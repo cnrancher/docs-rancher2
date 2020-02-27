@@ -8,15 +8,15 @@ Rancher's catalog service requires any custom catalogs to be structured in a spe
 
 Rancher supports two different types of charts:
 
-- **Helm Charts**
+* **Helm Charts**
 
       	Native Helm charts include an application along with other software required to run it. When deploying native Helm charts, you'll learn the chart's parameters and then configure them using **Answers**, which are sets of key value pairs.
 
       	The Helm Stable and Helm Incubators are populated with native Helm charts. However, you can also use native Helm charts in Custom catalogs (although we recommend Rancher Charts).
 
-- **Rancher Charts**
+* **Rancher Charts**
 
-      	Rancher charts mirror native helm charts, although they add two files that enhance user experience: `app-readme.md` and `questions.yaml`. Read more about them in [Rancher Chart Additional Files](#rancher-chart-additional-files).
+      	Rancher charts mirror native helm charts, although they add two files that enhance user experience: `app-readme.md` and `questions.yaml` . Read more about them in [Rancher Chart Additional Files](#rancher-chart-additional-files).
 
       	Advantages of Rancher charts include:
 
@@ -34,9 +34,9 @@ Rancher supports two different types of charts:
 
 ### Chart Directory Structure
 
-The following table demonstrates the directory structure for a chart, which can be found in a chart directory: `charts/<APPLICATION>/<APP_VERSION>/`. This information is helpful when customizing charts for a custom catalog. Files denoted with **Rancher Specific** are specific to Rancher charts, but are optional for chart customization.
+The following table demonstrates the directory structure for a chart, which can be found in a chart directory: `charts/<APPLICATION>/<APP_VERSION>/` . This information is helpful when customizing charts for a custom catalog. Files denoted with **Rancher Specific** are specific to Rancher charts, but are optional for chart customization.
 
-```
+``` 
 charts/<APPLICATION>/<APP_VERSION>/
 |--charts/           # Directory containing dependency charts.
 |--templates/        # Directory containing templates that, when combined with values.yml, generates Kubernetes YAML.
@@ -52,26 +52,29 @@ charts/<APPLICATION>/<APP_VERSION>/
 
 Before you create your own custom catalog, you should have a basic understanding about how a Rancher chart differs from a native Helm chart. Rancher charts differ slightly from Helm charts in their directory structures. Rancher charts include two files that Helm charts do not.
 
-- `app-readme.md`
+* `app-readme.md` 
 
-  A file that provides descriptive text in the chart's UI header. The following image displays the difference between a Rancher chart (which includes `app-readme.md`) and a native Helm chart (which does not).
+  A file that provides descriptive text in the chart's UI header. The following image displays the difference between a Rancher chart (which includes `app-readme.md` ) and a native Helm chart (which does not).
 
       	<figcaption>Rancher Chart with <code>app-readme.md</code> (left) vs. Helm Chart without (right)</figcaption>
 
-      	![app-readme.md](/img/rancher/app-readme.png)
+      	
 
-- `questions.yml`
+![app-readme.md](/img/rancher/app-readme.png)
 
-  A file that contains questions for a form. These form questions simplify deployment of a chart. Without it, you must configure the deployment using key value pairs, which is more difficult. The following image displays the difference between a Rancher chart (which includes `questions.yml`) and a native Helm chart (which does not).
+* `questions.yml` 
 
+  A file that contains questions for a form. These form questions simplify deployment of a chart. Without it, you must configure the deployment using key value pairs, which is more difficult. The following image displays the difference between a Rancher chart (which includes `questions.yml` ) and a native Helm chart (which does not).
 
     <figcaption>Rancher Chart with <code>questions.yml</code> (left) vs. Helm Chart without (right)</figcaption>
 
-    ![questions.yml](/img/rancher/questions.png)
+    
+
+![questions.yml](/img/rancher/questions.png)
 
 #### Questions.yml
 
-Inside the `questions.yml`, most of the content will be around the questions to ask the end user, but there are some additional fields that can be set in this file.
+Inside the `questions.yml` , most of the content will be around the questions to ask the end user, but there are some additional fields that can be set in this file.
 
 ##### Min/Max Rancher versions
 
@@ -79,36 +82,36 @@ _Available as of v2.3.0_
 
 For each chart, you can add the minimum and/or maximum Rancher version, which determines whether or not this chart is available to be deployed from Rancher.
 
-> **Note:** Even though Rancher release versions are prefixed with a `v`, there is _no_ prefix for the release version when using this option.
+> **Note:** Even though Rancher release versions are prefixed with a `v` , there is _no_ prefix for the release version when using this option.
 
-```
+``` 
 rancher_min_version: 2.3.0
 rancher_max_version: 2.3.99
 ```
 
 ##### Question Variable Reference
 
-This reference contains variables that you can use in `questions.yml` nested under `questions:`.
+This reference contains variables that you can use in `questions.yml` nested under `questions:` .
 
 | Variable            | Type          | Required | Description                                                                                                                                                  |
 | ------------------- | ------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| variable            | string        | true     | Define the variable name specified in the `values.yml` file, using `foo.bar` for nested objects.                                                             |
-| label               | string        | true     | Define the UI label.                                                                                                                                         |
-| description         | string        | false    | Specify the description of the variable.                                                                                                                     |
-| type                | string        | false    | Default to `string` if not specified (current supported types are string, multiline, boolean, int, enum, password, storageclass, hostname, pvc, and secret). |
+| variable            | string        | true     | Define the variable name specified in the `values.yml` file, using `foo.bar` for nested objects.|
+| label               | string        | true     | Define the UI label.|
+| description         | string        | false    | Specify the description of the variable.|
+| type                | string        | false    | Default to `string` if not specified (current supported types are string, multiline, boolean, int, enum, password, storageclass, hostname, pvc, and secret).|
 | required            | bool          | false    | Define if the variable is required or not (true \| false)                                                                                                    |
-| default             | string        | false    | Specify the default value.                                                                                                                                   |
-| group               | string        | false    | Group questions by input value.                                                                                                                              |
-| min_length          | int           | false    | Min character length.                                                                                                                                        |
-| max_length          | int           | false    | Max character length.                                                                                                                                        |
-| min                 | int           | false    | Min integer length.                                                                                                                                          |
-| max                 | int           | false    | Max integer length.                                                                                                                                          |
-| options             | []string      | false    | Specify the options when the variable type is `enum`, for example: options:<br /> - "ClusterIP" <br /> - "NodePort" <br /> - "LoadBalancer"                  |
-| valid_chars         | string        | false    | Regular expression for input chars validation.                                                                                                               |
-| invalid_chars       | string        | false    | Regular expression for invalid input chars validation.                                                                                                       |
-| subquestions        | []subquestion | false    | Add an array of subquestions.                                                                                                                                |
-| show_if             | string        | false    | Show current variable if conditional variable is true. For example `show_if: "serviceType=Nodeport"`                                                         |
-| show_subquestion_if | string        | false    | Show subquestions if is true or equal to one of the options. for example `show_subquestion_if: "true"`                                                       |
+| default             | string        | false    | Specify the default value.|
+| group               | string        | false    | Group questions by input value.|
+| min_length          | int           | false    | Min character length.|
+| max_length          | int           | false    | Max character length.|
+| min                 | int           | false    | Min integer length.|
+| max                 | int           | false    | Max integer length.|
+| options             | []string      | false    | Specify the options when the variable type is `enum` , for example: options:<br /> - "ClusterIP" <br /> - "NodePort" <br /> - "LoadBalancer"                  |
+| valid_chars         | string        | false    | Regular expression for input chars validation.|
+| invalid_chars       | string        | false    | Regular expression for invalid input chars validation.|
+| subquestions        | []subquestion | false    | Add an array of subquestions.|
+| show_if             | string        | false    | Show current variable if conditional variable is true. For example `show_if: "serviceType=Nodeport"` |
+| show_subquestion_if | string        | false    | Show subquestions if is true or equal to one of the options.for example `show_subquestion_if: "true"` |
 
 > **Note:** `subquestions[]` cannot contain `subquestions` or `show_subquestions_if` keys, but all other keys in the above table are supported.
 
@@ -127,20 +130,22 @@ You can fill your custom catalogs with either Helm Charts or Rancher Charts, alt
    > - To begin customizing a chart, copy one from either the [Rancher Library](https://github.com/rancher/charts) or the [Helm Stable](https://github.com/kubernetes/charts/tree/master/stable).
    > - For a complete walk through of developing charts, see the upstream Helm chart [developer reference](https://docs.helm.sh/developing_charts/).
 
-2. **Recommended:** Create an `app-readme.md` file.
+2.**Recommended:** Create an `app-readme.md` file.
 
    Use this file to create custom text for your chart's header in the Rancher UI. You can use this text to notify users that the chart is customized for your environment or provide special instruction on how to use it.
    <br/>
    <br/>
    **Example**:
 
-   ```
+   
+
+``` 
    $ cat ./app-readme.md
 
    # Wordpress ROCKS!
    ```
 
-3. **Recommended:** Create a `questions.yml` file.
+3.**Recommended:** Create a `questions.yml` file.
 
    This file creates a form for users to specify deployment parameters when they deploy the custom chart. Without this file, users **must** specify the parameters manually using key value pairs, which isn't user-friendly.
    <br/>
@@ -150,7 +155,8 @@ You can fill your custom catalogs with either Helm Charts or Rancher Charts, alt
    <br/>
    For a list of variables you can use when creating a `questions.yml` file, see [Question Variable Reference](#question-variable-reference).
 
-   <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+   <pre>
+
        categories:
        - Blog
        - CMS
@@ -174,8 +180,10 @@ You can fill your custom catalogs with either Helm Charts or Rancher Charts, alt
            description: "If undefined or null, uses the default StorageClass. Default to null"
            type: storageclass
            label: Default StorageClass for WordPress
+
    </pre>
 
 4. Check the customized chart into your GitHub repo.
 
 **Result:** Your custom chart is added to the repo. Your Rancher Server will replicate the chart within a few minutes.
+

@@ -19,6 +19,11 @@ module.exports = {
         { to: 'docs/api-docs/how-to-use', label: '文档下载', position: 'left' },
         { to: 'docs/api-docs/how-to-use', label: '历史文档', position: 'left' },
         {
+          href: 'https://docs.rancher.cn',
+          label: '文档中心',
+          position: 'right'
+        },
+        {
           to: 'docs/api-docs/how-to-use',
           label: '微信交流群',
           position: 'right'
@@ -65,6 +70,7 @@ module.exports = {
   ],
   customFields: {
     sidebars,
-    stable: '版本说明 - v2.3.4'
+    stable: '版本说明 - v2.3.4',
+    baseCommit: 'a4b11566a4ed341fe2f89de367b5aaf6204f75cf - Feb 22, 2020'
   }
 };

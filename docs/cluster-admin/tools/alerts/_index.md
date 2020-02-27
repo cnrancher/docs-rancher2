@@ -14,20 +14,20 @@ For details about what triggers the predefined alerts, refer to the [documentati
 
 This section covers the following topics:
 
-- [Alert event examples](#alert-event-examples)
-- [Urgency levels](#urgency-levels)
-- [Scope of alerts](#scope-of-alerts)
-- [Adding cluster alerts](#adding-cluster-alerts)
-- [Managing cluster alerts](#managing-cluster-alerts)
+* [Alert event examples](#alert-event-examples)
+* [Urgency levels](#urgency-levels)
+* [Scope of alerts](#scope-of-alerts)
+* [Adding cluster alerts](#adding-cluster-alerts)
+* [Managing cluster alerts](#managing-cluster-alerts)
 
 ## Alert Event Examples
 
 Some examples of alert events are:
 
-- A Kubernetes [master component](/docs/cluster-provisioning/#kubernetes-cluster-node-components) entering an unhealthy state.
-- A node or [workload](/docs/k8s-in-rancher/workloads/) error occurring.
-- A scheduled deployment taking place as planned.
-- A node's hardware resources becoming overstressed.
+* A Kubernetes [master component](/docs/cluster-provisioning/#kubernetes-cluster-node-components) entering an unhealthy state.
+* A node or [workload](/docs/k8s-in-rancher/workloads/) error occurring.
+* A scheduled deployment taking place as planned.
+* A node's hardware resources becoming overstressed.
 
 ## Urgency Levels
 
@@ -39,10 +39,10 @@ The scope for alerts can be set at either the cluster level or [project level](/
 
 At the cluster level, Rancher monitors components in your Kubernetes cluster, and sends you alerts related to:
 
-- The state of your nodes.
-- The system services that manage your Kubernetes cluster.
-- The resource events from specific system services.
-- The Prometheus expression cross the thresholds
+* The state of your nodes.
+* The system services that manage your Kubernetes cluster.
+* The resource events from specific system services.
+* The Prometheus expression cross the thresholds
 
 ## Adding Cluster Alerts
 
@@ -55,20 +55,23 @@ As a [cluster owner](/docs/admin-settings/rbac/cluster-project-roles/#cluster-ro
 1. Enter a **Name** for the alert that describes its purpose, you could group alert rules for the different purpose.
 
 1. Based on the type of alert you want to create, complete one of the instruction subsets below.
-   {{% accordion id="system-service" label="System Service Alerts" %}}
+
+    accordion id="system-service" label="System Service Alerts" 
+
    This alert type monitor for events that affect one of the Kubernetes master components, regardless of the node it occurs on.
 
 1. Select the **System Services** option, and then select an option from the drop-down.
 
-- [controller-manager](https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager)
-- [etcd](https://kubernetes.io/docs/concepts/overview/components/#etcd)
-- [scheduler](https://kubernetes.io/docs/concepts/overview/components/#kube-scheduler)
+* [controller-manager](https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager)
+* [etcd](https://kubernetes.io/docs/concepts/overview/components/#etcd)
+* [scheduler](https://kubernetes.io/docs/concepts/overview/components/#kube-scheduler)
 
 1. Select the urgency level of the alert. The options are:
 
    - **Critical**: Most urgent
    - **Warning**: Normal urgency
    - **Info**: Least urgent
+
      <br/>
      <br/>
      Select the urgency level based on the importance of the service and how many nodes fill the role within your cluster. For example, if you're making an alert for the `etcd` service, select **Critical**. If you're making an alert for redundant schedulers, **Warning** is more appropriate.
@@ -85,22 +88,23 @@ This alert type monitors for specific events that are thrown from a resource typ
 
 1. Choose the type of resource event that triggers an alert. The options are:
 
-- **Normal**: triggers an alert when any standard resource event occurs.
-- **Warning**: triggers an alert when unexpected resource events occur.
+* **Normal**: triggers an alert when any standard resource event occurs.
+* **Warning**: triggers an alert when unexpected resource events occur.
 
 1. Select a resource type from the **Choose a Resource** drop-down that you want to trigger an alert.
 
-- [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)
-- [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
-- [Node](https://kubernetes.io/docs/concepts/architecture/nodes/)
-- [Pod](https://kubernetes.io/docs/concepts/workloads/pods/pod/)
-- [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
+* [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)
+* [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+* [Node](https://kubernetes.io/docs/concepts/architecture/nodes/)
+* [Pod](https://kubernetes.io/docs/concepts/workloads/pods/pod/)
+* [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
 
 1. Select the urgency level of the alert.
 
    - **Critical**: Most urgent
    - **Warning**: Normal urgency
    - **Info**: Least urgent
+
      <br/>
      <br/>
      Select the urgency level of the alert by considering factors such as how often the event occurs or its importance. For example:
@@ -122,15 +126,16 @@ This alert type monitors for events that occur on a specific node.
 
 1. Choose an event to trigger the alert.
 
-- **Not Ready**: Sends you an alert when the node is unresponsive.
-- **CPU usage over**: Sends you an alert when the node raises above an entered percentage of its processing allocation.
-- **Mem usage over**: Sends you an alert when the node raises above an entered percentage of its memory allocation.
+* **Not Ready**: Sends you an alert when the node is unresponsive.
+* **CPU usage over**: Sends you an alert when the node raises above an entered percentage of its processing allocation.
+* **Mem usage over**: Sends you an alert when the node raises above an entered percentage of its memory allocation.
 
 1. Select the urgency level of the alert.
 
    - **Critical**: Most urgent
    - **Warning**: Normal urgency
    - **Info**: Least urgent
+
      <br/>
      <br/>
      Select the urgency level of the alert based on its impact on operations. For example, an alert triggered when a node's CPU raises above 60% deems an urgency of **Info**, but a node that is **Not Ready** deems an urgency of **Critical**.
@@ -149,15 +154,16 @@ This alert type monitors for events that occur on any node on marked with a labe
 
 1. Choose an event to trigger the alert.
 
-- **Not Ready**: Sends you an alert when selected nodes are unresponsive.
-- **CPU usage over**: Sends you an alert when selected nodes raise above an entered percentage of processing allocation.
-- **Mem usage over**: Sends you an alert when selected nodes raise above an entered percentage of memory allocation.
+* **Not Ready**: Sends you an alert when selected nodes are unresponsive.
+* **CPU usage over**: Sends you an alert when selected nodes raise above an entered percentage of processing allocation.
+* **Mem usage over**: Sends you an alert when selected nodes raise above an entered percentage of memory allocation.
 
 1. Select the urgency level of the alert.
 
    - **Critical**: Most urgent
    - **Warning**: Normal urgency
    - **Info**: Least urgent
+
      <br/>
      <br/>
      Select the urgency level of the alert based on its impact on operations. For example, an alert triggered when a node's CPU raises above 60% deems an urgency of **Info**, but a node that is **Not Ready** deems an urgency of **Critical**.
@@ -174,23 +180,23 @@ This alert type monitors for the overload from Prometheus expression querying, i
 
 1. Input or select an **Expression**, the drop down shows the original metrics from Prometheus, including:
 
-- [**Node**](https://github.com/prometheus/node_exporter)
-- [**Container**](https://github.com/google/cadvisor)
-- [**ETCD**](https://etcd.io/docs/v3.4.0/op-guide/monitoring/)
-- [**Kubernetes Components**](https://github.com/kubernetes/metrics)
-- [**Kubernetes Resources**](https://github.com/kubernetes/kube-state-metrics)
-- [**Fluentd**](https://docs.fluentd.org/v1.0/articles/monitoring-prometheus) (supported by [Logging](/docs/tools/logging))
-- [**Cluster Level Grafana**](http://docs.grafana.org/administration/metrics/)
-- **Cluster Level Prometheus**
+* [**Node**](https://github.com/prometheus/node_exporter)
+* [**Container**](https://github.com/google/cadvisor)
+* [**ETCD**](https://etcd.io/docs/v3.4.0/op-guide/monitoring/)
+* [**Kubernetes Components**](https://github.com/kubernetes/metrics)
+* [**Kubernetes Resources**](https://github.com/kubernetes/kube-state-metrics)
+* [**Fluentd**](https://docs.fluentd.org/v1.0/articles/monitoring-prometheus) (supported by [Logging](/docs/tools/logging))
+* [**Cluster Level Grafana**](http://docs.grafana.org/administration/metrics/)
+* **Cluster Level Prometheus**
 
 1. Choose a **Comparison**.
 
-- **Equal**: Trigger alert when expression value equal to the threshold.
-- **Not Equal**: Trigger alert when expression value not equal to the threshold.
-- **Greater Than**: Trigger alert when expression value greater than to threshold.
-- **Less Than**: Trigger alert when expression value equal or less than the threshold.
-- **Greater or Equal**: Trigger alert when expression value greater to equal to the threshold.
-- **Less or Equal**: Trigger alert when expression value less or equal to the threshold.
+* **Equal**: Trigger alert when expression value equal to the threshold.
+* **Not Equal**: Trigger alert when expression value not equal to the threshold.
+* **Greater Than**: Trigger alert when expression value greater than to threshold.
+* **Less Than**: Trigger alert when expression value equal or less than the threshold.
+* **Greater or Equal**: Trigger alert when expression value greater to equal to the threshold.
+* **Less or Equal**: Trigger alert when expression value less or equal to the threshold.
 
 1. Input a **Threshold**, for trigger alert when the value of expression cross the threshold.
 
@@ -203,8 +209,7 @@ This alert type monitors for the overload from Prometheus expression querying, i
    - **Critical**: Most urgent
    - **Warning**: Normal urgency
    - **Info**: Least urgent
-     <br/>
-     <br/>
+
      Select the urgency level of the alert based on its impact on operations. For example, an alert triggered when a node's load expression `sum(node_load5) / count(node_cpu_seconds_total{mode="system"})` raises above 0.6 deems an urgency of **Info**, but 1 deems an urgency of **Critical**.
 
 1. Configure advanced options. By default, the below options will apply to all alert rules within the group. You can disable these advanced options when configuring a specific rule.
@@ -228,8 +233,9 @@ This alert type monitors for the overload from Prometheus expression querying, i
 
 After you set up cluster alerts, you can manage each alert object. To manage alerts, browse to the cluster containing the alerts, and then select **Tools > Alerts** that you want to manage. You can:
 
-- Deactivate/Reactive alerts
-- Edit alert settings
-- Delete unnecessary alerts
-- Mute firing alerts
-- Unmute muted alerts
+* Deactivate/Reactive alerts
+* Edit alert settings
+* Delete unnecessary alerts
+* Mute firing alerts
+* Unmute muted alerts
+
