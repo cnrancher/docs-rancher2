@@ -1,0 +1,69 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #0075a8;
+  --ifm-color-primary-dark: #006997;
+  --ifm-color-primary-darker: #00638f;
+  --ifm-color-primary-darkest: #005276;
+  --ifm-color-primary-light: #0081b9;
+  --ifm-color-primary-lighter: #0087c1;
+  --ifm-color-primary-lightest: #0098da;
+  --ifm-rancher-color-text-light: #34495e;
+  --ifm-rancher-color-text-lighter: #52677c;
+  --ifm-footer-padding-vertical: 12px;
+  --ifm-code-font-size: 95%;
+  --ifm-navbar-background-color: #0075a8;
+  --ifm-navbar-link-color: rgb(255, 255, 255, 0.9);
+  --ifm-navbar-link-hover-color: rgb(255, 255, 255);
+}
+
+html[data-theme='dark'] {
+  --ifm-navbar-background-color: rgb(48, 56, 70);
+  --ifm-heading-color: rgb(255, 255, 255, 0.8);
+  --ifm-color-primary: rgb(255, 255, 255, 0.8);
+  --ifm-hero-background-color: tranparent;
+}
+body {
+  font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
+}
+
+p {
+  line-height: 2;
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+.docTitle_node_modules-\@docusaurus-theme-classic-src-theme-DocItem- {
+  font-size: 2rem !important;
+  margin-bottom: 2rem !important;
+  border-left: 10px solid var(--ifm-color-primary);
+  padding-left: 1.5rem;
+}
+
+.text-xs {
+  font-size: 12px !important;
+}
+
+.text-grey {
+  color: grey !important;
+}
+
+.text-gray {
+  color: rgb(101, 125, 149);
+}
+
+.navbar-sidebar__items .menu__list-item a {
+  color: var(--ifm-navbar-link-color);
+}
+
+.navbar__items .navbar__toggle {
+  color: var(--ifm-navbar-link-color);
+}

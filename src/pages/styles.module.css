@@ -1,0 +1,87 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+.heroBanner {
+  padding: 2rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  color: var(--ifm-color-primary);
+}
+
+.wrapper {
+  margin: 0px auto;
+  max-width: 1100px;
+  padding: 0 20px;
+}
+
+.sectionList {
+  list-style: none;
+}
+
+.sectionList li {
+  list-style: none;
+}
+
+.subGroupList {
+  margin-top: 10px;
+  padding-left: 0;
+}
+
+.subGroupList > li {
+  display: inline-block;
+  padding-right: 30px;
+  margin: 4px 30px 4px 0px;
+  border-right: 1px solid gainsboro;
+}
+
+.subGroupList > li:last-of-type {
+  padding-right: 0px;
+  border-right: none;
+}
+
+.tocContainer h3 {
+  margin-bottom: 10px;
+  margin-top: 1.5em;
+  font-size: 16px;
+  border-left: 6px solid var(--ifm-color-primary);
+  padding-left: 0.7rem;
+}
+
+.tocContainer .subGroupList {
+  font-size: 14px;
+}
+
+.tocContainer .subGroupList a {
+  color: var(--ifm-rancher-color-text-lighter);
+}
+
+.tocContainer a {
+  color: var(--ifm-rancher-color-text-light);
+}
+
+.latest {
+  display: inline-block;
+  height: 20px;
+  margin-left: 7px;
+  font-size: 8px;
+  line-height: 1.8;
+  color: rgb(255, 255, 255);
+  background-color: rgb(245, 166, 35);
+  padding: 0px 13px;
+  border-radius: 12px;
+}
+
+.stable {
+  display: inline-block;
+  height: 20px;
+  margin-left: 7px;
+  font-size: 8px;
+  line-height: 1.8;
+  color: rgb(255, 255, 255);
+  background-color: #27aa5e;
+  padding: 0px 13px;
+  border-radius: 12px;
+}
