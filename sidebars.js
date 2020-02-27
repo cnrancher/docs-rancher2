@@ -20,8 +20,7 @@ module.exports = {
         {
           type: 'doc',
           id: 'releases/v2.3.4',
-          label: '版本说明 - v2.3.4',
-          stable: true
+          label: '版本说明 - v2.3.4'
         },
         {
           type: 'doc',

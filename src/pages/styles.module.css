@@ -69,7 +69,7 @@
   font-size: 8px;
   line-height: 1.8;
   color: rgb(255, 255, 255);
-  background-color: rgb(245, 166, 35);
+  background-color: var(--ifm-rancher-color-latest);
   padding: 0px 13px;
   border-radius: 12px;
 }
@@ -81,7 +81,7 @@
   font-size: 8px;
   line-height: 1.8;
   color: rgb(255, 255, 255);
-  background-color: #27aa5e;
+  background-color: var(--ifm-rancher-color-stable);
   padding: 0px 13px;
   border-radius: 12px;
 }

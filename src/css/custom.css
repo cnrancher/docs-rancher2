@@ -15,6 +15,8 @@
   --ifm-color-primary-lightest: #0098da;
   --ifm-rancher-color-text-light: #34495e;
   --ifm-rancher-color-text-lighter: #52677c;
+  --ifm-rancher-color-stable: #27ae5f;
+  --ifm-rancher-color-latest: #f1c40f;
   --ifm-footer-padding-vertical: 12px;
   --ifm-code-font-size: 95%;
   --ifm-navbar-background-color: #0075a8;
@@ -27,6 +29,8 @@ html[data-theme='dark'] {
   --ifm-heading-color: rgb(255, 255, 255, 0.8);
   --ifm-color-primary: rgb(255, 255, 255, 0.8);
   --ifm-hero-background-color: tranparent;
+  --ifm-rancher-color-stable: #13572f;
+  --ifm-rancher-color-latest: #786207;
 }
 body {
   font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
