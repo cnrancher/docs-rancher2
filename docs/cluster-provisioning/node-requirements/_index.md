@@ -73,7 +73,7 @@ If security isn't a large concern and you're okay with opening a few additional 
 
 These ports are typically opened on your Kubernetes nodes, regardless of what type of cluster it is.
 
-{{% accordion id="common-ports" label="Click to Expand" %}}
+ accordion id="common-ports" label="Click to Expand" 
 
 <figcaption>Commonly Used Ports Reference</figcaption>
 
@@ -92,19 +92,19 @@ These ports are typically opened on your Kubernetes nodes, regardless of what ty
 |   TCP    |    10254    | Ingress controller livenessProbe/readinessProbe     |
 | TCP/UDP  | 30000-32767 | NodePort port range                                 |
 
-{{% /accordion %}}
+ /accordion 
 
 #### Port Requirements for Custom Clusters
 
 If you are launching a Kubernetes cluster on your existing infrastructure, refer to these port requirements.
 
-{{% accordion id="port-reqs-for-custom-clusters" label="Click to Expand" %}}
+ accordion id="port-reqs-for-custom-clusters" label="Click to Expand" 
 
 The following table depicts the port requirements for [Rancher Launched Kubernetes](/docs/cluster-provisioning/rke-clusters/) with [custom nodes](/docs/cluster-provisioning/rke-clusters/custom-nodes/).
 
 {{< ports-custom-nodes >}}
 
-{{% /accordion %}}
+ /accordion 
 
 #### Port Requirements for Clusters Hosted by an Infrastructure Provider
 
@@ -112,7 +112,7 @@ If you are launching a Kubernetes cluster on nodes that are in an infrastructure
 
 These required ports are automatically opened by Rancher during creation of clusters using cloud providers.
 
-{{% accordion id="port-reqs-for-infrastructure-providers" label="Click to Expand" %}}
+ accordion id="port-reqs-for-infrastructure-providers" label="Click to Expand" 
 
 The following table depicts the port requirements for [Rancher Launched Kubernetes](/docs/cluster-provisioning/rke-clusters/) with nodes created in an [Infrastructure Provider](/docs/cluster-provisioning/rke-clusters/node-pools/).
 
@@ -121,7 +121,7 @@ The following table depicts the port requirements for [Rancher Launched Kubernet
 
 {{< ports-iaas-nodes >}}
 
-{{% /accordion %}}
+ /accordion 
 
 ##### Security Group for Nodes on AWS EC2
 
@@ -147,25 +147,25 @@ When using the [AWS EC2 node driver](/docs/cluster-provisioning/rke-clusters/nod
 
 If you are launching a cluster with a hosted Kubernetes provider such as Google Kubernetes Engine, Amazon EKS, or Azure Kubernetes Service, refer to these port requirements.
 
-{{% accordion id="port-reqs-for-hosted-kubernetes" label="Click to Expand" %}}
+ accordion id="port-reqs-for-hosted-kubernetes" label="Click to Expand" 
 
 The following table depicts the port requirements for nodes in [hosted Kubernetes clusters](/docs/cluster-provisioning/hosted-kubernetes-clusters).
 
 {{< ports-imported-hosted >}}
 
-{{% /accordion %}}
+ /accordion 
 
 #### Port Requirements for Imported Clusters
 
 If you are importing an existing cluster, refer to these port requirements.
 
-{{% accordion id="port-reqs-for-imported-clusters" label="Click to Expand" %}}
+ accordion id="port-reqs-for-imported-clusters" label="Click to Expand" 
 
 The following table depicts the port requirements for [imported clusters](/docs/cluster-provisioning/imported-clusters/).
 
 {{< ports-imported-hosted >}}
 
-{{% /accordion %}}
+ /accordion 
 
 #### Port Requirements for Local Traffic
 

@@ -12,8 +12,8 @@ This section describes how to set up your private registry so that when you inst
 
 By default, we provide the steps of how to populate your private registry assuming you are provisioning Linux only clusters, but if you plan on provisioning any [Windows clusters](/docs/cluster-provisioning/rke-clusters/windows-clusters/), there are separate instructions to support the images needed for a Windows cluster.
 
-{{% tabs %}}
-{{% tab "Linux Only Clusters" %}}
+ tabs 
+ tab "Linux Only Clusters" 
 
 For Rancher servers that will only provision Linux clusters, these are the steps to populate your private registry.
 
@@ -89,8 +89,8 @@ Move the images in the `rancher-images.tar.gz` to your private registry using th
 
 1.  Use `rancher-load-images.sh` to extract, tag and push `rancher-images.txt` and `rancher-images.tar.gz` to your private registry:
     `plain ./rancher-load-images.sh --image-list ./rancher-images.txt --registry <REGISTRY.YOURDOMAIN.COM:PORT>`
-    {{% /tab %}}
-    {{% tab "Linux and Windows Clusters" %}}
+     /tab 
+     tab "Linux and Windows Clusters" 
 
 _Available as of v2.3.0_
 
@@ -105,7 +105,7 @@ B. Save the images to your Windows Server workstation <br />
 C. Prepare the Docker daemon <br />
 D. Populate the private registry
 
-{{% accordion label="Collecting and Populating Windows Images into the Private Registry"%}}
+ accordion label="Collecting and Populating Windows Images into the Private Registry"
 
 #### Prerequisites
 
@@ -168,7 +168,7 @@ Move the images in the `rancher-windows-images.tar.gz` to your private registry 
    ./rancher-load-images.ps1 --registry <REGISTRY.YOURDOMAIN.COM:PORT>
    ```
 
-{{% /accordion %}}
+ /accordion 
 
 #### Linux Steps
 
@@ -179,7 +179,7 @@ B. Collect all the required images <br />
 C. Save the images to your Linux workstation <br />
 D. Populate the private registry
 
-{{% accordion label="Collecting and Populating Linux Images into the Private Registry" %}}
+ accordion label="Collecting and Populating Linux Images into the Private Registry" 
 
 #### Prerequisites
 
@@ -263,10 +263,10 @@ Move the images in the `rancher-images.tar.gz` to your private registry using th
      --registry <REGISTRY.YOURDOMAIN.COM:PORT>
    ```
 
-{{% /accordion %}}
+ /accordion 
 
-{{% /tab %}}
-{{% /tabs %}}
+ /tab 
+ /tabs 
 
 #### [Next: Kubernetes Installs - Launch a Kubernetes Cluster with RKE](/docs/installation/other-installation-methods/air-gap/launch-kubernetes/)
 

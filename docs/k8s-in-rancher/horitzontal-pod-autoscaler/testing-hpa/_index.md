@@ -10,7 +10,7 @@ For HPA to work correctly, service deployments should have resources request def
 
 2. Copy the `hello-world` deployment manifest below.
 
-   {{% accordion id="hello-world" label="Hello World Manifest" %}}
+    accordion id="hello-world" label="Hello World Manifest" 
 
 ``` 
 apiVersion: apps/v1beta2
@@ -68,7 +68,7 @@ spec:
     app: hello-world
 ```
 
-{{% /accordion %}}
+ /accordion 
 
 1. Deploy it to your cluster.
 
@@ -80,7 +80,7 @@ spec:
 
 1. Copy one of the HPAs below based on the metric type you're using:
 
-   {{% accordion id="service-deployment-resource-metrics" label="Hello World HPA: Resource Metrics" %}}
+    accordion id="service-deployment-resource-metrics" label="Hello World HPA: Resource Metrics" 
 
 ``` 
 apiVersion: autoscaling/v2beta1
@@ -110,8 +110,8 @@ spec:
       targetAverageValue: 1000Mi
 ```
 
-{{% /accordion %}}
-{{% accordion id="service-deployment-custom-metrics" label="Hello World HPA: Custom Metrics" %}}
+ /accordion 
+ accordion id="service-deployment-custom-metrics" label="Hello World HPA: Custom Metrics" 
 
 ``` 
 apiVersion: autoscaling/v2beta1
@@ -147,11 +147,11 @@ spec:
       targetAverageValue: 20m
 ```
 
-{{% /accordion %}}
+ /accordion 
 
 1. View the HPA info and description. Confirm that metric data is shown.
 
-   {{% accordion id="hpa-info-resource-metrics" label="Resource Metrics" %}}
+    accordion id="hpa-info-resource-metrics" label="Resource Metrics" 
 
 1. Enter the following commands.
 
@@ -182,8 +182,8 @@ spec:
    Events:           <none>
    ```
 
-   {{% /accordion %}}
-   {{% accordion id="hpa-info-custom-metrics" label="Custom Metrics" %}}
+    /accordion 
+    accordion id="hpa-info-custom-metrics" label="Custom Metrics" 
 
 1. Enter the following command.
 
@@ -218,14 +218,14 @@ spec:
    Events:           <none>
    ```
 
-   {{% /accordion %}}
+    /accordion 
 
 1)  Generate a load for the service to test that your pods autoscale as intended. You can use any load-testing tool (Hey, Gatling, etc.), but we're using [Hey](https://github.com/rakyll/hey).
 
 1)  Test that pod autoscaling works as intended.<br/>
 
     **To Test Autoscaling Using Resource Metrics:**
-    {{% accordion id="observe-upscale-2-pods-cpu" label="Upscale to 2 Pods: CPU Usage Up to Target" %}}
+     accordion id="observe-upscale-2-pods-cpu" label="Upscale to 2 Pods: CPU Usage Up to Target" 
     Use your load testing tool to scale up to two pods based on CPU Usage.
 
 1)  View your HPA.
@@ -282,8 +282,8 @@ spec:
        hello-world-54764dfbf8-q6l4v                             1/1       Running   0          3h
     ```
 
-    {{% /accordion %}}
-    {{% accordion id="observe-upscale-3-pods-cpu-cooldown" label="Upscale to 3 pods: CPU Usage Up to Target" %}}
+     /accordion 
+     accordion id="observe-upscale-3-pods-cpu-cooldown" label="Upscale to 3 pods: CPU Usage Up to Target" 
     Use your load testing tool to upscale to 3 pods based on CPU usage with `horizontal-pod-autoscaler-upscale-delay` set to 3 minutes.
 
 1)  Enter the following command.
@@ -341,8 +341,8 @@ spec:
           hello-world-54764dfbf8-q6l4v                             1/1       Running   0          3h
           ```
 
-    {{% /accordion %}}
-    {{% accordion id="observe-downscale-1-pod" label="Downscale to 1 Pod: All Metrics Below Target" %}}
+     /accordion 
+     accordion id="observe-downscale-1-pod" label="Downscale to 1 Pod: All Metrics Below Target" 
     Use your load testing to scale down to 1 pod when all metrics are below target for `horizontal-pod-autoscaler-downscale-delay` (5 minutes by default).
 
 1)  Enter the following command.
@@ -379,10 +379,10 @@ You should receive output similar to what follows.
       Normal  SuccessfulRescale  1s    horizontal-pod-autoscaler  New size: 1; reason: All metrics below target
 ```
 
-{{% /accordion %}}
+ /accordion 
 <br/>
 **To Test Autoscaling Using Custom Metrics:**
-{{% accordion id="custom-observe-upscale-2-pods-cpu" label="Upscale to 2 Pods: CPU Usage Up to Target" %}}
+ accordion id="custom-observe-upscale-2-pods-cpu" label="Upscale to 2 Pods: CPU Usage Up to Target" 
 Use your load testing tool to upscale two pods based on CPU usage.
 
 1. Enter the following command.
@@ -432,8 +432,8 @@ You should receive output similar to what follows.
       hello-world-54764dfbf8-q6l82   1/1       Running   0          6h
 ```
 
-{{% /accordion %}}
-{{% accordion id="observe-upscale-3-pods-cpu-cooldown-2" label="Upscale to 3 Pods: CPU Usage Up to Target" %}}
+ /accordion 
+ accordion id="observe-upscale-3-pods-cpu-cooldown-2" label="Upscale to 3 Pods: CPU Usage Up to Target" 
 Use your load testing tool to scale up to three pods when the cpu_system usage limit is up to target.
 
 1. Enter the following command.
@@ -493,8 +493,8 @@ Use your load testing tool to scale up to three pods when the cpu_system usage l
       hello-world-54764dfbf8-q6l82   1/1       Running   0          6h
    ```
 
-   {{% /accordion %}}
-   {{% accordion id="observe-upscale-4-pods" label="Upscale to 4 Pods: CPU Usage Up to Target" %}}
+    /accordion 
+    accordion id="observe-upscale-4-pods" label="Upscale to 4 Pods: CPU Usage Up to Target" 
    Use your load testing tool to upscale to four pods based on CPU usage. `horizontal-pod-autoscaler-upscale-delay` is set to three minutes by default.
 
 1. Enter the following command.
@@ -553,8 +553,8 @@ You should receive output similar to what follows.
     hello-world-54764dfbf8-q6l82   1/1       Running   0          6h
   ```
 
-{{% /accordion %}}
-{{% accordion id="custom-metrics-observe-downscale-1-pod" label="Downscale to 1 Pod: All Metrics Below Target" %}}
+ /accordion 
+ accordion id="custom-metrics-observe-downscale-1-pod" label="Downscale to 1 Pod: All Metrics Below Target" 
 Use your load testing tool to scale down to one pod when all metrics below target for `horizontal-pod-autoscaler-downscale-delay` .
 
 1. Enter the following command.
@@ -612,6 +612,6 @@ Use your load testing tool to scale down to one pod when all metrics below targe
       hello-world-54764dfbf8-q6l82   1/1       Running   0          6h
   ```
 
-{{% /accordion %}}
+ /accordion 
 ````
 

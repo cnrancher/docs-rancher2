@@ -12,15 +12,15 @@ The tables below describe the configuration options available in the vSphere nod
 
 The account access parameters are different based on the Rancher version.
 
-{{% tabs %}}
-{{% tab "Rancher v2.2.0+" %}}
+ tabs 
+ tab "Rancher v2.2.0+" 
 
 | Parameter                | Required | Description |
 |:----------------------|:--------:|:-----|
 | Cloud Credentials   |   *      | Your vSphere account access information, stored in a [cloud credential.](/docs/user-settings/cloud-credentials/)  |
 
-{{% /tab %}}
-{{% tab "Rancher prior to v2.2.0" %}}
+ /tab 
+ tab "Rancher prior to v2.2.0" 
 
 | Parameter                | Required | Description |
 |:------------------------|:--------:|:------------------------------------------------------------|
@@ -29,15 +29,15 @@ The account access parameters are different based on the Rancher version.
 | Username                 |   *      | vCenter/ESXi user to authenticate with the server. |
 | Password                 |   *      | User's password. |
 
-{{% /tab %}}
-{{% /tabs %}}
+ /tab 
+ /tabs 
 
 ## Instance Options
 
 The options for creating and configuring an instance are different depending on your Rancher version.
 
-{{% tabs %}}
-{{% tab "Rancher v2.3.3+" %}}
+ tabs 
+ tab "Rancher v2.3.3+" 
 
 | Parameter                | Required | Description |
 |:----------------|:--------:|:-----------|
@@ -49,8 +49,8 @@ The options for creating and configuring an instance are different depending on 
 | Networks | | Name(s) of the network to attach the VM to. |
 | Configuration Parameters used for guestinfo |          | Additional configuration parameters for the VMs. These correspond to the [Advanced Settings](https://kb.vmware.com/s/article/1016098) in the vSphere console. Example use cases include providing RancherOS [guestinfo]({{< baseurl >}}/os/v1.x/en/installation/running-rancheros/cloud/vmware-esxi/#vmware-guestinfo) parameters or enabling disk UUIDs for the VMs (`disk.EnableUUID=TRUE`). |
 
-{{% /tab %}}
-{{% tab "Rancher prior to v2.3.3" %}}
+ /tab 
+ tab "Rancher prior to v2.3.3" 
 
 | Parameter                | Required | Description |
 |:------------------------|:--------:|:------------------------------------------------------------|
@@ -61,13 +61,13 @@ The options for creating and configuring an instance are different depending on 
 | OS ISO URL               |   *      | URL of a RancherOS vSphere ISO file to boot the VMs from. You can find URLs for specific versions in the [Rancher OS GitHub Repo](https://github.com/rancher/os). |
 | Configuration Parameters |          | Additional configuration parameters for the VMs. These correspond to the [Advanced Settings](https://kb.vmware.com/s/article/1016098) in the vSphere console. Example use cases include providing RancherOS [guestinfo]({{< baseurl >}}/os/v1.x/en/installation/running-rancheros/cloud/vmware-esxi/#vmware-guestinfo) parameters or enabling disk UUIDs for the VMs (`disk.EnableUUID=TRUE`). |
 
-{{% /tab %}}
-{{% /tabs %}}
+ /tab 
+ /tabs 
 
 ## Scheduling Options
 The options for scheduling VMs to a hypervisor are different depending on your Rancher version.
-{{% tabs %}}
-{{% tab "Rancher v2.3.3+" %}}
+ tabs 
+ tab "Rancher v2.3.3+" 
 
 | Parameter                | Required | Description |
 |:------------------------|:--------:|:-------|
@@ -77,8 +77,8 @@ The options for scheduling VMs to a hypervisor are different depending on your R
 | Folder                   |          | Name of a folder in the datacenter to create the VMs in. Must already exist. The folder name should be prefaced with `vm/` in your vSphere config file. |
 | Host                     |          | The IP of the host system to schedule VMs in. If specified, the host system's pool will be used and the *Pool* parameter will be ignored. |
 
-{{% /tab %}}
-{{% tab "Rancher prior to v2.3.3" %}}
+ /tab 
+ tab "Rancher prior to v2.3.3" 
 
 | Parameter                | Required | Description |
 |:------------------------|:--------:|:------------------------------------------------------------|
@@ -88,5 +88,5 @@ The options for scheduling VMs to a hypervisor are different depending on your R
 | Network                  |   *      | Name of the VM network to attach VMs to. |
 | Data Store               |   *      | Datastore to store the VM disks. |
 | Folder                   |          | Name of a folder in the datacenter to create the VMs in. Must already exist. The folder name should be prefaced with `vm/` in your vSphere config file. |
-{{% /tab %}}
-{{% /tabs %}}
+ /tab 
+ /tabs 

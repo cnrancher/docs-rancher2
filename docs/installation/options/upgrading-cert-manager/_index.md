@@ -35,7 +35,7 @@ The namespace used in these instructions depends on the namespace cert-manager i
 
 In order to upgrade cert-manager, follow these instructions:
 
-{{% accordion id="normal" label="Upgrading cert-manager with Internet access" %}}
+ accordion id="normal" label="Upgrading cert-manager with Internet access" 
 
 1. [Back up existing resources](https://cert-manager.io/docs/tutorials/backup/) as a precaution
 
@@ -101,9 +101,9 @@ In order to upgrade cert-manager, follow these instructions:
    kubectl apply -f cert-manager-backup.yaml
    ```
 
-{{% /accordion %}}
+ /accordion 
 
-{{% accordion id="airgap" label="Upgrading cert-manager in an airgapped environment" %}}
+ accordion id="airgap" label="Upgrading cert-manager in an airgapped environment" 
 
 #### Prerequisites
 
@@ -206,7 +206,7 @@ Before you can perform the upgrade, you must prepare your air gapped environment
    kubectl apply -f cert-manager-backup.yaml
    ```
 
-{{% /accordion %}}
+ /accordion 
 
 Once you’ve installed cert-manager, you can verify it is deployed correctly by checking the kube-system namespace for running pods:
 

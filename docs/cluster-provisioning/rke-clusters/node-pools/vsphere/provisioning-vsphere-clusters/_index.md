@@ -83,8 +83,8 @@ Then, configure your template:
 
 The steps for configuring your vSphere credentials for the cluster are different depending on your version of Rancher.
 
-{{% tabs %}}
-{{% tab "Rancher v2.2.0+" %}}
+ tabs 
+ tab "Rancher v2.2.0+" 
 
 Your account access information is in a [cloud credential.](/docs/user-settings/cloud-credentials/) Cloud credentials are stored as Kubernetes secrets.
 
@@ -99,18 +99,18 @@ You can use an existing cloud credential or create a new one. To create a new cl
 
 **Result:** The node template has the credentials required to provision nodes in vSphere.
 
-{{% /tab %}}
-{{% tab "Rancher prior to v2.2.0" %}}
+ /tab 
+ tab "Rancher prior to v2.2.0" 
 In the **Account Access** section, enter the vCenter FQDN or IP address and the credentials for the vSphere user account.
-{{% /tab %}}
-{{% /tabs %}}
+ /tab 
+ /tabs 
 
 #### B. Configure Node Scheduling
 
 Choose what hypervisor the virtual machine will be scheduled to. The configuration options depend on your version of Rancher.
 
-{{% tabs %}}
-{{% tab "Rancher v2.3.3+" %}}
+ tabs 
+ tab "Rancher v2.3.3+" 
 
 The fields in the **Scheduling** section should auto-populate with the data center and other scheduling options that are available to you in vSphere.
 
@@ -119,8 +119,8 @@ The fields in the **Scheduling** section should auto-populate with the data cent
 1. If you have a data store cluster, you can toggle the **Data Store** field. This lets you select a data store cluster where your VM will be scheduled to. If the field is not toggled, you can select an individual disk.
 1. Optional: Select a folder where the VM will be placed. The VM folders in this dropdown menu directly correspond to your VM folders in vSphere. Note: The folder name should be prefaced with `vm/` in your vSphere config file.
 1. Optional: Choose a specific host to create the VM on. Leave this field blank for a standalone ESXi or for a cluster with DRS (Distributed Resource Scheduler). If specified, the host system's pool will be used and the **Resource Pool** parameter will be ignored.
-   {{% /tab %}}
-   {{% tab "Rancher prior to v2.3.3" %}}
+    /tab 
+    tab "Rancher prior to v2.3.3" 
 
 In the **Scheduling** section, enter:
 
@@ -130,15 +130,15 @@ In the **Scheduling** section, enter:
 
   ![image](/img/rancher/vsphere-node-template-2.png")
 
-{{% /tab %}}
-{{% /tabs %}}
+ /tab 
+ /tabs 
 
 #### C. Configure Instances and Operating Systems
 
 Depending on the Rancher version there are different options available to configure instances.
 
-{{% tabs %}}
-{{% tab "Rancher v2.3.3+" %}}
+ tabs 
+ tab "Rancher v2.3.3+" 
 
 In the **Instance Options** section, configure the number of vCPUs, memory, and disk size for the VMs created by this template.
 
@@ -153,8 +153,8 @@ Choose the way that the VM will be created:
 - **Clone an existing virtual machine:** In the **Virtual machine** field, choose an existing VM that the new VM will be cloned from.
 - **Install from boot2docker ISO:** Ensure that the `OS ISO URL` field contains the URL of a VMware ISO release for RancherOS (rancheros-vmware.iso). Note that this URL must be accessible from the nodes running your Rancher server installation.
 
-{{% /tab %}}
-{{% tab "Rancher prior to v2.3.3" %}}
+ /tab 
+ tab "Rancher prior to v2.3.3" 
 
 In the **Instance Options** section, configure the number of vCPUs, memory, and disk size for the VMs created by this template.
 
@@ -164,8 +164,8 @@ Ensure that the [OS ISO URL](#instance-options) contains the URL of the VMware I
 
     ![image](/img/rancher/vsphere-node-template-1.png)
 
-{{% /tab %}}
-{{% /tabs %}}
+ /tab 
+ /tabs 
 
 #### D. Add Networks
 
@@ -185,8 +185,8 @@ If you are using Rancher prior to v2.0.4, refer to these [instructions](/docs/cl
 
 The way to attach metadata to the VM is different depending on your Rancher version.
 
-{{% tabs %}}
-{{% tab "Rancher v2.3.3+" %}}
+ tabs 
+ tab "Rancher v2.3.3+" 
 
 **Optional:** Add vSphere tags and custom attributes. Tags allow you to attach metadata to objects in the vSphere inventory to make it easier to sort and search for these objects.
 
@@ -196,8 +196,8 @@ In the custom attributes, Rancher will let you select all the custom attributes 
 
 > **Note:** Custom attributes are a legacy feature that will eventually be removed from vSphere. These attributes allow you to attach metadata to objects in the vSphere inventory to make it easier to sort and search for these objects.
 
-{{% /tab %}}
-{{% tab "Rancher prior to v2.3.3" %}}
+ /tab 
+ tab "Rancher prior to v2.3.3" 
 
 **Optional:**
 
@@ -207,8 +207,8 @@ In the custom attributes, Rancher will let you select all the custom attributes 
 
 > **Note:** Custom attributes are a legacy feature that will eventually be removed from vSphere. These attributes allow you to attach metadata to objects in the vSphere inventory to make it easier to sort and search for these objects.
 
-{{% /tab %}}
-{{% /tabs %}}
+ /tab 
+ /tabs 
 
 #### G. Optional: Configure cloud-init
 
@@ -216,20 +216,20 @@ In the custom attributes, Rancher will let you select all the custom attributes 
 
 The scope of cloud-init support for the VMs differs depending on the Rancher version.
 
-{{% tabs %}}
-{{% tab "Rancher v2.3.3+" %}}
+ tabs 
+ tab "Rancher v2.3.3+" 
 
 To make use of cloud-init initialization, create a cloud config file using valid YAML syntax and paste the file content in the the **Cloud Init** field. Refer to the [cloud-init documentation.](https://cloudinit.readthedocs.io/en/latest/topics/examples.html) for a commented set of examples of supported cloud config directives.
 
 _Note that cloud-init is not supported when using the ISO creation method._
 
-{{% /tab %}}
-{{% tab "Rancher prior to v2.3.3" %}}
+ /tab 
+ tab "Rancher prior to v2.3.3" 
 
 You may specify the URL of a RancherOS cloud-config.yaml file in the the **Cloud Init** field. Refer to the [RancherOS Documentation]https://rancher.com/docs/os/v1.x/en/installation/configuration/#cloud-config) for details on the supported configuration directives. Note that the URL must be network accessible from the VMs created by the template.
 
-{{% /tab %}}
-{{% /tabs %}}
+ /tab 
+ /tabs 
 
 #### H. Saving the Node Template
 

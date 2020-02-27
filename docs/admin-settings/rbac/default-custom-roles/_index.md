@@ -28,8 +28,8 @@ While Rancher comes out-of-the-box with a set of default user roles, you can als
 
 The steps to add custom roles differ depending on the version of Rancher.
 
-{{% tabs %}}
-{{% tab "Rancher v2.0.7+" %}}
+ tabs 
+ tab "Rancher v2.0.7+" 
 
 1.  From the **Global** view, select **Security > Roles** from the main menu.
 
@@ -56,8 +56,8 @@ The steps to add custom roles differ depending on the version of Rancher.
 
 1.  Click **Create**.
 
-{{% /tab %}}
-{{% tab "Rancher prior to v2.0.7" %}}
+ /tab 
+ tab "Rancher prior to v2.0.7" 
 
 1.  From the **Global** view, select **Security > Roles** from the main menu.
 
@@ -87,8 +87,8 @@ The steps to add custom roles differ depending on the version of Rancher.
 
 1.  Click **Create**.
 
-{{% /tab %}}
-{{% /tabs %}}
+ /tab 
+ /tabs 
 
 ### Creating a Custom Global Role that Copies Rules from an Existing Role
 

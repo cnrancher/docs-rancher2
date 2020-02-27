@@ -36,7 +36,7 @@ By default, only [global administrators](/docs/admin-settings/rbac/global-permis
 1. To add a provider, choose from the available provider options and configure the Global DNS Provider with necessary credentials and an optional domain.
 1. (Optional) Add additional users so they could use the provider when creating Global DNS entries as well as manage the Global DNS provider.
 
-{{% accordion id="route53" label="Route53" %}}
+ accordion id="route53" label="Route53" 
 
 1. Enter a **Name** for the provider.
 1. (Optional) Enter the **Root Domain** of the hosted zone on AWS Route53. If this is not provided, Rancher's Global DNS Provider will work with all hosted zones that the AWS keys can access.
@@ -44,16 +44,16 @@ By default, only [global administrators](/docs/admin-settings/rbac/global-permis
 1. Enter the AWS **Secret Key**.
 1. Under **Member Access**, search for any users that you want to have the ability to use this provider. By adding this user, they will also be able to manage the Global DNS Provider entry.
 1. Click **Create**.
-   {{% /accordion %}}
-   {{% accordion id="cloudflare" label="CloudFlare" %}}
+    /accordion 
+    accordion id="cloudflare" label="CloudFlare" 
 1. Enter a **Name** for the provider.
 1. Enter the **Root Domain**, this field is optional, in case this is not provided, Rancher's Global DNS Provider will work with all domains that the keys can access.
 1. Enter the CloudFlare **API Email**.
 1. Enter the CloudFlare **API Key**.
 1. Under **Member Access**, search for any users that you want to have the ability to use this provider. By adding this user, they will also be able to manage the Global DNS Provider entry.
 1. Click **Create**.
-   {{% /accordion %}}
-   {{% accordion id="alidns" label="AliDNS" %}}
+    /accordion 
+    accordion id="alidns" label="AliDNS" 
 1. Enter a **Name** for the provider.
 1. Enter the **Root Domain**, this field is optional, in case this is not provided, Rancher's Global DNS Provider will work with all domains that the keys can access.
 1. Enter the **Access Key**.
@@ -65,7 +65,7 @@ By default, only [global administrators](/docs/admin-settings/rbac/global-permis
 >
 > - Alibaba Cloud SDK uses TZ data. It needs to be present on `/usr/share/zoneinfo` path of the nodes running [`local` cluster](/docs/installation/options/chart-options/#import-local-cluster), and it is mounted to the external DNS pods. If it is not available on the nodes, please follow the [instruction](https://www.ietf.org/timezones/tzdb-2018f/tz-link.html) to prepare it.
 > - Different versions of AliDNS have different allowable TTL range, where the default TTL for a global DNS entry may not be valid. Please see the [reference](https://www.alibabacloud.com/help/doc-detail/34338.htm) before adding an AliDNS entry.
->   {{% /accordion %}}
+>    /accordion 
 
 #### Add a Global DNS Entry
 

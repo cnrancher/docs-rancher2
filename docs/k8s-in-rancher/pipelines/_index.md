@@ -78,10 +78,10 @@ Now that repositories are added to your project, you can start configuring the p
 
         >**Note:** As you build out each step, there are different [advanced options](#advanced-options) based on the step type.
 
-        {{% accordion id="stages-and-steps" label="Adding Stages and Steps" %}}
+         accordion id="stages-and-steps" label="Adding Stages and Steps" 
 
-    {{% tabs %}}
-    {{% tab "By UI" %}}
+     tabs 
+     tab "By UI" 
     <br />
     If you haven't added any stages, click **Configure pipeline for this branch** to configure the pipeline through the UI.
 
@@ -93,8 +93,8 @@ Now that repositories are added to your project, you can start configuring the p
 1.  After you've created a stage, start [adding steps](#step-types) by clicking **Add a Step**. You can add multiple steps to each stage.
     <br />
     <br />
-    {{% /tab %}}
-    {{% tab "By YAML" %}}
+     /tab 
+     tab "By YAML" 
     <br />
     For each stage, you can add multiple steps. Read more about each [step type](#step-types) and the [advanced options](#advanced-options) to get all the details on how to configure the YAML. This is only a small example of how to have multiple stages with a singular step in each stage.
 
@@ -123,18 +123,18 @@ stages:
 ```
 
 <br />
-{{% /tab %}}
-{{% /tabs %}}
-    {{% /accordion %}}
+ /tab 
+ /tabs 
+     /accordion 
 
 1. _Available as of v2.2.0_
 
    **Notifications:** Decide if you want to set up notifications for your pipeline. You can enable notifications to any [notifiers](/docs/cluster-admin/tools/notifiers/) based on the build status of a pipeline. Before enabling notifications, Rancher recommends [setting up notifiers](/docs/cluster-admin/tools/notifiers/#adding-notifiers) so it will be easy to add recipients immediately.
 
-   {{% accordion id="notification" label="Configuring Notifications" %}}
+    accordion id="notification" label="Configuring Notifications" 
 
-{{% tabs %}}
-{{% tab "By UI" %}}
+ tabs 
+ tab "By UI" 
 <br />
 _Available as of v2.2.0_
 
@@ -149,8 +149,8 @@ _Available as of v2.2.0_
 1. For each recipient, select which notifier type from the dropdown. Based on the type of notifier, you can use the default recipient or override the recipient with a different one. For example, if you have a notifier for _Slack_, you can update which channel to send the notification to. You can add additional notifiers by clicking **Add Recipient**.
    <br />
    <br />
-   {{% /tab %}}
-   {{% tab "By YAML" %}}
+    /tab 
+    tab "By YAML" 
    <br />
    _Available as of v2.2.0_
 
@@ -185,25 +185,25 @@ notification:
 ```
 
 <br />
-{{% /tab %}}
-{{% /tabs %}}
+ /tab 
+ /tabs 
 
-    {{% /accordion %}}
+     /accordion 
 
 1. Set up the **[Trigger Rules](#trigger-rules)** for the pipeline.
 
 1. Enter a **Timeout** for the pipeline. By default, each pipeline execution has a timeout of 60 minutes. If the pipeline execution cannot complete within its timeout period, the pipeline is aborted.
 
-   {{% accordion id="timeout" label="Setting up Timeout" %}}
+    accordion id="timeout" label="Setting up Timeout" 
 
-{{% tabs %}}
-{{% tab "By UI" %}}
+ tabs 
+ tab "By UI" 
 <br />
 Enter a new value in the **Timeout** field.
 <br />
 <br />
-{{% /tab %}}
-{{% tab "By YAML" %}}
+ /tab 
+ tab "By YAML" 
 <br />
 In the `timeout` section, enter the timeout value in minutes.
 
@@ -220,10 +220,10 @@ timeout: 30
 ```
 
 <br />
-{{% /tab %}}
-{{% /tabs %}}
+ /tab 
+ /tabs 
 
-    {{% /accordion %}}
+     /accordion 
 
 1. When all the stages and steps are configured, click **Done**.
 
@@ -285,17 +285,17 @@ The first stage is preserved to be a cloning step that checks out source code fr
 
 The **Run Script** step executes arbitrary commands in the workspace inside a specified container. You can use it to build, test and do more, given whatever utilities the base image provides. For your convenience, you can use variables to refer to metadata of a pipeline execution. Please refer to the [pipeline variable substitution reference](#pipeline-variable-substitution-reference) for the list of available variables.
 
-{{% tabs %}}
+ tabs 
 
-{{% tab "By UI" %}}
+ tab "By UI" 
 
 1. From the **Step Type** drop-down, choose **Run Script** and fill in the form.
 
 1. Click **Add**.
 
-{{% /tab %}}
+ /tab 
 
-{{% tab "By YAML" %}}
+ tab "By YAML" 
 <br />
 
 ```yaml
@@ -309,9 +309,9 @@ stages:
 ```
 
 <br />
-{{% /tab %}}
+ /tab 
 
-{{% /tabs %}}
+ /tabs 
 
 #### Build and Publish Images
 
@@ -321,9 +321,9 @@ _Available as of Rancher v2.1.0_
 
 The option to publish an image to an insecure registry is not exposed in the UI, but you can specify an environment variable in the YAML that allows you to publish an image insecurely.
 
-{{% tabs %}}
+ tabs 
 
-{{% tab "By UI" %}}
+ tab "By UI" 
 
 1. From the **Step Type** drop-down, choose **Build and Publish**.
 
@@ -336,9 +336,9 @@ The option to publish an image to an insecure registry is not exposed in the UI,
    | Push image to remote repository                      | An option to set the registry that publishes the image that's built. To use this option, enable it and choose a registry from the drop-down. If this option is disabled, the image is pushed to the internal registry.                                    |
    | Build Context <br/><br/> (**Show advanced options**) | By default, the root directory of the source code (`.`). For more details, see the Docker [build command documentation](https://docs.docker.com/engine/reference/commandline/build/).                                                                     |
 
-{{% /tab %}}
+ /tab 
 
-{{% tab "By YAML" %}}
+ tab "By YAML" 
 
 You can use specific arguments for Docker daemon and the build. They are not exposed in the UI, but they are available in pipeline YAML format, as indicated in the example below. Available environment variables include:
 
@@ -371,9 +371,9 @@ stages:
 
 ````
 <br />
-{{% /tab %}}
+ /tab 
 
-{{% /tabs %}}
+ /tabs 
 
 #### Publish Catalog Template
 
@@ -381,9 +381,9 @@ _Available as of v2.2.0_
 
 The **Publish Catalog Template** step publishes a version of a catalog app template (i.e. Helm chart) to a [git hosted chart repository](/docs/catalog/custom/). It generates a git commit and pushes it to your chart repository. This process requires a chart folder in your source code's repository and a pre-configured secret in the dedicated pipeline namespace to complete successfully. Any variables in the [pipeline variable substitution reference](#pipeline-variable-substitution-reference) is supported for any file in the chart folder.
 
-{{% tabs %}}
+ tabs 
 
-{{% tab "By UI" %}}
+ tab "By UI" 
 <br/>
 
 1. From the **Step Type** drop-down, choose **Publish Catalog Template**.
@@ -403,9 +403,9 @@ The **Publish Catalog Template** step publishes a version of a catalog app templ
      Author Email | The author email used in the commit message. |
 
 
-{{% /tab %}}
+ /tab 
 
-{{% tab "By YAML" %}}
+ tab "By YAML" 
 <br />
 You can add **Publish Catalog Template** steps directly in the `.rancher-pipeline.yml` file.
 
@@ -439,17 +439,17 @@ stages:
 ````
 
 <br />
-{{% /tab %}}
+ /tab 
 
-{{% /tabs %}}
+ /tabs 
 
 #### Deploy YAML
 
 This step deploys arbitrary Kubernetes resources to the project. This deployment requires a Kubernetes manifest file to be present in the source code repository. Pipeline variable substitution is supported in the manifest file. You can view an example file at [GitHub](https://github.com/rancher/pipeline-example-go/blob/master/deployment.yaml). Please refer to the [pipeline variable substitution reference](#pipeline-variable-substitution-reference) for the list of available variables.
 
-{{% tabs %}}
+ tabs 
 
-{{% tab "By UI" %}}
+ tab "By UI" 
 
 1. From the **Step Type** drop-down, choose **Deploy YAML** and fill in the form.
 
@@ -457,9 +457,9 @@ This step deploys arbitrary Kubernetes resources to the project. This deployment
 
 1. Click **Add**.
 
-{{% /tab %}}
+ /tab 
 
-{{% tab "By YAML" %}}
+ tab "By YAML" 
 <br />
 
 ```yaml
@@ -472,9 +472,9 @@ stages:
 ```
 
 <br />
-{{% /tab %}}
+ /tab 
 
-{{% /tabs %}}
+ /tabs 
 
 #### Deploy Catalog App
 
@@ -482,9 +482,9 @@ _Available as of v2.2.0_
 
 The **Deploy Catalog App** step deploys a catalog app in the project. It will install a new app if it is not present, or upgrade an existing one.
 
-{{% tabs %}}
+ tabs 
 
-{{% tab "By UI" %}}
+ tab "By UI" 
 
 1. From the **Step Type** drop-down, choose **Deploy Catalog App**.
 
@@ -499,9 +499,9 @@ The **Deploy Catalog App** step deploys a catalog app in the project. It will in
    | App Name         | The name of the app you want to deploy.                |
    | Answers          | Key-value pairs of answers used to deploy the app.     |
 
-{{% /tab %}}
+ /tab 
 
-{{% tab "By YAML" %}}
+ tab "By YAML" 
 <br />
 You can add **Deploy Catalog App** steps directly in the `.rancher-pipeline.yml` file.
 
@@ -528,8 +528,8 @@ stages:
 ```
 
 <br />
-{{% /tab %}}
-{{% /tabs %}}
+ /tab 
+ /tabs 
 
 ### Advanced Options
 
@@ -555,8 +555,8 @@ If all conditions evaluate to `true`, then the pipeline/stage/step is executed. 
 
 Wildcard character (`*`) expansion is supported in `branch` conditions.
 
-{{% tabs %}}
-{{% tab "Pipeline Trigger" %}}
+ tabs 
+ tab "Pipeline Trigger" 
 
 1. From the **Global** view, navigate to the project that you want to configure a pipeline trigger rule.
 
@@ -574,8 +574,8 @@ Wildcard character (`*`) expansion is supported in `branch` conditions.
 
 1. Click **Done.**
 
-{{% /tab %}}
-{{% tab "Stage Trigger" %}}
+ /tab 
+ tab "Stage Trigger" 
 
 1. From the **Global** view, navigate to the project that you want to configure a stage trigger rule.
 
@@ -600,8 +600,8 @@ Wildcard character (`*`) expansion is supported in `branch` conditions.
 
 1. Click **Save**.
 
-{{% /tab %}}
-{{% tab "Step Trigger" %}}
+ /tab 
+ tab "Step Trigger" 
 
 1. From the **Global** view, navigate to the project that you want to configure a stage trigger rule.
 
@@ -626,8 +626,8 @@ Wildcard character (`*`) expansion is supported in `branch` conditions.
 
 1. Click **Save**.
 
-{{% /tab %}}
-{{% tab "By YAML" %}}
+ /tab 
+ tab "By YAML" 
 <br />
 
 ```yaml
@@ -654,15 +654,15 @@ branch:
 ```
 
 <br />
-{{% /tab %}}
-{{% /tabs %}}
+ /tab 
+ /tabs 
 
 #### Environment Variables
 
 When configuring a pipeline, certain [step types](#step-types) allow you to use environment variables to configure the step's script.
 
-{{% tabs %}}
-{{% tab "By UI" %}}
+ tabs 
+ tab "By UI" 
 
 1. From the **Global** view, navigate to the project that you want to configure pipelines.
 
@@ -680,9 +680,9 @@ When configuring a pipeline, certain [step types](#step-types) allow you to use 
 
 1. Click **Save**.
 
-{{% /tab %}}
+ /tab 
 
-{{% tab "By YAML" %}}
+ tab "By YAML" 
 <br />
 
 ```yaml
@@ -699,9 +699,9 @@ stages:
 ```
 
 <br />
-{{% /tab %}}
+ /tab 
 
-{{% /tabs %}}
+ /tabs 
 
 #### Secrets
 
@@ -714,8 +714,8 @@ Create a secret in the same project as your pipeline, or explicitly in the names
 
 > **Note:** Secret injection is disabled on [pull request events](#pipeline-setting).
 
-{{% tabs %}}
-{{% tab "By UI" %}}
+ tabs 
+ tab "By UI" 
 
 1. From the **Global** view, navigate to the project that you want to configure pipelines.
 
@@ -731,8 +731,8 @@ Create a secret in the same project as your pipeline, or explicitly in the names
 
 1. Click **Save**.
 
-{{% /tab %}}
-{{% tab "By YAML" %}}
+ /tab 
+ tab "By YAML" 
 <br />
 
 ```yaml
@@ -751,8 +751,8 @@ stages:
 ```
 
 <br />
-{{% /tab %}}
-{{% /tabs %}}
+ /tab 
+ /tabs 
 
 ### Pipeline Variable Substitution Reference
 

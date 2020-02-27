@@ -17,8 +17,8 @@ Use Rancher to create a Kubernetes cluster in Amazon EC2.
 
 The steps to create a cluster differ based on your Rancher version.
 
-{{% tabs %}}
-{{% tab "Rancher v2.2.0+" %}}
+ tabs 
+ tab "Rancher v2.2.0+" 
 
 1. [Create your cloud credentials](#1-create-your-cloud-credentials)
 2. [Create a node template with your cloud credentials and information from EC2](#2-create-a-node-template-with-your-cloud-credentials-and-information-from-ec2)
@@ -74,8 +74,8 @@ Optional: In the **Engine Options** section of the node template, you can config
 1. Click **Create**.
 
 {{< result_create-cluster >}}
-{{% /tab %}}
-{{% tab "Rancher prior to v2.2.0+" %}}
+ /tab 
+ tab "Rancher prior to v2.2.0+" 
 
 1. From the **Clusters** page, click **Add Cluster**.
 
@@ -108,8 +108,8 @@ If you need to pass an **IAM Instance Profile Name** (not ARN), for example, whe
 1. Review your cluster settings to confirm they are correct. Then click **Create**.
 
 {{< result_create-cluster >}}
-{{% /tab %}}
-{{% /tabs %}}
+ /tab 
+ /tabs 
 
 #### Optional Next Steps
 

@@ -24,8 +24,8 @@ Refer to the release notes in the `system-charts` repository to see which branch
 
 Rancher needs to be configured to use your Git mirror of the `system-charts` repository. You can configure the system charts repository either from the Rancher UI or from Rancher's API view.
 
-{{% tabs %}}
-{{% tab "Rancher UI" %}}
+ tabs 
+ tab "Rancher UI" 
 
 In the catalog management page in the Rancher UI, follow these steps:
 
@@ -41,8 +41,8 @@ In the catalog management page in the Rancher UI, follow these steps:
 
 **Result:** Rancher is configured to download all the required catalog items from your `system-charts` repository.
 
-{{% /tab %}}
-{{% tab "Rancher API" %}}
+ /tab 
+ tab "Rancher API" 
 
 1. Log into Rancher.
 
@@ -60,5 +60,5 @@ In the catalog management page in the Rancher UI, follow these steps:
 
 **Result:** Rancher is configured to download all the required catalog items from your `system-charts` repository.
 
-{{% /tab %}}
-{{% /tabs %}}
+ /tab 
+ /tabs 

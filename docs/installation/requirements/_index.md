@@ -48,8 +48,8 @@ This section describes the CPU, memory, and disk requirements for the nodes wher
 
 Hardware requirements scale based on the size of your Rancher deployment. Provision each individual node according to the requirements. The requirements are different depending on if you are installing Rancher with Docker or on a Kubernetes cluster.
 
-{{% tabs %}}
-{{% tab "Nodes in Kubernetes Install" %}}
+ tabs 
+ tab "Nodes in Kubernetes Install" 
 
 These requirements apply to [installing Rancher on a Kubernetes cluster.](/docs/installation/k8s-install/)
 
@@ -61,8 +61,8 @@ These requirements apply to [installing Rancher on a Kubernetes cluster.](/docs/
 | X-Large         | Up to 100 | Up to 1000 | 32                                              | 128 GB                                          |
 | XX-Large        | 100+      | 1000+      | [Contact Rancher](https://rancher.com/contact/) | [Contact Rancher](https://rancher.com/contact/) |
 
-{{% /tab %}}
-{{% tab "Node in Docker Install" %}}
+ /tab 
+ tab "Node in Docker Install" 
 
 These requirements apply to [single node](/docs/installation/other-installation-methods/single-node-docker) installations of Rancher.
 
@@ -71,8 +71,8 @@ These requirements apply to [single node](/docs/installation/other-installation-
 | Small           | Up to 5  | Up to 50  | 1     | 4 GB |
 | Medium          | Up to 15 | Up to 200 | 2     | 8 GB |
 
-{{% /tab %}}
-{{% /tabs %}}
+ /tab 
+ /tabs 
 
 #### Disks
 
@@ -95,8 +95,8 @@ The port requirements are different depending on whether you are installing Ranc
 - **For a Docker installation,** you only need to open the ports required to enable Rancher to communicate with downstream user clusters.
 - **For a high-availability installation,** the same ports need to be opened, as well as additional ports required to set up the Kubernetes cluster that Rancher is installed on.
 
-{{% tabs %}}
-{{% tab "Kubernetes Install Port Requirements" %}}
+ tabs 
+ tab "Kubernetes Install Port Requirements" 
 
 #### Ports for Communication with Downstream Clusters
 
@@ -170,8 +170,8 @@ If you follow the Rancher installation documentation for setting up a Kubernetes
 | TCP      | 10254 | the node itself (local traffic, not across nodes) | Ingress controller livenessProbe/readinessProbe   |
 
 The ports that need to be opened for each node depend on the node's Kubernetes role: etcd, controlplane, or worker. If you installed Rancher on a Kubernetes cluster that doesn't have all three roles on each node, refer to the [port requirements for the Rancher Kubernetes Engine (RKE).]({{<baseurl>}}/rke/latest/en/os/#ports) The RKE docs show a breakdown of the port requirements for each role.
-{{% /tab %}}
-{{% tab "Single Node Port Requirements" %}}
+ /tab 
+ tab "Single Node Port Requirements" 
 
 #### Ports for Communication with Downstream Clusters
 
@@ -206,5 +206,5 @@ The following tables break down the port requirements for inbound and outbound t
 | TCP      | 6443 | Hosted/Imported Kubernetes API                           | Kubernetes API server                         |
 
 **Note** Rancher nodes may also require additional outbound access for any external [authentication provider](/docs/admin-settings/authentication/) which is configured (LDAP for example).
-{{% /tab %}}
-{{% /tabs %}}
+ /tab 
+ /tabs 

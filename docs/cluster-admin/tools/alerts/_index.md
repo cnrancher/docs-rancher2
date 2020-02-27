@@ -82,8 +82,8 @@ As a [cluster owner](/docs/admin-settings/rbac/cluster-project-roles/#cluster-ro
    - **Group Interval Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 30 seconds.
    - **Repeat Wait Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 1 hour.
 
-{{% /accordion %}}
-{{% accordion id="resource-event" label="Resource Event Alerts" %}}
+ /accordion 
+ accordion id="resource-event" label="Resource Event Alerts" 
 This alert type monitors for specific events that are thrown from a resource type.
 
 1. Choose the type of resource event that triggers an alert. The options are:
@@ -118,8 +118,8 @@ This alert type monitors for specific events that are thrown from a resource typ
    - **Group Interval Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 30 seconds.
    - **Repeat Wait Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 1 hour.
 
-{{% /accordion %}}
-{{% accordion id="node" label="Node Alerts" %}}
+ /accordion 
+ accordion id="node" label="Node Alerts" 
 This alert type monitors for events that occur on a specific node.
 
 1. Select the **Node** option, and then make a selection from the **Choose a Node** drop-down.
@@ -146,8 +146,8 @@ This alert type monitors for events that occur on a specific node.
    - **Group Interval Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 30 seconds.
    - **Repeat Wait Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 1 hour.
 
-{{% /accordion %}}
-{{% accordion id="node-selector" label="Node Selector Alerts" %}}
+ /accordion 
+ accordion id="node-selector" label="Node Selector Alerts" 
 This alert type monitors for events that occur on any node on marked with a label. For more information, see the Kubernetes documentation for [Labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/).
 
 1. Select the **Node Selector** option, and then click **Add Selector** to enter a key value pair for a label. This label should be applied to one or more of your nodes. Add as many selectors as you'd like.
@@ -174,8 +174,8 @@ This alert type monitors for events that occur on any node on marked with a labe
    - **Group Interval Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 30 seconds.
    - **Repeat Wait Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 1 hour.
 
-{{% /accordion %}}
-{{% accordion id="cluster-expression" label="Metric Expression Alerts" %}}
+ /accordion 
+ accordion id="cluster-expression" label="Metric Expression Alerts" 
 This alert type monitors for the overload from Prometheus expression querying, it would be available after you enable monitoring.
 
 1. Input or select an **Expression**, the drop down shows the original metrics from Prometheus, including:
@@ -218,7 +218,7 @@ This alert type monitors for the overload from Prometheus expression querying, i
    - **Group Interval Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 30 seconds.
    - **Repeat Wait Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 1 hour.
 
-{{% /accordion %}}
+ /accordion 
 
 1. Continue adding more **Alert Rule** to the group.
 

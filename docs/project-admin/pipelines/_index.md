@@ -93,8 +93,8 @@ Before you can start [configuring a pipeline](/docs/k8s-in-rancher/pipelines/) f
 
 Select your provider's tab below and follow the directions.
 
-{{% tabs %}}
-{{% tab "GitHub" %}}
+ tabs 
+ tab "GitHub" 
 
 1. From the **Global** view, navigate to the project that you want to configure pipelines.
 
@@ -108,8 +108,8 @@ Select your provider's tab below and follow the directions.
 
 1. Click **Authenticate**.
 
-{{% /tab %}}
-{{% tab "GitLab" %}}
+ /tab 
+ tab "GitLab" 
 
 _Available as of v2.1.0_
 
@@ -129,8 +129,8 @@ _Available as of v2.1.0_
 >
 > 1. Pipeline uses Gitlab [v4 API](https://docs.gitlab.com/ee/api/v3_to_v4.html) and the supported Gitlab version is 9.0+.
 > 2. If you use GitLab 10.7+ and your Rancher setup is in a local network, enable the **Allow requests to the local network from hooks and services** option in GitLab admin settings.
->    {{% /tab %}}
->    {{% tab "Bitbucket Cloud" %}}
+>     /tab 
+>     tab "Bitbucket Cloud" 
 
 _Available as of v2.2.0_
 
@@ -146,8 +146,8 @@ _Available as of v2.2.0_
 
 1. Click **Authenticate**.
 
-{{% /tab %}}
-{{% tab "Bitbucket Server" %}}
+ /tab 
+ tab "Bitbucket Server" 
 
 _Available as of v2.2.0_
 
@@ -169,8 +169,8 @@ _Available as of v2.2.0_
 > 1. Setup Rancher server with a certificate from a trusted CA.
 > 1. If you're using self-signed certificates, import Rancher server's certificate to the Bitbucket server. For instructions, see the Bitbucket server documentation for [configuring self-signed certificates](https://confluence.atlassian.com/bitbucketserver/if-you-use-self-signed-certificates-938028692.html).
 >
-> {{% /tab %}}
-> {{% /tabs %}}
+>  /tab 
+>  /tabs 
 
 **Result:** After the version control provider is authenticated, you will be automatically re-directed to start [configuring which repositories](/docs/k8s-in-rancher/pipelines/#configuring-repositories) that you want start using with a pipeline. Once a repository is enabled, you can start to [configure the pipeline](/docs/k8s-in-rancher/pipelines/#pipeline-configuration).
 
@@ -184,12 +184,12 @@ After configuring a version control provider, there are several options that can
 
 1. Edit the different settings:
 
-   {{% accordion id="executor-quota" label="Executor Quota" %}}
+    accordion id="executor-quota" label="Executor Quota" 
 
 Select the maximum number of pipeline executors. The _executor quota_ decides how many builds can run simultaneously in the project. If the number of triggered builds exceeds the quota, subsequent builds will queue until a vacancy opens. By default, the quota is `2`. A value of `0` or less removes the quota limit.
-{{% /accordion %}}
+ /accordion 
 
-    {{% accordion id="resource-quota" label="Resource Quota for Executors" %}}
+     accordion id="resource-quota" label="Resource Quota for Executors" 
 
 _Available as of v2.2.0_
 
@@ -198,8 +198,8 @@ Configure compute resources for Jenkins agent containers. When a pipeline execut
 Edit the **Memory Reservation**, **Memory Limit**, **CPU Reservation** or **CPU Limit**, then click **Update Limit and Reservation**.
 
 To configure compute resources for pipeline-step containers:
-{{% tabs %}}
-{{% tab "By YAML" %}}
+ tabs 
+ tab "By YAML" 
 
 You can configure compute resources for pipeline-step containers in the `.rancher-pipeline.yml` file.
 
@@ -233,11 +233,11 @@ stages:
 ```
 
 > **Note:** Rancher sets default compute resources for pipeline steps except for `Build and Publish Images` and `Run Script` steps. You can override the default value by specifying compute resources in the same way.
-> {{% /tab %}}
-> {{% /tabs %}}
+>  /tab 
+>  /tabs 
 
-    {{% /accordion %}}
-    {{% accordion id="cacerts" label="Custom CA" %}}
+     /accordion 
+     accordion id="cacerts" label="Custom CA" 
 
 _Available as of v2.2.0_
 
@@ -249,7 +249,7 @@ If you want to use a version control provider with a certificate from a custom/i
 
 **Result:** Pipelines can be used and new pods will be able to work with the self-signed-certificate.
 
-    {{% /accordion %}}
+     /accordion 
 
 ### Configuring Persistent Data for Pipeline Components
 
@@ -271,9 +271,9 @@ The internal [Docker registry](#how-pipelines-work) and the [Minio](#how-pipelin
    - **Add Volume > Use an existing persistent volume (claim)**
 
 1. Complete the form that displays to choose a persistent volume for the internal Docker registry.
-   {{% tabs %}}
+    tabs 
 
-{{% tab "Add a new persistent volume" %}}
+ tab "Add a new persistent volume" 
 <br/>
 
 1. Enter a **Name** for the volume claim.
@@ -288,9 +288,9 @@ The internal [Docker registry](#how-pipelines-work) and the [Minio](#how-pipelin
 
 1. Click **Define**.
 
-{{% /tab %}}
+ /tab 
 
-{{% tab "Use an existing persistent volume" %}}
+ tab "Use an existing persistent volume" 
 <br/>
 
 1. Enter a **Name** for the volume claim.
@@ -301,9 +301,9 @@ The internal [Docker registry](#how-pipelines-work) and the [Minio](#how-pipelin
 
 1. Click **Define**.
 
-{{% /tab %}}
+ /tab 
 
-{{% /tabs %}}
+ /tabs 
 
 1. From the **Mount Point** field, enter `/var/lib/registry`, which is the data storage path inside the Docker registry container.
 
@@ -319,9 +319,9 @@ The internal [Docker registry](#how-pipelines-work) and the [Minio](#how-pipelin
    - **Add Volume > Use an existing persistent volume (claim)**
 
 1. Complete the form that displays to choose a persistent volume for the internal Docker registry.
-   {{% tabs %}}
+    tabs 
 
-{{% tab "Add a new persistent volume" %}}
+ tab "Add a new persistent volume" 
 <br/>
 
 1. Enter a **Name** for the volume claim.
@@ -336,9 +336,9 @@ The internal [Docker registry](#how-pipelines-work) and the [Minio](#how-pipelin
 
 1. Click **Define**.
 
-{{% /tab %}}
+ /tab 
 
-{{% tab "Use an existing persistent volume" %}}
+ tab "Use an existing persistent volume" 
 <br/>
 
 1. Enter a **Name** for the volume claim.
@@ -349,9 +349,9 @@ The internal [Docker registry](#how-pipelines-work) and the [Minio](#how-pipelin
 
 1. Click **Define**.
 
-{{% /tab %}}
+ /tab 
 
-{{% /tabs %}}
+ /tabs 
 
 1. From the **Mount Point** field, enter `/data`, which is the data storage path inside the Minio container.
 

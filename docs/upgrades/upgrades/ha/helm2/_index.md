@@ -75,8 +75,8 @@ of your Kubernetes cluster running Rancher server. You'll use the snapshot as a 
 
 This section describes how to upgrade normal (Internet-connected) or air gap installations of Rancher with Helm.
 
-{{% tabs %}}
-{{% tab "Kubernetes Upgrade" %}}
+ tabs 
+ tab "Kubernetes Upgrade" 
 
 Get the values, which were passed with `--set`, from the current Rancher Helm chart that is installed.
 
@@ -90,7 +90,7 @@ hostname: rancher.my.org
 
 If you are also upgrading cert-manager to the latest version from a version older than 0.11.0, follow `Option B: Reinstalling Rancher`. Otherwise, follow `Option A: Upgrading Rancher`.
 
-{{% accordion label="Option A: Upgrading Rancher" %}}
+ accordion label="Option A: Upgrading Rancher" 
 
 Upgrade Rancher to the latest version with all your settings.
 
@@ -103,9 +103,9 @@ helm upgrade rancher-<CHART_REPO>/rancher \
   --set hostname=rancher.my.org
 ```
 
-{{% /accordion %}}
+ /accordion 
 
-{{% accordion label="Option B: Reinstalling Rancher chart" %}}
+ accordion label="Option B: Reinstalling Rancher chart" 
 
 If you are currently running the cert-manger whose version is older than v0.11, and want to upgrade both Rancher and cert-manager to a newer version, then you need to reinstall both Rancher and cert-manger due to the API change in cert-manger v0.11.
 
@@ -126,11 +126,11 @@ Please refer the [Upgrading Cert-Manager](/docs/installation/options/upgrading-c
    --set hostname=rancher.my.org
    ```
 
-{{% /accordion %}}
+ /accordion 
 
-{{% /tab %}}
+ /tab 
 
-{{% tab "Kubernetes Air Gap Upgrade" %}}
+ tab "Kubernetes Air Gap Upgrade" 
 
 1. Render the Rancher template using the same chosen options that were used when installing Rancher. Use the reference table below to replace each placeholder. Rancher needs to be configured to use the private registry in order to provision any Rancher launched Kubernetes clusters or Rancher tools.
 
@@ -143,7 +143,7 @@ Please refer the [Upgrading Cert-Manager](/docs/installation/options/upgrading-c
    | `<REGISTRY.YOURDOMAIN.COM:PORT>` | The DNS name for your private registry.         |
    | `<CERTMANAGER_VERSION>`          | Cert-manager version running on k8s cluster.    |
 
-{{% accordion id="self-signed" label="Option A-Default Self-Signed Certificate" %}}
+ accordion id="self-signed" label="Option A-Default Self-Signed Certificate" 
 
 ```plain
 helm template ./rancher-<VERSION>.tgz --output-dir . \
@@ -156,8 +156,8 @@ helm template ./rancher-<VERSION>.tgz --output-dir . \
 --set useBundledSystemChart=true # Available as of v2.3.0, use the packaged Rancher system charts
 ```
 
-{{% /accordion %}}
-{{% accordion id="secret" label="Option B: Certificates From Files using Kubernetes Secrets" %}}
+ /accordion 
+ accordion id="secret" label="Option B: Certificates From Files using Kubernetes Secrets" 
 
 > **Note:** If you are using a Private CA signed cert, add `--set privateCA=true` following `--set ingress.tls.source=secret`.
 
@@ -172,7 +172,7 @@ helm template ./rancher-<VERSION>.tgz --output-dir . \
 --set useBundledSystemChart=true # Available as of v2.3.0, use the packaged Rancher system charts
 ```
 
-{{% /accordion %}}
+ /accordion 
 
 2. Copy the rendered manifest directories to a system with access to the Rancher server cluster and apply the rendered templates.
 
@@ -182,8 +182,8 @@ helm template ./rancher-<VERSION>.tgz --output-dir . \
    kubectl -n cattle-system apply -R -f ./rancher
    ```
 
-{{% /tab %}}
-{{% /tabs %}}
+ /tab 
+ /tabs 
 
 #### D. Verify the Upgrade
 

@@ -23,7 +23,7 @@ Set up a notifier so that you can begin configuring and sending alerts.
 1. From the main menu, select **Tools > Notifiers**. Then click **Add Notifier**.
 
 1. Select the service you want to use as your notifier, and then fill out the form.
-   {{% accordion id="slack" label="Slack" %}}
+    accordion id="slack" label="Slack" 
 1. Enter a **Name** for the notifier.
 1. From Slack, create a webhook. For instructions, see the [Slack Documentation](https://get.slack.help/hc/en-us/articles/115005265063-Incoming-WebHooks-for-Slack).
 1. From Rancher, enter your Slack webhook **URL**.
@@ -32,8 +32,8 @@ Set up a notifier so that you can begin configuring and sending alerts.
    Both public and private channels are supported.
 
 1. Click **Test**. If the test is successful, the Slack channel you're configuring for the notifier outputs `Slack setting validated`.
-   {{% /accordion %}}
-   {{% accordion id="email" label="Email" %}}
+    /accordion 
+    accordion id="email" label="Email" 
 1. Enter a **Name** for the notifier.
 1. In the **Sender** field, enter an email address available on your mail server that you want to send the notification.
 1. In the **Host** field, enter the IP address or hostname for your SMTP server. Example: `smtp.email.com`
@@ -41,21 +41,21 @@ Set up a notifier so that you can begin configuring and sending alerts.
 1. Enter a **Username** and **Password** that authenticate with the SMTP server.
 1. In the **Default Recipient** field, enter the email address that you want to receive the notification.
 1. Click **Test**. If the test is successful, Rancher prints `settings validated` and you receive a test notification email.
-   {{% /accordion %}}
-   {{% accordion id="pagerduty" label="PagerDuty" %}}
+    /accordion 
+    accordion id="pagerduty" label="PagerDuty" 
 1. Enter a **Name** for the notifier.
 1. From PagerDuty, create a webhook. For instructions, see the [PagerDuty Documentation](https://support.pagerduty.com/docs/webhooks).
 1. From PagerDuty, copy the webhook's **Integration Key**.
 1. From Rancher, enter the key in the **Service Key** field.
 1. Click **Test**. If the test is successful, your PagerDuty endpoint outputs `PageDuty setting validated`.
-   {{% /accordion %}}
-   {{% accordion id="webhook" label="WebHook" %}}
+    /accordion 
+    accordion id="webhook" label="WebHook" 
 1. Enter a **Name** for the notifier.
 1. Using the app of your choice, create a webhook URL.
 1. Enter your webhook **URL**.
 1. Click **Test**. If the test is successful, the URL you're configuring as a notifier outputs `Webhook setting validated`.
-   {{% /accordion %}}
-   {{% accordion id="WeChat" label="WeChat" %}}
+    /accordion 
+    accordion id="WeChat" label="WeChat" 
 
 _Available as of v2.2.0_
 
@@ -63,7 +63,7 @@ _Available as of v2.2.0_
 1. In the **Corporation ID** field, enter the "EnterpriseID" of your corporation, you could get it from [Profile page](https://work.weixin.qq.com/wework_admin/frame#profile).
 1. From Enterprise WeChat, create an application in the [Application page](https://work.weixin.qq.com/wework_admin/frame#apps), and then enter the "AgentId" and "Secret" of this application to the **Application Agent ID** and **Application Secret** fields.
 1. Select the **Recipient Type** and then enter a corresponding id to **Default Recipient** field, for example, the party id, tag id or user account that you want to receive the notification. You could get contact information from [Contacts page](https://work.weixin.qq.com/wework_admin/frame#contacts).
-   {{% /accordion %}}
+    /accordion 
 
 1. _Available as of v2.3.0_ - Select **Enable** for **Send Resolved Alerts** if you wish to notify about resolved alerts.
 1. Click **Add** to complete adding the notifier.

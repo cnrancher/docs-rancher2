@@ -113,8 +113,8 @@ If we parse the two example files from [Migration Example Files](/docs/v1.6-mig
 <!--
 The following tabs display the contents of each parsed file. We've omitted `webLB-deployment.yaml` and `webLB-service.yaml` because we aren't migrating them to v2.x.
 
-{{% tabs %}}
-{{% tab "web-deployment.yaml" %}}
+ tabs 
+ tab "web-deployment.yaml" 
 
 ```YAML
 apiVersion: extensions/v1beta1
@@ -151,8 +151,8 @@ spec:
 status: {}
 ```
 
-{{% /tab %}}
-{{% tab "web-service.yaml" %}}
+ /tab 
+ tab "web-service.yaml" 
 
 ```YAML
 apiVersion: v1
@@ -179,8 +179,8 @@ status:
   loadBalancer: {}
 ```
 
-{{% /tab %}}
-{{% tab "database-deployment.yaml" %}}
+ /tab 
+ tab "database-deployment.yaml" 
 
 ```YAML
 apiVersion: extensions/v1beta1
@@ -216,10 +216,10 @@ status: {}
 
 ```
 
-{{% /tab %}}
+ /tab 
 
 
-{{% /tabs %}}
+ /tabs 
 
 -->
 
@@ -227,8 +227,8 @@ status: {}
 
 > **Note:** Although these instructions deploy your v1.6 services in Rancher v2.x, they will not work correctly until you adjust their Kubernetes manifests.
 
-{{% tabs %}}
-{{% tab "Rancher UI" %}}
+ tabs 
+ tab "Rancher UI" 
 
 You can deploy the Kubernetes manifests created by migration-tools by importing them into Rancher v2.x.
 
@@ -240,8 +240,8 @@ You can deploy the Kubernetes manifests created by migration-tools by importing 
 
 ![Deploy Services](/img/rancher/deploy-service.gif)
 
-{{% /tab %}}
-{{% tab "Rancher CLI" %}}
+ /tab 
+ tab "Rancher CLI" 
 
 > **Prerequisite:** [Install Rancher CLI](/docs/cli/) for Rancher v2.x.
 
@@ -253,8 +253,8 @@ Use the following Rancher CLI commands to deploy your application using Rancher 
 ./rancher kubectl create -f <SERVICE_YAML_FILE> # DEPLOY THE SERVICE YAML
 ```
 
-{{% /tab %}}
-{{% /tabs %}}
+ /tab 
+ /tabs 
 
 Following importation, you can view your v1.6 services in the v2.x UI as Kubernetes manifests by using the context menu to select `<CLUSTER> > <PROJECT>` that contains your services. The imported manifests will display on the **Resources > Workloads** and on the tab at **Resources > Workloads > Service Discovery.** (In Rancher v2.x prior to v2.3.0, these are on the **Workloads** and **Service Discovery** tabs in the top navigation bar.)
 

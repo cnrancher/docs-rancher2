@@ -56,7 +56,7 @@ Rancher relies on [cert-manager](https://github.com/jetstack/cert-manager) to is
 
 `cert-manager` is only required for certificates issued by Rancher's generated CA (`ingress.tls.source=rancher`) and Let's Encrypt issued certificates (`ingress.tls.source=letsEncrypt`). You should skip this step if you are using your own certificate files (option `ingress.tls.source=secret`) or if you use [TLS termination on an External Load Balancer](/docs/installation/options/chart-options/#external-tls-termination).
 
-{{% accordion id="cert-manager" label="Click to Expand" %}}
+ accordion id="cert-manager" label="Click to Expand" 
 
 > **Important:**
 > Due to an issue with Helm v2.12.0 and cert-manager, please use Helm v2.12.1 or higher.
@@ -99,12 +99,12 @@ cert-manager-cainjector-577f6d9fd7-tr77l   1/1     Running   0          2m
 cert-manager-webhook-787858fcdb-nlzsq      1/1     Running   0          2m
 ```
 
-{{% /accordion %}}
+ /accordion 
 
 #### Install Rancher with Helm and Your Chosen Certificate Option
 
-{{% tabs %}}
-{{% tab "Rancher-generated Certificates" %}}
+ tabs 
+ tab "Rancher-generated Certificates" 
 
 > **Note:** You need to have [cert-manager](#optional-install-cert-manager) installed before proceeding.
 
@@ -126,8 +126,8 @@ Waiting for deployment "rancher" rollout to finish: 0 of 3 updated replicas are 
 deployment "rancher" successfully rolled out
 ```
 
-{{% /tab %}}
-{{% tab "Let's Encrypt" %}}
+ /tab 
+ tab "Let's Encrypt" 
 
 > **Note:** You need to have [cert-manager](#optional-install-cert-manager) installed before proceeding.
 
@@ -151,8 +151,8 @@ Waiting for deployment "rancher" rollout to finish: 0 of 3 updated replicas are 
 deployment "rancher" successfully rolled out
 ```
 
-{{% /tab %}}
-{{% tab "Certificates from Files" %}}
+ /tab 
+ tab "Certificates from Files" 
 Create Kubernetes secrets from your own certificates for Rancher to use.
 
 > **Note:** The `Common Name` or a `Subject Alternative Names` entry in the server certificate must match the `hostname` option, or the ingress controller will fail to configure correctly. Although an entry in the `Subject Alternative Names` is technically required, having a matching `Common Name` maximizes compatibility with older browsers/applications. If you want to check if your certificates are correct, see [How do I check Common Name and Subject Alternative Names in my server certificate?](/docs/faq/technical/#how-do-i-check-common-name-and-subject-alternative-names-in-my-server-certificate)
@@ -186,8 +186,8 @@ rancher   3         3         3            3           3m
 ```
 
 It should show the same count for `DESIRED` and `AVAILABLE`.
-{{% /tab %}}
-{{% /tabs %}}
+ /tab 
+ /tabs 
 
 #### Advanced Configurations
 

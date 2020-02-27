@@ -20,9 +20,9 @@ The ports required to be open for cluster nodes changes depending on how the clu
 >
 > If security isn't a large concern and you're okay with opening a few additional ports, you can use the table in [Commonly Used Ports](#commonly-used-ports) as your port reference instead of the comprehensive tables below.
 
-{{% tabs %}}
+ tabs 
 
-{{% tab "Node Pools" %}}
+ tab "Node Pools" 
 
 The following table depicts the port requirements for [Rancher Launched Kubernetes](/docs/cluster-provisioning/rke-clusters/) with nodes created in an [Infrastructure Provider](/docs/cluster-provisioning/rke-clusters/node-pools/).
 
@@ -31,33 +31,33 @@ The following table depicts the port requirements for [Rancher Launched Kubernet
 
 {{< ports-iaas-nodes >}}
 
-{{% /tab %}}
+ /tab 
 
-{{% tab "Custom Nodes" %}}
+ tab "Custom Nodes" 
 
 The following table depicts the port requirements for [Rancher Launched Kubernetes](/docs/cluster-provisioning/rke-clusters/) with [Custom Nodes](/docs/cluster-provisioning/rke-clusters/custom-nodes/).
 
 {{< ports-custom-nodes >}}
 
-{{% /tab %}}
+ /tab 
 
-{{% tab "Hosted Clusters" %}}
+ tab "Hosted Clusters" 
 
 The following table depicts the port requirements for [hosted clusters](/docs/cluster-provisioning/hosted-kubernetes-clusters).
 
 {{< ports-imported-hosted >}}
 
-{{% /tab %}}
+ /tab 
 
-{{% tab "Imported Clusters" %}}
+ tab "Imported Clusters" 
 
 The following table depicts the port requirements for [imported clusters](/docs/cluster-provisioning/imported-clusters/).
 
 {{< ports-imported-hosted >}}
 
-{{% /tab %}}
+ /tab 
 
-{{% /tabs %}}
+ /tabs 
 
 ### Other Port Considerations
 

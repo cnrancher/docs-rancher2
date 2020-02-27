@@ -1268,7 +1268,7 @@ runcmd:
 
 Before apply, replace `rancher_kubernetes_engine_config.services.etcd.gid` and `rancher_kubernetes_engine_config.services.etcd.uid` with the proper etcd group and user ids that were created on etcd nodes.
 
-{{% accordion id="cluster-1.14" label="RKE yaml for k8s 1.14" %}}
+ accordion id="cluster-1.14" label="RKE yaml for k8s 1.14" 
 
 ```yaml
 nodes:
@@ -1398,9 +1398,9 @@ services:
 ssh_agent_auth: false
 ```
 
-{{% /accordion %}}
+ /accordion 
 
-{{% accordion id="cluster-1.15" label="RKE yaml for k8s 1.15" %}}
+ accordion id="cluster-1.15" label="RKE yaml for k8s 1.15" 
 
 ```yaml
 nodes:
@@ -1522,9 +1522,9 @@ services:
 ssh_agent_auth: false
 ```
 
-{{% /accordion %}}
+ /accordion 
 
-{{% accordion id="cluster-1.16" label="RKE yaml for k8s 1.16" %}}
+ accordion id="cluster-1.16" label="RKE yaml for k8s 1.16" 
 
 ```yaml
 nodes:
@@ -1646,13 +1646,13 @@ services:
 ssh_agent_auth: false
 ```
 
-{{% /accordion %}}
+ /accordion 
 
 ### Appendix C - Complete RKE Template Example
 
 Before apply, replace `rancher_kubernetes_engine_config.services.etcd.gid` and `rancher_kubernetes_engine_config.services.etcd.uid` with the proper etcd group and user ids that were created on etcd nodes.
 
-{{% accordion id="k8s-1.14" label="RKE template for k8s 1.14" %}}
+ accordion id="k8s-1.14" label="RKE template for k8s 1.14" 
 
 ```yaml
 ##
@@ -1786,9 +1786,9 @@ rancher_kubernetes_engine_config:
 windows_prefered_cluster: false
 ```
 
-{{% /accordion %}}
+ /accordion 
 
-{{% accordion id="k8s-1.15" label="RKE template for k8s 1.15" %}}
+ accordion id="k8s-1.15" label="RKE template for k8s 1.15" 
 
 ```yaml
 ##
@@ -1912,9 +1912,9 @@ rancher_kubernetes_engine_config:
 windows_prefered_cluster: false
 ```
 
-{{% /accordion %}}
+ /accordion 
 
-{{% accordion id="k8s-1.16" label="RKE template for k8s 1.16" %}}
+ accordion id="k8s-1.16" label="RKE template for k8s 1.16" 
 
 ```yaml
 ##
@@ -2038,4 +2038,4 @@ rancher_kubernetes_engine_config:
 windows_prefered_cluster: false
 ```
 
-{{% /accordion %}}
+ /accordion 

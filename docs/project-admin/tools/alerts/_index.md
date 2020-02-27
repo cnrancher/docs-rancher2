@@ -51,7 +51,7 @@ For information on other default alerts, refer to the section on [cluster-level 
 
 1. Based on the type of alert you want to create, complete one of the instruction subsets below.
 
-{{% accordion id="pod" label="Pod Alerts" %}}
+ accordion id="pod" label="Pod Alerts" 
 This alert type monitors for the status of a specific pod.
 
 1. Select the **Pod** option, and then select a pod from the drop-down.
@@ -75,8 +75,8 @@ This alert type monitors for the status of a specific pod.
    - **Group Interval Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 30 seconds.
    - **Repeat Wait Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 1 hour.
 
-{{% /accordion %}}
-{{% accordion id="workload" label="Workload Alerts" %}}
+ /accordion 
+ accordion id="workload" label="Workload Alerts" 
 This alert type monitors for the availability of a workload.
 
 1. Choose the **Workload** option. Then choose a workload from the drop-down.
@@ -97,8 +97,8 @@ This alert type monitors for the availability of a workload.
    - **Group Interval Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 30 seconds.
    - **Repeat Wait Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 1 hour.
 
-{{% /accordion %}}
-{{% accordion id="workload-selector" label="Workload Selector Alerts" %}}
+ /accordion 
+ accordion id="workload-selector" label="Workload Selector Alerts" 
 This alert type monitors for the availability of all workloads marked with tags that you've specified.
 
 1. Select the **Workload Selector** option, and then click **Add Selector** to enter the key value pair for a label. If one of the workloads drops below your specifications, an alert is triggered. This label should be applied to one or more of your workloads.
@@ -117,8 +117,8 @@ This alert type monitors for the availability of all workloads marked with tags 
    - **Group Interval Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 30 seconds.
    - **Repeat Wait Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 1 hour.
 
-{{% /accordion %}}
-{{% accordion id="project-expression" label="Metric Expression Alerts" %}}
+ /accordion 
+ accordion id="project-expression" label="Metric Expression Alerts" 
 <br />
 _Available as of v2.2.4_
 
@@ -163,7 +163,7 @@ If you enable [project monitoring](/docs/project-admin/tools/#monitoring), this 
         - **Repeat Wait Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 1 hour.
 
     <br />
-    {{% /accordion %}}
+     /accordion 
 
 1.  Continue adding more **Alert Rule** to the group.
 

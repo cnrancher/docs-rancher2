@@ -33,7 +33,7 @@ The namespace used in these instructions depends on the namespace cert-manager i
 
 In order to upgrade cert-manager, follow these instructions:
 
-{{% accordion id="normal" label="Upgrading cert-manager with Internet access" %}}
+ accordion id="normal" label="Upgrading cert-manager with Internet access" 
 
 1.  Back up existing resources as a precaution
 
@@ -77,9 +77,9 @@ In order to upgrade cert-manager, follow these instructions:
         helm install --version 0.9.1 --name cert-manager --namespace kube-system jetstack/cert-manager
         ```
 
-    {{% /accordion %}}
+     /accordion 
 
-{{% accordion id="airgap" label="Upgrading cert-manager in an airgapped environment" %}}
+ accordion id="airgap" label="Upgrading cert-manager in an airgapped environment" 
 
 #### Prerequisites
 
@@ -148,7 +148,7 @@ Before you can perform the upgrade, you must prepare your air gapped environment
         kubectl -n kube-system apply -R -f ./cert-manager
         ```
 
-    {{% /accordion %}}
+     /accordion 
 
 Once you’ve installed cert-manager, you can verify it is deployed correctly by checking the kube-system namespace for running pods:
 
