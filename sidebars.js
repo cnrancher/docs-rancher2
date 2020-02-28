@@ -26,6 +26,10 @@ module.exports = {
       'quick-start-guide/deployment/_index',
       'quick-start-guide/workload/_index',
       'quick-start-guide/cli/_index'
+    ],
+    安装指南: [
+      'installation/requirements/_index',
+      'installation/k8s-install/_index'
     ]
   }
 };

@@ -2,7 +2,8 @@ const metadata = {
   categories: {
     版本说明: '为您介绍 Rancher 2.3 已发布的版本功能与更新',
     产品介绍: '为您介绍Rancher的产品。帮助您了解 Rancher 容器平台',
-    快速入门: '为您介绍Rancher的产品。帮助您了解 Rancher 容器平台'
+    快速入门: '为您介绍Rancher的产品。帮助您了解 Rancher 容器平台',
+    安装指南: '为您介绍如何安装Rancher'
   },
   docs: {
     'releases/v2.3.5': '版本说明 - v2.3.5',
@@ -18,7 +19,9 @@ const metadata = {
     'quick-start-guide/_index': '入门必读',
     'quick-start-guide/deployment/_index': '部署Rancher Server',
     'quick-start-guide/workload/_index': '部署工作负载',
-    'quick-start-guide/cli/_index': '命令行工具'
+    'quick-start-guide/cli/_index': '命令行工具',
+    'installation/requirements/_index': '安装要求',
+    'installation/k8s-install/_index': '高可用安装'
   }
 };
 
