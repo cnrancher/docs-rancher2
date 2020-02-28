@@ -4,17 +4,17 @@ import Layout from '@theme/Layout';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './styles.module.css';
 
-function getToc(sidebars, baseUrl) {
+function getToc(sidebars, metadata, baseUrl) {
   const out = [];
   const docs = sidebars.docs;
-  docs.forEach(doc => {
+  Object.keys(docs).forEach(categoryKey => {
+    const items = docs[categoryKey];
     out.push({
-      key: doc.label,
-      description: doc.description,
-      subGroups: doc.items.map(item => {
-        const { label, id } = item;
+      key: categoryKey,
+      description: metadata.categories[categoryKey],
+      subGroups: items.map(id => {
         return {
-          label,
+          label: metadata.docs[id],
           key: baseUrl + 'docs/' + id
         };
       })
@@ -26,7 +26,9 @@ function getToc(sidebars, baseUrl) {
 function Home() {
   const context = useDocusaurusContext();
   const { siteConfig = {} } = context;
-  const toc = getToc(siteConfig.customFields.sidebars, siteConfig.baseUrl);
+  const { baseUrl } = siteConfig;
+  const { sidebars, metadata } = siteConfig.customFields;
+  const toc = getToc(sidebars, metadata, baseUrl);
   const title = siteConfig.title + ' 中文文档';
   return (
     <Layout title="中文文档" description={title}>

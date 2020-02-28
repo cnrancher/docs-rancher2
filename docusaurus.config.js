@@ -1,4 +1,5 @@
 const sidebars = require('./sidebars');
+const metadata = require('./metadata');
 
 module.exports = {
   title: 'Rancher 2.3',
@@ -60,7 +61,7 @@ module.exports = {
       '@docusaurus/preset-classic',
       {
         docs: {
-          sidebarPath: require.resolve('./metadata.js')
+          sidebarPath: require.resolve('./sidebars.js')
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css')
@@ -70,6 +71,7 @@ module.exports = {
   ],
   customFields: {
     sidebars,
+    metadata,
     stable: '版本说明 - v2.3.4',
     baseCommit: 'a4b11566a4ed341fe2f89de367b5aaf6204f75cf - Feb 22, 2020'
   }
