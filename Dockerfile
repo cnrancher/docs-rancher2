@@ -1,5 +1,3 @@
-FROM node:12.6.0
+FROM alpine:3.8
 COPY . /build
 WORKDIR /build
-RUN yarn install
-RUN yarn build
