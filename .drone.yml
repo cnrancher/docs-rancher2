@@ -4,6 +4,7 @@ name: default
 steps:
   - name: build
     image: plugins/docker
+    dry_run: true
     volumes:
       - name: vol
         path: /build
