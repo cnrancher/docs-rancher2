@@ -6,8 +6,10 @@ steps:
     image: docker
     commands:
       - docker build .
+    privileged: true
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - name: docker
+        path: /var/run/docker.sock
       - name: vol
         path: /build
   - name: oss
