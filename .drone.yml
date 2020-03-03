@@ -4,8 +4,8 @@ name: default
 steps:
   - name: build
     image: plugins/docker
-    dry_run: true
     settings:
+      dry_run: true
       repo: foo/bar
       tags: latest
     volumes:
