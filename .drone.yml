@@ -6,7 +6,6 @@ steps:
     image: docker
     commands:
       - docker build .
-    privileged: true
     volumes:
       - name: docker
         path: /var/run/docker.sock
