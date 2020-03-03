@@ -5,11 +5,9 @@ steps:
   - name: build
     image: node:12.16.0
     commands:
-      - node -v
-      - touch /build/xxx
-      - pwd
-      - ls
-      - mv ./docs /build
+      - yarn install
+      - yarn build
+      - mv ./build /
     volumes:
       - name: vol
         path: /build
