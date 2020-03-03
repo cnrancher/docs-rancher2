@@ -3,11 +3,10 @@ name: default
 
 steps:
   - name: build
-    image: plugins/docker
-    settings:
-      dry_run: true
-      repo: foo/bar
-      tags: latest
+    image: alpine:3.8
+    commands:
+      - npm -v
+      - touch /build/xxx
     volumes:
       - name: vol
         path: /build
