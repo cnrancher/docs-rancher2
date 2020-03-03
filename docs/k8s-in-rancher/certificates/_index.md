@@ -1,41 +1,43 @@
 ---
-title: Encrypting HTTP Communication
+title: 证书，加密HTTP通信
 ---
 
-When you create an ingress within Rancher/Kubernetes, you must provide it with a secret that includes a TLS private key and certificate, which are used to encrypt and decrypt communications that come through the ingress. You can make certificates available for ingress use by navigating to its project or namespace, and then uploading the certificate. You can then add the certificate to the ingress deployment.
+在 Rancher 和 Kubernetes 中创建 Ingress 时，如果需要对 HTTP 通信进行加密，您必须提供包含 TLS 私钥和证书的密文。该私钥和证书用于加密和解密通过 Ingress 进行的通信。您可以导航到某个[项目](/docs/cluster-admin/projects-and-namespaces/_index)或[命名空间](/docs/cluster-admin/projects-and-namespaces/_index)，然后上传证书，以使证书可供 Ingress 使用。然后，您可以将证书添加到 Ingress 中。
 
-Add SSL certificates to either projects, namespaces, or both. A project scoped certificate will be available in all its namespaces.
+## 添加证书
 
-> **Prerequisites:** You must have a TLS private key and certificate available to upload.
+您可以将 SSL 证书添加到项目，命名空间或同时添加到两者。如果添加的是项目范围的证书，您将可以在该项目下所有命名空间里使用该证书。
 
-1. From the **Global** view, select the project where you want to deploy your ingress.
+> **先决条件：** 您必须具有 TLS 私钥和证书。
 
-1. From the main menu, select **Resources > Secrets > Certificates**. Click **Add Certificate**. (For Rancher prior to v2.3, click **Resources > Certificates.**)
+1. 从“全局”视图中，选择要在其中部署 Ingress 的项目。
 
-1. Enter a **Name** for the certificate.
+2. 从主菜单中，选择 **资源 > 密文 > 证书列表** 。点击**添加证书**。 （对于 v2.3 之前的 Rancher，请单击 **资源 > 证书** 。）
 
-   > **Note:** Kubernetes classifies SSL certificates as [secrets](https://kubernetes.io/docs/concepts/configuration/secret/), and no two secrets in a project or namespace can have duplicate names. Therefore, to prevent conflicts, your SSL certificate must have a unique name among the other certificates, ConfigMaps, registries, and secrets within your project/workspace.
+3. 输入证书的**名称**。
 
-1. Select the **Scope** of the certificate.
+   > **注意：** Kubernetes 将 SSL 证书分类为[secret](https://kubernetes.io/docs/concepts/configuration/secret/)，并且规定命名空间中的两个 secrets 不能具有相同的名称。因此，为防止冲突，请确保您的 SSL 证书与该命名空间中的其他证书，镜像库凭证和密文有不同的名称。
 
-   - **Available to all namespaces in this project:** The certificate is available for any deployment in any namespaces in the project.
+4. 选择证书的**作用域**。
 
-   - **Available to a single namespace:** The certificate is only available for the deployments in one [namespace](/docs/k8s-in-rancher/projects-and-namespaces/#namespaces). If you choose this option, select a **Namespace** from the drop-down list or click **Add to a new namespace** to add the certificate to a namespace you create on the fly.
+   - **此项目所有命名空间：** 该证书可用于项目中任何命名空间中的任何工作负载。
 
-1. From **Private Key**, either copy and paste your certificate's private key into the text box (include the header and footer), or click **Read from a file** to browse to the private key on your file system. If possible, we recommend using **Read from a file** to reduce likelihood of error.
+   - **单个命名空间：** 该证书仅可用于一个[命名空间](/docs/k8s-in-rancher/projects-and-namespaces/#namespaces)中的工作负载。如果选择此选项，请从下拉列表中选择一个**命名空间**，或单击**创建新的命名空间**以将证书添加到新创建的命名空间中。
 
-   Private key files end with an extension of `.key`.
+5. 在**私钥**里，将证书的私钥复制并粘贴到文本框中（包括头部和尾部），或单击**从文件读取**以浏览到文件系统上的私钥。如果可能的话，我们建议使用**从文件读取**，以减少出错的可能性。
 
-1. From **Certificate**, either copy and paste your certificate into the text box (include the header and footer), or click **Read from a file** to browse to the certificate on your file system. If possible, we recommend using **Read from a file** to reduce likelihood of error.
+   私钥文件以 `.key` 扩展名结尾。
 
-   Certificate files end with an extension of `.crt`.
+6. 在**证书**里，将证书的证书复制并粘贴到文本框中（包括头部和尾部），或单击**从文件读取**以浏览到文件系统上的证书。如果可能的话，我们建议使用**从文件读取**，以减少出错的可能性。
 
-**Result:** Your certificate is added to the project or namespace. You can now add it to deployments.
+   证书文件以 `.crt` 扩展名结尾。
 
-- If you added an SSL certificate to the project, the certificate is available for deployments created in any project namespace.
-- If you added an SSL certificate to a namespace, the certificate is available only for deployments in that namespace.
-- Your certificate is added to the **Resources > Secrets > Certificates** view. (For Rancher prior to v2.3, it is added to **Resources > Certificates.**)
+**结果：** 您的证书已添加到项目或命名空间。现在，您可以将其添加到工作负载中。
 
-### What's Next?
+- 如果将 SSL 证书添加到项目，则该证书可用于在任何项目命名空间的工作负载。
+- 如果您将 SSL 证书添加到命名空间，则该证书仅可用于该命名空间的工作负载。
+- 您的证书已添加到 **资源 > 密文 > 证书列表** 视图中。 （对于 v2.3 之前的 Rancher，它已添加到 **资源 > 证书** 中。）
 
-Now you can add the certificate when launching an ingress within the current project or namespace. For more information, see [Adding Ingress](/docs/k8s-in-rancher/load-balancers-and-ingress/ingress/).
+## 添加 Ingress
+
+现在，您可以在当前项目或命名空间中创建 Ingress 时添加证书。有关更多信息，请参阅[添加 Ingress](/docs/k8s-in-rancher/load-balancers-and-ingress/ingress/_index)。

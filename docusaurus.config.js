@@ -16,32 +16,29 @@ module.exports = {
       },
       links: [
         { to: 'docs/overview/_index', label: '帮助文档', position: 'left' },
-        { to: 'docs/api-docs/how-to-use', label: 'API 文档', position: 'left' },
-        { to: 'docs/api-docs/how-to-use', label: '文档下载', position: 'left' },
-        { to: 'docs/api-docs/how-to-use', label: '历史文档', position: 'left' },
         {
-          href: 'https://docs.rancher.cn',
+          href: 'https://docs.rancher.cn/',
           label: '文档中心',
+          position: 'left'
+        },
+        {
+          href: 'https://www.rancher.cn/',
+          label: '中国官网',
           position: 'right'
         },
         {
-          to: 'docs/api-docs/how-to-use',
+          href: 'https://www.rancher.com/',
+          label: '美国官网',
+          position: 'right'
+        },
+        {
+          href: 'https://www.rancher.cn/weixin/',
           label: '微信交流群',
           position: 'right'
         },
         {
-          to: 'docs/api-docs/how-to-use',
-          label: '官方网站',
-          position: 'right'
-        },
-        {
-          to: 'docs/api-docs/how-to-use',
-          label: '免费培训',
-          position: 'right'
-        },
-        {
-          to: 'docs/support/rancher-support',
-          label: '付费支持',
+          href: 'https://www.rancher.cn/support/',
+          label: '技术支持',
           position: 'right'
         },
         {

@@ -28,6 +28,7 @@ html[data-theme='dark'] {
   --ifm-navbar-background-color: rgb(48, 56, 70);
   --ifm-heading-color: rgb(255, 255, 255, 0.8);
   --ifm-color-primary: rgb(255, 255, 255, 0.8);
+  --ifm-font-base-color: rgb(255, 255, 255, 0.8);
   --ifm-hero-background-color: tranparent;
   --ifm-rancher-color-stable: #13572f;
   --ifm-rancher-color-latest: #786207;

@@ -1,32 +1,32 @@
 ---
-title: The Horizontal Pod Autoscaler
+title: Pod 弹性伸缩（HPA）
 ---
 
-The [Horizontal Pod Autoscaler](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) (HPA) is a Kubernetes feature that allows you to configure your cluster to automatically scale the services it's running up or down.
+[Pod 弹性伸缩器](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)（HPA）是 Kubernetes 的一项功能，可以对您的应用进行自动扩容和自动缩容。
 
-Rancher provides some additional features to help manage HPAs, depending on the version of Rancher.
+Rancher 提供了一些额外功能来帮助您管理 HPA，具体取决于 Rancher 的版本。
 
-You can create, manage, and delete HPAs using the Rancher UI in Rancher v2.3.0-alpha4 and higher versions. It only supports HPA in the `autoscaling/v2beta2` API.
+您可以在 Rancher v2.3.0 或更高版本中的 Rancher UI 创建，管理和删除 HPA。Rancher UI 仅支持 `autoscaling/v2beta2` 版本的 HPA。
 
-### Managing HPAs
+### 管理 HPA
 
-The way that you manage HPAs is different based on your version of the Kubernetes API:
+根据您的 Kubernetes API 版本，管理 HPA 的方式有所不同：
 
-- **For Kubernetes API version autoscaling/V2beta1:** This version of the Kubernetes API lets you autoscale your pods based on the CPU and memory utilization of your application.
-- **For Kubernetes API Version autoscaling/V2beta2:** This version of the Kubernetes API lets you autoscale your pods based on CPU and memory utilization, in addition to custom metrics.
+- **对于 Kubernetes API 版本自动缩放/ V2beta1：** 使用此版本的 Kubernetes API，您可以根据应用的 CPU 和内存使用量自动缩放 Pod。
+- **对于 Kubernetes API 版本自动缩放/ V2beta2：** 使用此版本的 Kubernetes API，除了可以根据应用的 CPU 和内存使用量自动缩放 Pod 外，还可以使用“自定义指标”进行自动缩放。
 
-HPAs are also managed differently based on your version of Rancher:
+根据您的 Rancher 版本，HPA 的管理方式也不同：
 
-- **For Rancher v2.3.0+**: You can create, manage, and delete HPAs using the Rancher UI. From the Rancher UI you can configure the HPA to scale based on CPU and memory utilization. For more information, refer to [Managing HPAs with the Rancher UI](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-rancher-ui). To scale the HPA based on custom metrics, you still need to use `kubectl`. For more information, refer to [Configuring HPA to Scale Using Custom Metrics with Prometheus](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-kubectl/#configuring-hpa-to-scale-using-custom-metrics-with-prometheus).
-- **For Rancher Prior to v2.3.0:** To manage and configure HPAs, you need to use `kubectl`. For instructions on how to create, manage, and scale HPAs, refer to [Managing HPAs with kubectl](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-kubectl).
+- **对于 Rancher v2.3.0+ ：** 您可以使用 Rancher UI 创建，管理和删除 HPA。在 Rancher UI 中，您可以配置以 CPU 和内存使用量进行扩缩容的 HPA。有关更多信息，请参阅[使用 Rancher UI 管理 HPA](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-rancher-ui/_index)。要基于自定义指标进行扩缩容的 HPA，您仍然有部分操作需要使用 `kubectl` 。有关更多信息，请参阅[使用基于 Prometheus 自定义指标配置 HPA 进行缩放](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-kubectl/_index)。
+- **对于 Rancher v2.3.0 之前的版本：** 要管理和配置 HPA，您需要使用 `kubectl` 。有关如何创建，管理和扩展 HPA 的说明，请参阅[使用 kubectl 管理 HPA](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-kubectl/_index)。
 
-You might have additional HPA installation steps if you are using an older version of Rancher:
+如果使用的是较旧版本的 Rancher，则可能需要其他 HPA 安装步骤：
 
-- **For Rancher v2.0.7+:** Clusters created in Rancher v2.0.7 and higher automatically have all the requirements needed (metrics-server and Kubernetes cluster configuration) to use HPA.
-- **For Rancher Prior to v2.0.7:** Clusters created in Rancher prior to v2.0.7 don't automatically have the requirements needed to use HPA. For instructions on installing HPA for these clusters, refer to [Manual HPA Installation for Clusters Created Before Rancher v2.0.7](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/hpa-for-rancher-before-2_0_7).
+- **对于 Rancher v2.0.7+：** 在 Rancher v2.0.7 及更高版本中创建的集群自动具有使用 HPA 所需的所有前置条件（metrics-server 和 Kubernetes 集群配置）。
+- **对于 Rancher v2.0.7 之前的版本：** 在 Rancher v2.0.7 之前版本中创建的群集不会自动具有使用 HPA 所需的全部前置条件。有关为这些群集安装 HPA 的说明，请参阅[为 Rancher v2.0.7 之前创建的群集手动安装 HPA](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/hpa-for-rancher-before-2_0_7/_index)。
 
-### Testing HPAs with a Service Deployment
+### 通过部署服务测试 HPA
 
-In Rancher v2.3.x+, you can see your HPA's current number of replicas by going to your project and clicking **Resources > HPA.** For more information, refer to [Get HPA Metrics and Status](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-rancher-ui/).
+在 Rancher v2.3.0+ 中，您可以导航到项目并单击 **资源 > HPA** 来查看 HPA 当前的副本数。有关更多信息，请参阅[获取 HPA 指标和状态](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-rancher-ui/_index)。
 
-You can also use `kubectl` to get the status of HPAs that you test with your load testing tool. For more information, refer to [Testing HPAs with kubectl](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/testing-hpa/).
+您也可以使用 `kubectl` 获取使用压测工具测试的 HPA 的状态。有关更多信息，请参阅[使用 kubectl 测试 HPA](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/testing-hpa/_index)。
