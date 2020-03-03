@@ -19,6 +19,7 @@ steps:
       PLUGIN_SOURCE: /website/docs
       ALIYUN_BUCKET: oss://docs-rancher2-preview
       ALIYUN_ENDPOINT: oss-cn-hangzhou.aliyuncs.com
+      PLUGIN_RECURSIVE: --recursive
     commands:
       - "aliyun-oss"
     volumes:
