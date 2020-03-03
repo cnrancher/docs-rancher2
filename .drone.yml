@@ -3,7 +3,7 @@ name: default
 
 steps:
   - name: build
-    image: alpine:3.8
+    image: node:12.16.0
     commands:
       - npm -v
       - touch /build/xxx
