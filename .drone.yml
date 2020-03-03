@@ -5,8 +5,9 @@ steps:
   - name: build
     image: plugins/docker
     dry_run: true
-    repo: foo/bar
-    tags: latest
+    settings:
+      repo: foo/bar
+      tags: latest
     volumes:
       - name: vol
         path: /build
