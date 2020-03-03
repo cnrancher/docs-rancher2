@@ -17,7 +17,7 @@ steps:
       ALIYUN_SECRET_ACCESS_KEY:
         from_secret: ACCESS_KEY_SECRET
       PLUGIN_SOURCE: /website/docs
-      ALIYUN_BUCKET: docs-rancher2-preview
+      ALIYUN_BUCKET: oss://docs-rancher2-preview
       ALIYUN_ENDPOINT: oss-cn-hangzhou.aliyuncs.com
       PLUGIN_TARGET: /
     commands:
