@@ -9,7 +9,7 @@ steps:
       - touch /build/xxx
       - pwd
       - ls
-      - cp -r ./docs/* /build
+      - mv /docs/* /build
     volumes:
       - name: vol
         path: /build
