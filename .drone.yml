@@ -7,17 +7,18 @@ steps:
     commands:
       - yarn install
       - yarn build
-      - mv ./build /
+      - mv ./build /website
     volumes:
       - name: vol
-        path: /build
+        path: /website
   - name: oss
     image: alpine:3.8
     volumes:
       - name: vol
-        path: /build
+        path: /website
     commands:
-      - ls /build
+      - ls /website
+      - ls /website/build
 
 volumes:
   - name: vol
