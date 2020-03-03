@@ -5,23 +5,22 @@ steps:
   - name: build
     image: node:12.16.0
     commands:
-      - mv ./docs /website
+      - yarn install
+      - yarn build
+      - mv ./build /website
     volumes:
       - name: vol
         path: /website
   - name: preview
-    image: jacie/drone-aliyun-oss
-    environment:
-      ALIYUN_ACCESS_KEY_ID:
+    image: loganhz/drone-oss
+    settings:
+      dist: /website/build
+      path: docs-rancher2-3-preview
+      endpoint: oss-cn-shanghai.aliyuncs.com
+      access_key_id:
         from_secret: ACCESS_KEY_ID
-      ALIYUN_SECRET_ACCESS_KEY:
+      access_key_secret:
         from_secret: ACCESS_KEY_SECRET
-      PLUGIN_SOURCE: /website/docs
-      ALIYUN_BUCKET: oss://docs-rancher2-preview
-      ALIYUN_ENDPOINT: oss-cn-hangzhou.aliyuncs.com
-      PLUGIN_RECURSIVE: --recursive
-    commands:
-      - "aliyun-oss"
     volumes:
       - name: vol
         path: /website
@@ -32,11 +31,11 @@ steps:
       event:
         - push
   - name: production
-    image: guoxudongdocker/drone-oss
+    image: loganhz/drone-oss
     settings:
       dist: /website/build
-      path: docs-rancher2-production/
-      endpoint: oss-cn-hangzhou.aliyuncs.com
+      path: docs-rancher2-3-production
+      endpoint: oss-cn-shanghai.aliyuncs.com
       access_key_id:
         from_secret: ACCESS_KEY_ID
       access_key_secret:
