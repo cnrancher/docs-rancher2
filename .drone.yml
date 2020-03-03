@@ -16,7 +16,7 @@ steps:
     settings:
       dist: /website/build
       path: docs-rancher2-preview/
-      endpoint: oss-cn-shanghai.aliyuncs.com
+      endpoint: oss-cn-hangzhou.aliyuncs.com
       access_key_id:
         from_secret: ACCESS_KEY_ID
       access_key_secret:
@@ -35,7 +35,7 @@ steps:
     settings:
       dist: /website/build
       path: docs-rancher2-production/
-      endpoint: oss-cn-shanghai.aliyuncs.com
+      endpoint: oss-cn-hangzhou.aliyuncs.com
       access_key_id:
         from_secret: ACCESS_KEY_ID
       access_key_secret:
