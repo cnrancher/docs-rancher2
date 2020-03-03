@@ -15,7 +15,7 @@ steps:
     image: guoxudongdocker/drone-oss
     settings:
       dist: /website/build
-      path: docs-rancher2/preview
+      path: docs-rancher2-preview
       endpoint: oss-cn-shanghai.aliyuncs.com
       access_key_id:
         from_secret: ACCESS_KEY_ID
@@ -34,7 +34,7 @@ steps:
     image: guoxudongdocker/drone-oss
     settings:
       dist: /website/build
-      path: docs-rancher2/production
+      path: docs-rancher2-production
       endpoint: oss-cn-shanghai.aliyuncs.com
       access_key_id:
         from_secret: ACCESS_KEY_ID
