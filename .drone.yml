@@ -3,9 +3,11 @@ name: default
 
 steps:
   - name: build
-    image: plugins/docker
-    dry_run: true
+    image: docker
+    commands:
+      - docker build .
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
       - name: vol
         path: /build
   - name: oss
