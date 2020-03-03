@@ -7,7 +7,7 @@ steps:
     volumes:
       - name: vol
         path: /build
-  - name: upload
+  - name: oss
     image: alpine:3.8
     volumes:
       - name: vol
