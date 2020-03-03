@@ -11,14 +11,44 @@ steps:
     volumes:
       - name: vol
         path: /website
-  - name: oss
-    image: alpine:3.8
+  - name: preview
+    image: guoxudongdocker/drone-oss
+    settings:
+      dist: /website/build
+      path: docs-rancher2/preview
+      endpoint: oss-cn-shanghai.aliyuncs.com
+      access_key_id:
+        from_secret: ACCESS_KEY_ID
+      access_key_secret:
+        from_secret: ACCESS_KEY_SECRET
     volumes:
       - name: vol
         path: /website
-    commands:
-      - ls /website
-      - ls /website/build
+    when:
+      ref:
+        include:
+          - "refs/heads/preview"
+      event:
+        - push
+  - name: production
+    image: guoxudongdocker/drone-oss
+    settings:
+      dist: /website/build
+      path: docs-rancher2/preview
+      endpoint: oss-cn-shanghai.aliyuncs.com
+      access_key_id:
+        from_secret: ACCESS_KEY_ID
+      access_key_secret:
+        from_secret: ACCESS_KEY_SECRET
+    volumes:
+      - name: vol
+        path: /website
+    when:
+      ref:
+        include:
+          - "refs/heads/master"
+      event:
+        - push
 
 volumes:
   - name: vol
