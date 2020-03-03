@@ -5,7 +5,7 @@ steps:
   - name: build
     image: node:12.16.0
     commands:
-      - npm -v
+      - node -v
       - touch /build/xxx
     volumes:
       - name: vol
