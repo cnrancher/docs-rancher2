@@ -5,22 +5,23 @@ steps:
   - name: build
     image: node:12.16.0
     commands:
-      - yarn install
-      - yarn build
-      - mv ./build /website
+      - mv ./docs /website
     volumes:
       - name: vol
         path: /website
   - name: preview
-    image: guoxudongdocker/drone-oss
-    settings:
-      dist: /website/build
-      path: docs-rancher2-preview/
-      endpoint: oss-cn-hangzhou.aliyuncs.com
-      access_key_id:
+    image: jacie/drone-aliyun-oss
+    environment:
+      ALIYUN_ACCESS_KEY_ID:
         from_secret: ACCESS_KEY_ID
-      access_key_secret:
+      ALIYUN_SECRET_ACCESS_KEY:
         from_secret: ACCESS_KEY_SECRET
+      PLUGIN_SOURCE: /website/docs
+      ALIYUN_BUCKET: docs-rancher2-preview
+      ALIYUN_ENDPOINT: oss-cn-hangzhou.aliyuncs.com
+      PLUGIN_TARGET: /
+    commands:
+      - "aliyun-oss"
     volumes:
       - name: vol
         path: /website
