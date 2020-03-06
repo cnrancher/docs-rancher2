@@ -2,14 +2,14 @@ const sidebars = require('./sidebars');
 const metadata = require('./metadata');
 
 module.exports = {
-  title: 'Rancher 2.3',
+  title: 'Rancher 2.x',
   tagline: 'Run Kubernetes Everywhere',
   baseUrl: '/',
   url: 'https://www.rancher.cn',
   favicon: 'img/favicon.ico',
   themeConfig: {
     navbar: {
-      title: 'Rancher 2.3',
+      title: 'Rancher 2.x',
       logo: {
         alt: 'Rancher Logo',
         src: 'img/rancher-logo-cow-white.svg'
