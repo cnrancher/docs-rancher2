@@ -4,21 +4,36 @@ import Layout from '@theme/Layout';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './styles.module.css';
 
-function getToc(sidebars, baseUrl) {
+function findAndAppendSubGroups(all, metadata, baseUrl, subItems) {
+  subItems.forEach(sub => {
+    if (typeof sub === 'string') {
+      const label = metadata.docs[sub];
+      if (label) {
+        all.push({
+          label,
+          key: baseUrl + 'docs/' + sub
+        });
+      }
+    } else if (sub.items) {
+      findAndAppendSubGroups(all, metadata, baseUrl, sub.items);
+    }
+  });
+}
+
+function getToc(sidebars, metadata, baseUrl) {
   const out = [];
   const docs = sidebars.docs;
-  docs.forEach(doc => {
-    out.push({
-      key: doc.label,
-      description: doc.description,
-      subGroups: doc.items.map(item => {
-        const { label, id } = item;
-        return {
-          label,
-          key: baseUrl + 'docs/' + id
-        };
-      })
-    });
+  Object.keys(docs).forEach(categoryKey => {
+    const allSubGroups = [];
+    findAndAppendSubGroups(allSubGroups, metadata, baseUrl, docs[categoryKey]);
+    const description = metadata.categories[categoryKey];
+    if (description) {
+      out.push({
+        key: categoryKey,
+        description,
+        subGroups: allSubGroups
+      });
+    }
   });
   return out;
 }
@@ -26,7 +41,9 @@ function getToc(sidebars, baseUrl) {
 function Home() {
   const context = useDocusaurusContext();
   const { siteConfig = {} } = context;
-  const toc = getToc(siteConfig.customFields.sidebars, siteConfig.baseUrl);
+  const { baseUrl } = siteConfig;
+  const { sidebars, metadata } = siteConfig.customFields;
+  const toc = getToc(sidebars, metadata, baseUrl);
   const title = siteConfig.title + ' 中文文档';
   return (
     <Layout title="中文文档" description={title}>
@@ -44,10 +61,13 @@ function Home() {
         <div className={classnames(styles.tocContainer, styles.wrapper)}>
           <ul className={styles.sectionList}>
             {toc.map(group => {
+              const sectionTitleUrl = group.subGroups[0]
+                ? group.subGroups[0].key
+                : baseUrl;
               return (
                 <li key={group.key}>
                   <h3>
-                    <a href={group.key}>{group.key}</a>
+                    <a href={sectionTitleUrl}>{group.key}</a>
                   </h3>
                   <span className="text-xs text-grey">{group.description}</span>
                   <ul className={styles.subGroupList}>
@@ -67,6 +87,9 @@ function Home() {
                               return (
                                 <span className={styles.latest}>最新版</span>
                               );
+                            }
+                            if ('产品介绍' === group.key && index === 0) {
+                              return <span className={styles.vedio}>视频</span>;
                             }
                           })()}
                         </li>

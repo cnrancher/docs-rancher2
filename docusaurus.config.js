@@ -1,4 +1,5 @@
 const sidebars = require('./sidebars');
+const metadata = require('./metadata');
 
 module.exports = {
   title: 'Rancher 2.3',
@@ -15,27 +16,29 @@ module.exports = {
       },
       links: [
         { to: 'docs/overview/_index', label: '帮助文档', position: 'left' },
-        { to: 'docs/api-docs/how-to-use', label: 'API 文档', position: 'left' },
-        { to: 'docs/api-docs/how-to-use', label: '文档下载', position: 'left' },
-        { to: 'docs/api-docs/how-to-use', label: '历史文档', position: 'left' },
         {
-          to: 'docs/api-docs/how-to-use',
+          href: 'https://docs.rancher.cn/',
+          label: '文档中心',
+          position: 'left'
+        },
+        {
+          href: 'https://www.rancher.cn/support/',
+          label: '技术支持',
+          position: 'left'
+        },
+        {
+          href: 'https://www.rancher.cn/',
+          label: '中国官网',
+          position: 'right'
+        },
+        {
+          href: 'https://www.rancher.com/',
+          label: '美国官网',
+          position: 'right'
+        },
+        {
+          href: 'https://www.rancher.cn/weixin/',
           label: '微信交流群',
-          position: 'right'
-        },
-        {
-          to: 'docs/api-docs/how-to-use',
-          label: '官方网站',
-          position: 'right'
-        },
-        {
-          to: 'docs/api-docs/how-to-use',
-          label: '免费培训',
-          position: 'right'
-        },
-        {
-          to: 'docs/support/rancher-support',
-          label: '付费支持',
           position: 'right'
         },
         {
@@ -44,6 +47,10 @@ module.exports = {
           position: 'right'
         }
       ]
+    },
+    algolia: {
+      apiKey: 'f790c2168867f49bb212aee8c224116d',
+      indexName: 'rancher'
     },
     footer: {
       style: 'dark',
@@ -55,7 +62,10 @@ module.exports = {
       '@docusaurus/preset-classic',
       {
         docs: {
-          sidebarPath: require.resolve('./sidebars.js')
+          sidebarPath: require.resolve('./sidebars.js'),
+          editUrl: 'https://github.com/cnrancher/docs-rancher2/edit/master/',
+          showLastUpdateAuthor: true,
+          showLastUpdateTime: true
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css')
@@ -65,6 +75,8 @@ module.exports = {
   ],
   customFields: {
     sidebars,
-    stable: '版本说明 - v2.3.4'
+    metadata,
+    stable: '版本说明 - v2.3.5',
+    baseCommit: 'a4b11566a4ed341fe2f89de367b5aaf6204f75cf - Feb 22, 2020'
   }
 };

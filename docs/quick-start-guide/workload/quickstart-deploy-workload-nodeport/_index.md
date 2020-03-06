@@ -1,5 +1,5 @@
 ---
-title: Workload with NodePort Quick Start
+title: 快速部署带有NodePort的工作负载
 ---
 
 #### Prerequisite
@@ -12,36 +12,41 @@ You're ready to create your first _workload_. A workload is an object that inclu
 
 For this workload, you'll be deploying the application Rancher Hello-World.
 
-1.  From the **Clusters** page, open the cluster that you just created.
+01.  From the **Clusters** page, open the cluster that you just created.
 
-2.  From the main menu of the **Dashboard**, select **Projects/Namespaces**.
+02.  From the main menu of the **Dashboard**, select **Projects/Namespaces**.
 
-3.  Open the **Project: Default** project.
+03.  Open the **Project: Default** project.
 
-4.  Click **Resources > Workloads.** In versions prior to v2.3.0, click **Workloads > Workloads.**
+04.  Click **Resources > Workloads.** In versions prior to v2.3.0, click **Workloads > Workloads.**
 
-5.  Click **Deploy**.
+05.  Click **Deploy**.
 
     **Step Result:** The **Deploy Workload** page opens.
 
-6.  Enter a **Name** for your workload.
+06.  Enter a **Name** for your workload.
 
-7.  From the **Docker Image** field, enter `rancher/hello-world`. This field is case-sensitive.
+07. From the **Docker Image** field, enter `rancher/hello-world` . This field is case-sensitive.
 
-8.  From **Port Mapping**, click **Add Port**.
+08.  From **Port Mapping**, click **Add Port**.
 
-9.  From the **As a** drop-down, make sure that **NodePort (On every node)** is selected.
+09.  From the **As a** drop-down, make sure that **NodePort (On every node)** is selected.
 
-    ![As a dropdown, NodePort (On every node selected)](/img/rancher/nodeport-dropdown.png)
+    
+
+![As a dropdown, NodePort (On every node selected)](/img/rancher/nodeport-dropdown.png)
 
 10. From the **On Listening Port** field, leave the **Random** value in place.
 
+    
 
-    ![On Listening Port, Random selected](/img/rancher/listening-port-field.png)
+![On Listening Port, Random selected](/img/rancher/listening-port-field.png)
 
-11. From the **Publish the container port** field, enter port `80`.
+11. From the **Publish the container port** field, enter port `80` .
 
-    ![Publish the container port, 80 entered](/img/rancher/container-port-field.png)
+    
+
+![Publish the container port, 80 entered](/img/rancher/container-port-field.png)
 
 12. Leave the remaining options on their default setting. We'll tell you about them later.
 
@@ -49,8 +54,8 @@ For this workload, you'll be deploying the application Rancher Hello-World.
 
 **Result:**
 
-- Your workload is deployed. This process might take a few minutes to complete.
-- When your workload completes deployment, it's assigned a state of **Active**. You can view this status from the project's **Workloads** page.
+* Your workload is deployed. This process might take a few minutes to complete.
+* When your workload completes deployment, it's assigned a state of **Active**. You can view this status from the project's **Workloads** page.
 
 <br/>
 
@@ -60,9 +65,9 @@ From the **Workloads** page, click the link underneath your workload. If your de
 
 #### Attention: Cloud-Hosted Sandboxes
 
-When using a cloud-hosted virtual machine, you may not have access to the port running the container. In this event, you can test Nginx in an ssh session on the local machine using `Execute Shell`. Use the port number after the `:` in the link under your workload if available, which is `31568` in this example.
+When using a cloud-hosted virtual machine, you may not have access to the port running the container. In this event, you can test Nginx in an ssh session on the local machine using `Execute Shell` . Use the port number after the `:` in the link under your workload if available, which is `31568` in this example.
 
-```sh
+``` sh
 gettingstarted@rancher:~$ curl http://localhost:31568
 <!DOCTYPE html>
 <html>
@@ -116,7 +121,7 @@ gettingstarted@rancher:~$ curl http://localhost:31568
     </div>
     <br />
     <button class='button' onclick='myFunction()'>Show request details</button>
-    <div id="reqInfo" style='display:none'>
+    <div id="reqInfo">
       <h3>Request info</h3>
       <b>Host:</b> 172.22.101.111:31411 <br />
       <b>Pod:</b> hello-world-66b4b9d88b-78bhx </b><br />
@@ -151,6 +156,7 @@ Congratulations! You have successfully deployed a workload exposed via a NodePor
 
 When you're done using your sandbox, destroy the Rancher Server and your cluster. See one of the following:
 
-- [Amazon AWS: Destroying the Environment](/docs/quick-start-guide/deployment/amazon-aws-qs/#destroying-the-environment)
-- [DigitalOcean: Destroying the Environment](/docs/quick-start-guide/deployment/digital-ocean-qs/#destroying-the-environment)
-- [Vagrant: Destroying the Environment](/docs/quick-start-guide/deployment/quickstart-vagrant/#destroying-the-environment)
+* [Amazon AWS: Destroying the Environment](/docs/quick-start-guide/deployment/amazon-aws-qs/#destroying-the-environment)
+* [DigitalOcean: Destroying the Environment](/docs/quick-start-guide/deployment/digital-ocean-qs/#destroying-the-environment)
+* [Vagrant: Destroying the Environment](/docs/quick-start-guide/deployment/quickstart-vagrant/#destroying-the-environment)
+

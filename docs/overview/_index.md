@@ -1,9 +1,20 @@
 ---
 title: 产品简介
-description: 为您介绍Rancher的产品。帮助您了解 Rancher 容器平台
+description: 为你介绍Rancher的产品。帮助你了解 Rancher 容器平台
 ---
 
 Rancher is a container management platform built for organizations that deploy containers in production. Rancher makes it easy to run Kubernetes everywhere, meet IT requirements, and empower DevOps teams.
+
+<div class="text-center">
+<iframe
+    width="444"
+    height="250"
+    src="https://www.youtube.com/embed/tW347-TqRWg"
+    frameborder="0"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+></iframe>
+</div>
 
 ## Run Kubernetes Everywhere
 

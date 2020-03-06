@@ -15,18 +15,26 @@
   --ifm-color-primary-lightest: #0098da;
   --ifm-rancher-color-text-light: #34495e;
   --ifm-rancher-color-text-lighter: #52677c;
+  --ifm-rancher-color-stable: #27ae5f;
+  --ifm-rancher-color-latest: #f1c40f;
+  --ifm-rancher-color-vedio: rgb(204, 0, 0);
   --ifm-footer-padding-vertical: 12px;
   --ifm-code-font-size: 95%;
   --ifm-navbar-background-color: #0075a8;
   --ifm-navbar-link-color: rgb(255, 255, 255, 0.9);
   --ifm-navbar-link-hover-color: rgb(255, 255, 255);
+  --ra-color-important: var(--ifm-color-primary);
 }
 
 html[data-theme='dark'] {
   --ifm-navbar-background-color: rgb(48, 56, 70);
   --ifm-heading-color: rgb(255, 255, 255, 0.8);
   --ifm-color-primary: rgb(255, 255, 255, 0.8);
+  --ifm-font-base-color: rgb(255, 255, 255, 0.8);
   --ifm-hero-background-color: tranparent;
+  --ifm-rancher-color-stable: #13572f;
+  --ifm-rancher-color-latest: #786207;
+  --ifm-rancher-color-vedio: rgb(204, 0, 0, 0.5);
 }
 body {
   font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
@@ -41,7 +49,7 @@ p {
   margin-inline-end: 0px;
 }
 
-.docTitle_node_modules-\@docusaurus-theme-classic-src-theme-DocItem- {
+.docTitle_src-theme-DocItem- {
   font-size: 2rem !important;
   margin-bottom: 2rem !important;
   border-left: 10px solid var(--ifm-color-primary);
@@ -58,6 +66,10 @@ p {
 
 .text-gray {
   color: rgb(101, 125, 149);
+}
+
+.text-center {
+  text-align: center;
 }
 
 .navbar-sidebar__items .menu__list-item a {
