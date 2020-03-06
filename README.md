@@ -14,7 +14,7 @@
 
 ### 安装
 
-如果在国内，yarn install速度很慢，可以的配置淘宝Registry。
+如果yarn install的速度很慢，可以尝试配置淘宝Registry。
 
 ``` 
 $ yarn config set registry https://registry.npm.taobao.org -g
