@@ -269,8 +269,8 @@ module.exports = {
         label: '备份',
         items: [
           'backups/backups/_index',
-          'backups/backups/single-node-backups/_index',
-          'backups/backups/ha-backups/_index'
+          'backups/backups/ha-backups/_index',
+          'backups/backups/single-node-backups/_index'
         ]
       },
       {
@@ -278,8 +278,8 @@ module.exports = {
         label: '恢复',
         items: [
           'backups/restorations/_index',
-          'backups/restorations/single-node-restoration/_index',
-          'backups/restorations/ha-restoration/_index'
+          'backups/restorations/ha-restoration/_index',
+          'backups/restorations/single-node-restoration/_index'
         ]
       }
     ],
