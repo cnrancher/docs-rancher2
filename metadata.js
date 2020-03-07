@@ -39,6 +39,7 @@ const metadata = {
     'overview/architecture/_index': '产品架构',
     'overview/architecture-recommendations/_index': '推荐架构',
     'overview/concepts/_index': 'Kubernetes 概念',
+    'overview/glossary/_index': '名词解释',
     'quick-start-guide/_index': '入门必读',
     'quick-start-guide/cli/_index': '命令行工具',
     'quick-start-guide/deployment/_index': '部署 Rancher Server',

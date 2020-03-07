@@ -19,7 +19,8 @@ module.exports = {
       'overview/_index',
       'overview/architecture/_index',
       'overview/architecture-recommendations/_index',
-      'overview/concepts/_index'
+      'overview/concepts/_index',
+      'overview/glossary/_index'
     ],
     快速入门: [
       'quick-start-guide/_index',
