@@ -1,26 +1,26 @@
 ---
-title: 在 v2.0.7 之前版本的 Rancher 中，手动安装 HPA
+title: 手动安装 HPA （仅适用于2.0.7之前版本）
 ---
 
-This section describes how to manually install HPAs for clusters created with Rancher prior to v2.0.7. This section also describes how to configure your HPA to scale up or down, and how to assign roles to your HPA.
+本节介绍如何为 v2.0.7 版本之前的 Rancher 创建的群集中手动安装 HPA。 本节还介绍了如何配置 HPA 以便按比例进行自动扩缩容，以及如何为 HPA 分配角色。
 
-Before you can use HPA in your Kubernetes cluster, you must fulfill some requirements.
+必须先满足一些要求，然后才能在 Kubernetes 群集中使用 HPA。
 
-#### Requirements
+## 要求
 
-Be sure that your Kubernetes cluster services are running with these flags at minimum:
+确保您的 Kubernetes 集群服务至少以以下参数运行：
 
-* kube-api: `requestheader-client-ca-file` 
-* kubelet: `read-only-port` at 10255
-* kube-controller: Optional, just needed if distinct values than default are required.
+- kube-api: `requestheader-client-ca-file`
+- kubelet: `read-only-port` at 10255
+- kube-controller: 可选，仅在需要与默认值不同的值时才需要。
 
-  + `horizontal-pod-autoscaler-downscale-delay: "5m0s"` 
-  + `horizontal-pod-autoscaler-upscale-delay: "3m0s"` 
-  + `horizontal-pod-autoscaler-sync-period: "30s"` 
+  - `horizontal-pod-autoscaler-downscale-delay: "5m0s"`
+  - `horizontal-pod-autoscaler-upscale-delay: "3m0s"`
+  - `horizontal-pod-autoscaler-sync-period: "30s"`
 
-For an RKE Kubernetes cluster definition, add this snippet in the `services` section. To add this snippet using the Rancher v2.0 UI, open the **Clusters** view and select **Ellipsis (... ) > Edit** for the cluster in which you want to use HPA. Then, from **Cluster Options**, click **Edit as YAML**. Add the following snippet to the `services` section:
+对于 RKE 部署的 Kubernetes 集群，在 `services` 部分添加此代码段。 要使用 Rancher v2.0 UI 添加此代码段，请打开**集群**视图，然后为要在其中使用 HPA 的集群选择**省略号（... ）> 编辑**。 然后，从**集群选项**中，单击**编辑为 YAML**。 将以下代码段添加 `services` 部分：
 
-``` 
+```
 services:
 ...
   kube-api:
@@ -36,183 +36,170 @@ services:
       read-only-port: 10255
 ```
 
-Once the Kubernetes cluster is configured and deployed, you can deploy metrics services.
+一旦配置和部署了 Kubernetes 集群，就可以部署指标服务（metrics services）。
 
-> **Note:** `kubectl` command samples in the sections that follow were tested in a cluster running Rancher v2.0.6 and Kubernetes v1.10.1.
+> **注:** 以下各节中的 `kubectl` 命令示例在运行 Rancher v2.0.6 和 Kubernetes v1.10.1 的集群中进行了测试。
 
-#### Configuring HPA to Scale Using Resource Metrics
+## 使用资源指标配置 HPA 进行自动扩缩容
 
-To create HPA resources based on resource metrics such as CPU and memory use, you need to deploy the `metrics-server` package in the `kube-system` namespace of your Kubernetes cluster. This deployment allows HPA to consume the `metrics.k8s.io` API.
+要基于 CPU 和内存使用等资源指标创建 HPA 资源，您需要在 Kubernetes 集群的 `kube-system` 名称空间中部署 `metrics-server` 软件包。 这种部署允许 HPA 使用 `metrics.k8s.io` API。
 
-> **Prerequisite:** You must be running `kubectl` 1.8 or later.
+> **前提条件：**您必须运行 `kubectl` 1.8 或更高版本。
 
-1. Connect to your Kubernetes cluster using `kubectl` .
+1. 使用 `kubectl` 连接到您的 Kubernetes 集群。
 
-1. Clone the GitHub `metrics-server` repo:
+1. 克隆 GitHub `metrics-server` 仓库：
 
-``` 
-# git clone https://github.com/kubernetes-incubator/metrics-server
-```
+   ```
+   # git clone https://github.com/kubernetes-incubator/metrics-server
+   ```
 
-1. Install the `metrics-server` package.
+1. 安装 `metrics-server` 软件包。
 
-``` 
-# kubectl create -f metrics-server/deploy/1.8+/
-```
+   ```
+   # kubectl create -f metrics-server/deploy/1.8+/
+   ```
 
-1. Check that `metrics-server` is running properly. Check the service pod and logs in the `kube-system` namespace.
+1. 检查 `metrics-server` 是否正常运行。 在 `kube-system` 名称空间里检查对应的 pod 和日志是否正常。
 
-1. Check the service pod for a status of `running` . Enter the following command:
+   1. 检查 pod 状态是否为 `running` 状态。 输入以下命令：
 
-    
+      ```
+      # kubectl get pods -n kube-system
+      ```
 
-``` 
-    # kubectl get pods -n kube-system
+      然后检查是否 pod 的状态 `running` .
+
+      ```
+      NAME READY STATUS RESTARTS AGE
+      ...
+      metrics-server-6fbfb84cdd-t2fk9 1/1 Running 0 8h
+      ...
+      ```
+
+   1. 检查 pod 日志以确保服务可用性。 输入以下命令：
+
+      ```
+      # kubectl -n kube-system logs metrics-server-6fbfb84cdd-t2fk9
+      ```
+
+      然后查看日志以确认 `metrics-server` 软件包正在运行。
+
+      ```
+      I0723 08:09:56.193136 1 heapster.go:71] /metrics-server --source=kubernetes.summary_api:''
+      I0723 08:09:56.193574 1 heapster.go:72] Metrics Server version v0.2.1
+      I0723 08:09:56.194480 1 configs.go:61] Using Kubernetes client with master "https://10.43.0.1:443" and version
+      I0723 08:09:56.194501 1 configs.go:62] Using kubelet port 10255
+      I0723 08:09:56.198612 1 heapster.go:128] Starting with Metric Sink
+      I0723 08:09:56.780114 1 serving.go:308] Generated self-signed cert (apiserver.local.config/certificates/apiserver.crt, apiserver.local.config/certificates/apiserver.key)
+      I0723 08:09:57.391518 1 heapster.go:101] Starting Heapster API server...
+      [restful] 2018/07/23 08:09:57 log.go:33: [restful/swagger] listing is available at https:///swaggerapi
+      [restful] 2018/07/23 08:09:57 log.go:33: [restful/swagger] https:///swaggerui/ is mapped to folder /swagger-ui/
+      I0723 08:09:57.394080 1 serve.go:85] Serving securely on 0.0.0.0:443
+      ```
+
+1. 检查是否可以通过 `kubectl` 访问 metrics api。
+
+   - 如果要通过 Rancher 访问群集，请在 `kubectl` 配置中以以下格式输入服务器 URL： `https:// <RANCHER_URL>/k8s/clusters/<CLUSTER_ID>` 。 将后缀 `/k8s/clusters/<CLUSTER_ID>` 添加到 API 路径。
+
+     ```
+     # kubectl get --raw /k8s/clusters/<CLUSTER_ID>/apis/metrics.k8s.io/v1beta1
+     ```
+
+     如果 API 正常运行，您应该收到与以下输出类似的输出。
+
+     ```
+     {"kind":"APIResourceList","apiVersion":"v1","groupVersion":"metrics.k8s.io/v1beta1","resources":[{"name":"nodes","singularName":"","namespaced":false,"kind":"NodeMetrics","verbs":["get","list"]},{"name":"pods","singularName":"","namespaced":true,"kind":"PodMetrics","verbs":["get","list"]}]}
+     ```
+
+   - 如果直接访问群集，请在 kubectl 配置中以以下格式输入服务器 URL： `https://<K8s_URL>:6443` 。
+
+     ```
+     # kubectl get --raw /apis/metrics.k8s.io/v1beta1
+     ```
+
+     如果 API 正常运行，您应该收到与以下输出类似的输出。
+
+     ```
+     {"kind":"APIResourceList","apiVersion":"v1","groupVersion":"metrics.k8s.io/v1beta1","resources":[{"name":"nodes","singularName":"","namespaced":false,"kind":"NodeMetrics","verbs":["get","list"]},{"name":"pods","singularName":"","namespaced":true,"kind":"PodMetrics","verbs":["get","list"]}]}
+     ```
+
+## 为您的 HPA 分配其他必需的角色
+
+默认情况下，HPA 使用`system:anonymous`用户读取资源和自定义指标。 在 ClusterRole 和 ClusterRoleBindings 清单中将`system:anonymous`分配给`view-resource-metrics`和`view-custom-metrics`。 这些角色用于访问指标。
+
+为此，请按照下列步骤操作：
+
+### 配置`kubectl`以连接到您的集群。
+
+### 复制 ClusterRole 和 ClusterRoleBinding 清单以获取用于 HPA 的指标类型。
+
+1.  资源指标: ApiGroups `resource.metrics.k8s.io`
+
+    ```
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    metadata:
+      name: view-resource-metrics
+    rules:
+    - apiGroups:
+        - metrics.k8s.io
+      resources:
+        - pods
+        - nodes
+      verbs:
+        - get
+        - list
+        - watch
+    ---
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      name: view-resource-metrics
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: view-resource-metrics
+    subjects:
+      - apiGroup: rbac.authorization.k8s.io
+        kind: User
+        name: system:anonymous
     ```
 
-    Then check for the status of `running` .
-    
+1.  自定义指标: ApiGroups `custom.metrics.k8s.io`
 
-``` 
-    NAME                                  READY     STATUS    RESTARTS   AGE
-    ...
-    metrics-server-6fbfb84cdd-t2fk9       1/1       Running   0          8h
-    ...
+    ```
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    metadata:
+      name: view-custom-metrics
+    rules:
+    - apiGroups:
+        - custom.metrics.k8s.io
+      resources:
+        - "*"
+      verbs:
+        - get
+        - list
+        - watch
+    ---
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      name: view-custom-metrics
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: view-custom-metrics
+    subjects:
+      - apiGroup: rbac.authorization.k8s.io
+        kind: User
+        name: system:anonymous
     ```
 
-1. Check the service logs for service availability. Enter the following command:
+### 根据您使用的指标，使用以下命令之一在集群中创建它们。
 
-    
-
-``` 
-    # kubectl -n kube-system logs metrics-server-6fbfb84cdd-t2fk9
-    ```
-
-    Then review the log to confirm that the `metrics-server` package is running.
-     accordion id="metrics-server-run-check" label="Metrics Server Log Output" 
-    I0723 08:09:56.193136       1 heapster.go:71] /metrics-server --source=kubernetes.summary_api:''
-    I0723 08:09:56.193574       1 heapster.go:72] Metrics Server version v0.2.1
-    I0723 08:09:56.194480       1 configs.go:61] Using Kubernetes client with master "https://10.43.0.1:443" and version
-    I0723 08:09:56.194501       1 configs.go:62] Using kubelet port 10255
-    I0723 08:09:56.198612       1 heapster.go:128] Starting with Metric Sink
-    I0723 08:09:56.780114       1 serving.go:308] Generated self-signed cert (apiserver.local.config/certificates/apiserver.crt, apiserver.local.config/certificates/apiserver.key)
-    I0723 08:09:57.391518       1 heapster.go:101] Starting Heapster API server... 
-    [restful] 2018/07/23 08:09:57 log.go:33: [restful/swagger] listing is available at https:///swaggerapi
-    [restful] 2018/07/23 08:09:57 log.go:33: [restful/swagger] https:///swaggerui/ is mapped to folder /swagger-ui/
-    I0723 08:09:57.394080       1 serve.go:85] Serving securely on 0.0.0.0:443
-     /accordion 
-
-1. Check that the metrics api is accessible from `kubectl` .
-
-* If you are accessing the cluster through Rancher, enter your Server URL in the `kubectl` config in the following format: `https://<RANCHER_URL>/k8s/clusters/<CLUSTER_ID>` . Add the suffix `/k8s/clusters/<CLUSTER_ID>` to API path.
-
-  
-
-``` 
-  # kubectl get --raw /k8s/clusters/<CLUSTER_ID>/apis/metrics.k8s.io/v1beta1
-  ```
-
-  If the API is working correctly, you should receive output similar to the output below.
-
-  
-
-``` 
-  {"kind":"APIResourceList","apiVersion":"v1","groupVersion":"metrics.k8s.io/v1beta1","resources":[{"name":"nodes","singularName":"","namespaced":false,"kind":"NodeMetrics","verbs":["get","list"]},{"name":"pods","singularName":"","namespaced":true,"kind":"PodMetrics","verbs":["get","list"]}]}
-  ```
-
-* If you are accessing the cluster directly, enter your Server URL in the kubectl config in the following format: `https://<K8s_URL>:6443` .
-
-  
-
-``` 
-  # kubectl get --raw /apis/metrics.k8s.io/v1beta1
-  ```
-
-  If the API is working correctly, you should receive output similar to the output below.
-  
-
-``` 
-  {"kind":"APIResourceList","apiVersion":"v1","groupVersion":"metrics.k8s.io/v1beta1","resources":[{"name":"nodes","singularName":"","namespaced":false,"kind":"NodeMetrics","verbs":["get","list"]},{"name":"pods","singularName":"","namespaced":true,"kind":"PodMetrics","verbs":["get","list"]}]}
-  ```
-
-#### Assigning Additional Required Roles to Your HPA
-
-By default, HPA reads resource and custom metrics with the user `system:anonymous` . Assign `system:anonymous` to `view-resource-metrics` and `view-custom-metrics` in the ClusterRole and ClusterRoleBindings manifests. These roles are used to access metrics.
-
-To do it, follow these steps:
-
-1. Configure `kubectl` to connect to your cluster.
-
-1. Copy the ClusterRole and ClusterRoleBinding manifest for the type of metrics you're using for your HPA.
-
-    accordion id="cluster-role-resource-metrics" label="Resource Metrics: ApiGroups resource.metrics.k8s.io" 
-
-   apiVersion: rbac.authorization.k8s.io/v1
-   kind: ClusterRole
-   metadata:
-   name: view-resource-metrics
-   rules: - apiGroups: - metrics.k8s.io
-   resources: - pods - nodes
-   verbs: - get - list - watch
-   ---
-   apiVersion: rbac.authorization.k8s.io/v1
-   kind: ClusterRoleBinding
-   metadata:
-   name: view-resource-metrics
-   roleRef:
-   apiGroup: rbac.authorization.k8s.io
-   kind: ClusterRole
-   name: view-resource-metrics
-   subjects: - apiGroup: rbac.authorization.k8s.io
-   kind: User
-   name: system:anonymous
-
-    /accordion 
-    accordion id="cluster-role-custom-resources" label="Custom Metrics: ApiGroups custom.metrics.k8s.io" 
-
-``` 
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: view-custom-metrics
-rules:
-
-* apiGroups:
-    - custom.metrics.k8s.io
-
-  resources:
-
-    - "*"
-
-  verbs:
-
-    - get
-    - list
-    - watch
-
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: view-custom-metrics
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: view-custom-metrics
-subjects:
-
-  + apiGroup: rbac.authorization.k8s.io
-
-    kind: User
-    name: system:anonymous
 ```
-
- /accordion 
-
-1. Create them in your cluster using one of the follow commands, depending on the metrics you're using.
-
-``` 
- # kubectl create -f <RESOURCE_METRICS_MANIFEST>
- # kubectl create -f <CUSTOM_METRICS_MANIFEST>
+# kubectl create -f <RESOURCE_METRICS_MANIFEST>
+# kubectl create -f <CUSTOM_METRICS_MANIFEST>
 ```
-
