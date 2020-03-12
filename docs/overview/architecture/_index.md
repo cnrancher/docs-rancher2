@@ -6,19 +6,6 @@ title: 产品架构
 
 > 本章节默认读者已经对Docker和Kubernetes有一定的了解。如果您需要了解Kubernetes组件的工作机制和原理，请查阅 [Kubernetes概念](/docs/overview/concepts/_index)。
 
-本小节讲述如下几个主题：
-docs/overview/architecture/_index/
-
-* [Rancher Server 架构](#rancher-server-architecture)
-* [与下游用户集群交互](#communicating-with-downstream-user-clusters)
-  + [Proxy认证](#1-the-authentication-proxy)
-  + [集群控制面板和集群Agent](#2-cluster-controllers-and-cluster-agents)
-  + [节点Agents](#3-node-agents)
-  + [授权集群Endpoint](#4-authorized-cluster-endpoint)
-* [重要文件](#important-files)
-* [启动Kubernetes集群所需工具](#tools-for-provisioning-kubernetes-clusters)
-* [Rancher Server组件和源代码](#rancher-server-components-and-source-code)
-
 ## Rancher Server架构
 
 大多数Rancher 2.x软件在Rancher Server上运行。 Rancher Server囊括了管理Rancher部署的所有组件。
@@ -47,12 +34,12 @@ docs/overview/architecture/_index/
 
 图中的数字和对应的描述如下：
 
-1. [Proxy认证](#1-the-authentication-proxy)
-2. [集群控制面板和集群Agent](#2-cluster-controllers-and-cluster-agents)
-3. [节点Agents](#3-node-agents)
-4. [授权集群端点](#4-authorized-cluster-endpoint)
+1. [Proxy认证](#proxy认证)
+2. [集群控制面板和集群Agent](#集群控制面板和集群agent)
+3. [节点Agents](#节点agent)
+4. [授权集群端点](#授权集群端点)
 
-#### 1. Proxy认证
+### Proxy认证
 
 在这张示意图中，一个叫做Bob的用户希望查看下游用户集群“User Cluster 1”里面正在运行的pod。在Rancher中，他可以运行 `kubectl` 命令查看该集群中的pod。Bob通过了Rancher的Proxy认证。
 
@@ -62,7 +49,7 @@ Rancher使用 [service account](https://kubernetes.io/docs/tasks/configure-pod-c
 
 默认状态下，Rancher生成一个包含认证信息的[kubeconfig](/docs/cluster-admin/cluster-access/kubectl//index)文件，为Rancher Server和下游用户集群的Kubernetes API Server之间的通信提供认证。该文件包含了访问集群的所有权限。
 
-#### 2. 集群控制面板和集群Agent
+### 集群控制面板和集群Agent
 
 每一个下游用户集群都有一个集群Agent保持用户集群的controller与Rancher Server之间的信息畅通。
 
@@ -82,13 +69,13 @@ Rancher使用 [service account](https://kubernetes.io/docs/tasks/configure-pod-c
 * 在每个集群的全局策略中应用角色和连接
 * 实现集群和Rancher Server之间的消息传输，包括健康状况和节点信息等。
 
-#### 3. 节点Agent
+### 节点Agent
 
 如果集群Agent不可用，其中一个节点Agent会创建一个通信的管道，由节点Agent连接到集群controller，再由controller连接到Rancher，实现集群Agent和Rancher之间的通信。
 
 使用[DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)资源部署节点Agent，可以确保集群内每个节点都成功运行节点Agent。执行集群操作时，可以使用这种方式和节点互动。集群操作包括：升级Kubernetes版本和创建或恢复etcd快照（etcd snapshot）。
 
-#### 4. 授权集群端点
+### 授权集群端点
 
 用户授权集群端点连接下游用户集群时，不需要将他们的请求发送到Rancher认证Proxy。
 
@@ -123,19 +110,19 @@ Rancher使用 [service account](https://kubernetes.io/docs/tasks/configure-pod-c
 
 下游Kubernetes集群的类型决定了启动集群需要的工具。集群类型主要分为以下几种：
 
-#### 在Rancher内运行云服务供应商的集群
+### 在Rancher内运行云服务供应商的集群
 
 Rancher可以动态启动位于云上的集群，如Amazon EC2、DigitalOcean、Azure和vSphere，然后在集群上安装Kubernetes。Rancher使用 [RKE](https://github.com/rancher/rke) 和 [docker-machine](https://github.com/rancher/machine)启动这种集群。
 
-#### Rancher Launched Kubernetes for Custom Nodes在Rancher内运行自定义的集群
+### Rancher Launched Kubernetes for Custom Nodes在Rancher内运行自定义的集群
 
 配置这种集群时，Rancher在已有节点上安装了Kubernetes，创建了自定义集群。Rancher使用[RKE](https://github.com/rancher/rke)启动这种集群。
 
-#### 云服务供应商的集群
+### 云服务供应商的集群
 
 配置这种集群时，Kubernetes由云服务供应商安装，如GKE、ECS和AKS。Rancher使用[kontainer-engine](https://github.com/rancher/kontainer-engine)启动这种集群。
 
-#### 导入的Kubernetes集群
+### 导入的Kubernetes集群
 
 这种情况下，Rancher连接到已经配置好Kubernetes的集群。因此，Rancher只配置Rancher Agent与集群通信，不直接启动集群。
 
@@ -155,5 +142,5 @@ Rancher的GitHub repository如下：
 * [Rancher CLI](https://github.com/rancher/cli)
 * [Catalog applications](https://github.com/rancher/helm)
 
-上面只列举了Rancher最重要的组件。请查看[参与Rancher开源贡献](/docs/contributing/_index/#repositories)，获取详细信息。请查看 `rancher/rancher` repository中的 [ `go.mod` 文件](https://github.com/rancher/rancher/blob/master/go.mod)，获取Rancher使用的所有库和项目。
+上面只列举了Rancher最重要的组件。请查看[参与Rancher开源贡献](/docs/contributing/_index#源代码仓库)，获取详细信息。请查看 `rancher/rancher` repository中的 [ `go.mod` 文件](https://github.com/rancher/rancher/blob/master/go.mod)，获取Rancher使用的所有库和项目。
 
