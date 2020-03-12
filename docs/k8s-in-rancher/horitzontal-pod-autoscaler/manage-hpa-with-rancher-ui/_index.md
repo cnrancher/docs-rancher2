@@ -2,53 +2,38 @@
 title: 通过 Rancher UI 管理 HPA
 ---
 
-_Available as of v2.3.0_
+_自 Rancher v2.3.0 起可用_
 
-The Rancher UI supports creating, managing, and deleting HPAs. You can configure CPU or memory usage as the metric that the HPA uses to scale.
+Rancher UI 支持创建，管理和删除 HPA。 您可以将 CPU 或内存使用率配置为用于 HPA 自动扩缩容所使用的指标。
 
-If you want to create HPAs that scale based on other metrics than CPU and memory, refer to [Configuring HPA to Scale Using Custom Metrics with Prometheus](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-kubectl/#configuring-hpa-to-scale-using-custom-metrics-with-prometheus).
+如果要创建可根据 CPU 和内存以外的其他指标进行扩展的 HPA，请参阅[配置 HPA 以使用 Prometheus 的自定义指标进行扩展](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-kubectl/_index)。
 
-### Creating an HPA
+## 创建一个 HPA
 
-1. From the **Global** view, open the project that you want to deploy a HPA to.
+1. 从**全局**视图中，打开一个项目，将 HPA 部署到此项目中。
+1. 单击**资源 > HPA**。
+1. 单击**添加 HPA**。
+1. 输入 HPA 的**名称**。
+1. 为 HPA 选择一个**名称空间**。
+1. 选择**工作负载**作为 HPA 的扩展目标。
+1. 为 HPA 指定**最小比例**和**最大比例**。
+1. 配置 HPA 的指标。 您可以选择内存或 CPU 使用率作为度量标准，这将触发 HPA 弹性扩缩容。 在**数量**字段中，输入将触发 HPA 扩缩容机制的工作负载内存或 CPU 使用率的百分比。 要配置其他 HPA 指标，包括 Prometheus 可用的指标，您需要[使用 kubectl 管理 HPA](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-kubectl/_index)。
+1. 单击**创建**以创建 HPA。
 
-1. Click **Resources > HPA.**
+> **结果：** HPA 已部署到选定的名称空间。 您可以从项目的资源> HPA 视图查看 HPA 的状态。
 
-1. Click **Add HPA.**
+## 获取 HPA 指标和状态
 
-1. Enter a **Name** for the HPA.
+1. 从**全局**视图中，打开要查看的 HPA 资源所在的项目。
+1. 单击**资源 > HPA**。**HPA**选项卡显示当前副本数。
+1. 有关特定 HPA 的更多详细指标和状态，请单击 HPA 的名称。 将会进入 HPA 详细信息页面。
 
-1. Select a **Namespace** for the HPA.
+## 删除 HPA
 
-1. Select a **Deployment** as scale target for the HPA.
+1. 从**全局**视图中，打开要从中删除 HPA 的项目。
+1. 单击**资源> HPA”**。
+1. 找到要删除的 HPA。
+1. 单击**省略号（...）>删除**。
+1. 单击**删除**以确认。
 
-1. Specify the **Minimum Scale** and **Maximum Scale** for the HPA.
-
-1. Configure the metrics for the HPA. You can choose memory or CPU usage as the metric that will cause the HPA to scale the service up or down. In the **Quantity** field, enter the percentage of the workload's memory or CPU usage that will cause the HPA to scale the service. To configure other HPA metrics, including metrics available from Prometheus, you need to [manage HPAs using kubectl](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-kubectl/#configuring-hpa-to-scale-using-custom-metrics-with-prometheus).
-
-1. Click **Create** to create the HPA.
-
-> **Result:** The HPA is deployed to the chosen namespace. You can view the HPA's status from the project's Resources > HPA view.
-
-### Get HPA Metrics and Status
-
-1. From the **Global** view, open the project with the HPAs you want to look at.
-
-1. Click **Resources > HPA.** The **HPA** tab shows the number of current replicas.
-
-1. For more detailed metrics and status of a specific HPA, click the name of the HPA. This leads to the HPA detail page.
-
-### Deleting an HPA
-
-1. From the **Global** view, open the project that you want to delete an HPA from.
-
-1. Click **Resources > HPA.**
-
-1. Find the HPA which you would like to delete.
-
-1. Click **Ellipsis (...) > Delete**.
-
-1. Click **Delete** to confirm.
-
-> **Result:** The HPA is deleted from the current cluster.
-
+> **结果：** HPA 已从当前群集中删除。

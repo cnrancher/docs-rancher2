@@ -605,8 +605,8 @@ module.exports = {
         items: [
           'k8s-in-rancher/horitzontal-pod-autoscaler/_index',
           'k8s-in-rancher/horitzontal-pod-autoscaler/hpa-background/_index',
-          'k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-kubectl/_index',
           'k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-rancher-ui/_index',
+          'k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-kubectl/_index',
           'k8s-in-rancher/horitzontal-pod-autoscaler/testing-hpa/_index',
           'k8s-in-rancher/horitzontal-pod-autoscaler/hpa-for-rancher-before-2_0_7/_index'
         ]

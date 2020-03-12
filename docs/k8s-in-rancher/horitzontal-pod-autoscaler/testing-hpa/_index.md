@@ -2,17 +2,15 @@
 title: 通过 Kubectl 测试 HPA
 ---
 
-This document describes how to check the status of your HPAs after scaling them up or down with your load testing tool. For information on how to check the status from the Rancher UI (at least version 2.3.x), refer to [Managing HPAs with the Rancher UI](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-kubectl/).
+本文档介绍了使用负载测试工具触发 HPA 按比例扩容或缩容的值后如何检查其状态。有关如何从 Rancher UI（至少 2.3.x 版）检查状态的信息，请参阅 [使用 Rancher UI 管理 HPA](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-kubectl/_index)。
 
-For HPA to work correctly, service deployments should have resources request definitions for containers. Follow this hello-world example to test if HPA is working correctly.
+为了使 HPA 正常工作，服务部署应具有容器的资源请求（request）定义。可以按照此 hello-world 示例测试 HPA 是否正常工作。
 
-1. Configure `kubectl` to connect to your Kubernetes cluster.
+## 配置 `kubectl` 以连接到您的 Kubernetes 集群。
 
-2. Copy the `hello-world` deployment manifest below.
+## 复制下面的 `hello-world` 部署清单。
 
-    accordion id="hello-world" label="Hello World Manifest" 
-
-``` 
+```
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
@@ -36,9 +34,7 @@ spec:
         app: hello-world
     spec:
       containers:
-
       - image: rancher/hello-world
-
         imagePullPolicy: Always
         name: hello-world
         resources:
@@ -46,9 +42,7 @@ spec:
             cpu: 500m
             memory: 64Mi
         ports:
-
         - containerPort: 80
-
           protocol: TCP
       restartPolicy: Always
 ---
@@ -59,189 +53,161 @@ metadata:
   namespace: default
 spec:
   ports:
-
-  + port: 80
-
+  - port: 80
     protocol: TCP
     targetPort: 80
   selector:
     app: hello-world
 ```
 
- /accordion 
+## 将其部署到您的集群。
 
-1. Deploy it to your cluster.
-
-   
-
-``` 
-   # kubectl create -f <HELLO_WORLD_MANIFEST>
-   ```
-
-1. Copy one of the HPAs below based on the metric type you're using:
-
-    accordion id="service-deployment-resource-metrics" label="Hello World HPA: Resource Metrics" 
-
-``` 
-apiVersion: autoscaling/v2beta1
-kind: HorizontalPodAutoscaler
-metadata:
-  name: hello-world
-  namespace: default
-spec:
-  scaleTargetRef:
-    apiVersion: extensions/v1beta1
-    kind: Deployment
-    name: hello-world
-  minReplicas: 1
-  maxReplicas: 10
-  metrics:
-
-  + type: Resource
-
-    resource:
-      name: cpu
-      targetAverageUtilization: 50
-
-  + type: Resource
-
-    resource:
-      name: memory
-      targetAverageValue: 1000Mi
+```
+# kubectl create -f <HELLO_WORLD_MANIFEST>
 ```
 
- /accordion 
- accordion id="service-deployment-custom-metrics" label="Hello World HPA: Custom Metrics" 
+## 根据您使用的指标类型复制下面适合您的 HPA：
 
-``` 
-apiVersion: autoscaling/v2beta1
-kind: HorizontalPodAutoscaler
-metadata:
-  name: hello-world
-  namespace: default
-spec:
-  scaleTargetRef:
-    apiVersion: extensions/v1beta1
-    kind: Deployment
+- Hello World HPA: 资源指标
+
+  ```
+  apiVersion: autoscaling/v2beta1
+  kind: HorizontalPodAutoscaler
+  metadata:
     name: hello-world
-  minReplicas: 1
-  maxReplicas: 10
-  metrics:
+    namespace: default
+  spec:
+    scaleTargetRef:
+      apiVersion: extensions/v1beta1
+      kind: Deployment
+      name: hello-world
+    minReplicas: 1
+    maxReplicas: 10
+    metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: 50
+    - type: Resource
+      resource:
+        name: memory
+        targetAverageValue: 1000Mi
+  ```
 
-  + type: Resource
+- Hello World HPA: 自定义指标
 
-    resource:
-      name: cpu
-      targetAverageUtilization: 50
+  ```
+  apiVersion: autoscaling/v2beta1
+  kind: HorizontalPodAutoscaler
+  metadata:
+    name: hello-world
+    namespace: default
+  spec:
+    scaleTargetRef:
+      apiVersion: extensions/v1beta1
+      kind: Deployment
+      name: hello-world
+    minReplicas: 1
+    maxReplicas: 10
+    metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: 50
+    - type: Resource
+      resource:
+        name: memory
+        targetAverageValue: 100Mi
+    - type: Pods
+      pods:
+        metricName: cpu_system
+        targetAverageValue: 20m
+  ```
 
-  + type: Resource
+## 查看 HPA 信息和说明。确认已显示指标数据。
 
-    resource:
-      name: memory
-      targetAverageValue: 100Mi
+- 资源指标
 
-  + type: Pods
+  1.  输入以下命令。
 
-    pods:
-      metricName: cpu_system
-      targetAverageValue: 20m
-```
+      ```
+      # kubectl get hpa
+      NAME          REFERENCE                TARGETS                     MINPODS   MAXPODS   REPLICAS   AGE
+      hello-world   Deployment/hello-world   1253376 / 100Mi, 0% / 50%   1         10        1          6m
+      # kubectl describe hpa
+      Name:                                                  hello-world
+      Namespace:                                             default
+      Labels:                                                <none>
+      Annotations:                                           <none>
+      CreationTimestamp:                                     Mon, 23 Jul 2018 20:21:16 +0200
+      Reference:                                             Deployment/hello-world
+      Metrics:                                               ( current / target )
+        resource memory on pods:                             1253376 / 100Mi
+        resource cpu on pods  (as a percentage of request):  0% (0) / 50%
+      Min replicas:                                          1
+      Max replicas:                                          10
+      Conditions:
+        Type            Status  Reason              Message
+        ----            ------  ------              -------
+        AbleToScale     True    ReadyForNewScale    the last scale time was sufficiently old as to warrant a new scale
+        ScalingActive   True    ValidMetricFound    the HPA was able to successfully calculate a replica count from memory resource
+        ScalingLimited  False   DesiredWithinRange  the desired count is within the acceptable range
+      Events:           <none>
+      ```
 
- /accordion 
+- 自定义指标
 
-1. View the HPA info and description. Confirm that metric data is shown.
+  1. 输入以下命令。
 
-    accordion id="hpa-info-resource-metrics" label="Resource Metrics" 
+     ```
+     # kubectl describe hpa
+     ```
 
-1. Enter the following commands.
+  1. 您应该看到以下输出：
 
-   
+     ```
+     Name:                                                  hello-world
+     Namespace:                                             default
+     Labels:                                                <none>
+     Annotations:                                           <none>
+     CreationTimestamp:                                     Tue, 24 Jul 2018 18:36:28 +0200
+     Reference:                                             Deployment/hello-world
+     Metrics:                                               ( current / target )
+       resource memory on pods:                             3514368 / 100Mi
+       "cpu_system" on pods:                                0 / 20m
+       resource cpu on pods  (as a percentage of request):  0% (0) / 50%
+     Min replicas:                                          1
+     Max replicas:                                          10
+     Conditions:
+       Type            Status  Reason              Message
+       ----            ------  ------              -------
+       AbleToScale     True    ReadyForNewScale    the last scale time was sufficiently old as to warrant a new scale
+       ScalingActive   True    ValidMetricFound    the HPA was able to successfully calculate a replica count from memory resource
+       ScalingLimited  False   DesiredWithinRange  the desired count is within the acceptable range
+     Events:           <none>
+     ```
 
-``` 
-   # kubectl get hpa
-   NAME          REFERENCE                TARGETS                     MINPODS   MAXPODS   REPLICAS   AGE
-   hello-world   Deployment/hello-world   1253376 / 100Mi, 0% / 50%   1         10        1          6m
-   # kubectl describe hpa
-   Name:                                                  hello-world
-   Namespace:                                             default
-   Labels:                                                <none>
-   Annotations:                                           <none>
-   CreationTimestamp:                                     Mon, 23 Jul 2018 20:21:16 +0200
-   Reference:                                             Deployment/hello-world
-   Metrics:                                               ( current / target )
-     resource memory on pods:                             1253376 / 100Mi
-     resource cpu on pods  (as a percentage of request):  0% (0) / 50%
-   Min replicas:                                          1
-   Max replicas:                                          10
-   Conditions:
-     Type            Status  Reason              Message
-     ----            ------  ------              -------
-     AbleToScale     True    ReadyForNewScale    the last scale time was sufficiently old as to warrant a new scale
-     ScalingActive   True    ValidMetricFound    the HPA was able to successfully calculate a replica count from memory resource
-     ScalingLimited  False   DesiredWithinRange  the desired count is within the acceptable range
-   Events:           <none>
-   ```
+## 对 HPA 服务进行压测，以测试您的 Pod 是否可以按预期自动缩放。
 
-    /accordion 
+您可以使用任何负载测试工具（Hey，Gatling 等），我们使用的是 [Hey](https://github.com/rakyll/hey)。
 
-    accordion id="hpa-info-custom-metrics" label="Custom Metrics" 
+## 测试 Pod 自动扩缩容功能是否按预期工作。
 
-1. Enter the following command.
+### 使用资源指标测试自动扩缩容
 
-   
+#### 扩容到 2 个 Pod：CPU 使用量超过目标值
 
-``` 
-   # kubectl describe hpa
-   ```
+使用负载测试工具对工作负载进行压测，提高 CPU 使用率触发自动扩缩容，使得 pod 数量扩容至 2 个。
 
-   You should receive the output that follows.
-   
+1.  查看您的 HPA。
 
-``` 
-   Name:                                                  hello-world
-   Namespace:                                             default
-   Labels:                                                <none>
-   Annotations:                                           <none>
-   CreationTimestamp:                                     Tue, 24 Jul 2018 18:36:28 +0200
-   Reference:                                             Deployment/hello-world
-   Metrics:                                               ( current / target )
-     resource memory on pods:                             3514368 / 100Mi
-     "cpu_system" on pods:                                0 / 20m
-     resource cpu on pods  (as a percentage of request):  0% (0) / 50%
-   Min replicas:                                          1
-   Max replicas:                                          10
-   Conditions:
-     Type            Status  Reason              Message
-     ----            ------  ------              -------
-     AbleToScale     True    ReadyForNewScale    the last scale time was sufficiently old as to warrant a new scale
-     ScalingActive   True    ValidMetricFound    the HPA was able to successfully calculate a replica count from memory resource
-     ScalingLimited  False   DesiredWithinRange  the desired count is within the acceptable range
-   Events:           <none>
-   ```
-
-    /accordion 
-
-1)  Generate a load for the service to test that your pods autoscale as intended. You can use any load-testing tool (Hey, Gatling, etc.), but we're using [Hey](https://github.com/rakyll/hey).
-
-1)  Test that pod autoscaling works as intended.<br/>
-
-    **To Test Autoscaling Using Resource Metrics:**
-     accordion id="observe-upscale-2-pods-cpu" label="Upscale to 2 Pods: CPU Usage Up to Target" 
-    Use your load testing tool to scale up to two pods based on CPU Usage.
-
-1)  View your HPA.
-
-    
-
-``` 
+    ```
     # kubectl describe hpa
     ```
 
-    You should receive output similar to what follows.
+    您应该收到与以下类似的输出。
 
-    
-
-``` 
+    ```
     Name:                                                  hello-world
     Namespace:                                             default
     Labels:                                                <none>
@@ -265,96 +231,85 @@ spec:
       Normal  SuccessfulRescale  13s   horizontal-pod-autoscaler  New size: 2; reason: cpu resource utilization (percentage of request) above target
     ```
 
-1)  Enter the following command to confirm you've scaled to two pods.
+1.  输入以下命令以确认您已扩容至 2 个 pod。
 
-    
-
-``` 
-       # kubectl get pods
     ```
-
-    You should receive output similar to what follows:
-
-    
-
-``` 
-       NAME                                                     READY     STATUS    RESTARTS   AGE
-       hello-world-54764dfbf8-k8ph2                             1/1       Running   0          1m
-       hello-world-54764dfbf8-q6l4v                             1/1       Running   0          3h
-    ```
-
-     /accordion 
-     accordion id="observe-upscale-3-pods-cpu-cooldown" label="Upscale to 3 pods: CPU Usage Up to Target" 
-    Use your load testing tool to upscale to 3 pods based on CPU usage with `horizontal-pod-autoscaler-upscale-delay` set to 3 minutes.
-
-1)  Enter the following command.
-
-    
-
-``` 
-    # kubectl describe hpa
-    ```
-
-    You should receive output similar to what follows
-
-    
-
-``` 
-       Name:                                                  hello-world
-       Namespace:                                             default
-       Labels:                                                <none>
-       Annotations:                                           <none>
-       CreationTimestamp:                                     Mon, 23 Jul 2018 22:22:04 +0200
-       Reference:                                             Deployment/hello-world
-       Metrics:                                               ( current / target )
-         resource memory on pods:                             9424896 / 100Mi
-         resource cpu on pods  (as a percentage of request):  66% (333m) / 50%
-       Min replicas:                                          1
-       Max replicas:                                          10
-       Conditions:
-         Type            Status  Reason              Message
-         ----            ------  ------              -------
-         AbleToScale     True    SucceededRescale    the HPA controller was able to update the target scale to 3
-         ScalingActive   True    ValidMetricFound    the HPA was able to successfully calculate a replica count from cpu resource utilization (percentage of request)
-         ScalingLimited  False   DesiredWithinRange  the desired count is within the acceptable range
-       Events:
-         Type    Reason             Age   From                       Message
-         ----    ------             ----  ----                       -------
-         Normal  SuccessfulRescale  4m    horizontal-pod-autoscaler  New size: 2; reason: cpu resource utilization (percentage of request) above target
-         Normal  SuccessfulRescale  16s   horizontal-pod-autoscaler  New size: 3; reason: cpu resource utilization (percentage of request) above target
-    ```
-
-1)  Enter the following command to confirm three pods are running.
-
-    
-
-``` 
     # kubectl get pods
     ```
 
-        You should receive output similar to what follows.
-         
+    您应该收到类似于以下内容的输出：
 
-``` 
-          NAME                                                     READY     STATUS    RESTARTS   AGE
-          hello-world-54764dfbf8-f46kh                             0/1       Running   0          1m
-          hello-world-54764dfbf8-k8ph2                             1/1       Running   0          5m
-          hello-world-54764dfbf8-q6l4v                             1/1       Running   0          3h
-          ```
+    ```
+    NAME                                                     READY     STATUS    RESTARTS   AGE
+    hello-world-54764dfbf8-k8ph2                             1/1       Running   0          1m
+    hello-world-54764dfbf8-q6l4v                             1/1       Running   0          3h
+    ```
 
-     /accordion 
-     accordion id="observe-downscale-1-pod" label="Downscale to 1 Pod: All Metrics Below Target" 
-    Use your load testing to scale down to 1 pod when all metrics are below target for `horizontal-pod-autoscaler-downscale-delay` (5 minutes by default).
+#### 扩容到 3 个 Pod：CPU 使用量超过目标值
 
-1)  Enter the following command.
+使用您的负载测试工具，根据 CPU 使用率将 `horizontal-pod-autoscaler-upscale-delay` 设置为 3 分钟，以将其扩展到 3 个 pod。
 
-``` 
-# kubectl describe hpa
-```
+1.  输入以下命令。
 
-You should receive output similar to what follows.
+    ```
+    # kubectl describe hpa
+    ```
 
-``` 
+    您应该收到类似于以下内容的输出
+
+    ```
+    Name:                                                  hello-world
+    Namespace:                                             default
+    Labels:                                                <none>
+    Annotations:                                           <none>
+    CreationTimestamp:                                     Mon, 23 Jul 2018 22:22:04 +0200
+    Reference:                                             Deployment/hello-world
+    Metrics:                                               ( current / target )
+      resource memory on pods:                             9424896 / 100Mi
+      resource cpu on pods  (as a percentage of request):  66% (333m) / 50%
+    Min replicas:                                          1
+    Max replicas:                                          10
+    Conditions:
+      Type            Status  Reason              Message
+      ----            ------  ------              -------
+      AbleToScale     True    SucceededRescale    the HPA controller was able to update the target scale to 3
+      ScalingActive   True    ValidMetricFound    the HPA was able to successfully calculate a replica count from cpu resource utilization (percentage of request)
+      ScalingLimited  False   DesiredWithinRange  the desired count is within the acceptable range
+    Events:
+      Type    Reason             Age   From                       Message
+      ----    ------             ----  ----                       -------
+      Normal  SuccessfulRescale  4m    horizontal-pod-autoscaler  New size: 2; reason: cpu resource utilization (percentage of request) above target
+      Normal  SuccessfulRescale  16s   horizontal-pod-autoscaler  New size: 3; reason: cpu resource utilization (percentage of request) above target
+    ```
+
+1.  输入以下命令以确认您已扩容至 3 个 pod。
+
+    ```
+    # kubectl get pods
+    ```
+
+    您应该收到与以下类似的输出。
+
+    ```
+    NAME                                                     READY     STATUS    RESTARTS   AGE
+    hello-world-54764dfbf8-f46kh                             0/1       Running   0          1m
+    hello-world-54764dfbf8-k8ph2                             1/1       Running   0          5m
+    hello-world-54764dfbf8-q6l4v                             1/1       Running   0          3h
+    ```
+
+#### 缩容到 1 个 Pod: 全部指标低于目标值
+
+当所有指标均低于“ horizontal-pod-autoscaler-downscale-delay”的目标（默认为 5 分钟）时，请使用压测工具将其缩小到 1 个 pod。
+
+1.  输入以下命令。
+
+    ```
+    # kubectl describe hpa
+    ```
+
+    您应该收到与以下类似的输出。
+
+    ```
     Name:                                                  hello-world
     Namespace:                                             default
     Labels:                                                <none>
@@ -378,242 +333,219 @@ You should receive output similar to what follows.
       Normal  SuccessfulRescale  10m   horizontal-pod-autoscaler  New size: 2; reason: cpu resource utilization (percentage of request) above target
       Normal  SuccessfulRescale  6m    horizontal-pod-autoscaler  New size: 3; reason: cpu resource utilization (percentage of request) above target
       Normal  SuccessfulRescale  1s    horizontal-pod-autoscaler  New size: 1; reason: All metrics below target
-```
+    ```
 
- /accordion 
-<br/>
-**To Test Autoscaling Using Custom Metrics:**
- accordion id="custom-observe-upscale-2-pods-cpu" label="Upscale to 2 Pods: CPU Usage Up to Target" 
-Use your load testing tool to upscale two pods based on CPU usage.
+### 使用自定义指标测试自动扩缩容
 
-1. Enter the following command.
+#### 扩容到 2 个 Pod：CPU 使用量超过目标值
 
-``` 
-  # kubectl describe hpa
-```
+使用您的负载测试工具加大应用负载，以触发 HPA 根据 CPU 使用率自动扩容至 2 个 Pod。
 
-You should receive output similar to what follows.
+1. 输入以下命令。
 
-``` 
-  Name:                                                  hello-world
-  Namespace:                                             default
-  Labels:                                                <none>
-  Annotations:                                           <none>
-  CreationTimestamp:                                     Tue, 24 Jul 2018 18:01:11 +0200
-  Reference:                                             Deployment/hello-world
-  Metrics:                                               ( current / target )
-    resource memory on pods:                             8159232 / 100Mi
-    "cpu_system" on pods:                                7m / 20m
-    resource cpu on pods  (as a percentage of request):  64% (321m) / 50%
-  Min replicas:                                          1
-  Max replicas:                                          10
-  Conditions:
-    Type            Status  Reason              Message
-    ----            ------  ------              -------
-    AbleToScale     True    SucceededRescale    the HPA controller was able to update the target scale to 2
-    ScalingActive   True    ValidMetricFound    the HPA was able to successfully calculate a replica count from cpu resource utilization (percentage of request)
-    ScalingLimited  False   DesiredWithinRange  the desired count is within the acceptable range
-  Events:
-    Type    Reason             Age   From                       Message
-    ----    ------             ----  ----                       -------
-    Normal  SuccessfulRescale  16s   horizontal-pod-autoscaler  New size: 2; reason: cpu resource utilization (percentage of request) above target
-```
-
-1. Enter the following command to confirm two pods are running.
-
-``` 
-  # kubectl get pods
-```
-
-You should receive output similar to what follows.
-
-``` 
-      NAME                           READY     STATUS    RESTARTS   AGE
-      hello-world-54764dfbf8-5pfdr   1/1       Running   0          3s
-      hello-world-54764dfbf8-q6l82   1/1       Running   0          6h
-```
-
- /accordion 
- accordion id="observe-upscale-3-pods-cpu-cooldown-2" label="Upscale to 3 Pods: CPU Usage Up to Target" 
-Use your load testing tool to scale up to three pods when the cpu_system usage limit is up to target.
-
-1. Enter the following command.
-
-   
-
-``` 
+   ```
    # kubectl describe hpa
    ```
 
-   You should receive output similar to what follows:
-   
+   您应该收到与以下类似的输出。
 
-``` 
-      Name:                                                  hello-world
-      Namespace:                                             default
-      Labels:                                                <none>
-      Annotations:                                           <none>
-      CreationTimestamp:                                     Tue, 24 Jul 2018 18:01:11 +0200
-      Reference:                                             Deployment/hello-world
-      Metrics:                                               ( current / target )
-        resource memory on pods:                             8374272 / 100Mi
-        "cpu_system" on pods:                                27m / 20m
-        resource cpu on pods  (as a percentage of request):  71% (357m) / 50%
-      Min replicas:                                          1
-      Max replicas:                                          10
-      Conditions:
-        Type            Status  Reason              Message
-        ----            ------  ------              -------
-        AbleToScale     True    SucceededRescale    the HPA controller was able to update the target scale to 3
-        ScalingActive   True    ValidMetricFound    the HPA was able to successfully calculate a replica count from cpu resource utilization (percentage of request)
-        ScalingLimited  False   DesiredWithinRange  the desired count is within the acceptable range
-      Events:
-        Type    Reason             Age   From                       Message
-        ----    ------             ----  ----                       -------
-        Normal  SuccessfulRescale  3m    horizontal-pod-autoscaler  New size: 2; reason: cpu resource utilization (percentage of request) above target
-        Normal  SuccessfulRescale  3s    horizontal-pod-autoscaler  New size: 3; reason: pods metric cpu_system above target
+   ```
+   Name:                                                  hello-world
+   Namespace:                                             default
+   Labels:                                                <none>
+   Annotations:                                           <none>
+   CreationTimestamp:                                     Tue, 24 Jul 2018 18:01:11 +0200
+   Reference:                                             Deployment/hello-world
+   Metrics:                                               ( current / target )
+     resource memory on pods:                             8159232 / 100Mi
+     "cpu_system" on pods:                                7m / 20m
+     resource cpu on pods  (as a percentage of request):  64% (321m) / 50%
+   Min replicas:                                          1
+   Max replicas:                                          10
+   Conditions:
+     Type            Status  Reason              Message
+     ----            ------  ------              -------
+     AbleToScale     True    SucceededRescale    the HPA controller was able to update the target scale to 2
+     ScalingActive   True    ValidMetricFound    the HPA was able to successfully calculate a replica count from cpu resource utilization (percentage of request)
+     ScalingLimited  False   DesiredWithinRange  the desired count is within the acceptable range
+   Events:
+     Type    Reason             Age   From                       Message
+     ----    ------             ----  ----                       -------
+     Normal  SuccessfulRescale  16s   horizontal-pod-autoscaler  New size: 2; reason: cpu resource utilization (percentage of request) above target
    ```
 
-1. Enter the following command to confirm three pods are running.
+1. 输入以下命令以确认两个 Pod 正在运行。
 
-   
-
-``` 
+   ```
    # kubectl get pods
    ```
 
-   You should receive output similar to what follows:
+   您应该收到与以下类似的输出。
 
-   
-
-``` 
-      # kubectl get pods
-      NAME                           READY     STATUS    RESTARTS   AGE
-      hello-world-54764dfbf8-5pfdr   1/1       Running   0          3m
-      hello-world-54764dfbf8-m2hrl   1/1       Running   0          1s
-      hello-world-54764dfbf8-q6l82   1/1       Running   0          6h
+   ```
+   NAME                           READY     STATUS    RESTARTS   AGE
+   hello-world-54764dfbf8-5pfdr   1/1       Running   0          3s
+   hello-world-54764dfbf8-q6l82   1/1       Running   0          6h
    ```
 
-    /accordion 
+#### 扩容到 3 个 Pod：CPU 使用量超过目标值
 
-    accordion id="observe-upscale-4-pods" label="Upscale to 4 Pods: CPU Usage Up to Target" 
-   Use your load testing tool to upscale to four pods based on CPU usage. `horizontal-pod-autoscaler-upscale-delay` is set to three minutes by default.
+使用负载测试工具进行压测，当 cpu_system 的限制达到目标值时，pod 数量会继续扩容至 3 个
 
-1. Enter the following command.
+1. 输入以下命令。
 
-``` 
-# kubectl describe hpa
-```
+   ```
+   # kubectl describe hpa
+   ```
 
-You should receive output similar to what follows.
+   您应该收到类似于以下内容的输出：
 
-`
+   ```
+   Name:                                                  hello-world
+   Namespace:                                             default
+   Labels:                                                <none>
+   Annotations:                                           <none>
+   CreationTimestamp:                                     Tue, 24 Jul 2018 18:01:11 +0200
+   Reference:                                             Deployment/hello-world
+   Metrics:                                               ( current / target )
+     resource memory on pods:                             8374272 / 100Mi
+     "cpu_system" on pods:                                27m / 20m
+     resource cpu on pods  (as a percentage of request):  71% (357m) / 50%
+   Min replicas:                                          1
+   Max replicas:                                          10
+   Conditions:
+     Type            Status  Reason              Message
+     ----            ------  ------              -------
+     AbleToScale     True    SucceededRescale    the HPA controller was able to update the target scale to 3
+     ScalingActive   True    ValidMetricFound    the HPA was able to successfully calculate a replica count from cpu resource utilization (percentage of request)
+     ScalingLimited  False   DesiredWithinRange  the desired count is within the acceptable range
+   Events:
+     Type    Reason             Age   From                       Message
+     ----    ------             ----  ----                       -------
+     Normal  SuccessfulRescale  3m    horizontal-pod-autoscaler  New size: 2; reason: cpu resource utilization (percentage of request) above target
+     Normal  SuccessfulRescale  3s    horizontal-pod-autoscaler  New size: 3; reason: pods metric cpu_system above target
+   ```
 
-``` 
-    Name:                                                  hello-world
-    Namespace:                                             default
-    Labels:                                                <none>
-    Annotations:                                           <none>
-    CreationTimestamp:                                     Tue, 24 Jul 2018 18:01:11 +0200
-    Reference:                                             Deployment/hello-world
-    Metrics:                                               ( current / target )
-      resource memory on pods:                             8374272 / 100Mi
-      "cpu_system" on pods:                                27m / 20m
-      resource cpu on pods  (as a percentage of request):  71% (357m) / 50%
-    Min replicas:                                          1
-    Max replicas:                                          10
-    Conditions:
-      Type            Status  Reason              Message
-      ----            ------  ------              -------
-      AbleToScale     True    SucceededRescale    the HPA controller was able to update the target scale to 3
-      ScalingActive   True    ValidMetricFound    the HPA was able to successfully calculate a replica count from cpu resource utilization (percentage of request)
-      ScalingLimited  False   DesiredWithinRange  the desired count is within the acceptable range
-    Events:
-      Type    Reason             Age   From                       Message
-      ----    ------             ----  ----                       -------
-      Normal  SuccessfulRescale  5m    horizontal-pod-autoscaler  New size: 2; reason: cpu resource utilization (percentage of request) above target
-      Normal  SuccessfulRescale  3m    horizontal-pod-autoscaler  New size: 3; reason: pods metric cpu_system above target
-      Normal  SuccessfulRescale  4s    horizontal-pod-autoscaler  New size: 4; reason: cpu resource utilization (percentage of request) above target
-  ```
+1. 输入以下命令以确认三个 Pod 正在运行。
 
-1.  Enter the following command to confirm four pods are running.
+   ```
+     # kubectl get pods
+   ```
 
-  
+   您应该收到类似于以下内容的输出：
 
-``` 
-  # kubectl get pods
-  ```
+   ```
+         # kubectl get pods
+         NAME                           READY     STATUS    RESTARTS   AGE
+         hello-world-54764dfbf8-5pfdr   1/1       Running   0          3m
+         hello-world-54764dfbf8-m2hrl   1/1       Running   0          1s
+         hello-world-54764dfbf8-q6l82   1/1       Running   0          6h
+   ```
 
-  You should receive output similar to what follows.
-  
+#### 扩容到 4 个 Pod：CPU 使用量超过目标值
 
-``` 
-    NAME                           READY     STATUS    RESTARTS   AGE
-    hello-world-54764dfbf8-2p9xb   1/1       Running   0          5m
-    hello-world-54764dfbf8-5pfdr   1/1       Running   0          2m
-    hello-world-54764dfbf8-m2hrl   1/1       Running   0          1s
-    hello-world-54764dfbf8-q6l82   1/1       Running   0          6h
-  ```
+使用您的负载测试工具进行压测，提升 CPU 使用率，触发 HPA 机制扩容至 4 个 Pod。 默认情况下， `horizontal-pod-autoscaler-upscale-delay` 设置为三分钟。
 
- /accordion 
- accordion id="custom-metrics-observe-downscale-1-pod" label="Downscale to 1 Pod: All Metrics Below Target" 
-Use your load testing tool to scale down to one pod when all metrics below target for `horizontal-pod-autoscaler-downscale-delay` .
+1. 输入以下命令。
 
-1. Enter the following command.
+   ```
+   # kubectl describe hpa
+   ```
 
-  
+   您应该收到与以下类似的输出。
 
-``` 
-  # kubectl describe hpa
-  ```
+   ```
+   Name:                                                  hello-world
+   Namespace:                                             default
+   Labels:                                                <none>
+   Annotations:                                           <none>
+   CreationTimestamp:                                     Tue, 24 Jul 2018 18:01:11 +0200
+   Reference:                                             Deployment/hello-world
+   Metrics:                                               ( current / target )
+     resource memory on pods:                             8374272 / 100Mi
+     "cpu_system" on pods:                                27m / 20m
+     resource cpu on pods  (as a percentage of request):  71% (357m) / 50%
+   Min replicas:                                          1
+   Max replicas:                                          10
+   Conditions:
+     Type            Status  Reason              Message
+     ----            ------  ------              -------
+     AbleToScale     True    SucceededRescale    the HPA controller was able to update the target scale to 3
+     ScalingActive   True    ValidMetricFound    the HPA was able to successfully calculate a replica count from cpu resource utilization (percentage of request)
+     ScalingLimited  False   DesiredWithinRange  the desired count is within the acceptable range
+   Events:
+     Type    Reason             Age   From                       Message
+     ----    ------             ----  ----                       -------
+     Normal  SuccessfulRescale  5m    horizontal-pod-autoscaler  New size: 2; reason: cpu resource utilization (percentage of request) above target
+     Normal  SuccessfulRescale  3m    horizontal-pod-autoscaler  New size: 3; reason: pods metric cpu_system above target
+     Normal  SuccessfulRescale  4s    horizontal-pod-autoscaler  New size: 4; reason: cpu resource utilization (percentage of request) above target
+   ```
 
-  You should receive similar output to what follows.
-  
+1. 输入以下命令以确认四个 Pod 正在运行。
 
-``` 
-      Name:                                                  hello-world
-      Namespace:                                             default
-      Labels:                                                <none>
-      Annotations:                                           <none>
-      CreationTimestamp:                                     Tue, 24 Jul 2018 18:01:11 +0200
-      Reference:                                             Deployment/hello-world
-      Metrics:                                               ( current / target )
-        resource memory on pods:                             8101888 / 100Mi
-        "cpu_system" on pods:                                8m / 20m
-        resource cpu on pods  (as a percentage of request):  0% (0) / 50%
-      Min replicas:                                          1
-      Max replicas:                                          10
-      Conditions:
-        Type            Status  Reason              Message
-        ----            ------  ------              -------
-        AbleToScale     True    SucceededRescale    the HPA controller was able to update the target scale to 1
-        ScalingActive   True    ValidMetricFound    the HPA was able to successfully calculate a replica count from memory resource
-        ScalingLimited  False   DesiredWithinRange  the desired count is within the acceptable range
-      Events:
-        Type    Reason             Age   From                       Message
-        ----    ------             ----  ----                       -------
-        Normal  SuccessfulRescale  10m    horizontal-pod-autoscaler  New size: 2; reason: cpu resource utilization (percentage of request) above target
-        Normal  SuccessfulRescale  8m    horizontal-pod-autoscaler  New size: 3; reason: pods metric cpu_system above target
-        Normal  SuccessfulRescale  5m    horizontal-pod-autoscaler  New size: 4; reason: cpu resource utilization (percentage of request) above target
-        Normal   SuccessfulRescale             13s               horizontal-pod-autoscaler  New size: 1; reason: All metrics below target
-  ```
+   ```
+   # kubectl get pods
+   ```
 
-1. Enter the following command to confirm a single pods is running.
+   您应该收到与以下类似的输出。
 
-  
+   ```
+   NAME                           READY     STATUS    RESTARTS   AGE
+   hello-world-54764dfbf8-2p9xb   1/1       Running   0          5m
+   hello-world-54764dfbf8-5pfdr   1/1       Running   0          2m
+   hello-world-54764dfbf8-m2hrl   1/1       Running   0          1s
+   hello-world-54764dfbf8-q6l82   1/1       Running   0          6h
+   ```
 
-``` 
-      # kubectl get pods
-  ```
+#### 缩容到 1 个 Pod: 全部指标低于目标值
 
-  You should receive output similar to what follows.
-  
+当所有指标均低于 `horizontal-pod-autoscaler-downscale-delay` 目标值时，请使用负载测试工具将其缩小到 1 个 Pod。
 
-``` 
-      NAME                           READY     STATUS    RESTARTS   AGE
-      hello-world-54764dfbf8-q6l82   1/1       Running   0          6h
-  ```
+1. 输入以下命令。
 
- /accordion 
-````
+   ```
+   # kubectl describe hpa
+   ```
 
+   您应该收到与以下类似的输出。
+
+   ```
+   Name:                                                  hello-world
+   Namespace:                                             default
+   Labels:                                                <none>
+   Annotations:                                           <none>
+   CreationTimestamp:                                     Tue, 24 Jul 2018 18:01:11 +0200
+   Reference:                                             Deployment/hello-world
+   Metrics:                                               ( current / target )
+     resource memory on pods:                             8101888 / 100Mi
+     "cpu_system" on pods:                                8m / 20m
+     resource cpu on pods  (as a percentage of request):  0% (0) / 50%
+   Min replicas:                                          1
+   Max replicas:                                          10
+   Conditions:
+     Type            Status  Reason              Message
+     ----            ------  ------              -------
+     AbleToScale     True    SucceededRescale    the HPA controller was able to update the target scale to 1
+     ScalingActive   True    ValidMetricFound    the HPA was able to successfully calculate a replica count from memory resource
+     ScalingLimited  False   DesiredWithinRange  the desired count is within the acceptable range
+   Events:
+     Type    Reason             Age   From                       Message
+     ----    ------             ----  ----                       -------
+     Normal  SuccessfulRescale  10m    horizontal-pod-autoscaler  New size: 2; reason: cpu resource utilization (percentage of request) above target
+     Normal  SuccessfulRescale  8m    horizontal-pod-autoscaler  New size: 3; reason: pods metric cpu_system above target
+     Normal  SuccessfulRescale  5m    horizontal-pod-autoscaler  New size: 4; reason: cpu resource utilization (percentage of request) above target
+     Normal   SuccessfulRescale             13s               horizontal-pod-autoscaler  New size: 1; reason: All metrics below target
+   ```
+
+1. 输入以下命令以确认单个 Pod 正在运行。
+
+   ```
+   # kubectl get pods
+   ```
+
+   您应该收到与以下类似的输出。
+
+   ```
+   NAME                           READY     STATUS    RESTARTS   AGE
+   hello-world-54764dfbf8-q6l82   1/1       Running   0          6h
+   ```
