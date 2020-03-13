@@ -2,7 +2,7 @@
 title: 产品架构
 ---
 
-本文主要介绍 Rancher Server 和它的组件，以及 Rancher 如何与下游用户集群沟通。请查阅[安装介绍](/docs/installation/_index/#overview-of-installation-options)获取 Rancher 的其他安装方式。请查阅 [产品简介](/docs/overview/_index#rancher-api-server-的功能)获取 Rancher API Server 的功能介绍。请查阅[推荐架构](/docs/overview/architecture-recommendations/_index)获取 Rancher Server 底层架构的配置指导。
+本文主要介绍 Rancher Server 和它的组件，以及 Rancher 如何与下游用户集群通信。请查阅[安装介绍](/docs/installation/_index/#overview-of-installation-options)获取 Rancher 的其他安装方式。请查阅 [产品简介](/docs/overview/_index#rancher-api-server-的功能)获取 Rancher API Server 的功能介绍。请查阅[推荐架构](/docs/overview/architecture-recommendations/_index)获取 Rancher Server 底层架构的配置指导。
 
 > 本文默认读者已经对 Docker 和 Kubernetes 有一定的了解。如果您需要了解 Kubernetes 组件的工作机制和原理，请查阅 [Kubernetes 概念](/docs/overview/concepts/_index)。
 
