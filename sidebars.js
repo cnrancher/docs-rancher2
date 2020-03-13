@@ -664,16 +664,28 @@ module.exports = {
     安全: [
       'security/_index',
       'security/security-scan/_index',
-      'security/hardening-2.3.5/_index',
-      'security/hardening-2.3.3/_index',
-      'security/hardening-2.3/_index',
-      'security/hardening-2.2/_index',
-      'security/hardening-2.1/_index',
-      'security/benchmark-2.3.5/_index',
-      'security/benchmark-2.3.3/_index',
-      'security/benchmark-2.3/_index',
-      'security/benchmark-2.2/_index',
-      'security/benchmark-2.1/_index'
+      {
+        type: 'category',
+        label: '安全加固指南',
+        items: [
+          'security/hardening-2.3.5/_index',
+          'security/hardening-2.3.3/_index',
+          'security/hardening-2.3/_index',
+          'security/hardening-2.2/_index',
+          'security/hardening-2.1/_index'
+        ]
+      },
+      {
+        type: 'category',
+        label: 'CIS自测指南',
+        items: [
+          'security/benchmark-2.3.5/_index',
+          'security/benchmark-2.3.3/_index',
+          'security/benchmark-2.3/_index',
+          'security/benchmark-2.2/_index',
+          'security/benchmark-2.1/_index'
+        ]
+      }
     ],
     常见问题: [
       'faq/_index',

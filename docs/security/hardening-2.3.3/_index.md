@@ -1,5 +1,5 @@
 ---
-title: 安全加固指南 - v2.3.5
+title: 安全加固指南 - v2.3.3
 ---
 
 This document provides prescriptive guidance for hardening a production installation of Rancher v2.3.3. It outlines the configurations and controls required to address Kubernetes benchmark controls from the Center for Information Security (CIS).
@@ -26,17 +26,17 @@ A profile is a set of configurations that provide a certain amount of hardening.
 
 Items in this profile intend to:
 
-* offer practical advice appropriate for the environment; 
-* deliver an obvious security benefit; and
-* not alter the functionality or utility of the environment beyond an acceptable margin
+- offer practical advice appropriate for the environment;
+- deliver an obvious security benefit; and
+- not alter the functionality or utility of the environment beyond an acceptable margin
 
 ##### Level 2
 
 Items in this profile extend the “Level 1” profile and exhibit one or more of the following characteristics:
 
-* are intended for use in environments or use cases where security is paramount
-* act as a defense in depth measure
-* may negatively impact the utility or performance of the technology
+- are intended for use in environments or use cases where security is paramount
+- act as a defense in depth measure
+- may negatively impact the utility or performance of the technology
 
 ---
 
@@ -48,7 +48,7 @@ Items in this profile extend the “Level 1” profile and exhibit one or more o
 
 **Profile Applicability**
 
-* Level 1
+- Level 1
 
 **Description**
 
@@ -60,51 +60,51 @@ We recommend that users launch the kubelet with the `--protect-kernel-defaults` 
 
 This supports the following control:
 
-* 2.1.7 - Ensure that the `--protect-kernel-defaults` argument is set to true (Scored)
+- 2.1.7 - Ensure that the `--protect-kernel-defaults` argument is set to true (Scored)
 
 **Audit**
 
-* Verify `vm.overcommit_memory = 1` 
+- Verify `vm.overcommit_memory = 1`
 
-``` bash
+```bash
 sysctl vm.overcommit_memory
 ```
 
-* Verify `vm.panic_on_oom = 0` 
+- Verify `vm.panic_on_oom = 0`
 
-``` bash
+```bash
 sysctl vm.panic_on_oom
 ```
 
-* Verify `kernel.panic = 10` 
+- Verify `kernel.panic = 10`
 
-``` bash
+```bash
 sysctl kernel.panic
 ```
 
-* Verify `kernel.panic_on_oops = 1` 
+- Verify `kernel.panic_on_oops = 1`
 
-``` bash
+```bash
 sysctl kernel.panic_on_oops
 ```
 
-* Verify `kernel.keys.root_maxkeys = 1000000` 
+- Verify `kernel.keys.root_maxkeys = 1000000`
 
-``` bash
+```bash
 sysctl kernel.keys.root_maxkeys
 ```
 
-* Verify `kernel.keys.root_maxbytes = 25000000` 
+- Verify `kernel.keys.root_maxbytes = 25000000`
 
-``` bash
+```bash
 sysctl kernel.keys.root_maxbytes
 ```
 
 **Remediation**
 
-* Set the following parameters in `/etc/sysctl.d/90-kubelet.conf` on all nodes:
+- Set the following parameters in `/etc/sysctl.d/90-kubelet.conf` on all nodes:
 
-``` plain
+```plain
 vm.overcommit_memory=1
 vm.panic_on_oom=0
 kernel.panic=10
@@ -113,13 +113,13 @@ kernel.keys.root_maxkeys=1000000
 kernel.keys.root_maxbytes=25000000
 ```
 
-* Run `sysctl -p /etc/sysctl.d/90-kubelet.conf` to enable the settings.
+- Run `sysctl -p /etc/sysctl.d/90-kubelet.conf` to enable the settings.
 
 #### 1.4.11 Ensure that the etcd data directory permissions are set to `700` or more restrictive
 
 **Profile Applicability**
 
-* Level 1
+- Level 1
 
 **Description**
 
@@ -131,16 +131,16 @@ etcd is a highly-available key-value store used by Kubernetes deployments for pe
 
 **Audit**
 
-On the etcd server node, get the etcd data directory, passed as an argument `--data-dir` , 
+On the etcd server node, get the etcd data directory, passed as an argument `--data-dir` ,
 from the below command:
 
-``` bash
+```bash
 ps -ef | grep etcd
 ```
 
-Run the below command (based on the etcd data directory found above). For example, 
+Run the below command (based on the etcd data directory found above). For example,
 
-``` bash
+```bash
 stat -c %a /var/lib/etcd
 ```
 
@@ -150,11 +150,11 @@ Verify that the permissions are `700` or more restrictive.
 
 Follow the steps as documented in [1.4.12](/docs/security/hardening-2.3.3/#1-4-12-ensure-that-the-etcd-data-directory-ownership-is-set-to-etcd-etcd) remediation.
 
-#### 1.4.12 - Ensure that the etcd data directory ownership is set to `etcd:etcd` 
+#### 1.4.12 - Ensure that the etcd data directory ownership is set to `etcd:etcd`
 
 **Profile Applicability**
 
-* Level 1
+- Level 1
 
 **Description**
 
@@ -168,13 +168,13 @@ etcd is a highly-available key-value store used by Kubernetes deployments for pe
 
 On a etcd server node, get the etcd data directory, passed as an argument `--data-dir` , from the below command:
 
-``` bash
+```bash
 ps -ef | grep etcd
 ```
 
-Run the below command (based on the etcd data directory found above). For example, 
+Run the below command (based on the etcd data directory found above). For example,
 
-``` bash
+```bash
 stat -c %U:%G /var/lib/etcd
 ```
 
@@ -182,21 +182,21 @@ Verify that the ownership is set to `etcd:etcd` .
 
 **Remediation**
 
-* On the etcd server node(s) add the `etcd` user:
+- On the etcd server node(s) add the `etcd` user:
 
-``` bash
+```bash
 useradd -c "Etcd user" -d /var/lib/etcd etcd
 ```
 
 Record the uid/gid:
 
-``` bash
+```bash
 id etcd
 ```
 
-* Add the following to the RKE `cluster.yml` etcd section under `services` :
+- Add the following to the RKE `cluster.yml` etcd section under `services` :
 
-``` yaml
+```yaml
 services:
   etcd:
     uid: <etcd user uid recorded previously>
@@ -211,7 +211,7 @@ services:
 
 **Profile Applicability**
 
-* Level 1
+- Level 1
 
 **Description**
 
@@ -221,33 +221,33 @@ Ensure Kubelet options are configured to match CIS controls.
 
 To pass the following controls in the CIS benchmark, ensure the appropriate flags are passed to the Kubelet.
 
-* 2.1.1 - Ensure that the `--anonymous-auth` argument is set to false (Scored)
-* 2.1.2 - Ensure that the `--authorization-mode` argument is not set to `AlwaysAllow` (Scored)
-* 2.1.6 - Ensure that the `--streaming-connection-idle-timeout` argument is not set to 0 (Scored)
-* 2.1.7 - Ensure that the `--protect-kernel-defaults` argument is set to true (Scored)
-* 2.1.8 - Ensure that the `--make-iptables-util-chains` argument is set to true (Scored)
-* 2.1.10 - Ensure that the `--event-qps` argument is set to 0 (Scored)
-* 2.1.13 - Ensure that the `RotateKubeletServerCertificate` argument is set to true (Scored)
-* 2.1.14 - Ensure that the Kubelet only makes use of Strong Cryptographic Ciphers (Not Scored)
+- 2.1.1 - Ensure that the `--anonymous-auth` argument is set to false (Scored)
+- 2.1.2 - Ensure that the `--authorization-mode` argument is not set to `AlwaysAllow` (Scored)
+- 2.1.6 - Ensure that the `--streaming-connection-idle-timeout` argument is not set to 0 (Scored)
+- 2.1.7 - Ensure that the `--protect-kernel-defaults` argument is set to true (Scored)
+- 2.1.8 - Ensure that the `--make-iptables-util-chains` argument is set to true (Scored)
+- 2.1.10 - Ensure that the `--event-qps` argument is set to 0 (Scored)
+- 2.1.13 - Ensure that the `RotateKubeletServerCertificate` argument is set to true (Scored)
+- 2.1.14 - Ensure that the Kubelet only makes use of Strong Cryptographic Ciphers (Not Scored)
 
 **Audit**
 
 Inspect the Kubelet containers on all hosts and verify that they are running with the following options:
 
-* `--streaming-connection-idle-timeout=<duration greater than 0>` 
-* `--authorization-mode=Webhook` 
-* `--protect-kernel-defaults=true` 
-* `--make-iptables-util-chains=true` 
-* `--event-qps=0` 
-* `--anonymous-auth=false` 
-* `--feature-gates="RotateKubeletServerCertificate=true"` 
-* `--tls-cipher-suites="TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256"` 
+- `--streaming-connection-idle-timeout=<duration greater than 0>`
+- `--authorization-mode=Webhook`
+- `--protect-kernel-defaults=true`
+- `--make-iptables-util-chains=true`
+- `--event-qps=0`
+- `--anonymous-auth=false`
+- `--feature-gates="RotateKubeletServerCertificate=true"`
+- `--tls-cipher-suites="TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256"`
 
 **Remediation**
 
-* Add the following to the RKE `cluster.yml` kubelet section under `services` :
+- Add the following to the RKE `cluster.yml` kubelet section under `services` :
 
-``` yaml
+```yaml
 services:
   kubelet:
     generate_serving_certificate: true
@@ -259,9 +259,9 @@ services:
 
 Where `<duration>` is in a form like `1800s` .
 
-* Reconfigure the cluster:
+- Reconfigure the cluster:
 
-``` bash
+```bash
 rke up --config cluster.yml
 ```
 
@@ -269,7 +269,7 @@ rke up --config cluster.yml
 
 **Profile Applicability**
 
-* Level 1
+- Level 1
 
 **Description**
 
@@ -284,36 +284,34 @@ Enabling the `DenyEscalatingExec` admission control plugin will prevent the 'Lau
 
 To pass the following controls for the kube-api server ensure RKE configuration passes the appropriate options.
 
-* 1.1.1 - Ensure that the `--anonymous-auth` argument is set to false (Scored)
-* 1.1.8 - Ensure that the `--profiling` argument is set to false (Scored)
-* 1.1.11 - Ensure that the admission control plugin `AlwaysPullImages` is set (Scored)
-* 1.1.12 - Ensure that the admission control plugin `DenyEscalatingExec` is set (Scored)
-* 1.1.14 - Ensure that the admission control plugin `NamespaceLifecycle` is set (Scored)
-* 1.1.15 - Ensure that the `--audit-log-path` argument is set as appropriate (Scored)
-* 1.1.16 - Ensure that the `--audit-log-maxage` argument is set as appropriate (Scored)
-* 1.1.17 - Ensure that the `--audit-log-maxbackup` argument is set as appropriate (Scored)
-* 1.1.18 - Ensure that the `--audit-log-maxsize` argument is set as appropriate (Scored)
-* 1.1.23 - Ensure that the `--service-account-lookup` argument is set to true (Scored)
-* 1.1.24 - Ensure that the admission control plugin `PodSecurityPolicy` is set (Scored)
-* 1.1.30 Ensure that the API Server only makes use of Strong Cryptographic Ciphers (Not Scored)
-* 1.1.34 - Ensure that the `--encryption-provider-config` argument is set as appropriate (Scored)
-* 1.1.35 - Ensure that the encryption provider is set to `aescbc` (Scored)
-* 1.1.36 - Ensure that the admission control plugin `EventRateLimit` is set (Scored)
-* 1.1.37 - Ensure that the `AdvancedAuditing` argument is not set to `false` (Scored)
+- 1.1.1 - Ensure that the `--anonymous-auth` argument is set to false (Scored)
+- 1.1.8 - Ensure that the `--profiling` argument is set to false (Scored)
+- 1.1.11 - Ensure that the admission control plugin `AlwaysPullImages` is set (Scored)
+- 1.1.12 - Ensure that the admission control plugin `DenyEscalatingExec` is set (Scored)
+- 1.1.14 - Ensure that the admission control plugin `NamespaceLifecycle` is set (Scored)
+- 1.1.15 - Ensure that the `--audit-log-path` argument is set as appropriate (Scored)
+- 1.1.16 - Ensure that the `--audit-log-maxage` argument is set as appropriate (Scored)
+- 1.1.17 - Ensure that the `--audit-log-maxbackup` argument is set as appropriate (Scored)
+- 1.1.18 - Ensure that the `--audit-log-maxsize` argument is set as appropriate (Scored)
+- 1.1.23 - Ensure that the `--service-account-lookup` argument is set to true (Scored)
+- 1.1.24 - Ensure that the admission control plugin `PodSecurityPolicy` is set (Scored)
+- 1.1.30 Ensure that the API Server only makes use of Strong Cryptographic Ciphers (Not Scored)
+- 1.1.34 - Ensure that the `--encryption-provider-config` argument is set as appropriate (Scored)
+- 1.1.35 - Ensure that the encryption provider is set to `aescbc` (Scored)
+- 1.1.36 - Ensure that the admission control plugin `EventRateLimit` is set (Scored)
+- 1.1.37 - Ensure that the `AdvancedAuditing` argument is not set to `false` (Scored)
 
 **Audit**
 
-* On nodes with the `controlplane` role inspect the `kube-apiserver` containers:
+- On nodes with the `controlplane` role inspect the `kube-apiserver` containers:
 
-  
-
-``` bash
+```bash
   docker inspect kube-apiserver
-  ```
+```
 
-* Look for the following options in the command section of the output:
+- Look for the following options in the command section of the output:
 
-``` text
+```text
 --anonymous-auth=false
 --profiling=false
 --service-account-lookup=true
@@ -329,17 +327,17 @@ To pass the following controls for the kube-api server ensure RKE configuration 
 --tls-cipher-suites=TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256
 ```
 
-* In the `volume` section of the output ensure the bind mount is present:
+- In the `volume` section of the output ensure the bind mount is present:
 
-``` text
+```text
 /var/log/kube-audit:/var/log/kube-audit
 ```
 
 **Remediation**
 
-* In the RKE `cluster.yml` add the following directives to the `kube-api` section under `services` :
+- In the RKE `cluster.yml` add the following directives to the `kube-api` section under `services` :
 
-``` yaml
+```yaml
 services:
   kube_api:
     always_pull_images: true
@@ -358,20 +356,18 @@ services:
       service-account-lookup: 'true'
       tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
     extra_binds:
-
       - '/opt/kubernetes:/opt/kubernetes'
-
 ```
 
 For k8s 1.14 `enable-admission-plugins` should be
 
-``` yaml
+```yaml
 enable-admission-plugins: 'ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,PodSecurityPolicy,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,Priority,EventRateLimit'
 ```
 
-* Reconfigure the cluster:
+- Reconfigure the cluster:
 
-``` bash
+```bash
 rke up --config cluster.yml
 ```
 
@@ -383,7 +379,7 @@ Files that are placed in `/opt/kubernetes` need to be mounted in using the `extr
 
 **Profile Applicability**
 
-* Level 1
+- Level 1
 
 **Description**
 
@@ -395,29 +391,29 @@ Set the appropriate options for the Kubernetes scheduling service.
 
 To address the following controls on the CIS benchmark, the command line options should be set on the Kubernetes scheduler.
 
-* 1.2.1 - Ensure that the `--profiling` argument is set to `false` (Scored)
-* 1.2.2 - Ensure that the `--address` argument is set to `127.0.0.1` (Scored)
+- 1.2.1 - Ensure that the `--profiling` argument is set to `false` (Scored)
+- 1.2.2 - Ensure that the `--address` argument is set to `127.0.0.1` (Scored)
 
 **Audit**
 
-* On nodes with the `controlplane` role: inspect the `kube-scheduler` containers:
+- On nodes with the `controlplane` role: inspect the `kube-scheduler` containers:
 
-``` bash
+```bash
 docker inspect kube-scheduler
 ```
 
-* Verify the following options are set in the `command` section.
+- Verify the following options are set in the `command` section.
 
-``` text
+```text
 --profiling=false
 --address=127.0.0.1
 ```
 
 **Remediation**
 
-* In the RKE `cluster.yml` file ensure the following options are set:
+- In the RKE `cluster.yml` file ensure the following options are set:
 
-``` yaml
+```yaml
 services:
   scheduler:
     extra_args:
@@ -425,9 +421,9 @@ services:
       address: '127.0.0.1'
 ```
 
-* Reconfigure the cluster:
+- Reconfigure the cluster:
 
-``` bash
+```bash
 rke up --config cluster.yml
 ```
 
@@ -435,7 +431,7 @@ rke up --config cluster.yml
 
 **Profile Applicability**
 
-* Level 1
+- Level 1
 
 **Description**
 
@@ -447,22 +443,22 @@ Set the appropriate arguments on the Kubernetes controller manager.
 
 To address the following controls the options need to be passed to the Kubernetes controller manager.
 
-* 1.3.1 - Ensure that the `--terminated-pod-gc-threshold` argument is set as appropriate (Scored)
-* 1.3.2 - Ensure that the `--profiling` argument is set to false (Scored)
-* 1.3.6 Ensure that the RotateKubeletServerCertificate argument is set to true (Scored)
-* 1.3.7 - Ensure that the `--address` argument is set to 127.0.0.1 (Scored)
+- 1.3.1 - Ensure that the `--terminated-pod-gc-threshold` argument is set as appropriate (Scored)
+- 1.3.2 - Ensure that the `--profiling` argument is set to false (Scored)
+- 1.3.6 Ensure that the RotateKubeletServerCertificate argument is set to true (Scored)
+- 1.3.7 - Ensure that the `--address` argument is set to 127.0.0.1 (Scored)
 
 **Audit**
 
-* On nodes with the `controlplane` role inspect the `kube-controller-manager` container:
+- On nodes with the `controlplane` role inspect the `kube-controller-manager` container:
 
-``` bash
+```bash
 docker inspect kube-controller-manager
 ```
 
-* Verify the following options are set in the `command` section:
+- Verify the following options are set in the `command` section:
 
-``` text
+```text
 --terminated-pod-gc-threshold=1000
 --profiling=false
 --address=127.0.0.1
@@ -471,9 +467,9 @@ docker inspect kube-controller-manager
 
 **Remediation**
 
-* In the RKE `cluster.yml` file ensure the following options are set:
+- In the RKE `cluster.yml` file ensure the following options are set:
 
-``` yaml
+```yaml
 services:
   kube-controller:
     extra_args:
@@ -483,9 +479,9 @@ services:
       feature-gates: 'RotateKubeletServerCertificate=true'
 ```
 
-* Reconfigure the cluster:
+- Reconfigure the cluster:
 
-``` bash
+```bash
 rke up --config cluster.yml
 ```
 
@@ -493,7 +489,7 @@ rke up --config cluster.yml
 
 **Profile Applicability**
 
-* Level 1
+- Level 1
 
 **Description**
 
@@ -503,49 +499,49 @@ Configure a restrictive pod security policy (PSP) as the default and create role
 
 To address the following controls, a restrictive default PSP needs to be applied as the default. Role bindings need to be in place to allow system services to still function.
 
-* 1.7.1 - Do not admit privileged containers (Not Scored)
-* 1.7.2 - Do not admit containers wishing to share the host process ID namespace (Not Scored)
-* 1.7.3 - Do not admit containers wishing to share the host IPC namespace (Not Scored)
-* 1.7.4 - Do not admit containers wishing to share the host network namespace (Not Scored)
-* 1.7.5 - Do not admit containers with `allowPrivilegeEscalation` (Not Scored)
-* 1.7.6 - Do not admit root containers (Not Scored)
-* 1.7.7 - Do not admit containers with dangerous capabilities (Not Scored)
+- 1.7.1 - Do not admit privileged containers (Not Scored)
+- 1.7.2 - Do not admit containers wishing to share the host process ID namespace (Not Scored)
+- 1.7.3 - Do not admit containers wishing to share the host IPC namespace (Not Scored)
+- 1.7.4 - Do not admit containers wishing to share the host network namespace (Not Scored)
+- 1.7.5 - Do not admit containers with `allowPrivilegeEscalation` (Not Scored)
+- 1.7.6 - Do not admit root containers (Not Scored)
+- 1.7.7 - Do not admit containers with dangerous capabilities (Not Scored)
 
 **Audit**
 
-* Verify that the `cattle-system` namespace exists:
+- Verify that the `cattle-system` namespace exists:
 
-``` bash
+```bash
 kubectl get ns |grep cattle
 ```
 
-* Verify that the roles exist:
+- Verify that the roles exist:
 
-``` bash
+```bash
 kubectl get role default-psp-role -n ingress-nginx
 kubectl get role default-psp-role -n cattle-system
 kubectl get clusterrole restricted-clusterrole
 ```
 
-* Verify the bindings are set correctly:
+- Verify the bindings are set correctly:
 
-``` bash
+```bash
 kubectl get rolebinding -n ingress-nginx default-psp-rolebinding
 kubectl get rolebinding -n cattle-system default-psp-rolebinding
 kubectl get clusterrolebinding restricted-clusterrolebinding
 ```
 
-* Verify the restricted PSP is present.
+- Verify the restricted PSP is present.
 
-``` bash
+```bash
 kubectl get psp restricted-psp
 ```
 
 **Remediation**
 
-* In the RKE `cluster.yml` file ensure the following options are set:
+- In the RKE `cluster.yml` file ensure the following options are set:
 
-``` yaml
+```yaml
 addons: |
   apiVersion: rbac.authorization.k8s.io/v1
   kind: Role
@@ -713,9 +709,9 @@ addons: |
     name: system:authenticated
 ```
 
-* Reconfigure the cluster:
+- Reconfigure the cluster:
 
-``` bash
+```bash
 rke up --config cluster.yml
 ```
 
@@ -725,7 +721,7 @@ rke up --config cluster.yml
 
 **Profile Applicability**
 
-* Level 2
+- Level 2
 
 **Description**
 
@@ -739,19 +735,19 @@ Having access to the local cluster from the Rancher UI is convenient for trouble
 
 **Audit**
 
-* Verify the Rancher deployment has the `--add-local=false` option set.
+- Verify the Rancher deployment has the `--add-local=false` option set.
 
-``` bash
+```bash
 kubectl get deployment rancher -n cattle-system -o yaml |grep 'add-local'
 ```
 
-* In the Rancher UI go to _Clusters_ in the _Global_ view and verify that no `local` cluster is present.
+- In the Rancher UI go to _Clusters_ in the _Global_ view and verify that no `local` cluster is present.
 
 **Remediation**
 
-* While upgrading or installing Rancher 2.3.3 or above, provide the following flag:
+- While upgrading or installing Rancher 2.3.3 or above, provide the following flag:
 
-``` text
+```text
 --set addLocal="false"
 ```
 
@@ -759,7 +755,7 @@ kubectl get deployment rancher -n cattle-system -o yaml |grep 'add-local'
 
 **Profile Applicability**
 
-* Level 1
+- Level 1
 
 **Description**
 
@@ -771,35 +767,33 @@ Tracking down what actions were performed by users in Rancher can provide insigh
 
 **Audit**
 
-* Verify that the audit log parameters were passed into the Rancher deployment.
+- Verify that the audit log parameters were passed into the Rancher deployment.
 
-``` 
+```
 kubectl get deployment rancher -n cattle-system -o yaml | grep auditLog
 ```
 
-* Verify that the log is going to the appropriate destination, as set by
+- Verify that the log is going to the appropriate destination, as set by
 
-`auditLog.destination` 
+`auditLog.destination`
 
-  + `sidecar` :
+- `sidecar` :
 
-    1. List pods:
+  1. List pods:
 
-       
-
-``` bash
+````bash
        kubectl get pods -n cattle-system
        ```
 
     2. Tail logs:
 
-       
+
 
 ``` bash
        kubectl logs <pod> -n cattle-system -c rancher-audit-log
        ```
 
-  + `hostPath` 
+  + `hostPath`
 
     1. On the worker nodes running the Rancher pods, verify that the log files are being written to the destination indicated in `auditlog.hostPath` .
 
@@ -897,7 +891,7 @@ curl -sk -u 'token-<id>:<secret>' $i| jq '.data[] | "\(.userId) \(.globalRoleId)
 
 done
 
-```
+````
 
 The `admin` role should only be assigned to users that require administrative privileges. Any role that is not `admin` or `user` should be audited in the RBAC section of the UI to ensure that the privileges adhere to policies for global access.
 
@@ -913,7 +907,7 @@ Remove the `admin` role from any user that does not require administrative privi
 
 **Profile Applicability**
 
-* Level 1
+- Level 1
 
 **Description**
 
@@ -925,9 +919,9 @@ Node drivers are used to provision compute nodes in various cloud providers and 
 
 **Audit**
 
-* In the Rancher UI select _Global_
-* Select _Node Drivers_
-* Review the list of node drivers that are in an _Active_ state.
+- In the Rancher UI select _Global_
+- Select _Node Drivers_
+- Review the list of node drivers that are in an _Active_ state.
 
 **Remediation**
 
@@ -941,7 +935,7 @@ If a disallowed node driver is active, visit the _Node Drivers_ page under _Glob
 
 **Profile Applicability**
 
-* Level 1
+- Level 1
 
 **Description**
 
@@ -951,33 +945,33 @@ Ensure Kubelet options are configured to match CIS controls.
 
 To pass the following controls in the CIS benchmark, ensure the appropriate flags are passed to the Kubelet.
 
-* 2.1.1 - Ensure that the `--anonymous-auth` argument is set to false (Scored)
-* 2.1.2 - Ensure that the `--authorization-mode` argument is not set to `AlwaysAllow` (Scored)
-* 2.1.6 - Ensure that the `--streaming-connection-idle-timeout` argument is not set to 0 (Scored)
-* 2.1.7 - Ensure that the `--protect-kernel-defaults` argument is set to true (Scored)
-* 2.1.8 - Ensure that the `--make-iptables-util-chains` argument is set to true (Scored)
-* 2.1.10 - Ensure that the `--event-qps` argument is set to 0 (Scored)
-* 2.1.13 - Ensure that the `RotateKubeletServerCertificate` argument is set to true (Scored)
-* 2.1.14 - Ensure that the Kubelet only makes use of Strong Cryptographic Ciphers (Not Scored)
+- 2.1.1 - Ensure that the `--anonymous-auth` argument is set to false (Scored)
+- 2.1.2 - Ensure that the `--authorization-mode` argument is not set to `AlwaysAllow` (Scored)
+- 2.1.6 - Ensure that the `--streaming-connection-idle-timeout` argument is not set to 0 (Scored)
+- 2.1.7 - Ensure that the `--protect-kernel-defaults` argument is set to true (Scored)
+- 2.1.8 - Ensure that the `--make-iptables-util-chains` argument is set to true (Scored)
+- 2.1.10 - Ensure that the `--event-qps` argument is set to 0 (Scored)
+- 2.1.13 - Ensure that the `RotateKubeletServerCertificate` argument is set to true (Scored)
+- 2.1.14 - Ensure that the Kubelet only makes use of Strong Cryptographic Ciphers (Not Scored)
 
 **Audit**
 
 Inspect the Kubelet containers on all hosts and verify that they are running with the following options:
 
-* `--streaming-connection-idle-timeout=<duration greater than 0>` 
-* `--authorization-mode=Webhook` 
-* `--protect-kernel-defaults=true` 
-* `--make-iptables-util-chains=true` 
-* `--event-qps=0` 
-* `--anonymous-auth=false` 
-* `--feature-gates="RotateKubeletServerCertificate=true"` 
-* `--tls-cipher-suites="TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256"` 
+- `--streaming-connection-idle-timeout=<duration greater than 0>`
+- `--authorization-mode=Webhook`
+- `--protect-kernel-defaults=true`
+- `--make-iptables-util-chains=true`
+- `--event-qps=0`
+- `--anonymous-auth=false`
+- `--feature-gates="RotateKubeletServerCertificate=true"`
+- `--tls-cipher-suites="TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256"`
 
 **Remediation**
 
-* Add the following to the RKE `cluster.yml` kubelet section under `services` :
+- Add the following to the RKE `cluster.yml` kubelet section under `services` :
 
-``` yaml
+```yaml
 services:
   kubelet:
     generate_serving_certificate: true
@@ -989,9 +983,9 @@ services:
 
 Where `<duration>` is in a form like `1800s` .
 
-* Reconfigure the cluster:
+- Reconfigure the cluster:
 
-``` bash
+```bash
 rke up --config cluster.yml
 ```
 
@@ -999,7 +993,7 @@ rke up --config cluster.yml
 
 **Profile Applicability**
 
-* Level 1
+- Level 1
 
 **Description**
 
@@ -1014,36 +1008,34 @@ Enabling the `DenyEscalatingExec` admission control plugin will prevent the 'Lau
 
 To pass the following controls for the kube-api server ensure RKE configuration passes the appropriate options.
 
-* 1.1.1 - Ensure that the `--anonymous-auth` argument is set to false (Scored)
-* 1.1.8 - Ensure that the `--profiling` argument is set to false (Scored)
-* 1.1.11 - Ensure that the admission control plugin `AlwaysPullImages` is set (Scored)
-* 1.1.12 - Ensure that the admission control plugin `DenyEscalatingExec` is set (Scored)
-* 1.1.14 - Ensure that the admission control plugin `NamespaceLifecycle` is set (Scored)
-* 1.1.15 - Ensure that the `--audit-log-path` argument is set as appropriate (Scored)
-* 1.1.16 - Ensure that the `--audit-log-maxage` argument is set as appropriate (Scored)
-* 1.1.17 - Ensure that the `--audit-log-maxbackup` argument is set as appropriate (Scored)
-* 1.1.18 - Ensure that the `--audit-log-maxsize` argument is set as appropriate (Scored)
-* 1.1.23 - Ensure that the `--service-account-lookup` argument is set to true (Scored)
-* 1.1.24 - Ensure that the admission control plugin `PodSecurityPolicy` is set (Scored)
-* 1.1.30 Ensure that the API Server only makes use of Strong Cryptographic Ciphers (Not Scored)
-* 1.1.34 - Ensure that the `--encryption-provider-config` argument is set as appropriate (Scored)
-* 1.1.35 - Ensure that the encryption provider is set to `aescbc` (Scored)
-* 1.1.36 - Ensure that the admission control plugin `EventRateLimit` is set (Scored)
-* 1.1.37 - Ensure that the `AdvancedAuditing` argument is not set to `false` (Scored)
+- 1.1.1 - Ensure that the `--anonymous-auth` argument is set to false (Scored)
+- 1.1.8 - Ensure that the `--profiling` argument is set to false (Scored)
+- 1.1.11 - Ensure that the admission control plugin `AlwaysPullImages` is set (Scored)
+- 1.1.12 - Ensure that the admission control plugin `DenyEscalatingExec` is set (Scored)
+- 1.1.14 - Ensure that the admission control plugin `NamespaceLifecycle` is set (Scored)
+- 1.1.15 - Ensure that the `--audit-log-path` argument is set as appropriate (Scored)
+- 1.1.16 - Ensure that the `--audit-log-maxage` argument is set as appropriate (Scored)
+- 1.1.17 - Ensure that the `--audit-log-maxbackup` argument is set as appropriate (Scored)
+- 1.1.18 - Ensure that the `--audit-log-maxsize` argument is set as appropriate (Scored)
+- 1.1.23 - Ensure that the `--service-account-lookup` argument is set to true (Scored)
+- 1.1.24 - Ensure that the admission control plugin `PodSecurityPolicy` is set (Scored)
+- 1.1.30 Ensure that the API Server only makes use of Strong Cryptographic Ciphers (Not Scored)
+- 1.1.34 - Ensure that the `--encryption-provider-config` argument is set as appropriate (Scored)
+- 1.1.35 - Ensure that the encryption provider is set to `aescbc` (Scored)
+- 1.1.36 - Ensure that the admission control plugin `EventRateLimit` is set (Scored)
+- 1.1.37 - Ensure that the `AdvancedAuditing` argument is not set to `false` (Scored)
 
 **Audit**
 
-* On nodes with the `controlplane` role inspect the `kube-apiserver` containers:
+- On nodes with the `controlplane` role inspect the `kube-apiserver` containers:
 
-  
-
-``` bash
+```bash
   docker inspect kube-apiserver
-  ```
+```
 
-* Look for the following options in the command section of the output:
+- Look for the following options in the command section of the output:
 
-``` text
+```text
 --anonymous-auth=false
 --profiling=false
 --service-account-lookup=true
@@ -1059,17 +1051,17 @@ To pass the following controls for the kube-api server ensure RKE configuration 
 --tls-cipher-suites=TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256
 ```
 
-* In the `volume` section of the output ensure the bind mount is present:
+- In the `volume` section of the output ensure the bind mount is present:
 
-``` text
+```text
 /var/log/kube-audit:/var/log/kube-audit
 ```
 
 **Remediation**
 
-* In the RKE `cluster.yml` add the following directives to the `kube-api` section under `services` :
+- In the RKE `cluster.yml` add the following directives to the `kube-api` section under `services` :
 
-``` yaml
+```yaml
 services:
   kube_api:
     always_pull_images: true
@@ -1088,20 +1080,18 @@ services:
       service-account-lookup: 'true'
       tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
     extra_binds:
-
       - '/opt/kubernetes:/opt/kubernetes'
-
 ```
 
 For k8s 1.14 `enable-admission-plugins` should be
 
-``` yaml
+```yaml
 enable-admission-plugins: 'ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,PodSecurityPolicy,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,Priority,EventRateLimit'
 ```
 
-* Reconfigure the cluster:
+- Reconfigure the cluster:
 
-``` bash
+```bash
 rke up --config cluster.yml
 ```
 
@@ -1113,7 +1103,7 @@ Files that are placed in `/opt/kubernetes` need to be mounted in using the `extr
 
 **Profile Applicability**
 
-* Level 1
+- Level 1
 
 **Description**
 
@@ -1125,29 +1115,29 @@ Set the appropriate options for the Kubernetes scheduling service.
 
 To address the following controls on the CIS benchmark, the command line options should be set on the Kubernetes scheduler.
 
-* 1.2.1 - Ensure that the `--profiling` argument is set to `false` (Scored)
-* 1.2.2 - Ensure that the `--address` argument is set to `127.0.0.1` (Scored)
+- 1.2.1 - Ensure that the `--profiling` argument is set to `false` (Scored)
+- 1.2.2 - Ensure that the `--address` argument is set to `127.0.0.1` (Scored)
 
 **Audit**
 
-* On nodes with the `controlplane` role: inspect the `kube-scheduler` containers:
+- On nodes with the `controlplane` role: inspect the `kube-scheduler` containers:
 
-``` bash
+```bash
 docker inspect kube-scheduler
 ```
 
-* Verify the following options are set in the `command` section.
+- Verify the following options are set in the `command` section.
 
-``` text
+```text
 --profiling=false
 --address=127.0.0.1
 ```
 
 **Remediation**
 
-* In the RKE `cluster.yml` file ensure the following options are set:
+- In the RKE `cluster.yml` file ensure the following options are set:
 
-``` yaml
+```yaml
 services:
   scheduler:
     extra_args:
@@ -1155,9 +1145,9 @@ services:
       address: '127.0.0.1'
 ```
 
-* Reconfigure the cluster:
+- Reconfigure the cluster:
 
-``` bash
+```bash
 rke up --config cluster.yml
 ```
 
@@ -1165,7 +1155,7 @@ rke up --config cluster.yml
 
 **Profile Applicability**
 
-* Level 1
+- Level 1
 
 **Description**
 
@@ -1177,22 +1167,22 @@ Set the appropriate arguments on the Kubernetes controller manager.
 
 To address the following controls the options need to be passed to the Kubernetes controller manager.
 
-* 1.3.1 - Ensure that the `--terminated-pod-gc-threshold` argument is set as appropriate (Scored)
-* 1.3.2 - Ensure that the `--profiling` argument is set to false (Scored)
-* 1.3.6 Ensure that the RotateKubeletServerCertificate argument is set to true (Scored)
-* 1.3.7 - Ensure that the `--address` argument is set to 127.0.0.1 (Scored)
+- 1.3.1 - Ensure that the `--terminated-pod-gc-threshold` argument is set as appropriate (Scored)
+- 1.3.2 - Ensure that the `--profiling` argument is set to false (Scored)
+- 1.3.6 Ensure that the RotateKubeletServerCertificate argument is set to true (Scored)
+- 1.3.7 - Ensure that the `--address` argument is set to 127.0.0.1 (Scored)
 
 **Audit**
 
-* On nodes with the `controlplane` role inspect the `kube-controller-manager` container:
+- On nodes with the `controlplane` role inspect the `kube-controller-manager` container:
 
-``` bash
+```bash
 docker inspect kube-controller-manager
 ```
 
-* Verify the following options are set in the `command` section:
+- Verify the following options are set in the `command` section:
 
-``` text
+```text
 --terminated-pod-gc-threshold=1000
 --profiling=false
 --address=127.0.0.1
@@ -1201,9 +1191,9 @@ docker inspect kube-controller-manager
 
 **Remediation**
 
-* In the RKE `cluster.yml` file ensure the following options are set:
+- In the RKE `cluster.yml` file ensure the following options are set:
 
-``` yaml
+```yaml
 services:
   kube-controller:
     extra_args:
@@ -1213,9 +1203,9 @@ services:
       feature-gates: 'RotateKubeletServerCertificate=true'
 ```
 
-* Reconfigure the cluster:
+- Reconfigure the cluster:
 
-``` bash
+```bash
 rke up --config cluster.yml
 ```
 
@@ -1223,7 +1213,7 @@ rke up --config cluster.yml
 
 **Profile Applicability**
 
-* Level 1
+- Level 1
 
 **Description**
 
@@ -1233,40 +1223,40 @@ Configure a restrictive pod security policy (PSP) as the default and create role
 
 To address the following controls, a restrictive default PSP needs to be applied as the default. Role bindings need to be in place to allow system services to still function.
 
-* 1.7.1 - Do not admit privileged containers (Not Scored)
-* 1.7.2 - Do not admit containers wishing to share the host process ID namespace (Not Scored)
-* 1.7.3 - Do not admit containers wishing to share the host IPC namespace (Not Scored)
-* 1.7.4 - Do not admit containers wishing to share the host network namespace (Not Scored)
-* 1.7.5 - Do not admit containers with `allowPrivilegeEscalation` (Not Scored)
-* 1.7.6 - Do not admit root containers (Not Scored)
-* 1.7.7 - Do not admit containers with dangerous capabilities (Not Scored)
+- 1.7.1 - Do not admit privileged containers (Not Scored)
+- 1.7.2 - Do not admit containers wishing to share the host process ID namespace (Not Scored)
+- 1.7.3 - Do not admit containers wishing to share the host IPC namespace (Not Scored)
+- 1.7.4 - Do not admit containers wishing to share the host network namespace (Not Scored)
+- 1.7.5 - Do not admit containers with `allowPrivilegeEscalation` (Not Scored)
+- 1.7.6 - Do not admit root containers (Not Scored)
+- 1.7.7 - Do not admit containers with dangerous capabilities (Not Scored)
 
 **Audit**
 
-* Verify that the `cattle-system` namespace exists:
+- Verify that the `cattle-system` namespace exists:
 
-``` bash
+```bash
 kubectl get ns |grep cattle
 ```
 
-* Verify that the roles exist:
+- Verify that the roles exist:
 
-``` bash
+```bash
 kubectl get role default-psp-role -n ingress-nginx
 kubectl get role default-psp-role -n cattle-system
 kubectl get clusterrole restricted-clusterrole
 ```
 
-* Verify the bindings are set correctly:
+- Verify the bindings are set correctly:
 
-``` bash
+```bash
 kubectl get rolebinding -n ingress-nginx default-psp-rolebinding
 kubectl get rolebinding -n cattle-system default-psp-rolebinding
 ```
 
-* Verify the restricted PSP is present.
+- Verify the restricted PSP is present.
 
-``` bash
+```bash
 kubectl get psp restricted-psp
 ```
 
@@ -1276,7 +1266,7 @@ kubectl get psp restricted-psp
 
 `cloud-config` file to automate hardening manual steps on nodes deployment.
 
-``` 
+```
 #cloud-config
 bootcmd:
 
@@ -1338,9 +1328,9 @@ runcmd:
 
 Before apply, replace `rancher_kubernetes_engine_config.services.etcd.gid` and `rancher_kubernetes_engine_config.services.etcd.uid` with the proper etcd group and user ids that were created on etcd nodes.
 
- accordion id="cluster-1.14" label="RKE yaml for k8s 1.14" 
+accordion id="cluster-1.14" label="RKE yaml for k8s 1.14"
 
-``` yaml
+```yaml
 nodes:
 
   + address: 18.191.190.205
@@ -1372,7 +1362,7 @@ ignore_docker_version: true
 
 ## # Currently only nginx ingress provider is supported.
 
-## # To disable ingress controller, set `provider: none` 
+## # To disable ingress controller, set `provider: none`
 
 ## # To enable ingress on specific nodes, use the node_selector, eg:
 
@@ -1510,11 +1500,11 @@ services:
 ssh_agent_auth: false
 ```
 
- /accordion 
+/accordion
 
- accordion id="cluster-1.15" label="RKE yaml for k8s 1.15" 
+accordion id="cluster-1.15" label="RKE yaml for k8s 1.15"
 
-``` yaml
+```yaml
 nodes:
 
   + address: 18.191.190.205
@@ -1542,7 +1532,7 @@ ignore_docker_version: true
 
 ## # Currently only nginx ingress provider is supported.
 
-## # To disable ingress controller, set `provider: none` 
+## # To disable ingress controller, set `provider: none`
 
 ## # To enable ingress on specific nodes, use the node_selector, eg:
 
@@ -1676,11 +1666,11 @@ services:
 ssh_agent_auth: false
 ```
 
- /accordion 
+/accordion
 
- accordion id="cluster-1.16" label="RKE yaml for k8s 1.16" 
+accordion id="cluster-1.16" label="RKE yaml for k8s 1.16"
 
-``` yaml
+```yaml
 nodes:
 
   + address: 18.191.190.205
@@ -1708,7 +1698,7 @@ ignore_docker_version: true
 
 ## # Currently only nginx ingress provider is supported.
 
-## # To disable ingress controller, set `provider: none` 
+## # To disable ingress controller, set `provider: none`
 
 ## # To enable ingress on specific nodes, use the node_selector, eg:
 
@@ -1842,15 +1832,15 @@ services:
 ssh_agent_auth: false
 ```
 
- /accordion 
+/accordion
 
 ### Appendix C - Complete RKE Template Example
 
 Before apply, replace `rancher_kubernetes_engine_config.services.etcd.gid` and `rancher_kubernetes_engine_config.services.etcd.uid` with the proper etcd group and user ids that were created on etcd nodes.
 
- accordion id="k8s-1.14" label="RKE template for k8s 1.14" 
+accordion id="k8s-1.14" label="RKE template for k8s 1.14"
 
-``` yaml
+```yaml
 ##
 
 ## Cluster Config
@@ -1881,7 +1871,7 @@ rancher_kubernetes_engine_config:
   ignore_docker_version: true
   ##
   ## # Currently only nginx ingress provider is supported.
-  ## # To disable ingress controller, set `provider: none` 
+  ## # To disable ingress controller, set `provider: none`
   ## # To enable ingress on specific nodes, use the node_selector, eg:
   ##    provider: nginx
   ##    node_selector:
@@ -1961,7 +1951,6 @@ rancher_kubernetes_engine_config:
         tls-cipher-suites: >-
           TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256
       extra_binds:
-
         - '/opt/kubernetes:/opt/kubernetes'
 
       pod_security_policy: true
@@ -1988,11 +1977,11 @@ rancher_kubernetes_engine_config:
 windows_prefered_cluster: false
 ```
 
- /accordion 
+/accordion
 
- accordion id="k8s-1.15" label="RKE template for k8s 1.15" 
+accordion id="k8s-1.15" label="RKE template for k8s 1.15"
 
-``` yaml
+```yaml
 ##
 
 ## Cluster Config
@@ -2017,7 +2006,7 @@ rancher_kubernetes_engine_config:
   ignore_docker_version: true
   ##
   ## # Currently only nginx ingress provider is supported.
-  ## # To disable ingress controller, set `provider: none` 
+  ## # To disable ingress controller, set `provider: none`
   ## # To enable ingress on specific nodes, use the node_selector, eg:
   ##    provider: nginx
   ##    node_selector:
@@ -2097,7 +2086,6 @@ rancher_kubernetes_engine_config:
         service-account-lookup: 'true'
         tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
       extra_binds:
-
         - '/opt/kubernetes:/opt/kubernetes'
 
     kubelet:
@@ -2120,11 +2108,11 @@ rancher_kubernetes_engine_config:
 windows_prefered_cluster: false
 ```
 
- /accordion 
+/accordion
 
- accordion id="k8s-1.16" label="RKE template for k8s 1.16" 
+accordion id="k8s-1.16" label="RKE template for k8s 1.16"
 
-``` yaml
+```yaml
 ##
 
 ## Cluster Config
@@ -2149,7 +2137,7 @@ rancher_kubernetes_engine_config:
   ignore_docker_version: true
   ##
   ## # Currently only nginx ingress provider is supported.
-  ## # To disable ingress controller, set `provider: none` 
+  ## # To disable ingress controller, set `provider: none`
   ## # To enable ingress on specific nodes, use the node_selector, eg:
   ##    provider: nginx
   ##    node_selector:
@@ -2229,7 +2217,6 @@ rancher_kubernetes_engine_config:
         service-account-lookup: 'true'
         tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
       extra_binds:
-
         - '/opt/kubernetes:/opt/kubernetes'
 
     kubelet:
@@ -2252,5 +2239,4 @@ rancher_kubernetes_engine_config:
 windows_prefered_cluster: false
 ```
 
- /accordion 
-
+/accordion

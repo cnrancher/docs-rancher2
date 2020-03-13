@@ -1,5 +1,5 @@
 ---
-title: CIS Kubernetes 标准 Rancher 自测报告 - v2.3.5
+title: 自测指南 - v2.3.5
 ---
 
 #### CIS Kubernetes Benchmark 1.5 - Rancher 2.3.5 with Kubernetes 1.15

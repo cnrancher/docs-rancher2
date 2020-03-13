@@ -1,106 +1,114 @@
 ---
-title: 介绍
+title: 安全说明
 ---
 
 <table width="100%">
+<tbody>
 <tr>
-<td width="30%">
-<h4>Security policy</h4>
-<p>Rancher Labs supports responsible disclosure, and endeavours to resolve all issues in a reasonable time frame.</p>
+<td width="30%" style={{verticalAlign: 'top'}}>
+<h4>安全策略</h4>
+<p>
+Rancher Labs会做负责任的漏洞披露，并努力在合理的时间内解决所有问题。
+</p>
 </td>
-<td width="30%">
-<h4>Reporting process</h4>
-<p>Please submit possible security issues by emailing <a href="mailto:security@rancher.com">security@rancher.com</a></p>
+<td width="30%" style={{verticalAlign: 'top'}}>
+<h4>漏洞报告流程</h4>
+<p>
+请发送邮件到 
+<a href="mailto:security@rancher.com">security@rancher.com</a>提交可能的安全漏洞。
+</p>
 </td>
-<td width="30%">
-<h4>Announcements</h4>
-<p>Subscribe to the <a href="https://forums.rancher.com/c/announcements">Rancher announcements forum</a> for release updates.</p>
+<td width="30%" style={{verticalAlign: 'top'}}>
+<h4>漏洞公布</h4>
+<p>
+请订阅<a href="https://forums.rancher.com/c/announcements">Rancher发布论坛</a>获取发布信息。
+</p>
 </td>
 </tr>
+</tbody>
 </table>
 
-Security is at the heart of all Rancher features. From integrating with all the popular authentication tools and services, to an enterprise grade [RBAC capability, ](/docs/admin-settings/rbac) Rancher makes your Kubernetes clusters even more secure.
+安全是 Rancher 全部功能的核心。Rancher 集成了全部的主流认证工具和服务，并且提供了企业级的[RBAC 能力](/docs/admin-settings/rbac/_index)，这些都可以让您的 Kubernetes 集群更安全。
 
-On this page, we provide security-related documentation along with resources to help you secure your Rancher installation and your downstream Kubernetes clusters:
+本页，我们将提供安全相关的文档，以及帮助您安全加固 Rancher Server 和下游 Kubernetes 集群的相关质料：
 
-* [Running a CIS security scan on a Kubernetes cluster](#running-a-cis-security-scan-on-a-kubernetes-cluster)
-* [Guide to hardening Rancher installations](#rancher-hardening-guide)
-* [The CIS Benchmark and self-assessment](#the-cis-benchmark-and-self-assessment)
-* [Third-party penetration test reports](#third-party-penetration-test-reports)
-* [Rancher CVEs and resolutions](#rancher-cves-and-resolutions)
-* [Security Tips and Best Practices](#security-tips-and-best-practices)
+- [在 Kubernetes 集群中执行 CIS 安全扫描](#在-kubernetes-集群中执行-cis-安全扫描)
+- [Rancher 安全加固指南](#rancher-安全加固指南)
+- [CIS Benchmark 和自测指南](#cis-benchmark-和自测指南)
+- [第三方安全机构发布的 Rancher 安全测试报告](#第三方安全测试报告)
+- [Rancher CVE（通用漏洞披露）和修复版本](#rancher-cve-和修复版本)
+- [安全建议和最佳实践](#安全建议和最佳实践)
 
-#### Running a CIS Security Scan on a Kubernetes Cluster
+## 在 Kubernetes 集群中执行 CIS 安全扫描
 
-_Available as of v2.4.0-alpha1_
+_从 v2.4.0-alpha1 版本起可用_
 
-Rancher leverages [kube-bench](https://github.com/aquasecurity/kube-bench) to run a security scan to check whether Kubernetes is deployed according to security best practices as defined in the CIS (Center for Internet Security) Kubernetes Benchmark.
+Rancher 充分利用了[kube-bench](https://github.com/aquasecurity/kube-bench)来对 Kubernetes 集群进行安全扫描。Rancher 会检查 Kubernetes 集群是否遵循了 CIS (Center for Internet Security，互联网安全中心) Kubernetes Benchmark 中定义的最佳实践。
 
-The CIS Kubernetes Benchmark is a reference document that can be used to establish a secure configuration baseline for Kubernetes. The Benchmark provides recommendations of two types: Scored and Not Scored. We run tests related to only Scored recommendations.
+CIS Kubernetes Benchmark 是一个可以用来给 Kubernetes 创建安全基准的参考文档。这个 Benchmark 提供了两种类型的建议：`计分`和`不计分`。我们仅会针对`计分`的建议进行测试。
 
-When Rancher runs a CIS Security Scan on a cluster, it generates a report showing the results of each test, including a summary with the number of passed, skipped and failed tests. The report also includes remediation steps for any failed tests.
+当 Rancher 对一个集群进行 CIS 安全扫描时，它会生成一个展示每个测试结果的报告。报告中包括`通过`，`跳过`和`失败`的测试数量的汇总。报告中同时也给`失败`的测试提供了补救办法。
 
-For details, refer to the section on [security scans.](/docs/security/security-scan)
+更多详情，请参阅[安全扫描](/docs/security/security-scan/_index)部分的文档。
 
-#### Rancher Hardening Guide
+## Rancher 安全加固指南
 
-The Rancher Hardening Guide is based off of controls and best practices found in the <a href="https://www.cisecurity.org/benchmark/kubernetes/" target="_blank">CIS Kubernetes Benchmark</a> from the Center for Internet Security.
+Rancher 的安全加固指南是根据 CIS（互联网安全中心）发布的<a href="https://www.cisecurity.org/benchmark/kubernetes/" target="_blank">CIS Kubernetes 安全标准</a>中的最佳实践来建立的。
 
-The hardening guide provides prescriptive guidance for hardening a production installation of Rancher v2.1.x, v2.2.x and v.2.3.x. See Rancher's [Self Assessment of the CIS Kubernetes Benchmark](#cis-benchmark-rancher-self-assessment) for the full list of security controls.
+这个指南提供了用来加固生产环境 Rancher 2.1，2.2 和 2.3 部署的指引。请通过查看 Rancher 的[CIS Kubernetes 安全标准自测指南](#cis-benchmark-和自测指南)来获取全部的安全管控清单。
 
-> The hardening guides describe how to secure the nodes in your cluster, and it is recommended to follow a hardening guide before installing Kubernetes.
+> 加固指南描述了如何确保您集群中的节点安全。我们建议您在安装 Kubernetes 前，先按照加固指南加固您的节点。
 
-Each version of the hardening guide is intended to be used with specific versions of the CIS Kubernetes Benchmark, Kubernetes, and Rancher:
+每个版本的加固指南都是针对特定版本的 CIS Kubernetes 安全标准，特定版本的 Kubernetes 和 特定版本的 Rancher 设计的：
 
-| Hardening Guide Version                                   | Rancher Version       | CIS Benchmark Version      | Kubernetes Version                 |
-| --------------------------------------------------------- | --------------------- | -------------------------- | ---------------------------------- |
-| [Hardening Guide v2.3.5](/docs/security/hardening-2.3.5/) | Rancher v2.3.5        | Benchmark v1.5             | Kubernetes v1.15                   |
-| [Hardening Guide v2.3.3](/docs/security/hardening-2.3.3/) | Rancher v2.3.3        | Benchmark v1.4.1           | Kubernetes v1.14, v1.15, and v1.16 |
-| [Hardening Guide v2.3](/docs/security/hardening-2.3/)     | Rancher v2.3.0-v2.3.2 | Benchmark v1.4.1           | Kubernetes v1.15                   |
-| [Hardening Guide v2.2](/docs/security/hardening-2.2/)     | Rancher v2.2.x        | Benchmark v1.4.1 and 1.4.0 | Kubernetes v1.13                   |
-| [Hardening Guide v2.1](/docs/security/hardening-2.1/)     | Rancher v2.1.x        | Benchmark v1.3.0           | Kubernetes v1.11                   |
+| 在加固指南版本                                           | Rancher 版本          | CIS 安全标准版本          | Kubernetes 版本                  |
+| -------------------------------------------------------- | --------------------- | ------------------------- | -------------------------------- |
+| [加固指南 v2.3.5](/docs/security/hardening-2.3.5/_index) | Rancher v2.3.5        | Benchmark v1.5            | Kubernetes v1.15                 |
+| [加固指南 v2.3.3](/docs/security/hardening-2.3.3/_index) | Rancher v2.3.3        | Benchmark v1.4.1          | Kubernetes v1.14, v1.15 和 v1.16 |
+| [加固指南 v2.3](/docs/security/hardening-2.3/_index)     | Rancher v2.3.0-v2.3.2 | Benchmark v1.4.1          | Kubernetes v1.15                 |
+| [加固指南 v2.2](/docs/security/hardening-2.2/_index)     | Rancher v2.2.x        | Benchmark v1.4.1 和 1.4.0 | Kubernetes v1.13                 |
+| [加固指南 v2.1](/docs/security/hardening-2.1/_index)     | Rancher v2.1.x        | Benchmark v1.3.0          | Kubernetes v1.11                 |
 
-#### The CIS Benchmark and Self-Assessment
+## CIS Benchmark 和自测指南
 
-The benchmark self-assessment is a companion to the Rancher security hardening guide. While the hardening guide shows you how to harden the cluster, the benchmark guide is meant to help you evaluate the level of security of the hardened cluster.
+安全标准自测指南是对 Rancher 安全加固指南的补充。加固指南向您展示了如何加固集群的安全，而安全标准指南旨在帮助您评估加固后的集群的安全级别。
 
-Because Rancher and RKE install Kubernetes services as Docker containers, many of the control verification checks in the CIS Kubernetes Benchmark don't apply. This guide will walk through the various controls and provide updated example commands to audit compliance in Rancher created clusters. The original benchmark documents can be downloaded from the [CIS website](https://www.cisecurity.org/benchmark/kubernetes/).
+因为 Rancher 和 RKE 会通过 Docker 容器的形式安装 Kubernetes 服务，所以很多 CIS Kubernetes Benchmark 中的很多安全管控检查点并不适用。这个指南将逐步介绍各种管控，并提供示例命令以审核 Rancher 创建的集群的合规性。您可以通过[CIS 官网](https://www.cisecurity.org/benchmark/kubernetes/)下载原始的安全标准文档。
 
-Each version of Rancher's self assessment guide corresponds to specific versions of the hardening guide, Rancher, Kubernetes, and the CIS Benchmark:
+每个版本的自测指南都是针对特定版本的加固指南，特定版本的 Kubernetes，特定版本的 Rancher 和特定版本的 CIS Kubernetes 安全标准进行的：
 
-| Self Assessment Guide Version                                                                                                       | Rancher Version      | Hardening Guide Version | Kubernetes Version | CIS Benchmark Version       |
-| ----------------------------------------------------------------------------------------------------------------------------------- | -------------------- | ----------------------- | ------------------ | --------------------------- |
-| [Self Assessment Guide v2.3.5](/docs/security/benchmark-2.3.5/#cis-kubernetes-benchmark-1-5-0-rancher-2-3-5-+-with-kubernetes-1-15) | Rancher v2.3.5       | Hardening Guide v2.3.3  | Kubernetes v1.15   | Benchmark v1.5.0            |
-| [Self Assessment Guide v2.3.3](/docs/security/benchmark-2.3.3/#cis-kubernetes-benchmark-1-4-1-rancher-2-3-3-+-with-kubernetes-1-16) | Rancher v2.3.3       | Hardening Guide v2.3.3  | Kubernetes v1.16   | Benchmark v1.4.1            |
-| [Self Assessment Guide v2.3](/docs/security/benchmark-2.3/#cis-kubernetes-benchmark-1-4-1-rancher-2-3-0-2-3-2-with-kubernetes-1-15) | Rancher v2.3.0-2.3.2 | Hardening Guide v2.3    | Kubernetes v1.15   | Benchmark v1.4.1            |
-| [Self Assessment Guide v2.2](/docs/security/benchmark-2.2/)                                                                         | Rancher v2.2.x       | Hardening Guide v2.2    | Kubernetes v1.13   | Benchmark v1.4.0 and v1.4.1 |
-| [Self Assessment Guide v2.1](/docs/security/benchmark-2.1/)                                                                         | Rancher v2.1.x       | Hardening Guide v2.1    | Kubernetes v1.11   | Benchmark 1.3.0             |
+| 自测指南版本                                                                                                           | Rancher 版本         | 加固指南版本    | Kubernetes 版本  | CIS 安全标准版本          |
+| ---------------------------------------------------------------------------------------------------------------------- | -------------------- | --------------- | ---------------- | ------------------------- |
+| [自测指南 v2.3.5](/docs/security/benchmark-2.3.5/#cis-kubernetes-benchmark-1-5-0-rancher-2-3-5-+-with-kubernetes-1-15) | Rancher v2.3.5       | 加固指南 v2.3.3 | Kubernetes v1.15 | 安全标准 v1.5.0           |
+| [自测指南 v2.3.3](/docs/security/benchmark-2.3.3/#cis-kubernetes-benchmark-1-4-1-rancher-2-3-3-+-with-kubernetes-1-16) | Rancher v2.3.3       | 加固指南 v2.3.3 | Kubernetes v1.16 | 安全标准 v1.4.1           |
+| [自测指南 v2.3](/docs/security/benchmark-2.3/#cis-kubernetes-benchmark-1-4-1-rancher-2-3-0-2-3-2-with-kubernetes-1-15) | Rancher v2.3.0-2.3.2 | 加固指南 v2.3   | Kubernetes v1.15 | 安全标准 v1.4.1           |
+| [自测指南 v2.2](/docs/security/benchmark-2.2/)                                                                         | Rancher v2.2.x       | 加固指南 v2.2   | Kubernetes v1.13 | 安全标准 v1.4.0 和 v1.4.1 |
+| [自测指南 v2.1](/docs/security/benchmark-2.1/)                                                                         | Rancher v2.1.x       | 加固指南 v2.1   | Kubernetes v1.11 | 安全标准 1.3.0            |
 
-#### Third-party Penetration Test Reports
+## 第三方安全测试报告
 
-Rancher periodically hires third parties to perform security audits and penetration tests of the Rancher 2.x software stack. The environments under test follow the Rancher provided hardening guides at the time of the testing. Results are posted when the third party has also verified fixes classified MEDIUM or above.
+Rancher 周期性的雇佣第三方对 Rancher 2.x 版本软件进行安全审核和漏洞检测。在安全测试中使用的环境，是按照 Rancher 提供的加固指南部署的。测试报告会在第三方确认我们已经修复了测试中发现的中级或以上级别的安全漏洞后公布。
 
-Results:
+测试结果：
 
-* [Cure53 Pen Test - 7/2019](https://releases.rancher.com/documents/security/pen-tests/2019/RAN-01-cure53-report.final.pdf)
-* [Untamed Theory Pen Test- 3/2019](https://releases.rancher.com/documents/security/pen-tests/2019/UntamedTheory-Rancher_SecurityAssessment-20190712_v5.pdf)
+- [Cure53 安全测试报告 - 7/2019](https://releases.rancher.com/documents/security/pen-tests/2019/RAN-01-cure53-report.final.pdf)
+- [Untamed Theory 安全测试报告 - 3/2019](https://releases.rancher.com/documents/security/pen-tests/2019/UntamedTheory-Rancher_SecurityAssessment-20190712_v5.pdf)
 
-#### Rancher CVEs and Resolutions
+## Rancher CVE 和修复版本
 
-Rancher is committed to informing the community of security issues in our products. Rancher will publish CVEs (Common Vulnerabilities and Exposures) for issues we have resolved.
+Rancher 致力于向社区披露我们产品的安全问题。Rancher 将对修复的问题通过发布 CVEs(通用漏洞披露，Common Vulnerabilities and Exposures)通知社区。
 
-| ID                                                                              | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Date        | Resolution                                                                                                                                                                                                                                                     |
-| ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [CVE-2018-20321](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20321) | Any project member with access to the `default` namespace can mount the `netes-default` service account in a pod and then use that pod to execute administrative privileged commands against the Kubernetes cluster.| 29 Jan 2019 | [Rancher v2.1.6](https://github.com/rancher/rancher/releases/tag/v2.1.6) and [Rancher v2.0.11](https://github.com/rancher/rancher/releases/tag/v2.0.11) - Rolling back from these versions or greater have specific [instructions](/docs/upgrades/rollbacks/).|
-| [CVE-2019-6287](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6287)   | Project members continue to get access to namespaces from projects that they were removed from if they were added to more than one project.| 29 Jan 2019 | [Rancher v2.1.6](https://github.com/rancher/rancher/releases/tag/v2.1.6) and [Rancher v2.0.11](https://github.com/rancher/rancher/releases/tag/v2.0.11)                                                                                                        |
-| [CVE-2019-11202](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11202) | The default admin, that is shipped with Rancher, will be re-created upon restart of Rancher despite being explicitly deleted.| 16 Apr 2019 | [Rancher v2.2.2](https://github.com/rancher/rancher/releases/tag/v2.2.2), [Rancher v2.1.9](https://github.com/rancher/rancher/releases/tag/v2.1.9) and [Rancher v2.0.14](https://github.com/rancher/rancher/releases/tag/v2.0.14)                              |
-| [CVE-2019-12274](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-12274) | Nodes using the built-in node drivers using a file path option allows the machine to read arbitrary files including sensitive ones from inside the Rancher server container.| 5 Jun 2019  | [Rancher v2.2.4](https://github.com/rancher/rancher/releases/tag/v2.2.4), [Rancher v2.1.10](https://github.com/rancher/rancher/releases/tag/v2.1.10) and [Rancher v2.0.15](https://github.com/rancher/rancher/releases/tag/v2.0.15)                            |
-| [CVE-2019-12303](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-12303) | Project owners can inject extra fluentd logging configurations that makes it possible to read files or execute arbitrary commands inside the fluentd container. Reported by Tyler Welton from Untamed Theory.| 5 Jun 2019  | [Rancher v2.2.4](https://github.com/rancher/rancher/releases/tag/v2.2.4), [Rancher v2.1.10](https://github.com/rancher/rancher/releases/tag/v2.1.10) and [Rancher v2.0.15](https://github.com/rancher/rancher/releases/tag/v2.0.15)                            |
-| [CVE-2019-13209](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13209) | The vulnerability is known as a [Cross-Site Websocket Hijacking attack](https://www.christian-schneider.net/CrossSiteWebSocketHijacking.html). This attack allows an exploiter to gain access to clusters managed by Rancher with the roles/permissions of a victim. It requires that a victim to be logged into a Rancher server and then access a third-party site hosted by the exploiter. Once that is accomplished, the exploiter is able to execute commands against the Kubernetes API with the permissions and identity of the victim. Reported by Matt Belisle and Alex Stevenson from Workiva.| 15 Jul 2019 | [Rancher v2.2.5](https://github.com/rancher/rancher/releases/tag/v2.2.5), [Rancher v2.1.11](https://github.com/rancher/rancher/releases/tag/v2.1.11) and [Rancher v2.0.16](https://github.com/rancher/rancher/releases/tag/v2.0.16)                            |
-| [CVE-2019-14436](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14436) | The vulnerability allows a member of a project that has access to edit role bindings to be able to assign themselves or others a cluster level role granting them administrator access to that cluster. The issue was found and reported by Michal Lipinski at Nokia.| 5 Aug 2019  | [Rancher v2.2.7](https://github.com/rancher/rancher/releases/tag/v2.2.7) and [Rancher v2.1.12](https://github.com/rancher/rancher/releases/tag/v2.1.12)                                                                                                        |
-| [CVE-2019-14435](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14435) | This vulnerability allows authenticated users to potentially extract otherwise private data out of IPs reachable from system service containers used by Rancher. This can include but not only limited to services such as cloud provider metadata services. Although Rancher allow users to configure whitelisted domains for system service access, this flaw can still be exploited by a carefully crafted HTTP request. The issue was found and reported by Matt Belisle and Alex Stevenson at Workiva.| 5 Aug 2019  | [Rancher v2.2.7](https://github.com/rancher/rancher/releases/tag/v2.2.7) and [Rancher v2.1.12](https://github.com/rancher/rancher/releases/tag/v2.1.12)                                                                                                        |
+| ID                                                                              | 描述                                                                                                                                                                                                                                                                                                                | 日期       | 修复版本                                                                                                                                                                                                                           |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [CVE-2018-20321](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20321) | 任何有`default`命名空间访问权限的项目成员，可以通过在 pod 中挂载名称为`netes-default`的 service account。然后可以通过这个 pod 使用管理员权限对 Kubernetes 集群下发指令。                                                                                                                                            | 2019/01/29 | [Rancher v2.1.6](https://github.com/rancher/rancher/releases/tag/v2.1.6) 和 [Rancher v2.0.11](https://github.com/rancher/rancher/releases/tag/v2.0.11)                                                                             |
+| [CVE-2019-6287](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6287)   | 如果这个项目成员之前被添加到一个以上的项目中，即使将这个项目成员从项目移除后，这个项目成员仍然可以继续访问这个项目中的命名空间。                                                                                                                                                                                    | 2019/01/29 | [Rancher v2.1.6](https://github.com/rancher/rancher/releases/tag/v2.1.6) 和 [Rancher v2.0.11](https://github.com/rancher/rancher/releases/tag/v2.0.11)                                                                             |
+| [CVE-2019-11202](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11202) | 无法删除默认的 admin 用户（Rancher 自带的那个用户），因为在 Rancher Server 重启时将会重建这个用户。                                                                                                                                                                                                                 | 2019/04/16 | [Rancher v2.2.2](https://github.com/rancher/rancher/releases/tag/v2.2.2), [Rancher v2.1.9](https://github.com/rancher/rancher/releases/tag/v2.1.9) 和 [Rancher v2.0.14](https://github.com/rancher/rancher/releases/tag/v2.0.14)   |
+| [CVE-2019-12274](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-12274) | 如果是通过带有支持文件路径参数的内置主机驱动创建的节点，那么这个节点将可以访问 Rancher Server 容器内的任何文件，包含敏感文件。                                                                                                                                                                                      | 2019/06/05 | [Rancher v2.2.4](https://github.com/rancher/rancher/releases/tag/v2.2.4), [Rancher v2.1.10](https://github.com/rancher/rancher/releases/tag/v2.1.10) 和 [Rancher v2.0.15](https://github.com/rancher/rancher/releases/tag/v2.0.15) |
+| [CVE-2019-12303](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-12303) | 项目管理员可以注意额外的 fluentd 配置，从而读取 fluentd 容器中的任何文件，并且可以在 fluentd 容器内执行命令。 这个问题由来自 Untamed Theory 的 Tyler Welton 发现的。                                                                                                                                                | 2019/06/05 | [Rancher v2.2.4](https://github.com/rancher/rancher/releases/tag/v2.2.4), [Rancher v2.1.10](https://github.com/rancher/rancher/releases/tag/v2.1.10) 和 [Rancher v2.0.15](https://github.com/rancher/rancher/releases/tag/v2.0.15) |
+| [CVE-2019-13209](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13209) | 这个漏洞被称之为[WebSocket 跨站劫持](https://www.christian-schneider.net/CrossSiteWebSocketHijacking.html)。黑客可以利用这个漏洞以受害者角色和身份来访问 Rancher 中纳管集群。一旦成功，黑客可以以受害者的权限对 Kubernetes API 发布指令。这个问题是由来自 Workiva 的 Matt Belisle 和 Alex Stevenson 发现的。        | 2019/07/15 | [Rancher v2.2.5](https://github.com/rancher/rancher/releases/tag/v2.2.5), [Rancher v2.1.11](https://github.com/rancher/rancher/releases/tag/v2.1.11) 和 [Rancher v2.0.16](https://github.com/rancher/rancher/releases/tag/v2.0.16) |
+| [CVE-2019-14436](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14436) | 这个漏洞允许拥有修改 Role Binding 的项目成员给自己分配一个集群级别管理员的角色，从而以管理员的权限访问该集群。 这个问题是由来自 Nokia 的 Michal Lipinski 发现的。                                                                                                                                                   | 2019/08/05 | [Rancher v2.2.7](https://github.com/rancher/rancher/releases/tag/v2.2.7) 和 [Rancher v2.1.12](https://github.com/rancher/rancher/releases/tag/v2.1.12)                                                                             |
+| [CVE-2019-14435](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14435) | 此漏洞允许经过身份验证的用户潜在地从 Rancher 使用的系统服务容器可访问的 IP 中提取私有数据。这可以包括但不仅限于诸如云提供商元数据服务之类的服务。尽管 Rancher 允许用户配置白名单域以进行系统服务访问，但是精心设计的 HTTP 请求仍可以利用此缺陷。这个问题是由来自 Workiva 的 Matt Belisle 和 Alex Stevenson 发现的。 | 2019/08/05 | [Rancher v2.2.7](https://github.com/rancher/rancher/releases/tag/v2.2.7) 和 [Rancher v2.1.12](https://github.com/rancher/rancher/releases/tag/v2.1.12)                                                                             |
 
-#### Security Tips and Best Practices
+## 安全建议和最佳实践
 
-Our [best practices guide](/docs/best-practices/management/#tips-for-security) includes basic tips for increasing security in Rancher.
-
+我们的[最佳实践建议](/docs/best-practices/management/_index)包含了基本的提升 Rancher 安全的建议。
