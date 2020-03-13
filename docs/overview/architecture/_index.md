@@ -49,7 +49,7 @@ Rancher 的 认证代理把 API 调用命令转发到下游用户集群。认证
 
 Rancher 使用 [Service Account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/) （Service Accout 提供了一种方便的认证机制）和 Kubernetes 进行交互。
 
-默认状态下，Rancher 生成一个包含认证信息的[kubeconfig](/docs/cluster-admin/cluster-access/kubectl//index)文件，为 Rancher Server 和下游用户集群的 Kubernetes API Server 之间的通信提供认证。该文件包含了访问集群的所有权限。
+默认状态下，Rancher 生成一个包含认证信息的[kubeconfig](/docs/cluster-admin/cluster-access/kubectl/_index)文件，为 Rancher Server 和下游用户集群的 Kubernetes API Server 之间的通信提供认证。该文件包含了访问集群的所有权限。
 
 ### 集群控制器和集群Agent
 
