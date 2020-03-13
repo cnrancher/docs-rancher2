@@ -32,7 +32,7 @@ title: 产品架构
 
 <figcaption>与下游集群通信</figcaption>
 
-![Rancher Components](/img/rancher/rancher-architecture-cluster-Controller.svg)
+![Rancher Components](/img/rancher/rancher-architecture-cluster-controller.svg)
 
 图中的数字和对应的描述如下：
 
