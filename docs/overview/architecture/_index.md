@@ -58,7 +58,7 @@ Rancher 使用 [Service Account](https://kubernetes.io/docs/tasks/configure-pod-
 每一个下游用户集群都有一个 Agent 和一个 Controller。Controller 具有以下功能：
 
 - 观察用户集群的资源变化
-- 把用户集群的“当前”状态变更到“目标”状态
+- 把用户集群从“当前”状态变更到“目标”状态
 - 配置用户集群和项目的访问控制策略
 - 通过调用 Docker Machine 和 Kubernetes Engine，如 RKE 和 GKE，创建集群。
 
