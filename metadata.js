@@ -125,7 +125,7 @@ const metadata = {
     'security/_index': '安全说明',
     'security/security-scan/_index': '安全扫描',
     'security/hardening-2.3.5/_index': '安全加固指南',
-    'security/benchmark-2.3.5/_index': 'CIS 自测报告',
+    'security/benchmark-2.3.5/_index': 'CIS 自测指南',
     'faq/kubectl/_index': '安装和配置 kubectl',
     'faq/networking/_index': '网络问题',
     'faq/technical/_index': '技术问题',
