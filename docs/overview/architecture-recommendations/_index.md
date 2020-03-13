@@ -2,91 +2,79 @@
 title: 推荐架构
 ---
 
-Kubernetes cluster. If you are installing Rancher on a single node, the main architecture recommendation that applies to your installation is that the node running Rancher should be [separate from downstream clusters.](#separation-of-rancher-and-user-clusters)
+如果您准备在单节点上安装Rancher，请参考[分开部署rancher与下游用户集群](#分开部署rancher与下游用户集群)，获取适用于这种架构的建议。
 
-This section covers the following topics:
+## 分开部署Rancher与下游用户集群
 
-- [Separation of Rancher and User Clusters](#separation-of-rancher-and-user-clusters)
-- [Why HA is Better for Rancher in Production](#why-ha-is-better-for-rancher-in-production)
-- [Recommended Load Balancer Configuration for Kubernetes Installations](#recommended-load-balancer-configuration-for-ha-installations)
-- [Environment for Kubernetes Installations](#environment-for-ha-installations)
-- [Recommended Node Roles for Kubernetes Installations](#recommended-node-roles-for-ha-installations)
-- [Architecture for an Authorized Cluster Endpoint](#architecture-for-an-authorized-cluster-endpoint)
-
-## Separation of Rancher and User Clusters
-
-A user cluster is a downstream Kubernetes cluster that runs your apps and services.
-
-If you have a Docker installation of Rancher, the node running the Rancher server should be separate from your downstream clusters.
-
-In Kubernetes Installations of Rancher, the Rancher server cluster should also be separate from the user clusters.
+下游用户集群，是运行应用和服务的下游Kubernetes集群，如果您在Rancher中安装了Docker或Kubernetes，运行RancherServer的节点应该和下游用户集群分开部署。
 
 ![Separation of Rancher Server from User Clusters](/img/rancher/rancher-architecture-separation-of-rancher-server.svg)
 
-## Why HA is Better for Rancher in Production
+## 为什么高可用集群与Rancher适配性更高
 
-We recommend installing the Rancher server on a three-node Kubernetes cluster for production, primarily because it protects the Rancher server data. The Rancher server stores its data in etcd in both single-node and Kubernetes Installations.
+在生产环境中，我们建议您创建三节点的Kubernetes集群，然后把Rancher Server安装在里面，这样可以保障Rancher Server的数据安全。不管是单节点安装，还是高可用安装，Rancher Server都会把数据存储在etcd节点中。
+使用单节点安装Rancher Server时，如果该节点出现故障，etcd节点数据在其他节点没有备份，有可能导致Rancher Server数据丢失。
+与单节点安装不同，高可用集群（High Availability Cluster，简称HA）安装具有如下优势：
 
-When Rancher is installed on a single node, if the node goes down, there is no copy of the etcd data available on other nodes and you could lose the data on your Rancher server.
+* etcd节点数据在三个节点上都有备份，如果etcd节点出现故障，其他三个节点可以提供数据备份。
+* 负载均衡负责单点对接客户的，把网络流量分配给集群内的多个服务器，防止单个服务器因为访问请求过多，而出现故障。本文使用了NGINX server作为例子，讲述如何将NGINX server的配置成一个四层负载均衡（TCP负载均衡）。
 
-By contrast, in the high-availability installation,
+## 负载均衡的推荐配置参数
 
-- The etcd data is replicated on three nodes in the cluster, providing redundancy and data duplication in case one of the nodes fails.
-- A load balancer serves as the single point of contact for clients, distributing network traffic across multiple servers in the cluster and helping to prevent any one server from becoming a point of failure. Note: This [example](/docs/installation/k8s-install/create-nodes-lb/nginx/) of how to configure an NGINX server as a basic layer 4 load balancer (TCP).
+我们建议您使用以下方案，配置您的负载均衡和Ingress controller：
 
-## Recommended Load Balancer Configuration for Kubernetes Installations
+* 使用Rancher的域名系统（DNS）解析四层负载均衡
+* 负载均衡跟集群中所有节点的80端口和443端口通信。
+* Ingress controller把HTTP重定向到HTTPS，在443端口安装SSL/TLS安全证书。
+* Ingress controller把流量转发到Rancher pod的80端口。
 
-We recommend the following configurations for the load balancer and Ingress controllers:
-
-- The DNS for Rancher should resolve to a Layer 4 load balancer (TCP)
-- The Load Balancer should forward port TCP/80 and TCP/443 to all 3 nodes in the Kubernetes cluster.
-- The Ingress controller will redirect HTTP to HTTPS and terminate SSL/TLS on port TCP/443.
-- The Ingress controller will forward traffic to port TCP/80 on the pod in the Rancher deployment.
-
-<figcaption>Rancher installed on a Kubernetes cluster with layer 4 load balancer, depicting SSL termination at ingress controllers</figcaption>
+<figcaption>在Kubernetes集群中安装Rancher，四层负载均衡，在Ingress controller中描述SSL进程。</figcaption>
 
 ![Rancher HA](/img/rancher/ha/rancher2ha.svg)
 
-<sup>Rancher installed on a Kubernetes cluster with Layer 4 load balancer (TCP), depicting SSL termination at ingress controllers</sup>
+## Kubernetes的安装环境
 
-## Environment for Kubernetes Installations
+我们建议您使用云服务提供商的虚拟机，如EC2、GCE等，安装Kubernetes集群，然后在集群中安装Rancher。
 
-It is strongly recommended to install Rancher on a Kubernetes cluster on hosted infrastructure such as Amazon's EC2 or Google Compute Engine.
+为了达到最好的性能和安全条件，我们建议您为Rancher创建一个专用的Kubernetes集群。不建议您在同一个集群内运行应用或程序。部署Rancher后，您可以[创建新集群或导入已有集群](/docs/cluster-provisioning/_index/#cluster-creation-in-rancher)，然后用这些集群启动应用或程序。
 
-For the best performance and greater security, we recommend a dedicated Kubernetes cluster for the Rancher management server. Running user workloads on this cluster is not advised. After deploying Rancher, you can [create or import clusters](/docs/cluster-provisioning/#cluster-creation-in-rancher) for running your workloads.
+我们不建议在已经预安装Kubernetes管理工具的云服务上，如EKS和GKE，安装Rancher。
+Rancher无法获取到这些云端Kubernetes的etcd节点信息，而且这些管理工具可能会与Rancher的命令冲突。
 
-It is not recommended to install Rancher on top of a managed Kubernetes service such as Amazon’s EKS or Google Kubernetes Engine. These hosted Kubernetes solutions do not expose etcd to a degree that is manageable for Rancher, and their customizations can interfere with Rancher operations.
+## 节点角色分配建议
 
-## Recommended Node Roles for Kubernetes Installations
+适合安装Rancher的Kubernetes集群应满足以下条件：
 
-We recommend installing Rancher on a Kubernetes cluster in which each node has all three Kubernetes roles: etcd, controlplane, and worker.
+* 集群有多个节点
+* 每个节点都有三个Kubernetes角色：etcd、controlplane和worker
 
-#### Comparing Node Roles for the Rancher Server Cluster and User Clusters
+## Rancher Server集群和下游用户集群的角色对比
 
-Our recommendation for node roles on the Rancher server cluster contrast with our recommendations for the downstream user clusters that run your apps and services. We recommend that each node in a user cluster should have a single role for stability and scalability.
+Rancher Server集群中的节点角色分配，我们建议每个节点都分配etcd、controlplane和worker三个角色；而下游用户集群中的角色分配则恰好相反，每个节点只分配一个角色，这样可以保持稳定性和可扩展性。
 
 ![Kubernetes Roles for Nodes in Rancher Server Cluster vs. User Clusters](/img/rancher/rancher-architecture-node-roles.svg)
 
-Kubernetes only requires at least one node with each role and does not require nodes to be restricted to one role. However, for the clusters that run your apps, we recommend separate roles for each node so that workloads on worker nodes don't interfere with the Kubernetes master or cluster data as your services scale.
+我们建议只给每个节点分配一个角色，提高可扩展性，这样不会干扰到Kubernetes master节点或集群数据。但是，Kubernetes只要求每个节点至少要分配到一个角色，而没有对每个节点可分配的角色数量作要求。也就是说，每个节点可以具有一种或多种角色。完成一个高可用集群的配置，至少需要三个节点，具体配置方法如下：
 
-We recommend that downstream user clusters should have at least:
+以下是我们对于下游用户集群节点的配置建议：
 
-- **Three nodes with only the etcd role** to maintain a quorum if one node is lost, making the state of your cluster highly available
-- **Two nodes with only the controlplane role** to make the master component highly available
-- **One or more nodes with only the worker role** to run the Kubernetes node components, as well as the workloads for your apps and services
+* **etcd角色分配给任意三个节点**保障高可用性，如果这三个节点中的任意一个出现故障，还有两个节点可以使用。
+* **controlplane角色分配给任意两个节点**，这样可以保证master组件的高可用性。
+* **worker角色分配给一个或以上的节点**用于运行Kubernetes节点组件和您部署的服务或应用。
 
-With that said, it is safe to use all three roles on three nodes when setting up the Rancher server because:
+综上所述，合理配置三个节点足以构建一个高可用集群，因为：
 
-- It allows one `etcd` node failure.
-- It maintains multiple instances of the master components by having multiple `controlplane` nodes.
-- No other workloads than Rancher itself should be created on this cluster.
+* 集群中有三个etcd节点，如果其中一个出现故障，而另外两个含有etcd节点备份数据的节点随时待命
+* 多个controlplane节点使master组件保持多实例的状态
+* 该集群有且只有Rancher在运行
 
-Because no additional workloads will be deployed on the Rancher server cluster, in most cases it is not necessary to use the same architecture that we recommend for the scalability and reliability of user clusters.
+因为这个节点中只部署了Rancher，其他程序或应用都没有部署到这里，所以这种配置方式不需要使用到我们建议的架构，它的可扩展性和可靠性足以应对大多数情况。
 
-For more best practices for user clusters, refer to the [production checklist](/docs/cluster-provisioning/production) or our [best practices guide.](/docs/best-practices/management/#tips-for-scaling-and-reliability)
+请查看 [生产环境清单](/docs/cluster-provisioning/production/_index) 或 [可靠性和可扩展性建议](/docs/best-practices/management/_index#tips-for-scaling-and-reliability)，获取配置建议。
 
-## Architecture for an Authorized Cluster Endpoint
+## 授权集群端点的架构
 
-If you are using an [authorized cluster endpoint,](/docs/overview/architecture/#4-authorized-cluster-endpoint) we recommend creating an FQDN pointing to a load balancer which balances traffic across your nodes with the `controlplane` role.
+如果您使用的是[授权集群端点](/docs/overview/architecture/_index#4-authorized-cluster-endpoint)，我们建议您创建一个指向负载均衡的FQDN，使用controlplane角色控制FQDN，平和多个节点之间的工作负载。
 
-If you are using private CA signed certificates on the load balancer, you have to supply the CA certificate, which will be included in the generated kubeconfig file to validate the certificate chain. See the documentation on [kubeconfig files](/docs/k8s-in-rancher/kubeconfig/) and [API keys](/docs/user-settings/api-keys/#creating-an-api-key) for more information.
+如果您在负载均衡上使用了CA证书，您需要提供证书。证书可以从kubeconfig文件中获取。详情请见 [kubeconfig文件](/docs/k8s-in-rancher/kubeconfig/_index) and [API keys](/docs/user-settings/api-keys/_index#creating-an-api-key) 。
+

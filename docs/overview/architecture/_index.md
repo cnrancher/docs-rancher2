@@ -43,24 +43,24 @@ title: 产品架构
 
 在这张示意图中，一个叫做Bob的用户希望查看下游用户集群“User Cluster 1”里面正在运行的pod。在Rancher中，他可以运行 `kubectl` 命令查看该集群中的pod。Bob通过了Rancher的Proxy认证。
 
-Rancher的Proxy认证把API调用命令转发到下游用户集群。Proxy认证集成了多种认证方式，如本地认证、活动目录认证、GitHub认证等。在发起每一个Kubernetes API调用请求的时候，Proxy认证会去确认请求方的身份，在转发调用命令前，设置匿名化的消息头。
+Rancher的Proxy认证把API调用命令转发到下游用户集群。Proxy认证集成了多种认证方式，如本地认证、活动目录认证、GitHub认证等。在发起每一个Kubernetes API调用请求的时候，Proxy认证会去确认请求方的身份，在转发调用命令前，设置 Kubernetes impersonation 消息头。
 
 Rancher使用 [service account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)和Kubernetes进行交互。Service Accout提供了一种方便的认证机制。
 
 默认状态下，Rancher生成一个包含认证信息的[kubeconfig](/docs/cluster-admin/cluster-access/kubectl//index)文件，为Rancher Server和下游用户集群的Kubernetes API Server之间的通信提供认证。该文件包含了访问集群的所有权限。
 
-### 集群控制面板和集群Agent
+### 集群控制器和集群Agent
 
-每一个下游用户集群都有一个集群Agent保持用户集群的controller与Rancher Server之间的信息畅通。
+每一个下游用户集群都有一个集群Agent保持用户集群的控制器与Rancher Server之间的信息畅通。
 
-每一个下游用户集群都有一个Agent和和一个controller。Controller具有以下功能：
+每一个下游用户集群都有一个Agent和和一个控制器。集群控制器具有以下功能：
 
 * 检测用户集群的资源变化
 * 变更用户集群的状态
 * 配置用户集群和项目的安全控制策略
-* 调用Docker和Kubernetes Engine，如RKE和GKE，运行集群。
+* 调用docker machine 和 Kubernetes 引擎，如RKE和GKE，创建集群。
 
-默认状态下，controller连接Agent，Rancher才可以与用户集群通信。如果集群Agent不可用，controller可以连接到节点Agent，不会影响Ranche与用户集群之间的通信。
+默认状态下，集群控制器连接Agent，Rancher才可以与用户集群通信。如果集群Agent不可用，集群控制器可以连接到节点Agent，不会影响Ranche与用户集群之间的通信。
 
 集群Agent，也叫做“cattle-cluster-agent”，是在用户集群中运行的组件，它具有以下功能：
 
@@ -71,7 +71,7 @@ Rancher使用 [service account](https://kubernetes.io/docs/tasks/configure-pod-c
 
 ### 节点Agent
 
-如果集群Agent不可用，其中一个节点Agent会创建一个通信的管道，由节点Agent连接到集群controller，再由controller连接到Rancher，实现集群Agent和Rancher之间的通信。
+如果集群Agent不可用，其中一个节点Agent会创建一个通信的管道，由节点Agent连接到集群控制器，再由控制器连接到Rancher，实现集群Agent和Rancher之间的通信。
 
 使用[DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)资源部署节点Agent，可以确保集群内每个节点都成功运行节点Agent。执行集群操作时，可以使用这种方式和节点互动。集群操作包括：升级Kubernetes版本和创建或恢复etcd快照（etcd snapshot）。
 
@@ -79,7 +79,7 @@ Rancher使用 [service account](https://kubernetes.io/docs/tasks/configure-pod-c
 
 用户授权集群端点连接下游用户集群时，不需要将他们的请求发送到Rancher认证Proxy。
 
-> 授权集群端点只在Rancher运行的Kubernetes集群中有效。换句话说，它只在使用RKE发布的集群中有效。其他类型的集群，如导入的集群、位于其他云服务上的集群等，并不能够使用此功能。
+> 授权集群端点只在Rancher运行的Kubernetes集群中有效。换句话说，它只在使用RKE创建的集群中有效。其他类型的集群，如导入的集群、位于其他云服务上的集群等，并不能够使用此功能。
 
 使用授权集群端点的主要理由如下：
 
@@ -92,7 +92,7 @@ Rancher使用 [service account](https://kubernetes.io/docs/tasks/configure-pod-c
 
 > 使用场景举例：假设Rancher Server位于美国，用户集群“User Cluster 1”位于澳大利亚，用户“Alice“也位于澳大利亚。虽然Alice可以使用Rancher控制台分配User Cluster 1中的资源，但是她发出的请求从澳大利亚集群端发送到美国Server端，请求结果从美国Server端返回到澳大利亚集群端。因为美澳之间实际的距离非常遥远，所以发送的请求和返回的请求结果都会存在显著的时延。Alice可以使用授权集群端点，降低时延，更好地掌控她的用户集群。
 
-为下游集群开启授权集群端点后，Rancher会在”kubeconfig“文件中额外生成一段Kubernetes内容，这段内容允许集群和Rancher Server直连。kubeconfig这个文件中含有 `kubectl` 和 `helm` 的认证信息。
+为下游集群开启授权集群端点后，Rancher会在”kubeconfig“文件中额外生成一段 Kubernetes context，允许集群和Rancher Server直连。kubeconfig这个文件中含有 `kubectl` 和 `helm` 的认证信息。
 
 如果Rancher出现问题，无法连接，您需要使用kubeconfig文件中的一个字段可以帮助您访问集群。因此，我们建议您导出一份kubeconfig文件副本，保存到本地，以备不时之需。更多详细信息请参考 [kubectl 和 kubeconfig文件](/docs/cluster-admin/cluster-access/kubectl)。
 
@@ -106,7 +106,7 @@ Rancher使用 [service account](https://kubernetes.io/docs/tasks/configure-pod-c
 
 更多详细信息请参考[kubeconfig文件](/docs/cluster-admin/cluster-access/kubectl/_index)。
 
-## 启动Kubernetes集群所需工具
+## 创建Kubernetes集群所需工具
 
 下游Kubernetes集群的类型决定了启动集群需要的工具。集群类型主要分为以下几种：
 
