@@ -38,7 +38,7 @@ title: 推荐架构
 
 为了达到最好的性能和安全条件，我们建议您为Rancher创建一个专用的Kubernetes集群。不建议您在同一个集群内运行应用或程序。部署Rancher后，您可以[创建新集群或导入已有集群](/docs/cluster-provisioning/_index/#cluster-creation-in-rancher)，然后用这些集群启动应用或程序。
 
-我们不建议在已经预安装Kubernetes管理工具的云服务上，如EKS和GKE，安装Rancher。
+我们不建议在托管的Kubernete集群服务上，如EKS和GKE，安装Rancher。
 Rancher无法获取到这些云端Kubernetes的etcd节点信息，而且这些管理工具可能会与Rancher的命令冲突。
 
 ## 节点角色分配建议

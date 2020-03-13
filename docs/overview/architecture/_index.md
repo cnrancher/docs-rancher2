@@ -2,7 +2,7 @@
 title: 产品架构
 ---
 
-本小节主要介绍Rancher Server和它的组件，以及Rancher如何与下游Kubernetes集群沟通。请查阅[安装介绍](/docs/installation/_index/#overview-of-installation-options)获取Rancher的其他安装方式。请查阅 [产品介绍](/docs/overview//_index/#features-of-the-rancher-api-server)获取Rancher API Server的功能介绍。请查阅[推荐架构](/docs/overview/architecture-recommendations/_index)获取Rancher Server底层架构的配置指导。
+本文主要介绍Rancher Server和它的组件，以及Rancher如何与下游Kubernetes集群沟通。请查阅[安装介绍](/docs/installation/_index/#overview-of-installation-options)获取Rancher的其他安装方式。请查阅 [产品介绍](/docs/overview/_index/#features-of-the-rancher-api-server)获取Rancher API Server的功能介绍。请查阅[推荐架构](/docs/overview/architecture-recommendations/_index)获取Rancher Server底层架构的配置指导。
 
 > 本章节默认读者已经对Docker和Kubernetes有一定的了解。如果您需要了解Kubernetes组件的工作机制和原理，请查阅 [Kubernetes概念](/docs/overview/concepts/_index)。
 
@@ -10,7 +10,7 @@ title: 产品架构
 
 大多数Rancher 2.x软件在Rancher Server上运行。 Rancher Server囊括了管理Rancher部署的所有组件。
 
-下图描述了Rancher 2.x的架构。该图描述了用户使用Rancher Server向Kubernetes集群下发指令的全过程。
+下图描述了Rancher 2.x的架构。该图描述了用户使用Rancher Server向RKE集群和EKS集群下发指令的全过程。
 
 为了达到最好的效果，我们建议您使用一个专门与Rancher Server对接的Kubernetes集群进行操作。不建议您使用用工作负载。部署Rancher之后，您可以创建或导入集群，然后在这些集群上运行您的工作负载。
 
@@ -35,8 +35,8 @@ title: 产品架构
 图中的数字和对应的描述如下：
 
 1. [Proxy认证](#proxy认证)
-2. [集群控制面板和集群Agent](#集群控制面板和集群agent)
-3. [节点Agents](#节点agent)
+2. [集群控制器和集群Agent](#集群控制器和集群agent)
+3. [节点Agent](#节点agent)
 4. [授权集群端点](#授权集群端点)
 
 ### Proxy认证
@@ -47,7 +47,7 @@ Rancher的Proxy认证把API调用命令转发到下游用户集群。Proxy认证
 
 Rancher使用 [service account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)和Kubernetes进行交互。Service Accout提供了一种方便的认证机制。
 
-默认状态下，Rancher生成一个包含认证信息的[kubeconfig](/docs/cluster-admin/cluster-access/kubectl//index)文件，为Rancher Server和下游用户集群的Kubernetes API Server之间的通信提供认证。该文件包含了访问集群的所有权限。
+默认状态下，Rancher生成一个包含认证信息的[kubeconfig](/docs/cluster-admin/cluster-access/kubectl/_index)文件，为Rancher Server和下游用户集群的Kubernetes API Server之间的通信提供认证。该文件包含了访问集群的所有权限。
 
 ### 集群控制器和集群Agent
 
@@ -104,7 +104,7 @@ Rancher使用 [service account](https://kubernetes.io/docs/tasks/configure-pod-c
 * `kube_config_rancher-cluster.yml` ：集群的kubeconfig文件，如上文所述，该文件含有 `kubectl` 和 `helm` 的认证信息。如果Rancher出现故障，无法运行，您可以使用这个文件完成Rancher集群认证。
 * `rancher-cluster.rkestate` ：Kubernetes集群状态文件，该文件含有访问集群的所有权限。只有使用RKE 0.2.0或以上版本时，才会创建该文件。
 
-更多详细信息请参考[kubeconfig文件](/docs/cluster-admin/cluster-access/kubectl/_index)。
+更多详细信息请参考[kubeconfig文件](/docs/cluster-admin/cluster-access/_index)。
 
 ## 创建Kubernetes集群所需工具
 
@@ -114,7 +114,7 @@ Rancher使用 [service account](https://kubernetes.io/docs/tasks/configure-pod-c
 
 Rancher可以动态启动位于云上的集群，如Amazon EC2、DigitalOcean、Azure和vSphere，然后在集群上安装Kubernetes。Rancher使用 [RKE](https://github.com/rancher/rke) 和 [docker-machine](https://github.com/rancher/machine)启动这种集群。
 
-### Rancher Launched Kubernetes for Custom Nodes在Rancher内运行自定义的集群
+### Rancher部署的Kubernetes集群（RKE集群）
 
 配置这种集群时，Rancher在已有节点上安装了Kubernetes，创建了自定义集群。Rancher使用[RKE](https://github.com/rancher/rke)启动这种集群。
 
