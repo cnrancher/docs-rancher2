@@ -2,7 +2,7 @@
 title: 推荐架构
 ---
 
-推荐架构为通过 Kubernetes 集群安装的方式。如果您准备在单节点上安装 Rancher，那么这个推荐中只有运行 Rancher 的节点要[与下游集群开部署](#分开部署-rancher-与用户集群)的部分适用于你。
+安装 Rancher 的方式有两种：**单节点安装**和**高可用集群安装**。因为单节点安装只适用于测试和demo环境，而且单节点安装和高可用集群安装之间不能进行数据迁移，所以我们推荐从一开始就使用高可用集群安装的方式安装 Rancher。本文将详细介绍高可用集群安装的配置方式。如果您仍然准备在单节点上安装 Rancher，本文只有运行 Rancher 的节点[与下游集群开部署](#分开部署-rancher-与用户集群)的部分适用于单节点安装。
 
 ## 分开部署 Rancher 与用户集群
 
@@ -42,10 +42,10 @@ title: 推荐架构
 
 我们强烈建议您使用云服务提供商的虚拟机，如 EC2、GCE 等，安装 Kubernetes 集群，然后在集群中安装 Rancher。
 
-为了达到最好的性能和安全条件，我们建议您为 Rancher 创建一个专用的 Kubernetes 集群。不建议您在这个专用的集群内运行应用或程序。部署 Rancher 后，您可以[创建新集群或导入已有集群](/docs/cluster-provisioning/_index)，然后用这些集群启动您自己的应用或程序。
+为了达到最好的性能和安全条件，我们建议您为 Rancher 创建一个专用的 Kubernetes 集群，只在这个机器中部署 Rancher Server，不在这个集群中运行应用或程序。部署 Rancher 后，您可以[创建新集群或导入已有集群](/docs/cluster-provisioning/_index)，然后用这些集群启动您自己的应用或程序。
 
 我们不建议在托管的 Kubernetes 集群上，如 EKS 和 GKE，安装 Rancher。
-这些托管的 Kubernetes 集群不会将 etcd 暴露给 Rancher 到，Rancher 可以管理的程度，而且它们的特殊改动可能与 Rancher 的操作冲突。
+这些托管的 Kubernetes 集群不会将 etcd 暴露给 Rancher ，达到Rancher 可以管理的程度，而且它们的特殊改动可能与 Rancher 的操作冲突。
 
 ## 节点角色分配建议
 
@@ -56,7 +56,7 @@ title: 推荐架构
 
 ## Rancher Server 集群和用户集群的角色对比
 
-Rancher Server 集群中的节点角色分配，我们建议每个节点都分配 etcd、controlplane 和 worker 三个角色；而用户集群中的角色分配则恰好相反，每个节点只分配一个角色，这样可以保持稳定性和可扩展性。
+Rancher Server 集群中的节点角色分配，我们建议每个节点都分配 etcd、controlplane 和 worker 三个角色；而用户集群中的角色分配则恰好相反，每个节点只分配一个角色，这样可以保持集群的稳定性和可扩展性。
 
 ![Kubernetes Roles for Nodes in Rancher Server Cluster vs. User Clusters](/img/rancher/rancher-architecture-node-roles.svg)
 
