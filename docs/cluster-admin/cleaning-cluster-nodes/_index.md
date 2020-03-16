@@ -1,185 +1,173 @@
 ---
-title: 删除 RKE 集群节点上的 Kubernetes 组件
+title: 删除集群节点上的 Kubernetes 组件
 ---
 
-This section describes how to disconnect a node from a Rancher-launched Kubernetes cluster and remove all of the Kubernetes components from the node. This process allows you to use the node for other purposes.
+本节介绍如何从一个 Rancher 创建的 Kubernetes 集群中断开一个节点，并从该节点中删除所有 Kubernetes 组件。此过程允许您将节点用于其他用途。
 
-When you use Rancher to [launch nodes for a cluster](/docs/cluster-provisioning/#cluster-creation-in-rancher), resources (containers/virtual network interfaces) and configuration items (certificates/configuration files) are created.
+当您使用 Rancher [创建集群节点](/docs/cluster-provisioning/_index) 时, 将创建资源(容器/虚拟网络接口)和配置项(证书/配置文件)。
 
-When removing nodes from your Rancher launched Kubernetes cluster (provided that they are in `Active` state), those resources are automatically cleaned, and the only action needed is to restart the node. When a node has become unreachable and the automatic cleanup process cannot be used, we describe the steps that need to be executed before the node can be added to a cluster again.
+当从您的 Rancher 启动的 Kubernetes 集群中删除节点时(假设它们处于“活动”状态)，这些资源将被自动清除，所需的惟一操作是重新启动节点。当一个节点变得不可访问并且不能使用自动清理过程时，我们将再次说明将该节点添加到集群之前需要执行的步骤。
 
-### What Gets Removed?
+## 删除了什么？
 
-When cleaning nodes provisioned using Rancher, the following components are deleted based on the type of cluster node you're removing.
+在使用 Rancher 清理创建的节点时，将根据要删除的集群节点的类型删除以下组件。
 
-| Removed Component                                                              | [Nodes Hosted by Infrastructure Provider][1] | [Custom Nodes][2] | [Hosted Cluster][3] | [Imported Nodes][4] |
-| ------------------------------------------------------------------------------ | -------------------------------------------- | ----------------- | ------------------- | ------------------- |
-| The Rancher deployment namespace ( `cattle-system` by default)                  | ✓                                            | ✓                 | ✓                   | ✓                   |
-| `serviceAccount` , `clusterRoles` , and `clusterRoleBindings` labeled by Rancher | ✓                                            | ✓                 | ✓                   | ✓                   |
-| Labels, Annotations, and Finalizers                                            | ✓                                            | ✓                 | ✓                   | ✓                   |
-| Rancher Deployment                                                             | ✓                                            | ✓                 | ✓                   |                     |
-| Machines, clusters, projects, and user custom resource definitions (CRDs)      | ✓                                            | ✓                 | ✓                   |                     |
-| All resources create under the `management.cattle.io` API Group                | ✓                                            | ✓                 | ✓                   |                     |
-| All CRDs created by Rancher v2.x                                               | ✓                                            | ✓                 | ✓                   |                     |
+| 删除的组件                                                                      | [由基础设施提供商托管的节点][1] | [自定义集群的节点][2] | [托管集群的节点][3] | [导入集群的节点][4] |
+| ------------------------------------------------------------------------------- | ------------------------------- | --------------------- | ------------------- | ------------------- |
+| Rancher deployment 命名空间 (默认`cattle-system` )                              | ✓                               | ✓                     | ✓                   | ✓                   |
+| 由 Rancher 打了标签的`serviceAccount`, `clusterRoles`, 和 `clusterRoleBindings` | ✓                               | ✓                     | ✓                   | ✓                   |
+| 标签、注释和清理器                                                              | ✓                               | ✓                     | ✓                   | ✓                   |
+| Rancher Deployment                                                              | ✓                               | ✓                     | ✓                   |                     |
+| 主机、集群、项目和用户自定义资源定义 (CRDs)                                     | ✓                               | ✓                     | ✓                   |                     |
+| 在`management.cattle.io` API 分组下创建的所有资源                               | ✓                               | ✓                     | ✓                   |                     |
+| 所有由 Rancher v2.x 创建的 CRD                                                  | ✓                               | ✓                     | ✓                   |                     |
 
-[1]: /docs/cluster-provisioning/rke-clusters/node-pools/
-[2]: /docs/cluster-provisioning/rke-clusters/custom-nodes/
-[3]: /docs/cluster-provisioning/hosted-kubernetes-clusters/
-[4]: /docs/cluster-provisioning/imported-clusters/
+[1]: /docs/cluster-provisioning/rke-clusters/node-pools/_index
+[2]: /docs/cluster-provisioning/rke-clusters/custom-nodes/_index
+[3]: /docs/cluster-provisioning/hosted-kubernetes-clusters/_index
+[4]: /docs/cluster-provisioning/imported-clusters/_index
 
-### Removing a Node from a Cluster by Rancher UI
+## 通过 Rancher UI 从集群中删除节点
 
-When the node is in `Active` state, removing the node from a cluster will trigger a process to clean up the node. Please restart the node after the automatic cleanup process is done to make sure any non-persistent data is properly removed.
+当节点处于“活动”状态时，从集群中删除节点将触发一个进程来清理节点。完成自动清理过程后，请重启节点，以确保正确删除了所有非持久性数据。
 
-**To restart a node:**
+**重启节点:**
 
-``` 
-
+```
 ## using reboot
-
 $ sudo reboot
 
 ## using shutdown
-
 $ sudo shutdown -r now
 ```
 
-### Removing Rancher Components from a Cluster Manually
+## 手动从集群中删除 Rancher 组件
 
-When a node is unreachable and removed from the cluster, the automatic cleaning process can't be triggered because the node is unreachable. Please follow the steps below to manually remove the Rancher components.
+当某个节点不可访问并从集群中删除时，由于该节点不可访问，因此无法触发自动清理过程。请按照以下步骤手动删除 Rancher 组件。
 
-> **Warning:** The commands listed below will remove data from the node. Make sure you have created a backup of files you want to keep before executing any of the commands as data will be lost.
+> **警告:** 下面列出的命令将会从节点中删除数据。在执行任何命令之前，确保您已经创建了要保存的文件备份，因为数据将会丢失。
 
-#### Removing Rancher Components from Imported Clusters
+### 从导入的集群中删除 Rancher 组件
 
-For imported clusters, the process for removing Rancher is a little different. You have the option of simply deleting the cluster in the Rancher UI, or your can run a script that removes Rancher components from the nodes. Both options make the same deletions.
+对于导入的集群，删除 Rancher 的过程略有不同。您可以在 Rancher UI 中简单地删除集群，也可以运行从节点中删除 Rancher 组件的脚本。两个选项执行相同的删除操作。
 
-After the imported cluster is detached from Rancher, the cluster's workloads will be unaffected and you can access the cluster using the same methods that you did before the cluster was imported into Rancher.
+将导入的集群与 Rancher 分离后，集群的工作负载将不受影响，您可以使用与将集群导入 Rancher 之前相同的方法访问集群。
 
- tabs 
- tab "By UI / API" 
+#### 通过 UI / API 删除
 
-> **Warning:** This process will remove data from your cluster. Make sure you have created a backup of files you want to keep before executing the command, as data will be lost.
+> **警告:** 此过程将从您的集群中删除数据。在执行命令之前，请确保您已经创建了要保存的文件备份，因为数据将会丢失。
 
-After you initiate the removal of an [imported cluster](/docs/cluster-provisioning/#import-existing-cluster) using the Rancher UI (or API), the following events occur.
+在使用 Rancher UI(或 API)开始删除 [导入的集群](/docs/cluster-provisioning/_index) 之后, 将发生以下事件。
 
-1. Rancher creates a `serviceAccount` that it uses to remove the Rancher components from the cluster. This account is assigned the [clusterRole](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#role-and-clusterrole) and [clusterRoleBinding](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#rolebinding-and-clusterrolebinding) permissions, which are required to remove the Rancher components.
+1. Rancher 创建了一个 `serviceAccount` 用于从集群中删除 Rancher 组件。这个帐户分配了删除 Rancher 组件所需要的[clusterRole](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#role-and-clusterrole) 和 [clusterRoleBinding](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#rolebinding-and-clusterrolebinding) 权限。
 
-1. Using the `serviceAccount` , Rancher schedules and runs a [job](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) that cleans the Rancher components off of the cluster. This job also references the `serviceAccount` and its roles as dependencies, so the job deletes them before its completion.
+1. 使用`serviceAccount`, Rancher 调度并运行一个[作业](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/)，该作业清除集群中的 Rancher 组件。此作业还将 `serviceAccount` 及其角色作为依赖项引用，因此作业将在完成之前删除它们。
+1. Rancher 从集群中移除。但是，集群仍然在运行本地版本的 Kubernetes。
 
-1. Rancher is removed from the cluster. However, the cluster persists, running the native version of Kubernetes.
+**结果:** 所有在 [删除了什么？](#删除了什么？)中为导入集群列出的组件会被删除.
 
-**Result:** All components listed for imported clusters in [What Gets Removed?](#what-gets-removed) are deleted.
+#### 通过运行脚本删除
 
- /tab 
- tab "By Script" 
-Rather than cleaning imported cluster nodes using the Rancher UI, you can run a script instead. This functionality is available since `v2.1.0` .
+您可以运行一个脚本，而不是使用 Rancher UI 来清除导入的集群节点。 该功能从`v2.1.0`版本开始提供。
 
-> **Prerequisite:**
+> **先决条件:**
 >
-> Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+> 安装 [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 
-1. Open a web browser, navigate to [GitHub](https://github.com/rancher/rancher/blob/master/cleanup/user-cluster.sh), and download `user-cluster.sh` .
+1. 打开网页浏览器, 打开 [GitHub](https://github.com/rancher/rancher/blob/master/cleanup/user-cluster.sh)页面, 并下载 `user-cluster.sh`.
 
-1. Make the script executable by running the following command from the same directory as `user-cluster.sh` :
+1. 在与`user-cluster.sh`相同的路径下运行以下命令，使脚本可执行:
 
-   
-
-``` 
+   ```
    chmod +x user-cluster.sh
    ```
 
-1.**Air Gap Environments Only:** Open `user-cluster.sh` and replace `yaml_url` with the URL in `user-cluster.yml` .
+1. **仅限于离线环境:** 打开 `user-cluster.sh` 将 `yaml_url` 替换成 `user-cluster.yml`中的 URL
 
-   If you don't have an air gap environment, skip this step.
+   如果您没有离线环境，请跳过这一步。
 
-1. From the same directory, run the script and provide the `rancher/rancher-agent` image version which should be equal to the version of Rancher used to manage the cluster.( `<RANCHER_VERSION>` ):
+1. 在同一目录中，运行脚本并提供 `rancher/rancher-agent` 镜像版本， 该版本应该与用于管理集群的 Rancher 版本一致。 (`<RANCHER_VERSION>`):
 
-   > **Tip:**
+   > **提示:**
    >
-   > Add the `-dry-run` flag to preview the script's outcome without making changes.
+   > 添加 `-dry-run` 标志来预览脚本的结果，而不做任何更改
 
-   
-
-``` 
+   ```
    ./user-cluster.sh rancher/rancher-agent:<RANCHER_VERSION>
    ```
 
-**Result:** The script runs. All components listed for imported clusters in [What Gets Removed?](#what-gets-removed) are deleted.
+**结果:** 脚本运行。所有在 [删除了什么？](#删除了什么？)中为导入集群列出的组件会被删除.
 
- /tab 
- /tabs 
+### Windows 节点
 
-#### Windows Nodes
+要清理 Windows 节点，可以运行位于 `c:\etc\rancher`目录下的清理脚本. 该脚本删除 Kubernetes 生成的资源和执行的二进制文件。它还取消了防火墙规则和网络设置。
 
-To clean up a Windows node, you can run a cleanup script located in `c:\etc\rancher` . The script deletes Kubernetes generated resources and the execution binary. It also drops the firewall rules and network settings.
+要运行脚本，可以在 PowerShell 中使用此命令:
 
-To run the script, you can use this command in the PowerShell:
-
-``` 
+```
 pushd c:\etc\rancher
 .\cleanup.ps1
 popd
 ```
 
-**Result:** The node is reset and can be re-added to a Kubernetes cluster.
+**结果:** 节点被重置，可以重新添加到 Kubernetes 集群中。
 
-#### Docker Containers, Images, and Volumes
+### Docker 容器、镜像和卷
 
-Based on what role you assigned to the node, there are Kubernetes components in containers, containers belonging to overlay networking, DNS, ingress controller and Rancher agent.(and pods you created that have been scheduled to this node)
+根据您分配给节点的角色，容器中有 Kubernetes 组件， 属于覆盖网络的容器、DNS、ingress 控制器和 Rancher 代理。 (还有你创建的 Pods 也被调度到这个节点)
 
-**To clean all Docker containers, images and volumes:**
+**清理所有 Docker 容器、镜像和卷:**
 
-``` 
+```
 docker rm -f $(docker ps -qa)
 docker rmi -f $(docker images -q)
 docker volume rm $(docker volume ls -q)
 ```
 
-#### Mounts
+### 挂载
 
-Kubernetes components and secrets leave behind mounts on the system that need to be unmounted.
+Kubernetes 的组件和密钥在系统上留下了需要卸载的挂载。
 
-| Mounts                                             |
-| -------------------------------------------------- |
-| `/var/lib/kubelet/pods/XXX` (miscellaneous mounts) |
-| `/var/lib/kubelet` |
-| `/var/lib/rancher` |
+| 挂载                                   |
+| -------------------------------------- |
+| `/var/lib/kubelet/pods/XXX` (各种挂载) |
+| `/var/lib/kubelet`                     |
+| `/var/lib/rancher`                     |
 
-**To unmount all mounts:**
+**卸载所有挂载:**
 
-``` 
+```
 for mount in $(mount | grep tmpfs | grep '/var/lib/kubelet' | awk '{ print $3 }') /var/lib/kubelet /var/lib/rancher; do umount $mount; done
 ```
 
-#### Directories and Files
+### 文件与目录
 
-The following directories are used when adding a node to a cluster, and should be removed. You can remove a directory using `rm -rf /directory_name` .
+以下目录在添加一个节点到一个集群时被使用到，应该将它们删除。您可以使用命令 `rm -rf /directory_name`删除目录
 
-> **Note:** Depending on the role you assigned to the node, some of the directories will or won't be present on the node.
+> **注意:** 根据您分配给节点的角色，一些目录将会或不会出现在节点上。
 
 | Directories                  |
 | ---------------------------- |
-| `/etc/ceph` |
-| `/etc/cni` |
-| `/etc/kubernetes` |
-| `/opt/cni` |
-| `/opt/rke` |
+| `/etc/ceph`                  |
+| `/etc/cni`                   |
+| `/etc/kubernetes`            |
+| `/opt/cni`                   |
+| `/opt/rke`                   |
 | `/run/secrets/kubernetes.io` |
-| `/run/calico` |
-| `/run/flannel` |
-| `/var/lib/calico` |
-| `/var/lib/etcd` |
-| `/var/lib/cni` |
-| `/var/lib/kubelet` |
-| `/var/lib/rancher/rke/log` |
-| `/var/log/containers` |
-| `/var/log/pods` |
-| `/var/run/calico` |
+| `/run/calico`                |
+| `/run/flannel`               |
+| `/var/lib/calico`            |
+| `/var/lib/etcd`              |
+| `/var/lib/cni`               |
+| `/var/lib/kubelet`           |
+| `/var/lib/rancher/rke/log`   |
+| `/var/log/containers`        |
+| `/var/log/pods`              |
+| `/var/run/calico`            |
 
-**To clean the directories:**
+**清除目录:**
 
-``` 
+```
 rm -rf /etc/ceph \
        /etc/cni \
        /etc/kubernetes \
@@ -198,94 +186,87 @@ rm -rf /etc/ceph \
        /var/run/calico
 ```
 
-#### Network Interfaces and Iptables
+### 网络接口和 Iptables
 
-The remaining two components that are changed/configured are (virtual) network interfaces and iptables rules. Both are non-persistent to the node, meaning that they will be cleared after a restart of the node. To remove these components, a restart is recommended.
+其余被更改/配置过的两个组件是(虚拟)网络接口和 iptables 规则。它们相对于节点来说都是非持久性的，这意味着它们将在重新启动节点后被清除。要删除这些组件，建议重启节点。
 
-**To restart a node:**
+**重启节点:**
 
-``` 
-
+```
 ## using reboot
-
 $ sudo reboot
 
 ## using shutdown
-
 $ sudo shutdown -r now
 ```
 
-If you want to know more on (virtual) network interfaces or iptables rules, please see the specific subjects below.
+如果您想了解更多关于(虚拟)网络接口或 iptables 规则的信息，请参阅下面的特定主题。
 
-#### Network Interfaces
+### 网络接口
 
-> **Note:** Depending on the network provider configured for the cluster the node was part of, some of the interfaces will or won't be present on the node.
+> **注意:** 根据为节点所在的集群配置的网络供应商，一些接口将出现在节点上，也可能不出现在节点上。
 
 | Interfaces                                 |
 | ------------------------------------------ |
-| `flannel.1` |
-| `cni0` |
-| `tunl0` |
+| `flannel.1`                                |
+| `cni0`                                     |
+| `tunl0`                                    |
 | `caliXXXXXXXXXXX` (random interface names) |
 | `vethXXXXXXXX` (random interface names)    |
 
-**To list all interfaces:**
+**列出所有接口:**
 
-``` 
-
+```
 ## Using ip
-
 ip address show
 
 ## Using ifconfig
-
 ifconfig -a
 ```
 
-**To remove an interface:**
+**删除接口:**
 
-``` 
+```
 ip link delete interface_name
 ```
 
-#### Iptables
+### Iptables
 
-> **Note:** Depending on the network provider configured for the cluster the node was part of, some of the chains will or won't be present on the node.
+> **注意:** 根据为节点所在的集群配置的网络供应商，节点上可能存在或不存在某些 chains。
 
-Iptables rules are used to route traffic from and to containers. The created rules are not persistent, so restarting the node will restore iptables to its original state.
+Iptables 规则用于将数据从容器路由到容器。创建的规则不是持久性的，因此重新启动节点将把 iptables 恢复到原来的状态。
 
 | Chains                                           |
 | ------------------------------------------------ |
-| `cali-failsafe-in` |
-| `cali-failsafe-out` |
-| `cali-fip-dnat` |
-| `cali-fip-snat` |
-| `cali-from-hep-forward` |
-| `cali-from-host-endpoint` |
-| `cali-from-wl-dispatch` |
+| `cali-failsafe-in`                               |
+| `cali-failsafe-out`                              |
+| `cali-fip-dnat`                                  |
+| `cali-fip-snat`                                  |
+| `cali-from-hep-forward`                          |
+| `cali-from-host-endpoint`                        |
+| `cali-from-wl-dispatch`                          |
 | `cali-fw-caliXXXXXXXXXXX` (random chain names)   |
-| `cali-nat-outgoing` |
+| `cali-nat-outgoing`                              |
 | `cali-pri-kns.NAMESPACE` (chain per namespace)   |
 | `cali-pro-kns.NAMESPACE` (chain per namespace)   |
-| `cali-to-hep-forward` |
-| `cali-to-host-endpoint` |
-| `cali-to-wl-dispatch` |
+| `cali-to-hep-forward`                            |
+| `cali-to-host-endpoint`                          |
+| `cali-to-wl-dispatch`                            |
 | `cali-tw-caliXXXXXXXXXXX` (random chain names)   |
-| `cali-wl-to-host` |
-| `KUBE-EXTERNAL-SERVICES` |
-| `KUBE-FIREWALL` |
-| `KUBE-MARK-DROP` |
-| `KUBE-MARK-MASQ` |
-| `KUBE-NODEPORTS` |
+| `cali-wl-to-host`                                |
+| `KUBE-EXTERNAL-SERVICES`                         |
+| `KUBE-FIREWALL`                                  |
+| `KUBE-MARK-DROP`                                 |
+| `KUBE-MARK-MASQ`                                 |
+| `KUBE-NODEPORTS`                                 |
 | `KUBE-SEP-XXXXXXXXXXXXXXXX` (random chain names) |
-| `KUBE-SERVICES` |
+| `KUBE-SERVICES`                                  |
 | `KUBE-SVC-XXXXXXXXXXXXXXXX` (random chain names) |
 
-**To list all iptables rules:**
+**列出所有 iptables 规则:**
 
-``` 
+```
 iptables -L -t nat
 iptables -L -t mangle
 iptables -L
 ```
-

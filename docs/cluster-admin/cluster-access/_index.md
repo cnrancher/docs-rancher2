@@ -1,34 +1,33 @@
 ---
-title: 介绍
+title: 访问集群
 ---
 
-There are many ways you can interact with Kubernetes clusters that are managed by Rancher:
+您可以通过多种方式与由 Rancher 管理的 Kubernetes 集群进行交互:
 
-* **Rancher UI**
+## Rancher UI
 
-  Rancher provides an intuitive user interface for interacting with your clusters. All options available in the UI use the Rancher API. Therefore any action possible in the UI is also possible in the Rancher CLI or Rancher API.
+Rancher 为与集群交互提供了直观的用户界面。UI 中所有可用的选项都调用 Rancher API。因此，在 UI 中任何可行的操作在 Rancher CLI 或 Rancher API 中也是可行的。
 
-* **kubectl**
+## kubectl
 
-  You can use the Kubernetes command-line tool, [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/), to manage your clusters. You have two options for using kubectl:
+您可以使用 Kubernetes 命令行工具[kubectl](https://kubernetes.io/docs/reference/kubectl/overview/)来管理你的集群，使用 kubectl 有两种选择:
 
-  + **Rancher kubectl shell**
+### Rancher kubectl shell
 
-    Interact with your clusters by launching a kubectl shell available in the Rancher UI. This option requires no configuration actions on your part.
+通过启动 Rancher UI 中可用的 kubectl shell 与集群进行交互。此选项不需要您进行任何配置操作。
 
-    For more information, see [Accessing Clusters with kubectl Shell](/docs/k8s-in-rancher/kubectl/#accessing-clusters-with-kubectl-shell).
+有关更多信息，请参见 [使用 kubectl Shell 访问集群](/docs/cluster-admin/cluster-access/kubectl/_index).
 
-  + **Terminal remote connection**
+### 终端远程连接
 
-    You can also interact with your clusters by installing [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) on your local desktop and then copying the cluster's kubeconfig file to your local `~/.kube/config` directory.
+您还可以通过在本地桌面安装 [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) 来与集群进行交互，然后将集群的 kubeconfig 文件复制到本地 `~/.kube/config` 目录中。
 
-    For more information, see [Accessing Clusters with kubectl and a kubeconfig File](/docs/k8s-in-rancher/kubectl/#accessing-clusters-with-kubectl-and-a-kubeconfig-file).
+有关更多信息，请参见 [使用 kubectl 和 kubeconfig 文件访问集群](/docs/cluster-admin/cluster-access/kubectl/_index).
 
-* **Rancher CLI**
+## Rancher CLI
 
-  You can control your clusters by downloading Rancher's own command-line interface, [Rancher CLI](/docs/cli/). This CLI tool can interact directly with different clusters and projects or pass them `kubectl` commands.
+您可以通过下载 Rancher 自己的 CLI 来控制集群, [Rancher CLI](/docs/cli/_index). 这个 CLI 工具可以直接与不同的集群和项目交互，或者向它们传递 `kubectl` 命令。
 
-* **Rancher API**
+## Rancher API
 
-  Finally, you can interact with your clusters over the Rancher API. Before you use the API, you must obtain an [API key](/docs/user-settings/api-keys/). To view the different resource fields and actions for an API object, open the API UI, which can be accessed by clicking on **View in API** for any Rancher UI object.
-
+最后，您可以通过 Rancher API 与集群进行交互。在使用 API 之前，您必须获得一个 [API Key](/docs/user-settings/api-keys/_index). 要查看 API 对象的不同资源字段和操作，请打开 API UI，可以通过单击 **View in API** 来访问任何 Rancher UI 对象

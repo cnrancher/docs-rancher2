@@ -2,52 +2,53 @@
 title: 将用户添加到集群中
 ---
 
-If you want to provide a user with access and permissions to _all_ projects, nodes, and resources within a cluster, assign the user a cluster membership.
+## 添加集群成员
 
-> **Tip:** Want to provide a user with access to a _specific_ project within a cluster? See [Adding Project Members](/docs/k8s-in-rancher/projects-and-namespaces/project-members/) instead.
+如果希望为用户提供对集群中的 _所有_ 项目、节点和资源的访问和权限，请为该用户分配集群成员资格。
 
-There are two contexts where you can add cluster members:
+> **提示:** 希望为用户提供对集群中 _特定_ 项目的访问权限? 请参见 [添加项目成员](/docs/project-admin/project-members/_index)。
 
-* Adding Members to a New Cluster
+以下两种情况下，您可以添加集群成员:
 
-  You can add members to a cluster as you create it (recommended if possible).
+- 向新集群添加成员
 
-* [Adding Members to an Existing Cluster](#editing-cluster-membership)
+  您可以在创建集群时将成员添加到集群中 (如果可能，建议这样做)。
 
-  You can always add members to a cluster after a cluster is provisioned.
+- [向现有集群添加成员](#编辑集群成员)
 
-### Editing Cluster Membership
+  在集群创建之后，随时可以向集群添加成员。
 
-Cluster administrators can edit the membership for a cluster, controlling which Rancher users can access the cluster and what features they can use.
+## 编辑集群成员
 
-1.  From the **Global** view, open the cluster that you want to add members to.
+集群管理员可以编辑集群的成员关系，控制哪些 Rancher 用户可以访问集群以及他们可以使用哪些功能。
 
-2.  From the main menu, select **Members**. Then click **Add Member**.
+1.  在 **全局** 视图中，打开要向其添加成员的集群。
 
-3.  Search for the user or group that you want to add to the cluster.
+2.  从主菜单中选择 **成员**，然后单击 **添加成员**.
 
-    If external authentication is configured:
+3.  搜索要添加到集群中的用户或组。
 
-    - Rancher returns users from your [external authentication](/docs/admin-settings/authentication/) source as you type.
+    如果配置了外部认证:
 
-          	>**Using AD but can't find your users?**
-          	>There may be an issue with your search attribute configuration. See [Configuring Active Directory Authentication: Step 5](/docs/admin-settings/authentication/ad/).
+    - Rancher 在您键入时从 [外部身份验证](/docs/admin-settings/authentication/_index) 源返回用户。
 
-    - A drop-down allows you to add groups instead of individual users. The drop-down only lists groups that you, the logged in user, are part of.
+      > **使用 AD 却找不到你的用户?**
+      > 您的搜索属性配置可能存在问题.请参见 [配置 Active Directory 身份验证:步骤 5](/docs/admin-settings/authentication/ad/_index).
 
-          	>**Note:** If you are logged in as a local user, external users do not display in your search results. For more information, see [External Authentication Configuration and Principal Users](/docs/admin-settings/authentication/#external-authentication-configuration-and-principal-users).
+    - 下拉菜单允许您添加组，而不是单个用户。下拉列表只列出登录用户所属的组。
 
-4.  Assign the user or group **Cluster** roles.
+      > **注意:** 如果您是以本地用户登录的，那么外部用户不会显示在您的搜索结果中。更多信息，请参见 [外部身份验证配置和主要用户](/docs/admin-settings/authentication/_index).
 
-    [What are Cluster Roles?](/docs/admin-settings/rbac/cluster-project-roles/)
+4.  给用户或组分配 **集群** 角色。
 
-    > **Tip:** For Custom Roles, you can modify the list of individual roles available for assignment.
+    [什么是集群角色?](/docs/admin-settings/rbac/cluster-project-roles/_index)
+
+    > **提示：** 对于自定义角色，您可以修改可用于分配的各个角色的列表。
     >
-    > - To add roles to the list, [Add a Custom Role](/docs/admin-settings/rbac/default-custom-roles/).
-    > - To remove roles from the list, [Lock/Unlock Roles](/docs/admin-settings/rbac/locked-roles).
+    > - 将角色添加到列表中， [添加自定义角色](/docs/admin-settings/rbac/default-custom-roles/_index).
+    > - 要从列表中删除角色， [锁定/解锁角色](/docs/admin-settings/rbac/locked-roles/_index).
 
-**Result:** The chosen users are added to the cluster.
+**结果：** 选择的用户被添加到集群中。
 
-* To revoke cluster membership, select the user and click **Delete**. This action deletes membership, not the user.
-* To modify a user's roles in the cluster, delete them from the cluster, and then re-add them with modified roles.
-
+- 要撤消集群成员资格，请选择用户并单击 **删除**. 此操作删除的是成员关系，而不是用户。
+- 要修改用户在集群中的角色，请从集群中删除它们，然后使用修改后的角色重新添加它们。
