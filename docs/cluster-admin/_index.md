@@ -1,50 +1,45 @@
 ---
-title: 介绍
+title: 集群管理概览
 ---
 
-After you provision a cluster in Rancher, you can begin using powerful Kubernetes features to deploy and scale your containerized applications in development, testing, or production environments.
+在 Rancher 中创建集群之后，您便可以开始使用强大的 Kubernetes 特性在开发、测试或生产环境中部署和扩展您的容器化应用程序。
 
-This page covers the following topics:
+> 这部分内容会假设您基本熟悉 Docker 和 Kubernetes。有关 Kubernetes 组件是如何协同工作的简要说明，请参阅 [概念](/docs/overview/concepts/_index) 页面.
 
-* [Switching between clusters](#switching-between-clusters)
-* [Managing clusters in Rancher](#managing-clusters-in-rancher)
-* [Configuring tools](#configuring-tools)
+## 集群之间切换
 
-> This section assumes a basic familiarity with Docker and Kubernetes. For a brief explanation of how Kubernetes components work together, refer to the [concepts](/docs/overview/concepts) page.
+要在集群之间切换，可以使用导航栏中的下拉菜单。
 
-### Switching between Clusters
+或者，您可以在导航栏中直接在项目和集群之间切换。打开**全局**视图，从主菜单中选择**集群**。然后选择要打开集群的名称。
 
-To switch between clusters, use the drop-down available in the navigation bar.
+## 在 Rancher 中管理集群
 
-Alternatively, you can switch between projects and clusters directly in the navigation bar. Open the **Global** view and select **Clusters** from the main menu. Then select the name of the cluster you want to open.
+当在 Rancher 中创建集群完成之后，集群所有者将需要管理这些集群
 
-### Managing Clusters in Rancher
+当在 Rancher 中 [创建集群](/docs/cluster-provisioning/_index) 完成之后, [集群所有者](/docs/admin-settings/rbac/cluster-project-roles/_index) 将需要管理这些集群. 关于如何管理集群，有许多不同的功能选择。
 
-After clusters have been [provisioned into Rancher](/docs/cluster-provisioning/), [cluster owners](/docs/admin-settings/rbac/cluster-project-roles/#cluster-roles) will need to manage these clusters. There are many different options of how to manage your cluster.
+| 功能                                                                                                     | [Rancher 启动的 Kubernetes 集群 (RKE 集群)](/docs/cluster-provisioning/rke-clusters/_index) | [托管的 Kubernetes 集群](/docs/cluster-provisioning/hosted-kubernetes-clusters/_index) | [导入的 Kubernetes 集群](/docs/cluster-provisioning/imported-clusters/_index) |
+| -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| [使用 kubectl 和 kubeconfig 文件访问集群](/docs/cluster-admin/cluster-access/kubectl/_index)             | \*                                                                                          | \*                                                                                     | \*                                                                            |
+| [添加集群成员](/docs/cluster-admin/cluster-access/cluster-members/_index)                                | \*                                                                                          | \*                                                                                     | \*                                                                            |
+| [编辑集群](/docs/cluster-admin/editing-clusters/_index)                                                  | \*                                                                                          | \*                                                                                     | \*                                                                            |
+| [管理节点](/docs/cluster-admin/nodes/_index)                                                             | \*                                                                                          | \*                                                                                     | \*                                                                            |
+| [管理持久卷和存储类](/docs/cluster-admin/volumes-and-storage/_index)                                     | \*                                                                                          | \*                                                                                     | \*                                                                            |
+| [管理项目和命名空间](/docs/cluster-admin/projects-and-namespaces/_index)                                 | \*                                                                                          | \*                                                                                     | \*                                                                            |
+| [配置工具](#配置工具)                                                                                    | \*                                                                                          | \*                                                                                     | \*                                                                            |
+| [克隆集群](/docs/cluster-admin/cloning-clusters/_index)                                                  |                                                                                             | \*                                                                                     | \*                                                                            |
+| [证书轮换的能力](/docs/cluster-admin/certificate-rotation/_index)                                        | \*                                                                                          |                                                                                        |                                                                               |
+| [备份您的 Kubernetes 集群的能力](/docs/cluster-admin/backing-up-etcd/_index)                             | \*                                                                                          |                                                                                        |                                                                               |
+| [恢复和还原 etcd 的能力](/docs/cluster-admin/restoring-etcd/_index)                                      | \*                                                                                          |                                                                                        |                                                                               |
+| [当集群不再能从 Rancher 访问时，清理 Kubernetes 组件](/docs/cluster-admin/cleaning-cluster-nodes/_index) | \*                                                                                          |                                                                                        |                                                                               |
 
-| Action                                                                                                                           | [Rancher launched Kubernetes Clusters](/docs/cluster-provisioning/rke-clusters/) | [Hosted Kubernetes Clusters](/docs/cluster-provisioning/hosted-kubernetes-clusters/) | [Imported Clusters](/docs/cluster-provisioning/imported-clusters) |
-| -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
-| [Using kubectl and a kubeconfig file to Access a Cluster](/docs/cluster-admin/cluster-access/kubectl/)                           | \*                                                                               | \*                                                                                   | \*                                                                |
-| [Adding Cluster Members](/docs/cluster-admin/cluster-access/cluster-members/)                                                    | \*                                                                               | \*                                                                                   | \*                                                                |
-| [Editing Clusters](/docs/cluster-admin/editing-clusters/)                                                                        | \*                                                                               | \*                                                                                   | \*                                                                |
-| [Managing Nodes](/docs/cluster-admin/nodes)                                                                                      | \*                                                                               | \*                                                                                   | \*                                                                |
-| [Managing Persistent Volumes and Storage Classes](/docs/cluster-admin/volumes-and-storage/)                                      | \*                                                                               | \*                                                                                   | \*                                                                |
-| [Managing Projects and Namespaces](/docs/cluster-admin/projects-and-namespaces/)                                                 | \*                                                                               | \*                                                                                   | \*                                                                |
-| [Configuring Tools](#configuring-tools)                                                                                          | \*                                                                               | \*                                                                                   | \*                                                                |
-| [Cloning Clusters](/docs/cluster-admin/cloning-clusters/)                                                                        |                                                                                  | \*                                                                                   | \*                                                                |
-| [Ability to rotate certificates](/docs/cluster-admin/certificate-rotation/)                                                      | \*                                                                               |                                                                                      |                                                                   |
-| [Ability to back up your Kubernetes Clusters](/docs/cluster-admin/backing-up-etcd/)                                              | \*                                                                               |                                                                                      |                                                                   |
-| [Ability to recover and restore etcd](/docs/cluster-admin/restoring-etcd/)                                                       | \*                                                                               |                                                                                      |                                                                   |
-| [Cleaning Kubernetes components when clusters are no longer reachable from Rancher](/docs/cluster-admin/cleaning-cluster-nodes/) | \*                                                                               |                                                                                      |                                                                   |
+## 配置工具
 
-### Configuring Tools
+Rancher 包含许多 Kubernetes 中没有的工具来帮助您的 DevOps 运作。Rancher 可以与外部服务集成，以帮助您的集群更有效地运行。工具分为以下几类:
 
-Rancher contains a variety of tools that aren't included in Kubernetes to assist in your DevOps operations. Rancher can integrate with external services to help your clusters run more efficiently. Tools are divided into following categories:
+- 告警
+- 通知
+- 日志
+- 监控
 
-* Alerts
-* Notifiers
-* Logging
-* Monitoring
-
-For more information, see [Tools](/docs/cluster-admin/tools/)
-
+更多信息，请参见 [工具](/docs/cluster-admin/tools/_index)

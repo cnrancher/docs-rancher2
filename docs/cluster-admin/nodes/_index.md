@@ -2,180 +2,162 @@
 title: 节点和节点池
 ---
 
-After you launch a Kubernetes cluster in Rancher, you can manage individual nodes from the cluster's **Node** tab. Depending on the [option used](/docs/cluster-provisioning/#cluster-creation-in-rancher) to provision the cluster, there are different node options available.
+在 Rancher 中启动 Kubernetes 集群之后，可以从集群的**节点**选项卡管理各个节点。根据[创建集群的方式](/docs/cluster-provisioning/_index)的不同，会有相应的节点选项。
 
-This page covers the following topics:
+要管理单个节点，请浏览要管理的集群，然后从主菜单中选择**节点**。您可以通过单击节点的**省略号(...)**来打开该节点的选项菜单。
 
-* [Node options for each type of cluster](#node-options-for-each-type-of-cluster)
-* [Cordoning and draining nodes](#cordoning-and-draining-nodes)
-* [Editing a node](#editing-a-node)
-* [Viewing a node API](#viewing-a-node-api)
-* [Deleting a node](#deleting-a-node)
-* [Scaling nodes](#scaling-nodes)
-* [SSH into a node hosted by an infrastructure provider](#ssh-into-a-node-hosted-by-an-infrastructure-provider)
-* [Managing node pools](#managing-node-pools)
+> **注意：** 如果您想管理 _集群_ 而不是单个节点，请参阅[编辑集群](/docs/cluster-admin/editing-clusters/_index).
 
-To manage individual nodes, browse to the cluster that you want to manage and then select **Nodes** from the main menu. You can open the options menu for a node by clicking its **Ellipsis** icon (**... **).
+## 每种类型集群的节点选项
 
-> **Note:** If you want to manage the _cluster_ and not individual nodes, see [Editing Clusters](/docs/k8s-in-rancher/editing-clusters).
+下表列出了 Rancher 中每个[类型的集群](/docs/cluster-provisioning/_index)可用的节点选项。单击 **选项** 列中的链接以获得关于每个功能模块的更详细信息。
 
-## Node Options for Each Type of Cluster
+| 选项                                           | [由基础设施提供商托管的节点][1] | [自定义的节点][2] | [托管的集群][3] | [导入的节点][4] | 描述                                                |
+| ---------------------------------------------- | ------------------------------- | ----------------- | --------------- | --------------- | --------------------------------------------------- |
+| [隔离](#隔离和驱逐节点)                        | ✓                               | ✓                 | ✓               | ✓               | 将节点标记为不可调度。                              |
+| [驱逐](#隔离和驱逐节点)                        | ✓                               | ✓                 | ✓               | ✓               | 将节点标记为不可调度的， _并_ 将所有 pod 驱逐出去。 |
+| [编辑](#编辑节点)                              | ✓                               | ✓                 | ✓               | ✓               | 输入节点的自定义名称、描述、标签或污点。            |
+| [查看 API](#查看节点-api)                      | ✓                               | ✓                 | ✓               | ✓               | 查看 API 数据。                                     |
+| [删除](#删除节点)                              | ✓                               | ✓                 |                 |                 | 从群集中删除有缺陷的节点。                          |
+| [下载 Keys](#ssh-到由基础设施提供商托管的节点) | ✓                               |                   |                 |                 | 下载 SSH 密钥以便 SSH 到节点。                      |
+| [节点扩缩](#扩缩节点)                          | ✓                               |                   |                 |                 | 增加或减少节点池中的节点数。                        |
 
-The following table lists which node options are available for each [type of cluster](/docs/cluster-provisioning/#cluster-creation-options) in Rancher. Click the links in the **Option** column for more detailed information about each feature.
+[1]: /docs/cluster-provisioning/rke-clusters/node-pools/_index
+[2]: /docs/cluster-provisioning/rke-clusters/custom-nodes/_index
+[3]: /docs/cluster-provisioning/hosted-kubernetes-clusters/_index
+[4]: /docs/cluster-provisioning/imported-clusters/_index
 
-| Option                                                                 | [Nodes Hosted by an Infrastructure Provider][1] | [Custom Node][2] | [Hosted Cluster][3] | [Imported Nodes][4] | Description                                                    |
-| ---------------------------------------------------------------------- | ----------------------------------------------- | ---------------- | ------------------- | ------------------- | -------------------------------------------------------------- |
-| [Cordon](#cordoning-a-node)                                            | ✓                                               | ✓                | ✓                   |                     | Marks the node as unschedulable.|
-| [Drain](#draining-a-node)                                              | ✓                                               | ✓                | ✓                   |                     | Marks the node as unschedulable _and_ evicts all pods.|
-| [Edit](#editing-a-node)                                                | ✓                                               | ✓                | ✓                   |                     | Enter a custom name, description, label, or taints for a node.|
-| [View API](#viewing-a-node-api)                                        | ✓                                               | ✓                | ✓                   |                     | View API data.|
-| [Delete](#deleting-a-node)                                             | ✓                                               | ✓                |                     |                     | Deletes defective nodes from the cluster.|
-| [Download Keys](#ssh-into-a-node-hosted-by-an-infrastructure-provider) | ✓                                               |                  |                     |                     | Download SSH key for in order to SSH into the node.|
-| [Node Scaling](#scaling-nodes)                                         | ✓                                               |                  |                     |                     | Scale the number of nodes in the node pool up or down.|
+### 节点池节点注意事项
 
-[1]: /docs/cluster-provisioning/rke-clusters/node-pools/
-[2]: /docs/cluster-provisioning/rke-clusters/custom-nodes/
-[3]: /docs/cluster-provisioning/hosted-kubernetes-clusters/
-[4]: /docs/cluster-provisioning/imported-clusters/
+如果你使用了[这个节点池选项](/docs/cluster-provisioning/rke-clusters/node-pools/_index)，那么 Rancher 会自动维护创建的集群在初始集群配置期间设置的节点规模。这个 scale 决定了 Rancher 为集群维护的活动节点的数量。
 
-#### Notes for Node Pool Nodes
+### 托管的 Kubernetes 集群节点注意事项
 
-Clusters provisioned using [one of the node pool options](/docs/cluster-provisioning/rke-clusters/node-pools/#node-pools) automatically maintain the node scale that's set during the initial cluster provisioning. This scale determines the number of active nodes that Rancher maintains for the cluster.
+在 Rancher 中，管理[托管集群](/docs/cluster-provisioning/hosted-kubernetes-clusters/_index)中的节点的选项多少有些有限。你不能通过在 Rancher UI 里点击加减号，来增加或减少节点，你需要直接编辑集群。
 
-#### Notes for Nodes Provisioned by Hosted Kubernetes Providers
+## 隔离和驱逐节点
 
-Options for managing nodes [hosted by a Kubernetes provider](/docs/cluster-provisioning/hosted-kubernetes-clusters/) are somewhat limited in Rancher. Rather than using the Rancher UI to make edits such as scaling the number of nodes up or down, edit the cluster directly.
+_隔离_ 一个节点则将其标记为不可调度。此功能对于在小型维护窗口（如重启、升级或销毁）期间在节点上执行短任务非常有用。完成后，重新打开电源，并通过取消对节点的隔离使其可以再次调度。
 
-#### Notes for Imported Nodes
+_驱逐_ 的过程是首先隔离节点，然后驱逐所有的 pods。该功能对于执行节点维护(如内核升级或硬件维护)非常有用。它可以防止新的 pods 部署到节点，同时重新分配现有 pods，这样用户就不会遇到服务中断。
 
-Although you can deploy workloads to an [imported cluster](/docs/cluster-provisioning/imported-clusters/) using Rancher, you cannot manage individual cluster nodes. All management of imported cluster nodes must take place outside of Rancher.
+当节点被驱逐时, pods 按以下规则处理:
 
-## Cordoning and Draining Nodes
+- 对于具有副本集的 pod，该 pod 将被一个新的 pod 替换，该 pod 将被调度到一个新节点。另外，如果 pod 是服务的一部分，那么客户机将自动重定向到新的 pod。
 
-_Cordoning_ a node marks it as unschedulable. This feature is useful for performing short tasks on the node during small maintenance windows, like reboots, upgrades, or decommissions. When you're done, power back on and make the node schedulable again by uncordoning it.
+- 对于没有副本集的 pod，您需要调出一个新的 pod 副本，并假设它不是服务的一部分，将客户端重定向到它。
 
-_Draining_ is the process of first cordoning the node, and then evicting all its pods. This feature is useful for performing node maintenance (like kernel upgrades or hardware maintenance). It prevents new pods from deploying to the node while redistributing existing pods so that users don't experience service interruption.
+您可以驱逐处于`隔离` 或者 `活动` 状态的节点。 当您驱逐一个节点时，节点被隔离，评估节点必须满足的条件来驱逐，然后(如果它满足条件)节点驱逐它的 pods。
 
-When nodes are drained, pods are handled with the following rules:
+然而，您可以在初始化驱逐时覆盖驱逐条件。您还可以设置一个宽限期和超时值。
 
-* For pods with a replica set, the pod is replaced by a new pod that will be scheduled to a new node. Additionally, if the pod is part of a service, then clients will automatically be redirected to the new pod.
+不同的 Rancher 版本会有不同的节点驱逐选项。
 
-* For pods with no replica set, you need to bring up a new copy of the pod, and assuming it is not part of a service, redirect clients to it.
+### Rancher v2.2.x+主动的和安全的驱逐选项
 
-You can drain nodes that are in either a `cordoned` or `active` state. When you drain a node, the node is cordoned, the nodes are evaluated for conditions they must meet to be drained, and then (if it meets the conditions) the node evicts its pods.
+两种驱逐模式：主动的和安全的。
 
-However, you can override the conditions draining when you initiate the drain. You're also given an opportunity to set a grace period and timeout value.
+- **主动模式**
 
-The node draining options are different based on your version of Rancher.
+  在这种模式下，pods 不会被重新调度到一个新节点，即使它们没有控制器。Kubernetes 希望您有自己的逻辑来处理删除这些 pods。
 
-#### Aggressive and Safe Draining Options for Rancher v2.2.x+
+  Kubernetes 还希望实现能够决定如何使用 emptyDir 处理 pods。如果 pod 使用 emptyDir 存储本地数据，您可能无法安全地删除它，因为一旦从节点删除了 pod, emptyDir 中的数据将被删除。选择主动模式将删除这些 pods。
 
-There are two drain modes: aggressive and safe.
+- **安全模式**
 
-* **Aggressive Mode**
+  如果一个节点有独立的 pods 或临时数据，它将被隔离，但不会被驱逐。
 
-  In this mode, pods won't get rescheduled to a new node, even if they do not have a controller. Kubernetes expects you to have your own logic that handles the deletion of these pods.
+### Rancher v2.2.x 之前版本的主动的和安全的驱逐选项
 
-  Kubernetes also expects the implementation to decide what to do with pods using emptyDir. If a pod uses emptyDir to store local data, you might not be able to safely delete it, since the data in the emptyDir will be deleted once the pod is removed from the node. Choosing aggressive mode will delete these pods.
+下面的列表描述了每个驱逐选项:
 
-* **Safe Mode**
+- **即使存在不受 ReplicationController、ReplicaSet、Job、DaemonSet 或 StatefulSet 管理的 pod **
 
-  If a node has standalone pods or ephemeral data it will be cordoned but not drained.
+  这些类型的 pod 不会被重新调度到一个新节点，因为它们没有控制器。Kubernetes 希望您有自己的逻辑来处理删除这些 pods。Kubernetes 强迫你选择这个选项(它将会删除/驱逐这些 pod)或者驱逐不会继续。
 
-#### Aggressive and Safe Draining Options for Rancher Prior to v2.2.x
+- **即使有 daemonset 管理的 pods**
 
-The following list describes each drain option:
+  与上面类似，如果您有任何 daemonsets，则仅在选中此选项时才会进行驱逐。即使打开了这个选项，pod 也不会被删除，因为它们会立即被替换。在启动时，Rancher 当前在系统中有几个默认运行的守护进程集，因此该选项在默认情况下是打开的。
 
-* **Even if there are pods not managed by a ReplicationController, ReplicaSet, Job, DaemonSet or StatefulSet**
+- **即使有使用 emptyDir 的 pods**
 
-  These types of pods won't get rescheduled to a new node, since they do not have a controller. Kubernetes expects you to have your own logic that handles the deletion of these pods. Kubernetes forces you to choose this option (which will delete/evict these pods) or drain won't proceed.
+  如果 pod 使用 emptyDir 存储本地数据，您可能无法安全地删除它，因为一旦从节点删除了 pod, emptyDir 中的数据将被删除。与第一个选项类似，Kubernetes 希望实现能够决定如何处理这些 pods。选择此选项将删除这些 pods。
 
-* **Even if there are DaemonSet-managed pods**
+### 宽限期
 
-  Similar to above, if you have any daemonsets, drain would proceed only if this option is selected. Even when this option is on, pods won't be deleted since they'll immediately be replaced. On startup, Rancher currently has a few daemonsets running by default in the system, so this option is turned on by default.
+给予每个 pod 清理时间，这样它们就有机会优雅地离开。例如，当 pods 可能需要完成任何未完成的请求时，回滚事务或将状态保存到某个外部存储中。如果是负数，将使用 pod 中指定的默认值。
 
-* **Even if there are pods using emptyDir**
+### 超时
 
-  If a pod uses emptyDir to store local data, you might not be able to safely delete it, since the data in the emptyDir will be deleted once the pod is removed from the node. Similar to the first option, Kubernetes expects the implementation to decide what to do with these pods. Choosing this option will delete these pods.
+在放弃操作之前驱逐应该继续等待的时间。
 
-#### Grace Period
+> **Kubernetes 已知问题:** 目前[超时设置](https://github.com/kubernetes/kubernetes/pull/64378)在驱逐节点时不强制执行。这个问题将在 Kubernetes 1.12 中更正。
 
-The timeout given to each pod for cleaning things up, so they will have chance to exit gracefully. For example, when pods might need to finish any outstanding requests, roll back transactions or save state to some external storage. If negative, the default value specified in the pod will be used.
+### 驱逐和隔离状态
 
-#### Timeout
+如果有任何与用户输入相关的错误，节点将进入 `隔离` 状态，因为驱逐失败。您可以更正输入并尝试再次驱逐该节点，也可以通过解除该节点的隔离来中止。
 
-The amount of time drain should continue to wait before giving up.
+如果驱逐继续没有错误，节点进入 `驱逐中` 的状态。 当节点处于这种状态时，您可以选择停止驱逐，这将停止驱逐过程并将节点的状态更改为 `已隔离`。
 
-> **Kubernetes Known Issue:** Currently, the [timeout setting](https://github.com/kubernetes/kubernetes/pull/64378) is not enforced while draining a node. This issue will be corrected as of Kubernetes 1.12.
+一旦驱逐成功完成，节点将处于`已驱逐`状态。然后可以关闭或删除节点。
 
-#### Drained and Cordoned State
+> **想知道更多关于隔离和驱逐的信息吗?** 请残月[Kubernetes 文档](https://kubernetes.io/docs/tasks/administer-cluster/cluster-management/#maintenance-on-a-node).
 
-If there's any error related to user input, the node enters a `cordoned` state because the drain failed. You can either correct the input and attempt to drain the node again, or you can abort by uncordoning the node.
+## 编辑节点
 
-If the drain continues without error, the node enters a `draining` state. You'll have the option to stop the drain when the node is in this state, which will stop the drain process and change the node's state to `cordoned` .
+编辑节点允许您:
 
-Once drain successfully completes, the node will be in a state of `drained` . You can then power off or delete the node.
+- 更改它的名字
+- 更改它的描述
+- 添加[标签](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)
+- 添加/删除[污点](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)
 
-> **Want to know more about cordon and drain?** See the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/cluster-management/#maintenance-on-a-node).
+## 查看节点 API
 
-## Editing a Node
+选择此选项以查看节点的[API endpoints](/docs/api/_index)。
 
-Editing a node lets you:
+## 删除节点
 
-* Change its name
-* Change its description
-* Add [labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)
-* Add/Remove [taints](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)
+可以点击**删除**从云提供商删除有缺陷的节点。当您删除一个有缺陷的节点时，Rancher 会自动将其替换为具有相同配置的节点。
 
-## Viewing a Node API
+> **提示:** 如果您的集群由基础设施提供商托管，并且您希望降低集群规模，而不是删除有缺陷的节点，那么[降低规模](#扩缩节点)而不是删除。
 
-Select this option to view the node's [API endpoints](/docs/api/).
+## 扩缩节点
 
-## Deleting a Node
+对于由基础设施提供商托管的节点，您可以使用 scale 控件来扩缩每个节点池中的节点数量。此选项不适用于其他集群类型。
 
-Use **Delete** to remove defective nodes from the cloud provider. When you the delete a defective node, Rancher automatically replaces it with an identically provisioned node.
+## SSH 到由基础设施提供商托管的节点
 
-> **Tip:** If your cluster is hosted by an infrastructure provider, and you want to scale your cluster down instead of deleting a defective node, [scale down](#scaling-nodes) rather than delete.
+对于[由基础设施提供商托管的节点](/docs/cluster-provisioning/rke-clusters/node-pools/_index)，您可以选择下载它的 SSH 密钥，以便您可以从桌面远程连接到它。
 
-## Scaling Nodes
+1. 在由基础设施提供商托管的集群中，从主菜单中选择 **节点**。
 
-For nodes hosted by an infrastructure provider, you can scale the number of nodes in each node pool by using the scale controls. This option isn't available for other cluster types.
+1. 找到要远程进入的节点。 选择 **省略号 (...)> 下载 Keys**.
 
-## SSH into a Node Hosted by an Infrastructure Provider
+   **步骤结果：** 一个包含用于 SSH 的文件的 ZIP 文件被下载。
 
-For [nodes hosted by an infrastructure provider](/docs/cluster-provisioning/rke-clusters/node-pools/), you have the option of downloading its SSH key so that you can connect to it remotely from your desktop.
+1. 将 ZIP 文件解压缩到任何位置。
 
-1. From the cluster hosted by an infrastructure provider, select **Nodes** from the main menu.
+1. 打开终端。切换到解压缩的 ZIP 文件目录。
 
-1. Find the node that you want to remote into. Select **Ellipsis (...) > Download Keys**.
+1. 输入以下命令:
 
-   **Step Result:** A ZIP file containing files used for SSH is downloaded.
-
-1. Extract the ZIP file to any location.
-
-1. Open Terminal. Change your location to the extracted ZIP file.
-
-1. Enter the following command:
-
-   
-
-``` 
+   ```
    ssh -i id_rsa root@<IP_OF_HOST>
    ```
 
-## Managing Node Pools
+## 管理节点池
 
-> **Prerequisite:** The options below are available only for clusters that are [launched using RKE.](/docs/cluster-provisioning/rke-clusters/) The node pool features are not available for imported clusters or clusters hosted by a Kubernetes provider.
+> **先决条件：** 以下选项仅适用于[使用主机驱动启动](/docs/cluster-provisioning/rke-clusters/_index)的 RKE 集群。节点池功能不适用于导入的集群或由 Kubernetes 提供商托管的集群。
 
-In clusters [launched by RKE](/docs/cluster-provisioning/rke-clusters/), you can:
+在[由主机驱动启动的 RKE 集群](/docs/cluster-provisioning/rke-clusters/_index)中，你可以：
 
-* Add new [pools of nodes](/docs/cluster-provisioning/rke-clusters/node-pools/) to your cluster. The nodes added to the pool are provisioned according to the [node template](/docs/user-settings/node-templates/) that you use.
+- 向集群中添加新的[节点池](/docs/cluster-provisioning/rke-clusters/node-pools/_index)。添加到池中的节点是根据您使用的[节点模版](/docs/user-settings/node-templates/_index)创建的。
 
-      	- Click **+** and follow the directions on screen to create a new template.
+  - 点击 **+** 按照屏幕上的说明创建一个新模板。
 
-      	- You can also reuse existing templates by selecting one from the **Template** drop-down.
+    - 您还可以通过从 **模版** 下拉列表中选择一个来重用现有的模板。
 
-* Redistribute Kubernetes roles amongst your node pools by making different checkbox selections
+- 通过选择不同的复选框，在节点池中重新分配 Kubernetes 角色。
 
-* Scale the number of nodes in a pool up or down (although, if you simply want to maintain your node scale, we recommend using the cluster's [Nodes tab](/docs/k8s-in-rancher/nodes/#nodes-provisioned-by-node-pool) instead.)
-
+- 增加或减少池中的节点数量 (不过，如果只是想保持节点的规模，我们建议使用集群的[节点列表页的 scale 按钮](#扩缩节点))。

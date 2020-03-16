@@ -2,42 +2,42 @@
 title: 直接通过业务集群（不经过 Rancher）进行认证的原理
 ---
 
-This section describes how the kubectl CLI, the kubeconfig file, and the authorized cluster endpoint work together to allow you to access a downstream Kubernetes cluster directly, without authenticating through the Rancher server. It is intended to provide background information and context to the instructions for [how to set up kubectl to directly access a cluster.](../kubectl/#authenticating-directly-with-a-downstream-cluster)
+本节介绍 kubectl CLI、kubeconfig 文件和授权的集群终端如何协同工作，从而允许您直接访问下游的 Kubernetes 集群，而无需通过 Rancher 服务器进行身份验证。它的目的是为[如何设置 kubectl 来直接访问集群](/docs/cluster-admin/cluster-access/kubectl/_index)提供背景信息和上下文的指示。
 
-#### About the kubeconfig File
+## 关于 kubeconfig 文件
 
-The _kubeconfig file_ is a file used to configure access to Kubernetes when used in conjunction with the kubectl command line tool (or other clients).
+_kubeconfig 文件_ 是一个当与 kubectl 命令行工具(或其他客户端)一起使用时，用于配置对 Kubernetes 的访问的文件。
 
-This kubeconfig file and its contents are specific to the cluster you are viewing. It can be downloaded from the cluster view in Rancher. You will need a separate kubeconfig file for each cluster that you have access to in Rancher.
+这个 kubeconfig 文件及其内容是特定于您正在查看的集群的。您可以从 Rancher 中的 Cluster 视图下载它。对于 Rancher 中可以访问的每个集群，您都需要一个单独的 kubeconfig 文件。
 
-After you download the kubeconfig file, you will be able to use the kubeconfig file and its Kubernetes [contexts](https://kubernetes.io/docs/reference/kubectl/cheatsheet/#kubectl-context-and-configuration) to access your downstream cluster.
+下载 kubeconfig 文件后，您将能够使用 kubeconfig 文件及其 Kubernetes[上下文](https://kubernetes.io/docs/reference/kubectl/cheatsheet/#kubectl-context-and-configuration)访问下游集群。
 
-#### Two Authentication Methods for RKE Clusters
+## RKE 集群的两种身份验证方法
 
-If the cluster is not an [RKE cluster, ](/docs/cluster-provisioning/rke-clusters/) the kubeconfig file allows you to access the cluster in only one way: it lets you be authenticated with the Rancher server, then Rancher allows you to run kubectl commands on the cluster.
+如果集群不是[RKE 集群](/docs/cluster-provisioning/rke-clusters/_index)，kubeconfig 文件只允许您以一种方式访问集群：它允许您通过 Rancher 服务器进行身份验证，然后 Rancher 允许您在集群上运行 kubectl 命令。
 
-For RKE clusters, the kubeconfig file allows you to be authenticated in two ways:
+对于 RKE 集群，kubeconfig 文件允许您以两种方式进行身份验证:
 
-* **Through the Rancher server authentication proxy:** Rancher's authentication proxy validates your identity, then connects you to the downstream cluster that you want to access.
-* **Directly with the downstream cluster's API server:** RKE clusters have an authorized cluster endpoint enabled by default. This endpoint allows you to access your downstream Kubernetes cluster with the kubectl CLI and a kubeconfig file, and it is enabled by default for RKE clusters. In this scenario, the downstream cluster's Kubernetes API server authenticates you by calling a webhook (the `kube-api-auth` microservice) that Rancher set up.
+**通过 Rancher 服务器身份验证代理:** Rancher 的认证代理校验你的登陆信息，然后把你连接到你想要访问的下游集群。
 
-This second method, the capability to connect directly to the cluster's Kubernetes API server, is important because it lets you access your downstream cluster if you can't connect to Rancher.
+**直接使用下游集群的 API Server:** 默认情况下，RKE 集群会默认启用授权集群端点。这个端点允许您使用 kubectl CLI 和 kubeconfig 文件访问下游的 Kubernetes 集群，RKE 集群默认启用了该端点。在这个场景中，下游集群的 Kubernetes API Server 通过调用 Rancher 设置的 webhook ( `kube-api-auth` 微服务) 对您进行身份验证。
 
-To use the authorized cluster endpoint, you will need to configure kubectl to use the extra kubectl context in the kubeconfig file that Rancher generates for you when the RKE cluster is created. This file can be downloaded from the cluster view in the Rancher UI, and the instructions for configuring kubectl are on [this page.](../kubectl/#authenticating-directly-with-a-downstream-cluster)
+第二种方法是能够直接连接到集群的 Kubernetes API Server，这很重要，因为如果不能连接到 Rancher，它允许您访问下游集群。
 
-These methods of communicating with downstream Kubernetes clusters are also explained in the [architecture page](/docs/overview/architecture/#communicating-with-downstream-user-clusters) in the larger context of explaining how Rancher works and how Rancher communicates with downstream clusters.
+要使用授权的集群端点，您需要配置 kubectl 来使用 Rancher 在创建 RKE 集群时为您生成的 kubeconfig 文件中的额外 kubectl 上下文。这个文件可以从 Rancher UI 的 cluster 视图中下载，配置 kubectl 的说明在[此页](/docs/cluster-admin/cluster-access/kubectl/_index)中
 
-#### About the kube-api-auth Authentication Webhook
+这些与下游 Kubernetes 集群通信的方法也在[架构页面](/docs/overview/architecture/_index)上范围更广的上下文中解释了 Rancher 是如何工作的，以及 Rancher 是如何与下游集群通信的。
 
-The `kube-api-auth` microservice is deployed to provide the user authentication functionality for the [authorized cluster endpoint, ](/docs/overview/architecture/#4-authorized-cluster-endpoint) which is only available for [RKE clusters.](/docs/cluster-provisioning/rke-clusters/) When you access the user cluster using `kubectl` , the cluster's Kubernetes API server authenticates you by using the `kube-api-auth` service as a webhook.
+## 关于 kube-api-auth 认证 Webhook
 
-During cluster provisioning, the file `/etc/kubernetes/kube-api-authn-webhook.yaml` is deployed and `kube-apiserver` is configured with `--authentication-token-webhook-config-file=/etc/kubernetes/kube-api-authn-webhook.yaml` . This configures the `kube-apiserver` to query `http://127.0.0.1:6440/v1/authenticate` to determine authentication for bearer tokens.
+部署 `kube-api-auth` 微服务是为了为[已授权的集群端点](/docs/overview/architecture/_index)提供用户身份验证功能，该功能仅对[RKE 集群](/docs/cluster-provisioning/rke-clusters/_index)可用。当您使用 `kubectl`, 访问用户集群时，集群的 Kubernetes API 服务器将使用 `kube-api-auth` 务作为 webhook 对您进行身份验证。
 
-The scheduling rules for `kube-api-auth` are listed below:
+在集群创建过程中, `/etc/kubernetes/kube-api-authn-webhook.yaml` 文件被部署，而且 `kube-apiserver` 配置了 `--authentication-token-webhook-config-file=/etc/kubernetes/kube-api-authn-webhook.yaml`. 这将 `kube-apiserver` 配置为查询 `http://127.0.0.1:6440/v1/authenticate` 以确定 bearer tokens 的身份验证。
 
-_Applies to v2.3.0 and higher_
+`kube-api-auth` 的调度规则如下:
 
-| Component     | nodeAffinity nodeSelectorTerms                                                             | nodeSelector | Tolerations       |
+_适用于 v2.3.0 及以上版本_
+
+| 组件          | nodeAffinity nodeSelectorTerms                                                             | nodeSelector | Tolerations       |
 | ------------- | ------------------------------------------------------------------------------------------ | ------------ | ----------------- |
-| kube-api-auth | `beta.kubernetes.io/os:NotIn:windows` <br/> `node-role.kubernetes.io/controlplane:In:"true"` | none         | `operator:Exists` |
-
+| kube-api-auth | `beta.kubernetes.io/os:NotIn:windows`<br/>`node-role.kubernetes.io/controlplane:In:"true"` | none         | `operator:Exists` |

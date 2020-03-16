@@ -2,69 +2,64 @@
 title: 恢复 etcd
 ---
 
-_Available as of v2.2.0_
+_从 v2.2.0 开始可用_
 
-etcd backup and recovery for [Rancher launched Kubernetes clusters](/docs/cluster-provisioning/rke-clusters/) can be easily performed. Snapshots of the etcd database are taken and saved either locally onto the etcd nodes or to a S3 compatible target. The advantages of configuring S3 is that if all etcd nodes are lost, your snapshot is saved remotely and can be used to restore the cluster.
+etcd 备份和恢复由[Rancher 启用的 Kubernetes 集群](/docs/cluster-provisioning/rke-clusters/_index)可以很容易地执行。etcd 数据库的快照被获取并保存到本地的 etcd 节点或 S3 兼容的目标上。配置 S3 的优点是，如果所有 etcd 节点都丢失了，您的快照将被远程保存，并可用于恢复集群。
 
-Rancher recommends enabling the [ability to set up recurring snapshots of etcd](/docs/cluster-admin/backing-up-etcd/#configuring-recurring-snapshots-for-the-cluster), but [one-time snapshots](/docs/cluster-admin/backing-up-etcd/#one-time-snapshots) can easily be taken as well. Rancher allows restore from [saved snapshots](#restoring-your-cluster-from-a-snapshot) or if you don't have any snapshots, you can still [restore etcd](#recovering-etcd-without-a-snapshot).
+Rancher 建议启用[设置 etcd 重复快照的能力](/docs/cluster-admin/backing-up-etcd/_index)，但是[一次性快照](/docs/cluster-admin/backing-up-etcd/_index)也可以很容易地获取。Rancher 允许从[已保存的快照](#从快照恢复集群)恢复，或者如果您没有任何快照，您仍然可以[恢复 etcd](#在没有快照的情况下恢复-etcd)。
 
-> **Note:** If you have any Rancher launched Kubernetes clusters that were created prior to v2.2.0, after upgrading Rancher, you must [edit the cluster](/docs/cluster-admin/editing-clusters/) and _save_ it, in order to enable the [updated snapshot features](/docs/cluster-admin/backing-up-etcd/). Even if you were already creating snapshots prior to v2.2.0, you must do this step as the older snapshots will not be available to use to back up and restore etcd through the UI.
+> **注意：** I 如果您有任何 Rancher 启动了 v2.2.0 之前版本创建的 Kubernetes 集群，在升级 Rancher 之后，您必须[编辑集群](/docs/cluster-admin/editing-clusters/_index)并*保存* 它， 以便启用[已更新的快照功能](/docs/cluster-admin/backing-up-etcd/_index)。即使您已经使用 v2.2.0 之前的版本创建了快照，您也必须执行此步骤，因为旧的快照将无法用于通过 UI 备份和恢复 etcd。
 
-### Viewing Available Snapshots
+## 查看可用的快照
 
-The list of all available snapshots for the cluster is available.
+集群中所有可用快照的列表都是可用的。
 
-1. In the **Global** view, navigate to the cluster that you want to view snapshots.
+1. 在 **全局** 视图中，导航到要查看快照的集群。
 
-2. Click **Tools > Snapshots** from the navigation bar to view the list of saved snapshots. These snapshots include a timestamp of when they were created.
+2. 从导航栏中点击 **工具>快照** 查看保存的快照列表。这些快照包括创建它们的时间戳。
 
-### Restoring your Cluster from a Snapshot
+## 从快照恢复集群
 
-If your Kubernetes cluster is broken, you can restore the cluster from a snapshot.
+如果您的 Kubernetes 集群不可用了，您可以从快照中恢复集群。
 
-1. In the **Global** view, navigate to the cluster that you want to view snapshots.
+1. 在 **全局** 视图中，导航到要查看快照的集群。
 
-2. Click the **Vertical Ellipsis (...) > Restore Snapshot**.
+2. 点击 **垂直省略号 (...)> 恢复快照**。
 
-3. Select the snapshot that you want to use for restoring your cluster from the dropdown of available snapshots. Click **Save**.
+3. 从可用快照的下拉菜单中选择要用于恢复集群的快照。点击 **保存**。
 
-   > **Note:** Snapshots from S3 can only be restored from if the cluster is configured to take recurring snapshots on S3.
+   > **注意：** 只有将集群配置为在 S3 上获取重复快照，才能从 S3 恢复快照。
 
-**Result:** The cluster will go into `updating` state and the process of restoring the `etcd` nodes from the snapshot will start. The cluster is restored when it returns to an `active` state.
+**结果：** 集群将进入 `更新中` 状态，从快照恢复 `etcd` 节点的过程将启动。当集群返回到 `活动` 状态时，它将被恢复。
 
-> **Note:** If you are restoring a cluster with unavailable etcd nodes, it's recommended that all etcd nodes are removed from Rancher before attempting to restore. For clusters that were provisioned using [nodes hosted in an infrastructure provider](/docs/cluster-provisioning/rke-clusters/node-pools/), new etcd nodes will automatically be created. For [custom clusters](/docs/cluster-provisioning/rke-clusters/custom-nodes/), please ensure that you add new etcd nodes to the cluster.
+> **注意：** 如果您正在恢复一个具有不可用 etcd 节点的集群，建议在尝试恢复之前从 Rancher 中删除所有 etcd 节点。对于使用[在基础设施提供商中托管的节点](/docs/cluster-provisioning/rke-clusters/node-pools/_index)创建的集群，将自动创建新的 etcd 节点。对于[自定义集群](/docs/cluster-provisioning/rke-clusters/custom-nodes/_index)，请确保将新的 etcd 节点添加到集群中。
 
-### Recovering etcd without a Snapshot
+## 在没有快照的情况下恢复 etcd
 
-If the group of etcd nodes loses quorum, the Kubernetes cluster will report a failure because no operations, e.g.deploying workloads, can be executed in the Kubernetes cluster. Please review the best practices for the what the [number of etcd nodes](/docs/cluster-provisioning/production/#count-of-etcd-nodes) should be in a Kubernetes cluster. If you want to recover your set of etcd nodes, follow these instructions:
+如果 etcd 节点组失去 quorum, Kubernetes 集群将报告失败，因为在 Kubernetes 集群中不能执行任何操作，例如部署工作负载。请查看 Kubernetes 集群中的[etcd 节点数量](/docs/cluster-provisioning/production/_index)的最佳实践。如果你想恢复你的 etcd 节点集，请遵循以下说明:
 
-1. Keep only one etcd node in the cluster by removing all other etcd nodes.
+1. 通过删除所有其他 etcd 节点，在集群中只保留一个 etcd 节点。
 
-2. On the single remaining etcd node, run the following command:
+2. 在剩下的 etcd 节点上，运行以下命令:
 
-   
-
-``` 
+   ```
    $ docker run --rm -v /var/run/docker.sock:/var/run/docker.sock assaflavie/runlike etcd
    ```
 
-   This command outputs the running command for etcd, save this command to use later.
+   此命令输出 etcd 的运行命令，保存此命令供以后使用。
 
-3. Stop the etcd container that you launched in the previous step and rename it to `etcd-old` .
+3. 停止上一步启动的 etcd 容器，将其重命名为 `etcd-old`。
 
-   
-
-``` 
+   ```
    $ docker stop etcd
    $ docker rename etcd etcd-old
    ```
 
-4. Take the saved command from Step 2 and revise it:
+4. 使用步骤 2 中保存的命令并修改它:
 
-   - If you originally had more than 1 etcd node, then you need to change `--initial-cluster` to only contain the node that remains.
-   - Add `--force-new-cluster` to the end of the command.
+   - 如果您最初拥有一个以上的 etcd 节点，那么您需要将 `--initial-cluster` 更改为只包含剩余的节点。
+   - 在命令末尾添加`--force-new-cluster` 。
 
-5. Run the revised command.
+5. 运行修改后的命令。
 
-6. After the single nodes is up and running, Rancher recommends adding additional etcd nodes to your cluster. If you have a [custom cluster](/docs/cluster-provisioning/custom-clusters/) and you want to reuse an old node, you are required to [clean up the nodes](/docs/faq/cleaning-cluster-nodes/) before attempting to add them back into a cluster.
-
+6. 在单个节点启动并运行之后，Rancher 建议向集群添加额外的 etcd 节点。如果您有一个[自定义集群](/docs/cluster-provisioning/rke-clusters/custom-nodes/_index)并且希望重用旧节点，则需要在尝试将它们重新添加回集群之前[清理节点](/docs/cluster-admin/cleaning-cluster-nodes/_index)。

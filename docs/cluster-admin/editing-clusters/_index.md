@@ -2,73 +2,70 @@
 title: 设置集群
 ---
 
-After you provision a Kubernetes cluster using Rancher, you can still edit options and settings for the cluster. To edit your cluster, open the **Global** view, make sure the **Clusters** tab is selected, and then select **Ellipsis (... ) > Edit** for the cluster that you want to edit.
+使用 Rancher 创建 Kubernetes 集群之后，仍然可以编辑该集群的选项和设置。要编辑您的集群，请打开 **全局** 视图， 确保选中 **集群** 选项卡， 然后为您要编辑的集群选择 **省略号 (...) > 编辑**
 
-<sup>To Edit an Existing Cluster</sup>
+<sup>编辑现有集群</sup>
 
-![Edit Cluster](/img/rancher/edit-cluster.png)
+![编辑集群](/img/rancher/edit-cluster.png)
 
-The options and settings available for an existing cluster change based on the method that you used to provision it. For example, only clusters [provisioned by RKE](/docs/cluster-provisioning/rke-clusters/) have **Cluster Options** available for editing.
+现有集群的可用选项和设置将根据用于提供它的方法进行更改。例如，只有集群[由 RKE 创建](/docs/cluster-provisioning/rke-clusters/_index)才有可用于编辑的 **集群选项**。
 
-The following table summarizes the options and settings available for each cluster type:
+下表总结了每种集群类型可用的选项和设置:
 
-| Rancher Capability   | RKE Launched | Hosted Kubernetes Cluster | Imported Cluster |
-| -------------------- | ------------ | ------------------------- | ---------------- |
-| Manage member roles  | ✓            | ✓                         | ✓                |
-| Edit cluster options | ✓            |                           |
-| Manage node pools    | ✓            |                           |
+| Rancher 可做到 | RKE 启动的集群 | 托管的 Kubernetes 集群 | 导入的集群 |
+| -------------- | -------------- | ---------------------- | ---------- |
+| 管理成员角色   | ✓              | ✓                      | ✓          |
+| 编辑集群选项   | ✓              |                        |            |
+| 管理节点池     | ✓              |                        |            |
 
-### Editing Cluster Membership
+## 编辑集群成员
 
-Cluster administrators can [edit the membership for a cluster, ](/docs/cluster-admin/cluster-access/cluster-members) controlling which Rancher users can access the cluster and what features they can use.
+集群管理员可以[编辑集群的成员资格](/docs/cluster-admin/cluster-access/cluster-members/_index)控制哪些 Rancher 用户可以访问集群以及他们可以使用哪些功能模块。
 
-### Cluster Options
+## 集群选项
 
-When editing clusters, clusters that are [launched using RKE](/docs/cluster-provisioning/rke-clusters/) feature more options than clusters that are imported or hosted by a Kubernetes provider. The headings that follow document options available only for RKE clusters.
+在编辑集群时，[使用 RKE 启动](/docs/cluster-provisioning/rke-clusters/_index)的集群比由 Kubernetes 提供商导入或托管的集群具有更多的选项。文档选项后面的标题仅对 RKE 集群可用。
 
-#### Updating ingress-nginx
+### 更新 ingress-nginx
 
-Clusters that were created before Kubernetes 1.16 will have an `ingress-nginx`  `updateStrategy` of `OnDelete` . Clusters that were created with Kubernetes 1.16 or newer will have `RollingUpdate` .
+使用 Kubernetes 1.16 之前的版本创建的集群会有一个`OnDelete`的 `ingress-nginx` `updateStrategy`。使用 Kubernetes 1.16 或更新版本创建的集群会有 `RollingUpdate`.
 
-If the `updateStrategy` of `ingress-nginx` is `OnDelete` , you will need to delete these pods to get the correct version for your deployment.
+如果 `ingress-nginx`的 `updateStrategy` 是 `OnDelete`, 那么您需要删除这些 pod 以获得正确的部署版本。
 
-## Editing Other Cluster Options
+## 编辑其他集群选项
 
-In [clusters launched by RKE](/docs/cluster-provisioning/rke-clusters/), you can edit any of the remaining options that follow.
+在[由 RKE 启动的集群](/docs/cluster-provisioning/rke-clusters/_index)，您可以编辑以下任何其它的选项。
 
-> **Note:** These options are not available for imported clusters or hosted Kubernetes clusters.
+> **注意：** 这些选项对于导入的集群或托管的 Kubernetes 集群是不可用的。
 
-<sup>Options for RKE Clusters</sup>
+<sup>RKE 集群的选项</sup>
 
-![Cluster Options](/img/rancher/cluster-options.png)
+![集群选项](/img/rancher/cluster-options.png)
 
-| Option                      | Description                                                                                                                                                                                                                                                                                                           |
-| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Kubernetes Version          | The version of Kubernetes installed on each cluster node. For more detail, see [Upgrading Kubernetes](/docs/cluster-admin/upgrading-kubernetes).|
-| Network Provider            | The [container networking interface](/docs/faq/networking/#cni-providers) that powers networking for your cluster.<br/><br/>**Note:** You can only choose this option while provisioning your cluster. It cannot be edited later.|
-| Project Network Isolation   | As of Rancher v2.0.7, if you're using the Canal network provider, you can choose whether to enable or disable inter-project communication.|
-| Nginx Ingress               | If you want to publish your applications in a high-availability configuration, and you're hosting your nodes with a cloud-provider that doesn't have a native load-balancing feature, enable this option to use Nginx ingress within the cluster.|
-| Metrics Server Monitoring   | Each cloud provider capable of launching a cluster using RKE can collect metrics and monitor for your cluster nodes. Enable this option to view your node metrics from your cloud provider's portal.|
-| Pod Security Policy Support | Enables [pod security policies](/docs/admin-settings/pod-security-policies/) for the cluster. After enabling this option, choose a policy using the **Default Pod Security Policy** drop-down.|
-| Docker version on nodes     | Configures whether nodes are allowed to run versions of Docker that Rancher doesn't officially support. If you choose to require a [supported Docker version](/docs/installation/options/rke-add-on/layer-7-lb/), Rancher will stop pods from running on nodes that don't have a supported Docker version installed.|
-| Docker Root Directory       | The directory on your cluster nodes where you've installed Docker. If you install Docker on your nodes to a non-default directory, update this path.|
-| Default Pod Security Policy | If you enable **Pod Security Policy Support**, use this drop-down to choose the pod security policy that's applied to the cluster.|
-| Cloud Provider              | If you're using a cloud provider to host cluster nodes launched by RKE, enable [this option](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/) so that you can use the cloud provider's native features. If you want to store persistent data for your cloud-hosted cluster, this option is required.|
+| 选项                 | 描述                                                                                                                                                                                                                            |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Kubernetes 版本      | 每个集群节点上安装的 Kubernetes 版本。更多细节，请参阅[升级 Kubernetes](/docs/cluster-admin/upgrading-kubernetes/_index).                                                                                                       |
+| 网络提供商           | 为您的集群提供联网功能的[容器联网接口](/docs/faq/networking/_index)。<br/><br/>**注意：** 您只能在配置集群时选择此选项。以后无法编辑。                                                                                          |
+| 项目网络隔离         | 从 Rancher v2.0.7 开始，如果您正在使用 Canal 网络提供商，您可以选择启用或禁用项目间通信。                                                                                                                                       |
+| Nginx Ingress        | 如果您希望以高可用性配置发布应用程序，并且您使用的是没有本地负载平衡功能的云提供商来托管节点，那么请启用此选项，以便在集群中使用 Nginx ingress。                                                                                |
+| 度量服务器监控       | 每个能够使用 RKE 启动集群的云提供商都可以收集指标并监视您的集群节点。启用此选项可从云提供商的门户查看您的节点指标。                                                                                                             |
+| Pod 安全政策支持     | 为集群启用[pod 安全策略](/docs/admin-settings/pod-security-policies/_index)。启用此选项后，使用 **默认 Pod 安全策略** 下拉列表选择一个策略。                                                                                    |
+| 节点上的 Docker 版本 | 配置不管节点是否允许运行 Rancher 不正式支持的 Docker 版本。 如果您选择需要一个[受支持的 Docker 版本](/docs/installation/options/rke-add-on/layer-7-lb/_index)，Rancher 将停止在没有安装受支持的 Docker 版本的节点上运行 pods。  |
+| Docker 根目录        | 集群节点上安装 Docker 的目录。如果在节点上将 Docker 安装到非默认目录，请更新此路径。                                                                                                                                            |
+| 默认 Pod 安全策略    | 如果启用了 **Pod 安全策略支持**，请使用此下拉菜单选择应用于集群的 Pod 安全策略。                                                                                                                                                |
+| 云提供商             | 如果您使用云提供商来托管由 RKE 启动的集群节点，请启用[此选项](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/_index)，以便您可以使用云提供商的本地特性。如果您希望为您的云托管集群存储持久数据，则需要此选项。 |
 
-<br/>
+## 编辑集群 YAML
 
-## Editing Cluster as YAML
+> **注意：** 在 Rancher v2.0.5 和 v2.0.6 中，配置文件(YAML)中的服务名称应该只包含下划线: `kube_api` 和`kube_controller`。
 
-> **Note:** In Rancher v2.0.5 and v2.0.6, the names of services in the Config File (YAML) should contain underscores only: `kube_api` and `kube_controller` .
+高级用户可以创建一个 RKE 配置文件，而不是使用 Rancher UI 为集群选择 Kubernetes 选项。通过使用配置文件，可以在 YAML 中指定 RKE 安装中可用的任何选项，system_images 配置除外。
 
-Instead of using the Rancher UI to choose Kubernetes options for the cluster, advanced users can create an RKE config file. Using a config file allows you to set any of the options available in an RKE installation, except for system_images configuration, by specifying them in YAML.
+- 要直接从 Rancher UI 编辑 RKE 配置文件， 请单击 **编辑 YAML**。
+- 要从现有的 RKE 文件中读取， 请点击 **从文件读取**。
 
-* To edit an RKE config file directly from the Rancher UI, click **Edit as YAML**.
-* To read from an existing RKE file, click **Read from File**.
-
-In Rancher v2.0.0-v2.2.x, the config file is identical to the [cluster config file for the Rancher Kubernetes Engine]({{<baseurl>}}/rke/latest/en/config-options/), which is the tool Rancher uses to provision clusters. In Rancher v2.3.0, the RKE information is still included in the config file, but it is separated from other options, so that the RKE cluster config options are nested under the `rancher_kubernetes_engine_config` directive. For more information, see the [cluster configuration reference.](/docs/cluster-provisioning/rke-clusters/options)
+Rancher v2.0.0-v2.2.x，配置文件与[Rancher Kubernetes Engine 的集群配置文件](https://rancher.com/docs/rke/latest/en/config-options/)相同，Rancher 使用该配置文件来创建集群。 在 Rancher v2.3.0 中，RKE 信息仍然包含在配置文件中，但是它与其他选项分离，因此 RKE 集群配置选项嵌套在`rancher_kubernetes_engine_config` 指令下。有关更多信息，请参阅[集群配置参考资料](/docs/cluster-provisioning/rke-clusters/options/_index)。
 
 ![image](/img/rancher/cluster-options-yaml.png)
 
-For an example of RKE config file syntax, see the [RKE documentation]({{< baseurl >}}/rke/latest/en/example-yamls/).
-
+有关 RKE 配置文件语法的示例，请参阅[RKE 文档](https://rancher.com/docs/rke/latest/en/example-yamls/)。
