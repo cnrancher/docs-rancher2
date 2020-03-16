@@ -38,12 +38,12 @@ Rancher目录包含了一套内置的DevOps开发工具。Rancher通过了一些
 
 Rancher API Server是基于嵌入式Kubernetes API Server和ETCD数据库建立的，它提供了以下功能：
 
-#### 授权和角色权限控制
+### 授权和角色权限控制
 
 * **用户管理：** Rancher API server 除了管理用户在公司内部的使用的认证信息之外，还管理[用户访问外部服务所需的认证信息](/docs/admin-settings/authentication/_index)，如登录活动目录或GitHub所需的账号密码。  
 * **授权：** Rancher API server负责管理[权限控制策略](/docs/admin-settings/rbac/_index) 和 [安全策略](/docs/admin-settings/pod-security-policies/_index)。
 
-#### 使用Kubernetes的功能
+### 使用Kubernetes的功能
 
 * **运行Kubernetes集群：** Rancher API server可以在已有节点上运行 [Kubernetes集群](/docs/cluster-provisioning/_index) ，或对Kubernetes进行[版本升级](/docs/cluster-admin/upgrading-kubernetes/_index)。
 * **目录管理：** Rancher可以使用[Helm Chart目录](/docs/catalog/_index)重复部署应用。
@@ -56,7 +56,7 @@ Rancher API Server是基于嵌入式Kubernetes API Server和ETCD数据库建立�
 * **同步节点信息：** Rancher API server可以同步集群内所有[节点](/docs/cluster-admin/nodes/_index)的信息。
 * **配置云端基础信息：** 当Rancher与云服务提供商配置完了之后，可以在云端动态配置[新节点](/docs/cluster-provisioning/rke-clusters/node-pools/_index)和[永久存储](/docs/cluster-admin/volumes-and-storage/_index)。
 
-#### 查看集群信息
+### 查看集群信息
 
 * **日志：** Rancher可以跟多种主流日志工具集成，您可以设置 [集群日志](/docs/cluster-admin/tools/logging/_index) 或[项目日志](/docs/project-admin/tools/logging/_index)。
 * **监控：** 使用Rancher，你可以通过Prometheus监控集群节点、Kubernetes组件、软件部署的状态和进度。您可以设置 [集群监控](/docs/cluster-admin/tools/monitoring/_index) 或[项目监控](/docs/project-admin/tools/monitoring/_index)。

@@ -1,8 +1,8 @@
 ---
 title: 推荐架构
+description: 本文介绍了Rancher的推荐架构，帮助您了解使用高可用集群部署Rancher的优势。
 ---
-
-如果您准备在单节点上安装Rancher，请参考[分开部署rancher与下游用户集群](#分开部署rancher与下游用户集群)，获取适用于这种架构的建议。
+本文主要介绍了Rancher的推荐架构，以及推荐架构的优势。如果您准备在单节点上安装Rancher，请参考[分开部署rancher与下游用户集群](#分开部署rancher与下游用户集群)，获取适用于这种架构的建议。
 
 ## 分开部署Rancher与下游用户集群
 
@@ -21,14 +21,14 @@ title: 推荐架构
 
 ## 负载均衡的推荐配置参数
 
-我们建议您使用以下方案，配置您的负载均衡和Ingress controller：
+我们建议您使用以下方案，配置您的负载均衡和应用路由控制器：
 
 * 使用Rancher的域名系统（DNS）解析四层负载均衡
 * 负载均衡跟集群中所有节点的80端口和443端口通信。
-* Ingress controller把HTTP重定向到HTTPS，在443端口安装SSL/TLS安全证书。
-* Ingress controller把流量转发到Rancher pod的80端口。
+* 应用路由控制器把HTTP重定向到HTTPS，在443端口安装SSL/TLS安全证书。
+* 应用路由控制器把流量转发到Rancher pod的80端口。
 
-<figcaption>在Kubernetes集群中安装Rancher，四层负载均衡，在Ingress controller中描述SSL进程。</figcaption>
+<figcaption>在Kubernetes集群中安装Rancher，四层负载均衡，在应用路由控制器中描述SSL进程。</figcaption>
 
 ![Rancher HA](/img/rancher/ha/rancher2ha.svg)
 
