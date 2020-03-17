@@ -2,182 +2,187 @@
 title: 配置 Amazon NLB
 ---
 
-### Objectives
+## 目标
 
-Configuring an Amazon NLB is a multistage process. We've broken it down into multiple tasks so that it's easy to follow.
+配置 Amazon NLB 是一个多阶段过程。 我们将其细分为多个任务以便于理解。
 
-1. [Create Target Groups](#create-target-groups)
+1. [创建目标群组](#创建目标群组)
 
-   Begin by creating two target groups for the **TCP** protocol, one regarding TCP port 443 and one regarding TCP port 80 (providing redirect to TCP port 443). You'll add your Linux nodes to these groups.
+   首先为 **TCP** 协议创建两个目标群组，一个是 TCP 端口 443，一个是 TCP 端口 80（提供到 TCP 端口 443 的重定向）。你将添加你的 Linux 节点到这些组中。
 
-2. [Register Targets](#register-targets)
+2. [注册目标](#注册目标)
 
-   Add your Linux nodes to the target groups.
+   添加你的 Linux 节点到这些目标群组中。
 
-3. [Create Your NLB](#create-your-nlb)
+3. [创建 NLB](#创建你的-nlb)
 
-   Use Amazon's Wizard to create an Network Load Balancer. As part of this process, you'll add the target groups you created in **1. Create Target Groups**.
+   使用亚马逊的向导创建网络负载平衡器。 作为此过程的一部分，您将添加在 **1. 创建的目标群组** 中创建的目标群组。
 
-> **Note:** Rancher only supports using the Amazon NLB when terminating traffic in `tcp` mode for port 443 rather than `tls` mode. This is due to the fact that the NLB does not inject the correct headers into requests when terminated at the NLB. This means that if you want to use certificates managed by the Amazon Certificate Manager (ACM), you should use an ELB or ALB.
+4. [添加侦听器](#给-nlb-的-tcp-80-端口添加侦听器)
 
-### Create Target Groups
+> **注意事项:** 当以端口 443 的`tcp`模式而非`tls`模式终止流量时，Rancher 仅支持使用 Amazon NLB。 这是由于以下原因：当在 NLB 终止时，NLB 不会将正确的标头注入请求中。 这意味着，如果希望使用由 Amazon 证书管理器(ACM)管理的证书时，应该使用 ELB 或 ALB。
 
-Your first NLB configuration step is to create two target groups. Technically, only port 443 is needed to access Rancher, but its convenient to add a listener for port 80 which will be redirected to port 443 automatically. The NGINX ingress controller on the nodes will make sure that port 80 gets redirected to port 443.
+## 创建目标群组
 
-Log into the [Amazon AWS Console](https://console.aws.amazon.com/ec2/) to get started, make sure to select the **Region** where your EC2 instances (Linux nodes) are created.
+第一个 NLB 配置步骤是创建两个目标群组。 从技术上讲，只需要端口 443 即可访问 Rancher，但为了提升易用性通常会为端口 80 添加侦听器，该端口将自动重定向到端口 443。 节点上的 NGINX ingress controller 将确保将端口 80 重定向到端口 443。
 
-The Target Groups configuration resides in the **Load Balancing** section of the **EC2** service. Select **Services** and choose **EC2**, find the section **Load Balancing** and open **Target Groups**.
+登陆 [亚马逊 AWS 控制台](https://console.aws.amazon.com/ec2/) , 确保选择指定的 **Region** 来创建你的 EC2 实例（Linux 主机）。
 
-![EC2 Load Balancing section](/img/rancher/ha/nlb/ec2-loadbalancing.png)
+目标群组配置位于**EC2** **服务** **负载平衡** 部分中。选择 **服务** 然后选择 **EC2**, 找到 **负载平衡** 然后选择 **目标群组**。
 
-Click **Create target group** to create the first target group, regarding TCP port 443.
+点击 **创建目标群组** 来创建第一个关于 TCP 端口 443 的目标组。
 
-#### Target Group (TCP port 443)
+### 目标群组 (TCP 端口 443)
 
-Configure the first target group according to the table below. Screenshots of the configuration are shown just below the table.
+根据下表配置第一个目标组。 表格下方显示了配置的屏幕截图。
 
-| Option                              | Setting           |
+| 选项                                | 设置              |
 | ----------------------------------- | ----------------- |
 | Target Group Name                   | `rancher-tcp-443` |
-| Protocol                            | `TCP` |
-| Port                                | `443` |
-| Target type                         | `instance` |
-| VPC                                 | Choose your VPC   |
-| Protocol<br/>(Health Check)         | `HTTP` |
-| Path<br/>(Health Check)             | `/healthz` |
-| Port (Advanced health check)        | `override` , `80` |
-| Healthy threshold (Advanced health) | `3` |
-| Unhealthy threshold (Advanced)      | `3` |
-| Timeout (Advanced)                  | `6 seconds` |
-| Interval (Advanced)                 | `10 second` |
-| Success codes                       | `200-399` |
-
-<hr />
-**Screenshot Target group TCP port 443 settings**<br/>
-
-![Target group 443](/img/rancher/ha/nlb/create-targetgroup-443.png)
-
-<hr />
-**Screenshot Target group TCP port 443 Advanced settings**<br/>
-
-![Target group 443 Advanced](/img/rancher/ha/nlb/create-targetgroup-443-advanced.png)
+| Protocol                            | `TCP`             |
+| Port                                | `443`             |
+| Target type                         | `instance`        |
+| VPC                                 | 选择你的 VPC      |
+| Protocol<br/>(Health Check)         | `HTTP`            |
+| Path<br/>(Health Check)             | `/healthz`        |
+| Port (Advanced health check)        | `override`,`80`   |
+| Healthy threshold (Advanced health) | `3`               |
+| Unhealthy threshold (Advanced)      | `3`               |
+| Timeout (Advanced)                  | `6 seconds`       |
+| Interval (Advanced)                 | `10 second`       |
+| Success codes                       | `200-399`         |
 
 <hr />
 
-Click **Create target group** to create the second target group, regarding TCP port 80.
+**屏幕快照: 目标群组 TCP 端口 443 设置**
 
-#### Target Group (TCP port 80)
+![目标组 443](/img/rancher/ha/nlb/create-targetgroup-443.png)
 
-Configure the second target group according to the table below. Screenshots of the configuration are shown just below the table.
+<hr />
 
-| Option                              | Setting          |
+**屏幕快照: 目标群组 TCP 端口 443 高级设置**
+
+![目标组 443 高级](/img/rancher/ha/nlb/create-targetgroup-443-advanced.png)
+
+<hr />
+
+点击 **创建目标组** 来创建第二个关于 TCP 端口 80 的目标组。
+
+### 目标群组 (TCP 端口 80)
+
+根据下表配置第二个目标组。 表格下方显示了配置的屏幕截图。
+
+| 选择                                | 设置             |
 | ----------------------------------- | ---------------- |
 | Target Group Name                   | `rancher-tcp-80` |
-| Protocol                            | `TCP` |
-| Port                                | `80` |
-| Target type                         | `instance` |
-| VPC                                 | Choose your VPC  |
-| Protocol<br/>(Health Check)         | `HTTP` |
-| Path<br/>(Health Check)             | `/healthz` |
-| Port (Advanced health check)        | `traffic port` |
-| Healthy threshold (Advanced health) | `3` |
-| Unhealthy threshold (Advanced)      | `3` |
-| Timeout (Advanced)                  | `6 seconds` |
-| Interval (Advanced)                 | `10 second` |
-| Success codes                       | `200-399` |
-
-<hr />
-**Screenshot Target group TCP port 80 settings**<br/>
-
-![Target group 80](/img/rancher/ha/nlb/create-targetgroup-80.png)
-
-<hr />
-**Screenshot Target group TCP port 80 Advanced settings**<br/>
-
-![Target group 80 Advanced](/img/rancher/ha/nlb/create-targetgroup-80-advanced.png)
+| Protocol                            | `TCP`            |
+| Port                                | `80`             |
+| Target type                         | `instance`       |
+| VPC                                 | 选择你的 VPC     |
+| Protocol<br/>(Health Check)         | `HTTP`           |
+| Path<br/>(Health Check)             | `/healthz`       |
+| Port (Advanced health check)        | `traffic port`   |
+| Healthy threshold (Advanced health) | `3`              |
+| Unhealthy threshold (Advanced)      | `3`              |
+| Timeout (Advanced)                  | `6 seconds`      |
+| Interval (Advanced)                 | `10 second`      |
+| Success codes                       | `200-399`        |
 
 <hr />
 
-### Register Targets
+**屏幕快照: 目标群组 TCP 端口 80 设置**
 
-Next, add your Linux nodes to both target groups.
-
-Select the target group named **rancher-tcp-443**, click the tab **Targets** and choose **Edit**.
-
-![Edit target group 443](/img/rancher/ha/nlb/edit-targetgroup-443.png)
-
-Select the instances (Linux nodes) you want to add, and click **Add to registered**.
+![目标群组 80](/img/rancher/ha/nlb/create-targetgroup-80.png)
 
 <hr />
-**Screenshot Add targets to target group TCP port 443**<br/>
 
-![Add targets to target group 443](/img/rancher/ha/nlb/add-targets-targetgroup-443.png)
+**屏幕快照: 目标群组 TCP 端口 443 高级设置**
+
+![目标群组 80 高级](/img/rancher/ha/nlb/create-targetgroup-80-advanced.png)
 
 <hr />
-**Screenshot Added targets to target group TCP port 443**<br/>
 
-![Added targets to target group 443](/img/rancher/ha/nlb/added-targets-targetgroup-443.png)
+## 注册目标
 
-When the instances are added, click **Save** on the bottom right of the screen.
+下一步，为目标群组添加 Linux 节点。
 
-Repeat those steps, replacing **rancher-tcp-443** with **rancher-tcp-80**. The same instances need to be added as targets to this target group.
+选择 **rancher-tcp-443** 的目标群组，点击 **目标** 选项卡然后选择 **编辑**。
 
-### Create Your NLB
+![编辑目标群组 443](/img/rancher/ha/nlb/edit-targetgroup-443.png)
 
-Use Amazon's Wizard to create an Network Load Balancer. As part of this process, you'll add the target groups you created in [Create Target Groups](#create-target-groups).
+选择您想添加的实例（Linux 节点）, 点击 **添加到已注册**。
 
-1. From your web browser, navigate to the [Amazon EC2 Console](https://console.aws.amazon.com/ec2/).
+<hr />
 
-2.  From the navigation pane, choose **LOAD BALANCING** > **Load Balancers**.
+**屏幕快照: 添加目标到 TCP 端口 443 目标群组**
 
-3.  Click **Create Load Balancer**.
+![添加目标到TCP端口443目标群组](/img/rancher/ha/nlb/add-targets-targetgroup-443.png)
 
-4.  Choose **Network Load Balancer** and click **Create**.
+<hr />
 
-5.  Complete the **Step 1: Configure Load Balancer** form.
+**屏幕快照: 向目标组 TCP 端口 443 添加了目标**
 
-    - **Basic Configuration**
+![向目标组TCP端口443添加了目标](/img/rancher/ha/nlb/added-targets-targetgroup-443.png)
 
-      - Name: `rancher` 
-      - Scheme: `internal` or `internet-facing` 
+添加实例后，单击屏幕右下角的`保存`。
 
-        The Scheme that you choose for your NLB is dependent on the configuration of your instances/VPC. If your instances do not have public IPs associated with them, or you will only be accessing Rancher internally, you should set your NLB Scheme to `internal` rather than `internet-facing` .
+重复这些步骤， 将 **rancher-tcp-443** 替换成 **rancher-tcp-80**。 需要将相同的实例作为目标添加到该目标组。
 
-    - **Listeners**
+## 创建你的 NLB
 
-          	Add the **Load Balancer Protocols** and **Load Balancer Ports** below.
+使用 Amazon 的向导创建网络负载均衡器。 作为此过程的一部分，您将添加在[创建目标组](#创建目标群组)中已创建的目标组。
 
-          	- `TCP` : `443` 
+1.  在 Web 浏览器中，导航至 [亚马逊 EC2 控制台](https://console.aws.amazon.com/ec2/)。
 
-    - **Availability Zones**
+2.  在导航窗格中，选择 **负载平衡** > **负载均衡器**。
 
-      - Select Your **VPC** and **Availability Zones**.
+3.  点击 **创建负载均衡器**。
 
-6.  Complete the **Step 2: Configure Routing** form.
+4.  选择 **网络负载均衡器** 点击 **创建**。
 
-    - From the **Target Group** drop-down, choose **Existing target group**.
+5.  完成 **步骤 1: 配置负载均衡器** 表单。
 
-    - From the **Name** drop-down, choose `rancher-tcp-443` .
+    - **基本配置**
 
-    - Open **Advanced health check settings**, and configure **Interval** to `10 seconds` .
+      - 名称: `rancher`
+      - 模式: `内部` or `面向internet`
 
-7.  Complete **Step 3: Register Targets**. Since you registered your targets earlier, all you have to do is click **Next: Review**.
+        您为 NLB 选择的模式取决于实例/VPC 的配置。 如果您的实例没有与之关联的公共 IP，或者您将仅在内部访问 Rancher，则应将 NLB 方案设置为`内部`，而不是`面向internet`。
 
-8.  Complete **Step 4: Review**. Look over the load balancer details and click **Create** when you're satisfied.
+    - **侦听器**
 
-9.  After AWS creates the NLB, click **Close**.
+      添加如下的 **负载均衡器协议** 和 **负载均衡器端口**。
 
-### Add listener to NLB for TCP port 80
+      - `TCP`: `443`
 
-1. Select your newly created NLB and select the **Listeners** tab.
+    - **可用区**
 
-2. Click **Add listener**.
+      - 选择您的 **VPC** 和 **可用区**。
 
-3. Use `TCP` : `80` as **Protocol** : **Port**
+6.  完成 **步骤 2: 配置路由** 表单。
 
-4. Click **Add action** and choose **Forward to...**
+    - 从 **目标组** 下拉列表中选择 **已经存在的目标组**。
 
-5. From the **Forward to** drop-down, choose `rancher-tcp-80` .
+    - 从 **名称** 下拉框中选择 `rancher-tcp-443`。
 
-6. Click **Save** in the top right of the screen.
+    - 打开 **高级运行状况检查设置**， 配置 **间隔** 为 `10 秒`。
 
+7.  完成 **步骤 3: 注册目标**。由于您较早注册了目标，因此只需点击 **下一步: 审核**。
+
+8.  完成 **步骤 4: 审核**。 查看并检查负载均衡器的详细信息，确认无误后单击`创建`。
+
+9.  完成创建 NLB 步骤后，点击 **关闭**。
+
+## 给 NLB 的 TCP 80 端口添加侦听器
+
+1. 选择您刚创建的 NLB 然后点击 **侦听器** 选项卡。
+
+2. 点击 **添加侦听器**。
+
+3. 使用 `TCP`:`80` 作为 **协议** : **端口**。
+
+4. 点击 **添加操作** 并选择 **转发至...**。
+
+5. 根据 **转发至** 下拉框, 选择 `rancher-tcp-80`。
+
+6. 点击屏幕右上角的 **保存**。
