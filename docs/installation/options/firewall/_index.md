@@ -2,11 +2,11 @@
 title: 通过 firewalld 放行端口
 ---
 
-Some distributions of Linux [derived from RHEL, ](https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux#Rebuilds) including Oracle Linux, may have default firewall rules that block communication with Helm.
+Linux 的一些发行版[源自 RHEL](https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux#Rebuilds)，包括 Oracle Linux，可能有默认的防火墙规则来阻止与 Helm 的通信。
 
-For example, one Oracle Linux image in AWS has REJECT rules that stop Helm from communicating with Tiller:
+例如，AWS 中的一个 Oracle Linux 映像具有 REJECT 规则，可阻止 Helm 与 Tiller 通信：
 
-``` 
+```
 Chain INPUT (policy ACCEPT)
 target     prot opt source               destination
 ACCEPT     all  --  anywhere             anywhere             state RELATED,ESTABLISHED
@@ -23,29 +23,29 @@ Chain OUTPUT (policy ACCEPT)
 target     prot opt source               destination
 ```
 
-You can check the default firewall rules with this command:
+您可以使用以下命令检查默认防火墙规则：
 
-``` 
+```
 sudo iptables --list
 ```
 
-This section describes how to use `firewalld` to apply the [firewall port rules](/docs/installation/references) for nodes in a high-availability Rancher server cluster.
+本节介绍如何使用`firewalld`为高可用性 Rancher 服务器群集中的节点应用[防火墙端口规则](/docs/installation/references/_index)。
 
-## Prerequisite
+## 先决条件
 
-Install v7.x or later ofv `firewalld` :
+安装 v7.x 或更高版本的`firewalld`：
 
-``` 
+```
 yum install firewalld
 systemctl start firewalld
 systemctl enable firewalld
 ```
 
-## Applying Firewall Port Rules
+## 应用防火墙端口规则
 
-In the Rancher high-availability installation instructions, the Rancher server is set up on three nodes that have all three Kubernetes roles: etcd, controlplane, and worker. If your Rancher server nodes have all three roles, run the following commands on each node:
+在 Rancher 高可用性安装说明中，Rancher 服务器设置在三个节点上，这三个节点具有 Kubernetes 的所有三个角色：etcd、controlplane 和 worker。如果您的 Rancher 服务器节点具有所有这三个角色，请在每个节点上运行以下命令：
 
-``` 
+```
 firewall-cmd --permanent --add-port=22/tcp
 firewall-cmd --permanent --add-port=80/tcp
 firewall-cmd --permanent --add-port=443/tcp
@@ -61,12 +61,10 @@ firewall-cmd --permanent --add-port=30000-32767/tcp
 firewall-cmd --permanent --add-port=30000-32767/udp
 ```
 
-If your Rancher server nodes have separate roles, use the following commands based on the role of the node:
+如果您的 Rancher 服务器节点具有单独的角色，请根据节点的角色使用以下命令：
 
-``` 
-
-## For etcd nodes, run the following commands:
-
+```
+## 对于etcd节点，运行以下命令：
 firewall-cmd --permanent --add-port=2376/tcp
 firewall-cmd --permanent --add-port=2379/tcp
 firewall-cmd --permanent --add-port=2380/tcp
@@ -74,8 +72,7 @@ firewall-cmd --permanent --add-port=8472/udp
 firewall-cmd --permanent --add-port=9099/tcp
 firewall-cmd --permanent --add-port=10250/tcp
 
-## For control plane nodes, run the following commands:
-
+## 对于control plane节点，运行以下命令：
 firewall-cmd --permanent --add-port=80/tcp
 firewall-cmd --permanent --add-port=443/tcp
 firewall-cmd --permanent --add-port=2376/tcp
@@ -87,8 +84,7 @@ firewall-cmd --permanent --add-port=10254/tcp
 firewall-cmd --permanent --add-port=30000-32767/tcp
 firewall-cmd --permanent --add-port=30000-32767/udp
 
-## For worker nodes, run the following commands:
-
+## 对于worker nodes节点，运行以下命令：
 firewall-cmd --permanent --add-port=22/tcp
 firewall-cmd --permanent --add-port=80/tcp
 firewall-cmd --permanent --add-port=443/tcp
@@ -101,11 +97,10 @@ firewall-cmd --permanent --add-port=30000-32767/tcp
 firewall-cmd --permanent --add-port=30000-32767/udp
 ```
 
-After the `firewall-cmd` commands have been run on a node, use the following command to enable the firewall rules:
+在节点上运行`firewall-cmd`命令后，使用以下命令启用防火墙规则：
 
-``` 
+```
 firewall-cmd --reload
 ```
 
-**Result:** The firewall is updated so that Helm can communicate with the Rancher server nodes.
-
+**结果：** 防火墙已更新，因此 Helm 可以与 Rancher 服务器节点通信。

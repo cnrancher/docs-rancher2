@@ -2,18 +2,18 @@
 title: 配置 Pod 安全策略
 ---
 
-_Pod Security Policies_ are objects that control security-sensitive aspects of pod specification (like root privileges).
+_Pod 安全策略_ 可以用来控制安全敏感的 Pod 字段（如 root 权限等）。
 
-### Adding a Default Pod Security Policy
+### 添加一个默认的 Pod 安全策略
 
-When you create a new cluster, you can configure it to apply a PSP immediately. As you create the cluster, use the **Cluster Options** to enable a PSP. The PSP assigned to the cluster will be the default PSP for projects within the cluster.
+当您创建一个新的集群时，您可以立即配置集群使用 PSP。创建集群时，使用 **集群选项** 启用 PSP。分配给集群的 PSP 将成为该集群中项目的默认 PSP。
 
-> **Prerequisite:**
-> Create a Pod Security Policy within Rancher. Before you can assign a default PSP to a new cluster, you must have a PSP available for assignment. For instruction, see [Creating Pod Security Policies](/docs/admin-settings/pod-security-policies/).
-> **Note:**
-> For security purposes, we recommend assigning a PSP as you create your clusters.
+> **先决条件:**
+> 在 Rancher 中创建 Pod 安全策略。在将默认 PSP 分配给新集群之前，必须有可用于分配的 PSP。有关说明，请参阅[创建 Pod 安全策略](/docs/admin-settings/pod-security-policies/_index).
 
-To enable a default Pod Security Policy, set the **Pod Security Policy Support** option to **Enabled**, and then make a selection from the **Default Pod Security Policy** drop-down.
+> **注意:**
+> 出于安全考虑，我们建议您在创建集群时分配 PSP。
 
-When the cluster finishes provisioning, the PSP you selected is applied to all projects within the cluster.
+如果要启用默认 Pod 安全策略，你需要设置 RKE 集群的 **Pod 安全策略** 选项为 **启用**，然后在 **默认的 Pod 安全策略** 下拉菜单中进行选择。
 
+当集群完成创建时，您选择的 PSP 将应用于集群中的所有项目。
