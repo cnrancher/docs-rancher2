@@ -1,30 +1,31 @@
 ---
-title: '介绍'
+title: 节点和负载均衡
 ---
 
-Use your provider of choice to provision 3 nodes and a Load Balancer endpoint for your RKE install.
+使用您选择的提供商为您的 RKE 安装提供 3 个节点和一个负载均衡器端点。
 
-> **Note:** These nodes must be in the same region/datacenter. You may place these servers in separate availability zones.
+> **注意事项:** 这些节点必须位于相同的区域/数据中心。您可以将这些服务器放在单独的可用区中。
 
-#### Node Requirements
+## 节点要求
 
-View the supported operating systems and hardware/software/networking requirements for nodes running Rancher at [Node Requirements](/docs/installation/requirements).
+查看支持的操作系统和运行 Rancher 节点的硬件/软件/网络需求 [节点需求](/docs/installation/requirements/_index)
 
-View the OS requirements for RKE at [RKE Requirements]({{<baseurl>}}/rke/latest/en/os/)
+查看 RKE 的操作系统需求 [RKE 需求](https://rancher.com/docs/rke/latest/en/os/)
 
-#### Load Balancer
+## 负载均衡
 
-RKE will configure an Ingress controller pod, on each of your nodes. The Ingress controller pods are bound to ports TCP/80 and TCP/443 on the host network and are the entry point for HTTPS traffic to the Rancher server.
+RKE 将在每个节点上配置一个 Ingress controller pod。
 
-Configure a load balancer as a basic Layer 4 TCP forwarder. The exact configuration will vary depending on your environment.
+Ingress controller pods 被绑定到主机网络的 TCP/80 和 TCP/443 端口上，并且是到 Rancher Server 的 HTTPS 流量的入口点。
 
-> **Important:**
-> Do not use this load balancer (i.e, the `local` cluster Ingress) to load balance applications other than Rancher following installation. Sharing this Ingress with other applications may result in websocket errors to Rancher following Ingress configuration reloads for other apps. We recommend dedicating the `local` cluster to Rancher and no other applications.
+将负载均衡器配置为基本的 4 层 TCP 转发器。确切的配置将取决于您的环境。
 
-##### Examples
+> **重要:**
+> 安装后，请勿使用此负载平衡器（即`local`群集 Ingress）对 Rancher 以外的应用程序进行负载平衡。与其他应用程序共享此 Ingress 可能会在其他应用的 Ingress 配置重新加载后导致 Rancher 出现 websocket 错误。我们建议将`local`群集专用于 Rancher，而不应使用其他任何应用程序。
 
-* [Nginx](/docs/installation/options/helm2/create-nodes-lb/nginx/)
-* [Amazon NLB](/docs/installation/options/helm2/create-nodes-lb/nlb/)
+## 例子
 
-#### [Next: Install Kubernetes with RKE](/docs/installation/options/helm2/kubernetes-rke/)
+- [Nginx](/docs/installation/options/helm2/create-nodes-lb/nginx/_index)
+- [Amazon NLB](/docs/installation/options/helm2/create-nodes-lb/nlb/_index)
 
+#### [下一步: 使用 RKE 安装 Kubernetes](/docs/installation/options/helm2/kubernetes-rke/_index)
