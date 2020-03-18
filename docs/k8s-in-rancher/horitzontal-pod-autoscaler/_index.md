@@ -23,7 +23,7 @@ Rancher 提供了一些额外功能来帮助你管理 HPA，具体取决于 Ranc
 如果使用的是较旧版本的 Rancher，则可能需要其他 HPA 安装步骤：
 
 - **对于 Rancher v2.0.7+：** 在 Rancher v2.0.7 及更高版本中创建的集群自动具有使用 HPA 所需的所有前置条件（metrics-server 和 Kubernetes 集群配置）。
-- **对于 Rancher v2.0.7 之前的版本：** 在 Rancher v2.0.7 之前版本中创建的群集不会自动具有使用 HPA 所需的全部前置条件。有关为这些群集安装 HPA 的说明，请参阅[为 Rancher v2.0.7 之前创建的群集手动安装 HPA](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/hpa-for-rancher-before-2_0_7/_index)。
+- **对于 Rancher v2.0.7 之前的版本：** 在 Rancher v2.0.7 之前版本中创建的集群不会自动具有使用 HPA 所需的全部前置条件。有关为这些集群安装 HPA 的说明，请参阅[为 Rancher v2.0.7 之前创建的集群手动安装 HPA](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/hpa-for-rancher-before-2_0_7/_index)。
 
 ### 通过部署服务测试 HPA
 

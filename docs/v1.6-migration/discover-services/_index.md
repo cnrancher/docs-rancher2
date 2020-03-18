@@ -2,88 +2,74 @@
 title: '6、服务发现'
 ---
 
-Service discovery is one of the core functionalities of any container-based environment. Once you have packaged and launched your application, the next step is making it discoverable to other containers in your environment or the external world. This document will describe how to use the service discovery support provided by Rancher v2.x so that you can find them by name.
+服务发现是任何基于容器环境的核心功能之一。一旦打包并启动应用程序后，下一步就是使你的环境或外部环境中的其他容器可以发现它。本文档将描述如何使用 Rancher v2.x 提供的服务发现支持让你可以用名称找到它们。
 
-This document will also show you how to link the workloads and services that you migrated into Rancher v2.x. When you parsed your services from v1.6 using migration-tools CLI, it output two files for each service: one deployment manifest and one service manifest. You'll have to link these two files together before the deployment works correctly in v2.x.
+本文还将向你展示当迁移到 Rancher v2.x 时，如何连接工作负载和服务。使用迁移工具 CLI 从 v1.6 解析服务时，它将为每个服务输出两个文件：一个部署清单和一个服务清单。你必须将这两个文件连接在一起，这样部署才能在 v2.x 中正常运行。
 
-<figcaption>Resolve the <code>output.txt</code> Link Directive</figcaption>
+<figcaption>解决“output.text”中的“links”问题</figcaption>
 
-![Resolve Link Directive](/img/rancher/resolve-links.png)
+![解析连接指令](/img/rancher/resolve-links.png)
 
-### In This Document
+## 服务发现: Rancher v1.6 vs. v2.x
 
-<!-- TOC -->
+对于 Rancher v2.x，我们已将 v1.6 中使用的 Rancher DNS 微服务替换为本地[Kubernetes DNS 支持](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)，它为 Kubernetes 工作负载和 pods 提供了等效的服务发现。前 Cattle 用户可以在 v2.x 中使用 Rancher v1.6 中的所有服务发现功能。并且不会有功能损失。
 
-* [Service Discovery: Rancher v1.6 vs.v2.x](#service-discovery-rancher-v1-6-vs-v2-x)
-* [Service Discovery Within and Across Namespaces](#service-discovery-within-and-across-namespaces)
-* [Container Discovery](#container-discovery)
-* [Service Name Alias Creation](#service-name-alias-creation)
+Kubernetes 在集群中部署了 DNS pod 和服务，这类似于[Rancher v1.6 DNS 微服务](https://docs.rancher.com/docs/rancher/v1.6/en/cattle/internal-dns-service/#internal-dns-service-in-cattle-environments)。Kubernetes 将配置它的 kubelet，从而将全部的 DNS 查询请求都转到那个 DNS 服务（例如 kube-dns 和 core-dns 等）上。
 
-<!-- /TOC -->
+下表显示了两个 Rancher 版本中可用的每个服务发现功能。
 
-### Service Discovery: Rancher v1.6 vs.v2.x
+| 服务发现功能                                      | Rancher v1.6 | Rancher v2.x | 描述                                                                                      |
+| ------------------------------------------------- | ------------ | ------------ | ----------------------------------------------------------------------------------------- |
+| [堆栈内部和堆栈之间的服务发现][1] (例如 clusters) | ✓            | ✓            | 堆栈内服务均可通过`<service_name>`访问，堆栈间可以通过`<service_name>.<stack_name>`访问。 |
+| [容器发现][2]                                     | ✓            | ✓            | 所有容器都可以通过其名称全局可见。                                                        |
+| [创建服务别名][3]                                 | ✓            | ✓            | 向服务添加别名，并使用别名连接到其他服务。                                                |
+| [发现外部服务][4]                                 | ✓            | ✓            | 指向在 Rancher 外部部署的服务并使用外部 IP 或域名。                                       |
 
-For Rancher v2.x, we've replaced the Rancher DNS microservice used in v1.6 with native [Kubernetes DNS support](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/), which provides equivalent service discovery for Kubernetes workloads and pods. Former Cattle users can replicate all the service discovery features from Rancher v1.6 in v2.x. There's no loss of functionality.
+[1]: #命名空间内和跨命名空间的服务发现
+[2]: #容器发现
+[3]: #创建服务别名
+[4]: #创建服务别名
 
-Kubernetes schedules a DNS pod and service in the cluster, which is similar to the [Rancher v1.6 DNS microservice]({{< baseurl >}}/rancher/v1.6/en/cattle/internal-dns-service/#internal-dns-service-in-cattle-environments). Kubernetes then configures its kubelets to route all DNS lookups to this DNS service, which is skyDNS, a flavor of the default Kube-DNS implementation.
+## 命名空间内和跨命名空间的服务发现
 
-The following table displays each service discovery feature available in the two Rancher releases.
+在 v2.x 中创建*新*工作负载时 (不是迁移的，更多内容查看[下面](#连接迁移的工作负载和服务))，Rancher 会自动创建一个具有相同名称的服务，然后将服务和工作负载连接在一起。如果未显式公开端口，则使用默认端口`42`。这种做法使工作负载可以通过名称在命名空间内和命名空间之间被发现。
 
-| Service Discovery Feature                                       | Rancher v1.6 | Rancher v2.x | Description                                                                                                      |
-| --------------------------------------------------------------- | ------------ | ------------ | ---------------------------------------------------------------------------------------------------------------- |
-| [service discovery within and across stack][1] (i.e., clusters) | ✓            | ✓            | All services in the stack are resolvable by `<service_name>` and by `<service_name>.<stack_name>` across stacks.|
-| [container discovery][2]                                        | ✓            | ✓            | All containers are resolvable globally by their name.|
-| [service alias name creation][3]                                | ✓            | ✓            | Adding an alias name to services and linking to other services using aliases.|
-| [discovery of external services][4]                             | ✓            | ✓            | Pointing to services deployed outside of Rancher using the external IP(s) or a domain name.|
+## 容器发现
 
-[1]: #service-discovery-within-and-across-stacks
-[2]: #container-discovery
-[3]: #service-name-alias-creation
-[4]: #service-name-alias-creation
+在 Kubernetes 集群中运行的每个 pod 也将获得一个 DNS。这个 DNS 也用点表示法： `<POD_IP_ADDRESS>.<NAMESPACE_NAME>.pod.cluster.local`。例如，一个在`default`命名空间中，DNS 名称为 `cluster.local`，IP 是`10.42.2.7`的 pod 的 DNS 为 `10-42-2-7.default.pod.cluster.local`。
 
-<br/>
+如果在 pods spec 中进行了设置，也可以使用 hostname 和 subdomain 字段解析 pods。有关此解析的详细信息，请参见[Kubernetes 文档](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)。
 
-#### Service Discovery Within and Across Namespaces
+## 连接迁移的工作负载和服务
 
-When you create a _new_ workload in v2.x (not migrated, more on that [below](#linking-migrated-workloads-and-services)), Rancher automatically creates a service with an identical name, and then links the service and workload together. If you don't explicitly expose a port, the default port of `42` is used. This practice makes the workload discoverable within and across namespaces by its name.
+当将 v1.6 服务迁移到 v2.x 时，Rancher 不会自动为每个迁移的部署创建 Kubernetes 服务。相反，你必须使用下面列出的一些方法将部署和服务手动连接在一起。
 
-#### Container Discovery
+在下图中，`web-deployment.yml` 和 `web-service.yml` 文件连接在一起。
 
-Individual pods running in the Kubernetes cluster also get a DNS record assigned, which uses dot notation as well: `<POD_IP_ADDRESS>.<NAMESPACE_NAME>.pod.cluster.local` . For example, a pod with an IP of `10.42.2.7` in the namespace `default` with a DNS name of `cluster.local` would have an entry of `10-42-2-7.default.pod.cluster.local` .
+<figcaption>连接工作负载和Kubernetes服务</figcaption>
 
-Pods can also be resolved using the `hostname` and `subdomain` fields if set in the pod spec. Details about this resolution is covered in the [Kubernetes docs](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/).
+![连接的工作负载和Kubernetes服务](/img/rancher/linked-service-workload.png)
 
-#### Linking Migrated Workloads and Services
+## 创建服务别名
 
-When you migrate v1.6 services to v2.x, Rancher does not automatically create a Kubernetes service record for each migrated deployment. Instead, you'll have to link the deployment and service together manually, using any of the methods listed below.
+正如你可以为 Rancher v1.6 服务创建别名一样，你也可以为 Rancher v2.x 工作负载执行相同的操作。同样，你也可以使用主机名或 IP 地址创建指向外部运行的服务的 DNS 记录。这些 DNS 记录是 Kubernetes 服务对象。
 
-In the image below, the `web-deployment.yml` and `web-service.yml` files [created after parsing](/docs/v1.6-migration/run-migration-tool/#migration-example-file-output) our [migration example services](/docs/v1.6-migration/#migration-example-files) are linked together.
+使用 v2.x UI，在菜单中导航至 `Project` 视图. 然后单击 **资源 > 工作负载 > 服务发现**。 (在 v2.3.0 之前的版本中，单击 **工作负载 > 服务发现** 选项卡。) 为工作负载创建的所有 DNS 记录，根据命名空间，分组显示在该页。
 
-<figcaption>Linked Workload and Kubernetes Service</figcaption>
+单击 **添加记录** 以创建新的 DNS 记录。支持连接到外部服务或为另一个工作负载，DNS 记录或 Pod 组创建别名。
 
-![Linked Workload and Kubernetes Service](/img/rancher/linked-service-workload.png)
+<figcaption>添加服务发现记录</figcaption>
 
-#### Service Name Alias Creation
+![添加服务发现记录](/img/rancher/add-record.png)
 
-Just as you can create an alias for Rancher v1.6 services, you can do the same for Rancher v2.x workloads. Similarly, you can also create DNS records pointing to services running externally, using either their hostname or IP address. These DNS records are Kubernetes service objects.
+下表指出了哪些别名选项由 Kubernetes 实现，哪些选项由 Rancher 利用 Kubernetes 实现。
 
-Using the v2.x UI, use the context menu to navigate to the `Project` view. Then click **Resources > Workloads > Service Discovery.** (In versions prior to v2.3.0, click the **Workloads > Service Discovery** tab.) All existing DNS records created for your workloads are listed under each namespace.
+| 选项                       | Kubernetes 实现? | Rancher 实现? |
+| -------------------------- | ---------------- | ------------- |
+| 指向外部主机名             | ✓                |               |
+| 指向与选择器匹配的一组 pod | ✓                |               |
+| 指向外部 IP 地址           |                  | ✓             |
+| 指向另一个工作负载         |                  | ✓             |
+| 指向另一个 DNS 记录的别名  |                  | ✓             |
 
-Click **Add Record** to create new DNS records. Then view the various options supported to link to external services or to create aliases for another workload, DNS record, or set of pods.
-
-<figcaption>Add Service Discovery Record</figcaption>
-
-![Add Service Discovery Record](/img/rancher/add-record.png)
-
-The following table indicates which alias options are implemented natively by Kubernetes and which options are implemented by Rancher leveraging Kubernetes.
-
-| Option                                          | Kubernetes-implemented? | Rancher-implemented? |
-| ----------------------------------------------- | ----------------------- | -------------------- |
-| Pointing to an external hostname                | ✓                       |                      |
-| Pointing to a set of pods that match a selector | ✓                       |                      |
-| Pointing to an external IP address              |                         | ✓                    |
-| Pointing to another workload                    |                         | ✓                    |
-| Create alias for another DNS record             |                         | ✓                    |
-
-#### [Next: Load Balancing](/docs/v1.6-migration/load-balancing/)
-
+## [下一步: 负载均衡](/docs/v1.6-migration/load-balancing/_index)

@@ -2,97 +2,85 @@
 title: '1、开始迁移'
 ---
 
-Get started with your migration to Rancher v2.x by installing Rancher and configuring your new Rancher environment.
+通过安装 Rancher 并配置新的 Rancher 环境，来开始迁移到 Rancherv2.x。
 
-### Outline
+## 安装 Rancher v2.x
 
-<!-- TOC -->
+从 v1.6 迁移到 v2.x 的第一步是将 Rancher v2.x Server 与 v1.6 Server 并排安装，因在迁移过程中需要使用旧的安装。 由于 v1.6 和 v2.x 之间的体系结构更改，因此没有直接的升级途径。 您必须独立安装 v2.x，然后将 v1.6 服务迁移到 v2.x。
 
-* [A. Install Rancher v2.x](#a-install-rancher-v2-x)
-* [B. Configure Authentication](#b-configure-authentication)
-* [C. Provision a Cluster and Project](#c-provision-a-cluster-and-project)
-* [D. Create Stacks](#d-create-stacks)
+v2.x 的新功能，与 Rancher Server 的所有通信均已加密。 以下过程不仅指导你安装 Rancher，而且还将指导你创建和安装这些证书。
 
-<!-- /TOC -->
+在安装 v2.x 之前，请提供一台或多台主机以用作 Rancher Server(s)。 你可以在以下位置找到这些主机的要求[Server 要求](/docs/installation/requirements/_index)。
 
-### A. Install Rancher v2.x
+提供节点后， 开始安装 Rancher:
 
-The first step in migrating from v1.6 to v2.x is to install the Rancher v2.x Server side-by-side with your v1.6 Server, as you'll need your old install during the migration process. Due to the architecture changes between v1.6 and v2.x, there is no direct path for upgrade. You'll have to install v2.x independently and then migrate your v1.6 services to v2.x.
+- [Docker 安装](/docs/installation/other-installation-methods/single-node-docker/_index)
 
-New for v2.x, all communication to Rancher Server is encrypted. The procedures below instruct you not only on installation of Rancher, but also creation and installation of these certificates.
+对于开发环境，可以使用 Docker 将 Rancher 安装在单个节点上。 此安装过程将单个 Rancher 容器部署到你的主机。
 
-Before installing v2.x, provision one host or more to function as your Rancher Server(s). You can find the requirements for these hosts in [Server Requirements](/docs/installation/requirements/).
+- [Kubernetes 安装](/docs/installation/k8s-install/_index)
 
-After provisioning your node(s), install Rancher:
+对于用户需要不断访问集群的生产环境，我们推荐采用高可用 Kubernetes 集群安装的方式安装 Rancher。 此安装过程将设置一个三节点集群，并使用 Helm chart 在每个节点上安装 Rancher。
 
-* [Docker Install](/docs/installation/single-node)
+> **重要区别:** 尽管你可以在每个节点上使用外部数据库和 Docker 命令以高可用 Kubernetes 配置来安装 Rancher v1.6，但 Kubernetes 安装中的 Rancher v2.x 需要现有的 Kubernetes 集群。查阅[Kubernetes 安装](/docs/installation/k8s-install/_index) 以满足所有要求。
 
-  For development environments, Rancher can be installed on a single node using Docker. This installation procedure deploys a single Rancher container to your host.
+## 配置身份验证
 
-* [Kubernetes Install](/docs/installation/k8s-install/)
+安装 Rancher v2.x Server 之后，我们建议配置外部身份验证（例如 Active Directory 或 GitHub），以便用户可以使用其单点登录 Rancher。 有关已支持的身份验证提供程序的完整列表以及有关如何配置它们的说明， 查看[认证方式](/docs/admin-settings/authentication/_index)。
 
-  For production environments where your user base requires constant access to your cluster, we recommend installing Rancher in a high availability Kubernetes installation. This installation procedure provisions a three-node cluster and installs Rancher on each node using a Helm chart.
+<figcaption>Rancher v2.x 中的认证</figcaption>
 
-  > **Important Difference:** Although you could install Rancher v1.6 in a high-availability Kubernetes configuration using an external database and a Docker command on each node, Rancher v2.x in a Kubernetes install requires an existing Kubernetes cluster. Review [Kubernetes Install](/docs/installation/k8s-install/) for full requirements.
+![Rancher v2.x 认证方式](/img/rancher/auth-providers.svg)
 
-### B. Configure Authentication
+### 本地用户
 
-After your Rancher v2.x Server is installed, we recommend configuring external authentication (like Active Directory or GitHub) so that users can log into Rancher using their single sign-on. For a full list of supported authentication providers and instructions on how to configure them, see [Authentication](/docs/admin-settings/authentication).
+尽管我们建议使用外部身份验证提供程序，但 Rancher v1.6 和 v2.x 都为 Rancher 本地用户提供支持。 但是，这些用户无法从 Rancher v1.6 迁移到 v2.x。 如果你在 Rancher v1.6 中使用了本地用户，并希望在 v2.x 中继续进行使用， 你会需要去[手动重新创建这些用户账号](/docs/admin-settings/authentication/_index)并为其分配访问权限。
 
-<figcaption>Rancher v2.x Authentication</figcaption>
+最佳实践，你应该使用外部*和*本地身份验证的混合体。 这种做法可在你的外部身份验证遇到中断时提供对 Rancher 的访问，因为你仍然可以使用本地用户帐户登录。设置一些本地帐户作为 Rancher 的管理用户。
 
-![Rancher v2.x Authentication](/img/rancher/auth-providers.svg)
+### SAML 身份验证
 
-#### Local Users
+在 Rancher v1.6 中，我们鼓励 SAML 用户使用 Shibboleth，因为它是我们提供的唯一 SAML 身份验证选项。 但是，为了更好地对它们的微小差异进行支持，我们为 v2.x 添加了经过充分测试的 SAML 提供程序：Ping Identity，Microsoft ADFS 和 FreeIPA。
 
-Although we recommend using an external authentication provider, Rancher v1.6 and v2.x both offer support for users local to Rancher. However, these users cannot be migrated from Rancher v1.6 to v2.x. If you used local users in Rancher v1.6 and want to continue this practice in v2.x, you'll need to [manually recreate these user accounts](/docs/admin-settings/authentication/) and assign them access rights.
+## 创建集群和项目
 
-As a best practice, you should use a hybrid of external _and_ local authentication. This practice provides access to Rancher should your external authentication experience an interruption, as you can still log in using a local user account. Set up a few local accounts as administrative users of Rancher.
+开始在 Rancher v2.x 的工作通过配置新的 Kubernetes 集群，类似于 v1.6 中的环境。 该集群将托管你的应用程序部署。
 
-#### SAML Authentication Providers
+在 Rancher v2.x 中结合在一起的集群和项目等效于 v1.6 环境。 *集群*是计算边界（即你的主机），而*项目*是管理边界（即用于为用户分配访问权限的命名空间组）。
 
-In Rancher v1.6, we encouraged our SAML users to use Shibboleth, as it was the only SAML authentication option we offered. However, to better support their minor differences, we've added more fully tested SAML providers for v2.x: Ping Identity, Microsoft ADFS, and FreeIPA.
+以下标题中提供了有关配置集群的更多基本信息，但有关完整信息， 查看[配置 Kubernetes 集群](/docs/cluster-provisioning/_index).
 
-### C. Provision a Cluster and Project
+### 集群
 
-Begin work in Rancher v2.x by using it to provision a new Kubernetes cluster, which is similar to an environment in v1.6. This cluster will host your application deployments.
+在 Rancher v1.6 中，计算节点已添加到*环境*中。 Rancher v2.x 避免使用*环境*来表示*集群*，因为 Kubernetes 将此术语用于一组计算机而不是*环境*。
 
-A cluster and project in combined together in Rancher v2.x is equivalent to a v1.6 environment. A _cluster_ is the compute boundary (i.e., your hosts) and a _project_ is an administrative boundary (i.e., a grouping of namespaces used to assign access rights to users).
+Rancher v2.x 允许你在任何地方启动 Kubernetes 集群。 使用以下方式纳管集群：
 
-There's more basic info on provisioning clusters in the headings below, but for full information, see [Provisioning Kubernetes Clusters](/docs/cluster-provisioning/).
+- 一个[托管的 Kubernetes 集群](/docs/cluster-provisioning/hosted-kubernetes-clusters/_index)。
+- 一个[来自基础设施提供商的节点](/docs/cluster-provisioning/rke-clusters/node-pools/_index)。 Rancher 在节点上启动 Kubernetes。
+- 任何[自定义节点](/docs/cluster-provisioning/rke-clusters/custom-nodes/_index)。Rancher 可以在节点上启动 Kubernetes，无论是裸机服务器，虚拟机还是不太流行的基础架构提供商上的云主机。
 
-#### Clusters
+### 项目
 
-In Rancher v1.6, compute nodes were added to an _environment_. Rancher v2.x eschews the term _environment_ for _cluster_, as Kubernetes uses this term for a team of computers instead of _environment_.
+此外，Rancher v2.x 引入了[项目](/docs/cluster-admin/projects-and-namespaces/_index)，该对象将集群分为不同的应用程序组，这对于应用用户权限很有用。集群和项目的这种模型允许多租户。因为主机归集群所有，并且可以将集群进一步划分为多个项目，用户可以在其中管理应用程序，而其他用户则不能。
 
-Rancher v2.x lets you launch a Kubernetes cluster anywhere. Host your cluster using:
+当你创建一个集群时，将自动创建两个项目：
 
-* A [hosted Kubernetes provider](/docs/cluster-provisioning/hosted-kubernetes-clusters/).
-* A [pool of nodes from an infrastructure provider](/docs/cluster-provisioning/rke-clusters/node-pools/). Rancher launches Kubernetes on the nodes.
-* Any [custom node(s)](/docs/cluster-provisioning/rke-clusters/custom-nodes/). Rancher can launch Kubernetes on the nodes, be they bare metal servers, virtual machines, or cloud hosts on a less popular infrastructure provider.
+- `System` 项目，其中包含运行重要的 Kubernetes 资源的系统命名空间（例如 ingress 控制器和集群 dns 服务）
+- `Default` 项目。
 
-#### Projects
+但是，对于生产环境， 我们推荐[创建自己的项目](/docs/project-admin/namespaces/_index) 并为其指定一个描述性名称。
 
-Additionally, Rancher v2.x introduces [projects](/docs/k8s-in-rancher/projects-and-namespaces/), which are objects that divide clusters into different application groups that are useful for applying user permissions. This model of clusters and projects allow for multi-tenancy because hosts are owned by the cluster, and the cluster can be further divided into multiple projects where users can manage their apps, but not those of others.
+在配置新的集群和项目之后，你可以授权用户访问和使用项目资源。与 Rancher v1.6 环境类似，Rancher v2.x 允许你[将用户分配给项目](/docs/project-admin/_index)。通过将用户分配给项目，你可以限制用户可以访问哪些应用程序和资源。
 
-When you create a cluster, two projects are automatically created:
+## 创建堆栈
 
-* The `System` project, which includes system namespaces where important Kubernetes resources are running (like ingress controllers and cluster dns services)
-* The `Default` project.
+在 Rancher v1.6 中，使用*堆栈*将属于你应用程序的服务分组在一起。在 v2.x 中，你需要去[创建命名空间](/docs/cluster-admin/projects-and-namespaces/_index)，出于相同的目的，它们相当于 v2.x 的堆栈。
 
-However, for production environments, we recommend [creating your own project](/docs/project-admin/namespaces/#creating-projects) and giving it a descriptive name.
+在 Rancher v2.x 中，名称空间是项目的子对象。创建项目时，会向该项目添加一个`default`命名空间，但你可以创建自己的名称空间以与 v1.6 的堆栈并行。
 
-After provisioning a new cluster and project, you can authorize your users to access and use project resources. Similarly to Rancher v1.6 environments, Rancher v2.x allows you to [assign users to projects](/docs/k8s-in-rancher/projects-and-namespaces/editing-projects/). By assigning users to projects, you can limit what applications and resources a user can access.
+在迁移过程中，如果你未明确定义服务应部署到的名称空间，则会将其部署到`default`命名空间。
 
-### D. Create Stacks
+与 v1.6 一样，Rancher v2.x 支持命名空间内和跨命名空间的服务发现 (我们很快将会了解到[服务发现](/docs/v1.6-migration/discover-services/_index))。
 
-In Rancher v1.6, _stacks_ were used to group together the services that belong to your application. In v2.x, you need to [create namespaces](/docs/k8s-in-rancher/projects-and-namespaces/#creating-namespaces), which are the v2.x equivalent of stacks, for the same purpose.
-
-In Rancher v2.x, namespaces are child objects to projects. When you create a project, a `default` namespace is added to the project, but you can create your own to parallel your stacks from v1.6.
-
-During migration, if you don't explicitly define which namespace a service should be deployed to, it's deployed to the `default` namespace.
-
-Just like v1.6, Rancher v2.x supports service discovery within and across namespaces (we'll get to [service discovery](/docs/v1.6-migration/discover-services) soon).
-
-#### [Next: Migrate Your Services](/docs/v1.6-migration/run-migration-tool)
-
+## [下一步: 迁移服务](/docs/v1.6-migration/run-migration-tool/_index)

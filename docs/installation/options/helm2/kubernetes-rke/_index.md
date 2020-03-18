@@ -113,13 +113,13 @@ kube-system     rke-network-plugin-deploy-job-6pbgj       0/1       Completed   
 ## 保存您的文件
 
 > **重要**
-> 以下文件也需要维护用于问题诊断和升级群集。
+> 以下文件也需要维护用于问题诊断和升级集群。
 
 将以下文件拷贝并保存在安全的位置:
 
 - `rancher-cluster.yml`: RKE 集群配置文件。
-- `kube_config_rancher-cluster.yml`: 集群的[Kubeconfig 文件](https://rancher.com/docs/rke/latest/en/kubeconfig/)， 此文件包含用于完全访问群集的凭据。
-- `rancher-cluster.rkestate`:[Kubernetes 集群状态文件](https://rancher.com/docs/rke/latest/en/installation/#kubernetes-cluster-state)， 此文件包含用于完全访问群集的凭据.<br/><br/>_Kubernetes 集群状态文件 只会在 RKE v0.2.0 或更高版本中被创建。_
+- `kube_config_rancher-cluster.yml`: 集群的[Kubeconfig 文件](https://rancher.com/docs/rke/latest/en/kubeconfig/)， 此文件包含用于完全访问集群的凭据。
+- `rancher-cluster.rkestate`:[Kubernetes 集群状态文件](https://rancher.com/docs/rke/latest/en/installation/#kubernetes-cluster-state)， 此文件包含用于完全访问集群的凭据.<br/><br/>_Kubernetes 集群状态文件 只会在 RKE v0.2.0 或更高版本中被创建。_
 
 ## 遇到的问题或错误?
 

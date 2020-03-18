@@ -2,48 +2,45 @@
 title: 从 v1.6 迁移到 v2.x
 ---
 
-Rancher v2.x has been rearchitected and rewritten with the goal of providing a complete management solution for Kubernetes and Docker. Due to these extensive changes, there is no direct upgrade path from v1.6 to v2.x, but rather a migration of your v1.6 services into v2.x as Kubernetes workloads. In v1.6, the most common orchestration used was Rancher's own engine called Cattle. The following guide explains and educates our Cattle users on running workloads in a Kubernetes environment.
+Rancher v2.x 经过重新整理和编写，旨在为 Kubernetes 和 Docker 提供一个完整的管理解决方案。 由于进行了较为广泛的更改，因此没有从版本 v1.6 直接升级到 v2.x 的途径，而是将 v1.6 服务迁移到 v2.x 作为 Kubernetes 的工作负载。 在 v1.6 版本中，最常用的编排是 Rancher 自己的引擎 Cattle。 以下指南将说明和指导我们的 Cattle 用户如何在 Kubernetes 环境中运行工作负载。
 
-### Video
+## 视频
 
-This video demonstrates a complete walk through of migration from Rancher v1.6 to v2.x.
+该[视频](https://www.youtube.com/watch?time_continue=1002&v=OIifcqj5Srw&feature=emb_logo)演示了从 Rancher v1.6 到 v2.x 的完整迁移过程。
 
-{{< youtube OIifcqj5Srw >}}
+## 迁移计划
 
-### Migration Plan
+> **在开始之前想了解有关 Kubernetes 的更多信息?** 阅读我们的 [Kubernetes 介绍](/docs/v1.6-migration/kub-intro/_index)。
 
-> **Want to more about Kubernetes before getting started?** Read our [Kubernetes Introduction](/docs/v1.6-migration/kub-intro).
+- [1. 开始迁移](/docs/v1.6-migration/get-started/_index)
 
-* [1. Get Started](/docs/v1.6-migration/get-started)
-
-  > **Already a Kubernetes user in v1.6?**
+  > **在版本 v1.6 时已经是 Kubernetes 的使用者?**
   >
-  > _Get Started_ is the only section you need to review for migration to v2.x. You can skip everything else.
+  > _开始使用_ 是你为迁移到 v2.x 唯一需要看的部分。您可以跳过其他所有内容
 
-* [2. Migrate Your Services](/docs/v1.6-migration/run-migration-tool/)
-* [3. Expose Your Services](/docs/v1.6-migration/expose-services/)
-* [4. Configure Health Checks](/docs/v1.6-migration/monitor-apps)
-* [5. Schedule Your Services](/docs/v1.6-migration/schedule-workloads/)
-* [6. Service Discovery](/docs/v1.6-migration/discover-services/)
-* [7. Load Balancing](/docs/v1.6-migration/load-balancing/)
+* [2. 迁移服务](/docs/v1.6-migration/run-migration-tool/_index)
+* [3. 暴露服务](/docs/v1.6-migration/expose-services/_index)
+* [4. 健康检查](/docs/v1.6-migration/monitor-apps/_index)
+* [5. 调度服务](/docs/v1.6-migration/schedule-workloads/_index)
+* [6. 服务发现](/docs/v1.6-migration/discover-services/_index)
+* [7. 负载均衡](/docs/v1.6-migration/load-balancing/_index)
 
-### Migration Example Files
+## 迁移示例文件
 
-Throughout this migration guide, we will reference several example services from Rancher v1.6 that we're migrating to v2.x. These services are:
+在整个迁移指南中，我们将引用几个要从 Rancher v1.6 迁移到 v2.x 的的示例服务。 这些服务是：
 
-* A service named `web` , which runs [Let's Chat](http://sdelements.github.io/lets-chat/), a self-hosted chat for small teams.
-* A service named `database` , which runs [Mongo DB](https://www.mongodb.com/), an open source document database.
-* A service named `webLB` , which runs [HAProxy](http://www.haproxy.org/), an open source load balancer used in Rancher v1.6.
+- 名为 `web` 的服务, 该服务运行 [Let's Chat](http://sdelements.github.io/lets-chat/), 一个为小团队的自托管聊天服务。
+- 名为 `database` 的服务, 该服务运行 [Mongo DB](https://www.mongodb.com/), 一个开源文档数据库。
+- 名为 `webLB`的服务, 该服务运行 [HAProxy](http://www.haproxy.org/), 一个 Rancher v1.6 中使用的开源负载均衡器。
 
-During migration, we'll export these services from Rancher v1.6. The export generates a unique directory for each Rancher v1.6 environment and stack, and two files are output into each stack's directory:
+在迁移过程中，我们将从 Rancher v1.6 中导出这些服务，为每个 Rancher v1.6 环境和堆栈导出生成一个唯一的目录，并且输出两个文件到每个堆栈的目录中:
 
-* `docker-compose.yml` 
+- `docker-compose.yml`
 
-  A file that contains standard Docker directives for each service in your stack. We'll be converting these files to Kubernetes manifests that can be read by Rancher v2.x.
+  包含堆栈中每个服务的标准 Docker 指令文件。 我们将把这些文件转换为 Rancher v2.x 可以读取的 Kubernetes 清单。
 
-* `rancher-compose.yml` 
+- `rancher-compose.yml`
 
-  A file for Rancher-specific functionality such as health checks and load balancers. These files cannot be read by Rancher v2.x, so don't worry about their contents—we're discarding them and recreating them using the v2.x UI.
+  用于 Rancher 特定功能的文件，例如运行健康检查和负载均衡器。 Rancher v2.x 无法读取这些文件，因此不必担心它们的内容--我们正丢弃它们，然后使用 v2.x UI 重新创建。
 
-#### [Next: Get Started](/docs/v1.6-migration/get-started)
-
+## [下一步: 开始迁移](/docs/v1.6-migration/get-started/_index)

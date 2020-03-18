@@ -16,7 +16,7 @@ title: 通过 Kubectl 管理 HPA
 
 ## v2.0.7 之前的 Rancher 的说明
 
-使用较早版本的 Rancher 创建的群集不会自动满足创建 HPA 的所有要求。 要在这些群集上安装 HPA，请参考 [在 Rancher v2.0.7 之前创建的群集的手动 HPA 安装](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/hpa-for-rancher-before-2_0_7/_index)。
+使用较早版本的 Rancher 创建的集群不会自动满足创建 HPA 的所有要求。 要在这些集群上安装 HPA，请参考 [在 Rancher v2.0.7 之前创建的集群的手动 HPA 安装](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/hpa-for-rancher-before-2_0_7/_index)。
 
 ## 管理 HPA 的基本 kubectl 命令
 
@@ -122,7 +122,7 @@ I1002 12:55:32.928597       1 serve.go:85] Serving securely on 0.0.0.0:443
 
 Prometheus 可在 Rancher v2.0 应用商店进行部署。 如果您的集群中尚未运行它，请从 Rancher 应用商店中进行部署。
 
-为了使 HPA 使用 Prometheus 的自定义指标，群集的 `kube-system` 命名空间中需要安装[k8s-prometheus-adapter](https://github.com/DirectXMan12/k8s-prometheus-adapter) 。要安装 `k8s-prometheus-adapter` ，我们使用 [banzai-charts](https://github.com/banzaicloud/banzai-charts)上可用的 Helm chart。
+为了使 HPA 使用 Prometheus 的自定义指标，集群的 `kube-system` 命名空间中需要安装[k8s-prometheus-adapter](https://github.com/DirectXMan12/k8s-prometheus-adapter) 。要安装 `k8s-prometheus-adapter` ，我们使用 [banzai-charts](https://github.com/banzaicloud/banzai-charts)上可用的 Helm chart。
 
 ### 在您的集群中初始化 Helm。
 
@@ -186,7 +186,7 @@ Prometheus 可在 Rancher v2.0 应用商店进行部署。 如果您的集群中
 
 ### 检查是否可以通过 kubectl 访问 metrics API。
 
-- 如果直接访问群集，请在 kubectl 配置中以以下格式输入服务器 URL： `https://<Kubernetes_URL>:6443` .
+- 如果直接访问集群，请在 kubectl 配置中以以下格式输入服务器 URL： `https://<Kubernetes_URL>:6443` .
 
   ```
   # kubectl get --raw /apis/custom.metrics.k8s.io/v1beta1
@@ -198,7 +198,7 @@ Prometheus 可在 Rancher v2.0 应用商店进行部署。 如果您的集群中
   {"kind":"APIResourceList", "apiVersion":"v1", "groupVersion":"custom.metrics.k8s.io/v1beta1", "resources":[{"name":"pods/fs_usage_bytes", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/memory_rss", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/spec_cpu_period", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/cpu_cfs_throttled", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/fs_io_time", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/fs_read", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/fs_sector_writes", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/cpu_user", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/last_seen", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/tasks_state", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/spec_cpu_quota", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/start_time_seconds", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/fs_limit_bytes", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/fs_write", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/memory_cache", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/memory_usage_bytes", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/cpu_cfs_periods", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/cpu_cfs_throttled_periods", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/fs_reads_merged", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/memory_working_set_bytes", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/network_udp_usage", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/fs_inodes_free", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/fs_inodes", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/fs_io_time_weighted", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/memory_failures", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/memory_swap", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/spec_cpu_shares", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/spec_memory_swap_limit_bytes", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/cpu_usage", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/fs_io_current", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/fs_writes", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/memory_failcnt", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/fs_reads", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/fs_writes_bytes", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/fs_writes_merged", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/network_tcp_usage", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/memory_max_usage_bytes", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/spec_memory_limit_bytes", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/spec_memory_reservation_limit_bytes", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/cpu_load_average_10s", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/cpu_system", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/fs_reads_bytes", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}, {"name":"pods/fs_sector_reads", "singularName":"", "namespaced":true, "kind":"MetricValueList", "verbs":["get"]}]}
   ```
 
-- 如果要通过 Rancher 访问群集，请在 kubectl 配置中以以下格式输入服务器 URL： `https://<RANCHER_URL>/k8s/clusters/<CLUSTER_ID>` 。将后缀 `/k8s/clusters/<CLUSTER_ID>` 添加到 API 路径。
+- 如果要通过 Rancher 访问集群，请在 kubectl 配置中以以下格式输入服务器 URL： `https://<RANCHER_URL>/k8s/clusters/<CLUSTER_ID>` 。将后缀 `/k8s/clusters/<CLUSTER_ID>` 添加到 API 路径。
 
   ```
   # kubectl get --raw /k8s/clusters/<CLUSTER_ID>/apis/custom.metrics.k8s.io/v1beta1
