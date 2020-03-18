@@ -12,9 +12,10 @@ steps:
       - name: vol
         path: /website
   - name: preview
-    image: loganhz/drone-oss:0.0.1
+    image: loganhz/drone-oss:0.0.2
     settings:
       dist: /website/build
+      distIgnore: img/
       path: docs-rancher2-3-preview
       endpoint: oss-cn-shanghai.aliyuncs.com
       access_key_id:
@@ -31,9 +32,10 @@ steps:
       event:
         - push
   - name: production
-    image: loganhz/drone-oss:0.0.1
+    image: loganhz/drone-oss:0.0.2
     settings:
       dist: /website/build
+      distIgnore: img/
       path: docs-rancher2-3-production
       endpoint: oss-cn-shanghai.aliyuncs.com
       access_key_id:

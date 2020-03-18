@@ -2,773 +2,660 @@
 title: 流水线
 ---
 
-> **Notes:**
+> **注意:**
 >
-> - Pipelines are new and improved for Rancher v2.1! Therefore, if you configured pipelines while using v2.0.x, you'll have to reconfigure them after upgrading to v2.1.
-> - Still using v2.0.x? See the pipeline documentation for [previous versions](/docs/tools/pipelines/docs-for-v2.0.x).
+> - 流水线是 Rancher v2.1 版本之后新增和改进功能! 因此，如果您在 v2.0.x 版本已经配置了流水线功能，则需要您在升级到 v2.1 版本之后重新配置流水线功能。
+> - 还在使用 v2.0.x 版本吗? 请参阅[早期版本](/docs/project-admin/pipelines/docs-for-v2.0.x/_index)的流水线配置文档。
 
-Before setting up any pipelines, review the [pipeline overview](/docs/project-admin/pipelines/) and ensure that the project has [configured authentication to your version control provider](/docs/project-admin/pipelines/#version-control-providers), e.g. GitHub, GitLab, Bitbucket. If you haven't configured a version control provider, you can always use [Rancher's example repositories](/docs/k8s-in-rancher/pipelines/example/) to view some common pipeline deployments.
+在设置任何流水线之前，请查看[流水线概述](/docs/project-admin/pipelines/_index)并确保此项目已经[对接了您的版本管理工具](/docs/project-admin/pipelines/_index)，例如，GitHub，GitLab，Bitbucket。如果您没有配置版本管理工具，您可以使用[Rancher 提供的示例代码库](/docs/k8s-in-rancher/pipelines/example-repos/_index)去预览一些常见的流水线部署流程。
 
-If you can access a project, you can enable repositories to start building pipelines. Only an [administrator](/docs/admin-settings/rbac/global-permissions/), [cluster owner or member](/docs/admin-settings/rbac/cluster-project-roles/#cluster-roles), or [project owner](/docs/admin-settings/rbac/cluster-project-roles/#project-roles) can authorize version control providers.
+如果您可以访问一个项目，你就能激活代码库来构建流水线。但只有[系统管理员](/docs/admin-settings/rbac/global-permissions/_index)，[集群所有者或集群成员](/docs/admin-settings/rbac/cluster-project-roles/_index)，或者[项目所有者](/docs/admin-settings/rbac/cluster-project-roles/_index)能够授权版本管理工具。
 
-### Concepts
+## 概念
 
-When setting up a pipeline, it's helpful to know a few related terms.
+设置流水线时，了解一些相关术语会很有帮助。
 
-- **Pipeline:**
+- **流水线：**
 
-  A pipeline consists of stages and steps. It is based on a specific repository. It defines the process to build, test, and deploy your code. Rancher uses the [pipeline as code](https://jenkins.io/doc/book/pipeline-as-code/) model. Pipeline configuration is represented as a pipeline file in the source code repository, using the file name `.rancher-pipeline.yml` or `.rancher-pipeline.yaml`.
+  一个流水线主要包括阶段和步骤两个部分。它是基于一个特定的代码库，定义了您的代码从构建，测试到部署的过程。Rancher 采用了[流水线即代码](https://jenkins.io/doc/book/pipeline-as-code/)的模式。流水线配置被作为源代码库里的一个流水线文件存在，它使用的文件名为`.rancher-pipeline.yml` 或者 `.rancher-pipeline.yaml`。
 
-- **Stages:**
+- **阶段：**
 
-  A pipeline stage consists of multiple steps. Stages are executed in the order defined in the pipeline file. The steps in a stage are executed concurrently. A stage starts when all steps in the former stage finish without failure.
+  一个流水线的阶段包括多个步骤。 阶段是按照流水线文件中定义的顺序执行，而阶段中的步骤也是同步顺序执行。当前一个阶段中的所有步骤都正确执行完毕下一个阶段才开始执行。
 
-- **Steps:**
+- **步骤：**
 
-  A pipeline step is executed inside a specified stage. A step fails if it exits with a code other than `0`. If a step exits with this failure code, the entire pipeline fails and terminates.
+  流水线的“步骤”在指定阶段内执行。如果步骤以“0”以外的代码退出，则该步骤失败。如果步骤以一个失败码退出，则整个流水线将失败并且终止。
 
-- **Workspace:**
+- **工作空间：**
 
-  The workspace is the working directory shared by all pipeline steps. In the beginning of a pipeline, source code is checked out to the workspace. The command for every step bootstraps in the workspace. During a pipeline execution, the artifacts from a previous step will be available in future steps. The working directory is an ephemeral volume and will be cleaned out with the executor pod when a pipeline execution is finished.
+  工作空间是所有流水线步骤共享的工作目录。在流水线的开始时，Rancher 会将源代码提取到工作空间。每个步骤的命令都会在工作空间中执行。在流水线执行期间，来自上一步的制品将在以后的步骤中可用。工作目录是一个临时卷，当流水线执行完成时，Rancher 将对其进行清理。
 
-### Configuring Repositories
+## 配置代码库
 
-After the version control provider is authorized, you are automatically re-directed to start configuring which repositories that you want start using pipelines with. Even if someone else has set up the version control provider, you will see their repositories and can build a pipeline.
+授权版本管理工具后，UI 将自动重定向，你可以开始配置你的代码库来激活流水线。如果其他人也设置了版本管理工具，您也将看到他们的代码库并可以运行相应的流水线。
 
-1. From the **Global** view, navigate to the project that you want to configure pipelines.
+1. 从**全局**视图，导航到您想要配置流水线的项目。
 
-1. Click **Resources > Pipelines.** In versions prior to v2.3.0, click **Workloads > Pipelines.**
+1. 点击**资源 > 流水线**。在 v2.3.0 之前版本，点击**工作负载 > 流水线**。
 
-1. Click on **Configure Repositories**.
+1. 点击**设置代码库**。
 
-1. A list of repositories are displayed. If you are configuring repositories the first time, click on **Authorize & Fetch Your Own Repositories** to fetch your repository list.
+1. 显示代码库列表。如果您是第一次配置代码库，点击 **认证 & 同步代码库**去刷新您的代码库列表。
 
-1. For each repository that you want to set up a pipeline, click on **Enable**.
+1. 对于您想设置流水线的每个代码库，点击**启用**。
 
-1. When you're done enabling all your repositories, click on **Done**.
+1. 当您启用所有代码库后，点击**完成**。
 
-**Results:** You have a list of repositories that you can start configuring pipelines for.
+**效果:** 您已经有了一列可以用来配置流水线的代码库。
 
-### Pipeline Configuration
+## 配置流水线
 
-Now that repositories are added to your project, you can start configuring the pipeline by adding automated stages and steps. For your convenience, there are multiple built-in [step types](#step-types) for dedicated tasks.
+现在代码库已经添加到了您的项目中，您可以开始添加自动化的阶段和步骤来配置流水线了。这里有多种内置的[步骤类型](#步骤类型)便您使用。
 
-1.  From the **Global** view, navigate to the project that you want to configure pipelines.
+1.  从 **全局** 视图，导航到您想要配置流水线的项目。
 
-1.  Click **Resources > Pipelines.** In versions prior to v2.3.0, click **Workloads > Pipelines.**
+1.  点击 **资源 > 流水线**。在 v2.3.0 之前版本，点击 **工作负载 > 流水线**。
 
-1.  Find the repository that you want to set up a pipeline for. Pipelines can be configured either through the UI or using a yaml file in the repository, i.e. `.rancher-pipeline.yml` or `.rancher-pipeline.yaml`. Throughout the next couple of steps, we'll provide the options of how to do pipeline configuration through the UI or the YAML file.
+1.  找到您想设置流水线的代码库. 通过 UI 或者使用代码库中的 yml 文件，例如 `.rancher-pipeline.yml` 或者 `.rancher-pipeline.yaml`进行流水线的配置。在接下来的两个步骤里，我们将介绍如何通过 UI 或 YAML 文件进行流水线配置。
 
-    - If you are going to use the UI, select the vertical **Ellipsis (...) > Edit Config** to configure the pipeline using the UI. After the pipeline is configured, you must view the YAML file and push it to the repository.
-    - If you are going to use the YAML file, select the vertical **Ellipsis (...) **View/Edit YAML\*\* to configure the pipeline. If you choose to use a YAML file, you need to push it to the repository after any changes in order for it to be updated in the repository.
+    - 如果您正在使用 UI，选择 **省略号 (...) > 编辑配置** 来使用 UI 配置流水线，流水线配置之后，您需要查看 YAML 文件并推送此文件到远端代码库。您也可以直接在 Rancher UI 上将更新后的 YAML 文件同步到代码库中。
 
-    > **Note:** When editing the pipeline configuration, it takes a few moments for Rancher to check for an existing pipeline configuration.
+    - 如果正在使用 YAML 文件，选择 **省略号(...) > 查看/编辑 YAML** 来配置流水线。如果您选择使用 YAML 文件，您需要在进行任何更改后将其推送到代码库中。您也可以直接在 Rancher UI 上将更新后的 YAML 文件同步到代码库中。
 
-1.  Select which `branch` to use from the list of branches.
+    > **注意:** 当编辑流水线配置时，Rancher 会花一些时间去检查现有流水线配置。
 
-1.  Pipeline configuration is split into stages and [steps](#step-types). Remember that stages must fully complete before moving onto the next stage, but steps in a stage run concurrently.
+1.  从分支列表中选择要使用的代码`分支`。
 
-        For each stage, you can add different step types. Learn more about how to configure each step type:
+1.  流水线的配置分为`阶段`和[步骤](#步骤类型)。请记住，在进入下一个`阶段`之前，当前`阶段`必须全部完成，但是一个`阶段`中的`步骤`是同时运行的。
 
-        - [Run Script](#run-script)
-        - [Build and Publish Images](#build-and-publish-images)
-        - [Publish Catalog Template](#publish-catalog-template)
-        - [Deploy YAML](#deploy-yaml)
-        - [Deploy Catalog App](#deploy-catalog-app)
+    对于每个阶段，您可以添加不同的步骤类型。了解有关如何配置步骤类型的更多信息:
 
-        >**Note:** As you build out each step, there are different [advanced options](#advanced-options) based on the step type.
+    - [运行脚本](#运行脚本)
+    - [构建并发布镜像](#构建并发布镜像)
+    - [发布应用模板](#发布应用模板)
+    - [部署 YAML](#部署-yaml)
+    - [部署应用商店应用](#部署应用商店应用)
 
-         accordion id="stages-and-steps" label="Adding Stages and Steps" 
+    > **注意:** 在设置每个步骤时，根据步骤类型有不同的[高级选项](#高级选项)。
 
-     tabs 
-     tab "By UI" 
-    <br />
-    If you haven't added any stages, click **Configure pipeline for this branch** to configure the pipeline through the UI.
+    - 通过 UI 添加阶段和步骤
 
-1.  Add stages to your pipeline execution by clicking **Add Stage**.
+      如果您尚未添加任何阶段，通过 UI 界面点击 **设置流水线** 来配置这个分支的流水线。
 
-    1. Enter a **Name** for each stage of your pipeline.
-    1. For each stage, you can configure [trigger rules](#trigger-rules) by clicking on **Show Advanced Options**. Note: this can always be updated at a later time.
+      1.  通过点击**添加阶段**将阶段添加到流水线。
 
-1.  After you've created a stage, start [adding steps](#step-types) by clicking **Add a Step**. You can add multiple steps to each stage.
-    <br />
-    <br />
-     /tab 
-     tab "By YAML" 
-    <br />
-    For each stage, you can add multiple steps. Read more about each [step type](#step-types) and the [advanced options](#advanced-options) to get all the details on how to configure the YAML. This is only a small example of how to have multiple stages with a singular step in each stage.
+          1. 为您流水线的每个阶段输入一个**名称**。
+          1. 对于每个阶段，您可以通过单击**显示高级选项**来配置[触发规则](#触发规则)。注意：此设置可以随时更新。
 
-```yaml
-## example
-stages:
-  - name: Build something
-    # Conditions for stages
-    when:
-      branch: master
-      event: [push, pull_request]
-    # Multiple steps run concurrently
-    steps:
-      - runScriptConfig:
-          image: busybox
-          shellScript: date -R
-  - name: Publish my image
-    steps:
-      - publishImageConfig:
-          dockerfilePath: ./Dockerfile
-          buildContext: .
-          tag: rancher/rancher:v2.0.0
-          # Optionally push to remote registry
-          pushRemote: true
-          registry: reg.example.com
-```
-
-<br />
- /tab 
- /tabs 
-     /accordion 
-
-1. _Available as of v2.2.0_
-
-   **Notifications:** Decide if you want to set up notifications for your pipeline. You can enable notifications to any [notifiers](/docs/cluster-admin/tools/notifiers/) based on the build status of a pipeline. Before enabling notifications, Rancher recommends [setting up notifiers](/docs/cluster-admin/tools/notifiers/#adding-notifiers) so it will be easy to add recipients immediately.
-
-    accordion id="notification" label="Configuring Notifications" 
-
- tabs 
- tab "By UI" 
-<br />
-_Available as of v2.2.0_
-
-1. Within the **Notification** section, turn on notifications by clicking **Enable**.
-
-1. Select the conditions for the notification. You can select to get a notification for the following statuses: `Failed`, `Success`, `Changed`. For example, if you want to receive notifications when an execution fails, select **Failed**.
-
-1. If you don't have any existing [notifiers](/docs/cluster-admin/tools/notifiers), Rancher will provide a warning that no notifiers are set up and provide a link to be able to go to the notifiers page. Follow the [instructions](/docs/cluster-admin/tools/notifiers/#adding-notifiers) to add a notifier. If you already have notifiers, you can add them to the notification by clicking the **Add Recipient** button.
-
-   > **Note:** Notifiers are configured at a cluster level and require a different level of permissions.
-
-1. For each recipient, select which notifier type from the dropdown. Based on the type of notifier, you can use the default recipient or override the recipient with a different one. For example, if you have a notifier for _Slack_, you can update which channel to send the notification to. You can add additional notifiers by clicking **Add Recipient**.
-   <br />
-   <br />
-    /tab 
-    tab "By YAML" 
-   <br />
-   _Available as of v2.2.0_
-
-In the `notification` section, you will provide the following information:
-
-- **Recipients:** This will be the list of notifiers/recipients that will receive the notification.
-  - **Notifier:** The ID of the notifier. This can be found by finding the notifier and selecting **View in API** to get the ID.
-  - **Recipient:** Depending on the type of the notifier, the "default recipient" can be used or you can override this with a different recipient. For example, when configuring a slack notifier, you select a channel as your default recipient, but if you wanted to send notifications to a different channel, you can select a different recipient.
-- **Condition:** Select which conditions of when you want the notification to be sent.
-- **Message (Optional):** If you want to change the default notification message, you can edit this in the yaml. Note: This option is not available in the UI.
-
-```yaml
-## Example
-stages:
-  - name: Build something
-    steps:
-      - runScriptConfig:
-          image: busybox
-          shellScript: ls
-notification:
-  recipients:
-    - # Recipient
-      recipient: '#mychannel'
-      # ID of Notifier
-      notifier: 'c-wdcsr:n-c9pg7'
-    - recipient: 'test@example.com'
-      notifier: 'c-wdcsr:n-lkrhd'
-  # Select which statuses you want the notification to be sent
-  condition: ['Failed', 'Success', 'Changed']
-  # Ability to override the default message (Optional)
-  message: 'my-message'
-```
-
-<br />
- /tab 
- /tabs 
-
-     /accordion 
-
-1. Set up the **[Trigger Rules](#trigger-rules)** for the pipeline.
-
-1. Enter a **Timeout** for the pipeline. By default, each pipeline execution has a timeout of 60 minutes. If the pipeline execution cannot complete within its timeout period, the pipeline is aborted.
-
-    accordion id="timeout" label="Setting up Timeout" 
-
- tabs 
- tab "By UI" 
-<br />
-Enter a new value in the **Timeout** field.
-<br />
-<br />
- /tab 
- tab "By YAML" 
-<br />
-In the `timeout` section, enter the timeout value in minutes.
-
-```yaml
-## example
-stages:
-  - name: Build something
-    steps:
-      - runScriptConfig:
-          image: busybox
-          shellScript: ls
-## timeout in minutes
-timeout: 30
-```
-
-<br />
- /tab 
- /tabs 
-
-     /accordion 
-
-1. When all the stages and steps are configured, click **Done**.
-
-**Results:** Your pipeline is now configured and ready to be run.
-
-### Running your Pipelines
-
-Run your pipeline for the first time. From the project view in Rancher, go to **Resources > Pipelines.** (In versions prior to v2.3.0, go to the **Pipelines** tab.) Find your pipeline and select the vertical **Ellipsis (...) > Run**.
-
-During this initial run, your pipeline is tested, and the following [pipeline components](/docs/project-admin/pipelines/#how-pipelines-work) are deployed to your project as workloads in a new namespace dedicated to the pipeline:
+      1.  创建阶段后，通过单击“添加步骤”开始[添加步骤](#步骤类型)。您可以在每个阶段添加多个步骤。
+
+    - 通过 YAML 添加阶段和步骤
+
+      对于每个阶段，您可以添加多个步骤。 阅读有关每个[步骤类型](#步骤类型)和[高级选项](#高级选项)的更多信息，以获取有关如何配置 YAML 的详细信息。下面是一个每个`阶段`有单个`步骤`的例子。
+
+      ```yaml
+      # 示例
+      stages:
+        - name: Build something
+          # 触发阶段的条件
+          when:
+            branch: master
+            event: [push，pull_request]
+          # 同步运行的多个步骤
+          steps:
+            - runScriptConfig:
+                image: busybox
+                shellScript: date -R
+        - name: Publish my image
+          steps:
+            - publishImageConfig:
+                dockerfilePath: ./Dockerfile
+                buildContext: .
+                tag: rancher/rancher:v2.0.0
+                # （可选）是否推送到远端仓库
+                pushRemote: true
+                registry: reg.example.com
+      ```
+
+1.  设置流水线通知
+
+    _可用于 v2.2.0_
+
+    **通知：** 您可以决定是否要为流水线设置通知。您可以根据流水线的构建状态，启用任何[通知](/docs/cluster-admin/tools/notifiers/_index)。在启用流水线通知之前，你需要[配置通知](/docs/cluster-admin/tools/notifiers/_index)，这样可以轻松地添加接收者。
+
+    - 通过 UI 配置通知
+      _可用于 v2.2.0_
+
+      1. 在**通知**部分中，单击**启用**以启用通知。
+
+      1. 选择通知的条件。 您可以选择获得下列状态的通知：`Failed`，`Success`，`Changed`。 例如，如果您想在执行失败时接收通知，请选择**Failed**.
+
+      1. 如果您没有任何现有的[通知](/docs/cluster-admin/tools/notifiers/_index)，Rancher 将警告您未设置任何通知，并提供一个链接，可转到设置通知页面。按照[相关说明文档](/docs/cluster-admin/tools/notifiers/_index)添加通知。如果您已有接收者，则可以通过单击**添加接收者**按钮将其添加到通知中。
+
+         > **注意：**通知是在集群级别配置的，需要不同级别的权限。
+
+      1. 对于每个接收者，从下拉列表中选择哪种通知类型。根据接收者的类型，您可以使用默认接收者，也可以使用其他接收者替换默认接收者。例如，如果您有*Slack*的通知，则可以将通知发送到的*Slack Channel*。您可以通过单击**添加接收者**来添加其他接收者。
+
+    - 通过 YAML 配置通知
+
+      _可用于 v2.2.0_
+
+      在`通知`部分，您将提供以下信息:
+
+      - **Recipients：** 这是将接收通知的接收者的列表。
+        - **Notifier：** 通知的 ID。可以通过找到通知并选择**在 API 中查看**来获取 ID。
+        - **Recipient：** 根据接收者的类型，可以使用“默认接收者”，也可以用其他接收者覆盖它。例如，在配置一个 stack 接收者时，您选择一个频道作为默认接收者，但是如果要将通知发送到其他频道，则可以选择其他接收者。
+      - **Condition：** 选择您希望发送通知的条件。
+      - **Message (可选)：** 如果要更改默认通知消息，则可以在 Yaml 中进行编辑。注意：此选项在用户界面中不可用。
+
+      ```yaml
+      # 示例
+      stages:
+        - name: Build something
+          steps:
+            - runScriptConfig:
+                image: busybox
+                shellScript: ls
+      notification:
+        recipients:
+          - # 接收者
+            recipient: '#mychannel'
+            # 通知的ID
+            notifier: 'c-wdcsr:n-c9pg7'
+          - recipient: 'test@example.com'
+            notifier: 'c-wdcsr:n-lkrhd'
+        # 选择你想要发送通知的条件
+        condtions: ['Failed'，'Success'，'Changed']
+        # 用来覆盖默认通知内容 (可选)
+        message: 'my-message'
+      ```
+
+1.  为流水线设置**[触发规则](#触发规则)**。
+
+1.  设置流水线的**超时时间**。默认情况下，每个流水线执行都有 60 分钟的超时时间限制。如果流水线执行无法在其超时时间内完成，流水线将会被自动中止。
+
+    - 通过 UI 配置超时时间
+
+      在**高级选项 > 超时时间**字段中输入新值。
+
+    - 通过 YAML 配置超时时间
+
+      在**timeout**部分中，输入以分钟为单位的超时值。
+
+      ```yaml
+      # 示例
+      stages:
+        - name: Build something
+          steps:
+            - runScriptConfig:
+                image: busybox
+                shellScript: ls
+      # 以分钟为单位的超时时间
+      timeout: 30
+      ```
+
+1.  配置完所有`阶段`和`步骤`后，单击**完成**。
+
+**结果：** 您的流水线现已配置并可以运行。
+
+## 运行流水线
+
+现在可以开始运行流水线了。从 Rancher 的项目视图中，转到 **资源 > 流水线。** (在 v2.3.0 之前的版本中，转到 **流水线** 选项卡)找到您的流水线，选择 **省略号(...) > 运行**。
+
+在此第一次运行流水线的时候，Rancher 会将以下[流水线组件](/docs/project-admin/pipelines/_index)作为工作负载部署到项目的新命名空间中，作为专用于流水线的工作负载:
 
 - `docker-registry`
 - `jenkins`
 - `minio`
 
-This process takes several minutes. When it completes, you can view each pipeline component from the project **Workloads** tab.
+此过程需要几分钟。 完成后，您可以从项目的**工作负载**选项卡中查看每个流水线组件。
 
-### Pipeline Setting
+## 流水线设置
 
-When a repository is enabled, a webhook is automatically set in the version control provider. By default, the pipeline is triggered by a **push** event to a repository, but you can modify the event(s) that trigger running the pipeline.
+启用代码库后，将在版本控制工具中自动设置一个 Webhook。默认情况下，流水线是由向代码库的**push**事件触发的，但是您可以修改触发运行流水线的事件。
 
-Available Events:
+可用事件:
 
-- **Push**: Whenever a commit is pushed to the branch in the repository, the pipeline is triggered.
-- **Pull Request**: Whenever a pull request is made to the repository, the pipeline is triggered.
-- **Tag**: When a tag is created in the repository, the pipeline is triggered.
+- **Push**: 当将代码推送到代码库中的分支时，触发流水线。
+- **Pull Request**: 每当对代码库提 Pull Request 时，触发流水线。
+- **Tag**: 在代码库中创建 tag 时，触发流水线。
 
-> **Note:** This option doesn't exist for Rancher's [example repositories](/docs/k8s-in-rancher/pipelines/example/).
+> **注意：** 对于 Rancher 的[示例代码库](/docs/k8s-in-rancher/pipelines/example-repos/_index)，流水线的`设置`项不存在。
 
-#### Modifying the Event Triggers for the Repository
+#### 修改代码库的触发事件
 
-1. From the **Global** view, navigate to the project that you want to modify the event trigger for the pipeline.
+1. 从 **全局** 视图，导航到要修改流水线触发事件的项目。
 
-1. 1. Click **Resources > Pipelines.** In versions prior to v2.3.0, click **Workloads > Pipelines.**
+1. 点击 **资源 > 流水线**。在 v2.3.0 之前的版本中，点击 **工作负载 > 流水线**
 
-1. Find the repository that you want to modify the event triggers. Select the vertical **Ellipsis (...) > Setting**.
+1. 找到您要修改事件触发器的代码库。选择**省略号(...)> 设置**。
 
-1. Select which event triggers (**Push**, **Pull Request** or **Tag**) you want for the repository.
+1. 选择要用于代码库的事件触发器(**Push**，**Pull Request** 或者 **Tag**)。
 
-1. Click **Save**.
+1. 点击**保存**。
 
-### Step Types
+## 步骤类型
 
-Within each stage, you can add as many steps as you'd like. When there are multiple steps in one stage, they run concurrently.
+在每个阶段中，您可以添加任意多个步骤。在一个阶段中有多个步骤时，它们会同时运行。
 
-- [Run Script](#run-script)
-- [Build and Publish Images](#build-and-publish-images)
-- [Publish Catalog Template](#publish-catalog-template)
-- [Deploy YAML](#deploy-yaml)
-- [Deploy Catalog App](#deploy-catalog-app)
+- [运行脚本](#运行脚本)
+- [构建并发布镜像](#构建并发布镜像)
+- [发布应用模板](#发布应用模板)
+- [部署 YAML](#部署-yaml)
+- [部署应用商店应用](#部署应用商店应用)
 
-<!--
-#### Clone
+### 运行脚本
 
-The first stage is preserved to be a cloning step that checks out source code from your repo. Rancher handles the cloning of the git repository. This action is equivalent to `git clone <repository_link> <workspace_dir>`.
--->
+**运行脚本**步骤可以在指定容器内的工作空间中执行任意命令。您可以使用它来构建，测试和执行更多操作，您可以使用这个指定的基础镜像内的全部工具。您可以通过`变量替换`的方式使用流水线元数据。有关可用变量的列表，请参考[流水线变量替换列表](#流水线变量替换列表)。
 
-#### Run Script
+- 通过 UI 设置运行脚本
 
-The **Run Script** step executes arbitrary commands in the workspace inside a specified container. You can use it to build, test and do more, given whatever utilities the base image provides. For your convenience, you can use variables to refer to metadata of a pipeline execution. Please refer to the [pipeline variable substitution reference](#pipeline-variable-substitution-reference) for the list of available variables.
+  1. 从**步骤类型**下拉列表中，选择**运行脚本**并填写表格。
 
- tabs 
+  1. 点击 **添加**。
 
- tab "By UI" 
+- 通过 YAML 设置运行脚本
 
-1. From the **Step Type** drop-down, choose **Run Script** and fill in the form.
+  ```yaml
+  ## 示例
+  stages:
+    - name: Build something
+      steps:
+        - runScriptConfig:
+            image: golang
+            shellScript: go build
+  ```
 
-1. Click **Add**.
+### 构建并发布镜像
 
- /tab 
+_可用于 Rancher v2.1.0_
 
- tab "By YAML" 
-<br />
+**构建并发布镜像**步骤将构建并发布 Docker 镜像。此过程需要您源代码库中的 Dockerfile 才能成功完成。
 
-```yaml
-## example
-stages:
-  - name: Build something
-    steps:
-      - runScriptConfig:
-          image: golang
-          shellScript: go build
-```
+> UI 中没有暴露允许将镜像发布到不安全的镜像库的选项，但是您可以在 YAML 中，通过设置环境变量来允许将镜像发送到不安全的镜像库。
 
-<br />
- /tab 
+- 通过 UI 设置构建并发布镜像
 
- /tabs 
+  1. 在 **步骤类型** 下拉列表中，选择 **构建并发布镜像**。
 
-#### Build and Publish Images
+  1. 填写表格的其余部分。下面列出了每个字段的说明。 完成后，点击 **添加**。
 
-The **Build and Publish Image** step builds and publishes a Docker image. This process requires a Dockerfile in your source code's repository to complete successfully.
+     | 字段                        | 描述                                                                                                                                                                                             |
+     | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+     | Dockerfile 路径             | Dockerfile 文件在你代码库中的相对路径。默认值为`./Dockerfile`，它意味着 Rancher 将使用你的代码库根目录中的 Dockerfile 文件。根据需要，你可以把这个设置为其他值。例如，`./path/to/myDockerfile`。 |
+     | 镜像名称                    | 以`name:tag`为格式的镜像名称。不需要包括镜像库地址。例如，构建`example.com/repo/my-image:dev`镜像，输入`repo/my-image:dev`。                                                                     |
+     | 推送镜像到远端镜像仓库      | 选择是否将流水线中构建的镜像发布到远端镜像仓库中。如果需要，请选中该项，并且在下拉菜单中选择要推送的镜像仓库。如果没有选择该项，您构建的镜像将被推送到流水线内置的镜像库                         |
+     | 构建上下文 （在高级选项中） | 默认值为源代码根目录(`.`)。获取更多详情，请参阅[Docker 构建命令文档](https://docs.docker.com/engine/reference/commandline/build/)。                                                              |
 
-_Available as of Rancher v2.1.0_
+- 通过 YAML 设置构建并发布镜像
 
-The option to publish an image to an insecure registry is not exposed in the UI, but you can specify an environment variable in the YAML that allows you to publish an image insecurely.
+  您可以为 Docker 守护进程和构建使用特定的参数。它们没有显示在 UI 中，但是可以在 YAML 中设置它们，如下例所示。可用的环境变量包括:
 
- tabs 
+  | 变量名            | 描述                                   |
+  | ----------------- | -------------------------------------- |
+  | PLUGIN_DRY_RUN    | 禁用 docker push                       |
+  | PLUGIN_DEBUG      | 以 Debug 模式运行 Docker 守护进程      |
+  | PLUGIN_MIRROR     | 配置 Docker 守护进程的镜像库 mirror    |
+  | PLUGIN_INSECURE   | 允许 Docker 守护进程使用不安全的镜像库 |
+  | PLUGIN_BUILD_ARGS | 由逗号分隔的 Docker 构建参数           |
 
- tab "By UI" 
+  ```yaml
+  # 本示例显示了使用的环境变量
+  # 在“发布镜像”步骤中。此变量允许您将镜像发布到不安全的镜像库
 
-1. From the **Step Type** drop-down, choose **Build and Publish**.
+  stages:
+    - name: Publish Image
+      steps:
+        - publishImageConfig:
+            dockerfilePath: ./Dockerfile
+            buildContext: .
+            tag: repo/app:v1
+            pushRemote: true
+            registry: example.com
+          env:
+            PLUGIN_INSECURE: 'true'
+  ```
 
-1. Fill in the rest of the form. Descriptions for each field are listed below. When you're done, click **Add**.
+### 发布应用模板
 
-   | Field                                                | Description                                                                                                                                                                                                                                               |
-   | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | Dockerfile Path                                      | The relative path to the Dockerfile in the source code repo. By default, this path is `./Dockerfile`, which assumes the Dockerfile is in the root directory. You can set it to other paths in different use cases (`./path/to/myDockerfile` for example). |
-   | Image Name                                           | The image name in `name:tag` format. The registry address is not required. For example, to build `example.com/repo/my-image:dev`, enter `repo/my-image:dev`.                                                                                              |
-   | Push image to remote repository                      | An option to set the registry that publishes the image that's built. To use this option, enable it and choose a registry from the drop-down. If this option is disabled, the image is pushed to the internal registry.                                    |
-   | Build Context <br/><br/> (**Show advanced options**) | By default, the root directory of the source code (`.`). For more details, see the Docker [build command documentation](https://docs.docker.com/engine/reference/commandline/build/).                                                                     |
+_可用于 v2.2.0_
 
- /tab 
+**发布应用模板** 步骤将应用商店模板的版本文件（即 Helm chart）发布到[git 托管的 chart 代码库](/docs/catalog/custom/_index)。Rancher 将生成一个 git commit 并将其推送到您的 chart 代码库。此过程需要在源代码库中有一个 chart 文件夹。并且需要您在流水线专用的命名空间中预先配置的好可以访问 git 的密文。您可以在 chart 文件夹中的任何文件中使用[流水线变量替换功能](#流水线变量替换列表)。
 
- tab "By YAML" 
+- 通过 UI 设置发布应用模板
 
-You can use specific arguments for Docker daemon and the build. They are not exposed in the UI, but they are available in pipeline YAML format, as indicated in the example below. Available environment variables include:
-
-| Variable Name     | Description                               |
-| ----------------- | ----------------------------------------- |
-| PLUGIN_DRY_RUN    | Disable docker push                       |
-| PLUGIN_DEBUG      | Docker daemon executes in debug mode      |
-| PLUGIN_MIRROR     | Docker daemon registry mirror             |
-| PLUGIN_INSECURE   | Docker daemon allows insecure registries  |
-| PLUGIN_BUILD_ARGS | Docker build args, a comma separated list |
-
-<br />
-```yaml
-## This example shows an environment variable being used
-## in the Publish Image step. This variable allows you to
-## publish an image to an insecure registry:
+  1.  在**步骤类型**下拉列表中，选择**发布应用模板**。
 
-stages:
+  1.  填写表格的其余部分。 下面列出了每个字段的说明。 完成后，点击 **添加**。
 
-- name: Publish Image
-  steps:
-  - publishImageConfig:
-    dockerfilePath: ./Dockerfile
-    buildContext: .
-    tag: repo/app:v1
-    pushRemote: true
-    registry: example.com
-    env:
-    PLUGIN_INSECURE: "true"
+      | 字段         | 描述                                                                                                                                                                                                                                                                          |
+      | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      | Chart 目录   | chart 目录在代码库中的相对路径。也就是`Chart.yaml`所在的目录。                                                                                                                                                                                                                |
+      | 应用模版名称 | 所发布应用模版的名称。例如，wordpress。                                                                                                                                                                                                                                       |
+      | 应用模版版本 | 所发布应用模版的版本。这个版本应该和你`Chart.yaml`文件中的版本号匹配。                                                                                                                                                                                                        |
+      | 协议         | 你可以选择通过 HTTP(s)或者 SSH 的方式发布到代码库中。                                                                                                                                                                                                                         |
+      | 密文         | 选择包含你的 Git 访问凭证的密文。你需要在流水线专用的命名空间中创建一个密文。如果您用的是 HTTP 或者 HTTPS 的方式，请把 Git 的用户名和密码保存在这个密文的`USERNAME`和`PASSWORD`键值对中。如果你使用 SSH 的方式，请把 Git 的 deploy key 保存在这个密文的`DEPLOY_KEY`键值对中。 |
+      | Git 地址     | 把应用模版发布到这个 Git 地址。                                                                                                                                                                                                                                               |
+      | Git 分支     | 把应用模版发布到这个 Git 分支。                                                                                                                                                                                                                                               |
+      | 作者         | 提交信息中所包含的作者信息。                                                                                                                                                                                                                                                  |
+      | 作者邮箱     | 提交信息中所包含的作者邮箱信息。                                                                                                                                                                                                                                              |
+
+* 通过 YAML 设置发布应用模板
+
+  您可以直接在 `.rancher-pipeline.yml` 文件中添加 **发布应用模板**步骤。
+
+  在 `步骤` 部分下，使用 `publishCatalogConfig` 添加一个步骤。 您将提供以下信息:
+
+  - Path: 源代码库中 `Chart.yaml` 文件所在的 chart 文件夹的相对路径。
+  - CatalogTemplate: 模板名称。
+  - Version: 您要发布的模板版本，应与 `Chart.yaml` 文件中定义的版本一致。
+  - GitUrl: 模板将发布到的 chart 代码库的 git URL。
+  - GitBranch: 模板将发布到的 chart 代码库的 git 分支。
+  - GitAuthor: 提交消息中使用的作者姓名。
+  - GitEmail: 提交消息中使用的作者电子邮件。
+  - Credentials: 包含你的 Git 访问凭证的密文。你需要在流水线专用的命名空间中创建一个密文。如果您用的是 HTTP 或者 HTTPS 的方式，请把 Git 的用户名和密码保存在这个密文的`USERNAME`和`PASSWORD`键值对中。如果你使用 SSH 的方式，请把 Git 的 deploy key 保存在这个密文的`DEPLOY_KEY`键值对中。
 
-````
-<br />
- /tab 
+  ```yaml
+  # 示例
+  stages:
+    - name: Publish Wordpress Template
+      steps:
+        - publishCatalogConfig:
+            path: ./charts/wordpress/latest
+            catalogTemplate: wordpress
+            version: ${CICD_GIT_TAG}
+            gitUrl: git@github.com:myrepo/charts.git
+            gitBranch: master
+            gitAuthor: example-user
+            gitEmail: user@example.com
+          envFrom:
+            - sourceName: publish-keys
+              sourceKey: DEPLOY_KEY
+  ```
 
- /tabs 
+### 部署 YAML
 
-#### Publish Catalog Template
+此步骤将任意 Kubernetes 资源部署到项目。此部署要求你的源代码库中存在 Kubernetes YAML 文件。你可以在 Kubernetes YAML 文件中使用流水线变量替换功能。您可以在[GitHub](https://github.com/rancher/pipeline-example-go/blob/master/deployment.yaml)上查看示例文件。有关可用变量的列表，请参考[流水线变量替换列表](#流水线变量替换列表)。
 
-_Available as of v2.2.0_
+- 通过 UI 设置部署 YAML
 
-The **Publish Catalog Template** step publishes a version of a catalog app template (i.e. Helm chart) to a [git hosted chart repository](/docs/catalog/custom/). It generates a git commit and pushes it to your chart repository. This process requires a chart folder in your source code's repository and a pre-configured secret in the dedicated pipeline namespace to complete successfully. Any variables in the [pipeline variable substitution reference](#pipeline-variable-substitution-reference) is supported for any file in the chart folder.
+  1. 从 **步骤类型** 下拉列表中，选择 **部署 YAML** 并填写表格。
 
- tabs 
+  1. 输入 **YAML 路径**，这是源代码中 Kubernetes YAML 文件的路径。
 
- tab "By UI" 
-<br/>
+  1. 点击 **添加**。
 
-1. From the **Step Type** drop-down, choose **Publish Catalog Template**.
+- 通过 YAML 设置部署 YAML
 
-1. Fill in the rest of the form. Descriptions for each field are listed below. When you're done, click **Add**.
+  ```yaml
+  # 示例
+  stages:
+    - name: Deploy
+      steps:
+        - applyYamlConfig:
+            path: ./deployment.yaml
+  ```
 
-    Field | Description |
-    ---------|----------|
-     Chart Folder | The relative path to the chart folder in the source code repo, where the `Chart.yaml` file is located. |
-     Catalog Template Name | The name of the template. For example, wordpress. |
-     Catalog Template Version | The version of the template you want to publish, it should be consistent with the version defined in the `Chart.yaml` file. |
-     Protocol | You can choose to publish via HTTP(S) or SSH protocol. |
-     Secret   | The secret that stores your Git credentials. You need to create a secret in dedicated pipeline namespace in the project before adding this step. If you use HTTP(S) protocol, store Git username and password in `USERNAME` and `PASSWORD` key of the secret. If you use SSH protocol, store Git deploy key in `DEPLOY_KEY` key of the secret. After the secret is created, select it in this option. |
-     Git URL  | The Git URL of the chart repository that the template will be published to. |
-     Git Branch | The Git branch of the chart repository that the template will be published to. |
-     Author Name | The author name used in the commit message. |
-     Author Email | The author email used in the commit message. |
+### 部署应用商店应用
 
+_可用于 v2.2.0_
 
- /tab 
+**部署应用商店应用** 步骤在项目中部署应用商店应用。如果应用不存在，它将安装一个新应用。如果存在，它将升级一个已有的应用.
 
- tab "By YAML" 
-<br />
-You can add **Publish Catalog Template** steps directly in the `.rancher-pipeline.yml` file.
+- 通过 UI 设置部署应用商店应用
 
-Under the `steps` section, add a step with `publishCatalogConfig`. You will provide the following information:
+  1. 在 **步骤类型** 下拉列表中，选择 **部署应用**。
 
-* Path: The relative path to the chart folder in the source code repo, where the `Chart.yaml` file is located.
-* CatalogTemplate: The name of the template.
-* Version: The version of the template you want to publish, it should be consistent with the version defined in the `Chart.yaml` file.
-* GitUrl: The git URL of the chart repository that the template will be published to.
-* GitBranch: The git branch of the chart repository that the template will be published to.
-* GitAuthor: The author name used in the commit message.
-* GitEmail: The author email used in the commit message.
-* Credentials: You should provide Git credentials by referencing secrets in dedicated pipeline namespace. If you publish via SSH protocol, inject your deploy key to the `DEPLOY_KEY` environment variable. If you publish via HTTP(S) protocol, inject your username and password to `USERNAME` and `PASSWORD` environment variables.
+  1. 填写表格的其余部分。下面列出了每个字段的说明。完成后，点击 **添加**。
 
-```yaml
-## example
-stages:
-- name: Publish Wordpress Template
-  steps:
-  - publishCatalogConfig:
-      path: ./charts/wordpress/latest
-      catalogTemplate: wordpress
-      version: ${CICD_GIT_TAG}
-      gitUrl: git@github.com:myrepo/charts.git
-      gitBranch: master
-      gitAuthor: example-user
-      gitEmail: user@example.com
-    envFrom:
-    - sourceName: publish-keys
-      sourceKey: DEPLOY_KEY
-````
+     | 字段     | 描述                              |
+     | -------- | --------------------------------- |
+     | 应用商店 | 应用模版所在的应用商店。          |
+     | 应用模版 | 应用模版的名称。例如，wordpress。 |
+     | 模版版本 | 你要部署的应用模版的版本。        |
+     | 命名空间 | 部署应用的命名空间。              |
+     | 应用名称 | 部署应用的应用名称。              |
+     | 应答     | 用来部署应用的键值对形式的应答。  |
 
-<br />
- /tab 
+- 通过 YAML 设置部署应用商店应用
 
- /tabs 
+  您可以直接在 `.rancher-pipeline.yml` 文件中添加 **部署应用商店应用** 步骤。
 
-#### Deploy YAML
+  在 `步骤` 部分下，通过 `applyAppConfig` 添加一个步骤。您将提供以下信息:
 
-This step deploys arbitrary Kubernetes resources to the project. This deployment requires a Kubernetes manifest file to be present in the source code repository. Pipeline variable substitution is supported in the manifest file. You can view an example file at [GitHub](https://github.com/rancher/pipeline-example-go/blob/master/deployment.yaml). Please refer to the [pipeline variable substitution reference](#pipeline-variable-substitution-reference) for the list of available variables.
+  - CatalogTemplate: 应用模板的 ID。可以在应用商店页单击 `启动`。找到并点击你要部署的应用。应用部署页 url 的最后一部分就是你要找的`CatalogTemplate`值。
+  - Version: 你要部署的应用模版的版本。
+  - Answers: 用来部署应用的键值对形式的应答
+  - Name: 部署应用的应用名称。
+  - TargetNamespace: 部署应用的命名空间。
 
- tabs 
+  ```yaml
+  # 示例
+  stages:
+    - name: Deploy App
+      steps:
+        - applyAppConfig:
+            catalogTemplate: cattle-global-data:library-mysql
+            version: 0.3.8
+            answers:
+              persistence.enabled: 'false'
+            name: testmysql
+            targetNamespace: test
+  ```
 
- tab "By UI" 
+## 高级选项
 
-1. From the **Step Type** drop-down, choose **Deploy YAML** and fill in the form.
+在流水线中，针对流水线的不同部分有多个高级选项。
 
-1. Enter the **YAML Path**, which is the path to the manifest file in the source code.
+- [触发规则](#触发规则)
+- [环境变量](#环境变量)
+- [密文](#密文)
 
-1. Click **Add**.
+### 触发规则
 
- /tab 
+可以创建触发规则，以对流水线的执行进行细粒度的控制。触发规则有两种:
 
- tab "By YAML" 
-<br />
+- **当满足条件时运行：**
 
-```yaml
-## example
-stages:
-  - name: Deploy
-    steps:
-      - applyYamlConfig:
-          path: ./deployment.yaml
-```
+  在触发事件发生时，将启动流水线，阶段或步骤。
 
-<br />
- /tab 
+- **当满足条件时不运行：**
 
- /tabs 
+  在触发事件发生时，将跳过流水线，阶段或步骤。
 
-#### Deploy Catalog App
+只有所有触发规则都满足时，才会执行流水线/阶段/步骤。否则将被跳过。如果跳过流水线，整个流水线都不会被执行。如果跳过某个阶段或步骤，则认为该阶段/步骤执行成功，并且继续执行后续阶段/步骤。
 
-_Available as of v2.2.0_
+在设置`分支`条件时，支持通配符（`*`）。
 
-The **Deploy Catalog App** step deploys a catalog app in the project. It will install a new app if it is not present, or upgrade an existing one.
+- 通过 UI 设置流水线触发规则
 
- tabs 
+  1. 从 **全局** 视图，导航到要配置流水线触发规则的项目。
 
- tab "By UI" 
+  1. 点击 **资源 > 流水线.** 在 v2.3.0 之前的版本中，点击 **工作负载 > 流水线**。
 
-1. From the **Step Type** drop-down, choose **Deploy Catalog App**.
+  1. 从要管理触发规则的代码库中，选择**省略号（...）> 编辑配置**。
 
-1. Fill in the rest of the form. Descriptions for each field are listed below. When you're done, click **Add**.
+  1. 点击 **显示高级选项**。
 
-   | Field            | Description                                            |
-   | ---------------- | ------------------------------------------------------ |
-   | Catalog          | The catalog from which the app template will be used.  |
-   | Template Name    | The name of the app template. For example, wordpress.  |
-   | Template Version | The version of the app template you want to deploy.    |
-   | Namespace        | The target namespace where you want to deploy the app. |
-   | App Name         | The name of the app you want to deploy.                |
-   | Answers          | Key-value pairs of answers used to deploy the app.     |
+  1. 在 **触发规则** 部分中，配置规则以运行或跳过流水线。
 
- /tab 
+  1. 点击 **添加规则**。 在 **值** 字段中，输入触发流水线的分支名称。
 
- tab "By YAML" 
-<br />
-You can add **Deploy Catalog App** steps directly in the `.rancher-pipeline.yml` file.
+  1. **可选:** 添加更多触发构建的分支。
 
-Under the `steps` section, add a step with `applyAppConfig`. You will provide the following information:
+  1. 点击 **完成**。
 
-- CatalogTemplate: The ID of the template. This can be found by clicking `Launch app` and selecting `View details` for the app. It is the last part of the URL.
-- Version: The version of the template you want to deploy.
-- Answers: Key-value pairs of answers used to deploy the app.
-- Name: The name of the app you want to deploy.
-- TargetNamespace: The target namespace where you want to deploy the app.
+- 通过 UI 设置阶段触发规则
 
-```yaml
-## example
-stages:
-  - name: Deploy App
-    steps:
-      - applyAppConfig:
-          catalogTemplate: cattle-global-data:library-mysql
-          version: 0.3.8
-          answers:
-            persistence.enabled: 'false'
-          name: testmysql
-          targetNamespace: test
-```
+  1. 从 **全局** 视图,导航到要配置阶段触发规则的项目。
 
-<br />
- /tab 
- /tabs 
+  1. 点击 **资源 > 流水线**。在 v2.3.0 之前的版本中，点击 **工作负载 > 流水线**。
 
-### Advanced Options
+  1. 从要管理触发规则的代码库中，选择**省略号（...）>编辑配置**。
 
-Within a pipeline, there are multiple advanced options for different parts of the pipeline.
+  1. 找到您要管理触发规则的 **阶段**，单击该阶段的 **编辑** 图标。
 
-- [Trigger Rules](#trigger-rules)
-- [Environment Variables](#environment-variables)
-- [Secrets](#secrets)
+  1. 点击 **显示高级选项**。
 
-#### Trigger Rules
+  1. 在 **触发规则** 部分中，配置规则以运行或跳过阶段。
 
-Trigger rules can be created to have fine-grained control of pipeline executions in your pipeline configuration. Trigger rules come in two types:
+     1. 点击 **添加规则**。
 
-- **Run this when:**
+     1. 选择触发阶段的 **类型** 并输入一个值。
 
-  This type of rule starts the pipeline, stage, or step when a trigger explicitly occurs.
+        | 类型 | 值                                                |
+        | ---- | ------------------------------------------------- |
+        | 分支 | 触发阶段的分支名称                                |
+        | 事件 | 触发阶段的事件名称：`Push`，`Pull Request`，`Tag` |
 
-- **Do Not Run this when:**
+  1. 点击 **保存**。
 
-  This type of rule skips the pipeline, stage, or step when a trigger explicitly occurs.
+- 通过 UI 设置步骤触发规则
 
-If all conditions evaluate to `true`, then the pipeline/stage/step is executed. Otherwise it is skipped. When a pipeline is skipped, none of the pipeline is executed. When a stage/step is skipped, it is considered successful and follow-up stages/steps continue to run.
+  1. 从 **全局** 视图，导航到要配置阶段触发规则的项目。
 
-Wildcard character (`*`) expansion is supported in `branch` conditions.
+  1. 点击 **资源 > 流水线**。在 v2.3.0 之前的版本中，点击 **工作负载 > 流水线**。
 
- tabs 
- tab "Pipeline Trigger" 
+  1. 从要管理触发规则的代码库中，选择**省略号（...）>编辑配置**。
 
-1. From the **Global** view, navigate to the project that you want to configure a pipeline trigger rule.
+  1. 找到您要管理触发规则的 **步骤**，单击该步骤的 **编辑** 图标。
 
-1. Click **Resources > Pipelines.** In versions prior to v2.3.0, click **Workloads > Pipelines.**
+  1. 点击 **显示高级选项**。
 
-1. From the repository for which you want to manage trigger rules, select the vertical **Ellipsis (...) > Edit Config**.
+  1. 在 **触发规则** 部分中，配置规则以运行或跳过阶段。
 
-1. Click on **Show Advanced Options**.
+     1. 点击 **添加规则**。
 
-1. In the **Trigger Rules** section, configure rules to run or skip the pipeline.
+     1. 选择触发阶段的 **类型** 并输入一个值。
 
-   1. Click **Add Rule**. In the **Value** field, enter the name of the branch that triggers the pipeline.
+        | 类型 | 值                                                |
+        | ---- | ------------------------------------------------- |
+        | 分支 | 触发步骤的分支名称                                |
+        | 事件 | 触发步骤的事件名称：`Push`，`Pull Request`，`Tag` |
 
-   1. **Optional:** Add more branches that trigger a build.
+  1. 点击 **保存**。
 
-1. Click **Done.**
+- 通过 YAML 设置触发规则
 
- /tab 
- tab "Stage Trigger" 
+  ```yaml
+  # 示例
+  stages:
+    - name: Build something
+      # 阶段条件
+      when:
+        branch: master
+        event: [push，pull_request]
+      # 多个步骤同时运行
+      steps:
+        - runScriptConfig:
+            image: busybox
+            shellScript: date -R
+          # 阶段条件
+          when:
+            branch: [master，dev]
+            event: push
+  # 流水线的分支条件
+  branch:
+    include: [master，feature/*]
+    exclude: [dev]
+  ```
 
-1. From the **Global** view, navigate to the project that you want to configure a stage trigger rule.
+### 环境变量
 
-1. Click **Resources > Pipelines.** In versions prior to v2.3.0, click **Workloads > Pipelines.**
+配置流水线时，某些[步骤类型](#步骤类型)允许您使用环境变量来配置步骤的脚本。
 
-1. From the repository for which you want to manage trigger rules, select the vertical **Ellipsis (...) > Edit Config**.
+- 通过 UI 设置环境变量
 
-1. Find the **stage** that you want to manage trigger rules, click the **Edit** icon for that stage.
+  1. 从 **全局** 视图，导航到要配置的流水线的项目。
 
-1. Click **Show advanced options**.
+  1. 点击 **资源 > 流水线**。在 v2.3.0 之前的版本中，点击 **工作负载 > 流水线**。
 
-1. In the **Trigger Rules** section, configure rules to run or skip the stage.
+  1. 从要管理的流水线中，选择**省略号（...）>编辑配置**。
 
-   1. Click **Add Rule**.
+  1. 找到您要管理的**步骤**，单击该步骤的 **编辑** 图标。
 
-   1. Choose the **Type** that triggers the stage and enter a value.
+  1. 点击 **显示高级选项**。
 
-      | Type   | Value                                                                                |
-      | ------ | ------------------------------------------------------------------------------------ |
-      | Branch | The name of the branch that triggers the stage.                                      |
-      | Event  | The type of event that triggers the stage. Values are: `Push`, `Pull Request`, `Tag` |
+  1. 单击 **添加变量**，然后在出现的字段中输入键和值。 根据需要添加更多变量。
 
-1. Click **Save**.
+  1. 将环境变量添加到脚本或文件中。
 
- /tab 
- tab "Step Trigger" 
+  1. 点击 **保存**。
 
-1. From the **Global** view, navigate to the project that you want to configure a stage trigger rule.
+- 通过 YAML 设置环境变量
 
-1. Click **Resources > Pipelines.** In versions prior to v2.3.0, click **Workloads > Pipelines.**
+  ```yaml
+  # 示例
+  stages:
+    - name: Build something
+      steps:
+        - runScriptConfig:
+            image: busybox
+            shellScript: echo ${FIRST_KEY} && echo ${SECOND_KEY}
+          env:
+            FIRST_KEY: VALUE
+            SECOND_KEY: VALUE2
+  ```
 
-1. From the repository for which you want to manage trigger rules, select the vertical **Ellipsis (...) > Edit Config**.
+### 密文
 
-1. Find the **step** that you want to manage trigger rules, click the **Edit** icon for that step.
+如果您需要在流水线脚本中使用对安全敏感的信息（例如密码），则可以使用 Kubernetes [密文](/docs/k8s-in-rancher/secrets/_index)传递它们。
 
-1. Click **Show advanced options**.
+#### 先决条件
 
-1. In the **Trigger Rules** section, configure rules to run or skip the step.
+在与流水线相同的项目中或在运行流水线构建 Pod 的命名空间中显式创建密文。
 
-   1. Click **Add Rule**.
+> **注意:** 密文注入功能不能在[Pull Request 事件](#流水线设置)触发的流水线中使用。
 
-   1. Choose the **Type** that triggers the step and enter a value.
+- 通过 UI 配置密文
 
-      | Type   | Value                                                                               |
-      | ------ | ----------------------------------------------------------------------------------- |
-      | Branch | The name of the branch that triggers the step.                                      |
-      | Event  | The type of event that triggers the step. Values are: `Push`, `Pull Request`, `Tag` |
+1. 从 **全局** 视图，导航到要配置的流水线的项目。
 
-1. Click **Save**.
+1. 点击 **资源 > 流水线**。在 v2.3.0 之前的版本中，点击 **工作负载 > 流水线**。
 
- /tab 
- tab "By YAML" 
-<br />
+1. 从要管理的流水线中，选择**省略号（...）>编辑配置**。
 
-```yaml
-## example
-stages:
-  - name: Build something
-    # Conditions for stages
-    when:
-      branch: master
-      event: [push, pull_request]
-    # Multiple steps run concurrently
-    steps:
-      - runScriptConfig:
-          image: busybox
-          shellScript: date -R
-        # Conditions for steps
-        when:
-          branch: [master, dev]
-          event: push
-## branch conditions for the pipeline
-branch:
-  include: [master, feature/*]
-  exclude: [dev]
-```
+1. 找到您要管理的**步骤**，单击该步骤的 **编辑** 图标。
 
-<br />
- /tab 
- /tabs 
+1. 点击 **显示高级选项**。
 
-#### Environment Variables
+1. 点击 **从密文中添加**。 选择您要使用的密文文件。然后选择一个键。您也可以输入密钥的别名。
 
-When configuring a pipeline, certain [step types](#step-types) allow you to use environment variables to configure the step's script.
+1. 点击 **保存**。
 
- tabs 
- tab "By UI" 
+- 通过 YAML 配置密文
 
-1. From the **Global** view, navigate to the project that you want to configure pipelines.
+  ```yaml
+  # 示例
+  stages:
+    - name: Build something
+      steps:
+        - runScriptConfig:
+            image: busybox
+            shellScript: echo ${ALIAS_ENV}
+          # 项目密文中的环境变量
+          envFrom:
+            - sourceName: my-secret
+              sourceKey: secret-key
+              targetKey: ALIAS_ENV
+  ```
 
-1. Click **Resources > Pipelines.** In versions prior to v2.3.0, click **Workloads > Pipelines.**
+## 流水线变量替换列表
 
-1. From the pipeline for which you want to edit build triggers, select **Ellipsis (...) > Edit Config**.
+为了方便起见，以下变量可用于流水线的配置脚本中。在流水线执行期间，这些变量将被替换为元数据。您可以通过 `$ {VAR_NAME}` 的形式引用它们.
 
-1. Within one of the stages, find the **step** that you want to add an environment variable for, click the **Edit** icon.
-
-1. Click **Show advanced options**.
-
-1. Click **Add Variable**, and then enter a key and value in the fields that appear. Add more variables if needed.
-
-1. Add your environment variable(s) into either the script or file.
-
-1. Click **Save**.
-
- /tab 
-
- tab "By YAML" 
-<br />
-
-```yaml
-## example
-stages:
-  - name: Build something
-    steps:
-      - runScriptConfig:
-          image: busybox
-          shellScript: echo ${FIRST_KEY} && echo ${SECOND_KEY}
-        env:
-          FIRST_KEY: VALUE
-          SECOND_KEY: VALUE2
-```
-
-<br />
- /tab 
-
- /tabs 
-
-#### Secrets
-
-If you need to use security-sensitive information in your pipeline scripts (like a password), you can pass them in using Kubernetes [secrets](/docs/k8s-in-rancher/secrets/).
-
-##### Prerequisite
-
-Create a secret in the same project as your pipeline, or explicitly in the namespace where pipeline build pods run.
-<br />
-
-> **Note:** Secret injection is disabled on [pull request events](#pipeline-setting).
-
- tabs 
- tab "By UI" 
-
-1. From the **Global** view, navigate to the project that you want to configure pipelines.
-
-1. Click **Resources > Pipelines.** In versions prior to v2.3.0, click **Workloads > Pipelines.**
-
-1. From the pipeline for which you want to edit build triggers, select **Ellipsis (...) > Edit Config**.
-
-1. Within one of the stages, find the **step** that you want to use a secret for, click the **Edit** icon.
-
-1. Click **Show advanced options**.
-
-1. Click **Add From Secret**. Select the secret file that you want to use. Then choose a key. Optionally, you can enter an alias for the key.
-
-1. Click **Save**.
-
- /tab 
- tab "By YAML" 
-<br />
-
-```yaml
-## example
-stages:
-  - name: Build something
-    steps:
-      - runScriptConfig:
-          image: busybox
-          shellScript: echo ${ALIAS_ENV}
-        # environment variables from project secrets
-        envFrom:
-          - sourceName: my-secret
-            sourceKey: secret-key
-            targetKey: ALIAS_ENV
-```
-
-<br />
- /tab 
- /tabs 
-
-### Pipeline Variable Substitution Reference
-
-For your convenience, the following variables are available for your pipeline configuration scripts. During pipeline executions, these variables are replaced by metadata. You can reference them in the form of `${VAR_NAME}`.
-
-| Variable Name             | Description                                                                                                                                                                                                                                                         |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CICD_GIT_REPO_NAME`      | Repository name (Github organization omitted).                                                                                                                                                                                                                      |
-| `CICD_GIT_URL`            | URL of the Git repository.                                                                                                                                                                                                                                          |
-| `CICD_GIT_COMMIT`         | Git commit ID being executed.                                                                                                                                                                                                                                       |
-| `CICD_GIT_BRANCH`         | Git branch of this event.                                                                                                                                                                                                                                           |
-| `CICD_GIT_REF`            | Git reference specification of this event.                                                                                                                                                                                                                          |
-| `CICD_GIT_TAG`            | Git tag name, set on tag event.                                                                                                                                                                                                                                     |
-| `CICD_EVENT`              | Event that triggered the build (`push`, `pull_request` or `tag`).                                                                                                                                                                                                   |
-| `CICD_PIPELINE_ID`        | Rancher ID for the pipeline.                                                                                                                                                                                                                                        |
-| `CICD_EXECUTION_SEQUENCE` | Build number of the pipeline.                                                                                                                                                                                                                                       |
-| `CICD_EXECUTION_ID`       | Combination of `{CICD_PIPELINE_ID}-{CICD_EXECUTION_SEQUENCE}`.                                                                                                                                                                                                      |
-| `CICD_REGISTRY`           | Address for the Docker registry for the previous publish image step, available in the Kubernetes manifest file of a `Deploy YAML` step.                                                                                                                             |
-| `CICD_IMAGE`              | Name of the image built from the previous publish image step, available in the Kubernetes manifest file of a `Deploy YAML` step. It does not contain the image tag.<br/><br/> [Example](https://github.com/rancher/pipeline-example-go/blob/master/deployment.yaml) |
+| 变量名                    | 描述                                                                                                                                                                                                               |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `CICD_GIT_REPO_NAME`      | 代码库名称                                                                                                                                                                                                         |
+| `CICD_GIT_URL`            | 代码库 Git 地址                                                                                                                                                                                                    |
+| `CICD_GIT_COMMIT`         | 触发流水线的 Git commit ID                                                                                                                                                                                         |
+| `CICD_GIT_BRANCH`         | 触发流水线的 Git 分支                                                                                                                                                                                              |
+| `CICD_GIT_REF`            | 触发流水线的 Git 详细信息                                                                                                                                                                                          |
+| `CICD_GIT_TAG`            | 触发流水线的 Tag 名称。仅在由 tag 事件触发时可用。                                                                                                                                                                 |
+| `CICD_EVENT`              | 触发流水线的的事件名称 (`push`，`pull_request` 或 `tag`)。                                                                                                                                                         |
+| `CICD_PIPELINE_ID`        | 这个流水线在 Rancher 中的 ID                                                                                                                                                                                       |
+| `CICD_EXECUTION_SEQUENCE` | 流水线的 Build Number                                                                                                                                                                                              |
+| `CICD_EXECUTION_ID`       | 内容组成为`{CICD_PIPELINE_ID}-{CICD_EXECUTION_SEQUENCE}`。                                                                                                                                                         |
+| `CICD_REGISTRY`           | 在发布镜像步骤中使用的镜像仓库地址。这个变量在`部署 YAML`步骤中的 Kubernetes YAML 文件中可用。                                                                                                                     |
+| `CICD_IMAGE`              | 在发布镜像步骤中使用的镜像名称。这个变量在`部署 YAML`步骤中的 Kubernetes YAML 文件中可用。这个名称不包括镜像的标签。点击[这里](https://github.com/rancher/pipeline-example-go/blob/master/deployment.yaml)查看示例 |
