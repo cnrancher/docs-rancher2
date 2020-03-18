@@ -621,6 +621,10 @@ module.exports = {
         ]
       },
       'k8s-in-rancher/service-discovery/_index',
+      'k8s-in-rancher/certificates/_index',
+      'k8s-in-rancher/configmaps/_index',
+      'k8s-in-rancher/secrets/_index',
+      'k8s-in-rancher/registries/_index',
       {
         type: 'category',
         label: '流水线',
@@ -629,11 +633,7 @@ module.exports = {
           'k8s-in-rancher/pipelines/example-repos/_index',
           'k8s-in-rancher/pipelines/example/_index'
         ]
-      },
-      'k8s-in-rancher/certificates/_index',
-      'k8s-in-rancher/configmaps/_index',
-      'k8s-in-rancher/secrets/_index',
-      'k8s-in-rancher/registries/_index'
+      }
     ],
     应用商店: [
       'catalog/_index',

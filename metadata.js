@@ -103,7 +103,7 @@ const metadata = {
     'k8s-in-rancher/horitzontal-pod-autoscaler/_index': 'Pod 弹性伸缩',
     'k8s-in-rancher/load-balancers-and-ingress/_index': '负载均衡和 Ingress',
     'k8s-in-rancher/service-discovery/_index': '服务发现',
-    'docs/k8s-in-rancher/pipelines/_index': 'CI/CD 流水线',
+    'k8s-in-rancher/pipelines/_index': 'CI/CD 流水线',
     'k8s-in-rancher/certificates/_index': '证书，加密HTTP通信',
     'k8s-in-rancher/configmaps/_index': '配置管理',
     'k8s-in-rancher/secrets/_index': '密文',
