@@ -27,6 +27,11 @@ module.exports = {
           position: 'left'
         },
         {
+          href: 'https://www.rancher.cn/weixin/',
+          label: '微信交流群',
+          position: 'left'
+        },
+        {
           href: 'https://www.rancher.cn/',
           label: '中国官网',
           position: 'right'
@@ -34,11 +39,6 @@ module.exports = {
         {
           href: 'https://www.rancher.com/',
           label: '美国官网',
-          position: 'right'
-        },
-        {
-          href: 'https://www.rancher.cn/weixin/',
-          label: '微信交流群',
           position: 'right'
         },
         {

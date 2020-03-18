@@ -2,42 +2,39 @@
 title: 配置映射
 ---
 
-While most types of Kubernetes secrets store sensitive information, [ConfigMaps](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/) store general configuration information, such as a group of config files. Because ConfigMaps don't store sensitive information, they can be updated automatically, and therefore don't require their containers to be restarted following update (unlike most secret types, which require manual updates and a container restart to take effect).
+和大多数 kubernetes 密文类型配置存储敏感信息不同，[配置映射（ConfigMaps）](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/) 主要用于存储常规的配置信息， 例如一组配置文件。由于配置映射不存储敏感信息， 因此它们在更新配置完成以后可以被自动刷新， 而不需要在更新后重新启动容器生效 (不像大多数密文类型配置， 需要手动更新并重新启动容器才能生效)。
 
-ConfigMaps accept key value pairs in common string formats, like config files or JSON blobs. After you upload a config map, any workload can reference it as either an environment variable or a volume mount.
+ConfigMap 接受通用字符串格式的键值对， 例如配置文件或者 JSON. 在您上传 config map 配置以后， 任何工作负载都可以将此配置引用为环境变量或者以数据卷形式挂载使用。
 
-> **Note:** ConfigMaps can only be applied to namespaces and not projects.
+> **注意:** 配置映射仅仅只能应用于命名空间（namespaces）而不能应用于项目。
 
-1. From the **Global** view, select the project containing the namespace that you want to add a ConfigMap to.
+1. 从 **全局** 视图， 选择包含要向其添加配置映射的 namespace 所在的项目
 
-1. From the main menu, select **Resources > Config Maps**. Click **Add Config Map**.
+1. 从主菜单， 选择 **资源 > 配置映射**。 点击 **添加配置映射**。
 
-1. Enter a **Name** for the Config Map.
+1. 输入配置映射的 **名称** 。
 
-   > **Note:** Kubernetes classifies ConfigMaps as [secrets](https://kubernetes.io/docs/concepts/configuration/secret/), and no two secrets in a project or namespace can have duplicate names. Therefore, to prevent conflicts, your ConfigMaps must have a unique name among the other certificates, ConfigMaps, registries, and secrets within your workspace.
+   > **注意:** Kubernetes 区别 ConfigMaps 作为 [密文](https://kubernetes.io/docs/concepts/configuration/secret/)， 并且项目或命名空间中的两个密文都不能具有重复的名称。 因此， 为防止冲突，您的配置映射必须和在工作空间内的其他证书，配置映射，镜像库凭证和密文一样具有唯一的名称。
 
-1. Select the **Namespace** you want to add Config Map to. You can also add a new namespace on the fly by clicking **Add to a new namespace**.
+1. 选择您想要添加配置映射的 **命名空间**。 你也可以通过点击 **创建新的命名空间**添加一个全新的命名空间（namespace）
 
-1. From **Config Map Values**, click **Add Config Map Value** to add a key value pair to your ConfigMap. Add as many values as you need.
+1. 从次级**配置映射**视图， 单击 **添加配置映射** 为您的配置映射添加一个键值对。也可以根据您的需要添加更多的值。
 
-1. Click **Save**.
+1. 单击 **保存**。
 
-   > **Note:** Don't use ConfigMaps to store sensitive data [use a secret](/docs/k8s-in-rancher/secrets/).
+   > **注意:** 不要使用配置映射去存储敏感数据 [使用一个密文](/docs/k8s-in-rancher/secrets/_index)。
    >
-   > **Tip:** You can add multiple key value pairs to the ConfigMap by copying and pasting.
+   > **提示:** 您可以通过复制和粘贴的方式将多个键值对添加到 ConfigMap 中。
    >
-   > 
+   > ![Bulk Key Value Pair Copy/Paste](/img/rancher/bulk-key-values.gif)
 
-![Bulk Key Value Pair Copy/Paste](/img/rancher/bulk-key-values.gif)
+**效果:** 您的 ConfigMap 被添加到命名空间（namespace）。您可以通过 Rancher UI 的 **资源 > 配置映射** 视图查看到它。
 
-**Result:** Your ConfigMap is added to the namespace. You can view it in the Rancher UI from the **Resources > Config Maps** view.
+## 下一步是什么?
 
-### What's Next?
+现在您已将配置映射添加到命名空间，您也可以将其添加到从原有命名空间部署的工作负载中。 您可以使用配置映射来指定供应用程序使用的信息，例如:
 
-Now that you have a ConfigMap added to a namespace, you can add it to a workload that you deploy from the namespace of origin. You can use the ConfigMap to specify information for you application to consume, such as:
+- 应用程序的环境变量。
+- 作为设定配置参数的数据卷以文件的形式挂载给工作负载使用。
 
-* Application environment variables.
-* Specifying parameters for a Volume mounted to the workload.
-
-For more information on adding ConfigMaps to a workload, see [Deploying Workloads](/docs/k8s-in-rancher/workloads/deploy-workloads/).
-
+有关 ConfigMap 添加到工作负载的更多信息，请参见[部署工作负载](/docs/k8s-in-rancher/workloads/deploy-workloads/_index)。

@@ -2,95 +2,68 @@
 title: YAML 文件示例
 ---
 
-Pipelines can be configured either through the UI or using a yaml file in the repository, i.e. `.rancher-pipeline.yml` or `.rancher-pipeline.yaml` .
+流水线（Pipelines）能够通过 Rancher UI 或者使用代码仓库中的 YMAL 文件，即 `.rancher-pipeline.yml` 或 `.rancher-pipeline.yaml` 的方式进行配置。
 
-In the [pipeline configuration docs](), we provide examples of each available feature within pipelines. Here is a full example for those who want to jump right in.
+在 pipeline 配置文档中，我们提供了流水线（Pipelines）每个可用特性的示例。这是一个完整的示例供大家使用参考。
 
-``` yaml
-
+```yaml
 ## example
-
 stages:
-
-  + name: Build something
-
-    # Conditions for stages
+  - name: Build something
+    # 阶段条件
     when:
       branch: master
       event: [push, pull_request]
-    # Multiple steps run concurrently
+    # 多步骤同时运行
     steps:
-
       - runScriptConfig:
-
           image: busybox
           shellScript: echo ${FIRST_KEY} && echo ${ALIAS_ENV}
-        # Set environment variables in container for the step
+        # 该步骤为容器设置环境变量
         env:
           FIRST_KEY: VALUE
           SECOND_KEY: VALUE2
-        # Set environment variables from project secrets
+        # 设置导入项目密钥的环境变量
         envFrom:
-
           - sourceName: my-secret
-
             sourceKey: secret-key
             targetKey: ALIAS_ENV
-
       - runScriptConfig:
-
           image: busybox
           shellScript: date -R
-        # Conditions for steps
+        # 阶段条件
         when:
           branch: [master, dev]
           event: push
-
-  + name: Publish my image
-
+  - name: Publish my image
     steps:
-
       - publishImageConfig:
-
           dockerfilePath: ./Dockerfile
           buildContext: .
           tag: rancher/rancher:v2.0.0
-          # Optionally push to remote registry
+          #（可选项）推送镜像到远程镜像库
           pushRemote: true
           registry: reg.example.com
-
-  + name: Deploy some workloads
-
+  - name: Deploy some workloads
     steps:
-
       - applyYamlConfig:
-
           path: ./deployment.yaml
-
-## branch conditions for the pipeline
-
+## Pipeline分支条件
 branch:
   include: [master, feature/*]
   exclude: [dev]
-
-## timeout in minutes
-
+## 超时（单位：分钟）
 timeout: 30
 notification:
   recipients:
-
-    - # Recipient
-
+    - # 接收者
       recipient: '#mychannel'
-      # ID of Notifier
+      # 通知者ID
       notifier: 'c-wdcsr:n-c9pg7'
-
     - recipient: 'test@example.com'
-
       notifier: 'c-wdcsr:n-lkrhd'
-  # Select which statuses you want the notification to be sent
+  # 选择您要发送通知的状态
   condition: ['Failed', 'Success', 'Changed']
-  # Ability to override the default message (Optional)
+  #（可选项）覆盖默认消息
   message: 'my-message'
 ```
-

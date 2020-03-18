@@ -2,68 +2,67 @@
 title: 示例代码库
 ---
 
-Rancher ships with several example repositories that you can use to familiarize yourself with pipelines. We recommend configuring and testing the example repository that most resembles your environment before using pipelines with your own repositories in a production environment. Use this example repository as a sandbox for repo configuration, build demonstration, etc. Rancher includes example repositories for:
+Rancher 附带了几个示例代码库，您可以使用它们来熟悉流水线（Pipeline）。在生产环境使用您自己的代码库之前，我们建议您先使用下面的示例代码库来进行配置和测试。你可以把这个示例代码库作为一个配置沙箱，用来进行构建演示等。Rancher 包括以下示例代码库：
 
-* Go
-* Maven
-* php
+- Go
+- Maven
+- php
 
-> **Note:** The example repositories are only available if you have not [configured a version control provider](/docs/project-admin/pipelines).
+> **注意:** 示例代码库仅在您[对接版本管理工具](/docs/project-admin/pipelines/_index)之前可用。
 
-### Configure Repositories
+## 配置代码库
 
-By default, the example pipeline repositories are disabled. Enable one (or more) to test out the pipeline feature and see how it works.
+默认情况下，示例流水线（Pipeline）代码库是禁用的。 启用一项（或多项）代码库以测试流水线功能并查看其运行流程。
 
-1. From the **Global** view, navigate to the project that you want to test out pipelines.
+1. 从 **全局** 视图， 导航到要测试流水线的项目。
 
-1. Click **Resources > Pipelines.** In versions prior to v2.3.0, click **Workloads > Pipelines.**
+1. 点击 **资源 > 流水线**。 在 v2.3.0 之前的版本，点击 **工作负载 > 流水线**。
 
-1. Click **Configure Repositories**.
+1. 点击 **设置代码库**。
 
-   **Step Result:** A list of example repositories displays.
+   **步骤结果:** 显示示例代码库列表
 
-   > **Note:** Example repositories only display if you haven't fetched your own repos.
+   > **注意:** 示例代码库仅在您未获取自己的代码库时显示。
 
-1. Click **Enable** for one of the example repos (e.g., `https://github.com/rancher/pipeline-example-go.git` ). Then click **Done**.
+1. 点击 **启用** 其中一个示例代码库 (例如， `https://github.com/rancher/pipeline-example-go.git`). 然后点击 **完成**。
 
-**Results:**
+**效果:**
 
-* The example repository is enabled to work with a pipeline is available in the **Pipeline** tab.
+- 这个示例代码库被激活了，您可以在**流水线**页面看到该流水线。
 
-* The following workloads are deployed to a new namespace:
+- 以下工作负载被部署到新的命名空间：
 
-  + `docker-registry` 
-  + `jenkins` 
-  + `minio` 
+  - `docker-registry`
+  - `jenkins`
+  - `minio`
 
-### View the Example Pipeline
+## 查看示例流水线
 
-After enabling an example repository, review the pipeline to see how it is set up.
+启用示例代码库后， 查看流水线以了解其设置方式。
 
-1. From the **Global** view, navigate to the project that you want to test out pipelines.
+1. 从 **全局** 视图， 导航到要测试流水线的项目。
 
-1. Click **Resources > Pipelines.** In versions prior to v2.3.0, click **Workloads > Pipelines.**
+1. 点击 **资源 > 流水线**。 在 v2.3.0 之前的版本中，点击 **工作负载 > 流水线**。
 
-1. Find the example repository, select the vertical **Ellipsis (...)**. There are two ways to view the pipeline:
+1. 找到示例代码库，选择垂直的 **省略号 (...)**。这里有两种查看流水线的方式
 
-* **Rancher UI**: Click on **Edit Config** to view the stages and steps of the pipeline.
-* **YAML**: Click on View/Edit YAML to view the `./rancher-pipeline.yml` file.
+- **Rancher UI**: 点击 **编辑配置** 去查看流水线的阶段和步骤。
+- **YAML**: 点击查看/编辑 YAML，以查看 `./rancher-pipeline.yml` 文件
 
-### Run the Example Pipeline
+## 运行示例流水线
 
-After enabling an example repository, run the pipeline to see how it works.
+启用示例代码库后，运行流水线以查看其工作方式。
 
-1. From the **Global** view, navigate to the project that you want to test out pipelines.
+1. 从 **全局** 视图，导航到要测试流水线的项目。
 
-1. Click **Resources > Pipelines.** In versions prior to v2.3.0, click **Workloads > Pipelines.**
+1. 点击 **资源 > 流水线**。 在 v2.3.0 之前的版本中，点击 **工作负载 > 流水线**。
 
-1. Find the example repository, select the vertical **Ellipsis (...) > Run**.
+1. 找到示例代码库，选择垂直的 **省略号 (...)**。
 
-   > **Note:** When you run a pipeline the first time, it takes a few minutes to pull relevant images and provision necessary pipeline components.
+   > **注意:**当您第一次运行流水行时，需要几分钟的时间来提取相关容器镜像并置备必要的流水线组件。
 
-**Result:** The pipeline runs. You can see the results in the logs.
+**效果:** 通过运行流水线。您能在日志里看到运行结果。
 
-### What's Next?
+## 下一步是什么?
 
-For detailed information about setting up your own pipeline for your repository, [configure a version control provider](/docs/project-admin/pipelines), [enable a repository](#configure-repositories) and finally [configure your pipeline](/docs/k8s-in-rancher/pipelines/#pipeline-configuration).
-
+有关为代码库设置自己的流水线的详细信息，请查阅[对接版本管理工具](/docs/project-admin/pipelines/_index)，[配置代码库](#配置代码库)和[配置流水线](/docs/k8s-in-rancher/pipelines/_index)相关的文档。
