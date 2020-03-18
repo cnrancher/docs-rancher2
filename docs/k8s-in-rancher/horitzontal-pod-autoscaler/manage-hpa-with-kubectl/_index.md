@@ -117,7 +117,7 @@ I1002 12:55:32.928597       1 serve.go:85] Serving securely on 0.0.0.0:443
 在这个例子中，我们将使用 [Prometheus](https://prometheus.io/)。我们从以下假设开始：
 
 - Prometheus 部署在集群中。
-- Prometheus 的配置正确，并且可以从 pod，节点，名称空间等收集适当的指标。
+- Prometheus 的配置正确，并且可以从 pod，节点，命名空间等收集适当的指标。
 - Prometheus 服务暴露的 URL 及端口为: `http://prometheus.mycompany.io:80`
 
 Prometheus 可在 Rancher v2.0 应用商店进行部署。 如果您的集群中尚未运行它，请从 Rancher 应用商店中进行部署。
@@ -144,7 +144,7 @@ Prometheus 可在 Rancher v2.0 应用商店进行部署。 如果您的集群中
 # helm install --name prometheus-adapter banzai-charts/prometheus-adapter --set prometheus.url="http://prometheus.mycompany.io",prometheus.port="80" --namespace kube-system
 ```
 
-### 检查 `prometheus-adapter` 是否正常运行。 检查服务容器并登录 `kube-system` 名称空间。
+### 检查 `prometheus-adapter` 是否正常运行。 检查服务容器并登录 `kube-system` 命名空间。
 
 1.  检查 pod 是否正在运行。 输入以下命令。
 

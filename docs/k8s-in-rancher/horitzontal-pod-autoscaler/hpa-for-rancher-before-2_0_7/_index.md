@@ -42,7 +42,7 @@ services:
 
 ## 使用资源指标配置 HPA 进行自动扩缩容
 
-要基于 CPU 和内存使用等资源指标创建 HPA 资源，您需要在 Kubernetes 集群的 `kube-system` 名称空间中部署 `metrics-server` 软件包。 这种部署允许 HPA 使用 `metrics.k8s.io` API。
+要基于 CPU 和内存使用等资源指标创建 HPA 资源，您需要在 Kubernetes 集群的 `kube-system` 命名空间中部署 `metrics-server` 软件包。 这种部署允许 HPA 使用 `metrics.k8s.io` API。
 
 > **前提条件：**您必须运行 `kubectl` 1.8 或更高版本。
 
@@ -60,7 +60,7 @@ services:
    # kubectl create -f metrics-server/deploy/1.8+/
    ```
 
-1. 检查 `metrics-server` 是否正常运行。 在 `kube-system` 名称空间里检查对应的 pod 和日志是否正常。
+1. 检查 `metrics-server` 是否正常运行。 在 `kube-system` 命名空间里检查对应的 pod 和日志是否正常。
 
    1. 检查 pod 状态是否为 `running` 状态。 输入以下命令：
 

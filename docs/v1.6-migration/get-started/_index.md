@@ -77,9 +77,9 @@ Rancher v2.x 允许你在任何地方启动 Kubernetes 集群。 使用以下方
 
 在 Rancher v1.6 中，使用*堆栈*将属于你应用程序的服务分组在一起。在 v2.x 中，你需要去[创建命名空间](/docs/cluster-admin/projects-and-namespaces/_index)，出于相同的目的，它们相当于 v2.x 的堆栈。
 
-在 Rancher v2.x 中，名称空间是项目的子对象。创建项目时，会向该项目添加一个`default`命名空间，但你可以创建自己的名称空间以与 v1.6 的堆栈并行。
+在 Rancher v2.x 中，命名空间是项目的子对象。创建项目时，会向该项目添加一个`default`命名空间，但你可以创建自己的命名空间以与 v1.6 的堆栈并行。
 
-在迁移过程中，如果你未明确定义服务应部署到的名称空间，则会将其部署到`default`命名空间。
+在迁移过程中，如果你未明确定义服务应部署到的命名空间，则会将其部署到`default`命名空间。
 
 与 v1.6 一样，Rancher v2.x 支持命名空间内和跨命名空间的服务发现 (我们很快将会了解到[服务发现](/docs/v1.6-migration/discover-services/_index))。
 
