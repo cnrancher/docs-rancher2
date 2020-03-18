@@ -23,7 +23,7 @@ services:
 
 另外，为了减少 etcd 磁盘上的 IO 争用，可以将专用设备用于 data 和 wal 目录。根据 etcd 最佳实践，镜像 RAID 配置是不必要的，因为 etcd 会在集群中的节点之间复制数据。您可以使用剥离 RAID 配置来增加可用的 IOPS。
 
-要在 RKE 群集中实施此解决方案，`/var/lib/etcd/dataand` 和 `/var/lib/etc/wal`目录将需要在底层主机上挂载磁盘并对其进行格式化。在`etcd`服务的`extra_args`指令中，必须包含`wal_dir`目录。如果不指定`wal_dir`，则 etcd 进程将尝试在`wal`权限不足的情况下操纵基础安装。
+要在 RKE 集群中实施此解决方案，`/var/lib/etcd/dataand` 和 `/var/lib/etc/wal`目录将需要在底层主机上挂载磁盘并对其进行格式化。在`etcd`服务的`extra_args`指令中，必须包含`wal_dir`目录。如果不指定`wal_dir`，则 etcd 进程将尝试在`wal`权限不足的情况下操纵基础安装。
 
 ```yaml
 ## RKE cluster.yml

@@ -2,101 +2,94 @@
 title: '3、暴露服务'
 ---
 
-In testing environments, you usually need to route external traffic to your cluster containers by using an unadvertised IP and port number, providing users access to their apps. You can accomplish this goal using port mapping, which exposes a workload (i.e., service) publicly over a specific port, provided you know your node IP address(es). You can either map a port using HostPorts (which exposes a service on a specified port on a single node) or NodePorts (which exposes a service on _all_ nodes on a single port).
+在测试环境中，通常需要使用未发布的 IP 和端口号将外部流量路由到集群容器，以便用户能够访问其应用程序。你可以使用端口映射来实现此目标，只要你知道节点 IP 地址，该映射就会通过特定端口暴露工作负载（即服务）。你可以使用 HostPorts（在单个节点的指定端口上公开服务）或 NodePorts（在单个端口的*所有*节点上公开服务）映射端口。
 
-Use this document to correct workloads that list `ports` in `output.txt` . You can correct it by either setting a HostPort or a NodePort.
+使用本文档修改在`output.txt`中列出`ports`的工作负载。你可以通过设置 HostPort 或 NodePort 来修改它。
 
-<figcaption>Resolve <code>ports</code> for the <code>web</code> Workload</figcaption>
+<figcaption>
+为“web”工作负载解决“ports”问题
+</figcaption>
 
-![Resolve Ports](/img/rancher/resolve-ports.png)
+![解析端口](/img/rancher/resolve-ports.png)
 
-### In This Document
+## 在 Rancher v2.x 中公开服务有何不同?
 
-<!-- TOC -->
+在 Rancher v1.6 中，我们使用了*Port Mapping*来公开你和你的用户可以访问服务的 IP 地址和端口。
 
-* [What's Different About Exposing Services in Rancher v2.x?](#what-s-different-about-exposing-services-in-rancher-v2-x)
-* [HostPorts](#hostport)
-* [Setting HostPort](#setting-hostport)
-* [NodePorts](#nodeport)
-* [Setting NodePort](#setting-nodeport)
+在 Rancher v2.x 中，暴露服务的机制和术语已更改和扩展。现在，你有两个端口映射选项：_HostPorts_（与 v1.6 端口映射最相似，允许你将应用程序暴露在单个 IP 和端口上）和*NodePorts*（允许你在集群*所有*节点上映射端口， 不只是一个）。
 
-<!-- /TOC -->
+可惜的是，迁移工具 CLI 无法解析端口映射。如果要从 v1.6 迁移到 v2.x 的服务有端口映射，则必须设置[HostPort](#什么是-hostport？)或[NodePort](#什么是-nodeport？)作为替代。
 
-### What's Different About Exposing Services in Rancher v2.x?
+## 什么是 HostPort？
 
-In Rancher v1.6, we used the term _Port Mapping_ for exposing an IP address and port where your you and your users can access a service.
+_HostPort_ 是在运行一个或多个 Pod 的节点上上向公众暴露的端口。到节点和公开端口（`<HOST_IP>：<HOSTPORT>`）的流量将路由到相应的容器端口。在 Rancher v2.x 中为 Kubernetes Pod 使用 HostPort 与在 Rancher v1.6 中为容器创建公共端口映射同义。
 
-In Rancher v2.x, the mechanisms and terms for service exposure have changed and expanded. You now have two port mapping options: _HostPorts_ (which is most synonymous with v1.6 port mapping, allows you to expose your app at a single IP and port) and _NodePorts_ (which allows you to map ports on _all_ of your cluster nodes, not just one).
+在下图中，用户试图访问 Nginx 实例，该实例在端口 80 的 Pod 中运行。但是，Nginx 部署的 HostPort 为 9890。用户可以通过浏览其主机 IP 地址加上正在使用的 HostPort 来连接到此 Pod（当前例子是 9890 端口）。
 
-Unfortunately, port mapping cannot be parsed by the migration-tools CLI. If the services you're migrating from v1.6 to v2.x have port mappings set, you'll have to either set a [HostPort](#hostport) or [NodePort](#nodeport) as a replacement.
+![HostPort图解](/img/rancher/hostPort.svg)
 
-### HostPort
+#### HostPort 优点
 
-A _HostPort_ is a port exposed to the public on a _specific node_ running one or more pod. Traffic to the node and the exposed port ( `<HOST_IP>:<HOSTPORT>` ) are routed to the requested container's private port. Using a HostPort for a Kubernetes pod in Rancher v2.x is synonymous with creating a public port mapping for a container in Rancher v1.6.
+- 主机上可用的任何端口都可以暴露。
+- 配置很简单，并且可以在 Kubernetes pod 规范中直接设置 HostPort。与 NodePort 不同，无需创建其他对象即可公开你的应用程序。
 
-In the following diagram, a user is trying to access an instance of Nginx, which is running within a pod on port 80. However, the Nginx deployment is assigned a HostPort of 9890. The user can connect to this pod by browsing to its host IP address, followed by the HostPort in use (9890 in case).
+#### HostPort 缺点
 
-![HostPort Diagram](/img/rancher/hostPort.svg)
+- 限制 Pod 的调度选项，仅能使用所选端口处于空闲状态的主机。
+- 如果工作负载规模大于 Kubernetes 集群中的节点数，则部署将失败。
+- 指定相同 HostPort 的任何两个工作负载无法部署到同一节点。
+- 如果你的 Pod 运行所在的主机不可用，Kubernetes 会将 Pod 重新调度到其他节点。因此，如果你的工作负载的 IP 地址发生更改，则应用程序的外部客户端将失去对 Pod 的访问权限。当你重新启动 Pod 时，也会发生同样的事情，Kubernetes 会将其重新调度到另一个节点。
 
-##### HostPort Pros
+## 设置 HostPort
 
-* Any port available on the host can be exposed.
-* Configuration is simple, and the HostPort is set directly in the Kubernetes pod specifications. Unlike NodePort, no other objects need to be created to expose your app.
+你可以使用 Rancher v2.x UI 为已迁移的工作负载（即服务）设置 HostPort。要添加 HostPort，请浏览到包含你的工作负载的项目，然后编辑要公开的每个工作负载，如下所示。将服务容器公开的端口映射到目标节点上公开的 HostPort。
 
-##### HostPort Cons
+例如，对于我们一直用作示例的从 v1.6 解析的 web-deployment.yml 文件，我们将编辑其 Kubernetes 清单，设置发布容器使用的端口，然后声明一个监听 HostPort 的端口。所选择的端口(`9890`)，如下所示。然后，你可以通过单击 Rancher UI 中创建的链接来访问工作负载。
 
-* Limits the scheduling options for your pod, as only hosts with vacancies for your chosen port can be used.
-* If the scale of your workload is larger than the number of nodes in your Kubernetes cluster, the deployment fails.
-* Any two workloads that specify the same HostPort cannot be deployed to the same node.
-* If the host where your pods are running becomes unavailable, Kubernetes reschedules the pods to different nodes. Thus, if the IP address for your workload changes, external clients of your application will lose access to the pod. The same thing happens when you restart your pods—Kubernetes reschedules them to a different node.
+<figcaption>
+端口映射：设置 HostPort
+</figcaption>
 
-### Setting HostPort
+![设置HostPort](/img/rancher/set-hostport.gif)
 
-You can set a HostPort for migrated workloads (i.e., services) using the Rancher v2.x UI. To add a HostPort, browse to the project containing your workloads, and edit each workload that you want to expose, as shown below. Map the port that your service container exposes to the HostPort exposed on your target node.
+## 什么是 NodePort？
 
-For example, for the web-deployment.yml file parsed from v1.6 that we've been using as a sample, we would edit its Kubernetes manifest, set the publish the port that the container uses, and then declare a HostPort listening on the port of your choice ( `9890` ) as shown below. You can then access your workload by clicking the link created in the Rancher UI.
+*NodePort*是向*每一个*集群节点开放的端口。当任何集群主机 IP 地址收到向 NodePort 指定的端口的请求时，NodePort（这是一个 Kubernetes 服务）会将流量路由到特定的 Pod，而不管它在哪个节点上运行。NodePort 提供了一个静态端点，外部请求可以可靠地到达你的 Pod。
 
-<figcaption>Port Mapping: Setting HostPort</figcaption>
+NodePorts 可帮助你规避 IP 地址的缺点。尽管可以通过 pod 的 IP 地址访问 Pod，但它们本质上是一次性的。pod 通常会被销毁并重新创建，每次重建都会获得一个新的 IP 地址。因此，pod IP 地址不是访问 pod 的可靠方法。NodePorts 通过提供始终可以访问它们的静态服务来帮助你解决此问题。即使你的 pod 更改了其 IP 地址，依赖于它们的外部客户端也可以继续访问它们而不会受到干扰，也不会感知到后端 pod 重新创建了。
 
-![Set HostPort](/img/rancher/set-hostport.gif)
+在下图中，用户试图连接到 Rancher 管理的 Kubernetes 集群中运行的 Nginx 实例。尽管他知道 NodePort Nginx 正在运行（在这种情况下为 30216），但他不知道 Pod 在哪台节点上允许。但是，启用 NodePort 后，他可以使用集群中*任何*节点的 IP 地址连接到 Pod。Kubeproxy 会将请求转发到正确的节点和 Pod。
 
-### NodePort
+![NodePort图解](/img/rancher/nodePort.svg)
 
-A _NodePort_ is a port that's open to the public _on each_ of your cluster nodes. When the NodePort receives a request for any of the cluster hosts' IP address for the set NodePort value, NodePort (which is a Kubernetes service) routes traffic to a specific pod, regardless of what node it's running on. NodePort provides a static endpoint where external requests can reliably reach your pods.
+NodePort 在 Kubernetes 集群中的节点的内部 IP 可用。如果要在集群外部公开 Pod，请结合使用 NodePort 和外部负载均衡器。来自集群外部对 `<NodeIP>:<NodePort>` 的流量请求将定向到工作负载。`<NodeIP>` 可以是 Kubernetes 集群中任何节点的 IP 地址。
 
-NodePorts help you circumvent an IP address shortcoming. Although pods can be reached by their IP addresses, they are disposable by nature. Pods are routinely destroyed and recreated, getting a new IP address with each replication. Therefore, IP addresses are not a reliable way to access your pods. NodePorts help you around this issue by providing a static service where they can always be reached. Even if your pods change their IP addresses, external clients dependent on them can continue accessing them without disruption, all without any knowledge of the pod re-creation occurring on the back end.
+#### NodePort 优点
 
-In the following diagram, a user is trying to connect to an instance of Nginx running in a Kubernetes cluster managed by Rancher. Although he knows what NodePort Nginx is operating on (30216 in this case), he does not know the IP address of the specific node that the pod is running on. However, with NodePort enabled, he can connect to the pod using the IP address for _any_ node in the cluster. Kubeproxy will forward the request to the correct node and pod.
+- 创建 NodePort 服务为你的工作负载容器提供了一个静态的公共端点。在那里，即使 Pod 已被破坏，Kubernetes 也可以在集群中的任何位置部署工作负载，而无需更改公共端点。
+- Pod 的规模不受集群中节点数量的限制。NodePort 允许将公共访问与 Pod 的数量和位置分离。
 
-![NodePort Diagram](/img/rancher/nodePort.svg)
+#### NodePort 缺点
 
-NodePorts are available within your Kubernetes cluster on an internal IP. If you want to expose pods external to the cluster, use NodePorts in conjunction with an external load balancer. Traffic requests from outside your cluster for `<NodeIP>:<NodePort>` are directed to the workload. The `<NodeIP>` can be the IP address of any node in your Kubernetes cluster.
+- 使用 NodePort 时，`<NodeIP>:<NodePort>`将在你的 Kubernetes 集群中所有节点上预留，即使工作负载从未部署到其他节点。
+- 你只能在可配置范围内指定端口 (默认, 是 `30000-32767` 之间)。
+- 需要一个额外的 Kubernetes 对象（类型为 NodePort 的 Kubernetes 服务）来暴露你的工作负载。因此，找到应用程序的暴露方式并不直接。
 
-##### NodePort Pros
+## 设置 NodePort
 
-* Creating a NodePort service provides a static public endpoint to your workload pods. There, even if the pods are destroyed, Kubernetes can deploy the workload anywhere in the cluster without altering the public endpoint.
-* The scale of the pods is not limited by the number of nodes in the cluster. NodePort allows decoupling of public access from the number and location of pods.
+你可以使用 Rancher v2.x UI 为迁移的工作负载（即服务）设置 NodePort。要添加 NodePort，请浏览到包含你的工作负载的项目，然后编辑要公开的每个工作负载，如下所示。将服务容器公开的端口映射到 NodePort，你可以通过每个集群节点访问该端口。
 
-##### NodePort Cons
+例如，对于从我们一直用作示例的 v1.6 解析的`web-deployment.yml`文件，我们将编辑其 Kubernetes 清单，设置发布容器使用的端口，然后声明一个 NodePort。然后，你可以通过单击 Rancher UI 中创建的链接来访问工作负载。
 
-* When a NodePort is used, that `<NodeIP>:<NodePort>` is reserved in your Kubernetes cluster on all nodes, even if the workload is never deployed to the other nodes.
-* You can only specify a port from a configurable range (by default, it is `30000-32767` ).
-* An extra Kubernetes object (a Kubernetes service of type NodePort) is needed to expose your workload. Thus, finding out how your application is exposed is not straightforward.
-
-### Setting NodePort
-
-You can set a NodePort for migrated workloads (i.e., services) using the Rancher v2.x UI. To add a NodePort, browse to the project containing your workloads, and edit each workload that you want to expose, as shown below. Map the port that your service container exposes to a NodePort, which you'll be able to access from each cluster node.
-
-For example, for the `web-deployment.yml` file parsed from v1.6 that we've been using as a sample, we would edit its Kubernetes manifest, set the publish the port that the container uses, and then declare a NodePort. You can then access your workload by clicking the link created in the Rancher UI.
-
-> **Note:**
+> **注意:**
 >
-> - If you set a NodePort without giving it a value, Rancher chooses a port at random from the following range: `30000-32767` .
-> - If you manually set a NodePort, you must assign it a value within the `30000-32767` range.
+> - 如果设置 NodePort 时未指定其值，则 Rancher 将从以下范围内随机选择一个端口： `30000-32767`。
+> - 如果你手动设置 NodePort，则端口必须在 `30000-32767` 之间。
 
-<figcaption>Port Mapping: Setting NodePort</figcaption>
+<figcaption>
+端口映射：设置 NodePort
+</figcaption>
 
-![Set NodePort](/img/rancher/set-nodeport.gif)
+![设置NodePort](/img/rancher/set-nodeport.gif)
 
-#### [Next: Configure Health Checks](/docs/v1.6-migration/monitor-apps)
-
+## [下一步: 配置健康检查](/docs/v1.6-migration/monitor-apps/_index)

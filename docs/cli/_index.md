@@ -12,14 +12,14 @@ Rancher CLI(命令行界面)是一个命令行工具，可用于与 Rancher 进�
 
 下载 Rancher CLI 后，需要进行一些配置。 Rancher CLI 需要：
 
-* 你的[Rancher Server URL](/docs/admin-settings/_index)，用于连接到 Rancher Server。
-* API Bearer Token，用于与 Rancher 进行身份验证。有关获取 Bearer Token 的更多信息，请参见[创建 API 密钥](/docs/user-settings/api-keys/_index)。
+- 你的[Rancher Server URL](/docs/admin-settings/_index)，用于连接到 Rancher Server。
+- API Bearer Token，用于与 Rancher 进行身份验证。有关获取 Bearer Token 的更多信息，请参见[创建 API 密钥](/docs/user-settings/api-keys/_index)。
 
 ## CLI 认证
 
 在使用 Rancher CLI 控制 Rancher Server 之前，必须使用 API​​ Bearer Token 进行身份验证。使用以下命令登录(用你的信息替换 `<BEARER_TOKEN>` 和 `<SERVER_URL>` )：
 
-``` bash
+```bash
 $ ./rancher login https://<SERVER_URL> --token <BEARER_TOKEN>
 ```
 
@@ -31,7 +31,7 @@ $ ./rancher login https://<SERVER_URL> --token <BEARER_TOKEN>
 
 **例如： `./rancher context switch` 输出**
 
-``` 
+```
 User:rancher-cli-directory user$ ./rancher context switch
 NUMBER    CLUSTER NAME   PROJECT ID              PROJECT NAME
 1         cluster-2      c-7q96s:p-h4tmb         project-2
@@ -43,7 +43,7 @@ Select a Project:
 
 输入一个数字后，控制台会显示一条消息，说明你已更改项目。
 
-``` 
+```
 INFO[0005] Setting new context to project project-1
 INFO[0005] Saving config to /Users/markbishop/.rancher/cli2.json
 ```
@@ -54,24 +54,23 @@ INFO[0005] Saving config to /Users/markbishop/.rancher/cli2.json
 
 | 指令                                          | 作用                                                                                                                                                                                                                                                                       |
 | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `apps, [app]` | 对应用商店 App 执行操作 (例如，单个[Helm charts](https://helm.sh/docs/) 或 [Rancher charts](/docs/catalog/custom/_index))。                                                                                                                                                |
-| `catalog` | 对[应用商店](/docs/catalog/_index)执行操作。                                                                                                                                                                                                                               |
-| `clusters, [cluster]` | 对你的[集群](/docs/cluster-provisioning/_index)执行操作。                                                                                                                                                                                                                  |
-| `context` | 在 Rancher 的[项目](/docs/cluster-admin/projects-and-namespaces/_index)间切换。请看示例[选择项目](#选择项目)。                                                                                                                                                             |
+| `apps, [app]`                                 | 对应用商店 App 执行操作 (例如，单个[Helm charts](https://helm.sh/docs/) 或 [Rancher charts](/docs/catalog/custom/_index))。                                                                                                                                                |
+| `catalog`                                     | 对[应用商店](/docs/catalog/_index)执行操作。                                                                                                                                                                                                                               |
+| `clusters, [cluster]`                         | 对你的[集群](/docs/cluster-provisioning/_index)执行操作。                                                                                                                                                                                                                  |
+| `context`                                     | 在 Rancher 的[项目](/docs/cluster-admin/projects-and-namespaces/_index)间切换。请看示例[选择项目](#选择项目)。                                                                                                                                                             |
 | `inspect [OPTIONS] [RESOURCEID RESOURCENAME]` | 显示有关[Kubernetes 资源](https://kubernetes.io/docs/reference/kubectl/cheatsheet/#resource-types)或 Rancher 资源(例如：[项目](/docs/cluster-admin/projects-and-namespaces/_index)和[工作负载](/docs/k8s-in-rancher/workloads/_index))的详细信息，通过名称或 ID 指定资源。 |
-| `kubectl` | 执行[kubectl 指令](https://kubernetes.io/docs/reference/kubectl/overview/#operations)。                                                                                                                                                                                    |
-| `login, [l]` | 登录进一个 Rancher Server。例如：[CLI 认证](#cli认证)。                                                                                                                                                                                                                    |
-| `namespaces, [namespace]` | 对[命名空间](/docs/cluster-admin/projects-and-namespaces/_index)执行操作。                                                                                                                                                                                                 |
-| `nodes, [node]` | 对[节点](/docs/overview/concepts/_index)执行操作。                                                                                                                                                                                                                         |
-| `projects, [project]` | 对[项目](/docs/cluster-admin/projects-and-namespaces/_index)执行操作。                                                                                                                                                                                                     |
-| `ps` | 显示项目中的[工作负载](/docs/k8s-in-rancher/workloads/_index)。                                                                                                                                                                                                            |
-| `settings, [setting]` | 显示当前 Rancher Server 的设置。                                                                                                                                                                                                                                           |
-| `ssh` | 使用 SSH 协议连接到群集里的节点。                                                                                                                                                                                                                                          |
-| `help, [h]` | 显示命令列表或某个命令的帮助信息。                                                                                                                                                                                                                                         |
+| `kubectl`                                     | 执行[kubectl 指令](https://kubernetes.io/docs/reference/kubectl/overview/#operations)。                                                                                                                                                                                    |
+| `login, [l]`                                  | 登录进一个 Rancher Server。例如：[CLI 认证](#cli认证)。                                                                                                                                                                                                                    |
+| `namespaces, [namespace]`                     | 对[命名空间](/docs/cluster-admin/projects-and-namespaces/_index)执行操作。                                                                                                                                                                                                 |
+| `nodes, [node]`                               | 对[节点](/docs/overview/concepts/_index)执行操作。                                                                                                                                                                                                                         |
+| `projects, [project]`                         | 对[项目](/docs/cluster-admin/projects-and-namespaces/_index)执行操作。                                                                                                                                                                                                     |
+| `ps`                                          | 显示项目中的[工作负载](/docs/k8s-in-rancher/workloads/_index)。                                                                                                                                                                                                            |
+| `settings, [setting]`                         | 显示当前 Rancher Server 的设置。                                                                                                                                                                                                                                           |
+| `ssh`                                         | 使用 SSH 协议连接到集群里的节点。                                                                                                                                                                                                                                          |
+| `help, [h]`                                   | 显示命令列表或某个命令的帮助信息。                                                                                                                                                                                                                                         |
 
 ## Rancher CLI 帮助命令
 
 使用 CLI 登录到 Rancher Server 后，输入 `./rancher --help` 可以查看可用的命令列表。
 
 所有命令都接受 `--help` 参数，可以通过改参数查看每个命令行的用法。
-

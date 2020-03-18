@@ -4,7 +4,7 @@ title: 问题排查
 
 ## 去哪里排查？
 
-大部分常见问题排查都将在这 3 个名称空间中的对象上进行。
+大部分常见问题排查都将在这 3 个命名空间中的对象上进行。
 
 - `cattle-system` - `rancher` deployment 和 pods。
 - `ingress-nginx` - Ingress controller pods 和 services。
@@ -22,7 +22,7 @@ title: 问题排查
 
 ### Rancher 是否在运行
 
-使用`kubectl`来检查`cattle-system`系统名称空间，并查看 Rancher 容器是否处于 Running 状态。
+使用`kubectl`来检查`cattle-system`系统命名空间，并查看 Rancher 容器是否处于 Running 状态。
 
 ```
 kubectl -n cattle-system get pods
@@ -106,7 +106,7 @@ Events:
 
 ### 你自己提供的证书
 
-您的证书将直接应用于`cattle-system`名称空间中的 Ingress 对象。
+您的证书将直接应用于`cattle-system`命名空间中的 Ingress 对象。
 
 检查 Ingress 对象的状态，并查看其是否准备就绪。
 
