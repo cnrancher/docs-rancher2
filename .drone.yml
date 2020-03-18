@@ -12,7 +12,7 @@ steps:
       - name: vol
         path: /website
   - name: preview
-    image: loganhz/drone-oss:0.0.3
+    image: loganhz/drone-oss:0.0.4
     settings:
       dist: /website/build
       dist_ignore: img/
@@ -32,7 +32,7 @@ steps:
       event:
         - push
   - name: production
-    image: loganhz/drone-oss:0.0.3
+    image: loganhz/drone-oss:0.0.4
     settings:
       dist: /website/build
       dist_ignore: img/
