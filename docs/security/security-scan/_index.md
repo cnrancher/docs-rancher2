@@ -22,7 +22,7 @@ Rancher 会根据您的 Kubernetes 版本，使用合适的[安全标准](https:
 
 相似的，您可以查看对应的 Kubernetes 版本的[Rancher 自测指南](/docs/security/_index#cis-benchmark-和自测指南)中的 1.3.6 节，从而获取如何手动检查这个安全问题的方法。
 
-## 前提条件
+## 先决条件
 
 如果想要对集群运行安全扫描并生成报告，您必须是[系统管理员](/docs/admin-settings/rbac/global-permissions/_index)或[集群管理员](/docs/admin-settings/rbac/cluster-project-roles/_index)。
 

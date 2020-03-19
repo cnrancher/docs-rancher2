@@ -2,75 +2,79 @@
 title: 创建腾讯 TKE 集群
 ---
 
-_Available as of v2.2.0_
+_从 v2.2.0 开始可用_
 
-You can use Rancher to create a cluster hosted in Tencent Kubernetes Engine (TKE). Rancher has already implemented and packaged the [cluster driver](/docs/admin-settings/drivers/cluster-drivers/) for TKE, but by default, this cluster driver is `inactive` . In order to launch TKE clusters, you will need to [enable the TKE cluster driver](/docs/admin-settings/drivers/cluster-drivers/#activating-deactivating-cluster-drivers). After enabling the cluster driver, you can start provisioning TKE clusters.
+您可以使用 Rancher 创建一个托管于 Tencent Kubernetes Engine（TKE）中的集群。Rancher 已经为 TKE 实现并打包了针对 TKE 的[集群驱动](/docs/admin-settings/drivers/cluster-drivers/_index)，但是默认情况下，这个集群驱动是`未启用的`。为了启动 TKE 集群，您需要先[启用 TKE 集群驱动程序](/docs/admin-settings/drivers/cluster-drivers/_index)。启用集群驱动后，可以开始配置 TKE 集群。
 
-### Prerequisites in Tencent
+### 先决条件
 
-> **Note**
-> Deploying to TKE will incur charges.
+> **注意**
+> 部署到 TKE 将会产生费用。
 
-1. Make sure that the account you will be using to create the TKE cluster has the appropriate permissions by referring to the [Cloud Access Management](https://intl.cloud.tencent.com/document/product/598/10600) documentation for details.
+1. 请确保您将用于创建 TKE 集群的帐户具有适当的权限，详细信息请参考[云访问管理](https://intl.cloud.tencent.com/document/product/598/10600)文档。
 
-2. Create a [Cloud API Secret ID and Secret Key](https://console.cloud.tencent.com/capi).
+1. 创建[云 API 密钥 ID 和密钥](https://console.cloud.tencent.com/capi)。
 
-3. Create a [Private Network and Subnet](https://intl.cloud.tencent.com/document/product/215/4927) in the region that you want to deploy your Kubernetes cluster.
+1. 在您要部署 Kubernetes 集群的区域中创建[专用网络和子网](https://intl.cloud.tencent.com/document/product/215/4927)。
 
-4. Create a [SSH key pair](https://intl.cloud.tencent.com/document/product/213/6092). This key is used to access the nodes in the Kubernetes cluster.
+1. 创建[SSH 密钥对](https://intl.cloud.tencent.com/document/product/213/6092)，此密钥用于访问 Kubernetes 集群中的节点。
 
-### Create a TKE Cluster
+### 创建 TKE 集群
 
-1. From the **Clusters** page, click **Add Cluster**.
+1. 从 **集群** 页面，单击 **添加集群**。
 
-2. Choose **Tencent TKE**.
+1. 选择 **Tencent TKE**。
 
-3. Enter a **Cluster Name**.
+1. 输入 **集群名称**。
 
-4. {{< step_create-cluster_member-roles >}}
+1. 通过**成员角色**来设置用户访问集群的权限。
 
-5. Configure **Account Access** for the TKE cluster. Complete each drop-down and field using the information obtained in [Prerequisites](#prerequisites).
+   - 点击**添加成员**将需要访问这个集群的用户添加到成员中。
+   - 在**角色**下拉菜单中选择每个用户的权限。
 
-| Option     | Description                                                                        |
-|------------|------------------------------------------------------------------------------------|
-| Region     | From the drop-down chooses the geographical region in which to build your cluster. |
-| Secret ID  | Enter the Secret ID that you obtained from the Tencent Cloud Console.              |
-| Secret Key | Enter the Secret key that you obtained from Tencent Cloud Console.                 |
+1. 为 TKE 集群配置**帐户访问**。 使用[先决条件](#先决条件)中获得的信息完成每个下拉列表和字段。
 
-6. Click `Next: Configure Cluster` to set your TKE cluster configurations.
+   | 选项       | 描述                                         |
+   | ---------- | -------------------------------------------- |
+   | 区域       | 从下拉列表中选择要在其中构建集群的地理区域。 |
+   | Secret ID  | 输入从腾讯云控制台获取的 Secret ID。         |
+   | Secret Key | 输入从腾讯云控制台获取的 Secret key。        |
 
-| Option                 | Description                                                                                                                                                               |
-|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Kubernetes Version     | The TKE only supports Kubernetes version 1.10.5 now.                                                                                                                      |
-| Node Count             | Enter the amount of worker node you want to purchase for your Kubernetes cluster, up to 100.                                                                              |
-| VPC                    | Select the VPC name that you have created in the Tencent Cloud Console.                                                                                                   |
-| Container Network CIDR | Enter the CIDR range of your Kubernetes cluster, you may check the available range of the CIDR in the VPC service of the Tencent Cloud Console. Default to 172.16.0.0/16. |
+1. 单击 `下一步: 配置集群` 来设置您的 TKE 集群配置。
 
-   **Note:** If you are editing the cluster in the `cluster.yml` instead of the Rancher UI, note that as of Rancher v2.3.0, cluster configuration directives must be nested under the `rancher_kubernetes_engine_config` directive in `cluster.yml` . For more information, refer to the section on [the config file structure in Rancher v2.3.0+.](/docs/cluster-provisioning/rke-clusters/options/#config-file-structure-in-rancher-v2-3-0)
+   | 选项            | 描述                                                                                                          |
+   | --------------- | ------------------------------------------------------------------------------------------------------------- |
+   | Kubernetes 版本 | TKE 现在只支持 Kubernetes 版本 1.10.5。                                                                       |
+   | 节点数量        | 输入您希望为 Kubernetes 集群购买的工作节点数量，最多 100 个。                                                 |
+   | VPC             | 选择您在腾讯云控制台中创建的 VPC 名称。                                                                       |
+   | 容器 CIDR 网络  | 输入 Kubernetes 集群的 CIDR 范围，您可以在腾讯云控制台的 VPC 服务中查看 CIDR 的可用范围。默认 172.16.0.0/16。 |
 
-7. Click `Next: Select Instance Type` to choose the instance type that will use for your TKE cluster.
+1. 单击 `下一步: 选择实例类型` 选择将用于 TKE 集群的实例类型。
 
-| Option            | Description                                                                                                                            |
-|-------------------|----------------------------------------------------------------------------------------------------------------------------------------|
-| Availability Zone | Choose the availability zone of the VPC region.                                                                                        |
-| Subnet            | Select the Subnet that you have created within the VPC, and add a new one if you don't have it in the chosen availability zone.        |
-| Instance Type     | From the drop-down chooses the VM instance type that you want to use for the TKE cluster, default to S2. MEDIUM4 (CPU 2 Memory 4 GiB). |
+   | 选项     | 描述                                                                                    |
+   | -------- | --------------------------------------------------------------------------------------- |
+   | 可用区   | 选择 VPC 的可用区。                                                                     |
+   | 子网     | 选择在 VPC 中创建的子网，如果在选择的可用区中没有子网，则添加一个新的子网。             |
+   | 实例类型 | 从下拉菜单中选择要用于 TKE 集群的 VM 实例类型，默认为 S2.MEDIUM4 (CPU 2 Memory 4 GiB)。 |
 
-8. Click `Next: Configure Instance` to configure the VM instance that will use for your TKE cluster.
+1. 单击 `下一步: 配置实例` 配置将用于 TKE 集群的 VM 实例。
 
-| Option           | Description                                                                                                                                             |
-|------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Operating System | The name of the operating system, currently supports Centos7.2x86_64 or ubuntu16.04.1 LTSx86_64                                                         |
-| Security Group   | Security group ID, default does not bind any security groups.                                                                                           |
-| Root Disk Type   | System disk type. System disk type restrictions are detailed in the [CVM instance configuration](https://cloud.tencent.com/document/product/213/11518). |
-| Root Disk Size   | System disk size. Linux system adjustment range is 20 - 50G, step size is 1.                                                                            |
-| Data Disk Type   | Data disk type, default value to the SSD cloud drive                                                                                                    |
-| Data Disk Size   | Data disk size (GB), the step size is 10                                                                                                                |
-| Band Width Type  | Type of bandwidth, PayByTraffic or PayByHour                                                                                                            |
-| Band Width       | Public network bandwidth (Mbps)                                                                                                                         |
-| Key Pair         | Key id, after associating the key can be used to logging to the VM node                                                                                 |
+   | 选项         | 描述                                                                                                     |
+   | ------------ | -------------------------------------------------------------------------------------------------------- |
+   | 操作系统     | 操作系统的名称，当前支持 Centos7.2x86_64 或 ubuntu16.04.1 LTSx86_64。                                    |
+   | 安全组       | 安全组 ID，默认不绑定任何安全组。                                                                        |
+   | 根磁盘类型   | 系统磁盘类型。系统磁盘类型限制详见[CVM 实例配置](https://cloud.tencent.com/document/product/213/11518)。 |
+   | 根磁盘大小   | 系统磁盘大小。Linux 系统调整范围为 20-50G，步长为 1。                                                    |
+   | 数据磁盘类型 | 数据磁盘类型，SSD 云驱动器的默认值。                                                                     |
+   | 数据磁盘大小 | 数据磁盘大小（GB），步长为 10。                                                                          |
+   | 带宽类型     | 带宽类型、按流量计费或按小时计费。                                                                       |
+   | 带宽         | 公网带宽（Mbps）                                                                                         |
+   | 密钥对       | 密钥 id，在关联密钥后可以用来登录到 VM 节点。                                                            |
 
-9. Click **Create**.
+1. 单击 **创建**。
 
-{{< result_create-cluster >}}
+**结果：**
 
+- 你的集群创建成功并进入到**Provisioning**（启动中）的状态。Rancher 正在拉起你的集群。
+- 在集群状态变为**Active**（激活）状态后，你将可以开始访问你的集群。
+- 在**Active**的集群中，默认会有两个项目。`Default`项目（包括`default`命名空间）和`System`项目（包括`cattle-system`，`ingress-nginx`，`kube-public` 和 `kube-system`，如果这些命名空间存在的话）

@@ -365,7 +365,7 @@ module.exports = {
       'cluster-provisioning/node-requirements/_index',
       {
         type: 'category',
-        label: '生产环境节点配置清单',
+        label: '生产环境检查清单',
         items: [
           'cluster-provisioning/production/_index',
           'cluster-provisioning/production/recommended-architecture/_index',

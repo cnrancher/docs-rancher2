@@ -34,7 +34,7 @@ title: 迁移服务
 
 接下来，使用迁移工具 CLI 将所有 Cattle 环境中的所有堆栈导出到 Compose 文件中。然后，对于要迁移到 Rancher v2.x 的堆栈，将 Compose 文件转换为 Kubernetes 清单。
 
-> **前提条件:** 创建一个 [Account API Key](https://docs.rancher.com/docs/rancher/v1.6/en/api/v2-beta/api-keys/#account-api-keys) 使用迁移工具 CLI 时使用 Rancher v1.6 进行身份验证。
+> **先决条件:** 创建一个 [Account API Key](https://docs.rancher.com/docs/rancher/v1.6/en/api/v2-beta/api-keys/#account-api-keys) 使用迁移工具 CLI 时使用 Rancher v1.6 进行身份验证。
 
 1. 从 Rancher v1.6 导出适用于 Cattle 环境和堆栈的 Docker Compose 文件。
 
@@ -116,7 +116,7 @@ title: 迁移服务
 
 - 通过 Rancher CLI 部署
 
-  > **前提条件:** 为 Rancher v2.x [安装 Rancher CLI](/docs/cli/_index)
+  > **先决条件:** 为 Rancher v2.x [安装 Rancher CLI](/docs/cli/_index)
 
   使用以下 Rancher CLI 命令让 Rancher v2.x 部署应用程序。对于迁移工具 CLI 输出的每个 Kubernetes 清单，请输入以下命令之一，以将其导入 Rancherv2.x。
 
