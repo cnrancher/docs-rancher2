@@ -24,7 +24,7 @@ title: 为Rancher社区做出贡献
 | Types                  | https://github.com/rancher/types            | 该库存有 Rancher 2.x 所有 API 定义。                                                                                |
 | API Framework          | https://github.com/rancher/norman           | 该库是一个 API 框架，用于构建基于 Kubernetes CRD 和 Controller 的 Rancher 风格的 API。                              |
 | UI                     | https://github.com/rancher/ui               | 该库是 UI 的代码库。                                                                                                |
-| Rancher Docker Machine | https://github.com/rancher/machine          | 该库是使用节点驱动时使用的 Rancher Docker Machine 二进制文件的源。这是 `docker/machine` 库的 fork.                  |
+| Rancher Docker Machine | https://github.com/rancher/machine          | 该库是使用主机驱动时使用的 Rancher Docker Machine 二进制文件的源。这是 `docker/machine` 库的 fork.                  |
 | machine-package        | https://github.com/rancher/machine-package  | 该库用于构建 Rancher Docker Machine 二进制文件。                                                                    |
 | kontainer-engine       | https://github.com/rancher/kontainer-engine | 该库是 kontainer-engine 的源代码，kontainer-engine 是用于配置托管 Kubernetes 集群的工具。                           |
 | RKE                    | https://github.com/rancher/rke              | 该库是 Rancher Kubernetes Engine 的代码库，Rancher Kubernetes Engine 是在任何机器构建，配置 Kubernetes 集群的工具。 |

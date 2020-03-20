@@ -1,50 +1,50 @@
 ---
-title: 介绍
+title: 生产就绪集群检查清单
 ---
 
-In this section, we recommend best practices for creating the production-ready Kubernetes clusters that will run your apps and services.
+在本节中，我们将介绍如何创建可用于生产的 Kubernetes 业务集群。这个集群将用来运行您的应用程序和服务。
 
-For a list of requirements for your cluster, including the requirements for OS/Docker, hardware, and networking, refer to the section on [node requirements.](/docs/cluster-provisioning/node-requirements)
+关于对创建业务集群的节点的要求，例如操作系统/Docker、硬件和网络的需求，请参考[节点需求](/docs/cluster-provisioning/node-requirements/_index)。
 
-This is a shortlist of best practices that we strongly recommend for all production clusters.
+:::important 重要
+这里是最重要的一些最佳实践，我们强烈建议将这些最佳实践应用于全部的生产集群。
+:::
 
-For a full list of all the best practices that we recommend, refer to the [best practices section.](/docs/best-practices)
+有关我们建议的所有最佳实践的完整列表，请参阅[最佳实践部分](/docs/best-practices/_index)。
 
-#### Node Requirements
+## 节点需求
 
-* Make sure your nodes fulfill all of the [node requirements, ](/docs/cluster-provisioning/node-requirements/) including the port requirements.
+- 确保您的节点满足所有的[节点需求](/docs/cluster-provisioning/node-requirements/_index)，包括端口需求。
 
-#### Back up etcd
+## 备份 etcd
 
-* Enable etcd snapshots. Verify that snapshots are being created, and run a disaster recovery scenario to verify the snapshots are valid.etcd is the location where the state of your cluster is stored, and losing etcd data means losing your cluster. Make sure you configure [etcd Recurring Snapshots](/docs/backups/backups/ha-backups/#option-a-recurring-snapshots) for your cluster(s), and make sure the snapshots are stored externally (off the node) as well.
+- 启用 etcd 快照。验证快照是否被创建成功，并且进行一次灾难恢复来验证快照是否有效。etcd 中存储了你集群状态，丢失 etcd 数据意味着丢失集群。请确保为你的集群配置了[etcd 循环快照](/docs/backups/backups/ha-backups/_index)，并确保快照存储在外部（节点之外）。
 
-#### Cluster Architecture
+## 集群架构
 
-* Nodes should have one of the following role configurations:
-  + `etcd` 
-  + `controlplane` 
-  + `etcd` and `controlplane` 
-  + `worker` (the `worker` role should not be used or added on nodes with the `etcd` or `controlplane` role)
-* Have at least three nodes with the role `etcd` to survive losing one node. Increase this count for higher node fault toleration, and spread them across (availability) zones to provide even better fault tolerance.
-* Assign two or more nodes the `controlplane` role for master component high availability.
-* Assign two or more nodes the `worker` role for workload rescheduling upon node failure.
+- 节点应具有以下角色配置之一：
+  - `etcd`
+  - `controlplane`
+  - `etcd` 和 `controlplane`
+  - `worker` (不应在具有 `etcd` 或 `controlplane` 角色的节点上使用或添加 `worker` 角色)
+- 至少有三个角色为 `etcd` 的节点，来确保当失去一个节点时仍能存活。增加 etcd 节点数量以提高容错率，并将 etcd 其分散到不通可用区，以提供更好的容错能力。
+- 分配两个或多个节点为 `controlplane` 角色，以实现 master 组件的高可用性。
+- 分配两个或多个节点为 `worker` 角色，以在节点出现故障时，可以将工作负载重新调度。
 
-For more information on what each role is used for, refer to the [section on roles for nodes in Kubernetes.](/docs/cluster-provisioning/production/nodes-and-roles)
+有关每个角色的用途的更多信息，请参考[Kubernetes 中关于节点的角色一节](/docs/cluster-provisioning/production/nodes-and-roles/_index)。
 
-For more information about the
-number of nodes for each Kubernetes role, refer to the section on [recommended architecture.](/docs/overview/architecture-recommendations/)
+有关每个 Kubernets 角色的节点数的详细信息，请参阅[推荐的集群架构](/docs/cluster-provisioning/production/recommended-architecture/_index)。
 
-#### Logging and Monitoring
+## 日志记录和监控
 
-* Configure alerts/notifiers for Kubernetes components (System Service).
-* Configure logging for cluster analysis and post-mortems.
+- 为 Kubernetes 组件（系统服务）配置告警和通知程序。
+- 配置日志记录以进行集群分析和事后复盘。
 
-#### Reliability
+## 可靠性
 
-* Perform load tests on your cluster to verify that its hardware can support your workloads.
+- 在集群上执行压力测试，以验证其硬件能够支撑您的工作负载。
 
-#### Networking
+## 网络
 
-* Minimize network latency. Rancher recommends minimizing latency between the etcd nodes. The default setting for `heartbeat-interval` is `500` , and the default setting for `election-timeout` is `5000` . These [settings for etcd tuning](https://coreos.com/etcd/docs/latest/tuning.html) allow etcd to run in most networks (except really high latency networks).
-* Cluster nodes should be located within a single region. Most cloud providers provide multiple availability zones within a region, which can be used to create higher availability for your cluster. Using multiple availability zones is fine for nodes with any role. If you are using [Kubernetes Cloud Provider](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/) resources, consult the documentation for any restrictions (i.e.zone storage restrictions).
-
+- 最小化网络延迟。Rancher 建议最小化 etcd 节点之间的延迟。默认的`心跳间隔`为 `500`，默认的`选举超时`为`5000`。这些[etcd 调优设置](https://coreos.com/etcd/docs/latest/tuning.html)允许 etcd 在大多数网络（网络延迟特别高的情况下除外）中运行。
+- 集群节点应该位于单个区域内。大多数云厂商在一个区域内会提供多个可用区。这可以增加你的集群的高可用性。任何角色的节点都可以使用多可用区。如果您正在使用[Kubernetes Cloud Provider](/docs/cluster-provisioning/rke-clusters/options/Cloud-providers/_index)资源，请参考相关文档了解任何限制(例如可用区存储的限制)。

@@ -44,7 +44,7 @@ services:
 
 要基于 CPU 和内存使用等资源指标创建 HPA 资源，您需要在 Kubernetes 集群的 `kube-system` 命名空间中部署 `metrics-server` 软件包。 这种部署允许 HPA 使用 `metrics.k8s.io` API。
 
-> **前提条件：**您必须运行 `kubectl` 1.8 或更高版本。
+> **先决条件：**您必须运行 `kubectl` 1.8 或更高版本。
 
 1. 使用 `kubectl` 连接到您的 Kubernetes 集群。
 

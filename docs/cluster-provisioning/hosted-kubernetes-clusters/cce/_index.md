@@ -2,79 +2,84 @@
 title: 创建华为 CCE 集群
 ---
 
-_Available as of v2.2.0_
+_从 v2.2.0 开始可用_
 
-You can use Rancher to create a cluster hosted in Huawei Cloud Container Engine (CCE). Rancher has already implemented and packaged the [cluster driver](/docs/admin-settings/drivers/cluster-drivers/) for CCE, but by default, this cluster driver is `inactive`. In order to launch CCE clusters, you will need to [enable the CCE cluster driver](/docs/admin-settings/drivers/cluster-drivers/#activating-deactivating-cluster-drivers). After enabling the cluster driver, you can start provisioning CCE clusters.
+您可以使用 Rancher 创建一个托管于 Huawei Cloud Container Engine (CCE)中的集群。Rancher 已经为 CCE 实现并打包了针对 CCE 的[集群驱动](/docs/admin-settings/drivers/cluster-drivers/_index)，但是默认情况下，这个集群驱动是`未启用的`。为了启动 CCE 集群，您需要先[启用 CCE 集群驱动程序](/docs/admin-settings/drivers/cluster-drivers/_index)。启用集群驱动后，可以开始配置 CCE 集群。
 
-### Prerequisites in Huawei
+### 先决条件
 
->**Note**
->Deploying to CCE will incur charges.
+> **注意**
+> 部署到 CCE 将会产生费用。
 
-1. Find your project ID in Huawei CCE portal. See the CCE documentation on how to [manage your projects](https://support.huaweicloud.com/en-us/usermanual-iam/en-us_topic_0066738518.html).
+1. 在华为 CCE 门户中查找您的项目 ID. 请参阅关于如何[管理项目](https://support.huaweicloud.com/en-us/usermanual-iam/en-us_topic_0066738518.html)的 CCE 文档.
 
-2. Create an [Access Key ID and Secret Access Key](https://support.huaweicloud.com/en-us/usermanual-iam/en-us_topic_0079477318.html).
+2. 创建[访问密钥](https://support.huaweicloud.com/en-us/usermanual-iam/en-us_topic_0079477318.html).
 
-### Limitations
+### 局限性
 
-Huawei CCE service doesn't support the ability to create clusters with public access through their API. You are required to run Rancher in the same VPC as the CCE clusters that you want to provision.
+华为 CCE 服务不支持通过 API 创建具有公共访问权限的集群。您需要在与要配置的 CCE 集群相同的 VPC 中运行 Rancher Server。
 
-### Create the CCE Cluster
+### 创建一个 CCE 集群
 
-1. From the **Clusters** page, click **Add Cluster**.
+1. 从 **集群** 页面，单击 **添加集群**。
 
-2. Choose **Huawei CCE**.
+2. 选择 **华为 CCE**。
 
-3. Enter a **Cluster Name**.
+3. 输入 **集群名称**。
 
-4. {{< step_create-cluster_member-roles >}}
+4. 通过**成员角色**来设置用户访问集群的权限。
 
-5. Enter **Project Id**, Access Key ID as **Access Key** and Secret Access Key **Secret Key**. Then Click **Next: Configure cluster**.
+   - 点击**添加成员**将需要访问这个集群的用户添加到成员中。
+   - 在**角色**下拉菜单中选择每个用户的权限。
 
-6. Fill the following cluster configuration:
+5. 输入 **项目 ID**，访问密钥 ID**Access Key**和访问密钥**Secret Key**。然后单击**下一步: 配置集群**。
 
-    |Settings|Description|
-    |---|---|
-    | Cluster Type | Which type or node you want to include into the cluster, `VirtualMachine` or `BareMetal`. |
-	| Description | The description of the cluster. |
-	| Master Version | The Kubernetes version. |
-	| Management Scale Count | The max node count of the cluster. The options are 50, 200 and 1000. The larger of the scale count, the more the cost. |
-	| High Availability | Enable master node high availability. The cluster with high availability enabled will have more cost. |
-	| Container Network Mode | The network mode used in the cluster. `overlay_l2` and `vpc-router` is supported in `VirtualMachine` type and `underlay_ipvlan` is supported in `BareMetal` type |
-	| Container Network CIDR | Network CIDR for the cluster. |
-	| VPC Name | The VPC name which the cluster is going to deploy into. Rancher will create one if it is blank. |
-	| Subnet Name | The Subnet name which the cluster is going to deploy into. Rancher will create one if it is blank. |
-	| External Server | This option is reserved for the future we can enable CCE cluster public access via API. For now, it is always disabled. |
-	| Cluster Label | The labels for the cluster. |
-	| Highway Subnet | This option is only supported in `BareMetal` type. It requires you to select a VPC with high network speed for the bare metal machines. |
+6. 填写以下集群配置:
 
-	**Note:** If you are editing the cluster in the `cluster.yml` instead of the Rancher UI, note that as of Rancher v2.3.0, cluster configuration directives must be nested under the `rancher_kubernetes_engine_config` directive in `cluster.yml`. For more information, refer to the section on [the config file structure in Rancher v2.3.0+.](/docs/cluster-provisioning/rke-clusters/options/#config-file-structure-in-rancher-v2-3-0)
+   | 设置          | 描述                                                                                                      |
+   | ------------- | --------------------------------------------------------------------------------------------------------- |
+   | 集群类型      | 您要包含在集群中的类型或节点，`虚拟机` or `裸机` 。                                                       |
+   | 描述          | 集群的描述。                                                                                              |
+   | 主版本        | Kubernetes 版本。                                                                                         |
+   | 管理规模计数  | 集群的最大节点计数。选项有 50、200 和 1000。规模越大，成本就越高。                                        |
+   | 高可用性      | 启用主节点高可用性。启用高可用性的集群将具有更高的成本。                                                  |
+   | 容器网络模式  | 集群中使用的网络模式。 `虚拟机` 类型支持 `overlay-l2` 和 `vpc-router` ，`裸机` 类型支持 `underlay-ipvlan` |
+   | 容器网络 CIDR | 集群的网络 CIDR。                                                                                         |
+   | VPC 名称      | 要部署集群的 VPC 名称。 如果为空，Rancher 将创建一个。                                                    |
+   | 子网名称      | 集群将部署到的子网名称。 如果空白，Rancher 将创建一个。                                                   |
+   | 外部服务器    | 该选项是为将来保留的，我们可以通过 API 启用 CCE 集群公共访问。目前，它始终处于禁用状态。                  |
+   | 集群标签      | 集群的标签。                                                                                              |
+   | 高速子网      | 此选项仅在 `裸机` 类型时可用。它要求您为裸机选择一个高速网络的 VPC。                                      |
 
-7. Fill the following node configuration of the cluster:
+7. 填写集群的以下节点配置:
 
-    |Settings|Description|
-	|---|---|
-	| Zone | The available zone at where the node(s) of the cluster is deployed. |
-	| Billing Mode | The bill mode for the cluster node(s). In `VirtualMachine` type, only `Pay-per-use` is supported. in `BareMetal`, you can choose `Pay-per-use` or `Yearly/Monthly`. |
-	| Validity Period | This option only shows in `Yearly/Monthly` bill mode. It means how long you want to pay for the cluster node(s). |
-	| Auto Renew | This option only shows in `Yearly/Monthly` bill mode. It means that the cluster node(s) will renew the `Yearly/Monthly` payment automatically or not. |
-	| Data Volume Type | Data volume type for the cluster node(s). `SATA`, `SSD` or `SAS` for this option. |
-	| Data Volume Size | Data volume size for the cluster node(s) |
-	| Root Volume Type | Root volume type for the cluster node(s). `SATA`, `SSD` or `SAS` for this option. |
-	| Root Volume Size | Root volume size for the cluster node(s) |
-	| Node Flavor | The node flavor of the cluster node(s). The flavor list in Rancher UI is fetched from Huawei Cloud. It includes all the supported node flavors. |
-	| Node Count | The node count of the cluster |
-	| Node Operating System | The operating system for the cluster node(s). Only `EulerOS 2.2` and `CentOS 7.4` are supported right now. |
-	| SSH Key Name | The ssh key for the cluster node(s) |
-	| EIP | The public IP options for the cluster node(s). `Disabled` means that the cluster node(s) are not going to bind a public IP. `Create EIP` means that the cluster node(s) will bind one or many newly created Eips after provisioned and more options will be shown in the UI to set the to-create EIP parameters. And `Select Existed EIP` means that the node(s) will bind to the EIPs you select.  |
-	| EIP Count | This option will only be shown when `Create EIP` is selected. It means how many EIPs you want to create for the node(s). |
-	| EIP Type | This option will only be shown when `Create EIP` is selected. The options are `5_bgp` and `5_sbgp`. |
-	| EIP Share Type | This option will only be shown when `Create EIP` is selected. The only option is `PER`. |
-	| EIP Charge Mode | This option will only be shown when `Create EIP` is selected. The options are pay by `BandWidth` and pay by `Traffic`. |
-	| EIP Bandwidth Size | This option will only be shown when `Create EIP` is selected. The BandWidth of the EIPs. |
-	| Authentication Mode | It means enabling `RBAC` or also enabling `Authenticating Proxy`. If you select `Authenticating Proxy`, the certificate which is used for authenticating proxy will be also required. |
-	| Node Label | The labels for the cluster node(s). |
+   | 设置         | 描述                                                                                                                                                                                                                |
+   | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | 区域         | 集群节点所在的可用区域。                                                                                                                                                                                            |
+   | 计费方式     | 集群节点的计费方式。 在 `虚拟机` 类型中，仅支持 `按使用量付费`。 在 `裸机` 中，您可以选择 `按使用量付费` 或 `按年/按月`。                                                                                           |
+   | 有效期       | 此选项仅在 `年/月` 计费模式中显示。您要为集群节点支付多长时间的费用。                                                                                                                                               |
+   | 自动续定     | 此选项仅在 `年/月` 计费模式中显示。是否在集群节点到期时自动续定。                                                                                                                                                   |
+   | 数据卷类型   | 集群节点的数据卷类型。可选项为`SATA` ，`SSD`或者`SAS`。                                                                                                                                                             |
+   | 数据卷大小   | 集群节点的数据卷大小。                                                                                                                                                                                              |
+   | 根卷类型     | 集群节点的根卷类型。可选项为`SATA` ，`SSD`或者`SAS`。                                                                                                                                                               |
+   | 根卷大小     | 集群节点的根卷大小。                                                                                                                                                                                                |
+   | 节点规格     | 集群节点的节点规格。Rancher UI 中的规格列表来自华为云。它包括所有支持的节点类型。                                                                                                                                   |
+   | 节点数       | 集群的节点数                                                                                                                                                                                                        |
+   | 节点操作系统 | 集群节点的操作系统。现在只支持 `EulerOS 2.2` 和 `CentOS 7.4`。                                                                                                                                                      |
+   | SSH 密钥名   | 集群节点的 ssh 密钥                                                                                                                                                                                                 |
+   | EIP          | 集群节点的公用 IP 选项。`禁用`表示集群节点不会绑定公共 IP。 `创建EIP` 意味着集群节点将在配置后绑定一个或多个新创建的 EIP，并在 UI 中显示更多选项以设置创建 EIP 参数。`选择已有EIP` 意味着节点将绑定到您选择的 EIP。 |
+   | EIP 数量     | 仅当选择 `创建EIP` 时才会显示此选项。 这意味着要为节点创建多少 EIP。                                                                                                                                                |
+   | EIP 类型     | 仅当选择 `创建EIP` 时才会显示此选项。 选项是 `5_bgp` 和 `5_sbgp`。                                                                                                                                                  |
+   | EIP 共享类型 | 仅当选择 `创建EIP` 时才会显示此选项。 选项为`PER`。                                                                                                                                                                 |
+   | EIP 收费模式 | 仅当选择 `创建EIP` 时才会显示此选项。选择是按`带宽`付费还是按`流量`付费。                                                                                                                                           |
+   | EIP 带宽大小 | 仅当选择 `创建EIP` 时才会显示此选项。EIP 的带宽。                                                                                                                                                                   |
+   | 身份验证模式 | 启用`RBAC`或启用`认证代理`。如果选择 `认证代理`，则还需要提供用于验证代理的证书。                                                                                                                                   |
+   | 节点标签     | 集群节点的标签。                                                                                                                                                                                                    |
 
-8. Click **Create** to create the CCE cluster.
+8. 单击 **创建** 去创建 CCE 集群。
 
-{{< result_create-cluster >}}
+**结果：**
+
+- 你的集群创建成功并进入到**Provisioning**（启动中）的状态。Rancher 正在拉起你的集群。
+- 在集群状态变为**Active**（激活）状态后，你将可以开始访问你的集群。
+- 在**Active**的集群中，默认会有两个项目。`Default`项目（包括`default`命名空间）和`System`项目（包括`cattle-system`，`ingress-nginx`，`kube-public` 和 `kube-system`，如果这些命名空间存在的话）

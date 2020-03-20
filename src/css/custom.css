@@ -79,3 +79,7 @@ p {
 .navbar__items .navbar__toggle {
   color: var(--ifm-navbar-link-color);
 }
+
+.admonition-important a {
+  color: var(--ifm-rancher-color-latest);
+}

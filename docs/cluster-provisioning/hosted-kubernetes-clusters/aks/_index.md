@@ -1,37 +1,37 @@
 ---
-title: 创建 AKS 集群
+title: 创建微软 AKS 集群
 ---
 
-You can use Rancher to create a cluster hosted in Microsoft Azure Kubernetes Service (AKS).
+您可以使用 Rancher 创建一个托管在 Microsoft Azure Kubernetes 服务 (AKS) 中的集群。
 
-### Prerequisites in Microsoft Azure
+## 先决条件
 
-> **Note**
-> Deploying to AKS will incur charges.
+> **注意**
+> 部署到 AKS 将会产生费用。
 
-To interact with Azure APIs, an AKS cluster requires an Azure Active Directory (AD) service principal. The service principal is needed to dynamically create and manage other Azure resources, and it provides credentials for your cluster to communicate with AKS. For more information about the service principal, refer to the [AKS documentation](https://docs.microsoft.com/en-us/azure/aks/kubernetes-service-principal).
+要与 Azure API 交互，AKS 集群需要 Azure 活动目录 （AD） 服务主体。需要服务主体来动态创建和管理其他 Azure 资源，它为您的集群提供了与 AKS 通信的凭证。有关服务主体的详细信息，请参阅 [AKS 文档](https://docs.microsoft.com/zh-cn/azure/aks/kubernetes-service-principal)。
 
-Before creating the service principal, you need to obtain the following information from the [Microsoft Azure Portal](https://portal.azure.com):
+在创建服务主体之前，您需要从[Microsoft Azure 门户](https://portal.azure.com)获取以下信息：
 
-* Your subscription ID
-* Your tenant ID
-* An app ID (also called a client ID)
-* Client secret
-* A resource group
+- 您的订阅 ID
+- 您的租户 ID
+- 应用 ID（也称为客户端 ID）
+- 客户密钥
+- 资源组
 
-The below sections describe how to set up these prerequisites using either the Azure command line tool or the Azure portal.
+下面的部分描述了如何使用 Azure 命令行工具或 Azure 门户设置这些先决条件。
 
-#### Setting Up the Service Principal with the Azure Command Line Tool
+### 使用 Azure 命令行工具设置服务主体
 
-You can create the service principal by running this command:
+您可以通过运行以下命令来创建服务主体:
 
-``` 
+```
 az ad sp create-for-rbac --skip-assignment
 ```
 
-The result should show information about the new service principal:
+结果应显示有关新服务主体的信息：
 
-``` 
+```
 {
   "appId": "xxxx--xxx",
   "displayName": "<SERVICE-PRINCIPAL-NAME>",
@@ -41,104 +41,103 @@ The result should show information about the new service principal:
 }
 ```
 
-You also need to add roles to the service principal so that it has privileges for communication with the AKS API. It also needs access to create and list virtual networks.
+您还需要向服务主体添加角色，以便它具有与 AKS API 通信的权限。它还需要创建和列出虚拟网络的访问权限。
 
-Below is an example command for assigning the Contributor role to a service principal. Contributors can manage anything on AKS but cannot give access to others:
+下面是将`Contributor`角色分配给服务主体的示例命令。`Contributor`角色的用户可以管理 AKS 上的任何内容，但不能授予其他人访问权限：
 
-``` 
+```
 az role assignment create \
   --assignee $appId \
   --scope /subscriptions/$<SUBSCRIPTION-ID>/resourceGroups/$<GROUP> \
   --role Contributor
 ```
 
-You can also create the service principal and give it Contributor privileges by combining the two commands into one. In this command, the scope needs to provide a full path to an Azure resource:
+您也可以用一条命令来创建服务主体并赋予`Contributor`权限。在此命令中，设置 scope 参数时，要提供 Azure 资源的完整路径：
 
-``` 
+```
 az ad sp create-for-rbac \
   --scope /subscriptions/$<SUBSCRIPTION-ID>/resourceGroups/$<GROUP> \
   --role Contributor
 ```
 
-#### Setting Up the Service Principal from the Azure Portal
+### 从 Azure 门户网站设置服务主体
 
-You can also follow these instructions to set up a service principal and give it role-based access from the Azure Portal.
+还可以按照这些指示设置服务主体，并从 Azure 门户网站授予其基于角色的访问权限。
 
-1. Go to the Microsoft Azure Portal [home page](https://portal.azure.com).
+1. 跳转到 Microsoft Azure 门户网站[主页](https://portal.azure.com).
 
-1. Click **Azure Active Directory.**
+1. 单击 **Azure Active Directory**。
 
-1. Click **App registrations.**
+1. 单击 **应用注册**。
 
-1. Click **New registration.**
+1. 单击 **新注册**。
 
-1. Enter a name. This will be the name of your service principal.
+1. 输入名称。这将是服务主体的名称。
 
-1. Optional: Choose which accounts can use the service principal.
+1. 可选:选择哪些帐户可以使用服务主体。
 
-1. Click **Register.**
+1. 单击 **注册**。
 
-1. You should now see the name of your service principal under **Azure Active Directory > App registrations.**
+1. 您现在应该看到服务主体的名称 **Azure Active Directory > 应用注册**。
 
-1. Click the name of your service principal. Take note of the tenant ID and application ID (also called app ID or client ID) so that you can use it when provisioning your AKS cluster. Then click **Certificates & secrets.**
+1. 单击服务主体的名称。请注意租户 ID 和应用程序 ID（也称为应用 ID 或客户端 ID），以便在配置 AKS 集群时使用它。然后单击 **证书 & 密钥**。
 
-1. Click **New client secret.**
+1. 单击 **新客户端密钥**。
 
-1. Enter a short description, pick an expiration time, and click **Add.** Take note of the client secret so that you can use it when provisioning the AKS cluster.
+1. 输入一个简短的描述，选择一个过期时间，然后单击**添加**。记下客户端密钥，以便在配置 AKS 集群时使用它。
 
-**Result:** You have created a service principal and you should be able to see it listed in the **Azure Active Directory** section under **App registrations.** You still need to give the service principal access to AKS.
+**结果:** 你已经创建了一个服务主体，你应该能够在**Azure 活动目录**的**应用注册**中看到它。您仍然需要授予服务主体对 AKS 的访问权限。
 
-To give role-based access to your service principal, 
+给你的服务主体配置基于角色的访问权限，
 
-1. Click **All Services** in the left navigation bar. Then click **Subscriptions.**
+1. 点击左边导航栏中的 **全部服务**。然后点击 **订阅**。
 
-1. Click the name of the subscription that you want to associate with your Kubernetes cluster. Take note of the subscription ID so that you can use it when provisioning your AKS cluster.
+1. 单击要与 Kubernetes 集群关联的订阅的名称。记下订阅 ID，以便在预配 AKS 集群时使用它。
 
-1. Click **Access Control (IAM).**
+1. 单击 **访问控制 (IAM)**。
 
-1. In the **Add role assignment** section, click **Add.**
+1. 在 **添加角色分配** 部分，点击 **添加**。
 
-1. In the **Role** field, select a role that will have access to AKS. For example, you can use the **Contributor** role, which has permission to manage everything except for giving access to other users.
+1. 在 **角色** 字段中，选择可以访问 AKS 的角色。例如，您可以使用 **Contributor** 角色，该角色具有管理所有内容的权限，但不能授予其他用户访问权限。
 
-1. In the **Assign access to** field, select **Azure AD user, group, or service principal.**
+1. 在 **分配访问权限** 字段中，选择 **Azure AD 或 访问主体**。
 
-1. In the **Select** field, select the name of your service principal and click **Save.**
+1. 在 **选择** 字段中，选择服务主体的名称，然后单击 **保存**。
 
-**Result:** Your service principal now has access to AKS.
+**结果:** 您的服务主体现在有了访问 AKS 的权限。
 
-### Create the AKS Cluster
+## 创建 AKS 集群
 
-Use Rancher to set up and configure your Kubernetes cluster.
+使用 Rancher 来配置您的 Kubernetes 集群。
 
-1. From the **Clusters** page, click **Add Cluster**.
+1. 在 **集群** 页，单击 **添加集群**。
 
-1. Choose **Azure Kubernetes Service**.
+1. 选择 **Azure Kubernetes Service**。
 
-1. Enter a **Cluster Name**.
+1. 输入 **集群名称**。
 
-1. {{< step_create-cluster_member-roles >}}
+1. 通过**成员角色**来设置用户访问集群的权限。
 
-1. Use your subscription ID, tenant ID, app ID, and client secret to give your cluster access to AKS. If you don't have all of that information, you can retrieve it using these instructions:
+   - 点击**添加成员**将需要访问这个集群的用户添加到成员中。
+   - 在**角色**下拉菜单中选择每个用户的权限。
 
-* **App ID and tenant ID:** To get the app ID and tenant ID, you can go to the Azure Portal, then click **Azure Active Directory**, then click **App registrations, ** then click the name of the service principal. The app ID and tenant ID are both on the app registration detail page.
-* **Client secret:** If you didn't copy the client secret when creating the service principal, you can get a new one if you go to the app registration detail page, then click **Certificates & secrets**, then click **New client secret.**
-* **Subscription ID:** You can get the subscription ID is available in the portal from **All services > Subscriptions.**
+1. 使用订阅 ID、租户 ID、应用 ID 和客户端密钥授予集群对 AKS 的访问权限。如果您没有所有这些信息，则可以使用以下指引来获取这些信息：
 
-1.  {{< step_create-cluster_cluster-options >}}
+- **应用 ID and ID、租户 ID：** 要获取应用 ID 和租户 ID，可以转到 Azure 门户网站，然后单击**Azure Active Directory**，然后单击**应用注册**，然后单击服务主体的名称。应用 ID 和租户 ID 都位于应用注册详细信息页上。
+- **客户端密钥：** 如果在创建服务主体时未复制客户端密钥，在应用注册详细信息页面，可以获取新密钥，然后单击**证书 & 密钥**，然后单击**新客户端密钥**。
+- **订阅 ID：** 您可以从门户网站的**全部服务 > 订阅**中获取订阅 ID。
 
-1.  Complete the **Account Access** form using the output from your Service Principal. This information is used to authenticate with Azure.
+1.  使用您的服务主体的信息完成**帐户访问**表单，并选择一个地理区域。此信息用于 Azure 进行身份验证。
 
-1.  Use **Nodes** to provision each node in your cluster and choose a geographical region.
+1.  使用**Kubernetes 选项**来配置 Kubernetes 版本，DNS 前缀，是否启用监控等。
+1.  使用**主机**部分来配置集群中的节点。
 
-        [Microsoft Documentation: How to create and use an SSH public and private key pair](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys)
+    [Microsoft 文档：如何创建和使用 SSH 公钥和私钥对](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys)
 
-    <br/>
+1.  检查你的选项来确认它们是正确的. 然后单击**创建**。
 
-1.  Click **Create**.
+**结果：**
 
-    <br/>
-
-1.  Review your options to confirm they're correct. Then click **Create**.
-
-{{< result_create-cluster >}}
-
+- 你的集群创建成功并进入到**Provisioning**（启动中）的状态。Rancher 正在拉起你的集群。
+- 在集群状态变为**Active**（激活）状态后，你将可以开始访问你的集群。
+- 在**Active**的集群中，默认会有两个项目。`Default`项目（包括`default`命名空间）和`System`项目（包括`cattle-system`，`ingress-nginx`，`kube-public` 和 `kube-system`，如果这些命名空间存在的话）

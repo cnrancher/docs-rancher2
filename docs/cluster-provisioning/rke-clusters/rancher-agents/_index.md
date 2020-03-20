@@ -1,38 +1,38 @@
 ---
-title: Rancher Agents
+title: Rancher Agent
 ---
 
-There are two different agent resources deployed on Rancher managed clusters:
+有两种不同的 Agent 资源部署在 Rancher 纳管的集群：
 
 - [cattle-cluster-agent](#cattle-cluster-agent)
 - [cattle-node-agent](#cattle-node-agent)
 
-For a conceptual overview of how the Rancher server provisions clusters and communicates with them, refer to the [architecture](/docs/overview/architecture/)
+有关 Rancher Server 如何设置集群并与之通信的概述，请参阅[产品架构](/docs/overview/architecture/_index)。
 
-#### cattle-cluster-agent
+## cattle-cluster-agent
 
-The `cattle-cluster-agent` is used to connect to the Kubernetes API of [Rancher Launched Kubernetes](/docs/cluster-provisioning/rke-clusters/) clusters. The `cattle-cluster-agent` is deployed using a Deployment resource.
+`cattle-cluster-agent`用于连接集群的[Rancher 部署的 Kubernetes 集群](/docs/cluster-provisioning/rke-clusters/_index)的 Kubernetes API。`cattle-cluster-agent`是通过 Deployment 的方式部署的。
 
-#### cattle-node-agent
+## cattle-node-agent
 
-The `cattle-node-agent` is used to interact with nodes in a [Rancher Launched Kubernetes](/docs/cluster-provisioning/rke-clusters/) cluster when performing cluster operations. Examples of cluster operations are upgrading Kubernetes version and creating/restoring etcd snapshots. The `cattle-node-agent` is deployed using a DaemonSet resource to make sure it runs on every node. The `cattle-node-agent` is used as fallback option to connect to the Kubernetes API of [Rancher Launched Kubernetes](/docs/cluster-provisioning/rke-clusters/) clusters when `cattle-cluster-agent` is unavailable.
+在执行集群操作时，`cattle-node-agent`用于和[Rancher 部署的 Kubernetes 集群](/docs/cluster-provisioning/rke-clusters/_index)中的节点进行交互。集群操作的示例包括升级 Kubernetes 版本和创建/恢复 etcd 快照。`cattle-node-agent`是通过 DaemonSet 的方式部署的，以确保其在每个节点上运行。当`cattle-cluster-agent`不可用时，`cattle-node-agent` 讲作为备选方案连接到[Rancher 部署的 Kubernetes 集群](/docs/cluster-provisioning/rke-clusters/_index)中的 Kubernetes API。
 
-> **Note:** In Rancher v2.2.4 and lower, the `cattle-node-agent` pods did not tolerate all taints, causing Kubernetes upgrades to fail on these nodes. The fix for this has been included in Rancher v2.2.5 and higher.
+> **注意：** 在 Rancher v2.2.4 及以下版本中，`cattle-node-agent` pod 没有忍受所有的 taints，导致 Kubernetes 升级失败。Rancher v2.2.5 及更高版本中包含了对此问题的修复。
 
-#### Scheduling rules
+## 调度规则
 
-_Applies to v2.3.0 and higher_
+_适用于 v2.3.0 及更高版本_
 
-| Component              | nodeAffinity nodeSelectorTerms        | nodeSelector | Tolerations       |
-| ---------------------- | ------------------------------------- | ------------ | ----------------- |
-| `cattle-cluster-agent` | `beta.kubernetes.io/os:NotIn:windows` | none         | `operator:Exists` |
-| `cattle-node-agent`    | `beta.kubernetes.io/os:NotIn:windows` | none         | `operator:Exists` |
+| 组件                   | 节点亲和性和节点选择器                | 节点选择器 | 容忍              |
+| ---------------------- | ------------------------------------- | ---------- | ----------------- |
+| `cattle-cluster-agent` | `beta.kubernetes.io/os:NotIn:windows` | none       | `operator:Exists` |
+| `cattle-node-agent`    | `beta.kubernetes.io/os:NotIn:windows` | none       | `operator:Exists` |
 
-The `cattle-cluster-agent` Deployment has preferred scheduling rules using `requiredDuringSchedulingIgnoredDuringExecution`, favoring to be scheduled on nodes with the `controlplane` node. See [Kubernetes: Assigning Pods to Nodes](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) to find more information about scheduling rules.
+`cattle-cluster-agent` 部署配置了有着`requiredDuringSchedulingIgnoredDuringExecution`的设置的首选调度规则，使它在 `controlplane` 角色的节点上调度。参考[Kubernetes: 将 pod 分配给节点](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/)，可以找到更多关于调度规则的信息。
 
-The `requiredDuringSchedulingIgnoredDuringExecution` configuration is shown in the table below:
+`requiredDuringSchedulingIgnoredDuringExecution` 配置如下表所示:
 
-| Weight | Expression                                       |
-| ------ | ------------------------------------------------ |
-| 100    | `node-role.kubernetes.io/controlplane:In:"true"` |
-| 1      | `node-role.kubernetes.io/etcd:In:"true"`         |
+| 权重 | 表达式                                           |
+| ---- | ------------------------------------------------ |
+| 100  | `node-role.kubernetes.io/controlplane:In:"true"` |
+| 1    | `node-role.kubernetes.io/etcd:In:"true"`         |

@@ -58,7 +58,7 @@ Rancher v2.x 允许你在任何地方启动 Kubernetes 集群。 使用以下方
 
 - 一个[托管的 Kubernetes 集群](/docs/cluster-provisioning/hosted-kubernetes-clusters/_index)。
 - 一个[来自基础设施提供商的节点](/docs/cluster-provisioning/rke-clusters/node-pools/_index)。 Rancher 在节点上启动 Kubernetes。
-- 任何[自定义节点](/docs/cluster-provisioning/rke-clusters/custom-nodes/_index)。Rancher 可以在节点上启动 Kubernetes，无论是裸机服务器，虚拟机还是不太流行的基础架构提供商上的云主机。
+- 任何[自定义节点](/docs/cluster-provisioning/rke-clusters/custom-nodes/_index)。Rancher 可以在节点上启动 Kubernetes，无论是裸金属服务器，虚拟机还是不太流行的基础架构提供商上的云主机。
 
 ### 项目
 

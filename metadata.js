@@ -67,7 +67,7 @@ const metadata = {
     'admin-settings/rke-templates/_index': 'RKE 集群模版',
     'admin-settings/drivers/cluster-drivers/_index': '集群驱动',
     'admin-settings/drivers/node-drivers/_index': '主机驱动',
-    'cluster-provisioning/production/_index': '创建生产环境集群',
+    'cluster-provisioning/production/_index': '创建生产可用集群',
     'cluster-provisioning/hosted-kubernetes-clusters/_index': '创建托管集群',
     'cluster-provisioning/rke-clusters/custom-nodes/_index':
       '在现有节点上创建 RKE 集群',
