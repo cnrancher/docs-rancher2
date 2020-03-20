@@ -1,46 +1,45 @@
 ---
-title: 关于 “404 - default backend” 的问题
+title: 404 - default backend
 ---
 
-> #### **Important: RKE add-on install is only supported up to Rancher v2.0.8**
+> #### **重要：RKE add-on 安装 仅支持至 Rancher v2.0.8 版本**
 >
-> Please use the Rancher Helm chart to install Rancher on a Kubernetes cluster. For details, see the [Kubernetes Install - Installation Outline](/docs/installation/k8s-install/#installation-outline).
+> 你可以使用 Helm chart 在 Kubernetes 集群中安装 Rancher。获取更多细节，请参考[安装 Kubernetes - 安装概述](/docs/installation/k8s-install/_index)。
 >
-> If you are currently using the RKE add-on install method, see [Migrating from a Kubernetes Install with an RKE Add-on](/docs/upgrades/upgrades/migrating-from-rke-add-on/) for details on how to move to using the helm chart.
+> 如果您正在使用 RKE add-on 安装的方法，请参阅[从一个 RKE Add-on 安装的 Rancher 迁移到 Helm 安装](/docs/upgrades/upgrades/migrating-from-rke-add-on/_index) 获取如何迁移至使用 helm chart 的更多细节。
 
-To debug issues around this error, you will need to download the command-line tool `kubectl` . See [Install and Set Up kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) how to download `kubectl` for your platform.
+要调试有关此错误的问题，您需要下载命令行工具 `kubectl`。请参阅[安装和设置 kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)，查看如何在您的平台上下载 `kubectl`。
 
-When you have made changes to `rancher-cluster.yml` , you will have to run `rke remove --config rancher-cluster.yml` to clean the nodes, so it cannot conflict with previous configuration errors.
+当您对`rancher-cluster.yml`进行更改后，您将必须运行`rke remove --config rancher-cluster.yml`来清理节点，避免与以前的错误配置冲突。
 
-#### Possible causes
+## 可能的原因
 
-The nginx ingress controller is not able to serve the configured host in `rancher-cluster.yml` . This should be the FQDN you configured to access Rancher. You can check if it is properly configured by viewing the ingress that is created by running the following command:
+nginx ingress controller 无法为 `rancher-cluster.yml` 中配置的主机提供服务。这应该是您配置的用来访问 Rancher 的 FQDN。您可以通过运行以下命令查看创建的 ingress 来检查其是否正确配置：
 
-``` 
+```
 kubectl --kubeconfig kube_config_rancher-cluster.yml get ingress -n cattle-system -o wide
 ```
 
-Check if the `HOSTS` column is displaying the FQDN you configured in the template, and that the used nodes are listed in the `ADDRESS` column. If that is configured correctly, we can check the logging of the nginx ingress controller.
+检查 `HOSTS` 列是否显示您在模板中配置的 FQDN，以及 `ADDRESS` 列中是否列出了使用的节点。如果配置正确，我们可以检查 nginx ingress controller 的日志。
 
-The logging of the nginx ingress controller will show why it cannot serve the requested host. To view the logs, you can run the following command
+nginx ingress 的日志将显示为什么它不能为请求的主机名提供服务。要查看日志，可以运行以下命令
 
-``` 
+```
 kubectl --kubeconfig kube_config_rancher-cluster.yml logs -l app=ingress-nginx -n ingress-nginx
 ```
 
-<b>Errors</b>
+**错误**
 
-* `x509: certificate is valid for fqdn, not your_configured_fqdn` 
+- `x509: certificate is valid for fqdn，not your_configured_fqdn`
 
-The used certificates do not contain the correct hostname. Generate new certificates that contain the chosen FQDN to access Rancher and redeploy.
+  使用的证书不包含正确的主机名。生成包含所选 FQDN 的新证书以访问 Rancher 并重新部署。
 
-* `Port 80 is already in use. Please check the flag --http-port` 
+- `Port 80 is already in use. Please check the flag --http-port`
 
-There is a process on the node occupying port 80, this port is needed for the nginx ingress controller to route requests to Rancher. You can find the process by running the command: `netstat -plant | grep \:80` .
+  节点上有一个进程占用端口 80，nginx ingress controller 需要使用此端口将请求路由到 Rancher。您可以通过运行以下命令找到该进程: `netstat -plant | grep \:80`。
 
-Stop/kill the process and redeploy.
+  停止/终止该进程并重新部署。
 
-* `unexpected error creating pem file: no valid PEM formatted block found` 
+- `unexpected error creating pem file: no valid PEM formatted block found`
 
-The base64 encoded string configured in the template is not valid. Please check if you can decode the configured string using `base64 -D STRING` , this should return the same output as the content of the file you used to generate the string. If this is correct, please check if the base64 encoded string is placed directly after the key, without any newlines before, in between or after.(For example: `tls.crt: LS01..` )
-
+  模板中配置的 base64 编码的字符串无效。请检查是否可以使用`base64 -D STRING`解码配置的字符串，这将返回与用于生成字符串的文件内容相同的输出。如果正确，请检查 base64 编码的字符串是否直接放置在密钥之后，前后和之间确保没有任何换行符。(例如: `tls.crt: LS01..`)
