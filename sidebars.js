@@ -295,7 +295,7 @@ module.exports = {
       'admin-settings/config-private-registry/_index',
       {
         type: 'category',
-        label: '认证',
+        label: '登录认证',
         items: [
           'admin-settings/authentication/_index',
           'admin-settings/authentication/user-groups/_index',
