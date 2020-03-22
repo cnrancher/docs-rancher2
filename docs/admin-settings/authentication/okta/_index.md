@@ -2,50 +2,54 @@
 title: 对接 Okta (SAML)
 ---
 
-_Available as of v2.2.0_
+_v2.2.0 版本可用_
 
-If your organization uses Okta Identity Provider (IdP) for user authentication, you can configure Rancher to allow your users to log in using their IdP credentials.
+如果您的组织使用 Okta Identity Provider （IdP）进行用户身份验证，您可以配置 Rancher 以允许您的用户使用他们的 IdP 凭据登录。
 
-> **Note:** Okta integration only supports Service Provider initiated logins.
+**注：** Okta 集成仅支持服务提供商发起的登录。
 
-### Prerequisites
+## 先决条件
 
-In Okta, create a SAML Application with the settings below. See the [Okta documentation](https://developer.okta.com/standards/SAML/setting_up_a_saml_application_in_okta) for help.
+在 Okta 中，使用下面的设置创建一个 SAML 应用程序。参见[Okta 文档](https://developer.okta.com/standards/SAML/setting_up_a_saml_application_in_okta)以获得帮助。
 
-| Setting                       | Value                                                   |
-| ----------------------------- | ------------------------------------------------------- |
-| `Single Sign on URL` | `https://yourRancherHostURL/v1-saml/okta/saml/acs` |
-| `Audience URI (SP Entity ID)` | `https://yourRancherHostURL/v1-saml/okta/saml/metadata` |
+| 设置                            | 值                                                      |
+| ------------------------------- | ------------------------------------------------------- |
+| `Single Sign on URL`            | `https://yourRancherHostURL/v1-saml/okta/saml/acs`      |
+| `Audience URI （SP Entity ID）` | `https://yourRancherHostURL/v1-saml/okta/saml/metadata` |
 
-### Configuring Okta in Rancher
+## 在 Rancher 中配置 Okta
 
-1.  From the **Global** view, select **Security > Authentication** from the main menu.
+1.  在**全局**视图中，从主菜单中选择**安全 > 认证**。
 
-1.  Select **Okta**.
+1.  选择**Okta**。
 
-1.  Complete the **Configure Okta Account** form. The examples below describe how you can map Okta attributes to fields within Rancher.
+1.  完成**配置 Okta 帐户**表单。下面的示例描述了如何将 Okta 属性映射到 Rancher 中的字段。
 
-| Field                     | Description                                                                               |
-|---------------------------|-------------------------------------------------------------------------------------------|
-| Display Name Field        | The attribute that contains the display name of users.                                    |
-| User Name Field           | The attribute that contains the user name/given name.                                     |
-| UID Field                 | An attribute that is unique to every user.                                                |
-| Groups Field              | Make entries for managing group memberships.                                              |
-| Rancher API Host          | The URL for your Rancher Server.                                                          |
-| Private Key / Certificate | A key/certificate pair to create a secure shell between Rancher and your IdP.             |
-| Metadata XML              | The `Identity Provider metadata` file that you find in the application `Sign On` section. |
+    | 字段             | 描述                                                         |
+    | ---------------- | ------------------------------------------------------------ |
+    | 显示名称         | 包含用户 display name 的属性。                               |
+    | 用户名           | 包含用户 user name/given name 属性                           |
+    | UID              | 对每个用户唯一的属性。                                       |
+    | 组               | 为管理组成员身份创建的条目。                                 |
+    | Rancher API 地址 | Rancher 服务器的 URL 地址                                    |
+    | 私钥/证书        | 密钥/证书对，用于在 Rancher 和 IdP 之间创建安全 shell。      |
+    | 元数据 XML       | 在应用程序`登录`部分得到的`Identity Provider metadata`文件。 |
 
-    > **Tip:** You can generate a key/certificate pair using an openssl command. For example:
+    > **提示：** 您可以使用 openssl 命令生成密钥/证书对。例如：
     >
-    >        openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout myservice.key -out myservice.crt
+    >        openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout myservice.key -out myservice.cert
 
-1) After you complete the **Configure Okta Account** form, click **Authenticate with Okta**, which is at the bottom of the page.
+1.  完成**配置 Okta 账户**表单后，点击页面底部的**启用 Okta 认证**。
 
-   Rancher redirects you to the IdP login page. Enter credentials that authenticate with Okta IdP to validate your Rancher Okta configuration.
+    Rancher 会将您重定向到 IdP 登录页面。输入使用 Okta IdP 进行身份验证的凭据，以验证您的 Rancher Okta 配置。
 
-   > **Note:** If nothing seems to happen, it's likely because your browser blocked the pop-up. Make sure you disable the pop-up blocker for your rancher domain and whitelist it in any other extensions you might utilize.
+    > **注：** 如果什么都没有发生，很可能是因为你的浏览器阻塞了弹出窗口。请确保您禁用了 Rancher 域的弹出窗口拦截器，并在您可能使用的任何其他扩展中将其列入白名单。
 
-**Result:** Rancher is configured to work with Okta. Your users can now sign into Rancher using their Okta logins.
+**结果：** Rancher 被配置为使用 Okta。您的用户现在可以使用他们的 Okta 账号登录到 Rancher。
 
-{{< saml_caveats >}}
-
+> SAML 身份验证提供商警告：
+>
+> - SAML 协议不支持搜索或查找用户或组。因此，将用户或组添加到 Rancher 时不会对其进行验证。
+> - 添加用户时，必须正确输入确切的用户 ID（即`UID`字段）。键入用户 ID 时，将不会搜索可能匹配的其他用户 ID。
+> - 添加组时，必须从文本框旁边的下拉列表中选择组。 Rancher 假定来自文本框的任何输入都是用户。
+>   - 群组下拉列表仅显示您所属的群组。您将无法添加您不是其成员的组。
