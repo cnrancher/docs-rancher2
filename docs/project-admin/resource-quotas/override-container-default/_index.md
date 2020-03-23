@@ -38,10 +38,10 @@ _v2.2.0或更新版本可用_
 
 可以修改的容器资源限制类型如下表所示：
 
-| 资源类型     | 描述                                                                                                                                                                   |
+|     资源类型         | 描述                                                                                                                                                                   |
 | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| CPU限制          | 可以分配给容器的CPU最大值，单位：[millicores](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-cpu)。|
-| CPU预留    | 保障容器正常运行所需的CPU最小值，单位：millicores。|
-| 内存限制       | 可以分配给容器的内存最大值，单位：bytes。|
-| 内存预留 | The minimum amount of memory (in bytes) guaranteed to the container. 保障容器正常运行所需的内存最小值，单位：bytes。|
+|     CPU限制              | 可以分配给容器的CPU最大值，单位：[millicores](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-cpu)。|
+|     CPU预留        | 保障容器正常运行所需的CPU最小值，单位：millicores。|
+|     内存限制           | 可以分配给容器的内存最大值，单位：bytes。|
+|     内存预留     | 保障容器正常运行所需的内存最小值，单位：bytes。|
 
