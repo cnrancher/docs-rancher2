@@ -2,31 +2,35 @@
 title: 设置 Pod 安全策略
 ---
 
-> These cluster options are only available for [clusters in which Rancher has launched Kubernetes](/docs/cluster-provisioning/rke-clusters/).
+> 本文的集群选项只适用于[使用RKE创建的集群](/docs/cluster-provisioning/rke-clusters/_index)。
 
-You can always assign a pod security policy (PSP) to an existing project if you didn't assign one during creation.
+您可以在创建项目时设置 Pod 安全策略，您也可以先创建项目，再设置项目的 Pod 安全策略，或随时修改已有项目的 Pod 安全策略。
 
-#### Prerequisites
+## 前提条件
 
-* Create a Pod Security Policy within Rancher. Before you can assign a default PSP to an existing project, you must have a PSP available for assignment. For instruction, see [Creating Pod Security Policies](/docs/admin-settings/pod-security-policies/).
-* Assign a default Pod Security Policy to the project's cluster. You can't assign a PSP to a project until one is already applied to the cluster. For more information, see [Existing Cluster: Adding a Pod Security Policy](/docs/k8s-in-rancher/editing-clusters/#adding-changing-a-pod-security-policy).
+* 已经在 Rancher 内创建了 Pod 安全策略。给项目分配 Pod 安全策略之前，您需要先在 Rancher 内完成 Pod 安全策略的创建。如果您还未创建 Pod 安全策略，请参考[如何创建 Pod 安全策略](/docs/admin-settings/pod-security-policies/_index)。 
 
-#### Applying a Pod Security Policy
+* 已经给项目所属的集群分配了默认 Pod 安全策略。如果没有给集群分配默认 Pod 安全策略，会无法配置项目级的Pod 安全策略。如果您还未给项目所属的集群配置默认 Pod 安全策略，请参考[如何配置集群默认Pod 安全策略](/docs/k8s-in-rancher/editing-clusters/_index#adding-changing-a-pod-security-policy)。
 
-1. From the **Global** view, find the cluster containing the project you want to apply a PSP to.
-1. From the main menu, select **Projects/Namespaces**.
-1. Find the project that you want to add a PSP to. From that project, select **Vertical Ellipsis (...) > Edit**.
-1. From the **Pod Security Policy** drop-down, select the PSP you want to apply to the project.
+## 应用Pod 安全策略
 
-   Assigning a PSP to a project will:
+1. 访问 Rancher UI **全局** 页面，找到项目所属的集群。
 
-* Override the cluster's default PSP.
-* Apply the PSP to the project.
-* Apply the PSP to any namespaces you add to the project later.
+1. 打开主菜单，选择 **项目/命名空间**。
 
-1. Click **Save**.
+1. 找到需要配置 Pod 安全策略的项目。从项目首页选择**省略号(...) > 编辑**.
 
-**Result:** The PSP is applied to the project and any namespaces added to the project.
+1. 从**Pod 安全策略**下拉菜单中单击项目名称，选择需要配置 Pod 安全策略的项目。
 
-> **Note:** Any workloads that are already running in a cluster or project before a PSP is assigned will not be checked to determine if they comply with the PSP. Workloads would need to be cloned or upgraded to see if they pass the PSP.
+   给项目设置Pod 安全策略会有这些效果：
+
+   * 覆盖项目所属集群给该项目配置的默认Pod 安全策略
+   * 项目会立刻应用这一条Pod 安全策略 
+   * 后续添加到该项目中命名空间会应用这一条Pod 安全策略。
+
+1. 单击“保存”，完成Pod 安全策略配置。
+
+**结果：**项目和项目内的命名空间已经应用了新的Pod 安全策略。如果后续在该项目中新建命名空间，该命名空间也会沿用这条Pod 安全策略。 
+
+> **说明：** 配置Pod 安全策略前，我们不会检查任何在集群或项目中状态为 **“运行中”** 的工作负载和Pod 安全策略是否适配。所以您需要克隆或升级这些工作负载，检查适配性。
 
