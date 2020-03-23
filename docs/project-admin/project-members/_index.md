@@ -2,49 +2,45 @@
 title: 添加项目成员
 ---
 
-If you want to provide a user with access and permissions to _specific_ projects and resources within a cluster, assign the user a project membership.
+如果您需要给用户提供访问某个集群内特定项目和项目资源的权限，你需要将该用户添加到项目成员列表中。在 Rancher 中，项目和项目成员存在多对多的映射关系，也就是说，一个用户可以是多个项目的成员，与此同时，一个项目也可以有多个项目成员。本文主要介绍在新建的项目和已有的项目中添加成员的操作步骤。如果您需要将同一个集群的全部项目的权限开放给一个用户，请参考 [添加集群成员](/docs/cluster-provisioning/cluster-members/_index)。
 
-You can add members to a project as it is created, or add them to an existing project.
+## 新建项目时添加成员
 
-> **Tip:** Want to provide a user with access to _all_ projects within a cluster? See [Adding Cluster Members](/docs/cluster-provisioning/cluster-members/) instead.
+我们建议用户在创建项目的时候添加项目成员。详情请参考[集群管理员指南](/docs/k8s-in-rancher/projects-and-namespaces/_index)。若您想先创建项目，再添加项目成员，请参考下文的操作指导。
 
-#### Adding Members to a New Project
+## 在已有项目中添加成员
 
-You can add members to a project as you create it (recommended if possible). For details on creating a new project, refer to the [cluster administration section.](/docs/k8s-in-rancher/projects-and-namespaces/)
+完成项目创建以后，您可以将其他用户添加到项目成员名单里面，这样他们就有访问项目内容和项目资源的权限了。
 
-#### Adding Members to an Existing Project
+1. 访问 Rancher UI **全局** 页面，单击项目名称，跳转到需要添加成员的项目。
 
-Following project creation, you can add users as project members so that they can access its resources.
+2. 从项目的主菜单中选择**成员**，然后单击**添加成员**。
 
-1. From the **Global** view, open the project that you want to add members to.
+3. 在搜索框中输入您想要添加的成员名称。
 
-2. From the main menu, select **Members**. Then click **Add Member**.
+   如果外部认证已经配置好了：
 
-3. Search for the user or group that you want to add to the project.
+   - Rancher 会返回外部认证中含有您输入的用户名称的账户。
 
-   If external authentication is configured:
+   - Rancher 会提供下拉菜单，除了添加单个用户以外，Rancher允许您添加一个群组内的所有用户。下拉菜单会把您和您准备添加的用户所在的所有群组的显示出来，方便批量添加用户到某一个项目中。
 
-   - Rancher returns users from your external authentication source as you type.
+   > **说明：** 如果您以本地用户的方式登录 Rancher，搜索结果中不会显示外部用户。
 
-   - A drop-down allows you to add groups instead of individual users. The dropdown only lists groups that you, the logged in user, are included in.
+4. 分配用户或用户群组的项目角色。
 
-   > **Note:** If you are logged in as a local user, external users do not display in your search results.
+   [什么是项目角色？](/docs/admin-settings/rbac/cluster-project-roles/_index)
 
-4. Assign the user or group **Project** roles.
-
-   [What are Project Roles?](/docs/admin-settings/rbac/cluster-project-roles/)
-
-   > **Notes:**
+   > **说明：**
    >
-   > - Users assigned the `Owner` or `Member` role for a project automatically inherit the `namespace creation` role. However, this role is a [Kubernetes ClusterRole](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#role-and-clusterrole), meaning its scope extends to all projects in the cluster. Therefore, users explicitly assigned the `Owner` or `Member` role for a project can create namespaces in other projects they're assigned to, even with only the `Read Only` role assigned.
+   > -被分配到 `Owner` 或 `Member` 角色的用户自动获得 `namespace creation` 角色。这个角色是原生Kubernetes中的概念，意味着用户可以管理集群中的所有项目。因此，即使用户在一个项目分配到了 `Owner` 或 `Member` 角色，而在同一个集群中的另一个项目中分配到了 `Read Only` 权限，该用户还是具有管理集群中所有项目的权限。
    >
-   > - For `Custom` roles, you can modify the list of individual roles available for assignment.
+   > - `Custom` 角色是自定义角色，您可以创建一个自定义角色，或修改已有角色，分配给用户使用。
    >
-   >   - To add roles to the list, [Add a Custom Role](/docs/admin-settings/rbac/default-custom-roles).
-   >   - To remove roles from the list, [Lock/Unlock Roles](/docs/admin-settings/rbac/locked-roles/).
+   >   - 添加角色的详细步骤请参考[添加自定义角色](/docs/admin-settings/rbac/default-custom-roles/_index)。
+   >   - 删除角色的详细步骤请参考[锁定/解锁角色](/docs/admin-settings/rbac/locked-roles/_index)。
 
-**Result:** The chosen users are added to the project.
+**结果：** 用户分配到了指定的角色，成为了指定项目的成员。
 
-* To revoke project membership, select the user and click **Delete**. This action deletes membership, not the user.
-* To modify a user's roles in the project, delete them from the project, and then re-add them with modified roles.
+* 需要修改项目用户名单时，您可以选择用户，单击**删除**，把用户从项目成员中移除。这个操作会取消用户访问该项目的权限，而不是删除用户本身。
+* 需要调整用户在项目内的角色时，您需要先将用户从成员名单中删除，再重新将用户和新角色添加单项目中。
 
