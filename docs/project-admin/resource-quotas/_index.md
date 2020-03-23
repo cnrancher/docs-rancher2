@@ -2,45 +2,45 @@
 title: 介绍
 ---
 
-_Available as of v2.1.0_
+_Rancher v2.1.0或更新版本可用_
 
-In situations where several teams share a cluster, one team may overconsume the resources available: CPU, memory, storage, services, Kubernetes objects like pods or secrets, and so on. To prevent this overconsumption, you can apply a _resource quota_, which is a Rancher feature that limits the resources available to a project or namespace.
+当几个开发团队共享一个集群的时候，其中一个开发团队可能会消耗过多的CPU、内存、存储、设备、Pod、秘钥等集群资源。为了防止资源浪费，保护集群健康，您可以使用 _资源配额_ 管理集群资源 。资源配额，是 Rancher 独有的功能，对每个项目和命名空间资源做出限制。
 
-This page is a how-to guide for creating resource quotas in existing projects.
+本文提供了创建项目资源配额的操作指导。
 
-Resource quotas can also be set when a new project is created. For details, refer to the section on [creating new projects.](/docs/cluster-admin/projects-and-namespaces/#creating-projects)
+新建项目的时候也可以配置资源，详情请见[新建项目](/docs/cluster-admin/projects-and-namespaces/_index#creating-projects)。
 
-> Resource quotas in Rancher include the same functionality as the [native version of Kubernetes](https://kubernetes.io/docs/concepts/policy/resource-quotas/). However, in Rancher, resource quotas have been extended so that you can apply them to [projects](/docs/k8s-in-rancher/projects-and-namespaces/#projects). For details on how resource quotas work with projects in Rancher, refer to [this page.](./quotas-for-projects)
+> Rancher 的资源配额包括了[原生Kubernetes](https://kubernetes.io/docs/concepts/policy/resource-quotas/)的资源配额功能。但是 Rancher 把资源配额扩展到了项目层级。请参考下文了解如何配置项目级的资源配额。
 
-#### Applying Resource Quotas to Existing Projects
+## 如何在已有项目中配置资源配额
 
-_Available as of v2.0.1_
+_Rancher v2.1.0或更新版本可用_
 
-Edit [resource quotas](/docs/k8s-in-rancher/projects-and-namespaces/resource-quotas) when:
+修改资源配额的使用场景如下：
 
-* You want to limit the resources that a project and its namespaces can use.
-* You want to scale the resources available to a project up or down when a research quota is already in effect.
+* 限制某个项目和项目下的命名空间能使用的资源
+* 对项目可用的资源进行扩容或缩容
 
-1. From the **Global** view, open the cluster containing the project to which you want to apply a resource quota.
+1. 访问 Rancher UI **全局** 页面，打开含有您想要配置资源配额的项目的集群。
 
-1. From the main menu, select **Projects/Namespaces**.
+1. 从主菜单中选择 **项目/命名空间**。
 
-1. Find the project that you want to add a resource quota to. From that project, select **Ellipsis (...) > Edit**.
+1. 找到项目，单击 **(... ) > 编辑**。 
 
-1. Expand **Resource Quotas** and click **Add Quota**. Alternatively, you can edit existing quotas.
+1. 打开**资源配额**，单击**添加配额**，添加新的资源配额。修改现有的资源配额也可以达到相同的效果。 
 
-1. Select a [Resource Type](/docs/project-admin/resource-quotas/#resource-quota-types).
+1. 选择一个资源类型。
 
-1. Enter values for the **Project Limit** and the **Namespace Default Limit**.
+1. 输入**项目资源限额** 和 **命名空间默认限额**.
 
-| Field                   | Description                                                                                                                                                                                          |
+| 名称                   | 描述                                                                                                                                                                                          |
 |-------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Project Limit           | The overall resource limit for the project.                                                                                                                                                          |
-| Namespace Default Limit | The default resource limit available for each namespace. This limit is propagated to each namespace in the project. The combined limit of all project namespaces shouldn't exceed the project limit. |
+| 项目资源配额           | 项目整体的资源配额。|
+| 命名空间默认配额 | 项目内每一个命名空间的默认资源配额，所有命名空间的配额总和应该小于或等于项目资源配额。|
 
-1. **Optional:** Add more quotas.
+1. **可选：** 添加更多限额。
 
-1. Click **Create**.
+1. 单击 **创建**，新建项目资源配额。
 
-**Result:** The resource quota is applied to your project and namespaces. When you add more namespaces in the future, Rancher validates that the project can accommodate the namespace. If the project can't allocate the resources, Rancher won't let you save your changes.
+**结果：** 完成项目和命名空间的资源配额配置。当您在项目中新建命名空间的时候，Rancher 会验证项目是否有能力容纳新的命名空间。新建的命名空间可能导致实际所需资源会出项目整体资源配额，在这种情况下Rancher 会禁止您创建新的命名空间。我们建议您在创建新的命名空间之前，检查项目整体资源配额，按需调整。
 
