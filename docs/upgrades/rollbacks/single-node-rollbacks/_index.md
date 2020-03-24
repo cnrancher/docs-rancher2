@@ -2,92 +2,83 @@
 title: 单节点回滚
 ---
 
-If a Rancher upgrade does not complete successfully, you'll have to roll back to your Rancher setup that you were using before [Docker Upgrade](/docs/upgrades/upgrades/single-node-upgrade). Rolling back restores:
+如果 Rancher 升级未成功完成，则必须回滚到[升级 Rancher 单节点](/docs/upgrades/upgrades/single-node/_index)之前使用的 Rancher 部署。回滚还原：
 
-* Your previous version of Rancher.
-* Your data backup created before upgrade.
+- 您之前的 Rancher 版本。
+- 升级前已创建数据备份。
 
-### Before You Start
+## 在回滚之前
 
-During rollback to a prior version of Rancher, you'll enter a series of commands, filling placeholders with data from your environment. These placeholders are denoted with angled brackets and all capital letters ( `<EXAMPLE>` ). Here's an example of a command with a placeholder:
+回滚到较早版本的 Rancher 期间，您将输入一系列命令，按照你的情况替换命令中的占位符。这些占位符用尖括号和大写字母（`<EXAMPLE>`）表示。这是带有占位符的命令示例：
 
-``` 
+```
 docker pull rancher/rancher:<PRIOR_RANCHER_VERSION>
 ```
 
-In this command, { `<PRIOR_RANCHER_VERSION>` } is the version of Rancher you were running before your unsuccessful upgrade. `v2.0.5` for example.
+在此命令中，`<PRIOR_RANCHER_VERSION>`是升级失败之前运行的 Rancher 的版本。例如`v2.0.5`。
 
-Cross reference the image and reference table below to learn how to obtain this placeholder data. Write down or copy this information before starting the [procedure below](#creating-a-backup).
+请交叉参考下面的图片和参考表，以了解如何获取此占位符数据。在开始以回滚之前，写下或复制此信息。
 
-<sup>Terminal `docker ps` Command, Displaying Where to Find { `<PRIOR_RANCHER_VERSION>` } and { `<RANCHER_CONTAINER_NAME>` }</sup>
+<sup>终端 “docker ps” 命令，显示在何处找到 {`<PRIOR_RANCHER_VERSION>`} 和 {`<RANCHER_CONTAINER_NAME>`} </sup>
 
-![Placeholder Reference](/img/rancher/placeholder-ref-2.png)
+![占位符参考](/img/rancher/placeholder-ref-2.png)
 
-| Placeholder                  | Example           | Description                                             |
-| ---------------------------- | ----------------- | ------------------------------------------------------- |
-| { `<PRIOR_RANCHER_VERSION>` }  | `v2.0.5` | The rancher/rancher image you used before upgrade.|
-| { `<RANCHER_CONTAINER_NAME>` } | `festive_mestorf` | The name of your Rancher container.|
-| `<RANCHER_VERSION>` | `v2.0.5` | The version of Rancher that the backup is for.|
-| { `<DATE>` }                   | `9-27-18` | The date that the data container or backup was created.|
+| 占位符                     | 例子              | 描述                                  |
+| -------------------------- | ----------------- | ------------------------------------- |
+| `<PRIOR_RANCHER_VERSION>`  | `v2.0.5`          | 升级之前使用的 rancher/rancher 镜像。 |
+| `<RANCHER_CONTAINER_NAME>` | `festive_mestorf` | Rancher 容器的名称。                  |
+| `<RANCHER_VERSION>`        | `v2.0.5`          | 备份所针对的 Rancher 版本。           |
+| `<DATE>`                   | `9-27-18`         | 数据容器或备份的创建日期。            |
 
-<br/>
+您可以通过远程连接登录到 Rancher Server 所在的主机并输入命令以查看正在运行的容器：`docker ps`，从而获得 `<PRIOR_RANCHER_VERSION>` 和 `<RANCHER_CONTAINER_NAME>`的值。您还可以使用其他命令查看停止的容器：`docker ps -a`。在创建备份期间，你可以随时使用这些命令获得帮助。
 
-You can obtain { `<PRIOR_RANCHER_VERSION>` } and { `<RANCHER_CONTAINER_NAME>` } by logging into your Rancher Server by remote connection and entering the command to view the containers that are running: `docker ps` . You can also view containers that are stopped using a different command: `docker ps -a` . Use these commands for help anytime during while creating backups.
+## 回滚 Rancher
 
-### Rolling Back Rancher
+如果您在升级 Rancher 时遇到问题，需要拉取之前正常版本的镜像，并且还原在升级前所做的备份，从而将 Rancher 恢复到之前工作的状态。
 
-If you have issues upgrading Rancher, roll it back to its latest known healthy state by pulling the last version you used and then restoring the backup you made before upgrade.
+:::important 警告！
+回滚到 Rancher 的先前版本会破坏您在升级后对 Rancher 所做的任何更改。可能会发生不可恢复的数据丢失。
+:::
 
-> **Warning!** Rolling back to a previous version of Rancher destroys any changes made to Rancher following the upgrade. Unrecoverable data loss may occur.
+1. 使用远程终端连接，登录运行 Rancher Server 的节点。
 
-1. Using a remote Terminal connection, log into the node running your Rancher Server.
+1. 拉取升级前运行的 Rancher 版本的镜像。将`<PRIOR_RANCHER_VERSION>` 替换为[那个版本](#在回滚之前)。
 
-1. Pull the version of Rancher that you were running prior to upgrade. Replace the { `<PRIOR_RANCHER_VERSION>` } with [that version](#before-you-start).
+   例如，如果升级前运行的是 Rancher v2.0.5，请拉取 v2.0.5。
 
-   For example, if you were running Rancher v2.0.5 before upgrade, pull v2.0.5.
-
-   
-
-``` 
+   ```
    docker pull rancher/rancher:<PRIOR_RANCHER_VERSION>
    ```
 
-1. Stop the container currently running Rancher Server. Replace { `<RANCHER_CONTAINER_NAME>` } with the name of your Rancher container.
+1. 停止当前运行 Rancher Server 的容器。将`<RANCHER_CONTAINER_NAME>`替换为 Rancher 容器的名称。
 
-   
-
-``` 
+   ```
    docker stop <RANCHER_CONTAINER_NAME>
    ```
 
-   You can obtain the name for your Rancher container by entering `docker ps` .
+   您可以通过输入`docker ps`获得 Rancher 容器的名称。
 
-1. Move the backup tarball that you created during completion of [Docker Upgrade](/docs/upgrades/upgrades/single-node-upgrade/) onto your Rancher Server. Change to the directory that you moved it to. Enter `dir` to confirm that it's there.
+1. 将在[升级单节点 Rancher](/docs/upgrades/upgrades/single-node/_index)时生成的备份压缩包移动到 Rancher 服务器上。转到您将其移动到的目录。输入`ls`确认它在那里。
 
-   If you followed the naming convention we suggested in [Docker Upgrade](/docs/upgrades/upgrades/single-node-upgrade/), it will have a name similar to ({ `rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz` }).
+   如果您遵循了我们在[升级单节点 Rancher](/docs/upgrades/upgrades/single-node/_index)中建议的命名约定，则其命名类似于(`rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz`)。
 
-1. Run the following command to replace the data in the `rancher-data` container with the data in the backup tarball, replacing the [placeholder](#before-you-start). Don't forget to close the quotes.
+1. 运行以下命令，替换[占位符](#在回滚之前)，别忘了关闭引号。从而将`rancher-data`容器中的数据替换为备份压缩包中的数据。
 
-   
-
-``` 
+   ```
    docker run  --volumes-from rancher-data \
    -v $PWD:/backup busybox sh -c "rm /var/lib/rancher/* -rf \
    && tar zxvf /backup/rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz"
    ```
 
-1. Start a new Rancher Server container with the { `<PRIOR_RANCHER_VERSION>` } tag [placeholder](#before-you-start) pointing to the data container.
+1. 启动一个新的指向数据容器的 Rancher Server 容器，替换 `<PRIOR_RANCHER_VERSION>` [占位符](#在回滚之前)。
 
-   
-
-``` 
+   ```
    docker run -d --volumes-from rancher-data \
    --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher:<PRIOR_RANCHER_VERSION>
    ```
 
-   > **Note:** _Do not_ stop the rollback after initiating it, even if the rollback process seems longer than expected. Stopping the rollback may result in database issues during future upgrades.
+   > **注意：** 不要在启动回滚后停止回滚，即使回滚过程似乎比预期的要长。停止回滚可能导致在将来的升级时产生数据库问题。
 
-1. Wait a few moments and then open Rancher in a web browser. Confirm that the rollback succeeded and that your data is restored.
+1. 等待片刻，然后在 Web 浏览器中打开 Rancher。确认回滚成功并且您的数据已还原。
 
-**Result:** Rancher is rolled back to its version and data state prior to upgrade.
-
+**结果：** Rancher 回滚到了在其升级之前的版本和数据状态。

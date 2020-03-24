@@ -1,32 +1,31 @@
 ---
-title: 介绍
+title: 升级必读
 ---
 
-This section contains information about how to upgrade your Rancher server to a newer version. Regardless if you installed in an air gap environment or not, the upgrade steps mainly depend on whether you have a single node or high-availability installation of Rancher. Select from the following options:
+本节包含有关如何将 Rancher Server 升级到较新版本的信息。无论 Rancher Server 是否安装在内网环境中，升级步骤取决于您是在使用单节点 Rancher 还是在使用高可用 Rancher。请从以下选项中选择：
 
-* [Upgrading Rancher installed with Docker](/docs/upgrades/upgrades/single-node/)
-* [Upgrading Rancher installed on a Kubernetes cluster](/docs/upgrades/upgrades/ha/)
+- [升级单节点 Rancher](/docs/upgrades/upgrades/single-node/_index)
+- [升级高可用 Rancher](/docs/upgrades/upgrades/ha/_index)
 
-#### Known Upgrade Issues
+## 已知的升级问题
 
-The following table lists some of the most noteworthy issues to be considered when upgrading Rancher. A more complete list of known issues for each Rancher version can be found in the release notes on [GitHub](https://github.com/rancher/rancher/releases) and on the [Rancher forums.](https://forums.rancher.com/c/announcements/12)
+下表列出了升级 Rancher 时要考虑的一些最值得注意的问题。可以在[GitHub](https://github.com/rancher/rancher/releases)和[Rancher 论坛](https://forums.rancher.com/c/announcements/12)的发行说明中找到有关每个 Rancher 版本的已知问题的更完整列表。
 
-| Upgrade Scenario                  | Issue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Upgrading to v2.3.0+              | Any user provisioned cluster will be automatically updated upon any edit as tolerations were added to the images used for Kubernetes provisioning.|
-| Upgrading to v2.2.0-v2.2.x        | Rancher introduced the [system charts](https://github.com/rancher/system-charts) repository which contains all the catalog items required for features such as monitoring, logging, alerting and global DNS. To be able to use these features in an air gap install, you will need to mirror the `system-charts` repository locally and configure Rancher to use that repository. Please follow the instructions to [configure Rancher system charts](/docs/installation/options/local-system-charts/#setting-up-system-charts-for-rancher-prior-to-v2-3-0).|
-| Upgrading from v2.0.13 or earlier | If your cluster's certificates have expired, you will need to perform [additional steps](/docs/cluster-admin/certificate-rotation/#rotating-expired-certificates-after-upgrading-older-rancher-versions) to rotate the certificates.|
-| Upgrading from v2.0.7 or earlier  | Rancher introduced the `system` project, which is a project that's automatically created to store important namespaces that Kubernetes needs to operate. During upgrade to v2.0.7+, Rancher expects these namespaces to be unassigned from all projects. Before beginning upgrade, check your system namespaces to make sure that they're unassigned to [prevent cluster networking issues](/docs/upgrades/upgrades/namespace-migration/#preventing-cluster-networking-issues).|
+| 升级场景                  | 问题                                                                                                                                                                                                                                                                                                                                                        |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 升级到 v2.3.0+            | 从 v2.0，v2.1 或 v2.2 版本升级到 v2.3.0 或者以上版本时，第一次修改通过 Rancher v2.3.0 之前版本部署的 RKE 集群时，由于要向系统组件中加入 Tolerations，该集群全部的系统组件将会自动重启。                                                                                                                                                                     |
+| 升级到 v2.2.0-v2.2.x      | Rancher 引入了[System Charts](https://github.com/rancher/system-charts)代码库，其中包含监控，日志，告警和全局 DNS 等功能所需的所有应用商店应用。为了能够在离线环境中使用这些功能，您将需要在本地镜像`system-charts`代码库，并将 Rancher 配置为使用该代码库。请按照说明[配置 Rancher System Charts](/docs/installation/options/local-system-charts/_index)。 |
+| 从 v2.0.13 或更早版本升级 | 如果您集群的证书已过期，则需要执行[其他步骤](/docs/cluster-admin/certificate-rotation/_index)来轮换证书。                                                                                                                                                                                                                                                   |
+| 从 v2.0.7 或更早版本升级  | Rancher 引入了 `System` 项目，这是一个自动创建的项目，用于存放 Kubernetes 需要操作的重要命名空间。在升级到 v2.0.7+ 的过程中，Rancher 希望从所有项目中移出这些命名空间。在开始升级之前，请检查这些系统名称空间，确保它们不在任何项目中，从而[防止集群网络问题](/docs/upgrades/upgrades/namespace-migration/_index)。                                         |
 
-#### Caveats
+## 警告
 
-Upgrades _to_ or _from_ any chart in the [rancher-alpha repository](/docs/installation/options/server-tags/#helm-chart-repositories/) aren't supported.
+不支持升级到[rancher-alpha 库](/docs/installation/options/server-tags/_index)中的任何版本或从[rancher-alpha 库](/docs/installation/options/server-tags/_index)中的任何版本升级到其他版本。
 
-#### RKE Add-on Installs
+## 通过 RKE Add-on 安装
 
-**Important: RKE add-on install is only supported up to Rancher v2.0.8**
+**重要提示：RKE Add-on 安装方式仅支持到 Rancher v2.0.8 版本**
 
-Please use the Rancher helm chart to install Rancher on a Kubernetes cluster. For details, see the [Kubernetes Install - Installation Outline](/docs/installation/k8s-install/#installation-outline).
+请使用 Rancher helm chart 来安装 Rancher 高可用。有关详细信息，请参见[高可用安装 - 安装概述](/docs/installation/k8s-install/_index)。
 
-If you are currently using the RKE add-on install method, see [Migrating from a RKE add-on install](/docs/upgrades/upgrades/migrating-from-rke-add-on/) for details on how to move to using the helm chart.
-
+如果您当前正在使用 RKE Add-on 安装方法，请参阅[从 RKE Add-on 安装迁移](/docs/upgrades/upgrades/migrating-from-rke-add-on/_index)了解有关如何迁移到使用 helm chart 安装 Rancher 高可用。
