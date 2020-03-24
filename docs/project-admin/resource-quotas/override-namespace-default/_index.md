@@ -2,34 +2,32 @@
 title: 覆盖命名空间默认资源限制
 ---
 
-Although the **Namespace Default Limit** propagates from the project to each namespace, in some cases, you may need to increase (or decrease) the performance for a specific namespace. In this situation, you can override the default limits by editing the namespace.
+**命名空间默认资源限制**是从项目传递到每个命名空间的，但是在某些场景下，您可能需要增强或降低特定命名空间的性能。在这种情况下，您可以修改命名空间资源限制，覆盖原有的默认资源限制。
 
-In the diagram below, the Rancher administrator has a resource quota in effect for their project. However, the administrator wants to override the namespace limits for `Namespace 3` so that it performs better. Therefore, the administrator [raises the namespace limits](/docs/k8s-in-rancher/projects-and-namespaces/#editing-namespace-resource-quotas) for `Namespace 3` so that the namespace can access more resources.
+下图中，Rancher管理员有一个已经生效的项目资源限制。但是管理员需要提升 `Namespace 3` 的性能，所以需要 `Namespace 3` 使用更多的资源。这与命名空间默认资源限制冲突了。因此，管理员提高了命名空间资源限制， `Namespace 3` 就可以使用更多资源了。
 
 <sup>Namespace Default Limit Override</sup>
 
 ![Namespace Default Limit Override](/img/rancher/rancher-resource-quota-override.svg)
 
-How to: [Editing Namespace Resource Quotas](/docs/k8s-in-rancher/projects-and-namespaces/#editing-namespace-resource-quotas)
+## 编辑命名空间资源限制
 
-#### Editing Namespace Resource Quotas
+如果项目中已经配置了[资源限制](/docs/project-admin/resource-quotas/_index) ，您可以覆盖命名空间资源限制，让特定的命名空间有权限使用更多或更少的项目资源。
 
-If there is a [resource quota](/docs/k8s-in-rancher/projects-and-namespaces/resource-quotas) configured for a project, you can override the namespace default limit to provide a specific namespace with access to more (or less) project resources.
+1. 访问 Rancher UI **全局** 页面，找到项目和命名空间所属的集群。
 
-1. From the **Global** view, open the cluster that contains the namespace for which you want to edit the resource quota.
+1. 打开主菜单，选择 **项目/命名空间**。
 
-1. From the main menu, select **Projects/Namespaces**.
+1. 找到需要配置资源限制的命名空间。从项目首页选择 **... > 编辑**。
 
-1. Find the namespace for which you want to edit the resource quota. Select **Ellipsis (...) > Edit**.
+1. 编辑资源**限制**。这些限制决定了命名空间能够使用的资源数量。命名空间的资源限制不能和已生效的项目资源限制冲突。
 
-1. Edit the Resource Quota **Limits**. These limits determine the resources available to the namespace. The limits must be set within the configured project limits.
+   关于**资源类型**的详情，请参考[资源限制类型](/docs/project-admin/resource-quotas/_index)。
 
-   For more information about each **Resource Type**, see [Resource Quota Types](/docs/k8s-in-rancher/projects-and-namespaces/resource-quotas/#resource-quota-types).
-
-   > **Note:**
+   > **说明**
    >
-   > - If a resource quota is not configured for the project, these options will not be available.
-   > - If you enter limits that exceed the configured project limits, Rancher will not let you save your edits.
-
-**Result:** The namespace's default resource quota is overwritten with your override.
+   > - 修改命名空间层级的资源限制的前提条件是您已经配置好了项目层级的资源限制。如果项目层级的资源限制还没有配置好，上述关于如何修改命名空间层级的资源限制都不适用。
+   > - 如果修改时输入的命名空间资源限制超过了项目资源限制，Rancher 不会允许您保存这次修改。
+   
+**结果：** 命名空间默认资源限制被覆盖。
 
