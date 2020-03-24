@@ -1,43 +1,47 @@
 ---
-title: 设置容器的默认资源限制
+title: 覆盖容器的默认资源限制
 ---
 
-_Available as of v2.2.0_
+_v2.2.0或更新版本可用_
 
-When setting resource quotas, if you set anything related to CPU or Memory (i.e.limits or reservations) on a project / namespace, all containers will require a respective CPU or Memory field set during creation. See the [Kubernetes documentation](https://kubernetes.io/docs/concepts/policy/resource-quotas/#requests-vs-limits) for more details on why this is required.
+设置资源限制的时候，如果您在项目或命名空间中设置任何CPU相关，或内存相关的限制（如资源限制或资源保留），创建这种资源限制的期间，所有容器需要各自的CPU和内存空间。详情请参考[Kubernetes 官方文档](https://kubernetes.io/docs/concepts/policy/resource-quotas/#requests-vs-limits)。
 
-To avoid setting these limits on each and every container during workload creation, a default container resource limit can be specified on the namespace.
+为了避免在每一个容器里都设置一遍资源限制，您可以在命名空间中设置容器的默认资源限制。
 
-#### Editing the Container Default Resource Limit
+## 修改容器的默认资源限制
 
-_Available as of v2.2.0_
+_v2.2.0或更新版本可用_
 
-Edit [container default resource limit](/docs/k8s-in-rancher/projects-and-namespaces/resource-quotas/#setting-container-default-resource-limit) when:
+当您遇到下列任意一种情况时，您可以修改容器的默认资源限制。
 
-* You have a CPU or Memory resource quota set on a project, and want to supply the corresponding default values for a container.
-* You want to edit the default container resource limit.
+* 您已经对容器内的一个项目设置了资源限制，现在需要给容器设置一个对应的资源限制。
 
-1. From the **Global** view, open the cluster containing the project to which you want to edit the container default resource limit.
-1. From the main menu, select **Projects/Namespaces**.
-1. Find the project that you want to edit the container default resource limit. From that project, select **Ellipsis (...) > Edit**.
-1. Expand **Container Default Resource Limit** and edit the values.
+* 您需要修改容器的默认资源限制
 
-#### Resource Limit Propagation
+1. 访问 Rancher  **全局**页面，选择容器。 
 
-When the default container resource limit is set at a project level, the parameter will be propagated to any namespace created in the project after the limit has been set. For any existing namespace in a project, this limit will not be automatically propagated. You will need to manually set the default container resource limit for any existing namespaces in the project in order for it to be used when creating any containers.
+1. 从主菜单中选择**项目/命名空间**。
 
-> **Note:** Prior to v2.2.0, you could not launch catalog applications that did not have any limits set. With v2.2.0, you can set a default container resource limit on a project and launch any catalog applications.
+1. 在项目列表中找到您需要修改的项目，选择 **... > 编辑**
 
-Once a container default resource limit is configured on a namespace, the default will be pre-populated for any containers created in that namespace. These limits/reservations can always be overridden during workload creation.
+1. 展开**容器默认资源限制**，修改默认值。
 
-#### Container Resource Quota Types
+## 沿用资源限制
 
-The following resource limits can be configured:
+在完成在项目层级设置默认容器资源限制之后，项目中的所有新建的命名空间都会沿用这个资源限制参数。对修改资源限制之前已经在项目内的命名空间而言，它们不会自动沿用修改之后的容器资源限制，您需要手动管理这些命名空间，把它们的资源限制修改为新的参数，这样操作，才可以用来创建新的容器。
 
-| Resource Type      | Description                                                                                                                                                                   |
+> **说明：** 在 Rancher v2.2.0 版本之前，您不可以发布没有资源限制的catalog applications。在ancher v2.2.0及更新版本内，您可以在项目中设置容器的默认资源限制，然后运行catalog applications。
+
+在命名空间层级设置容器的默认资源限制以后，这个默认参数会下发到容器中。在创建工作负载的过程中，这些资源限制/资源预留数值是可以被覆盖的。
+
+## 容器资源限制类型
+
+可以修改的容器资源限制类型如下表所示：
+
+|     资源类型         | 描述                                                                                                                                                                   |
 | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| CPU Limit          | The maximum amount of CPU (in [millicores](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-cpu)) allocated to the container.|
-| CPU Reservation    | The minimum amount of CPU (in millicores) guaranteed to the container.|
-| Memory Limit       | The maximum amount of memory (in bytes) allocated to the container.|
-| Memory Reservation | The minimum amount of memory (in bytes) guaranteed to the container.|
+|     CPU限制              | 可以分配给容器的CPU最大值，单位：[millicores](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-cpu)。|
+|     CPU预留        | 保障容器正常运行所需的CPU最小值，单位：millicores。|
+|     内存限制           | 可以分配给容器的内存最大值，单位：bytes。|
+|     内存预留     | 保障容器正常运行所需的内存最小值，单位：bytes。|
 
