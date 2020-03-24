@@ -1,211 +1,194 @@
 ---
-title: 对通过 Helm 2 安装在 Kubernetes 集群内的 Rancher 进行升级
+title: 高可用升级指南（ Helm 2）
 ---
 
-> After Helm 3 was released, the [instructions for upgrading Rancher on a Kubernetes cluster](./ha) were updated to use Helm 3.
+:::important 重要
+在发布 Helm 3 之后。[Rancher 高可用升级指南](../_index)已更新为使用 Helm 3。
+
+如果您使用的是 Helm 2，我们建议[迁移到 Helm 3](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/)，因为 Helm 3 使用起来更简单，而且比 Helm 2 更安全。
+
+本节提供了使用 Helm 2 升级 Rancher 的旧版指南，适用于无法升级到 Helm 3 的情况。
+:::
+
+以下说明将指导您使用 Helm 升级 Kubernetes 集群上安装的 Rancher Server。
+
+要升级 Kubernetes 集群中的组件，[Kubernetes 服务](https://rancher.com/docs/rke/latest/en/config-options/services/)或[add-ons](https://rancher.com/docs/rke/latest/en/config-options/add-ons/)，请参阅[RKE 的升级文档](https://rancher.com/docs/rke/latest/en/upgrades/)，Rancher Kubernetes Engine。
+
+如果您使用 RKE Add-on 的方式安装了 Rancher，请按照[迁移或升级](/docs/upgrades/upgrades/migrating-from-rke-add-on/_index)的说明进行操作。
+
+> **注意：**
 >
-> If you are using Helm 2, we recommend [migrating to Helm 3](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/) because it is simpler to use and more secure than Helm 2.
->
-> This section provides a copy of the older instructions for upgrading Rancher with Helm 2, and it is intended to be used if upgrading to Helm 3 is not feasible.
+> - [Let's Encrypt 于 2019 年 11 月 1 日开始屏蔽早于 0.8.0 版本的 cert-manager 实例。](https://community.letsencrypt.org/t/blocking-old-cert-manager-versions/98753) 按照[这些说明](/docs/installation/options/upgrading-cert-manager/_index)升级 cert-manager 到最新版本。
+> - 如果要将 Rancher 从 v2.x 升级到 v2.3+，并且正在使用外部 TLS 终止，则需要编辑 cluster.yml 文件，来[配置 Ingress 使用 use-forwarded-headers](/docs/installation/options/chart-options/_index)。
 
-The following instructions will guide you through using Helm to upgrade a Rancher server that is installed on a Kubernetes cluster.
+## 先决条件
 
-To upgrade the components in your Kubernetes cluster, or the definition of the [Kubernetes services]({{<baseurl>}}/rke/latest/en/config-options/services/) or [add-ons]({{< baseurl >}}/rke/latest/en/config-options/add-ons/), refer to the [upgrade documentation for RKE]({{<baseurl>}}/rke/latest/en/upgrades/), the Rancher Kubernetes Engine.
+- 从 Rancher 文档中的 **[已知升级问题](/docs/upgrades/upgrades/_index#已知的升级问题) 和 [警告](/docs/upgrades/upgrades/_index#警告)** 查看升级 Rancher 中最值得注意的问题。可以在[GitHub](https://github.com/rancher/rancher/releases) 和 [Rancher 论坛](https://forums.rancher.com/c/announcements/12)的发行说明中找到每个 Rancher 版本的已知问题的更完整列表。
+- **[仅对于离线安装](/docs/installation/other-installation-methods/air-gap/_index)，拉取并上传新的 Rancher Server 版本的镜像**。请按照指南[准备私有仓库](/docs/installation/other-installation-methods/air-gap/populate-private-registry/_index)，来准备你要升级的版本的镜像。
 
-If you installed Rancher using the RKE Add-on yaml, follow the directions to [migrate or upgrade](/docs/upgrades/upgrades/migrating-from-rke-add-on).
+## 升级大纲
 
-> **Notes:**
->
-> - [Let's Encrypt will be blocking cert-manager instances older than 0.8.0 starting November 1st 2019.](https://community.letsencrypt.org/t/blocking-old-cert-manager-versions/98753) Upgrade cert-manager to the latest version by following [these instructions.](/docs/installation/options/upgrading-cert-manager)
-> - If you are upgrading Rancher from v2.x to v2.3+, and you are using external TLS termination, you will need to edit the cluster.yml to [enable using forwarded host headers.](/docs/installation/ha/helm-rancher/chart-options/#configuring-ingress-for-external-tls-when-using-nginx-v0-25)
-> - The upgrade instructions assume you are using Helm 3. For migration of installs started with Helm 2, refer to the official [Helm 2 to 3 migration docs.](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/) This [section](/docs/upgrades/helm2) provides a copy of the older upgrade instructions that used Helm 2, and it is intended to be used if upgrading to Helm 3 is not feasible.
+请按照以下步骤升级 Rancher Server：
 
-## Prerequisites
+- [A. 备份正在运行 Rancher Server 的 Kubernetes 集群](#a-备份运行-rancher-server-的-kubernetes-集群)
+- [B. 更新 Helm Chart 仓库](#b-更新-helm-chart-仓库)
+- [C. 升级 Rancher](#c-升级-rancher)
+- [D. 验证升级](#d-验证升级)
 
-* **Review the [known upgrade issues](/docs/upgrades/upgrades/#known-upgrade-issues) and [caveats](/docs/upgrades/upgrades/#caveats)** in the Rancher documentation for the most noteworthy issues to consider when upgrading Rancher. A more complete list of known issues for each Rancher version can be found in the release notes on [GitHub](https://github.com/rancher/rancher/releases) and on the [Rancher forums.](https://forums.rancher.com/c/announcements/12)
-* **For [air gap installs only, ](/docs/installation/other-installation-methods/air-gap) collect and populate images for the new Rancher server version.** Follow the guide to [populate your private registry](/docs/installation/other-installation-methods/air-gap/populate-private-registry/) with the images for the Rancher version that you want to upgrade to.
+### A. 备份运行 Rancher Server 的 Kubernetes 集群
 
-## Upgrade Outline
+为运行 Rancher Server 的 Kubernetes 集群[拍摄一次快照](/docs/backups/backups/ha-backups/_index)。
+如果升级过程中出现问题，则将快照用作还原点。
 
-Follow the steps to upgrade Rancher server:
+### B. 更新 Helm chart 仓库
 
-* [A. Back up your Kubernetes cluster that is running Rancher server](#a-backup-your-kubernetes-cluster-that-is-running-rancher-server)
-* [B. Update the Helm chart repository](#b-update-the-helm-chart-repository)
-* [C. Upgrade Rancher](#c-upgrade-rancher)
-* [D. Verify the Upgrade](#d-verify-the-upgrade)
+1. 更新本地的 helm 仓库
 
-#### A. Back up Your Kubernetes Cluster that is Running Rancher Server
-
-[Take a one-time snapshot](/docs/backups/backups/ha-backups/#option-b-one-time-snapshots)
-of your Kubernetes cluster running Rancher server. You'll use the snapshot as a restoration point if something goes wrong during upgrade.
-
-#### B. Update the Helm chart repository
-
-1. Update your local helm repo cache.
-
-   
-
-``` 
+   ```
    helm repo update
    ```
 
-1. Get the repository name that you used to install Rancher.
+1. 获取用于安装 Rancher 的仓库名称。
 
-   For information about the repos and their differences, see [Helm Chart Repositories](/docs/installation/options/server-tags/#helm-chart-repositories).
+   请替换命令中的`<CHART_REPO>`，替换为`latest`，`stable`或`alpha`。有关仓库及其差异的信息，请参见[Helm Chart 仓库](/docs/installation/options/server-tags/_index)。
 
-   {{< release-channel >}}
+   - `latest`: 推荐在尝试新功能时使用。
+   - `stable`: 推荐生产环境中使用。（推荐）
+   - `alpha`: 未来版本的实验性预览。
 
-   
+   <br/>
 
-``` 
+   ```
    helm repo list
 
-   NAME          	       URL
-   stable        	       https://kubernetes-charts.storage.googleapis.com
-   rancher-<CHART_REPO>	 https://releases.rancher.com/server-charts/<CHART_REPO>
+   NAME          	        URL
+   stable        	        https://kubernetes-charts.storage.googleapis.com
+   rancher-<CHART_REPO>	https://releases.rancher.com/server-charts/<CHART_REPO>
    ```
 
-   > **Note:** If you want to switch to a different Helm chart repository, please follow the [steps on how to switch repositories](/docs/installation/options/server-tags/#switching-to-a-different-helm-chart-repository). If you switch repositories, make sure to list the repositories again before continuing onto Step 3 to ensure you have the correct one added.
+   > **注意：** 如果要切换到其他 Helm chart 仓库，请按照[切换仓库文档](/docs/installation/options/server-tags/_index)进行切换。如果要切换仓库，请确保在继续执行第 3 步之前再次列出仓库，以确保添加了正确的仓库。
 
-1) Fetch the latest chart to install Rancher from the Helm chart repository.
+1. 从 Helm chart 仓库中获取最新的 chart 以安装 Rancher。
 
-   This command will pull down the latest charts and save it in the current directory as a `.tgz` file.
+   该命令将拉取最新的 chart 并将其保存为当前目录中的一个`.tgz`文件。
 
-   
-
-``` plain
+   ```plain
    helm fetch rancher-<CHART_REPO>/rancher
    ```
 
-#### C. Upgrade Rancher
+### C. 升级 Rancher
 
-This section describes how to upgrade normal (Internet-connected) or air gap installations of Rancher with Helm.
+本节介绍如何使用 Helm 升级 Rancher 的常规（连接 Internet） 或离线安装。
 
- tabs 
- tab "Kubernetes Upgrade" 
+#### Rancher 高可用升级
 
-Get the values, which were passed with `--set` , from the current Rancher Helm chart that is installed.
+从已安装的当前 Rancher Helm chart 中获取通过 `--set` 传递的值。
 
-``` 
+```
 helm get values rancher
 
 hostname: rancher.my.org
 ```
 
-> **Note:** There will be more values that are listed with this command. This is just an example of one of the values.
+> **注意：** 此命令将列出更多的值。这只是其中一个值的示例。
 
-If you are also upgrading cert-manager to the latest version from a version older than 0.11.0, follow `Option B: Reinstalling Rancher` . Otherwise, follow `Option A: Upgrading Rancher` .
+如果您在将 cert-manager 从 0.11.0 之前的版本升级到最新版本，请执行 `选项 B - 重新安装 Rancher Chart`。否则，请执行 `选项 A - 升级Rancher`。
 
- accordion label="Option A: Upgrading Rancher" 
+##### 选项 A - 升级 Rancher
 
-Upgrade Rancher to the latest version with all your settings.
+使用所有设置将 Rancher 升级到最新版本。
 
-Take all the values from the previous step and append them to the command using `--set key=value` . Note: There will be many more options from the previous step that need to be appended.
+取上一步中的所有值，然后使用`--set key=value`将它们附加到命令中：
 
-``` 
+```
 helm upgrade rancher-<CHART_REPO>/rancher \
   --name rancher \
   --namespace cattle-system \
   --set hostname=rancher.my.org
 ```
 
- /accordion 
+> **注意：** 这里将要添加很多从上一步获取的选项。
 
- accordion label="Option B: Reinstalling Rancher chart" 
+##### 选项 B - 重新安装 Rancher Chart
 
-If you are currently running the cert-manger whose version is older than v0.11, and want to upgrade both Rancher and cert-manager to a newer version, then you need to reinstall both Rancher and cert-manger due to the API change in cert-manger v0.11.
+如果您当前正在运行版本低于 v0.11 的 cert-manger，并且想将 Rancher 和 cert-manager 都升级到新版本，则由于 cert-manger v0.11 中的 API 更改，您需要重新安装 Rancher 和 cert-manger。
 
-Please refer the [Upgrading Cert-Manager](/docs/installation/options/upgrading-cert-manager) page for more information.
+请参阅[升级 Cert-Manger](/docs/installation/options/upgrading-cert-manager/_index)页面以获取更多信息。
 
-1. Uninstall Rancher
+1. 卸载 Rancher
 
-   
-
-``` 
+   ```
    helm delete rancher -n cattle-system
    ```
 
-2. Reinstall Rancher to the latest version with all your settings. Take all the values from the previous step and append them to the command using `--set key=value` . Note: There will be many more options from the previous step that need to be appended.
+1. 使用所有的选项将 Rancher 重新安装到最新版本。获取上一步中的所有值，然后使用`--set key=value`。将它们附加到命令中。
 
-   
-
-``` 
+   ```
    helm install rancher-<CHART_REPO>/rancher \
    --name rancher \
    --namespace cattle-system \
    --set hostname=rancher.my.org
    ```
 
- /accordion 
+   > **注意：** 这里将要添加很多从上一步获取的选项。
 
- /tab 
+#### 离线安装的 Rancher 高可用升级
 
- tab "Kubernetes Air Gap Upgrade" 
+1. 使用与安装 Rancher 时使用的相同参数选项来渲染 Rancher 模板。使用下面的参考表替换每个占位符。需要将 Rancher 配置为使用私有仓库，来部署 RKE 集群或 Rancher 工具。
 
-1. Render the Rancher template using the same chosen options that were used when installing Rancher. Use the reference table below to replace each placeholder. Rancher needs to be configured to use the private registry in order to provision any Rancher launched Kubernetes clusters or Rancher tools.
+   根据您在安装过程中所做的选择，完成以下过程之一。
 
-   Based on the choice you made during installation, complete one of the procedures below.
+   | 占位符                           | 描述                                   |
+   | -------------------------------- | -------------------------------------- |
+   | `<VERSION>`                      | 输出压缩包的版本号。                   |
+   | `<RANCHER.YOURDOMAIN.COM>`       | 您指向负载均衡器的 DNS 名称。          |
+   | `<REGISTRY.YOURDOMAIN.COM:PORT>` | 您的私有仓库的 DNS 名称。              |
+   | `<CERTMANAGER_VERSION>`          | 在 k8s 集群上运行的 cert-manage 版本。 |
 
-| Placeholder                      | Description                                     |
-|----------------------------------|-------------------------------------------------|
-| `<VERSION>` | The version number of the output tarball.       |
-| `<RANCHER.YOURDOMAIN.COM>` | The DNS name you pointed at your load balancer. |
-| `<REGISTRY.YOURDOMAIN.COM:PORT>` | The DNS name for your private registry.         |
-| `<CERTMANAGER_VERSION>` | Cert-manager version running on k8s cluster.    |
+   #### 选项 A - 使用 Rancher 默认的自签名证书
 
- accordion id="self-signed" label="Option A-Default Self-Signed Certificate" 
+   ```plain
+   helm template ./rancher-<VERSION>.tgz --output-dir . \
+   --name rancher \
+   --namespace cattle-system \
+   --set hostname=<RANCHER.YOURDOMAIN.COM> \
+   --set certmanager.version=<CERTMANAGER_VERSION> \
+   --set rancherImage=<REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher \
+   --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # Available as of v2.2.0, set a default private registry to be used in Rancher
+   --set useBundledSystemChart=true # Available as of v2.3.0, use the packaged Rancher system charts
+   ```
 
-``` plain
-helm template ./rancher-<VERSION>.tgz --output-dir . \
---name rancher \
---namespace cattle-system \
---set hostname=<RANCHER.YOURDOMAIN.COM> \
---set certmanager.version=<CERTMANAGER_VERSION> \
---set rancherImage=<REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher \
---set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # Available as of v2.2.0, set a default private registry to be used in Rancher
---set useBundledSystemChart=true # Available as of v2.3.0, use the packaged Rancher system charts
-```
+   #### 选项 B - 使用 Kubernetes 密文中的证书
 
- /accordion 
- accordion id="secret" label="Option B: Certificates From Files using Kubernetes Secrets" 
+   > **注意：** 如果您使用的是由私有 CA 签名的证书，请在 `--set ingress.tls.source=secret` 之后添加 `--set privateCA=true`。
 
-> **Note:** If you are using a Private CA signed cert, add `--set privateCA=true` following `--set ingress.tls.source=secret` .
+   ```plain
+   helm template ./rancher-<VERSION>.tgz --output-dir . \
+   --name rancher \
+   --namespace cattle-system \
+   --set hostname=<RANCHER.YOURDOMAIN.COM> \
+   --set rancherImage=<REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher \
+   --set ingress.tls.source=secret \
+   --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # Available as of v2.2.0, set a default private registry to be used in Rancher
+   --set useBundledSystemChart=true # Available as of v2.3.0, use the packaged Rancher system charts
+   ```
 
-``` plain
-helm template ./rancher-<VERSION>.tgz --output-dir . \
---name rancher \
---namespace cattle-system \
---set hostname=<RANCHER.YOURDOMAIN.COM> \
---set rancherImage=<REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher \
---set ingress.tls.source=secret \
---set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # Available as of v2.2.0, set a default private registry to be used in Rancher
---set useBundledSystemChart=true # Available as of v2.3.0, use the packaged Rancher system charts
-```
+1. 将渲染的清单 YAML 文件目录复制到可以访问 Rancher Server 集群的系统，然后应用渲染的模板。
 
- /accordion 
+   使用 `kubectl` 应用渲染的清单 YAML 文件。
 
-2. Copy the rendered manifest directories to a system with access to the Rancher server cluster and apply the rendered templates.
-
-   Use `kubectl` to apply the rendered manifests.
-
-   
-
-``` plain
+   ```plain
    kubectl -n cattle-system apply -R -f ./rancher
    ```
 
- /tab 
- /tabs 
+### D. 验证升级
 
-#### D. Verify the Upgrade
+登录到 Rancher。通过检查浏览器窗口左下角显示的版本，确认升级成功.
 
-Log into Rancher to confirm that the upgrade succeeded.
-
-> **Having network issues following upgrade?**
+> **升级后您的用户集群中有网络问题吗？**
 >
-> See [Restoring Cluster Networking](/docs/upgrades/upgrades/namespace-migration/#restoring-cluster-networking).
+> 如果您是从 v2.0.6 或更旧的版本升级上来的，请参阅[还原集群网络](/docs/upgrades/upgrades/namespace-migration/_index)。
 
-### Rolling Back
+### 回滚
 
-Should something go wrong, follow the [roll back](/docs/upgrades/rollbacks/ha-server-rollbacks/) instructions to restore the snapshot you took before you preformed the upgrade.
-
+如果升级异常，可以通过使用升级之前拍摄的快照，恢复集群。有关更多信息，请参阅[高可用回滚](/docs/upgrades/rollbacks/ha-server-rollbacks/_index)。
