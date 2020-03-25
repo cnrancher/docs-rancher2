@@ -2,40 +2,40 @@
 title: 项目中的资源配额是如何工作的
 ---
 
-Resource quotas in Rancher include the same functionality as the [native version of Kubernetes](https://kubernetes.io/docs/concepts/policy/resource-quotas/). However, in Rancher, resource quotas have been extended so that you can apply them to [projects](/docs/k8s-in-rancher/projects-and-namespaces/#projects).
+Rancher 资源配额不仅包含了[原生 Kubernetes](https://kubernetes.io/docs/concepts/policy/resource-quotas/) 资源配额的所有功能，也对原生 Kubernetes 的资源配额做了扩展。在 Rancher 中，您可以把资源配额应用到[项目](/docs/cluster-admin/projects-and-namespaces/_index#projects)层级。
 
-In a standard Kubernetes deployment, resource quotas are applied to individual namespaces. However, you cannot apply the quota to your namespaces simultaneously with a single action. Instead, the resource quota must be applied multiple times.
+在一个标准的 Kubernetes 部署中，每个命名空间都应用了独立的资源配额。然而，原生 Kubernetes 不支持一键更新所有命名空间的资源配额。如果需要更新所有命名空间的资源配额，需要操作多次，逐个修改。
 
-In the following diagram, a Kubernetes administrator is trying to enforce a resource quota without Rancher. The administrator wants to apply a resource quota that sets the same CPU and memory limit to every namespace in his cluster ( `Namespace 1-4` ) . However, in the base version of Kubernetes, each namespace requires a unique resource quota. The administrator has to create four different resource quotas that have the same specs configured ( `Resource Quota 1-4` ) and apply them individually.
+下图描述了一个 Kubernetes 管理员在没有使用 Rancher 的情况下尝试设置集群中每一个命名空间的资源配额。管理员想给每个命名空间（ `Namespace 1-4` ） 设置相同的CPU和内存限制。但是在原生 Kubernetes 里面，每个命名空间都需要一个独立的资源配额。管理员必须创建四个参数相同的资源配额（ `Resource Quota 1-4` ），分别应用到四个命名空间中，只有这样才能完成这个集群内所有命名空间的资源配额修改。
 
-<sup>Base Kubernetes: Unique Resource Quotas Being Applied to Each Namespace</sup>
+<sup>原生 Kubernetes：每个命名空间都需要一个独立的资源配额</sup>
 
-![Native Kubernetes Resource Quota Implementation](/img/rancher/kubernetes-resource-quota.svg)
+![原生 Kubernetes 资源配额实现过程](/img/rancher/kubernetes-resource-quota.svg)
 
-Resource quotas are a little different in Rancher. In Rancher, you apply a resource quota to the [project](/docs/k8s-in-rancher/projects-and-namespaces/#projects), and then the quota propagates to each namespace, whereafter Kubernetes enforces your limits using the native version of resource quotas. If you want to change the quota for a specific namespace, you can [override it](#overriding-the-default-limit-for-a-namespace).
+和原生 Kubernetes 相比，Rancher 的资源配额有一些不同。在 Rancher 中，您可以把资源配额应用到[项目](/docs/cluster-admin/projects-and-namespaces/_index#projects)层级，然后资源配额会传播到项目内的每一个命名空间。而原生 Kubernetes 只能在命名空间层级应用资源配额。如果需要修改指定命名空间的资源配额，您还可以使用 Rancher [覆盖命名空间默认资源配额](#overriding-the-default-limit-for-a-namespace)。
 
-The resource quota includes two limits, which you set while creating or editing a project:
+资源配额包括两个限制：项目资源限制和命名空间资源限制，创建或修改项目时可以修改。
 <a id="project-limits"></a>
 
-* **Project Limits:**
+* **项目资源限制：**
 
-  This set of values configures an overall resource limit for the project. If you try to add a new namespace to the project, Rancher uses the limits you've set to validate that the project has enough resources to accommodate the namespace. In other words, if you try to move a namespace into a project near its resource quota, Rancher blocks you from moving the namespace.
+  项目资源限制是项目总体的资源限制。如果您尝试在项目中新建命名空间， Rancher 会使用您配置的项目资源限制校验项目是否有足够多的资源适配新建的命名空间。换句话说，如果您尝试把一个命名空间移到项目中，而这个操作会导致项目资源超出限制的话， Rancher 会禁止您执行这个操作。
 
-* **Namespace Default Limits:**
+* **命名空间资源限制：**
 
-  This value is the default resource limit available for each namespace. When the resource quota is set on the project level, this limit is automatically propagated to each namespace in the project. Each namespace is bound to this default limit unless you [override it](#namespace-default-limit-overrides).
+  命名空间资源限制是每个命名空间的默认资源限制。确定了项目层级的资源限制后，命名空间资源限制会自动下发到项目内的每个命名空间。每个命名空间的资源限制都是这个值，除非您手动修改，[覆盖命名空间默认资源限制](#namespace-default-limit-overrides)。 
 
-In the following diagram, a Rancher administrator wants to apply a resource quota that sets the same CPU and memory limit for every namespace in their project ( `Namespace 1-4` ). However, in Rancher, the administrator can set a resource quota for the project ( `Project Resource Quota` ) rather than individual namespaces. This quota includes resource limits for both the entire project ( `Project Limit` ) and individual namespaces ( `Namespace Default Limit` ). Rancher then propagates the `Namespace Default Limit` quotas to each namespace ( `Namespace Resource Quota` ).
+下图说明了 Rancher 管理员给项目内所有命名空间（ `Namespace 1-4` ）配置统一的CPU限额和内存限额的过程。管理员可以设置项目资源配额（ `Project Resource Quota` ），而不是单独设置每个命名空间的资源配额。完成项目资源配额的设置以后，配额包括的项目整体的项目资源限制（ `Project Limit` ），和每个命名空间的命名空间默认资源限制（ `Namespace Default Limit` ）。然后 Rancher 把命名空间默认资源限制( `Namespace Default Limit` )下发到每个命名空间( `Namespace Resource Quota` )。
 
-<sup>Rancher: Resource Quotas Propagating to Each Namespace</sup>
+<sup>Rancher：资源配额下发到每个命名空间</sup>
 
-![Rancher Resource Quota Implementation](/img/rancher/rancher-resource-quota.svg)
+![Rancher 资源配额实现过程](/img/rancher/rancher-resource-quota.svg)
 
-The following table explains the key differences between the two quota types.
+下表说明了 Rancher 资源配额和 Kubernetes 资源配额的主要不同点。
 
-| Rancher Resource Quotas                                    | Kubernetes Resource Quotas                               |
-| ---------------------------------------------------------- | -------------------------------------------------------- |
-| Applies to projects and namespace.| Applies to namespaces only.|
-| Creates resource pool for all namespaces in project.| Applies static resource limits to individual namespaces.|
-| Applies resource quotas to namespaces through propagation.| Applies only to the assigned namespace.|
+| Rancher 资源配额                                    | Kubernetes 资源配额                               |
+| :---------------------------------------------------------- | :-------------------------------------------------------- |
+| 可应用于项目层级和命名空间层级| 只能应用于命名空间层级|
+| 给项目内的所有命名空间创建了一个资源池，资源可以动态分配给命名空间| 每个命名空间都应用了静态资源限制|
+| 把资源配额下发到了命名空间| 只应用于指定的命名空间|
 
