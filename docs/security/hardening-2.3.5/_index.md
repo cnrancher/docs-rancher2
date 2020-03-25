@@ -2,29 +2,29 @@
 title: 安全加固指南 - v2.3.5
 ---
 
-This document provides prescriptive guidance for hardening a production installation of Rancher v2.3.5. It outlines the configurations and controls required to address Kubernetes benchmark controls from the Center for Information Security (CIS).
+本文是 Rancher v2.3.5 生产环境的安全加固指南。它概述了如何使你的集群符合互联网安全中心发布的 Kubernetes 安全基准。
 
-> This hardening guide describes how to secure the nodes in your cluster, and it is recommended to follow this guide before installing Kubernetes.
+> 本加固指南介绍了如何保护集群中节点的安全，建议在安装 Kubernetes 之前按照本指南进行操作。
 
-This hardening guide is intended to be used with specific versions of the CIS Kubernetes Benchmark, Kubernetes, and Rancher:
+该加固指南旨在与特定版本的 CIS Kubernetes Benchmark，Kubernetes 和 Rancher 一起使用：
 
-| Hardening Guide Version | Rancher Version | CIS Benchmark Version | Kubernetes Version |
-| ----------------------- | --------------- | --------------------- | ------------------ |
-| Hardening Guide v2.3.5  | Rancher v2.3.5  | Benchmark v1.5        | Kubernetes 1.15    |
+| 加固指南版本    | Rancher 版本   | CIS Benchmark 版本 | Kubernetes 版本  |
+| --------------- | -------------- | ------------------ | ---------------- |
+| 加固指南 v2.3.5 | Rancher v2.3.5 | Benchmark v1.5     | Kubernetes v1.15 |
 
-[Click here to download a PDF version of this document](https://releases.rancher.com/documents/security/2.3.5/Rancher_Hardening_Guide.pdf)
+[点击这里下载 PDF 版本的加固指南](https://releases.rancher.com/documents/security/2.3.5/Rancher_Hardening_Guide.pdf)
 
-#### Overview
+## 概览
 
-This document provides prescriptive guidance for hardening a production installation of Rancher v2.3.5 with Kubernetes v1.15. It outlines the configurations required to address Kubernetes benchmark controls from the Center for Information Security (CIS).
+下面的安全加固指南是针对在生产环境的 Rancher v2.3.5 中使用 Kubernetes v1.15 版本的集群。它概述了如何满足互联网安全中心（CIS）提出的 Kubernetes 安全标准。
 
-For more detail about evaluating a hardened cluster against the official CIS benchmark, refer to the [CIS Benchmark Rancher Self-Assessment Guide - Rancher v2.3.5](/docs/security/benchmark-2.3.5/).
+有关如果根据官方 CIS 基准评估集群的更多详细信息，请参阅[CIS Benchmark Rancher 自测指南 - Rancher v2.3.5](/docs/security/benchmark-2.3.5/_index)。
 
-#### Configure Kernel Runtime Parameters
+## 配置内核运行时参数
 
-The following `sysctl` configuration is recommended for all nodes type in the cluster. Set the following parameters in `/etc/sysctl.d/90-kubelet.conf` :
+对于集群中的所有类型的节点，都建议使用以下的`sysctl`配置。在`/etc/sysctl.d/90-kubelet.conf`中设置以下参数：
 
-``` 
+```
 vm.overcommit_memory=1
 vm.panic_on_oom=0
 kernel.panic=10
@@ -32,43 +32,43 @@ kernel.panic_on_oops=1
 kernel.keys.root_maxbytes=25000000
 ```
 
-Run `sysctl -p /etc/sysctl.d/90-kubelet.conf` to enable the settings.
+执行`sysctl -p /etc/sysctl.d/90-kubelet.conf`来启用配置。
 
-#### Configure `etcd` user and group
+## 配置`etcd`用户和组
 
-A user account and group for the **etcd** service is required to be setup prior to installing RKE. The **uid** and **gid** for the **etcd** user will be used in the RKE **config.yml** to set the proper permissions for files and directories during installation time.
+在安装 RKE 之前，需要设置**etcd**服务的用户帐户和组。 **etcd**用户的**uid**和**gid**将在 RKE 的**config.yml**中使用，以在安装期间为文件和目录设置适当的权限。
 
-##### create `etcd` user and group
+### 创建`etcd`用户和组
 
-To create the **etcd** group run the following console commands.
+要创建**etcd**组，请运行以下控制台命令。
 
-``` 
+```
 addgroup --gid 52034 etcd
 useradd --comment "etcd service account" --uid 52034 --gid 52034 etcd
 ```
 
-Update the RKE **config.yml** with the **uid** and **gid** of the **etcd** user:
+使用**etcd**用户的**uid**和**gid**更新 RKE 的 **config.yml**文件：
 
-``` yaml
+```yaml
 services:
   etcd:
     gid: 52034
     uid: 52034
 ```
 
-##### Set `automountServiceAccountToken` to `false` for `default` service accounts
+## 将`default`服务账号的`automountServiceAccountToken`设置为 false。
 
-Kubernetes provides a default service account which is used by cluster workloads where no specific service account is assigned to the pod. Where access to the Kubernetes API from a pod is required, a specific service account should be created for that pod, and rights granted to that service account. The default service account should be configured such that it does not provide a service account token and does not have any explicit rights assignments.
+Kubernetes 提供了一个默认服务账号（Service Account），如果集群的工作负载中没有为 Pod 分配任何特定服务账号，那么它将会使用这个`default`的服务账号。在需要从 Pod 访问 Kubernetes API 的情况下，应为该 Pod 创建一个特定的服务账号，并向该服务账号授予权限。这个`default`的服务账户应该被设置为不提供服务账号令牌（service account token）和任何权限。将`automountServiceAccountToken`设置为 false 之后，Kubernetes 在启动 Pod 时，将不会自动注入`default`服务账户。
 
-For each namespace the **default** service account must include this value:
+对于每个命名空间中的，**default**服务账号必须包含以下值：
 
-``` 
+```
 automountServiceAccountToken: false
 ```
 
-Save the following yaml to a file called `account_update.yaml` 
+把下面的 yaml 另存为`account_update.yaml`
 
-``` yaml
+```yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -76,9 +76,9 @@ metadata:
 automountServiceAccountToken: false
 ```
 
-Create a bash script file called `account_update.sh` . Be sure to `chmod +x account_update.sh` so the script has execute permissions.
+创建一个名称为`account_update.sh`的脚本。通过运行`chmod +x account_update.sh`，使这个脚本有执行权限。
 
-``` 
+```
 #!/bin/bash -e
 
 for namespace in $(kubectl get namespaces -A -o json | jq -r '.items[].metadata.name'); do
@@ -86,32 +86,20 @@ for namespace in $(kubectl get namespaces -A -o json | jq -r '.items[].metadata.
 done
 ```
 
-#### Ensure that all Namespaces have Network Policies defined
+## 确保所有命名空间均已定义网络策略
 
-Running different applications on the same Kubernetes cluster creates a risk of one
-compromised application attacking a neighboring application. Network segmentation is
-important to ensure that containers can communicate only with those they are supposed
-to. A network policy is a specification of how selections of pods are allowed to
-communicate with each other and other network endpoints.
+在同一个 Kubernetes 集群上运行不同的应用程序会产生一个风险，那就是应用可能受到相邻应用程序的攻击。为了确保容器只能与预期的容器进行通信，网络细分是必不可少的。通过设置网络策略（Network Policy），可以设置哪些 Pod 之间可以通信，以及是否可以和其他网络端点进行通信。
 
-Network Policies are namespace scoped. When a network policy is introduced to a given
-namespace, all traffic not allowed by the policy is denied. However, if there are no network
-policies in a namespace all traffic will be allowed into and out of the pods in that
-namespace. To enforce network policies, a CNI (container network interface) plugin must be enabled.
-This guide uses [canal](https://github.com/projectcalico/canal) to provide the policy enforcement.
-Additional information about CNI providers can be found
-[here](https://rancher.com/blog/2019/2019-03-21-comparing-kubernetes-cni-providers-flannel-calico-canal-and-weave/)
+网络策略是作用于命名空间范围的。将网络策略应用于给定命名空间时，所有不被这个策略允许的流量将被拒绝。然而，如果命名空间中没有设置网络策略，那么进出这个命名空间中 Pod 的所有流量都将被允许。要使用网络策略，必须启用 CNI（容器网络接口）插件。本指南使用[canal](https://github.com/projectcalico/canal)提供策略实施。你可以在[这里](https://rancher.com/blog/2019/2019-03-21-comparing-kubernetes-cni-providers-flannel-calico-canal-and-weave/)找到有关 CNI 插件的其他信息。
 
-Once a CNI provider is enabled on a cluster a default network policy can be applied. For reference purposes a
-**permissive** example is provide below. If you want to allow all traffic to all pods in a namespace
-(even if policies are added that cause some pods to be treated as “isolated”), 
-you can create a policy that explicitly allows all traffic in that namespace. Save the following `yaml` as
-`default-allow-all.yaml` . Additional [documentation](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
-about network policies can be found on the Kubernetes site.
+在集群上启用 CN​​I 插件后，你可以设置一个默认的网络策略。下面是一个**宽松**的网络策略示例，仅供参考。如果你想要允许到某个命名空间内所有 Pod 的流量（即使已经添加了一些策略，使得一些 Pods 被隔离了），您可以创建一个策略，明确允许该命名空间中的所有流量。将以下`yaml`另存为
+`default-allow-all.yaml`。额外关于网络策略的信息，请查看[Kubernetes 官方文档](https://kubernetes.io/docs/concepts/services-networking/network-policies/)。
 
-> This `NetworkPolicy` is not recommended for production use
+:::important 重要
+这个`NetworkPolicy`示例不建议在生产环境中使用。
+:::
 
-``` yaml
+```yaml
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -119,17 +107,18 @@ metadata:
   name: default-allow-all
 spec:
   podSelector: {}
+  ingress:
+    - {}
+  egress:
+    - {}
   policyTypes:
-
     - Ingress
     - Egress
-
 ```
 
-Create a bash script file called `apply_networkPolicy_to_all_ns.sh` . Be sure to
-`chmod +x apply_networkPolicy_to_all_ns.sh` so the script has execute permissions.
+创建一个名称为`apply_networkPolicy_to_all_ns.sh`的脚本。通过运行`chmod +x apply_networkPolicy_to_all_ns.sh`，使这个脚本有执行权限。
 
-``` 
+```
 #!/bin/bash -e
 
 for namespace in $(kubectl get namespaces -A -o json | jq -r '.items[].metadata.name'); do
@@ -137,22 +126,18 @@ for namespace in $(kubectl get namespaces -A -o json | jq -r '.items[].metadata.
 done
 ```
 
-Execute this script to apply the `default-allow-all.yaml` the **permissive** `NetworkPolicy` to all namespaces.
+运行脚本，以使全部的命名空间使用这个`default-allow-all.yaml`文件中的**宽松**的`NetworkPolicy`。
 
-#### Reference Hardened RKE `cluster.yml` configuration
+## 加固的 RKE `cluster.yml` 配置参考
 
-The reference `cluster.yml` is used by the RKE CLI that provides the configuration needed to achieve a hardened install
-of Rancher Kubernetes Engine (RKE). Install [documentation](https://rancher.com/docs/rke/latest/en/installation/) is
-provided with additional details about the configuration items.
+你可以用这个供您参考的`cluster.yml`，通过 RKE CLI 来创建安全加固的 Rancher Kubernetes Engine（RKE）集群。有关每个配置的详细信息，请参阅[RKE 文档](https://rancher.com/docs/rke/latest/en/installation/)。
 
-``` yaml
-
-## If you intend to deploy Kubernetes in an air-gapped environment,
-
-## please consult the documentation on how to configure custom RKE images.
-kubernetes_version: "v1.15.9-rancher1-1"
+```yaml
+# 如果您打算在离线环境中部署Kubernetes，
+# 请查阅有关如何配置自定义RKE镜像的文档。
+kubernetes_version: 'v1.15.9-rancher1-1'
 enable_network_policy: true
-default_pod_security_policy_template_id: "restricted"
+default_pod_security_policy_template_id: 'restricted'
 services:
   etcd:
     uid: 52034
@@ -168,37 +153,36 @@ services:
       enabled: true
   kube-controller:
     extra_args:
-      feature-gates: "RotateKubeletServerCertificate=true"
+      feature-gates: 'RotateKubeletServerCertificate=true'
   scheduler:
-    image: ""
+    image: ''
     extra_args: {}
     extra_binds: []
     extra_env: []
   kubelet:
     generate_serving_certificate: true
     extra_args:
-      feature-gates: "RotateKubeletServerCertificate=true"
-      protect-kernel-defaults: "true"
-      tls-cipher-suites: "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256"
+      feature-gates: 'RotateKubeletServerCertificate=true'
+      protect-kernel-defaults: 'true'
+      tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
     extra_binds: []
     extra_env: []
-    cluster_domain: ""
-    infra_container_image: ""
-    cluster_dns_server: ""
+    cluster_domain: ''
+    infra_container_image: ''
+    cluster_dns_server: ''
     fail_swap_on: false
-    generate_serving_certificate: true
   kubeproxy:
-    image: ""
+    image: ''
     extra_args: {}
     extra_binds: []
     extra_env: []
 network:
-  plugin: ""
+  plugin: ''
   options: {}
   mtu: 0
   node_selector: {}
 authentication:
-  strategy: ""
+  strategy: ''
   sans: []
   webhook: null
 addons: |
@@ -214,22 +198,14 @@ addons: |
     name: default-psp-role
     namespace: ingress-nginx
   rules:
-
-  + apiGroups:
+  - apiGroups:
     - extensions
-
     resourceNames:
-
     - default-psp
-
     resources:
-
     - podsecuritypolicies
-
     verbs:
-
     - use
-
   ---
   apiVersion: rbac.authorization.k8s.io/v1
   kind: RoleBinding
@@ -241,14 +217,10 @@ addons: |
     kind: Role
     name: default-psp-role
   subjects:
-
-  + apiGroup: rbac.authorization.k8s.io
-
+  - apiGroup: rbac.authorization.k8s.io
     kind: Group
     name: system:serviceaccounts
-
-  + apiGroup: rbac.authorization.k8s.io
-
+  - apiGroup: rbac.authorization.k8s.io
     kind: Group
     name: system:authenticated
   ---
@@ -263,22 +235,14 @@ addons: |
     name: default-psp-role
     namespace: cattle-system
   rules:
-
-  + apiGroups:
+  - apiGroups:
     - extensions
-
     resourceNames:
-
     - default-psp
-
     resources:
-
     - podsecuritypolicies
-
     verbs:
-
     - use
-
   ---
   apiVersion: rbac.authorization.k8s.io/v1
   kind: RoleBinding
@@ -290,14 +254,10 @@ addons: |
     kind: Role
     name: default-psp-role
   subjects:
-
-  + apiGroup: rbac.authorization.k8s.io
-
+  - apiGroup: rbac.authorization.k8s.io
     kind: Group
     name: system:serviceaccounts
-
-  + apiGroup: rbac.authorization.k8s.io
-
+  - apiGroup: rbac.authorization.k8s.io
     kind: Group
     name: system:authenticated
   ---
@@ -307,9 +267,7 @@ addons: |
     name: restricted
   spec:
     requiredDropCapabilities:
-
     - NET_RAW
-
     privileged: false
     allowPrivilegeEscalation: false
     defaultAllowPrivilegeEscalation: false
@@ -322,36 +280,26 @@ addons: |
     supplementalGroups:
       rule: RunAsAny
     volumes:
-
     - emptyDir
     - secret
     - persistentVolumeClaim
     - downwardAPI
     - configMap
     - projected
-
   ---
   apiVersion: rbac.authorization.k8s.io/v1
   kind: ClusterRole
   metadata:
     name: psp:restricted
   rules:
-
-  + apiGroups:
+  - apiGroups:
     - extensions
-
     resourceNames:
-
     - restricted
-
     resources:
-
     - podsecuritypolicies
-
     verbs:
-
     - use
-
   ---
   apiVersion: rbac.authorization.k8s.io/v1
   kind: ClusterRoleBinding
@@ -362,14 +310,10 @@ addons: |
     kind: ClusterRole
     name: psp:restricted
   subjects:
-
-  + apiGroup: rbac.authorization.k8s.io
-
+  - apiGroup: rbac.authorization.k8s.io
     kind: Group
     name: system:serviceaccounts
-
-  + apiGroup: rbac.authorization.k8s.io
-
+  - apiGroup: rbac.authorization.k8s.io
     kind: Group
     name: system:authenticated
   ---
@@ -388,104 +332,96 @@ addons: |
     kind: ClusterRole
     name: cluster-admin
   subjects:
-
-  + kind: ServiceAccount
-
+  - kind: ServiceAccount
     name: tiller
     namespace: kube-system
 
 addons_include: []
 system_images:
-  etcd: ""
-  alpine: ""
-  nginx_proxy: ""
-  cert_downloader: ""
-  kubernetes_services_sidecar: ""
-  kubedns: ""
-  dnsmasq: ""
-  kubedns_sidecar: ""
-  kubedns_autoscaler: ""
-  coredns: ""
-  coredns_autoscaler: ""
-  kubernetes: ""
-  flannel: ""
-  flannel_cni: ""
-  calico_node: ""
-  calico_cni: ""
-  calico_controllers: ""
-  calico_ctl: ""
-  calico_flexvol: ""
-  canal_node: ""
-  canal_cni: ""
-  canal_flannel: ""
-  canal_flexvol: ""
-  weave_node: ""
-  weave_cni: ""
-  pod_infra_container: ""
-  ingress: ""
-  ingress_backend: ""
-  metrics_server: ""
-  windows_pod_infra_container: ""
-ssh_key_path: ""
-ssh_cert_path: ""
+  etcd: ''
+  alpine: ''
+  nginx_proxy: ''
+  cert_downloader: ''
+  kubernetes_services_sidecar: ''
+  kubedns: ''
+  dnsmasq: ''
+  kubedns_sidecar: ''
+  kubedns_autoscaler: ''
+  coredns: ''
+  coredns_autoscaler: ''
+  kubernetes: ''
+  flannel: ''
+  flannel_cni: ''
+  calico_node: ''
+  calico_cni: ''
+  calico_controllers: ''
+  calico_ctl: ''
+  calico_flexvol: ''
+  canal_node: ''
+  canal_cni: ''
+  canal_flannel: ''
+  canal_flexvol: ''
+  weave_node: ''
+  weave_cni: ''
+  pod_infra_container: ''
+  ingress: ''
+  ingress_backend: ''
+  metrics_server: ''
+  windows_pod_infra_container: ''
+ssh_key_path: ''
+ssh_cert_path: ''
 ssh_agent_auth: false
 authorization:
-  mode: ""
+  mode: ''
   options: {}
 ignore_docker_version: false
 private_registries: []
 ingress:
-  provider: ""
+  provider: ''
   options: {}
   node_selector: {}
   extra_args: {}
-  dns_policy: ""
+  dns_policy: ''
   extra_envs: []
   extra_volumes: []
   extra_volume_mounts: []
-cluster_name: ""
-prefix_path: ""
+cluster_name: ''
+prefix_path: ''
 addon_job_timeout: 0
 bastion_host:
-  address: ""
-  port: ""
-  user: ""
-  ssh_key: ""
-  ssh_key_path: ""
-  ssh_cert: ""
-  ssh_cert_path: ""
+  address: ''
+  port: ''
+  user: ''
+  ssh_key: ''
+  ssh_key_path: ''
+  ssh_cert: ''
+  ssh_cert_path: ''
 monitoring:
-  provider: ""
+  provider: ''
   options: {}
   node_selector: {}
 restore:
   restore: false
-  snapshot_name: ""
+  snapshot_name: ''
 dns: null
 ```
 
-#### Reference Hardened RKE Template configuration
+## 安全加固的 RKE 模板配置参考
 
-The reference RKE Template provides the configuration needed to achieve a hardened install of Kubenetes.
-RKE Templates are used to provision Kubernetes and define Rancher settings. Follow the Rancher
-[documentaion](https://rancher.com/docs/rancher/v2.x/en/installation) for additional installation and RKE Template details.
+这个 RKE 参考模板提供了安装安全加固的 Kubenetes 所需的配置。RKE 模板用于配置 Kubernetes 和定义 Rancher 设置。请参阅[Rancher 文档](https://rancher.com/docs/rancher/v2.x/en/installation)获得更多安装和 RKE 模板的详细信息。
 
-``` yaml
-##
-
-## Cluster Config
-
-##
+```yaml
+#
+# Cluster Config
+#
 default_pod_security_policy_template_id: restricted
 docker_root_dir: /var/lib/docker
 enable_cluster_alerting: false
 enable_cluster_monitoring: false
 enable_network_policy: true
-##
-
-## Rancher Config
-
-##
+#
+# Rancher Config
+#
 rancher_kubernetes_engine_config:
   addon_job_timeout: 30
   addons: |-
@@ -501,22 +437,14 @@ rancher_kubernetes_engine_config:
       name: default-psp-role
       namespace: ingress-nginx
     rules:
-
     - apiGroups:
       - extensions
-
       resourceNames:
-
       - default-psp
-
       resources:
-
       - podsecuritypolicies
-
       verbs:
-
       - use
-
     ---
     apiVersion: rbac.authorization.k8s.io/v1
     kind: RoleBinding
@@ -528,14 +456,10 @@ rancher_kubernetes_engine_config:
       kind: Role
       name: default-psp-role
     subjects:
-
     - apiGroup: rbac.authorization.k8s.io
-
       kind: Group
       name: system:serviceaccounts
-
     - apiGroup: rbac.authorization.k8s.io
-
       kind: Group
       name: system:authenticated
     ---
@@ -550,22 +474,14 @@ rancher_kubernetes_engine_config:
       name: default-psp-role
       namespace: cattle-system
     rules:
-
     - apiGroups:
       - extensions
-
       resourceNames:
-
       - default-psp
-
       resources:
-
       - podsecuritypolicies
-
       verbs:
-
       - use
-
     ---
     apiVersion: rbac.authorization.k8s.io/v1
     kind: RoleBinding
@@ -577,26 +493,20 @@ rancher_kubernetes_engine_config:
       kind: Role
       name: default-psp-role
     subjects:
-
     - apiGroup: rbac.authorization.k8s.io
-
       kind: Group
       name: system:serviceaccounts
-
     - apiGroup: rbac.authorization.k8s.io
-
       kind: Group
       name: system:authenticated
     ---
-    apiVersion: extensions/v1beta1
+    apiVersion: policy/v1beta1
     kind: PodSecurityPolicy
     metadata:
       name: restricted
     spec:
       requiredDropCapabilities:
-
       - NET_RAW
-
       privileged: false
       allowPrivilegeEscalation: false
       defaultAllowPrivilegeEscalation: false
@@ -609,36 +519,26 @@ rancher_kubernetes_engine_config:
       supplementalGroups:
         rule: RunAsAny
       volumes:
-
       - emptyDir
       - secret
       - persistentVolumeClaim
       - downwardAPI
       - configMap
       - projected
-
     ---
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
     metadata:
       name: psp:restricted
     rules:
-
     - apiGroups:
       - extensions
-
       resourceNames:
-
       - restricted
-
       resources:
-
       - podsecuritypolicies
-
       verbs:
-
       - use
-
     ---
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
@@ -649,14 +549,10 @@ rancher_kubernetes_engine_config:
       kind: ClusterRole
       name: psp:restricted
     subjects:
-
     - apiGroup: rbac.authorization.k8s.io
-
       kind: Group
       name: system:serviceaccounts
-
     - apiGroup: rbac.authorization.k8s.io
-
       kind: Group
       name: system:authenticated
     ---
@@ -675,49 +571,47 @@ rancher_kubernetes_engine_config:
       kind: ClusterRole
       name: cluster-admin
     subjects:
-
     - kind: ServiceAccount
-
       name: tiller
       namespace: kube-system
   ignore_docker_version: true
   kubernetes_version: v1.15.9-rancher1-1
-  ##
-  ##   If you are using calico on AWS
-  ##
-  ##    network:
-  ##      plugin: calico
-  ##      calico_network_provider:
-  ##        cloud_provider: aws
-  ##
-  ## # To specify flannel interface
-  ##
-  ##    network:
-  ##      plugin: flannel
-  ##      flannel_network_provider:
-  ##      iface: eth1
-  ##
-  ## # To specify flannel interface for canal plugin
-  ##
-  ##    network:
-  ##      plugin: canal
-  ##      canal_network_provider:
-  ##        iface: eth1
-  ##
+  #
+  #   If you are using calico on AWS
+  #
+  #    network:
+  #      plugin: calico
+  #      calico_network_provider:
+  #        cloud_provider: aws
+  #
+  # # To specify flannel interface
+  #
+  #    network:
+  #      plugin: flannel
+  #      flannel_network_provider:
+  #      iface: eth1
+  #
+  # # To specify flannel interface for canal plugin
+  #
+  #    network:
+  #      plugin: canal
+  #      canal_network_provider:
+  #        iface: eth1
+  #
   network:
     mtu: 0
     plugin: canal
-  ##
-  ##    services:
-  ##      kube-api:
-  ##        service_cluster_ip_range: 10.43.0.0/16
-  ##      kube-controller:
-  ##        cluster_cidr: 10.42.0.0/16
-  ##        service_cluster_ip_range: 10.43.0.0/16
-  ##      kubelet:
-  ##        cluster_domain: cluster.local
-  ##        cluster_dns_server: 10.43.0.10
-  ##
+  #
+  #    services:
+  #      kube-api:
+  #        service_cluster_ip_range: 10.43.0.0/16
+  #      kube-controller:
+  #        cluster_cidr: 10.42.0.0/16
+  #        service_cluster_ip_range: 10.43.0.0/16
+  #      kubelet:
+  #        cluster_domain: cluster.local
+  #        cluster_dns_server: 10.43.0.10
+  #
   services:
     etcd:
       backup_config:
@@ -769,34 +663,26 @@ rancher_kubernetes_engine_config:
 windows_prefered_cluster: false
 ```
 
-#### Hardened Reference Ubuntu 18.04 LTS **cloud-config**:
+## 安全加固的 Ubuntu 18.04 LTS **cloud-config**参考配置
 
-The reference **cloud-config** is generally used in cloud infrastructure environments to allow for
-configuration management of compute instances. The reference config configures Ubuntu operating system level settings
-needed before installing kubernetes.
+这个供您参考的**cloud-config**通常被用于云基础架构环境中，来进行计算实例的配置管理。这个参考配置了在安装 kubernetes 之前需要的 Ubuntu 操作系统级别的设置。
 
-``` yaml
+```yaml
 #cloud-config
 packages:
-
-  + curl
-  + jq
-
+  - curl
+  - jq
 runcmd:
-
-  + sysctl -w vm.overcommit_memory=1
-  + sysctl -w kernel.panic=10
-  + sysctl -w kernel.panic_on_oops=1
-  + curl https://releases.rancher.com/install-docker/18.09.sh | sh
-  + usermod -aG docker ubuntu
-  + return=1; while [ $return != 0 ]; do sleep 2; docker ps; return=$?; done
-  + addgroup --gid 52034 etcd
-  + useradd --comment "etcd service account" --uid 52034 --gid 52034 etcd
-
+  - sysctl -w vm.overcommit_memory=1
+  - sysctl -w kernel.panic=10
+  - sysctl -w kernel.panic_on_oops=1
+  - curl https://releases.rancher.com/install-docker/18.09.sh | sh
+  - usermod -aG docker ubuntu
+  - return=1; while [ $return != 0 ]; do sleep 2; docker ps; return=$?; done
+  - addgroup --gid 52034 etcd
+  - useradd --comment "etcd service account" --uid 52034 --gid 52034 etcd
 write_files:
-
-  + path: /etc/sysctl.d/kubelet.conf
-
+  - path: /etc/sysctl.d/kubelet.conf
     owner: root:root
     permissions: '0644'
     content: |
@@ -804,4 +690,3 @@ write_files:
       kernel.panic=10
       kernel.panic_on_oops=1
 ```
-
