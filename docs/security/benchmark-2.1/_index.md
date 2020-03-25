@@ -2,35 +2,37 @@
 title: 自测指南 - v2.1
 ---
 
-This document is a companion to the Rancher v2.1 security hardening guide. The hardening guide provides prescriptive guidance for hardening a production installation of Rancher, and this benchmark guide is meant to help you evaluate the level of security of the hardened cluster against each control in the benchmark.
+### CIS Kubernetes Benchmark 1.3.0 - Rancher 2.1 - Kubernetes 1.11
 
-This guide corresponds to specific versions of the hardening guide, Rancher, Kubernetes, and the CIS Benchmark:
+[点击这里下载 PDF 版本的安全自测指南](https://releases.rancher.com/documents/security/2.1.x/Rancher_Benchmark_Assessment.pdf)
 
-| Self Assessment Guide Version | Rancher Version | Hardening Guide Version | Kubernetes Version | CIS Benchmark Version |
-| ----------------------------- | --------------- | ----------------------- | ------------------ | --------------------- |
-| Self Assessment Guide v2.1    | Rancher v2.1.x  | Hardening Guide v2.1    | Kubernetes 1.11    | Benchmark 1.3.0       |
+#### 概览
 
-Because Rancher and RKE install Kubernetes services as Docker containers, many of the control verification checks in the CIS Kubernetes Benchmark don't apply. This guide will walk through the various controls and provide updated example commands to audit compliance in Rancher-created clusters.
+本文档是对 Rancher v2.1 安全加固指南的补充。加固指南提供了用于加固 Rancher 的生产环境集群的说明性指南，该基准自测指南旨在帮助您针对安全基准中的每个控制，来评估加固集群的安全级别。
 
-This document is to be used by Rancher operators, security teams, auditors and decision makers.
+该加固指南旨在与特定版本的安全加固指南，CIS Kubernetes Benchmark，Kubernetes 和 Rancher 一起使用：
 
-For more detail about each audit, including rationales and remediations for failing tests, you can refer to the corresponding section of the CIS Kubernetes Benchmark v1.3.0. You can download the benchmark after logging in to [CISecurity.org](https://www.cisecurity.org/benchmark/kubernetes/).
+| 自测指南版本  | Rancher 版本   | 安全加固指南版本  | Kubernetes 版本  | CIS Benchmark 版本 |
+| ------------- | -------------- | ----------------- | ---------------- | ------------------ |
+| 自测指南 v2.1 | Rancher v2.1.x | 安全加固指南 v2.1 | Kubernetes v1.11 | Benchmark v1.3.0   |
 
-[Click here to download a PDF version of this document](https://releases.rancher.com/documents/security/2.1.x/Rancher_Benchmark_Assessment.pdf)
+由于 Rancher 和 RKE 将 Kubernetes 服务安装为 Docker 容器，因此 CIS Kubernetes Benchmark 中的许多控制验证检查均不适用，这些结果将为`Not Applicable`（不适用）。本指南将逐步介绍各种控制，并提供更新的示例命令以审核 Rancher 创建的群集中的合规性。
 
-#### Testing controls methodology
+Rancher 运维人员，安全团队，审核员和决策者将使用此文档。
 
-Rancher and RKE install Kubernetes services via Docker containers. Configuration is defined by arguments passed to the container at the time of initialization, not via configuration files.
+有关每个审核的更多详细信息，包括测试失败的原因和补救措施，您可以参考 CIS Kubernetes Benchmark v1.3.0 的相应部分。登录[CISecurity.org](https://www.cisecurity.org/benchmark/kubernetes/)后，可以下载基准测试。
 
-Scoring the commands is different in Rancher Labs than in the CIS Benchmark. Where the commands differ from the original CIS benchmark, the commands specific to Rancher Labs are provided for testing.
+#### 测试控制方法
 
-When performing the tests, you will need access to the Docker command line on the hosts of all three RKE roles. The commands also make use of the the `jq` command to provide human-readable formatting.
+Rancher 和 RKE 通过 Docker 容器安装 Kubernetes 服务。配置在初始化时通过给容器传递参数的方式设置，而不是通过配置文件定义。
 
-Tests will have an exit code of zero on success and non-zero on failure.
+如果控制审核与原始 CIS 基准不同，则将提供 Rancher Labs 特定的审核命令以进行测试。执行测试时，您将需要访问所有三个 RKE 角色的主机上的 Docker 命令行。这些命令还利用了[jq](https://stedolan.github.io/jq/)和[kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)（使用有效的 kubeconfig 文件）来测试和评估测试结果。
 
-#### Known Scored Control Failures
+测试成功时的退出代码为零，失败时的退出代码为非零。
 
-The following scored controls do not currently pass, and Rancher Labs is working towards addressing these through future enhancements to the product.
+#### 已知的失败的计分测试
+
+以下计分的控制当前无法通过，Rancher Labs 将来对产品进行增强来解决这些问题。
 
 - 1.1.21 - Ensure that the `--kubelet-certificate-authority` argument is set as appropriate (Scored)
 - 1.3.6 - Ensure that the `RotateKubeletServerCertificate` argument is set to `true` (Scored)

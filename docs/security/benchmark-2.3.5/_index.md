@@ -26,7 +26,7 @@ Rancher 运维人员，安全团队，审核员和决策者将使用此文档。
 
 Rancher 和 RKE 通过 Docker 容器安装 Kubernetes 服务。配置在初始化时通过给容器传递参数的方式设置，而不是通过配置文件定义。
 
-如果控制审核与原始 CIS 基准不同，则将提供 Rancher Labs 特定的审核命令以进行测试。执行测试时，您将需要访问所有三个 RKE 角色的主机上的 Docker 命令行。这些命令还利用了[jq](https://stedolan.github.io/jq/)和[kubectl][kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)（使用有效的 kubeconfig 文件）来测试和评估测试结果。
+如果控制审核与原始 CIS 基准不同，则将提供 Rancher Labs 特定的审核命令以进行测试。执行测试时，您将需要访问所有三个 RKE 角色的主机上的 Docker 命令行。这些命令还利用了[jq](https://stedolan.github.io/jq/)和[kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)（使用有效的 kubeconfig 文件）来测试和评估测试结果。
 
 > 注意：指南里只会覆盖计分（scored）的测试。
 
