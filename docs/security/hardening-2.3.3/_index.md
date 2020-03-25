@@ -2,27 +2,29 @@
 title: 安全加固指南 - v2.3.3
 ---
 
-This document provides prescriptive guidance for hardening a production installation of Rancher v2.3.3. It outlines the configurations and controls required to address Kubernetes benchmark controls from the Center for Information Security (CIS).
+本文是 Rancher v2.3.3 生产环境的安全加固指南。它概述了如何使你的集群符合互联网安全中心发布的 Kubernetes 安全基准。
 
-> This hardening guide describes how to secure the nodes in your cluster, and it is recommended to follow this guide before installing Kubernetes.
+> 本加固指南介绍了如何保护集群中节点的安全，建议在安装 Kubernetes 之前按照本指南进行操作。
 
-This hardening guide is intended to be used with specific versions of the CIS Kubernetes Benchmark, Kubernetes, and Rancher:
+该加固指南旨在与特定版本的 CIS Kubernetes Benchmark，Kubernetes 和 Rancher 一起使用：
 
-| Hardening Guide Version | Rancher Version | CIS Benchmark Version | Kubernetes Version              |
-| ----------------------- | --------------- | --------------------- | ------------------------------- |
-| Hardening Guide v2.3.3  | Rancher v2.3.3  | Benchmark v1.4.1      | Kubernetes 1.14, 1.15, and 1.16 |
+| 加固指南版本    | Rancher 版本   | CIS Benchmark 版本 | Kubernetes 版本               |
+| --------------- | -------------- | ------------------ | ----------------------------- |
+| 加固指南 v2.3.3 | Rancher v2.3.3 | Benchmark v1.4.1   | Kubernetes 1.14，1.15 和 1.16 |
 
-[Click here to download a PDF version of this document](https://releases.rancher.com/documents/security/2.3.3/Rancher_Hardening_Guide.pdf)
+[点击这里下载 PDF 版本的加固指南](https://releases.rancher.com/documents/security/2.3.3/Rancher_Hardening_Guide.pdf)
 
-For more detail about evaluating a hardened cluster against the official CIS benchmark, refer to the [CIS Benchmark Rancher Self-Assessment Guide v2.3.3](/docs/security/benchmark-2.3.3/).
+下面的安全加固指南是针对在生产环境的 Rancher v2.3.3 中使用 Kubernetes 1.14，1.15 和 1.16 版本的集群。它概述了如何满足互联网安全中心（CIS）提出的 Kubernetes 安全标准。
 
-#### Profile Definitions
+有关如果根据官方 CIS 基准评估集群的更多详细信息，请参阅[CIS Benchmark Rancher 自测指南 - Rancher v2.3.3](/docs/security/benchmark-2.3.3/_index)。
+
+### Profile Definitions
 
 The following profile definitions agree with the CIS benchmarks for Kubernetes.
 
 A profile is a set of configurations that provide a certain amount of hardening. Generally, the more hardened an environment is, the more it affects performance.
 
-##### Level 1
+#### Level 1
 
 Items in this profile intend to:
 
@@ -30,7 +32,7 @@ Items in this profile intend to:
 - deliver an obvious security benefit; and
 - not alter the functionality or utility of the environment beyond an acceptable margin
 
-##### Level 2
+#### Level 2
 
 Items in this profile extend the “Level 1” profile and exhibit one or more of the following characteristics:
 
@@ -40,11 +42,11 @@ Items in this profile extend the “Level 1” profile and exhibit one or more o
 
 ---
 
-### 1.1 - Rancher RKE Kubernetes cluster host configuration
+## 1.1 - Rancher RKE Kubernetes cluster host configuration
 
-(See Appendix A.for full ubuntu `cloud-config` example)
+(See Appendix A. for full ubuntu `cloud-config` example)
 
-#### 1.1.1 - Configure default sysctl settings on all hosts
+### 1.1.1 - Configure default sysctl settings on all hosts
 
 **Profile Applicability**
 
@@ -115,7 +117,7 @@ kernel.keys.root_maxbytes=25000000
 
 - Run `sysctl -p /etc/sysctl.d/90-kubelet.conf` to enable the settings.
 
-#### 1.4.11 Ensure that the etcd data directory permissions are set to `700` or more restrictive
+### 1.4.11 Ensure that the etcd data directory permissions are set to `700` or more restrictive
 
 **Profile Applicability**
 
@@ -148,9 +150,9 @@ Verify that the permissions are `700` or more restrictive.
 
 **Remediation**
 
-Follow the steps as documented in [1.4.12](/docs/security/hardening-2.3.3/#1-4-12-ensure-that-the-etcd-data-directory-ownership-is-set-to-etcd-etcd) remediation.
+Follow the steps as documented in [1.4.12]({{< baseurl >}}/rancher/v2.x/en/security/hardening-2.3.3/#1-4-12-ensure-that-the-etcd-data-directory-ownership-is-set-to-etcd-etcd) remediation.
 
-#### 1.4.12 - Ensure that the etcd data directory ownership is set to `etcd:etcd`
+### 1.4.12 - Ensure that the etcd data directory ownership is set to `etcd:etcd`
 
 **Profile Applicability**
 
@@ -158,15 +160,15 @@ Follow the steps as documented in [1.4.12](/docs/security/hardening-2.3.3/#1-4-1
 
 **Description**
 
-Ensure that the etcd data directory ownership is set to `etcd:etcd` .
+Ensure that the etcd data directory ownership is set to `etcd:etcd`.
 
 **Rationale**
 
-etcd is a highly-available key-value store used by Kubernetes deployments for persistent storage of all of its REST API objects. This data directory should be protected from any unauthorized reads or writes. It should be owned by `etcd:etcd` .
+etcd is a highly-available key-value store used by Kubernetes deployments for persistent storage of all of its REST API objects. This data directory should be protected from any unauthorized reads or writes. It should be owned by `etcd:etcd`.
 
 **Audit**
 
-On a etcd server node, get the etcd data directory, passed as an argument `--data-dir` , from the below command:
+On a etcd server node, get the etcd data directory, passed as an argument `--data-dir`, from the below command:
 
 ```bash
 ps -ef | grep etcd
@@ -178,7 +180,7 @@ Run the below command (based on the etcd data directory found above). For exampl
 stat -c %U:%G /var/lib/etcd
 ```
 
-Verify that the ownership is set to `etcd:etcd` .
+Verify that the ownership is set to `etcd:etcd`.
 
 **Remediation**
 
@@ -194,7 +196,7 @@ Record the uid/gid:
 id etcd
 ```
 
-- Add the following to the RKE `cluster.yml` etcd section under `services` :
+- Add the following to the RKE `cluster.yml` etcd section under `services`:
 
 ```yaml
 services:
@@ -203,11 +205,11 @@ services:
     gid: <etcd user gid recorded previously>
 ```
 
-### 2.1 - Rancher HA Kubernetes Cluster Configuration via RKE
+## 2.1 - Rancher HA Kubernetes Cluster Configuration via RKE
 
-(See Appendix B.for full RKE `cluster.yml` example)
+(See Appendix B. for full RKE `cluster.yml` example)
 
-#### 2.1.1 - Configure kubelet options
+### 2.1.1 - Configure kubelet options
 
 **Profile Applicability**
 
@@ -245,7 +247,7 @@ Inspect the Kubelet containers on all hosts and verify that they are running wit
 
 **Remediation**
 
-- Add the following to the RKE `cluster.yml` kubelet section under `services` :
+- Add the following to the RKE `cluster.yml` kubelet section under `services`:
 
 ```yaml
 services:
@@ -257,7 +259,7 @@ services:
       tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
 ```
 
-Where `<duration>` is in a form like `1800s` .
+Where `<duration>` is in a form like `1800s`.
 
 - Reconfigure the cluster:
 
@@ -265,7 +267,7 @@ Where `<duration>` is in a form like `1800s` .
 rke up --config cluster.yml
 ```
 
-#### 2.1.2 - Configure kube-api options
+### 2.1.2 - Configure kube-api options
 
 **Profile Applicability**
 
@@ -305,9 +307,9 @@ To pass the following controls for the kube-api server ensure RKE configuration 
 
 - On nodes with the `controlplane` role inspect the `kube-apiserver` containers:
 
-```bash
+  ```bash
   docker inspect kube-apiserver
-```
+  ```
 
 - Look for the following options in the command section of the output:
 
@@ -335,7 +337,7 @@ To pass the following controls for the kube-api server ensure RKE configuration 
 
 **Remediation**
 
-- In the RKE `cluster.yml` add the following directives to the `kube-api` section under `services` :
+- In the RKE `cluster.yml` add the following directives to the `kube-api` section under `services`:
 
 ```yaml
 services:
@@ -375,7 +377,7 @@ rke up --config cluster.yml
 
 Files that are placed in `/opt/kubernetes` need to be mounted in using the `extra_binds` functionality in RKE.
 
-#### 2.1.3 - Configure scheduler options
+### 2.1.3 - Configure scheduler options
 
 **Profile Applicability**
 
@@ -427,7 +429,7 @@ services:
 rke up --config cluster.yml
 ```
 
-#### 2.1.4 - Configure controller options
+### 2.1.4 - Configure controller options
 
 **Profile Applicability**
 
@@ -485,7 +487,7 @@ services:
 rke up --config cluster.yml
 ```
 
-#### 2.1.5 - Configure addons and PSPs
+### 2.1.5 - Configure addons and PSPs
 
 **Profile Applicability**
 
@@ -549,22 +551,14 @@ addons: |
     name: default-psp-role
     namespace: ingress-nginx
   rules:
-
-  + apiGroups:
+  - apiGroups:
     - extensions
-
     resourceNames:
-
     - default-psp
-
     resources:
-
     - podsecuritypolicies
-
     verbs:
-
     - use
-
   ---
   apiVersion: rbac.authorization.k8s.io/v1
   kind: RoleBinding
@@ -576,14 +570,10 @@ addons: |
     kind: Role
     name: default-psp-role
   subjects:
-
-  + apiGroup: rbac.authorization.k8s.io
-
+  - apiGroup: rbac.authorization.k8s.io
     kind: Group
     name: system:serviceaccounts
-
-  + apiGroup: rbac.authorization.k8s.io
-
+  - apiGroup: rbac.authorization.k8s.io
     kind: Group
     name: system:authenticated
   ---
@@ -598,22 +588,14 @@ addons: |
     name: default-psp-role
     namespace: cattle-system
   rules:
-
-  + apiGroups:
+  - apiGroups:
     - extensions
-
     resourceNames:
-
     - default-psp
-
     resources:
-
     - podsecuritypolicies
-
     verbs:
-
     - use
-
   ---
   apiVersion: rbac.authorization.k8s.io/v1
   kind: RoleBinding
@@ -625,14 +607,10 @@ addons: |
     kind: Role
     name: default-psp-role
   subjects:
-
-  + apiGroup: rbac.authorization.k8s.io
-
+  - apiGroup: rbac.authorization.k8s.io
     kind: Group
     name: system:serviceaccounts
-
-  + apiGroup: rbac.authorization.k8s.io
-
+  - apiGroup: rbac.authorization.k8s.io
     kind: Group
     name: system:authenticated
   ---
@@ -642,9 +620,7 @@ addons: |
     name: restricted-psp
   spec:
     requiredDropCapabilities:
-
     - NET_RAW
-
     privileged: false
     allowPrivilegeEscalation: false
     defaultAllowPrivilegeEscalation: false
@@ -657,36 +633,26 @@ addons: |
     supplementalGroups:
       rule: RunAsAny
     volumes:
-
     - emptyDir
     - secret
     - persistentVolumeClaim
     - downwardAPI
     - configMap
     - projected
-
   ---
   apiVersion: rbac.authorization.k8s.io/v1
   kind: ClusterRole
   metadata:
     name: restricted-clusterrole
   rules:
-
-  + apiGroups:
+  - apiGroups:
     - extensions
-
     resourceNames:
-
     - restricted-psp
-
     resources:
-
     - podsecuritypolicies
-
     verbs:
-
     - use
-
   ---
   apiVersion: rbac.authorization.k8s.io/v1
   kind: ClusterRoleBinding
@@ -697,14 +663,10 @@ addons: |
     kind: ClusterRole
     name: restricted-clusterrole
   subjects:
-
-  + apiGroup: rbac.authorization.k8s.io
-
+  - apiGroup: rbac.authorization.k8s.io
     kind: Group
     name: system:serviceaccounts
-
-  + apiGroup: rbac.authorization.k8s.io
-
+  - apiGroup: rbac.authorization.k8s.io
     kind: Group
     name: system:authenticated
 ```
@@ -715,9 +677,9 @@ addons: |
 rke up --config cluster.yml
 ```
 
-### 3.1 - Rancher Management Control Plane Installation
+## 3.1 - Rancher Management Control Plane Installation
 
-#### 3.1.1 - Disable the local cluster option
+### 3.1.1 - Disable the local cluster option
 
 **Profile Applicability**
 
@@ -751,7 +713,7 @@ kubectl get deployment rancher -n cattle-system -o yaml |grep 'add-local'
 --set addLocal="false"
 ```
 
-#### 3.1.2 - Enable Rancher Audit logging
+### 3.1.2 - Enable Rancher Audit logging
 
 **Profile Applicability**
 
@@ -774,44 +736,41 @@ kubectl get deployment rancher -n cattle-system -o yaml | grep auditLog
 ```
 
 - Verify that the log is going to the appropriate destination, as set by
+  `auditLog.destination`
 
-`auditLog.destination`
+  - `sidecar`:
 
-- `sidecar` :
+    1. List pods:
 
-  1. List pods:
-
-````bash
+       ```bash
        kubectl get pods -n cattle-system
        ```
 
     2. Tail logs:
 
-
-
-``` bash
+       ```bash
        kubectl logs <pod> -n cattle-system -c rancher-audit-log
        ```
 
-  + `hostPath`
+  - `hostPath`
 
-    1. On the worker nodes running the Rancher pods, verify that the log files are being written to the destination indicated in `auditlog.hostPath` .
+    1. On the worker nodes running the Rancher pods, verify that the log files are being written to the destination indicated in `auditlog.hostPath`.
 
 **Remediation**
 
 Upgrade the Rancher server installation using Helm, and configure the audit log settings. The instructions for doing so can be found in the reference section below.
 
-##### Reference
+#### Reference
 
-* <https://rancher.com/docs/rancher/v2.x/en/installation/options/chart-options/#advanced-options>
+- <https://rancher.com/docs/rancher/v2.x/en/installation/options/chart-options/#advanced-options>
 
-### 3.2 - Rancher Management Control Plane Authentication
+## 3.2 - Rancher Management Control Plane Authentication
 
-#### 3.2.1 - Change the local admin password from the default value
+### 3.2.1 - Change the local admin password from the default value
 
 **Profile Applicability**
 
-* Level 1
+- Level 1
 
 **Description**
 
@@ -825,8 +784,8 @@ The default admin password is common across all Rancher installations and should
 
 Attempt to login into the UI with the following credentials:
 
-* Username: admin
-* Password: admin
+- Username: admin
+- Password: admin
 
 The login attempt must not succeed.
 
@@ -834,11 +793,11 @@ The login attempt must not succeed.
 
 Change the password from `admin` to a password that meets the recommended password standards for your organization.
 
-#### 3.2.2 - Configure an Identity Provider for Authentication
+### 3.2.2 - Configure an Identity Provider for Authentication
 
 **Profile Applicability**
 
-* Level 1
+- Level 1
 
 **Description**
 
@@ -850,26 +809,26 @@ Rancher supports several authentication backends that are common in enterprises.
 
 **Audit**
 
-* In the Rancher UI, select _Global_
-* Select _Security_
-* Select _Authentication_
-* Ensure the authentication provider for your environment is active and configured correctly
+- In the Rancher UI, select _Global_
+- Select _Security_
+- Select _Authentication_
+- Ensure the authentication provider for your environment is active and configured correctly
 
 **Remediation**
 
 Configure the appropriate authentication provider for your Rancher installation according to the documentation found at the link in the reference section below.
 
-##### Reference
+#### Reference
 
-* <https://rancher.com/docs/rancher/v2.x/en/admin-settings/authentication/>
+- <https://rancher.com/docs/rancher/v2.x/en/admin-settings/authentication/>
 
-### 3.3 - Rancher Management Control Plane RBAC
+## 3.3 - Rancher Management Control Plane RBAC
 
-#### 3.3.1 - Ensure that administrator privileges are only granted to those who require them
+### 3.3.1 - Ensure that administrator privileges are only granted to those who require them
 
 **Profile Applicability**
 
-* Level 1
+- Level 1
 
 **Description**
 
@@ -883,7 +842,7 @@ The `admin` privilege level gives the user the highest level of access to the Ra
 
 The following script uses the Rancher API to show users with administrator privileges:
 
-``` bash
+```bash
 #!/bin/bash
 for i in $(curl -sk -u 'token-<id>:<secret>' https://<RANCHER_URL>/v3/users|jq -r .data[].links.globalRoleBindings); do
 
@@ -891,7 +850,7 @@ curl -sk -u 'token-<id>:<secret>' $i| jq '.data[] | "\(.userId) \(.globalRoleId)
 
 done
 
-````
+```
 
 The `admin` role should only be assigned to users that require administrative privileges. Any role that is not `admin` or `user` should be audited in the RBAC section of the UI to ensure that the privileges adhere to policies for global access.
 
@@ -901,9 +860,9 @@ The Rancher server permits customization of the default global permissions. We r
 
 Remove the `admin` role from any user that does not require administrative privileges.
 
-### 3.4 - Rancher Management Control Plane Configuration
+## 3.4 - Rancher Management Control Plane Configuration
 
-#### 3.4.1 - Ensure only approved node drivers are active
+### 3.4.1 - Ensure only approved node drivers are active
 
 **Profile Applicability**
 
@@ -927,11 +886,11 @@ Node drivers are used to provision compute nodes in various cloud providers and 
 
 If a disallowed node driver is active, visit the _Node Drivers_ page under _Global_ and disable it.
 
-### 4.1 - Rancher Kubernetes Custom Cluster Configuration via RKE
+## 4.1 - Rancher Kubernetes Custom Cluster Configuration via RKE
 
-(See Appendix C.for full RKE template example)
+(See Appendix C. for full RKE template example)
 
-#### 4.1.1 - Configure kubelet options
+### 4.1.1 - Configure kubelet options
 
 **Profile Applicability**
 
@@ -969,7 +928,7 @@ Inspect the Kubelet containers on all hosts and verify that they are running wit
 
 **Remediation**
 
-- Add the following to the RKE `cluster.yml` kubelet section under `services` :
+- Add the following to the RKE `cluster.yml` kubelet section under `services`:
 
 ```yaml
 services:
@@ -981,7 +940,7 @@ services:
       tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
 ```
 
-Where `<duration>` is in a form like `1800s` .
+Where `<duration>` is in a form like `1800s`.
 
 - Reconfigure the cluster:
 
@@ -989,7 +948,7 @@ Where `<duration>` is in a form like `1800s` .
 rke up --config cluster.yml
 ```
 
-#### 4.1.2 - Configure kube-api options
+### 4.1.2 - Configure kube-api options
 
 **Profile Applicability**
 
@@ -1029,9 +988,9 @@ To pass the following controls for the kube-api server ensure RKE configuration 
 
 - On nodes with the `controlplane` role inspect the `kube-apiserver` containers:
 
-```bash
+  ```bash
   docker inspect kube-apiserver
-```
+  ```
 
 - Look for the following options in the command section of the output:
 
@@ -1059,7 +1018,7 @@ To pass the following controls for the kube-api server ensure RKE configuration 
 
 **Remediation**
 
-- In the RKE `cluster.yml` add the following directives to the `kube-api` section under `services` :
+- In the RKE `cluster.yml` add the following directives to the `kube-api` section under `services`:
 
 ```yaml
 services:
@@ -1099,7 +1058,7 @@ rke up --config cluster.yml
 
 Files that are placed in `/opt/kubernetes` need to be mounted in using the `extra_binds` functionality in RKE.
 
-#### 4.1.3 - Configure scheduler options
+### 4.1.3 - Configure scheduler options
 
 **Profile Applicability**
 
@@ -1151,7 +1110,7 @@ services:
 rke up --config cluster.yml
 ```
 
-#### 4.1.4 - Configure controller options
+### 4.1.4 - Configure controller options
 
 **Profile Applicability**
 
@@ -1209,7 +1168,7 @@ services:
 rke up --config cluster.yml
 ```
 
-#### 4.1.5 - Check PSPs
+### 4.1.5 - Check PSPs
 
 **Profile Applicability**
 
@@ -1262,33 +1221,26 @@ kubectl get psp restricted-psp
 
 ---
 
-### Appendix A - Complete ubuntu `cloud-config` Example
+## Appendix A - Complete ubuntu `cloud-config` Example
 
 `cloud-config` file to automate hardening manual steps on nodes deployment.
 
 ```
 #cloud-config
 bootcmd:
-
-* apt-get update
-* apt-get install -y apt-transport-https
-
+- apt-get update
+- apt-get install -y apt-transport-https
 apt:
   sources:
     docker:
       source: "deb [arch=amd64] https://download.docker.com/linux/ubuntu $RELEASE stable"
       keyid: 0EBFCD88
 packages:
-
-* [docker-ce, '5:19.03.5~3-0~ubuntu-bionic']
-* jq
-
+- [docker-ce, '5:19.03.5~3-0~ubuntu-bionic']
+- jq
 write_files:
-
-## 1.1.1 - Configure default sysctl settings on all hosts
-
-* path: /etc/sysctl.d/90-kubelet.conf
-
+# 1.1.1 - Configure default sysctl settings on all hosts
+- path: /etc/sysctl.d/90-kubelet.conf
   owner: root:root
   permissions: '0644'
   content: |
@@ -1298,55 +1250,39 @@ write_files:
     kernel.panic_on_oops=1
     kernel.keys.root_maxkeys=1000000
     kernel.keys.root_maxbytes=25000000
-
-## 1.4.12 etcd user
-
+# 1.4.12 etcd user
 groups:
-
-  + etcd
-
+  - etcd
 users:
-
-  + default
-  + name: etcd
-
+  - default
+  - name: etcd
     gecos: Etcd user
     primary_group: etcd
     homedir: /var/lib/etcd
-
-## 1.4.11 etcd data dir
-
+# 1.4.11 etcd data dir
 runcmd:
-
-  + chmod 0700 /var/lib/etcd
-  + usermod -G docker -a ubuntu
-  + sysctl -p /etc/sysctl.d/90-kubelet.conf
-
+  - chmod 0700 /var/lib/etcd
+  - usermod -G docker -a ubuntu
+  - sysctl -p /etc/sysctl.d/90-kubelet.conf
 ```
 
-### Appendix B - Complete RKE `cluster.yml` Example
+## Appendix B - Complete RKE `cluster.yml` Example
 
 Before apply, replace `rancher_kubernetes_engine_config.services.etcd.gid` and `rancher_kubernetes_engine_config.services.etcd.uid` with the proper etcd group and user ids that were created on etcd nodes.
 
-accordion id="cluster-1.14" label="RKE yaml for k8s 1.14"
+{{% accordion id="cluster-1.14" label="RKE yaml for k8s 1.14" %}}
 
 ```yaml
 nodes:
-
-  + address: 18.191.190.205
-
+  - address: 18.191.190.205
     internal_address: 172.31.24.213
     user: ubuntu
     role: ['controlplane', 'etcd', 'worker']
-
-  + address: 18.191.190.203
-
+  - address: 18.191.190.203
     internal_address: 172.31.24.203
     user: ubuntu
     role: ['controlplane', 'etcd', 'worker']
-
-  + address: 18.191.190.10
-
+  - address: 18.191.190.10
     internal_address: 172.31.24.244
     user: ubuntu
     role: ['controlplane', 'etcd', 'worker']
@@ -1358,92 +1294,58 @@ bastion_host:
   ssh_agent_auth: false
 cloud_provider: {}
 ignore_docker_version: true
-##
-
-## # Currently only nginx ingress provider is supported.
-
-## # To disable ingress controller, set `provider: none`
-
-## # To enable ingress on specific nodes, use the node_selector, eg:
-
-##    provider: nginx
-
-##    node_selector:
-
-##      app: ingress
-##
+#
+# # Currently only nginx ingress provider is supported.
+# # To disable ingress controller, set `provider: none`
+# # To enable ingress on specific nodes, use the node_selector, eg:
+#    provider: nginx
+#    node_selector:
+#      app: ingress
+#
 ingress:
   provider: nginx
 kubernetes_version: v1.14.9-rancher1-1
 monitoring:
   provider: metrics-server
-##
-
-##   If you are using calico on AWS
-
-##
-
-##    network:
-
-##      plugin: calico
-
-##      calico_network_provider:
-
-##        cloud_provider: aws
-##
-
-## # To specify flannel interface
-
-##
-
-##    network:
-
-##      plugin: flannel
-
-##      flannel_network_provider:
-
-##      iface: eth1
-##
-
-## # To specify flannel interface for canal plugin
-
-##
-
-##    network:
-
-##      plugin: canal
-
-##      canal_network_provider:
-
-##        iface: eth1
-##
+#
+#   If you are using calico on AWS
+#
+#    network:
+#      plugin: calico
+#      calico_network_provider:
+#        cloud_provider: aws
+#
+# # To specify flannel interface
+#
+#    network:
+#      plugin: flannel
+#      flannel_network_provider:
+#      iface: eth1
+#
+# # To specify flannel interface for canal plugin
+#
+#    network:
+#      plugin: canal
+#      canal_network_provider:
+#        iface: eth1
+#
 network:
   options:
     flannel_backend_type: vxlan
   plugin: canal
 restore:
   restore: false
-##
-
-##    services:
-
-##      kube-api:
-
-##        service_cluster_ip_range: 10.43.0.0/16
-
-##      kube-controller:
-
-##        cluster_cidr: 10.42.0.0/16
-
-##        service_cluster_ip_range: 10.43.0.0/16
-
-##      kubelet:
-
-##        cluster_domain: cluster.local
-
-##        cluster_dns_server: 10.43.0.10
-
-##
+#
+#    services:
+#      kube-api:
+#        service_cluster_ip_range: 10.43.0.0/16
+#      kube-controller:
+#        cluster_cidr: 10.42.0.0/16
+#        service_cluster_ip_range: 10.43.0.0/16
+#      kubelet:
+#        cluster_domain: cluster.local
+#        cluster_dns_server: 10.43.0.10
+#
 services:
   etcd:
     backup_config:
@@ -1474,9 +1376,7 @@ services:
       tls-cipher-suites: >-
         TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256
     extra_binds:
-
       - '/opt/kubernetes:/opt/kubernetes'
-
     pod_security_policy: true
     secrets_encryption_config:
       enabled: true
@@ -1500,27 +1400,21 @@ services:
 ssh_agent_auth: false
 ```
 
-/accordion
+{{% /accordion %}}
 
-accordion id="cluster-1.15" label="RKE yaml for k8s 1.15"
+{{% accordion id="cluster-1.15" label="RKE yaml for k8s 1.15" %}}
 
 ```yaml
 nodes:
-
-  + address: 18.191.190.205
-
+  - address: 18.191.190.205
     internal_address: 172.31.24.213
     user: ubuntu
     role: ['controlplane', 'etcd', 'worker']
-
-  + address: 18.191.190.203
-
+  - address: 18.191.190.203
     internal_address: 172.31.24.203
     user: ubuntu
     role: ['controlplane', 'etcd', 'worker']
-
-  + address: 18.191.190.10
-
+  - address: 18.191.190.10
     internal_address: 172.31.24.244
     user: ubuntu
     role: ['controlplane', 'etcd', 'worker']
@@ -1528,90 +1422,56 @@ addon_job_timeout: 30
 authentication:
   strategy: x509
 ignore_docker_version: true
-##
-
-## # Currently only nginx ingress provider is supported.
-
-## # To disable ingress controller, set `provider: none`
-
-## # To enable ingress on specific nodes, use the node_selector, eg:
-
-##    provider: nginx
-
-##    node_selector:
-
-##      app: ingress
-##
+#
+# # Currently only nginx ingress provider is supported.
+# # To disable ingress controller, set `provider: none`
+# # To enable ingress on specific nodes, use the node_selector, eg:
+#    provider: nginx
+#    node_selector:
+#      app: ingress
+#
 ingress:
   provider: nginx
 kubernetes_version: v1.15.6-rancher1-2
 monitoring:
   provider: metrics-server
-##
-
-##   If you are using calico on AWS
-
-##
-
-##    network:
-
-##      plugin: calico
-
-##      calico_network_provider:
-
-##        cloud_provider: aws
-##
-
-## # To specify flannel interface
-
-##
-
-##    network:
-
-##      plugin: flannel
-
-##      flannel_network_provider:
-
-##      iface: eth1
-##
-
-## # To specify flannel interface for canal plugin
-
-##
-
-##    network:
-
-##      plugin: canal
-
-##      canal_network_provider:
-
-##        iface: eth1
-##
+#
+#   If you are using calico on AWS
+#
+#    network:
+#      plugin: calico
+#      calico_network_provider:
+#        cloud_provider: aws
+#
+# # To specify flannel interface
+#
+#    network:
+#      plugin: flannel
+#      flannel_network_provider:
+#      iface: eth1
+#
+# # To specify flannel interface for canal plugin
+#
+#    network:
+#      plugin: canal
+#      canal_network_provider:
+#        iface: eth1
+#
 network:
   options:
     flannel_backend_type: vxlan
   plugin: canal
-##
-
-##    services:
-
-##      kube-api:
-
-##        service_cluster_ip_range: 10.43.0.0/16
-
-##      kube-controller:
-
-##        cluster_cidr: 10.42.0.0/16
-
-##        service_cluster_ip_range: 10.43.0.0/16
-
-##      kubelet:
-
-##        cluster_domain: cluster.local
-
-##        cluster_dns_server: 10.43.0.10
-
-##
+#
+#    services:
+#      kube-api:
+#        service_cluster_ip_range: 10.43.0.0/16
+#      kube-controller:
+#        cluster_cidr: 10.42.0.0/16
+#        service_cluster_ip_range: 10.43.0.0/16
+#      kubelet:
+#        cluster_domain: cluster.local
+#        cluster_dns_server: 10.43.0.10
+#
 services:
   etcd:
     backup_config:
@@ -1644,9 +1504,7 @@ services:
       service-account-lookup: 'true'
       tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
     extra_binds:
-
       - '/opt/kubernetes:/opt/kubernetes'
-
   kubelet:
     generate_serving_certificate: true
     extra_args:
@@ -1666,27 +1524,21 @@ services:
 ssh_agent_auth: false
 ```
 
-/accordion
+{{% /accordion %}}
 
-accordion id="cluster-1.16" label="RKE yaml for k8s 1.16"
+{{% accordion id="cluster-1.16" label="RKE yaml for k8s 1.16" %}}
 
 ```yaml
 nodes:
-
-  + address: 18.191.190.205
-
+  - address: 18.191.190.205
     internal_address: 172.31.24.213
     user: ubuntu
     role: ['controlplane', 'etcd', 'worker']
-
-  + address: 18.191.190.203
-
+  - address: 18.191.190.203
     internal_address: 172.31.24.203
     user: ubuntu
     role: ['controlplane', 'etcd', 'worker']
-
-  + address: 18.191.190.10
-
+  - address: 18.191.190.10
     internal_address: 172.31.24.244
     user: ubuntu
     role: ['controlplane', 'etcd', 'worker']
@@ -1694,90 +1546,56 @@ addon_job_timeout: 30
 authentication:
   strategy: x509
 ignore_docker_version: true
-##
-
-## # Currently only nginx ingress provider is supported.
-
-## # To disable ingress controller, set `provider: none`
-
-## # To enable ingress on specific nodes, use the node_selector, eg:
-
-##    provider: nginx
-
-##    node_selector:
-
-##      app: ingress
-##
+#
+# # Currently only nginx ingress provider is supported.
+# # To disable ingress controller, set `provider: none`
+# # To enable ingress on specific nodes, use the node_selector, eg:
+#    provider: nginx
+#    node_selector:
+#      app: ingress
+#
 ingress:
   provider: nginx
 kubernetes_version: v1.16.3-rancher1-1
 monitoring:
   provider: metrics-server
-##
-
-##   If you are using calico on AWS
-
-##
-
-##    network:
-
-##      plugin: calico
-
-##      calico_network_provider:
-
-##        cloud_provider: aws
-##
-
-## # To specify flannel interface
-
-##
-
-##    network:
-
-##      plugin: flannel
-
-##      flannel_network_provider:
-
-##      iface: eth1
-##
-
-## # To specify flannel interface for canal plugin
-
-##
-
-##    network:
-
-##      plugin: canal
-
-##      canal_network_provider:
-
-##        iface: eth1
-##
+#
+#   If you are using calico on AWS
+#
+#    network:
+#      plugin: calico
+#      calico_network_provider:
+#        cloud_provider: aws
+#
+# # To specify flannel interface
+#
+#    network:
+#      plugin: flannel
+#      flannel_network_provider:
+#      iface: eth1
+#
+# # To specify flannel interface for canal plugin
+#
+#    network:
+#      plugin: canal
+#      canal_network_provider:
+#        iface: eth1
+#
 network:
   options:
     flannel_backend_type: vxlan
   plugin: canal
-##
-
-##    services:
-
-##      kube-api:
-
-##        service_cluster_ip_range: 10.43.0.0/16
-
-##      kube-controller:
-
-##        cluster_cidr: 10.42.0.0/16
-
-##        service_cluster_ip_range: 10.43.0.0/16
-
-##      kubelet:
-
-##        cluster_domain: cluster.local
-
-##        cluster_dns_server: 10.43.0.10
-
-##
+#
+#    services:
+#      kube-api:
+#        service_cluster_ip_range: 10.43.0.0/16
+#      kube-controller:
+#        cluster_cidr: 10.42.0.0/16
+#        service_cluster_ip_range: 10.43.0.0/16
+#      kubelet:
+#        cluster_domain: cluster.local
+#        cluster_dns_server: 10.43.0.10
+#
 services:
   etcd:
     backup_config:
@@ -1810,9 +1628,7 @@ services:
       service-account-lookup: 'true'
       tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
     extra_binds:
-
       - '/opt/kubernetes:/opt/kubernetes'
-
   kubelet:
     generate_serving_certificate: true
     extra_args:
@@ -1832,20 +1648,18 @@ services:
 ssh_agent_auth: false
 ```
 
-/accordion
+{{% /accordion %}}
 
-### Appendix C - Complete RKE Template Example
+## Appendix C - Complete RKE Template Example
 
 Before apply, replace `rancher_kubernetes_engine_config.services.etcd.gid` and `rancher_kubernetes_engine_config.services.etcd.uid` with the proper etcd group and user ids that were created on etcd nodes.
 
-accordion id="k8s-1.14" label="RKE template for k8s 1.14"
+{{% accordion id="k8s-1.14" label="RKE template for k8s 1.14" %}}
 
 ```yaml
-##
-
-## Cluster Config
-
-##
+#
+# Cluster Config
+#
 answers: {}
 default_pod_security_policy_template_id: restricted
 docker_root_dir: /var/lib/docker
@@ -1855,11 +1669,9 @@ enable_network_policy: false
 local_cluster_auth_endpoint:
   enabled: false
 name: test-35378
-##
-
-## Rancher Config
-
-##
+#
+# Rancher Config
+#
 rancher_kubernetes_engine_config:
   addon_job_timeout: 30
   authentication:
@@ -1869,58 +1681,58 @@ rancher_kubernetes_engine_config:
     ssh_agent_auth: false
   cloud_provider: {}
   ignore_docker_version: true
-  ##
-  ## # Currently only nginx ingress provider is supported.
-  ## # To disable ingress controller, set `provider: none`
-  ## # To enable ingress on specific nodes, use the node_selector, eg:
-  ##    provider: nginx
-  ##    node_selector:
-  ##      app: ingress
-  ##
+  #
+  # # Currently only nginx ingress provider is supported.
+  # # To disable ingress controller, set `provider: none`
+  # # To enable ingress on specific nodes, use the node_selector, eg:
+  #    provider: nginx
+  #    node_selector:
+  #      app: ingress
+  #
   ingress:
     provider: nginx
   kubernetes_version: v1.14.9-rancher1-1
   monitoring:
     provider: metrics-server
-  ##
-  ##   If you are using calico on AWS
-  ##
-  ##    network:
-  ##      plugin: calico
-  ##      calico_network_provider:
-  ##        cloud_provider: aws
-  ##
-  ## # To specify flannel interface
-  ##
-  ##    network:
-  ##      plugin: flannel
-  ##      flannel_network_provider:
-  ##      iface: eth1
-  ##
-  ## # To specify flannel interface for canal plugin
-  ##
-  ##    network:
-  ##      plugin: canal
-  ##      canal_network_provider:
-  ##        iface: eth1
-  ##
+  #
+  #   If you are using calico on AWS
+  #
+  #    network:
+  #      plugin: calico
+  #      calico_network_provider:
+  #        cloud_provider: aws
+  #
+  # # To specify flannel interface
+  #
+  #    network:
+  #      plugin: flannel
+  #      flannel_network_provider:
+  #      iface: eth1
+  #
+  # # To specify flannel interface for canal plugin
+  #
+  #    network:
+  #      plugin: canal
+  #      canal_network_provider:
+  #        iface: eth1
+  #
   network:
     options:
       flannel_backend_type: vxlan
     plugin: canal
   restore:
     restore: false
-  ##
-  ##    services:
-  ##      kube-api:
-  ##        service_cluster_ip_range: 10.43.0.0/16
-  ##      kube-controller:
-  ##        cluster_cidr: 10.42.0.0/16
-  ##        service_cluster_ip_range: 10.43.0.0/16
-  ##      kubelet:
-  ##        cluster_domain: cluster.local
-  ##        cluster_dns_server: 10.43.0.10
-  ##
+  #
+  #    services:
+  #      kube-api:
+  #        service_cluster_ip_range: 10.43.0.0/16
+  #      kube-controller:
+  #        cluster_cidr: 10.42.0.0/16
+  #        service_cluster_ip_range: 10.43.0.0/16
+  #      kubelet:
+  #        cluster_domain: cluster.local
+  #        cluster_dns_server: 10.43.0.10
+  #
   services:
     etcd:
       backup_config:
@@ -1952,7 +1764,6 @@ rancher_kubernetes_engine_config:
           TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256
       extra_binds:
         - '/opt/kubernetes:/opt/kubernetes'
-
       pod_security_policy: true
       secrets_encryption_config:
         enabled: true
@@ -1977,16 +1788,14 @@ rancher_kubernetes_engine_config:
 windows_prefered_cluster: false
 ```
 
-/accordion
+{{% /accordion %}}
 
-accordion id="k8s-1.15" label="RKE template for k8s 1.15"
+{{% accordion id="k8s-1.15" label="RKE template for k8s 1.15" %}}
 
 ```yaml
-##
-
-## Cluster Config
-
-##
+#
+# Cluster Config
+#
 default_pod_security_policy_template_id: restricted
 docker_root_dir: /var/lib/docker
 enable_cluster_alerting: false
@@ -1994,66 +1803,64 @@ enable_cluster_monitoring: false
 enable_network_policy: false
 local_cluster_auth_endpoint:
   enabled: true
-##
-
-## Rancher Config
-
-##
+#
+# Rancher Config
+#
 rancher_kubernetes_engine_config:
   addon_job_timeout: 30
   authentication:
     strategy: x509
   ignore_docker_version: true
-  ##
-  ## # Currently only nginx ingress provider is supported.
-  ## # To disable ingress controller, set `provider: none`
-  ## # To enable ingress on specific nodes, use the node_selector, eg:
-  ##    provider: nginx
-  ##    node_selector:
-  ##      app: ingress
-  ##
+  #
+  # # Currently only nginx ingress provider is supported.
+  # # To disable ingress controller, set `provider: none`
+  # # To enable ingress on specific nodes, use the node_selector, eg:
+  #    provider: nginx
+  #    node_selector:
+  #      app: ingress
+  #
   ingress:
     provider: nginx
   kubernetes_version: v1.15.6-rancher1-2
   monitoring:
     provider: metrics-server
-  ##
-  ##   If you are using calico on AWS
-  ##
-  ##    network:
-  ##      plugin: calico
-  ##      calico_network_provider:
-  ##        cloud_provider: aws
-  ##
-  ## # To specify flannel interface
-  ##
-  ##    network:
-  ##      plugin: flannel
-  ##      flannel_network_provider:
-  ##      iface: eth1
-  ##
-  ## # To specify flannel interface for canal plugin
-  ##
-  ##    network:
-  ##      plugin: canal
-  ##      canal_network_provider:
-  ##        iface: eth1
-  ##
+  #
+  #   If you are using calico on AWS
+  #
+  #    network:
+  #      plugin: calico
+  #      calico_network_provider:
+  #        cloud_provider: aws
+  #
+  # # To specify flannel interface
+  #
+  #    network:
+  #      plugin: flannel
+  #      flannel_network_provider:
+  #      iface: eth1
+  #
+  # # To specify flannel interface for canal plugin
+  #
+  #    network:
+  #      plugin: canal
+  #      canal_network_provider:
+  #        iface: eth1
+  #
   network:
     options:
       flannel_backend_type: vxlan
     plugin: canal
-  ##
-  ##    services:
-  ##      kube-api:
-  ##        service_cluster_ip_range: 10.43.0.0/16
-  ##      kube-controller:
-  ##        cluster_cidr: 10.42.0.0/16
-  ##        service_cluster_ip_range: 10.43.0.0/16
-  ##      kubelet:
-  ##        cluster_domain: cluster.local
-  ##        cluster_dns_server: 10.43.0.10
-  ##
+  #
+  #    services:
+  #      kube-api:
+  #        service_cluster_ip_range: 10.43.0.0/16
+  #      kube-controller:
+  #        cluster_cidr: 10.42.0.0/16
+  #        service_cluster_ip_range: 10.43.0.0/16
+  #      kubelet:
+  #        cluster_domain: cluster.local
+  #        cluster_dns_server: 10.43.0.10
+  #
   services:
     etcd:
       backup_config:
@@ -2087,7 +1894,6 @@ rancher_kubernetes_engine_config:
         tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
       extra_binds:
         - '/opt/kubernetes:/opt/kubernetes'
-
     kubelet:
       generate_serving_certificate: true
       extra_args:
@@ -2108,16 +1914,14 @@ rancher_kubernetes_engine_config:
 windows_prefered_cluster: false
 ```
 
-/accordion
+{{% /accordion %}}
 
-accordion id="k8s-1.16" label="RKE template for k8s 1.16"
+{{% accordion id="k8s-1.16" label="RKE template for k8s 1.16" %}}
 
 ```yaml
-##
-
-## Cluster Config
-
-##
+#
+# Cluster Config
+#
 default_pod_security_policy_template_id: restricted
 docker_root_dir: /var/lib/docker
 enable_cluster_alerting: false
@@ -2125,66 +1929,64 @@ enable_cluster_monitoring: false
 enable_network_policy: false
 local_cluster_auth_endpoint:
   enabled: true
-##
-
-## Rancher Config
-
-##
+#
+# Rancher Config
+#
 rancher_kubernetes_engine_config:
   addon_job_timeout: 30
   authentication:
     strategy: x509
   ignore_docker_version: true
-  ##
-  ## # Currently only nginx ingress provider is supported.
-  ## # To disable ingress controller, set `provider: none`
-  ## # To enable ingress on specific nodes, use the node_selector, eg:
-  ##    provider: nginx
-  ##    node_selector:
-  ##      app: ingress
-  ##
+  #
+  # # Currently only nginx ingress provider is supported.
+  # # To disable ingress controller, set `provider: none`
+  # # To enable ingress on specific nodes, use the node_selector, eg:
+  #    provider: nginx
+  #    node_selector:
+  #      app: ingress
+  #
   ingress:
     provider: nginx
   kubernetes_version: v1.16.3-rancher1-1
   monitoring:
     provider: metrics-server
-  ##
-  ##   If you are using calico on AWS
-  ##
-  ##    network:
-  ##      plugin: calico
-  ##      calico_network_provider:
-  ##        cloud_provider: aws
-  ##
-  ## # To specify flannel interface
-  ##
-  ##    network:
-  ##      plugin: flannel
-  ##      flannel_network_provider:
-  ##      iface: eth1
-  ##
-  ## # To specify flannel interface for canal plugin
-  ##
-  ##    network:
-  ##      plugin: canal
-  ##      canal_network_provider:
-  ##        iface: eth1
-  ##
+  #
+  #   If you are using calico on AWS
+  #
+  #    network:
+  #      plugin: calico
+  #      calico_network_provider:
+  #        cloud_provider: aws
+  #
+  # # To specify flannel interface
+  #
+  #    network:
+  #      plugin: flannel
+  #      flannel_network_provider:
+  #      iface: eth1
+  #
+  # # To specify flannel interface for canal plugin
+  #
+  #    network:
+  #      plugin: canal
+  #      canal_network_provider:
+  #        iface: eth1
+  #
   network:
     options:
       flannel_backend_type: vxlan
     plugin: canal
-  ##
-  ##    services:
-  ##      kube-api:
-  ##        service_cluster_ip_range: 10.43.0.0/16
-  ##      kube-controller:
-  ##        cluster_cidr: 10.42.0.0/16
-  ##        service_cluster_ip_range: 10.43.0.0/16
-  ##      kubelet:
-  ##        cluster_domain: cluster.local
-  ##        cluster_dns_server: 10.43.0.10
-  ##
+  #
+  #    services:
+  #      kube-api:
+  #        service_cluster_ip_range: 10.43.0.0/16
+  #      kube-controller:
+  #        cluster_cidr: 10.42.0.0/16
+  #        service_cluster_ip_range: 10.43.0.0/16
+  #      kubelet:
+  #        cluster_domain: cluster.local
+  #        cluster_dns_server: 10.43.0.10
+  #
   services:
     etcd:
       backup_config:
@@ -2218,7 +2020,6 @@ rancher_kubernetes_engine_config:
         tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
       extra_binds:
         - '/opt/kubernetes:/opt/kubernetes'
-
     kubelet:
       generate_serving_certificate: true
       extra_args:
@@ -2239,4 +2040,4 @@ rancher_kubernetes_engine_config:
 windows_prefered_cluster: false
 ```
 
-/accordion
+{{% /accordion %}}
