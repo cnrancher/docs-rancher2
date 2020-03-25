@@ -2,19 +2,21 @@
 title: 安全加固指南 - v2.2
 ---
 
-This document provides prescriptive guidance for hardening a production installation of Rancher v2.2.x. It outlines the configurations and controls required to address Kubernetes benchmark controls from the Center for Information Security (CIS).
+本文是 Rancher v2.2.x 生产环境的安全加固指南。它概述了如何使你的集群符合互联网安全中心发布的 Kubernetes 安全基准。
 
-> This hardening guide describes how to secure the nodes in your cluster, and it is recommended to follow this guide before installing Kubernetes.
+> 本加固指南介绍了如何保护集群中节点的安全，建议在安装 Kubernetes 之前按照本指南进行操作。
 
-This hardening guide is intended to be used with specific versions of the CIS Kubernetes Benchmark, Kubernetes, and Rancher:
+该加固指南旨在与特定版本的 CIS Kubernetes Benchmark，Kubernetes 和 Rancher 一起使用：
 
-| Hardening Guide Version | Rancher Version | CIS Benchmark Version   | Kubernetes Version |
-| ----------------------- | --------------- | ----------------------- | ------------------ |
-| Hardening Guide v2.2    | Rancher v2.2.x  | Benchmark v1.4.1, 1.4.0 | Kubernetes 1.13    |
+| 加固指南版本  | Rancher 版本   | CIS Benchmark 版本         | Kubernetes 版本 |
+| ------------- | -------------- | -------------------------- | --------------- |
+| 加固指南 v2.2 | Rancher v2.2.x | Benchmark v1.4.0 和 v1.4.1 | Kubernetes 1.13 |
 
-[Click here to download a PDF version of this document](https://releases.rancher.com/documents/security/2.2.x/Rancher_Hardening_Guide.pdf)
+[点击这里下载 PDF 版本的加固指南](https://releases.rancher.com/documents/security/2.2.x/Rancher_Hardening_Guide.pdf)
 
-For more detail about evaluating a hardened cluster against the official CIS benchmark, refer to the [CIS Benchmark Rancher Self-Assessment Guide - Rancher v2.2.x]({{< baseurl >}}/rancher/v2.x/en/security/benchmark-2.2/).
+下面的安全加固指南是针对在生产环境的 Rancher v2.2.x 中使用 Kubernetes 1.13 版本的集群。它概述了如何满足互联网安全中心（CIS）提出的 Kubernetes 安全标准。
+
+有关如果根据官方 CIS 基准评估集群的更多详细信息，请参阅[CIS Benchmark Rancher 自测指南 - Rancher v2.2](/docs/security/benchmark-2.2/_index)。
 
 ### Profile Definitions
 
