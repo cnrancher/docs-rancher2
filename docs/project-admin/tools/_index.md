@@ -6,19 +6,19 @@ Rancher 集成了很多 Kubernetes 缺少的监控和运维工具，可以辅助
 
 <!-- TOC -->
 
-- [提醒和告警](#提醒和告警)
+- [通知和告警](#通知和告警)
 - [日志](#日志)
 - [监控](#监控)
 
 <!-- /TOC -->
 
-## 提醒和告警
+## 通知和告警
 
-告警信息和告警规则需要互相配合，才能发挥作用。它们把 Rancher 系统中发生的事件以 Slack、电子邮件、PagerDuty、微信或 webhook 的形式告知用户。
+通知和告警需要互相配合，才能发挥作用。它们把 Rancher 系统中发生的事件以 Slack、电子邮件、PagerDuty、微信或 webhook 的形式告知用户。
 
-[告警信息](/docs/cluster-admin/tools/notifiers/_index)的功能是告知用户 Rancher 中正在发生的事件。您可以配置告警规则，把告警信息发送给最适合解决这个问题的员工，让他采取行动。Rancher 已经和 Slack、电子邮件、PagerDuty、微信和 webhook 对接，您可以使用这些应用发送告警信息。
+[通知](/docs/cluster-admin/tools/notifiers/_index)的功能是告知用户 Rancher 中正在发生的事件。您可以配置告警，把通知发送给最适合解决这个问题的员工，让他采取行动。Rancher 已经和 Slack、电子邮件、PagerDuty、微信和 webhook 对接，您可以使用这些应用发送通知。
 
-[告警规则](/docs/cluster-admin/tools/alerts_index) 是触发 Rancher 发送告警消息的规则。只有完成了告警规则的配置，您才会收到告警信息。您可以设置集群层级的告警规则或项目层级的告警规则。
+[告警](/docs/cluster-admin/tools/alerts_index)是触发 Rancher 发送通知的规则。只有完成了告警的配置，您才会收到通知。您可以设置集群层级的告警或项目层级的告警。
 
 ## 日志
 
@@ -36,4 +36,4 @@ Rancher 可以和 Elasticsearch、 splunk、 kafka、 syslog、 fluentd 等工�
 
 _v2.2.0 或更新版可用_
 
-您可以使用 Rancher 对接[普罗米修斯](https://prometheus.io/)，监控集群节点的状态和进程，详细信息参考[监控](/docs/cluster-admin/tools/monitoring/_index)章节。
+您可以使用 Rancher 对接[Prometheus](https://prometheus.io/)，监控集群节点的状态和进程，详细信息参考[监控](/docs/cluster-admin/tools/monitoring/_index)章节。
