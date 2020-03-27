@@ -1,187 +1,182 @@
 ---
-title: 告警
+title: 通知和告警
 ---
 
-To keep your clusters and applications healthy and driving your organizational productivity forward, you need to stay informed of events occurring in your clusters and projects, both planned and unplanned. When an event occurs, your alert is triggered, and you are sent a notification. You can then, if necessary, follow up with corrective actions.
+## 概述
 
-Notifiers and alerts are built on top of the [Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager/). Leveraging these tools, Rancher can notify [cluster owners](/docs/admin-settings/rbac/cluster-project-roles/#cluster-roles) and [project owners](/docs/admin-settings/rbac/cluster-project-roles/#project-roles) of events they need to address.
+为了保证您的集群和应用随时处于健康状态，提高组织的生产力，您需要知悉集群和项目内出现的计划内事件和计划外事件。事件会触发您设置的告警，您就会收到通知。您可以根据通知作出对应的操作。
 
-Before you can receive alerts, one or more [notifier](/docs/cluster-admin/tools/notifiers) must be configured at the cluster level.
+通知和告警是基于[Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager/)构建的。借助这些工具，Rancher 可以通知[集群 owner](/docs/admin-settings/rbac/cluster-project-roles/_index#cluster-roles)和 [项目 owner](/docs/admin-settings/rbac/cluster-project-roles/_index#project-roles)集群内发生的事件，由他们决定如何处理触发告警的事件。
 
-Only [administrators](/docs/admin-settings/rbac/global-permissions/), [cluster owners or members](/docs/admin-settings/rbac/cluster-project-roles/#cluster-roles), or [project owners](/docs/admin-settings/rbac/cluster-project-roles/#project-roles) can manage project alerts.
+收到告警信息之前，您需要在集群层级设置至少一个[通知](/docs/cluster-admin/tools/notifiers/_index)。
 
-This section covers the following topics:
+只有 [Rancher 管理员](/docs/admin-settings/rbac/global-permissions/_index)、[集群 owner 或集群成员](/docs/admin-settings/rbac/cluster-project-roles/_index#cluster-roles)或[项目 owner](/docs/admin-settings/rbac/cluster-project-roles/_index#project-roles)有权限管理告警。
 
-* [Alerts scope](#alerts-scope)
-* [Default project-level alerts](#default-project-level-alerts)
-* [Adding project alerts](#adding-project-alerts)
-* [Managing project alerts](#managing-project-alerts)
+## 告警的作用范围
 
-### Alerts Scope
+Rancher 的告警可以作用于[集群层级](/docs/cluster-admin/tools/alerts/_index) 或项目层级。
 
-The scope for alerts can be set at either the [cluster level](/docs/cluster-admin/tools/alerts/) or project level.
+在项目层级，Rancher 监控特定的部署，发出的告警信息主要和以下几个方面相关：
 
-At the project level, Rancher monitors specific deployments and sends alerts for:
+- 部署是否可用
+- 工作负载的状态
+- Pod 的状态
+- Prometheus 表达式是否超过了设定的阈值
 
-* Deployment availability
-* Workloads status
-* Pod status
-* The Prometheus expression cross the thresholds
+## 项目层级的默认告警
 
-### Default Project-level Alerts
+当您启用项目监控的时候，Rancher 提供了一些项目层级的默认告警。如果您已经在集群层级配置了通知，当项目触发任意一个默认告的时候，您就可以通过 Slack、电子邮件、微信、webhook 等方式收到相关的告警。项目层级的默认告警如下表所示。
 
-When you enable monitoring for the project, some project-level alerts are provided. You can receive these alerts if a [notifier](/docs/cluster-admin/tools/notifiers) for them is configured at the cluster level.
+| 告警                              | 解释                                                                                                                                   |
+| :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
+| Less than half workload available | 工作负载的键值对是 `app` 和 `workload`时，如果只有少于一半的工作负载可以使用，Rancher 会触发这条重要的告警。                           |
+| Memory usage close to the quota   | 如果工作负载占用的内存超过了工作负载的内存资源配额，会触发这条告警。您可以从 Rancher UI 中的**安全和主机配置**查看工作负载的内存限制。 |
 
-| Alert                             | Explanation                                                                                                                                                                                                                                    |
-| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Less than half workload available | A critical alert is triggered if less than half of a workload is available, based on workloads where the key is `app` and the value is `workload` .|
-| Memory usage close to the quota   | A warning alert is triggered if the workload's memory usage exceeds the memory resource quota that is set for the workload. You can see the memory limit in the Rancher UI if you go to the workload under the **Security & Host Config** tab.|
+除了上述的默认告警以外，Rancher 还有其他的默认告警，详情请参考[集群监控的默认告警](/docs/cluster-admin/tools/alerts/default-alerts/_index)
 
-For information on other default alerts, refer to the section on [cluster-level alerts.](/docs/cluster-admin/tools/alerts/default-alerts)
+## 添加项目告警组
 
-### Adding Project Alerts
+> **前提条件：** 收到项目告警信息前，您必须添加项目层级的告警提醒。
 
-> **Prerequisite:** Before you can receive project alerts, you must add a notifier.
+1. 单击 **全局**，打开**全局**视图的下拉菜单，选择到您需要设置告警的项目。
+1. 单击**工具**，从下拉菜单中单击**告警**，进入**项目 告警组**页面。如果您使用的是 v2.2.0 之前的版本，请选择 **资源 > 告警**。
 
-1. From the **Global** view, navigate to the project that you want to configure project alerts for. Select **Tools > Alerts**. In versions prior to v2.2.0, you can choose **Resources > Alerts**.
+1. 单击 **添加告警组**，添加告警组。
 
-1. Click **Add Alert Group**.
+1. 输入告警的**名称**，名称应该总结这一组告警的作用，您可以将多个告警放到同一个告警组中。如有需要，您可以单击**添加描述**，在文本框中添加告警组的描述。
+   Rancher 支持创建的告警分为四类：Pod 告警（Pod Alerts）、工作负载告警（Workload Alerts）、工作负载 Selector 告警（Workload Selector Alerts）和表达式告警（Metric Expression Alerts）。根据告警类别的不同，您需要完成以下步骤。
 
-1. Enter a **Name** for the alert that describes its purpose, you could group alert rules for the different purpose.
+### Pod 告警（Pod Alerts）
 
-1. Based on the type of alert you want to create, complete one of the instruction subsets below.
+Pod 告警的作用是监控 Pod 的状态。
 
- accordion id="pod" label="Pod Alerts" 
-This alert type monitors for the status of a specific pod.
+1. 输入告警的名称。
+1. 选择 **Pod** 选项，从下拉菜单中选择一个 Pod。
+1. 选择一个触发告警的 Pod 状态：
 
-1. Select the **Pod** option, and then select a pod from the drop-down.
-1. Select a pod status that triggers an alert:
+   - **未运行**
+   - **未调度**
+   - **在最近的 x 分钟内重启 x 次**
 
-   - **Not Running**
-   - **Not Scheduled**
-   - **Restarted `<x>` times with the last `<x>` Minutes**
+1. 选择告警的重要程度，有以下三个等级供您选择：
 
-1. Select the urgency level of the alert. The options are:
+   - **危险**: 最紧急，已经对 Pod 产生了影响，需要用户进行一些操作，修正这个影响。
+   - **警告**: 一般紧急，暂时对 Pod 没有影响。
+   - **信息**: 最不紧急，仅仅是通知用户，Pod 内发生了一个事件。
 
-   - **Critical**: Most urgent
-   - **Warning**: Normal urgency
-   - **Info**: Least urgent
+     告警的重要程度由集群状态决定。举个例子，pod 完成了一次任务运行后，向用户发送告警，这种情况只是知会用户，Pod 运行了一次，没有故障也不会对 Pod 产生潜在的影响，所以这种告警应该匹配的是**信息**等级。但是，如果一个重要的 Pod 出现调度失败的情况，这可能会影响后续操作，这种告警应该匹配的是**危险**等级。
 
-   Select the urgency level of the alert based on pod state. For example, select **Info** for Job pod which stop running after job finished. However, if an important pod isn't scheduled, it may affect operations, so choose **Critical**.
+1. 配置高级选项。默认状态下，一个告警组内的所有的告警都会应用下面的选项。配置告警的时候，您可以手动修改或禁用这些高级设置。
 
-1. Configure advanced options. By default, the below options will apply to all alert rules within the group. You can disable these advanced options when configuring a specific rule.
+   - **告警组等待时长：**发送告警信息前的缓冲等待时间，默认为 30 秒。
+   - **告警组间隔时长：** 把告警添加到告警组内的等待时间，默认为 3 分钟。
+   - **重复间隔：**发送两条相同的告警之间的时间间隔，默认为 1 小时。
 
-   - **Group Wait Time**: How long to wait to buffer alerts of the same group before sending initially, default to 30 seconds.
-   - **Group Interval Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 30 seconds.
-   - **Repeat Wait Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 1 hour.
+### 工作负载告警（Workload Alerts）
 
- /accordion 
- accordion id="workload" label="Workload Alerts" 
-This alert type monitors for the availability of a workload.
+工作负载告警的作用是监控工作负载的可用性。
 
-1. Choose the **Workload** option. Then choose a workload from the drop-down.
+1. 输入告警的名称。
 
-1. Choose an availability percentage using the slider. The alert is triggered when the workload's availability on your cluster nodes drops below the set percentage.
+1. 选择**Workload** ，然后从下拉菜单中选择一个工作负载。
 
-1. Select the urgency level of the alert.
+1. 选择可用百分比。当工作负载的可用百分比低于这个数值时，会触发告警。
 
-   - **Critical**: Most urgent
-   - **Warning**: Normal urgency
-   - **Info**: Least urgent
+1. 选择告警的重要程度。
 
-   Select the urgency level of the alert based on the percentage you choose and the importance of the workload.
+   - **危险**: 最紧急，已经对工作负载产生了影响，需要用户进行一些操作，修正这个影响。
+   - **警告**: 一般紧急，暂时对工作负载没有影响。
+   - **信息**: 最不紧急，仅仅是通知用户，工作负载内发生了一个事件。
 
-1. Configure advanced options. By default, the below options will apply to all alert rules within the group. You can disable these advanced options when configuring a specific rule.
+     建议您在选择告警重要程度的时候，综合考虑设置的百分比和工作负载的重要程度。
 
-   - **Group Wait Time**: How long to wait to buffer alerts of the same group before sending initially, default to 30 seconds.
-   - **Group Interval Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 30 seconds.
-   - **Repeat Wait Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 1 hour.
+1. 配置高级选项。默认状态下，一个告警组内的所有的告警都会应用下面的选项。配置告警的时候，您可以手动修改或禁用这些高级设置。
 
- /accordion 
- accordion id="workload-selector" label="Workload Selector Alerts" 
-This alert type monitors for the availability of all workloads marked with tags that you've specified.
+   - **告警组等待时长：**发送告警信息前的缓冲等待时间，默认为 30 秒。
+   - **告警组间隔时长：** 把告警添加到告警组内的等待时间，默认为 3 分钟。
+   - **重复间隔：**发送两条相同的告警之间的时间间隔，默认为 1 小时。
 
-1. Select the **Workload Selector** option, and then click **Add Selector** to enter the key value pair for a label. If one of the workloads drops below your specifications, an alert is triggered. This label should be applied to one or more of your workloads.
+### 工作负载 Selector 告警（Workload Selector Alerts）
 
-1. Select the urgency level of the alert.
+工作负载 Selector 告警的作用是监控添加了某个标签的全部工作负载的可用性。
 
-   - **Critical**: Most urgent
-   - **Warning**: Normal urgency
-   - **Info**: Least urgent
+1. 输入告警的名称。
 
-   Select the urgency level of the alert based on the percentage you choose and the importance of the workload.
+1. 选择**Workload Selector** 选项，单击**Add Selector** ，输入标签的键值对。如果有工作负载符合这个描述，就会触发告警。
 
-1. Configure advanced options. By default, the below options will apply to all alert rules within the group. You can disable these advanced options when configuring a specific rule.
+1. 选择告警的重要程度。
 
-   - **Group Wait Time**: How long to wait to buffer alerts of the same group before sending initially, default to 30 seconds.
-   - **Group Interval Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 30 seconds.
-   - **Repeat Wait Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 1 hour.
+   - **危险**: 最紧急，已经对工作负载产生了影响，需要用户进行一些操作，修正这个影响。
+   - **警告**: 一般紧急，暂时对工作负载没有影响。
+   - **信息**: 最不紧急，仅仅是通知用户，工作负载内发生了一个事件。
 
- /accordion 
- accordion id="project-expression" label="Metric Expression Alerts" 
-<br />
-_Available as of v2.2.4_
+   建议您在选择告警重要程度的时候，综合考虑设置的百分比和工作负载的重要程度。
 
-If you enable [project monitoring](/docs/project-admin/tools/#monitoring), this alert type monitors for the overload from Prometheus expression querying.
+1. 配置高级选项。默认状态下，一个告警组内的所有的告警都会应用下面的选项。配置告警的时候，您可以手动修改或禁用这些高级设置。
 
-1. Input or select an **Expression**, the drop down shows the original metrics from Prometheus, including:
+   - **告警组等待时长：**发送告警信息前的缓冲等待时间，默认为 30 秒。
+   - **告警组间隔时长：**把告警添加到告警组内的等待时间，默认为 3 分钟。
+   - **重复间隔：**发送两条相同的告警之间的时间间隔，默认为 1 小时。
 
-* [**Container**](https://github.com/google/cadvisor)
-* [**Kubernetes Resources**](https://github.com/kubernetes/kube-state-metrics)
-* [**Customize**](/docs/project-admin/tools/monitoring/#project-metrics)
-* [**Project Level Grafana**](http://docs.grafana.org/administration/metrics/)
-* **Project Level Prometheus**
+   建议您在选择告警重要程度的时候，综合考虑设置的百分比和工作负载的重要程度。
 
-1. Choose a comparison.
+### 表达式告警（Metric Expression Alerts）
 
-* **Equal**: Trigger alert when expression value equal to the threshold.
-* **Not Equal**: Trigger alert when expression value not equal to the threshold.
-* **Greater Than**: Trigger alert when expression value greater than to threshold.
-* **Less Than**: Trigger alert when expression value equal or less than the threshold.
-* **Greater or Equal**: Trigger alert when expression value greater to equal to the threshold.
-* **Less or Equal**: Trigger alert when expression value less or equal to the threshold.
+_v2.2.4 或更新版本可用_
 
-1.  Input a **Threshold**, for trigger alert when the value of expression cross the threshold.
+如果您启用了[项目监控](/docs/project-admin/tools/_index#monitoring)，这个告警类型使用 Prometheus 表达式查询的项目是否过载。
 
-1.  Choose a **Comparison**.
+1. 输入告警的名称。
 
-1.  Select a **Duration**, for trigger alert when expression value crosses the threshold longer than the configured duration.
+1. 输入一个新的**表达式**，或选择一个已有的**表达式**，下拉菜单展示了 Prometheus 自带的监控指标
 
-1.  Select the urgency level of the alert.
+   - [**Container**](https://github.com/google/cadvisor)
+   - [**Kubernetes Resources**](https://github.com/kubernetes/kube-state-metrics)
+   - [**Customize**](/docs/project-admin/tools/monitoring/_index#project-metrics)
+   - [**Project Level Grafana**](http://docs.grafana.org/administration/metrics/)
+   - **Project Level Prometheus**
 
-    - **Critical**: Most urgent
-    - **Warning**: Normal urgency
-    - **Info**: Least urgent
+1. 选择触发告警的方式。
 
-      <br/>
-      <br/>
-      Select the urgency level of the alert based on its impact on operations. For example, an alert triggered when a expression for container memory close to the limit raises above 60% deems an urgency of **Info**, but raised about 95% deems an urgency of **Critical**.
+   - **等于：** 表达式的值与阈值相等时触发告警。
+   - **不等于：**表达式的值与阈值不相等时触发告警。
+   - **大于：**表达式的值大于阈值时触发告警。
+   - **小于：**表达式的值小于阈值时触发告警。
+   - **大于或等于：**表达式的值大于或等于阈值时触发告警。
+   - **小于或等于：**表达式的值小于或等于阈值时触发告警。
 
-1.  Configure advanced options. By default, the below options will apply to all alert rules within the group. You can disable these advanced options when configuring a specific rule.
+1. 输入触发告警的阈值。
 
-        - **Group Wait Time**: How long to wait to buffer alerts of the same group before sending initially, default to 30 seconds.
-        - **Group Interval Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 30 seconds.
-        - **Repeat Wait Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 1 hour.
+1. 输入一个**持续**时间，表示在这条告警在指定的时间段内一直是有效的。
 
-    <br />
-     /accordion 
+1. 选择告警的重要程度。
 
-1.  Continue adding more **Alert Rule** to the group.
+   - **危险**: 最紧急，已经对工作负载产生了影响，需要用户进行一些操作，修正这个影响。
+   - **警告**: 一般紧急，暂时对工作负载没有影响。
+   - **信息**: 最不紧急，仅仅是通知用户，工作负载内发生了一个事件。
 
-1.  Finally, choose the [notifiers](/docs/cluster-admin/tools/notifiers/) that send you alerts.
+   建议您基于告警对操作的影响，选择告警的重要程度。例如，您设定了两条关于容器内存限制的告警，一条告警规定了内存使用率超过 60%时发出告警信息，另一条告警规定了内存使用率超过 95%时发出告警信息；您可以将前者的重要程度设置为**信息**，将后者的重要程度设置为**危险**。
 
-    - You can set up multiple notifiers.
-    - You can change notifier recipients on the fly.
+1. 配置高级选项。默认状态下，一个告警组内的所有的告警都会应用下面的选项。配置告警的时候，您可以手动修改或禁用这些高级设置。
 
-**Result:** Your alert is configured. A notification is sent when the alert is triggered.
+- **告警组等待时长：**发送告警信息前的缓冲等待时间，默认为 30 秒。
+- **告警组间隔时长：**把告警添加到告警组内的等待时间，默认为 3 分钟。
+- **重复间隔：**发送两条相同的告警之间的时间间隔，默认为 1 小时。
 
-### Managing Project Alerts
+### 后续操作
 
-To manage project alerts, browse to the project that alerts you want to manage. Then select **Tools > Alerts**. In versions prior to v2.2.0, you can choose **Resources > Alerts**. You can:
+1.  （可选）添加其他**告警** 到这个告警组内。
 
-* Deactivate/Reactive alerts
-* Edit alert settings
-* Delete unnecessary alerts
-* Mute firing alerts
-* Unmute muted alerts
+1.  返回告警组页面，单击 **... > 升级** ，进入编辑告警组页面，在页面最下方**告警 到**旁边的文本框中选择发送告警消息的[方式](/docs/cluster-admin/tools/notifiers/_index)，和告警消息的收件人。您可以选择多种方式发送告警信息， 也可以随时修改收件人的名单。
 
+**结果：** 完成告警和告警信息的配置。触发告警时，告警信息会通过您指定的方式发送给指定的收件人。
+
+## 管理项目告警
+
+打开项目，导航到您需要调整的告警。然后选择**工具 > 告警**。在 v2.2.0 之前的版本，你可以选择**资源 > 告警**。管理项目告警提供了以下功能：
+
+- 停用告警/重新激活告警
+- 修改告警相关参数
+- 删除多余的告则
+- 对已触发的告警开启静音
+- 对已静音的告警取消静音
