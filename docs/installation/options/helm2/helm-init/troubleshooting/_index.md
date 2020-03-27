@@ -2,22 +2,21 @@
 title: 问题排查
 ---
 
-#### Helm commands show forbidden
+## Helm 命令显示禁止
 
-When Helm is initiated in the cluster without specifying the correct `ServiceAccount` , the command `helm init` will succeed but you won't be able to execute most of the other `helm` commands. The following error will be shown:
+在集群中初始化 Helm 时，没有指定正确的 `ServiceAccount`，`helm init` 命令会成功执行，但是您将无法执行大部分 `helm` 命令，会显示如下错误信息：
 
-``` 
+```
 Error: configmaps is forbidden: User "system:serviceaccount:kube-system:default" cannot list configmaps in the namespace "kube-system"
 ```
 
-To resolve this, the server component ( `tiller` ) needs to be removed and added with the correct `ServiceAccount` . You can use `helm reset --force` to remove the `tiller` from the cluster. Please check if it is removed using `helm version --server` .
+为了解决这个问题，需要删除服务器组件(`tiller`)，并且添加正确的 `ServiceAccount`。您可以使用 `helm reset --force` 来删除集群中的 `tiller` 组件。请使用 `helm version --server` 来检查该组件是否已经被删除。
 
-``` 
+```
 helm reset --force
 Tiller (the Helm server-side component) has been uninstalled from your Kubernetes Cluster.
 helm version --server
 Error: could not find tiller
 ```
 
-When you have confirmed that `tiller` has been removed, please follow the steps provided in [Initialize Helm (Install tiller)](/docs/installation/options/helm2/helm-init/) to install `tiller` with the correct `ServiceAccount` .
-
+当您确认已经删除 `tiller` 后，请按照[初始化 Helm (安装 tiller)](/docs/installation/options/helm2/helm-init/_index) 中提供的步骤，使用正确的 `ServiceAccount` 来安装 `tiller` 。

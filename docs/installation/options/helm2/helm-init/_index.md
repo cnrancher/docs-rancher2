@@ -1,67 +1,71 @@
 ---
-title: '介绍'
+title: '安装 Tiller'
 ---
 
-Helm is the package management tool of choice for Kubernetes. Helm "charts" provide templating syntax for Kubernetes YAML manifest documents. With Helm we can create configurable deployments instead of just using static files. For more information about creating your own catalog of deployments, check out the docs at [https://helm.sh/](https://helm.sh/). To be able to use Helm, the server-side component `tiller` needs to be installed on your cluster.
+Helm 是 Kubernetes 首选的包管理工具。Helm "charts"为 Kubernetes YAML 文件提供了模板语法。我们可以使用 Helm 部署可配置的工作负载，来代替使用静态文件的方式。如果您想创建自己的私有应用商店，请参照这里[https://helm.sh/](https://helm.sh/)的说明。使用 Helm 前，您需要在集群安装 `tiller` 服务端组件。
 
-For systems without direct internet access, see [Helm - Air Gap](/docs/installation/air-gap-installation/install-rancher/#helm) for install details.
+对于无法访问互联网的环境，请查看[Helm - 离线安装](/docs/installation/options/air-gap-helm2/install-rancher/_index)获取更多安装信息。
 
-Refer to the [Helm version requirements](/docs/installation/options/helm-version) to choose a version of Helm to install Rancher.
+请参阅[Helm 版本要求](/docs/installation/options/helm-version/_index)来选择安装 Rancher 的 Helm 版本。
 
-> **Note:** The installation instructions assume you are using Helm 2. The instructions will be updated for Helm 3 soon. In the meantime, if you want to use Helm 3, refer to [these instructions.](https://github.com/ibrokethecloud/rancher-helm3)
+> **提示：** 当前安装说明假定您使用的是 Helm 2。如果您在使用 Helm 3，请参照[此说明](/docs/installation/k8s-install/helm-rancher/_index)。
 
-#### Install Tiller on the Cluster
+## 在集群中安装 Tiller
 
-> **Important:** Due to an issue with Helm v2.12.0 and cert-manager, please use Helm v2.12.1 or higher.
+> **重要：** 由于 Helm v2.12.0 和 cert-manager 的问题，请使用 Helm v2.12.1 或更高版本。
 
-Helm installs the `tiller` service on your cluster to manage charts. Since RKE enables RBAC by default we will need to use `kubectl` to create a `serviceaccount` and `clusterrolebinding` so `tiller` has permission to deploy to the cluster.
+Helm 在您的集群中安装 `tiller` 服务来管理 charts。由于 RKE 默认开启了 RBAC，我们将使用 `kubectl` 命令创建一个 `serviceaccount` 和 `clusterrolebinding`，为 `tiller` 提供在集群中部署应用的权限。
 
-* Create the `ServiceAccount` in the `kube-system` namespace.
-* Create the `ClusterRoleBinding` to give the `tiller` account access to the cluster.
-* Finally use `helm` to install the `tiller` service
+- 在 `kube-system` 命名空间中创建 `ServiceAccount`。
+- 为 `tiller` 创建 `ClusterRoleBinding` 获取访问集群的权限。
+- 最后使用 `helm` 来安装 `tiller` 服务。
 
-``` plain
+```plain
 kubectl -n kube-system create serviceaccount tiller
 
 kubectl create clusterrolebinding tiller \
   --clusterrole=cluster-admin \
   --serviceaccount=kube-system:tiller
 
+# 需要访问谷歌镜像库，如果无法访问请指定tiller-image
 helm init --service-account tiller
-
-## Users in China: You will need to specify a specific tiller-image in order to initialize tiller.
-
-## The list of tiller image tags are available here: https://dev.aliyun.com/detail.html?spm=5176.1972343.2.18.ErFNgC&repoId=62085.
-
-## When initializing tiller, you'll need to pass in --tiller-image
-
-helm init --service-account tiller \
---tiller-image registry.cn-hangzhou.aliyuncs.com/google_containers/tiller:<tag>
 ```
 
-> **Note:** This `tiller` install has full cluster access, which should be acceptable if the cluster is dedicated to Rancher server. Check out the [helm docs](https://docs.helm.sh/using_helm/#role-based-access-control) for restricting `tiller` access to suit your security requirements.
+:::important 针对中国用户
+在运行 helm init 时，您需要指定特定的 tiller-image 来初始化 tiller。
+初始化 tiller 时，需要通过 --tiller-image 指定 tiller image。
 
-#### Test your Tiller installation
+```
+helm_version=`helm version |grep Client | awk -F""\" '{print $2}'`
 
-Run the following command to verify the installation of `tiller` on your cluster:
+helm init --service-account tiller \
+--tiller-image registry.cn-hangzhou.aliyuncs.com/google_containers/tiller:${helm_version}
+```
 
-``` 
+:::
+
+> **提示：** 以上`tiller`安装后，对集群有完全访问权限，如果该集群是 Rancher Server 专用集群，则没有问题。请查看[helm 文档](https://docs.helm.sh/using_helm/#role-based-access-control) 按照您的安全需求，限制 `tiller` 访问权限。
+
+## 测试 Tiller
+
+在您的集群上运行以下命令来验证 `tiller` 是否安装成功：
+
+```
 kubectl -n kube-system  rollout status deploy/tiller-deploy
 Waiting for deployment "tiller-deploy" rollout to finish: 0 of 1 updated replicas are available...
 deployment "tiller-deploy" successfully rolled out
 ```
 
-And run the following command to validate Helm can talk to the `tiller` service:
+并且运行以下命令验证 Helm 是否可以与 `tiller` 服务通信：
 
-``` 
+```
 helm version
 Client: &version.Version{SemVer:"v2.12.1", GitCommit:"02a47c7249b1fc6d8fd3b94e6b4babf9d818144e", GitTreeState:"clean"}
 Server: &version.Version{SemVer:"v2.12.1", GitCommit:"02a47c7249b1fc6d8fd3b94e6b4babf9d818144e", GitTreeState:"clean"}
 ```
 
-#### Issues or errors?
+## 问题或错误？
 
-See the [Troubleshooting](/docs/installation/options/helm2/helm-init/troubleshooting/) page.
+请查看[问题排查](/docs/installation/options/helm2/helm-init/troubleshooting/_index)。
 
-#### [Next: Install Rancher](/docs/installation/options/helm2/helm-rancher/)
-
+## [下一章: 安装 Rancher](/docs/installation/options/helm2/helm-rancher/_index)

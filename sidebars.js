@@ -112,7 +112,7 @@ module.exports = {
           'installation/options/_index',
           {
             type: 'category',
-            label: '使用 Helm 2 将 Rancher 安装在 Kubernetes 中',
+            label: 'Rancher 高可用 Helm2 安装',
             items: [
               'installation/options/helm2/_index',
               {
@@ -126,7 +126,7 @@ module.exports = {
               },
               {
                 type: 'category',
-                label: '2、通过 RKE 安装 Kubernetes',
+                label: '2、安装 Kubernetes',
                 items: [
                   'installation/options/helm2/kubernetes-rke/_index',
                   'installation/options/helm2/kubernetes-rke/troubleshooting/_index'
@@ -134,7 +134,7 @@ module.exports = {
               },
               {
                 type: 'category',
-                label: '3、Helm初始化：安装 Tiller',
+                label: '3、Helm 初始化',
                 items: [
                   'installation/options/helm2/helm-init/_index',
                   'installation/options/helm2/helm-init/troubleshooting/_index'
@@ -142,7 +142,7 @@ module.exports = {
               },
               {
                 type: 'category',
-                label: '4、安装Rancher',
+                label: '4、安装 Rancher',
                 items: [
                   'installation/options/helm2/helm-rancher/_index',
                   'installation/options/helm2/helm-rancher/tls-secrets/_index',
@@ -154,7 +154,7 @@ module.exports = {
           },
           {
             type: 'category',
-            label: '使用 Helm 2 将 Rancher 安装到离线环境里',
+            label: 'Rancher 高可用 Helm2 离线安装',
             items: [
               'installation/options/air-gap-helm2/_index',
               'installation/options/air-gap-helm2/prepare-nodes/_index',
