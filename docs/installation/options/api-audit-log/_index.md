@@ -1,101 +1,94 @@
 ---
-title: 启用 API 审计日志来记录系统事件
+title: 启用API审计日志记录系统事件
 ---
 
-You can enable the API audit log to record the sequence of system events initiated by individual users. You can know what happened, when it happened, who initiated it, and what cluster it affected. When you enable this feature, all requests to the Rancher API and all responses from it are written to a log.
+您可以启用 API 审计日志用以记录每个用户发起的系统事件信息。您可以知道发生了什么，何时发生，谁发起的、以及事件对集群的影响。当您开启了这个特性，所有 Rancher API 的请求和响应信息都会写入到日志文件中。
 
-You can enable API Auditing during Rancher installation or upgrade.
+您可以在 Rancher 安装或升级时开启 API 审计日志功能。
 
-### Enabling API Audit Log
+## 开启 API 审计日志
 
-The Audit Log is enabled and configured by passing environment variables to the Rancher server container. See the following to enable on your installation.
+可以通过向 Rancher Server 容器中传入环境变量来开启和配置审计日志功能。请参见以下内容在安装时开启该特性。
 
-* [Docker Install](/docs/installation/other-installation-methods/single-node-docker/#api-audit-log)
+- [Rancher 单节点](/docs/installation/other-installation-methods/single-node-docker/_index)
 
-* [Kubernetes Install](/docs/installation/options/chart-options/#api-audit-log)
+- [Rancher 高可用](/docs/installation/options/chart-options/_index)
 
-### API Audit Log Options
+## API 审计日志选项
 
-The usage below defines rules about what the audit log should record and what data it should include:
+以下定义了有关审计日志记录的内容以及包含哪些数据的规则：
 
-| Parameter                             | Description                                                                                                                                                                                                                                                                                                                                                                     |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <a id="audit-level"></a> `AUDIT_LEVEL` | `0` - Disable audit log (default setting).<br/> `1` - Log event metadata.<br/> `2` - Log event metadata and request body.<br /> `3` - Log event metadata, request body, and response body. Each log transaction for a request/response pair uses the same `auditID` value.<br/><br/>See [Audit Level Logging](#audit-log-levels) for a table that displays what each setting logs.|
-| `AUDIT_LOG_PATH` | Log path for Rancher Server API. Default path is `/var/log/auditlog/rancher-api-audit.log` . You can mount the log directory to host.<br/><br/>Usage Example: `AUDIT_LOG_PATH=/my/custom/path/` <br/>                                                                                                                                                                            |
-| `AUDIT_LOG_MAXAGE` | Defined the maximum number of days to retain old audit log files. Default is 10 days.|
-| `AUDIT_LOG_MAXBACKUP` | Defines the maximum number of audit log files to retain. Default is 10.|
-| `AUDIT_LOG_MAXSIZE` | Defines the maximum size in megabytes of the audit log file before it gets rotated. Default size is 100M.|
+| 参数                                  | 描述                                                                                                                                                                                                                                                                                |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <a id="audit-level"></a>`AUDIT_LEVEL` | `0` - 禁用审计日志 (默认设置).<br/>`1` - 仅记录事件元数据 <br/>`2` - 记录事件元数据及请求内容 <br />`3` - 记录事件元数据、请求内容及响应内容。请求/响应对的每个日志事务使用相同的`auditID`值。 <br/><br/> 有关显示每个等级设置记录的具体内容，请参阅[审计日志级别](#审计日志级别)。 |
+| `AUDIT_LOG_PATH`                      | Rancher Server API 日志记录在容器内的目录位置。审计日志在容器内的默认路径为`/var/log/auditlog/rancher-api-audit.log`。您可以将日志目录挂载到主机。<br/><br/>例如: `AUDIT_LOG_PATH=/my/custom/path/`<br/>                                                                            |
+| `AUDIT_LOG_MAXAGE`                    | 定义保留旧审计日志文件的最大天数。默认 10 天。                                                                                                                                                                                                                                      |
+| `AUDIT_LOG_MAXBACKUP`                 | 定义保留的审计日志最大文件个数，默认 10。                                                                                                                                                                                                                                           |
+| `AUDIT_LOG_MAXSIZE`                   | 定义单个审计日志文件的最大值(以兆为单位)。默认 100M。                                                                                                                                                                                                                               |
 
 <br/>
 
-#### Audit Log Levels
+### 审计日志级别
 
-The following table displays what parts of API transactions are logged for each [ `AUDIT_LEVEL` ](#audit-level) setting.
+下面显示了每个[`AUDIT_LEVEL`](#审计日志级别)设置，记录的 API 事务具体内容。
 
-| `AUDIT_LEVEL` Setting | Request Metadata | Request Body | Response Metadata | Response Body |
-| --------------------- | ---------------- | ------------ | ----------------- | ------------- |
-| `0` |                  |              |                   |               |
-| `1` | ✓                |              |                   |               |
-| `2` | ✓                | ✓            |                   |               |
-| `3` | ✓                | ✓            | ✓                 | ✓             |
+| `AUDIT_LEVEL` 设置 | 请求元数据 | 请求正文内容 | 响应元数据 | 响应正文内容 |
+| ------------------ | ---------- | ------------ | ---------- | ------------ |
+| `0`                |            |              |            |              |
+| `1`                | ✓          |              |            |              |
+| `2`                | ✓          | ✓            |            |              |
+| `3`                | ✓          | ✓            | ✓          | ✓            |
 
-### Viewing API Audit Logs
+## 查看 API 审计日志
 
-#### Docker Install
+### Rancher 单节点
 
-Share the `AUDIT_LOG_PATH` directory (Default: `/var/log/auditlog` ) with the host system. The log can be parsed by standard CLI tools or forwarded on to a log collection tool like Fluentd, Filebeat, Logstash, etc.
+与主机系统共享`AUDIT_LOG_PATH`目录（默认目录：`/var/log/auditlog`）。日志可以通过标准的 CLI 工具进行查看，也可以转发到日志收集工具，例如 Fluentd, Filebeat, Logstash 等。
 
-#### Kubernetes Install
+### Rancher 高可用
 
-Enabling the API Audit Log with the Helm chart install will create a `rancher-audit-log` sidecar container in the Rancher pod. This container will stream the log to standard output (stdout). You can view the log as you would any container log.
+使用 Helm Chart 安装 Rancher 时启用 API 审计日志功能，会在 Rancher Pod 中创建一个`rancher-audit-log`的 sidecar 容器。该容器会将 API 审计日志发送到标准输出(stdout)。您可以像查看任何容器日志一样查看审计日志内容。
 
-The `rancher-audit-log` container is part of the `rancher` pod in the `cattle-system` namespace.
+`rancher-audit-log` 容器位于 `rancher` pod 所在的 `cattle-system` 命名空间中。
 
-##### CLI
+#### 通过 CLI 查看
 
-``` bash
+```bash
 kubectl -n cattle-system logs -f rancher-84d886bdbb-s4s69 rancher-audit-log
 ```
 
-##### Rancher Web GUI
+#### 通过 Rancher GUI 查看
 
-1. From the context menu, select **Cluster: local > System**.
+1. 在下拉菜单中，选择 **Cluster: local > System**。
 
-   
+   ![Local Cluster: System Project](/img/rancher/audit_logs_gui/context_local_system.png)
 
-![Local Cluster: System Project](/img/rancher/audit_logs_gui/context_local_system.png)
+1. 在主导航栏中，选择 **资源 > 工作负载** (在 v2.3.0 之前的版本, 在主导航栏中选择 **工作负载** )。找到 `cattle-system` 命名空间。找到 `rancher` 工作负载，点击它的链接。
 
-1. From the main navigation bar, choose **Resources > Workloads.** (In versions prior to v2.3.0, choose **Workloads** on the main navigation bar.) Find the `cattle-system` namespace. Open the `rancher` workload by clicking its link.
+   ![Rancher Workload](/img/rancher/audit_logs_gui/rancher_workload.png)
 
-   
+1. 选择一个 `rancher` Pod 并选择 **省略号 (...) > 查看日志** 来查看 rancher Pod 日志。
 
-![Rancher Workload](/img/rancher/audit_logs_gui/rancher_workload.png)
+   ![View Logs](/img/rancher/audit_logs_gui/view_logs.png)
 
-1. Pick one of the `rancher` pods and select **Ellipsis (... ) > View Logs**.
+1. 从 **日志** 下拉菜单中, 选择 `rancher-audit-log`.
 
-   
+   ![Select Audit Log](/img/rancher/audit_logs_gui/rancher_audit_log_container.png)
 
-![View Logs](/img/rancher/audit_logs_gui/view_logs.png)
+#### 收集审计日志
 
-1. From the **Logs** drop-down, select `rancher-audit-log` .
+可以为集群启用 Rancher 的内置日志收集功能，将审计和其他服务日志发送到受支持的日志收集服务端。
+更多内容请参照[Rancher 工具 - 日志](/docs/cluster-admin/tools/logging/_index)。
 
-   
+## 审计日志样本
 
-![Select Audit Log](/img/rancher/audit_logs_gui/rancher_audit_log_container.png)
+启用审核后，Rancher 以 JSON 的形式记录每个 API 请求或响应。以下每个代码示例都提供了如何标识每个 API 事务的示例。
 
-##### Shipping the Audit Log
+### 元数据级别
 
-You can enable Rancher's built in log collection and shipping for the cluster to ship the audit and other services logs to a supported collection endpoint. See [Rancher Tools - Logging](/docs/tools/logging) for details.
+如果设置了 `AUDIT_LEVEL` 为 `1`, Rancher 会记录每个 API 请求的元数据请求头，但不会记录正文。请求头提供有关 API 事务的基本信息，例如事务的 ID，发起事务的用户，事件发生的时间等。
 
-### Audit Log Samples
-
-After you enable auditing, each API request or response is logged by Rancher in the form of JSON. Each of the following code samples provide examples of how to identify each API transaction.
-
-#### Metadata Level
-
-If you set your `AUDIT_LEVEL` to `1` , Rancher logs the metadata header for every API request, but not the body. The header provides basic information about the API transaction, such as the transaction's ID, who initiated the transaction, the time it occurred, etc.
-
-``` json
+```json
 {
   "auditID": "30022177-9e2e-43d1-b0d0-06ef9d3db183",
   "requestURI": "/v3/schemas",
@@ -110,13 +103,13 @@ If you set your `AUDIT_LEVEL` to `1` , Rancher logs the metadata header for ever
 }
 ```
 
-#### Metadata and Request Body Level
+### 元数据和请求正文级别
 
-If you set your `AUDIT_LEVEL` to `2` , Rancher logs the metadata header and body for every API request.
+如果设置 `AUDIT_LEVEL` 为 `2`, Rancher 会记录每个 API 请求的元数据标题和正文。
 
-The code sample below depicts an API request, with both its metadata header and body.
+下面的代码示例描述了一个 API 请求，包含其元数据请求头和请求正文。
 
-``` json
+```json
 {
   "auditID": "ef1d249e-bfac-4fd0-a61f-cbdcad53b9bb",
   "requestURI": "/v3/project/c-bcz5t:p-fdr4s/workloads/deployment:default:nginx",
@@ -269,18 +262,18 @@ The code sample below depicts an API request, with both its metadata header and 
 }
 ```
 
-#### Metadata, Request Body, and Response Body Level
+### 元数据、请求正文和响应正文级别
 
-If you set your `AUDIT_LEVEL` to `3` , Rancher logs:
+如果设置 `AUDIT_LEVEL` 为 `3`, Rancher 会记录:
 
-* The metadata header and body for every API request.
-* The metadata header and body for every API response.
+- 每个 API 请求的元数据请求头和请求正文。
+- 每个 API 响应的元数据响应头和相应正文。
 
-##### Request
+#### 请求
 
-The code sample below depicts an API request, with both its metadata header and body.
+下面的代码示例描述了一个 API 请求，它有元数据请求头和请求正文。
 
-``` json
+```json
 {
   "auditID": "a886fd9f-5d6b-4ae3-9a10-5bff8f3d68af",
   "requestURI": "/v3/project/c-bcz5t:p-fdr4s/workloads/deployment:default:nginx",
@@ -433,11 +426,11 @@ The code sample below depicts an API request, with both its metadata header and 
 }
 ```
 
-##### Response
+#### 响应
 
-The code sample below depicts an API response, with both its metadata header and body.
+下面的代码示例描述了一个 API 响应，其中包含它的元数据响应头和响应正文。
 
-``` json
+```json
 {
   "auditID": "a886fd9f-5d6b-4ae3-9a10-5bff8f3d68af",
   "responseStatus": "200",
@@ -582,4 +575,3 @@ The code sample below depicts an API response, with both its metadata header and
   }
 }
 ```
-
