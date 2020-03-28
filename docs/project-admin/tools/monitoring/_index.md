@@ -2,79 +2,72 @@
 title: 监控
 ---
 
-_Available as of v2.2.4_
+_v2.2.4 或更新版本可用_
 
-Using Rancher, you can monitor the state and processes of your cluster nodes, Kubernetes components, and software deployments through integration with [Prometheus](https://prometheus.io/), a leading open-source monitoring solution.
+您可以通过 Rancher 和 Prometheus 的集成，监控集群节点、Kubernetes 组件或软件部署的状态和进程。
 
-> For more information about how Prometheus works, refer to the [cluster administration section.](/docs/cluster-admin/tools/monitoring/#about-prometheus)
+> 如需了解更多关于 Prometheus 的信息，请参考[Prometheus 的工作原理](/docs/cluster-admin/tools/monitoring/_index#about-prometheus)。
 
-This section covers the following topics:
+## 监控范围
 
-* [Monitoring scope](#monitoring-scope)
-* [Permissions to configure project monitoring](#permissions-to-configure-project-monitoring)
-* [Enabling project monitoring](#enabling-project-monitoring)
-* [Project-level monitoring resource requirements](#project-level-monitoring-resource-requirements)
-* [Project metrics](#project-metrics)
+Prometheus 监控可以应用于 Ranche [集群层级](/docs/cluster-admin/tools/monitoring/_index)和 Rancher 项目层级。Rancher 为每一个启用了监控功能的集群和项目都部署了一个对应的 Prometheus server。
 
-#### Monitoring Scope
+- [集群监控](/docs/cluster-admin/tools/monitoring/_index)允许用户查看 Kubernetes 集群的健康状况。Prometheus 从以下的集群组件中收集健康数据，用户可以通过 Rancher 用户界面的图表查看集群的健康状况。
 
-Using Prometheus, you can monitor Rancher at both the [cluster level](/docs/cluster-admin/tools/monitoring/) and project level. For each cluster and project that is enabled for monitoring, Rancher deploys a Prometheus server.
+  - [Kubernetes 监控指标](/docs/cluster-admin/tools/monitoring/cluster-metrics/_index#kubernetes-components-metrics)
+  - [etcd 数据库](/docs/cluster-admin/tools/monitoring/cluster-metrics/_index#etcd-metrics)
+  - [全部节点（包括 worker 节点）](/docs/cluster-admin/tools/monitoring/cluster-metrics/_index#cluster-metrics)
 
-* [Cluster monitoring](/docs/cluster-admin/tools/monitoring/) allows you to view the health of your Kubernetes cluster. Prometheus collects metrics from the cluster components below, which you can view in graphs and charts.
+* 项目监控允许用户查看项目内 pod 的运行状态。Prometheus 从项目部署的 HTTP 和 TCP/UDP 工作负载中收集数据。
 
-  + [Kubernetes control plane](/docs/cluster-admin/tools/monitoring/cluster-metrics/#kubernetes-components-metrics)
-  + [etcd database](/docs/cluster-admin/tools/monitoring/cluster-metrics/#etcd-metrics)
-  + [All nodes (including workers)](/docs/cluster-admin/tools/monitoring/cluster-metrics/#cluster-metrics)
+## 配置项目监控的许可
 
-* Project monitoring allows you to view the state of pods running in a given project. Prometheus collects metrics from the project's deployed HTTP and TCP/UDP workloads.
+只有[管理员](/docs/admin-settings/rbac/global-permissions/_index)、[集群所有者或集群成员](/docs/admin-settings/rbac/cluster-project-roles/_index#cluster-roles)和 [项目所有者](/docs/admin-settings/rbac/cluster-project-roles/_index#project-roles) 可以配置项目层级的监控。项目成员可以查看监控参数，不可以修改监控参数。
 
-#### Permissions to Configure Project Monitoring
+## 开启项目监控
 
-Only [administrators](/docs/admin-settings/rbac/global-permissions/), [cluster owners or members](/docs/admin-settings/rbac/cluster-project-roles/#cluster-roles), or [project owners](/docs/admin-settings/rbac/cluster-project-roles/#project-roles) can configure project level monitoring. Project members can only view monitoring metrics.
+> **前提条件：** 开启项目监控前，您需要先开启[集群监控](/docs/cluster-admin/tools/monitoring/_index)。
 
-#### Enabling Project Monitoring
+1. 打开需要启用项目监控功能的项目。
 
-> **Prerequisite:** Cluster monitoring must be [enabled.](/docs/cluster-admin/tools/monitoring/)
+   > 如果含有这个项目的集群已经启用了集群监控，默认会一并启用项目层级的监控功能。
 
-1. Go to the project where monitoring should be enabled. Note: When cluster monitoring is enabled, monitoring is also enabled by default in the **System** project.
+1. 在导航栏选择**工具 > 监控**。
 
-1. Select **Tools > Monitoring** in the navigation bar.
+1. 选择 **启用**，控制台上会出现[Prometheus 配置选项](/docs/cluster-admin/tools/monitoring/prometheus/_index)，输入你需要配置的监控参数。
 
-1. Select **Enable** to show the [Prometheus configuration options](/docs/cluster-admin/tools/monitoring/prometheus/). Enter in your desired configuration options.
+1. 单击**保存**，保存修改后的参数配置。
 
-1. Click **Save**.
+## 项目层级监控资源要求
 
-#### Project-Level Monitoring Resource Requirements
+| 容器       | CPU 资源需求 | 内存资源需求 | CPU 资源限制 | 内存限制 | 是否可以修改 |
+| ---------- | ------------ | ------------ | ------------ | -------- | ------------ |
+| Prometheus | 750m         | 750Mi        | 1000m        | 1000Mi   | 是           |
+| Grafana    | 100m         | 100Mi        | 200m         | 200Mi    | 否           |
 
-| Container  | CPU - Request | Mem - Request | CPU - Limit | Mem - Limit | Configurable |
-| ---------- | ------------- | ------------- | ----------- | ----------- | ------------ |
-| Prometheus | 750m          | 750Mi         | 1000m       | 1000Mi      | Yes          |
-| Grafana    | 100m          | 100Mi         | 200m        | 200Mi       | No           |
+**结果：**完成监控资源配置以后，Rancher 会把一个叫做`project-monitoring` 的项目层级监控，以[应用](/docs/catalog/apps/_index) 的形式添加到了项目中。当这个应用的状态变成了`active` ，您可以通过 [Rancher dashboard](/docs/cluster-admin/tools/monitoring/_index#rancher-dashboard) 查看项目的监控指标，或者直接从[Grafana](/docs/cluster-admin/tools/monitoring/_index#grafana)查看项目的监控指标。
 
-**Result:** A single application, `project-monitoring` , is added as an [application](/docs/catalog/apps/) to the project. After the application is `active` , you can start viewing [project metrics](#project-metrics) through the [Rancher dashboard](/docs/cluster-admin/tools/monitoring/#rancher-dashboard) or directly from [Grafana](/docs/cluster-admin/tools/monitoring/#grafana).
+## Project Metrics 项目监控指标
 
-#### Project Metrics
+如果您已经启用了[集群层级](/docs/cluster-admin/tools/monitoring/_index)和[项目层级](#开启项目监控)的的监控功能，[工作负载监控指标](/docs/cluster-admin/tools/monitoring/cluster-metrics/_index#workload-metrics)可用于项目监控。
 
-[Workload metrics](/docs/cluster-admin/tools/monitoring/cluster-metrics/#workload-metrics) are available for the project if monitoring is enabled at the [cluster level](/docs/cluster-admin/tools/monitoring/) and at the [project level.](#enabling-project-monitoring)
+您可以从[Prometheus exporters](https://prometheus.io/docs/instrumenting/exporters/)监控自定义的监控指标。您也可以暴露一些部署里面的自定义端点，而不需要修改 Prometheus 的参数，适配您的项目。
 
-You can monitor custom metrics from any [exporters.](https://prometheus.io/docs/instrumenting/exporters/) You can also expose some custom endpoints on deployments without needing to configure Prometheus for your project.
+> **示例：**
+> 项目中有一个命名空间叫`redis-app` ，这个命名空间中部署了一个[Redis](https://redis.io/)应用。您可以通过[Redis exporter](https://github.com/oliver006/redis_exporter)监控这个应用。开启了项目监控以后，您可以编辑应用，配置<b>高级选项 -> 自定义参数</b> 。输入`容器端口` 和 `路径`，然后选择`协议`。
 
-> **Example:**
-> A [Redis](https://redis.io/) application is deployed in the namespace `redis-app` in the project `Datacenter` . It is monitored via [Redis exporter](https://github.com/oliver006/redis_exporter). After enabling project monitoring, you can edit the application to configure the <b>Advanced Options -> Custom Metrics</b> section. Enter the `Container Port` and `Path` and select the `Protocol` .
+访问项目层级的 Grafana 实例需要执行以下步骤：
 
-To access a project-level Grafana instance, 
+1. 从 **全局**视图找到到已经开启监控的集群。
 
-1. From the **Global** view, navigate to a cluster that has monitoring enabled.
+1. 打开这个集群中已经开启监控的项目。
 
-1. Go to a project that has monitoring enabled.
+1) 打开项目视图，单击**应用**。如果您使用的是 Rancher v2.2.0 以前的版本，请在主导航栏中选择**目录应用**。
 
-1. From the project view, click **Apps.** In versions prior to v2.2.0, choose **Catalog Apps** on the main navigation bar.
+1) 打开`项目监控` 应用。
 
-1. Go to the `project-monitoring` application.
+1) 在`项目监控`里面，有两个以`/index.html`结尾的链接，分别连接了 Prometheus 实例和 Grafana 实例。单击 Grafana 实例的链接，会打开一个新的页面，里面有集群的监控参数。
 
-1. In the `project-monitoring` application, there are two `/index.html` links: one that leads to a Grafana instance and one that leads to a Prometheus instance. When you click the Grafana link, it will redirect you to a new webpage for Grafana, which shows metrics for the cluster.
+1) 您会自动登录进 Grafana 实例。默认用户名和密码都是`admin`。为了保证 Grafana 实例的安全，建议您先登出 Grafana 实例，重新登入后修改密码，然后再开始使用 Grafana 实例。
 
-1. You will be signed in to the Grafana instance automatically. The default username is `admin` and the default password is `admin` . For security, we recommend that you log out of Grafana, log back in with the `admin` password, and change your password.
-
-**Results:** You will be logged into Grafana from the Grafana instance. After logging in, you can view the preset Grafana dashboards, which are imported via the [Grafana provisioning mechanism](http://docs.grafana.org/administration/provisioning/#dashboards), so you cannot modify them directly. For now, if you want to configure your own dashboards, clone the original and modify the new copy.
-
+**结果：**您通过 Grafana 实例登录 Grafana。登录后，您可以查看通过[Grafana provisioning mechanism](http://docs.grafana.org/administration/provisioning/#dashboards)导入的，已经设置好的的 Grafana dashboards。您不可以直接修改栎社的配置。如果您需要创建自己的 dashboards，请先复制原有的 Grafana dashboard，创建一个副本，再通过修改副本的参数，达到创建自己的 dashboards 的目的。
