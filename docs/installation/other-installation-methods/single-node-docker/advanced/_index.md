@@ -1,30 +1,30 @@
 ---
-title: 通过 Docker 安装的高级选项
+title: 单节点安装的高级选项
 ---
 
-When installing Rancher, there are several [advanced options](/docs/installation/options/) that can be enabled:
+安装 Rancher 时，可以启用几个[高级选项](/docs/installation/options/_index)：
 
-* [Custom CA Certificate](#custom-ca-certificate)
-* [API Audit Log](#api-audit-log)
-* [TLS Settings](#tls-settings)
-* [Air Gap](#air-gap)
-* [Persistent Data](#persistent-data)
-* [Running `rancher/rancher` and `rancher/rancher-agent` on the Same Node](#running-rancher-rancher-and-rancher-rancher-agent-on-the-same-node)
+- [自定义 CA 证书](#自定义-ca-证书)
+- [API 审计日志](#api-审计日志)
+- [TLS 配置](#tls-设置)
+- [离线环境](#离线环境)
+- [持久化数据](#持久化数据)
+- [在相同节点运行`rancher/rancher` 和 `rancher/rancher-agent`](#在相同节点运行rancherrancher-和-rancherrancher-agent)
 
-#### Custom CA Certificate
+## 自定义 CA 证书
 
-If you want to configure Rancher to use a CA root certificate to be used when validating services, you would start the Rancher container sharing the directory that contains the CA root certificate.
+如果要配置 Rancher 使用的 CA 根证书，则应在启动 Rancher 容器，共享包含 CA 根证书的目录。
 
-Use the command example to start a Rancher container with your private CA certificates mounted.
+使用命令示例来启动安装了私有 CA 证书的 Rancher 容器。
 
-* The volume flag ( `-v` ) should specify the host directory containing the CA root certificates.
-* The environment variable flag ( `-e` ) in combination with `SSL_CERT_DIR` and directory declares an environment variable that specifies the mounted CA root certificates directory location inside the container.
-* Passing environment variables to the Rancher container can be done using `-e KEY=VALUE` or `--env KEY=VALUE` .
-* Mounting a host directory inside the container can be done using `-v host-source-directory:container-destination-directory` or `--volume host-source-directory:container-destination-directory` .
+- 卷标志（`-v`）应该指定包含 CA 根证书的主机目录。
+- 环境变量标记（`-e`）与 `SSL_CERT_DIR` 和目录结合使用，声明一个环境变量，该变量指定容器内已安装的 CA 根证书目录的位置。
+- 可以使用 `-e KEY = VALUE` 或 `--env KEY = VALUE` 将环境变量传递到 Rancher 容器。
+- 使用`-v host-source-directory:container-destination-directory`或`--volume host-source-directory:container-destination-directory`，可以在容器内挂载主机目录。
 
-The example below is based on having the CA root certificates in the `/host/certs` directory on the host and mounting this directory on `/container/certs` inside the Rancher container.
+以下示例是将主机上的`/host/certs`目录中的 CA 根证书在，挂载到 Rancher 容器中的`/container/certs`上。
 
-``` 
+```
 docker run -d --restart=unless-stopped \
   -p 80:80 -p 443:443 \
   -v /host/certs:/container/certs \
@@ -32,15 +32,15 @@ docker run -d --restart=unless-stopped \
   rancher/rancher:latest
 ```
 
-#### API Audit Log
+## API 审计日志
 
-The API Audit Log records all the user and system transactions made through Rancher server.
+API 审计日志记录通过 Rancher 服务器进行的所有用户请求和系统事务。
 
-The API Audit Log writes to `/var/log/auditlog` inside the rancher container by default. Share that directory as a volume and set your `AUDIT_LEVEL` to enable the log.
+默认情况下，API 审计日志会写入 rancher 容器内的`/var/log/auditlog`中。您可以设置`AUDIT_LEVEL`以启用日志，并将该目录作为卷共享。
 
-See [API Audit Log](/docs/installation/api-auditing) for more information and options.
+参考[API 审计日志](/docs/installation/options/api-audit-log/_index)获取更多信息。
 
-``` 
+```
 docker run -d --restart=unless-stopped \
   -p 80:80 -p 443:443 \
   -v /var/log/rancher/auditlog:/var/log/auditlog \
@@ -48,46 +48,54 @@ docker run -d --restart=unless-stopped \
   rancher/rancher:latest
 ```
 
-#### TLS settings
+## TLS 设置
 
-_Available as of v2.1.7_
+_v2.1.7 可用_
 
-To set a different TLS configuration, you can use the `CATTLE_TLS_MIN_VERSION` and `CATTLE_TLS_CIPHERS` environment variables. For example, to configure TLS 1.0 as minimum accepted TLS version:
+要设置其他 TLS 配置，您可以使用`CATTLE_TLS_MIN_VERSION`和`CATTLE_TLS_CIPHERS`环境变量。例如，要将 TLS 1.0 配置为可接受的最低 TLS 版本：
 
-``` 
+```
 docker run -d --restart=unless-stopped \
   -p 80:80 -p 443:443 \
   -e CATTLE_TLS_MIN_VERSION="1.0" \
   rancher/rancher:latest
 ```
 
-See [TLS settings](/docs/admin-settings/tls-settings) for more information and options.
+参阅[TLS 配置](/docs/installation/options/tls-settings/_index)查看更多信息和参数。
 
-#### Air Gap
+## 离线环境
 
-If you are visiting this page to complete an air gap installation, you must prepend your private registry URL to the server tag when running the installation command in the option that you choose. Add `<REGISTRY.DOMAIN.COM:PORT>` with your private registry URL in front of `rancher/rancher:latest` .
+如果要访问此页面以完成离线安装，则在您运行安装命令时，必须在 server 镜像之前添加私有镜像库的 URL。例如在您的`rancher/rancher:latest`前面添加带有您的私有镜像库的 URL`<REGISTRY.DOMAIN.COM:PORT>`。
 
-**Example:**
+**例子：**
 
      <REGISTRY.DOMAIN.COM:PORT>/rancher/rancher:latest
 
-#### Persistent Data
+## 持久化数据
 
-{{< persistentdata >}}
+Rancher 使用 etcd 作为数据存储。使用 Docker 安装时，将使用嵌入式 etcd。持久数据位于容器中的以下路径中：`/var/lib/rancher`。您可以将主机卷的挂载到该位置，以将数据保留在运行 Rancher Server 容器的主机上。使用 RancherOS 时，请检查哪些[持久性存储目录](https://rancher.com/docs/os/v1.x/en/installation/system-services/system-docker-volumes/#user-volumes)可用。
 
-#### Running `rancher/rancher` and `rancher/rancher-agent` on the Same Node
+命令：
 
-In the situation where you want to use a single node to run Rancher and to be able to add the same node to a cluster, you have to adjust the host ports mapped for the `rancher/rancher` container.
+```
+docker run -d --restart=unless-stopped \
+  -p 80:80 -p 443:443 \
+  -v /opt/rancher:/var/lib/rancher \
+  rancher/rancher:latest
+```
 
-If a node is added to a cluster, it deploys the nginx ingress controller which will use port 80 and 443. This will conflict with the default ports we advise to expose for the `rancher/rancher` container.
+## 在相同节点运行`rancher/rancher` 和 `rancher/rancher-agent`
 
-Please note that this setup is not recommended for production use, but can be convenient for development/demo purposes.
+在要使用单个节点运行 Rancher 并将同一个节点添加到集群的情况下，必须为`rancher/ rancher`容器调整映射的主机端口。
 
-To change the host ports mapping, replace the following part `-p 80:80 -p 443:443` with `-p 8080:80 -p 8443:443` :
+如果将节点添加到集群中，它将部署使用端口 80 和 443 的 nginx ingress 控制器。这将与我们建议为`rancher/ rancher`容器公开的默认端口冲突。
 
-``` 
+请注意，不建议将此设置用于生产环境，这种方式仅用来方便进行开发/演示。
+
+要更改主机端口映射，请将以下部分`-p 80:80 -p 443:443`替换为`-p 8080:80 -p 8443:443`：
+
+```
 docker run -d --restart=unless-stopped \
   -p 8080:80 -p 8443:443 \
   rancher/rancher:latest
 ```
-
