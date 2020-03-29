@@ -16,7 +16,7 @@ title: 自测指南 - v2.3.3
 | --------------- | -------------- | ------------------- | ---------------- | ------------------ |
 | 自测指南 v2.3.3 | Rancher v2.3.3 | 安全加固指南 v2.3.3 | Kubernetes v1.16 | Benchmark v1.4.1   |
 
-由于 Rancher 和 RKE 将 Kubernetes 服务安装为 Docker 容器，因此 CIS Kubernetes Benchmark 中的许多控制验证检查均不适用，这些结果将为`Not Applicable`（不适用）。本指南将逐步介绍各种控制，并提供更新的示例命令以审核 Rancher 创建的群集中的合规性。
+由于 Rancher 和 RKE 将 Kubernetes 服务安装为 Docker 容器，因此 CIS Kubernetes Benchmark 中的许多控制验证检查均不适用，这些结果将为`Not Applicable`（不适用）。本指南将逐步介绍各种控制，并提供更新的示例命令以审核 Rancher 创建的集群中的合规性。
 
 Rancher 运维人员，安全团队，审核员和决策者将使用此文档。
 

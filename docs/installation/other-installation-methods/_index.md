@@ -1,16 +1,15 @@
 ---
-title: 介绍
+title: 其他安装方式说明
 ---
 
-#### Docker Installations
+## 通过 Docker 安装
 
-The [single-node Docker installation](/docs/installation/other-installation-methods/single-node-docker) is for Rancher users that are wanting to test out Rancher. Instead of running on a Kubernetes cluster using Helm, you install the Rancher server component on a single node using a `docker run` command.
+[单节点 Docker 安装](/docs/installation/other-installation-methods/single-node-docker/_index)适用于想要测试 Rancher 的用户。无需使用 Helm 在 Kubernetes 集群上运行 Rancher，而是使用 docker run 命令在单个节点上安装 Rancher Server 组件。
 
-Since there is only one node and a single Docker container, if the node goes down, there is no copy of the etcd data available on other nodes and you will lose all the data of your Rancher server.
+由于只有一个节点和一个 Docker 容器，因此，如果该节点发生故障，并且其他节点上没有可用的 Rancher 数据副本，您将丢失 Rancher 服务器的所有数据。
 
-#### Air Gapped Installations
+## 私有环境安装
 
-Follow [these steps](/docs/installation/other-installation-methods/air-gap) to install the Rancher server in an air gapped environment.
+请按照[这些步骤](/docs/installation/other-installation-methods/air-gap/_index)在私有环境中安装 Rancher Server。
 
-An air gapped environment could be where Rancher server will be installed offline, behind a firewall, or behind a proxy.
-
+私有安装可能是离线安装，也可能是在防火墙或者代理之后安装。

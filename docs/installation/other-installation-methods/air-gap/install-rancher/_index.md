@@ -2,107 +2,102 @@
 title: 4、安装 Rancher
 ---
 
-This section is about how to deploy Rancher for your air gapped environment. An air gapped environment could be where Rancher server will be installed offline, behind a firewall, or behind a proxy. There are _tabs_ for either a high availability (recommended) or a Docker installation.
+本节介绍如何为离线环境部署 Rancher。您可以离线安装 Rancher Server，它可能处于防火墙之后或在代理之后。本文将介绍高可用离线安装（推荐）和单节点离线安装。
 
-> **Note:** These installation instructions assume you are using Helm 3. For migration of installs started with Helm 2, refer to the official [Helm 2 to 3 migration docs.](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/) This [section](/docs/installation/options/air-gap-helm2) provides a copy of the older air gap installation instructions for Rancher installed on Kubernetes with Helm 2, and it is intended to be used if upgrading to Helm 3 is not feasible.
+## 高可用安装（推荐）
 
- tabs 
- tab "Kubernetes Install (Recommended)" 
+> **注意：** 这个安装说明假定您使用的是 Helm3。有关从 Helm 2 开始的安装迁移，请参考官方的[Helm2 到 3 迁移文档](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/)。[这里](/docs/installation/options/air-gap-helm2/_index)提供了较旧的离线安装说明版本，该说明适用于使用 Helm2 在 Kubernetes 上安装的 Rancher。如果无法升级到 Helm3，则可以使用它。
 
-Rancher recommends installing Rancher on a Kubernetes cluster. A highly available Kubernetes install is comprised of three nodes running the Rancher server components on a Kubernetes cluster. The persistence layer (etcd) is also replicated on these three nodes, providing redundancy and data duplication in case one of the nodes fails.
+Rancher 建议在 Kubernetes 集群上安装 Rancher。高可用的 Kubernetes 安装包含三个节点。持久层（etcd）数据也可以在这三个节点上进行复制，以便在节点之一发生故障时提供冗余和数据复制。
 
-This section describes installing Rancher in five parts:
+本节分五个部分介绍如何安装 Rancher：
 
-* [A. Add the Helm Chart Repository](#a-add-the-helm-chart-repository)
-* [B. Choose your SSL Configuration](#b-choose-your-ssl-configuration)
-* [C. Render the Rancher Helm Template](#c-render-the-rancher-helm-template)
-* [D. Install Rancher](#d-install-rancher)
-* [E. For Rancher versions prior to v2.3.0, Configure System Charts](#e-for-rancher-versions-prior-to-v2-3-0-configure-system-charts)
+- [A. 添加 Helm Chart 仓库](#a-添加-helm-chart-仓库)
+- [B. SSL 配置](#b-选择你的-ssl-配置)
+- [C. 配置 Rancher Helm 模板](#c-渲染你的-rancher-helm-模版)
+- [D. 安装 Rancher](#d-安装-rancher)
+- [E. 针对 Rancher2.3.0 之前版本配置 system-chart](#e-针对-rancher230-之前版本配置-system-chart)
 
-#### A. Add the Helm Chart Repository
+### A. 添加 Helm Chart 仓库
 
-From a system that has access to the internet, fetch the latest Helm chart and copy the resulting manifests to a system that has access to the Rancher server cluster.
+从可以访问 Internet 的系统中，获取最新的 Rancher Helm Chart，然后将内容复制到可以访问 Rancher Server 集群的系统中。
 
-1. If you haven't already, initialize `helm` locally on a workstation that has internet access. Note: Refer to the [Helm version requirements](/docs/installation/options/helm-version) to choose a version of Helm to install Rancher.
+1. 如果你还没有在有互联网访问的系统上进行 helm 初始化。请运行下面的命令。注意：请参考[Helm 版本要求](/docs/installation/options/helm-version/_index)来选择一个 Helm 版本来安装 Rancher。
 
-   
-
-``` plain
+   ```plain
    helm init -c
    ```
 
-2. Use `helm repo add` command to add the Helm chart repository that contains charts to install Rancher. For more information about the repository choices and which is best for your use case, see [Choosing a Version of Rancher](/docs/installation/options/server-tags/#helm-chart-repositories).
+1. 使用`helm repo add`来添加仓库，不同的地址适应不同的 Rancher 版本，请替换命令中的`<CHART_REPO>`，替换为`latest`，`stable`或`alpha`。更多信息请参考[如何选择 Rancher 版本](/docs/installation/options/server-tags/_index)。
 
-   {{< release-channel >}}
+   - `latest`: 推荐在尝试新功能时使用。
+   - `stable`: 推荐生产环境中使用。（推荐）
+   - `alpha`: 未来版本的实验性预览。
 
-   
-
-``` 
+   ```
    helm repo add rancher-<CHART_REPO> https://releases.rancher.com/server-charts/<CHART_REPO>
    ```
 
-3. Fetch the latest Rancher chart. This will pull down the chart and save it in the current directory as a `.tgz` file.
+1. 获取最新的 Rancher Chart，你会看到对应的 tgz 文件下载到本地。
 
-``` plain
-helm fetch rancher-<CHART_REPO>/rancher
-```
+   ```plain
+   helm fetch rancher-<CHART_REPO>/rancher
+   ```
 
-> Want additional options? Need help troubleshooting? See [Kubernetes Install: Advanced Options](/docs/installation/k8s-install/helm-rancher/#advanced-configurations).
+> 是否需要其他选项？您需要进行故障排除的帮助吗？请参阅[高可用安装 - 高级选项](/docs/installation/k8s-install/helm-rancher/_index)。
 
-#### B. Choose your SSL Configuration
+### B. 选择你的 SSL 配置
 
-Rancher Server is designed to be secure by default and requires SSL/TLS configuration.
+Rancher Server 在默认情况下被设计为安全的，并且需要 SSL/TLS 配置。
 
-When Rancher is installed on an air gapped Kubernetes cluster, there are two recommended options for the source of the certificate.
+当在离线环境的 Kubernetes 中安装 Rancher 时，推荐两种证书生成方式。
 
-> **Note:** If you want terminate SSL/TLS externally, see [TLS termination on an External Load Balancer](/docs/installation/options/chart-options/#external-tls-termination).
+> **注意：**如果要在外部终止 SSL/TLS，请参阅[在外部负载均衡器上终止 TLS](/docs/installation/options/chart-options/_index)。
 
-| Configuration                              | Chart option                 | Description                                                                                                                                                   | Requires cert-manager |
-| ------------------------------------------ | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
-| Rancher Generated Self-Signed Certificates | `ingress.tls.source=rancher` | Use certificates issued by Rancher's generated CA (self signed)<br /> This is the **default** and does not need to be added when rendering the Helm template.| yes                   |
-| Certificates from Files                    | `ingress.tls.source=secret` | Use your own certificate files by creating Kubernetes Secret(s).<br /> This option must be passed when rendering the Rancher Helm template.| no                    |
+| 设置                     | Chart 选项                   | 描述                                                                                                       | 是否需要 cert-manager？ |
+| ------------------------ | ---------------------------- | ---------------------------------------------------------------------------------------------------------- | ----------------------- |
+| Rancher 生成的自签名证书 | `ingress.tls.source=rancher` | 使用 Rancher 生成的 CA 签发的自签名证书<br/>此项为**默认选项**。在渲染 Rancher Helm 模板时不需要传递此项。 | 是                      |
+| 已有的证书               | `ingress.tls.source=secret`  | 通过创建 Kubernetes Secret（s）使用您自己的证书文件。<br />渲染 Rancher Helm 模板时必须传递此选项。        | 否                      |
 
-#### C. Render the Rancher Helm Template
+:::important 重要
+Rancher 中国技术支持团队建议您使用“已有的自签名证书” `ingress.tls.source=secret` 这种方式，从而减少对 cert-manager 的运维成本。
+:::
 
-When setting up the Rancher Helm template, there are several options in the Helm chart that are designed specifically for air gap installations.
+### C. 渲染你的 Rancher Helm 模版
 
-| Chart Option            | Chart Value                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| ----------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `certmanager.version` | { `<version>` }                    | Configure proper Rancher TLS issuer depending of running cert-manager version.|
-| `systemDefaultRegistry` | `<REGISTRY.YOURDOMAIN.COM:PORT>` | Configure Rancher server to always pull from your private registry when provisioning clusters.|
-| `useBundledSystemChart` | `true` | Configure Rancher server to use the packaged copy of Helm system charts. The [system charts](https://github.com/rancher/system-charts) repository contains all the catalog items required for features such as monitoring, logging, alerting and global DNS. These [Helm charts](https://github.com/rancher/system-charts) are located in GitHub, but since you are in an air gapped environment, using the charts that are bundled within Rancher is much easier than setting up a Git mirror._Available as of v2.3.0_ |
+设置 Rancher Helm 模板时，Chart 中有几个选项是专门为离线安装设计的。
 
-Based on the choice your made in [B. Choose your SSL Configuration](#b-choose-your-ssl-configuration), complete one of the procedures below.
+| Chart 选项              | 值                               | 描述                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ----------------------- | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `certmanager.version`   | ""                               | 根据运行的 cert-manager 版本配置适当的 Rancher TLS 颁发者。                                                                                                                                                                                                                                                                                                                                                      |
+| `systemDefaultRegistry` | `<REGISTRY.YOURDOMAIN.COM:PORT>` | 配置 Rancher，在创建集群时，Rancher Server 始终从私有镜像仓库中拉取镜像                                                                                                                                                                                                                                                                                                                                          |
+| `useBundledSystemChart` | `true`                           | 配置 Rancher Server 使用内置的 system-chart，[system-chart](https://github.com/rancher/system-charts)中包含监控，日志，告警和全局 DNS 等功能所需的 Chart。这些 [Helm charts](https://github.com/rancher/system-charts) 位于 GitHub 中，但是由于您处于离线环境中，因此使用 Rancher 中内置的 Chart 比设置一个 Git 镜像简单得多。当然您也可以选择自己手动镜像 GitHub 中的 Rancher System Chart。 _自 v2.3.0 起可用_ |
 
- accordion id="self-signed" label="Option A-Default Self-Signed Certificate" 
+根据您在[B. 选择你的 SSL 配置](#选择你的-ssl-配置)做出的选择，完成以下步骤之一。
 
-By default, Rancher generates a CA and uses cert-manager to issue the certificate for access to the Rancher server interface.
+#### 选项 A - 使用 Rancher 默认的自签名证书
 
-> **Note:**
-> Recent changes to cert-manager require an upgrade. If you are upgrading Rancher and using a version of cert-manager older than v0.11.0, please see our [upgrade cert-manager documentation](/docs/installation/options/upgrading-cert-manager/).
+默认情况下，Rancher 会生成一个 CA 并使用 cert-manager 颁发证书以访问 Rancher Server 界面。
 
-1. From a system connected to the internet, add the cert-manager repo to Helm.
+> **注意：**
+> 由于 cert-manager 最近的改动，你需要进行升级。如果您要升级 Rancher 并在使用版本低于 v0.11.0 的 cert-manager，请参阅我们的[升级 cert-manager 文档](/docs/installation/options/upgrading-cert-manager/_index)。
 
-   
+1. 在可以连接互联网的系统中，添加 cert-manager 仓库
 
-``` plain
+   ```plain
    helm repo add jetstack https://charts.jetstack.io
    helm repo update
    ```
 
-1. Fetch the latest cert-manager chart available from the [Helm chart repository](https://hub.helm.sh/charts/jetstack/cert-manager).
+1. 从 [Helm Chart 仓库](https://hub.helm.sh/charts/jetstack/cert-manager) 中获取最新的 cert-manager Chart。
 
-   
-
-``` plain
+   ```plain
    helm fetch jetstack/cert-manager --version v0.12.0
    ```
 
-1. Render the cert manager template with the options you would like to use to install the chart. Remember to set the `image.repository` option to pull the image from your private registry. This will create a `cert-manager` directory with the Kubernetes manifest files.
+1. 使用你期望的参数渲染 chart 模板，切记设置`image.repository`以便从私有镜像仓库中拉取 Chart。这将生成一个包含相关 YAML 的名为`cert-manager`的文件夹。
 
-   
-
-``` plain
+   ```plain
    helm template cert-manager ./cert-manager-v0.12.0.tgz --output-dir . \
        --namespace cert-manager \
        --set image.repository=<REGISTRY.YOURDOMAIN.COM:PORT>/quay.io/jetstack/cert-manager-controller \
@@ -110,231 +105,211 @@ By default, Rancher generates a CA and uses cert-manager to issue the certificat
        --set cainjector.image.repository=<REGISTRY.YOURDOMAIN.COM:PORT>/quay.io/jetstack/cert-manager-cainjector
    ```
 
-1. Download the required CRD file for cert-manager
+1. 下载 cert-manager 所需的 CRD 文件
 
-   
-
-``` plain
+   ```plain
    curl -L -o cert-manager/cert-manager-crd.yaml https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/deploy/manifests/00-crds.yaml
    ```
 
-1. Render the Rancher template, declaring your chosen options. Use the reference table below to replace each placeholder. Rancher needs to be configured to use the private registry in order to provision any Rancher launched Kubernetes clusters or Rancher tools.
+1. 渲染 Rancher 模板，声明您选择的选项。使用下面的参考表替换每个占位符。需要将 Rancher 配置为在由 Rancher 启动 Kubernetes 集群或 Rancher 工具时，使用私有注册表。
 
-| Placeholder                      | Description                                     |
-|----------------------------------|-------------------------------------------------|
-| `<VERSION>` | The version number of the output tarball.       |
-| `<RANCHER.YOURDOMAIN.COM>` | The DNS name you pointed at your load balancer. |
-| `<REGISTRY.YOURDOMAIN.COM:PORT>` | The DNS name for your private registry.         |
-| `<CERTMANAGER_VERSION>` | Cert-manager version running on k8s cluster.    |
+   | 占位符                           | 描述                 |
+   | -------------------------------- | -------------------- |
+   | `<VERSION>`                      | 对应 Rancher 版本    |
+   | `<RANCHER.YOURDOMAIN.COM>`       | 负载均衡对应的 DNS   |
+   | `<REGISTRY.YOURDOMAIN.COM:PORT>` | 私有镜像库对应的 DNS |
+   | `<CERTMANAGER_VERSION>`          | Cert-manager 版本    |
 
-     
+   ```plain
+   helm template rancher ./rancher-<VERSION>.tgz --output-dir . \
+   --namespace cattle-system \
+   --set hostname=<RANCHER.YOURDOMAIN.COM> \
+   --set certmanager.version=<CERTMANAGER_VERSION> \
+   --set rancherImage=<REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher \
+   --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # 自v2.2.0可用，设置默认的系统镜像仓库
+   --set useBundledSystemChart=true # 自v2.3.0可用，使用内嵌的 Rancher system charts
+   ```
 
-``` plain
-    helm template rancher ./rancher-<VERSION>.tgz --output-dir . \
-     --namespace cattle-system \
-     --set hostname=<RANCHER.YOURDOMAIN.COM> \
-     --set certmanager.version=<CERTMANAGER_VERSION> \
-     --set rancherImage=<REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher \
-     --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # Available as of v2.2.0, set a default private registry to be used in Rancher
-     --set useBundledSystemChart=true # Available as of v2.3.0, use the packaged Rancher system charts
+#### 选项 B - 使用已有的证书
 
-````
+根据您自己的证书创建 Kubernetes 密文，以供 Rancher 使用。证书的`common name`将需要与以下命令中的`hostname`选项匹配，否则 ingress controller 将无法为 Rancher 设置入口。
 
- /accordion 
+设置 Rancher 模板，声明您选择的选项。使用下面表中的参考选项，需要给 Rancher 配置使用私有镜像库。
 
- accordion id="secret" label="Option B: Certificates From Files using Kubernetes Secrets" 
+如果您使用的是由私有 CA 签名的证书，则在`--set ingress.tls.source=secret`之后添加`--set privateCA=true`。
 
-Create Kubernetes secrets from your own certificates for Rancher to use. The common name for the cert will need to match the `hostname` option in the command below, or the ingress controller will fail to provision the site for Rancher.
+| 占位符                           | 描述                 |
+| -------------------------------- | -------------------- |
+| `<VERSION>`                      | Rancher 版本         |
+| `<RANCHER.YOURDOMAIN.COM>`       | 负载均衡器对应的 DNS |
+| `<REGISTRY.YOURDOMAIN.COM:PORT>` | 私有镜像库对应的 DNS |
 
-Render the Rancher template, declaring your chosen options. Use the reference table below to replace each placeholder. Rancher needs to be configured to use the private registry in order to provision any Rancher launched Kubernetes clusters or Rancher tools.
-
-If you are using a Private CA signed cert, add `--set privateCA=true` following `--set ingress.tls.source=secret` .
-
-| Placeholder                      | Description                                     |
-| -------------------------------- | ----------------------------------------------- |
-| `<VERSION>` | The version number of the output tarball.|
-| `<RANCHER.YOURDOMAIN.COM>` | The DNS name you pointed at your load balancer.|
-| `<REGISTRY.YOURDOMAIN.COM:PORT>` | The DNS name for your private registry.|
-
-``` plain
+```plain
    helm template rancher ./rancher-<VERSION>.tgz --output-dir . \
     --namespace cattle-system \
     --set hostname=<RANCHER.YOURDOMAIN.COM> \
     --set rancherImage=<REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher \
     --set ingress.tls.source=secret \
-    --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # Available as of v2.2.0, set a default private registry to be used in Rancher
-    --set useBundledSystemChart=true # Available as of v2.3.0, use the packaged Rancher system charts
-````
-
-Then refer to [Adding TLS Secrets](/docs/installation/options/tls-secrets/) to publish the certificate files so Rancher and the ingress controller can use them.
-
- /accordion 
-
-#### D. Install Rancher
-
-Copy the rendered manifest directories to a system that has access to the Rancher server cluster to complete installation.
-
-Use `kubectl` to create namespaces and apply the rendered manifests.
-
-If you chose to use self-signed certificates in [B. Choose your SSL Configuration](#b-choose-your-ssl-configuration), install cert-manager.
-
- accordion id="install-cert-manager" label="Self-Signed Certificate Installs - Install Cert-manager" 
-
-If you are using self-signed certificates, install cert-manager:
-
-1. Create the namespace for cert-manager.
-
-``` plain
-kubectl create namespace cert-manager
+    --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # 自v2.2.0可用，设置默认的系统镜像仓库
+    --set useBundledSystemChart=true # 自v2.3.0可用，使用内嵌的 Rancher system charts
 ```
 
-1. Create the cert-manager CustomResourceDefinitions (CRDs).
+然后请参考[添加 TLS 密文](/docs/installation/options/tls-secrets/_index)发布证书文件，以便 Rancher 和 ingress controller 可以使用它们。
 
-``` plain
-kubectl apply -f cert-manager/cert-manager-crd.yaml
-```
+### D. 安装 Rancher
 
-    > **Note:**
-    > If you are running Kubernetes v1.15 or below, you will need to add the `--validate=false` flag to your `kubectl apply` command above, or else you will receive a validation error relating to the `x-kubernetes-preserve-unknown-fields` field in cert-manager’s CustomResourceDefinition resources. This is a benign error and occurs due to the way kubectl performs resource validation.
+将以上配置完毕的内容复制到可以访问 Rancher Server 集群的系统中，准备妥当，完成最后的安装。
 
-1. Launch cert-manager.
+使用`kubectl`创建命名空间并安装配置好的 YAML。
 
-``` plain
-kubectl apply -R -f ./cert-manager
-```
+如果您选择在[B. 选择你的 SSL 配置](#b-选择你的-ssl-配置)选择了使用 Rancher 默认的自签名证书，则安装 cert-manager。
 
- /accordion 
+#### 安装 Cert-manager（仅限使用 Rancher 默认自签名证书）
 
-Install Rancher:
+如果您使用的是 Rancher 默认的自签名证书，请安装 cert-manager：
 
-``` plain
+1. 为 cert-manager 创建 namespace。
+
+   ```plain
+   kubectl create namespace cert-manager
+   ```
+
+1. 创建 cert-manager CRD
+
+   ```plain
+   kubectl apply -f cert-manager/cert-manager-crd.yaml
+   ```
+
+   > **注意：**
+   > 如果你在使用 Kubernetes v1.15 或更低的版本，你需要在`kubectl apply`命令中添加`--validate=false`。否则您将看到一个关于 cert-manager 的 CRD 资源中的`x-kubernetes-preserve-unknown-fields`字段的校验错误。这是由于 kubectl 执行资源验证的方式改变产生的良性错误。
+
+1. 启动 cert-manager.
+
+   ```plain
+   kubectl apply -R -f ./cert-manager
+   ```
+
+安装 Rancher：
+
+```plain
 kubectl create namespace cattle-system
 kubectl -n cattle-system apply -R -f ./rancher
 ```
 
-**Step Result:** If you are installing Rancher v2.3.0+, the installation is complete.
+**步骤结果：** 如果您在安装 Rancher v2.3.0+，则安装完成。
 
-#### E. For Rancher versions prior to v2.3.0, Configure System Charts
+### E. 针对 Rancher2.3.0 之前版本配置 system-chart
 
-If you are installing Rancher versions prior to v2.3.0, you will not be able to use the packaged system charts. Since the Rancher system charts are hosted in Github, an air gapped installation will not be able to access these charts. Therefore, you must [configure the Rancher system charts](/docs/installation/options/local-system-charts/#setting-up-system-charts-for-rancher-prior-to-v2-3-0).
+如果要安装 v2.3.0 之前的 Rancher 版本，则将无法使用内置打包的 system-charts。由于 Rancher system-charts 托管在 Github 中，因此，离线安装将无法访问 charts。因此，您必须[配置 Rancher system-charts](/docs/installation/options/local-system-charts/_index)。
 
-#### Additional Resources
+### 其他资源
 
-These resources could be helpful when installing Rancher:
+这些资源在安装 Rancher 时可能会有所帮助：
 
-* [Rancher Helm chart options](/docs/installation/options/chart-options/)
-* [Adding TLS secrets](/docs/installation/options/tls-secrets/)
-* [Troubleshooting Rancher Kubernetes Installations](/docs/installation/options/troubleshooting/)
+- [Rancher Helm Chart 选项](/docs/installation/options/chart-options/_index)
+- [添加 TLS 密文](/docs/installation/options/tls-secrets/_index)
+- [安装过程的故障排除](/docs/installation/options/troubleshooting/_index)
 
- /tab 
- tab "Docker Install" 
+## 单节点安装
 
-The Docker installation is for Rancher users that are wanting to **test** out Rancher. Instead of running on a Kubernetes cluster, you install the Rancher server component on a single node using a `docker run` command. Since there is only one node and a single Docker container, if the node goes down, there is no copy of the etcd data available on other nodes and you will lose all the data of your Rancher server.**Important: If you install Rancher following the Docker installation guide, there is no upgrade path to transition your Docker installation to a Kubernetes Installation.** Instead of running the single node installation, you have the option to follow the Kubernetes Install guide, but only use one node to install Rancher. Afterwards, you can scale up the etcd nodes in your Kubernetes cluster to make it a Kubernetes Installation.
+Docker 单节点安装适用于想要对 Rancher 进行`测试`的 Rancher 用户。您可以使用 `docker run` 命令在单个节点上安装 Rancher 服务器组件，而不是在 Kubernetes 集群上运行。由于只有一个节点和一个 Docker 容器，因此，如果该节点发生故障，并且其他节点上没有可用的 Rancher 数据副本，您将丢失 Rancher 服务器的所有数据。**重要提示：如果您按照 Docker 单节点安装指南安装 Rancher，则没有升级路径可将 Docker 单节点安装过渡到 Kubernetes 安装。**除了运行单节点安装，您还可以选择按照 Rancher 高可用安装指南，但只能使用一个节点来安装 Rancher 和 Kubernetes。之后，您可以扩展 Kubernetes 集群中的 etcd 节点，使其成为真正的高可用安装。
 
-For security purposes, SSL (Secure Sockets Layer) is required when using Rancher. SSL secures all Rancher network communication, like when you login or interact with a cluster.
+为了安全起见，使用 Rancher 时需要 SSL。SSL 保护所有 Rancher 网络通信的安全，例如在您登录集群或与集群交互时。
 
-| Environment Variable Key         | Environment Variable Value       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| -------------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `CATTLE_SYSTEM_DEFAULT_REGISTRY` | `<REGISTRY.YOURDOMAIN.COM:PORT>` | Configure Rancher server to always pull from your private registry when provisioning clusters.|
-| `CATTLE_SYSTEM_CATALOG` | `bundled` | Configure Rancher server to use the packaged copy of Helm system charts. The [system charts](https://github.com/rancher/system-charts) repository contains all the catalog items required for features such as monitoring, logging, alerting and global DNS. These [Helm charts](https://github.com/rancher/system-charts) are located in GitHub, but since you are in an air gapped environment, using the charts that are bundled within Rancher is much easier than setting up a Git mirror._Available as of v2.3.0_ |
+| 环境变量键                       | 环境变量值                       | 描述                                                                                                                                                                                                                                                                                                                                                                                                             |
+| -------------------------------- | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CATTLE_SYSTEM_DEFAULT_REGISTRY` | `<REGISTRY.YOURDOMAIN.COM:PORT>` | 在配置集群时，将 Rancher Server 配置为始终从您的私有镜像库中拉取镜像。                                                                                                                                                                                                                                                                                                                                           |
+| `CATTLE_SYSTEM_CATALOG`          | `bundled`                        | 配置 Rancher Server 使用内置的 system-chart，[system-chart](https://github.com/rancher/system-charts)中包含监控，日志，告警和全局 DNS 等功能所需的 Chart。这些 [Helm charts](https://github.com/rancher/system-charts) 位于 GitHub 中，但是由于您处于离线环境中，因此使用 Rancher 中内置的 Chart 比设置一个 Git 镜像简单得多。当然您也可以选择自己手动镜像 GitHub 中的 Rancher System Chart。 _自 v2.3.0 起可用_ |
 
-> **Do you want to... **
+> **你想要...**
 >
-> - Configure custom CA root certificate to access your services? See [Custom CA root certificate](/docs/installation/options/custom-ca-root-certificate/).
-> - Record all transactions with the Rancher API? See [API Auditing](/docs/installation/other-installation-methods/single-node-docker/#api-audit-log).
+> - 配置自定义 CA 根证书以访问您的服务？ 请参阅[自定义 CA 根证书](/docs/installation/options/custom-ca-root-certificate/_index)。
+> - 开启 API 审计日志，请参阅[API 审计日志](/docs/installation/other-installation-methods/single-node-docker/advanced/_index#api-审计日志)。
 
-* For Rancher prior to v2.3.0, you will need to mirror the `system-charts` repository to a location in your network that Rancher can reach. Then, after Rancher is installed, you will need to configure Rancher to use that repository. For details, refer to the documentation on [setting up the system charts for Rancher prior to v2.3.0.](/docs/installation/options/local-system-charts/#setting-up-system-charts-for-rancher-prior-to-v2-3-0)
+- 对于 v2.3.0 之前的 Rancher，您需要设置 Git 镜像将 system-charts 置于网络中 Rancher 可以访问的位置。然后，在安装 Rancher 之后，您将需要配置 Rancher 以使用该 Git 仓库。有关详细信息，请参阅[在 v2.3.0 之前为 Rancher 设置 system-charts。](/docs/installation/options/local-system-charts/_index)
 
-Choose from the following options:
+选择一个下面的选项：
 
- accordion id="option-a" label="Option A-Default Self-Signed Certificate" 
+#### 选项 A - 使用 Rancher 默认的自签名证书
 
-If you are installing Rancher in a development or testing environment where identity verification isn't a concern, install Rancher using the self-signed certificate that it generates. This installation option omits the hassle of generating a certificate yourself.
+如果要在不涉及身份验证的开发或测试环境中安装 Rancher，请使用其生成的自签名证书安装 Rancher。此安装选项省去了自己生成证书的麻烦。
 
-Log into your Linux host, and then run the installation command below. When entering the command, use the table below to replace each placeholder.
+登录到 Linux 主机，然后运行下面的安装命令。输入命令时，请参考下面的配置。
 
-| Placeholder                      | Description                                                                                                 |
-| -------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `<REGISTRY.YOURDOMAIN.COM:PORT>` | Your private registry URL and port.|
-| `<RANCHER_VERSION_TAG>` | The release tag of the [Rancher version](/docs/installation/options/server-tags/) that you want to install.|
+| 占位符                           | 描述                                                                      |
+| -------------------------------- | ------------------------------------------------------------------------- |
+| `<REGISTRY.YOURDOMAIN.COM:PORT>` | 私有镜像库地址                                                            |
+| `<RANCHER_VERSION_TAG>`          | 您要安装的[Rancher 版本](/docs/installation/options/server-tags/_index)。 |
 
-``` 
+```
 docker run -d --restart=unless-stopped \
     -p 80:80 -p 443:443 \
-    -e CATTLE_SYSTEM_DEFAULT_REGISTRY=<REGISTRY.YOURDOMAIN.COM:PORT> \ # Set a default private registry to be used in Rancher
-    -e CATTLE_SYSTEM_CATALOG=bundled \ #Available as of v2.3.0, use the packaged Rancher system charts
+    -e CATTLE_SYSTEM_DEFAULT_REGISTRY=<REGISTRY.YOURDOMAIN.COM:PORT> \ # 设置默认的系统镜像仓库
+    -e CATTLE_SYSTEM_CATALOG=bundled \ # 自v2.3.0可用，使用内嵌的 Rancher system charts
     <REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher:<RANCHER_VERSION_TAG>
 ```
 
- /accordion 
- accordion id="option-b" label="Option B-Bring Your Own Certificate: Self-Signed" 
+#### 选项 B - 使用已有的自签名证书
 
-In development or testing environments where your team will access your Rancher server, create a self-signed certificate for use with your install so that your team can verify they're connecting to your instance of Rancher.
+在您的团队将访问 Rancher 服务器的开发或测试环境中，创建一个自签名证书以供您的安装使用，以便您的团队可以验证它们是否正在连接到 Rancher 实例。
 
-> **Prerequisites:**
-> From a computer with an internet connection, create a self-signed certificate using [OpenSSL](https://www.openssl.org/) or another method of your choice.
+> **先决条件：**
+> 在具有互联网连接的计算机上，使用[OpenSSL](https://www.openssl.org/)或您选择的其他方法创建自签名证书。
 >
-> - The certificate files must be in [PEM format](/docs/installation/other-installation-methods/single-node-docker/#pem).
-> - In your certificate file, include all intermediate certificates in the chain. Order your certificates with your certificate first, followed by the intermediates. For an example, see [SSL FAQ / Troubleshooting](/docs/installation/other-installation-methods/single-node-docker/#cert-order).
+> - 证书文件必须为[PEM 格式](/docs/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
+> - 其他证书问题[SSL 常见问题和问题排查](/docs/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
 
-After creating your certificate, log into your Linux host, and then run the installation command below. When entering the command, use the table below to replace each placeholder. Use the `-v` flag and provide the path to your certificates to mount them in your container.
+创建证书后，登录到 Linux 主机，然后运行以下安装命令。输入命令时，请使用下表替换每个占位符。使用`-v`标志并提供证书的路径以将其安装在容器中。
 
-| Placeholder                      | Description                                                                                                 |
-| -------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `<CERT_DIRECTORY>` | The path to the directory containing your certificate files.|
-| `<FULL_CHAIN.pem>` | The path to your full certificate chain.|
-| `<PRIVATE_KEY.pem>` | The path to the private key for your certificate.|
-| `<CA_CERTS>` | The path to the certificate authority's certificate.|
-| `<REGISTRY.YOURDOMAIN.COM:PORT>` | Your private registry URL and port.|
-| `<RANCHER_VERSION_TAG>` | The release tag of the [Rancher version](/docs/installation/options/server-tags/) that you want to install.|
+| 占位符                           | 描述                                                                    |
+| -------------------------------- | ----------------------------------------------------------------------- |
+| `<CERT_DIRECTORY>`               | 证书文件所在目录                                                        |
+| `<FULL_CHAIN.pem>`               | 证书链文件路径                                                          |
+| `<PRIVATE_KEY.pem>`              | 证书私有秘钥路径                                                        |
+| `<CA_CERTS>`                     | 证书颁发机构的证书的路径                                                |
+| `<REGISTRY.YOURDOMAIN.COM:PORT>` | 私有镜像库                                                              |
+| `<RANCHER_VERSION_TAG>`          | 您要安装的[Rancher 版本](/docs/installation/options/server-tags/_index) |
 
-``` 
+```
 docker run -d --restart=unless-stopped \
     -p 80:80 -p 443:443 \
     -v /<CERT_DIRECTORY>/<FULL_CHAIN.pem>:/etc/rancher/ssl/cert.pem \
     -v /<CERT_DIRECTORY>/<PRIVATE_KEY.pem>:/etc/rancher/ssl/key.pem \
     -v /<CERT_DIRECTORY>/<CA_CERTS.pem>:/etc/rancher/ssl/cacerts.pem \
-    -e CATTLE_SYSTEM_DEFAULT_REGISTRY=<REGISTRY.YOURDOMAIN.COM:PORT> \ # Set a default private registry to be used in Rancher
-    -e CATTLE_SYSTEM_CATALOG=bundled \ #Available as of v2.3.0, use the packaged Rancher system charts
+    -e CATTLE_SYSTEM_DEFAULT_REGISTRY=<REGISTRY.YOURDOMAIN.COM:PORT> \ # 设置默认的系统镜像仓库
+    -e CATTLE_SYSTEM_CATALOG=bundled \ # 自v2.3.0可用，使用内嵌的 Rancher system charts
     <REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher:<RANCHER_VERSION_TAG>
 ```
 
- /accordion 
- accordion id="option-c" label="Option C-Bring Your Own Certificate: Signed by Recognized CA" 
+#### 选项 C - 使用已有的权威机构颁发的证书
 
-In development or testing environments where you're exposing an app publicly, use a certificate signed by a recognized CA so that your user base doesn't encounter security warnings.
+在要公开展示应用程序的开发或测试环境中，请使用由公认的 CA 签名的证书，这样您的用户群就不会遇到安全警告。
 
-> **Prerequisite:** The certificate files must be in [PEM format](/docs/installation/other-installation-methods/single-node-docker/#pem).
+> **先决条件：** 证书文件必须为[PEM 格式](/docs/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
 
-After obtaining your certificate, log into your Linux host, and then run the installation command below. When entering the command, use the table below to replace each placeholder. Because your certificate is signed by a recognized CA, mounting an additional CA certificate file is unnecessary.
+获得证书后，登录到 Linux 主机，然后运行下面的安装命令。由于您的证书是由公认的 CA 签名的，因此不需要安装其他 CA 证书文件。
 
-| Placeholder                      | Description                                                                                                 |
-| -------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `<CERT_DIRECTORY>` | The path to the directory containing your certificate files.|
-| `<FULL_CHAIN.pem>` | The path to your full certificate chain.|
-| `<PRIVATE_KEY.pem>` | The path to the private key for your certificate.|
-| `<REGISTRY.YOURDOMAIN.COM:PORT>` | Your private registry URL and port.|
-| `<RANCHER_VERSION_TAG>` | The release tag of the [Rancher version](/docs/installation/options/server-tags/) that you want to install.|
+| 占位符                           | 描述                                                                    |
+| -------------------------------- | ----------------------------------------------------------------------- |
+| `<CERT_DIRECTORY>`               | 证书文件所在目录                                                        |
+| `<FULL_CHAIN.pem>`               | 证书链文件路径                                                          |
+| `<PRIVATE_KEY.pem>`              | 证书私有秘钥路径                                                        |
+| `<REGISTRY.YOURDOMAIN.COM:PORT>` | 私有镜像库                                                              |
+| `<RANCHER_VERSION_TAG>`          | 您要安装的[Rancher 版本](/docs/installation/options/server-tags/_index) |
 
-> **Note:** Use the `--no-cacerts` as argument to the container to disable the default CA certificate generated by Rancher.
+> **注意：**使用`--no-cacerts`作为容器的参数来禁用 Rancher 生成的默认 CA 证书。
 
-``` 
+```
 docker run -d --restart=unless-stopped \
     -p 80:80 -p 443:443 \
     --no-cacerts \
     -v /<CERT_DIRECTORY>/<FULL_CHAIN.pem>:/etc/rancher/ssl/cert.pem \
     -v /<CERT_DIRECTORY>/<PRIVATE_KEY.pem>:/etc/rancher/ssl/key.pem \
-    -e CATTLE_SYSTEM_DEFAULT_REGISTRY=<REGISTRY.YOURDOMAIN.COM:PORT> \ # Set a default private registry to be used in Rancher
-    -e CATTLE_SYSTEM_CATALOG=bundled \ #Available as of v2.3.0, use the packaged Rancher system charts
+    -e CATTLE_SYSTEM_DEFAULT_REGISTRY=<REGISTRY.YOURDOMAIN.COM:PORT> \ # 设置默认的系统镜像仓库
+    -e CATTLE_SYSTEM_CATALOG=bundled \ # 自v2.3.0可用，使用内嵌的 Rancher system charts
     <REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher:<RANCHER_VERSION_TAG>
 ```
 
- /accordion 
+如果您要安装 Rancher v2.3.0+，则安装完成。
 
-If you are installing Rancher v2.3.0+, the installation is complete.
-
-If you are installing Rancher versions prior to v2.3.0, you will not be able to use the packaged system charts. Since the Rancher system charts are hosted in Github, an air gapped installation will not be able to access these charts. Therefore, you must [configure the Rancher system charts](/docs/installation/options/local-system-charts/#setting-up-system-charts-for-rancher-prior-to-v2-3-0).
-
- /tab 
- /tabs 
-
+如果要安装 v2.3.0 之前的 Rancher 版本，则将无法使用内置的 system-charts。由于 Rancher system-charts 托管在 Github 中，因此，离线安装将无法访问这些 charts。所以，您必须[配置 Rancher system-charts](/docs/installation/options/local-system-charts/_index)。
