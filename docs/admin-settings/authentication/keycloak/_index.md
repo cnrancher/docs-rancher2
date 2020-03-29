@@ -2,110 +2,111 @@
 title: 对接 Keycloak (SAML)
 ---
 
-_Available as of v2.1.0_
+_v2.1.0 版本可用_
 
-If your organization uses Keycloak Identity Provider (IdP) for user authentication, you can configure Rancher to allow your users to log in using their IdP credentials.
+如果您的组织使用 Keycloak Identity Provider (IdP)进行用户身份验证，您可以配置 Rancher 来允许您的用户使用他们的 IdP 凭证登录。
 
-### Prerequisites
+## 先决条件
 
-* You must have a [Keycloak IdP Server](https://www.keycloak.org/docs/latest/server_installation/) configured.
-* In Keycloak, create a [new SAML client](https://www.keycloak.org/docs/latest/server_admin/#saml-clients), with the settings below. See the [Keycloak documentation](https://www.keycloak.org/docs/latest/server_admin/#saml-clients) for help.
+- 你必须有一个[Keycloak IdP 服务器](https://www.keycloak.org/docs/latest/server_installation/)。
+- 在 Keycloak 中，创建一个[新的 SAML 客户端](https://www.keycloak.org/docs/latest/server_admin/#saml-clients)，设置如下。参见[Keycloak 文档](keycloak.org/docs/latest/server_admin/#saml-clients)获得帮助。
 
-| Setting                     | Value                                                       |
-|-----------------------------|-------------------------------------------------------------|
-| `Sign Documents` | `ON` <sup>1</sup>                                           |
-| `Sign Assertions` | `ON` <sup>1</sup>                                           |
-| All other `ON/OFF` Settings | `OFF` |
-| `Client ID` | `https://yourRancherHostURL/v1-saml/keycloak/saml/metadata` |
-| `Client Name` | <CLIENT_NAME> (e.g. `rancher` )                              |
-| `Client Protocol` | `SAML` |
-| `Valid Redirect URI` | `https://yourRancherHostURL/v1-saml/keycloak/saml/acs` |
+  | 设置                 | 值                                                          |
+  | -------------------- | ----------------------------------------------------------- |
+  | `Sign Documents`     | `ON` <sup>1</sup>                                           |
+  | `Sign Assertions`    | `ON` <sup>1</sup>                                           |
+  | 所有其它`ON/OFF`设置 | `OFF`                                                       |
+  | `Client ID`          | `https://yourRancherHostURL/v1-saml/keycloak/saml/metadata` |
+  | `Client Name`        | <CLIENT_NAME> (e.g. `rancher`)                              |
+  | `Client Protocol`    | `SAML`                                                      |
+  | `Valid Redirect URI` | `https://yourRancherHostURL/v1-saml/keycloak/saml/acs`      |
 
-      ><sup>1</sup>: Optionally, you can enable either one or both of these settings.
+  > <sup>1</sup>: 您可以选择启用这些设置中的一个或两个。
 
-* Export a `metadata.xml` file from your Keycloak client:
+- 从 Keycloak 客户端导出`metadata.xml`文件:
+  在`安装`选项卡中，选择`SAML Metadata IDPSSODescriptor`格式选项并下载文件。
 
-  From the `Installation` tab, choose the `SAML Metadata IDPSSODescriptor` format option and download your file.
+## 在 Rancher 中配置 Keycloak
 
-### Configuring Keycloak in Rancher
+1.  在**全局**视图中，从主菜单中选择**安全 > 认证**。
+1.  选择**Keycloak**。
+1.  完成**配置 Keycloak 帐户**表单。Keycloak IdP 允许您指定要使用的数据存储。您可以添加数据库，也可以使用现有的 LDAP 服务器。例如，如果您选择 Active Directory (AD)服务器，下面的示例将描述如何将 AD 属性映射到 Rancher 中的字段。
 
-1. From the **Global** view, select **Security > Authentication** from the main menu.
+    | 字段                      | 描述                                                    |
+    | ------------------------- | ------------------------------------------------------- |
+    | Display Name Field        | 包含用户 display name 的 AD 属性。                      |
+    | User Name Field           | 包含用户 user name/given name 的 AD 属性                |
+    | UID Field                 | 对每个用户唯一的 AD 属性。                              |
+    | Groups Field              | 为管理组成员身份创建的条目。                            |
+    | Rancher API Host          | Rancher 服务器的 URL 地址                               |
+    | Private Key / Certificate | 密钥/证书对，用于在 Rancher 和 IdP 之间创建安全 shell。 |
+    | IDP-metadata              | 从你的 IdP 服务器导出的`metadata.xml`文件。             |
 
-1. Select **Keycloak**.
-
-1. Complete the **Configure Keycloak Account** form. Keycloak IdP lets you specify what data store you want to use. You can either add a database or use an existing LDAP server. For example, if you select your Active Directory (AD) server, the examples below describe how you can map AD attributes to fields within Rancher.
-
-| Field                     | Description                                                                   |
-|---------------------------|-------------------------------------------------------------------------------|
-| Display Name Field        | The AD attribute that contains the display name of users.                     |
-| User Name Field           | The AD attribute that contains the user name/given name.                      |
-| UID Field                 | An AD attribute that is unique to every user.                                 |
-| Groups Field              | Make entries for managing group memberships.                                  |
-| Rancher API Host          | The URL for your Rancher Server.                                              |
-| Private Key / Certificate | A key/certificate pair to create a secure shell between Rancher and your IdP. |
-| IDP-metadata              | The `metadata.xml` file that you exported from your IdP server.               |
-
-    >**Tip:** You can generate a key/certificate pair using an openssl command. For example:
+    > **提示：** 您可以使用 openssl 命令生成密钥/证书对。例如:
     >
     >        openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout myservice.key -out myservice.cert
 
-1. After you complete the **Configure Keycloak Account** form, click **Authenticate with Keycloak**, which is at the bottom of the page.
+1.  完成**配置 Keycloak 帐户**表单后，单击页面底部的**启用 Keycloak 认证**进行身份验证。
 
-   Rancher redirects you to the IdP login page. Enter credentials that authenticate with Keycloak IdP to validate your Rancher Keycloak configuration.
+    Rancher 将重定向到 IdP 登录页面。输入 Keycloak IdP 系统的身份验证凭据，以验证您的 Rancher Keycloak 配置。
 
-   > **Note:** You may have to disable your popup blocker to see the IdP login page.
+    > **注：** 您可能需要禁用弹出窗口拦截器以访问 IdP 登录页面。
 
-**Result:** Rancher is configured to work with Keycloak. Your users can now sign into Rancher using their Keycloak logins.
+**结果：** Rancher 被配置为使用 Keycloak 认证。您的用户现在可以使用 Keycloak 账号登录 Rancher。
 
-{{< saml_caveats >}}
+> SAML 身份验证提供商警告：
+>
+> - SAML 协议不支持搜索或查找用户或组。因此，将用户或组添加到 Rancher 时不会对其进行验证。
+> - 添加用户时，必须正确输入确切的用户 ID（即`UID`字段）。键入用户 ID 时，将不会搜索可能匹配的其他用户 ID。
+> - 添加组时，必须从文本框旁边的下拉列表中选择组。 Rancher 假定来自文本框的任何输入都是用户。
+>   - 群组下拉列表仅显示您所属的群组。您将无法添加您不是其成员的组。
 
-### Annex: Troubleshooting
+## 附录: 故障诊断
 
-If you are experiencing issues while testing the connection to the Keycloak server, first double-check the configuration option of your SAML client. You may also inspect the Rancher logs to help pinpointing the problem cause. Debug logs may contain more detailed information about the error. Please refer to [How can I enable debug logging](/docs/faq/technical/#how-can-i-enable-debug-logging) in this documentation.
+如果在测试到 Keycloak 服务器的连接时遇到了问题，首先需要再次检查 SAML 客户机的配置选项。您还可以检查 Rancher 日志，以帮助确定问题的原因。调试日志可能包含关于错误的更详细的信息。请参考本文档中的[如何启用调试日志](/docs/faq/technical/_index)。
 
-#### You are not redirected to Keycloak
+### 没有被重定向到 Keycloak
 
-When you click on **Authenticate with Keycloak**, your are not redirected to your IdP.
+当您点击**启用 Keycloak 认证**时，没有被重定向到 Keycloak IdP。
 
-* Verify your Keycloak client configuration.
-* Make sure `Force Post Binding` set to `OFF` .
+- 验证你的 Keycloak 客户端配置。
+- 确保`Force Post Binding`设置为`OFF`。
 
-#### Forbidden message displayed after IdP login
+### IdP 登录后显示禁止消息
 
-You are correctly redirected to your IdP login page and you are able to enter your credentials, however you get a `Forbidden` message afterwards.
+您被正确地重定向到 Keycloak IdP 登录页面，可以输入凭据，但得到一个`禁止`的消息。
 
-* Check the Rancher debug log.
-* If the log displays `ERROR: either the Response or Assertion must be signed` , make sure either `Sign Documents` or `Sign assertions` is set to `ON` in your Keycloak client.
+- 检查 Rancher 调试日志。
+- 如果日志显示`ERROR: either the Response or Assertion must be signed`，确保`Sign Documents`或`Sign assertions` 在您的 Keycloak 客户端中被设置为`ON`。
 
-#### Keycloak Error: "We're sorry, failed to process response"
+### Keycloak 错误: "We're sorry, failed to process response"
 
-* Check your Keycloak log.
-* If the log displays `failed: org.keycloak.common.VerificationException: Client does not have a public key` , set `Encrypt Assertions` to `OFF` in your Keycloak client.
+- 检查 Keycloak 日志。
+- 如果日志显示`failed: org.keycloak.common.VerificationException: Client does not have a public key`，在 Keycloak 客户端中将`Encrypt Assertions` 设置为`OFF`。
 
-#### Keycloak Error: "We're sorry, invalid requester"
+### Keycloak 错误: "We're sorry, invalid requester"
 
-* Check your Keycloak log.
-* If the log displays `request validation failed: org.keycloak.common.VerificationException: SigAlg was null` , set `Client Signature Required` to `OFF` in your Keycloak client.
+- 检查 Keycloak 日志。
+- 如果日志显示`request validation failed: org.keycloak.common.VerificationException: SigAlg was null`，在 Keycloak 客户端中将`Client Signature Required`设置为`OFF`。
 
-#### Keycloak 6.0.0+: IDPSSODescriptor missing from options
+### Keycloak 6.0.0+: 选项中没有 IDPSSODescriptor 设置
 
-Keycloak versions 6.0.0 and up no longer provide the IDP metadata under the `Installation` tab.
-You can still get the XML from the following url:
+Keycloak 6.0.0 及以上版本在“安装”选项卡下不再提供 IDP 元数据。
+你仍然可以从以下网址获取 XML:
 
-`https://{KEYCLOAK-URL}/auth/realms/{REALM-NAME}/protocol/saml/descriptor` 
+`https://{KEYCLOAK-URL}/auth/realms/{REALM-NAME}/protocol/saml/descriptor`
 
-The XML obtained from this URL contains `EntitiesDescriptor` as the root element. Rancher expects the root element to be `EntityDescriptor` rather than `EntitiesDescriptor` . So before passing this XML to Rancher, follow these steps to adjust it:
+从这个 URL 获得的 XML 包含`EntitiesDescriptor`作为根元素。Rancher 期望的根元素是`EntityDescriptor`而不是`EntitiesDescriptor`。因此，在将此 XML 传递给 Rancher 之前，请按照以下步骤进行调整:
 
-* Copy all the tags from `EntitiesDescriptor` to the `EntityDescriptor` .
-* Remove the `<EntitiesDescriptor>` tag from the beginning.
-* Remove the `</EntitiesDescriptor>` from the end of the xml.
+- 将所有标签从“EntitiesDescriptor”复制到“EntityDescriptor”
+- 从文件开头删除`<EntitiesDescriptor>`标签。
+- 从 xml 末尾删除`</EntitiesDescriptor>`。
 
-You are left with something similar as the example below:
+您会得到类似下面的示例的文件:
 
-``` 
+```
 <EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" entityID="https://{KEYCLOAK-URL}/auth/realms/{REALM-NAME}">
   ....
 
 </EntityDescriptor>
 ```
-
