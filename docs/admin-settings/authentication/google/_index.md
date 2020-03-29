@@ -1,5 +1,5 @@
 ---
-title: 配置Google OAuth
+title: 对接 Google OAuth
 ---
 
 _v2.3.0 版本可用_
