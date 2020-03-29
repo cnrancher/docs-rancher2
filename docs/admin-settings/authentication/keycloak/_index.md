@@ -32,15 +32,15 @@ _v2.1.0 版本可用_
 1.  选择**Keycloak**。
 1.  完成**配置 Keycloak 帐户**表单。Keycloak IdP 允许您指定要使用的数据存储。您可以添加数据库，也可以使用现有的 LDAP 服务器。例如，如果您选择 Active Directory (AD)服务器，下面的示例将描述如何将 AD 属性映射到 Rancher 中的字段。
 
-    | 字段                      | 描述                                                    |
-    | ------------------------- | ------------------------------------------------------- |
-    | Display Name Field        | 包含用户 display name 的 AD 属性。                      |
-    | User Name Field           | 包含用户 user name/given name 的 AD 属性                |
-    | UID Field                 | 对每个用户唯一的 AD 属性。                              |
-    | Groups Field              | 为管理组成员身份创建的条目。                            |
-    | Rancher API Host          | Rancher 服务器的 URL 地址                               |
-    | Private Key / Certificate | 密钥/证书对，用于在 Rancher 和 IdP 之间创建安全 shell。 |
-    | IDP-metadata              | 从你的 IdP 服务器导出的`metadata.xml`文件。             |
+    | 字段             | 描述                                                    |
+    | ---------------- | ------------------------------------------------------- |
+    | 显示名称         | 包含用户 display name 的 AD 属性。                      |
+    | 用户名           | 包含用户 user name/given name 的 AD 属性                |
+    | UID              | 对每个用户唯一的 AD 属性。                              |
+    | 组               | 为管理组成员身份创建的条目。                            |
+    | Rancher API 地址 | Rancher 服务器的 URL 地址                               |
+    | 私钥 / 证书      | 密钥/证书对，用于在 Rancher 和 IdP 之间创建安全 shell。 |
+    | 元数据 XML       | 从你的 IdP 服务器导出的`metadata.xml`文件。             |
 
     > **提示：** 您可以使用 openssl 命令生成密钥/证书对。例如:
     >
