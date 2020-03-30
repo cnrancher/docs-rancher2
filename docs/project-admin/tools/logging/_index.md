@@ -2,111 +2,111 @@
 title: 日志
 ---
 
-Rancher can integrate with a variety of popular logging services and tools that exist outside of your Kubernetes clusters.
+## 概述
 
-For background information about how logging integrations work, refer to the [cluster administration section.](/docs/cluster-admin/tools/logging/#how-logging-integrations-work)
+Rancher 可以跟 Kubernetes 集群外部的多种主流日志服务或日志工具集成。
 
-Rancher supports the following services:
+如果您需要了解 Rancher 与日志服务或工具集成的工作原理，请参考[集群管理员章节](/docs/cluster-admin/tools/logging/_index#how-logging-integrations-work)相关文档。
 
-* Elasticsearch
-* Splunk
-* Kafka
-* Syslog
-* Fluentd
+Rancher 支持与下列日志服务集成：
 
-> **Note:** You can only configure one logging service per cluster or per project.
+- Elasticsearch
+- Splunk
+- Kafka
+- Syslog
+- Fluent
 
-Only [administrators](/docs/admin-settings/rbac/global-permissions/), [cluster owners or members](/docs/admin-settings/rbac/cluster-project-roles/#cluster-roles), or [project owners](/docs/admin-settings/rbac/cluster-project-roles/#project-roles) can configure Rancher to send Kubernetes logs to a logging service.
+> **说明：**Rancher 以集群或项目为单位配置日志服务，您可以给每个集群或项目配置日志服务。
 
-### Requirements
+只有[管理员](/docs/admin-settings/rbac/global-permissions/_index)、[集群所有者或集群成员](/docs/admin-settings/rbac/cluster-project-roles/_index#cluster-roles)或 [项目所有者](/docs/admin-settings/rbac/cluster-project-roles/_index#project-roles)有权限配置 Rancher 的日志功能。
 
-The Docker daemon on each node in the cluster should be [configured](https://docs.docker.com/config/containers/logging/configure/) with the (default) log-driver: `json-file` . You can check the log-driver by running the following command:
+## 前提条件
 
-``` 
+已经完成了集群中的每一个节点 Docker daemon 与日志驱动`json-file`的[配置](https://docs.docker.com/config/containers/logging/configure/)。您可以运行以下命令，检查每个节点是否已经完成了配置，如果返回结果是`Logging Driver: json-file`的话，则表示已经完成了配置。
+
+```
 $ docker info | grep 'Logging Driver'
 Logging Driver: json-file
 ```
 
-### Advantages
+## 日志功能的优势
 
-Setting up a logging service to collect logs from your cluster/project has several advantages:
+日志服务记录了集群或项目发生的事件，配置日志服务有以下几点优势：
 
-* Logs errors and warnings in your Kubernetes infrastructure to a stream. The stream informs you of events like a container crashing, a pod eviction, or a node dying.
-* Allows you to capture and analyze the state of your cluster and look for trends in your environment using the log stream.
-* Helps you when troubleshooting or debugging.
-* Saves your logs to a safe location outside of your cluster, so that you can still access them even if your cluster encounters issues.
+- 用 stream 数据类型记录 Kubernetes 集群触发的报错信息和告警信息。stream 通知您集群或项目中发生的事件，如容器崩溃、Pod 驱逐或节点死亡。
+- 允许您抓取和备份集群的状态，使用 stream 分析特定环境中集群变化的趋势。
+- 帮助您进行调试和定位问题。
+- 在集群以外的位置保存日志，如果您的集群出现问题，您仍然可以访问集群日志。
 
-### Logging Scope
+## 日志层级
 
-You can configure logging at either cluster level or project level.
+Rancher 支持启用集群层级的日志功能和项目层级的日志功能，而且您可以同时启用两个层级日志功能。
 
-* [Cluster logging](/docs/cluster-admin/tools/logging/) writes logs for every pod in the cluster, i.e.in all the projects. For [RKE clusters](/docs/cluster-provisioning/rke-clusters), it also writes logs for all the Kubernetes system components.
+- [集群日志](/docs/cluster-admin/tools/logging/_index)记录了包括集群中每一个项目，每一个 Pod 的活动。[RKE 集群](/docs/cluster-provisioning/rke-clusters/_index)开启了日志功能后，会记录 Kubernetes 系统组件的活动。
 
-* Project logging writes logs for every pod in that particular project.
+- 项目日志记录了该项目内每一个 Pod 的活动。
 
-Logs that are sent to your logging service are from the following locations:
+发送到日志服务的日志主要有两种：
 
-* Pod logs stored at `/var/log/containers` .
+- 存储在`/var/log/containers`的 Pod 日志
 
-* Kubernetes system components logs stored at `/var/lib/rancher/rke/logs/` .
+- 存储在`/var/lib/rancher/rke/logs/`的 Kubernetes 组件日志。
 
-### Enabling Project Logging
+## 开启项目日志功能
 
-1. From the **Global** view, navigate to the project that you want to configure project logging.
+1. 从**全局**页面导航到需要开启日志功能的项目。
 
-1. Select **Tools > Logging** in the navigation bar. In versions prior to v2.2.0, you can choose **Resources > Logging**.
+1. 在导航栏单击**工具 > 日志**，进入日志配置页面。如果您使用的是 Rancher v2.2.0 以前的版本，您需要在航栏单击**资源 > 日志**，进入日志配置页面。
+1. 选择一个日志服务，输入配置参数。每个日志服务需要输入的参数都不一样，请参考每个日志服务的操作文档输入参数。Rancher 支持的日志服务有以下几种：
 
-1. Select a logging service and enter the configuration. Refer to the specific service for detailed configuration. Rancher supports the following services:
+   - [Elasticsearch](/docs/cluster-admin/tools/logging/elasticsearch/_index)
+   - [Splunk](/docs/cluster-admin/tools/logging/splunk/_index)
+   - [Kafka](/docs/cluster-admin/tools/logging/kafka/_index)
+   - [Syslog](/docs/cluster-admin/tools/logging/syslog/_index)
+   - [Fluentd](/docs/cluster-admin/tools/logging/fluentd/_index)
 
-   - [Elasticsearch](/docs/cluster-admin/tools/logging/elasticsearch/)
-   - [Splunk](/docs/cluster-admin/tools/logging/splunk/)
-   - [Kafka](/docs/cluster-admin/tools/logging/kafka/)
-   - [Syslog](/docs/cluster-admin/tools/logging/syslog/)
-   - [Fluentd](/docs/cluster-admin/tools/logging/fluentd/)
+1. （可选）您可以使用 Rancher UI 配置日志服务的常规参数，也可以在选定日志服务后，单击**编辑文件**，输入自定义高级配置。
 
-1. (Optional) Instead of using the UI to configure the logging services, you can enter custom advanced configurations by clicking on **Edit as File**, which is located above the logging targets. This link is only visible after you select a logging service.
+   - 单击**编辑文件**，跳转到一个带有文本编辑器的新页面，您可以使用编辑器输入 raw fluentd 参数，配置日志服务。Elasticresearch、Splunk、Kafka、Syslog 和 Fluentd 的参数配置详情请参考以下链接：
 
-   - With the file editor, enter raw fluentd configuration for any logging service. Refer to the documentation for each logging service on how to setup the output configuration.
+     - [Elasticsearch 官方文档](https://github.com/uken/fluent-plugin-elasticsearch)
+     - [Splunk 官方文档](https://github.com/fluent/fluent-plugin-splunk)
+     - [Kafka 官方文档](https://github.com/fluent/fluent-plugin-kafka)
+     - [Syslog 官方文档](https://github.com/dlackty/fluent-plugin-remote_syslog)
+     - [Fluentd 官方文档](https://docs.fluentd.org/v1.0/articles/out_forward)
 
-     - [Elasticsearch Documentation](https://github.com/uken/fluent-plugin-elasticsearch)
-     - [Splunk Documentation](https://github.com/fluent/fluent-plugin-splunk)
-     - [Kafka Documentation](https://github.com/fluent/fluent-plugin-kafka)
-     - [Syslog Documentation](https://github.com/dlackty/fluent-plugin-remote_syslog)
-     - [Fluentd Documentation](https://docs.fluentd.org/v1.0/articles/out_forward)
+   - 如果您选择的日志服务使用了 TLS 证书，您需要完成 **SSL 配置**表格。
 
-   - If the logging service is using TLS, you also need to complete the **SSL Configuration** form.
+     1. 提供**客户端私钥**和**客户端证书**。您可以复制粘贴，或单击**从文件中读取**，以文件的形式上传秘钥和证书。
 
-     1. Provide the **Client Private Key** and **Client Certificate**. You can either copy and paste them or upload them by using the **Read from a file** button.
+        - 您可以使用自签名证书或由证书签发机构提供的证书。
 
-        - You can use either a self-signed certificate or one provided by a certificate authority.
+        - 您可使用以下命令生产自签名证书：
 
-        - You can generate a self-signed certificate using an openssl command. For example:
+        ```
+         openssl req -x509 -newkey rsa:2048 -keyout myservice.key -out myservice.cert -days 365 -nodes -subj "/CN=myservice.example.com"
+        ```
 
-          
+     2. 如果您使用的是自签名证书，请提供 **CA Certificate PEM**。
 
-``` 
-          openssl req -x509 -newkey rsa:2048 -keyout myservice.key -out myservice.cert -days 365 -nodes -subj "/CN=myservice.example.com"
-          ```
+1. （可选）填写**其他日志配置** 表格。
 
-     2. If you are using a self-signed certificate, provide the **CA Certificate PEM**.
+   1. **可选：**单击 **添加字段** ，添加自定义日志字段。这些字段是过滤日志的键值对，例如`foo=bar`。
 
-1. (Optional) Complete the **Additional Logging Configuration** form.
+   1. 输入**刷新时间间隔**。这个值决定了[Fluentd](https://www.fluentd.org/)向日志服务器推送数据的频率，时间间隔的单位是秒。
 
-   1.**Optional:** Use the **Add Field** button to add custom log fields to your logging configuration. These fields are key value pairs (such as `foo=bar` ) that you can use to filter the logs from another system.
+   1. **包含系统日志**，系统项目的 Pod 和 RKE 组件的日志会被发送到目标端日志服务器，默认勾选。如果不勾选，系统日志就不会发送到日志服务器。
 
-   1. Enter a **Flush Interval**. This value determines how often [Fluentd](https://www.fluentd.org/) flushes data to the logging server. Intervals are measured in seconds.
+   1. **是否支持 JSON 解析**，选择是否支持 JSON 字段解析。
 
-   1.**Include System Log**. The logs from pods in system project and RKE components will be sent to the target. Uncheck it to exclude the system logs.
+1. 单击**Test**。Rancher 把测试日志发送到日志服务。
 
-1. Click **Test**. Rancher sends a test log to the service.
+   > **说明：**如果您使用的自定义配置，该按键名会变成**空运行**，而不是**Test**。单击**空运行**，Rancher 会命令 fluentd 空运行，验证自定义配置是否可以运行。
 
-   > **Note:** This button is replaced with _Dry Run_ if you are using the custom configuration editor. In this case, Rancher calls the fluentd dry run command to validate the configuration.
+1. 单击**保存**。
 
-1. Click **Save**.
+**结果：**完成 Rancher 日志的配置，Rancher 现在可以把日志发送到指定的日志服务中，您可以通过日志服务查看 Rancher 的集群日志或项目日志。
 
-**Result:** Rancher is now configured to send logs to the selected service. Log into the logging service so that you can start viewing the logs.
+## 相关链接
 
-### Related Links
-
-[Logging Architecture](https://kubernetes.io/docs/concepts/cluster-administration/logging/)
-
+[Kubernetes 官方文档-日志架构](https://kubernetes.io/docs/concepts/cluster-administration/logging/)
