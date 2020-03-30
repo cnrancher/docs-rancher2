@@ -2,11 +2,9 @@
 title: 日志
 ---
 
-## 概述
-
 Rancher 可以跟 Kubernetes 集群外部的多种主流日志服务或日志工具集成。
 
-如果您需要了解 Rancher 与日志服务或工具集成的工作原理，请参考[集群管理员章节](/docs/cluster-admin/tools/logging/_index#how-logging-integrations-work)相关文档。
+如果您需要了解 Rancher 与日志服务或工具集成的工作原理，请参考[集群管理员章节](/docs/cluster-admin/tools/logging/_index)相关文档。
 
 Rancher 支持与下列日志服务集成：
 
@@ -18,11 +16,11 @@ Rancher 支持与下列日志服务集成：
 
 > **说明：**Rancher 以集群或项目为单位配置日志服务，您可以给每个集群或项目配置日志服务。
 
-只有[管理员](/docs/admin-settings/rbac/global-permissions/_index)、[集群所有者或集群成员](/docs/admin-settings/rbac/cluster-project-roles/_index#cluster-roles)或 [项目所有者](/docs/admin-settings/rbac/cluster-project-roles/_index#project-roles)有权限配置 Rancher 的日志功能。
+只有[管理员](/docs/admin-settings/rbac/global-permissions/_index)、[集群所有者或集群成员](/docs/admin-settings/rbac/cluster-project-roles/_index)或[项目所有者](/docs/admin-settings/rbac/cluster-project-roles/_index)有权限配置 Rancher 的日志功能。
 
 ## 前提条件
 
-已经完成了集群中的每一个节点 Docker daemon 与日志驱动`json-file`的[配置](https://docs.docker.com/config/containers/logging/configure/)。您可以运行以下命令，检查每个节点是否已经完成了配置，如果返回结果是`Logging Driver: json-file`的话，则表示已经完成了配置。
+集群中的每一个节点的 Docker daemon 都应该使用默认的日志驱动[配置](https://docs.docker.com/config/containers/logging/configure/)：`json-file`。您可以运行以下命令，检查每个节点是否已经完成了配置，如果返回结果是`Logging Driver: json-file`的话，则表示已经完成了配置。
 
 ```
 $ docker info | grep 'Logging Driver'
@@ -33,10 +31,10 @@ Logging Driver: json-file
 
 日志服务记录了集群或项目发生的事件，配置日志服务有以下几点优势：
 
-- 用 stream 数据类型记录 Kubernetes 集群触发的报错信息和告警信息。stream 通知您集群或项目中发生的事件，如容器崩溃、Pod 驱逐或节点死亡。
-- 允许您抓取和备份集群的状态，使用 stream 分析特定环境中集群变化的趋势。
+- 记录 Kubernetes 集群中的错误日志流和告警日志流。日志流可以让您知道集群或项目中发生的事件，如容器崩溃、Pod 驱逐或节点死亡。
+- 允许您获取和分析集群的状态，使用日志流分析特定环境中集群变化的趋势。
 - 帮助您进行调试和定位问题。
-- 在集群以外的位置保存日志，如果您的集群出现问题，您仍然可以访问集群日志。
+- 在集群以外的位置保存日志，如果您的集群出现问题，您仍然可以访问这些日志。
 
 ## 日志层级
 
@@ -67,7 +65,7 @@ Rancher 支持启用集群层级的日志功能和项目层级的日志功能，
 
 1. （可选）您可以使用 Rancher UI 配置日志服务的常规参数，也可以在选定日志服务后，单击**编辑文件**，输入自定义高级配置。
 
-   - 单击**编辑文件**，跳转到一个带有文本编辑器的新页面，您可以使用编辑器输入 raw fluentd 参数，配置日志服务。Elasticresearch、Splunk、Kafka、Syslog 和 Fluentd 的参数配置详情请参考以下链接：
+   - 单击**编辑文件**，跳转到一个带有文本编辑器的新页面，您可以使用编辑器输入原始的 fluentd 配置，配置日志服务。Elasticresearch、Splunk、Kafka、Syslog 和 Fluentd 的参数配置详情请参考以下链接：
 
      - [Elasticsearch 官方文档](https://github.com/uken/fluent-plugin-elasticsearch)
      - [Splunk 官方文档](https://github.com/fluent/fluent-plugin-splunk)
@@ -95,17 +93,15 @@ Rancher 支持启用集群层级的日志功能和项目层级的日志功能，
 
    1. 输入**刷新时间间隔**。这个值决定了[Fluentd](https://www.fluentd.org/)向日志服务器推送数据的频率，时间间隔的单位是秒。
 
-   1. **包含系统日志**，系统项目的 Pod 和 RKE 组件的日志会被发送到目标端日志服务器，默认勾选。如果不勾选，系统日志就不会发送到日志服务器。
-
    1. **是否支持 JSON 解析**，选择是否支持 JSON 字段解析。
 
-1. 单击**Test**。Rancher 把测试日志发送到日志服务。
+1. 单击**测试**。Rancher 把测试日志发送到日志服务。
 
-   > **说明：**如果您使用的自定义配置，该按键名会变成**空运行**，而不是**Test**。单击**空运行**，Rancher 会命令 fluentd 空运行，验证自定义配置是否可以运行。
+   > **说明：**如果您使用的自定义配置，该按键名会变成**试运行**，而不是**测试**。单击**试运行**，Rancher 会命令 fluentd 试运行配置，验证自定义配置是否正确。
 
 1. 单击**保存**。
 
-**结果：**完成 Rancher 日志的配置，Rancher 现在可以把日志发送到指定的日志服务中，您可以通过日志服务查看 Rancher 的集群日志或项目日志。
+**结果：**完成 Rancher 日志的配置，Rancher 现在可以把日志发送到指定的日志服务中，您可以通过日志服务查看 Rancher 的日志。
 
 ## 相关链接
 
