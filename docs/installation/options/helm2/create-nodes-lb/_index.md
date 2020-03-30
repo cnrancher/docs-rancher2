@@ -21,7 +21,7 @@ Ingress controller pods 被绑定到主机网络的 TCP/80 和 TCP/443 端口上
 将负载均衡器配置为基本的 4 层 TCP 转发器。确切的配置将取决于您的环境。
 
 > **重要:**
-> 安装后，请勿使用此负载平衡器（即`local`集群 Ingress）对 Rancher 以外的应用程序进行负载平衡。与其他应用程序共享此 Ingress 可能会在其他应用的 Ingress 配置重新加载后导致 Rancher 出现 websocket 错误。我们建议将`local`集群专用于 Rancher，而不应使用其他任何应用程序。
+> 安装后，请勿使用此负载均衡器（即`local`集群 Ingress）对 Rancher 以外的应用程序进行负载平衡。与其他应用程序共享此 Ingress 可能会在其他应用的 Ingress 配置重新加载后导致 Rancher 出现 websocket 错误。我们建议将`local`集群专用于 Rancher，而不应使用其他任何应用程序。
 
 ## 例子
 
