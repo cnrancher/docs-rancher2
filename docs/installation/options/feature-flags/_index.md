@@ -1,148 +1,146 @@
 ---
-title: 介绍
+title: 启用实验功能
 ---
 
-_Available as of v2.3.0_
+_自 v2.3.0 起可用_
 
-Rancher includes some features that are experimental and disabled by default. You might want to enable these features, for example, if you decide that the benefits of using an [unsupported storage type](/docs/installation/options/feature-flags/enable-not-default-storage-drivers) outweighs the risk of using an untested feature. Feature flags were introduced to allow you to try these features that are not enabled by default.
+Rancher 包含一些实验性质的功能，默认是被禁用的。你可能想要启用这些功能。例如，如果您决定使用的[Rancher 技术支持团队不支持的存储类型](/docs/installation/options/feature-flags/enable-not-default-storage-drivers/_index)所带来的好处大于风险，则可能需要启用这些未被测试过的功能。功能开关，使您可以尝试使用默认情况下未启用的功能。
 
-The features can be enabled in three ways:
+可以通过三种方式启用这些功能：
 
-* [Enable features when starting Rancher.](#enabling-features-when-starting-rancher) When installing Rancher with a CLI, you can use a feature flag to enable a feature by default.
-* [Enable features from the Rancher UI](#enabling-features-with-the-rancher-ui) in Rancher v2.3.3+ by going to the **Settings** page.
-* [Enable features with the Rancher API](#enabling-features-with-the-rancher-api) after installing Rancher.
+- [启动 Rancher 时启用功能](#启动-rancher-时启用功能) 使用 CLI 安装 Rancher 时，可以使用功能开关默认启用这些功能。
+- [在 Rancher UI 中启用功能](#通过-rancher-ui-启用功能) 在 Rancher v2.3.3+进入**设置**页面。
+- [通过 Rancher API 启用功能](#通过-rancher-api-启用功能) 安装 Rancher 之后。
 
-Each feature has two values:
+每个功能有两个值：
 
-* A default value, which can be configured with a flag or environment variable from the command line
-* A set value, which can be configured with the Rancher API or UI
+- 默认值，可以通过命令行配置一个标志或环境变量
+- 设置值，可以通过 Rancher API 或 UI 配置
 
-If no value has been set, Rancher uses the default value.
+如果未设置任何值，则 Rancher 使用默认值
 
-Because the API sets the actual value and the command line sets the default value, that means that if you enable or disable a feature with the API or UI, it will override any value set with the command line.
+因为 API 设置了实际值，而命令行设置了默认值，所以这意味着，如果您使用 API 或 UI 启用或禁用功能，它将覆盖命令行设置的值。
 
-For example, if you install Rancher, then set a feature flag to true with the Rancher API, then upgrade Rancher with a command that sets the feature flag to false, the default value will still be false, but the feature will still be enabled because it was set with the Rancher API. If you then deleted the set value (true) with the Rancher API, setting it to NULL, the default value (false) would take effect.
+例如，如果您安装 Rancher，然后使用 Rancher API 将功能开关设置为 true，然后通过命令行将功能开关设置为 false 来升级 Rancher，默认值仍然是 false，但是这个功能还是被启用的，因为它是通过 Rancher API 设置的。如果随后使用 Rancher API 删除了设置值（true），并将其设置为 NULL，则默认值（false）将生效。
 
-The following is a list of the feature flags available in Rancher:
+以下是 Rancher 中可用的功能开关的列表：
 
-* `unsupported-storage-drivers` : This feature [allows unsupported storage drivers.](/docs/installation/options/feature-flags/enable-not-default-storage-drivers) In other words, it enables types for storage providers and provisioners that are not enabled by default.
-* `istio-virtual-service-ui` : This feature enables a [UI to create, read, update, and delete Istio virtual services and destination rules](/docs/installation/options/feature-flags/istio-virtual-service-ui), which are traffic management features of Istio.
+- `unsupported-storage-drivers`: 启用[允许不受支持的存储驱动程序](/docs/installation/options/feature-flags/enable-not-default-storage-drivers/_index)。换句话说，它启用了默认情况下未启用的 storage providers 和 provisioners 的类型。
+- `istio-virtual-service-ui`: 启用 Istio 的流量管理功能：[通过 UI 创建，读取，更新和删除 Istio 虚拟服务和目标规则](/docs/installation/options/feature-flags/istio-virtual-service-ui/_index)。
 
-The below table shows the availability and default value for feature flags in Rancher:
+下表显示了在 Rancher 中功能开关的可用版本和默认值：
 
-| Feature Flag Name             | Default Value | Status       | Available as of |
-| ----------------------------- | ------------- | ------------ | --------------- |
-| `unsupported-storage-drivers` | `false` | Experimental | v2.3.0          |
-| `istio-virtual-service-ui` | `false` | Experimental | v2.3.0          |
-| `istio-virtual-service-ui` | `true` | GA           | v2.3.2          |
+| 功能开关名                    | 默认值  | 状态   | 可用版本 |
+| ----------------------------- | ------- | ------ | -------- |
+| `unsupported-storage-drivers` | `false` | 实验性 | v2.3.0   |
+| `istio-virtual-service-ui`    | `false` | 实验性 | v2.3.0   |
+| `istio-virtual-service-ui`    | `true`  | GA     | v2.3.2   |
 
-## Enabling Features when Starting Rancher
+## 启动 Rancher 时启用功能
 
-When you install Rancher, enable the feature you want with a feature flag. The command is different depending on whether you are installing Rancher on a single node or if you are doing a Kubernetes Installation of Rancher.
+安装 Rancher 时，请使用功能开关启用所需的功能。该命令会有所不同，具体取决于您是高可用安装还是单节点安装。
 
-> **Note:** Values set from the Rancher API will override the value passed in through the command line.
+> **注意：** 通过 Rancher API 设置的值将覆盖通过命令行传递的值。
 
- tabs 
- tab "Kubernetes Install" 
-When installing Rancher with a Helm chart, use the `--features` option. In the below example, two features are enabled by passing the feature flag names names in a comma separated list:
+### 高可用安装
 
-``` 
+当通过 Helm chart 安装 Rancher 时，请使用`--features`选项。在下面的示例中，通过传递功能开关名称（用逗号分隔）来启用两个功能：
+
+```
 helm install rancher-latest/rancher \
   --name rancher \
   --namespace cattle-system \
   --set hostname=rancher.my.org \
-  --set 'extraEnv[0].name=CATTLE_FEATURES' # Available as of v2.3.0
-  --set 'extraEnv[0].value=<FEATURE-FLAG-NAME-1>=true,<FEATURE-FLAG-NAME-2>=true' # Available as of v2.3.0
+  --set 'extraEnv[0].name=CATTLE_FEATURES' # 自 v2.3.0 起可用
+  --set 'extraEnv[0].value=<FEATURE-FLAG-NAME-1>=true,<FEATURE-FLAG-NAME-2>=true' # 自 v2.3.0 起可用
 ```
 
-#### Rendering the Helm Chart for Air Gap Installations
+#### 在离线安装时渲染 Helm Chart
 
-For an air gap installation of Rancher, you need to add a Helm chart repository and render a Helm template before installing Rancher with Helm. For details, refer to the [air gap installation documentation.](/docs/installation/other-installation-methods/air-gap/install-rancher)
+对于离线安装 Rancher，通过 Helm 安装 Rancher 之前，需要添加一个 Helm chart 仓库，渲染一个 Helm 模板。有关详细信息，请参阅[离线安装文档。](/docs/installation/other-installation-methods/air-gap/install-rancher/_index)
 
-Here is an example of a command for passing in the feature flag names when rendering the Helm template. In the below example, two features are enabled by passing the feature flag names in a comma separated list.
+一个命令例子，在渲染 Helm 模板时传递功能开关名称。在下面的示例中，通过传递功能开关名称（用逗号分隔）来启用两个功能。
 
-The Helm 3 command is as follows:
+Helm 3 命令如下：
 
-``` 
+```
 helm template rancher ./rancher-<VERSION>.tgz --output-dir . \
   --namespace cattle-system \
   --set hostname=<RANCHER.YOURDOMAIN.COM> \
   --set rancherImage=<REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher \
   --set ingress.tls.source=secret \
-  --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # Available as of v2.2.0, set a default private registry to be used in Rancher
-  --set useBundledSystemChart=true # Available as of v2.3.0, use the packaged Rancher system charts
-  --set 'extraEnv[0].name=CATTLE_FEATURES' # Available as of v2.3.0
-  --set 'extraEnv[0].value=<FEATURE-FLAG-NAME-1>=true,<FEATURE-FLAG-NAME-2>=true' # Available as of v2.3.0
+  --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # 自 v2.2.0 起可用，配置 Rancher 使用默认的镜像仓库
+  --set useBundledSystemChart=true # 自 v2.3.0 起可用，使用Rancher内嵌的system charts
+  --set 'extraEnv[0].name=CATTLE_FEATURES' # 自 v2.3.0 起可用
+  --set 'extraEnv[0].value=<FEATURE-FLAG-NAME-1>=true,<FEATURE-FLAG-NAME-2>=true' # 自 v2.3.0 起可用
 ```
 
-The Helm 2 command is as follows:
+Helm 2 命令如下：
 
-``` 
+```
 helm template ./rancher-<VERSION>.tgz --output-dir . \
   --name rancher \
   --namespace cattle-system \
   --set hostname=<RANCHER.YOURDOMAIN.COM> \
   --set rancherImage=<REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher \
   --set ingress.tls.source=secret \
-  --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # Available as of v2.2.0, set a default private registry to be used in Rancher
-  --set useBundledSystemChart=true # Available as of v2.3.0, use the packaged Rancher system charts
-  --set 'extraEnv[0].name=CATTLE_FEATURES' # Available as of v2.3.0
-  --set 'extraEnv[0].value=<FEATURE-FLAG-NAME-1>=true,<FEATURE-FLAG-NAME-2>=true' # Available as of v2.3.0
+  --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # 自 v2.2.0 起可用，配置 Rancher 使用默认的镜像仓库
+  --set useBundledSystemChart=true # 自 v2.3.0 起可用，使用Rancher内嵌的system charts
+  --set 'extraEnv[0].name=CATTLE_FEATURES' # 自 v2.3.0 起可用
+  --set 'extraEnv[0].value=<FEATURE-FLAG-NAME-1>=true,<FEATURE-FLAG-NAME-2>=true' # 自 v2.3.0 起可用
 ```
 
- /tab 
- tab "Docker Install" 
-When installing Rancher with Docker, use the `--features` option. In the below example, two features are enabled by passing the feature flag names in a comma separated list:
+### 单节点安装
 
-``` 
+通过 Docker 安装 Rancher 时，请使用`--features`选项。在下面的示例中，通过传递功能开关名称（逗号分隔）来启用两个功能：
+
+```
 docker run -d -p 80:80 -p 443:443 \
   --restart=unless-stopped \
   rancher/rancher:rancher-latest \
-  --features=<FEATURE-FLAG-NAME-1>=true,<FEATURE-NAME-2>=true # Available as of v2.3.0
+  --features=<FEATURE-FLAG-NAME-1>=true,<FEATURE-NAME-2>=true # 自 v2.3.0 起可用
 ```
 
- /tab 
- /tabs 
+## 通过 Rancher UI 启用功能
 
-## Enabling Features with the Rancher UI
+_自 v2.3.3 起可用_
 
-_Available as of Rancher v2.3.3_
+1. 转到**全局**视图，然后点击**系统设置**
+1. 点击**功能选项**选项卡。你将看到一个实验功能列表。
+1. 要启用功能，请转到要启用的禁用功能，然后单击 **省略号 (...) > 启用**。
 
-1. Go to the **Global** view and click **Settings.**
-1. Click the **Feature Flags** tab. You will see a list of experimental features.
-1. To enable a feature, go to the disabled feature you want to enable and click **Ellipsis (...) > Activate.**
+**结果：** 该功能已启用。
 
-**Result:** The feature is enabled.
+## 通过 Rancher UI 禁用功能
 
-#### Disabling Features with the Rancher UI
+_自 v2.3.3 起可用_
 
-1. Go to the **Global** view and click **Settings.**
-1. Click the **Feature Flags** tab. You will see a list of experimental features.
-1. To disable a feature, go to the enabled feature you want to disable and click **Ellipsis (...) > Deactivate.**
+1. 转到**全局**视图，然后点击**系统设置**
+1. 点击**功能选项**选项卡。你将看到一个实验功能列表。
+1. 要启用功能，请转到要启用的禁用功能，然后单击 **省略号 (...) > 停用**。
 
-**Result:** The feature is disabled.
+**结果：** 该功能被禁用。
 
-## Enabling Features with the Rancher API
+## 通过 Rancher API 启用功能
 
-1. Go to `<RANCHER-SERVER-URL>/v3/features` .
-1. In the `data` section, you will see an array containing all of the features that can be turned on with feature flags. The name of the feature is in the `id` field. Click the name of the feature you want to enable.
-1. In the upper left corner of the screen, under **Operations,** click **Edit.**
-1. In the **Value** drop-down menu, click **True.**
-1. Click **Show Request.**
-1. Click **Send Request.**
-1. Click **Close.**
+1. 转到 `<RANCHER-SERVER-URL>/v3/features`.
+1. 在`data`部分，你将会看到一个包含所有可以使用功能开关启用功能的功能数组。功能名称在`id`字段中。单击要启用的功能的名称。
+1. 在屏幕左上角，**Operations**下面，单击**Edit**.
+1. 在 **Value** 下拉菜单, 单击 **True**。
+1. 单击 **Show Request**。
+1. 单击 **Send Request**。
+1. 单击 **Close**。
 
-**Result:** The feature is enabled.
+**结果：** 该功能已启用。
 
-#### Disabling Features with the Rancher API
+## 通过 Rancher API 禁用功能
 
-1. Go to `<RANCHER-SERVER-URL>/v3/features` .
-1. In the `data` section, you will see an array containing all of the features that can be turned on with feature flags. The name of the feature is in the `id` field. Click the name of the feature you want to enable.
-1. In the upper left corner of the screen, under **Operations,** click **Edit.**
-1. In the **Value** drop-down menu, click **False.**
-1. Click **Show Request.**
-1. Click **Send Request.**
-1. Click **Close.**
+1. 转到 `<RANCHER-SERVER-URL>/v3/features`。
+1. 在 `data` 部分, 你将会看到一个包含所有可以使用功能开关启用功能的功能数组。功能名称在`id`字段中。单击要启用的功能的名称。
+1. 在屏幕左上角， **Operations** 下面， 单击**Edit**。
+1. 在 **Value** 下拉菜单, 单击 **False**。
+1. 单击 **Show Request**。
+1. 单击 **Send Request**。
+1. 单击 **Close**。
 
-**Result:** The feature is disabled.
-
+**结果：** 该功能被禁用。

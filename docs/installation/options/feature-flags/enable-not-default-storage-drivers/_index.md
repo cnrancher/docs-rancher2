@@ -2,43 +2,42 @@
 title: 允许使用非默认支持的存储驱动
 ---
 
-_Available as of v2.3.0_
+_自 v2.3.0 起可用_
 
-This feature allows you to use types for storage providers and provisioners that are not enabled by default.
+此功能允许你使用默认没有被启用的存储提供商的存储类和存储卷类型。
 
-To enable or disable this feature, refer to the instructions on [the main page about enabling experimental features.](/docs/installation/options/feature-flags/)
+要启用或禁用此功能，请参阅[关于启用实验性功能的主页](/docs/installation/options/feature-flags/_index)。
 
-| Environment Variable Key      | Default Value | Description                                                                                        |
-| ----------------------------- | ------------- | -------------------------------------------------------------------------------------------------- |
-| `unsupported-storage-drivers` | `false` | This feature enables types for storage providers and provisioners that are not enabled by default.|
+| 环境变量 Key                  | 默认值  | 描述                                                         |
+| ----------------------------- | ------- | ------------------------------------------------------------ |
+| `unsupported-storage-drivers` | `false` | 此功能启用了默认没有被启用的存储提供商的存储类和存储卷类型。 |
 
-#### Types for Persistent Volume Plugins that are Enabled by Default
+## 默认情况下启用的持久卷插件的类型
 
-Below is a list of storage types for persistent volume plugins that are enabled by default. When enabling this feature flag, any persistent volume plugins that are not on this list are considered experimental and unsupported:
+以下是默认情况下启用的持久卷插件的存储类型的列表。启用此功能开关时，未在此列表中的所有持久卷插件都被视为实验性的，在 UI 中不显示：
 
-| Name                   | Plugin                 |
+| 名称                   | 插件                   |
 | ---------------------- | ---------------------- |
-| Amazon EBS Disk        | `aws-ebs` |
-| AzureFile              | `azure-file` |
-| AzureDisk              | `azure-disk` |
-| Google Persistent Disk | `gce-pd` |
+| Amazon EBS Disk        | `aws-ebs`              |
+| AzureFile              | `azure-file`           |
+| AzureDisk              | `azure-disk`           |
+| Google Persistent Disk | `gce-pd`               |
 | Longhorn               | `flex-volume-longhorn` |
-| VMware vSphere Volume  | `vsphere-volume` |
-| Local                  | `local` |
-| Network File System    | `nfs` |
-| hostPath               | `host-path` |
+| VMware vSphere Volume  | `vsphere-volume`       |
+| Local                  | `local`                |
+| Network File System    | `nfs`                  |
+| hostPath               | `host-path`            |
 
-#### Types for StorageClass that are Enabled by Default
+## 默认情况下启用的 StorageClass 的类型
 
-Below is a list of storage types for a StorageClass that are enabled by default. When enabling this feature flag, any persistent volume plugins that are not on this list are considered experimental and unsupported:
+以下是默认情况下启用的 StorageClass 的存储类型的列表。启用此功能开关时，未在此列表中的所有 StorageClass 都被视为实验性的，在 UI 中不显示：
 
-| Name                   | Plugin                 |
+| 名称                   | 插件                   |
 | ---------------------- | ---------------------- |
-| Amazon EBS Disk        | `aws-ebs` |
-| AzureFile              | `azure-file` |
-| AzureDisk              | `azure-disk` |
-| Google Persistent Disk | `gce-pd` |
+| Amazon EBS Disk        | `aws-ebs`              |
+| AzureFile              | `azure-file`           |
+| AzureDisk              | `azure-disk`           |
+| Google Persistent Disk | `gce-pd`               |
 | Longhorn               | `flex-volume-longhorn` |
-| VMware vSphere Volume  | `vsphere-volume` |
-| Local                  | `local` |
-
+| VMware vSphere Volume  | `vsphere-volume`       |
+| Local                  | `local`                |

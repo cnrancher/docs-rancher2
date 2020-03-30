@@ -2,98 +2,89 @@
 title: 如何选择 Rancher 版本
 ---
 
-This section describes how to choose a Rancher version.
+这节描述如何选择 Rancher 版本
 
-For a high-availability installation of Rancher, which is recommended for production, the Rancher server is installed using a **Helm chart** on a Kubernetes cluster. Refer to the [Helm version requirements](/docs/installation/options/helm-version) to choose a version of Helm to install Rancher.
+我们建议在生产环境中使用 Rancher 高可用安装，使用 **Helm Chart** 将 Rancher 安装在 Kubernetes 集群上。请参阅[Helm 版本要求](/docs/installation/options/helm-version/_index)以选择安装 Rancher 的 Helm 版本。
 
-For Docker installations of Rancher, which is used for development and testing, you will install Rancher as a **Docker image.**
+对于使用 Docker 安装的单节点 Rancher，一般用于开发和测试，Rancher 将以 **Docker 镜像**的形式安装。
 
- tabs 
- tab "Helm Charts" 
+## Helm Charts
 
-When installing, upgrading, or rolling back Rancher Server when it is [installed on a Kubernetes cluster](/docs/installation/k8s-install/), Rancher server is installed using a Helm chart on a Kubernetes cluster. Therefore, as you prepare to install or upgrade a high availability Rancher configuration, you must add a Helm chart repository that contains the charts for installing Rancher.
+在安装，升级或回滚[Rancher 高可用](/docs/installation/k8s-install/_index)时，您将使用 **Helm Chart** 在 Kubernetes 集群上对 Rancher 进行操作。因此，在准备安装或升级 Rancher 高可用时，必须添加包含用于安装 Rancher 的 Helm Chart 的 Helm Chart 仓库。
 
-Refer to the [Helm version requirements](/docs/installation/options/helm-version) to choose a version of Helm to install Rancher.
+请参阅[Helm 版本要求](/docs/installation/options/helm-version/_index)以选择用来安装 Rancher 的 Helm 版本。
 
-#### Helm Chart Repositories
+### Helm Chart 仓库
 
-Rancher provides several different Helm chart repositories to choose from. We align our latest and stable Helm chart repositories with the Docker tags that are used for a Docker installation. Therefore, the `rancher-latest` repository will contain charts for all the Rancher versions that have been tagged as `rancher/rancher:latest` . When a Rancher version has been promoted to the `rancher/rancher:stable` , it will get added to the `rancher-stable` repository.
+Rancher 提供了几种不同的 Helm Chart 仓库供您选择。最新版或稳定版的 Rancher Helm Chart 与用于 Docker 安装的 Rancher 的 Docker 镜像标签对应。因此，`rancher-latest`仓库将包含所以被标记过为`rancher/rancher:latest`的版本。当 Rancher 版本升级到`rancher/rancher:stable`后，它将被添加到`rancher-stable`仓库中。
 
-| Type           | Command to Add the Repo                                                          | Description of the Repo                                                                                                                                                                                                                                                                    |
-| -------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| rancher-latest | `helm repo add rancher-latest https://releases.rancher.com/server-charts/latest` | Adds a repository of Helm charts for the latest versions of Rancher. We recommend using this repo for testing out new Rancher builds.|
-| rancher-stable | `helm repo add rancher-stable https://releases.rancher.com/server-charts/stable` | Adds a repository of Helm charts for older, stable versions of Rancher. We recommend using this repo for production environments.|
-| rancher-alpha  | `helm repo add rancher-alpha https://releases.rancher.com/server-charts/alpha` | Adds a repository of Helm charts for alpha versions of Rancher for previewing upcoming releases. These releases are discouraged in production environments. Upgrades _to_ or _from_ charts in the rancher-alpha repository to any other chart, regardless or repository, aren't supported.|
+| 类别           | 添加仓库命令                                                                     | 仓库描述                                                                                                                                                                                 |
+| -------------- | -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| rancher-latest | `helm repo add rancher-latest https://releases.rancher.com/server-charts/latest` | 添加最新版本的 Rancher 的 Helm Chart 仓库。我们建议使用此仓库来测试新版本的 Rancher。                                                                                                    |
+| rancher-stable | `helm repo add rancher-stable https://releases.rancher.com/server-charts/stable` | 添加较旧的，稳定的版本的 Rancher 的 Helm Chart 仓库。我们建议将此仓库用于生产环境。                                                                                                      |
+| rancher-alpha  | `helm repo add rancher-alpha https://releases.rancher.com/server-charts/alpha`   | 添加 alpha 版本的 Rancher 的 Helm Chart 仓库，以预览即将发布的版本。在生产环境中不建议使用这些版本。我们不支持从 rancher alpha 仓库中的 chart 升级到任何其他版本 chart，无论是哪个仓库。 |
 
-<br/>
-Instructions on when to select these repos are available below in [Switching to a Different Helm Chart Repository](#switching-to-a-different-helm-chart-repository).
+有关何时选择这些仓库，请参考[切换到不同 Helm Chart 仓库](#切换到不同-helm-chart-仓库).
 
-> **Note:** The introduction of the `rancher-latest` and `rancher-stable` Helm Chart repositories was introduced after Rancher v2.1.0, so the `rancher-stable` repository contains some Rancher versions that were never marked as `rancher/rancher:stable` . The versions of Rancher that were tagged as `rancher/rancher:stable` prior to v2.1.0 are v2.0.4, v2.0.6, v2.0.8. Post v2.1.0, all charts in the `rancher-stable` repository will correspond with any Rancher version tagged as `stable` .
+> **注意：** `rancher-latest` 和 `rancher-stable` Helm Chart 仓库是在 Rancher v2.1.0 后引入的，因此`rancher-stable`仓库包含一些从来没有被标记为`rancher/rancher:stable`标签的 Rancher 版本。在 v2.1.0 之前标记为`rancher/rancher:stable`的 Rancher 版本是 v2.0.4，v2.0.6，v2.0.8。在 v2.1.0 版本之后，`rancher-stable`仓库中的所有 charts 将与标记为`stable`的 Rancher 版本对应。
 
-#### Helm Chart Versions
+### Helm Chart 版本
 
-Rancher Helm chart versions match the Rancher version (i.e `appVersion` ).
+Rancher Helm Chart 版本必须匹配 Ranche 版本（即`appVersion`）。
 
-For the Rancher v2.1.x versions, there were some Helm charts, that were using a version that was a build number, i.e. `yyyy.mm.<build-number>` . These charts have been replaced with the equivalent Rancher version and are no longer available.
+对于 Rancher v2.1.x 版本，存在一些 Helm Charts，这些 Helm Charts 使用的版本号是构建版本号，即`yyyy.mm.<build-number>`。这些 charts 已经被等效的 Rancher 版本替换，并且不在可用。
 
-#### Switching to a Different Helm Chart Repository
+### 切换到不同 Helm Chart 仓库
 
-After installing Rancher, if you want to change which Helm chart repository to install Rancher from, you will need to follow these steps.
+安装 Rancher 之后，如果想要修改安装 Rancher 的 Helm Chart 仓库，需要执行以下步骤。
 
-> **Note:** Because the rancher-alpha repository contains only alpha charts, switching between the rancher-alpha repository and the rancher-stable or rancher-latest repository for upgrades is not supported.
+> **注意：** 由于 rancher-alpha 仓库只包含 alpha 版本 charts，因此不支持在 rancher alpha 仓库和 rancher stable 或 rancher latest 仓库之间切换以进行升级。
 
-{{< release-channel >}}
+请替换命令中的`<CHART_REPO>`，替换为`latest`，`stable`或`alpha`。
 
-1. List the current Helm chart repositories.
+- `latest`: 推荐在尝试新功能时使用。
+- `stable`: 推荐生产环境中使用。（推荐）
+- `alpha`: 未来版本的实验性预览。
 
-   
+1. 列出当前 Helm Chart 仓库。
 
-``` plain
+   ```plain
    helm repo list
 
-   NAME          	      URL
-   stable        	      https://kubernetes-charts.storage.googleapis.com
-   rancher-<CHART_REPO>		https://releases.rancher.com/server-charts/<CHART_REPO>
+   NAME          	        URL
+   stable        	        https://kubernetes-charts.storage.googleapis.com
+   rancher-<CHART_REPO>	https://releases.rancher.com/server-charts/<CHART_REPO>
    ```
 
-2. Remove the existing Helm Chart repository that contains your charts to install Rancher, which will either be `rancher-stable` or `rancher-latest` depending on what you had initially added.
+2. 移除你安装 Rancher 时用的 Helm Chart 仓库，是`rancher-stable` 还是 `rancher-latest`仓库取决于你初始安装时选择的是哪个库。
 
-   
-
-``` plain
+   ```plain
    helm repo remove rancher-<CHART_REPO>
    ```
 
-3. Add the Helm chart repository that you want to start installing Rancher from.
+3. 添加安装 Rancher 所需要的 Helm Chart 仓库。
 
-   
-
-``` plain
+   ```plain
    helm repo add rancher-<CHART_REPO> https://releases.rancher.com/server-charts/<CHART_REPO>
    ```
 
-4. Continue to follow the steps to [upgrade Rancher](/docs/upgrades/upgrades/ha-server-upgrade-helm/) from the new Helm chart repository.
+4. 继续按照这个步骤从新的 Helm Chart 仓库[升级 Rancher](/docs/upgrades/upgrades/ha/_index)。
 
-    /tab 
-    tab "Docker Images" 
+## Docker 镜像
 
-   When performing [Docker installs](/docs/installation/single-node), upgrades, or rollbacks, you can use _tags_ to install a specific version of Rancher.
+在执行[Docker 单节点安装](/docs/installation/single-node/_index)时，升级或回滚时，你可以使用*标签*去安装特定版本的 Rancher。
 
-#### Server Tags
+### Server 标签
 
-Rancher Server is distributed as a Docker image, which have tags attached to them. You can specify this tag when entering the command to deploy Rancher. Remember that if you use a tag without an explicit version (like `latest` or `stable` ), you must explicitly pull a new version of that image tag. Otherwise, any image cached on the host will be used.
+Rancher Server 作为 Docker 镜像分发，其中附加了标签。您可以在输入用于部署 Rancher 的命令时指定此标签。请记住，如果您使用的标签没有显式指定版本（例如`latest`或`stable`），则必须显式拉取该镜像标签的新版本。 否则，主机上缓存的镜像会被使用。
 
-| Tag                        | Description                                                                                                                                                     |
-| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `rancher/rancher:latest` | Our latest development release. These builds are validated through our CI automation framework. These releases are not recommended for production environments.|
-| `rancher/rancher:stable` | Our newest stable release. This tag is recommended for production.|
-| `rancher/rancher:<v2.X.X>` | You can install specific versions of Rancher by using the tag from a previous release. See what's available at DockerHub.|
+| 标签                       | 描述                                                                                   |
+| -------------------------- | -------------------------------------------------------------------------------------- |
+| `rancher/rancher:latest`   | 我们的最新版本。这些构建通过了我们的 CI 自动化验证。我们不建议将这些版本用于生产环境。 |
+| `rancher/rancher:stable`   | 我们最新的稳定版本。建议将此标签用于生产。                                             |
+| `rancher/rancher:<v2.X.X>` | 您可以使用标签来安装特定版本的 Rancher。你到 DockerHub 上查看有哪些可用的版本          |
 
-> **Notes:**
+> **注意：**
 >
-> - The `master` tag or any tag with `-rc` or another suffix is meant for the Rancher testing team to validate. You should not use these tags, as these builds are not officially supported.
-> - Want to install an alpha review for preview? Install using one of the alpha tags listed on our [announcements page](https://forums.rancher.com/c/announcements) (e.g., `v2.2.0-alpha1` ). Caveat: Alpha releases cannot be upgraded to or from any other release.
-
- /tab 
- /tabs 
-
+> - `master`标签或带有`-rc`或其他后缀的标签都是给 Rancher 测试团队验证用的版本。您不应该使用这些标签的版本，因为这些构建不受官方支持。
+> - 想要安装 alpha 版本体验吗？使用我们[公告页面](https://forums.rancher.com/c/announcements) (例如 `v2.2.0-alpha1`)上列出的某个 alpha 标签进行安装。注意：Alpha 版本无法升级到任何其他版本或从任何其他版本升级。
