@@ -169,13 +169,12 @@ module.exports = {
           'installation/options/chart-options/_index',
           {
             type: 'category',
-            label:
-              '通过 RKE Add-On 安装 Rancher （仅适用于 Rancher 2.0.8 之前的版本）',
+            label: 'RKE Add-On 安装',
             items: [
               'installation/options/rke-add-on/_index',
               {
                 type: 'category',
-                label: '将 Rancher 安装在 Kubernetes 中 并通过4层 LB 暴露',
+                label: 'Rancher 高可用 - 4层 LB',
                 items: [
                   'installation/options/rke-add-on/layer-4-lb/_index',
                   'installation/options/rke-add-on/layer-4-lb/nlb/_index'
@@ -210,7 +209,7 @@ module.exports = {
           'installation/options/local-system-charts/_index',
           {
             type: 'category',
-            label: '升级Cert-Manager',
+            label: '升级 Cert-Manager',
             items: [
               'installation/options/upgrading-cert-manager/_index',
               'installation/options/upgrading-cert-manager/helm-2-instructions/_index'

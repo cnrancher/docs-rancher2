@@ -1,81 +1,56 @@
 ---
-title: 介绍
+title: 安装指南
 ---
 
-> #### **Important: RKE add-on install is only supported up to Rancher v2.0.8**
->
-> Please use the Rancher helm chart to install Rancher on a Kubernetes cluster. For details, see the [Kubernetes Install - Installation Outline](/docs/installation/k8s-install/#installation-outline).
->
-> If you are currently using the RKE add-on install method, see [Migrating from a Kubernetes Install with an RKE Add-on](/docs/upgrades/upgrades/migrating-from-rke-add-on/) for details on how to move to using the helm chart.
+:::important 重要提示
+RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
+请使用 Rancher helm chart 将 Rancher 安装在 Kubernetes 集群上。有关详细信息，请参见[Rancher 高可用安装](/docs/installation/k8s-install/_index)。
+如果您当前正在使用 RKE add-on 安装方法，参见[将 RKE add-on 安装的 Rancher 迁移到 Helm 安装](/docs/upgrades/upgrades/migrating-from-rke-add-on/_index)，获取有关如何使用 Helm chart 的详细信息。
+:::
 
-This procedure walks you through setting up a 3-node cluster using the Rancher Kubernetes Engine (RKE). The cluster's sole purpose is running pods for Rancher. The setup is based on:
+此过程将引导您使用 Rancher Kubernetes Engine（RKE）设置 3 节点集群。该集群的唯一目的是为 Rancher 运行 Pod。设置基于：
 
-* Layer 4 load balancer (TCP)
-* [NGINX ingress controller with SSL termination (HTTPS)](https://kubernetes.github.io/ingress-nginx/)
+- 四层负载均衡器(TCP)
+- [具有 SSL termination(HTTPS)的 NGINX ingress 控制器](https://kubernetes.github.io/ingress-nginx/)
 
-In an HA setup that uses a layer 4 load balancer, the load balancer accepts Rancher client connections over the TCP/UDP protocols (i.e., the transport level). The load balancer then forwards these connections to individual cluster nodes without reading the request itself. Because the load balancer cannot read the packets it's forwarding, the routing decisions it can make are limited.
+在使用四层负载均衡器的 HA 设置中，负载均衡器通过 TCP/UDP 协议(即，传输级别)接受 Rancher 客户端连接，然后，负载均衡器将这些连接转发到各个集群节点，而不读取请求本身。由于负载均衡器无法读取其转发的数据包，因此它所能做出的路由决策是有限的。
 
-<sup>Rancher installed on a Kubernetes cluster with layer 4 load balancer, depicting SSL termination at ingress controllers</sup>
+<sup>Rancher 安装在具有四层负载均衡器的 Kubernetes 集群上，描述了在 ingress 控制器上的 SSL termination。</sup>
 
 ![Rancher HA](/img/rancher/ha/rancher2ha.svg)
 
-### Installation Outline
+### 1. 提供 Linux 主机
 
-Installation of Rancher in a high-availability configuration involves multiple procedures. Review this outline to learn about each procedure you need to complete.
+根据我们的[要求](/docs/installation/requirements/_index)配置三台 Linux 主机。
 
-<!-- TOC -->
+### 2. 配置负载均衡器
 
-* [1. Provision Linux Hosts](#1-provision-linux-hosts)
-* [2. Configure Load Balancer](#2-configure-load-balancer)
-* [3. Configure DNS](#3-configure-dns)
-* [4. Install RKE](#4-install-rke)
-* [5. Download RKE Config File Template](#5-download-rke-config-file-template)
-* [6. Configure Nodes](#6-configure-nodes)
-* [7. Configure Certificates](#7-configure-certificates)
-* [8. Configure FQDN](#8-configure-fqdn)
-* [9. Configure Rancher version](#9-configure-rancher-version)
-* [10. Back Up Your RKE Config File](#10-back-up-your-rke-config-file)
-* [11. Run RKE](#11-run-rke)
-* [12. Back Up Auto-Generated Config File](#12-back-up-auto-generated-config-file)
+我们将使用 NGINX 作为我们的四层负载均衡器(TCP)，NGINX 将所有连接转发到您的 Rancher 节点之一。如果要使用 Amazon NLB，则可以跳过此步骤并使用[Amazon NLB 配置](/docs/installation/options/rke-add-on/layer-4-lb/nlb/_index)。
 
-<!-- /TOC -->
-
-<br/>
-
-### 1. Provision Linux Hosts
-
-Provision three Linux hosts according to our [Requirements](/docs/installation/requirements).
-
-### 2. Configure Load Balancer
-
-We will be using NGINX as our Layer 4 Load Balancer (TCP). NGINX will forward all connections to one of your Rancher nodes. If you want to use Amazon NLB, you can skip this step and use [Amazon NLB configuration](/docs/installation/options/rke-add-on/layer-4-lb/nlb/)
-
-> **Note:**
-> In this configuration, the load balancer is positioned in front of your Linux hosts. The load balancer can be any host that you have available that's capable of running NGINX.
+> **注意：**
+> 在此配置中，负载均衡器位于 Linux 主机的前面，负载均衡器可以是任何可用的能够运行 NGINX 的主机。
 >
-> One caveat: do not use one of your Rancher nodes as the load balancer.
+> 一个警告：不要将 Rancher 节点之一用作负载均衡器。
 
-#### A. Install NGINX
+#### A. 安装 NGINX
 
-Start by installing NGINX on your load balancer host. NGINX has packages available for all known operating systems. For help installing NGINX, refer to their [install documentation](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/).
+首先在负载均衡器主机上安装 NGINX，NGINX 为所有已知的操作系统提供了可用的安装包。有关安装 NGINX 的帮助，请参阅[安装文档](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/)。
 
-The `stream` module is required, which is present when using the official NGINX packages. Please refer to your OS documentation how to install and enable the NGINX `stream` module on your operating system.
+在使用官方 NGINX 软件包时，`stream`模块是必需的。请参考您的操作系统文档，了解如何在操作系统上安装和启用 NGINX `stream`模块。
 
-#### B. Create NGINX Configuration
+#### B. 创建 NGINX 配置
 
-After installing NGINX, you need to update the NGINX config file, `nginx.conf` , with the IP addresses for your nodes.
+安装 NGINX 后，您需要使用节点的 IP 地址更新 NGINX 配置文件`nginx.conf`。
 
-1. Copy and paste the code sample below into your favorite text editor. Save it as `nginx.conf` .
+1. 将下面的代码示例复制并粘贴到您喜欢的文本编辑器中，另存为`nginx.conf`。
 
-2. From `nginx.conf` , replace `IP_NODE_1` , `IP_NODE_2` , and `IP_NODE_3` with the IPs of your [Linux hosts](#1-provision-linux-hosts).
+2. 将`nginx.conf`中的`IP_NODE_1`，`IP_NODE_2`和`IP_NODE_3`替换为您的 Linux 主机 IP 地址。
 
-   > **Note:** This Nginx configuration is only an example and may not suit your environment. For complete documentation, see [NGINX Load Balancing - TCP and UDP Load Balancer](https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/).
+   > **注意：** 此 Nginx 配置仅是示例，可能不适合您的环境。有关完整的文档，请参阅[NGINX 负载平衡-TCP 和 UDP 负载均衡器](https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/)。
 
-   **Example NGINX config:**
+   **NGINX 配置示例：**
 
-   
-
-``` 
+   ```
    worker_processes 4;
    worker_rlimit_nofile 40000;
 
@@ -104,42 +79,38 @@ After installing NGINX, you need to update the NGINX config file, `nginx.conf` ,
    }
    ```
 
-3. Save `nginx.conf` to your load balancer at the following path: `/etc/nginx/nginx.conf` .
+3. 保存`nginx.conf`到负载均衡器的以下路径：`/etc/nginx/nginx.conf`。
 
-4. Load the updates to your NGINX configuration by running the following command:
+4. 通过运行以下命令更新加载您的 NGINX 配置：
 
-   
-
-``` 
+   ```
    # nginx -s reload
    ```
 
-#### Option - Run NGINX as Docker container
+#### 可选 - 将 NGINX 作为 Docker 容器运行
 
-Instead of installing NGINX as a package on the operating system, you can rather run it as a Docker container. Save the edited **Example NGINX config** as `/etc/nginx.conf` and run the following command to launch the NGINX container:
+与其将 NGINX 作为包安装在操作系统上，不如将其作为 Docker 容器运行。将已编辑的**NGINX 配置示例**保存为`/etc/nginx.conf`，并运行以下命令以启动 NGINX 容器：
 
-``` 
+```
 docker run -d --restart=unless-stopped \
   -p 80:80 -p 443:443 \
   -v /etc/nginx.conf:/etc/nginx/nginx.conf \
   nginx:1.14
 ```
 
-### 3. Configure DNS
+### 3. 配置 DNS
 
-Choose a fully qualified domain name (FQDN) that you want to use to access Rancher (e.g., `rancher.yourdomain.com` ).<br/><br/>
+选择要用于访问 Rancher 的完全限定域名(FQDN)(例如，`rancher.yourdomain.com`)。<br/><br/>
 
-1. Log into your DNS server a create a `DNS A` record that points to the IP address of your [load balancer](#2-configure-load-balancer).
+1. 登录到 DNS 服务器，创建一个指向您的[负载均衡器]的 IP 地址的`DNS A`记录(#2-configure-load-balancer)。
 
-2. Validate that the `DNS A` is working correctly. Run the following command from any terminal, replacing `HOSTNAME.DOMAIN.COM` with your chosen FQDN:
+2. 验证`DNS A`是否正常工作，在任何终端上运行以下命令，替换`HOSTNAME.DOMAIN.COM`为您选择的 FQDN：
 
-`nslookup HOSTNAME.DOMAIN.COM` 
+   `nslookup HOSTNAME.DOMAIN.COM`
 
-   **Step Result:** Terminal displays output similar to the following:
+   **步骤结果：** 终端显示输出如下图所示：
 
-   
-
-``` 
+   ```
    $ nslookup rancher.yourdomain.com
    Server:         YOUR_HOSTNAME_IP_ADDRESS
    Address:        YOUR_HOSTNAME_IP_ADDRESS#53
@@ -151,107 +122,96 @@ Choose a fully qualified domain name (FQDN) that you want to use to access Ranch
 
 <br/>
 
-### 4. Install RKE
+### 4. 安装 RKE
 
-RKE (Rancher Kubernetes Engine) is a fast, versatile Kubernetes installer that you can use to install Kubernetes on your Linux hosts. We will use RKE to setup our cluster and run Rancher.
+RKE(Rancher Kubernetes 引擎)是一个快速、通用的 Kubernetes 安装程序，您可以使用它在您的 Linux 主机上安装 Kubernetes。我们将使用 RKE 来设置集群并运行 Rancher。
 
-1. Follow the [RKE Install]({{<baseurl>}}/rke/latest/en/installation) instructions.
+1. 请遵循[RKE 安装](https://rancher.com/docs/rke/latest/en/installation)说明。
 
-2. Confirm that RKE is now executable by running the following command:
+2. 通过运行以下命令，确认 RKE 现在是可执行的：
 
-   
-
-``` 
+   ```
    rke --version
    ```
 
-### 5. Download RKE Config File Template
+### 5. 下载 RKE 配置文件模板
 
-RKE uses a `.yml` config file to install and configure your Kubernetes cluster. There are 2 templates to choose from, depending on the SSL certificate you want to use.
+RKE 使用`.yml`配置文件来安装和配置 Kubernetes 集群。根据要使用的 SSL 证书，有两种模板可供选择。
 
-1. Download one of following templates, depending on the SSL certificate you're using.
+1. 根据您正在使用的 SSL 证书，下载以下模版之一。
 
-   - [Template for self-signed certificate<br/> `3-node-certificate.yml` ](https://raw.githubusercontent.com/rancher/rancher/master/rke-templates/3-node-certificate.yml)
-   - [Template for certificate signed by recognized CA<br/> `3-node-certificate-recognizedca.yml` ](https://raw.githubusercontent.com/rancher/rancher/master/rke-templates/3-node-certificate-recognizedca.yml)
+   - [自签名证书模版<br/> `3-node-certificate.yml`](https://raw.githubusercontent.com/rancher/rancher/master/rke-templates/3-node-certificate.yml)
+   - [由公认的 CA 签署的证书模板<br/> `3-node-certificate-recognizedca.yml`](https://raw.githubusercontent.com/rancher/rancher/master/rke-templates/3-node-certificate-recognizedca.yml)
 
-   > **Advanced Config Options:**
+   > **高级配置选项：**
    >
-   > - Want records of all transactions with the Rancher API? Enable the [API Auditing](/docs/installation/api-auditing) feature by editing your RKE config file. For more information, see how to enable it in [your RKE config file](/docs/installation/k8s-install/rke-add-on/api-auditing/).
-   > - Want to know the other config options available for your RKE template? See the [RKE Documentation: Config Options]({{<baseurl>}}/rke/latest/en/config-options/).
+   > - 想要 Rancher API 的所有事务记录？通过编辑 RKE 配置文件来启用[API 审核](/docs/installation/options/rke-add-on/api-audit-log/_index)功能。有关更多信息，请参见如何在[RKE 配置文件](/docs/installation/options/rke-add-on/api-auditing/_index)中启用它。
+   > - 想知道您的 RKE 模板可用的其他配置选项吗？请参阅[RKE 文档：配置选项](https://rancher.com/docs/rke/latest/en/config-options/)。
 
-2) Rename the file to `rancher-cluster.yml` .
+2. 将文件重命名为`rancher-cluster.yml`。
 
-### 6. Configure Nodes
+### 6. 配置节点
 
-Once you have the `rancher-cluster.yml` config file template, edit the nodes section to point toward your Linux hosts.
+有了`rancher-cluster.yml`配置文件模板后，编辑节点部分以指向您的 Linux 主机。
 
-1. Open `rancher-cluster.yml` in your favorite text editor.
+1.  在您喜欢的文本编辑器中打开`rancher-cluster.yml`。
 
-1. Update the `nodes` section with the information of your [Linux hosts](#1-provision-linux-hosts).
+1.  使用 Linux 主机信息更新`nodes`部分
 
-    For each node in your cluster, update the following placeholders: `IP_ADDRESS_X` and `USER` . The specified user should be able to access the Docket socket, you can test this by logging in with the specified user and run `docker ps` .
+    对于集群中的每个节点，更新以下占位符：`IP_ADDRESS_X`和`USER`。指定的用户应该能够访问 Docket 套接字，您可以使用指定的用户登录并运行`docker ps`来测试这一点。
 
-    > **Note:**
-    > When using RHEL/CentOS, the SSH user can't be root due to https://bugzilla.redhat.com/show_bug.cgi?id=1527565. See [Operating System Requirements]({{<baseurl>}}/rke/latest/en/installation/os#redhat-enterprise-linux-rhel-centos) >for RHEL/CentOS specific requirements.
+    > **注意：**
+    > 使用 RHEL/CentOS 时，由于 https://bugzilla.redhat.com/show_bug.cgi?id=1527565 导致 SSH 用户无法成为 root 用户。有关 RHEL/CentOS 的特定需求，请参阅[操作系统要求](https://rancher.com/docs/rke/latest/en/installation/os#redhat-enterprise-linux-rhel-centos)。
 
         nodes:
             # The IP address or hostname of the node
-
         - address: IP_ADDRESS_1
-
             # User that can login to the node and has access to the Docker socket (i.e. can execute `docker ps` on the node)
             # When using RHEL/CentOS, this can't be root due to https://bugzilla.redhat.com/show_bug.cgi?id=1527565
             user: USER
             role: [controlplane,etcd,worker]
             # Path the SSH key that can be used to access to node with the specified user
             ssh_key_path: ~/.ssh/id_rsa
-
         - address: IP_ADDRESS_2
-
             user: USER
             role: [controlplane,etcd,worker]
             ssh_key_path: ~/.ssh/id_rsa
-
         - address: IP_ADDRESS_3
-
             user: USER
             role: [controlplane,etcd,worker]
             ssh_key_path: ~/.ssh/id_rsa
 
-1.**Optional:** By default, `rancher-cluster.yml` is configured to take backup snapshots of your data. To disable these snapshots, change the `backup` directive setting to `false` , as depicted below.
+1.  **可选：** 默认情况下,`rancher-cluster.yml`被配置为备份您的数据快照，要禁用这些快照，请将`backup`指令设置更改为`false`，如下所示。
 
         services:
           etcd:
             backup: false
 
-### 7. Configure Certificates
+### 7. 配置证书
 
-For security purposes, SSL (Secure Sockets Layer) is required when using Rancher. SSL secures all Rancher network communication, like when you login or interact with a cluster.
+为了安全起见，使用 Rancher 时需要 SSL(Secure Sockets Layer)。SSL 保护所有 Rancher 网络通信的安全，例如在您登录集群或与集群交互时。
 
-Choose from the following options:
+从以下选项中选择：
 
- accordion id="option-a" label="Option A—Bring Your Own Certificate: Self-Signed" 
+#### 选项 A — 使用您自己的证书：自签名
 
-> **Prerequisites:**
-> Create a self-signed certificate.
+> **先决条件：**
+> 创建一个自签名证书
 >
-> - The certificate files must be in [PEM format](#pem).
-> - The certificate files must be encoded in [base64](#base64).
-> - In your certificate file, include all intermediate certificates in the chain. Order your certificates with your certificate first, followed by the intermediates. For an example, see [Intermediate Certificates](#cert-order).
+> - 证书文件必须为`PEM 格式`。
+> - 证书文件必须使用`base64`编码。
+> - 在您的证书文件中，包括链接中的所有中间证书。请先使用证书订购证书，然后再订购中间体。有关示例，请参见`中间证书`。
 
-1. In `kind: Secret` with `name: cattle-keys-ingress` :
+1. 在`kind: Secret`中`name: cattle-keys-ingress`：
 
-   - Replace `<BASE64_CRT>` with the base64 encoded string of the Certificate file (usually called `cert.pem` or `domain.crt` )
-   - Replace `<BASE64_KEY>` with the base64 encoded string of the Certificate Key file (usually called `key.pem` or `domain.key` )
+   - 替换`<BASE64_CRT>`为证书文件的 base64 编码字符串(通常称为`cert.pem`或`domain.crt`)
+   - 替换`<BASE64_KEY>`为证书密钥文件的 base64 编码字符串(通常称为`key.pem`或`domain.key`)
 
-   > **Note:**
-   > The base64 encoded string should be on the same line as `tls.crt` or `tls.key` , without any newline at the beginning, in between or at the end.
+   > **注意：** `tls.crt`或`tls.key`的 base64 编码的字符串应该在同一行，在开头、中间或结尾没有任何换行。
 
-   **Step Result:** After replacing the values, the file should look like the example below (the base64 encoded strings should be different):
+   **步骤结果：** 在替换了这些值之后，文件应该如下面的示例所示(base64 编码的字符串应该不同)：
 
-   
-
-``` yaml
+   ```yaml
    ---
    apiVersion: v1
    kind: Secret
@@ -264,47 +224,41 @@ Choose from the following options:
      tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBdEY3WEN6TVZHaDF1aU5oWTBJZW50RVlpSVFmUUlLQkMvYUFzU3gxQUlsOWI0OUQ5ClhmanEzdWI3c3RCNnRsYTlqV09keDZkZzBnZDBCSVNCSWFlcHJWdkZNZzRTRXpjRE51aW0xZnh3aVkwZCtFRlUKTXVCc3NYZEV6V0k3ZEVvdUFjcVJjamZWL0J5WTZ4ZDdTRWhjSE5PZVdEZWI5TDFiK3hLd2k2M21uZ0lKQjdBeQpLSmRlYzhnbWlaNk4wcTV3ZXFEWDJ6QVgrbDVPTldTcG1mWUVhVHBDSnFMVTNtZFpCWWx5cnhMTytvemx0MGdLCktLbG81cGgzc05CcDFMUG5LOUMxc3MvbWZRek9EMDNzck1Xa21oTDcwQ0IxZmIydCtOWnRITW5BYmYwYkJETnoKTlNRcXU4T2cwaUxnOUVhd3l1dEF4U3BGdmhHUGMvd0dHMExWaXdJREFRQUJBb0lCQUJKYUErOHp4MVhjNEw0egpwUFd5bDdHVDRTMFRLbTNuWUdtRnZudjJBZXg5WDFBU2wzVFVPckZyTnZpK2xYMnYzYUZoSFZDUEN4N1RlMDVxClhPa2JzZnZkZG5iZFQ2RjgyMnJleVByRXNINk9TUnBWSzBmeDVaMDQwVnRFUDJCWm04eTYyNG1QZk1vbDdya2MKcm9Kd09rOEVpUHZZekpsZUd0bTAwUm1sRysyL2c0aWJsOTVmQXpyc1MvcGUyS3ZoN2NBVEtIcVh6MjlpUmZpbApiTGhBamQwcEVSMjNYU0hHR1ZqRmF3amNJK1c2L2RtbDZURDhrSzFGaUtldmJKTlREeVNXQnpPbXRTYUp1K01JCm9iUnVWWG4yZVNoamVGM1BYcHZRMWRhNXdBa0dJQWxOWjRHTG5QU2ZwVmJyU0plU3RrTGNzdEJheVlJS3BWZVgKSVVTTHM0RUNnWUVBMmNnZUE2WHh0TXdFNU5QWlNWdGhzbXRiYi9YYmtsSTdrWHlsdk5zZjFPdXRYVzkybVJneQpHcEhUQ0VubDB0Z1p3T081T1FLNjdFT3JUdDBRWStxMDJzZndwcmgwNFZEVGZhcW5QNTBxa3BmZEJLQWpmanEyCjFoZDZMd2hLeDRxSm9aelp2VkowV0lvR1ZLcjhJSjJOWGRTUVlUanZUZHhGczRTamdqNFFiaEVDZ1lFQTFBWUUKSEo3eVlza2EvS2V2OVVYbmVrSTRvMm5aYjJ1UVZXazRXSHlaY2NRN3VMQVhGY3lJcW5SZnoxczVzN3RMTzJCagozTFZNUVBzazFNY25oTTl4WE4vQ3ZDTys5b2t0RnNaMGJqWFh6NEJ5V2lFNHJPS1lhVEFwcDVsWlpUT3ZVMWNyCm05R3NwMWJoVDVZb2RaZ3IwUHQyYzR4U2krUVlEWnNFb2lFdzNkc0NnWUVBcVJLYWNweWZKSXlMZEJjZ0JycGkKQTRFalVLMWZsSjR3enNjbGFKUDVoM1NjZUFCejQzRU1YT0kvSXAwMFJsY3N6em83N3cyMmpud09mOEJSM0RBMwp6ZTRSWDIydWw4b0hGdldvdUZOTTNOZjNaNExuYXpVc0F0UGhNS2hRWGMrcEFBWGthUDJkZzZ0TU5PazFxaUNHCndvU212a1BVVE84b1ViRTB1NFZ4ZmZFQ2dZQUpPdDNROVNadUlIMFpSSitIV095enlOQTRaUEkvUkhwN0RXS1QKajVFS2Y5VnR1OVMxY1RyOTJLVVhITXlOUTNrSjg2OUZPMnMvWk85OGg5THptQ2hDTjhkOWN6enI5SnJPNUFMTApqWEtBcVFIUlpLTFgrK0ZRcXZVVlE3cTlpaHQyMEZPb3E5OE5SZDMzSGYxUzZUWDNHZ3RWQ21YSml6dDAxQ3ZHCmR4VnVnd0tCZ0M2Mlp0b0RLb3JyT2hvdTBPelprK2YwQS9rNDJBOENiL29VMGpwSzZtdmxEWmNYdUF1QVZTVXIKNXJCZjRVYmdVYndqa1ZWSFR6LzdDb1BWSjUvVUxJWk1Db1RUNFprNTZXWDk4ZE93Q3VTVFpZYnlBbDZNS1BBZApTZEpuVVIraEpnSVFDVGJ4K1dzYnh2d0FkbWErWUhtaVlPRzZhSklXMXdSd1VGOURLUEhHCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
    ```
 
-2. In `kind: Secret` with `name: cattle-keys-server` , replace `<BASE64_CA>` with the base64 encoded string of the CA Certificate file (usually called `ca.pem` or `ca.crt` ).
+2. 在`kind: Secret`中`name: cattle-keys-server`，替换`<BASE64_CA>`为 CA 证书文件的 base64 编码的字符串(通常称为`ca.pem`或`ca.crt`)。
 
-   > **Note:**
-   > The base64 encoded string should be on the same line as `cacerts.pem` , without any newline at the beginning, in between or at the end.
+   > **注意：** `cacerts.pem`的 base64 编码的字符串应该在同一行，在开头、中间或结尾没有任何换行。
 
-    **Step Result:** The file should look like the example below (the base64 encoded string should be different):
+   **步骤结果：** 文件应该如下面的示例所示(base64 编码的字符串应该不同)：
 
-    
+   ```yaml
+   ---
+   apiVersion: v1
+   kind: Secret
+   metadata:
+     name: cattle-keys-server
+     namespace: cattle-system
+   type: Opaque
+   data:
+     cacerts.pem: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUNvRENDQVlnQ0NRRHVVWjZuMEZWeU16QU5CZ2txaGtpRzl3MEJBUXNGQURBU01SQXdEZ1lEVlFRRERBZDAKWlhOMExXTmhNQjRYRFRFNE1EVXdOakl4TURRd09Wb1hEVEU0TURjd05USXhNRFF3T1Zvd0VqRVFNQTRHQTFVRQpBd3dIZEdWemRDMWpZVENDQVNJd0RRWUpLb1pJaHZjTkFRRUJCUUFEZ2dFUEFEQ0NBUW9DZ2dFQkFNQmpBS3dQCndhRUhwQTdaRW1iWWczaTNYNlppVmtGZFJGckJlTmFYTHFPL2R0RUdmWktqYUF0Wm45R1VsckQxZUlUS3UzVHgKOWlGVlV4Mmo1Z0tyWmpwWitCUnFiZ1BNbk5hS1hocmRTdDRtUUN0VFFZdGRYMVFZS0pUbWF5NU45N3FoNTZtWQprMllKRkpOWVhHWlJabkdMUXJQNk04VHZramF0ZnZOdmJ0WmtkY2orYlY3aWhXanp2d2theHRUVjZlUGxuM2p5CnJUeXBBTDliYnlVcHlad3E2MWQvb0Q4VUtwZ2lZM1dOWmN1YnNvSjhxWlRsTnN6UjVadEFJV0tjSE5ZbE93d2oKaG41RE1tSFpwZ0ZGNW14TU52akxPRUc0S0ZRU3laYlV2QzlZRUhLZTUxbGVxa1lmQmtBZWpPY002TnlWQUh1dApuay9DMHpXcGdENkIwbkVDQXdFQUFUQU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFHTCtaNkRzK2R4WTZsU2VBClZHSkMvdzE1bHJ2ZXdia1YxN3hvcmlyNEMxVURJSXB6YXdCdFJRSGdSWXVtblVqOGo4T0hFWUFDUEthR3BTVUsKRDVuVWdzV0pMUUV0TDA2eTh6M3A0MDBrSlZFZW9xZlVnYjQrK1JLRVJrWmowWXR3NEN0WHhwOVMzVkd4NmNOQQozZVlqRnRQd2hoYWVEQmdma1hXQWtISXFDcEsrN3RYem9pRGpXbi8walI2VDcrSGlaNEZjZ1AzYnd3K3NjUDIyCjlDQVZ1ZFg4TWpEQ1hTcll0Y0ZINllBanlCSTJjbDhoSkJqa2E3aERpVC9DaFlEZlFFVFZDM3crQjBDYjF1NWcKdE03Z2NGcUw4OVdhMnp5UzdNdXk5bEthUDBvTXl1Ty82Tm1wNjNsVnRHeEZKSFh4WTN6M0lycGxlbTNZQThpTwpmbmlYZXc9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+   ```
 
-``` yaml
-    ---
-    apiVersion: v1
-    kind: Secret
-    metadata:
-      name: cattle-keys-server
-      namespace: cattle-system
-    type: Opaque
-    data:
-      cacerts.pem: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUNvRENDQVlnQ0NRRHVVWjZuMEZWeU16QU5CZ2txaGtpRzl3MEJBUXNGQURBU01SQXdEZ1lEVlFRRERBZDAKWlhOMExXTmhNQjRYRFRFNE1EVXdOakl4TURRd09Wb1hEVEU0TURjd05USXhNRFF3T1Zvd0VqRVFNQTRHQTFVRQpBd3dIZEdWemRDMWpZVENDQVNJd0RRWUpLb1pJaHZjTkFRRUJCUUFEZ2dFUEFEQ0NBUW9DZ2dFQkFNQmpBS3dQCndhRUhwQTdaRW1iWWczaTNYNlppVmtGZFJGckJlTmFYTHFPL2R0RUdmWktqYUF0Wm45R1VsckQxZUlUS3UzVHgKOWlGVlV4Mmo1Z0tyWmpwWitCUnFiZ1BNbk5hS1hocmRTdDRtUUN0VFFZdGRYMVFZS0pUbWF5NU45N3FoNTZtWQprMllKRkpOWVhHWlJabkdMUXJQNk04VHZramF0ZnZOdmJ0WmtkY2orYlY3aWhXanp2d2theHRUVjZlUGxuM2p5CnJUeXBBTDliYnlVcHlad3E2MWQvb0Q4VUtwZ2lZM1dOWmN1YnNvSjhxWlRsTnN6UjVadEFJV0tjSE5ZbE93d2oKaG41RE1tSFpwZ0ZGNW14TU52akxPRUc0S0ZRU3laYlV2QzlZRUhLZTUxbGVxa1lmQmtBZWpPY002TnlWQUh1dApuay9DMHpXcGdENkIwbkVDQXdFQUFUQU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFHTCtaNkRzK2R4WTZsU2VBClZHSkMvdzE1bHJ2ZXdia1YxN3hvcmlyNEMxVURJSXB6YXdCdFJRSGdSWXVtblVqOGo4T0hFWUFDUEthR3BTVUsKRDVuVWdzV0pMUUV0TDA2eTh6M3A0MDBrSlZFZW9xZlVnYjQrK1JLRVJrWmowWXR3NEN0WHhwOVMzVkd4NmNOQQozZVlqRnRQd2hoYWVEQmdma1hXQWtISXFDcEsrN3RYem9pRGpXbi8walI2VDcrSGlaNEZjZ1AzYnd3K3NjUDIyCjlDQVZ1ZFg4TWpEQ1hTcll0Y0ZINllBanlCSTJjbDhoSkJqa2E3aERpVC9DaFlEZlFFVFZDM3crQjBDYjF1NWcKdE03Z2NGcUw4OVdhMnp5UzdNdXk5bEthUDBvTXl1Ty82Tm1wNjNsVnRHeEZKSFh4WTN6M0lycGxlbTNZQThpTwpmbmlYZXc9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
-    ```
+#### 选项 B — 使用您自己的证书：由公认的 CA 签发
 
- /accordion 
+> **注意：**
+> 如果您使用的是自签名证书，[单击此处](#选项-a--使用您自己的证书：自签名)继续。
 
- accordion id="option-b" label="Option B—Bring Your Own Certificate: Signed by Recognized CA" 
+如果您使用的是由公认的证书颁发机构签名的证书，您需要为证书文件和证书密钥文件生成 base64 编码的字符串。确保您的证书文件包括链接中的所有`中间证书`，在这种情况下，证书的顺序首先是您自己的证书，然后是中间证书。请参阅您的 CSP(Certificate Service Provider)文档，了解需要包括哪些中间证书。
 
-> **Note:**
-> If you are using Self Signed Certificate, [click here](#option-a-bring-your-own-certificate-self-signed) to proceed.
+在`kind: Secret`中`name: cattle-keys-ingress`：
 
-If you are using a Certificate Signed By A Recognized Certificate Authority, you will need to generate a base64 encoded string for the Certificate file and the Certificate Key file. Make sure that your certificate file includes all the [intermediate certificates](#cert-order) in the chain, the order of certificates in this case is first your own certificate, followed by the intermediates. Please refer to the documentation of your CSP (Certificate Service Provider) to see what intermediate certificate(s) need to be included.
+- 替换`<BASE64_CRT>`为证书文件的 base64 编码字符串(通常称为`cert.pem`或`domain.crt`)
+- 替换`<BASE64_KEY>`为证书密钥文件的 base64 编码字符串(通常称为`key.pem`或`domain.key`)
 
-In the `kind: Secret` with `name: cattle-keys-ingress` :
+在替换了这些值之后，文件应该如下面的示例所示(base64 编码的字符串应该不同)：
 
-* Replace `<BASE64_CRT>` with the base64 encoded string of the Certificate file (usually called `cert.pem` or `domain.crt` )
-* Replace `<BASE64_KEY>` with the base64 encoded string of the Certificate Key file (usually called `key.pem` or `domain.key` )
+> **注意：** `tls.crt`或`tls.key`的 base64 编码的字符串应该在同一行，在开头、中间或结尾没有任何换行。
 
-After replacing the values, the file should look like the example below (the base64 encoded strings should be different):
-
-> **Note:**
-> The base64 encoded string should be on the same line as `tls.crt` or `tls.key` , without any newline at the beginning, in between or at the end.
-
-``` yaml
+```yaml
 ---
 apiVersion: v1
 kind: Secret
@@ -317,19 +271,17 @@ data:
   tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBdEY3WEN6TVZHaDF1aU5oWTBJZW50RVlpSVFmUUlLQkMvYUFzU3gxQUlsOWI0OUQ5ClhmanEzdWI3c3RCNnRsYTlqV09keDZkZzBnZDBCSVNCSWFlcHJWdkZNZzRTRXpjRE51aW0xZnh3aVkwZCtFRlUKTXVCc3NYZEV6V0k3ZEVvdUFjcVJjamZWL0J5WTZ4ZDdTRWhjSE5PZVdEZWI5TDFiK3hLd2k2M21uZ0lKQjdBeQpLSmRlYzhnbWlaNk4wcTV3ZXFEWDJ6QVgrbDVPTldTcG1mWUVhVHBDSnFMVTNtZFpCWWx5cnhMTytvemx0MGdLCktLbG81cGgzc05CcDFMUG5LOUMxc3MvbWZRek9EMDNzck1Xa21oTDcwQ0IxZmIydCtOWnRITW5BYmYwYkJETnoKTlNRcXU4T2cwaUxnOUVhd3l1dEF4U3BGdmhHUGMvd0dHMExWaXdJREFRQUJBb0lCQUJKYUErOHp4MVhjNEw0egpwUFd5bDdHVDRTMFRLbTNuWUdtRnZudjJBZXg5WDFBU2wzVFVPckZyTnZpK2xYMnYzYUZoSFZDUEN4N1RlMDVxClhPa2JzZnZkZG5iZFQ2RjgyMnJleVByRXNINk9TUnBWSzBmeDVaMDQwVnRFUDJCWm04eTYyNG1QZk1vbDdya2MKcm9Kd09rOEVpUHZZekpsZUd0bTAwUm1sRysyL2c0aWJsOTVmQXpyc1MvcGUyS3ZoN2NBVEtIcVh6MjlpUmZpbApiTGhBamQwcEVSMjNYU0hHR1ZqRmF3amNJK1c2L2RtbDZURDhrSzFGaUtldmJKTlREeVNXQnpPbXRTYUp1K01JCm9iUnVWWG4yZVNoamVGM1BYcHZRMWRhNXdBa0dJQWxOWjRHTG5QU2ZwVmJyU0plU3RrTGNzdEJheVlJS3BWZVgKSVVTTHM0RUNnWUVBMmNnZUE2WHh0TXdFNU5QWlNWdGhzbXRiYi9YYmtsSTdrWHlsdk5zZjFPdXRYVzkybVJneQpHcEhUQ0VubDB0Z1p3T081T1FLNjdFT3JUdDBRWStxMDJzZndwcmgwNFZEVGZhcW5QNTBxa3BmZEJLQWpmanEyCjFoZDZMd2hLeDRxSm9aelp2VkowV0lvR1ZLcjhJSjJOWGRTUVlUanZUZHhGczRTamdqNFFiaEVDZ1lFQTFBWUUKSEo3eVlza2EvS2V2OVVYbmVrSTRvMm5aYjJ1UVZXazRXSHlaY2NRN3VMQVhGY3lJcW5SZnoxczVzN3RMTzJCagozTFZNUVBzazFNY25oTTl4WE4vQ3ZDTys5b2t0RnNaMGJqWFh6NEJ5V2lFNHJPS1lhVEFwcDVsWlpUT3ZVMWNyCm05R3NwMWJoVDVZb2RaZ3IwUHQyYzR4U2krUVlEWnNFb2lFdzNkc0NnWUVBcVJLYWNweWZKSXlMZEJjZ0JycGkKQTRFalVLMWZsSjR3enNjbGFKUDVoM1NjZUFCejQzRU1YT0kvSXAwMFJsY3N6em83N3cyMmpud09mOEJSM0RBMwp6ZTRSWDIydWw4b0hGdldvdUZOTTNOZjNaNExuYXpVc0F0UGhNS2hRWGMrcEFBWGthUDJkZzZ0TU5PazFxaUNHCndvU212a1BVVE84b1ViRTB1NFZ4ZmZFQ2dZQUpPdDNROVNadUlIMFpSSitIV095enlOQTRaUEkvUkhwN0RXS1QKajVFS2Y5VnR1OVMxY1RyOTJLVVhITXlOUTNrSjg2OUZPMnMvWk85OGg5THptQ2hDTjhkOWN6enI5SnJPNUFMTApqWEtBcVFIUlpLTFgrK0ZRcXZVVlE3cTlpaHQyMEZPb3E5OE5SZDMzSGYxUzZUWDNHZ3RWQ21YSml6dDAxQ3ZHCmR4VnVnd0tCZ0M2Mlp0b0RLb3JyT2hvdTBPelprK2YwQS9rNDJBOENiL29VMGpwSzZtdmxEWmNYdUF1QVZTVXIKNXJCZjRVYmdVYndqa1ZWSFR6LzdDb1BWSjUvVUxJWk1Db1RUNFprNTZXWDk4ZE93Q3VTVFpZYnlBbDZNS1BBZApTZEpuVVIraEpnSVFDVGJ4K1dzYnh2d0FkbWErWUhtaVlPRzZhSklXMXdSd1VGOURLUEhHCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
 ```
 
- /accordion 
+### 8. 配置 FQDN
 
-### 8. Configure FQDN
+`<FQDN>`在配置文件中有两处引用(一个在这个步骤中，一个在下一个步骤中)。两者都需要替换为配置 DNS 中选择的 FQDN。
 
-There are two references to `<FQDN>` in the config file (one in this step and one in the next). Both need to be replaced with the FQDN chosen in [Configure DNS](#3-configure-dns).
+在`kind: Ingress`中`name: cattle-ingress-http`：
 
-In the `kind: Ingress` with `name: cattle-ingress-http` :
+- 替换`<FQDN>`为配置 DNS 中选择的 FQDN。
 
-* Replace `<FQDN>` with the FQDN chosen in [Configure DNS](#3-configure-dns).
+将`<FQDN>`替换为配置 DNS 中选择的 FQDN 后，该文件应类似于以下示例(本例中使用的 FQDN 是`rancher.yourdomain.com`)：
 
-After replacing `<FQDN>` with the FQDN chosen in [Configure DNS](#3-configure-dns), the file should look like the example below ( `rancher.yourdomain.com` is the FQDN used in this example):
-
-``` yaml
+```yaml
  ---
   apiVersion: extensions/v1beta1
   kind: Ingress
@@ -342,63 +294,53 @@ After replacing `<FQDN>` with the FQDN chosen in [Configure DNS](#3-configure-dn
       nginx.ingress.kubernetes.io/proxy-send-timeout: "1800"   # Max time in seconds for ws to remain shell window open
   spec:
     rules:
-
     - host: rancher.yourdomain.com
-
       http:
         paths:
-
         - backend:
-
             serviceName: cattle-service
             servicePort: 80
     tls:
-
     - secretName: cattle-keys-ingress
-
       hosts:
-
       - rancher.yourdomain.com
-
 ```
 
-Save the `.yml` file and close it.
+保存`.yml`文件并关闭它。
 
-### 9. Configure Rancher version
+### 9. 配置 Rancher 版本
 
-The last reference that needs to be replaced is `<RANCHER_VERSION>` . This needs to be replaced with a Rancher version which is marked as stable. The latest stable release of Rancher can be found in the [GitHub README](https://github.com/rancher/rancher/blob/master/README.md). Make sure the version is an actual version number, and not a named tag like `stable` or `latest` . The example below shows the version configured to `v2.0.6` .
+最后一个需要替换的引用是`<RANCHER_VERSION>`，这需要替换为标记为稳定的 Rancher 版本。最新的 Rancher 稳定版本可以在[GitHub README](https://github.com/rancher/rancher/blob/master/README.md)中找到。确保版本是实际的版本号，而不是带有`stable`或`latest`这样的命名标签。下面的示例显示了配置为`v2.0.6`的版本。
 
-``` 
-      spec:
-        serviceAccountName: cattle-admin
-        containers:
-
-        - image: rancher/rancher:v2.0.6
-
-          imagePullPolicy: Always
+```
+spec:
+  serviceAccountName: cattle-admin
+  containers:
+  - image: rancher/rancher:v2.0.6
+    imagePullPolicy: Always
 ```
 
-### 10. Back Up Your RKE Config File
+### 10. 备份 RKE 配置文件
 
-After you close your `.yml` file, back it up to a secure location. You can use this file again when it's time to upgrade Rancher.
+关闭`.yml`文件后，将其备份到安全位置。升级 Rancher 时，可以再次使用此文件。
 
-### 11. Run RKE
+### 11. 运行 RKE
 
-With all configuration in place, use RKE to launch Rancher. You can complete this action by running the `rke up` command and using the `--config` parameter to point toward your config file.
+完成所有配置后，使用 RKE 启动 Rancher。您可以通过运行`rke up`命令并使用`--config`参数指向你的配置文件来完成此操作。
 
-1. From your workstation, make sure `rancher-cluster.yml` and the downloaded `rke` binary are in the same directory.
+1. 在您的工作站中，确保`rancher-cluster.yml`和下载的`rke`二进制文件位于同一目录中。
 
-2. Open a Terminal instance. Change to the directory that contains your config file and `rke` .
+2. 打开一个终端实例，切换到包含您的配置文件和`rke`的目录。
 
-3. Enter one of the `rke up` commands listen below.
+3. 请输入下面的`rke up`命令。
 
-``` 
+```
 rke up --config rancher-cluster.yml
 ```
 
-**Step Result:** The output should be similar to the snippet below:
+**步骤结果：** 输出应与以下代码段相似：
 
-``` 
+```
 INFO[0000] Building Kubernetes cluster
 INFO[0000] [dialer] Setup tunnel for host [1.1.1.1]
 INFO[0000] [network] Deploying port listener containers
@@ -407,20 +349,86 @@ INFO[0000] [network] Pulling image [alpine:latest] on host [1.1.1.1]
 INFO[0101] Finished building Kubernetes cluster successfully
 ```
 
-### 12. Back Up Auto-Generated Config File
+### 12. 备份自动生成的配置文件
 
-During installation, RKE automatically generates a config file named `kube_config_rancher-cluster.yml` in the same directory as the RKE binary. Copy this file and back it up to a safe location. You'll use this file later when upgrading Rancher Server.
+在安装过程中，RKE 会自动生成一个与 RKE 二进制文件位于同一目录中的名为`kube_config_rancher-cluster.yml`的配置文件。复制此文件并将其备份到安全位置，稍后在升级 Rancher Server 时将使用此文件。
 
-### What's Next?
+### 下一步是什么？
 
-You have a couple of options:
+您有两种选择：
 
-* Create a backup of your Rancher Server in case of a disaster scenario: [High Availability Back Up and Restoration](/docs/installation/backups-and-restoration/ha-backup-and-restoration).
-* Create a Kubernetes cluster: [Provisioning Kubernetes Clusters](/docs/cluster-provisioning/).
+- 在发生灾难的情况下，为您的 Rancher Server 创建备份：[高可用性备份和恢复](/docs/installation/backups-and-restoration/ha-backup-and-restoration/_index)。
+- 创建 Kubernetes 集群：[提供 Kubernetes 集群](/docs/cluster-provisioning/_index)。
 
 <br/>
 
-### FAQ and Troubleshooting
+### 常见问题和故障排除
 
-{{< ssl_faq_ha >}}
+#### 如何知道我的证书是不是 PEM 格式？
 
+您可以通过以下特征识别 PEM 格式：
+
+- 该文件以以下标头开头：`-----BEGIN CERTIFICATE-----`
+- 标头后跟一长串字符。
+- 该文件以页脚结尾：`-----END CERTIFICATE-----`
+
+##### PEM 证书例子：
+
+```
+----BEGIN CERTIFICATE-----
+MIIGVDCCBDygAwIBAgIJAMiIrEm29kRLMA0GCSqGSIb3DQEBCwUAMHkxCzAJBgNV
+... more lines
+VWQqljhfacYPgp8KJUJENQ9h5hZ2nSCrI+W00Jcw4QcEdCI8HL5wmg==
+-----END CERTIFICATE-----
+```
+
+#### 如何通过 base64 编码我的 PEM 文件？
+
+运行以下命令之一。将`FILENAME`替换为您的证书名称。
+
+```
+# MacOS
+cat FILENAME | base64
+# Linux
+cat FILENAME | base64 -w0
+# Windows
+certutil -encode FILENAME FILENAME.base64
+```
+
+#### 如何验证生成的证书的 base64 字符串？
+
+运行以下命令之一。用之前复制的 base64 字符串替换 `YOUR_BASE64_STRING`。
+
+```
+# MacOS
+echo YOUR_BASE64_STRING | base64 -D
+# Linux
+echo YOUR_BASE64_STRING | base64 -d
+# Windows
+certutil -decode FILENAME.base64 FILENAME.verify
+```
+
+#### 如果我想添加中间证书，证书的顺序是什么？
+
+添加证书的顺序如下：
+
+```
+-----BEGIN CERTIFICATE-----
+%你的证书%
+-----END CERTIFICATE-----
+-----BEGIN CERTIFICATE-----
+%你的中间证书%
+-----END CERTIFICATE-----
+```
+
+#### 如何验证我的证书链？
+
+您可以使用 `openssl` 二进制文件来验证证书链。如果命令的输出（请参见下面的命令示例）以`Verify return code: 0 (ok)`，则您的证书链有效。`ca.pem`文件必须与您添加到`rancher/rancher`容器中的文件相同。使用由公认的证书颁发机构签名的证书时，可以省略`-CAfile`参数。
+
+命令：
+
+```
+openssl s_client -CAfile ca.pem -connect rancher.yourdomain.com:443
+...
+    Verify return code: 0 (ok)
+```

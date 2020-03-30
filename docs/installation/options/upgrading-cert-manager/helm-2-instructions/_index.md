@@ -1,128 +1,107 @@
 ---
-title: 使用 Helm 2 升级 Cert-Manager
+title: 升级 Cert-Manager（Helm 2）
 ---
 
-Rancher uses cert-manager to automatically generate and renew TLS certificates for HA deployments of Rancher. As of Fall 2019, three important changes to cert-manager are set to occur that you need to take action on if you have an HA deployment of Rancher:
+Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和更新 TLS 证书。截至 2019 秋季，cert-manager 将发生三个重要的变化，如果你有一个 Rancher 高可用部署，您需要采取以下措施：
 
-1.[Let's Encrypt will be blocking cert-manager instances older than 0.8.0 starting November 1st 2019.](https://community.letsencrypt.org/t/blocking-old-cert-manager-versions/98753)
-1.[Cert-manager is deprecating and replacing the certificate.spec.acme.solvers field](https://docs.cert-manager.io/en/latest/tasks/upgrading/upgrading-0.7-0.8.html#upgrading-from-v0-7-to-v0-8). This change has no exact deadline.
-1.[Cert-manager is deprecating `v1alpha1` API and replacing its API group](https://cert-manager.io/docs/installation/upgrading/upgrading-0.10-0.11/)
+1. [从 2019 年 11 月 1 日开始，Let's Encrypt 将阻止版本低于 0.8.0 的 cert-manager 实例。](https://community.letsencrypt.org/t/blocking-old-cert-manager-versions/98753)
+1. [Cert-manager 正在弃用并替换 certificate.spec.acme.solvers 字段。](https://cert-manager.io/docs/installation/upgrading/upgrading-0.7-0.8/)此更改没有确切的截止日期。
+1. [Cert-manager 正在弃用`v1alpha1`API 并替换它的 API 组。](https://cert-manager.io/docs/installation/upgrading/upgrading-0.10-0.11/)
 
-To address these changes, this guide will do two things:
+为了解决这些变化，本指南将做两件事：
 
-1. Document the procedure for upgrading cert-manager
-1. Explain the cert-manager API changes and link to cert-manager's offficial documentation for migrating your data
+1. 记录升级 cert-manager 的过程
+1. 解释 cert-manager API 的更改，并链接到 cert-manager 的官方文档以迁移数据
 
-> **Important:**
-> If you are currently running the cert-manger whose version is older than v0.11, and want to upgrade both Rancher and cert-manager to a newer version, you need to reinstall both of them:
+:::important 重要提示
+如果您当前正在运行版本低于 v0.11 的 cert-manger，并且想要将 Rancher 和 cert-manager 都升级到新版本，则需要重新安装它们：
 
-> 1. Take a one-time snapshot of your Kubernetes cluster running Rancher server
-> 2. Uninstall Rancher, cert-manager, and the CustomResourceDefinition for cert-manager
-> 3. Install the newer version of Rancher and cert-manager
+1. 对运行 Rancher 服务器的 Kubernetes 集群进行一次性快照
+2. 卸载 Rancher，cert-manager 和 cert-manager 的 CustomResourceDefinition
+3. 安装更新版本的 Rancher 和 cert-manager
 
-> The reason is that when Helm upgrades Rancher, it will reject the upgrade and show error messages if the running Rancher app does not match the chart template used to install it. Because cert-manager changed its API group and we cannot modify released charts for Rancher, there will always be a mismatch on the cert-manager's API version, therefore the upgrade will be rejected.
+原因是当 Helm 升级 Rancher 时，如果运行的 Rancher 应用程序与用于安装它的 chart 模板不匹配，它将拒绝升级并显示错误消息。因为 cert-manager 更改了它的 API 组，并且我们不能修改 Rancher 的已发布的 chart，所以 cert-manager 的 API 版本始终不匹配，因此升级将被拒绝。
+要使用 Helm 重新安装 Rancher，请在升级 Rancher 部分下选中[选项 B: 重新安装 Rancher Chart](/docs/upgrades/upgrades/ha/_index)。
+:::
 
-> For reinstalling Rancher with Helm, please check [Option B: Reinstalling Rancher Chart](/docs/upgrades/upgrades/ha/#c-upgrade-rancher) under the upgrade Rancher section.
+## 仅升级 Cert-Manager
 
-### Upgrade Cert-Manager Only
+> **注意：**
+> 如果你没有升级 Rancher 的计划，这些说明是适用的。
 
-> **Note:**
-> These instructions are applied if you have no plan to upgrade Rancher.
+这些说明中使用的命名空间取决于当前安装了 cert-manager 的命名空间。如果它在 kube-system 中，请在以下说明中使用。您可以通过运行`kubectl get pods --all-namespaces`来验证，并检查 cert-manager-\* pods 列在哪个名称空间中。请勿更改正在运行 cert-manager 的名称空间，否则可能会导致问题。
 
-The namespace used in these instructions depends on the namespace cert-manager is currently installed in. If it is in kube-system use that in the instructions below. You can verify by running `kubectl get pods --all-namespaces` and checking which namespace the cert-manager-\* pods are listed in. Do not change the namespace cert-manager is running in or this can cause issues.
+要升级 cert-manager，请遵循以下说明：
 
-In order to upgrade cert-manager, follow these instructions:
+### 联网升级 cert-manager
 
- accordion id="normal" label="Upgrading cert-manager with Internet access" 
+1.  [备份现有资源](https://cert-manager.io/docs/tutorials/backup/)
 
-1.  Back up existing resources as a precaution
-
-    
-
-``` plain
-    kubectl get -o yaml --all-namespaces issuer,clusterissuer,certificates > cert-manager-backup.yaml
+    ```plain
+    kubectl get -o yaml --all-namespaces \
+    issuer,clusterissuer,certificates,certificaterequests > cert-manager-backup.yaml
     ```
 
-1.  Delete the existing deployment
+1.  删除现有部署
 
-    
-
-``` plain
+    ```plain
     helm delete --purge cert-manager
     ```
 
-1.  Install the CustomResourceDefinition resources separately
+1.  单独安装 CustomResourceDefinition 资源
 
-    
-
-``` plain
+    ```plain
     kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.9/deploy/manifests/00-crds.yaml
     ```
 
-1.  Label the kube-system namespace to disable resource validation
+1.  标记 kube-system 命名空间以禁用资源验证
 
-    
-
-``` plain
+    ```plain
     kubectl label namespace kube-system certmanager.k8s.io/disable-validation=true
     ```
 
-1.  Add the Jetstack Helm repository
+1.  添加 Jetstack Helm 仓库
 
-    
-
-``` plain
+    ```plain
     helm repo add jetstack https://charts.jetstack.io
     ```
 
-1.  Update your local Helm chart repository cache
+1.  更新本地 Helm chart 仓库缓存
 
-    
-
-``` plain
+    ```plain
     helm repo update
     ```
 
-1.  Install the new version of cert-manager
+1.  安装新版本 cert-manager
 
-        
+    ```plain
+    helm install --version 0.9.1 --name cert-manager --namespace kube-system jetstack/cert-manager
+    ```
 
-``` plain
-        helm install --version 0.9.1 --name cert-manager --namespace kube-system jetstack/cert-manager
-        ```
+### 在离线环境中升级 cert-manager
 
-     /accordion 
+#### 先决条件
 
- accordion id="airgap" label="Upgrading cert-manager in an airgapped environment" 
+在执行升级之前，您必须通过将必要的容器镜像添加到私有镜像仓库中并下载或渲染所需的 Kubernetes manifest 文件来准备离线环境。
 
-#### Prerequisites
+1. 按照指南[准备私有镜像仓库](/docs/installation/other-installation-methods/air-gap/populate-private-registry/_index)准备升级所需的镜像。
 
-Before you can perform the upgrade, you must prepare your air gapped environment by adding the necessary container images to your private registry and downloading or rendering the required Kubernetes manifest files.
+1. 从连接到 Internet 的系统中，将 cert-manager 存储库添加到 Helm
 
-1. Follow the guide to [Prepare your Private Registry](/docs/installation/air-gap-installation/prepare-private-reg/) with the images needed for the upgrade.
-
-1. From a system connected to the internet, add the cert-manager repo to Helm
-
-   
-
-``` plain
+   ```plain
    helm repo add jetstack https://charts.jetstack.io
    helm repo update
    ```
 
-1. Fetch the latest cert-manager chart available from the [Helm chart repository](https://hub.helm.sh/charts/jetstack/cert-manager).
+1. 从[Helm chart 仓库](https://hub.helm.sh/charts/jetstack/cert-manager)中获取最新的 cert-manager chart
 
-   
-
-``` plain
+   ```plain
    helm fetch jetstack/cert-manager --version v0.9.1
    ```
 
-1. Render the cert manager template with the options you would like to use to install the chart. Remember to set the `image.repository` option to pull the image from your private registry. This will create a `cert-manager` directory with the Kubernetes manifest files.
+1. 使用您要用于安装 chart 的选项来渲染 cert-manager 模板。记得要为您从私有镜像仓库中拉取的镜像设置`image.repository`选项。 这将创建一个带有 Kubernetes manifest 文件的`cert-manager`目录。
 
-   
-
-``` plain
+   ```plain
    helm template ./cert-manager-v0.9.1.tgz --output-dir . \
    --name cert-manager --namespace kube-system \
    --set image.repository=<REGISTRY.YOURDOMAIN.COM:PORT>/quay.io/jetstack/cert-manager-controller
@@ -130,61 +109,47 @@ Before you can perform the upgrade, you must prepare your air gapped environment
    --set cainjector.image.repository=<REGISTRY.YOURDOMAIN.COM:PORT>/quay.io/jetstack/cert-manager-cainjector
    ```
 
-1. Download the required CRD file for cert-manager
+1. 下载 cert-manager 所需的 CRD 文件
 
-   
-
-``` plain
+   ```plain
    curl -L -o cert-manager/cert-manager-crd.yaml https://raw.githubusercontent.com/jetstack/cert-manager/release-0.9/deploy/manifests/00-crds.yaml
    ```
 
-#### Install cert-manager
+#### 安装 cert-manager
 
-1.  Back up existing resources as a precaution
+1.  备份现有资源
 
-    
-
-``` plain
+    ```plain
     kubectl get -o yaml --all-namespaces issuer,clusterissuer,certificates > cert-manager-backup.yaml
     ```
 
-1.  Delete the existing cert-manager installation
+1.  删除现有的 cert-manager 安装包
 
-    
-
-``` plain
+    ```plain
     kubectl -n kube-system delete deployment,sa,clusterrole,clusterrolebinding -l 'app=cert-manager' -l 'chart=cert-manager-v0.5.2'
     ```
 
-1.  Install the CustomResourceDefinition resources separately
+1.  单独安装 CustomResourceDefinition 资源
 
-    
-
-``` plain
+    ```plain
     kubectl apply -f cert-manager/cert-manager-crd.yaml
     ```
 
-1.  Label the kube-system namespace to disable resource validation
+1.  标记 kube-system 命名空间以禁用资源验证
 
-    
-
-``` plain
+    ```plain
     kubectl label namespace kube-system certmanager.k8s.io/disable-validation=true
     ```
 
-1.  Install cert-manager
+1.  安装 cert-manager
 
-        
+    ```plain
+    kubectl -n kube-system apply -R -f ./cert-manager
+    ```
 
-``` plain
-        kubectl -n kube-system apply -R -f ./cert-manager
-        ```
+安装了 cert-manager 之后，可以通过检查 kube-system 命名空间中运行的 Pod 来验证它是否已正确部署：
 
-     /accordion 
-
-Once you’ve installed cert-manager, you can verify it is deployed correctly by checking the kube-system namespace for running pods:
-
-``` 
+```
 kubectl get pods --namespace kube-system
 
 NAME                                            READY   STATUS      RESTARTS   AGE
@@ -193,26 +158,25 @@ cert-manager-webhook-5b5dd6999-kst4x            1/1     Running     0          3
 cert-manager-cainjector-3ba5cd2bcd-de332x       1/1     Running     0          3m
 ```
 
-If the ‘webhook’ pod (2nd line) is in a ContainerCreating state, it may still be waiting for the Secret to be mounted into the pod. Wait a couple of minutes for this to happen but if you experience problems, please check cert-manager's [troubleshooting](https://docs.cert-manager.io/en/latest/getting-started/troubleshooting.html) guide.
+如果"webhook" pod(第二行)处于 ContainerCreating 状态，则它可能仍在等待 Secret 被安装到 pod 中。等几分钟，以免发生这种情况，但是如果遇到问题，请查看 cert-manager[故障排除](https://docs.cert-manager.io/en/latest/getting-started/troubleshooting.html)指南。
 
-> **Note:** The above instructions ask you to add the disable-validation label to the kube-system namespace. Here are additional resources that explain why this is necessary:
+> **注意：** 上面的说明要求您将 disable-validation 标签添加到 kube-system 命名空间中。这里有一些额外的资源可以解释为什么这是必要的：
 >
-> - [Information on the disable-validation label](https://docs.cert-manager.io/en/latest/tasks/upgrading/upgrading-0.4-0.5.html?highlight=certmanager.k8s.io%2Fdisable-validation#disabling-resource-validation-on-the-cert-manager-namespace)
-> - [Information on webhook validation for certificates](https://docs.cert-manager.io/en/latest/getting-started/webhook.html)
+> - [关于 disable-validation 标签的信息](https://docs.cert-manager.io/en/latest/tasks/upgrading/upgrading-0.4-0.5.html?highlight=certmanager.k8s.io%2Fdisable-validation#disabling-resource-validation-on-the-cert-manager-namespace)
+> - [关于证书的 webhook 验证的信息](https://docs.cert-manager.io/en/latest/getting-started/webhook.html)
 
-### Cert-Manager API change and data migration
+## Cert-Manager API 更改和数据迁移
 
-Cert-manager has deprecated the use of the `certificate.spec.acme.solvers` field and will drop support for it completely in an upcoming release.
+Cert-manager 已经弃用 `certificate.spec.acme.solvers` 字段，并将在即将发布的版本中完全放弃对该字段的支持。
 
-Per the cert-manager documentation, a new format for configuring ACME certificate resources was introduced in v0.8. Specifically, the challenge solver configuration field was moved. Both the old format and new are supported as of v0.9, but support for the old format will be dropped in an upcoming release of cert-manager. The cert-manager documentation strongly recommends that after upgrading you update your ACME Issuer and Certificate resources to the new format.
+根据 cert-manager 文档，在 v0.8 中引入了配置 ACME 证书资源的新格式。具体来说，移动了 challenge solver 配置字段。从 v0.9 开始支持旧格式和新格式，但是在即将发布的 cert-manager 中将不再支持旧格式。cert-manager 文档强烈建议在升级之后将 ACME 颁发者和证书资源更新为新格式。
 
-Details about the change and migration instructions can be found in the [cert-manager v0.7 to v0.8 upgrade instructions](https://cert-manager.io/docs/installation/upgrading/upgrading-0.7-0.8/).
+有关更改和迁移说明的详细信息，请参见[cert-manager v0.7 至 v0.8 升级说明](https://cert-manager.io/docs/installation/upgrading/upgrading-0.7-0.8/)。
 
-The v0.11 release marks the removal of the v1alpha1 API that was used in previous versions of cert-manager, as well as our API group changing to be `cert-manager.io` instead of `certmanager.k8s.io.` 
+v0.11 版本标志着删除了先前版本的 cert-manager 中使用的 v1alpha1 API，并且我们的 API 组已更改为 cert-manager.io 而不是 certmanager.k8s.io。
 
-We have also removed support for the old configuration format that was deprecated in the v0.8 release. This means you must transition to using the new solvers style configuration format for your ACME issuers before upgrading to v0.11. For more information, see the [upgrading to v0.8 guide](https://cert-manager.io/docs/installation/upgrading/upgrading-0.7-0.8/).
+我们还删除了对 v0.8 版本中不支持的旧配置格式的支持，这意味着在升级到 v0.11 之前，您必须转换到为 ACME 发行者使用新的 solvers 样式配置格式。有关更多信息，请参见[升级到 v0.8 指南](https://cert-manager.io/docs/installation/upgrading/upgrading-0.7-0.8/)。
 
-Details about the change and migration instructions can be found in the [cert-manager v0.10 to v0.11 upgrade instructions](https://cert-manager.io/docs/installation/upgrading/upgrading-0.10-0.11/).
+有关更改和迁移说明的详细信息，请参见[cert-manager v0.10 至 v0.11 升级说明](https://cert-manager.io/docs/installation/upgrading/upgrading-0.10-0.11/)。
 
-For information on upgrading from all other versions of cert-manager, refer to the [official documentation](https://cert-manager.io/docs/installation/upgrading/).
-
+有关更多信息，请参见[cert-manager 升级信息](https://cert-manager.io/docs/installation/upgrading/)。
