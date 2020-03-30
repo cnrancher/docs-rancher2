@@ -139,9 +139,9 @@ kubectl -n cattle-system create secret generic tls-ca-additional --from-file=ca-
 
 ## 外部 TLS Termination
 
-我们建议将负载平衡器配置为 4 层平衡器，将普通 80/tcp 和 443/tcp 转发到 Rancher 管理集群节点。 集群上的 Ingress Controller 会将端口 80 上的 http 通信重定向到端口 443 上的 https。
+我们建议将负载均衡器配置为 4 层均衡器，将普通 80/tcp 和 443/tcp 转发到 Rancher 管理集群节点。 集群上的 Ingress Controller 会将端口 80 上的 http 通信重定向到端口 443 上的 https。
 
-您可以在 Rancher 集群（ingress）外部的 L7 负载平衡器上终止 SSL/TLS。 使用`--set tls=external`选项，将负载均衡器指向所有 Rancher 集群节点上的端口 http 80。 这将在 http 端口 80 上公开 Rancher 接口。 请注意，允许直接连接到 Rancher 集群的客户端将不会被加密。 如果您选择这样做，我们建议您将网络级别上的直接访问限制为仅用于您的负载均衡器。
+您可以在 Rancher 集群（ingress）外部的 L7 负载均衡器上终止 SSL/TLS。 使用`--set tls=external`选项，将负载均衡器指向所有 Rancher 集群节点上的端口 http 80。 这将在 http 端口 80 上公开 Rancher 接口。 请注意，允许直接连接到 Rancher 集群的客户端将不会被加密。 如果您选择这样做，我们建议您将网络级别上的直接访问限制为仅用于您的负载均衡器。
 
 > **注意事项:** 如果您使用的是专用 CA 签名的证书，请添加`--set privateCA=true`并参阅[添加 TLS Secrets - 使用私有的 CA 签名证书](/docs/installation/options/helm2/helm-rancher/tls-secrets/_index)来完成给 Rancher 添加 CA 证书。
 
