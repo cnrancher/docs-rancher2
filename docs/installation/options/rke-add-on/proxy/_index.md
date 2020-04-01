@@ -1,43 +1,42 @@
 ---
-title: HTTP 代理设置
+title: HTTP代理配置
 ---
 
-> #### **Important: RKE add-on install is only supported up to Rancher v2.0.8**
->
-> Please use the Rancher helm chart to install Rancher on a Kubernetes cluster. For details, see the [Kubernetes Install - Installation Outline](/docs/installation/k8s-install/#installation-outline).
->
-> If you are currently using the RKE add-on install method, see [Migrating from a Kubernetes Install with an RKE Add-on](/docs/upgrades/upgrades/migrating-from-rke-add-on/) for details on how to move to using the helm chart.
+:::important 重要提示
+RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
+请使用 Rancher helm chart 将 Rancher 安装在 Kubernetes 集群上。有关详细信息，请参见[Rancher 高可用安装](/docs/installation/k8s-install/_index)。
+如果您当前正在使用 RKE add-on 安装方法，参见[将 RKE add-on 安装的 Rancher 迁移到 Helm 安装](/docs/upgrades/upgrades/migrating-from-rke-add-on/_index)，获取有关如何使用 Helm chart 的详细信息。
+:::
 
-If you operate Rancher behind a proxy and you want to access services through the proxy (such as retrieving catalogs), you must provide Rancher information about your proxy. As Rancher is written in Go, it uses the common proxy environment variables as shown below.
+如果您在代理后面操作 Rancher，并且想要通过代理访问服务（例如拉取应用商店），则必须提供有关 Rancher 代理的信息。 由于 Rancher 是用 Go 编写的，因此它使用了常见的代理环境变量，如下所示。
 
-Make sure `NO_PROXY` contains the network addresses, network address ranges and domains that should be excluded from using the proxy.
+确保`NO_PROXY`包含不应使用代理的网络地址，网络地址范围和域。
 
-| Environment variable | Purpose                                                                                                                 |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| HTTP_PROXY           | Proxy address to use when initiating HTTP connection(s)                                                                 |
-| HTTPS_PROXY          | Proxy address to use when initiating HTTPS connection(s)                                                                |
-| NO_PROXY             | Network address(es), network address range(s) and domains to exclude from using the proxy when initiating connection(s) |
+| Environment variable | Purpose                                |
+| -------------------- | -------------------------------------- |
+| HTTP_PROXY           | HTTP 连接的代理地址                    |
+| HTTPS_PROXY          | HTTPS 连接的代理地址                   |
+| NO_PROXY             | 不使用代理的网络地址，网络地址范围和域 |
 
-> **Note** NO_PROXY must be in uppercase to use network range (CIDR) notation.
+> **注意** NO_PROXY 必须为大写才能使用网络范围（CIDR）表示法。
 
-### Installing Rancher on a Kubernetes Cluster
+## Rancher 高可用安装
 
-When using Kubernetes installation, the environment variables need to be added to the RKE Config File template.
+使用 Kubernetes 安装时，需要将环境变量添加到 RKE 配置文件的模板中。
 
-* [Kubernetes Installation with External Load Balancer (TCP/Layer 4) RKE Config File Template](/docs/installation/ha-server-install/#5-download-rke-config-file-template)
-* [Kubernetes Installation with External Load Balancer (HTTPS/Layer 7) RKE Config File Template](/docs/installation/ha-server-install-external-lb/#5-download-rke-config-file-template)
+- [使用外部负载均衡器（TCP / Layer 4）RKE 配置文件模板进行 Rancher 高可用](/docs/installation/options/rke-add-on/layer-4-lb/_index)
+- [使用外部负载均衡器（HTTPS / Layer 7）RKE 配置文件模板进行 Rancher 高可用](/docs/installation/options/rke-add-on/layer-7-lb/_index)
 
-The environment variables should be defined in the `Deployment` inside the RKE Config File Template. You only have to add the part starting with `env:` to (but not including) `ports:` . Make sure the indentation is identical to the preceding `name:` . Required values for `NO_PROXY` are:
+环境变量应在 RKE 配置文件模板内部的 `Deployment` 定义。您只需将它添加到从 `env:` 开头(但不包括)到 `ports:`结束的部分。确保缩进与前面的 `name:` 相同。需要配置 `NO_PROXY` 的值为:
 
-* `localhost` 
-* `127.0.0.1` 
-* `0.0.0.0` 
-* Configured `service_cluster_ip_range` (default: `10.43.0.0/16` )
+- `localhost`
+- `127.0.0.1`
+- `0.0.0.0`
+- 配置 `service_cluster_ip_range` (默认值: `10.43.0.0/16`)
 
-The example below is based on a proxy server accessible at `http://192.168.0.1:3128` , and excluding usage of the proxy when accessing network range `192.168.10.0/24` , the configured `service_cluster_ip_range` ( `10.43.0.0/16` ) and every hostname under the domain `example.com` . If you have changed the `service_cluster_ip_range` , you have to update the value below accordingly.
+下面的示例基于一个 Rancher 可访问的代理服务器 `http://192.168.0.1:3128`，Rancher 会使用这个代理服务器发送请求，但不包括访问网络范围 `192.168.10.0/24`，`service_cluster_ip_range` (`10.43.0.0/16`) 以及域 `example.com` 下的所有主机名。如果更改了 `service_cluster_ip_range`，则必须相应地更新下面的值。
 
-``` yaml
-
+```yaml
 ---
 kind: Deployment
 apiVersion: extensions/v1beta1
@@ -53,24 +52,15 @@ spec:
     spec:
       serviceAccountName: cattle-admin
       containers:
-
         - image: rancher/rancher:latest
-
           imagePullPolicy: Always
           name: cattle-server
           env:
-
             - name: HTTP_PROXY
-
               value: 'http://192.168.10.1:3128'
-
             - name: HTTPS_PROXY
-
               value: 'http://192.168.10.1:3128'
-
             - name: NO_PROXY
-
               value: 'localhost,127.0.0.1,0.0.0.0,10.43.0.0/16,192.168.10.0/24,example.com'
           ports:
 ```
-

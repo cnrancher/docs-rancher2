@@ -182,7 +182,7 @@ module.exports = {
               },
               {
                 type: 'category',
-                label: '将 Rancher 安装在 Kubernetes 中 并通过7层 LB 暴露',
+                label: 'Rancher 高可用 - 7层 LB',
                 items: [
                   'installation/options/rke-add-on/layer-7-lb/_index',
                   'installation/options/rke-add-on/layer-7-lb/alb/_index',
