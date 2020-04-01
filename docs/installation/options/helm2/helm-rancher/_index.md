@@ -38,10 +38,10 @@ Rancher Server 默认需要 SSL/TLS 配置来保证访问的安全性。
 | ----------------------------------------- | -------------------------------- | -------------------------------------------------------------- | ----------------------------- |
 | [Rancher 自签名证书](#rancher-自签名证书) | `ingress.tls.source=rancher`     | 使用 Rancher 生成的 CA 签发的自签名证书<br/>此项为**默认选项** | [是](#选项-安装-cert-manager) |
 | [Let’s Encrypt](#let-s-encrypt)           | `ingress.tls.source=letsEncrypt` | 使用[Let's Encrypt](https://letsencrypt.org/)颁发的证书        | [是](#选项-安装-cert-manager) |
-| [自签名证书](#自签名证书)                 | `ingress.tls.source=secret`      | 使用您的自签名证书（Kubernetes 密文）                          | 否                            |
+| [您已有的证书](#您已有的证书)             | `ingress.tls.source=secret`      | 使用您的已有证书（Kubernetes 密文）                            | 否                            |
 
 :::important 重要
-Rancher 中国技术支持团队建议您使用“自签名证书” `ingress.tls.source=secret` 这种方式，从而减少对 cert-manager 的运维成本。
+Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress.tls.source=secret` 这种方式，从而减少对 cert-manager 的运维成本。
 :::
 
 ## 选装：安装 cert-manager
@@ -164,9 +164,9 @@ Waiting for deployment "rancher" rollout to finish: 0 of 3 updated replicas are 
 deployment "rancher" successfully rolled out
 ```
 
-### 自签名证书
+### 您已有的证书
 
-根据您自己的证书创建 Kubernetes 密文以供 Rancher 使用。
+根据您已有的证书创建 Kubernetes 密文以供 Rancher 使用。
 
 > **提示：** 服务器证书中的 `Common Name` 或 `Subject Alternative Names` 必须与 `hostname` 选项一致, 否则 ingress controller 将无法正确配置。尽管技术上仅需要`Subject Alternative Names`中有一个条目，但是拥有一个匹配的 `Common Name` 可以最大程度的提高与旧版浏览器/应用程序的兼容性。如果您想检查证书是否正确，请查看[如何在服务器证书中检查 Common Name 和 Subject Alternative Names](/docs/faq/technical/_index)。
 

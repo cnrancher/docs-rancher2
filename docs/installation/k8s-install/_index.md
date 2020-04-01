@@ -1,62 +1,70 @@
 ---
-title: 介绍
+title: 安装说明
 ---
 
-For production environments, we recommend installing Rancher in a high-availability configuration so that your user base can always access Rancher Server. When installed in a Kubernetes cluster, Rancher will integrate with the cluster's etcd database and take advantage of Kubernetes scheduling for high-availability.
+对于生产环境，我们建议以高可用配置安装 Rancher，以便您的用户始终可以访问 Rancher Server。当 Rancher 安装在 Kubernetes 集群中时，Rancher 将与集群的 etcd 数据库或 MySQL （适用于 v2.4.0+）集成，并利用 Kubernetes 调度来实现高可用。
 
-This section describes how to first use RKE to create and manage a cluster, then install Rancher onto that cluster. For this type of architecture, you will need to deploy three VMs in the infrastructure provider of your choice. You will also need to configure a load balancer to direct front-end traffic to the three VMs. When the VMs are running and fulfill the [node requirements, ](/docs/installation/requirements) you can use RKE to deploy Kubernetes onto them, then use the Helm package manager to deploy Rancher onto Kubernetes.
+本节介绍如何使用 RKE 或 K3s 创建和管理集群，然后将 Rancher 安装到该集群上。对于这种类型的架构，您将需要在基础设施提供商中部署三个节点 - 通常为虚拟机。您还需要配置负载均衡器，将前端流量定向到这三个节点。当节点运行起来并满足[节点要求](/docs/installation/requirements/_index)时，可以使用 RKE 或 K3s 将 Kubernetes 部署到这些节点上，然后使用 Helm 软件包管理器将 Rancher 部署到 Kubernetes 上。
 
-#### Optional: Installing Rancher on a Single-node Kubernetes Cluster
+## 可选：在单节点 Kubernetes 集群上安装 Rancher
 
-If you only have one node, but you want to use the Rancher server in production in the future, it is better to install Rancher on a single-node Kubernetes cluster than to install it with Docker.
+如果您只有一个节点，但您想在将来的生产中使用 Rancher Server，则最好将 Rancher 安装在单节点 Kubernetes 集群上，而不是使用 Docker 安装它。
 
-One option is to install Rancher with Helm on a Kubernetes cluster, but to only use a single node in the cluster. In this case, the Rancher server does not have high availability, which is important for running Rancher in production. However, this option is useful if you want to save resources by using a single node in the short term, while preserving a high-availability migration path. In the future, you can add nodes to the cluster to get a high-availability Rancher server.
+一种选择是在 Kubernetes 集群上使用 Helm 安装 Rancher，但仅使用集群中的单个节点。在这种情况下，Rancher Server 不具有高可用性，这对于在生产环境中运行 Rancher 至关重要。如果您想在短期内通过使用单个节点来节省资源，同时又保留 Rancher 高可用迁移路径，则此选项很有用。将来，您可以将更多节点添加到集群中以获得真正高可用的 Rancher Server。
 
-The single-node Kubernetes install can be achieved by describing only one node in the `cluster.yml` when provisioning the Kubernetes cluster with RKE. The single node would have all three roles: `etcd` , `controlplane` , and `worker` . Then Rancher would be installed with Helm on the cluster in the same way that it would be installed on any other cluster.
+### 通过 RKE 安装
 
-#### Important Notes on Architecture
+通过为 RKE 配置 Kubernetes 集群时，可以通过在`cluster.yml`中只描述一个节点就可以实现单节点 Kubernetes 的安装。这个节点将具有所有三个角色：`etcd`，`controlplane`和`worker`。
 
-The Rancher management server can only be run on an RKE-managed Kubernetes cluster. Use of Rancher on hosted Kubernetes or other providers is not supported.
+### 通过 K3s 安装
 
-For the best performance and security, we recommend a dedicated Kubernetes cluster for the Rancher management server. Running user workloads on this cluster is not advised. After deploying Rancher, you can [create or import clusters](/docs/cluster-provisioning/#cluster-creation-in-rancher) for running your workloads.
+通过 K3s 安装 Kubernetes 集群时，可以将这个节点同时作为 Server 和 Agent 节点
 
-We recommend the following architecture and configurations for the load balancer and Ingress controllers:
+然后，就像在其他任何集群上安装一样，使用 Helm 将 Rancher 安装在集群上。
 
-* DNS for Rancher should resolve to a Layer 4 load balancer (TCP)
-* The Load Balancer should forward port TCP/80 and TCP/443 to all 3 nodes in the Kubernetes cluster.
-* The Ingress controller will redirect HTTP to HTTPS and terminate SSL/TLS on port TCP/443.
-* The Ingress controller will forward traffic to port TCP/80 on the pod in the Rancher deployment.
+## 关于架构的重要说明
 
-For more information on how a Kubernetes Installation works, refer to [this page.](/docs/installation/how-ha-works)
+Rancher Server 只能在 RKE 或 K3s 管理的 Kubernetes 集群上运行。不支持在托管的 Kubernetes 或其他提供商上使用 Rancher。
 
-For information on how Rancher works, regardless of the installation method, refer to the [architecture section.](/docs/overview/architecture)
+为了获得最佳性能和安全性，我们建议为 Rancher Server 使用专用的 Kubernetes 集群。不建议在此集群上运行用户的其他工作负载。部署完 Rancher 之后，您可以[创建或导入](/docs/cluster-provisioning/_index)用于运行用户工作负载的集群。
 
-### Required CLI Tools
+我们建议负载均衡器和 Ingress 控制器使用以下架构和配置：
 
-The following CLI tools are required for this install. Please make sure these tools are installed and available in your `$PATH` 
+- Rancher 的 DNS 应该解析到 4 层负载均衡器
+- 负载均衡器应将端口 TCP/80 和 TCP/443 的流量转发到 Kubernetes 集群中的所有 3 个节点。
+- Ingress 控制器会将 HTTP 重定向到 HTTPS，并在端口 TCP/443 上终止 SSL/TLS。
+- Ingress 控制器会将流量转发到 Rancher Server Deployment 中 Pod 上的端口 TCP/80。
 
-* [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl) - Kubernetes command-line tool.
-* [rke]({{<baseurl>}}/rke/latest/en/installation/) - Rancher Kubernetes Engine, cli for building Kubernetes clusters.
-* [helm](https://docs.helm.sh/using_helm/#installing-helm) - Package management for Kubernetes. Refer to the [Helm version requirements](/docs/installation/options/helm-version) to choose a version of Helm to install Rancher.
+有关 Rancher 高可用安装是如何工作的，请参阅[此页面](/docs/installation/how-ha-works/_index)。
 
-### Installation Outline
+有关 Rancher 是如何工作的（与安装方法无关），请参阅[产品架构](/docs/overview/architecture/_index)。
 
-* [Create Nodes and Load Balancer](/docs/installation/k8s-install/create-nodes-lb/)
-* [Install Kubernetes with RKE](/docs/installation/k8s-install/kubernetes-rke/)
-* [Install Rancher](/docs/installation/k8s-install/helm-rancher/)
+## 需要的 CLI 工具
 
-### Additional Install Options
+此安装需要以下 CLI 工具。请确保这些工具已经安装并在`$PATH`中可用
 
-* [Migrating from a high-availability Kubernetes Install with an RKE Add-on](/docs/upgrades/upgrades/migrating-from-rke-add-on/)
-* [Installing Rancher with Helm 2:](/docs/installation/options/helm2) This section provides a copy of the older high-availability Rancher installation instructions that used Helm 2, and it is intended to be used if upgrading to Helm 3 is not feasible.
+- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl) - Kubernetes 命令行工具.
+- [rke](https://rancher.com/docs/rke/latest/en/installation/) - Rancher Kubernetes Engine，用于构建 Kubernetes 集群的 cli。
+- [k3s](https://rancher.com/docs/k3s/latest/en/) - Rancher K3s。
+- [helm](https://docs.helm.sh/using_helm/#installing-helm) - Kubernetes 的软件包管理工具。请参阅[Helm 版本要求](/docs/installation/options/helm-version/_index)选择 Helm 的版本来安装 Rancher。
 
-### Previous Methods
+## 安装摘要
 
-[RKE add-on install](/docs/installation/options/rke-add-on/)
+- [创建节点和负载均衡器](/docs/installation/k8s-install/create-nodes-lb/_index)
+- [安装 Kubernetes](/docs/installation/k8s-install/kubernetes-rke/_index)
+- [安装 Rancher](/docs/installation/k8s-install/helm-rancher/_index)
 
-> **Important: RKE add-on install is only supported up to Rancher v2.0.8**
+## 其他安装选项
+
+- [从 RKE Add-on 安装的 Rancher 高可用迁移到 Helm 安装](/docs/upgrades/upgrades/migrating-from-rke-add-on/_index)
+- [使用 Helm 2 安装 Rancher 高可用](/docs/installation/options/helm2/_index)：本节提供了使用 Helm 2 安装高可用 Rancher 的说明，如果无法升级到 Helm 3，则可以使用该说明。
+
+## 弃用的安装方法
+
+[RKE add-on 安装](/docs/installation/options/rke-add-on/_index)
+
+> **重要说明：RKE ADD-ON 安装仅在 RANCHER v2.0.8 之前到版本中支持**
 >
-> Please use the Rancher Helm chart to install Rancher on a Kubernetes cluster. For details, see the [Kubernetes Install - Installation Outline](/docs/installation/k8s-install/#installation-outline).
+> 请使用 Rancher Helm Chart 在 Kubernetes 集群上安装 Rancher 高可用。更多信息请参阅[Rancher 高可用安装](/docs/installation/k8s-install/_index)
 >
-> If you are currently using the RKE add-on install method, see [Migrating from a Kubernetes Install with an RKE Add-on](/docs/upgrades/upgrades/migrating-from-rke-add-on/) for details on how to move to using the helm chart.
-
+> 如果您当前正在使用 RKE add-on 安装方式，请参阅[从 RKE Add-on 安装的 Rancher 高可用迁移到 Helm 安装](/docs/upgrades/upgrades/migrating-from-rke-add-on/_index)以获取有关如何使用 Helm Chart 的详细信息。

@@ -1,27 +1,26 @@
 ---
-title: HA 安装介绍
+title: 关于高可用安装
 ---
 
-We recommend using [Helm, ](/docs/overview/architecture/concepts/#about-helm) a Kubernetes package manager, to install Rancher on a dedicated Kubernetes cluster. This is called a high-availability Kubernetes installation because increased availability is achieved by running Rancher on multiple nodes.
+我们建议使用[Helm](/docs/overview/architecture/concepts/#about-helm) (Kubernetes 包管理器)在专用的 Kubernetes 集群上安装 Rancher。这被称为高可用 Kubernetes 安装，因为通过在多个节点上运行 Rancher 可以提高可用性。
 
-In a standard installation, Kubernetes is first installed on three nodes that are hosted in an infrastructure provider such as Amazon's EC2 or Google Compute Engine.
+在标准安装中，首先将 Kubernetes 安装在基础设施提供商（例如 Amazon 的 EC2 或 Google Compute Engine）中托管的三个节点上。
 
-Then Helm is used to install Rancher on top of the Kubernetes cluster. Helm uses Rancher's Helm chart to install a replica of Rancher on each of the three nodes in the Kubernetes cluster. We recommend using a load balancer to direct traffic to each replica of Rancher in the cluster, in order to increase Rancher's availability.
+然后使用 Helm 在 Kubernetes 集群上安装 Rancher。Helm 使用 Rancher 的 Helm chart 在 Kubernetes 集群的三个节点中的每个节点上安装 Rancher 的副本。我们建议使用负载均衡器将流量定向到集群中 Rancher 的每个副本，以提高 Rancher 的可用性。
 
-The Rancher server data is stored on etcd. This etcd database also runs on all three nodes, and requires an odd number of nodes so that it can always elect a leader with a majority of the etcd cluster. If the etcd database cannot elect a leader, etcd can fail, requiring the cluster to be restored from backup.
+Rancher server 数据存储在 etcd 或 MySQL （适用于 v2.4.0+） 中。etcd 数据库可以在所有三个节点上运行，并且需要奇数个节点，这样它就可以由大多数节点的选举出 etcd 集群的 leader。如果 etcd 数据库不能选出 leader，则 etcd 可能会失败，从而需要从备份中还原集群。
 
-For information on how Rancher works, regardless of the installation method, refer to the [architecture section.](/docs/overview/architecture)
+有关 Rancher 如何工作的说明（与安装方法无关），请参阅[架构部分](/docs/overview/architecture)。
 
-#### Recommended Architecture
+#### 推荐架构
 
-* DNS for Rancher should resolve to a layer 4 load balancer
-* The Load Balancer should forward port TCP/80 and TCP/443 to all 3 nodes in the Kubernetes cluster.
-* The Ingress controller will redirect HTTP to HTTPS and terminate SSL/TLS on port TCP/443.
-* The Ingress controller will forward traffic to port TCP/80 on the pod in the Rancher deployment.
+- Rancher 的 DNS 应该解析为 4 层负载均衡器
+- 负载均衡器应将端口 TCP/80 和 TCP/443 流量转发到 Kubernetes 集群中的所有 3 个节点。
+- Ingress 控制器会将 HTTP 重定向到 HTTPS，并在端口 TCP/443 上终止 SSL/TLS。
+- Ingress 控制器会将流量转发到 Rancher deployment 中 Pod 上的端口 TCP/80。
 
-<figcaption>Kubernetes Rancher install with layer 4 load balancer, depicting SSL termination at ingress controllers</figcaption>
+<figcaption>下图为使用 4 层负载均衡器在 Kubernetes 集群中安装的 Rancher 高可用，描述了 ingress 控制器的SSL终止</figcaption>
 
 ![High-availability Kubernetes Installation of Rancher](/img/rancher/ha/rancher2ha.svg)
 
-<sup>Kubernetes Rancher install with Layer 4 load balancer (TCP), depicting SSL termination at ingress controllers</sup>
-
+<sup>Kubernetes Rancher 安装了 4 层负载均衡器（TCP），描述了 ingress 控制器的 SSL 终止</sup>
