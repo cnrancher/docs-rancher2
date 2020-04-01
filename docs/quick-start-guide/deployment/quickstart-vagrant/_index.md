@@ -1,14 +1,14 @@
 ---
-title: 使用 Vagrant 快速部署
+title: Vagrant 快速部署
 ---
 
 The following steps quickly deploy a Rancher Server with a single node cluster attached.
 
 ### Prerequisites
 
-* [Vagrant](https://www.vagrantup.com): Vagrant is required as this is used to provision the machine based on the Vagrantfile.
-* [Virtualbox](https://www.virtualbox.org): The virtual machines that Vagrant provisions need to be provisioned to VirtualBox.
-* At least 4GB of free RAM.
+- [Vagrant](https://www.vagrantup.com): Vagrant is required as this is used to provision the machine based on the Vagrantfile.
+- [Virtualbox](https://www.virtualbox.org): The virtual machines that Vagrant provisions need to be provisioned to VirtualBox.
+- At least 4GB of free RAM.
 
 ### Getting Started
 
@@ -18,8 +18,8 @@ The following steps quickly deploy a Rancher Server with a single node cluster a
 
 3.**Optional:** Edit `config.yaml` to:
 
-   - Change the number of nodes and the memory allocations, if required.( `node.count` , `node.cpus` , `node.memory` )
-   - Change the password of the `admin` user for logging into Rancher.( `default_password` )
+- Change the number of nodes and the memory allocations, if required.( `node.count` , `node.cpus` , `node.memory` )
+- Change the password of the `admin` user for logging into Rancher.( `default_password` )
 
 4. To initiate the creation of the environment run, `vagrant up` .
 
@@ -36,4 +36,3 @@ Use Rancher to create a deployment. For more information, see [Creating Deployme
 1. From the `quickstart/vagrant` folder execute `vagrant destroy -f` .
 
 2. Wait for the confirmation that all resources have been destroyed.
-

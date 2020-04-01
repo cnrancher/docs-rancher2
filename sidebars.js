@@ -30,10 +30,10 @@ module.exports = {
         label: '部署 Rancher Server',
         items: [
           'quick-start-guide/deployment/_index',
+          'quick-start-guide/deployment/quickstart-manual-setup/_index',
           'quick-start-guide/deployment/digital-ocean-qs/_index',
           'quick-start-guide/deployment/amazon-aws-qs/_index',
-          'quick-start-guide/deployment/quickstart-vagrant/_index',
-          'quick-start-guide/deployment/quickstart-manual-setup/_index'
+          'quick-start-guide/deployment/quickstart-vagrant/_index'
         ]
       },
       {
@@ -60,12 +60,12 @@ module.exports = {
       'installation/how-ha-works/_index',
       {
         type: 'category',
-        label: '在 Kubernetes 集群中安装 Rancher',
+        label: 'Rancher 高可用安装',
         items: [
           'installation/k8s-install/_index',
           {
             type: 'category',
-            label: '1、创建节点和负载均衡',
+            label: '1、配置基础设置',
             items: [
               'installation/k8s-install/create-nodes-lb/_index',
               'installation/k8s-install/create-nodes-lb/nginx/_index',
@@ -83,7 +83,7 @@ module.exports = {
           'installation/other-installation-methods/_index',
           {
             type: 'category',
-            label: '通过 Docker 将 Rancher 安装在单节点中',
+            label: 'Rancher 单节点安装',
             items: [
               'installation/other-installation-methods/single-node-docker/_index',
               'installation/other-installation-methods/single-node-docker/troubleshooting/_index',
@@ -94,7 +94,7 @@ module.exports = {
           },
           {
             type: 'category',
-            label: '在离线环境中安装 Rancher',
+            label: 'Rancher 离线安装',
             items: [
               'installation/other-installation-methods/air-gap/_index',
               'installation/other-installation-methods/air-gap/prepare-nodes/_index',
@@ -117,7 +117,7 @@ module.exports = {
               'installation/options/helm2/_index',
               {
                 type: 'category',
-                label: '1、创建节点和负载均衡',
+                label: '1、配置基础设施',
                 items: [
                   'installation/options/helm2/create-nodes-lb/_index',
                   'installation/options/helm2/create-nodes-lb/nginx/_index',

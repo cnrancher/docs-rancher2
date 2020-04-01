@@ -193,7 +193,7 @@ RKE 使用`.yml`配置文件来安装和配置 Kubernetes 集群。根据要使�
 
 从以下选项中选择：
 
-#### 选项 A — 使用您自己的证书：自签名
+#### 选项 A — 使用您已有的证书：自签名
 
 > **先决条件：**
 > 创建一个自签名证书
@@ -242,12 +242,12 @@ RKE 使用`.yml`配置文件来安装和配置 Kubernetes 集群。根据要使�
      cacerts.pem: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUNvRENDQVlnQ0NRRHVVWjZuMEZWeU16QU5CZ2txaGtpRzl3MEJBUXNGQURBU01SQXdEZ1lEVlFRRERBZDAKWlhOMExXTmhNQjRYRFRFNE1EVXdOakl4TURRd09Wb1hEVEU0TURjd05USXhNRFF3T1Zvd0VqRVFNQTRHQTFVRQpBd3dIZEdWemRDMWpZVENDQVNJd0RRWUpLb1pJaHZjTkFRRUJCUUFEZ2dFUEFEQ0NBUW9DZ2dFQkFNQmpBS3dQCndhRUhwQTdaRW1iWWczaTNYNlppVmtGZFJGckJlTmFYTHFPL2R0RUdmWktqYUF0Wm45R1VsckQxZUlUS3UzVHgKOWlGVlV4Mmo1Z0tyWmpwWitCUnFiZ1BNbk5hS1hocmRTdDRtUUN0VFFZdGRYMVFZS0pUbWF5NU45N3FoNTZtWQprMllKRkpOWVhHWlJabkdMUXJQNk04VHZramF0ZnZOdmJ0WmtkY2orYlY3aWhXanp2d2theHRUVjZlUGxuM2p5CnJUeXBBTDliYnlVcHlad3E2MWQvb0Q4VUtwZ2lZM1dOWmN1YnNvSjhxWlRsTnN6UjVadEFJV0tjSE5ZbE93d2oKaG41RE1tSFpwZ0ZGNW14TU52akxPRUc0S0ZRU3laYlV2QzlZRUhLZTUxbGVxa1lmQmtBZWpPY002TnlWQUh1dApuay9DMHpXcGdENkIwbkVDQXdFQUFUQU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFHTCtaNkRzK2R4WTZsU2VBClZHSkMvdzE1bHJ2ZXdia1YxN3hvcmlyNEMxVURJSXB6YXdCdFJRSGdSWXVtblVqOGo4T0hFWUFDUEthR3BTVUsKRDVuVWdzV0pMUUV0TDA2eTh6M3A0MDBrSlZFZW9xZlVnYjQrK1JLRVJrWmowWXR3NEN0WHhwOVMzVkd4NmNOQQozZVlqRnRQd2hoYWVEQmdma1hXQWtISXFDcEsrN3RYem9pRGpXbi8walI2VDcrSGlaNEZjZ1AzYnd3K3NjUDIyCjlDQVZ1ZFg4TWpEQ1hTcll0Y0ZINllBanlCSTJjbDhoSkJqa2E3aERpVC9DaFlEZlFFVFZDM3crQjBDYjF1NWcKdE03Z2NGcUw4OVdhMnp5UzdNdXk5bEthUDBvTXl1Ty82Tm1wNjNsVnRHeEZKSFh4WTN6M0lycGxlbTNZQThpTwpmbmlYZXc9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
    ```
 
-#### 选项 B — 使用您自己的证书：由公认的 CA 签发
+#### 选项 B — 使用您已有的证书：由公认的 CA 签发
 
 > **注意：**
-> 如果您使用的是自签名证书，[单击此处](#选项-a--使用您自己的证书：自签名)继续。
+> 如果您使用的是自签名证书，[单击此处](#选项-a--使用您已有的证书：自签名)继续。
 
-如果您使用的是由公认的证书颁发机构签名的证书，您需要为证书文件和证书密钥文件生成 base64 编码的字符串。确保您的证书文件包括链接中的所有`中间证书`，在这种情况下，证书的顺序首先是您自己的证书，然后是中间证书。请参阅您的 CSP(Certificate Service Provider)文档，了解需要包括哪些中间证书。
+如果您使用的是由公认的证书颁发机构签名的证书，您需要为证书文件和证书密钥文件生成 base64 编码的字符串。确保您的证书文件包括链接中的所有`中间证书`，在这种情况下，证书的顺序首先是您已有的证书，然后是中间证书。请参阅您的 CSP(Certificate Service Provider)文档，了解需要包括哪些中间证书。
 
 在`kind: Secret`中`name: cattle-keys-ingress`：
 
