@@ -1,241 +1,218 @@
 ---
-title: 介绍
+title: 配置告警
 ---
 
-To keep your clusters and applications healthy and driving your organizational productivity forward, you need to stay informed of events occurring in your clusters and projects, both planned and unplanned. When an event occurs, your alert is triggered, and you are sent a notification. You can then, if necessary, follow up with corrective actions.
+为了保证集群和应用程序的健康，提高组织的生产力，您需要随时了解集群和项目里计划内和计划外发生的事件。发生事件时，将触发您的告警，并向您发送通知。然后，您可以根据需要采取应对措施。
 
-Notifiers and alerts are built on top of the [Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager/). Leveraging these tools, Rancher can notify [cluster owners](/docs/admin-settings/rbac/cluster-project-roles/#cluster-roles) and [project owners](/docs/admin-settings/rbac/cluster-project-roles/#project-roles) of events they need to address.
+通知和告警功能是基于 [Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager/) 的。利用这些工具，Rancher 可以通知[集群所有者](/docs/admin-settings/rbac/cluster-project-roles/_index)和[项目所有者](/docs/admin-settings/rbac/cluster-project-roles/_index)有需要处理的告警。
 
-Before you can receive alerts, you must configure one or more notifier in Rancher.
+在接收告警之前，必须在 Rancher 中配置一个或多个通知接收者。
 
-When you create a cluster, some alert rules are predefined. You can receive these alerts if you configure a [notifier](/docs/cluster-admin/tools/notifiers) for them.
+创建集群时，Rancher 已经配置了一些内置的告警规则。为它们配置[接收者](/docs/cluster-admin/tools/notifiers/_index)后就能收到相应告警。
 
-For details about what triggers the predefined alerts, refer to the [documentation on default alerts.](/docs/cluster-admin/tools/alerts/default-alerts)
+有关触发内置告警的详细信息，请参阅[内置告警](/docs/cluster-admin/tools/alerts/default-alerts/_index)。
 
-This section covers the following topics:
+## 告警示例
 
-* [Alert event examples](#alert-event-examples)
-* [Urgency levels](#urgency-levels)
-* [Scope of alerts](#scope-of-alerts)
-* [Adding cluster alerts](#adding-cluster-alerts)
-* [Managing cluster alerts](#managing-cluster-alerts)
+- Kubernetes 组件进入不健康状态。
+- 节点或者[工作负载](/docs/k8s-in-rancher/workloads/_index)发生错误。
+- 部署可以正常被调度。
+- 节点的硬件资源过分紧张。
 
-## Alert Event Examples
+## 紧急程度
 
-Some examples of alert events are:
+您可以为每个告警设置紧急程度。您收到的通知中会包含紧急程度，可帮助您决定响应操作的优先级。例如，如果您配置了告警以通知您例行部署，无需执行任何操作。这些告警可以设置为低优先级。但是，如果部署失败，将严重影响您的组织，需要您快速做出反应。所以需要为这些告警配置高优先级。
 
-* A Kubernetes [master component](/docs/cluster-provisioning/#kubernetes-cluster-node-components) entering an unhealthy state.
-* A node or [workload](/docs/k8s-in-rancher/workloads/) error occurring.
-* A scheduled deployment taking place as planned.
-* A node's hardware resources becoming overstressed.
+## 告警层级
 
-## Urgency Levels
+告警包含集群级别和[项目级别](/docs/project-admin/tools/alerts/_index)告警
 
-You can set an urgency level for each alert. This urgency appears in the notification you receive, helping you to prioritize your response actions. For example, if you have an alert configured to inform you of a routine deployment, no action is required. These alerts can be assigned a low priority level. However, if a deployment fails, it can critically impact your organization, and you need to react quickly. Assign these alerts a high priority level.
+在集群级别，Rancher 监控 Kubernetes 集群中的组件，并向您发送与以下内容有关的告警：
 
-## Scope of Alerts
+- 节点状态
+- 管理 Kubernetes 集群的系统组件
+- 对应 Kubernetes 资源发生的事件
+- Prometheus 表达式越过阈值
 
-The scope for alerts can be set at either the cluster level or [project level](/docs/project-admin/tools/alerts/).
+## 添加一个集群级别的告警
 
-At the cluster level, Rancher monitors components in your Kubernetes cluster, and sends you alerts related to:
+作为[集群所有者](/docs/admin-settings/rbac/cluster-project-roles/_index)，您可以配置 Rancher 向您发送有关集群事件的告警。
 
-* The state of your nodes.
-* The system services that manage your Kubernetes cluster.
-* The resource events from specific system services.
-* The Prometheus expression cross the thresholds
+> **前提：** 在收到集群告警之前，您必须[添加接收者](/docs/cluster-admin/tools/notifiers/_index)。
 
-## Adding Cluster Alerts
+1. 从 **全局** 视图，进入您需要配置告警的集群。选择 **工具 > 告警**。 然后点击 **添加告警组**。
 
-As a [cluster owner](/docs/admin-settings/rbac/cluster-project-roles/#cluster-roles), you can configure Rancher to send you alerts for cluster events.
+1. 输入 **名称** 及本条告警的描述，您可以将告警按照不同目的分组。
 
-> **Prerequisite:** Before you can receive cluster alerts, you must [add a notifier](/docs/cluster-admin/tools/notifiers/#adding-notifiers).
+1. 根据您要创建的告警类型，查看以下对应操作。
 
-1. From the **Global** view, navigate to the cluster that you want to configure cluster alerts for. Select **Tools > Alerts**. Then click **Add Alert Group**.
+   - 系统组件告警
 
-1. Enter a **Name** for the alert that describes its purpose, you could group alert rules for the different purpose.
+     此告警类型监控 Kubernetes 系统组件状态，无论组件在哪个节点上。
 
-1. Based on the type of alert you want to create, complete one of the instruction subsets below.
+     1. 选择 **系统服务** 选项，然后从下拉列表中选择一个选项。
 
-    accordion id="system-service" label="System Service Alerts" 
+        - [controller-manager](https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager)
+        - [etcd](https://kubernetes.io/docs/concepts/overview/components/#etcd)
+        - [scheduler](https://kubernetes.io/docs/concepts/overview/components/#kube-scheduler)
 
-   This alert type monitor for events that affect one of the Kubernetes master components, regardless of the node it occurs on.
+     1. 选择告警的紧急程度。选项包括：
 
-1. Select the **System Services** option, and then select an option from the drop-down.
+        - **危险**：最紧急
+        - **告警**：正常紧急
+        - **信息**：最不紧急
 
-* [controller-manager](https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager)
-* [etcd](https://kubernetes.io/docs/concepts/overview/components/#etcd)
-* [scheduler](https://kubernetes.io/docs/concepts/overview/components/#kube-scheduler)
+        根据服务的重要性以及在集群中担任角色的节点数，选择紧急级别。例如，如果您要为`etcd`服务发出告警，请选择**危险**。如果您要提醒冗余调度程序，则**告警**更合适。
 
-1. Select the urgency level of the alert. The options are:
+     1. 配置高级选项。默认情况下，以下选项将应用于组中的所有告警规则。您也可以在配置每一条规则时禁用继承来自告警组的高级选项配置，自定义每条规则的高级选项配置。
 
-   - **Critical**: Most urgent
-   - **Warning**: Normal urgency
-   - **Info**: Least urgent
+        - **告警组等待时长：** 第一次发送告警信息前，等待时间，默认为 30 秒。
+        - **告警组间隔时长：** 在发送了第一次的告警之后有新告警产生时，等待是否有告警触发，经过这个时间后，可以把这段时间的告警批量发送给接受者，默认为 3 分钟。
+        - **重复间隔：** 发送两条相同的告警之间的时间间隔，默认为 1 小时。
 
-     <br/>
-     <br/>
-     Select the urgency level based on the importance of the service and how many nodes fill the role within your cluster. For example, if you're making an alert for the `etcd` service, select **Critical**. If you're making an alert for redundant schedulers, **Warning** is more appropriate.
+   - 资源事件告警
 
-1. Configure advanced options. By default, the below options will apply to all alert rules within the group. You can disable these advanced options when configuring a specific rule.
+     此告警类型监控指定资源类型上发生的事件。
 
-   - **Group Wait Time**: How long to wait to buffer alerts of the same group before sending initially, default to 30 seconds.
-   - **Group Interval Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 30 seconds.
-   - **Repeat Wait Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 1 hour.
+     1. 选择触发告警的事件的类型。选项包括：
 
- /accordion 
- accordion id="resource-event" label="Resource Event Alerts" 
-This alert type monitors for specific events that are thrown from a resource type.
+        - **正常**: 在对应资源发生正常事件时触发告警
+        - **告警**: 在对应资源发生告警事件时触发告警
 
-1. Choose the type of resource event that triggers an alert. The options are:
+     1. 从**选择资源**下拉列表中选择要触发告警的资源类型
 
-* **Normal**: triggers an alert when any standard resource event occurs.
-* **Warning**: triggers an alert when unexpected resource events occur.
+        - [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)
+        - [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+        - [Node](https://kubernetes.io/docs/concepts/architecture/nodes/)
+        - [Pod](https://kubernetes.io/docs/concepts/workloads/pods/pod/)
+        - [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
 
-1. Select a resource type from the **Choose a Resource** drop-down that you want to trigger an alert.
+     1. 选择告警的紧急程度。选项包括：
 
-* [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)
-* [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
-* [Node](https://kubernetes.io/docs/concepts/architecture/nodes/)
-* [Pod](https://kubernetes.io/docs/concepts/workloads/pods/pod/)
-* [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
+        - **危险**: 最紧急
+        - **告警**: 正常紧急
+        - **信息**: 最不紧急
 
-1. Select the urgency level of the alert.
+        通过考虑事件发生的频率或其重要性等因素来选择告警的紧急程度。例如：
 
-   - **Critical**: Most urgent
-   - **Warning**: Normal urgency
-   - **Info**: Least urgent
+        - 如果您为 Pod 设置了常规告警，则您可能会经常收到告警，并且 Pod 通常会自愈，因此，请选择**信息**作为紧急程度
+        - 如果 StatefulSets 无法工作，则很可能无法自愈，因此，请选择**危险**作为紧急程度。
 
-     <br/>
-     <br/>
-     Select the urgency level of the alert by considering factors such as how often the event occurs or its importance. For example:
+     1. 配置高级选项。默认情况下，以下选项将应用于组中的所有告警规则。您也可以在配置每一条规则时禁用继承来自告警组的高级选项配置，自定义每条规则的高级选项配置。
 
-   - If you set a normal alert for pods, you're likely to receive alerts often, and individual pods usually self-heal, so select an urgency of **Info**.
-   - If you set a warning alert for StatefulSets, it's very likely to impact operations, so select an urgency of **Critical**.
+        - **告警组等待时长：** 第一次发送告警信息前，等待时间，默认为 30 秒。
+        - **告警组间隔时长：** 在发送了第一次的告警之后有新告警产生时，等待是否有告警触发，经过这个时间后，可以把这段时间的告警批量发送给接受者，默认为 3 分钟。
+        - **重复间隔：** 发送两条相同的告警之间的时间间隔，默认为 1 小时。
 
-1. Configure advanced options. By default, the below options will apply to all alert rules within the group. You can disable these advanced options when configuring a specific rule.
+   - 节点告警
 
-   - **Group Wait Time**: How long to wait to buffer alerts of the same group before sending initially, default to 30 seconds.
-   - **Group Interval Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 30 seconds.
-   - **Repeat Wait Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 1 hour.
+     此告警类型监控特定节点的情况。
 
- /accordion 
- accordion id="node" label="Node Alerts" 
-This alert type monitors for events that occur on a specific node.
+     1. 选择**节点**选项，然后从**选择节点**下拉列表中选择。
 
-1. Select the **Node** option, and then make a selection from the **Choose a Node** drop-down.
+     1. 选择触发告警的情况。
 
-1. Choose an event to trigger the alert.
+        - **未就绪**: 当节点无响应时发送告警。
+        - **CPU 使用率**: 当节点的 CPU 分配超出所输入的百分比时发送告警。
+        - **内存使用率**: 当节点的内存分配百分比提高到输入百分比以上时发送告警。
 
-* **Not Ready**: Sends you an alert when the node is unresponsive.
-* **CPU usage over**: Sends you an alert when the node raises above an entered percentage of its processing allocation.
-* **Mem usage over**: Sends you an alert when the node raises above an entered percentage of its memory allocation.
+     1. 选择告警的紧急程度。选项包括：
 
-1. Select the urgency level of the alert.
+        - **危险**: 最紧急
+        - **告警**: 正常紧急
+        - **信息**: 最不紧急
 
-   - **Critical**: Most urgent
-   - **Warning**: Normal urgency
-   - **Info**: Least urgent
+        根据告警对操作的影响来选择告警的紧急程度。例如，当节点的 CPU 提升到 60％以上时触发的告警，则认为紧急程度为**信息**，而节点为**未就绪**的节点则认为紧急程度为**危险**。
 
-     <br/>
-     <br/>
-     Select the urgency level of the alert based on its impact on operations. For example, an alert triggered when a node's CPU raises above 60% deems an urgency of **Info**, but a node that is **Not Ready** deems an urgency of **Critical**.
+     1. 配置高级选项。默认情况下，以下选项将应用于组中的所有告警规则。您也可以在配置每一条规则时禁用继承来自告警组的高级选项配置，自定义每条规则的高级选项配置。
 
-1. Configure advanced options. By default, the below options will apply to all alert rules within the group. You can disable these advanced options when configuring a specific rule.
+        - **告警组等待时长：** 第一次发送告警信息前，等待时间，默认为 30 秒。
+        - **告警组间隔时长：** 在发送了第一次的告警之后有新告警产生时，等待是否有告警触发，经过这个时间后，可以把这段时间的告警批量发送给接受者，默认为 3 分钟。
+        - **重复间隔：** 发送两条相同的告警之间的时间间隔，默认为 1 小时。
 
-   - **Group Wait Time**: How long to wait to buffer alerts of the same group before sending initially, default to 30 seconds.
-   - **Group Interval Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 30 seconds.
-   - **Repeat Wait Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 1 hour.
+   - 节点选择器告警
 
- /accordion 
- accordion id="node-selector" label="Node Selector Alerts" 
-This alert type monitors for events that occur on any node on marked with a label. For more information, see the Kubernetes documentation for [Labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/).
+     此告警类型监视在带有对应标签的任何节点的情况。详情参见 Kubernetes 文档中的[标签](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)。
 
-1. Select the **Node Selector** option, and then click **Add Selector** to enter a key value pair for a label. This label should be applied to one or more of your nodes. Add as many selectors as you'd like.
+     1. 选择**节点选择器**选项，然后单击**添加选择器**以输入标签的键值对。该标签应用于一个或多个节点。可以添加任意数量的选择器。
 
-1. Choose an event to trigger the alert.
+     1. 选择触发告警的情况。
 
-* **Not Ready**: Sends you an alert when selected nodes are unresponsive.
-* **CPU usage over**: Sends you an alert when selected nodes raise above an entered percentage of processing allocation.
-* **Mem usage over**: Sends you an alert when selected nodes raise above an entered percentage of memory allocation.
+        - **未就绪**: 当节点无响应时发送告警。
+        - **CPU 使用率**: 当节点的 CPU 分配超出所输入的百分比时发送告警。
+        - **内存使用率**: 当节点的内存分配百分比提高到输入百分比以上时发送告警。
 
-1. Select the urgency level of the alert.
+     1. 选择告警的紧急程度。选项包括：
 
-   - **Critical**: Most urgent
-   - **Warning**: Normal urgency
-   - **Info**: Least urgent
+        - **危险**: 最紧急
+        - **告警**: 正常紧急
+        - **信息**: 最不紧急
 
-     <br/>
-     <br/>
-     Select the urgency level of the alert based on its impact on operations. For example, an alert triggered when a node's CPU raises above 60% deems an urgency of **Info**, but a node that is **Not Ready** deems an urgency of **Critical**.
+        根据告警对操作的影响来选择告警的紧急程度。例如，当节点的 CPU 提升到 60％以上时触发的告警，则认为紧急程度为**信息**，而节点为**未就绪**的节点则认为紧急程度为**危险**。
 
-1. Configure advanced options. By default, the below options will apply to all alert rules within the group. You can disable these advanced options when configuring a specific rule.
+     1. 配置高级选项。默认情况下，以下选项将应用于组中的所有告警规则。您也可以在配置每一条规则时禁用继承来自告警组的高级选项配置，自定义每条规则的高级选项配置。
 
-   - **Group Wait Time**: How long to wait to buffer alerts of the same group before sending initially, default to 30 seconds.
-   - **Group Interval Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 30 seconds.
-   - **Repeat Wait Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 1 hour.
+        - **告警组等待时长：** 第一次发送告警信息前，等待时间，默认为 30 秒。
+        - **告警组间隔时长：** 在发送了第一次的告警之后有新告警产生时，等待是否有告警触发，经过这个时间后，可以把这段时间的告警批量发送给接受者，默认为 3 分钟。
+        - **重复间隔：** 发送两条相同的告警之间的时间间隔，默认为 1 小时。
 
- /accordion 
- accordion id="cluster-expression" label="Metric Expression Alerts" 
-This alert type monitors for the overload from Prometheus expression querying, it would be available after you enable monitoring.
+   - 表达式告警
 
-1. Input or select an **Expression**, the drop down shows the original metrics from Prometheus, including:
+     此告警类型监控 Prometheus 表达式执行结果是否超过阈值，此功能需要启动监控。
 
-* [**Node**](https://github.com/prometheus/node_exporter)
-* [**Container**](https://github.com/google/cadvisor)
-* [**ETCD**](https://etcd.io/docs/v3.4.0/op-guide/monitoring/)
-* [**Kubernetes Components**](https://github.com/kubernetes/metrics)
-* [**Kubernetes Resources**](https://github.com/kubernetes/kube-state-metrics)
-* [**Fluentd**](https://docs.fluentd.org/v1.0/articles/monitoring-prometheus) (supported by [Logging](/docs/tools/logging))
-* [**Cluster Level Grafana**](http://docs.grafana.org/administration/metrics/)
-* **Cluster Level Prometheus**
+     1. 输入或选择一个**表达式**，下拉列表显示 Prometheus 的原始指标表达式，包括：
 
-1. Choose a **Comparison**.
+        - [**节点**](https://github.com/prometheus/node_exporter)
+        - [**容器**](https://github.com/google/cadvisor)
+        - [**ETCD**](https://etcd.io/docs/v3.4.0/op-guide/monitoring/)
+        - [**Kubernetes 组件**](https://github.com/kubernetes/metrics)
+        - [**Kubernetes 资源**](https://github.com/kubernetes/kube-state-metrics)
+        - [**Fluentd**](https://docs.fluentd.org/v1.0/articles/monitoring-prometheus) ([日志](/docs/cluster-admin/logging/_index)中用到的)
+        - [**集群级别 Grafana**](http://docs.grafana.org/administration/metrics/)
+        - **集群级别 Prometheus**
 
-* **Equal**: Trigger alert when expression value equal to the threshold.
-* **Not Equal**: Trigger alert when expression value not equal to the threshold.
-* **Greater Than**: Trigger alert when expression value greater than to threshold.
-* **Less Than**: Trigger alert when expression value equal or less than the threshold.
-* **Greater or Equal**: Trigger alert when expression value greater to equal to the threshold.
-* **Less or Equal**: Trigger alert when expression value less or equal to the threshold.
+     1. 选择 **对比**.
 
-1. Input a **Threshold**, for trigger alert when the value of expression cross the threshold.
+        - **等于**: 当表达式值等于阈值时触发告警。
+        - **不等于**: 当表达式值不等于阈值时触发告警。
+        - **大于**: 当表达式值大于阈值时触发告警。
+        - **小于**: 当表达式值等于或小于阈值时触发告警。
+        - **大于或等于**: 当表达式值大于等于阈值时触发告警。
+        - **大小于或等于**: 当表达式值小于或等于阈值时触发告警。
 
-1. Choose a **Comparison**.
+     1. 输入 **阈值**，用于在表达式值超过阈值时触发告警。
 
-1. Select a duration, for trigger alert when expression value crosses the threshold longer than the configured duration.
+     1. 选择一个持续时间，表达式值超过阈值持续时长达到配置时触发告警。
 
-1. Select the urgency level of the alert.
+     1. 选择告警的紧急程度。选项包括：
 
-   - **Critical**: Most urgent
-   - **Warning**: Normal urgency
-   - **Info**: Least urgent
+        - **危险**: 最紧急
+        - **告警**: 正常紧急
+        - **信息**: 最不紧急
 
-     Select the urgency level of the alert based on its impact on operations. For example, an alert triggered when a node's load expression `sum(node_load5) / count(node_cpu_seconds_total{mode="system"})` raises above 0.6 deems an urgency of **Info**, but 1 deems an urgency of **Critical**.
+        根据告警对操作的影响来选择告警的紧急级别。例如，当节点的负载表达式 `sum(node_load5) / count(node_cpu_seconds_total{mode="system"})` 超过 0.6 时触发 **信息**级别告警，但是超过 1 时触发**危险**级别的告警。
 
-1. Configure advanced options. By default, the below options will apply to all alert rules within the group. You can disable these advanced options when configuring a specific rule.
+     1. 配置高级选项。默认情况下，以下选项将应用于组中的所有告警规则。您也可以在配置每一条规则时禁用继承来自告警组的高级选项配置，自定义每条规则的高级选项配置。
 
-   - **Group Wait Time**: How long to wait to buffer alerts of the same group before sending initially, default to 30 seconds.
-   - **Group Interval Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 30 seconds.
-   - **Repeat Wait Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 1 hour.
+        - **告警组等待时长：** 第一次发送告警信息前，等待时间，默认为 30 秒。
+        - **告警组间隔时长：** 在发送了第一次的告警之后有新告警产生时，等待是否有告警触发，经过这个时间后，可以把这段时间的告警批量发送给接受者，默认为 3 分钟。
+        - **重复间隔：** 发送两条相同的告警之间的时间间隔，默认为 1 小时。
 
- /accordion 
+1. 继续向该组添加更多的**告警规则**。
 
-1. Continue adding more **Alert Rule** to the group.
+1. 最后，选择[接收者](/docs/cluster-admin/tools/notifiers/_index)。
 
-1. Finally, choose the [notifiers](/docs/cluster-admin/tools/notifiers/) to send the alerts to.
+   - 您可以设置多个接收者。
+   - 您可以更改接收者的收件人。
 
-   - You can set up multiple notifiers.
-   - You can change notifier recipients on the fly.
+**结果：** 您的告警已配置。触发告警时发送通知。
 
-**Result:** Your alert is configured. A notification is sent when the alert is triggered.
+## 管理集群告警
 
-## Managing Cluster Alerts
+设置集群告警后，可以管理每个告警对象。要管理告警，进入对应的集群，然后选择**工具>告警**。您可以：
 
-After you set up cluster alerts, you can manage each alert object. To manage alerts, browse to the cluster containing the alerts, and then select **Tools > Alerts** that you want to manage. You can:
-
-* Deactivate/Reactive alerts
-* Edit alert settings
-* Delete unnecessary alerts
-* Mute firing alerts
-* Unmute muted alerts
-
+- 停用/激活告警
+- 编辑告警配置
+- 删除不必要的告警
+- 告警静音
+- 取消告警静音
