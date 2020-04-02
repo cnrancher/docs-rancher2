@@ -2,90 +2,83 @@
 title: 轮换证书
 ---
 
-> **Warning:** Rotating Kubernetes certificates may result in your cluster being temporarily unavailable as components are restarted. For production environments, it's recommended to perform this action during a maintenance window.
+:::note 警告
+轮换 Kubernetes 证书可能会导致集群在重新启动组件时暂时不可用。对于生产环境，建议在维护时段内执行此操作。
+:::
 
-By default, Kubernetes clusters require certificates and Rancher launched Kubernetes clusters automatically generate certificates for the Kubernetes components. Rotating these certificates is important before the certificates expire as well as if a certificate is compromised. After the certificates are rotated, the Kubernetes components are automatically restarted.
+默认情况下，Kubernetes 集群需要证书，并且 Rancher 启动的 Kubernetes 集群会自动为 Kubernetes 组件生成证书。在证书过期之前以及证书被泄露之后，轮换这些证书非常重要。轮换证书后，Kubernetes 组件将自动重新启动。
 
-Certificates can be rotated for the following services:
+可以为以下服务轮换证书：
 
-* etcd
-* kubelet
-* kube-apiserver
-* kube-proxy
-* kube-scheduler
-* kube-controller-manager
+- etcd
+- kubelet
+- kube-apiserver
+- kube-proxy
+- kube-scheduler
+- kube-controller-manager
 
-#### Certificate Rotation in Rancher v2.2.x
+## Rancher v2.2.x 中的证书轮换
 
-_Available as of v2.2.0_
+Rancher 启动的 Kubernetes 集群（RKE 集群）能够通过 UI 轮换自动生成的证书。
 
-Rancher launched Kubernetes clusters have the ability to rotate the auto-generated certificates through the UI.
+1. 在**全局**视图中，导航到要轮换证书的集群。
 
-1. In the **Global** view, navigate to the cluster that you want to rotate certificates.
+2. 选择**省略号（...）>轮换证书**。
 
-2. Select the **Ellipsis (...) > Rotate Certificates**.
+3. 选择要轮换的证书。
 
-3. Select which certificates that you want to rotate.
+   - 轮换所有服务证书（保持相同的 CA）
+   - 轮换单个服务，然后从下拉菜单中选择一项服务
 
-   - Rotate all Service certificates (keep the same CA)
-   - Rotate an individual service and choose one of the services from the drop down menu
+4. 单击**保存**。
 
-4. Click **Save**.
+**结果：**所选证书将被轮换，相关服务将重新启动以开始使用新证书。
 
-**Results:** The selected certificates will be rotated and the related services will be restarted to start using the new certificate.
+> **注意：** 尽管 RKE CLI 可以为 Kubernetes 集群组件使用自定义证书，但目前 Rancher 不支持在 Rancher UI 中创建 RKE 集群时上传这些证书。
 
-> **Note:** Even though the RKE CLI can use custom certificates for the Kubernetes cluster components, Rancher currently doesn't allow the ability to upload these in Rancher Launched Kubernetes clusters.
+## Rancher v2.1.x 和 v2.0.x 中的证书轮换
 
-#### Certificate Rotation in Rancher v2.1.x and v2.0.x
+_在版本 v2.0.14 以及 v2.1.9 中支持_
 
-_Available as of v2.0.14 and v2.1.9_
+Rancher 启动的 Kubernetes 集群能够通过 API 轮换自动生成的证书。
 
-Rancher launched Kubernetes clusters have the ability to rotate the auto-generated certificates through the API.
+1.在**全局**视图中，导航到要轮换证书的集群。
 
-1. In the **Global** view, navigate to the cluster that you want to rotate certificates.
+2.选择**省略号（...）>在 API 中查看**。
 
-2. Select the **Ellipsis (...) > View in API**.
+3.单击 **RotateCertificates**。
 
-3. Click on **RotateCertificates**.
+4.单击**显示请求**。
 
-4. Click on **Show Request**.
+5.单击**发送请求**。
 
-5. Click on **Send Request**.
+**结果：**所有 Kubernetes 证书将被轮换。
 
-**Results:** All Kubernetes certificates will be rotated.
+## 升级较旧的 Rancher 版本后轮换过期的证书
 
-#### Rotating Expired Certificates After Upgrading Older Rancher Versions
+如果要从 Rancher v2.0.13 或更早版本或 v2.1.8 或更早版本升级，并且您的集群已过期证书，则需要一些手动步骤来完成证书轮换。
 
-If you are upgrading from Rancher v2.0.13 or earlier, or v2.1.8 or earlier, and your clusters have expired certificates, some manual steps are required to complete the certificate rotation.
+1. 对于 `controlplane` 和 `etcd` 节点，登录到每个对应的主机，并检查证书 `kube-apiserver-requestheader-ca.pem` 是否在以下目录中：
 
-1. For the `controlplane` and `etcd` nodes, log in to each corresponding host and check if the certificate `kube-apiserver-requestheader-ca.pem` is in the following directory:
-
-   
-
-``` 
+   ```
    cd /etc/kubernetes/.tmp
    ```
 
-   If the certificate is not in the directory, perform the following commands:
+   如果证书不在目录中，请执行以下命令：
 
-   
-
-``` 
+   ```
    cp kube-ca.pem kube-apiserver-requestheader-ca.pem
    cp kube-ca-key.pem kube-apiserver-requestheader-ca-key.pem
    cp kube-apiserver.pem kube-apiserver-proxy-client.pem
    cp kube-apiserver-key.pem kube-apiserver-proxy-client-key.pem
    ```
 
-   If the `.tmp` directory does not exist, you can copy the entire SSL certificate to `.tmp` :
+   如果`.tmp`目录不存在，则可以将整个 SSL 证书复制到`.tmp`中：
 
-   
-
-``` 
+   ```
    cp -r /etc/kubernetes/ssl /etc/kubernetes/.tmp
    ```
 
-1. Rotate the certificates. For Rancher v2.0.x and v2.1.x, use the [Rancher API.](#certificate-rotation-in-rancher-v2-1-x-and-v2-0-x) For Rancher 2.2.x, [use the UI.](#certificate-rotation-in-rancher-v2-2-x)
+1. 轮换证书。对于 Rancher v2.0.x 和 v2.1.x，请使用 [Rancher API](#rancher-v21x-和-v20x-中的证书轮换)，对于 Rancher 2.2.x 请使用[Rancher UI](#rancher-v22x-中的证书轮换)。
 
-1. After the command is finished, check if the `worker` nodes are Active. If not, log in to each `worker` node and restart the kubelet and proxy.
-
+1. 命令完成后，检查 `worker` 节点是否处于活动状态。如果不是，请登录到每个 `worker` 节点，然后重新启动 kubelet 和 agent。

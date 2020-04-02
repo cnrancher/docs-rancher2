@@ -459,7 +459,7 @@ module.exports = {
       'cluster-admin/nodes/_index',
       {
         type: 'category',
-        label: '持久化存储：卷和存储类',
+        label: '存储卷和存储类',
         items: [
           'cluster-admin/volumes-and-storage/_index',
           'cluster-admin/volumes-and-storage/how-storage-works/_index',
