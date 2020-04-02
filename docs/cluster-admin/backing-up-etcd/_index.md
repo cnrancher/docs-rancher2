@@ -2,97 +2,96 @@
 title: 备份 etcd
 ---
 
-_Available as of v2.2.0_
+_从 v2.2.0 版本开始支持_
 
-In the Rancher UI, etcd backup and recovery for [Rancher launched Kubernetes clusters](/docs/cluster-provisioning/rke-clusters/) can be easily performed. Snapshots of the etcd database are taken and saved either [locally onto the etcd nodes](#local-backup-target) or to a [S3 compatible target](#s3-backup-target). The advantages of configuring S3 is that if all etcd nodes are lost, your snapshot is saved remotely and can be used to restore the cluster.
+在 Rancher UI 中，可以轻松执行 [RKE 集群](/docs/cluster-provisioning/rke-clusters/_index)的 etcd 备份和恢复。进行 etcd 数据库的快照并保存在[本地到 etcd 节点上](#本地磁盘备份)或[S3 备份](#s3-备份)中。配置 S3 的优点是，如果所有 etcd 节点都丢失了，因为快照在远程保存，所以在这种情况下也可以用于还原集群。
 
-Rancher recommends configuring recurrent `etcd` snapshots for all production clusters. Additionally, one-time snapshots can easily be taken as well.
+Rancher 建议为所有生产集群配置循环的`etcd`快照。此外，你也还可以轻松制作一次性快照。
 
-> **Note:** If you have any Rancher launched Kubernetes clusters that were created prior to v2.2.0, after upgrading Rancher, you must [edit the cluster](/docs/cluster-admin/editing-clusters/) and _save_ it, in order to enable the updated snapshot features. Even if you were already creating snapshots prior to v2.2.0, you must do this step as the older snapshots will not be available to use to [back up and restore etcd through the UI](/docs/cluster-admin/restoring-etcd/).
+> **注意：** 如果您有任何在 v2.2.0 之前创建的 RKE 集群，则在升级 Rancher 之后，必须[编辑集群](/docs/cluster-admin/editing-clusters/_index)并对其进行 _保存_ 以便启用更新了的快照功能。即使您已经在 v2.2.0 之前创建了快照，也必须执行此步骤，因为较早的快照将无法用于[通过 UI 备份和还原 etcd](/docs/cluster-admin/restoring-etcd/_index)。
 
-## Snapshot Creation Period and Retention Count
+## 快照创建频率和保留个数
 
-Select how often you want recurring snapshots to be taken as well as how many snapshots to keep. The amount of time is measured in hours. With timestamped snapshots, the user has the ability to do a point-in-time recovery.
+选择您希望定期制作快照的频率以及保留多少快照。时间量以小时为单位。用户可以使用这些带时间戳的快照，恢复集群到某个时间点。
 
-#### Configuring Recurring Snapshots for the Cluster
+### 为集群配置周期性快照
 
-By default, [Rancher launched Kubernetes clusters](/docs/cluster-provisioning/rke-clusters/) are configured to take recurring snapshots (saved to local disk). To protect against local disk failure, using the [S3 Target](#s3-backup-target) or replicating the path on disk is advised.
+默认情况下，[RKE 集群](/docs/cluster-provisioning/rke-clusters/_index)配置为定期拍摄快照（保存到本地磁盘）。为了防止本地磁盘故障，建议使用[S3 备份](#s3-备份)或对这个磁盘路径通过某种方式进行冗余。
 
-During cluster provisioning or editing the cluster, the configuration for snapshots can be found in the advanced section for **Cluster Options**. Click on **Show advanced options**.
+在创建集群或编辑集群期间，可以在**集群选项**的高级部分找到快照的配置。点击**显示高级选项**。
 
-In the **Advanced Cluster Options** section, there are several options available to configure:
+在**高级集群选项**部分中，有几个选项可以配置：
 
-| Option                                                                                   | Description                                                                        | Default Value |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------- |
-| [etcd Snapshot Backup Target](#snapshot-backup-targets)                                  | Select where you want the snapshots to be saved. Options are either local or in S3 | local         |
-| Recurring etcd Snapshot Enabled                                                          | Enable/Disable recurring snapshots                                                 | Yes           |
-| [Recurring etcd Snapshot Creation Period](#snapshot-creation-period-and-retention-count) | Time in hours between recurring snapshots                                          | 12 hours      |
-| [Recurring etcd Snapshot Retention Count](#snapshot-creation-period-and-retention-count) | Number of snapshots to retain                                                      | 6             |
+| 选项                                    | 描述                                                              | 默认值            |
+| --------------------------------------- | ----------------------------------------------------------------- | ----------------- |
+| [etcd 快照备份目标](#etcd-快照备份目标) | 选择你需要备份的存储目标，local（本地备份）或者 S3（AWS S3 备份） | local（本地备份） |
+| 启用定期 etcd 快照                      | 启用/停用 etcd 定期快照功能                                       | 是（启用）        |
+| etcd 定期快照周期                       | 定期快照之间的时间间隔（小时）                                    | 12 小时           |
+| 定期 etcd 快照保留数量                  | 要保留的快照数量                                                  | 6                 |
 
-#### One-Time Snapshots
+### 一次性快照
 
-In addition to recurring snapshots, you may want to take a "one-time" snapshot. For example, before upgrading the Kubernetes version of a cluster it's best to backup the state of the cluster to protect against upgrade failure.
+除了定期快照外，您可能还需要创建“一次性”快照。例如，在升级集群的 Kubernetes 版本之前，最好备份集群的状态以防止升级失败。
 
-1. In the **Global** view, navigate to the cluster that you want to take a one-time snapshot.
+1.在**全局**视图中，导航到要创建一次性快照的集群。
 
-2. Click the **Vertical Ellipsis (...) > Snapshot Now**.
+2.单击**省略号（...）> 立即快照**。
 
-**Result:** Based on your [snapshot backup target](#snapshot-backup-targets), a one-time snapshot will be taken and saved in the selected backup target.
+**结果：** 根据您的[etcd 快照备份目标](#etcd-快照备份目标)，将拍摄一次快照并将其保存在选定的备份目标中。
 
-## Snapshot Backup Targets
+## etcd 快照备份目标
 
-Rancher supports two different backup targets:
+Rancher 支持两种不同的备份目标：
 
-* [Local Target](#local-backup-target)
-* [S3 Target](#s3-backup-target)
+- [本地磁盘备份](#本地磁盘备份)
+- [S3 备份](#s3-备份)
 
-#### Local Backup Target
+### 本地磁盘备份
 
-By default, the `local` backup target is selected. The benefits of this option is that there is no external configuration. Snapshots are automatically saved locally to the etcd nodes in the [Rancher launched Kubernetes clusters](/docs/cluster-provisioning/rke-clusters/) in `/opt/rke/etcd-snapshots` . All recurring snapshots are taken at configured intervals. The downside of using the `local` backup target is that if there is a total disaster and _all_ etcd nodes are lost, there is no ability to restore the cluster.
+默认情况下，选择 `local(本地)` 备份目标。此选项的好处是没有额外的配置。快照会自动保存到[RKE 集群](/docs/cluster-provisioning/rke-clusters/_index)的 etcd 节点中的 `/opt/rke/etcd-snapshots` 路径。所有定期快照均以配置的时间间隔拍摄。使用 `local(本地)` 备份目标的不利之处在于，如果发生灾难，并且 _所有的_ etcd 节点丢失，则无法恢复集群。
 
-##### Safe Timestamps
+#### 安全时间戳
 
-_Available as of v2.3.0_
+_从 v2.3.0 开始支持_
 
-As of v2.2.6, snapshot files are timestamped to simplify processing the files using external tools and scripts, but in some S3 compatible backends, these timestamps were unusable. As of Rancher v2.3.0, the option `safe_timestamp` is added to support compatible file names. When this flag is set to `true` , all special characters in the snapshot filename timestamp are replaced.
+从 v2.2.6 版本开始，快照文件已打上时间戳，以简化使用外部工具和脚本处理文件的步骤，但是在某些与 S3 兼容的后端中，这些时间戳不可用。从 Rancher v2.3.0 开始，添加了 `safe_timestamp` 选项以支持兼容的文件名。当此标志设置为 `true` 时，快照文件名时间戳中的所有特殊字符将被替换。
 
-> > **Note:** This option is not available directly in the UI, and is only available through the `Edit as Yaml` interface.
+> **注意：** 此选项在用户界面中不直接可用，只能通过 `编辑为Yaml` 界面使用。
 
-#### S3 Backup Target
+### S3 备份
 
-The `S3` backup target allows users to configure a S3 compatible backend to store the snapshots. The primary benefit of this option is that if the cluster loses all the etcd nodes, the cluster can still be restored as the snapshots are stored externally. Rancher recommends external targets like `S3` backup, however its configuration requirements do require additional effort that should be considered.
+`S3` 备份目标允许用户配置兼容 S3 的后端来存储快照。此选项的主要好处是，如果集群丢失所有 etcd 节点，则由于快照存储在外部，因此仍可以还原该集群。Rancher 建议使用诸如 `S3` 之类的外部目标进行备份，但这要付出额外的努力，但您应予以考虑。
 
-| Option                | Description                                                                      | Required |
-| --------------------- | -------------------------------------------------------------------------------- | -------- |
-| S3 Bucket Name        | S3 bucket name where backups will be stored                                      | \*       |
-| S3 Region             | S3 region for the backup bucket                                                  |          |
-| S3 Region Endpoint    | S3 regions endpoint for the backup bucket                                        | \*       |
-| S3 Access Key         | S3 access key with permission to access the backup bucket                        | \*       |
-| S3 Secret Key         | S3 secret key with permission to access the backup bucket                        | \*       |
-| Custom CA Certificate | A custom certificate used to access private S3 backends _Available as of v2.2.5_ |          |
+| 选项           | 描述                                                      | 是否必须 |
+| -------------- | --------------------------------------------------------- | -------- |
+| S3 Bucket 名称 | 存储备份的 S3 bucket 名称                                 | \*       |
+| S3 区域        | 备份 S3 Bucket 的区域                                     |          |
+| S3 区域终结点  | 备份 S3 Bucket 区域终结点                                 | \*       |
+| S3 Access Key  | 有权限访问 S3 Bucket 的 access key                        | \*       |
+| S3 Secret Key  | 有权限访问 S3 Bucket 的 secret key                        | \*       |
+| 自定义 CA 证书 | 访问私有 S3 服务的自定义 CA 证书 _从 v2.2.5 版本开始支持_ |          |
 
-##### Using a custom CA certificate for S3
+#### 使用一个自定义 CA 证书访问 S3
 
-_Available as of v2.2.5_
+_从 v2.2.5 版本开始支持_
 
-The backup snapshot can be stored on a custom `S3` backup like [minio](https://min.io/). If the S3 back end uses a self-signed or custom certificate, provide a custom certificate using the `Custom CA Certificate` option to connect to the S3 backend.
+备份快照可以存储在自定义的 `S3` 备份中，例如 [minio](https://min.io/)。如果 S3 后端使用自签名或自定义证书，请使用 `自定义CA证书` 选项提供自定义证书以连接到 S3 后端。
 
-## IAM Support for Storing Snapshots in S3
+## S3 快照存储的 IAM 支持
 
-The `S3` backup target supports using IAM authentication to AWS API in addition to using API credentials. An IAM role gives temporary permissions that an application can use when making API calls to S3 storage. To use IAM authentication, the following requirements must be met:
+除了使用 API 凭证外，`S3` 备份目标还支持对 AWS API 使用 IAM 身份验证。IAM 角色授予应用程序在对 S3 存储进行 API 调用时可以使用的临时权限。要使用 IAM 身份验证，必须满足以下要求：
 
-* The cluster etcd nodes must have an instance role that has read/write access to the designated backup bucket.
-* The cluster etcd nodes must have network access to the specified S3 endpoint.
-* The Rancher Server worker node(s) must have an instance role that has read/write to the designated backup bucket.
-* The Rancher Server worker node(s) must have network access to the specified S3 endpoint.
+- 集群 etcd 节点必须具有实例角色，该角色具有对指定备份存储桶的读/写访问权限。
+- 集群 etcd 节点必须对指定的 S3 端点具有网络访问权限。
+- Rancher Server 所在节点必须具有实例角色，该实例角色已对指定的备份存储桶进行读/写。
+- Rancher Server 所在节点必须具有对指定 S3 端点的网络访问权限。
 
-To give an application access to S3, refer to the AWS documentation on [Using an IAM Role to Grant Permissions to Applications Running on Amazon EC2 Instances.](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html)
+要授予应用程序对 S3 的访问权限，请参阅[使用 IAM 角色向在 Amazon EC2 实例上运行的应用程序授予权限](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html)。
 
-## Viewing Available Snapshots
+## 查看可用的快照
 
-The list of all available snapshots for the cluster is available.
+集群的所有可用快照的列表均可用。
 
-1. In the **Global** view, navigate to the cluster that you want to view snapshots.
+1.在**全局**视图中，导航到要查看快照的集群。
 
-2. Click **Tools > Snapshots** from the navigation bar to view the list of saved snapshots. These snapshots include a timestamp of when they were created.
-
+2.在导航栏中单击**工具 > 快照**，以查看已保存快照的列表。这些快照包括创建时间的时间戳。

@@ -1,5 +1,5 @@
 ---
-title: 删除集群节点上的 Kubernetes 组件
+title: 清理节点
 ---
 
 本节介绍如何从一个 Rancher 创建的 Kubernetes 集群中断开一个节点，并从该节点中删除所有 Kubernetes 组件。此过程允许您将节点用于其他用途。

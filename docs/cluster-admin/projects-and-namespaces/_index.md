@@ -1,189 +1,174 @@
 ---
-title: 项目和 Kubernetes 命名空间
+title: 项目和命名空间
 ---
 
-A namespace is a Kubernetes concept that allows a virtual cluster within a cluster, which is useful for dividing the cluster into separate "virtual clusters" that each have their own access control and resource quotas.
+命名空间是 Kubernetes 的概念，它允许在集群中创建虚拟集群，这对于将集群划分为单独的“虚拟集群”非常有用，每个虚拟集群都有自己的访问控制和资源配额。
 
-A project is a group of namespaces, and it is a concept introduced by Rancher. Projects allow you to manage multiple namespaces as a group and perform Kubernetes operations in them. You can use projects to support multi-tenancy, so that a team can access a project within a cluster without having access to other projects in the same cluster.
+项目是一组命名空间，是 Rancher 引入的一个概念。项目使您可以将多个命名空间作为一个组进行管理，并在其中执行 Kubernetes 操作。您可以使用项目来支持多租户，例如设置团队可以访问集群中的某个项目，但不能访问同一集群中的其他项目。
 
-This section describes how projects and namespaces work with Rancher. It covers the following topics:
+本节描述如何在 Rancher 中使用项目和命名空间。
 
-* [About namespaces](#about-namespaces)
-* [About projects](#about-projects)
-  + [The cluster's default project](#the-cluster-s-default-project)
-  + [The system project](#the-system-project)
-* [Project authorization](#project-authorization)
-* [Pod security policies](#pod-security-policies)
-* [Creating projects](#creating-projects)
-* [Switching between clusters and projects](#switching-between-clusters-and-projects)
+## 命名空间（Namespace）
 
-## About Namespaces
+命名空间是 Kubernetes 引入的概念。根据[关于命名空间的 Kubernetes 官方文档](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)。
 
-A namespace is a concept introduced by Kubernetes. According to the [official Kubernetes documentation on namespaces, ](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
+> Kubernetes 支持在同一物理集群中设置多个虚拟集群。这些虚拟集群称为命名空间。命名空间旨在用于具有多个用户的环境，这些用户分布在多个团队或项目中。对于拥十个以内用户的集群，一般来说，您根本不需要创建或考虑命名空间。
 
-> Kubernetes supports multiple virtual clusters backed by the same physical cluster. These virtual clusters are called namespaces.[... ] Namespaces are intended for use in environments with many users spread across multiple teams, or projects. For clusters with a few to tens of users, you should not need to create or think about namespaces at all.
+命名空间提供以下功能：
 
-Namespaces provide the following functionality:
+- **提供名称范围：**资源名称在命名空间内必须是唯一的，但在命名空间之间则不必唯一。命名空间不能彼此嵌套，并且每个 Kubernetes 资源只能位于一个命名空间中。
+- **资源配额：**命名空间提供了一种在多个用户之间划分集群资源的方法。
 
-* **Providing a scope for names:** Names of resources need to be unique within a namespace, but not across namespaces. Namespaces can not be nested inside one another and each Kubernetes resource can only be in one namespace.
-* **Resource quotas:** Namespaces provide a way to divide cluster resources between multiple users.
+您可以在项目级别分配资源，以便项目中的每个命名空间都可以使用它们。您还可以通过将资源显式分配给命名空间来绕过此继承。
 
-You can assign resources at the project level so that each namespace in the project can use them. You can also bypass this inheritance by assigning resources explicitly to a namespace.
+您可以将以下资源直接分配给命名空间：
 
-You can assign the following resources directly to namespaces:
+- [工作负载](/docs/k8s-in-rancher/workloads/_index)
+- [负载均衡/Ingress](/docs/k8s-in-rancher/load-balancers-and-ingress/_index)
+- [服务发现](/docs/k8s-in-rancher/service-discovery/_index)
+- [PVC](/docs/cluster-admin/volumes-and-storage/how-storage-works/_index)
+- [证书](/docs/k8s-in-rancher/certificates/_index)
+- [配置映射](/docs/k8s-in-rancher/configmaps/_index)
+- [镜像仓库凭证](/docs/k8s-in-rancher/registries/_index)
+- [密文](/docs/k8s-in-rancher/secrets/_index)
 
-* [Workloads](/docs/k8s-in-rancher/workloads/)
-* [Load Balancers/Ingress](/docs/k8s-in-rancher/load-balancers-and-ingress/)
-* [Service Discovery Records](/docs/k8s-in-rancher/service-discovery/)
-* [Persistent Volume Claims](/docs/k8s-in-rancher/volumes-and-storage/persistent-volume-claims/)
-* [Certificates](/docs/k8s-in-rancher/certificates/)
-* [ConfigMaps](/docs/k8s-in-rancher/configmaps/)
-* [Registries](/docs/k8s-in-rancher/registries/)
-* [Secrets](/docs/k8s-in-rancher/secrets/)
+为了管理原生的 Kubernetes 集群中的权限，集群管理员需要为每个命名空间都配置基于角色的访问策略。使用 Rancher，用户权限将改为在项目级别分配，某个项目中都任何命名空间都将自动继承这些访问策略。
 
-To manage permissions in a vanilla Kubernetes cluster, cluster admins configure role-based access policies for each namespace. With Rancher, user permissions are assigned on the project level instead, and permissions are automatically inherited by any namespace owned by the particular project.
+> **注意：** 如果您使用`kubectl`创建命名空间，则可能无法使用，因为`kubectl`不需要将新命名空间限制在您有权访问的项目中。如果您的权限仅限于项目级别，则最好[通过 Rancher 创建命名空间](/docs/project-admin/namespaces/_index)以确保您有权访问该命名空间。
 
-> **Note:** If you create a namespace with `kubectl` , it may be unusable because `kubectl` doesn't require your new namespace to be scoped within a project that you have access to. If your permissions are restricted to the project level, it is better to [create a namespace through Rancher](/docs/project-admin/namespaces/#creating-namespaces) to ensure that you will have permission to access the namespace.
+有关创建和移动命名空间的更多信息，请参见[命名空间](/docs/project-admin/namespaces/_index)。
 
-For more information on creating and moving namespaces, see [Namespaces](/docs/project-admin/namespaces/).
+## 项目（Project）
 
-## About Projects
+在层次结构方面：
 
-In terms of hierarchy:
+- 集群包含项目
+- 项目包含命名空间
 
-* Clusters contain projects
-* Projects contain namespaces
+您可以使用项目来支持多租户，例如设置团队可以访问集群中的某个项目，但不能访问同一集群中的其他项目。
 
-You can use projects to support multi-tenancy, so that a team can access a project within a cluster without having access to other projects in the same cluster.
+在原生的 Kubernetes 中，诸如基于角色的访问权限或集群资源之类的功能只能在命名空间级别进行配置。个人或团队需要同时访问多个命名空间时，项目可以使您节省时间。
 
-In the base version of Kubernetes, features like role-based access rights or cluster resources are assigned to individual namespaces. A project allows you to save time by giving an individual or a team access to multiple namespaces simultaneously.
+您可以使用项目执行以下操作：
 
-You can use projects to perform actions such as:
+- 将用户分配到一组命名空间（例如，[项目成员](/docs/project-admin/project-members/_index)）。
+- 在项目中为用户分配特定角色。角色可以是所有者，成员，只读或[自定义角色](/docs/admin-settings/rbac/default-custom-roles/_index)。
+- 为项目分配资源配额。
+- 分配 Pod 安全策略。
 
-* Assign users to a group of namespaces (i.e., [project membership](/docs/k8s-in-rancher/projects-and-namespaces/project-members)).
-* Assign users specific roles in a project. A role can be owner, member, read-only, or [custom](/docs/admin-settings/rbac/default-custom-roles/).
-* Assign resources to the project.
-* Assign Pod Security Policies.
+创建集群时，将在其中自动创建两个项目：
 
-When you create a cluster, two projects are automatically created within it:
+- [集群默认（Default）项目](#集群默认（default）项目)
+- [集群系统（System）项目](#集群系统（system）项目)
 
-* [Default Project](#the-cluster-s-default-project)
-* [System Project](#the-system-project)
+#### 集群默认（Default）项目
 
-#### The Cluster's Default Project
+当您使用 Rancher 设置集群时，它将自动为该集群创建一个 `Default` 项目。您可以使用该项目来开始使用集群，但是您始终可以将其删除，并用具有更多描述性名称的项目替换它。
 
-When you provision a cluster with Rancher, it automatically creates a `default` project for the cluster. This is a project you can use to get started with your cluster, but you can always delete it and replace it with projects that have more descriptive names.
+如果您不需要`default`命名空间，那么您也不需要 Rancher 中的 **Default** 项目。
 
-If you don't have a need for more than the default namespace, you also do not need more than the **Default** project in Rancher.
+如果您需要除 **Default** 项目以外的其他项目，可以在 Rancher 中创建更多项目以隔离命名空间，应用程序和资源。
 
-If you require another level of organization beyond the **Default** project, you can create more projects in Rancher to isolate namespaces, applications and resources.
+#### 集群系统（System）项目
 
-#### The System Project
+_从 v2.0.7 版本开始支持_
 
-_Available as of v2.0.7_
+排查故障时，您可以查看`System`项目以检查 Kubernetes 系统中的重要命名空间是否正常运行。这个易于访问的项目使您不必对单个系统命名空间容器进行故障排查。
 
-When troubleshooting, you can view the `system` project to check if important namespaces in the Kubernetes system are working properly. This easily accessible project saves you from troubleshooting individual system namespace containers.
+要打开它，请打开**全局**菜单，然后选择你的集群中的`System`项目。
 
-To open it, open the **Global** menu, and then select the `system` project for your cluster.
+系统项目：
 
-The `system` project:
+- 在配置集群时自动创建。
+- 列出存在于 `v3/settings/system-namespaces` 中的所有命名空间。
+- 允许您添加更多命名空间或将其命名空间移至其他项目。
+- 无法删除，因为它是集群操作所必需的。
 
-* Is automatically created when you provision a cluster.
-* Lists all namespaces that exist in `v3/settings/system-namespaces` , if they exist.
-* Allows you to add more namespaces or move its namespaces to other projects.
-* Cannot be deleted because it's required for cluster operations.
-
-> **Note:** In clusters where both:
+> **注意：** 如果集群满足以下两个条件：
 >
-> - The [Canal network plug-in](/docs/cluster-provisioning/rke-clusters/options/#canal) is in use.
-> - The Project Network Isolation option is enabled.
+> - 正在使用 [Canal 网络插件](/docs/cluster-provisioning/rke-clusters/options/_index)。
+> - 启用了项目网络隔离选项。
 >
-> The `system` project overrides the Project Network Isolation option so that it can communicate with other projects, collect logs, and check health.
+> `System` 项目将覆盖项目网络隔离选项，以便它可以与其他项目通信，从而收集日志并检查运行状况。
 
-## Project Authorization
+## 项目授权
 
-Standard users are only authorized for project access in two situations:
+仅在两种情况下，标准用户才有权访问项目：
 
-* An administrator, cluster owner or cluster member explicitly adds the standard user to the project's **Members** tab.
-* Standard users can access projects that they create themselves.
+- 管理员，集群所有者或集群成员将标准用户明确添加到项目的**成员**选项卡中。
+- 标准用户可以访问自己创建的项目。
 
-## Pod Security Policies
+## Pod 安全策略
 
-Rancher extends Kubernetes to allow the application of [Pod Security Policies](https://kubernetes.io/docs/concepts/policy/pod-security-policy/) at the [project level](/docs/project-admin/pod-security-policies) in addition to the [cluster level.](../pod-security-policy) However, as a best practice, we recommend applying Pod Security Policies at the cluster level.
+Rancher 扩展了 Kubernetes 以允许在[项目级别](/docs/project-admin/pod-security-policies/_index)上应用[Pod 安全策略](https://kubernetes.io/docs/concepts/policy/pod-security-policy/)，作为[集群级别](/docs/cluster-admin/pod-security-policy/_index)之外的安全性策略。但是，作为最佳实践，我们建议在集群级别应用 Pod 安全策略。
 
-## Creating Projects
+## 创建项目
 
-This section describes how to create a new project with a name and with optional pod security policy, members, and resource quotas.
+本节介绍如何使用名称以及可选的 Pod 安全策略，成员和资源配额创建新项目。
 
-1. [Name a new project.](#1-name-a-new-project)
-2. [Optional: Select a pod security policy.](#2-optional-select-a-pod-security-policy)
-3. [Recommended: Add project members.](#3-recommended-add-project-members)
-4. [Optional: Add resource quotas.](#4-optional-add-resource-quotas)
+### 1. 命名新项目
 
-#### 1. Name a New Project
+1. 从**全局**视图中，从主菜单中选择**集群**。从**集群**页面中，打开要从中创建项目的集群。
 
-1. From the **Global** view, choose **Clusters** from the main menu. From the **Clusters** page, open the cluster from which you want to create a project.
+1. 从主菜单中，选择**项目/命名空间**。然后点击**添加项目**。
 
-1. From the main menu, choose **Projects/Namespaces**. Then click **Add Project**.
+1. 输入一个**项目名称**。
 
-1. Enter a **Project Name**.
+### 2. 可选：选择一个 Pod 安全策略
 
-#### 2. Optional: Select a Pod Security Policy
+仅当您已经创建了 Pod 安全策略时，此选项才可用。有关说明，请参阅[创建 Pod 安全策略](/docs/admin-settings/pod-security-policies/_index)。
 
-This option is only available if you've already created a Pod Security Policy. For instruction, see [Creating Pod Security Policies](/docs/admin-settings/pod-security-policies/).
+将 PSP 分配给项目将：
 
-Assigning a PSP to a project will:
+- 覆盖集群的默认 PSP。
+- 将 PSP 应用于项目。
+- 将 PSP 应用于以后添加到项目中的任何命名空间。
 
-* Override the cluster's default PSP.
-* Apply the PSP to the project.
-* Apply the PSP to any namespaces you add to the project later.
+### 3. 推荐：添加项目成员
 
-#### 3. Recommended: Add Project Members
+使用**成员**部分为其他用户提供项目访问权限和角色。
 
-Use the **Members** section to provide other users with project access and roles.
+默认情况下，您的用户被添加为项目`成员`。
 
-By default, your user is added as the project `Owner` .
-
-> **Notes on Permissions:**
+> **关于权限的说明：**
 >
-> - Users assigned the `Owner` or `Member` role for a project automatically inherit the `namespace creation` role. However, this role is a [Kubernetes ClusterRole](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#role-and-clusterrole), meaning its scope extends to all projects in the cluster. Therefore, users explicitly assigned the `Owner` or `Member` role for a project can create namespaces in other projects they're assigned to, even with only the `Read Only` role assigned.
-> - Choose `Custom` to create a custom role on the fly: [Custom Project Roles](/docs/admin-settings/rbac/cluster-project-roles/#custom-project-roles).
+> - 为项目分配了`所有者`或`成员`角色的用户会自动继承`命名空间创建`角色。但是，此角色是 [Kubernetes ClusterRole](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#role-and-clusterrole)，这意味着它的作用域扩展到了集群中的所有项目。因此，在某个项目中明确分配了`所有者`或`成员`角色的用户，即使在其他项目中仅分配了`只读`角色，这些用户也可以在这些项目中创建命名空间。
+> - 选择`自定义`以动态创建自定义角色：[自定义项目角色](/docs/admin-settings/rbac/cluster-project-roles/_index)。
 
-To add members:
+要添加成员：
 
-1. Click **Add Member**.
-1. From the **Name** combo box, search for a user or group that you want to assign project access. Note: You can only search for groups if external authentication is enabled.
-1. From the **Role** drop-down, choose a role. For more information, refer to the [documentation on project roles.](/docs/admin-settings/rbac/cluster-project-roles/)
+1. 点击`添加成员`。
+1. 在`名称`组合框中，搜索要分配项目访问权限的用户或组。注意：只有启用了外部身份验证，您才可以搜索组。
+1. 从`角色`下拉列表中，选择一个角色。有关更多信息，请参阅[关于项目角色的文档](/docs/admin-settings/rbac/cluster-project-roles/_index)。
 
-#### 4. Optional: Add Resource Quotas
+### 4. 可选：添加资源配额
 
-_Available as of v2.1.0_
+_从 v2.1.0 版本开始支持_
 
-Resource quotas limit the resources that a project (and its namespaces) can consume. For more information, see [Resource Quotas](/docs/k8s-in-rancher/projects-and-namespaces/resource-quotas).
+资源配额限制了项目（及其命名空间）可以消耗的资源。有关更多信息，请参见[资源配额](/docs/k8s-in-rancher/projects-and-namespaces/resource-quotas/_index)。
 
-To add a resource quota, 
+要添加资源配额，
 
-1. Click **Add Quota**.
-1. Select a [Resource Type](/docs/k8s-in-rancher/projects-and-namespaces/resource-quotas/#resource-quota-types).
-1. Enter values for the **Project Limit** and the **Namespace Default Limit**.
-1. **Optional:** Specify **Container Default Resource Limit**, which will be applied to every container started in the project. The parameter is recommended if you have CPU or Memory limits set by the Resource Quota. It can be overridden on per an individual namespace or a container level. For more information, see [Container Default Resource Limit](/docs/project-admin/resource-quotas/#setting-container-default-resource-limit) Note: This option is available as of v2.2.0.
-1. Click **Create**.
+1. 单击**添加配额**。
+1. 选择[资源类型](/docs/project-admin/resource-quotas/_index)。
+1. 输入`项目限制`和`命名空间默认限制`的值。
+1. **可选：**指定**容器默认资源限制**，它将应用于项目中启动的每个容器。如果您在资源配额中设置了 CPU 或内存相关的限制，则建议使用此参数。你可以在单个命名空间或容器级别上覆盖它。有关更多信息，请参见[容器默认资源限制](/docs/project-admin/resource-quotas/_index)，注：此选项自 v2.2.0 起可用。
+1. 单击**创建**。
 
-**Result:** Your project is created. You can view it from the cluster's **Projects/Namespaces** view.
+**结果：**您的项目已创建。您可以从集群的**项目/命名空间**视图中查看它。
 
-| Field                   | Description                                                                                                                                                                                          |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Project Limit           | The overall resource limit for the project.|
-| Namespace Default Limit | The default resource limit available for each namespace. This limit is propagated to each namespace in the project. The combined limit of all project namespaces shouldn't exceed the project limit.|
+| 字段                 | 描述                                                                                 |
+| -------------------- | ------------------------------------------------------------------------------------ |
+| 项目配额限制         | 项目整体的配额限制。                                                                 |
+| 命名空间默认配额限制 | 项目中每个命名空间默认的配额限制，项目下所有命名空间的配额限制之和不得大于项目配额。 |
 
-## Switching between Clusters and Projects
+## 集群与项目间切换
 
-To switch between clusters and projects, use the **Global** drop-down available in the main menu.
+要在集群和项目之间切换，请使用主菜单中的**全局**下拉菜单。
 
 ![Global Menu](/img/rancher/global-menu.png)
 
-Alternatively, you can switch between projects and clusters using the main menu.
+或者，您可以使用主菜单在项目和集群之间切换。
 
-* To switch between clusters, open the **Global** view and select **Clusters** from the main menu. Then open a cluster.
-* To switch between projects, open a cluster, and then select **Projects/Namespaces** from the main menu. Select the link for the project that you want to open.
-
+- 要在集群之间切换，请打开**全局**视图，然后从主菜单中选择**集群**。从而打开一个集群。
+- 要在项目之间切换，请打开一个集群，然后从主菜单中选择**项目/命名空间**。选择要打开的项目的链接。当然你也可以在**全局 > 项目所在集群**的下拉菜单中直接切换。
