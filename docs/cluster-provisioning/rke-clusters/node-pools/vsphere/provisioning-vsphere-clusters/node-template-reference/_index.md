@@ -1,94 +1,74 @@
 ---
-title: vSphere 主机模版配置详情
+title: 配置参考
 ---
 
-The tables below describe the configuration options available in the vSphere node template:
+## 账户访问
 
-* [Account access](#account-access)
-* [Instance options](#instance-options)
-* [Scheduling options](#scheduling-options)
+帐户访问参数因 Rancher 版本而异。
 
-## Account Access
+### Rancher v2.2.0+
 
-The account access parameters are different based on the Rancher version.
+| 参数   | 必填 | 描述                                                                                      |
+| :----- | :--: | :---------------------------------------------------------------------------------------- |
+| 云凭证 |  \*  | 您的 vSphere 账户访问信息, 保存为[云凭证](/docs/user-settings/cloud-credentials/_index)。 |
 
- tabs 
- tab "Rancher v2.2.0+" 
+### Rancher v2.2.0 之前的版本
 
-| Parameter                | Required | Description |
-|:----------------------|:--------:|:-----|
-| Cloud Credentials   |   *      | Your vSphere account access information, stored in a [cloud credential.](/docs/user-settings/cloud-credentials/)  |
+| 参数                        | 必填 | 描述                                    |
+| :-------------------------- | :--: | :-------------------------------------- |
+| vCenter 或 ESXi Server 地址 |  \*  | vCenter or ESXi 服务使用的 IP 或 FQDN。 |
+| 端口                        |  \*  | 连接服务时使用的端口，默认为`443`。     |
+| 用户名                      |  \*  | vCenter/ESXi 服务的用户名。             |
+| 密码                        |  \*  | 用户密码。                              |
 
- /tab 
- tab "Rancher prior to v2.2.0" 
+## 实例选项
 
-| Parameter                | Required | Description |
-|:------------------------|:--------:|:------------------------------------------------------------|
-| vCenter or ESXi Server   |   *      | IP or FQDN of the vCenter or ESXi server used for managing VMs.|
-| Port                     |   *      | Port to use when connecting to the server. Defaults to `443` .|
-| Username                 |   *      | vCenter/ESXi user to authenticate with the server.|
-| Password                 |   *      | User's password.|
+根据您的 Rancher 版本，用于创建和配置实例的选项会有所不同。
 
- /tab 
- /tabs 
+### Rancher v2.3.3+
 
-## Instance Options
+| 参数               | 必填 | 描述                                                                                                                                                                                                                                                                                                      |
+| :----------------- | :--: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CPUs               |  \*  | 虚拟机使用的 vCPUS 数量。                                                                                                                                                                                                                                                                                 |
+| 内存               |  \*  | 虚拟机使用的内存数量。                                                                                                                                                                                                                                                                                    |
+| 磁盘               |  \*  | 虚拟机使用的磁盘大小（MB）。                                                                                                                                                                                                                                                                              |
+| 创建方式           |  \*  | 在节点上配置操作系统的方法。可以从 ISO 或 VM 模板安装操作系统。根据创建方法的不同，您还必须指定 VM 模板，内容库，现有 VM 或 ISO。有关创建方法的更多信息，请参考[配置实例](/docs/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/_index)一节。                          |
+| Cloud Init         |      | `cloud-config.yml`文件的 URL 或用提供 VM 的 URL。此文件允许进一步自定义操作系统，例如网络配置，DNS 服务器或系统守护进程。操作系统必须支持`cloud-init`。                                                                                                                                                   |
+| 网络               |      | 创建的 VM 使用的网络。                                                                                                                                                                                                                                                                                    |
+| guestinfo 配置参数 |      | VM 的配置参数。 这些配置对应在 vSphere 控制台中的[高级设定](https://kb.vmware.com/s/article/1016098)。举例来说包括创建 RancherOS [guestinfo](https://rancher.com/docs/os/v1.x/en/installation/running-rancheros/cloud/vmware-esxi/#vmware-guestinfo) 参数或为 VM 开启磁盘 UUIDs(`disk.EnableUUID=TRUE`)。 |
 
-The options for creating and configuring an instance are different depending on your Rancher version.
+### Rancher v2.3.3 之前的版本
 
- tabs 
- tab "Rancher v2.3.3+" 
+| 参数       | 必填 | 描述                                                                                                                                                                                                                                                                                                      |
+| :--------- | :--: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CPUs       |  \*  | 虚拟机使用的 vCPUS 数量。                                                                                                                                                                                                                                                                                 |
+| 内存       |  \*  | 虚拟机使用的内存数量。                                                                                                                                                                                                                                                                                    |
+| 磁盘       |  \*  | 虚拟机使用的磁盘大小（MB）。                                                                                                                                                                                                                                                                              |
+| Cloud Init |      | 用于配置 VM 的[RancherOS cloud-config](https://rancher.com/docs/os/v1.x/en/installation/configuration/)文件的 URL。 该配置文件允许您进一步定制 RancherOS 操作系统，例如网络配置，DNS 服务或系统守护程序。                                                                                                 |
+| OS ISO URL |  \*  | 创建 VM 使用的 RancherOS 或 vSphere ISO 文件的 URL。 您可以在[Rancher OS GitHub Repo](https://github.com/rancher/os)中找到指定版本的 URL。                                                                                                                                                                |
+| 配置参数   |      | VM 的配置参数。 这些配置对应在 vSphere 控制台中的[高级设定](https://kb.vmware.com/s/article/1016098)。举例来说包括创建 RancherOS [guestinfo](https://rancher.com/docs/os/v1.x/en/installation/running-rancheros/cloud/vmware-esxi/#vmware-guestinfo) 参数或为 VM 开启磁盘 UUIDs(`disk.EnableUUID=TRUE`)。 |
 
-| Parameter                | Required | Description |
-|:----------------|:--------:|:-----------|
-| CPUs                     |   *      | Number of vCPUS to assign to VMs.|
-| Memory                   |   *      | Amount of memory to assign to VMs.|
-| Disk                     |   *      | Size of the disk (in MB) to attach to the VMs.|
-| Creation method | * | The method for setting up an operating system on the node. The operating system can be installed from an ISO or from a VM template. Depending on the creation method, you will also have to specify a VM template, content library, existing VM, or ISO. For more information on creation methods, refer to the section on [configuring instances.](/docs/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/#c-configure-instances-and-operating-systems) |
-| Cloud Init               |          | URL of a `cloud-config.yml` file or URL to provision VMs with. This file allows further customization of the operating system, such as network configuration, DNS servers, or system daemons. The operating system must support `cloud-init` .|
-| Networks | | Name(s) of the network to attach the VM to.|
-| Configuration Parameters used for guestinfo |          | Additional configuration parameters for the VMs. These correspond to the [Advanced Settings](https://kb.vmware.com/s/article/1016098) in the vSphere console. Example use cases include providing RancherOS [guestinfo]({{< baseurl >}}/os/v1.x/en/installation/running-rancheros/cloud/vmware-esxi/#vmware-guestinfo) parameters or enabling disk UUIDs for the VMs ( `disk.EnableUUID=TRUE` ).|
+## 调度选项
 
- /tab 
- tab "Rancher prior to v2.3.3" 
+根据您的 Rancher 版本，将虚拟机调度到虚拟机控制程序的选项有所不同。
 
-| Parameter                | Required | Description |
-|:------------------------|:--------:|:------------------------------------------------------------|
-| CPUs                     |   *      | Number of vCPUS to assign to VMs.|
-| Memory                   |   *      | Amount of memory to assign to VMs.|
-| Disk                     |   *      | Size of the disk (in MB) to attach to the VMs.|
-| Cloud Init               |          | URL of a [RancherOS cloud-config]({{< baseurl >}}/os/v1.x/en/installation/configuration/) file to provision VMs with. This file allows further customization of the RancherOS operating system, such as network configuration, DNS servers, or system daemons.|
-| OS ISO URL               |   *      | URL of a RancherOS vSphere ISO file to boot the VMs from. You can find URLs for specific versions in the [Rancher OS GitHub Repo](https://github.com/rancher/os).|
-| Configuration Parameters |          | Additional configuration parameters for the VMs. These correspond to the [Advanced Settings](https://kb.vmware.com/s/article/1016098) in the vSphere console. Example use cases include providing RancherOS [guestinfo]({{< baseurl >}}/os/v1.x/en/installation/running-rancheros/cloud/vmware-esxi/#vmware-guestinfo) parameters or enabling disk UUIDs for the VMs ( `disk.EnableUUID=TRUE` ).|
+### Rancher v2.3.3+
 
- /tab 
- /tabs 
+| 参数     | 必填 | 描述                                                                                                                                   |
+| :------- | :--: | :------------------------------------------------------------------------------------------------------------------------------------- |
+| 数据中心 |  \*  | 用于创建 VM 的数据中心的名称/路径。                                                                                                    |
+| 资源池   |      | 调度 VM 使用的资源池名称。 如果是独立的 ESXi，请保留为空。若未指定，则使用默认的资源池。                                               |
+| 数据存储 |  \*  | 如果您有数据存储集群，则可以切换**数据存储**选项。 这样，您可以选择将 VM 调度到的数据存储集群。 如果未切换该选项，则可以选择单个磁盘。 |
+| 文件夹   |      | 要放置虚拟机的文件夹，该文件夹必须是已存在的。文件夹名称在 vSphere 配置文件中应该以`vm/`开头。                                         |
+| 主机     |      | 用于调度 VM 的节点系统的 IP。如果指定，将使用节点系统的池，并且**资源池**参数将被忽略。                                                |
 
-## Scheduling Options
+### Rancher v2.3.3 之前的版本
 
-The options for scheduling VMs to a hypervisor are different depending on your Rancher version.
- tabs 
- tab "Rancher v2.3.3+" 
-
-| Parameter                | Required | Description |
-|:------------------------|:--------:|:-------|
-| Data Center              |   *      | Name/path of the datacenter to create VMs in.|
-| Resource Pool                     |          | Name of the resource pool to schedule the VMs in. Leave blank for standalone ESXi. If not specified, the default resource pool is used.|
-| Data Store               |   *      | If you have a data store cluster, you can toggle the **Data Store** field. This lets you select a data store cluster where your VM will be scheduled to. If the field is not toggled, you can select an individual disk.|
-| Folder                   |          | Name of a folder in the datacenter to create the VMs in. Must already exist. The folder name should be prefaced with `vm/` in your vSphere config file.|
-| Host                     |          | The IP of the host system to schedule VMs in. If specified, the host system's pool will be used and the *Pool* parameter will be ignored.|
-
- /tab 
- tab "Rancher prior to v2.3.3" 
-
-| Parameter                | Required | Description |
-|:------------------------|:--------:|:------------------------------------------------------------|
-| Data Center              |   *      | Name/path of the datacenter to create VMs in.|
-| Pool                     |          | Name/path of the resource pool to schedule the VMs in. If not specified, the default resource pool is used.|
-| Host                     |          | Name/path of the host system to schedule VMs in. If specified, the host system's pool will be used and the *Pool* parameter will be ignored.|
-| Network                  |   *      | Name of the VM network to attach VMs to.|
-| Data Store               |   *      | Datastore to store the VM disks.|
-| Folder                   |          | Name of a folder in the datacenter to create the VMs in. Must already exist. The folder name should be prefaced with `vm/` in your vSphere config file.|
- /tab 
- /tabs 
-
+| 参数     | 必填 | 描述                                                                                           |
+| :------- | :--: | :--------------------------------------------------------------------------------------------- |
+| 数据中心 |  \*  | 用于创建 VM 的数据中心的名称/路径。                                                            |
+| 资源池   |      | 调度 VM 使用的资源池名称/路径。若未指定，则使用默认的资源池。                                  |
+| 主机     |      | 用于调度 VM 的节点系统的名称/路径。如果指定，将使用节点系统的池，并且**资源池**参数将被忽略。  |
+| 网络     |  \*  | 创建的 VM 使用的网络。                                                                         |
+| 数据存储 |  \*  | 用于创建 VM 磁盘的数据存储。                                                                   |
+| 文件夹   |      | 要放置虚拟机的文件夹，该文件夹必须是已存在的。文件夹名称在 vSphere 配置文件中应该以`vm/`开头。 |

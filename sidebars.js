@@ -391,7 +391,7 @@ module.exports = {
           'cluster-provisioning/rke-clusters/_index',
           {
             type: 'category',
-            label: '在IaaS的新节点上运行Kubernetes',
+            label: '创建节点和集群',
             items: [
               'cluster-provisioning/rke-clusters/node-pools/_index',
               'cluster-provisioning/rke-clusters/node-pools/ec2/_index',
@@ -399,7 +399,7 @@ module.exports = {
               'cluster-provisioning/rke-clusters/node-pools/azure/_index',
               {
                 type: 'category',
-                label: '在 vSphere 上创建集群',
+                label: 'vSphere',
                 items: [
                   'cluster-provisioning/rke-clusters/node-pools/vsphere/_index',
                   'cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/_index',
@@ -412,7 +412,7 @@ module.exports = {
           },
           {
             type: 'category',
-            label: '在IaaS的已有节点上运行Kubernetes',
+            label: '自定义集群',
             items: [
               'cluster-provisioning/rke-clusters/custom-nodes/_index',
               'cluster-provisioning/rke-clusters/custom-nodes/agent-options/_index'
@@ -420,7 +420,7 @@ module.exports = {
           },
           {
             type: 'category',
-            label: '在Windows集群上运行Kubernetes',
+            label: 'Windows 集群',
             items: [
               'cluster-provisioning/rke-clusters/windows-clusters/_index',
               'cluster-provisioning/rke-clusters/windows-clusters/host-gateway-requirements/_index',

@@ -87,7 +87,7 @@ kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release
 # x-kubernetes-preserve-unknown-fields 字段有关的验证错误。
 # 这是一个良性错误，是由于 kubectl 执行资源验证的方式造成的。
 
-# 为 cert-manager 创建名称空间
+# 为 cert-manager 创建命名空间
 
 kubectl create namespace cert-manager
 

@@ -1,328 +1,352 @@
 ---
-title: 在 vSphere 上创建集群
+title: 创建集群
 ---
 
-This section explains how to configure Rancher with vSphere credentials, provision nodes in vSphere, and set up Kubernetes clusters on those nodes.
+本节说明了如何在 Rancher 中配置 vSphere 凭证，在 vSphere 中创建节点以及在这些节点上启动 Kubernetes 集群。
 
-## Prerequisites
+## 前提条件
 
-This section describes the requirements for setting up vSphere so that Rancher can provision VMs and clusters.
+本节介绍了使用 vSphere 在 Rancher 中创建节点和集群需要的必要条件。
 
-The node templates are documented and tested with the vSphere Web Services API version 6.5.
+该节点模板的文档使用 vSphere Web Services API 6.5 版本中进行了测试。
 
-* [Create credentials in vSphere](#create-credentials-in-vsphere)
-* [Network permissions](#network-permissions)
-* [Valid ESXi License for vSphere API Access](#valid-esxi-license-for-vsphere-api-access)
+### 在 vSphere 中创建凭证
 
-#### Create Credentials in vSphere
+在继续创建集群之前，必须确保您拥有具有足够权限的 vSphere 用户。当您设置节点模板时，该模板将需要使用这些 vSphere 凭证。
 
-Before proceeding to create a cluster, you must ensure that you have a vSphere user with sufficient permissions. When you set up a node template, the template will need to use these vSphere credentials.
+有关如何在 vSphere 中创建具有所需权限的用户，请参考此[使用指南](/docs/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/creating-credentials/_index)。通过这些步骤您将创建出需要提供给 Rancher 的用户名和密码，从而允许 Rancher 在 vSphere 中创建资源。
 
-Refer to this [how-to guide](/docs/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/creating-credentials) for instructions on how to create a user in vSphere with the required permissions. These steps result in a username and password that you will need to provide to Rancher, which allows Rancher to provision resources in vSphere.
+### 网络权限
 
-#### Network Permissions
+必须确保运行 Rancher 的节点能够建立以下网络连接：
 
-It must be ensured that the hosts running the Rancher server are able to establish the following network connections:
+- 能够访问 vCenter 服务中的 vSphere API（通常使用端口： 443/TCP）。
+- 能够访问位于实例化虚拟机的所有 ESXi 节点上的 Host API（端口 443/TCP）(_仅在使用 ISO 创建节点时需要_)。
+- 能够访问虚拟机的端口 22/TCP 和 2376/TCP
 
-* To the vSphere API on the vCenter server (usually port 443/TCP).
-* To the Host API (port 443/TCP) on all ESXi hosts used to instantiate virtual machines for the clusters (_only required with Rancher prior to v2.3.3 or when using the ISO creation method in later versions_).
-* To port 22/TCP and 2376/TCP on the created VMs
+请参照[节点网络需求](/docs/cluster-provisioning/node-requirements/_index)来获取详细的端口需求。
 
-See [Node Networking Requirements](/docs/cluster-provisioning/node-requirements/#networking-requirements) for a detailed list of port requirements applicable for creating nodes on an infrastructure provider.
+### 适用于 vSphere API 访问的有效 ESXi 许可证
 
-#### Valid ESXi License for vSphere API Access
+免费的 ESXi 许可证不支持 API 访问。vSphere 服务器必须具有效或评估的 ESXi 许可证。
 
-The free ESXi license does not support API access. The vSphere servers must have a valid or evaluation ESXi license.
+## 使用 vSphere 创建集群
 
-## Creating Clusters in vSphere with Rancher
+本节介绍了如何使用 Rancher UI 设置 vSphere 凭证，节点模板和 vSphere 集群。
 
-This section describes how to set up vSphere credentials, node templates, and vSphere clusters using the Rancher UI.
+### 配置参考
 
-You will need to do the following:
+详细的节点模板配置，请参照[节点模板配置参考](/docs/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/node-template-reference/_index)。
 
-1. [Create a node template using vSphere credentials](#1-create-a-node-template-using-vsphere-credentials)
-2. [Create a Kubernetes cluster using the node template](#2-create-a-kubernetes-cluster-using-the-node-template)
-3. [Optional: Provision storage](#3-optional-provision-storage)
+Rancher 使用 RKE 来创建 Kubernetes 集群。详细的 vSphere 中集群配置，请参照[RKE 文档中的集群配置参考](https://rancher.com/docs/rke/latest/en/config-options/cloud-providers/vsphere/config-reference/)。
 
-* [Enable the vSphere cloud provider for the cluster](#enable-the-vsphere-cloud-provider-for-the-cluster)
+请注意，必须[启用](#为集群启用-vsphere-cloud-provider) vSphere Cloud Provider 才能够动态配置数据卷。
 
-#### Configuration References
+### 使用 vSphere 凭证创建节点模板
 
-For details on configuring the node template, refer to the [node template configuration reference.](/docs/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/node-template-reference/)
+为了创建集群，您至少创建一个 vSphere[节点模板](/docs/cluster-provisioning/rke-clusters/node-pools/_index) 来配置如何在 vSphere 创建虚拟机。创建并保存的节点模板可在创建其他 vSphere 集群时重复使用它。
 
-Rancher uses the RKE library to provision Kubernetes clusters. For details on configuring clusters in vSphere, refer to the [cluster configuration reference in the RKE documentation.]({{<baseurl>}}/rke/latest/en/config-options/cloud-providers/vsphere/config-reference/)
+为了创建节点模板,
 
-Note that the vSphere cloud provider must be [enabled](#enable-the-vsphere-cloud-provider-for-the-cluster) to allow dynamic provisioning of volumes.
+1. 在 Rancher UI 中登录。
 
-## 1. Create a Node Template Using vSphere Credentials
+1. 在右上角的用户设定菜单中，选择**节点模板**。
 
-To create a cluster, you need to create at least one vSphere [node template](/docs/cluster-provisioning/rke-clusters/node-pools/#node-templates) that specifies how VMs are created in vSphere.
+1. 点击**添加模板**，然后点击**vSphere**图标。
 
-After you create a node template, it is saved, and you can re-use it whenever you create additional vSphere clusters.
+#### A. 配置 vSphere 凭证
 
-To create a node template, 
+根据您的 Rancher 版本，为集群配置 vSphere 凭证的步骤有所不同。
 
-1. Log in with an administrator account to the Rancher UI.
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-1. From the user settings menu, select **Node Templates.**
+<Tabs
+defaultValue="new"
+values={[
+{ label: 'Rancher v2.2.0+', value: 'new', },
+{ label: 'Rancher v2.2.0 之前的版本', value: 'old', },
+]}>
 
-1. Click **Add Template** and then click on the **vSphere** icon.
+<TabItem value="new">
 
-Then, configure your template:
+您的账户访问信息保存在[云凭证](/docs/user-settings/cloud-credentials/_index)。云凭证会保存为 Kubernetes 密文。
 
-* [A. Configure the vSphere credential](#a-configure-the-vsphere-credential)
-* [B. Configure node scheduling](#b-configure-node-scheduling)
-* [C. Configure instances and operating systems](#c-configure-instances-and-operating-systems)
-* [D. Add networks](#d-add-networks)
-* [E. If not already enabled, enable disk UUIDs](#e-if-not-already-enabled-enable-disk-uuids)
-* [F. Optional: Configure node tags and custom attributes](#f-optional-configure-node-tags-and-custom-attributes)
-* [G. Optional: Configure cloud-init](#g-optional-configure-cloud-init)
-* [H. Saving the node template](#h-saving-the-node-template)
+您可以使用现有的云凭证或创建新的云凭证。要创建新的云凭证：
 
-#### A. Configure the vSphere Credential
+1. 点击**添加凭证**。
+1. 在**名称**字段，输入 vSphere 凭证的名称。
+1. 在**vCenter or ESXi 服务** 字段，输入 vCenter 或 ESXi 节点名/IP。ESXi 是用于创建和运行虚拟机和虚拟设备的虚拟化平台。vCenter Server 是一项服务，通过它可以管理网络中连接的多个节点池中的节点资源。
+1. 可选：在**端口**字段，配置 vCenter 或 ESXi 服务的端口。
+1. 在**用户名** 和 **密码** 字段，输入您 vSphere 的用户名和密码。
+1. 点击**创建**。
 
-The steps for configuring your vSphere credentials for the cluster are different depending on your version of Rancher.
+**结果：** 节点模板成功添加了 vSphere 的云凭证。
 
- tabs 
- tab "Rancher v2.2.0+" 
+</TabItem>
 
-Your account access information is in a [cloud credential.](/docs/user-settings/cloud-credentials/) Cloud credentials are stored as Kubernetes secrets.
+<TabItem value="old">
 
-You can use an existing cloud credential or create a new one. To create a new cloud credential, 
+在 **账户访问** 选项中，输入 vCenter 的 FQDN 或 IP 地址和 vSphere 用户账户的凭证。
 
-1. Click **Add New.**
-1. In the **Name** field, enter a name for your vSphere credentials.
-1. In the **vCenter or ESXi Server** field, enter the vCenter or ESXi hostname/IP. ESXi is the virtualization platform where you create and run virtual machines and virtual appliances. vCenter Server is the service through which you manage multiple hosts connected in a network and pool host resources.
-1. Optional: In the **Port** field, configure the port of the vCenter or ESXi server.
-1. In the **Username** and **Password** fields, enter your vSphere login username and password.
-1. Click **Create.**
+</TabItem>
 
-**Result:** The node template has the credentials required to provision nodes in vSphere.
+</Tabs>
 
- /tab 
- tab "Rancher prior to v2.2.0" 
-In the **Account Access** section, enter the vCenter FQDN or IP address and the credentials for the vSphere user account.
- /tab 
- /tabs 
+#### B. 配置节点调度
 
-#### B. Configure Node Scheduling
+选择虚拟机将被调度到的虚拟机管理程序。配置选项取决于您的 Rancher 版本。
 
-Choose what hypervisor the virtual machine will be scheduled to. The configuration options depend on your version of Rancher.
+<Tabs
+defaultValue="new"
+values={[
+{ label: 'Rancher v2.3.3+', value: 'new', },
+{ label: 'Rancher v2.3.3 之前的版本', value: 'old', },
+]}>
 
- tabs 
- tab "Rancher v2.3.3+" 
+<TabItem value="new">
 
-The fields in the **Scheduling** section should auto-populate with the data center and other scheduling options that are available to you in vSphere.
+**调度**部分中的字段会自动显示为数据中心和 vSphere 中可用的选项。
 
-1. In the **Data Center** field, choose the data center where the VM will be scheduled.
-1. Optional: Select a **Resource Pool.** Resource pools can be used to partition available CPU and memory resources of a standalone host or cluster, and they can also be nested.
-1. If you have a data store cluster, you can toggle the **Data Store** field. This lets you select a data store cluster where your VM will be scheduled to. If the field is not toggled, you can select an individual disk.
-1. Optional: Select a folder where the VM will be placed. The VM folders in this dropdown menu directly correspond to your VM folders in vSphere. Note: The folder name should be prefaced with `vm/` in your vSphere config file.
-1. Optional: Choose a specific host to create the VM on. Leave this field blank for a standalone ESXi or for a cluster with DRS (Distributed Resource Scheduler). If specified, the host system's pool will be used and the **Resource Pool** parameter will be ignored.
+1. 在**数据中心**选项中，选择哪个数据中心用于虚拟机调度。
+1. **资源池**（可选）：选择**资源池**。资源池可用于对独立节点或集群中的 CPU 和内存资源进行分区，也可以嵌套。
+1. **数据存储**：如果您有数据存储集群，则可以切换它。这样，您可以选择将 VM 调度到哪个数据存储集群。如果选择该选项，则可以选择单个磁盘。
+1. **Folder** 可选：选择要放置虚拟机的文件夹。此下拉菜单中的 VM 文件夹直接与 vSphere 中的 VM 文件夹相对应。注意：文件夹名称在 vSphere 配置文件中应该以`vm/`开头。
+1. **主机**（可选）：选择一个特定的节点用于创建 VM。对于独立 ESXi 或具有 DRS（分布式资源调度程序）的集群，请将此字段设置为空。如果指定了该字段，将使用节点系统的池，并且**资源池**参数将被忽略。
 
-    /tab 
-    tab "Rancher prior to v2.3.3" 
+</TabItem>
 
-In the **Scheduling** section, enter:
+<TabItem value="old">
 
-* The name/path of the **Data Center** to create the VMs in
-* The name of the **VM Network** to attach to
-* The name/path of the **Datastore** to store the disks in
+在**调度**选项卡中，输入:
 
-  
+- 用于创建 VM 的**数据中心**的名称或路径。
+- **虚拟机网络**的名称。
+- 保存磁盘的**数据存储**名称或路径。
 
-![image](/img/rancher/vsphere-node-template-2.png")
+  ![image](/img/rancher/vsphere-node-template-2.png)
 
- /tab 
- /tabs 
+</TabItem>
 
-#### C. Configure Instances and Operating Systems
+</Tabs>
 
-Depending on the Rancher version there are different options available to configure instances.
+#### C. 配置实例和操作系统
 
- tabs 
- tab "Rancher v2.3.3+" 
+根据 Rancher 版本的不同，可以使用不同的选项来配置实例。
 
-In the **Instance Options** section, configure the number of vCPUs, memory, and disk size for the VMs created by this template.
+<Tabs
+defaultValue="new"
+values={[
+{ label: 'Rancher v2.3.3+', value: 'new', },
+{ label: 'Rancher v2.3.3 之前的版本', value: 'old', },
+]}>
 
-In the **Creation method** field, configure the method used to provision VMs in vSphere. Available options include creating VMs that boot from a RancherOS ISO or creating VMs by cloning from an existing virtual machine or [VM template](https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.vm_admin.doc/GUID-F7BF0E6B-7C4F-4E46-8BBF-76229AEA7220.html).
+<TabItem value="new">
 
-The existing VM or template may use any modern Linux operating system that is configured with support for [cloud-init](https://cloudinit.readthedocs.io/en/latest/) using the [NoCloud datasource](https://cloudinit.readthedocs.io/en/latest/topics/datasources/nocloud.html).
+在**实例选项**选项卡中，配置该节点模板创建节点的 CPU 数量，内存和磁盘大小。
 
-Choose the way that the VM will be created:
+在**创建方法**选项中，配置在 vSphere 中创建 VMs 的创建方法。可用选项包括通过 RancherOS ISO 创建 VMs 或通过一个已有的 VM 或[VM 模板](https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.vm_admin.doc/GUID-F7BF0E6B-7C4F-4E46-8BBF-76229AEA7220.html)克隆 VMs。
 
-* **Deploy from template: Data Center:** Choose a VM template that exists in the data center that you selected.
-* **Deploy from template: Content Library:** First, select the [Content Library](https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.vm_admin.doc/GUID-254B2CE8-20A8-43F0-90E8-3F6776C2C896.html) that contains your template, then select the template from the populated list `Library templates` .
-* **Clone an existing virtual machine:** In the **Virtual machine** field, choose an existing VM that the new VM will be cloned from.
-* **Install from boot2docker ISO:** Ensure that the `OS ISO URL` field contains the URL of a VMware ISO release for RancherOS (rancheros-vmware.iso). Note that this URL must be accessible from the nodes running your Rancher server installation.
+已有的 VM 或 VM 模板可以使用配置了[cloud-init](https://cloudinit.readthedocs.io/en/latest/)并使用[NoCloud datasource](https://cloudinit.readthedocs.io/en/latest/topics/datasources/nocloud.html)的任何现代 Linux 操作系统。
 
- /tab 
- tab "Rancher prior to v2.3.3" 
+选择创建虚拟机的方式：
 
-In the **Instance Options** section, configure the number of vCPUs, memory, and disk size for the VMs created by this template.
+- **模版部署: Data Center：** 选择一个数据中心中的 VM 模板。
+- **模版部署: Content Library：** 首先选择包含您的模板的 [Content Library](https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.vm_admin.doc/GUID-254B2CE8-20A8-43F0-90E8-3F6776C2C896.html)，然后在`Library 模版`选项中选择模板。
+- **克隆一个现有的虚拟机：** 在**虚拟机**选项中，选择一个用于克隆的虚拟机。
+- **从 boot2docker ISO 安装（弃用）：** 确保`操作系统ISO下载地址`选项填写正确的 VMware ISO 或 RancherOS (rancheros-vmware.iso)地址。请注意这个 URL 必须在 Rancher Server 的节点中能够访问。
 
-Only VMs booting from RancherOS ISO are supported.
+</TabItem>
 
-Ensure that the [OS ISO URL](#instance-options) contains the URL of the VMware ISO release for RancherOS: `rancheros-vmware.iso` .
+<TabItem value="old">
 
-    
+在**实例选项**选项卡中，配置该节点模板创建节点的 CPU 数量，内存和磁盘大小。
+
+仅支持从 RancherOS ISO 创建 VM。
+
+确保`操作系统ISO下载地址`选项填写正确的 VMware ISO 或 RancherOS (rancheros-vmware.iso)地址。
 
 ![image](/img/rancher/vsphere-node-template-1.png)
 
- /tab 
- /tabs 
+</TabItem>
 
-#### D. Add Networks
+</Tabs>
 
-_Available as of v2.3.3_
+#### D. 添加网络
 
-The node template now allows a VM to be provisioned with multiple networks. In the **Networks** field, you can now click **Add Network** to add any networks available to you in vSphere.
+_从 Rancher v2.3.3 开始可用_
 
-#### E. If Not Already Enabled, Enable Disk UUIDs
+现在，节点模板允许 VM 配置多个网络。在**网络**字段中，您可以点击**添加网络**来添加任何 vSphere 中可用的网络。
 
-In order to provision nodes with RKE, all nodes must be configured with disk UUIDs.
+#### E. 启用磁盘 UUIDs
 
-As of Rancher v2.0.4, disk UUIDs are enabled in vSphere node templates by default.
+为了使用 RKE 创建集群，必须为所有节点配置磁盘 UUIDs。
 
-If you are using Rancher prior to v2.0.4, refer to these [instructions](/docs/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/#enabling-disk-uuids-with-a-node-template) for details on how to enable a UUID with a Rancher node template.
+从 Rancher v2.0.4 开始，在 vSphere 节点模板中默认启用了磁盘 UUIDs。
 
-#### F. Optional: Configure Node Tags and Custom Attributes
+如果您在使用 Rancher v2.0.4 之前的版本，请参照以下[说明](/docs/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/enabling-uuids/_index)以获取如何通过 Rancher 节点模板启用 UUID 的详细信息。
 
-The way to attach metadata to the VM is different depending on your Rancher version.
+#### F. 可选：配置节点标签和自定义属性
 
- tabs 
- tab "Rancher v2.3.3+" 
+将元数据附加到 VM 的方式因 Rancher 版本而异。
 
-**Optional:** Add vSphere tags and custom attributes. Tags allow you to attach metadata to objects in the vSphere inventory to make it easier to sort and search for these objects.
+<Tabs
+defaultValue="new"
+values={[
+{ label: 'Rancher v2.3.3+', value: 'new', },
+{ label: 'Rancher v2.3.3 之前的版本', value: 'old', },
+]}>
 
-For tags, all your vSphere tags will show up as options to select from in your node template.
+<TabItem value="new">
 
-In the custom attributes, Rancher will let you select all the custom attributes you have already set up in vSphere. The custom attributes are keys and you can enter values for each one.
+**可选：** 添加 vSphere 标签和自定义属性。标签使您可以将元数据附加到 vSphere 清单中的对象，以使排序和搜索这些对象更加容易。
 
-> **Note:** Custom attributes are a legacy feature that will eventually be removed from vSphere. These attributes allow you to attach metadata to objects in the vSphere inventory to make it easier to sort and search for these objects.
+对于标签，在你选择主机模版时，所有 vSphere 标签都会显示出来。
 
- /tab 
- tab "Rancher prior to v2.3.3" 
+在自定义属性中，Rancher 将允许您选择已在 vSphere 中设置的所有自定义属性。自定义属性作为 keys，您可以为每个属性输入 value。
 
-**Optional:**
+> **注意：** 自定义属性是一项 legacy 功能，最终将会从 vSphere 中删除。这些属性使您可以将元数据附加到 vSphere 清单中的对象，以使排序和搜索这些对象更加容易。
 
-* Provide a set of configuration parameters (instance-options) for the VMs.
-* Assign labels to the VMs that can be used as a base for scheduling rules in the cluster.
-* Customize the configuration of the Docker daemon on the VMs that will be created.
+</TabItem>
 
-> **Note:** Custom attributes are a legacy feature that will eventually be removed from vSphere. These attributes allow you to attach metadata to objects in the vSphere inventory to make it easier to sort and search for these objects.
+<TabItem value="old">
 
- /tab 
- /tabs 
+**可选：**
 
-#### G. Optional: Configure cloud-init
+- 为虚拟机提供一组配置参数（实例选项）。
+- 为 VM 分配标签，这些标签可用作在集群中调度规则的依据。
+- 自定义将要创建的 VM 中的 Docker 守护程序的配置。
 
-[Cloud-init](https://cloudinit.readthedocs.io/en/latest/) allows you to initialize your nodes by applying configuration on the first boot. This may involve things such as creating users, authorizing SSH keys or setting up the network.
+> **注意：** 自定义属性是一项 legacy 功能，最终将会从 vSphere 中删除。这些属性使您可以将元数据附加到 vSphere 清单中的对象，以使排序和搜索这些对象更加容易。
 
-The scope of cloud-init support for the VMs differs depending on the Rancher version.
+</TabItem>
 
- tabs 
- tab "Rancher v2.3.3+" 
+</Tabs>
 
-To make use of cloud-init initialization, create a cloud config file using valid YAML syntax and paste the file content in the the **Cloud Init** field. Refer to the [cloud-init documentation.](https://cloudinit.readthedocs.io/en/latest/topics/examples.html) for a commented set of examples of supported cloud config directives.
+#### G. 可选：配置 cloud-init
 
-_Note that cloud-init is not supported when using the ISO creation method._
+[Cloud-init](https://cloudinit.readthedocs.io/en/latest/) 允许您在第一次启动时通过应用配置来初始化节点。这可能包括诸如创建用户，授权 SSH 密钥或设置网络等事情。
 
- /tab 
- tab "Rancher prior to v2.3.3" 
+VM 的 cloud-init 支持范围取决于 Rancher 的版本。
 
-You may specify the URL of a RancherOS cloud-config.yaml file in the the **Cloud Init** field. Refer to the [RancherOS Documentation]https://rancher.com/docs/os/v1.x/en/installation/configuration/#cloud-config) for details on the supported configuration directives. Note that the URL must be network accessible from the VMs created by the template.
+<Tabs
+defaultValue="new"
+values={[
+{ label: 'Rancher v2.3.3+', value: 'new', },
+{ label: 'Rancher v2.3.3 之前的版本', value: 'old', },
+]}>
 
- /tab 
- /tabs 
+<TabItem value="new">
 
-#### H. Saving the Node Template
+要使用 cloud-init 初始化，请使用有效的 YAML 语法创建一个配置文件，然后将文件内容粘贴到**Cloud Init**字段中。请参照[cloud-init 文档。](https://cloudinit.readthedocs.io/en/latest/topics/examples.html)以获取 cloud config 配置示例。
 
-Assign a descriptive **Name** for this template and click **Create.**
+_注意，通过 ISO 创建 VM 时不支持使用 cloud-init 选项_
 
-#### Node Template Configuration Reference
+</TabItem>
 
-Refer to [this section](/docs/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/node-template-reference/) for a reference on the configuration options available for vSphere node templates.
+<TabItem value="old">
 
-## 2. Create a Kubernetes Cluster Using the Node Template
+您可以在**Cloud Init**字段中指定 RancherOS cloud-config.yaml 文件的 URL。有关受支持的配置的详细信息，请参考[RancherOS 文档](https://rancher.com/docs/os/v1.x/en/installation/configuration/#cloud-config)。请注意，创建的 VM 中必须可以访问该 URL。
 
-After you've created a template, you can use it to stand up the vSphere cluster itself.
+</TabItem>
 
-To install Kubernetes on vSphere nodes, you will need to enable the vSphere cloud provider by modifying the cluster YAML file. This requirement applies to both pre-created [custom nodes](/docs/cluster-provisioning/rke-clusters/custom-nodes/) and for nodes created in Rancher using the vSphere node driver.
+</Tabs>
 
-To create the cluster and enable the vSphere provider for cluster, follow these steps:
+#### H. 保存节点模板
 
-* [A. Set up the cluster name and member roles](#a-set-up-the-cluster-name-and-member-roles)
-* [B. Configure Kubernetes options](#b-configure-kubernetes-options)
-* [C. Add node pools to the cluster](#c-add-node-pools-to-the-cluster)
-* [D. Optional: Add a self-healing node pool](#d-optional-add-a-self-healing-node-pool)
-* [E. Create the cluster](#e-create-the-cluster)
+为此模板分配一个描述性的**名称**，然后点击**创建**。
 
-#### A. Set up the Cluster Name and Member Roles
+#### 节点模板配置参考
 
-1. Log in to the Rancher UI as an administrator.
-2. Navigate to **Clusters** in the **Global** view.
-3. Click **Add Cluster** and select the **vSphere** infrastructure provider.
-4. Assign a **Cluster Name.**
-5. Assign **Member Roles** as required. {{< step_create-cluster_member-roles >}}
+适用于 vSphere 节点模板的配置选项的参考，请参考[本节](/docs/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/node-template-reference/_index)。
 
-> **Note:**
+### 使用节点模板创建 Kubernetes 集群
+
+创建模板后，可以使用它启动 vSphere 集群。
+
+如果要在 vSphere 节点上安装的 Kubernetes 中使用一些高级功能，您需要通过修改集群 YAML 文件来启用 vSphere Cloud Provider。此项既适用于预先创建的[自定义节点](/docs/cluster-provisioning/rke-clusters/custom-nodes/_index)，也适用于使用 vSphere 节点驱动程序在 Rancher 中创建的节点。
+
+要创建集群，请执行以下步骤：
+
+#### A. 设置集群名称和成员角色
+
+1. 以管理员身份登录到 Rancher UI。
+2. 进入到**全局**中的**集群列表**页面。
+3. 点击**添加集群** 选择 **vSphere** 基础设施供应商。
+4. 填写 **集群名称**。
+5. 指定需要的**成员角色**
+
+   通过**成员角色**来设置用户访问集群的权限。
+
+   - 点击**添加成员**将需要访问这个集群的用户添加到成员中。
+   - 在**角色**下拉菜单中选择每个用户的权限。
+
+> **注意：**
 >
-> If you have a cluster with DRS enabled, setting up [VM-VM Affinity Rules](https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.resmgmt.doc/GUID-7297C302-378F-4AF2-9BD6-6EDB1E0A850A.html) is recommended. These rules allow VMs assigned the etcd and control-plane roles to operate on separate ESXi hosts when they are assigned to different node pools. This practice ensures that the failure of a single physical machine does not affect the availability of those planes.
+> 如果您的集群启用了 DRS，推荐设置[VM-VM 关联性规则](https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.resmgmt.doc/GUID-7297C302-378F-4AF2-9BD6-6EDB1E0A850A.html)。这些规则使分配了 etcd 和控制平面角色的 VM 在分配给不同的节点池时可以在单独的 ESXi 节点上运行。这种做法可确保单个物理机的故障不会影响这些平面的可用性。
 
-#### B. Configure Kubernetes Options
+#### B. 配置 Kubernetes 选项
 
-{{<step_create-cluster_cluster-options>}}
+使用**集群选项**设置 Kubernetes 的版本，网络插件以及是否要启用项目网络隔离。要查看更多集群选项，请单击**显示高级选项**。
 
-#### C. Add Node Pools to the Cluster
+#### C. 为集群添加节点池
 
-{{<step_create-cluster_node-pools>}}
+将一个或多个节点池添加到您的集群。
 
-#### D. Optional: Add a Self-Healing Node Pool
+**节点池**是基于节点模板的节点的集合。节点模板定义节点的配置，例如要使用的操作系统，CPU 数量和内存量。每个节点池必须分配一个或多个节点角色。
 
-To make a node pool self-healing, enter a number greater than zero in the **Auto Replace** column. Rancher will use the node template for the given node pool to recreate the node if it becomes inactive for that number of minutes.
+:::important 注意：
 
-> **Note:** Self-healing node pools are designed to help you replace worker nodes for stateless applications. It is not recommended to enable node auto-replace on a node pool of master nodes or nodes with persistent volumes attached, because VMs are treated ephemerally. When a node in a node pool loses connectivity with the cluster, its persistent volumes are destroyed, resulting in data loss for stateful applications.
+- 每个节点角色（即 `etcd`，`Control Plane` 和 `Worker`）应分配给不同的节点池。尽管可以为一个节点池分配多个节点角色，但是不应对生产集群执行此操作。
+- 推荐的设置是拥有一个具有`etcd`节点角色且数量为 3 的节点池，一个具有`Control Plane`节点角色且数量至少为 2 的节点池，以及具有`Worker`节点角色且数量为 1 的节点池。至少两个。关于 `etcd` 节点角色，请参考 [etcd 管理指南](https://etcd.io/#optimal-cluster-size)。
 
-#### E. Create the Cluster
+:::
 
-Click **Create** to start provisioning the VMs and Kubernetes services.
+#### D. 可选：添加自我修复的节点池
 
-{{< result_create-cluster >}}
+要使节点池能够自我修复，请在**自动替换**列中输入一个大于零的数字。如果节点池在指定的分钟内处于非活动状态，Rancher 将使用该节点池使用的节点模板来重新创建该节点。
 
-## 3. Optional: Provision Storage
+> **注意：** 自我修复节点池旨在帮助您为**无状态**应用程序替换工作节点。不建议在主节点或具有持久卷连接的节点的节点池上启用节点自动替换。当节点池中的节点失去与集群的连接时，其持久卷将被破坏，从而导致有状态应用程序丢失数据。
 
-For an example of how to provision storage in vSphere using Rancher, refer to the
-[cluster administration section.](/docs/cluster-admin/volumes-and-storage/examples/vsphere)
+#### E. 创建集群
 
-In order to provision storage in vSphere, the vSphere provider must be enabled.
+点击 **创建** 开始创建虚拟机和 Kubernetes 集群。
 
-#### Enable the vSphere Cloud Provider for the Cluster
+结果：
 
-1. Set **Cloud Provider** option to `Custom` .
+- 您的集群已创建并进入为 **Provisioning** 的状态。Rancher 正在启动你的集群。
+- 您可以在集群的状态更新为 **Active** 后访问它。
+- Rancher 为活动的集群分配了两个项目，即 `Default`（包含命名空间 `default`）和 `System`（包含命名空间 `cattle-system`，`ingress-nginx`，`kube-public` 和 `kube-system`，如果存在）。
 
-   
+### 可选：配置 Cloud Provider 和并创建存储
 
-![vsphere-node-driver-cloudprovider](/img/rancher/vsphere-node-driver-cloudprovider.png")
+有关如何使用 Rancher 在 vSphere 中创建存储的，请参照[vShpere 存储](/docs/cluster-admin/volumes-and-storage/examples/vsphere/_index)。
 
-1. Click on **Edit as YAML**
-1. Insert the following structure to the pre-populated cluster YAML. As of Rancher v2.3+, this structure must be placed under `rancher_kubernetes_engine_config` . In versions prior to v2.3, it has to be defined as a top-level field. Note that the `name` _must_ be set to `vsphere` .
+为了在 vSphere 中创建存储，必须启用 vSphere Cloud Provider。
 
-   
+#### 为集群启用 vSphere Cloud Provider
 
-``` yaml
+1. 设置 **Cloud Provider** 选项为`Custom`.
+
+   ![vsphere-node-driver-cloudprovider](/img/rancher/vsphere-node-driver-cloudprovider.png)
+
+1. 点击**编辑 YAML**
+1. 将以下结构内容插入到预先配置的集群 YAML 中。从 Rancher v2.3+ 开始，此结构必须放在`rancher_kubernetes_engine_config`下。在 v2.3 之前的版本中，必须将其定义为顶级字段。注意，`name` *必须*设置为`vsphere`。
+
+   ```yaml
    rancher_kubernetes_engine_config: # Required as of Rancher v2.3+
      cloud_provider:
        name: vsphere
-       vsphereCloudProvider: [Insert provider configuration]
+       vsphereCloudProvider:
+         # 在下面加入你的 provider 配置
    ```
 
-   Rancher uses RKE (the Rancher Kubernetes Engine) to provision Kubernetes clusters. Refer to the [vSphere configuration reference in the RKE documentation]({{<baseurl>}}/rke/latest/en/config-options/cloud-providers/vsphere/config-reference/) for details about the properties of the `vsphereCloudProvider` directive.
+   Rancher 使用 RKE（the Rancher Kubernetes Engine）来创建 Kubernetes 集群。请参照[RKE 文档中的 vSphere 配置参考](https://rancher.com/docs/rke/latest/en/config-options/cloud-providers/vsphere/config-reference/)以获取`vsphereCloudProvider`配置中属性的详细信息。
 
-## Optional Next Steps
+## 可选步骤
 
-After creating your cluster, you can access it through the Rancher UI. As a best practice, we recommend setting up these alternate ways of accessing your cluster:
+创建集群后，您可以通过 Rancher UI 访问它。作为最佳实践，我们建议同时设置以下访问集群的替代方法：
 
-* **Access your cluster with the kubectl CLI:** Follow [these steps](/docs/cluster-admin/cluster-access/kubectl/#accessing-clusters-with-kubectl-on-your-workstation) to access clusters with kubectl on your workstation. In this case, you will be authenticated through the Rancher server’s authentication proxy, then Rancher will connect you to the downstream cluster. This method lets you manage the cluster without the Rancher UI.
-* **Access your cluster with the kubectl CLI, using the authorized cluster endpoint:** Follow [these steps](/docs/cluster-admin/cluster-access/kubectl/#authenticating-directly-with-a-downstream-cluster) to access your cluster with kubectl directly, without authenticating through Rancher. We recommend setting up this alternative method to access your cluster so that in case you can’t connect to Rancher, you can still access the cluster.
+- **通过 kubectl CLI 访问集群：** 请按照[这些步骤](/docs/cluster-admin/cluster-access/kubectl/_index)来通过 kubectl 访问您的集群。在这种情况下，您将通过 Rancher 服务器的身份验证代理进行身份验证，然后 Rancher 会将您连接到下游集群。此方法使您无需 Rancher UI 即可管理集群。
 
+- **通过 kubectl CLI 和授权的集群地址访问您的集群：** 请按照[这些步骤](/docs/cluster-admin/cluster-access/kubectl/_index)来通过 kubectl 直接访问您的集群，而不需要通过 Rancher 进行认证。我们建议您设定此方法访问集群，这样在您无法连接 Rancher 时您仍然能够访问集群。

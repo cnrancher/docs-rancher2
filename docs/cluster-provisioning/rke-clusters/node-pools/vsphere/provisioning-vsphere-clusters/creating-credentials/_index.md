@@ -1,49 +1,40 @@
 ---
-title: 在 vSphere 控制台中创建密钥
+title: 创建凭证
 ---
 
-This section describes how to create a vSphere username and password. You will need to provide these vSphere credentials to Rancher, which allows Rancher to provision resources in vSphere.
+本节介绍了如何创建 vSphere 用户名和密码。您需要将这些 vSphere 凭证提供给 Rancher，以便 Rancher 可以在 vSphere 中创建资源。
 
-The following table lists the permissions required for the vSphere user account:
+下面的表格列出了 vSphere 用户账户需要的权限：
 
-| Privilege Group | Operations                                                                                                                                         |
+| 权限组          | 操作                                                                                                                                               |
 | :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Datastore       | AllocateSpace <br /> Browse <br /> FileManagement (Low level file operations) <br /> UpdateVirtualMachineFiles <br /> UpdateVirtualMachineMetadata |
 | Network         | Assign                                                                                                                                             |
 | Resource        | AssignVMToPool                                                                                                                                     |
 | Virtual Machine | Config (All) <br /> GuestOperations (All) <br /> Interact (All) <br /> Inventory (All) <br /> Provisioning (All)                                   |
 
-The following steps create a role with the required privileges and then assign it to a new user in the vSphere console:
+以下步骤将创建具有所需权限的角色，并在 vSphere 控制台中将其分配给指定用户：
 
-1. From the **vSphere** console, go to the **Administration** page.
+1. 从**vSphere**控制台中, 进入**Administration**页面.
 
-2. Go to the **Roles** tab.
+2. 进入**Roles**选项卡.
 
-3. Create a new role. Give it a name and select the privileges listed in the permissions table above.
+3. 创建一个新角色并命名，然后选择上面的表格中列出的权限。
 
-   
+   ![image](/img/rancher/rancherroles1.png)
 
-![image](/img/rancher/rancherroles1.png")
+4. 选择 **Users and Groups** 选项卡.
 
-4. Go to the **Users and Groups** tab.
+5. 创建一个新用户。填写表单，然后单击**OK**。 请确保记下用户名和密码，因为在 Rancher 中配置节点模板时将需要它。
 
-5. Create a new user. Fill out the form and then click **OK**. Make sure to note the username and password, because you will need it when configuring node templates in Rancher.
+   ![image](/img/rancher/rancheruser.png)
 
-   
+6. 选择 **Global Permissions** 选项卡.
 
-![image](/img/rancher/rancheruser.png")
+7. 创建一个新的全局权限。添加您先前创建的用户，并将先前创建的角色应用到该用户。 点击**OK**。
 
-6. Go to the **Global Permissions** tab.
+   ![image](/img/rancher/globalpermissionuser.png)
 
-7. Create a new Global Permission. Add the user you created earlier and assign it the role you created earlier. Click **OK**.
+   ![image](/img/rancher/globalpermissionrole.png)
 
-   
-
-![image](/img/rancher/globalpermissionuser.png")
-
-   
-
-![image](/img/rancher/globalpermissionrole.png")
-
-**Result:** You now have credentials that Rancher can use to manipulate vSphere resources.
-
+**结果:** 现在，您具有可用于操作 vSphere 资源的凭证。
