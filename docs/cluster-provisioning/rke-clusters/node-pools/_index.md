@@ -1,119 +1,118 @@
 ---
-title: 介绍
+title: 在新节点上启动集群
 ---
 
-Using Rancher, you can create pools of nodes based on a [node template](/docs/cluster-provisioning/rke-clusters/node-pools/#node-templates). This node template defines the parameters you want to use to launch nodes in your infrastructure providers or cloud providers.
+使用 Rancher，您可以基于[节点模板](#节点模板)来创建节点池。该节点模板定义了用于在基础设施提供商或云服务商中启动节点的参数。
 
-One benefit of installing Kubernetes on node pools hosted by an infrastructure provider is that if a node loses connectivity with the cluster, Rancher can automatically create another node to join the cluster to ensure that the count of the node pool is as expected.
+在基础设施提供商托管的节点池上安装 Kubernetes 的一个好处是，如果某个节点与集群失去连接，Rancher 可以自动创建另一个节点加入集群，以确保节点池的数量符合预期。
 
-The available cloud providers to create a node template are decided based on active [node drivers](/docs/cluster-provisioning/rke-clusters/node-pools/#node-drivers).
+有哪些可用于创建节点模板的云提供商取决于启用了哪些[节点驱动](#节点驱动).
 
-This section covers the following topics:
+本节涵盖以下主题：
 
-* [Node templates](#node-templates)
-  + [Node labels](#node-labels)
-  + [Node taints](#node-taints)
-* [Node pools](#node-pools)
-  + [Node pool taints](#node-pool-taints)
-  + [About node auto-replace](#about-node-auto-replace)
-  + [Enabling node auto-replace](#enabling-node-auto-replace)
-  + [Disabling node auto-replace](#disabling-node-auto-replace)
-* [Cloud credentials](#cloud-credentials)
-* [Node drivers](#node-drivers)
+- [节点模板](#节点模板)
+  - [节点标签](#节点标签)
+  - [节点污点](#节点污点)
+- [节点池](#节点池)
+  - [节点池污点](#节点池污点)
+  - [关于节点自动替换](#关于节点自动替换)
+  - [开启节点自动替换](#开启节点自动替换)
+  - [关闭节点自动替换功能](#关闭节点自动替换功能)
+- [云凭证](#云凭证)
+- [节点驱动](#节点驱动)
 
-## Node Templates
+## 节点模板
 
-A node template is the saved configuration for the parameters to use when provisioning nodes in a specific cloud provider. These nodes can be launched from the UI. Rancher uses [Docker Machine](https://docs.docker.com/machine/) to provision these nodes. The available cloud providers to create node templates are based on the active node drivers in Rancher.
+节点模板保存了用于配置指定云提供商中的节点时使用的参数。这些节点可以从 UI 中启动。Rancher 使用 [Docker Machine](https://docs.docker.com/machine/) 来启动这些节点。具体有哪些可用于创建节点模板的云提供商取决于在 Rancher 中开启了哪些节点驱动。
 
-After you create a node template in Rancher, it's saved so that you can use this template again to create node pools. Node templates are bound to your login. After you add a template, you can remove them from your user profile.
+在 Rancher 中创建并保存节点模板后，您可以再次使用该模板来创建节点池。节点模板会绑定到您登录的用户中。您可以在用户个人资料中将创建的节点模板删除。
 
-#### Node Labels
+### 节点标签
 
-You can add [labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/) on each node template, so that any nodes created from the node template will automatically have these labels on them.
+您可以在节点模板中添加[标签](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)，这样从该节点模板创建的所有节点都将自动具有这些标签。
 
-#### Node Taints
+### 节点污点
 
-_Available as of Rancher v2.3.0_
+_从 Rancher v2.3.0 开始可用_
 
-You can add [taints](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) on each node template, so that any nodes created from the node template will automatically have these taints on them.
+您可以在节点模板中添加[污点](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)，这样从该节点模板创建的所有节点都将自动具有这些污点。
 
-Since taints can be added at a node template and node pool, if there is no conflict with the same key and effect of the taints, all taints will be added to the nodes. If there are taints with the same key and different effect, the taints from the node pool will override the taints from the node template.
+由于可以同时在节点模板和节点池中添加污点，因此如果添加了相同键的污点并且效果没有冲突，则所有污点都将被添加到节点。如果存在具有相同键但不同效果的污点，则节点池中的污点将覆盖节点模板中的污点。
 
-## Node Pools
+## 节点池
 
-Using Rancher, you can create pools of nodes based on a [node template](#node-templates). The benefit of using a node pool is that if a node is destroyed or deleted, you can increase the number of live nodes to compensate for the node that was lost. The node pool helps you ensure that the count of the node pool is as expected.
+使用 Rancher，您可以基于[节点模板](#节点模板)创建节点池。使用节点池的好处是，如果节点被破坏或删除，您可以增加活动节点的数量以补偿丢失的节点。节点池可帮助您确保节点的数量符合预期。
 
-Each node pool is assigned with a [node component](/docs/cluster-provisioning/#kubernetes-cluster-node-components) to specify how these nodes should be configured for the Kubernetes cluster.
+每个节点池都分配有一个[节点组件](/docs/cluster-provisioning/_index)以指定如何为 Kubernetes 集群配置这些节点。
 
-#### Node Pool Taints
+### 节点池污点
 
-_Available as of Rancher v2.3.0_
+_从 Rancher v2.3.0 开始可用_
 
-If you haven't defined [taints](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) on your node template, you can add taints for each node pool. The benefit of adding taints at a node pool is beneficial over adding it at a node template is that you can swap out the node templates without worrying if the taint is on the node template.
+如果您尚未在节点模板上定义[污点](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)，则可以为每个节点池添加污点。相比在节点模板上添加污点，在节点池上添加污点的好处在于，您可以替换节点模板，而不必担心污点是否在节点模板中。
 
-For each taint, they will automatically be added to any created node in the node pool. Therefore, if you add taints to a node pool that have existing nodes, the taints won't apply to existing nodes in the node pool, but any new node added into the node pool will get the taint.
+对于每个污点，它们将自动添加到节点池中创建的节点。因此，如果您在已有节点的节点池中添加污点，这些污点将不适用于该节点池中的已有的节点，但是该节点池中的任何新节点都将获得该污点。
 
-When there are taints on the node pool and node template, if there is no conflict with the same key and effect of the taints, all taints will be added to the nodes. If there are taints with the same key and different effect, the taints from the node pool will override the taints from the node template.
+当节点模板和节点池中同时添加了污点时，如果添加了相同键的污点的效果没有冲突，则所有污点都将被添加到节点。如果存在具有相同键但不同效果的污点，则节点池中的污点将覆盖节点模板中的污点。
 
-#### About Node Auto-replace
+### 关于节点自动替换
 
-_Available as of Rancher v2.3.0_
+_从 Rancher v2.3.0 开始可用_
 
-If a node is in a node pool, Rancher can automatically replace unreachable nodes. Rancher will use the existing node template for the given node pool to recreate the node if it becomes inactive for a specified number of minutes.
+如果节点在节点池中，Rancher 能够自动替换不可用的节点。如果节点在指定的时间中处于非活动状态，Rancher 将使用该节点池的节点模板来重新创建节点。
 
-> **Important:** Self-healing node pools are designed to help you replace worker nodes for **stateless** applications. It is not recommended to enable node auto-replace on a node pool of master nodes or nodes with persistent volumes attached, because VMs are treated ephemerally. When a node in a node pool loses connectivity with the cluster, its persistent volumes are destroyed, resulting in data loss for stateful applications.
+> **重要：** 自我修复节点池旨在帮助您为**无状态**应用程序替换工作节点。不建议在主节点或具有持久卷连接的节点的节点池上启用节点自动替换。当节点池中的节点失去与集群的连接时，其持久卷将被破坏，从而导致有状态应用程序丢失数据。
 
- accordion id="how-does-node-auto-replace-work" label="How does Node Auto-replace Work?" 
-Node auto-replace works on top of the Kubernetes node controller. The node controller periodically checks the status of all the nodes (configurable via the `--node-monitor-period` flag of the `kube-controller` ). When a node is unreachable, the node controller will taint that node. When this occurs, Rancher will begin its deletion countdown. You can configure the amount of time Rancher waits to delete the node. If the taint is not removed before the deletion countdown ends, Rancher will proceed to delete the node object. Rancher will then provision a node in accordance with the set quantity of the node pool.
- /accordion 
+#### 节点自动替换是如何工作的?
 
-#### Enabling Node Auto-replace
+节点自动替换在 Kubernetes 节点控制器之上工作。节点控制器会定期检查所有节点的状态（可通过`kube-controller`的`--node-monitor-period`参数进行配置）。当节点不可访问时，节点控制器将为该节点添加污点。发生这种情况时，Rancher 将开始其删除倒计时。您可以配置 Rancher 等待删除节点的时间。如果在删除倒计时结束之前污点没有被移除，Rancher 将删除该节点。然后 Rancher 将根据节点池的设置节点数量来创建新的节点。
 
-When you create the node pool, you can specify the amount of time in minutes that Rancher will wait to replace an unresponsive node.
+### 开启节点自动替换
 
-1. In the form for creating a cluster, go to the **Node Pools** section.
-1. Go to the node pool where you want to enable node auto-replace. In the **Recreate Unreachable After** field, enter the number of minutes that Rancher should wait for a node to respond before replacing the node.
-1. Fill out the rest of the form for creating a cluster.
+创建节点池时，您可以指定 Rancher 替换无响应节点的等待时间（以分钟为单位）。
 
-**Result:** Node auto-replace is enabled for the node pool.
+1. 在创建集群表单中, 选择**节点池**选项卡.
+1. 选择要开启节点自动替换功能的节点池，在**自动替换**列中输入 Rancher 自动替换节点需要的等待时间。
+1. 填写表单中的其他信息并创建集群。
 
-You can also enable node auto-replace after the cluster is created with the following steps:
+**结果：** 节点池开启了节点自动替换功能。
 
-1. From the Global view, click the Clusters tab.
-1. Go to the cluster where you want to enable node auto-replace, click the vertical ellipsis **(…)**, and click **Edit.**
-1. In the **Node Pools** section, go to the node pool where you want to enable node auto-replace. In the **Recreate Unreachable After** field, enter the number of minutes that Rancher should wait for a node to respond before replacing the node.
-1. Click **Save.**
+您还可以通过以下步骤在创建集群后启用节点自动替换功能：
 
-**Result:** Node auto-replace is enabled for the node pool.
+1. 在全局页面中，选择集群列表页。
+1. 选择您要开启节点自动替换功能的集群, 点击右侧**菜单**选项，并点击**编辑**按钮。
+1. 在**节点池**选项卡中，选择要开启节点自动替换功能的节点池，在**自动替换**列中输入 Rancher 自动替换节点需要的等待时间。
+1. 点击**保存**。
 
-#### Disabling Node Auto-replace
+**结果：** 节点池开启了节点自动替换功能。
 
-You can disable node auto-replace from the Rancher UI with the following steps:
+### 关闭节点自动替换功能
 
-1. From the Global view, click the Clusters tab.
-1. Go to the cluster where you want to enable node auto-replace, click the vertical ellipsis **(…)**, and click **Edit.**
-1. In the **Node Pools** section, go to the node pool where you want to enable node auto-replace. In the **Recreate Unreachable After** field, enter 0.
-1. Click **Save.**
+您可以通过以下步骤在 Rancher UI 中禁用节点自动替换功能：
 
-**Result:** Node auto-replace is disabled for the node pool.
+1. 在全局页面中，选择集群列表页。
+1. 选择您要关闭节点自动替换功能的集群, 点击右侧**菜单**选项，并点击**编辑**按钮。
+1. 在**节点池**选项卡中，选择要关闭节点自动替换功能的节点池，在**自动替换**列中输入 0。
+1. 点击**保存**。
 
-## Cloud Credentials
+**结果：** 节点池关闭了节点自动替换功能。
 
-_Available as of v2.2.0_
+## 云凭证
 
-Node templates can use cloud credentials to store credentials for launching nodes in your cloud provider, which has some benefits:
+_从 Rancher v2.2.0 开始可用_
 
-* Credentials are stored as a Kubernetes secret, which is not only more secure, but it also allows you to edit a node template without having to enter your credentials every time.
+节点模板可以使用云凭证来存储用于在云提供商中启动节点的凭证，这有做有如下好处：
 
-* After the cloud credential is created, it can be re-used to create additional node templates.
+- 凭证会在 Kubernetes 中保存为密文，这不仅更安全，而且还允许您编辑节点模板，而不必每次都输入凭证。
 
-* Multiple node templates can share the same cloud credential to create node pools. If your key is compromised or expired, the cloud credential can be updated in a single place, which allows all node templates that are using it to be updated at once.
+- 云凭证创建后, 您可以在创建其他节点模板时重复使用该凭证。
 
-> **Note:** As of v2.2.0, the default `active` [node drivers](/docs/admin-settings/drivers/node-drivers/) and any node driver, that has fields marked as `password` , are required to use cloud credentials. If you have upgraded to v2.2.0, existing node templates will continue to work with the previous account access information, but when you edit the node template, you will be required to create a cloud credential and the node template will start using it.
+- 多个节点模板可以共享相同的云凭据来创建节点池。如果您的密钥已被盗用或过期，您可以在一个位置更新云凭证，从而可以立即更新所有使用它的节点模板。
 
-After cloud credentials are created, the user can start [managing the cloud credentials that they created](/docs/user-settings/cloud-credentials/).
+> **注意：** 从 v2.2.0 开始，默认的`活动`的[节点驱动](/docs/admin-settings/drivers/node-drivers/_index)和其他节点驱动中，标记为`密码`的字段都要求使用云凭证。如果您是升级到 v2.2.0 版本，已有的节点模板将继续使用以前的帐户访问信息，但是在编辑该节点模板时，您需要创建云凭证并且该节点模板将开始使用它。
 
-## Node Drivers
+创建云凭证后，用户可以开始[管理他们创建的云凭证](/docs/user-settings/cloud-credentials/_index)。
 
-If you don't find the node driver that you want to use, you can see if it is available in Rancher's built-in [node drivers and activate it](/docs/admin-settings/drivers/node-drivers/#activating-deactivating-node-drivers), or you can [add your own custom node driver](/docs/admin-settings/drivers/node-drivers/#adding-custom-node-drivers).
+## 节点驱动
 
+如果您找不到想要使用的节点驱动，您可以在 Rancher 的[内置节点驱动](/docs/admin-settings/drivers/node-drivers/_index)中查看它是否可用并激活它，或者您可以[添加自定义节点驱动](/docs/admin-settings/drivers/node-drivers/_index)。

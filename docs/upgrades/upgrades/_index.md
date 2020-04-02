@@ -16,7 +16,7 @@ title: 升级必读
 | 升级到 v2.3.0+            | 从 v2.0，v2.1 或 v2.2 版本升级到 v2.3.0 或者以上版本时，第一次修改通过 Rancher v2.3.0 之前版本部署的 RKE 集群时，由于要向系统组件中加入 Tolerations，该集群全部的系统组件将会自动重启。                                                                                                                                                                     |
 | 升级到 v2.2.0-v2.2.x      | Rancher 引入了[System Charts](https://github.com/rancher/system-charts)代码库，其中包含监控，日志，告警和全局 DNS 等功能所需的所有应用商店应用。为了能够在离线环境中使用这些功能，您将需要在本地镜像`system-charts`代码库，并将 Rancher 配置为使用该代码库。请按照说明[配置 Rancher System Charts](/docs/installation/options/local-system-charts/_index)。 |
 | 从 v2.0.13 或更早版本升级 | 如果您集群的证书已过期，则需要执行[其他步骤](/docs/cluster-admin/certificate-rotation/_index)来轮换证书。                                                                                                                                                                                                                                                   |
-| 从 v2.0.7 或更早版本升级  | Rancher 引入了 `System` 项目，这是一个自动创建的项目，用于存放 Kubernetes 需要操作的重要命名空间。在升级到 v2.0.7+ 的过程中，Rancher 希望从所有项目中移出这些命名空间。在开始升级之前，请检查这些系统名称空间，确保它们不在任何项目中，从而[防止集群网络问题](/docs/upgrades/upgrades/namespace-migration/_index)。                                         |
+| 从 v2.0.7 或更早版本升级  | Rancher 引入了 `System` 项目，这是一个自动创建的项目，用于存放 Kubernetes 需要操作的重要命名空间。在升级到 v2.0.7+ 的过程中，Rancher 希望从所有项目中移出这些命名空间。在开始升级之前，请检查这些系统命名空间，确保它们不在任何项目中，从而[防止集群网络问题](/docs/upgrades/upgrades/namespace-migration/_index)。                                         |
 
 ## 警告
 

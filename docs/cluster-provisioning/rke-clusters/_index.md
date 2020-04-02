@@ -1,5 +1,5 @@
 ---
-title: Rancher 部署的 Kubernetes 集群
+title: RKE 集群
 ---
 
 您可以让 Rancher 在您想要的任何节点上启动 Kubernetes 集群。在 Rancher 将 Kubernetes 部署到这些节点上时，它底层使用的是[Rancher Kubernetes Engine](http://docs.rancher.com/docs/rke/latest/en/) (RKE)。这是 Rancher 自己的轻量级 Kubernetes 安装程序。它可以在任何计算机上启动 Kubernetes，包括：
@@ -18,7 +18,7 @@ RKE 集群包括 Rancher 在现有 Windows 节点或 Linux 节点上部署的集
 
 ## 在云提供商的新节点上启动 Kubernetes
 
-使用 Rancher，您可以基于[主机模版](/docs/cluster-provisioning/rke-clusters/node-pools/_index)创建节点池。这个主机模版定义了您希望用来启动云提供商中的节点的参数。
+使用 Rancher，您可以基于[节点模版](/docs/cluster-provisioning/rke-clusters/node-pools/_index)创建节点池。这个节点模版定义了您希望用来启动云提供商中的节点的参数。
 
 在设备提供商托管的节点池上安装 Kubernetes 的一个好处是，如果一个节点与集群失去连接，Rancher 可以自动创建另一个节点并加入集群，以确保节点池的节点数量与预期保持一致。
 
