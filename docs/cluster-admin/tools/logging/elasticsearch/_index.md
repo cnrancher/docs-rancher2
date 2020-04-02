@@ -1,43 +1,40 @@
 ---
-title: 对接 Elasticsearch
+title: Elasticsearch
 ---
 
-If your organization uses [Elasticsearch](https://www.elastic.co/), either on premise or in the cloud, you can configure Rancher to send it Kubernetes logs. Afterwards, you can log into your Elasticsearch deployment to view logs.
+如果您的组织在内部或云上使用 [Elasticsearch](https://www.elastic.co/)，可以配置 Rancher 向其发送 Kubernetes 日志。之后，您可以进入 Elasticsearch 中查看日志。
 
-> **Prerequisites:** Configure an [Elasticsearch deployment](https://www.elastic.co/guide/en/cloud/saas-release/ec-create-deployment.html).
+> **前提：** 配置 [Elasticsearch](https://www.elastic.co/guide/en/cloud/saas-release/ec-create-deployment.html)。
 
-### Elasticsearch Deployment Configuration
+### Elasticsearch 配置
 
-1. In the **Endpoint** field, enter the IP address and port of your Elasticsearch instance. You can find this information from the dashboard of your Elasticsearch deployment.
+1. 在**访问地址**字段中，输入您的 Elasticsearch 实例的 IP 地址和端口。您可以从 Elasticsearch 的仪表板中找到此信息。
 
-   - Elasticsearch usually uses port `9200` for HTTP and `9243` for HTTPS.
+   - Elasticsearch 通常将端口 `9200` 用于 HTTP，将 `9243` 用于 HTTPS。
 
-1. If you are using [X-Pack Security](https://www.elastic.co/guide/en/x-pack/current/xpack-introduction.html), enter your Elasticsearch **Username** and **Password** for authentication.
+1. 如果您使用 [X-Pack Security](https://www.elastic.co/guide/en/x-pack/current/xpack-introduction.html) 请输入您的 Elasticsearch **用户名**和**密码**用于身份验证。
 
-1. Enter an [Index Pattern](https://www.elastic.co/guide/en/kibana/current/index-patterns.html).
+1.输入 [Index Pattern](https://www.elastic.co/guide/en/kibana/current/index-patterns.html)。
 
-### SSL Configuration
+### SSL 配置
 
-If your instance of Elasticsearch uses SSL, your **Endpoint** will need to begin with `https://` . With the correct endpoint, the **SSL Configuration** form is enabled and ready to be completed.
+如果您的 Elasticsearch 实例使用 SSL，则您的**访问地址**必须以`https://` 开头。输入正确的访问地址，将展开**SSL 配置**表单。
 
-1. Provide the **Client Private Key** and **Client Certificate**. You can either copy and paste them or upload them by using the **Read from a file** button.
+1. 提供**客户端私钥**和**客户端证书**。您可以复制和粘贴它们，也可以使用**从文件读取**按钮上传它们。
 
-   - You can use either a self-signed certificate or one provided by a certificate authority.
+   - 您可以使用自签名证书，也可以使用证书颁发机构提供的证书。
 
-   - You can generate a self-signed certificate using an openssl command. For example:
+   - 您可以使用 openssl 命令生成自签名证书。例如：
 
-     
-
-``` 
+     ```
      openssl req -x509 -newkey rsa:2048 -keyout myservice.key -out myservice.cert -days 365 -nodes -subj "/CN=myservice.example.com"
      ```
 
-1. Enter your **Client Key Password**.
+1. 输入您的**客户密钥密码**。
 
-1. Enter your **SSL Version**. The default version is `TLSv1_2` .
+1. 输入您的**SSL 版本**。默认版本为 `TLSv1_2`。
 
-1. Select whether or not you want to verify your SSL.
+1. 选择是否要验证 SSL 证书
 
-   - If you are using a self-signed certificate, select **Enabled - Input trusted server certificate**, provide the **CA Certificate PEM**. You can copy and paste the certificate or upload it using the **Read from a file** button.
-   - If you are using a certificate from a certificate authority, select **Enabled - Input trusted server certificate**. You do not need to provide a **CA Certificate PEM**.
-
+   - 如果使用的是自签名证书，请选择**启用-输入受信任的服务器证书**，并提供 **PEM 格式的 CA 证书**。您可以复制和粘贴证书，也可以使用**从文件读取**按钮上传证书。
+   - 如果您使用的是来自证书颁发机构的证书，请选择**启用-输入受信任的服务器证书**。您无需提供**PEM 格式的 CA 证书**。

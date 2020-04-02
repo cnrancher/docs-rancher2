@@ -1,43 +1,38 @@
 ---
-title: 对接 Syslog
+title: Syslog
 ---
 
-If your organization uses [Syslog](https://tools.ietf.org/html/rfc5424), you can configure Rancher to send it Kubernetes logs. Afterwards, you can log into your Syslog server to view logs.
+如果您的组织使用 [Syslog](https://tools.ietf.org/html/rfc5424)， 则可以配置 Rancher 向其发送 Kubernetes 日志。之后，您可以到 Syslog 服务器以查看日志。
 
-> **Prerequisite:** You must have a Syslog server configured.
+> **前提：** 您必须配置 Syslog 服务器。
 
-If you are using rsyslog, please make sure your rsyslog authentication mode is `x509/name` .
+如果您使用的是 rsyslog，请确保您的 rsyslog 身份验证模式为 `x509/name`.
 
-### Syslog Server Configuration
+### Syslog 服务器配置
 
-1. In the **Endpoint** field, enter the IP address and port for your Syslog server. Additionally, in the dropdown, select the protocol that your Syslog server uses.
+1. 在**访问地址**字段中，输入 Syslog 服务器的 IP 地址和端口。此外，在下拉列表中，选择 Syslog 服务器使用的协议。
 
-1. In the **Program** field, enter the name of the application sending logs to your Syslog server, e.g. `Rancher` .
+1. 在**程序名**字段中，输入将日志发送到 Syslog 服务器的应用程序的名称，例如 `Rancher`.
 
-1. If you are using a cloud logging service, e.g.[Sumologic](https://www.sumologic.com/), enter a **Token** that authenticates with your Syslog server. You will need to create this token in the cloud logging service.
+1. 如果您使用的是云日志记录服务，例如：[Sumologic](https://www.sumologic.com/), 输入一个与您的 Syslog 服务器进行身份验证的**Token**。您将需要在云日志记录服务中创建此 Token。
 
-1. Select a **Log Severity** for events that are logged to the Syslog server. For more information on each severity level, see the [Syslog protocol documentation](https://tools.ietf.org/html/rfc5424#page-11).
+1. 为发送到 Syslog 服务器的日志选择 **Log Severity**。 有关每个严重性级别的更多信息，请参见 [Syslog 协议文档](https://tools.ietf.org/html/rfc5424#page-11).
 
-   - By specifying a **Log Severity** does not mean that will act as a filtering mechanism for logs. To do that you should use a parser on the Syslog server.
+### Encryption 配置
 
-### Encryption Configuration
+如果您的 Syslog 服务器使用 **TCP** 协议并使用 TLS，则需要选择 **Use TLS** 并完成 **Encryption 配置**。
 
-If your Syslog server is using **TCP** protocol and uses TLS, you need to select **Use TLS** and complete the **Encryption Configuration** form.
+1. 提供**客户端私钥**和**客户端证书**。您可以复制和粘贴它们，也可以使用**从文件读取**按钮上传它们。
 
-1. Provide the **Client Private Key** and **Client Certificate**. You can either copy and paste them or upload them by using the **Read from a file** button.
+   - 您可以使用自签名证书，也可以使用证书颁发机构提供的证书。
 
-   - You can use either a self-signed certificate or one provided by a certificate authority.
+   - 您可以使用 openssl 命令生成自签名证书。例如：
 
-   - You can generate a self-signed certificate using an openssl command. For example:
-
-     
-
-``` 
+     ```
      openssl req -x509 -newkey rsa:2048 -keyout myservice.key -out myservice.cert -days 365 -nodes -subj "/CN=myservice.example.com"
      ```
 
-1. Select whether or not you want to verify your SSL.
+1. 选择是否要验证 SSL 证书
 
-   - If you are using a self-signed certificate, select **Enabled - Input trusted server certificate**, provide the **CA Certificate PEM**. You can copy and paste the certificate or upload it using the **Read from a file** button.
-   - If you are using a certificate from a certificate authority, select **Enabled - Input trusted server certificate**. You do not need to provide a **CA Certificate PEM**.
-
+   - 如果使用的是自签名证书，请选择**启用-输入受信任的服务器证书**，并提供 **PEM 格式的 CA 证书**。您可以复制和粘贴证书，也可以使用**从文件读取**按钮上传证书。
+   - 如果您使用的是来自证书颁发机构的证书，请选择**启用-输入受信任的服务器证书**。您无需提供**PEM 格式的 CA 证书**。
