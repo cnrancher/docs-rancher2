@@ -160,5 +160,5 @@ docker run -d --restart=unless-stopped \
 
 ## 下一步？
 
-- **推荐：** 查看[单节点备份和还原](/docs/installation/backups-and-restoration/single-node-backup-and-restoration/_index)。尽管您现在没有任何数据需要备份，但是我们建议您在常规 Rancher 使用之后创建备份。
-- 创建 Kubernetes 集群: [Provisioning Kubernetes Clusters](/docs/cluster-provisioning/_index)。
+- **推荐：** 查看[单节点备份和还原](/docs/backups/backups/single-node-backups/_index)。尽管您现在没有任何数据需要备份，但是我们建议您在常规使用 Rancher 之后创建备份。
+- 创建 Kubernetes 集群：[创建 Kubernetes 集群](/docs/cluster-provisioning/_index)。
