@@ -8,7 +8,7 @@ title: 高可用安装 Helm Chart 选项
 | ------------------------- | ------------ | ---------------------------------------------------------------------- |
 | `hostname`                | " "          | `string` - Rancher 服务器完全限定域名                                  |
 | `ingress.tls.source`      | "rancher"    | `string` - ingress 获取证书的位置。 - "rancher， letsEncrypt， secret" |
-| `letsEncrypt.email`       | " "          | `string` - 你的邮箱地址                                                |
+| `letsEncrypt.email`       | " "          | `string` - 您的邮箱地址                                                |
 | `letsEncrypt.environment` | "production" | `string` - 有效选项： "staging， production"                           |
 | `privateCA`               | false        | `bool` - 如果证书由私有 CA 签名，则设置为 true                         |
 
@@ -45,13 +45,13 @@ title: 高可用安装 Helm Chart 选项
 
 启用[审计日志 API](/docs/installation/options/api-audit-log/_index)。
 
-你可以像收集任何容器日志一样收集审计日志，在 Rancher Server Cluster 中为`System` 项目启用[Rancher 工具中的日志服务](/docs/cluster-admin/tools/logging/_index)。
+您可以像收集任何容器日志一样收集审计日志，在 Rancher Server Cluster 中为`System` 项目启用[Rancher 工具中的日志服务](/docs/cluster-admin/tools/logging/_index)。
 
 ```plain
 --set auditLog.level=1
 ```
 
-默认情况下，启用审计日志会在 Rancher pod 中创建一个 sidecar 容器。这个容器(`rancher-audit-log`)会将日志流传输到`stdout`。你可以像收集任何容器日志一样收集审计日志。将 sidecar 用作审计日志目标时，`hostPath`， `maxAge`， `maxBackups`，和 `maxSize`选项将会被忽略。建议使用您的操作系统或 Docker 守护程序的日志轮换功能来控制磁盘空间的使用。为 Rancher Server 集群或 System 项目启用[Rancher 工具中的日志服务](/docs/cluster-admin/tools/logging/_index)。
+默认情况下，启用审计日志会在 Rancher pod 中创建一个 sidecar 容器。这个容器(`rancher-audit-log`)会将日志流传输到`stdout`。您可以像收集任何容器日志一样收集审计日志。将 sidecar 用作审计日志目标时，`hostPath`， `maxAge`， `maxBackups`，和 `maxSize`选项将会被忽略。建议使用您的操作系统或 Docker 守护程序的日志轮换功能来控制磁盘空间的使用。为 Rancher Server 集群或 System 项目启用[Rancher 工具中的日志服务](/docs/cluster-admin/tools/logging/_index)。
 
 将`auditLog.destination`设置为`hostPath`，会将日志转发至与主机系统共享的卷中，而不是流至一个 sidecar 容器中。当将目标设置为`hostPath`时，您可能需要调整其他 auditLog 参数以进行日志轮换。
 
@@ -59,7 +59,7 @@ title: 高可用安装 Helm Chart 选项
 
 _自 v2.2.0 起可用_
 
-你可以使用`extraEnv`为 Rancher Server 设置额外的环境变量。该列表使用与 Rancher 容器 YAML 定义中相同的`name`和 `value`键。请不要忘记了`引号`。
+您可以使用`extraEnv`为 Rancher Server 设置额外的环境变量。该列表使用与 Rancher 容器 YAML 定义中相同的`name`和 `value`键。请不要忘记了`引号`。
 
 ```plain
 --set 'extraEnv[0].name=CATTLE_TLS_MIN_VERSION'
@@ -90,7 +90,7 @@ _自 v2.2.0 起可用_
 --set addLocal="false"
 ```
 
-## 自定义你的 Ingress
+## 自定义您的 Ingress
 
 为 Rancher Server 自定义或使用其他的 Ingress，您可以设置自己的 Ingress annotations。
 
@@ -121,7 +121,7 @@ Rancher 需要访问网络，才能使用某些功能（helm charts）。 使用
 
 ## 其他受信任的 CA
 
-如果你有私有 Registry，catalogs 或拦截证书的代理，则可能需要向 Rancher 添加其他受信任的 CA。
+如果您有私有 Registry，catalogs 或拦截证书的代理，则可能需要向 Rancher 添加其他受信任的 CA。
 
 ```plain
 --set additionalTrustedCAs=true
@@ -142,19 +142,19 @@ kubectl -n cattle-system create secret generic tls-ca-additional --from-file=ca-
 
 ## 在外部终止 TLS
 
-我们建议将你的负载均衡器配置为第 4 层均衡器，将 80/tcp 和 443/tcp 的流量转发到 Rancher 管里面集群节点。集群上的 Ingress Controller 会将 80 端口的 http 请求重定向为 443 端口上的 https 请求。
+我们建议将您的负载均衡器配置为第 4 层均衡器，将 80/tcp 和 443/tcp 的流量转发到 Rancher 管里面集群节点。集群上的 Ingress Controller 会将 80 端口的 http 请求重定向为 443 端口上的 https 请求。
 
-你可以在 Rancher 集群外部的 L7 负载均衡器（Ingress）上终止 SSL/TLS 通信。使用`--set tls=external`选项，并将负载均衡器指向所有 Rancher 集群节点上的 http 协议 80 端口。这将会在 http 协议 80 端口上暴露 Rancher API。请注意，这种情况下，允许直接连接到 Rancher 集群的客户端与的 Rancher 的通信不会被加密。如果你选择这样做，我们建议将网络访问限制为只能访问你的负载均衡器。
+您可以在 Rancher 集群外部的 L7 负载均衡器（Ingress）上终止 SSL/TLS 通信。使用`--set tls=external`选项，并将负载均衡器指向所有 Rancher 集群节点上的 http 协议 80 端口。这将会在 http 协议 80 端口上暴露 Rancher API。请注意，这种情况下，允许直接连接到 Rancher 集群的客户端与的 Rancher 的通信不会被加密。如果您选择这样做，我们建议将网络访问限制为只能访问您的负载均衡器。
 
 > **注意：**
 >
 > 如果您使用的是私有 CA 签名证书，请添加`--set privateCA=true`，然后参阅[添加 TLS 密文 - 使用私有 CA 签发的证书](/docs/installation/options/tls-secrets/_index)来为 Rancher 添加 CA 证书。
 
-你的负载均衡器必须支持 websocket 长连接，并切需要插入代理头信息以便 Rancher 可以正确路由链接。
+您的负载均衡器必须支持 websocket 长连接，并切需要插入代理头信息以便 Rancher 可以正确路由链接。
 
 ### 使用 NGINX v0.25 时，为外部 TLS 访问配置 Ingress
 
-在 NGINX v0.25 版本中，关于转发头和终止外部 TLS 访问的 NGINX 行为已经[改变](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0220)，因此，在 NGINX v0.25 版本要终止外部 TLS 访问，你必须编辑`cluster.yml`文件，为 Ingress 启用 `use-forwarded-headers`选项：
+在 NGINX v0.25 版本中，关于转发头和终止外部 TLS 访问的 NGINX 行为已经[改变](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0220)，因此，在 NGINX v0.25 版本要终止外部 TLS 访问，您必须编辑`cluster.yml`文件，为 Ingress 启用 `use-forwarded-headers`选项：
 
 ```yaml
 ingress:
@@ -184,9 +184,9 @@ Rancher 将对`/healthz` 端点上的健康检查返回`200`响应。
 
 这个 NGINX 配置已经在 NGINX 1.14 测试过。
 
-> **注意：** 这个 NGINX 配置仅仅是一个示例，可能不适合你的环境。有关完整的文档，请参阅[NGINX 负载均衡 - HTTP 负载均衡](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/)。
+> **注意：** 这个 NGINX 配置仅仅是一个示例，可能不适合您的环境。有关完整的文档，请参阅[NGINX 负载均衡 - HTTP 负载均衡](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/)。
 
-- 将 `IP_NODE1`， `IP_NODE2` 和 `IP_NODE3` 替换为你的集群节点的 IP 地址。
+- 将 `IP_NODE1`， `IP_NODE2` 和 `IP_NODE3` 替换为您的集群节点的 IP 地址。
 - 将出现的两个`FQDN`替换为 Rancher 的 DNS 名称。
 - 将`/certs/fullchain.pem`和`/certs/privkey.pem`分别替换为服务器证书和服务器证书密钥的位置。
 
@@ -225,7 +225,7 @@ http {
             proxy_http_version 1.1;
             proxy_set_header Upgrade $http_upgrade;
             proxy_set_header Connection $connection_upgrade;
-            # 这里将允许你在 Rancher UI 中打开命令行窗口时，窗口可以保留最多15分钟。没有这个参数时，默认值为1分钟，一分钟后在Rancher中的shell会自动关闭。
+            # 这里将允许您在 Rancher UI 中打开命令行窗口时，窗口可以保留最多15分钟。没有这个参数时，默认值为1分钟，一分钟后在Rancher中的shell会自动关闭。
             proxy_read_timeout 900s;
             proxy_buffering off;
         }

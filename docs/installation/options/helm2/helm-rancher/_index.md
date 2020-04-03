@@ -8,7 +8,7 @@ title: '安装 Rancher'
 
 请参阅[Helm 版本要求](/docs/installation/options/helm-version/_index) 来选择安装 Rancher 的 Helm 版本。
 
-> **提示：** 当前安装说明假定您使用的是 Helm 2。如果您在使用 Helm 3，请参照[此说明](/docs/installation/k8s-install/helm-rancher/_index)。
+> **提示：** 当前安装指南假定您使用的是 Helm 2。如果您在使用 Helm 3，请参照[此说明](/docs/installation/k8s-install/helm-rancher/_index)。
 
 ## 添加 Helm Chart 仓库
 
@@ -121,7 +121,7 @@ cert-manager-cainjector-3ba5cd2bcd-de332x       1/1     Running     0          3
 默认情况下 Rancher 生成一个私有 CA 并使用 `cert-manager` 来颁发证书用以访问 Rancher 界面。因为 `rancher` 是 `ingress.tls.source` 选项的默认值，我们在运行 `helm install` 命令的时候并没有指定 `ingress.tls.source` 选项。
 
 - 将 `hostname` 设置为指向您负载均衡器的 DNS 名称
-- 如果你在安装 `alpha` 版本，需要把`--devel` 选项添加到下面到 Helm 命令中。
+- 如果您在安装 `alpha` 版本，需要把`--devel` 选项添加到下面到 Helm 命令中。
 
 ```
 helm install rancher-<CHART_REPO>/rancher \
@@ -145,7 +145,7 @@ deployment "rancher" successfully rolled out
 该选项使用 `cert-manager` 自动请求和更新[Let's Encrypt](https://letsencrypt.org/)证书。这是一个免费的服务，它为您提供一个受信的证书，因为 Let's Encrypt 提供的是受信的 CA。此配置使用 HTTP(`HTTP-01`)验证，因此负载均衡器必须具有公共的 DNS 记录并可以从互联网访问到。
 
 - 将 `hostname` 设置为公共 DNS 记录, 将 `ingress.tls.source` 选项设置为 `letsEncrypt`，并且设置 `letsEncrypt.email` 为可通讯的电子邮件地址，方便发送通知（例如证书到期通知）
-- 如果你在安装 `alpha` 版本，需要把`--devel` 选项添加到下面到 Helm 命令中。
+- 如果您在安装 `alpha` 版本，需要把`--devel` 选项添加到下面到 Helm 命令中。
 
 ```
 helm install rancher-<CHART_REPO>/rancher \
@@ -172,7 +172,7 @@ deployment "rancher" successfully rolled out
 
 - 设置 `hostname` 并且将 `ingress.tls.source` 选项设置为 `secret`.
 - 如果您使用的是私有 CA 证书，请在下面的命令中增加 `--set privateCA=true`.
-- 如果你在安装 `alpha` 版本，需要把`--devel` 选项添加到下面到 Helm 命令中。
+- 如果您在安装 `alpha` 版本，需要把`--devel` 选项添加到下面到 Helm 命令中。
 
 ```
 helm install rancher-<CHART_REPO>/rancher \
@@ -192,7 +192,7 @@ Waiting for deployment "rancher" rollout to finish: 0 of 3 updated replicas are 
 deployment "rancher" successfully rolled out
 ```
 
-如果你看到了错误：`error: deployment "rancher" exceeded its progress deadline`，您可以使用下面的命令来检查 deployment 的状态：
+如果您看到了错误：`error: deployment "rancher" exceeded its progress deadline`，您可以使用下面的命令来检查 deployment 的状态：
 
 ```
 kubectl -n cattle-system get deploy rancher

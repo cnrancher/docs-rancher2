@@ -1,5 +1,5 @@
 ---
-title: 离线安装说明
+title: 离线安装指南
 ---
 
 本节介绍在离线环境中安装 Rancher Server，我们将采取离线安装方式，同时要考虑防火墙和代理设置的因素。
@@ -19,7 +19,7 @@ Docker 安装适用于想要测试 Rancher 的用户。您可以使用 docker ru
 
 > **重要：** 如果您按照 Docker 安装指南安装 Rancher，以后将无法迁移到高可用安装。因为没有升级路径可以将 Docker 安装过渡到 Kubernetes 安装。
 
-如果为了节省资源，你也可以不使用 Docker 单节点安装指南。您可以选择使用 Rancher 高可用安装指南，但是也仅使用一个节点来安装 Kubernetes 和 Rancher。之后，您可以扩展 Kubernetes 集群中的 etcd 节点，使其成为真正的高可用安装。
+如果为了节省资源，您也可以不使用 Docker 单节点安装指南。您可以选择使用 Rancher 高可用安装指南，但是也仅使用一个节点来安装 Kubernetes 和 Rancher。之后，您可以扩展 Kubernetes 集群中的 etcd 节点，使其成为真正的高可用安装。
 
 ## 安装概要
 

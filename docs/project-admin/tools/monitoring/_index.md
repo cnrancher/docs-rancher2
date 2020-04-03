@@ -34,7 +34,7 @@ Prometheus 监控可以应用于 Rancher [集群层级](/docs/cluster-admin/tool
 
 1. 在导航栏选择**工具 > 监控**。
 
-1. 选择 **启用**，控制台上会出现[Prometheus 配置选项](/docs/cluster-admin/tools/monitoring/prometheus/_index)，输入你需要配置的监控参数。
+1. 选择 **启用**，控制台上会出现[Prometheus 配置选项](/docs/cluster-admin/tools/monitoring/prometheus/_index)，输入您需要配置的监控参数。
 
 1. 单击**保存**，保存修改后的参数配置。
 
@@ -49,7 +49,7 @@ Prometheus 监控可以应用于 Rancher [集群层级](/docs/cluster-admin/tool
 
 ## 项目监控指标
 
-在激活了项目监控后，在部署工作负载的页面，您可以配置自定义指标端点，从而使项目监控可以采集到自定义指标。当然，您可以通过部署任何 Prometheus [exporters](https://prometheus.io/docs/instrumenting/exporters/)，并在 Rancher 中配置相应的自定义端点，从而监控你的服务。
+在激活了项目监控后，在部署工作负载的页面，您可以配置自定义指标端点，从而使项目监控可以采集到自定义指标。当然，您可以通过部署任何 Prometheus [exporters](https://prometheus.io/docs/instrumenting/exporters/)，并在 Rancher 中配置相应的自定义端点，从而监控您的服务。
 
 > **示例：**
 > 项目中有一个命名空间叫 `redis-app` ，这个命名空间中部署了一个 [Redis](https://redis.io/) 应用。您可以通过部署 [Redis exporter](https://github.com/oliver006/redis_exporter) 监控这个应用。开启了项目监控以后，您可以编辑 Redis exporter 工作负载，配置**高级选项 -> 自定义参数**。输入暴露指标的`端口` 和 `路径`，然后选择`协议`。
@@ -66,6 +66,6 @@ Prometheus 监控可以应用于 Rancher [集群层级](/docs/cluster-admin/tool
 
 1. 在`project-monitoring`里面，有两个以`/index.html`结尾的链接，分别连接了 Prometheus 实例和 Grafana 实例。单击 Grafana 实例的链接，会打开一个新的页面，里面有集群的监控参数。
 
-1. 您会自动跳转到 Grafana UI。如果需要以管理员身份登录 Grafana，你需要在 Grafana 页面手动登录。默认的 Grafana 管理员的用户名和密码都是`admin`。为了保证 Grafana 实例的安全，建议您在登入后，先修改密码，然后再开始使用 Grafana 实例。
+1. 您会自动跳转到 Grafana UI。如果需要以管理员身份登录 Grafana，您需要在 Grafana 页面手动登录。默认的 Grafana 管理员的用户名和密码都是`admin`。为了保证 Grafana 实例的安全，建议您在登入后，先修改密码，然后再开始使用 Grafana 实例。
 
 **结果：** 您通过 Grafana 实例登录 Grafana。登录后，您可以查看通过[Grafana Provisioning 机制](http://docs.grafana.org/administration/provisioning/#dashboards)导入的，已经设置好的的 Grafana 仪表盘。如果您需要修改或创建自己的仪表盘，您需要先登录 Grafana。我们建议您先复制原有的 Grafana 仪表盘，通过它创建一个副本，再通过修改副本的参数，达到创建自己的仪表盘的目的。

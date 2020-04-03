@@ -9,7 +9,7 @@ title: 流水线使用指南
 
 在设置任何流水线之前，请查看[流水线概述](/docs/project-admin/pipelines/_index)并确保此项目已经[对接了您的版本管理工具](/docs/project-admin/pipelines/_index)，例如，GitHub，GitLab，Bitbucket。如果您没有配置版本管理工具，您可以使用[Rancher 提供的示例代码库](/docs/k8s-in-rancher/pipelines/example-repos/_index)去预览一些常见的流水线部署流程。
 
-如果您可以访问一个项目，你就能激活代码库来构建流水线。但只有[系统管理员](/docs/admin-settings/rbac/global-permissions/_index)，[集群所有者或集群成员](/docs/admin-settings/rbac/cluster-project-roles/_index)，或者[项目所有者](/docs/admin-settings/rbac/cluster-project-roles/_index)能够授权版本管理工具。
+如果您可以访问一个项目，您就能激活代码库来构建流水线。但只有[系统管理员](/docs/admin-settings/rbac/global-permissions/_index)，[集群所有者或集群成员](/docs/admin-settings/rbac/cluster-project-roles/_index)，或者[项目所有者](/docs/admin-settings/rbac/cluster-project-roles/_index)能够授权版本管理工具。
 
 ## 概念
 
@@ -33,7 +33,7 @@ title: 流水线使用指南
 
 ## 配置代码库
 
-授权版本管理工具后，UI 将自动重定向，你可以开始配置你的代码库来激活流水线。如果其他人也设置了版本管理工具，您也将看到他们的代码库并可以运行相应的流水线。
+授权版本管理工具后，UI 将自动重定向，您可以开始配置您的代码库来激活流水线。如果其他人也设置了版本管理工具，您也将看到他们的代码库并可以运行相应的流水线。
 
 1. 从**全局**视图，导航到您想要配置流水线的项目。
 
@@ -122,7 +122,7 @@ title: 流水线使用指南
 
     _可用于 v2.2.0_
 
-    **通知：** 您可以决定是否要为流水线设置通知。您可以根据流水线的构建状态，启用任何[通知](/docs/cluster-admin/tools/notifiers/_index)。在启用流水线通知之前，你需要[配置通知](/docs/cluster-admin/tools/notifiers/_index)，这样可以轻松地添加接收者。
+    **通知：** 您可以决定是否要为流水线设置通知。您可以根据流水线的构建状态，启用任何[通知](/docs/cluster-admin/tools/notifiers/_index)。在启用流水线通知之前，您需要[配置通知](/docs/cluster-admin/tools/notifiers/_index)，这样可以轻松地添加接收者。
 
     - 通过 UI 配置通知
       _可用于 v2.2.0_
@@ -165,7 +165,7 @@ title: 流水线使用指南
             notifier: 'c-wdcsr:n-c9pg7'
           - recipient: 'test@example.com'
             notifier: 'c-wdcsr:n-lkrhd'
-        # 选择你想要发送通知的条件
+        # 选择您想要发送通知的条件
         condtions: ['Failed'，'Success'，'Changed']
         # 用来覆盖默认通知内容 (可选)
         message: 'my-message'
@@ -283,7 +283,7 @@ _可用于 Rancher v2.1.0_
 
      | 字段                        | 描述                                                                                                                                                                                             |
      | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-     | Dockerfile 路径             | Dockerfile 文件在你代码库中的相对路径。默认值为`./Dockerfile`，它意味着 Rancher 将使用你的代码库根目录中的 Dockerfile 文件。根据需要，你可以把这个设置为其他值。例如，`./path/to/myDockerfile`。 |
+     | Dockerfile 路径             | Dockerfile 文件在您代码库中的相对路径。默认值为`./Dockerfile`，它意味着 Rancher 将使用您的代码库根目录中的 Dockerfile 文件。根据需要，您可以把这个设置为其他值。例如，`./path/to/myDockerfile`。 |
      | 镜像名称                    | 以`name:tag`为格式的镜像名称。不需要包括镜像库地址。例如，构建`example.com/repo/my-image:dev`镜像，输入`repo/my-image:dev`。                                                                     |
      | 推送镜像到远端镜像仓库      | 选择是否将流水线中构建的镜像发布到远端镜像仓库中。如果需要，请选中该项，并且在下拉菜单中选择要推送的镜像仓库。如果没有选择该项，您构建的镜像将被推送到流水线内置的镜像库                         |
      | 构建上下文 （在高级选项中） | 默认值为源代码根目录(`.`)。获取更多详情，请参阅[Docker 构建命令文档](https://docs.docker.com/engine/reference/commandline/build/)。                                                              |
@@ -333,9 +333,9 @@ _可用于 v2.2.0_
       | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
       | Chart 目录   | chart 目录在代码库中的相对路径。也就是`Chart.yaml`所在的目录。                                                                                                                                                                                                                |
       | 应用模版名称 | 所发布应用模版的名称。例如，wordpress。                                                                                                                                                                                                                                       |
-      | 应用模版版本 | 所发布应用模版的版本。这个版本应该和你`Chart.yaml`文件中的版本号匹配。                                                                                                                                                                                                        |
-      | 协议         | 你可以选择通过 HTTP(s)或者 SSH 的方式发布到代码库中。                                                                                                                                                                                                                         |
-      | 密文         | 选择包含你的 Git 访问凭证的密文。你需要在流水线专用的命名空间中创建一个密文。如果您用的是 HTTP 或者 HTTPS 的方式，请把 Git 的用户名和密码保存在这个密文的`USERNAME`和`PASSWORD`键值对中。如果你使用 SSH 的方式，请把 Git 的 deploy key 保存在这个密文的`DEPLOY_KEY`键值对中。 |
+      | 应用模版版本 | 所发布应用模版的版本。这个版本应该和您`Chart.yaml`文件中的版本号匹配。                                                                                                                                                                                                        |
+      | 协议         | 您可以选择通过 HTTP(s)或者 SSH 的方式发布到代码库中。                                                                                                                                                                                                                         |
+      | 密文         | 选择包含您的 Git 访问凭证的密文。您需要在流水线专用的命名空间中创建一个密文。如果您用的是 HTTP 或者 HTTPS 的方式，请把 Git 的用户名和密码保存在这个密文的`USERNAME`和`PASSWORD`键值对中。如果您使用 SSH 的方式，请把 Git 的 deploy key 保存在这个密文的`DEPLOY_KEY`键值对中。 |
       | Git 地址     | 把应用模版发布到这个 Git 地址。                                                                                                                                                                                                                                               |
       | Git 分支     | 把应用模版发布到这个 Git 分支。                                                                                                                                                                                                                                               |
       | 作者         | 提交信息中所包含的作者信息。                                                                                                                                                                                                                                                  |
@@ -354,7 +354,7 @@ _可用于 v2.2.0_
   - GitBranch: 模板将发布到的 chart 代码库的 git 分支。
   - GitAuthor: 提交消息中使用的作者姓名。
   - GitEmail: 提交消息中使用的作者电子邮件。
-  - Credentials: 包含你的 Git 访问凭证的密文。你需要在流水线专用的命名空间中创建一个密文。如果您用的是 HTTP 或者 HTTPS 的方式，请把 Git 的用户名和密码保存在这个密文的`USERNAME`和`PASSWORD`键值对中。如果你使用 SSH 的方式，请把 Git 的 deploy key 保存在这个密文的`DEPLOY_KEY`键值对中。
+  - Credentials: 包含您的 Git 访问凭证的密文。您需要在流水线专用的命名空间中创建一个密文。如果您用的是 HTTP 或者 HTTPS 的方式，请把 Git 的用户名和密码保存在这个密文的`USERNAME`和`PASSWORD`键值对中。如果您使用 SSH 的方式，请把 Git 的 deploy key 保存在这个密文的`DEPLOY_KEY`键值对中。
 
   ```yaml
   # 示例
@@ -376,7 +376,7 @@ _可用于 v2.2.0_
 
 ### 部署 YAML
 
-此步骤将任意 Kubernetes 资源部署到项目。此部署要求你的源代码库中存在 Kubernetes YAML 文件。你可以在 Kubernetes YAML 文件中使用流水线变量替换功能。您可以在[GitHub](https://github.com/rancher/pipeline-example-go/blob/master/deployment.yaml)上查看示例文件。有关可用变量的列表，请参考[流水线变量替换列表](#流水线变量替换列表)。
+此步骤将任意 Kubernetes 资源部署到项目。此部署要求您的源代码库中存在 Kubernetes YAML 文件。您可以在 Kubernetes YAML 文件中使用流水线变量替换功能。您可以在[GitHub](https://github.com/rancher/pipeline-example-go/blob/master/deployment.yaml)上查看示例文件。有关可用变量的列表，请参考[流水线变量替换列表](#流水线变量替换列表)。
 
 - 通过 UI 设置部署 YAML
 
@@ -413,7 +413,7 @@ _可用于 v2.2.0_
      | -------- | --------------------------------- |
      | 应用商店 | 应用模版所在的应用商店。          |
      | 应用模版 | 应用模版的名称。例如，wordpress。 |
-     | 模版版本 | 你要部署的应用模版的版本。        |
+     | 模版版本 | 您要部署的应用模版的版本。        |
      | 命名空间 | 部署应用的命名空间。              |
      | 应用名称 | 部署应用的应用名称。              |
      | 应答     | 用来部署应用的键值对形式的应答。  |
@@ -424,8 +424,8 @@ _可用于 v2.2.0_
 
   在 `步骤` 部分下，通过 `applyAppConfig` 添加一个步骤。您将提供以下信息:
 
-  - CatalogTemplate: 应用模板的 ID。可以在应用商店页单击 `启动`。找到并点击你要部署的应用。应用部署页 url 的最后一部分就是你要找的`CatalogTemplate`值。
-  - Version: 你要部署的应用模版的版本。
+  - CatalogTemplate: 应用模板的 ID。可以在应用商店页单击 `启动`。找到并点击您要部署的应用。应用部署页 url 的最后一部分就是您要找的`CatalogTemplate`值。
+  - Version: 您要部署的应用模版的版本。
   - Answers: 用来部署应用的键值对形式的应答
   - Name: 部署应用的应用名称。
   - TargetNamespace: 部署应用的命名空间。

@@ -43,7 +43,7 @@ systemctl enable firewalld
 
 ## 应用防火墙端口规则
 
-在 Rancher 高可用性安装说明中，Rancher 服务器设置在三个节点上，这三个节点具有 Kubernetes 的所有三个角色：etcd、controlplane 和 worker。如果您的 Rancher 服务器节点具有所有这三个角色，请在每个节点上运行以下命令：
+在 Rancher 高可用性安装指南中，Rancher 服务器设置在三个节点上，这三个节点具有 Kubernetes 的所有三个角色：etcd、controlplane 和 worker。如果您的 Rancher 服务器节点具有所有这三个角色，请在每个节点上运行以下命令：
 
 ```
 firewall-cmd --permanent --add-port=22/tcp

@@ -5,7 +5,7 @@ title: 具体要求
 这个页面描述了安装 Rancher Server 节点的软件，硬件和网络要求。Rancher Server 可以安装在单个节点或高可用的 Kubernetes 集群上。
 
 :::important 注意
-这是对安装 Rancher Server 的节点的要求。如果你要创建用来运行你自己的应用的集群，请参阅[用户集群的节点要求](/docs/cluster-provisioning/node-requirements/_index)。
+这是对安装 Rancher Server 的节点的要求。如果您要创建用来运行您自己的应用的集群，请参阅[用户集群的节点要求](/docs/cluster-provisioning/node-requirements/_index)。
 :::
 
 请确保 Rancher Server 的节点满足以下要求:
@@ -124,11 +124,11 @@ Rancher 的性能取决于 etcd 在集群中的性能。为了确保最佳速度
 | TCP  | 2376 | 使用主机驱动创建的节点中的任何节点 IP                    | Docker Machine 使用的 Docker 守护进程的 TLS 端口 |
 | TCP  | 6443 | 托管的/导入的 Kubernetes API                             | Kubernetes API Server                            |
 
-**注意** 如果你配置了的外部[身份验证系统](/docs/admin-settings/authentication/_index)（例如 LDAP），Rancher 节点可能还需要其他出站规则。
+**注意** 如果您配置了的外部[身份验证系统](/docs/admin-settings/authentication/_index)（例如 LDAP），Rancher 节点可能还需要其他出站规则。
 
 #### RKE 集群中节点的其他端口需求
 
-通过 RKE 安装 Rancher 高可用所在的集群时，你还需要开放其他的端口。
+通过 RKE 安装 Rancher 高可用所在的集群时，您还需要开放其他的端口。
 
 如果您按照 Rancher 安装文档通过 RKE 配置 Kubernetes 集群，这个集群中所有的三个节点都具有所有三个角色：etcd、controlplane 和 worker。在这种情况下，您可以参考具有所有三个角色的每个节点的需求列表：
 
@@ -183,7 +183,7 @@ Rancher 的性能取决于 etcd 在集群中的性能。为了确保最佳速度
 
 下表细分了入站和出站流量的端口要求：
 
-**注意** 如果你配置了的外部[身份验证系统](/docs/admin-settings/authentication/_index)（例如 LDAP），Rancher 节点可能还需要其他出站规则。
+**注意** 如果您配置了的外部[身份验证系统](/docs/admin-settings/authentication/_index)（例如 LDAP），Rancher 节点可能还需要其他出站规则。
 
 <figcaption>Rancher 节点的入站规则</figcaption>
 
@@ -201,4 +201,4 @@ Rancher 的性能取决于 etcd 在集群中的性能。为了确保最佳速度
 | TCP  | 2376 | 使用主机驱动创建的节点中的任何节点 IP                    | Docker Machine 使用的 Docker 守护进程的 TLS 端口 |
 | TCP  | 6443 | 托管/导入集群的 Kubernetes API 端口                      | Kubernetes API Server                            |
 
-**注意** 如果你配置了的外部[身份验证系统](/docs/admin-settings/authentication/_index)（例如 LDAP），Rancher 节点可能还需要其他出站规则。
+**注意** 如果您配置了的外部[身份验证系统](/docs/admin-settings/authentication/_index)（例如 LDAP），Rancher 节点可能还需要其他出站规则。

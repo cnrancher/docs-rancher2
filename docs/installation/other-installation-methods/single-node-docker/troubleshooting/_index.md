@@ -30,7 +30,7 @@ VWQqljhfacYPgp8KJUJENQ9h5hZ2nSCrI+W00Jcw4QcEdCI8HL5wmg==
 -----END RSA PRIVATE KEY-----
 ```
 
-如果你的密钥看起来像下面的例子，请查看[如何将证书密钥从 PKCS8 转换为 PKCS1](#如何将证书密钥从-pkcs8-转换为-pkcs1)
+如果您的密钥看起来像下面的例子，请查看[如何将证书密钥从 PKCS8 转换为 PKCS1](#如何将证书密钥从-pkcs8-转换为-pkcs1)
 
 ```
 -----BEGIN PRIVATE KEY-----
@@ -62,10 +62,10 @@ openssl rsa -in key.pem -out convertedkey.pem
 
 ```
 -----BEGIN CERTIFICATE-----
-%你的证书%
+%您的证书%
 -----END CERTIFICATE-----
 -----BEGIN CERTIFICATE-----
-%你的中间证书%
+%您的中间证书%
 -----END CERTIFICATE-----
 ```
 

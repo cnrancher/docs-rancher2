@@ -56,7 +56,7 @@ Rancher Helm Chart 版本必须匹配 Ranche 版本（即`appVersion`）。
    rancher-<CHART_REPO>	https://releases.rancher.com/server-charts/<CHART_REPO>
    ```
 
-2. 移除你安装 Rancher 时用的 Helm Chart 仓库，是`rancher-stable` 还是 `rancher-latest`仓库取决于你初始安装时选择的是哪个库。
+2. 移除您安装 Rancher 时用的 Helm Chart 仓库，是`rancher-stable` 还是 `rancher-latest`仓库取决于您初始安装时选择的是哪个库。
 
    ```plain
    helm repo remove rancher-<CHART_REPO>
@@ -72,7 +72,7 @@ Rancher Helm Chart 版本必须匹配 Ranche 版本（即`appVersion`）。
 
 ## Docker 镜像
 
-在执行[Docker 单节点安装](/docs/installation/single-node/_index)时，升级或回滚时，你可以使用*标签*去安装特定版本的 Rancher。
+在执行[Docker 单节点安装](/docs/installation/single-node/_index)时，升级或回滚时，您可以使用*标签*去安装特定版本的 Rancher。
 
 ### Server 标签
 
@@ -82,7 +82,7 @@ Rancher Server 作为 Docker 镜像分发，其中附加了标签。您可以在
 | -------------------------- | -------------------------------------------------------------------------------------- |
 | `rancher/rancher:latest`   | 我们的最新版本。这些构建通过了我们的 CI 自动化验证。我们不建议将这些版本用于生产环境。 |
 | `rancher/rancher:stable`   | 我们最新的稳定版本。建议将此标签用于生产。                                             |
-| `rancher/rancher:<v2.X.X>` | 您可以使用标签来安装特定版本的 Rancher。你到 DockerHub 上查看有哪些可用的版本          |
+| `rancher/rancher:<v2.X.X>` | 您可以使用标签来安装特定版本的 Rancher。您到 DockerHub 上查看有哪些可用的版本          |
 
 > **注意：**
 >

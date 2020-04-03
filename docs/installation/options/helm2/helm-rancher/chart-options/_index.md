@@ -6,11 +6,11 @@ title: Chart 安装选项
 
 | 选项                      | 默认值       | 描述                                                                    |
 | ------------------------- | ------------ | ----------------------------------------------------------------------- |
-| `hostname`                | " "          | `string` - 你的 Rancher Server 的 FQDN                                  |
+| `hostname`                | " "          | `string` - 您的 Rancher Server 的 FQDN                                  |
 | `ingress.tls.source`      | "rancher"    | `string` - 从哪里获取 ingress 的证书 - "rancher, letsEncrypt, secret"   |
-| `letsEncrypt.email`       | " "          | `string` - 你的邮箱地址                                                 |
+| `letsEncrypt.email`       | " "          | `string` - 您的邮箱地址                                                 |
 | `letsEncrypt.environment` | "production" | `string` - 可选项: "staging, production"                                |
-| `privateCA`               | false        | `bool` - 如果你的证书是通过私有 CA 签发的，那么你需要设置这个值为`true` |
+| `privateCA`               | false        | `bool` - 如果您的证书是通过私有 CA 签发的，那么您需要设置这个值为`true` |
 
 ## 高级选项
 

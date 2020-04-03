@@ -8,7 +8,7 @@ Helm 是 Kubernetes 首选的包管理工具。Helm "charts"为 Kubernetes YAML 
 
 请参阅[Helm 版本要求](/docs/installation/options/helm-version/_index)来选择安装 Rancher 的 Helm 版本。
 
-> **提示：** 当前安装说明假定您使用的是 Helm 2。如果您在使用 Helm 3，请参照[此说明](/docs/installation/k8s-install/helm-rancher/_index)。
+> **提示：** 当前安装指南假定您使用的是 Helm 2。如果您在使用 Helm 3，请参照[此说明](/docs/installation/k8s-install/helm-rancher/_index)。
 
 ## 在集群中安装 Tiller
 

@@ -44,7 +44,7 @@ title: 端口要求
 | TCP  | 2376         | 使用主机驱动创建的节点中的任何节点 IP                    | Docker Machine 使用的 Docker 守护进程的 TLS 端口 |
 | TCP  | 取决于供应商 | 托管集群的 Kubernetes API 端口                           | Kubernetes API                                   |
 
-**注意** 如果你配置了的外部[身份验证系统](/docs/admin-settings/authentication/_index)（例如 LDAP），Rancher 节点可能还需要其他出站规则。
+**注意** 如果您配置了的外部[身份验证系统](/docs/admin-settings/authentication/_index)（例如 LDAP），Rancher 节点可能还需要其他出站规则。
 
 ## 下游 Kubernetes 集群节点
 

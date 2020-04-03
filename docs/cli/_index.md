@@ -2,32 +2,32 @@
 title: 使用Rancher CLI
 ---
 
-Rancher CLI(命令行界面)是一个命令行工具，可用于与 Rancher 进行交互。使用此工具，你可以用命令行而不是 GUI 来操作 Rancher。
+Rancher CLI(命令行界面)是一个命令行工具，可用于与 Rancher 进行交互。使用此工具，您可以用命令行而不是 GUI 来操作 Rancher。
 
 ## 下载 Rancher CLI
 
-二进制文件可以直接从 UI 下载。该链接可以在 Rancher UI 的右下脚找到。我们有 Windows，Mac 和 Linux 的二进制文件。你也可以在[CLI 的发行页面](https://github.com/rancher/cli/releases)上直接下载该二进制文件。
+二进制文件可以直接从 UI 下载。该链接可以在 Rancher UI 的右下脚找到。我们有 Windows，Mac 和 Linux 的二进制文件。您也可以在[CLI 的发行页面](https://github.com/rancher/cli/releases)上直接下载该二进制文件。
 
 ## 要求
 
 下载 Rancher CLI 后，需要进行一些配置。 Rancher CLI 需要：
 
-- 你的[Rancher Server URL](/docs/admin-settings/_index)，用于连接到 Rancher Server。
+- 您的[Rancher Server URL](/docs/admin-settings/_index)，用于连接到 Rancher Server。
 - API Bearer Token，用于与 Rancher 进行身份验证。有关获取 Bearer Token 的更多信息，请参见[创建 API 密钥](/docs/user-settings/api-keys/_index)。
 
 ## CLI 认证
 
-在使用 Rancher CLI 控制 Rancher Server 之前，必须使用 API​​ Bearer Token 进行身份验证。使用以下命令登录(用你的信息替换 `<BEARER_TOKEN>` 和 `<SERVER_URL>` )：
+在使用 Rancher CLI 控制 Rancher Server 之前，必须使用 API​​ Bearer Token 进行身份验证。使用以下命令登录(用您的信息替换 `<BEARER_TOKEN>` 和 `<SERVER_URL>` )：
 
 ```bash
 $ ./rancher login https://<SERVER_URL> --token <BEARER_TOKEN>
 ```
 
-如果你的 Rancher Server 使用的是自签名证书，则 Rancher CLI 会询问你是否继续连接。
+如果您的 Rancher Server 使用的是自签名证书，则 Rancher CLI 会询问您是否继续连接。
 
 ## 选择项目
 
-在执行任何命令之前，必须选择一个 Rancher 项目(Project)来对其执行命令。要选择要运行的[项目](/docs/cluster-admin/projects-and-namespaces/_index)，请使用命令 `./rancher context switch` 。输入此命令时，将显示可用项目的列表。输入数字以选择你的项目。
+在执行任何命令之前，必须选择一个 Rancher 项目(Project)来对其执行命令。要选择要运行的[项目](/docs/cluster-admin/projects-and-namespaces/_index)，请使用命令 `./rancher context switch` 。输入此命令时，将显示可用项目的列表。输入数字以选择您的项目。
 
 **例如： `./rancher context switch` 输出**
 
@@ -41,7 +41,7 @@ NUMBER    CLUSTER NAME   PROJECT ID              PROJECT NAME
 Select a Project:
 ```
 
-输入一个数字后，控制台会显示一条消息，说明你已更改项目。
+输入一个数字后，控制台会显示一条消息，说明您已更改项目。
 
 ```
 INFO[0005] Setting new context to project project-1
@@ -56,7 +56,7 @@ INFO[0005] Saving config to /Users/markbishop/.rancher/cli2.json
 | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `apps, [app]`                                 | 对应用商店 App 执行操作 (例如，单个[Helm charts](https://helm.sh/docs/) 或 [Rancher charts](/docs/catalog/custom/_index))。                                                                                                                                                |
 | `catalog`                                     | 对[应用商店](/docs/catalog/_index)执行操作。                                                                                                                                                                                                                               |
-| `clusters, [cluster]`                         | 对你的[集群](/docs/cluster-provisioning/_index)执行操作。                                                                                                                                                                                                                  |
+| `clusters, [cluster]`                         | 对您的[集群](/docs/cluster-provisioning/_index)执行操作。                                                                                                                                                                                                                  |
 | `context`                                     | 在 Rancher 的[项目](/docs/cluster-admin/projects-and-namespaces/_index)间切换。请看示例[选择项目](#选择项目)。                                                                                                                                                             |
 | `inspect [OPTIONS] [RESOURCEID RESOURCENAME]` | 显示有关[Kubernetes 资源](https://kubernetes.io/docs/reference/kubectl/cheatsheet/#resource-types)或 Rancher 资源(例如：[项目](/docs/cluster-admin/projects-and-namespaces/_index)和[工作负载](/docs/k8s-in-rancher/workloads/_index))的详细信息，通过名称或 ID 指定资源。 |
 | `kubectl`                                     | 执行[kubectl 指令](https://kubernetes.io/docs/reference/kubectl/overview/#operations)。                                                                                                                                                                                    |

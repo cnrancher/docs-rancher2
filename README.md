@@ -6,7 +6,7 @@
 
 ### 准备
 
-确保你的开发环境有如下软件：
+确保您的开发环境有如下软件：
 
 * [Git](http://git-scm.com/)
 * [Node.js](http://nodejs.org/) 10.9.0+ (with NPM)

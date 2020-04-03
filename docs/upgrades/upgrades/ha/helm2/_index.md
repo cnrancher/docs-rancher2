@@ -24,7 +24,7 @@ title: 高可用升级指南（ Helm 2）
 ## 先决条件
 
 - 从 Rancher 文档中的 **[已知升级问题](/docs/upgrades/upgrades/_index#已知的升级问题) 和 [警告](/docs/upgrades/upgrades/_index#警告)** 查看升级 Rancher 中最值得注意的问题。可以在[GitHub](https://github.com/rancher/rancher/releases) 和 [Rancher 论坛](https://forums.rancher.com/c/announcements/12)的发行说明中找到每个 Rancher 版本的已知问题的更完整列表。
-- **[仅对于离线安装](/docs/installation/other-installation-methods/air-gap/_index)，拉取并上传新的 Rancher Server 版本的镜像**。请按照指南[准备私有仓库](/docs/installation/other-installation-methods/air-gap/populate-private-registry/_index)，来准备你要升级的版本的镜像。
+- **[仅对于离线安装](/docs/installation/other-installation-methods/air-gap/_index)，拉取并上传新的 Rancher Server 版本的镜像**。请按照指南[准备私有仓库](/docs/installation/other-installation-methods/air-gap/populate-private-registry/_index)，来准备您要升级的版本的镜像。
 
 ## 升级大纲
 

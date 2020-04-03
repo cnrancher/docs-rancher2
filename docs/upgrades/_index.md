@@ -8,7 +8,7 @@ title: 升级回滚指南
 
 ## 回滚不成功的升级
 
-如果你的 Rancher Server 没有成功升级，你可以回滚到升级之前的版本：
+如果您的 Rancher Server 没有成功升级，您可以回滚到升级之前的版本：
 
 - [回滚单节点 Rancher](/docs/upgrades/rollbacks/single-node-rollbacks/_index)
 - [回滚高可用 Rancher](/docs/upgrades/rollbacks/ha-server-rollbacks/_index)

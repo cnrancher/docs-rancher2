@@ -326,7 +326,7 @@ spec:
 
 ### 11. 运行 RKE
 
-完成所有配置后，使用 RKE 启动 Rancher。您可以通过运行`rke up`命令并使用`--config`参数指向你的配置文件来完成此操作。
+完成所有配置后，使用 RKE 启动 Rancher。您可以通过运行`rke up`命令并使用`--config`参数指向您的配置文件来完成此操作。
 
 1. 在您的工作站中，确保`rancher-cluster.yml`和下载的`rke`二进制文件位于同一目录中。
 
@@ -414,10 +414,10 @@ certutil -decode FILENAME.base64 FILENAME.verify
 
 ```
 -----BEGIN CERTIFICATE-----
-%你的证书%
+%您的证书%
 -----END CERTIFICATE-----
 -----BEGIN CERTIFICATE-----
-%你的中间证书%
+%您的中间证书%
 -----END CERTIFICATE-----
 ```
 
