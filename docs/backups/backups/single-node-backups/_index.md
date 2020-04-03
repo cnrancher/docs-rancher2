@@ -1,79 +1,68 @@
 ---
-title: 备份单节点 Rancher
+title: Rancher 单节点备份
 ---
 
-After completing your Docker installation of Rancher, we recommend creating backups of it on a regular basis. Having a recent backup will let you recover quickly from an unexpected disaster.
+在完成 Rancher 的单节点安装后，或在升级 Rancher 到新版本之前，需要对 Rancher 进行数据备份。如果在 Rancher 数据损坏或者丢失，或者升级遇到问题时，可以通过最新的备份进行数据恢复。
 
-### Before You Start
+## 备份准备
 
-During the creation of your backup, you'll enter a series of commands, replacing placeholders with data from your environment. These placeholders are denoted with angled brackets and all capital letters ( `<EXAMPLE>` ). Here's an example of a command with a placeholder:
+在创建备份期间，您将输入一系列命令，以环境中的数据替换占位符。这些占位符用尖括号和所有大写字母（`<EXAMPLE>`）表示。这是带有占位符的命令示例：
 
-``` 
+在此命令中，`<DATE>`是占位符，代表创建数据容器和备份的日期。例如 `9-27-18`。
+
+```bash
 docker run  --volumes-from rancher-data-<DATE> -v $PWD:/backup busybox tar pzcvf /backup/rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz /var/lib/rancher
 ```
 
-In this command, { `<DATE>` } is a placeholder for the date that the data container and backup were created. `9-27-18` for example.
+请交叉参考下面的图像和参考表，以了解如何获取此占位符数据。在开始以下步骤之前，写下或复制此信息。
 
-Cross reference the image and reference table below to learn how to obtain this placeholder data. Write down or copy this information before starting the [procedure below](#creating-a-backup).
-
-<sup>Terminal `docker ps` Command, Displaying Where to Find { `<RANCHER_CONTAINER_TAG>` } and { `<RANCHER_CONTAINER_NAME>` }</sup>
+<sup>
+终端输入"docker ps"命令，查看 RANCHER_CONTAINER_TAG 和 RANCHER_CONTAINER_NAME
+</sup>
 
 ![Placeholder Reference](/img/rancher/placeholder-ref.png)
 
-| Placeholder                  | Example           | Description                                               |
-| ---------------------------- | ----------------- | --------------------------------------------------------- |
-| { `<RANCHER_CONTAINER_TAG>` }  | `v2.0.5` | The rancher/rancher image you pulled for initial install.|
-| { `<RANCHER_CONTAINER_NAME>` } | `festive_mestorf` | The name of your Rancher container.|
-| `<RANCHER_VERSION>` | `v2.0.5` | The version of Rancher that you're creating a backup for.|
-| { `<DATE>` }                   | `9-27-18` | The date that the data container or backup was created.|
+| 占位符                     | 值                | 描述                                |
+| -------------------------- | ----------------- | ----------------------------------- |
+| `<RANCHER_CONTAINER_TAG>`  | `v2.0.5`          | 当前安装的 Rancher Server 镜像      |
+| `<RANCHER_CONTAINER_NAME>` | `festive_mestorf` | 当前 Rancher 容器名称。             |
+| `<RANCHER_VERSION>`        | `v2.0.5`          | 您正在为其创建备份的 Rancher 版本。 |
+| `<DATE>`                   | `9-27-18`         | 创建数据卷容器或备份的日期。        |
 
-<br/>
+您可以通过远程连接登录到 Rancher Server 所在的节点，并输入命令来查看正在运行的容器，从而获取`<RANCHER_CONTAINER_TAG>`和`<RANCHER_CONTAINER_NAME>`：`docker ps`。您还可以使用其他命令查看停止的容器：`docker ps -a`。创建备份期间，随时可以使用这些命令获得帮助。
 
-You can obtain { `<RANCHER_CONTAINER_TAG>` } and { `<RANCHER_CONTAINER_NAME>` } by logging into your Rancher Server by remote connection and entering the command to view the containers that are running: `docker ps` . You can also view containers that are stopped with `docker ps -a` . Use these commands for help anytime while creating backups.
+## 创建备份
 
-### Creating a Backup
+此过程将创建一个备份，如果 Rancher 遇到灾难情况，可以还原该备份。
 
-This procedure creates a backup that you can restore if Rancher encounters a disaster scenario.
+1. 使用远程终端连接，登录到运行 Rancher Server 的节点。
 
-1. Using a remote Terminal connection, log into the node running your Rancher Server.
+1. 停止当前运行 Rancher Server 的容器。将`<RANCHER_CONTAINER_NAME>`替换为 Rancher 容器的名称。
 
-1. Stop the container currently running Rancher Server. Replace { `<RANCHER_CONTAINER_NAME>` } with the [name of your Rancher container](#before-you-start).
-
-   
-
-``` 
+   ```bash
    docker stop <RANCHER_CONTAINER_NAME>
    ```
 
-1. <a id="backup"></a>Use the command below, replacing each [placeholder](#before-you-start), to create a data container from the Rancher container that you just stopped.
+1. 使用下面的命令替换每个占位符，从刚刚停止的 Rancher 容器中创建一个数据容器。
 
-   
-
-``` 
+   ```bash
    docker create --volumes-from <RANCHER_CONTAINER_NAME> --name rancher-data-<DATE> rancher/rancher:<RANCHER_CONTAINER_TAG>
    ```
 
-1.<a id="tarball"></a>From the data container that you just created ({ `rancher-data-<DATE>` }), create a backup tarball ({ `rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz` }). Use the following command, replacing each [placeholder](#before-you-start).
+1. 从刚刚创建的数据容器（`rancher-data-<DATE>`），创建一个备份包（`rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz`）。使用以下命令，替换每个占位符。
 
-   
-
-``` 
+   ```bash
    docker run  --volumes-from rancher-data-<DATE> -v $PWD:/backup:z busybox tar pzcvf /backup/rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz /var/lib/rancher
    ```
 
-   **Step Result:** A stream of commands runs on the screen.
+1. 输入`ls`命令以确认备份压缩包已经创建。它将有一个类似`rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz`的名字。
 
-1. Enter the `ls` command to confirm that the backup tarball was created. It will have a name similar to { `rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz` }.
+1. 将备份压缩包移到 Rancher Server 外部的安全位置。然后从 Rancher Server 中删除`rancher-data-<DATE>`容器。
 
-1. Move your backup tarball to a safe location external to your Rancher Server. Then delete the { `rancher-data-<DATE>` } container from your Rancher Server.
+1. 启动停止的 Rancher Server 容器。将`<RANCHER_CONTAINER_NAME>`替换为 Rancher 容器的名称。
 
-1. Restart Rancher Server. Replace { `<RANCHER_CONTAINER_NAME>` } with the name of your [Rancher container](#before-you-start).
-
-   
-
-``` 
+   ```bash
    docker start <RANCHER_CONTAINER_NAME>
    ```
 
-**Result:** A backup tarball of your Rancher Server data is created. See [Restoring Backups: Docker Installs](/docs/backups/restorations/single-node-restoration) if you need to restore backup data.
-
+1. 如果需要恢复数据，请访问[Rancher 单节点恢复](/docs/backups/restorations/single-node-restoration/_index)。
