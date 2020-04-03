@@ -2,43 +2,44 @@
 title: 运行 Rancher 的建议
 ---
 
-A high-availability Kubernetes installation, defined as an installation of Rancher on a Kubernetes cluster with at least three nodes, should be used in any production installation of Rancher, as well as any installation deemed "important." Multiple Rancher instances running on multiple nodes ensure high availability that cannot be accomplished with a single node environment.
+在生产或者一些很重要的环境中部署 Rancher，应该使用至少有三个节点的高可用 Kubernetes 集群，并在这个集群上面安装 Rancher。运行在多个节点上的多个 Rancher 实例确保了单节点环境无法实现的高可用性。
 
-When you set up your high-availability Rancher installation, consider the following:
+## 在专用的集群上运行 Rancher
 
-#### Run Rancher on a Separate Cluster
+不要在安装 Rancher 的 Kubernetes 集群中运行其他工作负载或微服务。
 
-Don't run other workloads or microservices in the Kubernetes cluster that Rancher is installed on.
+## 不要在托管的 Kubernetes 环境中运行 Rancher
 
-#### Don't Run Rancher on a Hosted Kubernetes Environment
+当 Rancher Server 安装在 Kubernetes 集群上时，它不应该在托管的 Kubernetes 环境中运行，比如谷歌的 GKE、Amazon 的 EKS 或 Microsoft 的 AKS。这些托管的 Kubernetes 解决方案没有将 etcd 开放到 Rancher 可以管理的程度，并且它们的自定义改动可能会干扰 Rancher 的操作。
 
-When the Rancher server is installed on a Kubernetes cluster, it should not be run in a hosted Kubernetes environment such as Google's GKE, Amazon's EKS, or Microsoft's AKS. These hosted Kubernetes solutions do not expose etcd to a degree that is manageable for Rancher, and their customizations can interfere with Rancher operations.
+强烈建议使用托管的基础设施，如 Amazon 的 EC2 或谷歌的 GCE。在基础设施提供者上使用 RKE 创建集群时，您可以配置集群创建 etcd 快照作为备份。然后，您可以使用 [RKE](https://rancher.com/docs/RKE/latest/en/etcd-snapshot/) 或 [Rancher](/docs/backup/restorations/_index) 从这些快照之一恢复您的集群。在托管的 Kubernetes 环境中，不支持这种备份和恢复功能。
 
-It is strongly recommended to use hosted infrastructure such as Amazon's EC2 or Google's GCE instead. When you create a cluster using RKE on an infrastructure provider, you can configure the cluster to create etcd snapshots as a backup. You can then [use RKE]({{<baseurl>}}/rke/latest/en/etcd-snapshots/) or [Rancher](/docs/backups/restorations/) to restore your cluster from one of these snapshots. In a hosted Kubernetes environment, this backup and restore functionality is not supported.
+## 确保 Kubernetes 的节点配置正确
 
-#### Make sure nodes are configured correctly for Kubernetes
+当你部署节点时需要遵循 Kubernetes 和 etcd 最佳实践，比如：禁用 swap、反复检查集群中的所有机器之间的网络连接、使用唯一的主机名、使用唯一的 MAC 地址、使用唯一的 product_uuids、检查所有需要的端口被打开，部署使用 ssd 的 etcd。更多的细节可以在 [Kubernetes 文档](https://kubernetes.io/docs/setup/producenvironment/tools/kubeadm/install-kubeadm/#before-you-begin) 和 [etcd 的性能操作指南](https://github.com/etcd-io/etcd/blob/master/Documentation/op-guide/performance.md) 中找到。
 
-It's important to follow K8s and etcd best practices when deploying your nodes, including disabling swap, double checking you have full network connectivity between all machines in the cluster, using unique hostnames, MAC addresses, and product_uuids for every node, checking that all correct ports are opened, and deploying with ssd backed etcd. More details can be found in the [kubernetes docs](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#before-you-begin) and [etcd's performance op guide](https://github.com/etcd-io/etcd/blob/master/Documentation/op-guide/performance.md)
+## 使用 RKE 备份状态文件
 
-#### When using RKE: Backup the Statefile
+对于`RKE v0.2`之前的版本，ETCD 备份会自动将`/etc/kubernetes/ssl/`目录下的所有证书打包为`pki.bundle.tar.gz`文件，然后保存在`/opt/rke/etcd-snapshot`目录中。
 
-RKE keeps record of the cluster state in a file called `cluster.rkestate` . This file is important for the recovery of a cluster and/or the continued maintenance of the cluster through RKE. Because this file contains certificate material, we strongly recommend encrypting this file before backing up. After each run of `rke up` you should backup the state file.
+对于`RKE v0.2`之后的版本，RKE 将集群状态记录在一个名为`cluster.rkestate`的文件中，这个文件存放于与 RKE 配置文件相同目录。这个文件保存了集群的 SSL 证书信息，对于通过 RKE 恢复集群`和/或`集群的后期维护非常重要。由于该文件包含证书信息，我们强烈建议在备份之前对该文件进行加密，并且每次运行`rke up`之后，您都应该备份此状态文件。
 
-#### Run All Nodes in the Cluster in the Same Datacenter
+## 集群中所有节点在同一个数据中心
 
-For best performance, run all three of your nodes in the same geographic datacenter. If you are running nodes in the cloud, such as AWS, run each node in a separate Availability Zone. For example, launch node 1 in us-west-2a, node 2 in us-west-2b, and node 3 in us-west-2c.
+为了获得最佳性能，请在同一个的数据中心中运行所有集群节点。
 
-#### Development and Production Environments Should be Similar
+如果您正在使用云中的节点，例如：AWS，请在单独的可用区域中运行每个节点。例如，启动 us-west-2a 中的节点，us-west-2b 中的节点 2，us-west-2c 中的节点 3。
 
-It's strongly recommended to have a "staging" or "pre-production" environment of the Kubernetes cluster that Rancher runs on. This environment should mirror your production environment as closely as possible in terms of software and hardware configuration.
+## 开发和生产环境应该类似
 
-#### Monitor Your Clusters to Plan Capacity
+强烈建议使用 Rancher 创建`staging`或`pre-production`环境的 Kubernetes 集群，这个环境应该在软件和硬件配置方面尽可能的与生产环境相同。
 
-The Rancher server's Kubernetes cluster should run within the [system and hardware requirements](/docs/installation/requirements/) as closely as possible. The more you deviate from the system and hardware requirements, the more risk you take.
+## 监视集群以计划容量
 
-However, metrics-driven capacity planning analysis should be the ultimate guidance for scaling Rancher, because the published requirements take into account a variety of workload types.
+Rancher Server 的 Local Kubernetes 集群应该尽可能符合[系统和硬件需求](/docs/installation/requirements/_index)。您越偏离系统和硬件需求，您承担的风险就越大。
 
-Using Rancher, you can monitor the state and processes of your cluster nodes, Kubernetes components, and software deployments through integration with Prometheus, a leading open-source monitoring solution, and Grafana, which lets you visualize the metrics from Prometheus.
+但是，基于指标的容量规划分析应该是扩展 Rancher 的最终指导，因为我们发布的需求建议考虑了各种工作负载类型。
 
-After you [enable monitoring](/docs/cluster-admin/tools/monitoring/) in the cluster, you can set up [a notification channel](/docs/cluster-admin/tools/notifiers/) and [cluster alerts](/docs/cluster-admin/tools/alerts/) to let you know if your cluster is approaching its capacity. You can also use the Prometheus and Grafana monitoring framework to establish a baseline for key metrics as you scale.
+使用 Rancher，您可以通过与领先的开源监控解决方案 Prometheus 和 Grafana 的集成来监控集群节点、Kubernetes 组件和软件部署的状态和过程，Grafana 可以可视化来自 Prometheus 的指标。
 
+在集群中[启用监控](/docs/cluster-admin/tools/monitoring/_index)之后，您可以设置[通知](/docs/cluster-admin/tools/notifiers/_index)和[告警](/docs/cluster-admin/tools/alerts/_index)，让您知道您的集群是否接近其容量。您还可以使用 Prometheus 和 Grafana 监控框架来建立适合你的规模的关键指标基准。

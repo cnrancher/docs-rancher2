@@ -261,7 +261,7 @@ module.exports = {
         ]
       }
     ],
-    备份与容灾恢复指南: [
+    备份和恢复指南: [
       'backups/_index',
       {
         type: 'category',

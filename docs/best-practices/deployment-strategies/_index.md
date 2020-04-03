@@ -2,47 +2,43 @@
 title: Rancher 部署策略
 ---
 
-There are two recommended deployment strategies. Each one has its own pros and cons. Read more about which one would fit best for your use case:
+有两种推荐的部署策略，每种方法都有其优缺点。哪种方法最适合你的场景，请阅读更多信息:
 
-* [Hub and Spoke](#hub-and-spoke)
-* [Regional](#regional)
-
-## Hub & Spoke Strategy
+## 轴心方式拓扑
 
 ---
 
-In this deployment scenario, there is a single Rancher control plane managing Kubernetes clusters across the globe. The control plane would be run on a high-availability Kubernetes cluster, and there would be impact due to latencies.
+在这个部署场景中，有一个 Rancher 控制平面来管理遍布全球的 Kubernetes 集群。控制平面将在一个高可用的 Kubernetes 集群上运行，但它将受到延迟的影响。
 
 ![Hub and Spoke Deployment](/img/rancher/bpg/hub-and-spoke.png)
 
-#### Pros
+### 优点
 
-* Environments could have nodes and network connectivity across regions.
-* Single control plane interface to view/see all regions and environments.
-* Kubernetes does not require Rancher to operate and can tolerate losing connectivity to the Rancher control plane.
+- 环境可以具有跨区域的节点和网络连接。
+- 单一控制平面界面，查看所有区域和环境。
+- Kubernetes 不需要 Rancher 操作，并且可以容忍失去与 Rancher 控制平面的连接。
 
-#### Cons
+### 缺点
 
-* Subject to network latencies.
-* If the control plane goes out, global provisioning of new services is unavailable until it is restored. However, each Kubernetes cluster can continue to be managed individually.
+- 受制于网络延迟。
+- 如果控制平面失效，在恢复之前全球范围内无法新建集群。但是，每个 Kubernetes 集群可以继续单独管理。
 
-## Regional Strategy
+## 区域性拓扑
 
 ---
 
-In the regional deployment model a control plane is deployed in close proximity to the compute nodes.
+在区域部署模型中，控制平面被部署在靠近计算节点的地方。
 
 ![Regional Deployment](/img/rancher/bpg/regional.png)
 
-#### Pros
+### 优点
 
-* Rancher functionality in regions stay operational if a control plane in another region goes down.
-* Network latency is greatly reduced, improving the performance of functionality in Rancher.
-* Upgrades of the Rancher control plane can be done independently per region.
+- 即使另一个区域的控制平面发生故障，本区域内的 Rancher 功能仍然可以保持运行状态。
+- 网络延迟大大降低，提高 Rancher 的性能。
+- Rancher 控制平面的升级可以在每个区域独立完成。
 
-#### Cons
+### 缺点
 
-* Overhead of managing multiple Rancher installations.
-* Visibility across global Kubernetes clusters requires multiple interfaces/panes of glass.
-* Deploying multi-cluster apps in Rancher requires repeating the process for each Rancher server.
-
+- 管理多个 Rancher 安装的开销。
+- 需要在多个界面中才能查看到全球所有的 Kubernetes 集群
+- 在 Rancher 中部署多集群应用时，需要在每个 Rancher Server 中重复这个过程。

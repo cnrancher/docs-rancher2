@@ -1,51 +1,51 @@
 ---
-title: 介绍
+title: 使用说明
 ---
 
-### How to use the API
+## 如何使用 API
 
-The API has its own user interface accessible from a web browser. This is an easy way to see resources, perform actions, and see the equivalent cURL or HTTP request & response. To access it, click on your user avatar in the upper right corner. Under **API & Keys**, you can find the URL endpoint as well as create [API keys](/docs/user-settings/api-keys/).
+API 具有独立的用户界面，您可从 Web 浏览器访问它。这是查看资源、执行操作以及查看等效 cURL 或 HTTP 请求和响应的最简便方法。要访问它，请单击右上角用户头像，在 **API & Keys** 下，您可以找到 API 访问地址，并且可以创建[API KEY](/docs/user-settings/api-keys/_index)。
 
-### Authentication
+## 认证
 
-API requests must include authentication information. Authentication is done with HTTP basic authentication using [API Keys](/docs/user-settings/api-keys/). API keys can create new clusters and have access to multiple clusters via `/v3/clusters/` .[Cluster and project roles](/docs/admin-settings/rbac/cluster-project-roles/) apply to these keys and restrict what clusters and projects the account can see and what actions they can take.
+API 请求必须包含身份验证信息。身份验证是通过使用带有[API KEY](/docs/user-settings/api-keys/_index)的 HTTP 的基本验证（Basic Auth）完成的。API KEY 可以创建新的集群，并可以通过`/v3/clusters/`访问多个集群。可以将[集群和项目角色](/docs/admin-settings/rbac/cluster-project-roles/_index)绑定到这些 KEY 上，从而限制用户可以看到哪些集群和项目，以及它们可以执行哪些操作。
 
-By default, some cluster-level API tokens are generated with infinite time-to-live ( `ttl=0` ). In other words, API tokens with `ttl=0` never expire unless you invalidate them. For details on how to invalidate them, refer to the [API tokens page](/docs/api/api-tokens).
+默认情况下，一些集群级别的 API KEY 是永不过期的，因为他们使用`ttl=0`生成。如不再需要这些 API KEY，可以删除这些 KEY 使其失效，有关操作说明请阅读[API Token 页面](/docs/api/api-tokens/_index)。
 
-### Making requests
+## 发送请求
 
-The API is generally RESTful but has several features to make the definition of everything discoverable by a client so that generic clients can be written instead of having to write specific code for every type of resource. For detailed info about the generic API spec, [see here](https://github.com/rancher/api-spec/blob/master/specification.md).
+该 API 通常是 RESTful 的，但是还具有多种功能。这些功能可以使客户端能够发现所有内容，因此可以编写通用客户端，而不必为每种类型的资源编写特定的代码。有关通用 API 规范的详细信息，请参见[API 规范](https://github.com/rancher/api-spec/blob/master/specification.md)。
 
-* Every type has a Schema which describes:
-  + The URL to get to the collection of this type of resources
-  + Every field the resource can have, along with their type, basic validation rules, whether they are required or optional, etc.
-  + Every action that is possible on this type of resource, with their inputs and outputs (also as schemas).
-  + Every field that filtering is allowed on
-  + What HTTP verb methods are available for the collection itself, or for individual resources in the collection.
+- 每种类型都有一个 Schema，这个 Schema 描述了以下内容：
 
-* So the theory is that you can load just the list of schemas and know everything about the API. This is in fact how the UI for the API works, it contains no code specific to Rancher itself. The URL to get Schemas is sent in every HTTP response as a `X-Api-Schemas` header. From there you can follow the `collection` link on each schema to know where to list resources, and other `links` inside of the returned resources to get any other information.
+  - 用于获取此类资源集合的 URL
+  - 资源可以具有的每个字段及其类型，基本验证规则（例如，是必填字段还是可选字段）
+  - 对这种类型的资源可能进行的所有操作，包括其输入和输出（也作为 Schema）。
+  - 允许过滤的每个字段
+  - 哪些 HTTP 方法可用于集合本身或集合中的单个资源。
 
-* In practice, you will probably just want to construct URL strings. We highly suggest limiting this to the top-level to list a collection ( `/v3/<type>` ) or get a specific resource ( `/v3/<type>/<id>` ). Anything deeper than that is subject to change in future releases.
+- 因此，理论上讲，您可以仅加载 Schema 列表并了解有关 API 的所有信息。实际上，这就是 API UI 的工作方式，它不包含特定于 Rancher 本身的代码。获取 Schema 的 URL 将在每个 HTTP 响应中的`X-Api-Schemas`头里。从那里，您可以按照每个 Schema 上的`collection`链接来了解在何处列出资源，以及返回资源中的其他`links`以获取任何其他信息。
 
-* Resources have relationships between each other called links. Each resource includes a map of `links` with the name of the link and the URL to retrieve that information. Again you should `GET` the resource and then follow the URL in the `links` map, not construct these strings yourself.
+- 实际上，您可能只想构造 URL 字符串。我们强烈建议将其限制在顶层列出的集合（`/v3/<type>`）或获取特定资源（`/v3/<type>/<id>`）。除此之外的任何内容都可能在将来的版本中发生更改。
 
-* Most resources have actions, which do something or change the state of the resource. To use these, send a HTTP `POST` to the URL in the `actions` map for the action you want. Some actions require input or produce output, see the individual documentation for each type or the schemas for specific information.
+- 资源之间相互之间有联系，称为链接。每个资源都包含一个`links`映射，其中包含链接名称和用于检索该信息的 URL。同样，您应该 `GET` 资源，然后使用`links`映射中的 URL，而不是自己构造这些字符串。
 
-* To edit a resource, send a HTTP `PUT` to the `links.update` link on the resource with the fields that you want to change. If the link is missing then you don't have permission to update the resource. Unknown fields and ones that are not editable are ignored.
+- 大多数资源都有操作，这些操作可以执行某些操作或更改资源的状态。要使用这些功能，请将 HTTP `POST` 请求发送到您想要的操作的`actions`映射中的 URL。有些操作需要输入或会产生输出，有关每种信息，请参阅每种类型的单独文档或 Schema。
 
-* To delete a resource, send a HTTP `DELETE` to the `links.remove` link on the resource. If the link is missing then you don't have permission to update the resource.
+- 要编辑资源，请将 HTTP `PUT` 请求发送到资源上的`links.update`链接，在请求中中包含您要更改的字段。如果缺少链接，则您无权更新资源。未知字段和不可编辑的字段将被忽略。
 
-* To create a new resource, HTTP `POST` to the collection URL in the schema (which is `/v3/<type>` ).
+- 要删除资源，请将 HTTP `DELETE` 请求发送到资源上的`links.remove`链接。如果缺少链接，则您无权删除资源。
 
-### Filtering
+- 要创建新资源，请在 Schema 中的集合 URL（为`/v3/<type>`）上发送 HTTP `POST`请求。
 
-Most collections can be filtered on the server-side by common fields using HTTP query parameters. The `filters` map shows you what fields can be filtered on and what the filtered values were for the request you made. The API UI has controls to setup filtering and show you the appropriate request. For simple "equals" matches it's just `field=value` . Modifiers can be added to the field name, e.g. `field_gt=42` for "field is greater than 42". See the [API spec](https://github.com/rancher/api-spec/blob/master/specification.md#filtering) for full details.
+## 过滤
 
-### Sorting
+可以使用 HTTP 查询参数，在服务器端过滤大多数集合。过滤器映射向您显示可以过滤哪些字段，以及相应的过滤值。 API 用户界面具有用于设置过滤条件并向您显示适当请求的控件。对于简单的“等于”匹配，它只是`field = value`。您也可以将修饰符添加到字段名称中，例如 field_gt = 42 表示“field 大于 42”。有关完整详细信息，请参见[API 规范](https://github.com/rancher/api-spec/blob/master/specification.md#filtering)。
 
-Most collections can be sorted on the server-side by common fields using HTTP query parameters. The `sortLinks` map shows you what sorts are available, along with the URL to get the collection sorted by that. It also includes info about what the current response was sorted by, if specified.
+## 排序
 
-### Pagination
+大多数集合可以使用 HTTP 查询参数，在服务器端根据某些参数进行排序。`sortLinks`映射显示了可用的排序种类以及 URL，可以根据这些 URL 对集合进行排序。它还包括有关当前响应排序的信息（如果已指定）。
 
-API responses are paginated with a limit of 100 resources per page by default. This can be changed with the `limit` query parameter, up to a maximum of 1000, e.g. `/v3/pods?limit=1000` . The `pagination` map in collection responses tells you whether or not you have the full result set and has a link to the next page if you do not.
+## 分页
 
+默认情况下，API 响应的页面分页限制为每页 100 个资源。可以通过`limit`查询参数进行更改，最多可以设置为`1000`，例如: `/v3/pods?limit=1000`。集合响应中的分页映射告诉您是否拥有完整的查询结果，如果没有完整结果，则提供下一页的链接。

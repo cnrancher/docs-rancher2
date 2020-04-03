@@ -1,170 +1,143 @@
 ---
-title: 恢复高可用 Rancher
+title: Rancher 高可用恢复
 ---
 
-This procedure describes how to use RKE to restore a snapshot of the Rancher Kubernetes cluster. The cluster snapshot will include Kubernetes configuration and the Rancher database and state.
+此过程描述了如何使用 RKE 还原 Rancher Kubernetes 集群的快照。集群快照将包括 Kubernetes 配置以及 Rancher 数据库和状态。
 
-Additionally, the `pki.bundle.tar.gz` file usage is no longer required as v0.2.0 has changed how the [Kubernetes cluster state is stored]({{< baseurl >}}/rke/latest/en/installation/#kubernetes-cluster-state).
+此外，由于 v0.2.0 更改了 [Kubernetes 集群状态的存储方式](https://rancher.com/docs/rke/latest/en/installation/#kubernetes-cluster-state)，因此不再需要使用 `pki.bundle.tar.gz` 文件。
 
-### Restore Outline
+## 1. 准备
 
-<!-- TOC -->
+您将需要安装 [RKE](https://rancher.com/docs/rke/latest/en/installation/) 和 [kubectl](https://rancher.com/docs/rancher/v2.x/en/faq/kubectl/) CLI 工具。
 
-* [1. Preparation](#1-preparation)
-* [2. Place Snapshot](#2-place-snapshot)
-* [3. Configure RKE](#3-configure-rke)
-* [4. Restore Database](#4-restore-database)
-* [5. Bring Up the Cluster](#5-bring-up-the-cluster)
+准备 3 个新节点作为还原的 Rancher 实例的目标。请参阅[高可用安装](/docs/installation/k8s-install/create-nodes-lb/_index)以了解节点要求。
 
-<!-- /TOC -->
+我们建议您从新节点和干净状态开始。或者，您可以从现有节点清除 Kubernetes 和 Rancher 配置。这将破坏这些节点上的数据。有关过程，请参阅[节点清理](/docs/cluster-admin/cleaning-cluster-nodes/_index)。
 
-#### 1. Preparation
+> **重要:** 在开始还原之前，请确保旧集群节点上的所有 Kubernetes 服务都已停止。我们建议关闭这些旧的节点。
 
-You will need [RKE]({{< baseurl >}}/rke/latest/en/installation/) and [kubectl](/docs/faq/kubectl/) CLI utilities installed.
+## 2. 放置快照
 
-Prepare by creating 3 new nodes to be the target for the restored Rancher instance. See [Kubernetes Install](/docs/installation/k8s-install/create-nodes-lb/) for node requirements.
+根据您的 RKE 版本，用于还原 etcd 集群的快照的处理方式有所不同。
 
-We recommend that you start with fresh nodes and a clean state. Alternatively you can clear Kubernetes and Rancher configurations from the existing nodes. This will destroy the data on these nodes. See [Node Cleanup](/docs/faq/cleaning-cluster-nodes/) for the procedure.
+#### RKE v0.2.0+
 
-> **IMPORTANT:** Before starting the restore make sure all the Kubernetes services on the old cluster nodes are stopped. We recommend powering off the nodes to be sure.
+从 RKE v0.2.0 开始，快照可以保存在与 S3 兼容的后端中。要从存储在 S3 兼容后端中的快照还原群集，可以跳过此步骤，并在[步骤 4：还原数据库](#4-还原数据库)中检索快照。否则，您将需要直接将快照放置在节点上。
 
-#### 2. Place Snapshot
+选择一个干净的节点。该节点将成为初始还原的“目标节点”。将快照放在目标节点上的`/opt/rke/etcd-snapshots`中。
 
-The snapshot used to restore your etcd cluster is handled differently based on your version of RKE.
+#### RKE v0.1.x
 
-##### RKE v0.2.0+
+拍摄快照时，RKE 将证书的备份（即名为 `pki.bundle.tar.gz` 的文件）保存在同一位置。快照和 PKI 捆绑包文件是还原过程所必需的，它们应位于同一位置。
 
-As of RKE v0.2.0, snapshots could be saved in an S3 compatible backend. To restore your cluster from the snapshot stored in S3 compatible backend, you can skip this step and retrieve the snapshot in [Step 4: Restore Database](#4-restore-database). Otherwise, you will need to place the snapshot directly on the nodes.
+选择一个干净的节点。该节点将成为初始还原的“目标节点”。将快照和 PKI 证书捆绑文件放在目标节点上的`/opt/rke/etcd-snapshots`目录中。
 
-Pick one of the clean nodes. That node will be the "target node" for the initial restore. Place your snapshot in `/opt/rke/etcd-snapshots` on the target node.
+- 快照 - `<snapshot>.db`
+- PKI 捆绑包 - `pki.bundle.tar.gz`
 
-##### RKE v0.1.x
+## 3. 配置 RKE
 
-When you take a snapshot, RKE saves a backup of the certificates, i.e.a file named `pki.bundle.tar.gz` , in the same location. The snapshot and PKI bundle file are required for the restore process, and they are expected to be in the same location.
+复制您原始的`rancher-cluster.yml`文件。
 
-Pick one of the clean nodes. That node will be the "target node" for the initial restore. Place the snapshot and PKI certificate bundle files in the `/opt/rke/etcd-snapshots` directory on the target node.
-
-* Snapshot - `<snapshot>.db` 
-* PKI Bundle - `pki.bundle.tar.gz` 
-
-#### 3. Configure RKE
-
-Make a copy of your original `rancher-cluster.yml` file.
-
-``` 
+```
 cp rancher-cluster.yml rancher-cluster-restore.yml
 ```
 
-Modify the copy and make the following changes.
+修改副本并进行以下更改。
 
-* Remove or comment out entire the `addons:` section. The Rancher deployment and supporting configuration is already in the `etcd` database.
-* Change your `nodes:` section to point to the restore nodes.
-* Comment out the nodes that are not your "target node". We want the cluster to only start on that one node.
+- 删除或注释掉整个`addons:`部分。 Rancher 的部署和支持配置已经在`etcd`数据库中。
+- 更改您的`nodes:`部分以指向还原节点。
+- 注释掉不是您的“目标节点”的节点。我们希望群集仅在该节点上启动。
 
-_Example_ `rancher-cluster-restore.yml` 
+_示例_ `rancher-cluster-restore.yml`
 
-``` yaml
+```yaml
 nodes:
-
-  + address: 52.15.238.179 # New Target Node
-
+  - address: 52.15.238.179 # 新目标节点
     user: ubuntu
     role: [etcd, controlplane, worker]
+# - address: 52.15.23.24
+#   user: ubuntu
+#   role: [ etcd, controlplane, worker ]
+# - address: 52.15.238.133
+#   user: ubuntu
+#   role: [ etcd, controlplane, worker ]
 
-## - address: 52.15.23.24
-
-##   user: ubuntu
-
-##   role: [ etcd, controlplane, worker ]
-
-## - address: 52.15.238.133
-
-##   user: ubuntu
-
-##   role: [ etcd, controlplane, worker ]
-
-## addons: |-
-
-##   ---
-
-##   kind: Namespace
-
-##   apiVersion: v1
-
-##   metadata:
-
-##     name: cattle-system
-
-##   ---
-
+# addons: |-
+#   ---
+#   kind: Namespace
+#   apiVersion: v1
+#   metadata:
+#     name: cattle-system
+#   ---
 ```
 
-#### 4. Restore Database
+## 4. 还原数据库
 
-Use RKE with the new `rancher-cluster-restore.yml` configuration and restore the database to the single "target node".
+将 RKE 与新的 `rancher-cluster-restore.yml` 配置一起使用，并将数据库还原到单个“目标节点”。
 
-RKE will create an `etcd` container with the restored database on the target node. This container will not complete the `etcd` initialization and stay in a running state until the cluster brought up in the next step.
+RKE 将使用目标节点上已还原的数据库创建一个 `etcd` 容器。在下一步中完集群启动前，该容器将不会完成 `etcd` 初始化并保持运行状态。
 
-##### Restoring from a Local Snapshot
+### 从本地快照还原
 
-When restoring etcd from a local snapshot, the snapshot is assumed to be located on the target node in the directory `/opt/rke/etcd-snapshots` .
+从本地快照还原 etcd 时，假定快照位于目录`/opt/rke/etcd-snapshots`中的目标节点上。
 
-> **Note:** For RKE v0.1.x, the `pki.bundle.tar.gz` file is also expected to be in the same location.
+> **注意：** 对于 RKE v0.1.x，`pki.bundle.tar.gz` 文件也应该位于同一位置。
 
-``` 
+```bash
 rke etcd snapshot-restore --name <snapshot>.db --config ./rancher-cluster-restore.yml
 ```
 
-##### Restoring from a Snapshot in S3
+### 从 S3 中的快照还原
 
-_Available as of RKE v0.2.0_
+_自 RKE v0.2.0 起可用_
 
-When restoring etcd from a snapshot located in an S3 compatible backend, the command needs the S3 information in order to connect to the S3 backend and retrieve the snapshot.
+从位于兼容 S3 的后端中的快照还原 etcd 时，该命令需要 S3 信息才能连接到 S3 后端并检索快照。
 
-> **Note:** Ensure your `cluster.rkestate` is present before starting the restore, as this contains your certificate data for the cluster.
+> **注意：** 开始还原之前，请确保您的`cluster.rkestate`存在，因为其中包含群集的证书数据。
 
-``` 
+```bash
 $ rke etcd snapshot-restore --config cluster.yml --name snapshot-name \
 --s3 --access-key S3_ACCESS_KEY --secret-key S3_SECRET_KEY \
 --bucket-name s3-bucket-name --s3-endpoint s3.amazonaws.com \
---folder folder-name # Available as of v2.3.0
+--folder folder-name # 自 v2.3.0 起可用
 ```
 
-##### Options for `rke etcd snapshot-restore` 
+### `rke etcd snapshot-restore`的选项
 
-S3 specific options are only available for RKE v0.2.0+.
+S3 特定选项仅适用于 RKE v0.2.0 +。
 
-| Option                    | Description                                                                                             | S3 Specific |
-| ------------------------- | ------------------------------------------------------------------------------------------------------- | ----------- |
-| `--name` value            | Specify snapshot name                                                                                   |             |
-| `--config` value          | Specify an alternate cluster YAML file (default: "cluster.yml") [$RKE_CONFIG]                           |             |
-| `--s3` | Enabled backup to s3                                                                                    | \*          |
-| `--s3-endpoint` value     | Specify s3 endpoint url (default: "s3.amazonaws.com")                                                   | \*          |
-| `--access-key` value      | Specify s3 accessKey                                                                                    | \*          |
-| `--secret-key` value      | Specify s3 secretKey                                                                                    | \*          |
-| `--bucket-name` value     | Specify s3 bucket name                                                                                  | \*          |
-| `--folder` value          | Specify s3 folder in the bucket name _Available as of v2.3.0_                                           | \*          |
-| `--region` value          | Specify the s3 bucket location (optional)                                                               | \*          |
-| `--ssh-agent-auth` | [Use SSH Agent Auth defined by SSH_AUTH_SOCK]({{< baseurl >}}/rke/latest/en/config-options/#ssh-agent)  |             |
-| `--ignore-docker-version` | [Disable Docker version check]({{< baseurl >}}/rke/latest/en/config-options/#supported-docker-versions) |
+| 选项                      | 描述                                                                                                           | S3 特定选项 |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------- | ----------- |
+| `--name` 值               | 指定快照名称                                                                                                   |             |
+| `--config` 值             | 指定集群 YAML 文件（默认为：“cluster.yml”）[$RKE_CONFIG]                                                       |             |
+| `--s3`                    | 启用备份到 s3                                                                                                  | \*          |
+| `--s3-endpoint` 值        | 指定 s3 端点 url (默认值："s3.amazonaws.com")                                                                  | \*          |
+| `--access-key` 值         | 指定 s3 accessKey                                                                                              | \*          |
+| `--secret-key` 值         | 指定 s3 secretKey                                                                                              | \*          |
+| `--bucket-name` 值        | 指定 s3 桶名称                                                                                                 | \*          |
+| `--folder` 值             | 指定 s3 在桶中到文件夹 _自 v2.3.0 起可用_                                                                      | \*          |
+| `--region` 值             | 指定 s3 桶位置 (可选)                                                                                          | \*          |
+| `--ssh-agent-auth`        | [使用 SSH_AUTH_SOCK 定义的 SSH 代理身份验证](https://rancher.com/docs/rke/latest/en/config-options/#ssh-agent) |             |
+| `--ignore-docker-version` | [禁用 Docker 版本检查](https://rancher.com/docs/rke/latest/en/config-options/#supported-docker-versions)       |
 
-#### 5. Bring Up the Cluster
+## 5. 启动集群
 
-Use RKE and bring up the cluster on the single "target node."
+使用 RKE 并在单个“目标节点”上启动群集。
 
-> **Note:** For users running RKE v0.2.0+, ensure your `cluster.rkestate` is present before starting the restore, as this contains your certificate data for the cluster.
+> **注意：** 对于运行 RKE v0.2.0 +的用户，在开始还原之前，请确保存在您的`cluster.rkestate`，因为其中包含群集的证书数据。
 
-``` 
+```
 rke up --config ./rancher-cluster-restore.yml
 ```
 
-##### Testing the Cluster
+### 测试集群
 
-Once RKE completes it will have created a credentials file in the local directory. Configure `kubectl` to use the `kube_config_rancher-cluster-restore.yml` credentials file and check on the state of the cluster. See [Installing and Configuring kubectl](/docs/faq/kubectl/#configuration) for details.
+RKE 完成后，它将在本地目录中创建一个凭证文件。配置`kubectl`以使用`kube_config_rancher-cluster-restore.yml`凭据文件并检查集群的状态。有关详细信息，请参见[安装和配置 kubectl](/docs/faq/kubectl/_index)）。
 
-Your new cluster will take a few minutes to stabilize. Once you see the new "target node" transition to `Ready` and three old nodes in `NotReady` you are ready to continue.
+您的新群集将需要几分钟才能稳定下来。一旦看到新的“目标节点”过渡到`Ready`，并在`NotReady`中看到三个旧节点，您就可以继续。
 
-``` 
+```
 kubectl get nodes
 
 NAME            STATUS    ROLES                      AGE       VERSION
@@ -174,25 +147,25 @@ NAME            STATUS    ROLES                      AGE       VERSION
 18.191.222.99   NotReady  controlplane,etcd,worker   16d       v1.10.5
 ```
 
-##### Cleaning up Old Nodes
+### 清理旧节点
 
-Use `kubectl` to delete the old nodes from the cluster.
+使用`kubectl`从集群中删除旧节点。
 
-``` 
+```
 kubectl delete node 18.217.82.189 18.222.22.56 18.191.222.99
 ```
 
-##### Reboot the Target Node
+### 重新启动目标节点
 
-Reboot the target node to ensure the cluster networking and services are in a clean state before continuing.
+重新启动目标节点以确保群集网络和服务处于干净状态，然后再继续。
 
-##### Check Kubernetes Pods
+### 检查 Kubernetes Pods
 
-Wait for the pods running in `kube-system` , `ingress-nginx` and the `rancher` pod in `cattle-system` to return to the `Running` state.
+等待在`kube-system`, `ingress-nginx`中运行的 Pod 和在`cattle-system`中运行的`rancher` Pod 返回到 `Running` 状态。
 
-> **Note:** `cattle-cluster-agent` and `cattle-node-agent` pods will be in an `Error` or `CrashLoopBackOff` state until Rancher server is up and the DNS/Load Balancer have been pointed at the new cluster.
+> **注意：** `cattle-cluster-agent` 和 `cattle-node-agent` Pod 将处于 `Error` 或 `CrashLoopBackOff` 状态，直到 Rancher Server 启动且 DNS /负载均衡器已指向新群集为止。
 
-``` 
+```
 kubectl get pods --all-namespaces
 
 NAMESPACE       NAME                                    READY     STATUS    RESTARTS   AGE
@@ -209,47 +182,38 @@ kube-system     metrics-server-97bc649d5-6w7zc          1/1       Running   1   
 kube-system     tiller-deploy-56c4cf647b-j4whh          1/1       Running   1          4m
 ```
 
-##### Adding in Additional Nodes
+### 添加其他节点
 
-Edit the `rancher-cluster-restore.yml` RKE config file and uncomment the additional nodes.
+编辑`rancher-cluster-restore.yml` RKE 配置文件，并取消其他节点的注释。
 
-_Example_ `rancher-cluster-restore.yml` 
+_示例_ `rancher-cluster-restore.yml`
 
-``` yaml
+```yaml
 nodes:
-
-  + address: 52.15.238.179 # New Target Node
-
+  - address: 52.15.238.179 # 新目标节点
     user: ubuntu
     role: [etcd, controlplane, worker]
-
-  + address: 52.15.23.24
-
+  - address: 52.15.23.24
     user: ubuntu
     role: [etcd, controlplane, worker]
-
-  + address: 52.15.238.133
-
+  - address: 52.15.238.133
     user: ubuntu
     role: [etcd, controlplane, worker]
-
-## addons: |-
-
-##   ---
-
-##   kind: Namespace
-
+# addons: |-
+#   ---
+#   kind: Namespace
 ```
 
-Run RKE and add the nodes to the new cluster.
+运行 RKE 并将节点添加到新群集。
 
-``` 
+```
 rke up --config ./rancher-cluster-restore.yml
 ```
 
-##### Finishing Up
+## 完成
 
-Rancher should now be running and available to manage your Kubernetes clusters. Review the [recommended architecture](/docs/installation/k8s-install/#recommended-architecture) for Kubernetes installations and update the endpoints for Rancher DNS or the Load Balancer that you built during Step 1 of the Kubernetes install ([1. Create Nodes and Load Balancer](/docs/installation/k8s-install/create-nodes-lb/#load-balancer)) to target the new cluster. Once the endpoints are updated, the agents on your managed clusters should automatically reconnect. This may take 10-15 minutes due to reconnect back off timeouts.
+Rancher 现在应该正在运行，并且可以用来管理 Kubernetes 集群。查看高可用安装的[推荐架构](/docs/installation/k8s-install/_index)并更新 Rancher DNS 或负载均衡器的端点，从而定位到新群集。端点更新后，纳管的群集上的代理应自动重新连接。由于重新连接回退超时，这可能需要 10 到 15 分钟。
 
-> **IMPORTANT:** Remember to save your new RKE config ( `rancher-cluster-restore.yml` ) and `kubectl` credentials ( `kube_config_rancher-cluster-restore.yml` ) files in a safe place for future maintenance.
-
+:::important 重要
+请记住将新的 RKE 配置 `rancher-cluster-restore.yml` 和 Kubectl 凭据 `kube_config_rancher-cluster-restore.yml` 保存在安全的地方，以备将来维护。
+:::
