@@ -201,7 +201,7 @@ values={[
 
 **可选：** 添加 vSphere 标签和自定义属性。标签使您可以将元数据附加到 vSphere 清单中的对象，以使排序和搜索这些对象更加容易。
 
-对于标签，在你选择主机模版时，所有 vSphere 标签都会显示出来。
+对于标签，在您选择主机模版时，所有 vSphere 标签都会显示出来。
 
 在自定义属性中，Rancher 将允许您选择已在 vSphere 中设置的所有自定义属性。自定义属性作为 keys，您可以为每个属性输入 value。
 
@@ -314,7 +314,7 @@ _注意，通过 ISO 创建 VM 时不支持使用 cloud-init 选项_
 
 结果：
 
-- 您的集群已创建并进入为 **Provisioning** 的状态。Rancher 正在启动你的集群。
+- 您的集群已创建并进入为 **Provisioning** 的状态。Rancher 正在启动您的集群。
 - 您可以在集群的状态更新为 **Active** 后访问它。
 - Rancher 为活动的集群分配了两个项目，即 `Default`（包含命名空间 `default`）和 `System`（包含命名空间 `cattle-system`，`ingress-nginx`，`kube-public` 和 `kube-system`，如果存在）。
 
@@ -338,7 +338,7 @@ _注意，通过 ISO 创建 VM 时不支持使用 cloud-init 选项_
      cloud_provider:
        name: vsphere
        vsphereCloudProvider:
-         # 在下面加入你的 provider 配置
+         # 在下面加入您的 provider 配置
    ```
 
    Rancher 使用 RKE（the Rancher Kubernetes Engine）来创建 Kubernetes 集群。请参照[RKE 文档中的 vSphere 配置参考](https://rancher.com/docs/rke/latest/en/config-options/cloud-providers/vsphere/config-reference/)以获取`vsphereCloudProvider`配置中属性的详细信息。

@@ -304,10 +304,10 @@ certutil -decode FILENAME.base64 FILENAME.verify
 
 ```
 -----BEGIN CERTIFICATE-----
-%你的证书%
+%您的证书%
 -----END CERTIFICATE-----
 -----BEGIN CERTIFICATE-----
-%你的中间证书%
+%您的中间证书%
 -----END CERTIFICATE-----
 ```
 

@@ -6,7 +6,7 @@ _适用于 v2.1.0 到 v2.1.9 和 v2.2.0 到 v2.2.3 版本_
 
 本节介绍如何在 Rancher v2.1.x 和 v2.2.x 版本中配置 Windows 集群。如果您正在使用 Rancher v2.3.0 或更高版本的 Rancher，请参阅新的 Windows 文档[v2.3.0 或更高版本](/docs/cluster-provisioning/rke-clusters/windows-clusters/_index)。
 
-当你创建一个[自定义集群](/docs/cluster-provisioning/rke-clusters/custom-nodes/_index) （Rancher 使用 RKE (Rancher Kubernetes Engine) 在现有的节点上配置 Kubernetes 集群）时，您可以通过将 Linux 和 Windows 节点混合使用来创建自定义 Windows 集群。
+当您创建一个[自定义集群](/docs/cluster-provisioning/rke-clusters/custom-nodes/_index) （Rancher 使用 RKE (Rancher Kubernetes Engine) 在现有的节点上配置 Kubernetes 集群）时，您可以通过将 Linux 和 Windows 节点混合使用来创建自定义 Windows 集群。
 
 > **重要:** 在 v2.3 之前的 Rancher 版本中，对 Windows 节点的支持是实验性的。因此，如果您在 v2.3 之前使用 Rancher，则不建议在生产环境中使用 Windows 节点。
 
@@ -35,7 +35,7 @@ _适用于 v2.1.0 到 v2.1.9 和 v2.2.0 到 v2.2.3 版本_
 - 虚拟化平台中的虚拟机
 - 裸金属服务器
 
-下表列出了您将分配给每个节点的[Kubernetes 角色](/docs/cluster-provisioning/_index)，尽管在创建节点过程中，您不会启用这些角色。但我们只是通知您每个节点的用途。第一个节点是 Linux 节点，主要负责 Kubernetes 控制面，不过，在这个用例中，我们将在这个节点上安装所有三个角色。节点 2 还是一个 Linux 工作节点，负责 Ingress Controller 等组件的支持。最后，第三个节点是 Windows 工作节点，它将运行你的 Windows 应用程序。
+下表列出了您将分配给每个节点的[Kubernetes 角色](/docs/cluster-provisioning/_index)，尽管在创建节点过程中，您不会启用这些角色。但我们只是通知您每个节点的用途。第一个节点是 Linux 节点，主要负责 Kubernetes 控制面，不过，在这个用例中，我们将在这个节点上安装所有三个角色。节点 2 还是一个 Linux 工作节点，负责 Ingress Controller 等组件的支持。最后，第三个节点是 Windows 工作节点，它将运行您的 Windows 应用程序。
 
 | 节点   | 操作系统                                              | 集群未来的角色                   |
 | ------ | ----------------------------------------------------- | -------------------------------- |
@@ -89,7 +89,7 @@ _适用于 v2.1.0 到 v2.1.9 和 v2.2.0 到 v2.2.3 版本_
 
 在完成自定义集群的初始设置之后，集群只有一个 Linux 节点。我们需要添加另一个 Linux 节点，该节点将用于支持集群的 Ingress。
 
-1. 从主菜单中，找到你的 Windows 集群。
+1. 从主菜单中，找到您的 Windows 集群。
 
 1. 单击 **编辑集群**.
 
@@ -109,7 +109,7 @@ _适用于 v2.1.0 到 v2.1.9 和 v2.2.0 到 v2.2.3 版本_
 
 您可以通过编辑集群并选择**Windows**选项将 Windows 节点添加到自定义集群。
 
-1. 从主菜单中，找到你的 Windows 集群。
+1. 从主菜单中，找到您的 Windows 集群。
 
 1. 单击 **编辑集群**.
 
@@ -131,9 +131,9 @@ _适用于 v2.1.0 到 v2.1.9 和 v2.2.0 到 v2.2.3 版本_
 
 我们使用的 Flannel 后端是[**Host Gateway（L2bridge）**](https://github.com/coreos/flannel/blob/master/Documentation/backends.md#host-gw)模式，那么同一节点上的所有容器都属于一个私有子网，子网会通过主机网络和另一个节点上的子网进行通信。
 
-- 如果你的节点在 AWS、私有数据中心或裸金属服务器上，请确保这些节点都在相同的 2 层子网中。如果节点不属于同一个 2 层子网，那么`host-gw`网络将无法正常工作。
+- 如果您的节点在 AWS、私有数据中心或裸金属服务器上，请确保这些节点都在相同的 2 层子网中。如果节点不属于同一个 2 层子网，那么`host-gw`网络将无法正常工作。
 
-- 如果你的节点在谷歌云或 Azure 上，那么它们会在不同的 2 层子网中。谷歌云和 Azure 上的节点属于一个可路由的 3 层网络。请按照下面的说明，来配置谷歌云和 Azure，以便云网络知道如何在每个节点上路由主机子网。
+- 如果您的节点在谷歌云或 Azure 上，那么它们会在不同的 2 层子网中。谷歌云和 Azure 上的节点属于一个可路由的 3 层网络。请按照下面的说明，来配置谷歌云和 Azure，以便云网络知道如何在每个节点上路由主机子网。
 
 要在谷歌云或 Azure 上配置主机子网路由，首先运行以下命令来查找每个工作节点上的主机子网：
 
@@ -145,5 +145,5 @@ kubectl get nodes -o custom-columns=nodeName:.metadata.name,nodeIP:status.addres
 
 | 服务   | 说明                                                                                                                                                               |
 | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 谷歌云 | 如果节点在谷歌云，你需要为每个节点添加一个静态路由：[添加静态路由](https://cloud.google.com/vpc/docs/using-routes#addingroute)。                                   |
-| Azure  | 如果节点在 Azure，你需要创建一个路由表：[自定义路由:用户定义](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview#user-defined)。 |
+| 谷歌云 | 如果节点在谷歌云，您需要为每个节点添加一个静态路由：[添加静态路由](https://cloud.google.com/vpc/docs/using-routes#addingroute)。                                   |
+| Azure  | 如果节点在 Azure，您需要创建一个路由表：[自定义路由:用户定义](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview#user-defined)。 |

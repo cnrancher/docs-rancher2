@@ -1,6 +1,6 @@
 ---
 title: 产品简介
-description: 为你介绍Rancher的产品。帮助你了解 Rancher 容器平台
+description: 为您介绍Rancher的产品。帮助您了解 Rancher 容器平台
 ---
 
 Rancher 是为使用容器的公司打造的容器管理平台。Rancher 简化了使用 Kubernetes 的流程，开发者可以随处运行 Kubernetes，满足 IT 需求规范，赋能 DevOps 团队。
@@ -59,7 +59,7 @@ Rancher API Server 是基于嵌入式 Kubernetes API Server 和 ETCD 数据库�
 #### 查看集群信息
 
 - **日志：** Rancher 可以跟多种主流日志工具集成，您可以设置 [集群日志](/docs/cluster-admin/tools/logging/_index) 或[项目日志](/docs/project-admin/tools/logging/_index)。
-- **监控：** 使用 Rancher，你可以通过 Prometheus 监控集群节点、Kubernetes 组件、软件部署的状态和进度。您可以设置 [集群监控](/docs/cluster-admin/tools/monitoring/_index) 或[项目监控](/docs/project-admin/tools/monitoring/_index)。
+- **监控：** 使用 Rancher，您可以通过 Prometheus 监控集群节点、Kubernetes 组件、软件部署的状态和进度。您可以设置 [集群监控](/docs/cluster-admin/tools/monitoring/_index) 或[项目监控](/docs/project-admin/tools/monitoring/_index)。
 - **告警信息：** 您需要随时知道集群和项目动态，才可以提高公司的运行效率。您可以设置[集群告警](/docs/cluster-admin/tools/alerts/_index) 或 [项目告警](/docs/project-admin/tools/alerts/_index)。
 
 ## 使用 Rancher 编辑下游集群

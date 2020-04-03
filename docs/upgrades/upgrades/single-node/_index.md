@@ -7,11 +7,11 @@ title: 升级单节点 Rancher
 ## 先决条件
 
 - 从 Rancher 文档中的 **[已知升级问题](/docs/upgrades/upgrades/_index#已知的升级问题) 和 [警告](/docs/upgrades/upgrades/_index#警告)** 查看升级 Rancher 中最值得注意的问题。可以在[GitHub](https://github.com/rancher/rancher/releases) 和 [Rancher 论坛](https://forums.rancher.com/c/announcements/12)的发行说明中找到每个 Rancher 版本的已知问题的更完整列表。
-- **[仅对于离线安装](/docs/installation/other-installation-methods/air-gap/_index)，拉取并上传新的 Rancher Server 版本的镜像**。请按照指南[准备私有仓库](/docs/installation/other-installation-methods/air-gap/populate-private-registry/_index)，来准备你要升级的版本的镜像。
+- **[仅对于离线安装](/docs/installation/other-installation-methods/air-gap/_index)，拉取并上传新的 Rancher Server 版本的镜像**。请按照指南[准备私有仓库](/docs/installation/other-installation-methods/air-gap/populate-private-registry/_index)，来准备您要升级的版本的镜像。
 
 ## 占位符
 
-在升级过程中，您将输入一系列命令，按照你的情况替换命令中的占位符。这些占位符用尖括号和大写字母（`<EXAMPLE>`）表示。
+在升级过程中，您将输入一系列命令，按照您的情况替换命令中的占位符。这些占位符用尖括号和大写字母（`<EXAMPLE>`）表示。
 
 这是带有占位符的命令的**示例**：
 
@@ -34,7 +34,7 @@ docker stop <RANCHER_CONTAINER_NAME>
 | `<RANCHER_VERSION>`        | `v2.1.3`          | 创建备份的 Rancher 的版本。   |
 | `<DATE>`                   | `2018-12-19`      | 数据容器或备份的创建日期。    |
 
-您可以通过远程连接登录到 Rancher Server 所在的主机并输入命令以查看正在运行的容器：`docker ps`，从而获得 `<RANCHER_CONTAINER_TAG>` 和 `<RANCHER_CONTAINER_NAME>`的值。您还可以使用其他命令查看停止的容器：`docker ps -a`。在创建备份期间，你可以随时使用这些命令获得帮助。
+您可以通过远程连接登录到 Rancher Server 所在的主机并输入命令以查看正在运行的容器：`docker ps`，从而获得 `<RANCHER_CONTAINER_TAG>` 和 `<RANCHER_CONTAINER_NAME>`的值。您还可以使用其他命令查看停止的容器：`docker ps -a`。在创建备份期间，您可以随时使用这些命令获得帮助。
 
 ## 升级大纲
 
@@ -136,7 +136,7 @@ docker run -d --volumes-from rancher-data \
 
 如果您选择携带自己的自签名证书，则在启动原始 Rancher Server 容器的命令中添加`--volumes-from rancher-data`，并需要可以访问到原始安装时使用的证书。
 
-> **证书先决条件提示：** 证书文件必须为[PEM 格式](/docs/installation/other-installation-methods/single-node-docker/_index)。在您的证书文件中，包括链中的所有中间证书。你需要对你的证书进行排序，把你的证书放在最签名，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排除](/docs/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
+> **证书先决条件提示：** 证书文件必须为[PEM 格式](/docs/installation/other-installation-methods/single-node-docker/_index)。在您的证书文件中，包括链中的所有中间证书。您需要对您的证书进行排序，把您的证书放在最签名，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排除](/docs/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
 
 | 占位符                  | 描述                                                                                  |
 | ----------------------- | ------------------------------------------------------------------------------------- |
@@ -161,7 +161,7 @@ docker run -d --volumes-from rancher-data \
 
 如果选择使用由可信 CA 签名的证书，则将 `--volumes-from rancher-data` 添加到启动原始 Rancher Server 容器的命令中，并需要可以访问到原始安装时使用的证书。请记住，要在容器启动命令中包含`--no-cacerts`参数，以禁用 Rancher 生成的默认 CA 证书。
 
-> **证书先决条件提示：** 证书文件必须为[PEM 格式](/docs/installation/other-installation-methods/single-node-docker/_index)。在您的证书文件中，包括可信 CA 提供的所有中间证书。你需要对你的证书进行排序，把你的证书放在最签名，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排除](/docs/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
+> **证书先决条件提示：** 证书文件必须为[PEM 格式](/docs/installation/other-installation-methods/single-node-docker/_index)。在您的证书文件中，包括可信 CA 提供的所有中间证书。您需要对您的证书进行排序，把您的证书放在最签名，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排除](/docs/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
 
 | 占位符                  | 描述                                                                                  |
 | ----------------------- | ------------------------------------------------------------------------------------- |
@@ -235,7 +235,7 @@ docker run -d --volumes-from rancher-data \
 
 如果您选择携带自己的自签名证书，则在启动原始 Rancher Server 容器的命令中添加`--volumes-from rancher-data`，并需要可以访问到原始安装时使用的证书。
 
-> **证书先决条件提示：** 证书文件必须为[PEM 格式](/docs/installation/other-installation-methods/single-node-docker/_index)。在您的证书文件中，包括链中的所有中间证书。你需要对你的证书进行排序，把你的证书放在最签名，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排除](/docs/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
+> **证书先决条件提示：** 证书文件必须为[PEM 格式](/docs/installation/other-installation-methods/single-node-docker/_index)。在您的证书文件中，包括链中的所有中间证书。您需要对您的证书进行排序，把您的证书放在最签名，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排除](/docs/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
 
 | 占位符                           | 描述                                                                                  |
 | -------------------------------- | ------------------------------------------------------------------------------------- |
@@ -261,7 +261,7 @@ docker run -d --restart=unless-stopped \
 
 如果选择使用由可信 CA 签名的证书，则将 `--volumes-from rancher-data` 添加到启动原始 Rancher Server 容器的命令中，并需要可以访问到原始安装时使用的证书。请记住，要在容器启动命令中包含`--no-cacerts`参数，以禁用 Rancher 生成的默认 CA 证书。
 
-> **证书先决条件提示：** 证书文件必须为[PEM 格式](/docs/installation/other-installation-methods/single-node-docker/_index)。在您的证书文件中，包括可信 CA 提供的所有中间证书。你需要对你的证书进行排序，把你的证书放在最签名，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排除](/docs/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
+> **证书先决条件提示：** 证书文件必须为[PEM 格式](/docs/installation/other-installation-methods/single-node-docker/_index)。在您的证书文件中，包括可信 CA 提供的所有中间证书。您需要对您的证书进行排序，把您的证书放在最签名，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排除](/docs/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
 
 | 占位符                           | 描述                                                                                   |
 | -------------------------------- | -------------------------------------------------------------------------------------- |

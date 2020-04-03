@@ -8,7 +8,7 @@ title: 推荐的集群架构
 
 在设计集群时，您有两个选择：
 
-- 为每个角色使用专用节点。这可确保指定角色所需的组件的资源可用性。而且你还可以根据[端口要求](/docs/cluster-provisioning/node-requirements/_index)严格隔离每个角色之间的网络流量。
+- 为每个角色使用专用节点。这可确保指定角色所需的组件的资源可用性。而且您还可以根据[端口要求](/docs/cluster-provisioning/node-requirements/_index)严格隔离每个角色之间的网络流量。
 - 将`etcd`和`controlplane`角色分配给相同的节点。这些节点必须满足这两个角色的硬件需求。
 
 无论在哪种情况下，都不应该把`worker`角色，添加到具有 `etcd` 或 `controlplane` 角色的节点中。
@@ -26,7 +26,7 @@ title: 推荐的集群架构
 
 - 至少有三个角色为 `etcd` 的节点，这样可以在丢失一个节点时存活下来。增加这个数量以获得更高的节点容错率，并将它们分散到多个可用区，以提供更好的容错能力。
 - 为了主组件高可用性，至少有两个角色为`controlplane`的节点。
-- 分配至少两个 `worker` 节点，以在节点出现故障时，可以重新调度你的工作负载。
+- 分配至少两个 `worker` 节点，以在节点出现故障时，可以重新调度您的工作负载。
 
 有关每个角色的用途的更多信息，请参阅[Kubernetes 中关于节点的角色一节](/docs/cluster-provisioning/production/nodes-and-roles/_index)。
 
@@ -57,7 +57,7 @@ title: 推荐的集群架构
 
 ### Worker 节点数
 
-添加多个`worker`角色的节点，可以确保在节点出现故障时，Kubernetes 可以重新调度你的工作负载到其他工作节点。
+添加多个`worker`角色的节点，可以确保在节点出现故障时，Kubernetes 可以重新调度您的工作负载到其他工作节点。
 
 ### 为什么对生产环境的 Rancher 集群和业务集群有着不通的要求？
 

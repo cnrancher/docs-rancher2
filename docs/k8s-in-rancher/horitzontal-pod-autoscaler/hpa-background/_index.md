@@ -2,17 +2,17 @@
 title: HPA 工作原理
 ---
 
-[Pod 弹性伸缩器](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)（HPA）是 Kubernetes 的一项功能，可以对你的应用进行自动扩容和自动缩容。本节将介绍 HPA 在 Kubernetes 集群中是如何工作的。
+[Pod 弹性伸缩器](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)（HPA）是 Kubernetes 的一项功能，可以对您的应用进行自动扩容和自动缩容。本节将介绍 HPA 在 Kubernetes 集群中是如何工作的。
 
 ### 为什么要使用 HPA？
 
-使用 HPA，你可以自动缩放在 Replication Controller，Deployment 或者 Replica Set 中的 Pod。 HPA 将自动缩放正在运行的 Pod 的数量，以实现最高效率。HPA 中影响 Pod 数量的因素包括：
+使用 HPA，您可以自动缩放在 Replication Controller，Deployment 或者 Replica Set 中的 Pod。 HPA 将自动缩放正在运行的 Pod 的数量，以实现最高效率。HPA 中影响 Pod 数量的因素包括：
 
 - 用户定义的允许运行的 Pod 的最小和最大数量。
 - 资源指标中报告的观察到的 CPU 或内存使用情况。
 - 第三方指标应用程序（例如 Prometheus，Datadog 等）提供的自定义指标。
 
-HPA 通过以下方式改善你的服务：
+HPA 通过以下方式改善您的服务：
 
 - 释放将因过多的 Pod 而浪费的硬件资源。
 - 按照应用需要的性能，自动提高或降低 Pod 数量。

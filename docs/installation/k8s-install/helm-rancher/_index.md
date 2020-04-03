@@ -13,12 +13,12 @@ Rancher 使用 Kubernetes 的 Helm 软件包管理器安装。Helm Charts 为 Ku
 要选择用于安装 Rancher 的 Helm 版本，请参阅[Helm 版本要求](/docs/installation/options/helm-version/_index)。
 
 :::important 注意
-本安装说明假定您使用的是 Helm3。有关从 Helm 2 迁移到 Helm 3 的方法，请参阅官方的[Helm 2 到 3 迁移文档](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/)。这个[指南](/docs/installation/options/helm2/_index)提供了使用 Helm 2 在 Kubernetes 上安装 Rancher 的较旧的安装说明，适用于无法升级到 Helm 3 的情况。
+本安装指南假定您使用的是 Helm3。有关从 Helm 2 迁移到 Helm 3 的方法，请参阅官方的[Helm 2 到 3 迁移文档](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/)。这个[指南](/docs/installation/options/helm2/_index)提供了使用 Helm 2 在 Kubernetes 上安装 Rancher 的较旧的安装指南，适用于无法升级到 Helm 3 的情况。
 :::
 
 ## 安装 Helm
 
-Helm 需要安装一个简单的 CLI 工具。请参 Helm 项目提供的[安装说明文档](https://helm.sh/docs/intro/install/)。
+Helm 需要安装一个简单的 CLI 工具。请参 Helm 项目提供的[安装指南文档](https://helm.sh/docs/intro/install/)。
 
 ## 添加 Helm Chart 仓库
 
@@ -119,7 +119,7 @@ cert-manager-cainjector-577f6d9fd7-tr77l 1/1 Running 0 2m
 cert-manager-webhook-787858fcdb-nlzsq 1/1 Running 0 2m
 ```
 
-## 根据你选择的 SSL 配置，通过 Helm 安装 Rancher
+## 根据您选择的 SSL 配置，通过 Helm 安装 Rancher
 
 请选择一种方式
 
@@ -130,7 +130,7 @@ cert-manager-webhook-787858fcdb-nlzsq 1/1 Running 0 2m
 默认情况下 Rancher 生成一个私有 CA 并使用 `cert-manager` 来颁发证书用以访问 Rancher Server。因为 `rancher` 是 `ingress.tls.source` 选项的默认值，我们在运行 `helm install` 命令的时候并没有指定 `ingress.tls.source` 选项。
 
 - 将`hostname`设置为您指向负载均衡器的 DNS 名称。
-- 如果你在安装 `alpha` 版本，需要把`--devel` 选项添加到下面到 Helm 命令中。
+- 如果您在安装 `alpha` 版本，需要把`--devel` 选项添加到下面到 Helm 命令中。
 
 ```
 helm install rancher rancher-<CHART_REPO>/rancher \
@@ -153,7 +153,7 @@ deployment "rancher" successfully rolled out
 该选项使用 `cert-manager` 自动请求和更新[Let's Encrypt](https://letsencrypt.org/)证书。这是一个免费的服务，它为您提供一个受信的证书，因为 Let's Encrypt 提供的是受信的 CA。此配置使用 HTTP 验证(`HTTP-01`)，因此负载均衡器必须具有公共的 DNS 记录并可以从互联网访问到。
 
 - 将 `hostname` 设置为公共 DNS 记录，将 `ingress.tls.source` 选项设置为 `letsEncrypt`，并且设置 `letsEncrypt.email` 为可通讯的电子邮件地址，方便发送通知（例如证书到期通知）
-- 如果你在安装 `alpha` 版本，需要把`--devel` 选项添加到下面到 Helm 命令中。
+- 如果您在安装 `alpha` 版本，需要把`--devel` 选项添加到下面到 Helm 命令中。
 
 ```
 helm install rancher rancher-<CHART_REPO>/rancher \
@@ -177,7 +177,7 @@ deployment "rancher" successfully rolled out
 
 - 设置 `hostname` 并且将 `ingress.tls.source` 选项设置为 `secret`。
 - 如果您使用的是私有 CA 证书，请在下面的命令中增加 `--set privateCA=true`。
-- 如果你在安装 `alpha` 版本，需要把`--devel` 选项添加到下面到 Helm 命令中。
+- 如果您在安装 `alpha` 版本，需要把`--devel` 选项添加到下面到 Helm 命令中。
 
 ```
 helm install rancher rancher-<CHART_REPO>/rancher \
@@ -216,12 +216,12 @@ Rancher Chart 有许多自定义安装选项以适应特定的环境。以下是
 
 有关选项的完整列表，请参见[Chart 选项](/docs/installation/options/chart-options/_index)。
 
-## 保存你的选项
+## 保存您的选项
 
 请保存您使用的全部`--set`选项。使用 Helm 升级 Rancher 到新版本时，您将需要使用相同的选项。
 
 ## 结束
 
-好了，现在您应该具有一个功能正常的 Rancher Server。打开浏览器，访问你的 DNS，您应该会看到一个色彩丰富的登录页面。
+好了，现在您应该具有一个功能正常的 Rancher Server。打开浏览器，访问您的 DNS，您应该会看到一个色彩丰富的登录页面。
 
 遇到了问题？查看[故障排查](/docs/installation/options/troubleshooting/_index)页面。

@@ -2,7 +2,7 @@
 title: 安全加固指南 - v2.3.5
 ---
 
-本文是 Rancher v2.3.5 生产环境的安全加固指南。它概述了如何使你的集群符合互联网安全中心发布的 Kubernetes 安全基准。
+本文是 Rancher v2.3.5 生产环境的安全加固指南。它概述了如何使您的集群符合互联网安全中心发布的 Kubernetes 安全基准。
 
 > 本加固指南介绍了如何保护集群中节点的安全，建议在安装 Kubernetes 之前按照本指南进行操作。
 
@@ -90,9 +90,9 @@ done
 
 在同一个 Kubernetes 集群上运行不同的应用程序会产生一个风险，那就是应用可能受到相邻应用程序的攻击。为了确保容器只能与预期的容器进行通信，网络细分是必不可少的。通过设置网络策略（Network Policy），可以设置哪些 Pod 之间可以通信，以及是否可以和其他网络端点进行通信。
 
-网络策略是作用于命名空间范围的。将网络策略应用于给定命名空间时，所有不被这个策略允许的流量将被拒绝。然而，如果命名空间中没有设置网络策略，那么进出这个命名空间中 Pod 的所有流量都将被允许。要使用网络策略，必须启用 CNI（容器网络接口）插件。本指南使用[canal](https://github.com/projectcalico/canal)提供策略实施。你可以在[这里](https://rancher.com/blog/2019/2019-03-21-comparing-kubernetes-cni-providers-flannel-calico-canal-and-weave/)找到有关 CNI 插件的其他信息。
+网络策略是作用于命名空间范围的。将网络策略应用于给定命名空间时，所有不被这个策略允许的流量将被拒绝。然而，如果命名空间中没有设置网络策略，那么进出这个命名空间中 Pod 的所有流量都将被允许。要使用网络策略，必须启用 CNI（容器网络接口）插件。本指南使用[canal](https://github.com/projectcalico/canal)提供策略实施。您可以在[这里](https://rancher.com/blog/2019/2019-03-21-comparing-kubernetes-cni-providers-flannel-calico-canal-and-weave/)找到有关 CNI 插件的其他信息。
 
-在集群上启用 CN​​I 插件后，你可以设置一个默认的网络策略。下面是一个**宽松**的网络策略示例，仅供参考。如果你想要允许到某个命名空间内所有 Pod 的流量（即使已经添加了一些策略，使得一些 Pods 被隔离了），您可以创建一个策略，明确允许该命名空间中的所有流量。将以下`yaml`另存为
+在集群上启用 CN​​I 插件后，您可以设置一个默认的网络策略。下面是一个**宽松**的网络策略示例，仅供参考。如果您想要允许到某个命名空间内所有 Pod 的流量（即使已经添加了一些策略，使得一些 Pods 被隔离了），您可以创建一个策略，明确允许该命名空间中的所有流量。将以下`yaml`另存为
 `default-allow-all.yaml`。额外关于网络策略的信息，请查看[Kubernetes 官方文档](https://kubernetes.io/docs/concepts/services-networking/network-policies/)。
 
 :::important 重要
@@ -130,7 +130,7 @@ done
 
 ## 加固的 RKE `cluster.yml` 配置参考
 
-你可以用这个供您参考的`cluster.yml`，通过 RKE CLI 来创建安全加固的 Rancher Kubernetes Engine（RKE）集群。有关每个配置的详细信息，请参阅[RKE 文档](https://rancher.com/docs/rke/latest/en/installation/)。
+您可以用这个供您参考的`cluster.yml`，通过 RKE CLI 来创建安全加固的 Rancher Kubernetes Engine（RKE）集群。有关每个配置的详细信息，请参阅[RKE 文档](https://rancher.com/docs/rke/latest/en/installation/)。
 
 ```yaml
 # 如果您打算在离线环境中部署Kubernetes，

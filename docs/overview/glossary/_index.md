@@ -27,7 +27,7 @@ RKE 全称是 Rancher Kubernetes Engine。可以通过 CLI 的方式独立于 Ra
 
 k3s 是经过精简和用户体验优化的 k8s。k3s 减少了运维负担。一条命令就可以启动 k3s。 加入一个新节点，使用 4 层 LB 等也都非常简单。同时也可以使用 MySQL/SQLite 等关系型数据库作为数据库。在开发测试环境和边缘计算等场景中，非常受用户喜欢。
 
-在 Rancher 2.2 和 2.3 中，你可以把 k3s 作为导入集群导入到 Rancher 中进行统一纳管。在即将发布的 Rancher 2.4 里，将会进一步加大对 k3s 的集成，用户将可以通过 Rancher UI 查看 k3s 集群中各个节点的配置，并且可以通过 Rancher UI 直接升级导入的 k3s 集群的 Kuberntes 版本。另外，针对 Rancher 2.4 的高可用部署，也将提供另外一种通过 k3s 集群安装 Rancher HA 的方法，从而大大简化部署 Rancher 高可用的流程。
+在 Rancher 2.2 和 2.3 中，您可以把 k3s 作为导入集群导入到 Rancher 中进行统一纳管。在即将发布的 Rancher 2.4 里，将会进一步加大对 k3s 的集成，用户将可以通过 Rancher UI 查看 k3s 集群中各个节点的配置，并且可以通过 Rancher UI 直接升级导入的 k3s 集群的 Kuberntes 版本。另外，针对 Rancher 2.4 的高可用部署，也将提供另外一种通过 k3s 集群安装 Rancher HA 的方法，从而大大简化部署 Rancher 高可用的流程。
 
 ## Kubernetes 相关概念
 

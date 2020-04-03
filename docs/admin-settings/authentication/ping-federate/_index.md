@@ -38,7 +38,7 @@ _v2.0.7 版本可用_
       openssl req -x509 -newkey rsa:2048 -keyout myservice.key -out myservice.cert -days 365 -nodes -subj "/CN=myservice.example.com"
       ```
 
-   1. **元数据 XML**： [从你的 IdP 服务器导出](https://documentation.pingidentity.com/pingfederate/pf83/index.shtml#concept_exportingMetadata.html)的`metadata.xml`文件。
+   1. **元数据 XML**： [从您的 IdP 服务器导出](https://documentation.pingidentity.com/pingfederate/pf83/index.shtml#concept_exportingMetadata.html)的`metadata.xml`文件。
 
 1. 完成**配置 Ping 帐号**表单后，点击页面底部的**启用 Ping 认证**。
 

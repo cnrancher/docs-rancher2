@@ -4,11 +4,11 @@ title: 创建 Windows 集群
 
 _从 v2.3.0 开始支持_
 
-当使用 Rancher 初始化一个[自定义集群](/docs/cluster-provisioning/rke-clusters/custom-nodes/_index)时，Rancher 会在你的基础设施上，使用 RKE（Rancher Kubernetes Engine）进行 Kubernetes 集群初始化。
+当使用 Rancher 初始化一个[自定义集群](/docs/cluster-provisioning/rke-clusters/custom-nodes/_index)时，Rancher 会在您的基础设施上，使用 RKE（Rancher Kubernetes Engine）进行 Kubernetes 集群初始化。
 
-你可以同时使用 Linux 以及 Windows 的节点组成你的集群。Windows 节点只能作为 `worker` 节点使用，Linux 则需要作为管理节点。
+您可以同时使用 Linux 以及 Windows 的节点组成您的集群。Windows 节点只能作为 `worker` 节点使用，Linux 则需要作为管理节点。
 
-你只能在启用了 Windows 支持的集群中添加 Windows 节点。Windows 支持只能适用于自定义集群并且 Kubernetes 版本为 1.15+，并且只能使用 Flannel 作为网络插件。不能在已创建的集群中启用 Windows 支持。
+您只能在启用了 Windows 支持的集群中添加 Windows 节点。Windows 支持只能适用于自定义集群并且 Kubernetes 版本为 1.15+，并且只能使用 Flannel 作为网络插件。不能在已创建的集群中启用 Windows 支持。
 
 > Windows 集群比 Linux 集群有更多的先决条件。例如，Windows 节点必须有 50GB 的磁盘空间，并且需要保证满足所有以下的[节点要求](#节点要求)。
 
@@ -154,7 +154,7 @@ Windows 要求容器必须建立在与容器相同的 Windows Server 版本上�
 
 结果：
 
-- 您的集群已创建并进入为 **Provisioning** 的状态。Rancher 正在启动你的集群。
+- 您的集群已创建并进入为 **Provisioning** 的状态。Rancher 正在启动您的集群。
 - 您可以在集群的状态更新为 **Active** 后访问它。
 - Rancher 为活动的集群分配了两个项目，即 `Default`（包含命名空间 `default`）和 `System`（包含命名空间 `cattle-system`，`ingress-nginx`，`kube-public` 和 `kube-system`，如果存在）。
 

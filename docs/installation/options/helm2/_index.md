@@ -1,8 +1,8 @@
 ---
-title: 安装说明（Helm2）
+title: 安装指南（Helm2）
 ---
 
-> Helm 3 已经发布，Rancher 安装说明已经更新成使用 Helm 3 来安装。
+> Helm 3 已经发布，Rancher 安装指南已经更新成使用 Helm 3 来安装。
 > 如果您使用的是 Helm 2，我们建议您[迁移到 Helm 3](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/)，因为 Helm 3 比 Helm 2 更安全，更容易使用。
 > 本节提供了较早版本的使用 Helm 2 安装 Rancher 高可用的安装方法，如果无法升级到 Helm 3，可以使用此方法。
 

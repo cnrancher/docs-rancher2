@@ -39,7 +39,7 @@ etcd 更新集群状态前，需要集群中的所有节点通过 quorum 投票�
 
 ### Controlplane 节点
 
-Controlplane 节点上运行的工作负载包括：Kubernetes API server、scheduler 和 controller mananger。这些节点负载执行日常任务，从而确保你的集群状态和你的集群配置相匹配。因为 etcd 节点保存了集群的全部数据，所以 Controlplane 节点是无状态的。虽然可以在单个节点上运行 Controlplane，但是我们建议在两个或以上的节点上运行 Controlplane，以保证冗余性。另外，因为 Kubernetes 只要求每个节点至少要分配一个角色，所以一个节点可以既是 Controlplane 节点，又是 etcd 节点。
+Controlplane 节点上运行的工作负载包括：Kubernetes API server、scheduler 和 controller mananger。这些节点负载执行日常任务，从而确保您的集群状态和您的集群配置相匹配。因为 etcd 节点保存了集群的全部数据，所以 Controlplane 节点是无状态的。虽然可以在单个节点上运行 Controlplane，但是我们建议在两个或以上的节点上运行 Controlplane，以保证冗余性。另外，因为 Kubernetes 只要求每个节点至少要分配一个角色，所以一个节点可以既是 Controlplane 节点，又是 etcd 节点。
 
 ### Worker 节点
 

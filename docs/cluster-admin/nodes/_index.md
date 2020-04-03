@@ -29,11 +29,11 @@ title: 节点和节点池
 
 ### 节点池节点注意事项
 
-如果你使用了[这个节点池选项](/docs/cluster-provisioning/rke-clusters/node-pools/_index)，那么 Rancher 会自动维护创建的集群在初始集群配置期间设置的节点规模。这个 scale 决定了 Rancher 为集群维护的活动节点的数量。
+如果您使用了[这个节点池选项](/docs/cluster-provisioning/rke-clusters/node-pools/_index)，那么 Rancher 会自动维护创建的集群在初始集群配置期间设置的节点规模。这个 scale 决定了 Rancher 为集群维护的活动节点的数量。
 
 ### 托管的 Kubernetes 集群节点注意事项
 
-在 Rancher 中，管理[托管集群](/docs/cluster-provisioning/hosted-kubernetes-clusters/_index)中的节点的选项多少有些有限。你不能通过在 Rancher UI 里点击加减号，来增加或减少节点，你需要直接编辑集群。
+在 Rancher 中，管理[托管集群](/docs/cluster-provisioning/hosted-kubernetes-clusters/_index)中的节点的选项多少有些有限。您不能通过在 Rancher UI 里点击加减号，来增加或减少节点，您需要直接编辑集群。
 
 ## 隔离和驱逐节点
 
@@ -73,7 +73,7 @@ _驱逐_ 的过程是首先隔离节点，然后驱逐所有的 pods。该功能
 
 - **即使存在不受 ReplicationController、ReplicaSet、Job、DaemonSet 或 StatefulSet 管理的 pod **
 
-  这些类型的 pod 不会被重新调度到一个新节点，因为它们没有控制器。Kubernetes 希望您有自己的逻辑来处理删除这些 pods。Kubernetes 强迫你选择这个选项(它将会删除/驱逐这些 pod)或者驱逐不会继续。
+  这些类型的 pod 不会被重新调度到一个新节点，因为它们没有控制器。Kubernetes 希望您有自己的逻辑来处理删除这些 pods。Kubernetes 强迫您选择这个选项(它将会删除/驱逐这些 pod)或者驱逐不会继续。
 
 - **即使有 daemonset 管理的 pods**
 
@@ -150,7 +150,7 @@ _驱逐_ 的过程是首先隔离节点，然后驱逐所有的 pods。该功能
 
 > **先决条件：** 以下选项仅适用于[使用主机驱动启动](/docs/cluster-provisioning/rke-clusters/_index)的 RKE 集群。节点池功能不适用于导入的集群或由 Kubernetes 提供商托管的集群。
 
-在[由主机驱动启动的 RKE 集群](/docs/cluster-provisioning/rke-clusters/_index)中，你可以：
+在[由主机驱动启动的 RKE 集群](/docs/cluster-provisioning/rke-clusters/_index)中，您可以：
 
 - 向集群中添加新的[节点池](/docs/cluster-provisioning/rke-clusters/node-pools/_index)。添加到池中的节点是根据您使用的[节点模版](/docs/user-settings/node-templates/_index)创建的。
 

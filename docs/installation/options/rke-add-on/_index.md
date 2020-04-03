@@ -1,5 +1,5 @@
 ---
-title: 安装说明
+title: 安装指南
 ---
 
 :::important 重要提示

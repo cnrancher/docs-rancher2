@@ -80,6 +80,6 @@ _从 v2.2.0 开始可用_
 
 **结果：**
 
-- 你的集群创建成功并进入到**Provisioning**（启动中）的状态。Rancher 正在拉起你的集群。
-- 在集群状态变为**Active**（激活）状态后，你将可以开始访问你的集群。
+- 您的集群创建成功并进入到**Provisioning**（启动中）的状态。Rancher 正在拉起您的集群。
+- 在集群状态变为**Active**（激活）状态后，您将可以开始访问您的集群。
 - 在**Active**的集群中，默认会有两个项目。`Default`项目（包括`default`命名空间）和`System`项目（包括`cattle-system`，`ingress-nginx`，`kube-public` 和 `kube-system`，如果这些命名空间存在的话）

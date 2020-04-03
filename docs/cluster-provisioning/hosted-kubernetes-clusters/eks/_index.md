@@ -9,11 +9,11 @@ Amazon EKS 为 Kubernetes 集群提供了一个托管的控制平面。为了确
 > **注意**
 > 在亚马逊 AWS 中进行部署会产生费用。了解更多信息，请参阅[EKS 定价页面](https://aws.amazon.com/eks/pricing/)。
 
-要在 EKS 上建立集群，你需要创建一个 Amazon VPC（Virtual Private Cloud）。您还需要确保用于创建 EKS 集群的帐户具有适当的权限。有关详细信息，请参阅官方文档[Amazon EKS 先决条件](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-console.html#eks-prereqs)。
+要在 EKS 上建立集群，您需要创建一个 Amazon VPC（Virtual Private Cloud）。您还需要确保用于创建 EKS 集群的帐户具有适当的权限。有关详细信息，请参阅官方文档[Amazon EKS 先决条件](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-console.html#eks-prereqs)。
 
 ### Amazon VPC
 
-你需要建立一个 Amazon VPC 来启动 EKS 集群。VPC 使您能够将 AWS 资源启动到您定义的虚拟网络中。了解更多信息，参考[教程: 为 Amazon EKS 集群创建一个包含公共和私有子网的 VPC](https://docs.aws.amazon.com/eks/latest/userguide/create-public-private-vpc.html)。
+您需要建立一个 Amazon VPC 来启动 EKS 集群。VPC 使您能够将 AWS 资源启动到您定义的虚拟网络中。了解更多信息，参考[教程: 为 Amazon EKS 集群创建一个包含公共和私有子网的 VPC](https://docs.aws.amazon.com/eks/latest/userguide/create-public-private-vpc.html)。
 
 ### IAM 策略
 
@@ -104,7 +104,7 @@ Rancher 需要访问您的 AWS 帐户，以便在 Amazon EKS 中创建和管理�
 
      如果您选择此选项，您还必须选择允许您的实例访问 internet 的**VPC & Subnet**。这个访问是必需的，这样您的工作节点才可以连接到 Kubernetes 控制平面。步骤如下：
 
-     > **提示:** 仅使用私有 IP 地址时，为了使你的节点可以访问 internet，你可以创建一个由两个子网组成的 VPC，一个共有子网，一个私有子网。公有子网内的网络地址转换 (NAT) 实例，可让私有子网中的实例发起到 Internet 的流量。有关私有子网路由流量的更多信息，请查看 [官方 AWS 文档](https://docs.aws.amazon.com/zh_cn/vpc/latest/userguide/VPC_NAT_Instance.html)。
+     > **提示:** 仅使用私有 IP 地址时，为了使您的节点可以访问 internet，您可以创建一个由两个子网组成的 VPC，一个共有子网，一个私有子网。公有子网内的网络地址转换 (NAT) 实例，可让私有子网中的实例发起到 Internet 的流量。有关私有子网路由流量的更多信息，请查看 [官方 AWS 文档](https://docs.aws.amazon.com/zh_cn/vpc/latest/userguide/VPC_NAT_Instance.html)。
 
      1. 从显示的下拉列表中,选择专有网络 VPC。
 
@@ -125,7 +125,7 @@ Rancher 需要访问您的 AWS 帐户，以便在 Amazon EKS 中创建和管理�
    | 选项          | 描述                                                                                                                                                                                                                                                                                                   |
    | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
    | 实例类型      | 为正在配置的实例选择[硬件规格](https://aws.amazon.com/ec2/instance-types/)。                                                                                                                                                                                                                           |
-   | 自定义 AMI    | 如果你想使用自定义的 [Amazon Machine Image](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html#creating-an-ami) (AMI)，请在这里指定它。默认情况下，Rancher 将会根据您选择的 EKS 版本来使用相应的[EKS-调优的 AMI](https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html)。 |
+   | 自定义 AMI    | 如果您想使用自定义的 [Amazon Machine Image](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html#creating-an-ami) (AMI)，请在这里指定它。默认情况下，Rancher 将会根据您选择的 EKS 版本来使用相应的[EKS-调优的 AMI](https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html)。 |
    | 预期 ASG 大小 | 通过[亚马逊弹性伸缩组](https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html)控制实例数。                                                                                                                                                                         |
    | 用户数据      | 可以传递自定义命令来执行自动配置任务 **警告：修改此命令可能会导致节点无法加入集群** _注意: 从 v2.2.0 起提供_                                                                                                                                                                                           |
 
@@ -133,8 +133,8 @@ Rancher 需要访问您的 AWS 帐户，以便在 Amazon EKS 中创建和管理�
 
 **结果：**
 
-- 你的集群创建成功并进入到**Provisioning**（启动中）的状态。Rancher 正在拉起你的集群。
-- 在集群状态变为**Active**（激活）状态后，你将可以开始访问你的集群。
+- 您的集群创建成功并进入到**Provisioning**（启动中）的状态。Rancher 正在拉起您的集群。
+- 在集群状态变为**Active**（激活）状态后，您将可以开始访问您的集群。
 - 在**Active**的集群中，默认会有两个项目。`Default`项目（包括`default`命名空间）和`System`项目（包括`cattle-system`，`ingress-nginx`，`kube-public` 和 `kube-system`，如果这些命名空间存在的话）
 
 ## 故障排查

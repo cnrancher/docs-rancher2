@@ -6,7 +6,7 @@ title: '3、安装 Kubernetes 集群'
 
 本节介绍如何准备启动 Kubernetes 集群，该集群用于为私有环境部署 Rancher Server。
 
-因为 Rancher 高可用安装需要 Kubernetes 集群。所以，我们需要使用[Rancher Kubernetes Engine](https://rancher.com/docs/rke/latest/en/)（RKE）来部署 Kubernetes 集群。在安装 Kubernetes 之前，你需要先[安装 RKE](https://rancher.com/docs/rke/latest/en/installation/)，并且创建一个 RKE 配置文件。
+因为 Rancher 高可用安装需要 Kubernetes 集群。所以，我们需要使用[Rancher Kubernetes Engine](https://rancher.com/docs/rke/latest/en/)（RKE）来部署 Kubernetes 集群。在安装 Kubernetes 之前，您需要先[安装 RKE](https://rancher.com/docs/rke/latest/en/installation/)，并且创建一个 RKE 配置文件。
 
 ## A. 创建 RKE 配置文件
 
@@ -61,7 +61,7 @@ private_registries:
 rke up --config ./rancher-cluster.yml
 ```
 
-## C. 保存你的文件
+## C. 保存您的文件
 
 > **重要**
 > 以下文件需要被维护，用来故障排除和升级集群。

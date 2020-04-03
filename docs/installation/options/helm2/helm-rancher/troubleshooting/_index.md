@@ -104,7 +104,7 @@ Events:
   Warning  ErrGetKeyPair  9m (x16 over 19m)   cert-manager  Error getting keypair for CA issuer: secret "tls-rancher" not found
 ```
 
-### 你自己提供的证书
+### 您自己提供的证书
 
 您的证书将直接应用于`cattle-system`命名空间中的 Ingress 对象。
 

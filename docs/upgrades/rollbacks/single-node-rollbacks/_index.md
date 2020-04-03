@@ -9,7 +9,7 @@ title: 单节点回滚
 
 ## 在回滚之前
 
-回滚到较早版本的 Rancher 期间，您将输入一系列命令，按照你的情况替换命令中的占位符。这些占位符用尖括号和大写字母（`<EXAMPLE>`）表示。这是带有占位符的命令示例：
+回滚到较早版本的 Rancher 期间，您将输入一系列命令，按照您的情况替换命令中的占位符。这些占位符用尖括号和大写字母（`<EXAMPLE>`）表示。这是带有占位符的命令示例：
 
 ```
 docker pull rancher/rancher:<PRIOR_RANCHER_VERSION>
@@ -30,7 +30,7 @@ docker pull rancher/rancher:<PRIOR_RANCHER_VERSION>
 | `<RANCHER_VERSION>`        | `v2.0.5`          | 备份所针对的 Rancher 版本。           |
 | `<DATE>`                   | `9-27-18`         | 数据容器或备份的创建日期。            |
 
-您可以通过远程连接登录到 Rancher Server 所在的主机并输入命令以查看正在运行的容器：`docker ps`，从而获得 `<PRIOR_RANCHER_VERSION>` 和 `<RANCHER_CONTAINER_NAME>`的值。您还可以使用其他命令查看停止的容器：`docker ps -a`。在创建备份期间，你可以随时使用这些命令获得帮助。
+您可以通过远程连接登录到 Rancher Server 所在的主机并输入命令以查看正在运行的容器：`docker ps`，从而获得 `<PRIOR_RANCHER_VERSION>` 和 `<RANCHER_CONTAINER_NAME>`的值。您还可以使用其他命令查看停止的容器：`docker ps -a`。在创建备份期间，您可以随时使用这些命令获得帮助。
 
 ## 回滚 Rancher
 

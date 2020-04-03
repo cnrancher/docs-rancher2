@@ -2,7 +2,7 @@
 title: 升级 Cert-Manager
 ---
 
-Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和更新 TLS 证书。截至 2019 秋季，cert-manager 将发生三个重要的变化，如果你有一个 Rancher 高可用部署，您需要采取以下措施：
+Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和更新 TLS 证书。截至 2019 秋季，cert-manager 将发生三个重要的变化，如果您有一个 Rancher 高可用部署，您需要采取以下措施：
 
 1. [从 2019 年 11 月 1 日开始，Let's Encrypt 将阻止版本低于 0.8.0 的 cert-manager 实例。](https://community.letsencrypt.org/t/blocking-old-cert-manager-versions/98753)
 1. [Cert-manager 正在弃用并替换 certificate.spec.acme.solvers 字段。](https://cert-manager.io/docs/installation/upgrading/upgrading-0.7-0.8/)此更改没有确切的截止日期。
@@ -27,7 +27,7 @@ Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和更新 TLS
 ## 仅升级 Cert-Manager
 
 > **注意：**
-> 如果你没有升级 Rancher 的计划，这些说明是适用的。
+> 如果您没有升级 Rancher 的计划，这些说明是适用的。
 
 这些说明中使用的命名空间取决于当前安装了 cert-manager 的命名空间。如果它在 kube-system 中，请在以下说明中使用。您可以通过运行`kubectl get pods --all-namespaces`来验证，并检查 cert-manager-\* pods 列在哪个命名空间中。请勿更改正在运行 cert-manager 的命名空间，否则可能会导致问题。
 

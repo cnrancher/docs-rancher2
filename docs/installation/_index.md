@@ -56,7 +56,7 @@ Rancher 的部署可以有三种架构：
 - [在负载均衡器上做 TLS termination](/docs/installation/options/chart-options/_index)
 - [自定义 Ingress](/docs/installation/options/chart-options/_index)
 
-在 Rancher 安装说明中，推荐使用 RKE 设置 Kubernetes 并基于它部署 Rancher。RKE 有许多配置选项可用于自定义 Kubernetes 以适合您的特定环境。 有关选项和功能的完整列表，请参见[RKE 文档](https://rancher.com/docs/rke/latest/en/config-options/)。
+在 Rancher 安装指南中，推荐使用 RKE 设置 Kubernetes 并基于它部署 Rancher。RKE 有许多配置选项可用于自定义 Kubernetes 以适合您的特定环境。 有关选项和功能的完整列表，请参见[RKE 文档](https://rancher.com/docs/rke/latest/en/config-options/)。
 
 ## 在 Docker 上安装 Rancher 的更多选项
 

@@ -10,7 +10,7 @@ Rancher 为与集群交互提供了直观的用户界面。UI 中所有可用的
 
 ## kubectl
 
-您可以使用 Kubernetes 命令行工具[kubectl](https://kubernetes.io/docs/reference/kubectl/overview/)来管理你的集群，使用 kubectl 有两种选择:
+您可以使用 Kubernetes 命令行工具[kubectl](https://kubernetes.io/docs/reference/kubectl/overview/)来管理您的集群，使用 kubectl 有两种选择:
 
 ### Rancher kubectl shell
 
