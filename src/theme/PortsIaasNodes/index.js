@@ -214,7 +214,7 @@ function PortsIaasNodes() {
           <td></td>
         </tr>
         <tr>
-          <td rowSpan={3}>工作负载客户端s</td>
+          <td rowSpan={3}>工作负载客户端</td>
           <td></td>
           <td></td>
           <td></td>

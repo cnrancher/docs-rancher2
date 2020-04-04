@@ -25,7 +25,7 @@ title: 通过 Kubectl 和 kubeconfig 访问集群
 1. 登录 Rancher. 从 **全局** 视图中，打开您希望使用 kubectl 访问的集群。
 1. 点击 **Kubeconfig 文件**.
 1. 将显示的内容复制到剪贴板。
-1. 将内容粘贴到本地计算机上的新文件中。 将文件移动到 `~/.kube/config`。 注意: kubectl 用于 kubeconfig 文件存放的默认位置是 `~/.kube/config`, 但是您可以使用任何目录，并使用 `--kubeconfig` 标记来指定它，如以下命令所示:
+1. 将内容粘贴到本地计算机上的新文件中。将文件移动到 `~/.kube/config`。注意: kubectl 用于 kubeconfig 文件存放的默认位置是 `~/.kube/config`, 但是您可以使用任何目录，并使用 `--kubeconfig` 标记来指定它，如以下命令所示:
 
    ```
    kubectl --kubeconfig /custom/path/kube.config get pods

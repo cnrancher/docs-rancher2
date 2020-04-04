@@ -6,27 +6,27 @@ title: '1、开始迁移'
 
 ## 安装 Rancher v2.x
 
-从 v1.6 迁移到 v2.x 的第一步是将 Rancher v2.x Server 与 v1.6 Server 并排安装，因在迁移过程中需要使用旧的安装。 由于 v1.6 和 v2.x 之间的体系结构更改，因此没有直接的升级途径。 您必须独立安装 v2.x，然后将 v1.6 服务迁移到 v2.x。
+从 v1.6 迁移到 v2.x 的第一步是将 Rancher v2.x Server 与 v1.6 Server 并排安装，因在迁移过程中需要使用旧的安装。由于 v1.6 和 v2.x 之间的体系结构更改，因此没有直接的升级途径。您必须独立安装 v2.x，然后将 v1.6 服务迁移到 v2.x。
 
-v2.x 的新功能，与 Rancher Server 的所有通信均已加密。 以下过程不仅指导您安装 Rancher，而且还将指导您创建和安装这些证书。
+v2.x 的新功能，与 Rancher Server 的所有通信均已加密。以下过程不仅指导您安装 Rancher，而且还将指导您创建和安装这些证书。
 
-在安装 v2.x 之前，请提供一台或多台主机以用作 Rancher Server(s)。 您可以在以下位置找到这些主机的要求[Server 要求](/docs/installation/requirements/_index)。
+在安装 v2.x 之前，请提供一台或多台主机以用作 Rancher Server(s)。您可以在以下位置找到这些主机的要求[Server 要求](/docs/installation/requirements/_index)。
 
 提供节点后， 开始安装 Rancher:
 
 - [Docker 安装](/docs/installation/other-installation-methods/single-node-docker/_index)
 
-对于开发环境，可以使用 Docker 将 Rancher 安装在单个节点上。 此安装过程将单个 Rancher 容器部署到您的主机。
+对于开发环境，可以使用 Docker 将 Rancher 安装在单个节点上。此安装过程将单个 Rancher 容器部署到您的主机。
 
 - [Kubernetes 安装](/docs/installation/k8s-install/_index)
 
-对于用户需要不断访问集群的生产环境，我们推荐采用高可用 Kubernetes 集群安装的方式安装 Rancher。 此安装过程将设置一个三节点集群，并使用 Helm chart 在每个节点上安装 Rancher。
+对于用户需要不断访问集群的生产环境，我们推荐采用高可用 Kubernetes 集群安装的方式安装 Rancher。此安装过程将设置一个三节点集群，并使用 Helm chart 在每个节点上安装 Rancher。
 
 > **重要区别:** 尽管您可以在每个节点上使用外部数据库和 Docker 命令以高可用 Kubernetes 配置来安装 Rancher v1.6，但 Kubernetes 安装中的 Rancher v2.x 需要现有的 Kubernetes 集群。查阅[Kubernetes 安装](/docs/installation/k8s-install/_index) 以满足所有要求。
 
 ## 配置身份验证
 
-安装 Rancher v2.x Server 之后，我们建议配置外部身份验证（例如 Active Directory 或 GitHub），以便用户可以使用其单点登录 Rancher。 有关已支持的身份验证提供程序的完整列表以及有关如何配置它们的说明， 查看[认证方式](/docs/admin-settings/authentication/_index)。
+安装 Rancher v2.x Server 之后，我们建议配置外部身份验证（例如 Active Directory 或 GitHub），以便用户可以使用其单点登录 Rancher。有关已支持的身份验证提供程序的完整列表以及有关如何配置它们的说明， 查看[认证方式](/docs/admin-settings/authentication/_index)。
 
 <figcaption>Rancher v2.x 中的认证</figcaption>
 
@@ -34,30 +34,30 @@ v2.x 的新功能，与 Rancher Server 的所有通信均已加密。 以下过�
 
 ### 本地用户
 
-尽管我们建议使用外部身份验证提供程序，但 Rancher v1.6 和 v2.x 都为 Rancher 本地用户提供支持。 但是，这些用户无法从 Rancher v1.6 迁移到 v2.x。 如果您在 Rancher v1.6 中使用了本地用户，并希望在 v2.x 中继续进行使用， 您会需要去[手动重新创建这些用户账号](/docs/admin-settings/authentication/_index)并为其分配访问权限。
+尽管我们建议使用外部身份验证提供程序，但 Rancher v1.6 和 v2.x 都为 Rancher 本地用户提供支持。但是，这些用户无法从 Rancher v1.6 迁移到 v2.x。如果您在 Rancher v1.6 中使用了本地用户，并希望在 v2.x 中继续进行使用， 您会需要去[手动重新创建这些用户账号](/docs/admin-settings/authentication/_index)并为其分配访问权限。
 
-最佳实践，您应该使用外部*和*本地身份验证的混合体。 这种做法可在您的外部身份验证遇到中断时提供对 Rancher 的访问，因为您仍然可以使用本地用户帐户登录。设置一些本地帐户作为 Rancher 的管理用户。
+最佳实践，您应该使用外部*和*本地身份验证的混合体。这种做法可在您的外部身份验证遇到中断时提供对 Rancher 的访问，因为您仍然可以使用本地用户帐户登录。设置一些本地帐户作为 Rancher 的管理用户。
 
 ### SAML 身份验证
 
-在 Rancher v1.6 中，我们鼓励 SAML 用户使用 Shibboleth，因为它是我们提供的唯一 SAML 身份验证选项。 但是，为了更好地对它们的微小差异进行支持，我们为 v2.x 添加了经过充分测试的 SAML 提供程序：Ping Identity，Microsoft ADFS 和 FreeIPA。
+在 Rancher v1.6 中，我们鼓励 SAML 用户使用 Shibboleth，因为它是我们提供的唯一 SAML 身份验证选项。但是，为了更好地对它们的微小差异进行支持，我们为 v2.x 添加了经过充分测试的 SAML 提供程序：Ping Identity，Microsoft ADFS 和 FreeIPA。
 
 ## 创建集群和项目
 
-开始在 Rancher v2.x 的工作通过配置新的 Kubernetes 集群，类似于 v1.6 中的环境。 该集群将托管您的应用程序部署。
+开始在 Rancher v2.x 的工作通过配置新的 Kubernetes 集群，类似于 v1.6 中的环境。该集群将托管您的应用程序部署。
 
-在 Rancher v2.x 中结合在一起的集群和项目等效于 v1.6 环境。 *集群*是计算边界（即您的主机），而*项目*是管理边界（即用于为用户分配访问权限的命名空间组）。
+在 Rancher v2.x 中结合在一起的集群和项目等效于 v1.6 环境。*集群*是计算边界（即您的主机），而*项目*是管理边界（即用于为用户分配访问权限的命名空间组）。
 
 以下标题中提供了有关配置集群的更多基本信息，但有关完整信息， 查看[配置 Kubernetes 集群](/docs/cluster-provisioning/_index).
 
 ### 集群
 
-在 Rancher v1.6 中，计算节点已添加到*环境*中。 Rancher v2.x 避免使用*环境*来表示*集群*，因为 Kubernetes 将此术语用于一组计算机而不是*环境*。
+在 Rancher v1.6 中，计算节点已添加到*环境*中。Rancher v2.x 避免使用*环境*来表示*集群*，因为 Kubernetes 将此术语用于一组计算机而不是*环境*。
 
-Rancher v2.x 允许您在任何地方启动 Kubernetes 集群。 使用以下方式纳管集群：
+Rancher v2.x 允许您在任何地方启动 Kubernetes 集群。使用以下方式纳管集群：
 
 - 一个[托管的 Kubernetes 集群](/docs/cluster-provisioning/hosted-kubernetes-clusters/_index)。
-- 一个[来自基础设施提供商的节点](/docs/cluster-provisioning/rke-clusters/node-pools/_index)。 Rancher 在节点上启动 Kubernetes。
+- 一个[来自基础设施提供商的节点](/docs/cluster-provisioning/rke-clusters/node-pools/_index)。Rancher 在节点上启动 Kubernetes。
 - 任何[自定义节点](/docs/cluster-provisioning/rke-clusters/custom-nodes/_index)。Rancher 可以在节点上启动 Kubernetes，无论是裸金属服务器，虚拟机还是不太流行的基础架构提供商上的云主机。
 
 ### 项目

@@ -8,7 +8,7 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
 如果您当前正在使用 RKE add-on 安装方法，参见[将 RKE add-on 安装的 Rancher 迁移到 Helm 安装](/docs/upgrades/upgrades/migrating-from-rke-add-on/_index)，获取有关如何使用 Helm chart 的详细信息。
 :::
 
-如果您在代理后面操作 Rancher，并且想要通过代理访问服务（例如拉取应用商店），则必须提供有关 Rancher 代理的信息。 由于 Rancher 是用 Go 编写的，因此它使用了常见的代理环境变量，如下所示。
+如果您在代理后面操作 Rancher，并且想要通过代理访问服务（例如拉取应用商店），则必须提供有关 Rancher 代理的信息。由于 Rancher 是用 Go 编写的，因此它使用了常见的代理环境变量，如下所示。
 
 确保`NO_PROXY`包含不应使用代理的网络地址，网络地址范围和域。
 

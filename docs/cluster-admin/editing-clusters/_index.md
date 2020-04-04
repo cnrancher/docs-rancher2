@@ -50,7 +50,7 @@ title: 设置集群
 | Nginx Ingress        | 如果您希望以高可用性配置发布应用程序，并且您使用的是没有本地负载平衡功能的云提供商来托管节点，那么请启用此选项，以便在集群中使用 Nginx ingress。                                                                                |
 | 度量服务器监控       | 每个能够使用 RKE 启动集群的云提供商都可以收集指标并监视您的集群节点。启用此选项可从云提供商的门户查看您的节点指标。                                                                                                             |
 | Pod 安全政策支持     | 为集群启用[pod 安全策略](/docs/admin-settings/pod-security-policies/_index)。启用此选项后，使用 **默认 Pod 安全策略** 下拉列表选择一个策略。                                                                                    |
-| 节点上的 Docker 版本 | 配置不管节点是否允许运行 Rancher 不正式支持的 Docker 版本。 如果您选择需要一个[受支持的 Docker 版本](/docs/installation/options/rke-add-on/layer-7-lb/_index)，Rancher 将停止在没有安装受支持的 Docker 版本的节点上运行 pods。  |
+| 节点上的 Docker 版本 | 配置不管节点是否允许运行 Rancher 不正式支持的 Docker 版本。如果您选择需要一个[受支持的 Docker 版本](/docs/installation/options/rke-add-on/layer-7-lb/_index)，Rancher 将停止在没有安装受支持的 Docker 版本的节点上运行 pods。   |
 | Docker 根目录        | 集群节点上安装 Docker 的目录。如果在节点上将 Docker 安装到非默认目录，请更新此路径。                                                                                                                                            |
 | 默认 Pod 安全策略    | 如果启用了 **Pod 安全策略支持**，请使用此下拉菜单选择应用于集群的 Pod 安全策略。                                                                                                                                                |
 | 云提供商             | 如果您使用云提供商来托管由 RKE 启动的集群节点，请启用[此选项](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/_index)，以便您可以使用云提供商的本地特性。如果您希望为您的云托管集群存储持久数据，则需要此选项。 |
@@ -64,7 +64,7 @@ title: 设置集群
 - 要直接从 Rancher UI 编辑 RKE 配置文件， 请单击 **编辑 YAML**。
 - 要从现有的 RKE 文件中读取， 请点击 **从文件读取**。
 
-Rancher v2.0.0-v2.2.x，配置文件与[Rancher Kubernetes Engine 的集群配置文件](https://rancher.com/docs/rke/latest/en/config-options/)相同，Rancher 使用该配置文件来创建集群。 在 Rancher v2.3.0 中，RKE 信息仍然包含在配置文件中，但是它与其他选项分离，因此 RKE 集群配置选项嵌套在`rancher_kubernetes_engine_config` 指令下。有关更多信息，请参阅[集群配置参考资料](/docs/cluster-provisioning/rke-clusters/options/_index)。
+Rancher v2.0.0-v2.2.x，配置文件与[Rancher Kubernetes Engine 的集群配置文件](https://rancher.com/docs/rke/latest/en/config-options/)相同，Rancher 使用该配置文件来创建集群。在 Rancher v2.3.0 中，RKE 信息仍然包含在配置文件中，但是它与其他选项分离，因此 RKE 集群配置选项嵌套在`rancher_kubernetes_engine_config` 指令下。有关更多信息，请参阅[集群配置参考资料](/docs/cluster-provisioning/rke-clusters/options/_index)。
 
 ![image](/img/rancher/cluster-options-yaml.png)
 

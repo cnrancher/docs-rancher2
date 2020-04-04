@@ -68,7 +68,7 @@ $ sudo shutdown -r now
 
 #### 通过运行脚本删除
 
-您可以运行一个脚本，而不是使用 Rancher UI 来清除导入的集群节点。 该功能从`v2.1.0`版本开始提供。
+您可以运行一个脚本，而不是使用 Rancher UI 来清除导入的集群节点。该功能从`v2.1.0`版本开始提供。
 
 > **先决条件:**
 >
@@ -86,7 +86,7 @@ $ sudo shutdown -r now
 
    如果您没有离线环境，请跳过这一步。
 
-1. 在同一目录中，运行脚本并提供 `rancher/rancher-agent` 镜像版本， 该版本应该与用于管理集群的 Rancher 版本一致。 (`<RANCHER_VERSION>`):
+1. 在同一目录中，运行脚本并提供 `rancher/rancher-agent` 镜像版本， 该版本应该与用于管理集群的 Rancher 版本一致。(`<RANCHER_VERSION>`):
 
    > **提示:**
    >
@@ -114,7 +114,7 @@ popd
 
 ### Docker 容器、镜像和卷
 
-根据您分配给节点的角色，容器中有 Kubernetes 组件， 属于覆盖网络的容器、DNS、ingress 控制器和 Rancher Agent。 (还有您创建的 Pods 也被调度到这个节点)
+根据您分配给节点的角色，容器中有 Kubernetes 组件， 属于覆盖网络的容器、DNS、ingress 控制器和 Rancher Agent。(还有您创建的 Pods 也被调度到这个节点)
 
 **清理所有 Docker 容器、镜像和卷:**
 

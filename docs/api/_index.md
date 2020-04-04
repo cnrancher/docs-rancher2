@@ -40,7 +40,7 @@ API 请求必须包含身份验证信息。身份验证是通过使用带有[API
 
 ## 过滤
 
-可以使用 HTTP 查询参数，在服务器端过滤大多数集合。过滤器映射向您显示可以过滤哪些字段，以及相应的过滤值。 API 用户界面具有用于设置过滤条件并向您显示适当请求的控件。对于简单的“等于”匹配，它只是`field = value`。您也可以将修饰符添加到字段名称中，例如 field_gt = 42 表示“field 大于 42”。有关完整详细信息，请参见[API 规范](https://github.com/rancher/api-spec/blob/master/specification.md#filtering)。
+可以使用 HTTP 查询参数，在服务器端过滤大多数集合。过滤器映射向您显示可以过滤哪些字段，以及相应的过滤值。API 用户界面具有用于设置过滤条件并向您显示适当请求的控件。对于简单的“等于”匹配，它只是`field = value`。您也可以将修饰符添加到字段名称中，例如 field_gt = 42 表示“field 大于 42”。有关完整详细信息，请参见[API 规范](https://github.com/rancher/api-spec/blob/master/specification.md#filtering)。
 
 ## 排序
 

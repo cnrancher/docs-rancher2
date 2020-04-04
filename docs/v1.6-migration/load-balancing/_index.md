@@ -4,7 +4,7 @@ title: '7、负载均衡'
 
 如果您的应用程序是面向公众的并且消耗大量流量，则应在集群之前放置一个负载均衡器，以便用户始终可以访问其应用程序而不会中断服务。通常，您可以通过对您的部署进行[水平扩容](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)来满足大量服务请求，随着流量的增加它会增加应用程序容器的实例。然而，此技术需要路由以高效地在您的节点之间分配流量。如果您需要根据公网流量进行扩容或者缩容，那么您需要一个负载均衡器。
 
-如[文档](https://docs.rancher.com/docs/rancher/v1.6/en/cattle/adding-load-balancers/)所述，Rancher v1.6 使用基于 HAProxy 的微服务提供负载均衡的能力，该服务支持 HTTP，HTTPS，TCP 主机名和基于路径的路由。v2.x 中提供了大多数这些相同的功能。 但是，您在 v1.6 中使用的负载均衡器无法迁移到 v2.x。您必须在 v2.x 中手动重新创建 v1.6 中的负载均衡器。
+如[文档](https://docs.rancher.com/docs/rancher/v1.6/en/cattle/adding-load-balancers/)所述，Rancher v1.6 使用基于 HAProxy 的微服务提供负载均衡的能力，该服务支持 HTTP，HTTPS，TCP 主机名和基于路径的路由。v2.x 中提供了大多数这些相同的功能。但是，您在 v1.6 中使用的负载均衡器无法迁移到 v2.x。您必须在 v2.x 中手动重新创建 v1.6 中的负载均衡器。
 
 如果在由 v1.6 Compose 文件转化为 Kubernetes 清单后，遇到下面的`output.txt`中的内容，您必须通过在 v2.x 中手动创建负载均衡器来解决它。
 
@@ -16,7 +16,7 @@ title: '7、负载均衡'
 
 ## 负载均衡器协议选项
 
-默认情况下，Rancher v2.x 用原生[Kubernetes Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)替换了 v1.6 负载均衡器微服务，该服务由 NGINX Ingress Controller 支持，用于 7 层负载均衡。 默认情况下，Kubernetes Ingress 仅支持 HTTP 和 HTTPS 协议，不支持 TCP。 使用 Ingress 时，负载均衡仅限于这两种协议。
+默认情况下，Rancher v2.x 用原生[Kubernetes Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)替换了 v1.6 负载均衡器微服务，该服务由 NGINX Ingress Controller 支持，用于 7 层负载均衡。默认情况下，Kubernetes Ingress 仅支持 HTTP 和 HTTPS 协议，不支持 TCP。使用 Ingress 时，负载均衡仅限于这两种协议。
 
 > **需要 TCP?** 请查看[TCP 负载均衡选项](#tcp-负载均衡选项)
 
@@ -24,9 +24,9 @@ title: '7、负载均衡'
 
 在 Rancher v1.6 中，您可以添加端口/服务规则，配置 HAProxy 以实现目标服务的负载均衡。您还可以配置基于主机名/路径的路由规则。
 
-Rancher v2.x 提供了类似的功能，但是负载均衡由 Ingress 处理。 Ingress 是负载均衡器规则的规范，由一个控制器来将这些规则应用到您的负载均衡上。实际的负载均衡器可以在集群之外或集群中运行。
+Rancher v2.x 提供了类似的功能，但是负载均衡由 Ingress 处理。Ingress 是负载均衡器规则的规范，由一个控制器来将这些规则应用到您的负载均衡上。实际的负载均衡器可以在集群之外或集群中运行。
 
-默认情况下，Rancher v2.x 在使用 RKE（Rancher 自己的 Kubernetes 安装程序）配置的集群上部署 NGINX Ingress Controller，以处理 Kubernetes Ingress 规则。 默认情况下，NGINX Ingress Controller 仅安装在 RKE 配置的集群中。 由云服务提供商（如 GKE）配置的集群具有自己的 Ingress Controller，用于配置负载均衡器。对于本文档，我们的范围仅限于 RKE 安装的 NGINX Ingress Controller。
+默认情况下，Rancher v2.x 在使用 RKE（Rancher 自己的 Kubernetes 安装程序）配置的集群上部署 NGINX Ingress Controller，以处理 Kubernetes Ingress 规则。默认情况下，NGINX Ingress Controller 仅安装在 RKE 配置的集群中。由云服务提供商（如 GKE）配置的集群具有自己的 Ingress Controller，用于配置负载均衡器。对于本文档，我们的范围仅限于 RKE 安装的 NGINX Ingress Controller。
 
 RKE 将 NGINX Ingress Controller 部署为 [Kubernetes DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)，这意味着 NGINX 实例已部署在集群中的每个节点上。NGINX 会作为一个 Ingress Controller，侦听在整个集群中的 Ingress 的创建，并且还将其自身配置为负载均衡器，以满足 Ingress 规则。这个 DaemonSet 使用主机网络并且暴露了两个端口：80 和 443。
 
@@ -36,7 +36,7 @@ RKE 将 NGINX Ingress Controller 部署为 [Kubernetes DaemonSet](https://kubern
 
 将 Ingress Controller 作为 DaemonSet 部署在 v2.x 中，带来了 v1.6 用户应该了解的一些体系结构更改。
 
-在 Rancher v1.6 中，您可以在堆栈中部署可伸缩的负载均衡器服务。 如果您在 Cattle 环境中有四个主机，则可以部署规模为 2 的负载均衡器服务，并通过将端口 80 附加到两个主机 IP 地址来指向您的应用程序。 您还可以在其余两台主机上启动另一个负载均衡器，以再次使用端口 80 均衡另一服务，因为您的负载均衡器正在使用不同的主机 IP 地址。
+在 Rancher v1.6 中，您可以在堆栈中部署可伸缩的负载均衡器服务。如果您在 Cattle 环境中有四个主机，则可以部署规模为 2 的负载均衡器服务，并通过将端口 80 附加到两个主机 IP 地址来指向您的应用程序。您还可以在其余两台主机上启动另一个负载均衡器，以再次使用端口 80 均衡另一服务，因为您的负载均衡器正在使用不同的主机 IP 地址。
 
 <figcaption>Rancher v1.6 负载均衡架构</figcaption>
 
@@ -65,7 +65,7 @@ Rancher v2.x Ingress Controller 是一个 DaemonSet，它全局部署在所有�
 
 ![工作负载规格](/img/rancher/workload-scale.png)
 
-为了在这两个 pods 之间保持平衡，您必须创建一个 Kubernetes Ingress 规则。要创建此规则，请导航到您的集群和项目，然后单击**资源>工作负载>负载均衡。**（在 v2.3.0 之前的版本中，单击**工作负载>负载均衡**）然后单击**添加规则**。 下面的 GIF 描述了如何将 Ingress 添加到您的一个项目中。
+为了在这两个 pods 之间保持平衡，您必须创建一个 Kubernetes Ingress 规则。要创建此规则，请导航到您的集群和项目，然后单击**资源>工作负载>负载均衡。**（在 v2.3.0 之前的版本中，单击**工作负载>负载均衡**）然后单击**添加规则**。下面的 GIF 描述了如何将 Ingress 添加到您的一个项目中。
 
 <figcaption>添加规则</figcaption>
 

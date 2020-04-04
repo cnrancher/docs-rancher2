@@ -7,4 +7,4 @@ title: 备份说明
 - [Rancher 单节点备份](/docs/backups/backups/single-node-backups/_index)
 - [Rancher 高可用备份](/docs/backups/backups/ha-backups/_index)
 
-如果你想备份你的[RKE 业务集群](/docs/cluster-provisioning/rke-clusters/_index)，请参考[文档](/docs/cluster-admin/backing-up-etcd/_index)。
+如果你想备份你的[RKE 用户集群](/docs/cluster-provisioning/rke-clusters/_index)，请参考[文档](/docs/cluster-admin/backing-up-etcd/_index)。

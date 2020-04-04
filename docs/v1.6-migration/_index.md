@@ -2,7 +2,7 @@
 title: 从 v1.6 迁移到 v2.x
 ---
 
-Rancher v2.x 经过重新整理和编写，旨在为 Kubernetes 和 Docker 提供一个完整的管理解决方案。 由于进行了较为广泛的更改，因此没有从版本 v1.6 直接升级到 v2.x 的途径，而是将 v1.6 服务迁移到 v2.x 作为 Kubernetes 的工作负载。 在 v1.6 版本中，最常用的编排是 Rancher 自己的引擎 Cattle。 以下指南将说明和指导我们的 Cattle 用户如何在 Kubernetes 环境中运行工作负载。
+Rancher v2.x 经过重新整理和编写，旨在为 Kubernetes 和 Docker 提供一个完整的管理解决方案。由于进行了较为广泛的更改，因此没有从版本 v1.6 直接升级到 v2.x 的途径，而是将 v1.6 服务迁移到 v2.x 作为 Kubernetes 的工作负载。在 v1.6 版本中，最常用的编排是 Rancher 自己的引擎 Cattle。以下指南将说明和指导我们的 Cattle 用户如何在 Kubernetes 环境中运行工作负载。
 
 ## 视频
 
@@ -27,7 +27,7 @@ Rancher v2.x 经过重新整理和编写，旨在为 Kubernetes 和 Docker 提�
 
 ## 迁移示例文件
 
-在整个迁移指南中，我们将引用几个要从 Rancher v1.6 迁移到 v2.x 的的示例服务。 这些服务是：
+在整个迁移指南中，我们将引用几个要从 Rancher v1.6 迁移到 v2.x 的的示例服务。这些服务是：
 
 - 名为 `web` 的服务, 该服务运行 [Let's Chat](http://sdelements.github.io/lets-chat/), 一个为小团队的自托管聊天服务。
 - 名为 `database` 的服务, 该服务运行 [Mongo DB](https://www.mongodb.com/), 一个开源文档数据库。
@@ -37,10 +37,10 @@ Rancher v2.x 经过重新整理和编写，旨在为 Kubernetes 和 Docker 提�
 
 - `docker-compose.yml`
 
-  包含堆栈中每个服务的标准 Docker 指令文件。 我们将把这些文件转换为 Rancher v2.x 可以读取的 Kubernetes 清单。
+  包含堆栈中每个服务的标准 Docker 指令文件。我们将把这些文件转换为 Rancher v2.x 可以读取的 Kubernetes 清单。
 
 - `rancher-compose.yml`
 
-  用于 Rancher 特定功能的文件，例如运行健康检查和负载均衡器。 Rancher v2.x 无法读取这些文件，因此不必担心它们的内容--我们正丢弃它们，然后使用 v2.x UI 重新创建。
+  用于 Rancher 特定功能的文件，例如运行健康检查和负载均衡器。Rancher v2.x 无法读取这些文件，因此不必担心它们的内容--我们正丢弃它们，然后使用 v2.x UI 重新创建。
 
 ## [下一步: 开始迁移](/docs/v1.6-migration/get-started/_index)

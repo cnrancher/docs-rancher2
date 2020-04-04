@@ -194,7 +194,7 @@ Linux 镜像需要从 Linux 主机上收集和推送，但是必须先将 Window
 
 #### A. 查找您用的 Rancher 版本所需要的资源
 
-1. 浏览我们的[版本发布页面](https://github.com/rancher/rancher/releases)并查找您想要安装的 Rancher v2.x.x 版本。 不要下载标记为 rc or Pre-release 的版本，因为它们在生产环境下不稳定。
+1. 浏览我们的[版本发布页面](https://github.com/rancher/rancher/releases)并查找您想要安装的 Rancher v2.x.x 版本。不要下载标记为 rc or Pre-release 的版本，因为它们在生产环境下不稳定。
 
 2. 从发行版 **Assets** 部分下载以下文件，这些文件是离线环境下安装 Rancher 所必需的:
 

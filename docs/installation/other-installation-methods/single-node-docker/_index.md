@@ -20,7 +20,7 @@ title: 安装指南
 
 ## 选择一个 SSL 选项并安装 Rancher
 
-为了安全起见，使用 Rancher 时需要 SSL。 SSL 保护所有 Rancher 网络通信的安全，例如在您登录集群或与集群交互时。
+为了安全起见，使用 Rancher 时需要 SSL。SSL 保护所有 Rancher 网络通信的安全，例如在您登录集群或与集群交互时。
 
 > **您想要...**
 >

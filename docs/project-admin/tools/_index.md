@@ -2,7 +2,7 @@
 title: 工具介绍
 ---
 
-Rancher 集成了很多 Kubernetes 缺少的监控和运维工具，可以辅助您进行 DevOps 开发工作。 Rancher 可以跟其他服务集成，帮助您的集群更高效地运行。工具分为以下几个种类：
+Rancher 集成了很多 Kubernetes 缺少的监控和运维工具，可以辅助您进行 DevOps 开发工作。Rancher 可以跟其他服务集成，帮助您的集群更高效地运行。工具分为以下几个种类：
 
 <!-- TOC -->
 

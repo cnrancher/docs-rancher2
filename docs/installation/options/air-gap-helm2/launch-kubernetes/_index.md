@@ -14,7 +14,7 @@ title: '3、安装 Kubernetes 集群'
 
 ## A. 创建 RKE 配置文件
 
-在可以访问主机节点上的端口 22 / tcp 和 6443 / tcp 的系统上，使用以下示例创建一个名为`rancher-cluster.yml`的新文件。 该文件是 Rancher Kubernetes Engine 的配置文件（RKE 配置文件）。
+在可以访问主机节点上的端口 22 / tcp 和 6443 / tcp 的系统上，使用以下示例创建一个名为`rancher-cluster.yml`的新文件。该文件是 Rancher Kubernetes Engine 的配置文件（RKE 配置文件）。
 
 使用您创建的[3 个节点](/docs/installation/options/air-gap-helm2/prepare-nodes/_index)的 IP 地址或 DNS 名称，替换下面的代码示例中的值。
 

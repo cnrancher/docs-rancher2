@@ -22,7 +22,7 @@ title: Rancher 高可用恢复
 
 #### RKE v0.2.0+
 
-从 RKE v0.2.0 开始，快照可以保存在与 S3 兼容的后端中。要从存储在 S3 兼容后端中的快照还原群集，可以跳过此步骤，并在[步骤 4：还原数据库](#4-还原数据库)中检索快照。否则，您将需要直接将快照放置在节点上。
+从 RKE v0.2.0 开始，快照可以保存在与 S3 兼容的后端中。要从存储在 S3 兼容后端中的快照还原集群，可以跳过此步骤，并在[步骤 4：还原数据库](#4-还原数据库)中检索快照。否则，您将需要直接将快照放置在节点上。
 
 选择一个干净的节点。该节点将成为初始还原的“目标节点”。将快照放在目标节点上的`/opt/rke/etcd-snapshots`中。
 
@@ -45,9 +45,9 @@ cp rancher-cluster.yml rancher-cluster-restore.yml
 
 修改副本并进行以下更改。
 
-- 删除或注释掉整个`addons:`部分。 Rancher 的部署和支持配置已经在`etcd`数据库中。
+- 删除或注释掉整个`addons:`部分。Rancher 的部署和支持配置已经在`etcd`数据库中。
 - 更改您的`nodes:`部分以指向还原节点。
-- 注释掉不是您的“目标节点”的节点。我们希望群集仅在该节点上启动。
+- 注释掉不是您的“目标节点”的节点。我们希望集群仅在该节点上启动。
 
 _示例_ `rancher-cluster-restore.yml`
 
@@ -94,7 +94,7 @@ _自 RKE v0.2.0 起可用_
 
 从位于兼容 S3 的后端中的快照还原 etcd 时，该命令需要 S3 信息才能连接到 S3 后端并检索快照。
 
-> **注意：** 开始还原之前，请确保您的`cluster.rkestate`存在，因为其中包含群集的证书数据。
+> **注意：** 开始还原之前，请确保您的`cluster.rkestate`存在，因为其中包含集群的证书数据。
 
 ```bash
 $ rke etcd snapshot-restore --config cluster.yml --name snapshot-name \
@@ -123,9 +123,9 @@ S3 特定选项仅适用于 RKE v0.2.0 +。
 
 ## 5. 启动集群
 
-使用 RKE 并在单个“目标节点”上启动群集。
+使用 RKE 并在单个“目标节点”上启动集群。
 
-> **注意：** 对于运行 RKE v0.2.0 +的用户，在开始还原之前，请确保存在您的`cluster.rkestate`，因为其中包含群集的证书数据。
+> **注意：** 对于运行 RKE v0.2.0 +的用户，在开始还原之前，请确保存在您的`cluster.rkestate`，因为其中包含集群的证书数据。
 
 ```
 rke up --config ./rancher-cluster-restore.yml
@@ -135,7 +135,7 @@ rke up --config ./rancher-cluster-restore.yml
 
 RKE 完成后，它将在本地目录中创建一个凭证文件。配置`kubectl`以使用`kube_config_rancher-cluster-restore.yml`凭据文件并检查集群的状态。有关详细信息，请参见[安装和配置 kubectl](/docs/faq/kubectl/_index)）。
 
-您的新群集将需要几分钟才能稳定下来。一旦看到新的“目标节点”过渡到`Ready`，并在`NotReady`中看到三个旧节点，您就可以继续。
+您的新集群将需要几分钟才能稳定下来。一旦看到新的“目标节点”过渡到`Ready`，并在`NotReady`中看到三个旧节点，您就可以继续。
 
 ```
 kubectl get nodes
@@ -157,13 +157,13 @@ kubectl delete node 18.217.82.189 18.222.22.56 18.191.222.99
 
 ### 重新启动目标节点
 
-重新启动目标节点以确保群集网络和服务处于干净状态，然后再继续。
+重新启动目标节点以确保集群网络和服务处于干净状态，然后再继续。
 
 ### 检查 Kubernetes Pods
 
 等待在`kube-system`, `ingress-nginx`中运行的 Pod 和在`cattle-system`中运行的`rancher` Pod 返回到 `Running` 状态。
 
-> **注意：** `cattle-cluster-agent` 和 `cattle-node-agent` Pod 将处于 `Error` 或 `CrashLoopBackOff` 状态，直到 Rancher Server 启动且 DNS /负载均衡器已指向新群集为止。
+> **注意：** `cattle-cluster-agent` 和 `cattle-node-agent` Pod 将处于 `Error` 或 `CrashLoopBackOff` 状态，直到 Rancher Server 启动且 DNS /负载均衡器已指向新集群为止。
 
 ```
 kubectl get pods --all-namespaces
@@ -204,7 +204,7 @@ nodes:
 #   kind: Namespace
 ```
 
-运行 RKE 并将节点添加到新群集。
+运行 RKE 并将节点添加到新集群。
 
 ```
 rke up --config ./rancher-cluster-restore.yml
@@ -212,7 +212,7 @@ rke up --config ./rancher-cluster-restore.yml
 
 ## 完成
 
-Rancher 现在应该正在运行，并且可以用来管理 Kubernetes 集群。查看高可用安装的[推荐架构](/docs/installation/k8s-install/_index)并更新 Rancher DNS 或负载均衡器的端点，从而定位到新群集。端点更新后，纳管的群集上的代理应自动重新连接。由于重新连接回退超时，这可能需要 10 到 15 分钟。
+Rancher 现在应该正在运行，并且可以用来管理 Kubernetes 集群。查看高可用安装的[推荐架构](/docs/installation/k8s-install/_index)并更新 Rancher DNS 或负载均衡器的端点，从而定位到新集群。端点更新后，纳管的集群上的代理应自动重新连接。由于重新连接回退超时，这可能需要 10 到 15 分钟。
 
 :::important 重要
 请记住将新的 RKE 配置 `rancher-cluster-restore.yml` 和 Kubectl 凭据 `kube_config_rancher-cluster-restore.yml` 保存在安全的地方，以备将来维护。

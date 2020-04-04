@@ -99,7 +99,7 @@ Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和更新 TLS
    helm fetch jetstack/cert-manager --version v0.9.1
    ```
 
-1. 使用您要用于安装 chart 的选项来渲染 cert-manager 模板。记得要为您从私有镜像仓库中拉取的镜像设置`image.repository`选项。 这将创建一个带有 Kubernetes manifest 文件的`cert-manager`目录。
+1. 使用您要用于安装 chart 的选项来渲染 cert-manager 模板。记得要为您从私有镜像仓库中拉取的镜像设置`image.repository`选项。这将创建一个带有 Kubernetes manifest 文件的`cert-manager`目录。
 
    ```plain
    helm template ./cert-manager-v0.9.1.tgz --output-dir . \

@@ -57,7 +57,7 @@ Logging Driver: json-file
 
 1. 在导航栏中选择**工具>日志**。
 
-1. 选择一个日志服务，然后输入配置。有关详细的配置，请参考特定的服务。 Rancher 支持与以下日志服务集成：
+1. 选择一个日志服务，然后输入配置。有关详细的配置，请参考特定的服务。Rancher 支持与以下日志服务集成：
 
    - [Elasticsearch](/docs/cluster-admin/tools/logging/elasticsearch/_index)
    - [Splunk](/docs/cluster-admin/tools/logging/splunk/_index)
@@ -93,7 +93,7 @@ Logging Driver: json-file
 
    1. **可选：**使用**添加字段**按钮将自定义日志字段添加到您的日志中。这些字段是键值对（例如`foo = bar`），可用于区别来自另一个系统的日志。
 
-   1. 输入**刷新间隔**。 定义 [Fluentd](https://www.fluentd.org/) 将日志刷新到日志服务的频率。间隔以秒为单位。
+   1. 输入**刷新间隔**。定义 [Fluentd](https://www.fluentd.org/) 将日志刷新到日志服务的频率。间隔以秒为单位。
 
    1. **包含系统日志**。将来自系统项目和 RKE 组件中的 Pod 的日志发送到日志服务。取消选中它以排除系统日志。
 
