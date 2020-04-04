@@ -46,7 +46,7 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
 
 2. 将`nginx.conf`中的`IP_NODE_1`，`IP_NODE_2`和`IP_NODE_3`替换为您的 Linux 主机 IP 地址。
 
-   > **注意：** 此 Nginx 配置仅是示例，可能不适合您的环境。有关完整的文档，请参阅[NGINX 负载平衡-TCP 和 UDP 负载均衡器](https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/)。
+   > **注意：** 此 Nginx 配置仅是示例，可能不适合您的环境。有关完整的文档，请参阅[NGINX 负载均衡-TCP 和 UDP 负载均衡器](https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/)。
 
    **NGINX 配置示例：**
 

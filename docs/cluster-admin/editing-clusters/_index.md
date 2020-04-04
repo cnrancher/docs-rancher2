@@ -47,7 +47,7 @@ title: 设置集群
 | Kubernetes 版本      | 每个集群节点上安装的 Kubernetes 版本。更多细节，请参阅[升级 Kubernetes](/docs/cluster-admin/upgrading-kubernetes/_index).                                                                                                       |
 | 网络提供商           | 为您的集群提供联网功能的[容器联网接口](/docs/faq/networking/_index)。<br/><br/>**注意：** 您只能在配置集群时选择此选项。以后无法编辑。                                                                                          |
 | 项目网络隔离         | 从 Rancher v2.0.7 开始，如果您正在使用 Canal 网络提供商，您可以选择启用或禁用项目间通信。                                                                                                                                       |
-| Nginx Ingress        | 如果您希望以高可用性配置发布应用程序，并且您使用的是没有本地负载平衡功能的云提供商来托管节点，那么请启用此选项，以便在集群中使用 Nginx ingress。                                                                                |
+| Nginx Ingress        | 如果您希望以高可用性配置发布应用程序，并且您使用的是没有本地负载均衡功能的云提供商来托管节点，那么请启用此选项，以便在集群中使用 Nginx ingress。                                                                                |
 | 度量服务器监控       | 每个能够使用 RKE 启动集群的云提供商都可以收集指标并监视您的集群节点。启用此选项可从云提供商的门户查看您的节点指标。                                                                                                             |
 | Pod 安全政策支持     | 为集群启用[pod 安全策略](/docs/admin-settings/pod-security-policies/_index)。启用此选项后，使用 **默认 Pod 安全策略** 下拉列表选择一个策略。                                                                                    |
 | 节点上的 Docker 版本 | 配置不管节点是否允许运行 Rancher 不正式支持的 Docker 版本。如果您选择需要一个[受支持的 Docker 版本](/docs/installation/options/rke-add-on/layer-7-lb/_index)，Rancher 将停止在没有安装受支持的 Docker 版本的节点上运行 pods。   |
