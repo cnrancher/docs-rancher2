@@ -33,7 +33,7 @@ title: 克隆集群
 
         ./rancher cluster ls
 
-1.  找到要克隆的集群，然后将其资源 `ID` 或 `NAME` 复制到剪贴板。 从这一点开始，我们将资源 `ID` 或 `NAME` 称为 `<RESOURCE_ID>`，在下一步中将其用作占位符。
+1.  找到要克隆的集群，然后将其资源 `ID` 或 `NAME` 复制到剪贴板。从这一点开始，我们将资源 `ID` 或 `NAME` 称为 `<RESOURCE_ID>`，在下一步中将其用作占位符。
 
 1.  输入以下命令以导出集群的配置。
 
@@ -41,7 +41,7 @@ title: 克隆集群
 
 **步骤结果：** 克隆集群的 YAML 输出到终端。
 
-1. 将 YAML 复制到剪贴板，并将其粘贴到新文件中。 将文件另存为 `cluster-template.yml`（或其他任何名称，只要扩展名为 `.yml` 即可）。
+1. 将 YAML 复制到剪贴板，并将其粘贴到新文件中。将文件另存为 `cluster-template.yml`（或其他任何名称，只要扩展名为 `.yml` 即可）。
 
 ### 2. 修改集群配置
 
@@ -71,7 +71,7 @@ title: 克隆集群
      ignoreDockerVersion: true
    ```
 
-1. 对于每个`nodePools`部分，在 `<NODEPOOL_NAME>` 占位符处用唯一名称替换原始节点池名称。 如果克隆的集群具有重复的节点池名称，则该集群将无法成功配置。
+1. 对于每个`nodePools`部分，在 `<NODEPOOL_NAME>` 占位符处用唯一名称替换原始节点池名称。如果克隆的集群具有重复的节点池名称，则该集群将无法成功配置。
 
    ```yml
    nodePools:
@@ -89,8 +89,8 @@ title: 克隆集群
 
 ### 3. 启动克隆集群
 
-将`cluster-template.yml`移到与 Rancher CLI 二进制文件相同的目录中。 然后运行以下命令：
+将`cluster-template.yml`移到与 Rancher CLI 二进制文件相同的目录中。然后运行以下命令：
 
     ./rancher up --file cluster-template.yml
 
-**结果：**您克隆的集群开始配置。 输入`./rancher cluster ls`进行确认。 您还可以登录 Rancher UI 并打开**全局**视图以查看新创建的集群的进度。
+**结果：**您克隆的集群开始配置。输入`./rancher cluster ls`进行确认。您还可以登录 Rancher UI 并打开**全局**视图以查看新创建的集群的进度。

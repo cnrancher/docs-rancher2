@@ -59,7 +59,7 @@ title: 推荐的集群架构
 
 添加多个`worker`角色的节点，可以确保在节点出现故障时，Kubernetes 可以重新调度您的工作负载到其他工作节点。
 
-### 为什么对生产环境的 Rancher 集群和业务集群有着不通的要求？
+### 为什么对生产环境的 Rancher 集群和用户集群有着不通的要求？
 
 您可能已经注意到，我们的[Rancehr Server 高可用安装指南](/docs/installation/k8s-install/_index)并不符合我们对生产就绪集群的定义。因为没有专用的节点作为`worker`节点。但是，对于 Rancehr Server 的部署，这三个节点的集群是有效的，因为：
 

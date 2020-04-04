@@ -25,13 +25,13 @@ title: 创建凭证
 
 4. 选择 **Users and Groups** 选项卡.
 
-5. 创建一个新用户。填写表单，然后单击**OK**。 请确保记下用户名和密码，因为在 Rancher 中配置节点模板时将需要它。
+5. 创建一个新用户。填写表单，然后单击**OK**。请确保记下用户名和密码，因为在 Rancher 中配置节点模板时将需要它。
 
    ![image](/img/rancher/rancheruser.png)
 
 6. 选择 **Global Permissions** 选项卡.
 
-7. 创建一个新的全局权限。添加您先前创建的用户，并将先前创建的角色应用到该用户。 点击**OK**。
+7. 创建一个新的全局权限。添加您先前创建的用户，并将先前创建的角色应用到该用户。点击**OK**。
 
    ![image](/img/rancher/globalpermissionuser.png)
 

@@ -2,7 +2,7 @@
 title: 集群工具
 ---
 
-Rancher 包含 Kubernetes 中未包含的各种工具，可帮助您进行 DevOps 操作。 Rancher 可以与外部服务集成，以帮助您的集群更高效地运行。工具分为以下几类：
+Rancher 包含 Kubernetes 中未包含的各种工具，可帮助您进行 DevOps 操作。Rancher 可以与外部服务集成，以帮助您的集群更高效地运行。工具分为以下几类：
 
 ## 通知和告警
 

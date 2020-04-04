@@ -10,7 +10,7 @@ title: 问题排查
 
 ### nginx-ingress-controller Pods 显示 RESTARTS
 
-造成此问题的最常见原因是 `canal` pods 未能建立 overlay 网络。 参阅 [canal Pods 显示 READY `2/3`](#canal-pods-显示-ready-23) 来处理。
+造成此问题的最常见原因是 `canal` pods 未能建立 overlay 网络。参阅 [canal Pods 显示 READY `2/3`](#canal-pods-显示-ready-23) 来处理。
 
 ### 无法创建 SSH 通道到节点，不能获取 Docker 信息
 
@@ -32,7 +32,7 @@ Failed to set up SSH tunneling for host [xxx.xxx.xxx.xxx]: Can't retrieve Docker
 
 如何正确设置，参阅 [使用非 root 用户管理 Docker](https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user)。
 
-- 当使用 RedHat/CentOS 作为操作系统时，由于[Bugzilla＃1527565](https://bugzilla.redhat.com/show_bug.cgi?id=1527565)，您不能使用`root`用户来连接节点。 您将需要为访问 Docker 套接字单独配置一个用户。 参阅 [使用非 root 用户管理 Docker](https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user)。
+- 当使用 RedHat/CentOS 作为操作系统时，由于[Bugzilla＃1527565](https://bugzilla.redhat.com/show_bug.cgi?id=1527565)，您不能使用`root`用户来连接节点。您将需要为访问 Docker 套接字单独配置一个用户。参阅 [使用非 root 用户管理 Docker](https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user)。
 
 - SSH 服务器版本不是 6.7 或更高版本。这是套接字转发正常工作所必需的，套接字转发用于通过 SSH 连接到 Docker 套接字。可以使用要连接的主机上的`sshd -V`或使用 netcat 来检查:
 
@@ -47,7 +47,7 @@ Failed to set up SSH tunneling for host [xxx.xxx.xxx.xxx]: Can't retrieve Docker
 
 #### Failed to dial ssh using address [xxx.xxx.xxx.xxx:xx]: ssh: handshake failed: ssh: unable to authenticate, attempted methods [none publickey], no supported methods remain
 
-- 对于正在访问的节点，文件中指定的密钥文件 `ssh_key_path` 不正确。 仔细检查是否为节点指定了正确的`ssh_key_path`，以及是否指定了与之连接的正确用户。
+- 对于正在访问的节点，文件中指定的密钥文件 `ssh_key_path` 不正确。仔细检查是否为节点指定了正确的`ssh_key_path`，以及是否指定了与之连接的正确用户。
 
 #### Failed to dial ssh using address [xxx.xxx.xxx.xxx:xx]: Error configuring SSH: ssh: cannot decode encrypted private keys
 

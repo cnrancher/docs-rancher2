@@ -444,7 +444,7 @@ spec:
 
 #### 扩容到 4 个 Pod：CPU 使用量超过目标值
 
-使用您的负载测试工具进行压测，提升 CPU 使用率，触发 HPA 机制扩容至 4 个 Pod。 默认情况下， `horizontal-pod-autoscaler-upscale-delay` 设置为三分钟。
+使用您的负载测试工具进行压测，提升 CPU 使用率，触发 HPA 机制扩容至 4 个 Pod。默认情况下， `horizontal-pod-autoscaler-upscale-delay` 设置为三分钟。
 
 1. 输入以下命令。
 

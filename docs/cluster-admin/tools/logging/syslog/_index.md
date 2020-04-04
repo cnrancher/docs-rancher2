@@ -12,11 +12,11 @@ title: Syslog
 
 1. 在**访问地址**字段中，输入 Syslog 服务器的 IP 地址和端口。此外，在下拉列表中，选择 Syslog 服务器使用的协议。
 
-1. 在**程序名**字段中，输入将日志发送到 Syslog 服务器的应用程序的名称，例如 `Rancher`.
+1. 在**程序名**字段中，输入将日志发送到 Syslog 服务器的应用程序的名称，例如 `Rancher`。
 
 1. 如果您使用的是云日志记录服务，例如：[Sumologic](https://www.sumologic.com/), 输入一个与您的 Syslog 服务器进行身份验证的**Token**。您将需要在云日志记录服务中创建此 Token。
 
-1. 为发送到 Syslog 服务器的日志选择 **Log Severity**。 有关每个严重性级别的更多信息，请参见 [Syslog 协议文档](https://tools.ietf.org/html/rfc5424#page-11).
+1. 为发送到 Syslog 服务器的日志选择 **Log Severity**。有关每个严重性级别的更多信息，请参见 [Syslog 协议文档](https://tools.ietf.org/html/rfc5424#page-11)。
 
 ### Encryption 配置
 

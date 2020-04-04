@@ -36,7 +36,7 @@ kernel.keys.root_maxbytes=25000000
 
 ## 配置`etcd`用户和组
 
-在安装 RKE 之前，需要设置**etcd**服务的用户帐户和组。 **etcd**用户的**uid**和**gid**将在 RKE 的**config.yml**中使用，以在安装期间为文件和目录设置适当的权限。
+在安装 RKE 之前，需要设置**etcd**服务的用户帐户和组。**etcd**用户的**uid**和**gid**将在 RKE 的**config.yml**中使用，以在安装期间为文件和目录设置适当的权限。
 
 ### 创建`etcd`用户和组
 

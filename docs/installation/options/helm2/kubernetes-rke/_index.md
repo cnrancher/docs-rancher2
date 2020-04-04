@@ -8,9 +8,9 @@ title: 安装 Kubernetes
 
 ## 创建 `rancher-cluster.yml` 文件
 
-使用以下示例创建 `rancher-cluster.yml` 文件。 将`节点`列表中的 IP 地址替换为您创建的 3 个节点的 IP 地址或 DNS 名称。
+使用以下示例创建 `rancher-cluster.yml` 文件。将`节点`列表中的 IP 地址替换为您创建的 3 个节点的 IP 地址或 DNS 名称。
 
-> **注意事项:** 如果您的节点具有公共和内部地址，建议设置`internal_address:`，以便 Kubernetes 将其用于集群内部通信。 如果使用自身安全组或防火墙，则某些服务例如 AWS EC2 需要设置 `internal_address:`。
+> **注意事项:** 如果您的节点具有公共和内部地址，建议设置`internal_address:`，以便 Kubernetes 将其用于集群内部通信。如果使用自身安全组或防火墙，则某些服务例如 AWS EC2 需要设置 `internal_address:`。
 
 ```yaml
 nodes:
@@ -89,7 +89,7 @@ NAME                          STATUS    ROLES                      AGE       VER
 
 - Pods 是 `Running` 或者 `Completed` 状态。
 - `READY` 列显示 Pod 中 `STATUS` 列是 `Running` 状态容器的数量。
-- Pods 的 `STATUS` 字段是 `Completed` 代表运行一次的任务。 这些 Pods 的 `READY`列应该是 `0/1`。
+- Pods 的 `STATUS` 字段是 `Completed` 代表运行一次的任务。这些 Pods 的 `READY`列应该是 `0/1`。
 
 ```
 kubectl get pods --all-namespaces

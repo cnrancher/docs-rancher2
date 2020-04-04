@@ -1,208 +1,180 @@
 ---
-title: 业务集群节点要求
+title: 用户集群节点要求
 ---
 
-This page describes the requirements for the nodes where your apps and services will be installed.
+本页描述了安装您的应用和服务所在节点的要求。
 
-In this section, "user cluster" refers to a cluster running your apps, which should be separate from the cluster (or single node) running Rancher.
+在本章节，`用户集群` 是指运行您的应用程序的集群，它应该与运行 Rancher Server 的集群（或单个节点）分开。
 
-> If Rancher is installed on a high-availability Kubernetes cluster, the Rancher server cluster and user clusters have different requirements. For Rancher installation requirements, refer to the node requirements in the [installation section.](/docs/installation/requirements/)
+> 如果 Rancher 安装在 Kubernetes 集群上，Rancher Server 集群和用户集群有不同的要求。有关 Rancher Server 安装要求，请参阅[高可用安装要求](/docs/installation/requirements/_index)。
 
-Make sure the nodes for the Rancher server fulfill the following requirements:
+请确保 Rancher Server 的节点满足以下要求。
 
-* [Operating systems and Docker requirements](#operating-systems-and-docker-requirements)
-* [Hardware Requirements](#hardware-requirements)
-* [Networking Requirements](#networking-requirements)
-* [Optional: Security Considerations](#optional-security-considerations)
+## 操作系统和 Docker 要求
 
-## Operating Systems and Docker Requirements
+Rancher 理论上可以任何通用的 Linux 发行版和任何通用的 Docker 版本一起工作。所有下游集群的 etcd 和 controlplane 节点都需要运行在 Linux 上。Worker 节点可以运行在 Linux 或 Windows 上。在 Rancher v2.3.0 中添加了在下游集群中使用 Windows Worker 节点的功能。
 
-Rancher should work with any modern Linux distribution and any modern Docker version. Linux is required for the etcd and controlplane nodes of all downstream clusters. Worker nodes may run Linux or [Windows Server.](#requirements-for-windows-nodes) The capability to use Windows worker nodes in downstream clusters was added in Rancher v2.3.0.
+Rancher 已经过测试，并官方支持在 Ubuntu，CentOS，Oracle Linux，RancherOS 和 RedHat Enterprise Linux 上运行下游集群。关于每个 Rancher 版本所测试过的操作系统和 Docker 版本的详细信息，请参阅[支持维护条款](https://rancher.com/support-maintenance-terms/)。
 
-Rancher works has been tested and is supported with downstream clusters running Ubuntu, CentOS, Oracle Linux, RancherOS, and RedHat Enterprise Linux. For details on which OS and Docker versions were tested with each Rancher version, refer to the [support maintenance terms.](https://rancher.com/support-maintenance-terms/)
+所有受支持的操作系统都是 64-bit x86 系统。
 
-All supported operating systems are 64-bit x86.
+如果您计划使用 ARM64，请参阅[在 ARM64 上运行（实验性）](/docs/installation/options/arm64-platform/_index)。
 
-If you plan to use ARM64, see [Running on ARM64 (Experimental).](/docs/installation/options/arm64-platform/)
+有关如何安装 Docker 的信息，请参阅官方[Docker 文档](https://docs.docker.com/)。
 
-For information on how to install Docker, refer to the official [Docker documentation.](https://docs.docker.com/)
+一些 RHEL 派生的 Linux 发行版，可能有默认的防火墙规则。这些规则可能会屏蔽掉 Helm 的通信。这个[操作指南](/docs/installation/options/firewall/_index)展示了如何检查 Oracle Linux 的默认防火墙规则，以及在必要时如何使用`firewalld`开放端口。
 
-Some distributions of Linux derived from RHEL, including Oracle Linux, may have default firewall rules that block communication with Helm. This [how-to guide](/docs/installation/options/firewall) shows how to check the default firewall rules and how to open the ports with `firewalld` if necessary.
+SUSE Linux 可能有默认阻止所有端口的防火墙。在这种情况下，请按照[以下步骤](#开放-suse-linux-端口)，开放将添加到自定义集群的主机的端口。
 
-SUSE Linux may have a firewall that blocks all ports by default. In that situation, follow [these steps](#opening-suse-linux-ports) to open the ports needed for adding a host to a custom cluster.
+### Windows 节点要求
 
-#### Requirements for Windows Nodes
+_Rancher v2.3.0 可以使用 Windows Worker 节点_
 
-_Windows worker nodes can be used as of Rancher v2.3.0_
+Windows Server 的节点必须使用 Docker 企业版。这是 Kubernetes 的限制。
 
-Nodes with Windows Server must run Docker Enterprise Edition.
+Windows 节点只能用于工作节点。详情请参阅[配置自定义 Windows 集群](/docs/cluster-provisioning/rke-clusters/windows-clusters/_index)。
 
-Windows nodes can be used for worker nodes only. See [Configuring Custom Clusters for Windows](/docs/cluster-provisioning/rke-clusters/windows-clusters/)
+## 硬件要求
 
-## Hardware Requirements
+具有`worker`角色的节点的硬件要求主要取决于您的工作负载。运行 Kubernetes 节点组件的最小值是 1 个 CPU（核心）和 1GB 内存。
 
-The hardware requirements for nodes with the `worker` role mostly depend on your workloads. The minimum to run the Kubernetes node components is 1 CPU (core) and 1GB of memory.
+关于 CPU 和内存，建议将不同平面的 Kubernetes 集群组件（etcd、controlplane 和 worker）托管在不同的节点上，以便它们可以彼此分开扩展。
 
-Regarding CPU and memory, it is recommended that the different planes of Kubernetes clusters (etcd, controlplane, and workers) should be hosted on different nodes so that they can scale separately from each other.
+有关大型 Kubernetes 集群的硬件建议，请参阅关于[构建大型集群](https://kubernetes.io/docs/setup/best-practices/cluster-large/)的官方 Kubernetes 文档。
 
-For hardware recommendations for large Kubernetes clusters, refer to the official Kubernetes documentation on [building large clusters.](https://kubernetes.io/docs/setup/best-practices/cluster-large/)
+有关生产中 etcd 集群的硬件建议，请参阅官方[etcd 文档](https://etcd.io/docs/v3.4.0/op-guide/hardware/)。
 
-For hardware recommendations for etcd clusters in production, refer to the official [etcd documentation.](https://etcd.io/docs/v3.4.0/op-guide/hardware/)
+## 网络要求
 
-## Networking Requirements
+对于生产集群，我们建议您仅开放下文端口要求中定义的端口来限制流量。
 
-For a production cluster, we recommend that you restrict traffic by opening only the ports defined in the port requirements below.
+需要开放的端口根据用户集群的启动方式而有所不同。下面的每个部分列出了在不同的[集群创建选项](/docs/cluster-provisioning/_index)下需要开放的端口。
 
-The ports required to be open are different depending on how the user cluster is launched. Each of the sections below list the ports that need to be opened for different [cluster creation options](/docs/cluster-provisioning/#cluster-creation-options).
+有关 kubernetes 集群中 etcd 节点、controlplane 节点和 worker 节点的端口要求的详细信息，请参阅 [Rancher Kubernetes Engine 的端口要求](https://rancher.com/docs/rke/latest/en/os/#ports)。
 
-For a breakdown of the port requirements for etcd nodes, controlplane nodes, and worker nodes in a Kubernetes cluster, refer to the [port requirements for the Rancher Kubernetes Engine.]({{<baseurl>}}/rke/latest/en/os/#ports)
+有关在每种情况下使用哪些端口的详细信息，请参阅以下章节。
 
-Details on which ports are used in each situation are found in the following sections:
+### 常用端口
 
-* [Commonly used ports](#commonly-used-ports)
-* [Port requirements for custom clusters](#port-requirements-for-custom-clusters)
-* [Port requirements for clusters hosted by an infrastructure provider](#port-requirements-for-clusters-hosted-by-an-infrastructure-provider)
-  + [Security group for nodes on AWS EC2](#security-group-for-nodes-on-aws-ec2)
-* [Port requirements for clusters hosted by a Kubernetes provider](#port-requirements-for-clusters-hosted-by-a-kubernetes-provider)
-* [Port requirements for imported clusters](#port-requirements-for-imported-clusters)
-* [Port requirements for local traffic](#port-requirements-for-local-traffic)
+如果安全性不是一个大问题，并且您可以开放一些额外的端口，则可以使用此表作为端口参考，而不是后续部分中的综合表。
 
-#### Commonly Used Ports
+这些端口通常在 Kubernetes 节点上是开放的，无论它是什么类型的集群。
 
-If security isn't a large concern and you're okay with opening a few additional ports, you can use this table as your port reference instead of the comprehensive tables in the following sections.
+<figcaption>常用端口参考</figcaption>
 
-These ports are typically opened on your Kubernetes nodes, regardless of what type of cluster it is.
+|  协议   |    端口     | 描述                                        |
+| :-----: | :---------: | ------------------------------------------- |
+|   TCP   |     22      | 节点驱动程序 SSH 设置                       |
+|   TCP   |    2376     | 节点驱动程序 Docker 守护进程 TLS 端口       |
+|   TCP   |    2379     | etcd 客户端请求                             |
+|   TCP   |    2380     | etcd 对等通信                               |
+|   UDP   |    8472     | Canal/Flannel VXLAN overlay 网络            |
+|   UDP   |    4789     | windows 集群上的 Flannel VXLAN overlay 网络 |
+|   TCP   |    9099     | Canal/Flannel 健康检查                      |
+|   TCP   |    6783     | Weave 端口                                  |
+|   UDP   |  6783-6784  | Weave UDP 端口                              |
+|   TCP   |    10250    | kubelet API                                 |
+|   TCP   |    10254    | Ingress controller 健康检查                 |
+| TCP/UDP | 30000-32767 | NodePort 端口范围                           |
 
- accordion id="common-ports" label="Click to Expand" 
+### 自定义集群的端口要求
 
-<figcaption>Commonly Used Ports Reference</figcaption>
+如果您要在现有的云服务商上启动 Kubernetes 集群，请参阅这些端口要求。
 
-| Protocol |    Port     | Description                                         |
-| :------: | :---------: | --------------------------------------------------- |
-|   TCP    |     22      | Node driver SSH provisioning                        |
-|   TCP    |    2376     | Node driver Docker daemon TLS port                  |
-|   TCP    |    2379     | etcd client requests                                |
-|   TCP    |    2380     | etcd peer communication                             |
-|   UDP    |    8472     | Canal/Flannel VXLAN overlay networking              |
-|   UDP    |    4789     | Flannel VXLAN overlay networking on Windows cluster |
-|   TCP    |    9099     | Canal/Flannel livenessProbe/readinessProbe          |
-|   TCP    |    6783     | Weave Port                                          |
-|   UDP    |  6783-6784  | Weave UDP Ports                                     |
-|   TCP    |    10250    | kubelet API                                         |
-|   TCP    |    10254    | Ingress controller livenessProbe/readinessProbe     |
-| TCP/UDP  | 30000-32767 | NodePort port range                                 |
+下表描述了[RKE 集群](/docs/cluster-provisioning/rke-clusters/_index)与[自定义节点](/docs/cluster-provisioning/rke-clusters/custom-nodes/_index)的端口要求。
 
- /accordion 
+import PortsCustomNodes from '@theme/PortsCustomNodes';
 
-#### Port Requirements for Custom Clusters
+<PortsCustomNodes/>
 
-If you are launching a Kubernetes cluster on your existing infrastructure, refer to these port requirements.
+### 集群节点托管在云服务商的端口要求
 
- accordion id="port-reqs-for-custom-clusters" label="Click to Expand" 
+如果您要在云服务商（如 Amazon EC2、Google Container Engine、DigitalOcean、Azure 或 vSphere）中的节点上启动 Kubernetes 集群，请应用这些端口要求。
 
-The following table depicts the port requirements for [Rancher Launched Kubernetes](/docs/cluster-provisioning/rke-clusters/) with [custom nodes](/docs/cluster-provisioning/rke-clusters/custom-nodes/).
+在使用云服务商创建集群期间，Rancher 会自动开放这些必需的端口。
 
-{{< ports-custom-nodes >}}
+下表描述了[RKE 集群](/docs/cluster-provisioning/rke-clusters/_index)在[云服务商](/docs/cluster-provisioning/rke-clusters/node-pools/_index)创建节点的端口要求。
 
- /accordion 
+> **注意：**
+> 在 Amazon EC2 或 DigitalOcean 等云服务商创建集群期间，Rancher 会自动开放所需的端口。
 
-#### Port Requirements for Clusters Hosted by an Infrastructure Provider
+import PortsIaasNodes from '@theme/PortsIaasNodes';
 
-If you are launching a Kubernetes cluster on nodes that are in an infrastructure provider such as Amazon EC2, Google Container Engine, DigitalOcean, Azure, or vSphere, these port requirements apply.
+<PortsIaasNodes/>
 
-These required ports are automatically opened by Rancher during creation of clusters using cloud providers.
+#### AWS EC2 上节点的安全组
 
- accordion id="port-reqs-for-infrastructure-providers" label="Click to Expand" 
+在使用 [AWS EC2 主机驱动](/docs/cluster-provisioning/rke-clusters/node-pools/ec2/_index)在 Rancher 中配置集群节点时，您可以选择让 Rancher 创建一个名为 rancher-nodes 的安全组。以下规则将自动添加到此安全组。
 
-The following table depicts the port requirements for [Rancher Launched Kubernetes](/docs/cluster-provisioning/rke-clusters/) with nodes created in an [Infrastructure Provider](/docs/cluster-provisioning/rke-clusters/node-pools/).
+| 类型            | 协议 |  端口范围   | 源/目的                | 规则类型 |
+| --------------- | :--: | :---------: | ---------------------- | :------: |
+| SSH             | TCP  |     22      | 0.0.0.0/0              |   入站   |
+| HTTP            | TCP  |     80      | 0.0.0.0/0              |   入站   |
+| 自定义 TCP 规则 | TCP  |     443     | 0.0.0.0/0              |   入站   |
+| 自定义 TCP 规则 | TCP  |    2376     | 0.0.0.0/0              |   入站   |
+| 自定义 TCP 规则 | TCP  |  2379-2380  | sg-xxx (rancher-nodes) |   入站   |
+| 自定义 UDP 规则 | UDP  |    4789     | sg-xxx (rancher-nodes) |   入站   |
+| 自定义 TCP 规则 | TCP  |    6443     | 0.0.0.0/0              |   入站   |
+| 自定义 UDP 规则 | UDP  |    8472     | sg-xxx (rancher-nodes) |   入站   |
+| 自定义 TCP 规则 | TCP  | 10250-10252 | sg-xxx (rancher-nodes) |   入站   |
+| 自定义 TCP 规则 | TCP  |    10256    | sg-xxx (rancher-nodes) |   入站   |
+| 自定义 TCP 规则 | TCP  | 30000-32767 | 0.0.0.0/0              |   入站   |
+| 自定义 UDP 规则 | UDP  | 30000-32767 | 0.0.0.0/0              |   入站   |
+| 全部流量        | All  |     All     | 0.0.0.0/0              |   出站   |
 
-> **Note:**
-> The required ports are automatically opened by Rancher during creation of clusters in cloud providers like Amazon EC2 or DigitalOcean.
+### 托管 Kubernetes 集群的端口要求
 
-{{< ports-iaas-nodes >}}
+如果您使用服务商托管的 Kubernetes（如 Google Kubernetes Engine、Amazon 或 Azure Kubernetes 服务）启动集群，请参阅这些端口要求。
 
- /accordion 
+下表描述了[托管的 Kubernetes 集群](/docs/cluster-provisioning/hosted-kubernetes-clusters/_index)中节点的端口要求。
 
-##### Security Group for Nodes on AWS EC2
+import PortsImportedHosted from '@theme/PortsImportedHosted';
 
-When using the [AWS EC2 node driver](/docs/cluster-provisioning/rke-clusters/node-pools/ec2/) to provision cluster nodes in Rancher, you can choose to let Rancher create a security group called `rancher-nodes` . The following rules are automatically added to this security group.
+<PortsImportedHosted/>
 
-| Type            | Protocol | Port Range  | Source/Destination     | Rule Type |
-| --------------- | :------: | :---------: | ---------------------- | :-------: |
-| SSH             |   TCP    |     22      | 0.0.0.0/0              |  Inbound  |
-| HTTP            |   TCP    |     80      | 0.0.0.0/0              |  Inbound  |
-| Custom TCP Rule |   TCP    |     443     | 0.0.0.0/0              |  Inbound  |
-| Custom TCP Rule |   TCP    |    2376     | 0.0.0.0/0              |  Inbound  |
-| Custom TCP Rule |   TCP    |  2379-2380  | sg-xxx (rancher-nodes) |  Inbound  |
-| Custom UDP Rule |   UDP    |    4789     | sg-xxx (rancher-nodes) |  Inbound  |
-| Custom TCP Rule |   TCP    |    6443     | 0.0.0.0/0              |  Inbound  |
-| Custom UDP Rule |   UDP    |    8472     | sg-xxx (rancher-nodes) |  Inbound  |
-| Custom TCP Rule |   TCP    | 10250-10252 | sg-xxx (rancher-nodes) |  Inbound  |
-| Custom TCP Rule |   TCP    |    10256    | sg-xxx (rancher-nodes) |  Inbound  |
-| Custom TCP Rule |   TCP    | 30000-32767 | 0.0.0.0/0              |  Inbound  |
-| Custom UDP Rule |   UDP    | 30000-32767 | 0.0.0.0/0              |  Inbound  |
-| All traffic     |   All    |     All     | 0.0.0.0/0              | Outbound  |
+### 导入集群的端口要求
 
-#### Port Requirements for Clusters Hosted by a Kubernetes Provider
+如果要导入现有集群，请参阅这些端口要求。
 
-If you are launching a cluster with a hosted Kubernetes provider such as Google Kubernetes Engine, Amazon EKS, or Azure Kubernetes Service, refer to these port requirements.
+下表描述了[导入集群](/docs/cluster-provisioning/import-clusters/_index)的端口要求。
 
- accordion id="port-reqs-for-hosted-kubernetes" label="Click to Expand" 
+<PortsImportedHosted/>
 
-The following table depicts the port requirements for nodes in [hosted Kubernetes clusters](/docs/cluster-provisioning/hosted-kubernetes-clusters).
+### 本地流量的端口要求
 
-{{< ports-imported-hosted >}}
+在端口要求中标记为 `local traffic`（例如：`9099 TCP`）的端口用于 Kubernetes 运行健康检查`livenessProbe`和`readinessprobe`）。
+这些健康检查在自身节点上执行。在大多数云环境中，默认情况下允许此本地流量。
 
- /accordion 
+但是，在以下情况下，此流量可能会被阻止：
 
-#### Port Requirements for Imported Clusters
+- 您已在节点上应用了严格的主机防火墙策略。
+- 您正在使用具有多个接口（多宿主）的节点。
 
-If you are importing an existing cluster, refer to these port requirements.
+在这些情况下，您必须在您的主机防火墙中明确允许此流量，或者在机器托管在公共/私有云（例如：AWS 或 OpenStack）的情况下，在您的安全组配置中明确允许此流量。请记住，在安全组中设置源或目标时，显式打开端口仅适用于节点/实例的私有接口。
 
- accordion id="port-reqs-for-imported-clusters" label="Click to Expand" 
+## 可选：安全注意事项
 
-The following table depicts the port requirements for [imported clusters](/docs/cluster-provisioning/imported-clusters/).
+如果您想要配置符合 CIS（Center for Internet Security）Kubernetes 基准的 Kubernetes 集群，我们建议您在安装 Kubernetes 之前，遵循我们的安全加固指南来配置您的节点。
 
-{{< ports-imported-hosted >}}
+有关安全加固指南的更多信息以及指南的哪个版本与您的 Rancher 和 Kubernetes 版本对应的详细信息，请参阅[安全说明](/docs/security/_index)。
 
- /accordion 
+## 开放 SUSE Linux 端口
 
-#### Port Requirements for Local Traffic
+SUSE Linux 可能具有默认情况下阻止所有端口的防火墙。要开放中集群所需的主机端口。
 
-Ports marked as `local traffic` (i.e., `9099 TCP` ) in the port requirements are used for Kubernetes healthchecks ( `livenessProbe` and `readinessProbe` ).
-These healthchecks are executed on the node itself. In most cloud environments, this local traffic is allowed by default.
+1. SSH 进入实例。
+2. 编辑/`etc/sysconfig/SuSEfirewall2`并开放所需的端口。在此示例中，还开放了端口 9796 和 10250 以进行监视：
 
-However, this traffic may be blocked when:
+   ```
+   FW_SERVICES_EXT_TCP="22 80 443 2376 2379 2380 6443 9099 9796 10250 10254 30000:32767"
+   FW_SERVICES_EXT_UDP="8472 30000:32767"
+   FW_ROUTE=yes
+   ```
 
-* You have applied strict host firewall policies on the node.
-* You are using nodes that have multiple interfaces (multihomed).
+3. 使用新端口重启防火墙:
 
-In these cases, you have to explicitly allow this traffic in your host firewall, or in case of public/private cloud hosted machines (i.e. AWS or OpenStack), in your security group configuration. Keep in mind that when using a security group as source or destination in your security group, explicitly opening ports only applies to the private interface of the nodes/instances.
+   ```
+   SuSEfirewall2
+   ```
 
-## Optional: Security Considerations
-
-If you want to provision a Kubernetes cluster that is compliant with the CIS (Center for Internet Security) Kubernetes Benchmark, we recommend to following our hardening guide to configure your nodes before installing Kubernetes.
-
-For more information on the hardening guide and details on which version of the guide corresponds to your Rancher and Kubernetes versions, refer to the [security section.](/docs/security/#rancher-hardening-guide)
-
-## Opening SUSE Linux Ports
-
-SUSE Linux may have a firewall that blocks all ports by default. To open the ports needed for adding the host to a custom cluster, 
-
-1. SSH into the instance.
-1. Edit / `etc/sysconfig/SuSEfirewall2` and open the required ports. In this example, ports 9796 and 10250 are also opened for monitoring:
-
-``` 
-FW_SERVICES_EXT_TCP="22 80 443 2376 2379 2380 6443 9099 9796 10250 10254 30000:32767"
-FW_SERVICES_EXT_UDP="8472 30000:32767"
-FW_ROUTE=yes
-```
-
-1. Restart the firewall with the new ports:
-
-``` 
-SuSEfirewall2
-```
-
-**Result:** The node has the open ports required to be added to a custom cluster.
-
+**结果：** 节点添加到自定义集群所需的节点端口已打开。

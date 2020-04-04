@@ -10,7 +10,7 @@ Rancher CLI(命令行界面)是一个命令行工具，可用于与 Rancher 进�
 
 ## 要求
 
-下载 Rancher CLI 后，需要进行一些配置。 Rancher CLI 需要：
+下载 Rancher CLI 后，需要进行一些配置。Rancher CLI 需要：
 
 - 您的[Rancher Server URL](/docs/admin-settings/_index)，用于连接到 Rancher Server。
 - API Bearer Token，用于与 Rancher 进行身份验证。有关获取 Bearer Token 的更多信息，请参见[创建 API 密钥](/docs/user-settings/api-keys/_index)。

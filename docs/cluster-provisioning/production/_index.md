@@ -2,9 +2,9 @@
 title: 生产就绪集群检查清单
 ---
 
-在本节中，我们将介绍如何创建可用于生产的 Kubernetes 业务集群。这个集群将用来运行您的应用程序和服务。
+在本节中，我们将介绍如何创建可用于生产的 Kubernetes 用户集群。这个集群将用来运行您的应用程序和服务。
 
-关于对创建业务集群的节点的要求，例如操作系统/Docker、硬件和网络的需求，请参考[节点需求](/docs/cluster-provisioning/node-requirements/_index)。
+关于对创建用户集群的节点的要求，例如操作系统/Docker、硬件和网络的需求，请参考[节点需求](/docs/cluster-provisioning/node-requirements/_index)。
 
 :::important 重要
 这里是最重要的一些最佳实践，我们强烈建议将这些最佳实践应用于全部的生产集群。

@@ -1,59 +1,52 @@
 ---
-title: 配置 Cloud Providers
+title: 配置 Cloud Provider
 ---
 
-A _cloud provider_ is a module in Kubernetes that provides an interface for managing nodes, load balancers, and networking routes. For more information, refer to the [official Kubernetes documentation on cloud providers.](https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/)
+_Cloud Provider_ 是 Kubernetes 中的一个模块，它提供了一个用于管理节点、负载均衡和网络路由的接口。有关更多信息，请参阅[关于 Cloud Provider 的官方 Kubernetes 文档](https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/)。
 
-When a cloud provider is set up in Rancher, the Rancher server can automatically provision new nodes, load balancers or persistent storage devices when launching Kubernetes definitions, if the cloud provider you're using supports such automation.
+当在 Rancher 中设置 Cloud Provider 时，如果您使用的 Cloud Provider 支持这种自动化，Rancher Server 可以在启动 Kubernetes 定义时自动配置新的节点，负载均衡器或持久存储设备。
 
-* [Cloud provider options](#cloud-provider-options)
-* [Setting up the Amazon cloud provider](#setting-up-the-amazon-cloud-provider)
-* [Setting up the Azure cloud provider](#setting-up-the-azure-cloud-provider)
+## Cloud Provider 选项
 
-### Cloud Provider Options
+默认情况下，**Cloud Provider** 选项设置为“无”。支持的 Cloud Provider 包括:
 
-By default, the **Cloud Provider** option is set to `None` . Supported cloud providers are:
+- Amazon
+- Azure
 
-* [Amazon](#setting-up-the-amazon-cloud-provider)
-* [Azure](#setting-up-the-azure-cloud-provider)
+`自定义` Cloud Provider 可以用来配置任意的 [Kubernetes Cloud Provider](https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/)。
 
-The `Custom` cloud provider is available if you want to configure any [Kubernetes cloud provider](https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/).
+对于自定义 Cloud Provider 选项，您可以参考 [RKE 文档](https://rancher.com/docs/rke/latest/en/config-options/cloud-providers/)关于如何为您的特定 Cloud Provider 编辑 yaml 文件。有一些特定的 Cloud Provider 具有更详细的配置文档：
 
-For the custom cloud provider option, you can refer to the [RKE docs]({{<baseurl>}}/rke/latest/en/config-options/cloud-providers/) on how to edit the yaml file for your specific cloud provider. There are specific cloud providers that have more detailed configuration :
+- [vSphere](https://rancher.com/docs/rke/latest/en/config-options/cloud-providers/vsphere/)
+- [Openstack](https://rancher.com/docs/rke/latest/en/config-options/cloud-providers/openstack/)
 
-* [vSphere]({{<baseurl>}}/rke/latest/en/config-options/cloud-providers/vsphere/)
-* [Openstack]({{<baseurl>}}/rke/latest/en/config-options/cloud-providers/openstack/)
+> **警告：** 如果您配置了不符合先决条件的节点的 Cloud Provider 集群，则集群将无法正确配置。下面列出了支持的 Cloud Provider 的先决条件。
 
-> **Warning:** Your cluster will not provision correctly if you configure a cloud provider cluster of nodes that do not meet the prerequisites. Prerequisites for supported cloud providers are listed below.
+## 设置 Amazon Cloud Provider
 
-### Setting up the Amazon Cloud Provider
+使用`Amazon`Cloud Provider 时，您可以使用以下功能:
 
-When using the `Amazon` cloud provider, you can leverage the following capabilities:
+- **负载均衡：** 在**端口映射**中选择`4 层负载均衡`时或在启动带有`type: LoadBalancer`的`Service`时，自动启动 AWS Elastic Load Balancer(ELB)。
+- **持久卷：** 允许您将 AWS Elastic Block Store(EBS) 用于持久卷。
 
-* **Load Balancers:** Launches an AWS Elastic Load Balancer (ELB) when choosing `Layer-4 Load Balancer` in **Port Mapping** or when launching a `Service` with `type: LoadBalancer` .
-* **Persistent Volumes**: Allows you to use AWS Elastic Block Stores (EBS) for persistent volumes.
+请参阅[Cloud Provider AWS 自述文档](https://github.com/kubernetes/cloud-provider-aws/blob/master/README.md)获取有关 Amazon Cloud Provider 的所有信息。
 
-See [cloud-provider-aws README](https://github.com/kubernetes/cloud-provider-aws/blob/master/README.md) for all information regarding the Amazon cloud provider.
+设置 Amazon Cloud Provider。
 
-To set up the Amazon cloud provider, 
+### 创建 IAM 角色并附加到实例
 
-1. [Create an IAM role and attach to the instances](#1-create-an-iam-role-and-attach-to-the-instances)
-2. [Configure the ClusterID](#2-configure-the-clusterid)
+添加到集群的所有节点必须能够与 EC2 交互，以便它们可以创建和删除资源。您可以使用附加到实例的 IAM 角色来启用此交互。请参阅[Amazon 文档：创建 IAM Role](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#create-iam-role)了解如何创建 IAM 角色。有两个示例策略：
 
-#### 1. Create an IAM Role and attach to the instances
+- 第一个策略是针对具有`controlplane`角色的节点。这些节点必须能够创建/删除 EC2 资源。下面的 IAM 策略是一个例子，请在例子中删除任何不需要的权限。
+- 第二个策略是针对具有`etcd`或`worker`角色的节点。这些节点只需要能够从 EC2 检索信息。
 
-All nodes added to the cluster must be able to interact with EC2 so that they can create and remove resources. You can enable this interaction by using an IAM role attached to the instance. See [Amazon documentation: Creating an IAM Role](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#create-iam-role) how to create an IAM role. There are two example policies:
+创建 [Amazon EC2 集群](/docs/cluster-provisioning/rke-clusters/node-pools/ec2/_index)时，必须在创建**节点模板**时填写创建的 IAM 角色的**Iam 实例配置文件名称**（而不是 ARN）。
 
-* The first policy is for the nodes with the `controlplane` role. These nodes have to be able to create/remove EC2 resources. The following IAM policy is an example, please remove any unneeded permissions for your use case.
-* The second policy is for the nodes with the `etcd` or `worker` role. These nodes only have to be able to retrieve information from EC2.
+创建[自定义集群](/docs/cluster-provisioning/custom-clusters/_index)时，必须手动将 IAM 角色附加到实例。
 
-While creating an [Amazon EC2 cluster](/docs/cluster-provisioning/rke-clusters/node-pools/ec2/#create-the-amazon-ec2-cluster), you must fill in the **IAM Instance Profile Name** (not ARN) of the created IAM role when creating the **Node Template**.
+具有`controlplane`角色的节点的 IAM 策略:
 
-While creating a [Custom cluster](/docs/cluster-provisioning/custom-clusters/), you must manually attach the IAM role to the instance(s).
-
-IAM Policy for nodes with the `controlplane` role:
-
-``` json
+```json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -121,9 +114,9 @@ IAM Policy for nodes with the `controlplane` role:
 }
 ```
 
-IAM policy for nodes with the `etcd` or `worker` role:
+具有`etcd`或`worker`角色的节点的 IAM 策略:
 
-``` json
+```json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -146,97 +139,93 @@ IAM policy for nodes with the `etcd` or `worker` role:
 }
 ```
 
-#### 2. Configure the ClusterID
+### 配置 ClusterID
 
-The following resources need to tagged with a `ClusterID` :
+以下资源需要标记上`ClusterID`:
 
-* **Nodes**: All hosts added in Rancher.
-* **Subnet**: The subnet used for your cluster.
-* **Security Group**: The security group used for your cluster.
+- **节点**：在 Rancher 中添加的所有主机。
+- **子网**：用于集群的子网
+- **安全组**：用于集群的安全组。
 
-> **Note:** Do not tag multiple security groups. Tagging multiple groups generates an error when creating an Elastic Load Balancer (ELB).
+  > **注意：** 不要标记多个安全组。创建弹性负载均衡器时，标记多个组会产生错误。
 
-When you create an [Amazon EC2 Cluster](/docs/cluster-provisioning/rke-clusters/node-pools/ec2/#create-the-amazon-ec2-cluster), the `ClusterID` is automatically configured for the created nodes. Other resources still need to be tagged manually.
+应该使用的标签是:
 
-Use the following tag:
+```
+Key=kubernetes.io/cluster/<CLUSTERID>, Value=owned
+```
 
-**Key** = `kubernetes.io/cluster/CLUSTERID` **Value** = `owned` 
+`<CLUSTERID>`可以是你选择的任何字符串。但是，必须在您标记的每个资源上使用相同的字符串。将标记值设置为`owned`会通知集群，使用`<CLUSTERID>`标记的所有资源都由该集群拥有和管理。
 
-`CLUSTERID` can be any string you like, as long as it is equal across all tags set.
+如果在集群之间共享资源，则可以将标记更改为:
 
-Setting the value of the tag to `owned` tells the cluster that all resources with this tag are owned and managed by this cluster. If you share resources between clusters, you can change the tag to:
+```
+Key=kubernetes.io/cluster/CLUSTERID, Value=shared
+```
 
-**Key** = `kubernetes.io/cluster/CLUSTERID` **Value** = `shared` .
+### 使用 Amazon Elastic Container Registry (ECR)
 
-#### Using Amazon Elastic Container Registry (ECR)
+将上面提到的 IAM 配置文件附加到实例时，kubelet 组件能够自动获取 ECR 凭据。当使用早于 v1.15.0 的 Kubernetes 版本时，需要在集群中配置 Amazon Cloud Provider。从 Kubernetes 版本 v1.15.0 开始，kubelet 可以自动获取 ECR 凭据，而无需在集群中配置 Amazon Cloud Provider。
 
-The kubelet component has the ability to automatically obtain ECR credentials, when the IAM profile mentioned in [Create an IAM Role and attach to the instances](#1-create-an-iam-role-and-attach-to-the-instances) is attached to the instance(s). When using a Kubernetes version older than v1.15.0, the Amazon cloud provider needs be configured in the cluster. Starting with Kubernetes version v1.15.0, the kubelet can obtain ECR credentials without having the Amazon cloud provider configured in the cluster.
+## 设置 Azure Cloud Provider
 
-### Setting up the Azure Cloud Provider
+使用 "Azure" Cloud Provider 时，您可以使用以下功能:
 
-When using the `Azure` cloud provider, you can leverage the following capabilities:
+- **负载均衡：** 在特定网络安全组中启动 Azure 负载均衡器。
 
-* **Load Balancers:** Launches an Azure Load Balancer within a specific Network Security Group.
+- **持久卷：** 支持使用具有标准和高级存储帐户的 Azure Blob 磁盘和 Azure 托管磁盘。
 
-* **Persistent Volumes:** Supports using Azure Blob disks and Azure Managed Disks with standard and premium storage accounts.
+- **网络存储：** 通过 CIFS 安装支持 Azure 文件。
 
-* **Network Storage:** Support Azure Files via CIFS mounts.
+Azure 订阅不支持以下帐户类型:
 
-The following account types are not supported for Azure Subscriptions:
+- 单租户帐户（即没有订阅的帐户）。
+- 多订阅帐户。
 
-* Single tenant accounts (i.e.accounts with no subscriptions).
-* Multi-subscription accounts.
+要设置 Azure Cloud Provider 需要配置以下凭据:
 
-To set up the Azure cloud provider following credentials need to be configured:
+### 设置 Azure 租户 ID
 
-1. [Set up the Azure Tenant ID](#1-set-up-the-azure-tenant-id)
-2. [Set up the Azure Client ID and Azure Client Secret](#2-set-up-the-azure-client-id-and-azure-client-secret)
-3. [Configure App Registration Permissions](#3-configure-app-registration-permissions)
-4. [Set up Azure Network Security Group Name](#4-set-up-azure-network-security-group-name)
+浏览[Azure 控制台](https://portal.azure.com), 登录并跳转**Azure Active Directory** 然后选择 **属性**. 您的**目录 ID** 是您的 **租户 ID** (tenantID).
 
-#### 1. Set up the Azure Tenant ID
+如果你想使用 Azure CLI，你可以运行命令`az account show`来获取信息。
 
-Visit [Azure portal](https://portal.azure.com), login and go to **Azure Active Directory** and select **Properties**. Your **Directory ID** is your **Tenant ID** (tenantID).
+### 设置 Azure 客户端 ID 和 Azure 客户端密钥
 
-If you want to use the Azure CLI, you can run the command `az account show` to get the information.
+浏览[Azure Portal](https://portal.azure.com)，登录并按照以下步骤创建**应用注册**中的**Azure 客户端 ID** (aadClientId)和**Azure 客户端密钥** (aadClientSecret)。
 
-#### 2. Set up the Azure Client ID and Azure Client Secret
+1. 选择**Azure Active Directory**.
+1. 选择**应用注册**。
+1. 选择**注册应用程序**。
+1. 输入**名称**, 在**Application 类型**中选择`Web app / API`和在这种情况下，可以是任何东西的**Sign-on URL**。
+1. 选择**创建**。
 
-Visit [Azure portal](https://portal.azure.com), login and follow the steps below to create an **App Registration** and the corresponding **Azure Client ID** (aadClientId) and **Azure Client Secret** (aadClientSecret).
+在**应用注册**视图，你应该看到你创建的应用程序注册。列中显示的值**应用 ID**便是您需要的**Azure 客户端 ID**。
 
-1. Select **Azure Active Directory**.
-1. Select **App registrations**.
-1. Select **New application registration**.
-1. Choose a **Name**, select `Web app / API` as **Application Type** and a **Sign-on URL** which can be anything in this case.
-1. Select **Create**.
+下一步是生成**Azure 客户端密钥**:
 
-In the **App registrations** view, you should see your created App registration. The value shown in the column **APPLICATION ID** is what you need to use as **Azure Client ID**.
+1. 打开您创建的应用程序注册。
+1. 在**设置**视图中，打开**键**。
+1. 输入**密钥说明**，选择到期时间并选择**保存**。
+1. **Value**列中显示的生成值是您需要用作**Azure 客户端密钥**的值。此值将只显示一次。
 
-The next step is to generate the **Azure Client Secret**:
+### 配置应用程序注册权限
 
-1. Open your created App registration.
-1. In the **Settings** view, open **Keys**.
-1. Enter a **Key description**, select an expiration time and select **Save**.
-1. The generated value shown in the column **Value** is what you need to use as **Azure Client Secret**. This value will only be shown once.
+您需要做的最后一件事是为您的应用程序注册分配适当的权限
 
-#### 3. Configure App Registration Permissions
+1. 转到**更多服务**，搜索**订阅**并打开它。
+1. 打开**访问控制(IAM)**。
+1. 选择**添加**。
+1. 对于**角色**，选择`参与者`。
+1. 对于**选择**，选择您创建的应用程序注册名称。
+1. 选择**保存**。
 
-The last thing you will need to do, is assign the appropriate permissions to your App registration.
+### 设置 Azure 网络安全组名称
 
-1. Go to **More services**, search for **Subscriptions** and open it.
-1. Open **Access control (IAM)**.
-1. Select **Add**.
-1. For **Role**, select `Contributor` .
-1. For **Select**, select your created App registration name.
-1. Select **Save**.
+需要自定义 Azure 网络安全组（securityGroupName）才能允许 Azure 负载均衡器工作。
 
-#### 4. Set up Azure Network Security Group Name
+如果使用 Rancher 的 Azure 主机驱动设置主机，则需要手动编辑它们以将它们分配给此网络安全组。
 
-A custom Azure Network Security Group (securityGroupName) is needed to allow Azure Load Balancers to work.
+在设置过程中，您应该已将自定义主机分配给此网络安全组。
 
-If you provision hosts using Rancher Machine Azure driver, you will need to edit them manually to assign them to this Network Security Group.
-
-You should already assign custom hosts to this Network Security Group during provisioning.
-
-Only hosts expected to be load balancer back ends need to be in this group.
-
+只有为负载均衡后台的主机需要在此组中。

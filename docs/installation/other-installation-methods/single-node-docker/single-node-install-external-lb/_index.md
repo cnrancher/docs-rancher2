@@ -24,7 +24,7 @@ title: 使用外部负载均衡器
 
 ## 2、选择一个 SSL 选项并安装 Rancher
 
-为了安全起见，使用 Rancher 时需要 SSL。 SSL 保护所有 Rancher 网络通信的安全，例如在您登录集群或与集群交互时。
+为了安全起见，使用 Rancher 时需要 SSL。SSL 保护所有 Rancher 网络通信的安全，例如在您登录集群或与集群交互时。
 
 > **您想要...**
 >
@@ -66,7 +66,7 @@ title: 使用外部负载均衡器
 
 **基于机构颁发证书安装 Rancher：**
 
-如果您使用由公认的 CA 签署的证书，则无需在 Rancher 容器中安装证书。 我们必须确保没有生成和存储默认的 CA 证书，您可以通过将`--no-cacerts`参数传递给容器来实现。
+如果您使用由公认的 CA 签署的证书，则无需在 Rancher 容器中安装证书。我们必须确保没有生成和存储默认的 CA 证书，您可以通过将`--no-cacerts`参数传递给容器来实现。
 
 1. 输入下面的命令
 
@@ -97,7 +97,7 @@ title: 使用外部负载均衡器
 
 此 NGINX 配置已在 NGINX 1.14 上进行了测试。
 
-> **注意：**此 Nginx 配置仅是示例，可能不适合您的环境。 有关完整的文档，请参阅[NGINX 负载均衡-HTTP 负载均衡](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/)。
+> **注意：**此 Nginx 配置仅是示例，可能不适合您的环境。有关完整的文档，请参阅[NGINX 负载均衡-HTTP 负载均衡](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/)。
 
 - 将`rancher-server`替换为运行 Rancher 容器的节点的 IP 地址或主机名。
 - 将两次出现的`FQDN`替换为 Rancher 的 DNS 名称。

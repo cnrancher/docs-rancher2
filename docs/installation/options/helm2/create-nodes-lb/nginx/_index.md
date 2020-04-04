@@ -11,9 +11,9 @@ NGINX 将被配置为 4 层负载均衡器(TCP)，将连接转发到其中一个
 
 ## 安装 NGINX
 
-首先在要用作负载均衡器的节点上安装 NGINX。 NGINX 在所有已知操作系统中都提供了可用的软件包。 已测试的版本是`1.14`和`1.15`。 Nginx 安装帮助文档，参考这里[安装文档](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/)。
+首先在要用作负载均衡器的节点上安装 NGINX。NGINX 在所有已知操作系统中都提供了可用的软件包。已测试的版本是`1.14`和`1.15`。Nginx 安装帮助文档，参考这里[安装文档](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/)。
 
-需要使用`stream`模块，该模块在使用官方 NGINX 软件包时提供。 请参考您的操作系统文档，了解如何在操作系统上安装和启用 NGINX`stream`模块。
+需要使用`stream`模块，该模块在使用官方 NGINX 软件包时提供。请参考您的操作系统文档，了解如何在操作系统上安装和启用 NGINX`stream`模块。
 
 ## 创建 NGINX 配置文件
 
@@ -72,7 +72,7 @@ NGINX 将被配置为 4 层负载均衡器(TCP)，将连接转发到其中一个
 
 ## 可选 - 以 Docker 方式运行 NGINX
 
-与其将 NGINX 作为软件包安装在操作系统上，还不如将其作为 Docker 容器运行。 把**NGINX 配置文件示例**保存为 `/etc/nginx.conf`，运行以下命令启动 NGINX 容器:
+与其将 NGINX 作为软件包安装在操作系统上，还不如将其作为 Docker 容器运行。把**NGINX 配置文件示例**保存为 `/etc/nginx.conf`，运行以下命令启动 NGINX 容器:
 
 ```
 docker run -d --restart=unless-stopped \

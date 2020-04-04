@@ -10,11 +10,11 @@ title: 安装介绍
 
 **Rancher Server** 用于管理和配置 Kubernetes 集群。您可以通过 Rancher Server 的 UI 与下游 Kubernetes 集群进行交互。
 
-**RKE（Rancher Kubernetes Engine** 是经过认证的 Kubernetes 发行版，它拥有对应的 CLI 工具可用于创建和管理 Kubernetes 集群。 在 Rancher UI 中创建集群时，它将调用 RKE 来配置 Rancher 启动的 Kubernetes 集群。
+**RKE（Rancher Kubernetes Engine** 是经过认证的 Kubernetes 发行版，它拥有对应的 CLI 工具可用于创建和管理 Kubernetes 集群。在 Rancher UI 中创建集群时，它将调用 RKE 来配置 Rancher 启动的 Kubernetes 集群。
 
 ## 安装选项概述
 
-如果您使用 Rancher 部署 Kubernetes 集群，需要确保 Rancher Server 不会出现故障。因为如果它发生故障，您可能会失去对由 Rancher 管理的 Kubernetes 集群的访问。因此，我们建议对于生产级架构，应使用 RKE 创建 Kubernetes 集群，然后在其上安装 Rancher。 安装 Rancher 后，您可以使用 Rancher 部署和管理 Kubernetes 集群。
+如果您使用 Rancher 部署 Kubernetes 集群，需要确保 Rancher Server 不会出现故障。因为如果它发生故障，您可能会失去对由 Rancher 管理的 Kubernetes 集群的访问。因此，我们建议对于生产级架构，应使用 RKE 创建 Kubernetes 集群，然后在其上安装 Rancher。安装 Rancher 后，您可以使用 Rancher 部署和管理 Kubernetes 集群。
 
 为了测试或演示目的，您可以在单个节点上通过 Docker 安装 Rancher，这个过程非常简洁，Rancher 是基本是开箱即用。
 
@@ -56,7 +56,7 @@ Rancher 的部署可以有三种架构：
 - [在负载均衡器上做 TLS termination](/docs/installation/options/chart-options/_index)
 - [自定义 Ingress](/docs/installation/options/chart-options/_index)
 
-在 Rancher 安装指南中，推荐使用 RKE 设置 Kubernetes 并基于它部署 Rancher。RKE 有许多配置选项可用于自定义 Kubernetes 以适合您的特定环境。 有关选项和功能的完整列表，请参见[RKE 文档](https://rancher.com/docs/rke/latest/en/config-options/)。
+在 Rancher 安装指南中，推荐使用 RKE 设置 Kubernetes 并基于它部署 Rancher。RKE 有许多配置选项可用于自定义 Kubernetes 以适合您的特定环境。有关选项和功能的完整列表，请参见[RKE 文档](https://rancher.com/docs/rke/latest/en/config-options/)。
 
 ## 在 Docker 上安装 Rancher 的更多选项
 

@@ -2,7 +2,7 @@
 title: 通过 Kubectl 管理 HPA
 ---
 
-本节介绍了使用 `kubectl` 进行的 HPA 管理。 本文档包含有关如何执行以下操作的说明：
+本节介绍了使用 `kubectl` 进行的 HPA 管理。本文档包含有关如何执行以下操作的说明：
 
 - 创建 HPA
 - 查看 HPA 相关信息
@@ -12,11 +12,11 @@ title: 通过 Kubectl 管理 HPA
 
 ## 对于 Rancher v2.3.x 版本的说明
 
-在 Rancher v2.3.x 版本中，您可以从 Rancher UI 中创建，查看和删除 HPA。 您还可以配置它们以根据 Rancher UI 中的 CPU 或内存使用量进行扩展。 有关更多信息，请参阅[使用 Rancher UI 管理 HPA](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-rancher-ui/_index)。 如果需要基于 CPU 或内存以外的其他指标扩展 HPA，您仍然需要使用 `kubectl` 工具。
+在 Rancher v2.3.x 版本中，您可以从 Rancher UI 中创建，查看和删除 HPA。您还可以配置它们以根据 Rancher UI 中的 CPU 或内存使用量进行扩展。有关更多信息，请参阅[使用 Rancher UI 管理 HPA](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-rancher-ui/_index)。如果需要基于 CPU 或内存以外的其他指标扩展 HPA，您仍然需要使用 `kubectl` 工具。
 
 ## v2.0.7 之前的 Rancher 的说明
 
-使用较早版本的 Rancher 创建的集群不会自动满足创建 HPA 的所有要求。 要在这些集群上安装 HPA，请参考 [在 Rancher v2.0.7 之前创建的集群的手动 HPA 安装](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/hpa-for-rancher-before-2_0_7/_index)。
+使用较早版本的 Rancher 创建的集群不会自动满足创建 HPA 的所有要求。要在这些集群上安装 HPA，请参考 [在 Rancher v2.0.7 之前创建的集群的手动 HPA 安装](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/hpa-for-rancher-before-2_0_7/_index)。
 
 ## 管理 HPA 的基本 kubectl 命令
 
@@ -42,7 +42,7 @@ title: 通过 Kubectl 管理 HPA
 
 HPA manifest 是用于通过 `kubectl` 管理 HPA 的配置文件。
 
-以下代码段演示了 HPA manifest 中不同指令的使用。 请参阅示例下面的列表以了解每个指令的目的。
+以下代码段演示了 HPA manifest 中不同指令的使用。请参阅示例下面的列表以了解每个指令的目的。
 
 ```yml
 apiVersion: autoscaling/v2beta1
@@ -67,18 +67,18 @@ spec:
         targetAverageValue: 100Mi
 ```
 
-| 指示                              | 描述                                                                                                           |
-| --------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `apiVersion: autoscaling/v2beta1` | 正在使用的 Kubernetes `autoscaling` API 组的版本。 此示例清单使用 beta 版本，因此启用了按 CPU 和内存进行缩放。 |
-| `name: hello-world`               | 表示 HPA 正在为 `hello-word` 部署执行自动扩展。                                                                |
-| `minReplicas: 1`                  | 表示正在运行的最小副本数不能低于 1。                                                                           |
-| `maxReplicas: 10`                 | 表示部署中的最大副本数不能超过 10。                                                                            |
-| `targetAverageUtilization: 50`    | 表示当平均运行的 Pod 使用超过其请求 CPU 的 50％时，部署将扩展 Pod。                                            |
-| `targetAverageValue: 100Mi`       | 表示当平均运行的 Pod 使用超过 100Mi 的内存时，部署将扩展 Pod。                                                 |
+| 指示                              | 描述                                                                                                          |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `apiVersion: autoscaling/v2beta1` | 正在使用的 Kubernetes `autoscaling` API 组的版本。此示例清单使用 beta 版本，因此启用了按 CPU 和内存进行缩放。 |
+| `name: hello-world`               | 表示 HPA 正在为 `hello-word` 部署执行自动扩展。                                                               |
+| `minReplicas: 1`                  | 表示正在运行的最小副本数不能低于 1。                                                                          |
+| `maxReplicas: 10`                 | 表示部署中的最大副本数不能超过 10。                                                                           |
+| `targetAverageUtilization: 50`    | 表示当平均运行的 Pod 使用超过其请求 CPU 的 50％时，部署将扩展 Pod。                                           |
+| `targetAverageValue: 100Mi`       | 表示当平均运行的 Pod 使用超过 100Mi 的内存时，部署将扩展 Pod。                                                |
 
 ## 配置 HPA 以使用资源指标（CPU 和内存）进行弹性扩缩容
 
-在 Rancher v2.0.7 及更高版本中创建的集群具有使用 Horizontal Pod Autoscaler 所需的全部要求（metrics-server 和 Kubernetes 集群配置）。 运行以下命令以检查 mecrics 组件是否安装成功：
+在 Rancher v2.0.7 及更高版本中创建的集群具有使用 Horizontal Pod Autoscaler 所需的全部要求（metrics-server 和 Kubernetes 集群配置）。运行以下命令以检查 mecrics 组件是否安装成功：
 
 ```
 $ kubectl top nodes
@@ -112,7 +112,7 @@ I1002 12:55:32.928597       1 serve.go:85] Serving securely on 0.0.0.0:443
 
 ## 配置 HPA 以使用 Prometheus 的自定义指标进行弹性扩缩容
 
-您可以将 HPA 配置为根据第三方软件提供的自定义指标自动扩缩容。 使用第三方软件进行自动扩缩容的最常见用例是基于应用程序级别的指标（即每秒 HTTP 请求）。 HPA 使用 `custom.metrics.k8s.io` API 来使用这些指标。 通过为指标收集解决方案部署自定义指标适配器来启用此 API。
+您可以将 HPA 配置为根据第三方软件提供的自定义指标自动扩缩容。使用第三方软件进行自动扩缩容的最常见用例是基于应用程序级别的指标（即每秒 HTTP 请求）。HPA 使用 `custom.metrics.k8s.io` API 来使用这些指标。通过为指标收集解决方案部署自定义指标适配器来启用此 API。
 
 在这个例子中，我们将使用 [Prometheus](https://prometheus.io/)。我们从以下假设开始：
 
@@ -120,7 +120,7 @@ I1002 12:55:32.928597       1 serve.go:85] Serving securely on 0.0.0.0:443
 - Prometheus 的配置正确，并且可以从 pod，节点，命名空间等收集适当的指标。
 - Prometheus 服务暴露的 URL 及端口为: `http://prometheus.mycompany.io:80`
 
-Prometheus 可在 Rancher v2.0 应用商店进行部署。 如果您的集群中尚未运行它，请从 Rancher 应用商店中进行部署。
+Prometheus 可在 Rancher v2.0 应用商店进行部署。如果您的集群中尚未运行它，请从 Rancher 应用商店中进行部署。
 
 为了使 HPA 使用 Prometheus 的自定义指标，集群的 `kube-system` 命名空间中需要安装[k8s-prometheus-adapter](https://github.com/DirectXMan12/k8s-prometheus-adapter) 。要安装 `k8s-prometheus-adapter` ，我们使用 [banzai-charts](https://github.com/banzaicloud/banzai-charts)上可用的 Helm chart。
 
@@ -144,9 +144,9 @@ Prometheus 可在 Rancher v2.0 应用商店进行部署。 如果您的集群中
 # helm install --name prometheus-adapter banzai-charts/prometheus-adapter --set prometheus.url="http://prometheus.mycompany.io",prometheus.port="80" --namespace kube-system
 ```
 
-### 检查 `prometheus-adapter` 是否正常运行。 检查服务容器并登录 `kube-system` 命名空间。
+### 检查 `prometheus-adapter` 是否正常运行。检查服务容器并登录 `kube-system` 命名空间。
 
-1.  检查 pod 是否正在运行。 输入以下命令。
+1.  检查 pod 是否正在运行。输入以下命令。
 
     ```
     # kubectl get pods -n kube-system

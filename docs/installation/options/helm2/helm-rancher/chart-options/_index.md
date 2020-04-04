@@ -25,7 +25,7 @@ title: Chart 安装选项
 | `auditLog.maxAge`              | 1                                                                  | `int` - 保留旧审计日志的最大天数 (仅在 `auditLog.destination` 的值为 `hostPath`时可用)                                     |
 | `auditLog.maxBackups`          | 1                                                                  | `int` - 保留旧审计日志的最大文件个数 (仅在 `auditLog.destination` 的值为 `hostPath`时可用)                                 |
 | `auditLog.maxSize`             | 100                                                                | `int` - 在审计日志被轮换前的以 M 为单位的最大容量 (仅在 `auditLog.destination` 的值为 `hostPath`时可用)                    |
-| `busyboxImage`                 | "busybox"                                                          | `string` - 用来收集审计日志的 busybox 镜像的地址。 _注意：从 v2.2.0 开始可用_                                              |
+| `busyboxImage`                 | "busybox"                                                          | `string` - 用来收集审计日志的 busybox 镜像的地址。_注意：从 v2.2.0 开始可用_                                               |
 | `debug`                        | false                                                              | `bool` - 设置 Rancher Server 的 debug 参数                                                                                 |
 | `extraEnv`                     | []                                                                 | `list` - 设置 Rancher Server 的额外环境变量 _注意：从 v2.2.0 开始可用_                                                     |
 | `imagePullSecrets`             | []                                                                 | `list` - 一列包含私有镜像仓库登录凭证的密文名称。                                                                          |
@@ -44,21 +44,21 @@ title: Chart 安装选项
 
 开启 [API 审计日志](/docs/installation/options/api-audit-log/_index)。
 
-您可以像收集任何容器日志一样收集此日志。 为 Rancher Server 集群上的`System`项目启用 [Rancher 工具中的日志服务](/docs/project-admin/tools/logging/_index)。
+您可以像收集任何容器日志一样收集此日志。为 Rancher Server 集群上的`System`项目启用 [Rancher 工具中的日志服务](/docs/project-admin/tools/logging/_index)。
 
 ```plain
 --set auditLog.level=1
 ```
 
-默认情况下，启用`审计日志`将在 Rancher pod 中创建一个 sidecar 容器。 这个容器（`rancher-audit-log`）会将日志流传输到`stdout`。 您可以像收集任何容器日志一样收集此日志。 将 sidecar 用作审计日志时，`hostPath`，`maxAge`，`maxBackups`和`maxSize`选项不适用。 建议使用您的操作系统或 Docker 守护进程的日志轮换功能来控制磁盘空间的使用。 为 Rancher Server 启用[Rancher 工具中的集群日志服务](/docs/cluster-admin/tools/logging/_index)或[Rancher 工具中的项目日志服务](/docs/project-admin/tools/logging/_index)。。
+默认情况下，启用`审计日志`将在 Rancher pod 中创建一个 sidecar 容器。这个容器（`rancher-audit-log`）会将日志流传输到`stdout`。您可以像收集任何容器日志一样收集此日志。将 sidecar 用作审计日志时，`hostPath`，`maxAge`，`maxBackups`和`maxSize`选项不适用。建议使用您的操作系统或 Docker 守护进程的日志轮换功能来控制磁盘空间的使用。为 Rancher Server 启用[Rancher 工具中的集群日志服务](/docs/cluster-admin/tools/logging/_index)或[Rancher 工具中的项目日志服务](/docs/project-admin/tools/logging/_index)。。
 
-将`auditLog.destination`设置为`hostPath`的值，以将日志转发至与主机系统共享的卷，而不是流至 Sidecar 容器。 将目标设置为`hostPath`时，您可能需要调整其他 auditLog 参数以进行日志轮换。
+将`auditLog.destination`设置为`hostPath`的值，以将日志转发至与主机系统共享的卷，而不是流至 Sidecar 容器。将目标设置为`hostPath`时，您可能需要调整其他 auditLog 参数以进行日志轮换。
 
 ## 设置额外环境变量
 
 _自 v2.2.0 起可用_
 
-您可以使用`extraEnv`为 Rancher Server 设置额外的环境变量。 该列表使用与容器清单定义相同的`name`和`value`键。 记住需要给值加上双引号。
+您可以使用`extraEnv`为 Rancher Server 设置额外的环境变量。该列表使用与容器清单定义相同的`name`和`value`键。记住需要给值加上双引号。
 
 ```plain
 --set 'extraEnv[0].name=CATTLE_TLS_MIN_VERSION'
@@ -69,7 +69,7 @@ _自 v2.2.0 起可用_
 
 _自 v2.2.0 起可用_
 
-要设置不同的 TLS 配置，可以使用`CATTLE_TLS_MIN_VERSION`和`CATTLE_TLS_CIPHERS`环境变量。 例如，将 TLS 1.0 配置为接受的最低 TLS 版本:
+要设置不同的 TLS 配置，可以使用`CATTLE_TLS_MIN_VERSION`和`CATTLE_TLS_CIPHERS`环境变量。例如，将 TLS 1.0 配置为接受的最低 TLS 版本:
 
 ```plain
 --set 'extraEnv[0].name=CATTLE_TLS_MIN_VERSION'
@@ -84,7 +84,7 @@ _自 v2.2.0 起可用_
 
 如果您的环境中存在此问题，则可以在初次安装时将此选项设置为`false`。
 
-> 注意事项: 此选项仅在第一次安装 Rancher 时有效。 参阅 [Issue 16522](https://github.com/rancher/rancher/issues/16522) 获取更多信息。
+> 注意事项: 此选项仅在第一次安装 Rancher 时有效。参阅 [Issue 16522](https://github.com/rancher/rancher/issues/16522) 获取更多信息。
 
 ```plain
 --set addLocal="false"
@@ -102,7 +102,7 @@ _自 v2.2.0 起可用_
 
 _v2.0.15, v2.1.10 和 v2.2.4 可用_
 
-使用`ingress.configurationSnippet`设置静态代理头的示例。 该值像模板一样进行解析，因此可以使用变量。
+使用`ingress.configurationSnippet`设置静态代理头的示例。该值像模板一样进行解析，因此可以使用变量。
 
 ```plain
 --set ingress.configurationSnippet='more_set_input_headers X-Forwarded-Host {{ .Values.hostname }};'
@@ -110,7 +110,7 @@ _v2.0.15, v2.1.10 和 v2.2.4 可用_
 
 ## HTTP 代理
 
-Rancher 需要 Internet 访问才能使用某些功能 (helm charts)。 使用`proxy`设置您的代理服务器。
+Rancher 需要 Internet 访问才能使用某些功能 (helm charts)。使用`proxy`设置您的代理服务器。
 
 在`noProxy`添加例外的 IP。确保添加了 Service cluster IP(默认: 10.43.0.1/16)和任何 worker 集群`controlplane`节点。Rancher 在此列表中支持 CIDR 范围表示法。
 
@@ -139,9 +139,9 @@ kubectl -n cattle-system create secret generic tls-ca-additional --from-file=ca-
 
 ## 外部 TLS Termination
 
-我们建议将负载均衡器配置为 4 层均衡器，将普通 80/tcp 和 443/tcp 转发到 Rancher 管理集群节点。 集群上的 Ingress Controller 会将端口 80 上的 http 通信重定向到端口 443 上的 https。
+我们建议将负载均衡器配置为 4 层均衡器，将普通 80/tcp 和 443/tcp 转发到 Rancher 管理集群节点。集群上的 Ingress Controller 会将端口 80 上的 http 通信重定向到端口 443 上的 https。
 
-您可以在 Rancher 集群（ingress）外部的 L7 负载均衡器上终止 SSL/TLS。 使用`--set tls=external`选项，将负载均衡器指向所有 Rancher 集群节点上的端口 http 80。 这将在 http 端口 80 上公开 Rancher 接口。 请注意，允许直接连接到 Rancher 集群的客户端将不会被加密。 如果您选择这样做，我们建议您将网络级别上的直接访问限制为仅用于您的负载均衡器。
+您可以在 Rancher 集群（ingress）外部的 L7 负载均衡器上终止 SSL/TLS。使用`--set tls=external`选项，将负载均衡器指向所有 Rancher 集群节点上的端口 http 80。这将在 http 端口 80 上公开 Rancher 接口。请注意，允许直接连接到 Rancher 集群的客户端将不会被加密。如果您选择这样做，我们建议您将网络级别上的直接访问限制为仅用于您的负载均衡器。
 
 > **注意事项:** 如果您使用的是专用 CA 签名的证书，请添加`--set privateCA=true`并参阅[添加 TLS Secrets - 使用私有的 CA 签名证书](/docs/installation/options/helm2/helm-rancher/tls-secrets/_index)来完成给 Rancher 添加 CA 证书。
 
@@ -179,7 +179,7 @@ Rancher 将对`/healthz`端点上的健康检查响应`200`。
 
 此 NGINX 配置已在 NGINX 1.14 上进行了测试。
 
-> **注意事项:** 此 NGINX 配置只是一个示例，可能不适合您的环境。 完整文档请参阅[NGINX 负载平衡 - HTTP 负载平衡](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/)。
+> **注意事项:** 此 NGINX 配置只是一个示例，可能不适合您的环境。完整文档请参阅[NGINX 负载平衡 - HTTP 负载平衡](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/)。
 
 - 将`IP_NODE1`，`IP_NODE2`和`IP_NODE3`替换为集群中节点的 IP 地址。
 - 将两个出现的`FQDN`替换为 Rancher 的 DNS 名称。

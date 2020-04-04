@@ -29,7 +29,7 @@ title: 为Rancher社区做出贡献
 | kontainer-engine       | https://github.com/rancher/kontainer-engine | 该库是 kontainer-engine 的源代码，kontainer-engine 是用于配置托管 Kubernetes 集群的工具。                           |
 | RKE                    | https://github.com/rancher/rke              | 该库是 Rancher Kubernetes Engine 的代码库，Rancher Kubernetes Engine 是在任何机器构建，配置 Kubernetes 集群的工具。 |
 | CLI                    | https://github.com/rancher/cli              | 该库是 Rancher 2.x 中使用的 Rancher CLI 的源代码。                                                                  |
-| Rancher Helm           | https://github.com/rancher/helm             | 该库是打包的 Helm 二进制文件的来源。 这是 `helm/helm` 库的分支。                                                    |
+| Rancher Helm           | https://github.com/rancher/helm             | 该库是打包的 Helm 二进制文件的来源。这是 `helm/helm` 库的分支。                                                     |
 | Telemetry              | https://github.com/rancher/telemetry        | 该库是采集遥测数据的源代码库。                                                                                      |
 | loglevel               | https://github.com/rancher/loglevel         | 该库是日志级别二进制文件的源代码库，用于动态更改日志级别。                                                          |
 
@@ -42,7 +42,7 @@ title: 为Rancher社区做出贡献
 
 ## 编译，构建源代码
 
-每个源代码仓库都有一个 Makefile，并且可以使用 `make` 命令来构建。 `make` 的 targets 就是`/scripts` 目录中的脚本，每个 target 都将使用 [Dapper](https://github.com/rancher/dapper) 在隔离的环境中执行构建。 这个过程是通过`Dockerfile.dapper`完成的，其中包括所有所需要的构建工具。
+每个源代码仓库都有一个 Makefile，并且可以使用 `make` 命令来构建。`make` 的 targets 就是`/scripts` 目录中的脚本，每个 target 都将使用 [Dapper](https://github.com/rancher/dapper) 在隔离的环境中执行构建。这个过程是通过`Dockerfile.dapper`完成的，其中包括所有所需要的构建工具。
 
 默认 target 是 `ci` ，这个 target 将运行 `./scripts/validate` 、 `./scripts/build` 、 `./scripts/package` 和 `./scripts/package`。构建的出的二进制文件将位于 `./build/bin` 中，并且通常也会生成相应的 Docker 镜像。
 

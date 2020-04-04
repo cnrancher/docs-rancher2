@@ -15,7 +15,7 @@ title: Splunk
 
 1. 在**访问地址**字段中，输入您的 Splunk 实例输入 IP 地址和端口(例如： `http://splunk-server:8088`)
 
-   - Splunk 通常使用端口 `8088`。 如果您使用的是 Splunk Cloud，可以通过 [Splunk 支持](https://www.splunk.com/en_us/support-and-services.html) 来获取访问地址。
+   - Splunk 通常使用端口 `8088`。如果您使用的是 Splunk Cloud，可以通过 [Splunk 支持](https://www.splunk.com/en_us/support-and-services.html) 来获取访问地址。
 
 1. 输入您在 Splunk 中获得的**Token**。
 

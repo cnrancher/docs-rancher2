@@ -6,13 +6,13 @@ title: Amazon EC2
 
 ## 前提条件
 
-- 创建实例时会使用**AWS EC2 访问密钥**。 请参照[Amazon 文档: 创建访问密钥](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)。
+- 创建实例时会使用**AWS EC2 访问密钥**。请参照[Amazon 文档: 创建访问密钥](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)。
 
-- 为用户的访问密钥**创建 IAM 策略**。 请参照[Amazon 文档: 创建 IAM 策略](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html#access_policies_create-start)。 下面是三个 JSON 策略的实例：
+- 为用户的访问密钥**创建 IAM 策略**。请参照[Amazon 文档: 创建 IAM 策略](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html#access_policies_create-start)。下面是三个 JSON 策略的实例：
   - [IAM 策略示例](#iam-策略示例)
   - [包含 PassRole 的 IAM 策略示例](#包含-passrole-的-iam-策略示例) (如果您想要使用 [Kubernetes Cloud Provider](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/_index) 或 IAM 实例配置文件)
   - [允许加密 EBS 卷的 IAM 策略示例](#允许加密-ebs-卷的-iam-策略示例)
-- 为用户添加**IAM 策略许可**。 请参照[Amazon 文档：为用户添加许可](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_change-permissions.html#users_change_permissions-add-console)。
+- 为用户添加**IAM 策略许可**。请参照[Amazon 文档：为用户添加许可](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_change-permissions.html#users_change_permissions-add-console)。
 
 ## 创建 EC2 集群
 
@@ -34,7 +34,7 @@ title: Amazon EC2
 1. 填写您的 AWS EC2 访问密钥：**Access Key** 和**Secret Key**。
 1. 点击**创建**。
 
-**结果：** 您已经创建了用于配置集群中节点的云凭证。 您可以将这些云凭证用于其他节点模板或其他集群。
+**结果：** 您已经创建了用于配置集群中节点的云凭证。您可以将这些云凭证用于其他节点模板或其他集群。
 
 #### 2. 使用云凭证和 EC2 信息创建节点模板
 
@@ -45,13 +45,13 @@ title: Amazon EC2
 1. 在**区域**选项中，选择您创建云凭证相同的区域。
 1. 在**云凭证**选项中，选择您创建的云凭证。
 1. 点击**下一步：认证 & 设置节点**
-1. 选择您的集群的可用区和网络设置。 点击 **下一步: 选择安全组**。
-1. 选择默认的安全组或配置一个新的安全组。 请根据文档 [Amazon EC2 使用节点驱动时的安全组](/docs/cluster-provisioning/node-requirements/_index) 来查看 `rancher-nodes` 安全组创建的规则。 然后点击**下一步: 设置实例选项**。
+1. 选择您的集群的可用区和网络设置。点击 **下一步: 选择安全组**。
+1. 选择默认的安全组或配置一个新的安全组。请根据文档 [Amazon EC2 使用节点驱动时的安全组](/docs/cluster-provisioning/node-requirements/_index) 来查看 `rancher-nodes` 安全组创建的规则。然后点击**下一步: 设置实例选项**。
 1. 配置将要创建的实例。确保为选择的 AMI 配置正确的**SSH 用户**。
 
 > 如果您需要设定 <b>IAM 实例配置名称</b> (不是 ARN)，例如当您需要使用 [Kubernetes Cloud Provider](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/_index)，在您的策略中需要额外的许可。请参照[包含 PassRole 的 IAM 策略示例](#包含-passrole-的-iam-策略示例)。
 
-可选：在节点模板的**引擎选项**部分中，您可以配置 Docker 守护程序。 您可能需要指定 Docker 版本或 Docker 镜像仓库地址。
+可选：在节点模板的**引擎选项**部分中，您可以配置 Docker 守护程序。您可能需要指定 Docker 版本或 Docker 镜像仓库地址。
 
 #### 3. 使用节点模板创建带节点池的集群
 
@@ -72,7 +72,7 @@ title: Amazon EC2
 
 1. 填写**集群名称**。
 
-1. 为每个 Kubernetes 角色创建一个节点池。 对于每个节点池，选择您创建的节点模板。
+1. 为每个 Kubernetes 角色创建一个节点池。对于每个节点池，选择您创建的节点模板。
 
 1. 点击**添加成员**来添加能够访问集群的用户。
 
@@ -127,7 +127,7 @@ title: Amazon EC2
 
    - **账户许可** 选项用于配置创建节点的区域及云凭证。关于如何创建访问密钥和权限，请参照[前提条件](#前提条件)。
    - **区域和网络** 选项用于配置您的集群可用区和网络设置。
-   - **安全组** 选项用于配置您的节点的安全组。 请参照 [Amazon EC2 使用节点驱动的安全组](/docs/cluster-provisioning/node-requirements/_index) 来查看`rancher-nodes`安全组中创建了哪些规则。
+   - **安全组** 选项用于配置您的节点的安全组。请参照 [Amazon EC2 使用节点驱动的安全组](/docs/cluster-provisioning/node-requirements/_index) 来查看`rancher-nodes`安全组中创建了哪些规则。
    - **实例** 选项用于配置将要创建的实例。确保为选择的 AMI 配置正确的**SSH 用户**。
 
    如果您需要设定 **IAM 实例配置名称** (不是 ARN)，例如当您需要使用[Kubernetes Cloud Provider](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/_index)，在您的策略中需要额外的许可。请参照[包含 PassRole 的 IAM 策略示例](#包含-passrole-的-iam-策略示例)。
