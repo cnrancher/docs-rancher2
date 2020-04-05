@@ -2,35 +2,34 @@
 title: 添加 Sidecar
 ---
 
-A _sidecar_ is a container that extends or enhances the main container in a pod. The main container and the sidecar share a pod, and therefore share the same network space and storage. You can add sidecars to existing workloads by using the **Add a Sidecar** option.
+_Sidecar_ 是在 Pod 中延伸或增强主容器的容器。主容器和 Sidecar 共享一个 Pod，因此共享相同的网络空间和存储空间。您可以使用**添加 Sidecar** 选项将 Sidecar 添加到现有的工作负载中。
 
-1. From the **Global** view, open the project running the workload you want to add a sidecar to.
+1. 从**全局**视角中，打开要向其添加 Sidecar 的工作负载所在的项目。
 
-1. Click **Resources > Workloads.** In versions prior to v2.3.0, select the **Workloads** tab.
+1. 点击**资源 > 工作负载**。在 v2.3.0 之前的版本中，选择**工作负载**选项卡。
 
-1. Find the workload that you want to extend. Select **Ellipsis icon (...) > Add a Sidecar**.
+1. 找到要扩展的工作负载。选择**省略号 (...) > 添加 Sidecar**。
 
-1. Enter a **Name** for the sidecar.
+1. 为 Sidecar 输入一个**名称**。
 
-1. Select a **Sidecar Type**. This option determines if the sidecar container is deployed before or after the main container is deployed.
+1. 选择一个 **Sidecar 类型**。此选项决定是否在部署主容器之前或之后部署 Sidecar 容器。
 
-   - **Standard Container:**
+   - **标准容器：**
 
-     The sidecar container is deployed after the main container.
+     Sidecar 容器在主容器之后部署。
 
-   - **Init Container:**
+   - **初始化容器：**
 
-     The sidecar container is deployed before the main container.
+     Sidecar 容器在主容器之前部署。
 
-1. From the **Docker Image** field, enter the name of the Docker image that you want to deploy in support of the main container. During deployment, Rancher pulls this image from [Docker Hub](https://hub.docker.com/explore/). Enter the name exactly as it appears on Docker Hub.
+1. 在 **Docker 镜像**字段，输入要部署以支持主容器的 Docker 镜像的名称。在部署期间，Rancher 将从镜像库中获取与输入完全相同的镜像。
 
-1. Set the remaining options. You can read about them in [Deploying Workloads](../deploy-workloads).
+1. 设置其余选项。详情请参阅[部署工作负载](/docs/k8s-in-rancher/workloads/deploy-workloads/_index)。
 
-1. Click **Launch**.
+1. 点击 **启动**。
 
-**Result:** The sidecar is deployed according to your parameters. Following its deployment, you can view the sidecar by selecting **Ellipsis icon (... ) > Edit** for the main deployment.
+**结果：** 部署了根据您的参数配置的 Sidecar。在其部署之后，您可以选择**省略号(...) > 编辑** 来查看 Sidecar。
 
-### Related Links
+## 相关链接
 
-* [The Distributed System ToolKit: Patterns for Composite Containers](https://kubernetes.io/blog/2015/06/the-distributed-system-toolkit-patterns/)
-
+- [分布式系统工具包：复合容器的模式](https://kubernetes.io/blog/2015/06/the-distributed-system-toolkit-patterns/)

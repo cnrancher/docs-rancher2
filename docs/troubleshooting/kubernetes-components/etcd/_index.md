@@ -2,104 +2,86 @@
 title: etcd 节点问题排查
 ---
 
-This section contains commands and tips for troubleshooting nodes with the `etcd` role.
+本节包含对具有`etcd`角色的节点进行故障排除的命令和技巧。
 
-This page covers the following topics:
+## 检查 etcd 容器是否正在运行
 
-* [Checking if the etcd Container is Running](#checking-if-the-etcd-container-is-running)
-* [etcd Container Logging](#etcd-container-logging)
-* [etcd Cluster and Connectivity Checks](#etcd-cluster-and-connectivity-checks)
-  + [Check etcd Members on all Nodes](#check-etcd-members-on-all-nodes)
-  + [Check Endpoint Status](#check-endpoint-status)
-  + [Check Endpoint Health](#check-endpoint-health)
-  + [Check Connectivity on Port TCP/2379](#check-connectivity-on-port-tcp-2379)
-  + [Check Connectivity on Port TCP/2380](#check-connectivity-on-port-tcp-2380)
-* [etcd Alarms](#etcd-alarms)
-* [etcd Space Errors](#etcd-space-errors)
-* [Log Level](#log-level)
-* [etcd Content](#etcd-content)
-  + [Watch Streaming Events](#watch-streaming-events)
-  + [Query etcd Directly](#query-etcd-directly)
-* [Replacing Unhealthy etcd Nodes](#replacing-unhealthy-etcd-nodes)
+etcd 的容器的状态应为**Up**。**Up**之后显示的持续时间是容器运行的时间。
 
-## Checking if the etcd Container is Running
-
-The container for etcd should have status **Up**. The duration shown after **Up** is the time the container has been running.
-
-``` 
+```
 docker ps -a -f=name=etcd$
 ```
 
-Example output:
+输出示例:
 
-``` 
+```
 CONTAINER ID        IMAGE                         COMMAND                  CREATED             STATUS              PORTS               NAMES
 605a124503b9        rancher/coreos-etcd:v3.2.18   "/usr/local/bin/et..."   2 hours ago         Up 2 hours                              etcd
 ```
 
-## etcd Container Logging
+## etcd 容器日志
 
-The logging of the container can contain information on what the problem could be.
+容器的日志记录可以包含有关可能出现的问题的信息。
 
-``` 
+```
 docker logs etcd
 ```
 
-| Log                                                                                                                                    | Explanation                                                                                                                                                                                                            |
-| -------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `health check for peer xxx could not connect: dial tcp IP:2380: getsockopt: connection refused` | A connection to the address shown on port 2380 cannot be established. Check if the etcd container is running on the host with the address shown.|
-| `xxx is starting a new election at term x` | The etcd cluster has lost its quorum and is trying to establish a new leader. This can happen when the majority of the nodes running etcd go down/unreachable.|
-| `connection error: desc = "transport: Error while dialing dial tcp 0.0.0.0:2379: i/o timeout"; Reconnecting to {0.0.0.0:2379 0 <nil>}` | The host firewall is preventing network communication.|
-| `rafthttp: request cluster ID mismatch` | The node with the etcd instance logging `rafthttp: request cluster ID mismatch` is trying to join a cluster that has already been formed with another peer. The node should be removed from the cluster, and re-added.|
-| `rafthttp: failed to find member` | The cluster state ( `/var/lib/etcd` ) contains wrong information to join the cluster. The node should be removed from the cluster, the state directory should be cleaned and the node should be re-added.|
+| 日志                                                                                                                                   | 说明                                                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `health check for peer xxx could not connect: dial tcp IP:2380: getsockopt: connection refused`                                        | 无法建立与这个 IP 的 2380 端口进行连接。检查 etcd 容器是否在那个 IP 的主机上运行。                                                                  |
+| `xxx is starting a new election at term x`                                                                                             | etcd 集群已经失去了法定人数，正在尝试建立新的领导者。当大多数运行 etcd 的节点出现故障或无法访问时，可能会发生这种情况。                             |
+| `connection error: desc = "transport: Error while dialing dial tcp 0.0.0.0:2379: i/o timeout"; Reconnecting to {0.0.0.0:2379 0 <nil>}` | 主机防火墙阻止了网络通信。                                                                                                                          |
+| `rafthttp: request cluster ID mismatch`                                                                                                | 运行着 etcd 实例并记录`rafthttp: request cluster ID mismatch`的节点正在尝试加入另一个由其他成员构成的集群。应该从集群中删除这个节点，然后重新添加。 |
+| `rafthttp: failed to find member`                                                                                                      | 集群状态 (`/var/lib/etcd`) 包含错误信息，无法加入集群。应该从集群中删除这个节点，并删除状态目录，然后重新添加。                                     |
 
-## etcd Cluster and Connectivity Checks
+## etcd 集群和连接性检查
 
-The address where etcd is listening depends on the address configuration of the host etcd is running on. If an internal address is configured for the host etcd is running on, the endpoint for `etcdctl` needs to be specified explicitly. If any of the commands respond with `Error: context deadline exceeded` , the etcd instance is unhealthy (either quorum is lost or the instance is not correctly joined in the cluster)
+etcd 监听的地址取决于运行 etcd 的主机的地址配置。如果为运行 etcd 的主机配置了内部地址，则需要显式指定`etcdctl`的端点。如果有任何命令响应`Error: context deadline exceeded`，则代表 etcd 实例不正常（仲裁丢失或该实例未正确加入集群）
 
-#### Check etcd Members on all Nodes
+### 检查所有节点上的 etcd 成员
 
-Output should contain all the nodes with the `etcd` role and the output should be identical on all nodes.
+输出应包含所有具有 etcd 角色的节点，并且所有节点上的输出应相同。
 
-Command:
+命令：
 
-``` 
+```
 docker exec etcd etcdctl member list
 ```
 
-Command when using etcd version lower than 3.3.x (Kubernetes 1.13.x and lower) and `--internal-address` was specified when adding the node:
+当使用低于 3.3.x 的 etcd 版本（Kubernetes 1.13.x 及更低版本）并且添加节点时指定了`--internal-address` 时的命令：
 
-``` 
+```
 docker exec etcd sh -c "etcdctl --endpoints=\$ETCDCTL_ENDPOINT member list"
 ```
 
-Example output:
+输出示例:
 
-``` 
+```
 xxx, started, etcd-xxx, https://IP:2380, https://IP:2379,https://IP:4001
 xxx, started, etcd-xxx, https://IP:2380, https://IP:2379,https://IP:4001
 xxx, started, etcd-xxx, https://IP:2380, https://IP:2379,https://IP:4001
 ```
 
-#### Check Endpoint Status
+### 检查端点状态
 
-The values for `RAFT TERM` should be equal and `RAFT INDEX` should be not be too far apart from each other.
+`RAFT TERM`的值应相等，`RAFT INDEX`的距离不应太远。
 
-Command:
+命令：
 
-``` 
+```
 docker exec etcd etcdctl endpoint status --endpoints=$(docker exec etcd /bin/sh -c "etcdctl member list | cut -d, -f5 | sed -e 's/ //g' | paste -sd ','") --write-out table
 ```
 
-Command when using etcd version lower than 3.3.x (Kubernetes 1.13.x and lower) and `--internal-address` was specified when adding the node:
+当使用低于 3.3.x 的 etcd 版本（Kubernetes 1.13.x 及更低版本）并且添加节点时指定了`--internal-address` 时的命令：
 
-``` 
+```
 docker exec etcd etcdctl endpoint status --endpoints=$(docker exec etcd /bin/sh -c "etcdctl --endpoints=\$ETCDCTL_ENDPOINT member list | cut -d, -f5 | sed -e 's/ //g' | paste -sd ','") --write-out table
 ```
 
-Example output:
+输出示例:
 
-``` 
+```
 +-----------------+------------------+---------+---------+-----------+-----------+------------+
 | ENDPOINT        |        ID        | VERSION | DB SIZE | IS LEADER | RAFT TERM | RAFT INDEX |
 +-----------------+------------------+---------+---------+-----------+-----------+------------+
@@ -109,51 +91,51 @@ Example output:
 +-----------------+------------------+---------+---------+-----------+-----------+------------+
 ```
 
-#### Check Endpoint Health
+### 检查端点健康
 
-Command:
+命令：
 
-``` 
+```
 docker exec etcd etcdctl endpoint health --endpoints=$(docker exec etcd /bin/sh -c "etcdctl member list | cut -d, -f5 | sed -e 's/ //g' | paste -sd ','")
 ```
 
-Command when using etcd version lower than 3.3.x (Kubernetes 1.13.x and lower) and `--internal-address` was specified when adding the node:
+当使用低于 3.3.x 的 etcd 版本（Kubernetes 1.13.x 及更低版本）并且添加节点时指定了`--internal-address` 时的命令：
 
-``` 
+```
 docker exec etcd etcdctl endpoint health --endpoints=$(docker exec etcd /bin/sh -c "etcdctl --endpoints=\$ETCDCTL_ENDPOINT member list | cut -d, -f5 | sed -e 's/ //g' | paste -sd ','")
 ```
 
-Example output:
+输出示例:
 
-``` 
+```
 https://IP:2379 is healthy: successfully committed proposal: took = 2.113189ms
 https://IP:2379 is healthy: successfully committed proposal: took = 2.649963ms
 https://IP:2379 is healthy: successfully committed proposal: took = 2.451201ms
 ```
 
-#### Check Connectivity on Port TCP/2379
+### 检查端口 TCP / 2379 的连接
 
-Command:
+命令：
 
-``` 
+```
 for endpoint in $(docker exec etcd /bin/sh -c "etcdctl member list | cut -d, -f5"); do
    echo "Validating connection to ${endpoint}/health"
    docker run --net=host -v $(docker inspect kubelet --format '{{ range .Mounts }}{{ if eq .Destination "/etc/kubernetes" }}{{ .Source }}{{ end }}{{ end }}')/ssl:/etc/kubernetes/ssl:ro appropriate/curl -s -w "\n" --cacert $(docker exec etcd printenv ETCDCTL_CACERT) --cert $(docker exec etcd printenv ETCDCTL_CERT) --key $(docker exec etcd printenv ETCDCTL_KEY) "${endpoint}/health"
 done
 ```
 
-Command when using etcd version lower than 3.3.x (Kubernetes 1.13.x and lower) and `--internal-address` was specified when adding the node:
+当使用低于 3.3.x 的 etcd 版本（Kubernetes 1.13.x 及更低版本）并且添加节点时指定了`--internal-address` 时的命令：
 
-``` 
+```
 for endpoint in $(docker exec etcd /bin/sh -c "etcdctl --endpoints=\$ETCDCTL_ENDPOINT member list | cut -d, -f5"); do
   echo "Validating connection to ${endpoint}/health";
   docker run --net=host -v $(docker inspect kubelet --format '{{ range .Mounts }}{{ if eq .Destination "/etc/kubernetes" }}{{ .Source }}{{ end }}{{ end }}')/ssl:/etc/kubernetes/ssl:ro appropriate/curl -s -w "\n" --cacert $(docker exec etcd printenv ETCDCTL_CACERT) --cert $(docker exec etcd printenv ETCDCTL_CERT) --key $(docker exec etcd printenv ETCDCTL_KEY) "${endpoint}/health"
 done
 ```
 
-Example output:
+输出示例：
 
-``` 
+```
 Validating connection to https://IP:2379/health
 {"health": "true"}
 Validating connection to https://IP:2379/health
@@ -162,29 +144,29 @@ Validating connection to https://IP:2379/health
 {"health": "true"}
 ```
 
-#### Check Connectivity on Port TCP/2380
+### 检查端口 TCP / 2380 的连接
 
-Command:
+命令：
 
-``` 
+```
 for endpoint in $(docker exec etcd /bin/sh -c "etcdctl member list | cut -d, -f4"); do
   echo "Validating connection to ${endpoint}/version";
   docker run --net=host -v $(docker inspect kubelet --format '{{ range .Mounts }}{{ if eq .Destination "/etc/kubernetes" }}{{ .Source }}{{ end }}{{ end }}')/ssl:/etc/kubernetes/ssl:ro appropriate/curl --http1.1 -s -w "\n" --cacert $(docker exec etcd printenv ETCDCTL_CACERT) --cert $(docker exec etcd printenv ETCDCTL_CERT) --key $(docker exec etcd printenv ETCDCTL_KEY) "${endpoint}/version"
 done
 ```
 
-Command when using etcd version lower than 3.3.x (Kubernetes 1.13.x and lower) and `--internal-address` was specified when adding the node:
+当使用低于 3.3.x 的 etcd 版本（Kubernetes 1.13.x 及更低版本）并且添加节点时指定了`--internal-address` 时的命令：
 
-``` 
+```
 for endpoint in $(docker exec etcd /bin/sh -c "etcdctl --endpoints=\$ETCDCTL_ENDPOINT member list | cut -d, -f4"); do
   echo "Validating connection to ${endpoint}/version";
   docker run --net=host -v $(docker inspect kubelet --format '{{ range .Mounts }}{{ if eq .Destination "/etc/kubernetes" }}{{ .Source }}{{ end }}{{ end }}')/ssl:/etc/kubernetes/ssl:ro appropriate/curl --http1.1 -s -w "\n" --cacert $(docker exec etcd printenv ETCDCTL_CACERT) --cert $(docker exec etcd printenv ETCDCTL_CERT) --key $(docker exec etcd printenv ETCDCTL_KEY) "${endpoint}/version"
 done
 ```
 
-Example output:
+输出示例:
 
-``` 
+```
 Validating connection to https://IP:2380/version
 {"etcdserver":"3.2.18","etcdcluster":"3.2.0"}
 Validating connection to https://IP:2380/version
@@ -193,102 +175,97 @@ Validating connection to https://IP:2380/version
 {"etcdserver":"3.2.18","etcdcluster":"3.2.0"}
 ```
 
-## etcd Alarms
+## etcd 警报
 
-etcd will trigger alarms, for instance when it runs out of space.
+例如，etcd 空间不足时，etcd 将触发警报。
 
-Command:
+命令：
 
-``` 
+```
 docker exec etcd etcdctl alarm list
 ```
 
-Command when using etcd version lower than 3.3.x (Kubernetes 1.13.x and lower) and `--internal-address` was specified when adding the node:
+当使用低于 3.3.x 的 etcd 版本（Kubernetes 1.13.x 及更低版本）并且添加节点时指定了`--internal-address` 时的命令：
 
-``` 
+```
 docker exec etcd sh -c "etcdctl --endpoints=\$ETCDCTL_ENDPOINT alarm list"
 ```
 
-Example output when NOSPACE alarm is triggered:
+触发 NOSPACE 警报时的示例输出:
 
-``` 
+```
 memberID:x alarm:NOSPACE
 memberID:x alarm:NOSPACE
 memberID:x alarm:NOSPACE
 ```
 
-## etcd Space Errors
+## etcd 空间错误
 
-Related error messages are `etcdserver: mvcc: database space exceeded` or `applying raft message exceeded backend quota` . Alarm `NOSPACE` will be triggered.
+相关错误消息是`etcdserver: mvcc: database space exceeded`或`applying raft message exceeded backend quota`。警报`NOSPACE`将被触发。
 
-Resolutions:
+解决方法：
 
-* [Compact the Keyspace](#compact-the-keyspace)
-* [Defrag All etcd Members](#defrag-all-etcd-members)
-* [Check Endpoint Status](#check-endpoint-status)
-* [Disarm Alarm](#disarm-alarm)
+### 压缩键空间
 
-#### Compact the Keyspace
+命令：
 
-Command:
-
-``` 
+```
 rev=$(docker exec etcd etcdctl endpoint status --write-out json | egrep -o '"revision":[0-9]*' | egrep -o '[0-9]*')
 docker exec etcd etcdctl compact "$rev"
 ```
 
-Command when using etcd version lower than 3.3.x (Kubernetes 1.13.x and lower) and `--internal-address` was specified when adding the node:
+当使用低于 3.3.x 的 etcd 版本（Kubernetes 1.13.x 及更低版本）并且添加节点时指定了`--internal-address` 时的命令：
 
-``` 
+```
 rev=$(docker exec etcd sh -c "etcdctl --endpoints=\$ETCDCTL_ENDPOINT endpoint status --write-out json | egrep -o '\"revision\":[0-9]*' | egrep -o '[0-9]*'")
 docker exec etcd sh -c "etcdctl --endpoints=\$ETCDCTL_ENDPOINT compact \"$rev\""
 ```
 
-Example output:
+输出示例：
 
-``` 
+```
 compacted revision xxx
 ```
 
-#### Defrag All etcd Members
+### 对所有 etcd 成员进行碎片整理
 
-Command:
+命令：
 
-``` 
+```
 docker exec etcd etcdctl defrag --endpoints=$(docker exec etcd /bin/sh -c "etcdctl member list | cut -d, -f5 | sed -e 's/ //g' | paste -sd ','")
 ```
 
-Command when using etcd version lower than 3.3.x (Kubernetes 1.13.x and lower) and `--internal-address` was specified when adding the node:
+当使用低于 3.3.x 的 etcd 版本（Kubernetes 1.13.x 及更低版本）并且添加节点时指定了`--internal-address` 时的命令：
 
-``` 
+```
 docker exec etcd sh -c "etcdctl defrag --endpoints=$(docker exec etcd /bin/sh -c "etcdctl --endpoints=\$ETCDCTL_ENDPOINT member list | cut -d, -f5 | sed -e 's/ //g' | paste -sd ','")"
 ```
 
-Example output:
+输出示例：
 
-``` 
+```
 Finished defragmenting etcd member[https://IP:2379]
 Finished defragmenting etcd member[https://IP:2379]
 Finished defragmenting etcd member[https://IP:2379]
 ```
 
-#### Check Endpoint Status
+### 检查端点状态
 
-Command:
+命令：
 
-``` 
+```
 docker exec etcd etcdctl endpoint status --endpoints=$(docker exec etcd /bin/sh -c "etcdctl member list | cut -d, -f5 | sed -e 's/ //g' | paste -sd ','") --write-out table
 ```
 
-Command when using etcd version lower than 3.3.x (Kubernetes 1.13.x and lower) and `--internal-address` was specified when adding the node:
+当使用低于 3.3.x 的 etcd 版本（Kubernetes 1.13.x 及更低版本）并且添加节点时指定了`--internal-address` 时的命令：
 
-``` 
+```
 docker exec etcd sh -c "etcdctl endpoint status --endpoints=$(docker exec etcd /bin/sh -c "etcdctl --endpoints=\$ETCDCTL_ENDPOINT member list | cut -d, -f5 | sed -e 's/ //g' | paste -sd ','") --write-out table"
 ```
 
-Example output:
+输出示例：
 
-``` 
+```
 +-----------------+------------------+---------+---------+-----------+-----------+------------+
 | ENDPOINT        |        ID        | VERSION | DB SIZE | IS LEADER | RAFT TERM | RAFT INDEX |
 +-----------------+------------------+---------+---------+-----------+-----------+------------+
@@ -298,29 +275,29 @@ Example output:
 +-----------------+------------------+---------+---------+-----------+-----------+------------+
 ```
 
-#### Disarm Alarm
+### 解除告警
 
-After verifying that the DB size went down after compaction and defragmenting, the alarm needs to be disarmed for etcd to allow writes again.
+确认压缩和碎片整理后 DB 大小减小后，需要解除该告警，以便 etcd 允许再次写入。
 
-Command:
+命令：
 
-``` 
+```
 docker exec etcd etcdctl alarm list
 docker exec etcd etcdctl alarm disarm
 docker exec etcd etcdctl alarm list
 ```
 
-Command when using etcd version lower than 3.3.x (Kubernetes 1.13.x and lower) and `--internal-address` was specified when adding the node:
+当使用低于 3.3.x 的 etcd 版本（Kubernetes 1.13.x 及更低版本）并且添加节点时指定了`--internal-address` 时的命令：
 
-``` 
+```
 docker exec etcd sh -c "etcdctl --endpoints=\$ETCDCTL_ENDPOINT alarm list"
 docker exec etcd sh -c "etcdctl --endpoints=\$ETCDCTL_ENDPOINT alarm disarm"
 docker exec etcd sh -c "etcdctl --endpoints=\$ETCDCTL_ENDPOINT alarm list"
 ```
 
-Example output:
+输出示例：
 
-``` 
+```
 docker exec etcd etcdctl alarm list
 memberID:x alarm:NOSPACE
 memberID:x alarm:NOSPACE
@@ -329,77 +306,76 @@ docker exec etcd etcdctl alarm disarm
 docker exec etcd etcdctl alarm list
 ```
 
-## Log Level
+## 日志级别
 
-The log level of etcd can be changed dynamically via the API. You can configure debug logging using the commands below.
+可以通过 API 动态更改 etcd 的日志级别。您可以使用以下命令配置调试日志记录。
 
-Command:
+命令：
 
-``` 
+```
 docker run --net=host -v $(docker inspect kubelet --format '{{ range .Mounts }}{{ if eq .Destination "/etc/kubernetes" }}{{ .Source }}{{ end }}{{ end }}')/ssl:/etc/kubernetes/ssl:ro appropriate/curl -s -XPUT -d '{"Level":"DEBUG"}' --cacert $(docker exec etcd printenv ETCDCTL_CACERT) --cert $(docker exec etcd printenv ETCDCTL_CERT) --key $(docker exec etcd printenv ETCDCTL_KEY) $(docker exec etcd printenv ETCDCTL_ENDPOINTS)/config/local/log
 ```
 
-Command when using etcd version lower than 3.3.x (Kubernetes 1.13.x and lower) and `--internal-address` was specified when adding the node:
+当使用低于 3.3.x 的 etcd 版本（Kubernetes 1.13.x 及更低版本）并且添加节点时指定了`--internal-address` 时的命令：
 
-``` 
+```
 docker run --net=host -v $(docker inspect kubelet --format '{{ range .Mounts }}{{ if eq .Destination "/etc/kubernetes" }}{{ .Source }}{{ end }}{{ end }}')/ssl:/etc/kubernetes/ssl:ro appropriate/curl -s -XPUT -d '{"Level":"DEBUG"}' --cacert $(docker exec etcd printenv ETCDCTL_CACERT) --cert $(docker exec etcd printenv ETCDCTL_CERT) --key $(docker exec etcd printenv ETCDCTL_KEY) $(docker exec etcd printenv ETCDCTL_ENDPOINT)/config/local/log
 ```
 
-To reset the log level back to the default ( `INFO` ), you can use the following command.
+要将日志级别重置回默认值（INFO），可以使用以下命令。
 
-Command:
+命令：
 
-``` 
+```
 docker run --net=host -v $(docker inspect kubelet --format '{{ range .Mounts }}{{ if eq .Destination "/etc/kubernetes" }}{{ .Source }}{{ end }}{{ end }}')/ssl:/etc/kubernetes/ssl:ro appropriate/curl -s -XPUT -d '{"Level":"INFO"}' --cacert $(docker exec etcd printenv ETCDCTL_CACERT) --cert $(docker exec etcd printenv ETCDCTL_CERT) --key $(docker exec etcd printenv ETCDCTL_KEY) $(docker exec etcd printenv ETCDCTL_ENDPOINTS)/config/local/log
 ```
 
-Command when using etcd version lower than 3.3.x (Kubernetes 1.13.x and lower) and `--internal-address` was specified when adding the node:
+当使用低于 3.3.x 的 etcd 版本（Kubernetes 1.13.x 及更低版本）并且添加节点时指定了`--internal-address` 时的命令：
 
-``` 
+```
 docker run --net=host -v $(docker inspect kubelet --format '{{ range .Mounts }}{{ if eq .Destination "/etc/kubernetes" }}{{ .Source }}{{ end }}{{ end }}')/ssl:/etc/kubernetes/ssl:ro appropriate/curl -s -XPUT -d '{"Level":"INFO"}' --cacert $(docker exec etcd printenv ETCDCTL_CACERT) --cert $(docker exec etcd printenv ETCDCTL_CERT) --key $(docker exec etcd printenv ETCDCTL_KEY) $(docker exec etcd printenv ETCDCTL_ENDPOINT)/config/local/log
 ```
 
-## etcd Content
+## etcd 内容
 
-If you want to investigate the contents of your etcd, you can either watch streaming events or you can query etcd directly, see below for examples.
+如果要调查 etcd 的内容，则可以观看事件流或直接查询 etcd，请参见以下示例。
 
-#### Watch Streaming Events
+### 查看实时事件
 
-Command:
+命令：
 
-``` 
+```
 docker exec etcd etcdctl watch --prefix /registry
 ```
 
-Command when using etcd version lower than 3.3.x (Kubernetes 1.13.x and lower) and `--internal-address` was specified when adding the node:
+当使用低于 3.3.x 的 etcd 版本（Kubernetes 1.13.x 及更低版本）并且添加节点时指定了`--internal-address` 时的命令：
 
-``` 
+```
 docker exec etcd etcdctl --endpoints=\$ETCDCTL_ENDPOINT watch --prefix /registry
 ```
 
-If you only want to see the affected keys (and not the binary data), you can append `| grep -a ^/registry` to the command to filter for keys only.
+如果只想查看受影响的键（而不是二进制数据），则可以附加 `| grep -a ^/registry` 命令仅过滤键。
 
-#### Query etcd Directly
+### 直接查询 etcd
 
-Command:
+命令：
 
-``` 
+```
 docker exec etcd etcdctl get /registry --prefix=true --keys-only
 ```
 
-Command when using etcd version lower than 3.3.x (Kubernetes 1.13.x and lower) and `--internal-address` was specified when adding the node:
+当使用低于 3.3.x 的 etcd 版本（Kubernetes 1.13.x 及更低版本）并且添加节点时指定了`--internal-address` 时的命令：
 
-``` 
+```
 docker exec etcd etcdctl --endpoints=\$ETCDCTL_ENDPOINT get /registry --prefix=true --keys-only
 ```
 
-You can process the data to get a summary of count per key, using the command below:
+您可以使用以下命令处理数据以获取每个键计数的摘要：
 
-``` 
+```
 docker exec etcd etcdctl get /registry --prefix=true --keys-only | grep -v ^$ | awk -F'/' '{ if ($3 ~ /cattle.io/) {h[$3"/"$4]++} else { h[$3]++ }} END { for(k in h) print h[k], k }' | sort -nr
 ```
 
-## Replacing Unhealthy etcd Nodes
+## 更换不健康的 etcd 节点
 
-When a node in your etcd cluster becomes unhealthy, the recommended approach is to fix or remove the failed or unhealthy node before adding a new etcd node to the cluster.
-
+当您的 etcd 集群中的某个节点不正常时，建议的方法是在将新的 etcd 节点添加到集群之前，先修复或删除出现故障或不正常的节点。

@@ -2,54 +2,50 @@
 title: 部署工作负载
 ---
 
-Deploy a workload to run an application in one or more containers.
+部署工作负载以运行在一个或多个容器中的应用程序。
 
-1. From the **Global** view, open the project that you want to deploy a workload to.
+1.  在**全局**视图中，打开要部署工作负载的项目。
 
-1. 1. Click **Resources > Workloads.** (In versions prior to v2.3.0, click the **Workloads** tab.) From the **Workloads** view, click **Deploy**.
+1.  点击**资源 > 工作负载**(在 v2.3.0 之前的版本中，单击**工作负载**选项卡)。在**工作负载**视图中，点击**部署**。
 
-1. Enter a **Name** for the workload.
+1.  为工作负载输入一个**名称**。
 
-1. Select a [workload type](/docs/k8s-in-rancher/workloads/). The workload defaults to a scalable deployment, by can change the workload type by clicking **More options.**
+1.  选择一个[工作负载类型](/docs/k8s-in-rancher/workloads/_index)。工作负载默认为可伸缩的部署，通过单击**更多选项**可以更改工作负载类型。
 
-1. From the **Docker Image** field, enter the name of the Docker image that you want to deploy to the project, optionally prefacing it with the registry host (e.g. `quay.io` , `registry.gitlab.com` , etc.). During deployment, Rancher pulls this image from the specified public or private registry. If no registry host is provided, Rancher will pull the image from [Docker Hub](https://hub.docker.com/explore/). Enter the name exactly as it appears in the registry server, including any required path, and optionally including the desired tag (e.g. `registry.gitlab.com/user/path/image:tag` ). If no tag is provided, the `latest` tag will be automatically used.
+1.  在**Docker 镜像**字段中，输入要部署到项目的 Docker 镜像的名称，可以选择使用镜像库地址作为前缀 (例如 `quay.io`，`registry.gitlab.com`等)。在部署期间，Rancher 将从指定的公共或私有镜像仓库获取此镜像。如果没有指定镜像仓库，Rancher 将从[Docker Hub](https://hub.docker.com/explore/)获取镜像。请输入与镜像库中的镜像名称完全相同的名称，包括所需的路径和所需的标记 (例如，`registry.gitlab.com/user/path/image:tag`)。如果没有提供标签，则会自动使用`latest`的标签。
+1.  选择一个现有的[命名空间](/docs/cluster-admin/projects-and-namespaces/_index)，或者单击**添加一个新的命名空间**创建一个新的命名空间。
+1.  单击**添加端口**输入端口映射，允许在集群内外访问应用程序。获取更多信息，请参见[服务](/docs/k8s-in-rancher/workloads/_index)。
 
-1. Either select an existing [namespace](/docs/k8s-in-rancher/projects-and-namespaces/#namespaces), or click **Add to a new namespace** and enter a new namespace.
+1.  配置其余选项:
 
-1. Click **Add Port** to enter a port mapping, which enables access to the application inside and outside of the cluster . For more information, see [Services](/docs/k8s-in-rancher/workloads/#services).
+    - **环境变量**
 
-1. Configure the remaining options:
+      这里可以为工作负载动态地指定环境变量，也可以从其他来源，例如[密文](/docs/k8s-in-rancher/secrets/_index)或[配置映射](/docs/k8s-in-rancher/configmaps/_index)，获取环境变量。
 
-   - **Environment Variables**
+    - **节点调度**
+    - **健康检查**
+    - **数据卷**
 
-     Use this section to either specify environment variables for your workload to consume on the fly, or to pull them from another source, such as a secret or [ConfigMap](/docs/k8s-in-rancher/configmaps/).
+      这里可以为工作负载添加存储。您可以手动指定要添加的卷，使用持久卷声明动态地为工作负载创建卷，或者从[配置映射](/docs/k8s-in-rancher/configmaps/_index)，[密文](/docs/k8s-in-rancher/secrets/_index)，[证书](/docs/k8s-in-rancher/certificates/_index)等文件中读取要使用的卷的数据。
 
-   - **Node Scheduling**
-   - **Health Check**
-   - **Volumes**
+      在部署**有状态程序集**时，应该在使用持久卷时使用卷声明模板。这将确保在扩展**有状态程序集**时动态创建持久卷。Rancher v2.2.0 的 UI 中提供了该选项。
 
-     Use this section to add storage for your workload. You can manually specify the volume that you want to add, use a persistent volume claim to dynamically create a volume for the workload, or read data for a volume to use from a file such as a [ConfigMap](/docs/k8s-in-rancher/configmaps/).
+    - **缩放/升级策略**
 
-     When you are deploying a Stateful Set, you should use a Volume Claim Template when using Persistent Volumes. This will ensure that Persistent Volumes are created dynamically when you scale your Stateful Set. This option is available in the UI as of Rancher v2.2.0.
+      > **使用 Amazon EBS 卷时请注意：**
+      >
+      > 挂载一个 Amazon EBS 卷:
+      >
+      > - 在 [Amazon AWS](https://aws.amazon.com/)，节点必须位于相同的可用性区域，并且拥有附加/卸载卷的 IAM 权限。
+      > - 集群必须配置了 [AWS Cloud Provider](https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/#aws)选项。有关启用此选项的更多信息，请参见[创建 Amazon EC2 集群](/docs/cluster-provisioning/rke-clusters/node-pools/ec2/_index)或[创建自定义集群](/docs/cluster-provisioning/custom-clusters/_index)。
 
-   - **Scaling/Upgrade Policy**
+1.  点击**显示高级选项**来配置：
 
-     > **Amazon Note for Volumes:**
-     >
-     > To mount an Amazon EBS volume:
-     >
-     > - In [Amazon AWS](https://aws.amazon.com/), the nodes must be in the same Availability Zone and possess IAM permissions to attach/unattach volumes.
-     >
-     > - The cluster must be using the [AWS cloud provider](https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/#aws) option. For more information on enabling this option see [Creating an Amazon EC2 Cluster](/docs/cluster-provisioning/rke-clusters/node-pools/ec2/) or [Creating a Custom Cluster](/docs/cluster-provisioning/custom-clusters/).
+    - **命令**
+    - **网络**
+    - **标签/注释**
+    - **安全和主机配置**
 
-1) Click **Show Advanced Options** and configure:
+1.  点击 **启动**。
 
-   - **Command**
-   - **Networking**
-   - **Labels & Annotations**
-   - **Security and Host Config**
-
-1) Click **Launch**.
-
-**Result:** The workload is deployed to the chosen namespace. You can view the workload's status from the project's **Workloads** view.
-
+**结果：** 工作负载被部署到所选的命名空间。您可以从项目的**工作负载**视图中查看工作负载的状态。

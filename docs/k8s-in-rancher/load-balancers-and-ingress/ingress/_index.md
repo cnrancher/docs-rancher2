@@ -2,77 +2,72 @@
 title: 添加 Ingress
 ---
 
-Ingress can be added for workloads to provide load balancing, SSL termination and host/path based routing. When using ingresses in a project, you can program the ingress hostname to an external DNS by setting up a [Global DNS entry](/docs/catalog/globaldns/).
+可以为工作负载添加 Ingress，以提供负载均衡，SSL 终止和基于主机/路径的路由。在项目中使用 Ingress 时，可以设置全局 DNS 条目，从而对外部 DNS 进行编程动态设置 Ingress。请参阅[全局 DNS 条目](/docs/catalog/globaldns/_index)。
 
-1. From the **Global** view, open the project that you want to add ingress to.
+1. 在**全局**视图中，打开要添加 Ingress 的项目。
 
-1. Click **Resources** in the main navigation bar. Click the **Load Balancing** tab. (In versions prior to v2.3.0, just click the **Load Balancing** tab.) Then click **Add Ingress**.
+1. 在主导航栏中单击“资源”。点击“负载均衡”标签。（在 v2.3.0 之前的版本中，只需单击“负载均衡”选项卡。）然后单击“添加 Ingress”。
 
-1. Enter a **Name** for the ingress.
+1. 输入 Ingress 的**名称**。
 
-1. Select an existing **Namespace** from the drop-down list. Alternatively, you can create a new [namespace](/docs/k8s-in-rancher/projects-and-namespaces/#namespaces) on the fly by clicking **Add to a new namespace**.
+1. 从下拉列表中选择一个现有的**命名空间**。或者，您可以创建一个新的[命名空间](/docs/cluster-admin/projects-and-namespaces/_index)，点击**添加到新的命名空间**来快速进行操作。
 
-1. Create ingress forwarding **Rules**.
+1. 创建 Ingress 转发**规则**。
 
-   - **Automatically generate a xip.io hostname**
+   - **自动生成 xip.io 主机名**
 
-     If you choose this option, ingress routes requests to hostname to a DNS name that's automatically generated. Rancher uses [xip.io](http://xip.io/) to automatically generates the DNS name. This option is best used for testing, _not_ production environments.
+     如果选择此选项，Ingress 会通过一个自动生成的 DNS 名称路由请求。Rancher 使用 [xip.io](http://xip.io/) 自动生成 DNS 名称。此选项最适合用于测试生产环境，而**非**生产环境。
 
-     > **Note:** To use this option, you must be able to resolve to `xip.io` addresses.
+     > **注意：**要使用此选项，您必须能够解析 `xip.io` 地址。
 
-     1. Add a **Target Backend**. By default, a workload is added to the ingress, but you can add more targets by clicking either **Service** or **Workload**.
+     1. 添加**目标后端**。默认情况下，一个工作负载会添加到 Ingress 中，您可以通过单击**服务**或**工作负载**来添加更多目标。
 
-     1. **Optional:** If you want specify a workload or service when a request is sent to a particular hostname path, add a **Path** for the target. For example, if you want requests for `www.mysite.com/contact-us` to be sent to a different service than `www.mysite.com` , enter `/contact-us` in the **Path** field.
+     1. **可选：**如果要在将请求发送到特定主机名路径时指定工作负载或服务，请为目标添加**路径**。例如，如果您希望将`www.mysite.com/contact-us`的请求发送到与`www.mysite.com`不同的服务，请在**路径**字段中输入`/contact-us`。通常，您创建的第一个规则不包含路径。
 
-        Typically, the first rule that you create does not include a path.
+     1. 从**目标**下拉列表中为已添加的每个目标选择工作负载或服务。
 
-     1. Select a workload or service from the **Target** drop-down list for each target you've added.
+     1. 输入每个目标使用的**端口**号。
 
-     1. Enter the **Port** number that each target operates on.
+   - **指定要使用的主机名**
 
-   - **Specify a hostname to use**
+     如果使用此选项，Ingress 会根据这个主机名路由请求到您指定的服务或工作负载。
 
-     If you use this option, ingress routes requests for a hostname to the service or workload that you specify.
+     1. 输入您的 Ingress 处理请求转发时用的主机名。例如，`www.mysite.com`.
 
-     1. Enter the hostname that your ingress will handle request forwarding for. For example, `www.mysite.com` .
+     1. 添加**目标后端**。默认情况下，一个工作负载会添加到 Ingress 中，您可以通过单击**服务**或**工作负载**来添加更多目标。
 
-     1. Add a **Target Backend**. By default, a workload is added to the ingress, but you can add more targets by clicking either **Service** or **Workload**.
+     1. **可选：**如果要在将请求发送到特定主机名路径时指定工作负载或服务，请为目标添加**路径**。例如，如果您希望将`www.mysite.com/contact-us`的请求发送到与`www.mysite.com`不同的服务，请在**路径**字段中输入`/contact-us`。通常，您创建的第一个规则不包含路径。
 
-     1. **Optional:** If you want specify a workload or service when a request is sent to a particular hostname path, add a **Path** for the target. For example, if you want requests for `www.mysite.com/contact-us` to be sent to a different service than `www.mysite.com` , enter `/contact-us` in the **Path** field.
+     1. 从**目标**下拉列表中为已添加的每个目标选择工作负载或服务。
 
-        Typically, the first rule that you create does not include a path.
+     1. 输入每个目标使用的**端口**号。
 
-     1. Select a workload or service from the **Target** drop-down list for each target you've added.
+   - **用作默认后端**
 
-     1. Enter the **Port** number that each target operates on.
+     使用此选项可以设置 Ingress 规则，以处理与任何其他 Ingress 规则都不匹配的请求。例如，使用此选项，来设置`404`页面。
 
-    - **Use as the default backend**
+     > **注意：**如果您使用 RKE 部署 Rancher，则已经配置了 404 和 202 的默认后端。
 
-        Use this option to set an ingress rule for handling requests that don't match any other ingress rules. For example, use this option to route requests that can't be found to a `404` page.
+     1. 添加**目标后端**。单击**服务**或**工作负载**以添加目标。
 
-        >**Note:** If you deployed Rancher using RKE, a default backend for 404s and 202s is already configured.
+     1. 从**目标**下拉列表中选择服务或工作负载。
 
-        1. Add a **Target Backend**. Click either **Service** or **Workload** to add the target.
+1. **可选：**单击**添加规则**以创建其他 Ingress 规则。例如，在创建了包含路由请求的主机名的 Ingress 规则之后，您可能想要创建一个默认后端来处理 404。
 
-        1. Select a service or workload from the **Target** drop-down list.
+1. 如果您的任何 Ingress 规则需要处理加密端口的请求，请添加证书以加密/解密通信。
 
-1. **Optional:** click **Add Rule** to create additional ingress rules. For example, after you create ingress rules to direct requests for your hostname, you'll likely want to create a default backend to handle 404s.
+   > **注意：**您必须具有一个 SSL 证书，Ingress 可用它来加密/解密通信。有关更多信息，请参见[添加 SSL 证书](/docs/k8s-in-rancher/certificates/_index)。
 
-1. If any of your ingress rules handle requests for encrypted ports, add a certificate to encrypt/decrypt communications.
+   1. 点击**添加证书**。
 
-   > **Note:** You must have an SSL certificate that the ingress can use to encrypt/decrypt communications. For more information see [Adding SSL Certificates](/docs/k8s-in-rancher/certificates/).
+   1. 从下拉列表中选择一个**证书**。
 
-   1. Click **Add Certificate**.
+   1. 输入使用加密通信的**主机**。
 
-   1. Select a **Certificate** from the drop-down list.
+   1. 要添加使用证书的其他主机，请单击**添加主机**。
 
-   1. Enter the **Host** using encrypted communication.
+1. **可选：**添加[标签](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)或[注释](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/)，为您的 Ingress 提供元数据。
 
-   1. To add additional hosts that use the certificate, click **Add Hosts**.
+   有关可用注释的列表，请参见 [Nginx Ingress Controller 文档](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/).
 
-1.**Optional:** Add [Labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/) and/or [Annotations](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/) to provide metadata for your ingress.
-
-   For a list of annotations available for use, see the [Nginx Ingress Controller Documentation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/).
-
-**Result:** Your ingress is added to the project. The ingress begins enforcing your ingress rules.
-
+**结果：**您的 Ingress 已添加到项目中。Ingress 开始执行您的 Ingress 规则。

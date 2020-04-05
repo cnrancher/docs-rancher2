@@ -2,21 +2,20 @@
 title: 升级工作负载
 ---
 
-When a new version of an application image is released on Docker Hub, you can upgrade any workloads running a previous version of the application to the new one.
+当镜像库中发布了新版本的应用程序镜像时，可以将运行以前应用程序版本的作负载升级到新版本。
 
-1. From the **Global** view, open the project running the workload you want to upgrade.
+1. 在**全局**视图，打开要升级的工作负载所在的项目。
 
-1. Find the workload that you want to upgrade and select **Vertical Ellipsis (... ) > Edit**.
+1. 找到要升级的工作负载，选择 **省略号 (... ) > 编辑**。
 
-1. Update the **Docker Image** to the updated version of the application image on Docker Hub.
+1. 将**Docker 镜像**更新为镜像库中上应用程序镜像的更新版本。
 
-1. Update any other options that you want to change.
+1. 更新您想要更改的任何其他选项。
 
-1. Review and edit the workload's **Scaling/Upgrade** policy.
+1. 检查和编辑工作负载的**缩放/升级**策略。
 
-   These options control how the upgrade rolls out to containers that are currently running. For example, for scalable deployments, you can chose whether you want to stop old pods before deploying new ones, or vice versa, as well as the upgrade batch size.
+   这些选项控制升级如何缩放到当前正在运行的容器数量。例如，对于可伸缩的部署，您可以选择是否在部署新 Pod 之前停止旧 Pod，或者相反，以及每批次升级的 Pod 个数。
 
-1. Click **Upgrade**.
+1. 点击 **升级**。
 
-**Result:** The workload begins upgrading its containers, per your specifications. Note that scaling up the deployment or updating the upgrade/scaling policy won't result in the pods recreation.
-
+**结果：** 工作负载开始根据您的升级策略，升级其容器。请注意，缩放部署或更新升级/缩放策略不会导致 Pod 重建。
