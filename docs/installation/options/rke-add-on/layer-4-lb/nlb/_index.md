@@ -30,7 +30,7 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
 
 登录[Amazon AWS 控制台](https://console.aws.amazon.com/ec2/)开始，确保选择创建 EC2 实例(Linux 节点)的**地区**。
 
-目标组配置位于**EC2**服务的**负载平衡**部分。选择**服务**，然后选择**EC2**，找到**负载平衡**部分并打开**目标组**。
+目标组配置位于**EC2**服务的**负载均衡**部分。选择**服务**，然后选择**EC2**，找到**负载均衡**部分并打开**目标组**。
 
 ![EC2 Load Balancing section](/img/rancher/ha/nlb/ec2-loadbalancing.png)
 
@@ -150,7 +150,7 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
 
 1.  在您的 Web 浏览器中，导航到[Amazon EC2 控制台](https://console.aws.amazon.com/ec2/)。
 
-2.  在导航栏中, 选择**负载平衡**>**负载均衡器**。
+2.  在导航栏中, 选择**负载均衡**>**负载均衡器**。
 
 3.  单击**创建负载均衡器**。
 

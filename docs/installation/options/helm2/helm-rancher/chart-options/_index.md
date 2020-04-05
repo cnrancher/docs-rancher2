@@ -179,7 +179,7 @@ Rancher 将对`/healthz`端点上的健康检查响应`200`。
 
 此 NGINX 配置已在 NGINX 1.14 上进行了测试。
 
-> **注意事项:** 此 NGINX 配置只是一个示例，可能不适合您的环境。完整文档请参阅[NGINX 负载平衡 - HTTP 负载平衡](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/)。
+> **注意事项:** 此 NGINX 配置只是一个示例，可能不适合您的环境。完整文档请参阅[NGINX 负载均衡 - HTTP 负载均衡](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/)。
 
 - 将`IP_NODE1`，`IP_NODE2`和`IP_NODE3`替换为集群中节点的 IP 地址。
 - 将两个出现的`FQDN`替换为 Rancher 的 DNS 名称。

@@ -1,59 +1,58 @@
 ---
-title: 介绍
+title: 工作原理
 ---
 
-Within Rancher, you can set up load balancers and ingress controllers to redirect service requests.
+在 Rancher 中您可以设置负载均衡器和 Ingress 以重定向服务请求。
 
-### Load Balancers
+## 负载均衡器
 
-After you launch an application, the app is only available within the cluster. It can't be reached from outside the cluster.
+启动应用程序后，该应用程序仅在集群中可用。无法从集群外部访问它。
 
-If you want your applications to be externally accessible, you must add a load balancer or ingress to your cluster. Load balancers create a gateway for external connections to access your cluster, provided that the user knows the load balancer's IP address and the application's port number.
+如果希望可以从外部访问您的应用程序，你可以将负载均衡器或 Ingress 添加到集群中。如果用户知道负载均衡器的 IP 地址和应用程序的端口号，则可以通过负载均衡器创建的网关访问您的集群。
 
-Rancher supports two types of load balancers:
+Rancher 支持两种类型的负载均衡器：
 
-* [Layer-4 Load Balancers](/docs/k8s-in-rancher/load-balancers-and-ingress/load-balancers/#layer-4-load-balancer)
-* [Layer-7 Load Balancers](/docs/k8s-in-rancher/load-balancers-and-ingress/load-balancers/#layer-7-load-balancer)
+- [4 层负载均衡器](/docs/k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index)
+- [7 层负载均衡器](/docs/k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index)
 
-For more information, see [load balancers](/docs/k8s-in-rancher/load-balancers-and-ingress/load-balancers).
+有关更多信息，请参见[负载均衡器](/docs/k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index)。
 
-#### Load Balancer Limitations
+### 负载均衡器限制
 
-Load Balancers have a couple of limitations you should be aware of:
+负载均衡器有两个限制您应该注意：
 
-* Load Balancers can only handle one IP address per service, which means if you run multiple services in your cluster, you must have a load balancer for each service. Running multiples load balancers can be expensive.
+- 每个负载均衡器只能处理一个 IP 地址，这意味着，如果您在集群中运行多个服务，则每个服务都必须具有一个负载均衡器。运行多个负载均衡器可能会很昂贵。
 
-* If you want to use a load balancer with a Hosted Kubernetes cluster (i.e., clusters hosted in GKE, EKS, or AKS), the load balancer must be running within that cloud provider's infrastructure. Please review the compatibility tables regarding support for load balancers based on how you've provisioned your clusters:
+- 如果要在托管的 Kubernetes 集群中（例如，GKE，EKS 或 AKS）使用负载均衡器，则负载均衡器必须在该云提供商的基础架构中运行。请根据配置集群的方式查看有关负载均衡器支持的兼容性表：
 
-    - [Support for Layer-4 Load Balancing](/docs/k8s-in-rancher/load-balancers-and-ingress/load-balancers/#support-for-layer-4-load-balancing)
+  - [支持 4 层负载均衡](/docs/k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index)
 
-    - [Support for Layer-7 Load Balancing](/docs/k8s-in-rancher/load-balancers-and-ingress/load-balancers/#support-for-layer-7-load-balancing)
+  - [支持 7 层负载均衡](/docs/k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index)
 
-### Ingress
+## Ingress
 
-As mentioned in the limitations above, the disadvantages of using a load balancer are:
+如以上限制所述，使用负载均衡器的缺点是：
 
-* Load Balancers can only handle one IP address per service.
-* If you run multiple services in your cluster, you must have a load balancer for each service.
-* It can be expensive to have a load balancer for every service.
+- 负载均衡器的每个实例只能处理一个 IP 地址。
+- 如果您在集群中运行多个服务，则每个服务都必须具有一个负载均衡器。
+- 为每个服务都配备一个负载均衡器可能会很昂贵。
 
-In contrast, when an ingress is used as the entrypoint into a cluster, the ingress can route traffic to multiple services with greater flexibility. It can map multiple HTTP requests to services without individual IP addresses for each service.
+相反，当将 Ingress 用作集群的入口点时，Ingress 可以更灵活地将流量路由到多个服务。它可以将多个 HTTP 请求映射到服务，而无需为每个服务使用单独的 IP 地址。
 
-Therefore, it is useful to have an ingress if you want multiple services to be exposed with the same IP address, the same Layer 7 protocol, or the same privileged node-ports: 80 and 443.
+因此，如果要使用相同的 IP 地址，相同的第 7 层协议或相同的特权节点端口：80 和 443 公开多个服务，则可以使用 Ingress。
 
-Ingress works in conjunction with one or more ingress controllers to dynamically route service requests. When the ingress receives a request, the ingress controller(s) in your cluster direct the request to the correct service based on service subdomains or path rules that you've configured.
+Ingress 与一个或多个 Ingress 控制器配合使用完成动态路由服务请求。当 Ingress 收到请求时，集群中的 Ingress 控制器将根据您配置的服务子域或路径规则将请求定向到正确的服务。
 
-Each Kubernetes Ingress resource corresponds roughly to a file in `/etc/nginx/sites-available/` containing a `server{}` configuration block, where requests for specific files and folders are configured.
+每个 Kubernetes Ingress 资源，你可以理解为类似`/etc/nginx/sites-available/`中的一个包含`server{}`配置的文件，其中配置了对特定文件和文件夹的请求。
 
-Your ingress, which creates a port of entry to your cluster similar to a load balancer, can reside within your cluster or externally. Ingress and ingress controllers residing in RKE-launcher clusters are powered by [Nginx](https://www.nginx.com/).
+与负载均衡器类似，您的 Ingress 可以创建集群的入口端口，它可以在集群内部或外部。在 RKE 集群中的 Ingress 和 Ingress 控制器是由 [Nginx](https://www.nginx.com/) 提供的。
 
-Ingress can provide other functionality as well, such as SSL termination, name-based virtual hosting, and more.
+Ingress 还可以提供其他功能，例如 SSL 终止，基于名称的虚拟服务等等。
 
-> **Using Rancher in a High Availability Configuration?**
+> **在 Rancher 高可用集群中使用 Ingress?**
 >
-> Refrain from adding an Ingress to the `local` cluster. The Nginx Ingress Controller that Rancher uses acts as a global entry point for _all_ clusters managed by Rancher, including the `local` cluster. Therefore, when users try to access an application, your Rancher connection may drop due to the Nginx configuration being reloaded. We recommend working around this issue by deploying applications only in clusters that you launch using Rancher.
+> 请勿将 Ingress 添加到`local`集群中。Rancher 使用的 Nginx Ingress Controller 充当 了 Rancher 管理的**全部**集群（包括`local`集群）的全局入口点。因此，当用户配置访问应用程序的 Ingress 时，它会导致 Nginx 重新加载配置，您的 Rancher 连接可能会断开。我们建议仅在下游集群中部署业务应用程序。
 
-* For more information on how to set up ingress in Rancher, see [Ingress](/docs/k8s-in-rancher/load-balancers-and-ingress/ingress).
-* For complete information about ingress and ingress controllers, see the [Kubernetes Ingress Documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/)
-* When using ingresses in a project, you can program the ingress hostname to an external DNS by setting up a Global DNS entry, see [Global DNS](/docs/catalog/globaldns/).
-
+- 有关如何在 Rancher 中设置 Ingress 的更多信息, 请参见 [Ingress](/docs/k8s-in-rancher/load-balancers-and-ingress/ingress/_index)。
+- 有关 Ingress 和 Ingress 控制器的完整信息，请参见 [Kubernetes Ingress 文档](https://kubernetes.io/docs/concepts/services-networking/ingress/)。
+- 在项目中使用 Ingress 时，可以设置全局 DNS 条目，从而对外部 DNS 进行编程动态设置 Ingress。请参见[全局 DNS](/docs/catalog/globaldns/_index)。

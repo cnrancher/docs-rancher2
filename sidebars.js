@@ -593,8 +593,8 @@ module.exports = {
         items: [
           'k8s-in-rancher/workloads/_index',
           'k8s-in-rancher/workloads/deploy-workloads/_index',
-          'k8s-in-rancher/workloads/rollback-workloads/_index',
           'k8s-in-rancher/workloads/upgrade-workloads/_index',
+          'k8s-in-rancher/workloads/rollback-workloads/_index',
           'k8s-in-rancher/workloads/add-a-sidecar/_index'
         ]
       },

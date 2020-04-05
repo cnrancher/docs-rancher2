@@ -2,49 +2,48 @@
 title: 服务发现
 ---
 
-For every workload created, a complementing Service Discovery entry is created. This Service Discovery entry enables DNS resolution for the workload's pods using the following naming convention:
-`<workload>.<namespace>.svc.cluster.local` .
+对于创建的每个工作负载，都会创建一个相应的服务发现。此服务发现使用以下命名约定为工作负载的容器启用 DNS 解析：
+`<workload>.<namespace>.svc.cluster.local`.
 
-However, you also have the option of creating additional Service Discovery records. You can use these additional records so that a given [namespace](/docs/k8s-in-rancher/projects-and-namespaces/#namespaces) resolves with one or more external IP addresses, an external hostname, an alias to another DNS record, other workloads, or a set of pods that match a selector that you create.
+您还可以创建其他服务发现。您可以使用这些 DNS 记录，让用户可以通过 DNS 解析到一个或多个外部 IP 地址，外部主机名，另一个 DNS 记录的别名，其他工作负载或一组与您创建的选择器匹配的 Pod。
 
-1. From the **Global** view, open the project that you want to add a DNS record to.
+1. 从**全局**视图中，打开要添加 DNS 记录的项目。
 
-1. Click **Resources** in the main navigation bar. Click the **Service Discovery** tab. (In versions prior to v2.3.0, just click the **Service Discovery** tab.) Then click **Add Record**.
+1. 在主导航栏中单击**资源**。点击**服务发现**标签。（在 v2.3.0 之前的版本中，只需单击**服务发现**选项卡。）然后单击**添加记录**。
 
-1. Enter a **Name** for the DNS record. This name is used for DNS resolution.
+1. 输入 DNS 记录的**名称**。此名称用于 DNS 解析。
 
-1. Select a **Namespace** from the drop-down list. Alternatively, you can create a new namespace on the fly by clicking **Add to a new namespace**.
+1. 从下拉列表中选择一个**命名空间**。或者您可以通过单击**添加到新命名空间**来动态创建新命名空间。
 
-1. Select one of the **Resolves To** options to route requests to the DNS record.
+1. 选择一个**解析为**选项，以将请求路由到 DNS 记录。
 
-   1.**One or more external IP addresses**
+   1. **一个或多个外部 IP 地址**
 
-      Enter an IP address in the **Target IP Addresses** field. Add more IP addresses by clicking **Add Target IP**.
+      在**目标 IP 地址**字段中输入 IP 地址。通过单击**添加 目标 IP**添加更多 IP 地址。
 
-   1.**An external hostname**
+   1. **外部主机名**
 
-      Enter a **Target Hostname**.
+      输入**目标主机名**。
 
-   1.**Alias of another DNS record's value**
+   1. **另一个 DNS 记录值的别名**
 
-      Click **Add Target Record** and select another DNS record from the **Value** drop-down.
+      单击**添加目标记录**，然后从**值**下拉列表中选择另一个 DNS 记录。
 
-   1.**One or more workloads**
+   1. **一个或多个工作负载**
 
-      Click **Add Target Workload** and select another workload from the **Value** drop-down.
+      点击 **添加目标工作负载** 然后从**值**下拉列表中选择另一个工作量.
 
-   1.**The set of pods which match a selector**
+   1. **与选择器匹配的 Pods**
 
-      Enter key value pairs of [label selectors](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors) to create a record for all pods that match your parameters.
+   输入的键值对[标签选择器](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors)为与您的参数匹配的所有 Pod 创建记录。
 
-1. Click **Create**
+1. 点击 **创建**
 
-**Result:** A new DNS record is created.
+**结果：** 创建了一个新的 DNS 记录。
 
-* You can view the record by from the project's **Service Discovery** tab.
-* When you visit the new DNS name for the new record that you created ( `<recordname>.<namespace>.svc.cluster.local` ), it resolves the chosen namespace.
+- 您可以通过项目的**服务发现**选项卡查看记录。
+- 您可以通过 `<recordname>.<namespace>.svc.cluster.local` 来使用新创建的 DNS 记录，它将按照您的配置进行解析。
 
-### Related Links
+## 相关链接
 
-* [Adding entries to Pod /etc/hosts with HostAliases](https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/)
-
+- [使用 HostAliases 参数将记录添加到 Pod 中的 /etc/hosts](https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/)

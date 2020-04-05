@@ -2,13 +2,12 @@
 title: 回滚工作负载
 ---
 
-Sometimes there is a need to rollback to the previous version of the application, either for debugging purposes or because an upgrade did not go as planned.
+有时需要回滚应用程序到前一个版本，这可能是出于调试目的，也可能是因为升级没有按计划进行。
 
-1. From the **Global** view, open the project running the workload you want to rollback.
+1. 在**全局**视图，打开要回滚的工作负载所在的项目。
 
-1. Find the workload that you want to rollback and select **Vertical Ellipsis (... ) > Rollback**.
+1. 找到要回滚的工作负载并选择**省略号 (...) > 回滚**。
 
-1. Choose the revision that you want to roll back to. Click **Rollback**.
+1. 选择要回滚的修订版本，点击**回滚**。
 
-**Result:** Your workload reverts to the previous version that you chose. Wait a few minutes for the action to complete.
-
+**结果：** 您的工作负载将恢复到您选择的先前版本。等待几分钟，等待动作完成。
