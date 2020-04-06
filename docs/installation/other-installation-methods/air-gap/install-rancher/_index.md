@@ -14,7 +14,7 @@ Rancher 建议在 Kubernetes 集群上安装 Rancher。高可用的 Kubernetes �
 
 - [A. 添加 Helm Chart 仓库](#a-添加-helm-chart-仓库)
 - [B. SSL 配置](#b-选择您的-ssl-配置)
-- [C. 配置 Rancher Helm 模板](#c-渲染您的-rancher-helm-模版)
+- [C. 配置 Rancher Helm 模板](#c-渲染您的-rancher-helm-模板)
 - [D. 安装 Rancher](#d-安装-rancher)
 - [E. 针对 Rancher 2.3.0 之前版本配置 system-chart](#e-针对-rancher230-之前版本配置-system-chart)
 
@@ -63,7 +63,7 @@ Rancher Server 在默认情况下被设计为安全的，并且需要 SSL/TLS �
 Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress.tls.source=secret` 这种方式，从而减少对 cert-manager 的运维成本。
 :::
 
-### C. 渲染您的 Rancher Helm 模版
+### C. 渲染您的 Rancher Helm 模板
 
 设置 Rancher Helm 模板时，Chart 中有几个选项是专门为离线安装设计的。
 

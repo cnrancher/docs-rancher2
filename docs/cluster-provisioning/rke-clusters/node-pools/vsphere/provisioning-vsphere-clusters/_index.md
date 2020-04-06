@@ -151,8 +151,8 @@ values={[
 
 选择创建虚拟机的方式：
 
-- **模版部署: Data Center：** 选择一个数据中心中的 VM 模板。
-- **模版部署: Content Library：** 首先选择包含您的模板的 [Content Library](https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.vm_admin.doc/GUID-254B2CE8-20A8-43F0-90E8-3F6776C2C896.html)，然后在`Library 模版`选项中选择模板。
+- **模板部署: Data Center：** 选择一个数据中心中的 VM 模板。
+- **模板部署: Content Library：** 首先选择包含您的模板的 [Content Library](https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.vm_admin.doc/GUID-254B2CE8-20A8-43F0-90E8-3F6776C2C896.html)，然后在`Library 模板`选项中选择模板。
 - **克隆一个现有的虚拟机：** 在**虚拟机**选项中，选择一个用于克隆的虚拟机。
 - **从 boot2docker ISO 安装（弃用）：** 确保`操作系统ISO下载地址`选项填写正确的 VMware ISO 或 RancherOS (rancheros-vmware.iso)地址。请注意这个 URL 必须在 Rancher Server 的节点中能够访问。
 
@@ -201,7 +201,7 @@ values={[
 
 **可选：** 添加 vSphere 标签和自定义属性。标签使您可以将元数据附加到 vSphere 清单中的对象，以使排序和搜索这些对象更加容易。
 
-对于标签，在您选择主机模版时，所有 vSphere 标签都会显示出来。
+对于标签，在您选择主机模板时，所有 vSphere 标签都会显示出来。
 
 在自定义属性中，Rancher 将允许您选择已在 vSphere 中设置的所有自定义属性。自定义属性作为 keys，您可以为每个属性输入 value。
 

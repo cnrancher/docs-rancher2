@@ -139,7 +139,7 @@ Rancher 的性能取决于 etcd 在集群中的性能。为了确保最佳速度
 | TCP     | 22          | 仅 Linux worker 节点，以及您希望从远程访问这个节点的任何网络。       | 通过 SSH 进行远程访问                                                           |
 | TCP     | 80          | 任何使用 Ingress 服务的源                                            | Ingress controller (HTTP)                                                       |
 | TCP     | 443         | 任何使用 Ingress 服务的源                                            | Ingress controller (HTTPS)                                                      |
-| TCP     | 2376        | Rancher 节点                                                         | Docker Machine 使用的 Docker 守护进程 TLS 的端口（仅在使用 主机驱动/模版时需要) |
+| TCP     | 2376        | Rancher 节点                                                         | Docker Machine 使用的 Docker 守护进程 TLS 的端口（仅在使用 主机驱动/模板时需要) |
 | TCP     | 2379        | etcd 节点 和 controlplane 节点                                       | etcd 客户端请求                                                                 |
 | TCP     | 2380        | etcd nodes 和 controlplane 节点                                      | etcd 节点通信                                                                   |
 | TCP     | 3389        | 仅 Windows worker 节点，以及您希望能够从远程访问这个节点的任何网络。 | 通过 RDP 远程访问                                                               |

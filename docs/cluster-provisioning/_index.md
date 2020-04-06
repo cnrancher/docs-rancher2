@@ -40,11 +40,11 @@ Rancher 允许您通过 Rancher UI 而不是其他更复杂的方案创建集群
 
 Rancher 可以在 Amazon EC2、DigitalOcean、Azure、阿里云 或 vSphere 等基础设施提供商中动态地创建节点，然后在这些节点上安装 Kubernetes。
 
-使用 Rancher，您可以基于[主机模版](/docs/cluster-provisioning/rke-clusters/node-pools/_index)来创建节点池。此模板定义了要在云提供商中创建的节点的参数。
+使用 Rancher，您可以基于[主机模板](/docs/cluster-provisioning/rke-clusters/node-pools/_index)来创建节点池。此模板定义了要在云提供商中创建的节点的参数。
 
 使用基基础设施提供商托管的节点的一个好处是，如果节点失去与集群的连接，Rancher 可以自动替换它，从而维护预期的集群配置。
 
-是否可以通过某云提供商创建主机模版取决于在 Rancher UI 中是否有状态为 Active 的相应的[主机驱动](/docs/cluster-provisioning/rke-clusters/node-pools/_index)。
+是否可以通过某云提供商创建主机模板取决于在 Rancher UI 中是否有状态为 Active 的相应的[主机驱动](/docs/cluster-provisioning/rke-clusters/node-pools/_index)。
 
 有关更多信息，请参阅关于[由设备提供商托管的节点](/docs/cluster-provisioning/rke-clusters/node-pools/_index)。
 

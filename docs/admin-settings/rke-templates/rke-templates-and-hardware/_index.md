@@ -1,5 +1,5 @@
 ---
-title: RKE 集群模版和基础架构
+title: RKE 集群模板和基础架构
 ---
 
 In Rancher, RKE templates are used to provision Kubernetes and define Rancher settings, while node templates are used to provision nodes.

@@ -2,171 +2,159 @@
 title: 全局权限
 ---
 
-_Permissions_ are individual access rights that you can assign when selecting a custom permission for a user.
+**权限**是在为用户选择自定义权限时可以分配的单独访问权限。
 
-Global Permissions define user authorization outside the scope of any particular cluster. Out-of-the-box, there are two default global permissions: `Administrator` and `Standard User` .
+全局权限定义在任何特定集群范围之外的用户授权。Rancher 中有两个开箱即用的默认全局权限：**系统管理员**和**标准用户**。
 
-* **Administrator:** These users have full control over the entire Rancher system and all clusters within it.
+- **系统管理员：** 这些用户完全控制整个 Rancher 系统及其中的所有集群。
 
-* <a id="user"></a>**Standard User:** These users can create new clusters and use them. Standard users can also assign other users permissions to their clusters.
+- **标准用户：** 这些用户可以创建新集群并使用它们。标准用户在自己的集群中向其他用户分配集群权限。
 
-You cannot update or delete the built-in Global Permissions.
+您无法更新或删除内置的全局权限。
 
-This section covers the following topics:
+## 分配全局权限
 
-* [Global permission assignment](#global-permission-assignment)
-  + [Global permissions for new local users](#global-permissions-for-new-local-users)
-  + [Global permissions for users with external authentication](#global-permissions-for-users-with-external-authentication)
-* [Custom global permissions](#custom-global-permissions)
-  + [Custom global permissions reference](#custom-global-permissions-reference)
-  + [Configuring default global permissions for new users](#configuring-default-global-permissions)
-  + [Configuring global permissions for existing individual users](#configuring-global-permissions-for-existing-individual-users)
-  + [Configuring global permissions for groups](#configuring-global-permissions-for-groups)
-  + [Refreshing group memberships](#refreshing-group-memberships)
+本地用户（Local）的全局权限分配与使用外部身份验证系统登录到 Rancher 的用户不同。
 
-## Global Permission Assignment
+### 本地用户
 
-Global permissions for local users are assigned differently than users who log in to Rancher using external authentication.
+当您创建新的本地（Local）用户时，请在填写**添加用户**表单时为其分配全局权限。
 
-#### Global Permissions for New Local Users
+要查看新用户的默认权限，请转到**全局**视图，然后单击**安全 > 角色**。在**全局**选项卡上，有一列名为**新用户默认角色**。添加新的本地用户时，该用户将获得在此列中标记为已选中的所有默认全局角色。您可以更改默认的全局权限来满足您的需求。
 
-When you create a new local user, you assign them a global permission as you complete the **Add User** form.
+### 外部用户
 
-To see the default permissions for new users, go to the **Global** view and click **Security > Roles.** On the **Global** tab, there is a column named **New User Default.** When adding a new local user, the user receives all default global permissions that are marked as checked in this column. You can [change the default global permissions to meet your needs.](#configuring-default-global-permissions)
+当用户首次使用外部身份验证系统登录 Rancher 时，会自动为用户分配**新用户默认角色**对应的全局权限。默认情况下，Rancher 为新用户分配**标准用户**权限。
 
-#### Global Permissions for Users with External Authentication
+要查看新用户的默认权限，请转到**全局**视图，然后单击**安全 > 角色**。在**全局**选项卡上，有一列名为**新用户默认角色**。添加新的外部用户时，该用户将获得在此列中标记为已选中的所有默认全局角色。您可以更改默认的全局权限来满足您的需求。
 
-When a user logs into Rancher using an external authentication provider for the first time, they are automatically assigned the **New User Default** global permissions. By default, Rancher assigns the **Standard User** permission for new users.
+可以使用[这些步骤](#配置用户的全局权限)将权限分配给单个用户。
 
-To see the default permissions for new users, go to the **Global** view and click **Security > Roles.** On the **Global** tab, there is a column named **New User Default.** When adding a new local user, the user receives all default global permissions that are marked as checked in this column, and you can [change them to meet your needs.](#configuring-default-global-permissions)
+从 Rancher v2.4.0 开始，如果外部身份验证系统支持组，则可以[同时向组中的每个人分配角色](#配置用户组的全局权限)。
 
-Permissions can be assigned to an individual user with [these steps.](#configuring-global-permissions-for-existing-individual-users)
+## 自定义全局权限
 
-As of Rancher v2.4.0-alpha1, you can [assign a role to everyone in the group at the same time](#configuring-global-permissions-for-groups) if the external authentication provider supports groups.
+使用自定义权限可以为用户配置在 Rancher 中的更受限的或指定的访问权限。
 
-## Custom Global Permissions
+来自[外部认证系统](/docs/admin-settings/authentication/_index)的用户首次登录 Rancher 时，会自动为用户分配一组全局权限（以下称权限）。默认情况下，在用户首次登录后，将以用户身份创建用户并为其分配默认的**用户**权限。标准的**用户**权限允许用户登录并创建集群。
 
-Using custom permissions is convenient for providing users with narrow or specialized access to Rancher.
+但是，在某些组织中，这些权限可能会被认为有过多的访问权限。您可以为用户分配一组限制性更强的自定义全局权限，而不是为用户分配**系统管理员**或**标准用户**的默认全局权限。
 
-When a user from an [external authentication source](/docs/admin-settings/authentication/) signs into Rancher for the first time, they're automatically assigned a set of global permissions (hereafter, permissions). By default, after a user logs in for the first time, they are created as a user and assigned the default `user` permission. The standard `user` permission allows users to login and create clusters.
+默认角色，**系统管理员**和**标准用户**，每个角色都内置有多个全局权限。系统管理员角色包括所有全局权限，而默认标准用户角色只包括**创建集群**，**使用应用商店模板**和**基本用户**（等效于登录 Rancher 的最低权限）等权限。换句话说，自定义全局权限是模块化的，因此，如果您要更改默认用户角色权限，则可以指定新的默认用户角色中包含哪些全局权限子集。
 
-However, in some organizations, these permissions may extend too much access. Rather than assigning users the default global permissions of `Administrator` or `Standard User` , you can assign them a more restrictive set of custom global permissions.
+管理员可以通过多种方式实施自定义全局权限：
 
-The default roles, Administrator and Standard User, each come with multiple global permissions built into them. The Administrator role includes all global permissions, while the default user role includes three global permissions: Create Clusters, Use Catalog Templates, and User Base, which is equivalent to the minimum permission to log in to Rancher. In other words, the custom global permissions are modularized so that if you want to change the default user role permissions, you can choose which subset of global permissions are included in the new default user role.
+- [配置默认的全局权限](#配置默认的全局权限)
+- [配置用户的全局权限](#配置用户的全局权限)
+- [配置用户组的全局权限](#配置用户组的全局权限)
 
-Administrators can enforce custom global permissions in multiple ways:
+### 自定义全局权限参考
 
-* [Changing the default permissions for new users](#configuring-default-global-permissions)
-* [Editing the permissions of an existing user](#configuring-global-permissions-for-individual-users)
-* [Assigning a custom global permission to a group](#assigning-a-custom-global-permission-to-a-group)
+下表列出了每个可用的自定义全局权限，并且列出了默认全局权限**系统管理员**和**标准用户**中是否包含该自定义全局权限。
 
-#### Custom Global Permissions Reference
+| 自定义全局权限            | 管理员 | 标准用户 |
+| ------------------------- | ------ | -------- |
+| 创建集群                  | ✓      | ✓        |
+| 创建 RKE 模板             | ✓      | ✓        |
+| 管理身份验证              | ✓      |          |
+| 管理应用商店              | ✓      |          |
+| 管理集群驱动程序          | ✓      |          |
+| 管理节点驱动程序          | ✓      |          |
+| 管理 Pod 安全策略模板     | ✓      |          |
+| 管理角色                  | ✓      |          |
+| 管理设置                  | ✓      |          |
+| 管理用户                  | ✓      |          |
+| 使用应用商店模板          | ✓      | ✓        |
+| 用户                      | ✓      | ✓        |
+| 基本用户 \*(基本登录访问) | ✓      |          |
 
-The following table lists each custom global permission available and whether it is included in the default global permissions, `Administrator` and `Standard User` .
-
-| Custom Global Permission           | Administrator | Standard User |
-| ---------------------------------- | ------------- | ------------- |
-| Create Clusters                    | ✓             | ✓             |
-| Create RKE Templates               | ✓             | ✓             |
-| Manage Authentication              | ✓             |               |
-| Manage Catalogs                    | ✓             |               |
-| Manage Cluster Drivers             | ✓             |               |
-| Manage Node Drivers                | ✓             |               |
-| Manage PodSecurityPolicy Templates | ✓             |               |
-| Manage Roles                       | ✓             |               |
-| Manage Settings                    | ✓             |               |
-| Manage Users                       | ✓             |               |
-| Use Catalog Templates              | ✓             | ✓             |
-| User Base\* (Basic log-in access)  | ✓             | ✓             |
-
-> \*This role has two names:
+> \*此角色有两个名称：
 >
-> - When you go to the <b>Users</b> tab and edit a user's global role, this role is called <b>Login Access</b> in the custom global permissions list.
-> - When you go to the <b>Security</b> tab and edit the roles from the roles page, this role is called <b>User Base.</b>
+> - 转到**用户**选项卡并编辑用户的全局角色时，此角色在自定义全局权限列表中称为**登录访问**。
+> - 转到**安全**选项卡并从**角色**页面编辑角色时，该角色称为**基本用户**。
 
-For details on which Kubernetes resources correspond to each global permission, you can go to the **Global** view in the Rancher UI. Then click **Security > Roles** and go to the **Global** tab. If you click an individual role, you can refer to the **Grant Resources** table to see all of the operations and resources that are permitted by the role.
+有关与每个全局权限对应的 Kubernetes 资源的详细信息，可以转到 Rancher UI 中的**全局**视图。然后单击**安全 > 角色**，然后转到**全局**标签。单击单个角色，然后可以参考**资源授权**表以查看该角色允许的所有操作和资源。
 
-> **Notes:**
+> **注意：**
 >
-> - Each permission listed above is comprised of multiple individual permissions not listed in the Rancher UI. For a full list of these permissions and the rules they are comprised of, access through the API at `/v3/globalRoles` .
-> - When viewing the resources associated with default roles created by Rancher, if there are multiple Kubernetes API resources on one line item, the resource will have `(Custom)` appended to it. These are not custom resources but just an indication that there are multiple Kubernetes API resources as one resource.
+> - 上面列出的每个权限都包含多个未在 Rancher UI 中列出的单独权限。有关这些权限及其所包含规则的完整列表，请通过 API `/v3/globalRoles` 进行查看。
+> - 查看与 Rancher 创建的默认角色相关的资源时，如果在一行上有多个 Kubernetes API 资源，则该资源将带有**(Custom)**标示。这些不是自定义资源，仅表示把多个 Kubernetes API 资源作为一种资源。
 
-#### Configuring Default Global Permissions
+### 配置默认的全局权限
 
-If you want to restrict the default permissions for new users, you can remove the `user` permission as default role and then assign multiple individual permissions as default instead. Conversely, you can also add administrative permissions on top of a set of other standard permissions.
+如果要限制新用户的默认权限，则可以删除作为默认角色的**User**角色，然后分配多个单独的权限作为默认角色。相反，您也可以在一组其他标准权限之上添加管理权限。
 
-> **Note:** Default roles are only assigned to users added from an external authentication provider. For local users, you must explicitly assign global permissions when adding a user to Rancher. You can customize these global permissions when adding the user.
+> **注意：** 默认角色仅分配给从外部身份验证系统添加的用户。对于本地用户，在将用户添加到 Rancher 时，必须显式分配全局权限。您可以在添加用户时自定义这些全局权限。
 
-To change the default global permissions that are assigned to external users upon their first log in, follow these steps:
+要更改在外部用户首次登录时分配给用户的默认全局权限，请按照下列步骤操作：
 
-1. From the **Global** view, select **Security > Roles** from the main menu. Make sure the **Global** tab is selected.
+1. 在**全局**视图中，从主菜单中选择**安全性 > 角色**。确保选择了**全局**选项卡。
 
-1. Find the permissions set that you want to add or remove as a default. Then edit the permission by selecting **Ellipsis > Edit**.
+2. 查找要默认添加或删除的权限集。然后通过选择**省略号 > 编辑**来编辑权限。
 
-1. If you want to add the permission as a default, Select **Yes: Default role for new users** and then click **Save**.
+3. 如果要添加默认权限，请选择**是：新用户默认角色**，然后单击**保存**。
 
-1. If you want to remove a default permission, edit the permission and select **No** from **New User Default**.
+4. 如果要删除默认权限，请编辑该权限，然后从**新用户默认角色**中选择**否**。
 
-**Result:** The default global permissions are configured based on your changes. Permissions assigned to new users display a check in the **New User Default** column.
+**结果：** 根据您的更改配置默认的全局权限。分配给新用户的权限在**新用户默认角色**列中被标记。
 
-#### Configuring Global Permissions for Existing Individual Users
+### 配置用户的全局权限
 
-To configure permission for a user, 
+要配置用户的权限，
 
-1. Go to the **Users** tab.
+1. 转到**用户**标签。
 
-1. On this page, go to the user whose access level you want to change and click **Ellipsis (...) > Edit.**
+1. 在此页面上，转到要更改其访问级别的用户，然后单击**省略号(...)>编辑**。
 
-1. In the **Global Permissions** section, click **Custom.**
+1. 在**全局权限**部分中，单击**自定义**。
 
-1. Check the boxes for each subset of permissions you want the user to have access to.
+1. 选中您要用户有权访问的每个权限子集的框。
 
-1. Click **Save.**
+1. 点击**保存**。
 
-> **Result:** The user's global permissions have been updated.
+> **结果：** 用户的全局权限已更新。
 
-#### Configuring Global Permissions for Groups
+### 配置用户组的全局权限
 
-_Available as of v2.4.0-alpha1_
+_自 v2.4.0 起可用_
 
-If you have a group of individuals that need the same level of access in Rancher, it can save time to assign permissions to the entire group at once, so that the users in the group have the appropriate level of access the first time they sign into Rancher.
+如果您有一组需要在 Rancher 中具有相同访问级别的个人，为了节省时间，可以一次将权限分配给整个组，这样该组中的用户在首次登录 Rancher 时便具有适当的访问级别。
 
-After you assign a custom global role to a group, the custom global role will be assigned to a user in the group when they log in to Rancher.
+将自定义全局角色分配给组后，该自定义全局角色将在用户登录 Rancher 时分配给该组中的用户。
 
-For existing users, the new permissions will take effect when the users log out of Rancher and back in again, or when an administrator [refreshes the group memberships.](#refreshing-group-memberships)
+对于现有用户，新权限将在用户退出 Rancher 并再次登录或管理员[刷新组成员身份](#刷新组成员身份)时生效。
 
-For new users, the new permissions take effect when the users log in to Rancher for the first time. New users from this group will receive the permissions from the custom global role in addition to the **New User Default** global permissions. By default, the **New User Default** permissions are equivalent to the **Standard User** global role, but the default permissions can be [configured.](#configuring-default-global-permissions)
+对于新用户，权限在用户首次登录 Rancher 时生效。除了**新用户默认角色**中的全局权限外，该组中的新用户还将获得配置的自定义全局角色的权限。默认情况下，**新用户默认角色**权限等同于**标准用户**全局角色，但是默认权限可以[被更改](#配置默认的全局权限)。
 
-If a user is removed from the external authentication provider group, they would lose their permissions from the custom global role that was assigned to the group. They would continue to have any remaining roles that were assigned to them, which would typically include the roles marked as **New User Default.** Rancher will remove the permissions that are associated with the group when the user logs out, or when an administrator [refreshes group memberships, ](<(#refreshing-group-memberships)>) whichever comes first.
+如果将用户从外部身份验证系统组中删除，用户将失去分配给该组的自定义全局角色的权限。用户将继续拥有分配给用户的所有剩余角色，通常包括标记为**新用户默认角色**的角色。Rancher 将在用户退出时或管理员[刷新组成员身份](#刷新组成员身份)时删除与该组关联的权限。
 
-> **Prerequisites:** You can only assign a global role to a group if:
+> **先决条件：** 您只能在以下情况下为用户组分配全局角色：
 >
-> - You have set up an [external authentication provider](/docs/admin-settings/authentication/#external-vs-local-authentication)
-> - The external authentication provider supports [user groups](/docs/admin-settings/authentication/user-groups/)
-> - You have already set up at least one user group with the authentication provider
+> - 您已经设置了[外部身份验证系统](/docs/admin-settings/authentication/_index)。
+> - 外部身份验证系统支持[用户组](/docs/admin-settingss/authentication/user-groups/_index)。
+> - 您已经通过身份验证系统建立了至少一个用户组。
 
-To assign a custom global role to a group, follow these steps:
+要将自定义全局角色分配给组，请按照下列步骤操作：
 
-1. From the **Global** view, go to **Security > Groups.**
-1. Click **Assign Global Role.**
-1. In the **Select Group To Add** field, choose the existing group that will be assigned the custom global role.
-1. In the **Global Permissions,** **Custom,** and/or **Built-in** sections, select the permissions that the group should have.
-1. Click **Create.**
+1. 从**全局**视图中，转到**安全 > 用户组**。
+2. 单击**分配全局角色**。
+3. 在**选择要添加的组**字段中，选择将被分配自定义全局角色的现有组。
+4. 在**全局权限**，**自定义**和/或**内置**部分中，选择组应具有的权限。
+5. 点击**创建**。
 
-**Result:** The custom global role will take effect when the users in the group log into Rancher.
+**结果：** 自定义全局角色将在组中的用户登录到 Rancher 时生效。
 
-#### Refreshing Group Memberships
+### 刷新组成员身份
 
-When an administrator updates the global permissions for a group, the changes take effect for individual group members after they log out of Rancher and log in again.
+管理员更新组的全局权限时，更改将在单个组成员退出 Rancher 并再次登录后生效。
 
-To make the changes take effect immediately, an administrator or cluster owner can refresh group memberships.
+为了使这些改动可以立即生效，管理员或集群所有者可以刷新组成员身份。
 
-An administrator might also want to refresh group memberships if a user is removed from a group in the external authentication service. In that case, the refresh makes Rancher aware that the user was removed from the group.
+管理员可能希望在将用户从外部身份验证系统中的用户组中删除的同时，刷新组成员身份。在这种情况下，**刷新组成员身份**可以使 Rancher 发现该用户已从组中删除。
 
-To refresh group memberships, 
+要刷新组成员身份，
 
-1. From the **Global** view, click **Security > Users.**
-1. Click **Refresh Group Memberships.**
+1. 在**全局**视图中，单击**安全 > 用户 或 用户组**。
+2. 单击**刷新组成员身份**。
 
-**Result:** Any changes to the group members' permissions will take effect.
-
+**结果：** 对用户组成员权限的任何更改将立即生效。
