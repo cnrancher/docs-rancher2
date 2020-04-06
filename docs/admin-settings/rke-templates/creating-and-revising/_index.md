@@ -1,162 +1,144 @@
 ---
-title: 创建和修改模版
+title: 创建和修改模板
 ---
 
-This section describes how to manage RKE templates and revisions. You an create, share, update, and delete templates from the **Global** view under **Tools > RKE Templates.**
+本节介绍如何管理 RKE 模板和修订版。您可以在**全局**视图下的**工具 > RKE 模板**中创建，共享，更新和删除模板。
 
-Template updates are handled through a revision system. When template owners want to change or update a template, they create a new revision of the template. Individual revisions cannot be edited. However, if you want to prevent a revision from being used to create a new cluster, you can disable it.
+模板更新通过修订系统进行处理。模板所有者想要更改或升级模板时，会创建该模板的新修订版。各个修订不能编辑。但是，如果要防止使用某个修订来创建新集群，则可以将其禁用。
 
-Template revisions can be used in two ways: to create a new cluster, or to upgrade a cluster that was created with an earlier version of the template. The template creator can choose a default revision, but when end users create a cluster, they can choose any template and any template revision that is available to them. After the cluster is created from a specific revision, it cannot change to another template, but the cluster can be upgraded to a newer available revision of the same template.
+可以使用两种方式来使用模板修订：创建新集群，或升级使用较早版本的模板创建的集群。模板创建者可以设置默认修订版，但是最终用户创建集群时，他们可以选择任何模板以及可供使用的任何模板修订版。从指定的修订版创建集群后，就无法将其更改为另一个模板，但是可以将集群升级为同一模板的较新的可用修订版。
 
-The template owner has full control over template revisions, and can create new revisions to update the template, delete or disable revisions that should not be used to create clusters, and choose which template revision is the default.
+模板所有者对模板修订版具有完全控制权，并且可以创建新的修订版来更新模板，删除或禁用不应被用于创建集群的修订版，和设置默认的模板修订版。
 
-This section covers the following topics:
+## 先决条件
 
-* [Prerequisites](#prerequisites)
-* [Creating a template](#creating-a-template)
-* [Updating a template](#updating-a-template)
-* [Deleting a template](#deleting-a-template)
-* [Creating a revision based on the default revision](#creating-a-revision-based-on-the-default-revision)
-* [Creating a revision based on a cloned revision](#creating-a-revision-based-on-a-cloned-revision)
-* [Disabling a template revision](#disabling-a-template-revision)
-* [Re-enabling a disabled template revision](#re-enabling-a-disabled-template-revision)
-* [Setting a template revision as default](#setting-a-template-revision-as-default)
-* [Deleting a template revision](#deleting-a-template-revision)
-* [Upgrading a cluster to use a new template revision](#upgrading-a-cluster-to-use-a-new-template-revision)
-* [Exporting a running cluster to a new RKE template and revision](#exporting-a-running-cluster-to-a-new-rke-template-and-revision)
+如果您具有`创建 RKE 模板`权限，则可以创建 RKE 模板，该权限可以[由系统管理员配置](/docs/admin-settings/rke-templates/creator-permissions/_index)。
 
-#### Prerequisites
+如果您是模板的所有者，则可以修改，共享和删除模板。有关如何成为模板所有者的详细信息，请参阅[有关共享模板所有权的文档](/docs/admin-settings/rke-templates/template-access-and-sharing/_index)。
 
-You can create RKE templates if you have the **Create RKE Templates** permission, which can be [given by an administrator.](/docs/admin-settings/rke-templates/creator-permissions)
+## 创建模板
 
-You can revise, share, and delete a template if you are an owner of the template. For details on how to become an owner of a template, refer to [the documentation on sharing template ownership.](/docs/admin-settings/rke-templates/template-access-and-sharing/#sharing-ownership-of-templates)
+1. 在**全局**视图中，单击**工具 > RKE 模板**。
+2. 单击**添加模板**。
+3. 输入模板的**名称**。已经为模板的第一个版本提供了自动生成的名称，该名称随该模板一起创建。
+4. 可选：通过[将其他用户或组添加为成员](/docs/admin-settings/rke-templates/template-access-and-sharing/_index)与其他用户或组共享模板。您还可以将模板公开，以与 Rancher 中的所有人共享。
+5. 然后按照屏幕上的表单将集群配置参数保存为模板修订版的一部分。可以将该版本标记为该模板的默认版本。
 
-#### Creating a Template
+**结果：** 配置了有着一个修订版的 RKE 模板。当您启动[RKE 集群](/docs/cluster-provisioning/rke-clusters/_index)时，可以使用此 RKE 模板修订版。
 
-1. From the **Global** view, click **Tools > RKE Templates.**
-1. Click **Add Template.**
-1. Provide a name for the template. An auto-generated name is already provided for the template' first version, which is created along with this template.
-1. Optional: Share the template with other users or groups by [adding them as members.](/docs/admin-settings/rke-templates/template-access-and-sharing/#sharing-templates-with-specific-users) You can also make the template public to share with everyone in the Rancher setup.
-1. Then follow the form on screen to save the cluster configuration parameters as part of the template's revision. The revision can be marked as default for this template.
+## 更新模板
 
-**Result:** An RKE template with one revision is configured. You can use this RKE template revision later when you [provision a Rancher-launched cluster](/docs/cluster-provisioning/rke-clusters).
+当您更新 RKE 模板时，您将创建一个现有模板的修订版。然后可以用来更新使用较旧版本的模板创建的集群，以匹配新版本。
 
-#### Updating a Template
+您无法编辑单个修订版。由于您无法编辑模板的各个修订，因此为了防止使用这些修订版，您可以[禁用它](#禁用模板修订版)。
 
-When you update an RKE template, you are creating a revision of the existing template. Clusters that were created with an older version of the template can be updated to match the new revision.
+创建新的模板修订版时，使用该模板的旧修订版的集群不受影响。
 
-You can't edit individual revisions. Since you can't edit individual revisions of a template, in order to prevent a revision from being used, you can [disable it.](#disabling-a-template-revision)
+1. 在**全局**视图中，单击**工具 > RKE 模板**。
+2. 转到要编辑的模板，然后单击**垂直省略号(...) > 编辑**。
+3. 编辑所需的信息，然后单击**保存**。
+4. 可选：您可以更改此模板的默认版本，也可以更改与谁共享。
 
-When new template revisions are created, clusters using an older revision of the template are unaffected.
+**结果：** 模板已更新。要将其应用于使用较旧版本模板的集群，请参阅[升级集群以使用模板的新修订版](#升级集群以使用新修订版)。
 
-1. From the **Global** view, click **Tools > RKE Templates.**
-1. Go to the template that you want to edit and click the **Vertical Ellipsis (...) > Edit.**
-1. Edit the required information and click **Save.**
-1. Optional: You can change the default revision of this template and also change who it is shared with.
+## 删除模板
 
-**Result:** The template is updated. To apply it to a cluster using an older version of the template, refer to the section on [upgrading a cluster to use a new revision of a template.](#upgrading-a-cluster-to-use-a-new-template-revision)
+当不再需要对任何集群使用某个 RKE 模板时，可以将其删除。
 
-#### Deleting a Template
+1. 在**全局**视图中，单击**工具 > RKE 模板**。
+2. 转到要删除的 RKE 模板，然后单击**垂直省略号(...) > 删除**。
+3. 出现提示时，确认删除。
 
-When you no longer use an RKE template for any of your clusters, you can delete it.
+**结果：** 模板被删除。
 
-1. From the **Global** view, click **Tools > RKE Templates.**
-1. Go to the RKE template that you want to delete and click the **Vertical Ellipsis (...) > Delete.**
-1. Confirm the deletion when prompted.
+## 基于默认修订版创建新修订版
 
-**Result:** The template is deleted.
+您可以克隆默认模板修订版并快速更新其设置，而无需从头开始创建新修订版。克隆模板为您节省了重新输入集群创建所需的访问密钥和其他参数的麻烦。
 
-#### Creating a Revision Based on the Default Revision
+1. 在**全局**视图中，单击**工具 > RKE 模板**。
+2. 转到要克隆的 RKE 模板，然后单击**垂直省略号(...) > 新修订的默认值**。
+3. 完成表单的其余部分以创建新修订。
 
-You can clone the default template revision and quickly update its settings rather than creating a new revision from scratch. Cloning templates saves you the hassle of re-entering the access keys and other parameters needed for cluster creation.
+**结果：** 克隆并配置了 RKE 模板修订版。
 
-1. From the **Global** view, click **Tools > RKE Templates.**
-1. Go to the RKE template that you want to clone and click the **Vertical Ellipsis (...) > New Revision From Default.**
-1. Complete the rest of the form to create a new revision.
+## 克隆某个修订版
 
-**Result:** The RKE template revision is cloned and configured.
+通过用户设置创建新的 RKE 模板修订版时，可以克隆现有修订版并快速更新其设置，而无需从头开始创建新的修订版。克隆模板修订版可省去重新输入集群参数的麻烦。
 
-#### Creating a Revision Based on a Cloned Revision
+1. 在**全局**视图中，单击**工具 > RKE 模板**。
+2. 转到要克隆的模板修订版。然后选择**省略号>克隆修订**。
+3. 完成表格的其余部分。
 
-When creating new RKE template revisions from your user settings, you can clone an existing revision and quickly update its settings rather than creating a new one from scratch. Cloning template revisions saves you the hassle of re-entering the cluster parameters.
+**结果：** 克隆并配置了 RKE 模板修订版。设置集群后，可以在以后使用 RKE 模板修订版。使用此 RKE 模板的任何现有集群都可以升级到此新修订版。
 
-1. From the **Global** view, click **Tools > RKE Templates.**
-1. Go to the template revision you want to clone. Then select **Ellipsis > Clone Revision.**
-1. Complete the rest of the form.
+## 禁用模板修订版
 
-**Result:** The RKE template revision is cloned and configured. You can use the RKE template revision later when you provision a cluster. Any existing cluster using this RKE template can be upgraded to this new revision.
+当您不再希望将 RKE 模板修订版本用于创建新集群时，可以将其禁用。禁用的修订版可以重新启用。
 
-#### Disabling a Template Revision
+1. 在**全局**视图中，单击**工具 > RKE 模板**。
+2. 转到要禁用的模板修订版。然后选择**省略号 > 禁用**。
 
-When you no longer want an RKE template revision to be used for creating new clusters, you can disable it. A disabled revision can be re-enabled.
+**结果：** RKE 模板修订版不能用于创建新集群。
 
-You can disable the revision if it is not being used by any cluster.
+## 重新启用禁用的模板修订版
 
-1. From the **Global** view, click **Tools > RKE Templates.**
-1. Go to the template revision you want to disable. Then select **Ellipsis > Disable.**
+如果您决定应该使用禁用的 RKE 模板修订版来创建新集群，则可以重新启用它。
 
-**Result:** The RKE template revision cannot be used to create a new cluster.
+1. 在**全局**视图中，单击**工具 > RKE 模板**。
+2. 转到您要重新启用的模板修订版。然后选择**省略号>启用**。
 
-#### Re-enabling a Disabled Template Revision
+**结果：** RKE 模板修订版可用于创建新集群。
 
-If you decide that a disabled RKE template revision should be used to create new clusters, you can re-enable it.
+## 将模板修订版设置为默认版本
 
-1. From the **Global** view, click **Tools > RKE Templates.**
-1. Go to the template revision you want to re-enable. Then select **Ellipsis > Enable.**
+最终用户使用 RKE 模板创建集群时，用户可以选择用于创建集群的版本。您可以配置默认使用哪个修订版。
 
-**Result:** The RKE template revision can be used to create a new cluster.
+要将 RKE 模板修订设置为默认设置，
 
-#### Setting a Template Revision as Default
+1. 在**全局**视图中，单击**工具 > RKE 模板**。
+2. 转到应该为默认值的 RKE 模板修订，然后单击**省略号(...) > 设置为缺省**。
 
-When end users create a cluster using an RKE template, they can choose which revision to create the cluster with. You can configure which revision is used by default.
+**结果：** 当使用模板创建集群时，RKE 模板修订版将用作默认选项。
 
-To set an RKE template revision as default, 
+## 删除模板修订版
 
-1. From the **Global** view, click **Tools > RKE Templates.**
-1. Go to the RKE template revision that should be default and click the **Ellipsis (...) > Set as Default.**
+您可以删除模板的所有修订版（默认修订版除外）。
 
-**Result:** The RKE template revision will be used as the default option when clusters are created with the template.
+要永久删除修订版，
 
-#### Deleting a Template Revision
+1. 在**全局**视图中，单击**工具 > RKE 模板**。
+2. 转到应删除的 RKE 模板修订，然后单击**省略号(...) > 删除**。
 
-You can delete all revisions of a template except for the default revision.
+**结果：** RKE 模板修订已删除。
 
-To permanently delete a revision, 
+## 升级集群以使用新修订版
 
-1. From the **Global** view, click **Tools > RKE Templates.**
-1. Go to the RKE template revision that should be deleted and click the **Ellipsis (...) > Delete.**
+> 本节假定您已经有一个集群，其中该集群[已应用 RKE 模板](/docs/admin-settings/rke-templates/applying-templates/_index)。
+> 本节还假设您已经[更新了集群使用的模板](#更新模板)，以便可以使用新的模板修订版。
 
-**Result:** The RKE template revision is deleted.
+要将集群升级为使用新的模板修订版，
 
-#### Upgrading a Cluster to Use a New Template Revision
+1. 从 Rancher 的**全局**视图中，单击**集群**选项卡。
+2. 转到要升级的集群，然后单击**省略号(...) > 编辑**。
+3. 在**集群选项**部分中，单击模板修订的下拉菜单，然后选择新的模板修订。
+4. 点击**保存**。
 
-> This section assumes that you already have a cluster that [has an RKE template applied.](/docs/admin-settings/rke-templates/applying-templates)
-> This section also assumes that you have [updated the template that the cluster is using](#updating-a-template) so that a new template revision is available.
+**结果：** 集群已升级为使用新模板修订版中定义的设置。
 
-To upgrade a cluster to use a new template revision, 
+## 从已有集群中导出到新的 RKE 模板并进行修订
 
-1. From the **Global** view in Rancher, click the **Clusters** tab.
-1. Go to the cluster that you want to upgrade and click **Ellipsis (...) > Edit.**
-1. In the **Cluster Options** section, click the dropdown menu for the template revision, then select the new template revision.
-1. Click **Save.**
+您可以将现有集群的设置另存为 RKE 模板。
 
-**Result:** The cluster is upgraded to use the settings defined in the new template revision.
+这会将集群的设置导出为新的 RKE 模板，并且还将集群绑定到该模板。然后，只有在[更新了 RKE 模板](/docs/admin-settings/rke-templates/creating-and-revising/_index)且集群将升级到较新版本的模板时才可以修改集群。
 
-#### Exporting a Running Cluster to a New RKE Template and Revision
+要将现有集群转换为使用 RKE 模板，
 
-You can save an existing cluster's settings as an RKE template.
+1. 从 Rancher 的**全局**视图中，单击**集群**选项卡。
+2. 转到将转换为使用 RKE 模板的集群。单击**省略号(...) > 另存为 RKE 模板**。
+3. 在显示的表单中输入模板的名称，然后单击**创建**。
 
-This exports the cluster's settings as a new RKE template, and also binds the cluster to that template. The result is that the cluster can only be changed if the [template is updated, ](/docs/admin-settings/rke-templates/creating-and-revising/#updating-a-template) and the cluster is upgraded to [use a newer version of the template.]
+**结果：**
 
-To convert an existing cluster to use an RKE template, 
-
-1. From the **Global** view in Rancher, click the **Clusters** tab.
-1. Go to the cluster that will be converted to use an RKE template. Click **Ellipsis (...)** > **Save as RKE Template.**
-1. Enter a name for the template in the form that appears, and click **Create.**
-
-**Results:**
-
-* A new RKE template is created.
-* The cluster is converted to use the new template.
-* New clusters can be [created from the new template and revision.](/docs/admin-settings/rke-templates/applying-templates/#creating-a-cluster-from-an-rke-template)
-
+- 创建了一个新的 RKE 模板。
+- 将集群转换为使用该新模板。
+- 可以[从新模板和修订版中创建新集群](/docs/admin-settings/rke-templates/applying-templates/_index)。

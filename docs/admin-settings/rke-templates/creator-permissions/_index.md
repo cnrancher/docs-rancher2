@@ -1,5 +1,5 @@
 ---
-title: 模版创建者权限
+title: 模板创建者权限
 ---
 
 Administrators have the permission to create RKE templates, and only administrators can give that permission to other users.

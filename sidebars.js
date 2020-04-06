@@ -322,7 +322,7 @@ module.exports = {
       },
       {
         type: 'category',
-        label: '角色权限控制（RBAC）',
+        label: 'RBAC',
         items: [
           'admin-settings/rbac/_index',
           'admin-settings/rbac/global-permissions/_index',

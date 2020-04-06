@@ -1,5 +1,5 @@
 ---
-title: 管理主机模版
+title: 管理主机模板
 ---
 
 When you provision a cluster [hosted by an infrastructure provider](/docs/cluster-provisioning/rke-clusters/node-pools), [node templates](/docs/cluster-provisioning/rke-clusters/node-pools/#node-templates) are used to provision the cluster nodes. These templates use Docker Machine configuration options to define an operating system image and settings/parameters for the node. You can create node templates in two contexts:

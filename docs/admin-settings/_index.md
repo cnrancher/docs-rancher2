@@ -1,5 +1,5 @@
 ---
-title: 身份验证、权限和全局配置
+title: 功能介绍
 ---
 
 安装完成后，[系统管理员](/docs/admin-settings/rbac/global-permissions/_index)应当对 Rancher 平台的身份验证、授权、安全、默认设置、安全策略、驱动程序和全局 DNS 等项目进行配置。

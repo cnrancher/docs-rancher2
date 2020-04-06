@@ -1,5 +1,5 @@
 ---
-title: 使用模版
+title: 使用模板
 ---
 
 You can create a cluster from an RKE template that you created, or from a template that has been [shared with you.](/docs/admin-settings/rke-templates/template-access-and-sharing)

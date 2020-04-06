@@ -138,9 +138,9 @@ RKE(Rancher Kubernetes 引擎)是一个快速、通用的 Kubernetes 安装程�
 
 RKE 使用`.yml`配置文件来安装和配置 Kubernetes 集群。根据要使用的 SSL 证书，有两种模板可供选择。
 
-1. 根据您正在使用的 SSL 证书，下载以下模版之一。
+1. 根据您正在使用的 SSL 证书，下载以下模板之一。
 
-   - [自签名证书模版<br/> `3-node-certificate.yml`](https://raw.githubusercontent.com/rancher/rancher/master/rke-templates/3-node-certificate.yml)
+   - [自签名证书模板<br/> `3-node-certificate.yml`](https://raw.githubusercontent.com/rancher/rancher/master/rke-templates/3-node-certificate.yml)
    - [由公认的 CA 签署的证书模板<br/> `3-node-certificate-recognizedca.yml`](https://raw.githubusercontent.com/rancher/rancher/master/rke-templates/3-node-certificate-recognizedca.yml)
 
    > **高级配置选项：**

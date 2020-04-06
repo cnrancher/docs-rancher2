@@ -1,5 +1,5 @@
 ---
-title: 强制使用模版
+title: 强制使用模板
 ---
 
 This section describes how template administrators can enforce templates in Rancher, restricting the ability of users to create clusters without a template.

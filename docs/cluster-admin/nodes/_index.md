@@ -152,11 +152,11 @@ _驱逐_ 的过程是首先隔离节点，然后驱逐所有的 pods。该功能
 
 在[由主机驱动启动的 RKE 集群](/docs/cluster-provisioning/rke-clusters/_index)中，您可以：
 
-- 向集群中添加新的[节点池](/docs/cluster-provisioning/rke-clusters/node-pools/_index)。添加到池中的节点是根据您使用的[节点模版](/docs/user-settings/node-templates/_index)创建的。
+- 向集群中添加新的[节点池](/docs/cluster-provisioning/rke-clusters/node-pools/_index)。添加到池中的节点是根据您使用的[节点模板](/docs/user-settings/node-templates/_index)创建的。
 
   - 点击 **+** 按照屏幕上的说明创建一个新模板。
 
-    - 您还可以通过从 **模版** 下拉列表中选择一个来重用现有的模板。
+    - 您还可以通过从 **模板** 下拉列表中选择一个来重用现有的模板。
 
 - 通过选择不同的复选框，在节点池中重新分配 Kubernetes 角色。
 

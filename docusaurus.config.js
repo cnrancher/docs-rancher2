@@ -63,7 +63,7 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/cnrancher/docs-rancher2/edit/master/',
+          editUrl: 'https://github.com/cnrancher/docs-rancher2/edit/dev/',
           showLastUpdateAuthor: true,
           showLastUpdateTime: true
         },

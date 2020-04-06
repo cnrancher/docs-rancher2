@@ -1,37 +1,36 @@
 ---
-title: 主机驱动
+title: 节点驱动
 ---
 
-Node drivers are used to provision hosts, which Rancher uses to launch and manage Kubernetes clusters. A node driver is the same as a [Docker Machine driver](https://docs.docker.com/machine/drivers/). The availability of which node driver to display when creating node templates is defined based on the node driver's status. Only `active` node drivers will be displayed as an option for creating node templates. By default, Rancher is packaged with many existing Docker Machine drivers, but you can also create custom node drivers to add to Rancher.
+节点驱动用于创建节点，Rancher 可以用这些节点启动和管理 Kubernetes 集群。节点驱动就是[Docker Machine](https://docs.docker.com/machine/drivers/)。在创建集群时显示哪个供应商的可用性是根据节点驱动的状态决定的。在创建供应商提供节点的 Kubernetes 集群的选项中，UI 仅显示节点驱动状态为`Active`的选项。默认情况下，Rancher 内置了许多现有的 Docker Machine 驱动，但是您也可以创建自定义节点驱动，并添加到 Rancher 中。
 
-If there are specific node drivers that you don't want to show to your users, you would need to de-activate these node drivers.
+如果不想将特定的节点驱动显示给用户，则可以在 Rancher 中停用这些节点驱动，它们将不会作为创建集群的选项出现。
 
-##### Managing Node Drivers
+## 管理节点驱动
 
-> **Prerequisites:** To create, edit, or delete drivers, you need _one_ of the following permissions:
+> **先决条件：** 要创建，编辑或删除节点驱动，您需要具有以下权限之一：
 >
-> - [Administrator Global Permissions](/docs/admin-settings/rbac/global-permissions/)
-> - [Custom Global Permissions](/docs/admin-settings/rbac/global-permissions/#custom-global-permissions) with the [Manage Node Drivers](/docs/admin-settings/rbac/global-permissions/#global-permissions-reference) role assigned.
+> - [系统管理员权限](/docs/admin-settings/rbac/global-permissions/_index)
+> - 分配了[管理节点驱动](/docs/admin-settings/rbac/global-permissions/_index)角色的[自定义全局权限](/docs/admin-settings/rbac/global-permissions/_index)。
 
-### Activating/Deactivating Node Drivers
+### 激活/停用节点驱动
 
-By default, Rancher only activates drivers for the most popular cloud providers, Amazon EC2, Azure, DigitalOcean and vSphere. If you want to show or hide any node driver, you can change its status.
+默认情况下，Rancher 仅激活最受欢迎的云提供商，Amazon EC2，Azure，DigitalOcean 和 vSphere 的驱动。如果要显示或隐藏任何节点驱动，则可以更改其状态。
 
-1.  From the **Global** view, choose **Tools > Drivers** in the navigation bar. From the **Drivers** page, select the **Node Drivers** tab. In version prior to v2.2.0, you can select **Node Drivers** directly in the navigation bar.
+1. 从**全局**视图中，在导航栏中选择**工具>驱动**。在**驱动**页面上，选择**节点驱动**选项卡。在 v2.2.0 之前的版本中，您可以直接在导航栏中选择**节点驱动**。
 
-2.  Select the driver that you wish to **Activate** or **Deactivate** and select the appropriate icon.
+2. 选择要**激活**或**停用**的驱动，然后点击适当的图标。
 
-### Adding Custom Node Drivers
+### 添加自定义节点驱动
 
-If you want to use a node driver that Rancher doesn't support out-of-the-box, you can add that provider's driver in order to start using them to create node templates and eventually node pools for your Kubernetes cluster.
+如果要使用 Rancher 不支持的节点驱动，则可以添加该供应商的驱动，以便开始使用它们来为 Kubernetes 集群创建节点模板并最终创建节点池。
 
-1.  From the **Global** view, choose **Tools > Drivers** in the navigation bar. From the **Drivers** page, select the **Node Drivers** tab. In version prior to v2.2.0, you can select **Node Drivers** directly in the navigation bar.
+1. 从**全局**视图中，在导航栏中选择**工具>驱动**。在**驱动**页面上，选择**节点驱动**选项卡。在 v2.2.0 之前的版本中，您可以直接在导航栏中选择**节点驱动**。
 
-2.  Click **Add Node Driver**.
+2. 单击**添加节点驱动**。
 
-3.  Complete the **Add Node Driver** form. Then click **Create**.
+3. 完成**添加节点驱动**表格。然后点击**创建**。
 
-#### Developing your own node driver
+## 开发自己的节点驱动
 
-Node drivers are implemented with [Docker Machine](https://docs.docker.com/machine/).
-
+节点驱动是通过 [Docker Machine](https://docs.docker.com/machine/) 实现的。你可以编写自己的 Docker Machine 然后添加到 Rancher 中。

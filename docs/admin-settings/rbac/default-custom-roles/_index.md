@@ -2,164 +2,151 @@
 title: 自定义角色
 ---
 
-Within Rancher, _roles_ determine what actions a user can make within a cluster or project.
+在 Rancher 中，**角色**决定了用户可以在集群或项目中执行哪些操作。
 
-Note that _roles_ are different from _permissions_, which determine what clusters and projects you can access.
+请注意，**角色**与**访问权限**不同，后者决定了您可以访问哪些集群和项目。
 
-This section covers the following topics:
+## 先决条件
 
-* [Prerequisites](#prerequisites)
-* [Creating a custom role for a cluster or project](#creating-a-custom-role-for-a-cluster-or-project)
-* [Creating a custom global role that copies rules from an existing role](#creating-a-custom-global-role-that-copies-rules-from-an-existing-role)
-* [Creating a custom global role that does not copy rules from another role](#creating-a-custom-global-role-that-does-not-copy-rules-from-another-role)
-* [Deleting a custom global role](#deleting-a-custom-global-role)
-* [Assigning a custom global role to a group](#assigning-a-custom-global-role-to-a-group)
+要完成此页面上的操作时，需要以下权限之一：
 
-### Prerequisites
+- [系统管理员权限](/docs/admin-settings/rbac/global-permissions/_index)。
+- 分配了 [Manage Roles](/docs/admin-settings/rbac/global-permissions/_index) 角色的[自定义全局权限](/docs/admin-settings/rbac/global-permissions/_index)。
 
-To complete the tasks on this page, one of the following permissions are required:
+## 为集群或项目创建自定义角色
 
-* [Administrator Global Permissions](/docs/admin-settings/rbac/global-permissions/).
-* [Custom Global Permissions](/docs/admin-settings/rbac/global-permissions/#custom-global-permissions) with the [Manage Roles](/docs/admin-settings/rbac/global-permissions/#global-permissions-reference) role assigned.
+Rancher 提供了一组开箱即用的默认用户角色，您也可以创建默认的自定义角色，以向 Rancher 中的用户提供指定的权限。
 
-### Creating A Custom Role for a Cluster or Project
+添加自定义角色的步骤因 Rancher 的版本而异。
 
-While Rancher comes out-of-the-box with a set of default user roles, you can also create default custom roles to provide users with very specific permissions within Rancher.
+#### 在 Rancher v2.0.7+ 的版本中
 
-The steps to add custom roles differ depending on the version of Rancher.
+1. 在**全局**视图中，从主菜单中选择 **安全>角色**。
 
- tabs 
- tab "Rancher v2.0.7+" 
+2. 选择一个选项卡以确定要添加的角色的范围。选项卡是：
 
-1.  From the **Global** view, select **Security > Roles** from the main menu.
+   - **集群：** 仅在添加/管理集群成员时，可以分配该角色。
+   - **项目：** 仅在添加/管理项目成员时，可以分配该角色。
 
-1.  Select a tab to determine the scope of the roles you're adding. The tabs are:
+3. 单击**添加集群/项目角色**。
 
-* **Cluster:** The role is valid for assignment when adding/managing members to _only_ clusters.
-* **Project:** The role is valid for assignment when adding/managing members to _only_ projects.
+4. 输入角色的**名称**。
 
-1.  Click **Add Cluster/Project Role.**
+5. 可选：选择**集群/项目创建者默认角色**选项，以在用户创建新集群或项目时将此角色分配给用户。使用此功能，可以扩展或限制集群/项目创建者的默认角色。
 
-1.  **Name** the role.
+   > 开箱即用，**集群创建者默认角色**和**项目创建者默认角色**分别是**集群所有者**和**项目所有者**。
 
-1.  Optional: Choose the **Cluster/Project Creator Default** option to assign this role to a user when they create a new cluster or project. Using this feature, you can expand or restrict the default roles for cluster/project creators.
+6. 使用**资源授权**选项将单个[Kubernetes API 资源](https://kubernetes.io/docs/reference/)分配给角色。
 
-    > Out of the box, the Cluster Creator Default and the Project Creator Default roles are `Cluster Owner` and `Project Owner` respectively.
+   > 查看与 Rancher 创建的默认角色相关的资源时，如果在一行上有多个 Kubernetes API 资源，则该资源将带有**(Custom)**标示。这些不是自定义资源，仅表示把多个 Kubernetes API 资源作为一种资源。
 
-1. Use the **Grant Resources** options to assign individual [Kubernetes API endpoints](https://kubernetes.io/docs/reference/) to the role.
+   您还可以给每个资源设置单独的 cURL 方法(**Create**，**Delete**，**Get**等)。
 
-    > When viewing the resources associated with default roles created by Rancher, if there are multiple Kubernetes API resources on one line item, the resource will have `(Custom)` appended to it. These are not custom resources but just an indication that there are multiple Kubernetes API resources as one resource.
+7. 使用**角色继承**选项将单个 Rancher 角色分配给您的自定义角色。注意：当有自定义角色从父角色继承时，只有删除子角色才能删除父角色。
 
-    You can also choose the individual cURL methods ( `Create` , `Delete` , `Get` , etc.) available for use with each endpoint you assign.
+8. 单击**创建**。
 
-1.  Use the **Inherit from a Role** options to assign individual Rancher roles to your custom roles. Note: When a custom role inherits from a parent role, the parent role cannot be deleted until the child role is deleted.
+#### 在 Rancher v2.0.7 之前的版本中
 
-1.  Click **Create**.
+1. 在**全局**视图中，从主菜单中选择**安全>角色**。
 
- /tab 
- tab "Rancher prior to v2.0.7" 
+2. 单击**添加角色**。
 
-1.  From the **Global** view, select **Security > Roles** from the main menu.
+3. 输入角色的**名称**。
 
-1.  Click **Add Role**.
+4. 选择是否将角色设置为[已锁定](/docs/admin-settings/rbac/locked-roles/_index)。
 
-1.  **Name** the role.
+   > **注意：** 无法将锁定角色分配给用户。
 
-1.  Choose whether to set the role to a status of [locked](/docs/admin-settings/rbac/locked-roles/).
+5. 在**上下文**下拉菜单中，选择分配给用户的角色范围。上下文是：
 
-    > **Note:** Locked roles cannot be assigned to users.
+   - **全部：** 不论上下文如何，用户都可以分配这些角色。在向集群或项目中添加/管理成员时，可以分配该角色。
 
-1.  In the **Context** dropdown menu, choose the scope of the role assigned to the user. The contexts are:
+   - **集群：** 仅在添加/管理集群成员时，可以分配该角色。
 
-    - **All:** The user can use their assigned role regardless of context. This role is valid for assignment when adding/managing members to clusters or projects.
+   - **项目：** 仅在添加/管理项目成员时，可以分配该角色。
 
-    - **Cluster:** This role is valid for assignment when adding/managing members to _only_ clusters.
+6. 使用**资源授权**选项将单个 [Kubernetes API 资源](https://kubernetes.io/docs/reference/)分配给角色。
 
-    - **Project:** This role is valid for assignment when adding/managing members to _only_ projects.
+   > 查看与 Rancher 创建的默认角色相关的资源时，如果在一行上有多个 Kubernetes API 资源，则该资源将带有**(Custom)**标示。这些不是自定义资源，仅表示把多个 Kubernetes API 资源作为一种资源。
 
-1. Use the **Grant Resources** options to assign individual [Kubernetes API endpoints](https://kubernetes.io/docs/reference/) to the role.
+   您还可以给每个资源设置单独的 cURL 方法(**Create**，**Delete**，**Get**等)。
 
-    > When viewing the resources associated with default roles created by Rancher, if there are multiple Kubernetes API resources on one line item, the resource will have `(Custom)` appended to it. These are not custom resources but just an indication that there are multiple Kubernetes API resources as one resource.
+7. 使用**角色继承**选项将单个 Rancher 角色分配给您的自定义角色。注意：当有自定义角色从父角色继承时，只有删除子角色才能删除父角色。
 
-    You can also choose the individual cURL methods ( `Create` , `Delete` , `Get` , etc.) available for use with each endpoint you assign.
+8. 单击**创建**。
 
-1.  Use the **Inherit from a Role** options to assign individual Rancher roles to your custom roles. Note: When a custom role inherits from a parent role, the parent role cannot be deleted until the child role is deleted.
+## 创建自定义全局角色
 
-1.  Click **Create**.
+## 通过克隆其他角色创建自定义全局角色
 
- /tab 
- /tabs 
+_自 v2.4.0 起可用_
 
-### Creating a Custom Global Role that Copies Rules from an Existing Role
+如果您有一组需要在 Rancher 中具有相同访问级别的人员，则可以节省时间来创建自定义全局角色，该角色将来自另一个角色（例如管理员角色）的所有规则，这些规则将被复制到一个新角色中。这使您可以仅配置现有角色和新角色之间的不同的地方。
 
-_Available as of v2.4.0-alpha1_
+然后，可以将自定义全局角色分配给用户或组，用户首次登录 Rancher 时，这个自定义全局角色就会生效。
 
-If you have a group of individuals that need the same level of access in Rancher, it can save time to create a custom global role in which all of the rules from another role, such as the administrator role, are copied into a new role. This allows you to only configure the variations between the existing role and the new role.
+要基于现有角色创建自定义全局角色，
 
-The custom global role can then be assigned to a user or group so that the custom global role takes effect the first time the user or users sign into Rancher.
+1. 转到**全局**视图，然后单击**安全 > 角色**。
+2. 在**全局**选项卡上，转到自定义全局角色想要复制的角色。单击**省略号(...)>克隆**。
+3. 输入角色名称。
+4. 可选：如果要将这个角色设置为新用户的默认角色，请转到**新用户默认角色**部分，然后单击**是: 新用户的默认角色**。
+5. 在**资源授权**部分中，选择该自定义角色包含的 Kubernetes 资源操作权限。
+6. 点击**保存**。
 
-To create a custom global role based on an existing role, 
+## 从头创建自定义全局角色
 
-1. Go to the **Global** view and click **Security > Roles.**
-1. On the **Global** tab, go to the role that the custom global role will be based on. Click **Ellipsis (…) > Clone.**
-1. Enter a name for the role.
-1. Optional: To assign the custom role default for new users, go to the **New User Default** section and click **Yes: Default role for new users.**
-1. In the **Grant Resources** section, select the Kubernetes resource operations that will be enabled for users with the custom role.
-1. Click **Save.**
+_自 v2.4.0 起可用_
 
-### Creating a Custom Global Role that Does Not Copy Rules from Another Role
+自定义全局角色不必基于现有角色。要从头创建自定义全局角色，请执行以下步骤：
 
-_Available as of v2.4.0-alpha1_
+1. 转到**全局**视图，然后单击**安全 > 角色**。
+2. 在**全局**选项卡上，单击**添加全局角色**。
+3. 输入角色名称。
+4. 可选：如果要将这个角色设置为新用户的默认角色，请转到**新用户默认角色**部分，然后单击**是: 新用户的默认角色**。
+5. 在**资源授权**部分中，选择该自定义角色包含的 Kubernetes 资源操作权限。
+6. 点击**保存**。
 
-Custom global roles don't have to be based on existing roles. To create a custom global role by choosing the specific Kubernetes resource operations that should be allowed for the role, follow these steps:
+## 删除自定义全局角色
 
-1. Go to the **Global** view and click **Security > Roles.**
-1. On the **Global** tab, click **Add Global Role.**
-1. Enter a name for the role.
-1. Optional: To assign the custom role default for new users, go to the **New User Default** section and click **Yes: Default role for new users.**
-1. In the **Grant Resources** section, select the Kubernetes resource operations that will be enabled for users with the custom role.
-1. Click **Save.**
+_自 v2.4.0 起可用_
 
-### Deleting a Custom Global Role
+删除自定义全局角色时，具有此自定义角色的所有全局角色绑定（Global Role Bindings）都将被删除。
 
-_Available as of v2.4.0-alpha1_
+如果仅为用户分配一个自定义全局角色，并且删除了该角色，则该用户将失去对 Rancher 的访问权限。为了使用户重新获得访问权限，管理员需要编辑用户并应用新的全局权限。
 
-When deleting a custom global role, all global role bindings with this custom role are deleted.
+可以删除自定义全局角色，但是不能删除内置的全局角色。
 
-If a user is only assigned one custom global role, and the role is deleted, the user would lose access to Rancher. For the user to regain access, an administrator would need to edit the user and apply new global permissions.
+要删除自定义全局角色，
 
-Custom global roles can be deleted, but built-in roles cannot be deleted.
+1. 转到**全局**视图，然后单击**安全 > 角色**。
+2. 在**全局**选项卡上，转到应删除的自定义全局角色，然后单击**省略号(…)>删除**。
+3. 单击**删除**。
 
-To delete a custom global role, 
+## 将自定义全局角色分配给组
 
-1. Go to the **Global** view and click **Security > Roles.**
-2. On the **Global** tab, go to the custom global role that should be deleted and click **Ellipsis (…) > Delete.**
-3. Click **Delete.**
+_自 v2.4.0 起可用_
 
-### Assigning a Custom Global Role to a Group
+如果您有一组需要在 Rancher 中具有相同访问级别的人员，那么创建一个自定义全局角色可以节省您的时间。将角色分配给组后，组中的用户首次登录 Rancher 时就会具有相应的访问级别。
 
-_Available as of v2.4.0-alpha1_
+当组中的用户登录时，默认情况下，用户将获得内置的**标准用户**全局角色。用户还将获得分配给其组的权限。
 
-If you have a group of individuals that need the same level of access in Rancher, it can save time to create a custom global role. When the role is assigned to a group, the users in the group have the appropriate level of access the first time they sign into Rancher.
+如果将用户从外部身份验证系统的组中删除，用户将失去分配给该组的自定义全局角色的权限。用户将仍然拥有**标准用户**角色。
 
-When a user in the group logs in, they get the built-in Standard User global role by default. They will also get the permissions assigned to their groups.
-
-If a user is removed from the external authentication provider group, they would lose their permissions from the custom global role that was assigned to the group. They would continue to have their individual Standard User role.
-
-> **Prerequisites:** You can only assign a global role to a group if:
+> **先决条件：** 您只能在以下情况下为组分配全局角色：
 >
-> - You have set up an [external authentication provider](/docs/admin-settings/authentication/#external-vs-local-authentication)
-> - The external authentication provider supports [user groups](/docs/admin-settings/authentication/user-groups/)
-> - You have already set up at least one user group with the authentication provider
+> - 您已经设置了[外部身份验证系统](/docs/admin-settings/authentication/_index)。
+> - 外部身份验证系统支持[用户组](/docs/admin-settings/authentication/user-groups/_index)。
+> - 您已经通过身份验证系统建立了至少一个用户组。
 
-To assign a custom global role to a group, follow these steps:
+要将自定义全局角色分配给组，请按照下列步骤操作：
 
-1. From the **Global** view, go to **Security > Groups.**
-1. Click **Assign Global Role.**
-1. In the **Select Group To Add** field, choose the existing group that will be assigned the custom global role.
-1. In the **Custom** section, choose any custom global role that will be assigned to the group.
-1. Optional: In the **Global Permissions** or **Built-in** sections, select any additional permissions that the group should have.
-1. Click **Create.**
+1. 从**全局**视图中，转到**安全 > 用户组**。
+2. 单击**分配全局角色**。
+3. 在**选择要添加的组**字段中，选择将被分配自定义全局角色的已经存在的组。
+4. 在**自定义**部分中，选择将分配给该组的任何自定义全局角色。
+5. 可选：在**全局权限**或**内置角色**部分中，选择组应具有的任何其他权限。
+6. 点击**创建**。
 
-**Result:** The custom global role will take effect when the users in the group log into Rancher.
-
+**结果：** 自定义全局角色将在组中的用户登录到 Rancher 时生效。
