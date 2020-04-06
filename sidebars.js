@@ -309,7 +309,7 @@ module.exports = {
           'admin-settings/authentication/ping-federate/_index',
           {
             type: 'category',
-            label: '配置微软 Active Directory Federation Service (SAML)',
+            label: '对接 AD FS (SAML)',
             items: [
               'admin-settings/authentication/microsoft-adfs/_index',
               'admin-settings/authentication/microsoft-adfs/microsoft-adfs-setup/_index',

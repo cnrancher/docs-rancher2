@@ -1,33 +1,29 @@
 ---
-title: 介绍
+title: AD FS（SAML）
 ---
 
-_Available as of v2.0.7_
+_v2.0.7 版本起可用_
 
-If your organization uses Microsoft Active Directory Federation Services (AD FS) for user authentication, you can configure Rancher to allow your users to log in using their AD FS credentials.
+如果您的公司使用 Microsoft Active Directory Federation Services（AD FS）进行用户身份验证，则可以将 Rancher 配置为允许用户使用其 AD FS 凭据登录。
 
-### Prerequisites
+## 先决添加
 
-* You must have Rancher installed.
+- 安装好 Rancher。
 
-  + Obtain your Rancher Server URL. During AD FS configuration, substitute this URL for the `<RANCHER_SERVER>` placeholder.
+  - 获取您的 Rancher Server URL。在 AD FS 配置期间，请将`<RANCHER_SERVER>`占位符替换为该 URL。
 
-  + You must have a global administrator account on your Rancher installation.
+  - 您的 Rancher 必须具有全局管理员帐户。
 
-* You must have a [Microsoft AD FS Server](https://docs.microsoft.com/en-us/windows-server/identity/active-directory-federation-services) configured.
+- 您必须配置一个 [Microsoft AD FS 服务器](https://docs.microsoft.com/en-us/windows-server/identity/active-directory-federation-services)。
 
-      	- Obtain your AD FS Server IP/DNS name. During AD FS configuration, substitute this IP/DNS name for the `<AD_SERVER>` placeholder.
+  - 获取您的 AD FS 服务器 IP / DNS 名称。在 AD FS 配置期间，将`<AD_SERVER>`替换为此 IP / DNS 名称。
+  - 您必须有权在 AD FS 服务器上添加 [Relying Party Trusts](https://docs.microsoft.com/zh-cn/windows-server/identity/ad-fs/operations/create-a-relying-party-trust)。
 
-      	- You must have access to add [Relying Party Trusts](https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/operations/create-a-relying-party-trust) on your AD FS Server.
+## 设置方法
 
-### Setup Outline
+使用 Rancher Server 设置 Microsoft AD FS 要求在 Active Directory 服务器上配置 AD FS，并配置 Rancher 来使用 AD FS 服务器。以下页面为在 Rancher 中设置 Microsoft AD FS 身份验证的指南。
 
-Setting up Microsoft AD FS with Rancher Server requires configuring AD FS on your Active Directory server, and configuring Rancher to utilize your AD FS server. The following pages serve as guides for setting up Microsoft AD FS authentication on your Rancher installation.
+- [1、为 Rancher 配置 AD FS](/docs/admin-settings/authentication/microsoft-adfs/microsoft-adfs-setup/_index)
+- [2、配置 Rancher 使用 AD FS](/docs/admin-settings/authentication/microsoft-adfs/rancher-adfs-setup/_index)
 
-* [1 — Configuring Microsoft AD FS for Rancher](/docs/admin-settings/authentication/microsoft-adfs/microsoft-adfs-setup)
-* [2 — Configuring Rancher for Microsoft AD FS](/docs/admin-settings/authentication/microsoft-adfs/rancher-adfs-setup)
-
-{{< saml_caveats >}}
-
-#### [Next: Configuring Microsoft AD FS for Rancher](/docs/admin-settings/authentication/microsoft-adfs/microsoft-adfs-setup)
-
+## [下一步: 为 Rancher 配置 Microsoft AD FS](/docs/admin-settings/authentication/microsoft-adfs/microsoft-adfs-setup/_index)

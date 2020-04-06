@@ -2,126 +2,121 @@
 title: 对接 OpenLDAP
 ---
 
-_Available as of v2.0.5_
+_自 v2.0.5 起开始可用_
 
-If your organization uses LDAP for user authentication, you can configure Rancher to communicate with an OpenLDAP server to authenticate users. This allows Rancher admins to control access to clusters and projects based on users and groups managed externally in the organisation's central user repository, while allowing end-users to authenticate with their LDAP credentials when logging in to the Rancher UI.
+如果您的组织使用 LDAP 进行用户身份验证，则可以配置 Rancher 与 OpenLDAP 服务器通信以对用户进行身份验证。这使 Rancher 管理员可以对外部用户系统中的用户和组进行集群和项目的访问控制，同时允许最终用户在登录 Rancher UI 时使用其 LDAP 凭据进行身份验证。
 
-### OpenLDAP Authentication Flow
+## OpenLDAP 认证流程
 
-1. When a user attempts to login with his LDAP credentials, Rancher creates an initial bind to the LDAP server using a service account with permissions to search the directory and read user/group attributes.
-2. Rancher then searches the directory for the user by using a search filter based on the provided username and configured attribute mappings.
-3. Once the user has been found, he is authenticated with another LDAP bind request using the user's DN and provided password.
-4. Once authentication succeeded, Rancher then resolves the group memberships both from the membership attribute in the user's object and by performing a group search based on the configured user mapping attribute.
+1. 当用户尝试使用其 LDAP 凭据登录时，Rancher 会使用具有搜索目录和读取用户/组属性权限的服务帐户，创建与 LDAP 服务器的初始绑定。
+2. 然后，Rancher 使用搜索过滤器根据提供的用户名和配置的属性映射为用户搜索目录。
+3. 找到用户后，将使用用户的 DN 和提供的密码通过另一个 LDAP 绑定请求对他进行身份验证。
+4. 身份验证成功后，Rancher 将从用户对象的成员资格属性以及通过基于配置的用户映射属性执行组搜索来解析组成员资格。
 
-> **Note:**
+> **注意：**
 >
-> Before you proceed with the configuration, please familiarise yourself with the concepts of [External Authentication Configuration and Principal Users](/docs/admin-settings/authentication/#external-authentication-configuration-and-principal-users).
+> 请阅读[外部身份验证配置和用户主体](/docs/admin-settings/authentication/_index)。
 
-### Prerequisites
+## 先决条件
 
-Rancher must be configured with a LDAP bind account (aka service account) to search and retrieve LDAP entries pertaining to users and groups that should have access. It is recommended to not use an administrator account or personal account for this purpose and instead create a dedicated account in OpenLDAP with read-only access to users and groups under the configured search base (see below).
+必须为 Rancher 配置 LDAP 绑定帐户（即服务帐户），以搜索和检索与应具有访问权限的用户和组有关的 LDAP 条目。建议不要为此目的使用管理员帐户或个人帐户，而应在 OpenLDAP 中创建一个专用帐户，该帐户对配置的 Search Base 下的用户和组具有只读访问权限（请参见下文）。
 
-> **Using TLS?**
+> **使用 TLS?**
 >
-> If the certificate used by the OpenLDAP server is self-signed or not from a recognised certificate authority, make sure have at hand the CA certificate (concatenated with any intermediate certificates) in PEM format. You will have to paste in this certificate during the configuration so that Rancher is able to validate the certificate chain.
+> 如果 OpenLDAP 服务器使用的证书是自签名的，或者不是来自公认的证书颁发机构的，则请确保手头有 PEM 格式的 CA 证书（包括任何中间证书）。在配置过程中，您将必须粘贴此证书，以便 Rancher 能够验证证书链。
 
-### Configuration Steps
+## 配置步骤
 
-#### Open OpenLDAP Configuration
+### 打开 OpenLDAP 配置
 
-1. Log into the Rancher UI using the initial local `admin` account.
-2. From the **Global** view, navigate to **Security** > **Authentication**
-3. Select **OpenLDAP**. The **Configure an OpenLDAP server** form will be displayed.
+1. 使用初始本地`admin`帐户登录 Rancher UI
+2. 在**全局**视图中，导航至**安全 > 认证**
+3. 选择 **OpenLDAP**。将显示**配置 OpenLDAP 服务**的表单。
 
-#### Configure OpenLDAP Server Settings
+### 配置 OpenLDAP 服务器设置
 
-In the section titled `1. Configure an OpenLDAP server` , complete the fields with the information specific to your server. Please refer to the following table for detailed information on the required values for each parameter.
+在标题为**1. 配置 OpenLDAP 服务**的部分中，填写包含服务器特定信息的字段。有关每个参数所需值的详细信息，请参阅下表。
 
-> **Note:**
->
-> If you are in doubt about the correct values to enter in the user/group Search Base configuration fields, consult your LDAP administrator or refer to the section [Identify Search Base and Schema using ldapsearch](/docs/admin-settings/authentication/ad/#annex-identify-search-base-and-schema-using-ldapsearch) in the Active Directory authentication documentation.
+> **注意：**
+> 如果您不确定在用户/组 **Search Base** 配置字段中输入的正确值，请咨询 LDAP 管理员，或参阅 Active Directory 身份验证文档中的[使用 ldapsearch 识别 Search Base 和架构部分](/docs/admin-settings/authentication/ad/#annex-identify-search-base-and-schema-using-ldapsearch)。
 
-**Table 1: OpenLDAP server parameters**
+**表 1：OpenLDAP 服务器参数**
 
-| Parameter                          | Description                                                                                                                                                                                                                  |
-| :--------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Hostname                           | Specify the hostname or IP address of the OpenLDAP server                                                                                                                                                                    |
-| Port                               | Specify the port at which the OpenLDAP server is listening for connections. Unencrypted LDAP normally uses the standard port of 389, while LDAPS uses port 636.|
-| TLS                                | Check this box to enable LDAP over SSL/TLS (commonly known as LDAPS). You will also need to paste in the CA certificate if the server uses a self-signed/enterprise-signed certificate.|
-| Server Connection Timeout          | The duration in number of seconds that Rancher waits before considering the server unreachable.|
-| Service Account Distinguished Name | Enter the Distinguished Name (DN) of the user that should be used to bind, search and retrieve LDAP entries.(see [Prerequisites](#prerequisites)).|
-| Service Account Password           | The password for the service account.|
-| User Search Base                   | Enter the Distinguished Name of the node in your directory tree from which to start searching for user objects. All users must be descendents of this base DN. For example: "ou=people, dc=acme, dc=com".|
-| Group Search Base                  | If your groups live under a different node than the one configured under `User Search Base` you will need to provide the Distinguished Name here. Otherwise leave this field empty. For example: "ou=groups, dc=acme, dc=com".|
+| 参数             | 描述                                                                                                                                         |
+| :--------------- | :------------------------------------------------------------------------------------------------------------------------------------------- |
+| 主机名           | 指定 OpenLDAP 服务器的主机名或 IP 地址。                                                                                                     |
+| 端口             | 指定 OpenLDAP 服务器侦听连接的端口。未加密的 LDAP 通常使用标准端口 389，而 LDAPS 使用端口 636。                                              |
+| TLS              | 选中此框以启用基于 SSL / TLS 的 LDAP（通常称为 LDAPS）。如果服务器使用自签名/企业签名的证书，则还需要粘贴 CA 证书。                          |
+| 服务器连接超时   | Rancher 在考虑服务器不可达之前等待的持续时间（以秒为单位）。                                                                                 |
+| 服务帐户专有名称 | 输入应用于绑定，搜索和检索 LDAP 条目的用户的专有名称（DN）。 (查看[参考](#先决条件))。                                                       |
+| 服务帐号密码     | 服务帐户的密码。                                                                                                                             |
+| 用户 Search Base | 输入目录树中节点的专有名称，从该节点开始搜索用户对象。所有用户都必须是此基本 DN 的后代。例如：`ou=people,dc=acme,dc=com`。                   |
+| 组 Search Base   | 如果您的组所在的节点与在其下配置的`User Search Base`节点不同，则需要在此处提供专有名称。否则将此字段留空。例如：`ou=groups,dc=acme,dc=com`。 |
 
 ---
 
-#### Configure User/Group Schema
+### 配置用户/组架构
 
-If your OpenLDAP directory deviates from the standard OpenLDAP schema, you must complete the **Customize Schema** section to match it.
-Note that the attribute mappings configured in this section are used by Rancher to construct search filters and resolve group membership. It is therefore always recommended to verify that the configuration here matches the schema used in your OpenLDAP.
+如果您的 OpenLDAP 目录不同于标准的 OpenLDAP 架构，则必须完成**自定义架构**部分以使其匹配。请注意，Rancher 使用本节中配置的属性映射来构造搜索过滤器并解析组成员身份。因此，始终建议您验证此处的配置是否与您的 OpenLDAP 中使用的架构匹配。
 
-> **Note:**
+> **注意：**
 >
-> If you are unfamiliar with the user/group schema used in the OpenLDAP server, consult your LDAP administrator or refer to the section [Identify Search Base and Schema using ldapsearch](/docs/admin-settings/authentication/ad/#annex-identify-search-base-and-schema-using-ldapsearch) in the Active Directory authentication documentation.
+> 如果您不熟悉 OpenLDAP 服务器中使用的用户/组架构，请咨询 LDAP 管理员，或参阅 Active Directory 身份验证文档中的[使用 ldapsearch 识别 Search Base 和架构部分](/docs/admin-settings/authentication/ad/#annex-identify-search-base-and-schema-using-ldapsearch).
 
-##### User Schema
+#### 用户架构配置
 
-The table below details the parameters for the user schema configuration.
+下表详细介绍了用户架构配置的参数。
 
-**Table 2: User schema configuration parameters**
+**表 2: 用户架构配置参数**
 
-| Parameter               | Description                                                                                                                                                                                                                                                                     |
-| :---------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Object Class            | The name of the object class used for user objects in your domain. If defined, only specify the name of the object class - _don't_ include it in an LDAP wrapper such as &(objectClass=xxxx)                                                                                    |
-| Username Attribute      | The user attribute whose value is suitable as a display name.|
-| Login Attribute         | The attribute whose value matches the username part of credentials entered by your users when logging in to Rancher. This is typically `uid` .|
-| User Member Attribute   | The user attribute containing the Distinguished Name of groups a user is member of. Usually this is one of `memberOf` or `isMemberOf` .|
-| Search Attribute        | When a user enters text to add users or groups in the UI, Rancher queries the LDAP server and attempts to match users by the attributes provided in this setting. Multiple attributes can be specified by separating them with the pipe ("\|") symbol.|
-| User Enabled Attribute  | If the schema of your OpenLDAP server supports a user attribute whose value can be evaluated to determine if the account is disabled or locked, enter the name of that attribute. The default OpenLDAP schema does not support this and the field should usually be left empty.|
-| Disabled Status Bitmask | This is the value for a disabled/locked user account. The parameter is ignored if `User Enabled Attribute` is empty.|
+| 参数           | 描述                                                                                                                                                                   |
+| :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 对象类         | 域中用于用户对象的对象类的名称。如果定义，则仅指定对象类的名称 - 请勿将其放在 LDAP 包装器中，例如`&(objectClass=xxxx)`                                                 |
+| 用户名属性     | 用户属性，其值适合作为显示名称。                                                                                                                                       |
+| 登录属性       | 该属性的值与用户登录 Rancher 时输入的凭据的用户名部分匹配。通常是这样`uid`。                                                                                           |
+| 用户成员属性   | 包含用户所属组的专有名称的用户属性。通常这是`memberOf`或之一`isMemberOf`。                                                                                             |
+| 搜索属性       | 当用户输入文本以在 UI 中添加用户或组时，Rancher 会查询 LDAP 服务器并尝试通过此设置中提供的属性来匹配用户。可以通过使用竖线(`|`)分隔多个属性来指定多个属性。            |
+| 用户启用的属性 | 如果您的 OpenLDAP 服务器的架构支持用户属性，可以对其值进行评估以确定该帐户是禁用还是锁定，请输入该属性的名称。默认的 OpenLDAP 模式不支持此功能，并且该字段通常应留空。 |
+| 禁用状态位掩码 | 这是禁用/锁定的用户帐户的值。如果`用户启用的属性`为空，则忽略该参数。                                                                                                  |
 
 ---
 
-##### Group Schema
+#### 组架构配置
 
-The table below details the parameters for the group schema configuration.
+下表详细介绍了组架构配置的参数。
 
-**Table 3: Group schema configuration parameters**
+**表 3: 组架构配置参数**
 
-| Parameter                      | Description                                                                                                                                                                                                    |
-| :----------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Object Class                   | The name of the object class used for group entries in your domain. If defined, only specify the name of the object class - _don't_ include it in an LDAP wrapper such as &(objectClass=xxxx)                  |
-| Name Attribute                 | The group attribute whose value is suitable for a display name.|
-| Group Member User Attribute    | The name of the **user attribute** whose format matches the group members in the `Group Member Mapping Attribute` .|
-| Group Member Mapping Attribute | The name of the group attribute containing the members of a group.|
-| Search Attribute               | Attribute used to construct search filters when adding groups to clusters or projects in the UI. See description of user schema `Search Attribute` .|
-| Group DN Attribute             | The name of the group attribute whose format matches the values in the user's group membership attribute. See `User Member Attribute` .|
-| Nested Group Membership        | This settings defines whether Rancher should resolve nested group memberships. Use only if your organisation makes use of these nested memberships (ie.you have groups that contain other groups as members).|
+| 参数           | 描述                                                                                                                          |
+| :------------- | :---------------------------------------------------------------------------------------------------------------------------- |
+| 对象类别       | 域中用于组对象的对象类的名称。如果定义，则仅指定对象类的名称 - 请勿将其放在 LDAP 包装器中，例如`&(objectClass=xxxx)`          |
+| 名称属性       | 其值适合于显示名称的组属性。                                                                                                  |
+| 组成员用户属性 | **用户属性的名称**，其格式与中的组成员匹配`组成员映射属性`。                                                                  |
+| 组成员映射属性 | 包含组成员的组属性的名称。                                                                                                    |
+| 搜索属性       | 在向 UI 中的集群或项目添加组时用于构造搜索过滤器的属性。请参阅用户架构说明`Search Attribute`。                                |
+| 组 DN 属性     | 组属性的名称，其格式与用户的组成员资格属性中的值匹配。请参阅`User Member Attribute`。                                         |
+| 嵌套组成员     | 此设置定义 Rancher 是否应解析嵌套的组成员身份。仅当您的组织使用这些嵌套成员身份时才使用（即，您具有包含其他组作为成员的组）。 |
 
----
+### 测试认证
 
-#### Test Authentication
+完成配置后，继续测试与 OpenLDAP 服务器的连接。如果测试成功，则表明启用了 OpenLDAP 身份验证。
 
-Once you have completed the configuration, proceed by testing the connection to the OpenLDAP server. Authentication with OpenLDAP will be enabled implicitly if the test is successful.
-
-> **Note:**
+> **注意：**
 >
-> The OpenLDAP user pertaining to the credentials entered in this step will be mapped to the local principal account and assigned administrator privileges in Rancher. You should therefore make a conscious decision on which LDAP account you use to perform this step.
+> 与在此步骤中输入的凭据有关的 OpenLDAP 用户将映射到本地主体帐户，并在 Rancher 中分配管理员权限。因此，您应该明智地决定要使用哪个 LDAP 帐户来执行此步骤。
 
-1. Enter the **username** and **password** for the OpenLDAP account that should be mapped to the local principal account.
-2. Click **Authenticate With OpenLDAP** to test the OpenLDAP connection and finalise the setup.
+1. 输入应该映射到本地主体帐户的 OpenLDAP 帐户的**用户名**和**密码**。
+2. 单击**启用 OpenLDAP 认证**，以测试 OpenLDAP 连接并完成设置。
 
-**Result:**
+**结果：**
 
-* OpenLDAP authentication is configured.
-* The LDAP user pertaining to the entered credentials is mapped to the local principal (administrative) account.
+- 已配置 OpenLDAP 身份验证。
+- 与输入的凭证有关的 LDAP 用户被映射到本地主体（系统管理员）帐户。
 
-> **Note:**
+> **注意：**
 >
-> You will still be able to login using the locally configured `admin` account and password in case of a disruption of LDAP services.
+> 如果在 LDAP 服务中断时，您仍然可以使用本地配置的 `admin` 帐户和密码登录。
 
-### Annex: Troubleshooting
+## 故障排除
 
-If you are experiencing issues while testing the connection to the OpenLDAP server, first double-check the credentials entered for the service account as well as the search base configuration. You may also inspect the Rancher logs to help pinpointing the problem cause. Debug logs may contain more detailed information about the error. Please refer to [How can I enable debug logging](/docs/faq/technical/#how-can-i-enable-debug-logging) in this documentation.
-
+如果在测试与 OpenLDAP 服务器的连接时遇到问题，请首先仔细检查为服务帐户输入的凭据以及 Search Base 配置。您也可以检查 Rancher 日志以帮助查明问题原因。debug 日志可能包含有关该错误的更多详细信息。请参阅本文档中的[如何开启 debug 级别日志](/docs/faq/technical/_index)。

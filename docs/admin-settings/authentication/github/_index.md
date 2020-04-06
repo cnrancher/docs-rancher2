@@ -2,51 +2,49 @@
 title: 对接 GitHub
 ---
 
-In environments using GitHub, you can configure Rancher to allow sign on using GitHub credentials.
+在使用 GitHub 的环境中，您可以配置 Rancher 允许使用 GitHub 凭据登录。
 
-> **Prerequisites:** Read [External Authentication Configuration and Principal Users](/docs/admin-settings/authentication/#external-authentication-configuration-and-principal-users).
+> **先决条件：** 请阅读[外部身份验证配置和用户主体](/docs/admin-settings/authentication/_index)
 
-1. Sign into Rancher using a local user assigned the `administrator` role (i.e., the _local principal_).
+1.  使用分配了`系统管理员`角色的本地用户（即本地主体）登录 Rancher。
 
-2.  From the **Global** view, select **Security > Authentication** from the main menu.
+2.  在**全局**视图中，从主菜单中选择**安全 > 认证**。
 
-3.  Select **GitHub**.
+3.  选择 **GitHub**。
 
-4.  Follow the directions displayed to **Setup a GitHub Application**. Rancher redirects you to GitHub to complete registration.
+4.  按照显示的说明**安装 GitHub 应用程序**。Rancher 将您重定向到 GitHub 以完成注册。
 
-    > **What's an Authorization Callback URL?**
+    > **什么是授权回调 URL？**
     >
-    > The Authorization Callback URL is the URL where users go to begin using your application (i.e. the splash screen).
-
-    > When you use external authentication, authentication does not actually take place in your application. Instead, authentication takes place externally (in this case, GitHub). After this external authentication completes successfully, the Authorization Callback URL is the location where the user re-enters your application.
-
-5.  From GitHub, copy the **Client ID** and **Client Secret**. Paste them into Rancher.
-
-    > **Where do I find the Client ID and Client Secret?**
+    > 授权回调 URL 是用户开始使用您的应用程序的 URL（即初始屏幕显示）。
     >
-    > From GitHub, select Settings > Developer Settings > OAuth Apps. The Client ID and Client Secret are displayed prominently.
+    > 当您使用外部身份验证时，身份验证实际上不会在您的应用程序中进行。而是在外部进行身份验证（在本例中为 GitHub）。在此外部身份验证成功完成之后，授权回调 URL 是用户重新进入应用程序的位置。
 
-6.  Click **Authenticate with GitHub**.
+5.  从 GitHub 中拷贝 **Client ID** 和 **Client Secret** 将它们粘贴在 Rancher 中。
 
-7.  Use the **Site Access** options to configure the scope of user authorization.
+    > **从哪里获取 Client ID 和 Client Secret?**
+    >
+    > 从 GitHub，选择 Settings > Developer Settings > OAuth Apps。此处有 Client ID 和 Client Secret。
 
-    - **Allow any valid Users**
+6.  点击 **启用 GitHub 认证**.
 
-      _Any_ GitHub user can access Rancher. We generally discourage use of this setting!
+7.  使用**访问控制**选项来配置用户授权范围.
 
-    - **Allow members of Clusters, Projects, plus Authorized Users and Organizations**
+    - **允许任何有效用户**
 
-      Any GitHub user or group added as a **Cluster Member** or **Project Member** can log in to Rancher. Additionally, any GitHub user or group you add to the **Authorized Users and Organizations** list may log in to Rancher.
+      不建议配置任何有效用户都可以访问 Rancher!
 
-    - **Restrict access to only Authorized Users and Organizations**
+    - **允许集群，项目以及授权用户和组织的成员**
 
-      Only GitHub users or groups added to the Authorized Users and Organizations can log in to Rancher.
-      <br/>
+      添加为**集群成员**或**项目成员**的任何 GitHub 用户或组均可登录 Rancher。另外，可以添加 GitHub 用户或组到**授权用户和组织**列表中，从而使这些用户可以登录 Rancher。
 
-8.  Click **Save**.
+    - **仅授权的用户和组织可以访问**
 
-**Result:**
+      只有添加到**授权的用户和组织**中的 GitHub 用户或组才能登录到 Rancher。
 
-* GitHub authentication is configured.
-* You are signed into Rancher with your GitHub account (i.e., the _external principal_).
+8.  点击**保存**。
 
+**结果：**
+
+- GitHub 身份验证已配置。
+- 您已可以使用 GitHub 帐户（即外部主体）登录到 Rancher。
