@@ -1,44 +1,41 @@
 ---
-title: 2、在 Rancher 中配置微软 AD FS
+title: 配置 Rancher 使用 AD FS
 ---
 
-_Available as of v2.0.7_
+_自 v2.0.7 版本开始可用_
 
-After you complete [Configuring Microsoft AD FS for Rancher](/docs/admin-settings/authentication/microsoft-adfs/microsoft-adfs-setup/), enter your AD FS information into Rancher to allow AD FS users to authenticate with Rancher.
+完成[在 Microsoft AD FS 中配置 Rancher 对接](/docs/admin-settings/authentication/microsoft-adfs/microsoft-adfs-setup/_index)后，将您的 AD FS 信息输入 Rancher，以允许 Rancher 通过 AD FS 进行身份验证。
 
-> **Important Notes For Configuring Your AD FS Server:**
+> **有关配置 AD FS 服务器的重要说明：**
 >
-> - The SAML 2.0 WebSSO Protocol Service URL is: `https://<RANCHER_SERVER>/v1-saml/adfs/saml/acs` 
-> - The Relying Party Trust identifier URL is: `https://<RANCHER_SERVER>/v1-saml/adfs/saml/metadata` 
-> - You must export the `federationmetadata.xml` file from your AD FS server. This can be found at: `https://<AD_SERVER>/federationmetadata/2007-06/federationmetadata.xml` 
+> - SAML 2.0 WebSSO 协议服务 URL 为: `https://<RANCHER_SERVER>/v1-saml/adfs/saml/acs`
+> - 依赖方信任标识符 URL 为: `https://<RANCHER_SERVER>/v1-saml/adfs/saml/metadata`
+> - 您必须从 AD FS 服务器导出`federationmetadata.xml`文件。可以在以下位置找到这个文件：`https://<AD_SERVER>/federationmetadata/2007-06/federationmetadata.xml`
 
-1.  From the **Global** view, select **Security > Authentication** from the main menu.
+1.  在**全局**视图中，选择 **安全 > 认证** 菜单。
 
-1.  Select **Microsoft Active Directory Federation Services**.
+2.  选择 **AD FS**。
 
-1.  Complete the **Configure AD FS Account** form. Microsoft AD FS lets you specify an existing Active Directory (AD) server. The examples below describe how you can map AD attributes to fields within Rancher.
+3.  完成 **配置 AD FS 帐户** 表单。Microsoft AD FS 允许您指定现有的 Active Directory（AD）服务器。以下示例描述了如何将 AD 属性映射到 Rancher 中的字段。
 
-| Field                     | Description                                                                                                                                                                                                    |
-|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Display Name Field        | The AD attribute that contains the display name of users. <br/><br/>Example: `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname` |
-| User Name Field           | The AD attribute that contains the user name/given name. <br/><br/>Example: `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name` |
-| UID Field                 | An AD attribute that is unique to every user. <br/><br/>Example: `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn` |
-| Groups Field              | Make entries for managing group memberships. <br/><br/>Example: `http://schemas.xmlsoap.org/claims/Group` |
-| Rancher API Host          | The URL for your Rancher Server.                                                                                                                                                                               |
-| Private Key / Certificate | This is a key-certificate pair to create a secure shell between Rancher and your AD FS. Ensure you set the Common Name (CN) to your Rancher Server URL.<br/><br/>[Certificate creation command](#cert-command) |
-| Metadata XML              | The `federationmetadata.xml` file exported from your AD FS server. <br/><br/>You can find this file at `https://<AD_SERVER>/federationmetadata/2007-06/federationmetadata.xml` .                                |
+    | 字段名           | 描述                                                                                                                                                           |
+    | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | 显示名称         | 包含用户显示名称的 AD 属性. <br/><br/>例: `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname`                                                    |
+    | 用户名           | 包含用户名/给定名称的 AD 属性。 <br/><br/>例: `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name`                                                     |
+    | UID              | 每个用户唯一的 AD 属性。 <br/><br/>例: `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn`                                                             |
+    | 组               | 进行输入以管理组成员身份。 <br/><br/>例: `http://schemas.xmlsoap.org/claims/Group`                                                                             |
+    | Rancher API 地址 | Rancher 服务器的 URL。                                                                                                                                         |
+    | 密钥 / 证书      | 这是用于在 Rancher 和您的 AD FS 之间创建安全 shell 的密钥证书对。确保将通用名称（CN）设置为 Rancher Server URL。                                               |
+    | 元数据 XML       | 从 AD FS 服务器导出的`federationmetadata.xml`文件。 <br/><br/>您可以在这里找到此文件 `https://<AD_SERVER>/federationmetadata/2007-06/federationmetadata.xml`。 |
 
-    <a id="cert-command"></a>
-
-    > **Tip:** You can generate a certificate using an openssl command. For example:
+    > **提示：** 您可以使用 openssl 命令生成证书。例如：
     >
     >        openssl req -x509 -newkey rsa:2048 -keyout myservice.key -out myservice.cert -days 365 -nodes -subj "/CN=myservice.example.com"
 
-1) After you complete the **Configure AD FS Account** form, click **Authenticate with AD FS**, which is at the bottom of the page.
+4.  完成 **配置 AD FS 帐户** 表单后, 点击 **使用 AD FS 进行身份验证**按钮。
 
-   Rancher redirects you to the AD FS login page. Enter credentials that authenticate with Microsoft AD FS to validate your Rancher AD FS configuration.
+    Rancher 将您重定向到 AD FS 登录页面。输入通过 Microsoft AD FS 进行身份验证的凭据，以验证 Rancher AD FS 配置。
 
-   > **Note:** You may have to disable your popup blocker to see the AD FS login page.
+> **注意：** 您可能必须禁用弹出窗口阻止程序才能查看 AD FS 登录页面。
 
-**Result:** Rancher is configured to work with MS FS. Your users can now sign into Rancher using their MS FS logins.
-
+**结果：** Rancher 被配置为与 AD FS 一起使用。您的用户现在可以使用其 AD FS 登录名登录 Rancher。

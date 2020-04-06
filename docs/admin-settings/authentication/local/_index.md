@@ -1,14 +1,13 @@
 ---
-title: 本地认证
+title: 本地验证
 ---
 
-Local authentication is the default until you configure an external authentication provider. Local authentication is where Rancher stores the user information, i.e.names and passwords, of who can log in to Rancher. By default, the `admin` user that logs in to Rancher for the first time is a local user.
+在配置外部身份验证系统之前，您将默认使用本地身份验证。本地身份验证是 Rancher 通过验证存储在本地的用户名和密码，对用户进行验证，验证通过后可以登录到 Rancher。默认情况下，用于首次登录 Rancher 的 `admin` 用户就是一个本地用户。
 
-### Adding Local Users
+## 添加本地用户
 
-Regardless of whether you use external authentication, you should create a few local authentication users so that you can continue using Rancher if your external authentication service encounters issues.
+无论是否使用外部身份验证，都应创建一些本地身份验证用户，以便在外部身份验证服务遇到问题时继续使用 Rancher。
 
-1. From the **Global** view, select **Users** from the navigation bar.
+1. 在**全局**视图中，在导航栏中选择**用户**。
 
-2. Click **Add User**. Then complete the **Add User** form. Click **Create** when you're done.
-
+2. 点击**添加用户**。完成**添加用户**表单信息填写。点击**创建**按钮，完成用户创建。
