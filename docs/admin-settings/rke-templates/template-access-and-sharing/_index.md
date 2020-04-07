@@ -1,61 +1,60 @@
 ---
-title: 权限和共享
+title: 访问和共享
 ---
 
-If you are an RKE template owner, you can share it with users or groups of users, who can then use the template to create clusters.
+如果您是 RKE 模板所有者，则可以与用户或用户组共享该模板，然后用户组可以使用该模板创建集群。
 
-Since RKE templates are specifically shared with users and groups, owners can share different RKE templates with different sets of users.
+由于 RKE 模板是专门与用户和组共享的，因此所有者可以与不同的用户集共享不同的 RKE 模板。
 
-When you share a template, each user can have one of two access levels:
+共享模板时，每个用户可以有两个访问级别之一：
 
-* **Owner:** This user can update, delete, and share the templates that they own. The owner can also share the template with other users.
-* **User:** These users can create clusters using the template. They can also upgrade those clusters to new revisions of the same template. When you share a template as **Make Public (read-only), ** all users in your Rancher setup have the User access level for the template.
+- **所有者：** 此用户可以更新、删除和共享其拥有的模板。所有者还可以与其他用户共享模板。
+- **用户：** 这些用户可以使用模板创建集群。他们还可以将这些集群升级到同一模板的新版本。当您将模板共享为 **公开（只读）时**，Rancher 中的所有用户都具有该模板的用户访问权限。
 
-If you create a template, you automatically become an owner of that template.
+如果用户创建了模板，则会自动成为该模板的所有者。
 
-If you want to delegate responsibility for updating the template, you can share ownership of the template. For details on how owners can modify templates, refer to the [documentation about revising templates.](/docs/admin-settings/rke-templates/creating-and-revising)
+如果要委派更新模板的责任，可以共享模板的所有权。有关所有者如何修改模板的详细信息，请参阅[有关修改模板的文档](/docs/admin-settings/rke-templates/creating-and-revising/_index)。
 
-There are several ways to share templates:
+有几种共享模板的方法：
 
-* Add users to a new RKE template during template creation
-* Add users to an existing RKE template
-* Make the RKE template public, sharing it with all users in the Rancher setup
-* Share template ownership with users who are trusted to modify the template
+- 在模板创建期间将用户添加到新的 RKE 模板
+- 将用户添加到现有 RKE 模板
+- 将 RKE 模板公开，与 Rancher 设置中的所有用户共享
+- 与受信任的用户共享模板所有权
 
-#### Sharing Templates with Specific Users or Groups
+## 与指定用户或组共享模板
 
-To allow users or groups to create clusters using your template, you can give them the basic **User** access level for the template.
+要允许用户或组使用模板创建集群，您可以为用户提供模板的基本**用户**访问级别。
 
-1. From the **Global** view, click **Tools > RKE Templates.**
-1. Go to the template that you want to share and click the **Vertical Ellipsis (...) > Edit.**
-1. In the **Share Template** section, click on **Add Member**.
-1. Search in the **Name** field for the user or group you want to share the template with.
-1. Choose the **User** access type.
-1. Click **Save.**
+1. 在**全局**视图中，单击**工具 > RKE 模板**。
+1. 转到要共享的模板，然后单击**垂直省略号(…)>编辑**。
+1. 在**共享模板**部分，单击**添加成员**。
+1. 在**名称**字段中搜索要与之共享模板的用户或组。
+1. 选择**用户**访问类型。
+1. 单击**保存**。
 
-**Result:** The user or group can create clusters using the template.
+**结果：** 用户或组可以使用模板创建集群。
 
-#### Sharing Templates with All Users
+## 与所有用户共享模板
 
-1. From the **Global** view, click **Tools > RKE Templates.**
-1. Go to the template that you want to share and click the **Vertical Ellipsis (...) > Edit.**
-1. Under **Share Template,** click **Make Public (read-only).** Then click **Save.**
+1. 在**全局**视图中，单击**工具 > RKE 模板**。
+1. 转到要共享的模板，然后单击**垂直省略号(…) > 编辑**。
+1. 在**共享模板下**，单击**公开（只读）**，然后单击**保存**。
 
-**Result:** All users in the Rancher setup can create clusters using the template.
+**结果：** Rancher 中的所有用户都可以使用模板创建集群。
 
-#### Sharing Ownership of Templates
+## 共享模板的所有权
 
-If you are the creator of a template, you might want to delegate responsibility for maintaining and updating a template to another user or group.
+如果您是模板的创建者，则可能希望将维护和更新模板的责任委派给其他用户或组。
 
-In that case, you can give users the Owner access type, which allows another user to update your template, delete it, or share access to it with other users.
+在这种情况下，可以为用户提供所有者类型的访问权限，该类型允许其他用户更新模板、删除模板或与其他用户共享对模板的访问权限。
 
-To give Owner access to a user or group, 
+要授予用户或组所有者访问权限，
 
-1. From the **Global** view, click **Tools > RKE Templates.**
-1. Go to the RKE template that you want to share and click the **Vertical Ellipsis (...) > Edit.**
-1. Under **Share Template**, click on **Add Member** and search in the **Name** field for the user or group you want to share the template with.
-1. In the **Access Type** field, click **Owner.**
-1. Click **Save.**
+1. 在**全局**视图中，单击**工具 > RKE 模板**。
+1. 转到要共享的 RKE 模板，然后单击**垂直省略号(…)>编辑**。
+1. 在**共享模板**下，单击**添加成员**，然后在**名称**字段中搜索要共享模板的用户或组。
+1. 在**访问类型**字段中，单击**所有者**。
+1. 单击**保存**。
 
-**Result:** The user or group has the Owner access type, and can modify, share, or delete the template.
-
+**结果：** 具有所有者访问类型的用户或组，可以修改、共享或删除模板。

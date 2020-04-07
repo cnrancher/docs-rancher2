@@ -2,37 +2,36 @@
 title: 强制使用模板
 ---
 
-This section describes how template administrators can enforce templates in Rancher, restricting the ability of users to create clusters without a template.
+本节介绍管理员如何在 Rancher 中强制使用模板，从而限制用户在没有模板的情况下创建集群的能力。
 
-By default, any standard user in Rancher can create clusters. But when RKE template enforcement is turned on, 
+默认情况下，Rancher 中的任何标准用户都可以创建集群。但当开启 RKE 模板强制时，
 
-* Only an administrator has the ability to create clusters without a template.
-* All standard users must use an RKE template to create a new cluster.
-* Standard users cannot create a cluster without using a template.
+- 只有管理员才能在没有模板的情况下创建集群。
+- 所有标准用户必须使用 RKE 模板创建新集群。
+- 标准用户不能在不使用模板的情况下创建集群。
 
-Users can only create new templates if the administrator [gives them permission.](/docs/admin-settings/rke-templates/creator-permissions/#allowing-a-user-to-create-templates)
+用户只能在管理员[授予其权限](/docs/admin-settings/rke-templates/creator-permissions/_index)的情况下创建新模板。
 
-After a cluster is created with an RKE template, the cluster creator cannot edit settings that are defined in the template. The only way to change those settings after the cluster is created is to [upgrade the cluster to a new revision](/docs/admin-settings/rke-templates/applying-templates/#updating-a-cluster-created-with-an-rke-template) of the same template. If cluster creators want to change template-defined settings, they would need to contact the template owner to get a new revision of the template. For details on how template revisions work, refer to the [documentation on revising templates.](/docs/admin-settings/rke-templates/creating-and-revising/#updating-a-template)
+使用 RKE 模板创建集群后，集群创建者无法编辑模板中定义的设置。创建集群后更改这些设置的唯一方法是[将集群升级到相同模板的新版本](/docs/admin-settings/rke-templates/applying-templates/_index)。如果集群创建者想要更改模板定义的设置，他们需要联系模板所有者以获取模板的新版本。有关模板修订工作方式的详细信息，请参阅[修订模板文档](/docs/admin-settings/rke-templates/creating-and-revising/_index)。
 
-## Requiring New Clusters to Use an RKE Template
+## 要求新集群使用 RKE 模板
 
-You might want to require new clusters to use a template to ensure that any cluster launched by a [standard user](/docs/admin-settings/rbac/global-permissions/) will use the Kubernetes and/or Rancher settings that are vetted by administrators.
+您可能希望要求新集群使用模板，以确保[标准用户](/docs/admin-settings/rbac/global-permissions/_index)启动的任何集群都将使用经过管理员审核的 Kubernetes 和/或 Rancher 设置。
 
-To require new clusters to use an RKE template, administrators can turn on RKE template enforcement with the following steps:
+要要求新集群使用 RKE 模板，管理员可以通过以下步骤启用 RKE 模板强制：
 
-1. From the **Global** view, click the **Settings** tab.
-1. Go to the `cluster-template-enforcement` setting. Click the vertical **Ellipsis (... )** and click **Edit.**
-1. Set the value to **True** and click **Save.**
+1. 在**全局**视图中，单击**设置**选项卡。
+1. 转到`cluster-template-enforcement`设置。单击垂直**省略号(…)**并单击**编辑**。
+1. 将该值设置为**true**，然后单击**保存**。
 
-**Result:** All clusters provisioned by Rancher must use a template, unless the creator is an administrator.
+**结果：** Rancher 设置的所有集群都必须使用模板，除非创建者是系统管理员。
 
-## Disabling RKE Template Enforcement
+## 禁用 RKE 模板强制
 
-To allow new clusters to be created without an RKE template, administrators can turn off RKE template enforcement with the following steps:
+要允许在没有 RKE 模板的情况下创建新集群，管理员可以通过以下步骤关闭 RKE 模板强制:
 
-1. From the **Global** view, click the **Settings** tab.
-1. Go to the `cluster-template-enforcement` setting. Click the vertical **Ellipsis (... )** and click **Edit.**
-1. Set the value to **False** and click **Save.**
+1. 在**全局**视图中，单击**设置**选项卡。
+1. 转到`cluster-template-enforcement`设置。单击垂直**省略号(…)**并单击**编辑**。
+1. 将该值设置为**false**，并单击**保存**。
 
-**Result:** When clusters are provisioned by Rancher, they don't need to use a template.
-
+**结果：** 当在 Rancher 中创建集群时，用户不需要使用模板。

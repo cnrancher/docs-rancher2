@@ -2,49 +2,35 @@
 title: YAML 示例
 ---
 
-Below is an example RKE template configuration file for reference.
+下面是一个示例 RKE 模板配置文件供参考。
 
-The YAML in the RKE template uses the same customization that is used when you create an RKE cluster. However, since the YAML is within the context of a Rancher provisioned RKE cluster, the customization from the RKE docs needs to be nested under the `rancher_kubernetes_engine` directive.
+RKE 模板中的 YAML 使用与创建 RKE 集群时相同的自定义项。但是，由于 YAML 是在 Rancher 创建的 RKE 集群的上下文中使用，因此来自 RKE 文档的设置需要嵌套在`rancher_kubernetes_engine_config`指令下。
 
-``` yaml
+```yaml
 ##
-
 ## Cluster Config
-
 ##
 docker_root_dir: /var/lib/docker
 
 enable_cluster_alerting: false
-
 ## This setting is not enforced. Clusters
-
 ## created with this sample template
-
 ## would have alerting turned off by default,
-
 ## but end users could still turn alerting
-
 ## on or off.
 
 enable_cluster_monitoring: true
-
 ## This setting is not enforced. Clusters
-
 ## created with this sample template
-
 ## would have monitoring turned on
-
 ## by default, but end users could still
-
 ## turn monitoring on or off.
 
 enable_network_policy: false
 local_cluster_auth_endpoint:
   enabled: true
 ##
-
 ## Rancher Config
-
 ##
 rancher_kubernetes_engine_config: # Your RKE template config goes here.
   addon_job_timeout: 30
@@ -53,7 +39,7 @@ rancher_kubernetes_engine_config: # Your RKE template config goes here.
   ignore_docker_version: true
   ##
   ## # Currently only nginx ingress provider is supported.
-  ## # To disable ingress controller, set `provider: none` 
+  ## # To disable ingress controller, set `provider: none`
   ## # To enable ingress on specific nodes, use the node_selector, eg:
   ##    provider: nginx
   ##    node_selector:
@@ -123,4 +109,3 @@ rancher_kubernetes_engine_config: # Your RKE template config goes here.
   ssh_agent_auth: false
 windows_prefered_cluster: false
 ```
-

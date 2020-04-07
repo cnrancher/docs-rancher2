@@ -2,62 +2,55 @@
 title: 使用模板
 ---
 
-You can create a cluster from an RKE template that you created, or from a template that has been [shared with you.](/docs/admin-settings/rke-templates/template-access-and-sharing)
+您可以从创建的 RKE 模板或已[与您共享的模板](/docs/admin-settings/rke-templates/template-access-and-sharing/_index)创建集群。
 
-RKE templates can be applied to new clusters.
+RKE 模板可以应用于新的集群。
 
-As of Rancher v2.3.3, you can [save the configuration of an existing cluster as an RKE template.](#converting-an-existing-cluster-to-use-an-rke-template) Then the cluster's settings can only be changed if the template is updated.
+从 Rancher v2.3.3 开始，您可以[将现有集群的配置保存为 RKE 模板](#将现有集群转换为使用-rke-模板)，然后只有更新模板时才能更改集群的设置。
 
-You can't change a cluster to use a different RKE template. You can only update the cluster to a new revision of the same template.
+不能将集群更改为使用其他 RKE 模板。只能将集群更新为同一模板的新版本。
 
-This section covers the following topics:
+## 从 RKE 模板创建集群
 
-* [Creating a cluster from an RKE template](#creating-a-cluster-from-an-rke-template)
-* [Updating a cluster created with an RKE template](#updating-a-cluster-created-with-an-rke-template)
-* [Converting an existing cluster to use an RKE template](#converting-an-existing-cluster-to-use-an-rke-template)
+要使用 RKE 模板添加[RKE 集群](/docs/cluster-provisioning/rke-clusters/_index)，请使用以下步骤:
 
-#### Creating a Cluster from an RKE Template
+1. 从**全局**视图，转到**集群**选项卡。
+1. 单击**添加集群**，然后选择基础设施提供商。
+1. 像往常一样提供集群名称和节点模板的详细信息。
+1. 若要使用 RKE 模板，请在**集群选项**下选中**使用现有 RKE 模板和修订版复选框**
+1. 从下拉菜单中选择现有模板和修订。
+1. 可选项：可以编辑创建模板时 RKE 模板所有者标记为**允许用户覆盖**的任何设置。如果有要更改的设置，但没有此选项，则需要与模板所有者联系以获取模板的新版本。然后您需要编辑集群以将其升级到新版本。
+1. 单击**保存**启动集群。
 
-To add a cluster [hosted by an infrastructure provider](/docs/cluster-provisioning/rke-clusters) using an RKE template, use these steps:
+## 更新使用 RKE 模板创建的集群
 
-1. From the **Global** view, go to the **Clusters** tab.
-1. Click **Add Cluster** and choose the infrastructure provider.
-1. Provide the cluster name and node template details as usual.
-1. To use an RKE template, under the **Cluster Options**, check the box for **Use an existing RKE template and revision.**
-1. Choose an existing template and revision from the dropdown menu.
-1. Optional: You can edit any settings that the RKE template owner marked as **Allow User Override** when the template was created. If there are settings that you want to change, but don't have the option to, you will need to contact the template owner to get a new revision of the template. Then you will need to edit the cluster to upgrade it to the new revision.
-1. Click **Save** to launch the cluster.
+当模板所有者创建模板时，每个设置在 Rancher UI 中都有一个开关，指示用户是否可以覆盖该设置。
 
-#### Updating a Cluster Created with an RKE Template
+- 如果设置允许用户覆盖，则可以通过[编辑集群](/docs/cluster-admin/editing-clusters/_index)更新集群中的这些设置
+- 如果该开关处于关闭状态，则除非集群所有者创建了允许您覆盖这些设置的模板修订版，否则无法更改这些设置。如果有要更改的设置，但没有此选项，则需要与模板所有者联系以获取模板的新版本。
 
-When the template owner creates a template, each setting has a switch in the Rancher UI that indicates if users can override the setting.
+如果集群是从 RKE 模板创建的，则可以编辑集群以将集群更新为模板的新版本。
 
-* If the setting allows a user override, you can update these settings in the cluster by [editing the cluster.](/docs/cluster-admin/editing-clusters/)
-* If the switch is turned off, you cannot change these settings unless the cluster owner creates a template revision that lets you override them. If there are settings that you want to change, but don't have the option to, you will need to contact the template owner to get a new revision of the template.
+从 Rancher v2.3.3 开始，现有集群的设置可以[保存为 RKE 模板](#将现有集群转换为使用-rke-模板)。在这种情况下，还可以编辑集群以将集群更新为模板的新版本。
 
-If a cluster was created from an RKE template, you can edit the cluster to update the cluster to a new revision of the template.
+> **注意：** 不能将集群更改为使用其他 RKE 模板。只能将集群更新为同一模板的新版本。
 
-As of Rancher v2.3.3, an existing cluster's settings can be [saved as an RKE template.](#converting-an-existing-cluster-to-use-an-rke-template) In that situation, you can also edit the cluster to update the cluster to a new revision of the template.
+## 将现有集群转换为使用 RKE 模板
 
-> **Note:** You can't change the cluster to use a different RKE template. You can only update the cluster to a new revision of the same template.
+_从 v2.3.3 开始可用_
 
-#### Converting an Existing Cluster to Use an RKE Template
+本节介绍如何从现有集群创建 RKE 模板。
 
-_Available as of v2.3.3_
+RKE 模板不能应用于现有集群，除非将现有集群的设置保存为 RKE 模板。这会将集群的设置导出为新的 RKE 模板，并将集群绑定到该模板。结果是，只有更新模板并将集群升级到新版本的模板时，才能更改集群。
 
-This section describes how to create an RKE template from an existing cluster.
+要将现有集群转换为使用 RKE 模板，
 
-RKE templates cannot be applied to existing clusters, except if you save an existing cluster's settings as an RKE template. This exports the cluster's settings as a new RKE template, and also binds the cluster to that template. The result is that the cluster can only be changed if the [template is updated, ](/docs/admin-settings/rke-templates/creating-and-revising/#updating-a-template) and the cluster is upgraded to [use a newer version of the template.](/docs/admin-settings/rke-templates/creating-and-revising/#upgrading-a-cluster-to-use-a-new-template-revision)
+1. 在 Rancher 中的**全局**视图中，单击**集群**选项卡。
+1. 转到将转换为使用 RKE 模板的集群。单击**省略号(…) > 另存为 RKE 模板**。
+1. 在出现的表单中输入模板的名称，然后单击**创建**。
 
-To convert an existing cluster to use an RKE template, 
+**结果：**
 
-1. From the **Global** view in Rancher, click the **Clusters** tab.
-1. Go to the cluster that will be converted to use an RKE template. Click **Ellipsis (...)** > **Save as RKE Template.**
-1. Enter a name for the template in the form that appears, and click **Create.**
-
-**Results:**
-
-* A new RKE template is created.
-* The cluster is converted to use the new template.
-* New clusters can be [created from the new template.](/docs/admin-settings/rke-templates/applying-templates/#creating-a-cluster-from-an-rke-template)
-
+- 将创建一个新的 RKE 模板。
+- 将转换集群以使用新模板。
+- 可以[从新模板创建新集群](/docs/admin-settings/rke-templates/applying-templates/_index)

@@ -1,127 +1,125 @@
 ---
-title: 介绍
+title: 功能介绍
 ---
 
-_Available as of Rancher v2.3.0_
+_从 Rancher v2.3.0 开始可用_
 
-RKE templates are designed to allow DevOps and security teams to standardize and simplify the creation of Kubernetes clusters.
+RKE 模板旨在允许 DevOps 和安全团队标准化和简化 Kubernetes 集群的创建过程。
 
-RKE is the [Rancher Kubernetes Engine, ]({{<baseurl>}}/rke/latest/en/) which is the tool that Rancher uses to provision Kubernetes clusters.
+RKE 是[Rancher Kubernetes Engine](https://rancher.com/docs/rke/latest/en/)，它是 Rancher 用来创建 Kubernetes 集群的工具。
 
-With Kubernetes increasing in popularity, there is a trend toward managing a larger number of smaller clusters. When you want to create many clusters, it’s more important to manage them consistently. Multi-cluster management comes with challenges to enforcing security and add-on configurations that need to be standardized before turning clusters over to end users.
+随着 Kubernetes 越来越受欢迎，有一种趋势是管理更多的小型集群。当您想要创建许多集群时，一致地管理它们更为重要。多集群管理面临着如何强制实施安全策略和附加配置的挑战，在将集群移交给最终用户之前，这些配置需要标准化。
 
-RKE templates help standardize these configurations. Regardless of whether clusters are created with the Rancher UI, the Rancher API, or an automated process, Rancher will guarantee that every cluster it provisions from an RKE template is uniform and consistent in the way it is produced.
+RKE 模板有助于标准化这些配置。无论集群是使用 Rancher UI、Rancher API 还是自动化流程创建的，Rancher 都将保证从 RKE 模板创建的每个集群在生成方式上是统一和一致的。
 
-Admins control which cluster options can be changed by end users. RKE templates can also be shared with specific users and groups, so that admins can create different RKE templates for different sets of users.
+管理员可以控制最终用户可以更改哪些集群选项。RKE 模板也可以与指定的用户和组共享，这样管理员可以为不同的用户集创建不同的 RKE 模板。
 
-If a cluster was created with an RKE template, you can't change it to a different RKE template. You can only update the cluster to a new revision of the same template.
+如果使用 RKE 模板创建集群，在创建成功之后，您不能将其更改为使用其他 RKE 模板。只能将集群更新为同一模板的新版本。
 
-As of Rancher v2.3.3, you can [save the configuration of an existing cluster as an RKE template.](/docs/admin-settings/rke-templates/applying-templates/#converting-an-existing-cluster-to-use-an-rke-template) Then the cluster's settings can only be changed if the template is updated. The new template can also be used to launch new clusters.
+从 Rancher v2.3.3 开始，您可以[将现有集群的配置另存为 RKE 模板](/docs/admin-settings/rke-templates/applying-templates/_index)，之后只有通过更新模板才能更新这个集群的设置。这个导出的模板还可以用于启动新的集群。
 
-The core features of RKE templates allow DevOps and security teams to:
+RKE 模板的核心功能允许 DevOps 和安全团队：
 
-* Standardize cluster configuration and ensure that Rancher-provisioned clusters are created following best practices
-* Prevent less technical users from making uninformed choices when provisioning clusters
-* Share different templates with different sets of users and groups
-* Delegate ownership of templates to users who are trusted to make changes to them
-* Control which users can create templates
-* Require users to create clusters from a template
+- 标准化集群配置并确保按照最佳实践来创建 RKE 集群
+- 防止技术水平较低的用户在配置集群时做出不知情的选择
+- 与不同的用户和组共享不同的模板
+- 将模板的所有权委托给受信任的用户进行更改
+- 控制哪些用户可以创建模板
+- 强制要求用户从模板创建集群
 
-## Configurable Settings
+## 可配置设置
 
-RKE templates can be created in the Rancher UI or defined in YAML format. They can define all the same parameters that can be specified when you use Rancher to provision custom nodes or nodes from an infrastructure provider:
+RKE 模板可以在 Rancher UI 中创建，也可以用 YAML 格式定义。模板中可以定义全部 RKE 集群中可以使用的参数：
 
-* Cloud provider options
-* Pod security options
-* Network providers
-* Ingress controllers
-* Network security configuration
-* Network plugins
-* Private registry URL and credentials
-* Add-ons
-* Kubernetes options, including configurations for Kubernetes components such as kube-api, kube-controller, kubelet, and services
+- Cloud Provider 选项
+- Pod 安全选项
+- 网络插件
+- Ingress 控制器
+- 网络安全配置
+- 私有镜像库 URL 和凭据
+- 插件（Add-ons）
+- Kubernetes 选项，包括 Kubernetes 组件的参数，如 kube-api、kube-controller、kubelet 和 services
 
-The [add-on section](#add-ons) of an RKE template is especially powerful because it allows a wide range of customization options.
+RKE 模板的[插件部分](#插件)功能特别强大，因为它允许多种自定义选项。
 
-## Scope of RKE Templates
+## RKE 模板作用范围
 
-RKE templates are supported for Rancher-provisioned clusters. The templates can be used to provision custom clusters or clusters that are launched by an infrastructure provider.
+Rancher 创建的集群支持 RKE 模板。模板可用于创建 RKE 集群（自定义集群和在云供应商上通过节点驱动创建的集群）。
 
-RKE templates are for defining Kubernetes and Rancher settings. Node templates are responsible for configuring nodes. For tips on how to use RKE templates in conjunction with hardware, refer to [RKE Templates and Hardware](/docs/admin-settings/rke-templates/rke-templates-and-hardware).
+RKE 模板用于定义 Kubernetes 和 Rancher 设置。节点模板负责配置节点。有关如何将 RKE 模板与硬件结合使用的参考，请参阅 [RKE 模板和硬件](/docs/admin-settings/rke-templates/rke-templates-and-hardware/_index)。
 
-RKE templates can be created from scratch to pre-define cluster configuration. They can be applied to launch new clusters, or templates can also be exported from existing running clusters.
+可以从头开始创建 RKE 模板来预先定义集群配置。然后可以使用它们启动新的集群，也可以从现有的 RKE 集群导出模板。
 
-As of v2.3.3, the settings of an existing cluster can be [saved as an RKE template.](/docs/admin-settings/rke-templates/applying-templates/#converting-an-existing-cluster-to-use-an-rke-template) This creates a new template and binds the cluster settings to the template, so that the cluster can only be upgraded if the [template is updated](/docs/admin-settings/rke-templates/creating-and-revising/#updating-a-template), and the cluster is upgraded to [use a newer version of the template.](/docs/admin-settings/rke-templates/creating-and-revising/#upgrading-a-cluster-to-use-a-new-template-revision) The new template can also be used to create new clusters.
+从 v2.3.3 开始，现有 RKE 集群的可以[保存为 RKE 模板](/docs/admin-settings/rke-templates/applying-templates/_index)。这将创建新的模板并将集群绑定到该模板。因此，只有通过更新[模板](/docs/admin-settings/rke-templates/creating-and-revising/_index)并且将这个集群[升级到新版本的模板](/docs/admin-settings/rke-templates/creating-and-revising/_index)，才能编辑这个集群。
 
-## Example Scenarios
+## 示例场景
 
-When an organization has both basic and advanced Rancher users, administrators might want to give the advanced users more options for cluster creation, while restricting the options for basic users.
+当组织同时拥有基本和高级 Rancher 用户时，管理员可能希望为高级用户提供更多创建集群的选项，同时限制基本用户的选项。
 
-These [example scenarios](/docs/admin-settings/rke-templates/example-scenarios) describe how an organization could use templates to standardize cluster creation.
+这些[示例场景](/docs/admin-settings/rke-templates/example-scenarios/_index)描述了组织如何使用模板来标准化集群创建。
 
-Some of the example scenarios include the following:
+一些示例场景包括：
 
-* **Enforcing templates:** Administrators might want to [enforce one or more template settings for everyone](/docs/admin-settings/rke-templates/example-scenarios/#enforcing-a-template-setting-for-everyone) if they want all new Rancher-provisioned clusters to have those settings.
-* **Sharing different templates with different users:** Administrators might give [different templates to basic and advanced users, ](/docs/admin-settings/rke-templates/example-scenarios/#templates-for-basic-and-advanced-users) so that basic users can have more restricted options and advanced users can use more discretion when creating clusters.
-* **Updating template settings:** If an organization's security and DevOps teams decide to embed best practices into the required settings for new clusters, those best practices could change over time. If the best practices change, [a template can be updated to a new revision](/docs/admin-settings/rke-templates/example-scenarios/#updating-templates-and-clusters-created-with-them) and clusters created from the template can [upgrade to the new version](/docs/admin-settings/rke-templates/creating-and-revising/#upgrading-a-cluster-to-use-a-new-template-revision) of the template.
-* **Sharing ownership of a template:** When a template owner no longer wants to maintain a template, or wants to share ownership of the template, this scenario describes how [template ownership can be shared.](/docs/admin-settings/rke-templates/example-scenarios/#allowing-other-users-to-control-and-share-a-template)
+- **强制使用模板：** 如果管理员希望所有新的 Rancher 创建的集群都具有这些设置，则管理员可能希望[强制每个人使用一个或多个模板来创建集群](/docs/admin-settings/rke-templates/example-scenarios/_index)。
+- **与不同的用户共享不同的模板：** 管理员可以给[基本用户和高级用户提供不同的模板](/docs/admin-settings/rke-templates/example-scenarios/_index)，这样基本用户会有更多受限的选项，高级用户在创建集群时可以更谨慎地使用更多选项。
+- **更新模板设置：** 如果组织的安全和 DevOps 团队决定将最佳实践嵌入到新集群所需的设置中，则这些最佳实践可能会随时间而改变。如果最佳实践发生变化，[模板可以更新为新版本](/docs/admin-settings/rke-templates/example-scenarios/_index)并且从模板创建的集群可以[升级到新版本](/docs/admin-settings/rke-templates/creating-and-revising/_index)模板。
+- **共享模板的所有权：** 当模板所有者不再希望维护模板或希望共享模板的所有权时，此场景描述如何[共享模板所有权](/docs/admin-settings/rke-templates/example-scenarios/_index)。
 
-## Template Management
+## 模板管理
 
-When you create an RKE template, it is available in the Rancher UI from the **Global** view under **Tools > RKE Templates.** When you create a template, you become the template owner, which gives you permission to revise and share the template. You can share the RKE templates with specific users or groups, and you can also make it public.
+创建 RKE 模板时，可以在 Rancher UI 中的**全局**视图中，**工具 > RKE 模板**找到它。创建模板时，您将成为模板所有者，这将授予您修改和共享模板的权限。您可以与指定的用户或组共享 RKE 模板，也可以将其公开。
 
-Administrators can turn on template enforcement to require users to always use RKE templates when creating a cluster. This allows administrators to guarantee that Rancher always provisions clusters with specific settings.
+管理员可以启用模板强制，以要求用户在创建集群时必须使用 RKE 模板。这允许管理员保证 Rancher 总是创建指定的配置的集群。
 
-RKE template updates are handled through a revision system. If you want to change or update a template, you create a new revision of the template. Then a cluster that was created with the older version of the template can be upgraded to the new template revision.
+RKE 模板更新通过修订系统处理。如果要更改或更新模板，请创建模板的新修订版。然后，可以将使用旧版本模板创建的集群升级到新模板修订版。
 
-In an RKE template, settings can be restricted to what the template owner chooses, or they can be open for the end user to select the value. The difference is indicated by the **Allow User Override** toggle over each setting in the Rancher UI when the template is created.
+在 RKE 模板中，可以将设置限制为模板所有者选择的内容，也可以打开设置以供最终用户选择值。它们的差别体现在，创建模板时，Rancher UI 中的每个设置上的**允许用户覆盖**标示。
 
-For the settings that cannot be overridden, the end user will not be able to directly edit them. In order for a user to get different options of these settings, an RKE template owner would need to create a new revision of the RKE template, which would allow the user to upgrade and change that option.
+对于无法覆盖的设置，最终用户将无法直接编辑它们。为了让用户使用这些设置的不同选项，RKE 模板所有者需要创建 RKE 模板的新版本，这将允许用户升级和更改该选项。
 
-The documents in this section explain the details of RKE template management:
+本节中的文件解释了 RKE 模板管理的细节：
 
-* [Getting permission to create templates](/docs/admin-settings/rke-templates/creator-permissions/)
-* [Creating and revising templates](/docs/admin-settings/rke-templates/creating-and-revising/)
-* [Enforcing template settings](/docs/admin-settings/rke-templates/enforcement/#requiring-new-clusters-to-use-a-cluster-template)
-* [Overriding template settings](/docs/admin-settings/rke-templates/overrides/)
-* [Sharing templates with cluster creators](/docs/admin-settings/rke-templates/template-access-and-sharing/#sharing-templates-with-specific-users)
-* [Sharing ownership of a template](/docs/admin-settings/rke-templates/template-access-and-sharing/#sharing-ownership-of-templates)
+- [获取创建模板的权限](/docs/admin-settings/rke-templates/creator-permissions/_index)
+- [创建和修改模板](/docs/admin-settings/rke-templates/creating-and-revising/_index)
+- [强制使用模板](/docs/admin-settings/rke-templates/enforcement/_index)
+- [覆盖模板设置](/docs/admin-settings/rke-templates/overrides/_index)
+- [与集群创建者共享模板](/docs/admin-settings/rke-templates/template-access-and-sharing/_index)
+- [共享模板所有权](/docs/admin-settings/rke-templates/template-access-and-sharing/_index)
 
-An [example YAML configuration file for a template](/docs/admin-settings/rke-templates/example-yaml) is provided for reference.
+这里有一个[RKE 模板的示例 YAML 文件](/docs/admin-settings/rke-templates/example-yaml/_index)以供参考。
 
-## Applying Templates
+## 应用模板
 
-You can [create a cluster from a template](/docs/admin-settings/rke-templates/applying-templates/#creating-a-cluster-from-a-cluster-template) that you created, or from a template that has been [shared with you.](/docs/admin-settings/rke-templates/template-access-and-sharing)
+您可以使用自己创建的模板来[创建集群](/docs/admin-settings/rke-templates/applying-templates/_index)，也可以从[与您共享的模板](/docs/admin-settings/rke-templates/template-access-and-sharing/_index)创建集群。
 
-If the RKE template owner creates a new revision of the template, you can [upgrade your cluster to that revision.](/docs/admin-settings/rke-templates/applying-templates/#updating-a-cluster-created-with-an-rke-template)
+如果 RKE 模板所有者创建了模板的新版本，则可以[将集群升级到该版本](/docs/admin-settings/rke-templates/applying-templates/_index)。
 
-RKE templates can be created from scratch to pre-define cluster configuration. They can be applied to launch new clusters, or templates can also be exported from existing running clusters.
+可以从头开始创建 RKE 模板来预先定义集群配置。它们可以应用于启动新的集群，也可以从现有的集群导出 RKE 模板。
 
-As of Rancher v2.3.3, you can [save the configuration of an existing cluster as an RKE template.](/docs/admin-settings/rke-templates/applying-templates/#converting-an-existing-cluster-to-use-an-rke-template) Then the cluster's settings can only be changed if the template is updated.
+从 Rancher v2.3.3 开始，您可以[将现有的集群另存为 RKE 模板](/docs/admin-settings/rke-templates/applying-templates/_index)，然后只有通过更新模板，才能更改集群的设置。
 
-## Standardizing Hardware
+## 标准化硬件
 
-RKE templates are designed to standardize Kubernetes and Rancher settings. If you want to standardize your infrastructure as well, you use RKE templates [in conjunction with other tools](/docs/admin-settings/rke-templates/rke-templates-and-hardware).
+RKE 模板的目的是用于标准化 Kubernetes 和 Rancher 设置。如果您还想标准化您的基础设施，可以将 RKE 模板和[其他工具](/docs/admin-settings/rke-templates/rke-templates-and-hardware/_index)一起使用，来实现这个目的。
 
-## YAML Customization
+## YAML 定制
 
-If you define an RKE template as a YAML file, you can modify this [example RKE template YAML](/docs/admin-settings/rke-templates/example-yaml). The YAML in the RKE template uses the same customization that Rancher uses when creating an RKE cluster, but since the YAML is located within the context of a Rancher provisioned cluster, you will need to nest the RKE template customization under the `rancher_kubernetes_engine_config` directive in the YAML.
+如果将 RKE 模板定义为 YAML 文件，则可以修改此[示例 RKE 模板 YAML](/docs/admin-settings/rke-templates/example-yaml/_index)。RKE 模板中的 YAML 使用的自定义项与 Rancher 在创建 RKE 集群时使用的自定义项相同，但由于 YAML 要在 Rancher 的 RKE 集群中使用，因此需要将 RKE 模板自定义项嵌套在 YAML 中的`rancher_kubernetes_engine_config`参数下。
 
-The RKE documentation also has [annotated]({{<baseurl>}}/rke/latest/en/example-yamls/) `cluster.yml` files that you can use for reference.
+RKE 文档还有[有注释的](https://rancher.com/docs/rke/latest/en/example-yamls/) `cluster.yml`文件，您可以使用这些文件作为参考。
 
-For guidance on available options, refer to the RKE documentation on [cluster configuration.]({{<baseurl>}}/rke/latest/en/config-options/)
+有关可用的全部选项，请参阅[集群配置](https://rancher.com/docs/rke/latest/en/config-options/)上的 RKE 文档。
 
-#### Add-ons
+#### 插件
 
-The add-on section of the RKE template configuration file works the same way as the [add-on section of a cluster configuration file]({{<baseurl>}}/rke/latest/en/config-options/add-ons/).
+RKE 模板配置文件的插件部分的工作方式与[集群配置文件的插件部分](https://rancher.com/docs/rke/latest/en/config-options/add-ons/)相同。
 
-The user-defined add-ons directive allows you to either call out and pull down Kubernetes manifests or put them inline directly. If you include these manifests as part of your RKE template, Rancher will provision those in the cluster.
+用户定义的插件（Add-ons) 指令允许您使用外部的 URL 来获取 Kubernetes 清单文件，或者直接将 Kubernetes YAML 写在模板内。如果您将这些 YAML 清单作为 RKE 模板的一部分，Rancher 将在集群中部署这些 YAML 文件。
 
-Some things you could do with add-ons include:
+您可以使用插件执行以下操作:
 
-* Install applications on the Kubernetes cluster after it starts
-* Install plugins on nodes that are deployed with a Kubernetes daemonset
-* Automatically set up namespaces, service accounts, or role binding
+- 在启动 Kubernetes 集群后，在集群上安装应用程序
+- 使用 Kubernetes 守护程序集，在集群中的每个节点上部署插件
+- 自动设置命名空间、服务帐户或角色绑定
 
-The RKE template configuration must be nested within the `rancher_kubernetes_engine_config` directive. To set add-ons, when creating the template, you will click **Edit as YAML.** Then use the `addons` directive to add a manifest, or the `addons_include` directive to set which YAML files are used for the add-ons. For more information on custom add-ons, refer to the [user-defined add-ons documentation.]({{<baseurl>}}/rke/latest/en/config-options/add-ons/user-defined-add-ons/)
-
+RKE 模板配置必须嵌套在`rancher_kubernetes_engine_config`指令中。要设置插件，在创建模板时，您将单击有**编辑 YAML**，然后使用`addons`参数添加清单，或使用`addons_include`指令设置 YAML 文件的 URL。有关自定义插件的详细信息，请参阅[用户定义的插件文档](https://rancher.com/docs/rke/latest/en/config-options/add-ons/user-defined-add-ons/)。

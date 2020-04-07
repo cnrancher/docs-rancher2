@@ -1,198 +1,197 @@
 ---
-title: 对接 Active Directory (AD)
+title: 对接 Active Directory
 ---
 
-If your organization uses Microsoft Active Directory as central user repository, you can configure Rancher to communicate with an Active Directory server to authenticate users. This allows Rancher admins to control access to clusters and projects based on users and groups managed externally in the Active Directory, while allowing end-users to authenticate with their AD credentials when logging in to the Rancher UI.
+如果您的组织使用 Microsoft Active Directory 作为中心用户存储库，则可以将 Rancher 配置为与 Active Directory 服务器通信以对用户进行身份验证。这使 Rancher 管理员可以对外部用户系统中的用户和组进行集群和项目的访问控制，同时允许最终用户在登录 Rancher UI 时使用其 Active Directory 凭据进行身份验证。
 
-Rancher uses LDAP to communicate with the Active Directory server. The authentication flow for Active Directory is therefore the same as for the [OpenLDAP authentication](/docs/admin-settings/authentication/openldap) integration.
+Rancher 使用 LDAP 与 Active Directory 服务器通信。因此，Active Directory 的身份验证流与 [OpenLDAP 认证](/docs/admin-settings/authentication/openldap/_index)的身份验证流相同。
 
-> **Note:**
+> **注意：**
 >
-> Before you start, please familiarise yourself with the concepts of [External Authentication Configuration and Principal Users](/docs/admin-settings/authentication/#external-authentication-configuration-and-principal-users).
+> 在开始之前，请熟悉[外部身份验证配置和用户主体](/docs/admin-settings/authentication/_index)的概念。
 
-### Prerequisites
+## 先决条件
 
-You'll need to create or obtain from your AD administrator a new AD user to use as service account for Rancher. This user must have sufficient permissions to perform LDAP searches and read attributes of users and groups under your AD domain.
+您需要创建或从您的 AD 管理员处获取一个新的 AD 用户，以用作 Rancher 的服务帐户。此用户必须具有足够的权限，才能执行 LDAP 搜索并读取您的 AD 域下的用户和组的属性。
 
-Usually a (non-admin) **Domain User** account should be used for this purpose, as by default such user has read-only privileges for most objects in the domain partition.
+通常（非管理员）**域用户** 帐户应用于此目的，因为默认情况下，该用户对域分区中的大多数对象具有只读权限。
 
-Note however, that in some locked-down Active Directory configurations this default behaviour may not apply. In such case you will need to ensure that the service account user has at least **Read** and **List Content** permissions granted either on the Base OU (enclosing users and groups) or globally for the domain.
+但是，请注意，在某些锁定的 Active Directory 配置中，此默认行为可能不适用。在这种情况下，您需要确保服务帐户用户在**Base OU**（包含用户和组）上或全局范围内至少拥有 **Read** 和 **List Content** 权限。
 
-> **Using TLS?**
+> **使用 TLS？**
 >
-> If the certificate used by the AD server is self-signed or not from a recognised certificate authority, make sure have at hand the CA certificate (concatenated with any intermediate certificates) in PEM format. You will have to paste in this certificate during the configuration so that Rancher is able to validate the certificate chain.
+> 如果 AD 服务器使用的证书是自签名的或不是来自认可的证书颁发机构，请确保手头有 PEM 格式的 CA 证书（包含任何中间证书）。您必须在配置期间粘贴此证书，以便 Rancher 能够验证证书链。
 
-### Configuration Steps
+## 配置步骤
 
-#### Open Active Directory Configuration
+### 打开 Active Directory 配置
 
-1. Log into the Rancher UI using the initial local `admin` account.
-2. From the **Global** view, navigate to **Security** > **Authentication**
-3. Select **Active Directory**. The **Configure an AD server** form will be displayed.
+1. 使用初始的本地`admin`帐户登录到 Rancher UI。
+2. 在 **全局** 视图中，导航到 **安全 > 认证**。
+3. 选择 **Active Directory** 。将显示**配置 AD 服务器**的表单。
 
-#### Configure Active Directory Server Settings
+### 配置 Active Directory 服务器设置
 
-In the section titled `1. Configure an Active Directory server` , complete the fields with the information specific to your Active Directory server. Please refer to the following table for detailed information on the required values for each parameter.
+在标题为`1. 配置Active Directory服务器`的部分中，填写您的 Active Directory 服务器的信息字段。有关每个参数所需值的详细信息，请参阅下表。
 
-> **Note:**
+> **注意：**
 >
-> If you are unsure about the correct values to enter in the  user/group Search Base field, please refer to [Identify Search Base and Schema using ldapsearch](#annex-identify-search-base-and-schema-using-ldapsearch).
+> 如果您不确定要在`用户/组 Search Base`字段中输入的正确值，请参阅[使用 ldapsearch 确认 Search Base 和架构](#附件：使用-ldapsearch-确认-search-base-和架构)。
 
-**Table 1: AD Server parameters**
+**表 1：AD 服务器参数**
 
-| Parameter | Description |
-|:--|:--|
-| Hostname | Specify the hostname or IP address of the AD server |
-| Port | Specify the port at which the Active Directory server is listening for connections. Unencrypted LDAP normally uses the standard port of 389, while LDAPS uses port 636.|
-| TLS | Check this box to enable LDAP over SSL/TLS (commonly known as LDAPS).|
-| Server Connection Timeout | 	The duration in number of seconds that Rancher waits before considering the AD server unreachable.|
-| Service Account Username | Enter the username of an AD account with read-only access to your domain partition (see [Prerequisites](#prerequisites)). The username can be entered in NetBIOS format (e.g."DOMAIN\serviceaccount") or UPN format (e.g."serviceaccount@domain.com").|
-| Service Account Password | The password for the service account.|
-| Default Login Domain | When you configure this field with the NetBIOS name of your AD domain, usernames entered without a domain (e.g."jdoe") will automatically be converted to a slashed, NetBIOS logon (e.g."LOGIN_DOMAIN\jdoe") when binding to the AD server. If your users authenticate with the UPN (e.g."jdoe@acme.com") as username then this field **must** be left empty.|
-| User Search Base | The Distinguished Name of the node in your directory tree from which to start searching for user objects. All users must be descendents of this base DN. For example: "ou=people, dc=acme, dc=com".|
-| Group Search Base | If your groups live under a different node than the one configured under `User Search Base` you will need to provide the Distinguished Name here. Otherwise leave it empty. For example: "ou=groups, dc=acme, dc=com".|
-
----
-
-#### Configure User/Group Schema
-
-In the section titled `2. Customize Schema` you must provide Rancher with a correct mapping of user and group attributes corresponding to the schema used in your directory.
-
-Rancher uses LDAP queries to search for and retrieve information about users and groups within the Active Directory. The attribute mappings configured in this section are used to construct search filters and resolve group membership. It is therefore paramount that the provided settings reflect the reality of your AD domain.
-
-> **Note:**
->
-> If you are unfamiliar with the schema used in your Active Directory domain, please refer to [Identify Search Base and Schema using ldapsearch](#annex-identify-search-base-and-schema-using-ldapsearch) to determine the correct configuration values.
-
-##### User Schema
-
-The table below details the parameters for the user schema section configuration.
-
-**Table 2: User schema configuration parameters**
-
-| Parameter | Description |
-|:--|:--|
-| Object Class | The name of the object class used for user objects in your domain. If defined, only specify the name of the object class - *don't* include it in an LDAP wrapper such as &(objectClass=xxxx) |
-| Username Attribute | The user attribute whose value is suitable as a display name.|
-| Login Attribute | The attribute whose value matches the username part of credentials entered by your users when logging in to Rancher. If your users authenticate with their UPN (e.g."jdoe@acme.com") as username then this field must normally be set to `userPrincipalName` . Otherwise for the old, NetBIOS-style logon names (e.g."jdoe") it's usually `sAMAccountName` .|
-| User Member Attribute | The attribute containing the groups that a user is a member of.|
-| Search Attribute | When a user enters text to add users or groups in the UI, Rancher queries the AD server and attempts to match users by the attributes provided in this setting. Multiple attributes can be specified by separating them with the pipe ("\|") symbol. To match UPN usernames (e.g.jdoe@acme.com) you should usually set the value of this field to `userPrincipalName` .|
-| Search Filter | This filter gets applied to the list of users that is searched when Rancher attempts to add users to a site access list or tries to add members to clusters or projects. For example, a user search filter could be <code>(&#124; (memberOf=CN=group1, CN=Users, DC=testad, DC=rancher, DC=io)(memberOf=CN=group2, CN=Users, DC=testad, DC=rancher, DC=io))</code>. Note: If the search filter does not use [valid AD search syntax, ](https://docs.microsoft.com/en-us/windows/win32/adsi/search-filter-syntax) the list of users will be empty.|
-| User Enabled Attribute | The attribute containing an integer value representing a bitwise enumeration of user account flags. Rancher uses this to determine if a user account is disabled. You should normally leave this set to the AD standard `userAccountControl` .|
-| Disabled Status Bitmask | This is the value of the `User Enabled Attribute` designating a disabled user account. You should normally leave this set to the default value of "2" as specified in the Microsoft Active Directory schema (see [here](https://docs.microsoft.com/en-us/windows/desktop/adschema/a-useraccountcontrol#remarks)).|
+| 参数             | 说明                                                                                                                                                                                                                                                                 |
+| :--------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 主机名           | 指定 AD 服务器的主机名或 IP 地址。                                                                                                                                                                                                                                   |
+| 端口             | 指定 Active Directory 服务器侦听连接的端口。未加密的 LDAP 通常使用 389 的标准端口，而 LDAPS 使用 636 端口                                                                                                                                                            |
+| TLS              | 选中此框可启用 SSL/TLS 上的 LDAP(通常称为 LDAPS)                                                                                                                                                                                                                     |
+| 服务器连接超时   | Rancher 在认为无法访问 AD 服务器之前等待的持续时间(秒)。                                                                                                                                                                                                             |
+| 服务帐户用户名   | 输入对域分区具有只读访问权限的 AD 帐户的用户名。请参阅[先决条件](#先决条件)。用户名可以用 NetBIOS 格式（例如“DOMAIN\serviceaccount”）或 UPN 格式（例如“serviceaccount@domain.com”）输入。                                                                            |
+| 服务帐户密码     | 服务帐户的密码。                                                                                                                                                                                                                                                     |
+| 默认登录域       | 当您使用 AD 域的 NetBIOS 名称配置此字段时，当绑定到 AD 服务器时，在没有域的情况下输入的用户名(例如“jdoe”)将自动转换为斜杠的 NetBIOS 登录（例如，“LOGIN_DOMAIN\jdoe”）。如果您的用户以 UPN（例如，“jdoe@acme.com”）作为用户名进行身份验证，则此字段**必**须保留为空。 |
+| 用户 Search Base | 目录树中开始搜索用户对象的节点的可分辨名称。所有用户都必须是此基本 DN 的后代。例如：“ou=people,dc=acme,dc=com”                                                                                                                                                       |
+| 组 Search Base   | 如果组位于`用户 Search Base`下配置的节点之外的其他节点下，则需要在此处提供可分辨名称。否则就空着。例如：“ou=groups,dc=acme,dc=com”                                                                                                                                   |
 
 ---
 
-##### Group Schema
+### 配置用户/组架构
 
-The table below details the parameters for the group schema configuration.
+在标题为`2. 自定义架构`的部分中，必须为 Rancher 提供与目录中使用的架构对应的用户和组属性的正确映射。
 
-**Table 3: Group schema configuration parameters**
+Rancher 使用 LDAP 查询来搜索和检索关于 Active Directory 中的用户和组的信息。本节中配置的属性映射用于构造搜索筛选器和解析组成员身份。因此，最重要的是所提供的设置反映了您的 AD 域的真实情况。
 
-| Parameter | Description |
-|:--|:--|
-| Object Class | The name of the object class used for group objects in your domain. If defined, only specify the name of the object class - *don't* include it in an LDAP wrapper such as &(objectClass=xxxx)  |
-| Name Attribute | The group attribute whose value is suitable for a display name.|
-| Group Member User Attribute | The name of the **user attribute** whose format matches the group members in the `Group Member Mapping Attribute` .|
-| Group Member Mapping Attribute | The name of the group attribute containing the members of a group.|
-| Search Attribute | Attribute used to construct search filters when adding groups to clusters or projects. See description of user schema `Search Attribute` .|
-| Search Filter | This filter gets applied to the list of groups that is searched when Rancher attempts to add groups to a site access list or tries to add groups to clusters or projects. For example, a group search filter could be <code>(&#124; (cn=group1)(cn=group2))</code>. Note: If the search filter does not use [valid AD search syntax, ](https://docs.microsoft.com/en-us/windows/win32/adsi/search-filter-syntax) the list of groups will be empty.|
-| Group DN Attribute | The name of the group attribute whose format matches the values in the user attribute describing a the user's memberships. See `User Member Attribute` .|
-| Nested Group Membership | This settings defines whether Rancher should resolve nested group memberships. Use only if your organisation makes use of these nested memberships (ie.you have groups that contain other groups as members).|
+> **注意：**
+>
+> 如果您不熟悉 Active Directory 域中使用的架构，请参阅[使用 ldapsearch 确认 Search Base 和架构](#附件：使用-ldapsearch-确认-search-base-和架构)以确定正确的配置值。
+
+#### 用户架构
+
+下表详细说明了用户架构部分配置的参数。
+
+**表 2：用户架构配置参数**
+
+| 参数           | 说明                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 对象类型       | 域中用于用户对象的对象类的名称。如果定义，则仅指定对象类的名称 - 请勿将其放在 LDAP 包装器中，例如`&(objectClass=xxxx)`                                                                                                                                                                                                                                                                                                |
+| 用户名属性     | 其值适合作为显示名称的用户属性。                                                                                                                                                                                                                                                                                                                                                                                      |
+| 登录属性       | 其值与用户登录 Rancher 时输入的凭据的用户名部分匹配的属性。如果您的用户以其 UPN（例如`jdoe@acme.com`）作为用户名进行身份验证，则此字段通常必须设置为`userPrincipalName`。否则，对于旧的 NetBIOS 风格的登录名（例如`jdoe`），通常是`sAMAccountName`。                                                                                                                                                                  |
+| 用户成员属性   | 包含用户所属组的属性。                                                                                                                                                                                                                                                                                                                                                                                                |
+| 搜索属性       | 当用户输入文本以在用户界面中添加用户或组时，Rancher 会查询 AD 服务器，并尝试根据此设置中提供的属性匹配用户。可以通过使用管道(“\|”)符号分隔属性来指定多个属性。要匹配 UPN 用户名(例如 jdoe@acme.com)，通常应将此字段的值设置为`userPrincipalName`。                                                                                                                                                                    |
+| 搜索筛选器     | 当 Rancher 尝试将用户添加到网站访问列表或尝试将成员添加到集群或项目时，此筛选器将应用于搜索的用户列表。例如，用户搜索过滤器可以是 <code>(&#124;(memberOf=CN=group1,CN=Users,DC=testad,DC=rancher,DC=io)(memberOf=CN=group2,CN=Users,DC=testad,DC=rancher,DC=io))</code>。注意：如果搜索筛选器未使用[有效的 AD 搜索语法](https://docs.microsoft.com/en-us/windows/win32/adsi/search-filter-syntax)，则用户列表将为空。 |
+| 用户启用属性   | 它是一个整数值，用来标识用户帐户。Rancher 使用此选项来确定用户帐户是否已禁用。通常应将此设置为 AD 标准的`userAccountControl`。                                                                                                                                                                                                                                                                                        |
+| 禁用状态位掩码 | 这是指定禁用用户帐户的`用户启用属性`的值。通常，您应该将此设置为 Microsoft Active Directory 架构中指定的默认值`2`（请参见[此处](https://docs.microsoft.com/en-us/windows/win32/adschema/a-useraccountcontrol#remarks)）。                                                                                                                                                                                             |
 
 ---
 
-#### Test Authentication
+#### 组架构
 
-Once you have completed the configuration, proceed by testing  the connection to the AD server. Authentication with the configured Active Directory will be enabled implicitly if the test is successful.
+下表详细说明了组架构配置的参数。
 
-> **Note:**
+**表 3：组架构配置参数**
+
+| 参数           | 说明                                                                                                                                                                                                                                                                                                            |
+| :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 对象类型       | 用于在域中对对象进行分组的对象类的名称。如果定义，则仅指定对象类的名称 - 请勿将其放在 LDAP 包装器中，例如`&(objectClass=xxxx)`                                                                                                                                                                                  |
+| 名称属性       | 其值适合显示名称的组属性。                                                                                                                                                                                                                                                                                      |
+| 组成员用户属性 | **用户属性** 的名称，其格式与`组成员映射属性`中的组成员匹配。                                                                                                                                                                                                                                                   |
+| 组成员映射属性 | 包含组成员的组属性的名称。                                                                                                                                                                                                                                                                                      |
+| 搜索属性       | 用于在将组添加到集群或项目时构造搜索筛选器的属性。请参见用户架构`Search Attribute`的说明。                                                                                                                                                                                                                      |
+| 搜索筛选器     | 当 Rancher 尝试将组添加到站点访问列表或尝试将组添加到集群或项目时，此筛选器将应用于搜索的组列表。例如，组搜索筛选器可以是<code>(&#124;(cn=group1)(cn=group2))</code>。注意:如果搜索筛选器未使用[有效的 AD 搜索语法](https://docs.microsoft.com/en-us/windows/win32/adsi/search-filter-syntax)，则组列表将为空。 |
+| 组 DN 属性     | 其格式与描述用户成员身份的用户属性中的值匹配的组属性的名称。请参见`用户成员属性`。                                                                                                                                                                                                                              |
+| 嵌套组成员身份 | 此设置定义 Rancher 是否应解析嵌套组成员身份。仅当您的组织使用这些嵌套成员身份时才使用（即您有包含其他组作为成员的组）。                                                                                                                                                                                         |
+
+---
+
+### 测试身份验证
+
+完成配置后，请测试与 AD 服务器的连接。如果测试成功，将启用与配置的 Active Directory 的身份验证。
+
+> **注意：**
 >
-> The AD user pertaining to the credentials entered in this step will be mapped to the local principal account and assigned administrator privileges in Rancher. You should therefore make a conscious decision on which AD account you use to perform this step.
+> 与此步骤中输入的凭据相关的 AD 用户将映射到本地主体帐户并在 Rancher 中分配系统管理员权限。因此，您应该有意识地决定使用哪个 AD 帐户来执行此步骤。
 
-1. Enter the **username** and **password** for the AD account that should be mapped to the local principal account.
-2. Click **Authenticate with Active Directory** to finalise the setup.
+1. 输入应映射到本地主体帐户的 AD 帐户的**用户名**和**密码**。
+2. 单击**启用 Active Directory 认证**以完成设置。
 
-**Result:**
+**结果：**
 
-* Active Directory authentication has been enabled.
-* You have been signed into Rancher as administrator using the provided AD credentials.
+- 已启用 Active Directory 身份验证。
+- 您已使用提供的 AD 凭据以系统管理员身份登录到 Rancher。
 
-> **Note:**
+> **注意：**
 >
-> You will still be able to login using the locally configured `admin` account and password in case of a disruption of LDAP services.
+> 如果 LDAP 服务中断，您仍然可以使用本地配置的`admin`帐户和密码登录。
 
-### Annex: Identify Search Base and Schema using ldapsearch
+## 附件：使用 ldapsearch 确认 Search Base 和架构
 
-In order to successfully configure AD authentication it is crucial that you provide the correct configuration pertaining to the hierarchy and schema of your AD server.
+为了成功配置 AD 身份验证，必须提供与 AD 服务器的层次结构和架构相关的正确配置。
 
-The [ `ldapsearch` ](http://manpages.ubuntu.com/manpages/artful/man1/ldapsearch.1.html) tool allows you to query your AD server to learn about the schema used for user and group objects.
+[ldapsearch](http://manpages.ubuntu.com/manpages/artful/man1/ldapsearch.1.html) 工具允许您查询您的 AD 服务器以了解用于用户和组对象的架构。
 
-For the purpose of the example commands provided below we will assume:
+对于下面提供的示例命令，我们假设：
 
-* The Active Directory server has a hostname of `ad.acme.com` 
-* The server is listening for unencrypted connections on port `389` 
-* The Active Directory domain is `acme` 
-* You have a valid AD account with the username `jdoe` and password `secret` 
+- Active Directory 服务器的主机名为`ad.acme.com`
+- 服务器正在监听端口`389上的未加密连接`
+- Active Directory 域是`acme`
+- 您有一个用户名为`jdoe`和密码为`secret`的有效 AD 帐户
 
-#### Identify Search Base
+### 确认 Search Base
 
-First we will use `ldapsearch` to identify the Distinguished Name (DN) of the parent node(s) for users and groups:
+首先，我们将使用`ldapsearch`来找到用户和组的父节点的可分辨名称（DN）：
 
-``` 
+```
 $ ldapsearch -x -D "acme\jdoe" -w "secret" -p 389 \
 -h ad.acme.com -b "dc=acme,dc=com" -s sub "sAMAccountName=jdoe"
 ```
 
-This command performs an LDAP search with the search base set to the domain root ( `-b "dc=acme,dc=com"` ) and a filter targeting the user account ( `sAMAccountNam=jdoe` ), returning the attributes for said user:
+此命令执行 LDAP 搜索，Search Base 设置为域根目录(`-b "dc=acme,dc=com"`)，并执行针对用户帐户的筛选器(`sAMAccountNam=jdoe`)，返回所述用户的属性:
 
 ![LDAP User](/img/rancher/ldapsearch-user.png)
 
-Since in this case the user's DN is `CN=John Doe,CN=Users,DC=acme,DC=com` [5], we should configure the **User Search Base** with the parent node DN `CN=Users,DC=acme,DC=com` .
+因为在这种情况下，用户的 DN 是`CN=John Doe,CN=Users,DC=acme,DC=com`[5]，所以我们应该使用父节点 DN`CN=Users,DC=acme,DC=com`配置**用户 Search Base**。
 
-Similarly, based on the DN of the group referenced in the **memberOf** attribute [4], the correct value for the **Group Search Base** would be the parent node of that value, ie. `OU=Groups,DC=acme,DC=com` .
+同样，基于 **memberOf** 属性[4]中引用的组的 DN，**组 Search Base**的正确值将是该值的父节点，即`OU=Groups,DC=acme,DC=com`。
 
-#### Identify User Schema
+### 确认用户架构
 
-The output of the above `ldapsearch` query also allows to determine the correct values to use in the user schema configuration:
+上述`ldapsearch`查询的输出还允许确定在用户架构配置中使用的正确值:
 
-* `Object Class` : **person** [1]
-* `Username Attribute` : **name** [2]
-* `Login Attribute` : **sAMAccountName** [3]
-* `User Member Attribute` : **memberOf** [4]
+- `对象类型`: **person**[1]
+- `用户名属性`: **name**[2]
+- `登录属性`: **sAMAccountName**[3]
+- `用户成员属性`: **memberOf**[4]
 
-> **Note:**
+> **注意：**
 >
-> If the AD users in our organisation were to authenticate with their UPN (e.g.jdoe@acme.com) instead of the short logon name, then we would have to set the `Login Attribute` to **userPrincipalName** instead.
+> 如果我们组织中的 AD 用户使用其 UPN（例如 jdoe@acme.com）而不是短登录名进行身份验证，则我们必须将`登录属性`设置为**userPrincipalName**。
 
-We'll also set the `Search Attribute` parameter to **sAMAccountName|name**. That way users can be added to clusters/projects in the Rancher UI either by entering their username or full name.
+我们还将`搜索属性`参数设置为**sAMAccountName|name**。这样，用户可以通过输入用户名或全名添加到 Rancher UI 中的集群/项目中。
 
-#### Identify Group Schema
+### 确认组架构
 
-Next, we'll query one of the groups associated with this user, in this case `CN=examplegroup,OU=Groups,DC=acme,DC=com` :
+接下来，我们将查询与此用户关联的组之一，在本例中为`CN=examplegroup，OU=groups，DC=acme，DC=com`:
 
-``` 
+```
 $ ldapsearch -x -D "acme\jdoe" -w "secret" -p 389 \
 -h ad.acme.com -b "ou=groups,dc=acme,dc=com" \
 -s sub "CN=examplegroup"
 ```
 
-This command will inform us on the attributes used for group objects:
+此命令将通知我们用于组对象的属性:
 
 ![LDAP Group](/img/rancher/ldapsearch-group.png)
 
-Again, this allows us to determine the correct values to enter in the group schema configuration:
+同样，这允许我们确定要在组架构配置中输入的正确值:
 
-* `Object Class` : **group** [1]
-* `Name Attribute` : **name** [2]
-* `Group Member Mapping Attribute` : **member** [3]
-* `Search Attribute` : **sAMAccountName** [4]
+- `对象类型`: **group**[1]
+- `名称属性`: **name**[2]
+- `组成员映射属性`: **member**[3]
+- `搜索属性`: **sAMAccountName**[4]
 
-Looking  at the value of the  **member** attribute, we can see that it contains the DN of the referenced user. This  corresponds to the **distinguishedName** attribute in our user object. Accordingly will have to set the value of the `Group Member User Attribute` parameter to this attribute.
+查看 **member** 属性的值，我们可以看到它包含被引用用户的 DN。这对应于我们的用户对象中的 **distinguishedName** 属性。因此，必须将`组成员映射属性`参数的值设置为此属性。
 
-In the same way, we can observe that the value in the **memberOf** attribute in the user object corresponds to the **distinguishedName** [5] of the group. We therefore need to set the value for the `Group DN Attribute` parameter to this attribute.
+同样，我们可以看到用户对象中 **memberOf** 属性中的值对应于组的 **distinguishedName**[5]。因此，我们需要将`组DN属性`参数的值设置为此属性。
 
-### Annex: Troubleshooting
+## 附件：故障排查
 
-If you are experiencing issues while testing the connection to the Active Directory server, first double-check the credentials entered for the service account as well as the search base configuration. You may also inspect the Rancher logs to help pinpointing the problem cause. Debug logs may contain more detailed information about the error. Please refer to [How can I enable debug logging](/docs/faq/technical/#how-can-i-enable-debug-logging) in this documentation.
-
+如果在测试与 Active Directory 服务器的连接时遇到问题，请首先仔细检查为服务帐户输入的凭据以及 Search Base 配置。您还可以检查 Rancher 日志，以帮助查明问题的原因。调试日志可能包含有关错误的更详细信息。请参阅本文档中的[如何启用调试日志](/docs/faq/technical/_index)。

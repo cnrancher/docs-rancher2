@@ -1,70 +1,68 @@
 ---
-title: RKE 集群模板和基础架构
+title: RKE 模板和基础设施
 ---
 
-In Rancher, RKE templates are used to provision Kubernetes and define Rancher settings, while node templates are used to provision nodes.
+在 Rancher 中，RKE 模板用于提供 Kubernetes 和定义 Rancher 设置，而节点模板用于配置节点。
 
-Therefore, even if RKE template enforcement is turned on, the end user still has flexibility when picking the underlying hardware when creating a Rancher cluster. The end users of an RKE template can still choose an infrastructure provider and the nodes they want to use.
+因此，即使启用了 RKE 模板强制，最终用户在创建 Rancher 集群时仍然可以灵活地选择底层硬件。RKE 模板的最终用户仍然可以选择基础设施提供商和他们想要使用的节点。
 
-If you want to standardize the hardware in your clusters, use RKE templates conjunction with node templates or with a server provisioning tool such as Terraform.
+如果要标准化集群中的硬件，请将 RKE 模板与节点模板或服务器配置工具(如 Terraform)结合使用。
 
-#### Node Templates
+## 节点模板
 
-[Node templates](/docs/user-settings/node-templates) are responsible for node configuration and node provisioning in Rancher. From your user profile, you can set up node templates to define which templates are used in each of your node pools. With node pools enabled, you can make sure you have the required number of nodes in each node pool, and ensure that all nodes in the pool are the same.
+[节点模板](/docs/user-settings/node-templates/_index)负责 Rancher 中的节点配置和节点设置。从用户配置文件中，可以设置节点模板以定义在每个节点池中使用的模板。启用节点池后，可以确保每个节点池中都有所需数量的节点，并确保池中的所有节点都相同。
 
-#### Terraform
+## Terraform
 
-Terraform is a server provisioning tool. It uses infrastructure-as-code that lets you create almost every aspect of your infrastructure with Terraform configuration files. It can automate the process of server provisioning in a way that is self-documenting and easy to track in version control.
+Terraform 是一个服务器配置工具。它使用基础设施作为代码，允许您使用 Terraform 配置文件创建基础设施的几乎每个方面。它可以自动执行服务器配置过程，这种方式是自文档化的，并且在版本控制中易于跟踪。
 
-This section focuses on how to use Terraform with the [Rancher 2 Terraform provider](https://www.terraform.io/docs/providers/rancher2/), which is a recommended option to standardize the hardware for your Kubernetes clusters. If you use the Rancher Terraform provider to provision hardware, and then use an RKE template to provision a Kubernetes cluster on that hardware, you can quickly create a comprehensive, production-ready cluster.
+本节重点介绍如何将 Terraform 与 [Rancher 2 Terraform Provider](https://www.terraform.io/docs/providers/rancher2/)一起使用，这是标准化 Kubernetes 集群硬件的推荐选项。如果使用 Rancher Terraform Provider 创建基础设施，然后使用 RKE 模板在该基础设施上创建 Kubernetes 集群，则可以快速创建一个全面的、可用于生产的集群。
 
-Terraform allows you to:
+Terraform 允许您:
 
-* Define almost any kind of infrastructure-as-code, including servers, databases, load balancers, monitoring, firewall settings, and SSL certificates
-* Leverage catalog apps and multi-cluster apps
-* Codify infrastructure across many platforms, including Rancher and major cloud providers
-* Commit infrastructure-as-code to version control
-* Easily repeat configuration and setup of infrastructure
-* Incorporate infrastructure changes into standard development practices
-* Prevent configuration drift, in which some servers become configured differently than others
+- 将几乎任何类型的基础设施定义为代码，包括服务器、数据库、负载均衡器、监控、防火墙设置和 SSL 证书
+- 利用应用商店应用和多集群应用
+- 跨多个平台（包括 Rancher 和主要云提供商）对基础设施进行编码
+- 将基础设施作为代码提交到版本控制工具中
+- 轻松重复配置和设置基础设施
+- 将基础设施更改纳入标准开发实践
+- 防止由于配置漂移，导致其中一些服务器的配置与其他服务器不同
 
-## How Does Terraform Work?
+## Terraform 是如何工作的？
 
-Terraform is written in files with the extension `.tf` . It is written in HashiCorp Configuration Language, which is a declarative language that lets you define the infrastructure you want in your cluster, the cloud provider you are using, and your credentials for the provider. Then Terraform makes API calls to the provider in order to efficiently create that infrastructure.
+Terraform 是用扩展名为`.tf`的文件编写的。它是用 HashiCorp 配置语言编写的，HashiCorp 配置语言是一种声明性语言，允许您在集群中定义所需的基础设施、正在使用的云供应商以及供应商的凭据。然后 Terraform 向供应商发出 API 调用，以便有效地创建基础设施。
 
-To create a Rancher-provisioned cluster with Terraform, go to your Terraform configuration file and define the provider as Rancher 2. You can set up your Rancher 2 provider with a Rancher API key. Note: The API key has the same permissions and access level as the user it is associated with.
+要使用 Terraform 创建 Rancher 配置的集群，请转到 Terraform 配置文件并将供应商定义为 Rancher 2。您可以使用 Rancher API 密钥设置 Rancher 2 Provider。注意：API 密钥具有与其关联的用户相同的权限和访问级别。
 
-Then Terraform calls the Rancher API to provision your infrastructure, and Rancher calls the infrastructure provider. As an example, if you wanted to use Rancher to provision infrastructure on AWS, you would provide both your Rancher API key and your AWS credentials in the Terraform configuration file or in environment variables so that they could be used to provision the infrastructure.
+然后 Terraform 调用 Rancher API 来创建基础设施，Rancher 调用基础设施供应商。例如，如果您想使用 Rancher 在 AWS 上提供基础设施，您可以在 Terraform 配置文件或环境变量中提供 Rancher API 密钥和 AWS 凭据，以便它们可以用于创建基础设施。
 
-When you need to make changes to your infrastructure, instead of manually updating the servers, you can make changes in the Terraform configuration files. Then those files can be committed to version control, validated, and reviewed as necessary. Then when you run `terraform apply` , the changes would be deployed.
+当需要更改基础设施时，您可以在 Terraform 配置文件中进行更改，而不是手动更新服务器。然后，可以将这些文件提交到版本控制、验证，并根据需要进行审阅。然后当您运行`terraform apply`时，将部署更改。
 
-## Tips for Working with Terraform
+## 使用 Terraform 的技巧
 
-* There are examples of how to provide most aspects of a cluster in the [documentation for the Rancher 2 provider.](https://www.terraform.io/docs/providers/rancher2/)
+- 请参阅[Terraform Rancher 2 Provider 文档](https://www.terraform.io/docs/providers/rancher2/)
 
-* In the Terraform settings, you can install Docker Machine by using the Docker Machine node driver.
+- 在 Terraform 设置中，可以使用 Docker Machine 节点驱动程序安装 Docker Machine。
 
-* You can also modify auth in the Terraform provider.
+- 也可以在 Terraform Provider 中修改 auth。
 
-* You can reverse engineer how to do define a setting in Terraform by changing the setting in Rancher, then going back and checking your Terraform state file to see how it maps to the current state of your infrastructure.
+- 您可以通过更改 Rancher 中的设置来反向工程如何在 Terraform 中定义设置，然后返回并检查 Terraform 状态文件以查看其如何映射到基础设施的当前状态。
 
-* If you want to manage Kubernetes cluster settings, Rancher settings, and hardware settings all in one place, use [Terraform modules](https://github.com/rancher/terraform-modules). You can pass a cluster configuration YAML file or an RKE template configuration file to a Terraform module so that the Terraform module will create it. In that case, you could use your infrastructure-as-code to manage the version control and revision history of both your Kubernetes cluster and its underlying hardware.
+- 如果您想在一个地方管理 Kubernetes 集群设置、Rancher 设置和硬件设置，请使用[Terraform 模块](https://github.com/rancher/terraform-modules)。您可以将集群配置的 YAML 文件或 RKE 模板配置文件传递给 Terraform 模块，以便 Terraform 模块创建它。在这种情况下，可以将基础设施当作代码来管理，从而可以管理 Kubernetes 集群及其底层硬件的版本和修订历史。
 
-## Tip for Creating CIS Benchmark Compliant Clusters
+## 创建符合 CIS 基准的集群的技巧
 
-This section describes one way that you can make security and compliance-related config files standard in your clusters.
+本节描述了一种方法，可以使安全合规的配置文件为集群的标准配置文件。
 
-When you create a [CIS benchmark compliant cluster, ](/docs/security/) you have an encryption config file and an audit log config file.
+创建 [符合 CIS 基准的集群时](/docs/security/_index)，有一个加密配置文件和一个审计日志配置文件。
+您的基础设施配置系统可以将这些文件写入磁盘。然后在 RKE 模板中，指定这些文件的位置，然后将加密配置文件和审计日志配置文件作为额外的挂载添加到`kube-api-server`。
 
-Your infrastructure provisioning system can write those files to disk. Then in your RKE template, you would specify where those files will be, then add your encryption config file and audit log config file as extra mounts to the `kube-api-server` .
+然后确保 RKE 模板中的`kube-api-server`标志使用符合 CIS 的配置文件。
 
-Then you would make sure that the `kube-api-server` flag in your RKE template uses your CIS-compliant config files.
+通过这种方式，可以创建符合 CIS 基准的配置参数。
 
-In this way, you can create flags that comply with the CIS benchmark.
+## 资源
 
-## Resources
-
-* [Terraform documentation](https://www.terraform.io/docs/)
-* [Rancher2 Terraform provider documentation](https://www.terraform.io/docs/providers/rancher2/)
-* [The RanchCast - Episode 1: Rancher 2 Terraform Provider](https://youtu.be/YNCq-prI8-8): In this demo, Director of Community Jason van Brackel walks through using the Rancher 2 Terraform Provider to provision nodes and create a custom cluster.
-
+- [Terraform 文档](https://www.terraform.io/docs/)
+- [Rancher2 Terraform Provider 文档](https://www.terraform.io/docs/providers/rancher2/)
+- [RanchCast - 第 1 集：Rancher 2 Terraform Provider](https://youtu.be/YNCq-prI8-8)：在本演示中，社区主管 Jason van Brackel 使用 Rancher 2 Terraform Provider 创建了节点并创建自定义集群。
