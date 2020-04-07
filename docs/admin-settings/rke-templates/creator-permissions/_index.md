@@ -2,49 +2,48 @@
 title: 模板创建者权限
 ---
 
-Administrators have the permission to create RKE templates, and only administrators can give that permission to other users.
+系统管理员有权创建 RKE 模板，只有系统管理员可以将该权限授予其他用户。
 
-For more information on administrator permissions, refer to the [documentation on global permissions](/docs/admin-settings/rbac/global-permissions/).
+有关管理员权限的详细信息，请参阅[全局权限文档](/docs/admin-settings/rbac/global-permissions/_index)。
 
-## Giving Users Permission to Create Templates
+## 授予用户创建模板的权限
 
-Templates can only be created by users who have the global permission **Create RKE Templates.**
+模板只能由具有全局权限**创建 RKE 模板**的用户创建。
 
-Administrators have the global permission to create templates, and only administrators can give that permission to other users.
+系统管理员具有创建模板的全局权限，只有系统管理员可以将该权限授予其他用户。
 
-For information on allowing users to modify existing templates, refer to [Sharing Templates.](/docs/admin-settings/rke-templates/template-access-and-sharing)
+有关允许用户修改现有模板的信息，请参阅[共享模板](/docs/admin-settings/rke-templates/template-access-and-sharing/_index)。
 
-Administrators can give users permission to create RKE templates in two ways:
+管理员可以通过两种方式授予用户创建 RKE 模板的权限：
 
-* By editing the permissions of an [individual user](#allowing-a-user-to-create-templates)
-* By changing the [default permissions of new users](#allowing-new-users-to-create-templates-by-default)
+- 编辑单个用户的权限
+- 更改新用户的默认权限
 
-#### Allowing a User to Create Templates
+### 允许用户创建模板
 
-An administrator can individually grant the role **Create RKE Templates** to any existing user by following these steps:
+管理员可以通过以下步骤将角色**创建 RKE 模板**单独授予任何现有用户:
 
-1. From the global view, click the **Users** tab. Choose the user you want to edit and click the **Vertical Ellipsis (...) > Edit.**
-1. In the **Global Permissions** section, choose **Custom** and select the **Create RKE Templates** role along with any other roles the user should have. Click **Save.**
+1. 在全局视图中，单击**用户**选项卡。选择要编辑的用户，然后单击**垂直省略号(…) > 编辑**。
+1. 在**全局权限**部分，选择**自定义**，然后选择**创建 RKE 模板**角色以及用户应该具有的任何其他角色。单击**保存**。
 
-**Result:** The user has permission to create RKE templates.
+**结果：** 用户有权创建 RKE 模板。
 
-#### Allowing New Users to Create Templates by Default
+### 默认情况下允许新用户创建模板
 
-Alternatively, the administrator can give all new users the default permission to create RKE templates by following the following steps. This will not affect the permissions of existing users.
+或者，管理员可以按照以下步骤授予所有新用户创建 RKE 模板的默认权限。这不会影响现有用户的权限。
 
-1. From the **Global** view, click **Security > Roles.**
-1. Under the **Global** roles tab, go to the role **Create RKE Templates** and click the **Vertical Ellipsis (...) > Edit**.
-1. Select the option **Yes: Default role for new users** and click **Save.**
+1. 在**全局**视图中，单击**安全 > 角色**
+1. 在**全局**角色选项卡下，转到角色**创建 RKE 模板**，然后单击**垂直省略号(…) > 编辑**。
+1. 选择**是：新用户的默认角色**，然后单击**保存**。
 
-**Result:** Any new user created in this Rancher installation will be able to create RKE templates. Existing users will not get this permission.
+**结果：** 在此 Rancher 安装中创建的任何新用户都可以创建 RKE 模板。现有用户将无法获得此权限。
 
-#### Revoking Permission to Create Templates
+### 取消创建模板的权限
 
-Administrators can remove a user's permission to create templates with the following steps:
+管理员可以通过以下步骤删除用户创建模板的权限:
 
-1. From the global view, click the **Users** tab. Choose the user you want to edit and click the **Vertical Ellipsis (...) > Edit.**
-1. In the **Global Permissions** section, un-check the box for **Create RKE Templates**. In this section, you can change the user back to a standard user, or give the user a different set of custom permissions.
-1. Click **Save.**
+1. 在全局视图中，单击**用户**选项卡。选择要编辑的用户，然后单击**垂直省略号(…)>编辑**。
+1. 在**全局权限**部分，取消选中**创建 RKE 模板**的复选框。在本节中，您可以将用户更改回标准用户，或者为用户提供一组不同的自定义权限。
+1. 单击**保存**。
 
-**Result:** The user cannot create RKE templates.
-
+**结果：** 用户无法创建 RKE 模板。

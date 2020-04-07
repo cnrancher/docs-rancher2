@@ -1,71 +1,70 @@
 ---
-title: 不升级 Rancher 的情况下获取新的 Kubernetes 版本
+title: 获取新的 Kubernetes 版本
 ---
 
-_Available as of v2.3.0_
+_从 2.3.0 版起可用_
 
-The RKE metadata feature allows you to provision clusters with new versions of Kubernetes as soon as they are released, without upgrading Rancher. This feature is useful for taking advantage of patch versions of Kubernetes, for example, if you want to upgrade to Kubernetes v1.14.7 when your Rancher server originally supported v1.14.6.
+RKE 元数据功能允许您在发布新版本的 Kubernetes 后立即为集群配置它们，而无需升级 Rancher。此功能对于使用 Kubernetes 的补丁版本非常有用，例如，如果您希望在仅支持 Kubernetes v1.14.6 的 Rancher Server 版本中，将业务集群升级到 Kubernetes v1.14.7。
 
-> **Note:** The Kubernetes API can change between minor versions. Therefore, we don't support introducing minor Kubernetes versions, such as introducing v1.15 when Rancher currently supports v1.14. You would need to upgrade Rancher to add support for minor Kubernetes versions.
+> **注意：** Kubernetes API 可能在次要版本之间发生变化。因此，我们不支持获取 Kubernetes 次要版本，例如在 Rancher Server 当前仅支持 v1.14。如果想要使用 Kubernetes v1.15。您需要升级 Rancher Server 以添加对新的次要 Kubernetes 版本的支持。
 
-Rancher's Kubernetes metadata contains information specific to the Kubernetes version that Rancher uses to provision [RKE clusters](/docs/cluster-provisioning/rke-clusters/). Rancher syncs the data periodically and creates custom resource definitions (CRDs) for **system images, ** **service options** and **addon templates.** Consequently, when a new Kubernetes version is compatible with the Rancher server version, the Kubernetes metadata makes the new version available to Rancher for provisioning clusters. The metadata gives you an overview of the information that the [Rancher Kubernetes Engine]({{<baseurl>}}/rke/latest/en/) (RKE) uses for deploying various Kubernetes versions.
+Rancher 的 Kubernetes 元数据包含了 Rancher 配置 [RKE 集群](/docs/cluster-provisioning/rke-clusters/_index)时可以使用的 Kubernetes 版本信息。Rancher 定期同步数据，并为**系统镜像** **服务选项**和**插件模板**创建自定义资源定义（CRD）。因此，当新的 Kubernetes 版本与 Rancher Server 版本兼容时，Kubernetes 元数据使 Rancher 可以使用新的 Kubernetes 版本来配置集群。元数据概述了 [Rancher Kubernetes Engine](https://rancher.com/docs/rke/latest/en/)（RKE）用于部署各种 Kubernetes 版本的信息。
 
-This table below describes the CRDs that are affected by the periodic data sync.
+下表描述了受定期数据同步影响的 CRD。
 
-> **Note:** Only administrators can edit metadata CRDs. It is recommended not to update existing objects unless explicitly advised.
+> **注意：** 只有管理员可以编辑元数据 CRD。除非明确需要，否则建议不要更新现有对象。
 
-| Resource        | Description                                                                                                                               | Rancher API URL                                |
-| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
-| System Images   | List of system images used to deploy Kubernetes through RKE.| `<RANCHER_SERVER_URL>/v3/rkek8ssystemimages` |
-| Service Options | Default options passed to Kubernetes components like `kube-api` , `scheduler` , `kubelet` , `kube-proxy` , and `kube-controller-manager` | `<RANCHER_SERVER_URL>/v3/rkek8sserviceoptions` |
-| Addon Templates | YAML definitions used to deploy addon components like Canal, Calico, Flannel, Weave, Kube-dns, CoreDNS, `metrics-server` , `nginx-ingress` | `<RANCHER_SERVER_URL>/v3/rkeaddons` |
+| 资源     | 描述                                                                                                                 | RancherAPI URL                                 |
+| -------- | -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| 系统镜像 | 用于通过 RKE 部署 Kubernetes 集群的系统镜像列表。                                                                    | `<RANCHER_SERVER_URL>/v3/rkek8ssystemimages`   |
+| 服务选项 | 传递给 Kubernetes 组件的默认参数，如`kube-api`、`scheduler`、`kubelet`、`kube-proxy`和`kube-controller-manager`等    | `<RANCHER_SERVER_URL>/v3/rkek8sserviceoptions` |
+| 插件模板 | 用于部署插件组件的 YAML 定义，如 Canal、Calico、Flannel、Weave、Kube-dns、CoreDNS、`metrics-server`、`nginx-ingress` | `<RANCHER_SERVER_URL>/v3/rkeaddons`            |
 
-Administrators might configure the RKE metadata settings to do the following:
+管理员可以将 RKE 元数据设置配置为执行以下操作：
 
-* Refresh the Kubernetes metadata, if a new patch version of Kubernetes comes out and they want Rancher to provision clusters with the latest version of Kubernetes without having to upgrade Rancher
-* Change the metadata URL that Rancher uses to sync the metadata, which is useful for air gap setups if you need to sync Rancher locally instead of with GitHub
-* Prevent Rancher from auto-syncing the metadata, which is one way to prevent new and unsupported Kubernetes versions from being available in Rancher
+- 刷新 Kubernetes 元数据，如果一个新的 Kubernetes 补丁版本出来了，用户希望 Rancher 在不升级 Rancher 的情况下为集群提供最新版本的 Kubernetes。
+- 更改 Rancher 用于同步元数据的 URL，如果需要让 Rancher 从本地的端点同步而不是与 GitHub 同步，这对于离线环境非常有用。
+- 防止 Rancher 自动同步元数据，这是禁止 Rancher 中使用新的和不受支持的 Kubernetes 版本的一种方法。
 
-#### Refresh Kubernetes Metadata
+## 刷新 Kubernetes 元数据
 
-The option to refresh the Kubernetes metadata is available for administrators by default, or for any user who has the **Manage Cluster Drivers** [global role.](/docs/admin-settings/rbac/global-permissions/)
+默认情况下，刷新 Kubernetes 元数据的选项可供系统管理员使用，也可供具有**管理集群驱动**[全局权限](/docs/admin-settings/rbac/global-permissions/_index)的任何用户使用。
 
-To force Rancher to refresh the Kubernetes metadata, a manual refresh action is available under **Tools > Drivers > Refresh Kubernetes Metadata** on the right side corner.
+要强制 Rancher 刷新 Kubernetes 元数据，可以在**工具 > 驱动管理 > 刷新 Kubernetes 元数据**下执行手动刷新操作。
 
-#### Configuring the Metadata Synchronization
+## 配置元数据同步
 
-> Only administrators can change these settings.
+> 只有管理员可以更改这些设置。
 
-The RKE metadata config controls how often Rancher syncs metadata and where it downloads data from. You can configure the metadata from the settings in the Rancher UI, or through the Rancher API at the endpoint `v3/settings/rke-metadata-config` .
+RKE 元数据配置控制 Rancher 同步元数据的频率以及从何处下载数据。您可以从 Rancher UI 中的设置或通过 API `v3/settings/rke-metadata-config` 配置元数据。
 
-To edit the metadata config in Rancher, 
+要在 Rancher 中编辑元数据配置，
 
-1. Go to the **Global** view and click the **Settings** tab.
-1. Go to the **rke-metadata-config** section. Click the **Ellipsis (...)** and click **Edit.**
-1. You can optionally fill in the following parameters:
+1. 转到**全局**视图并单击**系统设置**选项卡。
+1. 转到**rke-metadata-config**部分。单击**省略号(…)**并单击**升级**
+1. 您可以选择填写以下参数:
 
-* `refresh-interval-minutes` : This is the amount of time that Rancher waits to sync the metadata. To disable the periodic refresh, set `refresh-interval-minutes` to 0.
-* `url` : This is the HTTP path that Rancher fetches data from.
-* `branch` : This refers to the Git branch name if the URL is a Git URL.
+   - `refresh-interval-minutes`：这是 Rancher 等待同步元数据的时间。若要禁用定期刷新，请将`refresh-interval-minutes`设置为 0。
+   - `url`：这是 Rancher 从中获取数据的 HTTP 路径。
+   - `branch`：如果 URL 是 Git URL，则指 Git 分支名称。
 
-If you don't have an air gap setup, you don't need to specify the URL or Git branch where Rancher gets the metadata, because the default setting is to pull from [Rancher's metadata Git repository.](https://github.com/rancher/kontainer-driver-metadata.git)
+如果没有离线环境，则不需要指定 Rancher 获取元数据的 URL 或 Git 分支，因为默认设置是从 [Rancher 的元数据 Git 仓库](https://github.com/rancher/kontainer-driver-metadata.git)中获取。
 
-However, if you have an [air gap setup, ](#air-gap-setups) you will need to mirror the Kubernetes metadata repository in a location available to Rancher. Then you need to change the URL and Git branch in the `rke-metadata-config` settings to point to the new location of the repository.
+但是，如果您有[离线环境](#离线环境)需求，则需要将 Kubernetes 元数据仓库镜像到 Rancher 可用的位置。然后需要在`rke-metadata-config`设置中更改 URL 和 Git 分支，以指向代码库的新位置。
 
-#### Air Gap Setups
+## 离线环境
 
-Rancher relies on a periodic refresh of the `rke-metadata-config` to download new Kubernetes version metadata if it is supported with the current version of the Rancher server. For a table of compatible Kubernetes and Rancher versions, refer to the [service terms section.](https://rancher.com/support-maintenance-terms/all-supported-versions/rancher-v2.2.8/)
+Rancher Server 会定期刷新并下载`rke-metadata-config`中配置定元数据。如果新的元数据中包含当前 Rancher Server 版本支持的新的 Kubernetes 版本元数据。则用户可以在不升级 Rancher 的情况下，开始使用这些新的 Kubernetes 版本。有关 Kubernetes 和 Rancher 版本的兼容性表，请参阅[服务条款](https://rancher.com/support-maintenance-terms/all-supported-versions/)。
 
-If you have an air gap setup, you might not be able to get the automatic periodic refresh of the Kubernetes metadata from Rancher's Git repository. In that case, you should disable the periodic refresh to prevent your logs from showing errors. Optionally, you can configure your metadata settings so that Rancher can sync with a local copy of the RKE metadata.
+如果你有一个离线环境，则可能无法从 Rancher 的 Git 代码库中自动定期刷新 Kubernetes 元数据。在这种情况下，应该禁用定期刷新以防止在日志中显示相关错误。或者，您可以配置`rke-metadata-config`，以便 Rancher 可以与 RKE 元数据的本地副本同步。
 
-To sync Rancher with a local mirror of the RKE metadata, an administrator would configure the `rke-metadata-config` settings by updating the `url` and `branch` to point to the mirror.
+若要将 Rancher 与 RKE 元数据的本地镜像同步，管理员将通过更新`rke-metadata-config`中的`url`和`branch`以指向镜像的仓库。请参见[配置元数据同步](#配置元数据同步)。
 
-After new Kubernetes versions are loaded into the Rancher setup, additional steps would be required in order to use them for launching clusters. Rancher needs access to updated system images. While the metadata settings can only be changed by administrators, any user can download the Rancher system images and prepare a private Docker registry for them.
+在将新的 Kubernetes 版本加载到 Rancher Server 中之后，需要执行其他步骤才能使用它们启动集群。Rancher 需要访问更新的系统镜像。虽然元数据设置只能由系统管理员更改，但任何用户都可以下载 Rancher 系统镜像并为它们准备一个私有镜像仓库。
 
-1. To download the system images for the private registry, click the Rancher server version at the bottom left corner of the Rancher UI.
-1. Download the OS specific image lists for Linux or Windows.
-1. Download `rancher-images.txt` .
-1. Prepare the private registry using the same steps during the [air gap install](/docs/installation/other-installation-methods/air-gap/populate-private-registry), but instead of using the `rancher-images.txt` from the releases page, use the one obtained from the previous steps.
+1. 要下载私有镜像仓库所需的镜像，请单击 Rancher UI 左下角的 Rancher Server 版本。
+1. 下载 Linux 或 Windows 操作系统的特定镜像列表。
+1. 下载`rancher-images.txt`。
+1. 使用与[离线安装](/docs/installation/other-installation-methods/air-gap/populate-private-registry/_index)过程中相同的步骤准备私有镜像仓库，但不要使用发布公告页面中的`rancher-images.txt`，而是使用从前面步骤获得的镜像列表。
 
-**Result:** The air gap installation of Rancher can now sync the Kubernetes metadata. If you update your private registry when new versions of Kubernetes are released, you can provision clusters with the new version without having to upgrade Rancher.
-
+**结果：** Rancher 的离线安装现在可以同步 Kubernetes 元数据了。如果在新版本的 Kubernetes 发布后，更新了本地的 RKE 元数据 Git 库，并且在私有镜像仓库中同步了新的镜像，那么您可以在无需升级 Rancher Server 版本的情况下使用新版本的 Kubernetes 配置集群。
