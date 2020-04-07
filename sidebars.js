@@ -359,7 +359,7 @@ module.exports = {
         ]
       }
     ],
-    创建Kubernetes集群: [
+    创建集群: [
       'cluster-provisioning/_index',
       'cluster-provisioning/node-requirements/_index',
       {
@@ -650,7 +650,7 @@ module.exports = {
       'catalog/apps/_index',
       'catalog/globaldns/_index'
     ],
-    Rancher命令行工具使用指南: ['cli/_index'],
+    Rancher命令行: ['cli/_index'],
     系统工具: ['system-tools/_index'],
     用户设置: [
       'user-settings/_index',
@@ -719,7 +719,7 @@ module.exports = {
       'troubleshooting/rancherha/_index',
       'troubleshooting/imported-clusters/_index'
     ],
-    参与Rancher开源贡献: ['contributing/_index'],
+    参与Rancher开源项目: ['contributing/_index'],
     版本迁移: [
       'v1.6-migration/_index',
       'v1.6-migration/kub-intro/_index',
