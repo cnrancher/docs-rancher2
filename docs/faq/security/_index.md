@@ -2,13 +2,14 @@
 title: 安全
 ---
 
-**Is there a Hardening Guide?**
+**Rancher 提供安全加固指南吗？**
 
-The Hardening Guide is now located in the main [Security](/docs/security/) section.
+您可于[安全](/docs/security/_index)章节查看安全加固指导。
 
-<br />
+**当通过 CIS benchmark 标准扫描 rancher 的 Kubernetes 集群，结果是什么？**
 
-**What are the results of Rancher's Kubernetes cluster when it is CIS benchmarked?**
+我们对一个加固的 Rancher Kubernetes 集群进行了 CIS benchmark 扫描，其测试结果可以在[安全](/docs/security/_index) 章节查看。
 
-We have run the CIS Kubernetes benchmark against a hardened Rancher Kubernetes cluster. The results of that assessment can be found in the main [Security](/docs/security/) section.
+**还有其他方式确保 Rancher 的安全性吗**
 
+您可于[安全](/docs/security/_index)章节查看我们是如何保证 Rancher 是安全的。例如我们会定期找到第三方安全公司对 Rancher 的安全性进行测试。

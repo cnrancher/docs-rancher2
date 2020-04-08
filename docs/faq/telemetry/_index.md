@@ -2,31 +2,30 @@
 title: 遥测
 ---
 
-#### What is Telemetry?
+## 什么是遥测？
 
-Telemetry collects aggregate information about the size of Rancher installations, versions of components used, and which features are used. This information is used by Rancher Labs to help make the product better and is not shared with third-parties.
+遥测收集了关于 Rancher 安装规模、组件版本以及使用的功能特性的集合信息。Rancher Labs 可用这些信息持续提升产品，并对第三方严格保密。
 
-#### What information is collected?
+## 遥测共收集了哪些信息？
 
-No specific identifying information like usernames, passwords, or the names or addresses of user resources will ever be collected.
+我们不会收集如用户名、密码、名字和地址等用户信息。
 
-The primary things collected include:
+主要收集的信息如下：
 
-* Aggregate counts (smallest, average, largest, total) of nodes per-cluster and their size (e.g. CPU cores & RAM).
-* Aggregate counts of logical resources like Clusters, Projects, Namespaces, and Pods.
-* Counts of what driver was used to deploy clusters and nodes (e.g. GKE vs EC2 vs Imported vs Custom).
-* Versions of Kubernetes components, Operating Systems and Docker that are deployed on nodes.
-* Whether some optional components are enabled or not (e.g.which auth providers are used).
-* The image name & version of Rancher that is running.
-* A unique randomly-generated identifier for this installation.
+- 每个集群的规模（CPU 核数和内存）和节点统计信息（最小值、平均值、最大值和总值）
+- 逻辑资源如集群、项目、命名空间和 Pod 的统计信息
+- 部署集群和节点所使用的主机驱动的计数信息（如 GKE，EC2，导入，自定义）
+- 部署的 Kubernetes、操作系统和 Docker 的版本
+- 是否部署了一些可选的组件（例如鉴权服务提供者）
+- Rancher 的镜像名称和版本
+- 安装版本的独立随机 Identifier
 
-#### Can I see the information that is being sent?
+## 如何查看被发送的信息？
 
-If Telemetry is enabled, you can go to `https://<your rancher server>/v1-telemetry` in your installation to see the current data.
+如果开启了遥测，您可以访问`https://<your rancher server>/v1-telemetry`来查看当前发送的数据。
 
-If Telemetry is not enabled, the process that collects the data is not running, so there is nothing being collected to look at.
+如果未开启遥测，收集数据的进程不运行，则没有数据被收集和发送。
 
-#### How do I turn it on or off?
+## 如何关闭或开启遥测？
 
-After initial setup, an administrator can go to the `Settings` page in the `Global` section of the UI and click Edit to change the `telemetry-opt` setting to either `in` or `out` .
-
+Rancher 初始化完成后，系统管理员可以访问**全局**中的**系统设置**菜单，在`telemetry-opt`处点击编辑修改为`in` 或 `out`。
