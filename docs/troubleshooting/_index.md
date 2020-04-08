@@ -1,38 +1,37 @@
 ---
-title: 介绍
+title: 问题归类
 ---
 
-This section contains information to help you troubleshoot issues when using Rancher.
+本节包含帮助您解决使用 Rancher 时出现的问题。
 
-* [Kubernetes components](/docs/troubleshooting/kubernetes-components/)
+- [Kubernetes 组件列表](/docs/troubleshooting/kubernetes-components/_index)
 
-  If you need help troubleshooting core Kubernetes cluster components like:
+  如果您需要对核心 Kubernetes 集群组件进行故障排除可以查看此章节，例如：
 
-  + `etcd` 
-  + `kube-apiserver` 
-  + `kube-controller-manager` 
-  + `kube-scheduler` 
-  + `kubelet` 
-  + `kube-proxy` 
-  + `nginx-proxy` 
+  - `etcd`
+  - `kube-apiserver`
+  - `kube-controller-manager`
+  - `kube-scheduler`
+  - `kubelet`
+  - `kube-proxy`
+  - `nginx-proxy`
 
-* [Kubernetes resources](/docs/troubleshooting/kubernetes-resources/)
+- [Kubernetes 资源列表](/docs/troubleshooting/kubernetes-resources/_index)
 
-  Options for troubleshooting Kubernetes resources like Nodes, Ingress Controller and Rancher Agents are described in this section.
+  本节介绍了对 Kubernetes 资源进行故障排除的选项，例如节点，Ingress Controller 和 Rancher Agent。
 
-* [Networking](/docs/troubleshooting/networking/)
+- [网络](/docs/troubleshooting/networking/_index)
 
-  Steps to troubleshoot networking issues can be found here.
+  可以在此处找到解决网络问题的步骤。
 
-* [DNS](/docs/troubleshooting/dns/)
+- [DNS](/docs/troubleshooting/dns/_index)
 
-  When you experience name resolution issues in your cluster.
+  当您在集群中遇到域名解析问题时可以查看此部分。
 
-* [Troubleshooting Rancher installed on Kubernetes](/docs/troubleshooting/rancherha/)
+- [对 Rancher 高可用进行故障排除](/docs/troubleshooting/rancherha/_index)
 
-  If you experience issues with your [Rancher server installed on Kubernetes](/docs/installation/k8s-install/)
+  如果您安装遇到问题请查看 [Rancher 高可用安装](/docs/installation/k8s-install/_index)。
 
-* [Imported clusters](/docs/troubleshooting/imported-clusters/)
+- [导入的集群](/docs/troubleshooting/imported-clusters/_index)
 
-  If you experience issues when [Importing Kubernetes Clusters](/docs/cluster-provisioning/imported-clusters/)
-
+  如果您在导入集群的时候遇到问题，请查看[导入集群](/docs/cluster-provisioning/imported-clusters/_index)。

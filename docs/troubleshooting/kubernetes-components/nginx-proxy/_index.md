@@ -2,35 +2,35 @@
 title: NGINX 代理问题排查
 ---
 
-The `nginx-proxy` container is deployed on every node that does not have the `controlplane` role. It provides access to all the nodes with the `controlplane` role by dynamically generating the NGINX configuration based on available nodes with the `controlplane` role.
+`nginx-proxy` 容器部署在除了`controlplane`角色的所有节点上。他通过动态生成 NGINX 的配置，从而提供对`controlplane`角色节点的访问。
 
-## Check if the Container is Running
+## 检查容器是否正在运行
 
-The container is called `nginx-proxy` and should have status `Up` . The duration shown after `Up` is the time the container has been running.
+nginx-proxy 容器在正常情况应该是 **Up** 状态。 并且 **Up** 状态应该是长时间运行，通过下面命令可以进行检查：
 
-``` 
+```
 docker ps -a -f=name=nginx-proxy
 ```
 
-Example output:
+输出示例：
 
-``` 
+```
 docker ps -a -f=name=nginx-proxy
 CONTAINER ID        IMAGE                       COMMAND                  CREATED             STATUS              PORTS               NAMES
 c3e933687c0e        rancher/rke-tools:v0.1.15   "nginx-proxy CP_HO..."   3 hours ago         Up 3 hours                              nginx-proxy
 ```
 
-## Check Generated NGINX Configuration
+## 检查动态生成的 NGINX 配置
 
-The generated configuration should include the IP addresses of the nodes with the `controlplane` role. The configuration can be checked using the following command:
+生成的配置应包括具有`controlplane`角色的节点的 IP 地址。 可以使用以下命令检查配置：
 
-``` 
+```
 docker exec nginx-proxy cat /etc/nginx/nginx.conf
 ```
 
-Example output:
+输出示例：
 
-``` 
+```
 error_log stderr notice;
 
 worker_processes auto;
@@ -60,11 +60,10 @@ stream {
 }
 ```
 
-## nginx-proxy Container Logging
+## nginx-proxy 容器日志
 
-The logging of the containers can contain information on what the problem could be.
+通过下面命令查看容器日志信息可以查看到可能包含的`nginx-proxy`错误信息：
 
-``` 
+```
 docker logs nginx-proxy
 ```
-
