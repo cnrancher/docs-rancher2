@@ -1,86 +1,84 @@
 ---
-title: 技术
+title: 技术问题
 ---
 
-#### How can I reset the administrator password?
+## 如何重置系统管理员（admin）密码？
 
-Docker Install:
+使用单节点 Docker 安装时：
 
-``` 
+```
 $ docker exec -ti <container_id> reset-password
 New password for default administrator (user-xxxxx):
 <new_password>
 ```
 
-Kubernetes install (Helm):
+使用 Helm 的高可用安装时：
 
-``` 
+```
 $ KUBECONFIG=./kube_config_rancher-cluster.yml
 $ kubectl --kubeconfig $KUBECONFIG -n cattle-system exec $(kubectl --kubeconfig $KUBECONFIG -n cattle-system get pods -l app=rancher | grep '1/1' | head -1 | awk '{ print $1 }') -- reset-password
 New password for default administrator (user-xxxxx):
 <new_password>
 ```
 
-Kubernetes install (RKE add-on):
+使用 RKE Add-ons 的高可用安装时：
 
-``` 
+```
 $ KUBECONFIG=./kube_config_rancher-cluster.yml
 $ kubectl --kubeconfig $KUBECONFIG exec -n cattle-system $(kubectl --kubeconfig $KUBECONFIG get pods -n cattle-system -o json | jq -r '.items[] | select(.spec.containers[].name=="cattle-server") | .metadata.name') -- reset-password
 New password for default administrator (user-xxxxx):
 <new_password>
 ```
 
-#### I deleted/deactivated the last admin, how can I fix it?
+## 我删除/禁用了 admin 用户，该如何修复？
 
-Docker Install:
+使用单节点 Docker 安装时：
 
-``` 
+```
 $ docker exec -ti <container_id> ensure-default-admin
 New default administrator (user-xxxxx)
 New password for default administrator (user-xxxxx):
 <new_password>
 ```
 
-Kubernetes install (Helm):
+使用 Helm 的高可用安装时：
 
-``` 
+```
 $ KUBECONFIG=./kube_config_rancher-cluster.yml
 $ kubectl --kubeconfig $KUBECONFIG -n cattle-system exec $(kubectl --kubeconfig $KUBECONFIG -n cattle-system get pods -l app=rancher | grep '1/1' | head -1 | awk '{ print $1 }') -- ensure-default-admin
 New password for default administrator (user-xxxxx):
 <new_password>
 ```
 
-Kubernetes install (RKE add-on):
+使用 RKE Add-ons 的高可用安装时：
 
-``` 
+```
 $ KUBECONFIG=./kube_config_rancher-cluster.yml
 $ kubectl --kubeconfig $KUBECONFIG exec -n cattle-system $(kubectl --kubeconfig $KUBECONFIG get pods -n cattle-system -o json | jq -r '.items[] | select(.spec.containers[].name=="cattle-server") | .metadata.name') -- ensure-default-admin
 New password for default admin user (user-xxxxx):
 <new_password>
 ```
 
-#### How can I enable debug logging?
+## 如何开启 debug 调试日志？
 
-* Docker Install
-* Enable
+使用单节点 Docker 安装时，开启：
 
-``` 
+```
 $ docker exec -ti <container_id> loglevel --set debug
 OK
 $ docker logs -f <container_id>
 ```
 
-* Disable
+使用单节点 Docker 安装时，关闭：
 
-``` 
+```
 $ docker exec -ti <container_id> loglevel --set info
 OK
 ```
 
-* Kubernetes install (Helm)
-* Enable
+使用 Helm 的高可用安装时，开启：
 
-``` 
+```
 $ KUBECONFIG=./kube_config_rancher-cluster.yml
 $ kubectl --kubeconfig $KUBECONFIG -n cattle-system get pods -l app=rancher | grep '1/1' | awk '{ print $1 }' | xargs -I{} kubectl --kubeconfig $KUBECONFIG -n cattle-system exec {} -- loglevel --set debug
 OK
@@ -89,9 +87,9 @@ OK
 $ kubectl --kubeconfig $KUBECONFIG -n cattle-system logs -l app=rancher
 ```
 
-* Disable
+使用 Helm 的高可用安装时，关闭：
 
-``` 
+```
 $ KUBECONFIG=./kube_config_rancher-cluster.yml
 $ kubectl --kubeconfig $KUBECONFIG -n cattle-system get pods -l app=rancher | grep '1/1' | awk '{ print $1 }' | xargs -I{} kubectl --kubeconfig $KUBECONFIG -n cattle-system exec {} -- loglevel --set info
 OK
@@ -99,97 +97,97 @@ OK
 OK
 ```
 
-* Kubernetes install (RKE add-on)
-* Enable
+使用 RKE Add-ons 的高可用安装时，开启：
 
-``` 
+```
 $ KUBECONFIG=./kube_config_rancher-cluster.yml
 $ kubectl --kubeconfig $KUBECONFIG exec -n cattle-system $(kubectl --kubeconfig $KUBECONFIG get pods -n cattle-system -o json | jq -r '.items[] | select(.spec.containers[].name=="cattle-server") | .metadata.name') -- loglevel --set debug
 OK
 $ kubectl --kubeconfig $KUBECONFIG logs -n cattle-system -f $(kubectl --kubeconfig $KUBECONFIG get pods -n cattle-system -o json | jq -r '.items[] | select(.spec.containers[].name="cattle-server") | .metadata.name')
 ```
 
-* Disable
+使用 RKE Add-ons 的高可用安装时，关闭：
 
-``` 
+```
 $ KUBECONFIG=./kube_config_rancher-cluster.yml
 $ kubectl --kubeconfig $KUBECONFIG exec -n cattle-system $(kubectl --kubeconfig $KUBECONFIG get pods -n cattle-system -o json | jq -r '.items[] | select(.spec.containers[].name=="cattle-server") | .metadata.name') -- loglevel --set info
 OK
 ```
 
-#### My ClusterIP does not respond to ping
+## 我不能 ping 通 CluusterIP
 
-ClusterIP is a virtual IP, which will not respond to ping. Best way to test if the ClusterIP is configured correctly, is by using `curl` to access the IP and port to see if it responds.
+ClusterIP 是一个虚拟 IP，不能够回应 ping。更好的测试 ClusterIP 是否生效，可以采用`curl`命令访问其 IP 和端口。
 
-#### Where can I manage Node Templates?
+## 在哪里管理节点模板？
 
-Node Templates can be accessed by opening your account menu (top right) and selecting `Node Templates` .
+您可以在右上角账户菜单选择**节点模版**打开节点模版。
 
-#### Why is my Layer-4 Load Balancer in `Pending` state?
+## 为什么创建的 L4 负载均衡器一直处在`Pending`状态？
 
-The Layer-4 Load Balancer is created as `type: LoadBalancer` . In Kubernetes, this needs a cloud provider or controller that can satisfy these requests, otherwise these will be in `Pending` state forever. More information can be found on [Cloud Providers](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/) or [Create External Load Balancer](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/)
+L4 负载均衡器是通过`type: LoadBalancer`创建的。在 Kubernetes 里，它需要一个公有云提供商或者类似控制器（例如：MetalLB）来响应创建需求，否则就会一直处在`Pending`状态。更多信息请参阅[公有云提供商](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/_index)或[创建外部负载均衡器](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/)。
 
-#### Where is the state of Rancher stored?
+## Rancher 的状态数据存储在哪里？
 
-* Docker Install: in the embedded etcd of the `rancher/rancher` container, located at `/var/lib/rancher` .
-* Kubernetes install: in the etcd of the RKE cluster created to run Rancher.
+- Docker 安装方式：存储在嵌入在 rancher 容器的 etcd 里，目录为`/var/lib/rancher`。
+- 高可用安装（RKE）：存储在 Rancher 所在的 Kubernete 集群的 etcd 中。
+- 高可用安装（K3s）：存储在 Rancher 使用的 MySQL 或其他数据库中。
 
-#### How are the supported Docker versions determined?
+## 如何确定受支持的 Dokcer 版本？
 
-We follow the validated Docker versions for upstream Kubernetes releases. The validated versions can be found under [External Dependencies](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.10.md#external-dependencies) in the Kubernetes release CHANGELOG.md.
+我们依从上游 Kubernetes 版本的已验证的 Docker 版本。已验证的 Docker 版本可以在[外部依赖](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.10.md#external-dependencies)中的 Kubernetes 发布 CHANGELOG.md 查看。
 
-#### How can I access nodes created by Rancher?
+## 如何访问通过 Rancher 创建的节点？
 
-SSH keys to access the nodes created by Rancher can be downloaded via the **Nodes** view. Choose the node which you want to access and click on the vertical ellipsis button at the end of the row, and choose **Download Keys** as shown in the picture below.
+可以通过**节点**视图下载通过 Rancher 创建的节点的 SSH keys。选择你想要访问的节点并选择末尾的垂直省略号按钮，选择**下载密钥**即可下载。
 
 ![Download Keys](/img/rancher/downloadsshkeys.png)
 
-Unzip the downloaded zip file, and use the file `id_rsa` to connect to you host. Be sure to use the correct username ( `rancher` or `docker` for RancherOS, `ubuntu` for Ubuntu, `ec2-user` for Amazon Linux)
+解压下载后的 zip 文件，通过`id_rsa`文件连接您的节点。请确保使用正确的用户名（RancherOS 用`rancher` 或 `docker`，Ubuntu 用`ubuntu`，Amazon Linux 用`ec2-user`）
 
-``` 
+```
 $ ssh -i id_rsa user@ip_of_node
 ```
 
-#### How can I automate task X in Rancher?
+## 如何在 Rancher 里完成自动化任务？
 
-The UI consists of static files, and works based on responses of the API. That means every action/task that you can execute in the UI, can be automated via the API. There are 2 ways to do this:
+Rancher UI 包含静态文件，以及基于 API 响应工作。这意味着任何您在 UI 上执行的操作，都可以通过 API 自动化完成。一般有两种方式：
 
-* Visit `https://your_rancher_ip/v3` and browse the API options.
-* Capture the API calls when using the UI (Most commonly used for this is [Chrome Developer Tools](https://developers.google.com/web/tools/chrome-devtools/#network) but you can use anything you like)
+- 访问 `https://your_rancher_ip/v3`并浏览 API 选项。
+- 当用 UI 访问时抓取 API 请求（大多数使用的方法是 [Chrome Developer Tools](https://developers.google.com/web/tools/chrome-devtools/#network) 当然你可以选择其他的工具。）
 
-#### The IP address of a node changed, how can I recover?
+## 一个节点的 IP 地址改变了，该如何恢复？
 
-A node is required to have a static IP configured (or a reserved IP via DHCP). If the IP of a node has changed, you will have to remove it from the cluster and readd it. After it is removed, Rancher will update the cluster to the correct state. If the cluster is no longer in `Provisioning` state, the node is removed from the cluster.
+节点必须配置一个静态 IP（或者 DHCP 预留的 IP）。如果节点 IP 改变了，您必须从集群中移除它并再次添加。当您移除节点后，Rancher 会更新集群到正确的状态。当集群不再显示`Provisioning`状态，表示节点已完全从集群中移除。
 
-When the IP address of the node changed, Rancher lost connection to the node, so it will be unable to clean the node properly. See [Cleaning cluster nodes](/docs/faq/cleaning-cluster-nodes/) to clean the node.
+当节点 IP 改变时，Rancher 会丢失节点连接，所以无法在 Rancher 完全清理节点。请查阅[清理集群节点](/docs/cluster-admin/cleaning-cluster-nodes/_index)来完全清理节点。
 
-When the node is removed from the cluster, and the node is cleaned, you can readd the node to the cluster.
+当节点已经从集群中移除，并完全清理后，您就可以再次添加节点到集群中。
 
-#### How can I add additional arguments/binds/environment variables to Kubernetes components in a Rancher Launched Kubernetes cluster?
+## 如何向 Rancher 启动的 Kubernetes 组件添加 参数/绑定/环境变量？
 
-You can add additional arguments/binds/environment variables via the [Config File](/docs/cluster-provisioning/rke-clusters/options/#config-file) option in Cluster Options. For more information, see the [Extra Args, Extra Binds, and Extra Environment Variables]({{< baseurl >}}/rke/latest/en/config-options/services/services-extras/) in the RKE documentation or browse the [Example Cluster.ymls]({{< baseurl >}}/rke/latest/en/example-yamls/).
+您可以通过[配置文件](/docs/cluster-provisioning/rke-clusters/options/_index)集群选项添加附加参数/绑定/环境变量。更多信息请参阅 RKE 文档里的[附加参数，附加绑定和附加环境变量](https://rancher.com/docs/rke/latest/en/config-options/services/services-extras/)以及浏览 [Cluster.yml 示例文件](https://rancher.com/docs/rke/latest/en/example-yamls/)。
 
-#### How do I check if my certificate chain is valid?
+## 如何检查我的证书链是有效的？
 
-Use the `openssl verify` command to validate your certificate chain:
+使用`openssl verify`命令来验证你的证书链：
 
-> **Note:** Configure `SSL_CERT_DIR` and `SSL_CERT_FILE` to a dummy location to make sure the OS installed certificates are not used when verifying manually.
+> **注意：** 将`SSL_CERT_DIR` 和 `SSL_CERT_FILE` 配置为虚拟地址，以保证验证的时候不会使用操作系统自动安装的证书。
 
-``` 
+```
 SSL_CERT_DIR=/dummy SSL_CERT_FILE=/dummy openssl verify -CAfile ca.pem rancher.yourdomain.com.pem
 rancher.yourdomain.com.pem: OK
 ```
 
-If you receive the error `unable to get local issuer certificate` , the chain is incomplete. This usually means that there is an intermediate CA certificate that issued your server certificate. If you already have this certificate, you can use it in the verification of the certificate like shown below:
+上述命令执行后，如何您收到`unable to get local issuer certificate`的错误，则证书链是不完整的。这通常意味着您的服务器证书中含有中间 CA 证书。如果您拥有该中间证书，可以采用下述的方法验证。
 
-``` 
+```
 SSL_CERT_DIR=/dummy SSL_CERT_FILE=/dummy openssl verify -CAfile ca.pem -untrusted intermediate.pem rancher.yourdomain.com.pem
 rancher.yourdomain.com.pem: OK
 ```
 
-If you have successfully verified your certificate chain, you should include needed intermediate CA certificates in the server certificate to complete the certificate chain for any connection made to Rancher (for example, by the Rancher agent). The order of the certificates in the server certificate file should be first the server certificate itself (contents of `rancher.yourdomain.com.pem` ), followed by intermediate CA certificate(s) (contents of `intermediate.pem` ).
+如何您成功地验证了证书链，你可以将中间 CA 证书包含在服务器证书中来为所有到 Rancher 的连接（如到 Rancher Agent 的连接）提供完整证书链。服务器证书文件的证书顺序应该是服务器证书（`rancher.yourdomain.com.pem`的内容）自身放在第一位，随后是中间 CA 证书（`intermediate.pem`内容）
 
-``` 
+```
 -----BEGIN CERTIFICATE-----
 %YOUR_CERTIFICATE%
 -----END CERTIFICATE-----
@@ -198,52 +196,51 @@ If you have successfully verified your certificate chain, you should include nee
 -----END CERTIFICATE-----
 ```
 
-If you still get errors during verification, you can retrieve the subject and the issuer of the server certificate using the following command:
+如何您仍然遇到验证验证错误，你可以通过以下命令获取服务器证书的颁布者和主题：
 
-``` 
+```
 openssl x509 -noout -subject -issuer -in rancher.yourdomain.com.pem
 subject= /C=GB/ST=England/O=Alice Ltd/CN=rancher.yourdomain.com
 issuer= /C=GB/ST=England/O=Alice Ltd/CN=Alice Intermediate CA
 ```
 
-#### How do I check `Common Name` and `Subject Alternative Names` in my server certificate?
+## 如何查看服务器证书的`Common Name` 和 `Subject Alternative Names` ？
 
-Although technically an entry in `Subject Alternative Names` is required, having the hostname in both `Common Name` and as entry in `Subject Alternative Names` gives you maximum compatibility with older browser/applications.
+尽管技术上只要一个`Subject Alternative Names`条目就可以了，但是将 Hostname 作为`Common Name` 和 `Subject Alternative Names` 的条目能够使您的服务兼容更多的老版本浏览器和应用。
 
-Check `Common Name` :
+查看`Common Name`：
 
-``` 
+```
 openssl x509 -noout -subject -in cert.pem
 subject= /CN=rancher.my.org
 ```
 
-Check `Subject Alternative Names` :
+查看`Subject Alternative Names`：
 
-``` 
+```
 openssl x509 -noout -in cert.pem -text | grep DNS
                 DNS:rancher.my.org
 ```
 
-#### Why does it take 5+ minutes for a pod to be rescheduled when a node has failed?
+## 为什么当一个节点故障时，一个 Pod 需要大于 5 分钟时间才能被重新调度？
 
-This is due to a combination of the following default Kubernetes settings:
+这是因为下列默认 Kubernetes 设置共同产生的效果：
 
-* kubelet
-  + `node-status-update-frequency` : Specifies how often kubelet posts node status to master (default 10s)
-* kube-controller-manager
-  + `node-monitor-period` : The period for syncing NodeStatus in NodeController (default 5s)
-  + `node-monitor-grace-period` : Amount of time which we allow running Node to be unresponsive before marking it unhealthy (default 40s)
-  + `pod-eviction-timeout` : The grace period for deleting pods on failed nodes (default 5m0s)
+- kubelet
+  - `node-status-update-frequency`：设置 kubelet 上报节点信息给 master 的频率。(默认 10s)
+- kube-controller-manager
+  - `node-monitor-period`：NodeController 中 NodeStatus 的同步周期(默认 5s)
+  - `node-monitor-grace-period`：节点被认定为不健康前，节点不作响应的总的时间。(默认 40s)
+  - `pod-eviction-timeout`：优雅删除故障节点上容器的周期。(默认 5m0s)
 
-See [Kubernetes: kubelet](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/) and [Kubernetes: kube-controller-manager](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/) for more information on these settings.
+获取更多信息请参阅 [Kubernetes：kubelet](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/) 和 [Kubernetes: kube-controller-manager](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/)。
 
-In Kubernetes v1.13, the `TaintBasedEvictions` feature is enabled by default. See [Kubernetes: Taint based Evictions](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/#taint-based-evictions) for more information.
+在 Kubernetes v1.13 版本中，`TaintBasedEvictions`特性是默认开启的。请查阅 [Kubernetes: Taint based Evictions](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/#taint-based-evictions) 获取更多信息。
 
-* kube-apiserver (Kubernetes v1.13 and up)
-  + `default-not-ready-toleration-seconds` : Indicates the tolerationSeconds of the toleration for notReady: NoExecute that is added by default to every pod that does not already have such a toleration.
-  + `default-unreachable-toleration-seconds` : Indicates the tolerationSeconds of the toleration for unreachable: NoExecute that is added by default to every pod that does not already have such a toleration.
+- kube-apiserver (Kubernetes v1.13 版本及以后)
+  - `default-not-ready-toleration-seconds`: 表示 notReady:NoExecute 容忍的容忍时间。notReady:NoExecute 被默认添加到没有该容忍的所有 Pod。
+  - `default-unreachable-toleration-seconds`: 表示 unreachable:NoExecute 容忍的容忍时间。unreachable:NoExecute 被默认添加到没有该容忍的所有 Pod。
 
-#### Can I use keyboard shortcuts in the UI?
+## 我可以在 UI 里使用键盘快捷键吗？
 
-Yes, most parts of the UI can be reached using keyboard shortcuts. For an overview of the available shortcuts, press `?` anywhere in the UI.
-
+可以。大部分 UI 可以通过键盘快捷键访问。可在 UI 任意地方中按`?`查看所有可用的快捷键。

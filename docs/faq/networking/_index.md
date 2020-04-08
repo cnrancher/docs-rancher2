@@ -1,8 +1,7 @@
 ---
-title: 网络
+title: 常见问题
 ---
 
-Networking FAQ's
+关于网络的常见问题
 
-* [CNI Providers](/docs/faq/networking/cni-providers/)
-
+- [CNI 网络插件](/docs/faq/networking/cni-providers/_index)
