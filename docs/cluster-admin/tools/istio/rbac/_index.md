@@ -1,58 +1,57 @@
 ---
-title: 基于角色的权限控制
+title: 基于角色的访问控制
 ---
 
-This section describes the permissions required to access Istio features and how to configure access to the Kiali and Jaeger visualizations.
+本节描述访问 Istio 功能所需的权限以及如何配置对 Kiali 和 Jaeger 可视化的访问。
 
-## Cluster-level Access
+## 集群层级的访问
 
-By default, only cluster administrators can:
+默认情况下，只有集群管理员可以：
 
-* Enable Istio for the cluster
-* Configure resource allocations for Istio
-* View each UI for Prometheus, Grafana, Kiali, and Jaeger
+- 为集群启用 Istio
+- 为 Istio 配置资源分配
+- 查看 Prometheus，Grafana，Kiali 和 Jaeger 的 UI
 
-## Project-level Access
+## 项目层级的访问
 
-After Istio is enabled in a cluster, project owners and members have permission to:
+在集群中启用 Istio 后，项目所有者和成员有权：
 
-* Enable and disable Istio sidecar auto-injection for namespaces
-* Add the Istio sidecar to workloads
-* View the traffic metrics and traffic graph for the cluster
-* View the Kiali and Jaeger visualizations if cluster administrators give access to project members
-* Configure Istio's resources (such as the gateway, destination rules, or virtual services) with `kubectl` (This does not apply to read-only project members)
+- 给命名空间启用和禁用 Istio Sidecar 自动注入
+- 将 Istio Sidecar 添加到工作负载中
+- 查看集群的流量指标和流量图
+- 在集群管理员允许授权的情况下，查看 Kiali 和 Jaeger 视图
+- 使用 `kubectl` 配置 Istio 的资源（例如网关，目标规则或虚拟服务）（该项不适用于只读权限的项目成员）
 
-## Access to Visualizations
+## 可视化的访问
 
-By default, the Kiali and Jaeger visualizations are restricted to the cluster owner because the information in them could be sensitive.
+默认情况下，Kiali 和 Jaeger 可视化仅限于集群所有者，因为它们可能含有的敏感信息。
 
-**Jaeger** provides a UI for a distributed tracing system, which is useful for root cause analysis and for determining what causes poor performance.
+**Jaeger** 为分布式跟踪系统提供了一个 UI，该 UI 对分析问题根源和确定导致性能下降的原因很有用。
 
-**Kiali** provides a diagram that shows the services within a service mesh and how they are connected.
+**Kiali** 提供了一个显示服务网格中的服务及其连接方式的图表。
 
-Rancher supports giving groups permission to access Kiali and Jaeger, but not individuals.
+Rancher 支持给用户组授予访问 Kiali 和 Jaeger 的权限，不支持针对单个用户的授权。
 
-To configure who has permission to access the Kiali and Jaeger UI, 
+要配置谁有权访问 Kiali 和 Jaeger UI，
 
-1. Go to the cluster view and click **Tools > Istio.**
-1. Then go to the **Member Access** section. If you want to restrict access to certain groups, choose **Allow cluster owner and specified members to access Kiali and Jaeger UI.** Search for the groups that you want to have access to Kiali and Jaeger. If you want all members to have access to the tools, click **Allow all members to access Kiali and Jaeger UI.**
-1. Click **Save.**
+1. 转到集群视图，然后单击**工具 > Istio**。
+1. 然后转到 **成员访问权限** 部分。如果要限制对某些组的访问，请选择 **允许集群所有者和指定的成员访问 Kiali 和 Jaeger UI**。搜索允许访问 Kiali 和 Jaeger 的组。如果您希望所有成员都可以使用该工具，请单击 **允许所有成员访问 Kiali 和 Jaeger UI**。
+1. 单击 **保存**。
 
-**Result:** The access levels for Kiali and Jaeger have been updated.
+**结果：** Kiali 和 Jaeger 的访问权限级别已更新。
 
-## Summary of Default Permissions for Istio Users
+## Istio 用户的默认权限总结
 
-| Permission                                                              | Cluster Administrators | Project Owners | Project Members | Read-only Project Members |
-| ----------------------------------------------------------------------- | ---------------------- | -------------- | --------------- | ------------------------- |
-| Enable and disable Istio for the cluster                                | ✓                      |                |                 |                           |
-| Configure Istio resource limits                                         | ✓                      |                |                 |                           |
-| Control who has access to Kiali and the Jaeger UI                       | ✓                      |                |                 |                           |
-| Enable and disable Istio for a namespace                                | ✓                      | ✓              | ✓               |                           |
-| Enable and disable Istio on workloads                                   | ✓                      | ✓              | ✓               |                           |
-| Configure Istio with `kubectl` | ✓                      | ✓              | ✓               |                           |
-| View Prometheus UI and Grafana UI                                       | ✓                      |                |                 |                           |
-| View Kiali UI and Jaeger UI ([Configurable](#access-to-visualizations)) | ✓                      |                |                 |                           |
-| View Istio project dashboard, including traffic metrics\*               | ✓                      | ✓              | ✓               | ✓                         |
+| 权限                                                             | 集群管理员 | 项目所有者 | 项目成员 | 只读的项目成员 |
+| ---------------------------------------------------------------- | ---------- | ---------- | -------- | -------------- |
+| 为集群启用和禁用 Istio                                           | ✓          |            |          |                |
+| 配置 Istio 资源限制                                              | ✓          |            |          |                |
+| 控制谁有权访问 Kiali 和 Jaeger UI                                | ✓          |            |          |                |
+| 为命名空间启用和禁用 Istio                                       | ✓          | ✓          | ✓        |                |
+| 在工作负载上启用和禁用 Istio                                     | ✓          | ✓          | ✓        |                |
+| 用 `kubectl` 配置 Istio                                          | ✓          | ✓          | ✓        |                |
+| 查看 Prometheus UI 和 Grafana UI                                 | ✓          |            |          |                |
+| 查看 Kiali UI 和 Jaeger UI ([可配置](#access-to-visualizations)) | ✓          |            |          |                |
+| 查看 Istio 项目仪表板，包括流量指标\*                            | ✓          | ✓          | ✓        | ✓              |
 
-* By default, only the cluster owner will see the traffic graph. Project members will see only a subset of traffic metrics. Project members cannot see the traffic graph because it comes from Kiali, and access to Kiali is restricted to cluster owners by default.
-
+- 默认情况下，只有集群所有者才能看到流量图。项目成员只会看到一部分流量指标。项目成员无法看到流量图，因为它来自 Kiali，并且默认情况下，只有集群所有者具有对 Kiali 的访问权限。

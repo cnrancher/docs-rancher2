@@ -2,21 +2,20 @@
 title: 1、在集群中启用 Istio
 ---
 
-This cluster uses the default Nginx controller to allow traffic into the cluster.
+该集群使用默认的 Nginx 控制器来允许流量进入集群。
 
-A Rancher [administrator](/docs/admin-settings/rbac/global-permissions/) or [cluster owner](/docs/admin-settings/rbac/cluster-project-roles/#cluster-roles) can configure Rancher to deploy Istio in a Kubernetes cluster.
+Rancher 的[管理员](/docs/admin-settings/rbac/global-permissions/_index)或者[集群所有者](/docs/admin-settings/rbac/cluster-project-roles/_index)可以在一个 Kubernetes 集群中部署 Istio。
 
-1. From the **Global** view, navigate to the **cluster** where you want to enable Istio.
-1. Click **Tools > Istio.**
-1. Optional: Configure member access and [resource limits](/docs/cluster-admin/tools/istio/resources/) for the Istio components. Ensure you have enough resources on your worker nodes to enable Istio.
-1. Click **Enable**.
-1. Click **Save**.
+1. 从**全局**视图中，导航到要启用 Istio 的集群。
+1. 单击**工具 > Istio**。
+1. 可选: 为 Istio 组件配置成员访问权限和[资源限制](/docs/cluster-admin/tools/istio/resources/_index)。确保您的 worker 节点上有足够的资源来启用 Istio。
+1. 单击**启用**。
+1. 单击**保存**。
 
-**Result:** Istio is enabled at the cluster level.
+**结果：** 在集群层级启用了 Istio。
 
-The Istio application, `cluster-istio` , is added as an [application](/docs/catalog/apps/) to the cluster's `system` project.
+Istio 会作为一个名为`cluster-istio`的[应用](/docs/catalog/apps/_index)添加到该集群的`系统`项目中。
 
-When Istio is enabled in the cluster, the label for Istio sidecar auto injection, `istio-injection=enabled` , will be automatically added to each new namespace in this cluster. This automatically enables Istio sidecar injection in all new workloads that are deployed in those namespaces. You will need to manually enable Istio in preexisting namespaces and workloads.
+在集群中启用 Istio 时，Istio sidecar 自动注入的标签`istio-injection = enabled`将自动添加到该集群中的每个新的命名空间。这会自动在这些命名空间中部署的所有新工作负载中启用 Istio sidecar 注入。您将需要在预先存在的命名空间和工作负载中手动启用 Istio。
 
-#### [Next: Enable Istio in a Namespace](/docs/cluster-admin/tools/istio/setup/enable-istio-in-namespace)
-
+#### [下一步：在命名空间中启用 Istio](/docs/cluster-admin/tools/istio/setup/enable-istio-in-namespace/_index)
