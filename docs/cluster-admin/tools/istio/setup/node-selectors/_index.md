@@ -1,38 +1,37 @@
 ---
-title: 3、设置 Istio 组件所在节点
+title: 3、选择部署 Istio 组件的节点
 ---
 
-> **Prerequisite:** Your cluster needs a worker node that can designated for Istio. The worker node should meet the [resource requirements.](/docs/cluster-admin/tools/istio/resources)
+> **先决条件：** 您的集群需要一个可以为 Istio 指定的 worker 节点。Worker 结点应满足[资源要求](/docs/cluster-admin/tools/istio/resources/_index)。
 
-This section describes how use node selectors to configure Istio components to be deployed on a designated node.
+本节介绍如何使用节点选择器来配置在指定节点上部署 Istio 组件。
 
-In larger deployments, it is strongly advised that Istio's infrastructure be placed on dedicated nodes in the cluster by adding a node selector for each Istio component.
+在较大型的部署中，强烈建议通过为每个 Istio 组件添加节点选择器，将 Istio 的基础结构放置在集群中的专用节点上。
 
-## Adding a Label to the Istio Node
+## 给 Istio 节点添加标签
 
-First, add a label to the node where Istio components should be deployed. This label can have any key-value pair. For this example, we will use the key `istio` and the value `enabled` .
+首先，向应该部署 Istio 组件的节点添加标签。此标签可以是任意键值对。在这个例子中，我们将使用键`istio`和值`enabled`。
 
-1. From the cluster view, go to the **Nodes** tab.
-1. Go to a worker node that will host the Istio components and click **Ellipsis (...) > Edit.**
-1. Expand the **Labels & Annotations** section.
-1. Click **Add Label.**
-1. In the fields that appear, enter `istio` for the key and `enabled` for the value.
-1. Click **Save.**
+1. 在集群视图中，转到**节点**标签页。
+1. 找到用来运行 Istio 组件的工作节点，单击**省略号 (...) > 编辑**。
+1. 展开**标签/注释**部分。
+1. 单击**添加标签**。
+1. 在输入框中输入`istio`作为键，并输入`enabled`作为值。
+1. 单击**保存**。
 
-**Result:** A worker node has the label that will allow you to designate it for Istio components.
+**结果：** 一个 worker 节点拥有对应的标签，使其后续作为指定的节点用于 Istio 组件的部署。
 
-## Configuring Istio Components to Use the Labeled Node
+## 配置 Istio 组件以使用带标签的节点
 
-Configure each Istio component to be deployed to the node with the Istio label. Each Istio component can be configured individually, but in this tutorial, we will configure all of the components to be scheduled on the same node for the sake of simplicity.
+配置每个 Istio 组件以使用 Istio 标签将其部署到节点。每个 Istio 组件都可以单独配置，但是在本教程中，为简单起见，我们将所有组件配置为在同一节点上调度。
 
-For larger deployments, it is recommended to schedule each component of Istio onto separate nodes.
+对于较大型的部署，建议将 Istio 的每个组件调度到单独的节点上。
 
-1. From the cluster view, click **Tools > Istio.**
-1. Expand the **Pilot** section and click **Add Selector** in the form that appears. Enter the node selector label that you added to the Istio node. In our case, we are using the key `istio` and the value `enabled.` 
-1. Repeat the previous step for the **Mixer** and **Tracing** sections.
-1. Click **Save.**
+1. 在集群视图中，单击**工具 > Istio**。
+1. 展开**Pilot**部分并在出现的表单中单击**添加选择器**。输入您添加到 Istio 节点的节点标签。在本例中，我们使用键`istio`和值`enabled`。
+1. 对**Mixer**和**Tracing**部分重复上述步骤。
+1. 单击**保存**。
 
-**Result:** The Istio components will be deployed on the Istio node.
+**结果：** Istio 组件将部署在指定的节点上。
 
-#### [Next: Add Deployments and Services](/docs/cluster-admin/tools/istio/setup/deploy-workloads)
-
+#### [下一步：添加部署和服务](/docs/cluster-admin/tools/istio/setup/deploy-workloads/_index)

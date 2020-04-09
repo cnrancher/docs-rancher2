@@ -1,57 +1,57 @@
 ---
-title: 4、部署带有 Istio Sidecar 的工作负载
+title: 4. 添加带Istio sidecar 的部署和服务
 ---
 
-> **Prerequisite:** To enable Istio for a workload, the cluster and namespace must have Istio enabled.
+> **先决条件：** 要为工作负载启用 Istio，集群和命名空间必须启用 Istio。
 
-Enabling Istio in a namespace only enables automatic sidecar injection for new workloads. To enable the Envoy sidecar for existing workloads, you need to enable it manually for each workload.
+在命名空间中启用 Istio 后仅对新的工作负载启用自动 Sidecar 注入。要为现有工作负载启用 Envoy Sidecar，您需要为每个工作负载手动启用它。
 
-To inject the Istio sidecar on an existing workload in the namespace, go to the workload, click the **Ellipsis (... ), ** and click **Redeploy.** When the workload is redeployed, it will have the Envoy sidecar automatically injected.
+要将 Istio sidecar 注入命名空间中的现有工作负载，请转到工作负载页面，单击**省略号 (...)**，然后单击**重新部署**。重新部署工作负载时，Envoy sidecar 会自动注入。
 
-Wait a few minutes for the workload to upgrade to have the istio sidecar. Click it and go to the Containers section. You should be able to see istio-init and istio-proxy alongside your original workload. This means the Istio sidecar is enabled for the workload. Istio is doing all the wiring for the sidecar envoy. Now Istio can do all the features automatically if you enable them in the yaml.
+等待几分钟，以使工作负载升级到带有 Istio sidecar。单击该工作负载，然后转到**容器**部分。您应该能够在工作负载中看到 istio-init 和 istio-proxy 容器。这意味着已为工作负载启用了 Istio sidecar。Istio 正在为 Envoy sidecar 进行所有接线。现在，如果您通过 Yaml 中使用了 Istio 的功能，则 Istio 可以自动执行。
 
-### 3. Add Deployments and Services
+### 3. 添加部署和服务
 
-Next we add the Kubernetes resources for the sample deployments and services for the BookInfo app in Istio's documentation.
+接下来，我们再添加 Istio 文档中的 BookInfo 示例应用程序相关的 Kubernetes 资源。
 
-1. Go to the project inside the cluster you want to deploy the workload on.
-1. In Workloads, click **Import YAML.**
-1. Copy the below resources into the form.
-1. Click **Import.**
+1. 进入要部署工作负载的项目中。
+1. 在工作负载页面，单击**导入 YAML**。
+1. 将以下资源复制到表单中。
+1. 单击**导入**。
 
-This will set up the following sample resources from Istio's example BookInfo app:
+这将从 Istio 的 BookInfo 示例应用中设置以下资源：
 
-Details service and deployment:
+Details 部署和服务:
 
-* A `details` Service
-* A ServiceAccount for `bookinfo-details` 
-* A `details-v1` Deployment
+- 一个名为`details`的 Service
+- 一个名为`bookinfo-details`的 ServiceAccount
+- 一个名为`details-v1`的 Deployment
 
-Ratings service and deployment:
+Ratings 部署和服务:
 
-* A `ratings` Service
-* A ServiceAccount for `bookinfo-ratings` 
-* A `ratings-v1` Deployment
+- 一个名为`ratings`的 Service
+- 一个名为`bookinfo-ratings`的 ServiceAccount
+- 一个名为`ratings-v1`的 Deployment
 
-Reviews service and deployments (three versions):
+Reviews 部署和服务（三个版本）：
 
-* A `reviews` Service
-* A ServiceAccount for `bookinfo-reviews` 
-* A `reviews-v1` Deployment
-* A `reviews-v2` Deployment
-* A `reviews-v3` Deployment
+- 一个名为`reviews`的 Service
+- 一个名为`bookinfo-reviews`的 ServiceAccount
+- 一个名为`reviews-v1`的 Deployment
+- 一个名为`reviews-v2`的 Deployment
+- 一个名为`reviews-v3`的 Deployment
 
-Productpage service and deployment:
+Productpage 部署和服务:
 
-This is the main page of the app, which will be visible from a web browser. The other services will be called from this page.
+这是应用程序的主页，可从网页浏览器中看到。其他服务将从此页面调用。
 
-* A `productpage` service
-* A ServiceAccount for `bookinfo-productpage` 
-* A `productpage-v1` Deployment
+- 一个名为`productpage`的 Service
+- 一个名为`bookinfo-productpage`的 ServiceAccount
+- 一个名为`productpage-v1`的 Deployment
 
-### Resource YAML
+### 资源 YAML
 
-``` yaml
+```yaml
 # Copyright 2017 Istio Authors
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
@@ -78,9 +78,7 @@ metadata:
     service: details
 spec:
   ports:
-
     - port: 9080
-
       name: http
   selector:
     app: details
@@ -111,15 +109,11 @@ spec:
     spec:
       serviceAccountName: bookinfo-details
       containers:
-
         - name: details
-
           image: docker.io/istio/examples-bookinfo-details-v1:1.15.0
           imagePullPolicy: IfNotPresent
           ports:
-
             - containerPort: 9080
-
 ---
 ##################################################################################################
 # Ratings service
@@ -133,9 +127,7 @@ metadata:
     service: ratings
 spec:
   ports:
-
     - port: 9080
-
       name: http
   selector:
     app: ratings
@@ -166,15 +158,11 @@ spec:
     spec:
       serviceAccountName: bookinfo-ratings
       containers:
-
         - name: ratings
-
           image: docker.io/istio/examples-bookinfo-ratings-v1:1.15.0
           imagePullPolicy: IfNotPresent
           ports:
-
             - containerPort: 9080
-
 ---
 ##################################################################################################
 # Reviews service
@@ -188,9 +176,7 @@ metadata:
     service: reviews
 spec:
   ports:
-
     - port: 9080
-
       name: http
   selector:
     app: reviews
@@ -221,15 +207,11 @@ spec:
     spec:
       serviceAccountName: bookinfo-reviews
       containers:
-
         - name: reviews
-
           image: docker.io/istio/examples-bookinfo-reviews-v1:1.15.0
           imagePullPolicy: IfNotPresent
           ports:
-
             - containerPort: 9080
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -252,15 +234,11 @@ spec:
     spec:
       serviceAccountName: bookinfo-reviews
       containers:
-
         - name: reviews
-
           image: docker.io/istio/examples-bookinfo-reviews-v2:1.15.0
           imagePullPolicy: IfNotPresent
           ports:
-
             - containerPort: 9080
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -283,15 +261,11 @@ spec:
     spec:
       serviceAccountName: bookinfo-reviews
       containers:
-
         - name: reviews
-
           image: docker.io/istio/examples-bookinfo-reviews-v3:1.15.0
           imagePullPolicy: IfNotPresent
           ports:
-
             - containerPort: 9080
-
 ---
 ##################################################################################################
 # Productpage services
@@ -305,9 +279,7 @@ metadata:
     service: productpage
 spec:
   ports:
-
     - port: 9080
-
       name: http
   selector:
     app: productpage
@@ -338,18 +310,13 @@ spec:
     spec:
       serviceAccountName: bookinfo-productpage
       containers:
-
         - name: productpage
-
           image: docker.io/istio/examples-bookinfo-productpage-v1:1.15.0
           imagePullPolicy: IfNotPresent
           ports:
-
             - containerPort: 9080
-
 ---
 
 ```
 
-### [Next: Set up the Istio Gateway](/docs/cluster-admin/tools/istio/setup/gateway)
-
+### [下一步：设置 Istio 网关](/docs/cluster-admin/tools/istio/setup/gateway/_index)

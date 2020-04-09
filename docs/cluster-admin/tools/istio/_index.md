@@ -1,84 +1,83 @@
 ---
-title: 介绍
+title: 功能介绍
 ---
 
-_Available as of v2.3.0_
+_从 v2.3.0 版本开始支持_
 
-[Istio](https://istio.io/) is an open-source tool that makes it easier for DevOps teams to observe, control, troubleshoot, and secure the traffic within a complex network of microservices.
+[Istio](https://istio.io/) 是一种开源工具，可使 DevOps 团队更轻松地观察，控制，故障排除和保护复杂的微服务网络中的流量。
 
-As a network of microservices changes and grows, the interactions between them can become more difficult to manage and understand. In such a situation, it is useful to have a service mesh as a separate infrastructure layer. Istio's service mesh lets you manipulate traffic between microservices without changing the microservices directly.
+随着微服务网络的变化和增长，它们之间的交互会变得更加难以管理和理解。在这种情况下，将服务网格作为单独的基础结构层很有用。Istio 的服务网格使您可以操纵微服务之间的流量，而无需直接更改微服务。
 
-Our integration of Istio is designed so that a Rancher operator, such as an administrator or cluster owner, can deliver Istio to developers. Then developers can use Istio to enforce security policies, troubleshoot problems, or manage traffic for green/blue deployments, canary deployments, or A/B testing.
+我们与 Istio 的集成旨在使 Rancher 运维（例如管理员或集群所有者）可以将 Istio 交付给开发人员。然后，开发人员可以使用 Istio 实施安全策略，解决问题或管理绿色/蓝色部署，金丝雀部署或 A / B 测试的流量。
 
-This service mesh provides features that include but are not limited to the following:
+服务网格提供的功能包括但不限于以下功能：
 
-* Traffic management features
-* Enhanced monitoring and tracing
-* Service discovery and routing
-* Secure connections and service-to-service authentication with mutual TLS
-* Load balancing
-* Automatic retries, backoff, and circuit breaking
+- 流量管理功能
+- 增强的监视和跟踪
+- 服务发现和路由
+- 使用双向 TLS 的安全连接和服务到服务的身份验证
+- 负载均衡
+- 自动重试，退避和断路
 
-After Istio is enabled in a cluster, you can leverage Istio's control plane functionality with `kubectl` .
+在集群中启用 Istio 之后，您可以通过 `kubectl` 来使用 Istio 的控制平面功能。
 
-Rancher's Istio integration comes with comprehensive visualization aids:
+Rancher 的 Istio 集成附带了全面的可视化辅助工具：
 
-* **Trace the root cause of errors with Jaeger.** [Jaeger](https://www.jaegertracing.io/) is an open-source tool that provides a UI for a distributed tracing system, which is useful for root cause analysis and for determining what causes poor performance. Distributed tracing allows you to view an entire chain of calls, which might originate with a user request and traverse dozens of microservices.
-* **Get the full picture of your microservice architecture with Kiali.** [Kiali](https://www.kiali.io/) provides a diagram that shows the services within a service mesh and how they are connected, including the traffic rates and latencies between them. You can check the health of the service mesh, or drill down to see the incoming and outgoing requests to a single component.
-* **Gain insights from time series analytics with Grafana dashboards.** [Grafana](https://grafana.com/) is an analytics platform that allows you to query, visualize, alert on and understand the data gathered by Prometheus.
-* **Write custom queries for time series data with the Prometheus UI.** [Prometheus](https://prometheus.io/) is a systems monitoring and alerting toolkit. Prometheus scrapes data from your cluster, which is then used by Grafana. A Prometheus UI is also integrated into Rancher, and lets you write custom queries for time series data and see the results in the UI.
+- **使用 Jaeger 跟踪错误的根本原因。** [Jaeger](https://www.jaegertracing.io/) 是一个开放源代码工具，它为分布式跟踪系统提供 UI，这对于根本原因分析和确定导致性能下降的原因很有用。分布式跟踪使您可以查看整个调用链，这些调用可能源于用户请求并遍历数十个微服务。
+- **使用 Kiali 全面了解您的微服务架构。** [Kiali](https://www.kiali.io/) 提供了一个图表，显示了服务网格中的服务及其连接方式，包括流量速率和它们之间的延迟。您可以检查服务网格的运行状况，或深入查看单个组件的传入和传出请求。
+- **使用 Grafana 仪表板从时间序列分析中获得见解。** [Grafana](https://grafana.com/) 是一个分析平台，可让您查询，可视化，警告和了解 Prometheus 收集的数据。
+- **使用 Prometheus UI 编写时间序列数据的自定义查询。** [Prometheus](https://prometheus.io/) 是系统监视和警报工具包。Prometheus 会从您的集群中抓取数据，然后由 Grafana 使用。Prometheus UI 也集成到 Rancher 中，使您可以编写时间序列数据的自定义查询并在 UI 中查看结果。
 
-## Prerequisites
+## 先决条件
 
-Before enabling Istio, we recommend that you confirm that your Rancher worker nodes have enough [CPU and memory](/docs/cluster-admin/tools/istio/resources) to run all of the components of Istio.
+在启用 Istio 之前，我们建议您确认 Rancher worker 节点具有足够的 [CPU 和内存](/docs/cluster-admin/tools/istio/resources/_index)以运行 Istio 的所有组件。
 
-## Setup Guide
+## 设定指南
 
-Refer to the [setup guide](/docs/cluster-admin/tools/istio/setup) for instructions on how to set up Istio and use it in a project.
+有关如何设置 Istio 并将其在项目中使用的说明，请参考[设定指南](/docs/cluster-admin/tools/istio/setup/_index)。
 
-## Disabling Istio
+## 禁用 Istio
 
-To remove Istio components from a cluster, namespace, or workload, refer to the section on [disabling Istio.](/docs/cluster-admin/tools/istio/disabling-istio)
+要从集群，命名空间或工作负载中删除 Istio 组件，请参阅[禁用 Istio](/docs/cluster-admin/tools/istio/disabling-istio/_index)。
 
-## Accessing Visualizations
+## 访问可视化
 
-> By default, only cluster owners have access to Jaeger and Kiali. For instructions on how to allow project members to access them, refer to [Access to Visualizations.](/docs/cluster-admin/tools/istio/rbac/#access-to-visualizations)
+> 默认情况下，只有集群所有者才能访问 Jaeger 和 Kiali。关于如何允许项目成员访问它们的说明，请参阅[访问可视化](/docs/cluster-admin/tools/istio/rbac/_index)。
 
-After Istio is set up in a cluster, Grafana, Prometheus, Jaeger, and Kiali are available in the Rancher UI.
+在集群中设置 Istio 之后，Rancher UI 中将提供 Grafana，Prometheus，Jaeger 和 Kiali 访问。
 
-Your access to the visualizations depend on your role. Grafana and Prometheus are only available for cluster owners. The Kiali and Jaeger UIs are available only to cluster owners by default, but cluster owners can allow project members to access them by editing the Istio settings. When you go to your project and click **Resources > Istio, ** you can go to each UI for Kiali, Jaeger, Grafana, and Prometheus by clicking their icons in the top right corner of the page.
+您对可视化的访问取决于您的角色。Grafana 和 Prometheus 仅适用于集群所有者。默认情况下，Kiali 和 Jaeger UI 仅对集群所有者可用，但是集群所有者可以通过编辑 Istio 设置来允许项目成员访问它们。当您转到项目并单击**资源> Istio**时，您可以通过单击页面右上角的图标来转到 Kiali，Jaeger，Grafana 和 Prometheus 各自的 UI。
 
-To see the visualizations, go to the cluster where Istio is set up and click **Tools > Istio.** You should see links to each UI at the top of the page.
+要查看可视化效果，请转到设置 Istio 的集群，然后单击**工具 > Istio**。您能在页面顶部看到每个 UI 的链接。
 
-You can also get to the visualization tools from the project view.
+您还可以从项目视图访问可视化工具。
 
-## Viewing the Kiali Traffic Graph
+## 查看 Kiali 流量图
 
-1. From the project view in Rancher, click **Resources > Istio.**
-1. If you are a cluster owner, you can go to the **Traffic Graph** tab. This tab has the Kiali network visualization integrated into the UI.
+1. 在 Rancher 的项目视图中，单击**资源 > Istio**。
+1. 如果您是集群所有者，则可以转到**流量图**标签页。该标签页将 Kiali 网络可视化集成到 UI 中。
 
-## Viewing Traffic Metrics
+## 查看流量指标
 
-Istio’s monitoring features provide visibility into the performance of all your services.
+Istio 的监控功能使您可以查看所有服务的性能。
 
-1. From the project view in Rancher, click **Resources > Istio.**
-1. Go to the **Traffic Metrics** tab. After traffic is generated in your cluster, you should be able to see metrics for **Success Rate, Request Volume, 4xx Response Count, Project 5xx Response Count** and **Request Duration.** Cluster owners can see all of the metrics, while project members can see a subset of the metrics.
+1. 在 Rancher 中的项目视图中，单击**资源 > Istio**。
+1. 转到**流量指标**标签。在集群中生成流量之后，您应该能够看到**成功率，请求量，4xx 响应计数，项目 5xx 响应计数**和**请求持续时间**的指标。集群所有者可以查看所有指标 ，而项目成员可以查看指标的一部分。
 
-## Architecture
+## 架构
 
-Istio installs a service mesh that uses [Envoy](https://www.envoyproxy.io/learn/service-mesh) sidecar proxies to intercept traffic to each workload. These sidecars intercept and manage service-to-service communication, allowing fine-grained observation and control over traffic within the cluster.
+Istio 安装了一个服务网格，该网格使用 [Envoy](https://www.envoyproxy.io/learn/service-mesh) sidecar 代理来拦截到每个工作负载的流量。这些 sidecar 拦截并管理服务到服务的通信，从而可以对集群内的流量进行细粒度的观察和控制。
 
-Only workloads that have the Istio sidecar injected can be tracked and controlled by Istio.
+Istio 只能跟踪和控制已注入 Istio sidecar 的工作负载。
 
-Enabling Istio in Rancher enables monitoring in the cluster, and enables Istio in all new namespaces that are created in a cluster. You need to manually enable Istio in preexisting namespaces.
+在 Rancher 中启用 Istio 将启用集群监控，并在集群中创建的所有新命名空间中启用 Istio。您需要在预先存在的命名空间中手动启用 Istio。
 
-When a namespace has Istio enabled, new workloads deployed in the namespace will automatically have the Istio sidecar. You need to manually enable Istio in preexisting workloads.
+当命名空间启用 Istio 时，在命名空间中部署的新工作负载将自动具有 Istio sidecar。您需要在预先存在的工作负载中手动启用 Istio。
 
-For more information on the Istio sidecar, refer to the [Istio docs](https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/).
+有关 Istio sidecar 的更多信息，请参阅 [Istio 文档](https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/)。
 
-#### Two Ingresses
+#### 两个入口
 
-By default, each Rancher-provisioned cluster has one NGINX ingress controller allowing traffic into the cluster. To allow Istio to receive external traffic, you need to enable the Istio ingress gateway for the cluster. The result is that your cluster will have two ingresses.
+默认情况下，每个 Rancher 配置的集群都有一个 NGINX ingress 控制器，允许流量进入集群。要允许 Istio 接收外部流量，您需要为集群启用 Istio ingress 网关。结果是您的集群将有两个入口。
 
-![In an Istio-enabled cluster, you can have two ingresses: the default Nginx ingress, and the default Istio controller.](/img/rancher/istio-ingress.svg)
-
+![在启用Istio的集群中，您可以有两个入口：默认的Nginx ingress控制器和默认的Istio控制器。](/img/rancher/istio-ingress.svg)

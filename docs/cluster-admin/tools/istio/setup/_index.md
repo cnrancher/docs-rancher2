@@ -1,28 +1,27 @@
 ---
-title: 介绍
+title: 使用说明
 ---
 
-This section describes how to enable Istio and start using it in your projects.
+本节介绍如何启用 Istio 并开始在项目中使用它。
 
-This section assumes that you have Rancher installed, and you have a Rancher-provisioned Kubernetes cluster where you would like to set up Istio.
+本节假定您已安装 Rancher，并且您有一个要设置 Istio 的 Rancher 创建的 Kubernetes 集群。
 
-If you use Istio for traffic management, you will need to allow external traffic to the cluster. In that case, you will need to follow all of the steps below.
+如果使用 Istio 进行流量管理，则需要允许外部流量进入集群。在这种情况下，您将需要执行以下所有步骤。
 
-> **Quick Setup** If you don't need external traffic to reach Istio, and you just want to set up Istio for monitoring and tracing traffic within the cluster, skip the steps for [setting up the Istio gateway](/docs/cluster-admin/tools/istio/setup/gateway) and [setting up Istio's components for traffic management.](/docs/cluster-admin/tools/istio/setup/set-up-traffic-management)
+> **快速设置** 如果不需要外部流量到达 Istio，而只想设置 Istio 来监控和跟踪集群中的流量，请跳过[设置 Istio 网关](/docs/cluster-admin/tools/istio/setup/gateway/_index)和[设置 Istio 流量管理组件](/docs/cluster-admin/tools/istio/setup/set-up-traffic-management/_index)的步骤。
 
-1. [Enable Istio in the cluster.](/docs/cluster-admin/tools/istio/setup/enable-istio-in-cluster)
-1. [Enable Istio in all the namespaces where you want to use it.](/docs/cluster-admin/tools/istio/setup/enable-istio-in-namespace)
-1. [Select the nodes where the main Istio components will be deployed.](/docs/cluster-admin/tools/istio/setup/node-selectors)
-1. [Add deployments and services that have the Istio sidecar injected.](/docs/cluster-admin/tools/istio/setup/deploy-workloads)
-1. [Set up the Istio gateway. ](/docs/cluster-admin/tools/istio/setup/gateway)
-1. [Set up Istio's components for traffic management.](/docs/cluster-admin/tools/istio/setup/set-up-traffic-management)
-1. [Generate traffic and see Istio in action.](#generate-traffic-and-see-istio-in-action)
+1. [在集群中启用 Istio](/docs/cluster-admin/tools/istio/setup/enable-istio-in-cluster/_index)。
+1. [在所有要使用 Istio 的命名空间中启用它](/docs/cluster-admin/tools/istio/setup/enable-istio-in-namespace/_index)。
+1. [选择部署主要 Istio 组件的节点](/docs/cluster-admin/tools/istio/setup/node-selectors/_index)。
+1. [添加有 Istio sidecar 注入的部署和服务](/docs/cluster-admin/tools/istio/setup/deploy-workloads/_index)。
+1. [设置 Istio 网关](/docs/cluster-admin/tools/istio/setup/gateway/_index)。
+1. [设置 Istio 的流量管理组件](/docs/cluster-admin/tools/istio/setup/set-up-traffic-management/_index)。
+1. [产生流量并在实际操作中查看 Istio](/docs/cluster-admin/tools/istio/setup/view-traffic/_index)。
 
-## Prerequisites
+## 先决条件
 
-This guide assumes you have already [installed Rancher, ](/docs/installation) and you have already [provisioned a separate Kubernetes cluster](/docs/cluster-provisioning) on which you will install Istio.
+本指南假定您已经[安装 Rancher](/docs/installation/_index)并且已经[创建一个单独的 Kubernetes 集群](/docs/cluster-provisioning/_index)。指南步骤将在该集群安装 Istio。
 
-The nodes in your cluster must meet the [CPU and memory requirements.](/docs/cluster-admin/tools/istio/resources/)
+集群中的节点必须满足[CPU 和内存要求](/docs/cluster-admin/tools/istio/resources/_index)。
 
-The workloads and services that you want to be controlled by Istio must meet [Istio's requirements.](https://istio.io/docs/setup/additional-setup/requirements/)
-
+您希望由 Istio 控制的工作负载和服务必须满足[Istio 的要求](https://istio.io/docs/setup/additional-setup/requirements/)。
