@@ -1,374 +1,359 @@
 ---
-title: 相关表达式
+title: 表达式参考
 ---
 
-### In This Document
+## 集群指标
 
-<!-- TOC -->
+- **CPU利用率**
 
-- [Cluster Metrics](#cluster-metrics)
-    + [Node Metrics](#node-metrics)
-- [Etcd Metrics](#etcd-metrics)
-- [Kubernetes Components Metrics](#kubernetes-components-metrics)
-- [Rancher Logging Metrics](#rancher-logging-metrics)
-- [Workload Metrics](#workload-metrics)
-    + [Pod Metrics](#pod-metrics)
-    + [Container Metrics](#container-metrics)
-
-<!-- /TOC -->
-
-### Cluster Metrics
-
-- **CPU Utilization**
-
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | `1 - (avg(irate(node_cpu_seconds_total{mode="idle"}[5m])) by (instance))` |
-    | Summary | `1 - (avg(irate(node_cpu_seconds_total{mode="idle"}[5m])))` |
+    | 详情 | `1 - (avg(irate(node_cpu_seconds_total{mode="idle"}[5m])) by (instance))` |
+    | 汇总 | `1 - (avg(irate(node_cpu_seconds_total{mode="idle"}[5m])))` |
 
-- **Load Average**
+- **平均负载**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | <table><tr><td>load1</td><td>`sum(node_load1) by (instance) / count(node_cpu_seconds_total{mode="system"}) by (instance)`</td></tr><tr><td>load5</td><td>`sum(node_load5) by (instance) / count(node_cpu_seconds_total{mode="system"}) by (instance)`</td></tr><tr><td>load15</td><td>`sum(node_load15) by (instance) / count(node_cpu_seconds_total{mode="system"}) by (instance)`</td></tr></table> |
-    | Summary | <table><tr><td>load1</td><td>`sum(node_load1) by (instance) / count(node_cpu_seconds_total{mode="system"})`</td></tr><tr><td>load5</td><td>`sum(node_load5) by (instance) / count(node_cpu_seconds_total{mode="system"})`</td></tr><tr><td>load15</td><td>`sum(node_load15) by (instance) / count(node_cpu_seconds_total{mode="system"})`</td></tr></table> |
+    | 详情 | <table><tr><td>load1</td><td>`sum(node_load1) by (instance) / count(node_cpu_seconds_total{mode="system"}) by (instance)`</td></tr><tr><td>load5</td><td>`sum(node_load5) by (instance) / count(node_cpu_seconds_total{mode="system"}) by (instance)`</td></tr><tr><td>load15</td><td>`sum(node_load15) by (instance) / count(node_cpu_seconds_total{mode="system"}) by (instance)`</td></tr></table> |
+    | 汇总 | <table><tr><td>load1</td><td>`sum(node_load1) by (instance) / count(node_cpu_seconds_total{mode="system"})`</td></tr><tr><td>load5</td><td>`sum(node_load5) by (instance) / count(node_cpu_seconds_total{mode="system"})`</td></tr><tr><td>load15</td><td>`sum(node_load15) by (instance) / count(node_cpu_seconds_total{mode="system"})`</td></tr></table> |
 
-- **Memory Utilization**
+- **内存利用率**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | `1 - sum(node_memory_MemAvailable_bytes) by (instance) / sum(node_memory_MemTotal_bytes) by (instance)` |
-    | Summary | `1 - sum(node_memory_MemAvailable_bytes) / sum(node_memory_MemTotal_bytes)` |
+    | 详情 | `1 - sum(node_memory_MemAvailable_bytes) by (instance) / sum(node_memory_MemTotal_bytes) by (instance)` |
+    | 汇总 | `1 - sum(node_memory_MemAvailable_bytes) / sum(node_memory_MemTotal_bytes)` |
 
-- **Disk Utilization**
+- **磁盘利用率**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | `(sum(node_filesystem_size_bytes{device!="rootfs"}) by (instance) - sum(node_filesystem_free_bytes{device!="rootfs"}) by (instance)) / sum(node_filesystem_size_bytes{device!="rootfs"}) by (instance)` |
-    | Summary | `(sum(node_filesystem_size_bytes{device!="rootfs"}) - sum(node_filesystem_free_bytes{device!="rootfs"})) / sum(node_filesystem_size_bytes{device!="rootfs"})` |
+    | 详情 | `(sum(node_filesystem_size_bytes{device!="rootfs"}) by (instance) - sum(node_filesystem_free_bytes{device!="rootfs"}) by (instance)) / sum(node_filesystem_size_bytes{device!="rootfs"}) by (instance)` |
+    | 汇总 | `(sum(node_filesystem_size_bytes{device!="rootfs"}) - sum(node_filesystem_free_bytes{device!="rootfs"})) / sum(node_filesystem_size_bytes{device!="rootfs"})` |
 
-- **Disk I/O**
+- **磁盘 I/O**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | <table><tr><td>read</td><td>`sum(rate(node_disk_read_bytes_total[5m])) by (instance)`</td></tr><tr><td>written</td><td>`sum(rate(node_disk_written_bytes_total[5m])) by (instance)`</td></tr></table> |
-    | Summary | <table><tr><td>read</td><td>`sum(rate(node_disk_read_bytes_total[5m]))`</td></tr><tr><td>written</td><td>`sum(rate(node_disk_written_bytes_total[5m]))`</td></tr></table> |
+    | 详情 | <table><tr><td>read</td><td>`sum(rate(node_disk_read_bytes_total[5m])) by (instance)`</td></tr><tr><td>written</td><td>`sum(rate(node_disk_written_bytes_total[5m])) by (instance)`</td></tr></table> |
+    | 汇总 | <table><tr><td>read</td><td>`sum(rate(node_disk_read_bytes_total[5m]))`</td></tr><tr><td>written</td><td>`sum(rate(node_disk_written_bytes_total[5m]))`</td></tr></table> |
 
-- **Network Packets**
+- **网络收发包**
 
-| Catalog | Expression                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| 分类 | 表达式                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 |---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Detail  | <table><tr><td>receive-dropped</td><td>`sum(rate(node_network_receive_drop_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m])) by (instance)`</td></tr><tr><td>receive-errs</td><td>`sum(rate(node_network_receive_errs_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m])) by (instance)` </td></tr><tr><td>receive-packets</td><td> `sum(rate(node_network_receive_packets_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m])) by (instance)` </td></tr><tr><td>transmit-dropped</td><td> `sum(rate(node_network_transmit_drop_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m])) by (instance)` </td></tr><tr><td>transmit-errs</td><td> `sum(rate(node_network_transmit_errs_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m])) by (instance)` </td></tr><tr><td>transmit-packets</td><td> `sum(rate(node_network_transmit_packets_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m])) by (instance)` </td></tr></table> |
-| Summary | <table><tr><td>receive-dropped</td><td>`sum(rate(node_network_receive_drop_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m]))` </td></tr><tr><td>receive-errs</td><td> `sum(rate(node_network_receive_errs_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m]))` </td></tr><tr><td>receive-packets</td><td> `sum(rate(node_network_receive_packets_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m]))` </td></tr><tr><td>transmit-dropped</td><td> `sum(rate(node_network_transmit_drop_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m]))` </td></tr><tr><td>transmit-errs</td><td> `sum(rate(node_network_transmit_errs_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m]))` </td></tr><tr><td>transmit-packets</td><td> `sum(rate(node_network_transmit_packets_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m]))` </td></tr></table>                                                                                     |
+| 详情  | <table><tr><td>receive-dropped</td><td>`sum(rate(node_network_receive_drop_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m])) by (instance)`</td></tr><tr><td>receive-errs</td><td>`sum(rate(node_network_receive_errs_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m])) by (instance)` </td></tr><tr><td>receive-packets</td><td> `sum(rate(node_network_receive_packets_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m])) by (instance)` </td></tr><tr><td>transmit-dropped</td><td> `sum(rate(node_network_transmit_drop_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m])) by (instance)` </td></tr><tr><td>transmit-errs</td><td> `sum(rate(node_network_transmit_errs_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m])) by (instance)` </td></tr><tr><td>transmit-packets</td><td> `sum(rate(node_network_transmit_packets_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m])) by (instance)` </td></tr></table> |
+| 汇总 | <table><tr><td>receive-dropped</td><td>`sum(rate(node_network_receive_drop_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m]))` </td></tr><tr><td>receive-errs</td><td> `sum(rate(node_network_receive_errs_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m]))` </td></tr><tr><td>receive-packets</td><td> `sum(rate(node_network_receive_packets_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m]))` </td></tr><tr><td>transmit-dropped</td><td> `sum(rate(node_network_transmit_drop_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m]))` </td></tr><tr><td>transmit-errs</td><td> `sum(rate(node_network_transmit_errs_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m]))` </td></tr><tr><td>transmit-packets</td><td> `sum(rate(node_network_transmit_packets_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m]))` </td></tr></table>                                                                                     |
 
-* **Network I/O**
+* **网络 I/O**
 
-| Catalog | Expression                                                                                                                                                                                                                                                                                                                                                                                                                |
+| 分类 | 表达式                                                                                                                                                                                                                                                                                                                                                                                                                |
 |---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Detail  | <table><tr><td>receive</td><td> `sum(rate(node_network_receive_bytes_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m])) by (instance)` </td></tr><tr><td>transmit</td><td> `sum(rate(node_network_transmit_bytes_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m])) by (instance)` </td></tr></table> |
-| Summary | <table><tr><td>receive</td><td> `sum(rate(node_network_receive_bytes_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m]))` </td></tr><tr><td>transmit</td><td> `sum(rate(node_network_transmit_bytes_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m]))` </td></tr></table>                             |
+| 详情  | <table><tr><td>receive</td><td> `sum(rate(node_network_receive_bytes_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m])) by (instance)` </td></tr><tr><td>transmit</td><td> `sum(rate(node_network_transmit_bytes_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m])) by (instance)` </td></tr></table> |
+| 汇总 | <table><tr><td>receive</td><td> `sum(rate(node_network_receive_bytes_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m]))` </td></tr><tr><td>transmit</td><td> `sum(rate(node_network_transmit_bytes_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*"}[5m]))` </td></tr></table>                             |
 
-#### Node Metrics
+## 节点指标
 
-- **CPU Utilization**
+- **CPU利用率**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | `avg(irate(node_cpu_seconds_total{mode!="idle", instance=~"$instance"}[5m])) by (mode)` |
-    | Summary | `1 - (avg(irate(node_cpu_seconds_total{mode="idle", instance=~"$instance"}[5m])))` |
+    | 详情 | `avg(irate(node_cpu_seconds_total{mode!="idle", instance=~"$instance"}[5m])) by (mode)` |
+    | 汇总 | `1 - (avg(irate(node_cpu_seconds_total{mode="idle", instance=~"$instance"}[5m])))` |
 
-- **Load Average**
+- **平均负载**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | <table><tr><td>load1</td><td>`sum(node_load1{instance=~"$instance"}) / count(node_cpu_seconds_total{mode="system",instance=~"$instance"})`</td></tr><tr><td>load5</td><td>`sum(node_load5{instance=~"$instance"}) / count(node_cpu_seconds_total{mode="system",instance=~"$instance"})`</td></tr><tr><td>load15</td><td>`sum(node_load15{instance=~"$instance"}) / count(node_cpu_seconds_total{mode="system",instance=~"$instance"})`</td></tr></table> |
-    | Summary | <table><tr><td>load1</td><td>`sum(node_load1{instance=~"$instance"}) / count(node_cpu_seconds_total{mode="system",instance=~"$instance"})`</td></tr><tr><td>load5</td><td>`sum(node_load5{instance=~"$instance"}) / count(node_cpu_seconds_total{mode="system",instance=~"$instance"})`</td></tr><tr><td>load15</td><td>`sum(node_load15{instance=~"$instance"}) / count(node_cpu_seconds_total{mode="system",instance=~"$instance"})`</td></tr></table> |
+    | 详情 | <table><tr><td>load1</td><td>`sum(node_load1{instance=~"$instance"}) / count(node_cpu_seconds_total{mode="system",instance=~"$instance"})`</td></tr><tr><td>load5</td><td>`sum(node_load5{instance=~"$instance"}) / count(node_cpu_seconds_total{mode="system",instance=~"$instance"})`</td></tr><tr><td>load15</td><td>`sum(node_load15{instance=~"$instance"}) / count(node_cpu_seconds_total{mode="system",instance=~"$instance"})`</td></tr></table> |
+    | 汇总 | <table><tr><td>load1</td><td>`sum(node_load1{instance=~"$instance"}) / count(node_cpu_seconds_total{mode="system",instance=~"$instance"})`</td></tr><tr><td>load5</td><td>`sum(node_load5{instance=~"$instance"}) / count(node_cpu_seconds_total{mode="system",instance=~"$instance"})`</td></tr><tr><td>load15</td><td>`sum(node_load15{instance=~"$instance"}) / count(node_cpu_seconds_total{mode="system",instance=~"$instance"})`</td></tr></table> |
 
-- **Memory Utilization**
+- **内存负载**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | `1 - sum(node_memory_MemAvailable_bytes{instance=~"$instance"}) / sum(node_memory_MemTotal_bytes{instance=~"$instance"})` |
-    | Summary | `1 - sum(node_memory_MemAvailable_bytes{instance=~"$instance"}) / sum(node_memory_MemTotal_bytes{instance=~"$instance"}) ` |
+    | 详情 | `1 - sum(node_memory_MemAvailable_bytes{instance=~"$instance"}) / sum(node_memory_MemTotal_bytes{instance=~"$instance"})` |
+    | 汇总 | `1 - sum(node_memory_MemAvailable_bytes{instance=~"$instance"}) / sum(node_memory_MemTotal_bytes{instance=~"$instance"}) ` |
 
-- **Disk Utilization**
+- **磁盘负载**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | `(sum(node_filesystem_size_bytes{device!="rootfs",instance=~"$instance"}) by (device) - sum(node_filesystem_free_bytes{device!="rootfs",instance=~"$instance"}) by (device)) / sum(node_filesystem_size_bytes{device!="rootfs",instance=~"$instance"}) by (device)` |
-    | Summary | `(sum(node_filesystem_size_bytes{device!="rootfs",instance=~"$instance"}) - sum(node_filesystem_free_bytes{device!="rootfs",instance=~"$instance"})) / sum(node_filesystem_size_bytes{device!="rootfs",instance=~"$instance"})` |
+    | 详情 | `(sum(node_filesystem_size_bytes{device!="rootfs",instance=~"$instance"}) by (device) - sum(node_filesystem_free_bytes{device!="rootfs",instance=~"$instance"}) by (device)) / sum(node_filesystem_size_bytes{device!="rootfs",instance=~"$instance"}) by (device)` |
+    | 汇总 | `(sum(node_filesystem_size_bytes{device!="rootfs",instance=~"$instance"}) - sum(node_filesystem_free_bytes{device!="rootfs",instance=~"$instance"})) / sum(node_filesystem_size_bytes{device!="rootfs",instance=~"$instance"})` |
 
-- **Disk I/O**
+- **磁盘 I/O**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | <table><tr><td>read</td><td>`sum(rate(node_disk_read_bytes_total{instance=~"$instance"}[5m]))`</td></tr><tr><td>written</td><td>`sum(rate(node_disk_written_bytes_total{instance=~"$instance"}[5m]))`</td></tr></table> |
-    | Summary | <table><tr><td>read</td><td>`sum(rate(node_disk_read_bytes_total{instance=~"$instance"}[5m]))`</td></tr><tr><td>written</td><td>`sum(rate(node_disk_written_bytes_total{instance=~"$instance"}[5m]))`</td></tr></table> |
+    | 详情 | <table><tr><td>read</td><td>`sum(rate(node_disk_read_bytes_total{instance=~"$instance"}[5m]))`</td></tr><tr><td>written</td><td>`sum(rate(node_disk_written_bytes_total{instance=~"$instance"}[5m]))`</td></tr></table> |
+    | 汇总 | <table><tr><td>read</td><td>`sum(rate(node_disk_read_bytes_total{instance=~"$instance"}[5m]))`</td></tr><tr><td>written</td><td>`sum(rate(node_disk_written_bytes_total{instance=~"$instance"}[5m]))`</td></tr></table> |
 
-- **Network Packets**
+- **网络收发包**
 
-| Catalog | Expression                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| 分类 | 表达式                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 |---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Detail  | <table><tr><td>receive-dropped</td><td> `sum(rate(node_network_receive_drop_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m])) by (device)` </td></tr><tr><td>receive-errs</td><td> `sum(rate(node_network_receive_errs_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m])) by (device)` </td></tr><tr><td>receive-packets</td><td> `sum(rate(node_network_receive_packets_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m])) by (device)` </td></tr><tr><td>transmit-dropped</td><td> `sum(rate(node_network_transmit_drop_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m])) by (device)` </td></tr><tr><td>transmit-errs</td><td> `sum(rate(node_network_transmit_errs_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m])) by (device)` </td></tr><tr><td>transmit-packets</td><td> `sum(rate(node_network_transmit_packets_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m])) by (device)` </td></tr></table> |
-| Summary | <table><tr><td>receive-dropped</td><td> `sum(rate(node_network_receive_drop_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m]))` </td></tr><tr><td>receive-errs</td><td> `sum(rate(node_network_receive_errs_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m]))` </td></tr><tr><td>receive-packets</td><td> `sum(rate(node_network_receive_packets_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m]))` </td></tr><tr><td>transmit-dropped</td><td> `sum(rate(node_network_transmit_drop_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m]))` </td></tr><tr><td>transmit-errs</td><td> `sum(rate(node_network_transmit_errs_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m]))` </td></tr><tr><td>transmit-packets</td><td> `sum(rate(node_network_transmit_packets_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m]))` </td></tr></table>                                                                         |
+| 详情  | <table><tr><td>receive-dropped</td><td> `sum(rate(node_network_receive_drop_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m])) by (device)` </td></tr><tr><td>receive-errs</td><td> `sum(rate(node_network_receive_errs_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m])) by (device)` </td></tr><tr><td>receive-packets</td><td> `sum(rate(node_network_receive_packets_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m])) by (device)` </td></tr><tr><td>transmit-dropped</td><td> `sum(rate(node_network_transmit_drop_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m])) by (device)` </td></tr><tr><td>transmit-errs</td><td> `sum(rate(node_network_transmit_errs_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m])) by (device)` </td></tr><tr><td>transmit-packets</td><td> `sum(rate(node_network_transmit_packets_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m])) by (device)` </td></tr></table> |
+| 汇总 | <table><tr><td>receive-dropped</td><td> `sum(rate(node_network_receive_drop_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m]))` </td></tr><tr><td>receive-errs</td><td> `sum(rate(node_network_receive_errs_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m]))` </td></tr><tr><td>receive-packets</td><td> `sum(rate(node_network_receive_packets_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m]))` </td></tr><tr><td>transmit-dropped</td><td> `sum(rate(node_network_transmit_drop_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m]))` </td></tr><tr><td>transmit-errs</td><td> `sum(rate(node_network_transmit_errs_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m]))` </td></tr><tr><td>transmit-packets</td><td> `sum(rate(node_network_transmit_packets_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m]))` </td></tr></table>                                                                         |
 
-* **Network I/O**
+**网络 I/O**
 
-| Catalog | Expression                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| 分类 | 表达式                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 |---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Detail  | <table><tr><td>receive</td><td> `sum(rate(node_network_receive_bytes_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m])) by (device)` </td></tr><tr><td>transmit</td><td> `sum(rate(node_network_transmit_bytes_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m])) by (device)` </td></tr></table> |
-| Summary | <table><tr><td>receive</td><td> `sum(rate(node_network_receive_bytes_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m]))` </td></tr><tr><td>transmit</td><td> `sum(rate(node_network_transmit_bytes_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m]))` </td></tr></table>                         |
+| 详情  | <table><tr><td>receive</td><td> `sum(rate(node_network_receive_bytes_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m])) by (device)` </td></tr><tr><td>transmit</td><td> `sum(rate(node_network_transmit_bytes_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m])) by (device)` </td></tr></table> |
+| 汇总 | <table><tr><td>receive</td><td> `sum(rate(node_network_receive_bytes_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m]))` </td></tr><tr><td>transmit</td><td> `sum(rate(node_network_transmit_bytes_total{device!~"lo \| veth.* \| docker.* \| flannel.* \| cali.* \| cbr.*",instance=~"$instance"}[5m]))` </td></tr></table>                         |
 
-### Etcd Metrics
+## Etcd 指标
 
-- **Etcd has a leader**
+- **Etcd 有领导者**
 
     `max(etcd_server_has_leader)`
 
-- **Number of leader changes**
+- **领导者变更次数**
 
     `max(etcd_server_leader_changes_seen_total)`
 
-- **Number of failed proposals**
+- **选举提议失败次数**
 
     `sum(etcd_server_proposals_failed_total)`
 
-- **GRPC Client Traffic**
+- **GRPC 客户端流速**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | <table><tr><td>in</td><td>`sum(rate(etcd_network_client_grpc_received_bytes_total[5m])) by (instance)`</td></tr><tr><td>out</td><td>`sum(rate(etcd_network_client_grpc_sent_bytes_total[5m])) by (instance)`</td></tr></table> |
-    | Summary | <table><tr><td>in</td><td>`sum(rate(etcd_network_client_grpc_received_bytes_total[5m]))`</td></tr><tr><td>out</td><td>`sum(rate(etcd_network_client_grpc_sent_bytes_total[5m]))`</td></tr></table> |
+    | 详情 | <table><tr><td>in</td><td>`sum(rate(etcd_network_client_grpc_received_bytes_total[5m])) by (instance)`</td></tr><tr><td>out</td><td>`sum(rate(etcd_network_client_grpc_sent_bytes_total[5m])) by (instance)`</td></tr></table> |
+    | 汇总 | <table><tr><td>in</td><td>`sum(rate(etcd_network_client_grpc_received_bytes_total[5m]))`</td></tr><tr><td>out</td><td>`sum(rate(etcd_network_client_grpc_sent_bytes_total[5m]))`</td></tr></table> |
 
-- **Peer Traffic**
+- **Peer 流速**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | <table><tr><td>in</td><td>`sum(rate(etcd_network_peer_received_bytes_total[5m])) by (instance)`</td></tr><tr><td>out</td><td>`sum(rate(etcd_network_peer_sent_bytes_total[5m])) by (instance)`</td></tr></table> |
-    | Summary | <table><tr><td>in</td><td>`sum(rate(etcd_network_peer_received_bytes_total[5m]))`</td></tr><tr><td>out</td><td>`sum(rate(etcd_network_peer_sent_bytes_total[5m]))`</td></tr></table> |
+    | 详情 | <table><tr><td>in</td><td>`sum(rate(etcd_network_peer_received_bytes_total[5m])) by (instance)`</td></tr><tr><td>out</td><td>`sum(rate(etcd_network_peer_sent_bytes_total[5m])) by (instance)`</td></tr></table> |
+    | 汇总 | <table><tr><td>in</td><td>`sum(rate(etcd_network_peer_received_bytes_total[5m]))`</td></tr><tr><td>out</td><td>`sum(rate(etcd_network_peer_sent_bytes_total[5m]))`</td></tr></table> |
 
-- **DB Size**
+- **数据库大小**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | `sum(etcd_debugging_mvcc_db_total_size_in_bytes) by (instance)` |
-    | Summary | `sum(etcd_debugging_mvcc_db_total_size_in_bytes)` |
+    | 详情 | `sum(etcd_debugging_mvcc_db_total_size_in_bytes) by (instance)` |
+    | 汇总 | `sum(etcd_debugging_mvcc_db_total_size_in_bytes)` |
 
-- **Active Streams**
+- **活跃连接**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | <table><tr><td>lease-watch</td><td>`sum(grpc_server_started_total{grpc_service="etcdserverpb.Lease",grpc_type="bidi_stream"}) by (instance) - sum(grpc_server_handled_total{grpc_service="etcdserverpb.Lease",grpc_type="bidi_stream"}) by (instance)`</td></tr><tr><td>watch</td><td>`sum(grpc_server_started_total{grpc_service="etcdserverpb.Watch",grpc_type="bidi_stream"}) by (instance) - sum(grpc_server_handled_total{grpc_service="etcdserverpb.Watch",grpc_type="bidi_stream"}) by (instance)`</td></tr></table> |
-    | Summary | <table><tr><td>lease-watch</td><td>`sum(grpc_server_started_total{grpc_service="etcdserverpb.Lease",grpc_type="bidi_stream"}) - sum(grpc_server_handled_total{grpc_service="etcdserverpb.Lease",grpc_type="bidi_stream"})`</td></tr><tr><td>watch</td><td>`sum(grpc_server_started_total{grpc_service="etcdserverpb.Watch",grpc_type="bidi_stream"}) - sum(grpc_server_handled_total{grpc_service="etcdserverpb.Watch",grpc_type="bidi_stream"})`</td></tr></table> |
+    | 详情 | <table><tr><td>lease-watch</td><td>`sum(grpc_server_started_total{grpc_service="etcdserverpb.Lease",grpc_type="bidi_stream"}) by (instance) - sum(grpc_server_handled_total{grpc_service="etcdserverpb.Lease",grpc_type="bidi_stream"}) by (instance)`</td></tr><tr><td>watch</td><td>`sum(grpc_server_started_total{grpc_service="etcdserverpb.Watch",grpc_type="bidi_stream"}) by (instance) - sum(grpc_server_handled_total{grpc_service="etcdserverpb.Watch",grpc_type="bidi_stream"}) by (instance)`</td></tr></table> |
+    | 汇总 | <table><tr><td>lease-watch</td><td>`sum(grpc_server_started_total{grpc_service="etcdserverpb.Lease",grpc_type="bidi_stream"}) - sum(grpc_server_handled_total{grpc_service="etcdserverpb.Lease",grpc_type="bidi_stream"})`</td></tr><tr><td>watch</td><td>`sum(grpc_server_started_total{grpc_service="etcdserverpb.Watch",grpc_type="bidi_stream"}) - sum(grpc_server_handled_total{grpc_service="etcdserverpb.Watch",grpc_type="bidi_stream"})`</td></tr></table> |
 
-- **Raft Proposals**
+- **Raft 选举提议**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | <table><tr><td>applied</td><td>`sum(increase(etcd_server_proposals_applied_total[5m])) by (instance)`</td></tr><tr><td>committed</td><td>`sum(increase(etcd_server_proposals_committed_total[5m])) by (instance)`</td></tr><tr><td>pending</td><td>`sum(increase(etcd_server_proposals_pending[5m])) by (instance)`</td></tr><tr><td>failed</td><td>`sum(increase(etcd_server_proposals_failed_total[5m])) by (instance)`</td></tr></table> |
-    | Summary | <table><tr><td>applied</td><td>`sum(increase(etcd_server_proposals_applied_total[5m]))`</td></tr><tr><td>committed</td><td>`sum(increase(etcd_server_proposals_committed_total[5m]))`</td></tr><tr><td>pending</td><td>`sum(increase(etcd_server_proposals_pending[5m]))`</td></tr><tr><td>failed</td><td>`sum(increase(etcd_server_proposals_failed_total[5m]))`</td></tr></table> |
+    | 详情 | <table><tr><td>applied</td><td>`sum(increase(etcd_server_proposals_applied_total[5m])) by (instance)`</td></tr><tr><td>committed</td><td>`sum(increase(etcd_server_proposals_committed_total[5m])) by (instance)`</td></tr><tr><td>pending</td><td>`sum(increase(etcd_server_proposals_pending[5m])) by (instance)`</td></tr><tr><td>failed</td><td>`sum(increase(etcd_server_proposals_failed_total[5m])) by (instance)`</td></tr></table> |
+    | 汇总 | <table><tr><td>applied</td><td>`sum(increase(etcd_server_proposals_applied_total[5m]))`</td></tr><tr><td>committed</td><td>`sum(increase(etcd_server_proposals_committed_total[5m]))`</td></tr><tr><td>pending</td><td>`sum(increase(etcd_server_proposals_pending[5m]))`</td></tr><tr><td>failed</td><td>`sum(increase(etcd_server_proposals_failed_total[5m]))`</td></tr></table> |
 
-- **RPC Rate**
+- **RPC 速率**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | <table><tr><td>total</td><td>`sum(rate(grpc_server_started_total{grpc_type="unary"}[5m])) by (instance)`</td></tr><tr><td>fail</td><td>`sum(rate(grpc_server_handled_total{grpc_type="unary",grpc_code!="OK"}[5m])) by (instance)`</td></tr></table> |
-    | Summary | <table><tr><td>total</td><td>`sum(rate(grpc_server_started_total{grpc_type="unary"}[5m]))`</td></tr><tr><td>fail</td><td>`sum(rate(grpc_server_handled_total{grpc_type="unary",grpc_code!="OK"}[5m]))`</td></tr></table> |
+    | 详情 | <table><tr><td>total</td><td>`sum(rate(grpc_server_started_total{grpc_type="unary"}[5m])) by (instance)`</td></tr><tr><td>fail</td><td>`sum(rate(grpc_server_handled_total{grpc_type="unary",grpc_code!="OK"}[5m])) by (instance)`</td></tr></table> |
+    | 汇总 | <table><tr><td>total</td><td>`sum(rate(grpc_server_started_total{grpc_type="unary"}[5m]))`</td></tr><tr><td>fail</td><td>`sum(rate(grpc_server_handled_total{grpc_type="unary",grpc_code!="OK"}[5m]))`</td></tr></table> |
 
-- **Disk Operations**
+- **磁盘操作**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | <table><tr><td>commit-called-by-backend</td><td>`sum(rate(etcd_disk_backend_commit_duration_seconds_sum[1m])) by (instance)`</td></tr><tr><td>fsync-called-by-wal</td><td>`sum(rate(etcd_disk_wal_fsync_duration_seconds_sum[1m])) by (instance)`</td></tr></table> |
-    | Summary | <table><tr><td>commit-called-by-backend</td><td>`sum(rate(etcd_disk_backend_commit_duration_seconds_sum[1m]))`</td></tr><tr><td>fsync-called-by-wal</td><td>`sum(rate(etcd_disk_wal_fsync_duration_seconds_sum[1m]))`</td></tr></table> |
+    | 详情 | <table><tr><td>commit-called-by-backend</td><td>`sum(rate(etcd_disk_backend_commit_duration_seconds_sum[1m])) by (instance)`</td></tr><tr><td>fsync-called-by-wal</td><td>`sum(rate(etcd_disk_wal_fsync_duration_seconds_sum[1m])) by (instance)`</td></tr></table> |
+    | 汇总 | <table><tr><td>commit-called-by-backend</td><td>`sum(rate(etcd_disk_backend_commit_duration_seconds_sum[1m]))`</td></tr><tr><td>fsync-called-by-wal</td><td>`sum(rate(etcd_disk_wal_fsync_duration_seconds_sum[1m]))`</td></tr></table> |
 
-- **Disk Sync Duration**
+- **磁盘同步持续时间**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | <table><tr><td>wal</td><td>`histogram_quantile(0.99, sum(rate(etcd_disk_wal_fsync_duration_seconds_bucket[5m])) by (instance, le))`</td></tr><tr><td>db</td><td>`histogram_quantile(0.99, sum(rate(etcd_disk_backend_commit_duration_seconds_bucket[5m])) by (instance, le))`</td></tr></table> |
-    | Summary | <table><tr><td>wal</td><td>`sum(histogram_quantile(0.99, sum(rate(etcd_disk_wal_fsync_duration_seconds_bucket[5m])) by (instance, le)))`</td></tr><tr><td>db</td><td>`sum(histogram_quantile(0.99, sum(rate(etcd_disk_backend_commit_duration_seconds_bucket[5m])) by (instance, le)))`</td></tr></table> |
+    | 详情 | <table><tr><td>wal</td><td>`histogram_quantile(0.99, sum(rate(etcd_disk_wal_fsync_duration_seconds_bucket[5m])) by (instance, le))`</td></tr><tr><td>db</td><td>`histogram_quantile(0.99, sum(rate(etcd_disk_backend_commit_duration_seconds_bucket[5m])) by (instance, le))`</td></tr></table> |
+    | 汇总 | <table><tr><td>wal</td><td>`sum(histogram_quantile(0.99, sum(rate(etcd_disk_wal_fsync_duration_seconds_bucket[5m])) by (instance, le)))`</td></tr><tr><td>db</td><td>`sum(histogram_quantile(0.99, sum(rate(etcd_disk_backend_commit_duration_seconds_bucket[5m])) by (instance, le)))`</td></tr></table> |
 
-### Kubernetes Components Metrics
+## Kubernetes 组件指标
 
-- **API Server Request Latency**
+- **API Server请求延迟**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | `avg(apiserver_request_latencies_sum / apiserver_request_latencies_count) by (instance, verb) /1e+06` |
-    | Summary | `avg(apiserver_request_latencies_sum / apiserver_request_latencies_count) by (instance) /1e+06` |
+    | 详情 | `avg(apiserver_request_latencies_sum / apiserver_request_latencies_count) by (instance, verb) /1e+06` |
+    | 汇总 | `avg(apiserver_request_latencies_sum / apiserver_request_latencies_count) by (instance) /1e+06` |
 
-- **API Server Request Rate**
+- **API Server请求速率**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | `sum(rate(apiserver_request_count[5m])) by (instance, code)` |
-    | Summary | `sum(rate(apiserver_request_count[5m])) by (instance)` |
+    | 详情 | `sum(rate(apiserver_request_count[5m])) by (instance, code)` |
+    | 汇总 | `sum(rate(apiserver_request_count[5m])) by (instance)` |
 
-- **Scheduling Failed Pods**
+- **Pods调度失败次数**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | `sum(kube_pod_status_scheduled{condition="false"})` |
-    | Summary | `sum(kube_pod_status_scheduled{condition="false"})` |
+    | 详情 | `sum(kube_pod_status_scheduled{condition="false"})` |
+    | 汇总 | `sum(kube_pod_status_scheduled{condition="false"})` |
 
-- **Controller Manager Queue Depth**
+- **Controller Manager队列长度**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | <table><tr><td>volumes</td><td>`sum(volumes_depth) by instance`</td></tr><tr><td>deployment</td><td>`sum(deployment_depth) by instance`</td></tr><tr><td>replicaset</td><td>`sum(replicaset_depth) by instance`</td></tr><tr><td>service</td><td>`sum(service_depth) by instance`</td></tr><tr><td>serviceaccount</td><td>`sum(serviceaccount_depth) by instance`</td></tr><tr><td>endpoint</td><td>`sum(endpoint_depth) by instance`</td></tr><tr><td>daemonset</td><td>`sum(daemonset_depth) by instance`</td></tr><tr><td>statefulset</td><td>`sum(statefulset_depth) by instance`</td></tr><tr><td>replicationmanager</td><td>`sum(replicationmanager_depth) by instance`</td></tr></table> |
-    | Summary | <table><tr><td>volumes</td><td>`sum(volumes_depth)`</td></tr><tr><td>deployment</td><td>`sum(deployment_depth)`</td></tr><tr><td>replicaset</td><td>`sum(replicaset_depth)`</td></tr><tr><td>service</td><td>`sum(service_depth)`</td></tr><tr><td>serviceaccount</td><td>`sum(serviceaccount_depth)`</td></tr><tr><td>endpoint</td><td>`sum(endpoint_depth)`</td></tr><tr><td>daemonset</td><td>`sum(daemonset_depth)`</td></tr><tr><td>statefulset</td><td>`sum(statefulset_depth)`</td></tr><tr><td>replicationmanager</td><td>`sum(replicationmanager_depth)`</td></tr></table> |
+    | 详情 | <table><tr><td>volumes</td><td>`sum(volumes_depth) by instance`</td></tr><tr><td>deployment</td><td>`sum(deployment_depth) by instance`</td></tr><tr><td>replicaset</td><td>`sum(replicaset_depth) by instance`</td></tr><tr><td>service</td><td>`sum(service_depth) by instance`</td></tr><tr><td>serviceaccount</td><td>`sum(serviceaccount_depth) by instance`</td></tr><tr><td>endpoint</td><td>`sum(endpoint_depth) by instance`</td></tr><tr><td>daemonset</td><td>`sum(daemonset_depth) by instance`</td></tr><tr><td>statefulset</td><td>`sum(statefulset_depth) by instance`</td></tr><tr><td>replicationmanager</td><td>`sum(replicationmanager_depth) by instance`</td></tr></table> |
+    | 汇总 | <table><tr><td>volumes</td><td>`sum(volumes_depth)`</td></tr><tr><td>deployment</td><td>`sum(deployment_depth)`</td></tr><tr><td>replicaset</td><td>`sum(replicaset_depth)`</td></tr><tr><td>service</td><td>`sum(service_depth)`</td></tr><tr><td>serviceaccount</td><td>`sum(serviceaccount_depth)`</td></tr><tr><td>endpoint</td><td>`sum(endpoint_depth)`</td></tr><tr><td>daemonset</td><td>`sum(daemonset_depth)`</td></tr><tr><td>statefulset</td><td>`sum(statefulset_depth)`</td></tr><tr><td>replicationmanager</td><td>`sum(replicationmanager_depth)`</td></tr></table> |
 
-- **Scheduler E2E Scheduling Latency**
+- **Scheduler E2E调度延迟**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | `histogram_quantile(0.99, sum(scheduler_e2e_scheduling_latency_microseconds_bucket) by (le, instance)) / 1e+06` |
-    | Summary | `sum(histogram_quantile(0.99, sum(scheduler_e2e_scheduling_latency_microseconds_bucket) by (le, instance)) / 1e+06)` |
+    | 详情 | `histogram_quantile(0.99, sum(scheduler_e2e_scheduling_latency_microseconds_bucket) by (le, instance)) / 1e+06` |
+    | 汇总 | `sum(histogram_quantile(0.99, sum(scheduler_e2e_scheduling_latency_microseconds_bucket) by (le, instance)) / 1e+06)` |
 
-- **Scheduler Preemption Attempts**
+- **Scheduler抢占请求**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | `sum(rate(scheduler_total_preemption_attempts[5m])) by (instance)` |
-    | Summary | `sum(rate(scheduler_total_preemption_attempts[5m]))` |
+    | 详情 | `sum(rate(scheduler_total_preemption_attempts[5m])) by (instance)` |
+    | 汇总 | `sum(rate(scheduler_total_preemption_attempts[5m]))` |
 
-- **Ingress Controller Connections**
+- **Ingress Controller链接数**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | <table><tr><td>reading</td><td>`sum(nginx_ingress_controller_nginx_process_connections{state="reading"}) by (instance)`</td></tr><tr><td>waiting</td><td>`sum(nginx_ingress_controller_nginx_process_connections{state="waiting"}) by (instance)`</td></tr><tr><td>writing</td><td>`sum(nginx_ingress_controller_nginx_process_connections{state="writing"}) by (instance)`</td></tr><tr><td>accepted</td><td>`sum(ceil(increase(nginx_ingress_controller_nginx_process_connections_total{state="accepted"}[5m]))) by (instance)`</td></tr><tr><td>active</td><td>`sum(ceil(increase(nginx_ingress_controller_nginx_process_connections_total{state="active"}[5m]))) by (instance)`</td></tr><tr><td>handled</td><td>`sum(ceil(increase(nginx_ingress_controller_nginx_process_connections_total{state="handled"}[5m]))) by (instance)`</td></tr></table> |
-    | Summary | <table><tr><td>reading</td><td>`sum(nginx_ingress_controller_nginx_process_connections{state="reading"})`</td></tr><tr><td>waiting</td><td>`sum(nginx_ingress_controller_nginx_process_connections{state="waiting"})`</td></tr><tr><td>writing</td><td>`sum(nginx_ingress_controller_nginx_process_connections{state="writing"})`</td></tr><tr><td>accepted</td><td>`sum(ceil(increase(nginx_ingress_controller_nginx_process_connections_total{state="accepted"}[5m])))`</td></tr><tr><td>active</td><td>`sum(ceil(increase(nginx_ingress_controller_nginx_process_connections_total{state="active"}[5m])))`</td></tr><tr><td>handled</td><td>`sum(ceil(increase(nginx_ingress_controller_nginx_process_connections_total{state="handled"}[5m])))`</td></tr></table> |
+    | 详情 | <table><tr><td>reading</td><td>`sum(nginx_ingress_controller_nginx_process_connections{state="reading"}) by (instance)`</td></tr><tr><td>waiting</td><td>`sum(nginx_ingress_controller_nginx_process_connections{state="waiting"}) by (instance)`</td></tr><tr><td>writing</td><td>`sum(nginx_ingress_controller_nginx_process_connections{state="writing"}) by (instance)`</td></tr><tr><td>accepted</td><td>`sum(ceil(increase(nginx_ingress_controller_nginx_process_connections_total{state="accepted"}[5m]))) by (instance)`</td></tr><tr><td>active</td><td>`sum(ceil(increase(nginx_ingress_controller_nginx_process_connections_total{state="active"}[5m]))) by (instance)`</td></tr><tr><td>handled</td><td>`sum(ceil(increase(nginx_ingress_controller_nginx_process_connections_total{state="handled"}[5m]))) by (instance)`</td></tr></table> |
+    | 汇总 | <table><tr><td>reading</td><td>`sum(nginx_ingress_controller_nginx_process_connections{state="reading"})`</td></tr><tr><td>waiting</td><td>`sum(nginx_ingress_controller_nginx_process_connections{state="waiting"})`</td></tr><tr><td>writing</td><td>`sum(nginx_ingress_controller_nginx_process_connections{state="writing"})`</td></tr><tr><td>accepted</td><td>`sum(ceil(increase(nginx_ingress_controller_nginx_process_connections_total{state="accepted"}[5m])))`</td></tr><tr><td>active</td><td>`sum(ceil(increase(nginx_ingress_controller_nginx_process_connections_total{state="active"}[5m])))`</td></tr><tr><td>handled</td><td>`sum(ceil(increase(nginx_ingress_controller_nginx_process_connections_total{state="handled"}[5m])))`</td></tr></table> |
 
-- **Ingress Controller Request Process Time**
+- **Ingress Controller请求处理时长**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | `topk(10, histogram_quantile(0.95,sum by (le, host, path)(rate(nginx_ingress_controller_request_duration_seconds_bucket{host!="_"}[5m]))))` |
-    | Summary | `topk(10, histogram_quantile(0.95,sum by (le, host)(rate(nginx_ingress_controller_request_duration_seconds_bucket{host!="_"}[5m]))))` |
+    | 详情 | `topk(10, histogram_quantile(0.95,sum by (le, host, path)(rate(nginx_ingress_controller_request_duration_seconds_bucket{host!="_"}[5m]))))` |
+    | 汇总 | `topk(10, histogram_quantile(0.95,sum by (le, host)(rate(nginx_ingress_controller_request_duration_seconds_bucket{host!="_"}[5m]))))` |
 
-### Rancher Logging Metrics
+## Rancher 日志组件指标
 
-- **Fluentd Buffer Queue Rate**
+- **Fluentd 缓冲队列速率**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | `sum(rate(fluentd_output_status_buffer_queue_length[5m])) by (instance)` |
-    | Summary | `sum(rate(fluentd_output_status_buffer_queue_length[5m]))` |
+    | 详情 | `sum(rate(fluentd_output_status_buffer_queue_length[5m])) by (instance)` |
+    | 汇总 | `sum(rate(fluentd_output_status_buffer_queue_length[5m]))` |
 
-- **Fluentd Input Rate**
+- **Fluentd 输入速率**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | `sum(rate(fluentd_input_status_num_records_total[5m])) by (instance)` |
-    | Summary | `sum(rate(fluentd_input_status_num_records_total[5m]))` |
+    | 详情 | `sum(rate(fluentd_input_status_num_records_total[5m])) by (instance)` |
+    | 汇总 | `sum(rate(fluentd_input_status_num_records_total[5m]))` |
 
-- **Fluentd Output Errors Rate**
+- **Fluentd 错误输出速率**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | `sum(rate(fluentd_output_status_num_errors[5m])) by (type)` |
-    | Summary | `sum(rate(fluentd_output_status_num_errors[5m]))` |
+    | 详情 | `sum(rate(fluentd_output_status_num_errors[5m])) by (type)` |
+    | 汇总 | `sum(rate(fluentd_output_status_num_errors[5m]))` |
 
-- **Fluentd Output Rate**
+- **Fluentd 输出速率**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | `sum(rate(fluentd_output_status_num_records_total[5m])) by (instance)` |
-    | Summary | `sum(rate(fluentd_output_status_num_records_total[5m]))` |
+    | 详情 | `sum(rate(fluentd_output_status_num_records_total[5m])) by (instance)` |
+    | 汇总 | `sum(rate(fluentd_output_status_num_records_total[5m]))` |
 
-### Workload Metrics
+## 工作负载指标
 
-- **CPU Utilization**
+- **CPU 利用率**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | <table><tr><td>cfs throttled seconds</td><td>`sum(rate(container_cpu_cfs_throttled_seconds_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr><tr><td>user seconds</td><td>`sum(rate(container_cpu_user_seconds_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr><tr><td>system seconds</td><td>`sum(rate(container_cpu_system_seconds_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr><tr><td>usage seconds</td><td>`sum(rate(container_cpu_usage_seconds_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr></table> |
-    | Summary | <table><tr><td>cfs throttled seconds</td><td>`sum(rate(container_cpu_cfs_throttled_seconds_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr><tr><td>user seconds</td><td>`sum(rate(container_cpu_user_seconds_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr><tr><td>system seconds</td><td>`sum(rate(container_cpu_system_seconds_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr><tr><td>usage seconds</td><td>`sum(rate(container_cpu_usage_seconds_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr></table> |
+    | 详情 | <table><tr><td>cfs throttled seconds</td><td>`sum(rate(container_cpu_cfs_throttled_seconds_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr><tr><td>user seconds</td><td>`sum(rate(container_cpu_user_seconds_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr><tr><td>system seconds</td><td>`sum(rate(container_cpu_system_seconds_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr><tr><td>usage seconds</td><td>`sum(rate(container_cpu_usage_seconds_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr></table> |
+    | 汇总 | <table><tr><td>cfs throttled seconds</td><td>`sum(rate(container_cpu_cfs_throttled_seconds_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr><tr><td>user seconds</td><td>`sum(rate(container_cpu_user_seconds_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr><tr><td>system seconds</td><td>`sum(rate(container_cpu_system_seconds_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr><tr><td>usage seconds</td><td>`sum(rate(container_cpu_usage_seconds_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr></table> |
 
-- **Memory Utilization**
+- **内存利用率**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | `sum(container_memory_working_set_bytes{namespace="$namespace",pod_name=~"$podName", container_name!=""}) by (pod_name)` |
-    | Summary | `sum(container_memory_working_set_bytes{namespace="$namespace",pod_name=~"$podName", container_name!=""})` |
+    | 详情 | `sum(container_memory_working_set_bytes{namespace="$namespace",pod_name=~"$podName", container_name!=""}) by (pod_name)` |
+    | 汇总 | `sum(container_memory_working_set_bytes{namespace="$namespace",pod_name=~"$podName", container_name!=""})` |
 
-- **Network Packets**
+- **网络收发包**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | <table><tr><td>receive-packets</td><td>`sum(rate(container_network_receive_packets_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr><tr><td>receive-dropped</td><td>`sum(rate(container_network_receive_packets_dropped_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr><tr><td>receive-errors</td><td>`sum(rate(container_network_receive_errors_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr><tr><td>transmit-packets</td><td>`sum(rate(container_network_transmit_packets_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr><tr><td>transmit-dropped</td><td>`sum(rate(container_network_transmit_packets_dropped_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr><tr><td>transmit-errors</td><td>`sum(rate(container_network_transmit_errors_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr></table> |
-    | Summary | <table><tr><td>receive-packets</td><td>`sum(rate(container_network_receive_packets_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr><tr><td>receive-dropped</td><td>`sum(rate(container_network_receive_packets_dropped_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr><tr><td>receive-errors</td><td>`sum(rate(container_network_receive_errors_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr><tr><td>transmit-packets</td><td>`sum(rate(container_network_transmit_packets_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr><tr><td>transmit-dropped</td><td>`sum(rate(container_network_transmit_packets_dropped_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr><tr><td>transmit-errors</td><td>`sum(rate(container_network_transmit_errors_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr></table> |
+    | 详情 | <table><tr><td>receive-packets</td><td>`sum(rate(container_network_receive_packets_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr><tr><td>receive-dropped</td><td>`sum(rate(container_network_receive_packets_dropped_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr><tr><td>receive-errors</td><td>`sum(rate(container_network_receive_errors_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr><tr><td>transmit-packets</td><td>`sum(rate(container_network_transmit_packets_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr><tr><td>transmit-dropped</td><td>`sum(rate(container_network_transmit_packets_dropped_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr><tr><td>transmit-errors</td><td>`sum(rate(container_network_transmit_errors_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr></table> |
+    | 汇总 | <table><tr><td>receive-packets</td><td>`sum(rate(container_network_receive_packets_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr><tr><td>receive-dropped</td><td>`sum(rate(container_network_receive_packets_dropped_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr><tr><td>receive-errors</td><td>`sum(rate(container_network_receive_errors_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr><tr><td>transmit-packets</td><td>`sum(rate(container_network_transmit_packets_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr><tr><td>transmit-dropped</td><td>`sum(rate(container_network_transmit_packets_dropped_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr><tr><td>transmit-errors</td><td>`sum(rate(container_network_transmit_errors_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr></table> |
 
-- **Network I/O**
+- **网络 I/O**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | <table><tr><td>receive</td><td>`sum(rate(container_network_receive_bytes_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr><tr><td>transmit</td><td>`sum(rate(container_network_transmit_bytes_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr></table> |
-    | Summary | <table><tr><td>receive</td><td>`sum(rate(container_network_receive_bytes_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr><tr><td>transmit</td><td>`sum(rate(container_network_transmit_bytes_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr></table> |
+    | 详情 | <table><tr><td>receive</td><td>`sum(rate(container_network_receive_bytes_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr><tr><td>transmit</td><td>`sum(rate(container_network_transmit_bytes_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr></table> |
+    | 汇总 | <table><tr><td>receive</td><td>`sum(rate(container_network_receive_bytes_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr><tr><td>transmit</td><td>`sum(rate(container_network_transmit_bytes_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr></table> |
 
-- **Disk I/O**
+- **磁盘 I/O**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | <table><tr><td>read</td><td>`sum(rate(container_fs_reads_bytes_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr><tr><td>write</td><td>`sum(rate(container_fs_writes_bytes_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr></table> |
-    | Summary | <table><tr><td>read</td><td>`sum(rate(container_fs_reads_bytes_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr><tr><td>write</td><td>`sum(rate(container_fs_writes_bytes_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr></table> |
+    | 详情 | <table><tr><td>read</td><td>`sum(rate(container_fs_reads_bytes_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr><tr><td>write</td><td>`sum(rate(container_fs_writes_bytes_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m])) by (pod_name)`</td></tr></table> |
+    | 汇总 | <table><tr><td>read</td><td>`sum(rate(container_fs_reads_bytes_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr><tr><td>write</td><td>`sum(rate(container_fs_writes_bytes_total{namespace="$namespace",pod_name=~"$podName",container_name!=""}[5m]))`</td></tr></table> |
 
-#### Pod Metrics
+## Pod 指标
 
-- **CPU Utilization**
+- **CPU利用率**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | <table><tr><td>cfs throttled seconds</td><td>`sum(rate(container_cpu_cfs_throttled_seconds_total{container_name!="POD",namespace="$namespace",pod_name="$podName", container_name!=""}[5m])) by (container_name)`</td></tr><tr><td>usage seconds</td><td>`sum(rate(container_cpu_usage_seconds_total{container_name!="POD",namespace="$namespace",pod_name="$podName", container_name!=""}[5m])) by (container_name)`</td></tr><tr><td>system seconds</td><td>`sum(rate(container_cpu_system_seconds_total{container_name!="POD",namespace="$namespace",pod_name="$podName", container_name!=""}[5m])) by (container_name)`</td></tr><tr><td>user seconds</td><td>`sum(rate(container_cpu_user_seconds_total{container_name!="POD",namespace="$namespace",pod_name="$podName", container_name!=""}[5m])) by (container_name)`</td></tr></table> |
-    | Summary | <table><tr><td>cfs throttled seconds</td><td>`sum(rate(container_cpu_cfs_throttled_seconds_total{container_name!="POD",namespace="$namespace",pod_name="$podName", container_name!=""}[5m]))`</td></tr><tr><td>usage seconds</td><td>`sum(rate(container_cpu_usage_seconds_total{container_name!="POD",namespace="$namespace",pod_name="$podName", container_name!=""}[5m]))`</td></tr><tr><td>system seconds</td><td>`sum(rate(container_cpu_system_seconds_total{container_name!="POD",namespace="$namespace",pod_name="$podName", container_name!=""}[5m]))`</td></tr><tr><td>user seconds</td><td>`sum(rate(container_cpu_user_seconds_total{container_name!="POD",namespace="$namespace",pod_name="$podName", container_name!=""}[5m]))`</td></tr></table> |
+    | 详情 | <table><tr><td>cfs throttled seconds</td><td>`sum(rate(container_cpu_cfs_throttled_seconds_total{container_name!="POD",namespace="$namespace",pod_name="$podName", container_name!=""}[5m])) by (container_name)`</td></tr><tr><td>usage seconds</td><td>`sum(rate(container_cpu_usage_seconds_total{container_name!="POD",namespace="$namespace",pod_name="$podName", container_name!=""}[5m])) by (container_name)`</td></tr><tr><td>system seconds</td><td>`sum(rate(container_cpu_system_seconds_total{container_name!="POD",namespace="$namespace",pod_name="$podName", container_name!=""}[5m])) by (container_name)`</td></tr><tr><td>user seconds</td><td>`sum(rate(container_cpu_user_seconds_total{container_name!="POD",namespace="$namespace",pod_name="$podName", container_name!=""}[5m])) by (container_name)`</td></tr></table> |
+    | 汇总 | <table><tr><td>cfs throttled seconds</td><td>`sum(rate(container_cpu_cfs_throttled_seconds_total{container_name!="POD",namespace="$namespace",pod_name="$podName", container_name!=""}[5m]))`</td></tr><tr><td>usage seconds</td><td>`sum(rate(container_cpu_usage_seconds_total{container_name!="POD",namespace="$namespace",pod_name="$podName", container_name!=""}[5m]))`</td></tr><tr><td>system seconds</td><td>`sum(rate(container_cpu_system_seconds_total{container_name!="POD",namespace="$namespace",pod_name="$podName", container_name!=""}[5m]))`</td></tr><tr><td>user seconds</td><td>`sum(rate(container_cpu_user_seconds_total{container_name!="POD",namespace="$namespace",pod_name="$podName", container_name!=""}[5m]))`</td></tr></table> |
 
-- **Memory Utilization**
+- **内存利用率**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | `sum(container_memory_working_set_bytes{container_name!="POD",namespace="$namespace",pod_name="$podName",container_name!=""}) by (container_name)` |
-    | Summary | `sum(container_memory_working_set_bytes{container_name!="POD",namespace="$namespace",pod_name="$podName",container_name!=""})` |
+    | 详情 | `sum(container_memory_working_set_bytes{container_name!="POD",namespace="$namespace",pod_name="$podName",container_name!=""}) by (container_name)` |
+    | 汇总 | `sum(container_memory_working_set_bytes{container_name!="POD",namespace="$namespace",pod_name="$podName",container_name!=""})` |
 
-- **Network Packets**
+- **网络收发包**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | <table><tr><td>receive-packets</td><td>`sum(rate(container_network_receive_packets_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr><tr><td>receive-dropped</td><td>`sum(rate(container_network_receive_packets_dropped_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr><tr><td>receive-errors</td><td>`sum(rate(container_network_receive_errors_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr><tr><td>transmit-packets</td><td>`sum(rate(container_network_transmit_packets_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr><tr><td>transmit-dropped</td><td>`sum(rate(container_network_transmit_packets_dropped_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr><tr><td>transmit-errors</td><td>`sum(rate(container_network_transmit_errors_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr></table> |
-    | Summary | <table><tr><td>receive-packets</td><td>`sum(rate(container_network_receive_packets_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr><tr><td>receive-dropped</td><td>`sum(rate(container_network_receive_packets_dropped_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr><tr><td>receive-errors</td><td>`sum(rate(container_network_receive_errors_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr><tr><td>transmit-packets</td><td>`sum(rate(container_network_transmit_packets_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr><tr><td>transmit-dropped</td><td>`sum(rate(container_network_transmit_packets_dropped_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr><tr><td>transmit-errors</td><td>`sum(rate(container_network_transmit_errors_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr></table> |
+    | 详情 | <table><tr><td>receive-packets</td><td>`sum(rate(container_network_receive_packets_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr><tr><td>receive-dropped</td><td>`sum(rate(container_network_receive_packets_dropped_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr><tr><td>receive-errors</td><td>`sum(rate(container_network_receive_errors_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr><tr><td>transmit-packets</td><td>`sum(rate(container_network_transmit_packets_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr><tr><td>transmit-dropped</td><td>`sum(rate(container_network_transmit_packets_dropped_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr><tr><td>transmit-errors</td><td>`sum(rate(container_network_transmit_errors_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr></table> |
+    | 汇总 | <table><tr><td>receive-packets</td><td>`sum(rate(container_network_receive_packets_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr><tr><td>receive-dropped</td><td>`sum(rate(container_network_receive_packets_dropped_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr><tr><td>receive-errors</td><td>`sum(rate(container_network_receive_errors_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr><tr><td>transmit-packets</td><td>`sum(rate(container_network_transmit_packets_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr><tr><td>transmit-dropped</td><td>`sum(rate(container_network_transmit_packets_dropped_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr><tr><td>transmit-errors</td><td>`sum(rate(container_network_transmit_errors_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr></table> |
 
-- **Network I/O**
+- **网络 I/O**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | <table><tr><td>receive</td><td>`sum(rate(container_network_receive_bytes_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr><tr><td>transmit</td><td>`sum(rate(container_network_transmit_bytes_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr></table> |
-    | Summary | <table><tr><td>receive</td><td>`sum(rate(container_network_receive_bytes_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr><tr><td>transmit</td><td>`sum(rate(container_network_transmit_bytes_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr></table> |
+    | 详情 | <table><tr><td>receive</td><td>`sum(rate(container_network_receive_bytes_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr><tr><td>transmit</td><td>`sum(rate(container_network_transmit_bytes_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr></table> |
+    | 汇总 | <table><tr><td>receive</td><td>`sum(rate(container_network_receive_bytes_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr><tr><td>transmit</td><td>`sum(rate(container_network_transmit_bytes_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr></table> |
 
-- **Disk I/O**
+- **磁盘 I/O**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
-    | Detail | <table><tr><td>read</td><td>`sum(rate(container_fs_reads_bytes_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m])) by (container_name)`</td></tr><tr><td>write</td><td>`sum(rate(container_fs_writes_bytes_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m])) by (container_name)`</td></tr></table> |
-    | Summary | <table><tr><td>read</td><td>`sum(rate(container_fs_reads_bytes_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr><tr><td>write</td><td>`sum(rate(container_fs_writes_bytes_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr></table> |
+    | 详情 | <table><tr><td>read</td><td>`sum(rate(container_fs_reads_bytes_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m])) by (container_name)`</td></tr><tr><td>write</td><td>`sum(rate(container_fs_writes_bytes_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m])) by (container_name)`</td></tr></table> |
+    | 汇总 | <table><tr><td>read</td><td>`sum(rate(container_fs_reads_bytes_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr><tr><td>write</td><td>`sum(rate(container_fs_writes_bytes_total{namespace="$namespace",pod_name="$podName",container_name!=""}[5m]))`</td></tr></table> |
 
-#### Container Metrics
+## 容器指标
 
-- **CPU Utilization**
+- **CPU 利用率**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
     | cfs throttled seconds | `sum(rate(container_cpu_cfs_throttled_seconds_total{namespace="$namespace",pod_name="$podName",container_name="$containerName"}[5m]))` |
     | usage seconds | `sum(rate(container_cpu_usage_seconds_total{namespace="$namespace",pod_name="$podName",container_name="$containerName"}[5m]))` |
     | system seconds | `sum(rate(container_cpu_system_seconds_total{namespace="$namespace",pod_name="$podName",container_name="$containerName"}[5m]))` |
     | user seconds | `sum(rate(container_cpu_user_seconds_total{namespace="$namespace",pod_name="$podName",container_name="$containerName"}[5m]))` |
 
-- **Memory Utilization**
+- **内存利用率**
 
     `sum(container_memory_working_set_bytes{namespace="$namespace",pod_name="$podName",container_name="$containerName"})`
 
-- **Disk IO**
+- **磁盘 IO**
 
-    | Catalog | Expression |
+    | 分类 | 表达式 |
     | --- | --- |
     | read | `sum(rate(container_fs_reads_bytes_total{namespace="$namespace",pod_name="$podName",container_name="$containerName"}[5m]))` |
     | write | `sum(rate(container_fs_writes_bytes_total{namespace="$namespace",pod_name="$podName",container_name="$containerName"}[5m]))` |

@@ -1,99 +1,86 @@
 ---
-title: 介绍
+title: 功能介绍
 ---
 
-_Available as of v2.2.0_
+_自 v2.2.0 起可用_
 
-Using Rancher, you can monitor the state and processes of your cluster nodes, Kubernetes components, and software deployments through integration with [Prometheus](https://prometheus.io/), a leading open-source monitoring solution.
+通过 Rancher 你可以使用先进的开源监控解决方案[Prometheus](https://prometheus.io/)来监控集群节点，Kubernetes 组件和软件部署的状态和过程。
 
-This section covers the following topics:
+## Prometheus 简介
 
-* [About Prometheus](#about-prometheus)
-* [Monitoring scope](#monitoring-scope)
-* [Enabling cluster monitoring](#enabling-cluster-monitoring)
-* [Resource consumption](#resource-consumption)
-  + [Resource consumption of Prometheus pods](#resource-consumption-of-prometheus-pods)
-  + [Resource consumption of other pods](#resources-consumption-of-other-pods)
+根据[官方文档](https://prometheus.io/docs/concepts/data_model/)介绍，Prometheus 提供了时序型数据，这种时序型数据是指：
 
-## About Prometheus
+> 一个带有时间戳（时刻数值）的数值流，其中任何一个数值都属于同一个指标和同一组标签（维度）。
 
-Prometheus provides a _time series_ of your data, which is, according to [Prometheus documentation](https://prometheus.io/docs/concepts/data_model/):
+因此你可以配置 Prometheus 去收集集群级别或者项目级别的监控数据。本章节将介绍如何启用对集群的监控。有关对项目的监控，可以浏览[项目管理部分](/docs/project-admin/tools/monitoring/_index)。
 
-You can configure these services to collect logs at either the cluster level or the project level. This page describes how to enable monitoring for a cluster. For details on enabling monitoring for a project, refer to the [project administration section](/docs/project-admin/tools/monitoring/).
+换句话说，Prometheus 让你可以查看 Rancher 及其纳管的各个 Kubernetes 集群的指标。通过时间戳，你可以使用 Rancher UI 或者 [Grafana](https://grafana.com/)（这是一种与分析工具一起部署的分析查看平台）以易于阅读的图形和视觉形式来查询这些指标。
 
-> A stream of timestamped values belonging to the same metric and the same set of labeled dimensions, along with comprehensive statistics and metrics of the monitored cluster.
+通过查看 Prometheus 从集群控制平面，节点和部署的工作负载中刮取的监控数据，你可以掌握集群中发生的所有事情。然后，你可以使用这些数据进行分析，从而更好地进行管控工作：在系统紧急情况发生之前阻止它们，制定维护策略，还原崩溃的服务器等。
 
-In other words, Prometheus lets you view metrics from your different Rancher and Kubernetes objects. Using timestamps, Prometheus lets you query and view these metrics in easy-to-read graphs and visuals, either through the Rancher UI or [Grafana](https://grafana.com/), which is an analytics viewing platform deployed along with Prometheus.
+在集群和项目之间的多租户管理也是支持的。
 
-By viewing data that Prometheus scrapes from your cluster control plane, nodes, and deployments, you can stay on top of everything happening in your cluster. You can then use these analytics to better run your organization: stop system emergencies before they start, develop maintenance strategies, restore crashed servers, etc.
+## 监控访问
 
-Multi-tenancy support in terms of cluster-only and project-only Prometheus instances are also supported.
+通过 Prometheus，你可以在 Rancher 上在集群级别和[项目级别](/docs/project-admin/tools/monitoring/_index)进行监控。对于每个启用了监控的集群和项目，Rancher 都会部署一个 Prometheus 服务。
 
-## Monitoring Scope
+- 集群监控可让你查看 Kubernetes 集群的运行状况。Prometheus 从下面的集群组件中收集指标，你可以在图表中查看这些指标。
 
-Using Prometheus, you can monitor Rancher at both the cluster level and [project level](/docs/project-admin/tools/monitoring/). For each cluster and project that is enabled for monitoring, Rancher deploys a Prometheus server.
+  - [Kubernetes 控制平面](/docs/cluster-admin/tools/monitoring/cluster-metrics/_index)
+  - [etcd 数据库](/docs/cluster-admin/tools/monitoring/cluster-metrics/_index)
+  - [所有节点](/docs/cluster-admin/tools/monitoring/cluster-metrics/_index)
 
-* Cluster monitoring allows you to view the health of your Kubernetes cluster. Prometheus collects metrics from the cluster components below, which you can view in graphs and charts.
+- [项目监控](/docs/project-admin/tools/monitoring/_index)允许你查看在具体某个项目内运行的 Pods 的状态。项目级别的 Prometheus 可以从本项目内部署的工作负载中采集自定义指标，这些工作负载必须通过 HTTP 和 TCP/UDP 暴露指标。
 
-    - [Kubernetes control plane](/docs/cluster-admin/tools/monitoring/cluster-metrics/#kubernetes-components-metrics)
-    - [etcd database](/docs/cluster-admin/tools/monitoring/cluster-metrics/#etcd-metrics)
-    - [All nodes (including workers)](/docs/cluster-admin/tools/monitoring/cluster-metrics/#cluster-metrics)
+## 启用集群监控
 
-* [Project monitoring](/docs/project-admin/tools/monitoring/) allows you to view the state of pods running in a given project. Prometheus collects metrics from the project's deployed HTTP and TCP/UDP workloads.
+作为[系统管理员](/docs/admin-settings/rbac/global-permissions/_index)或[集群所有者](/docs/admin-settings/rbac/cluster-project-roles/_index)，你可以通过配置来监控你的 Kubernetes 集群。
 
-## Enabling Cluster Monitoring
+1. 在**全局**页面中导航到你想要配置的集群。
+1. 在导航栏中下拉**工具**，选择**监控**。
+1. 查看[资源消耗建议](#资源消耗)，以确保你有足够的资源用于 Prometheus 及其相关组件。根据需要，配置 [Prometheus 选项](/docs/cluster-admin/tools/monitoring/prometheus/_index)。
+1. 点击**启动**。
 
-As an [administrator](/docs/admin-settings/rbac/global-permissions/) or [cluster owner](/docs/admin-settings/rbac/cluster-project-roles/#cluster-roles), you can configure Rancher to deploy Prometheus to monitor your Kubernetes cluster.
+**结果：**将部署 Prometheus 服务以及两个监控[应用商店应用](/docs/catalog/apps/_index)。这两个监控应用商店应用是`cluster-monitoring`和`monitoring-operator`，它们会被添加到集群的`系统（System）`项目中。当这两个应用处于`Active`后，你可以通过 [Rancher 集群仪表盘](/docs/cluster-admin/tools/monitoring/viewing-metrics/_index)开始查看[集群指标](/docs/cluster-admin/tools/monitoring/cluster-metrics/_index)或直接从 [Grafana](/docs/cluster-admin/tools/monitoring/_index)中查看。
 
-1. From the **Global** view, navigate to the cluster that you want to configure cluster monitoring.
+## 资源消耗
 
-1. Select **Tools > Monitoring** in the navigation bar.
+启用集群监控时，需要确保你的工作节点和 Prometheus Pod 有足够的资源。下表提供了关于资源消耗方面的指南。在较大型的部署中，强烈建议将监控组件（Prometheus 及其相关组件）调度到集群中的专用节点上。
 
-1. Select **Enable** to show the [Prometheus configuration options](/docs/cluster-admin/tools/monitoring/prometheus/). Review the [resource consumption recommendations](#resource-consumption) to ensure you have enough resources for Prometheus and on your worker nodes to enable monitoring. Enter in your desired configuration options.
+### Prometheus Pods 的资源消耗
 
-1. Click **Save**.
+该表是 Prometheus Pod 的资源消耗，它基于集群中所有节点的数量。节点数包括工作节点，控制平面和 etcd 节点。总磁盘空间分配应通过在集群级别设置的`rate * retention`来估算。启用集群级别监控时，应该根据您的情况，调整 CPU 和内存的限制值及预留值。
 
-**Result:** The Prometheus server will be deployed as well as two monitoring applications. The two monitoring applications, `cluster-monitoring` and `monitoring-operator` , are added as an [application](/docs/catalog/apps/) to the cluster's `system` project. After the applications are `active` , you can start viewing [cluster metrics](/docs/cluster-admin/tools/monitoring/cluster-metrics/) through the [Rancher dashboard](/docs/cluster-admin/tools/monitoring/viewing-metrics/#rancher-dashboard) or directly from [Grafana](/docs/cluster-admin/tools/monitoring/#grafana).
+| 集群节点数目 | CPU (milli CPU) | 内存   | 磁盘       |
+| ------------ | --------------- | ------ | ---------- |
+| 5            | 500             | 650 MB | ~1 GB/Day  |
+| 50           | 2000            | 2 GB   | ~5 GB/Day  |
+| 256          | 4000            | 6 GB   | ~18 GB/Day |
 
-## Resource Consumption
+集群监控中其他的 Pod 资源的要求：
 
-When enabling cluster monitoring, you need to ensure your worker nodes and Prometheus pod have enough resources. The tables below provides a guide of how much resource consumption will be used. In larger deployments, it is strongly advised that the monitoring infrastructure be placed on dedicated nodes in the cluster.
+| 工作负载            | 容器                            | CPU 预留值 | 内存预留值 | CPU 限制值 | 内存限制值 | 是否可配置 |
+| ------------------- | ------------------------------- | ---------- | ---------- | ---------- | ---------- | ---------- |
+| Prometheus          | prometheus                      | 750m       | 750Mi      | 1000m      | 1000Mi     | Y          |
+|                     | prometheus-proxy                | 50m        | 50Mi       | 100m       | 100Mi      | Y          |
+|                     | prometheus-auth                 | 100m       | 100Mi      | 500m       | 200Mi      | Y          |
+|                     | prometheus-config-reloader      | -          | -          | 50m        | 50Mi       | N          |
+|                     | rules-configmap-reloader        | -          | -          | 100m       | 25Mi       | N          |
+| Grafana             | grafana-init-plugin-json-copy   | 50m        | 50Mi       | 50m        | 50Mi       | Y          |
+|                     | grafana-init-plugin-json-modify | 50m        | 50Mi       | 50m        | 50Mi       | Y          |
+|                     | grafana                         | 100m       | 100Mi      | 200m       | 200Mi      | Y          |
+|                     | grafana-proxy                   | 50m        | 50Mi       | 100m       | 100Mi      | Y          |
+| Kube-State Exporter | kube-state                      | 100m       | 130Mi      | 100m       | 200Mi      | Y          |
+| Node Exporter       | exporter-node                   | 200m       | 200Mi      | 200m       | 200Mi      | Y          |
+| Operator            | prometheus-operator             | 100m       | 50Mi       | 200m       | 100Mi      | Y          |
 
-#### Resource Consumption of Prometheus Pods
+### 其他 Pods 的资源消耗
 
-This table is the resource consumption of the Prometheus pod, which is based on the number of all the nodes in the cluster. The count of nodes includes the worker, control plane and etcd nodes. Total disk space allocation should be approximated by the `rate * retention` period set at the cluster level. When enabling cluster level monitoring, you should adjust the CPU and Memory limits and reservation.
+除了 Prometheus Pod 之外，还部署了一些组件，这些组件在工作节点上还需要额外的资源：
 
-| Number of Cluster Nodes | CPU (milli CPU) | Memory | Disk       |
-|-------------------------|-----------------|--------|------------|
-| 5                       | 500             | 650 MB | ~1 GB/Day  |
-| 50                      | 2000            | 2 GB   | ~5 GB/Day  |
-| 256                     | 4000            | 6 GB   | ~18 GB/Day |
-
-Additional pod resource requirements for cluster level monitoring.
-
-| Workload            |      Container                  | CPU - Request | Mem - Request | CPU - Limit | Mem - Limit | Configurable |
-|---------------------|---------------------------------|---------------|---------------|-------------|-------------|--------------|
-| Prometheus          | prometheus                      |     750m      |     750Mi     |    1000m    |    1000Mi   |       Y      |
-|                     | prometheus-proxy                |      50m      |      50Mi     |     100m    |     100Mi   |       Y      |
-|                     | prometheus-auth                 |     100m      |     100Mi     |     500m    |     200Mi   |       Y      |
-|                     | prometheus-config-reloader      |       -       |       -       |      50m    |      50Mi   |       N      |
-|                     | rules-configmap-reloader        |       -       |       -       |     100m    |      25Mi   |       N      |
-| Grafana             | grafana-init-plugin-json-copy   |      50m      |      50Mi     |      50m    |      50Mi   |       Y      |
-|                     | grafana-init-plugin-json-modify |      50m      |      50Mi     |      50m    |      50Mi   |       Y      |
-|                     | grafana                         |     100m      |     100Mi     |     200m    |     200Mi   |       Y      |
-|                     | grafana-proxy                   |      50m      |      50Mi     |     100m    |     100Mi   |       Y      |
-| Kube-State Exporter | kube-state                      |     100m      |     130Mi     |     100m    |     200Mi   |       Y      |
-| Node Exporter       | exporter-node                   |     200m      |     200Mi     |     200m    |     200Mi   |       Y      |
-| Operator            | prometheus-operator             |     100m      |      50Mi     |     200m    |     100Mi   |       Y      |
-
-#### Resource Consumption of Other Pods
-
-Besides the Prometheus pod, there are components that are deployed that require additional resources on the worker nodes.
-
-| Pod                                 | CPU (milli CPU) | Memory (MB) |
-|-------------------------------------|-----------------|-------------|
-| Node Exporter (Per Node)            | 100             | 30          |
-| Kube State Cluster Monitor          | 100             | 130         |
-| Grafana                             | 100             | 150         |
-| Prometheus Cluster Monitoring Nginx | 50              | 50          |
-
+| Pod                                 | CPU (milli CPU) | 内存 (MB) |
+| ----------------------------------- | --------------- | --------- |
+| Node Exporter (每个节点均部署)      | 100             | 30        |
+| Kube State Cluster Monitor          | 100             | 130       |
+| Grafana                             | 100             | 150       |
+| Prometheus Cluster Monitoring Nginx | 50              | 50        |
