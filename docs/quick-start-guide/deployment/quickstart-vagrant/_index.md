@@ -36,7 +36,7 @@ title: Vagrant 快速部署
 
 完成安装 Rancher Server 和 Kubernetes 集群的步骤后，您可以使用 Rancher 部署工作负载，详情请参考[部署工作负载](/docs/quick-start-guide/workload/_index)。
 
-## Destroying the Environment 数据清理
+## 数据清理
 
 快速入门为您创建了一个使用 Rancher 的沙盒，我们建议您在完成试用后清理环境内 Rancher 相关的资源和数据。具体步骤如下：
 
