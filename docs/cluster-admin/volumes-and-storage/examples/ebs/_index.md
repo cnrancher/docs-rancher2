@@ -2,15 +2,14 @@
 title: Amazon EBS 存储
 ---
 
-This section describes how to set up Amazon's Elastic Block Store in EC2.
+本章节描述的是如何在 EC2 里启用 Amazon EBS。
 
-1. From the EC2 console, go to the **ELASTIC BLOCK STORE** section in the left panel and click **Volumes.**
-1. Click **Create Volume.**
-1. Optional: Configure the size of the volume or other options. The volume should be created in the same availability zone as the instance it will be attached to.
-1. Click **Create Volume.**
-1. Click **Close.**
+1. 在 EC2 的控制台里，在左边的面板中找到**弹性块存储**，然后点击**卷**。
+1. 点击**创建卷**。
+1. 可选：配置卷的大小或其他选项。该卷应与其将连接到的 EC2 实例在相同的可用区。
+1. 点击**创建卷**。
+1. 点击**关闭**。
 
-**Result:** Persistent storage has been created.
+**结果：**持久化存储被创建了。
 
-For details on how to set up the newly created storage in Rancher, refer to the section on [setting up existing storage.](../attaching-existing-storage)
-
+关于如何在 Rancher 里创建新的存储，可以浏览[配置现有的存储](/docs/cluster-admin/volumes-and-storage/attaching-existing-storage/_index)。

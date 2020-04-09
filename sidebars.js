@@ -482,7 +482,7 @@ module.exports = {
       'cluster-admin/projects-and-namespaces/_index',
       {
         type: 'category',
-        label: '日志，监控等工具',
+        label: '集群工具',
         items: [
           'cluster-admin/tools/_index',
           'cluster-admin/tools/notifiers/_index',
@@ -566,7 +566,7 @@ module.exports = {
       'project-admin/namespaces/_index',
       {
         type: 'category',
-        label: '日志，监控等工具',
+        label: '项目工具',
         items: [
           'project-admin/tools/_index',
           'project-admin/tools/alerts/_index',

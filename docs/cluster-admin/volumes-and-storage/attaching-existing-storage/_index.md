@@ -2,101 +2,81 @@
 title: 使用已有存储
 ---
 
-This section describes how to set up existing persistent storage for workloads in Rancher.
+本章节描述了如何在 Rancher 里为工作负载配置现有的持久化存储。
 
-> This section assumes that you understand the Kubernetes concepts of persistent volumes and persistent volume claims. For more information, refer to the section on [how storage works.](../how-storage-works)
+> 本章节假定你已了解 Kubernetes 持久卷和持久卷声明的概念。 有关更多信息，请参阅[存储是如何工作的](/docs/cluster-admin/volumes-and-storage/how-storage-works/_index)
 
-To set up storage, follow these steps:
+可以按照以下步骤进行存储的配置。
 
-1. [Set up persistent storage in an infrastructure provider.](#1-set-up-persistent-storage-in-an-infrastructure-provider)
-2. [Add a persistent volume that refers to the persistent storage.](#2-add-a-persistent-volume-that-refers-to-the-persistent-storage)
-3. [Add a persistent volume claim that refers to the persistent volume.](#3-add-a-persistent-volume-claim-that-refers-to-the-persistent-volume)
-4. [Mount the persistent volume claim as a volume in your workload.](#4-mount-the-persistent-storage-claim-as-a-volume-in-your-workload)
+## 先决条件
 
-#### Prerequisites
+- 配置持久化存储，需要有`管理卷（Manage Volumes）`权限的[角色](/docs/admin-settings/rbac/cluster-project-roles/_index)。
+- 如果要在云提供商托管的集群中设置存储，则需要保证存储和集群主机是来自同一个云提供商。
 
-* To create a persistent volume as a Kubernetes resource, you must have the `Manage Volumes` [role.](/docs/admin-settings/rbac/cluster-project-roles/#project-role-reference)
-* If you are provisioning storage for a cluster hosted in the cloud, the storage and cluster hosts must have the same cloud provider.
+## 1、在基础设施中设置持久化存储
 
-#### 1. Set up persistent storage in an infrastructure provider
+在 Rancher 中，创建 PV 并不会创建真正的存储卷，它只会创建一个 Kubernetes 资源，映射到现有的卷。因此，必须先配置存储，然后再创建 PV。
 
-Creating a persistent volume in Rancher will not create a storage volume. It only creates a Kubernetes resource that maps to an existing volume. Therefore, before you can create a persistent volume as a Kubernetes resource, you must have storage provisioned.
+设置持久化存储设备的步骤将根据基础设施而有所不同。我们提供了一些例子来展示如何进行存储设置：[NFS](/docs/cluster-admin/volumes-and-storage/examples/nfs/_index)，[vSphere](/docs/cluster-admin/volumes-and-storage/examples/vsphere/_index) 以及[亚马逊 EBS](/docs/cluster-admin/volumes-and-storage/examples/ebs/_index)。
 
-The steps to set up a persistent storage device will differ based on your infrastructure. We provide examples of how to set up storage using [vSphere, ](../examples/vsphere) [NFS, ](../examples/nfs) or Amazon's [EBS.](../examples/ebs)
+## 2、添加引用持久性存储的持久性卷
 
-#### 2. Add a persistent volume that refers to the persistent storage
+下面的步骤描述了如何在集群中配置持久卷。
 
-These steps describe how to set up a persistent volume at the cluster level in Kubernetes.
+1. 在集群页面中，下拉**存储**，选择**持久卷**。
+1. 点击**添加卷**。
+1. 输入持久卷的**名称**。
+1. 根据使用的磁盘类型或服务选择`卷插件`。在云提供商托管的集群中设置存储，请使用云提供商的卷插件。例如，如果你有 Amazon EC2 集群，并且想要为其使用云存储，则必须使用`Amazon EBS Disk`卷插件。
+1. 输入卷的 **Capacity**（以 GB 为单位）。
+1. 填写**插件配置**表单。每种插件类型都需要特定于磁盘类型供应商的信息。有关每个插件的形式和所需信息的帮助，请参阅插件的服务文档以获取更多信息。
+1. **可选：** 在**自定义**表单中，配置[访问模式](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)。该选项设置了可访问卷的节点数及节点的读写权限。在[Kubernetes 文档](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)中包含了一个列表，列出了可用插件支持的访问模式。
+1. **可选：** 在**自定义**表单中，配置[挂载选项](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#mount-options)。每个卷插件都可以在挂载过程中指定其命令行选项。有关可用的挂载选项，请查阅每个插件的供应商文档。
+1. 点击**保存**。
 
-1. From the cluster view, select **Storage > Persistent Volumes**.
+**结果：** 创建了新的存储卷。
 
-1. Click **Add Volume**.
+## 3、添加引用持久卷的持久卷声明
 
-1. Enter a **Name** for the persistent volume.
+下面的步骤描述了如何在部署有状态工作负载的同一个命名空间中配置 PVC。
 
-1. Select the **Volume Plugin** for the disk type or service that you're using. When adding storage to a cluster that's hosted by a cloud provider, use the cloud provider's plug-in for cloud storage. For example, if you have a Amazon EC2 cluster and you want to use cloud storage for it, you must use the `Amazon EBS Disk` volume plugin.
+1. 进入包含要向其添加持久性批量声明的工作负载的项目。
+1. 点击**卷**页签，然后点击**添加卷**(在早于 v2.3.0 的版本中，可以点击导航栏上的**工作负载**，然后点击**卷**)。
+1. 输入卷声明的**名称**。
+1. 选择要将持久化存储添加到的工作负载的[命名空间](/docs/k8s-in-rancher/projects-and-namespaces/_index)。
+1. 在**使用现有的持久卷**中，进入**持久卷**下拉列表并选择你创建的持久卷。
+1. **可选：** 在**自定义**中，选择要使用的[访问模式](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)。
+1. 点击**创建**。
 
-1. Enter the **Capacity** of your volume in gigabytes.
+**结果：** 创建了新的 PVC，可以把它附加到项目中任意的工作负载上。
 
-1. Complete the **Plugin Configuration** form. Each plugin type requires information specific to the vendor of disk type. For help regarding each plugin's form and the information that's required, refer to the plug-in's vendor documentation.
+## 4、将持久卷声明挂载为工作负载中的卷
 
-1. Optional: In the **Customize** form, configure the [access modes.](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes) This options sets how many nodes can access the volume, along with the node read/write permissions. The [Kubernetes Documentation](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes) includes a table that lists which access modes are supported by the plugins available.
+将 PVC 挂载到有状态的工作负载，以便应用程序可以存储其数据。
 
-1. Optional: In the **Customize** form, configure the [mount options.](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#mount-options) Each volume plugin allows you to specify additional command line options during the mounting process. Consult each plugin's vendor documentation for the mount options available.
+你可以在工作负载部署期间或创建工作负载之后挂载 PVC。
 
-1. Click **Save**.
+以下的步骤描述了如何将 PVC 分配给有状态的新工作负载：
 
-**Result:** Your new persistent volume is created.
+1. 在**项目**页面中，进入**工作负载**页签。
+1. 点击**部署**。
+1. 输入工作负载的名称。
+1. 在**工作负载类型**旁边, 点击**更多选项**。
+1. 点击**StatefulSet**（可选）配置 Pod 的数量。
+1. 选择将在其中部署工作负载的命名空间。
+1. 展开**卷**，并点击**添加卷**，选择**使用现有的持久卷（声明）**。
+1. 在**持久卷声明**中，选择创建的 PVC。
+1. 在**挂载点**中，输入工作负载将用来访问卷的路径。
+1. 点击**启动**。
 
-#### 3. Add a persistent volume claim that refers to the persistent volume
+**结果：** 部署工作负载后，它将向 Kubernetes Master 请求指定数量的磁盘空间。如果在部署工作负载时具有资源匹配且可用的 PV，则 Kubernetes Master 会将 PV 绑定到 PVC。
 
-These steps describe how to set up a PVC in the namespace where your stateful workload will be deployed.
+以下的步骤描述了如何将 PVC 分配给现有工作负载：
 
-1. Go to the project containing a workload that you want to add a persistent volume claim to.
+1. 在**项目**页面中，进入**工作负载**页签.
+1. 进入要向其添加持久性存储的工作负载。工作负载类型应为有状态集合（StatefulSet）。点击 **...**，选择**编辑**。
+1. 展开**卷**，然后点击**添加卷**，选择**使用现有的持久卷（声明）**。
+1. 在**持久卷声明**中，选择创建的 PVC。
+1. 在**挂载点**中，输入工作负载将用来访问卷的路径。
+1. 点击**保存**。
 
-1. Then click the **Volumes** tab and click **Add Volume**. (In versions prior to v2.3.0, click **Workloads** on the main navigation bar, then **Volumes.**)
-
-1. Enter a **Name** for the volume claim.
-
-1. Select the [Namespace](/docs/k8s-in-rancher/projects-and-namespaces/#namespaces) of the workload that you want to add the persistent storage to.
-
-1. In the section called **Use an existing persistent volume,** go to the **Persistent Volume** drop-down and choose the persistent volume that you created.
-
-1.**Optional:** From **Customize**, select the [Access Modes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes) that you want to use.
-
-1. Click **Create.**
-
-**Result:** Your PVC is created. You can now attach it to any workload in the project.
-
-#### 4. Mount the persistent volume claim as a volume in your workload
-
-Mount PVCs to stateful workloads so that your applications can store their data.
-
-You can mount PVCs during the deployment of a workload, or following workload creation.
-
-The following steps describe how to assign existing storage to a new workload that is a stateful set:
-
-1. From the **Project** view, go to the **Workloads** tab.
-1. Click **Deploy.**
-1. Enter a name for the workload.
-1. Next to the **Workload Type** field, click **More Options.**
-1. Click **Stateful set of 1 pod.** Optionally, configure the number of pods.
-1. Choose the namespace where the workload will be deployed.
-1. Expand the **Volumes** section and click **Add Volume > Use an existing persistent volume (claim).**.
-1. In the **Persistent Volume Claim** field, select the PVC that you created.
-1. In the **Mount Point** field, enter the path that the workload will use to access the volume.
-1. Click **Launch.**
-
-**Result:** When the workload is deployed, it will make a request for the specified amount of disk space to the Kubernetes master. If a PV with the specified resources is available when the workload is deployed, the Kubernetes master will bind the PV to the PVC.
-
-The following steps describe how to assign persistent storage to an existing workload:
-
-1. From the **Project** view, go to the **Workloads** tab.
-1. Go to the workload that you want to add the persistent storage to. The workload type should be a stateful set. Click **Ellipsis (...) > Edit.**
-1. Expand the **Volumes** section and click **Add Volume > Use an existing persistent volume (claim).**.
-1. In the **Persistent Volume Claim** field, select the PVC that you created.
-1. In the **Mount Point** field, enter the path that the workload will use to access the volume.
-1. Click **Save.**
-
-**Result:** The workload will make a request for the specified amount of disk space to the Kubernetes master. If a PV with the specified resources is available when the workload is deployed, the Kubernetes master will bind the PV to the PVC.
-
+**结果：** 部署工作负载后，它将向 Kubernetes Master 请求指定数量的磁盘空间。如果在部署工作负载时具有资源匹配且可用的 PV，则 Kubernetes Master 会将 PV 绑定到 PVC。
