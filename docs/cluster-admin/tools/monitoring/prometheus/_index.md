@@ -32,6 +32,6 @@ _自 v2.2.0 起可用_
 
 > **先决条件：** 配置一个或多个[存储类](/docs/cluster-admin/volumes-and-storage/_index)来作为 Prometheus 或者 Grafana 的[持久化存储](/docs/cluster-admin/volumes-and-storage/_index)。
 
-默认情况下，启动集群监控或者项目监控，Prometheus 只会把监控数据临时存储在自己的 Pod 里面。当 Prometheus 或者 Grafana 意外宕掉后，你将面临所有监控数据丢失的问题。因此，Rancher 推荐使用外部持久化存储，在 Prometheus 或者 Grafana 恢复后，之前所有的监控数据不会有任何的损失。
+默认情况下，启动集群监控或者项目监控，Prometheus 只会把监控数据临时存储在自己的 Pod 里面。当 Prometheus 或者 Grafana 意外宕掉后，您将面临所有监控数据丢失的问题。因此，Rancher 推荐使用外部持久化存储，在 Prometheus 或者 Grafana 恢复后，之前所有的监控数据不会有任何的损失。
 
 在配置 Prometheus 或者 Grafana 使用持久化存储时，请指定持久卷的大小以及选择对应的[存储类](/docs/cluster-admin/volumes-and-storage/_index)。

@@ -105,7 +105,7 @@ Istio 网关允许将 Istio 功能（例如监视和路由规则）应用于进�
 | 选项                        | 描述                                                                                   | 是否必填项 | 默认值   |
 | --------------------------- | -------------------------------------------------------------------------------------- | ---------- | -------- |
 | 启用 Ingress 网关           | 是否部署 istio-ingressgateway。                                                        | 是         | 否       |
-| Ingress 网关的服务类型      | 暴露网关服务的方式。你可以选择 NodePort 或 Loadbalancer                                | 是         | NodePort |
+| Ingress 网关的服务类型      | 暴露网关服务的方式。您可以选择 NodePort 或 Loadbalancer                                | 是         | NodePort |
 | Http2 端口                  | http2 请求的 NodePort 端口                                                             | 是         | 31380    |
 | Https 端口                  | https 请求的 NodePort 端口                                                             | 是         | 31390    |
 | Load Balancer IP            | Ingress 网关的负载均衡器 IP                                                            | 否         | n/a      |

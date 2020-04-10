@@ -2,13 +2,13 @@
 title: NFS 存储
 ---
 
-你必须先配置 NFS 服务器，然后才能将 NFS 存储卷插件用于 Rancher 部署。
+您必须先配置 NFS 服务器，然后才能将 NFS 存储卷插件用于 Rancher 部署。
 
 > **注意：**
 >
-> - 如果你已经拥有 NFS 共享，则无需配置新的 NFS 服务器即可使用 Rancher 中的 NFS 卷插件。同时，请跳过本章节的其余部分并进行[存储添加](/docs/cluster-admin/volumes-and-storage/_index)。
+> - 如果您已经拥有 NFS 共享，则无需配置新的 NFS 服务器即可使用 Rancher 中的 NFS 卷插件。同时，请跳过本章节的其余部分并进行[存储添加](/docs/cluster-admin/volumes-and-storage/_index)。
 >
-> - 虽然你可以将本章节的说明用在其他 Linux 发行版（例如 Debian，RHEL，Arch Linux 等）上，但是本章节的所有内容都是基于 Ubuntu 来演示如何设置 NFS 服务器。有关如何使用其他 Linux 发行版创建 NFS 服务器的官方说明，请查阅发行版的文档。
+> - 虽然您可以将本章节的说明用在其他 Linux 发行版（例如 Debian，RHEL，Arch Linux 等）上，但是本章节的所有内容都是基于 Ubuntu 来演示如何设置 NFS 服务器。有关如何使用其他 Linux 发行版创建 NFS 服务器的官方说明，请查阅发行版的文档。
 >
 > **推荐：** 为了简化管理防火墙规则的过程，请使用 NFSv4。
 
@@ -40,7 +40,7 @@ title: NFS 存储
       /nfs <IP_ADDRESS1>(rw,sync,no_subtree_check) <IP_ADDRESS2>(rw,sync,no_subtree_check) <IP_ADDRESS3>(rw,sync,no_subtree_check)
       ```
 
-      **提示：** 你可以用子网替代 IP 地址，例如：`10.212.50.12/24`。
+      **提示：** 您可以用子网替代 IP 地址，例如：`10.212.50.12/24`。
 
    1. 使用以下命令更新 NFS 导出表：
 
@@ -62,7 +62,7 @@ title: NFS 存储
       sudo ufw allow 2049
       ```
 
-**结果：** 你的 NFS 服务器已经设置好，可用于 Rancher 作存储服务。
+**结果：** 您的 NFS 服务器已经设置好，可用于 Rancher 作存储服务。
 
 ## 下一步？
 

@@ -4,7 +4,7 @@ title: 重要指标
 
 _自 v2.2.0 起可用_
 
-集群指标用于展示集群内所有节点的硬件资源利用率，它们可以让你洞悉集群的全局。
+集群指标用于展示集群内所有节点的硬件资源利用率，它们可以让您洞悉集群的全局。
 
 > **注意：** 持续的监控需要"指标基准"。确立"指标基准"的方式往往是结合实践和经验：首先对组件进行一段时间的操作并观察相关指标，然后评估出能描述其"健康"的指标值，最后建立可供日后度量的参考系。
 
@@ -39,9 +39,9 @@ _自 v2.2.0 起可用_
 
 > **注意：** 仅支持通过 [Rancher 安装的 Kubernetes 集群](/docs/cluster-provisioning/rke-clusters/_index)。
 
-Etcd 指标用于展示 etcd 数据库的操作情况。当确立了 etcd 数据库操作的"基准指标"后，你就可以通过这些"基准指标"来观察异常的增量。当出现异常的增量时，这表明 etcd 集群可能存在问题，你应该尽快予以解决。
+Etcd 指标用于展示 etcd 数据库的操作情况。当确立了 etcd 数据库操作的"基准指标"后，您就可以通过这些"基准指标"来观察异常的增量。当出现异常的增量时，这表明 etcd 集群可能存在问题，您应该尽快予以解决。
 
-另外，你还需要关注位于 Etcd 指标顶部的文本。这些文本代表着 etcd 集群领导者选举的信息，描述了当前 etcd 集群是否具有领导者，即协调集群中其他 etcd 实例的 etcd 实例。如果出现大幅度的 etcd 领导者变化，那将意味着 etcd 集群处于不稳定的状态。
+另外，您还需要关注位于 Etcd 指标顶部的文本。这些文本代表着 etcd 集群领导者选举的信息，描述了当前 etcd 集群是否具有领导者，即协调集群中其他 etcd 实例的 etcd 实例。如果出现大幅度的 etcd 领导者变化，那将意味着 etcd 集群处于不稳定的状态。
 
 需要对下面几个重要的指标做些说明：
 
@@ -61,7 +61,7 @@ Kubernetes 组件指标用于展示集群里各个 Kubernetes 组件的监控数
 
 > **注意：** 仅支持通过 [Rancher 安装的 Kubernetes 集群](/docs/cluster-provisioning/rke-clusters/_index)。
 
-当分析 Kubernetes 组件指标时，不能仅关注图表内的某时刻的单个独立指标。相反，你应该观察一段时间以确立"指标基准"，通过它们来观察异常的增量。这些增量通常表明集群可能存在问题，你需要进行调查。
+当分析 Kubernetes 组件指标时，不能仅关注图表内的某时刻的单个独立指标。相反，您应该观察一段时间以确立"指标基准"，通过它们来观察异常的增量。这些增量通常表明集群可能存在问题，您需要进行调查。
 
 下面几个重要的组件指标需要做些说明：
 
@@ -89,13 +89,13 @@ Kubernetes 组件指标用于展示集群里各个 Kubernetes 组件的监控数
 
 ## Rancher 日志指标
 
-Rancher 日志指标可以展示日志服务相关组件的操作情况，前提是你需要[为 Rancher 启用日志服务](/docs/cluster-admin/tools/logging/_index)。
+Rancher 日志指标可以展示日志服务相关组件的操作情况，前提是您需要[为 Rancher 启用日志服务](/docs/cluster-admin/tools/logging/_index)。
 
 [_获取具体的指标表达式_](/docs/cluster-admin/tools/monitoring/expression/_index)
 
 ## 查看某个工作负载的指标
 
-工作负载的指标用于展示某个 Kubernetes 工作负载的硬件资源利用率。你可以查看关于 [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)，[StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) 等工作负载的指标。
+工作负载的指标用于展示某个 Kubernetes 工作负载的硬件资源利用率。您可以查看关于 [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)，[StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) 等工作负载的指标。
 
 1. 在**全局**页面找到需要查看工作负载指标的目标项目。
 

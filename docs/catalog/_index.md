@@ -1,174 +1,130 @@
 ---
-title: 介绍
+title: 功能介绍
 ---
 
-Rancher provides the ability to use a catalog of Helm charts that make it easy to repeatedly deploy applications.
+Rancher 提供了基于 Helm 的应用商店的功能，该功能使部署和管理相同的应用变得更加容易。
 
-* **Catalogs** are GitHub repositories or Helm Chart repositories filled with applications that are ready-made for deployment. Applications are bundled in objects called _Helm charts_.
-* **Helm charts** are a collection of files that describe a related set of Kubernetes resources. A single chart might be used to deploy something simple, like a memcached pod, or something complex, like a full web app stack with HTTP servers, databases, caches, and so on.
+- **应用商店**可以是 GitHub 代码库或 Helm Chart 库，其中包含了可部署的应用。应用打包在称为 **Helm Chart** 的对象中。
+- **Helm Charts** 是描述一组相关 Kubernetes 资源的文件的集合。单个 Chart 可能用于部署简单的内容（例如 Mencached Pod）或复杂的内容（例如带有 HTTP 服务，数据库，缓存等的完整的 Web 应用）。
 
-Rancher improves on Helm catalogs and charts. All native Helm charts can work within Rancher, but Rancher adds several enhancements to improve their user experience.
+Rancher 改进了 Helm 应用商店和 Chart。所有原生 Helm Chart 都可以在 Rancher 中使用，但是 Rancher 添加了一些增强功能以改善用户体验。
 
-This section covers the following topics:
+## 先决条件
 
-* [Prerequisites](#prerequisites)
-* [Catalog scopes](#catalog-scopes)
-* [Enabling built-in global catalogs](#enabling-built-in-global-catalogs)
-* [Adding custom global catalogs](#adding-custom-global-catalogs)
-  + [Add custom Git repositories](#add-custom-git-repositories)
-  + [Add custom Helm chart repositories](#add-custom-helm-chart-repositories)
-  + [Add private Git/Helm chart repositories](#add-private-git-helm-chart-repositories)
-* [Launching catalog applications](#launching-catalog-applications)
-* [Working with catalogs](#working-with-catalogs)
-  + [Apps](#apps)
-  + [Global DNS](#global-dns)
-  + [Chart compatibility with Rancher](#chart-compatibility-with-rancher)
+当 Rancher 部署应用商店应用时，它会启动一个临时的 Service Account 账号关联到 Helm 服务，该账号只具有部署应用商店应用的权限。因此，用户无法通过此账号或 Helm 服务获得其他资源的访问权限。
 
-## Prerequisites
+要启动应用商店应用或多集群应用，您至少应具有以下权限之一：
 
-When Rancher deploys a catalog app, it launches an ephemeral instance of a Helm service account that has the permissions of the user deploying the catalog app. Therefore, a user cannot gain more access to the cluster through Helm or a catalog application than they otherwise would have.
+- 目标集群的[项目成员角色](/docs/admin-settings/rbac/cluster-project-roles/_index)，使您能够创建，读取，更新和删除工作负载。
+- 目标集群的[集群所有者角色](/docs/admin-settings/rbac/cluster-project-roles/_index)。
 
-To launch a catalog app or a multi-cluster app, you should have at least one of the following permissions:
+## 应用商店范围
 
-* A [project-member role](/docs/admin-settings/rbac/cluster-project-roles/#project-roles) in the target cluster, which gives you the ability to create, read, update, and delete the workloads
-* A [cluster owner role](/docs/admin-settings/rbac/cluster-project-roles/#cluster-roles) for the cluster that include the target project
+在 Rancher 中，您可以在三个不同的范围内管理应用商店。全局应用商店在所有集群和项目之间共享。在某些用例中，您可能不想跨不同集群甚至不想在同一集群中的项目共享应用商店。通过利用集群和项目范围的应用商店，您将能够为特定团队提供应用，而无需与所有集群和/或项目共享它们。
 
-## Catalog Scopes
+| 范围 | 描述                                                    | 可用版本 |
+| ---- | ------------------------------------------------------- | -------- |
+| 全局 | 所有集群和所有项目都可以访问此应用商店中的 Helm Chart   | v2.0.0   |
+| 集群 | 特定集群中的所有项目都可以访问此应用商店中的 Helm Chart | v2.2.0   |
+| 项目 | 该特定集群中的特定项目可以访问此应用商店中的 Helm Chart | v2.2.0   |
 
-Within Rancher, you can manage catalogs at three different scopes. Global catalogs are shared across all clusters and project. There are some use cases where you might not want to share catalogs across between different clusters or even projects in the same cluster. By leveraging cluster and project scoped catalogs, you will be able to provide applications for specific teams without needing to share them with all clusters and/or projects.
+## 启用自带的应用商店
 
-| Scope   | Description                                                                     | Available As of |
-| ------- | ------------------------------------------------------------------------------- | --------------- |
-| Global  | All clusters and all projects can access the Helm charts in this catalog        | v2.0.0          |
-| Cluster | All projects in the specific cluster can access the Helm charts in this catalog | v2.2.0          |
-| Project | This specific cluster can access the Helm charts in this catalog                | v2.2.0          |
+在 Rancher 中，有一些默认应用商店作为 Rancher 的一部分。这些可以由管理员启用或禁用。
 
-## Enabling Built-in Global Catalogs
+1. 从**全局**视图中，在导航栏中选择**工具>应用商店**。在 v2.2.0 之前的版本中，您可以直接在导航栏中选择**应用商店**。
 
-Within Rancher, there are default catalogs packaged as part of Rancher. These can be enabled or disabled by an administrator.
-
-1. From the **Global** view, choose **Tools > Catalogs** in the navigation bar. In versions prior to v2.2.0, you can select **Catalogs** directly in the navigation bar.
-
-2. Toggle the default catalogs that you want use to a setting of **Enabled**.
+2. 将要使用的默认应用商店切换为**启用**。
 
    - **Library**
-
-     
-
-``` 
-
-     ```
-
    - **Helm Stable**
-
-     
-
-``` 
-
-     ```
-
    - **Helm Incubator**
 
-     
+**结果：**启用所选应用商店。等待几分钟，Rancher 需要复制应用商店模板。复制完成后，在项目级别菜单里，您可以在导航栏中选择**工具 > 应用商店**，从而查看它们。在 v2.2.0 之前的版本中，您可以从导航栏中选择**应用商店**。
 
-``` 
+## 添加自定义全局应用商店
 
-     ```
+添加应用商店，只需要添加应用商店名称，URL 和分支名称。
 
-**Result**: The chosen catalogs are enabled. Wait a few minutes for Rancher to replicate the catalog charts. When replication completes, you'll be able to see them in any of your projects by selecting **Apps** from the main navigation bar. In versions prior to v2.2.0, you can select **Catalog Apps** from the main navigation bar.
+### 添加自定义 Git 仓库
 
-## Adding Custom Global Catalogs
+Git URL 必须是`git clone`[可以处理的 URL](https://git-scm.com/docs/git-clone#_git_urls_a_id_urls_a)，并且必须以.git 结尾。分支名称必须是应用商店 URL 中的一个分支。如果没有提供分支名称，则默认使用`master`分支。每当您将应用商店添加到 Rancher 时，它将几乎立即可用。
 
-Adding a catalog is as simple as adding a catalog name, a URL and a branch name.
+### 添加自定义 Helm 仓库
 
-#### Add Custom Git Repositories
+Helm Chart 仓库是一个 HTTP 服务器，其中包含一个或多个打包的 Chart。可以提供 YAML 文件和 tar 文件并可以处理 GET 请求的任何 HTTP 服务器都可以用作应用商店仓库。
 
-The Git URL needs to be one that `git clone` [can handle](https://git-scm.com/docs/git-clone#_git_urls_a_id_urls_a) and must end in `.git` . The branch name must be a branch that is in your catalog URL. If no branch name is provided, it will use the `master` branch by default. Whenever you add a catalog to Rancher, it will be available immediately.
+Helm 带有用于开发人员测试的内置软件包服务器（`helm serve`）。Helm 团队已经测试了其他服务器，包括启用了网站模式的 Google Cloud Storage，启用了网站模式的 S3 或使用 [ChartMuseum](https://github.com/helm/chartmuseum) 等开源项目托管自定义应用商店 Chart 的服务器。
 
-#### Add Custom Helm Chart Repositories
+在 Rancher 中，您可以仅使用名称和 Chart 仓库的 URL 地址添加自定义 Helm 应用商店。
 
-A Helm chart repository is an HTTP server that houses one or more packaged charts. Any HTTP server that can serve YAML files and tar files and can answer GET requests can be used as a repository server.
+### 添加私有 Git/Helm 仓库
 
-Helm comes with built-in package server for developer testing (helm serve). The Helm team has tested other servers, including Google Cloud Storage with website mode enabled, S3 with website mode enabled or hosting custom chart repository server using open-source projects like [ChartMuseum](https://github.com/helm/chartmuseum).
+_自 v2.2.0 起可用_
 
-In Rancher, you can add the custom Helm chart repository with only a catalog name and the URL address of the chart repository.
+Rancher v2.2.0 起，用户可以使用任一凭据（即`用户名`和`密码`）将私有 Git 或 Helm Chart 库添加到 Rancher 中。私有 Git 库还支持使用 OAuth 令牌进行身份验证。
 
-#### Add Private Git/Helm Chart Repositories
+[阅读有关添加私有 Git/Helm 应用商店的更多信息](/docs/catalog/custom/_index)
 
-_Available as of v2.2.0_
+1. 从**全局**视图中，在导航栏中选择**工具>应用商店**。在 v2.2.0 之前的版本中，您可以直接在导航栏中选择**应用商店**。
+2. 单击**添加**。
+3. 填写表格，然后单击**创建**。
 
-In Rancher v2.2.0, you can add private catalog repositories using credentials like Username and Password. You may also want to use the
-OAuth token if your Git or Helm repository server support that.
+**结果**：您的应用商店已添加到 Rancher。
 
-[Read More About Adding Private Git/Helm Catalogs](/docs/catalog/custom/#private-repositories)
+## 创建应用商店应用
 
-<!--There are two types of catalogs that can be added into Rancher. There are global catalogs and project catalogs. In a global catalog, the catalog templates are available in *all* projects. In a project catalog, the catalog charts are only available in the project that the catalog is added to.
+启用内置应用商店或添加自己的自定义应用商店后，可以开始启动任何应用商店应用。
 
-An [admin](/docs/admin-settings/#global-Permissions) of Rancher has the ability to add or remove catalogs globally in Rancher.
+1. 从**全局**视图中，导航到要部署应用的项目。
 
-NEEDS TO BE FIXED FOR 2.0: Any [users]({{site.baseurl}}/rancher/{{page.version}}/{{page.lang}}/configuration/accounts/#account-types) of a Rancher environment has the ability to add or remove environment catalogs in their respective Rancher environment in **Catalog** -> **Manage**.
- -->
+2. 从主导航栏中，选择**工具->应用商店**。在 v2.2.0 之前的版本中，在主导航栏上选择**应用商店**。点击**启动**。
 
-1.  From the **Global** view, choose **Tools > Catalogs** in the navigation bar. In versions prior to v2.2.0, you can select **Catalogs** directly in the navigation bar.
-2.  Click **Add Catalog**.
-3.  Complete the form and click **Create**.
+3. 找到您要启动的应用，然后单击**查看详细信息**。
 
-**Result**: Your catalog is added to Rancher.
+4. 在**配置选项**下输入**名称**。默认情况下，该名称还用于为应用创建 Kubernetes 命名空间。
 
-## Launching Catalog Applications
+   - 如果您想更改**命名空间**，请单击**自定义**并更改命名空间的名称。
+   - 如果要使用已经存在的其他命名空间，请单击**自定义**，然后单击**使用现有的命名空间**。从列表中选择一个命名空间。
 
-After you've either enabled the built-in catalogs or added your own custom catalog, you can start launching any catalog application.>
+5. 选择一个**模板版本**。
 
-1. From the **Global** view, open the project that you want to deploy to.
+6. 完成其余的**配置选项**。
 
-2. From the main navigation bar, choose **Apps**. In versions prior to v2.2.0, choose **Catalog Apps** on the main navigation bar. Click **Launch**.
+   - 对于原生 Helm Chart（即 Helm Stable 或 Helm Incubator 应用商店中的 Chart），在答案部分可以通过键值对来配置答案。
+   - 可以在**详细说明**中找到关于键和值的可用参数。
+   - 输入答案时，必须遵守[使用 Helm：--set 的格式和限制](https://helm.sh/docs/intro/using_helm/#the-format-and-limitations-of-set)，因为 Rancher 将其作为`--set`标志传递给 Helm。
 
-3. Find the app that you want to launch, and then click **View Now**.
+     例如，输入包含两个用逗号分隔的值的答案（即`abc,bcd`）时，请用双引号将这些值引起来（即`"abc,bcd"`）。
 
-4. Under **Configuration Options** enter a **Name**. By default, this name is also used to create a Kubernetes namespace for the application.
+7. 可以通过**预览**部分，查看 Chart 中的 YAML 文件。如果确认，请单击**启动**。
 
-   - If you would like to change the **Namespace**, click **Customize** and enter a new name.
-   - If you want to use a different namespace that already exists, click **Customize**, and then click **Use an existing namespace**. Choose a namespace from the list.
+**结果：**您的应用已部署到所选的命名空间。您可以从项目的应用商店菜单下查看应用状态。
 
-5. Select a **Template Version**.
+## 使用应用商店
 
-6. Complete the rest of the **Configuration Options**.
+Rancher 中有两种类型的应用商店。了解有关每种类型的更多信息：
 
-   - For native Helm charts (i.e., charts from the **Helm Stable** or **Helm Incubator** catalogs), answers are provided as key value pairs in the **Answers** section.
-   - Keys and values are available within **Detailed Descriptions**.
-   - When entering answers, you must format them using the syntax rules found in [Using Helm: The format and limitations of --set](https://helm.sh/docs/intro/using_helm/#the-format-and-limitations-of-set), as Rancher passes them as `--set` flags to Helm.
+- [内置全局应用商店](/docs/catalog/built-in/_index)
+- [自定义应用商店](/docs/catalog/custom/_index)
 
-     For example, when entering an answer that includes two values separated by a comma (i.e., `abc, bcd` ), wrap the values with double quotes (i.e., `"abc, bcd"` ).
+### 应用
 
-7. Review the files in **Preview**. When you're satisfied, click **Launch**.
+在 Rancher 中，应用是从应用商店中的模板部署的。Rancher 支持两种类型的应用：
 
-**Result**: Your application is deployed to your chosen namespace. You can view the application status from the project's:
+- [多集群应用](/docs/catalog/multi-cluster-apps/_index)
+- [在特定项目中部署的应用](/docs/catalog/apps/_index)
 
-By creating a customized repository with added files, Rancher improves on Helm repositories and charts. All native Helm charts can work within Rancher, but Rancher adds several enhancements to improve their user experience.
+### 全局 DNS
 
-## Working with Catalogs
+_自 v2.2.0 起可用_
 
-There are two types of catalogs in Rancher. Learn more about each type:
+当创建跨多个 Kubernetes 集群的应用时，可以创建一个全局 DNS 记录以将流量路由到所有不同集群中的端点。将需要对外部 DNS 服务器进行编程，以为您的应用分配域名（FQDN）。Rancher 将使用您提供的 FQDN 和应用的所在的 IP 地址来对 DNS 进行编程。Rancher 将从运行您的应用的所有 Kubernetes 集群中找到端点，并对 DNS 进行编程。
 
-* [Built-in Global Catalogs](/docs/catalog/built-in/)
-* [Custom Catalogs](/docs/catalog/custom/)
+有关如何使用此功能的更多信息，请参见[全局 DNS](/docs/catalog/globaldns/_index)。
 
-#### Apps
+### 与 Rancher 的兼容性
 
-In Rancher, applications are deployed from the templates in a catalog. Rancher supports two types of applications:
+Chart 现在支持在 [questions.yml](https://github.com/rancher/integration-test-charts/blob/master/charts/chartmuseum/v1.6.0/questions.yml) 文件中，设置`rancher_min_version`和`rancher_max_version`字段，以指定 Chart 兼容的 Rancher 版本。
 
-* [Multi-cluster applications](/docs/catalog/multi-cluster-apps/)
-* [Applications deployed in a specific Project](/docs/catalog/apps)
-
-#### Global DNS
-
-_Available as v2.2.0_
-
-When creating applications that span multiple Kubernetes clusters, a Global DNS entry can be created to route traffic to the endpoints in all of the different clusters. An external DNS server will need be programmed to assign a fully qualified domain name (a.k.a FQDN) to your application. Rancher will use the FQDN you provide and the IP addresses where your application is running to program the DNS. Rancher will gather endpoints from all the Kubernetes clusters running your application and program the DNS.
-
-For more information on how to use this feature, see [Global DNS](/docs/catalog/globaldns/).
-
-#### Chart Compatibility with Rancher
-
-Charts now support the fields `rancher_min_version` and `rancher_max_version` in the [ `questions.yml` file](https://github.com/rancher/integration-test-charts/blob/master/charts/chartmuseum/v1.6.0/questions.yml) to specify the versions of Rancher that the chart is compatible with. When using the UI, only app versions that are valid for the version of Rancher running will be shown. API validation is done to ensure apps that don't meet the Rancher requirements cannot be launched. An app that is already running will not be affected on a Rancher upgrade if the newer Rancher version does not meet the app's requirements.
-
+使用 Rancher UI 部署应用时，将仅显示对当前运行的 Rancher 版本有效的应用版本，从而禁止启动不满足 Rancher 版本要求的应用。如果在升级 Rancher 前已经部署了应用，但这个应用不支持新版本的 Rancher，在这种情况下升级 Rancher 不会影响这个已有应用。
