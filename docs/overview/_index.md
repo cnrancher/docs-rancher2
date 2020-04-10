@@ -12,6 +12,8 @@ Rancher 是为使用容器的公司打造的容器管理平台。Rancher 简化�
 <a href="https://www.bilibili.com/video/av94394330/"> Rancher v2.3.5 Demo 视频 </a>
 </div>
 
+更多视频教程，请前往 [Bilibili](https://space.bilibili.com/430496045/video?tid=0&page=1&keyword=&order=pubdate) 查看。
+
 ## Run Kubernetes Everywhere
 
 Kubernetes 已经成为了容器管理的标准。大多数云服务和虚拟服务的提供商现在将 Kubernetes 作为标准的基础设施。用户可以使用 Rancher Kubernetes Engine（简称 RKE），或其他云服务提供商的容器服务，如 GKE、AKS、 EKS 等，创建 Kubernetes 集群。用户也可以将已有集群导入 Rancher，集中管理。

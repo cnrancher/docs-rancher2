@@ -1,43 +1,22 @@
 ---
-title: 内置的全局应用商店
+title: 内置全局应用商店
 ---
 
-There are default [global catalogs](/docs/catalog/#global-catalogs) packaged as part of Rancher.
+我们默认将一些[全局应用商店](/docs/catalog/#global-catalogs)打包到了 Rancher 中。
 
-### Managing Built-in Global Catalogs
+## 管理内置的全局应用商店
 
-> **Prerequisites:** In order to manage the built-in catalogs or [manage global catalogs](/docs/catalog/custom/adding/#adding-global-catalogs), you need _one_ of the following permissions:
+> **先决条件：** 为了管理内置应用商店或[管理全局应用商店](/docs/catalog/custom/adding/_index)，您需要具有以下权限之一：
 >
-> - [Administrator Global Permissions](/docs/admin-settings/rbac/global-permissions/)
-> - [Custom Global Permissions](/docs/admin-settings/rbac/global-permissions/#custom-global-permissions) with the [Manage Catalogs](/docs/admin-settings/rbac/global-permissions/#global-permissions-reference) role assigned.
+> - [管理员全局权限](/docs/admin-settings/rbac/global-permissions/_index)
+> - 包含 [Manage Catalogs](/docs/admin-settings/rbac/global-permissions/_index) 权限的[自定义全局权限](/docs/admin-settings/rbac/global-permissions/_index)。
 
-1. From the **Global** view, choose **Tools > Catalogs** in the navigation bar. In versions prior to v2.2.0, you can select **Catalogs** directly in the navigation bar.
+1. 从**全局**界面中，在导航栏中选择**工具 > 应用商店**。在 v2.2.0 之前的版本中，您可以直接在导航栏中选择**应用商店**。
 
-2. Toggle the default catalogs that you want use to a setting of **Enabled**.
+2. 将要使用的默认应用商店切换为**启用**状态。
 
    - **Library**
-
-     
-
-``` 
-
-     ```
-
    - **Helm Stable**
-
-     
-
-``` 
-
-     ```
-
    - **Helm Incubator**
 
-     
-
-``` 
-
-     ```
-
-**Result**: The chosen catalogs are enabled. Wait a few minutes for Rancher to replicate the catalog charts. When replication completes, you'll be able to see them in any of your projects by selecting **Apps** from the main navigation bar. In versions prior to v2.2.0, within a project, you can select **Catalog Apps** from the main navigation bar.
-
+**结果：**启用所选应用商店。等待几分钟，Rancher 需要复制应用商店模板。复制完成后，在项目级别菜单里，您可以在导航栏中选择**工具 > 应用商店**，从而查看它们。在 v2.2.0 之前的版本中，您可以从导航栏中选择**应用商店**。

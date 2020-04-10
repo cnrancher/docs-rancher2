@@ -18,7 +18,7 @@ title: 2、在命名空间中启用 Istio
 
 #### 验证是否启用了 Istio Sidecar 的自动注入
 
-要验证是否启用了 Istio，请在名称空间中部署 hello-world 工作负载。找到该工作负载，然后单击 Pod 名称。在**容器**部分，您应该看到`istio-proxy`容器。
+要验证是否启用了 Istio，请在命名空间中部署 hello-world 工作负载。找到该工作负载，然后单击 Pod 名称。在**容器**部分，您应该看到`istio-proxy`容器。
 
 #### 避免 Istio sidecar 自动注入到某些工作负载
 
