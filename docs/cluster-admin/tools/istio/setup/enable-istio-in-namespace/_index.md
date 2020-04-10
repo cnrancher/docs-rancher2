@@ -22,7 +22,7 @@ title: 2、在命名空间中启用 Istio
 
 #### 避免 Istio sidecar 自动注入到某些工作负载
 
-如果你需要避免 Istio sidecar 自动注入到某个工作负载，请在该工作负载上添加如下注释（annotation）：
+如果您需要避免 Istio sidecar 自动注入到某个工作负载，请在该工作负载上添加如下注释（annotation）：
 
 ```
 sidecar.istio.io/inject: “false”

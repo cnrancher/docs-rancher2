@@ -4,7 +4,7 @@ title: 项目级别应用
 
 在项目层级内部署应用商店应用时，显示的可用应用列表是由[商店作用范围](/docs/catalog/_index)决定的。
 
-如果你的应用使用 Ingress，则可以通过设置[全局 DNS](/docs/catalog/globaldns/_index) 将主机名编程到外部 DNS。
+如果您的应用使用 Ingress，则可以通过设置[全局 DNS](/docs/catalog/globaldns/_index) 将主机名编程到外部 DNS。
 
 ## 先决条件
 

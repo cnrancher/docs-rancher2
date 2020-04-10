@@ -155,7 +155,7 @@ _Cloud Provider_ 是 Kubernetes 中的一个模块，它提供了一个用于管
 Key=kubernetes.io/cluster/<CLUSTERID>, Value=owned
 ```
 
-`<CLUSTERID>`可以是你选择的任何字符串。但是，必须在您标记的每个资源上使用相同的字符串。将标记值设置为`owned`会通知集群，使用`<CLUSTERID>`标记的所有资源都由该集群拥有和管理。
+`<CLUSTERID>`可以是您选择的任何字符串。但是，必须在您标记的每个资源上使用相同的字符串。将标记值设置为`owned`会通知集群，使用`<CLUSTERID>`标记的所有资源都由该集群拥有和管理。
 
 如果在集群之间共享资源，则可以将标记更改为:
 
@@ -188,7 +188,7 @@ Azure 订阅不支持以下帐户类型:
 
 浏览[Azure 控制台](https://portal.azure.com), 登录并跳转**Azure Active Directory** 然后选择 **属性**. 您的**目录 ID** 是您的 **租户 ID** (tenantID).
 
-如果你想使用 Azure CLI，你可以运行命令`az account show`来获取信息。
+如果您想使用 Azure CLI，您可以运行命令`az account show`来获取信息。
 
 ### 设置 Azure 客户端 ID 和 Azure 客户端密钥
 
@@ -200,7 +200,7 @@ Azure 订阅不支持以下帐户类型:
 1. 输入**名称**, 在**Application 类型**中选择`Web app / API`和在这种情况下，可以是任何东西的**Sign-on URL**。
 1. 选择**创建**。
 
-在**应用注册**视图，你应该看到你创建的应用程序注册。列中显示的值**应用 ID**便是您需要的**Azure 客户端 ID**。
+在**应用注册**视图，您应该看到您创建的应用程序注册。列中显示的值**应用 ID**便是您需要的**Azure 客户端 ID**。
 
 下一步是生成**Azure 客户端密钥**:
 

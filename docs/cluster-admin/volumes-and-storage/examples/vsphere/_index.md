@@ -49,7 +49,7 @@ title: vSphere 存储
 7. 选择**删除**，删除这个 Pod。
 8. 观察 Pod 被重新调度并功运行。
 9. 再次点击**执行 Shell**。
-10. 通过输入`ls -l /persistent`，检查挂载卷的目录。请注意，你之前创建的文件应该存在。
+10. 通过输入`ls -l /persistent`，检查挂载卷的目录。请注意，您之前创建的文件应该存在。
 
     ![workload-persistent-data](/img/rancher/workload-persistent-data.png)
 

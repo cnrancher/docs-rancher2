@@ -4,7 +4,7 @@ title: GlusterFS 卷
 
 > 本章节仅适用于[由 RKE 创建的集群](/docs/cluster-provisioning/rke-clusters/_index)。
 
-将数据存储到 GlusterFS 卷时，你可能会遇到一个问题：在重启`kubelet`之后，Pod 无法安装卷。`kubelet`的日志记录将显示：`transport endpoint is not connected`。为了防止这种情况的发生，你可以把集群主机上的`systemd-run`挂载到所有的`kubelet`容器里。在做这个操作之前，有两个要求：
+将数据存储到 GlusterFS 卷时，您可能会遇到一个问题：在重启`kubelet`之后，Pod 无法安装卷。`kubelet`的日志记录将显示：`transport endpoint is not connected`。为了防止这种情况的发生，您可以把集群主机上的`systemd-run`挂载到所有的`kubelet`容器里。在做这个操作之前，有两个要求：
 
 - 集群主机需要安装了`systemd-run`，可以在每台主机上执行`which systemd-run`来验证。
 - `systemd-run`需要兼容 Debian 操作系统，可以在每台主机上执行下面的命令来进行验证，请根据需要更改 hyperkube 的镜像标签。

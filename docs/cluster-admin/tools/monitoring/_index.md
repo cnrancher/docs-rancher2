@@ -4,7 +4,7 @@ title: 功能介绍
 
 _自 v2.2.0 起可用_
 
-通过 Rancher 你可以使用先进的开源监控解决方案[Prometheus](https://prometheus.io/)来监控集群节点，Kubernetes 组件和软件部署的状态和过程。
+通过 Rancher 您可以使用先进的开源监控解决方案[Prometheus](https://prometheus.io/)来监控集群节点，Kubernetes 组件和软件部署的状态和过程。
 
 ## Prometheus 简介
 
@@ -12,40 +12,40 @@ _自 v2.2.0 起可用_
 
 > 一个带有时间戳（时刻数值）的数值流，其中任何一个数值都属于同一个指标和同一组标签（维度）。
 
-因此你可以配置 Prometheus 去收集集群级别或者项目级别的监控数据。本章节将介绍如何启用对集群的监控。有关对项目的监控，可以浏览[项目管理部分](/docs/project-admin/tools/monitoring/_index)。
+因此您可以配置 Prometheus 去收集集群级别或者项目级别的监控数据。本章节将介绍如何启用对集群的监控。有关对项目的监控，可以浏览[项目管理部分](/docs/project-admin/tools/monitoring/_index)。
 
-换句话说，Prometheus 让你可以查看 Rancher 及其纳管的各个 Kubernetes 集群的指标。通过时间戳，你可以使用 Rancher UI 或者 [Grafana](https://grafana.com/)（这是一种与分析工具一起部署的分析查看平台）以易于阅读的图形和视觉形式来查询这些指标。
+换句话说，Prometheus 让您可以查看 Rancher 及其纳管的各个 Kubernetes 集群的指标。通过时间戳，您可以使用 Rancher UI 或者 [Grafana](https://grafana.com/)（这是一种与分析工具一起部署的分析查看平台）以易于阅读的图形和视觉形式来查询这些指标。
 
-通过查看 Prometheus 从集群控制平面，节点和部署的工作负载中刮取的监控数据，你可以掌握集群中发生的所有事情。然后，你可以使用这些数据进行分析，从而更好地进行管控工作：在系统紧急情况发生之前阻止它们，制定维护策略，还原崩溃的服务器等。
+通过查看 Prometheus 从集群控制平面，节点和部署的工作负载中刮取的监控数据，您可以掌握集群中发生的所有事情。然后，您可以使用这些数据进行分析，从而更好地进行管控工作：在系统紧急情况发生之前阻止它们，制定维护策略，还原崩溃的服务器等。
 
 在集群和项目之间的多租户管理也是支持的。
 
 ## 监控访问
 
-通过 Prometheus，你可以在 Rancher 上在集群级别和[项目级别](/docs/project-admin/tools/monitoring/_index)进行监控。对于每个启用了监控的集群和项目，Rancher 都会部署一个 Prometheus 服务。
+通过 Prometheus，您可以在 Rancher 上在集群级别和[项目级别](/docs/project-admin/tools/monitoring/_index)进行监控。对于每个启用了监控的集群和项目，Rancher 都会部署一个 Prometheus 服务。
 
-- 集群监控可让你查看 Kubernetes 集群的运行状况。Prometheus 从下面的集群组件中收集指标，你可以在图表中查看这些指标。
+- 集群监控可让您查看 Kubernetes 集群的运行状况。Prometheus 从下面的集群组件中收集指标，您可以在图表中查看这些指标。
 
   - [Kubernetes 控制平面](/docs/cluster-admin/tools/monitoring/cluster-metrics/_index)
   - [etcd 数据库](/docs/cluster-admin/tools/monitoring/cluster-metrics/_index)
   - [所有节点](/docs/cluster-admin/tools/monitoring/cluster-metrics/_index)
 
-- [项目监控](/docs/project-admin/tools/monitoring/_index)允许你查看在具体某个项目内运行的 Pods 的状态。项目级别的 Prometheus 可以从本项目内部署的工作负载中采集自定义指标，这些工作负载必须通过 HTTP 和 TCP/UDP 暴露指标。
+- [项目监控](/docs/project-admin/tools/monitoring/_index)允许您查看在具体某个项目内运行的 Pods 的状态。项目级别的 Prometheus 可以从本项目内部署的工作负载中采集自定义指标，这些工作负载必须通过 HTTP 和 TCP/UDP 暴露指标。
 
 ## 启用集群监控
 
-作为[系统管理员](/docs/admin-settings/rbac/global-permissions/_index)或[集群所有者](/docs/admin-settings/rbac/cluster-project-roles/_index)，你可以通过配置来监控你的 Kubernetes 集群。
+作为[系统管理员](/docs/admin-settings/rbac/global-permissions/_index)或[集群所有者](/docs/admin-settings/rbac/cluster-project-roles/_index)，您可以通过配置来监控您的 Kubernetes 集群。
 
-1. 在**全局**页面中导航到你想要配置的集群。
+1. 在**全局**页面中导航到您想要配置的集群。
 1. 在导航栏中下拉**工具**，选择**监控**。
-1. 查看[资源消耗建议](#资源消耗)，以确保你有足够的资源用于 Prometheus 及其相关组件。根据需要，配置 [Prometheus 选项](/docs/cluster-admin/tools/monitoring/prometheus/_index)。
+1. 查看[资源消耗建议](#资源消耗)，以确保您有足够的资源用于 Prometheus 及其相关组件。根据需要，配置 [Prometheus 选项](/docs/cluster-admin/tools/monitoring/prometheus/_index)。
 1. 点击**启动**。
 
-**结果：**将部署 Prometheus 服务以及两个监控[应用商店应用](/docs/catalog/apps/_index)。这两个监控应用商店应用是`cluster-monitoring`和`monitoring-operator`，它们会被添加到集群的`系统（System）`项目中。当这两个应用处于`Active`后，你可以通过 [Rancher 集群仪表盘](/docs/cluster-admin/tools/monitoring/viewing-metrics/_index)开始查看[集群指标](/docs/cluster-admin/tools/monitoring/cluster-metrics/_index)或直接从 [Grafana](/docs/cluster-admin/tools/monitoring/_index)中查看。
+**结果：**将部署 Prometheus 服务以及两个监控[应用商店应用](/docs/catalog/apps/_index)。这两个监控应用商店应用是`cluster-monitoring`和`monitoring-operator`，它们会被添加到集群的`系统（System）`项目中。当这两个应用处于`Active`后，您可以通过 [Rancher 集群仪表盘](/docs/cluster-admin/tools/monitoring/viewing-metrics/_index)开始查看[集群指标](/docs/cluster-admin/tools/monitoring/cluster-metrics/_index)或直接从 [Grafana](/docs/cluster-admin/tools/monitoring/_index)中查看。
 
 ## 资源消耗
 
-启用集群监控时，需要确保你的工作节点和 Prometheus Pod 有足够的资源。下表提供了关于资源消耗方面的指南。在较大型的部署中，强烈建议将监控组件（Prometheus 及其相关组件）调度到集群中的专用节点上。
+启用集群监控时，需要确保您的工作节点和 Prometheus Pod 有足够的资源。下表提供了关于资源消耗方面的指南。在较大型的部署中，强烈建议将监控组件（Prometheus 及其相关组件）调度到集群中的专用节点上。
 
 ### Prometheus Pods 的资源消耗
 

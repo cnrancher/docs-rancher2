@@ -4,7 +4,7 @@ title: 使用已有存储
 
 本章节描述了如何在 Rancher 里为工作负载配置现有的持久化存储。
 
-> 本章节假定你已了解 Kubernetes 持久卷和持久卷声明的概念。 有关更多信息，请参阅[存储是如何工作的](/docs/cluster-admin/volumes-and-storage/how-storage-works/_index)
+> 本章节假定您已了解 Kubernetes 持久卷和持久卷声明的概念。 有关更多信息，请参阅[存储是如何工作的](/docs/cluster-admin/volumes-and-storage/how-storage-works/_index)
 
 可以按照以下步骤进行存储的配置。
 
@@ -26,7 +26,7 @@ title: 使用已有存储
 1. 在集群页面中，下拉**存储**，选择**持久卷**。
 1. 点击**添加卷**。
 1. 输入持久卷的**名称**。
-1. 根据使用的磁盘类型或服务选择`卷插件`。在云提供商托管的集群中设置存储，请使用云提供商的卷插件。例如，如果你有 Amazon EC2 集群，并且想要为其使用云存储，则必须使用`Amazon EBS Disk`卷插件。
+1. 根据使用的磁盘类型或服务选择`卷插件`。在云提供商托管的集群中设置存储，请使用云提供商的卷插件。例如，如果您有 Amazon EC2 集群，并且想要为其使用云存储，则必须使用`Amazon EBS Disk`卷插件。
 1. 输入卷的 **Capacity**（以 GB 为单位）。
 1. 填写**插件配置**表单。每种插件类型都需要特定于磁盘类型供应商的信息。有关每个插件的形式和所需信息的帮助，请参阅插件的服务文档以获取更多信息。
 1. **可选：** 在**自定义**表单中，配置[访问模式](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)。该选项设置了可访问卷的节点数及节点的读写权限。在[Kubernetes 文档](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)中包含了一个列表，列出了可用插件支持的访问模式。
@@ -43,7 +43,7 @@ title: 使用已有存储
 1. 点击**卷**页签，然后点击**添加卷**(在早于 v2.3.0 的版本中，可以点击导航栏上的**工作负载**，然后点击**卷**)。
 1. 输入卷声明的**名称**。
 1. 选择要将持久化存储添加到的工作负载的[命名空间](/docs/k8s-in-rancher/projects-and-namespaces/_index)。
-1. 在**使用现有的持久卷**中，进入**持久卷**下拉列表并选择你创建的持久卷。
+1. 在**使用现有的持久卷**中，进入**持久卷**下拉列表并选择您创建的持久卷。
 1. **可选：** 在**自定义**中，选择要使用的[访问模式](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)。
 1. 点击**创建**。
 
@@ -53,7 +53,7 @@ title: 使用已有存储
 
 将 PVC 挂载到有状态的工作负载，以便应用程序可以存储其数据。
 
-你可以在工作负载部署期间或创建工作负载之后挂载 PVC。
+您可以在工作负载部署期间或创建工作负载之后挂载 PVC。
 
 以下的步骤描述了如何将 PVC 分配给有状态的新工作负载：
 
