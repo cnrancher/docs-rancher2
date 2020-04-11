@@ -1,218 +1,221 @@
 ---
-title: 介绍
+title: 流水线介绍
 ---
 
-Using Rancher, you can integrate with a GitHub repository to setup a continuous integration (CI) pipeline.
+您可以使用 Rancher 和 GitHub、GitLab 或 Bitbucket 代码仓库库集成，配置持续集成（CI）流水线。本文提供了 Rancher 与代码库集成、管理全局流水线执行配置和配置流水线组件持久存储的操作指导。
 
-To set up a pipeline, you'll first need to authorize Rancher using your GitHub settings. Directions are provided in the Rancher UI. After authorizing Rancher in GitHub, provide Rancher with a client ID and secret to authenticate.
+以 GitHub 为例，如果您要集成 Rancher 流水线和 GitHub，首先您需要授权 Rancher 使用您的 GitHub 配置。Rancher UI 提供了授权指导。完成 GitHub 授权后，您需要在 Rancher UI 中提供 GitHub 用户名和密码，完成认证。完成 Rancher 和 GitHub 的对接工作后，您可以部署运行 Jenkins 的容器，自动运行流水线。
 
-After configuring Rancher and GitHub, you can deploy containers running Jenkins to automate a pipeline execution:
+*流水线*是一个软件开发的过程，它被分为了不同的阶段和步骤。一个流水线可以有若干个阶段，一个阶段可以有若干个步骤。流水线可以帮助开发者快速高效地开发软件。Rancher 支持项目层级的流水线部署，您可以给每一个 Rancher 项目单独配置流水线。一条典型的流水线包括了以下几个步骤：
 
-* Build your application from code to image.
-* Validate your builds.
-* Deploy your build images to your cluster.
-* Run unit tests.
-* Run regression tests.
+- 构建镜像
+- 验证镜像
+- 部署镜像到集群
+- 执行单元测试
+- 执行回归测试
 
-A _pipeline_ is a software delivery process that is broken into different stages and steps. Setting up a pipeline can help developers deliver new software as quickly and efficiently as possible. Within Rancher, you can configure pipelines for each of your Rancher projects.
+一条典型的流水线应该由以下几个阶段组成：
 
-Typically, pipeline stages include:
+- **复制代码：**
 
-* **Build:**
+  每次代码合入 GitHub 代码库的时候，流水线会自动复制一份新的代码，用这份代码构建版本迭代。
 
-  Each time code is checked into your repository, the pipeline automatically clones the repo and builds a new iteration of your software. Throughout this process, the software is typically reviewed by automated tests.
+- **构建和验证镜像：**
 
-* **Publish:**
+  在这个过程中，代码通常需要通过自动化测试（包括单元测试和回归测试）的验证，才可以完成版本迭代。
 
-  After the build is completed, either a Docker image is built and published to a Docker registry or a catalog template is published.
+- **发布镜像：**
 
-* **Deploy:**
+  完成版本后，会构建 Docker 镜像，发布到 Docker 镜像仓库中，或者发布一个应用模板。
 
-  After the artifacts are published, you would release your application so users could start using the updated product.
+* **部署镜像：**
 
-Only [administrators](/docs/admin-settings/rbac/global-permissions/), [cluster owners or members](/docs/admin-settings/rbac/cluster-project-roles/#cluster-roles), or [project owners](/docs/admin-settings/rbac/cluster-project-roles/#project-roles) can [configure version control providers](#version-control-providers) and [manage global pipeline execution settings](#managing-global-pipeline-execution-settings). Project members can only configure [repositories](/docs/k8s-in-rancher/pipelines/#configuring-repositories) and [pipelines](/docs/k8s-in-rancher/pipelines/#pipeline-configuration).
+  完成发布后，你可以发行新版软件，用户可以开始使用迭代后的产品。
 
-> **Notes:**
+只有[管理员](/docs/admin-settings/rbac/global-permissions/_index)、[集群所有者或集群成员](/docs/admin-settings/rbac/cluster-project-roles/_index)和 [项目所有者](/docs/admin-settings/rbac/cluster-project-roles/_index)可以[配置版本控制供应商](#version-control-providers)和[管理全局流水线执行配置](#managing-global-pipeline-execution-settings)。项目成员只能够配置[repositories](/docs/k8s-in-rancher/pipelines/_index)和[流水线](/docs/k8s-in-rancher/pipelines/_index)。
+
+> **说明：**
 >
-> - Pipelines were improved in Rancher v2.1. Therefore, if you configured pipelines while using v2.0.x, you'll have to reconfigure them after upgrading to v2.1.
-> - Still using v2.0.x? See the pipeline documentation for [previous versions](/docs/tools/pipelines/docs-for-v2.0.x).
+> - Rancher v2.1 改进了流水线功能。如果您使用 v2.1 以前的版本配置了流水线，当您升级到 v2.1 后，需要重新配置一遍流水线。
+> - 如果您仍在使用 Rancher v2.0.x，请参考[Rancher v2.0.x 文档](/docs/tools/pipelines/docs-for-v2.0.x/_index)。
 
-### Overview
+## 概述
 
-Rancher's pipeline provides a simple CI/CD experience. Use it to automatically checkout code, run builds or scripts, publish Docker images or catalog applications, and deploy the updated software to users.
+Rancher 的流水线提供了简单的持续集成/持续开发（CI/CD）体验。您可以使用 Rancher 流水线自动添加代码，运行构建或脚本，发布 Docker 镜像或应用，然后部署升级的软件供用户使用。
 
-After enabling the ability to use pipelines in a project, you can configure multiple pipelines in each project. Each pipeline is unique and can be configured independently.
+Rancher 项目启用了流水线功能后，您可以给每一个 Rancher 项目配置多条流水线。每一条流水线都是独立的，您可以单独配置每一条流水线的参数。
 
-A pipeline is configured off of a group of files that are checked into source code repositories. Users can configure their pipelines either through the Rancher UI or by adding a `.rancher-pipeline.yml` into the repository.
+流水线是配置到源代码 repository 的一组文件。用户可以使用 Rancher UI 配置流水线，或在 repository 添加一个`.rancher-pipeline.yml` ，配置流水线。
 
-> **Note:** Rancher's pipeline provides a simple CI/CD experience, but it does not offer the full power and flexibility of and is not a replacement of enterprise-grade Jenkins or other CI tools your team uses.
+> **说明：** Rancher 的流水线提供了简单的持续集成\持续开发（CI/CD ）体验，但是它是简化版的流水线，并不能提供典型流水线的全部功能。Rancher 的流水线不是一个企业级 Jenkins 或其他企业级持续集成工具的替代品。
 
-### How Pipelines Work
+## 流水线的工作原理
 
-When you configure a pipeline in one of your projects, a namespace specifically for the pipeline is automatically created. The following components are deployed to it:
+当您配置项目流水线的时候，Rancher 会自动创建一个供流水线使用的命名空间。以下的组件会部署到这个命名空间里面：
 
-* **Jenkins:**
+- **Jenkins：**
 
-  The pipeline's build engine. Because project users do not directly interact with Jenkins, it's managed and locked.
+  Jenkins 是构建流水线引擎。因为项目用户不会直接与 Jenkins 交互，所以它是被管理和被锁定的状态。
 
-  > **Note:** There is no option to use existing Jenkins deployments as the pipeline engine.
+  > **说明：** Rancher 不支持使用已有的 Jenkins 作为流水线引擎。
 
-* **Docker Registry:**
+- **Docker 镜像仓库：**
 
-  Out-of-the-box, the default target for your build-publish step is an internal Docker Registry. However, you can make configurations to push to a remote registry instead. The internal Docker Registry is only accessible from cluster nodes and cannot be directly accessed by users. Images are not persisted beyond the lifetime of the pipeline and should only be used in pipeline runs. If you need to access your images outside of pipeline runs, please push to an external registry.
+  Docker 镜像仓库是存储镜像的组件。您使用 Rancher 构建-发布的镜像或应用，默认会推送到 Rancher 内部的 Docker 镜像仓库。但是您可以修改默认配置，把修改后的代码推送到远端仓库。Rancher 内部的 Docker 镜像仓库只能通过集群节点访问，而用户不能直接访问。镜像留存的时间不会超过流水线的生命周期，而且镜像应该只用于流水线运行。如果您在流水线运行以外的时间访问镜像，请使用外部镜像仓库。
 
-* **Minio:**
+- **MinIO：**
 
-  Minio storage is used to store the logs for pipeline executions.
+  MinIO 是存储 Rancher 流水线日志的组件。
 
-> **Note:** The managed Jenkins instance works statelessly, so don't worry about its data persistency. The Docker Registry and Minio instances use ephemeral volumes by default, which is fine for most use cases. If you want to make sure pipeline logs can survive node failures, you can configure persistent volumes for them, as described in [data persistency for pipeline components](#configuring-persistent-data-for-pipeline-components).
+  > **说明：** 被管理的 Jenkins 实例的工作是无状态的，所以您不用担心数据持久化的问题。Docker 镜像仓库和 MinIO 实例默认使用短暂存储，短暂存储足以应对对大多数情况。如果您希望保证流水线日志在节点失败的情况下能被保存下来，您可以给日志配置持久存储，详情请参考[流水线组件数据持久存储](#配置流水线组件的持久存储)。
 
-### Pipeline Triggers
+## 流水线的触发方式
 
-After you configure a pipeline, you can trigger it using different methods:
+完成流水线的配置后，您可以手动或自动触发流水线：
 
-* **Manually:**
+- **手动触发：**
 
-  After you configure a pipeline, you can trigger a build using the latest CI definition from Rancher UI. When a pipeline execution is triggered, Rancher dynamically provisions a Kubernetes pod to run your CI tasks and then remove it upon completion.
+  完成流水线配置后，您可以从 Rancher UI 中最新的 CI 定义触发构建。触发流水线构建的时候，Rancher 动态提供一个 Kubernetes Pod 运行您的 CI 任务，然后在流水线完成的时候移除这个 Pod。
 
-* **Automatically:**
+* **自动触发：**
 
-  When you enable a repository for a pipeline, webhooks are automatically added to the version control system. When project users interact with the repo—push code, open pull requests, or create a tag—the version control system sends a webhook to Rancher Server, triggering a pipeline execution.
+  当您允许流水线对接远端代码仓库（repository）的时候，您使用的版本控制工具中会自动添加 webhook。当项目用户尝试修改远端代码仓库中的代码时，例如使用远端代码仓库中的代码、发起 pull request 或创建 tag，版本控制工具会发送一个 webhook 给 Rancher Server，这就会触发一次流水线运行。
 
-  To use this automation, webhook management permission is required for the repository. Therefore, when users authenticate and fetch their repositories, only those on which they have webhook management permission will be shown.
+  您需要有远端代码仓库的 webhook 管理权限，才可以使用自动触发流水线的功能。因此，当用户认证和 fetch 远端代码仓库的时候，只能认证和 fetch 到用户有 webhook 管理权限的远端代码仓库。
 
-### Version Control Providers
+## Rancher 支持的版本控制系统服务商
 
-Before you can start [configuring a pipeline](/docs/k8s-in-rancher/pipelines/) for your repository, you must configure and authorize a version control provider.
+配置流水线前，您必须配置和授权版本控制系统服务商 。Rancher 支持的版本控制系统服务商 包括：GitHub、GitLab 和 Bitbucket，详情如下表所示。
 
-| Provider  | Available as of |
-| --------- | --------------- |
-| GitHub    | v2.0.0          |
-| GitLab    | v2.1.0          |
-| Bitbucket | v2.2.0          |
+| 服务商    | 版本                          |
+| :-------- | :---------------------------- |
+| GitHub    | Rancher v2.0.0 或更新版本可用 |
+| GitLab    | Rancher v2.1.0 或更新版本可用 |
+| Bitbucket | Rancher v2.2.0 或更新版本可用 |
 
-Select your provider's tab below and follow the directions.
+选择一个版本控制系统服务商 然后按照以下步骤操作。
 
- tabs 
- tab "GitHub" 
+### GitHub
 
-1. From the **Global** view, navigate to the project that you want to configure pipelines.
+1. 从全局页面导航到需要配置流水线的项目。
 
-1. Select **Tools > Pipelines** in the navigation bar. In versions prior to v2.2.0, you can select **Resources > Pipelines**.
+1. 从导航栏选择 **工具 > 流水线**。如果您使用的是 v2.2.0 以前的版本，请选择**资源 > 流水线**。
 
-1. Follow the directions displayed to **Setup a Github application**. Rancher redirects you to Github to setup an OAuth App in Github.
+1. 按照 UI 界面的的提示，**配置 Github 应用**。Rancher 会打开 Github 网页，在里面配置一个 OAuth 应用。
 
-1. From GitHub, copy the **Client ID** and **Client Secret**. Paste them into Rancher.
+1. Paste them into Rancher.从复制 GitHub 的**Client ID** 和 **Client Secret**，粘贴到 Rancher UI 的对应位置。
 
-1. If you're using GitHub for enterprise, select **Use a private github enterprise installation**. Enter the host address of your GitHub installation.
+1. 如果您使用的企业版 GitHub，选择**Use a private github enterprise installation**，输入安装 GitHub 的主机地址。
 
-1. Click **Authenticate**.
+1. 单击**认证**，完成认证。
 
- /tab 
- tab "GitLab" 
+### GitLab
 
-_Available as of v2.1.0_
+_v2.1.0 或更新版本可用_
 
-1. From the **Global** view, navigate to the project that you want to configure pipelines.
+1. 从全局页面导航到需要配置流水线的项目。
 
-1. Select **Tools > Pipelines** in the navigation bar. In versions prior to v2.2.0, you can select **Resources > Pipelines**.
+1. 从导航栏选择 **工具 > 流水线**。如果您使用的是 v2.2.0 以前的版本，请选择**资源 > 流水线**。
 
-1. Follow the directions displayed to **Setup a GitLab application**. Rancher redirects you to GitLab.
+1. 按照 UI 界面的的提示，**配置 GitLab 应用**。Rancher 会打开 Github 网页。
 
-1. From GitLab, copy the **Application ID** and **Secret**. Paste them into Rancher.
+1. 从 GitLab 复制**Applicat ion ID**和 **Secret**，粘贴到 Rancher UI 的对应位置。
 
-1. If you're using GitLab for enterprise setup, select **Use a private gitlab enterprise installation**. Enter the host address of your GitLab installation.
+1. 如果果您使用的是企业版 GitLab，选择**Use a private gitlab enterprise installation**，输入安装 GitHub 的主机地址。
 
-1. Click **Authenticate**.
+1. 单击**认证**，完成认证。
 
-> **Note:**
+> **说明：**
 >
-> 1. Pipeline uses Gitlab [v4 API](https://docs.gitlab.com/ee/api/v3_to_v4.html) and the supported Gitlab version is 9.0+.
-> 2. If you use GitLab 10.7+ and your Rancher setup is in a local network, enable the **Allow requests to the local network from hooks and services** option in GitLab admin settings.
-> /tab 
-> tab "Bitbucket Cloud" 
+> 1. Rancher 流水线使用的 GitLab API 接口是[v4 API](https://docs.gitlab.com/ee/api/v3_to_v4.html)。流水线支持的 GitHub 版本是 9.0 及更新版本。
+> 2. 如果您使用的是 GitLab 10.7 或更新版本，且在本地安装了 Rancher，请启用 GitLab admin setting 的**Allow requests to the local network from hooks and services**功能。
 
-_Available as of v2.2.0_
+### Bitbucket Cloud
 
-1. From the **Global** view, navigate to the project that you want to configure pipelines.
+_v2.2.0 或更新版本可用_
 
-1. Select **Tools > Pipelines** in the navigation bar.
+1. 从全局页面导航到需要配置流水线的项目。
 
-1. Choose the **Use public Bitbucket Cloud** option.
+1. 从导航栏选择 **工具 > 流水线**。
 
-1. Follow the directions displayed to **Setup a Bitbucket Cloud application**. Rancher redirects you to Bitbucket to setup an OAuth consumer in Bitbucket.
+1. 选择**使用 Bitbucket Cloud**选项。
 
-1. From Bitbucket, copy the consumer **Key** and **Secret**. Paste them into Rancher.
+1. 按照 UI 界面的的提示，**配置 Bitbucket Cloud 应用**。Rancher 会打开 Bitbucket 网页，在里面配置一个 OAuth consumer。
 
-1. Click **Authenticate**.
+1. Paste them into Rancher.从 Bitbucket 复制 consumer **Key**和 **Secret**，粘贴到 Rancher UI 的对应位置。
 
- /tab 
- tab "Bitbucket Server" 
+1.单击**Authenticate**，完成认证。
 
-_Available as of v2.2.0_
+### Bitbucket Server
 
-1. From the **Global** view, navigate to the project that you want to configure pipelines.
+_v2.2.0 或更新版本可用_
 
-1. Select **Tools > Pipelines** in the navigation bar.
+1. 从全局页面导航到需要配置流水线的项目。
 
-1. Choose the **Use private Bitbucket Server setup** option.
+1. 从导航栏选择 **工具 > 流水线**。
 
-1. Follow the directions displayed to **Setup a Bitbucket Server application**.
+1. 选择**使用私有 Bitbucket Server**选项。
 
-1. Enter the host address of your Bitbucket server installation.
+1. 按照 UI 界面的的提示，**配置 Bitbucket Server 应用**。
 
-1. Click **Authenticate**.
+1. 输入安装 GitHub 的主机地址。
 
-> **Note:**
-> Bitbucket server needs to do SSL verification when sending webhooks to Rancher. Please ensure that Rancher server's certificate is trusted by the Bitbucket server. There are two options:
+1. 单击**认证**，完成认证。
+
+> **说明：**
+> Bitbucket server 发送 webhooks 到 Rancher 的时候需要对 Rancher 进行 SSL 认证，请保证 Rancher Server 使用的证书可以被 Bitbucket server 信任。有两种方法可以保证 Rancher Server 使用的证书可以被 Bitbucket server 信任：
 >
-> 1. Setup Rancher server with a certificate from a trusted CA.
-> 1. If you're using self-signed certificates, import Rancher server's certificate to the Bitbucket server. For instructions, see the Bitbucket server documentation for [configuring self-signed certificates](https://confluence.atlassian.com/bitbucketserver/if-you-use-self-signed-certificates-938028692.html).
->
-> /tab 
-> /tabs 
+> 1. 配置 Rancher Server 的时候，使用可信任证书颁发机构发出的证书。
+> 1. 如果您使用的是自签名证书，请将 Rancher Server 的证书导入到 Bitbucket server，详情请参考[如何配置自签名证书](https://confluence.atlassian.com/bitbucketserver/if-you-use-self-signed-certificates-938028692.html)。
 
-**Result:** After the version control provider is authenticated, you will be automatically re-directed to start [configuring which repositories](/docs/k8s-in-rancher/pipelines/#configuring-repositories) that you want start using with a pipeline. Once a repository is enabled, you can start to [configure the pipeline](/docs/k8s-in-rancher/pipelines/#pipeline-configuration).
+**结果：** 完成版本控制系统服务商认证后，Rancher 会重新导向到开始[配置 repositories](/docs/k8s-in-rancher/pipelines/_index)页面。启用 repository 后，您可以开始[配置流水线](/docs/k8s-in-rancher/pipelines/_index)。
 
-### Managing Global Pipeline Execution Settings
+## 管理全局流水线执行配置
 
-After configuring a version control provider, there are several options that can be configured globally on how [pipelines](/docs/k8s-in-rancher/pipelines/) are executed in Rancher.
+配置了版本控制服务商 后，您可以全局配置一些[流水线](/docs/k8s-in-rancher/pipelines/_index)相关的选项。
 
-1. From the **Global** view, navigate to the project that you want to configure pipelines.
+1. 从全局页面导航到需要配置流水线的项目。
 
-1. Select **Tools > Pipelines** in the navigation bar. In versions prior to v2.2.0, you can select **Resources > Pipelines**.
+1. 从导航栏选择 **工具 > 流水线**。如果您使用的是 v2.2.0 以前的版本，请选择**资源 > 流水线**。
 
-1. Edit the different settings:
+### 执行器配额（Executor Quota）
 
-    accordion id="executor-quota" label="Executor Quota" 
+1. 从全局页面导航到需要配置流水线的项目。
 
-Select the maximum number of pipeline executors. The _executor quota_ decides how many builds can run simultaneously in the project. If the number of triggered builds exceeds the quota, subsequent builds will queue until a vacancy opens. By default, the quota is `2` . A value of `0` or less removes the quota limit.
- /accordion 
+1. 从导航栏选择 **工具 > 流水线**。如果您使用的是 v2.2.0 以前的版本，请选择**资源 > 流水线**。
 
-     accordion id="resource-quota" label="Resource Quota for Executors" 
+选择最大数量的流水线执行器。_执行器配额_ 决定了项目中可以同时运行多少个构建，如果触发的构建数量超过了执行器配额，构建会形成队列，执行器先执行一部分构建，执行完成后，再执行另一部分构建。执行器的默认配额是`2`，将这个配额的值修改为`0`或负数会取消配额限制。
 
-_Available as of v2.2.0_
+### 执行器资源配额（Resource Quota for Executors）
 
-Configure compute resources for Jenkins agent containers. When a pipeline execution is triggered, a build pod is dynamically provisioned to run your CI tasks. Under the hood, A build pod consists of one Jenkins agent container and one container for each pipeline step. You can [manage compute resources](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) for every containers in the pod.
+_v2.2.0 或更新版本可用_
 
-Edit the **Memory Reservation**, **Memory Limit**, **CPU Reservation** or **CPU Limit**, then click **Update Limit and Reservation**.
+1. 从全局页面导航到需要配置流水线的项目。
 
-To configure compute resources for pipeline-step containers:
- tabs 
- tab "By YAML" 
+1. 从导航栏选择 **工具 > 流水线**。如果您使用的是 v2.2.0 以前的版本，请选择**资源 > 流水线**。
 
-You can configure compute resources for pipeline-step containers in the `.rancher-pipeline.yml` file.
+1. 配置 Jenkins agent 容器的计算资源。
 
-In a [step type](/docs/k8s-in-rancher/pipelines/#step-types), you will provide the following information:
+   触发流水线执行的时候，Rancher 会动态提供一个构建 Pod 运行您的 CI 任务。这个 Pod 由一个 Jenkins agent 容器和多个流水线步骤容器构成。您可以管理 Pod 内每一个容器的计算资源 [计算资源](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/)。编辑**内存预留**、**内存限制**、 **CPU 预留**、 **CPU 限制**。
 
-* **CPU Reservation ( `CpuRequest` )**: CPU request for the container of a pipeline step.
-* **CPU Limit ( `CpuLimit` )**: CPU limit for the container of a pipeline step.
-* **Memory Reservation ( `MemoryRequest` )**: Memory request for the container of a pipeline step.
-* **Memory Limit ( `MemoryLimit` )**: Memory limit for the container of a pipeline step.
+1. 单击**修改限制和预留**，完成修改。
 
-``` yaml
+### 通过 YAML 编辑流水线步骤容器的计算资源
 
-## example
+您可以在`.rancher-pipeline.yml`文件中配置流水线步骤容器的计算资源。
+
+在[步骤类型](/docs/k8s-in-rancher/pipelines/_index)中，你需要提供以下预留和限制：
+
+- **CPU 预留 ( `CpuRequest` )**: 预留给流水线步骤容器的 CPU 配额。
+- **CPU 限制 ( `CpuLimit` )**: 流水线步骤容器的能使用 CPU 的最大限额。
+- **Memory 预留 ( `MemoryRequest` )**:预留给流水线步骤容器的内存配额。
+- **Memory 限制 ( `MemoryLimit` )**:流水线步骤容器的能使用内存最大配额。
+
+以下是一个通过 YAML 编辑流水线步骤容器计算资源的示例：
+
+```yaml
+
+## 示例
 
 stages:
 
@@ -240,133 +243,113 @@ stages:
       memoryLimit: 1Gi
 ```
 
-> **Note:** Rancher sets default compute resources for pipeline steps except for `Build and Publish Images` and `Run Script` steps. You can override the default value by specifying compute resources in the same way.
-> /tab 
-> /tabs 
+> **说明：** Rancher 配置了除`构建和发布镜像`和 `运行脚本`以外的其他流水线步骤的计算资源。您可以覆盖原有的资源配额。
 
-     /accordion 
+### 自定义 CA 证书
 
-     accordion id="cacerts" label="Custom CA" 
+_v2.2.0 或更新版本可用_
 
-_Available as of v2.2.0_
+1. 从全局页面导航到需要配置流水线的项目。
 
-If you want to use a version control provider with a certificate from a custom/internal CA root, the CA root certificates need to be added as part of the version control provider configuration in order for the pipeline build pods to succeed.
+1. 从导航栏选择 **工具 > 流水线**。如果您使用的是 v2.2.0 以前的版本，请选择**资源 > 流水线**
 
-1. Click **Edit cacerts**.
+如果您需要配合自定义/内部 CA 根证书使用版本控制服务商 ，CA 根证书需要被添加到版本控制服务商的配置中，才可以保证流水线构建 Pod 成功运行。
 
-1. Paste in the CA root certificates and click **Save cacerts**.
+1. 单击**编辑证书**。
 
-**Result:** Pipelines can be used and new pods will be able to work with the self-signed-certificate.
+1. 复制粘贴 CA 根证书，单击**保存 CA 证书**。
 
-     /accordion 
+**结果：** 流水线和新 Pod 可以配合自签名证书使用。
 
-### Configuring Persistent Data for Pipeline Components
+## 配置流水线组件的持久存储
 
-The internal [Docker registry](#how-pipelines-work) and the [Minio](#how-pipelines-work) workloads use ephemeral volumes by default. This default storage works out-of-the-box and makes testing easy, but you lose the build images and build logs if the node running the Docker Registry or Minio fails. In most cases this is fine. If you want build images and logs to survive node failures, you can configure the Docker Registry and Minio to use persistent volumes.
+[Docker 镜像仓库](#流水线的工作原理) 和 [MinIO](#流水线的工作原理) 工作负载默认使用短暂存储，短暂存储足以应对对大多数情况。如果您希望镜像和流水线日志在节点失败的情况下能被保存下来，您可以给镜像日志配置持久存储。下文提供了配置持久存储的操作指导。
 
-> **Prerequisites (for both parts A and B):**
+> **前提条件：**
 >
-> [Persistent volumes](/docs/k8s-in-rancher/volumes-and-storage/#persistent-volumes) must be available for the cluster.
+> 集群必须有可用的[持久存储](/docs/k8s-in-rancher/volumes-and-storage/_index)。
 
-#### A. Configuring Persistent Data for Docker Registry
+### 配置镜像仓库的持久存储
 
-1. From the project that you're configuring a pipeline for, and click **Resources > Workloads.** In versions prior to v2.3.0, select the **Workloads** tab.
+1. 从需要配置流水线的项目选择**资源 > 工作负载**。如果您使用的是 v2.3.0 之前的版本，请选择**工作负载**。
 
-1. Find the `docker-registry` workload and select **Ellipsis (... ) > Edit**.
+1. 找到 `docker-registry`的工作负载，选择 **... > 编辑**。
 
-1. Scroll to the **Volumes** section and expand it. Make one of the following selections from the **Add Volume** menu, which is near the bottom of the section:
+1. 找到“持久卷”的部分，展开选项。单击**添加卷**，从下列两个选项中选择一个：
 
-   - **Add Volume > Add a new persistent volume (claim)**
-   - **Add Volume > Use an existing persistent volume (claim)**
+   - **添加卷 > 添加新的持久卷**
+   - **添加卷 > 使用已有的持久卷**
 
-1. Complete the form that displays to choose a persistent volume for the internal Docker registry.
+1. 填写 UI 界面提供的表格，选择内部镜像仓库使用的持久卷。
 
-    tabs 
+#### 添加新的持久卷
 
- tab "Add a new persistent volume" 
-<br/>
+1. 输入持久卷的**名称**。
 
-1. Enter a **Name** for the volume claim.
+1. 选择持久卷的**源**
 
-1. Select a volume claim **Source**:
+   - 如果您选择的是**使用 Storage Class 启动持久存储卷**，你需要选择[Storage Class](/docs/k8s-in-rancher/volumes-and-storage/_index) ，输入 **容量**。
 
-   - If you select **Use a Storage Class to provision a new persistent volume**, select a [Storage Class](/docs/k8s-in-rancher/volumes-and-storage/#storage-classes) and enter a **Capacity**.
+   - 如果您选择 **使用已有的存储卷**，请直接输入**容量**。
 
-   - If you select **Use an existing persistent volume**, choose a **Persistent Volume** from the drop-down.
+1. 在**自定义**的部分勾选存储卷的读写权限。
 
-1. From the **Customize** section, choose the read/write access for the volume.
+1. 单击**定义**。
 
-1. Click **Define**.
+#### 使用已有的持久卷
 
- /tab 
+1. 输入持久卷的**名称**。
 
- tab "Use an existing persistent volume" 
-<br/>
+1. 选择一个持久卷。
 
-1. Enter a **Name** for the volume claim.
+1. 在**自定义**的部分勾选存储卷的读写权限。
 
-1. Choose a **Persistent Volume Claim** from the drop-down.
+1. 单击**定义**。
 
-1. From the **Customize** section, choose the read/write access for the volume.
+#### 后续步骤
 
-1. Click **Define**.
+1. 在**挂载**对应的文本框输入镜像仓库数据存储的路径： `/var/lib/registry`。
 
- /tab 
+1. 单击 **升级**。
 
- /tabs 
+### 配置 MinIO 的数据存储
 
-1. From the **Mount Point** field, enter `/var/lib/registry` , which is the data storage path inside the Docker registry container.
+1. 从项目视图选择**资源 > 工作负载**（如果您使用的是 v2.3.0 之前的版本，请单击**工作负载**）。找到`minio`工作负载，然后选择 **... > 编辑**。
 
-1. Click **Upgrade**.
+1. 找到“持久卷”的部分，展开选项。单击**添加卷**，从下列两个选项中选择一个：
 
-#### B. Configuring Persistent Data for Minio
+   - **添加卷 > 添加新的持久卷**
+   - **添加卷 > 使用已有的持久卷**
 
-1. From the project view, click **Resources > Workloads.** (In versions prior to v2.3.0, click the **Workloads** tab.) Find the `minio` workload and select **Ellipsis (... ) > Edit**.
+1. 填写 UI 界面提供的表格，选择内部镜像仓库使用的持久卷
 
-1. Scroll to the **Volumes** section and expand it. Make one of the following selections from the **Add Volume** menu, which is near the bottom of the section:
+#### 添加新的持久卷
 
-   - **Add Volume > Add a new persistent volume (claim)**
-   - **Add Volume > Use an existing persistent volume (claim)**
+1. 输入持久卷的**名称**。
 
-1. Complete the form that displays to choose a persistent volume for the internal Docker registry.
+1. 选择持久卷的**源**
 
-    tabs 
+   - 如果您选择的是**Use a Storage Class to provision a new persistent volume**，你需要选择[Storage Class](/docs/k8s-in-rancher/volumes-and-storage/_index) ，输入 **Capacity**。
+   - 如果您选择 **Use an existing persistent volume**，请直接输入**Capacity**
 
- tab "Add a new persistent volume" 
-<br/>
+1. 在**自定义**的部分勾选存储卷的读写权限。
 
-1. Enter a **Name** for the volume claim.
+1. 单击 **Define**。
 
-1. Select a volume claim **Source**:
+#### 使用已有的持久卷
 
-   - If you select **Use a Storage Class to provision a new persistent volume**, select a [Storage Class](/docs/k8s-in-rancher/volumes-and-storage/#storage-classes) and enter a **Capacity**.
+1. 输入持久卷的**名称**。
 
-   - If you select **Use an existing persistent volume**, choose a **Persistent Volume** from the drop-down.
+1. 选择一个持久卷。
 
-1. From the **Customize** section, choose the read/write access for the volume.
+1. 在**自定义**的部分勾选存储卷的读写权限。
 
-1. Click **Define**.
+1. 单击**定义**。
 
- /tab 
+#### 后续步骤
 
- tab "Use an existing persistent volume" 
-<br/>
+1. 在**挂载**对应的文本框输入 MinIO 数据存储的路径： `/var/lib/registry`。
 
-1. Enter a **Name** for the volume claim.
+1. 单击 **升级**。
 
-1. Choose a **Persistent Volume Claim** from the drop-down.
-
-1. From the **Customize** section, choose the read/write access for the volume.
-
-1. Click **Define**.
-
- /tab 
-
- /tabs 
-
-1. From the **Mount Point** field, enter `/data` , which is the data storage path inside the Minio container.
-
-1. Click **Upgrade**.
-
-**Result:** Persistent storage is configured for your pipeline components.
-
+**结果：** 完成流水组件的持久存储配置。
