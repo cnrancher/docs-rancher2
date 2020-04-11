@@ -2,115 +2,110 @@
 title: v2.0.x 版本中的流水线
 ---
 
-> **Note:** This section describes the pipeline feature as implemented in Rancher v2.0.x. If you are using Rancher v2.1 or later, where pipelines have been significantly improved, please refer to the new documentation for [v2.1 or later](/docs/tools/pipelines).
+> **说明：**本文提供了配置**Rancher v2.0.x**流水线的操作步骤。 Rancher v2.1 改进了流水线，如果您使用的是 Rancher v2.1 或更新版本，请参考[Rancher v2.1 流水线相关操作](/docs/tools/pipelines)。
 
-Pipelines help you automate the software delivery process. You can integrate Rancher with GitHub to create a pipeline.
+## 概述
 
-You can set up your pipeline to run a series of stages and steps to test your code and deploy it.
+流水线把软件开发变成了一套自动化的流程。您可以使用 Rancher 和 GitHub 集成，创建流水线。
 
-<dl>
+您可以配置您的流水线，运行若干个阶段和步骤，测试您的代码，然后部署新版本的软件。
 
-	<dt>Pipelines</dt>
-	<dd>Contain a series of stages and steps. Out-of-the-box, the pipelines feature supports fan out and in capabilities.</dd>
-	<dt>Stages</dt>
-	<dd>Executed sequentially. The next stage will not execute until all of the steps within the stage execute.</dd>
-	<dt>Steps</dt>
-	<dd>Are executed in parallel within a stage. </dd>
+## 流水线相关概念
 
-</dl>
+- **流水线：**流水线在程序执行时多条指令重叠进行操作的一种准并行处理实现技术。一条流水线由若干个阶段组成，每
+- **阶段：**每个阶段由若干个步骤组成。运行流水线时，所有的阶段会按照既定的顺序运行，只有前一个阶段内的所有步骤完成运行之后，才会进入到下一个阶段，运行这个阶段内的步骤。
+- **步骤：**步骤是组成流水线的最小单位。运行流水线时，会同时执行一个阶段内的所有步骤。
 
-### Enabling CI Pipelines
+## 启用 CI 流水线
 
-1. Select cluster from drop down.
+1. 从下拉菜单选择集群。
 
-2. Under tools menu select pipelines.
+2. 从“工具”一栏选择“流水线”。
 
-3. Follow instructions for setting up github auth on page.
+3. 按照页面的指引完成 GitHub 授权。
 
-### Creating CI Pipelines
+## 创建 CI 流水线
 
-1. Go to the project you want this pipeline to run in.
+1. 选择需要运行流水线的项目。
 
-2. Click **Resources > Pipelines.** In versions prior to v2.3.0,click **Workloads > Pipelines.**
+2. 单击**资源 > 流水线**。如果您使用的是 v2.3.0 之前的版本，请单击**工作负载 > 流水线**。
 
-3. Click Add pipeline button.
+3. 单击“添加流水线”，进入添加流水线的页面。
 
-4. Enter in your repository name (Autocomplete should help zero in on it quickly).
+4. 输入代码仓库的名称。
 
-5. Select Branch options.
+5. 选择 分支 选项。
 
-   - Only the branch {BRANCH NAME}: Only events triggered by changes to this branch will be built.
+   - 只有这个分支：只有在这个分支内发生的事件会触发流水线构建。
 
-   - Everything but {BRANCH NAME}: Build any branch that triggered an event EXCEPT events from this branch.
+   - 除了这个分支外：除了这个分支外的所有分支内发生的所有事件，都会触发流水线构建。
 
-   - All branches: Regardless of the branch that triggered the event always build.
+   - 所有分支：所有分支内发生的事件，都会触发流水线构建。
 
-   > **Note:** If you want one path for master, but another for PRs or development/test/feature branches, create two separate pipelines.
+   > **说明：** 如果您希望分开配置 master 分支和其他分支（如开发、测试、新增功能等分支）的路径，请创建两条流水线，一条给 master 分支使用，另一条给其他分支使用。
 
-6. Select the build trigger events. By default, builds will only happen by manually clicking build now in Rancher UI.
+6. 选择触发构建流水线的事件。默认设置下，触发流水线构建的唯一方式是在 Rancher UI 上单击“构建”。Rancher 也提供了以下三种触发构建的方式，您可以按需配置：
 
-   - Automatically build this pipeline whenever there is a git commit.(This respects the branch selection above)
+   - 在选中任何一个的分支中出现新的 git commit 时，触发一次流水线构建，可以配合上一个步骤使用。例如，在上一个步骤中，您选择的是“所有分支内发生的所有事件，都会触发流水线构建”，那么只要您提交了 commit，就会触发一次流水线构建。
 
-   - Automatically build this pipeline whenever there is a new PR.
+   - 提交合入请求（Pull Request，简称 PR）时，触发一次流水线构建。成员完成`git add`、`git commit`和`git push`这一系列提交代码到 GitHub 代码仓库的操作后，需要提交 PR 才可以合入代码。使用这种方式构建流水线，可以在完成版本迭代之前验证新增代码是否有误。
 
-   - Automatically build the pipeline.(Allows you to configure scheduled builds similar to Cron)
+   - 定时自动构建流水线。通过类似 QuartzCron 的方式自定义构建流水线的时间和频率，你可以指定构建流水线的时刻和次数。例如，你可以指定在每个工作日早上 9：00 构建一次流水线。
 
-7. Click Add button.
+7. 单击“添加”，添加流水线。
 
-   By default, Rancher provides a three stage pipeline for you. It consists of a build stage where you would compile, unit test, and scan code. The publish stage has a single step to publish a docker image.
+   Rancher 提供了一条默认流水线供您使用。Rancher 的流水线由构建和发布两个阶段组成；构建阶段提供了代码编译、单元测试、代码扫描等功能；发布阶段提供了发布 docker 镜像的功能。
 
-8) Add a name to the pipeline in order to complete adding a pipeline.
+8. 输入流水线的名称。
 
-9) Click on the ‘run a script’ box under the ‘Build’ stage.
+9. 单击“运行脚本”。
 
-   Here you can set the image, or select from pre-packaged envs.
+   您可以选择镜像，或从已经封装好的环境中选择。
 
-10) Configure a shell script to run inside the container when building.
+10. 配置构建流水线时在容器内运行的 shell 脚本。
 
-11) Click Save to persist the changes.
+11. 单击“保存”，保存上述步骤的修改。
 
-12) Click the “publish an image’ box under the “Publish” stage.
+12. 单击“发布镜像”。
 
-13) Set the location of the Dockerfile. By default it looks in the root of the workspace. Instead, set the build context for building the image relative to the root of the workspace.
+13. 设置保存 Dockerfile 的路径。默认会保存在 workspace 的根目录下。
 
-14) Set the image information.
+14. 设置镜像信息。
 
-    The registry is the remote registry URL. It is defaulted to Docker hub.
-    Repository is the `<org>/<repo>` in the repository.
+    仓库是远端仓库的 URL。默认是 Docker hub。Repo 是仓库中的 `<org>/<repo>`。
 
-15) Select the Tag. You can hard code a tag like ‘latest’ or select from a list of available variables.
+15. 选择标签。你可以为镜像创建一个标签，如“latest”表示最新发布的镜像，或者从已有的标签中选择一个。
 
-16) If this is the first time using this registry, you can add the username/password for pushing the image. You must click save for the registry credentials AND also save for the modal.
+16. 如果这是您第一次使用这个仓库发布镜像，您可以添加推送镜像时所需的用户名和密码。您必须同时单击“保存”，保存认证信息，和保存镜像信息。
 
-### Creating a New Stage
+## 创建流水线内的阶段
 
-1. To add a new stage the user must click the ‘add a new stage’ link in either create or edit mode of the pipeline view.
+1. 在创建或编辑模式下，单击“添加新阶段”。
 
-2. Provide a name for the stage.
+2. 输入阶段的名称
 
-3. Click save.
+3. 单击“保存”，创建新阶段。
 
-### Creating a New Step
+## 创建阶段内的步骤
 
-1. Go to create / edit mode of the pipeline.
+1. 进入流水线的创建或编辑模式。
 
-2. Click “Add Step” button in the stage that you would like to add a step in.
+2. 单击“创建步骤”。
 
-3. Fill out the form as detailed above
+3. 输入步骤信息。
 
-### Environment Variables
+## 环境变量
 
-For your convenience the following environment variables are available in your build steps:
+构建流水线涉及以下变量，变量名称和解释如下表所示：
 
-| Variable Name           | Description                                                 |
-| ----------------------- | ----------------------------------------------------------- |
-| CICD_GIT_REPO_NAME      | Repository Name (Stripped of Github Organization)           |
-| CICD_PIPELINE_NAME      | Name of the pipeline                                        |
-| CICD_GIT_BRANCH         | Git branch of this event                                    |
-| CICD_TRIGGER_TYPE       | Event that triggered the build                              |
-| CICD_PIPELINE_ID        | Rancher ID for the pipeline                                 |
-| CICD_GIT_URL            | URL of the Git repository                                   |
-| CICD_EXECUTION_SEQUENCE | Build number of the pipeline                                |
-| CICD_EXECUTION_ID       | Combination of {CICD_PIPELINE_ID}-{CICD_EXECUTION_SEQUENCE} |
-| CICD_GIT_COMMIT         | Git commit ID being executed.|
-
+| 变量名称                | 描述                                                       |
+| :---------------------- | :--------------------------------------------------------- |
+| CICD_GIT_REPO_NAME      | Repository 名称（从 GitHub 获取）                          |
+| CICD_PIPELINE_NAME      | 流水线名称                                                 |
+| CICD_GIT_BRANCH         | Git 分支名称                                               |
+| CICD_TRIGGER_TYPE       | 触发构建的事件名称                                         |
+| CICD_PIPELINE_ID        | Rancher 中的流水线 ID                                      |
+| CICD_GIT_URL            | GitHub 代码仓库的 URL 地址                                 |
+| CICD_EXECUTION_SEQUENCE | 流水线的构建号码，表示流水线执行到了第几个步骤或第几个阶段 |
+| CICD_EXECUTION_ID       | 流水线构建 ID 和构建号码的组合                             |
+| CICD_GIT_COMMIT         | 触发构建对应的 Git commit                                  |
