@@ -6,10 +6,8 @@ title: 入门必读
 
 目前 Rancher 提供了以下三本快速入门手册：
 
-- [命令行工具](/docs/quick-start-guide/cli/_index): Use `kubectl` or Rancher command line interface (CLI) to interact with your Rancher instance.
-
-- [命令行工具](/docs/quick-start-guide/cli/_index): 使用`kubectl`或 Rancher 命令行工具（Rancher CLI）管理 Rancher 实例。
-
 - [部署 Rancher Server](/docs/quick-start-guide/deployment/_index)：使用对您来说最方便的方式运行 Rancher Server。
 
 - [部署工作负载](/docs/quick-start-guide/workload/_index)：部署一个简单的工作负载，然后暴露工作负载，这样您就可以从集群外部访问工作负载。
+
+- [命令行工具](/docs/quick-start-guide/cli/_index)：使用`kubectl`或 Rancher 命令行工具（Rancher CLI）管理 Rancher 实例。
