@@ -2,17 +2,17 @@
 title: AWS 快速部署
 ---
 
-您可以按照以下操作步骤部署单节点集群的 Rancher Server。
+您可以按照以下操作步骤部署 Rancher Server 和一个单节点的 Kubernetes 集群。
 
-## 前提条件
+## 先决条件
 
 - [AWS 账户](https://aws.amazon.com/account/)：您需要一个 AWS 账户创建资源，创建 Rancher Server 和 Kubernetes 集群。
-- [AWS Access Key](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html)： 您需要 AWS Access Key 完成 AWS 快速部署。单击链接查看如何获取或创建 AWS Access Key。
-- [AWS 秘钥对](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair) ：您需要 AWS 秘钥对完成 AWS 快速部署。单击链接查看如何获取或创建 AWS 秘钥对。
+- [AWS Access Key](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html)：您需要 AWS Access Key 完成 AWS 快速部署。单击链接查看如何获取或创建 AWS Access Key。
+- [AWS 秘钥对](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair)：您需要 AWS 秘钥对完成 AWS 快速部署。单击链接查看如何获取或创建 AWS 秘钥对。
 - [Terraform](https://www.terraform.io/downloads.html)：在 AWS 中启动 Rancher Server 和 Kubernetes 集群的工具。
 
 > **说明：**
-> 在 AWS 上部署 Rancher Server，Amazon 会向您收取一定的费用
+> 在 AWS 上部署 Rancher Server，Amazon 会向您收取一定的费用。
 
 ## 操作步骤
 
@@ -29,7 +29,7 @@ title: AWS 快速部署
    - `ssh_key_name` - AWS 秘钥对名称
    - `prefix` - 资源名称前缀。
 
-1. **可选：** 在 `terraform.tfvars`文件中编辑节点种类的数量，详情请参考[快速入门 Readme](https://github.com/rancher/quickstart) 。
+1. **可选：** 在 `terraform.tfvars`文件中编辑节点种类的数量，详情请参考[快速入门说明](https://github.com/rancher/quickstart) 。
 
 1. 执行`terraform init` 命令，初始化工作目录。
 
