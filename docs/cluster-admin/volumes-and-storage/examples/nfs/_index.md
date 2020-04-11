@@ -2,79 +2,68 @@
 title: NFS 存储
 ---
 
-Before you can use the NFS storage volume plug-in with Rancher deployments, you need to provision an NFS server.
+您必须先配置 NFS 服务器，然后才能将 NFS 存储卷插件用于 Rancher 部署。
 
-> **Note:**
+> **注意：**
 >
-> - If you already have an NFS share, you don't need to provision a new NFS server to use the NFS volume plugin within Rancher. Instead, skip the rest of this procedure and complete [adding storage](/docs/cluster-admin/volumes-and-storage/).
+> - 如果您已经拥有 NFS 共享，则无需配置新的 NFS 服务器即可使用 Rancher 中的 NFS 卷插件。同时，请跳过本章节的其余部分并进行[存储添加](/docs/cluster-admin/volumes-and-storage/_index)。
 >
-> - This procedure demonstrates how to set up an NFS server using Ubuntu, although you should be able to use these instructions for other Linux distros (e.g. Debian, RHEL, Arch Linux, etc.). For official instruction on how to create an NFS server using another Linux distro, consult the distro's documentation.
+> - 虽然您可以将本章节的说明用在其他 Linux 发行版（例如 Debian，RHEL，Arch Linux 等）上，但是本章节的所有内容都是基于 Ubuntu 来演示如何设置 NFS 服务器。有关如何使用其他 Linux 发行版创建 NFS 服务器的官方说明，请查阅发行版的文档。
+>
+> **推荐：** 为了简化管理防火墙规则的过程，请使用 NFSv4。
 
-> **Recommended:** To simplify the process of managing firewall rules, use NFSv4.
+## 配置 NFS 存储
 
-1. Using a remote Terminal connection, log into the Ubuntu server that you intend to use for NFS storage.
+1. 使用远程终端连接，登录要用于 NFS 存储的 Ubuntu 服务器。
 
-1. Enter the following command:
+1. 输入以下命令：
 
-   
-
-``` 
+   ```
    sudo apt-get install nfs-kernel-server
    ```
 
-1. Enter the command below, which sets the directory used for storage, along with user access rights. Modify the command if you'd like to keep storage at a different directory.
+1. 输入以下命令，该命令用于设置存储的目录以及用户访问权限。 如果要将存储保留在其他目录中，请修改命令。
 
-   
-
-``` 
+   ```
    mkdir -p /nfs && chown nobody:nogroup /nfs
    ```
 
-   - The `-p /nfs` parameter creates a directory named `nfs` at root.
-   - The `chown nobody:nogroup /nfs` parameter allows all access to the storage directory.
+   - `-p /nfs`在根目录创建了一个名为`nfs`的子目录。
+   - `chown nobody:nogroup /nfs`允许所有人可以访问存储目录`/nfs`。
 
-1. Create an NFS exports table. This table sets the directory paths on your NFS server that are exposed to the nodes that will use the server for storage.
+1. 创建一个 NFS 导出表。该表设置了 NFS 服务器上暴露给将使用该服务器进行存储的节点的目录路径。
 
-   1. Open `/etc/exports` using your text editor of choice.
-   1. Add the path of the `/nfs` folder that you created in step 3, along with the IP addresses of your cluster nodes. Add an entry for each IP address in your cluster. Follow each address and its accompanying parameters with a single space that is a delimiter.
+   1. 使用文本编辑器打开`/etc/exports`。
+   1. 添加在步骤 3 中创建的`/nfs`文件夹的路径，以及集群节点的 IP 地址。为集群中的每个 IP 地址添加一个条目。在每个地址及其伴随的参数后面加上一个空格，该空格作为定界符。
 
-      
-
-``` 
+      ```
       /nfs <IP_ADDRESS1>(rw,sync,no_subtree_check) <IP_ADDRESS2>(rw,sync,no_subtree_check) <IP_ADDRESS3>(rw,sync,no_subtree_check)
       ```
 
-      **Tip:** You can replace the IP addresses with a subnet. For example: `10.212.50.12&#47;24` 
+      **提示：** 您可以用子网替代 IP 地址，例如：`10.212.50.12/24`。
 
-   1. Update the NFS table by entering the following command:
+   1. 使用以下命令更新 NFS 导出表：
 
-      
-
-``` 
+      ```
       exportfs -ra
       ```
 
-1. Open the ports used by NFS.
+1. 打开 NFS 的端口.
 
-   1. To find out what ports NFS is using, enter the following command:
+   1. 可以使用以下命令找出 NFS 正在使用的端口：
 
-      
-
-``` 
+      ```
       rpcinfo -p | grep nfs
       ```
 
-   2.[Open the ports](https://help.ubuntu.com/lts/serverguide/firewall.html.en) that the previous command outputs. For example, the following command opens port 2049:
+   2. [打开](https://help.ubuntu.com/lts/serverguide/firewall.html.en)上面命令输出的端口，比如使用下面的命令来打开端口`2049`：
 
-      
-
-``` 
+      ```
       sudo ufw allow 2049
       ```
 
-**Result:** Your NFS server is configured to be used for storage with your Rancher nodes.
+**结果：** 您的 NFS 服务器已经设置好，可用于 Rancher 作存储服务。
 
-### What's Next?
+## 下一步？
 
-Within Rancher, add the NFS server as a [storage volume](/docs/k8s-in-rancher/volumes-and-storage/#adding-a-persistent-volume) and/or [storage class](/docs/k8s-in-rancher/volumes-and-storage/#adding-storage-classes). After adding the server, you can use it for storage for your deployments.
-
+在 Rancher 中，将 NFS 服务器添加为[存储卷](/docs/cluster-admin/volumes-and-storage/_index)又或者[存储类](/docs/cluster-admin/volumes-and-storage/_index)。添加服务器后，可以将其用于部署存储。

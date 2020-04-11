@@ -1,112 +1,115 @@
 ---
-title: 集群指标
+title: 重要指标
 ---
 
-_Available as of v2.2.0_
+_自 v2.2.0 起可用_
 
-Cluster metrics display the hardware utilization for all nodes in your cluster, regardless of its role. They give you a global monitoring insight into the cluster.
+集群指标用于展示集群内所有节点的硬件资源利用率，它们可以让您洞悉集群的全局。
 
-Some of the biggest metrics to look out for:
+> **注意：** 持续的监控需要"指标基准"。确立"指标基准"的方式往往是结合实践和经验：首先对组件进行一段时间的操作并观察相关指标，然后评估出能描述其"健康"的指标值，最后建立可供日后度量的参考系。
 
-- **CPU Utilization**
+需要对下面几个重要的指标做些说明：
 
-  High load either indicates that your cluster is running efficiently or that you're running out of CPU resources.
+- **CPU 利用率**
 
-- **Disk Utilization**
+  当集群的 CPU 利用率处于高水平时，这表明集群可能在高效的运行，也可能是 CPU 资源不足。
 
-  Be on the lookout for increased read and write rates on nodes nearing their disk capacity. This advice is especially true for etcd nodes, as running out of storage on an etcd node leads to cluster failure.
+- **磁盘利用率**
 
-- **Memory Utilization**
+  当某个节点快满时，需要特别留意这个节点的磁盘读写速率。这一点对于部署运行了 etcd 的节点尤为重要，因为集群会由于这类节点的存储空间不足而崩溃。
 
-  Deltas in memory utilization usually indicate a memory leak.
+- **内存利用率**
 
-- **Load Average**
+  内存利用率的异常增量通常意味着内存泄露。
 
-  Generally, you want your load average to match your number of logical CPUs for the cluster. For example, if your cluster has 8 logical CPUs, the ideal load average would be 8 as well. If you load average is well under the number of logical CPUs for the cluster, you may want to reduce cluster resources. On the other hand, if your average is over 8, your cluster may need more resources.
+- **平均负载**
 
-### Finding Node Metrics
+  理想的情况下，平均负载与集群的逻辑 CPU 数量应该保持一致。例如，如果集群有 8 个逻辑 CPU，则理想的平均负载也应该等于 8。如果平均负载远低于集群的逻辑 CPU 数量，则可能需要减少集群资源。相反，集群可能需要更多资源。
 
-1. From the **Global** view, navigate to the cluster that you want to view metrics.
+## 查看某个集群的节点指标
 
-1. Select **Nodes** in the navigation bar.
+1. 在**全局**页面找到需要查看节点指标的目标集群。
+1. 在导航栏中选择**节点**。
+1. 点选对应的节点。
+1. 展开**节点指标**查看。
 
-1. Select a specific node and click on its name.
+[_获取具体的指标表达式_](/docs/cluster-admin/tools/monitoring/expression/_index)
 
-1. Click on **Node Metrics**.
+### Etcd 指标
 
-[_Get expressions for Cluster Metrics_](/docs/cluster-admin/tools/monitoring/expression/#cluster-metrics)
+> **注意：** 仅支持通过 [Rancher 安装的 Kubernetes 集群](/docs/cluster-provisioning/rke-clusters/_index)。
 
-#### Etcd Metrics
+Etcd 指标用于展示 etcd 数据库的操作情况。当确立了 etcd 数据库操作的"基准指标"后，您就可以通过这些"基准指标"来观察异常的增量。当出现异常的增量时，这表明 etcd 集群可能存在问题，您应该尽快予以解决。
 
-> **Note:** Only supported for [Rancher launched Kubernetes clusters](/docs/cluster-provisioning/rke-clusters/).
+另外，您还需要关注位于 Etcd 指标顶部的文本。这些文本代表着 etcd 集群领导者选举的信息，描述了当前 etcd 集群是否具有领导者，即协调集群中其他 etcd 实例的 etcd 实例。如果出现大幅度的 etcd 领导者变化，那将意味着 etcd 集群处于不稳定的状态。
 
-Etcd metrics display the operations of the etcd database on each of your cluster nodes. After establishing a baseline of normal etcd operational metrics, observe them for abnormal deltas between metric refreshes, which indicate potential issues with etcd. Always address etcd issues immediately!
+需要对下面几个重要的指标做些说明：
 
-You should also pay attention to the text at the top of the etcd metrics, which displays leader election statistics. This text indicates if etcd currently has a leader, which is the etcd instance that coordinates the other etcd instances in your cluster. A large increase in leader changes implies etcd is unstable. If you notice a change in leader election statistics, you should investigate them for issues.
+- **Etcd 有领导者**
 
-Some of the biggest metrics to look out for:
+  etcd 通常以集群形式部署，部署到多个节点上并选举出一个领导者来协调集群操作。如果 ectd 集群没有领导者，集群的操作将无法被协调。
 
-- **Etcd has a leader**
+- **领导者变更次数**
 
-  etcd is usually deployed on multiple nodes and elects a leader to coordinate its operations. If etcd does not have a leader, its operations are not being coordinated.
+  如果该统计数字突然增长，通常表明网络通信问题不断迫使 etcd 集群选举新的领导者。
 
-- **Number of leader changes**
+[_获取具体的指标表达式_](/docs/cluster-admin/tools/monitoring/expression/_index)
 
-  If this statistic suddenly grows, it usually indicates network communication issues that constantly force the cluster to elect a new leader.
+### Kubernetes 组件指标
 
-[_Get expressions for Etcd Metrics_](/docs/cluster-admin/tools/monitoring/expression/#etcd-metrics)
+Kubernetes 组件指标用于展示集群里各个 Kubernetes 组件的监控数据。它表示每个组件的链接和延迟的信息：API Server，Controller Manager，Scheduler 以及 Ingress Controller。
 
-#### Kubernetes Components Metrics
+> **注意：** 仅支持通过 [Rancher 安装的 Kubernetes 集群](/docs/cluster-provisioning/rke-clusters/_index)。
 
-Kubernetes components metrics display data about the cluster's individual Kubernetes components. Primarily, it displays information about connections and latency for each component: the API server, controller manager, scheduler, and ingress controller.
+当分析 Kubernetes 组件指标时，不能仅关注图表内的某时刻的单个独立指标。相反，您应该观察一段时间以确立"指标基准"，通过它们来观察异常的增量。这些增量通常表明集群可能存在问题，您需要进行调查。
 
-> **Note:** The metrics for the controller manager, scheduler and ingress controller are only supported for [Rancher launched Kubernetes clusters](/docs/cluster-provisioning/rke-clusters/).
+下面几个重要的组件指标需要做些说明：
 
-When analyzing Kubernetes component metrics, don't be concerned about any single standalone metric in the charts and graphs that display. Rather, you should establish a baseline for metrics considered normal following a period of observation, e.g. the range of values that your components usually operate within and are considered normal. After you establish this baseline, be on the lookout for large deltas in the charts and graphs, as these big changes usually indicate a problem that you need to investigate.
+- **API Server 请求延迟**
 
-Some of the more important component metrics to monitor are:
+  API 响应时间的增加表明存在普遍的问题，需要进行调查。
 
-- **API Server Request Latency**
+- **API Server 请求率**
 
-  Increasing API response times indicate there's a generalized problem that requires investigation.
+  API 请求率的上升通常和响应时间的增加相吻合。请求率的增加也表明存在普片的问题，需要进行调查。
 
-- **API Server Request Rate**
+- **Scheduler 抢占请求**
 
-  Rising API request rates usually coincide with increased API response times. Increased request rates also indicate a generalized problem requiring investigation.
+  如果看到 Scheduler 抢占请求图表内出现高峰，则表明硬件资源已消耗完，Kubernetes 没有足够的资源来运行所有 Pod，只能优先处理更重要的 Pod。
 
-- **Scheduler Preemption Attempts**
+- **Pods 调度失败次数**
 
-  If you see a spike in scheduler preemptions, it's an indication that you're running out of hardware resources, as Kubernetes is recognizing it doesn't have enough resources to run all your pods and is prioritizing the more important ones.
+  Pods 调度失败可能有很多原因，例如未绑定的 PVC，耗尽的硬件资源，无响应的节点等。
 
-- **Scheduling Failed Pods**
+- **Ingress Controller 请求处理时长**
 
-  Failed pods can have a variety of causes, such as unbound persistent volume claims, exhausted hardware resources, non-responsive nodes, etc.
+  Ingress 路由请求到集群内的速度。
 
-- **Ingress Controller Request Process Time**
+[_获取具体的指标表达式_](/docs/cluster-admin/tools/monitoring/expression/_index)
 
-  How fast ingress is routing connections to your cluster services.
+## Rancher 日志指标
 
-[_Get expressions for Kubernetes Component Metrics_](/docs/cluster-admin/tools/monitoring/expression/#kubernetes-components-metrics)
+Rancher 日志指标可以展示日志服务相关组件的操作情况，前提是您需要[为 Rancher 启用日志服务](/docs/cluster-admin/tools/logging/_index)。
 
-### Rancher Logging Metrics
+[_获取具体的指标表达式_](/docs/cluster-admin/tools/monitoring/expression/_index)
 
-Although the Dashboard for a cluster primarily displays data sourced from Prometheus, it also displays information for cluster logging, provided that you have [configured Rancher to use a logging service](/docs/cluster-admin/tools/logging/).
+## 查看某个工作负载的指标
 
-[_Get expressions for Rancher Logging Metrics_](/docs/cluster-admin/tools/monitoring/expression/#rancher-logging-metrics)
+工作负载的指标用于展示某个 Kubernetes 工作负载的硬件资源利用率。您可以查看关于 [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)，[StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) 等工作负载的指标。
 
-### Finding Workload Metrics
+1. 在**全局**页面找到需要查看工作负载指标的目标项目。
 
-Workload metrics display the hardware utilization for a Kubernetes workload. You can also view metrics for [deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/), [stateful sets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) and so on.
+1. 在导航栏中下拉**资源**菜单，选择**工作负载**（在早于 v2.3.0 的版本中，可直接在导航栏中选择**工作负载**）。
 
-1. From the **Global** view, navigate to the project that you want to view workload metrics.
+1. 点选对应的工作负载。
 
-1. From the main navigation bar, choose **Resources > Workloads.** In versions prior to v2.3.0, choose **Workloads** on the main navigation bar.
+1. 展开**工作负载指标**查看。
 
-1. Select a specific workload and click on its name.
+1. 如果需要进一步查看 **Pod 指标**，可以点选该工作负载的 **Pod** 部分，
 
-1. In the **Pods** section, select a specific pod and click on its name.
+   - 展开 **Pod 指标**查看。
 
-   - **View the Pod Metrics:** Click on **Pod Metrics**.
-   - **View the Container Metrics:** In the **Containers** section, select a specific container and click on its name. Click on **Container Metrics**.
+   - 如果需要再进一步查看 **容器指标**，可以点选该 Pod 的**容器**部分，
+     - 展开**容器指标**查看。
 
-[_Get expressions for Workload Metrics_](/docs/cluster-admin/tools/monitoring/expression/#workload-metrics)
+[_获取具体的指标表达式_](/docs/cluster-admin/tools/monitoring/expression/_index)

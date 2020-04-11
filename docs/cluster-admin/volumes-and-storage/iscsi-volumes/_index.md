@@ -1,31 +1,30 @@
 ---
-title: iSCSI 存储卷
+title: iSCSI 卷
 ---
 
-In [Rancher Launched Kubernetes clusters](/docs/cluster-provisioning/rke-clusters/) that store data on iSCSI volumes, you may experience an issue where kubelets fail to automatically connect with iSCSI volumes. This failure is likely due to an incompatibility issue involving the iSCSI initiator tool. You can resolve this issue by installing the iSCSI initiator tool on each of your cluster nodes.
+> 本章节仅适用于[由 RKE 创建的集群](/docs/cluster-provisioning/rke-clusters/_index)。
 
-Rancher Launched Kubernetes clusters storing data on iSCSI volumes leverage the [iSCSI initiator tool](http://www.open-iscsi.com/), which is embedded in the kubelet's `rancher/hyperkube` Docker image. From each kubelet (i.e., the _initiator_), the tool discovers and launches sessions with an iSCSI volume (i.e., the _target_). However, in some instances, the versions of the iSCSI initiator tool installed on the initiator and the target may not match, resulting in a connection failure.
+将数据存储到 iSCSI 卷时，您可能会遇到一个问题：`kubelet`无法自动连接 iSCSI 卷。失败是可能因为 iSCSI 启动器工具不兼容而导致的问题，因此您可以通过在集群的每个节点上安装 iSCSI 启动器工具来解决这个问题。
 
-If you encounter this issue, you can work around it by installing the initiator tool on each node in your cluster. You can install the iSCSI initiator tool by logging into your cluster nodes and entering one of the following commands:
+Rancher 启动的 Kubernetes 集群是借助 [iSCSI 启动器工具](http://www.open-iscsi.com/)把数据存储到 iSCSI 卷的，这个工具已经被嵌入到 kubelet 的`rancher/hyperkube` Docker 镜像中。该工具从每个 kubelet（即**启动器**）中发起与 iSCSI 卷（即**目标**）的会话。但是，在某些情况下，启动器和目标上安装的 iSCSI 启动器工具的版本可能不匹配，从而导致连接失败。
 
-| Platform      | Package Name            | Install Command                        |
+如果您遇到这个问题，您可以通过在集群的每个节点上安装启动器工具来解决。您可以通过登录到节点并输入以下命令之一来安装 iSCSI 启动器工具：
+
+| 平台          | 包名                    | 安装指令                               |
 | ------------- | ----------------------- | -------------------------------------- |
-| Ubuntu/Debian | `open-iscsi` | `sudo apt install open-iscsi` |
+| Ubuntu/Debian | `open-iscsi`            | `sudo apt install open-iscsi`          |
 | RHEL          | `iscsi-initiator-utils` | `yum install iscsi-initiator-utils -y` |
 
-After installing the initiator tool on your nodes, edit the YAML for your cluster, editing the kubelet configuration to mount the iSCSI binary and configuration, as shown in the sample below.
+在节点上安装启动器工具后，编辑集群的 YAML，编辑 kubelet 配置以安装 iSCSI 二进制文件和配置，如下面的所示。
 
-> **Note:**
+> **注意：**
 >
-> Before updating your Kubernetes YAML to mount the iSCSI binary and configuration, make sure either the `open-iscsi` (deb) or `iscsi-initiator-utils` (yum) package is installed on your cluster nodes. If this package isn't installed _before_ the bind mounts are created in your Kubernetes YAML, Docker will automatically create the directories and files on each node and will not allow the package install to succeed.
+> 在更新 Kubernetes YAML 以挂载 iSCSI 二进制文件和配置之前，请确保在集群节点上安装了`open-iscsi`（deb）或`iscsi-initiator-utils`（yum）软件包。如果**之前**没有安装此软件包，更新 YAML 会导致 Docker 自动在每个节点上创建目录和文件，并且将不允许该软件包再被成功安装。
 
-``` 
+```
 services:
   kubelet:
     extra_binds:
-
       - "/etc/iscsi:/etc/iscsi"
       - "/sbin/iscsiadm:/sbin/iscsiadm"
-
 ```
-

@@ -138,7 +138,7 @@ L4 负载均衡器是通过`type: LoadBalancer`创建的。在 Kubernetes 里，
 
 ## 如何访问通过 Rancher 创建的节点？
 
-可以通过**节点**视图下载通过 Rancher 创建的节点的 SSH keys。选择你想要访问的节点并选择末尾的垂直省略号按钮，选择**下载密钥**即可下载。
+可以通过**节点**视图下载通过 Rancher 创建的节点的 SSH keys。选择您想要访问的节点并选择末尾的垂直省略号按钮，选择**下载密钥**即可下载。
 
 ![Download Keys](/img/rancher/downloadsshkeys.png)
 
@@ -153,7 +153,7 @@ $ ssh -i id_rsa user@ip_of_node
 Rancher UI 包含静态文件，以及基于 API 响应工作。这意味着任何您在 UI 上执行的操作，都可以通过 API 自动化完成。一般有两种方式：
 
 - 访问 `https://your_rancher_ip/v3`并浏览 API 选项。
-- 当用 UI 访问时抓取 API 请求（大多数使用的方法是 [Chrome Developer Tools](https://developers.google.com/web/tools/chrome-devtools/#network) 当然你可以选择其他的工具。）
+- 当用 UI 访问时抓取 API 请求（大多数使用的方法是 [Chrome Developer Tools](https://developers.google.com/web/tools/chrome-devtools/#network) 当然您可以选择其他的工具。）
 
 ## 一个节点的 IP 地址改变了，该如何恢复？
 
@@ -169,7 +169,7 @@ Rancher UI 包含静态文件，以及基于 API 响应工作。这意味着任�
 
 ## 如何检查我的证书链是有效的？
 
-使用`openssl verify`命令来验证你的证书链：
+使用`openssl verify`命令来验证您的证书链：
 
 > **注意：** 将`SSL_CERT_DIR` 和 `SSL_CERT_FILE` 配置为虚拟地址，以保证验证的时候不会使用操作系统自动安装的证书。
 
@@ -185,7 +185,7 @@ SSL_CERT_DIR=/dummy SSL_CERT_FILE=/dummy openssl verify -CAfile ca.pem -untruste
 rancher.yourdomain.com.pem: OK
 ```
 
-如何您成功地验证了证书链，你可以将中间 CA 证书包含在服务器证书中来为所有到 Rancher 的连接（如到 Rancher Agent 的连接）提供完整证书链。服务器证书文件的证书顺序应该是服务器证书（`rancher.yourdomain.com.pem`的内容）自身放在第一位，随后是中间 CA 证书（`intermediate.pem`内容）
+如何您成功地验证了证书链，您可以将中间 CA 证书包含在服务器证书中来为所有到 Rancher 的连接（如到 Rancher Agent 的连接）提供完整证书链。服务器证书文件的证书顺序应该是服务器证书（`rancher.yourdomain.com.pem`的内容）自身放在第一位，随后是中间 CA 证书（`intermediate.pem`内容）
 
 ```
 -----BEGIN CERTIFICATE-----
@@ -196,7 +196,7 @@ rancher.yourdomain.com.pem: OK
 -----END CERTIFICATE-----
 ```
 
-如何您仍然遇到验证验证错误，你可以通过以下命令获取服务器证书的颁布者和主题：
+如何您仍然遇到验证验证错误，您可以通过以下命令获取服务器证书的颁布者和主题：
 
 ```
 openssl x509 -noout -subject -issuer -in rancher.yourdomain.com.pem

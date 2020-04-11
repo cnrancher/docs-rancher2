@@ -8,7 +8,7 @@ title: Rancher 2 常见问题
 
 **Rancher v2.x 支持 Docker Swarm 和 Mesos 作为环境类型吗？**
 
-当你在 Rancher v2.x 创建环境时，Swarm 和 Mesos 已不在是你可选择的标准项。不再使用 Cattle，Swarm 和 Mesos 是一项艰难的决定，但这是大势所趋。比如，在 15000 个集群当中，可能只有大约 200 个左右在运行 Swarm。
+当您在 Rancher v2.x 创建环境时，Swarm 和 Mesos 已不在是您可选择的标准项。不再使用 Cattle，Swarm 和 Mesos 是一项艰难的决定，但这是大势所趋。比如，在 15000 个集群当中，可能只有大约 200 个左右在运行 Swarm。
 
 **Rancher v2.x 可以管理 Azure Kubernetes Services 吗？**
 

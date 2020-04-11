@@ -2,26 +2,25 @@
 title: 停用 Istio
 ---
 
-This section describes how to disable Istio in a cluster, namespace, or workload.
+本节介绍如何在一个集群，命名空间或工作负载中停用 Istio。
 
-## Disable Istio in a Cluster
+## 在一个集群中停用 Istio
 
-To disable Istio, 
+要停用 Istio，
 
-1. From the **Global** view, navigate to the cluster that you want to disable Istio for.
-1. Click **Tools > Istio.**
-1. Click **Disable,** then click the red button again to confirm the disable action.
+1. 从**全局**视图中，导航到要停用 Istio 的集群。
+1. 单击 **工具 > Istio。**
+1. 单击 **停用**，然后再次单击红色按钮以确认停用操作。
 
-**Result:** The `cluster-istio` application in the cluster's `system` project gets removed. The Istio sidecar cannot be deployed on any workloads in the cluster.
+**结果：** 集群的 `system` 项目中的 `cluster-istio` 应用被删除。Istio Sidecar 无法部署在集群中的任何工作负载上。
 
-## Disable Istio in a Namespace
+## 在一个命名空间中停用 Istio
 
-1. In the Rancher UI, go to the project that has the namespace where you want to disable Istio.
-1. On the **Workloads** tab, you will see a list of namespaces and the workloads deployed in them. Go to the namespace where you want to disable and click the **Ellipsis (...) > Disable Istio Auto Injection.**
+1. 在 Rancher UI 中，进入到您要停用 Istio 的命名空间所属的项目中。
+1. 在 **工作负载** 标签页上，您将看到命名空间及其中部署的工作负载的列表。找到要停用的命名空间，然后单击 **省略号（...）>停用 Istio 自动注入**。
 
-**Result:** When workloads are deployed in this namespace, they will not have the Istio sidecar.
+**结果：** 在该命名空间中部署工作负载时，它们将不会带有 Istio sidecar。
 
-## Remove the Istio Sidecar from a Workload
+## 从一个工作负载中删除 Istio Sidecar
 
-Disable Istio in the namespace, then redeploy the workloads with in it. They will be deployed without the Istio sidecar.
-
+在命名空间中停用 Istio，然后重新部署其中的工作负载。它们将不会带有 Istio sidecar。

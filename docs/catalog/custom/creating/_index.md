@@ -1,189 +1,179 @@
 ---
-title: 创建应用商店中的应用
+title: 创建应用
 ---
 
-Rancher's catalog service requires any custom catalogs to be structured in a specific format for the catalog service to be able to leverage it in Rancher.
+_自 v2.3.0 起可用_
 
-### Chart Types
+在 Chart 的 [questions.yml](https://github.com/rancher/integration-test-charts/blob/master/charts/chartmuseum/v1.6.0/questions.yml) 文件支持`rancher_min_version`和`rancher_max_version`字段，以指定 Chart 兼容的 Rancher 版本。
 
-Rancher supports two different types of charts:
+使用 Rancher UI 部署应用时，将仅显示对当前运行的 Rancher 版本有效的应用版本，从而禁止启动不满足 Rancher 版本要求的应用。如果在升级 Rancher 前已经部署了应用，但这个应用不支持新版本的 Rancher，在这种情况下升级 Rancher 不会影响这个已有应用。
 
-* **Helm Charts**
+## Charts 类型
 
-      	Native Helm charts include an application along with other software required to run it. When deploying native Helm charts, you'll learn the chart's parameters and then configure them using **Answers**, which are sets of key value pairs.
+Rancher 支持两种不同类型的 Chart：
 
-      	The Helm Stable and Helm Incubators are populated with native Helm charts. However, you can also use native Helm charts in Custom catalogs (although we recommend Rancher Charts).
+- **Helm Chart**
 
-* **Rancher Charts**
+  原生 Helm Charts 包括应用程序以及运行它所需的其他软件。部署原生 Helm Chart 时，您将需要了解学习每个 Chart 的参数，然后使用**应答**（它们是键值对的集合）来配置这些参数。
 
-      	Rancher charts mirror native helm charts, although they add two files that enhance user experience: `app-readme.md` and `questions.yaml` . Read more about them in [Rancher Chart Additional Files](#rancher-chart-additional-files).
+  Rancher 中的 Helm Stable 和 Helm Incubators 均为原生的 Helm Chart。您也可以添加其他的 Helm Charts（尽管我们建议使用 Rancher Chart）。
 
-      	Advantages of Rancher charts include:
+- **Rancher Chart**
 
-      	- **Enhanced Revision Tracking**
+  Rancher Chart 基本与原生 Helm Chart 一样。Rancher Chart 添加了两个额外的文件`app-readme.md`和`questions.yaml`来增强用户体验，但它们与原生 Helm Chart 的使用方式完全相同。在 [Rancher Chart 详解](#rancher-chart-详解)中了解有关它们的更多信息。
 
-      		While Helm supports versioned deployments, Rancher adds tracking and revision history to display changes between different versions of the chart.
+  Rancher Charts 的优点包括：
 
-      	- **Streamlined Application Launch**
+  - **增强的修订跟踪**
 
-      		Rancher charts add simplified chart descriptions and configuration forms to make catalog application deployment easy. Rancher users need not read through the entire list of Helm variables to understand how to launch an application.
+    虽然 Helm 支持版本化的部署，但 Rancher 添加了修订跟踪历史记录，以显示 Charts 的不同版本之间的更改。
 
-      	- **Application Resource Management**
+  - **简化的应用启动流程**
 
-      		Rancher tracks all the resources created by a specific application. Users can easily navigate to and troubleshoot on a page listing all the workload objects used to power an application.
+    Rancher Chart 添加了简化的 Chart 说明和配置表单，以简化应用商店中应用的部署。Rancher 用户无需阅读整个 Helm Chart 变量的列表即可了解如何启动应用。
 
-### Chart Directory Structure
+  - **应用资源管理**
 
-The following table demonstrates the directory structure for a chart, which can be found in a chart directory: `charts/<APPLICATION>/<APP_VERSION>/` . This information is helpful when customizing charts for a custom catalog. Files denoted with **Rancher Specific** are specific to Rancher charts, but are optional for chart customization.
+    Rancher 将跟踪由特定应用创建的所有资源。用户可以轻松地在 UI 上进行故障排除，该页面列出了此应用的所有工作负载和其他相关对象。
 
-``` 
+## 应用商店的文件结构
+
+下表为应用商店 Chart 的结构，展示了`charts/<APPLICATION>/<APP_VERSION>/`目录下的结构。在为自定义应用商店定制 Chart 时，此信息很有用。带有 **\*** 的文件代表 Rancher Chart 独有的文件，但这些文件不是必须的。
+
+```bash
 charts/<APPLICATION>/<APP_VERSION>/
-|--charts/           # Directory containing dependency charts.
-|--templates/        # Directory containing templates that, when combined with values.yml, generates Kubernetes YAML.
-|--app-readme.md     # Text displayed in the charts header within the Rancher UI.*
-|--Chart.yml         # Required Helm chart information file.
-|--questions.yml     # Form questions displayed within the Rancher UI. Questions display in Configuration Options.*
-|--README.md         # Optional: Helm Readme file displayed within Rancher UI. This text displays in Detailed Descriptions.
-|--requirements.yml  # Optional: YAML file listing dependencies for the chart.
-|--values.yml        # Default configuration values for the chart.
+| --charts /            # 包含依赖的 Chart 的应用商店。
+| --templates/          # 包含应用商店的模板，当与 values.yml 结合使用时，将生成 Kubernetes YAML。
+| --app-readme.md       # 文本为显示在 Rancher UI 的 Chart 标题中。*
+| --Chart.yml           # 必需的 Helm Chart 信息文件。
+| --questions.yml       # 用于生成在 Rancher UI 中显示的应答表单。它们将显示在配置选项中。*
+| --README.md           # 可选：在 Rancher UI 中显示的 Helm 自述文件。该文本显示在“详细描述”中。
+| --requirements.yml    # 可选：YAML 文件列出了 Chart 的依赖关系。
+| --values.yml          # Chart 的默认配置值。
 ```
 
-### Rancher Chart Additional Files
+## Rancher Chart 详解
 
-Before you create your own custom catalog, you should have a basic understanding about how a Rancher chart differs from a native Helm chart. Rancher charts differ slightly from Helm charts in their directory structures. Rancher charts include two files that Helm charts do not.
+在创建自己的自定义应用商店之前，您应该对 Rancher Chart 与本地 Helm Chart 的区别有基本的了解。Rancher Chart 的应用商店结构与 Helm Chart 略有不同。Rancher Chart 包含了两个 Helm Chart 不包含的文件。
 
-* `app-readme.md` 
+- `app-readme.md`
 
-  A file that provides descriptive text in the chart's UI header. The following image displays the difference between a Rancher chart (which includes `app-readme.md` ) and a native Helm chart (which does not).
+  在 Chart 的 UI 标题中提供描述性文本的文件。下图显示了 Rancher Chart（包括`app-readme.md`）和原生 Helm Chart（不包括`app-readme.md`）之间的差异。
 
-      	<figcaption>Rancher Chart with <code>app-readme.md</code> (left) vs. Helm Chart without (right)</figcaption>
+   <figcaption>带有 “app-readme.md” 的 Rancher Chart(左)与没有“app-readme.md”的 Helm Chart(右)</figcaption>
 
-      	
+  ![app-readme.md](/img/rancher/app-readme.png)
 
-![app-readme.md](/img/rancher/app-readme.png)
+- `questions.yml`
 
-* `questions.yml` 
+  包含 Chart 问题的文件。这些问题简化了 Chart 的部署。没有它，您必须使用键值对配置部署。下图显示了 Rancher Chart（包括`questions.yml`）和原生 Helm Chart（不包括`questions.yml`）之间的差异。
 
-  A file that contains questions for a form. These form questions simplify deployment of a chart. Without it, you must configure the deployment using key value pairs, which is more difficult. The following image displays the difference between a Rancher chart (which includes `questions.yml` ) and a native Helm chart (which does not).
+   <figcaption>带有 “questions.yml” 的 Rancher Chart(左)与没有“questions.yml”的 Helm Chart(右)</figcaption>
 
-    <figcaption>Rancher Chart with <code>questions.yml</code> (left) vs. Helm Chart without (right)</figcaption>
+  ![questions.yml](/img/rancher/questions.png)
 
-    
+## Questions.yml 详解
 
-![questions.yml](/img/rancher/questions.png)
+在`questions.yml`中，大多数内容都围绕着用户关心的应用配置的问题，但是也可以在此文件中设置一些其他字段。
 
-#### Questions.yml
+### 最小/最大 Rancher 版本
 
-Inside the `questions.yml` , most of the content will be around the questions to ask the end user, but there are some additional fields that can be set in this file.
+_自 v2.3.0 起可用_
 
-##### Min/Max Rancher versions
+对于每个 Chart，您可以添加最小和/或最大的 Rancher 版本，该版本确定是否可以从 Rancher 部署此 Chart。
 
-_Available as of v2.3.0_
+> **注意：** 即使 Rancher 发行版的前缀为`v`，使用该选项时发行版的前缀也为**空**。
 
-For each chart, you can add the minimum and/or maximum Rancher version, which determines whether or not this chart is available to be deployed from Rancher.
-
-> **Note:** Even though Rancher release versions are prefixed with a `v` , there is _no_ prefix for the release version when using this option.
-
-``` 
+```
 rancher_min_version: 2.3.0
 rancher_max_version: 2.3.99
 ```
 
-##### Question Variable Reference
+### 问题变量参考
 
-This reference contains variables that you can use in `questions.yml` nested under `questions:` .
+以下选项可在`questions.yml`文件中嵌套的`questions:`部分中使用。
 
-| Variable            | Type          | Required | Description                                                                                                                                                  |
-| ------------------- | ------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| variable            | string        | true     | Define the variable name specified in the `values.yml` file, using `foo.bar` for nested objects.|
-| label               | string        | true     | Define the UI label.|
-| description         | string        | false    | Specify the description of the variable.|
-| type                | string        | false    | Default to `string` if not specified (current supported types are string, multiline, boolean, int, enum, password, storageclass, hostname, pvc, and secret).|
-| required            | bool          | false    | Define if the variable is required or not (true \| false)                                                                                                    |
-| default             | string        | false    | Specify the default value.|
-| group               | string        | false    | Group questions by input value.|
-| min_length          | int           | false    | Min character length.|
-| max_length          | int           | false    | Max character length.|
-| min                 | int           | false    | Min integer length.|
-| max                 | int           | false    | Max integer length.|
-| options             | []string      | false    | Specify the options when the variable type is `enum` , for example: options:<br /> - "ClusterIP" <br /> - "NodePort" <br /> - "LoadBalancer"                  |
-| valid_chars         | string        | false    | Regular expression for input chars validation.|
-| invalid_chars       | string        | false    | Regular expression for invalid input chars validation.|
-| subquestions        | []subquestion | false    | Add an array of subquestions.|
-| show_if             | string        | false    | Show current variable if conditional variable is true. For example `show_if: "serviceType=Nodeport"` |
-| show_subquestion_if | string        | false    | Show subquestions if is true or equal to one of the options.for example `show_subquestion_if: "true"` |
+| 变量                | 类型          | 必填 | 描述                                                                                                                                             |
+| ------------------- | ------------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| variable            | string        | 是   | 定义`values.yml`文件中指定的变量名。如果是嵌套对象，可以使用`foo.bar`这种形式。                                                                  |
+| label               | string        | 是   | 指定变量的标题显示内容。                                                                                                                         |
+| description         | string        | 否   | 指定变量的描述显示内容。                                                                                                                         |
+| type                | string        | 否   | 变量类型，如果未指定，则默认为`string`(当前支持的类型为 string，multiline，boolean，int，enum，password，storageclass，hostname，pvc 和 secret。 |
+| required            | bool          | 否   | 定义变量是否为必填(true \| false)                                                                                                                |
+| default             | string        | 否   | 指定默认值。                                                                                                                                     |
+| group               | string        | 否   | 根据输入值对变量进行分组。                                                                                                                       |
+| min_length          | int           | 否   | 最小字符长度。                                                                                                                                   |
+| max_length          | int           | 否   | 最大字符长度。                                                                                                                                   |
+| min                 | int           | 否   | 最小整数值。                                                                                                                                     |
+| max                 | int           | 否   | 最大整数值。                                                                                                                                     |
+| options             | []string      | 否   | 当变量类型为`enum`时指定选项，例如：options:<br /> - "ClusterIP" <br /> - "NodePort" <br /> - "LoadBalancer"                                     |
+| valid_chars         | string        | 否   | 用于对输入字符进行验证的正则表达式。                                                                                                             |
+| invalid_chars       | string        | 否   | 用于对无效输入字符验证的正则表达式。                                                                                                             |
+| subquestions        | []subquestion | 否   | 添加一个子问题数组。                                                                                                                             |
+| show_if             | string        | 否   | 如果条件变量为 true，则显示当前变量。例如`show_if: "serviceType=Nodeport"`                                                                       |
+| show_subquestion_if | string        | 否   | 如果条件变量为 true，或等于某个选项，则显示它的子问题。例如`show_subquestion_if: "true"`                                                         |
 
-> **Note:** `subquestions[]` cannot contain `subquestions` or `show_subquestions_if` keys, but all other keys in the above table are supported.
+> **注意：** `subquestions[]` 不能包含 subquestions 或 show_subquestions_if 键，但是支持上表中的所有其他键。
 
-### Example Custom Chart Creation
+## 创建应用的示例
 
-You can fill your custom catalogs with either Helm Charts or Rancher Charts, although we recommend Rancher Charts due to their enhanced user experience.
+您可以把 Helm Chart 或 Rancher Chart 添加到应用商店里，但是我们建议使用 Rancher Chart，因为它们的用户体验更好。
 
-> **Note:** For a complete walkthrough of developing charts, see the upstream Helm chart [developer reference](https://helm.sh/docs/chart_template_guide/).
+> **注意：** 有关开发 Chart 的完整步骤，请参阅 Helm Chart [开发人员参考](https://helm.sh/docs/chart_template_guide/)。
 
-1. Within the GitHub repo that you're using as your custom catalog, create a directory structure that mirrors the structure listed in [Chart Directory Structure](#chart-directory-structure).
+1. 在您应用商店的 GitHub 仓库中，创建应用商店结构，该应用商店结构请参考[应用商店的文件结构](#应用商店的文件结构)中列出的结构。`app-readme.md`和`questions.yml`是可选的。
 
-   Rancher requires this directory structure, although `app-readme.md` and `questions.yml` are optional.
-
-   > **Tip:**
+   > **提示：**
    >
-   > - To begin customizing a chart, copy one from either the [Rancher Library](https://github.com/rancher/charts) or the [Helm Stable](https://github.com/kubernetes/charts/tree/master/stable).
-   > - For a complete walk through of developing charts, see the upstream Helm chart [developer reference](https://docs.helm.sh/developing_charts/).
+   > - 要创建自定义 Chart，请从 [Rancher Library](https://github.com/rancher/charts) 或 [Helm Stable](https://github.com/kubernetes/charts/tree/master/stable) 复制一个 Chart。
+   > - 有关开发 Chart 的完整介绍，请参见上游 Helm Chart [开发人员参考](https://docs.helm.sh/developing_charts/)。
 
-2.**Recommended:** Create an `app-readme.md` file.
+2. **推荐：** 创建一个`app-readme.md`文件。
 
-   Use this file to create custom text for your chart's header in the Rancher UI. You can use this text to notify users that the chart is customized for your environment or provide special instruction on how to use it.
-   <br/>
-   <br/>
-   **Example**:
+   使用此文件可为 Rancher UI 中的 chart 标题创建自定义文本。您可以使用此文本来通知用户该 chart 是针对您的环境定制的，或者提供有关如何使用它的特殊说明。
 
-   
+   **例如** ：
 
-``` 
+   ```
    $ cat ./app-readme.md
 
    # Wordpress ROCKS!
    ```
 
-3.**Recommended:** Create a `questions.yml` file.
+3. **推荐：** 添加一个`questions.yml`文件。
 
-   This file creates a form for users to specify deployment parameters when they deploy the custom chart. Without this file, users **must** specify the parameters manually using key value pairs, which isn't user-friendly.
-   <br/>
-   <br/>
-   The example below creates a form that prompts users for persistent volume size and a storage class.
-   <br/>
-   <br/>
-   For a list of variables you can use when creating a `questions.yml` file, see [Question Variable Reference](#question-variable-reference).
+   该文件为用户创建一个表单，供用户在部署自定义 Chart 时指定部署参数。如果没有此文件，则用户**必须**使用键值对手动指定参数，这对用户不友好。
 
-   <pre>
+   下面的示例创建一个表单，提示用户输入持久卷大小和存储类。
 
-       categories:
-       - Blog
-       - CMS
-       questions:
-       - variable: persistence.enabled
-       default: "false"
-       description: "Enable persistent volume for WordPress"
+   有关创建`questions.yml`文件时可以使用的变量列表，请参见[问题变量参考](#问题变量参考)
+
+   ```yaml
+   categories:
+     - Blog
+     - CMS
+   questions:
+     - variable: persistence.enabled
+       default: 'false'
+       description: 'Enable persistent volume for WordPress'
        type: boolean
        required: true
        label: WordPress Persistent Volume Enabled
        show_subquestion_if: true
-       group: "WordPress Settings"
+       group: 'WordPress Settings'
        subquestions:
-       - variable: persistence.size
-           default: "10Gi"
-           description: "WordPress Persistent Volume Size"
+         - variable: persistence.size
+           default: '10Gi'
+           description: 'WordPress Persistent Volume Size'
            type: string
            label: WordPress Volume Size
-       - variable: persistence.storageClass
-           default: ""
-           description: "If undefined or null, uses the default StorageClass. Default to null"
+         - variable: persistence.storageClass
+           default: ''
+           description: 'If undefined or null, uses the default StorageClass. Default to null'
            type: storageclass
            label: Default StorageClass for WordPress
+   ```
 
-   </pre>
+4. 将自定义的 Chart 推送到 GitHub 仓库中。
 
-4. Check the customized chart into your GitHub repo.
-
-**Result:** Your custom chart is added to the repo. Your Rancher Server will replicate the chart within a few minutes.
-
+**结果：** 您的自定义 Chart 已添加到仓库中。您的 Rancher Server 将在几分钟内同步 Chart。您可以在 Rancher UI 上手动刷新该应用商店，强制刷新。

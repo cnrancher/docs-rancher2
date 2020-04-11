@@ -2,59 +2,64 @@
 title: 查看指标
 ---
 
-_Available as of v2.2.0_
+_自 v2.2.0 起可用_
 
-After you've enabled monitoring at either the [cluster level](/docs/cluster-admin/tools/monitoring/#enabling-cluster-monitoring) or [project level](/docs/project-admin/tools/monitoring/#enabling-project-monitoring), you will want to be start viewing the data being collected. There are multiple ways to view this data.
+在启用[集群监控](/docs/cluster-admin/tools/monitoring/_index)或[项目监控](/docs/project-admin/tools/monitoring/_index)后，您将希望开始查看正在收集的监控数据。有多种查看监控数据的方式。
 
-### Rancher Dashboard
+## Rancher UI
 
-> **Note:** This is only available if you've enabled monitoring at the [cluster level](/docs/cluster-admin/tools/monitoring/#enabling-cluster-monitoring). Project specific analytics must be viewed using the project's Grafana instance.
+> **注意：** 仅当您启用了[集群监控](/docs/cluster-admin/tools/monitoring/_index)后，此方式才可用。[项目监控](/docs/project-admin/tools/monitoring/_index)采集到的自定义指标必须使用项目监控部署的 Grafana 来进行查看。
 
-Rancher's dashboards are available at multiple locations:
+Rancher 的指标线图在多个位置可用：
 
-* **Cluster Dashboard**: From the **Global** view, navigate to the cluster.
-* **Node Metrics**: From the **Global** view, navigate to the cluster. Select **Nodes**. Find the individual node and click on its name. Click **Node Metrics.**
-* **Workload Metrics**: From the **Global** view, navigate to the project. From the main navigation bar, choose **Resources > Workloads.** (In versions prior to v2.3.0, choose **Workloads** on the main navigation bar.) Find the individual workload and click on its name. Click **Workload Metrics.**
-* **Pod Metrics**: From the **Global** view, navigate to the project. Select **Workloads > Workloads**. Find the individual workload and click on its name. Find the individual pod and click on its name. Click **Pod Metrics.**
-* **Container Metrics**: From the **Global** view, navigate to the project. From the main navigation bar, choose **Resources > Workloads.** (In versions prior to v2.3.0, choose **Workloads** on the main navigation bar.) Find the individual workload and click on its name. Find the individual pod and click on its name. Find the individual container and click on its name. Click **Container Metrics.**
+- **集群仪表盘**：在**全局**页面导航到某个集群。
+- **节点指标：** 在**全局**页面导航到某个集群。点选**节点**，展开**节点指标**。
+- **工作负载指标：**在**全局**页面导航到某个项目。在导航栏里下拉**资源**，选择**工作负载** (在早于 v2.3.0 的版本中，可直接在导航栏中选择**工作负载**) 。点选工作负载，展开**工作负载指标**。
+- **Pod 指标：** 在**全局**页面导航到某个项目。在导航栏里下拉**资源**，选择**工作负载** (在早于 v2.3.0 的版本中，可直接在导航栏中选择**工作负载**) 。点选单个工作负载，点选其**Pod 部分**，展开**Pod 指标**。
+- **容器指标：** 在**全局**页面导航到某个项目。在导航栏里下拉**资源**，选择**工作负载** (在早于 v2.3.0 的版本中，可直接在导航栏中选择**工作负载**) 。点选单个工作负载。点选单个 Pod，点选其**Container 部分**，展开**Container 指标**。
 
-Prometheus metrics are displayed and are denoted with the Grafana icon. If you click on the icon, the metrics will open a new tab in Grafana.
+上述的仪表盘会显示 Prometheus 收集到的监控数据。点击右边的 Grafana 图标，浏览器会打开一个新的页签，在 Grafana 里呈现这些监控数据。
 
-Within each Prometheus metrics widget, there are several ways to customize your view.
+在这些指标的 UI 组件里，有几种方法可以切换视图：
 
-* Toggle between two views:
-  + **Detail**: Displays graphs and charts that let you view each event in a Prometheus time series
-  + **Summary** Displays events in a Prometheus time series that are outside the norm.
-* Change the range of the time series that you're viewing to see a more refined or expansive data sample.
-* Customize the data sample to display data between specific dates and times.
+- 视图切换:
+  - **详情：** 显示图形和图表，可以查看各个单元的指标。例如，在 **Pod 指标**的“内存使用率”的详情视图里，您可以看到各个容器的使用率折线，这可以帮助您进行对比分析。
+  - **汇总：** 查看单元汇总后的指标。例如，在 **Pod 指标**的“内存使用率”的汇总视图里，您可以看到整个 Pod 的使用率折线，这可以帮助您分析这个 Pod 对内存使用的走势。
+- 选择您正在查看的时间的范围，以查看更精确或更广阔的数据样本。
+- 自定义时间以显示特定时间之间的数据。
 
-When analyzing these metrics, don't be concerned about any single standalone metric in the charts and graphs. Rather, you should establish a baseline for your metrics over the course of time, e.g.the range of values that your components usually operate within and are considered normal. After you establish the baseline, be on the lookout for any large deltas in the charts and graphs, as these big changes usually indicate a problem that you need to investigate.
+分析这些指标时，不能仅关注图表内的某时刻的单个独立指标。相反，您应该观察一段时间以确立“指标基准”。例如，首先对组件进行一段时间的操作，并观察相关指标，然后评估出能描述其为“健康”的指标值，最后建立可供日后度量的参考系。拥有指标基准后，可以注意图表和图形中是否有较大的变化量，因为这些较大的变化通常表明组件可能存在问题，您需要进行调查。
 
-### Grafana
+## Grafana
 
-If you've enabled monitoring at either the [cluster level](/docs/cluster-admin/tools/monitoring/#enabling-cluster-monitoring) or [project level](/docs/project-admin/tools/monitoring/#enabling-project-monitoring), Rancher automatically creates a link to Grafana instance. Use this link to view monitoring data.
+在启用[集群监控](/docs/cluster-admin/tools/monitoring/_index)或[项目监控](/docs/project-admin/tools/monitoring/_index)后，Rancher 会自动创建一条可跳转到 Grafana 实例的链接。Grafana 允许您查询，可视化，设置告警并最终了解您的集群和工作负载状态。有关 Grafana 及其功能的更多信息，请查看 [Grafana 网站](https://grafana.com/grafana)。
 
-Grafana allows you to query, visualize, alert, and ultimately, understand your cluster and workload data. For more information on Grafana and its capabilities, visit the [Grafana website](https://grafana.com/grafana).
+### 访问权限
 
-#### Authentication
+Rancher 通过根据用户的[角色](/docs/admin-settings/rbac/cluster-project-roles/_index)，确定用户是否可以访问 Grafana 实例以及在其中可查看的数据。换句话说，用户在 Grafana 中的访问权限反映了他们在 Rancher 中的访问权限。
 
-Rancher determines which users can access the new Grafana instance, as well as the objects they can view within it, by validating them against the user's [cluster or project roles](/docs/admin-settings/rbac/cluster-project-roles/). In other words, a user's access in Grafana mirrors their access in Rancher.
+#### 集群级别 Grafana
 
-When you go to the Grafana instance, you will be logged in with the username `admin` and the password `admin` . If you log out and log in again, you will be prompted to change your password. You will only have access to the URL of the Grafana instance if you have access to view the corresponding metrics in Rancher. So for example, if your Rancher permissions are scoped to the project level, you won't be able to see the Grafana instance for cluster-level metrics.
+如果您有集群中 System 项目的访问权限，则您可以访问集群级别 Grafana 实例。当您跳转到 Grafana 实例时，需要使用用户名`admin`和密码`admin`登录。第一次登录时，Grafana 将提示您更改密码。如果您的 Rancher 权限仅限于自己的项目（非 System 项目），您将无法在集群级别的 Grafana 实例中查看集群级别的指标。
 
-#### Accessing the Cluster-level Grafana Instance
+#### 项目级别 Grafana
 
-1. From the **Global** view, navigate to a cluster that has monitoring enabled.
+如果您的项目启用了项目监控，您可以在这个项目中的项目级别 Grafana 中查看指标。当您跳转到 Grafana 实例时，需要使用用户名`admin`和密码`admin`登录。第一次登录时，Grafana 将提示您更改密码。在这个项目级别的 Grafana 中，您只能查看到该项目中的工作负载的指标，例如 CPU，内存等。如果您配置了自定义指标，您也可以自己创建仪表盘来查看您的自定义指标。
 
-1. Go to the **System** project view. This project is where the cluster-level Grafana instance runs.
+> 注意：System 项目中不支持启用项目监控。
 
-1. Click **Apps.** In versions prior to v2.2.0, choose **Catalog Apps** on the main navigation bar.
+### 访问集群级别 Grafana 实例
 
-1. Go to the `cluster-monitoring` application.
+1. 启动监控以后，在**全局**页面导航到某个集群。
 
-1. In the `cluster-monitoring` application, there are two `/index.html` links: one that leads to a Grafana instance and one that leads to a Prometheus instance. When you click the Grafana link, it will redirect you to a new webpage for Grafana, which shows metrics for the cluster.
+1. 找到**系统**项目，这个项目运行着集群级别 Grafana 实例。
 
-1. You will be signed in to the Grafana instance automatically. The default username is `admin` and the default password is `admin` . For security, we recommend that you log out of Grafana, log back in with the `admin` password, and change your password.
+1. 点击**应用**菜单。
 
-**Results:** You are logged into Grafana from the Grafana instance. After logging in, you can view the preset Grafana dashboards, which are imported via the [Grafana provisioning mechanism](http://docs.grafana.org/administration/provisioning/#dashboards), so you cannot modify them directly. For now, if you want to configure your own dashboards, clone the original and modify the new copy.
+1. 点选`cluster-monitoring`应用。
 
+1. 在`cluster-monitoring`应用中，有两个`/index.html`链接：一个连接到 Grafana 实例，另一个连接到 Prometheus 实例。当点击 Grafana 链接时，它将把您重定向到 Grafana 的新页面，其中显示了集群的指标。
+
+1. 您可以使用用户名`admin`和密码`admin`登录 Grafana 实例。为了安全起见，建议更改密码。
+
+**结果：** 您登录到 Grafana 里。登录后，您可以查看预设的 Grafana 仪表盘，这些仪表盘是通过[Grafana 设置机制](http://docs.grafana.org/administration/provisioning/#dashboards)导入的，因此您无法直接对它们进行修改。如果要修改这些仪表盘，请克隆仪表盘并修改副本。

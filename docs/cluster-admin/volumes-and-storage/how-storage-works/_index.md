@@ -1,75 +1,66 @@
 ---
-title: 持久化存储是如何工作到
+title: 工作原理
 ---
 
-A persistent volume (PV) is a piece of storage in the Kubernetes cluster, while a persistent volume claim (PVC) is a request for storage.
+持久卷（PV）是 Kubernetes 集群中一部分的存储，而持久卷声明（PVC）是存储的请求。
 
-There are two ways to use persistent storage in Kubernetes:
+在 Kubernetes 中有两种使用持久存储的方法：
 
-* Use an existing persistent volume
-* Dynamically provision new persistent volumes
+- 使用已存在的持久卷
+- 动态配置新的持久卷
 
-To use an existing PV, your application will need to use a PVC that is bound to a PV, and the PV should include the minimum resources that the PVC requires.
+要使用现有的 PV，您的应用程序需要使用已经绑定到 PV 的 PVC，并且 PV 应该包含 PVC 所需的最少资源（容量）。
 
-For dynamic storage provisioning, your application will need to use a PVC that is bound to a storage class. The storage class contains the authorization to provision new persistent volumes.
+对于动态存储的配置，您的应用程序需要使用已经绑定到存储类的 PVC，并且存储类应该包含创建新的持久卷的权限。
 
 ![Setting Up New and Existing Persistent Storage](/img/rancher/rancher-storage.svg)
 
-For more information, refer to the [official Kubernetes documentation on storage](https://kubernetes.io/docs/concepts/storage/volumes/)
+了解更多信息, 请参阅 [Kubernetes 存储的官方文档](https://kubernetes.io/docs/concepts/storage/volumes/)。
 
-This section covers the following topics:
+## 持久卷声明（PVC）简介
 
-* [About persistent volume claims](#about-persistent-volume-claims)
-  + [PVCs are required for both new and existing persistent storage](#pvcs-are-required-for-both-new-and-existing-persistent-storage)
-* [Setting up existing storage with a PVC and PV](#setting-up-existing-storage-with-a-pvc-and-pv)
-* [Binding PVs to PVCs](#binding-pvs-to-pvcs)
-* [Provisioning new storage with a PVC and storage class](#provisioning-new-storage-with-a-pvc-and-storage-class)
+持久卷声明（PVC）是向集群请求存储资源的对象。它们类似于您的部署应用可以兑换存储访问的凭证。PVC 作为卷挂载在工作负载中，以便工作负载可以声明其指定的持久化存储份额。
 
-## About Persistent Volume Claims
+要访问持久化存储，容器必须具有作为卷挂载的 PVC。该 PVC 可让您的部署应用将其数据存储在外部位置，这样，如果 Pod 发生故障，则可以用新的 Pod 替换它，并继续访问外部存储的数据，就好像从未发生中断一样。
 
-Persistent volume claims (PVCs) are objects that request storage resources from your cluster. They're similar to a voucher that your deployment can redeem for storage access. A PVC is mounted into a workloads as a volume so that the workload can claim its specified share of the persistent storage.
+Rancher 里每个项目均包含您创建的 PVC 列表，可从导航栏下拉**资源**，选择**工作负载**，选择**卷**进行查看（在早于 v2.3.0 的版本，PVC 位于**卷**页签中）。您可以在以后重用这些已经创建的 PVC。
 
-To access persistent storage, a pod must have a PVC mounted as a volume. This PVC lets your deployment application store its data in an external location, so that if a pod fails, it can be replaced with a new pod and continue accessing its data stored externally, as though an outage never occurred.
+### 新的和现有的持久化存储都需要 PVC
 
-Each Rancher project contains a list of PVCs that you've created, available from **Resources > Workloads > Volumes.** (In versions prior to v2.3.0, the PVCs are in the **Volumes** tab.) You can reuse these PVCs when creating deployments in the future.
+Pod 需要 PVC 才能使用持久化存储，无论工作负载是打算使用已经存在的存储，还是工作负载需要根据需要动态地配置新存储。
 
-#### PVCs are Required for Both New and Existing Persistent Storage
+如果要为工作负载设置现有存储，则该工作负载会挂载一个 PVC，该 PVC 指的是 PV，它与现有存储基础结构相对应。
 
-A PVC is required for pods to use any persistent storage, regardless of whether the workload is intended to use storage that already exists, or the workload will need to dynamically provision new storage on demand.
+如果工作负载要请求新的存储，则该工作负载将挂载 PVC，该 PVC 指的是存储类，该类具有创建新 PV 及其基础存储基础结构的能力。
 
-If you are setting up existing storage for a workload, the workload mounts a PVC, which refers to a PV, which corresponds to existing storage infrastructure.
+Rancher 允许您在项目中创建任意数量的 PVC。
 
-If a workload should request new storage, the workload mounts PVC, which refers to a storage class, which has the capability to create a new PV along with its underlying storage infrastructure.
+您可以在创建工作负载时将 PVC 挂载到工作负载中，也可以稍后在工作负载运行后将其挂载。
 
-Rancher lets you create as many PVCs within a project as you'd like.
+## 使用 PVC 和 PV 设置已存在的存储
 
-You can mount PVCs to a deployment as you create it, or later, after the deployment is running.
+您的 Pod 可以将数据存储在[卷](https://kubernetes.io/docs/concepts/storage/volumes/)中，但是如果 Pod 发生故障，该数据将丢失。为了解决此问题，Kubernetes 提供了持久卷（PV），这些 PV 是与 Pod 可以访问的外部存储磁盘或文件系统相对应的 Kubernetes 资源。如果 Pod 崩溃，则其替换 Pod 可以访问持久化存储中的数据，而不会丢失任何数据。
 
-## Setting up Existing Storage with a PVC and PV
+PV 可以表示您在内部托管的物理磁盘或文件系统，或代表云供应商托管的存储资源，例如 Amazon EBS 或 Azure Disk。
 
-Your pods can store data in [volumes, ](https://kubernetes.io/docs/concepts/storage/volumes/) but if the pod fails, that data is lost. To solve this issue, Kubernetes offers persistent volumes (PVs), which are Kubernetes resources that correspond to external storage disks or file systems that your pods can access. If a pod crashes, its replacement pod can access the data in persistent storage without any data loss.
+在 Rancher 中，创建 PV 并不会创建存储卷，它只会创建一个 Kubernetes 资源，映射到现有的卷。因此，必须先配置存储，然后再创建 PV。
 
-PVs can represent a physical disk or file system that you host on premise, or a vendor-hosted storage resource, such as Amazon EBS or Azure Disk.
+> **重要：** PV 是在集群级别创建的，这意味着在多租户集群中，不同到团队可能可以访问同一个 PV。
 
-Creating a persistent volume in Rancher will not create a storage volume. It only creates a Kubernetes resource that maps to an existing volume. Therefore, before you can create a persistent volume as a Kubernetes resource, you must have storage provisioned.
+### 将 PV 绑定到 PVC
 
-> **Important:** PVs are created at the cluster level, which means that in a multi-tenant cluster, teams with access to separate namespaces could have access to the same PV.
+当给 Pod 设置使用持久化存储时，它们会挂载一个持久性卷声明（PVC），该声明与其他任何 Kubernetes 卷的挂载方式相同。当创建 PVC 时，Kubernetes Master 将其视为存储请求，并将其绑定到与 PVC 的最低资源（容量）要求匹配的 PV。并非所有 PVC 都能保证绑定到 PV。根据[Kubernetes 的文档](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)：
 
-#### Binding PVs to PVCs
+> 如果不存在匹配的卷，则声明将一直保持未绑定的状态。声明变成已绑定状态仅当存在匹配的卷。比如，集群里有很多 50Gi 的 PV，但是无法匹配 100Gi 的声明。当将 100Gi 的 PV 加入集群后，声明将得到绑定。
 
-When pods are set up to use persistent storage, they mount a persistent volume claim (PVC) that is mounted the same way as any other Kubernetes volume. When each PVC is created, the Kubernetes master considers it to be a request for storage and binds it to a PV that matches the minimum resource requirements of the PVC. Not every PVC is guaranteed to be bound to a PV. According to the Kubernetes [documentation, ](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
+换句话说，您可以创建无限量的 PVC，但是只有当 Kubernetes 找到至少匹配其所需的磁盘空间量的 PV 时，它们才会绑定到 PV。
 
-> Claims will remain unbound indefinitely if a matching volume does not exist. Claims will be bound as matching volumes become available. For example, a cluster provisioned with many 50Gi PVs would not match a PVC requesting 100Gi. The PVC can be bound when a 100Gi PV is added to the cluster.
+为了动态地提供新的存储，挂载在容器中的 PVC 必须与存储类相对应，而不是与 PV 相对应。
 
-In other words, you can create unlimited PVCs, but they will only be bound to PVs if the Kubernetes master can find a sufficient PVs that has at least the amount of disk space required by the PVC.
+## 使用 PVC 和存储类型设置新存储
 
-To dynamically provision new storage, the PVC mounted in the pod would have to correspond to a storage class instead of a persistent volume.
+存储类让您可以动态创建 PV，而不必先在基础设施中创建持久化存储。
 
-## Provisioning New Storage with a PVC and Storage Class
+例如，如果工作负载绑定到 PVC，并且 PVC 引用 Amazon EBS 的存储类，则该存储类可以动态创建 EBS 卷和相应的 PV。
 
-Storage Classes allow you to create PVs dynamically without having to create persistent storage in an infrastructure provider first.
-
-For example, if a workload is bound to a PVC and the PVC refers to an Amazon EBS Storage Class, the storage class can dynamically create an EBS volume and a corresponding PV.
-
-The Kubernetes master will then bind the newly created PV to your workload's PVC, allowing your workload to use the persistent storage.
-
+然后 Kubernetes Master 将新创建的 PV 绑定到工作负载的 PVC，从而使您的工作负载可以使用持久化存储。

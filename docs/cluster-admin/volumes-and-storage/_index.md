@@ -1,55 +1,52 @@
 ---
-title: '介绍'
+title: 持久化存储
 ---
 
-When deploying an application that needs to retain data, you'll need to create persistent storage. Persistent storage allows you to store application data external from the pod running your application. This storage practice allows you to maintain application data, even if the application's pod fails.
+在部署需要保留数据的应用程序时，您需要创建永久性存储。持久化存储允许您将应用程序数据存储在运行应用程序的 Pod 外部。即使应用程序的 Pod 发生故障，这种存储方法也可以使您维护应用程序数据。
 
-The documents in this section assume that you understand the Kubernetes concepts of persistent volumes, persistent volume claims, and storage classes. For more information, refer to the section on [how storage works.](./how-storage-works)
+本章节假定您已了解 Kubernetes 持久卷，持久卷声明和存储类的概念。有关更多信息，请参阅[存储是如何工作的](/docs/cluster-admin/volumes-and-storage/how-storage-works/_index)。
 
-#### Prerequisites
+## 先决条件
 
-To set up persistent storage, the `Manage Volumes` [role](/docs/admin-settings/rbac/cluster-project-roles/#project-role-reference) is required.
+配置持久化存储，需要用有`管理卷（Manage Volumes）`权限的[角色](/docs/admin-settings/rbac/cluster-project-roles/_index)的用户。
 
-If you are provisioning storage for a cluster hosted in the cloud, the storage and cluster hosts must have the same cloud provider.
+如果要在云提供商托管的集群中设置存储，则需要保证存储和集群主机是来自同一个云提供商。在 Rancher 中对接新的云存储，必须配置 Cloud Provider，关于如何配置的详细信息可以浏览[这里](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/_index)。
 
-For provisioning new storage with Rancher, the cloud provider must be enabled. For details on enabling cloud providers, refer to [this page.](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/)
+如果是设置对接现有的存储，则无需配置启用云提供商。
 
-For attaching existing persistent storage to a cluster, the cloud provider does not need to be enabled.
+## 设置现有的存储
 
-#### Setting up Existing Storage
+设置现有存储的总体流程如下：
 
-The overall workflow for setting up existing storage is as follows:
+1. 在基础架构提供商中启动持久化存储。
+2. 添加一个持久卷（PV）指向上面启动的持久化存储。
+3. 添加一个持久卷声明（PVC）指向上面添加的持久卷。
+4. 把上面添加的 PVC 挂载到对应的工作负载。
 
-1. Set up persistent storage in an infrastructure provider.
-2. Add a persistent volume (PV) that refers to the persistent storage.
-3. Add a persistent volume claim (PVC) that refers to the PV.
-4. Mount the PVC as a volume in your workload.
+更多的细节和要求，请参阅[这里](/docs/cluster-admin/volumes-and-storage/attaching-existing-storage/_index)。
 
-For details and prerequisites, refer to [this page.](./attaching-existing-storage)
+## 在 Rancher 中动态设置新存储
 
-#### Dynamically Provisioning New Storage in Rancher
+设置新存储的总体流程如下：
 
-The overall workflow for provisioning new storage is as follows:
+1. 添加一个存储类并配置其使用对应的存储提供商。
+2. 添加一个持久卷声明（PVC）指向上面添加的存储类型。
+3. 把上面添加的 PVC 挂载到对应的工作负载。
 
-1. Add a storage class and configure it to use your storage provider.
-2. Add a persistent volume claim (PVC) that refers to the storage class.
-3. Mount the PVC as a volume for your workload.
+更多的细节和要求，请参阅[这里](/docs/cluster-admin/volumes-and-storage/provisioning-new-storage/_index)。
 
-For details and prerequisites, refer to [this page.](./provisioning-new-storage)
+## 存储设置的实例
 
-#### Provisioning Storage Examples
+我们提供了一些例子来展示如何进行存储设置：[NFS](/docs/cluster-admin/volumes-and-storage/examples/nfs/_index)，[vSphere](/docs/cluster-admin/volumes-and-storage/examples/vsphere/_index) 以及[亚马逊 EBS](/docs/cluster-admin/volumes-and-storage/examples/ebs/_index)。
 
-We provide examples of how to provision storage with [NFS, ](./examples/nfs) [vSphere, ](./examples/vsphere) and [Amazon's EBS.](./examples/ebs)
+## GlusterFS 卷
 
-#### GlusterFS Volumes
+在 [Rancher 启动的 Kubernetes 集群](/docs/cluster-provisioning/rke-clusters/_index)里，将数据存储到 GlusterFS 卷时，您可能会遇到一个问题：在重启`kubelet`之后，Pod 无法安装卷。关于如何防止这种情况发生的相关细节，可以参阅[这里](/docs/cluster-admin/volumes-and-storage/glusterfs-volumes/_index)。
 
-In clusters that store data on GlusterFS volumes, you may experience an issue where pods fail to mount volumes after restarting the `kubelet` . For details on preventing this from happening, refer to [this page.](./glusterfs-volumes)
+## iSCSI 卷
 
-#### iSCSI Volumes
+在 [Rancher 启动的 Kubernetes 集群](/docs/cluster-provisioning/rke-clusters/_index)里，将数据存储到 iSCSI 卷时，您可能会遇到一个问题：`kubelet`无法自动连接 iSCSI 卷。关于如何解决这个问题的相关细节，可以参阅[这里](/docs/cluster-admin/volumes-and-storage/iscsi-volumes/_index)。
 
-In [Rancher Launched Kubernetes clusters](/docs/cluster-provisioning/rke-clusters/) that store data on iSCSI volumes, you may experience an issue where kubelets fail to automatically connect with iSCSI volumes. For details on resolving this issue, refer to [this page.](./iscsi-volumes)
+## 相关链接
 
-#### Related Links
-
-* [Kubernetes Documentation: Storage](https://kubernetes.io/docs/concepts/storage/)
-
+- [Kubernetes 存储文档](https://kubernetes.io/docs/concepts/storage/)。
