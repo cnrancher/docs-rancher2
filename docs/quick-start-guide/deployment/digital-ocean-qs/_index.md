@@ -2,9 +2,9 @@
 title: DigitalOcean 快速部署
 ---
 
-您可以按照以下操作步骤部署单节点集群的 Rancher Server。
+您可以按照以下操作步骤部署 Rancher Server 和一个单节点的 Kubernetes 集群。
 
-## 前提条件
+## 先决条件
 
 - [DigitalOcean 账户](https://www.digitalocean.com)：您需要一个 DigitalOcean 账户创建资源，创建和运行 Rancher Server 和 Kubernetes 集群。
 - [DigitalOcean Access Key](https://www.digitalocean.com/community/tutorials/how-to-create-a-digitalocean-space-and-api-key)：您需要 DigitalOcean Access Key 完成 DigitalOcean 快速部署。单击链接查看如何获取或创建 DigitalOcean Access Key。

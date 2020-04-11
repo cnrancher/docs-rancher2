@@ -124,7 +124,7 @@ docker run -d --restart=unless-stopped \
 > - 在 DNS 中创建一条记录，该记录将 Linux 主机 IP 地址绑定到要用于 Rancher 访问的主机名 (例如，`rancher.mydomain.com`)。
 > - 在 Linux 主机上打开 `TCP/80` 端口。Let's Encrypt 的 http-01 challenge 可以来自任何源 IP 地址，因此端口 `TCP/80` 必须开放给所有 IP 地址。
 
-满足前提条件后，可以通过运行以下命令使用 Let's Encrypt 证书安装 Rancher。
+满足先决条件后，可以通过运行以下命令使用 Let's Encrypt 证书安装 Rancher。
 
 | 占位符            | 描述     |
 | ----------------- | -------- |

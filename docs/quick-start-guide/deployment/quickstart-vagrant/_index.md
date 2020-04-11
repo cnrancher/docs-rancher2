@@ -2,11 +2,11 @@
 title: Vagrant 快速部署
 ---
 
-您可以按照以下操作步骤部署单节点集群的 Rancher Server。
+您可以按照以下操作步骤部署 Rancher Server 和一个单节点的 Kubernetes 集群。
 
-## 前提条件
+## 先决条件
 
-- [Vagrant](https://www.vagrantup.com)：因为 Rancher Server 基于 Vagrantfile 运行，所以已经安装和配置好了 Vagrant 是前提条件之一。
+- [Vagrant](https://www.vagrantup.com)：因为 Rancher Server 基于 Vagrantfile 运行，所以已经安装和配置好了 Vagrant 是先决条件之一。
 
 - [Virtualbox](https://www.virtualbox.org)：需要在 VirtualBox 中启动运行 Vagrant 的虚拟机。
 

@@ -4,7 +4,7 @@ title: Amazon EC2
 
 使用 Rancher 在 Amazon EC2 中创建 Kubernetes 集群。
 
-## 前提条件
+## 先决条件
 
 - 创建实例时会使用**AWS EC2 访问密钥**。请参照[Amazon 文档: 创建访问密钥](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)。
 
@@ -125,7 +125,7 @@ title: Amazon EC2
 
 1. 使用[EC2 管理控制台](https://aws.amazon.com/ec2)中可用的信息来完成以下内容。
 
-   - **账户许可** 选项用于配置创建节点的区域及云凭证。关于如何创建访问密钥和权限，请参照[前提条件](#前提条件)。
+   - **账户许可** 选项用于配置创建节点的区域及云凭证。关于如何创建访问密钥和权限，请参照[先决条件](#先决条件)。
    - **区域和网络** 选项用于配置您的集群可用区和网络设置。
    - **安全组** 选项用于配置您的节点的安全组。请参照 [Amazon EC2 使用节点驱动的安全组](/docs/cluster-provisioning/node-requirements/_index) 来查看`rancher-nodes`安全组中创建了哪些规则。
    - **实例** 选项用于配置将要创建的实例。确保为选择的 AMI 配置正确的**SSH 用户**。
