@@ -8,14 +8,14 @@ title: 产品架构
 
 ## Rancher Server 架构
 
-Rancher Server 由认证代理（Authentication Proxy）、Rancher API Server、集群控制器（Cluster Controller）、etcd节点和集群 Agent（Cluster Agent） 组成。除了集群 Agent 以外，其他组件都部署在 Rancher Server 中。
+Rancher Server 由认证代理（Authentication Proxy）、Rancher API Server、集群控制器（Cluster Controller）、etcd 节点和集群 Agent（Cluster Agent） 组成。除了集群 Agent 以外，其他组件都部署在 Rancher Server 中。
 
-图中描述的是用户通过 Rancher Server 管控Rancher 部署的 Kubernetes 集群（RKE集群）和托管的 Kubernetes 集群的（EKS）集群的流程。以用户下发指令为例，指令的流动路径如下：
+图中描述的是用户通过 Rancher Server 管控 Rancher 部署的 Kubernetes 集群（RKE 集群）和托管的 Kubernetes 集群的（EKS）集群的流程。以用户下发指令为例，指令的流动路径如下：
 
-1. 首先，用户通过Rancher UI（即 Rancher 控制台） Rancher 命令行工具（Rancher CLI）输入指令；直接调用Rancher API接口也可以达到相同的效果。
-2. 用户通过Rancher的代理认证后，指令会进一步下发到 Rancher Server 。
-3. 与此同时，Rancher Server 也会执行容灾备份，将数据备份到etcd节点。
-4. 然后 Rancher Server 把指令传递给集群控制器。集群控制器把指令传递到下游用户集群的Agent，最终通过Agent把指令下发到指定的集群中。
+1. 首先，用户通过 Rancher UI（即 Rancher 控制台） Rancher 命令行工具（Rancher CLI）输入指令；直接调用 Rancher API 接口也可以达到相同的效果。
+2. 用户通过 Rancher 的代理认证后，指令会进一步下发到 Rancher Server 。
+3. 与此同时，Rancher Server 也会执行容灾备份，将数据备份到 etcd 节点。
+4. 然后 Rancher Server 把指令传递给集群控制器。集群控制器把指令传递到下游用户集群的 Agent，最终通过 Agent 把指令下发到指定的集群中。
 
 如果 Rancher Server 出现问题，我们也提供了备用方案，您可以通过[授权集群端点](#授权集群端点)管理集群。
 
@@ -31,7 +31,7 @@ Rancher Server 由认证代理（Authentication Proxy）、Rancher API Server、
 
 ## 与下游用户集群交互
 
-本小节通通过两个用户案例，讲解 Rancher 启动和管理下游用户集群的具体过程，和每个Rancher组件的作用。
+本小节通通过两个用户案例，讲解 Rancher 启动和管理下游用户集群的具体过程，和每个 Rancher 组件的作用。
 
 下图演示了集群控制器、集群 Agent 和 Node Agent 是如何允许 Rancher 控制下游用户集群的。
 
@@ -42,13 +42,13 @@ Rancher Server 由认证代理（Authentication Proxy）、Rancher API Server、
 图中的数字和对应的描述如下：
 
 1. [认证代理](#认证代理)
-2. [集群控制器和集群Agent](#集群控制器和集群agent)
+2. [集群控制器和集群 Agent](#集群控制器和集群agent)
 3. [节点 Agents](#节点-agent)
 4. [授权集群端点](#授权集群端点)
 
 ### 认证代理
 
-图左上角一个叫做 Bob 的用户希望查看下游用户集群“User Cluster 1”里面正在运行的 pod。Bob发起的请求会首先经过认证代理，通过认证之后，Rancher 的 认证代理才会把 API 调用命令转发到下游用户集群。
+图左上角一个叫做 Bob 的用户希望查看下游用户集群“User Cluster 1”里面正在运行的 pod。Bob 发起的请求会首先经过认证代理，通过认证之后，Rancher 的 认证代理才会把 API 调用命令转发到下游用户集群。
 
 认证代理集成了多种认证方式，如本地认证、活动目录认证、GitHub 认证等。在发起每一个 Kubernetes API 调用请求的时候，认证代理会去确认请求方的身份，在转发调用命令前，请设置正确的 Kubernetes impersonation 的消息头。
 
@@ -56,13 +56,13 @@ Rancher 使用 [Service Account](https://kubernetes.io/docs/tasks/configure-pod-
 
 默认状态下，Rancher 生成一个包含认证信息的[kubeconfig](/docs/cluster-admin/cluster-access/kubectl/_index)文件，为 Rancher Server 和下游用户集群的 Kubernetes API Server 之间的通信提供认证。该文件包含了访问集群的所有权限。
 
-### 集群控制器和集群Agent
+### 集群控制器和集群 Agent
 
 每一个下游用户集群都有一个集群 Agent 保持用户集群的集群控制器与 Rancher Server 之间的信息畅通。
 
 集群控制器具有以下功能：
 
-- 检测用户集群的资源变化，如内存使用率、CPU使用率等
+- 检测用户集群的资源变化，如内存使用率、CPU 使用率等
 - 把用户集群从“当前”状态变更到“目标”状态
 - 配置集群和项目的访问控制策略
 - 通过调用 Docker Machine 和 Kubernetes Engine，如 RKE 和 GKE，创建集群。
@@ -80,12 +80,11 @@ Rancher 使用 [Service Account](https://kubernetes.io/docs/tasks/configure-pod-
 
 如果集群 Agent 不可用，下游用户集群中的其中一个节点 Agent 会创建一个通信管道，由节点 Agent 连接到集群控制器，实现下游用户集群和 Rancher 之间的通信。
 
-部署节点 Agent 的方式有很多，我们建议您使用[DaemonSet](https://kubernetes.io/docs/concepts/workloads/Controllers/daemonset/)部署节点 Agent ，这种方式可以确保下游用户集群内每个节点都成功运行节点 Agent。执行集群操作时，可以使用这种方式将指令下发到用户集群。集群操作包括：升级 Kubernetes 版本、创建etcd节点备份和恢复 etcd 节点。
+部署节点 Agent 的方式有很多，我们建议您使用[DaemonSet](https://kubernetes.io/docs/concepts/workloads/Controllers/daemonset/)部署节点 Agent ，这种方式可以确保下游用户集群内每个节点都成功运行节点 Agent。执行集群操作时，可以使用这种方式将指令下发到用户集群。集群操作包括：升级 Kubernetes 版本、创建 etcd 节点备份和恢复 etcd 节点。
 
 ### 授权集群端点
 
-Rancher Server 和下游用户集群之间有明显的延迟，或Rancher Server 不可用时，用户可以通过授权集群端点连接下游用户集群，实现 Rancher Server 和集群之间的通信，降低网络延迟。
-
+Rancher Server 和下游用户集群之间有明显的延迟，或 Rancher Server 不可用时，用户可以通过授权集群端点连接下游用户集群，实现 Rancher Server 和集群之间的通信，降低网络延迟。
 
 > 需要注意的是，只有 Rancher 部署的 Kubernetes 集群（RKE 集群）可以使用授权集群端点这个功能。其他类型的集群，如导入的集群、托管的集群等，并不能够使用此功能。
 
@@ -106,6 +105,8 @@ Rancher Server 和下游用户集群之间有明显的延迟，或Rancher Server
 - `rancher-cluster.yml` ：RKE 集群配置文件。
 - `kube_config_rancher-cluster.yml` ：集群的 kubeconfig 文件，它包含了访问集群的全部权限。如果 Rancher 出现故障，无法运行，您可以使用这个文件连接通过 Rancher 部署的 Kubernetes 集群（RKE 集群）。
 - `rancher-cluster.rkestate` ：Kubernetes 集群状态文件，该文件含有访问集群的所有权限。只有使用 RKE 0.2.0 或以上版本时，才会创建该文件。
+
+> **注意：** 后两个文件名的“rancher-cluster”部分取决于您如何命名 RKE 集群的配置文件。
 
 更多详细信息请参考[kubeconfig 文件](/docs/cluster-admin/cluster-access/kubectl/_index)。
 

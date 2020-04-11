@@ -59,7 +59,7 @@ Ingress 通过一组规则定义实现负载均衡。Ingress 协同一个或多�
 
 除了启动应用程序的各个组件外，还可以使用 Rancher 应用商店启动应用程序，应用商店就是 Helm Charts。
 
-有关更多信息，请参见[项目中的应用商店](/docs/catalog/apps/_index)。
+有关更多信息，请参见[项目中的应用商店](/docs/catalog/launching-apps/_index)。
 
 ## Kubernetes 资源
 

@@ -41,11 +41,17 @@ Rancher Labs会做负责任的漏洞披露，并努力在合理的时间内解�
 
 ## 在 Kubernetes 集群中执行 CIS 安全扫描
 
-_从 v2.4.0-alpha1 版本起可用_
+_从 v2.4.0 版本起可用_
 
 Rancher 充分利用了[kube-bench](https://github.com/aquasecurity/kube-bench)来对 Kubernetes 集群进行安全扫描。Rancher 会检查 Kubernetes 集群是否遵循了 CIS (Center for Internet Security，互联网安全中心) Kubernetes Benchmark 中定义的最佳实践。
 
-CIS Kubernetes Benchmark 是一个可以用来给 Kubernetes 创建安全基准的参考文档。这个 Benchmark 提供了两种类型的建议：`计分`和`不计分`。我们仅会针对`计分`的建议进行测试。
+CIS Kubernetes Benchmark 是一个可以用来给 Kubernetes 创建安全基准的参考文档。
+
+互联网安全中心（CIS）是一个`501(c)(3)`非营利组织，成立于 2000 年 10 月，其使命是“通过识别，开发，验证，推广和维护最佳实践解决方案来防御网络攻击，并建立和引导社区打造安全可信的网络环境”。
+
+CIS 基准测试是安全配置目标系统的最佳实践。CIS 基准是通过领域专家，技术供应商，公共和私人社区成员以及 CIS 基准开发团队的不懈努力而制定的。
+
+基准提供两种类型的建议：计分和不记分。我们仅运行与“计分建议”相关的测试。
 
 当 Rancher 对一个集群进行 CIS 安全扫描时，它会生成一个展示每个测试结果的报告。报告中包括`通过`，`跳过`和`失败`的测试数量的汇总。报告中同时也给`失败`的测试提供了补救办法。
 

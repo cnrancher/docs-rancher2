@@ -1,8 +1,8 @@
 ---
-title: 功能介绍
+title: 自定义应用商店配置参考
 ---
 
-任何用户都可以[添加自定义应用商店](/docs/catalog/custom/creating/_index)到 Rancher 中。除了应用商店的内容外，用户还必须确保能够将商店添加到 Rancher 中。
+任何用户都可以[添加自定义应用商店](/docs/catalog/creating-apps/_index)到 Rancher 中。除了应用商店的内容外，用户还必须确保能够将商店添加到 Rancher 中。
 
 ## 商店仓库类型
 
@@ -25,7 +25,7 @@ Helm 带有用于开发人员测试的内置软件包服务器（`helm serve`）
 
 ## 配置参数
 
-在[添加应用商店](/docs/catalog/custom/adding/_index)到 Rancher 时，用户必须提供下列信息：
+在[添加应用商店](/docs/catalog/adding-catalogs/_index)到 Rancher 时，用户必须提供下列信息：
 
 | 参数             | 描述                                                                                                                             |
 | ---------------- | -------------------------------------------------------------------------------------------------------------------------------- |
@@ -44,7 +44,7 @@ _自 v2.2.0 起可用_
 
 ### 使用用户名与密码
 
-1. [添加应用商店](/docs/catalog/custom/adding/_index)时，选中**使用私有应用商店**复选框。
+1. [添加应用商店](/docs/catalog/adding-catalogs/_index)时，选中**使用私有应用商店**复选框。
 
 2. 为您的 Git 或 Helm 仓库提供`用户名`和`密码`。
 
@@ -54,6 +54,6 @@ _自 v2.2.0 起可用_
 
 1. 创建一个[OAuth 凭据](https://github.com/settings/tokens)。选择`repo`权限，然后点击`生成凭据`。
 
-2. [添加应用商店](/docs/catalog/custom/adding/_index)时，选中`使用私有应用商店`复选框。
+2. [添加应用商店](/docs/catalog/adding-catalogs/_index)时，选中`使用私有应用商店`复选框。
 
 3. 在`用户名`中，输入 Git 生成的 OAuth 凭据。在`密码`中，输入`x-oauth-basic`。

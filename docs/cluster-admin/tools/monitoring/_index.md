@@ -41,7 +41,7 @@ _自 v2.2.0 起可用_
 1. 查看[资源消耗建议](#资源消耗)，以确保您有足够的资源用于 Prometheus 及其相关组件。根据需要，配置 [Prometheus 选项](/docs/cluster-admin/tools/monitoring/prometheus/_index)。
 1. 点击**启动**。
 
-**结果：**将部署 Prometheus 服务以及两个监控[应用商店应用](/docs/catalog/apps/_index)。这两个监控应用商店应用是`cluster-monitoring`和`monitoring-operator`，它们会被添加到集群的`系统（System）`项目中。当这两个应用处于`Active`后，您可以通过 [Rancher 集群仪表盘](/docs/cluster-admin/tools/monitoring/viewing-metrics/_index)开始查看[集群指标](/docs/cluster-admin/tools/monitoring/cluster-metrics/_index)或直接从 [Grafana](/docs/cluster-admin/tools/monitoring/_index)中查看。
+**结果：**将部署 Prometheus 服务以及两个监控[应用商店应用](/docs/catalog/launching-apps/_index)。这两个监控应用商店应用是`cluster-monitoring`和`monitoring-operator`，它们会被添加到集群的`系统（System）`项目中。当这两个应用处于`Active`后，您可以通过 [Rancher 集群仪表盘](/docs/cluster-admin/tools/monitoring/viewing-metrics/_index)开始查看[集群指标](/docs/cluster-admin/tools/monitoring/cluster-metrics/_index)或直接从 [Grafana](/docs/cluster-admin/tools/monitoring/_index)中查看。
 
 ## 资源消耗
 

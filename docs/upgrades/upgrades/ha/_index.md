@@ -78,14 +78,14 @@ title: 高可用升级指南
 从已安装的当前 Rancher Helm chart 中获取通过 `--set` 传递的值。
 
 ```
-helm get values rancher
+helm get values rancher -n cattle-system
 
 hostname: rancher.my.org
 ```
 
 > **注意：** 此命令将列出更多的值。这只是其中一个值的示例。
 
-如果您在将 cert-manager 从 0.11.0 之前的版本升级到最新版本，请执行 `选项 B - 重新安装 Rancher Chart`。否则，请执行 `选项 A - 升级Rancher`。
+如果您在将 cert-manager 从 0.11.0 之前的版本升级到最新版本，请执行 `选项 B - 重新安装 Rancher Chart 和 Cert Manager`。否则，请执行 `选项 A - 升级Rancher`。
 
 ##### 选项 A - 升级 Rancher
 
@@ -101,11 +101,9 @@ helm upgrade rancher rancher-<CHART_REPO>/rancher \
 
 > **注意：** 这里将要添加很多从上一步获取的选项。
 
-##### 选项 B - 重新安装 Rancher Chart
+##### 选项 B - 重新安装 Rancher Chart 和 Cert Manager
 
 如果您当前正在运行版本低于 v0.11 的 cert-manger，并且想将 Rancher 和 cert-manager 都升级到新版本，则由于 cert-manger v0.11 中的 API 更改，您需要重新安装 Rancher 和 cert-manger。
-
-请参阅[升级 Cert-Manger](/docs/installation/options/upgrading-cert-manager/_index)页面以获取更多信息。
 
 1. 卸载 Rancher
 
@@ -121,7 +119,7 @@ helm upgrade rancher rancher-<CHART_REPO>/rancher \
    --set hostname=rancher.my.org
    ```
 
-   > **注意：** 这里将要添加很多从上一步获取的选项。
+1. 卸载并且重新安装`cert-manager`，请参考[升级 Cert-Manager](/docs/installation/options/upgrading-cert-manager/_index)。
 
 #### 离线安装的 Rancher 高可用升级
 

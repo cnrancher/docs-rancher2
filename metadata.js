@@ -108,10 +108,10 @@ const metadata = {
     'k8s-in-rancher/secrets/_index': '密文',
     'k8s-in-rancher/registries/_index': '镜像仓库凭证',
     'catalog/built-in/_index': '内置应用商店',
-    'catalog/custom/creating/_index': '创建自己的应用',
-    'catalog/custom/adding/_index': '添加应用商店',
+    'catalog/creating-apps/_index': '创建自己的应用',
+    'catalog/adding-catalogs/_index': '添加应用商店',
     'catalog/multi-cluster-apps/_index': '多集群应用',
-    'catalog/apps/_index': '项目中的应用',
+    'catalog/launching-apps/_index': '项目级别应用',
     'catalog/globaldns/_index': '全局 DNS',
     'cli/_index': 'Rancher CLI',
     'system-tools/_index': '系统工具',
@@ -141,6 +141,7 @@ const metadata = {
     'troubleshooting/dns/_index': 'DNS',
     'troubleshooting/rancherha/_index': 'Rancher 高可用',
     'troubleshooting/imported-clusters/_index': '导入集群',
+    'troubleshooting/logging/_index': '配置日志等级',
     'v1.6-migration/_index': '从 v1.6 迁移到 v2.x'
   }
 };

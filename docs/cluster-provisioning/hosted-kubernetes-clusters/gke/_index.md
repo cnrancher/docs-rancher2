@@ -7,7 +7,7 @@ title: 创建谷歌 GKE 集群
 > **注意**
 > 部署到 GKE 将会产生费用。
 
-使用[谷歌云平台](https://console.cloud.google.com/projectselector/iam-admin/serviceaccounts)创建服务账户。GKE 使用这个帐户来操作您的集群。创建此帐户还将生成用于身份验证的私钥。
+使用[Google Kubernetes Engine](https://console.cloud.google.com/projectselector/iam-admin/serviceaccounts)创建服务账户。GKE 使用这个帐户来操作您的集群。创建此帐户还将生成用于身份验证的私钥。
 
 服务帐户需要以下角色:
 

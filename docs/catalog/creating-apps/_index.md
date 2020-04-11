@@ -1,12 +1,10 @@
 ---
-title: 创建应用
+title: 创建应用商店应用
 ---
 
-_自 v2.3.0 起可用_
+Rancher 的应用商店服务要求所有自定义应用商店都必须以特定格式构建，以便应用商店服务能够在 Rancher 中使用它。
 
-在 Chart 的 [questions.yml](https://github.com/rancher/integration-test-charts/blob/master/charts/chartmuseum/v1.6.0/questions.yml) 文件支持`rancher_min_version`和`rancher_max_version`字段，以指定 Chart 兼容的 Rancher 版本。
-
-使用 Rancher UI 部署应用时，将仅显示对当前运行的 Rancher 版本有效的应用版本，从而禁止启动不满足 Rancher 版本要求的应用。如果在升级 Rancher 前已经部署了应用，但这个应用不支持新版本的 Rancher，在这种情况下升级 Rancher 不会影响这个已有应用。
+> 有关开发 Chart 的完整步骤，请参阅 Helm Chart [开发人员参考](https://helm.sh/docs/chart_template_guide/)。
 
 ## Charts 类型
 
@@ -20,7 +18,7 @@ Rancher 支持两种不同类型的 Chart：
 
 - **Rancher Chart**
 
-  Rancher Chart 基本与原生 Helm Chart 一样。Rancher Chart 添加了两个额外的文件`app-readme.md`和`questions.yaml`来增强用户体验，但它们与原生 Helm Chart 的使用方式完全相同。在 [Rancher Chart 详解](#rancher-chart-详解)中了解有关它们的更多信息。
+  Rancher Chart 基本与原生 Helm Chart 一样。Rancher Chart 添加了两个额外的文件`app-readme.md`和`questions.yaml`来增强用户体验，但它们与原生 Helm Chart 的使用方式完全相同。在 [Rancher Chart 独有的文件](#rancher-chart-独有的文件)中了解有关它们的更多信息。
 
   Rancher Charts 的优点包括：
 
@@ -52,7 +50,7 @@ charts/<APPLICATION>/<APP_VERSION>/
 | --values.yml          # Chart 的默认配置值。
 ```
 
-## Rancher Chart 详解
+## Rancher Chart 独有的文件
 
 在创建自己的自定义应用商店之前，您应该对 Rancher Chart 与本地 Helm Chart 的区别有基本的了解。Rancher Chart 的应用商店结构与 Helm Chart 略有不同。Rancher Chart 包含了两个 Helm Chart 不包含的文件。
 
@@ -72,7 +70,7 @@ charts/<APPLICATION>/<APP_VERSION>/
 
   ![questions.yml](/img/rancher/questions.png)
 
-## Questions.yml 详解
+### Questions.yml 详解
 
 在`questions.yml`中，大多数内容都围绕着用户关心的应用配置的问题，但是也可以在此文件中设置一些其他字段。
 
@@ -115,65 +113,6 @@ rancher_max_version: 2.3.99
 
 > **注意：** `subquestions[]` 不能包含 subquestions 或 show_subquestions_if 键，但是支持上表中的所有其他键。
 
-## 创建应用的示例
+## 教程：创建应用的示例
 
-您可以把 Helm Chart 或 Rancher Chart 添加到应用商店里，但是我们建议使用 Rancher Chart，因为它们的用户体验更好。
-
-> **注意：** 有关开发 Chart 的完整步骤，请参阅 Helm Chart [开发人员参考](https://helm.sh/docs/chart_template_guide/)。
-
-1. 在您应用商店的 GitHub 仓库中，创建应用商店结构，该应用商店结构请参考[应用商店的文件结构](#应用商店的文件结构)中列出的结构。`app-readme.md`和`questions.yml`是可选的。
-
-   > **提示：**
-   >
-   > - 要创建自定义 Chart，请从 [Rancher Library](https://github.com/rancher/charts) 或 [Helm Stable](https://github.com/kubernetes/charts/tree/master/stable) 复制一个 Chart。
-   > - 有关开发 Chart 的完整介绍，请参见上游 Helm Chart [开发人员参考](https://docs.helm.sh/developing_charts/)。
-
-2. **推荐：** 创建一个`app-readme.md`文件。
-
-   使用此文件可为 Rancher UI 中的 chart 标题创建自定义文本。您可以使用此文本来通知用户该 chart 是针对您的环境定制的，或者提供有关如何使用它的特殊说明。
-
-   **例如** ：
-
-   ```
-   $ cat ./app-readme.md
-
-   # Wordpress ROCKS!
-   ```
-
-3. **推荐：** 添加一个`questions.yml`文件。
-
-   该文件为用户创建一个表单，供用户在部署自定义 Chart 时指定部署参数。如果没有此文件，则用户**必须**使用键值对手动指定参数，这对用户不友好。
-
-   下面的示例创建一个表单，提示用户输入持久卷大小和存储类。
-
-   有关创建`questions.yml`文件时可以使用的变量列表，请参见[问题变量参考](#问题变量参考)
-
-   ```yaml
-   categories:
-     - Blog
-     - CMS
-   questions:
-     - variable: persistence.enabled
-       default: 'false'
-       description: 'Enable persistent volume for WordPress'
-       type: boolean
-       required: true
-       label: WordPress Persistent Volume Enabled
-       show_subquestion_if: true
-       group: 'WordPress Settings'
-       subquestions:
-         - variable: persistence.size
-           default: '10Gi'
-           description: 'WordPress Persistent Volume Size'
-           type: string
-           label: WordPress Volume Size
-         - variable: persistence.storageClass
-           default: ''
-           description: 'If undefined or null, uses the default StorageClass. Default to null'
-           type: storageclass
-           label: Default StorageClass for WordPress
-   ```
-
-4. 将自定义的 Chart 推送到 GitHub 仓库中。
-
-**结果：** 您的自定义 Chart 已添加到仓库中。您的 Rancher Server 将在几分钟内同步 Chart。您可以在 Rancher UI 上手动刷新该应用商店，强制刷新。
+有关将自定义应用添加到自定义应用商店的教程，请参阅[此页面](/docs/catalog/tutorial/_index)。

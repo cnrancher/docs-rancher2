@@ -61,58 +61,7 @@ New password for default admin user (user-xxxxx):
 
 ## 如何开启 debug 调试日志？
 
-使用单节点 Docker 安装时，开启：
-
-```
-$ docker exec -ti <container_id> loglevel --set debug
-OK
-$ docker logs -f <container_id>
-```
-
-使用单节点 Docker 安装时，关闭：
-
-```
-$ docker exec -ti <container_id> loglevel --set info
-OK
-```
-
-使用 Helm 的高可用安装时，开启：
-
-```
-$ KUBECONFIG=./kube_config_rancher-cluster.yml
-$ kubectl --kubeconfig $KUBECONFIG -n cattle-system get pods -l app=rancher | grep '1/1' | awk '{ print $1 }' | xargs -I{} kubectl --kubeconfig $KUBECONFIG -n cattle-system exec {} -- loglevel --set debug
-OK
-OK
-OK
-$ kubectl --kubeconfig $KUBECONFIG -n cattle-system logs -l app=rancher
-```
-
-使用 Helm 的高可用安装时，关闭：
-
-```
-$ KUBECONFIG=./kube_config_rancher-cluster.yml
-$ kubectl --kubeconfig $KUBECONFIG -n cattle-system get pods -l app=rancher | grep '1/1' | awk '{ print $1 }' | xargs -I{} kubectl --kubeconfig $KUBECONFIG -n cattle-system exec {} -- loglevel --set info
-OK
-OK
-OK
-```
-
-使用 RKE Add-ons 的高可用安装时，开启：
-
-```
-$ KUBECONFIG=./kube_config_rancher-cluster.yml
-$ kubectl --kubeconfig $KUBECONFIG exec -n cattle-system $(kubectl --kubeconfig $KUBECONFIG get pods -n cattle-system -o json | jq -r '.items[] | select(.spec.containers[].name=="cattle-server") | .metadata.name') -- loglevel --set debug
-OK
-$ kubectl --kubeconfig $KUBECONFIG logs -n cattle-system -f $(kubectl --kubeconfig $KUBECONFIG get pods -n cattle-system -o json | jq -r '.items[] | select(.spec.containers[].name="cattle-server") | .metadata.name')
-```
-
-使用 RKE Add-ons 的高可用安装时，关闭：
-
-```
-$ KUBECONFIG=./kube_config_rancher-cluster.yml
-$ kubectl --kubeconfig $KUBECONFIG exec -n cattle-system $(kubectl --kubeconfig $KUBECONFIG get pods -n cattle-system -o json | jq -r '.items[] | select(.spec.containers[].name=="cattle-server") | .metadata.name') -- loglevel --set info
-OK
-```
+请参阅[问题排查：日志级别](/docs/troubleshooting/logging/_index)。
 
 ## 我不能 ping 通 CluusterIP
 

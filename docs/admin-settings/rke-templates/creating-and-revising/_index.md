@@ -24,7 +24,7 @@ title: 创建和修改模板
 4. 可选：通过[将其他用户或组添加为成员](/docs/admin-settings/rke-templates/template-access-and-sharing/_index)与其他用户或组共享模板。您还可以将模板公开，以与 Rancher 中的所有人共享。
 5. 然后按照屏幕上的表单将集群配置参数保存为模板修订版的一部分。可以将该版本标记为该模板的默认版本。
 
-**结果：** 配置了有着一个修订版的 RKE 模板。当您启动[RKE 集群](/docs/cluster-provisioning/rke-clusters/_index)时，可以使用此 RKE 模板修订版。
+**结果：** 配置了有着一个修订版的 RKE 模板。当您启动[RKE 集群](/docs/cluster-provisioning/rke-clusters/_index)时，可以使用此 RKE 模板修订版。通过 RKE 模板管理集群后，集群无法解除与模板的绑定，并且无法取消选中**使用现有 RKE 模板和修订版**。
 
 ## 更新模板
 

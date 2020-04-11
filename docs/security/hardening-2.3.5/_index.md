@@ -20,6 +20,10 @@ title: 安全加固指南 - v2.3.5
 
 有关如果根据官方 CIS 基准评估集群的更多详细信息，请参阅[CIS Benchmark Rancher 自测指南 - Rancher v2.3.5](/docs/security/benchmark-2.3.5/_index)。
 
+## 已知问题
+
+如果注册自定义节点时只提供了公共 IP，在 CIS 1.5 加固设置中，将无法正常在 Rancher UI 中使用**执行命令行**和**查看日志**功能。
+
 ## 配置内核运行时参数
 
 对于集群中的所有类型的节点，都建议使用以下的`sysctl`配置。在`/etc/sysctl.d/90-kubelet.conf`中设置以下参数：

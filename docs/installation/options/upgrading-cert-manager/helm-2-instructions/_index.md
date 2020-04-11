@@ -75,7 +75,7 @@ Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和更新 TLS
 1.  安装新版本 cert-manager
 
     ```plain
-    helm install --version 0.9.1 --name cert-manager --namespace kube-system jetstack/cert-manager
+    helm install --version 0.12.0 --name cert-manager --namespace kube-system jetstack/cert-manager
     ```
 
 ### 在离线环境中升级 cert-manager
@@ -96,13 +96,13 @@ Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和更新 TLS
 1. 从[Helm chart 仓库](https://hub.helm.sh/charts/jetstack/cert-manager)中获取最新的 cert-manager chart
 
    ```plain
-   helm fetch jetstack/cert-manager --version v0.9.1
+   helm fetch jetstack/cert-manager --version v0.12.0
    ```
 
 1. 使用您要用于安装 chart 的选项来渲染 cert-manager 模板。记得要为您从私有镜像仓库中拉取的镜像设置`image.repository`选项。这将创建一个带有 Kubernetes manifest 文件的`cert-manager`目录。
 
    ```plain
-   helm template ./cert-manager-v0.9.1.tgz --output-dir . \
+   helm template ./cert-manager-v0.12.0.tgz --output-dir . \
    --name cert-manager --namespace kube-system \
    --set image.repository=<REGISTRY.YOURDOMAIN.COM:PORT>/quay.io/jetstack/cert-manager-controller
    --set webhook.image.repository=<REGISTRY.YOURDOMAIN.COM:PORT>/quay.io/jetstack/cert-manager-webhook
