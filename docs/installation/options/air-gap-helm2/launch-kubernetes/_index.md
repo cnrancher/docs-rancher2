@@ -76,6 +76,8 @@ rke up --config ./rancher-cluster.yml
 - `kube_config_rancher-cluster.yml`: [Kubeconfig 文件](https://rancher.com/docs/rke/latest/en/kubeconfig/)
 - `rancher-cluster.rkestate`：[Kubernetes 集群状态文件](https://rancher.com/docs/rke/latest/en/installation/#kubernetes-cluster-state)
 
+> **注意：** 后两个文件名的“rancher-cluster”部分取决于您如何命名 RKE 集群的配置文件。
+
 ## 遇到了问题？
 
 请查看[问题排查](/docs/installation/options/troubleshooting/_index)页面。

@@ -26,7 +26,7 @@ _从 v2.0.3 开始可用_
 
 1. 使用搜索功能打开**应用程序注册**服务。
 
-   ![Open App Registrations](/img/rancher/search-app-registrations.png)
+   ![Open App Registrations](/img/rancher/search-app-registrations1.png)
 
 1. 单击**新建申请注册**，完成**创建**表单。
 
@@ -46,7 +46,7 @@ _从 v2.0.3 开始可用_
 
 1. 使用搜索打开**应用注册**服务。然后打开您在上一个过程中创建的 Rancher 条目。
 
-   ![Open Rancher Registration](/img/rancher/open-rancher-app.png)
+   ![Open Rancher Registration](/img/rancher/open-rancher-app1.png)
 
 1. 单击**设置**。
 
@@ -129,7 +129,7 @@ _从 v2.0.3 开始可用_
 
    1 使用搜索打开**应用程序注册**。
 
-   ![Open App Registrations](/img/rancher/search-app-registrations.png)
+   ![Open App Registrations](/img/rancher/search-app-registrations1.png)
 
    1. 找到您为 Rancher 创建的条目。
 

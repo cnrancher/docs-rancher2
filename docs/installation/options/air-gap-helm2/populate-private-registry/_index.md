@@ -30,17 +30,19 @@ title: '2、同步镜像到私有镜像仓库'
 
 这些步骤要求您使用一个 Linux 工作站，它可以访问互联网和您的私有镜像库。请确保至少有 20GB 的磁盘空间可用。
 
+如果要使用 ARM64 主机，则镜像库必须支持 docker manifest 功能。截至 2020 年 4 月，Amazon Elastic Container Registry 不支持 docker manifest。
+
 #### A. 查找您用的 rancher 版本所需要的资源
 
 1. 浏览我们的[版本发布页面](https://github.com/rancher/rancher/releases)，查找您想安装的 Rancher v2.x.x 版本。不要下载标记为 `rc` 或 `Pre-release` 的版本，因为它们在生产环境下是不稳定的。
 
-1. 从发行版 **Assets** 部分下载以下文件，这些文件是离线环境下安装 Rancher 所必需：
+1. 从发行版 **Assets** 部分下载以下文件：
 
-   | Release 文件             | 描述                                                                                                                 |
-   | ------------------------ | -------------------------------------------------------------------------------------------------------------------- |
-   | `rancher-images.txt`     | 此文件包含安装 Rancher、创建集群和运行 Rancher 工具所需的镜像列表。                                                  |
-   | `rancher-save-images.sh` | 这个脚本会从 DockerHub 中拉取在文件`rancher-images.txt`中描述的所有镜像，并将它们保存为文件`rancher-images.tar.gz`。 |
-   | `rancher-load-images.sh` | 这个脚本会载入文件`rancher-images.tar.gz`中的镜像，并将它们推送到您自己的私有镜像库。                                |
+| Release 文件             | 描述                                                                                                                 |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| `rancher-images.txt`     | 此文件包含安装 Rancher、创建集群和运行 Rancher 工具所需的镜像列表。                                                  |
+| `rancher-save-images.sh` | 这个脚本会从 DockerHub 中拉取在文件`rancher-images.txt`中描述的所有镜像，并将它们保存为文件`rancher-images.tar.gz`。 |
+| `rancher-load-images.sh` | 这个脚本会载入文件`rancher-images.tar.gz`中的镜像，并将它们推送到您自己的私有镜像库。                                |
 
 #### B. 收集所有必需的镜像（针对使用 Rancher 生成的自签名证书的高可用安装）
 
@@ -120,6 +122,8 @@ _v2.3.0 及以后版本可用_
 
 工作站必须安装 Docker 18.02+版本，因为这个版本的 Docker 支持 manifests，这个特性是设置 Windows 集群所必须的。
 
+如果要使用 ARM64 主机，则镜像库必须支持 docker manifest 功能。截至 2020 年 4 月，Amazon Elastic Container Registry 不支持 docker manifest。
+
 #### A. 查找您用的 Rancher 版本所需要的资源
 
 1. 浏览我们的[版本发布页面](https://github.com/rancher/rancher/releases)并查找您想要安装的 Rancher v2.x.x 版本。不要下载标记为 `rc` or `Pre-release` 的版本，因为它们在生产环境下不稳定。
@@ -146,18 +150,18 @@ _v2.3.0 及以后版本可用_
 
 #### C. 准备 Docker 守护进程
 
-1. 将您的私有镜像库地址追加到 Docker 守护进程配置文件(`C:\ProgramData\Docker\config\daemon.json`)的`allow-nondistributable-artifacts`配置字段中。由于 Windows 镜像的基础镜像是由`mcr.microsoft.com` Registry 维护的，这一步是必须的，因为 Docker Hub 中缺少 Microsoft 注册表层，需要将其拉入私有镜像库。
+将您的私有镜像库地址追加到 Docker 守护进程配置文件(`C:\ProgramData\Docker\config\daemon.json`)的`allow-nondistributable-artifacts`配置字段中。由于 Windows 镜像的基础镜像是由`mcr.microsoft.com` Registry 维护的，这一步是必须的，因为 Docker Hub 中缺少 Microsoft 注册表层，需要将其拉入私有镜像库。
 
-   ```json
-   {
-     ...
-     "allow-nondistributable-artifacts": [
-       ...
-       "<REGISTRY.YOURDOMAIN.COM:PORT>"
-     ]
-     ...
-   }
-   ```
+```
+{
+  ...
+  "allow-nondistributable-artifacts": [
+    ...
+    "<REGISTRY.YOURDOMAIN.COM:PORT>"
+  ]
+  ...
+}
+```
 
 #### D. 推送镜像到私有镜像库
 
@@ -207,24 +211,24 @@ Linux 镜像需要从 Linux 主机上收集和推送，但是必须先将 Window
 
 #### B. 收集所有必需的镜像
 
-1. **针对使用 Rancher 生成的自签名证书安装的高可用：** 在安装 Kubernetes 过程中，如果选择使用 Rancher 默认的自签名 TLS 证书，则还必须将[`cert-manager`](https://hub.helm.sh/charts/jetstack/cert-manager)镜像添加到`rancher-images.txt`文件中。如果使用自己的证书，则跳过此步骤。
+**针对使用 Rancher 生成的自签名证书安装的高可用：** 在安装 Kubernetes 过程中，如果选择使用 Rancher 默认的自签名 TLS 证书，则还必须将[`cert-manager`](https://hub.helm.sh/charts/jetstack/cert-manager)镜像添加到`rancher-images.txt`文件中。如果使用自己的证书，则跳过此步骤。
 
-   1. 获取最新的`cert-manager` Helm chart，并解析模板以获取镜像详细信息：
+1.  获取最新的`cert-manager` Helm chart，并解析模板以获取镜像详细信息：
 
-      > **注意：** 由于`cert-manager`最近的改动，您需要升级`cert-manager`版本。如果您要升级 Rancher 并且使用`cert-manager`的版本低于 v0.12.0，请看我们的[升级文档](/docs/installation/options/upgrading-cert-manager/_index)。
+    > **注意：** 由于`cert-manager`最近的改动，您需要升级`cert-manager`版本。如果您要升级 Rancher 并且使用`cert-manager`的版本低于 v0.12.0，请看我们的[升级文档](/docs/installation/options/upgrading-cert-manager/_index)。
 
-      ```plain
-      helm repo add jetstack https://charts.jetstack.io
-      helm repo update
-      helm fetch jetstack/cert-manager --version v0.12.0
-      helm template ./cert-manager-<version>.tgz | grep -oP '(?<=image: ").*(?=")' >> ./rancher-images.txt
-      ```
+    ```plain
+    helm repo add jetstack https://charts.jetstack.io
+    helm repo update
+    helm fetch jetstack/cert-manager --version v0.12.0
+    helm template ./cert-manager-<version>.tgz | grep -oP '(?<=image: ").*(?=")' >> ./rancher-images.txt
+    ```
 
-   2. 对镜像列表进行排序和唯一化，以去除重复的镜像源：
+2.  对镜像列表进行排序和唯一化，以去除重复的镜像源：
 
-      ```plain
-      sort -u rancher-images.txt -o rancher-images.txt
-      ```
+    ```plain
+    sort -u rancher-images.txt -o rancher-images.txt
+    ```
 
 #### C. 将镜像保存到您的工作站中
 
@@ -240,7 +244,7 @@ Linux 镜像需要从 Linux 主机上收集和推送，但是必须先将 Window
    ./rancher-save-images.sh --image-list ./rancher-images.txt
    ```
 
-   **步骤结果：** Docker 会开始拉取用于离线安装所需的镜像。这个过程会花费几分钟时间。完成时，您的当前目录会输出名为 rancher-images.tar.gz 的压缩包。请确认文件存在这个目录里。
+   **结果：** Docker 会开始拉取用于离线安装所需的镜像。这个过程会花费几分钟时间。完成时，您的当前目录会输出名为 rancher-images.tar.gz 的压缩包。请确认文件存在这个目录里。
 
 #### D. 推送镜像到私有镜像库
 

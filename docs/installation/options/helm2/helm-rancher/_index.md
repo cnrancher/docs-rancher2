@@ -54,7 +54,7 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
 >
 > 由于 Helm v2.12.0 和 cert-manager 的问题，请使用 Helm v2.12.1 或更高版本。
 >
-> cert-manager 最近的更改需要升级版本。如果您正在升级 Rancher 并且使用低于 v0.9.1 版本的 cert-manager，请参考[升级文档](/docs/installation/options/upgrading-cert-manager/_index)。
+> cert-manager 最近的更改需要升级版本。如果您正在升级 Rancher 并且使用低于 v0.12.0 版本的 cert-manager，请参考[升级文档](/docs/installation/options/upgrading-cert-manager/_index)。
 
 Rancher 依靠[cert-manager](https://github.com/jetstack/cert-manager)使用 Rancher CA 生成证书或者请求 Let's Encrypt 签发的证书。
 
@@ -95,7 +95,7 @@ Rancher 依靠[cert-manager](https://github.com/jetstack/cert-manager)使用 Ran
    helm install \
      --name cert-manager \
      --namespace cert-manager \
-     --version v0.9.1 \
+     --version v0.12.0 \
      jetstack/cert-manager
    ```
 

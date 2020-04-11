@@ -28,7 +28,7 @@ steps:
     when:
       ref:
         include:
-          - "refs/heads/preview"
+          - 'refs/heads/preview'
       event:
         - push
   - name: production
@@ -48,10 +48,13 @@ steps:
     when:
       ref:
         include:
-          - "refs/heads/master"
+          - 'refs/heads/master'
       event:
         - push
 
 volumes:
   - name: vol
     temp: {}
+
+node:
+  instance: agent-amd64

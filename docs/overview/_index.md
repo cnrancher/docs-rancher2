@@ -5,6 +5,16 @@ description: 为您介绍Rancher的产品。帮助您了解 Rancher 容器平台
 
 Rancher 是为使用容器的公司打造的容器管理平台。Rancher 简化了使用 Kubernetes 的流程，开发者可以随处运行 Kubernetes，满足 IT 需求规范，赋能 DevOps 团队。
 
+Rancher 1.x 最初是为了支持多种容器编排引擎而构建的，其中包括自己的容器编排引擎 Cattle。但随着 Kubernetes 在市场上的兴起，Rancher 2.x 已经完全转向了 Kubernetes。Rancher 2.x 可以部署和管理在任何地方运行的 Kubernetes 集群。
+
+Rancher 可以创建来自 Kubernetes 托管服务提供商但集群，自动创建节点并安装 Kubernetes 集群，或者导入任何已经存在的 Kubernetes 集群。
+
+Rancher 通过支持集群的身份验证和基于角色的访问控制（RBAC），使系统管理员能够从一个位置控制全部集群的访问。
+
+然后，它可以对集群及其资源进行详细的监控和并在需要时发送告警，也可以将容器日志发送给外部日志系统，并通过应用商店与 Helm 集成。如果您具有外部 CI/CD 流水线系统，则可以将其与 Rancher 对接，如果没有，Rancher 也提供了简单易用的流水线来帮助您自动部署和升级工作负载。除此之外，还有很多开箱即用的功能来帮助您更好的管理集群和业务应用，例如多集群应用，全局 DNS，服务网格，安全扫描，集群模版和基于 OPA 的策略管理等功能。
+
+Rancher 是一个全栈式的 Kubernetes 容器管理平台，可以帮忙您在任何地方成功运行 Kubernetes 的工具。
+
 <div class="text-center">
 <iframe width="444" height="250" src="//player.bilibili.com/player.html?aid=94394330&cid=161139480&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 </div>

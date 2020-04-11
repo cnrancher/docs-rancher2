@@ -121,6 +121,8 @@ kube-system     rke-network-plugin-deploy-job-6pbgj       0/1       Completed   
 - `kube_config_rancher-cluster.yml`: 集群的[Kubeconfig 文件](https://rancher.com/docs/rke/latest/en/kubeconfig/)， 此文件包含用于完全访问集群的凭据。
 - `rancher-cluster.rkestate`:[Kubernetes 集群状态文件](https://rancher.com/docs/rke/latest/en/installation/#kubernetes-cluster-state)， 此文件包含用于完全访问集群的凭据.<br/><br/>_Kubernetes 集群状态文件 只会在 RKE v0.2.0 或更高版本中被创建。_
 
+> **注意：** 后两个文件名的“rancher-cluster”部分取决于您如何命名 RKE 集群的配置文件。
+
 ## 遇到的问题或错误?
 
 参阅[常见问题](/docs/installation/options/helm2/kubernetes-rke/troubleshooting/_index)。

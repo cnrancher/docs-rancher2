@@ -38,11 +38,42 @@ Rancher 的 Kubernetes 元数据包含了 Rancher 配置 [RKE 集群](/docs/clus
 
 RKE 元数据配置控制 Rancher 同步元数据的频率以及从何处下载数据。您可以从 Rancher UI 中的设置或通过 API `v3/settings/rke-metadata-config` 配置元数据。
 
+元数据的配置方式取决于 Rancher 版本。
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+defaultValue="new"
+values={[
+{ label: 'Rancher v2.4+', value: 'new', },
+{ label: 'Rancher v2.3', value: 'old', },
+]}>
+
+<TabItem value="new">
+
 要在 Rancher 中编辑元数据配置，
 
 1. 转到**全局**视图并单击**系统设置**选项卡。
 1. 转到**rke-metadata-config**部分。单击**省略号(…)**并单击**升级**
-1. 您可以选择填写以下参数:
+1. 您可以选择填写以下参数：
+
+   - `refresh-interval-minutes`：这是 Rancher 等待同步元数据的时间。若要禁用定期刷新，请将`refresh-interval-minutes`设置为 0。
+   - `url`： 这是 Rancher 从中获取数据的 HTTP 路径。该路径必须是 JSON 文件的直接路径。例如，Rancher v2.4 的默认 URL 是`https://releases.rancher.com/kontainer-driver-metadata/release-v2.4/data.json`。
+
+如果没有离线环境，则无需指定 Rancher 获取元数据的 URL，因为默认设置是从 [Rancher 的元数据存储库中提取](https://releases.rancher.com/kontainer-driver-metadata/release-v2.4/data.json)。
+
+但是，如果您有[离线环境](#离线环境)需求，则需要将 Kubernetes 元数据仓库镜像到 Rancher 可用的位置。然后，您需要更改 URL 以指向 JSON 文件的新位置。
+
+</TabItem>
+
+<TabItem value="old">
+
+要在 Rancher 中编辑元数据配置，
+
+1. 转到**全局**视图并单击**系统设置**选项卡。
+1. 转到**rke-metadata-config**部分。单击**省略号(…)**并单击**升级**
+1. 您可以选择填写以下参数：
 
    - `refresh-interval-minutes`：这是 Rancher 等待同步元数据的时间。若要禁用定期刷新，请将`refresh-interval-minutes`设置为 0。
    - `url`：这是 Rancher 从中获取数据的 HTTP 路径。
@@ -52,13 +83,19 @@ RKE 元数据配置控制 Rancher 同步元数据的频率以及从何处下载�
 
 但是，如果您有[离线环境](#离线环境)需求，则需要将 Kubernetes 元数据仓库镜像到 Rancher 可用的位置。然后需要在`rke-metadata-config`设置中更改 URL 和 Git 分支，以指向代码库的新位置。
 
+</TabItem>
+
+</Tabs>
+
 ## 离线环境
 
 Rancher Server 会定期刷新并下载`rke-metadata-config`中配置定元数据。如果新的元数据中包含当前 Rancher Server 版本支持的新的 Kubernetes 版本元数据。则用户可以在不升级 Rancher 的情况下，开始使用这些新的 Kubernetes 版本。有关 Kubernetes 和 Rancher 版本的兼容性表，请参阅[服务条款](https://rancher.com/support-maintenance-terms/all-supported-versions/)。
 
 如果您有一个离线环境，则可能无法从 Rancher 的 Git 代码库中自动定期刷新 Kubernetes 元数据。在这种情况下，应该禁用定期刷新以防止在日志中显示相关错误。或者，您可以配置`rke-metadata-config`，以便 Rancher 可以与 RKE 元数据的本地副本同步。
 
-若要将 Rancher 与 RKE 元数据的本地镜像同步，管理员将通过更新`rke-metadata-config`中的`url`和`branch`以指向镜像的仓库。请参见[配置元数据同步](#配置元数据同步)。
+若要将 Rancher 与 RKE 元数据的本地镜像同步，管理员将通过更新`rke-metadata-config`以指向镜像的仓库。请参见[配置元数据同步](#配置元数据同步)。
+
+To sync Rancher with a local mirror of the RKE metadata, an administrator would configure the `rke-metadata-config` settings to point to the mirror. For details, refer to [Configuring the Metadata Synchronization.](#configuring-the-metadata-synchronization)
 
 在将新的 Kubernetes 版本加载到 Rancher Server 中之后，需要执行其他步骤才能使用它们启动集群。Rancher 需要访问更新的系统镜像。虽然元数据设置只能由系统管理员更改，但任何用户都可以下载 Rancher 系统镜像并为它们准备一个私有镜像仓库。
 

@@ -637,17 +637,13 @@ module.exports = {
     应用商店: [
       'catalog/_index',
       'catalog/built-in/_index',
-      {
-        type: 'category',
-        label: '自定义应用商店',
-        items: [
-          'catalog/custom/_index',
-          'catalog/custom/creating/_index',
-          'catalog/custom/adding/_index'
-        ]
-      },
+      'catalog/adding-catalogs/_index',
+      'catalog/catalog-config/_index',
+      'catalog/creating-apps/_index',
+      'catalog/managing-apps/_index',
       'catalog/multi-cluster-apps/_index',
-      'catalog/apps/_index',
+      'catalog/launching-apps/_index',
+      'catalog/tutorial/_index',
       'catalog/globaldns/_index'
     ],
     Rancher命令行: ['cli/_index'],
@@ -717,7 +713,8 @@ module.exports = {
       'troubleshooting/networking/_index',
       'troubleshooting/dns/_index',
       'troubleshooting/rancherha/_index',
-      'troubleshooting/imported-clusters/_index'
+      'troubleshooting/imported-clusters/_index',
+      'troubleshooting/logging/_index'
     ],
     参与Rancher开源项目: ['contributing/_index'],
     版本迁移: [

@@ -35,3 +35,7 @@ _自 v2.2.0 起可用_
 ## Istio
 
 [Istio](https://istio.io/) 是一个开源工具，可使 DevOps 团队更轻松地观察，控制，排查故障和在复杂的微服务网络中的保证流量传输。有关如何在 Rancher 中启用 Istio 的详细信息，请参阅[Istio 部分](/docs/cluster-admin/tools/istio/_index)。
+
+## OPA Gatekeeper
+
+[OPA Gatekeeper](https://github.com/open-policy-agent/gatekeeper) 是一个开源项目，它对 OPA 和 Kubernetes 进行了集成，以通过准入控制器 Webhooks 提供策略控制。有关如何在 Rancher 中启用 Gatekeeper 的详细信息，请参阅[OPA Gatekeeper 部分](/docs/cluster-admin/tools/opa-gatekeeper/_index)。

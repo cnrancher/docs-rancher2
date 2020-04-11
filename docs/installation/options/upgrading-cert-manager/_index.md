@@ -24,10 +24,7 @@ Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和更新 TLS
 要使用 Helm 重新安装 Rancher，请在升级 Rancher 部分下选中[选项 B: 重新安装 Rancher Chart](/docs/upgrades/upgrades/ha/_index)。
 :::
 
-## 仅升级 Cert-Manager
-
-> **注意：**
-> 如果您没有升级 Rancher 的计划，这些说明是适用的。
+## 升级 Cert-Manager
 
 这些说明中使用的命名空间取决于当前安装了 cert-manager 的命名空间。如果它在 kube-system 中，请在以下说明中使用。您可以通过运行`kubectl get pods --all-namespaces`来验证，并检查 cert-manager-\* pods 列在哪个命名空间中。请勿更改正在运行 cert-manager 的命名空间，否则可能会导致问题。
 

@@ -45,7 +45,7 @@ Prometheus 监控可以应用于 Rancher [集群层级](/docs/cluster-admin/tool
 | Prometheus | 750m         | 750Mi        | 1000m        | 1000Mi   | 是           |
 | Grafana    | 100m         | 100Mi        | 200m         | 200Mi    | 否           |
 
-**结果：**完成监控资源配置以后，Rancher 会把一个叫做`project-monitoring`的项目层级监控，以[应用商店应用](/docs/catalog/apps/_index)的形式添加到了项目中。当这个应用的状态变成了`active` ，您可以通过 [Rancher UI](/docs/cluster-admin/tools/monitoring/_index#rancher-dashboard) 查看项目的监控指标，或者直接从[Grafana](/docs/cluster-admin/tools/monitoring/_index#grafana)查看项目的监控指标。
+**结果：**完成监控资源配置以后，Rancher 会把一个叫做`project-monitoring`的项目层级监控，以[应用商店应用](/docs/catalog/launching-apps/_index)的形式添加到了项目中。当这个应用的状态变成了`active` ，您可以通过 [Rancher UI](/docs/cluster-admin/tools/monitoring/_index#rancher-dashboard) 查看项目的监控指标，或者直接从[Grafana](/docs/cluster-admin/tools/monitoring/_index#grafana)查看项目的监控指标。
 
 ## 项目监控指标
 
