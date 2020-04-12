@@ -9,7 +9,7 @@ title: 动态创建持久卷
 ## 先决条件
 
 - 配置持久化存储，需要用有`管理卷（Manage Volumes）`权限的[角色](/docs/admin-settings/rbac/cluster-project-roles/_index)。
-- 如果要在云提供商托管的集群中设置存储，则需要保证存储和集群主机是来自同一个云提供商。并且必须启用 Cloud Provider。有关启用 Cloud Provider 的详细信息，请参阅[文档](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/_index)。
+- 如果要在云提供商托管的集群中设置存储，则需要保证存储和集群主机是来自同一个云提供商。并且必须启用 Cloud Provider。有关启用 Cloud Provider 的详细信息，请参阅[文档](/docs/cluster-provisioning/rke-clusters/cloud-providers/_index)。
 - 确保存储提供者是已启用的。
 
 下列的存储提供者默认启用：

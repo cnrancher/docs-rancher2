@@ -449,7 +449,6 @@ module.exports = {
             label: '集群配置参数',
             items: [
               'cluster-provisioning/rke-clusters/options/_index',
-              'cluster-provisioning/rke-clusters/options/cloud-providers/_index',
               'cluster-provisioning/rke-clusters/options/pod-security-policies/_index'
             ]
           },
