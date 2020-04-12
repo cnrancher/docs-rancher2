@@ -63,15 +63,7 @@ module.exports = {
         label: 'Rancher 高可用安装',
         items: [
           'installation/k8s-install/_index',
-          {
-            type: 'category',
-            label: '1、配置基础设置',
-            items: [
-              'installation/k8s-install/create-nodes-lb/_index',
-              'installation/k8s-install/create-nodes-lb/nginx/_index',
-              'installation/k8s-install/create-nodes-lb/nlb/_index'
-            ]
-          },
+          'installation/k8s-install/create-nodes-lb/_index',
           'installation/k8s-install/kubernetes-rke/_index',
           'installation/k8s-install/helm-rancher/_index'
         ]
@@ -88,8 +80,7 @@ module.exports = {
               'installation/other-installation-methods/single-node-docker/_index',
               'installation/other-installation-methods/single-node-docker/troubleshooting/_index',
               'installation/other-installation-methods/single-node-docker/advanced/_index',
-              'installation/other-installation-methods/single-node-docker/proxy/_index',
-              'installation/other-installation-methods/single-node-docker/single-node-install-external-lb/_index'
+              'installation/other-installation-methods/single-node-docker/proxy/_index'
             ]
           },
           {
@@ -165,6 +156,8 @@ module.exports = {
           },
           'installation/options/etcd/_index',
           'installation/options/server-tags/_index',
+          'installation/options/single-node-install-external-lb/_index',
+          'installation/options/nginx/_index',
           'installation/options/tls-secrets/_index',
           'installation/options/chart-options/_index',
           {
@@ -204,7 +197,9 @@ module.exports = {
             ]
           },
           'installation/options/troubleshooting/_index',
+          'installation/options/nlb/_index',
           'installation/options/ec2-node/_index',
+          'installation/options/rds/_index',
           'installation/options/helm-version/_index',
           'installation/options/custom-ca-root-certificate/_index',
           'installation/options/local-system-charts/_index',

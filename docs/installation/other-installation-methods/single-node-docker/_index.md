@@ -8,7 +8,7 @@ title: 安装指南
 
 > **想要使用外部负载均衡？**
 >
-> 请参阅[使用外部负载均器的单节点安装](/docs/installation/other-installation-methods/single-node-docker/single-node-install-external-lb/_index)。
+> 请参阅[使用外部负载均器的单节点安装](/docs/installation/options/single-node-install-external-lb/_index)。
 
 ## 操作系统，Docker，硬件和网络的要求
 
