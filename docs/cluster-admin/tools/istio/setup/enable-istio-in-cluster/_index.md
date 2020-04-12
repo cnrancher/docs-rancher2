@@ -1,5 +1,5 @@
 ---
-title: 1、在集群中启用 Istio
+title: 启用 Istio
 ---
 
 该集群使用默认的 Nginx 控制器来允许流量进入集群。

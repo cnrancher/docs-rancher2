@@ -74,7 +74,7 @@ _适用于 v2.1.0 到 v2.1.9 和 v2.2.0 到 v2.2.3 版本_
 
 当为支持 Windows 的集群选择网络插件时，唯一可用的选项是 Flannel，因为我们要用到[host-gw](https://github.com/coreos/flannel/blob/master/Documentation/backends.md#host-gw)来进行 IP 路由。
 
-如果您的节点由云提供商托管，并且您希望获得额外自动化功能，例如负载均衡器或持久存储设备等，有关配置信息，请参阅[Cloud Provider 设置](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/_index)。
+如果您的节点由云提供商托管，并且您希望获得额外自动化功能，例如负载均衡器或持久存储设备等，有关配置信息，请参阅[Cloud Provider 设置](/docs/cluster-provisioning/rke-clusters/cloud-providers/_index)。
 
 #### 节点配置
 

@@ -53,7 +53,7 @@ title: 设置集群
 | 节点上的 Docker 版本 | 配置不管节点是否允许运行 Rancher 不正式支持的 Docker 版本。如果您选择需要一个[受支持的 Docker 版本](/docs/installation/options/rke-add-on/layer-7-lb/_index)，Rancher 将停止在没有安装受支持的 Docker 版本的节点上运行 pods。   |
 | Docker 根目录        | 集群节点上安装 Docker 的目录。如果在节点上将 Docker 安装到非默认目录，请更新此路径。                                                                                                                                            |
 | 默认 Pod 安全策略    | 如果启用了 **Pod 安全策略支持**，请使用此下拉菜单选择应用于集群的 Pod 安全策略。                                                                                                                                                |
-| 云提供商             | 如果您使用云提供商来托管由 RKE 启动的集群节点，请启用[此选项](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/_index)，以便您可以使用云提供商的本地特性。如果您希望为您的云托管集群存储持久数据，则需要此选项。 |
+| 云提供商             | 如果您使用云提供商来托管由 RKE 启动的集群节点，请启用[此选项](/docs/cluster-provisioning/rke-clusters/cloud-providers/_index)，以便您可以使用云提供商的本地特性。如果您希望为您的云托管集群存储持久数据，则需要此选项。 |
 
 ## 编辑集群 YAML
 

@@ -72,7 +72,7 @@ Windows 要求容器必须建立在与容器相同的 Windows Server 版本上�
 
 ### Cloud Providers
 
-如果您在集群中设置 Kubernetes Cloud Provider，则需要执行一些其他步骤。如果要利用云提供商的功能（例如，为集群自动配置存储，负载均衡器或其他基础设施），则可能需要设置 Cloud Provider。请参阅[本页](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/_index)，以获取有关如何配置 Cloud Provider 的详细信息。
+如果您在集群中设置 Kubernetes Cloud Provider，则需要执行一些其他步骤。如果要利用云提供商的功能（例如，为集群自动配置存储，负载均衡器或其他基础设施），则可能需要设置 Cloud Provider。请参阅[本页](/docs/cluster-provisioning/rke-clusters/cloud-providers/_index)，以获取有关如何配置 Cloud Provider 的详细信息。
 
 如果您使用的是 GCE（Google Compute Engine）云提供商，则必须执行以下操作：
 
@@ -109,7 +109,7 @@ Windows 要求容器必须建立在与容器相同的 Windows Server 版本上�
 | Node 2 | Linux (推荐 Ubuntu Server 18.04)                  |
 | Node 3 | Windows (Windows Server Core Version 1809 或以上) |
 
-如果您的节点由**云供应商**托管，并且您需要自动化支持（例如负载均衡器或永久性存储设备），则您的节点还有其他配置要求。有关详细信息，请参阅[设置 Cloud Provider](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/_index)。
+如果您的节点由**云供应商**托管，并且您需要自动化支持（例如负载均衡器或永久性存储设备），则您的节点还有其他配置要求。有关详细信息，请参阅[设置 Cloud Provider](/docs/cluster-provisioning/rke-clusters/cloud-providers/_index)。
 
 ### 2. 创建自定义集群
 
@@ -227,7 +227,7 @@ Windows 要求容器必须建立在与容器相同的 Windows Server 版本上�
 
 为了使 Azure 平台创建所需的存储资源，请按照下列步骤操作：
 
-1. [配置 Azure Cloud Provider](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/_index)。
+1. [配置 Azure Cloud Provider](/docs/cluster-provisioning/rke-clusters/cloud-providers/_index)。
 
 1. 配置`kubectl`连接到您的集群。
 

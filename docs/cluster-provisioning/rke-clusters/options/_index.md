@@ -55,7 +55,7 @@ title: 集群参数
 
 ### Kubernetes Cloud Provider
 
-您可以配置[Kubernetes Cloud Provider](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/_index)。如果您想要在 Kubernetes 中使用[卷和存储](/docs/cluster-admin/volumes-and-storage/_index), 通常，您必须选择特定的 Cloud Provider 才能使用它。例如，如果您想使用 Amazon EBS，则需要选择 `aws` Cloud Provider。
+您可以配置[Kubernetes Cloud Provider](/docs/cluster-provisioning/rke-clusters/cloud-providers/_index)。如果您想要在 Kubernetes 中使用[卷和存储](/docs/cluster-admin/volumes-and-storage/_index), 通常，您必须选择特定的 Cloud Provider 才能使用它。例如，如果您想使用 Amazon EBS，则需要选择 `aws` Cloud Provider。
 
 > **注意：** 如果您要使用的 Cloud Provider 不在 UI 的选项，则需要使用 [RKE 配置文件](#集群配置文件)来配置 Cloud Provider。请参考 [RKE Cloud Provider 文档](http://docs.rancher.com/docs/rke/latest/en/config-options/cloud-providers/)了解如何配置 Cloud Provider。
 

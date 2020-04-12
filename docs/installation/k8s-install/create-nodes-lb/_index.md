@@ -1,5 +1,5 @@
 ---
-title: '配置说明'
+title: '1、配置基础设置'
 ---
 
 使用您选择的基础架构提供商为 RKE 安装设置三个节点和一个负载均衡器。
@@ -23,7 +23,7 @@ RKE 将在每个节点上配置一个 Ingress 控制器的 Pod。Ingress 控制�
 
 ### 入门指南
 
-- 有关如何设置 NGINX 负载均衡器的示例，请参阅[此页面。](/docs/installation/k8s-install/create-nodes-lb/nginx/_index)
-- 有关显示如何设置 Amazon NLB 负载均衡器的示例，请参阅[此页面。](/docs/installation/k8s-install/create-nodes-lb/nlb/_index)
+- 有关如何设置 NGINX 负载均衡器的示例，请参阅[此页面。](/docs/installation/options/nginx/_index)
+- 有关显示如何设置 Amazon NLB 负载均衡器的示例，请参阅[此页面。](/docs/installation/options/nlb/_index)
 
 ## [下一步：使用 RKE 安装 Kubernetes](/docs/installation/k8s-install/kubernetes-rke/_index)

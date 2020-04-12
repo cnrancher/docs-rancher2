@@ -73,7 +73,7 @@ ClusterIP 是一个虚拟 IP，不能够回应 ping。更好的测试 ClusterIP 
 
 ## 为什么创建的 L4 负载均衡器一直处在`Pending`状态？
 
-L4 负载均衡器是通过`type: LoadBalancer`创建的。在 Kubernetes 里，它需要一个公有云提供商或者类似控制器（例如：MetalLB）来响应创建需求，否则就会一直处在`Pending`状态。更多信息请参阅[公有云提供商](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/_index)或[创建外部负载均衡器](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/)。
+L4 负载均衡器是通过`type: LoadBalancer`创建的。在 Kubernetes 里，它需要一个公有云提供商或者类似控制器（例如：MetalLB）来响应创建需求，否则就会一直处在`Pending`状态。更多信息请参阅[公有云提供商](/docs/cluster-provisioning/rke-clusters/cloud-providers/_index)或[创建外部负载均衡器](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/)。
 
 ## Rancher 的状态数据存储在哪里？
 

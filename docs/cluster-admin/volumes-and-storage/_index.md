@@ -10,7 +10,7 @@ title: 持久化存储
 
 配置持久化存储，需要用有`管理卷（Manage Volumes）`权限的[角色](/docs/admin-settings/rbac/cluster-project-roles/_index)的用户。
 
-如果要在云提供商托管的集群中设置存储，则需要保证存储和集群主机是来自同一个云提供商。在 Rancher 中对接新的云存储，必须配置 Cloud Provider，关于如何配置的详细信息可以浏览[这里](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/_index)。
+如果要在云提供商托管的集群中设置存储，则需要保证存储和集群主机是来自同一个云提供商。在 Rancher 中对接新的云存储，必须配置 Cloud Provider，关于如何配置的详细信息可以浏览[这里](/docs/cluster-provisioning/rke-clusters/cloud-providers/_index)。
 
 如果是设置对接现有的存储，则无需配置启用云提供商。
 
