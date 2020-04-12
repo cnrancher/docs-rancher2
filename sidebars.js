@@ -31,8 +31,10 @@ module.exports = {
         items: [
           'quick-start-guide/deployment/_index',
           'quick-start-guide/deployment/quickstart-manual-setup/_index',
-          'quick-start-guide/deployment/digital-ocean-qs/_index',
           'quick-start-guide/deployment/amazon-aws-qs/_index',
+          'quick-start-guide/deployment/microsoft-azure-qs/_index',
+          'quick-start-guide/deployment/digital-ocean-qs/_index',
+          'quick-start-guide/deployment/google-gcp-qs/_index',
           'quick-start-guide/deployment/quickstart-vagrant/_index'
         ]
       },
