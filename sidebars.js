@@ -575,14 +575,7 @@ module.exports = {
         ]
       },
       'project-admin/istio/_index',
-      {
-        type: 'category',
-        label: '流水线',
-        items: [
-          'project-admin/pipelines/_index',
-          'project-admin/pipelines/docs-for-v2.0.x/_index'
-        ]
-      },
+      'project-admin/pipelines/_index',
       'project-admin/pod-security-policies/_index'
     ],
     用户指南: [
@@ -629,8 +622,12 @@ module.exports = {
         label: '流水线',
         items: [
           'k8s-in-rancher/pipelines/_index',
+          'k8s-in-rancher/pipelines/concepts/_index',
+          'k8s-in-rancher/pipelines/config/_index',
           'k8s-in-rancher/pipelines/example-repos/_index',
-          'k8s-in-rancher/pipelines/example/_index'
+          'k8s-in-rancher/pipelines/example/_index',
+          'k8s-in-rancher/pipelines/storage/_index',
+          'k8s-in-rancher/pipelines/docs-for-v2.0.x/_index'
         ]
       }
     ],

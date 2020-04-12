@@ -1,5 +1,5 @@
 ---
-title: 设置 Pod 安全策略
+title: Pod 安全策略
 ---
 
 > 本文只适用于[使用 RKE 创建的集群](/docs/cluster-provisioning/rke-clusters/_index)。
