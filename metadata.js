@@ -88,6 +88,7 @@ const metadata = {
     'cluster-admin/tools/logging/_index': '集群日志',
     'cluster-admin/tools/alerts/_index': '集群告警',
     'cluster-admin/tools/istio/_index': '服务网格（Istio）',
+    'cluster-admin/tools/opa-gatekeper/_index': '政策管理（OPA Gatekeeper）',
     'cluster-admin/certificate-rotation/_index': '轮换证书',
     'cluster-admin/backing-up-etcd/_index': '备份 etcd',
     'cluster-admin/restoring-etcd/_index': '恢复 etcd',

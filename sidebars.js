@@ -564,7 +564,8 @@ module.exports = {
               'cluster-admin/tools/monitoring/prometheus/_index',
               'cluster-admin/tools/monitoring/viewing-metrics/_index'
             ]
-          }
+          },
+          'cluster-admin/tools/opa-gatekeper/_index'
         ]
       },
       'cluster-admin/cloning-clusters/_index',
