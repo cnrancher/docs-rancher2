@@ -77,6 +77,8 @@ const metadata = {
     'cluster-provisioning/imported-clusters/_index': '导入已有集群',
     'cluster-provisioning/rke-clusters/windows-clusters/_index':
       '创建 Windows 集群',
+    'cluster-provisioning/rke-clusters/cloud-providers/_index':
+      '配置 Cloud Provider',
     'cluster-admin/cluster-access/_index': '访问控制',
     'cluster-admin/upgrading-kubernetes/_index': '升级 Kubernetes 版本',
     'cluster-admin/pod-security-policy/_index': '设置 Pod 安全策略',

@@ -453,6 +453,16 @@ module.exports = {
               'cluster-provisioning/rke-clusters/options/pod-security-policies/_index'
             ]
           },
+          {
+            type: 'category',
+            label: '配置 Cloud Provider',
+            items: [
+              'cluster-provisioning/rke-clusters/cloud-providers/_index',
+              'cluster-provisioning/rke-clusters/cloud-providers/amazon/_index',
+              'cluster-provisioning/rke-clusters/cloud-providers/azure/_index',
+              'cluster-provisioning/rke-clusters/cloud-providers/gce/_index'
+            ]
+          },
           'cluster-provisioning/rke-clusters/rancher-agents/_index'
         ]
       },
