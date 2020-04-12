@@ -300,7 +300,14 @@ module.exports = {
           'admin-settings/authentication/user-groups/_index',
           'admin-settings/authentication/local/_index',
           'admin-settings/authentication/ad/_index',
-          'admin-settings/authentication/openldap/_index',
+          {
+            type: 'category',
+            label: '对接 OpenLDAP',
+            items: [
+              'admin-settings/authentication/openldap/_index',
+              'admin-settings/authentication/openldap/openldap-config/_index'
+            ]
+          },
           'admin-settings/authentication/freeipa/_index',
           'admin-settings/authentication/azure-ad/_index',
 
@@ -317,6 +324,14 @@ module.exports = {
             ]
           },
           'admin-settings/authentication/okta/_index',
+          {
+            type: 'category',
+            label: '对接 Shibboleth (SAML)',
+            items: [
+              'admin-settings/authentication/shibboleth/_index',
+              'admin-settings/authentication/shibboleth/about/_index'
+            ]
+          },
           'admin-settings/authentication/google/_index'
         ]
       },
