@@ -1,5 +1,5 @@
 ---
-title: Rancher 高可用恢复
+title: RKE Rancher 高可用恢复
 ---
 
 此过程描述了如何使用 RKE 还原 Rancher Kubernetes 集群的快照。集群快照将包括 Kubernetes 配置以及 Rancher 数据库和状态。
