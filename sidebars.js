@@ -522,7 +522,14 @@ module.exports = {
                 label: 'Istio 使用指南',
                 items: [
                   'cluster-admin/tools/istio/setup/_index',
-                  'cluster-admin/tools/istio/setup/enable-istio-in-cluster/_index',
+                  {
+                    type: 'category',
+                    label: '1、在集群中启用 Istio',
+                    items: [
+                      'cluster-admin/tools/istio/setup/enable-istio-in-cluster/_index',
+                      'cluster-admin/tools/istio/setup/enable-istio-in-cluster/enable-istio-with-psp/_index'
+                    ]
+                  },
                   'cluster-admin/tools/istio/setup/enable-istio-in-namespace/_index',
                   'cluster-admin/tools/istio/setup/node-selectors/_index',
                   'cluster-admin/tools/istio/setup/deploy-workloads/_index',
