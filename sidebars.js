@@ -204,6 +204,7 @@ module.exports = {
             ]
           },
           'installation/options/troubleshooting/_index',
+          'installation/options/ec2-node/_index',
           'installation/options/helm-version/_index',
           'installation/options/custom-ca-root-certificate/_index',
           'installation/options/local-system-charts/_index',
