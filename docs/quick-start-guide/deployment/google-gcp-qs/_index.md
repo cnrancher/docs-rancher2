@@ -1,69 +1,70 @@
 ---
-title: Rancher GCP Quick Start Guide
-description: Read this step by step Rancher GCP guide to quickly deploy a Rancher Server with a single node cluster attached.
-weight: 100
+title: Google GCP 快速部署
 ---
-The following steps will quickly deploy a Rancher server on GCP in a single-node RKE Kubernetes cluster, with a single-node downstream Kubernetes cluster attached.
 
-## Prerequisites
+以下步骤将在 GCP 上创建一个单节点的 RKE Kubernetes 集群，并在其中部署 Rancher Server，并附加一个单节点的下游 Kubernetes 集群。
 
->**Note**
->Deploying to Google GCP will incur charges.
+## 先决条件
 
-- [Google GCP Account](https://console.cloud.google.com/): A Google GCP Account is required to create resources for deploying Rancher and Kubernetes.
-- [Google GCP Project](https://cloud.google.com/appengine/docs/standard/nodejs/building-app/creating-project): Use this link to follow a tutorial to create a GCP Project if you don't have one yet.
-- [Google GCP Service Account](https://cloud.google.com/iam/docs/creating-managing-service-account-keys): Use this link and follow instructions to create a GCP service account and token file.
-- [Terraform](https://www.terraform.io/downloads.html): Used to provision the server and cluster in Google GCP.
+> **注意：**
+> Google GCP 会向您收取一定的费用。
 
+- [Google GCP 账号](https://console.cloud.google.com/)：需要一个 Google GCP 账号来创建部署 Rancher Server 和 Kubernetes 所需要的资源。
+- [Google GCP 项目](https://cloud.google.com/appengine/docs/standard/nodejs/building-app/creating-project)：如果您还没有 GCP 项目，请使用这个链接查看相关指南。
+- [Google GCP 服务账号](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)：使用此链接并按照说明创建 GCP 服务帐户和 token 文件。
+- [Terraform](https://www.terraform.io/downloads.html)：用于在 Google GCP 中配置服务器和集群。
 
-## Getting Started
+## 操作步骤
 
-1. Clone [Rancher Quickstart](https://github.com/rancher/quickstart) to a folder using `git clone https://github.com/rancher/quickstart`.
+1. 打开命令行工具，执行`git clone https://github.com/rancher/quickstart`命令，把 Rancher 快速入门需要用的到的文件克隆到本地。
 
-1. Go into the GCP folder containing the terraform files by executing `cd quickstart/gcp`.
+1. 执行`cd quickstart/gcp`命令，进入 GCP 快速部署文件夹。
 
-1. Rename the `terraform.tfvars.example` file to `terraform.tfvars`.
+1. 重命名`terraform.tfvars.example`文件为`terraform.tfvars`。
 
-1. Edit `terraform.tfvars` and customize the following variables:
-    - `gcp_account_json` - GCP service account file path and file name 
-    - `rancher_server_admin_password` - Admin password for created Rancher server
+1. 编辑`terraform.tfvars`文件，替换以下两个变量。
 
-1. **Optional:** Modify optional variables within `terraform.tfvars`.
-See the [Quickstart Readme](https://github.com/rancher/quickstart) and the [GCP Quickstart Readme](https://github.com/rancher/quickstart/tree/master/gcp) for more information.
-Suggestions include:
-    - `gcp_region` - Google GCP region, choose the closest instead of the default
-    - `prefix` - Prefix for all created resources
-    - `machine_type` - Compute instance size used, minimum is `n1-standard-1` but `n1-standard-2` or `n1-standard-4` could be used if within budget
-    - `ssh_key_file_name` - Use a specific SSH key instead of `~/.ssh/id_rsa` (public key is assumed to be `${ssh_key_file_name}.pub`)
+   - `gcp_account_json` - GCP 服务账号的文件路径和文件名称
+   - `rancher_server_admin_password` - Rancher Server 的默认 admin 账户的密码
 
-1. Run `terraform init`.
+1. **可选：** 修改文件`terraform.tfvars`中的可选参数。
+   请参阅[快速启动说明](https://github.com/rancher/quickstart)和 [GCP 快速启动说明](https://github.com/rancher/quickstart/tree/master/gcp)了解更多信息。
 
-1. Install the [RKE terraform provider](https://github.com/rancher/terraform-provider-rke), see [installation instructions](https://github.com/rancher/terraform-provider-rke#using-the-provider).
+   建议包括：
 
-1. To initiate the creation of the environment, run `terraform apply --auto-approve`. Then wait for output similar to the following:
+   - `gcp_region` - Google GCP 区域，选择距离您最近的区域，而非使用默认值。
+   - `prefix` - 全部创建资源的前缀。
+   - `machine_type` - 使用的计算实例规格，最小规格为`n1-standard-1`。如果在预算范围内，建议使用`n1-standard-2`或`n1-standard-4`。
+   - `ssh_key_file_name` - 使用指定的 SSH 密钥而不是`~/.ssh/id_rsa`（假设公共密钥为`${ssh_key_file_name}.pub`）
 
-    ```
-    Apply complete! Resources: 16 added, 0 changed, 0 destroyed.
+1. 执行`terraform init`。
 
-    Outputs:
+1. 安装 [RKE terraform 提供商](https://github.com/rancher/terraform-provider-rke)，详情请参阅[安装指南](https://github.com/rancher/terraform-provider-rke#using-the-provider)。
 
-    rancher_node_ip = xx.xx.xx.xx
-    rancher_server_url = https://xx-xx-xx-xx.nip.io
-    workload_node_ip = yy.yy.yy.yy
-    ```
+1. 执行 `terraform apply --auto-approve` 开始初始化环境，命令行工具返回以下信息时，表示命令执行成功，完成了初始化环境配置。
 
-1. Paste the `rancher_server_url` from the output above into the browser. Log in when prompted (default username is `admin`, use the password set in `rancher_server_admin_password`).
+   ```
+   Apply complete! Resources: 16 added, 0 changed, 0 destroyed.
 
-#### Result
+   Outputs:
 
-Two Kubernetes clusters are deployed into your GCP account, one running Rancher Server and the other ready for experimentation deployments.
+   rancher_node_ip = xx.xx.xx.xx
+   rancher_server_url = https://xx-xx-xx-xx.nip.io
+   workload_node_ip = yy.yy.yy.yy
+   ```
 
-### What's Next?
+1. 将以上输出中的`rancher_server_url`粘贴到浏览器中。在登录页面中登录（默认用户名为`admin`，密码为在`rancher_server_admin_password`中设置的密码）。
 
-Use Rancher to create a deployment. For more information, see [Creating Deployments]({{< baseurl >}}/rancher/v2.x/en/quick-start-guide/workload).
+#### 结果
 
-## Destroying the Environment
+两个 Kubernetes 集群已部署到您的 GCP 帐户中，一个正在运行 Rancher Server，另一个可以用来部署您的实验应用。
 
-1. From the `quickstart/gcp` folder, execute `terraform destroy --auto-approve`.
+## 后续操作
 
-2. Wait for confirmation that all resources have been destroyed.
+使用 Rancher 部署工作负载，详情请参考[部署工作负载](/docs/quick-start-guide/workload/_index)。
+
+## 清理环境
+
+1. 进入`quickstart/gcp`文件夹，执行`terraform destroy --auto-approve`。
+
+1. 等待命令行界面显示完成了资源删除的信息。

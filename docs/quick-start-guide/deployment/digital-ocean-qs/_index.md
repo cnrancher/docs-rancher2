@@ -54,7 +54,7 @@ title: DigitalOcean 快速部署
 
 快速入门为您创建了一个使用 Rancher 的沙盒，我们建议您在完成试用后清理环境内 Rancher 相关的资源和数据。具体步骤如下：
 
-1. 执行`cd quickstart/do`命令，进入 Vagrant 快速部署文件夹。
+1. 执行`cd quickstart/do`命令，进入 DigitalOcean 快速部署文件夹。
 
 1. 执行`terraform destroy --force`命令，删除相关的资源和数据。
 
