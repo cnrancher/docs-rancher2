@@ -2,51 +2,54 @@
 title: 管理云密钥
 ---
 
-_Available as of v2.2.0_
+_v2.2.0 或更新版可用_
 
-When you create a cluster [hosted by an infrastructure provider](/docs/cluster-provisioning/rke-clusters/node-pools), [node templates](/docs/cluster-provisioning/rke-clusters/node-pools/#node-templates) are used to provision the cluster nodes. These templates use Docker Machine configuration options to define an operating system image and settings/parameters for the node.
+## 概述
 
-Node templates can use cloud credentials to access the credential information required to provision nodes in the infrastructure providers. The same cloud credential can be used by multiple node templates. By using a cloud credential, you do not have to re-enter access keys for the same cloud provider. Cloud credentials are stored as Kubernetes secrets.
+当您创建集群时，需要用到[节点模板](/docs/cluster-provisioning/rke-clusters/node-pools/_index)创建集群内的节点。这些模板使用 Docker Machine 配置选项，定义节点上的操作系统的镜像和配置参数。
 
-Cloud credentials are only used by node templates if there are fields marked as `password` . The default `active` node drivers have their account access fields marked as `password` , but there may be some `inactive` node drivers, which are not using them yet. These node drivers will not use cloud credentials.
+主机节点可以使用云密码访问基础设施提供商，获取创建节点所需的凭证信息。一个云秘钥可用于多个节点模板。云秘钥的优势是，使用同一个云服务提供商创建多个节点模板时，您不需要重复输入多次认证信息。云密码以 Kubernetes secrets 的方式存储。
 
-You can create cloud credentials in two contexts:
+如果节点模板中有字段被标记为`password`，那么云秘钥只被用于这些模板。处于`active`状态的节点驱动的账户访问字段被标记为`password`，但是除了`active`状态外，也可能有一些节点驱动的状态是`inactive`。它们暂时不需要使用云秘钥。
 
-* [During creation of a node template](/docs/cluster-provisioning/rke-clusters/node-pools/#node-templates) for a cluster.
-* In the **User Settings**
+您可以在以下两种场景中创建云秘钥：
 
-All cloud credentials are bound to the user profile of who created it. They **cannot** be shared across users.
+- 为集群创建节点模板时，创建云秘钥，详情请参考[创建节点模板](/docs/cluster-provisioning/rke-clusters/node-pools/_index)。
 
-### Creating a Cloud Credential from User Settings
+- 在**用户配置**中创建云秘钥。
 
-1. From your user settings, select **User Avatar > Cloud Credentials**.
-1. Click **Add Cloud Credential**.
-1. Enter a name for the cloud credential.
-1. Select a **Cloud Credential Type** from the drop down. The values of this dropdown is based on the `active` [node drivers](/docs/admin-settings/drivers/node-drivers/) in Rancher.
-1. Based on the selected cloud credential type, enter the required values to authenticate with the infrastructure provider.
-1. Click **Create**.
+> **说明：**云秘钥与创建该秘钥的用户绑定，用户之间不可用分享秘钥。
 
-**Result:** The cloud credential is created and can immediately be used to [create node templates](/docs/cluster-provisioning/rke-clusters/node-pools/#node-templates).
+## 创建云秘钥
 
-### Updating a Cloud Credential
+1.  单击页面右上方的 **用户头像**，选择 **云秘钥**。
+1.  单击**添加云秘钥**。
+1.  输入秘钥名称。
+1.  从下拉菜单选择一个云秘钥类型。可选的类型由 Rancher 内状态为`active`的[节点驱动](/docs/admin-settings/drivers/node-drivers/_index) 决定。
+1.  输入认证信息。
+1.  单击**创建**，添加新的云秘钥。
 
-When access credentials are changed or compromised, updating a cloud credential allows you to rotate those credentials while keeping the same node template.
+**结果：** 添加了新的云秘钥，[创建节点模板](/docs/cluster-provisioning/rke-clusters/node-pools/_index)时可以使用该秘钥。
 
-1. From your user settings, select **User Avatar > Cloud Credentials**.
-1. Choose the cloud credential you want to edit and click the **Vertical Ellipsis (...) > Edit**.
-1. Update the credential information and click **Save**.
+## 更新云秘钥
 
-**Result:** The cloud credential is updated with the new access credentials. All existing node templates using this cloud credential will automatically use the updated information whenever [new nodes are added](/docs/cluster-provisioning/rke-clusters/node-pools/).
+当访问秘钥信息泄露或被修改过后，更新云秘钥允许您在替换这些认证信息的同时，保留相同的节点模板。
 
-### Deleting a Cloud Credential
+1. 单击页面右上方的 **用户头像**，选择 **云秘钥**。
+1. 选择您需要更新的云秘钥，单击 **... > 编辑**。
+1. 输入最新的云秘钥信息，单击**保存**，完成更新。
 
-In order to delete cloud credentials, there must not be any node template associated with it. If you are unable to delete the cloud credential, [delete any node templates](/docs/user-settings/node-templates/#deleting-a-node-template) that are still associated to that cloud credential.
+**结果：** 完成云秘钥更新。新建节点时，所有的主机节点都会自动使用更新后的云秘钥。
 
-1. From your user settings, select **User Avatar > Cloud Credentials**.
-1. You can either individually delete a cloud credential or bulk delete.
+## 删除云秘钥
 
-   - To individually delete one, choose the cloud credential you want to edit and click the **Vertical Ellipsis (... ) > Delete**.
-   - To bulk delete cloud credentials, select one or more cloud credentials from the list. Click **Delete**.
+删除云秘钥前，请确保所有节点模板都已经不再使用该秘钥。如果出现删除秘钥失败的场景，请先删除正在使用该秘钥的所有节点模板，详情请参考[删除节点模板](/docs/user-settings/node-templates/_index)。
 
-1. Confirm that you want to delete these cloud credentials.
+1. 单击页面右上方的 **用户头像**，选择 **云秘钥**。
 
+1. 删除单个云秘钥或批量删除云秘钥
+
+   - 选择您需要更新的云秘钥，单击 **... > 删除**。
+   - 勾选多个云秘钥，单击**删除**。
+
+1. 单击 **确认**，删除选定的云秘钥。
