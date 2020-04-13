@@ -1,74 +1,72 @@
 ---
-title: Rancher Azure Quick Start Guide
-description: Read this step by step Rancher Azure guide to quickly deploy a Rancher Server with a single node cluster attached.
-weight: 100
+title: Azure 快速部署
 ---
 
-The following steps will quickly deploy a Rancher server on Azure in a single-node RKE Kubernetes cluster, with a single-node downstream Kubernetes cluster attached.
+以下步骤将在 Azure 上创建一个单节点的 RKE Kubernetes 集群，并在其中部署 Rancher Server，并附加一个单节点的下游 Kubernetes 集群。
 
-## Prerequisites
+## 先决条件
 
->**Note**
->Deploying to Microsoft Azure will incur charges.
+> **注意：**
+> Microsoft Azure 会向您收取一定的费用。
 
-- [Microsoft Azure Account](https://azure.microsoft.com/en-us/free/): A Microsoft Azure Account is required to create resources for deploying Rancher and Kubernetes.
-- [Microsoft Azure Subscription](https://docs.microsoft.com/en-us/azure/cost-management-billing/manage/create-subscription#create-a-subscription-in-the-azure-portal): Use this link to follow a tutorial to create a Microsoft Azure subscription if you don't have one yet.
-- [Micsoroft Azure Tenant](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-create-new-tenant): Use this link and follow instructions to create a Microsoft Azure tenant.
-- [Microsoft Azure Client ID/Secret](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal): Use this link and follow instructions to create a Microsoft Azure client and secret.
-- [Terraform](https://www.terraform.io/downloads.html): Used to provision the server and cluster in Microsoft Azure.
+- [Microsoft Azure 账号](https://azure.microsoft.com/en-us/free/)：需要一个 Microsoft Azure 账号来创建部署 Rancher Server 和 Kubernetes 所需要的资源。
+- [Microsoft Azure 订阅](https://docs.microsoft.com/en-us/azure/cost-management-billing/manage/create-subscription#create-a-subscription-in-the-azure-portal)：如果您还没有 Microsoft Azure 订阅，请使用这个链接查看相关指南。
+- [Micsoroft Azure 租户](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-create-new-tenant)：使用此链接并按照说明创建 Microsoft Azure 租户。
+- [Microsoft Azure 客户端 ID/密钥](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal)：使用此链接并按照说明创建 Microsoft Azure 客户端和密钥。
+- [Terraform](https://www.terraform.io/downloads.html)：用于在 Microsoft Azure 中配置服务器和集群。
 
+## 操作步骤
 
-## Getting Started
+1. 打开命令行工具，执行`git clone https://github.com/rancher/quickstart`命令，把 Rancher 快速入门需要用的到的文件克隆到本地。
 
-1. Clone [Rancher Quickstart](https://github.com/rancher/quickstart) to a folder using `git clone https://github.com/rancher/quickstart`.
+1. 执行`cd quickstart/azure`命令，进入 Azure 快速部署文件夹。
 
-1. Go into the Azure folder containing the terraform files by executing `cd quickstart/azure`.
+1. 重命名`terraform.tfvars.example`文件为`terraform.tfvars`。
 
-1. Rename the `terraform.tfvars.example` file to `terraform.tfvars`.
+1. 编辑`terraform.tfvars`文件，替换以下变量。
 
-1. Edit `terraform.tfvars` and customize the following variables:
-    - `azure_subscription_id` - Microsoft Azure Subscription ID 
-    - `azure_client_id` - Microsoft Azure Client ID
-    - `azure_client_secret` - Microsoft Azure Client Secret
-    - `azure_tenant_id` - Microsoft Azure Tenant ID
-    - `rancher_server_admin_password` - Admin password for created Rancher server
+   - `azure_subscription_id` - Microsoft Azure 订阅 ID
+   - `azure_client_id` - Microsoft Azure 客户端 ID
+   - `azure_client_secret` - Microsoft Azure 客户端密钥
+   - `azure_tenant_id` - Microsoft Azure 租户 ID
+   - `rancher_server_admin_password` - Rancher Server 的默认 admin 账户的密码
 
-2. **Optional:** Modify optional variables within `terraform.tfvars`.
-See the [Quickstart Readme](https://github.com/rancher/quickstart) and the [Azure Quickstart Readme](https://github.com/rancher/quickstart/tree/master/azure) for more information.
-Suggestions include:
-    - `azure_location` - Microsoft Azure region, choose the closest instead of the default
-    - `prefix` - Prefix for all created resources
-    - `instance_type` - Compute instance size used, minimum is `Standard_DS2_v2` but `Standard_DS2_v3` or `Standard_DS3_v2` could be used if within budget
-    - `ssh_key_file_name` - Use a specific SSH key instead of `~/.ssh/id_rsa` (public key is assumed to be `${ssh_key_file_name}.pub`)
+1. **可选：** 修改文件`terraform.tfvars`中的可选参数。
+   请参阅[快速启动说明](https://github.com/rancher/quickstart)和 [Azure 快速启动说明](https://github.com/rancher/quickstart/tree/master/azure)了解更多信息。
 
-1. Run `terraform init`.
+   - `azure_location` - Microsoft Azure 区域，选择距离您最近的区域，而非使用默认值。
+   - `prefix` - 全部创建资源的前缀。
+   - `instance_type` - 使用的计算实例规格，最小规格为`Standard_DS2_v2`。如果在预算范围内，建议使用`Standard_DS2_v3`或`Standard_DS3_v2`。
+   - `ssh_key_file_name` - 使用指定的 SSH 密钥而不是`~/.ssh/id_rsa`（假设公共密钥为`${ssh_key_file_name}.pub`）
 
-1. Install the [RKE terraform provider](https://github.com/rancher/terraform-provider-rke), see [installation instructions](https://github.com/rancher/terraform-provider-rke#using-the-provider).
+1. 执行`terraform init`。
 
-1. To initiate the creation of the environment, run `terraform apply --auto-approve`. Then wait for output similar to the following:
+1. 安装 [RKE terraform 提供商](https://github.com/rancher/terraform-provider-rke)，详情请参阅[安装指南](https://github.com/rancher/terraform-provider-rke#using-the-provider)。
 
-    ```
-    Apply complete! Resources: 16 added, 0 changed, 0 destroyed.
+1. 执行 `terraform apply --auto-approve` 开始初始化环境，命令行工具返回以下信息时，表示命令执行成功，完成了初始化环境配置。
 
-    Outputs:
+   ```
+   Apply complete! Resources: 16 added, 0 changed, 0 destroyed.
 
-    rancher_node_ip = xx.xx.xx.xx
-    rancher_server_url = https://xx-xx-xx-xx.nip.io
-    workload_node_ip = yy.yy.yy.yy
-    ```
+   Outputs:
 
-1. Paste the `rancher_server_url` from the output above into the browser. Log in when prompted (default username is `admin`, use the password set in `rancher_server_admin_password`).
+   rancher_node_ip = xx.xx.xx.xx
+   rancher_server_url = https://xx-xx-xx-xx.nip.io
+   workload_node_ip = yy.yy.yy.yy
+   ```
 
-#### Result
+1. 将以上输出中的`rancher_server_url`粘贴到浏览器中。在登录页面中登录（默认用户名为`admin`，密码为在`rancher_server_admin_password`中设置的密码）。
 
-Two Kubernetes clusters are deployed into your Azure account, one running Rancher Server and the other ready for experimentation deployments.
+#### 结果
 
-### What's Next?
+两个 Kubernetes 集群已部署到您的 Azure 帐户中，一个正在运行 Rancher Server，另一个可以用来部署您的实验应用。
 
-Use Rancher to create a deployment. For more information, see [Creating Deployments]({{< baseurl >}}/rancher/v2.x/en/quick-start-guide/workload).
+## 后续操作
 
-## Destroying the Environment
+使用 Rancher 部署工作负载，详情请参考[部署工作负载](/docs/quick-start-guide/workload/_index)。
 
-1. From the `quickstart/azure` folder, execute `terraform destroy --auto-approve`.
+## 清理环境
 
-2. Wait for confirmation that all resources have been destroyed.
+1. 进入`quickstart/azure`文件夹，执行`terraform destroy --auto-approve`。
+
+1. 等待命令行界面显示完成了资源删除的信息。
