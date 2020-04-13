@@ -9,7 +9,7 @@ title: 在 Amazon RDS 中创建 MySQL 数据库
 1. 登录[Amazon AWS RDS 控制台](https://console.aws.amazon.com/rds/)。选择创建的 EC2 实例（Linux 节点）所在的**区域**。
 1. 在左侧面板中，单击**数据库**。
 1. 单击**创建数据库**。
-1. 在**引擎类型**部分中，单击 **MySQL**。
+1. 在**引擎选项**部分中，单击 **MySQL**。
 1. 在**版本**部分中，选择 **MySQL 5.7.22**。
 1. 在**设置**部分的**凭据设置**下，输入**admin**主用户名的密码。确认密码。
 1. 展开**其他配置**部分。在**初始数据库名称**字段中，输入名称。名称只能包含字母，数字和下划线。该名称将用于连接数据库。
@@ -31,4 +31,4 @@ title: 在 Amazon RDS 中创建 MySQL 数据库
 mysql://username:password@tcp(hostname:3306)/database-name
 ```
 
-有关为 K3s 配置数据存储的更多信息，请参考[K3s 文档](https://rancher.com/docs/k3s/latest/en/installation/datastore/)。
+有关为 K3s 配置数据存储的更多信息，请参考 [K3s 文档](https://rancher.com/docs/k3s/latest/en/installation/datastore/)。
