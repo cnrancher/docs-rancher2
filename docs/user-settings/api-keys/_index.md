@@ -2,51 +2,51 @@
 title: API 密钥
 ---
 
-### API Keys and User Authentication
+## API 密钥和用户认证
 
-If you want to access your Rancher clusters, projects, or other objects using external applications, you can do so using the Rancher API. However, before your application can access the API, you must provide the app with a key used to authenticate with Rancher. You can obtain a key using the Rancher UI.
+如果您需要通过其他应用访问 Rancher 中的集群、项目或者其他组件，您可以使用 Rancher API。在使用前，您需要提供秘钥进行认证。您可以在 Rancher UI 中创建 API 秘钥。
 
-An API key is also required for using Rancher CLI.
+如果您使用的是 Rancher 命令行工具（Rancher CLI），您也需要提供 API 秘钥进行认证。
 
-API Keys are composed of four components:
+API 秘钥由以下四个部分组成：
 
-* **Endpoint:** This is the IP address and path that other applications use to send requests to the Rancher API.
-* **Access Key:** The token's username.
-* **Secret Key:** The token's password. For applications that prompt you for two different strings for API authentication, you usually enter the two keys together.
-* **Bearer Token:** The token username and password concatenated together. Use this string for applications that prompt you for one authentication string.
+- **端点（endpoint）：**其他应用发送请求到 Rancher 时使用的的 IP 地址和路径信息。
+- **Access Key：** 含有用户的 token。
+- **Secret Key：** 含有密码的 token。有一些应用会引导您输入两个字符串进行认证，只需将 Access Key 和 Secret Key 两个字符串分别输入即可。
+- **Bearer Token：** 含有用户名和密码的 token。有一些应用会引导您输入单个字符串进行认证，通常只需输入 Bearer Token 即可。
 
-### Creating an API Key
+## 创建 API 秘钥
 
-1. Select **User Avatar** > **API & Keys** from the **User Settings** menu in the upper-right.
+1. 单击 UI 界面右上方的**用户头像**,从下拉菜单中选择**用户设置 > API 秘钥**。
 
-2. Click **Add Key**.
+1. 单击 **添加秘钥**。
 
-3. **Optional:** Enter a description for the API key and select an expiration period or a scope. We recommend setting an expiration date.
+1. **可选：** 输入关于 API 秘钥的描述，设置 API 秘钥的有效期限和适用范围。
 
-   The API key won't be valid after expiration. Shorter expiration periods are more secure.
+   超出有效期限后，API 秘钥会失效。添加有效期限可以提高安全性。
 
-   A scope will limit the API key so that it will only work against the Kubernetes API of the specified cluster. If the cluster is configured with an Authorized Cluster Endpoint, you will be able to use a scoped token directly against the cluster's API without proxying through the Rancher server. See [Authorized Cluster Endpoints](/docs/overview/architecture/#4-authorized-cluster-endpoint) for more information.
+   适用范围对 API 可以调用的集群作了限制。如果集群配置了认证集群端点，您可以直接使用有适用范围的 token，不需要使用代理连接 Rancher Server。详情请查看[认证集群端点](/docs/overview/architecture/_index#4-authorized-cluster-endpoint)。
 
-4. Click **Create**.
+1. 单击 **创建**，创建 API 秘钥。
 
-   **Step Result:** Your API Key is created. Your API **Endpoint**, **Access Key**, **Secret Key**, and **Bearer Token** are displayed.
+   **步骤结果：** 创建了新的 API 秘钥。页面上会显示 API 秘钥的相关信息，如**端点**、 **Access Key**, **Secret Key**和 **Bearer Token**。
 
-   Use the **Bearer Token** to authenticate with Rancher CLI.
+   Use the **Bearer Token** to authenticate with Rancher CLI.在 Rancher 命令行工具中使用 **Bearer Token**进行认证。
 
-5. Copy the information displayed to a secure location. This information is only displayed once, so if you lose your key, you'll have to make a new one.
+1. 将 API 秘钥信息保存到一个安全的位置，因为这些信息只会显示一次。如果您丢失了 API 秘钥的信息，您只能创建一个新的 API 秘钥。
 
-### What's Next?
+## 删除 API 秘钥
 
-* Enter your API key information into the application that will send requests to the Rancher API.
-* Learn more about the Rancher endpoints and parameters by selecting **View in API** for an object in the Rancher UI.
-* API keys are used for API calls and [Rancher CLI](/docs/cli).
+如果您需要撤销 API 秘钥，您必须删除该免秘钥。如果秘钥符合以下任意一种情况，您应该删除该秘钥：
 
-### Deleting API Keys
+- 秘钥被破解了
+- 秘钥过期了
 
-If you need to revoke an API key, delete it. You should delete API keys:
+删除 API 秘钥只需单击**删除**即可
 
-* That may have been compromised.
-* That have expired.
+## 后续操作
 
-To delete an API, select the stale key and click **Delete**.
+- 选择**通过 API 查看**，学习更多关于 Rancher API 的端点和参数知识。
+- API 秘钥用于 API 调用和[Rancher 命令行工具](/docs/cli/_index)。
 
+。
