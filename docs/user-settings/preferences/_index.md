@@ -2,17 +2,16 @@
 title: 用户偏好
 ---
 
-Each user can choose preferences to personalize their Rancher experience. To change preference settings, open the **User Settings** menu and then select **Preferences**.
+每个用户都可以设置自己的用户偏好，按照自己的喜好调整 Rancher UI 界面。您可以从菜单选择**设置 > 偏好**中配置 UI 的主题、修改登录密码或修改页面显示的表格行数。
 
-### Theme
+- 修改主题
 
-Choose your background color for the Rancher UI. If you choose **Auto**, the background color changes from light to dark at 6 PM, and then changes back at 6 AM.
+您可以设置 Rancher UI 的背景颜色。如果您选择**自动**，Rancher 会在晚上 6：00 将背景颜色转换为深色，次日早上六点将背景颜色转换为浅色，您也可以通过顶部菜单右侧的按键自行切换深色模式/浅色模式。
 
-### My Account
+- 修改账户信息.
 
-This section displays the **Name** (your display name) and **Username** (your login) used for your session. To change your login's current password, click the **Change Password** button.
+您可以修改登录 Rancher 的密码。单击顶部菜单右侧的用户头像，单击**修改密码**即可。
 
-### Table Row per Page
+- 修改表格行数
 
-On pages that display system objects like clusters or deployments in a table, you can set the number of objects that display on the page before you must paginate. The default setting is `50` .
-
+Rancher UI 有些页面以表格的形式展示 Rancher 的集群或部署的应用，您可以调整每页显示的行数，默认值是`50`，表示每个页面最多显示 50 行数据，超过 50 行的部分会分到下一个页面显示。您可以按照自己的偏好调整分页。
