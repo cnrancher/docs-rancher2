@@ -28,6 +28,7 @@ title: Google GCP 快速部署
    - `rancher_server_admin_password` - Rancher Server 的默认 admin 账户的密码
 
 1. **可选：** 修改文件`terraform.tfvars`中的可选参数。
+
    请参阅[快速启动说明](https://github.com/rancher/quickstart)和 [GCP 快速启动说明](https://github.com/rancher/quickstart/tree/master/gcp)了解更多信息。
 
    建议包括：

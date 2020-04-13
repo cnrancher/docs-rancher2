@@ -32,6 +32,7 @@ title: Azure 快速部署
    - `rancher_server_admin_password` - Rancher Server 的默认 admin 账户的密码
 
 1. **可选：** 修改文件`terraform.tfvars`中的可选参数。
+
    请参阅[快速启动说明](https://github.com/rancher/quickstart)和 [Azure 快速启动说明](https://github.com/rancher/quickstart/tree/master/azure)了解更多信息。
 
    - `azure_location` - Microsoft Azure 区域，选择距离您最近的区域，而非使用默认值。
