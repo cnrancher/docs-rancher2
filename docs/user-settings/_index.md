@@ -2,15 +2,14 @@
 title: 介绍
 ---
 
-Within Rancher, each user has a number of settings associated with their login: personal preferences, API keys, etc. You can configure these settings by choosing from the **User Settings** menu. You can open this menu by clicking your avatar, located within the main menu.
+在 Rancher 中，每个用户都有一系列的配置信息可以使用，例如用户偏好、API 秘钥等。您可以从 **主菜单 > 用户配置**中查看、调整或使用这些参数。
 
 ![User Settings Menu](/img/rancher/user-settings.png)
 
-The available user settings are:
+Rancher 提供了以下用户配置供您使用：
 
-* [API & Keys](/docs/user-settings/api-keys/): If you want to interact with Rancher programmatically, you need an API key. Follow the directions in this section to obtain a key.gferfgre
-* [Cloud Credentials](/docs/user-settings/cloud-credentials/): Manage cloud credentials [used by node templates](/docs/cluster-provisioning/rke-clusters/node-pools/#node-templates) to [provision nodes for clusters](/docs/cluster-provisioning/rke-clusters). Note: Available as of v2.2.0.
-* [Node Templates](/docs/user-settings/node-templates): Manage templates [used by Rancher to provision nodes for clusters](/docs/cluster-provisioning/rke-clusters).
-* [Preferences](/docs/user-settings/preferences): Sets superficial preferences for the Rancher UI.
-* Log Out: Ends your user session.
-
+- [API 秘钥](/docs/user-settings/api-keys/_index)如果您需要使用命令行工具或其他程序使用 Rancher，您需要一个 API 秘钥。
+- [管理云密钥](/docs/user-settings/cloud-credentials/_index)： v2.2.0.或更新版本可用。管理节点模板[节点模板](/docs/cluster-provisioning/rke-clusters/node-pools/_index#node-templates)用于[运行集群中节点](/docs/cluster-provisioning/rke-clusters/_index)的云服务秘钥。
+- [管理主机模板](/docs/user-settings/node-templates/_index)：管理 Rancher 创建主机（节点）时使用的模板。
+- [用户偏好](/docs/user-settings/preferences/_index)：按您的偏好设置 Rancher UI，如 UI 主题、账户信息、每页显示的表格行数等。
+- 登出（注销登录）：登出您的 Rancher 账户。
