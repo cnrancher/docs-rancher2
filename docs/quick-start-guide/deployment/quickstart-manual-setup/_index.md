@@ -2,108 +2,88 @@
 title: 手动快速部署
 ---
 
-Howdy Partner! This tutorial walks you through:
+## 概述
 
-- Installation of {{< product >}} 2.x
-- Creation of your first cluster
-- Deployment of an application, Nginx
+手动快速部署 Rancher Server 包括以下四个步骤：
 
-## Quick Start Outline
+- [运行 Linux 主机](#运行-linux-主机)
+- [安装 Rancher 2.x](#安装-rancher-2x)
+- [登录 Rancher 2.x 和配置初始设置](#登录-rancher-界面和配置初始设置)
+- [创建集群](#创建集群)
 
-This Quick Start Guide is divided into different tasks for easier consumption.
+## 运行 Linux 主机:
 
-<!-- TOC -->
+首先，您需要运行一台 Linux 主机，Rancher 支持的 Linux 主机类型包括：
 
-1.  [Provision a Linux Host](#1-provision-a-linux-host)
+- 云端虚拟机（如 Amazon ECS、阿里云 ECS、腾讯云 CVM、华为云 ECS 等）
+- 本地物理机
+- 裸金属服务器（BMS）
 
-1.  [Install Rancher](#2-install-rancher)
-
-1.  [Log In](#3-log-in)
-
-1.  [Create the Cluster](#4-create-the-cluster)
-
-<!-- /TOC -->
-<br/>
-
-## 1. Provision a Linux Host
-
-Begin creation of a custom cluster by provisioning a Linux host. Your host can be:
-
-- A cloud-host virtual machine (VM)
-- An on-premise VM
-- A bare-metal server
-
-  > **Note:**
-  > When using a cloud-hosted virtual machine you need to allow inbound TCP communication to ports 80 and 443. Please see your cloud-host's documentation for information regarding port configuration.
+  > **说明：**
+  > 如果您使用的是云端虚拟机，请开放 80 端口和 443 端口的入方向通信权限，详情请参考云服务提供商的文档。
   >
-  > For a full list of port requirements, refer to [Docker Installation](/docs/cluster-provisioning/node-requirements/).
+  > 有关端口的详细要求，请参考[用户集群节点要求](/docs/cluster-provisioning/node-requirements/_index)。
 
-  Provision the host according to our [Requirements](/docs/installation/requirements/).
+  请按照[具体要求](/docs/installation/requirements/_index)运行 Linux 主机。
 
-## 2. Install Rancher
+## 安装 Rancher 2.x
 
-To install Rancher on your host, connect to it and then use a shell to install.
+首先连接到主机，然后使用 shell 安装 Rancher。
 
-1.  Log in to your Linux host using your preferred shell, such as PuTTy or a remote Terminal connection.
+1.  使用 shell 工具（如 PuTTy 或其他连接工具）登录 Linux 主机。
 
-2.  From your shell, enter the following command:
+2.  执行以下命令：
 
 ```
     $ sudo docker run -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher
 ```
 
-**Result:** Rancher is installed.
+**结果：** Linux 主机已安装 Rancher。
 
-## 3. Log In
+## 登录 Rancher 界面和配置初始设置
 
-Log in to Rancher to begin using the application. After you log in, you'll make some one-time configurations.
+您需要先登录 Rancher，然后再开始使用 Rancher。登录以后，你需要完成一些一次性的配置。
 
-1.  Open a web browser and enter the IP address of your host: `https://<SERVER_IP>` .
+1.  打开浏览器，输入主机的 IP 地址：`https://<SERVER_IP>`
 
-    Replace `<SERVER_IP>` with your host IP address.
+    请使用真实的主机 IP 地址替换 `<SERVER_IP>` 。
 
-2.  When prompted, create a password for the default `admin` account there cowpoke!
+1.  首次登录时，请按照页面提示设置登录密码。
 
-3.  Set the **Rancher Server URL**. The URL can either be an IP address or a host name. However, each node added to your cluster must be able to connect to this URL.<br/><br/>If you use a hostname in the URL, this hostname must be resolvable by DNS on the nodes you want to add to you cluster.
+1.  设置 **Rancher Server URL**。URL 既可以是一个 IP 地址，也可以是一个主机名称。请确保您在集群内添加的每个节点都可以连接到这个 URL。如果您使用的是主机名称，请保证主机名称可以被节点的 DNS 服务器解析成功。
 
-<br/>
+**结果：**完成 Rancher 管理员用户的密码设置和访问地址设置。下次使用 Rancher 时，可以输入 IP 地址或主机地址访问 Rancher 界面，然后输入管理员用户名`admin`和您设置的密码登录 Rancher 界面。
 
-## 4. Create the Cluster
+## 创建集群
 
-Welcome to Rancher! You are now able to create your first Kubernetes cluster.
+完成安装和登录 Rancher 的步骤之后，您现在可以参考以下步骤，在 Rancher 中创建第一个 Kubernetes 集群。
 
-In this task, you can use the versatile **Custom** option. This option lets you add _any_ Linux host (cloud-hosted VM, on-premise VM, or bare-metal) to be used in a cluster.
+在这个任务中，您可以使用 **自定义**选项，添加在集群中使用的 _任意_ Linux 主机（云主机、物理机或裸金属服务器）。
 
-1.  From the **Clusters** page, click **Add Cluster**.
+1. 访问**集群**页面，单击**添加集群**。
 
-2.  Choose **Custom**.
+1. 选择**自定义**选项。
 
-3.  Enter a **Cluster Name**.
+1. 输入**集群名称**。
 
-4.  Skip **Member Roles** and **Cluster Options**. We'll tell you about them later.
+1. 跳过**集群角色**和 **集群选项**。
 
-5.  Click **Next**.
+1. 单击**下一步**。
 
-6.  From **Node Role**, select _all_ the roles: **etcd**, **Control**, and **Worker**.
+1. 勾选**节点角色**中的所有角色： **etcd**、 **Control**和**Worker**。
 
-7.**Optional**: Rancher auto-detects the IP addresses used for Rancher communication and cluster communication. You can override these using `Public Address` and `Internal Address` in the **Node Address** section.
+1. **可选：**Rancher 会自动探查用于 Rancher 通信的 IP 地址`Public Address`，和集群通信的 IP 地址`Internal Address`。在**节点地址**模块，您可以手动覆盖这些地址。
 
-8.  Skip the **Labels** stuff. It's not important for now.
+1. 跳过**标签**参数，因为对快速入门来说，这部分的参数不太重要。
 
-9.  Copy the command displayed on screen to your clipboard.
+1. 复制代码框中的命令。
 
-10. Log in to your Linux host using your preferred shell, such as PuTTy or a remote Terminal connection. Run the command copied to your clipboard.
+1. 登录您的 Linux 主机，打开命令行工具，粘贴命令，单击回车键运命令。
 
-11. When you finish running the command on your Linux host, click **Done**.
+1. 运行完成后，回到 Rancher 界面，单击**完成**。
 
-{{< result_create-cluster >}}
-<br/>
-<br/>
+**结果：**在 Rancher 中创建了一个 Kubernetes 集群。
 
-## Finished
+## 后续操作
 
-Congratulations! You have created your first cluster.
-
-## What's Next?
-
-Use Rancher to create a deployment. For more information, see [Creating Deployments](/docs/quick-start-guide/workload).
+创建了集群后，您可以使用 Rancher 部署工作负载，详情请参考[部署工作负载](/docs/quick-start-guide/workload/_index)。
