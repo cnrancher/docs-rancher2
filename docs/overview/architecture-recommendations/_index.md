@@ -23,7 +23,7 @@ title: 推荐架构
 与单节点安装不同，高可用集群（High Availability Cluster，简称 HA）安装具有如下优势：
 
 - etcd 节点数据在三个节点上都有备份，如果 etcd 节点出现故障，其他三个节点可以提供数据备份。
-- 负载均衡负责对外提供服务，它可以把网络流量分配给集群内的多个服务器，防止单个服务器因为访问请求过多，而出现故障。这个[例子](/docs/installation/k8s-install/create-nodes-lb/nginx/_index)讲述如何通过 NGINX 配置四层负载均衡（TCP）。
+- 负载均衡负责对外提供服务，它可以把网络流量分配给集群内的多个服务器，防止单个服务器因为访问请求过多，而出现故障。这个[例子](/docs/installation/options/nginx/_index)讲述如何通过 NGINX 配置四层负载均衡（TCP）。
 
 ## 负载均衡的推荐配置参数
 

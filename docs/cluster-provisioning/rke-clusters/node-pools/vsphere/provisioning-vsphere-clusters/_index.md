@@ -4,7 +4,7 @@ title: 创建集群
 
 本节说明了如何在 Rancher 中配置 vSphere 凭证，在 vSphere 中创建节点以及在这些节点上启动 Kubernetes 集群。
 
-## 前提条件
+## 先决条件
 
 本节介绍了使用 vSphere 在 Rancher 中创建节点和集群需要的必要条件。
 

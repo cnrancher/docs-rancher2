@@ -2,57 +2,71 @@
 title: AWS 快速部署
 ---
 
-The following steps will quickly deploy a Rancher Server with a single node cluster attached.
+以下步骤将在 DigitalOcean 上创建一个单节点的 RKE Kubernetes 集群，并在其中部署 Rancher Server，并附加一个单节点的下游 Kubernetes 集群。
 
-### Prerequisites
+## 先决条件
 
-> **Note**
-> Deploying to Amazon AWS will incur charges.
+> **注意：**
+> Amazon AWS 会向您收取一定的费用。
 
-- [Amazon AWS Account](https://aws.amazon.com/account/): An Amazon AWS Account is required to create resources for deploying Rancher and Kubernetes.
-- [Amazon AWS Access Key](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html): Use this link to follow a tutorial to create an Amazon AWS Access Key if you don't have one yet.
-- [Amazon AWS Key Pair](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair) Use this link and follow instructions to create a Key Pair.
-- [Terraform](https://www.terraform.io/downloads.html): Used to provision the server and cluster in Amazon AWS.
+- [Amazon AWS 账号](https://aws.amazon.com/account/)：需要一个 Amazon AWS 账号来创建部署 Rancher Server 和 Kubernetes 所需要的资源。
+- [Amazon AWS 访问密钥](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html)：如果您还没有 Amazon AWS 访问密钥，请使用这个链接查看相关指南。
+- [Amazon AWS 密钥对](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair) 使用此链接并按照说明创建 Amazon AWS 密钥对。
+- [Terraform](https://www.terraform.io/downloads.html)：用于在 Amazon AWS 中配置服务器和集群。
 
-### Getting Started
+## 操作步骤
 
-1. Clone [Rancher Quickstart](https://github.com/rancher/quickstart) to a folder using `git clone https://github.com/rancher/quickstart` .
+1. 打开命令行工具，执行`git clone https://github.com/rancher/quickstart`命令，把 Rancher 快速入门需要用的到的文件克隆到本地。
 
-2. Go into the AWS folder containing the terraform file by executing `cd quickstart/aws` .
+1. 执行`cd quickstart/aws`命令，进入 AWS 快速部署文件夹。
 
-3. Rename the `terraform.tfvars.example` file to `terraform.tfvars` .
+1. 重命名`terraform.tfvars.example`文件为`terraform.tfvars`。
 
-4. Edit `terraform.tfvars` and customize the following variables at minimum. To change node counts and sizes, see `node sizes` .
+1. 编辑`terraform.tfvars`文件，替换以下变量。
 
-- `aws_access_key` - Amazon AWS Access Key
-- `aws_secret_key` - Amazon AWS Secret Key
-- `ssh_key_name` - Amazon AWS Key Pair Name
-- `prefix` - Resource Prefix
+   - `aws_access_key` - Amazon AWS Access Key
+   - `aws_secret_key` - Amazon AWS Secret Key
+   - `rancher_server_admin_password` - Rancher Server 的默认 admin 账户的密码
 
-  5.**Optional:** Modify the count of the various node types within `terraform.tfvars` . See the [Quickstart Readme](https://github.com/rancher/quickstart) for more information on the variables.
+1. **可选：** 修改文件`terraform.tfvars`中的可选参数。
 
-6. Run `terraform init` .
+   请参阅[快速启动说明](https://github.com/rancher/quickstart)和 [AWS 快速启动说明](https://github.com/rancher/quickstart/tree/master/aws)了解更多信息。
 
-7. To initiate the creation of the environment, run `terraform apply` . Then wait for the following output:
+   建议包括：
 
-```
-   Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
-     Outputs:
-     rancher-url = [
-             https://xxx.xxx.xxx.xxx
-     ]
-```
+   - `aws_region` - Amazon AWS 区域，选择距离您最近的区域，而非使用默认值。
+   - `prefix` - 全部创建资源的前缀。
+   - `instance_type` - 使用的计算实例规格，最小规格为`t3a.medium`。如果在预算范围内，建议使用`t3a.large`或`t3a.xlarge`。
+   - `ssh_key_file_name` - 使用指定的 SSH 密钥而不是`~/.ssh/id_rsa`（假设公共密钥为`${ssh_key_file_name}.pub`）
 
-8. Paste the `rancher-url` from the output above into the browser. Log in when prompted (default username is `admin` , and default password is `admin` ).
+1. 执行`terraform init`。
 
-**Result:** Rancher Server and your Kubernetes cluster is installed in Amazon AWS.
+1. 安装 [RKE terraform 提供商](https://github.com/rancher/terraform-provider-rke)，详情请参阅[安装指南](https://github.com/rancher/terraform-provider-rke#using-the-provider)。
 
-#### What's Next?
+1. 执行 `terraform apply --auto-approve` 开始初始化环境，命令行工具返回以下信息时，表示命令执行成功，完成了初始化环境配置。
 
-Use Rancher to create a deployment. For more information, see [Creating Deployments](/docs/quick-start-guide/workload).
+   ```
+   Apply complete! Resources: 16 added, 0 changed, 0 destroyed.
 
-### Destroying the Environment
+   Outputs:
 
-1. From the `quickstart/aws` folder, execute `terraform destroy --auto-approve` .
+   rancher_node_ip = xx.xx.xx.xx
+   rancher_server_url = https://ec2-xx-xx-xx-xx.compute-1.amazonaws.com
+   workload_node_ip = yy.yy.yy.yy
+   ```
 
-2. Wait for confirmation that all resources have been destroyed.
+1. 将以上输出中的`rancher_server_url`粘贴到浏览器中。在登录页面中登录（默认用户名为`admin`，密码为在`rancher_server_admin_password`中设置的密码）。
+
+#### 结果
+
+两个 Kubernetes 集群已部署到您的 AWS 帐户中，一个正在运行 Rancher Server，另一个可以用来部署您的实验应用。
+
+## 后续操作
+
+使用 Rancher 部署工作负载，详情请参考[部署工作负载](/docs/quick-start-guide/workload/_index)。
+
+## 清理环境
+
+1. 进入`quickstart/aws`文件夹，执行`terraform destroy --auto-approve`。
+
+1. 等待命令行界面显示完成了资源删除的信息。

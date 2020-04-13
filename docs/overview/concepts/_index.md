@@ -45,7 +45,7 @@ Controlplane 节点上运行的工作负载包括：Kubernetes API server、sche
 
 [worker 节点](https://kubernetes.io/docs/concepts/architecture/nodes/)运行以下应用：
 
-- **Kuberlets：** 监控节点状态的 Agent，确保您的容器处于健康状态。
+- **Kubelet：** 监控节点状态的 Agent，确保您的容器处于健康状态。
 - **工作负载：** 承载您的应用和其他类型的部署的容器和 Pod。
 
 Worker 节点也运行存储和网络驱动；有必要时也会运行`应用路由控制器（Ingress Controller）`。Rancher 对 Worker 节点的数量没有限制，您可以按照实际需要创建多个 Worker 节点。

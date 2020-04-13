@@ -16,7 +16,7 @@ title: 运行 Rancher 的建议
 
 ## 确保 Kubernetes 的节点配置正确
 
-当你部署节点时需要遵循 Kubernetes 和 etcd 最佳实践，比如：禁用 swap、反复检查集群中的所有机器之间的网络连接、使用唯一的主机名、使用唯一的 MAC 地址、使用唯一的 product_uuids、检查所有需要的端口被打开，部署使用 ssd 的 etcd。更多的细节可以在 [Kubernetes 文档](https://kubernetes.io/docs/setup/producenvironment/tools/kubeadm/install-kubeadm/#before-you-begin) 和 [etcd 的性能操作指南](https://github.com/etcd-io/etcd/blob/master/Documentation/op-guide/performance.md) 中找到。
+当您部署节点时需要遵循 Kubernetes 和 etcd 最佳实践，比如：禁用 swap、反复检查集群中的所有机器之间的网络连接、使用唯一的主机名、使用唯一的 MAC 地址、使用唯一的 product_uuids、检查所有需要的端口被打开，部署使用 ssd 的 etcd。更多的细节可以在 [Kubernetes 文档](https://kubernetes.io/docs/setup/producenvironment/tools/kubeadm/install-kubeadm/#before-you-begin) 和 [etcd 的性能操作指南](https://github.com/etcd-io/etcd/blob/master/Documentation/op-guide/performance.md) 中找到。
 
 ## 使用 RKE 备份状态文件
 
@@ -42,4 +42,4 @@ Rancher Server 的 Local Kubernetes 集群应该尽可能符合[系统和硬件�
 
 使用 Rancher，您可以通过与领先的开源监控解决方案 Prometheus 和 Grafana 的集成来监控集群节点、Kubernetes 组件和软件部署的状态和过程，Grafana 可以可视化来自 Prometheus 的指标。
 
-在集群中[启用监控](/docs/cluster-admin/tools/monitoring/_index)之后，您可以设置[通知](/docs/cluster-admin/tools/notifiers/_index)和[告警](/docs/cluster-admin/tools/alerts/_index)，让您知道您的集群是否接近其容量。您还可以使用 Prometheus 和 Grafana 监控框架来建立适合你的规模的关键指标基准。
+在集群中[启用监控](/docs/cluster-admin/tools/monitoring/_index)之后，您可以设置[通知](/docs/cluster-admin/tools/notifiers/_index)和[告警](/docs/cluster-admin/tools/alerts/_index)，让您知道您的集群是否接近其容量。您还可以使用 Prometheus 和 Grafana 监控框架来建立适合您的规模的关键指标基准。

@@ -4,13 +4,13 @@ title: Amazon EC2
 
 使用 Rancher 在 Amazon EC2 中创建 Kubernetes 集群。
 
-## 前提条件
+## 先决条件
 
 - 创建实例时会使用**AWS EC2 访问密钥**。请参照[Amazon 文档: 创建访问密钥](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)。
 
 - 为用户的访问密钥**创建 IAM 策略**。请参照[Amazon 文档: 创建 IAM 策略](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html#access_policies_create-start)。下面是三个 JSON 策略的实例：
   - [IAM 策略示例](#iam-策略示例)
-  - [包含 PassRole 的 IAM 策略示例](#包含-passrole-的-iam-策略示例) (如果您想要使用 [Kubernetes Cloud Provider](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/_index) 或 IAM 实例配置文件)
+  - [包含 PassRole 的 IAM 策略示例](#包含-passrole-的-iam-策略示例) (如果您想要使用 [Kubernetes Cloud Provider](/docs/cluster-provisioning/rke-clusters/cloud-providers/_index) 或 IAM 实例配置文件)
   - [允许加密 EBS 卷的 IAM 策略示例](#允许加密-ebs-卷的-iam-策略示例)
 - 为用户添加**IAM 策略许可**。请参照[Amazon 文档：为用户添加许可](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_change-permissions.html#users_change_permissions-add-console)。
 
@@ -49,7 +49,7 @@ title: Amazon EC2
 1. 选择默认的安全组或配置一个新的安全组。请根据文档 [Amazon EC2 使用节点驱动时的安全组](/docs/cluster-provisioning/node-requirements/_index) 来查看 `rancher-nodes` 安全组创建的规则。然后点击**下一步: 设置实例选项**。
 1. 配置将要创建的实例。确保为选择的 AMI 配置正确的**SSH 用户**。
 
-> 如果您需要设定 <b>IAM 实例配置名称</b> (不是 ARN)，例如当您需要使用 [Kubernetes Cloud Provider](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/_index)，在您的策略中需要额外的许可。请参照[包含 PassRole 的 IAM 策略示例](#包含-passrole-的-iam-策略示例)。
+> 如果您需要设定 <b>IAM 实例配置名称</b> (不是 ARN)，例如当您需要使用 [Kubernetes Cloud Provider](/docs/cluster-provisioning/rke-clusters/cloud-providers/_index)，在您的策略中需要额外的许可。请参照[包含 PassRole 的 IAM 策略示例](#包含-passrole-的-iam-策略示例)。
 
 可选：在节点模板的**引擎选项**部分中，您可以配置 Docker 守护程序。您可能需要指定 Docker 版本或 Docker 镜像仓库地址。
 
@@ -78,7 +78,7 @@ title: Amazon EC2
 
 1. 使用**角色**下拉菜单来为每个用户设定权限。
 
-1. 通过**集群选项**来选择 Kubernetes 版本，网络插件及是否开启网络隔离。请参照[选择 Cloud Providers](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/_index) 来设置 Kubernetes Cloud Provider。
+1. 通过**集群选项**来选择 Kubernetes 版本，网络插件及是否开启网络隔离。请参照[选择 Cloud Providers](/docs/cluster-provisioning/rke-clusters/cloud-providers/_index) 来设置 Kubernetes Cloud Provider。
 
 1. [Docker 守护进程](https://docs.docker.com/engine/docker-overview/#the-docker-daemon)配置选项包括：
 
@@ -108,7 +108,7 @@ title: Amazon EC2
    - 点击**添加成员**将需要访问这个集群的用户添加到成员中。
    - 在**角色**下拉菜单中选择每个用户的权限。
 
-1. 使用**集群选项**设置 Kubernetes 的版本，网络插件以及是否要启用项目网络隔离。要查看更多集群选项，请单击**显示高级选项**。请参照[选择 Cloud Providers](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/_index) 来设置 Kubernetes Cloud Provider。
+1. 使用**集群选项**设置 Kubernetes 的版本，网络插件以及是否要启用项目网络隔离。要查看更多集群选项，请单击**显示高级选项**。请参照[选择 Cloud Providers](/docs/cluster-provisioning/rke-clusters/cloud-providers/_index) 来设置 Kubernetes Cloud Provider。
 
 1. 将一个或多个节点池添加到您的集群。
 
@@ -125,12 +125,12 @@ title: Amazon EC2
 
 1. 使用[EC2 管理控制台](https://aws.amazon.com/ec2)中可用的信息来完成以下内容。
 
-   - **账户许可** 选项用于配置创建节点的区域及云凭证。关于如何创建访问密钥和权限，请参照[前提条件](#前提条件)。
+   - **账户许可** 选项用于配置创建节点的区域及云凭证。关于如何创建访问密钥和权限，请参照[先决条件](#先决条件)。
    - **区域和网络** 选项用于配置您的集群可用区和网络设置。
    - **安全组** 选项用于配置您的节点的安全组。请参照 [Amazon EC2 使用节点驱动的安全组](/docs/cluster-provisioning/node-requirements/_index) 来查看`rancher-nodes`安全组中创建了哪些规则。
    - **实例** 选项用于配置将要创建的实例。确保为选择的 AMI 配置正确的**SSH 用户**。
 
-   如果您需要设定 **IAM 实例配置名称** (不是 ARN)，例如当您需要使用[Kubernetes Cloud Provider](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/_index)，在您的策略中需要额外的许可。请参照[包含 PassRole 的 IAM 策略示例](#包含-passrole-的-iam-策略示例)。
+   如果您需要设定 **IAM 实例配置名称** (不是 ARN)，例如当您需要使用[Kubernetes Cloud Provider](/docs/cluster-provisioning/rke-clusters/cloud-providers/_index)，在您的策略中需要额外的许可。请参照[包含 PassRole 的 IAM 策略示例](#包含-passrole-的-iam-策略示例)。
 
 1. [Docker 守护进程](https://docs.docker.com/engine/docker-overview/#the-docker-daemon)配置选项包括：
 

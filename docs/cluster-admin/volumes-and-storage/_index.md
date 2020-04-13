@@ -2,15 +2,15 @@
 title: 持久化存储
 ---
 
-在部署需要保留数据的应用程序时，你需要创建永久性存储。持久化存储允许你将应用程序数据存储在运行应用程序的 Pod 外部。即使应用程序的 Pod 发生故障，这种存储方法也可以使你维护应用程序数据。
+在部署需要保留数据的应用程序时，您需要创建永久性存储。持久化存储允许您将应用程序数据存储在运行应用程序的 Pod 外部。即使应用程序的 Pod 发生故障，这种存储方法也可以使您维护应用程序数据。
 
-本章节假定你已了解 Kubernetes 持久卷，持久卷声明和存储类的概念。有关更多信息，请参阅[存储是如何工作的](/docs/cluster-admin/volumes-and-storage/how-storage-works/_index)。
+本章节假定您已了解 Kubernetes 持久卷，持久卷声明和存储类的概念。有关更多信息，请参阅[存储是如何工作的](/docs/cluster-admin/volumes-and-storage/how-storage-works/_index)。
 
 ## 先决条件
 
 配置持久化存储，需要用有`管理卷（Manage Volumes）`权限的[角色](/docs/admin-settings/rbac/cluster-project-roles/_index)的用户。
 
-如果要在云提供商托管的集群中设置存储，则需要保证存储和集群主机是来自同一个云提供商。在 Rancher 中对接新的云存储，必须配置 Cloud Provider，关于如何配置的详细信息可以浏览[这里](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/_index)。
+如果要在云提供商托管的集群中设置存储，则需要保证存储和集群主机是来自同一个云提供商。在 Rancher 中对接新的云存储，必须配置 Cloud Provider，关于如何配置的详细信息可以浏览[这里](/docs/cluster-provisioning/rke-clusters/cloud-providers/_index)。
 
 如果是设置对接现有的存储，则无需配置启用云提供商。
 
@@ -41,11 +41,11 @@ title: 持久化存储
 
 ## GlusterFS 卷
 
-在 [Rancher 启动的 Kubernetes 集群](/docs/cluster-provisioning/rke-clusters/_index)里，将数据存储到 GlusterFS 卷时，你可能会遇到一个问题：在重启`kubelet`之后，Pod 无法安装卷。关于如何防止这种情况发生的相关细节，可以参阅[这里](/docs/cluster-admin/volumes-and-storage/glusterfs-volumes/_index)。
+在 [Rancher 启动的 Kubernetes 集群](/docs/cluster-provisioning/rke-clusters/_index)里，将数据存储到 GlusterFS 卷时，您可能会遇到一个问题：在重启`kubelet`之后，Pod 无法安装卷。关于如何防止这种情况发生的相关细节，可以参阅[这里](/docs/cluster-admin/volumes-and-storage/glusterfs-volumes/_index)。
 
 ## iSCSI 卷
 
-在 [Rancher 启动的 Kubernetes 集群](/docs/cluster-provisioning/rke-clusters/_index)里，将数据存储到 iSCSI 卷时，你可能会遇到一个问题：`kubelet`无法自动连接 iSCSI 卷。关于如何解决这个问题的相关细节，可以参阅[这里](/docs/cluster-admin/volumes-and-storage/iscsi-volumes/_index)。
+在 [Rancher 启动的 Kubernetes 集群](/docs/cluster-provisioning/rke-clusters/_index)里，将数据存储到 iSCSI 卷时，您可能会遇到一个问题：`kubelet`无法自动连接 iSCSI 卷。关于如何解决这个问题的相关细节，可以参阅[这里](/docs/cluster-admin/volumes-and-storage/iscsi-volumes/_index)。
 
 ## 相关链接
 

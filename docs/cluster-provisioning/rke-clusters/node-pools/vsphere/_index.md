@@ -26,7 +26,7 @@ _从 Rancher v2.3.3 开始可用_
 
 增强后的 vSphere 的节点模板在使用 vSphere 凭证创建节点模板时，模板选项会自动获取与在 vSphere 控制台中配置 VM 相同的选项。
 
-对于要自动获取的字段，您的设置需要满足一些[前提条件](/docs/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/_index)。
+对于要自动获取的字段，您的设置需要满足一些[先决条件](/docs/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/_index)。
 
 ### 更多操作系统的支持
 

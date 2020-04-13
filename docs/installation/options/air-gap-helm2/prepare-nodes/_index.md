@@ -76,8 +76,8 @@ Rancher 建议在 Kubernetes 集群上安装 Rancher。一个高可用的 Kubern
 
 **负载均衡器配置示例：**
 
-- 有关如何设置 NGINX 负载均衡器的示例，请参考[此页](/docs/installation/k8s-install/create-nodes-lb/nginx/_index)。
-- 有关如何设置 Amazon NLB 负载均衡器的示例，请参考[此页](/docs/installation/k8s-install/create-nodes-lb/nlb/_index)。
+- 有关如何设置 NGINX 负载均衡器的示例，请参考[此页](/docs/installation/options/nginx/_index)。
+- 有关如何设置 Amazon NLB 负载均衡器的示例，请参考[此页](/docs/installation/options/nlb/_index)。
 
 ### Docker 安装
 

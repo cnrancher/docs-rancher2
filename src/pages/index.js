@@ -44,7 +44,7 @@ function Home() {
   const { baseUrl } = siteConfig;
   const { sidebars, metadata } = siteConfig.customFields;
   const toc = getToc(sidebars, metadata, baseUrl);
-  const title = siteConfig.title + ' 中文文档';
+  const title = siteConfig.title + ' 中文文档（Beta 版）';
   return (
     <Layout title="中文文档" description={title}>
       <header className={classnames('hero', styles.heroBanner)}>

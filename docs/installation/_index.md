@@ -63,5 +63,5 @@ Rancher 的部署可以有三种架构：
 有关其详细配置，请参考[Docker 安装方式](/docs/installation/other-installation-methods/single-node-docker/_index)：
 
 - [开启 API 审计](/docs/installation/other-installation-methods/single-node-docker/_index)
-- [外部负载均衡](/docs/installation/other-installation-methods/single-node-docker/single-node-install-external-lb/_index)
+- [外部负载均衡](/docs/installation/options/single-node-install-external-lb/_index)
 - [持久化存储](/docs/installation/other-installation-methods/single-node-docker/_index)

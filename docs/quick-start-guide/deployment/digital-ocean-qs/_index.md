@@ -2,54 +2,69 @@
 title: DigitalOcean 快速部署
 ---
 
-The following steps will quickly deploy a Rancher Server with a single node cluster attached.
+以下步骤将在 DigitalOcean 上创建一个单节点的 RKE Kubernetes 集群，并在其中部署 Rancher Server，并附加一个单节点的下游 Kubernetes 集群。
 
-### Prerequisites
+## 先决条件
 
-> **Note**
-> Deploying to DigitalOcean will incur charges.
+> **注意：**
+> Google DigitalOcean 会向您收取一定的费用。
 
-- [DigitalOcean Account](https://www.digitalocean.com): You will require an account on DigitalOcean as this is where the server and cluster will run.
-- [DigitalOcean Access Key](https://www.digitalocean.com/community/tutorials/how-to-create-a-digitalocean-space-and-api-key): Use this link to create a DigitalOcean Access Key if you don't have one.
-- [Terraform](https://www.terraform.io/downloads.html): Used to provision the server and cluster to DigitalOcean.
+- [DigitalOcean 账号](https://www.digitalocean.com)：需要一个 DigitalOcean 账号来创建部署 Rancher Server 和 Kubernetes 所需要的资源。
+- [DigitalOcean Access Key](https://www.digitalocean.com/community/tutorials/how-to-create-a-digitalocean-space-and-api-key)：如果您还没有 DigitalOcean Access Key，请使用这个链接查看相关指南。
+- [Terraform](https://www.terraform.io/downloads.html)：用于在 DigitalOcean 中配置服务器和集群。
 
-### Getting Started
+## 操作步骤
 
-1. Clone [Rancher Quickstart](https://github.com/rancher/quickstart) to a folder using `git clone https://github.com/rancher/quickstart` .
+1. 打开命令行工具，执行`git clone https://github.com/rancher/quickstart`命令，把 Rancher 快速入门需要用的到的文件克隆到本地。
 
-2. Go into the DigitalOcean folder containing the terraform file by executing `cd quickstart/do` .
+1. 执行`cd quickstart/do`命令，进入 DigitalOcean 快速部署文件夹。
 
-3. Rename the `terraform.tfvars.example` file to `terraform.tfvars` .
+1. 重命名`terraform.tfvars.example`文件为`terraform.tfvars`。
 
-4. Edit `terraform.tfvars` to include your DigitalOcean Access Key.
+1. 编辑`terraform.tfvars`文件，替换以下变量。
 
-5.**Optional:** Edit `terraform.tfvars` to:
+   - `do_token` - DigitalOcean Access Key
+   - `rancher_server_admin_password` - Rancher Server 的默认 admin 账户的密码
 
-- Change the number of nodes.( `count_agent_all_nodes` )
-- Change the password of the `admin` user for logging into Rancher.( `admin_password` )
+1. **可选：** 修改文件`terraform.tfvars`中的可选参数。
 
-6. Run `terraform init` .
+   请参阅[快速启动说明](https://github.com/rancher/quickstart)和 [DO 快速启动说明](https://github.com/rancher/quickstart/tree/master/do)了解更多信息。
 
-7. To initiate the creation of the environment, run `terraform apply` . Then wait for the following output:
+   建议包括：
 
-```
-   Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
-     Outputs:
-     rancher-url = [
-             https://xxx.xxx.xxx.xxx
-     ]
-```
+   - `do_region` - DigitalOcean 区域，选择距离您最近的区域，而非使用默认值。
+   - `prefix` - 全部创建资源的前缀。
+   - `droplet_size` - 使用的计算实例规格，最小规格为`s-2vcpu-4gb`。如果在预算范围内，建议使用`s-4vcpu-8g`。
+   - `ssh_key_file_name` - 使用指定的 SSH 密钥而不是`~/.ssh/id_rsa`（假设公共密钥为`${ssh_key_file_name}.pub`）
 
-8. Paste the `rancher-url` from the output above into the browser. Log in when prompted (default password is `admin` ).
+1. 执行`terraform init`。
 
-**Result:** Rancher Server and your Kubernetes cluster is installed on DigitalOcean.
+1. 安装 [RKE terraform 提供商](https://github.com/rancher/terraform-provider-rke)，详情请参阅[安装指南](https://github.com/rancher/terraform-provider-rke#using-the-provider)。
 
-#### What's Next?
+1. 执行 `terraform apply --auto-approve` 开始初始化环境，命令行工具返回以下信息时，表示命令执行成功，完成了初始化环境配置。
 
-Use Rancher to create a deployment. For more information, see [Creating Deployments](/docs/quick-start-guide/workload).
+   ```
+   Apply complete! Resources: 15 added, 0 changed, 0 destroyed.
 
-### Destroying the Environment
+   Outputs:
 
-1. From the `quickstart/do` folder, execute `terraform destroy --force` .
+   rancher_node_ip = xx.xx.xx.xx
+   rancher_server_url = https://rancher.xx.xx.xx.xx.xip.io
+   workload_node_ip = yy.yy.yy.yy
+   ```
 
-2. Wait for confirmation that all resources have been destroyed.
+1. 将以上输出中的`rancher_server_url`粘贴到浏览器中。在登录页面中登录（默认用户名为`admin`，密码为在`rancher_server_admin_password`中设置的密码）。
+
+#### 结果
+
+两个 Kubernetes 集群已部署到您的 DigitalOcean 帐户中，一个正在运行 Rancher Server，另一个可以用来部署您的实验应用。
+
+## 后续操作
+
+使用 Rancher 部署工作负载，详情请参考[部署工作负载](/docs/quick-start-guide/workload/_index)。
+
+## 清理环境
+
+1. 进入`quickstart/do`文件夹，执行`terraform destroy --auto-approve`。
+
+1. 等待命令行界面显示完成了资源删除的信息。

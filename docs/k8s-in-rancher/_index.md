@@ -33,7 +33,7 @@ Rancher 支持两种负载均衡器:
 
 ### Ingress
 
-每个负载均衡器只能处理一个 IP 地址，这意味着如果您在集群中运行多个服务，那么每个服务都必须有一个负载均衡器。运行多个负载均衡器可能很昂贵。你可以通过使用 Ingress 绕过这个问题。
+每个负载均衡器只能处理一个 IP 地址，这意味着如果您在集群中运行多个服务，那么每个服务都必须有一个负载均衡器。运行多个负载均衡器可能很昂贵。您可以通过使用 Ingress 绕过这个问题。
 
 Ingress 通过一组规则定义实现负载均衡。Ingress 协同一个或多个 Ingress 控制器来动态路由服务请求。当 Ingress 接收到一个请求时，在您的集群中的 Ingress 控制器根据您配置的服务子域或路径规则引导请求到正确的服务。
 
@@ -51,7 +51,7 @@ Ingress 通过一组规则定义实现负载均衡。Ingress 协同一个或多�
 
 ## 流水线
 
-在对接了[版本控制工具](/docs/project-admin/pipelines/_index)后，你可以添加代码库并开始为每个代码库配置流水线。
+在对接了[版本控制工具](/docs/project-admin/pipelines/_index)后，您可以添加代码库并开始为每个代码库配置流水线。
 
 有关更多信息，请参见[流水线](/docs/k8s-in-rancher/pipelines/_index)。
 
@@ -59,7 +59,7 @@ Ingress 通过一组规则定义实现负载均衡。Ingress 协同一个或多�
 
 除了启动应用程序的各个组件外，还可以使用 Rancher 应用商店启动应用程序，应用商店就是 Helm Charts。
 
-有关更多信息，请参见[项目中的应用商店](/docs/catalog/apps/_index)。
+有关更多信息，请参见[项目中的应用商店](/docs/catalog/launching-apps/_index)。
 
 ## Kubernetes 资源
 

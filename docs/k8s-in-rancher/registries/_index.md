@@ -25,7 +25,7 @@ title: 镜像仓库凭证
 
 1. 为镜像库凭证设置**名称**。
 
-   > **注意:** Kubernetes 将密文，证书，配置映射和镜像库凭证分类为[Secret](https://kubernetes.io/docs/concepts/configuration/secret/)，并且项目或命名空间中的两个 secret 都不能有重复的名称。因此，为防止冲突，镜像库凭证必须在工作空间内的所有 secret 中具有唯一的名称。
+   > **注意:** Kubernetes 将密文，证书和镜像库凭证分类为[Secret](https://kubernetes.io/docs/concepts/configuration/secret/)，并且项目或命名空间中的两个 secret 都不能有重复的名称。因此，为防止冲突，镜像库凭证必须在工作空间内的所有 secret 中具有唯一的名称。
 
 1. 为这个镜像库凭证选择一个**范围**。您可以设置此镜像库凭证作用于此项目所有[命名空间](/docs/cluster-admin/projects-and-namespaces/_index)或单个[命名空间](/docs/cluster-admin/projects-and-namespaces/_index)。
 

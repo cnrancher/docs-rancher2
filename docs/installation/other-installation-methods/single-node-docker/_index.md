@@ -8,7 +8,7 @@ title: 安装指南
 
 > **想要使用外部负载均衡？**
 >
-> 请参阅[使用外部负载均器的单节点安装](/docs/installation/other-installation-methods/single-node-docker/single-node-install-external-lb/_index)。
+> 请参阅[使用外部负载均器的单节点安装](/docs/installation/options/single-node-install-external-lb/_index)。
 
 ## 操作系统，Docker，硬件和网络的要求
 
@@ -124,11 +124,11 @@ docker run -d --restart=unless-stopped \
 > - 在 DNS 中创建一条记录，该记录将 Linux 主机 IP 地址绑定到要用于 Rancher 访问的主机名 (例如，`rancher.mydomain.com`)。
 > - 在 Linux 主机上打开 `TCP/80` 端口。Let's Encrypt 的 http-01 challenge 可以来自任何源 IP 地址，因此端口 `TCP/80` 必须开放给所有 IP 地址。
 
-满足前提条件后，可以通过运行以下命令使用 Let's Encrypt 证书安装 Rancher。
+满足先决条件后，可以通过运行以下命令使用 Let's Encrypt 证书安装 Rancher。
 
 | 占位符            | 描述     |
 | ----------------- | -------- |
-| `<YOUR.DNS.NAME>` | 你的域名 |
+| `<YOUR.DNS.NAME>` | 您的域名 |
 
 :::important 重要
 在使用单节点安装时，Rancher Server 的数据默认保存在容器里。这意味着，在 Rancher Server 容器被删除时，Rancher Server 的数据将会丢失。您可以通过添加 `-v` 参数以挂载目录的方式将数据保存在 Rancher Server 所在的主机上。详情请参阅 [Rancher 单节点数据持久化](/docs/installation/other-installation-methods/single-node-docker/advanced/_index#persist-data)。

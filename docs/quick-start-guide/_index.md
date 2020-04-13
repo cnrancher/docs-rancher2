@@ -2,14 +2,12 @@
 title: 入门必读
 ---
 
-> **Note:** The intent of these guides is to quickly launch a sandbox that you can use to evaluate Rancher. These guides are not intended for production environments. For comprehensive setup instructions, see [Installation](/docs/installation/).
+> **说明：**提供这些快速入门手册的目的是帮助您快速地建造一个 Rancher 的沙盒，您可以在这个沙盒中评估 Rancher 是否满足您的需求。请注意，快速入门手册不适用于正式的生产环境，请参考[安装介绍](/docs/installation/_index)获取适用于正式的生产环境的操作指导。
 
-Howdy buckaroos! Use this section of the docs to jump start your deployment and testing of Rancher 2.x! It contains instructions for a simple Rancher setup and some common use cases. We plan on adding more content to this section in the future.
+目前 Rancher 提供了以下三本快速入门手册：
 
-We have Quick Start Guides for:
+- [部署 Rancher Server](/docs/quick-start-guide/deployment/_index)：使用对您来说最方便的方式运行 Rancher Server。
 
-- [Deploying Rancher Server](/docs/quick-start-guide/deployment/): Get started running Rancher using the method most convenient for you.
+- [部署工作负载](/docs/quick-start-guide/workload/_index)：部署一个简单的工作负载，然后暴露工作负载，这样您就可以从集群外部访问工作负载。
 
-- [Deploying Workloads](/docs/quick-start-guide/workload/): Deploy a simple workload and expose it, letting you access it from outside the cluster.
-
-- [Using the CLI](/docs/quick-start-guide/cli/): Use `kubectl` or Rancher command line interface (CLI) to interact with your Rancher instance.
+- [命令行工具](/docs/quick-start-guide/cli/_index)：使用`kubectl`或 Rancher 命令行工具（Rancher CLI）管理 Rancher 实例。

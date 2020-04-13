@@ -8,7 +8,7 @@ title: 密文
 
 配置工作负载时，您将能够选择要包括的密文。与配置映射一样，工作负载可以将密文引用为环境变量或以数据卷挂载的方式使用。
 
-如果您是将密文通过`subPath`的方式挂载的，那么对正在使用的密文的任何更新，都不会自动更新到正在使用它的 Pod 里。所以您需要重新启动这些 Pod，以使新密文生效。
+如果您是将密文通过`subPath`的方式挂载的，那么对正在使用的密文的任何更新，都不会自动更新到正在使用它的 Pod 里。所以您需要重新启动这些 Pod，以使新密文生效。更多信息请参阅[Kubernetes 文档](https://kubernetes.io/docs/concepts/configuration/secret/#mounted-secrets-are-updated-automatically)。
 
 ## 创建密文
 
@@ -20,7 +20,7 @@ title: 密文
 
 3. 输入这个密文的**名称** 。
 
-   > **注意:** Kubernetes 将密文，证书，配置映射和镜像库凭证分类为[Secret](https://kubernetes.io/docs/concepts/configuration/secret/)，并且项目或命名空间中的两个 secret 都不能有重复的名称。因此，为防止冲突，镜像库凭证必须在工作空间内的所有 secret 中具有唯一的名称。
+   > **注意:** Kubernetes 将密文，证书和镜像库凭证分类为[Secret](https://kubernetes.io/docs/concepts/configuration/secret/)，并且项目或命名空间中的两个 secret 都不能有重复的名称。因此，为防止冲突，镜像库凭证必须在工作空间内的所有 secret 中具有唯一的名称。
 
 4. 为这个密文选择一个**范围**。您可以设置此密文作用于此项目所有[命名空间](/docs/cluster-admin/projects-and-namespaces/_index)或单个[命名空间](/docs/cluster-admin/projects-and-namespaces/_index)。
 
@@ -34,7 +34,7 @@ title: 密文
 
 **效果:** 您的密文是被添加到项目或者命名空间，具体取决于您的选择，您可以从 Rancher UI 的 **资源 > 密文** 视图中查看到该密文。
 
-如果您是将密文通过`subPath`的方式挂载的，那么对正在使用的密文的任何更新，都不会自动更新到正在使用它的 Pod 里。所以您需要重新启动这些 Pod，以使新密文生效。
+如果您是将密文通过`subPath`的方式挂载的，那么对正在使用的密文的任何更新，都不会自动更新到正在使用它的 Pod 里。所以您需要重新启动这些 Pod，以使新密文生效。更多信息请参阅[Kubernetes 文档](https://kubernetes.io/docs/concepts/configuration/secret/#mounted-secrets-are-updated-automatically)。
 
 ## 下一步是什么?
 

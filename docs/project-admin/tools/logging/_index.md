@@ -18,7 +18,7 @@ Rancher 支持与下列日志服务集成：
 
 只有[管理员](/docs/admin-settings/rbac/global-permissions/_index)、[集群所有者或集群成员](/docs/admin-settings/rbac/cluster-project-roles/_index)或[项目所有者](/docs/admin-settings/rbac/cluster-project-roles/_index)有权限配置 Rancher 的日志功能。
 
-## 前提条件
+## 先决条件
 
 集群中的每一个节点的 Docker daemon 都应该使用默认的日志驱动[配置](https://docs.docker.com/config/containers/logging/configure/)：`json-file`。您可以运行以下命令，检查每个节点是否已经完成了配置，如果返回结果是`Logging Driver: json-file`的话，则表示已经完成了配置。
 

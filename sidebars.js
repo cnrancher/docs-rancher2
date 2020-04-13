@@ -31,8 +31,10 @@ module.exports = {
         items: [
           'quick-start-guide/deployment/_index',
           'quick-start-guide/deployment/quickstart-manual-setup/_index',
-          'quick-start-guide/deployment/digital-ocean-qs/_index',
           'quick-start-guide/deployment/amazon-aws-qs/_index',
+          'quick-start-guide/deployment/microsoft-azure-qs/_index',
+          'quick-start-guide/deployment/digital-ocean-qs/_index',
+          'quick-start-guide/deployment/google-gcp-qs/_index',
           'quick-start-guide/deployment/quickstart-vagrant/_index'
         ]
       },
@@ -63,15 +65,7 @@ module.exports = {
         label: 'Rancher 高可用安装',
         items: [
           'installation/k8s-install/_index',
-          {
-            type: 'category',
-            label: '1、配置基础设置',
-            items: [
-              'installation/k8s-install/create-nodes-lb/_index',
-              'installation/k8s-install/create-nodes-lb/nginx/_index',
-              'installation/k8s-install/create-nodes-lb/nlb/_index'
-            ]
-          },
+          'installation/k8s-install/create-nodes-lb/_index',
           'installation/k8s-install/kubernetes-rke/_index',
           'installation/k8s-install/helm-rancher/_index'
         ]
@@ -88,8 +82,7 @@ module.exports = {
               'installation/other-installation-methods/single-node-docker/_index',
               'installation/other-installation-methods/single-node-docker/troubleshooting/_index',
               'installation/other-installation-methods/single-node-docker/advanced/_index',
-              'installation/other-installation-methods/single-node-docker/proxy/_index',
-              'installation/other-installation-methods/single-node-docker/single-node-install-external-lb/_index'
+              'installation/other-installation-methods/single-node-docker/proxy/_index'
             ]
           },
           {
@@ -165,6 +158,8 @@ module.exports = {
           },
           'installation/options/etcd/_index',
           'installation/options/server-tags/_index',
+          'installation/options/single-node-install-external-lb/_index',
+          'installation/options/nginx/_index',
           'installation/options/tls-secrets/_index',
           'installation/options/chart-options/_index',
           {
@@ -204,6 +199,9 @@ module.exports = {
             ]
           },
           'installation/options/troubleshooting/_index',
+          'installation/options/nlb/_index',
+          'installation/options/ec2-node/_index',
+          'installation/options/rds/_index',
           'installation/options/helm-version/_index',
           'installation/options/custom-ca-root-certificate/_index',
           'installation/options/local-system-charts/_index',
@@ -268,6 +266,7 @@ module.exports = {
         label: '备份',
         items: [
           'backups/backups/_index',
+          'backups/backups/k3s-backups/_index',
           'backups/backups/ha-backups/_index',
           'backups/backups/single-node-backups/_index'
         ]
@@ -277,6 +276,7 @@ module.exports = {
         label: '恢复',
         items: [
           'backups/restorations/_index',
+          'backups/restorations/k3s-restoration/_index',
           'backups/restorations/ha-restoration/_index',
           'backups/restorations/single-node-restoration/_index'
         ]
@@ -300,7 +300,14 @@ module.exports = {
           'admin-settings/authentication/user-groups/_index',
           'admin-settings/authentication/local/_index',
           'admin-settings/authentication/ad/_index',
-          'admin-settings/authentication/openldap/_index',
+          {
+            type: 'category',
+            label: '对接 OpenLDAP',
+            items: [
+              'admin-settings/authentication/openldap/_index',
+              'admin-settings/authentication/openldap/openldap-config/_index'
+            ]
+          },
           'admin-settings/authentication/freeipa/_index',
           'admin-settings/authentication/azure-ad/_index',
 
@@ -317,6 +324,14 @@ module.exports = {
             ]
           },
           'admin-settings/authentication/okta/_index',
+          {
+            type: 'category',
+            label: '对接 Shibboleth (SAML)',
+            items: [
+              'admin-settings/authentication/shibboleth/_index',
+              'admin-settings/authentication/shibboleth/about/_index'
+            ]
+          },
           'admin-settings/authentication/google/_index'
         ]
       },
@@ -432,8 +447,17 @@ module.exports = {
             label: '集群配置参数',
             items: [
               'cluster-provisioning/rke-clusters/options/_index',
-              'cluster-provisioning/rke-clusters/options/cloud-providers/_index',
               'cluster-provisioning/rke-clusters/options/pod-security-policies/_index'
+            ]
+          },
+          {
+            type: 'category',
+            label: '配置 Cloud Provider',
+            items: [
+              'cluster-provisioning/rke-clusters/cloud-providers/_index',
+              'cluster-provisioning/rke-clusters/cloud-providers/amazon/_index',
+              'cluster-provisioning/rke-clusters/cloud-providers/azure/_index',
+              'cluster-provisioning/rke-clusters/cloud-providers/gce/_index'
             ]
           },
           'cluster-provisioning/rke-clusters/rancher-agents/_index'
@@ -505,7 +529,14 @@ module.exports = {
                 label: 'Istio 使用指南',
                 items: [
                   'cluster-admin/tools/istio/setup/_index',
-                  'cluster-admin/tools/istio/setup/enable-istio-in-cluster/_index',
+                  {
+                    type: 'category',
+                    label: '1、在集群中启用 Istio',
+                    items: [
+                      'cluster-admin/tools/istio/setup/enable-istio-in-cluster/_index',
+                      'cluster-admin/tools/istio/setup/enable-istio-in-cluster/enable-istio-with-psp/_index'
+                    ]
+                  },
                   'cluster-admin/tools/istio/setup/enable-istio-in-namespace/_index',
                   'cluster-admin/tools/istio/setup/node-selectors/_index',
                   'cluster-admin/tools/istio/setup/deploy-workloads/_index',
@@ -540,7 +571,8 @@ module.exports = {
               'cluster-admin/tools/monitoring/prometheus/_index',
               'cluster-admin/tools/monitoring/viewing-metrics/_index'
             ]
-          }
+          },
+          'cluster-admin/tools/opa-gatekeper/_index'
         ]
       },
       'cluster-admin/cloning-clusters/_index',
@@ -575,14 +607,7 @@ module.exports = {
         ]
       },
       'project-admin/istio/_index',
-      {
-        type: 'category',
-        label: '流水线',
-        items: [
-          'project-admin/pipelines/_index',
-          'project-admin/pipelines/docs-for-v2.0.x/_index'
-        ]
-      },
+      'project-admin/pipelines/_index',
       'project-admin/pod-security-policies/_index'
     ],
     用户指南: [
@@ -629,25 +654,25 @@ module.exports = {
         label: '流水线',
         items: [
           'k8s-in-rancher/pipelines/_index',
+          'k8s-in-rancher/pipelines/concepts/_index',
+          'k8s-in-rancher/pipelines/config/_index',
           'k8s-in-rancher/pipelines/example-repos/_index',
-          'k8s-in-rancher/pipelines/example/_index'
+          'k8s-in-rancher/pipelines/example/_index',
+          'k8s-in-rancher/pipelines/storage/_index',
+          'k8s-in-rancher/pipelines/docs-for-v2.0.x/_index'
         ]
       }
     ],
     应用商店: [
       'catalog/_index',
       'catalog/built-in/_index',
-      {
-        type: 'category',
-        label: '自定义应用商店',
-        items: [
-          'catalog/custom/_index',
-          'catalog/custom/creating/_index',
-          'catalog/custom/adding/_index'
-        ]
-      },
+      'catalog/adding-catalogs/_index',
+      'catalog/catalog-config/_index',
+      'catalog/creating-apps/_index',
+      'catalog/managing-apps/_index',
       'catalog/multi-cluster-apps/_index',
-      'catalog/apps/_index',
+      'catalog/launching-apps/_index',
+      'catalog/tutorial/_index',
       'catalog/globaldns/_index'
     ],
     Rancher命令行: ['cli/_index'],
@@ -717,7 +742,8 @@ module.exports = {
       'troubleshooting/networking/_index',
       'troubleshooting/dns/_index',
       'troubleshooting/rancherha/_index',
-      'troubleshooting/imported-clusters/_index'
+      'troubleshooting/imported-clusters/_index',
+      'troubleshooting/logging/_index'
     ],
     参与Rancher开源项目: ['contributing/_index'],
     版本迁移: [

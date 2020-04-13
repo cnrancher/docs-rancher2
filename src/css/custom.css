@@ -81,5 +81,5 @@ p {
 }
 
 .admonition-important a {
-  color: var(--ifm-rancher-color-latest);
+  color: var(--ifm-navbar-background-color);
 }

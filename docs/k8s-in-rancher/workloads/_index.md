@@ -6,7 +6,7 @@ title: 工作负载类型
 
 ## Pods
 
-[Pod](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/) 是共享网络命名空间和存储卷的一个或多个容器。大多数 Pod 只有一个容器。因此，当我们讨论 **Pod** 时，该术语通常与**容器**同义。你可以通过扩容 Pod 来增加这个 Pod 中定义的那组容器的实例。这些容器就是你的业务实现。通常，Pod 由工作负载进行扩缩容和管理。
+[Pod](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/) 是共享网络命名空间和存储卷的一个或多个容器。大多数 Pod 只有一个容器。因此，当我们讨论 **Pod** 时，该术语通常与**容器**同义。您可以通过扩容 Pod 来增加这个 Pod 中定义的那组容器的实例。这些容器就是您的业务实现。通常，Pod 由工作负载进行扩缩容和管理。
 
 ## 工作负载
 
@@ -59,7 +59,7 @@ Rancher 中有几种可用的服务。以下说明来自 [Kubernetes 文档](htt
 
 - **LoadBalancer**
 
-  使用云提供商的负载均衡器对暴露开服务。不是所有的云提供商都支持这种类型的服务。如果你在自己的数据中心中部署的集群，那么你需要提供你自己的负载均衡实现，例如[MetalLB](https://metallb.universe.tf/)。
+  使用云提供商的负载均衡器对暴露开服务。不是所有的云提供商都支持这种类型的服务。如果您在自己的数据中心中部署的集群，那么您需要提供您自己的负载均衡实现，例如[MetalLB](https://metallb.universe.tf/)。
 
 ### 工作负载选项
 

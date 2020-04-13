@@ -24,11 +24,11 @@ scratch 是一个[官方 Docker 镜像](https://hub.docker.com/_/scratch)，它�
 
 ## 使用非特权模式运行容器
 
-如果可能，在容器中运行进程时使用非特权用户。虽然容器运行时提供隔离，但是仍然可能存在漏洞和攻击。如果容器作为 root 运行，有意或无意的主机挂载也会影响你的环境。有关为 Pod 或容器配置安全上下文的详细信息，请参考[Kubernetes 文档](https://kubernetes.io/docs/tasks/configu-po-container/secur-context/)。
+如果可能，在容器中运行进程时使用非特权用户。虽然容器运行时提供隔离，但是仍然可能存在漏洞和攻击。如果容器作为 root 运行，有意或无意的主机挂载也会影响您的环境。有关为 Pod 或容器配置安全上下文的详细信息，请参考[Kubernetes 文档](https://kubernetes.io/docs/tasks/configu-po-container/secur-context/)。
 
 ## 资源限制
 
-给你的 Pod 配置 CPU 和内存限制，这可以帮助你管理工作节点上的资源，并避免异常的微服务（比如内存溢出）影响其他微服务。
+给您的 Pod 配置 CPU 和内存限制，这可以帮助您管理工作节点上的资源，并避免异常的微服务（比如内存溢出）影响其他微服务。
 
 在标准 Kubernetes 中，可以在命名空间级别设置资源限制。在 Rancher 中，您可以在项目级别设置资源限制，它们将同步到项目中的所有命名空间，具体配置请查阅 Rancher 文档。
 
@@ -38,7 +38,7 @@ Kubernetes 文档提供了更多关于如何在[容器级别](https://kubernetes
 
 ## 资源预留
 
-你应该将 CPU 和内存需求配置到你的 Pod 上。这对于通知调度器需要将 Pod 放置在哪种类型的计算节点上，并确保它不会过度调度到该节点非常重要。在 Kubernetes 中，您可以在 Pods 容器的`spec`的`resources.requests` 请求字段中配置资源请求。有关详细信息，请参考[Kubernetes 文档](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container)。
+您应该将 CPU 和内存需求配置到您的 Pod 上。这对于通知调度器需要将 Pod 放置在哪种类型的计算节点上，并确保它不会过度调度到该节点非常重要。在 Kubernetes 中，您可以在 Pods 容器的`spec`的`resources.requests` 请求字段中配置资源请求。有关详细信息，请参考[Kubernetes 文档](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container)。
 
 > **注意：** 如果您为部署 Pod 的命名空间设置了资源限制，而 Pod 没有设置资源预留和资源限制，那么将不允许启动 Pod。为了避免在工作负载创建期间在每个容器上设置这些字段，可以在命名空间上指定默认资源预留和资源限制。
 

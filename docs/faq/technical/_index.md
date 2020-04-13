@@ -61,58 +61,7 @@ New password for default admin user (user-xxxxx):
 
 ## 如何开启 debug 调试日志？
 
-使用单节点 Docker 安装时，开启：
-
-```
-$ docker exec -ti <container_id> loglevel --set debug
-OK
-$ docker logs -f <container_id>
-```
-
-使用单节点 Docker 安装时，关闭：
-
-```
-$ docker exec -ti <container_id> loglevel --set info
-OK
-```
-
-使用 Helm 的高可用安装时，开启：
-
-```
-$ KUBECONFIG=./kube_config_rancher-cluster.yml
-$ kubectl --kubeconfig $KUBECONFIG -n cattle-system get pods -l app=rancher | grep '1/1' | awk '{ print $1 }' | xargs -I{} kubectl --kubeconfig $KUBECONFIG -n cattle-system exec {} -- loglevel --set debug
-OK
-OK
-OK
-$ kubectl --kubeconfig $KUBECONFIG -n cattle-system logs -l app=rancher
-```
-
-使用 Helm 的高可用安装时，关闭：
-
-```
-$ KUBECONFIG=./kube_config_rancher-cluster.yml
-$ kubectl --kubeconfig $KUBECONFIG -n cattle-system get pods -l app=rancher | grep '1/1' | awk '{ print $1 }' | xargs -I{} kubectl --kubeconfig $KUBECONFIG -n cattle-system exec {} -- loglevel --set info
-OK
-OK
-OK
-```
-
-使用 RKE Add-ons 的高可用安装时，开启：
-
-```
-$ KUBECONFIG=./kube_config_rancher-cluster.yml
-$ kubectl --kubeconfig $KUBECONFIG exec -n cattle-system $(kubectl --kubeconfig $KUBECONFIG get pods -n cattle-system -o json | jq -r '.items[] | select(.spec.containers[].name=="cattle-server") | .metadata.name') -- loglevel --set debug
-OK
-$ kubectl --kubeconfig $KUBECONFIG logs -n cattle-system -f $(kubectl --kubeconfig $KUBECONFIG get pods -n cattle-system -o json | jq -r '.items[] | select(.spec.containers[].name="cattle-server") | .metadata.name')
-```
-
-使用 RKE Add-ons 的高可用安装时，关闭：
-
-```
-$ KUBECONFIG=./kube_config_rancher-cluster.yml
-$ kubectl --kubeconfig $KUBECONFIG exec -n cattle-system $(kubectl --kubeconfig $KUBECONFIG get pods -n cattle-system -o json | jq -r '.items[] | select(.spec.containers[].name=="cattle-server") | .metadata.name') -- loglevel --set info
-OK
-```
+请参阅[问题排查：日志级别](/docs/troubleshooting/logging/_index)。
 
 ## 我不能 ping 通 CluusterIP
 
@@ -124,7 +73,7 @@ ClusterIP 是一个虚拟 IP，不能够回应 ping。更好的测试 ClusterIP 
 
 ## 为什么创建的 L4 负载均衡器一直处在`Pending`状态？
 
-L4 负载均衡器是通过`type: LoadBalancer`创建的。在 Kubernetes 里，它需要一个公有云提供商或者类似控制器（例如：MetalLB）来响应创建需求，否则就会一直处在`Pending`状态。更多信息请参阅[公有云提供商](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/_index)或[创建外部负载均衡器](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/)。
+L4 负载均衡器是通过`type: LoadBalancer`创建的。在 Kubernetes 里，它需要一个公有云提供商或者类似控制器（例如：MetalLB）来响应创建需求，否则就会一直处在`Pending`状态。更多信息请参阅[公有云提供商](/docs/cluster-provisioning/rke-clusters/cloud-providers/_index)或[创建外部负载均衡器](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/)。
 
 ## Rancher 的状态数据存储在哪里？
 
@@ -138,7 +87,7 @@ L4 负载均衡器是通过`type: LoadBalancer`创建的。在 Kubernetes 里，
 
 ## 如何访问通过 Rancher 创建的节点？
 
-可以通过**节点**视图下载通过 Rancher 创建的节点的 SSH keys。选择你想要访问的节点并选择末尾的垂直省略号按钮，选择**下载密钥**即可下载。
+可以通过**节点**视图下载通过 Rancher 创建的节点的 SSH keys。选择您想要访问的节点并选择末尾的垂直省略号按钮，选择**下载密钥**即可下载。
 
 ![Download Keys](/img/rancher/downloadsshkeys.png)
 
@@ -153,7 +102,7 @@ $ ssh -i id_rsa user@ip_of_node
 Rancher UI 包含静态文件，以及基于 API 响应工作。这意味着任何您在 UI 上执行的操作，都可以通过 API 自动化完成。一般有两种方式：
 
 - 访问 `https://your_rancher_ip/v3`并浏览 API 选项。
-- 当用 UI 访问时抓取 API 请求（大多数使用的方法是 [Chrome Developer Tools](https://developers.google.com/web/tools/chrome-devtools/#network) 当然你可以选择其他的工具。）
+- 当用 UI 访问时抓取 API 请求（大多数使用的方法是 [Chrome Developer Tools](https://developers.google.com/web/tools/chrome-devtools/#network) 当然您可以选择其他的工具。）
 
 ## 一个节点的 IP 地址改变了，该如何恢复？
 
@@ -169,7 +118,7 @@ Rancher UI 包含静态文件，以及基于 API 响应工作。这意味着任�
 
 ## 如何检查我的证书链是有效的？
 
-使用`openssl verify`命令来验证你的证书链：
+使用`openssl verify`命令来验证您的证书链：
 
 > **注意：** 将`SSL_CERT_DIR` 和 `SSL_CERT_FILE` 配置为虚拟地址，以保证验证的时候不会使用操作系统自动安装的证书。
 
@@ -185,7 +134,7 @@ SSL_CERT_DIR=/dummy SSL_CERT_FILE=/dummy openssl verify -CAfile ca.pem -untruste
 rancher.yourdomain.com.pem: OK
 ```
 
-如何您成功地验证了证书链，你可以将中间 CA 证书包含在服务器证书中来为所有到 Rancher 的连接（如到 Rancher Agent 的连接）提供完整证书链。服务器证书文件的证书顺序应该是服务器证书（`rancher.yourdomain.com.pem`的内容）自身放在第一位，随后是中间 CA 证书（`intermediate.pem`内容）
+如何您成功地验证了证书链，您可以将中间 CA 证书包含在服务器证书中来为所有到 Rancher 的连接（如到 Rancher Agent 的连接）提供完整证书链。服务器证书文件的证书顺序应该是服务器证书（`rancher.yourdomain.com.pem`的内容）自身放在第一位，随后是中间 CA 证书（`intermediate.pem`内容）
 
 ```
 -----BEGIN CERTIFICATE-----
@@ -196,7 +145,7 @@ rancher.yourdomain.com.pem: OK
 -----END CERTIFICATE-----
 ```
 
-如何您仍然遇到验证验证错误，你可以通过以下命令获取服务器证书的颁布者和主题：
+如何您仍然遇到验证验证错误，您可以通过以下命令获取服务器证书的颁布者和主题：
 
 ```
 openssl x509 -noout -subject -issuer -in rancher.yourdomain.com.pem

@@ -4,11 +4,11 @@ title: 查看指标
 
 _自 v2.2.0 起可用_
 
-在启用[集群监控](/docs/cluster-admin/tools/monitoring/_index)或[项目监控](/docs/project-admin/tools/monitoring/_index)后，你将希望开始查看正在收集的监控数据。有多种查看监控数据的方式。
+在启用[集群监控](/docs/cluster-admin/tools/monitoring/_index)或[项目监控](/docs/project-admin/tools/monitoring/_index)后，您将希望开始查看正在收集的监控数据。有多种查看监控数据的方式。
 
 ## Rancher UI
 
-> **注意：** 仅当你启用了[集群监控](/docs/cluster-admin/tools/monitoring/_index)后，此方式才可用。[项目监控](/docs/project-admin/tools/monitoring/_index)采集到的自定义指标必须使用项目监控部署的 Grafana 来进行查看。
+> **注意：** 仅当您启用了[集群监控](/docs/cluster-admin/tools/monitoring/_index)后，此方式才可用。[项目监控](/docs/project-admin/tools/monitoring/_index)采集到的自定义指标必须使用项目监控部署的 Grafana 来进行查看。
 
 Rancher 的指标线图在多个位置可用：
 
@@ -23,12 +23,12 @@ Rancher 的指标线图在多个位置可用：
 在这些指标的 UI 组件里，有几种方法可以切换视图：
 
 - 视图切换:
-  - **详情：** 显示图形和图表，可以查看各个单元的指标。例如，在 **Pod 指标**的“内存使用率”的详情视图里，你可以看到各个容器的使用率折线，这可以帮助你进行对比分析。
-  - **汇总：** 查看单元汇总后的指标。例如，在 **Pod 指标**的“内存使用率”的汇总视图里，你可以看到整个 Pod 的使用率折线，这可以帮助你分析这个 Pod 对内存使用的走势。
-- 选择你正在查看的时间的范围，以查看更精确或更广阔的数据样本。
+  - **详情：** 显示图形和图表，可以查看各个单元的指标。例如，在 **Pod 指标**的“内存使用率”的详情视图里，您可以看到各个容器的使用率折线，这可以帮助您进行对比分析。
+  - **汇总：** 查看单元汇总后的指标。例如，在 **Pod 指标**的“内存使用率”的汇总视图里，您可以看到整个 Pod 的使用率折线，这可以帮助您分析这个 Pod 对内存使用的走势。
+- 选择您正在查看的时间的范围，以查看更精确或更广阔的数据样本。
 - 自定义时间以显示特定时间之间的数据。
 
-分析这些指标时，不能仅关注图表内的某时刻的单个独立指标。相反，你应该观察一段时间以确立“指标基准”。例如，首先对组件进行一段时间的操作，并观察相关指标，然后评估出能描述其为“健康”的指标值，最后建立可供日后度量的参考系。拥有指标基准后，可以注意图表和图形中是否有较大的变化量，因为这些较大的变化通常表明组件可能存在问题，你需要进行调查。
+分析这些指标时，不能仅关注图表内的某时刻的单个独立指标。相反，您应该观察一段时间以确立“指标基准”。例如，首先对组件进行一段时间的操作，并观察相关指标，然后评估出能描述其为“健康”的指标值，最后建立可供日后度量的参考系。拥有指标基准后，可以注意图表和图形中是否有较大的变化量，因为这些较大的变化通常表明组件可能存在问题，您需要进行调查。
 
 ## Grafana
 
@@ -40,11 +40,11 @@ Rancher 通过根据用户的[角色](/docs/admin-settings/rbac/cluster-project-
 
 #### 集群级别 Grafana
 
-如果您有集群中 System 项目的访问权限，则您可以访问集群级别 Grafana 实例。当你跳转到 Grafana 实例时，需要使用用户名`admin`和密码`admin`登录。第一次登录时，Grafana 将提示您更改密码。如果你的 Rancher 权限仅限于自己的项目（非 System 项目），您将无法在集群级别的 Grafana 实例中查看集群级别的指标。
+如果您有集群中 System 项目的访问权限，则您可以访问集群级别 Grafana 实例。当您跳转到 Grafana 实例时，需要使用用户名`admin`和密码`admin`登录。第一次登录时，Grafana 将提示您更改密码。如果您的 Rancher 权限仅限于自己的项目（非 System 项目），您将无法在集群级别的 Grafana 实例中查看集群级别的指标。
 
 #### 项目级别 Grafana
 
-如果您的项目启用了项目监控，您可以在这个项目中的项目级别 Grafana 中查看指标。当你跳转到 Grafana 实例时，需要使用用户名`admin`和密码`admin`登录。第一次登录时，Grafana 将提示您更改密码。在这个项目级别的 Grafana 中，您只能查看到该项目中的工作负载的指标，例如 CPU，内存等。如果您配置了自定义指标，您也可以自己创建仪表盘来查看您的自定义指标。
+如果您的项目启用了项目监控，您可以在这个项目中的项目级别 Grafana 中查看指标。当您跳转到 Grafana 实例时，需要使用用户名`admin`和密码`admin`登录。第一次登录时，Grafana 将提示您更改密码。在这个项目级别的 Grafana 中，您只能查看到该项目中的工作负载的指标，例如 CPU，内存等。如果您配置了自定义指标，您也可以自己创建仪表盘来查看您的自定义指标。
 
 > 注意：System 项目中不支持启用项目监控。
 
@@ -58,8 +58,8 @@ Rancher 通过根据用户的[角色](/docs/admin-settings/rbac/cluster-project-
 
 1. 点选`cluster-monitoring`应用。
 
-1. 在`cluster-monitoring`应用中，有两个`/index.html`链接：一个连接到 Grafana 实例，另一个连接到 Prometheus 实例。当点击 Grafana 链接时，它将把你重定向到 Grafana 的新页面，其中显示了集群的指标。
+1. 在`cluster-monitoring`应用中，有两个`/index.html`链接：一个连接到 Grafana 实例，另一个连接到 Prometheus 实例。当点击 Grafana 链接时，它将把您重定向到 Grafana 的新页面，其中显示了集群的指标。
 
-1. 你可以使用用户名`admin`和密码`admin`登录 Grafana 实例。为了安全起见，建议更改密码。
+1. 您可以使用用户名`admin`和密码`admin`登录 Grafana 实例。为了安全起见，建议更改密码。
 
-**结果：** 你登录到 Grafana 里。登录后，你可以查看预设的 Grafana 仪表盘，这些仪表盘是通过[Grafana 设置机制](http://docs.grafana.org/administration/provisioning/#dashboards)导入的，因此你无法直接对它们进行修改。如果要修改这些仪表盘，请克隆仪表盘并修改副本。
+**结果：** 您登录到 Grafana 里。登录后，您可以查看预设的 Grafana 仪表盘，这些仪表盘是通过[Grafana 设置机制](http://docs.grafana.org/administration/provisioning/#dashboards)导入的，因此您无法直接对它们进行修改。如果要修改这些仪表盘，请克隆仪表盘并修改副本。

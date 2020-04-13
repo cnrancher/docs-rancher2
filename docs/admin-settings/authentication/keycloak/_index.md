@@ -11,17 +11,18 @@ _v2.1.0 版本可用_
 - 您必须有一个[Keycloak IdP 服务器](https://www.keycloak.org/docs/latest/server_installation/)。
 - 在 Keycloak 中，创建一个[新的 SAML 客户端](https://www.keycloak.org/docs/latest/server_admin/#saml-clients)，设置如下。参见[Keycloak 文档](keycloak.org/docs/latest/server_admin/#saml-clients)获得帮助。
 
-  | 设置                 | 值                                                          |
-  | -------------------- | ----------------------------------------------------------- |
-  | `Sign Documents`     | `ON` <sup>1</sup>                                           |
-  | `Sign Assertions`    | `ON` <sup>1</sup>                                           |
-  | 所有其它`ON/OFF`设置 | `OFF`                                                       |
-  | `Client ID`          | `https://yourRancherHostURL/v1-saml/keycloak/saml/metadata` |
-  | `Client Name`        | <CLIENT_NAME> (e.g. `rancher`)                              |
-  | `Client Protocol`    | `SAML`                                                      |
-  | `Valid Redirect URI` | `https://yourRancherHostURL/v1-saml/keycloak/saml/acs`      |
+  | 设置                 | 值                                                                      |
+  | -------------------- | ----------------------------------------------------------------------- |
+  | `Sign Documents`     | `ON` <sup>1</sup>                                                       |
+  | `Sign Assertions`    | `ON` <sup>1</sup>                                                       |
+  | 所有其它`ON/OFF`设置 | `OFF`                                                                   |
+  | `Client ID`          | `https://yourRancherHostURL/v1-saml/keycloak/saml/metadata`<sup>2</sup> |
+  | `Client Name`        | <CLIENT_NAME> (e.g. `rancher`)                                          |
+  | `Client Protocol`    | `SAML`                                                                  |
+  | `Valid Redirect URI` | `https://yourRancherHostURL/v1-saml/keycloak/saml/acs`                  |
 
-  > <sup>1</sup>: 您可以选择启用这些设置中的一个或两个。
+  > - 1：您可以选择启用这些设置中的一个或两个。
+  > - 2：在配置和保存 SAML 提供者之前，不会生成 Rancher SAML 元数据。
 
 - 从 Keycloak 客户端导出`metadata.xml`文件:
   在`安装`选项卡中，选择`SAML Metadata IDPSSODescriptor`格式选项并下载文件。
@@ -54,12 +55,12 @@ _v2.1.0 版本可用_
 
 **结果：** Rancher 被配置为使用 Keycloak 认证。您的用户现在可以使用 Keycloak 账号登录 Rancher。
 
-> SAML 身份验证提供商警告：
+> SAML 身份验证提供者警告：
 >
 > - SAML 协议不支持搜索或查找用户或组。因此，将用户或组添加到 Rancher 时不会对其进行验证。
 > - 添加用户时，必须正确输入确切的用户 ID（即`UID`字段）。键入用户 ID 时，将不会搜索可能匹配的其他用户 ID。
 > - 添加组时，必须从文本框旁边的下拉列表中选择组。Rancher 假定来自文本框的任何输入都是用户。
->   - 群组下拉列表仅显示您所属的群组。您将无法添加您不是其成员的组。
+>   - 用户组下拉列表仅显示您所属的用户组。您将无法添加您不是其成员的组。
 
 ## 附录: 故障诊断
 
@@ -78,6 +79,11 @@ _v2.1.0 版本可用_
 
 - 检查 Rancher 调试日志。
 - 如果日志显示`ERROR: either the Response or Assertion must be signed`，确保`Sign Documents`或`Sign assertions` 在您的 Keycloak 客户端中被设置为`ON`。
+
+### 在访问 `/v1-saml/keycloak/saml/metadata` 时返回 HTTP 502
+
+这通常是由于只有在配置了 SAML 提供者之后，才会创建元数据。
+尝试将 keycloak 配置并保存为你的 SAML 提供者，然后再访问元数据。
 
 ### Keycloak 错误: "We're sorry, failed to process response"
 
