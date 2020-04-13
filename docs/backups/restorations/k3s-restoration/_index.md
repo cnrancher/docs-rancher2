@@ -2,16 +2,16 @@
 title: K3s Rancher 高可用恢复
 ---
 
-When Rancher is installed on a high-availability Kubernetes cluster, we recommend using an external database to store the cluster data.
+当将 Rancher 安装在高可用 Kubernetes 集群上时，我们建议使用外部数据库存储集群数据。
 
-The database administrator will need to back up the external database, or restore it from a snapshot or dump.
+数据库管理员将需要备份外部数据库，并在需要时从快照或 dump 中还原它。
 
-We recommend configuring the database to take recurring snapshots.
+我们建议定期对数据库进行快照拍摄。
 
-### Creating Snapshots and Restoring Databases from Snapshots
+## 创建快照并从快照还原数据库
 
-For details on taking database snapshots and restoring your database from them, refer to the official database documentation:
+有关获取数据库快照和从快照还原数据库的详细信息，请参阅官方数据库文档：
 
-- [Official MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/replication-snapshot-method.html)
-- [Official PostgreSQL documentation](https://www.postgresql.org/docs/8.3/backup-dump.html)
-- [Official etcd documentation](https://github.com/etcd-io/etcd/blob/master/Documentation/op-guide/recovery.md)
+- [MySQL 官方文档](https://dev.mysql.com/doc/refman/8.0/en/replication-snapshot-method.html)
+- [PostgreSQL 官方文档](https://www.postgresql.org/docs/8.3/backup-dump.html)
+- [官方 etcd 文档](https://github.com/etcd-io/etcd/blob/master/Documentation/op-guide/recovery.md)
