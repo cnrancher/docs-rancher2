@@ -22,7 +22,7 @@ _v2.1.0 版本可用_
   | `Valid Redirect URI` | `https://yourRancherHostURL/v1-saml/keycloak/saml/acs`                  |
 
   > - 1：您可以选择启用这些设置中的一个或两个。
-  > - 2：在配置和保存 SAML 提供商之前，不会生成 Rancher SAML 元数据。
+  > - 2：在配置和保存 SAML 提供者之前，不会生成 Rancher SAML 元数据。
 
 - 从 Keycloak 客户端导出`metadata.xml`文件:
   在`安装`选项卡中，选择`SAML Metadata IDPSSODescriptor`格式选项并下载文件。
@@ -55,7 +55,7 @@ _v2.1.0 版本可用_
 
 **结果：** Rancher 被配置为使用 Keycloak 认证。您的用户现在可以使用 Keycloak 账号登录 Rancher。
 
-> SAML 身份验证提供商警告：
+> SAML 身份验证提供者警告：
 >
 > - SAML 协议不支持搜索或查找用户或组。因此，将用户或组添加到 Rancher 时不会对其进行验证。
 > - 添加用户时，必须正确输入确切的用户 ID（即`UID`字段）。键入用户 ID 时，将不会搜索可能匹配的其他用户 ID。
@@ -82,8 +82,8 @@ _v2.1.0 版本可用_
 
 ### 在访问 `/v1-saml/keycloak/saml/metadata` 时返回 HTTP 502
 
-这通常是由于只有在配置了 SAML 提供商之后，才会创建元数据。
-尝试将 keycloak 配置并保存为你的 SAML 提供商，然后再访问元数据。
+这通常是由于只有在配置了 SAML 提供者之后，才会创建元数据。
+尝试将 keycloak 配置并保存为你的 SAML 提供者，然后再访问元数据。
 
 ### Keycloak 错误: "We're sorry, failed to process response"
 

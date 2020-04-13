@@ -6,7 +6,7 @@ _从 v2.0.3 开始可用_
 
 如果您在 Azure 中托管了一个 Active Directory（AD）实例，您可以将 Rancher 配置为允许您的用户使用 AD 帐户登录。Azure AD 外部身份验证的配置要求您在 Azure 和 Rancher 中进行配置。
 
-> **注意：** Azure AD 集成仅支持服务提供商发起的登录。
+> **注意：** Azure AD 集成仅支持服务提供者发起的登录。
 >
 > **先决条件：** 已配置 Azure AD 实例。
 >
