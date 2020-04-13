@@ -2,24 +2,26 @@
 title: K3s Rancher 高可用备份
 ---
 
-When Rancher is installed on a high-availability Kubernetes cluster, we recommend using an external database to store the cluster data.
+当将 Rancher 安装在高可用 Kubernetes 集群上时，我们建议使用外部数据库存储集群数据。
 
-The database administrator will need to back up the external database, or restore it from a snapshot or dump.
+数据库管理员将需要备份外部数据库，并在需要时从快照或 dump 中还原它。
 
-We recommend configuring the database to take recurring snapshots.
+我们建议定期对数据库进行快照拍摄。
 
-### K3s Kubernetes Cluster Data
+## K3s Kubernetes 集群数据
 
-One main advantage of this K3s architecture is that it allows an external datastore to hold the cluster data, allowing the K3s server nodes to be treated as ephemeral.
+这种 K3s 架构的一个主要优点是，它允许将集群数据保存在外部数据库中，从而可以将 K3s 服务器节点视为无状态的。
 
-<figcaption>Architecture of a K3s Kubernetes Cluster Running the Rancher Management Server</figcaption>
+<figcaption>
+运行 Rancher Server 的 K3s Kubernetes 集群的架构
+</figcaption>
 
 ![Architecture of an RKE Kubernetes Cluster Running the Rancher Management Server](/img/rancher/k3s-server-storage.svg)
 
-### Creating Snapshots and Restoring Databases from Snapshots
+## 创建快照并从快照还原数据库
 
-For details on taking database snapshots and restoring your database from them, refer to the official database documentation:
+有关获取数据库快照和从快照还原数据库的详细信息，请参阅官方数据库文档：
 
-- [Official MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/replication-snapshot-method.html)
-- [Official PostgreSQL documentation](https://www.postgresql.org/docs/8.3/backup-dump.html)
-- [Official etcd documentation](https://github.com/etcd-io/etcd/blob/master/Documentation/op-guide/recovery.md)
+- [MySQL 官方文档](https://dev.mysql.com/doc/refman/8.0/en/replication-snapshot-method.html)
+- [PostgreSQL 官方文档](https://www.postgresql.org/docs/8.3/backup-dump.html)
+- [etcd 官方文档](https://github.com/etcd-io/etcd/blob/master/Documentation/op-guide/recovery.md)
