@@ -41,7 +41,7 @@ const metadata = {
     'overview/glossary/_index': '名词解释',
     'quick-start-guide/_index': '入门必读',
     'quick-start-guide/cli/_index': '命令行工具',
-    'quick-start-guide/deployment/_index': '部署 Rancher Server',
+    'quick-start-guide/deployment/_index': '部署 Rancher 和 Kubernetes',
     'quick-start-guide/workload/_index': '部署工作负载',
     'installation/requirements/_index': '安装要求',
     'installation/k8s-install/_index': '高可用安装',

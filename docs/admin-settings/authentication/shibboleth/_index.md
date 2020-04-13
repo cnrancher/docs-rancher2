@@ -2,108 +2,104 @@
 title: 配置指南
 ---
 
-_Available as of v2.4.0_
+_自 v2.4.0 起可用_
 
-If your organization uses Shibboleth Identity Provider (IdP) for user authentication, you can configure Rancher to allow your users to log in to Rancher using their Shibboleth credentials.
+如果您的组织使用 Shibboleth 认证系统（IdP）进行用户身份验证，可以将 Rancher 与 Shibboleth 进行对接，从而允许用户使用 Shibboleth 凭据登录到 Rancher。
 
-In this configuration, when Rancher users log in, they will be redirected to the Shibboleth IdP to enter their credentials. After authentication, they will be redirected back to the Rancher UI.
+在此配置中，当 Rancher 用户登录时，他们将被重定向到 Shibboleth IdP 以输入其凭据。身份验证结束后，它们将被重定向回 Rancher UI。
 
-If you also configure OpenLDAP as the back end to Shibboleth, it will return a SAML assertion to Rancher with user attributes that include groups. Then the authenticated user will be able to access resources in Rancher that their groups have permissions for.
+如果您将 OpenLDAP 配置为了 Shibboleth 的后端，它将返回一个 SAML 断言给 Rancher，其中包含用户的属性（其中包括用户所在的组的信息）。 然后，通过身份验证的用户将能够访问其所在的组有权访问的 Rancher 中的资源。
 
-> The instructions in this section assume that you understand how Rancher, Shibboleth, and OpenLDAP work together. For a more detailed explanation of how it works, refer to [this page.](./about)
+> 本节中的说明假定您了解 Rancher，Shibboleth 和 OpenLDAP 是如何协同工作的。有关其工作原理的详细说明，请参阅[本页](/docs/admin-settings/authentication/shibboleth/about/_index)。
 
-This section covers the following topics:
+## 在 Rancher 中设置 Shibboleth
 
-- [Setting up Shibboleth in Rancher](#setting-up-shibboleth-in-rancher)
-  - [Shibboleth Prerequisites](#shibboleth-prerequisites)
-  - [Configure Shibboleth in Rancher](#configure-shibboleth-in-rancher)
-  - [SAML Provider Caveats](#saml-provider-caveats)
-- [Setting up OpenLDAP in Rancher](#setting-up-openldap-in-rancher)
-  - [OpenLDAP Prerequisites](#openldap-prerequisites)
-  - [Configure OpenLDAP in Rancher](#configure-openldap-in-rancher)
-  - [Troubleshooting](#troubleshooting)
+### Shibboleth 先决条件
 
-# Setting up Shibboleth in Rancher
+> - 您必须有配置好的 Shibboleth IdP 服务器。
+> - 以下是配置所需的 Rancher 服务 Provider URL：
+>   元数据 URL：`https://<rancher-server>/v1-saml/shibboleth/saml/metadata`
+>   断言消费者服务（ACS）URL：`https://<rancher-server>/v1-saml/shibboleth/saml/acs`
+> - 从您的 IdP 服务器导出`metadata.xml`文件。有关更多信息，请参见[Shibboleth 文档](https://wiki.shibboleth.net/confluence/display/SP3/Home)。
 
-### Shibboleth Prerequisites
+### 在 Rancher 中配置 Shibboleth
 
-> - You must have a Shibboleth IdP Server configured.
-> - Following are the Rancher Service Provider URLs needed for configuration:
->   Metadata URL: `https://<rancher-server>/v1-saml/shibboleth/saml/metadata`
->   Assertion Consumer Service (ACS) URL: `https://<rancher-server>/v1-saml/shibboleth/saml/acs`
-> - Export a `metadata.xml` file from your IdP Server. For more information, see the [Shibboleth documentation.](https://wiki.shibboleth.net/confluence/display/SP3/Home)
+如果您的组织使用 Shibboleth 进行用户身份验证，则可以配置 Rancher 允许用户使用其 IdP 凭据登录。
 
-### Configure Shibboleth in Rancher
+1. 在**全局**视图中，从主菜单中选择**安全 > 认证**。
 
-If your organization uses Shibboleth for user authentication, you can configure Rancher to allow your users to log in using their IdP credentials.
+1. 选择 **Shibboleth**。
 
-1. From the **Global** view, select **Security > Authentication** from the main menu.
+1. 填写**配置 Shibboleth 帐户**表单。Shibboleth IdP 允许您指定要使用的数据存储。您可以添加数据库或使用现有的 ldap 服务器。例如，如果选择 Active Directory（AD）服务器，则以下示例说明如何将 AD 属性映射到 Rancher 中的字段。
 
-1. Select **Shibboleth**.
+   1. **显示名称字段**：输入包含用户显示名称的 AD 属性（例如：`displayName`）。
 
-1. Complete the **Configure Shibboleth Account** form. Shibboleth IdP lets you specify what data store you want to use. You can either add a database or use an existing ldap server. For example, if you select your Active Directory (AD) server, the examples below describe how you can map AD attributes to fields within Rancher.
+   1. **用户名字段**：输入包含用户名的 AD 属性（例如：`givenName`）。
 
-   1. **Display Name Field**: Enter the AD attribute that contains the display name of users (example: `displayName`).
+   1. **UID 字段**：输入每个用户唯一的 AD 属性（例如：`sAMAccountName`，`distinguishedName`）。
 
-   1. **User Name Field**: Enter the AD attribute that contains the user name/given name (example: `givenName`).
+   1. **Groups 字段**：输入用于管理组成员身份的条目（例如：`memberOf`）。
 
-   1. **UID Field**: Enter an AD attribute that is unique to every user (example: `sAMAccountName`, `distinguishedName`).
+   1. **Rancher API 地址**：输入 Rancher Server 的 URL。
 
-   1. **Groups Field**: Make entries for managing group memberships (example: `memberOf`).
+   1. **私钥**和**证书**：这是一个密钥证书对，用于在 Rancher 和您的 IdP 之间创建安全的连接。
 
-   1. **Rancher API Host**: Enter the URL for your Rancher Server.
-
-   1. **Private Key** and **Certificate**: This is a key-certificate pair to create a secure shell between Rancher and your IdP.
-
-      You can generate one using an openssl command. For example:
+      您可以使用 openssl 命令生成一个。例如：
 
       ```
       openssl req -x509 -newkey rsa:2048 -keyout myservice.key -out myservice.cert -days 365 -nodes -subj "/CN=myservice.example.com"
       ```
 
-   1. **IDP-metadata**: The `metadata.xml` file that you exported from your IdP server.
+   1. **IDP-metadata**：您从 IdP 服务器导出的`metadata.xml`文件。
 
-1) After you complete the **Configure Shibboleth Account** form, click **Authenticate with Shibboleth**, which is at the bottom of the page.
+1. 在完成**配置 Shibboleth 帐户**表单后，单击页面底部的**启用 Shibboleth 认证**。
 
-   Rancher redirects you to the IdP login page. Enter credentials that authenticate with Shibboleth IdP to validate your Rancher Shibboleth configuration.
+   Rancher 将您重定向到 IdP 登录页面。输入通过 Shibboleth IdP 进行身份验证的凭据，以验证您的 Rancher Shibboleth 配置。
 
-   > **Note:** You may have to disable your popup blocker to see the IdP login page.
+   > **注意：** 您可能必须禁用阻止浏览器弹出窗口的程序才能查看 IdP 登录页面。
 
-**Result:** Rancher is configured to work with Shibboleth. Your users can now sign into Rancher using their Shibboleth logins.
+**结果：** Rancher 配置为可与 Shibboleth 一起使用。您的用户现在可以使用其 Shibboleth 登录名登录 Rancher。
 
-### SAML Provider Caveats
+### SAML 身份验证提供者警告
 
-If you configure Shibboleth without OpenLDAP, the following caveats apply due to the fact that SAML Protocol does not support search or lookup for users or groups.
+因为 SAML 协议不支持用户或用户组的搜索或查找，如果您没有使用 OpenLDAP 的配置 Shibboleth，则以下警告适用。
 
-- There is no validation on users or groups when assigning permissions to them in Rancher.
-- When adding users, the exact user IDs (i.e. UID Field) must be entered correctly. As you type the user ID, there will be no search for other user IDs that may match.
-- When adding groups, you must select the group from the drop-down that is next to the text box. Rancher assumes that any input from the text box is a user.
-- The group drop-down shows only the groups that you are a member of. You will not be able to add groups that you are not a member of.
+- 将用户或组添加到 Rancher 时不会对其进行验证。
 
-To enable searching for groups when assigning permissions in Rancher, you will need to configure a back end for the SAML provider that supports groups, such as OpenLDAP.
+- 添加用户时，必须正确输入确切的用户 ID（即`UID`字段）。键入用户 ID 时，将不会搜索可能匹配的其他用户 ID。
 
-# Setting up OpenLDAP in Rancher
+- 添加组时，必须从文本框旁边的下拉列表中选择组。Rancher 假定来自文本框的任何输入都是用户。
 
-If you also configure OpenLDAP as the back end to Shibboleth, it will return a SAML assertion to Rancher with user attributes that include groups. Then authenticated users will be able to access resources in Rancher that their groups have permissions for.
+- 添加组时，必须从文本框旁边的下拉列表中选择组。 Rancher 假定来自文本框的任何输入都是用户。
 
-### OpenLDAP Prerequisites
+- 用户组下拉列表仅显示您所属的用户组。您将无法添加您不是其成员的组。
 
-Rancher must be configured with a LDAP bind account (aka service account) to search and retrieve LDAP entries pertaining to users and groups that should have access. It is recommended to not use an administrator account or personal account for this purpose and instead create a dedicated account in OpenLDAP with read-only access to users and groups under the configured search base (see below).
+要在 Rancher 中分配权限时支持搜索组的功能，您需要为支持组的 SAML 身份验证提供者配置一个后端（例如 OpenLDAP）。
 
-> **Using TLS?**
+## 在 Rancher 中设置 OpenLDAP
+
+如果您将 OpenLDAP 配置为了 Shibboleth 的后端，它将返回一个 SAML 断言给 Rancher，其中包含用户的属性（其中包括用户所在的组的信息）。 然后，通过身份验证的用户将能够访问其所在的组有权访问的 Rancher 中的资源。
+
+### OpenLDAP 先决条件
+
+必须为 Rancher 配置 LDAP 绑定帐户（即服务帐户），以搜索和检索有权限访问的用户和用户组的 LDAP 条目。建议不要在这里使用管理员帐户或个人帐户，应该在 OpenLDAP 中创建一个专用帐户，该帐户对配置的 Search Base 下的用户和组具有只读访问权限（请参见下文）。
+
+> **使用 TLS?**
 >
-> If the certificate used by the OpenLDAP server is self-signed or not from a recognized certificate authority, make sure have at hand the CA certificate (concatenated with any intermediate certificates) in PEM format. You will have to paste in this certificate during the configuration so that Rancher is able to validate the certificate chain.
+> 如果 OpenLDAP 服务器使用的证书是自签名的，或者不是来自公认的证书颁发机构的，则请确保手头有 PEM 格式的 CA 证书（包括任何中间证书）。在配置过程中，您将必须粘贴此证书，以便 Rancher 能够验证证书链。
 
-### Configure OpenLDAP in Rancher
+### 在 Rancher 中配置 OpenLDAP
 
-Configure the settings for the OpenLDAP server, groups and users. For help filling out each field, refer to the [configuration reference.]({{<baseurl>}}/rancher/v2.x/en/admin-settings/authentication/openldap/openldap-config) Note that nested group membership is not available for Shibboleth.
+配置 OpenLDAP 服务器，组和用户的设置。有关填写每个字段的帮助，请参考[配置参考](/docs/admin-settings/authentication/openldap/openldap-config/_index)。注意，嵌套的组成员身份不适用于 Shibboleth。
 
-> Before you proceed with the configuration, please familiarise yourself with the concepts of [External Authentication Configuration and Principal Users]({{<baseurl>}}/rancher/v2.x/en/admin-settings/authentication/#external-authentication-configuration-and-principal-users).
+> 在进行配置之前，请阅读并了解[外部身份验证配置和用户主体](/docs/admin-settings/authentication/_index)
 
-1. Log into the Rancher UI using the initial local `admin` account.
-2. From the **Global** view, navigate to **Security** > **Authentication**
-3. Select **OpenLDAP**. The **Configure an OpenLDAP server** form will be displayed.
+1. 使用默认本地`admin`帐户登录 Rancher UI。
 
-# Troubleshooting
+2. 从**全局**视图中，导航到**安全 > 认证**。
 
-If you are experiencing issues while testing the connection to the OpenLDAP server, first double-check the credentials entered for the service account as well as the search base configuration. You may also inspect the Rancher logs to help pinpointing the problem cause. Debug logs may contain more detailed information about the error. Please refer to [How can I enable debug logging]({{<baseurl>}}/rancher/v2.x/en/faq/technical/#how-can-i-enable-debug-logging) in this documentation.
+3. 选择 **OpenLDAP**。将会显示**配置 OpenLDAP 服务器**表单。
+
+# 故障排除
+
+如果在测试 Rancher 与 OpenLDAP 服务器的连接时遇到问题，请首先仔细检查输入的服务帐户的凭据以及 Search Base 配置。您也可以检查 Rancher 日志以帮助查明问题原因。调试日志可能包含有关该错误的更多详细信息。请参阅本文档中的[如何启用 debug 级别日志](/docs/faq/technical/_index)。

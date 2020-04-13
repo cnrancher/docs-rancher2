@@ -9,7 +9,7 @@ _v2.0.7 版本可用_
 > **先决条件：**
 >
 > - 您必须配置一个[Ping IdP 服务器](https://www.pingidentity.com/)。
-> - 以下是 Rancher 服务提供商配置所需的 URLs：
+> - 以下是 Rancher 服务提供者配置所需的 URLs：
 >   - Metadata URL：`https://<rancher-server>/v1-saml/ping/saml/metadata`
 >   - Assertion Consumer Service(ACS) URL：`https://<rancher-server>/v1-saml/ping/saml/acs`
 > - 从 IdP 服务器导出元数据`metadata.xml`文件。有关更多信息，请参见[PingIdentity 文档](https://document.pingidentity.com/pingfederate/pf83/index.shtml#concept_exportingMetadata.html)。
@@ -48,9 +48,9 @@ _v2.0.7 版本可用_
 
 **结果：** Rancher 被配置为使用 PingIdentity 认证。您的用户现在可以使用他们的 PingIdentity 账号登录到 Rancher。
 
-> SAML 身份验证提供商警告：
+> SAML 身份验证提供者警告：
 >
 > - SAML 协议不支持搜索或查找用户或组。因此，将用户或组添加到 Rancher 时不会对其进行验证。
 > - 添加用户时，必须正确输入确切的用户 ID（即`UID`字段）。键入用户 ID 时，将不会搜索可能匹配的其他用户 ID。
 > - 添加组时，必须从文本框旁边的下拉列表中选择组。Rancher 假定来自文本框的任何输入都是用户。
->   - 群组下拉列表仅显示您所属的群组。您将无法添加您不是其成员的组。
+>   - 用户组下拉列表仅显示您所属的用户组。您将无法添加您不是其成员的组。

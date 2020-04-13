@@ -2,95 +2,95 @@
 title: OPA Gatekeeper
 ---
 
-_Available as of v2.4.0_
+_自 v2.4.0 起可用_
 
-> This is an experimental feature for the Rancher v2.4 release.
+> 这是 Rancher v2.4 版本的实验性功能。
 
-To ensure consistency and compliance, every organization needs the ability to define and enforce policies in its environment in an automated way. OPA [https://www.openpolicyagent.org/] (Open Policy Agent) is a policy engine that facilitates policy-based control for cloud native environments. Rancher provides the ability to enable OPA Gatekeeper in Kubernetes clusters, and also installs a couple of built-in policy definitions, which are also called constraint templates.
+为了确保一致性和合规性，每个组织都需要具有在其环境中定义和执行策略的能力。[OPA](https://www.openpolicyagent.org/)（Open Policy Agent）是一种策略引擎，可对云原生环境进行基于策略的控制。Rancher 提供了在 Kubernetes 集群中启用 OPA Gatekeeper 的功能，并且还安装了一些内置策略定义，也称为约束模板。
 
-OPA provides a high-level declarative language that lets you specify policy as code and ability to extend simple APIs to offload policy decision-making.
+OPA 提供了一种声明性语言，您可以使用代码来定义策略，并具有扩展简单 API 的能力以减轻策略决策的负担。
 
-[OPA Gatekeeper](https://github.com/open-policy-agent/gatekeeper) is a project that provides integration between OPA and Kubernetes. OPA Gatekeeper provides:
+[OPA Gatekeeper](https://github.com/open-policy-agent/gatekeeper) 是一个支持 OPA 与 Kubernetes 集成的项目。OPA Gatekeeper 提供：
 
-- An extensible, parameterized policy library.
-- Native Kubernetes CRDs for instantiating the policy library, also called “constraints."
-- Native Kubernetes CRDs for extending the policy library, also called "constraint templates."
-- Audit functionality.
+- 可扩展的参数化策略库。
+- 用于实例化策略库的原生 Kubernetes CRD，也称为“约束”。
+- 原生 Kubernetes CRD，用于扩展策略库，也称为“约束模板”。
+- 审核功能。
 
-To read more about OPA, please refer to the [official documentation.](https://www.openpolicyagent.org/docs/latest/)
+要了解有关 OPA 的更多信息，请参阅[官方文档](https://www.openpolicyagent.org/docs/latest/)。
 
-# How the OPA Gatekeeper Integration Works
+## OPA Gatekeeper 集成的工作方式
 
-Kubernetes provides the ability to extend API server functionality via admission controller webhooks, which are invoked whenever a resource is created, updated or deleted. Gatekeeper is installed as a validating webhook and enforces policies defined by Kubernetes custom resource definitions. In addition to the admission control usage, Gatekeeper provides the capability to audit existing resources in Kubernetes clusters and mark current violations of enabled policies.
+Kubernetes 提供通过准入控制器（Admission Controller）Webhooks 扩展 API Server 功能的能力。在创建，更新或删除资源时，Kubernetes 就会调用这些 Webhooks。 Gatekeeper 被作为验证 Webhook，并执行 Kubernetes CRD 中定义的策略。除了使用准入控制外，Gatekeeper 还提供了审核 Kubernetes 集群中现有资源并标记当前违反策略的功能。
 
-OPA Gatekeeper is made availale via Rancher's Helm system chart, and it is installed in a namespace named `gatekeeper-system.`
+Rancher 的 Helm System Chart 里包含了 OPA Gatekeeper。启用后，它将被安装到`gatekeeper-system`命名空间中。
 
-# Enabling OPA Gatekeeper in a Cluster
+## 在集群中启用 OPA Gatekeeper
 
-> **Prerequisites:**
+> **先决条件：**
 >
-> - Only administrators and cluster owners can enable OPA Gatekeeper.
-> - The dashboard needs to be enabled using the `dashboard` feature flag. For more information, refer to the [section on enabling experimental features.]({{<baseurl>}}/rancher/v2.x/en/installation/options/feature-flags/)
+> - 只有系统管理员和集群所有者才能启用 OPA Gatekeeper。
+> - 需要通过`dashboard`功能开关启用仪表板。有关更多信息，请参阅[启用实验性功能](/docs/installation/options/feature-flags/_index)的部分。
 
-1. Navigate to the cluster's **Dashboard** view.
-1. On the left side menu, expand the cluster menu and click on **OPA Gatekeeper.**
-1. To install Gatekeeper with the default configuration, click on **Enable Gatekeeper (v0.1.0) with defaults.**
-1. To change any default configuration, click on **Customize Gatekeeper yaml configuration.**
+1. 导航到集群的**仪表板**视图。
+1. 在左侧菜单上，展开集群菜单，然后单击**OPA Gatekeeper**。
+1. 要使用默认配置安装 Gatekeeper，请单击**启用具有默认设置的 Gatekeeper（v0.1.0）**。
+1. 要更改任何默认配置，请单击**自定义 Gatekeeper yaml 配置**。
 
-# Constraint Templates
+## 约束模板
 
-[Constraint templates](https://github.com/open-policy-agent/gatekeeper#constraint-templates) are Kubernetes custom resources that define the schema and Rego logic of the OPA policy to be applied by Gatekeeper. For more information on the Rego policy language, refer to the [official documentation.](https://www.openpolicyagent.org/docs/latest/policy-language/)
+[约束模板](https://github.com/open-policy-agent/gatekeeper#constraint-templates) 是 Kubernetes CRD，用于定义 Gatekeeper 将实施的 OPA 策略的结构和 Rego 逻辑。有关 Rego 策略语言的更多信息，请参阅[官方文档](https://www.openpolicyagent.org/docs/latest/policy-language/)。
 
-When OPA Gatekeeper is enabled, Rancher installs some templates by default.
+启用 OPA Gatekeeper 后，Rancher 会默认安装一些模板。
 
-To list the constraint templates installed in the cluster, go to the left side menu under OPA Gatekeeper and click on **Templates.**
+要列出集群中安装的约束模板，请转到 OPA Gatekeeper 下的左侧菜单，然后单击**模版**。
 
-Rancher also provides the ability to create your own constraint templates by importing YAML definitions.
+Rancher 还支持通过导入 YAML 文件的方式来创建自己的约束模板。
 
-# Creating and Configuring Constraints
+## 创建和配置约束
 
-[Constraints](https://github.com/open-policy-agent/gatekeeper#constraints) are Kubernetes custom resources that define the scope of objects to which a specific constraint template applies to. The complete policy is defined by constraint templates and constraints together.
+[约束](https://github.com/open-policy-agent/gatekeeper#constraints)是 Kubernetes CRD，用于定义在什么范围内实施特定约束模板。完整的策略由约束模板和约束共同定义。
 
-> **Prerequisites:** OPA Gatekeeper must be enabled in the cluster.
+> **先决条件：** 必须在集群中启用 OPA Gatekeeper。
 
-To list the constraints installed, go to the left side menu under OPA Gatekeeper, and click on **Constraints.**
+要列出已安装的约束，请转到 OPA Gatekeeper 下的左侧菜单，然后单击**约束**。
 
-New constraints can be created from a constraint template.
+可以从约束模板创建新约束。
 
-Rancher provides the ability to create a constraint by using a convenient form that lets you input the various constraint fields.
+Rancher 提供了通过表单的形式创建约束的能力，该形式使您可以输入各种约束字段。（在 2.4.2 中，两个默认的约束模版需要数组类型的参数，由于仪表盘目前不支持数组的参数，所以请使用 YAML 使用 Rancher 的两个默认约束模版）。
 
-The **Edit as yaml** option is also availble to configure the the constraint's yaml definition.
+还可以使用**编辑 YAML** 选项来配置约束的 YAML 定义。
 
-### Exempting Rancher's System Namespaces from Constraints
+### 确保 Rancher 的系统命名空间不受约束
 
-When a constraint is created, ensure that it does not apply to any Rancher or Kubernetes system namespaces. If the system namespaces are not excluded, then it is possible to see many resources under them marked as violations of the constraint.
+创建约束后，请确保它不适用于任何 Rancher 或 Kubernetes 系统命名空间。如果不排除系统命名空间，则可能会看到其下的许多资源都被标记为违反了约束。
 
-To limit the scope of the constraint only to user namespaces, always specify these namespaces under the **Match** field of the constraint.
+要仅将约束的范围限制为用户命名空间，请始终在约束的**匹配**字段下指定这些命名空间。
 
-Also, the constraint may interfere with other Rancher functionality and deny system workloads from being deployed. To avoid this, exclude all Rancher-specific namespaces from your constraints.
+同样，该约束可能会干扰其他 Rancher 功能并阻止系统工作负载的部署。为了避免这种情况，请从约束中排除所有 Rancher 专用的命名空间。
 
-# Enforcing Constraints in your Cluster
+## 在集群中实施约束
 
-When the **Enforcement Action** is **Deny,** the constraint is immediately enabled and will deny any requests that violate the policy defined. By default, the enforcement value is **Deny.**
+当**强制执行措施**为**拒绝**时，该约束将立即启用，并将拒绝任何违反已定义策略的请求。默认情况下，强制值为**拒绝**。
 
-When the **Enforcement Action** is **Dryrun,** then any resources that violate the policy are only recorded under the constraint's status field.
+当**强制执行措施**为**试运行**时，则任何违反策略的资源都将仅记录在约束的状态字段下。
 
-To enforce constraints, create a constraint using the form. In the **Enforcement Action** field, choose **Deny.**
+要强制执行约束，请使用表单创建约束。在**强制执行措施**字段中，选择**拒绝**。
 
-# Audit and Violations in your Cluster
+## 集群中的审核和违规
 
-OPA Gatekeeper runs a periodic audit to check if any existing resource violates any enforced constraint. The audit-interval (default 300s) can be configured while installing Gatekeeper.
+OPA Gatekeeper 会定期对集群进行审核，以检查是否有任何现有资源违反任何强制约束。启用 Gatekeeper 时可以配置`audit-interval`（默认值为 300s）。
 
-On the Gatekeeper page, any violations of the defined constraints are listed.
+在 Gatekeeper 页面上，列出了所有违反约束的情况。
 
-Also under **Constraints,** the number of violations of the constraint can be found.
+同样在**约束**下，可以找到违反约束的次数。
 
-The detail view of each constraint lists information about the resource that violated the constraint.
+每个约束的详细信息视图列出了有关违反约束的资源的信息。
 
-# Disabling Gatekeeper
+## 禁用 OPA Gatekeeper
 
-1. Navigate to the cluster's Dashboard view
-1. On the left side menu, expand the cluster menu and click on **OPA Gatekeeper.**
-1. Click the **&#8942; > Disable**.
+1. 导航到集群的仪表板视图
+1. 在左侧菜单上，展开集群菜单，然后单击**OPA Gatekeeper**。
+1. 点击 **省略号 > 禁用**。
 
-**Result:** Upon disabling OPA Gatekeeper, all constraint templates and constraints will also be deleted.
+**结果：** 禁用 OPA Gatekeeper 后，所有约束模板和约束也将被删除。

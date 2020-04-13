@@ -1,34 +1,34 @@
 ---
-title: Setting up a MySQL Database in Amazon RDS
-weight: 290
+title: 在 Amazon RDS 中创建 MySQL 数据库
 ---
-This tutorial describes how to set up a MySQL database in Amazon's RDS.
 
-This database can later be used as an external datastore for a high-availability K3s Kubernetes cluster.
+本教程介绍了如何在 Amazon RDS 中创建 MySQL 数据库。
 
-1. Log into the [Amazon AWS RDS Console](https://console.aws.amazon.com/rds/) to get started. Make sure to select the **Region** where your EC2 instances (Linux nodes) are created.
-1. In the left panel, click **Databases.**
-1. Click **Create database.**
-1. In the **Engine type** section, click **MySQL.**
-1. In the **Version** section, choose **MySQL 5.7.22.**
-1. In **Settings** section, under **Credentials Settings,** enter a master password for the **admin** master username. Confirm the password.
-1. Expand the **Additional configuration** section. In the **Initial database name** field, enter a name. The name can have only letters, numbers, and underscores. This name will be used to connect to the database.
-1. Click **Create database.**
+该数据库可以用作高可用 K3s Kubernetes 集群的外部数据存储。
 
-You'll need to capture the following information about the new database so that the K3s Kubernetes cluster can connect to it.
+1. 登录[Amazon AWS RDS 控制台](https://console.aws.amazon.com/rds/)。选择创建的 EC2 实例（Linux 节点）所在的**区域**。
+1. 在左侧面板中，单击**数据库**。
+1. 单击**创建数据库**。
+1. 在**引擎选项**部分中，单击 **MySQL**。
+1. 在**版本**部分中，选择 **MySQL 5.7.22**。
+1. 在**设置**部分的**凭据设置**下，输入**admin**主用户名的密码。确认密码。
+1. 展开**其他配置**部分。在**初始数据库名称**字段中，输入名称。名称只能包含字母，数字和下划线。该名称将用于连接数据库。
+1. 单击**创建数据库**。
 
-To see this information in the Amazon RDS console, click **Databases,** and click the name of the database that you created.
+您需要获取有关新数据库的以下信息，以便 K3s Kubernetes 集群可以连接到该数据库。
 
-- **Username:** Use the admin username.
-- **Password:** Use the admin password.
-- **Hostname:** Use the **Endpoint** as the hostname. The endpoint is available in the **Connectivity & security** section.
-- **Port:** The port should be 3306 by default. You can confirm it in the **Connectivity & security** section.
-- **Database name:** Confirm the name by going to the **Configuration** tab. The name is listed under **DB name.**
+要在 Amazon RDS 控制台中查看此信息，请单击**数据库**，然后单击您创建的数据库的名称。
 
-This information will be used to connect to the database in the following format:
+- **用户名：** 使用的管理员用户名。
+- **密码：** 使用的管理员密码。
+- **主机名：** 使用**端点**作为主机名。端点可以在**连接性和安全性**部分中找到。
+- **端口：** 默认情况下，端口应为 3306。您可以在**连接性和安全性**部分中进行确认。
+- **数据库名称：** 转到**配置**选项卡，确认名称。该名称列在**数据库名称**下。
+
+请将以上信息替换到下面的数据库连接字符串中：
 
 ```
 mysql://username:password@tcp(hostname:3306)/database-name
 ```
 
-For more information on configuring the datastore for K3s, refer to the [K3s documentation.]({{<baseurl>}}/k3s/latest/en/installation/datastore/)
+有关为 K3s 配置数据存储的更多信息，请参考 [K3s 文档](https://rancher.com/docs/k3s/latest/en/installation/datastore/)。
