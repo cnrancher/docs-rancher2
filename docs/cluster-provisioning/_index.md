@@ -60,6 +60,23 @@ Rancher 可以在 Amazon EC2、DigitalOcean、Azure、阿里云 或 vSphere 等�
 
 在这种类型的集群中，Rancher 可以连接到一个已经建立好的 Kubernetes 集群。因此，Rancher 不提供 Kubernetes，只设置 Rancher Agent 来与集群通信。
 
-请注意，在这种情况下，Rancher 不能自动启动、缩放或升级您的导入集群。所有其他 Rancher 特性，包括集群管理、策略管理和工作负载管理等，都可用于导入的集群。
+请注意，在这种情况下，Rancher 不能自动启动、缩放或升级您的导入集群。所有其他 Rancher 特性，包括集群管理、基于角色的权限控制、策略管理和工作负载管理等，都可用于导入的集群。
+
+对于除 K3s 集群外的所有导入的 Kubernetes 集群，必须在 Rancher 外部编辑导入的集群的配置。例如添加和删除节点，升级 Kubernetes 版本以及更改 Kubernetes 组件参数等。
+
+在 Rancher v2.4 中，可以通过在 Rancher UI 中编辑导入的 K3s 集群，来升级它的 Kubernetes 版本。
 
 有关更多信息，请参阅[导入现有集群](/docs/cluster-provisioning/imported-clusters/_index)一节。
+
+### 导入并编辑 K3s 集群
+
+_自 Rancher v2.4.0 起可用_
+
+[K3s](https://rancher.com/docs/k3s/latest/en/)是轻量级的，完全兼容的 Kubernetes 发行版。现在可以将 K3s Kubernetes 集群导入 Rancher。
+
+导入 K3s 集群时，Rancher 会将其识别为 K3s，Rancher UI 将支持全部的导入集群功能，并且针对 K3s 还将提供以下额外功能：
+
+- 在 UI 中升级 K3s 版本
+- 在 UI 中查看（只读）集群中每个节点的 K3s 配置参数和环境变量。
+
+有关更多信息，请参阅[导入现有 K3s 集群](/docs/cluster-provisioning/imported-clusters/_index)一节。

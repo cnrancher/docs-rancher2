@@ -1,5 +1,5 @@
 ---
-title: 直接通过用户集群（不经过 Rancher）进行认证的原理
+title: 直接通过下游集群（不经过 Rancher）进行认证的原理
 ---
 
 本节介绍 kubectl CLI、kubeconfig 文件和授权的集群终端如何协同工作，从而允许您直接访问下游的 Kubernetes 集群，而无需通过 Rancher 服务器进行身份验证。它的目的是为[如何设置 kubectl 来直接访问集群](/docs/cluster-admin/cluster-access/kubectl/_index)提供背景信息和上下文的指示。
@@ -30,7 +30,7 @@ _kubeconfig 文件_ 是一个当与 kubectl 命令行工具(或其他客户端)�
 
 ## 关于 kube-api-auth 认证 Webhook
 
-部署 `kube-api-auth` 微服务是为了为[已授权的集群端点](/docs/overview/architecture/_index)提供用户身份验证功能，该功能仅对[RKE 集群](/docs/cluster-provisioning/rke-clusters/_index)可用。当您使用 `kubectl`, 访问用户集群时，集群的 Kubernetes API 服务器将使用 `kube-api-auth` 务作为 webhook 对您进行身份验证。
+部署 `kube-api-auth` 微服务是为了为[已授权的集群端点](/docs/overview/architecture/_index)提供用户身份验证功能，该功能仅对[RKE 集群](/docs/cluster-provisioning/rke-clusters/_index)可用。当您使用 `kubectl`, 访问下游集群时，集群的 Kubernetes API 服务器将使用 `kube-api-auth` 务作为 webhook 对您进行身份验证。
 
 在集群创建过程中, `/etc/kubernetes/kube-api-authn-webhook.yaml` 文件被部署，而且 `kube-apiserver` 配置了 `--authentication-token-webhook-config-file=/etc/kubernetes/kube-api-authn-webhook.yaml`. 这将 `kube-apiserver` 配置为查询 `http://127.0.0.1:6440/v1/authenticate` 以确定 bearer tokens 的身份验证。
 

@@ -2,30 +2,27 @@
 title: Amazon
 ---
 
-When using the `Amazon` cloud provider, you can leverage the following capabilities:
+使用`Amazon`Cloud Provider 时，您可以使用以下功能:
 
-- **Load Balancers:** Launches an AWS Elastic Load Balancer (ELB) when choosing `Layer-4 Load Balancer` in **Port Mapping** or when launching a `Service` with `type: LoadBalancer`.
-- **Persistent Volumes**: Allows you to use AWS Elastic Block Stores (EBS) for persistent volumes.
+- **负载均衡：** 在**端口映射**中选择`4 层负载均衡`时或在启动带有`type: LoadBalancer`的`Service`时，自动启动 AWS Elastic Load Balancer(ELB)。
+- **持久卷：** 允许您将 AWS Elastic Block Store(EBS) 用于持久卷。
 
-See [cloud-provider-aws README](https://github.com/kubernetes/cloud-provider-aws/blob/master/README.md) for all information regarding the Amazon cloud provider.
+请参阅 [Cloud Provider AWS 自述文档](https://github.com/kubernetes/cloud-provider-aws/blob/master/README.md)获取有关 Amazon Cloud Provider 的所有信息。
 
-To set up the Amazon cloud provider,
+设置 Amazon Cloud Provider。
 
-1. [Create an IAM role and attach to the instances](#1-create-an-iam-role-and-attach-to-the-instances)
-2. [Configure the ClusterID](#2-configure-the-clusterid)
+## 1、创建 IAM 角色并附加到实例
 
-### 1. Create an IAM Role and attach to the instances
+添加到集群的所有节点必须能够与 EC2 交互，以便它们可以创建和删除资源。您可以使用附加到实例的 IAM 角色来启用此交互。请参阅[Amazon 文档：创建 IAM Role](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#create-iam-role)了解如何创建 IAM 角色。有两个示例策略：
 
-All nodes added to the cluster must be able to interact with EC2 so that they can create and remove resources. You can enable this interaction by using an IAM role attached to the instance. See [Amazon documentation: Creating an IAM Role](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#create-iam-role) how to create an IAM role. There are two example policies:
+- 第一个策略是针对具有`controlplane`角色的节点。这些节点必须能够创建/删除 EC2 资源。下面的 IAM 策略是一个例子，请在例子中删除任何不需要的权限。
+- 第二个策略是针对具有`etcd`或`worker`角色的节点。这些节点只需要能够从 EC2 检索信息。
 
-- The first policy is for the nodes with the `controlplane` role. These nodes have to be able to create/remove EC2 resources. The following IAM policy is an example, please remove any unneeded permissions for your use case.
-- The second policy is for the nodes with the `etcd` or `worker` role. These nodes only have to be able to retrieve information from EC2.
+创建 [Amazon EC2 集群](/docs/cluster-provisioning/rke-clusters/node-pools/ec2/_index)时，必须在创建**节点模板**时填写创建的 IAM 角色的**Iam 实例配置文件名称**（而不是 ARN）。
 
-While creating an [Amazon EC2 cluster]({{<baseurl>}}/rancher/v2.x/en/cluster-provisioning/rke-clusters/node-pools/ec2/#create-the-amazon-ec2-cluster), you must fill in the **IAM Instance Profile Name** (not ARN) of the created IAM role when creating the **Node Template**.
+创建[自定义集群](/docs/cluster-provisioning/custom-clusters/_index)时，必须手动将 IAM 角色附加到实例。
 
-While creating a [Custom cluster]({{<baseurl>}}/rancher/v2.x/en/cluster-provisioning/custom-clusters/), you must manually attach the IAM role to the instance(s).
-
-IAM Policy for nodes with the `controlplane` role:
+具有`controlplane`角色的节点的 IAM 策略:
 
 ```json
 {
@@ -95,7 +92,7 @@ IAM Policy for nodes with the `controlplane` role:
 }
 ```
 
-IAM policy for nodes with the `etcd` or `worker` role:
+具有`etcd`或`worker`角色的节点的 IAM 策略:
 
 ```json
 {
@@ -120,28 +117,32 @@ IAM policy for nodes with the `etcd` or `worker` role:
 }
 ```
 
-### 2. Configure the ClusterID
+## 2、配置 ClusterID
 
-The following resources need to tagged with a `ClusterID`:
+以下资源需要标记上`ClusterID`:
 
-- **Nodes**: All hosts added in Rancher.
-- **Subnet**: The subnet used for your cluster.
-- **Security Group**: The security group used for your cluster.
+- **节点**：在 Rancher 中添加的所有主机。
+- **子网**：用于集群的子网
+- **安全组**：用于集群的安全组。
 
-> **Note:** Do not tag multiple security groups. Tagging multiple groups generates an error when creating an Elastic Load Balancer (ELB).
+  > **注意：** 不要标记多个安全组。创建弹性负载均衡器时，标记多个组会产生错误。
 
-When you create an [Amazon EC2 Cluster]({{<baseurl>}}/rancher/v2.x/en/cluster-provisioning/rke-clusters/node-pools/ec2/#create-the-amazon-ec2-cluster), the `ClusterID` is automatically configured for the created nodes. Other resources still need to be tagged manually.
+创建 [Amazon EC2 集群](/docs/cluster-provisioning/rke-clusters/node-pools/ec2/_index)时，Rancher 将为创建的节点自动设置`ClusterID`。其他资源仍然需要手动标记。
 
-Use the following tag:
+应该使用的标签是:
 
-**Key** = `kubernetes.io/cluster/CLUSTERID` **Value** = `owned`
+```
+Key=kubernetes.io/cluster/<CLUSTERID>, Value=owned
+```
 
-`CLUSTERID` can be any string you like, as long as it is equal across all tags set.
+`<CLUSTERID>`可以是您选择的任何字符串。但是，必须在您标记的每个资源上使用相同的字符串。
 
-Setting the value of the tag to `owned` tells the cluster that all resources with this tag are owned and managed by this cluster. If you share resources between clusters, you can change the tag to:
+将标记值设置为`owned`会通知集群，使用`<CLUSTERID>`标记的所有资源都由该集群拥有和管理。如果在集群之间共享资源，则可以将标记更改为:
 
-**Key** = `kubernetes.io/cluster/CLUSTERID` **Value** = `shared`.
+```
+Key=kubernetes.io/cluster/CLUSTERID, Value=shared
+```
 
-### Using Amazon Elastic Container Registry (ECR)
+## 使用 Amazon Elastic Container Registry (ECR)
 
-The kubelet component has the ability to automatically obtain ECR credentials, when the IAM profile mentioned in [Create an IAM Role and attach to the instances](#1-create-an-iam-role-and-attach-to-the-instances) is attached to the instance(s). When using a Kubernetes version older than v1.15.0, the Amazon cloud provider needs be configured in the cluster. Starting with Kubernetes version v1.15.0, the kubelet can obtain ECR credentials without having the Amazon cloud provider configured in the cluster.
+将上面提到的 IAM 配置文件附加到实例时，kubelet 组件能够自动获取 ECR 凭据。当使用早于 v1.15.0 的 Kubernetes 版本时，需要在集群中配置 Amazon Cloud Provider。从 Kubernetes 版本 v1.15.0 开始，kubelet 可以自动获取 ECR 凭据，而无需在集群中配置 Amazon Cloud Provider。

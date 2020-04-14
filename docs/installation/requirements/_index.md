@@ -5,7 +5,7 @@ title: 具体要求
 这个页面描述了安装 Rancher Server 节点的软件，硬件和网络要求。Rancher Server 可以安装在单个节点或高可用的 Kubernetes 集群上。
 
 :::important 注意
-这是对安装 Rancher Server 的节点的要求。如果您要创建用来运行您自己的应用的集群，请参阅[用户集群的节点要求](/docs/cluster-provisioning/node-requirements/_index)。
+这是对安装 Rancher Server 的节点的要求。如果您要创建用来运行您自己的应用的集群，请参阅[下游集群的节点要求](/docs/cluster-provisioning/node-requirements/_index)。
 :::
 
 请确保 Rancher Server 的节点满足以下要求:
@@ -89,7 +89,7 @@ Rancher 的性能取决于 etcd 在集群中的性能。为了确保最佳速度
 
 端口要求会有所不同，这取决于您是单节点安装还是高可用安装。
 
-- **对于 Docker 单节点**，您只需要开放使 Rancher 能够与下游用户集群通信所需的端口即可。
+- **对于 Docker 单节点**，您只需要开放使 Rancher 能够与下游集群通信所需的端口即可。
 - **对于高可用安装**，需要开放相同的端口，以及 Rancher Server 所安在的 Kubernetes 集群所需的其他端口。
 
 ### RKE 高可用安装的端口要求

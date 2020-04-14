@@ -174,7 +174,7 @@ helm upgrade rancher rancher-<CHART_REPO>/rancher \
 
 登录到 Rancher。通过检查浏览器窗口左下角显示的版本，确认升级成功.
 
-> **升级后您的用户集群中有网络问题吗？**
+> **升级后您的下游集群中有网络问题吗？**
 >
 > 如果您是从 v2.0.6 或更旧的版本升级上来的，请参阅[还原集群网络](/docs/upgrades/upgrades/namespace-migration/_index)。
 

@@ -2,18 +2,18 @@
 title: Google
 ---
 
-In this section, you'll learn how to enable the Google Compute Engine (GCE) cloud provider for custom clusters in Rancher. A custom cluster is one in which Rancher installs Kubernetes on existing nodes.
+在本部分中，您将学习如何为 Rancher 中的自定义集群启用 Google Compute Engine（GCE）Cloud Provider。在自定义集群中，Ranche 可以将 Kubernetes 集群安装在现有节点上。
 
-The official Kubernetes documentation for the GCE cloud provider is [here.](https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/#gce)
+GCE Cloud Provider 的官方 Kubernetes 文档在[此处](https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/#gce)。
 
-> **Prerequisites:** The service account of `Identity and API` access on GCE needs the `Computer Admin` permission.
+> **前提条件：** GCE 上 的 `Identity and API` 服务账号需要 `Computer Admin` 权限。
 
-If you are using Calico,
+如果您使用 Calico，
 
-1. Go to the cluster view in the Rancher UI, and click **&#8942; > Edit.**
-1. Click **Edit as YAML,** and enter the following configuration:
+1. 转到 Rancher UI 中的集群视图，然后单击 **省略号 >编辑**。
+1. 单击**编辑 YAML**，然后输入以下配置：
 
-   ```
+   ```yaml
    rancher_kubernetes_engine_config:
      cloud_provider:
        name: gce
@@ -26,16 +26,16 @@ If you are using Calico,
          node-tags=<your network tags, must patch one or some tags, required>
      network:
        options:
-         calico_cloud_provider: "gce"
-       plugin: "calico"
+         calico_cloud_provider: 'gce'
+       plugin: 'calico'
    ```
 
-If you are using Canal or Flannel,
+如果您使用 Canal 或 Flannel，
 
-1. Go to the cluster view in the Rancher UI, and click **&#8942; > Edit.**
-1. Click **Edit as YAML,** and enter the following configuration:
+1. 转到 Rancher UI 中的集群视图，然后单击 **省略号 >编辑**。
+1. 单击**编辑 YAML**，然后输入以下配置：
 
-   ```
+   ```yaml
    rancher_kubernetes_engine_config:
      cloud_provider:
        name: gce

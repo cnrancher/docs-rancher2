@@ -2,7 +2,7 @@
 title: AWS 快速部署
 ---
 
-以下步骤将在 DigitalOcean 上创建一个单节点的 RKE Kubernetes 集群，并在其中部署 Rancher Server，并附加一个单节点的下游 Kubernetes 集群。
+以下步骤将在 Amazon AWS 上创建一个单节点的 RKE Kubernetes 集群，并在其中部署 Rancher Server，并附加一个单节点的下游 Kubernetes 集群。
 
 ## 先决条件
 

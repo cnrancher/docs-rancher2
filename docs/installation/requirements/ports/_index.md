@@ -6,9 +6,44 @@ title: 端口要求
 
 ## Rancher 节点
 
-下表列出了使用[单节点安装](/docs/installation/single-node-install/_index)的 Rancher server 容器的节点与[高可用安装](/docs/installation/k8s-install/_index)的节点之间需要开放的端口。
+下表列出了运行 Rancher Server 的节点之间需要打开的端口。
 
-### RKE 高可用安装的端口要求
+端口要求因 Rancher 是安装在 K3s Kubernetes 集群，RKE Kubernetes 集群还是单个 Docker 容器中而异。
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+defaultValue="k3s"
+values={[
+{ label: 'K3s', value: 'k3s', },
+{ label: 'RKE', value: 'rke', },
+{ label: 'Docker', value: 'docker', },
+]}>
+
+<TabItem value="k3s">
+
+K3s Server 需要开放 6443 端口供节点访问。
+
+使用 Flannel VXLAN 时，这些节点需要能够通过 UDP 端口 8472 访问其他节点。节点不应侦听其他端口。K3s 使用反向隧道，建立节点与服务器的出站连接，所有 kubelet 通信都通过该隧道进行。但是，如果您不使用 Flannel，而是使用自定义的 CNI，则 K3s 不需要 8472 端口。
+
+如果要使用指标服务器（Metrics Server），则需要在每个节点上打开端口 10250。
+
+> **重要：** 节点上的 VXLAN 端口不应暴露给外界，因为这会开放集群网络，任何人都可以访问它。请在禁止访问 8472 端口的防火墙/安全组后面运行节点。
+
+<figcaption> Rancher Server 节点的入站规则</figcaption>
+
+| 协议 | 端口  | 源                       | 描述               |
+| ---- | ----- | ------------------------ | ------------------ |
+| TCP  | 6443  | K3s server 节点          | Kubernetes API     |
+| UDP  | 8472  | K3s server 和 agent 节点 | Flannel VXLAN 需要 |
+| TCP  | 10250 | K3s server 和 agent 节点 | kubelet            |
+
+通常情况下，可以允许全部出站流量。
+
+</TabItem>
+
+<TabItem value="rke">
 
 <figcaption>Rancher 节点的入站规则</figcaption>
 
@@ -26,7 +61,9 @@ title: 端口要求
 | TCP  | 2376         | 使用主机驱动创建的节点中的任何节点 IP                    | Docker Machine 使用的 Docker 守护进程的 TLS 端口 |
 | TCP  | 取决于供应商 | 托管集群的 Kubernetes API 端口                           | Kubernetes API                                   |
 
-### 单节点安装的端口要求
+</TabItem>
+
+<TabItem value="docker">
 
 <figcaption>Rancher 节点的入站规则</figcaption>
 
@@ -44,9 +81,19 @@ title: 端口要求
 | TCP  | 2376         | 使用主机驱动创建的节点中的任何节点 IP                    | Docker Machine 使用的 Docker 守护进程的 TLS 端口 |
 | TCP  | 取决于供应商 | 托管集群的 Kubernetes API 端口                           | Kubernetes API                                   |
 
-**注意** 如果您配置了的外部[身份验证系统](/docs/admin-settings/authentication/_index)（例如 LDAP），Rancher 节点可能还需要其他出站规则。
+</TabItem>
+
+</Tabs>
+
+> **注意：**
+>
+> - 如果您配置了的外部[身份验证系统](/docs/admin-settings/authentication/_index)（例如 LDAP），Rancher 节点可能还需要其他出站规则。
+> - Kubernetes 建议将 TCP 30000-32767 用于节点端口服务（NodePort svc）。
+> - 可能需要对防火墙进行配置，启用在集群和 Pod CIDR 中的流量。
 
 ## 下游 Kubernetes 集群节点
+
+下游 Kubernetes 集群可运行您的业务应用。本节介绍需要在下游集群中的节点上打开哪些端口，以便 Rancher 可以与它们进行通信。
 
 集群节点需要开放的端口会根据集群的启动方式而变化。下面列出了需要为不同[集群创建类型](/docs/cluster-provisioning/_index)开放的端口。
 
