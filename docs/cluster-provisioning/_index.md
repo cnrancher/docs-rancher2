@@ -58,10 +58,6 @@ Rancher 可以在 Amazon EC2、DigitalOcean、Azure、阿里云 或 vSphere 等�
 
 ## 导入现有 Kubernetes 集群
 
-请注意，在这种情况下，Rancher 不能自动启动、缩放或升级您的导入集群。所有其他 Rancher 特性，包括集群管理、策略管理和工作负载管理等，都可用于导入的集群。
-
-## 导入现有 Kubernetes 集群
-
 在这种类型的集群中，Rancher 可以连接到一个已经建立好的 Kubernetes 集群。因此，Rancher 不提供 Kubernetes，只设置 Rancher Agent 来与集群通信。
 
 请注意，在这种情况下，Rancher 不能自动启动、缩放或升级您的导入集群。所有其他 Rancher 特性，包括集群管理、基于角色的权限控制、策略管理和工作负载管理等，都可用于导入的集群。
