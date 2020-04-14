@@ -1,12 +1,12 @@
 ---
-title: 用户集群节点要求
+title: 下游集群节点要求
 ---
 
 本页描述了安装您的应用和服务所在节点的要求。
 
-在本章节，`用户集群` 是指运行您的应用程序的集群，它应该与运行 Rancher Server 的集群（或单个节点）分开。
+在本章节，`下游集群` 是指运行您的应用程序的集群，它应该与运行 Rancher Server 的集群（或单个节点）分开。
 
-> 如果 Rancher 安装在 Kubernetes 集群上，Rancher Server 集群和用户集群有不同的要求。有关 Rancher Server 安装要求，请参阅[高可用安装要求](/docs/installation/requirements/_index)。
+> 如果 Rancher 安装在 Kubernetes 集群上，Rancher Server 集群和下游集群有不同的要求。有关 Rancher Server 安装要求，请参阅[高可用安装要求](/docs/installation/requirements/_index)。
 
 请确保 Rancher Server 的节点满足以下要求。
 
@@ -48,7 +48,7 @@ Windows 节点只能用于工作节点。详情请参阅[配置自定义 Windows
 
 对于生产集群，我们建议您仅开放下文端口要求中定义的端口来限制流量。
 
-需要开放的端口根据用户集群的启动方式而有所不同。下面的每个部分列出了在不同的[集群创建选项](/docs/cluster-provisioning/_index)下需要开放的端口。
+需要开放的端口根据下游集群的启动方式而有所不同。下面的每个部分列出了在不同的[集群创建选项](/docs/cluster-provisioning/_index)下需要开放的端口。
 
 有关 kubernetes 集群中 etcd 节点、controlplane 节点和 worker 节点的端口要求的详细信息，请参阅 [Rancher Kubernetes Engine 的端口要求](https://rancher.com/docs/rke/latest/en/os/#ports)。
 

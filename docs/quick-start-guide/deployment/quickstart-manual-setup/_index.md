@@ -23,7 +23,7 @@ title: 手动快速部署
   >
   > 如果您使用的是云端虚拟机，请开放 80 端口和 443 端口的流入流量，详情请参考云服务提供商的文档。
   >
-  > 有关业务集群的端口的详细要求，请参考[用户集群节点要求](/docs/cluster-provisioning/node-requirements/_index)。
+  > 有关业务集群的端口的详细要求，请参考[下游集群节点要求](/docs/cluster-provisioning/node-requirements/_index)。
 
   请按照[具体要求](/docs/installation/requirements/_index)配置 Linux 主机。
 

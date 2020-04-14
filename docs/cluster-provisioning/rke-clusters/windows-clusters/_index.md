@@ -16,7 +16,7 @@ _从 v2.3.0 开始支持_
 
 ## Windows 集群要求
 
-对于自定义集群，网络，操作系统和 Docker 的一般节点要求与[用户集群的节点要求](/docs/cluster-provisioning/node-requirements/_index)相同。
+对于自定义集群，网络，操作系统和 Docker 的一般节点要求与[下游集群的节点要求](/docs/cluster-provisioning/node-requirements/_index)相同。
 
 ### 操作系统和 Docker
 
