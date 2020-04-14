@@ -13,7 +13,7 @@ GCE Cloud Provider 的官方 Kubernetes 文档在[此处](https://kubernetes.io/
 1. 转到 Rancher UI 中的集群视图，然后单击 **省略号 >编辑**。
 1. 单击**编辑 YAML**，然后输入以下配置：
 
-   ```
+   ```yaml
    rancher_kubernetes_engine_config:
      cloud_provider:
        name: gce
@@ -26,8 +26,8 @@ GCE Cloud Provider 的官方 Kubernetes 文档在[此处](https://kubernetes.io/
          node-tags=<your network tags, must patch one or some tags, required>
      network:
        options:
-         calico_cloud_provider: "gce"
-       plugin: "calico"
+         calico_cloud_provider: 'gce'
+       plugin: 'calico'
    ```
 
 如果您使用 Canal 或 Flannel，
@@ -35,7 +35,7 @@ GCE Cloud Provider 的官方 Kubernetes 文档在[此处](https://kubernetes.io/
 1. 转到 Rancher UI 中的集群视图，然后单击 **省略号 >编辑**。
 1. 单击**编辑 YAML**，然后输入以下配置：
 
-   ```
+   ```yaml
    rancher_kubernetes_engine_config:
      cloud_provider:
        name: gce
