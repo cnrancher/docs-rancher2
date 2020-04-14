@@ -4,8 +4,6 @@ title: 通知
 
 通知服务是通知您告警事件的服务。您可以配置通知服务，以将告警通知发送给最适合采取措施的人员。
 
-通知程序是在集群级别配置的。可确保仅集群所有者需要配置通知程序，而项目所有者则可以仅在其项目范围内使用已经定义好的通知作为告警接收者。无需考虑 SMTP 服务器访问或云帐户访问权限等问题。
-
 Rancher 集成了多种流行的通知服务，包括：
 
 - **Slack**： 将告警通知发送到您的 Slack 频道。
@@ -13,6 +11,10 @@ Rancher 集成了多种流行的通知服务，包括：
 - **PagerDuty**： 通过电话，短信或个人电子邮件将告警发送给员工。
 - **WebHooks**： 将告警发送到 Webhook 服务器。
 - **WeChat**： 向您的企业微信联系人发送告警通知。
+
+## 基于角色的访问控制
+
+通知程序是在集群级别配置的。可确保仅集群所有者需要配置通知程序，而项目所有者则可以仅在其项目范围内使用已经定义好的通知作为告警接收者。无需考虑 SMTP 服务器访问或云帐户访问权限等问题。
 
 ## 添加通知接收者
 
@@ -46,10 +48,10 @@ Rancher 集成了多种流行的通知服务，包括：
    - PagerDuty
 
      1. 输入通知接收者的**名称**。
-     1. 从 PagerDuty 创建一个 Webhook。有关说明，请参阅 [PagerDuty 文档](https://support.pagerduty.com/docs/webhooks)。
-     1. 从 PagerDuty 中，复制 Webhook 的 **Integration Key**。
+     1. 从 PagerDuty 创建一个 Prometheus 集成。有关说明，请参阅 [PagerDuty 文档](https://www.pagerduty.com/docs/guides/prometheus-integration-guide/)。
+     1. 从 PagerDuty 中，复制 Prometheus 集成的 **Integration Key**。
      1. 在 Rancher 中，在 **Service Key** 中输入密钥。
-     1. 点击 **测试**。如果测试成功，则您的 PagerDuty 端点将输出 `PageDuty setting validated`.
+     1. 点击 **测试**。如果测试成功，则您的 PagerDuty 端点将输出 `PagerDuty setting validated`.
 
    - WebHook
 
@@ -71,13 +73,6 @@ Rancher 集成了多种流行的通知服务，包括：
 
 **结果：** 您的通知接收者已添加到 Rancher。
 
-## 下一步是什么?
-
-创建通知程序接受者后，设置告警以接收 Rancher 告警事件。
-
-- [集群所有者](/docs/admin-settings/rbac/cluster-project-roles/_index)可以设置[集群级别](/docs/cluster-admin/tools/alerts/_index)的告警。
-- [项目所有者](/docs/admin-settings/rbac/cluster-project-roles/_index)可以设置[项目级别](/docs/project-admin/tools/alerts/_index)的告警。
-
 ## 管理通知
 
 设置通知程序后，您可以对其进行管理。从**全局**视图中，打开要管理通知者的集群。选择**工具>通知程序**。您可以：
@@ -85,3 +80,47 @@ Rancher 集成了多种流行的通知服务，包括：
 - **编辑**初始配置。
 - **克隆**通知，快速设置略有不同的通知。
 - **删除**不再需要的通知。
+
+## Webhook 类型告警通知的 Payload 示例
+
+```json
+{
+  "receiver": "c-2a3bc:kube-components-alert",
+  "status": "firing",
+  "alerts": [
+    {
+      "status": "firing",
+      "labels": {
+        "alert_name": "Scheduler is unavailable",
+        "alert_type": "systemService",
+        "cluster_name": "mycluster (ID: c-2a3bc)",
+        "component_name": "scheduler",
+        "group_id": "c-2a3bc:kube-components-alert",
+        "logs": "Get http://127.0.0.1:10251/healthz: dial tcp 127.0.0.1:10251: connect: connection refused",
+        "rule_id": "c-2a3bc:kube-components-alert_scheduler-system-service",
+        "severity": "critical"
+      },
+      "annotations": {},
+      "startsAt": "2020-01-30T19:18:13.321684733Z",
+      "endsAt": "0001-01-01T00:00:00Z",
+      "generatorURL": ""
+    }
+  ],
+  "groupLabels": {
+    "component_name": "scheduler",
+    "rule_id": "c-2a3bc:kube-components-alert_scheduler-system-service"
+  },
+  "commonLabels": {
+    "alert_name": "Scheduler is unavailable",
+    "alert_type": "systemService",
+    "cluster_name": "mycluster (ID: c-2a3bc)"
+  }
+}
+```
+
+## 下一步是什么?
+
+创建通知程序接受者后，设置告警以接收 Rancher 告警事件。
+
+- [集群所有者](/docs/admin-settings/rbac/cluster-project-roles/_index)可以设置[集群级别](/docs/cluster-admin/tools/alerts/_index)的告警。
+- [项目所有者](/docs/admin-settings/rbac/cluster-project-roles/_index)可以设置[项目级别](/docs/project-admin/tools/alerts/_index)的告警。
