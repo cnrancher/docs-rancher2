@@ -23,18 +23,24 @@ Rancher 包含一些实验性质的功能，默认是被禁用的。您可能想
 
 例如，如果您安装 Rancher，然后使用 Rancher API 将功能开关设置为 true，然后通过命令行将功能开关设置为 false 来升级 Rancher，默认值仍然是 false，但是这个功能还是被启用的，因为它是通过 Rancher API 设置的。如果随后使用 Rancher API 删除了设置值（true），并将其设置为 NULL，则默认值（false）将生效。
 
+> **注意：** 从 v2.4.0 开始，有些功能开关可能需要重新启动 Rancher Server 容器。下表和 UI 中标记了哪些功能需要重新启动 Rancher Server。
+
 以下是 Rancher 中可用的功能开关的列表：
 
+- `dashboard`: 此功能将启用下一代的实验性 UI。仪表板还使用了 Rancher 中的新 API，该 API 允许 UI 访问默认的 Kubernetes 资源，而不经过 Rancher 的任何干预。
 - `unsupported-storage-drivers`: 启用[允许不受支持的存储驱动程序](/docs/installation/options/feature-flags/enable-not-default-storage-drivers/_index)。换句话说，它启用了默认情况下未启用的 storage providers 和 provisioners 的类型。
+- `proxy`: 此功能使 Rancher 使用新的简化的代理模块，这有助于增强性能和安全性。但是目前有一个已知问题，新的代理功能会导致 Helm 不能正常工作，这会导致包括 Rancher 工具（如监控，日志，Istio 等）在内的任何应用商店应用部署失败。
 - `istio-virtual-service-ui`: 启用 Istio 的流量管理功能：[通过 UI 创建，读取，更新和删除 Istio 虚拟服务和目标规则](/docs/installation/options/feature-flags/istio-virtual-service-ui/_index)。
 
 下表显示了在 Rancher 中功能开关的可用版本和默认值：
 
-| 功能开关名                    | 默认值  | 状态   | 可用版本 |
-| ----------------------------- | ------- | ------ | -------- |
-| `unsupported-storage-drivers` | `false` | 实验性 | v2.3.0   |
-| `istio-virtual-service-ui`    | `false` | 实验性 | v2.3.0   |
-| `istio-virtual-service-ui`    | `true`  | GA     | v2.3.2   |
+| 功能开关名                    | 默认值  | 状态   | 可用版本 | 是否需要重启 Rancher? |
+| ----------------------------- | ------- | ------ | -------- | --------------------- |
+| `dashboard`                   | `true`  | 实验性 | v2.4.0   | 是                    |
+| `istio-virtual-service-ui`    | `false` | 实验性 | v2.3.0   |                       |
+| `istio-virtual-service-ui`    | `true`  | GA     | v2.3.2   |                       |
+| `proxy`                       | `false` | 实验性 | v2.4.0   |                       |
+| `unsupported-storage-drivers` | `false` | 实验性 | v2.3.0   |                       |
 
 ## 启动 Rancher 时启用功能
 
@@ -54,6 +60,8 @@ helm install rancher-latest/rancher \
   --set 'extraEnv[0].name=CATTLE_FEATURES' # 自 v2.3.0 起可用
   --set 'extraEnv[0].value=<FEATURE-FLAG-NAME-1>=true,<FEATURE-FLAG-NAME-2>=true' # 自 v2.3.0 起可用
 ```
+
+注意：如果要安装 Alpha 版本，Helm 要求在命令中添加`--devel`参数。
 
 #### 在离线安装时渲染 Helm Chart
 
