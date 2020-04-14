@@ -83,7 +83,7 @@ _v2.1.0 版本可用_
 ### 在访问 `/v1-saml/keycloak/saml/metadata` 时返回 HTTP 502
 
 这通常是由于只有在配置了 SAML 提供者之后，才会创建元数据。
-尝试将 keycloak 配置并保存为你的 SAML 提供者，然后再访问元数据。
+尝试将 keycloak 配置并保存为您的 SAML 提供者，然后再访问元数据。
 
 ### Keycloak 错误: "We're sorry, failed to process response"
 

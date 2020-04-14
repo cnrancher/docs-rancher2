@@ -29,7 +29,7 @@ Docker 镜像仓库和 MinIO 工作负载默认使用临时存储，临时存储
 
 1. 选择持久卷的**源**
 
-   - 如果您选择的是**使用存储类启动持久存储卷**，你需要选择[存储类](/docs/cluster-admin/volumes-and-storage/_index)，输入**容量**。
+   - 如果您选择的是**使用存储类启动持久存储卷**，您需要选择[存储类](/docs/cluster-admin/volumes-and-storage/_index)，输入**容量**。
 
    - 如果您选择 **使用已有的存储卷**，请直接输入**容量**。
 
@@ -70,7 +70,7 @@ Docker 镜像仓库和 MinIO 工作负载默认使用临时存储，临时存储
 
 1. 选择持久卷的**源**
 
-   - 如果您选择的是**使用存储类启动持久存储卷**，你需要选择[存储类](/docs/cluster-admin/volumes-and-storage/_index)，输入**容量**。
+   - 如果您选择的是**使用存储类启动持久存储卷**，您需要选择[存储类](/docs/cluster-admin/volumes-and-storage/_index)，输入**容量**。
 
    - 如果您选择 **使用已有的存储卷**，请直接输入**容量**。
 

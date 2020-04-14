@@ -584,7 +584,7 @@ _v2.2.0 或更新版本可用_
 
 您可以在`.rancher-pipeline.yml`文件中配置流水线步骤容器的计算资源。
 
-在[步骤类型](/docs/k8s-in-rancher/pipelines/_index)中，你需要提供以下预留和限制：
+在[步骤类型](/docs/k8s-in-rancher/pipelines/_index)中，您需要提供以下预留和限制：
 
 - **CPU 预留**: 预留给流水线步骤容器的 CPU 配额。
 - **CPU 限制**: 流水线步骤容器的能使用 CPU 的最大限额。
