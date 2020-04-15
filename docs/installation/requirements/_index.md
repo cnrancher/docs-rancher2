@@ -126,7 +126,7 @@ Rancher 的性能取决于 etcd 在集群中的性能。为了确保最佳速度
 
 本节描述运行`rancher/rancher`容器的节点的端口要求。
 
-端口要求会有所不同，具体取决于您是在 K3s 群集，RKE 群集还是单个 Docker 容器中安装 Rancher。
+端口要求会有所不同，具体取决于您是在 K3s 集群，RKE 集群还是单个 Docker 容器中安装 Rancher。
 
 ### K3s 高可用安装的端口要求
 
@@ -224,7 +224,7 @@ K3s Server 需要开放 6443 端口供节点访问。
 
 如果您按照 Rancher 安装文档通过 RKE 配置 Kubernetes 集群，这个集群中所有的三个节点都具有所有三个角色：etcd、controlplane 和 worker。在这种情况下，您可以参考具有所有三个角色的每个节点的需求列表：
 
-如果您将 Rancher 安装在 RKE Kubernetes 群集上，但并不是每个节点都具有全部三个角色，请参考 [Rancher Kubernetes Engine（RKE）的端口要求](https://rancher.com/docs/rke/latest/en/os/#ports)。RKE 文档显示了每个角色的端口要求的细分。
+如果您将 Rancher 安装在 RKE Kubernetes 集群上，但并不是每个节点都具有全部三个角色，请参考 [Rancher Kubernetes Engine（RKE）的端口要求](https://rancher.com/docs/rke/latest/en/os/#ports)。RKE 文档显示了每个角色的端口要求的细分。
 
 <figcaption>具有所有三个角色的节点的入站规则：etcd、controlplane 和 worker</figcaption>
 
