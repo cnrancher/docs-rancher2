@@ -13,6 +13,7 @@ title: 具体要求
 - [操作系统和 Docker 要求](#操作系统和-docker-要求)
 - [硬件要求](#硬件要求)
   - [CPU 和 Memory](#cpu-和-内存)
+  - [Rancher 2.4.0 之前版本的 CPU 和 Memory](#rancher-v240-之前的-rke-高可用安装的-cpu-和内存要求)
   - [磁盘](#磁盘)
 - [网络要求](#网络要求)
   - [节点 IP 地址](#节点-ip-地址)
@@ -26,7 +27,15 @@ title: 具体要求
 
 Rancher 应用可以兼容当前任何流行的 Linux 发行版和流行的 Docker 版本。
 
-Rancher 官方支持并且已在如下操作系统中进行了测试，它们包括 Ubuntu，CentOS，Oracle Linux，RancherOS 和 RedHat Enterprise Linux
+Rancher 官方支持并且已在如下操作系统中测试了 Rancher 和 RKE，它们包括 Ubuntu，CentOS，Oracle Linux，RancherOS 和 RedHat Enterprise Linux
+
+K3s 几乎可以在任何 Linux 版本上运行。K3s 在以下操作系统及其这些版本后续的非主要版本中进行了测试：
+
+- Ubuntu 16.04 (amd64)
+- Ubuntu 18.04 (amd64)
+- Raspbian Buster (armhf)
+
+如果您要在 Alpine Linux 操作系统上安装 K3s 集群并安装 Rancher，您需要执行[这些额外步骤](https://rancher.com/docs/k3s/latest/en/advanced/#additional-preparation-for-alpine-linux-setup)。
 
 有关每个 Rancher 版本测试了哪些操作系统和 Docker 版本的详细信息，请参阅[支持维护条款](https://rancher.com/support-maintenance-terms/)。
 
@@ -48,19 +57,37 @@ Rancher 官方支持并且已在如下操作系统中进行了测试，它们包
 
 #### CPU 和 内存
 
-硬件要求根据您的 Rancher 部署规模而定。根据要求配置每个单独的节点要求是不同的，具体取决于您是将 Rancher 与 Docker 一起安装还是在 Kubernetes 集群上安装。
+硬件要求根据您的 Rancher 部署规模而定。请根据要求配置每个单独的节点。这些要求具体取决于您是通过单节点容器安装 Rancher，还是在 Kubernetes 集群上安装 Rancher。
 
 ### RKE 高可用安装的 CPU 和 内存要求
 
-这些要求适用于[在 Kubernetes 集群上安装 Rancher](/docs/installation/k8s-install/_index)。
+这些要求适用于[安装了 Rancher Server 的 RKE Kubernetes 集群](/docs/installation/k8s-install/_index)中的每个主机。
 
-| 部署规模 | 集群        | 节点         | vCPUs                                           | 内存                                            |
-| -------- | ----------- | ------------ | ----------------------------------------------- | ----------------------------------------------- |
-| 小       | 最多 5 个   | 最多 50 个   | 2                                               | 8 GB                                            |
-| 中       | 最多 15 个  | 最多 200 个  | 4                                               | 16 GB                                           |
-| 大       | 最多 50 个  | 最多 500 个  | 8                                               | 32 GB                                           |
-| 加大     | 最多 100 个 | 最多 1000 个 | 32                                              | 128 GB                                          |
-| 超大     | 100+        | 1000+        | [联系 Rancher](https://www.rancher.cn/contact/) | [联系 Rancher](https://www.rancher.cn/contact/) |
+在 Rancher v2.4.0 中提高了性能。有关 v2.4.0 之前的 Rancher 的要求，请参阅[本节](#rancher-v240-之前的-rke-高可用安装的-cpu-和内存要求)。
+
+| 部署规模 | 集群         | 节点          | vCPUs | 内存  |
+| -------- | ------------ | ------------- | ----- | ----- |
+| 小       | 最多 150 个  | 最多 1500 个  | 2     | 8 GB  |
+| 中       | 最多 300 个  | 最多 3000 个  | 4     | 16 GB |
+| 大       | 最多 500 个  | 最多 5000 个  | 8     | 32 GB |
+| 特大     | 最多 1000 个 | 最多 10000 个 | 16    | 64 GB |
+| 超大     | 最多 2000 个 | 最多 20000 个 | 32    | 128GB |
+
+[联系 Rancher](https://www.rancher.cn/contact/)，如果您要管理 2000+ 集群和/或 20000+ 节点。
+
+### K3s 高可用安装的 CPU 和 内存要求
+
+这些要求适用于[安装了 Rancher Server 的 K3s Kubernetes 集群](/docs/installation/k8s-install/_index)中的每个主机。
+
+| 部署规模 | 集群         | 节点          | vCPUs | 内存   | 数据库规模              |
+| -------- | ------------ | ------------- | ----- | ------ | ----------------------- |
+| 小       | 最多 150 个  | 最多 1500 个  | 2     | 8 GB   | 2 cores 4GB + 1000 IOPS |
+| 中       | 最多 300 个  | 最多 3000 个  | 4     | 16 GB  | 2 cores 4GB + 1000 IOPS |
+| 大       | 最多 500 个  | 最多 5000 个  | 8     | 32 GB  | 2 cores 4GB + 1000 IOPS |
+| 特大     | 最多 1000 个 | 最多 10000 个 | 16    | 64 GB  | 2 cores 4GB + 1000 IOPS |
+| 超大     | 最多 2000 个 | 最多 20000 个 | 32    | 128 GB | 2 cores 4GB + 1000 IOPS |
+
+[联系 Rancher](https://www.rancher.cn/contact/)，如果您要管理 2000+ 集群和/或 20000+ 节点。
 
 ### 单节点安装的 CPU 和 内存要求
 
@@ -70,6 +97,18 @@ Rancher 官方支持并且已在如下操作系统中进行了测试，它们包
 | -------- | ---------- | ----------- | ----- | ---- |
 | 小       | 最多 5 个  | 最多 50 个  | 1     | 4 GB |
 | 中       | 最多 15 个 | 最多 200 个 | 2     | 8 GB |
+
+### Rancher v2.4.0 之前的 RKE 高可用安装的 CPU 和内存要求
+
+这些要求适用于安装了 v2.4.0 之前版本的 Rancher Server 所在的 Kubernetes 集群中的每个节点：
+
+| 部署规模 | 集群        | 节点         | vCPUs                                           | 内存                                            |
+| -------- | ----------- | ------------ | ----------------------------------------------- | ----------------------------------------------- |
+| 小       | 最多 5 个   | 最多 50 个   | 2                                               | 8 GB                                            |
+| 中       | 最多 15 个  | 最多 200 个  | 4                                               | 16 GB                                           |
+| 大       | 最多 50 个  | 最多 500 个  | 8                                               | 32 GB                                           |
+| 加大     | 最多 100 个 | 最多 1000 个 | 32                                              | 128 GB                                          |
+| 超大     | 100+        | 1000+        | [联系 Rancher](https://www.rancher.cn/contact/) | [联系 Rancher](https://www.rancher.cn/contact/) |
 
 ### 磁盘
 
@@ -87,10 +126,63 @@ Rancher 的性能取决于 etcd 在集群中的性能。为了确保最佳速度
 
 本节描述运行`rancher/rancher`容器的节点的端口要求。
 
-端口要求会有所不同，这取决于您是单节点安装还是高可用安装。
+端口要求会有所不同，具体取决于您是在 K3s 群集，RKE 群集还是单个 Docker 容器中安装 Rancher。
 
-- **对于 Docker 单节点**，您只需要开放使 Rancher 能够与下游集群通信所需的端口即可。
-- **对于高可用安装**，需要开放相同的端口，以及 Rancher Server 所安在的 Kubernetes 集群所需的其他端口。
+### K3s 高可用安装的端口要求
+
+#### 用于与下游集群通信的端口
+
+为了与下游集群通信，Rancher 要求开放不同的端口，具体取决于您使用的基础架构。
+
+例如，如果您在基础设施提供商托管的节点上部署 Rancher，则必须为 SSH 开放`22`端口。
+
+下图描述了为每种[集群类型](/docs/cluster-provisioning/_index)开放的端口。
+
+<figcaption>Rancher 管理面的端口要求</figcaption>
+
+![Basic Port Requirements](/img/rancher/port-communications.svg)
+
+下表细分了入站和出站流量的端口要求：
+
+<figcaption>Rancher 节点的入站规则</figcaption>
+
+| 协议 | 端口 | 源                                                                                                                                                     | 描述                                   |
+| ---- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------- |
+| TCP  | 80   | 进行外部 SSL 终止的负载均衡器/代理                                                                                                                     | 使用外部 SSL 终止时的 Rancher UI/API   |
+| TCP  | 443  | <ul><li>etcd 节点</li><li>controlplane 节点</li><li>worker 节点</li><li>托管的/导入的 Kubernetes</li><li>任何需要使用 Rancher UI 或 API 的源</li></ul> | Rancher Agent，Rancher UI/API，kubectl |
+
+<figcaption>Rancher 节点的出站规则</figcaption>
+
+| 协议 | 端口 | 目的                                                     | 描述                                             |
+| ---- | ---- | -------------------------------------------------------- | ------------------------------------------------ |
+| TCP  | 22   | 使用主机驱动创建的节点中的任何节点 IP                    | 使用主机驱动通过 SSH 进行节点配置                |
+| TCP  | 443  | `35.160.43.145/32`，`35.167.242.46/32`，`52.33.59.17/32` | git.rancher.io (应用商店)                        |
+| TCP  | 2376 | 使用主机驱动创建的节点中的任何节点 IP                    | Docker Machine 使用的 Docker 守护进程的 TLS 端口 |
+| TCP  | 6443 | 托管的/导入的 Kubernetes API                             | Kubernetes API Server                            |
+
+**注意** 如果您配置了的外部[身份验证系统](/docs/admin-settings/authentication/_index)（例如 LDAP），Rancher 节点可能还需要其他出站规则。
+
+#### K3s 集群中节点的其他端口要求
+
+为了安装 Rancher 高可用，您需要打开其他端口来启动 Kubernetes 集群。
+
+K3s Server 需要开放 6443 端口供节点访问。
+
+使用 Flannel VXLAN 时，这些节点需要能够通过 UDP 端口 8472 访问其他节点。节点不应侦听其他端口。K3s 使用反向隧道，建立节点与服务器的出站连接，所有 kubelet 通信都通过该隧道进行。但是，如果您不使用 Flannel，而是使用自定义的 CNI，则 K3s 不需要 8472 端口。
+
+如果要使用指标服务器（Metrics Server），则需要在每个节点上打开端口 10250。
+
+> **重要：** 节点上的 VXLAN 端口不应暴露给外界，因为这会开放集群网络，任何人都可以访问它。请在禁止访问 8472 端口的防火墙/安全组后面运行节点。
+
+<figcaption> Rancher Server 节点的入站规则 </figcaption>
+
+| 协议 | 端口  | 源                       | 描述               |
+| ---- | ----- | ------------------------ | ------------------ |
+| TCP  | 6443  | K3s server 节点          | Kubernetes API     |
+| UDP  | 8472  | K3s server 和 agent 节点 | Flannel VXLAN 需要 |
+| TCP  | 10250 | K3s server 和 agent 节点 | kubelet            |
+
+通常情况下，您可以允许全部的出站流量。
 
 ### RKE 高可用安装的端口要求
 
@@ -132,6 +224,8 @@ Rancher 的性能取决于 etcd 在集群中的性能。为了确保最佳速度
 
 如果您按照 Rancher 安装文档通过 RKE 配置 Kubernetes 集群，这个集群中所有的三个节点都具有所有三个角色：etcd、controlplane 和 worker。在这种情况下，您可以参考具有所有三个角色的每个节点的需求列表：
 
+如果您将 Rancher 安装在 RKE Kubernetes 群集上，但并不是每个节点都具有全部三个角色，请参考 [Rancher Kubernetes Engine（RKE）的端口要求](https://rancher.com/docs/rke/latest/en/os/#ports)。RKE 文档显示了每个角色的端口要求的细分。
+
 <figcaption>具有所有三个角色的节点的入站规则：etcd、controlplane 和 worker</figcaption>
 
 | 协议    | 端口        | 源                                                                   | 描述                                                                            |
@@ -165,15 +259,13 @@ Rancher 的性能取决于 etcd 在集群中的性能。为了确保最佳速度
 | TCP  | 10250 | etcd 节点, controlplane 节点和 worker 节点 | kubelet                                         |
 | TCP  | 10254 | 节点本身（本地流量，不跨节点               | Ingress controller livenessProbe/readinessProbe |
 
-每个节点需要开放的端口取决于节点的 Kubernetes 角色：etcd、controlplane 或 worker。如果您将 Rancher 安装在 Kubernetes 集群上，但并不是每个节点都有这三个角色，请参阅[Rancher Kubernetes Engine（RKE）的端口要求](https://rancher.com/docs/rke/latest/en/os/#ports)。RKE 文档显示了每个角色的端口需求。
-
 ### 单节点安装的端口要求
 
 #### 与下游集群通信的端口
 
-为了与下游集群通信，Rancher 要求开放不同的端口，具体端口取决于使用的基础架构。
+对于 Docker 安装，您只需要打开 Rancher 与下游用户集群通信所需的端口即可。
 
-例如，如果要在基础设施提供商托管的节点上部署 Rancher，则必须为 SSH 开放`22`端口。
+端口要求取决于您使用的基础设施。例如，如果要在基础设施提供商托管的节点上部署 Rancher，则必须开放`22`端口，这样您才能使用 SSH。
 
 下图描述了为每种[集群类型](/docs/cluster-provisioning/_index)开放的端口。
 
@@ -185,14 +277,14 @@ Rancher 的性能取决于 etcd 在集群中的性能。为了确保最佳速度
 
 **注意** 如果您配置了的外部[身份验证系统](/docs/admin-settings/authentication/_index)（例如 LDAP），Rancher 节点可能还需要其他出站规则。
 
-<figcaption>Rancher 节点的入站规则</figcaption>
+<figcaption>入站规则</figcaption>
 
 | 协议 | 端口 | 源                                                                                                                                                     | 描述                                   |
 | ---- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------- |
 | TCP  | 80   | 进行外部 SSL 终止的负载均衡器/代理                                                                                                                     | 使用外部 SSL 终止时的 Rancher UI/API   |
 | TCP  | 443  | <ul><li>etcd 节点</li><li>controlplane 节点</li><li>worker 节点</li><li>托管的/导入的 Kubernetes</li><li>任何需要使用 Rancher UI 或 API 的源</li></ul> | Rancher agent，Rancher UI/API，kubectl |
 
-<figcaption>Rancher 节点的出站规则</figcaption>
+<figcaption>出站规则</figcaption>
 
 | 协议 | 端口 | 源                                                       | 描述                                             |
 | ---- | ---- | -------------------------------------------------------- | ------------------------------------------------ |
