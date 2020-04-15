@@ -63,7 +63,7 @@ New password for default admin user (user-xxxxx):
 
 请参阅[问题排查：日志级别](/docs/troubleshooting/logging/_index)。
 
-## 我不能 ping 通 CluusterIP
+## 我不能 ping 通 ClusterIP
 
 ClusterIP 是一个虚拟 IP，不能够回应 ping。更好的测试 ClusterIP 是否生效，可以采用`curl`命令访问其 IP 和端口。
 
