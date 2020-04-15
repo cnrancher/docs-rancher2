@@ -1,5 +1,5 @@
 ---
-title: 安装指南
+title: 安装介绍
 ---
 
 对于生产环境，我们建议以高可用配置安装 Rancher，以便您的用户始终可以访问 Rancher Server。当 Rancher 安装在 Kubernetes 集群中时，Rancher 将与集群的 etcd 或 MySQL 等数据库集成，并利用 Kubernetes 调度来实现高可用。
