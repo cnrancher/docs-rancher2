@@ -10,7 +10,7 @@ title: 5、设置 Istio 网关
 
 您还需要为您的服务设置一个 Kubernetes 网关。这一 Kubernetes 资源指向 Istio 对集群的入口网关的实现。
 
-您可以使用负载平衡器或者 Istio 的 NodePort 网关将流量路由到服务网格中。本节介绍如何设置 NodePort 网关。
+您可以使用负载均衡器或者 Istio 的 NodePort 网关将流量路由到服务网格中。本节介绍如何设置 NodePort 网关。
 
 有关 Istio 网关的更多信息，请参阅[Istio 文档](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/)。
 
