@@ -28,7 +28,7 @@ title: 安装介绍
 
 ## 关于架构的重要说明
 
-Rancher 管理面服务器只能在使用 RKE 或 K3s 安装的 Kubernetes 集群中运行。不支持在托管的 Kubernetes 集群（例如 EKS）上使用 Rancher。
+Rancher Server 只能在使用 RKE 或 K3s 安装的 Kubernetes 集群中运行。不支持在托管的 Kubernetes 集群（例如 EKS）上使用 Rancher。
 
 为了获得最佳性能和安全性，我们建议为 Rancher Server 使用专用的 Kubernetes 集群。不建议在此集群上运行用户的其他工作负载。部署完 Rancher 之后，您可以[创建或导入](/docs/cluster-provisioning/_index)用于运行用户工作负载的集群。
 

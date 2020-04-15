@@ -2,7 +2,7 @@
 title: '1、配置基础设施'
 ---
 
-在本部分中，您将为 Rancher 管理面服务器配置基础设施。
+在本部分中，您将为 Rancher Server 配置基础设施。
 
 推荐基础设施会根据部署 Rancher 的方式而有所差异。具体取决于您要将 Rancher 安装在专用的 K3s Kubernetes 集群上，还是安装在专用的 RKE Kubernetes 集群上。
 
