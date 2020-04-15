@@ -2,8 +2,7 @@
 title: 介绍
 ---
 
-These guides walk you through the deployment of an application, including how to expose the application for use outside of the cluster.
+Rancher 提供了两本关于部署工作负载的快速入门手册，请单击以下链接查看详情。
 
-* [Workload with Ingress](./quickstart-deploy-workload-ingress)
-* [Workload with NodePort](./quickstart-deploy-workload-nodeport)
-
+- [快速部署带有 Ingress 的工作负载](./quickstart-deploy-workload-ingress/_index)
+- [快速部署带有 NodePort 的工作负载](./quickstart-deploy-workload-nodeport/_index)

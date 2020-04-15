@@ -2,72 +2,64 @@
 title: 快速部署带有NodePort的工作负载
 ---
 
-#### Prerequisite
+## 先决条件
 
-You have a running cluster with at least 1 node.
+已经有一个正在运行的集群，且集群中有至少一个节点。
 
-#### 1. Deploying a Workload
+## 部署工作负载
 
-You're ready to create your first _workload_. A workload is an object that includes pods along with other files and info needed to deploy your application.
+参考前文完成 [Rancher Server 的快速部署](/docs/quick-start-guide/deployment/_index)后，您可以创建 _工作负载_。工作负载即 Kubernetes 对一组 Pod 的抽象模型，用于描述业务的运行载体，包括 Deployment、Statefulset、Daemonset、Job、CronJob 等多种类型，详情请参考[名词解释](/docs/overview/glossary/_index)。
 
-For this workload, you'll be deploying the application Rancher Hello-World.
+以下步骤讲解了如何在 Rancher Server 中部署带有 NodePort 的工作负载。本文部署的工作负载是一个“Hello-World”应用。
 
-01.  From the **Clusters** page, open the cluster that you just created.
+1. 访问**集群**页面，选择您刚刚创建的集群，进入集群页面。
 
-02.  From the main menu of the **Dashboard**, select **Projects/Namespaces**.
+1. 从集群页面的主菜单**仪表盘**中选择**项目/命名空间**。
 
-03.  Open the **Project: Default** project.
+1. 打开 **项目：默认项目**。
 
-04.  Click **Resources > Workloads.** In versions prior to v2.3.0, click **Workloads > Workloads.**
+1. 单击**资源 > 工作负载**。如果您使用的是 v2.3.0 之前的版本，请单击 **工作负载 > 工作负载**。
 
-05.  Click **Deploy**.
+1. 单击**部署**。
 
-    **Step Result:** The **Deploy Workload** page opens.
+   **结果：** 打开**部署工作负载** 页面。
 
-06.  Enter a **Name** for your workload.
+1. 输入工作负载的名称。
 
-07. From the **Docker Image** field, enter `rancher/hello-world` . This field is case-sensitive.
+1. 在**Docker 镜像**一栏，输入`rancher/hello-world`，请注意区分大小写字母 。
 
-08.  From **Port Mapping**, click **Add Port**.
+1. 从**端口映射**单击**添加端口**。
 
-09.  From the **As a** drop-down, make sure that **NodePort (On every node)** is selected.
+1. 从**As a**下拉菜单选择**NodePort (On every node)**。
 
-    
+   ![As a dropdown, NodePort (On every node selected)](/img/rancher/nodeport-dropdown.png)
 
-![As a dropdown, NodePort (On every node selected)](/img/rancher/nodeport-dropdown.png)
+1. 在**监听端口**一栏，保持**随机**选项。
 
-10. From the **On Listening Port** field, leave the **Random** value in place.
+   ![On Listening Port, Random selected](/img/rancher/listening-port-field.png)
 
-    
+1. 在**发布容器端口** 输入`80`。
 
-![On Listening Port, Random selected](/img/rancher/listening-port-field.png)
+   ![Publish the container port, 80 entered](/img/rancher/container-port-field.png)
 
-11. From the **Publish the container port** field, enter port `80` .
+1. 余下的选项保持默认配置即可。
 
-    
+1. 单击**运行**。
 
-![Publish the container port, 80 entered](/img/rancher/container-port-field.png)
+**结果：**
 
-12. Leave the remaining options on their default setting. We'll tell you about them later.
+- 部署了工作负载。这个过程可能需要几分钟完成。
+- 当您的工作负载部署完成后，它的状态是**Active**，您可以从项目的**工作负载**页面查看工作负载当前的状态。
 
-13. Click **Launch**.
+## 查看您的应用
 
-**Result:**
+从**负载均衡**页面单击工作负载下方的链接，如果部署成功了，您的应用会在一个新窗口中打开。
 
-* Your workload is deployed. This process might take a few minutes to complete.
-* When your workload completes deployment, it's assigned a state of **Active**. You can view this status from the project's **Workloads** page.
+## 注意事项
 
-<br/>
+当您使用云端虚拟机时，您可能会因为权限不够而无法访问运行容器的端口。在这种情况下，您可以在本地机器的 ssh 会话中输入`Execute Shell`命令，测试 Nginx，找到可用的端口，使用`:`后面显示的端口。以下文代码为例，可用的端口是`31568`。
 
-#### 2. Viewing Your Application
-
-From the **Workloads** page, click the link underneath your workload. If your deployment succeeded, your application opens.
-
-#### Attention: Cloud-Hosted Sandboxes
-
-When using a cloud-hosted virtual machine, you may not have access to the port running the container. In this event, you can test Nginx in an ssh session on the local machine using `Execute Shell` . Use the port number after the `:` in the link under your workload if available, which is `31568` in this example.
-
-``` sh
+```sh
 gettingstarted@rancher:~$ curl http://localhost:31568
 <!DOCTYPE html>
 <html>
@@ -148,15 +140,14 @@ gettingstarted@rancher:~$
 
 ```
 
-#### Finished
+## 结果
 
-Congratulations! You have successfully deployed a workload exposed via a NodePort.
+成功部署工作负载并通过 NodePort 暴露该工作负载。
 
-##### What's Next?
+## 后续操作
 
-When you're done using your sandbox, destroy the Rancher Server and your cluster. See one of the following:
+使用完您通过快速入门搭建的 Rancher 沙盒后，您需要清理遗留在环境中和 Rancher 相关的资源，删除 Rancher Server 和您的集群，请单击下方链接查看操作指导。
 
-* [Amazon AWS: Destroying the Environment](/docs/quick-start-guide/deployment/amazon-aws-qs/#destroying-the-environment)
-* [DigitalOcean: Destroying the Environment](/docs/quick-start-guide/deployment/digital-ocean-qs/#destroying-the-environment)
-* [Vagrant: Destroying the Environment](/docs/quick-start-guide/deployment/quickstart-vagrant/#destroying-the-environment)
-
+- [清理环境-Amazon AWS](/docs/quick-start-guide/deployment/amazon-aws-qs/_index)
+- [清理环境-DigitalOcean](/docs/quick-start-guide/deployment/digital-ocean-qs/_index)
+- [清理环境-Vagrant](/docs/quick-start-guide/deployment/quickstart-vagrant/_index)
