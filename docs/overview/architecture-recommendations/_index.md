@@ -20,7 +20,7 @@ title: 推荐架构
 
 我们不建议在单个 Docker 容器中安装 Rancher，因为如果该节点发生故障，则其他节点上将没有可用的集群数据副本，并且您可能会丢失 Rancher 服务器上的数据。
 
-Rancher 需要安装在高可用的 [RKE（Rancher Kubernetes Engine）](https://rancher.com/docs/rke/latest/en/)Kubernetes 集群上，或高可用的[K3s（比 K8s 少 5 个缺点）](https://rancher.com/docs/k3s/latest/en/)Kubernetes 集群。 RKE 和 K3s 都是经过完全认证的 Kubernetes 发行版。
+Rancher 需要安装在高可用的 [RKE（Rancher Kubernetes Engine）](https://rancher.com/docs/rke/latest/en/)Kubernetes 集群上，或高可用的[K3s（比 K8s 少 5）](https://rancher.com/docs/k3s/latest/en/)Kubernetes 集群。 RKE 和 K3s 都是经过完全认证的 Kubernetes 发行版。
 
 ### K3s Kubernetes 集群安装
 
