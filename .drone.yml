@@ -17,7 +17,7 @@ steps:
       dist: /website/build
       dist_ignore: img/
       path: docs-rancher2-3-preview
-      endpoint: oss-cn-shanghai.aliyuncs.com
+      endpoint: oss-accelerate.aliyuncs.com
       access_key_id:
         from_secret: ACCESS_KEY_ID
       access_key_secret:
@@ -37,7 +37,7 @@ steps:
       dist: /website/build
       dist_ignore: img/
       path: docs-rancher2-3-production
-      endpoint: oss-cn-shanghai.aliyuncs.com
+      endpoint: oss-accelerate.aliyuncs.com
       access_key_id:
         from_secret: ACCESS_KEY_ID
       access_key_secret:
