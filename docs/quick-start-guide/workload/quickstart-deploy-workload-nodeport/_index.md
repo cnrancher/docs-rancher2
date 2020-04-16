@@ -8,7 +8,7 @@ title: 快速部署带有NodePort的工作负载
 
 ## 部署工作负载
 
-参考前文完成 [Rancher Server 的快速部署](/docs/quick-start-guide/deployment/_index)后，您可以创建 _工作负载_。工作负载即 Kubernetes 对一组 Pod 的抽象模型，用于描述业务的运行载体，包括 Deployment、Statefulset、Daemonset、Job、CronJob 等多种类型，详情请参考[名词解释](/docs/overview/glossary/_index)。
+参考前文完成[Rancher Server 的快速部署](/docs/quick-start-guide/deployment/_index)后，您可以创建 _工作负载_。工作负载即 Kubernetes 对一组 Pod 的抽象模型，用于描述业务的运行载体，包括 Deployment、Statefulset、Daemonset、Job、CronJob 等多种类型，详情请参考[名词解释](/docs/overview/glossary/_index)。
 
 以下步骤讲解了如何在 Rancher Server 中部署带有 NodePort 的工作负载。本文部署的工作负载是一个“Hello-World”应用。
 
@@ -26,7 +26,7 @@ title: 快速部署带有NodePort的工作负载
 
 1. 输入工作负载的名称。
 
-1. 在**Docker 镜像**一栏，输入`rancher/hello-world`，请注意区分大小写字母 。
+1. 在**Docker 镜像**一栏，输入`rancher/hello-world`，请注意区分大小写字母。
 
 1. 从**端口映射**单击**添加端口**。
 
