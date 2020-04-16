@@ -2,82 +2,77 @@
 title: 快速部署带有Ingress的工作负载
 ---
 
-#### Prerequisite
+## 先决条件
 
-You have a running cluster with at least 1 node.
+已经有一个正在运行的集群，且集群中有至少一个节点
 
-#### 1. Deploying a Workload
+## 部署工作负载
 
-You're ready to create your first _workload_. A workload is an object that includes pods along with other files and info needed to deploy your application.
+参考前文完成 [Rancher Server 的快速部署](/docs/quick-start-guide/deployment/_index)后，您可以创建 _工作负载_。工作负载即 Kubernetes 对一组 Pod 的抽象模型，用于描述业务的运行载体，包括 Deployment、Statefulset、Daemonset、Job、CronJob 等多种类型，详情请参考[名词解释](/docs/overview/glossary/_index)。
 
-For this workload, you'll be deploying the application Rancher Hello-World.
+以下步骤讲解了如何在 Rancher Server 中部署带有 Ingress 的工作负载。本文部署的工作负载是一个“Hello-World”应用。
 
-1.  From the **Clusters** page, open the cluster that you just created.
+1. 访问**集群**页面，选择您刚刚创建的集群，进入集群页面。
 
-2.  From the main menu of the **Dashboard**, select **Projects/Namespaces**.
+1. 从集群页面的主菜单**仪表盘**中选择**项目/命名空间**。
 
-3.  Open the **Project: Default** project.
+1. 打开 **项目：默认项目**。
 
-4.  Click **Resources > Workloads.** In versions prior to v2.3.0, click **Workloads > Workloads.**
+1. 单击**资源 > 工作负载**。如果您使用的是 v2.3.0 之前的版本，请单击 **工作负载 > 工作负载**。
 
-5.  Click **Deploy**.
+1. 单击**部署**。
 
-    **Step Result:** The **Deploy Workload** page opens.
+   **结果：** 打开**部署工作负载** 页面。
 
-6.  Enter a **Name** for your workload.
+1. 输入工作负载的名称。
 
-7. From the **Docker Image** field, enter `rancher/hello-world` . This field is case-sensitive.
+1. 在**Docker 镜像**一栏，输入`rancher/hello-world`，请注意区分大小写字母。
 
-8.  Leave the remaining options on their default setting. We'll tell you about them later.
+1. 余下的选项保持默认配置即可。
 
-9.  Click **Launch**.
+1. 单击**运行**。
 
-**Result:**
+**结果：**
 
-* Your workload is deployed. This process might take a few minutes to complete.
-* When your workload completes deployment, it's assigned a state of **Active**. You can view this status from the project's **Workloads** page.
+- 部署了工作负载。这个过程可能需要几分钟完成。
+- 当您的工作负载部署完成后，它的状态是**Active**，您可以从项目的**工作负载**页面查看工作负载当前的状态。
 
-<br/>
+## 暴露服务
 
-#### 2. Expose The Application Via An Ingress
+上述步骤帮助您完成了工作负载的部署，现在您需要将服务暴露出来，让其他服务可以通过网络连接和调用这个工作负载。
 
-Now that the application is up and running it needs to be exposed so that other services can connect.
+1.  访问**集群**页面，选择您刚刚创建的集群，进入集群页面。
 
-1.  From the **Clusters** page, open the cluster that you just created.
+1.  从集群页面的主菜单**仪表盘**中选择**项目/命名空间**。
 
-2.  From the main menu of the **Dashboard**, select **Projects**.
+1.  打开 **项目 > 默认项目**。
 
-3.  Open the **Default** project.
+1.  单击**资源 > 工作负载 > 负载均衡**。如果您使用的是 v2.3.0 之前的版本，请单击 **工作负载 > 负载均衡**。
 
-4.  Click **Resources > Workloads > Load Balancing.** In versions prior to v2.3.0, click the **Workloads** tab. Click on the **Load Balancing** tab.
+1.  单击**添加 Ingress**
 
-5.  Click **Add Ingress**.
+1.  输入 Ingress 负载均衡的名称，如 “hello”。
 
-6.  Enter a name i.e. **hello**.
+1.  在**Target**一栏，从下拉菜单选择您服务的名称。
 
-7.  In the **Target** field, drop down the list and choose the name that you set for your service.
+1.  在**端口**一栏输入 `80`。
 
-8. Enter `80` in the **Port** field.
+1.  余下的选项保持默认配置即可，单击**保存**。
 
-9.  Leave everything else as default and click **Save**.
+**结果：** 这个工作负载分配到了一个`xip.io`地址，已经暴露出去了。可能需要 1~2 分钟完成服务关联。
 
-**Result:** The application is assigned a `xip.io` address and exposed. It may take a minute or two to populate.
+## 查看您的应用
 
-#### View Your Application
+从**负载均衡**页面单击目标链接`hello.default.xxx.xxx.xxx.xxx.xip.io > hello-world`，您的应用会在一个新窗口中打开。
 
-From the **Load Balancing** page, click the target link, which will look something like `hello.default.xxx.xxx.xxx.xxx.xip.io > hello-world` .
+## 结果
 
-Your application will open in a separate window.
+成功部署工作负载并通过 Ingress 暴露该工作负载。
 
-##### Finished
+## 后续操作
 
-Congratulations! You have successfully deployed a workload exposed via an ingress.
+使用完您通过快速入门搭建的 Rancher 沙盒后，您需要清理遗留在环境中和 Rancher 相关的资源，删除 Rancher Server 和您的集群，请单击下方链接查看操作指导。
 
-##### What's Next?
-
-When you're done using your sandbox, destroy the Rancher Server and your cluster. See one of the following:
-
-* [Amazon AWS: Destroying the Environment](/docs/quick-start-guide/deployment/amazon-aws-qs/#destroying-the-environment)
-* [DigitalOcean: Destroying the Environment](/docs/quick-start-guide/deployment/digital-ocean-qs/#destroying-the-environment)
-* [Vagrant: Destroying the Environment](/docs/quick-start-guide/deployment/quickstart-vagrant/#destroying-the-environment)
-
+- [清理环境-Amazon AWS](/docs/quick-start-guide/deployment/amazon-aws-qs/_index)
+- [清理环境-DigitalOcean](/docs/quick-start-guide/deployment/digital-ocean-qs/_index)
+- [清理环境-Vagrant](/docs/quick-start-guide/deployment/quickstart-vagrant/_index)
