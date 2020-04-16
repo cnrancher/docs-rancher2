@@ -1,4 +1,4 @@
-# Rancher 2.x 中文文档 （WIP）
+# Rancher 2.x 中文文档 （Beta）
 
 本网站使用了 [Docusaurus 2](https://v2.docusaurus.io/) 文档框架。
 
