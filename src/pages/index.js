@@ -52,8 +52,8 @@ function Home() {
           <h1 className="hero__title">{title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
           <div className="text-xs text-gray">
-            该文档为{siteConfig.title}
-            版本的帮助文档，如果需要其它Rancher产品的文档请点击导航栏中的“文档中心”
+            在任何页面，您都可以点击左上角的logo回到本页。想要下载离线文档，请点击导航栏中的“获取
+            PDF 文档”。
           </div>
         </div>
       </header>

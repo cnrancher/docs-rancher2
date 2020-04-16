@@ -6,9 +6,9 @@ title: 2、安装 Kubernetes
 
 对于 v2.4 之前的 Rancher，Rancher 应该安装在 [RKE](https://rancher.com/docs/rke/latest/en/)（Rancher Kubernetes Engine）Kubernetes 集群上。RKE 是经过 CNCF 认证的 Kubernetes 发行版，并且全部组件完全在 Docker 容器内运行。
 
-从 Rancher v2.4 开始，Rancher 管理面服务器可以安装在 RKE Kubernetes 集群或 K3s Kubernetes 集群上。K3s 也是 Rancher 发布的经过完全认证的 Kubernetes 发行版，但比 RKE 更新。我们建议在 K3s 上安装 Rancher，因为 K3s 易于使用且更轻量，全部组件都打包在了一个二进制文件里。并且这个二进制文件小于 50 MB。注意：如果在 RKE 集群上安装了 Rancher 之后，目前没有办法将这个高可用迁移到 K3s 集群上。
+从 Rancher v2.4 开始，Rancher Server 可以安装在 RKE Kubernetes 集群或 K3s Kubernetes 集群上。K3s 也是 Rancher 发布的经过完全认证的 Kubernetes 发行版，但比 RKE 更新。我们建议在 K3s 上安装 Rancher，因为 K3s 易于使用且更轻量，全部组件都打包在了一个二进制文件里。并且这个二进制文件小于 50 MB。注意：如果在 RKE 集群上安装了 Rancher 之后，目前没有办法将这个高可用迁移到 K3s 集群上。
 
-Rancher 管理面服务器只能在使用 RKE 或 K3s 安装的 Kubernetes 集群中运行。不支持在托管的 Kubernetes 集群（例如 EKS）上使用 Rancher。
+Rancher Server 只能在使用 RKE 或 K3s 安装的 Kubernetes 集群中运行。不支持在托管的 Kubernetes 集群（例如 EKS）上使用 Rancher。
 
 对于无法直接访问 Internet 的系统，请参阅 [Rancher 离线安装指南](/docs/installation/other-installation-methods/air-gap/_index)。
 
@@ -147,7 +147,7 @@ kube-system     coredns-d798c9dd-ljjnf                    1/1     Running   0   
 
 如果您的节点具有公共和内部地址，建议设置`internal_address：`这样 Kubernetes 会将其用于集群内通信。某些服务（例如 AWS EC2）在使用自引用安全组或防火墙时需要设置`internal_address：`。
 
-RKE 需要通过 SSH 连接到每个节点，并且它将在默认位置`~/.ssh/id_rsa`中寻找私钥。如果你的默认私钥与节点的私钥不在同一个位置，则还需要为该节点配置`ssh_key_path`选项。
+RKE 需要通过 SSH 连接到每个节点，并且它将在默认位置`~/.ssh/id_rsa`中寻找私钥。如果您的默认私钥与节点的私钥不在同一个位置，则还需要为该节点配置`ssh_key_path`选项。
 
 ```yaml
 nodes:
@@ -205,7 +205,7 @@ rke up --config ./rancher-cluster.yml
 
 本节介绍如何在您的工作区进行设置，以便您可以在本地使用`kubectl`命令行工具与此集群进行交互。
 
-如果您已经安装了`kubectl`，你需要将`kubeconfig`文件放置在`kubectl`可以访问的位置。`kubeconfig`文件包含使用`kubectl`访问集群所必需的凭证。
+如果您已经安装了`kubectl`，您需要将`kubeconfig`文件放置在`kubectl`可以访问的位置。`kubeconfig`文件包含使用`kubectl`访问集群所必需的凭证。
 
 当您运行 rke up 时，RKE 应该已经创建了一个名为 kube_config_rancher-cluster.yml 的 kubeconfig 文件。该文件具有`kubectl`和`helm`的凭证。
 
