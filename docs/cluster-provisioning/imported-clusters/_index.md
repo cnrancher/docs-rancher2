@@ -131,7 +131,7 @@ kubectl logs -n cattle-system system-upgrade-controller
 kubectl get plans -A -o yaml
 ```
 
-如果在升级过程中，集群卡住无法继续进行升级，请尝试重新启动`system-upgrade-controller`。
+如果在升级过程中，集群停滞无法继续进行升级，请尝试重新启动`system-upgrade-controller`。
 
 为防止升级时出现问题，请遵循 [Kubernetes 升级最佳实践](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/)。
 
