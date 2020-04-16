@@ -26,7 +26,7 @@ Rancher Server 由认证代理（Authentication Proxy）、Rancher API Server、
 
 ![Architecture](/img/rancher/rancher-architecture-rancher-api-server.svg)
 
-您可以在单个节点或高可用的 Kubernetes 集群上安装 Rancher。由于单节点安装只适用于开发和测试环境，而且单节点和高可用集群之间无法进行数据迁移，所以我们建议您从一开始就使用高可用的 Kubernetes 集群来部署 Rancher Server，而且您需要分开部署运行 Rancher Server 的集群应该与下游集群。
+您可以在单个节点或高可用的 Kubernetes 集群上安装 Rancher。由于单节点安装只适用于开发和测试环境，而且单节点和高可用集群之间无法进行数据迁移，所以我们建议您从一开始就使用高可用的 Kubernetes 集群来部署 Rancher Server，而且您需要分开部署运行 Rancher Server 的集群和运行自己业务的下游集群。
 
 ## 与下游集群交互
 
