@@ -121,7 +121,7 @@ const metadata = {
     'cli/_index': 'Rancher CLI',
     'system-tools/_index': '系统工具',
     'user-settings/api-keys/_index': 'API 密钥',
-    'user-settings/node-templates/_index': '主机模板',
+    'user-settings/node-templates/_index': '节点模版',
     'user-settings/cloud-credentials/_index': '云密钥',
     'user-settings/preferences/_index': '偏好设置',
     'api/_index': '如何调用 Rancher API',
