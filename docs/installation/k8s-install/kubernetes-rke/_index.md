@@ -147,7 +147,7 @@ kube-system     coredns-d798c9dd-ljjnf                    1/1     Running   0   
 
 如果您的节点具有公共和内部地址，建议设置`internal_address：`这样 Kubernetes 会将其用于集群内通信。某些服务（例如 AWS EC2）在使用自引用安全组或防火墙时需要设置`internal_address：`。
 
-RKE 需要通过 SSH 连接到每个节点，并且它将在默认位置`~/.ssh/id_rsa`中寻找私钥。如果你的默认私钥与节点的私钥不在同一个位置，则还需要为该节点配置`ssh_key_path`选项。
+RKE 需要通过 SSH 连接到每个节点，并且它将在默认位置`~/.ssh/id_rsa`中寻找私钥。如果您的默认私钥与节点的私钥不在同一个位置，则还需要为该节点配置`ssh_key_path`选项。
 
 ```yaml
 nodes:
@@ -205,7 +205,7 @@ rke up --config ./rancher-cluster.yml
 
 本节介绍如何在您的工作区进行设置，以便您可以在本地使用`kubectl`命令行工具与此集群进行交互。
 
-如果您已经安装了`kubectl`，你需要将`kubeconfig`文件放置在`kubectl`可以访问的位置。`kubeconfig`文件包含使用`kubectl`访问集群所必需的凭证。
+如果您已经安装了`kubectl`，您需要将`kubeconfig`文件放置在`kubectl`可以访问的位置。`kubeconfig`文件包含使用`kubectl`访问集群所必需的凭证。
 
 当您运行 rke up 时，RKE 应该已经创建了一个名为 kube_config_rancher-cluster.yml 的 kubeconfig 文件。该文件具有`kubectl`和`helm`的凭证。
 
