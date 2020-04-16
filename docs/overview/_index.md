@@ -1,19 +1,21 @@
 ---
 title: 产品简介
-description: 为您介绍Rancher的产品。帮助您了解 Rancher 容器平台
+description: 为您介绍Rancher的产品。帮助您了解 Rancher 容器平台。Rancher 是为使用容器的公司打造的容器管理平台。Rancher 简化了使用 Kubernetes 的流程，开发者可以随处运行 Kubernetes，满足 IT 需求规范，赋能 DevOps 团队。
 ---
 
-Rancher 是为使用容器的公司打造的容器管理平台。Rancher 简化了使用 Kubernetes 的流程，开发者可以随处运行 Kubernetes，满足 IT 需求规范，赋能 DevOps 团队。
+## 概述
+
+Rancher 是为使用容器的公司打造的容器管理平台。Rancher 简化了使用 Kubernetes 的流程，开发者可以随处运行 Kubernetes（Run Kubernetes Everywhere），满足 IT 需求规范，赋能 DevOps 团队。
 
 Rancher 1.x 最初是为了支持多种容器编排引擎而构建的，其中包括自己的容器编排引擎 Cattle。但随着 Kubernetes 在市场上的兴起，Rancher 2.x 已经完全转向了 Kubernetes。Rancher 2.x 可以部署和管理在任何地方运行的 Kubernetes 集群。
 
+> **说明：**下文中所有的“Rancher”代指的都是 Rancher 2.x。
+
 Rancher 可以创建来自 Kubernetes 托管服务提供商但集群，自动创建节点并安装 Kubernetes 集群，或者导入任何已经存在的 Kubernetes 集群。
 
-Rancher 通过支持集群的身份验证和基于角色的访问控制（RBAC），使系统管理员能够从一个位置控制全部集群的访问。
+Rancher 通过支持集群的身份验证和基于角色的访问控制（RBAC），使系统管理员能够从一个位置控制全部集群的访问。Rancher 可以对集群及其资源进行详细的监控和并在需要时发送告警，也可以将容器日志发送给外部日志系统，并通过应用商店与 Helm 集成。如果您具有外部 CI/CD 流水线系统，则可以将其与 Rancher 对接，如果没有，Rancher 也提供了简单易用的流水线来帮助您自动部署和升级工作负载。除此之外，Rancher 还有很多开箱即用的功能来帮助您更好的管理集群和业务应用，例如多集群应用，全局 DNS，服务网格，安全扫描，集群模版和基于 OPA 的策略管理等功能。
 
-然后，它可以对集群及其资源进行详细的监控和并在需要时发送告警，也可以将容器日志发送给外部日志系统，并通过应用商店与 Helm 集成。如果您具有外部 CI/CD 流水线系统，则可以将其与 Rancher 对接，如果没有，Rancher 也提供了简单易用的流水线来帮助您自动部署和升级工作负载。除此之外，还有很多开箱即用的功能来帮助您更好的管理集群和业务应用，例如多集群应用，全局 DNS，服务网格，安全扫描，集群模版和基于 OPA 的策略管理等功能。
-
-Rancher 是一个全栈式的 Kubernetes 容器管理平台，可以帮忙您在任何地方成功运行 Kubernetes 的工具。
+总而言之，Rancher 是一个全栈式的 Kubernetes 容器管理平台，也是一个可以在任何地方都能成功运行 Kubernetes 的工具。
 
 <div class="text-center">
 <iframe width="444" height="250" src="//player.bilibili.com/player.html?aid=94394330&cid=161139480&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
@@ -50,12 +52,12 @@ Rancher 应用商店包含了一套内置的 DevOps 开发工具。Rancher 通�
 
 Rancher API Server 是基于嵌入式 Kubernetes API Server 和 ETCD 数据库建立的，它提供了以下功能：
 
-#### 授权和角色权限控制
+### 授权和角色权限控制
 
 - **用户管理：** Rancher API server 除了管理用户在公司内部的使用的认证信息之外，还管理[用户访问外部服务所需的认证信息](/docs/admin-settings/authentication/_index)，如登录活动目录或 GitHub 所需的账号密码。
 - **授权：** Rancher API server 负责管理[权限控制策略](/docs/admin-settings/rbac/_index) 和 [安全策略](/docs/admin-settings/pod-security-policies/_index)。
 
-#### 使用 Kubernetes 的功能
+### 使用 Kubernetes 的功能
 
 - **运行 Kubernetes 集群：** Rancher API server 可以在已有节点上运行 [Kubernetes 集群](/docs/cluster-provisioning/_index) ，或对 Kubernetes 进行[版本升级](/docs/cluster-admin/upgrading-kubernetes/_index)。
 - **应用商店管理：** Rancher 可以使用[Helm Chart 应用商店](/docs/catalog/_index)重复部署应用。
@@ -63,18 +65,18 @@ Rancher API Server 是基于嵌入式 Kubernetes API Server 和 ETCD 数据库�
 - **流水线：** [流水线](/docs/project-admin/pipelines/_index) 可以帮助开发者快速高效地上线新软件。Rancher 支持给每一个项目单独配置流水线。
 - **Istio：** [Rancher 与 Istio 集成](/docs/cluster-admin/tools/istio/_index)，管理员或集群所有者可以将 Istio 交给开发者，然后开发者使用 Istio 执行安全策略，排查问题，或为快速发布、灰度发布和 A/B 测试进行流量控制。
 
-#### 配置云端基础信息
+### 配置云端基础信息
 
 - **同步节点信息：** Rancher API server 可以同步集群内所有[节点](/docs/cluster-admin/nodes/_index)的信息。
 - **配置云端基础信息：** 当 Rancher 与云服务提供商配置完了之后，可以在云端动态配置[新节点](/docs/cluster-provisioning/rke-clusters/node-pools/_index)和[持久化存储](/docs/cluster-admin/volumes-and-storage/_index)。
 
-#### 查看集群信息
+### 查看集群信息
 
 - **日志：** Rancher 可以跟多种主流日志工具集成，您可以设置 [集群日志](/docs/cluster-admin/tools/logging/_index) 或[项目日志](/docs/project-admin/tools/logging/_index)。
 - **监控：** 使用 Rancher，您可以通过 Prometheus 监控集群节点、Kubernetes 组件、软件部署的状态和进度。您可以设置 [集群监控](/docs/cluster-admin/tools/monitoring/_index) 或[项目监控](/docs/project-admin/tools/monitoring/_index)。
 - **告警信息：** 您需要随时知道集群和项目动态，才可以提高公司的运行效率。您可以设置[集群告警](/docs/cluster-admin/tools/alerts/_index) 或 [项目告警](/docs/project-admin/tools/alerts/_index)。
 
-## 使用 Rancher 编辑下游集群
+## 编辑下游集群
 
 对于已有集群而言，启动集群的方法决定了可编辑的选项和设置。例如，只有通过 RKE 启动的集群才有可编辑的**集群选项**。使用 Rancher 创建集群后，集群管理员可以管理集群会员，开启 Pod 域安全策略，管理节点池，以及进行 [其他操作](/docs/cluster-admin/editing-clusters/_index)。下表总结了每一种类型的集群和对应的可编辑的选项和设置：
 

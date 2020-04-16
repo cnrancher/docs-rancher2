@@ -1,16 +1,15 @@
 ---
 title: 推荐架构
+description: 安装 Rancher 的方式有两种：单节点安装和高可用集群安装。因为单节点安装只适用于测试和 demo 环境，而且单节点安装和高可用集群安装之间不能进行数据迁移，所以我们推荐从一开始就使用高可用集群安装的方式安装 Rancher。本文将详细介绍高可用集群安装的配置方式。如果您仍然准备在单节点上安装 Rancher，本文只有分开部署 Rancher 与下游集群的部分适用于单节点安装。
 ---
 
-安装 Rancher 的方式有两种：**单节点安装**和**高可用集群安装**。因为单节点安装只适用于测试和 demo 环境，而且单节点安装和高可用集群安装之间不能进行数据迁移，所以我们推荐从一开始就使用高可用集群安装的方式安装 Rancher。本文将详细介绍高可用集群安装的配置方式。如果您仍然准备在单节点上安装 Rancher，本文只有运行 Rancher 的节点[与下游集群开部署](#分开部署-rancher-与下游集群)的部分适用于单节点安装。
+安装 Rancher 的方式有两种：**单节点安装**和**高可用集群安装**。因为单节点安装只适用于测试和 demo 环境，而且单节点安装和高可用集群安装之间不能进行数据迁移，所以我们推荐从一开始就使用高可用集群安装的方式安装 Rancher。
+
+本文将详细介绍高可用集群安装的配置方式。如果您仍然准备在单节点上安装 Rancher，本文只有[分开部署 Rancher 与下游集群](#分开部署-rancher-与下游集群)的部分适用于单节点安装。
 
 ## 分开部署 Rancher 与下游集群
 
-下游集群，是运行您自己的应用和服务的下游 Kubernetes 集群。
-
-如果您是单节点通过 Docker 安装的 Rancher。那么运行 Rancher Server 的节点应该和您的下游集群区分开。
-
-如果您是 Kubernetes 方式安装的 Rancher，安装 Rancher Server 的集群应该和下游集群分开部署。
+下游集群，是运行您自己的应用和服务的下游 Kubernetes 集群。单节点安装和高可用集群安装都需要分开部署 Rancher Server 的集群应该和下游集群。
 
 ![Separation of Rancher Server from User Clusters](/img/rancher/rancher-architecture-separation-of-rancher-server.svg)
 
