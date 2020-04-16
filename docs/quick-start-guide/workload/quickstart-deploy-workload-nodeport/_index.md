@@ -1,5 +1,5 @@
 ---
-title: 快速部署带有NodePort的工作负载
+title: 部署带有 NodePort 的工作负载
 ---
 
 ## 先决条件
@@ -14,9 +14,9 @@ title: 快速部署带有NodePort的工作负载
 
 1. 访问**集群**页面，选择您刚刚创建的集群，进入集群页面。
 
-1. 从集群页面的主菜单**仪表盘**中选择**项目/命名空间**。
+1. 从集群页面的主菜单中选择**项目/命名空间**。
 
-1. 打开 **项目：默认项目**。
+1. 打开 **项目：Default**。
 
 1. 单击**资源 > 工作负载**。如果您使用的是 v2.3.0 之前的版本，请单击 **工作负载 > 工作负载**。
 
@@ -30,15 +30,15 @@ title: 快速部署带有NodePort的工作负载
 
 1. 从**端口映射**单击**添加端口**。
 
-1. 从**As a**下拉菜单选择**NodePort (On every node)**。
+1. 从 **网络模式** 下拉菜单选择 **NodePort**。
 
    ![As a dropdown, NodePort (On every node selected)](/img/rancher/nodeport-dropdown.png)
 
-1. 在**监听端口**一栏，保持**随机**选项。
+1. 在**主机监听端口**一栏，保持**随机**选项。
 
    ![On Listening Port, Random selected](/img/rancher/listening-port-field.png)
 
-1. 在**发布容器端口** 输入`80`。
+1. 在**容器端口** 输入`80`。
 
    ![Publish the container port, 80 entered](/img/rancher/container-port-field.png)
 
@@ -49,7 +49,7 @@ title: 快速部署带有NodePort的工作负载
 **结果：**
 
 - 部署了工作负载。这个过程可能需要几分钟完成。
-- 当您的工作负载部署完成后，它的状态是**Active**，您可以从项目的**工作负载**页面查看工作负载当前的状态。
+- 当您的工作负载部署完成后，它的状态将变为**Active**，您可以从项目的**工作负载**页面查看工作负载当前的状态。
 
 ## 查看您的应用
 
@@ -57,7 +57,7 @@ title: 快速部署带有NodePort的工作负载
 
 ## 注意事项
 
-当您使用云端虚拟机时，您可能会因为权限不够而无法访问运行容器的端口。在这种情况下，您可以在本地机器的 ssh 会话中输入`Execute Shell`命令，测试 Nginx，找到可用的端口，使用`:`后面显示的端口。以下文代码为例，可用的端口是`31568`。
+当您使用云端虚拟机时，您可能会因为权限不够而无法访问所运行容器的端口。在这种情况下，您可以在本地使用 ssh 连接到集群中的任意节点，然后通过命令行测试 Nginx。在 Rancher UI 中找到新建的工作负载的可用的端口，也就工作负载下面 `:` 后显示的端口。以下文代码为例，可用的端口是`31568`。
 
 ```sh
 gettingstarted@rancher:~$ curl http://localhost:31568
@@ -146,8 +146,8 @@ gettingstarted@rancher:~$
 
 ## 后续操作
 
-使用完您通过快速入门搭建的 Rancher 沙盒后，您需要清理遗留在环境中和 Rancher 相关的资源，删除 Rancher Server 和您的集群，请单击下方链接查看操作指导。
+使用完您通过快速入门搭建的 Rancher 沙盒后，您可能想要清理遗留在环境中与 Rancher 相关的资源，并删除 Rancher Server 和您的集群，请单击下方链接查看操作指导。
 
-- [清理环境-Amazon AWS](/docs/quick-start-guide/deployment/amazon-aws-qs/_index)
-- [清理环境-DigitalOcean](/docs/quick-start-guide/deployment/digital-ocean-qs/_index)
-- [清理环境-Vagrant](/docs/quick-start-guide/deployment/quickstart-vagrant/_index)
+- [清理环境：Amazon AWS](/docs/quick-start-guide/deployment/amazon-aws-qs/_index)
+- [清理环境：DigitalOcean](/docs/quick-start-guide/deployment/digital-ocean-qs/_index)
+- [清理环境：Vagrant](/docs/quick-start-guide/deployment/quickstart-vagrant/_index)
