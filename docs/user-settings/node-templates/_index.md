@@ -2,46 +2,48 @@
 title: 管理主机模板
 ---
 
-When you provision a cluster [hosted by an infrastructure provider](/docs/cluster-provisioning/rke-clusters/node-pools), [node templates](/docs/cluster-provisioning/rke-clusters/node-pools/#node-templates) are used to provision the cluster nodes. These templates use Docker Machine configuration options to define an operating system image and settings/parameters for the node. You can create node templates in two contexts:
+## 概述
 
-* While [provisioning a node pool cluster](/docs/cluster-provisioning/rke-clusters/node-pools).
-* At any time, from your [user settings](#creating-a-node-template-from-user-settings).
+[在新节点上启动集群](/docs/cluster-provisioning/rke-clusters/node-pools/_index)时，需要用到[节点模板](/docs/cluster-provisioning/rke-clusters/node-pools/_index#节点模板)创建集群内的节点。每个节点都是一台主机。
+这些模板使用 Docker Machine 配置选项，定义主机操作系统镜像和主机配置。创建节点模板的方式有两种：
 
-When you create a node template, it is bound to your user profile. Node templates cannot be shared among users. You can delete stale node templates that you no longer user from your user settings.
+- 创建节点池集群的同时，创建节点模板，详情请参考[创建节点池集群](/docs/cluster-provisioning/rke-clusters/node-pools/_index)。
+- 通过 UI 界面菜单栏的[用户设置](#通过用户设置创建节点模板)，创建节点模板。
 
-### Creating a Node Template from User Settings
+节点模板与用户绑定，用户之间不可共享节点模板。当您不再使用某些节点模板时，您可以通过**用户设置**删除这些模板。
 
-1. From your user settings, select **User Avatar > Node Templates**.
-1. Click **Add Template**.
-1. Select one of the cloud providers available. Then follow the instructions on screen to configure the template.
+## 通过用户设置创建节点模板
 
-**Result:** The template is configured. You can use the template later when you [provision a node pool cluster](/docs/cluster-provisioning/rke-clusters/node-pools).
+1. 进入用户设置页面，单击页面右上方的 **用户头像**，选择 **节点模板**。
+1. 单击**添加模板**。
+1. 选择云服务提供商，按照页面提示配置节点模板。
 
-### Updating a Node Template
+**结果：**创建了一个节点模板，完成节点模板配置。[创建节点池集群](/docs/cluster-provisioning/rke-clusters/node-pools/_index)时，可以使用这个模板。
 
-1. From your user settings, select **User Avatar > Node Templates**.
-1. Choose the node template that you want to edit and click the **Vertical Ellipsis (...) > Edit**.
+## 更新节点模板
 
-   > **Note:** As of v2.2.0, the default `active` [node drivers](/docs/admin-settings/drivers/node-drivers/) and any node driver, that has fields marked as `password` , are required to use [cloud credentials](/docs/cluster-provisioning/rke-clusters/node-pools/#cloud-credentials). If you have upgraded to v2.2.0, existing node templates will continue to work with the previous account access information, but when you edit the node template, you will be required to create a cloud credential and the node template will start using it.
+1. 进入用户设置页面，单击页面右上方的 **用户头像**，选择 **节点模板**。
+1. 选择需要更新的节点，单击 **... > 编辑**。
 
-1. Edit the required information and click **Save**.
+   > **说明：** 在 v2.2.0 版本中，默认状态为`active` 的[节点驱动](/docs/admin-settings/drivers/node-drivers/_index)，和节点模板中有字段被标记为`password`的节点驱动，必须使用[云凭证](/docs/cluster-provisioning/rke-clusters/node-pools/_index#cloud-credentials)。如果您使用的 Rancher 是 v2.2.0 之前的版本，升级到 v2.2.0 后，原有的节点模板不会受到这条规则约束，仍然可以正常使用。但是当您更新这些节点模板时，您需要创建云凭证。完成模板更新后，这些节点模板使用云凭证。
 
-**Result:** The node template is updated. All node pools using this node template will automatically use the updated information when new nodes are added.
+1. 更新模板信息，单击**保存**，完成修改。
 
-### Cloning Node Templates
+**结果：** 完成节点模板更新。在使用该节点模板的节点池中添加节点时，节点池会自动使用更新后的模板。
 
-When creating new node templates from your user settings, you can clone an existing template and quickly update its settings rather than creating a new one from scratch. Cloning templates saves you the hassle of re-entering access keys for the cloud provider.
+## 复制节点模板
 
-1. From your user settings, select **User Avatar > Node Templates**.
-1. Find the template you want to clone. Then select **Ellipsis > Clone**.
-1. Complete the rest of the form.
+创建节点模板的时候，您可以复制已有的节点模板，然后在这个模板的基础上修改参数。相较从头开始创建模板而言，这种方式更加简单快捷。请参考以下步骤复制节点模板。
 
-**Result:** The template is cloned and configured. You can use the template later when you [provision a node pool cluster](/docs/cluster-provisioning/rke-clusters/node-pools).
+1. 进入用户设置页面，单击页面右上方的 **用户头像**，选择 **节点模板**。
+1. 选择需要复制的节点，单击 **... > 复制**。
+1. 填写表格上所需的其他信息。
 
-### Deleting a Node Template
+**结果：**成功复制了一个节点模板，完成了该模板的配置更新。您可以使用这个模板[创建节点池集群](/docs/cluster-provisioning/rke-clusters/node-pools/_index)。
 
-When you no longer use a node template, you can delete it from your user settings.
+## 删除节点模板
 
-1. From your user settings, select **User Avatar > Node Templates**.
-1. Select one or more template from the list. Then click **Delete**. Confirm the delete when prompted.
+您不再使用某个节点模板的时候，可以在用户设置页面删除节点模板。
 
+1. 进入用户设置页面，单击页面右上方的 **用户头像**，选择 **节点模板**。
+1. 勾选一个或多个节点模板，单击**删除**。页面弹出确认是否删除的信息后，单击**确认**，完成删除。
