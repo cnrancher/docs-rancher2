@@ -28,6 +28,9 @@ const metadata = {
     版本迁移: '为您介绍如何从Rancher容器平台1.6版本迁移到2.x版本'
   },
   docs: {
+    'releases/v2.4.2': '版本说明 - v2.4.2',
+    'releases/v2.4.0': '版本说明 - v2.4.0',
+    'releases/v2.3.6': '版本说明 - v2.3.6',
     'releases/v2.3.5': '版本说明 - v2.3.5',
     'releases/v2.3.4': '版本说明 - v2.3.4',
     'releases/v2.3.3': '版本说明 - v2.3.3',
@@ -121,7 +124,7 @@ const metadata = {
     'cli/_index': 'Rancher CLI',
     'system-tools/_index': '系统工具',
     'user-settings/api-keys/_index': 'API 密钥',
-    'user-settings/node-templates/_index': '主机模板',
+    'user-settings/node-templates/_index': '节点模版',
     'user-settings/cloud-credentials/_index': '云密钥',
     'user-settings/preferences/_index': '偏好设置',
     'api/_index': '如何调用 Rancher API',

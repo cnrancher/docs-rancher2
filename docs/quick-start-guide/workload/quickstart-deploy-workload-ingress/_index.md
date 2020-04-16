@@ -1,5 +1,5 @@
 ---
-title: 快速部署带有Ingress的工作负载
+title: 部署带有 Ingress 的工作负载
 ---
 
 ## 先决条件
@@ -14,9 +14,9 @@ title: 快速部署带有Ingress的工作负载
 
 1. 访问**集群**页面，选择您刚刚创建的集群，进入集群页面。
 
-1. 从集群页面的主菜单**仪表盘**中选择**项目/命名空间**。
+1. 从集群页面的主菜单中选择**项目/命名空间**。
 
-1. 打开 **项目：默认项目**。
+1. 打开 **项目：Default**。
 
 1. 单击**资源 > 工作负载**。如果您使用的是 v2.3.0 之前的版本，请单击 **工作负载 > 工作负载**。
 
@@ -35,7 +35,7 @@ title: 快速部署带有Ingress的工作负载
 **结果：**
 
 - 部署了工作负载。这个过程可能需要几分钟完成。
-- 当您的工作负载部署完成后，它的状态是**Active**，您可以从项目的**工作负载**页面查看工作负载当前的状态。
+- 当您的工作负载部署完成后，它的状态将变为**Active**，您可以从项目的**工作负载**页面查看工作负载当前的状态。
 
 ## 暴露服务
 
@@ -43,9 +43,9 @@ title: 快速部署带有Ingress的工作负载
 
 1.  访问**集群**页面，选择您刚刚创建的集群，进入集群页面。
 
-1.  从集群页面的主菜单**仪表盘**中选择**项目/命名空间**。
+1.  从集群页面的主菜单中选择**项目/命名空间**。
 
-1.  打开 **项目 > 默认项目**。
+1.  打开 **项目 > Default**。
 
 1.  单击**资源 > 工作负载 > 负载均衡**。如果您使用的是 v2.3.0 之前的版本，请单击 **工作负载 > 负载均衡**。
 
@@ -53,7 +53,7 @@ title: 快速部署带有Ingress的工作负载
 
 1.  输入 Ingress 负载均衡的名称，如 “hello”。
 
-1.  在**Target**一栏，从下拉菜单选择您服务的名称。
+1.  在**目标**一栏，从下拉菜单选择您服务的名称。
 
 1.  在**端口**一栏输入 `80`。
 
@@ -71,8 +71,8 @@ title: 快速部署带有Ingress的工作负载
 
 ## 后续操作
 
-使用完您通过快速入门搭建的 Rancher 沙盒后，您需要清理遗留在环境中和 Rancher 相关的资源，删除 Rancher Server 和您的集群，请单击下方链接查看操作指导。
+使用完您通过快速入门搭建的 Rancher 沙盒后，您可能想要清理遗留在环境中与 Rancher 相关的资源，并删除 Rancher Server 和您的集群，请单击下方链接查看操作指导。
 
-- [清理环境-Amazon AWS](/docs/quick-start-guide/deployment/amazon-aws-qs/_index)
-- [清理环境-DigitalOcean](/docs/quick-start-guide/deployment/digital-ocean-qs/_index)
-- [清理环境-Vagrant](/docs/quick-start-guide/deployment/quickstart-vagrant/_index)
+- [清理环境：Amazon AWS](/docs/quick-start-guide/deployment/amazon-aws-qs/_index)
+- [清理环境：DigitalOcean](/docs/quick-start-guide/deployment/digital-ocean-qs/_index)
+- [清理环境：Vagrant](/docs/quick-start-guide/deployment/quickstart-vagrant/_index)
