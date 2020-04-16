@@ -1,174 +1,148 @@
 ---
 title: 产品架构
+description: 本文主要介绍 Rancher Server 架构和各个组件的功能，用户如何通过 Rancher Server 或授权集群端点控制下游集群，以及如何通过授权集群访问端点管理下游集群。 Rancher Server 由认证代理（Authentication Proxy）、Rancher API Server、集群控制器（Cluster Controller）、etcd 节点和集群 Agent（Cluster Agent） 组成。除了集群 Agent 以外，其他组件都部署在 Rancher Server 中。
 ---
 
-This section focuses on the Rancher server, its components, and how Rancher communicates with downstream Kubernetes clusters.
+本文主要介绍 Rancher Server 架构和各个组件的功能，例如：用户如何通过 Rancher Server 或授权集群端点控制下游集群，以及如何通过授权集群访问端点管理下游集群。
 
-For information on the different ways that Rancher can be installed, refer to the [overview of installation options.](/docs/installation/#overview-of-installation-options)
+> 本文默认读者已经对 Docker 和 Kubernetes 有一定的了解。如果您需要了解 Kubernetes 组件的工作机制和原理，请查阅 [Kubernetes 概念](/docs/overview/concepts/_index)。
 
-For a list of main features of the Rancher API server, refer to the [overview section.](/docs/overview/#features-of-the-rancher-api-server)
+## Rancher Server 架构
 
-For guidance about setting up the underlying infrastructure for the Rancher server, refer to the [architecture recommendations.](/docs/overview/architecture-recommendations)
+Rancher Server 由认证代理（Authentication Proxy）、Rancher API Server、集群控制器（Cluster Controller）、etcd 节点和集群 Agent（Cluster Agent） 组成。除了集群 Agent 以外，其他组件都部署在 Rancher Server 中。
 
-> This section assumes a basic familiarity with Docker and Kubernetes. For a brief explanation of how Kubernetes components work together, refer to the [concepts](/docs/overview/concepts) page.
+图中描述的是用户通过 Rancher Server 管控 Rancher 部署的 Kubernetes 集群（RKE 集群）和托管的 Kubernetes 集群的（EKS）集群的流程。以用户下发指令为例，指令的流动路径如下：
 
-This section covers the following topics:
+1. 首先，用户通过 Rancher UI（即 Rancher 控制台） Rancher 命令行工具（Rancher CLI）输入指令；直接调用 Rancher API 接口也可以达到相同的效果。
+2. 用户通过 Rancher 的代理认证后，指令会进一步下发到 Rancher Server 。
+3. 与此同时，Rancher Server 也会执行容灾备份，将数据备份到 etcd 节点。
+4. 然后 Rancher Server 把指令传递给集群控制器。集群控制器把指令传递到下游集群的 Agent，最终通过 Agent 把指令下发到指定的集群中。
 
-- [Rancher server architecture](#rancher-server-architecture)
-- [Communicating with downstream user clusters](#communicating-with-downstream-user-clusters)
-  - [The authentication proxy](#1-the-authentication-proxy)
-  - [Cluster controllers and cluster agents](#2-cluster-controllers-and-cluster-agents)
-  - [Node agents](#3-node-agents)
-  - [Authorized cluster endpoint](#4-authorized-cluster-endpoint)
-- [Important files](#important-files)
-- [Tools for provisioning Kubernetes clusters](#tools-for-provisioning-kubernetes-clusters)
-- [Rancher server components and source code](#rancher-server-components-and-source-code)
+如果 Rancher Server 出现问题，我们也提供了备用方案，您可以通过[授权集群端点](#授权集群端点)管理集群。
 
-## Rancher Server Architecture
+考虑到性能表现和安全因素，我们建议您使用两个 Kubernetes 集群，分开部署 Rancher Server 和工作负载。部署 Rancher Server 后，您可以创建或导入集群，然后在这些集群上运行您的工作负载。
 
-The majority of Rancher 2.x software runs on the Rancher Server. Rancher Server includes all the software components used to manage the entire Rancher deployment.
-
-The figure below illustrates the high-level architecture of Rancher 2.x. The figure depicts a Rancher Server installation that manages two downstream Kubernetes clusters: one created by RKE and another created by Amazon EKS (Elastic Kubernetes Service).
-
-For the best performance and security, we recommend a dedicated Kubernetes cluster for the Rancher management server. Running user workloads on this cluster is not advised. After deploying Rancher, you can [create or import clusters](/docs/cluster-provisioning/#cluster-creation-in-rancher) for running your workloads.
-
-The diagram below shows how users can manipulate both [Rancher-launched Kubernetes](/docs/cluster-provisioning/rke-clusters/) clusters and [hosted Kubernetes](/docs/cluster-provisioning/hosted-kubernetes-clusters/) clusters through Rancher's authentication proxy:
-
-<figcaption>Managing Kubernetes Clusters through Rancher's Authentication Proxy</figcaption>
+<figcaption>通过Rancher认证代理管理 Kubernetes 集群</figcaption>
 
 ![Architecture](/img/rancher/rancher-architecture-rancher-api-server.svg)
 
-You can install Rancher on a single node, or on a high-availability Kubernetes cluster.
+您可以在单个节点或高可用的 Kubernetes 集群上安装 Rancher。由于单节点安装只适用于开发和测试环境，而且单节点和高可用集群之间无法进行数据迁移，所以我们建议您从一开始就使用高可用的 Kubernetes 集群来部署 Rancher Server，而且您需要分开部署运行 Rancher Server 的集群和运行自己业务的下游集群。
 
-A high-availability Kubernetes installation is recommended for production. A Docker installation may be used for development and testing purposes, but there is no migration path from a single-node to a high-availability installation. Therefore, you may want to use a Kubernetes installation from the start.
+## 与下游集群交互
 
-The Rancher server, regardless of the installation method, should always run on nodes that are separate from the downstream user clusters that it manages. If Rancher is installed on a high-availability Kubernetes cluster, it should run on a separate cluster from the cluster(s) it manages.
+本小节通过两个用户 Bob 和 Alice 的案例，讲解 Rancher 启动和管理下游集群的具体过程，和每个 Rancher 组件的作用。
 
-## Communicating with Downstream User Clusters
+下图演示了集群控制器、集群 Agent 和 Node Agent 是如何允许 Rancher 控制下游集群的。
 
-This section describes how Rancher provisions and manages the downstream user clusters that run your apps and services.
-
-The below diagram shows how the cluster controllers, cluster agents, and node agents allow Rancher to control downstream clusters.
-
-<figcaption>Communicating with Downstream Clusters</figcaption>
+<figcaption>与下游集群通信</figcaption>
 
 ![Rancher Components](/img/rancher/rancher-architecture-cluster-controller.svg)
 
-The following descriptions correspond to the numbers in the diagram above:
+图中的数字和对应的描述如下：
 
-1. [The Authentication Proxy](#1-the-authentication-proxy)
-2. [Cluster Controllers and Cluster Agents](#2-cluster-controllers-and-cluster-agents)
-3. [Node Agents](#3-node-agents)
-4. [Authorized Cluster Endpoint](#4-authorized-cluster-endpoint)
+1. [认证代理](#认证代理)
+2. [集群控制器和集群 Agent](#集群控制器和集群-agent)
+3. [节点 Agents](#节点-agent)
+4. [授权集群端点](#授权集群端点)
 
-#### 1. The Authentication Proxy
+### 认证代理
 
-In this diagram, a user named Bob wants to see all pods running on a downstream user cluster called User Cluster 1. From within Rancher, he can run a `kubectl` command to see
-the pods. Bob is authenticated through Rancher's authentication proxy.
+图左上角一个叫做 Bob 的用户希望查看下游集群“User Cluster 1”里面正在运行的 pod。Bob 发起的请求会首先经过认证代理，通过认证之后，Rancher 的 认证代理才会把 API 调用命令转发到下游集群。
 
-The authentication proxy forwards all Kubernetes API calls to downstream clusters. It integrates with authentication services like local authentication, Active Directory, and GitHub. On every Kubernetes API call, the authentication proxy authenticates the caller and sets the proper Kubernetes impersonation headers before forwarding the call to Kubernetes masters.
+认证代理集成了多种认证方式，如本地认证、活动目录认证、GitHub 认证等。在发起每一个 Kubernetes API 调用请求的时候，认证代理会去确认请求方的身份，在转发调用命令前，请设置正确的 Kubernetes impersonation 的消息头。
 
-Rancher communicates with Kubernetes clusters using a [service account,](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/) which provides an identity for processes that run in a pod.
+Rancher 使用 [Service Account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/) （Service Accout 提供了一种方便的认证机制）和 Kubernetes 进行交互。
 
-By default, Rancher generates a [kubeconfig file](/docs/cluster-admin/cluster-access/kubectl/) that contains credentials for proxying through the Rancher server to connect to the Kubernetes API server on a downstream user cluster. The kubeconfig file (`kube_config_rancher-cluster.yml`) contains full access to the cluster.
+默认状态下，Rancher 生成一个包含认证信息的[kubeconfig](/docs/cluster-admin/cluster-access/kubectl/_index)文件，为 Rancher Server 和下游集群的 Kubernetes API Server 之间的通信提供认证。该文件包含了访问集群的所有权限。
 
-#### 2. Cluster Controllers and Cluster Agents
+### 集群控制器和集群 Agent
 
-Each downstream user cluster has a cluster agent, which opens a tunnel to the corresponding cluster controller within the Rancher server.
+每一个下游集群都有一个集群 Agent 保持下游集群的集群控制器与 Rancher Server 之间的信息畅通。
 
-There is one cluster controller and one cluster agent for each downstream cluster. Each cluster controller:
+集群控制器具有以下功能：
 
-- Watches for resource changes in the downstream cluster
-- Brings the current state of the downstream cluster to the desired state
-- Configures access control policies to clusters and projects
-- Provisions clusters by calling the required Docker machine drivers and Kubernetes engines, such as RKE and GKE
+- 检测下游集群的资源变化，如内存使用率、CPU 使用率等
+- 把下游集群从“当前”状态变更到“目标”状态
+- 配置集群和项目的访问控制策略
+- 通过调用 Docker Machine 和 Kubernetes Engine，如 RKE 和 GKE，创建集群。
 
-By default, to enable Rancher to communicate with a downstream cluster, the cluster controller connects to the cluster agent. If the cluster agent is not available, the cluster controller can connect to a [node agent](#3-node-agents) instead.
+默认状态下，集群控制器连接 Agent，Rancher 才可以与下游集群通信。如果集群 Agent 不可用，集群控制器可以连接到节点 Agent，通过节点 Agent 实现用户和集群之间的通信。
 
-The cluster agent, also called `cattle-cluster-agent`, is a component that runs in a downstream user cluster. It performs the following tasks:
+集群 Agent，也叫做“cattle-cluster-agent”，是在下游集群中运行的组件，它具有以下功能：
 
-- Connects to the Kubernetes API of Rancher-launched Kubernetes clusters
-- Manages workloads, pod creation and deployment within each cluster
-- Applies the roles and bindings defined in each cluster's global policies
-- Communicates between the cluster and Rancher server (through a tunnel to the cluster controller) about events, stats, node info, and health
+- 连接使用 Rancher 部署的 Kubernetes 集群（RKE 集群）中的 Kubernetes API。
+- 管理集群内的工作负载，pod 创建和部署。
+- 根据每个集群的设置，配置 Role 和 RoleBindings
+- 实现集群和 Rancher Server 之间的消息传输，包括事件，指标，健康状况和节点信息等。
 
-#### 3. Node Agents
+### 节点 Agent
 
-If the cluster agent (also called `cattle-cluster-agent`) is not available, one of the node agents creates a tunnel to the cluster controller to communicate with Rancher.
+如果集群 Agent 不可用，下游集群中的其中一个节点 Agent 会创建一个通信管道，由节点 Agent 连接到集群控制器，实现下游集群和 Rancher 之间的通信。
 
-The `cattle-node-agent` is deployed using a [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) resource to make sure it runs on every node in a Rancher-launched Kubernetes cluster. It is used to interact with the nodes when performing cluster operations. Examples of cluster operations include upgrading the Kubernetes version and creating or restoring etcd snapshots.
+部署节点 Agent 的方式有很多，我们建议您使用[DaemonSet](https://kubernetes.io/docs/concepts/workloads/Controllers/daemonset/)部署节点 Agent ，这种方式可以确保下游集群内每个节点都成功运行节点 Agent。执行集群操作时，可以使用这种方式将指令下发到下游集群。集群操作包括：升级 Kubernetes 版本、创建 etcd 节点备份和恢复 etcd 节点。
 
-#### 4. Authorized Cluster Endpoint
+### 授权集群端点
 
-An authorized cluster endpoint allows users to connect to the Kubernetes API server of a downstream cluster without having to route their requests through the Rancher authentication proxy.
+Rancher Server 和下游集群之间有明显的延迟，或 Rancher Server 不可用时，用户可以通过授权集群端点连接下游集群，实现 Rancher Server 和集群之间的通信，降低网络延迟。
 
-> The authorized cluster endpoint only works on Rancher-launched Kubernetes clusters. In other words, it only works in clusters where Rancher [used RKE](/docs/cluster-provisioning/rke-clusters) to provision the cluster. It is not available for imported clusters, or for clusters in a hosted Kubernetes provider, such as Amazon's EKS.
+> 需要注意的是，只有 Rancher 部署的 Kubernetes 集群（RKE 集群）可以使用授权集群端点这个功能。其他类型的集群，如导入的集群、托管的集群等，并不能够使用此功能。
 
-There are two main reasons why a user might need the authorized cluster endpoint:
+`kube-api-auth` 微服务向授权集群端点提供了用户认证功能。使用 `kubectl` 访问下游集群时，集群的 Kubernetes API Server 通过 `kube-api-auth` 对用户进行认证。
 
-- To access a downstream user cluster while Rancher is down
-- To reduce latency in situations where the Rancher server and downstream cluster are separated by a long distance
+与授权集群端点类似， `kube-api-auth` 认证功能只在 Rancher 部署的 Kubernetes 集群（RKE 集群）中有效。
 
-The `kube-api-auth` microservice is deployed to provide the user authentication functionality for the authorized cluster endpoint. When you access the user cluster using `kubectl`, the cluster's Kubernetes API server authenticates you by using the `kube-api-auth` service as a webhook.
+> 使用场景举例：假设 Rancher Server 位于美国，用户“Alice”和她管理的下游集群“User Cluster 1”位于澳大利亚。虽然 Alice 可以使用 Rancher 控制台管理 User Cluster 1 中的资源，但是她发出的请求要从澳大利亚发送到美国的 Server 端，然后再由 Server 代理回澳大利亚的集群端，澳大利亚集群端处理完请求后，再返回给美国的 Server 端，最后才能返回给澳大利亚的“Alice”。因为美澳之间的距离非常遥远，所以发送的请求和返回的请求结果都会存在显著的延迟。Alice 可以使用授权集群端点，降低延迟，更好地掌控她的下游集群。
 
-Like the authorized cluster endpoint, the `kube-api-auth` authentication service is also only available for Rancher-launched Kubernetes clusters.
+为下游集群开启授权集群端点后，Rancher 会在“kubeconfig”文件中额外生成一段 Kubernetes context，来允许用户直接连接到集群。kubeconfig 这个文件中含有 `kubectl` 和 `helm` 的认证信息。
 
-> **Example scenario:** Let's say that the Rancher server is located in the United States, and User Cluster 1 is located in Australia. A user, Alice, also lives in Australia. Alice can manipulate resources in User Cluster 1 by using the Rancher UI, but her requests will have to be sent from Australia to the Rancher server in the United States, then be proxied back to Australia, where the downstream user cluster is. The geographical distance may cause significant latency, which Alice can reduce by using the authorized cluster endpoint.
+如果 Rancher 出现问题，无法连接，您需要使用 kubeconfig 中的 context 帮助您访问集群。因此，我们建议您导出一份 kubeconfig 文件副本，保存到本地，以备不时之需。更多详细信息请参考 [kubectl 和 kubeconfig 文件](/docs/cluster-admin/cluster-access/kubectl/_index)。
 
-With this endpoint enabled for the downstream cluster, Rancher generates an extra Kubernetes context in the kubeconfig file in order to connect directly to the cluster. This file has the credentials for `kubectl` and `helm`.
+## 重要文件
 
-You will need to use a context defined in this kubeconfig file to access the cluster if Rancher goes down. Therefore, we recommend exporting the kubeconfig file so that if Rancher goes down, you can still use the credentials in the file to access your cluster. For more information, refer to the section on accessing your cluster with [kubectl and the kubeconfig file.](/docs/cluster-admin/cluster-access/kubectl)
+下列文件在运维、排查问题和升级集群的场景中都会用到：
 
-## Important Files
+- `rancher-cluster.yml` ：RKE 集群配置文件。
+- `kube_config_rancher-cluster.yml` ：集群的 kubeconfig 文件，它包含了访问集群的全部权限。如果 Rancher 出现故障，无法运行，您可以使用这个文件连接通过 Rancher 部署的 Kubernetes 集群（RKE 集群）。
+- `rancher-cluster.rkestate` ：Kubernetes 集群状态文件，该文件含有访问集群的所有权限。只有使用 RKE 0.2.0 或以上版本时，才会创建该文件。
 
-The files mentioned below are needed to maintain, troubleshoot and upgrade your cluster:
+> **注意：** 后两个文件名的“rancher-cluster”部分取决于您如何命名 RKE 集群的配置文件。
 
-- `rancher-cluster.yml`: The RKE cluster configuration file.
-- `kube_config_rancher-cluster.yml`: The Kubeconfig file for the cluster, this file contains credentials for full access to the cluster. You can use this file to authenticate with a Rancher-launched Kubernetes cluster if Rancher goes down.
-- `rancher-cluster.rkestate`: The Kubernetes cluster state file. This file contains credentials for full access to the cluster. Note: This state file is only created when using RKE v0.2.0 or higher.
+更多详细信息请参考[kubeconfig 文件](/docs/cluster-admin/cluster-access/kubectl/_index)。
 
-For more information on connecting to a cluster without the Rancher authentication proxy and other configuration options, refer to the [kubeconfig file](/docs/cluster-admin/cluster-access/kubeconfig/) documentation.
+## 启动 Kubernetes 集群所需工具
 
-## Tools for Provisioning Kubernetes Clusters
+下游 Kubernetes 集群的类型决定了启动集群需要的工具。集群类型主要分为以下几种：
 
-The tools that Rancher uses to provision downstream user clusters depends on the type of cluster that is being provisioned.
+### Rancher 通过云供应商自动创建节点部署 Kubernetes 集群
 
-#### Rancher Launched Kubernetes for Nodes Hosted in an Infrastructure Provider
+Rancher 可以动态启动位于云上的节点，如 Amazon EC2、DigitalOcean、Azure 和 vSphere，然后在节点上安装 Kubernetes。Rancher 使用 [RKE](https://github.com/rancher/rke) 和 [docker-machine](https://github.com/rancher/machine)启动这种集群。
 
-Rancher can dynamically provision nodes in a provider such as Amazon EC2, DigitalOcean, Azure, or vSphere, then install Kubernetes on them.
+### Rancher 通过自定义主机部署的 Kubernetes 集群
 
-Rancher provisions this type of cluster using [RKE](https://github.com/rancher/rke) and [docker-machine.](https://github.com/rancher/machine)
+配置这种集群时，Rancher 可以在已有的虚拟机、物理机或云主机上安装 Kubernetes。这种集群叫自定义集群。Rancher 使用[RKE](https://github.com/rancher/rke)启动这种集群。
 
-#### Rancher Launched Kubernetes for Custom Nodes
+### 云服务供应商提供的托管的 Kubernetes 集群
 
-When setting up this type of cluster, Rancher installs Kubernetes on existing nodes, which creates a custom cluster.
+配置这种集群时，Kubernetes 由云服务供应商安装，如 GKE、ECS 和 AKS。Rancher 使用[kontainer-engine](https://github.com/rancher/kontainer-engine)来调用云厂商的 API 来启动集群。
 
-Rancher provisions this type of cluster using [RKE.](https://github.com/rancher/rke)
+### 导入的 Kubernetes 集群
 
-#### Hosted Kubernetes Providers
+这种情况下，Rancher 只需要连接到已经配置好 Kubernetes 的集群。因此，Rancher 只配置 Rancher Agent 与集群通信，不直接启动集群。
 
-When setting up this type of cluster, Kubernetes is installed by providers such as Google Kubernetes Engine, Amazon Elastic Container Service for Kubernetes, or Azure Kubernetes Service.
+## Rancher Server 组件和源代码
 
-Rancher provisions this type of cluster using [kontainer-engine.](https://github.com/rancher/kontainer-engine)
-
-#### Imported Kubernetes Clusters
-
-In this type of cluster, Rancher connects to a Kubernetes cluster that has already been set up. Therefore, Rancher does not provision Kubernetes, but only sets up the Rancher agents to communicate with the cluster.
-
-## Rancher Server Components and Source Code
-
-This diagram shows each component that the Rancher server is composed of:
+下图说明了 Rancher Server 都有哪些组件：
 
 ![Rancher Components](/img/rancher/rancher-architecture-rancher-components.svg)
 
-The GitHub repositories for Rancher can be found at the following links:
+Rancher 的 GitHub 源代码仓库如下：
 
-- [Main Rancher server repository](https://github.com/rancher/rancher)
+- [Rancher server 的主代码库](https://github.com/rancher/rancher)
 - [Rancher UI](https://github.com/rancher/ui)
 - [Rancher API UI](https://github.com/rancher/api-ui)
-- [Norman,](https://github.com/rancher/norman) Rancher's API framework
+- [Norman](https://github.com/rancher/norman)
 - [Types](https://github.com/rancher/types)
-- [Rancher CLI](https://github.com/rancher/cli)
-- [Catalog applications](https://github.com/rancher/helm)
+- [Rancher 命令行](https://github.com/rancher/cli)
+- [应用商店](https://github.com/rancher/helm)
 
-This is a partial list of the most important Rancher repositories. For more details about Rancher source code, refer to the section on [contributing to Rancher.](/docs/contributing/#repositories) To see all libraries and projects used in Rancher, see the [`go.mod` file](https://github.com/rancher/rancher/blob/master/go.mod) in the `rancher/rancher` repository.
+上面只列举了 Rancher 最重要的组件。请查看[参与 Rancher 开源贡献](/docs/contributing/_index#源代码仓库)，获取详细信息。请查看 `rancher/rancher` 代码库中的 [ `go.mod` 文件](https://github.com/rancher/rancher/blob/master/go.mod)，获取 Rancher 使用的所有库和项目。

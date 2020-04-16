@@ -1,38 +1,47 @@
 ---
-title: Vagrant Quick Start
+title: Vagrant 快速部署
 ---
 
-The following steps quickly deploy a Rancher Server with a single node cluster attached.
+您可以按照以下操作步骤部署 Rancher Server 和一个单节点的 Kubernetes 集群。
 
-### Prerequisites
+## 先决条件
 
-- [Vagrant](https://www.vagrantup.com): Vagrant is required as this is used to provision the machine based on the Vagrantfile.
-- [Virtualbox](https://www.virtualbox.org): The virtual machines that Vagrant provisions need to be provisioned to VirtualBox.
-- At least 4GB of free RAM.
+- [Vagrant](https://www.vagrantup.com)：因为 Rancher Server 基于 Vagrantfile 运行，所以已经安装和配置好了 Vagrant 是先决条件之一。
 
-### Getting Started
+- [Virtualbox](https://www.virtualbox.org)：需要在 VirtualBox 中启动运行 Vagrant 的虚拟机。
 
-1. Clone [Rancher Quickstart](https://github.com/rancher/quickstart) to a folder using `git clone https://github.com/rancher/quickstart`.
+- 至少 4 GB 的运行内存。
 
-2. Go into the folder containing the Vagrantfile by executing `cd quickstart/vagrant`.
+## 操作步骤
 
-3. **Optional:** Edit `config.yaml` to:
+1. 打开命令行工具，执行`git clone https://github.com/rancher/quickstart`命令，把 Rancher 快速入门需要用的到的文件复制到本地。
 
-   - Change the number of nodes and the memory allocations, if required. (`node.count`, `node.cpus`, `node.memory`)
-   - Change the password of the `admin` user for logging into Rancher. (`default_password`)
+1. 执行`cd quickstart/vagrant`命令，进入 Vagrant 快速部署文件夹。
 
-4. To initiate the creation of the environment run, `vagrant up`.
+1. **可选：**编辑`config.yaml`文件中的参数
 
-5. Once provisioning finishes, go to `https://172.22.101.101` in the browser. The default user/password is `admin/admin`.
+   - 您可以自定义节点数量、CPU 配额和内存配额，三者对应的参数分别是`node.count` 、`node.cpus`和 `node.memory`。
 
-**Result:** Rancher Server and your Kubernetes cluster is installed on VirtualBox.
+   - 修改管理员用户登录时使用的密码，对应的参数是`default_password` 。
 
-#### What's Next?
+1. 执行`vagrant up`命令，运行初始化环境。
 
-Use Rancher to create a deployment. For more information, see [Creating Deployments](/docs/quick-start-guide/workload).
+1. 完成初始化后，打开浏览器，执行`https://172.22.101.101`，访问 Rancher UI。
 
-### Destroying the Environment
+1. 执行用户名和密码，登录 Rancher UI。如果您跳过了上述可选步骤，没有设置密码，请输入默认用户名和密码，用户名是`admin`，密码是`admin`。如果您已经修改了密码，请输入修改后的密码登录 Rancher UI。为了保证安全性，我们建议您定期修改登录密码。
 
-1. From the `quickstart/vagrant` folder execute `vagrant destroy -f`.
+**结果：**完成 Vagrant 快速入门，在 VirtualBox 中安装了 Rancher Server 和 Kubernetes 集群。
 
-2. Wait for the confirmation that all resources have been destroyed.
+## 后续操作
+
+完成安装 Rancher Server 和 Kubernetes 集群的步骤后，您可以使用 Rancher 部署工作负载，详情请参考[部署工作负载](/docs/quick-start-guide/workload/_index)。
+
+## 清理环境
+
+快速入门为您创建了一个使用 Rancher 的沙盒，我们建议您在完成试用后清理环境内 Rancher 相关的资源和数据。具体步骤如下：
+
+1. 执行`cd quickstart/vagrant`命令，进入 Vagrant 快速部署文件夹。
+
+1. 执行`vagrant destroy -f`命令，删除相关的资源和数据。
+
+1. 命令行界面显示确认信息，完成所有资源的删除。

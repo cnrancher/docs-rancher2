@@ -1,71 +1,59 @@
 ---
 title: Kubernetes 概念
+description: 本文对 Kubernetes 相关概念和术语进行了解释，帮助您更好地了解 Rancher 的运行机制。Docker是容器打包和运行时系统的标准，主要用于管理各个节点上的容器。开发者在 Dockerfiles 中构建容器镜像，上传到镜像仓库中，用户只需从镜像仓库下载该镜像文件，就可以开始使用。
 ---
 
-This page explains concepts related to Kubernetes that are important for understanding how Rancher works. The descriptions below provide a simplified interview of Kubernetes components. For more details, refer to the [official documentation on Kubernetes components.](https://kubernetes.io/docs/concepts/overview/components/)
+本文对 Kubernetes 相关概念和术语进行了解释，帮助您更好地了解 Rancher 的运行机制。如需了解更多细节，请查看[Kubernetes 官方文档](https://kubernetes.io/docs/concepts/overview/components/)。
 
-This section covers the following topics:
+## 关于 Docker
 
-- [About Docker](#about-docker)
-- [About Kubernetes](#about-kubernetes)
-- [What is a Kubernetes Cluster?](#what-is-a-kubernetes-cluster)
-- [Roles for Nodes in Kubernetes Clusters](#roles-for-nodes-in-kubernetes-clusters)
-  - [etcd Nodes](#etcd-nodes)
-  - [Controlplane Nodes](#controlplane-nodes)
-  - [Worker Nodes](#worker-nodes)
-- [About Helm](#about-helm)
+_Docker_ 是容器打包和运行时系统的标准，主要用于管理各个节点上的容器。开发者在 Dockerfiles 中构建容器镜像，上传到镜像仓库中，用户只需从镜像仓库下载该镜像文件，就可以开始使用。
 
-## About Docker
+镜像仓库分为公有镜像仓库和私有镜像仓库。[Docker Hub](https://hub.docker.com) 是市面上主流的公有镜像仓库。除了公有镜像仓库以外，很多企业为了节省网络带宽和提高镜像资源使用率，也会配置自己的私有镜像仓库，提供给企业内部员工使用。
 
-Docker is the container packaging and runtime standard. Developers build container images from Dockerfiles and distribute container images from Docker registries. [Docker Hub](https://hub.docker.com) is the most popular public registry. Many organizations also set up private Docker registries. Docker is primarily used to manage containers on individual nodes.
+> **说明：** 因为 Kubernetes 已经成为了容器管理的主流工具，所以从 Rancher 2.x 版本开始，我们不再支持 Docker Swarm。如果您仍有使用 Docker 管理容器的需求，您可以安装 Rancher 1.6 进行操作。
 
-> **Note:** Although Rancher 1.6 supported Docker Swarm clustering technology, it is no longer supported in Rancher 2.x due to the success of Kubernetes.
+## 关于 Kubernetes
 
-## About Kubernetes
+_Kubernetes_ 是容器和集群管理的标准。YAML 文件规定了组成一个应用所需的容器和其他资源。Kubernetes 提供了调度、伸缩、服务发现、健康检查、密文管理和配置管理等功能。
 
-Kubernetes is the container cluster management standard. YAML files specify containers and other resources that form an application. Kubernetes performs functions such as scheduling, scaling, service discovery, health check, secret management, and configuration management.
+## Kubernetes 集群是什么
 
-## What is a Kubernetes Cluster?
+_Kubernetes 集群_ 是由多个计算机（可以是物理机、云主机或虚拟机）组成的一个独立系统，通过 [Kubernetes 容器管理系统](https://kubernetes.io/)，实现部署、运维和伸缩 Docker 容器等功能，它允许您的组织对应用进行自动化运维。
 
-A cluster is a group of computers that work together as a single system.
+## Kubernetes 集群中的节点角色
 
-A _Kubernetes Cluster_ is a cluster that uses the [Kubernetes container-orchestration system](https://kubernetes.io/) to deploy, maintain, and scale Docker containers, allowing your organization to automate application operations.
+_节点_ 是集群内的一个计算资源，节点可以是裸金属服务器或虚拟机。根据节点的角色不同，我们把节点分为三类：**etcd 节点**、**controlplane 节点**和**worker 节点**，下文会讲解三种节点的功能。一个 Kubernetes 集群至少要有一个 etcd
+节点、一个 controlplane 节点 和 一个 worker 节点。
 
-## Roles for Nodes in Kubernetes Clusters
+### etcd 节点
 
-Each computing resource in a Kubernetes cluster is called a _node_. Nodes can be either bare-metal servers or virtual machines. Kubernetes classifies nodes into three types: _etcd_ nodes, _control plane_ nodes, and _worker_ nodes.
+_etcd 节点_ 的主要功能是数据存储，它负责存储 Rancher Server 的数据和集群状态。
+Kubernetes 集群的状态保存在[etcd 节点](https://kubernetes.io/docs/concepts/overview/components/#etcd) 中，etcd 节点运行 ectd 数据库。ectd 数据库组件是一个分布式的键值对存储系统，用于存储 Kubernetes 的集群数据，例如集群协作相关和集群状态相关的数据。建议在多个节点上运行 etcd，保证在节点失效的情况下，可以获取到备份的集群数据。
 
-A Kubernetes cluster consists of at least one etcd, controlplane, and worker node.
+etcd 更新集群状态前，需要集群中的所有节点通过 quorum 投票机制完成投票。假设集群中有 n 个节点，至少需要 n/2 + 1（向下取整） 个节点同意，才被视为多数集群同意更新集群状态。例如一个集群中有 3 个 etcd 节点，quorum 投票机制要求至少两个节点同意，才会更新集群状态。
 
-#### etcd Nodes
+集群应该含有足够多健康的 etcd 节点，这样才可以形成一个 quorum。对含有奇数个节点的集群而言，每新增一个节点，就会增加通过 quorum 投票机制所需节点的数量。
 
-Rancher uses etcd as a data store in both single node and high-availability installations. In Kubernetes, etcd is also a role for nodes that store the cluster state.
+一般情况下，集群中只要配置三个 etcd 节点就能满足小型集群的需求，五个 etcd 节点能满足大型集群的需求。
 
-The state of a Kubernetes cluster is maintained in [etcd.](https://kubernetes.io/docs/concepts/overview/components/#etcd) The etcd nodes run the etcd database.
+### Controlplane 节点
 
-The etcd database component is a distributed key-value store used as Kubernetes storage for all cluster data, such as cluster coordination and state management. It is recommended to run etcd on multiple nodes so that there's always a backup available for failover.
+Controlplane 节点上运行的工作负载包括：Kubernetes API server、scheduler 和 controller mananger。这些节点负载执行日常任务，从而确保您的集群状态和您的集群配置相匹配。因为 etcd 节点保存了集群的全部数据，所以 Controlplane 节点是无状态的。虽然您可以在单个节点上运行 Controlplane，但是我们建议在两个或以上的节点上运行 Controlplane，以保证冗余性。另外，因为 Kubernetes 只要求每个节点至少要分配一个角色，所以一个节点可以既是 Controlplane 节点，又是 etcd 节点。
 
-Although you can run etcd on just one node, etcd requires a majority of nodes, a quorum, to agree on updates to the cluster state. The cluster should always contain enough healthy etcd nodes to form a quorum. For a cluster with n members, a quorum is (n/2)+1. For any odd-sized cluster, adding one node will always increase the number of nodes necessary for a quorum.
+### Worker 节点
 
-Three etcd nodes is generally sufficient for smaller clusters and five etcd nodes for large clusters.
+[worker 节点](https://kubernetes.io/docs/concepts/architecture/nodes/)运行以下应用：
 
-#### Controlplane Nodes
+- **Kubelet：** 监控节点状态的 Agent，确保您的容器处于健康状态。
+- **工作负载：** 承载您的应用和其他类型的部署的容器和 Pod。
 
-Controlplane nodes run the Kubernetes API server, scheduler, and controller manager. These nodes take care of routine tasks to ensure that your cluster maintains your configuration. Because all cluster data is stored on your etcd nodes, control plane nodes are stateless. You can run control plane on a single node, although two or more nodes are recommended for redundancy. Additionally, a single node can share the control plane and etcd roles.
+Worker 节点也运行存储和网络驱动；有必要时也会运行`应用路由控制器（Ingress Controller）`。Rancher 对 Worker 节点的数量没有限制，您可以按照实际需要创建多个 Worker 节点。
 
-#### Worker Nodes
+## 关于 Helm
 
-Each [worker node](https://kubernetes.io/docs/concepts/architecture/nodes/) runs the following:
+Helm 是安装 Rancher 高可用集群时会用到的工具。
 
-- **Kubelets:** An agent that monitors the state of the node, ensuring your containers are healthy.
-- **Workloads:** The containers and pods that hold your apps, as well as other types of deployments.
+Helm 是 Kubernetes 的软件包管理工具。Helm chart 为 Kubernetes YAML manifest 文件提供了模板语法。通过 Helm，可以创建可配置的 Deployment YAML，而不是只能用静态的 YAML。如果您想了解更多关于如何创建自己的应用商店应用（catalog），请查阅[Helm 官方网站](https://helm.sh)。
 
-Worker nodes also run storage and networking drivers, and ingress controllers when required. You create as many worker nodes as necessary to run your [workloads](/docs/k8s-in-rancher/workloads/).
-
-## About Helm
-
-For high-availability installations of Rancher, Helm is the tool used to install Rancher on a Kubernetes cluster.
-
-Helm is the package management tool of choice for Kubernetes. Helm charts provide templating syntax for Kubernetes YAML manifest documents. With Helm we can create configurable deployments instead of just using static files. For more information about creating your own catalog of deployments, check out the docs at [https://helm.sh/](https://helm.sh).
-
-For more information on service accounts and cluster role binding, refer to the [Kubernetes documentation.](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
+如果您想了解更多关于 Service Account 和 Cluster Role Binding 的信息，请查阅[Kubernetes 官方文档](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)。

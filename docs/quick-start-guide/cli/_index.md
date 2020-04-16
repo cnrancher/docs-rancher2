@@ -2,18 +2,16 @@
 title: 命令行工具
 ---
 
-Interact with Rancher using command line interface (CLI) tools from your workstation.
+从您的电脑使用命令行工具（CLI）与 Rancher 交互。
 
-### Rancher CLI
+## Rancher CLI
 
-Follow the steps in [rancher cli](../cli).
+详情请参考 [Rancher 命令行工具](/docs/cli/_index)。请确保您可以成功运行 `rancher kubectl get pods` 命令。
 
-Ensure you can run `rancher kubectl get pods` successfully.
+## kubectl
 
-### kubectl
+请先安装`kubectl`，详情请参考[安装 kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/_index)。
 
-Install the `kubectl` utility. See [install kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+通过 Rancher UI 访问您的集群，然后单击集群仪表盘页面右上角的`Kubeconfig 文件`，配置 kubectl，把内容复制粘贴到`~/.kube/config`文件内即可。
 
-Configure kubectl by visiting your cluster in the Rancher Web UI then clicking on `Kubeconfig`, copying contents and putting into your `~/.kube/config` file.
-
-Run `kubectl cluster-info` or `kubectl get pods` successfully.
+检查是否可以成功运行`kubectl cluster-info` 或 `kubectl get pods`命令。

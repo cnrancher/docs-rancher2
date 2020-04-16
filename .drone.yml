@@ -1,0 +1,60 @@
+kind: pipeline
+name: default
+
+steps:
+  - name: build
+    image: node:12.16.0
+    commands:
+      - yarn install
+      - yarn build
+      - mv ./build /website
+    volumes:
+      - name: vol
+        path: /website
+  - name: preview
+    image: loganhz/drone-oss:0.0.4
+    settings:
+      dist: /website/build
+      dist_ignore: img/
+      path: docs-rancher2-3-preview
+      endpoint: oss-cn-shanghai.aliyuncs.com
+      access_key_id:
+        from_secret: ACCESS_KEY_ID
+      access_key_secret:
+        from_secret: ACCESS_KEY_SECRET
+    volumes:
+      - name: vol
+        path: /website
+    when:
+      ref:
+        include:
+          - 'refs/heads/preview'
+      event:
+        - push
+  - name: production
+    image: loganhz/drone-oss:0.0.4
+    settings:
+      dist: /website/build
+      dist_ignore: img/
+      path: docs-rancher2-3-production
+      endpoint: oss-cn-shanghai.aliyuncs.com
+      access_key_id:
+        from_secret: ACCESS_KEY_ID
+      access_key_secret:
+        from_secret: ACCESS_KEY_SECRET
+    volumes:
+      - name: vol
+        path: /website
+    when:
+      ref:
+        include:
+          - 'refs/heads/master'
+      event:
+        - push
+
+volumes:
+  - name: vol
+    temp: {}
+
+node:
+  instance: agent-amd64
