@@ -2,117 +2,115 @@
 title: 介绍
 ---
 
-System Tools is a tool to perform operational tasks on [Rancher Launched Kubernetes](/docs/cluster-provisioning/rke-clusters/) clusters or [RKE cluster as used for installing Rancher on Kubernetes](/docs/installation/k8s-install/kubernetes-rke/). The tasks include:
+## 概述
 
-* Collect logging and system metrics from nodes.
-* Remove Kubernetes resources created by Rancher.
+系统工具是 Rancher 自带的运维工具，您可以使用系统工具管理[RKE 集群](/docs/cluster-provisioning/rke-clusters/_index)和[高可用集群](/docs/installation/k8s-install/kubernetes-rke/_index)。系统工具提供了`logs`、`stats`和`remove`三类指令，分别对应以下三种用途：
 
-The following commands are available:
+- [收集节点日志](#收集节点日志)：从节点收集 Kubernetes 集群组件的日志。
+- [收集节点系统参数](#收集节点系统参数)：从节点收集系统参数。
+- [移除 Kubernetes 资源](#移除-kubernetes-资源)：移除 Kubernetes 集群内 Rancher 创建的资源。
 
-| Command           | Description                                           |
-| ----------------- | ----------------------------------------------------- |
-| [logs](#logs)     | Collect Kubernetes cluster component logs from nodes.|
-| [stats](#stats)   | Stream system metrics from nodes.|
-| [remove](#remove) | Remove Kubernetes resources created by Rancher.|
+## 下载系统工具
 
-## Download System Tools
+您可以从[GitHub](https://github.com/rancher/system-tools/releases/latest)下载最新版的系统工具，下载时请根据您的操作系统选择对应的版本。
 
-You can download the latest version of System Tools from the [GitHub releases page](https://github.com/rancher/system-tools/releases/latest). Download the version of `system-tools` for the OS that you are using to interact with the cluster.
+| 操作系统 | 文件名称                         |
+| :------- | :------------------------------- |
+| MacOS    | `system-tools_darwin-amd64`      |
+| Linux    | `system-tools_linux-amd64`       |
+| Windows  | `system-tools_windows-amd64.exe` |
 
-| Operating System | Filename                         |
-| ---------------- | -------------------------------- |
-| MacOS            | `system-tools_darwin-amd64` |
-| Linux            | `system-tools_linux-amd64` |
-| Windows          | `system-tools_windows-amd64.exe` |
+完成下载后，请完成以下步骤：
 
-After you download the tools, complete the following actions:
+1. 重命名您下载的系统工具文件为`system-tools`。
 
-1. Rename the file to `system-tools` .
+1. 执行以下命令，对`system-tools`文件开放 executable 权限。
 
-1. Give the file executable permissions by running the following command:
+   > **说明**
+   > 如果您使用的是 Windows 操作系统，下载的系统工具是 executable 文件，可以跳过此步骤。
 
-   > **Using Windows?**
-   > The file is already an executable, you can skip this step.
-
-   
-
-``` 
+```
    chmod +x system-tools
-   ```
+```
 
-## Logs
+## 收集节点日志
 
-The logs subcommand will collect log files of core Kubernetes cluster components from nodes in [Rancher-launched Kubernetes clusters](/docs/cluster-provisioning/rke-clusters/) or nodes on an [RKE Kubernetes cluster that Rancher is installed on.](/docs/installation/k8s-install/kubernetes-rke/). See [Troubleshooting]({{< baseurl >}}//rancher/v2.x/en/troubleshooting/) for a list of core Kubernetes cluster components.
+### 指令介绍
 
-System Tools will use the provided kubeconfig file to deploy a DaemonSet, that will copy all the logfiles from the core Kubernetes cluster components and add them to a single tar file ( `cluster-logs.tar` by default). If you only want to collect logging from a single node, you can specify the node by using `--node NODENAME` or `-n NODENAME` .
+收集节点日志的命令`logs`，它的用途是收集 [RKE 集群](/docs/cluster-provisioning/rke-clusters/_index)和[高可用集群](/docs/installation/k8s-install/kubernetes-rke/_index)节点中，核心 Kubernetes 组件的日志文件。请参考[常见故障排查](/docs/troubleshooting/_index)，查看核心 Kubernetes 组件的列表。
 
-#### Usage
+系统工具使用 kubeconfig 文件部署 DaemonSet。DaemonSet 的作用是将核心 Kubernetes 组件的所有日志文件复制一遍后，打包成一个 `tar` 文件（默认文件名称是`cluster-logs.tar`）。如果您需要收集单节点的日志，您可以在命令中指定节点，例如`--node NODENAME`和 `-n NODENAME`，将`NODENAME`替换为节点名称后，可以指定单个节点，只收集该节点的日志。
 
-``` 
+### 使用方法
+
+```
 ./system-tools_darwin-amd64 logs --kubeconfig <KUBECONFIG>
 ```
 
-The following are the options for the logs command:
+`logs`指令有以下几种选项和使用方式：
 
-| Option                                                 | Description                                                                                                                    |
-| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| `--kubeconfig <KUBECONFIG_PATH>, -c <KUBECONFIG_PATH>` | The cluster's kubeconfig file.|
-| `--output <FILENAME>, -o cluster-logs.tar` | Name of the created tarball containing the logs. If no output filename is defined, the options defaults to `cluster-logs.tar` .|
-| `--node <NODENAME>, -n node1` | Specify the nodes to collect the logs from. If no node is specified, logs from all nodes in the cluster will be collected.|
+| 选项                                                   | 描述                                                                                                                                     |
+| :----------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------- |
+| `--kubeconfig <KUBECONFIG_PATH>, -c <KUBECONFIG_PATH>` | 集群 kubeconfig 文件的路径                                                                                                               |
+| `--output <FILENAME>, -o cluster-logs.tar`             | DaemonSet 打包的文件名称，默认文件名称是`cluster-logs.tar` ，您也可以修改为其他名称。                                                    |
+| `--node <NODENAME>, -n node1`                          | 收集日志的节点范围。把 `NODENAME` 修改为节点名称后，您可以指定收集某一个节点的日志。如果没有指定节点，则默认收集该集群中全部节点的日志。 |
 
-## Stats
+## 收集节点系统参数
 
-The stats subcommand will display system metrics from nodes in [Rancher-launched Kubernetes clusters](/docs/cluster-provisioning/rke-clusters/) or nodes in an [RKE Kubernetes cluster that Rancher is installed on.](/docs/installation/k8s-install/kubernetes-rke/).
+### 指令介绍
 
-System Tools will deploy a DaemonSet, and run a predefined command based on `sar` (System Activity Report) to show system metrics.
+收集节点系统参数的命令`stats`，它的用途是收集[RKE 集群](/docs/cluster-provisioning/rke-clusters/_index)和[高可用集群](/docs/installation/k8s-install/kubernetes-rke/_index)中，节点的系统参数。
 
-#### Usage
+系统工具部署的 DaemonSet，会运行基于`sar`（System Activity Report）预先定义好的指令，收集和显示系统参数。
 
-``` 
+### 使用方法
+
+```
 ./system-tools_darwin-amd64 stats --kubeconfig <KUBECONFIG>
 ```
 
-The following are the options for the stats command:
+`stats`指令有以下几种选项和使用方式：
 
-| Option                                                 | Description                                                                                                                          |
-| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `--kubeconfig <KUBECONFIG_PATH>, -c <KUBECONFIG_PATH>` | The cluster's kubeconfig file.|
-| `--node <NODENAME>, -n node1` | Specify the nodes to display the system metrics from. If no node is specified, logs from all nodes in the cluster will be displayed.|
-| `--stats-command value, -s value` | The command to run to display the system metrics. If no command is defined, the options defaults to `/usr/bin/sar -u -r -F 1 1` .|
+| 选项                                                   | 描述                                                                                                                                                 |
+| :----------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--kubeconfig <KUBECONFIG_PATH>, -c <KUBECONFIG_PATH>` | 集群 kubeconfig 文件的路径。                                                                                                                         |
+| `--node <NODENAME>, -n node1`                          | 收集系统参数的节点范围。把 `NODENAME` 修改为节点名称后，您可以指定收集某一个节点的系统参数。如果没有指定节点，则默认收集该集群中全部节点的系统参数。 |
+| `--stats-command value, -s value`                      | 触发系统工具，显示系统参数的命令，默认命令是`/usr/bin/sar -u -r -F 1 1`。                                                                            |
 
-## Remove
+## 移除 Kubernetes 资源
 
-> **Warning:** This command will remove data from your etcd nodes. Make sure you have created a [backup of etcd](/docs/backups/backups) before executing the command.
+### 指令介绍
 
-When you install Rancher on a Kubernetes cluster, it will create Kubernetes resources to run and to store configuration data. If you want to remove Rancher from your cluster, you can use the `remove` subcommand to remove the Kubernetes resources. When you use the `remove` subcommand, the following resources will be removed:
+> **警告：** 这条命令会移除 etcd 节点的数据。执行这条命令前，请检查是否已经完成[etcd 节点备份](/docs/backups/backups/_index)。
 
-* The Rancher deployment namespace ( `cattle-system` by default).
-* Any `serviceAccount` , `clusterRoles` , and `clusterRoleBindings` that Rancher applied the `cattle.io/creator:norman` label to. Rancher applies this label to any resource that it creates as of v2.1.0.
-* Labels, annotations, and finalizers.
-* Rancher Deployment.
-* Machines, clusters, projects, and user custom resource deployments (CRDs).
-* All resources create under the `management.cattle.io` API Group.
-* All CRDs created by Rancher v2.x.
+当您在 Kubernetes 集群中安装 Rancher 的时候，Rancher 会创建 Kubernetes 资源，用于运行和数据存储。如果您需要删除集群中的 Rancher，您可以使用`remove`命令，移除 Kubernetes 资源。执行`remove`命令会移除以下资源：
 
-> **Using 2.0.8 or Earlier?**
->
-> These versions of Rancher do not automatically delete the `serviceAccount` , `clusterRole` , and `clusterRoleBindings` resources after the job runs. You'll have to delete them yourself.
+- Rancher 部署的命名空间，默认名称是`cattle-system`。
 
-#### Usage
+- Rancher 应用到`cattle.io/creator:norman`标签的`serviceAccount`、 `clusterRoles`和`clusterRoleBindings`。使用 Rancher v2.1.0 或更新版本创建的所有及资源都会被打上`cattle.io/creator:norman`的标签。
+- 标签、备注和垃圾回收器。
+- Rancher 的部署的应用和工作负载。
+- 机器、集群、项目和用户自定义的资源部署（CRD）。
+- `management.cattle.io` API 群组内创建的所有资源。
+- 使用 Rancher v2.x 创建的所有用户自定义的资源部署。
 
-When you run the command below, all the resources listed [above](#remove) will be removed from the cluster.
+> **说明：**
+> 如果您使用的**2.0.8**或之前的版本，执行`remove`命令后需要手动删除`serviceAccount`、`clusterRole`和`clusterRoleBindings` 资源。
 
-> **Warning:** This command will remove data from your etcd nodes. Make sure you have created a [backup of etcd](/docs/backups/backups) before executing the command.
+### 使用方法
 
-``` 
+执行`remove` 命名后，会从集群中移除上述的所有资源。
+
+> **警告：** 这条命令会移除 etcd 节点的数据。执行这条命令前，请检查是否已经完成[etcd 节点备份](/docs/backups/backups)
+
+```
 ./system-tools remove --kubeconfig <KUBECONFIG> --namespace <NAMESPACE>
 ```
 
-The following are the options for the `remove` command:
+`remove`指令有以下几种选项和使用方式：
 
-| Option                                                 | Description                                                                                                            |
-| ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
-| `--kubeconfig <KUBECONFIG_PATH>, -c <KUBECONFIG_PATH>` | The cluster's kubeconfig file                                                                                          |
-| `--namespace <NAMESPACE>, -n cattle-system` | Rancher 2.x deployment namespace ( `<NAMESPACE>` ). If no namespace is defined, the options defaults to `cattle-system` .|
-| `--force` | Skips the interactive removal confirmation and removes the Rancher deployment without prompt.|
-
+| 选项                                                   | 描述                                                                      |
+| :----------------------------------------------------- | :------------------------------------------------------------------------ |
+| `--kubeconfig <KUBECONFIG_PATH>, -c <KUBECONFIG_PATH>` | 集群 kubeconfig 文件的路径。                                              |
+| `--namespace <NAMESPACE>, -n cattle-system`            | Rancher 2.x 部署的命名空间，如果没有指定命名空间，默认是`cattle-system`。 |
+| `--force`                                              | 跳过确认信息，强制执行移除命令。                                          |
