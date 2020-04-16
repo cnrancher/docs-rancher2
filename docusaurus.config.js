@@ -37,8 +37,9 @@ module.exports = {
           position: 'right'
         },
         {
-          href: 'https://www.rancher.com/',
-          label: '美国官网',
+          href:
+            'https://rancher.com/support-maintenance-terms/all-supported-versions/',
+          label: '支持矩阵',
           position: 'right'
         },
         {

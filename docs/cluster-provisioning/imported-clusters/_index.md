@@ -40,7 +40,7 @@ kubectl create clusterrolebinding cluster-admin-binding \
 
 默认情况下，GKE 用户不会获得此权限，因此您需要在导入 GKE 集群之前运行该命令。要了解有关 GKE 基于角色的访问控制的详细信息，请单击[此处](https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control)。
 
-> 如果要导入 K3s 集群，请确保`cluster.yml`可读。默认情况下它是受保护，在导入集群时，您需要访问此文件，如果您在使用`root`用户导入集群，可以跳过此配置。有关详细信息，请参阅[配置 K3s 集群来允许导入到 Rancher 中](#s)
+> 如果要导入 K3s 集群，请确保`cluster.yml`可读。默认情况下它是受保护，在导入集群时，您需要访问此文件，如果您在使用`root`用户导入集群，可以跳过此配置。有关详细信息，请参阅[配置 K3s 集群来允许导入到 Rancher 中](#配置-k3s-集群以允许导入到-rancher)
 
 ## 导入一个集群
 
