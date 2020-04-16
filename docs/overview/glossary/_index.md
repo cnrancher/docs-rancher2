@@ -1,6 +1,6 @@
 ---
 title: 名词解释
-description: 本文提供了使用 Rancher 过程中常见的名词和对应的解析，这些名词分为两大类：Rancher 相关概念和 Kubernetes 相关概念。
+description: 本文提供了使用 Rancher 过程中常见的名词和对应的解析，这些名词分为两大类：Rancher 相关概念和 Kubernetes 相关概念，如Rancher Labs、Rancher、RKE、K3s、集群（Cluster）、节点（Node）实例（Pod）、容器（Container）、工作负载（Workload）等。
 ---
 
 本文提供了使用 Rancher 过程中常见的名词和对应的解析，这些名词分为两大类：Rancher 相关概念和 Kubernetes 相关概念。需要注意的是，Kubernetes 相关英语词汇可能有不止一种中文翻译，我们会尽量保证中英文词汇对照的完整性。
@@ -23,7 +23,7 @@ Rancher 2.x 是一款 Kuberntes 管理平台，也是 Rancher Labs 的旗舰产�
 
 RKE 全称是 Rancher Kubernetes Engine。可以通过 CLI 的方式独立于 Rancher 2.x 使用。可以在安装好 docker 的 linux 主机上，快速方便的搭建 Kubernetes 集群。在搭建生产可用的 Kubernetes 集群的工具里，RKE 的易用性应该是最好的。关于 RKE 和 Rancher 的关系，RKE 是 Rancher 2.x 中的一个重要组成部分，在 UI 上通过“自定义主机”创建的集群和通过“主机驱动”创建的集群，都是 Rancher Server 调用 RKE 模块来实现的。我们一般叫这种集群为 RKE 集群。英文文档和 Release Notes 里叫 Rancher-Launched Kubernetes cluster。
 
-### k3s
+### K3s
 
 k3s 是经过精简和用户体验优化的 k8s。k3s 减少了运维负担。一条命令就可以启动 k3s。加入一个新节点，使用 4 层 LB 等也都非常简单。同时也可以使用 MySQL/SQLite 等关系型数据库作为数据库。在开发测试环境和边缘计算等场景中，非常受用户喜欢。
 

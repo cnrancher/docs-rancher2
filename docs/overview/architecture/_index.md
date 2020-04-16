@@ -1,8 +1,9 @@
 ---
 title: 产品架构
+description: 本文主要介绍 Rancher Server 架构和各个组件的功能，用户如何通过 Rancher Server 或授权集群端点控制下游集群，以及如何通过授权集群访问端点管理下游集群。 Rancher Server 由认证代理（Authentication Proxy）、Rancher API Server、集群控制器（Cluster Controller）、etcd 节点和集群 Agent（Cluster Agent） 组成。除了集群 Agent 以外，其他组件都部署在 Rancher Server 中。
 ---
 
-本文主要介绍 Rancher Server 架构和各个组件的功能，用户如何通过 Rancher Server 或授权集群端点控制下游集群，以及如何通过授权集群访问端点管理下游集群。
+本文主要介绍 Rancher Server 架构和各个组件的功能，例如：用户如何通过 Rancher Server 或授权集群端点控制下游集群，以及如何通过授权集群访问端点管理下游集群。
 
 > 本文默认读者已经对 Docker 和 Kubernetes 有一定的了解。如果您需要了解 Kubernetes 组件的工作机制和原理，请查阅 [Kubernetes 概念](/docs/overview/concepts/_index)。
 
@@ -19,19 +20,17 @@ Rancher Server 由认证代理（Authentication Proxy）、Rancher API Server、
 
 如果 Rancher Server 出现问题，我们也提供了备用方案，您可以通过[授权集群端点](#授权集群端点)管理集群。
 
-考虑到性能表现和安全因素，我们建议您在一个 Kubernetes 集群中单独部署 Rancher Server，在另一个集群单独部署自己的工作负载。部署 Rancher 之后，您可以创建或导入集群，然后在这些集群上运行您的工作负载。
+考虑到性能表现和安全因素，我们建议您使用两个 Kubernetes 集群，分开部署 Rancher Server 和工作负载。部署 Rancher Server 后，您可以创建或导入集群，然后在这些集群上运行您的工作负载。
 
 <figcaption>通过Rancher认证代理管理 Kubernetes 集群</figcaption>
 
 ![Architecture](/img/rancher/rancher-architecture-rancher-api-server.svg)
 
-您可以在单个节点或高可用的 Kubernetes 集群上安装 Rancher。
-
-我们建议您在生产环境中使用高可用 Kubernetes 集群安装 Rancher。虽然单节点 Docker 安装可以用于开发和测试环境，但是单节点和高可用集群之间无法进行数据迁移。因此，我们建议您从一开始就使用高可用的 Kubernetes 集群来部署 Rancher Server，而且运行 Rancher Server 的集群应该与下游集群分开部署。
+您可以在单个节点或高可用的 Kubernetes 集群上安装 Rancher。由于单节点安装只适用于开发和测试环境，而且单节点和高可用集群之间无法进行数据迁移，所以我们建议您从一开始就使用高可用的 Kubernetes 集群来部署 Rancher Server，而且您需要分开部署运行 Rancher Server 的集群应该与下游集群。
 
 ## 与下游集群交互
 
-本小节通通过两个用户案例，讲解 Rancher 启动和管理下游集群的具体过程，和每个 Rancher 组件的作用。
+本小节通过两个用户 Bob 和 Alice 的案例，讲解 Rancher 启动和管理下游集群的具体过程，和每个 Rancher 组件的作用。
 
 下图演示了集群控制器、集群 Agent 和 Node Agent 是如何允许 Rancher 控制下游集群的。
 
@@ -42,7 +41,7 @@ Rancher Server 由认证代理（Authentication Proxy）、Rancher API Server、
 图中的数字和对应的描述如下：
 
 1. [认证代理](#认证代理)
-2. [集群控制器和集群 Agent](#集群控制器和集群agent)
+2. [集群控制器和集群 Agent](#集群控制器和集群-agent)
 3. [节点 Agents](#节点-agent)
 4. [授权集群端点](#授权集群端点)
 

@@ -1,6 +1,6 @@
 ---
 title: Kubernetes 概念
-description: 本文对 Kubernetes 相关概念和术语进行了解释，帮助您更好地了解 Rancher 的运行机制。
+description: 本文对 Kubernetes 相关概念和术语进行了解释，帮助您更好地了解 Rancher 的运行机制。Docker是容器打包和运行时系统的标准，主要用于管理各个节点上的容器。开发者在 Dockerfiles 中构建容器镜像，上传到镜像仓库中，用户只需从镜像仓库下载该镜像文件，就可以开始使用。
 ---
 
 本文对 Kubernetes 相关概念和术语进行了解释，帮助您更好地了解 Rancher 的运行机制。如需了解更多细节，请查看[Kubernetes 官方文档](https://kubernetes.io/docs/concepts/overview/components/)。
@@ -33,13 +33,13 @@ Kubernetes 集群的状态保存在[etcd 节点](https://kubernetes.io/docs/conc
 
 etcd 更新集群状态前，需要集群中的所有节点通过 quorum 投票机制完成投票。假设集群中有 n 个节点，至少需要 n/2 + 1（向下取整） 个节点同意，才被视为多数集群同意更新集群状态。例如一个集群中有 3 个 etcd 节点，quorum 投票机制要求至少两个节点同意，才会更新集群状态。
 
-集群应该含有足够多健康的 etcd 节点，这样才可以形成一个 quorum。对含有奇数个节点的集群而言，每新增一个节点，就会增加通过 quarum 投票机制所需节点的数量。
+集群应该含有足够多健康的 etcd 节点，这样才可以形成一个 quorum。对含有奇数个节点的集群而言，每新增一个节点，就会增加通过 quorum 投票机制所需节点的数量。
 
 一般情况下，集群中只要配置三个 etcd 节点就能满足小型集群的需求，五个 etcd 节点能满足大型集群的需求。
 
 ### Controlplane 节点
 
-Controlplane 节点上运行的工作负载包括：Kubernetes API server、scheduler 和 controller mananger。这些节点负载执行日常任务，从而确保您的集群状态和您的集群配置相匹配。因为 etcd 节点保存了集群的全部数据，所以 Controlplane 节点是无状态的。虽然可以在单个节点上运行 Controlplane，但是我们建议在两个或以上的节点上运行 Controlplane，以保证冗余性。另外，因为 Kubernetes 只要求每个节点至少要分配一个角色，所以一个节点可以既是 Controlplane 节点，又是 etcd 节点。
+Controlplane 节点上运行的工作负载包括：Kubernetes API server、scheduler 和 controller mananger。这些节点负载执行日常任务，从而确保您的集群状态和您的集群配置相匹配。因为 etcd 节点保存了集群的全部数据，所以 Controlplane 节点是无状态的。虽然您可以在单个节点上运行 Controlplane，但是我们建议在两个或以上的节点上运行 Controlplane，以保证数据冗余性。另外，因为 Kubernetes 只要求每个节点至少要分配一个角色，所以一个节点可以既是 Controlplane 节点，又是 etcd 节点。
 
 ### Worker 节点
 
@@ -52,7 +52,7 @@ Worker 节点也运行存储和网络驱动；有必要时也会运行`应用路
 
 ## 关于 Helm
 
-Helm 是安装 Rancher 高可用时会用到的工具。
+Helm 是安装 Rancher 高可用集群时会用到的工具。
 
 Helm 是 Kubernetes 的软件包管理工具。Helm chart 为 Kubernetes YAML manifest 文件提供了模板语法。通过 Helm，可以创建可配置的 Deployment YAML，而不是只能用静态的 YAML。如果您想了解更多关于如何创建自己的应用商店应用（catalog），请查阅[Helm 官方网站](https://helm.sh)。
 
