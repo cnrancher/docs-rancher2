@@ -1,5 +1,6 @@
 ---
 title: 通过 firewalld 放行端口
+description: Linux 的一些发行版源自 RHEL，包括 Oracle Linux，可能有默认的防火墙规则来阻止与 Helm 的通信。例如，AWS 中的一个 Oracle Linux 映像具有 REJECT 规则，可阻止 Helm 与 Tiller 通信：
 ---
 
 Linux 的一些发行版[源自 RHEL](https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux#Rebuilds)，包括 Oracle Linux，可能有默认的防火墙规则来阻止与 Helm 的通信。
