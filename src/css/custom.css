@@ -5,6 +5,9 @@
  */
 
 /* You can override the default Infima variables here. */
+html {
+  -webkit-font-smoothing: auto;
+}
 :root {
   --ifm-color-primary: #0075a8;
   --ifm-color-primary-dark: #006997;
@@ -82,4 +85,39 @@ p {
 
 .admonition-important a {
   color: var(--ifm-navbar-background-color);
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  font-size: 15px;
+}
+
+.input-phone {
+  width: 50%;
+}
+
+.button-phone {
+  width: 50%;
+  margin-left: 10px;
+}
+
+.button-pdf {
+  border-radius: 4px;
+  background-color: var(--ifm-color-primary-lighter);
+  color: #fff;
+  text-align: center;
+  font-weight: lighter;
+  font-size: 15px;
+}
+
+.button-phone[disabled] {
+  background-color: #cccccc;
+  color: #666666;
+}
+
+.text-error {
+  color: var(--ifm-rancher-color-vedio) !important;
 }
