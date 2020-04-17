@@ -55,7 +55,7 @@ docker run -d --restart=unless-stopped \
 > 使用 [OpenSSL](https://www.openssl.org/) 或您选择的其他方法创建自签名证书。
 >
 > - 证书文件必须为 [PEM 格式](/docs/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
-> - 在您的证书文件中，包括链中的所有中间证书。您需要对您的证书进行排序，把您的证书放在最签名，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排除](/docs/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
+> - 在您的证书文件中，包括链中的所有中间证书。您需要对您的证书进行排序，把您的证书放在最签名，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
 
 创建证书后，运行下面的 Docker 命令安装 Rancher。使用该 `-v` 标志并提供证书的路径，以将其挂载到容器中。
 
@@ -86,7 +86,7 @@ docker run -d --restart=unless-stopped \
 > **先决条件：**
 >
 > - 证书文件必须为 [PEM 格式](/docs/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
-> - 在您的证书文件中，包括链中的所有中间证书。您需要对您的证书进行排序，把您的证书放在最签名，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排除](/docs/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
+> - 在您的证书文件中，包括链中的所有中间证书。您需要对您的证书进行排序，把您的证书放在最签名，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
 
 获得证书后，运行下面的 Docker 命令。
 

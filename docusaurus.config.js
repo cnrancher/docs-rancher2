@@ -15,20 +15,15 @@ module.exports = {
         src: 'img/rancher-logo-cow-white.svg'
       },
       links: [
-        { to: 'docs/overview/_index', label: '帮助文档', position: 'left' },
         {
           href: 'https://docs.rancher.cn/',
           label: '文档中心',
           position: 'left'
         },
-        {
-          href: 'https://www.rancher.cn/support/',
-          label: '技术支持',
-          position: 'left'
-        },
+        { to: 'pdf', label: '获取 PDF 文档', position: 'left' },
         {
           href: 'https://www.rancher.cn/weixin/',
-          label: '微信交流群',
+          label: '微信',
           position: 'left'
         },
         {
@@ -40,6 +35,11 @@ module.exports = {
           href:
             'https://rancher.com/support-maintenance-terms/all-supported-versions/',
           label: '支持矩阵',
+          position: 'right'
+        },
+        {
+          href: 'https://www.rancher.cn/support/',
+          label: '技术支持',
           position: 'right'
         },
         {

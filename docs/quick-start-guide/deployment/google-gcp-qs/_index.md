@@ -6,13 +6,13 @@ title: Google GCP 快速部署
 
 ## 先决条件
 
-> **注意：**
-> Google GCP 会向您收取一定的费用。
-
 - [Google GCP 账号](https://console.cloud.google.com/)：需要一个 Google GCP 账号来创建部署 Rancher Server 和 Kubernetes 所需要的资源。
 - [Google GCP 项目](https://cloud.google.com/appengine/docs/standard/nodejs/building-app/creating-project)：如果您还没有 GCP 项目，请使用这个链接查看相关指南。
 - [Google GCP 服务账号](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)：使用此链接并按照说明创建 GCP 服务帐户和 token 文件。
 - [Terraform](https://www.terraform.io/downloads.html)：用于在 Google GCP 中配置服务器和集群。
+
+> **注意：**
+> Google GCP 会向您收取一定的费用。
 
 ## 操作步骤
 
@@ -33,7 +33,7 @@ title: Google GCP 快速部署
 
    建议包括：
 
-   - `gcp_region` - Google GCP 区域，选择距离您最近的区域，而非使用默认值。
+   - `gcp_region` - Google GCP 区域，默认的 Google GCP 区域 不一定是距离您最近的区域，建议选择距离您最近的区域，降低延迟。
    - `prefix` - 全部创建资源的前缀。
    - `machine_type` - 使用的计算实例规格，最小规格为`n1-standard-1`。如果在预算范围内，建议使用`n1-standard-2`或`n1-standard-4`。
    - `ssh_key_file_name` - 使用指定的 SSH 密钥而不是`~/.ssh/id_rsa`（假设公共密钥为`${ssh_key_file_name}.pub`）
@@ -56,9 +56,7 @@ title: Google GCP 快速部署
 
 1. 将以上输出中的`rancher_server_url`粘贴到浏览器中。在登录页面中登录（默认用户名为`admin`，密码为在`rancher_server_admin_password`中设置的密码）。
 
-#### 结果
-
-两个 Kubernetes 集群已部署到您的 GCP 帐户中，一个正在运行 Rancher Server，另一个可以用来部署您的实验应用。
+**结果：**两个 Kubernetes 集群已部署到您的 GCP 帐户中，一个正在运行 Rancher Server，另一个可以用来部署您的实验应用。
 
 ## 后续操作
 

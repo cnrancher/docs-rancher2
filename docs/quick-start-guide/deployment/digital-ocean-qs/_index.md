@@ -6,12 +6,12 @@ title: DigitalOcean 快速部署
 
 ## 先决条件
 
-> **注意：**
-> Google DigitalOcean 会向您收取一定的费用。
-
-- [DigitalOcean 账号](https://www.digitalocean.com)：需要一个 DigitalOcean 账号来创建部署 Rancher Server 和 Kubernetes 所需要的资源。
+- [DigitalOcean 账号](https://www.digitalocean.com)：in 需要一个 DigitalOcean 账号来创建部署 Rancher Server 和 Kubernetes 所需要的资源。
 - [DigitalOcean Access Key](https://www.digitalocean.com/community/tutorials/how-to-create-a-digitalocean-space-and-api-key)：如果您还没有 DigitalOcean Access Key，请使用这个链接查看相关指南。
 - [Terraform](https://www.terraform.io/downloads.html)：用于在 DigitalOcean 中配置服务器和集群。
+
+> **注意：**
+> Google DigitalOcean 会向您收取一定的费用。
 
 ## 操作步骤
 
@@ -32,7 +32,7 @@ title: DigitalOcean 快速部署
 
    建议包括：
 
-   - `do_region` - DigitalOcean 区域，选择距离您最近的区域，而非使用默认值。
+   - `do_region` - DigitalOcean 区域，默认的 DigitalOcean 区域不一定是距离您最近的区域，建议选择距离您最近的区域，降低延迟。
    - `prefix` - 全部创建资源的前缀。
    - `droplet_size` - 使用的计算实例规格，最小规格为`s-2vcpu-4gb`。如果在预算范围内，建议使用`s-4vcpu-8g`。
    - `ssh_key_file_name` - 使用指定的 SSH 密钥而不是`~/.ssh/id_rsa`（假设公共密钥为`${ssh_key_file_name}.pub`）
@@ -55,9 +55,7 @@ title: DigitalOcean 快速部署
 
 1. 将以上输出中的`rancher_server_url`粘贴到浏览器中。在登录页面中登录（默认用户名为`admin`，密码为在`rancher_server_admin_password`中设置的密码）。
 
-#### 结果
-
-两个 Kubernetes 集群已部署到您的 DigitalOcean 帐户中，一个正在运行 Rancher Server，另一个可以用来部署您的实验应用。
+**结果：**两个 Kubernetes 集群已部署到您的 DigitalOcean 帐户中，一个正在运行 Rancher Server，另一个可以用来部署您的实验应用。
 
 ## 后续操作
 

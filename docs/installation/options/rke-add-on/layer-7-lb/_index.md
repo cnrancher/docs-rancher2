@@ -148,7 +148,7 @@ RKE 使用 YAML 配置文件来安装和配置 Kubernetes 集群。根据要使�
 >
 > - 证书文件必须为 `PEM` 格式。
 > - 证书文件必须使用 `base64` 编码。
-> - 在您的证书文件中，包括链中的所有中间证书。顺序为前面为证书，后面跟着其他中间证书。有关示例，请参阅本文最后的 SSL 常见问题/故障排除。
+> - 在您的证书文件中，包括链中的所有中间证书。顺序为前面为证书，后面跟着其他中间证书。有关示例，请参阅本文最后的 SSL 常见问题/故障排查。
 
 在有着`name: cattle-keys-ingress` 的 `kind: Secret` 中，用 CA 证书文件（通常称为 `ca.pem` 或 `ca.crt`）的 base64 编码字符串替换`<BASE64_CA>`。
 
@@ -252,7 +252,7 @@ RKE 使用 YAML 配置文件来安装和配置 Kubernetes 集群。根据要使�
 - **推荐：** 查看[创建备份：高可用性备份和还原](/docs/backups/backups/ha-backups/_index)，以了解在灾难情况下如何备份 Rancher Server。
 - 创建 Kubernetes 集群： [创建集群](/docs/cluster-provisioning/_index)。
 
-## 常见问题解答和故障排除
+## 常见问题解答和故障排查
 
 #### 如何知道我的证书是不是 PEM 格式？
 

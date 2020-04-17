@@ -362,7 +362,7 @@ INFO[0101] Finished building Kubernetes cluster successfully
 
 <br/>
 
-### 常见问题和故障排除
+### 常见问题和故障排查
 
 #### 如何知道我的证书是不是 PEM 格式？
 

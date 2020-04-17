@@ -9,7 +9,7 @@ title: 为Rancher社区做出贡献
 - 如何设置 Rancher 开发环境并运行测试
 - Issue 在整个开发生命周期中的流程
 - 编码指南和开发最佳实践
-- 调试和故障排除
+- 调试和故障排查
 - 开发 Rancher API
 
 在 Rancher 用户 Slack 上，开发人员的频道是 **#developer**。在我们的官方微信交流群中，每个群也都有 Rancher 的开发者。

@@ -139,7 +139,7 @@ Rancher 需要访问您的 AWS 帐户，以便在 Amazon EKS 中创建和管理�
 
 ## 故障排查
 
-对于您的 Amazon EKS Kubernetes 集群的任何问题或故障排除细节，请参考[文档](https://docs.aws.amazon.com/eks/latest/userguide/troubleshooting.html)。
+对于您的 Amazon EKS Kubernetes 集群的任何问题或故障排查细节，请参考[文档](https://docs.aws.amazon.com/eks/latest/userguide/troubleshooting.html)。
 
 ## AWS 服务事件
 
