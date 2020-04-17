@@ -56,7 +56,7 @@ title: Splunk
 1. 要查看实际的日志，请选择您先前声明的数据源名字。
    ![View Logs](/img/rancher/splunk/splunk5.jpg)
 
-### 故障排除
+### 故障排查
 
 您可以使用 curl 来查看 **HEC** 是否开启
 

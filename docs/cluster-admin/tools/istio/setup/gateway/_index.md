@@ -113,7 +113,7 @@ bookinfo-gateway   64m
 
 关于如何获取 Istio 控制器的 URL 和端口，请参阅[Istio 文档](https://istio.io/docs/tasks/traffic-management/ingress/ingress-control/#determining-the-ingress-ip-and-ports)中的指令。
 
-## 故障排除
+## 故障排查
 
 [Istio 官方文档](https://istio.io/docs/tasks/traffic-management/ingress/ingress-control/#troubleshooting)建议使用`kubectl`命令检查正确的入口主机和入口端口是否有外部请求。
 
