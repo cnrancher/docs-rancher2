@@ -113,7 +113,7 @@ $ curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
 $ curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" sh -s -
 ```
 
-### 导入的 K3s 集群的 debug 日志和故障排除
+### 导入的 K3s 集群的 debug 日志和故障排查
 
 节点由下游集群中运行的系统升级控制器升级。根据集群配置，Rancher 部署了两个[升级计划](https://github.com/rancher/system-upgrade-controller#example-upgrade-plan)来升级 K3s 节点：一个用于控制平面节点，另一个用于工作节点。系统升级控制器将按照计划来升级节点。
 

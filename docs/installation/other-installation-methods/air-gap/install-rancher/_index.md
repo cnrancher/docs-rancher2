@@ -44,7 +44,7 @@ Rancher 建议在 Kubernetes 集群上安装 Rancher。高可用的 Kubernetes �
    helm fetch rancher-<CHART_REPO>/rancher
    ```
 
-> 是否需要其他选项？您需要进行故障排除的帮助吗？请参阅[高可用安装 - 高级选项](/docs/installation/k8s-install/helm-rancher/_index)。
+> 是否需要其他选项？您需要进行故障排查的帮助吗？请参阅[高可用安装 - 高级选项](/docs/installation/k8s-install/helm-rancher/_index)。
 
 ### B. 选择您的 SSL 配置
 
@@ -208,7 +208,7 @@ kubectl -n cattle-system apply -R -f ./rancher
 
 - [Rancher Helm Chart 选项](/docs/installation/options/chart-options/_index)
 - [添加 TLS 密文](/docs/installation/options/tls-secrets/_index)
-- [安装过程的故障排除](/docs/installation/options/troubleshooting/_index)
+- [安装过程的故障排查](/docs/installation/options/troubleshooting/_index)
 
 ## 单节点安装
 

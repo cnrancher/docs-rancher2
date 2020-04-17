@@ -2,17 +2,17 @@
 title: AWS 快速部署
 ---
 
-以下步骤将在 Amazon AWS 上创建一个单节点的 RKE Kubernetes 集群，并在其中部署 Rancher Server，并附加一个单节点的下游 Kubernetes 集群。
+您可以参考以下步骤将在 Amazon AWS 上创建一个单节点的 RKE Kubernetes 集群，并在其中部署 Rancher Server，并附加一个单节点的下游 Kubernetes 集群。
 
 ## 先决条件
 
+- [Amazon AWS 账号](https://aws.amazon.com/account/)：您需要一个 Amazon AWS 账号来创建部署 Rancher Server 和 Kubernetes 所需要的资源。
+- [Amazon AWS 访问密钥](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html)：如果您还没有 Amazon AWS 访问密钥，请使用这个链接查看相关指南。
+- [Amazon AWS 密钥对](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair)：使用此链接并按照说明创建 Amazon AWS 密钥对。
+- [Terraform](https://www.terraform.io/downloads.html)：用于在 Amazon AWS 中配置服务器和集群。
+
 > **注意：**
 > Amazon AWS 会向您收取一定的费用。
-
-- [Amazon AWS 账号](https://aws.amazon.com/account/)：需要一个 Amazon AWS 账号来创建部署 Rancher Server 和 Kubernetes 所需要的资源。
-- [Amazon AWS 访问密钥](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html)：如果您还没有 Amazon AWS 访问密钥，请使用这个链接查看相关指南。
-- [Amazon AWS 密钥对](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair) 使用此链接并按照说明创建 Amazon AWS 密钥对。
-- [Terraform](https://www.terraform.io/downloads.html)：用于在 Amazon AWS 中配置服务器和集群。
 
 ## 操作步骤
 
@@ -24,17 +24,17 @@ title: AWS 快速部署
 
 1. 编辑`terraform.tfvars`文件，替换以下变量。
 
-   - `aws_access_key` - Amazon AWS Access Key
-   - `aws_secret_key` - Amazon AWS Secret Key
-   - `rancher_server_admin_password` - Rancher Server 的默认 admin 账户的密码
+   - `aws_access_key` - 替换为 Amazon AWS Access Key
+   - `aws_secret_key` - 替换为 Amazon AWS Secret Key
+   - `rancher_server_admin_password` - 替换为 Rancher Server 的默认 admin 账户的密码
 
 1. **可选：** 修改文件`terraform.tfvars`中的可选参数。
 
    请参阅[快速启动说明](https://github.com/rancher/quickstart)和 [AWS 快速启动说明](https://github.com/rancher/quickstart/tree/master/aws)了解更多信息。
 
-   建议包括：
+   建议修改的参数包括：
 
-   - `aws_region` - Amazon AWS 区域，选择距离您最近的区域，而非使用默认值。
+   - `aws_region` - Amazon AWS 区域，默认的 Amazon AWS 区域不一定是距离您最近的区域，建议选择距离您最近的区域，降低延迟。
    - `prefix` - 全部创建资源的前缀。
    - `instance_type` - 使用的计算实例规格，最小规格为`t3a.medium`。如果在预算范围内，建议使用`t3a.large`或`t3a.xlarge`。
    - `ssh_key_file_name` - 使用指定的 SSH 密钥而不是`~/.ssh/id_rsa`（假设公共密钥为`${ssh_key_file_name}.pub`）
@@ -57,9 +57,7 @@ title: AWS 快速部署
 
 1. 将以上输出中的`rancher_server_url`粘贴到浏览器中。在登录页面中登录（默认用户名为`admin`，密码为在`rancher_server_admin_password`中设置的密码）。
 
-#### 结果
-
-两个 Kubernetes 集群已部署到您的 AWS 帐户中，一个正在运行 Rancher Server，另一个可以用来部署您的实验应用。
+**结果：**两个 Kubernetes 集群已部署到您的 AWS 帐户中，一个正在运行 Rancher Server，另一个可以用来部署您的实验应用。
 
 ## 后续操作
 
