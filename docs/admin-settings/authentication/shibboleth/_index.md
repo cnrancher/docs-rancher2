@@ -100,6 +100,6 @@ _自 v2.4.0 起可用_
 
 3. 选择 **OpenLDAP**。将会显示**配置 OpenLDAP 服务器**表单。
 
-# 故障排除
+# 故障排查
 
 如果在测试 Rancher 与 OpenLDAP 服务器的连接时遇到问题，请首先仔细检查输入的服务帐户的凭据以及 Search Base 配置。您也可以检查 Rancher 日志以帮助查明问题原因。调试日志可能包含有关该错误的更多详细信息。请参阅本文档中的[如何启用 debug 级别日志](/docs/faq/technical/_index)。

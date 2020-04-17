@@ -129,7 +129,7 @@ _自 RKE v1.1.0 起可用_
 
 有关详细信息，请参阅 RKE 文档中的[配置升级策略](http://docs.rancher.com/docs/rke/latest/en/upgrades/configuring-strategy)。其中也包括了用于配置升级策略的`cluster.yml`示例。
 
-## 故障排除
+## 故障排查
 
 如果节点在升级后没有出现，则`rke up`命令会报错。
 
