@@ -1,12 +1,13 @@
 ---
 title: 添加 TLS 密文
+description: 只有当我们在 `cattle-system` 命名空间，将自签名证书和对应密钥配置到 `tls-rancher-ingress` 的密文中，Kubernetes 才会为 Rancher 创建所有的对象和服务。将服务器证书和任何所需的中间证书合并到名为 `tls.crt` 的文件中，将您的证书密钥拷贝到名称为 `tls.key` 的文件中。使用 `kubectl` 来创建 `tls` 类型的密文。如果您想要更换证书，您可以使用 `kubectl -n cattle-system delete secret tls-rancher-ingress` 来删除 `tls-rancher-ingress` 密文，之后使用上面的命令创建一个新的密文。如果您使用的是私有 CA 签发的证书，仅当新证书与当前证书是由同一个 CA 签发的，才可以替换。
 ---
 
 只有当我们在 `cattle-system` 命名空间，将自签名证书和对应密钥配置到 `tls-rancher-ingress` 的密文中，Kubernetes 才会为 Rancher 创建所有的对象和服务。
 
 将服务器证书和任何所需的中间证书合并到名为 `tls.crt` 的文件中，将您的证书密钥拷贝到名称为 `tls.key` 的文件中。
 
-使用 `kubectl` 来创建 `tls` 类型的密文。
+使用 `kubectl` 创建 `tls` 类型的密文。
 
 ```
 kubectl -n cattle-system create secret tls tls-rancher-ingress \

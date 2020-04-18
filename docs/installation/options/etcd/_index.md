@@ -1,5 +1,6 @@
 ---
 title: 针对大型部署的 etcd 调优
+description: 当运行具有 15 个或更多集群的大型 Rancher 安装时，建议将 etcd 的默认 keyspace 从默认的 2GB 增加。最大设置为 8GB，主机应具有足够的 RAM 以将整个数据集保留在内存中。增加此值时，还应该增加主机的大小。如果您预计在垃圾回收间隔期间容器的变化率很高，那么在较小的安装中也可以调整 keyspace 大小。Kubernetes 每隔五分钟会自动清理一次 etcd 数据集。在某些情况下，例如部署抖动，可以在垃圾回收发生之前将足够多的事件写入 etcd 并删除，并清理掉所有内容，从而导致 keyspace 被填满。
 ---
 
 当运行具有 15 个或更多集群的大型 Rancher 安装时，建议将 etcd 的默认 keyspace 从默认的 2GB 增加。最大设置为 8GB，主机应具有足够的 RAM 以将整个数据集保留在内存中。增加此值时，还应该增加主机的大小。如果您预计在垃圾回收间隔期间容器的变化率很高，那么在较小的安装中也可以调整 keyspace 大小。
@@ -31,9 +32,9 @@ services:
 services:
   etcd:
     extra_args:
-      data-dir: '/var/lib/rancher/etcd/data/'
-      wal-dir: '/var/lib/rancher/etcd/wal/wal_dir'
+      data-dir: "/var/lib/rancher/etcd/data/"
+      wal-dir: "/var/lib/rancher/etcd/wal/wal_dir"
     extra_binds:
-      - '/var/lib/etcd/data:/var/lib/rancher/etcd/data'
-      - '/var/lib/etcd/wal:/var/lib/rancher/etcd/wal'
+      - "/var/lib/etcd/data:/var/lib/rancher/etcd/data"
+      - "/var/lib/etcd/wal:/var/lib/rancher/etcd/wal"
 ```
