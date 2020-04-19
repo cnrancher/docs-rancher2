@@ -30,7 +30,7 @@ Rancher 提供了几种不同的 Helm Chart 仓库供您选择。最新版或稳
 
 ### Helm Chart 版本
 
-Rancher Helm Chart 版本必须匹配 Ranche 版本（即`appVersion`）。
+Rancher Helm Chart 版本必须匹配 Rancher 版本（即`appVersion`）。
 
 对于 Rancher v2.1.x 版本，存在一些 Helm Charts，这些 Helm Charts 使用的版本号是构建版本号，即`yyyy.mm.<build-number>`。这些 charts 已经被等效的 Rancher 版本替换，并且不在可用。
 
