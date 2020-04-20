@@ -1,5 +1,19 @@
 ---
 title: 对接 GitHub
+description: 在使用 GitHub 的环境中，您可以配置 Rancher 允许使用 GitHub 凭据登录。先决条件：请阅读外部身份验证配置和用户主体。使用分配了`系统管理员`角色的本地用户（即本地主体）登录 Rancher。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 系统管理员指南
+  - 登录认证
+  - 对接 GitHub
 ---
 
 在使用 GitHub 的环境中，您可以配置 Rancher 允许使用 GitHub 凭据登录。

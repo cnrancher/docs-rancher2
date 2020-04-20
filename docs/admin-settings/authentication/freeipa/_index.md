@@ -1,5 +1,19 @@
 ---
 title: 对接 FreeIPA
+description: 如果您使用 FreeIPA 进行用户身份验证，则可以将 Rancher 配置为允许您的用户使用其 FreeIPA 凭据登录。先决条件:您必须配置了 [FreeIPA Server](https://www.freeipa.org/) 服务器。在 FreeIPA 中创建一个具有 read-only 访问权限的服务帐户。当用户使用 API​​ 密钥发出请求时，Rancher 使用此帐户来验证组成员身份。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 系统管理员指南
+  - 登录认证
+  - 对接 FreeIPA
 ---
 
 _自 v2.0.5 起开始可用_
