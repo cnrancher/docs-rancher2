@@ -1,5 +1,20 @@
 ---
 title: 集群驱动
+description: 集群驱动用于创建托管的 Kubernetes 集群(例如 Google GKE)。在创建集群时显示哪个供应商的可用性是根据集群驱动的状态决定的。在创建托管 Kubernetes 集群的选项中，UI 仅显示集群驱动状态为`Active`的选项。默认情况下，Rancher 与几个现有的集群驱动打包在一起，但是您也可以创建自定义集群驱动，并添加到 Rancher 中。如果不想将特定的集群驱动显示给用户，则可以在 Rancher 中停用这些集群驱动，它们将不会作为创建集群的选项出现。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 系统管理员指南
+  - 驱动管理
+  - 驱动介绍
+  - 集群驱动
 ---
 
 _自 v2.2.0 起可用_

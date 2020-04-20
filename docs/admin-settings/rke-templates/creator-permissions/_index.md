@@ -1,5 +1,19 @@
 ---
 title: 模板创建者权限
+description: 系统管理员有权创建 RKE 模板，只有系统管理员可以将该权限授予其他用户。有关管理员权限的详细信息，请参阅全局权限文档。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 系统管理员指南
+  - RKE模板
+  - 模板创建者权限
 ---
 
 系统管理员有权创建 RKE 模板，只有系统管理员可以将该权限授予其他用户。

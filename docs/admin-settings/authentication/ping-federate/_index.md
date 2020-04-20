@@ -1,5 +1,20 @@
 ---
 title: 对接 PingIdentity (SAML)
+description: 如果您的组织使用 Ping Identity Provider (IdP)进行用户身份验证，您可以配置 Rancher 以允许您的用户使用他们的 IdP 凭据登录。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 系统管理员指南
+  - 登录认证
+  - 对接 OpenLDAP
+  - 对接 PingIdentity (SAML)
 ---
 
 _v2.0.7 版本可用_

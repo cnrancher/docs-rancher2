@@ -1,5 +1,21 @@
 ---
 title: 配置参考
+description: 本部分旨在在 Rancher 中设置 OpenLDAP 身份验证时用作参考。在开始之前，请阅读并了解外部身份验证配置和用户主体。
+
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 系统管理员指南
+  - 登录认证
+  - 对接 OpenLDAP
+  - 配置参考
 ---
 
 本部分旨在在 Rancher 中设置 OpenLDAP 身份验证时用作参考。
