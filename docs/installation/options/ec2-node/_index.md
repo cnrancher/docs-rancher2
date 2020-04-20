@@ -4,11 +4,11 @@ title: 在 Amazon EC2 中配置节点
 
 在本教程中，您将学习一种为 Rancher 管理面的服务器创建 Linux 节点的方法。这些节点将满足 Rancher 对 [OS，Docker，硬件和网络的要求](/docs/installation/requirements/_index)。
 
-如果要将 Rancher Server 安装在 RKE Kubernetes 集群上，则应创建三个实例。
+- 如果要将 Rancher Server 安装在 RKE Kubernetes 集群上，则应创建三个实例。
 
-如果要将 Rancher Server 安装在 K3s Kubernetes 集群上，则仅需创建两个实例。
+- 如果要将 Rancher Server 安装在 K3s Kubernetes 集群上，则仅需创建两个实例。
 
-如果要将 Rancher Server 安装在单个 Docker 容器中，则仅需创建一个实例。
+- 如果要将 Rancher Server 安装在单个 Docker 容器中，则仅需创建一个实例。
 
 ## 1、准备工作（可选）
 
@@ -33,7 +33,7 @@ title: 在 Amazon EC2 中配置节点
 1. 选择一个新的或现有的密钥对，以后将用于连接到您的实例。如果您使用的是现有的密钥对，请确保您已经可以访问相应的私钥。
 1. 单击**启动实例**。
 
-**结果：** 您已经创建了满足 OS，硬件和网络要求的 Rancher 节点。接下来，您将在每个节点上安装 Docker。
+**结果：** 您已经创建了满足 OS、硬件和网络要求的 Rancher 节点。接下来，您将在每个节点上安装 Docker。
 
 ## 3、安装 Docker 并创建用户
 

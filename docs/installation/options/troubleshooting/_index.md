@@ -170,14 +170,14 @@ Error: validation failed: unable to recognize "": no matches for kind "Issuer" i
 
 在`ssh_key_path`中指定的密钥文件无法访问。确保指定了私钥文件（不是公共密钥`.pub`），并且运行`rke`命令的用户可以访问这个密钥文件。
 
-#### Failed to dial ssh using address [xxx.xxx.xxx.xxx:xx]: ssh: handshake failed: ssh: unable to authenticate, attempted methods [none publickey], no supported methods remain
+## Failed to dial ssh using address [xxx.xxx.xxx.xxx:xx]: ssh: handshake failed: ssh: unable to authenticate, attempted methods [none publickey], no supported methods remain
 
 在`ssh_key_path`中指定的密钥文件对于访问该节点无效。仔细检查是否为节点指定了正确的`ssh_key_path`，以及是否指定了与之连接的正确用户。
 
-#### Failed to dial ssh using address [xxx.xxx.xxx.xxx:xx]: Error configuring SSH: ssh: cannot decode encrypted private keys
+## Failed to dial ssh using address [xxx.xxx.xxx.xxx:xx]: Error configuring SSH: ssh: cannot decode encrypted private keys
 
 如果要使用加密的密钥，则应使用`ssh-agent`来用密码加载密钥。如果在运行 `rke` 命令的环境中有 `SSH_AUTH_SOCK` 环境变量，在连接节点时将自动使用它。
 
-#### Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
+## Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
 
 无法通过配置的`address`和`port`访问该节点。
