@@ -28,7 +28,7 @@ title: 在 Amazon RDS 中创建 MySQL 数据库
 请将以上信息替换到下面的数据库连接字符串中：
 
 ```
-mysql://{username}:{password}@tcp({hostname}:{port})/{database-name}
+mysql://username:password@tcp(hostname:port)/database-name
 ```
 
 有关为 K3s 配置数据存储的更多信息，请参考 [K3s 文档](https://rancher.com/docs/k3s/latest/en/installation/datastore/)。
