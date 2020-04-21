@@ -1,5 +1,20 @@
 ---
 title: 开启磁盘 UUIDs
+description: 从 Rancher v2.0.4 开始，在 vSphere 节点模板中已经默认启用了磁盘 UUIDs。如果您在使用 2.0.4 以上的版本，请跳过此步骤。对于 v2.0.4 之前版本的 Rancher，我们建议在配置 vSphere 节点模板时自动启用磁盘 UUIDs，因为 Rancher 在操作 vSphere 资源时需要磁盘 UUIDs。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 创建集群
+  - 创建节点和集群
+  - vSphere
+  - 开启磁盘 UUIDs
 ---
 
 :::note 提示

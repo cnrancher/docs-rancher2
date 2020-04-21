@@ -1,5 +1,18 @@
 ---
 title: 从 v1.x 升级到 Rancher v2.x 的问题
+description: 本小节包含关于 Rancher v1.x 和 Ranhcer v2.x 版本的变化以及如何从 v1.x 升级到 v2.x 的常见问题回答。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 常见问题
+  - 从 v1.x 升级到 Rancher v2.x 的问题
 ---
 
 本小节包含关于 Rancher v1.x 和 Ranhcer v2.x 版本的变化以及如何从 v1.x 升级到 v2.x 的常见问题回答。

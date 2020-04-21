@@ -1,5 +1,21 @@
 ---
 title: v2.1 和v2.2 版本中的 Windows 支持（实验性）
+description: 本节介绍如何在 Rancher v2.1.x 和 v2.2.x 版本中配置 Windows 集群。如果您正在使用 Rancher v2.3.0 或更高版本的 Rancher，请参阅新的 Windows 文档[v2.3.0 或更高版本](/docs/cluster-provisioning/rke-clusters/windows-clusters/_index)。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 创建集群
+  - 创建RKE集群
+  - Windows 集群
+  - 创建 Windows 集群
+  - v2.1 和v2.2 版本中的 Windows 支持（实验性）
 ---
 
 _适用于 v2.1.0 到 v2.1.9 和 v2.2.0 到 v2.2.3 版本_

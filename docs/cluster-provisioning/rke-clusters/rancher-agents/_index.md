@@ -1,5 +1,19 @@
 ---
 title: Rancher Agent
+description: 有两种不同的 Agent 资源部署在 Rancher 纳管的集群：cattle-cluster-agent和cattle-node-agent
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 创建集群
+  - 集群配置参数
+  - 配置 Pod 安全策略
 ---
 
 有两种不同的 Agent 资源部署在 Rancher 纳管的集群：

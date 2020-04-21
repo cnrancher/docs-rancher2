@@ -1,5 +1,20 @@
 ---
 title: 创建凭证
+description: 本节介绍了如何创建 vSphere 用户名和密码。您需要将这些 vSphere 凭证提供给 Rancher，以便 Rancher 可以在 vSphere 中创建资源。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 创建集群
+  - 创建节点和集群
+  - vSphere
+  - 创建凭证
 ---
 
 本节介绍了如何创建 vSphere 用户名和密码。您需要将这些 vSphere 凭证提供给 Rancher，以便 Rancher 可以在 vSphere 中创建资源。
