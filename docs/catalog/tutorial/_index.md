@@ -1,5 +1,19 @@
 ---
-title: '教程：创建应用的示例'
+title: 教程：创建应用的示例
+description: 在本教程中，您将学习如何创建 Helm Chart 并将其推送到仓库。该仓库可用作 Rancher 中自定义应用商店的源。您可以把 Helm Chart 或 Rancher Chart 添加到应用商店里，但是我们建议使用 Rancher Chart，因为它们的用户体验更好。有关开发 Chart 的完整步骤，请参阅Helm Chart开发人员参考。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 应用商店
+  - 创建应用的示例
+  - 示例
 ---
 
 在本教程中，您将学习如何创建 Helm Chart 并将其推送到仓库。该仓库可用作 Rancher 中自定义应用商店的源。
@@ -41,22 +55,22 @@ title: '教程：创建应用的示例'
      - CMS
    questions:
      - variable: persistence.enabled
-       default: 'false'
-       description: 'Enable persistent volume for WordPress'
+       default: "false"
+       description: "Enable persistent volume for WordPress"
        type: boolean
        required: true
        label: WordPress Persistent Volume Enabled
        show_subquestion_if: true
-       group: 'WordPress Settings'
+       group: "WordPress Settings"
        subquestions:
          - variable: persistence.size
-           default: '10Gi'
-           description: 'WordPress Persistent Volume Size'
+           default: "10Gi"
+           description: "WordPress Persistent Volume Size"
            type: string
            label: WordPress Volume Size
          - variable: persistence.storageClass
-           default: ''
-           description: 'If undefined or null, uses the default StorageClass. Default to null'
+           default: ""
+           description: "If undefined or null, uses the default StorageClass. Default to null"
            type: storageclass
            label: Default StorageClass for WordPress
    ```

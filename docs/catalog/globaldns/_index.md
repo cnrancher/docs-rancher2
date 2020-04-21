@@ -1,5 +1,18 @@
 ---
 title: 全局 DNS
+description: Rancher 的全局 DNS 功能提供了一种对外部 DNS 提供商进行编程的方法，以将流量路由到您的 Kubernetes 应用程序。由于 DNS 编程支持跨不同 Kubernetes 集群的应用程序，因此需要在全局级别配置全局 DNS。一个应用程序可以变得高度可用，因为它允许您在不同的 Kubernetes 集群上运行同一个应用程序。如果您的 Kubernetes 集群中有一个集群发生了故障，该应用程序仍可以正常对外提供服务。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 应用商店
+  - 全局 DNS
 ---
 
 _自 v2.2.0 起可用_

@@ -1,5 +1,18 @@
 ---
 title: Rancher 部署策略
+description: 有两种推荐的部署策略，每种方法都有其优缺点。哪种方法最适合您的场景，请阅读更多信息。轴心方式拓扑，在这个部署场景中，有一个 Rancher 控制平面来管理遍布全球的 Kubernetes 集群。控制平面将在一个高可用的 Kubernetes 集群上运行，但它将受到延迟的影响。区域性拓扑，在区域部署模型中，控制平面被部署在靠近计算节点的地方。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 最佳实践
+  - Rancher 部署策略
 ---
 
 有两种推荐的部署策略，每种方法都有其优缺点。哪种方法最适合您的场景，请阅读更多信息:

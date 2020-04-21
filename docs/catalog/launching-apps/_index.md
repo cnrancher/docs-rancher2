@@ -1,5 +1,18 @@
 ---
 title: 部署项目级别应用
+description: 在项目层级内部署应用商店应用时，显示的可用应用列表是由商店作用范围决定的。如果您的应用使用Ingress，则可以通过设置全局将主机名编程到外部 DNS。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 应用商店
+  - 部署项目级别应用
 ---
 
 在项目层级内部署应用商店应用时，显示的可用应用列表是由[商店作用范围](/docs/catalog/_index)决定的。
