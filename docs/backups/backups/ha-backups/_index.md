@@ -1,5 +1,19 @@
 ---
 title: RKE Rancher 高可用备份
+description: 本节介绍如何创建 Rancher 高可用的备份。Rancher Kubernetes Engine v0.1.7 或更高版本。RKE v0.1.7 以及更高版本才支持`etcd`快照备份功能。在 RKE 集群中，集群数据将在集群中的三个 etcd 节点上的每个节点上复制，以在一个节点发生故障的情况下提供冗余和数据复制。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 备份和恢复指南
+  - 备份
+  - RKE Rancher 高可用备份
 ---
 
 本节介绍如何创建 Rancher 高可用的备份。
@@ -73,12 +87,12 @@ title: RKE Rancher 高可用备份
          retention: 60 # 快照保留天数(以天为单位)
          # Optional S3
          s3backupconfig:
-           access_key: 'myaccesskey'
-           secret_key: 'myaccesssecret'
-           bucket_name: 'my-backup-bucket'
-           folder: 'folder-name' # Available as of v2.3.0
-           endpoint: 's3.eu-west-1.amazonaws.com'
-           region: 'eu-west-1'
+           access_key: "myaccesskey"
+           secret_key: "myaccesssecret"
+           bucket_name: "my-backup-bucket"
+           folder: "folder-name" # Available as of v2.3.0
+           endpoint: "s3.eu-west-1.amazonaws.com"
+           region: "eu-west-1"
    ```
 
    _RKE v0.1.x_

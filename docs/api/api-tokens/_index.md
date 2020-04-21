@@ -1,5 +1,20 @@
 ---
 title: API Tokens
+description: 我们建议您在创建 API KEY 时，给它设置一个有效时间。但是一些 API Tokens 是永久有效(`ttl=0`)，除非删除它们，否则永不失效，并且 API Tokens 不会因更改用户密码而失效。您可以通过删除 API Tokens 或禁用用户来禁用它们。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - API
+  - API Tokens
+  - API指南
+  - API参考
 ---
 
 我们建议您在创建 API KEY 时，给它设置一个有效时间。但是一些 API Tokens 是永久有效(`ttl=0`)，除非删除它们，否则永不失效，并且 API Tokens 不会因更改用户密码而失效。
