@@ -1,5 +1,19 @@
 ---
 title: 通过 Kubectl 和 kubeconfig 访问集群
+description: 本节描述如何从 Rancher UI 或您的虚拟机使用 kubectl 操作下游 Kubernetes 集群。有关如何使用 kubectl 的更多信息，请参阅Kubernetes 文档：kubectl 概述。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 集群管理员指南
+  - 集群访问控制
+  - 通过 Kubectl 和 kubeconfig 访问集群
 ---
 
 本节描述如何从 Rancher UI 或您的虚拟机使用 kubectl 操作下游 Kubernetes 集群。
