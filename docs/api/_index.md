@@ -1,5 +1,20 @@
 ---
 title: 使用说明
+description: API 具有独立的用户界面，您可从 Web 浏览器访问它。这是查看资源、执行操作以及查看等效 cURL 或 HTTP 请求和响应的最简便方法。要访问它，请单击右上角用户头像，在API & Keys 下，您可以找到 API 访问地址，并且可以创建API KEY。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - API
+  - 使用说明
+  - API指南
+  - API参考
 ---
 
 ## 如何使用 API

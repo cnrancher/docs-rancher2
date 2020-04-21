@@ -1,5 +1,18 @@
 ---
 title: 备份和恢复
+description: 本节专门介绍在灾难情况下保护您的数据。为了保护自己免受灾难情况的影响，应定期创建备份。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 备份和恢复指南
+  - 备份和恢复
 ---
 
 本节专门介绍在灾难情况下保护您的数据。
