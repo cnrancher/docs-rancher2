@@ -1,5 +1,19 @@
 ---
 title: 在自定义点上启动集群
+description: 当您创建自定义集群时，Rancher 使用 RKE（Rancher Kubernetes Engine）在本地裸金属服务器、本地虚拟机或云提供商托管的任何节点中创建 Kubernetes 集群。要使用此选项，您需要访问将要在 Kubernetes 集群中使用的服务器。根据要求配置每个服务器，其中包括一些硬件规格和 Docker 版本等。在每台服务器上安装 Docker 后，运行 Rancher UI 中提供的命令，将每台服务器转换为 Kubernetes 节点。本节介绍如何设置自定义集群。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 创建集群
+  - 自定义集群
+  - 在自定义点上启动集群
 ---
 
 当您创建自定义集群时，Rancher 使用 RKE（Rancher Kubernetes Engine）在本地裸金属服务器、本地虚拟机或云提供商托管的任何节点中创建 Kubernetes 集群。

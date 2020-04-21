@@ -1,5 +1,20 @@
 ---
 title: 功能介绍
+description: 用 Rancher 和 vSphere，您可以在本地体验云环境的操作。Rancher 可以在 vSphere 中创建节点并在其上安装 Kubernetes。在 vSphere 中创建 Kubernetes 集群时，Rancher 首先通过与 vCenter API 通信来创建指定数量的虚拟机。然后将 Kubernetes 安装在节点上。vSphere 集群可能由具有不同属性（例如内存或 vCPU 数量）的多组虚拟机组成。该分组允许对每个 Kubernetes 角色的节点大小进行细粒度的控制。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 创建集群
+  - 创建节点和集群
+  - vSphere
+  - 功能介绍
 ---
 
 使用 Rancher 和 vSphere，您可以在本地体验云环境的操作。

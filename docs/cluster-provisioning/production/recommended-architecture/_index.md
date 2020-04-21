@@ -1,5 +1,19 @@
 ---
 title: 推荐的集群架构
+description: 有三个角色可以分配给节点：`etcd`，`controlplane`和`worker`。在设计集群时，您有两个选择，为每个角色使用专用节点。这可确保指定角色所需的组件的资源可用性；将`etcd`和`controlplane`角色分配给相同的节点。这些节点必须满足这两个角色的硬件需求。无论在哪种情况下，都不应该把`worker`角色，添加到具有 `etcd` 或 `controlplane` 角色的节点中。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 创建集群
+  - 生产环境检查清单
+  - 推荐的集群架构
 ---
 
 有三个角色可以分配给节点：`etcd`，`controlplane`和`worker`。

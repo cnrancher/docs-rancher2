@@ -1,5 +1,20 @@
 ---
 title: 创建集群
+description: 本节说明了如何在 Rancher 中配置 vSphere 凭证，在 vSphere 中创建节点以及在这些节点上启动 Kubernetes 集群。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 创建集群
+  - 创建节点和集群
+  - vSphere
+  - 创建集群
 ---
 
 本节说明了如何在 Rancher 中配置 vSphere 凭证，在 vSphere 中创建节点以及在这些节点上启动 Kubernetes 集群。

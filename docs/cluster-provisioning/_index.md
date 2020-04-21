@@ -1,5 +1,18 @@
 ---
 title: 创建集群的几种方式
+description: Rancher 允许您通过 Rancher UI 而不是其他更复杂的方案创建集群，从而简化了集群的创建。Rancher 提供了创建集群的多种方式：创建云供应商托管的 Kubernetes 集群、使用 Rancher 创建 Kubernetes 集群（RKE 集群）、导入现有 Kubernetes 集群。请您根据情况使用最适合您的方式来创建集群。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 创建集群
+  - 创建集群的几种方式
 ---
 
 Rancher 允许您通过 Rancher UI 而不是其他更复杂的方案创建集群，从而简化了集群的创建。Rancher 提供了创建集群的多种方式。请您根据情况使用最适合您的方式来创建集群。
