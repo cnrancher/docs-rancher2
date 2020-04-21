@@ -1,5 +1,18 @@
 ---
 title: 自定义应用商店配置参考
+description: 任何用户都可以添加自定义应用商店到Rancher中。除了应用商店的内容外，用户还必须确保能够将商店添加到 Rancher 中。Rancher 支持不同类型的应用商店仓库，自定义的 Github 仓库和自定义 Helm Chart 仓库。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 应用商店
+  - 自定义应用商店配置参考
 ---
 
 任何用户都可以[添加自定义应用商店](/docs/catalog/creating-apps/_index)到 Rancher 中。除了应用商店的内容外，用户还必须确保能够将商店添加到 Rancher 中。

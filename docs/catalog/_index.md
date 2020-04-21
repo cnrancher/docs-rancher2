@@ -1,5 +1,18 @@
 ---
 title: 功能介绍
+description: Rancher 提供了基于 Helm 的应用商店的功能，该功能使部署和管理相同的应用变得更加容易。应用商店可以是 GitHub 代码库或 Helm Chart 库，其中包含了可部署的应用。应用打包在称为Helm Chart的对象中。Helm Charts是描述一组相关 Kubernetes 资源的文件的集合。单个 Chart 可能用于部署简单的内容（例如 Mencached Pod）或复杂的内容（例如带有 HTTP 服务，数据库，缓存等的完整的 Web 应用）。Rancher 改进了 Helm 应用商店和 Chart。所有原生 Helm Chart 都可以在 Rancher 中使用，但是 Rancher 添加了一些增强功能以改善用户体验。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 应用商店
+  - 功能介绍
 ---
 
 Rancher 提供了基于 Helm 的应用商店的功能，该功能使部署和管理相同的应用变得更加容易。
