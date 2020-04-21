@@ -1,5 +1,19 @@
 ---
 title: 安全加固指南 - v2.3.3
+description: 本文是 Rancher v2.3.3 生产环境的安全加固指南。它概述了如何使您的集群符合互联网安全中心发布的 Kubernetes 安全基准。本加固指南介绍了如何保护集群中节点的安全，建议在安装 Kubernetes 之前按照本指南进行操作。该加固指南旨在与特定版本的 CIS Kubernetes Benchmark，Kubernetes 和 Rancher 一起使用。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安全
+  - 安全加固指南
+  - 安全加固指南 - v2.3.3
 ---
 
 本文是 Rancher v2.3.3 生产环境的安全加固指南。它概述了如何使您的集群符合互联网安全中心发布的 Kubernetes 安全基准。
@@ -254,9 +268,9 @@ services:
   kubelet:
     generate_serving_certificate: true
     extra_args:
-      feature-gates: 'RotateKubeletServerCertificate=true'
-      protect-kernel-defaults: 'true'
-      tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
+      feature-gates: "RotateKubeletServerCertificate=true"
+      protect-kernel-defaults: "true"
+      tls-cipher-suites: "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256"
 ```
 
 Where `<duration>` is in a form like `1800s`.
@@ -352,19 +366,19 @@ services:
     secrets_encryption_config:
       enabled: true
     extra_args:
-      anonymous-auth: 'false'
-      enable-admission-plugins: 'ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,EventRateLimit,PodSecurityPolicy'
-      profiling: 'false'
-      service-account-lookup: 'true'
-      tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
+      anonymous-auth: "false"
+      enable-admission-plugins: "ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,EventRateLimit,PodSecurityPolicy"
+      profiling: "false"
+      service-account-lookup: "true"
+      tls-cipher-suites: "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256"
     extra_binds:
-      - '/opt/kubernetes:/opt/kubernetes'
+      - "/opt/kubernetes:/opt/kubernetes"
 ```
 
 For k8s 1.14 `enable-admission-plugins` should be
 
 ```yaml
-enable-admission-plugins: 'ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,PodSecurityPolicy,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,Priority,EventRateLimit'
+enable-admission-plugins: "ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,PodSecurityPolicy,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,Priority,EventRateLimit"
 ```
 
 - Reconfigure the cluster:
@@ -419,8 +433,8 @@ docker inspect kube-scheduler
 services:
   scheduler:
     extra_args:
-      profiling: 'false'
-      address: '127.0.0.1'
+      profiling: "false"
+      address: "127.0.0.1"
 ```
 
 - Reconfigure the cluster:
@@ -475,10 +489,10 @@ docker inspect kube-controller-manager
 services:
   kube-controller:
     extra_args:
-      profiling: 'false'
-      address: '127.0.0.1'
-      terminated-pod-gc-threshold: '1000'
-      feature-gates: 'RotateKubeletServerCertificate=true'
+      profiling: "false"
+      address: "127.0.0.1"
+      terminated-pod-gc-threshold: "1000"
+      feature-gates: "RotateKubeletServerCertificate=true"
 ```
 
 - Reconfigure the cluster:
@@ -935,9 +949,9 @@ services:
   kubelet:
     generate_serving_certificate: true
     extra_args:
-      feature-gates: 'RotateKubeletServerCertificate=true'
-      protect-kernel-defaults: 'true'
-      tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
+      feature-gates: "RotateKubeletServerCertificate=true"
+      protect-kernel-defaults: "true"
+      tls-cipher-suites: "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256"
 ```
 
 Where `<duration>` is in a form like `1800s`.
@@ -1033,19 +1047,19 @@ services:
     secrets_encryption_config:
       enabled: true
     extra_args:
-      anonymous-auth: 'false'
-      enable-admission-plugins: 'ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,EventRateLimit,PodSecurityPolicy'
-      profiling: 'false'
-      service-account-lookup: 'true'
-      tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
+      anonymous-auth: "false"
+      enable-admission-plugins: "ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,EventRateLimit,PodSecurityPolicy"
+      profiling: "false"
+      service-account-lookup: "true"
+      tls-cipher-suites: "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256"
     extra_binds:
-      - '/opt/kubernetes:/opt/kubernetes'
+      - "/opt/kubernetes:/opt/kubernetes"
 ```
 
 For k8s 1.14 `enable-admission-plugins` should be
 
 ```yaml
-enable-admission-plugins: 'ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,PodSecurityPolicy,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,Priority,EventRateLimit'
+enable-admission-plugins: "ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,PodSecurityPolicy,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,Priority,EventRateLimit"
 ```
 
 - Reconfigure the cluster:
@@ -1100,8 +1114,8 @@ docker inspect kube-scheduler
 services:
   scheduler:
     extra_args:
-      profiling: 'false'
-      address: '127.0.0.1'
+      profiling: "false"
+      address: "127.0.0.1"
 ```
 
 - Reconfigure the cluster:
@@ -1156,10 +1170,10 @@ docker inspect kube-controller-manager
 services:
   kube-controller:
     extra_args:
-      profiling: 'false'
-      address: '127.0.0.1'
-      terminated-pod-gc-threshold: '1000'
-      feature-gates: 'RotateKubeletServerCertificate=true'
+      profiling: "false"
+      address: "127.0.0.1"
+      terminated-pod-gc-threshold: "1000"
+      feature-gates: "RotateKubeletServerCertificate=true"
 ```
 
 - Reconfigure the cluster:
@@ -1277,15 +1291,15 @@ nodes:
   - address: 18.191.190.205
     internal_address: 172.31.24.213
     user: ubuntu
-    role: ['controlplane', 'etcd', 'worker']
+    role: ["controlplane", "etcd", "worker"]
   - address: 18.191.190.203
     internal_address: 172.31.24.203
     user: ubuntu
-    role: ['controlplane', 'etcd', 'worker']
+    role: ["controlplane", "etcd", "worker"]
   - address: 18.191.190.10
     internal_address: 172.31.24.244
     user: ubuntu
-    role: ['controlplane', 'etcd', 'worker']
+    role: ["controlplane", "etcd", "worker"]
 addon_job_timeout: 30
 authentication:
   strategy: x509
@@ -1355,8 +1369,8 @@ services:
       safe_timestamp: false
     creation: 12h
     extra_args:
-      election-timeout: '5000'
-      heartbeat-interval: '500'
+      election-timeout: "5000"
+      heartbeat-interval: "500"
     gid: 1000
     retention: 72h
     snapshot: false
@@ -1368,15 +1382,15 @@ services:
     event_rate_limit:
       enabled: true
     extra_args:
-      anonymous-auth: 'false'
+      anonymous-auth: "false"
       enable-admission-plugins: >-
         ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,PodSecurityPolicy,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,Priority,EventRateLimit
-      profiling: 'false'
-      service-account-lookup: 'true'
+      profiling: "false"
+      service-account-lookup: "true"
       tls-cipher-suites: >-
         TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256
     extra_binds:
-      - '/opt/kubernetes:/opt/kubernetes'
+      - "/opt/kubernetes:/opt/kubernetes"
     pod_security_policy: true
     secrets_encryption_config:
       enabled: true
@@ -1385,18 +1399,18 @@ services:
     extra_args:
       address: 127.0.0.1
       feature-gates: RotateKubeletServerCertificate=true
-      profiling: 'false'
-      terminated-pod-gc-threshold: '1000'
+      profiling: "false"
+      terminated-pod-gc-threshold: "1000"
   kubelet:
     extra_args:
-      protect-kernel-defaults: 'true'
+      protect-kernel-defaults: "true"
     fail_swap_on: false
     generate_serving_certificate: true
   kubeproxy: {}
   scheduler:
     extra_args:
       address: 127.0.0.1
-      profiling: 'false'
+      profiling: "false"
 ssh_agent_auth: false
 ```
 
@@ -1409,15 +1423,15 @@ nodes:
   - address: 18.191.190.205
     internal_address: 172.31.24.213
     user: ubuntu
-    role: ['controlplane', 'etcd', 'worker']
+    role: ["controlplane", "etcd", "worker"]
   - address: 18.191.190.203
     internal_address: 172.31.24.203
     user: ubuntu
-    role: ['controlplane', 'etcd', 'worker']
+    role: ["controlplane", "etcd", "worker"]
   - address: 18.191.190.10
     internal_address: 172.31.24.244
     user: ubuntu
-    role: ['controlplane', 'etcd', 'worker']
+    role: ["controlplane", "etcd", "worker"]
 addon_job_timeout: 30
 authentication:
   strategy: x509
@@ -1498,29 +1512,29 @@ services:
     secrets_encryption_config:
       enabled: true
     extra_args:
-      anonymous-auth: 'false'
-      enable-admission-plugins: 'ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,EventRateLimit,PodSecurityPolicy'
-      profiling: 'false'
-      service-account-lookup: 'true'
-      tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
+      anonymous-auth: "false"
+      enable-admission-plugins: "ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,EventRateLimit,PodSecurityPolicy"
+      profiling: "false"
+      service-account-lookup: "true"
+      tls-cipher-suites: "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256"
     extra_binds:
-      - '/opt/kubernetes:/opt/kubernetes'
+      - "/opt/kubernetes:/opt/kubernetes"
   kubelet:
     generate_serving_certificate: true
     extra_args:
-      feature-gates: 'RotateKubeletServerCertificate=true'
-      protect-kernel-defaults: 'true'
-      tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
+      feature-gates: "RotateKubeletServerCertificate=true"
+      protect-kernel-defaults: "true"
+      tls-cipher-suites: "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256"
   kube-controller:
     extra_args:
-      profiling: 'false'
-      address: '127.0.0.1'
-      terminated-pod-gc-threshold: '1000'
-      feature-gates: 'RotateKubeletServerCertificate=true'
+      profiling: "false"
+      address: "127.0.0.1"
+      terminated-pod-gc-threshold: "1000"
+      feature-gates: "RotateKubeletServerCertificate=true"
   scheduler:
     extra_args:
-      profiling: 'false'
-      address: '127.0.0.1'
+      profiling: "false"
+      address: "127.0.0.1"
 ssh_agent_auth: false
 ```
 
@@ -1533,15 +1547,15 @@ nodes:
   - address: 18.191.190.205
     internal_address: 172.31.24.213
     user: ubuntu
-    role: ['controlplane', 'etcd', 'worker']
+    role: ["controlplane", "etcd", "worker"]
   - address: 18.191.190.203
     internal_address: 172.31.24.203
     user: ubuntu
-    role: ['controlplane', 'etcd', 'worker']
+    role: ["controlplane", "etcd", "worker"]
   - address: 18.191.190.10
     internal_address: 172.31.24.244
     user: ubuntu
-    role: ['controlplane', 'etcd', 'worker']
+    role: ["controlplane", "etcd", "worker"]
 addon_job_timeout: 30
 authentication:
   strategy: x509
@@ -1622,29 +1636,29 @@ services:
     secrets_encryption_config:
       enabled: true
     extra_args:
-      anonymous-auth: 'false'
-      enable-admission-plugins: 'ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,EventRateLimit,PodSecurityPolicy'
-      profiling: 'false'
-      service-account-lookup: 'true'
-      tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
+      anonymous-auth: "false"
+      enable-admission-plugins: "ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,EventRateLimit,PodSecurityPolicy"
+      profiling: "false"
+      service-account-lookup: "true"
+      tls-cipher-suites: "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256"
     extra_binds:
-      - '/opt/kubernetes:/opt/kubernetes'
+      - "/opt/kubernetes:/opt/kubernetes"
   kubelet:
     generate_serving_certificate: true
     extra_args:
-      feature-gates: 'RotateKubeletServerCertificate=true'
-      protect-kernel-defaults: 'true'
-      tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
+      feature-gates: "RotateKubeletServerCertificate=true"
+      protect-kernel-defaults: "true"
+      tls-cipher-suites: "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256"
   kube-controller:
     extra_args:
-      profiling: 'false'
-      address: '127.0.0.1'
-      terminated-pod-gc-threshold: '1000'
-      feature-gates: 'RotateKubeletServerCertificate=true'
+      profiling: "false"
+      address: "127.0.0.1"
+      terminated-pod-gc-threshold: "1000"
+      feature-gates: "RotateKubeletServerCertificate=true"
   scheduler:
     extra_args:
-      profiling: 'false'
-      address: '127.0.0.1'
+      profiling: "false"
+      address: "127.0.0.1"
 ssh_agent_auth: false
 ```
 
@@ -1742,8 +1756,8 @@ rancher_kubernetes_engine_config:
         safe_timestamp: false
       creation: 12h
       extra_args:
-        election-timeout: '5000'
-        heartbeat-interval: '500'
+        election-timeout: "5000"
+        heartbeat-interval: "500"
       gid: 1000
       retention: 72h
       snapshot: false
@@ -1755,15 +1769,15 @@ rancher_kubernetes_engine_config:
       event_rate_limit:
         enabled: true
       extra_args:
-        anonymous-auth: 'false'
+        anonymous-auth: "false"
         enable-admission-plugins: >-
           ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,PodSecurityPolicy,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,Priority,EventRateLimit
-        profiling: 'false'
-        service-account-lookup: 'true'
+        profiling: "false"
+        service-account-lookup: "true"
         tls-cipher-suites: >-
           TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256
       extra_binds:
-        - '/opt/kubernetes:/opt/kubernetes'
+        - "/opt/kubernetes:/opt/kubernetes"
       pod_security_policy: true
       secrets_encryption_config:
         enabled: true
@@ -1772,18 +1786,18 @@ rancher_kubernetes_engine_config:
       extra_args:
         address: 127.0.0.1
         feature-gates: RotateKubeletServerCertificate=true
-        profiling: 'false'
-        terminated-pod-gc-threshold: '1000'
+        profiling: "false"
+        terminated-pod-gc-threshold: "1000"
     kubelet:
       extra_args:
-        protect-kernel-defaults: 'true'
+        protect-kernel-defaults: "true"
       fail_swap_on: false
       generate_serving_certificate: true
     kubeproxy: {}
     scheduler:
       extra_args:
         address: 127.0.0.1
-        profiling: 'false'
+        profiling: "false"
   ssh_agent_auth: false
 windows_prefered_cluster: false
 ```
@@ -1887,29 +1901,29 @@ rancher_kubernetes_engine_config:
       secrets_encryption_config:
         enabled: true
       extra_args:
-        anonymous-auth: 'false'
-        enable-admission-plugins: 'ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,EventRateLimit,PodSecurityPolicy'
-        profiling: 'false'
-        service-account-lookup: 'true'
-        tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
+        anonymous-auth: "false"
+        enable-admission-plugins: "ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,EventRateLimit,PodSecurityPolicy"
+        profiling: "false"
+        service-account-lookup: "true"
+        tls-cipher-suites: "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256"
       extra_binds:
-        - '/opt/kubernetes:/opt/kubernetes'
+        - "/opt/kubernetes:/opt/kubernetes"
     kubelet:
       generate_serving_certificate: true
       extra_args:
-        feature-gates: 'RotateKubeletServerCertificate=true'
-        protect-kernel-defaults: 'true'
-        tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
+        feature-gates: "RotateKubeletServerCertificate=true"
+        protect-kernel-defaults: "true"
+        tls-cipher-suites: "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256"
     kube-controller:
       extra_args:
-        profiling: 'false'
-        address: '127.0.0.1'
-        terminated-pod-gc-threshold: '1000'
-        feature-gates: 'RotateKubeletServerCertificate=true'
+        profiling: "false"
+        address: "127.0.0.1"
+        terminated-pod-gc-threshold: "1000"
+        feature-gates: "RotateKubeletServerCertificate=true"
     scheduler:
       extra_args:
-        profiling: 'false'
-        address: '127.0.0.1'
+        profiling: "false"
+        address: "127.0.0.1"
   ssh_agent_auth: false
 windows_prefered_cluster: false
 ```
@@ -2013,29 +2027,29 @@ rancher_kubernetes_engine_config:
       secrets_encryption_config:
         enabled: true
       extra_args:
-        anonymous-auth: 'false'
-        enable-admission-plugins: 'ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,EventRateLimit,PodSecurityPolicy'
-        profiling: 'false'
-        service-account-lookup: 'true'
-        tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
+        anonymous-auth: "false"
+        enable-admission-plugins: "ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,EventRateLimit,PodSecurityPolicy"
+        profiling: "false"
+        service-account-lookup: "true"
+        tls-cipher-suites: "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256"
       extra_binds:
-        - '/opt/kubernetes:/opt/kubernetes'
+        - "/opt/kubernetes:/opt/kubernetes"
     kubelet:
       generate_serving_certificate: true
       extra_args:
-        feature-gates: 'RotateKubeletServerCertificate=true'
-        protect-kernel-defaults: 'true'
-        tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
+        feature-gates: "RotateKubeletServerCertificate=true"
+        protect-kernel-defaults: "true"
+        tls-cipher-suites: "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256"
     kube-controller:
       extra_args:
-        profiling: 'false'
-        address: '127.0.0.1'
-        terminated-pod-gc-threshold: '1000'
-        feature-gates: 'RotateKubeletServerCertificate=true'
+        profiling: "false"
+        address: "127.0.0.1"
+        terminated-pod-gc-threshold: "1000"
+        feature-gates: "RotateKubeletServerCertificate=true"
     scheduler:
       extra_args:
-        profiling: 'false'
-        address: '127.0.0.1'
+        profiling: "false"
+        address: "127.0.0.1"
   ssh_agent_auth: false
 windows_prefered_cluster: false
 ```

@@ -1,5 +1,19 @@
 ---
 title: 自测指南 - v2.1
+description: 本文档是对 Rancher v2.1 安全加固指南的补充。加固指南提供了用于加固 Rancher 的生产环境集群的说明性指南，该基准自测指南旨在帮助您针对安全基准中的每个控制，来评估加固集群的安全级别。该加固指南旨在与特定版本的安全加固指南，CIS Kubernetes Benchmark，Kubernetes 和 Rancher 一起使用。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安全
+  - CIS自测指南
+  - 自测指南 - v2.1
 ---
 
 ### CIS Kubernetes Benchmark 1.3.0 - Rancher 2.1 - Kubernetes 1.11

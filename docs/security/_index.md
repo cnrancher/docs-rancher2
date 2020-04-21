@@ -1,5 +1,18 @@
 ---
 title: 安全说明
+description: 安全是 Rancher 全部功能的核心。Rancher 集成了全部的主流认证工具和服务，并且提供了企业级的[RBAC 能力](/docs/admin-settings/rbac/_index)，这些都可以让您的 Kubernetes 集群更安全。本页，我们将提供安全相关的文档，以及帮助您安全加固 Rancher Server 和下游 Kubernetes 集群的相关质料
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安全
+  - 安全说明
 ---
 
 <table width="100%">

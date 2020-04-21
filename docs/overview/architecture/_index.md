@@ -1,6 +1,18 @@
 ---
 title: 产品架构
 description: 本文主要介绍 Rancher Server 架构和各个组件的功能，用户如何通过 Rancher Server 或授权集群端点控制下游集群，以及如何通过授权集群访问端点管理下游集群。 Rancher Server 由认证代理（Authentication Proxy）、Rancher API Server、集群控制器（Cluster Controller）、etcd 节点和集群 Agent（Cluster Agent） 组成。除了集群 Agent 以外，其他组件都部署在 Rancher Server 中。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 产品介绍
+  - 产品架构
 ---
 
 本文主要介绍 Rancher Server 架构和各个组件的功能，例如：用户如何通过 Rancher Server 或授权集群端点控制下游集群，以及如何通过授权集群访问端点管理下游集群。

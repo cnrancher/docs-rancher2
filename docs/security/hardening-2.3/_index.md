@@ -1,5 +1,19 @@
 ---
 title: 安全加固指南 - v2.3
+description: 本文是 Rancher v2.3 生产环境的安全加固指南。它概述了如何使您的集群符合互联网安全中心发布的 Kubernetes 安全基准。本加固指南介绍了如何保护集群中节点的安全，建议在安装 Kubernetes 之前按照本指南进行操作。该加固指南旨在与特定版本的 CIS Kubernetes Benchmark，Kubernetes 和 Rancher 一起使用。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安全
+  - 安全加固指南
+  - 安全加固指南 - v2.3
 ---
 
 本文是 Rancher v2.3.0-v2.3.2 生产环境的安全加固指南。它概述了如何使您的集群符合互联网安全中心发布的 Kubernetes 安全基准。
@@ -516,14 +530,14 @@ Inspect the Kubelet containers on all hosts and verify that they are running wit
 services:
   kubelet:
     extra_args:
-      authorization-mode: 'Webhook'
-      streaming-connection-idle-timeout: '<duration>'
-      protect-kernel-defaults: 'true'
-      make-iptables-util-chains: 'true'
-      event-qps: '0'
-      anonymous-auth: 'false'
-      feature-gates: 'RotateKubeletServerCertificate=true'
-      tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
+      authorization-mode: "Webhook"
+      streaming-connection-idle-timeout: "<duration>"
+      protect-kernel-defaults: "true"
+      make-iptables-util-chains: "true"
+      event-qps: "0"
+      anonymous-auth: "false"
+      feature-gates: "RotateKubeletServerCertificate=true"
+      tls-cipher-suites: "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256"
 ```
 
 Where `<duration>` is in a form like `1800s`.
@@ -611,22 +625,22 @@ services:
   kube-api:
     pod_security_policy: true
     extra_args:
-      anonymous-auth: 'false'
-      profiling: 'false'
-      service-account-lookup: 'true'
-      enable-admission-plugins: 'ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,EventRateLimit,PodSecurityPolicy'
+      anonymous-auth: "false"
+      profiling: "false"
+      service-account-lookup: "true"
+      enable-admission-plugins: "ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,EventRateLimit,PodSecurityPolicy"
       encryption-provider-config: /opt/kubernetes/encryption.yaml
-      admission-control-config-file: '/opt/kubernetes/admission.yaml'
-      audit-log-path: '/var/log/kube-audit/audit-log.json'
-      audit-log-maxage: '5'
-      audit-log-maxbackup: '5'
-      audit-log-maxsize: '100'
-      audit-log-format: 'json'
+      admission-control-config-file: "/opt/kubernetes/admission.yaml"
+      audit-log-path: "/var/log/kube-audit/audit-log.json"
+      audit-log-maxage: "5"
+      audit-log-maxbackup: "5"
+      audit-log-maxsize: "100"
+      audit-log-format: "json"
       audit-policy-file: /opt/kubernetes/audit.yaml
-      tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
+      tls-cipher-suites: "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256"
     extra_binds:
-      - '/var/log/kube-audit:/var/log/kube-audit'
-      - '/opt/kubernetes:/opt/kubernetes'
+      - "/var/log/kube-audit:/var/log/kube-audit"
+      - "/opt/kubernetes:/opt/kubernetes"
 ```
 
 - Reconfigure the cluster:
@@ -738,10 +752,10 @@ docker inspect kube-controller-manager
 services:
   kube-controller:
     extra_args:
-      profiling: 'false'
-      address: '127.0.0.1'
-      terminated-pod-gc-threshold: '1000'
-      feature-gates: 'RotateKubeletServerCertificate=true'
+      profiling: "false"
+      address: "127.0.0.1"
+      terminated-pod-gc-threshold: "1000"
+      feature-gates: "RotateKubeletServerCertificate=true"
 ```
 
 - Reconfigure the cluster:
@@ -1248,56 +1262,56 @@ nodes:
   - address: 18.191.190.205
     internal_address: 172.31.24.213
     user: ubuntu
-    role: ['controlplane', 'etcd', 'worker']
+    role: ["controlplane", "etcd", "worker"]
   - address: 18.191.190.203
     internal_address: 172.31.24.203
     user: ubuntu
-    role: ['controlplane', 'etcd', 'worker']
+    role: ["controlplane", "etcd", "worker"]
   - address: 18.191.190.10
     internal_address: 172.31.24.244
     user: ubuntu
-    role: ['controlplane', 'etcd', 'worker']
+    role: ["controlplane", "etcd", "worker"]
 
 services:
   kubelet:
     extra_args:
-      streaming-connection-idle-timeout: '1800s'
-      authorization-mode: 'Webhook'
-      protect-kernel-defaults: 'true'
-      make-iptables-util-chains: 'true'
-      event-qps: '0'
-      anonymous-auth: 'false'
-      feature-gates: 'RotateKubeletServerCertificate=true'
-      tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
+      streaming-connection-idle-timeout: "1800s"
+      authorization-mode: "Webhook"
+      protect-kernel-defaults: "true"
+      make-iptables-util-chains: "true"
+      event-qps: "0"
+      anonymous-auth: "false"
+      feature-gates: "RotateKubeletServerCertificate=true"
+      tls-cipher-suites: "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256"
   kube-api:
     pod_security_policy: true
     extra_args:
-      anonymous-auth: 'false'
-      profiling: 'false'
-      service-account-lookup: 'true'
-      enable-admission-plugins: 'ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,EventRateLimit,PodSecurityPolicy'
+      anonymous-auth: "false"
+      profiling: "false"
+      service-account-lookup: "true"
+      enable-admission-plugins: "ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,EventRateLimit,PodSecurityPolicy"
       encryption-provider-config: /opt/kubernetes/encryption.yaml
-      admission-control-config-file: '/opt/kubernetes/admission.yaml'
-      audit-log-path: '/var/log/kube-audit/audit-log.json'
-      audit-log-maxage: '5'
-      audit-log-maxbackup: '5'
-      audit-log-maxsize: '100'
-      audit-log-format: 'json'
+      admission-control-config-file: "/opt/kubernetes/admission.yaml"
+      audit-log-path: "/var/log/kube-audit/audit-log.json"
+      audit-log-maxage: "5"
+      audit-log-maxbackup: "5"
+      audit-log-maxsize: "100"
+      audit-log-format: "json"
       audit-policy-file: /opt/kubernetes/audit.yaml
-      tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
+      tls-cipher-suites: "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256"
     extra_binds:
-      - '/var/log/kube-audit:/var/log/kube-audit'
-      - '/opt/kubernetes:/opt/kubernetes'
+      - "/var/log/kube-audit:/var/log/kube-audit"
+      - "/opt/kubernetes:/opt/kubernetes"
   scheduler:
     extra_args:
-      profiling: 'false'
-      address: '127.0.0.1'
+      profiling: "false"
+      address: "127.0.0.1"
   kube-controller:
     extra_args:
-      profiling: 'false'
-      address: '127.0.0.1'
-      terminated-pod-gc-threshold: '1000'
-      feature-gates: 'RotateKubeletServerCertificate=true'
+      profiling: "false"
+      address: "127.0.0.1"
+      terminated-pod-gc-threshold: "1000"
+      feature-gates: "RotateKubeletServerCertificate=true"
   services:
     etcd:
       uid: 1001
@@ -1494,8 +1508,8 @@ rancher_kubernetes_engine_config:
         safe_timestamp: false
       creation: 12h
       extra_args:
-        election-timeout: '5000'
-        heartbeat-interval: '500'
+        election-timeout: "5000"
+        heartbeat-interval: "500"
       gid: 1001
       retention: 72h
       snapshot: false
@@ -1504,38 +1518,38 @@ rancher_kubernetes_engine_config:
       always_pull_images: false
       extra_args:
         admission-control-config-file: /opt/kubernetes/admission.yaml
-        anonymous-auth: 'false'
+        anonymous-auth: "false"
         audit-log-format: json
-        audit-log-maxage: '5'
-        audit-log-maxbackup: '5'
-        audit-log-maxsize: '100'
+        audit-log-maxage: "5"
+        audit-log-maxbackup: "5"
+        audit-log-maxsize: "100"
         audit-log-path: /var/log/kube-audit/audit-log.json
         audit-policy-file: /opt/kubernetes/audit.yaml
         enable-admission-plugins: >-
           ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,EventRateLimit,PodSecurityPolicy
         encryption-provider-config: /opt/kubernetes/encryption.yaml
-        profiling: 'false'
-        service-account-lookup: 'true'
+        profiling: "false"
+        service-account-lookup: "true"
         tls-cipher-suites: >-
           TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256
       extra_binds:
-        - '/var/log/kube-audit:/var/log/kube-audit'
-        - '/opt/kubernetes:/opt/kubernetes'
+        - "/var/log/kube-audit:/var/log/kube-audit"
+        - "/opt/kubernetes:/opt/kubernetes"
       pod_security_policy: true
       service_node_port_range: 30000-32767
     kube_controller:
       extra_args:
         address: 127.0.0.1
         feature-gates: RotateKubeletServerCertificate=true
-        profiling: 'false'
-        terminated-pod-gc-threshold: '1000'
+        profiling: "false"
+        terminated-pod-gc-threshold: "1000"
     kubelet:
       extra_args:
-        anonymous-auth: 'false'
-        event-qps: '0'
+        anonymous-auth: "false"
+        event-qps: "0"
         feature-gates: RotateKubeletServerCertificate=true
-        make-iptables-util-chains: 'true'
-        protect-kernel-defaults: 'true'
+        make-iptables-util-chains: "true"
+        protect-kernel-defaults: "true"
         streaming-connection-idle-timeout: 1800s
         tls-cipher-suites: >-
           TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256
@@ -1543,7 +1557,7 @@ rancher_kubernetes_engine_config:
     scheduler:
       extra_args:
         address: 127.0.0.1
-        profiling: 'false'
+        profiling: "false"
   ssh_agent_auth: false
 windows_prefered_cluster: false
 ```

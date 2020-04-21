@@ -1,5 +1,19 @@
 ---
 title: 部署带有 Ingress 的工作负载
+description: 以下步骤讲解了如何在 Rancher Server 中部署带有 Ingress 的工作负载。本文部署的工作负载是一个“Hello-World”应用。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 快速入门
+  - 部署工作负载
+  - 部署带有 Ingress 的工作负载
 ---
 
 ## 先决条件
