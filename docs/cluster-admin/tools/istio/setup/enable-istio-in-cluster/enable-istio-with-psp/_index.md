@@ -1,5 +1,22 @@
 ---
 title: 在设置了 PSP 的集群中启用 Istio
+description: 如果启用了限制性 Pod 安全策略，则 Istio 可能无法正确运行，因为它需要某些权限才能安装自身并管理 Pod 的基础结构。在本节中，我们将在配置了 PSP 的集群中启用 Istio，并设置 Istio CNI 插件。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 集群管理员指南
+  - 集群访问控制
+  - 告警
+  - Istio
+  - Istio使用指南
+  - 在设置了 PSP 的集群中启用 Istio
 ---
 
 > **注意：** 以下指南仅适用于 RKE 配置的集群。

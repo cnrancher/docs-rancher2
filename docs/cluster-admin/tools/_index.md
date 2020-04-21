@@ -1,5 +1,19 @@
 ---
 title: 集群工具
+description: Rancher 包含 Kubernetes 中未包含的各种工具，可帮助您进行 DevOps 操作。Rancher 可以与外部服务集成，以帮助您的集群更高效地运行。工具分为以下几类：通知和告警、日志、监控、Istio、OPA Gatekeeper。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 集群管理员指南
+  - 集群访问控制
+  - 集群工具
 ---
 
 Rancher 包含 Kubernetes 中未包含的各种工具，可帮助您进行 DevOps 操作。Rancher 可以与外部服务集成，以帮助您的集群更高效地运行。工具分为以下几类：

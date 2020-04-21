@@ -1,12 +1,28 @@
 ---
 title: 停用 Istio
+description: 本节介绍如何在一个集群，命名空间或工作负载中停用 Istio。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 集群管理员指南
+  - 集群访问控制
+  - 告警
+  - Istio
+  - 停用 Istio
 ---
 
 本节介绍如何在一个集群，命名空间或工作负载中停用 Istio。
 
 ## 在一个集群中停用 Istio
 
-要停用 Istio，
+停用 Istio 需执行以下步骤：
 
 1. 从**全局**视图中，导航到要停用 Istio 的集群。
 1. 单击 **工具 > Istio。**

@@ -1,5 +1,19 @@
 ---
 title: 工作原理
+description: 持久卷（PV）是 Kubernetes 集群中一部分的存储，而持久卷声明（PVC）是存储的请求。在 Kubernetes 中有两种使用持久存储的方法：使用已存在的持久卷或动态配置新的持久卷。要使用现有的 PV，您的应用程序需要使用已经绑定到 PV 的 PVC，并且 PV 应该包含 PVC 所需的最少资源（容量）。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 集群管理员指南
+  - 存储卷和存储类
+  - 工作原理
 ---
 
 持久卷（PV）是 Kubernetes 集群中一部分的存储，而持久卷声明（PVC）是存储的请求。

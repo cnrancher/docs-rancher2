@@ -1,5 +1,19 @@
 ---
 title: 直接通过下游集群（不经过 Rancher）进行认证的原理
+description: 本节介绍 kubectl CLI、kubeconfig 文件和授权的集群终端如何协同工作，从而允许您直接访问下游的 Kubernetes 集群，而无需通过 Rancher 服务器进行身份验证。它的目的是为如何设置 kubectl 来直接访问集群提供背景信息和上下文的指示。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 集群管理员指南
+  - 集群访问控制
+  - 直接通过下游集群进行认证
 ---
 
 本节介绍 kubectl CLI、kubeconfig 文件和授权的集群终端如何协同工作，从而允许您直接访问下游的 Kubernetes 集群，而无需通过 Rancher 服务器进行身份验证。它的目的是为[如何设置 kubectl 来直接访问集群](/docs/cluster-admin/cluster-access/kubectl/_index)提供背景信息和上下文的指示。

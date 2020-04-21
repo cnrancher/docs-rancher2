@@ -1,5 +1,18 @@
 ---
 title: 克隆集群
+description: 如果在 Rancher 中有一个集群，并希望用这个集群作为模板来创建相似集群，则可以使用 Rancher CLI 克隆该集群的配置，对其进行编辑，然后使用它来快速启动克隆的集群。仅当集群中的节点由基础设施供应商（例如 EC2，Azure 或 DigitalOcean）提供时，才可以克隆集群。Rancher不支持克隆导入的集群，托管的 Kubernetes 集群以及自定义集群。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 集群管理员指南
+  - 克隆集群
 ---
 
 如果在 Rancher 中有一个集群，并希望用这个集群作为模板来创建相似集群，则可以使用 Rancher CLI 克隆该集群的配置，对其进行编辑，然后使用它来快速启动克隆的集群。
