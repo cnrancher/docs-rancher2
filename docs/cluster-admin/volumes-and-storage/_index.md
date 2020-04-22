@@ -61,6 +61,10 @@ keywords:
 
 在 [Rancher 启动的 Kubernetes 集群](/docs/cluster-provisioning/rke-clusters/_index)里，将数据存储到 iSCSI 卷时，您可能会遇到一个问题：`kubelet`无法自动连接 iSCSI 卷。关于如何解决这个问题的相关细节，可以参阅[这里](/docs/cluster-admin/volumes-and-storage/iscsi-volumes/_index)。
 
+## hostPath 卷
+
+在创建 hostPath 卷之前，您需要在您的集群配置文件中设置 [extra_bind](https://rancher.com/docs/rke/latest/en/config-options/services/services-extras/#extra-binds/)。这会将这些路径作为卷挂载到您的 kubelet 中，然后可以在工作负载中通过 hostPath 卷使用它们。
+
 ## 相关链接
 
 - [Kubernetes 存储文档](https://kubernetes.io/docs/concepts/storage/)。

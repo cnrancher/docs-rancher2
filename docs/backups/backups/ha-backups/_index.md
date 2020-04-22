@@ -102,7 +102,7 @@ keywords:
      etcd:
        snapshot: true # 设置true启用ETCD自动备份，设置false禁用
        creation: 6h0s # 快照创建间隔时间，单位小时；
-       retention: 24h # 快照有效期，此时间后快照将被删除；
+       retention: 24 # 快照有效期，此时间后快照将被删除；
    ```
 
 3. 保存并关闭 `rancher-cluster.yml`.

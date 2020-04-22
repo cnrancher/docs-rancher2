@@ -182,13 +182,13 @@ services:
   etcd:
     snapshot: true
     creation: 6h
-    retention: 24h
+    retention: 24
 
 # 当使用外部 TLS 终止，并且使用 ingress-nginx v0.22或以上版本时，必须。
 ingress:
   provider: nginx
   options:
-    use-forwarded-headers: "true"
+    use-forwarded-headers: 'true'
 ```
 
 <figcaption>常用 RKE 节点选项</figcaption>
