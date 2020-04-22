@@ -1,5 +1,18 @@
 ---
 title: 镜像仓库凭证
+description: 镜像库凭证其实也是一个 Kubernetes Secret。“registry” 一词可以表示两件事，具体取决于它是用来指代 Docker Registry 还是 Kubernetes Registry
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 用户指南
+  - 镜像仓库凭证
 ---
 
 镜像库凭证其实也是一个 Kubernetes Secret。这个 Secret 包含用于向[私有 Docker 镜像库](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/)进行身份验证的凭据。

@@ -1,5 +1,19 @@
 ---
 title: 通过 Rancher UI 管理 HPA
+description: Rancher UI 支持创建，管理和删除 HPA。您可以将 CPU 或内存使用率配置为用于 HPA 自动扩缩容所使用的指标。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 用户指南
+  - Pod 弹性伸缩
+  - 通过 Rancher UI 管理 HPA
 ---
 
 _自 Rancher v2.3.0 起可用_

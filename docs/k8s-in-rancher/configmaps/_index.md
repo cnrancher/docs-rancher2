@@ -1,5 +1,18 @@
 ---
 title: 配置映射
+description: 和大多数 kubernetes 密文类型配置存储敏感信息不同，配置映射（ConfigMaps）主要用于存储常规的配置信息， 例如一组配置文件。由于配置映射不存储敏感信息， 因此它们在更新配置完成以后可以被自动刷新， 而不需要在更新后重新启动容器生效 (不像大多数密文类型配置， 需要手动更新并重新启动容器才能生效)。ConfigMap 接受通用字符串格式的键值对， 例如配置文件或者 JSON. 在您上传 config map 配置以后， 任何工作负载都可以将此配置引用为环境变量或者以数据卷形式挂载使用。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 用户指南
+  - 配置映射
 ---
 
 和大多数 kubernetes 密文类型配置存储敏感信息不同，[配置映射（ConfigMaps）](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/) 主要用于存储常规的配置信息， 例如一组配置文件。由于配置映射不存储敏感信息， 因此它们在更新配置完成以后可以被自动刷新， 而不需要在更新后重新启动容器生效 (不像大多数密文类型配置， 需要手动更新并重新启动容器才能生效)。

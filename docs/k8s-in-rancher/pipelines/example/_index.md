@@ -1,5 +1,19 @@
 ---
 title: YAML 文件示例
+description: 流水线（Pipelines）能够通过 Rancher UI 或者使用代码仓库中的 YMAL 文件，即 `.rancher-pipeline.yml` 或 `.rancher-pipeline.yaml` 的方式进行配置。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 用户指南
+  - 流水线
+  - YAML 文件示例
 ---
 
 流水线（Pipelines）能够通过 Rancher UI 或者使用代码仓库中的 YMAL 文件，即 `.rancher-pipeline.yml` 或 `.rancher-pipeline.yaml` 的方式进行配置。
@@ -59,13 +73,13 @@ timeout: 30
 notification:
   recipients:
     - # 接收者
-      recipient: '#mychannel'
+      recipient: "#mychannel"
       # 通知者ID
-      notifier: 'c-wdcsr:n-c9pg7'
-    - recipient: 'test@example.com'
-      notifier: 'c-wdcsr:n-lkrhd'
+      notifier: "c-wdcsr:n-c9pg7"
+    - recipient: "test@example.com"
+      notifier: "c-wdcsr:n-lkrhd"
   # 选择您要发送通知的状态
-  condition: ['Failed', 'Success', 'Changed']
+  condition: ["Failed", "Success", "Changed"]
   #（可选项）覆盖默认消息
-  message: 'my-message'
+  message: "my-message"
 ```

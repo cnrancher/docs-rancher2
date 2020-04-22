@@ -1,8 +1,22 @@
 ---
 title: 流水线中的概念
+description: 本页面讲说的是与流水线相关的常见概念和术语。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 用户指南
+  - 流水线
+  - 流水线中概念
 ---
 
-该页面的目的是解释与流水线相关的常见概念和术语。
+本页面讲说的是与流水线相关的常见概念和术语。
 
 - **流水线：**
 

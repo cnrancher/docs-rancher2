@@ -1,5 +1,19 @@
 ---
 title: HPA 工作原理
+description: Pod 弹性伸缩（HPA）是 Kubernetes 的一项功能，可以对您的应用进行自动扩容和自动缩容。使用 HPA，您可以自动缩放在 Replication Controller，Deployment 或者 Replica Set 中的 Pod。HPA 将自动缩放正在运行的 Pod 的数量，以实现最高效率。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 用户指南
+  - Pod 弹性伸缩
+  - HPA 工作原理
 ---
 
 [Pod 弹性伸缩器](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)（HPA）是 Kubernetes 的一项功能，可以对您的应用进行自动扩容和自动缩容。本节将介绍 HPA 在 Kubernetes 集群中是如何工作的。

@@ -1,5 +1,19 @@
 ---
 title: 通过 Kubectl 测试 HPA
+description: 本文档介绍了使用负载测试工具触发 HPA 按比例扩容或缩容的值后如何检查其状态。有关如何从 Rancher UI（至少 2.3.x 版）检查状态的信息，请参阅使用 Rancher UI 管理 HPA。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 用户指南
+  - Pod 弹性伸缩
+  - 通过 Kubectl 测试 HPA
 ---
 
 本文档介绍了使用负载测试工具触发 HPA 按比例扩容或缩容的值后如何检查其状态。有关如何从 Rancher UI（至少 2.3.x 版）检查状态的信息，请参阅 [使用 Rancher UI 管理 HPA](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-kubectl/_index)。

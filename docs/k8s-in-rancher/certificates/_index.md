@@ -1,5 +1,20 @@
 ---
 title: 证书，加密HTTP通信
+description: 您可以将 SSL 证书添加到项目，命名空间或同时添加到两者。如果添加的是项目范围的证书，您将可以在该项目下所有命名空间里使用该证书。现在，您可以在当前项目或命名空间中创建 Ingress 时添加证书。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 用户指南
+  - 证书，加密HTTP通信
+  - 加密HTTP通信
+  - 证书
 ---
 
 在 Rancher 和 Kubernetes 中创建 Ingress 时，如果需要对 HTTP 通信进行加密，您必须提供包含 TLS 私钥和证书的密文。该私钥和证书用于加密和解密通过 Ingress 进行的通信。您可以导航到某个[项目](/docs/cluster-admin/projects-and-namespaces/_index)或[命名空间](/docs/cluster-admin/projects-and-namespaces/_index)，然后上传证书，以使证书可供 Ingress 使用。然后，您可以将证书添加到 Ingress 中。
