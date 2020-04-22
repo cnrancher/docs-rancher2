@@ -1,5 +1,18 @@
 ---
 title: 资源类型
+description: 在您的项目建立之后，项目成员可以开始管理项目中的应用程序和其他的所有组件。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 用户指南
+  - 资源类型
 ---
 
 在您的项目建立之后，[项目成员](/docs/admin-settings/rbac/cluster-project-roles/_index)可以开始管理项目中的应用程序和其他的所有组件。

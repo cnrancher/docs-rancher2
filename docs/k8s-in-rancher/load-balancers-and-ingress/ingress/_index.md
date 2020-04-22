@@ -1,8 +1,22 @@
 ---
 title: 添加 Ingress
+description: 您可以为工作负载添加 Ingress，以提供负载均衡，SSL 终止和基于主机/路径的路由。在项目中使用 Ingress 时，可以设置全局 DNS 条目，从而对外部 DNS 进行编程动态设置 Ingress。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 用户指南
+  - 负载均衡和Ingress
+  - 添加 Ingress
 ---
 
-可以为工作负载添加 Ingress，以提供负载均衡，SSL 终止和基于主机/路径的路由。在项目中使用 Ingress 时，可以设置全局 DNS 条目，从而对外部 DNS 进行编程动态设置 Ingress。请参阅[全局 DNS 条目](/docs/catalog/globaldns/_index)。
+您可以为工作负载添加 Ingress，以提供负载均衡，SSL 终止和基于主机/路径的路由。在项目中使用 Ingress 时，可以设置全局 DNS 条目，从而对外部 DNS 进行编程动态设置 Ingress。请参阅[全局 DNS 条目](/docs/catalog/globaldns/_index)。
 
 1. 在**全局**视图中，打开要添加 Ingress 的项目。
 

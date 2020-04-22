@@ -1,5 +1,19 @@
 ---
 title: 部署工作负载
+description: 部署工作负载以运行在一个或多个容器中的应用程序。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 用户指南
+  - 工作负载
+  - 部署工作负载
 ---
 
 部署工作负载以运行在一个或多个容器中的应用程序。
