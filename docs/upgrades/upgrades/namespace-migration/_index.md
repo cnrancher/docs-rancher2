@@ -1,5 +1,20 @@
 ---
 title: 升级到 v2.0.7+ 版本时的命名空间迁移
+description: 本节仅适用于从 v2.0.6 或更早版本升级到 v2.0.7 或更高版本的 Rancher。从 v2.0.7 升级到更高版本不受影响。在 Rancher v2.0.6 及更低版本中，默认情况下，未将对 Rancher 和 Kubernetes 操作至关重要的系统命名空间分配给任何 Rancher 项目。相反，这些命名空间独立于所有 Rancher 项目而存在，但是您可以将这命名空间移至任何项目中而不会影响集群操作。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 升级和回滚
+  - 升级高可用Rancher
+  - 高可用升级指南
+  - 升级到 v2.0.7+ 版本时的命名空间迁移
 ---
 
 > 本节仅适用于从 v2.0.6 或更早版本升级到 v2.0.7 或更高版本的 Rancher。从 v2.0.7 升级到更高版本不受影响。

@@ -1,5 +1,18 @@
 ---
 title: 网络
+description: 此页面上列出的命令/步骤可用于检查集群中与网络相关的问题。确保您配置了正确的 kubeconfig(例如，在使用 Rancher 高可用时，`export KUBECONFIG=$PWD/kube_config_rancher-cluster.yml`) 或者通过 Rancher UI 使用内嵌的 kubectl。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 常见故障排查
+  - 网络
 ---
 
 此页面上列出的命令/步骤可用于检查集群中与网络相关的问题。

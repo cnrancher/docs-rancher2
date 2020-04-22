@@ -1,5 +1,19 @@
 ---
 title: etcd 节点问题排查
+description: 本节包含对具有`etcd`角色的节点进行故障排查的命令和技巧。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 常见故障排查
+  - Kubernetes组件
+  - etcd 节点问题排查
 ---
 
 本节包含对具有`etcd`角色的节点进行故障排查的命令和技巧。

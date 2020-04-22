@@ -1,5 +1,18 @@
 ---
 title: 回滚必读
+description: 本节包含有关如何将 Rancher Server 回滚到以前版本的信息。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 升级和回滚
+  - 回滚必读
 ---
 
 本节包含有关如何将 Rancher Server 回滚到以前版本的信息。

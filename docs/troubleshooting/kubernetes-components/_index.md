@@ -1,5 +1,19 @@
 ---
 title: 组件列表
+description: 本节中列出的命令和步骤适用于以下的RKE 集群中的 Kubernetes 核心组件。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 常见故障排查
+  - Kubernetes组件
+  - 组件列表
 ---
 
 本节中列出的命令和步骤适用于以下的[RKE 集群](/docs/cluster-provisioning/rke-clusters/_index)中的 Kubernetes 核心组件。

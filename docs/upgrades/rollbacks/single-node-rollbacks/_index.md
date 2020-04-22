@@ -1,5 +1,18 @@
 ---
 title: 单节点回滚
+description: 如果 Rancher 升级未成功完成，则必须回滚到[升级 Rancher 单节点](/docs/upgrades/upgrades/single-node/_index)之前使用的 Rancher 部署。回滚还原。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 升级和回滚
+  - 单节点回滚
 ---
 
 如果 Rancher 升级未成功完成，则必须回滚到[升级 Rancher 单节点](/docs/upgrades/upgrades/single-node/_index)之前使用的 Rancher 部署。回滚还原：
