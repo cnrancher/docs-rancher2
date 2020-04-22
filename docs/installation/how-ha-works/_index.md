@@ -1,5 +1,18 @@
 ---
 title: 关于高可用安装
+description: 我们建议使用Helm（Kubernetes 包管理器）在专用的 Kubernetes 集群上安装 Rancher。这被称为高可用 Kubernetes 安装，因为通过在多个节点上运行 Rancher 可以提高可用性。在标准安装中，首先将 Kubernetes 安装在基础设施提供商（例如 Amazon 的 EC2 或 Google Compute Engine）中托管的三个节点上。然后使用 Helm 在 Kubernetes 集群上安装 Rancher。Helm 使用 Rancher 的 Helm chart 在 Kubernetes 集群的三个节点中的每个节点上安装 Rancher 的副本。我们建议使用负载均衡器将流量定向到集群中 Rancher 的每个副本，以提高 Rancher 的可用性。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安装指南
+  - 关于高可用安装
 ---
 
 我们建议使用[Helm](/docs/overview/architecture/concepts/#about-helm) (Kubernetes 包管理器)在专用的 Kubernetes 集群上安装 Rancher。这被称为高可用 Kubernetes 安装，因为通过在多个节点上运行 Rancher 可以提高可用性。

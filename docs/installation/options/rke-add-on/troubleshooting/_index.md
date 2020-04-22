@@ -1,5 +1,20 @@
 ---
 title: 高可用 RKE Add-On 安装 常见问题
+description: 这一小节中包含了一些进行 Kubernetes 安装时会遇到的常见问题。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安装指南
+  - 资料、参考和高级选项
+  - RKE Add-on 安装
+  - 高可用 RKE Add-On 安装 常见问题
 ---
 
 :::important 重要提示

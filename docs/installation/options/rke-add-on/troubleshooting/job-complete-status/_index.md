@@ -1,5 +1,21 @@
 ---
 title: 无法获取 Job 完成状态
+description: 插件定义执行过程中有问题，您可以运行以下命令来获取日志查看作业失败的原因。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安装指南
+  - 资料、参考和高级选项
+  - RKE Add-on 安装
+  - 高可用 RKE Add-On 安装 常见问题
+  - 无法获取 Job 完成状态
 ---
 
 :::important 重要提示

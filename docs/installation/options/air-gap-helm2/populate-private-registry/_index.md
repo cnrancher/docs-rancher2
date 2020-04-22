@@ -1,5 +1,20 @@
 ---
-title: '2、同步镜像到私有镜像仓库'
+title: "2、同步镜像到私有镜像仓库"
+description: 本节描述如何设置您的私有镜像库，以便在安装 Rancher 时，Rancher 从此私有镜像库拉取所有必需的镜像。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安装指南
+  - 资料、参考和高级选项
+  - Rancher 高可用 Helm2 离线安装
+  - 同步镜像到私有镜像仓库
 ---
 
 > Helm 3 已经发布，Rancher 离线安装指南已经更新成使用 Helm 3 来安装。

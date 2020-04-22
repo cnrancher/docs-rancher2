@@ -1,5 +1,18 @@
 ---
 title: 安装介绍
+description: 本节整体概述了 Rancher 各种安装方式，并介绍了每个选项的优点。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安装指南
+  - 安装介绍
 ---
 
 本节整体概述了 Rancher 各种安装方式，并介绍了每个选项的优点。

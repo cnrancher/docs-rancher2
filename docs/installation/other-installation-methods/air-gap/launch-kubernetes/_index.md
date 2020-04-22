@@ -1,5 +1,20 @@
 ---
-title: '3、安装 Kubernetes 集群'
+title: "3、安装 Kubernetes 集群"
+description: 本节描述了如何根据我们的Rancher Server 环境的最佳实践来安装 Kubernetes 集群。该集群应专用于仅运行 Rancher Server。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安装指南
+  - 其他安装方法
+  - 离线安装
+  - 安装 Kubernetes 集群
 ---
 
 :::important 提示！
@@ -42,7 +57,7 @@ sudo cp ./k3s-airgap-images-$ARCH.tar /var/lib/rancher/k3s/agent/images/
 mirrors:
   customreg:
     endpoint:
-      - 'https://ip-to-server:5000'
+      - "https://ip-to-server:5000"
 configs:
   customreg:
     auth:
@@ -162,23 +177,23 @@ nodes:
   - address: 10.10.3.187 # 离线环境节点 IP
     internal_address: 172.31.7.22 # 节点内网 IP
     user: rancher
-    role: ['controlplane', 'etcd', 'worker']
+    role: ["controlplane", "etcd", "worker"]
     ssh_key_path: /home/user/.ssh/id_rsa
   - address: 10.10.3.254 # 离线环境节点 IP
     internal_address: 172.31.13.132 # 节点内网 IP
     user: rancher
-    role: ['controlplane', 'etcd', 'worker']
+    role: ["controlplane", "etcd", "worker"]
     ssh_key_path: /home/user/.ssh/id_rsa
   - address: 10.10.3.89 # 离线环境节点 IP
     internal_address: 172.31.3.216 # 节点内网 IP
     user: rancher
-    role: ['controlplane', 'etcd', 'worker']
+    role: ["controlplane", "etcd", "worker"]
     ssh_key_path: /home/user/.ssh/id_rsa
 
 private_registries:
   - url: <REGISTRY.YOURDOMAIN.COM:PORT> # 私有镜像库地址
     user: rancher
-    password: '*********'
+    password: "*********"
     is_default: true
 ```
 

@@ -1,5 +1,18 @@
 ---
 title: 资料、参考和高级选项
+description: 在安装 Rancher 时，可以在安装过程中启用一些高级选项。在每个安装指南中，已经介绍过这些选项了。下面可以了解这些选项的更多信息。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安装指南
+  - 资料、参考和高级选项
 ---
 
 在安装 Rancher 时，可以在安装过程中启用一些高级选项。在每个安装指南中，已经介绍过这些选项了。下面可以了解这些选项的更多信息：

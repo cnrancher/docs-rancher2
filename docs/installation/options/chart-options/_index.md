@@ -1,16 +1,30 @@
 ---
 title: 高可用安装 Helm Chart 选项
+description: 高可用安装 Helm Chart 选项
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安装指南
+  - 资料、参考和高级选项
+  - 高可用安装 Helm Chart 选项
 ---
 
 ## 一般选项
 
-| 选项                      | 默认值       | 描述                                                                   |
-| ------------------------- | ------------ | ---------------------------------------------------------------------- |
-| `hostname`                | " "          | `string` - Rancher 服务器完全限定域名                                  |
+| 选项                      | 默认值       | 描述                                                                  |
+| ------------------------- | ------------ | --------------------------------------------------------------------- |
+| `hostname`                | " "          | `string` - Rancher 服务器完全限定域名                                 |
 | `ingress.tls.source`      | "rancher"    | `string` - ingress 获取证书的位置。- "rancher， letsEncrypt， secret" |
-| `letsEncrypt.email`       | " "          | `string` - 您的邮箱地址                                                |
-| `letsEncrypt.environment` | "production" | `string` - 有效选项： "staging， production"                           |
-| `privateCA`               | false        | `bool` - 如果证书由私有 CA 签名，则设置为 true                         |
+| `letsEncrypt.email`       | " "          | `string` - 您的邮箱地址                                               |
+| `letsEncrypt.environment` | "production" | `string` - 有效选项： "staging， production"                          |
+| `privateCA`               | false        | `bool` - 如果证书由私有 CA 签名，则设置为 true                        |
 
 ## 高级选项
 
@@ -21,7 +35,7 @@ title: 高可用安装 Helm Chart 选项
 | `antiAffinity`                 | "preferred"                                              | `string` - 针对 Rancher pods 的 AntiAffinity 规则 - "preferred， required"                                     |
 | `auditLog.destination`         | "sidecar"                                                | `string` - 使日志流导向到 sidecar 容器的 console 或者 hostPath 卷 - "sidecar， hostPath"                       |
 | `auditLog.hostPath`            | "/var/log/rancher/audit"                                 | `string` - 主机上的日志文件地址 (仅当`auditLog.destination`设置为`hostPath`时适用)                             |
-| `auditLog.level`               | 0                                                        | `int` - 设置[API 审计日志](/docs/installation/options/api-audit-log/_index)等级。0 标示关闭。可选值为 0 ～ 3。|
+| `auditLog.level`               | 0                                                        | `int` - 设置[API 审计日志](/docs/installation/options/api-audit-log/_index)等级。0 标示关闭。可选值为 0 ～ 3。 |
 | `auditLog.maxAge`              | 1                                                        | `int` - 保留旧审计日志文件的最大天数 (仅当 `auditLog.destination` 设置为 `hostPath`时适用)                     |
 | `auditLog.maxBackups`          | 1                                                        | `int` - 要保留的审计日志最大文件数 (仅当 `auditLog.destination` 设置为 `hostPath`时适用)                       |
 | `auditLog.maxSize`             | 100                                                      | `int` - 轮换之前审计日志文件的最大大小（以兆字节为单位）(仅当 `auditLog.destination` 设置为 `hostPath`)        |
@@ -37,9 +51,9 @@ title: 高可用安装 Helm Chart 选项
 | `resources`                    | {}                                                       | `map` - rancher pod 资源请求和限制                                                                             |
 | `rancherImage`                 | "rancher/rancher"                                        | `string` - rancher 镜像源                                                                                      |
 | `rancherImageTag`              | 跟 chart 版本一样                                        | `string` - rancher 镜像标签                                                                                    |
-| `tls`                          | "ingress"                                                | `string` - 参考 [外部 TLS 终止](#在外部终止-tls)。- "ingress， external"                                      |
+| `tls`                          | "ingress"                                                | `string` - 参考 [外部 TLS 终止](#在外部终止-tls)。- "ingress， external"                                       |
 | `systemDefaultRegistry`        | ""                                                       | `string` - 用于所有系统 Docker 镜像的私有 Registry，例如： http://registry.example.com/ _自 v2.3.0 起可用_     |
-| `useBundledSystemChart`        | `false`                                                  | `bool` - 选择使用 Rancher Server 内嵌的 system-charts。这个选项用于离线安装。_自 v2.3.0 起可用_              |
+| `useBundledSystemChart`        | `false`                                                  | `bool` - 选择使用 Rancher Server 内嵌的 system-charts。这个选项用于离线安装。_自 v2.3.0 起可用_                |
 
 ## 审计日志 API
 
@@ -160,7 +174,7 @@ kubectl -n cattle-system create secret generic tls-ca-additional --from-file=ca-
 ingress:
   provider: nginx
   options:
-    use-forwarded-headers: 'true'
+    use-forwarded-headers: "true"
 ```
 
 ### 必需的头

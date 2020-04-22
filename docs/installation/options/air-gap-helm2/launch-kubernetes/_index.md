@@ -1,5 +1,20 @@
 ---
-title: '3、安装 Kubernetes 集群'
+title: "3、安装 Kubernetes 集群"
+description: 本节介绍如何准备启动 Kubernetes 集群，该集群用于为私有环境部署 Rancher Server。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安装指南
+  - 资料、参考和高级选项
+  - Rancher 高可用 Helm2 离线安装
+  - 安装 Kubernetes 集群
 ---
 
 > Helm 3 已经发布，Rancher 离线安装指南已经更新成使用 Helm 3 来安装。
@@ -37,23 +52,23 @@ nodes:
   - address: 10.10.3.187 # 离线环境节点 IP
     internal_address: 172.31.7.22 # 节点内网 IP
     user: rancher
-    role: ['controlplane', 'etcd', 'worker']
+    role: ["controlplane", "etcd", "worker"]
     ssh_key_path: /home/user/.ssh/id_rsa
   - address: 10.10.3.254 # 离线环境节点 IP
     internal_address: 172.31.13.132 # 节点内网 IP
     user: rancher
-    role: ['controlplane', 'etcd', 'worker']
+    role: ["controlplane", "etcd", "worker"]
     ssh_key_path: /home/user/.ssh/id_rsa
   - address: 10.10.3.89 # 离线环境节点 IP
     internal_address: 172.31.3.216 # 节点内网 IP
     user: rancher
-    role: ['controlplane', 'etcd', 'worker']
+    role: ["controlplane", "etcd", "worker"]
     ssh_key_path: /home/user/.ssh/id_rsa
 
 private_registries:
   - url: <REGISTRY.YOURDOMAIN.COM:PORT> # 私有镜像库地址
     user: rancher
-    password: '*********'
+    password: "*********"
     is_default: true
 ```
 

@@ -1,5 +1,19 @@
 ---
 title: 安装介绍
+description: 对于生产环境，我们建议以高可用配置安装 Rancher，以便您的用户始终可以访问 Rancher Server。当 Rancher 安装在 Kubernetes 集群中时，Rancher 将与集群的 etcd 或 MySQL 等数据库集成，并利用 Kubernetes 调度来实现高可用。本节介绍如何使用 RKE 或 K3s 创建和管理集群，然后将 Rancher 安装到该集群上。对于这种类型的架构，您将需要在基础设施提供商中创建节点（通常为虚拟机）。您还需要配置负载均衡器，将前端流量定向到这些节点中。当节点运行起来并满足节点要求时，可以使用 RKE 或 K3s 将 Kubernetes 部署到这些节点上，然后使用 Helm 软件包管理器将 Rancher 部署到 Kubernetes 上。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安装指南
+  - Rancher高可用安装
+  - 安装介绍
 ---
 
 对于生产环境，我们建议以高可用配置安装 Rancher，以便您的用户始终可以访问 Rancher Server。当 Rancher 安装在 Kubernetes 集群中时，Rancher 将与集群的 etcd 或 MySQL 等数据库集成，并利用 Kubernetes 调度来实现高可用。

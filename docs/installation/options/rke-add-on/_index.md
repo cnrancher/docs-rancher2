@@ -1,5 +1,20 @@
 ---
 title: 安装指南
+description: RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。请使用 Rancher helm chart 将 Rancher 安装在 Kubernetes 集群上。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安装指南
+  - 资料、参考和高级选项
+  - RKE Add-on 安装
+  - 安装指南
 ---
 
 :::important 重要提示

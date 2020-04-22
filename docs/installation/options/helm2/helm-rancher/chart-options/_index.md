@@ -1,5 +1,21 @@
 ---
 title: Chart 安装选项
+description: Chart 安装选项
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安装指南
+  - 资料、参考和高级选项
+  - Rancher高可用Helm2安装
+  - 安装 Rancher
+  - Chart 安装选项
 ---
 
 ## 通用选项
@@ -155,7 +171,7 @@ kubectl -n cattle-system create secret generic tls-ca-additional --from-file=ca-
 ingress:
   provider: nginx
   options:
-    use-forwarded-headers: 'true'
+    use-forwarded-headers: "true"
 ```
 
 ### 必须的头部

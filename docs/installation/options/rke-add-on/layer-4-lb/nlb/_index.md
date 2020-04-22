@@ -1,5 +1,21 @@
 ---
 title: 配置 Amazon NLB
+description: 配置 Amazon NLB 是一个多阶段过程，我们将其分解为多个任务，使其容易理解。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安装指南
+  - 资料、参考和高级选项
+  - RKE Add-on 安装
+  - Rancher 高可用 4层LB
+  - 配置 Amazon NLB
 ---
 
 :::important 重要提示
