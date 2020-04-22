@@ -1,5 +1,21 @@
 ---
 title: CPU 和内存分配
+description: 本节介绍了集群中 Istio 组件的最低推荐计算资源。每个组件的 CPU 和内存分配都是可配置的。启用 Istio 之前，建议您确认 Rancher worker 节点具有足够的 CPU 和内存来运行 Istio 的所有组件。在较大型的部署中，强烈建议通过为每个 Istio 组件添加节点选择器，将基础结构放置在集群中的专用节点上。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 集群管理员指南
+  - 集群访问控制
+  - 告警
+  - Istio
+  - CPU 和内存分配
 ---
 
 _从 v2.3.0 版本开始支持_

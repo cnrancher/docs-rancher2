@@ -1,5 +1,20 @@
 ---
 title: 创建 Windows 集群
+description: 当使用 Rancher 初始化一个[自定义集群](/docs/cluster-provisioning/rke-clusters/custom-nodes/_index)时，Rancher 会在您的基础设施上，使用 RKE（Rancher Kubernetes Engine）进行 Kubernetes 集群初始化。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 创建集群
+  - 创建RKE集群
+  - Windows 集群
+  - 创建 Windows 集群
 ---
 
 _从 v2.3.0 开始支持_

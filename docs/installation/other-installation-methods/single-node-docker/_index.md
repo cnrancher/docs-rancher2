@@ -1,5 +1,20 @@
 ---
 title: 安装指南
+description: 对于开发和测试环境，可以通过运行单个 Docker 容器来安装 Rancher。在这种安装方案中，您将 Docker 安装在单个 Linux 主机上，然后使用一个 Docker 容器在您的主机上部署 Rancher。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安装指南
+  - 其他安装方法
+  - 单节点安装
+  - 安装指南
 ---
 
 仅对于开发和测试环境，可以通过运行单个 Docker 容器来安装 Rancher。

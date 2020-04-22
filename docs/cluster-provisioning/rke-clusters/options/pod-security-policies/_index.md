@@ -1,5 +1,19 @@
 ---
 title: 配置 Pod 安全策略
+description: Pod 安全策略 可以用来控制安全敏感的 Pod 字段（如 root 权限等）。当您创建一个新的 RKE 集群时，您可以立即配置集群使用 PSP。创建集群时，使用 集群选项 启用 PSP。分配给集群的 PSP 将成为该集群中项目的默认 PSP。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 创建集群
+  - 集群配置参数
+  - 配置 Pod 安全策略
 ---
 
 _Pod 安全策略_ 可以用来控制安全敏感的 Pod 字段（如 root 权限等）。

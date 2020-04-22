@@ -1,5 +1,22 @@
 ---
 title: 7、产生并查看流量
+description: 本节介绍如何查看由 Istio 管理的流量。Rancher 将 Kiali 图集成到 Rancher UI 中。Kiali 图提供了一种强大的方式来可视化 Istio 服务网格的拓扑。它向您显示哪些服务相互通信。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 集群管理员指南
+  - 集群访问控制
+  - 告警
+  - Istio
+  - Istio使用指南
+  - 产生并查看流量
 ---
 
 本节介绍如何查看由 Istio 管理的流量。

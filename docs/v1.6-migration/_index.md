@@ -1,5 +1,18 @@
 ---
 title: 从 v1.6 迁移到 v2.x
+description: Rancher v2.x 经过重新整理和编写，旨在为 Kubernetes 和 Docker 提供一个完整的管理解决方案。由于进行了较为广泛的更改，因此没有从版本 v1.6 直接升级到 v2.x 的途径，而是将 v1.6 服务迁移到 v2.x 作为 Kubernetes 的工作负载。在 v1.6 版本中，最常用的编排是 Rancher 自己的引擎 Cattle。以下指南将说明和指导我们的 Cattle 用户如何在 Kubernetes 环境中运行工作负载。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 版本迁移
+  - 从 v1.6 迁移到 v2.x
 ---
 
 Rancher v2.x 经过重新整理和编写，旨在为 Kubernetes 和 Docker 提供一个完整的管理解决方案。由于进行了较为广泛的更改，因此没有从版本 v1.6 直接升级到 v2.x 的途径，而是将 v1.6 服务迁移到 v2.x 作为 Kubernetes 的工作负载。在 v1.6 版本中，最常用的编排是 Rancher 自己的引擎 Cattle。以下指南将说明和指导我们的 Cattle 用户如何在 Kubernetes 环境中运行工作负载。

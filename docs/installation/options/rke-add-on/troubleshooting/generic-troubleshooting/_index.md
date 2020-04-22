@@ -1,5 +1,21 @@
 ---
 title: 一般常见问题
+description: 您可以按下列步骤定位您集群中的问题原因。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安装指南
+  - 资料、参考和高级选项
+  - RKE Add-on 安装
+  - 高可用 RKE Add-On 安装 常见问题
+  - 一般常见问题
 ---
 
 :::important 重要提示
@@ -8,7 +24,7 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
 如果您当前正在使用 RKE add-on 安装方法，参见[将 RKE add-on 安装的 Rancher 迁移到 Helm 安装](/docs/upgrades/upgrades/migrating-from-rke-add-on/_index)，获取有关如何使用 Helm chart 的详细信息。
 :::
 
-您可以按下列步骤定位您集群中的问题原因.
+您可以按下列步骤定位您集群中的问题原因。
 
 ## 防火墙端口是否打开
 

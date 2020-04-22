@@ -1,5 +1,19 @@
 ---
 title: 手动安装 HPA （仅适用于2.0.7之前版本）
+description: 本节介绍如何为 v2.0.7 版本之前的 Rancher 创建的集群中手动安装 HPA。本节还介绍了如何配置 HPA 以便按比例进行自动扩缩容，以及如何为 HPA 分配角色。必须先满足一些要求，然后才能在 Kubernetes 集群中使用 HPA。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 用户指南
+  - Pod 弹性伸缩
+  - 手动安装 HPA
 ---
 
 本节介绍如何为 v2.0.7 版本之前的 Rancher 创建的集群中手动安装 HPA。本节还介绍了如何配置 HPA 以便按比例进行自动扩缩容，以及如何为 HPA 分配角色。

@@ -1,5 +1,19 @@
 ---
 title: 迁移 CLI 工具指南
+description: 迁移工具 CLI 含有多种命令和选项，以帮助您从 Rancher v1.6 迁移到 Rancherv2.x。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 版本迁移
+  - 迁移服务
+  - 迁移 CLI 工具指南
 ---
 
 迁移工具 CLI 含有多种命令和选项，以帮助您从 Rancher v1.6 迁移到 Rancherv2.x。

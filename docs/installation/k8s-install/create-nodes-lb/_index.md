@@ -1,5 +1,19 @@
 ---
-title: '1、配置基础设施'
+title: "1、配置基础设施"
+description: 在本部分中，您将为 Rancher Server 配置基础设施。推荐基础设施会根据部署 Rancher 的方式而有所差异。具体取决于您要将 Rancher 安装在专用的 K3s Kubernetes 集群上，还是安装在专用的 RKE Kubernetes 集群上。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安装指南
+  - Rancher高可用安装
+  - 配置基础设施
 ---
 
 在本部分中，您将为 Rancher Server 配置基础设施。

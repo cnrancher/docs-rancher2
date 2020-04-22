@@ -1,5 +1,19 @@
 ---
 title: 3、安装 Rancher
+description: Rancher 使用 Kubernetes 的 Helm 软件包管理器安装。Helm Charts 为 Kubernetes YAML 清单文档提供了模板语法。有了 Helm，我们可以创建可配置的 Deployment，而不只是使用静态文件。有关创建您自己的 Deployment 的应用商店应用的更多信息，请查看 https://helm.sh/ 中的文档。对于无法直接访问 Internet 的系统，请参阅[Rancher 离线安装](/docs/installation/other-installation-methods/air-gap/_index)。选择要安装的 Rancher 版本，请参阅[选择 Rancher 版本](/docs/installation/options/server-tags/_index)。要选择用于安装 Rancher 的 Helm 版本，请参阅[Helm 版本要求](/docs/installation/options/helm-version/_index)。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安装指南
+  - Rancher高可用安装
+  - 安装 Rancher
 ---
 
 Rancher 使用 Kubernetes 的 Helm 软件包管理器安装。Helm Charts 为 Kubernetes YAML 清单文档提供了模板语法。

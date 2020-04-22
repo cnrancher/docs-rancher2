@@ -1,5 +1,18 @@
 ---
 title: 技术问题
+description: 本节旨在回答关于Rancher技术的相关问题。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 常见问题
+  - 技术问题
 ---
 
 ## 如何重置系统管理员（admin）密码？

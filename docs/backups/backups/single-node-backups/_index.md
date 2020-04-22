@@ -1,5 +1,19 @@
 ---
 title: Rancher 单节点备份
+description: 在完成 Rancher 的单节点安装后，或在升级 Rancher 到新版本之前，需要对 Rancher 进行数据备份。如果在 Rancher 数据损坏或者丢失，或者升级遇到问题时，可以通过最新的备份进行数据恢复。在创建备份期间，您将输入一系列命令，以环境中的数据替换占位符。这些占位符用尖括号和所有大写字母（`<EXAMPLE>`）表示。这是带有占位符的命令示例：在此命令中，`<DATE>`是占位符，代表创建数据容器和备份的日期。例如 `9-27-18`。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 备份和恢复指南
+  - 备份
+  - Rancher 单节点备份
 ---
 
 在完成 Rancher 的单节点安装后，或在升级 Rancher 到新版本之前，需要对 Rancher 进行数据备份。如果在 Rancher 数据损坏或者丢失，或者升级遇到问题时，可以通过最新的备份进行数据恢复。

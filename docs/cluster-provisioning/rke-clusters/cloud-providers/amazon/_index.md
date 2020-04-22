@@ -1,8 +1,22 @@
 ---
 title: Amazon
+description: 使用`Amazon`Cloud Provider 时，您可以使用以下功能：负载均衡：** 在**端口映射**中选择`4 层负载均衡`时或在启动带有`typeLoadBalancer`的`Service`时，自动启动 AWS Elastic Load Balancer(ELB)。持久卷：允许您将 AWS Elastic Block Store(EBS) 用于持久卷。请参阅 [Cloud Provider AWS 自述文档](https://github.com/kubernetes/cloud-provider-aws/blob/master/README.md)获取有关 Amazon Cloud Provider 的所有信息。设置 Amazon Cloud Provider。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 创建集群
+  - 配置 Cloud Provider
+  - Amazon
 ---
 
-使用`Amazon`Cloud Provider 时，您可以使用以下功能:
+使用`Amazon`Cloud Provider 时，您可以使用以下功能：
 
 - **负载均衡：** 在**端口映射**中选择`4 层负载均衡`时或在启动带有`type: LoadBalancer`的`Service`时，自动启动 AWS Elastic Load Balancer(ELB)。
 - **持久卷：** 允许您将 AWS Elastic Block Store(EBS) 用于持久卷。

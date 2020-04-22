@@ -1,5 +1,18 @@
 ---
 title: 功能介绍
+description: 安装完成后，系统管理员应当对 Rancher 平台的身份验证、授权、安全、默认设置、安全策略、驱动程序和全局 DNS 等项目进行配置。第一次登录 Rancher 后，Rancher 将提示您输入一个Rancher Server URL。您应该将 URL 设置为 Rancher Server 的主入口点。当负载均衡器位于 Rancher Server 集群前面时，URL 应该设置为负载均衡地址。系统将自动尝试从运行 Rancher Server 的主机的 IP 地址或主机名推断 Rancher Server 的 URL。但只有在运行单个节点的 Rancher Server 安装时才，上述推断才正确。因此，在大多数情况下，您需要自己将 Rancher Server URL 设置为正确的值。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 系统管理员指南
+  - 功能介绍
 ---
 
 安装完成后，[系统管理员](/docs/admin-settings/rbac/global-permissions/_index)应当对 Rancher 平台的身份验证、授权、安全、默认设置、安全策略、驱动程序和全局 DNS 等项目进行配置。

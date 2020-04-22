@@ -1,5 +1,18 @@
 ---
 title: 集群管理概览
+description: 在 Rancher 中创建集群之后，您便可以开始使用强大的 Kubernetes 特性在开发、测试或生产环境中部署和扩展您的容器化应用程序。这部分内容会假设您基本熟悉 Docker 和 Kubernetes。有关 Kubernetes 组件是如何协同工作的简要说明，请参阅概念页面。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 集群管理员指南
+  - 集群管理概览
 ---
 
 在 Rancher 中创建集群之后，您便可以开始使用强大的 Kubernetes 特性在开发、测试或生产环境中部署和扩展您的容器化应用程序。

@@ -1,5 +1,18 @@
 ---
 title: 清理节点
+description: 本节介绍如何从一个 Rancher 创建的 Kubernetes 集群中断开一个节点，并从该节点中删除所有 Kubernetes 组件。此过程允许您将节点用于其他用途。当您使用 Rancher创建集群节点时，将创建资源(容器/虚拟网络接口)和配置项(证书/配置文件)。当从您的 Rancher 启动的 Kubernetes 集群中删除节点时(假设它们处于“活动”状态)，这些资源将被自动清除，所需的惟一操作是重新启动节点。当一个节点变得不可访问并且不能使用自动清理过程时，我们将再次说明将该节点添加到集群之前需要执行的步骤。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 集群管理员指南
+  - 清理节点
 ---
 
 本节介绍如何从一个 Rancher 创建的 Kubernetes 集群中断开一个节点，并从该节点中删除所有 Kubernetes 组件。此过程允许您将节点用于其他用途。

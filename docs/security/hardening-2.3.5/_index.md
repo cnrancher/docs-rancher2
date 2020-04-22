@@ -1,5 +1,19 @@
 ---
 title: 安全加固指南 - v2.3.5
+description: 本文是 Rancher v2.3.5 生产环境的安全加固指南。它概述了如何使您的集群符合互联网安全中心发布的 Kubernetes 安全基准。本加固指南介绍了如何保护集群中节点的安全，建议在安装 Kubernetes 之前按照本指南进行操作。该加固指南旨在与特定版本的 CIS Kubernetes Benchmark，Kubernetes 和 Rancher 一起使用。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安全
+  - 安全加固指南
+  - 安全加固指南 - v2.3.5
 ---
 
 本文是 Rancher v2.3.5 生产环境的安全加固指南。它概述了如何使您的集群符合互联网安全中心发布的 Kubernetes 安全基准。
@@ -139,9 +153,9 @@ done
 ```yaml
 # 如果您打算在离线环境中部署Kubernetes，
 # 请查阅有关如何配置自定义RKE镜像的文档。
-kubernetes_version: 'v1.15.9-rancher1-1'
+kubernetes_version: "v1.15.9-rancher1-1"
 enable_network_policy: true
-default_pod_security_policy_template_id: 'restricted'
+default_pod_security_policy_template_id: "restricted"
 services:
   etcd:
     uid: 52034
@@ -157,36 +171,36 @@ services:
       enabled: true
   kube-controller:
     extra_args:
-      feature-gates: 'RotateKubeletServerCertificate=true'
+      feature-gates: "RotateKubeletServerCertificate=true"
   scheduler:
-    image: ''
+    image: ""
     extra_args: {}
     extra_binds: []
     extra_env: []
   kubelet:
     generate_serving_certificate: true
     extra_args:
-      feature-gates: 'RotateKubeletServerCertificate=true'
-      protect-kernel-defaults: 'true'
-      tls-cipher-suites: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
+      feature-gates: "RotateKubeletServerCertificate=true"
+      protect-kernel-defaults: "true"
+      tls-cipher-suites: "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256"
     extra_binds: []
     extra_env: []
-    cluster_domain: ''
-    infra_container_image: ''
-    cluster_dns_server: ''
+    cluster_domain: ""
+    infra_container_image: ""
+    cluster_dns_server: ""
     fail_swap_on: false
   kubeproxy:
-    image: ''
+    image: ""
     extra_args: {}
     extra_binds: []
     extra_env: []
 network:
-  plugin: ''
+  plugin: ""
   options: {}
   mtu: 0
   node_selector: {}
 authentication:
-  strategy: ''
+  strategy: ""
   sans: []
   webhook: null
 addons: |
@@ -342,71 +356,71 @@ addons: |
 
 addons_include: []
 system_images:
-  etcd: ''
-  alpine: ''
-  nginx_proxy: ''
-  cert_downloader: ''
-  kubernetes_services_sidecar: ''
-  kubedns: ''
-  dnsmasq: ''
-  kubedns_sidecar: ''
-  kubedns_autoscaler: ''
-  coredns: ''
-  coredns_autoscaler: ''
-  kubernetes: ''
-  flannel: ''
-  flannel_cni: ''
-  calico_node: ''
-  calico_cni: ''
-  calico_controllers: ''
-  calico_ctl: ''
-  calico_flexvol: ''
-  canal_node: ''
-  canal_cni: ''
-  canal_flannel: ''
-  canal_flexvol: ''
-  weave_node: ''
-  weave_cni: ''
-  pod_infra_container: ''
-  ingress: ''
-  ingress_backend: ''
-  metrics_server: ''
-  windows_pod_infra_container: ''
-ssh_key_path: ''
-ssh_cert_path: ''
+  etcd: ""
+  alpine: ""
+  nginx_proxy: ""
+  cert_downloader: ""
+  kubernetes_services_sidecar: ""
+  kubedns: ""
+  dnsmasq: ""
+  kubedns_sidecar: ""
+  kubedns_autoscaler: ""
+  coredns: ""
+  coredns_autoscaler: ""
+  kubernetes: ""
+  flannel: ""
+  flannel_cni: ""
+  calico_node: ""
+  calico_cni: ""
+  calico_controllers: ""
+  calico_ctl: ""
+  calico_flexvol: ""
+  canal_node: ""
+  canal_cni: ""
+  canal_flannel: ""
+  canal_flexvol: ""
+  weave_node: ""
+  weave_cni: ""
+  pod_infra_container: ""
+  ingress: ""
+  ingress_backend: ""
+  metrics_server: ""
+  windows_pod_infra_container: ""
+ssh_key_path: ""
+ssh_cert_path: ""
 ssh_agent_auth: false
 authorization:
-  mode: ''
+  mode: ""
   options: {}
 ignore_docker_version: false
 private_registries: []
 ingress:
-  provider: ''
+  provider: ""
   options: {}
   node_selector: {}
   extra_args: {}
-  dns_policy: ''
+  dns_policy: ""
   extra_envs: []
   extra_volumes: []
   extra_volume_mounts: []
-cluster_name: ''
-prefix_path: ''
+cluster_name: ""
+prefix_path: ""
 addon_job_timeout: 0
 bastion_host:
-  address: ''
-  port: ''
-  user: ''
-  ssh_key: ''
-  ssh_key_path: ''
-  ssh_cert: ''
-  ssh_cert_path: ''
+  address: ""
+  port: ""
+  user: ""
+  ssh_key: ""
+  ssh_key_path: ""
+  ssh_cert: ""
+  ssh_cert_path: ""
 monitoring:
-  provider: ''
+  provider: ""
   options: {}
   node_selector: {}
 restore:
   restore: false
-  snapshot_name: ''
+  snapshot_name: ""
 dns: null
 ```
 
@@ -625,8 +639,8 @@ rancher_kubernetes_engine_config:
         safe_timestamp: false
       creation: 12h
       extra_args:
-        election-timeout: '5000'
-        heartbeat-interval: '500'
+        election-timeout: "5000"
+        heartbeat-interval: "500"
       gid: 52034
       retention: 72h
       snapshot: false
@@ -645,15 +659,15 @@ rancher_kubernetes_engine_config:
       extra_args:
         address: 127.0.0.1
         feature-gates: RotateKubeletServerCertificate=true
-        profiling: 'false'
-        terminated-pod-gc-threshold: '1000'
+        profiling: "false"
+        terminated-pod-gc-threshold: "1000"
     kubelet:
       extra_args:
-        anonymous-auth: 'false'
-        event-qps: '0'
+        anonymous-auth: "false"
+        event-qps: "0"
         feature-gates: RotateKubeletServerCertificate=true
-        make-iptables-util-chains: 'true'
-        protect-kernel-defaults: 'true'
+        make-iptables-util-chains: "true"
+        protect-kernel-defaults: "true"
         streaming-connection-idle-timeout: 1800s
         tls-cipher-suites: >-
           TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256
@@ -662,7 +676,7 @@ rancher_kubernetes_engine_config:
     scheduler:
       extra_args:
         address: 127.0.0.1
-        profiling: 'false'
+        profiling: "false"
   ssh_agent_auth: false
 windows_prefered_cluster: false
 ```
@@ -688,7 +702,7 @@ runcmd:
 write_files:
   - path: /etc/sysctl.d/kubelet.conf
     owner: root:root
-    permissions: '0644'
+    permissions: "0644"
     content: |
       vm.overcommit_memory=1
       kernel.panic=10

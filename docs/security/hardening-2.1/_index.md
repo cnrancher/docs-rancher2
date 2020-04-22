@@ -1,5 +1,19 @@
 ---
 title: 安全加固指南 - v2.1
+description: 本文是 Rancher v2.1.x 生产环境的安全加固指南。它概述了如何使您的集群符合互联网安全中心发布的 Kubernetes 安全基准。本加固指南介绍了如何保护集群中节点的安全，建议在安装 Kubernetes 之前按照本指南进行操作。该加固指南旨在与特定版本的 CIS Kubernetes Benchmark，Kubernetes 和 Rancher 一起使用。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安全
+  - 安全加固指南
+  - 安全加固指南 - v2.1
 ---
 
 本文是 Rancher v2.1.x 生产环境的安全加固指南。它概述了如何使您的集群符合互联网安全中心发布的 Kubernetes 安全基准。
@@ -383,10 +397,10 @@ Inspect the Kubelet containers on all hosts and verify that they are running wit
 services:
   kubelet:
     extra_args:
-      streaming-connection-idle-timeout: '<duration>'
-      protect-kernel-defaults: 'true'
-      make-iptables-util-chains: 'true'
-      event-qps: '0'
+      streaming-connection-idle-timeout: "<duration>"
+      protect-kernel-defaults: "true"
+      make-iptables-util-chains: "true"
+      event-qps: "0"
 ```
 
 Where `<duration>` is in a form like `1800s`.
@@ -469,21 +483,21 @@ services:
   kube-api:
     pod_security_policy: true
     extra_args:
-      anonymous-auth: 'false'
-      profiling: 'false'
-      repair-malformed-updates: 'false'
-      service-account-lookup: 'true'
-      enable-admission-plugins: 'ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,EventRateLimit,PodSecurityPolicy'
+      anonymous-auth: "false"
+      profiling: "false"
+      repair-malformed-updates: "false"
+      service-account-lookup: "true"
+      enable-admission-plugins: "ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,EventRateLimit,PodSecurityPolicy"
       experimental-encryption-provider-config: /etc/kubernetes/encryption.yaml
-      admission-control-config-file: '/etc/kubernetes/admission.yaml'
-      audit-log-path: '/var/log/kube-audit/audit-log.json'
-      audit-log-maxage: '5'
-      audit-log-maxbackup: '5'
-      audit-log-maxsize: '100'
-      audit-log-format: 'json'
+      admission-control-config-file: "/etc/kubernetes/admission.yaml"
+      audit-log-path: "/var/log/kube-audit/audit-log.json"
+      audit-log-maxage: "5"
+      audit-log-maxbackup: "5"
+      audit-log-maxsize: "100"
+      audit-log-format: "json"
       audit-policy-file: /etc/kubernetes/audit.yaml
     extra_binds:
-      - '/var/log/kube-audit:/var/log/kube-audit'
+      - "/var/log/kube-audit:/var/log/kube-audit"
 ```
 
 - Reconfigure the cluster:
@@ -585,9 +599,9 @@ docker inspect kube-controller-manager
 services:
   kube-controller:
     extra_args:
-      profiling: 'false'
-      address: '127.0.0.1'
-      terminated-pod-gc-threshold: '1000'
+      profiling: "false"
+      address: "127.0.0.1"
+      terminated-pod-gc-threshold: "1000"
 ```
 
 - Reconfigure the cluster:
@@ -1004,50 +1018,50 @@ nodes:
   - address: 18.191.190.205
     internal_address: 172.31.24.213
     user: ubuntu
-    role: ['controlplane', 'etcd', 'worker']
+    role: ["controlplane", "etcd", "worker"]
   - address: 18.191.190.203
     internal_address: 172.31.24.203
     user: ubuntu
-    role: ['controlplane', 'etcd', 'worker']
+    role: ["controlplane", "etcd", "worker"]
   - address: 18.191.190.10
     internal_address: 172.31.24.244
     user: ubuntu
-    role: ['controlplane', 'etcd', 'worker']
+    role: ["controlplane", "etcd", "worker"]
 
 services:
   kubelet:
     extra_args:
-      streaming-connection-idle-timeout: '1800s'
-      protect-kernel-defaults: 'true'
-      make-iptables-util-chains: 'true'
-      event-qps: '0'
+      streaming-connection-idle-timeout: "1800s"
+      protect-kernel-defaults: "true"
+      make-iptables-util-chains: "true"
+      event-qps: "0"
   kube-api:
     pod_security_policy: true
     extra_args:
-      anonymous-auth: 'false'
-      profiling: 'false'
-      repair-malformed-updates: 'false'
-      service-account-lookup: 'true'
-      enable-admission-plugins: 'ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,EventRateLimit,PodSecurityPolicy'
+      anonymous-auth: "false"
+      profiling: "false"
+      repair-malformed-updates: "false"
+      service-account-lookup: "true"
+      enable-admission-plugins: "ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,EventRateLimit,PodSecurityPolicy"
       experimental-encryption-provider-config: /etc/kubernetes/encryption.yaml
-      admission-control-config-file: '/etc/kubernetes/admission.yaml'
-      audit-log-path: '/var/log/kube-audit/audit-log.json'
-      audit-log-maxage: '5'
-      audit-log-maxbackup: '5'
-      audit-log-maxsize: '100'
-      audit-log-format: 'json'
+      admission-control-config-file: "/etc/kubernetes/admission.yaml"
+      audit-log-path: "/var/log/kube-audit/audit-log.json"
+      audit-log-maxage: "5"
+      audit-log-maxbackup: "5"
+      audit-log-maxsize: "100"
+      audit-log-format: "json"
       audit-policy-file: /etc/kubernetes/audit.yaml
     extra_binds:
-      - '/var/log/kube-audit:/var/log/kube-audit'
+      - "/var/log/kube-audit:/var/log/kube-audit"
   scheduler:
     extra_args:
-      profiling: 'false'
-      address: '127.0.0.1'
+      profiling: "false"
+      address: "127.0.0.1"
   kube-controller:
     extra_args:
-      profiling: 'false'
-      address: '127.0.0.1'
-      terminated-pod-gc-threshold: '1000'
+      profiling: "false"
+      address: "127.0.0.1"
+      terminated-pod-gc-threshold: "1000"
 addons: |
   apiVersion: rbac.authorization.k8s.io/v1
   kind: Role

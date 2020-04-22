@@ -1,5 +1,20 @@
 ---
 title: GlusterFS 卷
+description: 本章节仅适用于由 RKE 创建的集群。将数据存储到 GlusterFS 卷时，您可能会遇到一个问题：在重启`kubelet`之后，Pod 无法安装卷。`kubelet`的日志记录将显示：`transport endpoint is not connected`。为了防止这种情况的发生，您可以把集群主机上的`systemd-run`挂载到所有的`kubelet`容器里。在做这个操作之前，有两个要求。
+
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 集群管理员指南
+  - 存储卷和存储类
+  - GlusterFS 卷
 ---
 
 > 本章节仅适用于[由 RKE 创建的集群](/docs/cluster-provisioning/rke-clusters/_index)。

@@ -1,5 +1,18 @@
 ---
 title: CNI 插件
+description: NI (Container Network Interface) 是一个[云原生基金会项目](https://cncf.io/)，它包含了一些特性说明和库，用于编程 linux 容器网络以及一系列网络插件。CNI 只关注于提供容器之间的网络连接并在删除容器时移除分配的资源。Kubernetes 采用 CNI 作为网络插件和 Kubernetes Pod 网络之间的接口。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 常见问题
+  - CNI 插件
 ---
 
 ## CNI 是什么？

@@ -1,5 +1,19 @@
 ---
 title: 创建亚马逊 EKS 集群
+description: Amazon EKS 为 Kubernetes 集群提供了一个托管的控制平面。为了确保高可用性，Amazon EKS 中的 Kubernetes 控制平面实例运行在多个可用区。Rancher 为部署和管理 Amazon EKS 中运行的 Kubernetes 集群提供了直观的用户界面。通过本指南，您将使用 Rancher 在您的 AWS 帐户中快速轻松地启动 Amazon EKS Kubernetes 集群。有关 Amazon EKS 的更多信息，参考EKS文档。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 创建集群
+  - 创建托管集群
+  - 创建亚马逊 EKS 集群
 ---
 
 Amazon EKS 为 Kubernetes 集群提供了一个托管的控制平面。为了确保高可用性，Amazon EKS 中的 Kubernetes 控制平面实例运行在多个可用区。Rancher 为部署和管理 Amazon EKS 中运行的 Kubernetes 集群提供了直观的用户界面。通过本指南，您将使用 Rancher 在您的 AWS 帐户中快速轻松地启动 Amazon EKS Kubernetes 集群。有关 Amazon EKS 的更多信息，参考[文档](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html)。

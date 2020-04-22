@@ -1,5 +1,19 @@
 ---
 title: 对接 Google OAuth
+description: 如果您的组织使用 G Suite 进行用户身份验证，您可以配置 Rancher 以允许您的用户使用他们的 G Suite 凭据登录。只有 G Suite 域的管理员才能访问管理 SDK。因此，只有 G Suite 管理员可以配置 Rancher 的 Google OAuth。在 Rancher 中，只有具有Manage Authentication全局角色的管理员或用户才能配置身份验证。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 系统管理员指南
+  - 登录认证
+  - 对接 Google OAuth
 ---
 
 _v2.3.0 版本可用_

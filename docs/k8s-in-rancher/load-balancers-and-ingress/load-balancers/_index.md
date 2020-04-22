@@ -1,5 +1,19 @@
 ---
 title: 负载均衡
+description: Kubernetes 通过两种方式支持负载均衡：四层负载均衡和七层负载均衡。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 用户指南
+  - 负载均衡和Ingress
+  - 负载均衡
 ---
 
 Kubernetes 通过两种方式支持负载均衡：四层负载均衡和七层负载均衡。

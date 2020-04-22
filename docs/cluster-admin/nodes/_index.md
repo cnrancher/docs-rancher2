@@ -1,5 +1,19 @@
 ---
 title: 节点和节点池
+description: 在 Rancher 中启动 Kubernetes 集群后，您可以从集群的节点页面中管理各个节点。根据创建集群的方式的不同，有不同的节点选项可用。如果要管理的是*集群*而不是单个节点，请参阅编辑集群。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 集群管理员指南
+  - 集群访问控制
+  - 节点和节点池
 ---
 
 在 Rancher 中启动 Kubernetes 集群后，您可以从集群的节点页面中管理各个节点。根据[创建集群的方式](/docs/cluster-provisioning/_index)的不同，有不同的节点选项可用。

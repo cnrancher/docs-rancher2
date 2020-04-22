@@ -1,5 +1,19 @@
 ---
 title: 使用模板
+description: 您可以从创建的 RKE 模板或已与您共享的模板创建集群。RKE 模板可以应用于新的集群。从 Rancher v2.3.3 开始，您可以将现有集群的配置保存为 RKE 模板，然后只有更新模板时才能更改集群的设置。不能将集群更改为使用其他 RKE 模板。只能将集群更新为同一模板的新版本。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 系统管理员指南
+  - RKE模板
+  - 使用模板
 ---
 
 您可以从创建的 RKE 模板或已[与您共享的模板](/docs/admin-settings/rke-templates/template-access-and-sharing/_index)创建集群。

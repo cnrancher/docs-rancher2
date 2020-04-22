@@ -1,5 +1,20 @@
 ---
-title: '1、配置基础设施和私有镜像仓库'
+title: "1、配置基础设施和私有镜像仓库"
+description: 在本节中，您将在离线环境中为 Rancher Server 配置基础设施。您还将配置一个私有 Docker 镜像仓库，Rancher 节点必须可以使用这个镜像仓库。离线环境是指在没有外网的环境，或在防火墙后安装 Rancher Server 的环境。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安装指南
+  - 其他安装方法
+  - 离线安装
+  - 配置基础设施和私有镜像仓库
 ---
 
 在本节中，您将在离线环境中为 Rancher Server 配置基础设施。您还将配置一个私有 Docker 镜像仓库，Rancher 节点必须可以使用这个镜像仓库。

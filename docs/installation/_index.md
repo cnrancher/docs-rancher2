@@ -1,5 +1,18 @@
 ---
 title: 安装介绍
+description: 本节整体概述了 Rancher 各种安装方式，并介绍了每个选项的优点。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安装指南
+  - 安装介绍
 ---
 
 本节整体概述了 Rancher 各种安装方式，并介绍了每个选项的优点。
@@ -9,7 +22,7 @@ title: 安装介绍
 在这个部分的主要涉及的名词如下：
 
 - **Rancher Server** 用于管理和配置 Kubernetes 集群。您可以通过 Rancher Server 的 UI 与下游 Kubernetes 集群进行交互。
-- **RKE（Rancher Kubernetes Engine** 是经过认证的 Kubernetes 发行版，它拥有对应的 CLI 工具可用于创建和管理 Kubernetes 集群。在 Rancher UI 中创建集群时，它将调用 RKE 来配置 Rancher 启动的 Kubernetes 集群。
+- **RKE**（Rancher Kubernetes Engine，是经过认证的 Kubernetes 发行版，它拥有对应的 CLI 工具可用于创建和管理 Kubernetes 集群。在 Rancher UI 中创建集群时，它将调用 RKE 来配置 Rancher 启动的 Kubernetes 集群。
 - **K3s (比 K8s 少 5)** 也是经过认证的 Kubernetes 发行版。它比 RKE 更新，更易于使用且更轻巧，全部组件都在一个二进制文件中，并且文件的大小小于 50 MB。从 Rancher v2.4 开始，Rancher 可以安装在 K3s 集群上。
 
 ## 安装选项概述
@@ -32,7 +45,7 @@ Rancher 的部署可以有三种架构：
 
 因此，我们建议对于生产级别的架构，您应该使用 RKE 或 K3s 创建高可用的 Kubernetes 集群，然后在这个集群上安装 Rancher。安装 Rancher 后，您可以使用 Rancher 部署和管理 Kubernetes 集群。
 
-为了测试或演示目的，您可以在单个节点上通过 Docker 安装 Rancher，这个过程非常简洁，Rancher 是基本是开箱即用。
+为了测试或演示目的，您可以在单个节点上通过 Docker 安装 Rancher，这个过程非常简洁，基本上可以实现开箱即用。
 
 我们的[在 Kubernetes 上安装 Rancher 的说明](/docs/installation/k8s-install/_index)描述了如何使用 K3s 或 RKE 创建和管理 Kubernetes 集群，然后在这个集群上安装 Rancher。
 

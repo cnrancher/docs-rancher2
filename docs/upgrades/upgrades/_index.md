@@ -1,5 +1,18 @@
 ---
 title: 升级必读
+description: 本节包含有关如何将 Rancher Server 升级到较新版本的信息。无论 Rancher Server 是否安装在内网环境中，升级步骤取决于您是在使用单节点 Rancher 还是在使用高可用 Rancher。请从以下选项中选择。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 升级和回滚
+  - 升级必读
 ---
 
 本节包含有关如何将 Rancher Server 升级到较新版本的信息。无论 Rancher Server 是否安装在内网环境中，升级步骤取决于您是在使用单节点 Rancher 还是在使用高可用 Rancher。请从以下选项中选择：

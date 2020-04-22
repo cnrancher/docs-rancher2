@@ -1,5 +1,19 @@
 ---
 title: Pod 弹性伸缩（HPA）
+description: Pod 弹性伸缩（HPA）是 Kubernetes 的一项功能，可以对您的应用进行自动扩容和自动缩容。Rancher 提供了一些额外功能来帮助您管理 HPA，具体取决于 Rancher 的版本。您可以在 Rancher v2.3.0 或更高版本中的 Rancher UI 创建，管理和删除 HPA。Rancher UI 仅支持 `autoscaling/v2beta2` 版本的 HPA。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 用户指南
+  - Pod 弹性伸缩
+  - Pod 弹性伸缩（HPA）
 ---
 
 [Pod 弹性伸缩器](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)（HPA）是 Kubernetes 的一项功能，可以对您的应用进行自动扩容和自动缩容。
@@ -8,7 +22,7 @@ Rancher 提供了一些额外功能来帮助您管理 HPA，具体取决于 Ranc
 
 您可以在 Rancher v2.3.0 或更高版本中的 Rancher UI 创建，管理和删除 HPA。Rancher UI 仅支持 `autoscaling/v2beta2` 版本的 HPA。
 
-### 管理 HPA
+## 管理 HPA
 
 根据您的 Kubernetes API 版本，管理 HPA 的方式有所不同：
 
@@ -25,7 +39,7 @@ Rancher 提供了一些额外功能来帮助您管理 HPA，具体取决于 Ranc
 - **对于 Rancher v2.0.7+：** 在 Rancher v2.0.7 及更高版本中创建的集群自动具有使用 HPA 所需的所有先决条件（metrics-server 和 Kubernetes 集群配置）。
 - **对于 Rancher v2.0.7 之前的版本：** 在 Rancher v2.0.7 之前版本中创建的集群不会自动具有使用 HPA 所需的全部先决条件。有关为这些集群安装 HPA 的说明，请参阅[为 Rancher v2.0.7 之前创建的集群手动安装 HPA](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/hpa-for-rancher-before-2_0_7/_index)。
 
-### 通过部署服务测试 HPA
+## 通过部署服务测试 HPA
 
 在 Rancher v2.3.0+ 中，您可以导航到项目并单击 **资源 > HPA** 来查看 HPA 当前的副本数。有关更多信息，请参阅[获取 HPA 指标和状态](/docs/k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-rancher-ui/_index)。
 

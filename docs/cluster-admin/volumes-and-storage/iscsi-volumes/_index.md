@@ -1,5 +1,19 @@
 ---
 title: iSCSI 卷
+description: 将数据存储到 iSCSI 卷时，您可能会遇到一个问题：kubelet无法自动连接 iSCSI 卷。失败是可能因为 iSCSI 启动器工具不兼容而导致的问题，因此您可以通过在集群的每个节点上安装 iSCSI 启动器工具来解决这个问题。Rancher 启动的 Kubernetes 集群是借助iSCSI 启动器工具把数据存储到 iSCSI 卷的，这个工具已经被嵌入到 kubelet 的`rancher/hyperkube` Docker 镜像中。该工具从每个 kubelet（即启动器）中发起与 iSCSI 卷（即目标）的会话。但是，在某些情况下，启动器和目标上安装的 iSCSI 启动器工具的版本可能不匹配，从而导致连接失败。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 集群管理员指南
+  - 存储卷和存储类
+  - iSCSI 卷
 ---
 
 > 本章节仅适用于[由 RKE 创建的集群](/docs/cluster-provisioning/rke-clusters/_index)。

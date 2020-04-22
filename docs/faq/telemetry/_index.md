@@ -1,5 +1,18 @@
 ---
 title: 遥测
+description: 什么是遥测？遥测收集了关于 Rancher 安装规模、组件版本以及使用的功能特性的集合信息。Rancher Labs 可用这些信息持续提升产品，并对第三方严格保密。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 常见问题
+  - 遥测
 ---
 
 ## 什么是遥测？

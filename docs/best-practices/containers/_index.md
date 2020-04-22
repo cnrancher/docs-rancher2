@@ -1,5 +1,18 @@
 ---
 title: 配置容器的技巧
+description: 运行构建良好的容器会极大地提高环境的整体性能和安全性。下面是设置容器的一些技巧。如果可能，您应该尝试在通用的容器基础操作系统上进行标准化。较小的发布版本，如 Alpine 和 BusyBox，减少了容器镜像的大小，通常具有较小的攻击/漏洞Ubuntu、Fedora 和 CentOS 等流行的发行版经过了更多的实地测试，提供了更多的功能。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 最佳实践
+  - 配置容器的技巧
 ---
 
 运行构建良好的容器会极大地提高环境的整体性能和安全性。

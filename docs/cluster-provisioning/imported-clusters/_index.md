@@ -1,5 +1,18 @@
 ---
 title: 将现有集群导入 Rancher
+description: 当管理一个导入的集群时，Rancher 将连接到一个已经设置好的 Kubernetes 集群。因此，Rancher 不提供 Kubernetes，而只设置 Rancher Agent 来与集群通信。Rancher 的集群管理，基于角色的访问控制，策略管理和工作负载等功能在导入集群中可用。请注意，Rancher 中不能配置或扩展导入的集群。对于除 K3s 集群外的所有导入的 Kubernetes 集群，必须在 Rancher 外部编辑集群的配置。例如您需要自己在 Rancher 外部修改 Kubernetes 组件的参数，升级 Kubernetes 版本以及添加删除节点。Rancher v2.4 支持编辑导入的 K3s 集群，您可以在 Rancher UI 中编辑集群来升级 Kubernetes 的功能。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 创建集群
+  - 将现有集群导入 Rancher
 ---
 
 当管理一个导入的集群时，Rancher 将连接到一个已经设置好的 Kubernetes 集群。因此，Rancher 不提供 Kubernetes，而只设置 Rancher Agent 来与集群通信。

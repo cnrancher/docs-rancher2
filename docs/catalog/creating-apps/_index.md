@@ -1,5 +1,18 @@
 ---
 title: 创建应用商店应用
+description: Rancher 的应用商店服务要求所有自定义应用商店都必须以特定格式构建，以便应用商店服务能够在 Rancher 中使用它。有关开发 Chart 的完整步骤，请参阅Helm Chart开发人员参考。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 应用商店
+  - 创建应用商店应用
 ---
 
 Rancher 的应用商店服务要求所有自定义应用商店都必须以特定格式构建，以便应用商店服务能够在 Rancher 中使用它。

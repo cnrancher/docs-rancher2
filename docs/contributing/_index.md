@@ -1,5 +1,18 @@
 ---
 title: 为Rancher社区做出贡献
+description: 本部分将介绍 Rancher 2.x 的源代码仓库，如何构建源代码以及在提交 Issue 时要包括哪些信息。有关如何为 Rancher 2.x 的开发做出贡献的更多详细信息，请参阅[Rancher 开发指南](https://github.com/rancher/rancher/wiki)。这个 Wiki 具有许多主题的资源。在 Rancher 用户 Slack 上，开发人员的频道是 **#developer**。在我们的官方微信交流群中，每个群也都有 Rancher 的开发者。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 参与Rancher开源项目
+  - 为Rancher社区做出贡献
 ---
 
 本部分将介绍 Rancher 2.x 的源代码仓库，如何构建源代码以及在提交 Issue 时要包括哪些信息。

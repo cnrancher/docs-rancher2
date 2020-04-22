@@ -1,5 +1,19 @@
 ---
 title: 流水线配置参考
+description: 在每个阶段中，您可以任意添加多个步骤。在一个阶段中有多个步骤时，它们会同时运行。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 用户指南
+  - 流水线
+  - 流水线配置参考
 ---
 
 ## 步骤类型
@@ -122,7 +136,7 @@ stages:
           pushRemote: true
           registry: example.com
         env:
-          PLUGIN_INSECURE: 'true'
+          PLUGIN_INSECURE: "true"
 ```
 
 ## 步骤类型 - 发布应用模板
@@ -247,7 +261,7 @@ stages:
           catalogTemplate: cattle-global-data:library-mysql
           version: 0.3.8
           answers:
-            persistence.enabled: 'false'
+            persistence.enabled: "false"
           name: testmysql
           targetNamespace: test
 ```

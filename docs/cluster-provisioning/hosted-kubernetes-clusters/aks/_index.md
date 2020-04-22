@@ -1,5 +1,19 @@
 ---
 title: 创建微软 AKS 集群
+description: 您可以使用 Rancher 创建一个托管在 Microsoft Azure Kubernetes 服务 (AKS) 中的集群。要与 Azure API 交互，AKS 集群需要 Azure 活动目录 （AD） 服务主体。需要服务主体来动态创建和管理其他 Azure 资源，它为您的集群提供了与 AKS 通信的凭证。有关服务主体的详细信息，请参阅AKS 文档。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 创建集群
+  - 创建托管集群
+  - 创建微软 AKS 集群
 ---
 
 您可以使用 Rancher 创建一个托管在 Microsoft Azure Kubernetes 服务 (AKS) 中的集群。

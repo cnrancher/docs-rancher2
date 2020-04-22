@@ -1,5 +1,18 @@
 ---
 title: 配置日志等级
+description: Rancher 中使用以下日志级别：info、debug、trace。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 常见故障排查
+  - 配置日志等级
 ---
 
 Rancher 中使用以下日志级别：
