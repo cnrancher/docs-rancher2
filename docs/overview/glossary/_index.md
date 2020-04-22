@@ -1,6 +1,18 @@
 ---
 title: 名词解释
 description: 本文提供了使用 Rancher 过程中常见的名词和对应的解析，这些名词分为两大类：Rancher 相关概念和 Kubernetes 相关概念，如Rancher Labs、Rancher、RKE、K3s、集群（Cluster）、节点（Node）实例（Pod）、容器（Container）、工作负载（Workload）等。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 产品介绍
+  - 名词解释
 ---
 
 本文提供了使用 Rancher 过程中常见的名词和对应的解析，这些名词分为两大类：Rancher 相关概念和 Kubernetes 相关概念。需要注意的是，Kubernetes 相关英语词汇可能有不止一种中文翻译，我们会尽量保证中英文词汇对照的完整性。

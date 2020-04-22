@@ -1,5 +1,19 @@
 ---
 title: AWS 快速部署
+description: 您可以参考以下步骤将在 Amazon AWS 上创建一个单节点的 RKE Kubernetes 集群，并在其中部署 Rancher Server，并附加一个单节点的下游 Kubernetes 集群。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 快速入门
+  - 部署Rancher Server
+  - AWS 快速部署
 ---
 
 您可以参考以下步骤将在 Amazon AWS 上创建一个单节点的 RKE Kubernetes 集群，并在其中部署 Rancher Server，并附加一个单节点的下游 Kubernetes 集群。

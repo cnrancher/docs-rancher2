@@ -1,6 +1,18 @@
 ---
 title: Kubernetes 概念
 description: 本文对 Kubernetes 相关概念和术语进行了解释，帮助您更好地了解 Rancher 的运行机制。Docker是容器打包和运行时系统的标准，主要用于管理各个节点上的容器。开发者在 Dockerfiles 中构建容器镜像，上传到镜像仓库中，用户只需从镜像仓库下载该镜像文件，就可以开始使用。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 产品介绍
+  - Kubernetes 概念
 ---
 
 本文对 Kubernetes 相关概念和术语进行了解释，帮助您更好地了解 Rancher 的运行机制。如需了解更多细节，请查看[Kubernetes 官方文档](https://kubernetes.io/docs/concepts/overview/components/)。
