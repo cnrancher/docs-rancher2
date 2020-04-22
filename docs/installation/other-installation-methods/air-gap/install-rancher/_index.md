@@ -145,6 +145,8 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
    --set useBundledSystemChart=true # 自v2.3.0可用，使用内嵌的 Rancher system charts
    ```
 
+**可选**：要安装指定的 Rancher 版本，请设置`rancherImageTag`的值，例如：`--set rancherImageTag = v2.3.6`
+
 #### 选项 B - 使用已有的证书
 
 根据您已有的证书创建 Kubernetes 密文，以供 Rancher 使用。证书的`common name`将需要与以下命令中的`hostname`选项匹配，否则 ingress controller 将无法为 Rancher 设置入口。
@@ -168,6 +170,8 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
     --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # 自v2.2.0可用，设置默认的系统镜像仓库
     --set useBundledSystemChart=true # 自v2.3.0可用，使用内嵌的 Rancher system charts
 ```
+
+**可选**：要安装指定的 Rancher 版本，请设置`rancherImageTag`的值，例如：`--set rancherImageTag = v2.3.6`
 
 然后请参考[添加 TLS 密文](/docs/installation/options/tls-secrets/_index)发布证书文件，以便 Rancher 和 ingress controller 可以使用它们。
 

@@ -67,6 +67,7 @@ rm -rf /etc/ceph \
     /var/lib/cni \
     /var/lib/kubelet \
     /var/log/containers \
+    /var/log/kube-audit \
     /var/log/pods \
     /var/run/calico
 
@@ -261,6 +262,7 @@ for mount in $(mount | grep tmpfs | grep '/var/lib/kubelet' | awk '{ print $3 }'
 | `/var/lib/kubelet`           |
 | `/var/lib/rancher/rke/log`   |
 | `/var/log/containers`        |
+| `/var/log/kube-audit`        |
 | `/var/log/pods`              |
 | `/var/run/calico`            |
 
@@ -281,6 +283,7 @@ rm -rf /etc/ceph \
        /var/lib/kubelet \
        /var/lib/rancher/rke/log \
        /var/log/containers \
+       /var/log/kube-audit \
        /var/log/pods \
        /var/run/calico
 ```

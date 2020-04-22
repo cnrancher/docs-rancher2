@@ -102,7 +102,7 @@ services:
   etcd:
     snapshot: true
     creation: 6h
-    retention: 24h
+    retention: 24
 
 ## 从此处开始删除addons部分到文件结尾
 addons: |-

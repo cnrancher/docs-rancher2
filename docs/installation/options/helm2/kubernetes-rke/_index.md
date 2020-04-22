@@ -47,7 +47,7 @@ services:
   etcd:
     snapshot: true
     creation: 6h
-    retention: 24h
+    retention: 24
 ```
 
 ### RKE 节点通用选项

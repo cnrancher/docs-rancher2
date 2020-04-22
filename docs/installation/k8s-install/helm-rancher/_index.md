@@ -149,6 +149,7 @@ Rancher 的默认值是生成 CA 并使用`cert-manager`颁发证书，并将证
 
 - 将`hostname`设置为您指向负载均衡器的 DNS 名称。
 - 如果您在安装 `alpha` 版本，需要把`--devel` 选项添加到下面到 Helm 命令中。
+- 要安装指定版本的 Rancher，请使用`--version`选项，例如：`--version 2.3.6`。
 
 ```
 helm install rancher rancher-<CHART_REPO>/rancher \

@@ -36,7 +36,7 @@ Rancher 改进了 Helm 应用商店和 Chart。所有原生 Helm Chart 都可以
 
 _自 v2.4.0 起可用_
 
-Helm 3 在 2019 年 11 月发布，并且 Helm2 某些功能已被弃用或重构。它与 Helm 2 并不完全向后兼容。因此，Rancher 中的应用商店需要进行区分，每个应用商店仅可以使用一个指定的 Helm 版本。
+Helm 3 在 2019 年 11 月发布，并且 Helm2 某些功能已被弃用或重构。它并不可以完全向后兼容 Helm 2。因此，Rancher 中的应用商店需要进行区分，每个应用商店仅可以使用一个指定的 Helm 版本。这将有助于减少应用商店中应用部署相关的问题，因为您的 Rancher 用户不需要知道您的 Charts 的哪个版本与哪个 Helm 版本的兼容。用户只需选择应用商店，选择其中的应用，然后就可以部署已经过兼容性验证的版本。
 
 创建自定义应用商店时，必须将应用商店配置为使用 Helm 2 或 Helm3。设置了此版本以后就不能更改。如果使用错误的 Helm 版本添加了应用商店，则需要将其删除并重新添加。
 
@@ -45,6 +45,25 @@ Helm 3 在 2019 年 11 月发布，并且 Helm2 某些功能已被弃用或重�
 默认情况下，应用将使用 Helm 2 进行部署的。如果您在 v2.4.0 之前的 Rancher 中运行了某个应用，然后升级到 Rancher v2.4.0+，则该应用仍将由 Helm 2 管理。如果应用已经使用了 Helm 3 Chart（API 版本 2），它将在 v2.4.0+ 中不能正常工作。您必须降 Chart 的 API 版本或重新创建 Helm 3 的应用商店。
 
 只能将 Helm 2 的 Chart 添加到 Helm 2 的应用商店中。同样，Helm 3 的 Chart 仅能添加到 Helm 3 的应用商店中。
+
+## 什么时候使用 Helm 3
+
+_自 v2.4.0 起可用_
+
+- 如果要使用基于 kubeconfig 的安全权限
+- 如果您想使用 apiVersion `v2`的功能（Helm 3 使用 v2 API），例如创建 Library Chart 以减少重复的代码，或者将 requirements 从`requirements.yaml`移至`Chart.yaml`
+
+总体而言，Helm 3 是朝着更加标准化的 Kubernetes 迈进的一步。随着 Kubernetes 社区的发展，标准和最佳实践也随之发展。Helm 3 试图采用这些标准和最佳实践，并简化 Charts 的维护方式。
+
+## Helm 3 向后兼容性
+
+_自 v2.4.0 起可用_
+
+Helm 3 通过使用 OpenAPI schema 来验证渲染的模板，所以有些在 Helm 2 中可以正常工作的 Charts 可能在 Helm 3 中不能正常工作。这将需要您更新 Chart 模板以满足新的验证要求。这是我们在 Rancher 2.4.x 中同时支持 Helm 2 和 Helm 3 的主要原因之一，因为并非所有 Charts 都可以立即通过 Helm 3 中部署。
+
+Helm 3 不会自动为您创建命名空间，因此您必须提供一个现有的命名空间。如果您将代码与 Helm 2 集成在了一起，则可能会遇到问题，因为您可能需要更改您的代码逻辑以确保为 Helm 3 创建并传递了命名空间。如果您通过 Rancher 使用 Helm，您可以不用考虑这个事情，Rancher 将继续管理 Helm 所需的命名空间，并确保不会影响到您的应用部署。
+
+Helm 3 Charts 使用 apiVersion `v2`。在某些较旧的 Helm 2 版本中，并没有校验 `Chart.yaml` 文件中的 apiVersion，因此您在使用中可能会遇到问题。通常，您的 Helm 2 Charts 中的 apiVersion 应该设置为 `v1`，而 Helm 3 Charts 的 apiVersion 应该设置为`v2`。您可以使用 Helm 3 安装带有 apiVersion `v1` 的 Charts，但不能在 Helm 2 中安装带有 apiVersion `v2` 的 Charts。
 
 ## 内置的全局应用商店
 
