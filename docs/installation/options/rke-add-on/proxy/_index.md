@@ -1,5 +1,20 @@
 ---
 title: HTTP代理配置
+description: 如果您在代理后面操作 Rancher，并且想要通过代理访问服务（例如拉取应用商店），则必须提供有关 Rancher 代理的信息。由于 Rancher 是用 Go 编写的，因此它使用了常见的代理环境变量，如下所示。确保`NO_PROXY`包含不应使用代理的网络地址，网络地址范围和域。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安装指南
+  - 资料、参考和高级选项
+  - RKE Add-on 安装
+  - HTTP代理配置
 ---
 
 :::important 重要提示
@@ -57,10 +72,10 @@ spec:
           name: cattle-server
           env:
             - name: HTTP_PROXY
-              value: 'http://192.168.10.1:3128'
+              value: "http://192.168.10.1:3128"
             - name: HTTPS_PROXY
-              value: 'http://192.168.10.1:3128'
+              value: "http://192.168.10.1:3128"
             - name: NO_PROXY
-              value: 'localhost,127.0.0.1,0.0.0.0,10.43.0.0/16,192.168.10.0/24,example.com'
+              value: "localhost,127.0.0.1,0.0.0.0,10.43.0.0/16,192.168.10.0/24,example.com"
           ports:
 ```

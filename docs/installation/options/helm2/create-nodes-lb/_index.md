@@ -1,5 +1,21 @@
 ---
 title: 节点和负载均衡
+description: 使用您选择的提供商为您的 RKE 安装提供 3 个节点和一个负载均衡器端点。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安装指南
+  - 资料、参考和高级选项
+  - Rancher高可用Helm2安装
+  - 配置基础设施
+  - 节点和负载均衡
 ---
 
 使用您选择的提供商为您的 RKE 安装提供 3 个节点和一个负载均衡器端点。

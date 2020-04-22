@@ -1,5 +1,21 @@
 ---
 title: 问题排查
+description: 大部分常见问题排查都将在这 3 个命名空间中的对象上进行。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安装指南
+  - 资料、参考和高级选项
+  - Rancher高可用Helm2安装
+  - 安装 Rancher
+  - 问题排查
 ---
 
 ## 去哪里排查？

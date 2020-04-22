@@ -1,6 +1,19 @@
 ---
 title: 配置 Amazon NLB
 description: 本操作指南介绍了如何在 Amazon EC2 服务中设置 Amazon NLB 负载均衡器，该负载均衡器会将流量定向到 EC2 上的多个实例。在这些示例中，负载均衡器将被配置为将流量定向到三个 Rancher Server 节点。如果将 Rancher 安装在 RKE Kubernetes 集群上，则需要三个节点。如果将 Rancher 安装在 K3s Kubernetes 集群上，则仅需要两个节点Rancher 仅支持使用 Amazon NLB 以 tcp 模式终止 443 端口流量而不是以 tls 模式。这是由于以下原因：当终止 NLB 时，NLB 不会将正确的 headers 注入请求中。这意味着，如果您要使用由 Amazon Certificate Manager（ACM）管理的证书，则应使用 ALB。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安装指南
+  - 资料、参考和高级选项
+  - 配置 Amazon NLB
 ---
 
 本操作指南介绍了如何在 Amazon EC2 服务中设置 Amazon NLB 负载均衡器，该负载均衡器会将流量定向到 EC2 上的多个实例。

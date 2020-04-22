@@ -1,5 +1,20 @@
 ---
 title: UI 管理 Istio Virtual Services 和 Istio Destination Rules
+description: 此功能可以使用 UI 创建，读取，更新和删除虚拟服务和目标规则，他们负责 Istio 的流量管理功能。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安装指南
+  - 资料、参考和高级选项
+  - 功能开关
+  - UI 管理 Istio Virtual Services 和 Istio Destination Rules
 ---
 
 _自 v2.3.0 起可用_

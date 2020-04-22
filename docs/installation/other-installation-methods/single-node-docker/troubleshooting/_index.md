@@ -1,5 +1,20 @@
 ---
 title: 常见问题和问题排查
+description: 常见问题和问题排查
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安装指南
+  - 其他安装方法
+  - 单节点安装
+  - 常见问题和问题排查
 ---
 
 ## 如何知道我的证书是不是 PEM 格式？
