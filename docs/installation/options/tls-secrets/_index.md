@@ -29,3 +29,5 @@ kubectl -n cattle-system create secret tls tls-rancher-ingress \
 kubectl -n cattle-system create secret generic tls-ca \
   --from-file=cacerts.pem
 ```
+
+> **注意：** Rancher 在启动时检索`tls-ca`密文。如果您的 Rancher Server 正在运行中，您需要重新启动 Rancher Server Pod 才能使新的 CA 生效。

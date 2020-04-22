@@ -115,8 +115,6 @@ keywords:
 
 ## 创建 NLB
 
-使用 Amazon 的向导创建网络负载均衡器。您将添加在**1. 创建目标组**中创建的目标组。
-
 使用 Amazon 的向导创建网络负载均衡器。您将添加在[创建目标组](#1-创建目标组)中创建的目标组。
 
 1. 在您的 Web 浏览器中，导航到[Amazon EC2 控制台](https://console.aws.amazon.com/ec2/)。
