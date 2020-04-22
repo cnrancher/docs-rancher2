@@ -4,8 +4,8 @@ import axios from 'axios';
 import Layout from '@theme/Layout';
 
 const DEFAULT_TICK = 10;
-const SUBMIT_URL = 'https://www.npmjs.com/package/axios';
-const GENERATE_CODE_URL = 'https://www.npmjs.com/package/axios';
+const SUBMIT_URL = 'https://r2.docs.rancher.cn/sendEmail';
+const GENERATE_CODE_URL = 'https://r2.docs.rancher.cn/sendCode';
 
 function GetPDF() {
   const [tick, setTick] = useState(DEFAULT_TICK);
