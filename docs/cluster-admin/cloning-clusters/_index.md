@@ -17,15 +17,13 @@ keywords:
 
 如果在 Rancher 中有一个集群，并希望用这个集群作为模板来创建相似集群，则可以使用 Rancher CLI 克隆该集群的配置，对其进行编辑，然后使用它来快速启动克隆的集群。
 
-仅当集群中的节点由基础设施供应商（例如 EC2，Azure 或 DigitalOcean）提供时，才可以克隆集群。
-
-不支持克隆导入的集群，托管的 Kubernetes 集群以及自定义集群。
+不支持克隆导入的集群。.
 
 | 集群类型                                                                                      | 知否支持克隆 |
 | --------------------------------------------------------------------------------------------- | ------------ |
 | [节点运行在基础设施供应商上的集群](/docs/cluster-provisioning/rke-clusters/node-pools/_index) | ✓            |
-| [托管的 Kubernetes 集群](/docs/cluster-provisioning/hosted-kubernetes-clusters/_index)        |              |
-| [自定义集群](/docs/cluster-provisioning/custom-clusters/_index)                               |              |
+| [托管的 Kubernetes 集群](/docs/cluster-provisioning/hosted-kubernetes-clusters/_index)        | ✓            |
+| [自定义集群](/docs/cluster-provisioning/custom-clusters/_index)                               | ✓            |
 | [导入的集群](/docs/cluster-provisioning/imported-clusters/_index)                             |              |
 
 :::note 警告

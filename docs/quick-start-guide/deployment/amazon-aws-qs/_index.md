@@ -23,7 +23,8 @@ keywords:
 - [Amazon AWS 账号](https://aws.amazon.com/account/)：您需要一个 Amazon AWS 账号来创建部署 Rancher Server 和 Kubernetes 所需要的资源。
 - [Amazon AWS 访问密钥](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html)：如果您还没有 Amazon AWS 访问密钥，请使用这个链接查看相关指南。
 - [Amazon AWS 密钥对](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair)：使用此链接并按照说明创建 Amazon AWS 密钥对。
-- [Terraform](https://www.terraform.io/downloads.html)：用于在 Amazon AWS 中配置服务器和集群。
+- 安装 [Terraform](https://www.terraform.io/downloads.html)：用于在 Amazon AWS 中配置服务器和集群。
+- 安装 [RKE Terraform Provider](https://github.com/rancher/terraform-provider-rke#installing-the-provider)：您将需要下载 RKE 的 Terraform Provider 的二进制文件，该二进制文件与您的工作站的操作系统相对应。然后，您需要将二进制文件移到 Terraform 插件目录中。目录名称将取决于您的操作系统。有关如何安装 Terraform 插件的更多信息，请参考[Terraform 文档](https://www.terraform.io/docs/plugins/basics.html#installing-a-plugin)。
 
 > **注意：**
 > Amazon AWS 会向您收取一定的费用。
@@ -54,8 +55,6 @@ keywords:
    - `ssh_key_file_name` - 使用指定的 SSH 密钥而不是`~/.ssh/id_rsa`（假设公共密钥为`${ssh_key_file_name}.pub`）
 
 1. 执行`terraform init`。
-
-1. 安装 [RKE terraform 提供商](https://github.com/rancher/terraform-provider-rke)，详情请参阅[安装指南](https://github.com/rancher/terraform-provider-rke#using-the-provider)。
 
 1. 执行 `terraform apply --auto-approve` 开始初始化环境，命令行工具返回以下信息时，表示命令执行成功，完成了初始化环境配置。
 
