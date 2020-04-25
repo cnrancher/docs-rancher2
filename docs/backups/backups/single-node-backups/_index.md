@@ -28,10 +28,10 @@ keywords:
 docker run  --volumes-from rancher-data-<DATE> -v $PWD:/backup busybox tar pzcvf /backup/rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz /var/lib/rancher
 ```
 
-请交叉参考下面的图像和参考表，以了解如何获取此占位符数据。在开始以下步骤之前，写下或复制此信息。
+请参考下面的图像和参考表，以了解如何获取此占位符数据。在开始以下步骤之前，请执行以下操作。
 
 <sup>
-终端输入"docker ps"命令，查看 RANCHER_CONTAINER_TAG 和 RANCHER_CONTAINER_NAME
+在终端输入"docker ps"命令，查看 RANCHER_CONTAINER_TAG 和 RANCHER_CONTAINER_NAME
 </sup>
 
 ![Placeholder Reference](/img/rancher/placeholder-ref.png)
@@ -47,7 +47,7 @@ docker run  --volumes-from rancher-data-<DATE> -v $PWD:/backup busybox tar pzcvf
 
 ## 创建备份
 
-此过程将创建一个备份，如果 Rancher 遇到灾难情况，可以还原该备份。
+此过程将创建一个备份文件，如果 Rancher 遇到灾难情况，可以通过该备份文件还原。
 
 1. 使用远程终端连接，登录到运行 Rancher Server 的节点。
 
@@ -63,7 +63,7 @@ docker run  --volumes-from rancher-data-<DATE> -v $PWD:/backup busybox tar pzcvf
    docker create --volumes-from <RANCHER_CONTAINER_NAME> --name rancher-data-<DATE> rancher/rancher:<RANCHER_CONTAINER_TAG>
    ```
 
-1. 从刚刚创建的数据容器（`rancher-data-<DATE>`），创建一个备份包（`rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz`）。使用以下命令，替换每个占位符。
+1. 从刚刚创建的数据容器（`rancher-data-<DATE>`），创建一个备份包（`rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz`）。使用以下命令，请替换每个占位符。
 
    ```bash
    docker run  --volumes-from rancher-data-<DATE> -v $PWD:/backup:z busybox tar pzcvf /backup/rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz /var/lib/rancher
@@ -71,7 +71,7 @@ docker run  --volumes-from rancher-data-<DATE> -v $PWD:/backup busybox tar pzcvf
 
 1. 输入`ls`命令以确认备份压缩包已经创建。它将有一个类似`rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz`的名字。
 
-1. 将备份压缩包移到 Rancher Server 外部的安全位置。然后从 Rancher Server 中删除`rancher-data-<DATE>`容器。
+1. 将备份压缩包移到 Rancher Server 外部的安全位置。然后从 Rancher Server 所在主机中删除`rancher-data-<DATE>`容器。
 
 1. 启动停止的 Rancher Server 容器。将`<RANCHER_CONTAINER_NAME>`替换为 Rancher 容器的名称。
 

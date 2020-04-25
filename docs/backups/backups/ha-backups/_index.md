@@ -26,13 +26,13 @@ keywords:
 >
 > - `rancher-cluster.yml`
 >
->   需要使用到安装 Rancher 的 RKE 配置文件`rancher-cluster.yml`，将此文件需放在与 RKE 二进制文件同级目录中。
+>   需要使用到安装 Rancher 的 RKE 配置文件`rancher-cluster.yml`，需将此文件放在与 RKE 二进制文件同级目录中。
 >
-> - 您必须将每个 etcd 节点还原到同一快照。在运行 `etcd snapshot-restore` 命令之前，将您正在使用的快照从一个节点复制到其他节点。
+> - 您必须将每个 etcd 节点按照同一快照还原。在运行 `etcd snapshot-restore` 命令之前，您需要将正在使用的快照从一个节点复制到其他节点。
 
 ## RKE Kubernetes 集群数据架构
 
-在 RKE 集群中，集群数据将在集群中的三个 etcd 节点上的每个节点上复制，以在一个节点发生故障的情况下提供冗余和数据复制。
+在 RKE 集群中，集群中三个etcd节点中的每个etcd节点都会复制一份集群数据，以便在一个节点发生故障的情况下其他节点可以提供冗余和数据复制。
 
 <sup>运行 Rancher Server 的 RKE 集群的体系结构</sup>
 
@@ -48,7 +48,7 @@ keywords:
 
 1. [外部存储快照](#将本地快照备份到安全位置)
 
-   拍摄快照后，将其导出到一个安全的位置，如果您的集群遇到问题，该位置将不会受到影响。
+   拍摄快照后，将其导出到一个安全的位置，如果您的集群遇到问题，保存快照的位置将不会受到影响。
 
 ## 拍摄 etcd 数据库的快照
 
@@ -68,7 +68,7 @@ keywords:
 
 要制作定期快照，请启用 RKE 附带的 `etcd-snapshot`服务。该服务在 `etcd` 容器旁边的服务容器中运行。您可以通过向 `rancher-cluster.yml` 添加一些代码来启用此服务。
 
-**要启用定期快照：**
+**启用定期快照：**
 
 1. 编辑`rancher-cluster.yml`配置文件；
 
@@ -145,7 +145,7 @@ _自 RKE v0.2.0 起可用_
    --folder folder-name # 自 v2.3.0 起可用
    ```
 
-**结果：** RKE 为在每个节点上运行的 `etcd` 拍摄快照。该文件将保存到`/opt/rke/etcd-snapshots`。它还被上传到 S3 兼容后端。
+**结果：** RKE 为在每个节点上运行的 `etcd` 拍摄快照。该文件将保存到`/opt/rke/etcd-snapshots`，同时将快照上传到 S3 兼容后端。
 
 ## 将本地快照备份到安全位置
 

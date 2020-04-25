@@ -16,13 +16,13 @@ keywords:
   - RKE Rancher 高可用恢复
 ---
 
-此过程描述了如何使用 RKE 还原 Rancher Kubernetes 集群的快照。集群快照将包括 Kubernetes 配置以及 Rancher 数据库和状态。
+此过程描述了如何使用 RKE 根据快照还原 Rancher Kubernetes 集群的数据。集群快照将包括 Kubernetes 配置以及 Rancher 数据库和状态。
 
 此外，由于 v0.2.0 更改了 [Kubernetes 集群状态的存储方式](https://rancher.com/docs/rke/latest/en/installation/#kubernetes-cluster-state)，因此不再需要使用 `pki.bundle.tar.gz` 文件。
 
 ## 1. 准备
 
-您将需要安装 [RKE](https://rancher.com/docs/rke/latest/en/installation/) 和 [kubectl](https://rancher.com/docs/rancher/v2.x/en/faq/kubectl/) CLI 工具。
+您需要安装 [RKE](https://rancher.com/docs/rke/latest/en/installation/) 和 [kubectl](https://rancher.com/docs/rancher/v2.x/en/faq/kubectl/) CLI 工具。
 
 准备 3 个新节点作为还原的 Rancher 实例的目标。请参阅[高可用安装](/docs/installation/k8s-install/create-nodes-lb/_index)以了解节点要求。
 

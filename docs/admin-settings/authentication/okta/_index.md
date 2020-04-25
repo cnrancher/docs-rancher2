@@ -18,9 +18,9 @@ keywords:
 
 _v2.2.0 版本可用_
 
-如果您的组织使用 Okta Identity Provider （IdP）进行用户身份验证，您可以配置 Rancher 以允许您的用户使用他们的 IdP 凭据登录。
+如果您的公司使用 Okta Identity Provider （IdP）进行用户身份验证，您可以在 Rancher中配置使用 IdP 凭据登录。
 
-**注：** Okta 集成仅支持服务提供者发起的登录。
+**注：** Okta 仅支持服务提供者发起的登录。
 
 ## 先决条件
 
@@ -51,7 +51,7 @@ _v2.2.0 版本可用_
 
     > **提示：** 您可以使用 openssl 命令生成密钥/证书对。例如：
     >
-    >        openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout myservice.key -out myservice.cert
+    > openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout myservice.key -out myservice.cert
 
 1.  完成**配置 Okta 账户**表单后，点击页面底部的**启用 Okta 认证**。
 
@@ -59,11 +59,11 @@ _v2.2.0 版本可用_
 
     > **注：** 如果什么都没有发生，很可能是因为您的浏览器阻塞了弹出窗口。请确保您禁用了 Rancher 域的弹出窗口拦截器，并在您可能使用的任何其他扩展中将其列入白名单。
 
-**结果：** Rancher 被配置为使用 Okta。您的用户现在可以使用他们的 Okta 账号登录到 Rancher。
+**结果：** Rancher 登录认证配置为使用 Okta。您的用户现在可以使用他们的 Okta 账号登录到 Rancher。
 
 > SAML 身份验证提供者警告：
 >
 > - SAML 协议不支持搜索或查找用户或组。因此，将用户或组添加到 Rancher 时不会对其进行验证。
-> - 添加用户时，必须正确输入确切的用户 ID（即`UID`字段）。键入用户 ID 时，将不会搜索可能匹配的其他用户 ID。
+> - 添加用户时，必须正确输入确切的用户 ID（即`UID`字段）。输入用户 ID 时，将不会搜索可能匹配的其他用户 ID。
 > - 添加组时，必须从文本框旁边的下拉列表中选择组。Rancher 假定来自文本框的任何输入都是用户。
 >   - 用户组下拉列表仅显示您所属的用户组。您将无法添加您不是其成员的组。

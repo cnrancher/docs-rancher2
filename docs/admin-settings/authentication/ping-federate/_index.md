@@ -35,15 +35,15 @@ _v2.0.7 版本可用_
 
 1. 完成**配置 Ping 帐户**表单。Ping IdP 允许您指定要使用的数据存储。您可以添加数据库，也可以使用现有的 ldap 服务器。例如，如果您选择 Active Directory (AD)服务器，下面的示例将描述如何将 AD 属性映射到 Rancher 中的字段。
 
-   1. **显示名称**： 输入包含用户显示名称的 AD 属性(例如:`displayName`)。
+   1. **显示名称**： 包含用户显示名称的 AD 属性(例如:`displayName`)。
 
-   1. **用户名**： 输入包含用户名/给定名的 AD 属性(例如:`givenName`)。
+   1. **用户名**： 包含用户名/给定名的 AD 属性(例如:`givenName`)。
 
-   1. **UID**： 输入每个用户唯一的 AD 属性(例如:`sAMAccountName`，`ishedname`)。
+   1. **UID**： 每个用户唯一的 AD 属性(例如:`sAMAccountName`，`ishedname`)。
 
    1. **组**： 创建用于管理组成员关系的条目(例如:`memberOf`)。
 
-   1. **Rancher API 地址**： 输入 Rancher 服务器的 URL。
+   1. **Rancher API 地址**： Rancher 服务器的 URL。
 
    1. **私钥**和**证书**：这是一个密钥-证书对，用于在 Rancher 和您的 IdP 之间创建一个安全 shell。
 

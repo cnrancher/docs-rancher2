@@ -15,7 +15,7 @@ keywords:
   - 备份说明
 ---
 
-本节包含关于如何创建 Rancher 数据备份以及如何在灾难场景中恢复数据。
+本节包含如何创建 Rancher 数据备份以及如何在灾难场景中恢复数据。
 
 - [基于 K3s 的 Rancher 高可用备份](/docs/backups/backups/k3s-backups/_index)
 - [基于 RKE 的 Rancher 高可用备份](/docs/backups/backups/ha-backups/_index)
