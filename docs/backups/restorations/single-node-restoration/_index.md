@@ -30,7 +30,7 @@ tar pzxvf /backup/rancher-data-backup-<RANCHER_VERSION>-<DATE>"
 
 这个命令中的，`<RANCHER_CONTAINER_NAME>` 和 `<RANCHER_VERSION>-<DATE>`是您的 Rancher 部署的环境变量。
 
-请交叉参考下面的图像和参考表，以了解如何获取此占位符数据。在开始以下步骤之前，写下或复制此信息。
+请参考下面的图像和参考表，以了解如何获取此占位符数据。在开始以下步骤之前，请执行以下操作。
 
 <sup>
 终端输入“docker ps”命令，查看“RANCHER_CONTAINER_TAG”和“RANCHER_CONTAINER_NAME”的值 </sup>
@@ -44,7 +44,8 @@ tar pzxvf /backup/rancher-data-backup-<RANCHER_VERSION>-<DATE>"
 | `<RANCHER_VERSION>`        | `v2.0.5`          | 备份的 Rancher 版本号。                   |
 | `<DATE>`                   | `9-27-18`         | 创建数据容器或备份的日期。                |
 
-您可以通过远程连接登录到 Rancher Server 所在的节点，并输入命令来查看正在运行的容器，从而获取`<RANCHER_CONTAINER_TAG>`和`<RANCHER_CONTAINER_NAME>`：`docker ps`。您还可以使用其他命令查看停止的容器：`docker ps -a`。恢复备份期间，随时可以使用这些命令获得帮助。
+您可以通过远程连接登录到 Rancher Server 所在的节点，并输入`docker ps`命令来查看正在运行的容器，从而获取`<RANCHER_CONTAINER_TAG>`和`<RANCHER_CONTAINER_NAME>`。
+您还可以使用其他命令查看停止的容器：`docker ps -a`。恢复备份期间，随时可以使用这些命令获得帮助。
 
 ## 恢复备份
 

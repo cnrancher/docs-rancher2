@@ -29,7 +29,7 @@ html {
   --ra-color-important: var(--ifm-color-primary);
 }
 
-html[data-theme='dark'] {
+html[data-theme="dark"] {
   --ifm-navbar-background-color: rgb(48, 56, 70);
   --ifm-heading-color: rgb(255, 255, 255, 0.8);
   --ifm-color-primary: rgb(255, 255, 255, 0.8);
@@ -40,7 +40,7 @@ html[data-theme='dark'] {
   --ifm-rancher-color-vedio: rgb(204, 0, 0, 0.5);
 }
 body {
-  font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
+  font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
 }
 
 p {
@@ -120,4 +120,8 @@ p {
 
 .text-error {
   color: var(--ifm-rancher-color-vedio) !important;
+}
+
+.copyButton_node_modules-\@docusaurus-theme-classic-src-theme-CodeBlock- {
+  color: wheat !important;
 }
