@@ -18,7 +18,7 @@ keywords:
 
 _v2.2.0 版本可用_
 
-如果您的公司使用 Okta Identity Provider （IdP）进行用户身份验证，您可以在 Rancher中配置使用 IdP 凭据登录。
+如果您的公司使用 Okta Identity Provider （IdP）进行用户身份验证，您可以在 Rancher 中配置使用 IdP 凭据登录。
 
 **注：** Okta 仅支持服务提供者发起的登录。
 
@@ -51,7 +51,7 @@ _v2.2.0 版本可用_
 
     > **提示：** 您可以使用 openssl 命令生成密钥/证书对。例如：
     >
-    > openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout myservice.key -out myservice.cert
+    >     openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout myservice.key -out myservice.cert
 
 1.  完成**配置 Okta 账户**表单后，点击页面底部的**启用 Okta 认证**。
 
