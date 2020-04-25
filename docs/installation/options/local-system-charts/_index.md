@@ -26,7 +26,7 @@ keywords:
 
 [离线安装指南](/docs/installation/other-installation-methods/air-gap/install-rancher/_index)中包含用于带有捆绑的`system-charts`的 Rancher 安装的示例命令。
 
-## 在 2.3.0 之前为 Rancher 设置系统图表
+## 在 2.3.0 之前的版本设置系统图表
 
 ### 1. 准备系统图表
 

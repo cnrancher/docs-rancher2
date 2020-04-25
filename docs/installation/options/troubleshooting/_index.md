@@ -12,11 +12,11 @@ title: Rancher Server 所在 Kubernetes 集群的问题排查
 - `ingress-nginx` - Ingress Controller Pod 和 SVC。
 - `kube-system` - `tiller` 和 `cert-manager` Pod。
 
-## "default backend - 404"
+## default backend - 404
 
-多种原因可能导致 Ingress Controller 无法将流量转发到您的 rancher 实例。多数情况下，这是由于 ssl 配置错误所致。
+导致 Ingress Controller 无法将流量转发到您的 rancher 实例的原因有很多种，但是在大多数情况下，触发这条报错信息的原因是 SSL 配置错误。
 
-检查事项
+请检查以下事项，定位问题：
 
 - [Rancher 是否在运行](#检查-rancher-是否正在运行)
 - [证书的 CN 是不是为 "Kubernetes Ingress Controller Fake Certificate"](#证书-cn-是-kubernetes-ingress-controller-fake-certificate)
@@ -82,7 +82,7 @@ kubectl -n cattle-system logs -f rancher-784d94f59b-vgqzh
 
 对每个对象执行`kubectl describe`并检查事件，来检查可能缺少的内容。
 
-例如，Issuer 有问题：
+首先，检查在`cattle-system`命名空间中的 `Certificate` 对象，如以下代码示例所示，在命令行输入`kubectl -n cattle-system describe certificate`，会返回`Certificate`的信息，如事件种类、原因、时间戳、发生事件的根因部件等信息。示例中返回的信息是：根因部件`cert-manager`在 18 秒前发生了一个 warning 事件，发生的原因是 IssuerNotReady，发送了一条“Issuer rancher not ready”信息。
 
 ```
 kubectl -n cattle-system describe certificate
@@ -93,6 +93,11 @@ Events:
   Warning  IssuerNotReady  18s (x23 over 19m)  cert-manager  Issuer rancher not ready
 ```
 
+既然我们知道了发生 warning 的原因是 IssuerNotReady，那么我们需要检查`cattle-system`命名空间中的 `Issuer` 对象，找到触发 IssuerNotReady 警告的原因。如以下代码示例所示，在命令行输入`kubectl -n cattle-system describe issuer`,会返回`Issuer`的信息。例中返回的信息是：根因部件`cert-manager`发生了两个 wanring 事件：
+
+- 19 分钟前发生了一个 warning 事件，而且在事件发生至今的 19 分钟内重复触发了 12 次，发生的原因是 ErrInitIssuer，发送了一条“Error initializing issuer: secret "tls-rancher" not found”信息。触发该事件的原因在信息里面已经描述得非常清楚了，因为找不到"tls-rancher"的密文，所以触发警告信息。
+- 9 分钟发生了另一个 wanring 事件，而且在事件发生至今的 19 分钟内重复触发了 16 次，发生的原因是 ErrGetKeyPair，发送了一条“Error getting keypair for CA issuer: secret "tls-rancher" not found”信息。同理，触发这个事件的信息也在信息里面，和上面的原因相同，也是因为找不到"tls-rancher"的密文，才触发了警告信息。
+
 ```
 kubectl -n cattle-system describe issuer
 ...
@@ -102,6 +107,8 @@ Events:
   Warning  ErrInitIssuer  19m (x12 over 19m)  cert-manager  Error initializing issuer: secret "tls-rancher" not found
   Warning  ErrGetKeyPair  9m (x16 over 19m)   cert-manager  Error getting keypair for CA issuer: secret "tls-rancher" not found
 ```
+
+综上所述，触发上述连锁报错的最终原因是缺少"tls-rancher"的密文，可能是密文格式有问题，导致 Rancher 无法读取密文；也可能是密文是错的，无法校验。总之，您需要找到密文出错的地方并加以修复，然后上述所有问题就迎刃而解了。
 
 ## 检查您自己的 SSL 证书是否存在问题
 
@@ -131,7 +138,7 @@ W0705 23:04:58.240571       7 backend_ssl.go:49] error obtaining PEM from secret
 Error: validation failed: unable to recognize "": no matches for kind "Issuer" in version "certmanager.k8s.io/v1alpha1"
 ```
 
-安装 [cert-manager](/docs/installation/k8s-install/helm-rancher/_index) 并再次尝试安装 Rancher。
+请先安装 [cert-manager](/docs/installation/k8s-install/helm-rancher/_index)， 然后再次尝试安装 Rancher。
 
 ## Canal Pod 显示 READY 2/3
 
@@ -141,7 +148,7 @@ Error: validation failed: unable to recognize "": no matches for kind "Issuer" i
 
 ## nginx-ingress-controller Pod 显示 RESTARTS
 
-此问题的最常见原因是`canal` Pod 未能建立 overlay 网络。有关疑难解答，请参见 [canal Pods show READY 2/3 ](#canal-pods-show-ready-2-3)。
+此问题的最常见原因是`canal` Pod 未能建立 overlay 网络。有关疑难解答，请参见 [canal Pods show READY 2/3 ](#canal-pod-显示-ready-23)。
 
 ## Failed to dial to /var/run/docker.sock: ssh: rejected: administratively prohibited (open failed)
 

@@ -82,7 +82,7 @@ keywords:
 
 ## 可选 - 将 NGINX 作为 Docker 容器运行
 
-与其将 NGINX 作为软件包安装在操作系统上，还不如将其作为 Docker 容器运行。将已编辑的**示例 NGINX 配置**另存为`/etc/nginx.conf`并运行以下命令启动 NGINX 容器：
+除了可以将 NGINX 作为软件包安装在操作系统上外，您也可以将其作为 Docker 容器运行。将已编辑的**示例 NGINX 配置**另存为`/etc/nginx.conf`并运行以下命令启动 NGINX 容器：
 
 ```
 docker run -d --restart=unless-stopped \
