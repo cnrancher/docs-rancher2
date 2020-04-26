@@ -27,10 +27,10 @@ _自 v2.2.0 起可用_
 - 在基于 ARM64 的节点上运行 Rancher
   - 仅[安装 Docker](/docs/installation/other-installation-methods/single-node-docker/_index)
 - 创建自定义集群并添加基于 ARM64 的节点
-  - Kubernetes 集群版本必须为 1.12 或更高
+  - Kubernetes 集群版本必须为 1.12 或更新版本
   - CNI 网络插件必须为[Flannel](/docs/faq/networking/cni-providers/_index)
 - 导入包含基于 ARM64 的节点的集群
-  - Kubernetes 集群版本必须为 1.12 或更高
+  - Kubernetes 集群版本必须为 1.12 或更新版本
 
 请参考[集群选项](/docs/cluster-provisioning/rke-clusters/options/_index)，配置集群选项。
 

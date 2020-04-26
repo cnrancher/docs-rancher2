@@ -71,7 +71,7 @@ keywords:
    curl https://releases.rancher.com/install-docker/18.09.sh | sh
    ```
 
-1. 重复这些步骤，在运行 Rancher 管理面的服务器的每个节点上安装 Docker。
+1. 重复步骤 1~步骤 5，在运行 Rancher 管理面的服务器的每个节点上安装 Docker。
 
 > 要了解是否有可用于安装指定的 Docker 版本的脚本，请参阅此[GitHub 代码库](https://github.com/rancher/install-docker)，其中包含所有 Rancher 的 Docker 安装脚本。
 
