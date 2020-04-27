@@ -68,4 +68,4 @@ Prometheus 监控可以应用于 Rancher [集群层级](/docs/cluster-admin/tool
 
 1. 您会自动跳转到 Grafana UI。如果需要以管理员身份登录 Grafana，您需要在 Grafana 页面手动登录。默认的 Grafana 管理员的用户名和密码都是`admin`。为了保证 Grafana 实例的安全，建议您在登入后，先修改密码，然后再开始使用 Grafana 实例。
 
-**结果：** 您通过 Grafana 实例登录 Grafana。登录后，您可以查看通过[Grafana Provisioning 机制](http://docs.grafana.org/administration/provisioning/#dashboards)导入的，已经设置好的的 Grafana 仪表盘。如果您需要修改或创建自己的仪表盘，您需要先登录 Grafana。我们建议您先复制原有的 Grafana 仪表盘，通过它创建一个副本，再通过修改副本的参数，达到创建自己的仪表盘的目的。
+**结果：** 您通过 Grafana 实例登录 Grafana，登录后，您可以查看通过[Grafana Provisioning 机制](http://docs.grafana.org/administration/provisioning/#dashboards)导入的，已经设置好的的 Grafana 仪表盘。如果您需要修改或创建自己的仪表盘，您需要先登录 Grafana。我们建议您先复制原有的 Grafana 仪表盘，通过它创建一个副本，再通过修改副本的参数，达到创建自己的仪表盘的目的。

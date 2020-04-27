@@ -4,9 +4,9 @@ title: 通知和告警
 
 ## 概述
 
-为了保证您的集群和应用随时处于健康状态，提高组织的生产力，您需要知悉集群和项目内出现的计划内事件和计划外事件。事件会触发您设置的告警，您就会收到通知。您可以根据通知作出对应的操作。
+为了保证您的集群和应用随时处于健康状态，提高组织的生产力，您需要知悉集群和项目内出现的计划内事件和计划外事件。事件会触发您设置的告警，您就会收到通知，您可以根据通知作出对应的操作。
 
-通知和告警是基于[Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager/)构建的。借助这些工具，Rancher 可以通知[集群所有者](/docs/admin-settings/rbac/cluster-project-roles/_index#cluster-roles)和[项目所有者](/docs/admin-settings/rbac/cluster-project-roles/_index#project-roles)集群内发生的事件，由他们决定如何处理触发告警的事件。
+通知和告警是基于[Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager/)构建的，借助这些工具，Rancher 可以通知[集群所有者](/docs/admin-settings/rbac/cluster-project-roles/_index#cluster-roles)和[项目所有者](/docs/admin-settings/rbac/cluster-project-roles/_index#project-roles)集群内发生的事件，由他们决定如何处理触发告警的事件。
 
 收到告警信息之前，您需要在集群层级设置至少一个[通知](/docs/cluster-admin/tools/notifiers/_index)。
 
