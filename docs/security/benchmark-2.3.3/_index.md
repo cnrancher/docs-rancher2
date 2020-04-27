@@ -42,7 +42,7 @@ Rancher 和 RKE 通过 Docker 容器安装 Kubernetes 服务。配置在初始�
 
 ## 已知的失败的计分测试
 
-以下计分的控制当前无法通过，Rancher Labs 将来对产品进行增强来解决这些问题。
+Rancher 目前无法通过以下计分测试，Rancher Labs 会通过发布版本升级来解决这些问题。
 
 - 1.1.21 - Ensure that the `--kubelet-certificate-authority` argument is set as appropriate (Scored)
 - 2.1.8 - Ensure that the `--hostname-override` argument is not set (Scored)

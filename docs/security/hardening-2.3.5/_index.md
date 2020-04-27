@@ -1,6 +1,6 @@
 ---
 title: 安全加固指南 - v2.3.5
-description: 本文是 Rancher v2.3.5 生产环境的安全加固指南。它概述了如何使您的集群符合互联网安全中心发布的 Kubernetes 安全基准。本加固指南介绍了如何保护集群中节点的安全，建议在安装 Kubernetes 之前按照本指南进行操作。该加固指南旨在与特定版本的 CIS Kubernetes Benchmark，Kubernetes 和 Rancher 一起使用。
+description: 本文讲解了如何使您的集群符合互联网安全中心发布的 Kubernetes 安全基准，保护集群中节点的安全。安装 Kubernetes 之前，请按照本指南进行操作。加固指南旨在与特定版本的 CIS Kubernetes Benchmark，Kubernetes 和 Rancher 一起使用。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -16,14 +16,12 @@ keywords:
   - 安全加固指南 - v2.3.5
 ---
 
-本文是 Rancher v2.3.5 生产环境的安全加固指南。它概述了如何使您的集群符合互联网安全中心发布的 Kubernetes 安全基准。
+本文讲解了如何使您的集群符合互联网安全中心发布的 Kubernetes 安全基准，保护集群中节点的安全。安装 Kubernetes 之前，请按照本指南进行操作。加固指南旨在与特定版本的 CIS Kubernetes Benchmark，Kubernetes 和 Rancher 一起使用。
 
-> 本加固指南介绍了如何保护集群中节点的安全，建议在安装 Kubernetes 之前按照本指南进行操作。
-
-该加固指南旨在与特定版本的 CIS Kubernetes Benchmark，Kubernetes 和 Rancher 一起使用：
+加固指南旨在与特定版本的 CIS Kubernetes Benchmark，Kubernetes 和 Rancher 一起使用：
 
 | 加固指南版本    | Rancher 版本   | CIS Benchmark 版本 | Kubernetes 版本  |
-| --------------- | -------------- | ------------------ | ---------------- |
+| :-------------- | :------------- | :----------------- | :--------------- |
 | 加固指南 v2.3.5 | Rancher v2.3.5 | Benchmark v1.5     | Kubernetes v1.15 |
 
 [点击这里下载 PDF 版本的加固指南](https://releases.rancher.com/documents/security/2.3.5/Rancher_Hardening_Guide.pdf)
