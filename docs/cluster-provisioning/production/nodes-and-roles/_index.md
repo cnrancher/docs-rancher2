@@ -30,7 +30,7 @@ keywords:
 
 > **注意:** 在 UI 中如果具有 `etcd` 角色的节点显示为 `不可调度`，这意味着在默认情况下，不会将 pod 调度到这些节点。
 
-## 管理平面
+## Control Plane
 
 在具有 `controlplane` 角色的节点上运行 Kubernetes 的 master 组件（不包括`etcd`，因为它是一个单独的角色）。有关 master 组件的详细列表，请参阅[Kubernetes: master 组件](https://kubernetes.io/docs/concepts/overview/components/#master-components)。
 

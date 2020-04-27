@@ -79,7 +79,7 @@ Rancher 维护的 [Terraform Provider](https://rancher.com/blog/2019/rancher-2-t
 
 ### 在集群中使用低延迟网络进行通信
 
-Kubernetes 集群最好使用低延迟网络。对于控制平面组件和 etcd 尤其如此，在 etcd 中会出现大量的协调和领袖选举流量。Rancher Server 和它管理的 Kubernetes 集群之间的网络对延迟的容忍度更高。
+Kubernetes 集群最好使用低延迟网络。对于control plane组件和 etcd 尤其如此，在 etcd 中会出现大量的协调和领袖选举流量。Rancher Server 和它管理的 Kubernetes 集群之间的网络对延迟的容忍度更高。
 
 ### 允许 Rancher 直接与 Kubernetes 集群通信
 
@@ -101,9 +101,9 @@ Kubernetes 集群最好使用低延迟网络。对于控制平面组件和 etcd 
 
 使用 3 或 5 个 etcd 节点。Etcd 需要一个 quorum 来通过大多数节点来确定 leader，因此不建议使用偶数集群。对于较小的集群，三个 etcd 节点就足够了，对于大型集群，五个 etcd 节点就足够了。
 
-### 使用至少两个控制平面节点
+### 使用至少两个control plane节点
 
-提供两个或多个控制平面节点。一些控制平面组件，比如：`kube-apiserver`，运行在[双活](https://www.jscape.com/blog/active-active-vs-active-passive-high-availability-cluster) 模式下，将为您提供更多的规模。其他组件，如`kube-scheduler`和`kube-controller`运行在`主被`模式下，提供更多的容错。
+提供两个或多个control plane节点。一些control plane组件，比如：`kube-apiserver`，运行在[双活](https://www.jscape.com/blog/active-active-vs-active-passive-high-availability-cluster) 模式下，将为您提供更多的规模。其他组件，如`kube-scheduler`和`kube-controller`运行在`主被`模式下，提供更多的容错。
 
 ### 监控集群
 
