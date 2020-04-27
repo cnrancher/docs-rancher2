@@ -22,7 +22,7 @@ keywords:
 
 在设计集群时，您有两个选择：
 
-- 为每个角色使用专用节点。这可确保指定角色所需的组件的资源可用性。而且您还可以根据[端口要求](/docs/cluster-provisioning/node-requirements/_index)严格隔离每个角色之间的网络流量。
+- 为每个角色使用专用节点，这可确保指定角色所需的组件的资源可用性，而且您还可以根据[端口要求](/docs/cluster-provisioning/node-requirements/_index)严格隔离每个角色之间的网络流量。
 - 将`etcd`和`controlplane`角色分配给相同的节点。这些节点必须满足这两个角色的硬件需求。
 
 无论在哪种情况下，都不应该把`worker`角色，添加到具有 `etcd` 或 `controlplane` 角色的节点中。
@@ -46,7 +46,7 @@ keywords:
 
 ### Controlplane 节点数
 
-添加多个`controlplane`角色的节点，可以使每个 master 组件都高度可用。
+添加多个`controlplane`角色的节点，可以增强 master 组件的高可用性。
 
 ### etcd 节点数
 
