@@ -28,7 +28,7 @@ Rancher 集成了很多 Kubernetes 缺少的监控和运维工具，可以辅助
 - 寻找环境的变化趋势。
 - 在集群以外的位置保存日志。
 - 告知下游集群或项目中的异常情况，如容器崩溃、Pod 驱逐、节点死亡等。
-- 让系统调试和定位问题变得更加简单。
+- 让系统调试和问题定位变得更加简单。
 
 Rancher 可以和 Elasticsearch、 splunk、 kafka、 syslog、 fluentd 等工具集成。详情请参考[日志](/docs/cluster-admin/tools/logging/_index)章节。
 
