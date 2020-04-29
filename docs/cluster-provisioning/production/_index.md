@@ -43,7 +43,7 @@ keywords:
   - `worker` (不应在具有 `etcd` 或 `controlplane` 角色的节点上使用或添加 `worker` 角色)
 - 至少有三个角色为 `etcd` 的节点，来确保当失去一个节点时仍能存活。增加 etcd 节点数量以提高容错率，并将 etcd 其分散到不同可用区，以提供更好的容错能力。
 - 分配两个或多个节点为 `controlplane` 角色，以实现 master 组件的高可用性。
-- 分配两个或多个节点为 `worker` 角色，以便在节点出现故障时，可以将工作负载重新调度。
+- 分配两个或多个节点为 `worker` 角色，以便在节点出现故障时，重新调度工作负载。
 
 有关每个角色的用途的更多信息，请参考[Kubernetes 中关于节点的角色一节](/docs/cluster-provisioning/production/nodes-and-roles/_index)。
 

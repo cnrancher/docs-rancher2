@@ -21,19 +21,19 @@ keywords:
 
 第一次登录 Rancher 后，Rancher 将提示您输入一个**Rancher Server URL**。您应该将 URL 设置为 Rancher Server 的主入口点。当负载均衡器位于 Rancher Server 集群前面时，URL 应该设置为负载均衡地址。系统会自动尝试从运行 Rancher Server 的主机的 IP 地址或主机名推断 Rancher Server 的 URL，但只有在运行单节点的 Rancher Server 时，上述推断才会正确。因此，在大多数情况下，您需要自己将 Rancher Server URL 设置为正确的值。
 
-:::important 非常重要！
+:::important 注意
 Rancher Server URL 在设置后不支持更新修改操作。务必确保设置正确的 URL。
 :::
 
 ## 身份验证
 
-Rancher 向 Kubernetes 添加的关键特性之一是集中式用户身份验证。该特性允许设置本地用户或连接到外部身份认证系统。通过连接到外部身份认证系统，您可以使用该系统的用户和组。
+Rancher 向 Kubernetes 添加的关键特性之一是集中式用户身份验证。该特性允许设置本地用户连接到外部身份认证系统，使用该系统的用户和组进行身份验证。
 
 有关身份认证如何工作以及如何配置不同身份认证系统的更多信息，请参见[身份认证](/docs/admin-settings/authentication/_index)。
 
 ## 授权
 
-在 Rancher 中，每个人都认为是一个*用户*，这是一个允许您访问 Rancher 的登录名。一旦用户登录到 Rancher，用户在系统中的*授权*或访问权限就由用户的角色决定。Rancher 提供了内置的角色，允许您轻松地配置用户对资源的权限，同时 Rancher 还提供了为每个 Kubernetes 资源定制角色的能力。
+在 Rancher 中，每个人都是一个*用户*，这是一个允许您访问 Rancher 的登录名。一旦用户登录到 Rancher，用户在系统中的*授权*或访问权限就由用户的角色决定。Rancher 提供了内置的角色，允许您轻松地配置用户对资源的权限，同时 Rancher 还提供了为每个 Kubernetes 资源定制角色的能力。
 
 有关授权如何工作以及如何自定义角色的更多信息，请参见[基于角色的访问控制（RBAC）](/docs/admin-settings/rbac/_index)。
 
@@ -45,7 +45,7 @@ _Pod 安全策略_（或 PSP）是控制安全敏感相关对象的 pod 规范�
 
 ## 配置驱动程序
 
-Rancher 可以自动部署和管理云服务器中的 Kubernetes 集群， 您可以通过驱动程序管理提供托管服务的供应商，来创建[托管 Kubernetes 集群](/docs/cluster-provisioning/hosted-kubernetes-clusters/_index) 或者通过管理支持的云服务器，使用[云主机](/docs/cluster-provisioning/rke-clusters/node-pools/_index)创建kubernetes集群。
+Rancher 可以自动部署和管理云服务器中的 Kubernetes 集群， 您可以通过驱动程序管理提供托管服务的供应商，来创建[托管 Kubernetes 集群](/docs/cluster-provisioning/hosted-kubernetes-clusters/_index) 或者通过管理支持的云服务器，使用[云主机](/docs/cluster-provisioning/rke-clusters/node-pools/_index)创建 kubernetes 集群。
 
 相关更多信息，请参考[配置驱动程序](/docs/admin-settings/drivers/_index)。
 

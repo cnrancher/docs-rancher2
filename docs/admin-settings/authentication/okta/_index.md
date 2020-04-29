@@ -18,7 +18,7 @@ keywords:
 
 _v2.2.0 版本可用_
 
-如果您的公司使用 Okta Identity Provider （IdP）进行用户身份验证，您可以在 Rancher 中配置使用 IdP 凭据登录。
+如果您的公司使用 Okta Identity Provider （IdP）进行用户身份验证，您可以在 Rancher 中配置使用 IdP 凭证登录。
 
 **注：** Okta 仅支持服务提供者发起的登录。
 
@@ -59,7 +59,7 @@ _v2.2.0 版本可用_
 
     > **注：** 如果什么都没有发生，很可能是因为您的浏览器阻塞了弹出窗口。请确保您禁用了 Rancher 域的弹出窗口拦截器，并在您可能使用的任何其他扩展中将其列入白名单。
 
-**结果：** Rancher 登录认证配置为使用 Okta。您的用户现在可以使用他们的 Okta 账号登录到 Rancher。
+**结果：** 配置了使用 Okta 凭证的方式登录 Rancher，您的用户现在可以使用他们的 Okta 账号登录到 Rancher。
 
 > SAML 身份验证提供者警告：
 >
