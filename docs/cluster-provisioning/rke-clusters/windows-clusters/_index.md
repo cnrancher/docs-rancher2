@@ -98,7 +98,7 @@ Windows 要求容器必须建立在与容器相同的 Windows Server 版本上�
 
 本教程将介绍如何使用三个节点创建 Windows 集群。
 
-使用 Rancher 设置自定义集群时，将通过在每个集群上安装[Rancher Agent](/docs/cluster-provisioning/custom-clusters/agent-options/_index)将节点添加到集群中。从 Rancher UI 创建或编辑集群时，您将看到一个**自定义节点启动命令**，您可以在每个服务器上运行该命令以将其添加到自定义集群中。
+使用 Rancher 设置自定义集群时，将通过在每个集群上安装[Rancher Agent](/docs/cluster-provisioning/rke-clusters/custom-nodes/agent-options/_index)将节点添加到集群中。从 Rancher UI 创建或编辑集群时，您将看到一个**自定义节点启动命令**，您可以在每个服务器上运行该命令以将其添加到自定义集群中。
 
 要创建支持 Windows 节点和容器的自定义集群，您需要完成以下任务。
 
