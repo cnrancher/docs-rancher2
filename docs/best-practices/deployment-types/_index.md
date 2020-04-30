@@ -25,11 +25,12 @@ keywords:
 
 当 Rancher Server 安装在 Kubernetes 集群上时，它不应该在托管的 Kubernetes 环境中运行，比如谷歌的 GKE、Amazon 的 EKS 或 Microsoft 的 AKS。这些托管的 Kubernetes 解决方案没有将 etcd 开放到 Rancher 可以管理的程度，并且它们的自定义改动可能会干扰 Rancher 的操作。
 
-强烈建议使用托管的基础设施，如 Amazon 的 EC2 或谷歌的 GCE。在基础设施提供者上使用 RKE 创建集群时，您可以配置集群创建 etcd 快照作为备份。然后，您可以使用 [RKE](https://rancher.com/docs/RKE/latest/en/etcd-snapshot/) 或 [Rancher](/docs/backup/restorations/_index) 从这些快照之一恢复您的集群。在托管的 Kubernetes 环境中，不支持这种备份和恢复功能。
+强烈建议使用托管的基础设施，如 Amazon 的 EC2 或谷歌的 GCE。在基础设施提供者上使用 RKE 创建集群时，您可以配置集群创建 etcd 快照作为备份。然后，您可以使用 [RKE](https://rancher.com/docs/rke/latest/en/etcd-snapshots/recurring-snapshots) 或 [Rancher](/docs/backups/restorations/_index) 从这些快照之一恢复您的集群。在托管的
+Kubernetes 环境中，不支持这种备份和恢复功能。
 
 ## 确保 Kubernetes 的节点配置正确
 
-当您部署节点时需要遵循 Kubernetes 和 etcd 最佳实践，比如：禁用 swap、反复检查集群中的所有机器之间的网络连接、使用唯一的主机名、使用唯一的 MAC 地址、使用唯一的 product_uuids、检查所有需要的端口被打开，部署使用 ssd 的 etcd。更多的细节可以在 [Kubernetes 文档](https://kubernetes.io/docs/setup/producenvironment/tools/kubeadm/install-kubeadm/#before-you-begin) 和 [etcd 的性能操作指南](https://github.com/etcd-io/etcd/blob/master/Documentation/op-guide/performance.md) 中找到。
+当您部署节点时需要遵循 Kubernetes 和 etcd 最佳实践，比如：禁用 swap、反复检查集群中的所有机器之间的网络连接、使用唯一的主机名、使用唯一的 MAC 地址、使用唯一的 product_uuids、检查所有需要的端口被打开，部署使用 ssd 的 etcd。更多的细节可以在 [Kubernetes 文档](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm) 和 [etcd 的性能操作指南](https://github.com/etcd-io/etcd/blob/master/Documentation/op-guide/performance.md) 中找到。
 
 ## 使用 RKE 备份状态文件
 
