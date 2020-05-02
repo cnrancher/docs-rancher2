@@ -122,6 +122,6 @@ p {
   color: var(--ifm-rancher-color-vedio) !important;
 }
 
-.copyButton_node_modules-\@docusaurus-theme-classic-src-theme-CodeBlock- {
-  color: wheat !important;
+[class^="copyButton_"] {
+  color: #cccccc !important;
 }
