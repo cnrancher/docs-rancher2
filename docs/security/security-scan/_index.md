@@ -179,17 +179,17 @@ scheduled_cluster_scan:
 
 1. 创建一个`security-scan`命名空间。
 1. 创建一个名为`security-scan-cfg`配置映射。
-1. 以以下格式在`config.json`键下输入跳过信息（注意：复制的时候从`config.json:`后开始复制）。在指定跳过的测试时，也要同时指定 CIS 基准版本：
+1. 以以下格式在`config.json`键下输入跳过信息：
 
-```json
-{
-  "config.json": {
-    "skip": {
-      "rke-cis-1.4": ["1.1.1", "1.2.2"]
-    }
-  }
-}
-```
+   ```json
+   {
+     "skip": {
+       "rke-cis-1.4": ["1.1.1", "1.2.2"]
+     }
+   }
+   ```
+
+   在上面的示例中，指定了 CIS 基准测试版本以及该版本要跳过的测试。
 
 **结果：** 在使用定义的 CIS Benchmark 版本的后续扫描中，将跳过这些测试。
 

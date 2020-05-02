@@ -220,7 +220,6 @@ Rancher Chart 有许多自定义安装选项以适应特定的环境。以下是
 
 - 设置 `hostname`。
 - 将 `ingress.tls.source` 选项设置为 `secret`。
-- 如果您使用的是私有 CA 证书，请在下面的命令中增加 `--set privateCA=true`。
 - 如果您在安装 `alpha` 版本，需要把`--devel` 选项添加到下面到 Helm 命令中。
 
 ```
@@ -228,6 +227,16 @@ helm install rancher rancher-<CHART_REPO>/rancher \
  --namespace cattle-system \
  --set hostname=rancher.my.org \
  --set ingress.tls.source=secret
+```
+
+如果您使用的是私有 CA 证书，请在命令中增加 `--set privateCA=true`。
+
+```
+helm install rancher rancher-latest/rancher \
+  --namespace cattle-system \
+  --set hostname=rancher.my.org \
+  --set ingress.tls.source=secret \
+  --set privateCA=true
 ```
 
 现在已经部署了 Rancher，请参阅[添加 TLS 密文](/docs/installation/options/tls-secrets/_index)发布证书文件，以便 Rancher 和 ingress 控制器可以使用它们。

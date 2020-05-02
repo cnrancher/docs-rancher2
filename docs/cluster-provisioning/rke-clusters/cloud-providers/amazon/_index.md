@@ -34,7 +34,7 @@ keywords:
 
 创建 [Amazon EC2 集群](/docs/cluster-provisioning/rke-clusters/node-pools/ec2/_index)时，必须在创建**节点模板**时填写创建的 IAM 角色的**Iam 实例配置文件名称**（而不是 ARN）。
 
-创建[自定义集群](/docs/cluster-provisioning/custom-clusters/_index)时，必须手动将 IAM 角色附加到实例。
+创建[自定义集群](/docs/cluster-provisioning/rke-clusters/custom-nodes/_index)时，必须手动将 IAM 角色附加到实例。
 
 具有`controlplane`角色的节点的 IAM 策略:
 

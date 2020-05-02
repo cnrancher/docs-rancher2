@@ -37,11 +37,7 @@ Rancher 建议在 Kubernetes 集群上安装 Rancher。高可用的 Kubernetes �
 
 从可以访问 Internet 的系统中，获取最新的 Rancher Helm Chart，然后将内容复制到可以访问 Rancher Server 集群的系统中。
 
-1. 如果您还没有在有互联网访问的系统上进行 helm 初始化。请运行下面的命令。注意：请参考[Helm 版本要求](/docs/installation/options/helm-version/_index)来选择一个 Helm 版本来安装 Rancher。
-
-   ```plain
-   helm init -c
-   ```
+1. 如果您还没有在有互联网访问的系统上安装`helm`。注意：请参考[Helm 版本要求](/docs/installation/options/helm-version/_index)来选择一个 Helm 版本来安装 Rancher。
 
 1. 使用`helm repo add`来添加仓库，不同的地址适应不同的 Rancher 版本，请替换命令中的`<CHART_REPO>`，替换为`latest`，`stable`或`alpha`。更多信息请参考[如何选择 Rancher 版本](/docs/installation/options/server-tags/_index)。
 
@@ -153,8 +149,6 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
 
 设置 Rancher 模板，声明您选择的选项。使用下面表中的参考选项，需要给 Rancher 配置使用私有镜像库。
 
-如果您使用的是由私有 CA 签名的证书，则在`--set ingress.tls.source=secret`之后添加`--set privateCA=true`。
-
 | 占位符                           | 描述                 |
 | -------------------------------- | -------------------- |
 | `<VERSION>`                      | Rancher 版本         |
@@ -167,6 +161,19 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
     --set hostname=<RANCHER.YOURDOMAIN.COM> \
     --set rancherImage=<REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher \
     --set ingress.tls.source=secret \
+    --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # 自v2.2.0可用，设置默认的系统镜像仓库
+    --set useBundledSystemChart=true # 自v2.3.0可用，使用内嵌的 Rancher system charts
+```
+
+如果您使用的是由私有 CA 签名的证书，则在`--set ingress.tls.source=secret`之后添加`--set privateCA=true`：
+
+```plain
+   helm template rancher ./rancher-<VERSION>.tgz --output-dir . \
+    --namespace cattle-system \
+    --set hostname=<RANCHER.YOURDOMAIN.COM> \
+    --set rancherImage=<REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher \
+    --set ingress.tls.source=secret \
+    --set privateCA=true \
     --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # 自v2.2.0可用，设置默认的系统镜像仓库
     --set useBundledSystemChart=true # 自v2.3.0可用，使用内嵌的 Rancher system charts
 ```
