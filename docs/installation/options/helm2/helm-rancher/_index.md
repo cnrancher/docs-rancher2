@@ -186,8 +186,7 @@ deployment "rancher" successfully rolled out
 
 > **提示：** 服务器证书中的 `Common Name` 或 `Subject Alternative Names` 必须与 `hostname` 选项一致, 否则 ingress controller 将无法正确配置。尽管技术上仅需要`Subject Alternative Names`中有一个条目，但是拥有一个匹配的 `Common Name` 可以最大程度的提高与旧版浏览器/应用程序的兼容性。如果您想检查证书是否正确，请查看[如何在服务器证书中检查 Common Name 和 Subject Alternative Names](/docs/faq/technical/_index)。
 
-- 设置 `hostname` 并且将 `ingress.tls.source` 选项设置为 `secret`.
-- 如果您使用的是私有 CA 证书，请在下面的命令中增加 `--set privateCA=true`.
+- 设置 `hostname` 并且将 `ingress.tls.source` 选项设置为 `secret`。
 - 如果您在安装 `alpha` 版本，需要把`--devel` 选项添加到下面到 Helm 命令中。
 
 ```
@@ -196,6 +195,17 @@ helm install rancher-<CHART_REPO>/rancher \
   --namespace cattle-system \
   --set hostname=rancher.my.org \
   --set ingress.tls.source=secret
+```
+
+如果您使用的是私有 CA 证书，请在命令中增加 `--set privateCA=true`：
+
+```
+helm install rancher-<CHART_REPO>/rancher \
+  --name rancher \
+  --namespace cattle-system \
+  --set hostname=rancher.my.org \
+  --set ingress.tls.source=secret
+  --set privateCA=true
 ```
 
 现在已经部署完 Rancher，请参见[添加 Kubernetes TLS 密文](/docs/installation/options/helm2/helm-rancher/tls-secrets/_index)来发布证书文件，以便 Rancher 与 ingress controller 可以使用证书。

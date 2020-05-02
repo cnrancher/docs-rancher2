@@ -23,7 +23,7 @@ keywords:
 | --------------------------------------------------------------------------------------------- | ------------ |
 | [节点运行在基础设施供应商上的集群](/docs/cluster-provisioning/rke-clusters/node-pools/_index) | ✓            |
 | [托管的 Kubernetes 集群](/docs/cluster-provisioning/hosted-kubernetes-clusters/_index)        | ✓            |
-| [自定义集群](/docs/cluster-provisioning/custom-clusters/_index)                               | ✓            |
+| [自定义集群](/docs/cluster-provisioning/rke-clusters/custom-nodes/_index)                     | ✓            |
 | [导入的集群](/docs/cluster-provisioning/imported-clusters/_index)                             |              |
 
 :::note 警告
