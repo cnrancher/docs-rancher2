@@ -41,7 +41,7 @@ _节点_ 是集群内的一个计算资源，节点可以是裸金属服务器�
 ### etcd 节点
 
 _etcd 节点_ 的主要功能是数据存储，它负责存储 Rancher Server 的数据和集群状态。
-Kubernetes 集群的状态保存在[etcd 节点](https://kubernetes.io/docs/concepts/overview/components/#etcd) 中，etcd 节点运行 ectd 数据库。ectd 数据库组件是一个分布式的键值对存储系统，用于存储 Kubernetes 的集群数据，例如集群协作相关和集群状态相关的数据。建议在多个节点上运行 etcd，保证在节点失效的情况下，可以获取到备份的集群数据。
+Kubernetes 集群的状态保存在[etcd 节点](https://kubernetes.io/docs/concepts/overview/components/#etcd) 中，etcd 节点运行 etcd 数据库。etcd 数据库组件是一个分布式的键值对存储系统，用于存储 Kubernetes 的集群数据，例如集群协作相关和集群状态相关的数据。建议在多个节点上运行 etcd，保证在节点失效的情况下，可以获取到备份的集群数据。
 
 etcd 更新集群状态前，需要集群中的所有节点通过 quorum 投票机制完成投票。假设集群中有 n 个节点，至少需要 n/2 + 1（向下取整） 个节点同意，才被视为多数集群同意更新集群状态。例如一个集群中有 3 个 etcd 节点，quorum 投票机制要求至少两个节点同意，才会更新集群状态。
 

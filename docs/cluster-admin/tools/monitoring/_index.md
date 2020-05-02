@@ -26,7 +26,7 @@ _自 v2.2.0 起可用_
 
 - 集群监控可让您查看 Kubernetes 集群的运行状况。Prometheus 从下面的集群组件中收集指标，您可以在图表中查看这些指标。
 
-  - [Kubernetes 控制平面](/docs/cluster-admin/tools/monitoring/cluster-metrics/_index)
+  - [Kubernetes Control Plane](/docs/cluster-admin/tools/monitoring/cluster-metrics/_index)
   - [etcd 数据库](/docs/cluster-admin/tools/monitoring/cluster-metrics/_index)
   - [所有节点](/docs/cluster-admin/tools/monitoring/cluster-metrics/_index)
 

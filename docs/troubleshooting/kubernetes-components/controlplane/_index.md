@@ -1,5 +1,5 @@
 ---
-title: 管理平面节点问题排查
+title: Control Plane节点问题排查
 description: 本节适用于具有 `controlplane` 角色的节点。
 keywords:
   - rancher 2.0中文文档
@@ -13,7 +13,7 @@ keywords:
   - rancher2.0 中文教程
   - 常见故障排查
   - Kubernetes组件
-  - 管理平面节点问题排查
+  - control plane节点问题排查
 ---
 
 本节适用于具有 `controlplane` 角色的节点。

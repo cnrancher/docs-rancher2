@@ -31,11 +31,11 @@ Rancher 目前支持以下 Kubernetes 供应商：
 | [微软 AKS (Azure Kubernetes Service)](https://azure.microsoft.com/en-us/services/kubernetes-service/)          | v2.0.0 |
 | [阿里云 ACK (Alibaba Cloud Container Service for Kubernetes)](https://www.alibabacloud.com/product/kubernetes) | v2.2.0 |
 | [腾讯 TKE (Tencent Kubernetes Engine)](https://intl.cloud.tencent.com/product/tke)                             | v2.2.0 |
-| [华为 CCE (Huawei Cloud Container Engine)](https://www.huaweicloud.com/en-us/product/cce.html)                 | v2.2.0 |
+| [华为 CCE (Huawei Cloud Container Engine)](https://www.huaweicloud.com/product/cce.html)                       | v2.2.0 |
 
 ## 托管 Kubernetes 提供商的身份验证
 
-当使用 Rancher 创建由提供商托管的集群时，会提示您输入身份验证信息。Rancher 将用这个信息来访问云厂商的 API。更多详情请参阅以下文档：
+当使用 Rancher 创建由提供商托管的集群时，会提示您输入身份验证信息。Rancher 将用这个信息来访问云厂商的 API，详情请参阅以下文档：
 
 - [创建 GKE 集群](/docs/cluster-provisioning/hosted-kubernetes-clusters/gke/_index)
 - [创建 EKS 集群](/docs/cluster-provisioning/hosted-kubernetes-clusters/eks/_index)

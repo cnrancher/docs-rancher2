@@ -12,7 +12,7 @@ Rancher 资源配额不仅包含了[原生 Kubernetes](https://kubernetes.io/doc
 
 ![原生 Kubernetes 资源配额实现过程](/img/rancher/kubernetes-resource-quota.svg)
 
-和原生 Kubernetes 相比，Rancher 的资源配额有一些不同。在 Rancher 中，您可以把资源配额应用到[项目](/docs/cluster-admin/projects-and-namespaces/_index)层级，然后资源配额会传播到项目内的每一个命名空间。而原生 Kubernetes 只能在命名空间层级应用资源配额。如果需要修改指定命名空间的资源配额，您还可以使用 Rancher [覆盖命名空间默认资源配额](/docs/project-admin/resource-quotas/override-namespace-default/_index)。
+和原生 Kubernetes 相比，Rancher 的资源配额有一些不同。在 Rancher 中，您可以把资源配额应用到[项目](/docs/cluster-admin/projects-and-namespaces/_index)层级，然后资源配额会传播到项目内的每一个命名空间。而原生 Kubernetes 只能在命名空间层级应用资源配额，如果需要修改指定命名空间的资源配额，您还可以使用 Rancher [覆盖命名空间默认资源配额](/docs/project-admin/resource-quotas/override-namespace-default/_index)。
 
 资源配额包括两个限制：项目资源限制和命名空间默认资源限制，创建或修改项目时可以修改。
 

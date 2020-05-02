@@ -169,13 +169,11 @@ helm upgrade rancher-<CHART_REPO>/rancher \
    --set hostname=<RANCHER.YOURDOMAIN.COM> \
    --set certmanager.version=<CERTMANAGER_VERSION> \
    --set rancherImage=<REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher \
-   --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # Available as of v2.2.0, set a default private registry to be used in Rancher
-   --set useBundledSystemChart=true # Available as of v2.3.0, use the packaged Rancher system charts
+   --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # 自v2.2.0可用，设置默认的系统镜像仓库
+   --set useBundledSystemChart=true # 自v2.3.0可用，使用内嵌的 Rancher system charts
    ```
 
    #### 选项 B - 使用 Kubernetes 密文中的证书
-
-   > **注意：** 如果您使用的是由私有 CA 签名的证书，请在 `--set ingress.tls.source=secret` 之后添加 `--set privateCA=true`。
 
    ```plain
    helm template ./rancher-<VERSION>.tgz --output-dir . \
@@ -184,8 +182,22 @@ helm upgrade rancher-<CHART_REPO>/rancher \
    --set hostname=<RANCHER.YOURDOMAIN.COM> \
    --set rancherImage=<REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher \
    --set ingress.tls.source=secret \
-   --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # Available as of v2.2.0, set a default private registry to be used in Rancher
-   --set useBundledSystemChart=true # Available as of v2.3.0, use the packaged Rancher system charts
+   --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # 自v2.2.0可用，设置默认的系统镜像仓库
+   --set useBundledSystemChart=true # 自v2.3.0可用，使用内嵌的 Rancher system charts
+   ```
+
+   如果您使用的是由私有 CA 签名的证书，请在 `--set ingress.tls.source=secret` 之后添加 `--set privateCA=true`：
+
+   ```plain
+   helm template ./rancher-<VERSION>.tgz --output-dir . \
+   --name rancher \
+   --namespace cattle-system \
+   --set hostname=<RANCHER.YOURDOMAIN.COM> \
+   --set rancherImage=<REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher \
+   --set ingress.tls.source=secret \
+   --set privateCA=true \
+   --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # 自v2.2.0可用，设置默认的系统镜像仓库
+   --set useBundledSystemChart=true # 自v2.3.0可用，使用内嵌的 Rancher system charts
    ```
 
 1. 将渲染的清单 YAML 文件目录复制到可以访问 Rancher Server 集群的系统，然后应用渲染的模板。

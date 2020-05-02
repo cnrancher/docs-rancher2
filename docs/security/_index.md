@@ -1,6 +1,6 @@
 ---
 title: 安全说明
-description: 安全是 Rancher 全部功能的核心。Rancher 集成了全部的主流认证工具和服务，并且提供了企业级的[RBAC 能力](/docs/admin-settings/rbac/_index)，这些都可以让您的 Kubernetes 集群更安全。本页，我们将提供安全相关的文档，以及帮助您安全加固 Rancher Server 和下游 Kubernetes 集群的相关质料
+description: 安全是 Rancher 全部功能的核心。Rancher 集成了全部的主流认证工具和服务，并且提供了企业级的RBAC 能力，可以让您的 Kubernetes 集群更安全。安全策略：Rancher Labs 会对安全漏洞及时做出响应，并努力在合理的时间内解决所有问题。漏洞报告流程：如果您发现了疑似安全漏洞，请发送邮件到security@rancher.com提交可能的安全漏洞。为了帮助我们更快地定位和复现问题，请尽可能详细地描述您发现的疑似问题，包括使用环境、Rancher 版本、Kubernetes 版本的等信息。漏洞公布：请订阅Rancher 发布论坛获取发布信息。我们提供了安全相关的文档，以及帮助您安全加固 Rancher Server 和下游 Kubernetes 集群的相关资料。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -15,36 +15,15 @@ keywords:
   - 安全说明
 ---
 
-<table width="100%">
-<tbody>
-<tr>
-<td width="30%" style={{verticalAlign: 'top'}}>
-<h4>安全策略</h4>
-<p>
-Rancher Labs会做对安全漏洞做出响应，并努力在合理的时间内解决所有问题。
-</p>
-</td>
-<td width="30%" style={{verticalAlign: 'top'}}>
-<h4>漏洞报告流程</h4>
-<p>
-如果您发现了疑似安全漏洞，请发送邮件到 
-<a href="mailto:security@rancher.com">security@rancher.com</a>，提交可能的安全漏洞
-为了帮助我们更快地定位和复现问题，请尽可能详细地描述您发现的疑似问题，包括使用环境、Rancher版本、Kubernetes版本的等信息。
-</p>
-</td>
-<td width="30%" style={{verticalAlign: 'top'}}>
-<h4>漏洞公布</h4>
-<p>
-请订阅<a href="https://forums.rancher.com/c/announcements">Rancher发布论坛</a>获取发布信息。
-</p>
-</td>
-</tr>
-</tbody>
-</table>
+安全是 Rancher 全部功能的基础。Rancher 集成了全部的主流认证工具和服务，并且提供了企业级的[RBAC 能力](/docs/admin-settings/rbac/_index)，这些都可以让您的 Kubernetes 集群更安全。
 
-安全是 Rancher 全部功能的核心。Rancher 集成了全部的主流认证工具和服务，并且提供了企业级的[RBAC 能力](/docs/admin-settings/rbac/_index)，这些都可以让您的 Kubernetes 集群更安全。
+- **安全策略：**Rancher Labs 会对安全漏洞及时做出响应，并努力在合理的时间内解决所有问题。
 
-本页，我们将提供安全相关的文档，以及帮助您安全加固 Rancher Server 和下游 Kubernetes 集群的相关质料：
+- **漏洞报告流程：**如果您发现了疑似安全漏洞，请发送邮件到<a href="mailto:security@rancher.com">security@rancher.com</a>，提交问题。为了帮助我们更快地定位和复现问题，请尽可能详细地描述您发现的疑似问题，包括使用环境、Rancher 版本、Kubernetes 版本的等信息。
+
+- **漏洞公布：**请订阅<a href="https://forums.rancher.com/c/announcements">Rancher 发布论坛</a>获取发布信息。
+
+我们提供了安全相关的文档，以及帮助您安全加固 Rancher Server 和下游 Kubernetes 集群的相关资料：
 
 - [在 Kubernetes 集群中执行 CIS 安全扫描](#在-kubernetes-集群中执行-cis-安全扫描)
 - [Rancher 安全加固指南](#rancher-安全加固指南)
@@ -69,7 +48,7 @@ CIS 基准测试是安全配置目标系统的最佳实践。CIS 基准是通过
 
 当 Rancher 对一个集群进行 CIS 安全扫描时，它会生成一个展示每个测试结果的报告。报告中包括`通过`，`跳过`和`失败`的测试数量的汇总。报告中同时也给`失败`的测试提供了补救办法。
 
-更多详情，请参阅[安全扫描](/docs/security/security-scan/_index)部分的文档。
+更多详情，请参阅[安全扫描](/docs/security/security-scan/_index)文档。
 
 ## Rancher 安全加固指南
 
