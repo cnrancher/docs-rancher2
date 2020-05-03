@@ -103,10 +103,10 @@ _自 v2.4.0 起可用_
 
 **并发**是用来定义升级期间允许的不可用的最大节点数。如果不可用的节点的数量大于这个值，则无法升级成功。如果升级失败，您可能需要手动修复或删除发生故障的节点，并再次进行升级。
 
-- **控制平面节并发：** 同时升级的 Server 节点数量；也是最大不可用 Server 节点数量。
+- **Control Plane 节点并发：** 同时升级的 Server 节点数量；也是最大不可用 Server 节点数量。
 - **工作节点并发：** 同时升级的 Worker 节点数量；也是最大不可用 Worker 节点数量。
 
-在 K3s 文档中，控制平面节点称为 Server 节点。这些节点运行 Kubernetes Master 组件，该节点维护集群的所需状态。在 K3s 中，默认情况下，这些控制平面节点也可以运行用户的工作负载。
+在 K3s 文档中，Control Plane 节点称为 Server 节点。这些节点运行 Kubernetes Master 组件，该节点维护集群的所需状态。在 K3s 中，默认情况下，这些 Control Plane 节点也可以运行用户的工作负载。
 
 同样在 K3s 文档中，具有 Wroker 角色的节点也称为 Agent 节点。默认情况下，可以将集群中部署的所有工作负载或 Pod 调度到这些节点。
 
@@ -128,7 +128,7 @@ $ curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" sh -s -
 
 ### 导入的 K3s 集群的 debug 日志和故障排查
 
-节点由下游集群中运行的系统升级控制器升级。根据集群配置，Rancher 部署了两个[升级计划](https://github.com/rancher/system-upgrade-controller#example-upgrade-plan)来升级 K3s 节点：一个用于控制平面节点，另一个用于工作节点。系统升级控制器将按照计划来升级节点。
+节点由下游集群中运行的系统升级控制器升级。根据集群配置，Rancher 部署了两个[升级计划](https://github.com/rancher/system-upgrade-controller#example-upgrade-plan)来升级 K3s 节点：一个用于 Control Plane 节点，另一个用于工作节点。系统升级控制器将按照计划来升级节点。
 
 要在系统升级控制器部署上启用 debug 日志，请在[这个配置映射](https://github.com/rancher/system-upgrade-controller/blob/50a4c8975543d75f1d76a8290001d87dc298bdb4/manifests/system-upgrade-controller.yaml#L32)中，想`debug`环境变量设置为 true。然后重新启动`system-upgrade-controller`的 Pod。
 
