@@ -221,8 +221,6 @@ rke up --config ./rancher-cluster.yml
 
 如果您已经安装了`kubectl`，您需要将`kubeconfig`文件放置在`kubectl`可以访问的位置。`kubeconfig`文件包含使用`kubectl`访问集群所必需的凭证。
 
-当您运行 rke up 时，RKE 应该已经创建了一个名为 kube_config_rancher-cluster.yml 的 kubeconfig 文件。该文件具有`kubectl`和`helm`的凭证。
-
 当您运行 rke up 时，RKE 应该已经创建了一个名为`kube_config_rancher-cluster.yml`的`kubeconfig`文件。该文件具有`kubectl`和`helm`的凭据。
 
 > **注意：** 如果您使用了与`rancher-cluster.yml`不同的文件名，则 kubeconfig 文件将命名为`kube_config_<FILE_NAME>.yml`。
