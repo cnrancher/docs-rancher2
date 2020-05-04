@@ -27,9 +27,9 @@ keywords:
 
 > **先决条件：** 您必须先有一个可用的[私有镜像仓库](https://docs.docker.com/registry/deploying/)。
 
-## 集群中仅有 Linux
+## 集群中仅有 Linux 节点
 
-对于只用来创建仅有 Linux 的集群的 Rancher Server，请按以下步骤推送镜像到私有镜像库。
+对于只用来创建仅有 Linux 节点的集群的 Rancher Server，请按以下步骤推送镜像到私有镜像库。
 
 - 查找您用的 Rancher 版本所需要的资源
 - 搜集 cert-manager 镜像
@@ -115,11 +115,11 @@ keywords:
     ./rancher-load-images.sh --image-list ./rancher-images.txt --registry <REGISTRY.YOURDOMAIN.COM:PORT>`
     ```
 
-## 集群中有 Linux 和 Windows
+## 集群中同时含有 Linux 节点 和 Windows 节点
 
 _v2.3.0 及以后版本可用_
 
-对于用来创建包含 Linux 和 Windows 的集群的 Rancher Server，因为一个集群会包含 Linux 和 Windows 的混合节点，所以会有不同的步骤来为您的私有镜像库同步 Windows 镜像和 Linux 镜像。
+对于用来创建包含 Linux 节点和 Windows 节点的集群的 Rancher Server，因为一个集群会包含 Linux 和 Windows 的混合节点，所以会有不同的步骤来为您的私有镜像库同步 Windows 镜像和 Linux 镜像。
 
 ### 同步 Windows 镜像
 
