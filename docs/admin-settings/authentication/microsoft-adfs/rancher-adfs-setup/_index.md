@@ -17,7 +17,7 @@ keywords:
   - 配置 Rancher 使用 AD FS
 ---
 
-_自 v2.0.7 版本开始可用_
+_自 v2.0.7 版本起可用_
 
 完成[在 Microsoft AD FS 中配置 Rancher 对接](/docs/admin-settings/authentication/microsoft-adfs/microsoft-adfs-setup/_index)后，将您的 AD FS 信息输入 Rancher，以允许 Rancher 通过 AD FS 进行身份验证。
 

@@ -50,7 +50,7 @@ Rancher 使用 LDAP 与 Active Directory 服务器通信。因此，Active Direc
 
 > **注意：**
 >
-> 如果您不确定要在`用户/组 Search Base`字段中输入的正确值，请参阅[使用 ldapsearch 确认 Search Base 和架构](#附件：使用-ldapsearch-确认-search-base-和架构)。
+> 如果您不确定要在`用户/组搜索起点`字段中输入的正确值，请参阅[使用 ldapsearch 确认搜索起点和架构](#附件：使用-ldapsearch-确认搜索起点和架构)。
 
 **表 1：AD 服务器参数**
 
@@ -63,8 +63,8 @@ Rancher 使用 LDAP 与 Active Directory 服务器通信。因此，Active Direc
 | 服务帐户用户名   | 输入对域分区具有只读访问权限的 AD 帐户的用户名。请参阅[先决条件](#先决条件)。用户名可以用 NetBIOS 格式（例如“DOMAIN\serviceaccount”）或 UPN 格式（例如“serviceaccount@domain.com”）输入。                                                                            |
 | 服务帐户密码     | 服务帐户的密码。                                                                                                                                                                                                                                                     |
 | 默认登录域       | 当您使用 AD 域的 NetBIOS 名称配置此字段时，当绑定到 AD 服务器时，在没有域的情况下输入的用户名(例如“jdoe”)将自动转换为斜杠的 NetBIOS 登录（例如，“LOGIN_DOMAIN\jdoe”）。如果您的用户以 UPN（例如，“jdoe@acme.com”）作为用户名进行身份验证，则此字段**必**须保留为空。 |
-| 用户 Search Base | 目录树中开始搜索用户对象的节点的可分辨名称。所有用户都必须是此基本 DN 的后代。例如：“ou=people,dc=acme,dc=com”                                                                                                                                                       |
-| 组 Search Base   | 如果组位于`用户 Search Base`下配置的节点之外的其他节点下，则需要在此处提供可分辨名称。否则就空着。例如：“ou=groups,dc=acme,dc=com”                                                                                                                                   |
+| 用户搜索起点 | 目录树中开始搜索用户对象的节点的可分辨名称。所有用户都必须是此基本 DN 的后代。例如：“ou=people,dc=acme,dc=com”                                                                                                                                                       |
+| 组搜索起点   | 如果组位于`用户搜索起点`下配置的节点之外的其他节点下，则需要在此处提供可分辨名称。否则将其留空。例如：“ou=groups,dc=acme,dc=com”                                                                                                                                   |
 
 ---
 
@@ -76,7 +76,7 @@ Rancher 使用 LDAP 查询来搜索和检索关于 Active Directory 中的用户
 
 > **注意：**
 >
-> 如果您不熟悉 Active Directory 域中使用的架构，请参阅[使用 ldapsearch 确认 Search Base 和架构](#附件：使用-ldapsearch-确认-search-base-和架构)以确定正确的配置值。
+> 如果您不熟悉 Active Directory 域中使用的架构，请参阅[使用 ldapsearch 确认搜索起点和架构](#附件：使用-ldapsearch-确认搜索起点和架构)以确定正确的配置值。
 
 #### 用户架构
 
@@ -136,7 +136,7 @@ Rancher 使用 LDAP 查询来搜索和检索关于 Active Directory 中的用户
 >
 > 如果 LDAP 服务中断，您仍然可以使用本地配置的`admin`帐户和密码登录。
 
-## 附件：使用 ldapsearch 确认 Search Base 和架构
+## 附件：使用 ldapsearch 确认搜索起点和架构
 
 为了成功配置 AD 身份验证，必须提供与 AD 服务器的层次结构和架构相关的正确配置。
 
@@ -145,11 +145,11 @@ Rancher 使用 LDAP 查询来搜索和检索关于 Active Directory 中的用户
 对于下面提供的示例命令，我们假设：
 
 - Active Directory 服务器的主机名为`ad.acme.com`
-- 服务器正在监听端口`389上的未加密连接`
+- 服务器正在监听端口`389`上的未加密连接
 - Active Directory 域是`acme`
 - 您有一个用户名为`jdoe`和密码为`secret`的有效 AD 帐户
 
-### 确认 Search Base
+### 确认搜索起点
 
 首先，我们将使用`ldapsearch`来找到用户和组的父节点的可分辨名称（DN）：
 
@@ -158,13 +158,13 @@ $ ldapsearch -x -D "acme\jdoe" -w "secret" -p 389 \
 -h ad.acme.com -b "dc=acme,dc=com" -s sub "sAMAccountName=jdoe"
 ```
 
-此命令执行 LDAP 搜索，Search Base 设置为域根目录(`-b "dc=acme,dc=com"`)，并执行针对用户帐户的筛选器(`sAMAccountNam=jdoe`)，返回所述用户的属性:
+此命令执行 LDAP 搜索，搜索起点设置为域根目录(`-b "dc=acme,dc=com"`)，并执行针对用户帐户的筛选器(`sAMAccountNam=jdoe`)，返回所述用户的属性:
 
 ![LDAP User](/img/rancher/ldapsearch-user.png)
 
-因为在这种情况下，用户的 DN 是`CN=John Doe,CN=Users,DC=acme,DC=com`[5]，所以我们应该使用父节点 DN`CN=Users,DC=acme,DC=com`配置**用户 Search Base**。
+因为在这种情况下，用户的 DN 是`CN=John Doe,CN=Users,DC=acme,DC=com`[5]，所以我们应该使用父节点 DN`CN=Users,DC=acme,DC=com`配置**用户搜索起点**。
 
-同样，基于 **memberOf** 属性[4]中引用的组的 DN，**组 Search Base**的正确值将是该值的父节点，即`OU=Groups,DC=acme,DC=com`。
+同样，基于 **memberOf** 属性[4]中引用的组的 DN，**组搜索起点**的正确值将是该值的父节点，即`OU=Groups,DC=acme,DC=com`。
 
 ### 确认用户架构
 
@@ -179,7 +179,7 @@ $ ldapsearch -x -D "acme\jdoe" -w "secret" -p 389 \
 >
 > 如果我们组织中的 AD 用户使用其 UPN（例如 jdoe@acme.com）而不是短登录名进行身份验证，则我们必须将`登录属性`设置为**userPrincipalName**。
 
-我们还将`搜索属性`参数设置为**sAMAccountName|name**。这样，用户可以通过输入用户名或全名添加到 Rancher UI 中的集群/项目中。
+我们还将`搜索属性`参数设置为**sAMAccountName | name**。这样，用户可以通过输入用户名或全名添加到 Rancher UI 中的集群/项目中。
 
 ### 确认组架构
 
@@ -208,4 +208,4 @@ $ ldapsearch -x -D "acme\jdoe" -w "secret" -p 389 \
 
 ## 附件：故障排查
 
-如果在测试与 Active Directory 服务器的连接时遇到问题，请首先仔细检查为服务帐户输入的凭据以及 Search Base 配置。您还可以检查 Rancher 日志，以帮助查明问题的原因。调试日志可能包含有关错误的更详细信息。请参阅本文档中的[如何启用调试日志](/docs/faq/technical/_index)。
+如果在测试与 Active Directory 服务器的连接时遇到问题，请首先仔细检查为服务帐户输入的凭据以及搜索起点配置。您还可以检查 Rancher 日志，以帮助查明问题的原因。调试日志可能包含有关错误的更详细信息。请参阅本文档中的[如何启用调试日志](/docs/faq/technical/_index)。
