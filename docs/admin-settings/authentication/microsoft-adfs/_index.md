@@ -16,7 +16,7 @@ keywords:
   - AD FS（SAML）
 ---
 
-_v2.0.7 版本起可用_
+_自 v2.0.7 版本起可用_
 
 如果您的公司使用 Microsoft Active Directory Federation Services（AD FS）进行用户身份验证，则可以将 Rancher 配置为允许用户使用其 AD FS 凭据登录。
 

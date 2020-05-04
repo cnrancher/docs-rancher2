@@ -16,7 +16,7 @@ keywords:
   - 对接 Azure AD
 ---
 
-_从 v2.0.3 开始可用_
+_自 v2.0.3 版本起可用_
 
 如果您在 Azure 中托管了一个 Active Directory（AD）实例，您可以将 Rancher 配置为允许您的用户使用 AD 帐户登录。Azure AD 外部身份验证的配置要求您在 Azure 和 Rancher 中进行配置。
 
@@ -98,7 +98,7 @@ _从 v2.0.3 开始可用_
 
 1. 从 **Azure Active Directory Graph**，选中以下的 **Delegated Permissions**：
 
-   ![Select API Permissions](/img/rancher/select-required-permissions.png)
+   ![Select API Permissions](/img/rancher/select-required-permissions-2.png)
 
    - **Access the directory as the signed-in user**
    - **Read directory data**
@@ -165,9 +165,9 @@ _从 v2.0.3 开始可用_
 
    2. 将下列端点复制到剪贴板并粘贴到文本文件(这些值将是您的 Rancher 端点值)。
 
-      - **Microsoft Graph API 端点**(图形端点)
-      - **OAuth 2.0 令牌端点(v1)**(令牌端点)
-      - **OAuth 2.0 授权端点(v1)**(身份验证端点)
+      - **Microsoft Graph API 端点** (图形端点)
+      - **OAuth 2.0 令牌端点(v1)** (令牌端点)
+      - **OAuth 2.0 授权端点(v1)** (身份验证端点)
 
 > **注意：** 复制端点的 v1 版本
 
@@ -181,7 +181,7 @@ _从 v2.0.3 开始可用_
 
 1. 选择**Azure AD**。
 
-1. 使用完成“复制 Azure 应用程序数据”时复制的信息完成**配置 Azure AD 帐户**表单。
+1. 使用完成`复制 Azure 应用程序数据`时复制的信息完成**配置 Azure AD 帐户**表单。
 
    > **重要提示：** 输入图形端点时，从 URL 中删除租户 ID，如下所示。
    >
@@ -189,7 +189,7 @@ _从 v2.0.3 开始可用_
 
    下表将您在 Azure 门户中复制的值映射到 Rancher 中的字段。
 
-   | Rancher  | 蔚蓝价值                           |
+   | Rancher  | AZURE值                          |
    | -------- | ---------------------------------- |
    | 租户 ID  | 目录 ID                            |
    | 应用 ID  | 应用程序 ID                        |
