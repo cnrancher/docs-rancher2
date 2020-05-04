@@ -21,7 +21,7 @@ keywords:
 
 **Rancher v2.x 支持 Docker Swarm 和 Mesos 作为环境类型吗？**
 
-当您在 Rancher v2.x 创建环境时，Swarm 和 Mesos 已不在是您可选择的标准项。不再使用 Cattle，Swarm 和 Mesos 是一项艰难的决定，但这是大势所趋。比如，在 15000 个集群当中，可能只有大约 200 个左右在运行 Swarm。
+当您在 Rancher v2.x 创建环境时，Swarm 和 Mesos 已不再是您可选择的标准项。不再使用 Cattle，Swarm 和 Mesos 是一项艰难的决定，但这是大势所趋。比如，在 15000 个集群当中，可能只有大约 200 个左右在运行 Swarm。
 
 **Rancher v2.x 可以管理 Azure Kubernetes Services 吗？**
 
@@ -53,9 +53,9 @@ keywords:
 
 网络方案相对解耦，Rancher 支持 Kubernetes 集群常见 CNI 网络方案：Canal、Flannel、Calico 和 Weave（自 v2.2.0 版本支持 Weave）。请参阅 [Rancher 支持矩阵](https://rancher.com/support-maintenance-terms/)以查看 Rancher 官方支持的网络方案。
 
-**Rancher 计划支持 Trakfik 吗**
+**Rancher 计划支持 Traefik 吗**
 
-目前我们不支持开箱即用的 Treafik 部署和支持，您可以手动部署，但我们仍然在探索更多的负载均衡方案。
+目前我们不支持开箱即用的 Traefik 部署和支持，您可以手动部署，但我们仍然在探索更多的负载均衡方案。
 
 **我能导入 Openshift Kubernetes 集群到 Rancher v2.x 吗？**
 

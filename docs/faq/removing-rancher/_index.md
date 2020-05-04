@@ -19,15 +19,15 @@ keywords:
 
 ## 如果删除了 Rancher Server，Rancher 下管集群的工作负载会如何？
 
-如何 Rancher 集群被删除了且不可恢复，所有 Rancher 的下管集群的工作负载会继续正常工作。
+如果 Rancher 集群被删除了且不可恢复，所有 Rancher 的下管集群的工作负载会继续正常工作。
 
-## 如果删除了 Rancher Server，我该如何访问的的下管集群？
+## 如果删除了 Rancher Server，我该如何访问下管集群？
 
-访问 Rancher 下管集群的能力依赖于集群的类型以及创建集群的方法。总结起来：
+在没有 Rancher 的情况下访问下管集群的能力取决于集群的类型和创建集群的方法。总结起来：
 
 - **导入集群：** 集群不会受到影响，您仍然可以使用导入到 Rancher 之前访问集群的方法。
 
-- **托管的 Kubernetes 集群：** 如果您是在公有云提供商创建的如 EKS，GKE 或者 AKS 的托管集群，您可以继续使用公有云厂商提供的凭证访问集群。
+- **托管的 Kubernetes 集群：** 如果您是在公有云提供商（例如 EKS，GKE 或者 AKS）中创建的集群，您可以继续使用公有云厂商提供的凭证访问集群。
 
 - **RKE 集群：** 要访问[RKE 集群](/docs/cluster-provisioning/rke-clusters/_index)，集群必须开启[授权集群端点](/docs/overview/architecture/_index) ，而且您必须从 Rancher UI 上下载集群的 kubeconfig 文件（RKE 集群的授权集群端点是默认开启的）。您可以通过授权集群端口用 kubectl 访问 Kubernets 集群，而不必通过 Rancher 的[认证代理](/docs/overview/architecture/_index) 。更多关于如何配置 kubectl 使用授权集群端点的指导，请参阅[通过 Kubectl 和 kubeconfig 访问集群](/docs/cluster-admin/cluster-access/kubectl/_index)章节中配置 kubectl 直接访问集群的部分。当 Rancher 被删除时这些集群会创建一个授权快照。
 
@@ -37,7 +37,7 @@ keywords:
 
 如果您通过 Docker 单节点安装的 Rancher，可以通过移除 Docker 容器的方式移除 Rancher。
 
-导入集群不会因为 Rancher 被移除而受到影响。关于其他类型的集群，请参阅[如果删除了 Rancher Server，我该如何访问的的下管集群？](##如果删除了-rancher-server，我该如何访问的的下管集群？)部分。
+导入集群不会因为 Rancher 被移除而受到影响。关于其他类型的集群，请参阅[如果删除了 Rancher Server，我该如何访问的的下管集群？](##如果删除了-rancher-server，我该如何访问下管集群？)部分。
 
 ## 我的导入集群不想被 Rancher 管理该怎么做？
 
