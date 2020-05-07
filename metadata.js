@@ -28,8 +28,10 @@ const metadata = {
     版本迁移: "为您介绍如何从Rancher容器平台1.6版本迁移到2.x版本"
   },
   docs: {
+    "releases/v2.4.3": "版本说明 - v2.4.3",
     "releases/v2.4.2": "版本说明 - v2.4.2",
     "releases/v2.4.0": "版本说明 - v2.4.0",
+    "releases/v2.3.7": "版本说明 - v2.3.7",
     "releases/v2.3.6": "版本说明 - v2.3.6",
     "releases/v2.3.5": "版本说明 - v2.3.5",
     "releases/v2.3.4": "版本说明 - v2.3.4",
