@@ -1,6 +1,6 @@
 ---
 title: 添加 Ingress
-description: 集群内的服务（service）和 pod 仅有集群内互相访问的 IP 地址，只能实现集群内部之间的通信。Ingress 为集群内的所有服务提供了外网访问的入口，允许用户通过外网访问集群内的服务。Ingress 具有这些功能：提供服务外部访问的 URL、负载均衡、SSL 和提供基于名称的虚拟主机。请参考下文，为您的工作负载添加 Ingress。
+description: 集群内的服务（service）和 pod 仅有集群内互相访问的 IP 地址，只能实现集群内部之间的通信。Ingress 为集群内的所有服务提供了外网访问的入口，允许用户通过外网访问集群内的服务。Ingress 具有这些功能：提供服务外部访问的 URL、负载均衡、SSL 和提供基于主机和路径的路由。请参考下文，为您的工作负载添加 Ingress。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -16,7 +16,7 @@ keywords:
   - 添加 Ingress
 ---
 
-集群内的服务（service）和 pod 仅有集群内互相访问的 IP 地址，只能实现集群内部之间的通信。Ingress 为集群内的所有服务提供了外网访问的入口，允许用户通过外网访问集群内的服务。Ingress 具有这些功能：提供服务外部访问的 URL、负载均衡、SSL 和提供基于名称的虚拟主机。请参考下文，为您的工作负载添加 Ingress。
+集群内的服务（service）和 pod 仅有集群内互相访问的 IP 地址，只能实现集群内部之间的通信。Ingress 为集群内的所有服务提供了外网访问的入口，允许用户通过外网访问集群内的服务。Ingress 具有这些功能：提供服务外部访问的 URL、负载均衡、SSL 和提供基于主机和路径的路由。请参考下文，为您的工作负载添加 Ingress。
 
 在项目中使用 Ingress 时，可以设置全局 DNS 条目，从而对外部 DNS 进行编程动态设置 Ingress。请参考[全局 DNS 条目](/docs/catalog/globaldns/_index)。
 
@@ -34,7 +34,7 @@ keywords:
 
    - **自动生成 xip.io 主机名**
 
-     此选项适合用于测试生产环境，而**非**生产环境。如果选择此选项，Ingress 会通过一个自动生成的 DNS 名称路由请求。Rancher 使用 [xip.io](http://xip.io/) 自动生成 DNS 名称。
+     此选项适合用于测试环境，而**非**生产环境。如果选择此选项，Ingress 会通过一个自动生成的 DNS 名称路由请求。Rancher 使用 [xip.io](http://xip.io/) 自动生成 DNS 名称。
 
      > **注意：**要使用此选项，您必须能够解析 `xip.io` 地址。
 
