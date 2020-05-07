@@ -31,13 +31,13 @@ keywords:
 
 我们不建议在单个 Docker 容器中安装 Rancher，因为如果该节点发生故障，则其他节点上将没有可用的集群数据副本，并且您可能会丢失 Rancher 服务器上的数据。
 
-Rancher 需要安装在高可用的 [RKE（Rancher Kubernetes Engine）](https://rancher.com/docs/rke/latest/en/)Kubernetes 集群上，或高可用的[K3s（比 K8s 少 5）](https://rancher.com/docs/k3s/latest/en/)Kubernetes 集群。 RKE 和 K3s 都是经过完全认证的 Kubernetes 发行版。
+Rancher 需要安装在高可用的 [RKE（Rancher Kubernetes Engine）](https://rancher.com/docs/rke/latest/en/)Kubernetes 集群上，或高可用的[K3s (轻量级 Kubernetes) ](https://rancher.com/docs/k3s/latest/en/)Kubernetes 集群。 RKE 和 K3s 都是经过完全认证的 Kubernetes 发行版。
 
 ### K3s Kubernetes 集群安装
 
 如果您是首次安装 Rancher v2.4，建议将其安装在 K3s Kubernetes 集群上。这种 K3s 架构的一个主要优点是，它允许使用外部数据库保存集群数据，从而可以将 K3s 服务器节点视为无状态的。
 
-在 K3s 集群上安装 Rancher 的功能是在 Rancher v2.4 中引入的。K3s 易于安装，仅需要 Kubernetes 一半的内存，而且所有组件都在一个不超过 50 MB 的二进制文件中。
+在 K3s 集群上安装 Rancher 的功能是在 Rancher v2.4 中引入的。K3s 易于安装，仅需要 Kubernetes 一半的内存，而且所有组件都在一个不超过 100 MB 的二进制文件中。
 
 <figcaption> 使用 K3s Kubernetes 集群运行 Rancher Management Server 的架构 </figcaption>
 
@@ -89,7 +89,7 @@ Rancher 需要安装在高可用的 [RKE（Rancher Kubernetes Engine）](https:/
 
 如果将 Rancher 安装在 RKE Kubernetes 集群上，则该集群应具有三个节点，并且每个节点都应具有所有三个 Kubernetes 角色：etcd，controlplane 和 worker。
 
-### Rancher Server RKE集群和下游 Kubernetes RKE集群的架构对比
+### Rancher Server RKE 集群和下游 Kubernetes RKE 集群的架构对比
 
 我们对 Rancher Server 集群上的 RKE 节点角色的建议与对运行您的业务应用的下游集群的建议相反。
 

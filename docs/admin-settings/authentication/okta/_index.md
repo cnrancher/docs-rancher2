@@ -37,16 +37,16 @@ _v2.2.0 版本可用_
 
 1.  选择**Okta**。
 
-1.  完成**配置 Okta 帐户**表单。下面的示例描述了如何将 Okta 属性映射到 Rancher 中的字段。
+1.  完成**配置 Okta 帐户**表单。下面的示例描述了如何将 Okta 属性从属性 Statement 映射到 Rancher 中的字段。
 
     | 字段             | 描述                                                         |
     | ---------------- | ------------------------------------------------------------ |
-    | 显示名称         | 包含用户 display name 的属性。                               |
-    | 用户名           | 包含用户 user name/given name 属性                           |
-    | UID              | 对每个用户唯一的属性。                                       |
-    | 组               | 为管理组成员身份创建的条目。                                 |
+    | 显示名称         | 属性 Statement 中包含用户 display name 的属性名称。          |
+    | 用户名           | 属性 Statement 中包含用户 user name/given name 属性名称。    |
+    | UID              | 属性 Statement 中每个用户唯一的属性名称。                    |
+    | 组               | 组属性 Statement 中代表组信息的属性名称。                    |
     | Rancher API 地址 | Rancher 服务器的 URL 地址                                    |
-    | 私钥/证书        | 密钥/证书对，用于在 Rancher 和 IdP 之间创建安全 shell。      |
+    | 私钥/证书        | 密钥/证书对，用于声明加密。                                  |
     | 元数据 XML       | 在应用程序`登录`部分得到的`Identity Provider metadata`文件。 |
 
     > **提示：** 您可以使用 openssl 命令生成密钥/证书对。例如：
