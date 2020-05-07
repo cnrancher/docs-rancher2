@@ -1,30 +1,41 @@
 ---
 title: 升级 Cert-Manager（Helm 2）
+description: Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和更新 TLS 证书。从 2019 秋季开始，cert-manager 发生了三个重要的变化，如果你在此时间段前创建了 Rancher 高可用部署，您需要采取以下措施
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安装指南
+  - 升级 Cert-Manager（Helm 2）
 ---
 
-Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和更新 TLS 证书。截至 2019 秋季，cert-manager 将发生三个重要的变化，如果您有一个 Rancher 高可用部署，您需要采取以下措施：
+## 概述
+
+Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和更新 TLS 证书。从 2019 秋季开始，cert-manager 发生了三个重要的变化，如果你在此时间段前创建了 Rancher 高可用部署，您需要采取以下措施：
 
 1. [从 2019 年 11 月 1 日开始，Let's Encrypt 将阻止版本低于 0.8.0 的 cert-manager 实例。](https://community.letsencrypt.org/t/blocking-old-cert-manager-versions/98753)
 1. [Cert-manager 正在弃用并替换 certificate.spec.acme.solvers 字段。](https://cert-manager.io/docs/installation/upgrading/upgrading-0.7-0.8/)此更改没有确切的截止日期。
 1. [Cert-manager 正在弃用`v1alpha1`API 并替换它的 API 组。](https://cert-manager.io/docs/installation/upgrading/upgrading-0.10-0.11/)
 
-为了解决这些变化，本指南将做两件事：
-
-1. 记录升级 cert-manager 的过程
-1. 解释 cert-manager API 的更改，并链接到 cert-manager 的官方文档以迁移数据
-
-:::important 重要提示
-如果您当前正在运行版本低于 v0.11 的 cert-manger，并且想要将 Rancher 和 cert-manager 都升级到新版本，则需要重新安装它们：
+为了应对 cert-manager 的变化，本文提供了联网升级 cert-manager、离线升级 cert-manager 和 Cert-Manager API 更改和数据迁移的操作指导。
+:::important 注意
+如果您当前正在运行版本低于 v0.11 的 cert-manger，并且想要将 Rancher 和 cert-manager 都升级到新版本，只能先卸载旧版 cert-manger 和 Rancher，然后重新安装新版 cert-manger 和 Rancher。
 
 1. 对运行 Rancher 服务器的 Kubernetes 集群进行一次性快照
 2. 卸载 Rancher，cert-manager 和 cert-manager 的 CustomResourceDefinition
 3. 安装更新版本的 Rancher 和 cert-manager
 
-原因是当 Helm 升级 Rancher 时，如果运行的 Rancher 应用程序与用于安装它的 chart 模板不匹配，它将拒绝升级并显示错误消息。因为 cert-manager 更改了它的 API 组，并且我们不能修改 Rancher 的已发布的 chart，所以 cert-manager 的 API 版本始终不匹配，因此升级将被拒绝。
+因为 Helm 升级 Rancher 时，如果运行的 Rancher 应用程序与用于安装它的 chart 模板不匹配，它将拒绝升级并显示错误消息。因为 cert-manager 更改了它的 API 组，并且我们不能修改 Rancher 的已发布的 chart，所以 cert-manager 的 API 版本始终不匹配，因此无法升级 Rancher。
 要使用 Helm 重新安装 Rancher，请在升级 Rancher 部分下选中[选项 B: 重新安装 Rancher Chart](/docs/upgrades/upgrades/ha/_index)。
 :::
 
-## 仅升级 Cert-Manager
+## 升级 Cert-Manager
 
 > **注意：**
 > 如果您没有升级 Rancher 的计划，这些说明是适用的。
@@ -135,7 +146,7 @@ Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和更新 TLS
     kubectl -n kube-system apply -R -f ./cert-manager
     ```
 
-安装了 cert-manager 之后，可以通过检查 kube-system 命名空间中运行的 Pod 来验证它是否已正确部署：
+安装了 cert-manager 后，您可以通过检查 kube-system 命名空间中运行的 Pod 来验证它是否已正确部署：
 
 ```
 kubectl get pods --namespace kube-system
@@ -148,7 +159,7 @@ cert-manager-cainjector-3ba5cd2bcd-de332x       1/1     Running     0          3
 
 如果"webhook" pod(第二行)处于 ContainerCreating 状态，则它可能仍在等待 Secret 被安装到 pod 中。等几分钟，以免发生这种情况，但是如果遇到问题，请查看 cert-manager[故障排查](https://docs.cert-manager.io/en/latest/getting-started/troubleshooting.html)指南。
 
-> **注意：** 上面的说明要求您将 disable-validation 标签添加到 kube-system 命名空间中。这里有一些额外的资源可以解释为什么这是必要的：
+> **注意：** 上面的说明要求您将 disable-validation 标签添加到 kube-system 命名空间中。这里有一些外部文档解释了该操作的必要性：
 >
 > - [关于 disable-validation 标签的信息](https://docs.cert-manager.io/en/latest/tasks/upgrading/upgrading-0.4-0.5.html?highlight=certmanager.k8s.io%2Fdisable-validation#disabling-resource-validation-on-the-cert-manager-namespace)
 > - [关于证书的 webhook 验证的信息](https://docs.cert-manager.io/en/latest/getting-started/webhook.html)
@@ -157,7 +168,7 @@ cert-manager-cainjector-3ba5cd2bcd-de332x       1/1     Running     0          3
 
 Cert-manager 已经弃用 `certificate.spec.acme.solvers` 字段，并将在即将发布的版本中完全放弃对该字段的支持。
 
-根据 cert-manager 文档，在 v0.8 中引入了配置 ACME 证书资源的新格式。具体来说，移动了 challenge solver 配置字段。从 v0.9 开始支持旧格式和新格式，但是在即将发布的 cert-manager 中将不再支持旧格式。cert-manager 文档强烈建议在升级之后将 ACME 颁发者和证书资源更新为新格式。
+根据 cert-manager 文档，在 v0.8 中引入了配置 ACME 证书资源的新格式，移动了 challenge solver 配置字段。从 v0.9 开始支持旧格式和新格式，但是在即将发布的 cert-manager 中将不再支持旧格式。强烈建议在升级 cert-manager 文档后将 ACME 颁发者和证书资源更新为新格式。
 
 有关更改和迁移说明的详细信息，请参见[cert-manager v0.7 至 v0.8 升级说明](https://cert-manager.io/docs/installation/upgrading/upgrading-0.7-0.8/)。
 
