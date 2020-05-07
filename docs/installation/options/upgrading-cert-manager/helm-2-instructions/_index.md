@@ -51,13 +51,7 @@ Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和更新 TLS
 1.  单独安装 CustomResourceDefinition 资源
 
     ```plain
-    kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.9/deploy/manifests/00-crds.yaml
-    ```
-
-1.  标记 kube-system 命名空间以禁用资源验证
-
-    ```plain
-    kubectl label namespace kube-system certmanager.k8s.io/disable-validation=true
+    kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/deploy/manifests/00-crds.yaml
     ```
 
 1.  添加 Jetstack Helm 仓库
@@ -112,7 +106,7 @@ Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和更新 TLS
 1. 下载 cert-manager 所需的 CRD 文件
 
    ```plain
-   curl -L -o cert-manager/cert-manager-crd.yaml https://raw.githubusercontent.com/jetstack/cert-manager/release-0.9/deploy/manifests/00-crds.yaml
+   curl -L -o cert-manager/cert-manager-crd.yaml https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/deploy/manifests/00-crds.yaml
    ```
 
 #### 安装 cert-manager
@@ -133,12 +127,6 @@ Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和更新 TLS
 
     ```plain
     kubectl apply -f cert-manager/cert-manager-crd.yaml
-    ```
-
-1.  标记 kube-system 命名空间以禁用资源验证
-
-    ```plain
-    kubectl label namespace kube-system certmanager.k8s.io/disable-validation=true
     ```
 
 1.  安装 cert-manager

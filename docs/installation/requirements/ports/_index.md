@@ -154,20 +154,21 @@ import PortsImportedHosted from '@theme/PortsImportedHosted';
 
 通常情况下，可以将这些端口在 Kubernetes 节点上打开，无论它是哪种类型的集群。
 
-|  协议   |    端口     | 描述                                      |
-| :-----: | :---------: | ----------------------------------------- |
-|   TCP   |     22      | 使用主机驱动通过 SSH 进行节点配置         |
-|   TCP   |    2376     | 主机驱动与 Docker 守护进程通信的 TLS 端口 |
-|   TCP   |    2379     | etcd 客户端请求                           |
-|   TCP   |    2380     | etcd 节点通信                             |
-|   UDP   |    8472     | Canal/Flannel VXLAN overlay 网络          |
-|   UDP   |    4789     | Windows 集群中 Flannel VXLAN overlay 网络 |
-|   TCP   |    9099     | Canal/Flannel 健康检查                    |
-|   TCP   |    6783     | Weave 端口                                |
-|   UDP   |  6783-6784  | Weave UDP 端口                            |
-|   TCP   |    10250    | kubelet API                               |
-|   TCP   |    10254    | Ingress controller 健康检查               |
-| TCP/UDP | 30000-32767 | NodePort 端口范围                         |
+|  协议   |    端口     | 描述                                             |
+| :-----: | :---------: | ------------------------------------------------ |
+|   TCP   |     22      | 使用主机驱动通过 SSH 进行节点配置                |
+|   TCP   |    2376     | 主机驱动与 Docker 守护进程通信的 TLS 端口        |
+|   TCP   |    2379     | etcd 客户端请求                                  |
+|   TCP   |    2380     | etcd 节点通信                                    |
+|   UDP   |    8472     | Canal/Flannel VXLAN overlay 网络                 |
+|   UDP   |    4789     | Windows 集群中 Flannel VXLAN overlay 网络        |
+|   TCP   |    9099     | Canal/Flannel 健康检查                           |
+|   TCP   |    9796     | 集群监控拉取节点指标的默认端口（仅需要内网可达） |
+|   TCP   |    6783     | Weave 端口                                       |
+|   UDP   |  6783-6784  | Weave UDP 端口                                   |
+|   TCP   |    10250    | kubelet API                                      |
+|   TCP   |    10254    | Ingress controller 健康检查                      |
+| TCP/UDP | 30000-32767 | NodePort 端口范围                                |
 
 ---
 
