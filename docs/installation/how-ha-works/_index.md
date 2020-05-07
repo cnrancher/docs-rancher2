@@ -23,7 +23,7 @@ keywords:
 
 然后使用 Helm 在 Kubernetes 集群上安装 Rancher。Helm 使用 Rancher 的 Helm chart 在 Kubernetes 集群的三个节点中的每个节点上安装 Rancher 的副本。我们建议使用负载均衡器将流量定向到集群中 Rancher 的每个副本，以提高 Rancher 的可用性。
 
-Rancher server 数据存储在 etcd 或 MySQL 中（适用于 v2.4.0 及更新版本 。etcd 数据库可以在所有三个节点上运行，并且需要奇数个节点，这样它就可以由大多数节点的选举出 etcd 集群的 leader。如果 etcd 数据库不能选出 leader，则 etcd 可能会失败，从而需要从备份中还原集群。
+Rancher server 数据存储在 etcd 或 MySQL 中（适用于 v2.4.0 及更新版本)。etcd 数据库可以在所有三个节点上运行，并且需要奇数个节点，这样它就可以由大多数节点选举出 etcd 集群的 leader。如果 etcd 数据库不能选出 leader，则 etcd 可能会失败，从而需要从备份中还原集群。
 
 有关 Rancher 如何工作的说明（与安装方法无关），请参阅[架构部分](/docs/overview/architecture)。
 
