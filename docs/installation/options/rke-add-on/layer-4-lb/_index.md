@@ -29,17 +29,17 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
 - 四层负载均衡器(TCP)
 - [具有 SSL termination(HTTPS)的 NGINX ingress 控制器](https://kubernetes.github.io/ingress-nginx/)
 
-在使用四层负载均衡器的 HA 设置中，负载均衡器通过 TCP/UDP 协议(即，传输级别)接受 Rancher 客户端连接，然后，负载均衡器将这些连接转发到各个集群节点，而不读取请求本身。由于负载均衡器无法读取其转发的数据包，因此它所能做出的路由决策是有限的。
+在使用四层负载均衡器的 HA 设置中，负载均衡器通过 TCP/UDP 协议接受 Rancher 客户端连接，然后，负载均衡器将这些连接转发到各个集群节点，而不读取请求本身。由于负载均衡器无法读取其转发的数据包，因此它所能做出的路由决策是有限的。
 
 <sup>Rancher 安装在具有四层负载均衡器的 Kubernetes 集群上，描述了在 ingress 控制器上的 SSL termination。</sup>
 
 ![Rancher HA](/img/rancher/ha/rancher2ha.svg)
 
-### 1. 提供 Linux 主机
+## 1. 提供 Linux 主机
 
-根据我们的[要求](/docs/installation/requirements/_index)配置三台 Linux 主机。
+按照[要求](/docs/installation/requirements/_index)配置三台 Linux 主机。
 
-### 2. 配置负载均衡器
+## 2. 配置负载均衡器
 
 我们将使用 NGINX 作为我们的四层负载均衡器(TCP)，NGINX 将所有连接转发到您的 Rancher 节点之一。如果要使用 Amazon NLB，则可以跳过此步骤并使用[Amazon NLB 配置](/docs/installation/options/rke-add-on/layer-4-lb/nlb/_index)。
 
@@ -48,13 +48,13 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
 >
 > 一个警告：不要将 Rancher 节点之一用作负载均衡器。
 
-#### A. 安装 NGINX
+### 2.1 安装 NGINX
 
 首先在负载均衡器主机上安装 NGINX，NGINX 为所有已知的操作系统提供了可用的安装包。有关安装 NGINX 的帮助，请参阅[安装文档](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/)。
 
 在使用官方 NGINX 软件包时，`stream`模块是必需的。请参考您的操作系统文档，了解如何在操作系统上安装和启用 NGINX `stream`模块。
 
-#### B. 创建 NGINX 配置
+### 2.2 创建 NGINX 配置
 
 安装 NGINX 后，您需要使用节点的 IP 地址更新 NGINX 配置文件`nginx.conf`。
 
@@ -103,7 +103,7 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
    # nginx -s reload
    ```
 
-#### 可选 - 将 NGINX 作为 Docker 容器运行
+### 2.3 可选 - 将 NGINX 作为 Docker 容器运行
 
 与其将 NGINX 作为包安装在操作系统上，不如将其作为 Docker 容器运行。将已编辑的**NGINX 配置示例**保存为`/etc/nginx.conf`，并运行以下命令以启动 NGINX 容器：
 
@@ -114,7 +114,7 @@ docker run -d --restart=unless-stopped \
   nginx:1.14
 ```
 
-### 3. 配置 DNS
+## 3. 配置 DNS
 
 选择要用于访问 Rancher 的完全限定域名(FQDN)(例如，`rancher.yourdomain.com`)。<br/><br/>
 
@@ -138,7 +138,7 @@ docker run -d --restart=unless-stopped \
 
 <br/>
 
-### 4. 安装 RKE
+## 4. 安装 RKE
 
 RKE(Rancher Kubernetes 引擎)是一个快速、通用的 Kubernetes 安装程序，您可以使用它在您的 Linux 主机上安装 Kubernetes。我们将使用 RKE 来设置集群并运行 Rancher。
 
@@ -150,7 +150,7 @@ RKE(Rancher Kubernetes 引擎)是一个快速、通用的 Kubernetes 安装程�
    rke --version
    ```
 
-### 5. 下载 RKE 配置文件模板
+## 5. 下载 RKE 配置文件模板
 
 RKE 使用`.yml`配置文件来安装和配置 Kubernetes 集群。根据要使用的 SSL 证书，有两种模板可供选择。
 
@@ -166,7 +166,7 @@ RKE 使用`.yml`配置文件来安装和配置 Kubernetes 集群。根据要使�
 
 2. 将文件重命名为`rancher-cluster.yml`。
 
-### 6. 配置节点
+## 6. 配置节点
 
 有了`rancher-cluster.yml`配置文件模板后，编辑节点部分以指向您的 Linux 主机。
 
@@ -203,13 +203,13 @@ RKE 使用`.yml`配置文件来安装和配置 Kubernetes 集群。根据要使�
           etcd:
             backup: false
 
-### 7. 配置证书
+## 7. 配置证书
 
 为了安全起见，使用 Rancher 时需要 SSL(Secure Sockets Layer)。SSL 保护所有 Rancher 网络通信的安全，例如在您登录集群或与集群交互时。
 
 从以下选项中选择：
 
-#### 选项 A — 使用您已有的证书：自签名
+### 7.1 — 使用您已有的证书：自签名
 
 > **先决条件：**
 > 创建一个自签名证书
@@ -258,7 +258,7 @@ RKE 使用`.yml`配置文件来安装和配置 Kubernetes 集群。根据要使�
      cacerts.pem: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUNvRENDQVlnQ0NRRHVVWjZuMEZWeU16QU5CZ2txaGtpRzl3MEJBUXNGQURBU01SQXdEZ1lEVlFRRERBZDAKWlhOMExXTmhNQjRYRFRFNE1EVXdOakl4TURRd09Wb1hEVEU0TURjd05USXhNRFF3T1Zvd0VqRVFNQTRHQTFVRQpBd3dIZEdWemRDMWpZVENDQVNJd0RRWUpLb1pJaHZjTkFRRUJCUUFEZ2dFUEFEQ0NBUW9DZ2dFQkFNQmpBS3dQCndhRUhwQTdaRW1iWWczaTNYNlppVmtGZFJGckJlTmFYTHFPL2R0RUdmWktqYUF0Wm45R1VsckQxZUlUS3UzVHgKOWlGVlV4Mmo1Z0tyWmpwWitCUnFiZ1BNbk5hS1hocmRTdDRtUUN0VFFZdGRYMVFZS0pUbWF5NU45N3FoNTZtWQprMllKRkpOWVhHWlJabkdMUXJQNk04VHZramF0ZnZOdmJ0WmtkY2orYlY3aWhXanp2d2theHRUVjZlUGxuM2p5CnJUeXBBTDliYnlVcHlad3E2MWQvb0Q4VUtwZ2lZM1dOWmN1YnNvSjhxWlRsTnN6UjVadEFJV0tjSE5ZbE93d2oKaG41RE1tSFpwZ0ZGNW14TU52akxPRUc0S0ZRU3laYlV2QzlZRUhLZTUxbGVxa1lmQmtBZWpPY002TnlWQUh1dApuay9DMHpXcGdENkIwbkVDQXdFQUFUQU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFHTCtaNkRzK2R4WTZsU2VBClZHSkMvdzE1bHJ2ZXdia1YxN3hvcmlyNEMxVURJSXB6YXdCdFJRSGdSWXVtblVqOGo4T0hFWUFDUEthR3BTVUsKRDVuVWdzV0pMUUV0TDA2eTh6M3A0MDBrSlZFZW9xZlVnYjQrK1JLRVJrWmowWXR3NEN0WHhwOVMzVkd4NmNOQQozZVlqRnRQd2hoYWVEQmdma1hXQWtISXFDcEsrN3RYem9pRGpXbi8walI2VDcrSGlaNEZjZ1AzYnd3K3NjUDIyCjlDQVZ1ZFg4TWpEQ1hTcll0Y0ZINllBanlCSTJjbDhoSkJqa2E3aERpVC9DaFlEZlFFVFZDM3crQjBDYjF1NWcKdE03Z2NGcUw4OVdhMnp5UzdNdXk5bEthUDBvTXl1Ty82Tm1wNjNsVnRHeEZKSFh4WTN6M0lycGxlbTNZQThpTwpmbmlYZXc9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
    ```
 
-#### 选项 B — 使用您已有的证书：由公认的 CA 签发
+### 7.2 — 使用您已有的证书：由公认的 CA 签发
 
 > **注意：**
 > 如果您使用的是自签名证书，[单击此处](#选项-a--使用您已有的证书：自签名)继续。
@@ -287,7 +287,7 @@ data:
   tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBdEY3WEN6TVZHaDF1aU5oWTBJZW50RVlpSVFmUUlLQkMvYUFzU3gxQUlsOWI0OUQ5ClhmanEzdWI3c3RCNnRsYTlqV09keDZkZzBnZDBCSVNCSWFlcHJWdkZNZzRTRXpjRE51aW0xZnh3aVkwZCtFRlUKTXVCc3NYZEV6V0k3ZEVvdUFjcVJjamZWL0J5WTZ4ZDdTRWhjSE5PZVdEZWI5TDFiK3hLd2k2M21uZ0lKQjdBeQpLSmRlYzhnbWlaNk4wcTV3ZXFEWDJ6QVgrbDVPTldTcG1mWUVhVHBDSnFMVTNtZFpCWWx5cnhMTytvemx0MGdLCktLbG81cGgzc05CcDFMUG5LOUMxc3MvbWZRek9EMDNzck1Xa21oTDcwQ0IxZmIydCtOWnRITW5BYmYwYkJETnoKTlNRcXU4T2cwaUxnOUVhd3l1dEF4U3BGdmhHUGMvd0dHMExWaXdJREFRQUJBb0lCQUJKYUErOHp4MVhjNEw0egpwUFd5bDdHVDRTMFRLbTNuWUdtRnZudjJBZXg5WDFBU2wzVFVPckZyTnZpK2xYMnYzYUZoSFZDUEN4N1RlMDVxClhPa2JzZnZkZG5iZFQ2RjgyMnJleVByRXNINk9TUnBWSzBmeDVaMDQwVnRFUDJCWm04eTYyNG1QZk1vbDdya2MKcm9Kd09rOEVpUHZZekpsZUd0bTAwUm1sRysyL2c0aWJsOTVmQXpyc1MvcGUyS3ZoN2NBVEtIcVh6MjlpUmZpbApiTGhBamQwcEVSMjNYU0hHR1ZqRmF3amNJK1c2L2RtbDZURDhrSzFGaUtldmJKTlREeVNXQnpPbXRTYUp1K01JCm9iUnVWWG4yZVNoamVGM1BYcHZRMWRhNXdBa0dJQWxOWjRHTG5QU2ZwVmJyU0plU3RrTGNzdEJheVlJS3BWZVgKSVVTTHM0RUNnWUVBMmNnZUE2WHh0TXdFNU5QWlNWdGhzbXRiYi9YYmtsSTdrWHlsdk5zZjFPdXRYVzkybVJneQpHcEhUQ0VubDB0Z1p3T081T1FLNjdFT3JUdDBRWStxMDJzZndwcmgwNFZEVGZhcW5QNTBxa3BmZEJLQWpmanEyCjFoZDZMd2hLeDRxSm9aelp2VkowV0lvR1ZLcjhJSjJOWGRTUVlUanZUZHhGczRTamdqNFFiaEVDZ1lFQTFBWUUKSEo3eVlza2EvS2V2OVVYbmVrSTRvMm5aYjJ1UVZXazRXSHlaY2NRN3VMQVhGY3lJcW5SZnoxczVzN3RMTzJCagozTFZNUVBzazFNY25oTTl4WE4vQ3ZDTys5b2t0RnNaMGJqWFh6NEJ5V2lFNHJPS1lhVEFwcDVsWlpUT3ZVMWNyCm05R3NwMWJoVDVZb2RaZ3IwUHQyYzR4U2krUVlEWnNFb2lFdzNkc0NnWUVBcVJLYWNweWZKSXlMZEJjZ0JycGkKQTRFalVLMWZsSjR3enNjbGFKUDVoM1NjZUFCejQzRU1YT0kvSXAwMFJsY3N6em83N3cyMmpud09mOEJSM0RBMwp6ZTRSWDIydWw4b0hGdldvdUZOTTNOZjNaNExuYXpVc0F0UGhNS2hRWGMrcEFBWGthUDJkZzZ0TU5PazFxaUNHCndvU212a1BVVE84b1ViRTB1NFZ4ZmZFQ2dZQUpPdDNROVNadUlIMFpSSitIV095enlOQTRaUEkvUkhwN0RXS1QKajVFS2Y5VnR1OVMxY1RyOTJLVVhITXlOUTNrSjg2OUZPMnMvWk85OGg5THptQ2hDTjhkOWN6enI5SnJPNUFMTApqWEtBcVFIUlpLTFgrK0ZRcXZVVlE3cTlpaHQyMEZPb3E5OE5SZDMzSGYxUzZUWDNHZ3RWQ21YSml6dDAxQ3ZHCmR4VnVnd0tCZ0M2Mlp0b0RLb3JyT2hvdTBPelprK2YwQS9rNDJBOENiL29VMGpwSzZtdmxEWmNYdUF1QVZTVXIKNXJCZjRVYmdVYndqa1ZWSFR6LzdDb1BWSjUvVUxJWk1Db1RUNFprNTZXWDk4ZE93Q3VTVFpZYnlBbDZNS1BBZApTZEpuVVIraEpnSVFDVGJ4K1dzYnh2d0FkbWErWUhtaVlPRzZhSklXMXdSd1VGOURLUEhHCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
 ```
 
-### 8. 配置 FQDN
+## 8. 配置 FQDN
 
 `<FQDN>`在配置文件中有两处引用(一个在这个步骤中，一个在下一个步骤中)。两者都需要替换为配置 DNS 中选择的 FQDN。
 
@@ -324,7 +324,7 @@ data:
 
 保存`.yml`文件并关闭它。
 
-### 9. 配置 Rancher 版本
+## 9. 配置 Rancher 版本
 
 最后一个需要替换的引用是`<RANCHER_VERSION>`，这需要替换为标记为稳定的 Rancher 版本。最新的 Rancher 稳定版本可以在[GitHub README](https://github.com/rancher/rancher/blob/master/README.md)中找到。确保版本是实际的版本号，而不是带有`stable`或`latest`这样的命名标签。下面的示例显示了配置为`v2.0.6`的版本。
 
@@ -336,11 +336,11 @@ spec:
     imagePullPolicy: Always
 ```
 
-### 10. 备份 RKE 配置文件
+## 10. 备份 RKE 配置文件
 
 关闭`.yml`文件后，将其备份到安全位置。升级 Rancher 时，可以再次使用此文件。
 
-### 11. 运行 RKE
+## 11. 运行 RKE
 
 完成所有配置后，使用 RKE 启动 Rancher。您可以通过运行`rke up`命令并使用`--config`参数指向您的配置文件来完成此操作。
 
@@ -365,22 +365,20 @@ INFO[0000] [network] Pulling image [alpine:latest] on host [1.1.1.1]
 INFO[0101] Finished building Kubernetes cluster successfully
 ```
 
-### 12. 备份自动生成的配置文件
+## 12. 备份自动生成的配置文件
 
 在安装过程中，RKE 会自动生成一个与 RKE 二进制文件位于同一目录中的名为`kube_config_rancher-cluster.yml`的配置文件。复制此文件并将其备份到安全位置，稍后在升级 Rancher Server 时将使用此文件。
 
-### 下一步是什么？
+## 后续操作
 
 您有两种选择：
 
 - 在发生灾难的情况下，为您的 Rancher Server 创建备份：[高可用性备份和恢复](/docs/installation/backups-and-restoration/ha-backup-and-restoration/_index)。
 - 创建 Kubernetes 集群：[提供 Kubernetes 集群](/docs/cluster-provisioning/_index)。
 
-<br/>
+## 常见问题和故障排查
 
-### 常见问题和故障排查
-
-#### 如何知道我的证书是不是 PEM 格式？
+### 如何知道我的证书是不是 PEM 格式？
 
 您可以通过以下特征识别 PEM 格式：
 
@@ -388,7 +386,7 @@ INFO[0101] Finished building Kubernetes cluster successfully
 - 标头后跟一长串字符。
 - 该文件以页脚结尾：`-----END CERTIFICATE-----`
 
-##### PEM 证书例子：
+#### PEM 证书例子：
 
 ```
 ----BEGIN CERTIFICATE-----
@@ -398,7 +396,7 @@ VWQqljhfacYPgp8KJUJENQ9h5hZ2nSCrI+W00Jcw4QcEdCI8HL5wmg==
 -----END CERTIFICATE-----
 ```
 
-#### 如何通过 base64 编码我的 PEM 文件？
+### 如何通过 base64 编码我的 PEM 文件？
 
 运行以下命令之一。将`FILENAME`替换为您的证书名称。
 
@@ -411,7 +409,7 @@ cat FILENAME | base64 -w0
 certutil -encode FILENAME FILENAME.base64
 ```
 
-#### 如何验证生成的证书的 base64 字符串？
+### 如何验证生成的证书的 base64 字符串？
 
 运行以下命令之一。用之前复制的 base64 字符串替换 `YOUR_BASE64_STRING`。
 
@@ -424,7 +422,7 @@ echo YOUR_BASE64_STRING | base64 -d
 certutil -decode FILENAME.base64 FILENAME.verify
 ```
 
-#### 如果我想添加中间证书，证书的顺序是什么？
+### 如果我想添加中间证书，证书的顺序是什么？
 
 添加证书的顺序如下：
 
@@ -437,7 +435,7 @@ certutil -decode FILENAME.base64 FILENAME.verify
 -----END CERTIFICATE-----
 ```
 
-#### 如何验证我的证书链？
+### 如何验证我的证书链？
 
 您可以使用 `openssl` 二进制文件来验证证书链。如果命令的输出（请参见下面的命令示例）以`Verify return code: 0 (ok)`，则您的证书链有效。`ca.pem`文件必须与您添加到`rancher/rancher`容器中的文件相同。使用由公认的证书颁发机构签名的证书时，可以省略`-CAfile`参数。
 

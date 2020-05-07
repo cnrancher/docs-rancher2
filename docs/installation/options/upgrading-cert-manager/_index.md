@@ -1,17 +1,29 @@
 ---
 title: 升级 Cert-Manager
+description: Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和更新 TLS 证书。从 2019 秋季开始，cert-manager 发生了三个重要的变化，如果你在此时间段前创建了 Rancher 高可用部署，您需要采取以下措施
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安装指南
+  - 升级 Cert-Manager
 ---
 
-Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和更新 TLS 证书。截至 2019 秋季，cert-manager 将发生三个重要的变化，如果您有一个 Rancher 高可用部署，您需要采取以下措施：
+## 概述
+
+Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和更新 TLS 证书。从 2019 秋季开始，cert-manager 发生了三个重要的变化，如果你在此时间段前创建了 Rancher 高可用部署，您需要采取以下措施：
 
 1. [从 2019 年 11 月 1 日开始，Let's Encrypt 将阻止版本低于 0.8.0 的 cert-manager 实例。](https://community.letsencrypt.org/t/blocking-old-cert-manager-versions/98753)
 1. [Cert-manager 正在弃用并替换 certificate.spec.acme.solvers 字段。](https://cert-manager.io/docs/installation/upgrading/upgrading-0.7-0.8/)此更改没有确切的截止日期。
 1. [Cert-manager 正在弃用`v1alpha1`API 并替换它的 API 组。](https://cert-manager.io/docs/installation/upgrading/upgrading-0.10-0.11/)
 
-为了解决这些变化，本指南将做两件事：
-
-1. 记录升级 cert-manager 的过程
-1. 解释 cert-manager API 的更改，并链接到 cert-manager 的官方文档以迁移数据
+为了应对 cert-manager 的变化，本文提供了联网升级 cert-manager、离线升级 cert-manager 和 Cert-Manager API 更改和数据迁移的操作指导。
 
 :::important 重要提示
 如果您当前正在运行版本低于 v0.11 的 cert-manger，并且想要将 Rancher 和 cert-manager 都升级到新版本，则需要重新安装它们：
@@ -200,7 +212,7 @@ cert-manager-cainjector-577f6d9fd7-tr77l   1/1     Running   0          2m
 cert-manager-webhook-787858fcdb-nlzsq      1/1     Running   0          2m
 ```
 
-### Cert-Manager API 更改和数据迁移
+## Cert-Manager API 更改和数据迁移
 
 Cert-manager 已经弃用 `certificate.spec.acme.solvers` 字段，并将在即将发布的版本中完全放弃对该字段的支持。
 
