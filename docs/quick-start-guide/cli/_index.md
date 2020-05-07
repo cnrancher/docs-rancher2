@@ -15,8 +15,6 @@ keywords:
   - 命令行工具
 ---
 
-从您的电脑使用命令行工具（CLI）与 Rancher 交互。
-
 ## Rancher CLI
 
 Rancher CLI(命令行界面)是一个命令行工具，可用于与 Rancher 进行交互。使用此工具，您可以用命令行而不是 GUI 来操作 Rancher，详情请参考 [Rancher 命令行工具](/docs/cli/_index)。
