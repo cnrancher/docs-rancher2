@@ -1,6 +1,6 @@
 ---
 title: 功能介绍
-description: RKE 模板旨在允许 DevOps 和安全团队标准化和简化 Kubernetes 集群的创建过程。RKE的全称是Rancher Kubernetes Engine，它是 Rancher 用来创建 Kubernetes 集群的工具。随着 Kubernetes 越来越受欢迎，管理大量较小的集群成为趋势。当您要创建多个集群时，更重要的是要对其进行统一管理。多集群管理面临着如何强制实施安全策略和附加配置的挑战，在将集群移交给最终用户之前，这些配置需要标准化。RKE 模板有助于标准化这些配置。无论集群是使用 Rancher UI、Rancher API 还是自动化流程创建的，Rancher 都将保证从 RKE 模板创建的每个集群在生成方式上是统一和一致的。
+description: RKE 的全称是Rancher Kubernetes Engine，它是 Rancher 用来创建 Kubernetes 集群的工具。RKE 集群模板制定了 DevOps 和安全团队的标准，简化了 Kubernetes 集群的创建过程。多集群管理面临着如何强制实施安全策略和附加配置的挑战，在将集群移交给最终用户之前，管理员需要标准化这些配置。RKE 集群模板提供了标准化集群配置的方式。无论是使用 Rancher UI、Rancher API 还是自动化流程创建的集群，Rancher 都将保证从 RKE 集群模板创建的每个集群在生成方式上是一致的。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -17,17 +17,17 @@ keywords:
 
 _从 Rancher v2.3.0 开始可用_
 
-RKE 模板旨在允许 DevOps 和安全团队标准化和简化 Kubernetes 集群的创建过程。
+RKE 的全称是[Rancher Kubernetes Engine](https://rancher.com/docs/rke/latest/en/)，它是 Rancher 用来创建 Kubernetes 集群的工具。RKE 集群模板制定了 DevOps 和安全团队的标准，简化了 Kubernetes 集群的创建过程。
 
-RKE 的全称是[Rancher Kubernetes Engine](https://rancher.com/docs/rke/latest/en/)，它是 Rancher 用来创建 Kubernetes 集群的工具。
+多集群管理面临着如何强制实施安全策略和附加配置的挑战，在将集群移交给最终用户之前，管理员需要标准化这些配置。RKE 集群模板提供了标准化集群配置的方式。无论是使用 Rancher UI、Rancher API 还是自动化流程创建的集群，Rancher 都将保证从 RKE 集群模板创建的每个集群在生成方式上是一致的。
 
-随着 Kubernetes 越来越受欢迎，管理大量较小的集群成为趋势。当您要创建多个集群时，更重要的是要对其进行统一管理。多集群管理面临着如何强制实施安全策略和附加配置的挑战，在将集群移交给最终用户之前，这些配置需要标准化。
+配置 RKE 集群模板时，管理员具有以下权限：
 
-RKE 模板有助于标准化这些配置。无论集群是使用 Rancher UI、Rancher API 还是自动化流程创建的，Rancher 都将保证从 RKE 模板创建的每个集群在生成方式上是统一和一致的。
+- 决定用户可以修改的和不可修改的集群选项。
+- 指定的用户是否可以与其他用户或和用户组共享 RKE 集群模板。
+- 为不同的用户组创建 RKE 集群模板。
 
-管理员控制最终用户可以更改哪些集群选项。RKE 模板也可以与指定的用户和组共享，因此管理员可以为不同的用户组创建不同的 RKE 模板。
-
-如果集群是使用 RKE 模板创建的，则不能将其更改为其他 RKE 模板。您只能将集群更新为同一模板的新版本。
+集群和模板之间存在多对一的关系，用户可以使用一个模板创建多个集群，而每个集群有且只有一个对应的模板。确认使用的模板后，无法修改。例如，“集群 A”是用户使用“模板 a”创建的，那么在编辑集群时，用户不能将集群 A”对应的“模板 a”，修改为其他模板。管理员可以通过编辑集群模板的方式更新集群模板，应用该模板创建的集群就会自动适配新模板的参数。
 
 从 Rancher v2.3.3 开始，您可以[将现有集群的配置另存为 RKE 模板](/docs/admin-settings/rke-templates/applying-templates/_index)。只有在更新模板后，才能更改集群的设置。新模板也可以用于启动新集群。
 
@@ -62,7 +62,7 @@ Rancher 创建的集群支持 RKE 模板。模板可用于创建 RKE 集群（�
 
 RKE 模板用于定义 Kubernetes 和 Rancher 设置。节点模板负责配置节点。有关如何将 RKE 模板与硬件结合使用的参考，请参阅 [RKE 模板和硬件](/docs/admin-settings/rke-templates/rke-templates-and-hardware/_index)。
 
-可以从头开始创建 RKE 模板来预先定义集群配置。它们可以用于启动新集群，也可以从现有的 RKE 集群导出模板。  
+可以从头开始创建 RKE 模板来预先定义集群配置。它们可以用于启动新集群，也可以从现有的 RKE 集群导出模板。
 
 从 v2.3.3 开始，现有 RKE 集群的设置可以[保存为 RKE 模板](/docs/admin-settings/rke-templates/applying-templates/_index)。这将创建新的模板并将集群设置绑定到该模板。因此，只有通过更新[模板](/docs/admin-settings/rke-templates/creating-and-revising/_index)并且将这个集群[升级到新版本的模板](/docs/admin-settings/rke-templates/creating-and-revising/_index)，才能编辑这个集群。
 
