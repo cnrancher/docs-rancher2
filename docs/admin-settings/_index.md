@@ -87,7 +87,7 @@ _v2.3.0 版本可用_
 
 Kubernetes 的版本更新速度比 Rancher 快，在 Rancher 大版本的周期内（如 v2.3.0~v2.3.7），Kubernetes 可能会发布包括补丁版和正式版在内的多个的版本；而且 Kubernetes 倾向于在正式版本之间添加和删除 API 接口，这就造成了 Kubernetes 升级正式版本后，新旧 API 接口对应不上，调用 API 返回异常失等问题。
 
-RKE 元数据功能允许用户在升级 Kubernetes 版本的同时，保持 Rancher 的版本不变，您可以轻松升级 Kubernetes 的补丁版本（例如：`v1.15.X`)，而不需要不升级 Kubernetes 的正式版本(例如：`v1.X.0`)。
+RKE 元数据功能允许用户在获取新的可用 Kubernetes 版本的同时，保持 Rancher 的版本不变，您可以轻松升级 Kubernetes 的补丁版本（例如：`v1.15.X`)，而不需要不升级 Kubernetes 的正式版本(例如：`v1.X.0`)。
 
 Rancher 用于配置[RKE 集群](/docs/cluster-provisioning/rke-clusters/_index)的信息位于 Rancher Kubernetes 元数据中。有关元数据配置和如何更改用于配置 RKE 集群的 Kubernetes 版本的详细信息，请参考[获取新的 Kubernetes 版本](/docs/admin-settings/k8s-metadata/_index)。
 
