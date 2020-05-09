@@ -166,3 +166,141 @@ Rancher 需要访问您的 AWS 帐户，以便在 Amazon EKS 中创建和管理�
 ## 教程
 
 AWS 开源博客上的这篇[教程](https://aws.amazon.com/blogs/opensource/managing-eks-clusters-rancher/)将指导您如何使用 Rancher 设置一个 EKS 集群，并部署一个可公开访问的应用程序来测试集群。并部署一个通过使用其他开源软件如 Grafana 和 influxdb 来实时监控地理信息的示例项目。
+
+## 附录 - 最小 EKS 权限
+
+此文档描述了在使用 Rancher 中的 EKS 驱动时，所需要的最小权限。
+
+因为很多要创建的资源的 ARN（Amazon 资源名称）不能在创建 EKS 集群之前确定，所以需要使用`*`来表示目标资源。某些权限（例如 `ec2：CreateVpc`）仅在 Rancher 需要创建这些资源的时候使用。
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "EC2Permisssions",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:DeleteSubnet",
+        "ec2:CreateKeyPair",
+        "ec2:AttachInternetGateway",
+        "ec2:ReplaceRoute",
+        "ec2:DeleteRouteTable",
+        "ec2:AssociateRouteTable",
+        "ec2:DescribeInternetGateways",
+        "ec2:CreateRoute",
+        "ec2:CreateInternetGateway",
+        "ec2:RevokeSecurityGroupEgress",
+        "ec2:DescribeAccountAttributes",
+        "ec2:DeleteInternetGateway",
+        "ec2:DescribeKeyPairs",
+        "ec2:CreateTags",
+        "ec2:CreateRouteTable",
+        "ec2:DescribeRouteTables",
+        "ec2:DetachInternetGateway",
+        "ec2:DisassociateRouteTable",
+        "ec2:RevokeSecurityGroupIngress",
+        "ec2:DeleteVpc",
+        "ec2:CreateSubnet",
+        "ec2:DescribeSubnets",
+        "ec2:DeleteKeyPair",
+        "ec2:DeleteTags",
+        "ec2:CreateVpc",
+        "ec2:DescribeAvailabilityZones",
+        "ec2:CreateSecurityGroup",
+        "ec2:ModifyVpcAttribute",
+        "ec2:AuthorizeSecurityGroupEgress",
+        "ec2:DescribeTags",
+        "ec2:DeleteRoute",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeImages",
+        "ec2:DescribeVpcs",
+        "ec2:DeleteSecurityGroup"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "EKSPermissions",
+      "Effect": "Allow",
+      "Action": [
+        "eks:DeleteFargateProfile",
+        "eks:DescribeFargateProfile",
+        "eks:ListTagsForResource",
+        "eks:UpdateClusterConfig",
+        "eks:DescribeNodegroup",
+        "eks:ListNodegroups",
+        "eks:DeleteCluster",
+        "eks:CreateFargateProfile",
+        "eks:DeleteNodegroup",
+        "eks:UpdateNodegroupConfig",
+        "eks:DescribeCluster",
+        "eks:ListClusters",
+        "eks:UpdateClusterVersion",
+        "eks:UpdateNodegroupVersion",
+        "eks:ListUpdates",
+        "eks:CreateCluster",
+        "eks:UntagResource",
+        "eks:CreateNodegroup",
+        "eks:ListFargateProfiles",
+        "eks:DescribeUpdate",
+        "eks:TagResource"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "IAMPermissions",
+      "Effect": "Allow",
+      "Action": [
+        "iam:ListRoleTags",
+        "iam:RemoveRoleFromInstanceProfile",
+        "iam:CreateRole",
+        "iam:AttachRolePolicy",
+        "iam:AddRoleToInstanceProfile",
+        "iam:DetachRolePolicy",
+        "iam:GetRole",
+        "iam:DeleteRole",
+        "iam:CreateInstanceProfile",
+        "iam:ListInstanceProfilesForRole",
+        "iam:PassRole",
+        "iam:GetInstanceProfile",
+        "iam:ListRoles",
+        "iam:ListInstanceProfiles",
+        "iam:DeleteInstanceProfile"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "CloudFormationPermisssions",
+      "Effect": "Allow",
+      "Action": [
+        "cloudformation:DescribeStackResource",
+        "cloudformation:ListStackResources",
+        "cloudformation:DescribeStackResources",
+        "cloudformation:DescribeStacks",
+        "cloudformation:ListStacks",
+        "cloudformation:CreateStack"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "AutoScalingPermissions",
+      "Effect": "Allow",
+      "Action": [
+        "autoscaling:DescribeAutoScalingGroups",
+        "autoscaling:UpdateAutoScalingGroup",
+        "autoscaling:TerminateInstanceInAutoScalingGroup",
+        "autoscaling:CreateOrUpdateTags",
+        "autoscaling:DeleteAutoScalingGroup",
+        "autoscaling:CreateAutoScalingGroup",
+        "autoscaling:DescribeAutoScalingInstances",
+        "autoscaling:DescribeLaunchConfigurations",
+        "autoscaling:DescribeScalingActivities",
+        "autoscaling:CreateLaunchConfiguration",
+        "autoscaling:DeleteLaunchConfiguration"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+```

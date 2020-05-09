@@ -36,6 +36,8 @@ _自 v2.2.0 起可用_
 
 作为[系统管理员](/docs/admin-settings/rbac/global-permissions/_index)或[集群所有者](/docs/admin-settings/rbac/cluster-project-roles/_index)，您可以通过配置来监控您的 Kubernetes 集群。
 
+> **先决条件：** 如果需要启用 node-exporter 的话，请确保放行在内网中每个节点的 9796 端口的流量，因为 Prometheus 将从此处抓取节点指标。
+
 1. 在**全局**页面中导航到您想要配置的集群。
 1. 在导航栏中下拉**工具**，选择**监控**。
 1. 查看[资源消耗建议](#资源消耗)，以确保您有足够的资源用于 Prometheus 及其相关组件。根据需要，配置 [Prometheus 选项](/docs/cluster-admin/tools/monitoring/prometheus/_index)。
