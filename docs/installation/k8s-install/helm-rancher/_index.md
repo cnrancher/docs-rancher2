@@ -249,7 +249,7 @@ Rancher Chart 有许多自定义安装选项以适应特定的环境。以下是
 
 有关选项的完整列表，请参见[Chart 选项](/docs/installation/options/chart-options/_index)。
 
-### 7、验证 Rancher Server 是否已成功部署
+## 7、验证 Rancher Server 是否已成功部署
 
 检查 Rancher Server 是否运行成功：
 

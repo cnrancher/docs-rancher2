@@ -137,9 +137,7 @@ import PortsIaasNodes from '@theme/PortsIaasNodes';
 
 ### 托管 Kubernetes 集群的端口要求
 
-如果您使用服务商托管的 Kubernetes（如 Google Kubernetes Engine、Amazon 或 Azure Kubernetes 服务）启动集群，请参阅这些端口要求。
-
-下表描述了[托管的 Kubernetes 集群](/docs/cluster-provisioning/hosted-kubernetes-clusters/_index)中节点的端口要求。
+如果您使用服务商[托管的 Kubernetes 集群](/docs/cluster-provisioning/hosted-kubernetes-clusters/_index)，例如（如 Google Kubernetes Engine、Amazon 或 Azure Kubernetes 服务）启动集群，请参阅这些端口要求。
 
 import PortsImportedHosted from '@theme/PortsImportedHosted';
 

@@ -24,7 +24,7 @@ Kubernetes 通过**四层负载均衡**和**七层负载均衡**两种方式支�
 
 大部分云服务供应商都支持第四层负载均衡器，但是裸金属服务器和 VSphere 并不支持第四层负载均衡器。您可以通过配置[全局的配置映射](https://kubernetes.github.io/ingress-nginx/user-guide/exposing-tcp-udp-services/)，在 NGINX 或第三方入口上公开集群内的服务。
 
-> **注意：** 可以在集群中部署第三负载均衡器（例如 [MetalLB](https://metallb.universe.tf/)）。但是相对云提供商所支持的四层负载均衡器，它部署起来更复杂，并且不能在 Rancher 或 RKE 中进行配置。
+> **注意：** 可以在集群中部署非云供应商的负载均衡器（例如 [MetalLB](https://metallb.universe.tf/)）。但是相对云提供商所支持的四层负载均衡器，它部署起来更复杂，并且不能在 Rancher 或 RKE 中进行配置。
 
 ## 不同的云服务供应商支持哪些四层负载均衡
 
