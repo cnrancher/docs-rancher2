@@ -22,7 +22,7 @@ keywords:
 Istio 中流量管理的主要优势在于它允许动态请求路由。动态请求路由的一些常见应用包括金丝雀部署和蓝/绿部署。Istio 流量管理中的两个关键资源是*虚拟服务（virtual services）*和*目标规则（destination rules）*。
 
 - [虚拟服务](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/)拦截流量并将其定向到您的 Kubernetes 服务，从而使您可以将流量百分比从请求分配到其他服务。您可以使用它们来定义一组路由规则，以在寻址主机时应用。
-- [目标规则](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/)可以作为有关哪些服务版本可用于接收虚拟服务流量的唯一来源。您可以使用这些资源来定义策略，该策略适用于路由发生后用于服务的流量。
+- [目标规则](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/)可以作为有关哪些服务版本可用于接收虚拟服务流量的唯一来源。您可以使用这些资源来定义策略，该策略适用于路由发生后的服务流量。
 
 本节介绍如何在示例 BookInfo 应用中添加与`reviews`微服务相对应的示例虚拟服务。该服务的目的是在两个版本的`reviews`服务之间分配流量。
 
