@@ -15,7 +15,7 @@ keywords:
   - Rancher 2 常见问题
 ---
 
-本章 FAQ 将回答用户关于 Rancher v2.x 常见的问题，我们将保持持续更新。
+本文罗列了用户在使用 Rancher 的过程中出现的常见问题，我们会持续更新常见问题。
 
 关于常见的技术问题，请参阅[常见的技术问题](/docs/faq/technical/_index)。
 

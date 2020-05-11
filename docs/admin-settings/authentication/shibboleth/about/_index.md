@@ -20,8 +20,6 @@ keywords:
 
 _自 Rancher v2.4 起可用_
 
-该页面为打算在 Rancher 中设置 Shibboleth 身份验证提供者的 Rancher 用户提供背景信息和上下文。
-
 由于 Shibboleth 是 SAML 提供者，因此它不支持搜索用户组的功能。 Shibboleth 集成可以验证用户凭据，但是如果没有其他配置，则不能在 Rancher 中给用户组分配权限。
 
 解决此问题的一种方法是配置 OpenLDAP 身份提供者。使用 Shibboleth 的 OpenLDAP 后端，您将能够在 Rancher UI 中搜索用户组，并将资源分配给用户组，例如集群，项目或命名空间。
