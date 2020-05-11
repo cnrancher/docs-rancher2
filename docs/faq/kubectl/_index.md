@@ -15,7 +15,7 @@ keywords:
   - 安装和配置 kubectl
 ---
 
-`kubectl`是一个对 Kubernetes 运行命令的 CLI 命令行工具。您将在 Rancher 2.x 的诸多运维和管理任务上需要使用它。
+`kubectl`是一个对 Kubernetes 运行命令的 CLI 命令行工具。您将在 Rancher 2.x 的诸多运维和管理任务上使用 kubectl。
 
 ## 安装
 

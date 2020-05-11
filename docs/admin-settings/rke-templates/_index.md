@@ -34,7 +34,7 @@ RKE 的全称是[Rancher Kubernetes Engine](https://rancher.com/docs/rke/latest/
 RKE 模板的核心功能使 DevOps 和安全团队能够：
 
 - 标准化集群配置，并确保按照最佳实践来创建 RKE 集群
-- 配置集群时，防止技术水平较低的用户做出不明智的选择
+- 配置集群时，防止用户做出不明智的选择
 - 与不同的用户和组共享不同的模板
 - 将模板的所有权委托给受信任的用户进行更改
 - 控制哪些用户可以创建模板
@@ -124,7 +124,7 @@ RKE 文档还有[带有注释的](https://rancher.com/docs/rke/latest/en/example
 
 有关可用的全部选项，请参阅[集群配置](https://rancher.com/docs/rke/latest/en/config-options/)上的 RKE 文档。
 
-#### 插件
+## 插件
 
 RKE 模板配置文件的插件部分的工作方式与[集群配置文件的插件部分](https://rancher.com/docs/rke/latest/en/config-options/add-ons/)相同。
 

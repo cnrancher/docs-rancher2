@@ -93,4 +93,6 @@ keywords:
 
 **结果：** 您已将 Rancher 添加为依赖的信任方。现在，您可以配置 Rancher 以使用 AD FS。
 
-## [下一步：配置 Rancher 使用 AD FS](/docs/admin-settings/authentication/microsoft-adfs/rancher-adfs-setup/_index)
+## 后续操作
+
+[配置 Rancher 使用 AD FS](/docs/admin-settings/authentication/microsoft-adfs/rancher-adfs-setup/_index)

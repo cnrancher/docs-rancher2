@@ -19,7 +19,7 @@ keywords:
 
 ## Kubernetes
 
-**如何理解说 Rancher v2.x 是运行在 Kubernetes 之上的？**
+**如何理解“Rancher v2.x 是运行在 Kubernetes 之上的”？**
 
 Rancher v2.x 是一个百分百运行在 Kubernetes 之上的容器管理平台。它是通过 Kubernetes 自定义资源和控制器框架实现的。所有的特性都通过自定义资源定义 CRD 进行编写，并利用了 Kubernetes 原生功能如 RBAC 等。
 

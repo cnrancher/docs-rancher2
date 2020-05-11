@@ -16,13 +16,9 @@ keywords:
   - 使用模板
 ---
 
-您可以从创建的 RKE 模板或已[与您共享的模板](/docs/admin-settings/rke-templates/template-access-and-sharing/_index)创建集群。
+创建 RKE 集群时，您可以使用自己创建的 RKE 模板或已[共享的模板](/docs/admin-settings/rke-templates/template-access-and-sharing/_index)创建集群。
 
-RKE 模板可以应用于新的集群。
-
-从 Rancher v2.3.3 开始，您可以[将现有集群的配置保存为 RKE 模板](#将现有集群转换为使用-rke-模板)，然后只有更新模板时才能更改集群的设置。
-
-不能将集群更改为使用其他 RKE 模板。只能将集群更新为同一模板的新版本。
+从 Rancher v2.3.3 开始，您可以[将现有集群的配置保存为 RKE 模板](#将现有集群转换为使用-rke-模板)，只有更新模板时才能更改集群的设置。使用模板创建集群后，只能将集群更新为同一模板的新版本，不能将集群更改为使用其他 RKE 模板。
 
 ## 从 RKE 模板创建集群
 
@@ -53,8 +49,6 @@ RKE 模板可以应用于新的集群。
 
 _从 v2.3.3 开始可用_
 
-本节介绍如何从现有集群创建 RKE 模板。
-
 RKE 模板不能应用于现有集群，除非将现有集群的设置保存为 RKE 模板。这会将集群的设置导出为新的 RKE 模板，并将集群绑定到该模板。结果是，只有更新模板并将集群升级到新版本的模板时，才能更改集群。
 
 要将现有集群转换为使用 RKE 模板，
@@ -67,4 +61,4 @@ RKE 模板不能应用于现有集群，除非将现有集群的设置保存为 
 
 - 将创建一个新的 RKE 模板。
 - 将转换集群以使用新模板。
-- 可以[从新模板创建新集群](/docs/admin-settings/rke-templates/applying-templates/_index)
+- 可以[从新模板创建新集群](/docs/admin-settings/rke-templates/applying-templates/_index)。

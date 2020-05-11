@@ -17,7 +17,7 @@ keywords:
 
 _从 2.3.0 版起可用_
 
-RKE 元数据功能允许您在发布新版本的 Kubernetes 后立即为集群配置它们，而无需升级 Rancher。此功能对于使用 Kubernetes 的补丁版本非常有用，例如，如果您希望在仅支持 Kubernetes v1.14.6 的 Rancher Server 版本中，将业务集群升级到 Kubernetes v1.14.7。
+RKE 元数据功能允许您在发布新版本的 Kubernetes 后，无需升级 Rancher，立即为集群配置元数据。此功能对于使用 Kubernetes 的补丁版本非常有用，例如，如果您希望在仅支持 Kubernetes v1.14.6 的 Rancher Server 版本中，将业务集群升级到 Kubernetes v1.14.7。
 
 > **注意：** Kubernetes API 可能在次要版本之间发生变化。因此，我们不支持获取 Kubernetes 次要版本，例如在 Rancher Server 当前仅支持 v1.14。如果想要使用 Kubernetes v1.15。您需要升级 Rancher Server 以添加对新的次要 Kubernetes 版本的支持。
 
@@ -28,7 +28,7 @@ Rancher 的 Kubernetes 元数据包含了 Rancher 配置 [RKE 集群](/docs/clus
 > **注意：** 只有管理员可以编辑元数据 CRD。除非明确需要，否则建议不要更新现有对象。
 
 | 资源     | 描述                                                                                                                 | RancherAPI URL                                 |
-| -------- | -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| :------- | :------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------- |
 | 系统镜像 | 用于通过 RKE 部署 Kubernetes 集群的系统镜像列表。                                                                    | `<RANCHER_SERVER_URL>/v3/rkek8ssystemimages`   |
 | 服务选项 | 传递给 Kubernetes 组件的默认参数，如`kube-api`、`scheduler`、`kubelet`、`kube-proxy`和`kube-controller-manager`等    | `<RANCHER_SERVER_URL>/v3/rkek8sserviceoptions` |
 | 插件模板 | 用于部署插件组件的 YAML 定义，如 Canal、Calico、Flannel、Weave、Kube-dns、CoreDNS、`metrics-server`、`nginx-ingress` | `<RANCHER_SERVER_URL>/v3/rkeaddons`            |
@@ -65,8 +65,6 @@ values={[
 
 <TabItem value="new">
 
-要在 Rancher 中编辑元数据配置，
-
 1. 转到**全局**视图并单击**系统设置**选项卡。
 1. 转到**rke-metadata-config**部分。单击**省略号(…)**并单击**升级**
 1. 您可以选择填写以下参数：
@@ -81,8 +79,6 @@ values={[
 </TabItem>
 
 <TabItem value="old">
-
-要在 Rancher 中编辑元数据配置，
 
 1. 转到**全局**视图并单击**系统设置**选项卡。
 1. 转到**rke-metadata-config**部分。单击**省略号(…)**并单击**升级**
