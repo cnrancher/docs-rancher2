@@ -1,5 +1,5 @@
 ---
-title: 替换证书
+title: 轮换证书
 description: 默认情况下，Kubernetes 集群所需要的证书由 Rancher 生成，如果出现证书过期，或证书泄露等情况，则需要使用新的证书替换掉有问题的证书。替换证书后，Kubernetes 组件将自动重新启动。
 keywords:
   - rancher 2.0中文文档
@@ -47,7 +47,7 @@ Rancher 启动的 Kubernetes 集群（RKE 集群）能够通过 UI 替换自动�
 
 4. 单击**保存**。
 
-**结果：**所选证书将被替换，相关服务将重新启动以开始使用新证书。
+**结果：**所选证书将被轮换，相关服务将重新启动以开始使用新证书。
 
 > **注意：** 尽管 RKE CLI 可以为 Kubernetes 集群组件使用自定义证书，但目前 Rancher 不支持在 Rancher UI 中创建 RKE 集群时上传这些证书。
 
