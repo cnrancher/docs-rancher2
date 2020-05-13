@@ -92,7 +92,7 @@ keywords:
 > **注意：**
 >
 > - 上面列出的每个权限都包含多个未在 Rancher UI 中列出的单独权限。有关这些权限及其所包含规则的完整列表，请通过 API `/v3/globalRoles` 进行查看。
-> - 查看与 Rancher 创建的默认角色相关的资源时，如果在一行上有多个 Kubernetes API 资源，则该资源将带有**(Custom)**标示。这些不是自定义资源，仅表示把多个 Kubernetes API 资源作为一种资源。
+> - 查看与 Rancher 创建的默认角色相关的资源时，如果在一行上有多个 Kubernetes API 资源，则该资源将带有**(Custom)**标识。这些不是自定义资源，仅表示把多个 Kubernetes API 资源作为一种资源。
 
 ### 配置默认的全局权限
 

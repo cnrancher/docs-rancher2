@@ -15,7 +15,7 @@ keywords:
   - 单节点回滚
 ---
 
-如果 Rancher 升级未成功完成，则必须回滚到[升级 Rancher 单节点](/docs/upgrades/upgrades/single-node/_index)之前使用的 Rancher 部署。回滚还原：
+如果 Rancher 升级未成功完成，则必须回滚到[升级 Rancher 单节点](/docs/upgrades/upgrades/single-node/_index)之前使用的 Rancher 版本及设置。回滚还原：
 
 - 您之前的 Rancher 版本。
 - 升级前已创建数据备份。
@@ -32,7 +32,7 @@ docker pull rancher/rancher:<PRIOR_RANCHER_VERSION>
 
 请交叉参考下面的图片和参考表，以了解如何获取此占位符数据。在开始以回滚之前，写下或复制此信息。
 
-<sup>终端 “docker ps” 命令，显示在何处找到 {`<PRIOR_RANCHER_VERSION>`} 和 {`<RANCHER_CONTAINER_NAME>`} </sup>
+终端 `docker ps` 命令，显示在何处找到 `<PRIOR_RANCHER_VERSION>` 和 `<RANCHER_CONTAINER_NAME>`
 
 ![占位符参考](/img/rancher/placeholder-ref-2.png)
 
@@ -47,7 +47,7 @@ docker pull rancher/rancher:<PRIOR_RANCHER_VERSION>
 
 ## 回滚 Rancher
 
-如果您在升级 Rancher 时遇到问题，需要拉取之前正常版本的镜像，并且还原在升级前所做的备份，从而将 Rancher 恢复到之前工作的状态。
+如果您在升级 Rancher 时遇到问题，需要拉取之前正常版本的镜像，并且还原在升级前所做的备份，从而将 Rancher 回滚到之前正常工作的状态。
 
 :::important 警告！
 回滚到 Rancher 的先前版本会破坏您在升级后对 Rancher 所做的任何更改。可能会发生不可恢复的数据丢失。
@@ -71,7 +71,7 @@ docker pull rancher/rancher:<PRIOR_RANCHER_VERSION>
 
    您可以通过输入`docker ps`获得 Rancher 容器的名称。
 
-1. 将在[升级单节点 Rancher](/docs/upgrades/upgrades/single-node/_index)时生成的备份压缩包移动到 Rancher 服务器上。转到您将其移动到的目录。输入`ls`确认它在那里。
+1. 将在[升级单节点 Rancher](/docs/upgrades/upgrades/single-node/_index)时生成的备份压缩包移动到 Rancher 服务器上。切换到您将其移动到的目录。输入`ls`确认它在那里。
 
    如果您遵循了我们在[升级单节点 Rancher](/docs/upgrades/upgrades/single-node/_index)中建议的命名约定，则其命名类似于(`rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz`)。
 

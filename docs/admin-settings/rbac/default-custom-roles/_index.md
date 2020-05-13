@@ -52,7 +52,7 @@ Rancher 提供了一组开箱即用的默认用户角色，您也可以创建默
 
 6. 使用**资源授权**选项将单个[Kubernetes API 资源](https://kubernetes.io/docs/reference/)分配给角色。
 
-   > 查看与 Rancher 创建的默认角色相关的资源时，如果在一行上有多个 Kubernetes API 资源，则该资源将带有**(Custom)**标示。这些不是自定义资源，仅表示把多个 Kubernetes API 资源作为一种资源。
+   > 查看与 Rancher 创建的默认角色相关的资源时，如果在一行上有多个 Kubernetes API 资源，则该资源将带有**(Custom)**标识。这些不是自定义资源，仅表示把多个 Kubernetes API 资源作为一种资源。
 
    您还可以给每个资源设置单独的 cURL 方法(**Create**，**Delete**，**Get**等)。
 
@@ -82,7 +82,7 @@ Rancher 提供了一组开箱即用的默认用户角色，您也可以创建默
 
 6. 使用**资源授权**选项将单个 [Kubernetes API 资源](https://kubernetes.io/docs/reference/)分配给角色。
 
-   > 查看与 Rancher 创建的默认角色相关的资源时，如果在一行上有多个 Kubernetes API 资源，则该资源将带有**(Custom)**标示。这些不是自定义资源，仅表示把多个 Kubernetes API 资源作为一种资源。
+   > 查看与 Rancher 创建的默认角色相关的资源时，如果在一行上有多个 Kubernetes API 资源，则该资源将带有**(Custom)**标识。这些不是自定义资源，仅表示把多个 Kubernetes API 资源作为一种资源。
 
    您还可以给每个资源设置单独的 cURL 方法(**Create**，**Delete**，**Get**等)。
 
