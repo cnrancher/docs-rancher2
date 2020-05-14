@@ -18,3 +18,4 @@ keywords:
 关于网络的常见问题
 
 - [CNI 网络插件](/docs/faq/networking/cni-providers/_index)
+- [Canal网络驱动下，Pod MTU值大于主机flannel.1MTU值](/docs/faq/networking/mtu/_index)
