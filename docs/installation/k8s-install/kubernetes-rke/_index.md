@@ -90,7 +90,7 @@ sudo k3s kubectl get pods --all-namespaces
 要使用此`kubeconfig`文件，
 
 1. 安装 Kubernetes 命令行工具[kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl)。
-2. 将文件`/etc/rancher/k3s/k3s.yaml`复制并保存到本地计算机上的目录`~/.kube/config`中。
+2. 将文件`/etc/rancher/k3s/k3s.yaml`复制并保存到本地计算机上的`~/.kube/config`文件中。
 3. 在这个 `kubeconfig` 文件中，`server`参数为 `localhost`。您需要手动更改这个地址为负载均衡器的 DNS，并且指定端口 6443。（Kubernetes API Server 的端口为 6443，Rancher Server 的端口为 80 和 443。）以下是一个示例`k3s.yaml`：
 
 :::important 注意
