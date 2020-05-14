@@ -20,20 +20,16 @@ keywords:
 
 _从 v2.3.0 版本开始支持_
 
-本节介绍了集群中 Istio 组件的最低推荐计算资源。
+## 概述
 
-每个组件的 CPU 和内存分配都是 [可配置的](#configuring-resource-allocations)。
-
-启用 Istio 之前，建议您确认 Rancher worker 节点具有足够的 CPU 和内存来运行 Istio 的所有组件。
-
-> **提示：** 在较大型的部署中，强烈建议通过为每个 Istio 组件添加节点选择器，将基础结构放置在集群中的专用节点上。
-
-下表汇总了建议的最低资源要求以及每个 Istio 核心组件的 CPU 和内存限制。
+本节介绍了集群中 Istio 组件的最低推荐计算资源。每个组件的 CPU 和内存分配都是可调整的。启用 Istio 之前，建议您确认 Rancher worker 节点具是否有足够的 CPU 和内存资源，运行 Istio 的所有组件。在较大型的部署中，我们建议通过为每个 Istio 组件添加节点选择器，将基础结构放置在集群中的专用节点上。
 
 在 Kubernetes 中，资源请求意味着除非该节点至少具有指定数量的可用内存和 CPU，否则不会在该节点上部署工作负载。如果工作负载超过 CPU 或内存的限制，则可以终止该工作负载或将其从节点中逐出。有关管理容器资源限制的更多信息，请参考 [Kubernetes 文档](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/)。
 
+下表汇总了建议的最低资源要求以及每个 Istio 核心组件的 CPU 和内存限制。
+
 | 工作负载        | 容器       | CPU - 请求 | Mem - 请求 | CPU - 限制  | Mem - 限制   | 是否可配置 |
-| --------------- | ---------- | ---------- | ---------- | ----------- | ------------ | ---------- |
+| :-------------- | :--------- | :--------- | :--------- | :---------- | :----------- | :--------- |
 | istio-pilot     | discovery  | 500m       | 2048Mi     | 1000m       | 4096Mi       | 是         |
 | istio-telemetry | mixer      | 1000m      | 1024Mi     | 4800m       | 4096Mi       | 是         |
 | istio-policy    | mixer      | 1000m      | 1024Mi     | 4800m       | 4096Mi       | 是         |
@@ -43,7 +39,7 @@ _从 v2.3.0 版本开始支持_
 | Others          | -          | 500m       | 500Mi      | -           | -            | 否         |
 | **Total**       | **-**      | **3950m**  | **5546Mi** | **>12300m** | **>14848Mi** | **-**      |
 
-## 配置资源分配
+## 操作步骤
 
 您可以为每种 Istio 组件类型分别配置资源分配。本节包括每个组件的默认资源分配。
 
@@ -60,7 +56,7 @@ _从 v2.3.0 版本开始支持_
 
 **结果：** Istio 组件的资源分配已更新。
 
-### Pilot
+## Pilot
 
 [Pilot](https://istio.io/docs/ops/deployment/architecture/#pilot) 组件提供以下功能：
 
@@ -72,7 +68,7 @@ _从 v2.3.0 版本开始支持_
 有关 Pilot 组件的更多信息，请参阅[文档](https://istio.io/docs/concepts/traffic-management/#pilot-and-envoy).
 
 | 选项              | 描述                                                                                                 | 是否必填项 | 默认值 |
-| ----------------- | ---------------------------------------------------------------------------------------------------- | ---------- | ------ |
+| :---------------- | :--------------------------------------------------------------------------------------------------- | :--------- | :----- |
 | Pilot CPU 限制    | Istio-pilot pod 的 CPU 资源限制。                                                                    | 是         | 1000   |
 | Pilot CPU 预留    | Istio-pilot pod 的 CPU 资源预留。                                                                    | 是         | 500    |
 | Pilot Memory 限制 | Istio-pilot pod 的内存资源限制。                                                                     | 是         | 4096   |
@@ -80,14 +76,14 @@ _从 v2.3.0 版本开始支持_
 | 跟踪抽样比例      | [跟踪抽样的比例](https://istio.io/docs/tasks/telemetry/distributed-tracing/overview/#trace-sampling) | 是         | 1      |
 | Pilot 结点选择器  | 能够选择将 istio-pilot pod 部署到的节点。要使用此选项，节点必须带有对应标签。                        | 否         | n/a    |
 
-### Mixer
+## Mixer
 
 [Mixer](https://istio.io/docs/ops/deployment/architecture/#mixer) 组件跨服务网格实施访问控制和使用策略。它还与用于监视工具（例如 Prometheus）的插件集成。Envoy sidecar 将遥测数据和监视数据传递给 Mixer，而 Mixer 将监视数据传递给 Prometheus。
 
 有关 Mixer，策略和遥测的更多信息，请参阅[文档](https://istio.io/docs/concepts/policies-and-telemetry/)。
 
 | 选项                        | 描述                                                                                               | 是否必填项           | 默认值 |
-| --------------------------- | -------------------------------------------------------------------------------------------------- | -------------------- | ------ |
+| :-------------------------- | :------------------------------------------------------------------------------------------------- | -------------------- | :----- |
 | Mixer Telemetry CPU 限制    | Istio-telemetry pod 的 CPU 资源限制。                                                              | 是                   | 4800   |
 | Mixer Telemetry CPU 预留    | Istio-telemetry pod 的 CPU 资源预留。                                                              | 是                   | 1000   |
 | Mixer Telemetry Memory 限制 | Istio-telemetry pod 的内存资源限制。                                                               | 是                   | 4096   |
@@ -99,12 +95,12 @@ _从 v2.3.0 版本开始支持_
 | Mixer Policy Memory 预留    | Istio-policy pod 的内存资源预留。                                                                  | 是，当 Policy 启用时 | 1024   |
 | Mixer 结点选择器            | 能够选择将 istio-policy 和 istio-telemetry pods 部署到的节点。要使用此选项，节点必须带有对应标签。 | 否                   | n/a    |
 
-### Tracing
+## Tracing
 
 [分布式跟踪](https://istio.io/docs/tasks/telemetry/distributed-tracing/overview/)使用户可以通过服务网格跟踪请求。这使解决延迟，并行性和序列化问题变得更加容易。
 
 | 选项                | 描述                                                                      | 是否必填项 | 默认值 |
-| ------------------- | ------------------------------------------------------------------------- | ---------- | ------ |
+| :------------------ | :------------------------------------------------------------------------ | ---------- | :----- |
 | 启用跟踪            | 是否部署 istio-tracing。                                                  | 是         | 是     |
 | Tracing CPU 限制    | Istio-tracing pod 的 CPU 资源限制。                                       | 是         | 500    |
 | Tracing CPU 预留    | Istio-tracing pod 的 CPU 资源预留。                                       | 是         | 100    |
@@ -112,14 +108,14 @@ _从 v2.3.0 版本开始支持_
 | Tracing Memory 预留 | Istio-tracing pod 的内存资源预留。                                        | 是         | 100    |
 | Tracing 结点选择器  | 能够选择将 tracing pod 部署到的节点。要使用此选项，节点必须带有对应标签。 | 否         | n/a    |
 
-### Ingress 网关
+## Ingress 网关
 
 Istio 网关允许将 Istio 功能（例如监视和路由规则）应用于进入集群的流量。此网关是外部流量向 Istio 发出请求的先决条件。
 
-有关更多信息，请参阅[文档](https://istio.io/docs/tasks/traffic-management/ingress/).
+详情请参阅[文档](https://istio.io/docs/tasks/traffic-management/ingress/).
 
 | 选项                        | 描述                                                                                   | 是否必填项 | 默认值   |
-| --------------------------- | -------------------------------------------------------------------------------------- | ---------- | -------- |
+| :-------------------------- | :------------------------------------------------------------------------------------- | :--------- | -------- |
 | 启用 Ingress 网关           | 是否部署 istio-ingressgateway。                                                        | 是         | 否       |
 | Ingress 网关的服务类型      | 暴露网关服务的方式。您可以选择 NodePort 或 Loadbalancer                                | 是         | NodePort |
 | Http2 端口                  | http2 请求的 NodePort 端口                                                             | 是         | 31380    |
@@ -132,12 +128,12 @@ Istio 网关允许将 Istio 功能（例如监视和路由规则）应用于进�
 | Ingress Gateway Memory 预留 | Istio-ingressgateway 的内存资源预留。                                                  | 是         | 128      |
 | Ingress Gateway 结点选择器  | 能够选择将 Istio-ingressgateway pod 部署到的节点。要使用此选项，节点必须带有对应标签。 | 否         | n/a      |
 
-### Prometheus
+## Prometheus
 
-您可以使用 Prometheus 查询 Istio 指标。Prometheus 是一个开源系统监视和警报工具包。
+Prometheus 是一个开源系统监视和警报工具包，您可以使用 Prometheus 查询 Istio 指标。
 
 | 选项                   | 描述                                                                         | 是否必填项 | 默认值 |
-| ---------------------- | ---------------------------------------------------------------------------- | ---------- | ------ |
+| :--------------------- | :--------------------------------------------------------------------------- | :--------- | :----- |
 | Prometheus CPU 限制    | Prometheus pod 的 CPU 资源限制。                                             | 是         | 1000   |
 | Prometheus CPU 预留    | Prometheus pod 的 CPU 资源预留。                                             | 是         | 750    |
 | Prometheus Memory 限制 | Prometheus pod 的内存资源限制。                                              | 是         | 1024   |
@@ -145,12 +141,12 @@ Istio 网关允许将 Istio 功能（例如监视和路由规则）应用于进�
 | Prometheus 数据保留    | Prometheus 实例保留数据的时长                                                | 是         | 6      |
 | Prometheus 结点选择器  | 能够选择将 Prometheus pod 部署到的节点。要使用此选项，节点必须带有对应标签。 | 否         | n/a    |
 
-### Grafana
+## Grafana
 
-您可以使用 Grafana 可视化指标。Grafana 可让您可视化 Prometheus 抓取的 Istio 流量数据。
+Grafana 可让您可视化 Prometheus 抓取的 Istio 流量数据，您可以使用 Grafana 可视化指标。
 
 | 选项                  | 描述                                                                      | 是否必填项                                                    | 默认值           |
-| --------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------- | ---------------- |
+| :-------------------- | :------------------------------------------------------------------------ | :------------------------------------------------------------ | :--------------- |
 | 启用 Grafana          | 是否部署 Grafana。                                                        | 是                                                            | 是               |
 | Grafana CPU 限制      | Grafana pod 的 CPU 资源限制。                                             | 是，当 Grafana 启用时                                         | 200              |
 | Grafana CPU 预留      | Grafana pod 的 CPU 资源预留。                                             | 是，当 Grafana 启用时                                         | 100              |

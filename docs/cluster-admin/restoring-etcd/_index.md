@@ -127,4 +127,5 @@ values={[
 
 ## 在 Rancher v2.2.0 之前的版本中创建的集群里启用定期快照
 
-如果您有任何在 v2.2.0 之前创建的 Rancher 启动的 Kubernetes 集群（RKE 集群），在升级 Rancher 之后，您必须[编辑集群](/docs/en/cluster-admin/editing-clusters/_index)并且**保存**它，以启用更新的快照功能。即使您已经在 v2.2.0 之前创建了快照，也必须执行此步骤，因为在[通过 UI 还原集群](/docs/cluster-admin/restoring-etcd/_index)时，无法使用较早版本中创建的快照。
+如果您有任何在 v2.2.0 之前创建的 Rancher 启动的 Kubernetes 集群（RKE 集群），在升级 Rancher 之后，您必须[编辑集群](/docs/cluster-admin/editing-clusters/_index)并且**保存**它，以启用更新的快照功能。即使您已经在 v2.2.0 之前创建了快照，也必须执行此步骤，因为在[通过 UI 还原集群](/docs/cluster-admin/restoring-etcd/_index)时，无法使用较早版本中创建的快照。
+/docs/cluster-admin/editing-clusters/\_index

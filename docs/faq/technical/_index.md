@@ -43,7 +43,7 @@ New password for default administrator (user-xxxxx):
 <new_password>
 ```
 
-## 我删除/禁用了 admin 用户，该如何修复？
+## 删除/禁用了 admin 用户，该如何修复？
 
 使用单节点 Docker 安装时：
 

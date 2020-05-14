@@ -18,7 +18,7 @@ keywords:
 
 _自 v2.0.7 版本起可用_
 
-如果您的公司使用 Microsoft Active Directory Federation Services（AD FS）进行用户身份验证，则可以将 Rancher 配置为允许用户使用其 AD FS 凭据登录。
+如果您使用 Microsoft Active Directory Federation Services（AD FS）进行用户身份验证，可以将 Rancher 配置为允许用户使用其 AD FS 凭据登录。
 
 ## 先决条件
 
@@ -40,4 +40,6 @@ _自 v2.0.7 版本起可用_
 - [1、为 Rancher 配置 AD FS](/docs/admin-settings/authentication/microsoft-adfs/microsoft-adfs-setup/_index)
 - [2、配置 Rancher 使用 AD FS](/docs/admin-settings/authentication/microsoft-adfs/rancher-adfs-setup/_index)
 
-## [下一步: 为 Rancher 配置 Microsoft AD FS](/docs/admin-settings/authentication/microsoft-adfs/microsoft-adfs-setup/_index)
+## 后续操作
+
+[为 Rancher 配置 Microsoft AD FS](/docs/admin-settings/authentication/microsoft-adfs/microsoft-adfs-setup/_index)

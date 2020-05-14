@@ -20,9 +20,9 @@ keywords:
 - [回滚单节点 Rancher](/docs/upgrades/rollbacks/single-node-rollbacks/_index)
 - [回滚高可用 Rancher](/docs/upgrades/rollbacks/ha-server-rollbacks/_index)
 
-## 有关回滚的特殊情况
+## 有关回滚的特殊场景
 
-如果要在这两种情况下都还原到版本，则必须遵循一些额外的说明才能使集群正常工作。
+如果回滚在这两种情况下，则必须遵循一些额外的说明才能使集群正常工作。
 
 - 从 v2.1.6+ 回滚到 v2.1.0-v2.1.5 或 v2.0.0-v2.0.10 之间的任何版本。
 - 从 v2.0.11+ 回滚到 v2.0.0-v2.0.10 之间的任何版本。

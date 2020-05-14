@@ -21,9 +21,7 @@ keywords:
 
 > **先决条件：** 您的集群需要一个可以为 Istio 指定的 worker 节点。Worker 结点应满足[资源要求](/docs/cluster-admin/tools/istio/resources/_index)。
 
-本节介绍如何使用节点选择器来配置在指定节点上部署 Istio 组件。
-
-在较大型的部署中，强烈建议通过为每个 Istio 组件添加节点选择器，将 Istio 的基础结构放置在集群中的专用节点上。
+在较大型的部署中，我们建议通过为每个 Istio 组件添加节点选择器，将 Istio 的基础结构放置在集群中的专用节点上。
 
 ## 给 Istio 节点添加标签
 
@@ -51,4 +49,6 @@ keywords:
 
 **结果：** Istio 组件将部署在指定的节点上。
 
-#### [下一步：添加部署和服务](/docs/cluster-admin/tools/istio/setup/deploy-workloads/_index)
+## 后续操作
+
+[添加部署和服务](/docs/cluster-admin/tools/istio/setup/deploy-workloads/_index)
