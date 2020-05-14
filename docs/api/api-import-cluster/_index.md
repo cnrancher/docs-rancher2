@@ -1,6 +1,6 @@
 ---
-title: 创建import集群
-description: 
+title: 使用脚本创建导入集群
+description:
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -15,79 +15,79 @@ keywords:
   - API Tokens
   - API指南
   - API参考
-  - 创建import集群
+  - 创建导入集群
 ---
 
 :::note 注意
-jq工具可能需要单独安装，安装方法参考：[jq安装](https://stedolan.github.io/jq/download/)
+jq 工具可能需要单独安装，安装方法参考：[jq 安装](https://stedolan.github.io/jq/download/)
 :::
 
-## 1. Rancher UI获取创建集群参数
+## 1. Rancher UI 获取创建集群参数
 
 1. 访问`Rancher_URL/v3/clusters/`,点击右上角的创建：
 
-    ![image-20191213210405727](/img/rancher/old-doc/image-20191213210405727.png)
+   ![image-20191213210405727](/img/rancher/old-doc/image-20191213210405727.png)
 
 1. 在弹出的参数填写页面中，主要修改以下参数:
 
-    - `dockerRootDir`
-    默认为`/var/lib/docker`,如果dockerroot路径有修改，需要修改此配置路径；
+   - `dockerRootDir`
+     默认为`/var/lib/docker`,如果 dockerroot 路径有修改，需要修改此配置路径；
 
-    - `enableClusterAlerting`(可选)
-    根据需要选择是否默认开启集群告警；
+   - `enableClusterAlerting`(可选)
+     根据需要选择是否默认开启集群告警；
 
-    - `enableClusterMonitoring`(可选)
-    根据需要选择是否默认开启集群监控；
+   - `enableClusterMonitoring`(可选)
+     根据需要选择是否默认开启集群监控；
 
-    - `name`(必填)
-    设置集群名称，名称具有唯一性，不能与现有集群名称相同；
+   - `name`(必填)
+     设置集群名称，名称具有唯一性，不能与现有集群名称相同；
 
 1. 配置好参数后点击`Show Request`；
 
-1. 在弹出的窗口中，复制`API Request`中`HTTP Request:`的`{}`中的内容，此内容即为创建的集群的API参数；
+1. 在弹出的窗口中，复制`API Request`中`HTTP Request:`的`{}`中的内容，此内容即为创建的集群的 API 参数；
 
-    ```bash
-    #!/bin/bash
+   ```bash
+   #!/bin/bash
 
-    api_url='https://xxx.rancher.com/v3/clusters'
-    api_token='token-vrdkx:mvnrxxxxxxxxxnxzfx4h2gjkdtzzv97sw7brz66454'
-    cluster_name='test-import'
+   api_url='https://xxx.rancher.com/v3/clusters'
+   api_token='token-vrdkx:mvnrxxxxxxxxxnxzfx4h2gjkdtzzv97sw7brz66454'
+   cluster_name='test-import'
 
-    create_cluster_data()
-    {
-      cat <<EOF
-    {
-        "aliyunEngineConfig": null,
-        "amazonElasticContainerServiceConfig": null,
-        "answers": null,
-        "azureKubernetesServiceConfig": null,
-        "baiduEngineConfig": null,
-        "dockerRootDir": "/var/lib/docker",
-        "enableClusterAlerting": true,
-        "enableClusterMonitoring": true,
-        "googleKubernetesEngineConfig": null,
-        "huaweiEngineConfig": null,
-        "localClusterAuthEndpoint": null,
-        "name": "test-import",
-        "rancherKubernetesEngineConfig": null,
-        "tencentEngineConfig": null,
-        "windowsPreferedCluster": false
-    }
-    EOF
-    }
+   create_cluster_data()
+   {
+     cat <<EOF
+   {
+       "aliyunEngineConfig": null,
+       "amazonElasticContainerServiceConfig": null,
+       "answers": null,
+       "azureKubernetesServiceConfig": null,
+       "baiduEngineConfig": null,
+       "dockerRootDir": "/var/lib/docker",
+       "enableClusterAlerting": true,
+       "enableClusterMonitoring": true,
+       "googleKubernetesEngineConfig": null,
+       "huaweiEngineConfig": null,
+       "localClusterAuthEndpoint": null,
+       "name": "test-import",
+       "rancherKubernetesEngineConfig": null,
+       "tencentEngineConfig": null,
+       "windowsPreferedCluster": false
+   }
+   EOF
+   }
 
-    curl -k -X POST \
-        -H "Authorization: Bearer ${api_token}" \
-        -H "Content-Type: application/json" \
-        -d "$(create_cluster_data)" $api_url/v3/clusters
-    ```
+   curl -k -X POST \
+       -H "Authorization: Bearer ${api_token}" \
+       -H "Content-Type: application/json" \
+       -d "$(create_cluster_data)" $api_url/v3/clusters
+   ```
 
 ## 2. 创建集群
 
 1. 保存以上代码为脚本文件，修改前三行的变量与配置中的参数（比如：dockerRootDir ），最后执行脚本。
 1. 脚本执行完成后，集群状态如下所示，其状态为`Provisioning;`
 
-    ![image-20191213212549253](/img/rancher/old-doc/image-20191213212549253.png)
+   ![image-20191213212549253](/img/rancher/old-doc/image-20191213212549253.png)
 
 ## 3. 创建注册命令
 

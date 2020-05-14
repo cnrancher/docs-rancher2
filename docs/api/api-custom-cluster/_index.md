@@ -1,6 +1,6 @@
 ---
-title: 创建自定义集群
-description: 
+title: 使用脚本创建自定义集群
+description:
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -19,7 +19,7 @@ keywords:
 ---
 
 :::note 注意
-jq工具可能需要单独安装，安装方法参考：[jq安装](https://stedolan.github.io/jq/download/)
+jq 工具可能需要单独安装，安装方法参考：[jq 安装](https://stedolan.github.io/jq/download/)
 :::
 
 ## 1. 创建自定义集群
