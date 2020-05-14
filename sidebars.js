@@ -230,7 +230,8 @@ module.exports = {
           },
           "installation/options/api-audit-log/_index",
           "installation/options/tls-settings/_index",
-          "installation/options/firewall/_index"
+          "installation/options/firewall/_index",
+          "installation/options/self-signed-ssl/_index"
         ]
       }
     ],
@@ -292,7 +293,17 @@ module.exports = {
       "best-practices/deployment-strategies/_index",
       "best-practices/deployment-types/_index",
       "best-practices/containers/_index",
-      "best-practices/management/_index"
+      "best-practices/management/_index",
+      {
+        type: "category",
+        label: "调优",
+        items: [
+          "best-practices/optimize/os/_index",
+          "best-practices/optimize/docker/_index",
+          "best-practices/optimize/etcd/_index",
+          "best-practices/optimize/kubernetes/_index"
+        ]
+      }
     ],
     系统管理员指南: [
       "admin-settings/_index",
@@ -584,7 +595,15 @@ module.exports = {
       "cluster-admin/certificate-rotation/_index",
       "cluster-admin/backing-up-etcd/_index",
       "cluster-admin/restoring-etcd/_index",
-      "cluster-admin/cleaning-cluster-nodes/_index"
+      "cluster-admin/cleaning-cluster-nodes/_index",
+      "cluster-admin/replace-ip-domain/_index",
+      "cluster-admin/restore-kubecfg/_index",
+      "cluster-admin/restore-rkestate/_index",
+      "cluster-admin/replace-ca/_index",
+      "cluster-admin/single-to-ha/_index",
+      "cluster-admin/etcd-compact/_index",
+      "cluster-admin/webhooks/_index",
+      "cluster-admin/kubectl-delete-evicted-pods/_index"
     ],
     项目管理员指南: [
       "project-admin/_index",
@@ -689,7 +708,12 @@ module.exports = {
       "user-settings/cloud-credentials/_index",
       "user-settings/preferences/_index"
     ],
-    API: ["api/_index", "api/api-tokens/_index"],
+    API: ["api/_index",
+      "api/api-tokens/_index",
+      "api/api-resources/_index",
+      "api/api-custom-cluster/_index",
+      "api/api-import-cluster/_index"
+    ],
     安全: [
       "security/_index",
       "security/security-scan/_index",
@@ -723,12 +747,16 @@ module.exports = {
       {
         type: "category",
         label: "网络",
-        items: ["faq/networking/_index", "faq/networking/cni-providers/_index"]
+        items: ["faq/networking/_index",
+          "faq/networking/cni-providers/_index",
+          "faq/networking/mtu/_index"
+        ]
       },
       "faq/technical/_index",
       "faq/security/_index",
       "faq/telemetry/_index",
-      "faq/removing-rancher/_index"
+      "faq/removing-rancher/_index",
+      "faq/etcd/_index"
     ],
     常见故障排查: [
       "troubleshooting/_index",
