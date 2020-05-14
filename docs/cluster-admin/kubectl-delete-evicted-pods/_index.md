@@ -1,6 +1,6 @@
 ---
-title: 删除状态为Failed、Evicted的Pod
-description: 
+title: 删除状态为 Failed、Evicted 的 Pod
+description:
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档

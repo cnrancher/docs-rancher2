@@ -1,6 +1,6 @@
 ---
-title: 主机OS调优
-description: 
+title: 节点 OS 调优
+description:
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档

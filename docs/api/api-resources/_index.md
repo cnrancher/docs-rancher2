@@ -1,6 +1,6 @@
 ---
-title: API资源类型
-description: 
+title: 原生 Kubernetes API
+description:
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -18,11 +18,11 @@ keywords:
   - API资源类型
 ---
 
-Rancher UI目前的API只支持一些常用资源处理，通过访问`https://rancher_url/v3/`可以查看到具体支持的类型。
+Rancher UI 目前的 API 只支持一些常用资源处理，通过访问`https://rancher_url/v3/`可以查看到具体支持的类型。
 
-但是对于像`ServiceAccount`之类的资源，可通过Rancher UI代理去访问K8S直连API，接口地址为：`rancher_url/k8s/clusters/<集群ID>/api/<API版本>/<资源类型>`。
+但是对于像`ServiceAccount`之类的资源，可通过 Rancher UI 代理去访问 K8S 直连 API，接口地址为：`rancher_url/k8s/clusters/<集群ID>/api/<API版本>/<资源类型>`。
 
-比如`ServiceAccount `可以通过 `rancher_url/k8s/clusters/<集群ID>/api/v1/serviceaccounts`去查看所有的`ServiceAccountList`，比如访问：`https://rancher_url/k8s/clusters/c-nlbtk/api/v1/serviceaccounts`
+比如`ServiceAccount`可以通过 `rancher_url/k8s/clusters/<集群ID>/api/v1/serviceaccounts`去查看所有的`ServiceAccountList`，比如访问：`https://rancher_url/k8s/clusters/c-nlbtk/api/v1/serviceaccounts`
 
 ```json
 {
@@ -53,7 +53,7 @@ Rancher UI目前的API只支持一些常用资源处理，通过访问`https://r
 然后可以通过命名空间去过滤，比如：`https://rancher_url/k8s/clusters/<cluster——id>/api/v1/namespaces/cattle-logging/serviceaccounts`
 
 ```json
-	{
+{
   "kind": "ServiceAccountList",
   "apiVersion": "v1",
   "metadata": {
@@ -123,4 +123,3 @@ Rancher UI目前的API只支持一些常用资源处理，通过访问`https://r
   ]
 }
 ```
-

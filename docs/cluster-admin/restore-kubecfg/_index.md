@@ -1,6 +1,6 @@
 ---
-title: 恢复kubectl配置文件
-description: 
+title: 恢复 Kubectl 配置文件
+description:
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -16,17 +16,17 @@ keywords:
   - 恢复kubectl配置文件
 ---
 
-分析Rancher UI生成的kubecfg文件可以发现，第一个`server`对应的是Rancher Server的`url或者IP`。当kubectl访问`K8S API SERVER`的时候，请求是先发送到Rancher，然后再通过`cluster agent`转发给`K8S API SERVER`。
+分析 Rancher UI 生成的 kubecfg 文件可以发现，第一个`server`对应的是 Rancher Server 的`url 或者 IP`。当 kubectl 访问`K8S API SERVER`的时候，请求是先发送到 Rancher，然后再通过`cluster agent`转发给`K8S API SERVER`。
 
 ![image-20190514185322798](/img/rancher/old-doc/image-20190514185322798.png)
 
-在Rancher v2.2.2以前的版本，Rancher UI生成的kubecfg文件中只设置了一个`server`。从Rancher v2.2.2开始，从Rancher UI创建的集群默认开启`授权集群访问地址`。创建好集群后Rancher UI生成的kubecfg文件中将显示多个master节点IP对应的`server`。
+在 Rancher v2.2.2 以前的版本，Rancher UI 生成的 kubecfg 文件中只设置了一个`server`。从 Rancher v2.2.2 开始，从 Rancher UI 创建的集群默认开启`授权集群访问地址`。创建好集群后 Rancher UI 生成的 kubecfg 文件中将显示多个 master 节点 IP 对应的`server`。
 
 ![image-20190514185026706](/img/rancher/old-doc/image-20190514185026706.png)
 
 ![image-20190514184126478](/img/rancher/old-doc/image-20190514184126478.png)
 
-因此，`Rancher v2.2.2`以及之后版本通过Rancher UI创建的集群，如果Rancher Server无法访问，那么可以通过`kubectl --kubeconfig=xxx --context=xxx`来切换`server`。
+因此，`Rancher v2.2.2`以及之后版本通过 Rancher UI 创建的集群，如果 Rancher Server 无法访问，那么可以通过`kubectl --kubeconfig=xxx --context=xxx`来切换`server`。
 
 对于`Rancher v2.2.2`之前的版本，则需要通过以下方式找回`kube-admin`配置文件。
 
@@ -90,7 +90,7 @@ if [ $CHECK_CLUSTER_STATE_CONFIGMAP != 'yes' ]; then
   -n kube-system \
   get secret kube-admin -o jsonpath={.data.Config} | base64 --decode | \
   sed -e "/^[[:space:]]*server:/ s_:.*_: \"https://${K8S_MASTER_NODE_IP}:6443\"_"' > kubeconfig_admin.yaml
-  
+
   if [ -s kubeconfig_admin.yaml ]; then
     echo '恢复成功，执行以下命令测试：'
     echo ''
@@ -112,7 +112,7 @@ else
   jq -r .data.\"full-cluster-state\" | \
   jq -r .currentState.certificatesBundle.\"kube-admin\".config | \
   sed -e "/^[[:space:]]*server:/ s_:.*_: \"https://${K8S_MASTER_NODE_IP}:6443\"_"' > kubeconfig_admin.yaml
-  
+
   if [ -s kubeconfig_admin.yaml ]; then
     echo '恢复成功，执行以下命令测试：'
     echo ''

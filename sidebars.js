@@ -388,7 +388,8 @@ module.exports = {
           "admin-settings/drivers/cluster-drivers/_index",
           "admin-settings/drivers/node-drivers/_index"
         ]
-      }
+      },
+      "admin-settings/replace-ip-domain/_index"
     ],
     创建集群: [
       "cluster-provisioning/_index",
@@ -596,7 +597,6 @@ module.exports = {
       "cluster-admin/backing-up-etcd/_index",
       "cluster-admin/restoring-etcd/_index",
       "cluster-admin/cleaning-cluster-nodes/_index",
-      "cluster-admin/replace-ip-domain/_index",
       "cluster-admin/restore-kubecfg/_index",
       "cluster-admin/restore-rkestate/_index",
       "cluster-admin/replace-ca/_index",
@@ -708,7 +708,8 @@ module.exports = {
       "user-settings/cloud-credentials/_index",
       "user-settings/preferences/_index"
     ],
-    API: ["api/_index",
+    API: [
+      "api/_index",
       "api/api-tokens/_index",
       "api/api-resources/_index",
       "api/api-custom-cluster/_index",
@@ -747,7 +748,8 @@ module.exports = {
       {
         type: "category",
         label: "网络",
-        items: ["faq/networking/_index",
+        items: [
+          "faq/networking/_index",
           "faq/networking/cni-providers/_index",
           "faq/networking/mtu/_index"
         ]
