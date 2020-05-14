@@ -1,6 +1,6 @@
 ---
 title: 轮换证书
-description: 轮换 Kubernetes 证书可能会导致集群在重新启动组件时暂时不可用。对于生产环境，建议在维护时段内执行此操作。默认情况下，Kubernetes 集群需要证书，并且 Rancher 启动的 Kubernetes 集群会自动为 Kubernetes 组件生成证书。在证书过期之前以及证书被泄露之后，轮换这些证书非常重要。轮换证书后，Kubernetes 组件将自动重新启动。可以为以下服务轮换证书：etcd、kubelet、kube-apiserver、kube-proxy、kube-scheduler、kube-controller-manager。
+description: 默认情况下，Kubernetes 集群所需要的证书由 Rancher 生成，如果出现证书过期，或证书泄露等情况，则需要使用新的证书轮换掉有问题的证书。轮换证书后，Kubernetes 组件将自动重新启动。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -15,13 +15,11 @@ keywords:
   - 轮换证书
 ---
 
-:::note 警告
-轮换 Kubernetes 证书可能会导致集群在重新启动组件时暂时不可用。对于生产环境，建议在维护时段内执行此操作。
-:::
+## 概述
 
-默认情况下，Kubernetes 集群需要证书，并且 Rancher 启动的 Kubernetes 集群会自动为 Kubernetes 组件生成证书。在证书过期之前以及证书被泄露之后，轮换这些证书非常重要。轮换证书后，Kubernetes 组件将自动重新启动。
+默认情况下，Kubernetes 集群所需要的证书由 Rancher 生成，如果出现证书过期，或证书泄露等情况，则需要使用新的证书轮换掉有问题的证书。轮换证书后，Kubernetes 组件将自动重新启动。
 
-可以为以下服务轮换证书：
+以下服务支持证书轮换：
 
 - etcd
 - kubelet
@@ -29,6 +27,10 @@ keywords:
 - kube-proxy
 - kube-scheduler
 - kube-controller-manager
+
+:::note 警告
+轮换 Kubernetes 证书可能会导致集群在重新启动组件时暂时不可用。对于生产环境，建议在维护时段内执行此操作。
+:::
 
 ## Rancher v2.2.x 中的证书轮换
 
