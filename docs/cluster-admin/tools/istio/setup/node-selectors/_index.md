@@ -1,5 +1,5 @@
 ---
-title: 3. 选择部署 Istio 组件的节点
+title: 3、选择部署 Istio 组件的节点
 description: 您的集群需要一个可以为 Istio 指定的 worker 节点。Worker 结点应满足资源要求。本节介绍如何使用节点选择器来配置在指定节点上部署 Istio 组件。在较大型的部署中，强烈建议通过为每个 Istio 组件添加节点选择器，将 Istio 的基础结构放置在集群中的专用节点上。
 keywords:
   - rancher 2.0中文文档
