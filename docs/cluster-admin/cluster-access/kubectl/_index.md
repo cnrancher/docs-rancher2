@@ -70,7 +70,7 @@ CURRENT   NAME                        CLUSTER                     AUTHINFO     N
           my-cluster-controlplane-1   my-cluster-controlplane-1   user-46tmn
 ```
 
-在本例中，当您将 `kubectl` 与第一个上下文 `my-cluster`一起使用时，将通过 Rancher Server对您进行身份验证。
+在本例中，当您将 `kubectl` 与第一个上下文 `my-cluster`一起使用时，将通过 Rancher Server 对您进行身份验证。
 
 对于第二个上下文 `my-cluster-controlplane-1`，您将使用授权的集群端点进行身份验证，直接与下游 RKE 集群通信。
 

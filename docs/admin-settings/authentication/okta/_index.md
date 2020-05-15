@@ -45,7 +45,7 @@ _v2.2.0 版本可用_
     | 用户名           | 属性 Statement 中包含用户 user name/given name 属性名称。    |
     | UID              | 属性 Statement 中每个用户唯一的属性名称。                    |
     | 组               | 组属性 Statement 中代表组信息的属性名称。                    |
-    | Rancher API 地址 | Rancher Server的 URL 地址                                    |
+    | Rancher API 地址 | Rancher Server 的 URL 地址                                   |
     | 私钥/证书        | 密钥/证书对，用于声明加密。                                  |
     | 元数据 XML       | 在应用程序`登录`部分得到的`Identity Provider metadata`文件。 |
 

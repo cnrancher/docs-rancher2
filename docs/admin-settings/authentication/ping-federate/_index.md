@@ -43,7 +43,7 @@ _v2.0.7 版本可用_
 
    1. **组**： 创建用于管理组成员关系的条目(例如:`memberOf`)。
 
-   1. **Rancher API 地址**： Rancher Server的 URL。
+   1. **Rancher API 地址**： Rancher Server 的 URL。
 
    1. **私钥**和**证书**：这是一个密钥-证书对，用于在 Rancher 和您的 IdP 之间创建一个安全 shell。
 

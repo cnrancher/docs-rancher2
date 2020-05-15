@@ -122,17 +122,17 @@ $ rke etcd snapshot-restore --config cluster.yml --name snapshot-name \
 S3 特定选项仅适用于 RKE v0.2.0 +。
 
 | 选项                      | 描述                                                                                                           | S3 特定选项 |
-|---------------------------|----------------------------------------------------------------------------------------------------------------|--|
-| `--name` 值               | 指定快照名称                                                                                                   |  |
-| `--config` 值             | 指定集群 YAML 文件（默认为：“cluster.yml”）[$RKE_CONFIG]                                                       |  |
-| `--s3`                    | 启用备份到 s3                                                                                                  | \* |
-| `--s3-endpoint` 值        | 指定 s3 端点 url (默认值："s3.amazonaws.com")                                                                  | \* |
-| `--access-key` 值         | 指定 s3 accessKey                                                                                              | \* |
-| `--secret-key` 值         | 指定 s3 secretKey                                                                                              | \* |
-| `--bucket-name` 值        | 指定 s3 桶名称                                                                                                 | \* |
-| `--folder` 值             | 指定 s3 在桶中到文件夹 _自 v2.3.0 起可用_                                                                      | \* |
-| `--region` 值             | 指定 s3 桶位置 (可选)                                                                                          | \* |
-| `--ssh-agent-auth`        | [使用 SSH_AUTH_SOCK 定义的 SSH 代理身份验证](https://rancher.com/docs/rke/latest/en/config-options/#ssh-agent) |  |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------- | ----------- |
+| `--name` 值               | 指定快照名称                                                                                                   |             |
+| `--config` 值             | 指定集群 YAML 文件（默认为：“cluster.yml”）[$RKE_CONFIG]                                                       |             |
+| `--s3`                    | 启用备份到 s3                                                                                                  | \*          |
+| `--s3-endpoint` 值        | 指定 s3 端点 url (默认值："s3.amazonaws.com")                                                                  | \*          |
+| `--access-key` 值         | 指定 s3 accessKey                                                                                              | \*          |
+| `--secret-key` 值         | 指定 s3 secretKey                                                                                              | \*          |
+| `--bucket-name` 值        | 指定 s3 桶名称                                                                                                 | \*          |
+| `--folder` 值             | 指定 s3 在桶中到文件夹 _自 v2.3.0 起可用_                                                                      | \*          |
+| `--region` 值             | 指定 s3 桶位置 (可选)                                                                                          | \*          |
+| `--ssh-agent-auth`        | [使用 SSH_AUTH_SOCK 定义的 SSH 代理身份验证](https://rancher.com/docs/rke/latest/en/config-options/#ssh-agent) |             |
 | `--ignore-docker-version` | [禁用 Docker 版本检查](https://rancher.com/docs/rke/latest/en/config-options/#supported-docker-versions)       |
 
 ## 5. 启动集群

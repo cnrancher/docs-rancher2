@@ -16,7 +16,7 @@ keywords:
   - 配置 NGINX 负载均衡
 ---
 
-我们将使用 NGINX 作为`L4`层负载均衡器(TCP)，它将请求轮训转发到后端的 Rancher server 节点。在此配置中，负载均衡器位于 Rancher server 节点的前面。负载均衡器可以是任何能够运行 NGINX 的主机。我们不建议使用任意一个 Rancher server 节点作为负载均衡器节点，因为默认配置下每个K8S节点都会运行 ingress 控制器，而 ingress 控制器以为`host`网络模式运行，并默认监听了`80`和`443`端口，所以默认情况下会出现端口冲突。如果一定要将NGINX安装在 Rancher server 某个节点上，那么可以编辑 ingress 控制器配置文件，在`args`中添加参数，端口根据实际情况修改 `--http-port=8880 --http-port=8443`。 ingress 控制器修改默认端口后，nginx 配置中代理的后端 server端口也需要一并修改。
+我们将使用 NGINX 作为`L4`层负载均衡器(TCP)，它将请求轮训转发到后端的 Rancher server 节点。在此配置中，负载均衡器位于 Rancher server 节点的前面。负载均衡器可以是任何能够运行 NGINX 的主机。我们不建议使用任意一个 Rancher server 节点作为负载均衡器节点，因为默认配置下每个 K8S 节点都会运行 ingress 控制器，而 ingress 控制器以为`host`网络模式运行，并默认监听了`80`和`443`端口，所以默认情况下会出现端口冲突。如果一定要将 NGINX 安装在 Rancher server 某个节点上，那么可以编辑 ingress 控制器配置文件，在`args`中添加参数，端口根据实际情况修改 `--http-port=8880 --http-port=8443`。 ingress 控制器修改默认端口后，nginx 配置中代理的后端 server 端口也需要一并修改。
 
 ![image-20200515141942435](images/image-20200515141942435.png)
 
@@ -36,51 +36,51 @@ keywords:
 
 2. 在 nginx.conf 配置中，用之前准备的[节点](/docs/installation/k8s-install/create-nodes-lb/_index)的 IP 替换 `<IP_NODE_1>`，`<IP_NODE_2>`和`<IP_NODE_3>`。
 
-    > **注意:** 有关所有配置选项，请参见[NGINX 文档：TCP 和 UDP 负载均衡。](https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/)
+   > **注意:** 有关所有配置选项，请参见[NGINX 文档：TCP 和 UDP 负载均衡。](https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/)
 
-    <figcaption>NGINX 配置示例</figcaption>
+   <figcaption>NGINX 配置示例</figcaption>
 
-    ```bash
-    worker_processes 4;
-    worker_rlimit_nofile 40000;
+   ```bash
+   worker_processes 4;
+   worker_rlimit_nofile 40000;
 
-    events {
-        worker_connections 8192;
-    }
+   events {
+       worker_connections 8192;
+   }
 
-    stream {
-        upstream rancher_servers_http {
-            least_conn;
-            server <IP_NODE_1>:80 max_fails=3 fail_timeout=5s;
-            server <IP_NODE_2>:80 max_fails=3 fail_timeout=5s;
-            server <IP_NODE_3>:80 max_fails=3 fail_timeout=5s;
-        }
-        server {
-            listen 80;
-            proxy_pass rancher_servers_http;
-        }
+   stream {
+       upstream rancher_servers_http {
+           least_conn;
+           server <IP_NODE_1>:80 max_fails=3 fail_timeout=5s;
+           server <IP_NODE_2>:80 max_fails=3 fail_timeout=5s;
+           server <IP_NODE_3>:80 max_fails=3 fail_timeout=5s;
+       }
+       server {
+           listen 80;
+           proxy_pass rancher_servers_http;
+       }
 
-        upstream rancher_servers_https {
-            least_conn;
-            server <IP_NODE_1>:443 max_fails=3 fail_timeout=5s;
-            server <IP_NODE_2>:443 max_fails=3 fail_timeout=5s;
-            server <IP_NODE_3>:443 max_fails=3 fail_timeout=5s;
-        }
-        server {
-            listen     443;
-            proxy_pass rancher_servers_https;
-        }
+       upstream rancher_servers_https {
+           least_conn;
+           server <IP_NODE_1>:443 max_fails=3 fail_timeout=5s;
+           server <IP_NODE_2>:443 max_fails=3 fail_timeout=5s;
+           server <IP_NODE_3>:443 max_fails=3 fail_timeout=5s;
+       }
+       server {
+           listen     443;
+           proxy_pass rancher_servers_https;
+       }
 
-    }
-    ```
+   }
+   ```
 
 3. 将`nginx.conf`保存到`/etc/nginx/nginx.conf`。
 
 4. 运行以下命令重新加载 NGINX 配置：
 
-    ```bash
-    # nginx -s reload
-    ```
+   ```bash
+   # nginx -s reload
+   ```
 
 ## 可选 - 将 NGINX 作为 Docker 容器运行
 

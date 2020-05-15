@@ -238,7 +238,7 @@ kubectl -n cattle-system apply -R -f ./rancher
 
 ## 单节点安装
 
-Docker 单节点安装适用于想要对 Rancher 进行`测试`的 Rancher 用户。您可以使用 `docker run` 命令在单个节点上安装 Rancher Server组件，而不是在 Kubernetes 集群上运行。由于只有一个节点和一个 Docker 容器，因此，如果该节点发生故障，并且其他节点上没有可用的 Rancher 数据副本，您将丢失 Rancher Server的所有数据。**重要提示：如果您按照 Docker 单节点安装指南安装 Rancher，则没有升级路径可将 Docker 单节点安装过渡到 Kubernetes 安装。**除了运行单节点安装，您还可以选择按照 Rancher 高可用安装指南，但只能使用一个节点来安装 Rancher 和 Kubernetes。之后，您可以扩展 Kubernetes 集群中的 etcd 节点，使其成为真正的高可用安装。
+Docker 单节点安装适用于想要对 Rancher 进行`测试`的 Rancher 用户。您可以使用 `docker run` 命令在单个节点上安装 Rancher Server 组件，而不是在 Kubernetes 集群上运行。由于只有一个节点和一个 Docker 容器，因此，如果该节点发生故障，并且其他节点上没有可用的 Rancher 数据副本，您将丢失 Rancher Server 的所有数据。**重要提示：如果您按照 Docker 单节点安装指南安装 Rancher，则没有升级路径可将 Docker 单节点安装过渡到 Kubernetes 安装。**除了运行单节点安装，您还可以选择按照 Rancher 高可用安装指南，但只能使用一个节点来安装 Rancher 和 Kubernetes。之后，您可以扩展 Kubernetes 集群中的 etcd 节点，使其成为真正的高可用安装。
 
 为了安全起见，使用 Rancher 时需要 SSL。SSL 保护所有 Rancher 网络通信的安全，例如在您登录集群或与集群交互时。
 
@@ -277,7 +277,7 @@ docker run -d --restart=unless-stopped \
 
 #### 选项 B - 使用已有的自签名证书
 
-在您的团队将访问 Rancher Server的开发或测试环境中，创建一个自签名证书以供您的安装使用，以便您的团队可以验证它们是否正在连接到 Rancher 实例。
+在您的团队将访问 Rancher Server 的开发或测试环境中，创建一个自签名证书以供您的安装使用，以便您的团队可以验证它们是否正在连接到 Rancher 实例。
 
 > **先决条件：**
 > 在具有互联网连接的计算机上，使用[OpenSSL](https://www.openssl.org/)或您选择的其他方法创建自签名证书。

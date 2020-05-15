@@ -27,7 +27,7 @@ _自 v2.3.0 版本起可用_
 ## 先决条件
 
 - 您必须拥有一个配置的[G Suite 管理员帐户](https://admin.google.com)。
-- G Suite 需要一个[顶级私有域 FQDN](https://github.com/google/guava/wiki/InternetDomainNameExplained#public-suffixes-private-domains)作为授权域。获取 FQDN 的一种方法是在 Route53 中为 Rancher Server创建 A 记录。您不需要使用该记录更新 Rancher Server的 URL 设置，因为可能有集群使用该 URL。
+- G Suite 需要一个[顶级私有域 FQDN](https://github.com/google/guava/wiki/InternetDomainNameExplained#public-suffixes-private-domains)作为授权域。获取 FQDN 的一种方法是在 Route53 中为 Rancher Server 创建 A 记录。您不需要使用该记录更新 Rancher Server 的 URL 设置，因为可能有集群使用该 URL。
 - 您的 G Suite 域必须启用了 Admin SDK API。您可以使用[此页](https://support.google.com/a/answer/60757?hl=en)中的步骤来启用它。
 
 启用 Admin SDK API 后，您的 G Suite 域的 API 页面应如下图所示:
@@ -56,8 +56,8 @@ _自 v2.3.0 版本起可用_
 1. 输入一个名称。
 1. 填写**授权的 JavaScript 源**和**授权的重定向 URI**。注意:设置 Google OAuth 的 Rancher UI 页面（可在**Security > Authentication >Google**下的全局视图中获得）为您提供了这一步要输入的准确链接。
 
-- 在**授权的 JavaScript 源**一栏，输入您的 Rancher Server的 URL。
-- 在**授权的重定向 URI**一栏，输入您的 Rancher Server的 URL 并附加路径`verify-auth`。例如，如果您的 URI 是`https://rancherServer`，您需要输入`https://rancherServer/verify-auth`。
+- 在**授权的 JavaScript 源**一栏，输入您的 Rancher Server 的 URL。
+- 在**授权的重定向 URI**一栏，输入您的 Rancher Server 的 URL 并附加路径`verify-auth`。例如，如果您的 URI 是`https://rancherServer`，您需要输入`https://rancherServer/verify-auth`。
 
 1. 点击**创建**。
 1. 创建凭据之后，您将看到一个页面，其中显示您的凭据列表。选择刚刚创建的凭据，然后在最右边的行中单击**下载 JSON**保存文件，以便您可以在 Rancher 中设置这些凭据。

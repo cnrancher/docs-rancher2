@@ -34,7 +34,7 @@ keywords:
 所有代码库都位于我们官方的 GitHub 账号下。有许多用于 Rancher 的代码库，我们将对 Rancher 中使用的一些主要代码库进行描述。
 
 | 代码库                 | URL                                         | 描述                                                                                                                |
-|------------------------|---------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| ---------------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | Rancher                | https://github.com/rancher/rancher          | 该库是 Rancher 2.x 的主要源代码。                                                                                   |
 | Types                  | https://github.com/rancher/types            | 该库存有 Rancher 2.x 所有 API 定义。                                                                                |
 | API Framework          | https://github.com/rancher/norman           | 该库是一个 API 框架，用于构建基于 Kubernetes CRD 和 Controller 的 Rancher 风格的 API。                              |
@@ -65,7 +65,7 @@ keywords:
 
 如果您发现任何错误或遇到任何问题，请搜索[已经报告的 Issues](https://github.com/rancher/rancher/issues)，因为可能有人遇到过相同的问题或我们正在积极寻求解决方案。
 
-如果没有找到与您问题相关的issue，请通过[创建 Issue](https://github.com/rancher/rancher/issues/new)与我们联系。尽管我们有许多与 Rancher 相关的代码库，但我们希望将问题记录在 `rancher/rancher` 的代码库中，这样我们就不会错过它们！如果您想提出问题或向其他用户询问使用案例，我们建议在[Rancher 全球论坛](https://forums.rancher.com)或[Rancher 中文论坛](https://forums.cnrancher.com/)上发布问题，或者在 Rancher 微信交流群中和大家一起讨论。
+如果没有找到与您问题相关的 issue，请通过[创建 Issue](https://github.com/rancher/rancher/issues/new)与我们联系。尽管我们有许多与 Rancher 相关的代码库，但我们希望将问题记录在 `rancher/rancher` 的代码库中，这样我们就不会错过它们！如果您想提出问题或向其他用户询问使用案例，我们建议在[Rancher 全球论坛](https://forums.rancher.com)或[Rancher 中文论坛](https://forums.cnrancher.com/)上发布问题，或者在 Rancher 微信交流群中和大家一起讨论。
 
 ### 提交问题清单
 
@@ -79,13 +79,14 @@ keywords:
 - **资源：** 尽可能提供有关已使用资源的详细信息。问题的根源可能是很多，包括尽可能多的细节有助于确定根本原因。请参阅以下示例：
   - **主机：** 主机具有什么规格，例如：CPU/内存/磁盘；它在什么环境运行，比如：物理机、虚拟机、云主机；使用的是什么 系统镜像；
   - **操作系统：** 您使用什么操作系统？提供详细信息是非常有帮助，例如：确切的操作系统版本（ `cat /etc/os-release` ）和内核版本（ `uname -r` ）。
-  - **Docker：** 您正在使用的Docker 版本与安装方式；可以通过执行 `docker version` 和 `docker info` 输出更多的Docker配置信息。
+  - **Docker：** 您正在使用的 Docker 版本与安装方式；可以通过执行 `docker version` 和 `docker info` 输出更多的 Docker 配置信息。
   - **环境：** 您是否在代理环境中，是否正在使用可信的 CA，还是在用自签名证书，是否正在使用外部负载均衡器。
-  - **Rancher：** 您正在使用的Rancher版本与Rancher部署方式，单容器运行还是HA运行；Rancher版本可以在Rancher UI的左下方找到，也可以从主机上运行的 Image 的 Tag 中找到。
-  - **K8S集群：** 您创建了哪种k8s集群，如何创建的，在创建集群时自定义了什么参数。
+  - **Rancher：** 您正在使用的 Rancher 版本与 Rancher 部署方式，单容器运行还是 HA 运行；Rancher 版本可以在 Rancher UI 的左下方找到，也可以从主机上运行的 Image 的 Tag 中找到。
+  - **K8S 集群：** 您创建了哪种 k8s 集群，如何创建的，在创建集群时自定义了什么参数。
 - **重现此问题的步骤：** 请尽量详细的提供您是如何遇到所报告的情况的信息，这有助于重现您遇到的情况。
-  
+
   - 提供手动步骤或自动化脚本，用于从新创建的设置获取您所报告的情况。
+
 - **日志：** 提供使用资源中的数据/日志。
 
   - Rancher Server 日志
@@ -133,7 +134,7 @@ keywords:
     - `/var/log/syslog`
     - `/var/log/kern.log`
   - Docker 守护程序日志记录（这些可能并不全部存在，具体取决于操作系统）
-    
+
     - `/var/log/docker.log`
 
 * **指标：** 如果遇到性能问题，请提供尽可能多的指标数据（文件或屏幕截图），以帮助确定正在发生的事情。如果您有与机器有关的问题，则可以提供输出 `top` ， `free -m` 和 `df` 的输出，这些输出显示了进程/内存/磁盘使用情况。

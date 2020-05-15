@@ -26,7 +26,7 @@ keywords:
 
 [离线安装指南](/docs/installation/other-installation-methods/air-gap/install-rancher/_index)中包含用于带有捆绑的`system-charts`的 Rancher 安装的示例命令。
 
-> **注意：** 当需要从内置 `system-charts` 切换到外部 `system-charts` 时，需要更新rancher server容器，添加环境变量：`CATTLE_SYSTEM_CATALOG=external`。
+> **注意：** 当需要从内置 `system-charts` 切换到外部 `system-charts` 时，需要更新 rancher server 容器，添加环境变量：`CATTLE_SYSTEM_CATALOG=external`。
 
 ## 在 2.3.0 之前的版本设置 System Charts
 

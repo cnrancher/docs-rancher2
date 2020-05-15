@@ -25,7 +25,7 @@ Rancher 启动的 Kubernetes 集群是借助 [iSCSI 启动器工具](http://www.
 如果您遇到这个问题，您可以通过在集群的每个节点上安装启动器工具来解决。您可以通过登录到节点并输入以下命令之一来安装 iSCSI 启动器工具：
 
 | 平台          | 包名                    | 安装指令                               |
-|---------------|-------------------------|----------------------------------------|
+| ------------- | ----------------------- | -------------------------------------- |
 | Ubuntu/Debian | `open-iscsi`            | `sudo apt install open-iscsi`          |
 | RHEL          | `iscsi-initiator-utils` | `yum install iscsi-initiator-utils -y` |
 

@@ -121,7 +121,7 @@ _自 v2.0.3 版本起可用_
 
    ![Azure: Enter Reply URL](/img/rancher/enter-azure-reply-url.png)
 
-1. 从**回调 URL**blade 中，输入您的 Rancher Server的 URL，并附加验证路径:`<MY_Rancher_URL>/verify auth azure`。
+1. 从**回调 URL**blade 中，输入您的 Rancher Server 的 URL，并附加验证路径:`<MY_Rancher_URL>/verify auth azure`。
 
    > **提示：**您可以在 Rancher 的 Azure AD 身份验证页面(全局视图> 认证> Azure AD)中找到您的个性化 Azure 回调 URL。
 
