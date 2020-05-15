@@ -33,13 +33,13 @@ keywords:
 
 1. 输入以下命令：
 
-   ```
+   ```bash
    sudo apt-get install nfs-kernel-server
    ```
 
 1. 输入以下命令，该命令用于设置存储的目录以及用户访问权限。 如果要将存储保留在其他目录中，请修改命令。
 
-   ```
+   ```bash
    mkdir -p /nfs && chown nobody:nogroup /nfs
    ```
 
@@ -51,7 +51,7 @@ keywords:
    1. 使用文本编辑器打开`/etc/exports`。
    1. 添加在步骤 3 中创建的`/nfs`文件夹的路径，以及集群节点的 IP 地址。为集群中的每个 IP 地址添加一个条目。在每个地址及其伴随的参数后面加上一个空格，该空格作为定界符。
 
-      ```
+      ```bash
       /nfs <IP_ADDRESS1>(rw,sync,no_subtree_check) <IP_ADDRESS2>(rw,sync,no_subtree_check) <IP_ADDRESS3>(rw,sync,no_subtree_check)
       ```
 
@@ -59,7 +59,7 @@ keywords:
 
    1. 使用以下命令更新 NFS 导出表：
 
-      ```
+      ```bash
       exportfs -ra
       ```
 
@@ -67,13 +67,13 @@ keywords:
 
    1. 可以使用以下命令找出 NFS 正在使用的端口：
 
-      ```
+      ```bash
       rpcinfo -p | grep nfs
       ```
 
    2. [打开](https://help.ubuntu.com/lts/serverguide/firewall.html.en)上面命令输出的端口，比如使用下面的命令来打开端口`2049`：
 
-      ```
+      ```bash
       sudo ufw allow 2049
       ```
 

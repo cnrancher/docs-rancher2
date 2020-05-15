@@ -20,7 +20,7 @@ keywords:
 
 | 选项                      | 默认值       | 描述                                                                  |
 | ------------------------- | ------------ | --------------------------------------------------------------------- |
-| `hostname`                | " "          | `string` - Rancher 服务器完全限定域名                                 |
+| `hostname`                | " "          | `string` - Rancher Server 完全限定域名                                |
 | `ingress.tls.source`      | "rancher"    | `string` - ingress 获取证书的位置。- "rancher， letsEncrypt， secret" |
 | `letsEncrypt.email`       | " "          | `string` - 您的邮箱地址                                               |
 | `letsEncrypt.environment` | "production" | `string` - 有效选项： "staging， production"                          |

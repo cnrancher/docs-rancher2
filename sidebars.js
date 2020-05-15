@@ -303,7 +303,8 @@ module.exports = {
           "best-practices/optimize/etcd/_index",
           "best-practices/optimize/kubernetes/_index"
         ]
-      }
+      },
+      "best-practices/use-in-china/_index"
     ],
     系统管理员指南: [
       "admin-settings/_index",

@@ -21,14 +21,12 @@ keywords:
 
 如果不想将特定的节点驱动显示给用户，则可以在 Rancher 中停用这些节点驱动，它们将不会作为创建集群的选项出现。
 
-## 管理节点驱动
+## 先决条件
 
-> **先决条件：** 要创建，编辑或删除节点驱动，您需要具有以下权限之一：
->
-> - [系统管理员权限](/docs/admin-settings/rbac/global-permissions/_index)
-> - 分配了[管理节点驱动](/docs/admin-settings/rbac/global-permissions/_index)角色的[自定义全局权限](/docs/admin-settings/rbac/global-permissions/_index)。
+- 拥有[系统管理员权限](/docs/admin-settings/rbac/global-permissions/_index)
+- 分配了[管理节点驱动](/docs/admin-settings/rbac/global-permissions/_index)角色的[自定义全局权限](/docs/admin-settings/rbac/global-permissions/_index)。
 
-### 激活/停用节点驱动
+## 激活/停用节点驱动
 
 默认情况下，Rancher 仅激活最受欢迎的云提供商，Amazon EC2，Azure，DigitalOcean 和 vSphere 的驱动。如果要显示或隐藏任何节点驱动，则可以更改其状态。
 
@@ -36,7 +34,7 @@ keywords:
 
 2. 选择要**激活**或**停用**的驱动，然后点击适当的图标。
 
-### 添加自定义节点驱动
+## 添加自定义节点驱动
 
 如果要使用 Rancher 不支持的节点驱动，则可以添加该供应商的驱动，以便开始使用它们来为 Kubernetes 集群创建节点模板并最终创建节点池。
 

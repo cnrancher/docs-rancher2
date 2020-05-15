@@ -16,13 +16,13 @@
 
 如果yarn install的速度很慢，可以尝试配置淘宝Registry。
 
-``` 
+```bash
 $ yarn config set registry https://registry.npm.taobao.org -g
 ```
 
 安装初始化
 
-``` 
+```bash
 $ git clone 'https://github.com/cnrancher/docs-rancher2'
 $ cd 'docs-rancher2'
 $ yarn install
@@ -30,7 +30,7 @@ $ yarn install
 
 ### 本地启动
 
-``` 
+```bash
 $ yarn start
 ```
 
@@ -38,7 +38,7 @@ $ yarn start
 
 ### 构建
 
-``` 
+```bash
 $ yarn build
 ```
 
