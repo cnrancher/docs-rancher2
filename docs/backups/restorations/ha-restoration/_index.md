@@ -53,7 +53,7 @@ keywords:
 
 复制您原始的`rancher-cluster.yml`文件。
 
-```
+```bash
 cp rancher-cluster.yml rancher-cluster-restore.yml
 ```
 
@@ -122,17 +122,17 @@ $ rke etcd snapshot-restore --config cluster.yml --name snapshot-name \
 S3 特定选项仅适用于 RKE v0.2.0 +。
 
 | 选项                      | 描述                                                                                                           | S3 特定选项 |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------- | ----------- |
-| `--name` 值               | 指定快照名称                                                                                                   |             |
-| `--config` 值             | 指定集群 YAML 文件（默认为：“cluster.yml”）[$RKE_CONFIG]                                                       |             |
-| `--s3`                    | 启用备份到 s3                                                                                                  | \*          |
-| `--s3-endpoint` 值        | 指定 s3 端点 url (默认值："s3.amazonaws.com")                                                                  | \*          |
-| `--access-key` 值         | 指定 s3 accessKey                                                                                              | \*          |
-| `--secret-key` 值         | 指定 s3 secretKey                                                                                              | \*          |
-| `--bucket-name` 值        | 指定 s3 桶名称                                                                                                 | \*          |
-| `--folder` 值             | 指定 s3 在桶中到文件夹 _自 v2.3.0 起可用_                                                                      | \*          |
-| `--region` 值             | 指定 s3 桶位置 (可选)                                                                                          | \*          |
-| `--ssh-agent-auth`        | [使用 SSH_AUTH_SOCK 定义的 SSH 代理身份验证](https://rancher.com/docs/rke/latest/en/config-options/#ssh-agent) |             |
+|---------------------------|----------------------------------------------------------------------------------------------------------------|--|
+| `--name` 值               | 指定快照名称                                                                                                   |  |
+| `--config` 值             | 指定集群 YAML 文件（默认为：“cluster.yml”）[$RKE_CONFIG]                                                       |  |
+| `--s3`                    | 启用备份到 s3                                                                                                  | \* |
+| `--s3-endpoint` 值        | 指定 s3 端点 url (默认值："s3.amazonaws.com")                                                                  | \* |
+| `--access-key` 值         | 指定 s3 accessKey                                                                                              | \* |
+| `--secret-key` 值         | 指定 s3 secretKey                                                                                              | \* |
+| `--bucket-name` 值        | 指定 s3 桶名称                                                                                                 | \* |
+| `--folder` 值             | 指定 s3 在桶中到文件夹 _自 v2.3.0 起可用_                                                                      | \* |
+| `--region` 值             | 指定 s3 桶位置 (可选)                                                                                          | \* |
+| `--ssh-agent-auth`        | [使用 SSH_AUTH_SOCK 定义的 SSH 代理身份验证](https://rancher.com/docs/rke/latest/en/config-options/#ssh-agent) |  |
 | `--ignore-docker-version` | [禁用 Docker 版本检查](https://rancher.com/docs/rke/latest/en/config-options/#supported-docker-versions)       |
 
 ## 5. 启动集群
@@ -141,7 +141,7 @@ S3 特定选项仅适用于 RKE v0.2.0 +。
 
 > **注意：** 对于运行 RKE v0.2.0 +的用户，在开始还原之前，请确保存在您的`cluster.rkestate`，因为其中包含集群的证书数据。
 
-```
+```bash
 rke up --config ./rancher-cluster-restore.yml
 ```
 
@@ -151,7 +151,7 @@ RKE 完成后，它将在本地目录中创建一个凭证文件。配置`kubect
 
 您的新集群将需要几分钟才能稳定下来。一旦看到新的“目标节点”过渡到`Ready`，并在`NotReady`中看到三个旧节点，您就可以继续。
 
-```
+```bash
 kubectl get nodes
 
 NAME            STATUS    ROLES                      AGE       VERSION
@@ -165,7 +165,7 @@ NAME            STATUS    ROLES                      AGE       VERSION
 
 使用`kubectl`从集群中删除旧节点。
 
-```
+```bash
 kubectl delete node 18.217.82.189 18.222.22.56 18.191.222.99
 ```
 
@@ -179,7 +179,7 @@ kubectl delete node 18.217.82.189 18.222.22.56 18.191.222.99
 
 > **注意：** `cattle-cluster-agent` 和 `cattle-node-agent` Pod 将处于 `Error` 或 `CrashLoopBackOff` 状态，直到 Rancher Server 启动且 DNS /负载均衡器已指向新集群为止。
 
-```
+```bash
 kubectl get pods --all-namespaces
 
 NAMESPACE       NAME                                    READY     STATUS    RESTARTS   AGE
@@ -220,7 +220,7 @@ nodes:
 
 运行 RKE 并将节点添加到新集群。
 
-```
+```bash
 rke up --config ./rancher-cluster-restore.yml
 ```
 

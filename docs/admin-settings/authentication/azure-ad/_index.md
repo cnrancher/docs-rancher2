@@ -115,13 +115,13 @@ _自 v2.0.3 版本起可用_
 
 ## 添加回调 URL
 
-要将 Azure AD 与 Rancher 一起使用，必须将 Rancher 与 Azure 一起白名单。您可以通过向 Azure 提供 Rancher 的回调 URL 来完成此白名单，该 URL 是您的 Rancher 服务器 URL，后跟验证路径。
+要将 Azure AD 与 Rancher 一起使用，必须将 Rancher 与 Azure 一起白名单。您可以通过向 Azure 提供 Rancher 的回调 URL 来完成此白名单，该 URL 是您的 Rancher Server URL，后跟验证路径。
 
 1. 从**设置**页中，选择**回调 URL**。
 
    ![Azure: Enter Reply URL](/img/rancher/enter-azure-reply-url.png)
 
-1. 从**回调 URL**blade 中，输入您的 Rancher 服务器的 URL，并附加验证路径:`<MY_Rancher_URL>/verify auth azure`。
+1. 从**回调 URL**blade 中，输入您的 Rancher Server的 URL，并附加验证路径:`<MY_Rancher_URL>/verify auth azure`。
 
    > **提示：**您可以在 Rancher 的 Azure AD 身份验证页面(全局视图> 认证> Azure AD)中找到您的个性化 Azure 回调 URL。
 

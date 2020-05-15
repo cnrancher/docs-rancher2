@@ -25,7 +25,7 @@ Rancher 启动的 Kubernetes 集群是借助 [iSCSI 启动器工具](http://www.
 如果您遇到这个问题，您可以通过在集群的每个节点上安装启动器工具来解决。您可以通过登录到节点并输入以下命令之一来安装 iSCSI 启动器工具：
 
 | 平台          | 包名                    | 安装指令                               |
-| ------------- | ----------------------- | -------------------------------------- |
+|---------------|-------------------------|----------------------------------------|
 | Ubuntu/Debian | `open-iscsi`            | `sudo apt install open-iscsi`          |
 | RHEL          | `iscsi-initiator-utils` | `yum install iscsi-initiator-utils -y` |
 
@@ -35,7 +35,7 @@ Rancher 启动的 Kubernetes 集群是借助 [iSCSI 启动器工具](http://www.
 >
 > 在更新 Kubernetes YAML 以挂载 iSCSI 二进制文件和配置之前，请确保在集群节点上安装了`open-iscsi`（deb）或`iscsi-initiator-utils`（yum）软件包。如果**之前**没有安装此软件包，更新 YAML 会导致 Docker 自动在每个节点上创建目录和文件，并且将不允许该软件包再被成功安装。
 
-```
+```yalml
 services:
   kubelet:
     extra_binds:

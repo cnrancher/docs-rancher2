@@ -113,7 +113,7 @@ systemctl restart docker
 在使用 Rancher 清理创建的节点时，将根据要删除的集群节点的类型删除以下组件。
 
 | 删除的组件                                                                      | [由基础设施提供商托管的节点][1] | [自定义集群的节点][2] | [托管集群的节点][3] | [导入集群的节点][4] |
-| ------------------------------------------------------------------------------- | ------------------------------- | --------------------- | ------------------- | ------------------- |
+|---------------------------------------------------------------------------------|---------------------------------|-----------------------|---------------------|---------------------|
 | Rancher deployment 命名空间 (默认`cattle-system` )                              | ✓                               | ✓                     | ✓                   | ✓                   |
 | 由 Rancher 打了标签的`serviceAccount`, `clusterRoles`, 和 `clusterRoleBindings` | ✓                               | ✓                     | ✓                   | ✓                   |
 | 标签、注释和清理器                                                              | ✓                               | ✓                     | ✓                   | ✓                   |
@@ -133,7 +133,7 @@ systemctl restart docker
 
 **重启节点:**
 
-```
+```bash
 ## using reboot
 $ sudo reboot
 
@@ -178,7 +178,7 @@ $ sudo shutdown -r now
 
 1. 在与`user-cluster.sh`相同的路径下运行以下命令，使脚本可执行:
 
-   ```
+   ```bash
    chmod +x user-cluster.sh
    ```
 
@@ -192,7 +192,7 @@ $ sudo shutdown -r now
    >
    > 添加 `-dry-run` 标志来预览脚本的结果，而不做任何更改
 
-   ```
+   ```bash
    ./user-cluster.sh rancher/rancher-agent:<RANCHER_VERSION>
    ```
 
@@ -204,7 +204,7 @@ $ sudo shutdown -r now
 
 要运行脚本，可以在 PowerShell 中使用此命令:
 
-```
+```bash
 pushd c:\etc\rancher
 .\cleanup.ps1
 popd
@@ -218,7 +218,7 @@ popd
 
 **清理所有 Docker 容器、镜像和卷:**
 
-```
+```bash
 docker rm -f $(docker ps -qa)
 docker rmi -f $(docker images -q)
 docker volume rm $(docker volume ls -q)
@@ -229,14 +229,14 @@ docker volume rm $(docker volume ls -q)
 Kubernetes 的组件和密钥在系统上留下了需要卸载的挂载。
 
 | 挂载                                   |
-| -------------------------------------- |
+|----------------------------------------|
 | `/var/lib/kubelet/pods/XXX` (各种挂载) |
 | `/var/lib/kubelet`                     |
 | `/var/lib/rancher`                     |
 
 **卸载所有挂载:**
 
-```
+```bash
 for mount in $(mount | grep tmpfs | grep '/var/lib/kubelet' | awk '{ print $3 }') /var/lib/kubelet /var/lib/rancher; do umount $mount; done
 ```
 
@@ -247,7 +247,7 @@ for mount in $(mount | grep tmpfs | grep '/var/lib/kubelet' | awk '{ print $3 }'
 > **注意:** 根据您分配给节点的角色，一些目录将会或不会出现在节点上。
 
 | Directories                  |
-| ---------------------------- |
+|------------------------------|
 | `/etc/ceph`                  |
 | `/etc/cni`                   |
 | `/etc/kubernetes`            |
@@ -268,7 +268,7 @@ for mount in $(mount | grep tmpfs | grep '/var/lib/kubelet' | awk '{ print $3 }'
 
 **清除目录:**
 
-```
+```bash
 rm -rf /etc/ceph \
        /etc/cni \
        /etc/kubernetes \
@@ -294,7 +294,7 @@ rm -rf /etc/ceph \
 
 **重启节点:**
 
-```
+```bash
 ## using reboot
 $ sudo reboot
 
@@ -309,7 +309,7 @@ $ sudo shutdown -r now
 > **注意:** 根据为节点所在的集群配置的网络供应商，一些接口将出现在节点上，也可能不出现在节点上。
 
 | Interfaces                                 |
-| ------------------------------------------ |
+|--------------------------------------------|
 | `flannel.1`                                |
 | `cni0`                                     |
 | `tunl0`                                    |
@@ -318,7 +318,7 @@ $ sudo shutdown -r now
 
 **列出所有接口:**
 
-```
+```bash
 ## Using ip
 ip address show
 
@@ -328,7 +328,7 @@ ifconfig -a
 
 **删除接口:**
 
-```
+```bash
 ip link delete interface_name
 ```
 
@@ -339,7 +339,7 @@ ip link delete interface_name
 Iptables 规则用于将数据从容器路由到容器。创建的规则不是持久性的，因此重新启动节点将把 iptables 恢复到原来的状态。
 
 | Chains                                           |
-| ------------------------------------------------ |
+|--------------------------------------------------|
 | `cali-failsafe-in`                               |
 | `cali-failsafe-out`                              |
 | `cali-fip-dnat`                                  |
@@ -367,7 +367,7 @@ Iptables 规则用于将数据从容器路由到容器。创建的规则不是�
 
 **列出所有 iptables 规则:**
 
-```
+```bash
 iptables -L -t nat
 iptables -L -t mangle
 iptables -L
