@@ -23,14 +23,12 @@ _自 v2.2.0 起可用_
 
 如果不想将特定的集群驱动显示给用户，则可以在 Rancher 中停用这些集群驱动，它们将不会作为创建集群的选项出现。
 
-## 管理集群驱动
+## 先决条件
 
-> **先决条件：** 要创建，编辑或删除集群驱动，您需要具有以下权限之一：
->
-> - [系统管理员权限](/docs/admin-settings/rbac/global-permissions/_index)
-> - 分配了[管理集群驱动](/docs/admin-settings/rbac/global-permissions/_index)角色的[自定义全局权限](/docs/admin-settings/rbac/global-permissions/_index)。
+- 拥有[系统管理员权限](/docs/admin-settings/rbac/global-permissions/_index)。
+- 分配了[管理集群驱动](/docs/admin-settings/rbac/global-permissions/_index)角色的[自定义全局权限](/docs/admin-settings/rbac/global-permissions/_index)。
 
-### 激活/停用集群驱动
+## 激活/停用集群驱动
 
 默认情况下，Rancher 仅激活最流行的云供应商，Google GKE，Amazon EKS 和 Azure AKS 的驱动。如果要显示或隐藏任何集群驱动，则可以更改其状态。
 
@@ -40,7 +38,7 @@ _自 v2.2.0 起可用_
 
 3. 选择要**激活**或**禁用**的驱动，然后点击适当的图标。
 
-### 添加自定义集群驱动
+## 添加自定义集群驱动
 
 如果要使用 Rancher 不支持的集群驱动，您可以添加供应商的驱动，以便开始使用它们来创建**托管的** Kubernetes 集群。
 
