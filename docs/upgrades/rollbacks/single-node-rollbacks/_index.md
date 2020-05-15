@@ -37,7 +37,7 @@ docker pull rancher/rancher:<PRIOR_RANCHER_VERSION>
 ![占位符参考](/img/rancher/placeholder-ref-2.png)
 
 | 占位符                     | 例子              | 描述                                  |
-| -------------------------- | ----------------- | ------------------------------------- |
+|----------------------------|-------------------|---------------------------------------|
 | `<PRIOR_RANCHER_VERSION>`  | `v2.0.5`          | 升级之前使用的 rancher/rancher 镜像。 |
 | `<RANCHER_CONTAINER_NAME>` | `festive_mestorf` | Rancher 容器的名称。                  |
 | `<RANCHER_VERSION>`        | `v2.0.5`          | 备份所针对的 Rancher 版本。           |
@@ -71,7 +71,7 @@ docker pull rancher/rancher:<PRIOR_RANCHER_VERSION>
 
    您可以通过输入`docker ps`获得 Rancher 容器的名称。
 
-1. 将在[升级单节点 Rancher](/docs/upgrades/upgrades/single-node/_index)时生成的备份压缩包移动到 Rancher 服务器上。切换到您将其移动到的目录。输入`ls`确认它在那里。
+1. 将在[升级单节点 Rancher](/docs/upgrades/upgrades/single-node/_index)时生成的备份压缩包移动到 Rancher Server 上。切换到您将其移动到的目录。输入`ls`确认它在那里。
 
    如果您遵循了我们在[升级单节点 Rancher](/docs/upgrades/upgrades/single-node/_index)中建议的命名约定，则其命名类似于(`rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz`)。
 

@@ -36,7 +36,7 @@ Istio 中流量管理的主要优势在于它允许动态请求路由。动态�
 1. 将下面的资源复制到表单中。
 1. 单击**导入**。
 
-```
+```yaml
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
@@ -75,4 +75,4 @@ spec:
 
 **结果：** 当您为此服务生成流量时（例如通过刷新入口网关 URL），Kiali 流量图将反映出对`reviews`服务的流量在`v1`和`v3`之间平均分配。
 
-#### [下一步：产生并查看流量](/docs/cluster-admin/tools/istio/setup/view-traffic/_index)
+### [下一步：产生并查看流量](/docs/cluster-admin/tools/istio/setup/view-traffic/_index)

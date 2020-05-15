@@ -35,7 +35,7 @@ keywords:
 
    **例如** ：
 
-   ```
+   ```bash
    $ cat ./app-readme.md
 
    # Wordpress ROCKS!

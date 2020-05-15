@@ -45,7 +45,7 @@ keywords:
 1. 将命名空间更新为`kube-system`
 1. 在答案部分中，单击`编辑 YAML`并粘贴以下内容，然后单击启动：
 
-   ```
+   ```yaml
    ---
      logLevel: "info"
      excludeNamespaces:

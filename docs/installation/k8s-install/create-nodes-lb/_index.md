@@ -92,7 +92,7 @@ keywords:
 
 #### 为什么要三个节点？
 
-在 RKE 集群中，Rancher 服务器数据存储在 etcd 中。这个 etcd 数据库在所有三个节点上运行。
+在 RKE 集群中，Rancher Server 数据存储在 etcd 中。这个 etcd 数据库在所有三个节点上运行。
 
 etcd 数据库需要奇数个节点，因此它始终可以选举出被大多数 etcd 节点认可的集群的领导者。如果 etcd 数据库无法选出领导者，则 etcd 可能会遭受[脑裂](https://www.quora.com/What-is-split-brain-in-distributed-systems)的困扰，这时将需要从备份中恢复集群。如果三个 etcd 节点之一发生故障，则其余两个节点可以选择一个领导者，因为它们占 etcd 节点总数的大部分。
 

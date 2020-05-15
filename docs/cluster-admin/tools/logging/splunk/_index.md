@@ -33,7 +33,7 @@ title: Splunk
 
    - 您可以使用 openssl 命令生成自签名证书。例如：
 
-     ```
+     ```bash
      openssl req -x509 -newkey rsa:2048 -keyout myservice.key -out myservice.cert -days 365 -nodes -subj "/CN=myservice.example.com"
      ```
 
@@ -60,7 +60,7 @@ title: Splunk
 
 您可以使用 curl 来查看 **HEC** 是否开启
 
-```
+```bash
 $ curl http://splunk-server:8088/services/collector/event \
     -H 'Authorization: Splunk 8da70994-b1b0-4a79-b154-bfaae8f93432' \
     -d '{"event": "hello world"}'

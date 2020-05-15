@@ -75,7 +75,7 @@ keywords:
 
 > 要了解是否有可用于安装指定的 Docker 版本的脚本，请参阅此[GitHub 代码库](https://github.com/rancher/install-docker)，其中包含所有 Rancher 的 Docker 安装脚本。
 
-**结果：** 您已创建了 Rancher 服务器节点，这些节点满足了 Rancher 对 OS，Docker，硬件和网络的要求。
+**结果：** 您已创建了 Rancher Server 节点，这些节点满足了 Rancher 对 OS，Docker，硬件和网络的要求。
 
 ## RKE 集群节点的后续步骤
 

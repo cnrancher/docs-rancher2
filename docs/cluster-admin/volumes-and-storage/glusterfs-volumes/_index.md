@@ -24,7 +24,7 @@ keywords:
 - 集群主机需要安装了`systemd-run`，可以在每台主机上执行`which systemd-run`来验证。
 - `systemd-run`需要兼容 Debian 操作系统，可以在每台主机上执行下面的命令来进行验证，请根据需要更改 hyperkube 的镜像标签。
 
-  ```
+  ```bash
   docker run -v /usr/bin/systemd-run:/usr/bin/systemd-run --entrypoint /usr/bin/systemd-run rancher/hyperkube:v1.16.2-rancher1 --version
   ```
 
@@ -32,7 +32,7 @@ keywords:
 >
 > 在更新 Kubernetes YAML 以挂载`systemd-run`之前，请确保`systemd`软件包已安装在集群节点上。如果**之前**没有安装此软件包，更新 YAML 会导致 Docker 自动在每个节点上创建目录和文件，并且将不允许该软件包再被成功安装。
 
-```
+```yaml
 services:
   kubelet:
     extra_binds:
@@ -41,6 +41,6 @@ services:
 
 当集群配置完成后，可以通过查找以下日志行来检查`kubelet`容器的日志，以确认该功能是否已激活。
 
-```
+```bash
 Detected OS with systemd
 ```

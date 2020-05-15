@@ -157,7 +157,7 @@ _自 RKE v0.2.0 起可用_
 
 **例如：**
 
-```
+```bash
 root@node:~# s3cmd mb s3://rke-etcd-snapshots
 root@node:~# s3cmd put /opt/rke/etcd-snapshots/snapshot.db s3://rke-etcd-snapshots/
 ```

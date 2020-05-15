@@ -41,7 +41,7 @@ keywords:
 
 如果您需要避免 Istio sidecar 自动注入到某个工作负载，请在该工作负载上添加如下注释（annotation）：
 
-```
+```yaml
 sidecar.istio.io/inject: "false"
 ```
 

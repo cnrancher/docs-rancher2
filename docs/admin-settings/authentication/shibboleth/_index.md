@@ -62,7 +62,7 @@ _自 v2.4.0 起可用_
 
       您可以使用 openssl 命令生成一个。例如：
 
-      ```
+      ```bash
       openssl req -x509 -newkey rsa:2048 -keyout myservice.key -out myservice.cert -days 365 -nodes -subj "/CN=myservice.example.com"
       ```
 

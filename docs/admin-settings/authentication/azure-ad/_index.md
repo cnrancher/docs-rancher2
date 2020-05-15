@@ -115,13 +115,13 @@ _自 v2.0.3 版本起可用_
 
 ## 添加回调 URL
 
-要将 Azure AD 与 Rancher 一起使用，必须将 Rancher 与 Azure 一起白名单。您可以通过向 Azure 提供 Rancher 的回调 URL 来完成此白名单，该 URL 是您的 Rancher 服务器 URL，后跟验证路径。
+要将 Azure AD 与 Rancher 一起使用，必须将 Rancher 与 Azure 一起白名单。您可以通过向 Azure 提供 Rancher 的回调 URL 来完成此白名单，该 URL 是您的 Rancher Server URL，后跟验证路径。
 
 1. 从**设置**页中，选择**回调 URL**。
 
    ![Azure: Enter Reply URL](/img/rancher/enter-azure-reply-url.png)
 
-1. 从**回调 URL**blade 中，输入您的 Rancher 服务器的 URL，并附加验证路径:`<MY_Rancher_URL>/verify auth azure`。
+1. 从**回调 URL**blade 中，输入您的 Rancher Server 的 URL，并附加验证路径:`<MY_Rancher_URL>/verify auth azure`。
 
    > **提示：**您可以在 Rancher 的 Azure AD 身份验证页面(全局视图> 认证> Azure AD)中找到您的个性化 Azure 回调 URL。
 
@@ -189,15 +189,15 @@ _自 v2.0.3 版本起可用_
 
    下表将您在 Azure 门户中复制的值映射到 Rancher 中的字段。
 
-   | Rancher  | AZURE 值                           |
-   | :------- | :--------------------------------- |
-   | 租户 ID  | 目录 ID                            |
-   | 应用 ID  | 应用程序 ID                        |
-   | 应用密文 | 密钥值                             |
-   | 端点     | https://login.microsoftonline.com/ |
-   | 图形端点 | Microsoft Azure AD Graph API 端点  |
-   | 令牌端点 | OAuth 2.0 令牌端点                 |
-   | 认证端点 | OAuth 2.0 授权端点                 |
+| Rancher  | AZURE 值                           |
+|:---------|:-----------------------------------|
+| 租户 ID  | 目录 ID                            |
+| 应用 ID  | 应用程序 ID                        |
+| 应用密文 | 密钥值                             |
+| 端点     | https://login.microsoftonline.com/ |
+| 图形端点 | Microsoft Azure AD Graph API 端点  |
+| 令牌端点 | OAuth 2.0 令牌端点                 |
+| 认证端点 | OAuth 2.0 授权端点                 |
 
 1. 单击 **使用 Azure 进行身份验证**。
 

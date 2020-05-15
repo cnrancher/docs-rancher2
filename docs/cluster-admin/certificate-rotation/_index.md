@@ -73,13 +73,13 @@ Rancher 启动的 Kubernetes 集群能够通过 API 轮换自动生成的证书�
 
 1. 对于 `controlplane` 和 `etcd` 节点，登录到每个对应的主机，并检查证书 `kube-apiserver-requestheader-ca.pem` 是否在以下目录中：
 
-   ```
+   ```bash
    cd /etc/kubernetes/.tmp
    ```
 
    如果证书不在目录中，请执行以下命令：
 
-   ```
+   ```bash
    cp kube-ca.pem kube-apiserver-requestheader-ca.pem
    cp kube-ca-key.pem kube-apiserver-requestheader-ca-key.pem
    cp kube-apiserver.pem kube-apiserver-proxy-client.pem
@@ -88,7 +88,7 @@ Rancher 启动的 Kubernetes 集群能够通过 API 轮换自动生成的证书�
 
    如果`.tmp`目录不存在，则可以将整个 SSL 证书复制到`.tmp`中：
 
-   ```
+   ```bash
    cp -r /etc/kubernetes/ssl /etc/kubernetes/.tmp
    ```
 

@@ -26,7 +26,7 @@ title: Elasticsearch
 
    - 您可以使用 openssl 命令生成自签名证书。例如：
 
-     ```
+     ```bash
      openssl req -x509 -newkey rsa:2048 -keyout myservice.key -out myservice.cert -days 365 -nodes -subj "/CN=myservice.example.com"
      ```
 

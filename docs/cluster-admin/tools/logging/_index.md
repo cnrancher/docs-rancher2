@@ -32,7 +32,7 @@ Fluentd 收集保存在节点上 `/var/log/containers` 目录下的容器日志�
 
 集群中每个节点上的 Docker 守护进程应[配置](https://docs.docker.com/config/containers/logging/configure/) （默认）日志驱动为: `json-file`。您可以通过运行以下命令来检查日志驱动配置：
 
-```
+```bash
 $ docker info | grep 'Logging Driver'
 Logging Driver: json-file
 ```
@@ -83,7 +83,7 @@ Logging Driver: json-file
 
         - 您可以使用 openssl 命令生成自签名证书。例如：
 
-          ```
+          ```bash
           openssl req -x509 -newkey rsa:2048 -keyout myservice.key -out myservice.cert -days 365 -nodes -subj "/CN=myservice.example.com"
           ```
 

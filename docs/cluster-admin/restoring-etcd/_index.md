@@ -103,7 +103,7 @@ values={[
 
 2. 在剩下的 etcd 节点上，运行以下命令:
 
-   ```
+   ```bash
    $ docker run --rm -v /var/run/docker.sock:/var/run/docker.sock assaflavie/runlike etcd
    ```
 
@@ -111,7 +111,7 @@ values={[
 
 3. 停止上一步启动的 etcd 容器，将其重命名为 `etcd-old`。
 
-   ```
+   ```bash
    $ docker stop etcd
    $ docker rename etcd etcd-old
    ```

@@ -102,18 +102,18 @@ spec:
 
 通过运行以下命令确认资源是否存在：
 
-```
+```bash
 kubectl get gateway -A
 ```
 
 预期的结果是输出与下方类似的信息：
 
-```
+```bash
 NAME               AGE
 bookinfo-gateway   64m
 ```
 
-#### 从 Web 浏览器访问 ProductPage 服务
+### 从 Web 浏览器访问 ProductPage 服务
 
 要测试并查看 BookInfo 应用程序是否正确部署，可以使用 Istio 控制器 IP 和端口以及您的 Kubernetes 网关资源中指定的请求名称，在 Web 浏览器中查看该应用程序：
 
@@ -134,7 +134,7 @@ bookinfo-gateway   64m
 
 [Istio 官方文档](https://istio.io/docs/tasks/traffic-management/ingress/ingress-control/#troubleshooting)建议使用`kubectl`命令检查正确的入口主机和入口端口是否有外部请求。
 
-#### 确认 Kubernetes 网关与 Istio 的 Ingress 控制器匹配
+### 确认 Kubernetes 网关与 Istio 的 Ingress 控制器匹配
 
 您可以尝试执行本节中的步骤，以确保正确配置 Kubernetes 网关。
 
@@ -145,4 +145,4 @@ bookinfo-gateway   64m
 1. 在`istio-system`命名空间中，找到一个名为`istio-ingressgateway`的工作负载。
 1. 单击此工作负载的名称，然后转到**标签/注释**部分。您应该看到它具有键`istio`和值`ingressgateway`。这确认网关资源中的选择器与 Istio 的默认 Ingress 控制器匹配。
 
-#### [下一步：设置 Istio 的流量管理组件](/docs/cluster-admin/tools/istio/setup/set-up-traffic-management/_index)
+### [下一步：设置 Istio 的流量管理组件](/docs/cluster-admin/tools/istio/setup/set-up-traffic-management/_index)

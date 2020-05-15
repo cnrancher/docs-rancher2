@@ -41,7 +41,7 @@ keywords:
 1. 将显示的内容复制到剪贴板。
 1. 将内容粘贴到本地计算机上的新文件中。将文件移动到 `~/.kube/config`。注意: kubectl 用于 kubeconfig 文件存放的默认位置是 `~/.kube/config`, 但是您可以使用任何目录，并使用 `--kubeconfig` 标记来指定它，如以下命令所示:
 
-   ```
+   ```bash
    kubectl --kubeconfig /custom/path/kube.config get pods
    ```
 
@@ -63,14 +63,14 @@ Rancher 将发现和显示由 `kubectl`创建的资源。但是，这些资源�
 
 要在下载的 kubeconfig 文件中找到上下文的名称，请运行：
 
-```
+```bash
 kubectl config get-contexts --kubeconfig /custom/path/kube.config
 CURRENT   NAME                        CLUSTER                     AUTHINFO     NAMESPACE
 *         my-cluster                  my-cluster                  user-46tmn
           my-cluster-controlplane-1   my-cluster-controlplane-1   user-46tmn
 ```
 
-在本例中，当您将 `kubectl` 与第一个上下文 `my-cluster`一起使用时，将通过 Rancher 服务器对您进行身份验证。
+在本例中，当您将 `kubectl` 与第一个上下文 `my-cluster`一起使用时，将通过 Rancher Server 对您进行身份验证。
 
 对于第二个上下文 `my-cluster-controlplane-1`，您将使用授权的集群端点进行身份验证，直接与下游 RKE 集群通信。
 
@@ -86,13 +86,13 @@ CURRENT   NAME                        CLUSTER                     AUTHINFO     N
 
 假设 kubeconfig 文件位于 `~/.kube/config`:
 
-```
+```bash
 kubectl --context <CLUSTER_NAME>-fqdn get nodes
 ```
 
 直接引用 kubeconfig 文件的位置:
 
-```
+```bash
 kubectl --kubeconfig /custom/path/kube.config --context <CLUSTER_NAME>-fqdn get pods
 ```
 
@@ -102,12 +102,12 @@ kubectl --kubeconfig /custom/path/kube.config --context <CLUSTER_NAME>-fqdn get 
 
 假设 kubeconfig 文件位于 `~/.kube/config`:
 
-```
+```bash
 kubectl --context <CLUSTER_NAME>-<NODE_NAME> get nodes
 ```
 
 直接引用 kubeconfig 文件的位置:
 
-```
+```bash
 kubectl --kubeconfig /custom/path/kube.config --context <CLUSTER_NAME>-<NODE_NAME> get pods
 ```

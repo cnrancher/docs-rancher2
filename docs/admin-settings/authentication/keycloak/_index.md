@@ -25,15 +25,15 @@ _v2.1.0 版本可用_
 - 您必须有一个[Keycloak IdP 服务器](https://www.keycloak.org/docs/latest/server_installation/)。
 - 在 Keycloak 中，创建一个[新的 SAML 客户端](https://www.keycloak.org/docs/latest/server_admin/#saml-clients)，设置如下。参见[Keycloak 文档](keycloak.org/docs/latest/server_admin/#saml-clients)获得帮助。
 
-  | 设置                 | 值                                                                      |
-  | -------------------- | ----------------------------------------------------------------------- |
-  | `Sign Documents`     | `ON` <sup>1</sup>                                                       |
-  | `Sign Assertions`    | `ON` <sup>1</sup>                                                       |
-  | 所有其它`ON/OFF`设置 | `OFF`                                                                   |
-  | `Client ID`          | `https://yourRancherHostURL/v1-saml/keycloak/saml/metadata`<sup>2</sup> |
-  | `Client Name`        | <CLIENT_NAME> (e.g. `rancher`)                                          |
-  | `Client Protocol`    | `SAML`                                                                  |
-  | `Valid Redirect URI` | `https://yourRancherHostURL/v1-saml/keycloak/saml/acs`                  |
+| 设置                 | 值                                                                      |
+|----------------------|-------------------------------------------------------------------------|
+| `Sign Documents`     | `ON` <sup>1</sup>                                                       |
+| `Sign Assertions`    | `ON` <sup>1</sup>                                                       |
+| 所有其它`ON/OFF`设置 | `OFF`                                                                   |
+| `Client ID`          | `https://yourRancherHostURL/v1-saml/keycloak/saml/metadata`<sup>2</sup> |
+| `Client Name`        | <CLIENT_NAME> (e.g. `rancher`)                                          |
+| `Client Protocol`    | `SAML`                                                                  |
+| `Valid Redirect URI` | `https://yourRancherHostURL/v1-saml/keycloak/saml/acs`                  |
 
   > - 1：您可以选择启用这些设置中的一个或两个。
   > - 2：在配置和保存 SAML 提供者之前，不会生成 Rancher SAML 元数据。
@@ -47,15 +47,15 @@ _v2.1.0 版本可用_
 1.  选择**Keycloak**。
 1.  完成**配置 Keycloak 帐户**表单。Keycloak IdP 允许您指定要使用的数据存储。您可以添加数据库，也可以使用现有的 LDAP 服务器。例如，如果您选择 Active Directory (AD)服务器，下面的示例将描述如何将 AD 属性映射到 Rancher 中的字段。
 
-    | 字段             | 描述                                                    |
-    | ---------------- | ------------------------------------------------------- |
-    | 显示名称         | 包含用户 display name 的 AD 属性。                      |
-    | 用户名           | 包含用户 user name/given name 的 AD 属性                |
-    | UID              | 对每个用户唯一的 AD 属性。                              |
-    | 组               | 为管理组成员身份创建的条目。                            |
-    | Rancher API 地址 | Rancher 服务器的 URL 地址                               |
-    | 私钥 / 证书      | 密钥/证书对，用于在 Rancher 和 IdP 之间创建安全 shell。 |
-    | 元数据 XML       | 从您的 IdP 服务器导出的`metadata.xml`文件。             |
+| 字段             | 描述                                                    |
+|------------------|---------------------------------------------------------|
+| 显示名称         | 包含用户 display name 的 AD 属性。                      |
+| 用户名           | 包含用户 user name/given name 的 AD 属性                |
+| UID              | 对每个用户唯一的 AD 属性。                              |
+| 组               | 为管理组成员身份创建的条目。                            |
+| Rancher API 地址 | Rancher Server 的 URL 地址                              |
+| 私钥 / 证书      | 密钥/证书对，用于在 Rancher 和 IdP 之间创建安全 shell。 |
+| 元数据 XML       | 从您的 IdP 服务器导出的`metadata.xml`文件。             |
 
     > **提示：** 您可以使用 openssl 命令生成密钥/证书对。例如:
     >
@@ -124,7 +124,7 @@ Keycloak 6.0.0 及以上版本在“安装”选项卡下不再提供 IDP 元数
 
 您会得到类似下面的示例的文件:
 
-```
+```bash
 <EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" entityID="https://{KEYCLOAK-URL}/auth/realms/{REALM-NAME}">
   ....
 
