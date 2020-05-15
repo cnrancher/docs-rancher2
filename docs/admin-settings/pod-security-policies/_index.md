@@ -15,6 +15,8 @@ keywords:
   - Pod 安全策略
 ---
 
+## 概述
+
 **Pod 安全策略** (PSP) 是控制 Pod 安全的规范（如是否可以使用 root 权限等）的对象。如果 Pod 不符合 PSP 中指定的条件，Kubernetes 将不允许其启动，并且 Rancher 中将显示错误消息`Pod <NAME> is forbidden: unable to validate...`。
 
 > 注意：
@@ -41,16 +43,16 @@ keywords:
 
 _自 v2.0.7 起可用_
 
-Rancher 内置了两个默认的 Pod 安全策略（PSP）：`受限制的`和`不受限制的`策略。
+Rancher 内置了两个默认的 Pod 安全策略（PSP）：`受限`和`不受限`策略。
 
-- `受限制的`
+- 受限策略
 
   该策略基于 Kubernetes [示例受限策略](https://raw.githubusercontent.com/kubernetes/website/master/content/en/examples/policy/restricted-psp.yaml)。它极大地限制了可以将哪些类型的 Pod 部署到集群或项目中。这项策略：
 
   - 阻止 Pod 以特权用户身份运行，并防止特权升级。
   - 验证服务器所需的安全性机制是否到位(例如，限制哪些卷可以被挂载，以及防止添加 root 补充组)。
 
-- `不受限制的`
+- 不受限策略
 
   该策略等效于在禁用 PSP 控制器的情况下运行 Kubernetes。对于可以将哪些 Pod 部署到集群或项目中，它没有任何限制
 
@@ -79,7 +81,7 @@ Rancher 内置了两个默认的 Pod 安全策略（PSP）：`受限制的`和`�
     - [SELinux 策略](https://kubernetes.io/docs/concepts/policy/pod-security-policy/#selinux)
     - [附加组策略][3]
 
-## 下一步是什么？
+## 后续操作
 
 您可以在以下上下文中添加 Pod 安全策略（PSP)：
 

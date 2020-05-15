@@ -16,18 +16,18 @@ keywords:
   - 驱动介绍
 ---
 
+## 概述
+
 使用 Rancher 中的驱动，您可以管理可以使用哪些供应商来创建[托管的 Kubernetes 集群](/docs/cluster-provisioning/hosted-kubernetes-clusters/_index)或[节点](/docs/cluster-provisioning/rke-clusters/node-pools/_index)，以允许 Rancher 部署和管理 Kubernetes。
 
-## Rancher 驱动
-
-使用 Rancher 驱动，您可以启用/禁用 Rancher 中内置的驱动。另外，如果相关驱动 Rancher 尚未实现，您可以添加自己的驱动。
-
-Rancher 中有两种驱动：
+Rancher 有两种驱动：
 
 - [集群驱动](#集群驱动)
 - [节点驱动](#节点驱动)
 
-### 集群驱动
+您可以启用或禁用 Rancher 中内置的驱动。如果相关驱动 Rancher 尚未实现，您可以添加自己的驱动。
+
+## 集群驱动
 
 _自 v2.2.0 起可用_
 
@@ -46,7 +46,7 @@ _自 v2.2.0 起可用_
 - [腾讯 TKE](/docs/cluster-provisioning/hosted-kubernetes-clusters/tke/_index)
 - 百度 CCE
 
-### 节点驱动
+## 节点驱动
 
 节点驱动用于创建节点，Rancher 可以用这些节点启动和管理 Kubernetes 集群。节点驱动就是[Docker Machine](https://docs.docker.com/machine/drivers/)。在创建集群时显示哪个供应商的可用性是根据节点驱动的状态决定的。在创建供应商提供节点的 Kubernetes 集群的选项中，UI 仅显示节点驱动状态为`Active`的选项。默认情况下，Rancher 内置了许多现有的 Docker Machine 驱动，但是您也可以创建自定义节点驱动，并添加到 Rancher 中。
 
