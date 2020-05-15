@@ -29,7 +29,7 @@ keywords:
 
 我们建议将 Rancher Server 安装在高可用的 Kubernetes 集群上，主要是因为它可以保护 Rancher Server 的数据。在高可用安装中，负载均衡器充当客户端的单点入口，并在集群中的多台服务器之间分配网络流量，这有助于防止任何一台服务器成为单点故障。
 
-我们不建议在单个 Docker 容器中安装 Rancher，因为如果该节点发生故障，则其他节点上将没有可用的集群数据副本，并且您可能会丢失 Rancher 服务器上的数据。
+我们不建议在单个 Docker 容器中安装 Rancher，因为如果该节点发生故障，则其他节点上将没有可用的集群数据副本，并且您可能会丢失 Rancher Server 上的数据。
 
 Rancher 需要安装在高可用的 [RKE（Rancher Kubernetes Engine）](https://rancher.com/docs/rke/latest/en/)Kubernetes 集群上，或高可用的[K3s (轻量级 Kubernetes) ](https://rancher.com/docs/k3s/latest/en/)Kubernetes 集群。 RKE 和 K3s 都是经过完全认证的 Kubernetes 发行版。
 
