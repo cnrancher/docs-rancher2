@@ -331,7 +331,7 @@ _注意，通过 ISO 创建 VM 时不支持使用 cloud-init 选项_
 
 - 您的集群已创建并进入为 **Provisioning** 的状态。Rancher 正在启动您的集群。
 - 您可以在集群的状态更新为 **Active** 后访问它。
-- Rancher 为活动的集群分配了两个项目，即 `Default`（包含命名空间 `default`）和 `System`（包含命名空间 `cattle-system`，`ingress-nginx`，`kube-public` 和 `kube-system`，如果存在）。
+- Rancher 为活动的集群分配了两个项目，即 `Default`项目（包含命名空间 `default`）和 `System`项目（包含命名空间 `cattle-system`，`ingress-nginx`，`kube-public` 和 `kube-system`，如果命名空间存在）。
 
 ### 可选：配置 Cloud Provider 和并创建存储
 
