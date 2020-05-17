@@ -26,8 +26,8 @@ Rancher 提供了一些额外功能来帮助您管理 HPA，具体取决于 Ranc
 
 根据您的 Kubernetes API 版本，管理 HPA 的方式有所不同：
 
-- **对于 Kubernetes API 版本自动缩放/ V2beta1：** 使用此版本的 Kubernetes API，您可以根据应用的 CPU 和内存使用量自动缩放 Pod。
-- **对于 Kubernetes API 版本自动缩放/ V2beta2：** 使用此版本的 Kubernetes API，除了可以根据应用的 CPU 和内存使用量自动缩放 Pod 外，还可以使用“自定义指标”进行自动缩放。
+- **对于 Kubernetes API autoscaling/V2beta1：** 使用此版本的 Kubernetes API，您可以根据应用的 CPU 和内存使用量自动缩放 Pod。
+- **对于 Kubernetes API autoscaling/V2beta2：** 使用此版本的 Kubernetes API，除了可以根据应用的 CPU 和内存使用量自动缩放 Pod 外，还可以使用“自定义指标”进行自动缩放。
 
 根据您的 Rancher 版本，HPA 的管理方式也不同：
 

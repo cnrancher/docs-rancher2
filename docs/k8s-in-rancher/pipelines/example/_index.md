@@ -1,6 +1,6 @@
 ---
 title: YAML 文件示例
-description: 流水线（Pipelines）能够通过 Rancher UI 或者使用代码仓库中的 YMAL 文件，即 `.rancher-pipeline.yml` 或 `.rancher-pipeline.yaml` 的方式进行配置。
+description: 流水线（Pipelines）能够通过 Rancher UI 或者使用代码仓库中的 YMAL 文件(即 `.rancher-pipeline.yml` 或 `.rancher-pipeline.yaml`)的方式进行配置。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档

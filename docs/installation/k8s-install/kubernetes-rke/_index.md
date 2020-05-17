@@ -1,6 +1,6 @@
 ---
 title: 2、安装 Kubernetes
-description: 本节描述了如何根据我们的 [Rancher Server 环境的最佳实践](/docs/overview/architecture-recommendations/_index)来安装 Kubernetes 集群。该集群应专用于仅运行 Rancher Server。对于 v2.4 之前的 Rancher，Rancher 应该安装在 [RKE](https://rancher.com/docs/rke/latest/en/)（Rancher Kubernetes Engine）Kubernetes 集群上。RKE 是经过 CNCF 认证的 Kubernetes 发行版，并且全部组件完全在 Docker 容器内运行。从 Rancher v2.4 开始，Rancher Server 可以安装在 RKE Kubernetes 集群或 K3s Kubernetes 集群上。K3s 也是 Rancher 发布的经过完全认证的 Kubernetes 发行版，但比 RKE 更新。我们建议在 K3s 上安装 Rancher，因为 K3s 易于使用且更轻量，全部组件都打包在了一个二进制文件里。并且这个二进制文件小于 100 MB。注意：如果在 RKE 集群上安装了 Rancher 之后，目前没有办法将这个高可用迁移到 K3s 集群上。Rancher Server 只能在使用 RKE 或 K3s 安装的 Kubernetes 集群中运行。不支持在托管的 Kubernetes 集群（例如 EKS）上使用 Rancher。
+description: 本节描述了如何根据我们的 [Rancher Server 环境的最佳实践](/docs/overview/architecture-recommendations/_index)来安装 Kubernetes 集群。该集群应专用于运行 Rancher Server。对于 v2.4 之前的 Rancher，Rancher 应该安装在 [RKE](https://rancher.com/docs/rke/latest/en/)（Rancher Kubernetes Engine）Kubernetes 集群上。RKE 是经过 CNCF 认证的 Kubernetes 发行版，并且全部组件完全在 Docker 容器内运行。从 Rancher v2.4 开始，Rancher Server 可以安装在 RKE Kubernetes 集群或 K3s Kubernetes 集群上。K3s 也是 Rancher 发布的经过完全认证的 Kubernetes 发行版，但比 RKE 更新。我们建议在 K3s 上安装 Rancher，因为 K3s 易于使用且更轻量，全部组件都打包在了一个二进制文件里。并且这个二进制文件小于 100 MB。注意：如果在 RKE 集群上安装了 Rancher 之后，目前没有办法将这个高可用迁移到 K3s 集群上。Rancher Server 只能在使用 RKE 或 K3s 安装的 Kubernetes 集群中运行。不支持在托管的 Kubernetes 集群（例如 EKS）上使用 Rancher。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -16,7 +16,7 @@ keywords:
   - 安装 Kubernetes
 ---
 
-本节描述了如何根据我们的 [Rancher Server 环境的最佳实践](/docs/overview/architecture-recommendations/_index)来安装 Kubernetes 集群。该集群应专用于仅运行 Rancher Server。
+本节描述了如何根据我们的 [Rancher Server 环境的最佳实践](/docs/overview/architecture-recommendations/_index)来安装 Kubernetes 集群。该集群应专用于运行 Rancher Server。
 
 对于 v2.4 之前的 Rancher，Rancher 应该安装在 [RKE](https://rancher.com/docs/rke/latest/en/)（Rancher Kubernetes Engine）Kubernetes 集群上。RKE 是经过 CNCF 认证的 Kubernetes 发行版，并且全部组件完全在 Docker 容器内运行。
 
