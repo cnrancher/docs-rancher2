@@ -28,7 +28,7 @@ keywords:
 
 HPA 通过以下方式改善您的服务：
 
-- 释放将因过多的 Pod 而浪费的硬件资源。
+- 释放因过多的 Pod 而浪费的硬件资源。
 - 按照应用需要的性能，自动提高或降低 Pod 数量。
 
 ### HPA 是如何工作的？
@@ -47,6 +47,6 @@ HPA 是通过循环控制来实现的，其循环周期由下面的 `kube-contro
 
 ### Horizontal Pod Autoscaler API 对象
 
-HPA 是 Kubernetes `autoscaling` API 组中的 API 资源。当前的稳定版本是 `autoscaling/v1` ，仅支持 CPU 自动缩放。为了获得更多基于内存和自定义指标的扩展支持，请改用 beta 版本： `autoscaling / v2beta1` 。
+HPA 是 Kubernetes `autoscaling` API 组中的 API 资源。当前的稳定版本是 `autoscaling/v1` ，仅支持 CPU 自动缩放。为了获得更多基于内存和自定义指标的扩展支持，请改用 beta 版本： `autoscaling/v2beta1` 。
 
 有关 HPA API 对象的更多信息，请参见[HPA GitHub Readme](https://git.k8s.io/community/contributors/design-proposals/autoscaling/horizontal-pod-autoscaler.md#horizontalpodautoscaler-object)。

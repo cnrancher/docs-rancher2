@@ -89,7 +89,7 @@ NODE1 cannot reach NODE3
 
 运行命令来清理这个 DaemonSet 应用 `kubectl delete ds/overlaytest`。
 
-## 检查主机和网络设备伤的的 MTU 是否正确配置
+## 检查主机和网络设备上的 MTU 是否正确配置
 
 当 MTU 配置错误时（在运行 Rancher 的主机上，在已创建/导入的集群中的节点上或在两者之间的网络设备上），错误消息将记录在 Rancher Server 和 Rancher Agent 中，类似于：
 

@@ -19,7 +19,7 @@ keywords:
 
 > 本页主要是关于密文的文档。有关设置私有镜像库的详细信息，请参阅[镜像仓库凭证](/docs/k8s-in-rancher/registries/_index)。
 
-配置工作负载时，您将能够选择要包括的密文。与配置映射一样，工作负载可以将密文引用为环境变量或以数据卷挂载的方式使用。
+配置工作负载时，您可以选择要包括的密文。与配置映射一样，工作负载可以将密文引用为环境变量或以数据卷挂载的方式使用。
 
 如果您是将密文通过`subPath`的方式挂载的，那么对正在使用的密文的任何更新，都不会自动更新到正在使用它的 Pod 里。所以您需要重新启动这些 Pod，以使新密文生效。更多信息请参阅[Kubernetes 文档](https://kubernetes.io/docs/concepts/configuration/secret/#mounted-secrets-are-updated-automatically)。
 

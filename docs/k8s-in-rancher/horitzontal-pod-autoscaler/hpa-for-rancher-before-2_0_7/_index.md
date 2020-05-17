@@ -25,8 +25,8 @@ keywords:
 确保您的 Kubernetes 集群服务至少以以下参数运行：
 
 - kube-api: `requestheader-client-ca-file`
-- kubelet: `read-only-port` at 10255
-- kube-controller: 可选，仅在需要与默认值不同的值时才需要。
+- kubelet: `read-only-port` 为 10255
+- kube-controller: 可选，仅在需要与默认值不同时才需要。
 
   - `horizontal-pod-autoscaler-downscale-delay: "5m0s"`
   - `horizontal-pod-autoscaler-upscale-delay: "3m0s"`

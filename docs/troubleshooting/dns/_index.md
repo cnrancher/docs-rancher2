@@ -181,7 +181,7 @@ kubectl get configmap -n kube-system coredns -o json |  kubectl get configmap -n
 
 ## kube-dns 的特别检查
 
-### 检查 kubedns 容器中的 servername 配置
+### 检查 kubedns 容器中的 nameservers 配置
 
 默认情况下，主机上在/etc/resolv.conf 中配置的 nameserver 将用作 kube-dns 的 servername。有时主机会运行本地缓存 DNS 名称服务器，这意味着`/etc/resolv.conf`中的地址将指向容器无法访问的环回范围（`127.0.0.0/8`）中的地址。对于 Ubuntu 18.04，这是通过`systemd-resolved`完成的。从 Rancher v2.0.7 开始，我们将检测`systemd-resolved`是否正在运行，并将自动将`/etc/resolv.conf`文件用于正确的 nameserver（位于`/run/systemd/resolve/resolv.conf`）。
 
