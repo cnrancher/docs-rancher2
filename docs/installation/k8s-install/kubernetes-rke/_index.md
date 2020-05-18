@@ -56,6 +56,14 @@ Rancher Server 只能在使用 RKE 或 K3s 安装的 Kubernetes 集群中运行�
 
    注意：您也可以通过环境变量`$K3S_DATASTORE_ENDPOINT`来配置数据库端点。
 
+  :::note 提示
+   国内用户，可以使用以下方法加速安装：
+   ```
+   curl -sfL https://docs.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -s - server \
+  --datastore-endpoint="mysql://username:password@tcp(hostname:3306)/database-name"
+   ```
+  :::
+
 1. 在您的另外一台 Linux 节点上执行同样的操作。
 
 ### 2、确认 K3s 是否创建成功
