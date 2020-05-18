@@ -185,20 +185,31 @@ _可用版本: rke v0.2.0+_
 
 - 证书未过期
 
-证书未过期时，rancher server 可以正常运行。升级到 Rancher v2.0.14+ 、v2.1.9+、v2.2.0+ 后会自动检查证书有效期，如果发现证书即将过期，将会自动生成新的证书。所以独立容器运行的 Rancher Server，只需在证书过期前把 rancher 版本升级到支持自动更新 ssl 证书的版本即可，无需做其他操作。
+  证书未过期时，rancher server 可以正常运行。升级到 Rancher v2.0.14+ 、v2.1.9+、v2.2.2+ 后会自动检查证书有效期，如果发现证书即将过期，将会自动生成新的证书。所以独立容器运行的 Rancher Server，只需在证书过期前把 rancher 版本升级到支持自动更新 ssl 证书的版本即可，无需做其他操作。
 
 - 证书已过期
 
-如果证书已过期，那么 rancher server 无法正常运行。即使升级到 Rancher v2.0.14+ 、v2.1.9+、v2.2.0+ 也可能会提示证书错误。如果出现这种情况，可通过以下操作进行处理：
+  如果证书已过期，那么 rancher server 无法正常运行。即使升级到 Rancher v2.0.14+ 、v2.1.9+、v2.2.2+ 也可能会提示证书错误。如果出现这种情况，可通过以下操作进行处理：
 
-1. 正常升级 rancher 版本到 v2.0.14+ 、v2.1.9+、v2.2.0+；
-2. 执行以下命令：
+  1. 正常升级 rancher 版本到 v2.0.14+ 、v2.1.9+、v2.2.2+；
+  2. 执行以下命令：
 
-   ```bash
-   docker exec c -ti <rancher_server_id> mv /var/lib/rancher/management-state/certs/bundle.json /var/lib/rancher/management-state/certs/bundle.json-bak
+     - 2.0 或 2.1 版本
 
-   docker restart <rancher_server_id>
-   ```
+       ```bash
+       docker exec -ti <rancher_server_id> mv /var/lib/rancher/management-state/certs/bundle.json /var/lib/rancher/management-state/certs/bundle.json-bak
+       ```
+
+     - 2.2 +
+
+       ```bash
+       docker exec -ti <rancher_server_id> mv /var/lib/rancher/management-state/tls/localhost.crt /var/lib/rancher/management-state/tls/localhost.crt-bak
+       ```
+
+  3. 重启 Rancher Server 容器
+     ```bash
+     docker restart <rancher_server_id>
+     ```
 
 ## 故障处理
 
