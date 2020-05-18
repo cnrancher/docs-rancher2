@@ -76,8 +76,6 @@ services:
       concurrent-service-syncs: 1
       # 默认5. 同时同步的服务帐户令牌数。
       concurrent-serviceaccount-token-syncs: 5
-      # 默认5. 同时同步的复制控制器的数量
-      concurrent-rc-syncs: 5
       # 默认30s. 同步deployment的周期。
       deployment-controller-sync-period: 30s
       # 默认15s。同步PV和PVC的周期。
@@ -131,7 +129,7 @@ services:
       ### 等待中每10s检查一次，当最后一次检查还触发了软驱逐阈值就会开始驱逐，驱逐不会直接Kill POD，先发送停止信号给POD，然后等待eviction-max-pod-grace-period设置的时长；
       ### 在eviction-max-pod-grace-period时长之后，如果POD还未退出则发送强制kill POD"
       eviction-soft: "memory.available<500Mi,nodefs.available<50%,imagefs.available<50%,nodefs.inodesFree<10%"
-      eviction-soft-grace-period: "memory.available=1m30s"
+      eviction-soft-grace-period: "memory.available=1m30s,nodefs.available=1m30s,imagefs.available=1m30s,nodefs.inodesFree=1m30s"
       eviction-max-pod-grace-period: "30"
       eviction-pressure-transition-period: "30s"
       # 指定kubelet多长时间向master发布一次节点状态。注意: 它必须与kube-controller中的nodeMonitorGracePeriod一起协调工作。(默认 10s)
