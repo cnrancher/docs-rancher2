@@ -195,7 +195,7 @@ _可用版本: rke v0.2.0+_
 2. 执行以下命令：
 
    ```bash
-   docker exec c -ti <rancher_server_id> mv /var/lib/rancher/management-state/certs/bundle.json /var/lib/rancher/management-state/certs/bundle.json-bak
+   docker exec -ti <rancher_server_id> mv /var/lib/rancher/management-state/certs/bundle.json /var/lib/rancher/management-state/certs/bundle.json-bak
 
    docker restart <rancher_server_id>
    ```
