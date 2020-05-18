@@ -119,12 +119,25 @@ _自 v2.4.0 起可用_
 ```
 $ curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
 ```
+:::note 提示
+国内用户，可以使用以下方法加速安装：
+```
+$ curl -sfL https://docs.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -s - --write-kubeconfig-mode 644
+```
+:::
 
 您也可以使用环境变量`K3S_KUBECONFIG_MODE`指定该选项：
 
 ```
 $ curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" sh -s -
 ```
+:::note 提示
+国内用户，可以使用以下方法加速安装：
+```
+$ curl -sfL https://docs.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn K3S_KUBECONFIG_MODE="644" sh -s -
+```
+:::
+
 
 ### 导入的 K3s 集群的 debug 日志和故障排查
 
