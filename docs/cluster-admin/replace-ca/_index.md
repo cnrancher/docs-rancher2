@@ -123,6 +123,4 @@ kubectl --kubeconfig=${local_kubeconfig} get clusters ${Cluster_ID} -o yaml > ${
 
 这是在 Rancher 2.1.x 版本中已知问题，因为在内存中保存着一份 CRD 资源副本，Rancher 运行时使用的内存中的 CRD 资源。在更新了 CRD 资源后，Rancher 没有感知到 CRD 资源变化，会一直使用内存中的 CRD 副本。旧 CRD 副本保存着旧的 CA 证书和 token，从而导致 Agent 无法连接 K8S 集群。
 
-### 3.1. 解决方法
-
 目前有效的方法只有重启 Rancher server pod。

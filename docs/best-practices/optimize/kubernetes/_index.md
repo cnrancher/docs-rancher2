@@ -19,7 +19,7 @@ keywords:
 
 ## 1. kube-apiserver
 
-> RKE 或者 Rancher UI 自定义部署集群的时候，在 yaml 文件中指定以下参数
+RKE 或者 Rancher UI 自定义部署集群的时候，在 yaml 文件中指定以下参数
 
 ```yaml
 services:
@@ -39,7 +39,7 @@ services:
 
 ## 2. kube-controller
 
-> RKE 或者 Rancher UI 自定义部署集群的时候，在 yaml 文件中指定以下参数
+RKE 或者 Rancher UI 自定义部署集群的时候，在 yaml 文件中指定以下参数
 
 ```yaml
 services:
@@ -86,7 +86,7 @@ services:
 
 ## 3. kubelet
 
-> RKE 或者 Rancher UI 自定义部署集群的时候，在 yaml 文件中指定以下参数
+RKE 或者 Rancher UI 自定义部署集群的时候，在 yaml 文件中指定以下参数
 
 ```yaml
 services:

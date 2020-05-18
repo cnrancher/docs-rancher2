@@ -170,7 +170,7 @@ _可用版本: rke v0.2.0+_
    INFO[0001] Rebuilding Kubernetes cluster with rotated certificates
    ```
 
-4. 因为证书改变，相应的`token`也会变化，在集群证书更新完成后，需要对连接`API SERVER`的 Pod 进行重建，以获取新的`token`。
+4. 因为证书改变，相应的`token`也会变化，所以在完成集群证书更新后，需要对连接`API SERVER`的 Pod 进行重建，以获取新的`token`。
 
    - cattle-system/cattle-cluster-agent
    - cattle-system/cattle-node-agent
