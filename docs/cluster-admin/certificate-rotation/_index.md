@@ -194,11 +194,22 @@ _可用版本: rke v0.2.0+_
   1. 正常升级 rancher 版本到 v2.0.14+ 、v2.1.9+、v2.2.2+；
   2. 执行以下命令：
 
-   ```bash
-   docker exec -ti <rancher_server_id> mv /var/lib/rancher/management-state/certs/bundle.json /var/lib/rancher/management-state/certs/bundle.json-bak
+     - 2.0 或 2.1 版本
 
-   docker restart <rancher_server_id>
-   ```
+       ```bash
+       docker exec -ti <rancher_server_id> mv /var/lib/rancher/management-state/certs/bundle.json /var/lib/rancher/management-state/certs/bundle.json-bak
+       ```
+
+     - 2.2 +
+
+       ```bash
+       docker exec -ti <rancher_server_id> mv /var/lib/rancher/management-state/tls/localhost.crt /var/lib/rancher/management-state/tls/localhost.crt-bak
+       ```
+
+  3. 重启 Rancher Server 容器
+     ```bash
+     docker restart <rancher_server_id>
+     ```
 
 ## 故障处理
 
