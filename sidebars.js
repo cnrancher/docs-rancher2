@@ -759,7 +759,8 @@ module.exports = {
       "faq/security/_index",
       "faq/telemetry/_index",
       "faq/removing-rancher/_index",
-      "faq/etcd/_index"
+      "faq/etcd/_index",
+      "faq/install/_index"
     ],
     常见故障排查: [
       "troubleshooting/_index",
