@@ -1,6 +1,6 @@
 ---
 title: "安装 Tiller"
-description: Helm 是 Kubernetes 首选的包管理工具。Helm "charts"为 Kubernetes YAML 文件提供了模板语法。我们可以使用 Helm 部署可配置的工作负载，来代替使用静态文件的方式。如果您想创建自己的私有应用商店，请参照这里[https://helm.sh/](https://helm.sh/)的说明。使用 Helm 前，您需要在集群安装 `tiller` 服务端组件。
+description: Helm 是 Kubernetes 首选的包管理工具。Helm "charts"为 Kubernetes YAML 文件提供了模板语法。我们可以使用 Helm 部署可配置的工作负载，来代替使用静态文件的方式。如果您想创建自己的私有应用商店，请参照文档 [https://helm.sh/](https://helm.sh/) 。使用 Helm 前，您需要在集群安装 `tiller` 服务端组件。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -18,7 +18,7 @@ keywords:
   - 安装 Tiller
 ---
 
-Helm 是 Kubernetes 首选的包管理工具。Helm "charts"为 Kubernetes YAML 文件提供了模板语法。我们可以使用 Helm 部署可配置的工作负载，来代替使用静态文件的方式。如果您想创建自己的私有应用商店，请参照这里[https://helm.sh/](https://helm.sh/)的说明。使用 Helm 前，您需要在集群安装 `tiller` 服务端组件。
+Helm 是 Kubernetes 首选的包管理工具。Helm "charts"为 Kubernetes YAML 文件提供了模板语法。我们可以使用 Helm 部署可配置的工作负载，来代替使用静态文件的方式。如果您想创建自己的私有应用商店，请参照文档 [https://helm.sh/](https://helm.sh/) 。使用 Helm 前，您需要在集群安装 `tiller` 服务端组件。
 
 对于无法访问互联网的环境，请查看[Helm - 离线安装](/docs/installation/options/air-gap-helm2/install-rancher/_index)获取更多安装信息。
 

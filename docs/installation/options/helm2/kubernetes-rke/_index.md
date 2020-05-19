@@ -56,7 +56,7 @@ services:
 | ------------------ | ------ | ------------------------------------------------------ |
 | `address`          | 是     | 公共 DNS 或 IP 地址                                    |
 | `user`             | 是     | 可以执行 docker 命令的用户                             |
-| `role`             | 是     | 一列给这个节点分配的 Kubernetes 角色                   |
+| `role`             | 是     | 给节点分配的 Kubernetes 角色列表                   |
 | `internal_address` | 否     | 给集群内部流量使用的私有 DNS 或者 IP 地址              |
 | `ssh_key_path`     | 否     | 用来登录节点的 SSH 私钥路径 (默认值为 `~/.ssh/id_rsa`) |
 
@@ -141,6 +141,6 @@ kube-system     rke-network-plugin-deploy-job-6pbgj       0/1       Completed   
 
 ## 遇到的问题或错误?
 
-参阅[常见问题](/docs/installation/options/helm2/kubernetes-rke/troubleshooting/_index)。
+参阅[问题排查](/docs/installation/options/helm2/kubernetes-rke/troubleshooting/_index)。
 
 ## [下一步: 初始化 Helm (安装 tiller)](/docs/installation/options/helm2/helm-init/_index)

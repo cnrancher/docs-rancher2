@@ -59,11 +59,11 @@ Failed to set up SSH tunneling for host [xxx.xxx.xxx.xxx]: Can't retrieve Docker
 
 #### Failed to dial ssh using address [xxx.xxx.xxx.xxx:xx]: Error configuring SSH: ssh: no key found
 
-- `ssh_key_path` 文件中指定的 key 文件无法被访问。确保指定了私钥文件（而不是公共密钥`.pub`），并且正在运行`rke`命令的用户可以访问私钥文件。
+- 指定为 `ssh_key_path` 的密钥文件无法被访问。确保指定了私钥文件（而不是公共密钥`.pub`），并且正在运行`rke`命令的用户可以访问私钥文件。
 
 #### Failed to dial ssh using address [xxx.xxx.xxx.xxx:xx]: ssh: handshake failed: ssh: unable to authenticate, attempted methods [none publickey], no supported methods remain
 
-- 对于正在访问的节点，文件中指定的密钥文件 `ssh_key_path` 不正确。仔细检查是否为节点指定了正确的`ssh_key_path`，以及是否指定了与之连接的正确用户。
+- 对于正在访问的节点，指定为 `ssh_key_path` 的密钥文件不正确。仔细检查是否为节点指定了正确的`ssh_key_path`，以及是否指定了与之连接的正确用户。
 
 #### Failed to dial ssh using address [xxx.xxx.xxx.xxx:xx]: Error configuring SSH: ssh: cannot decode encrypted private keys
 
