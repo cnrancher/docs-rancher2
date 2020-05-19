@@ -44,7 +44,8 @@ target     prot opt source               destination
 sudo iptables --list
 ```
 
-本节介绍如何使用`firewalld`为高可用性 Rancher Server 集群中的节点应用[防火墙端口规则](/docs/installation/references/_index)。
+本节介绍如何使用`firewalld`为高可用性 Rancher 服务器集群中的节点应用[防火墙端口规则](/docs/installation/options/firewall/_index/)。
+
 
 ## 先决条件
 

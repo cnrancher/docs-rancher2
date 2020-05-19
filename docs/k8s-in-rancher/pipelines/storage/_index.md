@@ -22,7 +22,7 @@ Docker 镜像仓库和 Minio 工作负载默认使用临时存储，临时存储
 
 > **先决条件：**
 >
-> 集群必须有可用的[持久存储](/docs/k8s-in-rancher/volumes-and-storage/_index)。
+> 集群必须有可用的[持久存储](/docs/cluster-admin/volumes-and-storage/_index)。
 
 ## 配置内置镜像仓库的持久存储
 

@@ -90,7 +90,7 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
 | `systemDefaultRegistry` | `<REGISTRY.YOURDOMAIN.COM:PORT>` | 配置 Rancher，在创建集群时，Rancher Server 始终从私有镜像仓库中拉取镜像                                                                                                                                                                                                                                                                                                                                         |
 | `useBundledSystemChart` | `true`                           | 配置 Rancher Server 使用内置的 system-chart，[system-chart](https://github.com/rancher/system-charts)中包含监控，日志，告警和全局 DNS 等功能所需的 Chart。这些 [Helm charts](https://github.com/rancher/system-charts) 位于 GitHub 中，但是由于您处于离线环境中，因此使用 Rancher 中内置的 Chart 比设置一个 Git 镜像简单得多。当然您也可以选择自己手动镜像 GitHub 中的 Rancher System Chart。_自 v2.3.0 起可用_ |
 
-根据您在[B. 选择您的 SSL 配置](#选择您的-ssl-配置)做出的选择，完成以下步骤之一。
+根据您在[B. 选择您的 SSL 配置](#b-选择您的-ssl-配置)做出的选择，完成以下步骤之一。
 
 #### 选项 A - 使用 Rancher 默认的自签名证书
 
@@ -193,7 +193,7 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
 
 使用`kubectl`创建命名空间并安装配置好的 YAML。
 
-如果您选择在[B. 选择您的 SSL 配置](#b-选择您的-ssl-配置)选择了使用 Rancher 默认的自签名证书，则安装 cert-manager。
+如果您选择在[B. 选择您的 SSL 配置](#b-选择您的-ssl-配置)中使用 Rancher 默认的自签名证书，则安装 cert-manager。
 
 #### 安装 Cert-manager（仅限使用 Rancher 默认自签名证书）
 

@@ -24,15 +24,13 @@ keywords:
 
 ## 节点要求
 
-查看支持的操作系统和运行 Rancher 节点的硬件/软件/网络需求 [节点需求](/docs/installation/requirements/_index)
+在 [节点需求](/docs/installation/requirements/_index) 中查看运行 Rancher 的节点支持的操作系统和硬件/软件/网络需求。
 
-查看 RKE 的操作系统需求 [RKE 需求](https://rancher.com/docs/rke/latest/en/os/)
+在 [RKE 需求](https://rancher.com/docs/rke/latest/en/os/) 中查看 RKE 的操作系统需求。
 
 ## 负载均衡
 
-RKE 将在每个节点上配置一个 Ingress controller pod。
-
-Ingress controller pods 被绑定到主机网络的 TCP/80 和 TCP/443 端口上，并且是到 Rancher Server 的 HTTPS 流量的入口点。
+RKE 将在每个节点上配置一个 Ingress controller pod。Ingress controller pods 被绑定到主机网络的 TCP/80 和 TCP/443 端口上，并且是到 Rancher Server 的 HTTPS 流量的入口点。
 
 将负载均衡器配置为基本的 4 层 TCP 转发器。确切的配置将取决于您的环境。
 

@@ -145,7 +145,7 @@ _自 v2.4.0 起可用_
 > **先决条件：** 您只能在以下情况下为用户组分配全局角色：
 >
 > - 您已经设置了[外部身份验证系统](/docs/admin-settings/authentication/_index)。
-> - 外部身份验证系统支持[用户组](/docs/admin-settingss/authentication/user-groups/_index)。
+> - 外部身份验证系统支持[用户组](/docs/admin-settings/authentication/user-groups/_index/)。
 > - 您已经通过身份验证系统建立了至少一个用户组。
 
 要将自定义全局角色分配给组，请按照下列步骤操作：

@@ -1,6 +1,6 @@
 ---
 title: 配置 NGINX
-description: NGINX 将被配置为 4 层负载均衡器(TCP)，将连接转发到其中一个 Rancher Server 节点。在此配置中，负载均衡器位于节点的前面。负载均衡器可以是任何能够运行 NGINX 的主机。不要将 Rancher 节点之一用作负载均衡器。
+description: NGINX 将被配置为 4 层负载均衡器(TCP)，将连接转发到其中一个 Rancher Server 节点。在此配置中，负载均衡器位于节点的前面。负载均衡器可以是任何能够运行 NGINX 的主机。不要将 Rancher 节点用作负载均衡器。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -23,7 +23,7 @@ NGINX 将被配置为 4 层负载均衡器(TCP)，将连接转发到其中一个
 > **注意事项:**
 > 在此配置中，负载均衡器位于节点的前面。负载均衡器可以是任何能够运行 NGINX 的主机。
 >
-> 警告：不要将 Rancher 节点之一用作负载均衡器。
+> 警告：不要将 Rancher 节点用作负载均衡器。
 
 ## 安装 NGINX
 
@@ -39,7 +39,7 @@ NGINX 将被配置为 4 层负载均衡器(TCP)，将连接转发到其中一个
 
 2.  在`nginx.conf`中, 使用[节点](/docs/installation/options/helm2/create-nodes-lb/_index)IPs 替换(端口 80 和 端口 443)的`<IP_NODE_1>`, `<IP_NODE_2>`, 和`<IP_NODE_3>`。
 
-    > **注意事项:** 可配置项请参考[NGINX 文档: TCP and UDP Load Balancing](https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer)。
+    > **注意事项:** 可配置项请参考[NGINX 文档: TCP and UDP Load Balancing](https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/)。
 
     <figcaption>NGINX 配置文件示例</figcaption>
 
@@ -52,16 +52,16 @@ NGINX 将被配置为 4 层负载均衡器(TCP)，将连接转发到其中一个
     }
 
     stream {
-    upstream rancher_servers_http {
-    least_conn;
-    server <IP_NODE_1>:80 max_fails=3 fail_timeout=5s;
-    server <IP_NODE_2>:80 max_fails=3 fail_timeout=5s;
-    server <IP_NODE_3>:80 max_fails=3 fail_timeout=5s;
-    }
-    server {
-    listen 80;
-    proxy_pass rancher_servers_http;
-    }
+        upstream rancher_servers_http {
+            least_conn;
+            server <IP_NODE_1>:80 max_fails=3 fail_timeout=5s;
+            server <IP_NODE_2>:80 max_fails=3 fail_timeout=5s;
+            server <IP_NODE_3>:80 max_fails=3 fail_timeout=5s;
+        }
+        server {
+            listen 80;
+            proxy_pass rancher_servers_http;
+        }
 
         upstream rancher_servers_https {
             least_conn;

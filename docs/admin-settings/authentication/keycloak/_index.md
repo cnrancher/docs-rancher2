@@ -26,7 +26,7 @@ _v2.1.0 版本可用_
 - 在 Keycloak 中，创建一个[新的 SAML 客户端](https://www.keycloak.org/docs/latest/server_admin/#saml-clients)，设置如下。参见[Keycloak 文档](keycloak.org/docs/latest/server_admin/#saml-clients)获得帮助。
 
   | 设置                 | 值                                                                      |
-  | -------------------- | ----------------------------------------------------------------------- |
+  | :------------------- | :---------------------------------------------------------------------- |
   | `Sign Documents`     | `ON` <sup>1</sup>                                                       |
   | `Sign Assertions`    | `ON` <sup>1</sup>                                                       |
   | 所有其它`ON/OFF`设置 | `OFF`                                                                   |

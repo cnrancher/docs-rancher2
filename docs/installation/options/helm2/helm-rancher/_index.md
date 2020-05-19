@@ -1,6 +1,6 @@
 ---
 title: "安装 Rancher"
-description: 可以使用 Kubernetes 的 helm 包管理工具来管理 Rancher 的安装。使用 `helm` 来可以一键安装 Rancher 及其依赖组件。
+description: 可以使用 Kubernetes 的 helm 包管理工具来管理 Rancher 的安装。使用 `helm` 来一键安装 Rancher 及其依赖组件。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -18,7 +18,7 @@ keywords:
   - 安装 Rancher
 ---
 
-可以使用 Kubernetes 的 helm 包管理工具来管理 Rancher 的安装。使用 `helm` 来可以一键安装 Rancher 及其依赖组件。
+可以使用 Kubernetes 的 helm 包管理工具来管理 Rancher 的安装。使用 `helm` 来一键安装 Rancher 及其依赖组件。
 
 对于无法访问互联网的环境，请查看[Rancher 高可用 Helm2 离线安装](/docs/installation/options/air-gap-helm2/install-rancher/_index)。
 
@@ -48,12 +48,12 @@ Rancher Server 默认需要 SSL/TLS 配置来保证访问的安全性。
 
 以下有三种关于证书来源的推荐选项。
 
-> **提示：** 如果您想要将 SSL/TLS 访问在外部终止，请查看[使用外部 TLS 负载均衡器](/docs/installation/options/helm2/helm-rancher/chart-options/_index#tls-termination)。
+> **提示：** 如果您想要将 SSL/TLS 访问在外部终止，请查看[使用外部 TLS 负载均衡器](/docs/installation/options/helm2/helm-rancher/chart-options/_index#外部-tls-termination)。
 
 | 设置                                      | Chart 选项                       | 描述                                                           | 是否需要 cert-manager         |
 | ----------------------------------------- | -------------------------------- | -------------------------------------------------------------- | ----------------------------- |
-| [Rancher 自签名证书](#rancher-自签名证书) | `ingress.tls.source=rancher`     | 使用 Rancher 生成的 CA 签发的自签名证书<br/>此项为**默认选项** | [是](#选项-安装-cert-manager) |
-| [Let’s Encrypt](#let-s-encrypt)           | `ingress.tls.source=letsEncrypt` | 使用[Let's Encrypt](https://letsencrypt.org/)颁发的证书        | [是](#选项-安装-cert-manager) |
+| [Rancher 自签名证书](#rancher-自签名证书) | `ingress.tls.source=rancher`     | 使用 Rancher 生成的 CA 签发的自签名证书<br/>此项为**默认选项** | [是](#选装：安装-cert-manager) |
+| [Let’s Encrypt](#lets-encrypt)           | `ingress.tls.source=letsEncrypt` | 使用[Let's Encrypt](https://letsencrypt.org/)颁发的证书        | [是](#选装：安装-cert-manager) |
 | [您已有的证书](#您已有的证书)             | `ingress.tls.source=secret`      | 使用您的已有证书（Kubernetes 密文）                            | 否                            |
 
 :::important 重要
@@ -63,7 +63,7 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
 ## 选装：安装 cert-manager
 
 :::note 提示
-仅由 Rancher 生成的 CA `ingress.tls.source=rancher` 和 Let's Encrypt 颁发的证书 `ingress.tls.source=letsEncrypt` 才需要 cert-manager。如果您使用自己的证书文件 `ingress.tls.source=secret` 或者[使用外部 TLS 负载均衡器](/docs/installation/options/helm2/helm-rancher/chart-options/_index)可以跳过此步骤。
+仅由 Rancher 生成的 CA `ingress.tls.source=rancher` 和 Let's Encrypt 颁发的证书 `ingress.tls.source=letsEncrypt` 才需要 cert-manager。如果您使用自己的证书文件 `ingress.tls.source=secret` 或者[使用外部 TLS 负载均衡器](/docs/installation/options/helm2/helm-rancher/chart-options/_index#外部-tls-termination)可以跳过此步骤。
 :::
 
 > **重要：**
@@ -132,7 +132,7 @@ cert-manager-cainjector-3ba5cd2bcd-de332x       1/1     Running     0          3
 
 ### Rancher 自签名证书
 
-> **提示：** 在执行以下操作之前，您需要安装 [cert-manager](#optional-install-cert-manager)
+> **提示：** 在执行以下操作之前，您需要安装 [cert-manager](#选装：安装-cert-manager)
 
 默认情况下 Rancher 生成一个私有 CA 并使用 `cert-manager` 来颁发证书用以访问 Rancher 界面。因为 `rancher` 是 `ingress.tls.source` 选项的默认值，我们在运行 `helm install` 命令的时候并没有指定 `ingress.tls.source` 选项。
 
@@ -156,7 +156,7 @@ deployment "rancher" successfully rolled out
 
 ### Let's Encrypt
 
-> **提示：** 在执行以下操作之前，您需要安装[cert-manager](#optional-install-cert-manager)
+> **提示：** 在执行以下操作之前，您需要安装[cert-manager](#选装：安装-cert-manager)
 
 该选项使用 `cert-manager` 自动请求和更新[Let's Encrypt](https://letsencrypt.org/)证书。这是一个免费的服务，它为您提供一个受信的证书，因为 Let's Encrypt 提供的是受信的 CA。此配置使用 HTTP(`HTTP-01`)验证，因此负载均衡器必须具有公共的 DNS 记录并可以从互联网访问到。
 
@@ -230,7 +230,7 @@ rancher   3         3         3            3           3m
 
 ## 高级配置
 
-Rancher chart 有需要配置选项可用于自定义安装 Rancher 来适配您的环境。以下是一些常见的高级场景。
+Rancher chart 配置有许多选项可用于自定义安装 Rancher 来适配您的环境。以下是一些常见的高级场景。
 
 - [HTTP Proxy](/docs/installation/options/helm2/helm-rancher/chart-options/_index#http-代理)
 - [私有镜像仓库](/docs/installation/options/helm2/helm-rancher/chart-options/_index#私有镜像仓库registry和离线安装)
