@@ -39,4 +39,4 @@ ERROR: https://rancher.my.org/ping is not accessible (Could not resolve host: ra
 
 这个问题在内网并且无DNS服务器的环境下非常常见，即使在/etc/hosts文件中配置了映射关系也无法解决，这是因为`cattle-node-agent`从宿主机的/etc/resolv.conf中继承`nameserver`用作dns服务器。
 
-所以要解决这个问题，可以在环境中搭建一个dns服务器，配置正确的域名和IP的对应关系，然后将每个节点的`nameserver`指向这个dns服务器。
+所以要解决这个问题，可以在环境中搭建一个dns服务器，配置正确的域名和IP的对应关系，然后将每个节点的`nameserver`指向这个dns服务器。或者使用[HostAliases](https://kubernetes.io/zh/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/)
