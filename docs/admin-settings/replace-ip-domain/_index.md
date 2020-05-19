@@ -130,7 +130,7 @@ SSL 证书与`域名或IP`之间存在绑定关系，客户端通过`域名或IP
   [ v3_req ]
   basicConstraints = CA:FALSE
   keyUsage = nonRepudiation, digitalSignature, keyEncipherment
-  extendedKeyUsage = clientAuth, ServerAuth
+  extendedKeyUsage = clientAuth, serverAuth
   EOM
 
   if [[ -n ${SSL_TRUSTED_IP} || -n ${SSL_TRUSTED_DOMAIN} ]]; then
@@ -215,7 +215,7 @@ SSL 证书与`域名或IP`之间存在绑定关系，客户端通过`域名或IP
 
 ### 3.1. Rancher 单节点运行（默认容器自动生成自签名 SSL 证书）
 
-默认情况，通过`docker run`运行的 Rancher Server 容器，会自动为 Rancher 生成 SSL 证书，这个证书会自动绑定 Rancher 系统设置中`Server-url`配置的`域名或IP`。如果更换了`域名或IP`，证书会自动更新，无需单独操作。
+默认情况，通过`docker run`运行的 Rancher Server 容器，会自动为 Rancher 生成 SSL 证书，这个证书会自动绑定 Rancher 系统设置中`server-url`配置的`域名或IP`。如果更换了`域名或IP`，证书会自动更新，无需单独操作。
 
 ### 3.2. Rancher 单节点运行（外置自签名 SSL 证书）
 
@@ -268,7 +268,7 @@ SSL 证书与`域名或IP`之间存在绑定关系，客户端通过`域名或IP
 
 ## 步骤 4：修改 Rancher Server IP 或域名
 
-1. 依次访问`全局 > 系统设置`，页面往下翻找到`Server-url`文件；
+1. 依次访问`全局 > 系统设置`，页面往下翻找到`server-url`文件；
 
    ![image-20200220190647637](/img/rancher/old-doc/image-20200220190647637.png)
 
@@ -276,7 +276,7 @@ SSL 证书与`域名或IP`之间存在绑定关系，客户端通过`域名或IP
 
    ![image-20200220190801613](/img/rancher/old-doc/image-20200220190801613.png)
 
-1. 修改`Server-url`地址；
+1. 修改`server-url`地址；
 
    ![image-20200220190821898](/img/rancher/old-doc/image-20200220190821898.png)
 
