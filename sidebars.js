@@ -590,7 +590,7 @@ module.exports = {
               "cluster-admin/tools/monitoring/viewing-metrics/_index"
             ]
           },
-          "cluster-admin/tools/opa-gatekeper/_index"
+          "cluster-admin/tools/opa-gatekeeper/_index"
         ]
       },
       "cluster-admin/cloning-clusters/_index",

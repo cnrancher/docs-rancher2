@@ -30,7 +30,7 @@ Rancher v2.4 支持编辑导入的 K3s 集群，您可以在 Rancher UI 中编�
 - 通过基于角色的访问控制[管理集群访问](/docs/admin-settings/rbac/cluster-project-roles/_index)。
 - 启用[监控](/docs/cluster-admin/tools/monitoring/_index)和[日志](/docs/cluster-admin/tools/logging/_index)
 - 启用[Istio](/docs/cluster-admin/tools/istio/_index)
-- 启用[OPA Gatekeeper](/docs/cluster-admin/tools/opa-gatekeper/_index/)
+- 启用[OPA Gatekeeper](/docs/cluster-admin/tools/opa-gatekeeper/_index/)
 - 使用[流水线](/docs/project-admin/pipelines/_index)
 - 配置[告警](/docs/cluster-admin/tools/alerts/_index)和[通知](/docs/cluster-admin/tools/notifiers/_index)
 - 管理[项目](/docs/project-admin/_index)和[工作负载](/docs/k8s-in-rancher/workloads/_index)
@@ -119,11 +119,14 @@ _自 v2.4.0 起可用_
 ```
 $ curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
 ```
+
 :::note 提示
 国内用户，可以使用以下方法加速安装：
+
 ```
 $ curl -sfL https://docs.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -s - --write-kubeconfig-mode 644
 ```
+
 :::
 
 您也可以使用环境变量`K3S_KUBECONFIG_MODE`指定该选项：
@@ -131,13 +134,15 @@ $ curl -sfL https://docs.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn s
 ```
 $ curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" sh -s -
 ```
+
 :::note 提示
 国内用户，可以使用以下方法加速安装：
+
 ```
 $ curl -sfL https://docs.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn K3S_KUBECONFIG_MODE="644" sh -s -
 ```
-:::
 
+:::
 
 ### 导入的 K3s 集群的 debug 日志和故障排查
 
