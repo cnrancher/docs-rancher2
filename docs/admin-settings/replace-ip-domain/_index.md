@@ -315,7 +315,7 @@ spec:
 
    ![image-20200220205103937](/img/rancher/old-doc/image-20200220205103937.png)
 
-3. 访问`https://<新的Server_url>/v3/clusters/<集群ID>/clusterregistrationtokens`页面；
+3. 访问`https://<新的server_url>/v3/clusters/<集群ID>/clusterregistrationtokens`页面；
 
 4. 打开**clusterRegistrationTokens**页面后，定位到`data`字段；
 
