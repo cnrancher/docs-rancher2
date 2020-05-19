@@ -112,7 +112,7 @@ _v2.2.0 可用_
 
 ### NGINX Ingress
 
-启用或禁用 [NGINX ingress 控制器](http://docs.rancher.com/docs/rke/latest/en/config-options/add-ons/ingress-controller/)的选项。
+启用或禁用 [NGINX ingress 控制器](https://rancher.com/docs/rke/latest/en/config-options/add-ons/ingress-controllers/)的选项。
 
 ### Node Port 范围
 
@@ -379,4 +379,4 @@ _v2.2.4 可用_
 - [行内插件](http://docs.rancher.com/docs/rke/latest/en/config-options/add-ons/user-defined-add-ons/#in-line-add-ons)
 - [引用外部的 YAML 文件](http://docs.rancher.com/docs/rke/latest/en/config-options/add-ons/user-defined-add-ons/#referencing-yaml-files-for-add-ons)
 
-有关如何通过编辑配置自定义网络插件的示例 `cluster.yml`，请参阅 [RKE 文档](http://docs.rancher.com/docs/rke/latest/en/config-options/add-ons/network-plugins/custom-network-plugins-example)。
+有关如何通过编辑配置自定义网络插件的示例 `cluster.yml`，请参阅 [RKE 文档](http://docs.rancher.com/docs/rke/latest/en/config-options/add-ons/network-plugins/custom-network-plugin-example)。

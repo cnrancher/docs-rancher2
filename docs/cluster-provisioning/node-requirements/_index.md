@@ -76,7 +76,7 @@ Windows 节点只能用于工作节点。详情请参阅[配置自定义 Windows
 <figcaption>常用端口参考</figcaption>
 
 |  协议   |    端口     | 描述                                        |
-| :-----: | :---------: | ------------------------------------------- |
+| :-----: | :---------: | :------------------------------------------ |
 |   TCP   |     22      | 节点驱动程序 SSH 设置                       |
 |   TCP   |    2376     | 节点驱动程序 Docker 守护进程 TLS 端口       |
 |   TCP   |    2379     | etcd 客户端请求                             |
@@ -147,7 +147,7 @@ import PortsImportedHosted from '@theme/PortsImportedHosted';
 
 如果要导入现有集群，请参阅这些端口要求。
 
-下表描述了[导入集群](/docs/cluster-provisioning/import-clusters/_index)的端口要求。
+下表描述了[导入集群](/docs/cluster-provisioning/imported-clusters/_index/)的端口要求。
 
 <PortsImportedHosted/>
 

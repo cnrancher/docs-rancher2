@@ -27,7 +27,7 @@ _从 v2.2.0 开始可用_
 
 1. 在华为 CCE 门户中查找您的项目 ID. 请参阅关于如何[管理项目](https://support.huaweicloud.com/en-us/usermanual-iam/en-us_topic_0066738518.html)的 CCE 文档.
 
-2. 创建[访问密钥](https://support.huaweicloud.com/en-us/usermanual-iam/en-us_topic_0079477318.html).
+2. 创建[访问密钥](https://support.huaweicloud.com/api-iam/iam_03_0001.html).
 
 ### 局限性
 

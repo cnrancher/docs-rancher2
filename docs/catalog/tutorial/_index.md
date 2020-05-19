@@ -20,14 +20,14 @@ keywords:
 
 您可以把 Helm Chart 或 Rancher Chart 添加到应用商店里，但是我们建议使用 Rancher Chart，因为它们的用户体验更好。
 
-> **注意：** 有关开发 Chart 的完整步骤，请参阅 Helm Chart [开发人员参考](https://helm.sh/docs/chart_template_guide/)。
+> **注意：** 有关开发 Chart 的完整步骤，请参阅 Helm Chart [开发指南](https://helm.sh/docs/chart_template_guide/)。
 
 1. 在您应用商店的 GitHub 仓库中，创建应用商店结构，该应用商店结构请参考[应用商店的文件结构](#应用商店的文件结构)中列出的结构。`app-readme.md`和`questions.yml`是可选的。
 
    > **提示：**
    >
    > - 要创建自定义 Chart，请从 [Rancher Library](https://github.com/rancher/charts) 或 [Helm Stable](https://github.com/kubernetes/charts/tree/master/stable) 复制一个 Chart。
-   > - 有关开发 Chart 的完整介绍，请参见上游 Helm Chart [开发人员参考](https://docs.helm.sh/developing_charts/)。
+   > - 有关开发 Chart 的完整介绍，请参见上游 Helm Chart [开发指南](https://helm.sh/docs/chart_template_guide/)。
 
 2. **推荐：** 创建一个`app-readme.md`文件。
 

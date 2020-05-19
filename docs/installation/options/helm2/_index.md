@@ -27,7 +27,7 @@ keywords:
 
 > **重要：** Rancher 的管理服务只能在 RKE 管理的 Kubernetes 集群上运行。不支持将 Rancher 运行在托管的 Kubernetes 服务或者其他供应商的托管服务。
 
-> **重要：** 为了最佳的性能，我们建议使用专用 Kubernetes 集群来运行 Rancher Server 服务，不建议在此集群上运行用户的工作负载。部署 Rancher 之后，您可以通过[创建或导入集群](/docs/cluster-provisioning/#cluster-creation-in-rancher)来运行您的工作负载。
+> **重要：** 为了最佳的性能，我们建议使用专用 Kubernetes 集群来运行 Rancher Server 服务，不建议在此集群上运行用户的工作负载。部署 Rancher 之后，您可以通过[创建或导入集群](/docs/cluster-provisioning/_index_)来运行您的工作负载。
 
 ## 推荐架构
 
@@ -63,7 +63,7 @@ keywords:
 
 ## 较早的安装方法
 
-[RKE add-on 安装](/docs/installation/options/helm2/rke-add-on/_index)
+[RKE add-on 安装](/docs/installation/options/rke-add-on/_index/)
 
 > **重要: RKE add-on 安装方式仅支持到 Rancher v2.0.8**
 >

@@ -161,7 +161,7 @@ RKE 使用`.yml`配置文件来安装和配置 Kubernetes 集群。根据要使�
 
    > **高级配置选项：**
    >
-   > - 想要 Rancher API 的所有事务记录？通过编辑 RKE 配置文件来启用[API 审核](/docs/installation/options/rke-add-on/api-audit-log/_index)功能。有关更多信息，请参见如何在[RKE 配置文件](/docs/installation/options/rke-add-on/api-auditing/_index)中启用它。
+   > - 想要 Rancher API 的所有事务记录？通过编辑 RKE 配置文件来启用[API 审核](/docs/installation/options/api-audit-log/_index)功能。有关更多信息，请参见如何在[RKE 配置文件](/docs/installation/options/rke-add-on/api-auditing/_index)中启用它。
    > - 想知道您的 RKE 模板可用的其他配置选项吗？请参阅[RKE 文档：配置选项](https://rancher.com/docs/rke/latest/en/config-options/)。
 
 2. 将文件重命名为`rancher-cluster.yml`。
@@ -373,7 +373,7 @@ INFO[0101] Finished building Kubernetes cluster successfully
 
 您有两种选择：
 
-- 在发生灾难的情况下，为您的 Rancher Server 创建备份：[高可用性备份和恢复](/docs/installation/backups-and-restoration/ha-backup-and-restoration/_index)。
+- 在发生灾难的情况下，为您的 Rancher Server 创建备份：[K3s Rancher 高可用备份](/docs/backups/backups/k3s-backups/_index)。
 - 创建 Kubernetes 集群：[提供 Kubernetes 集群](/docs/cluster-provisioning/_index)。
 
 ## 常见问题和故障排查

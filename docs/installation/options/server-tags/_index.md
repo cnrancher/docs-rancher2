@@ -72,7 +72,7 @@ Rancher Helm Chart 版本必须匹配 Rancher 版本（即`appVersion`）。
 
 ## Docker 镜像
 
-在执行[Docker 单节点安装](/docs/installation/single-node/_index)时，升级或回滚时，您可以使用*标签*去安装特定版本的 Rancher。
+在执行[Docker 单节点安装](/docs/installation/other-installation-methods/single-node-docker/_index/)时，升级或回滚时，您可以使用*标签*去安装特定版本的 Rancher。
 
 ### Server 标签
 

@@ -171,9 +171,7 @@ Rancher 扩展了 Kubernetes 以允许在[项目级别](/docs/project-admin/pod-
 
 _从 v2.1.0 版本开始支持_
 
-资源配额限制了项目（及其命名空间）可以消耗的资源。有关更多信息，请参见[资源配额](/docs/k8s-in-rancher/projects-and-namespaces/resource-quotas/_index)。
-
-要添加资源配额，
+资源配额限制了项目（及其命名空间）可以消耗的资源。详情请参考请[资源配额](/docs/project-admin/resource-quotas/quota-type-reference/_index)。
 
 1. 单击**添加配额**。
 1. 选择[资源类型](/docs/project-admin/resource-quotas/_index)。
