@@ -75,7 +75,7 @@ configs:
 
 ### 3、安装 K3s 集群
 
-从[版本发布](https://github.com/rancher/k3s/releases)页面获取 K3s 二进制文件，找到与版本对应的镜像`tar`文件包。
+从[版本发布](https://github.com/rancher/k3s/releases)页面获取 K3s 二进制文件，找到与版本对应的镜像`tar`文件包，
 
 并通过 https://get.k3s.io 获取 K3s 安装脚本。
 
