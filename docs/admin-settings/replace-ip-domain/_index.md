@@ -13,30 +13,26 @@ keywords:
   - rancher2.0 中文教程
   - 集群管理员指南
   - 集群访问控制
-  - 变更Rancher Server IP或域名
+  - 变更Rancher Server 域名或IP
 ---
 
-## 1. 准备全部集群的直连 kubeconfig 配置文件
+## 步骤 1：准备全部集群的直连 kubeconfig 配置文件
 
-默认情况，在 Rancher UI 上复制的 kubeconfig 是通过`cluster agent`代理连接到 K8S 集群的。在变更 SSL 证书后，因为一些参数发送变化，需要通过`kubectl`命令行去修改配置。在变更 SSL 证书后会导致`cluster agent`无法连接 Rancher server，从而导致`kubectl`无法使用 Rancher UI 上复制的 kubeconfig 去操作 K8S 集群。因此，建议在做域名或 IP 变更之前，准备好所有集群的直连 kubeconfig 配置文件。具体可参考：[恢复 kubectl 配置文件](/docs/cluster-admin/restore-kubecfg/_index)
+在默认情况下， Rancher UI 上复制的 kubeconfig 通过`cluster agent`代理连接到 K8S 集群。变更 SSL 证书会导致`cluster agent`无法连接 Rancher Server，从而导致`kubectl`无法使用 Rancher UI 上复制的 kubeconfig 去操作 K8S 集群。用户需要通过`kubectl`命令行修改配置，解决这个问题。在执行域名或 IP 变更之前，请准备好所有集群的直连 kubeconfig 配置文件，详情考参考：[恢复 kubectl 配置文件](/docs/cluster-admin/restore-kubecfg/_index)
 
 :::note 警告
 
-1. 2.1.x 以前的版本，可在 Master 节点的`/etc/kubernetes/.tmp`路径下找到`kubecfg-kube-admin.yml`，这个是具有集群管理员权限的直连 kubeconfig 配置文件；
+1. 如果您使用的是 2.1.x 以前的版本，可以在 Master 节点的`/etc/kubernetes/.tmp`路径下找到`kubecfg-kube-admin.yml`文件。该文件是具有集群管理员权限的直连 kubeconfig 配置文件；
 
    ![image-20190309173154246](/img/rancher/old-doc/image-20190309173154246.png)
 
-2. 操作之前备份 Rancher Server
-
-   备份方法参考：[备份和恢复](/docs/backups/_index)
+2. 执行域名变更或 IP 变更之前，请备份 Rancher Server，详情请参考[备份和恢复](/docs/backups/_index)。
 
 :::
 
-## 2. 准备证书
+## 步骤 2：准备证书
 
-SSL 证书与`域名或IP`有绑定关系，客户端在访问 Server 端时，ssl 证书用于客户端访问地址的检验作用。客户端通过`域名或IP`访问 Server 端时，会先进行 SSL 证书验证，如果客户端访问的`IP或域名`与 SSL 证书中预先绑定的`IP或域名`不一致，那么 SSL 可以认为 Server 端是伪造了，SSL 验证无法通过从而导致客户端无法连接 Server 端。
-
-因此，如果更换了 Server 端的`IP或域名`，一般就会涉及到 SSL 证书更换，除非在最开始生成 SSL 证书的时候加入了后期可能需要更换的`IP或域名`。
+SSL 证书与`域名或IP`之间存在绑定关系，客户端通过`域名或IP`访问 Server 端时，需要进行 SSL 证书校验。如果客户端访问的`域名或IP`与 SSL 证书中预先绑定的`域名或IP`不一致，那么 SSL 会认为这个 Server 端是伪造的，导致证书校验失败，客户端无法连接 Server 端。如果您更换了域名或 IP，而且在生成 SSL 证书时没有绑定新的域名或 IP，出现上述问题就是一个正常的现象。解决该问题的方法也非常直接明了：生成一个新的 SSL 证书，绑定新的域名或 IP，替换已有的证书。如果您已经有后续域名或 IP 变更的具体规划，也可以在生成 SSL 证书 时绑定这次和以后需要替换的域名或 IP，这样可以减轻下次变更的工作量。总而言之，如果更换了 Server 端的`域名或IP`，一般会涉及到 SSL 证书更换。请参考下文，替换自签名 SSL 证书或权威认证证书。
 
 - 自签名 ssl 证书
 
@@ -49,7 +45,7 @@ SSL 证书与`域名或IP`有绑定关系，客户端在访问 Server 端时，s
   {
       echo  ' ================================================================ '
       echo  ' --ssl-domain: 生成ssl证书需要的主域名，如不指定则默认为www.rancher.local，如果是ip访问服务，则可忽略；'
-      echo  ' --ssl-trusted-ip: 一般ssl证书只信任域名的访问请求，有时候需要使用ip去访问server，那么需要给ssl证书添加扩展IP，多个IP用逗号隔开；'
+      echo  ' --ssl-trusted-ip: 一般ssl证书只信任域名的访问请求，有时候需要使用ip去访问Server，那么需要给ssl证书添加扩展IP，多个IP用逗号隔开；'
       echo  ' --ssl-trusted-domain: 如果想多个域名访问，则添加扩展域名（SSL_TRUSTED_DOMAIN）,多个扩展域名用逗号隔开；'
       echo  ' --ssl-size: ssl加密位数，默认2048；'
       echo  ' --ssl-cn: 国家代码(2个字母的代号),默认CN;'
@@ -211,7 +207,7 @@ SSL 证书与`域名或IP`有绑定关系，客户端在访问 Server 端时，s
   cp xxx.crt tls.crt
   ```
 
-## 3. 更新证书（可选）
+## 步骤 3：更新证书（可选）
 
 :::note 提示
 证书与域名或 IP 有绑定关系，一般情况更换域名或 IP 需更换证书。如果之前配置的证书是一个通配证书或者之前配置的证书已经包含了需要变更的域名或 IP，那么证书则可以不用更换。
@@ -219,7 +215,7 @@ SSL 证书与`域名或IP`有绑定关系，客户端在访问 Server 端时，s
 
 ### 3.1. Rancher 单节点运行（默认容器自动生成自签名 SSL 证书）
 
-默认情况，通过`docker run`运行的 Rancher server 容器，会自动为 Rancher 生成 SSL 证书，这个证书会自动绑定 Rancher 系统设置中`server-url`配置的`域名或IP`。如果更换了`域名或IP`，证书会自动更新，无需单独操作。
+默认情况，通过`docker run`运行的 Rancher Server 容器，会自动为 Rancher 生成 SSL 证书，这个证书会自动绑定 Rancher 系统设置中`server-url`配置的`域名或IP`。如果更换了`域名或IP`，证书会自动更新，无需单独操作。
 
 ### 3.2. Rancher 单节点运行（外置自签名 SSL 证书）
 
@@ -270,13 +266,13 @@ SSL 证书与`域名或IP`有绑定关系，客户端在访问 Server 端时，s
 
 > **重要提示:** 如果环境不是按照标准的 rancher 安装文档安装，`secret`名称可能不相同，请根据实际 secret 名称操作。
 
-## 4. 修改 Rancher Server IP 或域名
+## 步骤 4：修改 Rancher Server IP 或域名
 
-1. 依次访问`全局 》系统设置`，页面往下翻找到`server-url`；
+1. 依次访问`全局 > 系统设置`，页面往下翻找到`server-url`文件；
 
    ![image-20200220190647637](/img/rancher/old-doc/image-20200220190647637.png)
 
-1. 点击右侧的省略号菜单，选择升级；
+1. 单击右侧的省略号菜单，选择升级；
 
    ![image-20200220190801613](/img/rancher/old-doc/image-20200220190801613.png)
 
@@ -284,9 +280,9 @@ SSL 证书与`域名或IP`有绑定关系，客户端在访问 Server 端时，s
 
    ![image-20200220190821898](/img/rancher/old-doc/image-20200220190821898.png)
 
-1. 最后点击`保存`
+1. 最后单击`保存`
 
-## 5. 更新 ingress 配置文件
+## 步骤 5：更新 ingress 配置文件
 
 将 ingress 中的 host 字段修改成新的域名
 
@@ -307,7 +303,7 @@ spec:
     secretName: tls-rancher-ingress
 ```
 
-## 6. 更新 agent 配置文件
+## 步骤 6：更新 agent 配置文件
 
 1. 通过`新域名或IP`登录 Rancher Server；
 
@@ -338,4 +334,6 @@ spec:
    curl -L -k <替换为上面步骤获取的YAML文件链接> | kubectl --kubeconfig=<直连kubeconfig配置文件> apply -f -
    ```
 
-## 7. 其他所有集群均需按照以上方法进行 agent 配置更新
+## 后续操作
+
+上述步骤 1~6 演示了如何为单个集群更新 agent 配置，您需要按照这些步骤，为所有集群更新 agent 配置，才能够完成域名或 IP 变更。

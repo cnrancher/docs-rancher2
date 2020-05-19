@@ -96,7 +96,7 @@ L4 负载均衡器是通过`type: LoadBalancer`创建的。在 Kubernetes 里，
 
 ## 如何确定受支持的 Dokcer 版本？
 
-我们依从上游 Kubernetes 版本的已验证的 Docker 版本。已验证的 Docker 版本可以在[外部依赖](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.10.md#external-dependencies)中的 Kubernetes 发布 CHANGELOG.md 查看。
+我们依从上游 Kubernetes 版本的已验证的 Docker 版本。已验证的 Docker 版本可以在[外部依赖](https://github.com/kubernetes/kubernetes/tree/master/CHANGELOG)中的 Kubernetes 发布 CHANGELOG.md 查看。
 
 ## 如何访问通过 Rancher 创建的节点？
 

@@ -15,35 +15,37 @@ keywords:
   - ETCD调优
 ---
 
-## 1. 磁盘 IOPS
+## 修改磁盘 IOPS
 
 etcd 对磁盘写入延迟非常敏感，通常需要 50 顺序写入 IOPS(例如: 7200RPM 磁盘)。对于负载较重的集群，建议使用 500 顺序写入 IOPS(例如，典型的本地 SSD 或高性能虚拟化块设备)。请注意，大多数云服务器或者云存储提供并发 IOPS 而不是顺序 IOPS，提供的并发 IOPS 可能比顺序 IOPS 大 10 倍。为了测量实际的顺序 IOPS，建议使用磁盘基准测试工具，如[diskbench](https://github.com/ongardie/diskbenchmark)或[fio](https://github.com/axboe/fio)。
 
-> **PS** 常见磁盘平均物理寻道时间约为: \
-> 7200 转/分的 STAT 硬盘平均物理寻道时间是 9ms \
-> 10000 转/分的 STAT 硬盘平均物理寻道时间是 6ms \
-> 15000 转/分的 SAS 硬盘平均物理寻道时间是 4ms
->
-> 常见硬盘的旋转延迟时间约为: \
-> 7200 rpm 的磁盘平均旋转延迟大约为 60X1000/7200/2=4.17ms \
-> 10000 rpm 的磁盘平均旋转延迟大约为 60X1000/10000/2=3ms，\
-> 15000 rpm 的磁盘其平均旋转延迟约为 60X1000/15000/2=2ms。
->
-> 最大 IOPS 的理论计算方法:\
-> IOPS=1000ms/(寻道时间+旋转延迟)。忽略数据传输时间。\
-> 7200 rpm 的磁盘 IOPS=1000/(9+4.17)=76IOPS\
-> 10000 rpm 的磁盘 IOPS=1000/(6+3)=111IOPS\
-> 15000 rpm 的磁盘 IOPS=1000/(4+2)=166IOPS
+常见磁盘平均物理寻道时间约为：
 
-## 2. 修改 CPU 优先级
+- 7200 转/分的 STAT 硬盘平均物理寻道时间是 9ms；
+- 10000 转/分的 STAT 硬盘平均物理寻道时间是 6ms；
+- 15000 转/分的 SAS 硬盘平均物理寻道时间是 4ms；
+
+常见硬盘的旋转延迟时间约为：
+
+- 7200 rpm 的磁盘平均旋转延迟大约为 60X1000/7200/2=4.17ms；
+- 10000 rpm 的磁盘平均旋转延迟大约为 60X1000/10000/2=3ms；
+- 15000 rpm 的磁盘其平均旋转延迟约为 60X1000/15000/2=2ms。
+
+最大 IOPS 的理论计算方法：IOPS=1000ms/(寻道时间+旋转延迟)，数据传输时间忽略不计。
+
+- 7200 rpm 的磁盘 IOPS=1000/(9+4.17)=76IOPS；
+- 10000 rpm 的磁盘 IOPS=1000/(6+3)=111IOPS；
+- 15000 rpm 的磁盘 IOPS=1000/(4+2)=166IOPS。
+
+## 修改 CPU 优先级
 
 ```bash
 sudo renice -n -20 -P $(pgrep etcd)
 ```
 
-其中 nice 值可以用户指定，nice 的默认值为 0，root 可用范围从-20 到 19，普通用户只能用 0 到 19，值越小 PRI(new)越小，CPU 执行优先级越高。
+其中 nice 值可以由用户指定，默认值为 0，root 用户的取值范围是[-20, 19]，普通用户的值取值范围是[0, 19]，数字越小，CPU 执行优先级越高。
 
-## 3. 磁盘 IO 优先级
+## 修改磁盘 IO 优先级
 
 由于 etcd 必须将数据持久保存到磁盘日志文件中，因此来自其他进程的磁盘活动可能会导致增加`写入时间`，结果可能会导致 etcd 请求超时和临时`leader`丢失。当给定高磁盘优先级时，etcd 服务可以稳定地与这些进程一起运行。
 
@@ -55,7 +57,7 @@ sudo ionice -c2 -n0 -p $(pgrep etcd)
 
 > **温馨提示**: 因为主机重启或者容器重启后，容器中进程的 PID 会发生变化，所以建议把以上命令放在系统的启动脚本中（比如 Ubuntu 的`/etc/init.d/rc.local`脚本中），并且把命令配置在 crontab 定时任务中。
 
-## 4. 修改空间配额大小
+## 修改空间配额大小
 
 默认 ETCD 空间配额大小为 2G，超过 2G 将不再写入数据。通过给 ETCD 配置`--quota-backend-bytes`参数增大空间配额,最大支持 8G。
 
@@ -102,7 +104,7 @@ Finished defragmenting etcd member[127.0.0.1:2379]
 
 - [释放数据库空间](/docs/cluster-admin/etcd-compact/_index)
 
-## 5. 网络延迟
+## 修改网络优先级
 
 如果有大量并发客户端请求 etcd leader 服务，则可能由于网络拥塞而延迟处理`follower`对等请求。在`follower`节点上的发送缓冲区错误消息：
 
@@ -111,7 +113,7 @@ dropped MsgProp to 247ae21ff9436b2d since streamMsg's sending buffer is full
 dropped MsgAppResp to 247ae21ff9436b2d since streamMsg's sending buffer is full
 ```
 
-可以通过在客户端提高 etcd 对等网络流量优先级来解决这些错误。在 Linux 上，可以使用流量控制机制对对等流量进行优先级排序：
+可以通过在客户端提高 etcd 对等网络流量优先级来解决这些错误。在 Linux 上，可以使用流量控制机制对对等流量进行优先级排序（请根据实际情况修改接口名称）：
 
 ```bash
 NETWORK_INTERFACE=eth0
@@ -122,5 +124,3 @@ tc filter add dev ${NETWORK_INTERFACE} parent 1: protocol ip prio 1 u32 match ip
 tc filter add dev ${NETWORK_INTERFACE} parent 1: protocol ip prio 2 u32 match ip sport 2739 0xffff flowid 1:1
 tc filter add dev ${NETWORK_INTERFACE} parent 1: protocol ip prio 2 u32 match ip dport 2739 0xffff flowid 1:1
 ```
-
-> 根据实际情况修改接口名称

@@ -22,7 +22,7 @@ Rancher UI 目前的 API 只支持一些常用资源处理，通过访问`https:
 
 但是对于像`ServiceAccount`之类的资源，可通过 Rancher UI 代理去访问 K8S 直连 API，接口地址为：`rancher_url/k8s/clusters/<集群ID>/api/<API版本>/<资源类型>`。
 
-比如`ServiceAccount`可以通过 `rancher_url/k8s/clusters/<集群ID>/api/v1/serviceaccounts`去查看所有的`ServiceAccountList`，比如访问：`https://rancher_url/k8s/clusters/c-nlbtk/api/v1/serviceaccounts`
+`ServiceAccount`可以通过 `rancher_url/k8s/clusters/<集群ID>/api/v1/serviceaccounts`去查看所有的`ServiceAccountList`，例如访问：`https://rancher_url/k8s/clusters/c-nlbtk/api/v1/serviceaccounts`，会返回如下结果：
 
 ```json
 {
@@ -50,7 +50,7 @@ Rancher UI 目前的 API 只支持一些常用资源处理，通过访问`https:
     },
 ```
 
-然后可以通过命名空间去过滤，比如：`https://rancher_url/k8s/clusters/<cluster——id>/api/v1/namespaces/cattle-logging/serviceaccounts`
+您可以通过命名空间筛选 Service Account，例如：`https://rancher_url/k8s/clusters/<cluster——id>/api/v1/namespaces/cattle-logging/serviceaccounts`，`/namespaces/cattle-logging/serviceaccounts`是一种过滤方式，表示只返回该命名空间下的 Service Account 列表。
 
 ```json
 {
