@@ -49,7 +49,7 @@ docker run -d --restart=unless-stopped \
 
 ## API 审计日志
 
-API 审计日志记录通过 Rancher 服务器进行的所有用户请求和系统事务。
+API 审计日志记录通过 Rancher Server 进行的所有用户请求和系统事务。
 
 默认情况下，API 审计日志会写入 rancher 容器内的`/var/log/auditlog`中。您可以设置`AUDIT_LEVEL`以启用日志，并将该目录作为卷共享。
 

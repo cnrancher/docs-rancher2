@@ -15,19 +15,22 @@ keywords:
   - 回滚必读
 ---
 
+## 概述
+
 本节包含有关如何将 Rancher Server 回滚到以前版本的信息。
 
 - [回滚单节点 Rancher](/docs/upgrades/rollbacks/single-node-rollbacks/_index)
 - [回滚高可用 Rancher](/docs/upgrades/rollbacks/ha-server-rollbacks/_index)
+- [回滚到特定版本的 Rancher](#回滚到特定版本的Rancher)
 
-## 有关回滚的特殊情况
+## 回滚到特定版本
 
-如果要在这两种情况下都还原到版本，则必须遵循一些额外的说明才能使集群正常工作。
+如果回滚在这两种情况下，则必须遵循一些额外的说明才能使集群正常工作。
 
 - 从 v2.1.6+ 回滚到 v2.1.0-v2.1.5 或 v2.0.0-v2.0.10 之间的任何版本。
 - 从 v2.0.11+ 回滚到 v2.0.0-v2.0.10 之间的任何版本。
 
-由于要解决[CVE-2018-20321](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20321)，因此如果用户需要回滚到存在此漏洞的 Rancher 的早期版本。则需要采取特殊步骤，步骤如下：
+由于早期的 Rancher 版本存在安全漏洞[CVE-2018-20321](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20321)，如果用户需要回滚到存在此漏洞的 Rancher 的早期版本。则需要采取特殊步骤，步骤如下：
 
 1. 记录每个集群的`serviceAccountToken`。为此，将以下脚本保存在运行 rancher 容器（单节点）或可以通过 kubectl 访问 Rancher 管理平面（高可用）的计算机上，并且运行它们。在运行命令之前，请确保已安装 了 JQ。这些命令取决于您的 Rancher 安装方式。
 
@@ -99,4 +102,4 @@ keywords:
 
    片刻之后，集群将从`Unavailable`状态回到`Available`状态。
 
-1. 继续正常使用 Rancher。
+1. 开始使用 Rancher。

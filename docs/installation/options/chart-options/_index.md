@@ -20,7 +20,7 @@ keywords:
 
 | 选项                      | 默认值       | 描述                                                                  |
 | ------------------------- | ------------ | --------------------------------------------------------------------- |
-| `hostname`                | " "          | `string` - Rancher 服务器完全限定域名                                 |
+| `hostname`                | " "          | `string` - Rancher Server 完全限定域名                                |
 | `ingress.tls.source`      | "rancher"    | `string` - ingress 获取证书的位置。- "rancher， letsEncrypt， secret" |
 | `letsEncrypt.email`       | " "          | `string` - 您的邮箱地址                                               |
 | `letsEncrypt.environment` | "production" | `string` - 有效选项： "staging， production"                          |
@@ -35,7 +35,7 @@ keywords:
 | `antiAffinity`                 | "preferred"                                              | `string` - 针对 Rancher pods 的 AntiAffinity 规则 - "preferred， required"                                     |
 | `auditLog.destination`         | "sidecar"                                                | `string` - 使日志流导向到 sidecar 容器的 console 或者 hostPath 卷 - "sidecar， hostPath"                       |
 | `auditLog.hostPath`            | "/var/log/rancher/audit"                                 | `string` - 主机上的日志文件地址 (仅当`auditLog.destination`设置为`hostPath`时适用)                             |
-| `auditLog.level`               | 0                                                        | `int` - 设置[API 审计日志](/docs/installation/options/api-audit-log/_index)等级。0 标示关闭。可选值为 0 ～ 3。 |
+| `auditLog.level`               | 0                                                        | `int` - 设置[API 审计日志](/docs/installation/options/api-audit-log/_index)等级。0 表示关闭。可选值为 0 ～ 3。 |
 | `auditLog.maxAge`              | 1                                                        | `int` - 保留旧审计日志文件的最大天数 (仅当 `auditLog.destination` 设置为 `hostPath`时适用)                     |
 | `auditLog.maxBackups`          | 1                                                        | `int` - 要保留的审计日志最大文件数 (仅当 `auditLog.destination` 设置为 `hostPath`时适用)                       |
 | `auditLog.maxSize`             | 100                                                      | `int` - 轮换之前审计日志文件的最大大小（以兆字节为单位）(仅当 `auditLog.destination` 设置为 `hostPath`)        |

@@ -20,9 +20,9 @@ keywords:
 
 ## Rancher 节点
 
-下表列出了运行 Rancher Server 的节点之间需要打开的端口。
+下表列出了运行 Rancher Server 的节点之间需要开放的端口。
 
-端口要求因 Rancher 是安装在 K3s Kubernetes 集群，RKE Kubernetes 集群还是单个 Docker 容器中而异。
+端口要求因 Rancher 是安装在 K3s Kubernetes 集群，RKE Kubernetes 集群还是单个 Docker 容器中而有所不同。
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -41,7 +41,7 @@ K3s Server 需要开放 6443 端口供节点访问。
 
 使用 Flannel VXLAN 时，这些节点需要能够通过 UDP 端口 8472 访问其他节点。节点不应侦听其他端口。K3s 使用反向隧道，建立节点与服务器的出站连接，所有 kubelet 通信都通过该隧道进行。但是，如果您不使用 Flannel，而是使用自定义的 CNI，则 K3s 不需要 8472 端口。
 
-如果要使用指标服务器（Metrics Server），则需要在每个节点上打开端口 10250。
+如果要使用指标服务器（Metrics Server），则需要在每个节点上开放端口 10250。
 
 > **重要：** 节点上的 VXLAN 端口不应暴露给外界，因为这会开放集群网络，任何人都可以访问它。请在禁止访问 8472 端口的防火墙/安全组后面运行节点。
 
@@ -107,20 +107,20 @@ K3s Server 需要开放 6443 端口供节点访问。
 
 ## 下游 Kubernetes 集群节点
 
-下游 Kubernetes 集群可运行您的业务应用。本节介绍需要在下游集群中的节点上打开哪些端口，以便 Rancher 可以与它们进行通信。
+下游 Kubernetes 集群可运行您的业务应用。本节介绍需要在下游集群中的节点上开放哪些端口，以便 Rancher 可以与它们进行通信。
 
 集群节点需要开放的端口会根据集群的启动方式而变化。下面列出了需要为不同[集群创建类型](/docs/cluster-provisioning/_index)开放的端口。
 
 > **提示：**
 >
-> 如果安全不是一个大问题，并且可以打开一些其他端口，可以将[常用端口](#常用端口)作为端口参考，而不是使用下面的完整表。
+> 如果安全不是一个大问题，并且可以开放一些其他端口，可以将[常用端口](#常用端口)作为端口参考，而不是使用下面的完整列表。
 
 ### 节点池中节点的端口要求
 
-下表描述了在[基础设施提供商](/docs/cluster-provisioning/rke-clusters/node-pools/_index)中自定创建节点，并创建[RKE 集群](/docs/cluster-provisioning/rke-clusters/_index)的节点的端口要求。
+下表描述了在[基础设施提供商](/docs/cluster-provisioning/rke-clusters/node-pools/_index)中创建节点用于[Rancher启动Kubernetes](/docs/cluster-provisioning/rke-clusters/_index)的端口需求。
 
 > **注意：**
-> 在 Amazon EC2 或阿里云等云提供商中创建集群时，Rancher 会自动打开所需的端口。
+> 在 Amazon EC2 或阿里云等云提供商中创建集群时，Rancher 会自动开放所需的端口。
 
 import PortsIaasNodes from '@theme/PortsIaasNodes';
 
@@ -152,7 +152,7 @@ import PortsImportedHosted from '@theme/PortsImportedHosted';
 
 ### 常用端口
 
-通常情况下，可以将这些端口在 Kubernetes 节点上打开，无论它是哪种类型的集群。
+通常情况下，可以将这些端口在 Kubernetes 节点上开放，无论它是哪种类型的集群。
 
 |  协议   |    端口     | 描述                                             |
 | :-----: | :---------: | ------------------------------------------------ |
@@ -187,18 +187,18 @@ import PortsImportedHosted from '@theme/PortsImportedHosted';
 
 在使用[AWS EC2 主机驱动](/docs/cluster-provisioning/rke-clusters/node-pools/ec2/_index)在 Rancher 中配置集群节点时，您可以选择让 Rancher 创建一个名为 rancher-nodes 的安全组。以下规则将自动添加到此安全组。
 
-| 类型            | 协议 |  端口范围   | 源/目的                | 规则类型 |
-| --------------- | :--: | :---------: | ---------------------- | :------: |
-| SSH             | TCP  |     22      | 0.0.0.0/0              |   入站   |
-| HTTP            | TCP  |     80      | 0.0.0.0/0              |   入站   |
-| 自定义 TCP 规则 | TCP  |     443     | 0.0.0.0/0              |   入站   |
-| 自定义 TCP 规则 | TCP  |    2376     | 0.0.0.0/0              |   入站   |
-| 自定义 TCP 规则 | TCP  |  2379-2380  | sg-xxx (rancher-nodes) |   入站   |
-| 自定义 UDP 规则 | UDP  |    4789     | sg-xxx (rancher-nodes) |   入站   |
-| 自定义 TCP 规则 | TCP  |    6443     | 0.0.0.0/0              |   入站   |
-| 自定义 UDP 规则 | UDP  |    8472     | sg-xxx (rancher-nodes) |   入站   |
-| 自定义 TCP 规则 | TCP  | 10250-10252 | sg-xxx (rancher-nodes) |   入站   |
-| 自定义 TCP 规则 | TCP  |    10256    | sg-xxx (rancher-nodes) |   入站   |
-| 自定义 TCP 规则 | TCP  | 30000-32767 | 0.0.0.0/0              |   入站   |
-| 自定义 UDP 规则 | UDP  | 30000-32767 | 0.0.0.0/0              |   入站   |
-| 全部流量        | All  |     All     | 0.0.0.0/0              |   出站   |
+| 类型            | 协议  |  端口范围   | 源/目的                | 规则类型 |
+| --------------- | :---: | :---------: | ---------------------- | :------: |
+| SSH             |  TCP  |     22      | 0.0.0.0/0              |   入站   |
+| HTTP            |  TCP  |     80      | 0.0.0.0/0              |   入站   |
+| 自定义 TCP 规则 |  TCP  |     443     | 0.0.0.0/0              |   入站   |
+| 自定义 TCP 规则 |  TCP  |    2376     | 0.0.0.0/0              |   入站   |
+| 自定义 TCP 规则 |  TCP  |  2379-2380  | sg-xxx (rancher-nodes) |   入站   |
+| 自定义 UDP 规则 |  UDP  |    4789     | sg-xxx (rancher-nodes) |   入站   |
+| 自定义 TCP 规则 |  TCP  |    6443     | 0.0.0.0/0              |   入站   |
+| 自定义 UDP 规则 |  UDP  |    8472     | sg-xxx (rancher-nodes) |   入站   |
+| 自定义 TCP 规则 |  TCP  | 10250-10252 | sg-xxx (rancher-nodes) |   入站   |
+| 自定义 TCP 规则 |  TCP  |    10256    | sg-xxx (rancher-nodes) |   入站   |
+| 自定义 TCP 规则 |  TCP  | 30000-32767 | 0.0.0.0/0              |   入站   |
+| 自定义 UDP 规则 |  UDP  | 30000-32767 | 0.0.0.0/0              |   入站   |
+| 全部流量        |  All  |     All     | 0.0.0.0/0              |   出站   |

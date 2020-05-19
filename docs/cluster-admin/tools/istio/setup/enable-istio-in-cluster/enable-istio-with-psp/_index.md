@@ -1,6 +1,6 @@
 ---
 title: 在设置了 PSP 的集群中启用 Istio
-description: 如果启用了限制性 Pod 安全策略，则 Istio 可能无法正确运行，因为它需要某些权限才能安装自身并管理 Pod 的基础结构。在本节中，我们将在配置了 PSP 的集群中启用 Istio，并设置 Istio CNI 插件。
+description: 由于 Istio 需要某些权限才能安装自身并管理 Pod 的基础结构，如果启用了限制性 Pod 安全策略，则 Istio 可能无法正确运行。在本节中，我们在配置了 PSP 的集群中启用 Istio，然后设置 Istio CNI 插件。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -21,17 +21,17 @@ keywords:
 
 > **注意：** 以下指南仅适用于 RKE 配置的集群。
 
-如果启用了限制性 Pod 安全策略，则 Istio 可能无法正确运行，因为它需要某些权限才能安装自身并管理 Pod 的基础结构。在本节中，我们将在配置了 PSP 的集群中启用 Istio，并设置 Istio CNI 插件。
+由于 Istio 需要某些权限才能安装自身并管理 Pod 的基础结构，如果启用了限制性 Pod 安全策略，则 Istio 可能无法正确运行。在本节中，我们在配置了 PSP 的集群中启用 Istio，然后设置 Istio CNI 插件。
 
 使用 Istio CNI 插件后，应用程序的 Pod 中的容器将不再必须拥有`NET_ADMIN`特权。有关更多信息，请参见 [Istio CNI 插件文档](https://istio.io/docs/setup/additional-setup/cni)。请注意，[Istio CNI 插件仍为 Alpha 阶段](https://istio.io/about/feature-stages/)。
 
-## 1、配置系统项目的 PSP 策略以允许安装 Istio
+## 配置系统项目的 PSP 策略以允许安装 Istio
 
 1. 从主菜单中，选择**项目/命名空间**。
 1. 找到**项目：系统**项目，然后选择**省略号 > 编辑**。
 1. 将**Pod 安全策略**选项更改为不受限制，然后单击**保存**。
 
-## 2、在系统项目中安装 CNI 插件
+## 在系统项目中安装 CNI 插件
 
 1. 从的主菜单中，选择**项目/命名空间**。
 1. 选择**项目：系统**项目。
@@ -53,7 +53,7 @@ keywords:
        - "kube-system"
    ```
 
-## 3、安装 Istio
+## 安装 Istio
 
 按照[启动 Istio](/docs/cluster-admin/tools/istio/setup/enable-istio-in-cluster/_index) 的说明执行，并添加一个自定义答案：`istio_cni.enabled = true`。
 

@@ -1,6 +1,6 @@
 ---
 title: 2、安装 Kubernetes
-description: 本节描述了如何根据我们的 [Rancher Server 环境的最佳实践](/docs/overview/architecture-recommendations/_index)来安装 Kubernetes 集群。该集群应专用于仅运行 Rancher Server。对于 v2.4 之前的 Rancher，Rancher 应该安装在 [RKE](https://rancher.com/docs/rke/latest/en/)（Rancher Kubernetes Engine）Kubernetes 集群上。RKE 是经过 CNCF 认证的 Kubernetes 发行版，并且全部组件完全在 Docker 容器内运行。从 Rancher v2.4 开始，Rancher Server 可以安装在 RKE Kubernetes 集群或 K3s Kubernetes 集群上。K3s 也是 Rancher 发布的经过完全认证的 Kubernetes 发行版，但比 RKE 更新。我们建议在 K3s 上安装 Rancher，因为 K3s 易于使用且更轻量，全部组件都打包在了一个二进制文件里。并且这个二进制文件小于 100 MB。注意：如果在 RKE 集群上安装了 Rancher 之后，目前没有办法将这个高可用迁移到 K3s 集群上。Rancher Server 只能在使用 RKE 或 K3s 安装的 Kubernetes 集群中运行。不支持在托管的 Kubernetes 集群（例如 EKS）上使用 Rancher。
+description: 本节描述了如何根据我们的 [Rancher Server 环境的最佳实践](/docs/overview/architecture-recommendations/_index)来安装 Kubernetes 集群。该集群应专用于运行 Rancher Server。对于 v2.4 之前的 Rancher，Rancher 应该安装在 [RKE](https://rancher.com/docs/rke/latest/en/)（Rancher Kubernetes Engine）Kubernetes 集群上。RKE 是经过 CNCF 认证的 Kubernetes 发行版，并且全部组件完全在 Docker 容器内运行。从 Rancher v2.4 开始，Rancher Server 可以安装在 RKE Kubernetes 集群或 K3s Kubernetes 集群上。K3s 也是 Rancher 发布的经过完全认证的 Kubernetes 发行版，但比 RKE 更新。我们建议在 K3s 上安装 Rancher，因为 K3s 易于使用且更轻量，全部组件都打包在了一个二进制文件里。并且这个二进制文件小于 100 MB。注意：如果在 RKE 集群上安装了 Rancher 之后，目前没有办法将这个高可用迁移到 K3s 集群上。Rancher Server 只能在使用 RKE 或 K3s 安装的 Kubernetes 集群中运行。不支持在托管的 Kubernetes 集群（例如 EKS）上使用 Rancher。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -16,7 +16,7 @@ keywords:
   - 安装 Kubernetes
 ---
 
-本节描述了如何根据我们的 [Rancher Server 环境的最佳实践](/docs/overview/architecture-recommendations/_index)来安装 Kubernetes 集群。该集群应专用于仅运行 Rancher Server。
+本节描述了如何根据我们的 [Rancher Server 环境的最佳实践](/docs/overview/architecture-recommendations/_index)来安装 Kubernetes 集群。该集群应专用于运行 Rancher Server。
 
 对于 v2.4 之前的 Rancher，Rancher 应该安装在 [RKE](https://rancher.com/docs/rke/latest/en/)（Rancher Kubernetes Engine）Kubernetes 集群上。RKE 是经过 CNCF 认证的 Kubernetes 发行版，并且全部组件完全在 Docker 容器内运行。
 
@@ -56,6 +56,14 @@ Rancher Server 只能在使用 RKE 或 K3s 安装的 Kubernetes 集群中运行�
 
    注意：您也可以通过环境变量`$K3S_DATASTORE_ENDPOINT`来配置数据库端点。
 
+  :::note 提示
+   国内用户，可以使用以下方法加速安装：
+   ```
+   curl -sfL https://docs.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -s - server \
+  --datastore-endpoint="mysql://username:password@tcp(hostname:3306)/database-name"
+   ```
+  :::
+
 1. 在您的另外一台 Linux 节点上执行同样的操作。
 
 ### 2、确认 K3s 是否创建成功
@@ -90,7 +98,7 @@ sudo k3s kubectl get pods --all-namespaces
 要使用此`kubeconfig`文件，
 
 1. 安装 Kubernetes 命令行工具[kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl)。
-2. 将文件`/etc/rancher/k3s/k3s.yaml`复制并保存到本地计算机上的目录`~/.kube/config`中。
+2. 将文件`/etc/rancher/k3s/k3s.yaml`复制并保存到本地计算机上的`~/.kube/config`文件中。
 3. 在这个 `kubeconfig` 文件中，`server`参数为 `localhost`。您需要手动更改这个地址为负载均衡器的 DNS，并且指定端口 6443。（Kubernetes API Server 的端口为 6443，Rancher Server 的端口为 80 和 443。）以下是一个示例`k3s.yaml`：
 
 :::important 注意

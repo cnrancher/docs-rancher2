@@ -96,7 +96,7 @@ _自 v2.2.0 起可用_
 
 ## 导入`local`集群
 
-默认情况下，Rancher 服务器将检测并导入正在运行的`local`集群。有权访问`local`集群的用户实际上将具有对 Rancher Server 管理的所有集群的`root`访问权限。
+默认情况下，Rancher Server 将检测并导入正在运行的`local`集群。有权访问`local`集群的用户实际上将具有对 Rancher Server 管理的所有集群的`root`访问权限。
 
 如果您的环境中存在此问题，则可以在初次安装时将此选项设置为`false`。
 

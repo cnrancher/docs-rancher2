@@ -32,7 +32,7 @@ Kubernetes 将工作负载分为不同类型。Kubernetes 支持的最受欢迎�
 
 - [部署](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
 
-  **部署**最好用于无状态应用程序（即，您不必维护工作负载的状态）。由**部署**工作负载管理的 Pod 被视为独立且可以被启用的。如果 Pod 发送了问题，Kubernetes 会将其删除，然后重新创建一个新的 Pod。一个示例应用程序是 Nginx Web 服务器。
+  **部署**最好用于无状态应用程序（即，您不必维护工作负载的状态）。由**部署**工作负载管理的 Pod 被视为独立且可处理的。如果 Pod 发送了问题，Kubernetes 会将其删除，然后重新创建一个新的 Pod。一个示例应用程序是 Nginx Web 服务器。
 
 - [有状态程序集](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
 
@@ -73,7 +73,7 @@ Rancher 中有几种可用的服务。以下说明来自 [Kubernetes 文档](htt
 
 - **LoadBalancer**
 
-  使用云提供商的负载均衡器对暴露开服务。不是所有的云提供商都支持这种类型的服务。如果您在自己的数据中心中部署的集群，那么您需要提供您自己的负载均衡实现，例如[MetalLB](https://metallb.universe.tf/)。
+  使用云提供商的负载均衡器对外公开服务。不是所有的云提供商都支持这种类型的服务。如果您在自己的数据中心中部署的集群，那么您需要提供您自己的负载均衡实现，例如[MetalLB](https://metallb.universe.tf/)。
 
 ### 工作负载选项
 

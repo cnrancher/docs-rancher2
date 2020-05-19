@@ -1,6 +1,6 @@
 ---
 title: TLS 设置
-descripition: 在 Rancher v2.1.7 中，默认 TLS 配置已更改为仅接受 TLS 1.2 和安全 TLS 密码套件。不支持 TLS 1.3 和 TLS 1.3 专用密码套件。通过将环境变量传递到 Rancher 服务器容器来启用和配置审计日志。请参阅以下内容以启用安装。
+descripition: 在 Rancher v2.1.7 中，默认 TLS 配置已更改为仅接受 TLS 1.2 和安全 TLS 密码套件。不支持 TLS 1.3 和 TLS 1.3 专用密码套件。通过将环境变量传递到 Rancher Server 容器来启用和配置审计日志。请参阅以下内容以启用安装。
 ---
 
 _自 v2.1.7 起可用_
@@ -9,7 +9,7 @@ _自 v2.1.7 起可用_
 
 ## 配置 TLS 设置
 
-通过将环境变量传递到 Rancher 服务器容器来启用和配置审计日志。请参阅以下内容以启用安装。
+可通过将环境变量传递到 Rancher Server 容器来启用和配置审计日志。请参阅以下内容以启用安装。
 
 - [使用 Docker 在单个节点上安装 Rancher](/docs/installation/other-installation-methods/single-node-docker/_index)
 

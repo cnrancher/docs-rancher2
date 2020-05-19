@@ -153,7 +153,7 @@ Rancher 使用 LDAP 查询来搜索和检索关于 Active Directory 中的用户
 
 首先，我们将使用`ldapsearch`来找到用户和组的父节点的可分辨名称（DN）：
 
-```
+```bash
 $ ldapsearch -x -D "acme\jdoe" -w "secret" -p 389 \
 -h ad.acme.com -b "dc=acme,dc=com" -s sub "sAMAccountName=jdoe"
 ```
@@ -185,7 +185,7 @@ $ ldapsearch -x -D "acme\jdoe" -w "secret" -p 389 \
 
 接下来，我们将查询与此用户关联的组之一，在本例中为`CN=examplegroup，OU=groups，DC=acme，DC=com`:
 
-```
+```bash
 $ ldapsearch -x -D "acme\jdoe" -w "secret" -p 389 \
 -h ad.acme.com -b "ou=groups,dc=acme,dc=com" \
 -s sub "CN=examplegroup"

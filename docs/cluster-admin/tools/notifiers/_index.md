@@ -4,7 +4,7 @@ title: 通知
 
 通知服务是通知您告警事件的服务。您可以配置通知服务，以将告警通知发送给最适合采取措施的人员。
 
-Rancher 集成了多种流行的通知服务，包括：
+Rancher 集成了多种通知服务，包括：
 
 - **Slack**： 将告警通知发送到您的 Slack 频道。
 - **Email**： 选择电子邮件收件人以接收告警通知。
@@ -118,9 +118,9 @@ Rancher 集成了多种流行的通知服务，包括：
 }
 ```
 
-## 下一步是什么?
+## 后续操作
 
-创建通知程序接受者后，设置告警以接收 Rancher 告警事件。
+创建通知程序接收者后，设置告警以接收 Rancher 告警事件。
 
 - [集群所有者](/docs/admin-settings/rbac/cluster-project-roles/_index)可以设置[集群级别](/docs/cluster-admin/tools/alerts/_index)的告警。
 - [项目所有者](/docs/admin-settings/rbac/cluster-project-roles/_index)可以设置[项目级别](/docs/project-admin/tools/alerts/_index)的告警。

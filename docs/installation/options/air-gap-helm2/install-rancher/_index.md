@@ -1,6 +1,6 @@
 ---
 title: 4、安装 Rancher
-description: 本节提供了较早版本的使用 Helm 2 离线安装 Rancher 的方法，如果无法升级到 Helm 3，可以使用此方法。本节介绍如何为离线安装 Rancher 准备您的节点。Rancher 服务器可能会离线安装在防火墙或代理之后的封闭环境。这里有两个选项卡，用于高可用性（推荐）或 Docker 安装。
+description: 本节提供了较早版本的使用 Helm 2 离线安装 Rancher 的方法，如果无法升级到 Helm 3，可以使用此方法。本节介绍如何为离线安装 Rancher 准备您的节点。Rancher Server 可能会离线安装在防火墙或代理之后的封闭环境。这里有两个选项卡，用于高可用性（推荐）或 Docker 安装。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -130,23 +130,23 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
 
 1. 渲染 Rancher 模板，声明您选择的选项。使用下面的参考表替换每个占位符。需要将 Rancher 配置为在由 Rancher 启动 Kubernetes 集群或 Rancher 工具时，使用私有注册表。
 
-   | 占位符                           | 描述                 |
-   | -------------------------------- | -------------------- |
-   | `<VERSION>`                      | 对应 Rancher 版本    |
-   | `<RANCHER.YOURDOMAIN.COM>`       | 负载均衡对应的 DNS   |
-   | `<REGISTRY.YOURDOMAIN.COM:PORT>` | 私有镜像库对应的 DNS |
-   | `<CERTMANAGER_VERSION>`          | Cert-manager 版本    |
+| 占位符                           | 描述                 |
+| -------------------------------- | -------------------- |
+| `<VERSION>`                      | 对应 Rancher 版本    |
+| `<RANCHER.YOURDOMAIN.COM>`       | 负载均衡对应的 DNS   |
+| `<REGISTRY.YOURDOMAIN.COM:PORT>` | 私有镜像库对应的 DNS |
+| `<CERTMANAGER_VERSION>`          | Cert-manager 版本    |
 
-   ```plain
-    helm template ./rancher-<VERSION>.tgz --output-dir . \
-    --name rancher \
-    --namespace cattle-system \
-    --set hostname=<RANCHER.YOURDOMAIN.COM> \
-    --set certmanager.version=<CERTMANAGER_VERSION> \
-    --set rancherImage=<REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher \
-    --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # 自v2.2.0可用，设置默认的系统镜像仓库
-    --set useBundledSystemChart=true # 自v2.3.0可用，使用内嵌的 Rancher system charts
-   ```
+```plain
+ helm template ./rancher-<VERSION>.tgz --output-dir . \
+ --name rancher \
+ --namespace cattle-system \
+ --set hostname=<RANCHER.YOURDOMAIN.COM> \
+ --set certmanager.version=<CERTMANAGER_VERSION> \
+ --set rancherImage=<REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher \
+ --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # 自v2.2.0可用，设置默认的系统镜像仓库
+ --set useBundledSystemChart=true # 自v2.3.0可用，使用内嵌的 Rancher system charts
+```
 
 #### 选项 B - 使用已有的证书
 
@@ -243,7 +243,7 @@ kubectl -n cattle-system apply -R -f ./rancher
 
 ## 单节点安装
 
-Docker 单节点安装适用于想要对 Rancher 进行`测试`的 Rancher 用户。您可以使用 `docker run` 命令在单个节点上安装 Rancher 服务器组件，而不是在 Kubernetes 集群上运行。由于只有一个节点和一个 Docker 容器，因此，如果该节点发生故障，并且其他节点上没有可用的 Rancher 数据副本，您将丢失 Rancher 服务器的所有数据。**重要提示：如果您按照 Docker 单节点安装指南安装 Rancher，则没有升级路径可将 Docker 单节点安装过渡到 Kubernetes 安装。**除了运行单节点安装，您还可以选择按照 Rancher 高可用安装指南，但只能使用一个节点来安装 Rancher 和 Kubernetes。之后，您可以扩展 Kubernetes 集群中的 etcd 节点，使其成为真正的高可用安装。
+Docker 单节点安装适用于想要对 Rancher 进行`测试`的 Rancher 用户。您可以使用 `docker run` 命令在单个节点上安装 Rancher Server 组件，而不是在 Kubernetes 集群上运行。由于只有一个节点和一个 Docker 容器，因此，如果该节点发生故障，并且其他节点上没有可用的 Rancher 数据副本，您将丢失 Rancher Server 的所有数据。**重要提示：如果您按照 Docker 单节点安装指南安装 Rancher，则没有升级路径可将 Docker 单节点安装过渡到 Kubernetes 安装。**除了运行单节点安装，您还可以选择按照 Rancher 高可用安装指南，但只能使用一个节点来安装 Rancher 和 Kubernetes。之后，您可以扩展 Kubernetes 集群中的 etcd 节点，使其成为真正的高可用安装。
 
 为了安全起见，使用 Rancher 时需要 SSL。SSL 保护所有 Rancher 网络通信的安全，例如在您登录集群或与集群交互时。
 
@@ -282,7 +282,7 @@ docker run -d --restart=unless-stopped \
 
 #### 选项 B - 使用已有的自签名证书
 
-在您的团队将访问 Rancher 服务器的开发或测试环境中，创建一个自签名证书以供您的安装使用，以便您的团队可以验证它们是否正在连接到 Rancher 实例。
+在您的团队将访问 Rancher Server 的开发或测试环境中，创建一个自签名证书以供您的安装使用，以便您的团队可以验证它们是否正在连接到 Rancher 实例。
 
 > **先决条件：**
 > 在具有互联网连接的计算机上，使用[OpenSSL](https://www.openssl.org/)或您选择的其他方法创建自签名证书。
