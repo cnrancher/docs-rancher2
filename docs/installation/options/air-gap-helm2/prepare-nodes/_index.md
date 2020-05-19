@@ -39,7 +39,7 @@ Rancher 支持使用私有仓库进行离线安装。您必须具有自己的私
 
 #### CLI 工具
 
-Kubernetes 安装需要以下 CLI 工具。确保这些工具已安装在您的工作站上，并且在您的计算机中可用`$PATH`。
+Kubernetes 安装需要以下 CLI 工具。确保这些工具已安装在您的工作环境上，并且在`$PATH`中可用。
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl) - Kubernetes 命令行工具。
 - [rke](https://rancher.com/docs/rke/latest/en/installation/) - Rancher Kubernetes 引擎，用于构建 Kubernetes 集群的 cli。
@@ -65,12 +65,12 @@ Rancher 建议在 Kubernetes 集群上安装 Rancher。一个高可用的 Kubern
 
 #### 推荐架构
 
-- Rancher 的 DNS 应该解析为 4 层负载均衡器
+- Rancher 的 DNS 应该解析为 4 层负载均衡器。
 - 负载均衡器应将端口 TCP/80 和 TCP/443 转发到 Kubernetes 集群中的所有 3 个节点。
 - Ingress 控制器会将 HTTP 重定向到 HTTPS，并在端口 TCP/443 上终止 SSL/TLS。
 - Ingress 控制器会将流量转发到 Rancher 部署中 Pod 上的端口 TCP/80。
 
-<figcaption>Rancher安装在具有4层负载均衡器的Kubernetes集群上，描绘了Ingress控制器处的SSL终止</figcaption>
+<figcaption>Rancher安装在具有4层负载均衡器的Kubernetes集群上，描绘了Ingress控制器处的SSL终止。</figcaption>
 
 ![Rancher HA](/img/rancher/ha/rancher2ha.svg)
 
@@ -108,4 +108,4 @@ Docker 安装适用于想要测试 Rancher 的 Rancher 用户。您可以使用`
 
 在[需求](/docs/installation/requirements/_index)中查看每个集群节点的硬件和软件需求。
 
-## [下一步: 收集并将镜像发布到您的私有仓库](/docs/installation/options/air-gap-helm2/populate-private-registry/_index)
+## [下一步: 同步镜像到私有镜像仓库](/docs/installation/options/air-gap-helm2/populate-private-registry/_index)

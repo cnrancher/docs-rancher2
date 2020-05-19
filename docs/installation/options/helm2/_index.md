@@ -27,11 +27,11 @@ keywords:
 
 > **重要：** Rancher 的管理服务只能在 RKE 管理的 Kubernetes 集群上运行。不支持将 Rancher 运行在托管的 Kubernetes 服务或者其他供应商的托管服务。
 
-> **重要：** 为了最佳的性能，我们建议使用专用 Kubernetes 集群来运行 Rancher Server 服务，不建议在此集群上运行用户的工作负载。部署 Rancher 之后，您可以通过[创建或导入集群](/docs/cluster-provisioning/_index_)来运行您的工作负载。
+> **重要：** 为了最佳的性能，我们建议使用专用 Kubernetes 集群来运行 Rancher Server 服务，不建议在此集群上运行用户的工作负载。部署 Rancher 之后，您可以通过[创建或导入集群](/docs/cluster-provisioning/_index/#cluster-creation-in-rancher)来运行您的工作负载。
 
 ## 推荐架构
 
-- Rancher 的 DNS 应为 4 层负载均衡器（TCP）
+- Rancher 的 DNS 应为 4 层负载均衡器（TCP）。
 - 负载均衡器应允许 Kubernetes 集群中全部三个节点的 TCP/80 和 TCP/443 端口访问。
 - Ingress controller 会将 HTTP 重定向到 HTTPS，并在端口 TCP/443 终止 SSL/TLS。
 - Ingress controller 会将流量转发到 Rancher Pod 的 TCP/80 端口。
@@ -44,7 +44,7 @@ keywords:
 
 ## 依赖工具
 
-在安装过程中依赖以下 CLI 工具。请确认这些工具已经安装完成并且配置到环境变量 `$PATH` 中
+在安装过程中依赖以下 CLI 工具。请确认这些工具已经安装完成并且配置到环境变量 `$PATH` 中。
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl) - Kubernetes 命令行工具。
 - [rke](https://rancher.com/docs/rke/latest/en/installation/) - Rancher Kubernetes Engine, 构建 Kubernetes 集群的 cli 工具。

@@ -133,7 +133,7 @@ _v2.3.0 及以后版本可用_
 
 #### 先决条件
 
-这些步骤要求您使用 Windows Server 1809 工作站，该工作站能访问网络、能您的私有镜像库 以及至少 50 GB 的磁盘空间。
+这些步骤要求您使用 Windows Server 1809 工作站，该工作站能访问网络、能访问您的私有镜像库 以及至少 50 GB 的磁盘空间。
 
 工作站必须安装 Docker 18.02+版本，因为这个版本的 Docker 支持 manifests，这个特性是设置 Windows 集群所必须的。
 
@@ -141,7 +141,7 @@ _v2.3.0 及以后版本可用_
 
 #### A. 查找您用的 Rancher 版本所需要的资源
 
-1. 浏览我们的[版本发布页面](https://github.com/rancher/rancher/releases)并查找您想要安装的 Rancher v2.x.x 版本。不要下载标记为 `rc` or `Pre-release` 的版本，因为它们在生产环境下不稳定。
+1. 浏览我们的[版本发布页面](https://github.com/rancher/rancher/releases)并查找您想要安装的 Rancher v2.x.x 版本。不要下载标记为 `rc` 或 `Pre-release` 的版本，因为它们在生产环境下不稳定。
 
 2. 从发行版本的 "Assets" 部分，下载下列文件:
 
@@ -180,7 +180,7 @@ _v2.3.0 及以后版本可用_
 
 #### D. 推送镜像到私有镜像库
 
-将通过脚本，将文件`rancher-windows-images.tar.gz`中的镜像移入到您私有镜像库中。在工作站中，文件`rancher-windows-images.txt`要放在与运行脚本`rancher-load-images.ps1`同一目录下。
+通过脚本将文件`rancher-windows-images.tar.gz`中的镜像移入到您私有镜像库中。在工作站中，文件`rancher-windows-images.txt`要放在与运行脚本`rancher-load-images.ps1`同一目录下。
 
 1. 如果需要，请使用 `powershell`，登录到您的私有镜像库：
 
@@ -263,7 +263,7 @@ Linux 镜像需要从 Linux 主机上收集和推送，但是必须先将 Window
 
 #### D. 推送镜像到私有镜像库
 
-将用脚本`rancher-load-images.sh`将文件`rancher-images.tar.gz`中的镜像移入到您私有镜像库中。在工作站中，镜像列表文件 `rancher-images.txt` / `rancher-windows-images.txt`要放在与运行脚本`rancher-load-images.sh`同一目录下。
+用脚本`rancher-load-images.sh`将文件`rancher-images.tar.gz`中的镜像移入到您私有镜像库中。在工作站中，镜像列表文件 `rancher-images.txt` / `rancher-windows-images.txt`要放在与运行脚本`rancher-load-images.sh`同一目录下。
 
 1. 请先登录到自己的私有镜像库 中：
 
