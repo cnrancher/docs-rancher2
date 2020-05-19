@@ -30,7 +30,7 @@ keywords:
 
 这是带有占位符的命令的**示例**：
 
-```
+```bash
 docker stop <RANCHER_CONTAINER_NAME>
 ```
 
@@ -68,13 +68,13 @@ docker stop <RANCHER_CONTAINER_NAME>
 
 1. 停止当前正在运行的 Rancher Server 的容器。将`<RANCHER_CONTAINER_NAME>` 替换为 Rancher 容器的名称。
 
-   ```
+   ```bash
    docker stop <RANCHER_CONTAINER_NAME>
    ```
 
 1. 替换下面命令中每个占位符，运行命令，从刚刚停止的 Rancher 容器中创建一个数据容器。
 
-   ```
+   ```bash
    docker create --volumes-from <RANCHER_CONTAINER_NAME> --name rancher-data rancher/rancher:<RANCHER_CONTAINER_TAG>
    ```
 
@@ -84,7 +84,7 @@ docker stop <RANCHER_CONTAINER_NAME>
 
    如果升级期间出现问题，则此备份包将用作回滚点。使用以下命令，替换每个[占位符](#占位符)。
 
-   ```
+   ```bash
    docker run --volumes-from rancher-data -v $PWD:/backup busybox tar zcvf /backup/rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz /var/lib/rancher
    ```
 
@@ -92,7 +92,7 @@ docker stop <RANCHER_CONTAINER_NAME>
 
 1. 输入`ls`命令以确认备份压缩包创建成功。它的名称类似于 `rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz`。
 
-   ```
+   ```bash
    [rancher@ip-10-0-0-50 ~]$ ls
    rancher-data-backup-v2.1.3-20181219.tar.gz
    ```
@@ -107,7 +107,7 @@ docker stop <RANCHER_CONTAINER_NAME>
 | ----------------------- | -------------------------------------------------------------------------------------- |
 | `<RANCHER_VERSION_TAG>` | 您要升级到的[Rancher 版本](/docs/installation/options/server-tags/_index) 的发行标签。 |
 
-```
+```bash
 docker pull rancher/rancher:<RANCHER_VERSION_TAG>
 ```
 
@@ -140,7 +140,7 @@ docker pull rancher/rancher:<RANCHER_VERSION_TAG>
 | ----------------------- | ------------------------------------------------------------------------------------- |
 | `<RANCHER_VERSION_TAG>` | 您要升级到的[Rancher 版本](/docs/installation/options/server-tags/_index)的发行标签。 |
 
-```
+```bash
 docker run -d --volumes-from rancher-data \
   --restart=unless-stopped \
   -p 80:80 -p 443:443 \
@@ -160,9 +160,9 @@ docker run -d --volumes-from rancher-data \
 | `<PRIVATE_KEY.pem>`     | 证书私钥的路径。                                                                      |
 | `<CA_CERTS>`            | 证书颁发机构的证书的路径。                                                            |
 | `<RANCHER_VERSION_TAG>` | 您要升级到的[Rancher 版本](/docs/installation/options/server-tags/_index)的发行标签。 |
-|                         |
+|                         |                                                                                       |
 
-```
+```bash
 docker run -d --volumes-from rancher-data \
   --restart=unless-stopped \
 	-p 80:80 -p 443:443 \
@@ -184,9 +184,9 @@ docker run -d --volumes-from rancher-data \
 | `<FULL_CHAIN.pem>`      | 完整证书链的路径。                                                                    |
 | `<PRIVATE_KEY.pem>`     | 证书私钥的路径。                                                                      |
 | `<RANCHER_VERSION_TAG>` | 您要升级到的[Rancher 版本](/docs/installation/options/server-tags/_index)的发行标签。 |
-|                         |
+|                         |                                                                                       |
 
-```
+```bash
 docker run -d --volumes-from rancher-data \
   --restart=unless-stopped \
 	-p 80:80 -p 443:443 \
@@ -212,7 +212,7 @@ docker run -d --volumes-from rancher-data \
 | `<RANCHER_VERSION_TAG>` | 您要升级到的[Rancher 版本](/docs/installation/options/server-tags/_index)的发行标签。 |
 | `<YOUR.DNS.NAME>`       | 您最初开始使用的域地址                                                                |
 
-```
+```bash
 docker run -d --volumes-from rancher-data \
   --restart=unless-stopped \
 	-p 80:80 -p 443:443 \
@@ -237,7 +237,7 @@ docker run -d --volumes-from rancher-data \
 | `<REGISTRY.YOURDOMAIN.COM:PORT>` | 您的私有仓库 URL 和端口。                                                             |
 | `<RANCHER_VERSION_TAG>`          | 您要升级到的[Rancher 版本](/docs/installation/options/server-tags/_index)的发行标签。 |
 
-```
+```bash
   docker run -d --volumes-from rancher-data \
       --restart=unless-stopped \
       -p 80:80 -p 443:443 \
@@ -261,7 +261,7 @@ docker run -d --volumes-from rancher-data \
 | `<REGISTRY.YOURDOMAIN.COM:PORT>` | 您的私有仓库 URL 和端口。                                                             |
 | `<RANCHER_VERSION_TAG>`          | 您要升级到的[Rancher 版本](/docs/installation/options/server-tags/_index)的发行标签。 |
 
-```
+```bash
 docker run -d --restart=unless-stopped \
     -p 80:80 -p 443:443 \
     -v /<CERT_DIRECTORY>/<FULL_CHAIN.pem>:/etc/rancher/ssl/cert.pem \
@@ -288,7 +288,7 @@ docker run -d --restart=unless-stopped \
 
 > **注意：** 使用`--no-cacerts`作为容器的参数来禁用 Rancher 生成的默认 CA 证书。
 
-```
+```bash
 docker run -d --volumes-from rancher-data \
     --restart=unless-stopped \
      -p 80:80 -p 443:443 \

@@ -30,7 +30,7 @@ keywords:
 Rancher 的部署可以有三种架构：
 
 - **高可用 Kubernetes 安装：** 我们建议使用 Kubernetes 程序包管理器 [Helm](/docs/overview/concepts/_index) 在专用的 Kubernetes 集群上安装 Rancher。在 RKE 集群中，需要使用三个节点以实现高可用性。在 K3s 集群中，仅需要两个节点即可。
-- **单节点 Kubernetes 安装：** 另一个选择是在 Kubernetes 集群上使用 Helm 安装 Rancher，仅在集群中使用单个节点。虽然在这种情况下的 Rancher 服务器不具有高可用性，但是这种架构既节省了资源，又保留了可扩展性。如果您想在短期内通过使用单个节点来节省资源，同时又保留高可用性迁移路径，最合适的架构就是单节点 Kubernetes 安装。
+- **单节点 Kubernetes 安装：** 另一个选择是在 Kubernetes 集群上使用 Helm 安装 Rancher，仅在集群中使用单个节点。虽然在这种情况下的 Rancher Server 不具有高可用性，但是这种架构既节省了资源，又保留了可扩展性。如果您想在短期内通过使用单个节点来节省资源，同时又保留高可用性迁移路径，最合适的架构就是单节点 Kubernetes 安装。
 - **单节点 Docker 安装：** 将 Rancher 与 Docker 一起安装在单个节点上。这种安装方式的优点是开箱即用，建议您在测试和演示环境中使用这种架构。它的缺点也非常明显，单节点 Docker 安装和 Kubernetes 安装之间无法迁移。如果您已经决定了要在生产环境中使用 Rancher，我们推荐您在上述的两种 Kubernetes 安装中选择一种，在生产环境中使用。
 
 关于在私有环境中或 HTTP 代理后面安装 Rancher，我们有单独的说明文档：

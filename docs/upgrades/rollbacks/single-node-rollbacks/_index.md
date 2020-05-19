@@ -68,7 +68,7 @@ docker pull rancher/rancher:<PRIOR_RANCHER_VERSION>
 
    您可以在命令行工具输入`docker ps`，获得 Rancher 容器的名称。
 
-1. 将[升级单节点 Rancher](/docs/upgrades/upgrades/single-node/_index)时生成的备份压缩包移动到 Rancher 服务器上。切换到目标目录，输入`ls`指令，确认将备份压缩包移动到了正确的路径。
+1. 将[升级单节点 Rancher](/docs/upgrades/upgrades/single-node/_index)时生成的备份压缩包移动到 Rancher Server 上。切换到目标目录，输入`ls`指令，确认将备份压缩包移动到了正确的路径。
 
    如果您遵循了我们在[升级单节点 Rancher](/docs/upgrades/upgrades/single-node/_index)中建议的命名约定，则其命名类似于(`rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz`)。
 

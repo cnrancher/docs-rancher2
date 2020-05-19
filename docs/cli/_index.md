@@ -44,7 +44,7 @@ $ ./rancher login https://<SERVER_URL> --token <BEARER_TOKEN>
 
 **例如： `./rancher context switch` 输出**
 
-```
+```bash
 User:rancher-cli-directory user$ ./rancher context switch
 NUMBER    CLUSTER NAME   PROJECT ID              PROJECT NAME
 1         cluster-2      c-7q96s:p-h4tmb         project-2
@@ -56,7 +56,7 @@ Select a Project:
 
 输入一个数字后，控制台会显示一条消息，说明您已更改项目。
 
-```
+```bash
 INFO[0005] Setting new context to project project-1
 INFO[0005] Saving config to /Users/markbishop/.rancher/cli2.json
 ```

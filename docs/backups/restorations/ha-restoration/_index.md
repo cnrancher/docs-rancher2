@@ -53,7 +53,7 @@ keywords:
 
 复制您原始的`rancher-cluster.yml`文件。
 
-```
+```bash
 cp rancher-cluster.yml rancher-cluster-restore.yml
 ```
 
@@ -141,7 +141,7 @@ S3 特定选项仅适用于 RKE v0.2.0 +。
 
 > **注意：** 对于运行 RKE v0.2.0 +的用户，在开始还原之前，请确保存在您的`cluster.rkestate`，因为其中包含集群的证书数据。
 
-```
+```bash
 rke up --config ./rancher-cluster-restore.yml
 ```
 
@@ -151,7 +151,7 @@ RKE 完成后，它将在本地目录中创建一个凭证文件。配置`kubect
 
 您的新集群将需要几分钟才能稳定下来。一旦看到新的“目标节点”过渡到`Ready`，并在`NotReady`中看到三个旧节点，您就可以继续。
 
-```
+```bash
 kubectl get nodes
 
 NAME            STATUS    ROLES                      AGE       VERSION
@@ -165,7 +165,7 @@ NAME            STATUS    ROLES                      AGE       VERSION
 
 使用`kubectl`从集群中删除旧节点。
 
-```
+```bash
 kubectl delete node 18.217.82.189 18.222.22.56 18.191.222.99
 ```
 
@@ -179,7 +179,7 @@ kubectl delete node 18.217.82.189 18.222.22.56 18.191.222.99
 
 > **注意：** `cattle-cluster-agent` 和 `cattle-node-agent` Pod 将处于 `Error` 或 `CrashLoopBackOff` 状态，直到 Rancher Server 启动且 DNS /负载均衡器已指向新集群为止。
 
-```
+```bash
 kubectl get pods --all-namespaces
 
 NAMESPACE       NAME                                    READY     STATUS    RESTARTS   AGE
@@ -220,7 +220,7 @@ nodes:
 
 运行 RKE 并将节点添加到新集群。
 
-```
+```bash
 rke up --config ./rancher-cluster-restore.yml
 ```
 

@@ -32,7 +32,7 @@ keywords:
 
 ## RKE Kubernetes 集群数据架构
 
-在 RKE 集群中，集群中三个etcd节点中的每个etcd节点都会复制一份集群数据，以便在一个节点发生故障的情况下其他节点可以提供冗余和数据复制。
+在 RKE 集群中，集群中三个 etcd 节点中的每个 etcd 节点都会复制一份集群数据，以便在一个节点发生故障的情况下其他节点可以提供冗余和数据复制。
 
 <sup>运行 Rancher Server 的 RKE 集群的体系结构</sup>
 
@@ -157,7 +157,7 @@ _自 RKE v0.2.0 起可用_
 
 **例如：**
 
-```
+```bash
 root@node:~# s3cmd mb s3://rke-etcd-snapshots
 root@node:~# s3cmd put /opt/rke/etcd-snapshots/snapshot.db s3://rke-etcd-snapshots/
 ```
