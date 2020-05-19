@@ -139,7 +139,7 @@ kubectl --kubeconfig ~/.kube/config/k3s.yaml get pods --all-namespaces
 可以通过以下方式完成离线环境的升级：
 
 1. 从[版本发布](https://github.com/rancher/k3s/releases)页面下载要升级的 K3s 版本的新镜像包（`tar`文件）。将`tar`包放在每个节点上的`/var/lib/rancher/k3s/agent/images/`目录中。删除旧的 `tar` 文件。
-2. 复制并替换每个节点上`/usr/local/bin`中的旧的 K3s 二进制文件。复制新的安装脚本到每个节点，地址为 https://get.k3s.io（因为自上一发行以来，脚本可能已更改）。与过去一样，使用相同的环境变量再次运行脚本。
+2. 复制并替换每个节点上`/usr/local/bin`中的旧的 K3s 二进制文件。因为自上一发行以来，脚本可能已更改，单击[这里](https://raw.githubusercontent.com/rancher/k3s/master/install.sh)获取新的二进制文件。与过去一样，使用相同的环境变量再次运行脚本。
 3. 重新启动 K3s 服务（如果安装程序未自动重启 K3s）。
 
 ## 安装 RKE 集群

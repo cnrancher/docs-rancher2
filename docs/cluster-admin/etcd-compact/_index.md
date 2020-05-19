@@ -16,13 +16,15 @@ keywords:
   - ETCD数据压缩
 ---
 
-etcd 默认不会自动进行数据压缩，etcd 保存了 keys 的历史信息，数据频繁的改动会导致数据版本越来越多，相对应的数据库就会越来越大。etcd 数据库大小默认 2GB，当在 etcd 容器或者 rancher ui 出现以下日志时，说明数据库空间占满，需要进行数据压缩腾出空间。
+## 概述
+
+etcd 默认不会自动进行数据压缩，etcd 保存了 keys 的历史信息，数据频繁的改动会导致数据版本越来越多，相对应的数据库就会越来越大。etcd 数据库大小默认 2GB，当在 etcd 容器或者 rancher ui 出现以下日志时，说明数据库空间占满，需要进行数据压缩，腾出空间。
 
 ```bash
 Error from server: etcdserver: mvcc: database space exceeded
 ```
 
-## 释放空间
+## 操作步骤
 
 1. 登录 etcd 容器
 
@@ -52,7 +54,7 @@ Error from server: etcdserver: mvcc: database space exceeded
    etcdctl defrag
    ```
 
-   > 以上 2-4 步，操作需在每个 etcd 容器中执行。
+   > 您需要在每个 etcd 容器中执行步骤 2~步骤 4。
 
 5. 忽略 etcd 告警
 

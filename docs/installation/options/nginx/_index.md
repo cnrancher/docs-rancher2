@@ -18,7 +18,7 @@ keywords:
 
 我们将使用 NGINX 作为`L4`层负载均衡器(TCP)，它将请求轮训转发到后端的 Rancher server 节点。在此配置中，负载均衡器位于 Rancher server 节点的前面。负载均衡器可以是任何能够运行 NGINX 的主机。我们不建议使用任意一个 Rancher server 节点作为负载均衡器节点，因为默认配置下每个 K8S 节点都会运行 ingress 控制器，而 ingress 控制器以为`host`网络模式运行，并默认监听了`80`和`443`端口，所以默认情况下会出现端口冲突。如果一定要将 NGINX 安装在 Rancher server 某个节点上，那么可以编辑 ingress 控制器配置文件，在`args`中添加参数，端口根据实际情况修改 `--http-port=8880 --http-port=8443`。 ingress 控制器修改默认端口后，nginx 配置中代理的后端 server 端口也需要一并修改。
 
-![image-20200515141942435](images/image-20200515141942435.png)
+![image-20200515141942435](/img/rancher/nginx-config.png)
 
 > **说明：**在这些示例中，负载均衡器将被配置为将流量定向到三个 Rancher Server 节点。如果将 Rancher 安装在 RKE Kubernetes 集群上，则需要三个节点。如果将 Rancher 安装在 K3s Kubernetes 集群上，则仅需要两个节点。
 

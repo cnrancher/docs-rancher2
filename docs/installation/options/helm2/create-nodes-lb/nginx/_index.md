@@ -39,7 +39,7 @@ NGINX 将被配置为 4 层负载均衡器(TCP)，将连接转发到其中一个
 
 2.  在`nginx.conf`中, 使用[节点](/docs/installation/options/helm2/create-nodes-lb/_index)IPs 替换(端口 80 和 端口 443)的`<IP_NODE_1>`, `<IP_NODE_2>`, 和`<IP_NODE_3>`。
 
-    > **注意事项:** 可配置项请参考[NGINX 文档: TCP and UDP Load Balancing](https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/_index)。
+    > **注意事项:** 可配置项请参考[NGINX 文档: TCP and UDP Load Balancing](https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer)。
 
     <figcaption>NGINX 配置文件示例</figcaption>
 

@@ -24,11 +24,11 @@ jq 工具可能需要单独安装，安装方法参考：[jq 安装](https://ste
 
 ## 1. Rancher UI 获取创建集群参数
 
-1. 访问`Rancher_URL/v3/clusters/`,点击右上角的创建：
+1. 访问`Rancher_URL/v3/clusters/`，单击右上角“Create”，创建导入集群：
 
    ![image-20191213210405727](/img/rancher/old-doc/image-20191213210405727.png)
 
-1. 在弹出的参数填写页面中，主要修改以下参数:
+1. 在参数填写页面中，修改以下参数:
 
    - `dockerRootDir`
      默认为`/var/lib/docker`,如果 dockerroot 路径有修改，需要修改此配置路径；
@@ -42,7 +42,7 @@ jq 工具可能需要单独安装，安装方法参考：[jq 安装](https://ste
    - `name`(必填)
      设置集群名称，名称具有唯一性，不能与现有集群名称相同；
 
-1. 配置好参数后点击`Show Request`；
+1. 配置好参数后单击`Show Request`；
 
 1. 在弹出的窗口中，复制`API Request`中`HTTP Request:`的`{}`中的内容，此内容即为创建的集群的 API 参数；
 
