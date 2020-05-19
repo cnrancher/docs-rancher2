@@ -53,7 +53,7 @@ _v2.1.0 版本可用_
     | 用户名           | 包含用户 user name/given name 的 AD 属性                |
     | UID              | 对每个用户唯一的 AD 属性。                              |
     | 组               | 为管理组成员身份创建的条目。                            |
-    | Rancher API 地址 | Rancher 服务器的 URL 地址                               |
+    | Rancher API 地址 | Rancher Server 的 URL 地址                              |
     | 私钥 / 证书      | 密钥/证书对，用于在 Rancher 和 IdP 之间创建安全 shell。 |
     | 元数据 XML       | 从您的 IdP 服务器导出的`metadata.xml`文件。             |
 

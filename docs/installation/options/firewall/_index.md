@@ -44,13 +44,15 @@ target     prot opt source               destination
 sudo iptables --list
 ```
 
+
 本节介绍如何使用`firewalld`为高可用性 Rancher 服务器集群中的节点应用[防火墙端口规则](/docs/installation/options/firewall/_index/)。
+
 
 ## 先决条件
 
 安装 v7.x 或更高版本的`firewalld`：
 
-```
+```bash
 yum install firewalld
 systemctl start firewalld
 systemctl enable firewalld
@@ -58,9 +60,9 @@ systemctl enable firewalld
 
 ## 应用防火墙端口规则
 
-在 Rancher 高可用性安装指南中，Rancher 服务器设置在三个节点上，这三个节点具有 Kubernetes 的所有三个角色：etcd、controlplane 和 worker。如果您的 Rancher 服务器节点具有所有这三个角色，请在每个节点上运行以下命令：
+在 Rancher 高可用性安装指南中，Rancher Server 设置在三个节点上，这三个节点具有 Kubernetes 的所有角色：etcd、controlplane 和 worker。如果您的 Rancher Server 节点具有所有角色，请在每个节点上运行以下命令：
 
-```
+```bash
 firewall-cmd --permanent --add-port=22/tcp
 firewall-cmd --permanent --add-port=80/tcp
 firewall-cmd --permanent --add-port=443/tcp
@@ -76,9 +78,9 @@ firewall-cmd --permanent --add-port=30000-32767/tcp
 firewall-cmd --permanent --add-port=30000-32767/udp
 ```
 
-如果您的 Rancher 服务器节点具有单独的角色，请根据节点的角色使用以下命令：
+如果您的 Rancher Server 节点具有单独的非全部角色，请根据节点的角色执行以下命令：
 
-```
+```bash
 ## 对于etcd节点，运行以下命令：
 firewall-cmd --permanent --add-port=2376/tcp
 firewall-cmd --permanent --add-port=2379/tcp
@@ -112,10 +114,10 @@ firewall-cmd --permanent --add-port=30000-32767/tcp
 firewall-cmd --permanent --add-port=30000-32767/udp
 ```
 
-在节点上运行`firewall-cmd`命令后，使用以下命令启用防火墙规则：
+在节点上运行`firewall-cmd`命令后，使用以下命令重新加载防火墙规则：
 
-```
+```bash
 firewall-cmd --reload
 ```
 
-**结果：** 防火墙已更新，因此 Helm 可以与 Rancher 服务器节点通信。
+**结果：** 防火墙已更新，因此 Helm 可以与 Rancher Server 节点通信。

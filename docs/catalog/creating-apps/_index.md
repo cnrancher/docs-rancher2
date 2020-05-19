@@ -95,7 +95,7 @@ _自 v2.3.0 起可用_
 
 > **注意：** 即使 Rancher 发行版的前缀为`v`，使用该选项时发行版的前缀也为**空**。
 
-```
+```bash
 rancher_min_version: 2.3.0
 rancher_max_version: 2.3.99
 ```

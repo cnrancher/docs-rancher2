@@ -16,7 +16,7 @@ keywords:
   - 安装介绍
 ---
 
-对于生产环境，我们建议以高可用配置安装 Rancher，以便您的用户始终可以访问 Rancher Server。当 Rancher 安装在 Kubernetes 集群中时，Rancher 将与集群的 etcd 或 MySQL 等数据库集成，并利用 Kubernetes 调度来实现高可用。
+对于生产环境，我们建议以高可用配置安装 Rancher，以便您的用户始终可以访问 Rancher Server。当 Rancher 安装在 Kubernetes 集群中时，Rancher 将与集群的etcd数据库集成，并利用 Kubernetes 调度来实现高可用。
 
 本节介绍如何使用 RKE 或 K3s 创建和管理集群，然后将 Rancher 安装到该集群上。对于这种类型的架构，您将需要在基础设施提供商中创建节点（通常为虚拟机）。您还需要配置负载均衡器，将前端流量定向到这些节点中。当节点运行起来并满足[节点要求](/docs/installation/requirements/_index)时，可以使用 RKE 或 K3s 将 Kubernetes 部署到这些节点上，然后使用 Helm 软件包管理器将 Rancher 部署到 Kubernetes 上。
 
@@ -24,7 +24,7 @@ keywords:
 
 如果您只有一个节点，但您想在将来的生产中使用 Rancher Server，则最好将 Rancher 安装在单节点 Kubernetes 集群上，而不是使用 Docker 安装它。
 
-要创建单节点 RKE 集群，只需在`cluster.yml`中配置一个节点。这个节点应该具有所有三个角色：`etcd`、`controlplane`和`worker`。
+要创建单节点 RKE 集群，只需在`cluster.yml`中配置一个节点。这个节点应该具有所有三个角色：`etcd`,`controlplane`和`worker`。
 
 要创建单节点 K3s 集群，只需在一个节点上运行安装命令即可，并不需要像高可用集群一样在两个节点上安装。
 

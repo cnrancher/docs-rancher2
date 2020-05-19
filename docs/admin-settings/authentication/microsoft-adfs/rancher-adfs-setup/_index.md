@@ -39,7 +39,7 @@ _自 v2.0.7 版本起可用_
     | 用户名           | 包含用户名/给定名称的 AD 属性。 <br/><br/>例: `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name`                                                     |
     | UID              | 每个用户唯一的 AD 属性。 <br/><br/>例: `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn`                                                             |
     | 组               | 进行输入以管理组成员身份。 <br/><br/>例: `http://schemas.xmlsoap.org/claims/Group`                                                                             |
-    | Rancher API 地址 | Rancher 服务器的 URL。                                                                                                                                         |
+    | Rancher API 地址 | Rancher Server 的 URL。                                                                                                                                        |
     | 密钥 / 证书      | 这是用于在 Rancher 和您的 AD FS 之间创建安全 shell 的密钥证书对。确保将通用名称（CN）设置为 Rancher Server URL。                                               |
     | 元数据 XML       | 从 AD FS 服务器导出的`federationmetadata.xml`文件。 <br/><br/>您可以在这里找到此文件 `https://<AD_SERVER>/federationmetadata/2007-06/federationmetadata.xml`。 |
 

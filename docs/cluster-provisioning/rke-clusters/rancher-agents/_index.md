@@ -1,6 +1,6 @@
 ---
 title: Rancher Agent
-description: 有两种不同的 Agent 资源部署在 Rancher 纳管的集群：cattle-cluster-agent和cattle-node-agent
+description: Rancher 纳管的集群部署有两种不同的Agent ：cattle-cluster-agent 和 cattle-node-agent
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -16,7 +16,7 @@ keywords:
   - 配置 Pod 安全策略
 ---
 
-有两种不同的 Agent 资源部署在 Rancher 纳管的集群：
+Rancher 纳管的集群部署有两种不同的Agent：
 
 - [cattle-cluster-agent](#cattle-cluster-agent)
 - [cattle-node-agent](#cattle-node-agent)
@@ -29,7 +29,7 @@ keywords:
 
 ## cattle-node-agent
 
-在执行集群操作时，`cattle-node-agent`用于和[Rancher 部署的 Kubernetes 集群](/docs/cluster-provisioning/rke-clusters/_index)中的节点进行交互。集群操作的示例包括升级 Kubernetes 版本和创建/恢复 etcd 快照。`cattle-node-agent`是通过 DaemonSet 的方式部署的，以确保其在每个节点上运行。当`cattle-cluster-agent`不可用时，`cattle-node-agent` 讲作为备选方案连接到[Rancher 部署的 Kubernetes 集群](/docs/cluster-provisioning/rke-clusters/_index)中的 Kubernetes API。
+在执行集群操作时，`cattle-node-agent`用于和[Rancher 部署的 Kubernetes 集群](/docs/cluster-provisioning/rke-clusters/_index)中的节点进行交互。集群操作的示例包括升级 Kubernetes 版本和创建/恢复 etcd 快照。`cattle-node-agent`是通过 DaemonSet 的方式部署的，以确保其在每个节点上运行。当`cattle-cluster-agent`不可用时，`cattle-node-agent` 将作为备选方案连接到[Rancher 部署的 Kubernetes 集群](/docs/cluster-provisioning/rke-clusters/_index)中的 Kubernetes API。
 
 > **注意：** 在 Rancher v2.2.4 及以下版本中，`cattle-node-agent` pod 没有忍受所有的 taints，导致 Kubernetes 升级失败。Rancher v2.2.5 及更高版本中包含了对此问题的修复。
 
@@ -42,7 +42,7 @@ _适用于 v2.3.0 及更高版本_
 | `cattle-cluster-agent` | `beta.kubernetes.io/os:NotIn:windows` | none       | `operator:Exists` |
 | `cattle-node-agent`    | `beta.kubernetes.io/os:NotIn:windows` | none       | `operator:Exists` |
 
-`cattle-cluster-agent` 部署配置了有着`requiredDuringSchedulingIgnoredDuringExecution`的设置的首选调度规则，使它在 `controlplane` 角色的节点上调度。参考[Kubernetes: 将 pod 分配给节点](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/)，可以找到更多关于调度规则的信息。
+因`cattle-cluster-agent` 部署配置了`requiredDuringSchedulingIgnoredDuringExecution`相关的首选调度规则设置，它会在 `controlplane` 角色的节点上调度。参考[Kubernetes: 将 pod 分配给节点](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/)，可以找到更多关于调度规则的信息。
 
 `requiredDuringSchedulingIgnoredDuringExecution` 配置如下表所示:
 

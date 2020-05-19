@@ -60,7 +60,7 @@ keywords:
 对于实现，请考虑是否要使用 4 层或 7 层负载均衡器：
 
 - **4 层负载均衡器** 是两种选择中相对简单的一种，它将 TCP 流量转发到您到节点。我们建议使用 4 层负载均衡器，将流量从 TCP / 80 端口和 TCP / 443 端口转发到 Rancher 管理面的集群节点上。集群上的 Ingress 控制器会将 HTTP 流量重定向到 HTTPS，并在 TCP / 443 端口上终止 SSL / TLS。Ingress 控制器会将流量转发到 Rancher Server Pod 的 TCP / 443 端口。
-- **7 层负载均衡器** 相对有些复杂，但可以提供您可能需要的功能。例如，与 Rancher 本身进行 TLS 终止相反，7 层负载均衡器能够在负载均衡器处处理 TLS 终止。如果要在基础设施中进行 TLS 终止，7 层负载均衡可能会很有用。7 层负载均衡还可以为您的负载均衡器提供基于 HTTP 属性（例如 cookie 等）做出决策的能力，而 4 层负载均衡器提供这种功能。如果决定在 7 层负载均衡器上终止 SSL / TLS 流量，则在安装 Rancher 时（后续步骤）需要使用`--set tls=external`选项。有关更多信息，请参阅[Rancher Helm Chart 选项](/docs/installation/options/chart-options/_index)。
+- **7 层负载均衡器** 相对有些复杂，但可以提供您可能需要的功能。例如，与 Rancher 本身进行 TLS 终止相反，7 层负载均衡器能够在负载均衡器处理 TLS 终止。如果要在基础设施中进行 TLS 终止，7 层负载均衡可能会很有用。7 层负载均衡还可以为您的负载均衡器提供基于 HTTP 属性（例如 cookie 等）做出决策的能力，而 4 层负载均衡器无法提供这种功能。如果决定在 7 层负载均衡器上终止 SSL / TLS 流量，则在安装 Rancher 时（后续步骤）需要使用`--set tls=external`选项。有关更多信息，请参阅[Rancher Helm Chart 选项](/docs/installation/options/chart-options/_index)。
 
 有关如何设置 NGINX 负载均衡器的示例，请参考[本页](/docs/installation/options/nginx/_index)。
 
@@ -92,7 +92,7 @@ keywords:
 
 #### 为什么要三个节点？
 
-在 RKE 集群中，Rancher 服务器数据存储在 etcd 中。这个 etcd 数据库在所有三个节点上运行。
+在 RKE 集群中，Rancher Server 数据存储在 etcd 中。这个 etcd 数据库在所有三个节点上运行。
 
 etcd 数据库需要奇数个节点，因此它始终可以选举出被大多数 etcd 节点认可的集群的领导者。如果 etcd 数据库无法选出领导者，则 etcd 可能会遭受[脑裂](https://www.quora.com/What-is-split-brain-in-distributed-systems)的困扰，这时将需要从备份中恢复集群。如果三个 etcd 节点之一发生故障，则其余两个节点可以选择一个领导者，因为它们占 etcd 节点总数的大部分。
 
@@ -113,7 +113,7 @@ etcd 数据库需要奇数个节点，因此它始终可以选举出被大多数
 对于实现，请考虑是否要使用 4 层或 7 层负载均衡器：
 
 - **4 层负载均衡器** 是两种选择中相对简单的一种，它将 TCP 流量转发到您到节点。我们建议使用 4 层负载均衡器，将流量从 TCP / 80 端口和 TCP / 443 端口转发到 Rancher 管理面的集群节点上。集群上的 Ingress 控制器会将 HTTP 流量重定向到 HTTPS，并在 TCP / 443 端口上终止 SSL / TLS。Ingress 控制器会将流量转发到 Rancher Server Pod 的 TCP / 443 端口。
-- **7 层负载均衡器** 相对有些复杂，但可以提供您可能需要的功能。例如，与 Rancher 本身进行 TLS 终止相反，7 层负载均衡器能够在负载均衡器处处理 TLS 终止。如果要在基础设施中进行 TLS 终止，7 层负载均衡可能会很有用。7 层负载均衡还可以为您的负载均衡器提供基于 HTTP 属性（例如 cookie 等）做出决策的能力，而 4 层负载均衡器提供这种功能。如果决定在 7 层负载均衡器上终止 SSL / TLS 流量，则在安装 Rancher 时（后续步骤）需要使用`--set tls=external`选项。有关更多信息，请参阅[Rancher Helm Chart 选项](/docs/installation/options/chart-options/_index)。
+- **7 层负载均衡器** 相对有些复杂，但可以提供您可能需要的功能。例如，与 Rancher 本身进行 TLS 终止相反，7 层负载均衡器能够在负载均衡器处理 TLS 终止。如果要在基础设施中进行 TLS 终止，7 层负载均衡可能会很有用。7 层负载均衡还可以为您的负载均衡器提供基于 HTTP 属性（例如 cookie 等）做出决策的能力，而 4 层负载均衡器无法提供这种功能。如果决定在 7 层负载均衡器上终止 SSL / TLS 流量，则在安装 Rancher 时（后续步骤）需要使用`--set tls=external`选项。有关更多信息，请参阅[Rancher Helm Chart 选项](/docs/installation/options/chart-options/_index)。
 
 有关如何设置 NGINX 负载均衡器的示例，请参考[本页](/docs/installation/options/nginx/_index)。
 

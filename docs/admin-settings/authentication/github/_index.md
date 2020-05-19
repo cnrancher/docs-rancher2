@@ -26,19 +26,19 @@ keywords:
 
 3.  选择 **GitHub**。
 
-4.  在**设置Github应用**中，点击 **点击此处**，Rancher 会帮您重定向到 GitHub 以完成注册。
+4.  在**设置 Github 应用**中，点击 **点击此处**，Rancher 会帮您重定向到 GitHub 以完成注册。
 
     > **什么是授权回调 URL？**
     >
-    > 授权回调 URL 是用户开始使用您的应用程序的URL（即**设置Github应用**中显示的URL）。
+    > 授权回调 URL 是用户开始使用您的应用程序的 URL（即**设置 Github 应用**中显示的 URL）。
     >
-    > 使用外部身份验证时，实际上不会在您的应用程序中进行身份验证。相反，身份验证在外部进行(在本例中为GitHub)。在外部身份验证成功完成后，用户将通过**授权回调URL**重新进入应用程序。
+    > 使用外部身份验证时，实际上不会在您的应用程序中进行身份验证。相反，身份验证在外部进行(在本例中为 GitHub)。在外部身份验证成功完成后，用户将通过**授权回调 URL**重新进入应用程序。
 
-5.  在Rancher Github配置页面，输入复制的 **Client ID** 和 **Client Secret**
+5.  在 Rancher Github 配置页面，输入复制的 **Client ID** 和 **Client Secret**
 
     > **从哪里获取 Client ID 和 Client Secret?**
     >
-    > 从 GitHub页面，选择 Settings > Developer Settings > OAuth Apps。点击 `new OAuth app` 来为Rancher创建对应的 Client ID 和 Client Secret。
+    > 从 GitHub 页面，选择 Settings > Developer Settings > OAuth Apps。点击 `new OAuth app` 来为 Rancher 创建对应的 Client ID 和 Client Secret。
 
 6.  点击 **启用 GitHub 认证**.
 
