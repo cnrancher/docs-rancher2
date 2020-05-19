@@ -202,7 +202,7 @@ Rancher 为集群扫描提供了一组告警。默认情况下，这些告警没
 - 定期集群扫描已完成
 - 定期集群扫描失败
 
-> **先决条件：**您需要在配置，发送或接收告警之前配置[通知](/docs/cluster-admin/tools/notifiers/)。
+> **先决条件：**您需要在配置，发送或接收告警之前配置[通知](/docs/cluster-admin/tools/alerts/_index)。
 
 要为 CIS 扫描结果激活现有告警，
 

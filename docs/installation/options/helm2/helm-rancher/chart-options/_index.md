@@ -53,7 +53,7 @@ keywords:
 | `rancherImage`                 | "rancher/rancher"                                                  | `string` - Rancher 镜像的地址                                                                                              |
 | `rancherImageTag`              | same as chart version                                              | `string` - rancher/rancher 镜像标签                                                                                        |
 | `tls`                          | "ingress"                                                          | `string` - 请参阅 [外部 TLS Termination](#外部-tls-termination) - "ingress, external"                                      |
-| `systemDefaultRegistry`        | ""                                                                 | `string` - 全部系统组件相关的 Docker 镜像的私有仓库地址。例如：http://registry.example.com/ _注意：从 v2.3.0 开始可用_     |
+| `systemDefaultRegistry`        | ""                                                                 | `string` - 全部系统组件相关的 Docker 镜像的私有仓库地址。例如：`http://registry.example.com/`_注意：从 v2.3.0 开始可用_    |
 | `useBundledSystemChart`        | `false`                                                            | `bool` - 选择是否用打包在 Rancher Server 容器内的`system-charts`。这个参数是针对离线环境使用的。_注意：从 v2.3.0 开始可用_ |
 
 ## API 审计日志

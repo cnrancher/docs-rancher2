@@ -77,7 +77,7 @@ configs:
 
 从[版本发布](https://github.com/rancher/k3s/releases)页面获取 K3s 二进制文件，找到与版本对应的镜像`tar`文件包。
 
-并通过 https://get.k3s.io 获取 K3s 安装脚本。
+并通过 https://raw.githubusercontent.com/rancher/k3s/master/install.sh 获取 K3s 安装脚本。
 
 将二进制文件放在每个节点上的`/usr/local/bin`中。
 将安装脚本放置在每个节点上的任何位置，并将其命名为`install.sh`。

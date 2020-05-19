@@ -39,7 +39,7 @@ keywords:
 >
 > 如果 OpenLDAP 服务器使用的证书是自签名的，或者不是来自公认的证书颁发机构的，则请确保手头有 PEM 格式的 CA 证书（包括任何中间证书）。在配置过程中，您将必须粘贴此证书，以便 Rancher 能够验证证书链。
 
-如果您不确定在用户/组 **Search Base** 配置字段中输入的正确值，请咨询 LDAP 管理员，或参阅 Active Directory 身份验证文档中的[使用 ldapsearch 识别 Search Base 和架构部分](/docs/admin-settings/authentication/ad/#annex-identify-search-base-and-schema-using-ldapsearch)。
+如果您不确定在用户/组 **Search Base** 配置字段中输入的正确值，请咨询 LDAP 管理员，或参阅 Active Directory 身份验证文档中的[使用 ldapsearch 识别 Search Base 和架构部分](/docs/admin-settings/authentication/ad/_index/)。
 
 **OpenLDAP 服务器参数**
 
@@ -49,7 +49,7 @@ keywords:
 | 端口             | 指定 OpenLDAP 服务器侦听连接的端口。未加密的 LDAP 通常使用标准端口 389，而 LDAPS 使用端口 636。                                              |
 | TLS              | 选中此框以启用基于 SSL / TLS 的 LDAP（通常称为 LDAPS）。如果服务器使用自签名/企业签名的证书，则还需要粘贴 CA 证书。                          |
 | 服务器连接超时   | Rancher 在考虑服务器不可达之前等待的持续时间（以秒为单位）。                                                                                 |
-| 服务帐户专有名称 | 应用于绑定，搜索和检索 LDAP 条目的用户的专有名称（DN）。 (查看[先决条件](/docs/admin-settings/authentication/openldap/_index#先决条件))。                                                       |
+| 服务帐户专有名称 | 应用于绑定，搜索和检索 LDAP 条目的用户的专有名称（DN）。 (查看[先决条件](/docs/admin-settings/authentication/openldap/_index#先决条件))。    |
 | 服务帐号密码     | 服务帐户的密码。                                                                                                                             |
 | 用户 Search Base | 输入目录树中节点的专有名称，从该节点开始搜索用户对象。所有用户都必须是此基本 DN 的后代。例如：`ou=people,dc=acme,dc=com`。                   |
 | 组 Search Base   | 如果您的组所在的节点与在其下配置的`User Search Base`节点不同，则需要在此处提供专有名称。否则将此字段留空。例如：`ou=groups,dc=acme,dc=com`。 |
@@ -58,7 +58,7 @@ keywords:
 
 如果您的 OpenLDAP 目录不同于标准的 OpenLDAP 架构，则必须完成**自定义架构**部分以使其匹配。请注意，Rancher 使用本节中配置的属性映射来构造搜索过滤器并解析组成员身份。因此，始终建议您验证此处的配置是否与您的 OpenLDAP 中使用的架构匹配。
 
-如果您不熟悉 OpenLDAP 服务器中使用的用户/组架构，请咨询 LDAP 管理员，或参阅 Active Directory 身份验证文档中的[使用 ldapsearch 识别 Search Base 和架构部分](/docs/admin-settings/authentication/ad/#annex-identify-search-base-and-schema-using-ldapsearch)。
+如果您不熟悉 OpenLDAP 服务器中使用的用户/组架构，请咨询 LDAP 管理员，或参阅 Active Directory 身份验证文档中的[使用 ldapsearch 识别 Search Base 和架构部分](/docs/admin-settings/authentication/ad/_index/)。
 
 ### 用户架构配置
 
@@ -82,12 +82,12 @@ keywords:
 
 **组架构配置参数**
 
-| 参数           | 描述                                                                                                                          |
-| :------------- | :---------------------------------------------------------------------------------------------------------------------------- |
-| 对象类别       | 域中用于组对象的对象类的名称。如果定义，则仅指定对象类的名称 - 请勿将其放在 LDAP 包装器中，例如`&(objectClass=xxxx)`          |
-| 名称属性       | 其值适合于显示名称的组属性。                                                                                                  |
-| 组成员用户属性 | **用户属性的名称**，其格式与中的组成员匹配`组成员映射属性`。                                                                  |
-| 组成员映射属性 | 包含组成员的组属性的名称。                                                                                                    |
-| 搜索属性       | 在向 UI 中的集群或项目添加组时用于构造搜索过滤器的属性。请参阅用户架构说明`Search Attribute`。                                |
-| 组 DN 属性     | 组属性的名称，其格式与用户的组成员资格属性中的值匹配。请参阅`User Member Attribute`。                                         |
+| 参数           | 描述                                                                                                                        |
+| :------------- | :-------------------------------------------------------------------------------------------------------------------------- |
+| 对象类别       | 域中用于组对象的对象类的名称。如果定义，则仅指定对象类的名称 - 请勿将其放在 LDAP 包装器中，例如`&(objectClass=xxxx)`        |
+| 名称属性       | 其值适合于显示名称的组属性。                                                                                                |
+| 组成员用户属性 | **用户属性的名称**，其格式与中的组成员匹配`组成员映射属性`。                                                                |
+| 组成员映射属性 | 包含组成员的组属性的名称。                                                                                                  |
+| 搜索属性       | 在向 UI 中的集群或项目添加组时用于构造搜索过滤器的属性。请参阅用户架构说明`Search Attribute`。                              |
+| 组 DN 属性     | 组属性的名称，其格式与用户的组成员资格属性中的值匹配。请参阅`User Member Attribute`。                                       |
 | 嵌套组成员     | 此设置定义 Rancher 是否应解析嵌套的组成员身份。仅当您的组织使用这些嵌套成员身份时才使用（即您具有包含其他组作为成员的组）。 |

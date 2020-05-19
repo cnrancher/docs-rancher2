@@ -52,4 +52,4 @@ _自 v2.2.0 起可用_
 
 ## OPA Gatekeeper
 
-[OPA Gatekeeper](https://github.com/open-policy-agent/gatekeeper) 是一个开源项目，它对 OPA 和 Kubernetes 进行了集成，以通过准入控制器 Webhooks 提供策略控制。有关如何在 Rancher 中启用 Gatekeeper 的详细信息，请参阅[OPA Gatekeeper 部分](/docs/cluster-admin/tools/opa-gatekeeper/_index)。
+[OPA Gatekeeper](https://github.com/open-policy-agent/gatekeeper) 是一个开源项目，它对 OPA 和 Kubernetes 进行了集成，以通过准入控制器 Webhooks 提供策略控制。有关如何在 Rancher 中启用 Gatekeeper 的详细信息，请参阅[OPA Gatekeeper 部分](/docs/cluster-admin/tools/_index/)。

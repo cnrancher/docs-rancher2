@@ -244,7 +244,7 @@ openssl s_client -CAfile ca.pem -connect rancher.yourdomain.com:443
 
 ### API 审计日志
 
-如果要使用 Rancher API 记录所有事务，请通过在安装命令中添加以下标志来启用[API 审计](/docs/installation/api-auditing/_index)功能。
+如果要使用 Rancher API 记录所有事务，请通过在安装命令中添加以下标志来启用[API 审计](//docs/installation/options/rke-add-on/api-auditing/_index)功能。
 
     -e AUDIT_LEVEL=1 \
     -e AUDIT_LOG_PATH=/var/log/auditlog/rancher-api-audit.log \
@@ -254,9 +254,9 @@ openssl s_client -CAfile ca.pem -connect rancher.yourdomain.com:443
 
 ### 离线安装
 
-如果要访问此页面以完成[离线安装](/docs/installation/air-gap-installation/_index)，则在您运行安装命令时，必须在 server 镜像之前添加私有镜像库的 URL。例如在您的`rancher/rancher:latest`前面添加带有您的私有镜像库的 URL`<REGISTRY.DOMAIN.COM:PORT>`。
+如果要访问此页面以完成[离线安装](/docs/installation/other-installation-methods/air-gap/_index/)，则在您运行安装命令时，必须在 server 镜像之前添加私有镜像库的 URL。例如在您的`rancher/rancher:latest`前面添加带有您的私有镜像库的 URL`<REGISTRY.DOMAIN.COM:PORT>`。
 
-**例子：**
+**示例：**
 
      <REGISTRY.DOMAIN.COM:PORT>/rancher/rancher:latest
 

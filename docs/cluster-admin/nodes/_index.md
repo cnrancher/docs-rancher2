@@ -18,7 +18,7 @@ keywords:
 
 在 Rancher 中启动 Kubernetes 集群后，您可以从集群的节点页面中管理各个节点。根据[创建集群的方式](/docs/cluster-provisioning/_index)的不同，有不同的节点选项可用。
 
-> 如果要管理的是*集群*而不是单个节点，请参阅[编辑集群](/docs/k8s-in-rancher/editing-clusters/_index)。
+> 如果要管理的是*集群*而不是单个节点，请参阅[编辑集群](/docs/cluster-admin/editing-clusters/_index)。
 
 ## 每种类型集群的节点选项
 

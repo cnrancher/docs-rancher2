@@ -31,7 +31,7 @@ keywords:
 
 ## 单节点安装
 
-可以使用 `-e KEY = VALUE` 或 `--env KEY = VALUE` 将环境变量传递到 Rancher 容器。[单节点安装](/docs/installation/single-node-install/)中的`NO_PROXY`的值必须包括：
+可以使用 `-e KEY = VALUE` 或 `--env KEY = VALUE` 将环境变量传递到 Rancher 容器。单节点安装中的`NO_PROXY`的值必须包括：
 
 - `localhost`
 - `127.0.0.1`

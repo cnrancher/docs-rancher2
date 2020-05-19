@@ -56,7 +56,7 @@ keywords:
 1. 进入包含要向其添加持久性批量声明的工作负载的项目。
 1. 点击**卷**页签，然后点击**添加卷**(在早于 v2.3.0 的版本中，可以点击导航栏上的**工作负载**，然后点击**卷**)。
 1. 输入卷声明的**名称**。
-1. 选择要将持久化存储添加到的工作负载的[命名空间](/docs/k8s-in-rancher/projects-and-namespaces/_index)。
+1. 选择要将持久化存储添加到的工作负载的[命名空间](/docs/cluster-admin/projects-and-namespaces/_index/)。
 1. 在**使用现有的持久卷**中，进入**持久卷**下拉列表并选择您创建的持久卷。
 1. **可选：** 在**自定义**中，选择要使用的[访问模式](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)。
 1. 点击**创建**。
