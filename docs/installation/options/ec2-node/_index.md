@@ -26,7 +26,7 @@ keywords:
 
 ## 1、准备工作（可选）
 
-- **创建 IAM 角色：** 要允许 Rancher 操作 AWS 资源，例如创建新存储或新节点，您需要将 Amazon 配置为 Cloud Provider。在 EC2 上设置 Cloud Provider 需要做几件事，此过程的一部分是为 Rancher Server 节点设置 IAM 角色。有关设置 Cloud Provider 的完整详细信息，请参阅此[页面](/docs/cluster-provisioning/rke-clusters/options/cloud-providers/_index)。
+- **创建 IAM 角色：** 要允许 Rancher 操作 AWS 资源，例如创建新存储或新节点，您需要将 Amazon 配置为 Cloud Provider。在 EC2 上设置 Cloud Provider 需要做几件事，此过程的一部分是为 Rancher Server 节点设置 IAM 角色。有关设置 Cloud Provider 的完整详细信息，请参阅[创建托管的 Kubernetes 集群](/docs/cluster-provisioning/hosted-kubernetes-clusters/_index)。
 
 * **创建安全组：** 我们还建议为 Rancher 节点设置一个符合 [Rancher 节点端口要求](/docs/installation/requirements/_index)的安全组。确切的端口要求会有所不同，具体取决于您要使用 RKE 还是 K3s 来安装 Kubernetes。
 

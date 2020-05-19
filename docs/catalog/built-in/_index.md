@@ -15,7 +15,7 @@ keywords:
   - 内置全局应用商店
 ---
 
-我们默认将一些[全局应用商店](/docs/catalog/#global-catalogs)打包到了 Rancher 中。这些应用商店可以由系统管理员启用或禁用。
+我们默认将一些[全局应用商店](/docs/catalog/_index)打包到了 Rancher 中。这些应用商店可以由系统管理员启用或禁用。
 
 ## 管理内置的全局应用商店
 

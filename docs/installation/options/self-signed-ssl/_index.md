@@ -46,7 +46,7 @@ keywords:
 
 x509 的证书编码格式有两种:
 
-- PEM(Privacy-enhanced Electronic Mail)是明文格式的，以 -----BEGIN CERTIFICATE-----开头，已-----END CERTIFICATE-----结尾。中间是经过 base64 编码的内容，apache 需要的证书就是这类编码的证书.查看这类证书的信息的命令为：`openssl x509 -noout -text -in server.pem`。
+- PEM(Privacy-enhanced Electronic Mail)是明文格式的，以 -----BEGIN CERTIFICATE-----开头，以-----END CERTIFICATE-----结尾。中间是经过 base64 编码的内容，apache 需要的证书就是这类编码的证书.查看这类证书的信息的命令为：`openssl x509 -noout -text -in server.pem`。
 
 - DER 是二进制格式的证书，查看这类证书的信息的命令为: `openssl x509 -noout -text -inform der -in server.der`
 
