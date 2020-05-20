@@ -1,6 +1,6 @@
 ---
 title: 配置 NGINX
-description: NGINX 将被配置为 4 层负载均衡器(TCP)，将连接转发到其中一个 Rancher Server 节点。在此配置中，负载均衡器位于节点的前面。负载均衡器可以是任何能够运行 NGINX 的主机。不要将 Rancher 节点用作负载均衡器。
+description: 负载均衡器可以是任何能够运行 NGINX 的主机。本文讲述了如何将 NGINX 配置为 4 层负载均衡器(TCP)，将流量转发到其中一个 Rancher Server 节点的过程。在此配置中，负载均衡器位于节点的前面请勿将 Rancher 节点用作负载均衡器。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -18,30 +18,27 @@ keywords:
   - 配置 NGINX
 ---
 
-NGINX 将被配置为 4 层负载均衡器(TCP)，将连接转发到其中一个 Rancher Server 节点。
+负载均衡器可以是任何能够运行 NGINX 的主机。本文讲述了如何将 NGINX 配置为 4 层负载均衡器（TCP），将流量转发到其中一个 Rancher Server 节点的过程。在此配置中，负载均衡器位于节点的前面。
 
-> **注意事项:**
-> 在此配置中，负载均衡器位于节点的前面。负载均衡器可以是任何能够运行 NGINX 的主机。
->
-> 警告：不要将 Rancher 节点用作负载均衡器。
+:::note 说明
+请勿将 Rancher 节点用作负载均衡器。
+:::
 
 ## 安装 NGINX
 
-首先在要用作负载均衡器的节点上安装 NGINX。NGINX 在所有已知操作系统中都提供了可用的软件包。已测试的版本是`1.14`和`1.15`。Nginx 安装帮助文档，参考这里[安装文档](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/)。
-
-需要使用`stream`模块，该模块在使用官方 NGINX 软件包时提供。请参考您的操作系统文档，了解如何在操作系统上安装和启用 NGINX`stream`模块。
+配置基于 NGINX 的负载均衡前，您需要安装 NGINX 和 stream 模块。Rancher 支持的 NGINX 版本包括：**v1.14** 和 **v1.15**。 NGINX 官网提供了多种操作系统的安装包，您可以自行选择其中一种进行安装。所有的安装包里面都包含 stream 模块，所以不需要单独下载和安装 stream 模块。详情请参考[NGINX 官方中文文档](https://www.nginx.cn/doc/)。建议您在这两个版本中选择一个，参考下文完成配置。
 
 ## 创建 NGINX 配置文件
 
 安装 NGINX 之后，您需要使用节点的 IP 地址更新 NGINX 配置文件`nginx.conf`。
 
-1.  将下面的代码示例复制并粘贴到您喜欢的文本编辑器中。将其另存为`nginx.conf`。
+1.  打开一个文本编辑器（如 Notepad++），复制下面的代码模板，粘贴到文本编辑器中，将其另存为`nginx.conf`。
 
-2.  在`nginx.conf`中, 使用[节点](/docs/installation/options/helm2/create-nodes-lb/_index)IPs 替换(端口 80 和 端口 443)的`<IP_NODE_1>`, `<IP_NODE_2>`, 和`<IP_NODE_3>`。
+2.  在`nginx.conf`中, 使用[节点](/docs/installation/options/helm2/create-nodes-lb/_index)IP 地址 替换(端口 80 和 端口 443)的`<IP_NODE_1>`, `<IP_NODE_2>`, 和`<IP_NODE_3>`。
 
     > **注意事项:** 可配置项请参考[NGINX 文档: TCP and UDP Load Balancing](https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/)。
 
-    <figcaption>NGINX 配置文件示例</figcaption>
+    <figcaption>NGINX 配置文件模板</figcaption>
 
     ```
     worker_processes 4;
@@ -78,17 +75,19 @@ NGINX 将被配置为 4 层负载均衡器(TCP)，将连接转发到其中一个
 
     ```
 
-3.  为负载均衡器保存`nginx.conf`到以下路径: `/etc/nginx/nginx.conf`。
+3.  替换完 IP 地址后，将`nginx.conf`保存到以下路径: `/etc/nginx/nginx.conf`。
 
-4.  通过运行以下命令将更新加载到您的 NGINX 配置:
+4.  运行以下命令，更新 NGINX 配置：
 
     ```
-    # nginx -s reload
+    nginx -s reload
     ```
 
-## 可选 - 以 Docker 方式运行 NGINX
+## 可选： 以 Docker 方式运行 NGINX
 
-与其将 NGINX 作为软件包安装在操作系统上，还不如将其作为 Docker 容器运行。把**NGINX 配置文件示例**保存为 `/etc/nginx.conf`，运行以下命令启动 NGINX 容器:
+您可以使用软件包将 NGINX 安装在操作系统上，也可以将 NGINX 作为 Docker 容器运行，这样可以节省一些资源。
+
+完成 IP 地址替换后，将文件另存为`/etc/nginx.conf`，运行以下命令即可启动 NGINX 容器。使用 NGINX v1.15 时，请将最后一行的“1.14”替换为“1.15”。
 
 ```
 docker run -d --restart=unless-stopped \
