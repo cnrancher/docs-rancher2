@@ -32,7 +32,7 @@ _kubeconfig 文件_ 是一个当与 kubectl 命令行工具(或其他客户端)�
 
 对于 RKE 集群，kubeconfig 文件允许您以两种方式进行身份验证:
 
-**通过 Rancher Server 身份验证代理:** Rancher 的认证代理校验您的登陆信息，然后把您连接到您想要访问的下游集群。
+**通过 Rancher Server 身份验证代理:** Rancher 的认证代理校验您的登录信息，然后把您连接到您想要访问的下游集群。
 
 **直接使用下游集群的 API Server:** 默认情况下，RKE 集群会默认启用授权集群端点。这个端点允许您使用 kubectl CLI 和 kubeconfig 文件访问下游的 Kubernetes 集群，RKE 集群默认启用了该端点。在这个场景中，下游集群的 Kubernetes API Server 通过调用 Rancher 设置的 webhook ( `kube-api-auth` 微服务) 对您进行身份验证。
 
