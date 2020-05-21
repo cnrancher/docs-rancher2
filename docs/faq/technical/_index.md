@@ -206,3 +206,26 @@ openssl x509 -noout -in cert.pem -text | grep DNS
 ## 我可以在 UI 里使用键盘快捷键吗？
 
 可以。大部分 UI 可以通过键盘快捷键访问。可在 UI 任意地方中按`?`查看所有可用的快捷键。
+
+## 将kubeconfig文件复制到本地，kubectl无法使用
+
+Rancher 2.4.x版本使用kubectl连接kubernetes集群出现以下错误：
+
+```bash
+kubectl get pods
+Unable to connect to the server: x509: certificate is valid for 127.0.0.1, 172.17.0.2, 172.31.1.2, not x.x.x.x
+```
+
+这是因为2.4.x调整了证书注册的逻辑，将首次启动rancher设置的`server-url`添加到证书当中，如果想通过其他域名或IP连接rancher，将会失败。
+
+解决办法：
+
+```bash
+kubectl -n cattle-system patch  secret serving-cert --patch '{
+    "metadata": {
+        "annotations": {
+            "listener.cattle.io/cn-{{IP}}": "{{IP}}"
+        }
+    }
+}'
+```
