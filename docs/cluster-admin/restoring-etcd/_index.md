@@ -50,7 +50,7 @@ values={[
 
 <TabItem value="new">
 
-快照由 etcd 中的集群数据，Kubernetes 版本和`cluster.yml`形式的集群配置组成。有了这些快照中的组件，您可以选择如何从快照中恢复集群：
+快照由 etcd 中的集群数据、Kubernetes 版本和`cluster.yml`形式的集群配置组成。您可以使用快照中的这些组件。选择如何从快照中恢复集群：
 
 - **仅恢复 etcd 中的集群数据：** 此还原类似于在 v2.4.0 之前的 Rancher 中还原快照。
 - **恢复 etcd 和 Kubernetes 版本：** 如果由于升级 Kubernetes 版本导致集群出现故障，并且您尚未进行任何集群配置更改，则应使用此选项。

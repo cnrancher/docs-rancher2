@@ -25,7 +25,7 @@ keywords:
 > **注意：**
 >
 > - [Let's Encrypt 于 2019 年 11 月 1 日开始屏蔽早于 0.8.0 版本的 cert-manager 实例。](https://community.letsencrypt.org/t/blocking-old-cert-manager-versions/98753) 按照[这些说明](/docs/installation/options/upgrading-cert-manager/_index)升级 cert-manager 到最新版本。
-> - 升级指南假定您使用的是 Helm3。如果您是使用 Helm 2 安装的 Rancher，并希望迁移到 Helm 3，请参阅官方的[从 Helm 2 迁移到 Helm 3 的文档](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/)。如果升级到 Helm 3 对您来说是不可行的，我们在[这里](/docs/upgrades/upgrades/ha/helm2/_index)也提供了使用 Helm 2 的升级指南。
+> - 升级指南假定您使用的是 Helm3。如果您是使用 Helm 2 安装的 Rancher，并希望迁移到 Helm 3，请参阅官方的[从 Helm 2 迁移到 Helm 3 的文档](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/)。如果升级到 Helm 3 对您来说是不可行的，我们在[高可用升级指南（ Helm 2）](/docs/upgrades/upgrades/ha/helm2/_index)也提供了使用 Helm 2 的升级指南。
 > - 如果要将 Rancher 从 v2.x 升级到 v2.3+，并且正在使用外部 TLS 终止，则需要编辑 cluster.yml 文件，来[配置 Ingress 使用 use-forwarded-headers](/docs/installation/options/chart-options/_index)。
 
 ## 先决条件
@@ -125,15 +125,15 @@ helm upgrade rancher rancher-<CHART_REPO>/rancher \
    helm delete rancher -n cattle-system
    ```
 
-1. 使用所有的选项将 Rancher 重新安装到最新版本。获取上一步中的所有值，然后使用`--set key=value`。将它们附加到命令中。
+1. 参考[升级 Cert-Manager](/docs/installation/options/upgrading-cert-manager/_index)，卸载并且重新安装`cert-manager`。
+
+1. 使用所有的选项将 Rancher 重新安装到最新版本。获取步骤 1 中的所有值，然后使用`--set key=value`。将它们附加到命令中。
 
    ```
    helm install rancher rancher-<CHART_REPO>/rancher \
    --namespace cattle-system \
    --set hostname=rancher.my.org
    ```
-
-1. 卸载并且重新安装`cert-manager`，请参考[升级 Cert-Manager](/docs/installation/options/upgrading-cert-manager/_index)。
 
 #### 离线安装的 Rancher 高可用升级
 
@@ -142,7 +142,7 @@ helm upgrade rancher rancher-<CHART_REPO>/rancher \
    根据您在安装过程中所做的选择，完成以下过程之一。
 
    | 占位符                           | 描述                                   |
-   | -------------------------------- | -------------------------------------- |
+   | :------------------------------- | :------------------------------------- |
    | `<VERSION>`                      | 输出压缩包的版本号。                   |
    | `<RANCHER.YOURDOMAIN.COM>`       | 您指向负载均衡器的 DNS 名称。          |
    | `<REGISTRY.YOURDOMAIN.COM:PORT>` | 您的私有仓库的 DNS 名称。              |
