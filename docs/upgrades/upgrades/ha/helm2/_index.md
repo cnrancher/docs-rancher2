@@ -128,15 +128,15 @@ helm upgrade rancher-<CHART_REPO>/rancher \
 
 如果您当前正在运行版本低于 v0.11 的 cert-manger，并且想将 Rancher 和 cert-manager 都升级到新版本，则由于 cert-manger v0.11 中的 API 更改，您需要重新安装 Rancher 和 cert-manger。
 
-请参阅[升级 Cert-Manger](/docs/installation/options/upgrading-cert-manager/_index)页面以获取更多信息。
-
 1. 卸载 Rancher
 
    ```
    helm delete rancher -n cattle-system
    ```
 
-1. 使用所有的选项将 Rancher 重新安装到最新版本。获取上一步中的所有值，然后使用`--set key=value`。将它们附加到命令中。
+1. 参考[升级 Cert-Manager](/docs/installation/options/upgrading-cert-manager/_index)，卸载并且重新安装`cert-manager`。
+
+1. 使用所有的选项将 Rancher 重新安装到最新版本。获取步骤 1 中的所有值，然后使用`--set key=value`。将它们附加到命令中。
 
    ```
    helm install rancher-<CHART_REPO>/rancher \
@@ -154,7 +154,7 @@ helm upgrade rancher-<CHART_REPO>/rancher \
    根据您在安装过程中所做的选择，完成以下过程之一。
 
    | 占位符                           | 描述                                   |
-   | -------------------------------- | -------------------------------------- |
+   | :------------------------------- | :------------------------------------- |
    | `<VERSION>`                      | 输出压缩包的版本号。                   |
    | `<RANCHER.YOURDOMAIN.COM>`       | 您指向负载均衡器的 DNS 名称。          |
    | `<REGISTRY.YOURDOMAIN.COM:PORT>` | 您的私有仓库的 DNS 名称。              |
