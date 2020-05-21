@@ -1,17 +1,17 @@
-import React from 'react';
-import classnames from 'classnames';
-import Layout from '@theme/Layout';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import styles from './styles.module.css';
+import React from "react";
+import classnames from "classnames";
+import Layout from "@theme/Layout";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import styles from "./styles.module.css";
 
 function findAndAppendSubGroups(all, metadata, baseUrl, subItems) {
   subItems.forEach(sub => {
-    if (typeof sub === 'string') {
+    if (typeof sub === "string") {
       const label = metadata.docs[sub];
       if (label) {
         all.push({
           label,
-          key: baseUrl + 'docs/' + sub
+          key: baseUrl + "docs/" + sub
         });
       }
     } else if (sub.items) {
@@ -44,10 +44,10 @@ function Home() {
   const { baseUrl } = siteConfig;
   const { sidebars, metadata } = siteConfig.customFields;
   const toc = getToc(sidebars, metadata, baseUrl);
-  const title = siteConfig.title + ' 中文文档（Beta 版）';
+  const title = siteConfig.title + " 中文文档";
   return (
     <Layout title="中文文档" description={title}>
-      <header className={classnames('hero', styles.heroBanner)}>
+      <header className={classnames("hero", styles.heroBanner)}>
         <div className="container">
           <h1 className="hero__title">{title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
@@ -83,12 +83,12 @@ function Home() {
                                 <span className={styles.stable}>稳定版</span>
                               );
                             }
-                            if ('版本说明' === group.key && index === 0) {
+                            if ("版本说明" === group.key && index === 0) {
                               return (
                                 <span className={styles.latest}>最新版</span>
                               );
                             }
-                            if ('产品介绍' === group.key && index === 0) {
+                            if ("产品介绍" === group.key && index === 0) {
                               return <span className={styles.vedio}>视频</span>;
                             }
                           })()}
