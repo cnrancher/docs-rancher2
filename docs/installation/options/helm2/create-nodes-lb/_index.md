@@ -1,6 +1,6 @@
 ---
 title: 节点和负载均衡
-description: 使用您选择的提供商为您的 RKE 安装提供 3 个节点和一个负载均衡器端点。
+description: 本文讲述了安装负载均衡器时的节点配置要求、绑定端口和示例。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -18,9 +18,9 @@ keywords:
   - 节点和负载均衡
 ---
 
-使用您选择的提供商为您的 RKE 安装提供 3 个节点和一个负载均衡器端点。
+本文讲述了安装负载均衡器时的节点配置要求、绑定端口和示例。
 
-> **注意事项:** 这些节点必须位于相同的区域/数据中心。您可以将这些服务器放在单独的可用区中。
+> **注意事项:** 您可以将这些服务器放在单独的可用区中，但是这些节点必须和 Rancher 的其他节点位于相同的区域/数据中心。
 
 ## 节点要求
 
@@ -37,9 +37,11 @@ RKE 将在每个节点上配置一个 Ingress controller pod。Ingress controlle
 > **重要:**
 > 安装后，请勿使用此负载均衡器（即`local`集群 Ingress）对 Rancher 以外的应用程序进行负载均衡。与其他应用程序共享此 Ingress 可能会在其他应用的 Ingress 配置重新加载后导致 Rancher 出现 websocket 错误。我们建议将`local`集群专用于 Rancher，而不应使用其他任何应用程序。
 
-## 例子
+## 示例
 
 - [Nginx](/docs/installation/options/helm2/create-nodes-lb/nginx/_index)
 - [Amazon NLB](/docs/installation/options/helm2/create-nodes-lb/nlb/_index)
 
-#### [下一步: 使用 RKE 安装 Kubernetes](/docs/installation/options/helm2/kubernetes-rke/_index)
+## 后续步骤
+
+[使用 RKE 安装 Kubernetes](/docs/installation/options/helm2/kubernetes-rke/_index)

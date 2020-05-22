@@ -18,7 +18,7 @@ keywords:
   - 添加 Kubernetes TLS 密文
 ---
 
-只有当我们在 `cattle-system` 命名空间，将自签名证书和对应密钥配置到 `tls-rancher-ingress` 的密文中，Kubernetes 才会为 Rancher 创建所有的对象和服务。
+只有在 `cattle-system` 命名空间，将自签名证书和对应密钥配置到 `tls-rancher-ingress` 的密文中，Kubernetes 才会为 Rancher 创建所有的对象和服务。
 
 将服务器证书和任何所需的中间证书合并到名为 `tls.crt` 的文件中，将您的证书密钥拷贝到名称为 `tls.key` 的文件中。
 

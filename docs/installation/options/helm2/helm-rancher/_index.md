@@ -50,11 +50,11 @@ Rancher Server 默认需要 SSL/TLS 配置来保证访问的安全性。
 
 > **提示：** 如果您想要将 SSL/TLS 访问在外部终止，请查看[使用外部 TLS 负载均衡器](/docs/installation/options/helm2/helm-rancher/chart-options/_index#外部-tls-termination)。
 
-| 设置                                      | Chart 选项                       | 描述                                                           | 是否需要 cert-manager         |
-| ----------------------------------------- | -------------------------------- | -------------------------------------------------------------- | ----------------------------- |
+| 设置                                      | Chart 选项                       | 描述                                                           | 是否需要 cert-manager          |
+| ----------------------------------------- | -------------------------------- | -------------------------------------------------------------- | ------------------------------ |
 | [Rancher 自签名证书](#rancher-自签名证书) | `ingress.tls.source=rancher`     | 使用 Rancher 生成的 CA 签发的自签名证书<br/>此项为**默认选项** | [是](#选装：安装-cert-manager) |
-| [Let’s Encrypt](#lets-encrypt)           | `ingress.tls.source=letsEncrypt` | 使用[Let's Encrypt](https://letsencrypt.org/)颁发的证书        | [是](#选装：安装-cert-manager) |
-| [您已有的证书](#您已有的证书)             | `ingress.tls.source=secret`      | 使用您的已有证书（Kubernetes 密文）                            | 否                            |
+| [Let’s Encrypt](#lets-encrypt)            | `ingress.tls.source=letsEncrypt` | 使用[Let's Encrypt](https://letsencrypt.org/)颁发的证书        | [是](#选装：安装-cert-manager) |
+| [您已有的证书](#您已有的证书)             | `ingress.tls.source=secret`      | 使用您的已有证书（Kubernetes 密文）                            | 否                             |
 
 :::important 重要
 Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress.tls.source=secret` 这种方式，从而减少对 cert-manager 的运维成本。
@@ -74,39 +74,39 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
 
 Rancher 依靠[cert-manager](https://github.com/jetstack/cert-manager)使用 Rancher CA 生成证书或者请求 Let's Encrypt 签发的证书。
 
-这些说明来自[cert-manager 官方文档](https://docs.cert-manager.io/en/latest/getting-started/install/kubernetes.html#installing-with-helm)。
+以下操作步骤由[cert-manager 官方文档](https://docs.cert-manager.io/en/latest/getting-started/install/kubernetes.html#installing-with-helm)提供。
 
-1. 单独安装 CustomResourceDefinition 资源
+1. 单独安装 CustomResourceDefinition 资源。
 
    ```plain
    kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.9/deploy/manifests/00-crds.yaml
    ```
 
-1. 为 cert-manager 创建命名空间
+1. 为 cert-manager 创建命名空间。
 
    ```plain
    kubectl create namespace cert-manager
    ```
 
-1. 标记 cert-manager 命名空间来禁用资源验证
+1. 标记 cert-manager 命名空间，禁用资源验证。
 
    ```plain
    kubectl label namespace cert-manager certmanager.k8s.io/disable-validation=true
    ```
 
-1. 添加 Jetstack Helm repository
+1. 添加 Jetstack Helm repository。
 
    ```plain
    helm repo add jetstack https://charts.jetstack.io
    ```
 
-1. 更新您本地的 Helm chart repository 缓存
+1. 更新本地的 Helm chart repository 缓存。
 
    ```plain
    helm repo update
    ```
 
-1. 使用 Helm chart 安装 cert-manager
+1. 使用 Helm chart 安装 cert-manager。
    ```plain
    helm install \
      --name cert-manager \
@@ -246,4 +246,4 @@ Rancher chart 配置有许多选项可用于自定义安装 Rancher 来适配您
 
 通过上面的操作，您应该已经完成了 Rancher server 的安装。在浏览器中输入您配置的域名，便可以访问 Rancher 的登录页面了。
 
-如果还不可用。请查看[问题排查](/docs/installation/options/helm2/helm-rancher/troubleshooting/_index)页面。
+如果无法访问 Rancher 登录页面，请查看[问题排查](/docs/installation/options/helm2/helm-rancher/troubleshooting/_index)页面，排查安装 Rancher Server 的过程中引起的问题。
