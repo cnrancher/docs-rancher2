@@ -21,7 +21,7 @@ keywords:
 ## 通用选项
 
 | 选项                      | 默认值       | 描述                                                                    |
-| ------------------------- | ------------ | ----------------------------------------------------------------------- |
+| :------------------------ | :----------- | :---------------------------------------------------------------------- |
 | `hostname`                | " "          | `string` - 您的 Rancher Server 的 FQDN                                  |
 | `ingress.tls.source`      | "rancher"    | `string` - 从哪里获取 ingress 的证书 - "rancher, letsEncrypt, secret"   |
 | `letsEncrypt.email`       | " "          | `string` - 您的邮箱地址                                                 |
@@ -31,11 +31,11 @@ keywords:
 ## 高级选项
 
 | 选项                           | 默认值                                                             | 描述                                                                                                                       |
-| ------------------------------ | ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| `additionalTrustedCAs`         | false                                                              | `bool` - 请参阅 [附加授信 CAs](#附加授信-cas)                                                                               |
-| `addLocal`                     | "auto"                                                             | `string` - 使 Rancher 发现并且导入"local" Rancher Server 集群 [导入"local"集群](#导入local集群)                          |
+| :----------------------------- | :----------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------- |
+| `additionalTrustedCAs`         | false                                                              | `bool` - 请参阅 [附加授信 CAs](#附加授信-cas)                                                                              |
+| `addLocal`                     | "auto"                                                             | `string` - 使 Rancher 发现并且导入"local" Rancher Server 集群 [导入"local"集群](#导入local集群)                            |
 | `antiAffinity`                 | "preferred"                                                        | `string` - Rancher Pod 反亲和性规则 - "preferred, required"                                                                |
-| `auditLog.destination`         | "sidecar"                                                          | `string` - 发送审计日志到 sidecar 容器的 console，或发送到 hostPath 卷 - "sidecar, hostPath"                             |
+| `auditLog.destination`         | "sidecar"                                                          | `string` - 发送审计日志到 sidecar 容器的 console，或发送到 hostPath 卷 - "sidecar, hostPath"                               |
 | `auditLog.hostPath`            | "/var/log/rancher/audit"                                           | `string` - 主机上的日志文件目标地址 (仅在 `auditLog.destination` 的值为 `hostPath`时可用)                                  |
 | `auditLog.level`               | 0                                                                  | `int` - 设置[API 审计日志](/docs/installation/options/api-audit-log/_index)等级。0 代表关闭。[0-3]                         |
 | `auditLog.maxAge`              | 1                                                                  | `int` - 保留旧审计日志的最大天数 (仅在 `auditLog.destination` 的值为 `hostPath`时可用)                                     |
@@ -44,7 +44,7 @@ keywords:
 | `busyboxImage`                 | "busybox"                                                          | `string` - 用来收集审计日志的 busybox 镜像的地址。_注意：从 v2.2.0 开始可用_                                               |
 | `debug`                        | false                                                              | `bool` - 设置 Rancher Server 的 debug 参数                                                                                 |
 | `extraEnv`                     | []                                                                 | `list` - 设置 Rancher Server 的额外环境变量 _注意：从 v2.2.0 开始可用_                                                     |
-| `imagePullSecrets`             | []                                                                 | `list` - 私有镜像仓库登录凭证的密文名称列表。                                                                          |
+| `imagePullSecrets`             | []                                                                 | `list` - 私有镜像仓库登录凭证的密文名称列表。                                                                              |
 | `ingress.extraAnnotations`     | {}                                                                 | `map` - 加到 ingress 中的额外 annotation，从而自定义 ingress                                                               |
 | `ingress.configurationSnippet` | ""                                                                 | `string` - 添加额外的 Nginx 配置。可以用来配置代理。_注意：从 v2.0.15, v2.1.10 和 v2.2.4 开始可用_                         |
 | `proxy`                        | ""                                                                 | `string` - 给 Rancher 配置 HTTP[S] 代理                                                                                    |
@@ -58,9 +58,7 @@ keywords:
 
 ## API 审计日志
 
-开启 [API 审计日志](/docs/installation/options/api-audit-log/_index)。
-
-您可以像收集任何容器日志一样收集此日志。为 Rancher Server 集群上的`System`项目启用 [Rancher 工具中的日志服务](/docs/project-admin/tools/logging/_index)。
+您可以为 Rancher Server 集群上的`System`项目启用 [Rancher 工具中的日志服务](/docs/project-admin/tools/logging/_index)。
 
 ```plain
 --set auditLog.level=1
@@ -96,7 +94,7 @@ _自 v2.2.0 起可用_
 
 ## 导入`local`集群
 
-默认情况下，Rancher Server 将检测并导入正在运行的`local`集群。有权访问`local`集群的用户实际上将具有对 Rancher Server 管理的所有集群的`root`访问权限。
+默认情况下，Rancher Server 将检测并导入正在运行的`local`集群。有权访问`local`集群的用户具有对 Rancher Server 管理的所有集群的`root`访问权限。
 
 如果您的环境中存在此问题，则可以在初次安装时将此选项设置为`false`。
 
@@ -110,7 +108,7 @@ _自 v2.2.0 起可用_
 
 要自定义或使用 Rancher Server 的其他 Ingress，您可以设置自己的 Ingress annotations。
 
-设置自定义证书颁发者的示例:
+设置自定义证书颁发者的示例：
 
 ```plain
 --set ingress.extraAnnotations.'certmanager\.k8s\.io/cluster-issuer'=ca-key-pair
@@ -137,7 +135,7 @@ Rancher 需要 Internet 访问才能使用某些功能 (helm charts)。使用`pr
 
 ## 附加授信 CAs
 
-如果您有私有 registries，catalogs 或拦截证书的代理，则可能需要向 Rancher 添加额外的受信任的 CA。
+如果您有私有镜像仓库（registries）、应用商店（catalogs） 或拦截证书的代理，则可能需要向 Rancher 添加额外的受信任的 CA。
 
 ```plain
 --set additionalTrustedCAs=true
@@ -174,7 +172,7 @@ ingress:
     use-forwarded-headers: "true"
 ```
 
-### 必须的头部
+### Headers
 
 - `Host`
 - `X-Forwarded-Proto`
