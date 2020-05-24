@@ -27,7 +27,7 @@ keywords:
 
 在 Slack 上，Rancher 开发人员的频道是 **#developer**。在我们的官方微信交流群中，每个群也都有 Rancher 的开发者。
 
-![img](images/ewm.jpg)
+![img](/img/contributing/ewm.jpg)
 
 ## 源代码仓库
 
