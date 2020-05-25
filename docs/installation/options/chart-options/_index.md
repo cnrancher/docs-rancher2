@@ -29,7 +29,7 @@ keywords:
 ## 高级选项
 
 | 选项                           | 默认值                                                   | 描述                                                                                                           |
-| ------------------------------ | -------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| :----------------------------- | :------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------- |
 | `additionalTrustedCAs`         | false                                                    | `bool` - 参考 [其他受信任的 CA](#其他受信任的-ca)                                                              |
 | `addLocal`                     | "auto"                                                   | `string` - 让 Rancher 检测，并导入"local" Rancher Server 所在的集群。[导入 local 集群](#导入-local-集群)       |
 | `antiAffinity`                 | "preferred"                                              | `string` - 针对 Rancher pods 的 AntiAffinity 规则 - "preferred， required"                                     |
@@ -52,7 +52,7 @@ keywords:
 | `rancherImage`                 | "rancher/rancher"                                        | `string` - rancher 镜像源                                                                                      |
 | `rancherImageTag`              | 跟 chart 版本一样                                        | `string` - rancher 镜像标签                                                                                    |
 | `tls`                          | "ingress"                                                | `string` - 参考 [外部 TLS 终止](#在外部终止-tls)。- "ingress， external"                                       |
-| `systemDefaultRegistry`        | ""                                                       | `string` - 用于所有系统 Docker 镜像的私有 Registry，例如： http://registry.example.com/ _自 v2.3.0 起可用_     |
+| `systemDefaultRegistry`        | ""                                                       | `string` - 用于所有系统 Docker 镜像的私有 Registry，例如： `http://registry.example.com/` _自 v2.3.0 起可用_   |
 | `useBundledSystemChart`        | `false`                                                  | `bool` - 选择使用 Rancher Server 内嵌的 system-charts。这个选项用于离线安装。_自 v2.3.0 起可用_                |
 
 ## 审计日志 API
