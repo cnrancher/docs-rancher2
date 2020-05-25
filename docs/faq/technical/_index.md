@@ -229,3 +229,19 @@ kubectl -n cattle-system patch  secret serving-cert --patch '{
     }
 }'
 ```
+
+## 为什么命名空间无法移动到其他项目
+
+在[项目/命名空间](/docs/project-admin/namespaces/_index)页面移动命名空间，有时会出现无法移动的情况，这是因为rancher针对移动命名空间做了一些限制：
+
+- Rancher 不支持将命名空间移动到已经配置了[资源配额](/docs/project-admin/resource-quotas/_index)的项目中。
+
+> 日志提示：
+>
+>  ```bash
+>  Move Error
+>  can't move namespace. Project pp11 has resource quota set
+>  ```
+
+- 如果把命名空间从一个已经配置了配额的项目中，移动到一个没有配置配额的项目中，这个命名空间的配额将会被移除。
+- Rancher不支持移动从应用商店启动应用时创建的命名空间，选择该命名空间，`移动`按钮将变为灰色。
