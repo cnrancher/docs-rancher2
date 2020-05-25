@@ -81,3 +81,33 @@ kubectl -n cattle-system patch  daemonsets cattle-node-agent --patch '{
  }
 }'
 ```
+
+## 创建Kubernetes集群，ETCD无法启动
+
+通过[rke创建Kubernetes集群](/docs/cluster-provisioning/rke-clusters/_index)，集群状态为`Provisioning`，并且UI显示如下错误信息：
+
+```bash
+[etcd] Failed to bring up Etcd Plane: etcd cluster is unhealthy: hosts [10.0.2.15] failed to report healthy. Check etcd container logs on each host for more information
+```
+
+查看etcd日志，显示如下错误信息：
+
+```bash
+2020-05-25 08:43:41.515364 I | embed: ready to serve client requests
+2020-05-25 08:43:41.523589 I | embed: serving client requests on [::]:2379
+2020-05-25 08:43:41.536538 I | embed: rejected connection from "10.0.2.15:39550" (error "tls: failed to verify client's certificate: x509: certificate signed by unknown authority (possibly because of \"crypto/rsa: verification error\" while trying to verify candidate authority certificate \"kube-ca\")", ServerName "")
+2020-05-25 08:43:46.545930 I | embed: rejected connection from "10.0.2.15:39554" (error "tls: failed to verify client's certificate: x509: certificate signed by unknown authority (possibly because of \"crypto/rsa: verification error\" while trying to verify candidate authority certificate \"kube-ca\")", ServerName "")
+2020-05-25 08:43:51.554070 I | embed: rejected connection from "10.0.2.15:39556" (error "tls: failed to verify client's certificate: x509: certificate signed by unknown authority (possibly because of \"crypto/rsa: verification error\" while trying to verify candidate authority certificate \"kube-ca\")", ServerName "")
+2020-05-25 08:44:34.072012 I | embed: rejected connection from "10.0.2.15:39703" (error "EOF", ServerName "")
+2020-05-25 08:44:46.520865 I | embed: rejected connection from "10.0.2.15:39560" (error "tls: failed to verify client's certificate: x509: certificate signed by unknown authority (possibly because of \"crypto/rsa: verification error\" while trying to verify candidate authority certificate \"kube-ca\")", ServerName "")
+```
+
+以上报错是因为证书的问题，导致etcd启动失败。原因主要有两种可能：
+
+1. 主机时钟不同步
+2. 该主机之前添加过kubernetes集群，在残留数据没有清理干净的情况下重新安装集群。
+
+**解决办法：**
+
+1. 检查主机时钟，并使各主机时钟同步。
+2. 参考[清理节点](/docs/cluster-admin/cleaning-cluster-nodes/_index)说明，将主机数据残留数据清理干净，然后再从新添加集群。
