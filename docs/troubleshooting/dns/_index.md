@@ -213,7 +213,7 @@ services:
 
 > **注意：** 由于 kubelet 在容器中运行，因此/etc 和/usr 中的文件的路径位于 kubelet 容器中的/host/etc 和/host/usr 中。
 
-查看[集群 YAML](/docs/k8s-in-rancher/editing-clusters/_index)可以看到如何更改这个配置。集群的配置完成后，您必须删除 kube-dns pod 才能使用 pod 中的新设置：
+查看[集群 YAML](/docs/cluster-admin/editing-clusters/_index)可以看到如何更改这个配置。集群的配置完成后，您必须删除 kube-dns pod 才能使用 pod 中的新设置：
 
 ```
 kubectl delete pods -n kube-system -l k8s-app=kube-dns

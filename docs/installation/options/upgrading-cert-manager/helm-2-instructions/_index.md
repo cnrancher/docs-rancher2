@@ -157,7 +157,7 @@ cert-manager-webhook-5b5dd6999-kst4x            1/1     Running     0          3
 cert-manager-cainjector-3ba5cd2bcd-de332x       1/1     Running     0          3m
 ```
 
-如果"webhook" pod(第二行)处于 ContainerCreating 状态，则它可能仍在等待 Secret 被安装到 pod 中。等几分钟，以免发生这种情况，但是如果遇到问题，请查看 cert-manager[故障排查](https://docs.cert-manager.io/en/latest/getting-started/troubleshooting.html)指南。
+如果"webhook" pod(第二行)处于 ContainerCreating 状态，则它可能仍在等待 Secret 被安装到 pod 中。等几分钟，以免发生这种情况，但是如果遇到问题，请查看 cert-manager[故障排查](https://cert-manager.io/docs/faq/)指南。
 
 > **注意：** 上面的说明要求您将 disable-validation 标签添加到 kube-system 命名空间中。这里有一些外部文档解释了该操作的必要性：
 >
