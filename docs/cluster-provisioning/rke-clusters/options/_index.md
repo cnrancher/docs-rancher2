@@ -16,14 +16,14 @@ keywords:
   - 集群参数
 ---
 
-当您在 Rancher 中[使用 RKE 启动](/docs/cluster-provisioning/rke-clusters/_index)的集群时，您可以选择自定义 Kubernetes 选项。
-
-您可以通过以下两种方式之一配置 Kubernetes 选项：
+[使用 RKE 启动](/docs/cluster-provisioning/rke-clusters/_index)的集群时，您可以选择自定义 Kubernetes 选项，通过 Rancher UI 或集群配置文件配置 Kubernetes 选项。
 
 - [Rancher UI](#rancher-ui)：通过 Rancher UI 设置 Kubernetes 集群的通用自定义的选项。
-- [集群配置文件](#集群配置文件)：高级用户可以创建 RKE 配置文件，而不是使用 Rancher UI 为集群设置 Kubernetes 选项。通过使用配置文件，您可以在 YAML 中指定 RKE 安装中可用的任何选项，但 `system_images`参数除外。
+- [集群配置文件](#集群配置文件)：除了 Rancher UI 之外，高级用户还可以通过 RKE 配置文件，在 YAML 中指定 RKE 安装中可用的任何选项，`system_images`参数除外。
 
-在 Rancher v2.0.0 至 v2.2.x，Rancher 用于配置集群的配置文件与 [Rancher Kubernetes Engine 的集群配置文件](http://docs.rancher.com/docs/rke/latest/en/config-options/)相同。在 Rancher v2.3.0 中，RKE 信息仍然包含在配置文件中，但它与其他选项的层级是分开的，因此 RKE 集群配置应在`rancher_kubernetes_engine_config`参数下。有关详细信息，请参阅关于[集群配置文件](#集群配置文件)。
+在 v2.0.0 至 v2.2.x 版本中，Rancher 用于配置集群的配置文件与 [Rancher Kubernetes Engine 的集群配置文件](http://docs.rancher.com/docs/rke/latest/en/config-options/)相同。
+
+在 v2.3.0 和更新的版本中，RKE 信息与其他选项的层级是分开的，因此，高级用户使用方法 2 在 v2.3.0 和更新版本的 Rancher 配置中 RKE 集群参数时，应在`rancher_kubernetes_engine_config`参数下修改配置 RKE 集群参数。详情请参考[集群配置文件](#集群配置文件)
 
 ## Rancher UI
 
@@ -38,7 +38,7 @@ keywords:
 集群使用的[网络插件](https://kubernetes.io/docs/concepts/cluster-administration/networking/)。有关不同网络提供商的更多详细信息，请查看我们的[网络常见问题解答](/docs/faq/networking/cni-providers/_index)。
 
 :::important 重要
-启动集群后，您无法更改网络插件。因此，请谨慎选择要使用的网络插件，因为 Kubernetes 不允许在网络插件之间切换。使用网络插件创建集群后，更改网络插件将需要删除整个集群及其所有应用程序。
+启动集群后，您无法更改网络插件，请谨慎选择要使用的网络插件。Kubernetes 不支持切换网络插件。创建集群后，如果您需要更改网络插件，只能删除整个集群及其所有应用程序，重新创建集群和配置网络插件。
 :::
 
 开箱即用，Rancher 与以下网络插件兼容：
@@ -50,22 +50,22 @@ keywords:
 
 **Canal 注意事项：**
 
-在 v2.0.0-v2.0.4 和 v2.0.6 中，使用 Canal 时，默认的集群网络隔离选项是开启的。在自动启用网络隔离后，它阻止了[项目](/docs/cluster-admin/projects-and-namespaces/_index)之间的 Pod 通过 Pod IP 直接通信。
+在 v2.0.0-v2.0.4 和 v2.0.6 中，使用 Canal 时，默认的集群网络隔离选项是开启的阻止了[项目](/docs/cluster-admin/projects-and-namespaces/_index)之间的 Pod 通过 Pod IP 直接通信。
 
-从 v2.0.7 开始，如果您使用 Canal，您还可以选择使用**网络隔离**，这将启用或禁用不同[项目](/docs/cluster-admin/projects-and-namespaces/_index)中的 Pod 是否可以通过 Pod IP 直接通信。
+从 v2.0.7 开始，如果您使用 Canal，您还可以选择使用**网络隔离**，自行决定[项目](/docs/cluster-admin/projects-and-namespaces/_index)中的 Pod 是否可以通过 Pod IP 直接通信。
 
 > **Rancher v2.0.0 - v2.0.6 请用户注意：**
 >
-> - 在以前的 Rancher 版本中，Canal 隔离了项目网络通信，而且没有禁用它的选项。如果您正在使用任何这些 Rancher 版本，请注意，使用 Canal 会阻止不同项目中的 Pod 之间通过 Pod Ip 的所有通信。
+> - 在以前的 Rancher 版本中，Canal 隔离了项目网络通信，而且没有禁用它的选项。如果您正在使用这些 Rancher 版本，请注意，使用 Canal 会阻止不同项目中的 Pod 之间通过 Pod Ip 的所有通信。
 > - 如果您有使用 Canal 的集群并且要升级到 v2.0.7，则这些集群默认情况下会启用项目网络隔离。如果要禁用项目网络隔离，请编辑集群并禁用该选项。
 
 **Flannel 注意事项：**
 
-在 v2.0.5 中，这是默认选项，它不会阻止项目之间的任何网络通信。
+Flannel 是 Rancher v2.0.5 默认使用的网络插件，不会阻止项目之间的网络通信。
 
 **Weave 注意事项：**
 
-当 Weave 被选为网络插件时，Rancher 将通过生成随机密码自动启用加密。如果要手动指定密码，请参阅如何使用[RKE 配置文件](/docs/cluster-provisioning/rke-clusters/options/_index)和[Weave 网络插件选项](http://docs.rancher.com/docs/rke/latest/en/config-options/add-ons/network-plugins/#weave-network-plug-in-options)配置集群。
+当 Weave 被选为网络插件时，Rancher 将通过生成随机密码自动启用加密。如果要手动指定密码，请参考如何使用[RKE 配置文件](/docs/cluster-provisioning/rke-clusters/options/_index)和[Weave 网络插件选项](http://docs.rancher.com/docs/rke/latest/en/config-options/add-ons/network-plugins/#weave-network-plug-in-options)配置集群。
 
 ### Kubernetes Cloud Provider
 
@@ -85,7 +85,7 @@ _v2.2.0 可用_
 
 如果您的私有镜像仓库需要登录认证，则需要通过编辑从镜像仓库中提取镜像的每个集群的集群选项，并将登录认证信息传递给 Rancher。
 
-私有镜像仓库配置选项告诉 Rancher 将在哪里拉取集群中使用的[系统镜像](http://docs.rancher.com/docs/rke/latest/en/config-options/system-images/)和[插件镜像](http://docs.rancher.com/docs/rke/latest/en/config-options/add-ons/)。
+私有镜像仓库配置选项告诉 Rancher 从哪里拉取集群中使用的[系统镜像](http://docs.rancher.com/docs/rke/latest/en/config-options/system-images/)和[插件镜像](http://docs.rancher.com/docs/rke/latest/en/config-options/add-ons/)。
 
 - **系统镜像** 是维护 Kubernetes 集群所需的组件。
 - **插件镜像** 用于部署多个集群组件包括网络插件、ingress 控制器、DNS 插件或 `metrics-server`。
@@ -108,7 +108,7 @@ _v2.2.0 可用_
 
 ## 高级选项
 
-在 Rancher UI 中创建集群时，以下选项可用。它们位于**高级选项**。
+在 Rancher UI 中创建集群时，可以配置以下高级选项。
 
 ### NGINX Ingress
 
@@ -140,20 +140,20 @@ _v2.2.0 可用_
 
 ## 集群配置文件
 
-高级用户可以创建 RKE 配置文件，而不是使用 Rancher UI 为集群配置 Kubernetes 选项。使用配置文件允许您使用 RKE 安装中的任何[可用选项](http://docs.rancher.com/docs/rke/latest/en/config-options/)，但`system_images`选项除外。
+除了 Rancher UI 之外，高级用户还可以通过 RKE 配置文件，在 YAML 中指定 RKE 安装[可用选项](http://docs.rancher.com/docs/rke/latest/en/config-options/)，`system_images`选项除外。
 
 > **注意：** 在 Rancher v2.0.5 和 v2.0.6 中，配置文件（YAML）中的服务名称应该只包含下划线：例如，`kube_api`和`kube_controller`。
 
-- 要直接从 Rancher UI 编辑 RKE 配置文件，请单击**编辑 YAML**。
-- 要从现有 RKE 文件读取，请单击**从文件读取**。
+- 单击**编辑 YAML**，使用 Rancher UI 编辑 RKE 配置文件。
+- 单击**从文件读取**，从现有 RKE 文件读取 RKE 参数信息。
 
 ![image](/img/rancher/cluster-options-yaml.png)
 
-根据您的 Rancher 版本，配置文件的结构是不同的。以下是 Rancher v2.0.0-v2.2.x 和 Rancher v2.3.0+ 的示例配置文件。
+Rancher v2.0.0-v2.2.x 和 Rancher v2.3.0+ 配置文件的结构是不同的。以下是两者的配置文件示例。
 
 ### Rancher v2.3.0+ 配置文件结构
 
-RKE（Rancher Kubernetes Engine）是 Rancher 用来配置 Kubernetes 集群的工具。Rancher 的集群配置文件过去与[RKE 配置文件](http://docs.rancher.com/docs/rke/latest/en/example-yamls/)具有相同的结构，但后来结构发生了变化，在 Rancher 中，RKE 集群配置选项与非 RKE 配置选项分开。因此，集群的配置需要嵌套在集群配置文件中的`rancher_kubernetes_engine_config`参数下。使用早期版本的 Rancher 创建的集群配置文件将需要按照此格式更新。下面是一个集群配置文件示例。
+RKE（Rancher Kubernetes Engine）是 Rancher 配置 Kubernetes 集群的工具。Rancher 的集群配置文件过去与[RKE 配置文件](http://docs.rancher.com/docs/rke/latest/en/example-yamls/)具有相同的结构，但后来结构发生了变化，RKE 集群配置选项与非 RKE 配置选项分，集群的配置嵌套在集群配置文件中的`rancher_kubernetes_engine_config`参数下。使用早期版本的 Rancher 创建的集群配置文件将需要按照此格式更新。下面是一个新版集群配置文件示例。
 
 ```yaml
 #
@@ -248,7 +248,7 @@ windows_prefered_cluster: false
 
 ### Rancher v2.0.0-v2.2.x 配置文件结构
 
-下面包含一个旧版本的集群配置文件示例。
+以下是一个旧版本的集群配置文件示例。
 
 ```yaml
 addon_job_timeout: 30
@@ -329,10 +329,12 @@ ssh_agent_auth: false
 
 ### 默认 DNS 插件
 
-下表显示了默认情况下部署的 DNS 插件。有关如何配置不同的 DNS 插件的详细信息，请参阅[关于 DNS 插件的文档](http://docs.rancher.com/docs/rke/latest/en/config-options/add-ons/dns/)。CoreDNS 只能在 Kubernetes v1.12.0 及更高版本上使用。
+下表显示了默认情况下部署的 DNS 插件。CoreDNS 只能在 Kubernetes v1.12.0 及更高版本上使用。
+
+有关如何配置不同的 DNS 插件的详细信息，请参阅[关于 DNS 插件的文档](http://docs.rancher.com/docs/rke/latest/en/config-options/add-ons/dns/)。
 
 | Rancher 版本 | Kubernetes 版本 | 默认 DNS 插件 |
-| ------------ | --------------- | ------------- |
+| :----------- | :-------------- | :------------ |
 | v2.2.5+      | v1.14.0+        | CoreDNS       |
 | v2.2.5+      | v1.13.x-        | kube-dns      |
 | v2.2.4-      | 任何版本        | kube-dns      |
@@ -341,7 +343,7 @@ ssh_agent_auth: false
 
 _v2.2.0 可用_
 
-除了 RKE 配置文件选项之外，还有可以在配置文件（YAML）中配置 Rancher 的特有选项):
+除了 RKE 配置文件选项之外，还有可以在配置文件（YAML）中配置 Rancher 的特有选项)：`docker_root_dir`、`enable_cluster_monitoring`、`enable_network_policy`和`local_cluster_auth_endpoint`。
 
 ### docker_root_dir
 
