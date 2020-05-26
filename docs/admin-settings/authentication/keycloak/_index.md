@@ -23,7 +23,7 @@ _v2.1.0 版本可用_
 ## 先决条件
 
 - 您必须有一个[Keycloak IdP 服务器](https://www.keycloak.org/docs/latest/server_installation/)。
-- 在 Keycloak 中，创建一个[新的 SAML 客户端](https://www.keycloak.org/docs/latest/server_admin/#saml-clients)，设置如下。参见[Keycloak 文档](keycloak.org/docs/latest/server_admin/#saml-clients)获得帮助。
+- 在 Keycloak 中，创建一个[新的 SAML 客户端](https://www.keycloak.org/docs/latest/server_admin/#saml-clients)，设置如下。参见[Keycloak 文档](https://keycloak.org/docs/latest/server_admin/#saml-clients)获得帮助。
 
   | 设置                 | 值                                                                      |
   | :------------------- | :---------------------------------------------------------------------- |

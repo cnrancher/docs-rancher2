@@ -28,9 +28,9 @@ keywords:
 
 ## "default backend - 404"
 
-多种原因可能导致 ingress-controller 无法将流量转发到您的 rancher 实例。多数情况下，这是由于 ssl 配置错误所致。
+多数情况下，这是由于 ssl 配置错误所致。
 
-检查事项
+请检查以下三项参数是否有误：
 
 - [Rancher 是否在运行](#rancher-是否在运行)
 - [Rancher 日志](#检查-rancher-日志)
@@ -38,7 +38,7 @@ keywords:
 
 ### Rancher 是否在运行
 
-使用`kubectl`来检查`cattle-system`系统命名空间，并查看 Rancher 容器是否处于 Running 状态。
+使用`kubectl`检查`cattle-system`系统命名空间，并查看 Rancher 容器是否处于 Running 状态。
 
 ```
 kubectl -n cattle-system get pods
@@ -47,7 +47,7 @@ NAME                           READY     STATUS    RESTARTS   AGE
 pod/rancher-784d94f59b-vgqzh   1/1       Running   0          10m
 ```
 
-如果状态不是`Running`，则在容器上运行`describe`并检查事件。
+如果状态不是`Running`，则需要在容器上运行`describe`并检查事件。
 
 ```
 kubectl -n cattle-system describe pod
@@ -99,7 +99,7 @@ Rancher 生成的或是通过 LetsEncrypt 生成的
 
 对每个对象执行`kubectl describe`并检查事件。您可以追踪可能缺少的东西。
 
-例如颁布证书存在问题:
+例如颁布证书存在问题：
 
 ```
 kubectl -n cattle-system describe certificate

@@ -29,7 +29,7 @@ Rancher 一般指的是 Rancher 1.x 和 Rancher 2.x。
 
 Rancher 1.x 主要用的是 Rancher 自研的 Cattle 编排引擎管理容器，简单易用。由于版本更新，目前已经 Rancher Labs 不再继续维护 Rancher 1.x，而是推出了 Rancher 2.x。
 
-Rancher 2.x 是一款 Kuberntes 管理平台，也是 Rancher Labs 的旗舰产品，目前 Rancher 2.x 产品在 k8s 多集群管理领域里处于绝对领先的位置。
+Rancher 2.x 是一款 Kubernetes 管理平台，也是 Rancher Labs 的旗舰产品，目前 Rancher 2.x 产品在 k8s 多集群管理领域里处于绝对领先的位置。
 
 ### RKE
 
@@ -39,7 +39,7 @@ RKE 全称是 Rancher Kubernetes Engine。可以通过 CLI 的方式独立于 Ra
 
 K3s 是经过精简和用户体验优化的 k8s。K3s 减少了运维负担。一条命令就可以启动 K3s。加入一个新节点，使用 4 层 LB 等也都非常简单。同时也可以使用 MySQL/SQLite 等关系型数据库作为数据库。在开发测试环境和边缘计算等场景中，非常受用户喜欢。
 
-在 Rancher 2.2 和 2.3 中，您可以把 K3s 作为导入集群导入到 Rancher 中进行统一纳管。在即将发布的 Rancher 2.4 里，将会进一步加大对 K3s 的集成，用户将可以通过 Rancher UI 查看 K3s 集群中各个节点的配置，并且可以通过 Rancher UI 直接升级导入的 K3s 集群的 Kuberntes 版本。另外，针对 Rancher 2.4 的高可用部署，也将提供另外一种通过 K3s 集群安装 Rancher HA 的方法，从而大大简化部署 Rancher 高可用的流程。
+在 Rancher 2.2 和 2.3 中，您可以把 K3s 作为导入集群导入到 Rancher 中进行统一纳管。在即将发布的 Rancher 2.4 里，将会进一步加大对 K3s 的集成，用户将可以通过 Rancher UI 查看 K3s 集群中各个节点的配置，并且可以通过 Rancher UI 直接升级导入的 K3s 集群的 Kubernetes 版本。另外，针对 Rancher 2.4 的高可用部署，也将提供另外一种通过 K3s 集群安装 Rancher HA 的方法，从而大大简化部署 Rancher 高可用的流程。
 
 ## Kubernetes 相关概念
 

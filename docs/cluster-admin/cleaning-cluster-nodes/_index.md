@@ -28,18 +28,31 @@ keywords:
 :::
 
 ```bash
-# 停止服务
-systemctl  disable kubelet.service
-systemctl  disable kube-scheduler.service
-systemctl  disable kube-proxy.service
-systemctl  disable kube-controller-manager.service
-systemctl  disable kube-apiserver.service
 
-systemctl  stop kubelet.service
-systemctl  stop kube-scheduler.service
-systemctl  stop kube-proxy.service
-systemctl  stop kube-controller-manager.service
-systemctl  stop kube-apiserver.service
+#!/bin/bash
+
+KUBE_SVC='
+kubelet
+kube-scheduler
+kube-proxy
+kube-controller-manager
+kube-apiserver
+'
+
+for kube_svc in ${KUBE_SVC};
+do
+  # 停止服务
+  if [[ `systemctl is-active ${kube_svc}` == 'active' ]]; then
+    systemctl stop ${kube_svc}
+  fi
+  # 禁止服务开机启动
+  if [[ `systemctl is-enabled ${kube_svc}` == 'enabled' ]]; then
+    systemctl disable ${kube_svc}
+  fi
+done
+
+# 停止所有容器
+docker stop $(docker ps -aq)
 
 # 删除所有容器
 docker rm -f $(docker ps -qa)
@@ -48,7 +61,10 @@ docker rm -f $(docker ps -qa)
 docker volume rm $(docker volume ls -q)
 
 # 卸载mount目录
-for mount in $(mount | grep tmpfs | grep '/var/lib/kubelet' | awk '{ print $3 }') /var/lib/kubelet /var/lib/rancher; do umount $mount; done
+for mount in $(mount | grep tmpfs | grep '/var/lib/kubelet' | awk '{ print $3 }') /var/lib/kubelet /var/lib/rancher;
+do
+  umount $mount;
+done
 
 # 备份目录
 mv /etc/kubernetes /etc/kubernetes-bak-$(date +"%Y%m%d%H%M")
@@ -72,29 +88,49 @@ rm -rf /etc/ceph \
     /var/run/calico
 
 # 清理网络接口
+no_del_net_inter='
+lo
+docker0
+eth
+ens
+bond
+'
+
 network_interface=`ls /sys/class/net`
+
 for net_inter in $network_interface;
 do
-  if ! echo $net_inter | grep -qiE 'lo|docker0|eth*|ens*';then
+  if ! echo "${no_del_net_inter}" | grep -qE ${net_inter:0:3}; then
     ip link delete $net_inter
   fi
 done
 
 # 清理残留进程
-port_list='80 443 6443 2376 2379 2380 8472 9099 10250 10254'
+port_list='
+80
+443
+6443
+2376
+2379
+2380
+8472
+9099
+10250
+10254
+'
 
-for port in $port_list
+for port in $port_list;
 do
-  pid=`netstat -atlnup|grep $port |awk '{print $7}'|awk -F '/' '{print $1}'|grep -v -|sort -rnk2|uniq`
-  if [[ -n $pid ]];then
+  pid=`netstat -atlnup | grep $port | awk '{print $7}' | awk -F '/' '{print $1}' | grep -v - | sort -rnk2 | uniq`
+  if [[ -n $pid ]]; then
     kill -9 $pid
   fi
 done
 
-pro_pid=`ps -ef |grep -v grep |grep kube|awk '{print $2}'`
+kube_pid=`ps -ef | grep -v grep | grep kube | awk '{print $2}'`
 
-if [[ -n $pro_pid ]];then
-  kill -9 $pro_pid
+if [[ -n $kube_pid ]]; then
+  kill -9 $kube_pid
 fi
 
 # 清理Iptables表
@@ -104,7 +140,6 @@ sudo iptables --flush --table nat
 sudo iptables --flush --table filter
 sudo iptables --table nat --delete-chain
 sudo iptables --table filter --delete-chain
-
 systemctl restart docker
 ```
 

@@ -206,3 +206,42 @@ openssl x509 -noout -in cert.pem -text | grep DNS
 ## 我可以在 UI 里使用键盘快捷键吗？
 
 可以。大部分 UI 可以通过键盘快捷键访问。可在 UI 任意地方中按`?`查看所有可用的快捷键。
+
+## 将kubeconfig文件复制到本地，kubectl无法使用
+
+Rancher 2.4.x版本使用kubectl连接kubernetes集群出现以下错误：
+
+```bash
+kubectl get pods
+Unable to connect to the server: x509: certificate is valid for 127.0.0.1, 172.17.0.2, 172.31.1.2, not x.x.x.x
+```
+
+这是因为2.4.x调整了证书注册的逻辑，将首次启动rancher设置的`server-url`添加到证书当中，如果想通过其他域名或IP连接rancher，将会失败。
+
+解决办法：
+
+```bash
+kubectl -n cattle-system patch  secret serving-cert --patch '{
+    "metadata": {
+        "annotations": {
+            "listener.cattle.io/cn-{{IP}}": "{{IP}}"
+        }
+    }
+}'
+```
+
+## 为什么命名空间无法移动到其他项目
+
+在[项目/命名空间](/docs/project-admin/namespaces/_index)页面移动命名空间，有时会出现无法移动的情况，这是因为rancher针对移动命名空间做了一些限制：
+
+- Rancher 不支持将命名空间移动到已经配置了[资源配额](/docs/project-admin/resource-quotas/_index)的项目中。
+
+> 日志提示：
+>
+>  ```bash
+>  Move Error
+>  can't move namespace. Project pp11 has resource quota set
+>  ```
+
+- 如果把命名空间从一个已经配置了配额的项目中，移动到一个没有配置配额的项目中，这个命名空间的配额将会被移除。
+- Rancher不支持移动从应用商店启动应用时创建的命名空间，选择该命名空间，`移动`按钮将变为灰色。

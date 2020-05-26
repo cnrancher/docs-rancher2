@@ -20,13 +20,13 @@ keywords:
 
 ## Helm 命令显示禁止
 
-在集群中初始化 Helm 时，没有指定正确的 `ServiceAccount`，`helm init` 命令会成功执行，但是您将无法执行大部分 `helm` 命令，会显示如下错误信息：
+在集群中初始化 Helm 时，如果没有指定正确的 `ServiceAccount`，虽然`helm init` 命令会成功执行，可以初始化 Helm，但是当您执行大部分 `helm` 命令的时候，会显示如下错误信息：
 
 ```
 Error: configmaps is forbidden: User "system:serviceaccount:kube-system:default" cannot list configmaps in the namespace "kube-system"
 ```
 
-为了解决这个问题，需要删除服务器组件(`tiller`)，并且添加正确的 `ServiceAccount`。您可以使用 `helm reset --force` 来删除集群中的 `tiller` 组件。请使用 `helm version --server` 来检查该组件是否已经被删除。
+为了解决这个问题，需要卸载服务器组件(`tiller`)，您可以使用 `helm reset --force` 来删除集群中的 `tiller` 组件，然后使用 `helm version --server` 来检查该组件是否已经被删除，如果返回的结果和下方的代码示例相似，报错提示“could not find tiller”，则表示已经删除了 tiller 组件。
 
 ```
 helm reset --force

@@ -56,13 +56,15 @@ Rancher Server 只能在使用 RKE 或 K3s 安装的 Kubernetes 集群中运行�
 
    注意：您也可以通过环境变量`$K3S_DATASTORE_ENDPOINT`来配置数据库端点。
 
-  :::note 提示
-   国内用户，可以使用以下方法加速安装：
-   ```
-   curl -sfL https://docs.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -s - server \
-  --datastore-endpoint="mysql://username:password@tcp(hostname:3306)/database-name"
-   ```
-  :::
+:::note 提示
+国内用户，可以使用以下方法加速安装：
+
+```
+curl -sfL https://docs.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -s - server \
+--datastore-endpoint="mysql://username:password@tcp(hostname:3306)/database-name"
+```
+
+:::
 
 1. 在您的另外一台 Linux 节点上执行同样的操作。
 
@@ -190,7 +192,7 @@ services:
   etcd:
     snapshot: true
     creation: 6h
-    retention: 24
+    retention: 24h
 
 # 当使用外部 TLS 终止，并且使用 ingress-nginx v0.22或以上版本时，必须。
 ingress:
@@ -202,7 +204,7 @@ ingress:
 <figcaption>常用 RKE 节点选项</figcaption>
 
 | 选项               | 必填 | 描述                                                             |
-| ------------------ | ---- | ---------------------------------------------------------------- |
+| :----------------- | :--- | :--------------------------------------------------------------- |
 | `address`          | 是   | 公用 DNS 或 IP 地址                                              |
 | `user`             | 是   | 可以运行 docker 命令的用户                                       |
 | `role`             | 是   | 分配给节点的 Kubernetes 角色列表                                 |

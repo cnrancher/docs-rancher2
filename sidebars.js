@@ -25,7 +25,8 @@ module.exports = {
       "overview/architecture/_index",
       "overview/architecture-recommendations/_index",
       "overview/concepts/_index",
-      "overview/glossary/_index"
+      "overview/glossary/_index",
+      "overview/rancher-glossary/_index"
     ],
     快速入门: [
       "quick-start-guide/_index",

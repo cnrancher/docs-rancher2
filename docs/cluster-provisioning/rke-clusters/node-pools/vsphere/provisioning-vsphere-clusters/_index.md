@@ -21,13 +21,11 @@ keywords:
 
 ## 先决条件
 
-本节介绍了使用 vSphere 在 Rancher 中创建节点和集群需要的必要条件。
-
-该节点模板的文档使用 vSphere Web Services API 6.5 版本中进行了测试。
+本节介绍了使用 vSphere 在 Rancher 中创建节点和集群需要的必要条件。该节点模板的文档使用 vSphere Web Services API 6.5 版本中进行了测试。
 
 ### 在 vSphere 中创建凭证
 
-在继续创建集群之前，必须确保您拥有具有足够权限的 vSphere 用户。当您设置节点模板时，该模板将需要使用这些 vSphere 凭证。
+在继续创建集群之前，必须确保您的 vSphere 账户拥有足够的权限。当您设置节点模板时，该模板将需要使用这些 vSphere 凭证。
 
 有关如何在 vSphere 中创建具有所需权限的用户，请参考此[使用指南](/docs/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/creating-credentials/_index)。通过这些步骤您将创建出需要提供给 Rancher 的用户名和密码，从而允许 Rancher 在 vSphere 中创建资源。
 
@@ -37,13 +35,13 @@ keywords:
 
 - 能够访问 vCenter 服务中的 vSphere API（通常使用端口： 443/TCP）。
 - 能够访问位于实例化虚拟机的所有 ESXi 节点上的 Host API（端口 443/TCP）(_仅在使用 ISO 创建节点时需要_)。
-- 能够访问虚拟机的端口 22/TCP 和 2376/TCP
+- 能够访问虚拟机的端口 22/TCP 和 2376/TCP。
 
 请参照[节点网络需求](/docs/cluster-provisioning/node-requirements/_index)来获取详细的端口需求。
 
 ### 适用于 vSphere API 访问的有效 ESXi 许可证
 
-免费的 ESXi 许可证不支持 API 访问。vSphere 服务器必须具有效或评估的 ESXi 许可证。
+vSphere 服务器必须具生效的，经过评估的 ESXi 许可证。免费的 ESXi 许可证不支持 API 访问。
 
 ## 使用 vSphere 创建集群
 
@@ -53,21 +51,19 @@ keywords:
 
 详细的节点模板配置，请参照[节点模板配置参考](/docs/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/node-template-reference/_index)。
 
-Rancher 使用 RKE 来创建 Kubernetes 集群。详细的 vSphere 中集群配置，请参照[RKE 文档中的集群配置参考](https://rancher.com/docs/rke/latest/en/config-options/cloud-providers/vsphere/config-reference/)。
+Rancher 使用 RKE 创建 Kubernetes 集群。详细的 vSphere 中集群配置，请参照[RKE 文档中的集群配置参考](https://rancher.com/docs/rke/latest/en/config-options/cloud-providers/vsphere/config-reference/)。
 
 请注意，必须[启用](#为集群启用-vsphere-cloud-provider) vSphere Cloud Provider 才能够动态配置数据卷。
 
 ### 使用 vSphere 凭证创建节点模板
 
-为了创建集群，您至少创建一个 vSphere[节点模板](/docs/cluster-provisioning/rke-clusters/node-pools/_index) 来配置如何在 vSphere 创建虚拟机。创建并保存的节点模板可在创建其他 vSphere 集群时重复使用它。
+创建集群前，您需要创建 vSphere[节点模板](/docs/cluster-provisioning/rke-clusters/node-pools/_index) 用于配置 VSphere 中的虚拟机。创建并保存的节点模板可在创建其他 vSphere 集群时重复使用。
 
-为了创建节点模板,
-
-1. 在 Rancher UI 中登录。
+1. 登录 Rancher UI。
 
 1. 在右上角的用户设定菜单中，选择**节点模板**。
 
-1. 点击**添加模板**，然后点击**vSphere**图标。
+1. 单击**添加模板**，然后单击**vSphere**图标。
 
 #### A. 配置 vSphere 凭证
 
@@ -85,16 +81,14 @@ values={[
 
 <TabItem value="new">
 
-您的账户访问信息保存在[云凭证](/docs/user-settings/cloud-credentials/_index)。云凭证会保存为 Kubernetes 密文。
+您的账户访问信息保存在[云凭证](/docs/user-settings/cloud-credentials/_index)。云凭证会保存为 Kubernetes 密文。您可以创建新的云凭证或使用现有的云凭证。创建云凭证的步骤如下：
 
-您可以使用现有的云凭证或创建新的云凭证。要创建新的云凭证：
-
-1. 点击**添加凭证**。
+1. 单击**添加凭证**。
 1. 在**名称**字段，输入 vSphere 凭证的名称。
 1. 在**vCenter or ESXi 服务** 字段，输入 vCenter 或 ESXi 节点名/IP。ESXi 是用于创建和运行虚拟机和虚拟设备的虚拟化平台。vCenter Server 是一项服务，通过它可以管理网络中连接的多个节点池中的节点资源。
 1. 可选：在**端口**字段，配置 vCenter 或 ESXi 服务的端口。
 1. 在**用户名** 和 **密码** 字段，输入您 vSphere 的用户名和密码。
-1. 点击**创建**。
+1. 单击**创建**。
 
 **结果：** 节点模板成功添加了 vSphere 的云凭证。
 
@@ -123,17 +117,17 @@ values={[
 
 **调度**部分中的字段会自动显示为数据中心和 vSphere 中可用的选项。
 
-1. 在**数据中心**选项中，选择哪个数据中心用于虚拟机调度。
+1. 在**数据中心**选项中，选择用于虚拟机调度的数据中心。
 1. **资源池**（可选）：选择**资源池**。资源池可用于对独立节点或集群中的 CPU 和内存资源进行分区，也可以嵌套。
-1. **数据存储**：如果您有数据存储集群，则可以切换它。这样，您可以选择将 VM 调度到哪个数据存储集群。如果选择该选项，则可以选择单个磁盘。
+1. **数据存储**：如果您有数据存储集群，则可以切换到该数据存储集群，将虚拟机调度到该数据存储集群。如果选择该选项，则可以选择单个磁盘。
 1. **Folder** 可选：选择要放置虚拟机的文件夹。此下拉菜单中的 VM 文件夹直接与 vSphere 中的 VM 文件夹相对应。注意：文件夹名称在 vSphere 配置文件中应该以`vm/`开头。
-1. **主机**（可选）：选择一个特定的节点用于创建 VM。对于独立 ESXi 或具有 DRS（分布式资源调度程序）的集群，请将此字段设置为空。如果指定了该字段，将使用节点系统的池，并且**资源池**参数将被忽略。
+1. **主机**（可选）：选择一个特定的节点用于创建 VM。对于独立 ESXi 或具有 DRS（分布式资源调度程序）的集群，请将此字段设置为空。如果指定了该字段，就会使用节点系统的池，而且**资源池**的参数会被忽略。
 
 </TabItem>
 
 <TabItem value="old">
 
-在**调度**选项卡中，输入:
+在**调度**选项卡中，输入：
 
 - 用于创建 VM 的**数据中心**的名称或路径。
 - **虚拟机网络**的名称。
@@ -177,7 +171,7 @@ values={[
 
 在**实例选项**选项卡中，配置该节点模板创建节点的 CPU 数量，内存和磁盘大小。
 
-仅支持从 RancherOS ISO 创建 VM。
+仅支持从 RancherOS ISO 创建虚拟机。
 
 确保`操作系统ISO下载地址`选项填写正确的 VMware ISO 或 RancherOS (rancheros-vmware.iso)地址。
 
@@ -191,7 +185,7 @@ values={[
 
 _从 Rancher v2.3.3 开始可用_
 
-现在，节点模板允许 VM 配置多个网络。在**网络**字段中，您可以点击**添加网络**来添加任何 vSphere 中可用的网络。
+现在，节点模板允许 VM 配置多个网络。在**网络**字段中，您可以单击**添加网络**来添加任何 vSphere 中可用的网络。
 
 #### E. 启用磁盘 UUIDs
 
@@ -269,7 +263,7 @@ _注意，通过 ISO 创建 VM 时不支持使用 cloud-init 选项_
 
 #### H. 保存节点模板
 
-为此模板分配一个描述性的**名称**，然后点击**创建**。
+为此模板分配一个描述性的**名称**，然后单击**创建**。
 
 #### 节点模板配置参考
 
@@ -287,13 +281,13 @@ _注意，通过 ISO 创建 VM 时不支持使用 cloud-init 选项_
 
 1. 以管理员身份登录到 Rancher UI。
 2. 进入到**全局**中的**集群列表**页面。
-3. 点击**添加集群** 选择 **vSphere** 基础设施供应商。
+3. 单击**添加集群** 选择 **vSphere** 基础设施供应商。
 4. 填写 **集群名称**。
 5. 指定需要的**成员角色**
 
    通过**成员角色**来设置用户访问集群的权限。
 
-   - 点击**添加成员**将需要访问这个集群的用户添加到成员中。
+   - 单击**添加成员**将需要访问这个集群的用户添加到成员中。
    - 在**角色**下拉菜单中选择每个用户的权限。
 
 > **注意：**
@@ -325,7 +319,7 @@ _注意，通过 ISO 创建 VM 时不支持使用 cloud-init 选项_
 
 #### E. 创建集群
 
-点击 **创建** 开始创建虚拟机和 Kubernetes 集群。
+单击 **创建** 开始创建虚拟机和 Kubernetes 集群。
 
 结果：
 
@@ -345,7 +339,7 @@ _注意，通过 ISO 创建 VM 时不支持使用 cloud-init 选项_
 
    ![vsphere-node-driver-cloudprovider](/img/rancher/vsphere-node-driver-cloudprovider.png)
 
-1. 点击**编辑 YAML**
+1. 单击**编辑 YAML**
 1. 将以下结构内容插入到预先配置的集群 YAML 中。从 Rancher v2.3+ 开始，此结构必须放在`rancher_kubernetes_engine_config`下。在 v2.3 之前的版本中，必须将其定义为顶级字段。注意，`name` *必须*设置为`vsphere`。
 
    ```yaml

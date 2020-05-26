@@ -18,28 +18,26 @@ keywords:
   - 安装 Kubernetes
 ---
 
-使用 RKE 安装具有高可用 etcd 配置的 Kubernetes。
-
-> **注意事项:** 对于无法直接访问互联网的系统请参考[离线环境安装](/docs/installation/other-installation-methods/air-gap/_index)。
+本文讲述了使用 RKE 安装具有高可用 etcd 配置的 Kubernetes 的操作步骤。请检查您的网络环境是否可以直接访问互联网，如果您使用的局域网或离线环境，请参考[离线环境安装](/docs/installation/other-installation-methods/air-gap/_index)。
 
 ## 创建 `rancher-cluster.yml` 文件
 
-使用以下示例创建 `rancher-cluster.yml` 文件。将`节点`列表中的 IP 地址替换为您创建的 3 个节点的 IP 地址或 DNS 名称。
+使用以下 yaml 模板创建 `rancher-cluster.yml` 文件。将`nodes`列表中的`<IP_Address>` 替换为您创建的 3 个节点的 IP 地址或 DNS 名称。
 
-> **注意事项:** 如果您的节点具有公共和内部地址，建议设置`internal_address:`，以便 Kubernetes 将其用于集群内部通信。如果使用自身安全组或防火墙，则某些服务例如 AWS EC2 需要设置 `internal_address:`。
+> **注意事项:** 如果您的节点具有公网和内网地址，建议在`internal_address`一栏输入内网地址，以便 Kubernetes 将其用于集群内部通信。如果使用自身安全组或防火墙，则某些云服务供应商强制要求设置 `internal_address:`。
 
 ```yaml
 nodes:
-  - address: 165.227.114.63
-    internal_address: 172.16.22.12
+  - address: <IP_Address>
+    internal_address: <IP_Address>
     user: ubuntu
     role:[controlplane, worker, etcd]
-  - address: 165.227.116.167
-    internal_address: 172.16.32.37
+  - address: <IP_Address>
+    internal_address: <IP_Address>
     user: ubuntu
     role:[controlplane, worker, etcd]
-  - address: 165.227.127.226
-    internal_address: 172.16.42.73
+  - address: <IP_Address>
+    internal_address: <IP_Address>
     user: ubuntu
     role:[controlplane, worker, etcd]
 
@@ -52,37 +50,33 @@ services:
 
 ### RKE 节点通用选项
 
-| 选项               | 必选项 | 描述                                                   |
-| ------------------ | ------ | ------------------------------------------------------ |
-| `address`          | 是     | 公共 DNS 或 IP 地址                                    |
-| `user`             | 是     | 可以执行 docker 命令的用户                             |
-| `role`             | 是     | 给节点分配的 Kubernetes 角色列表                   |
-| `internal_address` | 否     | 给集群内部流量使用的私有 DNS 或者 IP 地址              |
-| `ssh_key_path`     | 否     | 用来登录节点的 SSH 私钥路径 (默认值为 `~/.ssh/id_rsa`) |
+| 选项               | 是否必选 | 描述                                                   |
+| :----------------- | :------- | :----------------------------------------------------- |
+| `address`          | 是       | 公共 DNS 或 IP 地址                                    |
+| `user`             | 是       | 可以执行 docker 命令的用户                             |
+| `role`             | 是       | 给节点分配的 Kubernetes 角色列表                       |
+| `internal_address` | 否       | 给集群内部流量使用的私有 DNS 或者 IP 地址              |
+| `ssh_key_path`     | 否       | 用来登录节点的 SSH 私钥路径 ，默认值为 `~/.ssh/id_rsa` |
 
-### 高级配置
+### RKE 节点高级配置
 
-RKE 有许多配置选项可用于自定义安装以适合您的特定环境。
-
-有关选项和功能的完整列表，请参阅[RKE 文档](https://rancher.com/docs/rke/latest/en/config-options/)。
-
-有关为大型 Rancher 安装而调整 etcd 集群的信息，请参见[etcd 配置文档](/docs/installation/options/etcd/_index)。
+RKE 有许多配置选项可用于自定义安装以适合您的特定环境。选项和功能的完整列表，请参考[RKE 文档](https://rancher.com/docs/rke/latest/en/config-options/)。为大型 Rancher 安装而调整 etcd 集群的信息，请参考[etcd 配置文档](/docs/installation/options/etcd/_index)。
 
 ## 运行 RKE
+
+输入以下命令，运行 RKE 节点。
 
 ```
 rke up --config ./rancher-cluster.yml
 ```
 
-正常运行结束会打印: `Finished building Kubernetes cluster successfully`。
+运行结束后返回 `Finished building Kubernetes cluster successfully`，表示正常运行。
 
 ## 测试您的集群
 
-RKE 应该已经创建了 `kube_config_rancher-cluster.yml` 文件. 该文件具有 `kubectl` and `helm` 访问集群的凭证。
+RKE 创建了 `kube_config_rancher-cluster.yml` 文件，该文件具有 `kubectl` and `helm` 访问集群的凭证。 如果您使用了不同的文件名例如 `rancher-cluster.yml`， 那么 kube config 文件将被命名为 `kube_config_<FILE_NAME>.yml`。
 
-> **注意事项:** 如果您使用了不同的文件名例如 `rancher-cluster.yml`， 那么 kube config 文件将被命名为 `kube_config_<FILE_NAME>.yml`。
-
-您可以拷贝这个文件到 `$HOME/.kube/config` 或者 如果使用多个 Kubernetes 集群，请将环境变量 `KUBECONFIG` 设置为 `kube_config_rancher-cluster.yml` 的路径。
+您可以拷贝这个文件到 `$HOME/.kube/config`路径下。如果您使用的多个 Kubernetes 集群环境，请将环境变量 `KUBECONFIG` 设置为 `kube_config_rancher-cluster.yml` 的路径。
 
 ```
 export KUBECONFIG=$(pwd)/kube_config_rancher-cluster.yml
@@ -101,14 +95,19 @@ NAME                          STATUS    ROLES                      AGE       VER
 
 ## 检查您的集群中 Pods 的健康情况
 
-检查所有必须的 pods 和容器是否处于健康状态。
-
-- Pods 是 `Running` 或者 `Completed` 状态。
-- `READY` 列显示 Pod 中 `STATUS` 列是 `Running` 状态容器的数量。
-- Pods 的 `STATUS` 字段是 `Completed` 代表运行一次的任务。这些 Pods 的 `READY`列应该是 `0/1`。
+输入以下命令，检查所有必须的 pods 和容器是否处于健康状态。
 
 ```
 kubectl get pods --all-namespaces
+```
+
+返回的信息如下：
+
+- `STATUS`一列显示是 `Running`表示集群正在运行，`Completed` 表示集群已经完成运行。这两种状态的集群都是健康的。
+- `READY` 一列显示 Pod 中 `STATUS` 列是 `Running` 状态容器的数量。
+- Pods 的 `STATUS` 字段是 `Completed` 代表运行一次的任务。这些 Pods 的 `READY`列应该是 `0/1`。
+
+```
 
 NAMESPACE       NAME                                      READY     STATUS      RESTARTS   AGE
 ingress-nginx   nginx-ingress-controller-tnsn4            1/1       Running     0          30s
@@ -128,10 +127,7 @@ kube-system     rke-network-plugin-deploy-job-6pbgj       0/1       Completed   
 
 ## 保存您的文件
 
-> **重要**
-> 以下文件也需要维护用于问题诊断和升级集群。
-
-将以下文件拷贝并保存在安全的位置:
+以下文件也需要维护用于问题诊断和升级集群，请将它们保存在安全的路径下。
 
 - `rancher-cluster.yml`: RKE 集群配置文件。
 - `kube_config_rancher-cluster.yml`: 集群的[Kubeconfig 文件](https://rancher.com/docs/rke/latest/en/kubeconfig/)， 此文件包含用于完全访问集群的凭据。
@@ -141,6 +137,8 @@ kube-system     rke-network-plugin-deploy-job-6pbgj       0/1       Completed   
 
 ## 遇到的问题或错误?
 
-参阅[问题排查](/docs/installation/options/helm2/kubernetes-rke/troubleshooting/_index)。
+如果您在安装 Kubernetes 的过程中遇到问题，请参考[问题排查](/docs/installation/options/helm2/kubernetes-rke/troubleshooting/_index)。
 
-## [下一步: 初始化 Helm (安装 tiller)](/docs/installation/options/helm2/helm-init/_index)
+## 后续操作
+
+[下一步: 初始化 Helm (安装 tiller)](/docs/installation/options/helm2/helm-init/_index)
