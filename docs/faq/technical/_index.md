@@ -94,7 +94,7 @@ L4 负载均衡器是通过`type: LoadBalancer`创建的。在 Kubernetes 里，
 - 高可用安装（RKE）：存储在 Rancher 所在的 Kubernete 集群的 etcd 中。
 - 高可用安装（K3s）：存储在 Rancher 使用的 MySQL 或其他数据库中。
 
-## 如何确定受支持的 Dokcer 版本？
+## 如何确定受支持的 Docker 版本？
 
 我们依从上游 Kubernetes 版本的已验证的 Docker 版本。已验证的 Docker 版本可以在[外部依赖](https://github.com/kubernetes/kubernetes/tree/master/CHANGELOG)中的 Kubernetes 发布 CHANGELOG.md 查看。
 
