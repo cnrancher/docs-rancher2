@@ -16,17 +16,13 @@ keywords:
   - RKE集群说明
 ---
 
-您可以让 Rancher 使用任何节点启动 Kubernetes 集群。Rancher 使用 [Rancher Kubernetes Engine](http://docs.rancher.com/docs/rke/latest/en/)（RKE）来部署 Kubernetes 集群，这是 Rancher 自己的轻量级 Kubernetes 安装程序。它可以在任何计算机上启动 Kubernetes，包括：
+Rancher 可以使用 RKE[Rancher Kubernetes Engine（简称 RKE，Rancher 的轻量级 Kubernetes 安装程序）](http://docs.rancher.com/docs/rke/latest/en/)在任何节点部署 Kubernetes 集群。它可以在裸金属服务器（BMS)、本地虚拟机、云服务商托管的虚拟机等机器上启动 Kubernete。
 
-- 裸金属服务器
-- 本地虚拟机
-- 由云服务商托管的虚拟机
+Rancher 可以在现有节点上安装 Kubernetes，也可以在云服务商中创建节点并在其上安装 Kubernetes。
 
-Rancher 可以在现有节点上安装 Kubernetes，也可以在云服务商中动态创建节点并在其上安装 Kubernetes。
+为了方便理解，我们把通 RKE 部署的 Kubernetes 集群称为“RKE 集群”，RKE 集群包括 Rancher 在 Windows 节点或其他现有自定义节点上启动的集群，以及 Rancher 在 Azure、Digital Ocean、EC2、阿里云 或 vSphere 等上使用新节点启动的集群。
 
-RKE 集群包括 Rancher 在 Windows 节点或其他现有自定义节点上启动的集群，以及 Rancher 在 Azure、Digital Ocean、EC2、阿里云 或 vSphere 等上使用新节点启动的集群。
-
-## 要求
+## 节点配置要求
 
 如果您使用 RKE 启动集群，您的节点必须满足下游集群中节点的[要求](/docs/cluster-provisioning/node-requirements/_index)。
 

@@ -17,11 +17,9 @@ keywords:
   - 功能介绍
 ---
 
-使用 Rancher 和 vSphere，您可以在本地体验云环境的操作。
+## 概述
 
-Rancher 可以在 vSphere 中创建节点并在其上安装 Kubernetes。在 vSphere 中创建 Kubernetes 集群时，Rancher 首先通过与 vCenter API 通信来创建指定数量的虚拟机。然后将 Kubernetes 安装在节点上。
-
-vSphere 集群可能由具有不同属性（例如内存或 vCPU 数量）的多组虚拟机组成。该分组允许对每个 Kubernetes 角色的节点大小进行细粒度的控制。
+您可以使用 Rancher 和 vSphere 在本地体验云环境的操作。Rancher 可以在 vSphere 中创建节点并在其上安装 Kubernetes。创建 Kubernetes 集群时，Rancher 首先通过与 vCenter API 通信来创建指定数量的虚拟机，然后将 Kubernetes 安装在节点上。vSphere 集群可能由具有不同属性（例如内存或 vCPU 数量）的多组虚拟机组成。该分组允许对每个 Kubernetes 角色的节点大小进行细粒度的控制。
 
 ## vSphere 增强
 
@@ -31,9 +29,9 @@ vSphere 集群可能由具有不同属性（例如内存或 vCPU 数量）的多
 
 _从 Rancher v2.3.0 开始可用_
 
-使用 Rancher 设置 vSphere 节点的最大优势之一是，它允许您在本地集群中利用 Rancher 的自我修复节点池，也称为[节点自动替换功能](/docs/cluster-provisioning/rke-clusters/node-pools/_index)。自我修复节点池旨在帮助您替换无状态应用程序的工作节点。当 Rancher 通过节点模板创建节点时，Rancher 可以自动替换无法访问的节点。
+自我修复节点池，也称为[节点自动替换功能](/docs/cluster-provisioning/rke-clusters/node-pools/_index)，是使用 Rancher 设置 vSphere 节点的最大优势。自我修复节点池可以帮助您替换无状态应用程序的工作节点，当您使用 Rancher 通过节点模板创建节点时，Rancher 可以自动替换无法访问的节点。
 
-> **重要：** 不建议在 master 节点或具有持久卷连接的节点的节点池上启用节点自动替换。当节点池中的节点失去与集群的连接时，其持久卷将被破坏，从而导致有状态应用程序丢失数据。
+> **重要：** 不建议在 master 节点或具有持久卷连接的节点的节点池上启用节点自动替换。当节点池中的节点失去与集群的连接时，其持久卷会被破坏，从而导致有状态应用程序丢失数据。
 
 ### 实例配置选项的动态获取
 

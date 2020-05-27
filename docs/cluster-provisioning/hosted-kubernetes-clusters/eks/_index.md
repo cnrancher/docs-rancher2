@@ -149,7 +149,7 @@ Rancher 需要访问您的 AWS 帐户，以便在 Amazon EKS 中创建和管理�
 
 - 您的集群创建成功并进入到**Provisioning**（启动中）的状态。Rancher 正在拉起您的集群。
 - 在集群状态变为**Active**（激活）状态后，您将可以开始访问您的集群。
-- 在**Active**的集群中，默认会有两个项目。`Default`项目（包括`default`命名空间）和`System`项目（包括`cattle-system`，`ingress-nginx`，`kube-public` 和 `kube-system`，如果这些命名空间存在的话）
+- 在**Active**的集群中，有两个默认项目：`Default`项目（包括`default`命名空间）和`System`项目（包括`cattle-system`、`ingress-nginx`、`kube-public` 和 `kube-system`）。
 
 ## 故障排查
 

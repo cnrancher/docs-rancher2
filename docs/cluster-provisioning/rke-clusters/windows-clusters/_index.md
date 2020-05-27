@@ -17,15 +17,29 @@ keywords:
   - 创建 Windows 集群
 ---
 
+## 概述
+
 _从 v2.3.0 开始支持_
 
 当使用 Rancher 初始化一个[自定义集群](/docs/cluster-provisioning/rke-clusters/custom-nodes/_index)时，Rancher 会在您的基础设施上，使用 RKE（Rancher Kubernetes Engine）进行 Kubernetes 集群初始化。
 
-您可以同时使用 Linux 以及 Windows 的节点组成您的集群。Windows 节点只能作为 `worker` 节点使用，Linux 则需要作为管理节点。
+## 使用限制
 
-您只能在启用了 Windows 支持的集群中添加 Windows 节点。Windows 支持只能适用于自定义集群并且 Kubernetes 版本为 1.15+，并且只能使用 Flannel 作为网络插件。不能在已创建的集群中启用 Windows 支持。
+使用 Windows 集群时，有如下限制：
 
-> Windows 集群比 Linux 集群有更多的先决条件。例如，Windows 节点必须有 50GB 的磁盘空间，并且需要保证满足所有以下的[节点要求](#节点要求)。
+- 同时使用 Linux 以及 Windows 的节点时，Windows 节点只能作为 `worker` 节点使用，Linux 则需要作为管理节点。
+
+- 您只能在启用了 Windows 支持的集群中添加 Windows 节点。
+
+- Windows 集群只能适用于自定义集群，并且 Kubernetes 版本不低于 v1.15。
+
+- 只能使用 Flannel 作为网络插件。
+
+- 不能在已创建的集群中启用 Windows 支持。
+
+- Windows 节点必须有 50GB 的磁盘空间，并且需要保证满足所有以下的[节点要求](#节点要求)。
+
+> Windows 集群比 Linux 集群有更多的使用限制。例如，Windows 节点必须有 50GB 的磁盘空间，并且需要保证满足所有以下的[节点要求](#节点要求)。
 
 有关 Kubernetes 中 Windows 节点支持，请参阅[Kubernetes Windows 支持](https://kubernetes.io/docs/setup/production-environment/windows/intro-windows-in-kubernetes/#supported-functionality-and-limitations)或者参考[在 Kubernetes 中调度 Windows 容器](https://kubernetes.io/docs/setup/production-environment/windows/user-guide-windows-containers/)。
 
@@ -57,33 +71,33 @@ _从 v2.3.0 开始支持_
 
 ### 网络要求
 
-在配置新集群之前，请确保已经安装了 Rancher。并且确保节点可以与 Rancher 通信，这是必需的。如果尚未安装 Rancher，请在继续本指南之前参考[安装文档](/docs/installation/_index)进行安装。
+在配置新集群之前，请确保已经安装了 Rancher。并且确保节点可以与 Rancher 通信。如果尚未安装 Rancher，请参考[安装文档](/docs/installation/_index)进行安装。
 
 Rancher 仅支持在 Windows 集群中使用 Flannel 作为网络插件。
 
-有两个网络模式：[**Host Gateway (L2bridge)**](https://github.com/coreos/flannel/blob/master/Documentation/backends.md#host-gw) 和 [**VXLAN (Overlay)**](https://github.com/coreos/flannel/blob/master/Documentation/backends.md#vxlan)。默认选项是 **VXLAN (Overlay)** 模式。
+您需要在[**Host Gateway (L2bridge)**](https://github.com/coreos/flannel/blob/master/Documentation/backends.md#host-gw) 和 [**VXLAN (Overlay)**](https://github.com/coreos/flannel/blob/master/Documentation/backends.md#vxlan)中选择一个作为 Rancher 的网络模式。
 
-对于 **Host Gateway (L2bridge)** 网络模式，最好对所有节点使用相同的第 2 层网络。否则，您需要为其配置路由规则。有关详细信息，请参阅[配置云托管的 VM 路由](/docs/cluster-provisioning/rke-clusters/windows-clusters/host-gateway-requirements/_index)，如果您使用的是亚马逊 EC2，Google GCE 或 Azure VM，还需要[禁用私有 IP 地址检查](/docs/cluster-provisioning/rke-clusters/windows-clusters/host-gateway-requirements/_index)。
+如果您选用**Host Gateway (L2bridge)** 网络模式，最好对所有节点使用相同的第 2 层网络。否则，您需要为其配置路由规则。有关详细信息，请参阅[配置云托管的 VM 路由](/docs/cluster-provisioning/rke-clusters/windows-clusters/host-gateway-requirements/_index)，如果您使用的是亚马逊 EC2，Google GCE 或 Azure VM，还需要[禁用私有 IP 地址检查](/docs/cluster-provisioning/rke-clusters/windows-clusters/host-gateway-requirements/_index)。
 
-对于 **VXLAN (Overlay)** 网络，必须安装[KB4489899](https://support.microsoft.com/en-us/help/4489899)修补程序。大多数云托管的 VM 已经具有此修补程序。
+**VXLAN (Overlay)** 模式是默认选项。如果您选用 **VXLAN (Overlay)** 网络，必须安装[KB4489899](https://support.microsoft.com/en-us/help/4489899)补丁，大多数云托管的虚拟机已经安装了这个补丁。
 
 ### 架构要求
 
 Kubernetes 集群管理节点(`etcd`和`controlplane`)必须在 Linux 节点上运行。
 
-Windows 集群中的工作负载通常部署在 Windows（`worker`）节点中。但是，您必须至少有一个 Linux `worker`节点才能运行 Rancher Cluster Agent，Metrics Server，DNS 和与 Ingress 相关的容器。
+Windows 集群中的工作负载通常部署在 Windows（`worker`）节点中。但是，您必须至少有一个 Linux `worker`节点才能运行 Rancher Cluster Agent、Metrics Server、DNS 和 Ingress 相关容器。
 
 下表中是一个由三个节点组成的集群，您可以添加其他 Linux 和 Windows 节点来扩展集群，实现冗余：
 
 | 节点   | 操作系统                                 | 集群角色                                                                                                                                   | 目的                                                           |
-| ------ | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------- |
+| :----- | :--------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------- |
 | Node 1 | Linux (推荐 Ubuntu Server 18.04)         | [Control Plane](/docs/cluster-provisioning/_index), [etcd](/docs/cluster-provisioning/_index), [Worker](/docs/cluster-provisioning/_index) | 管理 Kubernetes 集群                                           |
 | Node 2 | Linux (推荐 Ubuntu Server 18.04)         | [Worker](/docs/cluster-provisioning/_index)                                                                                                | 用来部署 Rancher Cluster Agent，Metrics server，DNS 和 Ingress |
 | Node 3 | Windows (Windows Server 1809 或以上版本) | [Worker](/docs/cluster-provisioning/_index)                                                                                                | 运行 Windows 容器                                              |
 
 ### 容器要求
 
-Windows 要求容器必须建立在与容器相同的 Windows Server 版本上。因此，必须在 Windows Server Core 1809 或更高版本上构建容器。如果您已经为早期的 Windows Server 核心版本构建了容器，则必须在 Windows Server Core 1809 或更高版本上重新构建它们。
+因为 Windows 要求容器必须建立在与容器相同的 Windows Server 版本上，所以您必须在 Windows Server Core 1809 或更高版本上构建容器。如果您已经为早期的 Windows Server 核心版本构建了容器，则必须在 Windows Server Core 1809 或更高版本上重新构建。
 
 ### Cloud Providers
 
@@ -112,14 +126,14 @@ Windows 要求容器必须建立在与容器相同的 Windows Server 版本上�
 - 虚拟化集群中的 VM
 - 裸金属服务器
 
-您将置备三个节点：
+您将配置三个节点：
 
 - 一个 Linux 节点，用于部署 Kubernetes 控制平面和`etcd`
 - 第二个 Linux 节点，它将是一个工作节点
 - Windows 节点，它将用来运行 Windows 容器。
 
 | 节点   | 操作系统                                          |
-| ------ | ------------------------------------------------- |
+| :----- | :------------------------------------------------ |
 | Node 1 | Linux (推荐 Ubuntu Server 18.04)                  |
 | Node 2 | Linux (推荐 Ubuntu Server 18.04)                  |
 | Node 3 | Windows (Windows Server Core Version 1809 或以上) |
@@ -146,7 +160,7 @@ Windows 要求容器必须建立在与容器相同的 Windows Server 版本上�
 
 1. 可选：启用 Windows 支持后，您将能够选择 Flannel 后端模式。有两个网络选项：[**Host Gateway (L2bridge)**](https://github.com/coreos/flannel/blob/master/Documentation/backends.md#host-gw) 和 [**VXLAN (Overlay)**](https://github.com/coreos/flannel/blob/master/Documentation/backends.md#vxlan)。默认选项是 **VXLAN (Overlay)** 模式。
 
-1. 点击 **下一步**.
+1. 单击 **下一步**.
 
 > **重要提示：** 对于 **Host Gateway (L2bridge)**网络，最好对所有节点使用相同的第 2 层网络。否则，您需要为其配置路由规则。有关详细信息，请参阅[配置云托管的 VM 路由](/docs/cluster-provisioning/rke-clusters/windows-clusters/host-gateway-requirements/_index)。如果您使用的是亚马逊 EC2，Google GCE 或 Azure VM，还需要[禁用私有 IP 地址检查](/docs/cluster-provisioning/rke-clusters/windows-clusters/host-gateway-requirements/_index)。
 
@@ -162,7 +176,7 @@ Windows 要求容器必须建立在与容器相同的 Windows Server 版本上�
 
 1. 在**节点操作系统**部分中，单击**Linux**。
 
-1. 在**节点角色**部分中，至少选择**etcd**和**Control Plane**。我们这里选择所有三个角色。
+1. 在**节点角色**部分中，至少选择**etcd**和**Control Plane**。选择所有角色。
 
 1. 可选：如果您单击**显示高级选项**，则可以自定义 [Rancher Agent](/docs/cluster-provisioning/rke-clusters/rancher-agents/_index) 和[节点标签](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)等。
 
@@ -205,7 +219,7 @@ Windows 要求容器必须建立在与容器相同的 Windows Server 版本上�
 > 对于添加到集群中的每个 Linux 节点，以下污点将添加到 Linux 节点。通过将此污点添加到 Linux Worker 节点，使得添加到 Windows 集群的所有工作负载都将自动调度到 Windows Worker 节点。如果要将工作负载专门安排到 Linux 工作节点上，则需要为这些工作负载添加 Toleration 或者指定某一台 Linux 主机。
 >
 > | Taint Key      | Taint Value | Taint Effect |
-> | -------------- | ----------- | ------------ |
+> | :------------- | :---------- | :----------- |
 > | `cattle.io/os` | `linux`     | `NoSchedule` |
 
 #### 添加 Windows 节点
@@ -224,7 +238,7 @@ Windows 要求容器必须建立在与容器相同的 Windows Server 版本上�
 
 1. 在**Rancher**中，单击**保存**。
 
-1. 可选：如果要向集群添加更多 Windows 节点，请重复这些说明。
+1. 可选：如果要向集群添加更多 Windows 节点，请重复上述步骤。
 
 **结果：** **Worker**角色已安装在 Windows 主机上，并且该节点向 Rancher 注册。该节点可能需要几分钟才能在您的集群中注册。您现在已经拥有来 Windows Kubernetes 集群。
 
@@ -273,7 +287,7 @@ Windows 要求容器必须建立在与容器相同的 Windows Server 版本上�
          namespace: kube-system
    ```
 
-1. 使用以下命令创建相关资源
+1. 使用以下命令创建相关资源。
 
    ```
    # kubectl create -f <MANIFEST>
