@@ -15,17 +15,17 @@ keywords:
   - 将现有集群导入 Rancher
 ---
 
-当管理一个导入的集群时，Rancher 将连接到一个已经设置好的 Kubernetes 集群。因此，Rancher 不提供 Kubernetes，而只设置 Rancher Agent 来与集群通信。
+管理导入的集群时，Rancher 将连接到一个已经设置好的 Kubernetes 集群，设置 Rancher Agent 与集群通信，不负责提供 Kubernetes。
 
-Rancher 的集群管理，基于角色的访问控制，策略管理和工作负载等功能在导入集群中可用。请注意，Rancher 中不能配置或扩展导入的集群。
+Rancher 的集群管理基于角色的访问控制策略，策略管理和工作负载等功能在导入集群中可用。请注意，Rancher 中不能配置或扩展导入的集群。
 
-对于除 K3s 集群外的所有导入的 Kubernetes 集群，必须在 Rancher 外部编辑集群的配置。例如您需要自己在 Rancher 外部修改 Kubernetes 组件的参数，升级 Kubernetes 版本以及添加删除节点。
+对于除 K3s 集群外的所有导入的 Kubernetes 集群，必须在 Rancher 外部编辑集群的配置，您需要自己在集群中修改 Kubernetes 组件的参数、升级 Kubernetes 版本以及添加或删除节点。
 
 Rancher v2.4 支持编辑导入的 K3s 集群，您可以在 Rancher UI 中编辑集群来升级 Kubernetes 的功能。
 
 ## 功能
 
-在将集群导入到 Rancher 以后，集群所有者可以：
+在将集群导入到 Rancher 以后，集群所有者可以执行以下操作：
 
 - 通过基于角色的访问控制[管理集群访问](/docs/admin-settings/rbac/cluster-project-roles/_index)。
 - 启用[监控](/docs/cluster-admin/tools/monitoring/_index)和[日志](/docs/cluster-admin/tools/logging/_index)
@@ -49,13 +49,11 @@ kubectl create clusterrolebinding cluster-admin-binding \
   --user [USER_ACCOUNT]
 ```
 
-在运行`kubectl`命令以导入集群之前。
-
 默认情况下，GKE 用户不会获得此权限，因此您需要在导入 GKE 集群之前运行该命令。要了解有关 GKE 基于角色的访问控制的详细信息，请单击[此处](https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control)。
 
-> 如果要导入 K3s 集群，请确保`cluster.yml`可读。默认情况下它是受保护，在导入集群时，您需要访问此文件，如果您在使用`root`用户导入集群，可以跳过此配置。有关详细信息，请参阅[配置 K3s 集群来允许导入到 Rancher 中](#配置-k3s-集群以允许导入到-rancher)
+> 如果要导入 K3s 集群，请确保`cluster.yml`是可读。默认情况下它是受保护，在导入集群时，您需要访问此文件，如果您在使用`root`用户导入集群，可以跳过此配置。有关详细信息，请参阅[配置 K3s 集群来允许导入到 Rancher 中](#配置-k3s-集群以允许导入到-rancher)
 
-## 导入一个集群
+## 导入非 K3s 集群
 
 1. 在 **集群** 页, 点击 **添加**。
 2. 选择 **导入**。
@@ -78,10 +76,10 @@ kubectl create clusterrolebinding cluster-admin-binding \
 
 - 您的集群创建成功并进入到**Pending**（等待中）的状态。Rancher 正在向您的集群部署资源。
 - 在集群状态变为**Active**（激活）状态后，您将可以开始访问您的集群。
-- 在**Active**的集群中，默认会有两个项目。`Default`项目（包括`default`命名空间）和`System`项目（包括`cattle-system`，`ingress-nginx`，`kube-public` 和 `kube-system`，如果这些命名空间存在的话）
+- 在**Active**的集群中，默认会有两个项目：`Default`项目（包括`default`命名空间）和`System`项目（包括`cattle-system`、`ingress-nginx`、`kube-public` 和 `kube-system`）。
 
-> **注意:**
-> 您不能重新导入当前在 Rancher 设置中处于活动状态的集群.
+> **注意：**
+> 您不能重新导入当前在 Rancher 设置中处于激活状态的集群.
 
 ## 导入 K3s 集群
 
@@ -93,8 +91,8 @@ _自 v2.4.0 起可用_
 
 导入 K3s 集群时，Rancher 会将其识别为 K3s，除了其他导入的集群支持的功能之外，Rancher UI 还提供以下功能：
 
-- 能够升级 K3s 版本
-- 能够配置在升级集群时，同时可以升级的最大节点数
+- 能够升级 K3s 版本。
+- 能够配置在升级集群时，同时可以升级的最大节点数。
 - 在主机详情页，能够查看（不能编辑）启动 K3s 集群时每个节点的 K3s 配置参数和环境变量。
 
 ### 升级 K3s 集群
@@ -198,8 +196,6 @@ kubectl get plans -A -o yaml
 - `taintSupport`
 
 可以在 Rancher API UI 中的`[Rancher Server URL]/v3/schemas/capabilities`查看所有能力及其定义。
-
-要注释导入的集群，
 
 1. 转到 Rancher 中的集群视图，然后选择**省略号>编辑**。
 1. 展开**标签和注释**部分。
