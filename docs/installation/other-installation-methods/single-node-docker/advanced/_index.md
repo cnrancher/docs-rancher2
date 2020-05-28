@@ -28,7 +28,7 @@ keywords:
 
 ## 自定义 CA 证书
 
-如果要配置 Rancher 使用的 CA 根证书，则应在启动 Rancher 容器，共享包含 CA 根证书的目录。
+如果要配置 Rancher 使用的 CA 根证书，则应在启动 Rancher 容器时挂载包含 CA 根证书的目录。
 
 使用命令示例来启动安装了私有 CA 证书的 Rancher 容器。
 
@@ -37,7 +37,7 @@ keywords:
 - 可以使用 `-e KEY = VALUE` 或 `--env KEY = VALUE` 将环境变量传递到 Rancher 容器。
 - 使用`-v host-source-directory:container-destination-directory`或`--volume host-source-directory:container-destination-directory`，可以在容器内挂载主机目录。
 
-以下示例是将主机上的`/host/certs`目录中的 CA 根证书在，挂载到 Rancher 容器中的`/container/certs`上。
+以下示例是将主机上的`/host/certs`目录中的 CA 根证书，挂载到 Rancher 容器中的`/container/certs`上。
 
 ```
 docker run -d --restart=unless-stopped \

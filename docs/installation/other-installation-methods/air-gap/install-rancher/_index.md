@@ -122,7 +122,7 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
    curl -L -o cert-manager/cert-manager-crd.yaml https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/deploy/manifests/00-crds.yaml
    ```
 
-1. 渲染 Rancher 模板，声明您选择的选项。使用下面的参考表替换每个占位符。需要将 Rancher 配置为在由 Rancher 启动 Kubernetes 集群或 Rancher 工具时，使用私有注册表。
+1. 渲染 Rancher 模板，声明您选择的选项。使用下面的参考表替换每个占位符。需要将 Rancher 配置为在由 Rancher 启动 Kubernetes 集群或 Rancher 工具时，使用私有镜像库。
 
    | 占位符                           | 描述                 |
    | -------------------------------- | -------------------- |
@@ -238,7 +238,7 @@ kubectl -n cattle-system apply -R -f ./rancher
 
 ## 单节点安装
 
-Docker 单节点安装适用于想要对 Rancher 进行`测试`的 Rancher 用户。您可以使用 `docker run` 命令在单个节点上安装 Rancher Server 组件，而不是在 Kubernetes 集群上运行。由于只有一个节点和一个 Docker 容器，因此，如果该节点发生故障，并且其他节点上没有可用的 Rancher 数据副本，您将丢失 Rancher Server 的所有数据。**重要提示：如果您按照 Docker 单节点安装指南安装 Rancher，则没有升级路径可将 Docker 单节点安装过渡到 Kubernetes 安装。**除了运行单节点安装，您还可以选择按照 Rancher 高可用安装指南，但只能使用一个节点来安装 Rancher 和 Kubernetes。之后，您可以扩展 Kubernetes 集群中的 etcd 节点，使其成为真正的高可用安装。
+Docker 单节点安装适用于想要对 Rancher 进行`测试`的 Rancher 用户。您可以使用 `docker run` 命令在单个节点上安装 Rancher Server 组件，而不是在 Kubernetes 集群上运行。由于只有一个节点和一个 Docker 容器，因此，如果该节点发生故障，并且其他节点上没有可用的 Rancher 数据副本，您将丢失 Rancher Server 的所有数据。**重要提示：如果您按照 Docker 单节点安装指南安装 Rancher，则没有升级路径可将 Docker 单节点安装过渡到 Kubernetes 安装。**除了运行单节点安装，您还可以选择按照 Rancher 高可用安装指南，但只使用一个节点来安装 Rancher 和 Kubernetes。之后，您可以扩展 Kubernetes 集群中的 etcd 节点，使其成为真正的高可用安装。
 
 为了安全起见，使用 Rancher 时需要 SSL。SSL 保护所有 Rancher 网络通信的安全，例如在您登录集群或与集群交互时。
 
