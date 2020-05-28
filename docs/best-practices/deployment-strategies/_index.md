@@ -15,13 +15,11 @@ keywords:
   - Rancher 部署策略
 ---
 
-有两种推荐的部署策略，每种方法都有其优缺点。哪种方法最适合您的场景，请阅读更多信息:
+本文提供了两种部署 Rancher 的策略，每种方法都有优缺点，请按照您的场景选择最适合的部署策略。
 
 ## 轴心方式拓扑
 
----
-
-在这个部署场景中，有一个 Rancher 控制平面来管理遍布全球的 Kubernetes 集群。控制平面将在一个高可用的 Kubernetes 集群上运行，但它将受到延迟的影响。
+在轴心部署场景中，由一个 Rancher 控制平面来管理遍布全球的 Kubernetes 集群。控制平面在一个高可用的 Kubernetes 集群上运行，但这种部署策略会受到延迟的影响。
 
 ![Hub and Spoke Deployment](/img/rancher/bpg/hub-and-spoke.png)
 
@@ -34,14 +32,11 @@ keywords:
 ### 缺点
 
 - 受制于网络延迟。
-- 如果控制平面失效，在恢复之前全球范围内无法新建集群。但是，每个 Kubernetes 集群可以继续单独管理。
+- 如果控制平面失效，在恢复之前全球范围内无法新建集群，但是每个 Kubernetes 集群可以继续单独管理。
 
 ## 区域性拓扑
 
----
-
-在区域部署模型中，控制平面被部署在靠近计算节点的地方。
-
+在区域部署模中，多个 Rancher 控制平面被部署在靠近计算节点的地方，不会受到延迟的影响。
 ![Regional Deployment](/img/rancher/bpg/regional.png)
 
 ### 优点
@@ -52,6 +47,6 @@ keywords:
 
 ### 缺点
 
-- 管理多个 Rancher 安装的开销。
+- 管理多个 Rancher 安装的开销较大。
 - 需要在多个界面中才能查看到全球所有的 Kubernetes 集群
 - 在 Rancher 中部署多集群应用时，需要在每个 Rancher Server 中重复这个过程。
