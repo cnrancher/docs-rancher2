@@ -89,7 +89,7 @@ stages:
           shellScript: go build
 ```
 
-### 步骤类型 - 构建并发布镜像
+## 步骤类型 - 构建并发布镜像
 
 _可用于 Rancher v2.1.0_
 
