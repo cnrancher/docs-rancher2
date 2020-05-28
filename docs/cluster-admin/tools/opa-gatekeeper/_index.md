@@ -1,5 +1,19 @@
 ---
 title: OPA Gatekeeper
+description: 为了确保一致性和合规性，每个组织都需要具有在其环境中定义和执行策略的能力。OPA（Open Policy Agent）是一种策略引擎，可对云原生环境进行基于策略的控制。Rancher 提供了在 Kubernetes 集群中启用 OPA Gatekeeper 的功能，并且还安装了一些内置策略定义，也称为约束模板。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 集群管理员指南
+  - 集群工具
+  - OPA Gatekeeper
 ---
 
 _自 v2.4.0 起可用_
@@ -91,6 +105,6 @@ OPA Gatekeeper 会定期对集群进行审核，以检查是否有任何现有�
 
 1. 导航到集群的仪表板视图
 1. 在左侧菜单上，展开集群菜单，然后单击**OPA Gatekeeper**。
-1. 点击 **省略号 > 禁用**。
+1. 单击 **省略号 > 禁用**。
 
 **结果：** 禁用 OPA Gatekeeper 后，所有约束模板和约束也将被删除。

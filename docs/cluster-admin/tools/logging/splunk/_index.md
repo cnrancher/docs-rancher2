@@ -1,8 +1,23 @@
 ---
 title: Splunk
+description: 如果您的组织使用Fluentd， 则可以配置 Rancher 向其发送 Kubernetes 日志。然后，您可以在 Fluentd 服务器中查看日志。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 集群管理员指南
+  - 集群工具
+  - 日志
+  - splunk
 ---
 
-如果您的组织使用 [Splunk](https://www.splunk.com/)，则可以配置 Rancher 向其发送 Kubernetes 日志。之后，您可以登录到 Splunk 服务器以查看日志。
+如果您的组织使用 [Splunk](https://www.splunk.com/)，则可以配置 Rancher 向其发送 Kubernetes 日志。您可以登录 Splunk 服务器，查看日志。
 
 > **前提：**
 >
@@ -31,7 +46,7 @@ title: Splunk
 
    - 您可以使用自签名证书，也可以使用证书颁发机构提供的证书。
 
-   - 您可以使用 openssl 命令生成自签名证书。例如：
+   - 或使用 openssl 命令生成自签名证书。例如：
 
      ```
      openssl req -x509 -newkey rsa:2048 -keyout myservice.key -out myservice.cert -days 365 -nodes -subj "/CN=myservice.example.com"
@@ -50,7 +65,7 @@ title: Splunk
 
 1. 点击**Search & Reporting**。**Indexed Events**的数量应在增加。
 
-1. 点击 Data Summary 选择 Sources 选项卡.
+1. 点击 Data Summary 选择 Sources 选项卡。
    ![View Logs](/img/rancher/splunk/splunk4.jpg)
 
 1. 要查看实际的日志，请选择您先前声明的数据源名字。
@@ -58,7 +73,7 @@ title: Splunk
 
 ### 故障排查
 
-您可以使用 curl 来查看 **HEC** 是否开启
+您可以使用 curl 来查看 **HEC** 是否开启：
 
 ```
 $ curl http://splunk-server:8088/services/collector/event \
