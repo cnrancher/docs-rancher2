@@ -15,11 +15,11 @@ keywords:
   - 最佳实践指南
 ---
 
-本节的目的是整合 Rancher 使用的最佳实践。这还包括对相关技术的建议，如 Kubernetes、Docker、容器等。目的是利用 Rancher 及其客户的操作经验来改进 Rancher 实施的结果。
+本节整合了 Rancher 使用技巧和建议，包括对相关技术如 Kubernetes、Docker、容器等的使用建议。
 
 使用左边的导航栏查找当前管理和部署 Rancher Server 的最佳实践。
 
-有关最佳实践的更多信息，您可以参考以下资源:
+有关最佳实践的更多信息，您可以参考以下资源：
 
 - [Rancher 文档](/docs/overview/_index)
   - [监控](/docs/cluster-admin/tools/monitoring/_index)

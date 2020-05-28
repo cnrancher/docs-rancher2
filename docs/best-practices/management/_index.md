@@ -15,7 +15,7 @@ keywords:
   - 关于规模，安全，可靠性的建议
 ---
 
-Rancher 允许您设置许多配置组合。有些配置更适合于开发和测试，而对于生产环境，还有其他一些最佳实践可以获得最大的可用性和容错能力。生产应该遵循以下最佳实践。
+Rancher 允许您设置许多配置组合，有些配置适用于开发和测试环境，另外一些配置适用于生产环境。对于生产环境而言，除了配置之外，还有其他一些规模、安全和可靠性的建议可以提升 Rancher 的可用性和容错能力。当您在生产环境使用 Rancher 时，应该遵循以下使用建议。
 
 ## 预防和处理问题的提示
 
@@ -23,21 +23,23 @@ Rancher 允许您设置许多配置组合。有些配置更适合于开发和测
 
 ### 在支持的 OS 和 Docker 版本上运行 Rancher
 
-Rancher 是基于容器的，可以在任何基于 linux 的操作系统上运行。但是，您应该只在[需求文档](/docs/installation/requirements/_index)中列出的操作系统以及支持的 Docker 版本上运行 Rancher。这些版本经过了最彻底的测试，可以得到 Rancher 支持团队的适当支持。
+Rancher 是基于容器的，可以在任何基于 linux 的操作系统上运行。但是，您应该只在[需求文档](/docs/installation/requirements/_index)中列出的操作系统以及支持的 Docker 版本上运行 Rancher。这些版本经过了最彻底的测试，可以得到 Rancher Support 团队的支持。
 
 ### 升级 Kubernetes 版本
 
-保持您的 Kubernetes 集群与最新的和受支持的版本保持同步。通常 Kubernetes 社区将支持当前版本和之前的三个小版本(例如: 1.14.x, 1.13.x, 1.12.x 和 1.11.x)。新版本发布后，之前的第四个支持版本达到 EOL(生命结束)状态，如果发现了安全问题并且没有可用的补丁，那么在 EOL 版本上运行可能会有风险。社区通常每个季度(每三个月)发布一些小版本。
+请确保您的 Kubernetes 集群与最新的和受支持的版本保持同步。通常 Kubernetes 社区将支持当前版本和之前的三个小版本。新版本发布后，之前的第四个支持版本达到 EOL（生命结束）状态，Kubernetes 不会为它提供后续的支持，如果在 EOL 版本中发现了安全问题并且没有可用的补丁，那么在此版本上运行 Kubernetes 可能会有风险。社区通常每个季度(每三个月)发布一些小版本。
 
-Rancher 的 SLA 不依赖于社区，但由于 Kubernetes 是一个社区驱动的软件，当您离社区支持的目标越来越远时，体验的质量就会下降。
+举个例子，当前 Kubernetes 支持的版本为 1.14.x、1.13.x、1.12.x 和 1.11.x。假设下一个季度 Kubernetes 发布了新版本，即 1.15.x，那么下一个季度 Kubernetes 支持的版本会变为 1.15.x、1.14.x、1.13.x 和 1.12.x，1.11.x 进入 EOL 状态，Kubernetes 不再继续支持。如果您此时恰好使用的是 1.11.x，建议您提前为版本更新做好准备。
+
+Rancher 的服务等级协议（SLA） 不依赖于社区，但由于 Kubernetes 是一个社区驱动的软件，当您使用的 Kubernetes 版本和社区支持的版本相差越来越大时，使用 Rancher 的体验就会不可避免地下降。
 
 ### 在测试中随机杀死 Pod
 
-运行 chaoskube 或类似的机制，在测试环境中随机杀死 Pod。这将测试您的基础设施的弹性和 Kubernetes 的自愈能力，但不建议在您的生产环境中运行它。
+您可以在开发环境、测试环境或预生产环境中运行 chaoskube 或类似的机制，随机杀死 Pod，测试您的基础设施的弹性和 Kubernetes 的自愈能力。在您产环境中杀死 pod 可能会触发现网故障，所以不建议在生产环境中测试基础设施的弹性和 Kubernetes 的自愈能力。
 
 ### 使用 Terraform 部署复杂的集群
 
-Rancher UI 的 `添加集群` 更适合于使用 Kubernetes 集群的初级阶段或简单的用例。但是，对于更复杂或要求更高的用例，建议使用 CLI/API 驱动的方法。我们建议使用 [Terraform](https://www.terraform.io/) 作为实现此功能的工具。当您使用带有版本控制和 CI/CD 环境的 Terraform 时，您可以在部署 Kubernetes 集群时获得高度的一致性和可靠性保证。这种方法还提供了最多的定制选项。
+Rancher UI 的 `添加集群` 功能适用于初学者，可以部署简单的集群和添加简单的用例。部署更复杂或添加要求更高的用例时，建议您使用 [Terraform](https://www.terraform.io/) 。当您使用带有版本控制和 CI/CD 环境的 Terraform 时，您可以在部署 Kubernetes 集群时获得高度的一致性和可靠性保证。这种方法还提供了多种定制选项。
 
 Rancher 维护的 [Terraform Provider](https://rancher.com/blog/2019/rancher-2-terraform-provider/) 用于部署 Rancher 2.x 中的集群，它被称为[Rancher2 Provider](https://www.terraform.io/docs/providers/rancher2/index.html)。
 
@@ -47,7 +49,7 @@ Rancher 维护的 [Terraform Provider](https://rancher.com/blog/2019/rancher-2-t
 
 ### 更新集群证书
 
-您组织中的多个人应为续订证书设置日历提醒。考虑提前两周到一个月更新证书。如果要跟踪多个证书，请考虑使用监控和告警机制来跟踪证书到期。
+您应为续订证书设置日历提醒，提前两周到一个月更新证书。如果要跟踪多个证书，请考虑使用监控和告警机制来跟踪证书到期的状况。
 
 由 Rancher 提供的 Kubernetes 集群将使用在十年内到期的证书。通过其他方式配置的集群的到期时间可能更长或更短。
 
@@ -55,7 +57,7 @@ Rancher 维护的 [Terraform Provider](https://rancher.com/blog/2019/rancher-2-t
 
 ### 集群启用循环快照
 
-确保启用 etcd 循环快照， 将快照保持时间延长到满足业务需求的一段时间。在发生灾难性故障或数据删除时，这可能是您进行恢复的惟一途径。有关配置快照的详细信息，请参阅 [RKE 文档](https://rancher.com/docs/rke/latest/en/etcd-snapshots/) 或者 [Rancher 备份](/docs/backups/_index)。
+确保启用 etcd 循环快照， 将快照保持时间延长到满足业务需求的一段时间。在发生灾难性故障或数据删除时，这是您进行恢复的唯一途径。有关配置快照的详细信息，请参阅 [RKE 文档](https://rancher.com/docs/rke/latest/en/etcd-snapshots/) 或者 [Rancher 备份](/docs/backups/_index)。
 
 ### Rancher 部署 Kubernetes 集群
 
@@ -69,7 +71,7 @@ Rancher 维护的 [Terraform Provider](https://rancher.com/blog/2019/rancher-2-t
 
 确保您在生产环境中使用 `stable` 版本，可以在测试、开发或演示环境中使用 beta、rc 和`latest`版本来尝试新功能特性。一些 bug 修复和大多数功能都没有移植到旧版本中，所以在大版本发布时，例如 2.1.x 到 2.2 x，应该考虑进行升级。
 
-请记住，Rancher 也有 EOL。在一段时间后，我们会终止对旧版本的支持，所以您需要通过升级来更新补丁或者功能。
+请记住，Rancher 的每一个版本都有生命周期，它们都会有 EOL，在一段时间后，我们会终止对旧版本的支持，所以您需要通过版本升级更新补丁或者功能。
 
 有关 Rancher 产品生命周期的更多细节，请参考[技术支持条款](https://rancher.com/support-maintenance-terms/)。
 
@@ -83,7 +85,7 @@ Kubernetes 集群最好使用低延迟网络。对于 control plane 组件和 et
 
 ### 允许 Rancher 直接与 Kubernetes 集群通信
 
-避免 Rancher Server 和 Kubernetes 集群之间使用代理或负载均衡器。由于 Rancher 维持的是长生命周期的 web sockets 连接，这些中间件可能会干扰连接的生命周期，因为它们通常没有考虑到这个用例。
+避免 Rancher Server 和 Kubernetes 集群之间使用代理或负载均衡器。由于 Rancher 维持的是长生命周期的 websockets 连接，这些中间件可能会干扰连接的生命周期，因为它们通常没有考虑到这个用例。
 
 ## 关于规模和可靠性的提示
 
@@ -91,11 +93,11 @@ Kubernetes 集群最好使用低延迟网络。对于 control plane 组件和 et
 
 ### 每个主机使用一个 Kubernetes 角色
 
-将 etcd、control plane 和 worker 角色分离到不同的主机上。不要将多个角色分配给同一台主机，如 control plane 和 worker 角色在一起，这将为您提供最大的可扩展性。
+将 etcd、control plane 和 worker 角色分配到不同的主机上，这将为您提供最大的可扩展性。不要将多个角色分配给同一台主机。
 
 ### 在虚拟机上运行 control plane 和 etcd
 
-在虚拟机上运行 etcd 和 control plane 节点，如果将来需要，您可以轻松地扩展 CPU 和内存。
+在虚拟机上运行 etcd 和 control plane 节点，如果将来需要扩展，您可以轻松地调整 CPU 和内存。
 
 ### 至少使用三个 etcd 节点
 
@@ -111,22 +113,22 @@ Kubernetes 集群最好使用低延迟网络。对于 control plane 组件和 et
 
 ## 安全提示
 
-下面是一些提高 Rancher 安全的基本技巧。有关保护集群的更详细信息，请参考以下参考资料:
+下面是一些提高 Rancher 安全的基本技巧。有关保护集群的更详细信息，请参考以下参考资料：
 
 - Rancher 的[Kubernetes 安全加固指南](/docs/security/_index)
 - [Kubernetes 安全最佳实践](https://rancher.com/blog/2019/2019-01-17-101-more-kubernetes-security-best-practices/)
 
 ### 更新 Rancher 安全补丁
 
-让您的 Rancher 安装最新的补丁。补丁更新包含重要的软件补丁，有时还包含安全补丁。当带有安全补丁的补丁发布时，持有 Rancher 许可证的客户将收到电子邮件通知。这些更新也公布在 Rancher 的[论坛](https://forums.rancher.com/)。
+让您的 Rancher 安装最新的补丁。补丁更新包含重要的软件补丁和含安全补丁。当带有安全补丁的补丁发布时，持有 Rancher 许可证的客户将收到电子邮件通知，提醒客户安装补丁。这些更新也会在 Rancher 的[论坛](https://forums.rancher.com/)发布，您也可以通过 Rancher 论坛获取最新的补丁信息。
 
 ### 直接向 Rancher 报告安全问题
 
-如果您认为您已经发现了 Rancher 的安全相关问题，请立即与 Rancher 团队进行沟通(security@rancher.com)。在 Twitter、Rancher Slack、GitHub 等公共论坛上发布安全问题可能会危及所有 Rancher 客户的安全。安全补丁通常具有较高的优先级，并尽可能快地发布。
+如果您发现了 Rancher 的安全相关问题，请立即与 Rancher 团队进行沟通（电子邮箱地址：security@rancher.com）。在 Twitter、Rancher Slack、GitHub 等公共论坛上发布安全问题可能会危及所有 Rancher 客户的安全。安全补丁通常具有较高的优先级，Rancher 会尽快发布该安全补丁。
 
 ### 一次只升级一个组件
 
-除了 Rancher 软件更新之外，还要密切监视相关软件(如 Docker、Linux 和工作负载使用的任何库)的安全修复。对于生产环境，请尝试避免在单个维护窗口期间升级太多实体。升级多个组件在发生故障时很难从根本上解决问题。在业务需求允许的情况下，一次升级一个组件。
+除了 Rancher 软件更新之外，还要密切监视相关软件（如 Docker、Linux 和工作负载使用的任何库）的安全修复。对于生产环境，请尝试避免在单个维护窗口期间升级太多实体。升级多个组件在发生故障时很难定位和解决问题。在业务需求允许的情况下，一次只升级一个组件。
 
 ## 关于多租户集群的提示
 
@@ -136,11 +138,11 @@ Kubernetes 集群最好使用低延迟网络。对于 control plane 组件和 et
 
 ### 项目隔离
 
-使用 Rancher 的项目隔离在项目之间自动生成网络策略(命名空间集)，这进一步保护了工作负载免受干扰。
+使用 Rancher 的项目隔离在项目之间自动生成网络策略（命名空间集），这进一步保护了工作负载免受干扰。
 
 ### 资源限制
 
-为集群中的每个应用部署强制使用资源限制定义。这不仅保护了部署的所有者，还保护了邻近的资源不受其他租户的影响。请记住，命名空间不会在节点级别隔离，因此节点上资源的过度消耗会影响其他命名空间部署。可以编写 Admission controllers 来要求定义资源限制。或者使用 Rancher 2.4 的新功能 OPA 来进行限制。
+为集群中的每个应用部署强制使用资源限制定义。这不仅保护了部署的所有者，还保护了邻近的资源不受其他租户的影响。命名空间不会在节点级别隔离，因此过度消耗的节点上资源会影响其他命名空间部署。可以编写 Admission controllers 来要求定义资源限制。或者使用 Rancher 2.4 的新功能 OPA 来进行限制。
 
 ### 资源预留
 
@@ -160,7 +162,7 @@ Kubernetes 的升级并非没有风险，预测升级结果的最佳方法是在
 
 ### 资源效率
 
-可以使用不同程度的冗余来构建集群。在对正常运行时间期望较低的一类服务中，可以通过构建没有冗余 Kubernetes 控制组件的集群来节约资源和成本。这种方法还可以释放更多的预算/资源来增加生产级别的冗余。
+可以使用不同程度的冗余来构建集群。在对正常运行时间期望较低的一类服务中，可以通过构建没有冗余 Kubernetes 控制组件的集群来节约资源和成本。这种方法还可以释放更多的预算和资源来增加生产级别的冗余。
 
 ## 网络安全
 
