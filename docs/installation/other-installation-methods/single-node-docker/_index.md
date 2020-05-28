@@ -50,7 +50,7 @@ keywords:
 
 如果要在不涉及身份验证的开发或测试环境中安装 Rancher，请使用其生成的自签名证书安装 Rancher。此安装选项省去了自己生成证书的麻烦。
 
-登录到 Linux 主机，然后运行下面这个非常简洁安装命令。
+登录到 Linux 主机，然后运行下面这个非常简洁的安装命令。
 
 :::important 重要
 在使用单节点安装时，Rancher Server 的数据默认保存在容器里。这意味着，在 Rancher Server 容器被删除时，Rancher Server 的数据将会丢失。您可以通过添加 `-v` 参数以挂载目录的方式将数据保存在 Rancher Server 所在的主机上。详情请参阅 [Rancher 单节点数据持久化](/docs/installation/other-installation-methods/single-node-docker/advanced/_index#persist-data)。
@@ -70,7 +70,7 @@ docker run -d --restart=unless-stopped \
 > 使用 [OpenSSL](https://www.openssl.org/) 或您选择的其他方法创建自签名证书。
 >
 > - 证书文件必须为 [PEM 格式](/docs/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
-> - 在您的证书文件中，包括链中的所有中间证书。您需要对您的证书进行排序，把您的证书放在最签名，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
+> - 在您的证书文件中，需要包含证书链中的所有中间证书。您需要对您的证书进行排序，把您的证书放在最前面，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
 
 创建证书后，运行下面的 Docker 命令安装 Rancher。使用该 `-v` 标志并提供证书的路径，以将其挂载到容器中。
 
@@ -101,7 +101,7 @@ docker run -d --restart=unless-stopped \
 > **先决条件：**
 >
 > - 证书文件必须为 [PEM 格式](/docs/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
-> - 在您的证书文件中，包括链中的所有中间证书。您需要对您的证书进行排序，把您的证书放在最签名，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
+> - 在您的证书文件中，需要包含证书链中的所有中间证书。您需要对您的证书进行排序，把您的证书放在最前面，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
 
 获得证书后，运行下面的 Docker 命令。
 
