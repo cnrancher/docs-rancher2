@@ -19,23 +19,23 @@ keywords:
 
 在本节中，您将在离线环境中为 Rancher Server 配置基础设施。您还将配置一个私有 Docker 镜像仓库，Rancher 节点必须可以使用这个镜像仓库。
 
-离线环境是指在没有外网的环境，或在防火墙后安装 Rancher Server 的环境。
+离线环境是指在没有外网访问的环境，或在防火墙后安装 Rancher Server 的环境。
 
-基础设施取决于您是否要在 K3s Kubernetes 集群，RKE Kubernetes 集群或单个 Docker 容器上安装 Rancher。有关每个安装选项的更多信息，请参考[本页](/docs/installation/_index)。
+基础设施取决于您是否要在 K3s Kubernetes 集群、RKE Kubernetes 集群或单个 Docker 容器上安装 Rancher。有关每个安装选项的更多信息，请参考[本页](/docs/installation/_index)。
 
 ## K3s 高可用集群
 
 在 K3s 集群中安装 Rancher 高可用，我们建议为高可用安装配置以下基础设施：
 
-- **2 个 Linux 节点**，通常是虚拟机，您可以自行选择的基础设施提供商，例如 Amazon EC2，阿里云，腾讯云或者 vShpere 等。
+- **2 个 Linux 节点**，通常是虚拟机，您可以自行选择的基础设施提供商，例如 Amazon EC2、阿里云、腾讯云或者 vShpere 等。
 - **1 个外置数据库**，用于存储集群数据。我们支持 PostgreSQL，MySQL 和 etcd。
 - **1 个负载均衡器**，用于将流量转发到这两个节点。
-- **一条 DNS 记录**，用于将 URL 指向负载均衡器。这将成为 Rancher Server 的 URL，下游集群需要可以访问到这个地址。
+- **1 条 DNS 记录**，用于将 URL 指向负载均衡器。这将成为 Rancher Server 的 URL，下游集群需要可以访问到这个地址。
 - **私有 Docker 镜像仓库**，用于为您的节点分发 Docker 镜像。
 
 ### 1、配置 Linux 节点
 
-这些主机将与 Internet 断开连接，但需要能够与您的私有镜像仓库连接。
+这些主机可以与 Internet 断开连接，但需要能够与您的私有镜像仓库连接。
 
 确保您的节点满足 [OS，Docker，硬件和网络](/docs/installation/requirements/_index)的常规安装要求。
 
@@ -43,7 +43,7 @@ keywords:
 
 ### 2、配置外部数据库
 
-支持使用除 etcd 以外的数据库来运行 Kubernetes 的能力使 K3s 与其他 Kubernetes 发行版区分开来。该功能为 Kubernetes 运维人员供了灵活性。您可以选择最适合您的实际情况的数据库。
+支持使用 etcd 以外的数据库来运行 Kubernetes 的能力使 K3s 与其他 Kubernetes 发行版区分开来。该功能为 Kubernetes 运维人员供了灵活性。您可以选择最适合您的实际情况的数据库。
 
 对于 K3s 高可用安装，您将需要配置以下外部数据库之一：
 
@@ -68,7 +68,7 @@ keywords:
 对于实现，请考虑是否要使用 4 层或 7 层负载均衡器：
 
 - **4 层负载均衡器** 是两种选择中相对简单的一种，它将 TCP 流量转发到您到节点。我们建议使用 4 层负载均衡器，将流量从 TCP / 80 端口和 TCP / 443 端口转发到 Rancher 管理面的集群节点上。集群上的 Ingress 控制器会将 HTTP 流量重定向到 HTTPS，并在 TCP / 443 端口上终止 SSL / TLS。Ingress 控制器会将流量转发到 Rancher Server Pod 的 TCP / 443 端口。
-- **7 层负载均衡器** 相对有些复杂，但可以提供您可能需要的功能。例如，与 Rancher 本身进行 TLS 终止相反，7 层负载均衡器能够在负载均衡器处处理 TLS 终止。如果要在基础设施中进行 TLS 终止，7 层负载均衡可能会很有用。7 层负载均衡还可以为您的负载均衡器提供基于 HTTP 属性（例如 cookie 等）做出决策的能力，而 4 层负载均衡器提供这种功能。如果决定在 7 层负载均衡器上终止 SSL / TLS 流量，则在安装 Rancher 时（后续步骤）需要使用`--set tls=external`选项。有关更多信息，请参阅[Rancher Helm Chart 选项](/docs/installation/options/chart-options/_index)。
+- **7 层负载均衡器** 相对有些复杂，但可以提供您可能需要的功能。例如，与 Rancher 本身进行 TLS 终止相反，7 层负载均衡器能够在负载均衡器处处理 TLS 终止。如果要在基础设施中进行 TLS 终止，7 层负载均衡可能会很有用。7 层负载均衡还可以为您的负载均衡器提供基于 HTTP 属性（例如 cookie 等）做出决策的能力，而 4 层负载均衡器不提供这种功能。如果决定在 7 层负载均衡器上终止 SSL / TLS 流量，则在安装 Rancher 时（后续步骤）需要使用`--set tls=external`选项。有关更多信息，请参阅[Rancher Helm Chart 选项](/docs/installation/options/chart-options/_index)。
 
 有关如何设置 NGINX 负载均衡器的示例，请参考[本页](/docs/installation/options/nginx/_index)。
 
@@ -82,7 +82,7 @@ keywords:
 
 配置完负载均衡器后，您将需要创建 DNS 记录，以将流量发送到该负载均衡器。
 
-根据您的环境，可以是指向负载均衡器 IP 的 A 记录，也可以是指向负载均衡器主机名的 CNAME。无论哪种情况，请确保该记录是您要 Rancher 进行响应的主机名。
+根据您的环境，DNS 记录可以是指向负载均衡器 IP 的 A 记录，也可以是指向负载均衡器主机名的 CNAME。无论哪种情况，请确保该记录是您要 Rancher 进行响应的主机名。
 
 在安装 Rancher 时（后续步骤），您需要指定此主机名，并且在以后也无法更改它。确保您的决定是最终决定。
 
@@ -100,9 +100,9 @@ Rancher 支持使用私有镜像仓库进行离线安装。您必须有自己的
 
 在 RKE 集群中安装 Rancher 高可用，我们建议为高可用安装配置以下基础设施：
 
-- **3 个 Linux 节点**，通常是虚拟机，您可以自行选择的基础设施提供商，例如 Amazon EC2，阿里云，腾讯云或者 vShpere。
+- **3 个 Linux 节点**，通常是虚拟机，您可以自行选择的基础设施提供商，例如 Amazon EC2、阿里云、腾讯云或者 vShpere。
 - **1 个负载均衡器**，用于将流量转发到这三个节点。
-- **一条 DNS 记录**，用于将 URL 指向负载均衡器。这将成为 Rancher Server 的 URL，下游集群需要可以访问到这个地址。
+- **1 条 DNS 记录**，用于将 URL 指向负载均衡器。这将成为 Rancher Server 的 URL，下游集群需要可以访问到这个地址。
 - **私有 Docker 镜像仓库**，用于为您的节点分发 Docker 镜像。
 
 您可以将这些服务器放在不同的可用区里，但这些节点必须位于相同的区域/数据中心。
@@ -115,7 +115,7 @@ etcd 数据库需要奇数个节点，因此它始终可以选举出被大多数
 
 ### 1、配置 Linux 节点
 
-这些主机将与 Internet 断开连接，但需要能够与您的私有镜像仓库连接。
+这些主机可以与 Internet 断开连接，但需要能够与您的私有镜像仓库连接。
 
 确保您的节点满足 [OS，Docker，硬件和网络](/docs/installation/requirements/_index)的常规安装要求。
 
@@ -146,7 +146,7 @@ etcd 数据库需要奇数个节点，因此它始终可以选举出被大多数
 
 配置完负载均衡器后，您将需要创建 DNS 记录，以将流量发送到该负载均衡器。
 
-根据您的环境，可以是指向负载均衡器 IP 的 A 记录，也可以是指向负载均衡器主机名的 CNAME。无论哪种情况，请确保该记录是您要 Rancher 进行响应的主机名。
+根据您的环境，DNS 记录可以是指向负载均衡器 IP 的 A 记录，也可以是指向负载均衡器主机名的 CNAME。无论哪种情况，请确保该记录是您要 Rancher 进行响应的主机名。
 
 在安装 Rancher 时（后续步骤），您需要指定此主机名，并且在以后也无法更改它。确保您的决定是最终决定。
 
@@ -168,7 +168,7 @@ Rancher 支持使用私有镜像仓库进行离线安装。您必须有自己的
 
 ### 1、配置 Linux 节点
 
-这些主机将与 Internet 断开连接，但需要能够与您的私有镜像仓库连接。
+这些主机可以与 Internet 断开连接，但需要能够与您的私有镜像仓库连接。
 
 确保您的节点满足 [OS，Docker，硬件和网络](/docs/installation/requirements/_index)的常规安装要求。
 

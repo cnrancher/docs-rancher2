@@ -1,13 +1,28 @@
 ---
 title: Prometheus 参数
+description: 在配置 Prometheus集群监控或项目监控时，有以下的可配置项。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 集群管理员指南
+  - 集群工具
+  - 监控
+  - Prometheus 参数
 ---
 
 _自 v2.2.0 起可用_
 
-在配置[集群监控](/docs/cluster-admin/tools/monitoring/_index)或[项目监控](/docs/project-admin/tools/monitoring/_index)时，有以下的可配置项：
+在配置 Prometheus[集群监控](/docs/cluster-admin/tools/monitoring/_index)或[项目监控](/docs/project-admin/tools/monitoring/_index)时，有以下的可配置项：
 
 | 选项                                                                                                                             | 描述                                                                                                                                                                                                                                                                                                 |
-| -------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| :------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 数据留存                                                                                                                         | 设定 Prometheus 留存监控数据的时间。                                                                                                                                                                                                                                                                 |
 | 激活 Node Exporter                                                                                                               | 是否部署 Node Exporter。                                                                                                                                                                                                                                                                             |
 | Node Exporter 主机端口                                                                                                           | 设定 Node Exporter 主机端口，用于暴露主机相关的指标。如果部署 Node Exporter，则为必填项。                                                                                                                                                                                                            |
@@ -22,9 +37,9 @@ _自 v2.2.0 起可用_
 
 ## Node Exporter
 
-[Node Exporter](https://github.com/prometheus/node_exporter/blob/master/README.md) 是一款流行且开源的 exporter，用于暴露主机硬件和类 Unix 内核操作系统的指标，它旨在监视主机系统。但是，完全在容器内运行 Node Exporter 时，仍然存在一些问题，所以为了获得实际的网络指标，我们必须以`hostNetwork`模式部署 Node Exporter。
+[Node Exporter](https://github.com/prometheus/node_exporter/blob/master/README.md) 是一款开源的 exporter，用于监视主机系统暴露主机硬件和类 Unix 内核操作系统的指标。但是，完全在容器内运行 Node Exporter 时，仍然存在一些问题，所以为了获得实际的网络指标，我们必须以`hostNetwork`模式部署 Node Exporter。
 
-在配置 Prometheus 并启用 Node Exporter 时，请在 **Node Exporter 主机端口**中输入一个与现有应用不会产生冲突的端口号。所填选的端口号必须是打开的（允许内网访问即可），以允许 Prometheus Pod 与 Node Exporter 进行通讯。
+在配置 Prometheus 并启用 Node Exporter 时，请在 **Node Exporter 主机端口**中输入一个与现有应用不会产生冲突的端口号。所填选的端口号必须是打开的（允许内网访问即可），允许 Prometheus Pod 与 Node Exporter 进行通讯。
 
 > **警告：** 为了能让 Prometheus 刮取 Node Exporter 暴露的指标，在启动集群监控后，必须打开 **Node Exporter 主机端口**的防火墙以支持**内网**访问。默认是使用`9796`作为 Node Exporter 的主机端口。
 
@@ -32,6 +47,6 @@ _自 v2.2.0 起可用_
 
 > **先决条件：** 配置一个或多个[存储类](/docs/cluster-admin/volumes-and-storage/_index)来作为 Prometheus 或者 Grafana 的[持久化存储](/docs/cluster-admin/volumes-and-storage/_index)。
 
-默认情况下，启动集群监控或者项目监控，Prometheus 只会把监控数据临时存储在自己的 Pod 里面。当 Prometheus 或者 Grafana 意外宕掉后，您将面临所有监控数据丢失的问题。因此，Rancher 推荐使用外部持久化存储，在 Prometheus 或者 Grafana 恢复后，之前所有的监控数据不会有任何的损失。
+默认情况下，启动集群监控或者项目监控，Prometheus 只会把监控数据临时存储在自己的 Pod 里面。当 Prometheus 或者 Grafana 意外宕机后，您将面临所有监控数据丢失的问题。因此，Rancher 推荐使用外部持久化存储，在 Prometheus 或者 Grafana 恢复后，之前所有的监控数据不会有任何的损失。
 
 在配置 Prometheus 或者 Grafana 使用持久化存储时，请指定持久卷的大小以及选择对应的[存储类](/docs/cluster-admin/volumes-and-storage/_index)。

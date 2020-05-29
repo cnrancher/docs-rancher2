@@ -1,14 +1,29 @@
 ---
 title: Fluentd
+description: 如果您的组织使用Fluentd， 则可以配置 Rancher 向其发送 Kubernetes 日志。然后，您可以在 Fluentd 服务器中查看日志。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 集群管理员指南
+  - 集群工具
+  - 日志
+  - fluentd
 ---
 
-如果您的组织使用 [Fluentd](https://www.fluentd.org/)， 则可以配置 Rancher 向其发送 Kubernetes 日志。然后，您可以在 Fluentd 服务器中查看日志。
+如果您的组织使用 [Fluentd](https://www.fluentd.org/)， 则可以配置 Rancher 向其发送 Kubernetes 日志。完成配置后，您可以在 Fluentd 服务器中查看日志。
 
 > **前提：** 配置 Fluentd 接收日志。有关详细信息，请参见 [Fluentd 文档](https://docs.fluentd.org/v1.0/articles/in_forward)。
 
 ### Fluentd 配置
 
-您可以添加多个 Fluentd 服务器。如果要添加其他 Fluentd 服务器，请单击**添加 Fluentd 服务器**。对于每个 Fluentd 服务器，请完成配置信息：
+您可以添加多个 Fluentd 服务器。如果要添加其他 Fluentd 服务器，请单击**添加 Fluentd 服务器**。请参考以下步骤，输入每个 Fluentd 服务器的配置信息：
 
 1. 在**访问地址**字段中，输入 Fluentd 实例的地址和端口，例如 `http://Fluentd-server:24224`.
 

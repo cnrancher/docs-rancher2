@@ -19,7 +19,7 @@ keywords:
 
 本节介绍如何配置私有镜像仓库，以便在安装 Rancher 时，Rancher 可以从此私有镜像仓库中拉取所需的镜像。
 
-默认情况下，Rancher 中所有用于[创建 Kubernetes 集群](/docs/cluster-provisioning/_index)或运行任何[工具](/docs/cluster-admin/tools/_index)的镜像都从 Docker Hub 中拉取，如： 监控，日志，告警，流水线等镜像。在离线环境下安装 Rancher，您需要一个私有镜像库，这个私有镜像库应该位于 Rancher 中的节点能访问的位置上。之后您需要载入所有镜像到这个私有镜像库里。
+默认情况下，Rancher 中所有用于[创建 Kubernetes 集群](/docs/cluster-provisioning/_index)或运行任何[工具](/docs/cluster-admin/tools/_index)的镜像都从 Docker Hub 中拉取，如： 监控、日志、告警、流水线等镜像。在离线环境下安装 Rancher，您需要一个私有镜像库，这个私有镜像库应该位于 Rancher 中的节点能访问的位置上。之后您需要载入所有镜像到这个私有镜像库里。
 
 对于高可用安装和单节点安装，同步镜像到私有镜像仓库的过程是相同的。
 
@@ -29,7 +29,7 @@ keywords:
 
 ## 集群中仅有 Linux 节点
 
-对于只用来创建仅有 Linux 节点的集群的 Rancher Server，请按以下步骤推送镜像到私有镜像库。
+对于创建仅有 Linux 节点的集群的 Rancher Server，请按以下步骤推送镜像到私有镜像库。
 
 - 查找您用的 Rancher 版本所需要的资源
 - 搜集 cert-manager 镜像
@@ -91,15 +91,15 @@ keywords:
    ./rancher-save-images.sh --image-list ./rancher-images.txt
    ```
 
-   **结果：** Docker 开始会拉取用于离线安装所需的镜像。这个过程会花费几分钟时间。完成时，您的当前目录会输出名为`rancher-images.tar.gz`的压缩包。请确认文件存在这个目录里。
+   **结果：** Docker 会开始拉取用于离线安装所需的镜像。这个过程会花费几分钟时间。完成时，您的当前目录会输出名为`rancher-images.tar.gz`的压缩包。请确认输出文件是否存在。
 
 #### 4、推送镜像到私有镜像库
 
-下一步，您将使用脚本将文件 `rancher-images.tar.gz` 中的镜像转移到您自己的私有镜像库。
+下一步，您将使用脚本将文件 `rancher-images.tar.gz` 中的镜像上传到您自己的私有镜像库。
 
 文件 `rancher-images.txt` 和 `rancher-images.tar.gz` 应该位于工作站中运行 `rancher-load-images.sh` 脚本的同一目录下。
 
-1.  请先登录到自己的私有镜像库 中:
+1.  请先登录到自己的私有镜像库中:
     ```plain
     docker login <REGISTRY.YOURDOMAIN.COM:PORT>
     ```
@@ -132,7 +132,7 @@ _v2.3.0 及以后版本可用_
 
 #### 先决条件
 
-这些步骤要求您使用 Windows Server 1809 工作站，该工作站能访问网络、能您的私有镜像库 以及至少 50 GB 的磁盘空间。
+这些步骤要求您使用 Windows Server 1809 工作站，该工作站能访问网络、您的私有镜像库以及至少拥有 50 GB 的磁盘空间。
 
 工作站必须安装 Docker 18.02+版本，因为这个版本的 Docker 支持 manifests，这个特性是设置 Windows 集群所必须的。
 
@@ -260,7 +260,7 @@ Linux 镜像需要从 Linux 主机上收集和推送，但是必须先将 Window
    ./rancher-save-images.sh --image-list ./rancher-images.txt
    ```
 
-   **结果：** Docker 会开始拉取用于离线安装所需的镜像。这个过程会花费几分钟时间。完成时，您的当前目录会输出名为 rancher-images.tar.gz 的压缩包。请确认文件存在这个目录里。
+   **结果：** Docker 会开始拉取用于离线安装所需的镜像。这个过程会花费几分钟时间。完成时，您的当前目录会输出名为 rancher-images.tar.gz 的压缩包。请确认文件是否存在。
 
 #### 4、推送镜像到私有镜像库
 

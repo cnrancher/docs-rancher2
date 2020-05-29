@@ -1,5 +1,20 @@
 ---
 title: Syslog
+description: 如果您的组织使用Syslog， 则可以配置 Rancher 向其发送 Kubernetes 日志。之后，您可以到 Syslog 服务器以查看日志。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 集群管理员指南
+  - 集群工具
+  - 日志
+  - Syslog
 ---
 
 如果您的组织使用 [Syslog](https://tools.ietf.org/html/rfc5424)， 则可以配置 Rancher 向其发送 Kubernetes 日志。之后，您可以到 Syslog 服务器以查看日志。
