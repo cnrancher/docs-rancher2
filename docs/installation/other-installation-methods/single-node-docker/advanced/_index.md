@@ -17,7 +17,7 @@ keywords:
   - 单节点安装的高级选项
 ---
 
-安装 Rancher 时，可以启用几个[高级选项](/docs/installation/options/_index)：
+安装 Rancher 时，您可以启用以下几个[高级选项](/docs/installation/options/_index)：
 
 - [自定义 CA 证书](#自定义-ca-证书)
 - [API 审计日志](#api-审计日志)
@@ -76,7 +76,7 @@ docker run -d --restart=unless-stopped \
   rancher/rancher:latest
 ```
 
-参阅[TLS 配置](/docs/installation/options/tls-settings/_index)查看更多信息和参数。
+参考[TLS 配置](/docs/installation/options/tls-settings/_index)查看更多信息和参数。
 
 ## 离线环境
 

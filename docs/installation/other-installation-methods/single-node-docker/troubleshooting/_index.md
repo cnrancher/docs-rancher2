@@ -24,6 +24,7 @@ keywords:
 - 该文件以以下标头开头：`-----BEGIN CERTIFICATE-----`
 - 标头后跟一长串字符。
 - 该文件以页脚结尾：`-----END CERTIFICATE-----`
+  符合上述三点特征的就是 PEM 格式的证书
 
 ### PEM 证书例子：
 

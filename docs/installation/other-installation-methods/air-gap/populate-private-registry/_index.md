@@ -19,22 +19,22 @@ keywords:
 
 本节介绍如何配置私有镜像仓库，以便在安装 Rancher 时，Rancher 可以从此私有镜像仓库中拉取所需的镜像。
 
-默认情况下，Rancher 中所有用于[创建 Kubernetes 集群](/docs/cluster-provisioning/_index)或运行任何[工具](/docs/cluster-admin/tools/_index)的镜像都从 Docker Hub 中拉取，如： 监控、日志、告警、流水线等镜像。在离线环境下安装 Rancher，您需要一个私有镜像库，这个私有镜像库应该位于 Rancher 中的节点能访问的位置上。之后您需要载入所有镜像到这个私有镜像库里。
+默认情况下，Rancher 中所有用于[创建 Kubernetes 集群](/docs/cluster-provisioning/_index)或运行任何[工具](/docs/cluster-admin/tools/_index)的镜像都从 Docker Hub 中拉取，如： 监控、日志、告警、流水线等镜像。在离线环境下安装 Rancher，您需要一个私有镜像库，这个私有镜像库应该位于 Rancher 中的节点能访问的位置上。然后您需要载入所有镜像到这个私有镜像库里。
 
 对于高可用安装和单节点安装，同步镜像到私有镜像仓库的过程是相同的。
 
 但是同步用来创建 Linux 集群和用来创建 Windows 集群的镜像过程是不同的。所以这取决于您是否要创建 Windows 集群。默认情况下，我们假设只配置 Linux 集群，我们提供了如何推送 Linux 需要的镜像到私有镜像库的步骤。但是如果您计划创建 [Windows 集群](/docs/cluster-provisioning/rke-clusters/windows-clusters/_index)，我们有单独的文档来介绍如何同步 Linux 和 Windows 集群所需的镜像。
 
-> **先决条件：** 您必须先有一个可用的[私有镜像仓库](https://docs.docker.com/registry/deploying/)。
+> **先决条件：** 已有一个 Rancher 可访问的[私有镜像仓库](https://docs.docker.com/registry/deploying/)，。
 
 ## 集群中仅有 Linux 节点
 
 对于创建仅有 Linux 节点的集群的 Rancher Server，请按以下步骤推送镜像到私有镜像库。
 
-- 查找您用的 Rancher 版本所需要的资源
-- 搜集 cert-manager 镜像
-- 将镜像保存到您的工作站中
-- 推送镜像到私有镜像库
+1. 查找您用的 Rancher 版本所需要的资源
+2. 搜集 cert-manager 镜像
+3. 将镜像保存到您的工作站中
+4. 推送镜像到私有镜像库
 
 #### 先决条件
 
@@ -49,18 +49,18 @@ keywords:
 1. 从发行版 **Assets** 部分下载以下文件，这些文件是离线环境下安装 Rancher 所必需的：
 
    | Release 文件             | 描述                                                                                                                 |
-   | ------------------------ | -------------------------------------------------------------------------------------------------------------------- |
+   | :----------------------- | :------------------------------------------------------------------------------------------------------------------- |
    | `rancher-images.txt`     | 此文件包含安装 Rancher、创建集群和运行 Rancher 工具所需的镜像列表。                                                  |
    | `rancher-save-images.sh` | 这个脚本会从 DockerHub 中拉取在文件`rancher-images.txt`中描述的所有镜像，并将它们保存为文件`rancher-images.tar.gz`。 |
    | `rancher-load-images.sh` | 这个脚本会载入文件`rancher-images.tar.gz`中的镜像，并将它们推送到您自己的私有镜像库。                                |
 
 #### 2、收集 cert-manager 镜像
 
-> 如果您使用自己的证书，或者要在外部负载均衡器上终止 TLS，请跳过此步骤。
+如果您使用自己的证书，或者要在外部负载均衡器上终止 TLS，请跳过此步骤。
 
 在安装高可用过程中，如果选择使用 Rancher 默认的自签名 TLS 证书，则还必须将 [`cert-manager`](https://hub.helm.sh/charts/jetstack/cert-manager) 镜像添加到 `rancher-images.txt` 文件中。如果使用自己的证书，则跳过此步骤。
 
-1.  获取最新的`cert-manager` Helm chart，并解析模板以获取镜像详细信息：
+1.  获取最新的`cert-manager` Helm chart，解析模板,获取镜像详细信息：
 
     > **注意：** 由于`cert-manager`最近的改动，您需要升级`cert-manager`版本。如果您要升级 Rancher 并且使用`cert-manager`的版本低于 v0.12.0，请看我们的[升级文档](/docs/installation/options/upgrading-cert-manager/_index)。
 
@@ -71,7 +71,7 @@ keywords:
     helm template ./cert-manager-<version>.tgz | grep -oP '(?<=image: ").*(?=")' >> ./rancher-images.txt
     ```
 
-2.  对镜像列表进行排序和唯一化，以去除重复的镜像源：
+2.  对镜像列表进行排序和唯一化，去除重复的镜像源：
 
     ```plain
     sort -u rancher-images.txt -o rancher-images.txt
@@ -79,7 +79,7 @@ keywords:
 
 #### 3、将镜像保存到您的工作站中
 
-1. 给文件 `rancher-save-images.sh` 添加可执行权限:
+1. 为`rancher-save-images.sh` 文件添加可执行权限：
 
    ```
    chmod +x rancher-save-images.sh
@@ -99,17 +99,17 @@ keywords:
 
 文件 `rancher-images.txt` 和 `rancher-images.tar.gz` 应该位于工作站中运行 `rancher-load-images.sh` 脚本的同一目录下。
 
-1.  请先登录到自己的私有镜像库中:
+1.  登录私有镜像库：
     ```plain
     docker login <REGISTRY.YOURDOMAIN.COM:PORT>
     ```
-1.  给脚本 `rancher-load-images.sh` 添加可执行权限:
+1.  为 `rancher-load-images.sh` 添加可执行权限：
 
     ```
     chmod +x rancher-load-images.sh
     ```
 
-1.  使用脚本 `rancher-load-images.sh`提取`rancher-images.tar.gz`文件中的镜像，根据文件`rancher-images.txt`中的镜像列表对提取的镜像文件重新打 tag 并推送到您的私有镜像库中：
+1.  使用脚本 `rancher-load-images.sh`提取`rancher-images.tar.gz`文件中的镜像，根据文件`rancher-images.txt`中的镜像列表对提取的镜像文件重新打 tag 并推送到您的私有镜像库：
 
     ```
     ./rancher-load-images.sh --image-list ./rancher-images.txt --registry <REGISTRY.YOURDOMAIN.COM:PORT>`
@@ -125,10 +125,10 @@ _v2.3.0 及以后版本可用_
 
 从 Windows 工作站中收集和推送 Windows 镜像。
 
-- A. 查找您用的 rancher 版本所需要的资源
-- B. 将镜像保存到您的 Windows 服务工作站中
-- C. 准备 Docker 守护进程
-- D. 推送镜像到私有镜像库
+- 1. 查找您用的 rancher 版本所需要的资源
+- 2. 将镜像保存到您的 Windows 服务工作站中
+- 3. 准备 Docker 守护进程
+- 4. 推送镜像到私有镜像库
 
 #### 先决条件
 
@@ -136,7 +136,7 @@ _v2.3.0 及以后版本可用_
 
 工作站必须安装 Docker 18.02+版本，因为这个版本的 Docker 支持 manifests，这个特性是设置 Windows 集群所必须的。
 
-如果要使用 ARM64 主机，则镜像仓库必须支持 Docker Manifest。截至 2020 年 4 月，Amazon Elastic Container Registry 不支持 Docker Manifest 功能。
+如果要使用 ARM64 主机，则镜像仓库必须支持 Docker Manifest。截至 2020 年 5 月，Amazon Elastic Container Registry 不支持 Docker Manifest 功能。
 
 #### 1、查找您用的 Rancher 版本所需要的资源
 
@@ -145,7 +145,7 @@ _v2.3.0 及以后版本可用_
 2. 从发行版本的 "Assets" 部分，下载下列文件:
 
    | Release 文件                 | 描述                                                                                                                                   |
-   | ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+   | :--------------------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
    | `rancher-windows-images.txt` | 这个文件包含设置 Windows 集群所需的 Windows 镜像列表。                                                                                 |
    | `rancher-save-images.ps1`    | 这个脚本会从 DockerHub 上拉取所有在文件`rancher-windows-images.txt`中列举的镜像，并将它们保存到`rancher-windows-images.tar.gz`文件中。 |
    | `rancher-load-images.ps1`    | 这个脚本会从压缩包`rancher-windows-images.tar.gz`中加载镜像，并把它们推送到您的私有镜像库 中。                                         |
@@ -219,7 +219,7 @@ Linux 镜像需要从 Linux 主机上收集和推送，但是必须先将 Window
 2. 从发行版 **Assets** 部分下载以下文件：
 
    | Release 文件                 | 描述                                                                                                                  |
-   | ---------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+   | :--------------------------- | :-------------------------------------------------------------------------------------------------------------------- |
    | `rancher-images.txt`         | 此文件包含安装 Rancher、设置集群和用户 Rancher 工具所需的镜像列表。                                                   |
    | `rancher-windows-images.txt` | 此文件包含需要设置 Windows 集群所需的镜像列表。                                                                       |
    | `rancher-save-images.sh`     | 这个脚本会从 Docker Hub 中拉取所有在文件`rancher-images.txt`中列举的镜像并将它们保存到`rancher-images.tar.gz`文件中。 |
@@ -266,13 +266,13 @@ Linux 镜像需要从 Linux 主机上收集和推送，但是必须先将 Window
 
 将用脚本`rancher-load-images.sh`将文件`rancher-images.tar.gz`中的镜像移入到您私有镜像库中。在工作站中，镜像列表文件 `rancher-images.txt` / `rancher-windows-images.txt`要放在与运行脚本`rancher-load-images.sh`同一目录下。
 
-1. 请先登录到自己的私有镜像库 中：
+1. 请先登录到自己的私有镜像库中：
 
    ```plain
    docker login <REGISTRY.YOURDOMAIN.COM:PORT>
    ```
 
-1. 给文件 `rancher-load-images.sh` 添加可执行权限:
+1. 给文件 `rancher-load-images.sh` 添加可执行权限：
 
    ```
    chmod +x rancher-load-images.sh
@@ -285,6 +285,8 @@ Linux 镜像需要从 Linux 主机上收集和推送，但是必须先将 Window
      --registry <REGISTRY.YOURDOMAIN.COM:PORT>
    ```
 
-## [安装 Rancher 高可用的下一步](/docs/installation/other-installation-methods/air-gap/launch-kubernetes/_index)
+## 后续操作
 
-## [安装 Rancher 单节点的下一步](/docs/installation/other-installation-methods/air-gap/install-rancher/_index)
+[安装 Rancher 高可用的下一步](/docs/installation/other-installation-methods/air-gap/launch-kubernetes/_index)
+
+[安装 Rancher 单节点的下一步](/docs/installation/other-installation-methods/air-gap/install-rancher/_index)
