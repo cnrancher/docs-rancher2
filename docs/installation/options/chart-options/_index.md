@@ -19,7 +19,7 @@ keywords:
 ## 一般选项
 
 | 选项                      | 默认值       | 描述                                                                  |
-| ------------------------- | ------------ | --------------------------------------------------------------------- |
+| :------------------------ | :----------- | :-------------------------------------------------------------------- |
 | `hostname`                | " "          | `string` - Rancher Server 完全限定域名                                |
 | `ingress.tls.source`      | "rancher"    | `string` - ingress 获取证书的位置。- "rancher， letsEncrypt， secret" |
 | `letsEncrypt.email`       | " "          | `string` - 您的邮箱地址                                               |
@@ -65,7 +65,7 @@ keywords:
 --set auditLog.level=1
 ```
 
-默认情况下，启用审计日志会在 Rancher pod 中创建一个 sidecar 容器。这个容器(`rancher-audit-log`)会将日志流传输到`stdout`。您可以像收集任何容器日志一样收集审计日志。将 sidecar 用作审计日志目标时，`hostPath`， `maxAge`， `maxBackups`，和 `maxSize`选项将会被忽略。建议使用您的操作系统或 Docker 守护程序的日志轮换功能来控制磁盘空间的使用。为 Rancher Server 集群或 System 项目启用[Rancher 工具中的日志服务](/docs/cluster-admin/tools/logging/_index)。
+默认情况下，启用审计日志会在 Rancher pod 中创建一个 sidecar 容器。这个容器(`rancher-audit-log`)会将日志流传输到`stdout`。将 sidecar 用作审计日志目标时，`hostPath`， `maxAge`， `maxBackups`，和 `maxSize`选项将会被忽略。建议使用您的操作系统或 Docker 守护程序的日志轮换功能来控制磁盘空间的使用。为 Rancher Server 集群或 System 项目启用[Rancher 工具中的日志服务](/docs/cluster-admin/tools/logging/_index)。
 
 将`auditLog.destination`设置为`hostPath`，会将日志转发至与主机系统共享的卷中，而不是流至一个 sidecar 容器中。当将目标设置为`hostPath`时，您可能需要调整其他 auditLog 参数以进行日志轮换。
 
@@ -95,7 +95,7 @@ _自 v2.2.0 起可用_
 
 ## 导入 `local` 集群
 
-默认情况下，Rancher Server 会检测并导入正在运行的`local`集群。有权访问`local`集群权限的用户实际上将具有对 Rancher Server 管理的所有集群的`root`访问权限.
+默认情况下，Rancher Server 会检测并导入正在运行的`local`集群。有权访问`local`集群权限的用户实际上将具有对 Rancher Server 管理的所有集群的`root`访问权限。
 如果您的环境中存在此问题，则可以在初次安装时将此选项设置为`false`。
 
 > 注意：这个选项只在初始安装 Rancher 时有效。有关更多信息，请参见[问题 16522](https://github.com/rancher/rancher/issues/16522)。

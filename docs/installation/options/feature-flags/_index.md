@@ -1,6 +1,6 @@
 ---
 title: 启用实验功能
-description: 当运行具有 15 个或更多集群的大型 Rancher 安装时，建议将 etcd 的默认 keyspace 从默认的 2GB 增加。最大设置为 8GB，主机应具有足够的 RAM 以将整个数据集保留在内存中。增加此值时，还应该增加主机的大小。如果您预计在垃圾回收间隔期间容器的变化率很高，那么在较小的安装中也可以调整 keyspace 大小。Kubernetes 每隔五分钟会自动清理一次 etcd 数据集。在某些情况下，例如部署抖动，可以在垃圾回收发生之前将足够多的事件写入 etcd 并删除，并清理掉所有内容，从而导致 keyspace 被填满。
+description: Rancher 包含一些实验性质的功能，默认是被禁用的。您可能想要启用这些功能。例如，如果您决定使用的Rancher 技术支持团队不支持的存储类型所带来的好处大于风险，则可能需要启用这些未被测试过的功能。功能开关，使您可以尝试使用默认情况下未启用的功能。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -19,7 +19,7 @@ keywords:
 
 _自 v2.3.0 起可用_
 
-Rancher 包含一些实验性质的功能，默认是被禁用的。您可能想要启用这些功能。例如，如果您决定使用的[Rancher 技术支持团队不支持的存储类型](/docs/installation/options/feature-flags/enable-not-default-storage-drivers/_index)所带来的好处大于风险，则可能需要启用这些未被测试过的功能。功能开关，使您可以尝试使用默认情况下未启用的功能。
+Rancher 包含一些实验性功能，默认状态下，这些功能是禁用的。在某些情况下，您可能想要启用这些功能。例如，如果您决定使用的[Rancher 技术支持团队不支持的存储类型](/docs/installation/options/feature-flags/enable-not-default-storage-drivers/_index)所带来的好处大于风险，则可能需要启用这些未被测试过的功能。功能开关，使您可以尝试使用默认情况下未启用的功能。
 
 可以通过三种方式启用这些功能：
 
@@ -42,20 +42,20 @@ Rancher 包含一些实验性质的功能，默认是被禁用的。您可能想
 
 以下是 Rancher 中可用的功能开关的列表：
 
-- `dashboard`: 此功能将启用下一代的实验性 UI。仪表板还使用了 Rancher 中的新 API，该 API 允许 UI 访问默认的 Kubernetes 资源，而不经过 Rancher 的任何干预。
+- `dashboard`：此功能将启用下一代的实验性 UI。仪表板还使用了 Rancher 中的新 API，该 API 允许 UI 访问默认的 Kubernetes 资源，而不经过 Rancher 的任何干预。
 - `unsupported-storage-drivers`: 启用[允许不受支持的存储驱动程序](/docs/installation/options/feature-flags/enable-not-default-storage-drivers/_index)。换句话说，它启用了默认情况下未启用的 storage providers 和 provisioners 的类型。
-- `proxy`: 此功能使 Rancher 使用新的简化的代理模块，这有助于增强性能和安全性。但是目前有一个已知问题，新的代理功能会导致 Helm 不能正常工作，这会导致包括 Rancher 工具（如监控，日志，Istio 等）在内的任何应用商店应用部署失败。
-- `istio-virtual-service-ui`: 启用 Istio 的流量管理功能：[通过 UI 创建，读取，更新和删除 Istio 虚拟服务和目标规则](/docs/installation/options/feature-flags/istio-virtual-service-ui/_index)。
+- `proxy`：此功能使 Rancher 使用新的简化的代理模块，这有助于增强性能和安全性。但是目前有一个已知问题，新的代理功能会导致 Helm 不能正常工作，这会导致包括 Rancher 工具（如监控，日志，Istio 等）在内的任何应用商店应用部署失败。
+- `istio-virtual-service-ui`：启用 Istio 的流量管理功能：[通过 UI 创建，读取，更新和删除 Istio 虚拟服务和目标规则](/docs/installation/options/feature-flags/istio-virtual-service-ui/_index)。
 
 下表显示了在 Rancher 中功能开关的可用版本和默认值：
 
 | 功能开关名                    | 默认值  | 状态   | 可用版本 | 是否需要重启 Rancher? |
-| ----------------------------- | ------- | ------ | -------- | --------------------- |
+| :---------------------------- | :------ | :----- | :------- | :-------------------- |
 | `dashboard`                   | `true`  | 实验性 | v2.4.0   | 是                    |
-| `istio-virtual-service-ui`    | `false` | 实验性 | v2.3.0   |                       |
-| `istio-virtual-service-ui`    | `true`  | GA     | v2.3.2   |                       |
-| `proxy`                       | `false` | 实验性 | v2.4.0   |                       |
-| `unsupported-storage-drivers` | `false` | 实验性 | v2.3.0   |                       |
+| `istio-virtual-service-ui`    | `false` | 实验性 | v2.3.0   | 否                    |
+| `istio-virtual-service-ui`    | `true`  | GA     | v2.3.2   | 否                    |
+| `proxy`                       | `false` | 实验性 | v2.4.0   | 否                    |
+| `unsupported-storage-drivers` | `false` | 实验性 | v2.3.0   | 否                    |
 
 ## 启动 Rancher 时启用功能
 
@@ -82,7 +82,7 @@ helm install rancher-latest/rancher \
 
 对于离线安装 Rancher，通过 Helm 安装 Rancher 之前，需要添加一个 Helm chart 仓库，渲染一个 Helm 模板。有关详细信息，请参阅[离线安装文档。](/docs/installation/other-installation-methods/air-gap/install-rancher/_index)
 
-一个命令例子，在渲染 Helm 模板时传递功能开关名称。在下面的示例中，通过传递功能开关名称（用逗号分隔）来启用两个功能。
+在下面的示例中，通过传递功能开关名称（用逗号分隔）来启用两个功能。
 
 Helm 3 命令如下：
 
