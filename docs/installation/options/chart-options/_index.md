@@ -130,7 +130,7 @@ Rancher 需要访问网络，才能使用某些功能（helm charts）。使用`
 
 ```plain
 --set proxy="http://<username>:<password>@<proxy_url>:<proxy_port>/"
---set noProxy="127.0.0.0/8\，10.0.0.0/8\，172.16.0.0/12\，192.168.0.0/16"
+--set noProxy="127.0.0.0/8\,10.0.0.0/8\,172.16.0.0/12\,192.168.0.0/16"
 ```
 
 ## 其他受信任的 CA
