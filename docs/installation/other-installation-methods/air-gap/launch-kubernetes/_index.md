@@ -21,7 +21,7 @@ keywords:
 如果要使用 Docker 在单个节点上安装 Rancher，请跳过本节。
 :::
 
-本节描述了如何根据我们的 [Rancher Server 环境的最佳实践](/docs/overview/architecture-recommendations/_index)来安装 Kubernetes 集群。该集群应仅用于运行 Rancher Server。
+本节描述了如何根据 [Rancher Server 环境的最佳实践](/docs/overview/architecture-recommendations/_index)来安装 Kubernetes 集群。该集群应仅用于运行 Rancher Server。
 
 对于 v2.4 之前的 Rancher，Rancher 应该安装在 [RKE](https://rancher.com/docs/rke/latest/en/)（Rancher Kubernetes Engine）Kubernetes 集群上。RKE 是经过 CNCF 认证的 Kubernetes 发行版，并且全部组件完全在 Docker 容器内运行。
 
@@ -33,20 +33,23 @@ Rancher Server 只能在使用 RKE 或 K3s 安装的 Kubernetes 集群中运行�
 
 ## 安装 K3s 集群
 
-在本指南中，我们假设您在离线环境中创建了节点，并且在堡垒机上部署了安全的 Docker 私有镜像仓库。
+### 先决条件
+
+- 已经在离线环境中创建了节点
+- 已经部署了 Docker 私有镜像仓库
 
 ### 1、准备镜像目录
 
-从[版本发布](https://github.com/rancher/k3s/releases)页面获取要运行的 K3s 版本的镜像`tar`文件。
+1. 从[版本发布](https://github.com/rancher/k3s/releases)页面获取要运行的 K3s 版本的镜像`tar`文件。
 
-在每个节点上启动 K3s 之前，将这个`tar`文件放在 `images` 目录中，例如：
+2. 在每个节点上启动 K3s 之前，将这个`tar`文件放在 `images` 目录中，例如：
 
 ```bash
 sudo mkdir -p /var/lib/rancher/k3s/agent/images/
 sudo cp ./k3s-airgap-images-$ARCH.tar /var/lib/rancher/k3s/agent/images/
 ```
 
-### 1、创建镜像库 YAML
+### 2、创建镜像库 YAML
 
 在`/etc/rancher/k3s/registries.yaml`创建`registries.yaml`文件。这将告诉 K3s 如何连接到您的私有镜像仓库。
 
@@ -75,14 +78,13 @@ configs:
 
 ### 3、安装 K3s 集群
 
-从[版本发布](https://github.com/rancher/k3s/releases)页面获取 K3s 二进制文件，找到与版本对应的镜像`tar`文件包，
+1. 从[版本发布](https://github.com/rancher/k3s/releases)页面获取 K3s 二进制文件，找到与版本对应的镜像`tar`文件包，并通过 https://get.k3s.io 获取 K3s 安装脚本。
 
-并通过 https://get.k3s.io 获取 K3s 安装脚本。
+2. 将二进制文件放在每个节点上的`/usr/local/bin`中。
 
-将二进制文件放在每个节点上的`/usr/local/bin`中。
-将安装脚本放置在每个节点上的任何位置，并将其命名为`install.sh`。
+3. 将安装脚本放置在每个节点上的任何位置，并将其命名为`install.sh`。
 
-请根据您的准备好的数据库，替换以下命令中的数据库连接字符串，并在准备好的两台 Linux 节点中运行命令来安装 K3s：
+4. 请根据您的准备好的数据库，替换以下命令中的数据库连接字符串，并在准备好的两台 Linux 节点中运行命令来安装 K3s：
 
 ```
 INSTALL_K3S_SKIP_DOWNLOAD=true INSTALL_K3S_EXEC='server --datastore-endpoint="mysql://username:password@tcp(hostname:3306)/database-name"' ./install.sh
@@ -138,13 +140,16 @@ kubectl --kubeconfig ~/.kube/config/k3s.yaml get pods --all-namespaces
 
 可以通过以下方式完成离线环境的升级：
 
-1. 从[版本发布](https://github.com/rancher/k3s/releases)页面下载要升级的 K3s 版本的新镜像包（`tar`文件）。将`tar`包放在每个节点上的`/var/lib/rancher/k3s/agent/images/`目录中。删除旧的 `tar` 文件。
-2. 复制并替换每个节点上`/usr/local/bin`中的旧的 K3s 二进制文件。因为自上一发行以来，脚本可能已更改，单击[这里](https://raw.githubusercontent.com/rancher/k3s/master/install.sh)获取新的二进制文件。与过去一样，使用相同的环境变量再次运行脚本。
-3. 重新启动 K3s 服务（如果安装程序未自动重启 K3s）。
+- 从[版本发布](https://github.com/rancher/k3s/releases)页面下载要升级的 K3s 版本的新镜像包（`tar`文件）。将`tar`包放在每个节点上的`/var/lib/rancher/k3s/agent/images/`目录中。删除旧的 `tar` 文件。
+- 复制并替换每个节点上`/usr/local/bin`中的旧的 K3s 二进制文件。因为自上一发行以来，脚本可能已更改，单击[这里](https://raw.githubusercontent.com/rancher/k3s/master/install.sh)获取新的二进制文件。与过去一样，使用相同的环境变量再次运行脚本。
+- 重新启动 K3s 服务（如果安装程序未自动重启 K3s）。
 
 ## 安装 RKE 集群
 
-我们将使用 Rancher Kubernetes Engine（RKE）创建一个 Kubernetes 集群。在启动 Kubernetes 集群之前，您需要安装 RKE 并创建一个 RKE 配置文件。
+### 先决条件
+
+- 已安装 RKE
+- 已创建 RKE 配置文件
 
 ### 1、安装 RKE
 
@@ -162,13 +167,13 @@ kubectl --kubeconfig ~/.kube/config/k3s.yaml get pods --all-namespaces
 
 <figcaption>RKE 选项</figcaption>
 
-| 选项               | 必选             | 描述                                                       |
-| ------------------ | ---------------- | ---------------------------------------------------------- |
-| `address`          | ✓                | 离线环境中节点的 DNS 或 IP                                 |
-| `user`             | ✓                | 可以在节点上执行 docker 命令的用户                         |
-| `role`             | ✓                | 想要给节点分配的一个或多个 Kubernetes 角色                 |
-| `internal_address` | 可选<sup>1</sup> | 离线环境中节点的内部 DNS 或内网 IP                         |
-| `ssh_key_path`     |                  | 用来登录节点的 SSH 私钥文件路径（默认值为`~/.ssh/id_rsa`） |
+| 选项               | 是否必选       | 描述                                                       |
+| :----------------- | :------------- | :--------------------------------------------------------- |
+| `address`          | 是             | 离线环境中节点的 DNS 或 IP                                 |
+| `user`             | 是             | 可以在节点上执行 docker 命令的用户                         |
+| `role`             | 否             | 想要给节点分配的一个或多个 Kubernetes 角色                 |
+| `internal_address` | 否<sup>1</sup> | 离线环境中节点的内部 DNS 或内网 IP                         |
+| `ssh_key_path`     | 否             | 用来登录节点的 SSH 私钥文件路径（默认值为`~/.ssh/id_rsa`） |
 
 > <sup>1</sup> 如果您想使用自引用安全组或防火墙，某些服务（如 AWS EC2）需要设置`internal_address`。
 
@@ -212,14 +217,16 @@ rke up --config ./rancher-cluster.yml
 
 将以下文件的副本保存在安全的位置：
 
-- `rancher-cluster.yml`: RKE 配置文件
-- `kube_config_rancher-cluster.yml`: [Kubeconfig 文件](https://rancher.com/docs/rke/latest/en/kubeconfig/)
+- `rancher-cluster.yml`：RKE 配置文件
+- `kube_config_rancher-cluster.yml`：[Kubeconfig 文件](https://rancher.com/docs/rke/latest/en/kubeconfig/)
 - `rancher-cluster.rkestate`：[Kubernetes 集群状态文件](https://rancher.com/docs/rke/latest/en/installation/#kubernetes-cluster-state)
 
 > **注意：** 后两个文件名的“rancher-cluster”部分取决于您如何命名 RKE 集群的配置文件。
 
-### 遇到了问题？
+## 问题排查
 
-请查看[问题排查](/docs/installation/options/troubleshooting/_index)页面。
+请查看[问题排查](/docs/installation/options/troubleshooting/_index)页面，获取常见问题和解决方法。
 
-## [下一步：安装 Rancher](/docs/installation/other-installation-methods/air-gap/install-rancher/_index)
+## 后续操作
+
+[安装 Rancher](/docs/installation/other-installation-methods/air-gap/install-rancher/_index)
