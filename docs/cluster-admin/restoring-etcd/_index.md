@@ -97,7 +97,7 @@ values={[
 
 ## 在没有快照的情况下恢复 etcd
 
-如果 etcd 节点组失去 quorum，Kubernetes 集群将报告失败，因为在 Kubernetes 集群中不能执行任何操作，例如部署工作负载。请查看 Kubernetes 集群中的[etcd 节点数量](/docs/cluster-provisioning/production/_index)的最佳实践。如果您想恢复您的 etcd 节点集，请遵循以下说明:
+如果 etcd 节点组没有保持法定的成员数（quorum），即超过半数以上的 etcd 节点组成员丢失，Kubernetes 集群将报告失败，因为在 Kubernetes 集群中不能执行任何操作，例如部署工作负载。请查看 Kubernetes 集群中的[etcd 节点数量](/docs/cluster-provisioning/production/_index)的最佳实践。如果您想恢复您的 etcd 节点集，请遵循以下说明:
 
 1. 通过删除所有其他 etcd 节点，在集群中只保留一个 etcd 节点。
 
@@ -128,4 +128,3 @@ values={[
 ## 在 Rancher v2.2.0 之前的版本中创建的集群里启用定期快照
 
 如果您有任何在 v2.2.0 之前创建的 Rancher 启动的 Kubernetes 集群（RKE 集群），在升级 Rancher 之后，您必须[编辑集群](/docs/cluster-admin/editing-clusters/_index)并且**保存**它，以启用更新的快照功能。即使您已经在 v2.2.0 之前创建了快照，也必须执行此步骤，因为在[通过 UI 还原集群](/docs/cluster-admin/restoring-etcd/_index)时，无法使用较早版本中创建的快照。
-/docs/cluster-admin/editing-clusters/\_index

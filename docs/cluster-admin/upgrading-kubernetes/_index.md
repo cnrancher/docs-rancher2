@@ -17,11 +17,11 @@ keywords:
 
 升级到最新版本的 Rancher 之后，下游 Kubernetes 集群可以升级为 Rancher 支持的最新的 Kubernetes 版本。
 
-Rancher 将使用 RKE（Rancher Kubernetes Engine）作为库来创建和编辑 RKE 集群。有关为 RKE 集群配置升级策略的更多信息，请参考 [RKE 文档](http://docs.rancher.com/docs/rke/latest/en/)。
+Rancher 将使用 RKE（Rancher Kubernetes Engine）作为库来创建和编辑 RKE 集群。有关为 RKE 集群配置升级策略的更多信息，请参考[RKE 文档](http://docs.rancher.com/docs/rke/latest/en/)。
 
 ## 新功能
 
-从 Rancher v2.3.0 开始，Rancher 添加了 Kubernetes 元数据功能，该功能允许在不升级 Rancher 的情况下，获取到 Kubernetes 补丁版本。有关详细信息，请参阅[关于 Kubernetes 元数据](/docs/admin-settings/k8s-metadata/_index)的部分。
+从 Rancher v2.3.0 开始，Rancher 添加了 Kubernetes 元数据功能，该功能允许在不升级 Rancher 的情况下，获取到 Kubernetes 补丁版本。有关详细信息，请参阅关于 [Kubernetes 元数据](/docs/admin-settings/k8s-metadata/_index)的部分。
 
 从 Rancher v2.4.0 开始，
 
@@ -49,7 +49,7 @@ RKE v1.1.0 更改了集群升级方式。
 1. 如果升级失败，请在 Rancher UI 中编辑集群，将 Kubernetes 版本修改为之前的版本，并点击保存。
 1. 从 etcd 快照还原集群。在还原之前，请确保您的集群正在运行升级之前的 Kubernetes 版本。
 
-还原操作将在处于非健康状态或非`active`状态的集群上进行。
+还原操作将在处于非健康状态或非 `active` 状态的集群上进行。
 
 ### Rancher v2.4 之前的版本
 
@@ -71,11 +71,8 @@ RKE v1.1.0 更改了集群升级方式。
 > - 升级 Kubernetes 之前，请[备份您的集群](/docs/backups/_index)。
 
 1. 从**全局**视图中，找到要升级 Kubernetes 版本的集群。选择 **省略号 > 编辑**。
-
 1. 点开**集群选项**。
-
 1. 从 **Kubernetes 版本**下拉菜单中，选择要用于集群的 Kubernetes 版本。
-
 1. 单击**保存**。
 
 **结果：** 集群开始升级 Kubernetes 版本。

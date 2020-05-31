@@ -43,13 +43,13 @@ keywords:
    mkdir -p /nfs && chown nobody:nogroup /nfs
    ```
 
-   - `-p /nfs`在根目录创建了一个名为`nfs`的子目录。
-   - `chown nobody:nogroup /nfs`允许所有人可以访问存储目录`/nfs`。
+   - `-p /nfs` 在根目录创建了一个名为 `nfs` 的子目录。
+   - `chown nobody:nogroup /nfs` 允许所有人可以访问存储目录 `/nfs`。
 
 1. 创建一个 NFS 导出表。该表设置了 NFS 服务器上暴露给将使用该服务器进行存储的节点的目录路径。
 
-   1. 使用文本编辑器打开`/etc/exports`。
-   1. 添加在步骤 3 中创建的`/nfs`文件夹的路径，以及集群节点的 IP 地址。为集群中的每个 IP 地址添加一个条目。在每个地址及其伴随的参数后面加上一个空格，该空格作为定界符。
+   1. 使用文本编辑器打开 `/etc/exports`。
+   1. 添加在步骤 3 中创建的 `/nfs` 文件夹的路径，以及集群节点的 IP 地址。为集群中的每个 IP 地址添加一个条目。在每个地址及其伴随的参数后面加上一个空格，该空格作为定界符。
 
       ```bash
       /nfs <IP_ADDRESS1>(rw,sync,no_subtree_check) <IP_ADDRESS2>(rw,sync,no_subtree_check) <IP_ADDRESS3>(rw,sync,no_subtree_check)
@@ -71,7 +71,7 @@ keywords:
       rpcinfo -p | grep nfs
       ```
 
-   2. [打开](https://help.ubuntu.com/lts/serverguide/firewall.html.en)上面命令输出的端口，比如使用下面的命令来打开端口`2049`：
+   2. [打开](https://help.ubuntu.com/lts/serverguide/firewall.html.en)上面命令输出的端口，比如使用下面的命令来打开端口 `2049`：
 
       ```bash
       sudo ufw allow 2049

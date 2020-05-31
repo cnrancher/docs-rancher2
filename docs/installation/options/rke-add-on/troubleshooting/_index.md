@@ -29,16 +29,16 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
 
 - [一般常见问题](/docs/installation/options/rke-add-on/troubleshooting/generic-troubleshooting/_index)
 
-  在这一节中，您可以了解调试 Kubernetes 集群的一些通用方法。
+  在这一节中，您可以了解一些调试 Kubernetes 集群的通用方法。
 
 - [为主机设置 SSH tunneling 时失败](https://rancher.com/docs/rke/latest/en/troubleshooting/ssh-connectivity-errors/)
 
-  在这一节中，您可以找到有关在使用 `rke` 命令配置节点时，可能遇到的有关 SSH tunneling 的创建错误的问题。
+  在这一节中，您可以了解到在使用 `rke` 配置节点时，SSH tunneling 创建失败的处理方法。
 
-- [获取 job 完整状态时失败时](/docs/installation/options/rke-add-on/troubleshooting/job-complete-status/_index)
+- [获取 Job 完整状态时失败时](/docs/installation/options/rke-add-on/troubleshooting/job-complete-status/_index)
 
-  在这一节中，您可以了解到有关部署时产生的错误处理方法。
+  在这一节中，您可以了解到在部署插件时，Job 失败的处理方法。
 
 - [404 - default backend](/docs/installation/options/rke-add-on/troubleshooting/404-default-backend/_index)
 
-  在这一节中，您可以了解到有关在尝试访问 Rancher 时页面显示 `404 - default backend` 的问题处理方法。
+  在这一节中，您可以了解到在尝试访问 Rancher 时，页面显示 `404 - default backend` 的处理方法。
