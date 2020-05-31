@@ -44,7 +44,7 @@ keywords:
 
     如果配置了外部认证:
 
-    - Rancher 在您键入时从 [外部身份验证](/docs/admin-settings/authentication/_index) 源返回用户。
+    - Rancher 在您登录时可以从 [外部身份验证](/docs/admin-settings/authentication/_index) 源获取相应的用户信息。
 
       > **使用 AD 却找不到您的用户?**
       > 您的搜索属性配置可能存在问题.请参见 [配置 Active Directory 身份验证:步骤 5](/docs/admin-settings/authentication/ad/_index).

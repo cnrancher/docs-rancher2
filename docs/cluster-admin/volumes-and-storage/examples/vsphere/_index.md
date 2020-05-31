@@ -27,7 +27,7 @@ keywords:
 
 > **注意：**
 >
-> 也可以使用`kubectl`命令行工具来执行以下步骤。相关的详细信息，请参阅[Kubernetes 关于持久卷的文档](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)。
+> 也可以使用 `kubectl` 命令行工具来执行以下步骤。相关的详细信息，请参阅[Kubernetes 关于持久卷的文档](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)。
 
 1. 在**全局**页面中，点选要提供 vSphere 存储的集群。
 2. 在主菜单中，下拉**存储**，选择**存储类**。然后点击**添加存储类**。
@@ -45,7 +45,7 @@ keywords:
 2. 在**工作负载类型**中，选择**StatefulSet**，Pod 数量为 1。
 3. 展开**卷**列表，并点击**添加卷**。
 4. 选择**添加一个新的持久卷(声明)**. 在部署工作负载后，该选项将隐式地创建一个卷声明。
-5. 为卷声明分配一个**名称**，例如`test-volume`，然后选择在上一步中创建的 vSphere 存储类。
+5. 为卷声明分配一个**名称**，例如 `test-volume`，然后选择在上一步中创建的 vSphere 存储类。
 6. 输入所需的卷**容量**，随后点击**定义**。
 
    ![workload-add-volume](/img/rancher/workload-add-volume.png)
@@ -56,7 +56,7 @@ keywords:
 ## 检验卷的持久性
 
 1. 在刚刚创建的工作负载的菜单中选择**执行 Shell**。
-2. 记下卷挂载的完整路径，在本例中是`/persistent`。
+2. 记下卷挂载的完整路径，在本例中是 `/persistent`。
 3. 在卷中创建一个文件：`touch /persistent/data.txt`。
 4. 点击**关闭**，关闭这个 shell。
 5. 单击工作负载的名称以显示详细信息。
@@ -64,7 +64,7 @@ keywords:
 7. 选择**删除**，删除这个 Pod。
 8. 观察 Pod 被重新调度并功运行。
 9. 再次点击**执行 Shell**。
-10. 通过输入`ls -l /persistent`，检查挂载卷的目录。请注意，您之前创建的文件应该存在。
+10. 通过输入 `ls -l /persistent`，检查挂载卷的目录。请注意，您之前创建的文件应该存在。
 
     ![workload-persistent-data](/img/rancher/workload-persistent-data.png)
 

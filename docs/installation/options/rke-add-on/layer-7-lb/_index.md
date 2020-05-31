@@ -26,12 +26,12 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
 
 此过程将引导您使用 Rancher Kubernetes Engine（RKE）设置 3 节点的集群。该集群的唯一目的是运行 Rancher Server 的 Pod。这个安装基于：
 
-- 具有 SSL 终止的第 7 层负载均衡器（HTTPS）
+- 可 SSL 终止的7层负载均衡器（HTTPS）
 - [NGINX Ingress Controller（HTTP）](https://kubernetes.github.io/ingress-nginx/)
 
-在使用第 7 层负载均衡器的 HA 设置中，负载均衡器通过 HTTP 协议（即应用程序级别）接受 Rancher 客户端连接。这种应用程序级别的访问，允许负载均衡器读取客户端请求，然后使用优化分配负载的逻辑将其重定向到合适的集群节点。
+在使用7层负载均衡器的 HA 设置中，负载均衡器通过 HTTP 协议（即应用程序级别）接受 Rancher 客户端连接。这种应用程序级别的访问，允许负载均衡器读取客户端请求，然后使用优化分配负载的逻辑将其重定向到合适的集群节点。
 
-<sup>Rancher 安装在具有第 7 层负载均衡器的 Kubernetes 集群上，描绘了负载均衡器的 SSL 终止</sup>
+<sup>下图描绘了在具有可 SSL 终止的7层负载均衡器的 Kubernetes 集群上，安装 Rancher Server。</sup>
 
 ![Rancher HA](/img/rancher/ha/rancher2ha-l7.svg)
 
@@ -41,15 +41,17 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
 
 ## 2. 配置负载均衡器
 
+当为 Rancher Server 配置7层负载均衡时，Rancher Server 无需重定向来自 80 或 443 端口的通讯。可 SSL 终止的7层负载均衡器传递 `X-Forwarded-Proto: https`请求头来禁用此重定向。
+
 在 Rancher 前面使用负载均衡器时，容器无需从 80 端口或 443 端口重定向端口通信。通过传递标头`X-Forwarded-Proto: https`禁用此重定向。这是在外部终止 SSL 时的必要配置。
 
 负载均衡器必须配置为支持以下各项：
 
 - **WebSocket** 连接
 - **SPDY** / **HTTP/2** 协议
-- 传递/设置以下标题：
+- 传递/设置以下请求头：
 
-  | HTTP 头             | 值                       | 描述                                                                                                                               |
+  | HTTP 请求头             | 值                       | 描述                                                                                                                               |
   | ------------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------- |
   | `Host`              | 可达 Rancher 的 hostname | 用来表示接受请求的 Rancher Server                                                                                                  |
   | `X-Forwarded-Proto` | `https`                  | 标识客户端用来连接到负载均衡器或代理的协议。<br /> <br/> **注意：**如果存在此标头，则`rancher/rancher`不会将 HTTP 重定向到 HTTPS。 |
@@ -117,9 +119,9 @@ RKE 使用 YAML 配置文件来安装和配置 Kubernetes 集群。根据要使�
 
 有了 `rancher-cluster.yml` 配置文件模板后，编辑节点部分以指向您的 Linux 主机。
 
-1.  在您喜欢的文本编辑器中打开`rancher-cluster.yml`。
+1.  在您喜欢的文本编辑器中打开 `rancher-cluster.yml` 。
 
-1.  `nodes` 使用 Linux 主机的信息更新此部分。
+1.  使用您的 Linux 主机信息更新配置模板中的 `nodes` 域。
 
     对于集群中的每个节点，更新以下占位符：`IP_ADDRESS_X` 和 `USER`。指定的用户应该能够访问 Docket socket，您可以通过使用指定的用户登录并运行来对其进行测试`docker ps`。
 
@@ -163,12 +165,12 @@ RKE 使用 YAML 配置文件来安装和配置 Kubernetes 集群。根据要使�
 > 创建一个自签名证书。
 >
 > - 证书文件必须为 `PEM` 格式。
-> - 证书文件必须使用 `base64` 编码。
+> - 证书文件必须使用 `Base64` 编码。
 > - 在您的证书文件中，包括链中的所有中间证书。顺序为前面为证书，后面跟着其他中间证书。有关示例，请参阅本文最后的 SSL 常见问题/故障排查。
 
-在有着`name: cattle-keys-ingress` 的 `kind: Secret` 中，用 CA 证书文件（通常称为 `ca.pem` 或 `ca.crt`）的 base64 编码字符串替换`<BASE64_CA>`。
+在有着`name: cattle-keys-ingress` 的 `kind: Secret` 中，用 CA 证书文件（通常称为 `ca.pem` 或 `ca.crt`）的 Base64 编码字符串替换`<BASE64_CA>`。
 
-> **注意：** base64 编码的字符串应与 `cacerts.pem` 在同一行，在开头，中间或结尾没有换行符。
+> **注意：** Base64 编码的字符串应与 `cacerts.pem` 在同一行，在开头，中间或结尾没有换行符。
 
 替换值之后，文件应类似于以下示例（base64 编码的字符串应不同）：
 
@@ -194,7 +196,7 @@ RKE 使用 YAML 配置文件来安装和配置 Kubernetes 集群。根据要使�
 
 2. 在有着 `name: cattle-ingress-http:` 的 `kind: Ingress`中，替换 `<FQDN>` 为在配置 DNS 时选择的 FQDN 。
 
-   **步骤结果：** 替换值后，文件应类似于以下示例（base64 编码的字符串应不同）：
+   **步骤结果：** 替换值后，文件应类似于以下示例（Base64 编码的字符串应不同）：
 
    ```
    apiVersion: extensions/v1beta1
@@ -288,7 +290,7 @@ VWQqljhfacYPgp8KJUJENQ9h5hZ2nSCrI+W00Jcw4QcEdCI8HL5wmg==
 -----END CERTIFICATE-----
 ```
 
-#### 如何通过 base64 编码我的 PEM 文件？
+#### 如何通过 Base64 编码我的 PEM 文件？
 
 运行以下命令之一。将`FILENAME`替换为您的证书名称。
 
@@ -301,9 +303,9 @@ cat FILENAME | base64 -w0
 certutil -encode FILENAME FILENAME.base64
 ```
 
-#### 如何验证生成的证书的 base64 字符串？
+#### 如何验证生成的证书的 Base64 字符串？
 
-运行以下命令之一。用之前复制的 base64 字符串替换 `YOUR_BASE64_STRING`。
+运行以下命令之一。用之前复制的 Base64 字符串替换 `YOUR_BASE64_STRING`。
 
 ```
 # MacOS
