@@ -76,6 +76,6 @@ module.exports = {
         sidebars,
         metadata,
         stable: "版本说明 - v2.4.3",
-        baseCommit: "edeea536490b4110b1915c429da5fd1cf55a08d6 - May 22, 2020",
+        baseCommit: "b0922e95c7e14ff9850613ff5b38348db0bf59d4 - June 1, 2020",
     },
 };
