@@ -98,7 +98,7 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
 ```
 # 安装 CustomResourceDefinition 资源
 
-kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/deploy/manifests/00-crds.yaml
+kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.15.0/cert-manager.crds.yaml
 
 # **重要：**
 # 如果您正在运行 Kubernetes v1.15 或更低版本，
@@ -124,7 +124,7 @@ helm repo update
 helm install \
  cert-manager jetstack/cert-manager \
  --namespace cert-manager \
- --version v0.12.0
+ --version v0.15.0
 
 ```
 

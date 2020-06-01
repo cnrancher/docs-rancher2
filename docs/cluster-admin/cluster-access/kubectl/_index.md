@@ -22,7 +22,7 @@ keywords:
 
 ## 在 Rancher UI 中使用 kubectl Shell 访问集群
 
-您可以通过登录 Rancher 并在 UI 中打开 kubectl shell 来访问和管理集群。无需进一步配置。
+您可以通过登录 Rancher 并在 UI 中打开 kubectl Shell 来访问和管理集群。无需进一步配置。
 
 1. 在 **全局** 视图中，打开您希望使用 kubectl 访问的集群。
 
@@ -49,7 +49,7 @@ keywords:
 
 ### 使用 kubectl 创建的资源注意事项
 
-Rancher 将发现和显示由 `kubectl`创建的资源。但是，这些资源可能没有关于发现的所有必要注释。如果使用 Rancher UI/API 对资源执行操作(例如，扩展工作负载)，这可能会由于缺少注释而触发对资源的重新创建。只有在对发现的资源执行操作时才会发生这种情况。
+Rancher 将发现和显示由 `kubectl` 创建的资源。但是，这些资源可能没有关于发现的所有必要注释。如果使用 Rancher UI/API 对资源执行操作(例如，扩展工作负载)，这可能会由于缺少注释而触发对资源的重新创建。只有在对发现的资源执行操作时才会发生这种情况。
 
 ## 直接使用下游集群进行身份验证
 
@@ -70,7 +70,7 @@ CURRENT   NAME                        CLUSTER                     AUTHINFO     N
           my-cluster-controlplane-1   my-cluster-controlplane-1   user-46tmn
 ```
 
-在本例中，当您将 `kubectl` 与第一个上下文 `my-cluster`一起使用时，将通过 Rancher Server 对您进行身份验证。
+在本例中，当您将 `kubectl` 与第一个上下文 `my-cluster` 一起使用时，将通过 Rancher Server 对您进行身份验证。
 
 对于第二个上下文 `my-cluster-controlplane-1`，您将使用授权的集群端点进行身份验证，直接与下游 RKE 集群通信。
 
@@ -98,7 +98,7 @@ kubectl --kubeconfig /custom/path/kube.config --context <CLUSTER_NAME>-fqdn get 
 
 ### 直接连接到没有 FQDN 的集群
 
-如果没有为集群定义 FQDN，则会创建引用控制平面中每个节点的 IP 地址的额外上下文。每个上下文将被命名为`<CLUSTER_NAME>-<NODE_NAME>`。当您想使用`kubectl` 来访问这个集群而不需要 Rancher 时，您将需要使用这个上下文。
+如果没有为集群定义 FQDN，则会创建引用控制平面中每个节点的 IP 地址的额外上下文。每个上下文将被命名为 `<CLUSTER_NAME>-<NODE_NAME>`。当您想使用 `kubectl` 来访问这个集群而不需要 Rancher 时，您将需要使用这个上下文。
 
 假设 kubeconfig 文件位于 `~/.kube/config`:
 

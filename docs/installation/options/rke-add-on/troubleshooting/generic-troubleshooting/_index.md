@@ -24,11 +24,11 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
 如果您当前正在使用 RKE add-on 安装方法，参见[将 RKE add-on 安装的 Rancher 迁移到 Helm 安装](/docs/upgrades/upgrades/migrating-from-rke-add-on/_index)，获取有关如何使用 Helm chart 的详细信息。
 :::
 
-您可以按下列步骤定位您集群中的问题原因。
+您可以按下列步骤定位您集群中的问题。
 
 ## 防火墙端口是否打开
 
-仔细检查所有[必需的端口](/docs/cluster-provisioning/node-requirements/_index)是否已经在（主机的）防火墙中开通。
+仔细检查[所需端口](/docs/cluster-provisioning/node-requirements/_index)是否已在主机防火墙或VPC安全组中打开。
 
 ## 节点是否处于 Ready 状态
 
@@ -48,7 +48,7 @@ kubectl --kubeconfig kube_config_rancher-cluster.yml get nodes
 kubectl --kubeconfig kube_config_rancher-cluster.yml get pods --all-namespaces
 ```
 
-如果有 pod 不处于 **Running** 状态，可以通过运行以下命令来找出根本原因：
+如果有 Pod 处于非 **Running** 状态，可以通过运行以下命令来找出根本原因：
 
 #### 描述 Pod
 
@@ -62,7 +62,7 @@ kubectl --kubeconfig kube_config_rancher-cluster.yml describe pod POD_NAME -n NA
 kubectl --kubeconfig kube_config_rancher-cluster.yml logs POD_NAME -n NAMESPACE
 ```
 
-如果有 job 处于非 **Completed** 状态，可以通过运行以下命令来找出根本原因：
+如果有 Job 处于非 **Completed** 状态，可以通过运行以下命令来找出根本原因：
 
 #### 描述 Job
 
@@ -84,7 +84,7 @@ Ingress 应该具有正确的 `HOSTS`（显示已配置的 FQDN）和 `ADDRESS` 
 kubectl --kubeconfig kube_config_rancher-cluster.yml get ingress --all-namespaces
 ```
 
-## 显示所有 Kubernetes 集群事件
+## 显示 Kubernetes 集群的所有事件
 
 Kubernetes 集群事件会被存储，可以通过运行以下命令进行检索：
 
@@ -106,11 +106,11 @@ kubectl --kubeconfig kube_config_rancher-cluster.yml logs -l app=ingress-nginx -
 
 ## 检查 Overlay 网络是否正常运行
 
-Pod 可以被调度到集群中的任何主机，这就意味着 NGINX ingress controller 需要能够将请求从 `NODE_1` 路由到 `NODE_2`。这发生在 Overlay 网络 上。如果 Overlay 网络 不工作，NGINX ingress controller 就无法路由到 Pod，那么您将可能遇到间歇性的 TCP/HTTP 连接失败的错误。
+Pod 可以被调度到集群中的任何主机，这就意味着 NGINX ingress controller 能将请求从 `NODE_1` 路由到 `NODE_2`，即，请求是在 Overlay 网络之上流转的。也就是说，如果 Overlay 网络不正常，NGINX ingress controller 就无法把请求路由到 Pod，那么您将遇到间歇性的 TCP/HTTP connection failed 的错误。
 
-要测试 Overlay 网络，您可以启动以下的 `DaemonSet` 定义。这将在每个主机上运行一个 `alpine`容器，并在所有主机上的容器之间运行一个 `ping` 测试。
+您如果要测试集群 Overlay 网络的连通性，可以运行下面的 `DaemonSet` ，在每个主机上跑起一个 `alpine` 容器，然后在这些容器之间执行 `ping` 测试。
 
-1. 将以下文件另存为 `ds-alpine.yml`
+1. 将以下文件另存为 `ds-alpine.yml`：
 
    ```
      apiVersion: apps/v1
@@ -141,26 +141,26 @@ Pod 可以被调度到集群中的任何主机，这就意味着 NGINX ingress c
              terminationMessagePath: /dev/termination-log
    ```
 
-1. 安装并启动它 `kubectl --kubeconfig kube_config_rancher-cluster.yml create -f ds-alpine.yml`
+1. 执行 `kubectl --kubeconfig kube_config_rancher-cluster.yml create -f ds-alpine.yml` 。
 
-1. 等待直到 `kubectl --kubeconfig kube_config_rancher-cluster.yml rollout status ds/alpine -w` 返回：`daemon set "alpine" successfully rolled out`。
+1. 执行 `kubectl --kubeconfig kube_config_rancher-cluster.yml rollout status ds/alpine -w` 直到返回：`daemon set "alpine" successfully rolled out` 。
 
-1. 运行以下命令，使每个主机上的每个容器相互 ping 通（这是一条单行命令）.
+1. 运行以下命令，使每个主机上的每个容器相互 ping 通（这是一条单行命令）。
 
    ```
      echo "=> Start"; kubectl --kubeconfig kube_config_rancher-cluster.yml get pods -l name=alpine -o jsonpath='{range .items[*]}{@.metadata.name}{" "}{@.spec.nodeName}{"\n"}{end}' | while read spod shost; do kubectl --kubeconfig kube_config_rancher-cluster.yml get pods -l name=alpine -o jsonpath='{range .items[*]}{@.status.podIP}{" "}{@.spec.nodeName}{"\n"}{end}' | while read tip thost; do kubectl --kubeconfig kube_config_rancher-cluster.yml --request-timeout='10s' exec $spod -- /bin/sh -c "ping -c2 $tip > /dev/null 2>&1"; RC=$?; if [ $RC -ne 0 ]; then echo $shost cannot reach $thost; fi; done; done; echo "=> End"
    ```
 
-1. 该命令运行完毕后，代表一切正确的输出为：
+1. 该命令运行完毕后，代表一切正确的输出如下：
 
    ```
      => Start
      => End
    ```
 
-如果在输出中看到错误，则表示在指示的主机之间未打开给 Overlay 网络使用的[必须端口](/docs/cluster-provisioning/node-requirements/_index)。
+如果在输出中看到错误，则表示在测试的主机之间未打开 Overlay 网络的[所需端口](/docs/cluster-provisioning/node-requirements/_index)。
 
-当 NODE1 的 UDP 端口被禁用时的错误示例。
+下面是当 NODE1 的 UDP 端口被禁用时的错误示例：
 
 ```
 => Start

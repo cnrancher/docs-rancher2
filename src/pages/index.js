@@ -4,6 +4,10 @@ import Layout from "@theme/Layout";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import styles from "./styles.module.css";
 
+const description =
+  "Rancher中文文档由Rancher中国研发团队翻译并重新编排，每周更新，与Rancher英文文档保持同步。另一方面，Rancher中文文档也是Kubernetes入门的重要性内容文档，用户可以从中获得K8S相关的有用知识。";
+const keywords = ["Rancher文档", "k8s文档", "容器管理平台", "Kubernetes集群"];
+const metaTitle = "Rancher文档 | K8S文档 | Rancher";
 function findAndAppendSubGroups(all, metadata, baseUrl, subItems) {
   subItems.forEach(sub => {
     if (typeof sub === "string") {
@@ -44,9 +48,9 @@ function Home() {
   const { baseUrl } = siteConfig;
   const { sidebars, metadata } = siteConfig.customFields;
   const toc = getToc(sidebars, metadata, baseUrl);
-  const title = siteConfig.title + " 中文文档";
+  const title = "Rancher 2.x 中文文档";
   return (
-    <Layout title="中文文档" description={title}>
+    <Layout title={metaTitle} description={description} keywords={keywords}>
       <header className={classnames("hero", styles.heroBanner)}>
         <div className="container">
           <h1 className="hero__title">{title}</h1>

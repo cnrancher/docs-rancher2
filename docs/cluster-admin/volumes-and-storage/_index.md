@@ -22,11 +22,11 @@ keywords:
 
 ## 先决条件
 
-配置持久化存储，需要用有`管理卷（Manage Volumes）`权限的[角色](/docs/admin-settings/rbac/cluster-project-roles/_index)的用户。
+配置持久化存储，需要用拥有 `管理卷（Manage Volumes）` 权限的[角色](/docs/admin-settings/rbac/cluster-project-roles/_index)的用户。
 
-如果要在云提供商托管的集群中设置存储，则需要保证存储和集群主机是来自同一个云提供商。在 Rancher 中对接新的云存储，必须配置 Cloud Provider，关于如何配置的详细信息可以浏览[这里](/docs/cluster-provisioning/rke-clusters/cloud-providers/_index)。
+如果要在基础设施提供商托管的集群中设置存储，则需要保证存储和集群主机是来自同一个基础设施提供商。在 Rancher 中对接新的云存储，必须配置 Cloud Provider，关于如何配置的详细信息可以浏览[这里](/docs/cluster-provisioning/rke-clusters/cloud-providers/_index)。
 
-如果是设置对接现有的存储，则无需配置启用云提供商。
+如果是设置对接现有的存储，则无需配置启用基础设施提供商。
 
 ## 设置现有的存储
 
@@ -55,15 +55,15 @@ keywords:
 
 ## GlusterFS 卷
 
-在 [Rancher 启动的 Kubernetes 集群](/docs/cluster-provisioning/rke-clusters/_index)里，将数据存储到 GlusterFS 卷时，您可能会遇到一个问题：在重启`kubelet`之后，Pod 无法安装卷。关于如何防止这种情况发生的相关细节，可以参阅[这里](/docs/cluster-admin/volumes-and-storage/glusterfs-volumes/_index)。
+在 [Rancher 启动的 Kubernetes 集群](/docs/cluster-provisioning/rke-clusters/_index)里，将数据存储到 GlusterFS 卷时，您可能会遇到一个问题：在重启 `kubelet` 之后，Pod 无法安装卷。关于如何防止这种情况发生的相关细节，可以参阅[这里](/docs/cluster-admin/volumes-and-storage/glusterfs-volumes/_index)。
 
 ## iSCSI 卷
 
-在 [Rancher 启动的 Kubernetes 集群](/docs/cluster-provisioning/rke-clusters/_index)里，将数据存储到 iSCSI 卷时，您可能会遇到一个问题：`kubelet`无法自动连接 iSCSI 卷。关于如何解决这个问题的相关细节，可以参阅[这里](/docs/cluster-admin/volumes-and-storage/iscsi-volumes/_index)。
+在 [Rancher 启动的 Kubernetes 集群](/docs/cluster-provisioning/rke-clusters/_index)里，将数据存储到 iSCSI 卷时，您可能会遇到一个问题：`kubelet` 无法自动连接 iSCSI 卷。关于如何解决这个问题的相关细节，可以参阅[这里](/docs/cluster-admin/volumes-and-storage/iscsi-volumes/_index)。
 
-## hostPath 卷
+## HostPath 卷
 
-在创建 hostPath 卷之前，您需要在您的集群配置文件中设置 [extra_bind](https://rancher.com/docs/rke/latest/en/config-options/services/services-extras/#extra-binds/)。这会将这些路径作为卷挂载到您的 kubelet 中，然后可以在工作负载中通过 hostPath 卷使用它们。
+在创建 HostPath 卷之前，您需要在您的集群配置文件中设置 [extra_bind](https://rancher.com/docs/rke/latest/en/config-options/services/services-extras/#extra-binds/)。这会将这些路径作为卷挂载到您的 `kubelet` 中，然后可以在工作负载中通过 hostPath 卷使用它们。
 
 ## 相关链接
 

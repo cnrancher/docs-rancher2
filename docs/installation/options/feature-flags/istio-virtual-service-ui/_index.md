@@ -1,6 +1,6 @@
 ---
 title: UI 管理 Istio Virtual Services 和 Istio Destination Rules
-description: 此功能可以使用 UI 创建，读取，更新和删除虚拟服务和目标规则，他们负责 Istio 的流量管理功能。
+description: 此功能可以使用 UI 创建、读取、更新和删除虚拟服务和目标规则，他们负责 Istio 的流量管理功能。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -19,22 +19,22 @@ keywords:
 
 _自 v2.3.0 起可用_
 
-此功能可以使用 UI 创建，读取，更新和删除虚拟服务和目标规则，他们负责 Istio 的流量管理功能。
+此功能可以使用 UI 创建、读取、更新和删除虚拟服务和目标规则，负责 Istio 的流量管理功能。
 
 > **先决条件：** 打开此功能不会启用 Istio。集群管理员需要[为集群启用 Istio](/docs/cluster-admin/tools/istio/setup/_index)才能使用该功能。
 
 要启用或禁用此功能，请参阅[关于启用实验性功能的主页](/docs/installation/options/feature-flags/_index)。
 
 | 环境变量 Key               | 默认值  | 状态   | 可用版本 |
-| -------------------------- | ------- | ------ | -------- |
+| :------------------------- | :------ | :----- | :------- |
 | `istio-virtual-service-ui` | `false` | 实验性 | v2.3.0   |
 | `istio-virtual-service-ui` | `true`  | GA     | v2.3.2   |
 
 ## 关于此功能
 
-Istio 的流量管理功能的主要优势在于它们允许动态请求路由，这对于金丝雀发布，蓝/绿发布或 A/B 测试非常有用。
+Istio 的流量管理功能的主要优势在于它们允许动态请求路由，对于金丝雀发布，蓝/绿发布或 A/B 测试非常有用。
 
-启用后，此功能会打开一个页面，使您可以使用 Rancher UI 配置 Istio 的一些流量管理功能。没有此功能，您需要使用`kubectl`来管理 Istio 的流量。
+启用后，此功能会打开一个页面，使您可以使用 Rancher UI 配置 Istio 的一些流量管理功能。如果没有此功能，您需要使用`kubectl`来管理 Istio 的流量。
 
 该功能启用了两个 UI 选项卡：一个选项卡用于**虚拟服务** ，另一个选项卡用于**目标规则**
 

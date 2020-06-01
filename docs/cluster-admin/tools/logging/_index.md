@@ -22,7 +22,7 @@ Rancher 支持与以下日志收集目标服务集成：
 
 Rancher 使用 Fluentd 收集日志，并与外部日志服务集成。
 
-将 Rancher 配置为与这些外部日志服务集成时，必须将 Rancher 指向服务的访问地址端点并提供身份验证信息。
+当配置 Rancher 与外部日志服务集成时，必须为 Rancher 指明这些服务的访问地址并提供访问这些服务的身份验证信息。
 
 Fluentd 收集保存在节点上 `/var/log/containers` 目录下的容器日志，其中包含了容器的标准输出日志和错误日志并发送到外部日志服务，您可以进入接收日志的外部日志服务查看日志。
 
@@ -51,7 +51,7 @@ Logging Driver: json-file
 
 ## 开启集群级别的日志
 
-作为[系统管理员](/docs/admin-settings/rbac/global-permissions/_index)或者[集群所有者](/docs/admin-settings/rbac/cluster-project-roles/_index)，您可以配置 Rancher 将 Kubernetes 集群日志发送到日志服务。
+作为[系统管理员](/docs/admin-settings/rbac/global-permissions/_index)或者[集群所有者](/docs/admin-settings/rbac/cluster-project-roles/_index)，您可以配置 Rancher 把集群的日志发送到外部的日志服务。
 
 1. 从**全局**视图中，进入要收集日志的集群。
 
@@ -103,7 +103,7 @@ Logging Driver: json-file
 
 1. 点击 **保存**。
 
-**结果：** 现在，Rancher 已配置为将日志发送到所选日志服务。登录到外部日志服务，以便您可以开始查看日志。
+**结果：** 现在，Rancher 已配置为把日志发送到所选的外部日志服务。登录到对应的外部日志服务，您可以开始查看相关的集群日志。
 
 ### 相关链接
 

@@ -18,14 +18,14 @@ keywords:
 
 本章节描述了如何在 Rancher 里为工作负载配置现有的持久化存储。
 
-> 本章节假定您已了解 Kubernetes 持久卷和持久卷声明的概念。 有关更多信息，请参阅[存储是如何工作的](/docs/cluster-admin/volumes-and-storage/how-storage-works/_index)
+> 本章节假定您已了解 Kubernetes 持久卷和持久卷声明的概念。有关更多信息，请参阅[存储是如何工作的](/docs/cluster-admin/volumes-and-storage/how-storage-works/_index)
 
 可以按照以下步骤进行存储的配置。
 
 ## 先决条件
 
-- 配置持久化存储，需要有`管理卷（Manage Volumes）`权限的[角色](/docs/admin-settings/rbac/cluster-project-roles/_index)。
-- 如果要在云提供商托管的集群中设置存储，则需要保证存储和集群主机是来自同一个云提供商。
+- 配置持久化存储，需要有 `管理卷（Manage Volumes）` 权限的[角色](/docs/admin-settings/rbac/cluster-project-roles/_index)。
+- 如果要在基础设施提供商托管的集群中设置存储，则需要保证存储和集群主机是来自同一个基础设施提供商。
 
 ## 1、在基础设施中设置持久化存储
 
@@ -40,7 +40,7 @@ keywords:
 1. 在集群页面中，下拉**存储**，选择**持久卷**。
 1. 点击**添加卷**。
 1. 输入持久卷的**名称**。
-1. 根据使用的磁盘类型或服务选择`卷插件`。在云提供商托管的集群中设置存储，请使用云提供商的卷插件。例如，如果您有 Amazon EC2 集群，并且想要为其使用云存储，则必须使用`Amazon EBS Disk`卷插件。
+1. 根据使用的磁盘类型或服务选择 `卷插件`。在基础设施提供商托管的集群中设置存储，请使用基础设施提供商的卷插件。例如，如果您有 Amazon EC2 集群，并且想要为其使用云存储，则必须使用 `Amazon EBS Disk` 卷插件。
 1. 输入卷的 **Capacity**（以 GB 为单位）。
 1. 填写**插件配置**表单。每种插件类型都需要特定于磁盘类型供应商的信息。有关每个插件的形式和所需信息的帮助，请参阅插件的服务文档以获取更多信息。
 1. **可选：** 在**自定义**表单中，配置[访问模式](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)。该选项设置了可访问卷的节点数及节点的读写权限。在[Kubernetes 文档](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)中包含了一个列表，列出了可用插件支持的访问模式。
