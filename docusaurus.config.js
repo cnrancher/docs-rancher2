@@ -77,7 +77,7 @@ module.exports = {
   customFields: {
     sidebars,
     metadata,
-    stable: "版本说明 - v2.4.3",
+    stable: "版本说明 - v2.4.4",
     baseCommit: "b0922e95c7e14ff9850613ff5b38348db0bf59d4 - June 1, 2020"
   }
 };
