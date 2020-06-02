@@ -63,7 +63,7 @@ keywords:
       exportfs -ra
       ```
 
-1. 打开 NFS 的端口.
+1. 打开 NFS 的端口。
 
    1. 可以使用以下命令找出 NFS 正在使用的端口：
 
@@ -79,6 +79,6 @@ keywords:
 
 **结果：** 您的 NFS 服务器已经设置好，可用于 Rancher 作存储服务。
 
-## 下一步？
+## 后续操作
 
 在 Rancher 中，将 NFS 服务器添加为[存储卷](/docs/cluster-admin/volumes-and-storage/_index)又或者[存储类](/docs/cluster-admin/volumes-and-storage/_index)。添加服务器后，可以将其用于部署存储。

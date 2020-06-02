@@ -16,17 +16,17 @@ keywords:
   - 持久化存储
 ---
 
-在部署需要保留数据的应用程序时，您需要创建永久性存储。持久化存储允许您将应用程序数据存储在运行应用程序的 Pod 外部。即使应用程序的 Pod 发生故障，这种存储方法也可以使您维护应用程序数据。
+持久化存储允许您将应用程序数据存储在运行应用程序的 Pod 外部。如果应用程序的 Pod 发生故障，这种存储方法可以保护应用程序数据不受故障影响。在部署需要保留数据的应用程序时，您需要创建永久性存储。
 
-本章节假定您已了解 Kubernetes 持久卷，持久卷声明和存储类的概念。有关更多信息，请参阅[存储是如何工作的](/docs/cluster-admin/volumes-and-storage/how-storage-works/_index)。
+本章节默认您已了解 Kubernetes 持久卷、持久卷声明和存储类的概念。请参阅[存储是如何工作的](/docs/cluster-admin/volumes-and-storage/how-storage-works/_index)，获取更多相关信息。
 
 ## 先决条件
 
 配置持久化存储，需要用拥有 `管理卷（Manage Volumes）` 权限的[角色](/docs/admin-settings/rbac/cluster-project-roles/_index)的用户。
 
-如果要在基础设施提供商托管的集群中设置存储，则需要保证存储和集群主机是来自同一个基础设施提供商。在 Rancher 中对接新的云存储，必须配置 Cloud Provider，关于如何配置的详细信息可以浏览[这里](/docs/cluster-provisioning/rke-clusters/cloud-providers/_index)。
+如果要在基础设施提供商托管的集群中设置存储，则需要使来自同一个基础设施提供商的存储和集群主机。在 Rancher 中对接新的云存储，必须配置 Cloud Provider，关于如何配置的详细信息可以浏览[这里](/docs/cluster-provisioning/rke-clusters/cloud-providers/_index)。
 
-如果是设置对接现有的存储，则无需配置启用基础设施提供商。
+如果对接现有的存储，则无需配置启用基础设施提供商。
 
 ## 设置现有的存储
 
