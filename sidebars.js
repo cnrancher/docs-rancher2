@@ -8,9 +8,11 @@
 module.exports = {
   docs: {
     版本说明: [
+      "releases/v2.4.4",
       "releases/v2.4.3",
       "releases/v2.4.2",
       "releases/v2.4.0",
+      "releases/v2.3.8",
       "releases/v2.3.7",
       "releases/v2.3.6",
       "releases/v2.3.5",
