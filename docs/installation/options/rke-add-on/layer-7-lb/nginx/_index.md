@@ -36,17 +36,17 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
 
 ## 运行 NGINX
 
-- 重新加载或重启 NGINX
+重新加载或重启 NGINX
 
-  ```
-  # Reload NGINX
-  nginx -s reload
+```
+# Reload NGINX
+nginx -s reload
 
-  # Restart NGINX
-  # Depending on your Linux distribution
-  service nginx restart
-  systemctl restart nginx
-  ```
+# Restart NGINX
+# Depending on your Linux distribution
+service nginx restart
+systemctl restart nginx
+```
 
 ## 浏览 Rancher UI
 

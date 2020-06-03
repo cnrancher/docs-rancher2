@@ -44,7 +44,7 @@ kubectl --kubeconfig kube_config_rancher-cluster.yml logs -l job-name=rke-user-a
 
 - 是否将每个 Base64 编码的证书字符串直接放置在密钥之后，例如: `tls.crt: LS01...`，在此前后和之间确保没有任何换行符。
 - YAML 的格式是否正确，缩进应为 **2** 个空格。
-- 运行以下命令验证证书的完整性，如果存在任何错误, 命令输出将显示。
+- 运行以下命令验证证书的完整性，如果存在任何错误，命令输出将显示。
   - Linux：`cat MyCertificate | base64 -d`
   - Mac OS：`cat MyCertificate | base64 -D`
 
@@ -73,4 +73,4 @@ certutil -decode FILENAME.base64 FILENAME.verify
 
 ## The Ingress “cattle-ingress-http” is invalid: spec.rules[0].host: Invalid value: “IP”: must be a DNS name, not an IP address
 
-在 `spec.rules[0].host` 中只能定义一个主机名, 因为 ingress controller 需要该名称来匹配请求头中描述的 `Host` ，并传递给正确的应用服务。
+在 `spec.rules[0].host` 中只能定义一个主机名，因为 ingress controller 需要该名称来匹配请求头中描述的 `Host` ，并传递给正确的应用服务。
