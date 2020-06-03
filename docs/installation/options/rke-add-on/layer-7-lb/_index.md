@@ -26,12 +26,12 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
 
 此过程将引导您使用 Rancher Kubernetes Engine（RKE）设置 3 节点的集群。该集群的唯一目的是运行 Rancher Server 的 Pod。这个安装基于：
 
-- 可 SSL 终止的7层负载均衡器（HTTPS）
+- 可 SSL 终止的 7 层负载均衡器（HTTPS）
 - [NGINX Ingress Controller（HTTP）](https://kubernetes.github.io/ingress-nginx/)
 
-在使用7层负载均衡器的 HA 设置中，负载均衡器通过 HTTP 协议（即应用程序级别）接受 Rancher 客户端连接。这种应用程序级别的访问，允许负载均衡器读取客户端请求，然后使用优化分配负载的逻辑将其重定向到合适的集群节点。
+在使用 7 层负载均衡器的 HA 设置中，负载均衡器通过 HTTP 协议（即应用程序级别）接受 Rancher 客户端连接。这种应用程序级别的访问，允许负载均衡器读取客户端请求，然后使用优化分配负载的逻辑将其重定向到合适的集群节点。
 
-<sup>下图描绘了在具有可 SSL 终止的7层负载均衡器的 Kubernetes 集群上，安装 Rancher Server。</sup>
+<sup>下图描绘了在具有可 SSL 终止的 7 层负载均衡器的 Kubernetes 集群上，安装 Rancher Server。</sup>
 
 ![Rancher HA](/img/rancher/ha/rancher2ha-l7.svg)
 
@@ -41,7 +41,7 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
 
 ## 2. 配置负载均衡器
 
-当为 Rancher Server 配置7层负载均衡时，Rancher Server 无需重定向来自 80 或 443 端口的通讯。可 SSL 终止的7层负载均衡器传递 `X-Forwarded-Proto: https`请求头来禁用此重定向。
+当为 Rancher Server 配置 7 层负载均衡时，Rancher Server 无需重定向来自 80 或 443 端口的通讯。可 SSL 终止的 7 层负载均衡器传递 `X-Forwarded-Proto: https`请求头来禁用此重定向。
 
 在 Rancher 前面使用负载均衡器时，容器无需从 80 端口或 443 端口重定向端口通信。通过传递标头`X-Forwarded-Proto: https`禁用此重定向。这是在外部终止 SSL 时的必要配置。
 
@@ -51,12 +51,12 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
 - **SPDY** / **HTTP/2** 协议
 - 传递/设置以下请求头：
 
-  | HTTP 请求头             | 值                       | 描述                                                                                                                               |
-  | ------------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------- |
-  | `Host`              | 可达 Rancher 的 hostname | 用来表示接受请求的 Rancher Server                                                                                                  |
+  | HTTP 请求头         | 值                       | 描述                                                                                                                               |
+  | :------------------ | :----------------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
+  | `Host`              | 可达 Rancher 的 hostname | 接收请求的 Rancher Server。                                                                                                        |
   | `X-Forwarded-Proto` | `https`                  | 标识客户端用来连接到负载均衡器或代理的协议。<br /> <br/> **注意：**如果存在此标头，则`rancher/rancher`不会将 HTTP 重定向到 HTTPS。 |
   | `X-Forwarded-Port`  | 可达 Rancher 的端口      | 标识客户端用来连接到负载均衡器或代理的端口。                                                                                       |
-  | `X-Forwarded-For`   | 请求端 IP 地址           | 用来表示请求端原始 IP                                                                                                              |
+  | `X-Forwarded-For`   | 请求端 IP 地址           | 请求端的原始 IP。                                                                                                                  |
 
   可以在节点的`/healthz`端点上执行健康检查，这将返回 HTTP 200。
 
@@ -113,7 +113,7 @@ RKE 使用 YAML 配置文件来安装和配置 Kubernetes 集群。根据要使�
    > - 想要记录 Rancher API 的所有事务? 通过编辑 RKE 配置文件来启用[API 审计日志](/docs/installation/options/api-audit-log/_index)功能。有关更多信息，请参见如何在[RKE 配置文件中](/docs/installation/options/api-audit-log/_index)中启用它。
    > - 想知道您的 RKE 模板可用的其他配置选项吗？ 请参阅[RKE 文档：配置选项](https://rancher.com/docs/rke/latest/en/config-options/)。
 
-2. 将文件重命名为 `rancher-cluster.yml`.
+2. 将文件重命名为 `rancher-cluster.yml`。
 
 ## 6. 配置节点
 
@@ -265,7 +265,7 @@ RKE 使用 YAML 配置文件来安装和配置 Kubernetes 集群。根据要使�
 
 在安装过程中，RKE 自动生成一个 `kube_config_rancher-cluster.yml` 与该 `rancher-cluster.yml` 文件位于同一目录中的配置文件。复制此文件并将其备份到安全位置。稍后在升级 Rancher Server 时将使用此文件。
 
-## 下一步是什么？
+## 后续操作
 
 - **推荐：** 查看[创建备份：高可用性备份和还原](/docs/backups/backups/ha-backups/_index)，以了解在灾难情况下如何备份 Rancher Server。
 - 创建 Kubernetes 集群： [创建集群](/docs/cluster-provisioning/_index)。

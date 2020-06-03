@@ -28,11 +28,11 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
 
 ## 防火墙端口是否打开
 
-仔细检查[所需端口](/docs/cluster-provisioning/node-requirements/_index)是否已在主机防火墙或VPC安全组中打开。
+仔细检查[所需端口](/docs/cluster-provisioning/node-requirements/_index)是否已在主机防火墙或 VPC 安全组中打开。
 
 ## 节点是否处于 Ready 状态
 
-请运行以下命令检测:
+请运行以下命令检测：
 
 ```
 kubectl --kubeconfig kube_config_rancher-cluster.yml get nodes
