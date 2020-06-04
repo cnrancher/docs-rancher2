@@ -55,6 +55,14 @@ Rancher 使用 Kubernetes 的 Helm 软件包管理器安装。Helm Charts 为 Ku
 helm repo add rancher-<CHART_REPO> https://releases.rancher.com/server-charts/<CHART_REPO>
 ```
 
+:::note 提示
+国内用户，可以使用放在国内的Rancher Chart加速安装：
+
+```
+helm repo add rancher-<CHART_REPO> http://rancher-mirror.oss-cn-beijing.aliyuncs.com/server-charts/<CHART_REPO>
+```
+:::
+
 ## 3、为 Rancher 创建 Namespace
 
 我们需要定义一个 Kubernetes Namespace，在 Namespace 中安装由 Chart 创建的资源。这个命名空间的名称为`cattle-system`：

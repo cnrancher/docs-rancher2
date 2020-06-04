@@ -96,6 +96,21 @@ Rancher 默认使用 github 上的 repo 作为应用商店的 URL，如果出现
 修改`rke-metadata-config`地址时，需要对应版本号，一定要和默认地址中的版本号对应上，本例的版本号是`v2.4`。
 :::
 
+## 使用国内 Rancher Chart 地址添加 Helm Chart 仓库
+
+在国内使用helm安装rancher，[添加 Helm Chart 仓库](/docs/installation/k8s-install/helm-rancher/_index)时有时候会因为访问国外网络导致Rancher Chart添加失败，如下:
+
+```
+helm repo add rancher-stable https://releases.rancher.com/server-charts/stable
+Error: looks like "https://releases.rancher.com/server-charts/stable" is not a valid chart repository or cannot be reached: Get https://releases.rancher.com/server-charts/stable/index.yaml: dial tcp 104.26.5.146:443: i/o timeout
+```
+
+为了解决这个问题，我们在国内也同步了一份Rancher Chart，使用时只需要替换成国内的Rancher Chart地址即可：
+
+```
+helm repo add rancher-<CHART_REPO> http://rancher-mirror.oss-cn-beijing.aliyuncs.com/server-charts/<CHART_REPO>
+```
+
 ## 同步说明
 
 以上提到的资源，我们会通过定时任务每天从 Github 上拉取，同步到国内。也许存在延迟或同步失败的情况，如果发现任何问题，欢迎在微信技术交流群或官方论坛中向我们反馈。
