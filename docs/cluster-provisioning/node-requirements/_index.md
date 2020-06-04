@@ -15,9 +15,7 @@ keywords:
   - 下游集群节点要求
 ---
 
-本页描述了安装您的应用和服务所在节点的要求。
-
-在本章节，`下游集群` 是指运行您的应用程序的集群，它应该与运行 Rancher Server 的集群（或单个节点）分开。
+本页描述了安装您的应用和服务所在节点的要求。`下游集群` 是指运行您的应用程序的集群，它应该与运行 Rancher Server 的高可用集群或单节点分开。
 
 > 如果 Rancher 安装在 Kubernetes 集群上，Rancher Server 集群和下游集群有不同的要求。有关 Rancher Server 安装要求，请参阅[高可用安装要求](/docs/installation/requirements/_index)。
 
@@ -27,7 +25,9 @@ keywords:
 
 Rancher 理论上可以任何通用的 Linux 发行版和任何通用的 Docker 版本一起工作。所有下游集群的 etcd 和 controlplane 节点都需要运行在 Linux 上。Worker 节点可以运行在 Linux 或 Windows 上。在 Rancher v2.3.0 中添加了在下游集群中使用 Windows Worker 节点的功能。
 
-Rancher 已经过测试，并官方支持在 Ubuntu，CentOS，Oracle Linux，RancherOS 和 RedHat Enterprise Linux 上运行下游集群。关于每个 Rancher 版本所测试过的操作系统和 Docker 版本的详细信息，请参阅[支持维护条款](https://rancher.com/support-maintenance-terms/)。
+
+Rancher 已经过测试，并官方支持在 Ubuntu，CentOS，Oracle Linux，RancherOS 和 RedHat Enterprise Linux 上运行下游集群。关于每个 Rancher 版本所测试过的操作系统和 Docker 版本的详细信息，请参阅[支持维护条款](https://rancher.cn/support-maintenance-terms/)。
+
 
 所有受支持的操作系统都是 64-bit x86 系统。
 
@@ -35,7 +35,7 @@ Rancher 已经过测试，并官方支持在 Ubuntu，CentOS，Oracle Linux，Ra
 
 有关如何安装 Docker 的信息，请参阅官方[Docker 文档](https://docs.docker.com/)。
 
-一些 RHEL 派生的 Linux 发行版，可能有默认的防火墙规则。这些规则可能会屏蔽掉 Helm 的通信。这个[操作指南](/docs/installation/options/firewall/_index)展示了如何检查 Oracle Linux 的默认防火墙规则，以及在必要时如何使用`firewalld`开放端口。
+一些 RHEL 衍生的 Linux 发行版，可能有默认的防火墙规则，可能会屏蔽掉 Helm 的通信。这个[操作指南](/docs/installation/options/firewall/_index)展示了如何检查 Oracle Linux 的默认防火墙规则，以及在必要时如何使用`firewalld`开放端口。
 
 SUSE Linux 可能有默认阻止所有端口的防火墙。在这种情况下，请按照[以下步骤](#开放-suse-linux-端口)，开放将添加到自定义集群的主机的端口。
 
@@ -120,7 +120,7 @@ import PortsIaasNodes from '@theme/PortsIaasNodes';
 在使用 [AWS EC2 主机驱动](/docs/cluster-provisioning/rke-clusters/node-pools/ec2/_index)在 Rancher 中配置集群节点时，您可以选择让 Rancher 创建一个名为 rancher-nodes 的安全组。以下规则将自动添加到此安全组。
 
 | 类型            | 协议 |  端口范围   | 源/目的                | 规则类型 |
-| --------------- | :--: | :---------: | ---------------------- | :------: |
+| :-------------- | :--: | :---------: | :--------------------- | :------: |
 | SSH             | TCP  |     22      | 0.0.0.0/0              |   入站   |
 | HTTP            | TCP  |     80      | 0.0.0.0/0              |   入站   |
 | 自定义 TCP 规则 | TCP  |     443     | 0.0.0.0/0              |   入站   |
@@ -182,7 +182,7 @@ SUSE Linux 可能具有默认情况下阻止所有端口的防火墙。要开放
    FW_ROUTE=yes
    ```
 
-3. 使用新端口重启防火墙:
+3. 使用新端口重启防火墙：
 
    ```
    SuSEfirewall2

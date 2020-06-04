@@ -27,16 +27,16 @@ keywords:
 
 ## 1、创建 IAM 角色并附加到实例
 
-添加到集群的所有节点必须能够与 EC2 交互，以便它们可以创建和删除资源。您可以使用附加到实例的 IAM 角色来启用此交互。请参阅[Amazon 文档：创建 IAM Role](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#create-iam-role)了解如何创建 IAM 角色。有两个示例策略：
+添加到集群的所有节点必须能够与 EC2 交互，这样它们才可以创建和删除资源。您可以使用附加到实例的 IAM 角色来启用此交互。请参阅[Amazon 文档：创建 IAM Role](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#create-iam-role)了解如何创建 IAM 角色。有两个示例策略：
 
-- 第一个策略是针对具有`controlplane`角色的节点。这些节点必须能够创建/删除 EC2 资源。下面的 IAM 策略是一个例子，请在例子中删除任何不需要的权限。
+- 第一个策略是针对具有`controlplane`角色的节点。这些节点必须能够创建和删除 EC2 资源。下面的 IAM 策略是一个例子，请在例子中删除任何不需要的权限。
 - 第二个策略是针对具有`etcd`或`worker`角色的节点。这些节点只需要能够从 EC2 检索信息。
 
-创建 [Amazon EC2 集群](/docs/cluster-provisioning/rke-clusters/node-pools/ec2/_index)时，必须在创建**节点模板**时填写创建的 IAM 角色的**Iam 实例配置文件名称**（而不是 ARN）。
+创建 [Amazon EC2 集群](/docs/cluster-provisioning/rke-clusters/node-pools/ec2/_index)时，必须在创建**节点模板**时填写创建的 IAM 角色的**IAM 实例配置文件名称**（而不是 ARN）。
 
 创建[自定义集群](/docs/cluster-provisioning/rke-clusters/custom-nodes/_index)时，必须手动将 IAM 角色附加到实例。
 
-具有`controlplane`角色的节点的 IAM 策略:
+具有`controlplane`角色的节点的 IAM 策略：
 
 ```json
 {
@@ -106,7 +106,7 @@ keywords:
 }
 ```
 
-具有`etcd`或`worker`角色的节点的 IAM 策略:
+具有`etcd`或`worker`角色的节点的 IAM 策略：
 
 ```json
 {
@@ -133,7 +133,7 @@ keywords:
 
 ## 2、配置 ClusterID
 
-以下资源需要标记上`ClusterID`:
+以下资源需要标记上`ClusterID`：
 
 - **节点**：在 Rancher 中添加的所有主机。
 - **子网**：用于集群的子网
@@ -143,7 +143,7 @@ keywords:
 
 创建 [Amazon EC2 集群](/docs/cluster-provisioning/rke-clusters/node-pools/ec2/_index)时，Rancher 将为创建的节点自动设置`ClusterID`。其他资源仍然需要手动标记。
 
-应该使用的标签是:
+应该使用的标签是：
 
 ```
 Key=kubernetes.io/cluster/<CLUSTERID>, Value=owned
@@ -151,7 +151,7 @@ Key=kubernetes.io/cluster/<CLUSTERID>, Value=owned
 
 `<CLUSTERID>`可以是您选择的任何字符串。但是，必须在您标记的每个资源上使用相同的字符串。
 
-将标记值设置为`owned`会通知集群，使用`<CLUSTERID>`标记的所有资源都由该集群拥有和管理。如果在集群之间共享资源，则可以将标记更改为:
+将标记值设置为`owned`会通知集群，使用`<CLUSTERID>`标记的所有资源都由该集群拥有和管理。如果在集群之间共享资源，则可以将标记更改为：
 
 ```
 Key=kubernetes.io/cluster/CLUSTERID, Value=shared

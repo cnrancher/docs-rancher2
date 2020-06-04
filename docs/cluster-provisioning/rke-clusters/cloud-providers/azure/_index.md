@@ -33,7 +33,7 @@ Azure 订阅不支持以下帐户类型：
 
 ## 1、设置 Azure 租户 ID
 
-打开 [Azure 控制台](https://portal.azure.com), 登录并跳转到 **Azure Active Directory** 然后选择 **属性**. 您的**目录 ID** 是您的 **租户 ID** (tenantID).
+打开 [Azure 控制台](https://portal.azure.com), 登录并跳转到 **Azure Active Directory** 然后选择 **属性**。 您的**目录 ID** 是您的 **租户 ID** (tenantID).
 
 如果您想使用 Azure CLI，您可以运行命令`az account show`来获取信息。
 
@@ -41,15 +41,15 @@ Azure 订阅不支持以下帐户类型：
 
 浏览[Azure Portal](https://portal.azure.com)，登录并按照以下步骤创建**应用注册**中的**Azure 客户端 ID** (aadClientId)和**Azure 客户端密钥** (aadClientSecret)。
 
-1. 选择**Azure Active Directory**.
+1. 选择**Azure Active Directory**。
 1. 选择**应用注册**。
 1. 选择**注册应用程序**。
-1. 输入**名称**, 在**Application 类型**中选择`Web app / API`和在这种情况下，可以是任何东西的**Sign-on URL**。
-1. 选择**创建**。
+1. 输入**名称**, 在**Application 类型**中选择`Web app / API`和在这种情况下，可以是任何**Sign-on URL**。
+1. 单击**创建**。
 
 在**应用注册**视图，您应该看到您创建的应用程序注册。列中显示的值**应用 ID**便是您需要的**Azure 客户端 ID**。
 
-下一步是生成**Azure 客户端密钥**:
+下一步是生成**Azure 客户端密钥**：
 
 1. 打开您创建的应用程序注册。
 1. 在**设置**视图中，打开**键**。

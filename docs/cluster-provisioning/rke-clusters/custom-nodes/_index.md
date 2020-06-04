@@ -1,5 +1,5 @@
 ---
-title: 在自定义点上启动集群
+title: 在自定义节点上启动集群
 description: 当您创建自定义集群时，Rancher 使用 RKE（Rancher Kubernetes Engine）在本地裸金属服务器、本地虚拟机或云提供商托管的任何节点中创建 Kubernetes 集群。要使用此选项，您需要访问将要在 Kubernetes 集群中使用的服务器。根据要求配置每个服务器，其中包括一些硬件规格和 Docker 版本等。在每台服务器上安装 Docker 后，运行 Rancher UI 中提供的命令，将每台服务器转换为 Kubernetes 节点。本节介绍如何设置自定义集群。
 keywords:
   - rancher 2.0中文文档
@@ -24,7 +24,7 @@ keywords:
 
 ## 创建具有自定义节点的集群
 
-> **想要使用 Windows 主机作为 Kubernetes Worker 节点?**
+> **想要使用 Windows 主机作为 Kubernetes Worker 节点？**
 >
 > 在开始之前，请参阅[配置 Windows 自定义集群](/docs/cluster-provisioning/rke-clusters/windows-clusters/_index)。
 
@@ -46,9 +46,9 @@ keywords:
 
 1. 在**集群**页面中，单击**添加集群**。
 
-2. 选择**Custom**.
+2. 选择**Custom**。
 
-3. 输入**集群名称**.
+3. 输入**集群名称**。
 
 4. 通过**成员角色**来设置用户访问集群的权限。
 
@@ -57,7 +57,7 @@ keywords:
 
 5. 使用**集群选项**设置 Kubernetes 的版本，网络插件以及是否要启用项目网络隔离。要查看更多集群选项，请单击**显示高级选项**。
 
-   > **使用 Windows 主机作为 Kubernetes Worker 节点?**
+   > **使用 Windows 主机作为 Kubernetes Worker 节点？**
    >
    > - 请参阅[启用 Windows 支持选项](/docs/cluster-provisioning/rke-clusters/windows-clusters/_index)。
    > - 唯一可用于支持 Windows 的集群的网络插件是 Flannel。请参阅[网络选项](/docs/cluster-provisioning/rke-clusters/windows-clusters/_index)。
@@ -71,11 +71,11 @@ keywords:
    > - 使用 Windows 主机作为 Kubernetes Worker 节点? 请参阅[节点配置](/docs/cluster-provisioning/rke-clusters/windows-clusters/_index)。
    > - 裸金属服务器提醒：如果您计划将裸金属服务器专用于每个角色，则必须为每个角色配置裸金属服务器（即配置多个裸金属服务器）。
 
-8. **可选**: 点击**[显示高级选项](/docs/cluster-provisioning/rke-clusters/custom-nodes/agent-options/_index)**以指定注册节点时要使用的 IP 地址、重写节点的主机名或添加[标签](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)或[污点](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)到节点上。
+8. **可选**：点击**[显示高级选项](/docs/cluster-provisioning/rke-clusters/custom-nodes/agent-options/_index)**以指定注册节点时要使用的 IP 地址、重写节点的主机名或添加[标签](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)或[污点](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)到节点上。
 
 9. 复制屏幕上显示的命令到剪贴板。
 
-10. 使用您喜欢的 shell 工具登录到您的 Linux 主机，如 PuTTy 等。运行复制到剪贴板的命令。
+10. 使用 shell 工具登录到您的 Linux 主机，如 PuTTy 等。运行复制到剪贴板的命令。
 
     > **注意：** 如果要将特定主机专用于特定节点角色，请重复步骤 7-10。根据需要多次重复这些步骤。
 
@@ -91,19 +91,19 @@ keywords:
 
 如果您已将集群配置为使用 Amazon 作为**Cloud Provider**，请使用 ClusterID 标记您的 AWS 资源。
 
-[Amazon 文档: 标记您的 Amazon EC2 资源](https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/Using_Tags.html)
+[Amazon 文档：标记您的 Amazon EC2 资源](https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/Using_Tags.html)
 
 > **注意：** 您无需在 Kubernetes 中配置 **Cloud Provider** 即可使用 Amazon EC2 实例。如果您想使用特定的 Kubernetes Cloud Provider 功能，则需要配置 **Cloud Provider** 。有关更多信息，请参阅 [Kubernetes Cloud Provider](https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/)。
 
-以下资源需要标记上`ClusterID`:
+以下资源需要标记上`ClusterID`：
 
 - **节点**：在 Rancher 中添加的所有主机。
-- **子网**：用于集群的子网
+- **子网**：用于集群的子网。
 - **安全组**：用于集群的安全组。
 
   > **注意：** 不要标记多个安全组。创建弹性负载均衡器时，标记多个组会产生错误。
 
-应该使用的标签是:
+应该使用的标签是：
 
 ```
 Key=kubernetes.io/cluster/<CLUSTERID>, Value=owned
@@ -111,7 +111,7 @@ Key=kubernetes.io/cluster/<CLUSTERID>, Value=owned
 
 `<CLUSTERID>`可以是您选择的任何字符串。但是，必须在您标记的每个资源上使用相同的字符串。将标记值设置为`owned`会通知集群，使用`<CLUSTERID>`标记的所有资源都由该集群拥有和管理。
 
-如果在集群之间共享资源，则可以将标记更改为:
+如果在集群之间共享资源，则可以将标记更改为：
 
 ```
 Key=kubernetes.io/cluster/CLUSTERID, Value=shared

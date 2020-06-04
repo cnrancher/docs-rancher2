@@ -24,28 +24,27 @@ keywords:
 
 默认情况下，**Cloud Provider** 选项设置为`None`。
 
-支持的 Cloud Provider 包括:
+支持的 Cloud Provider 包括：
 
 - Amazon
 - Azure
+- Google Compute Engine（GCE）
 
-### 设置 Amazon Cloud Provider
+## 设置 Amazon Cloud Provider
 
 有关启用 Amazon Cloud Provider 的详细信息，请参阅[此页面](/docs/cluster-provisioning/rke-clusters/cloud-providers/amazon/_index)。
 
-### 设置 Azure Cloud Provider
+## 设置 Azure Cloud Provider
 
 有关启用 Azure Cloud Provider 的详细信息，请参阅[此页面](/docs/cluster-provisioning/rke-clusters/cloud-providers/azure/_index)。
 
-### 设置 GCE Cloud Provider
+## 设置 GCE Cloud Provider
 
 有关启用 Google Compute Engine Cloud Provider 的详细信息，请参阅[此页面](/docs/cluster-provisioning/rke-clusters/cloud-providers/gce/_index)。
 
-### 设置 自定义 Cloud Provider
+## 设置 自定义 Cloud Provider
 
 任何的 [Kubernetes Cloud Provider](https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/)，都可以通过`自定义` Cloud Provider 进行配置。
-
-For the custom cloud provider option, you can refer to the [RKE docs](https://rancher.com/docs/rke/latest/en/config-options/cloud-providers/) on how to edit the yaml file for your specific cloud provider. There are specific cloud providers that have more detailed configuration :
 
 对于自定义 Cloud Provider 选项，您可以参考 [RKE 文档](https://rancher.com/docs/rke/latest/en/config-options/cloud-providers/)，了解如何通过编辑 YAML 的方式，配置 Cloud Provider。以下还有一些更具体的 Cloud Provider 配置说明文档：
 

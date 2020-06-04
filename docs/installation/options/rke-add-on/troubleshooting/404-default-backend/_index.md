@@ -56,7 +56,7 @@ kubectl --kubeconfig kube_config_rancher-cluster.yml logs -l app=ingress-nginx -
 
   节点上有一个进程占用端口 NGINX ingress controller 需要使用此端口将请求路由到 Rancher 。
 
-  您可以通过运行以下命令找到该进程: `netstat -plant | grep \:80`，然后停止或终止该进程，并重新部署 Rancher 。
+  您可以通过运行以下命令找到该进程： `netstat -plant | grep \:80`，然后停止或终止该进程，并重新部署 Rancher 。
 
 - `unexpected error creating pem file: no valid PEM formatted block found`
 
