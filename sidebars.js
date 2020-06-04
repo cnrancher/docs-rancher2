@@ -804,5 +804,8 @@ module.exports = {
       "v1.6-migration/discover-services/_index",
       "v1.6-migration/load-balancing/_index"
     ]
+  },
+  rke: {
+    产品介绍: ["rke/_index"]
   }
 };
