@@ -1,6 +1,6 @@
 ---
 title: 使用Rancher CLI
-description: Rancher CLI(命令行界面)是一个命令行工具，可用于与 Rancher 进行交互。使用此工具，您可以用命令行而不是 GUI 来操作 Rancher。二进制文件可以直接从 UI 下载。该链接可以在 Rancher UI 的右下脚找到。我们有 Windows，Mac 和 Linux 的二进制文件。您也可以在CLI 的发行页面 https://github.com/rancher/cli/releases 上直接下载该二进制文件。
+description: Rancher CLI(命令行界面)是一个命令行工具，可用于与 Rancher 进行交互。二进制文件可以直接从 UI 下载。该链接可以在 Rancher UI 的右下角找到。我们有 Windows，Mac 和 Linux 的二进制文件。您也可以在CLI 的发行页面 https://github.com/rancher/cli/releases 上直接下载该二进制文件。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -15,15 +15,15 @@ keywords:
   - 使用Rancher CLI
 ---
 
-Rancher CLI(命令行界面)是一个命令行工具，可用于与 Rancher 进行交互。使用此工具，您可以用命令行而不是 GUI 来操作 Rancher。
+Rancher CLI(命令行界面)是一个命令行工具，可用于与 Rancher 进行交互。
 
 ## 下载 Rancher CLI
 
-二进制文件可以直接从 UI 下载。该链接可以在 Rancher UI 的右下脚找到。我们有 Windows，Mac 和 Linux 的二进制文件。您也可以在[CLI 的发行页面](https://github.com/rancher/cli/releases)上直接下载该二进制文件。
+Rancher 提供了 Windows、Mac 和 Linux 的 Rancher CLI 二进制文件下载链接，该链接位于 Rancher UI 的右下角，单击链接可以下载 Rancher CLI 二进制文件。除此之外，您还可以访问 Rancher 的 GitHub 页面，导航到[CLI 发行页面](https://github.com/rancher/cli/releases)，下载该二进制文件。
 
 ## 要求
 
-下载 Rancher CLI 后，需要进行一些配置。Rancher CLI 需要：
+下载 Rancher CLI 后，需要配置一些参数：
 
 - 您的[Rancher Server URL](/docs/admin-settings/_index)，用于连接到 Rancher Server。
 - API Bearer Token，用于与 Rancher 进行身份验证。有关获取 Bearer Token 的更多信息，请参见[创建 API 密钥](/docs/user-settings/api-keys/_index)。
@@ -40,9 +40,9 @@ $ ./rancher login https://<SERVER_URL> --token <BEARER_TOKEN>
 
 ## 选择项目
 
-在执行任何命令之前，必须选择一个 Rancher 项目(Project)来对其执行命令。要选择要运行的[项目](/docs/cluster-admin/projects-and-namespaces/_index)，请使用命令 `./rancher context switch` 。输入此命令时，将显示可用项目的列表。输入数字以选择您的项目。
+在执行任何命令之前，必须选择一个 Rancher 项目(Project)来对其执行命令。要选择要运行的[项目](/docs/cluster-admin/projects-and-namespaces/_index)，请使用命令 `./rancher context switch` 切换或选择项目。输入此命令时，将显示可用项目的列表。输入数字以选择您的项目。
 
-**例如： `./rancher context switch` 输出**
+例如： `./rancher context switch` 输出
 
 ```bash
 User:rancher-cli-directory user$ ./rancher context switch
@@ -54,7 +54,7 @@ NUMBER    CLUSTER NAME   PROJECT ID              PROJECT NAME
 Select a Project:
 ```
 
-输入一个数字后，控制台会显示一条消息，说明您已更改项目。
+输入数字“3”，单击回车键，控制台会显示两条消息，第一条说明您已切换到项目`project-1`，第二条说明修改`project-1`参数后，这些改动会被保存到`/Users/markbishop/.rancher`路径下的`cli2.json`文件中。
 
 ```bash
 INFO[0005] Setting new context to project project-1
@@ -66,7 +66,7 @@ INFO[0005] Saving config to /Users/markbishop/.rancher/cli2.json
 以下指令可在 Rancher CLI 中使用。
 
 | 指令                                          | 作用                                                                                                                                                                                                                                                                       |
-| --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| :-------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `apps, [app]`                                 | 对应用商店 App 执行操作 (例如，单个[Helm charts](https://helm.sh/docs/) 或 [Rancher charts](/docs/catalog/adding-catalogs/_index))。                                                                                                                                       |
 | `catalog`                                     | 对[应用商店](/docs/catalog/_index)执行操作。                                                                                                                                                                                                                               |
 | `clusters, [cluster]`                         | 对您的[集群](/docs/cluster-provisioning/_index)执行操作。                                                                                                                                                                                                                  |
