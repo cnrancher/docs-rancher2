@@ -45,8 +45,6 @@ keywords:
 
 任何的 [Kubernetes Cloud Provider](https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/)，都可以通过`自定义` Cloud Provider 进行配置。
 
-For the custom cloud provider option, you can refer to the [RKE docs](https://rancher.com/docs/rke/latest/en/config-options/cloud-providers/) on how to edit the yaml file for your specific cloud provider. There are specific cloud providers that have more detailed configuration :
-
 对于自定义 Cloud Provider 选项，您可以参考 [RKE 文档](https://rancher.com/docs/rke/latest/en/config-options/cloud-providers/)，了解如何通过编辑 YAML 的方式，配置 Cloud Provider。以下还有一些更具体的 Cloud Provider 配置说明文档：
 
 - [vSphere](https://rancher.com/docs/rke/latest/en/config-options/cloud-providers/vsphere/)
