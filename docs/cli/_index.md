@@ -86,4 +86,4 @@ INFO[0005] Saving config to /Users/markbishop/.rancher/cli2.json
 
 使用 CLI 登录到 Rancher Server 后，输入 `./rancher --help` 可以查看可用的命令列表。
 
-所有命令都接受 `--help` 参数，可以通过改参数查看每个命令行的用法。
+所有命令都接受 `--help` 参数，可以通过该参数查看每个命令行的用法。
