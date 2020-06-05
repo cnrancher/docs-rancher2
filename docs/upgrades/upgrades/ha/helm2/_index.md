@@ -18,7 +18,7 @@ keywords:
 ---
 
 :::important 重要
-在发布 Helm 3 之后。[Rancher 高可用升级指南](../_index)已更新为使用 Helm 3。
+在发布 Helm 3 之后，[Rancher 高可用升级指南](../_index)已更新为使用 Helm 3 的升级指南。
 
 如果您使用的是 Helm 2，我们建议[迁移到 Helm 3](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/)，因为 Helm 3 使用起来更简单，而且比 Helm 2 更安全。
 
@@ -50,12 +50,12 @@ keywords:
 - [C. 升级 Rancher](#c-升级-rancher)
 - [D. 验证升级](#d-验证升级)
 
-### A. 备份运行 Rancher Server 的 Kubernetes 集群
+### 备份运行 Rancher Server 的 Kubernetes 集群
 
-为运行 Rancher Server 的 Kubernetes 集群[拍摄一次快照](/docs/backups/backups/ha-backups/_index)。
-如果升级过程中出现问题，则将快照用作还原点。
+为运行 Rancher Server 的 Kubernetes 集群[创建快照](/docs/backups/backups/ha-backups/_index)。
+如果升级过程中出现问题，则使用快照回滚至升级前的版本。
 
-### B. 更新 Helm chart 仓库
+### 更新 Helm chart 仓库
 
 1. 更新本地的 helm 仓库
 
@@ -91,7 +91,7 @@ keywords:
    helm fetch rancher-<CHART_REPO>/rancher
    ```
 
-### C. 升级 Rancher
+### 升级 Rancher
 
 本节介绍如何使用 Helm 升级 Rancher 的常规（连接 Internet） 或离线安装。
 
@@ -208,7 +208,7 @@ helm upgrade rancher-<CHART_REPO>/rancher \
    kubectl -n cattle-system apply -R -f ./rancher
    ```
 
-### D. 验证升级
+### 验证升级
 
 登录到 Rancher。通过检查浏览器窗口左下角显示的版本，确认升级成功.
 

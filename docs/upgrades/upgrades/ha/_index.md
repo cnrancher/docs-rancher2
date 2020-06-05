@@ -18,7 +18,7 @@ keywords:
 
 以下说明将指导您使用 Helm 升级 Kubernetes 集群上安装的 Rancher Server。
 
-要升级 Kubernetes 集群中的组件，[Kubernetes 服务](https://rancher.com/docs/rke/latest/en/config-options/services/)或[add-ons](https://rancher.com/docs/rke/latest/en/config-options/add-ons/)，请参阅[RKE 的升级文档](https://rancher.com/docs/rke/latest/en/upgrades/)，Rancher Kubernetes Engine。
+要升级 Kubernetes 集群中的组件，[Kubernetes 服务](https://rancher.com/docs/rke/latest/en/config-options/services/)或[add-ons](https://rancher.com/docs/rke/latest/en/config-options/add-ons/)，请参阅[RKE 的升级文档](https://rancher.com/docs/rke/latest/en/upgrades/)。
 
 如果您使用 RKE Add-on 的方式安装了 Rancher，请按照[迁移或升级](/docs/upgrades/upgrades/migrating-from-rke-add-on/_index)的说明进行操作。
 
@@ -37,19 +37,18 @@ keywords:
 
 请按照以下步骤升级 Rancher Server：
 
-- [A. 备份正在运行 Rancher Server 的 Kubernetes 集群](#a-备份运行-rancher-server-的-kubernetes-集群)
-- [B. 更新 Helm Chart 仓库](#b-更新-helm-chart-仓库)
-- [C. 升级 Rancher](#c-升级-rancher)
-- [D. 验证升级](#d-验证升级)
+- [备份集群](#备份集群)
+- [更新 Helm Chart 仓库](#更新-helm-chart-仓库)
+- [升级 Rancher](#升级-rancher)
+- [验证升级](#验证升级)
 
-### A. 备份运行 Rancher Server 的 Kubernetes 集群
+### 备份集群
 
-为运行 Rancher Server 的 Kubernetes 集群[拍摄一次快照](/docs/backups/backups/ha-backups/_index)。
-如果升级过程中出现问题，则将快照用作还原点。
+为运行 Rancher Server 的 Kubernetes 集群[保存一次快照](/docs/backups/backups/ha-backups/_index)。如果升级过程中出现问题，则可以使用快照用作为还原点，回滚至升级前的状态。
 
-### B. 更新 Helm chart 仓库
+### 更新 Helm chart 仓库
 
-1. 更新本地的 helm 仓库
+1. 执行以下命令，更新本地的 helm 仓库。
 
    ```
    helm repo update
@@ -59,9 +58,9 @@ keywords:
 
    请替换命令中的`<CHART_REPO>`，替换为`latest`，`stable`或`alpha`。有关仓库及其差异的信息，请参见[Helm Chart 仓库](/docs/installation/options/server-tags/_index)。
 
-   - `latest`: 推荐在尝试新功能时使用。
-   - `stable`: 推荐生产环境中使用。（推荐）
-   - `alpha`: 未来版本的实验性预览。
+   - `latest`：最新版，推荐在尝试新功能时使用。
+   - `stable`：稳定版，推荐生产环境中使用。
+   - `alpha`：预览版，未来版本的实验性预览。
 
    <br/>
 
@@ -75,15 +74,15 @@ keywords:
 
    > **注意：** 如果要切换到其他 Helm chart 仓库，请按照[切换仓库文档](/docs/installation/options/server-tags/_index)进行切换。如果要切换仓库，请确保在继续执行第 3 步之前再次列出仓库，以确保添加了正确的仓库。
 
-1. 从 Helm chart 仓库中获取最新的 chart 以安装 Rancher。
+1. 从 Helm chart 仓库中获取最新的 chart ，安装 Rancher。
 
-   该命令将拉取最新的 chart 并将其保存为当前目录中的一个`.tgz`文件。
+   该命令将拉取最新的 chart 并将其保存为当前目录中的一个`.tgz`文件。请替换命令中的`<CHART_REPO>`，替换为`latest`，`stable`或`alpha`。
 
    ```plain
    helm fetch rancher-<CHART_REPO>/rancher
    ```
 
-### C. 升级 Rancher
+### 升级 Rancher
 
 本节介绍如何使用 Helm 升级 Rancher 的常规（连接 Internet） 或离线安装。
 
@@ -196,7 +195,7 @@ helm upgrade rancher rancher-<CHART_REPO>/rancher \
    kubectl -n cattle-system apply -R -f ./rancher
    ```
 
-### D. 验证升级
+### 验证升级
 
 登录到 Rancher。通过检查浏览器窗口左下角显示的版本，确认升级成功.
 
@@ -206,4 +205,4 @@ helm upgrade rancher rancher-<CHART_REPO>/rancher \
 
 ### 回滚
 
-如果升级异常，可以通过使用升级之前拍摄的快照，恢复集群。有关更多信息，请参阅[高可用回滚](/docs/upgrades/rollbacks/ha-server-rollbacks/_index)。
+如果升级异常，可以通过使用升级之前保存的集群快照，恢复集群。有关更多信息，请参阅[高可用回滚](/docs/upgrades/rollbacks/ha-server-rollbacks/_index)。

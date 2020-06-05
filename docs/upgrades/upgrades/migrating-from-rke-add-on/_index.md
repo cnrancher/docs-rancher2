@@ -25,9 +25,10 @@ keywords:
 
 您将需要安装[kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl)和由 RKE 生成的 kubeconfig YAML 文件(`kube_config_rancher-cluster.yml`)。
 
-> **注意：** 本指南假定安装了标准的 Rancher。如果您修改了任何对象名称或命名空间，请进行相应的调整。
-
-> **注意：** 如果要从 Rancher v2.0.13 或更早版本或 v2.1.8 或更早版本升级，并且集群的证书已过期，则需要执行[其他步骤](/docs/cluster-admin/certificate-rotation/_index) 以轮换证书。
+> **注意：**
+>
+> - 本指南假定安装了标准的 Rancher。如果您修改了任何对象名称或命名空间，请进行相应的调整。
+> - 如果要从 Rancher v2.0.13 或更早版本或 v2.1.8 或更早版本升级，并且集群的证书已过期，则需要执行[其他步骤](/docs/cluster-admin/certificate-rotation/_index) 以轮换证书。
 
 ## 将 kubectl 指向 Rancher 集群
 
