@@ -22,6 +22,8 @@ keywords:
 
 将服务器证书和任何所需的中间证书合并到名为 `tls.crt` 的文件中，将您的证书密钥拷贝到名称为 `tls.key` 的文件中。
 
+例如，[acme.sh](https://acme.sh)在`fullchain.cer`文件中提供了服务器证书和中间证书。在这种情况下，您应该将`fullchain.cer`文件重命名为`tls.crt`，将证书秘钥文件重命名为`tls.key` 。
+
 使用 `kubectl` 来创建 `tls` 类型的密文。
 
 ```
