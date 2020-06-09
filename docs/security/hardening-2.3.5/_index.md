@@ -34,7 +34,10 @@ keywords:
 
 ## 已知问题
 
-如果注册自定义节点时只提供了公共 IP，在 CIS 1.5 加固设置中，将无法正常在 Rancher UI 中使用**执行命令行**和**查看日志**功能。
+如果注册自定义节点时只提供了公共 IP，在 CIS 1.5 加固设置中，将无法正常在 Rancher UI 中使用**执行命令行**和**查看日志**功能。如果想要使用上述两个功能，请在注册自定义节点时提供私有 IP 地址。
+
+- 如果注册自定义节点时只提供了公共 IP，在 CIS 1.5 加固设置中，将无法正常在 Rancher UI 中使用**执行命令行**和**查看日志**功能。如果想要使用上述两个功能，请在注册自定义节点时提供私有 IP 地址。
+- `default_pod_security_policy_template_id:`为 `restricted`时，Rancher 在默认的 service account 中创建**角色绑定**和**集群角色绑定**。CIS 1.5 要求默认 service account 没有绑定任何角色，不提供 service account 的 token，不分配特定的权限。
 
 ## 配置内核运行时参数
 

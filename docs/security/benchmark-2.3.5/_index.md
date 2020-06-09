@@ -2027,7 +2027,7 @@ exit 1
 ./5.1.5.sh
 ```
 
-**Expected result**:
+**Expected result:**
 
 ```
 '--pass' is present
