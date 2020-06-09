@@ -50,3 +50,22 @@ _自 v2.2.0 起可用_
 默认情况下，启动集群监控或者项目监控，Prometheus 只会把监控数据临时存储在自己的 Pod 里面。当 Prometheus 或者 Grafana 意外宕机后，您将面临所有监控数据丢失的问题。因此，Rancher 推荐使用外部持久化存储，在 Prometheus 或者 Grafana 恢复后，之前所有的监控数据不会有任何的损失。
 
 在配置 Prometheus 或者 Grafana 使用持久化存储时，请指定持久卷的大小以及选择对应的[存储类](/docs/cluster-admin/volumes-and-storage/_index)。
+
+## 远程存储
+
+> **前提条件：**需要一个可用的远程存储端点。单击[这里](https://prometheus.io/docs/operating/integrations/)，查看可以与 Prometheus 集成的远程存储列表。
+> 使用高级配置选项时，您可以按照以下代码示例提供的参数，配置 Prometheus 的远程存储：
+
+```
+prometheus.remoteWrite[0].url = http://remote1/push
+prometheus.remoteWrite[0].remoteTimeout = 33s
+prometheus.remoteWrite[1].url = http://remote2/push
+prometheus.remoteRead[0].url = http://remote1/read
+prometheus.remoteRead[0].proxyUrl = http://proxy.url
+prometheus.remoteRead[0].bearerToken = token-value
+prometheus.remoteRead[1].url = http://remote2/read
+prometheus.remoteRead[1].remoteTimeout = 33s
+prometheus.remoteRead[1].readRecent = true
+```
+
+您还可以配置其他参数，详情请参考[RemoteRead 参数说明](https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#remotereadspec)和[RemoteWrite 参数说明](https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#remotewritespec)。

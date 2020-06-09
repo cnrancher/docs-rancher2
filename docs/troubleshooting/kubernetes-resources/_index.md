@@ -193,15 +193,18 @@ kubectl -n cattle-system logs -l app=cattle-cluster-agent
 
 ## 其他
 
-### 所有 Pods/Jobs 它们的状态应该是 **Running**/**Completed**
+### 检查所有 Pods/Jobs 的状态
 
-执行命令进行检查
+执行以下命令进行检查集群中所有 Pod/Job 是否正常运行：
 
 ```
 kubectl get pods --all-namespaces
 ```
 
-检查集群中所有 Pod/Job 是否正常运行，正确运行的状态应该是 **Running** 并且重启的次数应该不多。
+Pods 和 Jobs 正确运行的状态应该是：
+
+- **Running**，并且重启的次数应该不多。
+- 或者是**Completed**，已经完成运行。
 
 ### 查看 Pod 详细信息
 
@@ -217,13 +220,13 @@ kubectl logs POD_NAME -n NAMESPACE
 
 如果 Job 状态是 **Completed** 则可以通过以下命令检查未完成原因：
 
-#### 查看 Job 详细信息
+### 查看 Job 详细信息
 
 ```
 kubectl describe job JOB_NAME -n NAMESPACE
 ```
 
-#### 查看 Job Pod 的日志
+### 查看 Job Pod 的日志
 
 ```
 kubectl logs -l job-name=JOB_NAME -n NAMESPACE
@@ -250,3 +253,9 @@ kubectl get pods --all-namespaces -o go-template='{{range .items}}{{if eq .statu
 ```
 kubectl get pods --all-namespaces -o go-template='{{range .items}}{{if eq .status.phase "Failed"}}{{if eq .status.reason "Evicted"}}{{.metadata.name}}{{" "}}{{.metadata.namespace}}{{"\n"}}{{end}}{{end}}{{end}}' | while read epod enamespace; do kubectl -n $enamespace get pod $epod -o=custom-columns=NAME:.metadata.name,NODE:.spec.nodeName,MSG:.status.message; done
 ```
+
+### Job 的状态一直没有变更为 Completed
+
+如果您启用了 Istio，而且部署了 Job 之后，Job 的状态一直没有变更为**Completed**，您需要参考[这些步骤](/docs/cluster-admin/tools/istio/setup/enable-istio-in-namespace/_index)手动添加 annotation。
+
+因为 Istio Sidecarh 会无休止地运行，即使 Job 的任务完成了，它的状态也不能被视为**Completed**。上述步骤是在短期内处理这个问题的方法，它禁止了 Istio 和添加了 annotation 的 Pod 之间的通信。如果您使用了这种方式解决这个问题，这个 Job 就没有权限访问 service mesh，不能够用于集成测试。

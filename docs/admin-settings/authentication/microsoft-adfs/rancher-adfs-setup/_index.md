@@ -35,8 +35,8 @@ _自 v2.0.7 版本起可用_
 
     | 字段名           | 描述                                                                                                                                                           |
     | :--------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    | 显示名称         | 包含用户显示名称的 AD 属性. <br/><br/>例: `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname`                                                    |
-    | 用户名           | 包含用户名/给定名称的 AD 属性。 <br/><br/>例: `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name`                                                     |
+    | 显示名称         | 包含用户显示名称的 AD 属性. <br/><br/>例: `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name`                                                         |
+    | 用户名           | 包含用户名/给定名称的 AD 属性。 <br/><br/>例: `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname`                                                |
     | UID              | 每个用户唯一的 AD 属性。 <br/><br/>例: `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn`                                                             |
     | 组               | 进行输入以管理组成员身份。 <br/><br/>例: `http://schemas.xmlsoap.org/claims/Group`                                                                             |
     | Rancher API 地址 | Rancher Server 的 URL。                                                                                                                                        |
