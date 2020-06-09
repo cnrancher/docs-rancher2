@@ -84,7 +84,7 @@ xxx, started, etcd-xxx, https://IP:2380, https://IP:2379,https://IP:4001
 命令：
 
 ```
-docker exec etcd etcdctl endpoint status --endpoints=$(docker exec etcd /bin/sh -c "etcdctl member list | cut -d, -f5 | sed -e 's/ //g' | paste -sd ','") --write-out table
+docker exec -e ETCDCTL_ENDPOINTS=$(docker exec etcd /bin/sh -c "etcdctl member list | cut -d, -f5 | sed -e 's/ //g' | paste -sd ','") etcd etcdctl endpoint status --write-out table
 ```
 
 当使用低于 3.3.x 的 etcd 版本（Kubernetes 1.13.x 及更低版本）并且添加节点时指定了`--internal-address` 时的命令：
@@ -110,7 +110,7 @@ docker exec etcd etcdctl endpoint status --endpoints=$(docker exec etcd /bin/sh 
 命令：
 
 ```
-docker exec etcd etcdctl endpoint health --endpoints=$(docker exec etcd /bin/sh -c "etcdctl member list | cut -d, -f5 | sed -e 's/ //g' | paste -sd ','")
+docker exec -e ETCDCTL_ENDPOINTS=$(docker exec etcd /bin/sh -c "etcdctl member list | cut -d, -f5 | sed -e 's/ //g' | paste -sd ','") etcd etcdctl endpoint health
 ```
 
 当使用低于 3.3.x 的 etcd 版本（Kubernetes 1.13.x 及更低版本）并且添加节点时指定了`--internal-address` 时的命令：
@@ -246,7 +246,7 @@ compacted revision xxx
 命令：
 
 ```
-docker exec etcd etcdctl defrag --endpoints=$(docker exec etcd /bin/sh -c "etcdctl member list | cut -d, -f5 | sed -e 's/ //g' | paste -sd ','")
+docker exec -e ETCDCTL_ENDPOINTS=$(docker exec etcd /bin/sh -c "etcdctl member list | cut -d, -f5 | sed -e 's/ //g' | paste -sd ','") etcd etcdctl defrag
 ```
 
 当使用低于 3.3.x 的 etcd 版本（Kubernetes 1.13.x 及更低版本）并且添加节点时指定了`--internal-address` 时的命令：
@@ -268,7 +268,7 @@ Finished defragmenting etcd member[https://IP:2379]
 命令：
 
 ```
-docker exec etcd etcdctl endpoint status --endpoints=$(docker exec etcd /bin/sh -c "etcdctl member list | cut -d, -f5 | sed -e 's/ //g' | paste -sd ','") --write-out table
+docker exec -e ETCDCTL_ENDPOINTS=$(docker exec etcd /bin/sh -c "etcdctl member list | cut -d, -f5 | sed -e 's/ //g' | paste -sd ','") etcd etcdctl endpoint status --write-out table
 ```
 
 当使用低于 3.3.x 的 etcd 版本（Kubernetes 1.13.x 及更低版本）并且添加节点时指定了`--internal-address` 时的命令：

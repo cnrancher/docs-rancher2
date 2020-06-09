@@ -28,32 +28,35 @@ keywords:
 
 ## 高级选项
 
-| 选项                           | 默认值                                                   | 描述                                                                                                           |
-| :----------------------------- | :------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------- |
-| `additionalTrustedCAs`         | false                                                    | `bool` - 参考 [其他受信任的 CA](#其他受信任的-ca)                                                              |
-| `addLocal`                     | "auto"                                                   | `string` - 让 Rancher 检测，并导入"local" Rancher Server 所在的集群。[导入 local 集群](#导入-local-集群)       |
-| `antiAffinity`                 | "preferred"                                              | `string` - 针对 Rancher pods 的 AntiAffinity 规则 - "preferred， required"                                     |
-| `auditLog.destination`         | "sidecar"                                                | `string` - 使日志流导向到 sidecar 容器的 console 或者 hostPath 卷 - "sidecar， hostPath"                       |
-| `auditLog.hostPath`            | "/var/log/rancher/audit"                                 | `string` - 主机上的日志文件地址 (仅当`auditLog.destination`设置为`hostPath`时适用)                             |
-| `auditLog.level`               | 0                                                        | `int` - 设置[API 审计日志](/docs/installation/options/api-audit-log/_index)等级。0 表示关闭。可选值为 0 ～ 3。 |
-| `auditLog.maxAge`              | 1                                                        | `int` - 保留旧审计日志文件的最大天数 (仅当 `auditLog.destination` 设置为 `hostPath`时适用)                     |
-| `auditLog.maxBackups`          | 1                                                        | `int` - 要保留的审计日志最大文件数 (仅当 `auditLog.destination` 设置为 `hostPath`时适用)                       |
-| `auditLog.maxSize`             | 100                                                      | `int` - 轮换之前审计日志文件的最大大小（以兆字节为单位）(仅当 `auditLog.destination` 设置为 `hostPath`)        |
-| `busyboxImage`                 | "busybox"                                                | `string` - 用于收集审计日志的 busybox 镜像的镜像位置 _注：自 v2.2.0 起可用_                                    |
-| `debug`                        | false                                                    | `bool` - 在 Rancher Server 设置调试标志                                                                        |
-| `certmanager.version`          | ""                                                       | `string` - 设置 cert-manager 兼容性                                                                            |
-| `extraEnv`                     | []                                                       | `list` - 为 Rancher 设置其他环境变量 _注：自 v2.2.0 起可用_                                                    |
-| `imagePullSecrets`             | []                                                       | `list` - 包含私有 Registry 凭据的密钥资源名称列表                                                              |
-| `ingress.extraAnnotations`     | {}                                                       | `map` - 自定义 ingress 的其他 annotations                                                                      |
-| `ingress.configurationSnippet` | ""                                                       | `string` - 添加其他的 Nginx 配置。可以用于代理配置。_注：自 v2.0.15， v2.1.10 和 v2.2.4 起可用_                |
-| `proxy`                        | ""                                                       | `string` - Rancher 的 HTTP[S] 代理服务                                                                         |
-| `noProxy`                      | "127.0.0.0/8，10.0.0.0/8，172.16.0.0/12，192.168.0.0/16" | `string` - 不使用代理的逗号分隔的主机名或 IP 地址列表                                                          |
-| `resources`                    | {}                                                       | `map` - rancher pod 资源请求和限制                                                                             |
-| `rancherImage`                 | "rancher/rancher"                                        | `string` - rancher 镜像源                                                                                      |
-| `rancherImageTag`              | 跟 chart 版本一样                                        | `string` - rancher 镜像标签                                                                                    |
-| `tls`                          | "ingress"                                                | `string` - 参考 [外部 TLS 终止](#在外部终止-tls)。- "ingress， external"                                       |
-| `systemDefaultRegistry`        | ""                                                       | `string` - 用于所有系统 Docker 镜像的私有 Registry，例如： `http://registry.example.com/` _自 v2.3.0 起可用_   |
-| `useBundledSystemChart`        | `false`                                                  | `bool` - 选择使用 Rancher Server 内嵌的 system-charts。这个选项用于离线安装。_自 v2.3.0 起可用_                |
+| 选项                           | 默认值                                                   | 描述                                                                                                                                                    |
+| :----------------------------- | :------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `additionalTrustedCAs`         | false                                                    | `bool` - 参考 [其他受信任的 CA](#其他受信任的-ca)                                                                                                       |
+| `addLocal`                     | "auto"                                                   | `string` - 让 Rancher 检测，并导入"local" Rancher Server 所在的集群。[导入 local 集群](#导入-local-集群)                                                |
+| `antiAffinity`                 | "preferred"                                              | `string` - 针对 Rancher pods 的 AntiAffinity 规则 - "preferred， required"                                                                              |
+| `replicas`                     | 3                                                        | `int` - Rancher Pods 的数量                                                                                                                             |
+| `auditLog.destination`         | "sidecar"                                                | `string` - 使日志流导向到 sidecar 容器的 console 或者 hostPath 卷 - "sidecar， hostPath"                                                                |
+| `auditLog.hostPath`            | "/var/log/rancher/audit"                                 | `string` - 主机上的日志文件地址 (仅当`auditLog.destination`设置为`hostPath`时适用)                                                                      |
+| `auditLog.level`               | 0                                                        | `int` - 设置[API 审计日志](/docs/installation/options/api-audit-log/_index)等级。0 表示关闭。可选值为 0 ～ 3。                                          |
+| `auditLog.maxAge`              | 1                                                        | `int` - 保留旧审计日志文件的最大天数 (仅当 `auditLog.destination` 设置为 `hostPath`时适用)                                                              |
+| `auditLog.maxBackups`          | 1                                                        | `int` - 要保留的审计日志最大文件数 (仅当 `auditLog.destination` 设置为 `hostPath`时适用)                                                                |
+| `auditLog.maxSize`             | 100                                                      | `int` - 轮换之前审计日志文件的最大大小（以兆字节为单位）(仅当 `auditLog.destination` 设置为 `hostPath`)                                                 |
+| `busyboxImage`                 | "busybox"                                                | `string` - 用于收集审计日志的 busybox 镜像的镜像位置 _注：自 v2.2.0 起可用_                                                                             |
+| `debug`                        | false                                                    | `bool` - 在 Rancher Server 设置调试标志                                                                                                                 |
+| `certmanager.version`          | ""                                                       | `string` - 设置 cert-manager 兼容性                                                                                                                     |
+| `extraEnv`                     | []                                                       | `list` - 为 Rancher 设置其他环境变量 _注：自 v2.2.0 起可用_                                                                                             |
+| `imagePullSecrets`             | []                                                       | `list` - 包含私有 Registry 凭据的密钥资源名称列表                                                                                                       |
+| `ingress.extraAnnotations`     | {}                                                       | `map` - 自定义 ingress 的其他 annotations                                                                                                               |
+| `ingress.configurationSnippet` | ""                                                       | `string` - 添加其他的 Nginx 配置。可以用于代理配置。_注：自 v2.0.15， v2.1.10 和 v2.2.4 起可用_                                                         |
+| `letsEncrypt.ingress.class`    | ""                                                       | `string` - optional ingress class for the cert-manager acmesolver ingress that responds to the Let's Encrypt ACME challenges                            |
+| `proxy`                        | ""                                                       | `string` - Rancher 的 HTTP[S] 代理服务                                                                                                                  |
+| `noProxy`                      | "127.0.0.0/8，10.0.0.0/8，172.16.0.0/12，192.168.0.0/16" | `string` - 不使用代理的逗号分隔的主机名或 IP 地址列表                                                                                                   |
+| `resources`                    | {}                                                       | `map` - rancher pod 资源请求和限制                                                                                                                      |
+| `rancherImage`                 | "rancher/rancher"                                        | `string` - rancher 镜像源                                                                                                                               |
+| `rancherImageTag`              | 跟 chart 版本一样                                        | `string` - rancher 镜像标签                                                                                                                             |
+| `rancherImagePullPolicy`       | "IfNotPresent"                                           | `string` - 覆盖拉取 Rancher Server 镜像的规则，“Always”：每次都会拉取镜像；“Never”：每次都不会拉取镜像；”“IfNotPresent”：如果有更新的版本，则拉取镜像。 |
+| `tls`                          | "ingress"                                                | `string` - 参考 [外部 TLS 终止](#在外部终止-tls)。- "ingress， external"                                                                                |
+| `systemDefaultRegistry`        | ""                                                       | `string` - 用于所有系统 Docker 镜像的私有 Registry，例如： `http://registry.example.com/` _自 v2.3.0 起可用_                                            |
+| `useBundledSystemChart`        | `false`                                                  | `bool` - 选择使用 Rancher Server 内嵌的 system-charts。这个选项用于离线安装。_自 v2.3.0 起可用_                                                         |
 
 ## 审计日志 API
 

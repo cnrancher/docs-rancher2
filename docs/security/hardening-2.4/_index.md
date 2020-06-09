@@ -1,5 +1,5 @@
 ---
-title: 安全加固指南 - v2.3.5
+title: 安全加固指南 - v2.4.0
 description: 本文讲解了如何使您的集群符合互联网安全中心发布的 Kubernetes 安全基准，保护集群中节点的安全。安装 Kubernetes 之前，请按照本指南进行操作。加固指南旨在与特定版本的 CIS Kubernetes Benchmark，Kubernetes 和 Rancher 一起使用。
 keywords:
   - rancher 2.0中文文档
@@ -13,7 +13,7 @@ keywords:
   - rancher2.0 中文教程
   - 安全
   - 安全加固指南
-  - 安全加固指南 - v2.3.5
+  - 安全加固指南 - v2.4.0
 ---
 
 本文讲解了如何使您的集群符合互联网安全中心发布的 Kubernetes 安全基准，保护集群中节点的安全。安装 Kubernetes 之前，请按照本指南进行操作。加固指南旨在与特定版本的 CIS Kubernetes Benchmark，Kubernetes 和 Rancher 一起使用。
@@ -22,19 +22,19 @@ keywords:
 
 | 加固指南版本    | Rancher 版本   | CIS Benchmark 版本 | Kubernetes 版本  |
 | :-------------- | :------------- | :----------------- | :--------------- |
-| 加固指南 v2.3.5 | Rancher v2.3.5 | Benchmark v1.5     | Kubernetes v1.15 |
+| 加固指南 v2.4.0 | Rancher v2.4.0 | Benchmark v1.5     | Kubernetes v1.15 |
 
-[点击这里下载 PDF 版本的加固指南](https://releases.rancher.com/documents/security/2.3.5/Rancher_Hardening_Guide.pdf)
+[点击这里下载 PDF 版本的加固指南](https://releases.rancher.com/documents/security/2.4/Rancher_Hardening_Guide.pdf)
 
 ## 概览
 
-下面的安全加固指南是针对在生产环境的 Rancher v2.3.5 中使用 Kubernetes v1.15 版本的集群。它概述了如何满足互联网安全中心（CIS）提出的 Kubernetes 安全标准。
+下面的安全加固指南是针对在生产环境的 Rancher v2.4.0 中使用 Kubernetes v1.15 版本的集群。它概述了如何满足互联网安全中心（CIS）提出的 Kubernetes 安全标准。
 
-有关如果根据官方 CIS 基准评估集群的更多详细信息，请参阅[CIS Benchmark Rancher 自测指南 - Rancher v2.3.5](/docs/security/benchmark-2.3.5/_index)。
+有关如果根据官方 CIS 基准评估集群的更多详细信息，请参阅[CIS Benchmark Rancher 自测指南 - Rancher v2.4.0](/docs/security/benchmark-2.4/_index)。
 
 ## 已知问题
 
-如果注册自定义节点时只提供了公共 IP，在 CIS 1.5 加固设置中，将无法正常在 Rancher UI 中使用**执行命令行**和**查看日志**功能。如果想要使用上述两个功能，请在注册自定义节点时提供私有 IP 地址。
+如果注册自定义节点时只提供了公共 IP，在 CIS 1.5 加固设置中，将无法正常在 Rancher UI 中使用**执行命令行**和**查看日志**功能。
 
 - 如果注册自定义节点时只提供了公共 IP，在 CIS 1.5 加固设置中，将无法正常在 Rancher UI 中使用**执行命令行**和**查看日志**功能。如果想要使用上述两个功能，请在注册自定义节点时提供私有 IP 地址。
 - `default_pod_security_policy_template_id:`为 `restricted`时，Rancher 在默认的 service account 中创建**角色绑定**和**集群角色绑定**。CIS 1.5 要求默认 service account 没有绑定任何角色，不提供 service account 的 token，不分配特定的权限。
@@ -56,6 +56,7 @@ kernel.keys.root_maxbytes=25000000
 ## 配置`etcd`用户和组
 
 在安装 RKE 之前，需要设置**etcd**服务的用户帐户和组。**etcd**用户的**uid**和**gid**将在 RKE 的**config.yml**中使用，以在安装期间为文件和目录设置适当的权限。
+.
 
 ### 创建`etcd`用户和组
 
@@ -79,7 +80,7 @@ services:
 
 Kubernetes 提供了一个默认服务账号（Service Account），如果集群的工作负载中没有为 Pod 分配任何特定服务账号，那么它将会使用这个`default`的服务账号。在需要从 Pod 访问 Kubernetes API 的情况下，应为该 Pod 创建一个特定的服务账号，并向该服务账号授予权限。这个`default`的服务账户应该被设置为不提供服务账号令牌（service account token）和任何权限。将`automountServiceAccountToken`设置为 false 之后，Kubernetes 在启动 Pod 时，将不会自动注入`default`服务账户。
 
-对于每个命名空间中的，**default**服务账号必须包含以下值：
+每个命名空间中的**default**服务账号必须包含以下值：
 
 ```
 automountServiceAccountToken: false
@@ -135,7 +136,7 @@ spec:
     - Egress
 ```
 
-创建一个名称为`apply_networkPolicy_to_all_ns.sh`的脚本。通过运行`chmod +x apply_networkPolicy_to_all_ns.sh`，使这个脚本有执行权限。
+创建一个名称为`apply_networkPolicy_to_all_ns.sh`的脚本。通过运行`chmod +x apply_networkPolicy_to_all_ns.sh`，使这个脚本有执行权限
 
 ```
 #!/bin/bash -e
@@ -152,8 +153,8 @@ done
 您可以用这个供您参考的`cluster.yml`，通过 RKE CLI 来创建安全加固的 Rancher Kubernetes Engine（RKE）集群。有关每个配置的详细信息，请参阅[RKE 文档](https://rancher.com/docs/rke/latest/en/installation/)。
 
 ```yaml
-# 如果您打算在离线环境中部署Kubernetes，
-# 请查阅有关如何配置自定义RKE镜像的文档。
+# If you intend to deploy Kubernetes in an air-gapped environment,
+# please consult the documentation on how to configure custom RKE images.
 kubernetes_version: "v1.15.9-rancher1-1"
 enable_network_policy: true
 default_pod_security_policy_template_id: "restricted"
