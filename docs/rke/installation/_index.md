@@ -1,146 +1,167 @@
 ---
-title: RKE Kubernetes Installation
-description: RKE is a fast, versatile Kubernetes installer you can use to install Kubernetes on your Linux hosts. Learn the simple steps for an RKE Kubernetes installation
-weight: 50
+title: RKE Kubernetes 安装介绍
 ---
 
-RKE is a fast, versatile Kubernetes installer that you can use to install Kubernetes on your Linux hosts. You can get started in a couple of quick and easy steps:
+RKE 是一个快速的，多功能的 Kubernetes 安装工具，您可以参考以下步骤，使用 RKE 在您的 Linux 主机上安装 Kubernetes：
 
-1. [Download the RKE Binary](#download-the-rke-binary)
-    1. [Alternative RKE macOS Install - Homebrew](#alternative-rke-macos-x-install-homebrew)
-    1. [Alternative RKE macOS Install - MacPorts](#alternative-rke-macos-install-macports)
-1. [Prepare the Nodes for the Kubernetes Cluster](#prepare-the-nodes-for-the-kubernetes-cluster)
-1. [Creating the Cluster Configuration File](#creating-the-cluster-configuration-file)
-1. [Deploying Kubernetes with RKE](#deploying-kubernetes-with-rke)
-1. [Save your Files](#save-your-files)
-1. [Interacting with your Kubernetes Cluster](#interacting-with-your-kubernetes-cluster)
+1. [下载 RKE 二进制安装包](#download-the-rke-binary)
+   - [使用 GitHub 安装 RKE](#使用-GitHub-安装-RKE)
+   - [使用 Homebrew 安装 RKE](#使用-Homebrew-安装-RKE)
+   - [使用 MacPorts 安装 RKE](#使用-MacPorts-安装-RKE)
+1. [为 Kubernetes 集群准备节点](#为-Kubernetes-集群准备节点)
+1. [创建集群配置文件](#创建集群配置文件)
+1. [使用 RKE 部署 Kubernetes](#使用-RKE-部署-Kubernetes)
+1. [保存文件](#保存文件)
+1. [操作 Kubernetes 集群](#操作-Kubernetes-集群)
 
-## Download the RKE binary
+## 下载 RKE 二进制安装包
 
-1. From your workstation, open a web browser and navigate to our [RKE Releases](https://github.com/rancher/rke/releases) page. Download the latest RKE v1.x installer applicable to your operating system and architecture:
+RKE 提供了三种下载安装包的方法：使用 GitHub、Homebrew 或 MacPorts 都可以下载 RKE 安装包。使用 Github 下载对您使用的主机操作系统没有要求，而使用 Homebrew 和 MacPorts 要求您的主机操作系统必须为 MacOS。
 
-    - **macOS**: `rke_darwin-amd64`
-    - **Linux (Intel/AMD)**: `rke_linux-amd64`
-    - **Linux (ARM 32-bit)**: `rke_linux-arm`
-    - **Linux (ARM 64-bit)**: `rke_linux-arm64`
-    - **Windows (32-bit)**: `rke_windows-386.exe`
-    - **Windows (64-bit)**: `rke_windows-amd64.exe`
+### 使用 GitHub 下载安装包
 
-2. Copy the RKE binary to a folder in your `$PATH` and rename it `rke` (or `rke.exe` for Windows)
+1. 登录您的主机，打开浏览器，访问[RKE 版本发布页面](https://github.com/rancher/rke/releases)，下载最新的 RKE v1.x，有以下几个版本供您下载：
 
-    ```
-    # macOS
-    $ mv rke_darwin-amd64 rke
-    # Linux
-    $ mv rke_linux-amd64 rke
-    # Windows PowerShell
-    > mv rke_windows-amd64.exe rke.exe
-    ```
+   - **macOS**：`rke_darwin-amd64`
+   - **Linux (Intel/AMD)**：`rke_linux-amd64`
+   - **Linux (ARM 32-bit)**：`rke_linux-arm`
+   - **Linux (ARM 64-bit)**：`rke_linux-arm64`
+   - **Windows (32-bit)**：`rke_windows-386.exe`
+   - **Windows (64-bit)**：`rke_windows-amd64.exe`
 
-3. Make the RKE binary that you just downloaded executable. Open Terminal, change directory to the location of the RKE binary, and then run one of the commands below.
+2. 运行以下命令，将下载的 RKE 二进制安装包复制到您想要保存的路径下。然后将这个安装包重命名为`rke` （Windows 用户请重命名为`rke.exe`）。
 
-    >**Using Windows?**
-    >The file is already an executable. Skip to [Prepare the Nodes for the Kubernetes Cluster](#prepare-the-nodes-for-the-kubernetes-cluster).
+   MacOS 用户请运行以下命令：
 
-    ```
-    $ chmod +x rke
-    ```
+   ```
+   # macOS
+   $ mv rke_darwin-amd64 rke
+   ```
 
-4.  Confirm that RKE is now executable by running the following command:
+   Linux 用户请运行以下命令：
 
-    ```
-    $ rke --version
-    ```
+   ```
+   # Linux
+   $ mv rke_linux-amd64 rke
+   ```
 
+   Windows 用户请运行以下命令：
 
-### Alternative RKE macOS Install - Homebrew
+   ```
+   # Windows PowerShell
+   > mv rke_windows-amd64.exe rke.exe
+   ```
 
-RKE can also be installed and updated using Homebrew, a package manager for macOS.
+3. 运行以下命令，将 RKE 安装包转为可执行文件。如果您使用的 Windows 操作系统，则可以跳过这个步骤，直接查看[为 Kubernetes 集群准备节点](#为-Kubernetes-集群准备节点)。
 
-1. Install Homebrew. See https://brew.sh/ for instructions.
+   ```
+   $ chmod +x rke
+   ```
 
-2. Using `brew`, install RKE by running the following command in a Terminal window:
+4. 运行以下命令，检查 RKE 安装包是否已经转换成可执行文件。
 
-    ```
-    $ brew install rke
-    ```
+   ```
+   $ rke --version
+   ```
 
-If you have already installed RKE using `brew`, you can upgrade RKE by running:
+### 使用 Homebrew 下载安装包
 
-```
-$ brew upgrade rke
-```
+使用 Homebrew 下载 RKE 安装包时，请参考以下步骤：
 
-### Alternative RKE macOS Install - MacPorts
+1. 打开浏览器，访问[Homebrew 官方网站](https://brew.sh/)，按照网站列出的指示安装 Homebrew，通常只需要将网站上的命令复制粘贴到命令行工具中，单击回车键运行该命令即可，整个安装过程可能需要 3~5 分钟。
 
-RKE can also be installed and updated using MacPorts, a package manager for macOS.
+2. 运行`brew`命令，安装 RKE。
 
-1. Install MacPorts. See https://www.macports.org/ for instructions.
+   ```
+   $ brew install rke
+   ```
 
-2. Using `port`, install RKE by running the following command in a Terminal window:
+3. 完成 Homebrew 安装后，使用`brew`命令安装 Docker。
 
-    ```
-    $ port install rke
-    ```
+   ```
+   $ brew install rke
+   ```
 
-If you have already installed RKE using `port`, you can upgrade RKE by running:
+   如果您已经使用 Homebrew 安装过了 RKE，可以运行以下命令，升级到最新版本的 RKE。
 
-```
-$ port upgrade rke
-```
+   ```
+   $ brew upgrade rke
+   ```
 
-## Prepare the Nodes for the Kubernetes cluster
+### 使用 MacPorts 下载安装包
 
-The Kubernetes cluster components are launched using Docker on a Linux distro. You can use any Linux you want, as long as you can install Docker on it.
+使用 MacPorts 下载 RKE 安装包时，请参考以下步骤：
 
-Review the [OS requirements]({{<baseurl>}}/rke/latest/en/installation/os/) and configure each node appropriately.
+1. 打开浏览器，访问[MacPorts 官方网站](https://www.macports.org/)，按照网站列出的指示安装 MacPorts，通常只需要将网站上的命令复制粘贴到命令行工具中，单击回车键运行该命令即可，整个安装过程可能需要 3~5 分钟。
 
-## Creating the Cluster Configuration File
+2. 运行`port`命令，安装 RKE。
 
-RKE uses a cluster configuration file, referred to as `cluster.yml` to determine what nodes will be in the cluster and how to deploy Kubernetes. There are [many configuration options]({{<baseurl>}}/rke/latest/en/config-options/) that can be set in the `cluster.yml`. In our example, we will be assuming the minimum of one [node]({{<baseurl>}}/rke/latest/en/config-options/nodes) for your Kubernetes cluster.
+   ```
+   $ port install rke
+   ```
 
-There are two easy ways to create a `cluster.yml`:
+3. 完成 MacPorts 安装后，使用`port`命令安装 Docker：
 
-- Using our [minimal `cluster.yml`]({{<baseurl>}}/rke/latest/en/example-yamls/#minimal-cluster-yml-example) and updating it based on the node that you will be using.
-- Using `rke config` to query for all the information needed.
+   ```
+   $ port install rke
+   ```
 
-### Using `rke config`
+   如果您已经使用 MacPorts 安装过了 RKE，可以运行以下命令，升级到最新版本的 RKE。
 
-Run `rke config` to create a new `cluster.yml` in the current directory. This command will prompt you for all the information needed to build a cluster. See [cluster configuration options]({{<baseurl>}}/rke/latest/en/config-options/) for details on the various options.
+   ```
+   $ port upgrade rke
+   ```
+
+## 为 Kubernetes 集群准备节点
+
+Kubernetes 集群组件需要在 Linux 发行版上的 Docker 中运行，只要是能安装和运行 Docker 的 Linux 发行版，您都可以使用。请参考[操作系统要求](/docs/rke/os/_index)，正确地配置每一个节点。
+
+## 创建集群配置文件
+
+RKE 使用集群配置文件`cluster.yml`规划集群中的节点，例如集群中应该包含哪些节点，如何部署 Kubernetes。您可以通过该文件修改很多[集群配置选项](/docs/rke/config-options/_index)。在 RKE 的文档中，我们提供的代码示例假设集群中只有一个[节点](/docs/rke/config-options/nodes/_index)。
+
+创建集群配置文件`cluster.yml`的方式有两种：
+
+- 使用 [minimal `cluster.yml`](/docs/rke/example-yamls/_index)创建集群配置文件，然后将您使用的节点的相关信息添加到文件中。
+- 使用`rke config`命令创建集群配置文件，然后将集群参数逐个输入到该文件中。
+
+### 使用`rke config`
+
+运行`rke config`命令，在当前路径下创建 `cluster.yml`文件。这条命令会引导您输入创建集群所需的所有参数，详情请参考[集群配置选项](/docs/rke/config-options/_index)。
 
 ```
 rke config --name cluster.yml
 ```
 
-#### Other RKE Configuration Options
+#### 其他配置选项
 
-You can create an empty template `cluster.yml` file by specifying the `--empty` flag.
+在原有创建集群配置文件命令的基础上，加上 `--empty` ，可以创建一个空白的集群配置文件。
 
 ```
 rke config --empty --name cluster.yml
 ```
 
-Instead of creating a file, you can print the generated configuration to stdout using the `--print` flag.
+您也可以使用`--print`，将`cluster.yml`文件的内容显示出来。
 
 ```
 rke config --print
 ```
 
-### High Availability
+### 高可用
 
-RKE is HA ready, you can specify more than one `controlplane` node in the `cluster.yml` file. RKE will deploy master components on all of these nodes and the kubelets are configured to connect to `127.0.0.1:6443` by default which is the address of `nginx-proxy` service that proxy requests to all master nodes.
+RKE 适配了高可用集群，您可以在`cluster.yml`文件中配置多个`controlplane`节点。RKE 会把 master 节点的组件部署在所有被列为`controlplane`的节点上，同时把 kubelets 的默认连接地址配置为`127.0.0.1:6443`。这个地址是`nginx-proxy`请求所有 master 节点的地址
 
-To create an HA cluster, specify more than one host with role `controlplane`.
+创建高可用集群需要指定两个或更多的节点作为`controlplane`。
 
-### Certificates
+### 证书
 
-_Available as of v0.2.0_
+_v0.2.0 开始可用_
 
-By default, Kubernetes clusters require certificates and RKE auto-generates the certificates for all cluster components. You can also use [custom certificates]({{<baseurl>}}/rke/latest/en/installation/certs/). After the Kubernetes cluster is deployed, you can [manage these auto-generated certificates]({{<baseurl>}}/rke/latest/en/cert-mgmt/#certificate-rotation).
+默认情况下，Kubernetes 集群需要用到证书，而 RKE 会自动为所有集群组件生成证书。您也可以使用[自定义证书](/docs/rke/installation/certs/_index)。部署集群后，您可以管理这些自动生成的证书，详情请参考[管理自动生成的证书](/docs/rke/cert-mgmt/_index)。
 
-## Deploying Kubernetes with RKE
+## 使用 RKE 部署 Kubernetes
 
-After you've created your `cluster.yml`, you can deploy your cluster with a simple command. This command assumes the `cluster.yml` file is in the same directory as where you are running the command.
+创建了`cluster.yml`文件后，您可以运行以下命令部署集群。这条命令默认`cluster.yml`已经保存在了您运行命令所处的路径下。
 
 ```
 rke up
@@ -153,36 +174,38 @@ INFO[0000] [network] Pulling image [alpine:latest] on host [10.0.0.1]
 INFO[0101] Finished building Kubernetes cluster successfully
 ```
 
-The last line should read `Finished building Kubernetes cluster successfully` to indicate that your cluster is ready to use. As part of the Kubernetes creation process, a `kubeconfig` file has been created and written at `kube_config_cluster.yml`, which can be used to start interacting with your Kubernetes cluster.
+运行该命令后，返回的最后一行信息应该是`Finished building Kubernetes cluster successfully`，表示成功部署集群，可以开始使用集群。在创建 Kubernetes 集群的过程中，会创建一个`kubeconfig` 文件，它的文件名称是 `kube_config_cluster.yml`，您可以使用它控制 Kubernetes 集群。
 
-> **Note:** If you have used a different file name from `cluster.yml`, then the kube config file will be named `kube_config_<FILE_NAME>.yml`.
+> **说明：**如果您之前使用的集群配置文件名称不是`cluster.yml`，那么这里生成的 kube_config 文件的名称也会随之变化为`kube_config*<FILE_NAME>.yml`。
 
-## Save Your Files
+## 保存文件
 
-> **Important**
-> The files mentioned below are needed to maintain, troubleshoot and upgrade your cluster.
+> **重要**
+> 请保存下文中列出来的所有文件，这些文件可以用于维护集群，排查问题和升级集群。
 
-Save a copy of the following files in a secure location:
+请将这些文件复制并保存到安全的位置。
 
-- `cluster.yml`: The RKE cluster configuration file.
-- `kube_config_cluster.yml`: The [Kubeconfig file]({{<baseurl>}}/rke/latest/en/kubeconfig/) for the cluster, this file contains credentials for full access to the cluster.
-- `cluster.rkestate`: The [Kubernetes Cluster State file](#kubernetes-cluster-state), this file contains credentials for full access to the cluster.<br/><br/>_The Kubernetes Cluster State file is only created when using RKE v0.2.0 or higher._
+- `cluster.yml`：RKE 集群的配置文件。
+- `kube_config_cluster.yml`：该集群的[Kubeconfig 文件](/docs/rke/kubeconfig/_index)包含了获取该集群所有权限的认证凭据。
+- `cluster.rkestate`：[Kubernetes 集群状态文件](#Kubernetes-集群状态文件)，包含了获取该集群所有权限的认证凭据，使用 RKE v0.2.0 时才会创建这个文件。
 
-> **Note:** The "rancher-cluster" parts of the two latter file names are dependent on how you name the RKE cluster configuration file.
+> **说明：** 后两个文件的名称取决于您如何命名 RKE 集群配置文件，如果您修改的集群配置文件的名称，那么后两个文件的名称可能会跟上面列出来的文件名称不一样。
 
-### Kubernetes Cluster State
+### Kubernetes 集群状态文件
 
-The Kubernetes cluster state, which consists of the cluster configuration file `cluster.yml` and components certificates in Kubernetes cluster, is saved by RKE, but depending on your RKE version, the cluster state is saved differently.
+Kubernetes 集群状态文件用集群配置文件`cluster.yml`以及集群中的组件证书组成。不同版本的 RKE 会将文件保存在不同的地方。
 
-As of v0.2.0, RKE creates a `.rkestate` file in the same directory that has the cluster configuration file `cluster.yml`. The `.rkestate` file contains the current state of the cluster including the RKE configuration and the certificates. It is required to keep this file in order to update the cluster or perform any operation on it through RKE.
+**v0.2.0 以及更新版本**的 RKE 会在保存集群配置文件 `cluster.yml`的路径下创建一个`.rkestate`文件。该文件包含当前集群的状态、RKE 配置信息和证书信息。请妥善保存该文件的副本。
 
-Prior to v0.2.0, RKE saved the Kubernetes cluster state as a secret. When updating the state, RKE pulls the secret, updates/changes the state and saves a new secret.   
+**v0.2.0 之前的版本**的 RKE 会将集群状态存储以密文的形式存储。更新集群状态时，RKE 拉取这些密文，修改集群状态，然后将新的集群状态再次存储为密文。
 
-## Interacting with your Kubernetes cluster
+## 操作 Kubernetes 集群
 
-After your cluster is up and running, you can start using the [generated kubeconfig file]({{<baseurl>}}/rke/latest/en/kubeconfig) to start interacting with your Kubernetes cluster using `kubectl`.
+成功启动和运行集群后，您可以使用`kubectl`和[kubeconfig 文件](/docs/rke/kubeconfig/_index)控制集群。
 
-After installation, there are several maintenance items that might arise:
+## 相关操作
 
-* [Certificate Management]({{<baseurl>}}/rke/latest/en/cert-mgmt/)
-* [Adding and Removing Nodes in the cluster]({{<baseurl>}}/rke/latest/en/managing-clusters)
+完成 RKE 安装后，可能还需要完成以下两个相关操作：
+
+- [管理证书](/docs/rke/cert-mgmt/_index)
+- [添加或移除节点](/docs/rke/managing-clusters/_index)

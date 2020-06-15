@@ -1,124 +1,120 @@
 ---
-title: Requirements
-weight: 5
+title: 安装要求
 ---
-**In this section:** 
 
-<!-- TOC -->
+## 概述
 
-- [Operating System](#operating-system)
-    - [General Linux Requirements](#general-linux-requirements)
-    - [Red Hat Enterprise Linux (RHEL) / Oracle Enterprise Linux (OEL) / CentOS](#red-hat-enterprise-linux-rhel-oracle-enterprise-linux-oel-centos)
+本文讲述了 RKE 对操作系统、软件、端口和 SSH 配置的要求，安装 RKE 前，请检查您的节点是否满足这些要求。
 
-        - [Using upstream Docker](#using-upstream-docker)
-        - [Using RHEL/CentOS packaged Docker](#using-rhel-centos-packaged-docker)
-    - [Notes about Atomic Nodes](#red-hat-atomic)
+## 操作系统要求
 
-        - [OpenSSH version](#openssh-version)
-        - [Creating a Docker Group](#creating-a-docker-group)
-- [Software](#software)
-- [Ports](#ports)
+### 总体
 
-    - [Opening port TCP/6443 using `iptables`](#opening-port-tcp-6443-using-iptables)
-    - [Opening port TCP/6443 using `firewalld`](#opening-port-tcp-6443-using-firewalld)
-- [SSH Server Configuration](#ssh-server-configuration)
+RKE 可以在大多数已安装 Docker 的 Linux 操作系统上运行。RKE 的开发和测试过程是在 Ubuntu 16.04 上完成的。然而，其他操作系统对 RKE 有限制或要求。
 
-<!-- /TOC -->
+- [SSH 用户](/docs/rke/config-options/nodes/_index) - 使用 SSH 访问节点的用户必须是节点上`docker`用户组的成员。请运行以下命令，把使用 SSH 的用户添加到`docker`用户组里面。注意，您需要将`<user_name>`占位符替换为真实的用户名称。例如，您的用户是`example_user1`，则最终输入的命令为`usermod -aG docker example_user1`。除了可以将自己添加到用户组里面，您也可以运行以下命令，将其他用户添加到用户组中，只要将`<user_name>`替换为其他用户的用户名即可。
 
-## Operating System
+  ```
+  usermod -aG docker <user_name>
+  ```
 
-### General Linux Requirements
+> **说明：**
+>
+> - 添加到`docker`用户组的用户会自动获得主机的 root 权限，运行上述命令前，请确认您是否想让该用户获得 root 权限。运行命令后，请妥善保存该用户的认证凭据。
+> - 如果您无法切换到 root 用户，不能运行上述命令将用户添加到`docker`用户组，请参考[Docker 官方文档](https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user)，该文档提供了以非 root 用户的身份管理 Docker 的操作步骤。
 
-RKE runs on almost any Linux OS with Docker installed. Most of the development and testing of RKE occurred on Ubuntu 16.04. However, some OS's have restrictions and specific requirements.
+- 禁用所有 woker 节点上的交换功能（Swap）
 
-- [SSH user]({{<baseurl>}}/rke/latest/en/config-options/nodes/#ssh-user) - The SSH user used for node access must be a member of the `docker` group on the node:
+- 在命令行工具中输入以下命令和脚本，检查下列模组是否存在。
 
-   ```
-   usermod -aG docker <user_name>
-   ```
-   
-> **Note:** Users added to the `docker` group are granted effective root permissions on the host by means of the Docker API. Only choose a user that is intended for this purpose and has its credentials and access properly secured. 
+  - `modprobe module_name`
+  - `lsmod | grep module_name`
+  - 如果是内置模组，请输入这条命令检查：`grep module_name /lib/modules/$(uname -r)/modules.builtin`
+  - 请输入以下脚本：
 
-   See [Manage Docker as a non-root user](https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user) to see how you can configure access to Docker without using the `root` user.
+    ```bash
+        for module in br_netfilter ip6_udp_tunnel ip_set ip_set_hash_ip ip_set_hash_net iptable_filter iptable_nat iptable_mangle iptable_raw nf_conntrack_netlink nf_conntrack nf_conntrack_ipv4   nf_defrag_ipv4 nf_nat nf_nat_ipv4 nf_nat_masquerade_ipv4 nfnetlink udp_tunnel veth vxlan x_tables xt_addrtype xt_conntrack xt_comment xt_mark xt_multiport xt_nat xt_recent xt_set  xt_statistic xt_tcpudp;
+        do
+          if ! lsmod | grep -q $module; then
+            echo "module $module is not present";
+          fi;
+        done
+    ```
 
-- Swap should be disabled on any worker nodes
+返回的模组应该包括下列的所有模组：
 
-- Following kernel modules should be present. This can be checked using:
-   * `modprobe module_name`
-   * `lsmod | grep module_name`
-   * `grep module_name /lib/modules/$(uname -r)/modules.builtin`, if it's a built-in module
-   * The following bash script
+| 模组名称               |
+| :--------------------- |
+| br_netfilter           |
+| ip6_udp_tunnel         |
+| ip_set                 |
+| ip_set_hash_ip         |
+| ip_set_hash_net        |
+| iptable_filter         |
+| iptable_nat            |
+| iptable_mangle         |
+| iptable_raw            |
+| nf_conntrack_netlink   |
+| nf_conntrack           |
+| nf_conntrack_ipv4      |
+| nf_defrag_ipv4         |
+| nf_nat                 |
+| nf_nat_ipv4            |
+| nf_nat_masquerade_ipv4 |
+| nfnetlink              |
+| udp_tunnel             |
+| veth                   |
+| vxlan                  |
+| x_tables               |
+| xt_addrtype            |
+| xt_conntrack           |
+| xt_comment             |
+| xt_mark                |
+| xt_multiport           |
+| xt_nat                 |
+| xt_recent              |
+| xt_set                 |
+| xt_statistic           |
+| xt_tcpudp              |
 
-```bash
-     for module in br_netfilter ip6_udp_tunnel ip_set ip_set_hash_ip ip_set_hash_net iptable_filter iptable_nat iptable_mangle iptable_raw nf_conntrack_netlink nf_conntrack nf_conntrack_ipv4   nf_defrag_ipv4 nf_nat nf_nat_ipv4 nf_nat_masquerade_ipv4 nfnetlink udp_tunnel veth vxlan x_tables xt_addrtype xt_conntrack xt_comment xt_mark xt_multiport xt_nat xt_recent xt_set  xt_statistic xt_tcpudp;
-     do
-       if ! lsmod | grep -q $module; then
-         echo "module $module is not present";
-       fi;
-     done
-```
+- 运行以下命令，修改 sysctl 配置：
 
-Module name |
-------------|
-br_netfilter |
-ip6_udp_tunnel |
-ip_set |
-ip_set_hash_ip |
-ip_set_hash_net |
-iptable_filter |
-iptable_nat |
-iptable_mangle |
-iptable_raw |
-nf_conntrack_netlink |
-nf_conntrack |
-nf_conntrack_ipv4 |
-nf_defrag_ipv4 |
-nf_nat |
-nf_nat_ipv4 |
-nf_nat_masquerade_ipv4 |
-nfnetlink |
-udp_tunnel |
-veth |
-vxlan |
-x_tables |
-xt_addrtype |
-xt_conntrack |
-xt_comment |
-xt_mark |
-xt_multiport |
-xt_nat |
-xt_recent |
-xt_set |
-xt_statistic |
-xt_tcpudp |
+  ```
+  net.bridge.bridge-nf-call-iptables=1
+  ```
 
-- Following sysctl settings must be applied
+### RHEL、OEL、CentOS
 
-```
-net.bridge.bridge-nf-call-iptables=1
-```
+因为 Red Hat Enterprise Linux（RHEL）、Oracle Enterprise Linux （OEL）和 CentOS 存在漏洞[Bugzilla 1527565](https://bugzilla.redhat.com/show_bug.cgi?id=1527565)，所以它们不允许用户使用`root`作为[SSH 用户](docs/rke/config-options/nodes/_index#ssh-user)。
 
-### Red Hat Enterprise Linux (RHEL) / Oracle Enterprise Linux (OEL) / CentOS
+如果您使用的操作系统是 RHEL、OEL 或 CentOS ，请参考下文。
 
-If using Red Hat Enterprise Linux, Oracle Enterprise Linux or CentOS, you cannot use the `root` user as [SSH user]({{<baseurl>}}/rke/latest/en/config-options/nodes/#ssh-user) due to [Bugzilla 1527565](https://bugzilla.redhat.com/show_bug.cgi?id=1527565). Please follow the instructions below how to setup Docker correctly, based on the way you installed Docker on the node.
+#### 使用 upstream Docker
 
-#### Using upstream Docker
-If you are using upstream Docker, the package name is `docker-ce` or `docker-ee`. You can check the installed package by executing:
+如果您使用的是 upstream Docker，Docker 的二进制安装包名字应该是`docker-ce`或 `docker-ee`，您需要输入以下命令，查询 Docker 安装包的名称。
 
 ```
 rpm -q docker-ce
 ```
 
-When using the upstream Docker packages, please follow [Manage Docker as a non-root user](https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user).
+如果第一条命令的返回结果显示没有这个安装包，则表示安装包的名称可能是`docker-ee`，请输入以下命令确认安装包名称：
+
+```
+rpm -q docker-ee
+```
+
+输入上述命令后，如果您使用的确实是`docker-ce`或 `docker-ee`，命令行工具会询问您是否安装，请选择不安装。因为在这个步骤中，我们只是在借用`rpm -q`确认安装包的名称，以确认其来源。
+确认安装包的来源是 uptream Docker 后，请参考[Docker 官方文档](https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user)，该文档提供了以非 root 用户的身份管理 Docker 的操作步骤。
 
 #### Using RHEL/CentOS packaged Docker
-If you are using the Docker package supplied by Red Hat / CentOS, the package name is `docker`. You can check the installed package by executing:
+
+如果您使用的是 Red Hat 或 CentOS 提供的 Docker 二进制安装包，则安装包的名字应该是`docker`，您需要输入以下命令，查询 Docker 安装包的名称。输入上述命令后，如果您使用的确实是`docker`，命令行工具会询问您是否安装，请选择不安装。因为在这个步骤中，我们只是在借用`rpm -q`确认安装包的名称，以确认其来源。
 
 ```
 rpm -q docker
 ```
 
-If you are using the Docker package supplied by Red Hat / CentOS, the `dockerroot` group is automatically added to the system. You will need to edit (or create) `/etc/docker/daemon.json` to include the following:
+来源于 Red Hat 或 CentOS 的安装包会自动将`dockerroot` 添加到系统内。您需要创建`/etc/docker/daemon.json`文件，然后将下文代码示例中的键值添加到 JSON 文件中，创建一个名为`dockerroot`的用户组。
 
 ```
 {
@@ -126,19 +122,19 @@ If you are using the Docker package supplied by Red Hat / CentOS, the `dockerroo
 }
 ```
 
-Restart Docker after editing or creating the file. After restarting Docker, you can check the group permission of the Docker socket (`/var/run/docker.sock`), which should show `dockerroot` as group:
+创建和编辑文件后，请重启 Docker。重启后，您可以打开`/var/run/docker.sock`，检查用户组权限。此时返回的信息显示已经创建 `dockerroot`用户组，该用户组有读写权限：
 
 ```
 srw-rw----. 1 root dockerroot 0 Jul  4 09:57 /var/run/docker.sock
 ```
 
-Add the SSH user you want to use to this group, this can't be the `root` user.
+运行以下命令，将 SSH 用户添加到`dockerroot`用户组中。注意，您需要将`<user_name>`占位符替换为真实的用户名称。例如，您的用户是`example_user1`，则最终输入的命令为`usermod -aG docker example_user1`。除了可以将自己添加到用户组里面，您也可以运行以下命令，将其他用户添加到用户组中，只要将`<user_name>`替换为其他用户的用户名即可。
 
 ```
 usermod -aG dockerroot <user_name>
 ```
 
-To verify that the user is correctly configured, log out of the node and login with your SSH user, and execute `docker ps`:
+完成添加后，您需要登出该节点，然后使用 SSH 用户的认证信息登录该节点，执行`docker ps`，应该返回如下信息：
 
 ```
 ssh <user_name>@node
@@ -148,63 +144,70 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 
 ### Red Hat Atomic
 
-Before trying to use RKE with Red Hat Atomic nodes, there are a couple of updates to the OS that need to occur in order to get RKE working.
+使用 Red Hat Atomic 节点运行 RKE 前，请完成以下两项升级。
 
-#### OpenSSH version
+#### 升级 OpenSSH 版本
 
-By default, Atomic hosts ship with OpenSSH 6.4, which doesn't support SSH tunneling, which is a core RKE requirement. If you upgrade to the latest version of OpenSSH supported by Atomic, it will correct the SSH issue.
+默认情况下，Atomic 使用的是 OpenSSH 6.4，该版本不支持 SSH 隧道协议（SSH tunneling），而 RKE 的其中一个核心需求就是 SSH 隧道协议，所以您需要将 OpenSSH 升级到 Atomic 支持的最新版，解决 SSH 隧道协议的问题。
 
-#### Creating a Docker Group
+#### 创建 Docker 分组
 
-By default, Atomic hosts do not come with a Docker group. You can update the ownership of the Docker socket by enabling the specific user in order to launch RKE.
+Atomic 和 RHEL、CentOS 不同，没有内置的 Docker 分组，所以也就不像 RHEL 和 CentOS 那样，不可以通过编辑用户组权限、将用户添加到用户组等操作，批量分配用户权限。但是您可以运行以下命令，允许单个用户运行 RKE。如果您需要授权多个用户，请重复运行以下命令，将用户名替换成不同的用户名即可。
 
 ```
-# chown <user> /var/run/docker.sock
+chown <user> /var/run/docker.sock
 ```
 
-## Software
+完成权限分配后，您需要登出该节点，然后使用 SSH 用户的认证信息登录该节点，执行`docker ps`，应该返回如下信息：
 
-This section describes the requirements for Docker, Kubernetes, and SSH.
+```
+ssh <user_name>@node
+$ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+```
+
+## 软件要求
+
+本节描述了 RKE 对于 Docker、Kubernetes 和 SSH 的要求。
 
 ### OpenSSH
 
-In order to SSH into each node, OpenSSH 7.0+ must be installed on each node.
+为了可以通过 SSH 访问每一个节点，RKE 要求每个节点上安装的是 OpenSSH 的版本是**OpenSSH 7.0+**。
 
 ### Kubernetes
 
-Refer to the [RKE release notes](https://github.com/rancher/rke/releases) for the supported versions of Kubernetes.
+请参考[RKE 版本说明](https://github.com/rancher/rke/releases) ，获取每个版本的 RKE 支持的 Kubernetes 版本。
 
 ### Docker
 
-Each Kubernetes version supports different Docker versions. The Kubernetes release notes contain the [current list](https://kubernetes.io/docs/setup/release/notes/#dependencies) of validated Docker versions.
+每一个 Kubernetes 版本支持的 Docker 版本都不同，详情请参考，[Kubernetes 的版本说明](https://kubernetes.io/docs/setup/release/notes/#dependencies)。
 
-### Installing Docker
+#### 安装 Docker
 
-You can either follow the [Docker installation](https://docs.docker.com/install/) instructions or use one of Rancher's [install scripts](https://github.com/rancher/install-docker) to install Docker. For RHEL, please see [How to install Docker on Red Hat Enterprise Linux 7](https://access.redhat.com/solutions/3727511).
+请参考[Docker 官方文档](https://docs.docker.com/install/)完成 Docker 安装。Rancher 也提供了 Docker 的安装脚本，详情请参考[安装脚本](https://github.com/rancher/install-docker) 。如果您使用的操作系统是 RHEL，请参考[Red Hat 官方文档-如何在 RHEL 上安装 Docker](https://access.redhat.com/solutions/3727511)。
 
-Docker Version   | Install Script |
-----------|------------------
-18.09.2 |  <code>curl https://releases.rancher.com/install-docker/18.09.2.sh &#124; sh</code> |
-18.06.2 |  <code>curl https://releases.rancher.com/install-docker/18.06.2.sh &#124; sh</code> |
-17.03.2 |  <code>curl https://releases.rancher.com/install-docker/17.03.2.sh &#124; sh</code> |
+| Docker 版本 | 安装脚本                                                                           |
+| :---------- | :--------------------------------------------------------------------------------- |
+| 18.09.2     | <code>curl https://releases.rancher.com/install-docker/18.09.2.sh &#124; sh</code> |
+| 18.06.2     | <code>curl https://releases.rancher.com/install-docker/18.06.2.sh &#124; sh</code> |
+| 17.03.2     | <code>curl https://releases.rancher.com/install-docker/17.03.2.sh &#124; sh</code> |
 
-### Checking the Installed Docker Version
+#### 检查 Docker 版本号
 
-Confirm that a Kubernetes supported version of Docker is installed on your machine, by running `docker version --format '{{.Server.Version}}'`.
+输入`docker version --format '{{.Server.Version}}'`，检查支持特定版本 Kubernetes 的 Docker 是否已经成功安装到您的机器上。如果已经成功安装，返回的信息应该如代码示例所示。
 
 ```
 docker version --format '{{.Server.Version}}'
 17.03.2-ce
 ```
 
-## Ports
-{{< ports-rke-nodes >}}
-{{< requirements_ports_rke >}}
+## 端口要求
 
-If you are using an external firewall, make sure you have this port opened between the machine you are using to run `rke` and the nodes that you are going to use in the cluster.
+如果您使用的是外部防火墙，请确保在运行 RKE 的节点和创建集群的节点之间开放了 TCP/6443 端口。
 
+### 使用 iptables 打开 TCP/6443 端口
 
-### Opening port TCP/6443 using `iptables`
+运行以下命令，使用 iptables 打开 TCP/6443 端口。
 
 ```
 # Open TCP/6443 for all
@@ -214,7 +217,9 @@ iptables -A INPUT -p tcp --dport 6443 -j ACCEPT
 iptables -A INPUT -p tcp -s your_ip_here --dport 6443 -j ACCEPT
 ```
 
-### Opening port TCP/6443 using `firewalld`
+### 使用 firewalld 打开 TCP/6443 端口
+
+运行以下命令，使用 firewlld 打开 TCP/6443 端口。
 
 ```
 # Open TCP/6443 for all
@@ -229,9 +234,9 @@ firewall-cmd --permanent --zone=public --add-rich-rule='
 firewall-cmd --reload
 ```
 
-## SSH Server Configuration
+## SSH Server 配置
 
-Your SSH server system-wide configuration file, located at `/etc/ssh/sshd_config`, must include this line that allows TCP forwarding:
+您的 SSH server 全系统配置文件，位于`/etc/ssh/sshd_config`，该文件必须包含以下代码，允许 TCP 转发。
 
 ```
 AllowTcpForwarding yes
