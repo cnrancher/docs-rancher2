@@ -1,26 +1,22 @@
 ---
-title: Certificate Management
-weight: 150
+title: 管理证书
 ---
 
-_Available as of v0.2.0_
+_v0.2.0 开始可用_
 
-Certificates are an important part of Kubernetes clusters and are used for all Kubernetes cluster components. RKE has a `rke cert` command to help work with certificates.
+证书是 Kubernetes 集群重要的组成部分，所有的 Kubernetes 组件需要用到证书。您可以使用 RKE 的 `rke cert`命令管理证书。
 
-* [Ability to generate certificate sign requests for the Kubernetes components](#generating-certificate-signing-requests-csrs-and-keys)
-* [Rotate Auto-Generated Certificates](#certificate-rotation)
+## 生成证书签发请求（CSRs）和密钥
 
-## Generating Certificate Signing Requests (CSRs) and Keys
+如果您想使用证书签发机构创建和签发证书，您可以使用[RKE 创建证书签发请求和密钥](/docs/rke/installation/certs/_index)。
 
-If you want to create and sign the certificates by a real Certificate Authority (CA), you can use RKE to [generate a set of Certificate Signing Requests (CSRs) and keys]({{<baseurl>}}/rke/latest/en/installation/certs/#generating-certificate-signing-requests-csrs-and-keys).
+您可以使用证书签发请求和密钥给证书签发机构的证书签名。签名之后，RKE 可以在 Kubernetes 集群中使用这些[自定义证书](/docs/rke/installation/certs/_index)。
 
-You can use the CSRs and keys to sign the certificates by a real CA. After the certificates are signed, these custom certificates can be used by RKE to as [custom certificates]({{<baseurl>}}/rke/latest/en/installation/certs/) for the Kubernetes cluster.
+## 轮换证书
 
-## Certificate Rotation
+默认状态下，Kubenetes 集群使用由 RKE 自动生成的证书。当证书临近过期时，或当证书被泄露时，用户应该及时轮换证书。
 
-By default, Kubernetes clusters require certificates and RKE will automatically generate certificates for the clusters. Rotating these certificates are important before the certificates expire as well as if a certificate is compromised.
-
-After the certificates are rotated, the Kubernetes components are automatically restarted. Certificates can be rotated for the following services:
+完成证书轮换后，Kubernetes 组件会自动重启，重启后，新的证书就会生效。您可以为以下这些服务轮换证书：
 
 - etcd
 - kubelet
@@ -29,76 +25,67 @@ After the certificates are rotated, the Kubernetes components are automatically 
 - kube-scheduler
 - kube-controller-manager
 
-RKE has the ability to rotate the auto-generated certificates with some simple commands:
+RKE 具有轮换证书的能力，您可以使用`rke cert`命令轮换服务证书：
 
-* Rotating all service certificates while using the same CA
-* Rotating a certificate on an individual service while using the same CA
-* Rotating the CA and all service certificates
+- `rke cert rotate`：轮换全部服务证书。
+- `rke cert rotate --service <ServiceName>`：轮换单个服务证书。
+- `rke cert rotate --rotate-ca`：轮换 CA 证书和全部服务证书。
 
-Whenever you're trying to rotate certificates, the `cluster.yml` that was used to deploy the Kubernetes cluster is required. You can reference a different location for this file by using the `--config` option when running `rke cert rotate`.
+只要您在进行证书轮换，都需要用到`cluster.yml` 文件。如果您修改了`cluster.yml` 默认的存储路径，在执行证书轮换的时候，您可以使用`rke cert rotate --config`指向`cluster.yml` 的路径。
 
-### Rotating all Service Certificates while using the same CA
+### 轮换服务证书
 
-To rotate the service certificates for all the Kubernetes services, run the following command, i.e. `rke cert rotate`. After all the service certificates are rotated, these services will automatically be restarted to start using the new certificate.
+#### 轮换全部服务证书
 
-```
-$ rke cert rotate
-INFO[0000] Initiating Kubernetes cluster                
-INFO[0000] Rotating Kubernetes cluster certificates     
-INFO[0000] [certificates] Generating Kubernetes API server certificates
-INFO[0000] [certificates] Generating Kube Controller certificates
-INFO[0000] [certificates] Generating Kube Scheduler certificates
-INFO[0001] [certificates] Generating Kube Proxy certificates
-INFO[0001] [certificates] Generating Node certificate   
-INFO[0001] [certificates] Generating admin certificates and kubeconfig
-INFO[0001] [certificates] Generating Kubernetes API server proxy client certificates
-INFO[0001] [certificates] Generating etcd-xxxxx certificate and key
-INFO[0001] [certificates] Generating etcd-yyyyy certificate and key
-INFO[0002] [certificates] Generating etcd-zzzzz certificate and key
-INFO[0002] Successfully Deployed state file at [./cluster.rkestate]
-INFO[0002] Rebuilding Kubernetes cluster with rotated certificates
-.....
-INFO[0050] [worker] Successfully restarted Worker Plane..
-```
+运行`rke cert rotate`命令，可以将所有服务正在使用的证书替换为同一证书签发机构颁发的新证书。在命令行工具输入该命令后，返回信息如下。完成证书轮换后，Kubernetes 组件会自动重启，然后新的证书就会生效。
 
-### Rotating a Certificate on an Individual Service while using the same CA
+#### 轮换单个服务证书
 
-To rotate the certificate for an individual Kubernetes service, use the `--service` option when rotating certificates to specify the service. After the specified Kubernetes service has had its certificate rotated, it is automatically restarted to start using the new certificate.
+运行`rke cert rotate --service <ServiceName>`命令，可以将单个服务正在使用的证书替换为同一证书签发机构颁发的新证书。在命令行工具输入该命令后，返回信息如下。完成证书轮换后，Kubernetes 组件会自动重启，然后新的证书就会生效。
 
-Example of rotating the certificate for only the `kubelet`:
+`<ServiceName>`的可选值包括：
+
+- etcd
+- kubelet
+- kube-apiserver
+- kube-proxy
+- kube-scheduler
+- kube-controller-manager
+
+以下代码示例演示的是替换`kubelet`组件使用的证书：
 
 ```
 $ rke cert rotate --service kubelet
-INFO[0000] Initiating Kubernetes cluster                
-INFO[0000] Rotating Kubernetes cluster certificates     
-INFO[0000] [certificates] Generating Node certificate   
+INFO[0000] Initiating Kubernetes cluster
+INFO[0000] Rotating Kubernetes cluster certificates
+INFO[0000] [certificates] Generating Node certificate
 INFO[0000] Successfully Deployed state file at [./cluster.rkestate]
 INFO[0000] Rebuilding Kubernetes cluster with rotated certificates
 .....
 INFO[0033] [worker] Successfully restarted Worker Plane..
 ```
 
-### Rotating the CA and all service certificates
+### 轮换 CA 证书
 
-If the CA certificate needs to be rotated, you are required to rotate all the services certificates as they need to be signed with the newly rotated CA certificate. To include rotating the CA with the service certificates, add the `--rotate-ca` option. After the CA and all the service certificates are rotated, these services will automatically be restarted to start using the new certificate.
+如果需要轮换 CA 证书，您需要为所有的服务轮换证书。使用`--rotate-ca`选项，可以轮换 CA 证书和所有服务的证书。完成证书轮换后，Kubernetes 组件会自动重启，然后新的证书就会生效。
 
-Rotating the CA certificate will result in restarting other system pods, that will also use the new CA certificate. This includes:
+轮换 CA 证书会导致其他 system pods 重启，这些 pods 重启后也会使用新的 CA 证书：
 
-- Networking pods (canal, calico, flannel, and weave)
+- 网络组件 Pods（canal、calico、flannel 和 weave）
 - Ingress Controller pods
 - KubeDNS pods
 
 ```
-$ rke cert rotate --rotate-ca      
-INFO[0000] Initiating Kubernetes cluster                
-INFO[0000] Rotating Kubernetes cluster certificates     
+$ rke cert rotate --rotate-ca
+INFO[0000] Initiating Kubernetes cluster
+INFO[0000] Rotating Kubernetes cluster certificates
 INFO[0000] [certificates] Generating CA kubernetes certificates
 INFO[0000] [certificates] Generating Kubernetes API server aggregation layer requestheader client CA certificates
 INFO[0000] [certificates] Generating Kubernetes API server certificates
 INFO[0000] [certificates] Generating Kube Controller certificates
 INFO[0000] [certificates] Generating Kube Scheduler certificates
 INFO[0000] [certificates] Generating Kube Proxy certificates
-INFO[0000] [certificates] Generating Node certificate   
+INFO[0000] [certificates] Generating Node certificate
 INFO[0001] [certificates] Generating admin certificates and kubeconfig
 INFO[0001] [certificates] Generating Kubernetes API server proxy client certificates
 INFO[0001] [certificates] Generating etcd-xxxxx certificate and key
