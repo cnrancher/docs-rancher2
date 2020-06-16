@@ -187,6 +187,6 @@ AWS 创建 NLB 后，单击**关闭**。
 
 - **Traefik：** 健康检查路径是 `/ping`。默认的健康检查路径是`/ping`。Traefik 会给`/ping`发送[自身的应答](https://docs.traefik.io/operations/ping/)。
 
-* **NGINX Ingress：**NGINX Ingress 的默认后端有一个`/healthz`端点。默认的健康检查路径是`/healthz`。Traefik 会给`/ping`发送[自身的应答](https://github.com/kubernetes/ingress-nginx/blob/0cbe783f43a9313c9c26136e888324b1ee91a72f/charts/ingress-nginx/values.yaml#L212)。
+* **NGINX Ingress：** NGINX Ingress 的默认后端有一个`/healthz`端点。默认的健康检查路径是`/healthz`。Traefik 会给`/ping`发送[自身的应答](https://github.com/kubernetes/ingress-nginx/blob/0cbe783f43a9313c9c26136e888324b1ee91a72f/charts/ingress-nginx/values.yaml#L212)。
 
 模拟一个准确的健康检查的最好方式是，使用主机 header（Rancher hostname）加上`/ping`或 `/healthz`，得到 Rancher Pods 的相应消息而不是 Ingress 的响应消息。
