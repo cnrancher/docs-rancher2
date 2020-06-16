@@ -296,7 +296,7 @@ docker run -d --restart=unless-stopped \
 | `<CERT_DIRECTORY>`               | 证书文件所在目录                                                        |
 | `<FULL_CHAIN.pem>`               | 证书链文件路径                                                          |
 | `<PRIVATE_KEY.pem>`              | 证书私有密钥路径                                                        |
-| `<CA_CERTS>`                     | 证书颁发机构的证书的路径                                                |
+| `<CA_CERTS.pem>`                 | 证书颁发机构的证书的路径                                                |
 | `<REGISTRY.YOURDOMAIN.COM:PORT>` | 私有镜像库                                                              |
 | `<RANCHER_VERSION_TAG>`          | 您要安装的[Rancher 版本](/docs/installation/options/server-tags/_index) |
 

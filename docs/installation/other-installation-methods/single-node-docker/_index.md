@@ -77,7 +77,7 @@ docker run -d --restart=unless-stopped \
 | `<CERT_DIRECTORY>`  | 证书文件所在目录。         |
 | `<FULL_CHAIN.pem>`  | 证书链文件路径。           |
 | `<PRIVATE_KEY.pem>` | 证书私有密钥路径。         |
-| `<CA_CERTS>`        | 证书颁发机构的证书的路径。 |
+| `<CA_CERTS.pem>`    | 证书颁发机构的证书的路径。 |
 
 :::important 重要
 在使用单节点安装时，Rancher Server 的数据默认保存在容器里。这意味着，在 Rancher Server 容器被删除时，Rancher Server 的数据将会丢失。您可以通过添加 `-v` 参数以挂载目录的方式将数据保存在 Rancher Server 所在的主机上。详情请参阅 [Rancher 单节点数据持久化](/docs/installation/other-installation-methods/single-node-docker/advanced/_index#persist-data)。
