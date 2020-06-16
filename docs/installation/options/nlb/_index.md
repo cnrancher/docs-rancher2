@@ -185,8 +185,8 @@ AWS 创建 NLB 后，单击**关闭**。
 
 因为 K3s 和 RKE 集群使用的 Ingress 不同，RKE 集群默认使用的是 NGINX Ingress，K3s 默认使用的是 Traefik，所以它们处理路由健康检查的方式不一样。
 
-- **Traefik：** 健康检查路径是 `/ping`。默认的健康检查路径是`/ping`。Traefik 会给`/ping`发送[自身的应答](https://docs.traefik.io/operations/ping/)。
+- **Traefik：** 健康检查路径是 `/ping`。默认的健康检查路径是`/ping`。[Traefik 自身](https://docs.traefik.io/operations/ping/)会响应该请求。
 
-* **NGINX Ingress：** NGINX Ingress 的默认后端有一个`/healthz`端点。默认的健康检查路径是`/healthz`。Traefik 会给`/ping`发送[自身的应答](https://github.com/kubernetes/ingress-nginx/blob/0cbe783f43a9313c9c26136e888324b1ee91a72f/charts/ingress-nginx/values.yaml#L212)。
+* **NGINX Ingress：** NGINX Ingress 的默认后端有一个`/healthz`端点。默认的健康检查路径是`/healthz`。[NGINX 自身](https://github.com/kubernetes/ingress-nginx/blob/0cbe783f43a9313c9c26136e888324b1ee91a72f/charts/ingress-nginx/values.yaml#L212)会响应该请求。
 
 模拟一个准确的健康检查的最好方式是，使用主机 header（Rancher hostname）加上`/ping`或 `/healthz`，得到 Rancher Pods 的相应消息而不是 Ingress 的响应消息。
