@@ -35,7 +35,7 @@ keywords:
 
 ### 1、配置 Linux 节点
 
-确保您的节点满足 [OS，Docker，硬件和网络](/docs/installation/requirements/_index)的常规安装要求。
+确保您的节点满足 [操作系统和容器运行时要求](/docs/installation/requirements/_index)的常规安装要求。
 
 要在 Amazon EC2 中的创建节点，请参考[这个教程](/docs/installation/options/ec2-node/_index)。
 
@@ -98,7 +98,7 @@ etcd 数据库需要奇数个节点，因此它始终可以选举出被大多数
 
 ### 1、配置 Linux 节点
 
-确保您的节点满足 [OS，Docker，硬件和网络](/docs/installation/requirements/_index)的常规安装要求。
+确保您的节点满足 [操作系统和容器运行时要求](/docs/installation/requirements/_index)的常规安装要求。
 
 要在 Amazon EC2 中的创建节点，请参考[这个教程](/docs/installation/options/ec2-node/_index)。
 

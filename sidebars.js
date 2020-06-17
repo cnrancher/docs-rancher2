@@ -587,7 +587,14 @@ module.exports = {
                         label: "监控",
                         items: [
                             "cluster-admin/tools/monitoring/_index",
-                            "cluster-admin/tools/monitoring/cluster-metrics/_index",
+                            {
+                                type: "category",
+                                label: "集群参数",
+                                items: [
+                                    "cluster-admin/tools/monitoring/cluster-metrics/_index",
+                                    "cluster-admin/tools/monitoring/cluster-metrics/custom-metrics/_index",
+                                ],
+                            },
                             "cluster-admin/tools/monitoring/expression/_index",
                             "cluster-admin/tools/monitoring/prometheus/_index",
                             "cluster-admin/tools/monitoring/viewing-metrics/_index",
