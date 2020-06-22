@@ -158,7 +158,7 @@ docker run -d --volumes-from rancher-data \
 | `<CERT_DIRECTORY>`      | 包含证书文件的目录的路径。                                                            |
 | `<FULL_CHAIN.pem>`      | 完整证书链的路径。                                                                    |
 | `<PRIVATE_KEY.pem>`     | 证书私钥的路径。                                                                      |
-| `<CA_CERTS>`            | 证书颁发机构的证书的路径。                                                            |
+| `<CA_CERTS.pem>`        | 证书颁发机构的证书的路径。                                                            |
 | `<RANCHER_VERSION_TAG>` | 您要升级到的[Rancher 版本](/docs/installation/options/server-tags/_index)的发行标签。 |
 |                         |                                                                                       |
 
@@ -257,7 +257,7 @@ docker run -d --volumes-from rancher-data \
 | `<CERT_DIRECTORY>`               | 包含证书文件的目录的路径。                                                            |
 | `<FULL_CHAIN.pem>`               | 完整证书链的路径。                                                                    |
 | `<PRIVATE_KEY.pem>`              | 证书私钥的路径。                                                                      |
-| `<CA_CERTS>`                     | 证书颁发机构的证书的路径。                                                            |
+| `<CA_CERTS.pem>`                 | 证书颁发机构的证书的路径。                                                            |
 | `<REGISTRY.YOURDOMAIN.COM:PORT>` | 您的私有仓库 URL 和端口。                                                             |
 | `<RANCHER_VERSION_TAG>`          | 您要升级到的[Rancher 版本](/docs/installation/options/server-tags/_index)的发行标签。 |
 

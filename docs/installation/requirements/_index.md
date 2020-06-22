@@ -24,7 +24,7 @@ keywords:
 
 请确保 Rancher Server 的节点满足以下要求:
 
-- [操作系统和 Docker 要求](#操作系统和-docker-要求)
+- [操作系统和容器运行时要求](#操作系统和-docker-要求)
 - [硬件要求](#硬件要求)
   - [CPU 和 Memory](#cpu-和-内存)
   - [Rancher 2.4.0 之前版本的 CPU 和 Memory](#rancher-v240-之前的-rke-高可用安装的-cpu-和内存要求)
@@ -37,9 +37,9 @@ keywords:
 
 建议在 Chrome 或 Firefox 中使用 Rancher UI。
 
-## 操作系统和 Docker 要求
+## 操作系统和容器运行时要求
 
-Rancher 应用可以兼容当前任何流行的 Linux 发行版和流行的 Docker 版本。
+Rancher 应用可以兼容当前任何流行的 Linux 发行版。
 
 Rancher 官方支持并且已在如下操作系统中测试了 Rancher 和 RKE，它们包括 Ubuntu，CentOS，Oracle Linux，RancherOS 和 RedHat Enterprise Linux
 
@@ -48,6 +48,8 @@ K3s 几乎可以在任何 Linux 版本上运行。K3s 在以下操作系统及�
 - Ubuntu 16.04 (amd64)
 - Ubuntu 18.04 (amd64)
 - Raspbian Buster (armhf)
+
+如果您在 K3s 集群上使用**Raspbian Buster**安装 Rancher，请参考[这些步骤](https://rancher.com/docs/k3s/latest/en/advanced/#enabling-legacy-iptables-on-raspbian-buster)，在 Raspbian Buster 中启用 legacy iptables。
 
 如果您要在 Alpine Linux 操作系统上安装 K3s 集群并安装 Rancher，您需要执行[这些额外步骤](https://rancher.com/docs/k3s/latest/en/advanced/#additional-preparation-for-alpine-linux-setup)。
 

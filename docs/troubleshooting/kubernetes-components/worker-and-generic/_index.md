@@ -20,7 +20,7 @@ keywords:
 
 ## 检查容器是否正在运行
 
-在所有节点上应该运行以下两个容器：
+`worker`节点上应该运行以下两个容器：
 
 - kubelet
 - kube-proxy

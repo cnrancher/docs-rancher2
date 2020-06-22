@@ -21,13 +21,11 @@ keywords:
 
 请确保 Rancher Server 的节点满足以下要求。
 
-## 操作系统和 Docker 要求
+## 操作系统和容器运行要求
 
 Rancher 理论上可以任何通用的 Linux 发行版和任何通用的 Docker 版本一起工作。所有下游集群的 etcd 和 controlplane 节点都需要运行在 Linux 上。Worker 节点可以运行在 Linux 或 Windows 上。在 Rancher v2.3.0 中添加了在下游集群中使用 Windows Worker 节点的功能。
 
-
 Rancher 已经过测试，并官方支持在 Ubuntu，CentOS，Oracle Linux，RancherOS 和 RedHat Enterprise Linux 上运行下游集群。关于每个 Rancher 版本所测试过的操作系统和 Docker 版本的详细信息，请参阅[支持维护条款](https://rancher.cn/support-maintenance-terms/)。
-
 
 所有受支持的操作系统都是 64-bit x86 系统。
 

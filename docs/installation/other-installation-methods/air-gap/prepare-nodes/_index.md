@@ -117,7 +117,7 @@ etcd 数据库需要奇数个节点，因此它始终可以选举出被大多数
 
 这些主机可以与 Internet 断开连接，但需要能够与您的私有镜像仓库连接。
 
-确保您的节点满足 [OS，Docker，硬件和网络](/docs/installation/requirements/_index)的常规安装要求。
+确保您的节点满足 [操作系统和容器运行时要求](/docs/installation/requirements/_index)的常规安装要求。
 
 要在 Amazon EC2 中的创建节点，请参考[这个教程](/docs/installation/options/ec2-node/_index)。
 
@@ -170,7 +170,7 @@ Rancher 支持使用私有镜像仓库进行离线安装。您必须有自己的
 
 这些主机可以与 Internet 断开连接，但需要能够与您的私有镜像仓库连接。
 
-确保您的节点满足 [OS，Docker，硬件和网络](/docs/installation/requirements/_index)的常规安装要求。
+确保您的节点满足 [操作系统和容器运行时要求](/docs/installation/requirements/_index)的常规安装要求。
 
 要在 Amazon EC2 中的创建节点，请参考[这个教程](/docs/installation/options/ec2-node/_index)。
 
