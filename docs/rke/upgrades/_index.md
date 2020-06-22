@@ -1,89 +1,74 @@
 ---
-title: Upgrades
-weight: 100
+title: 升级必读
 ---
 
-After RKE has deployed Kubernetes, you can upgrade the versions of the components in your Kubernetes cluster, the [definition of the Kubernetes services]({{<baseurl>}}/rke/latest/en/config-options/services/) or the [add-ons]({{<baseurl>}}/rke/latest/en/config-options/add-ons/).
+## 概述
 
-The default Kubernetes version for each RKE version can be found in [the RKE release notes](https://github.com/rancher/rke/releases/). RKE v1.x should be used.
+使用 RKE 部署 Kubernetes 后，您可以升级 Kubernetes 集群中组件的版本、编辑[Kubernetes services 列表](/docs/rke/config-options/services/_index)或编辑[插件](/docs/rke/config-options/add-ons/_index)。
 
-You can also select a newer version of Kubernetes to install for your cluster.
+RKE 的版本说明列出了每个 RKE 版本支持的 Kubernetes 版本，详情请参考[RKE 版本说明](https://github.com/rancher/rke/releases/)。本文基于 RKE v1.x 写作。
 
-Each version of RKE has a specific [list of supported Kubernetes versions.](#listing-supported-kubernetes-versions)
+您也可以使用更新的 Kubernetes 版本安装集群。
 
-In case the Kubernetes version is defined in the `kubernetes_version` directive and under the `system-images` directive, the `system-images` configuration will take precedence over the `kubernetes_version`.
+每个版本的 RKE 都有对应的支持[Kubernetes 版本列表](#listing-supported-kubernetes-versions)。
 
-This page covers the following topics:
+如果在`kubernetes_version`和`system-images`都定义了 Kubernetes 版本号，`system-images`中的版本号优先级高于`kubernetes_version`的版本号。
 
-- [How upgrades work](#how-upgrades-work)
-- [Prerequisites](#prerequisites)
-- [Upgrading Kubernetes](#upgrading-kubernetes)
-- [Configuring the upgrade strategy](#configuring-the-upgrade-strategy)
-- [Maintaining availability for applications during upgrades](#maintaining-availability-for-applications-during-upgrades)
-- [Listing supported Kubernetes versions](#listing-supported-kubernetes-versions)
-- [Kubernetes version precedence](#kubernetes-version-precedence)
-- [Using an unsupported Kubernetes version](#using-an-unsupported-kubernetes-version)
-- [Mapping the Kubernetes version to services](#mapping-the-kubernetes-version-to-services)
-- [Service upgrades](#service-upgrades)
-- [Upgrading Nodes Manually](#upgrading-nodes-manually)
-- [Rolling Back the Kubernetes Version](#rolling-back-the-kubernetes-version)
-- [Troubleshooting](#troubleshooting)
+## 工作原理
 
-### How Upgrades Work
+本文讲述了编辑或升级 RKE Kubernetes 集群时发生的事项。
 
-In [this section,]({{<baseurl>}}/rke/latest/en/upgrades/how-upgrades-work) you'll learn what happens when you edit or upgrade your RKE Kubernetes cluster.
+## 先决条件
 
-### Prerequisites
+- 保证`cluster.yml`缺少`system_images`的说明和配置。如果您使用的是[RKE 不支持的 Kubernetes 版本](#using-an-unsupported-kubernetes-version)，则要保证只在`system——images`中说明 Kubernetes 版本号。详情请参考[Kubernetes 版本优先级](#kubernetes-version-precedence)。
 
-- Ensure that any `system_images` configuration is absent from the `cluster.yml`. The Kubernetes version should only be listed under the `system_images` directive if an [unsupported version](#using-an-unsupported-kubernetes-version) is being used. Refer to [Kubernetes version precedence](#kubernetes-version-precedence) for more information.
-- Ensure that the correct files to manage [Kubernetes cluster state]({{<baseurl>}}/rke/latest/en/installation/#kubernetes-cluster-state) are present in the working directory. Refer to the tabs below for the required files, which differ based on the RKE version.
+* 保证工作目录中有管理[Kubernetes 集群状态](/docs/rke/installation/_index)所需的文件，不同版本的 RKE 使用不同的文件管理 Kubernetes 集群状态。
 
-{{% tabs %}}
-{{% tab "RKE v0.2.0+" %}}
-The `cluster.rkestate` file contains the current state of the cluster including the RKE configuration and the certificates.
+  - RKE v0.2.0 及更新版本
 
-This file is created in the same directory that has the cluster configuration file `cluster.yml`.
+    RKE v0.2.0 及以上的版本使用`cluster.rkestate`文件管理集群状态。`cluster.rkestate`文件中含有集群的当前状态，包括 RKE 配置和证书等信息。
 
-It is required to keep the `cluster.rkestate` file to perform any operation on the cluster through RKE, or when upgrading a cluster last managed via RKE v0.2.0 or later.
-{{% /tab %}}
-{{% tab "RKE prior to v0.2.0" %}}
-Ensure that the `kube_config_cluster.yml` file is present in the working directory.
+    这个文件和`cluster.yml`位于同一目录下。
 
-RKE saves the Kubernetes cluster state as a secret. When updating the state, RKE pulls the secret, updates or changes the state, and saves a new secret. The `kube_config_cluster.yml` file is required for upgrading a cluster last managed via RKE v0.1.x.
-{{% /tab %}}
-{{% /tabs %}}
+    `cluster.rkestate`文件非常重要，控制集群和升级集群的时候都需要用到这个文件，请妥善保管该文件。
 
-### Upgrading Kubernetes
+  - RKE v0.2.0 之前的版本
 
-To upgrade the Kubernetes version of an RKE-provisioned cluster, set the `kubernetes_version` string in the `cluster.yml` to the desired version from the [list of supported Kubernetes versions](#listing-supported-kubernetes-versions) for the specific version of RKE:
+    请保证工作目录中含有`kube_config_cluster.yml`文件
+
+    RKE 以密文的方式保存 Kubernetes 集群状态。编辑集群状态时，RKE 拉取密文，变更集群状态，然后将变更后的状态以密文的方式保存到`kube_config_cluster.yml`文件中。如果您使用的是 RKE v0.2.0 之前的版本，请妥善保管该文件。
+
+## 升级 Kubernetes 版本
+
+打开`cluster.yml`文件，找到 `kubernetes_version`字符串，将原有的版本号修改为新的版本号即可。每个 RKE 版本支持的 Kubernetes 版本不同，请参考[列举支持的 Kubernetes 版本](#listing-supported-kubernetes-versions)。
 
 ```yaml
 kubernetes_version: "v1.15.5-rancher1-1"
 ```
 
-Then invoke `rke up`:
+然后在命令行工具中输入 `rke up`，使用`cluster.yml`文件指定的新版本器启动 RKE。
 
 ```
 $ rke up --config cluster.yml
 ```
 
-### Configuring the Upgrade Strategy
+## 配置升级策略
 
-As of v0.1.8, upgrades to add-ons are supported. [Add-ons]({{<baseurl>}}/rke/latest/en/config-options/add-ons/) can also be upgraded by changing any of the add-ons and running `rke up` again with the updated configuration file.
+从 v0.1.8 开始，RKE 支持升级插件（Add-on）。也可以在配置文件中直接编辑组件版本，然后运行`rke up`重启 RKE，重启后 RKE 就会使用更新后的[插件](/docs/rke/config-options/add-ons/_index)。
 
-As of v1.1.0, additional upgrade options became available to give you more granular control over the upgrade process. These options can be used to maintain availability of your applications during a cluster upgrade.
+从 v1.1.0 开始，RKE 提供了更多的升级选项，让用户在升级插件的过程中可控的选择更多。这些选项可以使业务在升级的过程中不中断。
 
-For details on upgrade configuration options, refer to [Configuring the Upgrade Strategy.]({{<baseurl>}}/rke/latest/en/upgrades/configuring-strategy)
+升级配置选项的详情请查看[配置升级策略](/docs/rke/upgrades/configuring-strategy/_index)。
 
-### Maintaining Availability for Applications During Upgrades
+## 不间断业务升级
 
-In [this section,]({{<baseurl>}}/rke/latest/en/upgrades/maintaining-availability/) you'll learn the requirements to prevent downtime for your applications when you upgrade the cluster using `rke up`.
+这个文档讲述了如何实现不中断业务的升级过程，详情请参考[不中断业务的升级](/docs/rke/upgrades/maintaining-availability/_index)。
 
-### Listing Supported Kubernetes Versions
+## 列举支持的 Kubernetes 版本
 
-Please refer to the [release notes](https://github.com/rancher/rke/releases) of the RKE version that you are running, to find the list of supported Kubernetes versions as well as the default Kubernetes version. Note: RKE v1.x should be used.
+请参考[RKE 版本说明](https://github.com/rancher/rke/releases)，获取您当前使用的 RKE 支持的 Kubernetes 版本号。
 
-You can also list the supported versions and system images of specific version of RKE release with a quick command.
+也可以输入以下命令，快速获取支持的版本号。
 
 ```
 $ rke config --list-version --all
@@ -93,64 +78,62 @@ v1.14.6-rancher2-1
 v1.16.0-beta.1-rancher1-1
 ```
 
-### Kubernetes Version Precedence
+## Kubernetes 版本优先级
 
-In case both `kubernetes_version` and `system_images` are defined, the `system_images` configuration will take precedence over `kubernetes_version`.
+如果在`kubernetes_version`和`system_images`中都定义了 Kubernetes 版本，`system_images`中定义的版本会生效，而`kubernetes_version`中定义的版本不会生效。如果两者都没有定义 Kubernetes 版本，RKE 会使用默认的 Kubernetes 版本。总体来说，选取 Kubernetes 版本的优先级从高到底的排序是这样的：`kubernetes_version` > `system_images` > 默认版本。
 
-In addition, if neither `kubernetes_version` nor `system_images` are configured in the `cluster.yml`, RKE will apply the default Kubernetes version for the specific version of RKE used to invoke `rke up`.
+## 使用不支持的 Kubernetes 版本 Using an Unsupported Kubernetes Version
 
-### Using an Unsupported Kubernetes Version
+使用 RKEv0.2.0 或更旧的版本时，如果`kubernetes_version`定义的版本和 RKE 支持的 Kubernetes 版本不同，RKE 会无法运行。
 
-As of v0.2.0, if a version is defined in `kubernetes_version` and is not found in the specific list of supported Kubernetes versions, then RKE will error out.
+使用 RKEv0.2.0 之后的版本是，如果`kubernetes_version`定义的版本和 RKE 支持的 Kubernetes 版本不同，RKE 会转而使用自身支持的 Kubernetes 版本。
 
-Prior to v0.2.0, if a version is defined in `kubernetes_version` and is not found in the specific list of supported Kubernetes versions,  the default version from the supported list is used.
+如果您想将既定的 Kubernetes 版本替换为其他版本，请使用[system images](/docs/rke/config-options/system-images/_index)选项。
 
-If you want to use a different version from the supported list, please use the [system images]({{<baseurl>}}/rke/latest/en/config-options/system-images/) option.
+## Kubernetes 版本和服务的映射关系
 
-### Mapping the Kubernetes Version to Services
+在 RKE 中，`kubernetes_version`将 Kubernetes 版本映射到默认的服务、参数和选项中。
 
-In RKE, `kubernetes_version` is used to map the version of Kubernetes to the default services, parameters, and options.
+使用 v0.3.0+时，RKE 有这些[默认服务](https://github.com/rancher/kontainer-driver-metadata/blob/master/rke/k8s_service_options.go)。
 
-For RKE v0.3.0+, the service defaults are located [here](https://github.com/rancher/kontainer-driver-metadata/blob/master/rke/k8s_service_options.go).
+使用 v0.3.0 之前的版本时，有这些[默认服务](https://github.com/rancher/types/blob/release/v2.2/apis/management.cattle.io/v3/k8s_defaults.go)。目录中的服务版本与 Rancher 版本相同。因此，使用 Rancher2.1.x 时应该使用[这个文件](https://github.com/rancher/types/blob/release/v2.1/apis/management.cattle.io/v3/k8s_defaults.go)。
 
-For RKE prior to v0.3.0, the service defaults are located [here](https://github.com/rancher/types/blob/release/v2.2/apis/management.cattle.io/v3/k8s_defaults.go). Note: The version in the path of the service defaults file corresponds to a Rancher version. Therefore, for Rancher v2.1.x, [this file](https://github.com/rancher/types/blob/release/v2.1/apis/management.cattle.io/v3/k8s_defaults.go) should be used.
+## 升级服务
 
-### Service Upgrades
+您可以修改服务的对象，或添加`extra_args`，然后运行`rke up`命令，升级服务。
 
-[Services]({{<baseurl>}}/rke/latest/en/config-options/services/) can be upgraded by changing any of the services arguments or `extra_args` and running `rke up` again with the updated configuration file.
+> **说明：** `service_cluster_ip_range` 和 `cluster_cidr`不可修改。
 
-> **Note:** The following arguments, `service_cluster_ip_range` or `cluster_cidr`, cannot be changed as any changes to these arguments will result in a broken cluster. Currently, network pods are not automatically upgraded.
+## 手动升级节点
 
-### Upgrading Nodes Manually
+_v1.1.0 开始可用_
 
-_Available as of v1.1.0_
+您可以手动升级每种类型的节点。建议您先升级 etcd 节点，然后升级 controlplane 节点，最后再升级 worker 节点。
 
-You can manually update each type of node separately. As a best practice, upgrade the etcd nodes first, followed by controlplane and then worker nodes.
+## 回滚 Kubernetes 版本
 
-### Rolling Back the Kubernetes Version
+_v1.1.0 开始可用_
 
-_Available as of v1.1.0_
+您可以使用快照，将集群恢复到使用上一个 Kubernetes 版本的时候。
 
-A cluster can be restored back to a snapshot that uses a previous Kubernetes version.
+## 问题排查
 
-### Troubleshooting
+_v1.1.0 开始可用_
 
-_Applies to v1.1.0+_
+如果一个节点在升级之后不出现，`rke up`指令会报错。
 
-If a node doesn't come up after an upgrade, the `rke up` command errors out.
+如果实际不可用的节点超出了配置文件中限定不可用节点数量的最大值，则不会升级。
 
-No upgrade will proceed if the number of unavailable nodes exceeds the configured maximum.
+如果升级停止了，您可能需要修改一些不可用的节点，或者将它从集群中移除，然后继续升级。
 
-If an upgrade stops, you may need to fix an unavailable node or remove it from the cluster before the upgrade can continue.
+一个不可用的节点可能处于以下几种状态：
 
-A failed node could be in many different states:
+- 关机
+- 不可用
+- 用户执行了 drain 命令，将该节点上运行的 pod 驱逐到了其他节点上，导致该节点上没有 kubelets。
+- 升级失败
 
-- Powered off
-- Unavailable
-- User drains a node while upgrade is in process, so there are no kubelets on the node
-- The upgrade itself failed
+以下是升级失败的常见场景：
 
-Some expected failure scenarios include the following:
-
-- If the maximum unavailable number of nodes is reached during an upgrade, the RKE CLI will error out and exit the CLI with a failure code.
-- If some nodes fail to upgrade, but the number of failed nodes doesn't reach the maximum unavailable number of nodes, the RKE CLI logs the nodes that were unable to upgrade and continues to upgrade the add-ons. After the add-ons are upgraded, RKE will error out and exit the CLI with a failure code regardless of add-on upgrade status.
+- 升级过程中，不可用的节点数量达到预设的最大值，RKE CLI 会报错，停止工作。
+- 如果一些节点升级失败，但是不可用的节点数量小于预设的最大值，RKE CLI 会将这些节点升级失败的事项记录在日志里，然后跳过这些节点，升级其他节点和插件。完成插件升级或，RKE 会报错，然后退出。
