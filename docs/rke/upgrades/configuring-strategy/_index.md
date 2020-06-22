@@ -1,6 +1,5 @@
 ---
-title: Configuring the Upgrade Strategy
-weight: 2
+title: 配置升级策略
 ---
 
 In this section, you'll learn how to configure the maximum number of unavailable controlplane and worker nodes, how to drain nodes before upgrading them, and how to configure the replicas for addons such as Ingress.
@@ -16,9 +15,9 @@ In this section, you'll learn how to configure the maximum number of unavailable
 The maximum number of unavailable controlplane and worker nodes can be configured in the `cluster.yml` before upgrading the cluster:
 
 - **max_unavailable_controlplane:** The maximum number of controlplane nodes that can fail without causing the cluster upgrade to fail. By default, `max_unavailable_controlplane` is defined as one node.
-- **max_unavailable_worker:** The maximum number of worker nodes that can fail without causing the cluster upgrade to fail. By default, `max_unavailable_worker` is defined as 10 percent of all worker nodes.*
+- **max_unavailable_worker:** The maximum number of worker nodes that can fail without causing the cluster upgrade to fail. By default, `max_unavailable_worker` is defined as 10 percent of all worker nodes.\*
 
-/*  This number can be configured as a percentage or as an integer. When defined as a percentage, the batch size is rounded down to the nearest node, with a minimum of one node per batch.
+/\* This number can be configured as a percentage or as an integer. When defined as a percentage, the batch size is rounded down to the nearest node, with a minimum of one node per batch.
 
 An example configuration of the cluster upgrade strategy is shown below:
 
@@ -58,13 +57,13 @@ An example configuration of the Ingress and network addons is shown below:
 ```yaml
 ingress:
   provider: nginx
-  update_strategy: 
+  update_strategy:
     strategy: RollingUpdate
     rollingUpdate:
       maxUnavailable: 5
 network:
   plugin: canal
-  update_strategy: 
+  update_strategy:
     strategy: RollingUpdate
     rollingUpdate:
       maxUnavailable: 6
@@ -80,12 +79,12 @@ The DNS addons use `cluster-proportional-autoscaler`, which is an [open-source c
 
 The following table shows the default values for these fields:
 
-Field Name | Default Value
------------|--------------
-coresPerReplica | 128
-nodesPerReplica | 4
-min | 1
-preventSinglePointFailure | true
+| Field Name                | Default Value |
+| ------------------------- | ------------- |
+| coresPerReplica           | 128           |
+| nodesPerReplica           | 4             |
+| min                       | 1             |
+| preventSinglePointFailure | true          |
 
 The `cluster-proportional-autoscaler` uses this formula to calculate the number of replicas:
 
@@ -100,7 +99,7 @@ An example configuration of the DNS and monitoring addons is shown below:
 ```yaml
 dns:
   provider: coredns
-  update_strategy: 
+  update_strategy:
     strategy: RollingUpdate
     rollingUpdate:
       maxUnavailable: 20%
@@ -109,11 +108,11 @@ dns:
     cores_per_replica: 0.34
     nodes_per_replica: 4
     prevent_single_point_failure: true
-    min: 2 
+    min: 2
     max: 3
 monitoring:
   provider: metrics-server
-  update_strategy: 
+  update_strategy:
     strategy: RollingUpdate
     rollingUpdate:
       maxUnavailable: 8
@@ -160,7 +159,7 @@ dns:
     cores_per_replica: 0.34
     nodes_per_replica: 4
     prevent_single_point_failure: true
-    min: 2 
+    min: 2
     max: 3
 monitoring:
   provider: metrics-server

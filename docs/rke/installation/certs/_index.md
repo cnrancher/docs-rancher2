@@ -1,74 +1,80 @@
 ---
-title: Custom Certificates
-weight: 150
+title: 自定义证书
 ---
 
-_Available as of v0.2.0_
+_v0.2.0 以上可用_
 
-By default, Kubernetes clusters require certificates and RKE auto-generates the certificates for all the Kubernetes services. RKE can also use custom certificates for these Kubernetes services.
+## 概述
 
-When [deploying Kubernetes with RKE]({{<baseurl>}}/rke/latest/en/installation/#deploying-kubernetes-with-rke), there are two additional options that can be used with `rke up` so that RKE uses custom certificates.
+默认情况下，Kubernetes 集群需要用到证书，而 RKE 会自动为所有集群组件生成证书。您也可以使用[自定义证书](/docs/rke/installation/certs/_index)。
 
-| Option | Description |
-| --- | --- |
-| `--custom-certs` | Use custom certificates from a cert dir. The default directory is `/cluster_certs`. |
-| `--cert-dir` value |  Specify a certificate dir path |
+使用[RKE 部署 Kubernetes](/docs/rke/installation/_index#使用-RKE-部署-Kubernetes)时，可以在`rke up`命令后面添加额外的选项，命令 RKE 使用自定义证书部署 Kubernetes。
 
-## Using Custom Certificates
+| 选项               | 描述                                                                                                 |
+| :----------------- | :--------------------------------------------------------------------------------------------------- |
+| `--custom-certs`   | 如果您没有修改保存证书的路径，RKE 会使用默认路径`/cluster_certs`保存证书，自定义证书会保存在该路径。 |
+| `--cert-dir` value | 如果您的自定义证书保存在其他路径下，可以使用这个选项将保存证书的默认路径改为您保存证书的路径。       |
+
+## 如何使用自定义证书
+
+以下是分别使用两种选项的代码示例：
 
 ```
-# Use certificates located in the default directory `/cluster_certs`
+# 如果您没有修改保存证书的路径，RKE 会使用默认路径`/cluster_certs`保存证书，自定义证书会保存在该路径
 $ rke up --custom-certs
+```
 
-# Use certificates located in your own directory
+```
+# 如果您的自定义证书保存在其他路径下，可以使用这个选项将保存证书的默认路径改为您保存证书的路径
 $ rke up --custom-certs --cert-dir ~/my/own/certs
 ```
 
-## Certificates
+## 证书和密钥清单
 
-The following certificates must exist in the certificate directory.
+无论您使用默认路径还是其他路径保存证书，都要确保该路径下已有以下证书和密钥：
 
-| Name |  Certificate | Key |
-|---|---|---|
-|          Master CA         |             kube-ca.pem             |                    -                    |
-|          Kube API          |          kube-apiserver.pem         |          kube-apiserver-key.pem         |
-|   Kube Controller Manager  |     kube-controller-manager.pem     |     kube-controller-manager-key.pem     |
-|       Kube Scheduler       |          kube-scheduler.pem         |          kube-scheduler-key.pem         |
-|         Kube Proxy         |            kube-proxy.pem           |            kube-proxy-key.pem           |
-|         Kube Admin         |            kube-admin.pem           |            kube-admin-key.pem           |
-|   Apiserver Proxy Client   |   kube-apiserver-proxy-client.pem   |   kube-apiserver-proxy-client-key.pem   |
-|         Etcd Nodes         |        kube-etcd-x-x-x-x.pem        |        kube-etcd-x-x-x-x-key.pem        |
+| 名称                       | 证书                                | 密钥                                    |
+| :------------------------- | :---------------------------------- | :-------------------------------------- |
+| Master CA                  | kube-ca.pem                         | N/A                                     |
+| Kube API                   | kube-apiserver.pem                  | kube-apiserver-key.pem                  |
+| Kube Controller Manager    | kube-controller-manager.pem         | kube-controller-manager-key.pem         |
+| Kube Scheduler             | kube-scheduler.pem                  | kube-scheduler-key.pem                  |
+| Kube Proxy                 | kube-proxy.pem                      | kube-proxy-key.pem                      |
+| Kube Admin                 | kube-admin.pem                      | kube-admin-key.pem                      |
+| Apiserver Proxy Client     | kube-apiserver-proxy-client.pem     | kube-apiserver-proxy-client-key.pem     |
+| Etcd Nodes                 | kube-etcd-x-x-x-x.pem               | kube-etcd-x-x-x-x-key.pem               |
 | Kube Api Request Header CA | kube-apiserver-requestheader-ca.pem | kube-apiserver-requestheader-ca-key.pem |
-|    Service Account Token   |                  -                  |    kube-service-account-token-key.pem   |
+| Service Account Token      | N/A                                 | kube-service-account-token-key.pem      |
 
-## Generating Certificate Signing Requests (CSRs) and Keys
+## 生成证书签名请求和密钥
 
-If you want to create and sign the certificates by a real Certificate Authority (CA), you can use RKE to generate a set of Certificate Signing Requests (CSRs) and keys. Using the `rke cert generate-csr` command, you can generate the CSRs and keys.
+如果您想使用证书签发机构（Certificate Authority，简称 CA）创建和签发证书，您可以使用 RKE 命令`rke cert generate-csr`，创建证书签发请求（CSR）和密钥。
 
-1. Set up your `cluster.yml` with the [node information]({{<baseurl>}}/rke/latest/en/config-options/nodes/).
+1. 参考[节点信息](/docs/rke/config-options/nodes/_index)，配置`cluster.yml`。
 
-2. Run `rke cert generate-csr` to generate certificates for the node(s) in the `cluster.yml`. By default, the CSRs and keys will be saved in `./cluster_certs`. To have them saved in a different directory, use `--cert-dir` to define what directory to have them saved in.
+2. 运行`rke cert generate-csr`命令，生成`cluster.yml`文件中提及的节点需要的证书。默认情况下，RKE 会将 CSR 和密钥保存在`./cluster_certs`路径。如果您需要将它们保存在其他路径，请在命令后添加使用 `--cert-dir <PathName>`选项，将`<PathName>`替换成其他路径名称。
 
-    ```
-    $ rke cert generate-csr     
-    INFO[0000] Generating Kubernetes cluster CSR certificates
-    INFO[0000] [certificates] Generating Kubernetes API server csr
-    INFO[0000] [certificates] Generating Kube Controller csr
-    INFO[0000] [certificates] Generating Kube Scheduler csr
-    INFO[0000] [certificates] Generating Kube Proxy csr     
-    INFO[0001] [certificates] Generating Node csr and key   
-    INFO[0001] [certificates] Generating admin csr and kubeconfig
-    INFO[0001] [certificates] Generating Kubernetes API server proxy client csr
-    INFO[0001] [certificates] Generating etcd-x.x.x.x csr and key
-    INFO[0001] Successfully Deployed certificates at [./cluster_certs]
-    ```
+   ```
+   $ rke cert generate-csr
+   INFO[0000] Generating Kubernetes cluster CSR certificates
+   INFO[0000] [certificates] Generating Kubernetes API server csr
+   INFO[0000] [certificates] Generating Kube Controller csr
+   INFO[0000] [certificates] Generating Kube Scheduler csr
+   INFO[0000] [certificates] Generating Kube Proxy csr
+   INFO[0001] [certificates] Generating Node csr and key
+   INFO[0001] [certificates] Generating admin csr and kubeconfig
+   INFO[0001] [certificates] Generating Kubernetes API server proxy client csr
+   INFO[0001] [certificates] Generating etcd-x.x.x.x csr and key
+   INFO[0001] Successfully Deployed certificates at [./cluster_certs]
+   ```
 
-3. In addition to the CSRs, you also need to generate the kube-service-account-token-key.pem key. To do this, run the following:
-    ```
-    $ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./cluster_certs/kube-service-account-token-key.pem -out ./cluster_certs/kube-service-account-token.pem
-    ```
+3. 运行以下命令，生成`kube-service-account-token-key.pem`密钥。
 
-**Result:** The CSRs and keys will be deployed in `./cluster_certs` directory, assuming you didn't specify a `--cert-dir`. The CSR files will contain the right Alternative DNS and IP Names for the certificates. You can use them to sign the certificates by a real CA. After the certificates are signed, those certificates can be used by RKE as custom certificates.
+   ```
+   $ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./cluster_certs/kube-service-account-token-key.pem -out ./cluster_certs/kube-service-account-token.pem
+   ```
+
+**结果：** 生成了多个 CSR 和密钥。它们被部署在您指定的路径。如果您没有指定路径，它们则会被部署在`./cluster_certs`。CSR 文件中包含了证书需要用到的 Alternative DNS 地址和 IP Names。您可以使用它们给证书颁发机构颁发的证书签名。完成此过程后，RKE 可以使用这些自定义证书。
 
 ```
 $ tree cluster_certs
