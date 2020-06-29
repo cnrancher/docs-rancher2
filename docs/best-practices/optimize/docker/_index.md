@@ -64,7 +64,7 @@ Docker 第一次运行时会自动创建名为 docker0 的网络接口，默认�
 
 - 修改 docker 配置文件
 
-  在`/etc/docker/daemon.json`中添加`"bip": "169.254.123.1/24",`
+  在`/etc/docker/daemon.json`中添加`"bip": "192.168.1.1/24",`
 
 ## 综合配置调优
 
@@ -80,7 +80,7 @@ cat > /etc/docker/daemon.json <<EOF
     },
     "max-concurrent-downloads": 10,
     "max-concurrent-uploads": 10,
-    "bip": "169.254.123.1/24",
+    "bip": "192.168.1.1/24",
     "registry-mirrors": ["https://7bezldxe.mirror.aliyuncs.com"],
     "storage-driver": "overlay2",
     "storage-opts": [
