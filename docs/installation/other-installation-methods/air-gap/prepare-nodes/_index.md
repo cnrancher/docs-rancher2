@@ -70,9 +70,13 @@ Rancher 对上述特定版本的数据库进行过测试和验证，如果您使
 - **4 层负载均衡器** 是一种相对简单的负载均衡，它将 TCP 流量转发到您到节点。我们建议使用 4 层负载均衡器，将流量从 TCP / 80 端口和 TCP / 443 端口转发到 Rancher 管理面的集群节点上。集群上的 Ingress 控制器会将 HTTP 流量重定向到 HTTPS，并在 TCP / 443 端口上终止 SSL / TLS。Ingress 控制器会将流量转发到 Rancher Server Pod 的 TCP / 443 端口。
 - **7 层负载均衡器** 是一种相对复杂的负载均衡，但功能更加全面。例如，与 Rancher 本身进行 TLS 终止相反，7 层负载均衡器能够在负载均衡器处处理 TLS 终止。如果要在基础设施中进行 TLS 终止，7 层负载均衡可能会很有用。7 层负载均衡还可以为您的负载均衡器提供基于 HTTP 属性（例如 cookie 等）做出决策的能力，而 4 层负载均衡器不提供这种功能。如果决定在 7 层负载均衡器上终止 SSL / TLS 流量，则在安装 Rancher 时（后续步骤）需要使用`--set tls=external`选项。有关更多信息，请参阅[Rancher Helm Chart 选项](/docs/installation/options/chart-options/_index)。
 
-有关如何设置 NGINX 负载均衡器的示例，请参考[本页](/docs/installation/options/nginx/_index)。
+- 有关如何设置 NGINX 负载均衡器的示例，请参考[本页](/docs/installation/options/nginx/_index)。
 
-有关如何设置 Amazon ELB Network Load Balancer 的示例，请参考[本页](/docs/installation/options/nlb/_index)。
+- 有关如何设置 Amazon ELB Network Load Balancer 的示例，请参考[本页](/docs/installation/options/nlb/_index)。
+
+- 有关如何配置 F5 作为 Rancher 前端 7 层负载均衡器的示例，请参考[本页](/docs/installation/options/F5-7-layer-loadbalancer/_index)。
+
+- 有关如何为 F5 启动 WAF 功能的示例，请参考[本页](/docs/installation/options/F5-WAF/_index)。
 
 :::important 重要提示
 安装后，请勿使用 `local` 集群的 Ingress 对 Rancher 以外的应用进行负载均衡。与其他应用共享此 Ingress 可能会在其他应用的 Ingress 配置重新加载后，导致 Rancher 出现 websocket 错误。我们强烈建议将 `local` 集群专用于 Rancher，而不应在 `local` 集群内部署任何其他应用。
@@ -134,9 +138,13 @@ etcd 数据库需要奇数个节点，因此它始终可以选举出被大多数
 - **4 层负载均衡器** 是一种相对简单的负载均衡，它将 TCP 流量转发到您到节点。我们建议使用 4 层负载均衡器，将流量从 TCP / 80 端口和 TCP / 443 端口转发到 Rancher 管理面的集群节点上。集群上的 Ingress 控制器会将 HTTP 流量重定向到 HTTPS，并在 TCP / 443 端口上终止 SSL / TLS。Ingress 控制器会将流量转发到 Rancher Server Pod 的 TCP / 443 端口。
 - **7 层负载均衡器** 是一种相对复杂的负载均衡，但功能更加全面。例如，与 Rancher 本身进行 TLS 终止相反，7 层负载均衡器能够在负载均衡器处处理 TLS 终止。如果要在基础设施中进行 TLS 终止，7 层负载均衡可能会很有用。7 层负载均衡还可以为您的负载均衡器提供基于 HTTP 属性（例如 cookie 等）做出决策的能力，而 4 层负载均衡器不提供这种功能。如果决定在 7 层负载均衡器上终止 SSL / TLS 流量，则在安装 Rancher 时（后续步骤）需要使用`--set tls=external`选项。有关更多信息，请参阅[Rancher Helm Chart 选项](/docs/installation/options/chart-options/_index)。
 
-有关如何设置 NGINX 负载均衡器的示例，请参考[本页](/docs/installation/options/nginx/_index)。
+- 有关如何设置 NGINX 负载均衡器的示例，请参考[本页](/docs/installation/options/nginx/_index)。
 
-有关如何设置 Amazon ELB Network Load Balancer 的示例，请参考[本页](/docs/installation/options/nlb/_index)。
+- 有关如何设置 Amazon ELB Network Load Balancer 的示例，请参考[本页](/docs/installation/options/nlb/_index)。
+
+- 有关如何配置 F5 作为 Rancher 前端 7 层负载均衡器的示例，请参考[本页](/docs/installation/options/F5-7-layer-loadbalancer/_index)。
+
+- 有关如何为 F5 启动 WAF 功能的示例，请参考[本页](/docs/installation/options/F5-WAF/_index)。
 
 :::important 重要提示
 安装后，请勿使用 `local` 集群的 Ingress 对 Rancher 以外的应用进行负载均衡。与其他应用共享此 Ingress 可能会在其他应用的 Ingress 配置重新加载后，导致 Rancher 出现 websocket 错误。我们强烈建议将 `local` 集群专用于 Rancher，而不应在 `local` 集群内部署任何其他应用。
