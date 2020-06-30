@@ -169,6 +169,8 @@ module.exports = {
                     "installation/options/server-tags/_index",
                     "installation/options/single-node-install-external-lb/_index",
                     "installation/options/nginx/_index",
+                    "installation/options/F5-WAF/_index",
+                    "installation/options/F5-7-layer-loadbalancer/_index",
                     "installation/options/tls-secrets/_index",
                     "installation/options/chart-options/_index",
                     {
