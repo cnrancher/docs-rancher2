@@ -51,7 +51,7 @@ F5 通过成熟健壮的负载均衡和应用安全保障 Rancher 管平面的�
 
 安全策略的绑定可在建立策略是直接选择，也可在 LTM 的属性中直接关联。创建策略时选择虚拟服务器，如下：
 
-![绑定到 LTM 虚拟服务器（Virtual Server）](/img/rancher/F5-WAF/virtual-server.jpg)
+![绑定到 LTM 虚拟服务器（Virtual Server）](/img/rancher/F5-WAF/virtual-server-binding-1.png)
 
 在虚拟服务器属性中关联：
 
@@ -147,7 +147,7 @@ F5 的 SSLO 策略配置完全实现向导化，只需根据流程指引完成�
 
 打开菜单 `Local Traffic ›› Virtual Servers : Virtual Server List ›› vs-rancher-443` 在 `Access Policy` 中，`Access Profile` 选择 `“ssloDefault_accessProfile”`，`Per-Request Ploicy` 选择 `“ssloP_existing_app_per_req_policy”` 即可。
 
-![绑定到 LTM 虚拟服务器](/img/rancher/F5-WAF/virtual-server-binding.jpg)
+![绑定到 LTM 虚拟服务器](/img/rancher/F5-WAF/virtual-server-binding-1.png)
 
 #### 验证访问
 
