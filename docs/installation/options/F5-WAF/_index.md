@@ -147,7 +147,7 @@ F5 的 SSLO 策略配置完全实现向导化，只需根据流程指引完成�
 
 打开菜单 `Local Traffic ›› Virtual Servers : Virtual Server List ›› vs-rancher-443` 在 `Access Policy` 中，`Access Profile` 选择 `“ssloDefault_accessProfile”`，`Per-Request Ploicy` 选择 `“ssloP_existing_app_per_req_policy”` 即可。
 
-![绑定到 LTM 虚拟服务器](/img/rancher/F5-WAF/virtual-server-binding.jpg)
+![绑定到 LTM 虚拟服务器](/img/rancher/F5-WAF/virtual-server-binding-1.png)
 
 #### 验证访问
 
