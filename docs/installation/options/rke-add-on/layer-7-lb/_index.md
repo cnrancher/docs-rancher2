@@ -105,13 +105,12 @@ RKE 使用 YAML 配置文件来安装和配置 Kubernetes 集群。根据要使�
 
 1. 下载以下模板之一，具体取决于您使用的 SSL 证书。
 
-   - [自签名证书的模板<br/> `3-node-externalssl-certificate.yml`](https://raw.githubusercontent.com/rancher/rancher/master/rke-templates/3-node-externalssl-certificate.yml)
-   - [由公认的 CA 签署的证书模板<br/> `3-node-externalssl-recognizedca.yml`](https://raw.githubusercontent.com/rancher/rancher/master/rke-templates/3-node-externalssl-recognizedca.yml)
-
-   > **高级配置选项：**
-   >
-   > - 想要记录 Rancher API 的所有事务? 通过编辑 RKE 配置文件来启用[API 审计日志](/docs/installation/options/api-audit-log/_index)功能。有关更多信息，请参见如何在[RKE 配置文件中](/docs/installation/options/api-audit-log/_index)中启用它。
-   > - 想知道您的 RKE 模板可用的其他配置选项吗？ 请参阅[RKE 文档：配置选项](https://rancher.com/docs/rke/latest/en/config-options/)。
+   - [自签名证书模板<br/> `3-node-certificate.yml`](/docs/installation/options/cluster-yml-templates/3-node-certificate/_index)
+   - [由公认的 CA 签署的证书模板<br/> `3-node-certificate-recognizedca.yml`](/docs/installation/options/cluster-yml-templates/3-node-certificate-recognizedca/_index)
+     > **高级配置选项：**
+     >
+     > - 想要记录 Rancher API 的所有事务? 通过编辑 RKE 配置文件来启用[API 审计日志](/docs/installation/options/api-audit-log/_index)功能。有关更多信息，请参见如何在[RKE 配置文件中](/docs/installation/options/api-audit-log/_index)中启用它。
+     > - 想知道您的 RKE 模板可用的其他配置选项吗？ 请参阅[RKE 文档：配置选项](https://rancher.com/docs/rke/latest/en/config-options/)。
 
 2. 将文件重命名为 `rancher-cluster.yml`。
 

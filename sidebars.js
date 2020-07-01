@@ -238,6 +238,17 @@ module.exports = {
                     "installation/options/tls-settings/_index",
                     "installation/options/firewall/_index",
                     "installation/options/self-signed-ssl/_index",
+                    {
+                        type: "category",
+                        label: "cluster.yml 文件模板",
+                        items: [
+                            "installation/options/cluster-yml-templates/_index",
+                            "installation/options/cluster-yml-templates/3-node-certificate/_index",
+                            "installation/options/cluster-yml-templates/3-node-certificate-recognizedca/_index",
+                            "installation/options/cluster-yml-templates/3-node-externalssl-certificate/_index",
+                            "installation/options/cluster-yml-templates/3-node-externalssl-recognizedca/_index",
+                        ],
+                    },
                 ],
             },
         ],
