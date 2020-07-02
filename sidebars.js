@@ -152,6 +152,15 @@ module.exports = {
                                     "installation/options/helm2/helm-rancher/troubleshooting/_index",
                                 ],
                             },
+                            {
+                                type: "category",
+                                label: "5、安装RKE Add-on",
+                                items: [
+                                    "installation/options/helm2/rke-add-on/_index",
+                                    "installation/options/helm2/rke-add-on/layer-4-lb/_index",
+                                    "installation/options/helm2/rke-add-on/layer-7-lb/_index",
+                                ],
+                            },
                         ],
                     },
                     {
