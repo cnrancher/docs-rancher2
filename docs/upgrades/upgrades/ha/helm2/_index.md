@@ -116,8 +116,7 @@ hostname: rancher.my.org
 取上一步中的所有值，然后使用`--set key=value`将它们附加到命令中：
 
 ```
-helm upgrade rancher-<CHART_REPO>/rancher \
-  --name rancher \
+helm upgrade --install rancher rancher-<CHART_REPO>/rancher \
   --namespace cattle-system \
   --set hostname=rancher.my.org
 ```

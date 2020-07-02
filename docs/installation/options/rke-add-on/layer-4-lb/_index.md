@@ -156,8 +156,8 @@ RKE 使用`.yml`配置文件来安装和配置 Kubernetes 集群。根据要使�
 
 1. 根据您正在使用的 SSL 证书，下载以下模板之一。
 
-   - [自签名证书模板<br/> `3-node-certificate.yml`](https://raw.githubusercontent.com/rancher/rancher/master/rke-templates/3-node-certificate.yml)
-   - [由公认的 CA 签署的证书模板<br/> `3-node-certificate-recognizedca.yml`](https://raw.githubusercontent.com/rancher/rancher/master/rke-templates/3-node-certificate-recognizedca.yml)
+   - [自签名证书模板<br/> `3-node-certificate.yml`](/docs/installation/options/cluster-yml-templates/3-node-certificate/_index)
+   - [由公认的 CA 签署的证书模板<br/> `3-node-certificate-recognizedca.yml`](/docs/installation/options/cluster-yml-templates/3-node-certificate-recognizedca/_index)
 
    > **高级配置选项：**
    >
