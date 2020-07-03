@@ -79,7 +79,7 @@ Rancher 依靠[cert-manager](https://github.com/jetstack/cert-manager)使用 Ran
 1. 单独安装 CustomResourceDefinition 资源。
 
    ```plain
-   kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.9/deploy/manifests/00-crds.yaml
+   kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/deploy/manifests/00-crds.yaml
    ```
 
 1. 为 cert-manager 创建命名空间。

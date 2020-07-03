@@ -2,24 +2,17 @@
 title: 配置升级策略
 ---
 
-In this section, you'll learn how to configure the maximum number of unavailable controlplane and worker nodes, how to drain nodes before upgrading them, and how to configure the replicas for addons such as Ingress.
+本文讲述了如何配置 RKE 集群的升级策略，包括如何配置最大不可用节点数量、如何在升级节点前驱逐节点和如何为 RKE 插件配置副本（replicas）等操作，并且为用户提供了示例代码。
 
-- [Maximum Unavailable Nodes](#maximum-unavailable-nodes)
-- [Draining Nodes](#draining-nodes)
-- [Replicas for Ingress and Networking Addons](#replicas-for-ingress-and-networking-addons)
-- [Replicas for DNS and Monitoring Addons](#replicas-for-dns-and-monitoring-addons)
-- [Example cluster.yml](#example-cluster-yml)
+## 配置最大不可用节点数量
 
-### Maximum Unavailable Nodes
+升级集群前，您可以编辑`cluster.yml`文件对应的参数，调整最大不可用节点的数量。RKE 支持手动调整最大不可用节点的数量，只要实际不可用的节点数少于最大不可用节点数，就可以避免由节点不可用导致升级失败的问题。可调整的节点类型包括：**controlplane 节点和 worker 节点**。
 
-The maximum number of unavailable controlplane and worker nodes can be configured in the `cluster.yml` before upgrading the cluster:
+- **max_unavailable_controlplane：** 升级集群时，RKE 可以容忍的无响应 controlplane 节点数量，默认值为 1，表示如果有 1 个节点在升级 RK 集群的过程中没有响应，不会导致集群升级失败；在同一个升级过程中出现 2 个或多节点失败时，则会导致升级集群失败。
 
-- **max_unavailable_controlplane:** The maximum number of controlplane nodes that can fail without causing the cluster upgrade to fail. By default, `max_unavailable_controlplane` is defined as one node.
-- **max_unavailable_worker:** The maximum number of worker nodes that can fail without causing the cluster upgrade to fail. By default, `max_unavailable_worker` is defined as 10 percent of all worker nodes.\*
+- **max_unavailable_worker：** 升级集群时，RKE 可以容忍的无响应 worker 节点数量，默认值为 10%。这个参数的取值范围可以使用正整数或百分比表示。使用百分比时，如果得出的结果是大于 1 的小数，则会向下取整，如果得出的结果小于或等于 1，则会取 1 这个值。若该值为小数时，会向下取整至最接近的整数。例如，执行升级的集群中有 11 个 worker 节点，11x10%=1.1，向下取整，最终的结果是 1。如果有 1 个节点在升级 RK 集群的过程中没有响应，不会导致集群升级失败；在同一个升级过程中出现 2 个或多节点失败时，则会导致升级集群失败。
 
-/\* This number can be configured as a percentage or as an integer. When defined as a percentage, the batch size is rounded down to the nearest node, with a minimum of one node per batch.
-
-An example configuration of the cluster upgrade strategy is shown below:
+以下代码示例展示了如何使用百分比指定失效 worker 节点数量和使用数字指定失效 controlplane 节点数量：
 
 ```yaml
 upgrade_strategy:
@@ -27,13 +20,15 @@ upgrade_strategy:
   max_unavailable_controlplane: 1
 ```
 
-### Draining Nodes
+## 驱逐节点
 
-By default, nodes are cordoned first before upgrading. Each node should always be cordoned before starting its upgrade so that new pods will not be scheduled to it, and traffic will not reach the node. In addition to cordoning each node, RKE can also be configured to drain each node before starting its upgrade. Draining a node will evict all the pods running on the computing resource.
+默认情况下，升级节点前需要使用`kubectl cordon`命令将节点标记为“不可用”，这个标记的目的是防止在节点在升级的过程中因为被分配到新的 pods 或者流量而中断。完成升级后，您需要使用`kubectl uncordon`命令将节点重新标记为“可用”，此时可以将 pods 和流量分配到该节点上。该操作不会对节点上已有的 pods 造成影响。
 
-For information on draining and how to safely drain a node, refer to the [Kubernetes documentation.](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/)
+除了将节点标记为“不可用”外，您也可以使用`kubectl drain`命令，在升级节点前将节点内的所有 pod 驱逐到其他节点上，并且将其标记为“不可用”，确保这个节点内在升级完成之前不会有正在运行的 pods。`kubectl drain`命令会导致节点内所有的 pods 被驱逐。
 
-If the `drain` directive is set to `true` in the `cluster.yml`, worker nodes will be drained before they are upgraded. The default value is false:
+请参考[Kubernetes 官方文档](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/)，了解驱逐节点的注意事项。
+
+**注意：**`drain`的默认值是`false`，如果将它的值改为`true`，会导致 worker 节点在升级之前被驱逐，无法升级 worker 节点。
 
 ```yaml
 upgrade_strategy:
@@ -48,11 +43,11 @@ upgrade_strategy:
     timeout: 60
 ```
 
-### Replicas for Ingress and Networking Addons
+## Ingress 和网络插件的副本
 
-The Ingress and network addons are launched as Kubernetes [daemonsets.](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) If no value is given for the [update strategy,](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy) Kubernetes sets the update strategy to `rollingUpdate` by default, with `maxUnavailable` set to 1.
+Ingress 和网络插件的副本通过[Kubernetes daemonset](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)的方式运行。如果不指定升级策略，[`update_strategy`](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy)的值为空，Kubernetes 会使用默认的`RollingUpdate`滚动升级策略。同理，如果不指定最大不可用节点的数量，`maxUnavailable`为空，Kubernetes 会使用默认值**1**。
 
-An example configuration of the Ingress and network addons is shown below:
+配置 Ingress 和网络插件的示例代码如下：
 
 ```yaml
 ingress:
@@ -69,24 +64,22 @@ network:
       maxUnavailable: 6
 ```
 
-### Replicas for DNS and Monitoring Addons
+## DNS 和监控插件的副本
 
-The DNS and monitoring addons are launched as Kubernetes [deployments.](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) These addons include `coredns`, `kubedns`, and `metrics-server`, the monitoring deployment.
+DNS 和监控插件的副本通过[deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)的方式运行。DNS 插件包括：`coredns`、`kubedns`和`metrics-server`。
 
-If no value is configured for their [update strategy](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy) in the `cluster.yml`, Kubernetes sets the update strategy to `rollingUpdate` by default, with `maxUnavailable` set to 25% and `maxSurge` set to 25%.
+如果不指定升级策略，[`update_strategy`](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy)的值为空，Kubernetes 会使用默认的`RollingUpdate`滚动升级策略。同理，如果不指定最大不可用节点的数量，`maxUnavailable`为空，Kubernetes 会使用默认值**25%**，如果不指定最大增量，`maxSurge` 为空，则会使用默认值**25%**。
 
-The DNS addons use `cluster-proportional-autoscaler`, which is an [open-source container image](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler) that watches over the number of schedulable nodes and cores of the cluster and resizes the number of replicas for the required resource. This functionality is useful for applications that need to be autoscaled with the number of nodes in the cluster. For the DNS addon, the fields needed for the `cluster-proportional-autoscaler` are made configurable.
+DNS 插件使用`cluster-proportional-autoscaler`，一个[开源的容器镜像](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler) ，监控集群内可调配的节点和 cores 的数量，以调整资源所需要的副本数量。这个功能非常有用，应用可以根据集群内的节点自动伸缩。DNS 插件需要用到的`cluster-proportional-autoscaler`参数是可以配置的，详情如下表所示。
 
-The following table shows the default values for these fields:
+| 参数名称                  | 默认值 |
+| :------------------------ | :----- |
+| coresPerReplica           | 128    |
+| nodesPerReplica           | 4      |
+| min                       | 1      |
+| preventSinglePointFailure | true   |
 
-| Field Name                | Default Value |
-| ------------------------- | ------------- |
-| coresPerReplica           | 128           |
-| nodesPerReplica           | 4             |
-| min                       | 1             |
-| preventSinglePointFailure | true          |
-
-The `cluster-proportional-autoscaler` uses this formula to calculate the number of replicas:
+`cluster-proportional-autoscaler`使用这个公式计算实际所需的副本数量：
 
 ```plain
 replicas = max( ceil( cores * 1/coresPerReplica ) , ceil( nodes * 1/nodesPerReplica ) )
@@ -94,7 +87,7 @@ replicas = min(replicas, max)
 replicas = max(replicas, min)
 ```
 
-An example configuration of the DNS and monitoring addons is shown below:
+配置 DNS 和监控插件的示例代码如下：
 
 ```yaml
 dns:
@@ -118,14 +111,13 @@ monitoring:
       maxUnavailable: 8
 ```
 
-### Example cluster.yml
+## cluster.yml 示例
 
 ```yaml
-# If you intened to deploy Kubernetes in an air-gapped environment,
-# please consult the documentation on how to configure custom RKE images.
+# 如果您使用的是离线安装环境，请参考离线安装RKE的文档，配置自定义的RKE镜像文件。
 nodes:
-# At least three etcd nodes, two controlplane nodes, and two worker nodes,
-# nodes skipped for brevity
+# 至少需要三个etcd节点、两个controlplane节点和两个worker节点。
+# 为了简化案例，本示例只展示了一个节点，其他节点的配置类似，就不一一展示了。
 upgrade_strategy:
   max_unavailable_worker: 10%
   max_unavailable_controlplane: 1

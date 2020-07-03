@@ -1,43 +1,40 @@
 ---
-title: Maintaining Availability for Applications During Upgrades
-weight: 1
+title: 不宕机升级集群
 ---
-_Available as of v1.1.0_
 
-In this section, you'll learn the requirements to prevent downtime for your applications when you upgrade the cluster using `rke up`.
+_v1.1.0 开始可用_
 
-An upgrade without downtime is one in which your workloads are available on at least a single node, and all critical addon services, such as Ingress and DNS, are available during the upgrade.
+## 概述
 
-The way that clusters are upgraded changed in RKE v1.1.0. For details, refer to [How Upgrades Work.]({{<baseurl>}}/rke/latest/en/upgrades/how-upgrades-work)
+RKE v1.1.0+优化了升级集群的流程，提供了不宕机升级的功能。本节讲述了如何在使用`rke up`命令升级集群的时候保证集群内的 pods 可用，实现不宕机升级。
 
-This availability is achieved by upgrading worker nodes in batches of a configurable size, and ensuring that your workloads run on a number of nodes that exceeds that maximum number of unavailable worker nodes.
+不宕机升级的功能的工作原理是批量升级 worker 节点的同时，保证工作负载在至少一个节点上运行，详情请参考[RKE v1.1.0+ 升级工作原理](/docs/rke/upgrades/how-upgrades-work/_index)。
 
-To avoid downtime for your applications during an upgrade, you will need to configure your workloads to continue running despite the rolling upgrade of worker nodes. There are also requirements for the cluster architecture and Kubernetes target version.
+实现不宕机升级，需要在升级集群的过程中始终保持工作负载在至少一个节点上可用，并且保持工作负载所需的所有重要的插件（如 Ingress 和 DNS）可用。在不宕机升级的过程中，开发人员可以持续将应用程序部署到集群，用户也可以持续使用服务而不会受到干扰。不宕机升级对于集群架构和 Kubernetes 版本也有要求。具体要求请参考下文。
 
-1. [Kubernetes Version Requirement](#1-kubernetes-version-requirement)
-2. [Cluster Requirements](#2-cluster-requirements)
-3. [Workload Requirements](#3-workload-requirements)
+## Kubernetes 版本要求
 
-### 1. Kubernetes Version Requirement
+升级集群现有的 Kubernetes 时，必须是从一个小版本升级到另一个小版本，例如从 v1.16.0 升级到 v1.17.0，或是升级到同一个小版本内的补丁版，例如从 v1.16.0 升级到 v1.16.1。
 
-When upgrading to a newer Kubernetes version, the upgrade must be from a minor release to the next minor version, or to within the same patch release series. 
+## 集群要求
 
-### 2. Cluster Requirements
+集群必须满足以下条件：
 
-The following must be true of the cluster that will be upgraded:
+1. 集群具有至少 3 个 etcd 节点。
+1. 集群具有至少 2 个 controlplane 节点。
+1. 集群具有至少 2 个 worker 节点。
+1. 集群内的 Ingress 和 DNS 等插件可以被至少一个节点调度，工作负载部署在这个节点上。
 
-1. The cluster has three or more etcd nodes.
-1. The cluster has two or more controlplane nodes.
-1. The cluster has two or more worker nodes.
-1. The Ingress, DNS, and other addons are schedulable to a number of nodes that exceeds the maximum number of unavailable worker nodes, also called the batch size. By default, the minimum number of unavailable worker nodes is 10 percent of worker nodes, rounded down to the nearest node, with a minimum batch size of one node.
+## 工作负载要求
 
-### 3. Workload Requirements
+工作负载必须满足以下条件：
 
-The following must be true of the cluster's applications:
-
-1. The application and Ingress are deployed across a number of nodes exceeding the maximum number of unavailable worker nodes, also called the batch size. By default, the minimum number of unavailable worker nodes is 10 percent of worker nodes, rounded down to the nearest node, with a minimum batch size of one node.
+1. 应用和 Ingress 部署在至少一个节点上。
 1. The applications must make use of liveness and readiness probes.
+1. 应用必须使用存活探针（liveness probes）和就绪探针（readiness probes）。
 
-For information on how to use node selectors to assign pods to nodes, refer to the [official Kubernetes documentation.](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/)
+## 相关链接
 
-For information on configuring the number of replicas for each addon, refer to [this section.]({{<baseurl>}}/rke/latest/en/upgrades/configuring-strategy/)
+请参考[Kubernetes 官方文档](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/)，获取使用 node selector 将 pod 分配给节点的操作指导。
+
+配置插件副本的操作指导请参考[配置升级策略](/docs/rke/upgrades/configuring-strategy/_index)。

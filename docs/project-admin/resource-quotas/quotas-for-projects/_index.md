@@ -22,13 +22,15 @@ Rancher 资源配额不仅包含了[原生 Kubernetes](https://kubernetes.io/doc
 
 - **命名空间默认资源限制：**
 
-  它是每个命名空间的默认资源限制。确定了项目层级的资源限制后，命名空间默认资源限制会自动下发到项目内的每个命名空间。每个命名空间的资源限制都是这个值，除非您手动修改，[覆盖命名空间默认资源限制](/docs/project-admin/resource-quotas/override-namespace-default/_index)。
+  它是每个命名空间的默认资源限制。创建了项目层级的资源限制后，命名空间默认资源限制会自动下发到项目内的每个命名空间。每个命名空间的资源限制都是这个值，除非您手动修改，[覆盖命名空间默认资源限制](/docs/project-admin/resource-quotas/override-namespace-default/_index)。
 
 下图说明了 Rancher 管理员给项目内所有命名空间（ `Namespace 1-4` ）配置统一的 CPU 限额和内存限额的过程。管理员可以设置项目资源配额（ `Project Resource Quota` ），而不是单独设置每个命名空间的资源配额。完成项目资源配额的设置以后，配额包括的项目整体的项目资源限制（ `Project Limit` ），和每个命名空间的命名空间默认资源限制（ `Namespace Default Limit` ）。然后 Rancher 把命名空间默认资源限制( `Namespace Default Limit` )下发到每个命名空间( `Namespace Resource Quota` )。
 
 <sup>Rancher：资源配额下发到每个命名空间</sup>
 
 ![Rancher 资源配额实现过程](/img/rancher/rancher-resource-quota.svg)
+
+如果在项目层级删除了一个资源配额，无论命名空间层级是否有自定义的资源配额，该项目内的所有命名空间也会移除这个资源配额。在项目层级修改已有的默认资源配额，不会影响命名空间内的资源配额，修改后的项目层级资源配额只会对以后新建的命名空间生效。如果要修改命名空间层级的默认资源配额，您可以在项目层级删除现有的资源配额，然后创建一个新的资源配额并应用到该命名空间。这种操作方式会使项目内的所有命名空间都应用新建的资源配额。
 
 下表说明了 Rancher 资源配额和 Kubernetes 资源配额的主要不同点。
 
