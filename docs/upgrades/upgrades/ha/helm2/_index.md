@@ -1,5 +1,5 @@
 ---
-title: 高可用升级指南（ Helm 2）
+title: 高可用升级指南（Helm 2）
 description: 本节提供了使用 Helm 2 升级 Rancher 的旧版指南，适用于无法升级到 Helm 3 的情况。
 keywords:
   - rancher 2.0中文文档
@@ -14,7 +14,7 @@ keywords:
   - 升级和回滚
   - 升级高可用Rancher
   - 高可用升级指南
-  - 高可用升级指南（ Helm 2）
+  - 高可用升级指南（Helm 2）
 ---
 
 :::important 重要
