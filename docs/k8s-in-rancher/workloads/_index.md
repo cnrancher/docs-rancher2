@@ -32,7 +32,7 @@ Kubernetes 将工作负载分为不同类型。Kubernetes 支持的最受欢迎�
 
 - [部署](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
 
-  **部署**最好用于无状态应用程序（即，您不必维护工作负载的状态）。由**部署**工作负载管理的 Pod 被视为独立且可处理的。如果 Pod 发送了问题，Kubernetes 会将其删除，然后重新创建一个新的 Pod。一个示例应用程序是 Nginx Web 服务器。
+  **部署**最好用于无状态应用程序（即，您不必维护工作负载的状态）。由**部署**工作负载管理的 Pod 被视为独立且可处理的。如果 Pod 发生了问题，Kubernetes 会将其删除，然后重新创建一个新的 Pod。一个示例应用程序是 Nginx Web 服务器。
 
 - [有状态程序集](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
 
