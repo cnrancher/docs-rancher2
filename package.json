@@ -10,11 +10,12 @@
   },
   "dependencies": {
     "@docusaurus/core": "^2.0.0-alpha.50",
+    "@docusaurus/plugin-baidu-analytics": "https://github.com/thxcode/docusaurus-plugin-baidu-analytics",
     "@docusaurus/preset-classic": "^2.0.0-alpha.50",
+    "axios": "0.19.2",
     "classnames": "^2.2.6",
     "react": "^16.8.4",
-    "react-dom": "^16.8.4",
-    "axios": "0.19.2"
+    "react-dom": "^16.8.4"
   },
   "browserslist": {
     "production": [
