@@ -979,6 +979,10 @@
     stringify-object "^3.3.0"
     unist-util-visit "^2.0.2"
 
+"@docusaurus/plugin-baidu-analytics@https://github.com/thxcode/docusaurus-plugin-baidu-analytics":
+  version "1.0.0-alpha2"
+  resolved "https://github.com/thxcode/docusaurus-plugin-baidu-analytics#3cd26357bee73b5077c34ed24aba3ba71ea7ec83"
+
 "@docusaurus/plugin-content-blog@^2.0.0-alpha.50":
   version "2.0.0-alpha.50"
   resolved "https://registry.npm.taobao.org/@docusaurus/plugin-content-blog/download/@docusaurus/plugin-content-blog-2.0.0-alpha.50.tgz#847c7abebaa364b8394060c0c1255c3f0a125f6f"
