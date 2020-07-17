@@ -8,6 +8,9 @@ module.exports = {
     url: "https://www.rancher.cn",
     favicon: "img/favicon.ico",
     themeConfig: {
+        baiduAnalytics: {
+            trackingID: '692a488c8d0d137240f1a940bde32441',
+        },
         navbar: {
             title: "Rancher 2.x",
             logo: {
@@ -79,4 +82,5 @@ module.exports = {
         baseCommit: "196869f8db9dfd249fea270027129734469f1558 - July 1, 2020",
         rkeBaseCommit: "29992bb2ff420d53ca6c51b6520fe97a13c46c2d - June 4, 2020",
     },
+    plugins: ['@docusaurus/plugin-baidu-analytics'],
 };
