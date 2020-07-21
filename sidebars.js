@@ -512,6 +512,14 @@ module.exports = {
                     "cluster-admin/cluster-access/cluster-members/_index",
                 ],
             },
+            {
+                type: "category",
+                label: "集群弹性伸缩",
+                items: [
+                    "cluster-admin/cluster-autoscaler/_index",
+                    "cluster-admin/cluster-autoscaler/amazon/_index",
+                ],
+            },
             "cluster-admin/upgrading-kubernetes/_index",
             "cluster-admin/pod-security-policy/_index",
             "cluster-admin/editing-clusters/_index",
@@ -557,6 +565,7 @@ module.exports = {
                         type: "category",
                         label: "Istio",
                         items: [
+                            "cluster-admin/tools/istio/release-notes/_index",
                             "cluster-admin/tools/istio/_index",
                             "cluster-admin/tools/istio/resources/_index",
                             {
