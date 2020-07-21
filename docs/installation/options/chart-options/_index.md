@@ -147,7 +147,7 @@ Rancher 需要访问网络，才能使用某些功能（helm charts）。使用`
 创建完 Rancher Deployment 之后，将 pem 格式的 CA 证书复制到名为`ca-additional.pem`文件中，并用`kubectl`命令在`cattle-system`命名空间里创建`tls-ca-additional`密文。
 
 ```plain
-kubectl -n cattle-system create secret generic tls-ca-additional --from-file=ca-additional.pem
+kubectl -n cattle-system create secret generic tls-ca-additional --from-file=ca-additional.pem=./ca-additional.pem
 ```
 
 ## 私有 Registry 和 离线安装

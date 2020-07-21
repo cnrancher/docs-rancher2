@@ -25,11 +25,9 @@ kubectl -n cattle-system create secret tls tls-rancher-ingress \
 
 拷贝 CA 证书到名为 `cacerts.pem` 的文件，使用 `kubectl` 命令在 `cattle-system` 命名空间中创建名为 `tls-ca` 的密文。
 
-> **重要：** 请确保文件名称为 `cacerts.pem`，因为 Rancher 使用该文件名来配置 CA 证书。
-
 ```
 kubectl -n cattle-system create secret generic tls-ca \
-  --from-file=cacerts.pem
+  --from-file=cacerts.pem=./cacerts.pem
 ```
 
 > **注意：** Rancher 在启动时检索`tls-ca`密文。如果您的 Rancher Server 正在运行中，您需要重新启动 Rancher Server Pod 才能使新的 CA 生效。
