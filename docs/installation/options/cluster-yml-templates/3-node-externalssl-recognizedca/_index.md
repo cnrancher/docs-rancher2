@@ -19,6 +19,8 @@ keywords:
 
 RKE 使用 cluster.yml 文件安装和配置您的 Kubernetes 集群。
 
+本模板旨在用于 RKE 插件安装，只支持到 Rancher v2.0.8。如果您要安装更新的 Rancher 版本，请使用 Rancher Helm chart。有关详细信息，请参阅[Kubernetes 安装-安装大纲](/docs/installation/k8s-install/_index)。
+
 如果您使用配置如下所示，您可以使用这个 cluster.yml 模板安装和配置集群。
 
 - 权威证书（HTTPS）
