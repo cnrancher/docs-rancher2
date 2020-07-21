@@ -9,7 +9,7 @@ module.exports = {
     favicon: "img/favicon.ico",
     themeConfig: {
         baiduAnalytics: {
-            trackingID: '692a488c8d0d137240f1a940bde32441',
+            trackingID: "692a488c8d0d137240f1a940bde32441",
         },
         navbar: {
             title: "Rancher 2.x",
@@ -17,7 +17,8 @@ module.exports = {
                 alt: "Rancher Logo",
                 src: "img/rancher-logo-cow-white.svg",
             },
-            links: [{
+            links: [
+                {
                     href: "https://docs.rancher.cn/",
                     label: "文档中心",
                     position: "left",
@@ -34,7 +35,8 @@ module.exports = {
                     position: "right",
                 },
                 {
-                    href: "https://rancher.com/support-maintenance-terms/all-supported-versions/",
+                    href:
+                        "https://rancher.com/support-maintenance-terms/all-supported-versions/",
                     label: "支持矩阵",
                     position: "right",
                 },
@@ -65,7 +67,8 @@ module.exports = {
             {
                 docs: {
                     sidebarPath: require.resolve("./sidebars.js"),
-                    editUrl: "https://github.com/cnrancher/docs-rancher2/edit/dev/",
+                    editUrl:
+                        "https://github.com/cnrancher/docs-rancher2/edit/dev/",
                     showLastUpdateAuthor: true,
                     showLastUpdateTime: true,
                 },
@@ -79,8 +82,9 @@ module.exports = {
         sidebars,
         metadata,
         stable: "版本说明 - v2.4.5",
-        baseCommit: "196869f8db9dfd249fea270027129734469f1558 - July 1, 2020",
-        rkeBaseCommit: "29992bb2ff420d53ca6c51b6520fe97a13c46c2d - June 4, 2020",
+        baseCommit: "3303b080ca3735cd932fd530266796c729aca7ef - July 21, 2020",
+        rkeBaseCommit:
+            "29992bb2ff420d53ca6c51b6520fe97a13c46c2d - June 4, 2020",
     },
-    plugins: ['@docusaurus/plugin-baidu-analytics'],
+    plugins: ["@docusaurus/plugin-baidu-analytics"],
 };
