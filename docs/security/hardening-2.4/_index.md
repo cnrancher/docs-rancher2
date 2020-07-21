@@ -56,7 +56,8 @@ kernel.keys.root_maxbytes=25000000
 ## 配置`etcd`用户和组
 
 在安装 RKE 之前，需要设置**etcd**服务的用户帐户和组。**etcd**用户的**uid**和**gid**将在 RKE 的**config.yml**中使用，以在安装期间为文件和目录设置适当的权限。
-.
+
+以下命令使用`52034`作为**uid**和**gid**的例子。任何有效的未使用的**uid**或**gid**也可以用来代替`52034`。
 
 ### 创建`etcd`用户和组
 
@@ -80,7 +81,7 @@ services:
 
 Kubernetes 提供了一个默认服务账号（Service Account），如果集群的工作负载中没有为 Pod 分配任何特定服务账号，那么它将会使用这个`default`的服务账号。在需要从 Pod 访问 Kubernetes API 的情况下，应为该 Pod 创建一个特定的服务账号，并向该服务账号授予权限。这个`default`的服务账户应该被设置为不提供服务账号令牌（service account token）和任何权限。将`automountServiceAccountToken`设置为 false 之后，Kubernetes 在启动 Pod 时，将不会自动注入`default`服务账户。
 
-每个命名空间中的**default**服务账号必须包含以下值：
+对于标准 RKE 安装中包括**default**和**kube-system**在内的每个命名空间，**default**服务账户必须包含这个值。
 
 ```
 automountServiceAccountToken: false
@@ -150,7 +151,7 @@ done
 
 ## 加固的 RKE `cluster.yml` 配置参考
 
-您可以用这个供您参考的`cluster.yml`，通过 RKE CLI 来创建安全加固的 Rancher Kubernetes Engine（RKE）集群。有关每个配置的详细信息，请参阅[RKE 文档](https://rancher.com/docs/rke/latest/en/installation/)。
+您可以用这个供您参考的`cluster.yml`，通过 RKE CLI 来创建安全加固的 Rancher Kubernetes Engine（RKE）集群。有关每个配置的详细信息，请参阅[RKE 文档](https://rancher.com/docs/rke/latest/en/installation/)。这个`cluster.yml`问号不包括所需的**nodes**指令，它将根据你的环境而变化。有关如何节点配置的文档可以参考[RKE 节点配置示例](https://rancher.com/docs/rke/latest/en/config-options/nodes)。
 
 ```yaml
 # If you intend to deploy Kubernetes in an air-gapped environment,
@@ -158,6 +159,9 @@ done
 kubernetes_version: "v1.15.9-rancher1-1"
 enable_network_policy: true
 default_pod_security_policy_template_id: "restricted"
+# the nodes directive is required and will vary depending on your environment
+# documentation for node configuration can be found here:
+# https://rancher.com/docs/rke/latest/en/config-options/nodes
 services:
   etcd:
     uid: 52034
