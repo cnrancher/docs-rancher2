@@ -1,71 +1,74 @@
 ---
-title: Azure Cloud Provider
-weight: 252
+title: Azure
 ---
 
-To enable the Azure cloud provider, besides setting the name as `azure`, there are specific configuration options that must be set. Additionally, the Azure node name must also match the Kubernetes node name.
+## 概述
+
+除了将名称设置为`azure`外，还必须设置一些特定的配置选项，才可以启用 Azure 云提供商。此外，Azure 节点名称还必须与 Kubernetes 节点名称一致。
 
 ```yaml
 cloud_provider:
-    name: azure
-    azureCloudProvider:
-      aadClientId: xxxxxxxxx
-      aadClientSecret: xxxxxxxxx
-      location: xxxxxxxxx
-      resourceGroup: xxxxxxxxx
-      subnetName: xxxxxxxxx
-      subscriptionId: xxxxxxxxx
-      vnetName: xxxxxxxxx
-      tenantId: xxxxxxxxx
-      securityGroupName: xxxxxxxxx
+  name: azure
+  azureCloudProvider:
+    aadClientId: xxxxxxxxx
+    aadClientSecret: xxxxxxxxx
+    location: xxxxxxxxx
+    resourceGroup: xxxxxxxxx
+    subnetName: xxxxxxxxx
+    subscriptionId: xxxxxxxxx
+    vnetName: xxxxxxxxx
+    tenantId: xxxxxxxxx
+    securityGroupName: xxxxxxxxx
 ```
 
-## Overriding the hostname
+## 覆盖主机名称
 
 Since the Azure node name must match the Kubernetes node name, you override the Kubernetes name on the node by setting the `hostname_override` for each node. If you do not set the `hostname_override`, the Kubernetes node name will be set as the `address`, which will cause the Azure cloud provider to fail.
 
+因 Azure 节点名称必须与 Kubernetes 节点名称相匹配，可以通过为每个节点设置`hostname_override`来覆盖节点上的 Kubernetes 名称。如果不设置`hostname_override`，Kubernetes 节点名将被设置为`address`，会导致 Azure 云提供商失败。
+
 ```yaml
 nodes:
-    - address: x.x.x.x
-      hostname_override: azure-rke1
-      user: ubuntu
-      role:
-        - controlplane
-        - etcd
-        - worker
+  - address: x.x.x.x
+    hostname_override: azure-rke1
+    user: ubuntu
+    role:
+      - controlplane
+      - etcd
+      - worker
 ```
 
-## Azure Configuration Options
+## Azure 配置选项列表
 
-Besides the minimum set of options, there are many other options that are supported in RKE:
+除了上文中的 Azure 选项，RKE 还支持许多其他选项，详情请参考下表。
 
-|   Azure Configuration Options |  Type  	| Required  |
-|:----------------------------:	|:------:	|:---------:|
-|           tenantId           	| string 	|   *    |
-|        subscriptionId        	| string 	|   *    |
-|          aadClientId         	| string 	|   *    |
-|        aadClientSecret       	| string 	|   *    |
-|             cloud            	| string 	|      |
-|         resourceGroup        	| string 	|      |
-|           location           	| string 	|      |
-|           vnetName           	| string 	|      |
-|       vnetResourceGroup      	| string 	|      |
-|          subnetName          	| string 	|      |
-|       securityGroupName      	| string 	|      |
-|        routeTableName        	| string 	|      |
-|  primaryAvailabilitySetName  	| string 	|      |
-|            vmType            	| string 	|      |
-|      primaryScaleSetName     	| string 	|      |
-|       aadClientCertPath      	| string 	|      |
-|     aadClientCertPassword    	| string 	|      |
-|     cloudProviderBackoff     	|  bool  	|      |
-|  cloudProviderBackoffRetries 	|   int  	|      |
-| cloudProviderBackoffExponent 	|   int  	|      |
-| cloudProviderBackoffDuration 	|   int  	|      |
-|  cloudProviderBackoffJitter  	|   int  	|      |
-|    cloudProviderRateLimit    	|  bool  	|      |
-|   cloudProviderRateLimitQPS  	|   int  	|      |
-| cloudProviderRateLimitBucket 	|   int  	|      |
-|      useInstanceMetadata     	|  bool  	|      |
-|  useManagedIdentityExtension 	|  bool  	|      |
-| maximumLoadBalancerRuleCount 	|   int  	|      |
+| Azure 配置选项               | 类型   | 是否必填 |
+| :--------------------------- | :----- | :------- |
+| tenantId                     | string | 是       |
+| subscriptionId               | string | 是       |
+| aadClientId                  | string | 是       |
+| aadClientSecret              | string | 是       |
+| cloud                        | string | 否       |
+| resourceGroup                | string | 否       |
+| location                     | string | 否       |
+| vnetName                     | string | 否       |
+| vnetResourceGroup            | string | 否       |
+| subnetName                   | string | 否       |
+| securityGroupName            | string | 否       |
+| routeTableName               | string | 否       |
+| primaryAvailabilitySetName   | string | 否       |
+| vmType                       | string | 否       |
+| primaryScaleSetName          | string | 否       |
+| aadClientCertPath            | string | 否       |
+| aadClientCertPassword        | string | 否       |
+| cloudProviderBackoff         | bool   | 否       |
+| cloudProviderBackoffRetries  | int    | 否       |
+| cloudProviderBackoffExponent | int    | 否       |
+| cloudProviderBackoffDuration | int    | 否       |
+| cloudProviderBackoffJitter   | int    | 否       |
+| cloudProviderRateLimit       | bool   | 否       |
+| cloudProviderRateLimitQPS    | int    | 否       |
+| cloudProviderRateLimitBucket | int    | 否       |
+| useInstanceMetadata          | bool   | 否       |
+| useManagedIdentityExtension  | bool   | 否       |
+| maximumLoadBalancerRuleCount | int    | 否       |

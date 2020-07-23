@@ -1,14 +1,14 @@
 ---
-title: Cloud Providers
-weight: 250
+title: 云服务提供商
 ---
 
-RKE supports the ability to set your specific [cloud provider](https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/) for your Kubernetes cluster. There are specific cloud configurations for these cloud providers.
-To enable a cloud provider its name as well as any required configuration options must be provided under the `cloud_provider` directive in the cluster YML.
+RKE 支持为 Kubernetes 集群设置特定的[云服务提供商](https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/)。这些云服务提供商有特定的配置参数。
 
-* [AWS]({{<baseurl>}}/rke/latest/en/config-options/cloud-providers/aws)
-* [Azure]({{<baseurl>}}/rke/latest/en/config-options/cloud-providers/azure)
-* [OpenStack]({{<baseurl>}}/rke/latest/en/config-options/cloud-providers/openstack)
-* [vSphere]({{<baseurl>}}/rke/latest/en/config-options/cloud-providers/vsphere)
+要启用云服务提供商，必须在`cluster.yaml`中的`cloud_provider`参数中提供其名称以及任何所需配置选项，RKE 支持的云服务提供商如下：
 
-Outside of this list, RKE also supports the ability to handle any [custom cloud provider]({{<baseurl>}}/rke/latest/en/config-options/cloud-providers/custom).
+- [AWS](/docs/rke/config-options/cloud-providers/aws/_index)
+- [Azure](/docs/rke/config-options/cloud-providers/azure/_index)
+- [OpenStack](/docs/rke/config-options/cloud-providers/openstack/_index)
+- [vSphere](/docs/rke/config-options/cloud-providers/vsphere/_index)
+
+除了上述云服务提供商之外，RKE 还支持[自定义云提供商](/docs/rke/config-options/cloud-providers/custom/_index)。

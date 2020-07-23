@@ -1,102 +1,102 @@
 ---
 title: K8s Ingress Controllers
-description: By default, RKE deploys the NGINX ingress controller. Learn how to schedule and disable default k8s ingress controllers, and how to configure NGINX controller
-weight: 262
 ---
 
-By default, RKE deploys the NGINX ingress controller on all schedulable nodes.
+默认情况下，RKE 会在所有可调度节点上部署 NGINX ingress controller。
 
-> **Note:** As of v0.1.8, only workers are considered schedulable nodes, but prior to v0.1.8, worker and controlplane nodes were considered schedulable nodes.  
+> **说明：** 从 v0.1.8 开始，只有 worker 节点是可调度节点，但在 v0.1.8 之前， worker 节点和 controlplane 节点都是是可调度节点。
 
-RKE will deploy the ingress controller as a DaemonSet with `hostnetwork: true`, so ports `80`, and `443` will be opened on each node where the controller is deployed.
+RKE 将以 DaemonSet 的形式部署 Ingress Controller，并使用 `hostnetwork: true`，因此在部署控制器的每个节点上都会打开 `80`和`443`端口。
 
-The images used for ingress controller is under the [`system_images` directive]({{<baseurl>}}/rke/latest/en/config-options/system-images/). For each Kubernetes version, there are default images associated with the ingress controller, but these can be overridden by changing the image tag in `system_images`.
+Ingress Controller 使用的镜像在[`system_images`](/docs/rke/config-options/system-images/_index)中。对于每个 Kubernetes 版本，都有与 Ingress Controller 相关联的默认镜像，这些镜像可以通过更改`system_images`中的镜像标签来覆盖默认设置。
 
-## Scheduling Ingress Controllers
+## 调度 Ingress Controller
 
-If you only wanted ingress controllers to be deployed on specific nodes, you can set a `node_selector` for the ingress. The label in the `node_selector` would need to match the label on the nodes for the ingress controller to be deployed.
+如果只想在特定的节点上部署 Ingress Controller ，可以在`dns`部分设置一个`node_selector`。`node_selector`中的标签需要与要部署 Ingress Controller 的节点上的标签相匹配。
 
 ```yaml
 nodes:
-    - address: 1.1.1.1
-      role: [controlplane,worker,etcd]
-      user: root
-      labels:
-        app: ingress
-
-ingress:
-    provider: nginx
-    node_selector:
+  - address: 1.1.1.1
+    role: [controlplane, worker, etcd]
+    user: root
+    labels:
       app: ingress
+
+ingress:
+  provider: nginx
+  node_selector:
+    app: ingress
 ```
 
-## Disabling the Default Ingress Controller
+## 禁用默认 Ingress Controller
 
-You can disable the default controller by specifying `none` to  the ingress `provider` directive in the cluster configuration.
+您可以在群集配置中的 Ingress`provider`设置为`none`，禁用默认的 Ingress Controller。
 
 ```yaml
 ingress:
-    provider: none
+  provider: none
 ```
-## Configuring NGINX Ingress Controller
 
-For the configuration of NGINX, there are configuration options available in Kubernetes. There are a [list of options for the NGINX config map](https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md) , [command line extra_args](https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/cli-arguments.md) and [annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/).
+## 配置 NGINX Ingress Controller
+
+Kubernetes 中有对于 NGINX 的选项。有[NGINX 配置图的选项列表](https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md)、[命令行 extra_args](https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/cli-arguments.md)和[注释](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/)。
 
 ```yaml
 ingress:
-    provider: nginx
-    options:
-      map-hash-bucket-size: "128"
-      ssl-protocols: SSLv2
-    extra_args:
-      enable-ssl-passthrough: ""
+  provider: nginx
+  options:
+    map-hash-bucket-size: "128"
+    ssl-protocols: SSLv2
+  extra_args:
+    enable-ssl-passthrough: ""
 ```
 
-## Configuring an NGINX Default Certificate
+## 配置 NGINX 默认证书
 
-When configuring an ingress object with TLS termination, you must provide it with a certificate used for encryption/decryption. Instead of explicitly defining a certificate each time you configure an ingress, you can set up a custom certificate that's used by default.
+在配置具有 TLS 终止功能的 ingress 对象时，必须为其提供用于加密/解密的证书。与其在每次配置 ingress 时明确定义证书，不如设置一个默认使用的自定义证书。
 
-Setting up a default certificate is especially helpful in environments where a wildcard certificate is used, as the certificate can be applied in multiple subdomains.
+在使用通配符证书的环境中，设置默认证书特别有用，因为该证书可以应用在多个子域中。
 
->**Prerequisites:**
+> **先决条件**
 >
->- Access to the `cluster.yml` used to create the cluster.
->- The PEM encoded certificate you will use as the default certificate.
+> - 访问用于创建集群的`cluster.yml`。
+> - 你将使用的 PEM 编码证书作为默认证书。
 
-1. Obtain or generate your certificate key pair in a PEM encoded form.
+1. 获取或生成 PEM 编码形式的证书密钥对。
 
-2. Generate a Kubernetes secret from your PEM encoded certificate with the following command, substituting your certificate for `mycert.cert` and `mycert.key`.
+2. 运行以下命令，从你的 PEM 编码证书中生成一个 Kubernetes 密钥，用`mycert.cert`和`mycert.key`代替你的证书。
 
-    ```
-    kubectl -n ingress-nginx create secret tls ingress-default-cert --cert=mycert.cert --key=mycert.key -o yaml --dry-run=true > ingress-default-cert.yaml
-    ```
-3. Include the contents of `ingress-default-cert.yml` inline with your RKE `cluster.yml` file. For example:
+   ```
+   kubectl -n ingress-nginx create secret tls ingress-default-cert --cert=mycert.cert --key=mycert.key -o yaml --dry-run=true > ingress-default-cert.yaml
+   ```
 
-    ```yaml
-    addons: |-
-      ---
-      apiVersion: v1
-      data:
-        tls.crt: [ENCODED CERT]
-        tls.key: [ENCODED KEY]
-      kind: Secret
-      metadata:
-        creationTimestamp: null
-        name: ingress-default-cert
-        namespace: ingress-nginx
-      type: kubernetes.io/tls
-    ```
-4. Define your ingress resource with the following `default-ssl-certificate` argument, which references the secret we created earlier under `extra_args` in your `cluster.yml`:
+3. 将 `ingress-default-cert.yml`的内容嵌入到 RKE 的`cluster.yml`文件中：
 
-    ```yaml
-    ingress: 
-      provider: "nginx"
-      extra_args:
-        default-ssl-certificate: "ingress-nginx/ingress-default-cert"
-    ```
+   ```yaml
+   addons: |-
+     ---
+     apiVersion: v1
+     data:
+       tls.crt: [ENCODED CERT]
+       tls.key: [ENCODED KEY]
+     kind: Secret
+     metadata:
+       creationTimestamp: null
+       name: ingress-default-cert
+       namespace: ingress-nginx
+     type: kubernetes.io/tls
+   ```
 
-5. **Optional:** If you want to apply the default certificate to ingresses in a cluster that already exists, you must delete the NGINX ingress controller pods to have Kubernetes schedule new pods with the newly configured `extra_args`.
+4. 用下面的`default-ssl-certificate`参数定义你的 ingress 资源，它引用了我们之前在`cluster.yml`中`extra_args`下创建的密钥。
 
-    ```
-    kubectl delete pod -l app=ingress-nginx -n ingress-nginx
-    ```
+   ```yaml
+   ingress:
+     provider: "nginx"
+     extra_args:
+       default-ssl-certificate: "ingress-nginx/ingress-default-cert"
+   ```
+
+5. **可选：** 如果想将默认证书应用到已经存在的集群中的入口，必须删除 NGINX 入口控制器 pods，让 Kubernetes 使用新配置的`extra_args`调度新的 pods。
+   ```
+   kubectl delete pod -l app=ingress-nginx -n ingress-nginx
+   ```
