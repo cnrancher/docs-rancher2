@@ -1,51 +1,50 @@
 ---
-title: Add-Ons
-weight: 260
+title: RKE 插件
 ---
 
-RKE supports configuring pluggable add-ons in the cluster YML. Add-ons are used to deploy several cluster components including:
+RKE 支持在集群 yaml 文件中配置插件选项，这些插件用于部署多种集群组件，包括：
 
-* [Network plug-ins]({{<baseurl>}}/rke/latest/en/config-options/add-ons/network-plugins/)
-* [Ingress controller]({{<baseurl>}}/rke/latest/en/config-options/add-ons/ingress-controllers/)
-* [DNS provider]({{<baseurl>}}/rke/latest/en/config-options/add-ons/dns/)
-* [Metrics Server]({{<baseurl>}}/rke/latest/en/config-options/add-ons/metrics-server/)
+- [网络插件](/docs/rke/config-options/add-ons/network-plugins/_index)
+- [Ingress controller 插件](/docs/rke/config-options/add-ons/ingress-controllers/_index)
+- [DNS 提供商插件](/docs/rke/config-options/add-ons/dns/_index)
+- [Metrics Server 插件](/docs/rke/config-options/add-ons/metrics-server/_index)
 
-These add-ons require images that can be found under the [`system_images` directive]({{<baseurl>}}/rke/latest/en/config-options/system-images/). For each Kubernetes version, there are default images associated with each add-on, but these can be overridden by changing the image tag in `system_images`.
+这些插件的镜像文件可以在[`system_images`](/docs/rke/config-options/system-images/_index)中找到。对于每个 Kubernetes 版本，都有与每个插件相关联的默认镜像版本，但这些镜像可以通过更改`system_images`中的镜像来覆盖。
 
-There are a few things worth noting:
+注意：
 
-* In addition to these pluggable add-ons, you can specify an add-on that you want deployed after the cluster deployment is complete.
-* As of v0.1.8, RKE will update an add-on if it is the same name.
-* Prior to v0.1.8, update any add-ons by using `kubectl edit`.
+- 除了这些 RKE 已有的插件外，您在集群部署完成，部署自定义插件，详情请参考[自定义插件](/docs/rke/config-options/add-ons/user-defined-add-ons/_index)。
+- 从 v0.1.8 开始，如果插件名称相同，RKE 会执行更新。
+- 在 v0.1.8 之前，您需要运行`kubectl edit`命令更新插件。
 
-## Critical and Non-Critical Add-ons
+## 关键插件与非关键插件
 
-As of version v0.1.7, add-ons are split into two categories:
+从 v0.1.7 开始，插件被分为关键插件与非关键插件：
 
-- **Critical add-ons:** If these add-ons fail to deploy for any reason, RKE will error out.
-- **Non-critical add-ons:** If these add-ons fail to deploy, RKE will only log a warning and continue deploying any other add-ons.
+- **关键插件：** 如果部署失败，会导致 RKE 报错
+- **非关键插件：** 如果部署失败，RKE 会在日志中记录一个告警，并继续部署其他插件
 
-Currently, only the [network plug-in]({{<baseurl>}}/rke/latest/en/config-options/add-ons/network-plugins/) is considered critical. KubeDNS, [ingress controllers]({{<baseurl>}}/rke/latest/en/config-options/add-ons/ingress-controllers/) and [user-defined add-ons]({{<baseurl>}}/rke/latest/en/config-options/add-ons/user-defined-add-ons/) are considered non-critical.
+当前只有[网络插件](/docs/rke/config-options/add-ons/network-plugins/_index)是**关键插件**，其他插件都是**非关键插件**。
 
-## Add-on deployment jobs
+## 插件部署 job
 
-RKE uses Kubernetes jobs to deploy add-ons. In some cases, add-ons deployment takes longer than expected. As of with version v0.1.7, RKE provides an option to control the job check timeout in seconds. This timeout is set at the cluster level.
+RKE 使用 Kubernetes job 的方式部署插件。在某些情况下，部署插件的时间会比预期时间长。从 v0.1.7 开始，RKE 提供集群层级的`addon_job_timeout`选项，以检查 job 的连接是否超时，默认值为 30，单位是秒。
 
 ```yaml
 addon_job_timeout: 30
 ```
 
-## Add-on placement
+## Add-on 位置
 
-_Applies to v0.2.3 and higher_
+_v0.2.3 或更新版本可用_
 
-| Component          | nodeAffinity nodeSelectorTerms             | nodeSelector | Tolerations |
-| ------------------ | ------------------------------------------ | ------------ | ----------- |
-| Calico             | `beta.kubernetes.io/os:NotIn:windows`  | none | - `NoSchedule:Exists`<br/>- `NoExecute:Exists`<br/>- `CriticalAddonsOnly:Exists` |
-| Flannel            | `beta.kubernetes.io/os:NotIn:windows`  | none | - `operator:Exists` |
-| Canal              | `beta.kubernetes.io/os:NotIn:windows`  | none         | - `NoSchedule:Exists`<br/>- `NoExecute:Exists`<br/>- `CriticalAddonsOnly:Exists` |
-| Weave              | `beta.kubernetes.io/os:NotIn:windows`  | none | - `NoSchedule:Exists`<br/>- `NoExecute:Exists` |
-| CoreDNS            | `node-role.kubernetes.io/worker:Exists` | `beta.kubernetes.io/os:linux` | - `NoSchedule:Exists`<br/>- `NoExecute:Exists`<br/>- `CriticalAddonsOnly:Exists` |
-| kube-dns           | - `beta.kubernetes.io/os:NotIn:windows`<br/>- `node-role.kubernetes.io/worker` `Exists` | none  | - `NoSchedule:Exists`<br/>- `NoExecute:Exists`<br/>- `CriticalAddonsOnly:Exists` |
-| nginx-ingress      | - `beta.kubernetes.io/os:NotIn:windows`<br/>- `node-role.kubernetes.io/worker` `Exists` | none | - `NoSchedule:Exists`<br/>- `NoExecute:Exists` |
-| metrics-server     | - `beta.kubernetes.io/os:NotIn:windows`<br/>- `node-role.kubernetes.io/worker` `Exists` | none | - `NoSchedule:Exists`<br/>- `NoExecute:Exists` |
+| 组件           | nodeAffinity nodeSelectorTerms                                                          | nodeSelector                  | Tolerations                                                                      |
+| :------------- | :-------------------------------------------------------------------------------------- | :---------------------------- | :------------------------------------------------------------------------------- |
+| Calico         | `beta.kubernetes.io/os:NotIn:windows`                                                   | none                          | - `NoSchedule:Exists`<br/>- `NoExecute:Exists`<br/>- `CriticalAddonsOnly:Exists` |
+| Flannel        | `beta.kubernetes.io/os:NotIn:windows`                                                   | none                          | - `operator:Exists`                                                              |
+| Canal          | `beta.kubernetes.io/os:NotIn:windows`                                                   | none                          | - `NoSchedule:Exists`<br/>- `NoExecute:Exists`<br/>- `CriticalAddonsOnly:Exists` |
+| Weave          | `beta.kubernetes.io/os:NotIn:windows`                                                   | none                          | - `NoSchedule:Exists`<br/>- `NoExecute:Exists`                                   |
+| CoreDNS        | `node-role.kubernetes.io/worker:Exists`                                                 | `beta.kubernetes.io/os:linux` | - `NoSchedule:Exists`<br/>- `NoExecute:Exists`<br/>- `CriticalAddonsOnly:Exists` |
+| kube-dns       | - `beta.kubernetes.io/os:NotIn:windows`<br/>- `node-role.kubernetes.io/worker` `Exists` | none                          | - `NoSchedule:Exists`<br/>- `NoExecute:Exists`<br/>- `CriticalAddonsOnly:Exists` |
+| nginx-ingress  | - `beta.kubernetes.io/os:NotIn:windows`<br/>- `node-role.kubernetes.io/worker` `Exists` | none                          | - `NoSchedule:Exists`<br/>- `NoExecute:Exists`                                   |
+| metrics-server | - `beta.kubernetes.io/os:NotIn:windows`<br/>- `node-role.kubernetes.io/worker` `Exists` | none                          | - `NoSchedule:Exists`<br/>- `NoExecute:Exists`                                   |
