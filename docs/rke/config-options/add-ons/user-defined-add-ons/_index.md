@@ -1,52 +1,52 @@
 ---
-title: User-Defined Add-Ons
-weight: 263
+title: 添加用户自定义插件
 ---
 
-Besides the [network plug-in]({{<baseurl>}}/rke/latest/en/config-options/add-ons/network-plugins) and [ingress controllers]({{<baseurl>}}/rke/latest/en/config-options/add-ons/ingress-controllers/), you can define any add-on that you want deployed after the Kubernetes cluster is deployed.
+除了[网络插件](/docs/rke/config-options/add-ons/network-plugins/_index)、[ingress controllers 插件](/docs/rke/config-options/add-ons/ingress-controllers/_index)、[DNS 插件](/docs/rke/config-options/add-ons/dns/_index)和[Metrics Server 插件](/docs/rke/config-options/add-ons/metrics-server/_index)之外，RKE 支持添加用户自定义插件。
 
-There are two ways that you can specify an add-on.
+添加自定义插件方式有两种：
 
-- [In-line Add-ons](#in-line-add-ons)
-- [Referencing YAML Files for Add-ons](#referencing-yaml-files-for-add-ons)
+- [在 cluster.yaml 文件中嵌入插件](#在-clusteryaml-文件中嵌入插件)
+- [引用插件的 YAML 文件](#引用插件的-yaml-文件)
 
-> **Note:** When using user-defined add-ons, you *must* define a namespace for *all* your resources, otherwise they will end up in the `kube-system` namespace.
+> **说明：**当使自定义的附加组件时，必须为你的所有资源定义一个命名空间，否则它们会进入`kube-system`命名空间。
 
-RKE uploads the YAML manifest as a configmap to the Kubernetes cluster. Then, it runs a Kubernetes job that mounts the configmap and deploys the add-on using `kubectl apply -f`.
+RKE 将 YAML 清单作为 configmap 上传至 Kubernetes 集群。然后，它运行一个 Kubernetes job，挂载 configmap 并使用`kubectl apply -f`部署插件。
 
-RKE only adds additional add-ons when using `rke up` multiple times. RKE does **not** support removing of cluster add-ons when doing `rke up` with a different list of add-ons.
+RKE 只有在多次使用`rke up`时才会添加额外的插件。当使用不同的附加组件列表进行`rke up`时，RKE 不支持删除集群附加组件。
 
-As of v0.1.8, RKE will update an add-on if it is the same name.
+从 v0.1.8 开始，RKE 会更新同名的插件。
 
-Prior to v0.1.8, update any add-ons by using `kubectl edit`.
+在 v0.1.8 之前，使用`kubectl edit`更新任何插件。
 
-## In-line Add-ons
+## 在 cluster.yaml 文件中嵌入插件
 
-To define an add-on directly in the YAML file, make sure to use the YAML's block indicator `|-` as the `addons` directive is a multi-line string option. It's possible to specify multiple YAML resource definitions by separating them using the `---` directive.
+如果要在 YAML 文件中直接定义一个插件，一定要使用 YAML 的 block indicator`|-`，因为`addons`指令是一个多行字符串选项。可以用`---`指令将多个 YAML 资源定义分开来指定。
 
 ```yaml
 addons: |-
-    ---
-    apiVersion: v1
-    kind: Pod
-    metadata:
-      name: my-nginx
-      namespace: default
-    spec:
-      containers:
-      - name: my-nginx
-        image: nginx
-        ports:
-        - containerPort: 80
+  ---
+  apiVersion: v1
+  kind: Pod
+  metadata:
+    name: my-nginx
+    namespace: default
+  spec:
+    containers:
+    - name: my-nginx
+      image: nginx
+      ports:
+      - containerPort: 80
 ```
 
-## Referencing YAML files for Add-ons
-Use the `addons_include` directive to reference a local file or a URL for any user-defined add-ons.  
+## 引用插件的 YAML 文件
+
+使用`addons_include`指令，提供自定义插件引用的本地文件路径或 URL 地址。
 
 ```yaml
 addons_include:
-    - https://raw.githubusercontent.com/rook/rook/master/cluster/examples/kubernetes/ceph/operator.yaml
-    - https://raw.githubusercontent.com/rook/rook/master/cluster/examples/kubernetes/ceph/cluster.yaml
-    - /opt/manifests/example.yaml
-    - ./nginx.yaml
+  - https://raw.githubusercontent.com/rook/rook/master/cluster/examples/kubernetes/ceph/operator.yaml
+  - https://raw.githubusercontent.com/rook/rook/master/cluster/examples/kubernetes/ceph/cluster.yaml
+  - /opt/manifests/example.yaml
+  - ./nginx.yaml
 ```

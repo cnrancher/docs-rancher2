@@ -1,21 +1,22 @@
 ---
-title: Metrics Server
-weight: 263
+title: Metrics Server 插件
 ---
 
-By default, RKE deploys [Metrics Server](https://github.com/kubernetes-incubator/metrics-server) to provide metrics on resources in your cluster.
+## 概述
 
-RKE will deploy Metrics Server as a Deployment.
+默认情况下，RKE 会部署 [Metrics Server](https://github.com/kubernetes-incubator/metrics-server)来提供集群中资源的指标。
 
-The image used for Metrics Server is under the [`system_images` directive]({{<baseurl>}}/rke/latest/en/config-options/system-images/). For each Kubernetes version, there is a default image associated with the Metrics Server, but these can be overridden by changing the image tag in `system_images`.
+RKE 会将 Metrics Server 部署为一个 Deployment。
 
-## Disabling the Metrics Server
+Metrics Server 使用的镜像在[`system_images`](/docs/rke/config-options/system-images/_index)下。对于每个 Kubernetes 版本，都有一个与 Metrics Server 相关联的默认镜像，但这些镜像可以通过更改`system_images`中的镜像标签来覆盖。
 
-_Available as of v0.2.0_
+## 禁用 Metrics Server
 
-You can disable the default controller by specifying `none` to the monitoring `provider` directive in the cluster configuration.
+_v0.2.0 或更新版本可用_
+
+您可以将`provider`的值修改为`none`，禁用默认控制器。
 
 ```yaml
 monitoring:
-    provider: none
+  provider: none
 ```
