@@ -1,22 +1,23 @@
 ---
-title: AWS Cloud Provider
-weight: 251
+title: AWS
 ---
 
-To enable the AWS cloud provider, there are no RKE configuration options. You only need to set the name as `aws`. In order to use the AWS cloud provider, all cluster nodes must have already been configured with an [appropriate IAM role](#iam-requirements) and your AWS resources must be [tagged with a cluster ID](#tagging-aws-resources).
+您只需要将名称设置为`aws`，就可以启用 AWS。所有群集节点必须已经配置了 [适当的 IAM 角色](#配置-IAM)，并且您的 AWS 资源必须 [标记 AWS 资源](#标记-AWS-资源)。
 
 ```yaml
 cloud_provider:
-    name: aws
+  name: aws
 ```
 
-## IAM Requirements
+## 配置 IAM
 
-In a cluster with the AWS cloud provider enabled, nodes must have at least the `ec2:Describe*` action.
+在启用了 AWS 云提供商的群集中，节点必须至少拥有`ec2:Describe*`动作。
 
-In order to use Elastic Load Balancers (ELBs) and EBS volumes with Kubernetes, the node(s) will need to have the an IAM role with appropriate permissions.
+为了使用 Kubernetes 的弹性负载均衡器(ELB)和 EBS 卷，节点需要拥有具有适当权限的 IAM 角色。
 
-IAM policy for nodes with the `controlplane` role:
+### 配置 controlplane 节点的 IAM 策略
+
+请参考以下代码示例，配置具有 `controlplane`角色的节点的 IAM 策略：
 
 ```json
 {
@@ -80,15 +81,15 @@ IAM policy for nodes with the `controlplane` role:
         "iam:CreateServiceLinkedRole",
         "kms:DescribeKey"
       ],
-      "Resource": [
-        "*"
-      ]
+      "Resource": ["*"]
     }
   ]
 }
 ```
 
-IAM policy for nodes with the `etcd` or `worker` role:
+### 配置 etcd 节点和 worker 节点的 IAM 策略
+
+请参考以下代码示例，配置具有`etcd` or `worker`角色的节点的 IAM 策略：
 
 ```json
 {
@@ -113,35 +114,33 @@ IAM policy for nodes with the `etcd` or `worker` role:
 }
 ```
 
-## Tagging AWS Resources
+## 标记 AWS 资源
 
-The AWS cloud provider uses tagging to discover and manage resources, the following resources are not automatically tagged by Kubernetes or RKE:
+AWS 云提供商使用标记来发现和管理资源，以下资源不会被 Kubernetes 或 RKE 自动标记，需要用户手动添加标记。
 
-- **VPC**: The VPC used by the cluster
-- **Subnet**: The subnets used by the cluster
-- **EC2 instances**: All nodes launched for the cluster 
-- **Security Groups**: The security group(s) used by nodes in the cluster
+- **VPC**：集群使用的 VPC
+- **子网**：集群使用的子网
+- **EC2 实例**：为该集群启动的所有节点
+- **安全组**：集群中各节点使用的安全组
 
-  >**Note:** If creating a `LoadBalancer` service and there is more than one security group attached to nodes, you must tag only one of the security groups as `owned` so that Kubernetes knows which group to add and remove rules. A single untagged security group is allowed, however, sharing this between clusters is not recommended.
+> **注意：**如果创建`LoadBalancer`服务，且节点上连接有多个安全组，则必须仅将其中一个安全组标记为`owned`，以便 Kubernetes 知道要添加和删除哪个组的规则。允许使用一个未标记的安全组，但是，不建议在集群之间共享这个安全组。
 
-[AWS Documentation: Tagging Your Amazon EC2 Resources](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html)
+[标记 Amazon EC2 资源](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html)
 
-You must tag with one of the following:
+`<CLUSTERID>`可以是你选择的任何字符串。但是，必须在标记的每个资源上使用相同的字符串。将标签值设置为`owned`会通知集群，所有用`<CLUSTERID>`标记的资源都只由这个集群拥有和管理。
 
-| Key | Value |
-|---|---|
+| Key                                 | Value  |
+| ----------------------------------- | ------ |
 | kubernetes.io/cluster/`<CLUSTERID>` | shared |
 
-`<CLUSTERID>` can be any string you choose. However, the same string must be used on every resource you tag. Setting the tag value to `owned` informs the cluster that all resources tagged with the `<CLUSTERID>` are owned and managed by this cluster only.
+如果您不在集群之间共享资源，您可以将标签改为：
 
-If you do not share resources between clusters, you can change the tag to:
-
-| Key | Value |
-|---|---|
+| Key                                 | Value |
+| ----------------------------------- | ----- |
 | kubernetes.io/cluster/`<CLUSTERID>` | owned |
 
-## Tagging for Load Balancers
+## 标记负载均衡器
 
-When provisioning a `LoadBalancer` service Kubernetes will attempt to discover the correct subnets, this is also achieved by tags and requires adding additional subnet tags to ensure internet-facing and internal ELBs are created in the correct subnets.
+在配置`LoadBalancer`服务时，Kubernetes 会尝试发现正确的子网，这也是通过标签来实现的，需要添加额外的子网标签，以确保在正确的子网中创建面向互联网和内部的 ELB。
 
-[AWS Documentation: Subnet tagging for load balancers](https://docs.aws.amazon.com/eks/latest/userguide/load-balancing.html#subnet-tagging-for-load-balancers)
+[AWS 负载均衡器的子网标记](https://docs.aws.amazon.com/eks/latest/userguide/load-balancing.html#subnet-tagging-for-load-balancers)

@@ -1,54 +1,55 @@
 ---
-title: Bastion/Jump Host Configuration
-weight: 220
+title: 配置堡垒机
 ---
 
-Since RKE uses `ssh` to connect to [nodes]({{<baseurl>}}/rke/latest/en/config-options/nodes/), you can configure the `cluster.yml` so RKE will use a bastion host. Keep in mind that the [port requirements]({{<baseurl>}}/rke/latest/en/os/#ports) for the RKE node move to the configured bastion host. Our private SSH key(s) only needs to reside on the host running RKE. You do not need to copy your private SSH key(s) to the bastion host.
+## 概述
+
+由于 RKE 使用 "ssh "连接到[节点](/docs/rke/config-options/nodes/_index)，所以您可以配置`cluster.yml`，使 RKE 使用堡垒主机。请注意，RKE 节点的[端口要求](/docs/rke/os/_index)会移动到配置的堡垒主机上。我们的私有 SSH 密钥只需要存在运行 RKE 的主机上。您不需要将您的 SSH 私钥复制到堡垒主机上。
 
 ```yaml
 bastion_host:
-    address: x.x.x.x
-    user: ubuntu
-    port: 22
-    ssh_key_path: /home/user/.ssh/bastion_rsa
-    # or
-    # ssh_key: |-
-    #   -----BEGIN RSA PRIVATE KEY-----
-    #
-    #   -----END RSA PRIVATE KEY-----
-    # Optionally using SSH certificates
-    # ssh_cert_path: /home/user/.ssh/id_rsa-cert.pub
-    # or
-    # ssh_cert: |-
-    #   ssh-rsa-cert-v01@openssh.com AAAAHHNza...
+  address: x.x.x.x
+  user: ubuntu
+  port: 22
+  ssh_key_path: /home/user/.ssh/bastion_rsa
+  # or
+  # ssh_key: |-
+  #   -----BEGIN RSA PRIVATE KEY-----
+  #
+  #   -----END RSA PRIVATE KEY-----
+  # Optionally using SSH certificates
+  # ssh_cert_path: /home/user/.ssh/id_rsa-cert.pub
+  # or
+  # ssh_cert: |-
+  #   ssh-rsa-cert-v01@openssh.com AAAAHHNza...
 ```
 
-## Bastion Host Options
+## 堡垒机配置选项
 
 ### Address
 
-The `address` directive will be used to set the hostname or IP address of the bastion host. RKE must be able to connect to this address.
+`address`指令用于设置堡垒主机的主机名或 IP 地址。RKE 必须能够连接到这个地址。
 
 ### SSH Port
 
-You specify which `port` to be used when connecting to the bastion host. The default port is `22`.
+您可以指定连接到堡垒主机时要使用的 端口，如果不指定，会使用默认端口`22`。
 
 ### SSH Users
 
-You specify the `user` to be used when connecting to this node.
+指定连接到这个节点时要使用的用户。
 
 ### SSH Key Path
 
-You specify the path, i.e. `ssh_key_path`, for the SSH private key to be used when connecting to the bastion host.
+指定路径，即`ssh_key_path`，用于连接堡垒主机时要使用的 SSH 私钥。
 
 ### SSH Key
 
-Instead of setting the path to the SSH key, you can specify the actual key, i.e. `ssh_key`, to be used to connect to the bastion host.
+你可以指定连接到堡垒主机使用的密钥，即`ssh_key`，这样的话就不需要设置 SSH 密钥的路径`ssh_key_path`。
 
 ### SSH Certificate Path
 
-You specify the path, i.e. `ssh_cert_path`, for the signed SSH certificate to be used when connecting to the bastion host.
+您可以指定路径，即`ssh_cert_path`，用于连接堡垒主机时要使用的签名 SSH 证书。
 
 ### SSH Certificate
 
-Instead of setting the path to the signed SSH certificate, you can specify the actual certificate, i.e. `ssh_cert`, to be used to connect to the bastion host.
+你可以指定实际的证书，即`ssh_cert`，用来连接到堡垒主机，这样的话就不需要设置 SSH 密钥路径`ssh_cert_path`。
