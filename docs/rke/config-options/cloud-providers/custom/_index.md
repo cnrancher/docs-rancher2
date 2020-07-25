@@ -1,11 +1,10 @@
 ---
-title: Custom Cloud Provider
-weight: 255
+title: 自定义云服务提供商
 ---
 
-If you want to enable a different cloud provider, RKE allows for custom cloud provider options. A name must be provided and the custom Cloud Provider options can be passed in as a multiline string in `customCloudProvider`.
+如果您想启用其他的云提供商，RKE 允许用户配置自定义云提供商选项。用必须提供一个名称，自定义云提供商选项可以作为`customCloudProvider`中的多行字符串传递进来。
 
-For example, in order to use the oVirt cloud provider with Kubernetes, here's the following cloud provider information:
+例如，为了使用 oVirt 云提供商与 Kubernetes，需要提供以下信息：
 
 ```
 [connection]
@@ -14,15 +13,15 @@ username = admin@internal
 password = admin
 ```
 
-To add this cloud config file to RKE, the `cloud_provider` would be need to be set.
+要将这个云配置文件添加到 RKE 中，需要设置`cloud_provider`。
 
 ```yaml
 cloud_provider:
-    name: ovirt
-    # Note the pipe as this is what indicates a multiline string
-    customCloudProvider: |-
-      [connection]
-      uri = https://localhost:8443/ovirt-engine/api
-      username = admin@internal
-      password = admin
+  name: ovirt
+  # Note the pipe as this is what indicates a multiline string
+  customCloudProvider: |-
+    [connection]
+    uri = https://localhost:8443/ovirt-engine/api
+    username = admin@internal
+    password = admin
 ```
