@@ -1,27 +1,28 @@
 ---
-title: Audit Log
-weight: 251
+title: 审计日志
 ---
 
-Kubernetes auditing provides a security-relevant chronological set of records about a cluster. Kube-apiserver performs auditing. Each request on each stage of its execution generates an event, which is then pre-processed according to a certain policy and written to a backend. The policy determines what’s recorded and the backends persist the records.
+## 概述
 
-You might want to configure the audit log as part of compliance with the CIS (Center for Internet Security) Kubernetes Benchmark controls.
+Kubernetes 审计提供了关于集群的安全相关的时间顺序记录集。Kube-apiserver 执行审计。在其执行的每个阶段的每个请求都会产生一个事件，然后根据一定的策略进行预处理，并写入后端。策略决定了记录的内容，而后端则会将记录持久化。
 
-For configuration details, refer to the [official Kubernetes documentation.](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/)
+你可能想配置审计日志，作为遵守 CIS（Center for Internet Security）Kubernetes Benchmark 控制的一部分。
 
-### Enabled by default
+有关配置细节，请参考[Kubernetes 官方文档](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/)。
 
-In RKE v1.1.0 and higher and when using specific Kubernetes versions, audit log is enabled by default. See the table below to check when audit log is enabled by default.
+## 默认启用
 
-| RKE version | Kubernetes version | audit log Enabled |
-|-------------|--------------------|----------------------|
-| v1.1.0 and higher | v1.17.4 and higher (v1.17.x) | Yes |
-| v1.1.0 and higher | v1.16.8 and higher (v1.16.x) | Yes |
-| v1.1.0 and higher | v1.15.11 and higher (v1.15.x) | Yes |
+在 RKE v1.1.0+中，使用特定 Kubernetes 版本时，审计日志是默认启用的。
 
-### Example Configurations
+| RKE 版本 | Kubernetes 版本 | 是否默认启用审计日志 |
+| -------- | --------------- | -------------------- |
+| v1.1.0+  | v1.17.4+        | 是                   |
+| v1.1.0 + | v1.16.8+        | 是                   |
+| v1.1.0 + | v1.15.11+       | 是                   |
 
-The audit log can be enabled by default using the following configuration in `cluster.yml`:
+## YAML 配置示例
+
+在`cluster.yml`中使用以下配置可以默认启用审计日志：
 
 ```yaml
 services:
@@ -30,49 +31,36 @@ services:
       enabled: true
 ```
 
-When the audit log is enabled, you should be able to see the default values at `/etc/kubernetes/audit-policy.yaml` (This is located at `/etc/kubernetes/audit.yaml` before RKE v1.1.0):
+启用审计日志后，可以在`/etc/kubernetes/audit-policy.yaml`中看到默认值（在 RKE v1.1.0 之前，路径是`/etc/kubernetes/audit.yaml`）。
 
 ```yaml
-# Minimum Configuration: Capture event metadata.
-...
+# 最简单的审计日志配置：采集事件元数据
+---
 rules:
-- level: Metadata
-...
+  - level: Metadata
 ```
 
-When the audit log is enabled, default values are also set for the audit log path, maximum age, maximum number of backups, maximum size in megabytes, and format. To see the default values, run:
+启用审计日志后，还将为审计日志路径、最大年龄、最大备份数量、最大大小（兆字节）和格式设置默认值。请运行以下命令查看默认值：
 
 ```
 ps -ef | grep kube-apiserver
 ```
 
-The default values for audit log were changed in RKE v1.1.0 to the following:
+在 RKE v1.1.0 中，审计日志的默认值为：
 
 ```yaml
---audit-log-maxage=30 # The maximum number of days to retain old audit log files
---audit-log-maxbackup=10 # The maximum number of audit log files to retain
---audit-log-path=/var/log/kube-audit/audit-log.json # The log file path that log backend uses to write audit events
---audit-log-maxsize=100 # The maximum size in megabytes of the audit log file before it gets rotated
---audit-policy-file=/etc/kubernetes/audit-policy.yaml # The file containing your audit log rules
---audit-log-format=json # The log file format
+--audit-log-maxage=5 # 保留旧审计日志文件的最长天数
+--audit-log-maxbackup=5 # 保留旧审计日志文件的最大数量
+--audit-log-path=/var/log/kube-audit/audit-log.json # 日志后端用于写入审计事件的日志文件路径
+--audit-log-maxsize=100 # 审计日志文件在被替换之前的最大大小（MB）
+--audit-policy-file=/etc/kubernetes/audit.yaml # 包含您的审计日志规则的文件
+--audit-log-format=json # 日志文件格式
 
 ```
 
-The default values for the audit log before RKE v1.1.0 are:
+您可以使用`configuration`自定义审计日志。
 
-```yaml
---audit-log-maxage=5 # The maximum number of days to retain old audit log files
---audit-log-maxbackup=5 # The maximum number of audit log files to retain
---audit-log-path=/var/log/kube-audit/audit-log.json # The log file path that log backend uses to write audit events
---audit-log-maxsize=100 # The maximum size in megabytes of the audit log file before it gets rotated
---audit-policy-file=/etc/kubernetes/audit.yaml # The file containing your audit log rules
---audit-log-format=json # The log file format
-
-```
-
-To customize the audit log, the `configuration` directive is used.
-
-A rules policy is passed to kube-apiserver using the `--audit-policy-file` or the `policy` directive in the `cluster.yml`. Below is an example `cluster.yml` with custom values and an audit log policy nested under the `configuration` directive. This example audit log policy is taken from the official [Kubernetes documentation:](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/#audit-policy)
+规则策略通过`--audit-policy-file`或`cluster.yml`中的`policy`指令传递给 kube-apiserver。下面是一个例子`cluster.yml`，其中包含自定义值和嵌套在`configuration`指令下的审计日志策略。这个审计日志策略示例来自官方[Kubernetes 文档](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/#audit-policy)。
 
 ```yaml
 services:
@@ -94,43 +82,43 @@ services:
             # Log pod changes at RequestResponse level
             - level: RequestResponse
               resources:
-              - group: ""
-                # Resource "pods" doesn't match requests to any subresource of pods,
-                # which is consistent with the RBAC policy.
-                resources: ["pods"]
+                - group: ""
+                  # Resource "pods" doesn't match requests to any subresource of pods,
+                  # which is consistent with the RBAC policy.
+                  resources: ["pods"]
             # Log "pods/log", "pods/status" at Metadata level
             - level: Metadata
               resources:
-              - group: ""
-                resources: ["pods/log", "pods/status"]
+                - group: ""
+                  resources: ["pods/log", "pods/status"]
 
             # Don't log requests to a configmap called "controller-leader"
             - level: None
               resources:
-              - group: ""
-                resources: ["configmaps"]
-                resourceNames: ["controller-leader"]
+                - group: ""
+                  resources: ["configmaps"]
+                  resourceNames: ["controller-leader"]
 
             # Don't log watch requests by the "system:kube-proxy" on endpoints or services
             - level: None
               users: ["system:kube-proxy"]
               verbs: ["watch"]
               resources:
-              - group: "" # core API group
-                resources: ["endpoints", "services"]
+                - group: "" # core API group
+                  resources: ["endpoints", "services"]
 
             # Don't log authenticated requests to certain non-resource URL paths.
             - level: None
               userGroups: ["system:authenticated"]
               nonResourceURLs:
-              - "/api*" # Wildcard matching.
-              - "/version"
+                - "/api*" # Wildcard matching.
+                - "/version"
 
             # Log the request body of configmap changes in kube-system.
             - level: Request
               resources:
-              - group: "" # core API group
-                resources: ["configmaps"]
+                - group: "" # core API group
+                  resources: ["configmaps"]
               # This rule only applies to resources in the "kube-system" namespace.
               # The empty string "" can be used to select non-namespaced resources.
               namespaces: ["kube-system"]
@@ -138,14 +126,14 @@ services:
             # Log configmap and secret changes in all other namespaces at the Metadata level.
             - level: Metadata
               resources:
-              - group: "" # core API group
-                resources: ["secrets", "configmaps"]
+                - group: "" # core API group
+                  resources: ["secrets", "configmaps"]
 
             # Log all other resources in core and extensions at the Request level.
             - level: Request
               resources:
-              - group: "" # core API group
-              - group: "extensions" # Version of group should NOT be included.
+                - group: "" # core API group
+                - group: "extensions" # Version of group should NOT be included.
 
             # A catch-all rule to log all other requests at the Metadata level.
             - level: Metadata

@@ -1,25 +1,17 @@
 ---
-title: Custom Network Plug-in Example
-weight: 1
+title: 自定义的网络插件示例
 ---
 
-The below example shows how to configure a custom network plug-in with an in-line add-on to the `cluster.yml`.
+下面的例子展示了如何在`cluster.yml`中配置自定义网络插件与内嵌式插件。
 
-First, to edit the network plug-ins, change the `network` section of the YAML from:
+首先，打开`cluster.yml`文件，将`network`参数的现有值修改为 `none`。
 
-```
-network: 
-  options: 
-    flannel_backend_type: "vxlan"
-  plugin: "canal"
-```
-to:
 ```
 network:
     plugin: none
 ```
 
-Then, in the `addons` section of the `cluster.yml`, you can add the add-on manifest of a cluster that has the network plugin-that you want. In the below example, we are replacing the Canal plugin with a Flannel plugin by adding the add-on manifest for the cluster through the `addons` field:
+然后，在 `cluster.yml`中的 `addons`部分，添加拥有网络插件的集群的 add-on manifest。在下面的例子中，我们通过`addons`字段添加集群的 add-on manifest，将 Canal 插件替换成 Flannel 插件。
 
 ```
 addons: |-
@@ -204,4 +196,5 @@ addons: |-
       name: flannel
       namespace: kube-system
 ```
-**Result:** The cluster is up with the custom network plug-in.
+
+**结果：** 为集群创建了自定义的网络插件。
