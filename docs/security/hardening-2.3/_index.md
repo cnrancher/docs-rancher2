@@ -598,7 +598,6 @@ To pass the following controls for the kube-api server ensure RKE configuration 
 --service-account-lookup=true
 --enable-admission-plugins= "ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,EventRateLimit,PodSecurityPolicy"
 --encryption-provider-config=/opt/kubernetes/encryption.yaml
---admission-control-config-file=/opt/kubernetes/admission.yaml
 --audit-log-path=/var/log/kube-audit/audit-log.json
 --audit-log-maxage=5
 --audit-log-maxbackup=5
@@ -622,22 +621,20 @@ To pass the following controls for the kube-api server ensure RKE configuration 
 services:
   kube-api:
     pod_security_policy: true
+    event_rate_limit:
+      enabled: true
     extra_args:
       anonymous-auth: "false"
       profiling: "false"
       service-account-lookup: "true"
       enable-admission-plugins: "ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,EventRateLimit,PodSecurityPolicy"
-      encryption-provider-config: /opt/kubernetes/encryption.yaml
-      admission-control-config-file: "/opt/kubernetes/admission.yaml"
       audit-log-path: "/var/log/kube-audit/audit-log.json"
       audit-log-maxage: "5"
       audit-log-maxbackup: "5"
       audit-log-maxsize: "100"
       audit-log-format: "json"
-      audit-policy-file: /opt/kubernetes/audit.yaml
       tls-cipher-suites: "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256"
     extra_binds:
-      - "/var/log/kube-audit:/var/log/kube-audit"
       - "/opt/kubernetes:/opt/kubernetes"
 ```
 
@@ -1251,6 +1248,7 @@ runcmd:
   - chmod 0700 /var/lib/etcd
   - usermod -G docker -a ubuntu
   - sysctl -p /etc/sysctl.d/90-kubelet.conf
+
 ```
 
 ## Appendix B - Complete RKE `cluster.yml` Example
@@ -1283,13 +1281,13 @@ services:
       tls-cipher-suites: "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256"
   kube-api:
     pod_security_policy: true
+    event_rate_limit:
+      enabled: true
     extra_args:
       anonymous-auth: "false"
       profiling: "false"
       service-account-lookup: "true"
       enable-admission-plugins: "ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,EventRateLimit,PodSecurityPolicy"
-      encryption-provider-config: /opt/kubernetes/encryption.yaml
-      admission-control-config-file: "/opt/kubernetes/admission.yaml"
       audit-log-path: "/var/log/kube-audit/audit-log.json"
       audit-log-maxage: "5"
       audit-log-maxbackup: "5"
@@ -1298,7 +1296,6 @@ services:
       audit-policy-file: /opt/kubernetes/audit.yaml
       tls-cipher-suites: "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256"
     extra_binds:
-      - "/var/log/kube-audit:/var/log/kube-audit"
       - "/opt/kubernetes:/opt/kubernetes"
   scheduler:
     extra_args:
@@ -1525,15 +1522,15 @@ rancher_kubernetes_engine_config:
         audit-policy-file: /opt/kubernetes/audit.yaml
         enable-admission-plugins: >-
           ServiceAccount,NamespaceLifecycle,LimitRanger,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,AlwaysPullImages,DenyEscalatingExec,NodeRestriction,EventRateLimit,PodSecurityPolicy
-        encryption-provider-config: /opt/kubernetes/encryption.yaml
         profiling: "false"
         service-account-lookup: "true"
         tls-cipher-suites: >-
           TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256
       extra_binds:
-        - "/var/log/kube-audit:/var/log/kube-audit"
         - "/opt/kubernetes:/opt/kubernetes"
       pod_security_policy: true
+      event_rate_limit:
+      enabled: true
       service_node_port_range: 30000-32767
     kube_controller:
       extra_args:
