@@ -1,19 +1,20 @@
 ---
-title: Rate Limiting
-weight: 241
+title: 配置事件速率限制
 ---
 
-Using the `EventRateLimit` admission control enforces a limit on the number of events that the API Server will accept in a given time period. In a large multi-tenant cluster, there might be a small percentage of tenants that flood the server with event requests, which could have a significant impact on the performance of the cluster overall. Therefore, it is recommended to limit the rate of events that the API server will accept.
+## 概述
 
-You might want to configure event rate limit as part of compliance with the CIS (Center for Internet Security) Kubernetes Benchmark. Event rate limiting corresponds to the CIS Kubernetes Benchmark 1.1.36 - Ensure that the admission control plugin `EventRateLimit` is set (Scored).
+使用 `EventRateLimit`接纳控制对 API 服务器在特定时间段内接受的事件数量进行限制。在一个大型多租户集群中，可能会有一小部分租户用事件请求淹没服务器，这可能会对集群的整体性能产生重大影响。因此，建议限制 API 服务器接受事件的速率。
 
-Rate limits can be configured for the server, a namespace, a user, or a combination of a source and an object.
+您可能希望配置事件速率限制，作为符合 CIS（互联网安全中心）Kubernetes 基准的一部分。事件速率限制对应于 CIS Kubernetes Benchmark 1.1.36 - 确保接纳控制插件`EventRateLimit`被设置（Score）。
 
-For configuration details, refer to the [official Kubernetes documentation.](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#eventratelimit)
+可以为服务器、命名空间、用户或源和对象的组合配置速率限制。
 
-### Example Configurations
+配置细节请参考[Kubernetes 官方文档。](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#eventratelimit)
 
-The following configuration in the `cluster.yml` can be used to enable the event rate limit by default:
+## 配置示例
+
+`cluster.yml`中的以下配置可用于默认启用事件速率限制。
 
 ```yaml
 services:
@@ -22,22 +23,21 @@ services:
       enabled: true
 ```
 
-When the event rate limit is enabled, you should be able to see the default values at `/etc/kubernetes/admission.yaml`:
+当启用事件速率限制时，你应该可以在`/etc/kubernetes/admission.yaml`看到默认值。
 
 ```yaml
-...
+---
 plugins:
-- configuration:
-    apiVersion: eventratelimit.admission.k8s.io/v1alpha1
-    kind: Configuration
-    limits:
-    - burst: 20000
-      qps: 5000
-      type: Server
-...
+  - configuration:
+      apiVersion: eventratelimit.admission.k8s.io/v1alpha1
+      kind: Configuration
+      limits:
+        - burst: 20000
+          qps: 5000
+          type: Server
 ```
 
-To customize the event rate limit, the entire Kubernetes resource for the configuration must be provided in the `configuration` directive:
+要自定义事件速率限制，必须在`configuration`指令中提供整个配置的 Kubernetes 资源。
 
 ```yaml
 services:
@@ -48,7 +48,7 @@ services:
         apiVersion: eventratelimit.admission.k8s.io/v1alpha1
         kind: Configuration
         limits:
-        - type: Server
-          qps: 6000
-          burst: 30000
+          - type: Server
+            qps: 6000
+            burst: 30000
 ```

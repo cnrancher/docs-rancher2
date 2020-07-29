@@ -1,29 +1,30 @@
 ---
 title: vSphere Cloud Provider
-weight: 254
 ---
 
-In order to provision Kubernetes clusters in vSphere with the RKE CLI, you must enable the vSphere cloud provider.
+## 概述
 
-The vSphere cloud provider must also be enabled in order to provision clusters with Rancher, which uses RKE as a library when provisioning [RKE clusters.]({{<baseurl>}}/rancher/v2.x/en/cluster-provisioning/rke-clusters/)
+要在 vSphere 中使用 RKE CLI 配置 Kubernetes 群集，必须启用 vSphere 云提供商。
 
-The [vSphere Cloud Provider](https://vmware.github.io/vsphere-storage-for-kubernetes/documentation/) interacts with VMware infrastructure (vCenter or standalone ESXi server) to provision and manage storage for persistent volumes in a Kubernetes cluster.
+还必须启用 vSphere 云提供商才能使用 Rancher 配置集群，Rancher 在配置 [RKE 集群时使用 RKE 作为库](/docs/cluster-provisioning/rke-clusters/_index)。
 
-This section describes how to enable the vSphere cloud provider. You will need to use the `cloud_provider` directive in the cluster YAML file.
+[vSphere Cloud Provider](https://vmware.github.io/vsphere-storage-for-kubernetes/documentation/)与 VMware 基础架构（vCenter 或独立的 ESXi 服务器）交互，以便为 Kubernetes 集群中的持久卷配置和管理存储。
 
-### Related Links
+本节介绍如何启用 vSphere 云提供商。您需要在群集 YAML 文件中使用 `cloud_provider` 指令。
 
-- **Configuration:** For details on vSphere configuration in RKE, refer to the [configuration reference.]({{<baseurl>}}/rke/latest/en/config-options/cloud-providers/vsphere/config-reference)
-- **Troubleshooting:** For guidance on troubleshooting a cluster with the vSphere cloud provider enabled, refer to the [troubleshooting section.]({{<baseurl>}}/rke/latest/en/config-options/cloud-providers/vsphere/troubleshooting)
-- **Storage:** If you are setting up storage, see the [official vSphere documentation on storage for Kubernetes,](https://vmware.github.io/vsphere-storage-for-kubernetes/documentation/) or the [official Kubernetes documentation on persistent volumes.](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) If you are using Rancher, refer to the [Rancher documentation on provisioning storage in vSphere.]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/volumes-and-storage/examples/vsphere)
-- **For Rancher users:** Refer to the Rancher documentation on [creating vSphere Kubernetes clusters]({{<baseurl>}}/rancher/v2.x/en/cluster-provisioning/rke-clusters/node-pools/vsphere) and [provisioning storage.]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/volumes-and-storage/examples/vsphere)
+## 相关链接
 
-# Prerequisites
+- **配置：**有关 RKE 中 vSphere 配置的详细信息，请参阅[配置参考](/docs/rke/config-options/cloud-providers/vsphere/config-reference/_index)
+- **故障排除：**有关在启用 vSphere 云提供商的情况下对群集进行故障排除的指导，请参阅 [故障排除部分。](docs/rke/config-options/cloud-providers/vsphere/troubleshooting/_index)
+- **存储：** 如果您正在设置存储，请参阅 [关于 Kubernetes 存储的官方 vSphere 文档](https://vmware.github.io/vsphere-storage-for-kubernetes/documentation/) 或 [关于持久卷的官方 Kubernetes 文档](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) 如果您正在使用 Rancher，请参阅 [关于在 vSphere 中供应存储的 Rancher 文档](/docs/cluster-admin/volumes-and-storage/examples/vsphere/_index)。
+- **对于 Rancher 用户：**请参考 Rancher 文档中关于[创建 vSphere Kubernetes 集群](/docs/cluster-provisioning/rke-clusters/node-pools/vsphere/_index)和[供应存储](/docs/cluster-admin/volumes-and-storage/examples/vsphere/_index)的内容。
 
-- **Credentials:** You'll need to have credentials of a vCenter/ESXi user account with privileges allowing the cloud provider to interact with the vSphere infrastructure to provision storage. Refer to [this document](https://vmware.github.io/vsphere-storage-for-kubernetes/documentation/vcp-roles.html) to create and assign a role with the required permissions in vCenter.
-- **VMware Tools** must be running in the Guest OS for all nodes in the cluster.
-- **Disk UUIDs:** All nodes must be configured with disk UUIDs. This is required so that attached VMDKs present a consistent UUID to the VM, allowing the disk to be mounted properly. See the section on [enabling disk UUIDs.]({{<baseurl>}}/rke/latest/en/config-options/cloud-providers/vsphere/enabling-uuid)
+## 先决条件
 
-# Enabling the vSphere Provider with the RKE CLI
+- 凭证：您需要拥有 vCenter/ESXi 用户帐户的凭证，该帐户具有允许云提供商与 vSphere 基础架构交互以供应存储的权限。  请参阅 [本文档](https://vmware.github.io/vsphere-storage-for-kubernetes/documentation/vcp-roles.html)，在 vCenter 中创建和分配具有所需权限的角色。
+- 群集中的所有节点必须在 Guest OS 中运行 **VMware Tools**。
+- 磁盘 UUID：所有节点必须配置磁盘 UUID。这是必需的，这样连接的 VMDK 才能向虚拟机呈现一致的 UUID，使磁盘能够正确挂载。请参阅[启用磁盘 UUID](/docs/rke/config-options/cloud-providers/vsphere/enabling-uuid/_index)一节。
 
-To enable the vSphere Cloud Provider in the cluster, you must add the top-level `cloud_provider` directive to the cluster configuration file, set the `name` property to `vsphere` and add the `vsphereCloudProvider` directive containing the configuration matching your infrastructure. See the [configuration reference]({{<baseurl>}}/rke/latest/en/config-options/cloud-providers/vsphere/config-reference) for the gory details.
+## 使用 RKE CLI 启用 vSphere Provider
+
+要在群集中启用 vSphere Cloud Provider，必须将顶层的`cloud_provider`指令添加到群集配置文件中，将`name`属性设置为`vsphere`，并添加包含与您的基础架构相匹配的配置的`vsphereCloudProvider`指令。详见[配置参考](/docs/rke/config-options/cloud-providers/vsphere/config-reference/_index)。

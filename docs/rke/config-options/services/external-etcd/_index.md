@@ -1,42 +1,43 @@
 ---
-title: External etcd
-weight: 232
+title: 外部etcd
 ---
 
-By default, RKE will launch etcd servers, but RKE also supports being able to use an external etcd. RKE only supports connecting to a TLS enabled etcd setup.
+## 概述
 
-> **Note:** RKE will not accept having external etcd servers in conjunction with [nodes]({{<baseurl>}}/rke/latest/en/config-options/nodes/) with the `etcd` role.
+默认情况下，RKE 会启动 etcd 服务器，但 RKE 也支持使用外部 etcd。RKE 只支持连接到启用 TLS 的 etcd 设置。
+
+> **注意：** RKE 不接受外部 etcd 服务器与[节点](/docs/rke/config-options/nodes/_index)一起使用`etcd`角色。
 
 ```yaml
 services:
-    etcd:
-      path: /etcdcluster
-      external_urls:
-        - https://etcd-example.com:2379
-      ca_cert: |-
-        -----BEGIN CERTIFICATE-----
-        xxxxxxxxxx
-        -----END CERTIFICATE-----
-      cert: |-
-        -----BEGIN CERTIFICATE-----
-        xxxxxxxxxx
-        -----END CERTIFICATE-----
-      key: |-
-        -----BEGIN PRIVATE KEY-----
-        xxxxxxxxxx
-        -----END PRIVATE KEY-----
+  etcd:
+    path: /etcdcluster
+    external_urls:
+      - https://etcd-example.com:2379
+    ca_cert: |-
+      -----BEGIN CERTIFICATE-----
+      xxxxxxxxxx
+      -----END CERTIFICATE-----
+    cert: |-
+      -----BEGIN CERTIFICATE-----
+      xxxxxxxxxx
+      -----END CERTIFICATE-----
+    key: |-
+      -----BEGIN PRIVATE KEY-----
+      xxxxxxxxxx
+      -----END PRIVATE KEY-----
 ```
 
-## External etcd Options
+## 外部 etcd 选项
 
-### Path
+### 路径
 
-The `path` defines the location of where the etcd cluster is on the endpoints.
+`path`定义了 etcd 集群在端点上的位置。
 
-### External URLs
+### 外部 URL
 
-The `external_urls` are the endpoints of where the etcd cluster is hosted. There can be multiple endpoints for the etcd cluster.
+`external_urls`是 etcd 集群的托管端点。etcd 集群可以有多个端点。
 
 ### CA Cert/Cert/KEY
 
-The certificates and private keys used to authenticate and access the etcd service.
+用于验证和访问 etcd 服务的证书和私钥。

@@ -1,20 +1,22 @@
 ---
-title: System Images
-weight: 225
+title: 系统镜像
 ---
-When RKE is deploying Kubernetes, there are several images that are pulled. These images are used as Kubernetes system components as well as helping to deploy these system components.  
 
-As of `v0.1.6`, the functionality of a couple of the system images were consolidated into a single `rancher/rke-tools` image to simplify and speed the deployment process.
+## 概述
 
-You can configure the [network plug-ins]({{<baseurl>}}/rke/latest/en/config-options/add-ons/network-plugins/), [ingress controller]({{<baseurl>}}/rke/latest/en/config-options/add-ons/ingress-controllers/) and [dns provider]({{<baseurl>}}/rke/latest/en/config-options/add-ons/dns/) as well as the options for these add-ons separately in the `cluster.yml`.
+RKE 在部署 Kubernetes 的时候，会从镜像仓库中拉镜像。这些镜像被用作 Kubernetes 系统组件，同时也帮助部署这些系统组件。
 
-Below is an example of the list of system images used to deploy Kubernetes through RKE. The default versions of Kubernetes are tied to specific versions of system images. 
+从`v0.1.6`开始，多个系统镜像的功能被整合到一个`rancher/rke-tools`镜像中，以简化和加快部署过程。
 
-- For RKE v0.2.x and below, the map of versions and the system image versions is located here: https://github.com/rancher/types/blob/release/v2.2/apis/management.cattle.io/v3/k8s_defaults.go
+你可以配置[网络插件](/docs/rke/config-options/add-ons/network-plugins/_index)。[ingress controller](/docs/rke/config-options/add-ons/ingress-controllers/_index)和[dns provider](/docs/rke/config-options/add-ons/dns/_index)以及这些附加组件的选项分别在`cluster. yml`中，以及这些附加组件的选项。
 
-- For RKE v0.3.0 and above, the map of versions and the system image versions is located here: https://github.com/rancher/kontainer-driver-metadata/blob/master/rke/k8s_rke_system_images.go
+下面是通过 RKE 部署 Kubernetes 所使用的系统镜像列表的一个例子。Kubernetes 的默认版本是与特定版本的系统镜像绑定的。
 
-> **Note:** As versions of RKE are released, the tags on these images will no longer be up to date. This list is specific for `v1.10.3-rancher2`.
+- 对于 RKE v0.2.x 及以下版本，版本和系统镜像版本位于：https://github.com/rancher/types/blob/release/v2.2/apis/management.cattle.io/v3/k8s_defaults.go。
+
+- 对于 RKE v0.3.0 及以上版本，版本和系统镜像版本位于：https://github.com/rancher/kontainer-driver-metadata/blob/master/rke/k8s_rke_system_images.go。
+
+> **注意：**随着 RKE 版本的发布，这些镜像的标签将不再是最新的。这个列表是针对`v1.10.3-rancher2`的。
 
 ```yaml
 system_images:
@@ -65,14 +67,16 @@ system_images:
 
 Prior to `v0.1.6`, instead of using the `rancher/rke-tools` image, we used the following images:
 
+在 "v0.1.6 "之前，我们不使用`rancher/rke-tools`镜像，而是使用以下镜像：
+
 ```yaml
 system_images:
-    alpine: alpine:latest
-    nginx_proxy: rancher/rke-nginx-proxy:v0.1.1
-    cert_downloader: rancher/rke-cert-deployer:v0.1.1
-    kubernetes_services_sidecar: rancher/rke-service-sidekick:v0.1.0
+  alpine: alpine:latest
+  nginx_proxy: rancher/rke-nginx-proxy:v0.1.1
+  cert_downloader: rancher/rke-cert-deployer:v0.1.1
+  kubernetes_services_sidecar: rancher/rke-service-sidekick:v0.1.0
 ```
 
-### Air-gapped Setups
+## 离线安装
 
-If you have an air-gapped setup and cannot access `docker.io`, you will need to set up your [private registry]({{<baseurl>}}/rke/latest/en/config-options/private-registries/) in your cluster configuration file. After you set up private registry, you will need to update these images to pull from your private registry.
+如果你处于离线环境，不能访问`docker.io`，你将需要在你的集群配置文件中设置你的[私有镜像仓库](/docs/rke/config-options/private-registries/_index)。设置好私有镜像仓库后，你需要更新这些镜像，以便从你的私有镜像仓库中提取最新版本的镜像。
