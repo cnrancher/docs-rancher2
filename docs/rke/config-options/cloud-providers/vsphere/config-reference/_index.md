@@ -1,26 +1,27 @@
 ---
-title: vSphere Configuration Reference
-weight: 3
+title: vSphere 配置参考
 ---
 
-This section shows an example of how to configure the vSphere cloud provider.
+## 概述
 
-The vSphere cloud provider must be enabled to allow dynamic provisioning of volumes.
+本节显示了如何配置 vSphere 云提供商的示例。
 
-For more details on deploying a Kubernetes cluster on vSphere, refer to the [official cloud provider documentation.](https://cloud-provider-vsphere.sigs.k8s.io/tutorials/kubernetes-on-vsphere-with-kubeadm.html)
+必须启用 vSphere 云提供商以允许动态供应卷。
 
->  **Note:** This documentation reflects the new vSphere Cloud Provider configuration schema introduced in Kubernetes v1.9 which differs from previous versions.
+有关在 vSphere 上部署 Kubernetes 群集的更多详细信息，请参阅 [官方云提供商文档](https://cloud-provider-vsphere.sigs.k8s.io/tutorials/kubernetes-on-vsphere-with-kubeadm.html)。
 
-# vSphere Configuration Example
+> **说明：**本文档反映了 Kubernetes v1.9 中引入的新 vSphere Cloud Provider 配置模式，与之前的版本有所不同。
 
-Given the following:
+## vSphere 配置示例
 
-- VMs in the cluster are running in the same datacenter `eu-west-1` managed by the vCenter `vc.example.com`.
-- The vCenter has a user `provisioner` with password `secret` with the required roles assigned, see [Prerequisites](#prerequisites).
-- The vCenter has a datastore named `ds-1` which should be used to store the VMDKs for volumes.
-- A `vm/kubernetes` folder exists in vCenter.
+已知以下信息：
 
-The corresponding configuration for the provider would then be as follows:
+- 群集中的虚拟机运行在同一个数据中心`us-west-1`，由 vCenter`vc.example.com`管理。
+- vCenter 有一个用户`provisioner`，密码`secret`，并分配了所需的角色。
+- vCenter 有一个名为`ds-1`的数据存储，应该用来存储卷的 VMDK。
+- vCenter 中存在一个`vm/kubernetes`文件夹。
+
+那么，提供商的相应配置如下：
 
 ```yaml
 (...)
@@ -41,27 +42,28 @@ cloud_provider:
       resourcepool-path: /us-west-1/host/hn1/resources/myresourcepool
 
 ```
-# Configuration Options
 
-The vSphere configuration options are divided into 5 groups:
+## 可配置选项
 
-* [global](#global)
-* [virtual_center](#virtual_center)
-* [workspace](#workspace)
-* [disk](#disk)
-* [network](#network)
+vSphere 配置选项分为 5 大类：
+
+- [global](#global)
+- [virtual_center](#virtual_center)
+- [workspace](#workspace)
+- [disk](#disk)
+- [network](#network)
 
 ### global
 
-The main purpose of global options is to be able to define a common set of configuration parameters that will be inherited by all vCenters defined under the `virtual_center` directive unless explicitly defined there.
+全局选项的主要目的是能够定义一套通用的配置参数，除非在`virtual_center`指令下明确定义，否则所有在`virtual_center`指令下定义的 vCenters 都将继承这些参数。
 
-Accordingly, the `global` directive accepts the same configuration options that are available under the `virtual_center` directive. Additionally it accepts a single parameter that can only be specified here:
+因此，`global`指令接受与`virtual_center`指令相同的配置选项。此外，它还接受一个只能在这里指定的单一参数：
 
-| global Options  |  Type   | Required  | Description |
-|:---------------:|:-------:|:---------:|:---------|
-| insecure-flag   | boolean |           | Set to **true** if the vCenter/ESXi uses a self-signed certificate.           |
+| 全局选项      | 类型    | 是否必填 | 描述                                                 |
+| :------------ | :------ | :------- | :--------------------------------------------------- |
+| insecure-flag | boolean | 否       | 如果 vCenter/ESXi 使用自签名证书，则设置为**true**。 |
 
-**Example:**
+**示例：**
 
 ```yaml
 (...)
@@ -71,27 +73,27 @@ Accordingly, the `global` directive accepts the same configuration options that 
 
 ### virtual_center
 
-This configuration directive specifies the vCenters that are managing the nodes in the cluster. You must define at least one vCenter/ESXi server. If the nodes span multiple vCenters then all must be defined.
+此配置指令指定管理群集中节点的 vCenters。您必须至少定义一个 vCenter/ESXi 服务器。如果节点跨越多个 vCenters，则必须定义所有的 vCenters。
 
-Each vCenter is defined by adding a new entry under the `virtual_center` directive with the vCenter IP or FQDN as the name. All required parameters must be provided for each vCenter unless they are already defined under the `global` directive.
+通过在`virtual_center`指令下添加一个新条目来定义每个 vCenter，并将 vCenter IP 或 FQDN 作为名称。必须为每个 vCenter 提供所有必要的参数，除非它们已经在`global`指令下定义。
 
-| virtual_center Options |  Type    | Required  | Description |
-|:----------------------:|:--------:|:---------:|:-----------|
-| user                   | string	  |   *       | vCenter/ESXi user used to authenticate with this server. |
-| password               | string	  |   *       | User's password. |
-| port                   | string	  |           | Port to use to connect to this server. Defaults to 443.  |
-| datacenters            | string	  |   *       | Comma-separated list of all datacenters in which cluster nodes are running in. |
-| soap-roundtrip-count   | uint     |           | Round tripper count for API requests to the vCenter (num retries = value - 1). |
+| virtual_center 选项  | 类型   | 是否必填 | 描述                                                           |
+| :------------------- | :----- | :------- | :------------------------------------------------------------- |
+| user                 | string | 是       | 用于验证此服务器的 vCenter/ESXi 用户                           |
+| password             | string | 是       | 用户密码                                                       |
+| port                 | string | 否       | 用于连接到该服务器的端口。默认使用 443 端口                    |
+| datacenters          | string | 是       | 集群节点运行的所有数据中心列表，通过逗号分隔。                 |
+| soap-roundtrip-count | uint   | 否       | 向 vCenter 提出的 API 请求的往返次数（num retries = 值 - 1）。 |
 
-> The following additional options (introduced in Kubernetes v1.11) are not yet supported in RKE.
+> RKE 尚未支持以下附加选项（在 Kubernetes v1.11 中引入）。
 
-| virtual_center Options |  Type    | Required  | Description |
-|:----------------------:|:--------:|:---------:|:-------|
-| secret-name            | string   |           | Name of secret resource containing credential key/value pairs. Can be specified in lieu of user/password parameters.|
-| secret-namespace       | string   |           | Namespace in which the secret resource was created in. |
-| ca-file                | string   |           | Path to CA cert file used to verify the vCenter certificate. |
+| virtual_center 选项 | 类型   | 是否必填 | 描述                                                           |
+| :------------------ | :----- | :------- | :------------------------------------------------------------- |
+| secret-name         | string | 否       | 包含凭证密钥/值对的密钥资源的名称。可以代替用户/密码参数而指定 |
+| secret-namespace    | string | 否       | 创建密钥资源所在的命名空间                                     |
+| ca-file             | string | 否       | 用于验证 vCenter 证书的 CA 证书文件的路径                      |
 
-**Example:**
+**示例：**
 
 ```yaml
 (...)
@@ -100,28 +102,28 @@ Each vCenter is defined by adding a new entry under the `virtual_center` directi
       172.158.110.2:     # All required options are set explicitly
         user: vc-user
         password: othersecret
-        datacenters: eu-west-2
+        datacenters: us-west-2
 ```
 
 ### workspace
 
-This configuration group specifies how storage for volumes is created in vSphere.
-The following configuration options are available:
+此配置组指定如何在 vSphere 中创建卷的存储。
+可使用以下配置选项。
 
-| workspace Options      |  Type    | Required  | Description |
-|:----------------------:|:--------:|:---------:|:---------|
-| server                 | string   |   *       | IP or FQDN of the vCenter/ESXi that should be used for creating the volumes. Must match one of the vCenters defined under the `virtual_center` directive.|
-| datacenter             | string   |   *       | Name of the datacenter that should be used for creating volumes. For ESXi enter *ha-datacenter*.|
-| folder                 | string   |   *       | Path of folder in which to create dummy VMs used for volume provisioning (relative from the root folder in vCenter), e.g. "vm/kubernetes".|
-| default-datastore      | string   |           | Name of default datastore to place VMDKs if neither datastore or storage policy are specified in the volume options of a PVC. If datastore is located in a storage folder or is a member of a datastore cluster, specify the full path. |
-| resourcepool-path      | string   |           | Absolute or relative path to the resource pool where the dummy VMs for [Storage policy based provisioning](https://vmware.github.io/vsphere-storage-for-kubernetes/documentation/policy-based-mgmt.html) should be created. If a relative path is specified, it is resolved with respect to the datacenter's *host* folder. Examples: `/<dataCenter>/host/<hostOrClusterName>/Resources/<poolName>`, `Resources/<poolName>`. For standalone ESXi specify `Resources`. |
+| workspace Options 选项 | 类型   | 是否必填 | 描述                                                                                                                                                                                                                                                                                                                                                                                 |
+| :--------------------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| server                 | string | 是       | 应用于创建卷的 vCenter/ESXi 的 IP 或 FQDN。必须与`virtual_center`指令中定义的 vCenters 之一相匹配                                                                                                                                                                                                                                                                                    |
+| datacenter             | string | 是       | 应用于创建卷的数据中心的名称。对于 ESXi，请输入*ha-datacenter*                                                                                                                                                                                                                                                                                                                       |
+| folder                 | string | 是       | 用于创建用于卷供应的虚拟机的文件夹路径（相对于 vCenter 中的根文件夹），例如 "vm/kubernetes"。                                                                                                                                                                                                                                                                                        |
+| default-datastore      | string | 否       | 如果在 PVC 的卷选项中既没有指定数据存储也没有指定存储策略，则要放置 VMDK 的默认数据存储的名称。如果数据存储位于存储文件夹中，或者是数据存储群集的成员，请指定完整路径。                                                                                                                                                                                                              |
+| resourcepool-path      | string | 否       | 资源池的绝对或相对路径，[基于存储策略的供应](https://vmware.github.io/vsphere-storage-for-kubernetes/documentation/policy-based-mgmt.html)的虚拟机应在其中创建。如果指定了相对路径，则根据数据中心的*host*文件夹进行解析。示例： `/<dataCenter>(dataCenter) /<dataCenter>/host/<host或ClusterName>/Resources/<poolName>`、`Resources/<poolName>`。对于独立的 ESXi，指定`Resources`。 |
 
-**Example:**
+**示例：**
 
 ```yaml
 (...)
     workspace:
-      server: 172.158.111.1 # matches IP of vCenter defined in the virtual_center block
+      server: 172.158.111.1 # virtual_center块中定义的vCenter的IP地址
       datacenter: eu-west-1
       folder: vm/kubernetes
       default-datastore: ds-1
@@ -129,16 +131,16 @@ The following configuration options are available:
 
 ### disk
 
-The following configuration options are available under the disk directive:
+disk 有以下配置选项：
 
-| disk Options         |  Type    | Required  | Description |
-|:--------------------:|:--------:|:---------:|:----------------|
-| scsicontrollertype   | string   |           | SCSI controller type to use when attaching block storage to VMs. Must be one of: *lsilogic-sas* or *pvscsi*. Default: *pvscsi*. |
+| disk 配置选项      | 类型   | 是否必填 | 描述                                                                                                                  |
+| :----------------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------- |
+| scsicontrollertype | string | 否       | 将块存储连接到虚拟机时要使用的 SCSI controller 类型，必须是以下类型之一：*lsilogic-sas*或*pvscsi*，默认值为*pvscsi*。 |
 
 ### network
 
-The following configuration options are available under the network directive:
+network 有以下配置选项：
 
-| network Options     |  Type    | Required  | Description |
-|:-------------------:|:--------:|:---------:|:-----------------------------------------------------------------------------|
-| public-network      | string   |           | Name of public **VM Network** to which the VMs in the cluster are connected. Used to determine public IP addresses of VMs.|
+| disk 配置选项  | 类型   | 是否必填 | 描述                                                                           |
+| :------------- | :----- | :------- | :----------------------------------------------------------------------------- |
+| public-network | string | 否       | 群集中的虚拟机所连接的公共**VM Network**的名称。用于确定虚拟机的公共 IP 地址。 |

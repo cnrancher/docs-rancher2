@@ -1,26 +1,25 @@
 ---
 title: Encrypting Secret Data at Rest
-weight: 230
 ---
 
-As of version `v0.3.1` RKE adds the support for managing secret data encryption at rest, which is [supported by Kubernetes](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#before-you-begin) since version `v1.13`.
+从 v0.3.1 版本开始，RKE 增加了对静止状态下秘密数据加密管理的支持。
 
-At-rest data encryption is required for:
+静止状态下的数据加密是需要的。
 
-- Compliance requirements
-- Additional layer of security
-- Reduce security impact of etcd node compromise
-- Reduce security impact of etcd backups compromise
-- Ability to use external Key Management Systems
+- 合规性要求
+- 附加安全层
+- 降低等节点泄露的安全影响
+- 降低等效文档备份的安全影响。
+- 能够使用外部密钥管理系统
 
-RKE provides users with two paths of configuration to enable at-rest data encryption:
+RKE 为用户提供了两种配置路径来实现静态数据加密。
 
-- Managed at-rest data encryption
-- Custom configuration for at-rest data encryption
+- 托管式静态数据加密
+- 自定义配置，用于静态数据加密
 
-Both configuration options can be added during initial cluster provisioning or by updating an existing cluster.
+这两个配置选项都可以在初始集群供应期间或通过更新现有集群来添加。
 
-To utilize this feature, a new field `secrets_encryption_config` is added to the [Kubernetes API service configuration]({{<baseurl>}}//rke/latest/en/config-options/services/#kubernetes-api-server). A full custom configuration looks like this:
+为了利用这个功能，在[Kubernetes API 服务配置](/docs/rke/config-options/services/_index)中添加了一个新的字段`secrets_encryption_config`。一个完整的自定义配置是这样的：
 
 ```yaml
 services:
@@ -31,22 +30,23 @@ services:
         apiVersion: apiserver.config.k8s.io/v1
         kind: EncryptionConfiguration
         resources:
-        - resources:
-          - secrets
-          providers:
-          - aescbc:
-              keys:
-              - name: k-fw5hn
-                secret: RTczRjFDODMwQzAyMDVBREU4NDJBMUZFNDhCNzM5N0I=
-          - identity: {}
-
+          - resources:
+              - secrets
+            providers:
+              - aescbc:
+                  keys:
+                    - name: k-fw5hn
+                      secret: RTczRjFDODMwQzAyMDVBREU4NDJBMUZFNDhCNzM5N0I=
+              - identity: {}
 ```
-# Managed At-Rest Data Encryption
 
-Enabling and disabling at-rest data encryption in Kubernetes is a relatively complex process that requires several steps to be performed by the Kubernetes cluster administrator. The managed configuration aims to reduce this overhead and provides a simple abstraction layer to manage the process.
+## 托管式静态数据加密
 
-### Enable Encryption
-Managed at-rest data encryption is disabled by default and can be enabled by using the following configuration:
+在 Kubernetes 中启用和禁用静态数据加密是一个相对复杂的过程，需要 Kubernetes 集群管理员执行几个步骤。管理配置旨在减少这种开销，并提供一个简单的抽象层来管理这个过程。
+
+### 启用加密功能
+
+管理的静态数据加密默认是禁用的，可以通过使用以下配置启用。
 
 ```yaml
 services:
@@ -54,18 +54,20 @@ services:
     secrets_encryption_config:
       enabled: true
 ```
-Once enabled, RKE will perform the following [actions](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#encrypting-your-data) to enable at-rest data encryption:
 
-- Generate a new random 32-bit encryption key
-- Generate an encryption provider configuration file using the new key The default [provider](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#providers) used is `aescbc`
-- Deploy the provider configuration file to all nodes with `controlplane` role
-- Update the `kube-apiserver` container arguments to point to the provider configuration file.
-- Restart the `kube-apiserver` container.
+启用后，RKE 将执行以下[操作](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#encrypting-your-data)以启用静态数据加密。
 
-After the `kube-api server` is restarted, data encryption is enabled. However, all existing secrets are still stored in plain text. RKE will [rewrite](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#ensure-all-secrets-are-encrypted) all secrets to ensure encryption is fully in effect.
+- 生成一个新的随机 32 位加密密钥。
+- 使用新的密钥生成加密提供者配置文件，默认使用的[提供者](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#providers)是`aescbc`。
+- 将提供者配置文件部署到所有具有`controlplane`角色的节点上。
+- 更新`kube-apiserver`容器参数，使其指向提供者配置文件。
+- 重新启动`kube-apiserver`容器。
 
-### Disable Encryption
-To disable encryption, you can either set the `enabled` flag to `false`, or simply remove the `secrets_encryption_config` block entirely from cluster.yml.
+重新启动`kube-api server`后，数据加密被启用。但是，所有现有的秘密仍然以纯文本形式存储。RKE 将[重写](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#ensure-all-secrets-are-encrypted)所有秘密，以确保加密完全生效。
+
+### 禁用加密功能
+
+要禁用加密，可以将 "enabled "标志设置为 "false"，或者干脆从 cluster.yml 中完全删除 "secrets_encryption_config "块。
 
 ```yaml
 services:
@@ -74,21 +76,22 @@ services:
       enabled: false
 ```
 
-Once encryption is disabled in `cluster.yml`, RKE will perform the following [actions](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#encrypting-your-data) to disable encryption in your cluster:
+一旦在`cluster.yml`中禁用加密，RKE 将执行以下[动作](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#encrypting-your-data)来禁用集群中的加密。
 
-- Generate a new provider configuration file with the no-encryption `identity{}` provider as the first provider, and the previous `aescbc` set in the second place. This will allow Kubernetes to use the first entry to write the secrets, and the second one to decrypt them.
-- Deploy the new provider configuration and restart `kube-apiserver`.
-- Rewrite all secrets. This is required because, at this point, new data will be written to disk in plain text, but the existing data is still encrypted using the old provider. By rewriting all secrets, RKE ensures that all stored data is decrypted.
-- Update `kube-apiserver` arguments to remove the encryption provider configuration and restart the `kube-apiserver`.
-- Remove the provider configuration file.
+- 生成一个新的 provider 配置文件，将不加密的`identity{}`provider 作为第一个 provider，并将之前的`aescbc`设置在第二个地方。这将允许 Kubernetes 使用第一个条目来写入秘密，而第二个条目来解密它们。
+- 部署新的提供者配置并重启`kube-apiserver`。
+- 重写所有秘密。这是必需的，因为此时，新的数据将以纯文本的形式写入磁盘，但现有的数据仍然使用旧的提供者进行加密。通过重写所有秘密，RKE 确保所有存储的数据都被解密。
+- 更新`kube-apiserver`参数，删除加密提供者配置，重启`kube-apiserver`。
+- 删除提供者配置文件。
 
+## 轮换密钥
 
-# Key Rotation
-Sometimes there is a need to rotate encryption config in your cluster. For example, the key is compromised. There are two ways to rotate the keys: with an RKE CLI command, or by disabling and re-enabling encryption in `cluster.yml`.
+有时候，需要在你的集群中轮换加密配置。例如，密钥被泄露了，有两种方法可以轮换密钥：使用 RKE CLI 命令，或者在`cluster.yml`中禁用和重新启用加密。有两种方法可以轮换密钥：使用 RKE CLI 命令，或者在`cluster.yml`中禁用和重新启用加密。
 
-### Rotating Keys with the RKE CLI
+### 使用 RKE CLI 命令轮换密钥
 
-With managed configuration, RKE CLI has the ability to perform the key rotation process documented [here](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#rotating-a-decryption-key) with one command. To perform this operation, the following subcommand is used:
+通过管理配置，RKE CLI 能够用一条命令执行[这里](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#rotating-a-decryption-key)中记载的键旋转过程。要执行这个操作，需要使用以下子命令。
+
 ```bash
 $ ./rke encrypt rotate-key --help
 NAME:
@@ -103,31 +106,32 @@ OPTIONS:
    --ignore-docker-version  Disable Docker version check
 
 ```
-This command will perform the following actions:
 
-- Generate a new random 32-bit encryption key
-- Generate a new provider configuration with the new key as the first provider and the second key as the second provider. When the secrets are rewritten, the first key will be used to encrypt the data on the write operation, while the second key (the old key) will be used to decrypt the stored data during the the read operation
-- Deploy the new provider configuration to all `controlplane` nodes and restart the `kube-apiserver`
-- Rewrite all secrets. This process will re-encrypt all the secrets with the new key.
-- Update the configuration to remove the old key and restart the `kube-apiserver`
+该命令将执行以下操作。
 
-### Rotating Keys by Disabling and Re-enabling Encryption in cluster.yml
+- 生成一个新的随机 32 位加密密钥
+- 生成一个新的提供者配置，新密钥作为第一提供者，第二密钥作为第二提供者。当秘密被重写时，第一把钥匙将在写操作时用于加密数据，而第二把钥匙（旧钥匙）将在读操作时用于解密存储的数据。
+- 将新的提供者配置部署到所有`controlplane`节点，并重新启动`kube-apiserver`。
+- 重写所有秘密。这个过程将用新的密钥重新加密所有的秘密。
+- 更新配置以删除旧密钥并重启`kube-apiserver`。
 
-For a cluster with encryption enabled, you can rotate the encryption keys by updating `cluster.yml`. If you enable and re-enable the data encryption in the `cluster.yml`, RKE will not reuse old keys. Instead, it will generate new keys every time, yielding the same result as a key rotation with the RKE CLI.
+### 编辑 cluster.yml 轮换密钥
 
-# Custom At-Rest Data Encryption Configuration
-With managed configuration, RKE provides the user with a very simple way to enable and disable encryption with minimal interaction and configuration. However, it doesn't allow for any customization to the configuration.
+对于启用了加密功能的集群，你可以通过更新`cluster.yml`来轮换加密密钥，如果你在`cluster.yml`中启用并重新启用了数据加密功能，RKE 将不会重复使用旧密钥。如果您在`cluster.yml`中启用并重新启用数据加密，RKE 将不会重复使用旧密钥。相反，它每次都会生成新的密钥，结果与使用 RKE CLI 进行密钥轮换的结果相同。
 
-With custom encryption configuration, RKE allows the user to provide their own configuration. Although RKE will help the user to deploy the configuration and rewrite the secrets if needed, it doesn't provide a configuration validation on user's behalf. It's the user responsibility to make sure their configuration is valid.
+## 自定义静态数据加密配置
 
->**Warning:** Using invalid Encryption Provider Configuration could cause several issues with your cluster, ranging from crashing the Kubernetes API service, `kube-api`,  to completely losing access to encrypted data.
+通过管理配置，RKE 为用户提供了一种非常简单的方式，以最小的交互和配置来启用和禁用加密。然而，它不允许对配置进行任何自定义。
 
-### Example: Using Custom Encryption Configuration with Amazon KMS
+通过自定义加密配置，RKE 允许用户提供自己的配置。虽然 RKE 会帮助用户部署配置，并在需要时重写秘密，但它并不代表用户提供配置验证。用户有责任确保自己的配置是有效的。
 
-An example for custom configuration would be enabling an external key management system like [Amazon KMS](https://aws.amazon.com/kms/). The following is an example of the configuration for AWS KMS:
+> **警告：**使用无效的加密提供者配置可能会导致您的集群出现一些问题，从崩溃 Kubernetes API 服务`kube-api`，到完全失去对加密数据的访问。
+
+### 例子: 使用 Amazon KMS 的自定义加密配置
+
+自定义配置的一个例子是启用外部密钥管理系统，如[Amazon KMS](https://aws.amazon.com/kms/)。以下是 AWS KMS 的配置实例。
 
 ```yaml
-
 services:
   kube-api:
     extra_binds:
@@ -139,36 +143,37 @@ services:
         kind: EncryptionConfiguration
         resources:
           - resources:
-            - secrets
+              - secrets
             providers:
-            - kms:
-                name: aws-encryption-provider
-                endpoint: unix:///var/run/kmsplugin/socket.sock
-                cachesize: 1000
-                timeout: 3s
-            - identity: {}
+              - kms:
+                  name: aws-encryption-provider
+                  endpoint: unix:///var/run/kmsplugin/socket.sock
+                  cachesize: 1000
+                  timeout: 3s
+              - identity: {}
 ```
 
-Documentation for AWS KMS can be found [here](https://github.com/kubernetes-sigs/aws-encryption-provider). When Custom Configuration is set to to enable the AWS KMS provider, you should consider the following points:
+AWS KMS 的文档可以在[这里](https://github.com/kubernetes-sigs/aws-encryption-provider)找到。当 "自定义配置 "设置为启用 AWS KMS 提供商时，你应该考虑以下几点。
 
-- Since RKE runs the `kube-api`  service in a container, it's required that you use the `extra_binds` feature to bind-mount the KMS provider socket location inside the `kube-api` container.
-- The AWS KMS provider runs as a pod in the cluster. Therefor, the proper way to enable it is to:
-    1. Deploy your cluster with at-rest encryption disabled.
-    2. Deploy the KMS pod and make sure it's working correctly.
-    3. Update your cluster with the custom encryption configuration to utilize the KMS provider.
-- Kube API connects to the KMS provider using a Unix socket. You should configure your KMS deployment to run pods on all `controlplane` nodes in the cluster.
-- Your `controlplane` node should be configured with an AMI profile that has access to the KMS key you used in your configuration.
+- 由于 RKE 在容器中运行 "kube-api "服务，因此需要您使用 "extra_binds "功能将 KMS 提供者的 socket 位置绑定安装在 "kube-api "容器内。
+- AWS KMS 提供者在集群中作为一个 pod 运行。因此，启用它的正确方法是。
+  1. 在禁用静态加密的情况下部署您的集群。
+  2. 部署 KMS pod，并确保其正确工作。
+  3. 使用自定义加密配置更新您的集群，以利用 KMS 提供者。
+- Kube API 使用 Unix 套接字连接到 KMS 提供者。你应该将你的 KMS 部署配置为在集群中的所有`controlplane`节点上运行 pods。
+- 你的`controlplane`节点应该配置一个 AMI 配置文件，它可以访问你在配置中使用的 KMS 密钥。
 
-### How to Prevent Restore Failures after Rotating Keys
-It's important to understand that enabling encryption for you cluster means that you can no longer access encrypted data in your etcd database and/or etcd database backups without using your encryption keys.
+### 如何预防轮换密钥后的还原故障
 
-The encryption configuration is stored in the cluster state file `cluster.rkestate`, which is decoupled from the etcd backups. For example, in any of the following backup cases, the restore process will fail:
+重要的是要明白，为你的集群启用加密意味着你不能再不使用你的加密密钥来访问你的 etcd 数据库和/或 etcd 数据库备份中的加密数据。
 
-- The snapshot is taken while encryption is enabled and restored when it's disabled. In this case, the encryption keys are no longer stored in the cluster state.
-- The snapshot is taken before the keys are rotated and restore is attempted after. In this case, the old keys used for encryption at the time of the snapshot no longer exist in the cluster state file.
+加密配置存储在集群状态文件`cluster.rkestate`中，它与 etcd 备份解耦。例如，在以下任何一种备份情况下，还原过程将失败。
 
-Therefore, we recommend that when you enable or disable encryption, or when you rotate keys, you should [create a snapshot]({{<baseurl>}}/rke/latest/en/etcd-snapshots/one-time-snapshots/) so that your backup requires the same keys that you have access to.
+- 快照是在启用加密时拍摄的，并在加密被禁用时恢复。在这种情况下，加密密钥不再存储在群集状态中。
+- 快照是在旋转密钥之前采集的，并在之后尝试还原。在这种情况下，快照时用于加密的旧密钥不再存在于群集状态文件中。
 
-This also means you should not rotate the keys during the restore process, because you would lose the encryption keys in `cluster.rkestate`.
+因此，我们建议，当您启用或禁用加密时，或者当您旋转密钥时，您应该[创建快照](/docs/rke/etcd-snapshots/one-time-snapshots/_index)，以便您的备份需要您可以访问的相同密钥。
 
-The same applies to the custom configuration use case, however in this case it will depend on the user-provided encryption configuration.
+这也意味着你不应该在还原过程中轮换密钥，因为你会丢失`cluster.rkestate`中的加密密钥。
+
+这同样适用于自定义配置用例，然而在这种情况下，它将取决于用户提供的加密配置。
