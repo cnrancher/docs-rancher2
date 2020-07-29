@@ -1,35 +1,31 @@
 ---
-title: Enabling Disk UUIDs for vSphere VMs
-weight: 2
+title: 为 vSphere 虚拟机启用磁盘 UUIDs
 ---
 
-In order to provision nodes with RKE, all nodes must be configured with disk UUIDs. This is required so that attached VMDKs present a consistent UUID to the VM, allowing the disk to be mounted properly.
+## 概述
 
-Depending on whether you are provisioning the VMs using the [vSphere node driver]({{<baseurl>}}/rancher/v2.x/en/cluster-provisioning/rke-clusters/node-pools/vsphere) in Rancher or using your own scripts or third-party tools, there are different methods available to enable disk UUIDs for VMs:
+为了用 RKE 配置节点，必须用磁盘 UUID 配置所有节点。这一点是必需的，以便连接的 VMDK 向虚拟机呈现一致的 UUID，使磁盘能够正确挂载。
 
-- [Using the vSphere console](#using-the-vsphere-console)
-- [Using the GOVC CLI tool](#using-the-govc-cli-tool)
-- [Using a Rancher node template](#using-a-rancher-node-template)
+根据您是使用 Rancher 中的 [vSphere 节点驱动程序](/docs/cluster-provisioning/rke-clusters/node-pools/vsphere/_index)还是使用自己的脚本或第三方工具来配置虚拟机，有不同的方法可以为虚拟机启用磁盘 UUID。
 
-### Using the vSphere Console
+## 使用 vSphere 控制台
 
-The required property can be set while creating or modifying VMs in the vSphere Console:
+可以在 vSphere Console 中创建或修改虚拟机时设置所需属性。
 
-1. For each VM navigate to the tab **VM Options** and click on **Edit Configuration**.
-2. Add the parameter `disk.EnableUUID` with a value of **TRUE**.
+1. 对于每个虚拟机，导航到**VM Options**选项卡，然后单击**Edit Configuration**。
+2. 添加参数`disk.EnableUID`，其值为**TRUE**。
+   ![vsphere-advanced-parameters](/img/rke/vsphere-advanced-parameters.png)
 
-    {{< img "/img/rke/vsphere-advanced-parameters.png" "vsphere-advanced-parameters" >}}
+## 使用 GOVC CLI 工具
 
-### Using the GOVC CLI tool
-
-You can also modify properties of VMs with the [govc](https://github.com/vmware/govmomi/tree/master/govc) command-line tool to enable disk UUIDs:
+您还可以使用[govc](https://github.com/vmware/govmomi/tree/master/govc)命令行工具修改虚拟机的属性，启用磁盘 UUID。
 
 ```sh
 $ govc vm.change -vm <vm-path> -e disk.enableUUID=TRUE
 ```
 
-### Using a Rancher Node Template
+## 使用 Rancher 节点模板
 
-In Rancher v2.0.4+, disk UUIDs are enabled in vSphere node templates by default.
+在 Rancher v2.0.4+ 中，磁盘 UUID 默认在 vSphere 节点模板中启用。
 
-If you are using Rancher prior to v2.0.4, refer to the [Rancher documentation.]({{<baseurl>}}/rancher/v2.x/en/cluster-provisioning/rke-clusters/node-pools/vsphere/#enabling-disk-uuids-with-a-node-template) for details on how to enable a UUID with a Rancher node template.
+如果您使用的是 v2.0.4 之前的 Rancher，请参考 [Rancher 文档.](/docs/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/_index)，以了解有关如何在 Rancher 节点模板中启用 UUID 的详细信息。

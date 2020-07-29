@@ -1,39 +1,39 @@
 ---
-title: Private Registries
-weight: 215
+title: 私有镜像仓库
 ---
 
-RKE supports the ability to configure multiple private Docker registries in the `cluster.yml`. By passing in your registry and credentials, it allows the nodes to pull images from these private registries.  
+## 概述
+
+RKE 支持在`cluster.yml`中配置多个私有镜像仓库。您可以在`cluster.yml`中配置私有镜像仓库和凭证你，然后从私有镜像仓拉取镜像。
 
 ```yaml
 private_registries:
-    - url: registry.com
-      user: Username
-      password: password
-    - url: myregistry.com
-      user: myuser
-      password: mypassword
+  - url: registry.com
+    user: Username
+    password: password
+  - url: myregistry.com
+    user: myuser
+    password: mypassword
 ```
 
-> **Note:** If you are using a Docker Hub registry, you can omit the `url` or set it to `docker.io`.
+> **注意：**如果你使用的是 Docker Hub 镜像仓库，你可以省略`url`，或者将`url`的值设置为 `docker.io`。
 
-### Default Registry
+### 默认镜像仓库
 
-As of v0.1.10, RKE supports specifying a default registry from the list of private registries to be used with all [system images]({{<baseurl>}}/rke/latest/en/config-options/system-images/) . In this example .RKE will use `registry.com` as the default registry for all system images, e.g. `rancher/rke-tools:v0.1.14` will become `registry.com/rancher/rke-tools:v0.1.14`.
+从 v0.1.10 开始，RKE 支持从私有镜像仓库中指定一个默认的镜像仓库，用于所有[系统镜像](/docs/rke/config-options/system-images/_index)。在这个例子中，RKE 将使用`registry.com`作为所有系统镜像的默认镜像仓库，例如`rancher/rke-tools:v0.1.14`将变成`registry.com/rancher/rke-tools:v0.1.14`。
 
 ```yaml
 private_registries:
-    - url: registry.com
-      user: Username
-      password: password
-      is_default: true # All system images will be pulled using this registry. 
+  - url: registry.com
+    user: Username
+    password: password
+    is_default: true # 所有的系统镜像都将使用该注册表进行拉取
 ```
 
-### Air-gapped Setups
+### 离线配置选项
 
-By default, all system images are being pulled from DockerHub. If you are on a system that does not have access to DockerHub, you will need to create a private registry that is populated with all the required [system images]({{<baseurl>}}/rke/latest/en/config-options/system-images/). 
+默认情况下，所有的系统镜像都是从 DockerHub 中拉取的。如果你所在的系统没有访问 DockerHub 的权限，你将需要创建一个私有镜像仓库，该镜像仓库将填充所有需要的[系统镜像](/docs/rke/config-options/system-images/_index)。
 
-As of v0.1.10, you have to configure your private registry credentials, but you can specify this registry as a default registry so that all [system images]({{<baseurl>}}/rke/latest/en/config-options/system-images/) are pulled from the designated private registry. You can use the command `rke config --system-images` to get the list of default system images to populate your private registry. 
+从 v0.1.10 开始，你必须配置你的私有镜像仓库凭证，但你可以指定这个镜像仓库为默认注册表，这样所有的[系统镜像]({/docs/rke/config-options/system-images/_index)都会从指定的私有注册表中提取。您可以使用`rke config --system-images`命令来获取默认系统映像的列表来填充您的私有注册表。
 
-Prior to v0.1.10, you had to configure your private registry credentials **and** update the names of all the [system images]({{<baseurl>}}/rke/latest/en/config-options/system-images/) in the `cluster.yml` so that the image names would have the private registry URL appended before each image name. 
-
+在 v0.1.10 之前，您必须配置您的私有镜像仓库凭证并更新`cluster.yml`中所有[系统镜像](/docs/rke/config-options/system-images/_index)的名称，这样镜像名称就会在每个镜像名称前附加私有注册表 URL。

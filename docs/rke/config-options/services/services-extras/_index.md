@@ -1,50 +1,49 @@
 ---
-title: Extra Args, Extra Binds, and Extra Environment Variables
-weight: 231
+title: 自定义参数、Docker挂载绑定和额外的环境变量
 ---
 
-RKE supports additional service arguments, volume binds and environment variables.
+RKE 支持用户添加自定义参数、挂载存储卷和添加额外的环境变量。
 
-### Extra Args
+## 自定义参数
 
-For any of the Kubernetes services, you can update the `extra_args` to change the existing defaults.
+对于任何一个 Kubernetes 服务，你可以更新`extra_args`来改变现有的默认值。
 
-As of `v0.1.3`, using `extra_args` will add new arguments and **override** any existing defaults. For example, if you need to modify the default admission plugins list, you need to include the default list and edit it with your changes so all changes are included.
+从`v0.1.3`开始，使用`extra_args`将添加新的参数，并**覆盖**任何现有的默认值。例如，如果你需要修改默认的录取插件列表，你需要包括默认列表，并编辑它与你的变化，所以所有的变化都包括在内。
 
-Prior to `v0.1.3`, using `extra_args` would only add new arguments to the list and there was no ability to change the default list.
+在 "v0.1.3 "之前，使用 "extra_args "只能向列表中添加新的参数，而无法更改默认列表。
 
-All service defaults and parameters are defined per [`kubernetes_version`]({{<baseurl>}}/rke/latest/en/config-options/#kubernetes-version):
+所有的服务默认值和参数都是根据[`kubernetes_version`](/docs/rke/config-options/_index)定义的。
 
-- For RKE v0.3.0+, the service defaults and parameters are defined per [`kubernetes_version`]({{<baseurl>}}/rke/latest/en/config-options/#kubernetes-version). The service defaults are located [here](https://github.com/rancher/kontainer-driver-metadata/blob/master/rke/k8s_service_options.go). The default list of admissions plugins is the same for all Kubernetes versions and is located [here](https://github.com/rancher/kontainer-driver-metadata/blob/master/rke/k8s_service_options.go#L11).
+- 对于 RKE v0.3.0+，服务默认值和参数定义在[`kubernetes_version`](/docs/rke/config-options/_index)。服务默认值位于[这里](https://github.com/rancher/kontainer-driver-metadata/blob/master/rke/k8s_service_options.go)。默认的接纳插件列表对于所有 Kubernetes 版本都是一样的，位于[这里](https://github.com/rancher/kontainer-driver-metadata/blob/master/rke/k8s_service_options.go#L11)。
 
-- For RKE prior to v0.3.0, the service defaults and admission plugins are defined per [`kubernetes_version`]({{<baseurl>}}/rke/latest/en/config-options/#kubernetes-version) and located [here](https://github.com/rancher/types/blob/release/v2.2/apis/management.cattle.io/v3/k8s_defaults.go). 
+- 对于 v0.3.0 之前的 RKE，服务默认值和接纳插件是根据[`kubernetes_version`](/docs/rke/config-options/_index)定义的，位于[here](https://github.com/rancher/types/blob/release/v2.2/apis/management.cattle.io/v3/k8s_defaults.go)。
 
 ```yaml
 services:
-    kube-controller:
-      extra_args:
-        cluster-name: "mycluster"
+  kube-controller:
+    extra_args:
+      cluster-name: "mycluster"
 ```
 
-### Extra Binds
+## Docker 挂载绑定
 
-Additional volume binds can be added to services using the `extra_binds` arguments.
+可以使用`extra_binds`参数为服务添加额外的卷绑定。
 
 ```yaml
 services:
-    kubelet:
-      extra_binds:
-        - "/host/dev:/dev"
-        - "/usr/libexec/kubernetes/kubelet-plugins:/usr/libexec/kubernetes/kubelet-plugins:z"
+  kubelet:
+    extra_binds:
+      - "/host/dev:/dev"
+      - "/usr/libexec/kubernetes/kubelet-plugins:/usr/libexec/kubernetes/kubelet-plugins:z"
 ```
 
-### Extra Environment Variables
+## 环境变量
 
-Additional environment variables can be added to services by using the `extra_env` arguments.
+可以通过使用`extra_env`参数为服务添加额外的环境变量。
 
 ```yaml
 services:
-    kubelet:
-      extra_env:
-        - "HTTP_PROXY=http://your_proxy"
+  kubelet:
+    extra_env:
+      - "HTTP_PROXY=http://your_proxy"
 ```
