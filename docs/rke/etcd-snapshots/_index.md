@@ -1,32 +1,31 @@
 ---
-title: Backups and Disaster Recovery
-weight: 150
-aliases:
-  - /rke/latest/en/installation/etcd-snapshots/
+title: 备份和容灾恢复
 ---
 
-_Available as of v0.1.7_
+## 概述
 
-RKE clusters can be configured to automatically take snapshots of etcd. In a disaster scenario, you can restore these snapshots, which are stored on other nodes in the cluster. Snapshots are always saved locally in `/opt/rke/etcd-snapshots`.
+_v0.1.7 或以上版本可用_
 
-_Available as of v0.2.0_
+RKE 集群可以自动备份 etcd 节点的快照。在灾难场景下，您可以使用这些快照恢复集群。快照保存在集群内的其他节点上。快照会保存在本地`/opt/rke/etcd-snapshots`路径下。
 
-RKE can upload your snapshots to a S3 compatible backend.
+_v0.2.0 或以上版本可用_
 
-**Note:** As of RKE v0.2.0, the `pki.bundle.tar.gz` file is no longer required because of a change in how the [Kubernetes cluster state is stored]({{<baseurl>}}/rke/latest/en/installation/#kubernetes-cluster-state).
+RKE 可将集群快照上传至 S3 适配的后端机器。
 
-# Backing Up a Cluster
+**说明：**RKE v0.2.0 改变了[存储集群状态的方式](/docs/rke/installation/_index)，所以`pki.bundle.tar.gz`不再是必须的文件。
 
-You can create [one-time snapshots]({{<baseurl>}}/rke/latest/en/etcd-snapshots/one-time-snapshots) to back up your cluster, and you can also configure [recurring snapshots]({{<baseurl>}}/rke/latest/en/etcd-snapshots/recurring-snapshots).
+## 备份集群
 
-# Restoring a Cluster from Backup
+您可以[手动创建集群备份](/docs/rke/etcd-snapshots/one-time-snapshots/_index)，或为集群配置[自动定时备份](/docs/rke/etcd-snapshots/recurring-snapshots/_index)。
 
-You can use RKE to [restore your cluster from backup]({{<baseurl>}}/rke/latest/en/etcd-snapshots/restoring-from-backup).
+## 恢复集群
 
-# Example Scenarios
+您可以使用 RKE 备份的集群快照[恢复集群](/docs/rke/etcd-snapshots/restoring-from-backup/_index)。
 
-These [example scenarios]({{<baseurl>}}/rke/latest/en/etcd-snapshots/example-scenarios) for backup and restore are different based on your version of RKE.
+## 示例场景
 
-## Troubleshooting
+这些备份和恢复集群的[示例场景](/docs/rke/etcd-snapshots/example-scenarios/_index)囊括了不同版本的 RKE。
 
-If you have trouble restoring your cluster, you can refer to the [troubleshooting]({{<baseurl>}}/rke/latest/en/etcd-snapshots/troubleshooting) page.
+## 问题排查
+
+如果在备份和恢复集群的过程中碰到问题，可以阅读[问题排查](/docs/rke/etcd-snapshots/troubleshooting/_index)，排查备份和恢复集群的每个步骤中可能出现问题的地方。

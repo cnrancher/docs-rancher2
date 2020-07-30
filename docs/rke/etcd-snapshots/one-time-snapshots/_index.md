@@ -1,75 +1,74 @@
 ---
-title: One-time Snapshots
-weight: 1
+title: 创建一次性快照
 ---
 
-One-time snapshots are handled differently depending on your version of RKE.
+## 概述
 
-{{% tabs %}}
-{{% tab "RKE v0.2.0+" %}}
+v0.2.0 或以上的版本和 v0.2.0 之前的版本创建一次性快照的方式不同，请阅读下文对应的章节获取创建一次性快照的信息。
 
-To save a snapshot of etcd from each etcd node in the cluster config file, run the `rke etcd snapshot-save` command.
+## RKE v0.2.0 或以上的版本
 
-The snapshot is saved in `/opt/rke/etcd-snapshots`.
+打开命令行工具，输入`rke etcd snapshot-save`命令，运行后即可保存 cluster config 文件内每个 etcd 节点的快照。RKE 会将节点快照保存在`/opt/rke/etcd-snapshots`路径下。运行上述命令时，RKE 会创建一个用于备份快照的容器。完成备份后，RKE 会删除该容器。您可以将一次性快照适配 S3 的后端主机。具体过程如下：
 
-When running the command, an additional container is created to take the snapshot. When the snapshot is completed, the container is automatically removed.
+1. 首先，运行以下命令，在本地创建一个一次性快照：
 
-The one-time snapshot can be uploaded to a S3 compatible backend by using the additional options to specify the S3 backend.
+   ```
+   $ rke etcd snapshot-save --config cluster.yml --name snapshot-name
+   ```
 
-To create a local one-time snapshot, run:
+   **结果：** 创建了一个快照，保存在 `/opt/rke/etcd-snapshots`路径下。
 
-```
-$ rke etcd snapshot-save --config cluster.yml --name snapshot-name   
-```
+2. 然后，运行以下命令，将这个快照保存到 S3。
 
-**Result:** The snapshot is saved in `/opt/rke/etcd-snapshots`.
+   ```
+   $ rke etcd snapshot-save \
+   --config cluster.yml \
+   --name snapshot-name \
+   --s3 \
+   --access-key S3_ACCESS_KEY \
+   --secret-key S3_SECRET_KEY \
+   --bucket-name s3-bucket-name \
+   --folder s3-folder-name \ # Optional - Available as of v0.3.0
+   --s3-endpoint s3.amazonaws.com
+   ```
 
-To save a one-time snapshot to S3, run:
+   **结果：** 保存在 `/opt/rke/etcd-snapshots`路径下的快照已经上传至 S3。
 
-```
-$ rke etcd snapshot-save \
---config cluster.yml \
---name snapshot-name \
---s3 \
---access-key S3_ACCESS_KEY \
---secret-key S3_SECRET_KEY \
---bucket-name s3-bucket-name \
---folder s3-folder-name \ # Optional - Available as of v0.3.0
---s3-endpoint s3.amazonaws.com
-```
+### rke etcd snapshot-save 命令的可配置参数
 
-**Result:** The snapshot is saved in `/opt/rke/etcd-snapshots` as well as uploaded to the S3 backend.
+创建一次性快照时，可配置的参数如下表所示：
 
-### Options for `rke etcd snapshot-save`
+| 参数                      | 描述                                                                         | S3 相关参数 |
+| :------------------------ | :--------------------------------------------------------------------------- | :---------- |
+| `--name`                  | 指定快照名称                                                                 |             |
+| `--config`                | 指定 YAML 文件名称，如果不指定，则会使用`cluster.yml`文件                    |             |
+| `--s3`                    | 启用 S3 存储服务备份节点快照                                                 | \*          |
+| `--s3-endpoint`           | 指定 S3 端点 URL 地址，默认值为 **s3.amazonaws.com**                         | \*          |
+| `--s3-endpoint-ca`        | 指定 CA 证书文件的路径连接自定义 S3 端点（可选）， RKE v0.2.5 及以上版本可用 | \*          |
+| `--access-key`            | S3 的 accessKey                                                              | \*          |
+| `--secret-key`            | S3 的 secretKey                                                              | \*          |
+| `--bucket-name`           | S3 的 桶名称（bucket name）                                                  | \*          |
+| `--folder`                | 指定 S3 存储节点快照的文件夹（可选）， RKE v0.3.0 及以上版本可用             | \*          |
+| `--region`                | S3 的 桶所在的区域（可选）                                                   | \*          |
+| `--ssh-agent-auth`        | [使用 SSH_AUTH_SOCK 定义的 SSH Agent Auth](/docs/rke/config-options/_index)  |             |
+| `--ignore-docker-version` | [禁用 Docker 版本检查](/docs/rke/config-options/_index)                      |
 
-| Option | Description | S3 Specific |
-| --- | --- | --- |
-|   `--name` value         |    Specify snapshot name |  |
-|   `--config` value       |    Specify an alternate cluster YAML file (default: `cluster.yml`) [$RKE_CONFIG] |  |
-|   `--s3`                 |    Enabled backup to s3 |   * |
-|   `--s3-endpoint` value  |    Specify s3 endpoint url (default: "s3.amazonaws.com") |   * |
-| `--s3-endpoint-ca` value     |    Specify a path to a CA cert file to connect to a custom s3 endpoint (optional) _Available as of v0.2.5_ | * |
-|   `--access-key` value   |    Specify s3 accessKey |   * |
-|   `--secret-key` value   |    Specify s3 secretKey |  * |
-|   `--bucket-name` value  |    Specify s3 bucket name |   * |
-|   `--folder` value  |    Specify folder inside  bucket where backup will be stored. This is optional. _Available as of v0.3.0_ |   * |
-|   `--region` value       |    Specify the s3 bucket location (optional) |   * |
-| `--ssh-agent-auth`      |   [Use SSH Agent Auth defined by SSH_AUTH_SOCK]({{<baseurl>}}/rke/latest/en/config-options/#ssh-agent) | |
-| `--ignore-docker-version`  | [Disable Docker version check]({{<baseurl>}}/rke/latest/en/config-options/#supported-docker-versions) |
+> **说明：**
+>
+> - 如果 AWS EC2 示例配置了 IAM 认证，则`--access-key`和`--secret-key`不是必填项。
+> - 表格第三列标记为"\* "的参数，是 S3 相关的参数。
 
-The `--access-key` and `--secret-key` options are not required if the `etcd` nodes are AWS EC2 instances that have been configured with a suitable IAM instance profile.
+### 使用自定义 CA 证书认证 S3
 
-##### Using a custom CA certificate for S3
+_v0.2.0 或以上的版本可用_
 
-_Available as of v2.2.5_
+备份快照可以被存储在自定义`S3`备份机器，如[minio](https://min.io/)上。如果 S3 Backend 使用的是自签名证书或自定义证书，需要使用`--s3-endpoint-ca`将自定义证书验证并连接到 S3 Backend。
 
-The backup snapshot can be stored on a custom `S3` backup like [minio](https://min.io/). If the S3 backend uses a self-signed or custom certificate, provide a custom certificate using the `--s3-endpoint-ca` to connect to the S3 back end.
+### 使用 IAM 认证 S3 并储存节点快照
 
-### IAM Support for Storing Snapshots in S3
+RKE 支持使用 IAM 角色权限管理进行 S3 认证。集群的 etcd 节点必须分配有 IAM 角色，并且这个角色需要有读写 S3 存储节点快照的桶的权限。节点必须有权限访问 S3 端点。
 
-In addition to API access keys, RKE supports using IAM roles for S3 authentication. The cluster etcd nodes must be assigned an IAM role that has read/write access to the designated backup bucket on S3. Also, the nodes must have network access to the S3 endpoint specified.
-
-Below is an [example IAM policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_s3_rw-bucket.html) that would allow nodes to store and retrieve backups from S3:
+以下是[IAM 策略示例代码](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_s3_rw-bucket.html)，给节点开放了在 S3 上读取和写入备份快照的权限。
 
 ```
 {
@@ -91,33 +90,29 @@ Below is an [example IAM policy](https://docs.aws.amazon.com/IAM/latest/UserGuid
 }
 ```
 
-For details on giving an application access to S3, refer to the AWS documentation on [Using an IAM Role to Grant Permissions to Applications Running on Amazon EC2 Instances.](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html)
+关于如何为应用开放访问 S3 的权限，请查看 AWS 的文档[使用 IAM 角色向在 Amazon EC2 实例上运行的应用程序授予权限](https://docs.aws.amazon.com/zh_cn/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html)。
 
-{{% /tab %}}
-{{% tab "RKE prior to v0.2.0" %}}
+## RKE v0.2.0 之前的版本
 
-To save a snapshot of etcd from each etcd node in the cluster config file, run the `rke etcd snapshot-save` command.
+打开命令行工具，输入`rke etcd snapshot-save`命令，运行后即可保存 cluster config 文件内每个 etcd 节点的快照。
 
-When running the command, an additional container is created to take the snapshot. When the snapshot is completed, the container is automatically removed.
+运行上述命令时，RKE 会创建一个用于备份快照的容器。完成备份后，RKE 会删除该容器。
 
-RKE saves a backup of the certificates, i.e. a file named `pki.bundle.tar.gz`, in the same location. The snapshot and pki bundle file are required for the restore process.
+RKE 会为证书生成备份，在同一路径下将证书保存为`pki.bundle.tar.gz`文件。恢复集群时，会用到快照和 pki 文件。
 
-To create a local one-time snapshot, run:
+运行以下命令，在本地创建一次性快照：
 
 ```
-$ rke etcd snapshot-save --config cluster.yml --name snapshot-name   
+$ rke etcd snapshot-save --config cluster.yml --name snapshot-name
 ```
 
-**Result:** The snapshot is saved in `/opt/rke/etcd-snapshots`.
+**结果：** RKE 会将节点快照保存在`/opt/rke/etcd-snapshots`路径下。
 
-### Options for `rke etcd snapshot-save`
+### rke etcd snapshot-save 命令的可参数
 
-| Option | Description |
-| --- | --- |
-|   `--name` value         |    Specify snapshot name |
-|   `--config` value       |    Specify an alternate cluster YAML file (default: `cluster.yml`) [$RKE_CONFIG] |
-| `--ssh-agent-auth`      |   [Use SSH Agent Auth defined by SSH_AUTH_SOCK]({{<baseurl>}}/rke/latest/en/config-options/#ssh-agent) |
-| `--ignore-docker-version`  | [Disable Docker version check]({{<baseurl>}}/rke/latest/en/config-options/#supported-docker-versions) |
-
-{{% /tab %}}
-{{% /tabs %}}
+| 参数                      | 描述                                                                        |
+| :------------------------ | :-------------------------------------------------------------------------- |
+| `--name`                  | 指定快照名称                                                                |
+| `--config`                | 指定 YAML 文件名称，如果不指定，则会使用`cluster.yml`文件 [$RKE_CONFIG]     |
+| `--ssh-agent-auth`        | [使用 SSH_AUTH_SOCK 定义的 SSH Agent Auth](/docs/rke/config-options/_index) |
+| `--ignore-docker-version` | [禁用 Docker 版本检查](/docs/rke/config-options/_index)                     |

@@ -1,147 +1,127 @@
 ---
-title: Example Scenarios
-weight: 4
+title: 示例场景
 ---
 
-These example scenarios for backup and restore are different based on your version of RKE.
+## 概述
 
-{{% tabs %}}
-{{% tab "RKE v0.2.0+" %}}
+本文提供了使用 RKE 备份和恢复集群的场景。示例场景使用的是部署在两个 AWS 节点上的 Kubernetes 集群：`node1` 和`node2`。我们会模拟`node2`失效的场景，创建一个新的节点`node3`并将`node2`的快照备份迁移到`node3`。具体的操作步骤因 RKE 版本而异，请按照您使用的 RKE 版本阅读对应的章节。节点的详细信息如下表所示：
 
-This walkthrough will demonstrate how to restore an etcd cluster from a local snapshot with the following steps:
+| 名称  | IP 地址  | 节点角色              |
+| :---- | :------- | :-------------------- |
+| node1 | 10.0.0.1 | [controlplane,worker] |
+| node2 | 10.0.0.2 | [etcd]                |
+| node3 | 10.0.0.3 | [etcd]                |
 
-1. [Back up the cluster](#1-back-up-the-cluster)
-1. [Simulate a node failure](#2-simulate-a-node-failure)
-1. [Add a new etcd node to the cluster](#3-add-a-new-etcd-node-to-the-kubernetes-cluster)
-1. [Restore etcd on the new node from the backup](#4-restore-etcd-on-the-new-node-from-the-backup)
-1. [Confirm that cluster operations are restored](#5-confirm-that-cluster-operations-are-restored)
+![备份集群](/img/rke/rke-etcd-backup.png)
 
-In this example, the Kubernetes cluster was deployed on two AWS nodes.
+## RKE v0.2.0 或更新的版本
 
-|  Name |    IP    |          Role          |
-|:-----:|:--------:|:----------------------:|
-| node1 | 10.0.0.1 | [controlplane, worker] |
-| node2 | 10.0.0.2 | [etcd]                 |
+### 概述
 
+本章节提供了使用 RKE v0.2.0 或更新的版本进行备份和恢复集群的操作指导，分为以下五个步骤：
 
-### 1. Back Up the Cluster
+1. [备份集群](#备份集群)
+1. [模拟节点 failure](#模拟节点-failure)
+1. [新建 etcd 节点](#新建-etcd-节点)
+1. [使用备份恢复新建节点的数据](#使用备份恢复新建节点的数据)
+1. [确认恢复后的集群处于正常状态](#确认恢复后的集群处于正常状态)
 
-Take a local snapshot of the Kubernetes cluster.
+### 备份集群
 
-You can upload this snapshot directly to an S3 backend with the [S3 options]({{<baseurl>}}/rke/latest/en/etcd-snapshots/one-time-snapshots/#options-for-rke-etcd-snapshot-save).
+运行以下命令，备份集群。如果您配置了 AWS S3 相关的参数，RKE 会将快照上传到 S3 Backend。AWS S3 相关的参数的详细信息请参考本文最后一个章节。
 
 ```
 $ rke etcd snapshot-save --name snapshot.db --config cluster.yml
 ```
 
-{{< img "/img/rke/rke-etcd-backup.png" "etcd snapshot" >}}
+### 模拟节点失效的场景
 
-### 2. Simulate a Node Failure
-
-To simulate the failure, let's power down `node2`.
+运行以下命令，关闭`node2`，模拟节点失效的场景。运行命令后，`node2`的状态变更为不可用：
 
 ```
 root@node2:~# poweroff
 ```
 
-|  Name |    IP    |          Role          |
-|:-----:|:--------:|:----------------------:|
-| node1 | 10.0.0.1 | [controlplane, worker] |
-| ~~node2~~ | ~~10.0.0.2~~ | ~~[etcd]~~     |
+### 新建 etcd 节点
 
-###  3. Add a New etcd Node to the Kubernetes Cluster
-
-Before updating and restoring etcd, you will need to add the new node into the Kubernetes cluster with the `etcd` role. In the `cluster.yml`, comment out the old node and add in the new node.
+升级和恢复 etcd 节点之前，您需要将新建的节点添加到 Kubernetes 集群内，并为其分配`etcd`角色。请打开`cluster.yml`文件，将`node2`相关的参数变更为注释，然后添加新节点`node3`的参数，如下所示。
 
 ```yaml
 nodes:
-    - address: 10.0.0.1
-      hostname_override: node1
-      user: ubuntu
-      role:
-        - controlplane
-        - worker
-#    - address: 10.0.0.2
-#      hostname_override: node2
-#      user: ubuntu
-#      role:
-#       - etcd
-    - address: 10.0.0.3
-      hostname_override: node3
-      user: ubuntu
-      role:
-        - etcd
+  - address: 10.0.0.1
+    hostname_override: node1
+    user: ubuntu
+    role:
+      - controlplane
+      - worker
+  #    - address: 10.0.0.2
+  #      hostname_override: node2
+  #      user: ubuntu
+  #      role:
+  #       - etcd
+  - address: 10.0.0.3
+    hostname_override: node3
+    user: ubuntu
+    role:
+      - etcd
 ```
 
-###  4. Restore etcd on the New Node from the Backup
+### 使用备份恢复新建节点的数据
 
-> **Prerequisite:** Ensure your `cluster.rkestate` is present before starting the restore, because this contains your certificate data for the cluster.
+**先决条件：**开始恢复节点前，请确保您的`cluster.rkestate`文件有效，因为该文件包含了集群所需的证书数据。
 
-After the new node is added to the `cluster.yml`, run the `rke etcd snapshot-restore` to launch `etcd` from the backup:
+将新建的节点添加到`cluster.yml`中后，运行 `rke etcd snapshot-restore`命令，从备份中启动`etcd`：
 
 ```
 $ rke etcd snapshot-restore --name snapshot.db --config cluster.yml
 ```
 
-The snapshot is expected to be saved at `/opt/rke/etcd-snapshots`.
+默认配置下，RKE 将快照保存在`/opt/rke/etcd-snapshots`路径。
 
-If you want to directly retrieve the snapshot from S3, add in the [S3 options](#options-for-rke-etcd-snapshot-restore).
+如果您想直接从 S3 获取快照，可以在以上代码示例的基础上添加配置参数，详情请参考本文的最后一个章节。
 
-> **Note:** As of v0.2.0, the file `pki.bundle.tar.gz` is no longer required for the restore process because the certificates required to restore are preserved within the `cluster.rkestate`.
+> **说明：**从 v0.2.0 开始，恢复集群所需的证书信息存储在`cluster.rkestate`中，所以`pki.bundle.tar.gz`不再是恢复集群时的必备文件。
 
-### 5. Confirm that Cluster Operations are Restored
+### 确认恢复后的集群处于正常状态
 
-The `rke etcd snapshot-restore` command triggers `rke up` using the new `cluster.yml`. Confirm that your Kubernetes cluster is functional by checking the pods on your cluster.
+`rke etcd snapshot-restore`命令触发了使用新的`cluster.yml`运行`rke up`命令。请运行`kubectl get pods`确认您的 Kubernetes 集群处于正常状态。如果状态正常，返回的信息应该与以下代码示例相似：
 
 ```
-> kubectl get pods                                                    
+> kubectl get pods
 NAME                     READY     STATUS    RESTARTS   AGE
 nginx-65899c769f-kcdpr   1/1       Running   0          17s
 nginx-65899c769f-pc45c   1/1       Running   0          17s
 nginx-65899c769f-qkhml   1/1       Running   0          17s
 ```
 
-{{% /tab %}}
-{{% tab "RKE prior to v0.2.0" %}}
+## RKE v0.2.0 之前的版本
 
-This walkthrough will demonstrate how to restore an etcd cluster from a local snapshot with the following steps:
+### 概述
 
-1. [Take a local snapshot of the cluster](#take-a-local-snapshot-of-the-cluster-rke-prior-to-v0.2.0)
-1. [Store the snapshot externally](#store-the-snapshot-externally-rke-prior-to-v0.2.0)
-1. [Simulate a node failure](#simulate-a-node-failure-rke-prior-to-v0.2.0)
-1. [Remove the Kubernetes cluster and clean the nodes](#remove-the-kubernetes-cluster-and-clean-the-nodes-rke-prior-to-v0.2.0)
-1. [Retrieve the backup and place it on a new node](#retrieve-the-backup-and-place-it-on-a-new-node-rke-prior-to-v0.2.0)
-1. [Add a new etcd node to the Kubernetes cluster](#add-a-new-etcd-node-to-the-kubernetes-cluster-rke-prior-to-v0.2.0)
-1. [Restore etcd on the new node from the backup](#restore-etcd-on-the-new-node-from-the-backup-rke-prior-to-v0.2.0)
-1. [Restore Operations on the Cluster](#restore-operations-on-the-cluster-rke-prior-to-v0.2.0)
+本章节提供了使用 RKE v0.2.0 之前的版本进行备份和恢复集群的操作指导，分为以下 8 个步骤：
 
-### Example Scenario of restoring from a Local Snapshot
+1. [创建集群的本地快照](#创建集群的本地快照)
+1. [将集群快照保存到外部](#将集群快照保存到外部)
+1. [模拟节点失效的场景](#模拟节点失效的场景)
+1. [移除 Kubernetes 集群并清理节点](#移除-Kubernetes-集群并清理节点)
+1. [获取备份信息并将其存储在新建的节点上](#获取备份信息并将其存储在新建的节点上)
+1. [为 Kubernetes 集群添加新节点](#为-Kubernetes-集群添加新节点)
+1. [使用备份在新节点上恢复 etcd 节点信息](#使用备份在新节点上恢复-etcd-节点信息)
+1. [恢复集群操作](#恢复集群操作)
 
-In this example, the Kubernetes cluster was deployed on two AWS nodes.
+### 创建集群的本地快照
 
-|  Name |    IP    |          Role          |
-|:-----:|:--------:|:----------------------:|
-| node1 | 10.0.0.1 | [controlplane, worker] |
-| node2 | 10.0.0.2 | [etcd]                 |
-
-<a id="take-a-local-snapshot-of-the-cluster-rke-prior-to-v0.2.0"></a>
-### 1. Take a Local Snapshot of the Cluster
-
-Back up the Kubernetes cluster by taking a local snapshot:
+运行以下命令，创建集群快照并保存至本地：
 
 ```
 $ rke etcd snapshot-save --name snapshot.db --config cluster.yml
 ```
 
-{{< img "/img/rke/rke-etcd-backup.png" "etcd snapshot" >}}
+### 将集群快照保存到外部
 
-<a id="store-the-snapshot-externally-rke-prior-to-v0.2.0"></a>
-### 2. Store the Snapshot Externally
-
-After taking the etcd snapshot on `node2`, we recommend saving this backup in a persistent place. One of the options is to save the backup and `pki.bundle.tar.gz` file on an S3 bucket or tape backup.
+创建 `node2`的快照后，建议将这个快照保存在安全的地方，例如将备份和`pki.bundle.tar.gz`信息在一个 S3 的 bucket 里面或是磁带备份。如果您使用的是 AWS 主机并且有可用的 S3 存储，请执行以下步骤：
 
 ```
-# If you're using an AWS host and have the ability to connect to S3
 root@node2:~# s3cmd mb s3://rke-etcd-backup
 root@node2:~# s3cmd \
   /opt/rke/etcd-snapshots/snapshot.db \
@@ -149,33 +129,25 @@ root@node2:~# s3cmd \
   s3://rke-etcd-backup/
 ```
 
-<a id="simulate-a-node-failure-rke-prior-to-v0.2.0"></a>
-### 3. Simulate a Node Failure
+### 模拟节点失效的场景
 
-To simulate the failure, let's power down `node2`.
+运行以下命令，关闭`node2`，模拟节点失败的场景。运行命令后，`node2`的状态变更为不可用
 
 ```
 root@node2:~# poweroff
 ```
 
-|  Name |    IP    |          Role          |
-|:-----:|:--------:|:----------------------:|
-| node1 | 10.0.0.1 | [controlplane, worker] |
-| ~~node2~~ | ~~10.0.0.2~~ | ~~[etcd]~~     |
+### 移除 Kubernetes 集群并清理节点
 
-<a id="remove-the-kubernetes-cluster-and-clean-the-nodes-rke-prior-to-v0.2.0"></a>
-### 4. Remove the Kubernetes Cluster and Clean the Nodes
-
-The following command removes your cluster and cleans the nodes so that the cluster can be restored without any conflicts:
+运行以下命令，移除集群并清理节点。
 
 ```
 rke remove --config rancher-cluster.yml
 ```
 
-<a id="retrieve-the-backup-and-place-it-on-a-new-node-rke-prior-to-v0.2.0"></a>
-### 5. Retrieve the Backup and Place it On a New Node
+### 获取备份信息并将其存储在新建的节点上
 
-Before restoring etcd and running `rke up`, we need to retrieve the backup saved on S3 to a new node, e.g. `node3`. 
+在原有的集群中创建一个新的节点`node3`。获取保存在 S3 里面的备份数据，将其迁移到新节点中。
 
 ```
 # Make a Directory
@@ -192,62 +164,70 @@ root@node3:~# s3cmd get \
   /opt/rke/etcd-snapshots/pki.bundle.tar.gz
 ```
 
-> **Note:** If you had multiple etcd nodes, you would have to manually sync the snapshot and `pki.bundle.tar.gz` across all of the etcd nodes in the cluster.
+> **说明：** 如果您有多个 etcd 节点，您需要手动同步为所有 etcd 节点同步快照数据和`pki.bundle.tar.gz`文件。
 
-<a id="add-a-new-etcd-node-to-the-kubernetes-cluster-rke-prior-to-v0.2.0"></a>
-###  6. Add a New etcd Node to the Kubernetes Cluster
+### 为 Kubernetes 集群添加新节点
 
-Before updating and restoring etcd, you will need to add the new node into the Kubernetes cluster with the `etcd` role. In the `cluster.yml`, comment out the old node and add in the new node. `
+升级和恢复 etcd 节点之前，您需要将新建的节点添加到 Kubernetes 集群内，并为其分配`etcd`角色。请打开`cluster.yml`文件，将`node2`相关的参数变更为 comment，然后添加新节点的参数，如下所示。
 
 ```yaml
 nodes:
-    - address: 10.0.0.1
-      hostname_override: node1
-      user: ubuntu
-      role:
-        - controlplane
-        - worker
-#    - address: 10.0.0.2
-#      hostname_override: node2
-#      user: ubuntu
-#      role:
-#       - etcd
-    - address: 10.0.0.3
-      hostname_override: node3
-      user: ubuntu
-      role:
-        - etcd
+  - address: 10.0.0.1
+    hostname_override: node1
+    user: ubuntu
+    role:
+      - controlplane
+      - worker
+  #    - address: 10.0.0.2
+  #      hostname_override: node2
+  #      user: ubuntu
+  #      role:
+  #       - etcd
+  - address: 10.0.0.3
+    hostname_override: node3
+    user: ubuntu
+    role:
+      - etcd
 ```
 
-<a id="restore-etcd-on-the-new-node-from-the-backup-rke-prior-to-v0.2.0"></a>
-###  7. Restore etcd on the New Node from the Backup
+### 使用备份在新节点上恢复 etcd 节点信息
 
-After the new node is added to the `cluster.yml`, run the `rke etcd snapshot-restore` command to launch `etcd` from the backup:
+在`cluster.yml`文件中添加了 node3 作为新节点后，运行 `rke etcd snapshot-restore`命令，从备份中启动`etcd`：
 
 ```
 $ rke etcd snapshot-restore --name snapshot.db --config cluster.yml
 ```
 
-The snapshot and `pki.bundle.tar.gz` file are expected to be saved at `/opt/rke/etcd-snapshots` on each etcd node.
+每个 etcd 节点对应的快照和`pki.bundle.tar.gz` 会被保存在`/opt/rke/etcd-snapshots`路径下。
 
-<a id="restore-operations-on-the-cluster-rke-prior-to-v0.2.0"></a>
-### 8. Restore Operations on the Cluster
+### 恢复集群操作
 
-Finally, we need to restore the operations on the cluster. We will make the Kubernetes API point to the new `etcd` by running `rke up` again using the new `cluster.yml`.
+最后我们需要将集群的状态恢复为正常。我们需要使用修改后的`cluster.yml`运行`rke up` 命令，将 Kubernetes API 指向新建的`etcd`节点，
 
 ```
 $ rke up --config cluster.yml
 ```
 
-Confirm that your Kubernetes cluster is functional by checking the pods on your cluster.
+请运行`kubectl get pods`确认您的 Kubernetes 集群处于正常状态。如果状态正常，返回的信息应该与以下代码示例相似：
 
 ```
-> kubectl get pods                                                    
+> kubectl get pods
 NAME                     READY     STATUS    RESTARTS   AGE
 nginx-65899c769f-kcdpr   1/1       Running   0          17s
 nginx-65899c769f-pc45c   1/1       Running   0          17s
 nginx-65899c769f-qkhml   1/1       Running   0          17s
 ```
 
-{{% /tab %}}
-{{% /tabs %}}
+## Etcd-Snapshot 服务的可配置参数
+
+| 参数               | 说明                                                                                                                                                                                                                                                                                   | S3 相关 |
+| :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
+| **interval_hours** | 创建快照的间隔时间。如果您使用 RKE v0.2.0 定义了`creation`参数，`interval_hours`会覆盖这个参数。如果不输入这个值，默认间隔是 5 分钟。支持输入正整数表示小时，如 1 表示间隔时间为 1 小时，每小时会创建一个快照；也支持输入正整数+m，表示分钟，如 1m 表示 1 分钟，每分钟会创建一个快照。 |         |
+| **retention**      | 快照的存活时间，当快照存活的时间超过这个限制后，会自动删除快照。如果在`etcd.retention`和`etcd.backup_config.retention`都配置了限制，RKE 会以`etcd.backup_config.retention`为准。                                                                                                       |         |
+| **bucket_name**    | S3 的 桶名称（bucket name）                                                                                                                                                                                                                                                            | \*      |
+| **folder**         | 指定 S3 存储节点快照的文件夹（可选）， RKE v0.3.0 及以上版本可用                                                                                                                                                                                                                       | \*      |
+| **access_key**     | S3 的 accessKey                                                                                                                                                                                                                                                                        | \*      |
+| **secret_key**     | S3 的 secretKey                                                                                                                                                                                                                                                                        | \*      |
+| **region**         | S3 的 桶所在的区域（可选）                                                                                                                                                                                                                                                             | \*      |
+| **endpoint**       | 指定 S3 端点 URL 地址，默认值为 **s3.amazonaws.com**                                                                                                                                                                                                                                   | \*      |
+| **custom_ca**      | 自定义证书认证，用于连接 S3 端点。使用私有存储时必填，RKE v0.2.5 及以上版本可用。                                                                                                                                                                                                      | \*      |
