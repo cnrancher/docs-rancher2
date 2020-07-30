@@ -8,7 +8,9 @@ The details of restoring your cluster from backup are different depending on you
 {{% tabs %}}
 {{% tab "RKE v0.2.0+"%}}
 
-If there is a disaster with your Kubernetes cluster, you can use `rke etcd snapshot-restore` to recover your etcd. This command reverts etcd to a specific snapshot and should be run on an etcd node of the the specific cluster that has suffered the disaster. 
+## 0.2.0 +
+
+If there is a disaster with your Kubernetes cluster, you can use `rke etcd snapshot-restore` to recover your etcd. This command reverts etcd to a specific snapshot and should be run on an etcd node of the the specific cluster that has suffered the disaster.
 
 The following actions will be performed when you run the command:
 
@@ -19,7 +21,7 @@ The following actions will be performed when you run the command:
 - Creates a new cluster by running `rke up`.
 - Restarts cluster system pods.
 
->**Warning:** You should back up any important data in your cluster before running `rke etcd snapshot-restore` because the command deletes your current Kubernetes cluster and replaces it with a new one.
+> **Warning:** You should back up any important data in your cluster before running `rke etcd snapshot-restore` because the command deletes your current Kubernetes cluster and replaces it with a new one.
 
 The snapshot used to restore your etcd cluster can either be stored locally in `/opt/rke/etcd-snapshots` or from a S3 compatible backend.
 
@@ -52,28 +54,31 @@ $ rke etcd snapshot-restore \
 --folder s3-folder-name \ # Optional - Available as of v0.3.0
 --s3-endpoint s3.amazonaws.com
 ```
+
 **Note:** if you were restoring a cluster that had Rancher installed, the Rancher UI should start up after a few minutes; you don't need to re-run Helm.
 
 ### Options for `rke etcd snapshot-restore`
 
-| Option | Description | S3 Specific |
-| --- | --- | ---|
-| `--name` value            |  Specify snapshot name | |
-| `--config` value          |  Specify an alternate cluster YAML file (default: `cluster.yml`) [$RKE_CONFIG] | |
-| `--s3`                    |  Enabled backup to s3 |* |
-| `--s3-endpoint` value     |  Specify s3 endpoint url (default: "s3.amazonaws.com") | * |
-| `--access-key` value      |  Specify s3 accessKey | *|
-| `--secret-key` value      |  Specify s3 secretKey | *|
-| `--bucket-name` value     |  Specify s3 bucket name | *|
-| `--folder` value     |   Specify folder inside  bucket where backup will be stored. This is optional.  This is optional. _Available as of v0.3.0_ | *|
-| `--region` value          |  Specify the s3 bucket location (optional) | *|
-| `--ssh-agent-auth`      |   [Use SSH Agent Auth defined by SSH_AUTH_SOCK]({{<baseurl>}}/rke/latest/en/config-options/#ssh-agent) | |
-| `--ignore-docker-version`  | [Disable Docker version check]({{<baseurl>}}/rke/latest/en/config-options/#supported-docker-versions) |
+| Option                    | Description                                                                                                            | S3 Specific |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `--name` value            | Specify snapshot name                                                                                                  |             |
+| `--config` value          | Specify an alternate cluster YAML file (default: `cluster.yml`) [$RKE_CONFIG]                                          |             |
+| `--s3`                    | Enabled backup to s3                                                                                                   | \*          |
+| `--s3-endpoint` value     | Specify s3 endpoint url (default: "s3.amazonaws.com")                                                                  | \*          |
+| `--access-key` value      | Specify s3 accessKey                                                                                                   | \*          |
+| `--secret-key` value      | Specify s3 secretKey                                                                                                   | \*          |
+| `--bucket-name` value     | Specify s3 bucket name                                                                                                 | \*          |
+| `--folder` value          | Specify folder inside bucket where backup will be stored. This is optional. This is optional. _Available as of v0.3.0_ | \*          |
+| `--region` value          | Specify the s3 bucket location (optional)                                                                              | \*          |
+| `--ssh-agent-auth`        | [Use SSH Agent Auth defined by SSH_AUTH_SOCK]({{<baseurl>}}/rke/latest/en/config-options/#ssh-agent)                   |             |
+| `--ignore-docker-version` | [Disable Docker version check]({{<baseurl>}}/rke/latest/en/config-options/#supported-docker-versions)                  |
 
 {{% /tab %}}
 {{% tab "RKE prior to v0.2.0"%}}
 
-If there is a disaster with your Kubernetes cluster, you can use `rke etcd snapshot-restore` to recover your etcd. This command reverts etcd to a specific snapshot and should be run on an etcd node of the the specific cluster that has suffered the disaster. 
+## 0.2.0 -
+
+If there is a disaster with your Kubernetes cluster, you can use `rke etcd snapshot-restore` to recover your etcd. This command reverts etcd to a specific snapshot and should be run on an etcd node of the the specific cluster that has suffered the disaster.
 
 The following actions will be performed when you run the command:
 
@@ -87,7 +92,7 @@ Before you run this command, you must:
 
 After the restore, you must rebuild your Kubernetes cluster with `rke up`.
 
->**Warning:** You should back up any important data in your cluster before running `rke etcd snapshot-restore` because the command deletes your current etcd cluster and replaces it with a new one.
+> **Warning:** You should back up any important data in your cluster before running `rke etcd snapshot-restore` because the command deletes your current etcd cluster and replaces it with a new one.
 
 ### Example of Restoring from a Local Snapshot
 
@@ -105,12 +110,12 @@ The `pki.bundle.tar.gz` file is also expected to be in the same location.
 
 ### Options for `rke etcd snapshot-restore`
 
-| Option | Description |
-| --- | --- |
-| `--name` value            |  Specify snapshot name |
-| `--config` value          |  Specify an alternate cluster YAML file (default: `cluster.yml`) [$RKE_CONFIG] |
-| `--ssh-agent-auth`      |   [Use SSH Agent Auth defined by SSH_AUTH_SOCK]({{<baseurl>}}/rke/latest/en/config-options/#ssh-agent) |
-| `--ignore-docker-version`  | [Disable Docker version check]({{<baseurl>}}/rke/latest/en/config-options/#supported-docker-versions) |
+| Option                    | Description                                                                                           |
+| ------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `--name` value            | Specify snapshot name                                                                                 |
+| `--config` value          | Specify an alternate cluster YAML file (default: `cluster.yml`) [$RKE_CONFIG]                         |
+| `--ssh-agent-auth`        | [Use SSH Agent Auth defined by SSH_AUTH_SOCK]({{<baseurl>}}/rke/latest/en/config-options/#ssh-agent)  |
+| `--ignore-docker-version` | [Disable Docker version check]({{<baseurl>}}/rke/latest/en/config-options/#supported-docker-versions) |
 
 {{% /tab %}}
 {{% /tabs %}}

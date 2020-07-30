@@ -90,7 +90,7 @@ nodes:
 
 ### Internal Address
 
-`internal_address`提供了让具有多个地址的节点设置一个特定的地址用于私有网络上的主机间通信的能力。如果没有设置`internal_address`，则使用`address`进行主机间通信。
+`internal_address`提供了让具有多个地址的节点设置一个特定的地址用于私有网络上的主机间通信的能力。如果没有设置`internal_address`，则使用`address`进行主机间通信。`internal_address`指令将设置用于 Kubernetes 组件的主机间通信的地址，例如 kube-apiserver 和 etcd。要改变 Canal 或 Flannel 网络插件的 vxlan 流量使用的接口，请参考[网络插件文档](/docs/rke/config-options/add-ons/network-plugins/_index)。
 
 ### Overriding the Hostname
 
