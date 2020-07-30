@@ -33,18 +33,23 @@ $ rke up --custom-certs --cert-dir ~/my/own/certs
 
 无论您使用默认路径还是其他路径保存证书，都要确保该路径下已有以下证书和密钥：
 
-| 名称                       | 证书                                | 密钥                                    |
-| :------------------------- | :---------------------------------- | :-------------------------------------- |
-| Master CA                  | kube-ca.pem                         | N/A                                     |
-| Kube API                   | kube-apiserver.pem                  | kube-apiserver-key.pem                  |
-| Kube Controller Manager    | kube-controller-manager.pem         | kube-controller-manager-key.pem         |
-| Kube Scheduler             | kube-scheduler.pem                  | kube-scheduler-key.pem                  |
-| Kube Proxy                 | kube-proxy.pem                      | kube-proxy-key.pem                      |
-| Kube Admin                 | kube-admin.pem                      | kube-admin-key.pem                      |
-| Apiserver Proxy Client     | kube-apiserver-proxy-client.pem     | kube-apiserver-proxy-client-key.pem     |
-| Etcd Nodes                 | kube-etcd-x-x-x-x.pem               | kube-etcd-x-x-x-x-key.pem               |
-| Kube Api Request Header CA | kube-apiserver-requestheader-ca.pem | kube-apiserver-requestheader-ca-key.pem |
-| Service Account Token      | N/A                                 | kube-service-account-token-key.pem      |
+| 名称                       | 证书                                  | 密钥                                        |
+| :------------------------- | :------------------------------------ | :------------------------------------------ |
+| Master CA                  | kube-ca.pem                           | N/A                                         |
+| Kube API                   | kube-apiserver.pem                    | kube-apiserver-key.pem                      |
+| Kube Controller Manager    | kube-controller-manager.pem           | kube-controller-manager-key.pem             |
+| Kube Scheduler             | kube-scheduler.pem                    | kube-scheduler-key.pem                      |
+| Kube Proxy                 | kube-proxy.pem                        | kube-proxy-key.pem                          |
+| Kube Admin                 | kube-admin.pem                        | kube-admin-key.pem                          |
+| Kube Node                  | kube-node.pem                         | kube-node-key.pem                           |
+| Apiserver Proxy Client     | kube-apiserver-proxy-client.pem       | kube-apiserver-proxy-client-key.pem         |
+| Etcd Nodes                 | kube-etcd-x-x-x-x.pem                 | kube-etcd-x-x-x-x-key.pem                   |
+| Kube Api Request Header CA | kube-apiserver-requestheader-ca.pem\* | kube-apiserver-requestheader-ca-key.pem\*\* |
+| Service Account Token      | N/A                                   | kube-service-account-token-key.pem          |
+
+\*：和 kube-ca.pem 相同。
+
+\*\*：和 kube-ca-key 相同。
 
 ## 生成证书签名请求和密钥
 
