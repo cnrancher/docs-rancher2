@@ -95,6 +95,10 @@ services:
         region: "" # 可选填
         folder: "" # 可选填，RKE v0.3.0开始可用
         endpoint: s3.amazonaws.com #默认值为：s3.amazonaws.com
+        custom_ca: |-
+          -----BEGIN CERTIFICATE-----
+          $CERTIFICATE
+          -----END CERTIFICATE-----
 ```
 
 ## RKE v0.2.0 之前的版本
