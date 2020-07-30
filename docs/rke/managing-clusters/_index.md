@@ -1,32 +1,31 @@
 ---
-title: Adding and Removing Nodes
+title: 添加或删除节点
 ---
 
-### Adding/Removing Nodes
+## 添加或删除节点
 
-RKE supports adding/removing [nodes]({{<baseurl>}}/rke/latest/en/config-options/nodes/) for worker and controlplane hosts.
+RKE 支持为 worker 和 controlplane 主机添加或删除[节点](/docs/rke/config-options/nodes/_index)。
 
-In order to add additional nodes, you update the original `cluster.yml` file with any additional nodes and specify their role in the Kubernetes cluster.
+您可以通过修改`cluster.yml`文件的内容，添加额外的节点，并指定它们在 Kubernetes 集群中的角色；或从`cluster.yml`中的节点列表中删除节点信息，以达到删除节点的目的。
 
-In order to remove nodes, remove the node information from the nodes list in the original `cluster.yml`.
+## 添加或删除 worker 节点。
 
-After you've made changes to add/remove nodes, run `rke up` with the updated `cluster.yml`.
+通过运行`rke up --update-only`，您可以运行`rke up --update-only`命令，只添加或删除工作节点。这将会忽略除了`cluster.yml`中的工作节点以外的其他内容。
 
-### Adding/Removing Worker Nodes
+:::note 注意
+使用`--update-only`添加或删除 worker 节点时，可能会触发[插件](/docs/rke/config-options/add-ons/_index)或其他组件的重新部署或更新。
+:::
 
-You can add/remove only worker nodes, by running `rke up --update-only`. This will ignore everything else in the `cluster.yml` except for any worker nodes.
+## 移除节点中的 Kubernetes 组件
 
-> **Note:** When using `--update-only`, other actions that do not specifically relate to nodes may be deployed or updated, for example [addons]({{< baseurl >}}/rke/latest/en/config-options/add-ons).
+您可以使用`rke remove`命令从节点中移除 Kubernetes 组件。
 
-### Removing Kubernetes Components from Nodes
+:::warning 警告
+这个命令是**不可逆**的，这个命令会毁坏 Kubernetes 集群，包括 S3 上的 etcd 集群快照。如果发生灾难，将无法访问您的集群，请参考[从快照恢复集群](/docs/rke/etcd-snapshots/_index)的流程。
+:::
 
-In order to remove the Kubernetes components from nodes, you use the `rke remove` command.
+- `rke remove`命令会删除`cluster.yml`中的每个节点上面的 Kubernetes 组件，包括：
 
-> **Warning:** This command is irreversible and will destroy the Kubernetes cluster, including etcd snapshots on S3. If there is a disaster and your cluster is inaccessible, refer to the process for [restoring your cluster from a snapshot]({{<baseurl>}}rke/latest/en/etcd-snapshots/#etcd-disaster-recovery).
-
-The `rke remove` command does the following to each node in the `cluster.yml`:
-
-- Remove the Kubernetes component deployed on it
   - `etcd`
   - `kube-apiserver`
   - `kube-controller-manager`
@@ -34,11 +33,13 @@ The `rke remove` command does the following to each node in the `cluster.yml`:
   - `kube-proxy`
   - `nginx-proxy`
 
-The cluster's etcd snapshots are removed, including both local snapshots and snapshots that are stored on S3.
+- `rke remove`命令会删除集群的 etcd 快照，包括：
+  - 本地快照
+  - 存储在 S3 上的快照
 
-> **Note:** Pods are not removed from the nodes. If the node is re-used, the pods will automatically be removed when the new Kubernetes cluster is created.
+> **注意：** `rke remove`命令不会从节点上删除 Pods。如果节点被重复使用，那么在创建新的 Kubernetes 集群时，将自动删除 pod。
 
-- Clean each host from the directories left by the services:
+- `rke remove`命令会从服务留下的目录中清理每个主机。
   - /etc/kubernetes/ssl
   - /var/lib/etcd
   - /etc/cni
