@@ -81,10 +81,9 @@ module.exports = {
     customFields: {
         sidebars,
         metadata,
-        stable: "版本说明 - v2.4.5",
+        stable: "版本说明 - v2.4.4",
         baseCommit: "469e90ea8b83a78fc82feac9dc51266e690d6bdf - July 27, 2020",
         rkeBaseCommit:
-            "29992bb2ff420d53ca6c51b6520fe97a13c46c2d - June 4, 2020",
+            "469e90ea8b83a78fc82feac9dc51266e690d6bdf - July 27, 2020",
     },
-    plugins: ["@docusaurus/plugin-baidu-analytics"],
 };
