@@ -163,6 +163,10 @@ kube-system     coredns-d798c9dd-ljjnf                    1/1     Running   0   
 
 请按照[RKE 文档](https://rancher.com/docs/rke/latest/en/installation/)中的说明安装 RKE。
 
+:::note 提示
+国内用户，可以导航到 http://mirror.cnrancher.com 下载所需资源
+:::
+
 ### 2、创建 RKE 配置文件
 
 在本节中，您将创建一个名为`rancher-cluster.yml`的 Kubernetes 集群配置文件。在后续步骤中，当使用 RKE 命令设置集群时，它将使用此文件在节点上安装 Kubernetes。
