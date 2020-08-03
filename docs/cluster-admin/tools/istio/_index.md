@@ -82,7 +82,7 @@ Istio 的监控功能使您可以查看所有服务的性能。
 
 ## 架构
 
-Istio 安装了一个服务网格，该网格使用 [Envoy](https://www.envoyproxy.io/learn/service-mesh) sidecar 代理来拦截到每个工作负载的流量。这些 sidecar 拦截并管理服务到服务的通信，从而可以对集群内的流量进行细粒度的观察和控制。
+Istio 安装了一个服务网格，该网格使用 [Envoy](https://www.envoyproxy.io/docs/envoy/v1.15.0/intro/arch_overview/upstream/service_discovery.html/) sidecar 代理来拦截到每个工作负载的流量。这些 sidecar 拦截并管理服务到服务的通信，从而可以对集群内的流量进行细粒度的观察和控制。
 
 Istio 只能跟踪和控制已注入 Istio sidecar 的工作负载。
 

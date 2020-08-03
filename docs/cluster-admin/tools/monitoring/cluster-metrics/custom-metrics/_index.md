@@ -293,7 +293,7 @@ title: Prometheus自定义监控指标适配器
 
 - 查询（Querying）：说明了如何将查询 Kubernetes 参数的转换为 Prometheus 的查询语句。
 
-您可以查看更加具体的配置文件[sample-config.yaml](sample-config.yaml)获取详细的配置样例，也可参考下方的代码示例，查看如何配置只有一条规则的配置文件：
+您可以参考下方的代码示例，查看如何配置只有一条规则的配置文件：
 
 ```yaml
 rules:
