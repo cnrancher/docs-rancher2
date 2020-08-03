@@ -41,7 +41,11 @@ keywords:
 | [配置 Pod 安全策略](/docs/cluster-admin/pod-security-policy/_index)                                      | ✓                                                                                           |                                                                                        |                                                                               |
 | [运行安全扫描](/docs/security/security-scan/_index)                                                      | ✓                                                                                           |                                                                                        |                                                                               |
 
-\*：除了 [K3s 集群](/docs/cluster-provisioning/imported-clusters/_index#导入的-K3s-集群的其他功能)外，Rancher 不支持为其他类型的导入集群配置集群选项。
+<<<<<<< HEAD
+
+# \*：除了 [K3s 集群](/docs/cluster-provisioning/imported-clusters/_index#导入的-K3s-集群的其他功能)外，Rancher 不支持为其他类型的导入集群配置集群选项。
+
+> > > > > > > 9361071... RKE and Rancher2.x modifications
 
 ## 创建云供应商托管的 Kubernetes 集群
 
