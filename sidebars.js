@@ -23,7 +23,6 @@ module.exports = {
             "releases/v2.3.1",
             "releases/v2.3.0",
         ],
-        热点问题: ["trending-topics/_index"],
         产品介绍: [
             "overview/_index",
             "overview/architecture/_index",
