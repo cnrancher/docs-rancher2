@@ -215,7 +215,7 @@ keywords:
 
 配置了 AWS 后，需要创建虚拟机来引导集群。
 
-- master（etcd+controlplane）节点：部署三个 master 实例。更多信息请参见[生产就绪集群的建议](/docs/cluster-provisioning/production/_index.md)。
+- master（etcd+controlplane）节点：部署三个 master 实例。更多信息请参见[生产就绪集群的建议](/docs/cluster-provisioning/production/_index)。
 
   - IAM 角色：`K8sMasterRole`
   - 安全组：`K8sMasterSg`
