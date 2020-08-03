@@ -1,25 +1,32 @@
 const metadata = {
     categories: {
         版本说明: "为您介绍Rancher容器平台每个版本的功能和新增特性",
-        产品介绍: "为您提供Rancher容器平台的产品介绍、产品架构、推荐架构和Kubernetes基础概念",
-        快速入门: "为您提供Rancher容器平台的基本使用方法，通过简易demo教学，帮助您体验Rancher容器平台",
+        热点问题: "为您介绍Rancher用户近期的热点问题和解决方法",
+        产品介绍:
+            "为您提供Rancher容器平台的产品介绍、产品架构、推荐架构和Kubernetes基础概念",
+        快速入门:
+            "为您提供Rancher容器平台的基本使用方法，通过简易demo教学，帮助您体验Rancher容器平台",
         安装指南: "为您提供在不同环境中安装Rancher容器平台的操作指导",
         升级和回滚: "为您提供升级和回滚Rancher容器平台的操作指导",
         备份和恢复指南: "为您提供备份和恢复Rancher容器平台数据的操作指导",
         最佳实践: "为您提供Rancher容器平台的部署策略和配置建议",
-        系统管理员指南: "指导系统管理员如何使用Rancher容器平台提供的系统管理功能",
+        系统管理员指南:
+            "指导系统管理员如何使用Rancher容器平台提供的系统管理功能",
         创建集群: "为您介绍如何通过多种方式创建您所需要的Kubernetes集群",
         集群管理员指南: "为您提供Rancher容器平台集群管理功能的操作指导",
         项目管理员指南: "为您提供指Rancher容器平台项目管理功能的操作指导",
         用户指南: "为您提供Rancher容器平台普通用户功能的操作指导",
         应用商店: "为您介绍Rancher容器平台中的应用商店、Helm Chart和应用",
         Rancher命令行: "为您提供Rancher命令行工具（Rancher CLI）的操作指导",
-        系统工具: "为您介绍如何使用Rancher容器平台自带的系统工具收集日志、监控集群资源和移除Kubernetes资源",
+        系统工具:
+            "为您介绍如何使用Rancher容器平台自带的系统工具收集日志、监控集群资源和移除Kubernetes资源",
         用户设置: "为您介绍Rancher容器平台提供的用户设置功能",
         API: "如何使用Rancher容器平台API",
-        安全: "为您提供Rancher容器平台的安全报告、安全加固指南、安全扫描报告和性能测试报告",
+        安全:
+            "为您提供Rancher容器平台的安全报告、安全加固指南、安全扫描报告和性能测试报告",
         常见问题: "为您提供在使用本服务的过程中，可能会遇到典型问题和解决方法",
-        常见故障排查: "为您提供在使用本服务的过程中，可能会遇到的典型报错，以及排查和定位问题的方法",
+        常见故障排查:
+            "为您提供在使用本服务的过程中，可能会遇到的典型报错，以及排查和定位问题的方法",
         版本迁移: "为您介绍如何从Rancher容器平台1.6版本迁移到2.x版本",
     },
     docs: {
@@ -37,6 +44,7 @@ const metadata = {
         "releases/v2.3.2": "版本说明 - v2.3.2",
         "releases/v2.3.1": "版本说明 - v2.3.1",
         "releases/v2.3.0": "版本说明 - v2.3.0",
+        "trending-topics/_index": "热点问题",
         "overview/_index": "产品简介",
         "overview/architecture/_index": "产品架构",
         "overview/architecture-recommendations/_index": "推荐架构",
@@ -48,7 +56,8 @@ const metadata = {
         "quick-start-guide/workload/_index": "部署工作负载",
         "installation/requirements/_index": "安装要求",
         "installation/k8s-install/_index": "高可用安装",
-        "installation/other-installation-methods/single-node-docker/_index": "单节点安装",
+        "installation/other-installation-methods/single-node-docker/_index":
+            "单节点安装",
         "installation/other-installation-methods/air-gap/_index": "离线安装",
         "upgrades/upgrades/ha/_index": "升级高可用 Rancher",
         "upgrades/upgrades/single-node/_index": "升级单节点 Rancher",
@@ -58,8 +67,10 @@ const metadata = {
         "backups/backups/k3s-backups/_index": "备份 K3s 高可用 Rancher",
         "backups/backups/single-node-backups/_index": "备份单节点 Rancher",
         "backups/restorations/ha-restoration/_index": "恢复 RKE 高可用 Rancher",
-        "backups/restorations/k3s-restoration/_index": "恢复 K3s 高可用 Rancher",
-        "backups/restorations/single-node-restoration/_index": "恢复单节点 Rancher",
+        "backups/restorations/k3s-restoration/_index":
+            "恢复 K3s 高可用 Rancher",
+        "backups/restorations/single-node-restoration/_index":
+            "恢复单节点 Rancher",
         "best-practices/deployment-strategies/_index": "Rancher 部署策略",
         "best-practices/deployment-types/_index": "运行 Rancher",
         "best-practices/containers/_index": "容器配置",
@@ -71,23 +82,30 @@ const metadata = {
         "admin-settings/drivers/cluster-drivers/_index": "集群驱动",
         "admin-settings/drivers/node-drivers/_index": "主机驱动",
         "cluster-provisioning/production/_index": "创建生产可用集群",
-        "cluster-provisioning/hosted-kubernetes-clusters/_index": "创建托管集群",
-        "cluster-provisioning/rke-clusters/custom-nodes/_index": "在现有节点上创建 RKE 集群",
-        "cluster-provisioning/rke-clusters/node-pools/_index": "通过主机驱动创建 RKE 集群",
+        "cluster-provisioning/hosted-kubernetes-clusters/_index":
+            "创建托管集群",
+        "cluster-provisioning/rke-clusters/custom-nodes/_index":
+            "在现有节点上创建 RKE 集群",
+        "cluster-provisioning/rke-clusters/node-pools/_index":
+            "通过主机驱动创建 RKE 集群",
         "cluster-provisioning/imported-clusters/_index": "导入已有集群",
-        "cluster-provisioning/rke-clusters/windows-clusters/_index": "创建 Windows 集群",
-        "cluster-provisioning/rke-clusters/cloud-providers/_index": "配置 Cloud Provider",
+        "cluster-provisioning/rke-clusters/windows-clusters/_index":
+            "创建 Windows 集群",
+        "cluster-provisioning/rke-clusters/cloud-providers/_index":
+            "配置 Cloud Provider",
         "cluster-admin/cluster-access/_index": "访问控制",
         "cluster-admin/upgrading-kubernetes/_index": "升级 Kubernetes 版本",
         "cluster-admin/pod-security-policy/_index": "设置 Pod 安全策略",
         "cluster-admin/editing-clusters/_index": "编辑集群",
         "cluster-admin/nodes/_index": "节点和节点池",
-        "cluster-admin/projects-and-namespaces/_index": "项目和 Kubernetes 命名空间",
+        "cluster-admin/projects-and-namespaces/_index":
+            "项目和 Kubernetes 命名空间",
         "cluster-admin/tools/monitoring/_index": "集群监控",
         "cluster-admin/tools/logging/_index": "集群日志",
         "cluster-admin/tools/alerts/_index": "集群告警",
         "cluster-admin/tools/istio/_index": "服务网格（Istio）",
-        "cluster-admin/tools/opa-gatekeeper/_index": "政策管理（OPA Gatekeeper）",
+        "cluster-admin/tools/opa-gatekeeper/_index":
+            "政策管理（OPA Gatekeeper）",
         "cluster-admin/certificate-rotation/_index": "轮换证书",
         "cluster-admin/backing-up-etcd/_index": "备份集群",
         "cluster-admin/restoring-etcd/_index": "恢复集群",
@@ -102,7 +120,8 @@ const metadata = {
         "project-admin/pod-security-policies/_index": "Pod 安全策略",
         "k8s-in-rancher/workloads/_index": "工作负载",
         "k8s-in-rancher/horitzontal-pod-autoscaler/_index": "Pod 弹性伸缩",
-        "k8s-in-rancher/load-balancers-and-ingress/_index": "负载均衡和 Ingress",
+        "k8s-in-rancher/load-balancers-and-ingress/_index":
+            "负载均衡和 Ingress",
         "k8s-in-rancher/service-discovery/_index": "服务发现",
         "k8s-in-rancher/pipelines/_index": "CI/CD 流水线",
         "k8s-in-rancher/certificates/_index": "证书，加密HTTP通信",
@@ -135,9 +154,12 @@ const metadata = {
         "faq/telemetry/_index": "遥测问题",
         "faq/removing-rancher/_index": "卸载 Rancher",
         "troubleshooting/kubernetes-components/etcd/_index": "etcd 节点",
-        "troubleshooting/kubernetes-components/controlplane/_index": "管理平面节点",
-        "troubleshooting/kubernetes-components/nginx-proxy/_index": "NGINX 代理",
-        "troubleshooting/kubernetes-components/worker-and-generic/_index": "Worker 节点和其他组件",
+        "troubleshooting/kubernetes-components/controlplane/_index":
+            "管理平面节点",
+        "troubleshooting/kubernetes-components/nginx-proxy/_index":
+            "NGINX 代理",
+        "troubleshooting/kubernetes-components/worker-and-generic/_index":
+            "Worker 节点和其他组件",
         "troubleshooting/kubernetes-resources/_index": "Kubernetes 资源",
         "troubleshooting/networking/_index": "网络",
         "troubleshooting/dns/_index": "DNS",
