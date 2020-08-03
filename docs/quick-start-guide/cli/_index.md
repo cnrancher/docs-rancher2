@@ -25,6 +25,10 @@ Rancher CLI(命令行界面)是一个命令行工具，可用于与 Rancher 进�
 
 请先安装`kubectl`，详情请参考[安装 kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl)。
 
+:::note 提示
+国内用户，可以导航到 http://mirror.cnrancher.com 下载所需资源
+:::
+
 通过 Rancher UI 访问您的集群，然后单击集群仪表盘页面右上角的`Kubeconfig 文件`，配置 kubectl，把内容复制粘贴到`~/.kube/config`文件内即可。
 
 检查是否可以成功运行`kubectl cluster-info` 或 `kubectl get pods`命令。

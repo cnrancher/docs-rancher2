@@ -57,6 +57,10 @@ Rancher Server 只能在使用 RKE 或 K3s 安装的 Kubernetes 集群中运行�
 - [k3s](https://rancher.com/docs/k3s/latest/en/) - Rancher K3s。
 - [helm](https://docs.helm.sh/using_helm/#installing-helm) - Kubernetes 的软件包管理工具。请参阅[Helm 版本要求](/docs/installation/options/helm-version/_index)选择 Helm 的版本来安装 Rancher。
 
+:::note 提示
+国内用户，可以导航到 http://mirror.cnrancher.com 下载所需资源
+:::
+
 ## 安装摘要
 
 - [配置基础设施](/docs/installation/k8s-install/create-nodes-lb/_index)
