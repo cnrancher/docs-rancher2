@@ -40,7 +40,7 @@ $ rke etcd snapshot-restore --config cluster.yml --name mysnapshot
 当从位于 S3 的快照中还原 etcd 时，命令需要 S3 信息才能连接到 S3 后台并检索快照。
 
 ```shell
-$ rke etcd snapshot-restore \
+rke etcd snapshot-restore \
 --config cluster.yml \
 --name snapshot-name \
 --s3 \
@@ -73,12 +73,12 @@ $ rke etcd snapshot-restore \
 
 如果您的 Kubernetes 集群发生了灾难，您可以使用`rke etcd snapshot-restore`来恢复您的 etcd。这个命令可以将 etcd 恢复到特定的快照，应该在遭受灾难的特定集群的 etcd 节点上运行。
 
-当您运行该命令时，将执行以下操作。
+当您运行该命令时，将执行以下操作：
 
 - 移除旧的 etcd 集群
 - 使用本地快照重建 etcd 群集。
 
-在运行这个命令之前，您必须
+在运行这个命令之前，您必须:
 
 - 运行 "rke remove "来移除 Kubernetes 集群并清理节点。
 - 从 S3 下载您的 etcd 快照（如果适用）。将 etcd 快照和`pki.bundle.tar.gz`文件放在`/opt/rke/etcd-snapshots`中。手动同步所有`etcd`节点的快照。
@@ -89,10 +89,10 @@ $ rke etcd snapshot-restore \
 
 ### 从本地快照恢复的示例
 
-要从本地快照中还原 etcd，请运行：
+请运行以下命令，从本地快照中还原 etcd：
 
 ```
-$ rke etcd snapshot-restore --config cluster.yml --name mysnapshot
+rke etcd snapshot-restore --config cluster.yml --name mysnapshot
 ```
 
 假设快照位于`/opt/rke/etcd-snapshots`中。
