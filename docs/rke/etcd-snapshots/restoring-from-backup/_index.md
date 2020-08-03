@@ -1,47 +1,43 @@
 ---
-title: Restoring from Backup
-weight: 3
+title: 使用备份恢复集群
 ---
 
-The details of restoring your cluster from backup are different depending on your version of RKE.
-
-{{% tabs %}}
-{{% tab "RKE v0.2.0+"%}}
+使用备份恢复群集的操作步骤如下，请根据您使用的 RKE 版本获取对应的操作指导说明。
 
 ## 0.2.0 +
 
-If there is a disaster with your Kubernetes cluster, you can use `rke etcd snapshot-restore` to recover your etcd. This command reverts etcd to a specific snapshot and should be run on an etcd node of the the specific cluster that has suffered the disaster.
+如果您的 Kubernetes 集群发生了灾难，您可以使用`rke etcd snapshot-restore`来恢复您的 etcd。这个命令可以将 etcd 恢复到特定的快照，应该在遭受灾难的特定集群的 etcd 节点上运行。
 
-The following actions will be performed when you run the command:
+当您运行该命令时，将执行以下操作。
 
-- Syncs the snapshot or downloads the snapshot from S3, if necessary.
-- Checks snapshot checksum across etcd nodes to make sure they are identical.
-- Deletes your current cluster and cleans old data by running `rke remove`. This removes the entire Kubernetes cluster, not just the etcd cluster.
-- Rebuilds the etcd cluster from the chosen snapshot.
-- Creates a new cluster by running `rke up`.
-- Restarts cluster system pods.
+- 同步快照或从 S3 下载快照(如有必要)。
+- 跨 etcd 节点检查快照校验和，确保它们是相同的。
+- 通过运行`rke remove`删除您当前的集群并清理旧数据。这将删除整个 Kubernetes 集群，而不仅仅是 etcd 集群。
+- 从选择的快照重建 etcd 群集。
+- 通过运行`rke up`创建一个新的集群。
+- 重新启动集群系统 pod。
 
-> **Warning:** You should back up any important data in your cluster before running `rke etcd snapshot-restore` because the command deletes your current Kubernetes cluster and replaces it with a new one.
+> **警告：**在运行`rke etcd snapshot-restore`之前，您应该备份集群中的任何重要数据，因为该命令会删除您当前的 Kubernetes 集群，并用新的集群替换。
 
-The snapshot used to restore your etcd cluster can either be stored locally in `/opt/rke/etcd-snapshots` or from a S3 compatible backend.
+用于恢复 etcd 集群的快照可以存储在本地的`/opt/rke/etcd-snapshots`中，也可以从 S3 兼容的后端存储。
 
-### Example of Restoring from a Local Snapshot
+### 从本地快照恢复的示例
 
-To restore etcd from a local snapshot, run:
+请运行以下命令，从本地快照中还原 etcd：
 
 ```
 $ rke etcd snapshot-restore --config cluster.yml --name mysnapshot
 ```
 
-The snapshot is assumed to be located in `/opt/rke/etcd-snapshots`.
+假设快照位于`/opt/rke/etcd-snapshots`中。
 
-**Note:** The `pki.bundle.tar.gz` file is not needed because RKE v0.2.0 changed how the [Kubernetes cluster state is stored]({{<baseurl>}}/rke/latest/en/installation/#kubernetes-cluster-state).
+**注意：**不需要`pki.bundle.tar.gz`文件，因为 RKE v0.2.0 改变了[Kubernetes 集群状态的存储方式](/docs/rke/installation/_index)。
 
-### Example of Restoring from a Snapshot in S3
+### 在 S3 中从快照恢复的例子
 
-> **Prerequisite:** Ensure your `cluster.rkestate` is present before starting the restore, because this contains your certificate data for the cluster.
+> **前提条件：** 确保在开始还原之前，您的 `cluster.rkestate`已经存在，因为它包含了集群的证书数据。
 
-When restoring etcd from a snapshot located in S3, the command needs the S3 information in order to connect to the S3 backend and retrieve the snapshot.
+当从位于 S3 的快照中还原 etcd 时，命令需要 S3 信息才能连接到 S3 后台并检索快照。
 
 ```shell
 $ rke etcd snapshot-restore \
@@ -55,67 +51,61 @@ $ rke etcd snapshot-restore \
 --s3-endpoint s3.amazonaws.com
 ```
 
-**Note:** if you were restoring a cluster that had Rancher installed, the Rancher UI should start up after a few minutes; you don't need to re-run Helm.
+**注：**如果您是在恢复安装了 Rancher 的群集，Rancher 用户界面应该在几分钟后启动；您不需要重新运行 Helm。
 
-### Options for `rke etcd snapshot-restore`
+### `rke etcd snapshot-restore`的选项
 
-| Option                    | Description                                                                                                            | S3 Specific |
-| ------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ----------- |
-| `--name` value            | Specify snapshot name                                                                                                  |             |
-| `--config` value          | Specify an alternate cluster YAML file (default: `cluster.yml`) [$RKE_CONFIG]                                          |             |
-| `--s3`                    | Enabled backup to s3                                                                                                   | \*          |
-| `--s3-endpoint` value     | Specify s3 endpoint url (default: "s3.amazonaws.com")                                                                  | \*          |
-| `--access-key` value      | Specify s3 accessKey                                                                                                   | \*          |
-| `--secret-key` value      | Specify s3 secretKey                                                                                                   | \*          |
-| `--bucket-name` value     | Specify s3 bucket name                                                                                                 | \*          |
-| `--folder` value          | Specify folder inside bucket where backup will be stored. This is optional. This is optional. _Available as of v0.3.0_ | \*          |
-| `--region` value          | Specify the s3 bucket location (optional)                                                                              | \*          |
-| `--ssh-agent-auth`        | [Use SSH Agent Auth defined by SSH_AUTH_SOCK]({{<baseurl>}}/rke/latest/en/config-options/#ssh-agent)                   |             |
-| `--ignore-docker-version` | [Disable Docker version check]({{<baseurl>}}/rke/latest/en/config-options/#supported-docker-versions)                  |
-
-{{% /tab %}}
-{{% tab "RKE prior to v0.2.0"%}}
+| 选项                      | 描述                                                                        | S3 相关参数 |
+| :------------------------ | :-------------------------------------------------------------------------- | :---------- |
+| `--name`                  | 指定快照 name                                                               |             |
+| `--config`                | 指定一个备用的集群 YAML 文件（默认：`cluster.yml`） [$RKE_CONFIG]           |             |
+| `--s3`                    | 启用备份到 s3                                                               |             |
+| `--s3-endpoint`           | 指定 s3 端点网址（默认："s3.amazonaws.com"）。                              | \*          |
+| `--access-key`            | 指定 s3 accessKey                                                           | \*          |
+| `--secret-key`            | 指定 s3 secretKey                                                           | \*          |
+| `--bucket-name`           | 指定 s3 bucket name                                                         | \*          |
+| `--folder`                | 指定存放备份的桶内文件夹。这是可选的。这是可选的。_从 v0.3.0 开始提供_。    | \*          |
+| `--region`                | Specify the s3 bucket location (optional)                                   | \*          |
+| `--ssh-agent-auth`        | [使用由 SSH_AUTH_SOCK 定义的 SSH 代理授权](/docs/rke/config-options/_index) |             |
+| `--ignore-docker-version` | [禁用 Docker 版本检查](/docs/rke/config-options/_index)                     |
 
 ## 0.2.0 -
 
-If there is a disaster with your Kubernetes cluster, you can use `rke etcd snapshot-restore` to recover your etcd. This command reverts etcd to a specific snapshot and should be run on an etcd node of the the specific cluster that has suffered the disaster.
+如果您的 Kubernetes 集群发生了灾难，您可以使用`rke etcd snapshot-restore`来恢复您的 etcd。这个命令可以将 etcd 恢复到特定的快照，应该在遭受灾难的特定集群的 etcd 节点上运行。
 
-The following actions will be performed when you run the command:
+当您运行该命令时，将执行以下操作。
 
-- Removes the old etcd cluster
-- Rebuilds the etcd cluster using the local snapshot
+- 移除旧的 etcd 集群
+- 使用本地快照重建 etcd 群集。
 
-Before you run this command, you must:
+在运行这个命令之前，您必须
 
-- Run `rke remove` to remove your Kubernetes cluster and clean the nodes
-- Download your etcd snapshot from S3, if applicable. Place the etcd snapshot and the `pki.bundle.tar.gz` file in `/opt/rke/etcd-snapshots`. Manually sync the snapshot across all `etcd` nodes.
+- 运行 "rke remove "来移除 Kubernetes 集群并清理节点。
+- 从 S3 下载您的 etcd 快照（如果适用）。将 etcd 快照和`pki.bundle.tar.gz`文件放在`/opt/rke/etcd-snapshots`中。手动同步所有`etcd`节点的快照。
 
-After the restore, you must rebuild your Kubernetes cluster with `rke up`.
+还原后，您必须使用`rke up`重建 Kubernetes 集群。
 
-> **Warning:** You should back up any important data in your cluster before running `rke etcd snapshot-restore` because the command deletes your current etcd cluster and replaces it with a new one.
+> **警告：**在运行`rke etcd snapshot-restore`之前，您应该备份集群中的任何重要数据，因为该命令会删除您当前的 etcd 集群，并以一个新的集群替换。
 
-### Example of Restoring from a Local Snapshot
+### 从本地快照恢复的示例
 
-To restore etcd from a local snapshot, run:
+要从本地快照中还原 etcd，请运行：
 
 ```
 $ rke etcd snapshot-restore --config cluster.yml --name mysnapshot
 ```
 
-The snapshot is assumed to be located in `/opt/rke/etcd-snapshots`.
+假设快照位于`/opt/rke/etcd-snapshots`中。
 
-The snapshot must be manually synched across all `etcd` nodes.
+快照必须在所有`etcd`节点上手动同步。
 
-The `pki.bundle.tar.gz` file is also expected to be in the same location.
+`pki.bundle.tar.gz`文件也应在同一位置。
 
-### Options for `rke etcd snapshot-restore`
+### `rke etcd snapshot-restore`的选项
 
-| Option                    | Description                                                                                           |
-| ------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `--name` value            | Specify snapshot name                                                                                 |
-| `--config` value          | Specify an alternate cluster YAML file (default: `cluster.yml`) [$RKE_CONFIG]                         |
-| `--ssh-agent-auth`        | [Use SSH Agent Auth defined by SSH_AUTH_SOCK]({{<baseurl>}}/rke/latest/en/config-options/#ssh-agent)  |
-| `--ignore-docker-version` | [Disable Docker version check]({{<baseurl>}}/rke/latest/en/config-options/#supported-docker-versions) |
-
-{{% /tab %}}
-{{% /tabs %}}
+| 选项                      | 描述                                                                        |
+| :------------------------ | :-------------------------------------------------------------------------- |
+| `--name`                  | 指定快照名称                                                                |
+| `--config`                | 指定一个备用的集群 YAML 文件（默认：`cluster.yml`） [$RKE_CONFIG]           |
+| `--ssh-agent-auth`        | [使用由 SSH_AUTH_SOCK 定义的 SSH 代理授权](/docs/rke/config-options/_index) |
+| `--ignore-docker-version` | [禁用 Docker 版本检查](/docs/rke/config-options/_index)                     |
