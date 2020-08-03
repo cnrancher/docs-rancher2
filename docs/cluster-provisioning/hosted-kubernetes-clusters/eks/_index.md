@@ -37,6 +37,8 @@ Rancher 需要访问您的 AWS 帐户，以便在 Amazon EKS 中创建和管理�
 
 2. 下一步，创建 IAM 策略，定义该用户在 AWS 账户中有权访问的内容。请务必仅授予此用户所需要的最小权限。请按照[此处](https://docs.aws.amazon.com/eks/latest/userguide/EKS_IAM_user_policies.html)的步骤来创建 IAM 策略并将其附加到用户。
 
+下一步，创建 IAM 策略，定义该用户在 AWS 账户中有权访问的内容。请参考[最小权限](#附录-最小-EKS-权限)，为该用户配置所需要的最小权限。按照步骤[这里](https://docs.aws.amazon.com/eks/latest/userguide/EKS_IAM_user_policies.html)创建 IAM 策略并将其附加到你的用户。
+
 3. 最后，按照[此处](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)的步骤为此用户创建 Access Key 和 Secret Key。
 
 > **注意:** 定期轮换 Access Key 和 Secret Key 非常重要，参考[文档](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#rotating_access_keys_console)了解更多信息。
@@ -279,7 +281,8 @@ AWS 开源博客上的这篇[教程](https://aws.amazon.com/blogs/opensource/man
         "cloudformation:DescribeStackResources",
         "cloudformation:DescribeStacks",
         "cloudformation:ListStacks",
-        "cloudformation:CreateStack"
+        "cloudformation:CreateStack",
+        "cloudformation:DeleteStack"
       ],
       "Resource": "*"
     },

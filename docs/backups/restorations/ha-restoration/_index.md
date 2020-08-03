@@ -16,17 +16,17 @@ keywords:
   - RKE Rancher 高可用恢复
 ---
 
-此过程描述了如何使用 RKE 根据快照还原 Rancher Kubernetes 集群的数据。集群快照将包括 Kubernetes 配置以及 Rancher 数据库和状态。
+此过程描述了如何使用 RKE 根据快照恢复 Rancher Kubernetes 集群的数据。集群快照了包括 Kubernetes 配置以及 Rancher 数据库和状态。使用集群快照恢复时，Kubernetes 配置以及 Rancher 数据库和状态都会被恢复到制作快照那一刻的状态，不会保留在制作快照之后进行的更改。
 
 此外，由于 v0.2.0 更改了 [Kubernetes 集群状态的存储方式](https://rancher.com/docs/rke/latest/en/installation/#kubernetes-cluster-state)，因此不再需要使用 `pki.bundle.tar.gz` 文件。
 
 ## 1. 准备
 
-您需要安装 [RKE](https://rancher.com/docs/rke/latest/en/installation/) 和 [kubectl](https://rancher.com/docs/rancher/v2.x/en/faq/kubectl/) CLI 工具。
+建议您从储存 cluster yaml、rke statefile 和 kubeconfig 的主机或堡垒机上进行高可用恢复。您需要安装 [RKE](https://rancher.com/docs/rke/latest/en/installation/) 和 [kubectl](https://rancher.com/docs/rancher/v2.x/en/faq/kubectl/) CLI 工具。
 
-准备 3 个新节点作为还原的 Rancher 实例的目标。请参阅[高可用安装](/docs/installation/k8s-install/create-nodes-lb/_index)以了解节点要求。
+准备 3 个新节点作为还原的 Rancher 实例的目标。请参阅[高可用安装](/docs/installation/k8s-install/create-nodes-lb/_index)以了解节点要求。我们建议您使用新建的节点和干净状态开始准备工作，详情请参考[节点要求](/docs/installation/requirements/_index)。
 
-我们建议您从新节点和干净状态开始。或者，您可以从现有节点清除 Kubernetes 和 Rancher 配置。这将破坏这些节点上的数据。有关过程，请参阅[节点清理](/docs/cluster-admin/cleaning-cluster-nodes/_index)。
+您也可以使用已有的节点进行准备工作，但是您需要清理节点内的数据和 Rancher 配置。该操作会抹去已有节点内的所有数据和配置，请谨慎使用。清理节点的详细操作指导请参考[清理节点](/docs/cluster-admin/cleaning-cluster-nodes/_index/)。
 
 > **重要:** 在开始还原之前，请确保旧集群节点上的所有 Kubernetes 服务都已停止。我们建议关闭这些旧的节点。
 

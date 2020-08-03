@@ -19,7 +19,7 @@ keywords:
 
 本节介绍在离线环境中安装 Rancher Server 的操作步骤。具体步骤因安装方式而异，详情请参考[安装介绍](/docs/installation/_index)。
 
-> **重要：** Docker 单节点安装 Rancher 法迁移到高可用安装。因为没有升级路径可以将 Docker 安装过渡到 Kubernetes 安装。
+> **重要：** Docker 单节点安装 Rancher 无法迁移到高可用安装。因为没有升级路径可以将 Docker 安装过渡到 Kubernetes 安装。
 
 ## 安装概要
 

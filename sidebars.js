@@ -8,6 +8,7 @@
 module.exports = {
     docs: {
         版本说明: [
+            "releases/v2.4.5",
             "releases/v2.4.4",
             "releases/v2.4.3",
             "releases/v2.4.2",
@@ -168,6 +169,8 @@ module.exports = {
                     "installation/options/server-tags/_index",
                     "installation/options/single-node-install-external-lb/_index",
                     "installation/options/nginx/_index",
+                    "installation/options/F5-7-layer-loadbalancer/_index",
+                    "installation/options/F5-WAF/_index",
                     "installation/options/tls-secrets/_index",
                     "installation/options/chart-options/_index",
                     {
@@ -235,6 +238,17 @@ module.exports = {
                     "installation/options/tls-settings/_index",
                     "installation/options/firewall/_index",
                     "installation/options/self-signed-ssl/_index",
+                    {
+                        type: "category",
+                        label: "cluster.yml 文件模板",
+                        items: [
+                            "installation/options/cluster-yml-templates/_index",
+                            "installation/options/cluster-yml-templates/3-node-certificate/_index",
+                            "installation/options/cluster-yml-templates/3-node-certificate-recognizedca/_index",
+                            "installation/options/cluster-yml-templates/3-node-externalssl-certificate/_index",
+                            "installation/options/cluster-yml-templates/3-node-externalssl-recognizedca/_index",
+                        ],
+                    },
                 ],
             },
         ],
@@ -498,6 +512,14 @@ module.exports = {
                     "cluster-admin/cluster-access/cluster-members/_index",
                 ],
             },
+            {
+                type: "category",
+                label: "集群弹性伸缩",
+                items: [
+                    "cluster-admin/cluster-autoscaler/_index",
+                    "cluster-admin/cluster-autoscaler/amazon/_index",
+                ],
+            },
             "cluster-admin/upgrading-kubernetes/_index",
             "cluster-admin/pod-security-policy/_index",
             "cluster-admin/editing-clusters/_index",
@@ -543,6 +565,7 @@ module.exports = {
                         type: "category",
                         label: "Istio",
                         items: [
+                            "cluster-admin/tools/istio/release-notes/_index",
                             "cluster-admin/tools/istio/_index",
                             "cluster-admin/tools/istio/resources/_index",
                             {
@@ -587,7 +610,14 @@ module.exports = {
                         label: "监控",
                         items: [
                             "cluster-admin/tools/monitoring/_index",
-                            "cluster-admin/tools/monitoring/cluster-metrics/_index",
+                            {
+                                type: "category",
+                                label: "集群参数",
+                                items: [
+                                    "cluster-admin/tools/monitoring/cluster-metrics/_index",
+                                    "cluster-admin/tools/monitoring/cluster-metrics/custom-metrics/_index",
+                                ],
+                            },
                             "cluster-admin/tools/monitoring/expression/_index",
                             "cluster-admin/tools/monitoring/prometheus/_index",
                             "cluster-admin/tools/monitoring/viewing-metrics/_index",

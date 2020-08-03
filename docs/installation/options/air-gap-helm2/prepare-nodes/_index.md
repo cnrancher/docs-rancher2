@@ -91,8 +91,13 @@ Rancher 建议在 Kubernetes 集群上安装 Rancher。一个高可用的 Kubern
 
 **负载均衡器配置示例：**
 
-- 有关如何设置 NGINX 负载均衡器的示例，请参考[此页](/docs/installation/options/nginx/_index)。
-- 有关如何设置 Amazon NLB 负载均衡器的示例，请参考[此页](/docs/installation/options/nlb/_index)。
+- 有关如何设置 NGINX 负载均衡器的示例，请参考[本页](/docs/installation/options/nginx/_index)。
+
+- 有关如何设置 Amazon ELB Network Load Balancer 的示例，请参考[本页](/docs/installation/options/nlb/_index)。
+
+- 有关如何配置 F5 作为 Rancher 前端 7 层负载均衡器的示例，请参考[本页](/docs/installation/options/F5-7-layer-loadbalancer/_index)。
+
+- 有关如何为 F5 启动 WAF 功能的示例，请参考[本页](/docs/installation/options/F5-WAF/_index)。
 
 ### Docker 安装
 

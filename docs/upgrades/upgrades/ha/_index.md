@@ -1,5 +1,5 @@
 ---
-title: 高可用升级指南
+title: 高可用升级指南（Helm 3）
 description: 以下说明将指导您使用 Helm 升级 Kubernetes 集群上安装的 Rancher Server。
 keywords:
   - rancher 2.0中文文档
@@ -13,7 +13,7 @@ keywords:
   - rancher2.0 中文教程
   - 升级和回滚
   - 升级高可用Rancher
-  - 高可用升级指南
+  - 高可用升级指南（Helm 3）
 ---
 
 以下说明将指导您使用 Helm 升级 Kubernetes 集群上安装的 Rancher Server。

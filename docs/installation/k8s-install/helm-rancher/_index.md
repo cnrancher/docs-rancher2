@@ -39,6 +39,10 @@ Rancher 使用 Kubernetes 的 Helm 软件包管理器安装。Helm Charts 为 Ku
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl) - Kubernetes 命令行工具。
 - [helm](https://docs.helm.sh/using_helm/#installing-helm) - Kubernetes 的软件包管理工具。请参阅 [Helm 版本要求](/docs/installation/options/helm-version/_index)以选择要安装 Rancher 的 Helm 版本。
 
+:::note 提示
+国内用户，可以导航到 http://mirror.cnrancher.com 下载所需资源
+:::
+
 ## 2、添加 Helm Chart 仓库
 
 使用`helm repo add`命令添加含有 Rancher Chart 的 Helm Chart 仓库。

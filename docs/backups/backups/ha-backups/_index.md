@@ -93,6 +93,10 @@ keywords:
            folder: "folder-name" # Available as of v2.3.0
            endpoint: "s3.eu-west-1.amazonaws.com"
            region: "eu-west-1"
+           custom_ca: |-
+             -----BEGIN CERTIFICATE-----
+             $CERTIFICATE
+             -----END CERTIFICATE-----
    ```
 
    _RKE v0.1.x_

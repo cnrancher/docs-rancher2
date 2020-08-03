@@ -27,6 +27,7 @@ _v2.0.7 版本可用_
 > - 以下是 Rancher 服务提供者配置所需的 URLs：
 >   - Metadata URL：`https://<rancher-server>/v1-saml/ping/saml/metadata`
 >   - Assertion Consumer Service(ACS) URL：`https://<rancher-server>/v1-saml/ping/saml/acs`
+>   - 请注意，在 Rancher 中保存验证配置之前，这些 URL 不会返回有效数据。
 > - 从 IdP 服务器导出元数据`metadata.xml`文件。有关更多信息，请参见[PingIdentity 文档](https://docs.pingidentity.com/bundle/integrations/page/mcz1588209689936.html)。
 
 1. 在**全局**视图中，从主菜单中选择**安全 > 认证**。

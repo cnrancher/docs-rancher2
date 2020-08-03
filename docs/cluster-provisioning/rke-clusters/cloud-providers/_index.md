@@ -24,7 +24,7 @@ keywords:
 
 默认情况下，**Cloud Provider** 选项设置为`None`。
 
-支持的 Cloud Provider 包括：
+Rancher 支持的 Cloud Provider 包括：
 
 - Amazon
 - Azure

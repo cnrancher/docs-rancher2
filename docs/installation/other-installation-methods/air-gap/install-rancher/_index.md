@@ -224,6 +224,8 @@ kubectl -n cattle-system apply -R -f ./rancher
 
 **步骤结果：** 如果您在安装 Rancher v2.3.0+，则安装完成。
 
+**说明：** 如果您不打算发送遥测数据，请在初始登录时选择退出[遥测](/docs/faq/telemetry/_index)。
+
 ### 针对 Rancher 2.3.0 之前版本配置 system-chart
 
 如果要安装 v2.3.0 之前的 Rancher 版本，则将无法使用内置打包的 system-charts。由于 Rancher system-charts 托管在 Github 中，因此，离线安装将无法访问 charts。因此，您必须[配置 Rancher system-charts](/docs/installation/options/local-system-charts/_index)。
@@ -296,7 +298,7 @@ docker run -d --restart=unless-stopped \
 | `<CERT_DIRECTORY>`               | 证书文件所在目录                                                        |
 | `<FULL_CHAIN.pem>`               | 证书链文件路径                                                          |
 | `<PRIVATE_KEY.pem>`              | 证书私有密钥路径                                                        |
-| `<CA_CERTS>`                     | 证书颁发机构的证书的路径                                                |
+| `<CA_CERTS.pem>`                 | 证书颁发机构的证书的路径                                                |
 | `<REGISTRY.YOURDOMAIN.COM:PORT>` | 私有镜像库                                                              |
 | `<RANCHER_VERSION_TAG>`          | 您要安装的[Rancher 版本](/docs/installation/options/server-tags/_index) |
 
@@ -339,6 +341,8 @@ docker run -d --restart=unless-stopped \
     -e CATTLE_SYSTEM_CATALOG=bundled \ # 自v2.3.0可用，使用内嵌的 Rancher system charts
     <REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher:<RANCHER_VERSION_TAG>
 ```
+
+**说明：** 如果您不打算发送遥测数据，请在初始登录时选择退出[遥测](/docs/faq/telemetry/_index)。
 
 如果要安装 v2.3.0 之前的 Rancher 版本，则将无法使用内置的 system-charts。由于 Rancher system-charts 托管在 Github 中，因此，离线安装将无法访问这些 charts。所以，您必须[配置 Rancher system-charts](/docs/installation/options/local-system-charts/_index)。
 

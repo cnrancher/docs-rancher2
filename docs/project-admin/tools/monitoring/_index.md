@@ -47,6 +47,8 @@ Prometheus 监控可以应用于 Rancher [集群层级](/docs/cluster-admin/tool
 
 **结果：**完成监控资源配置以后，Rancher 会把一个叫做`project-monitoring`的项目层级监控，以[应用商店应用](/docs/catalog/launching-apps/_index)的形式添加到了项目中。当这个应用的状态变成了`active` ，您可以通过 [Rancher UI](/docs/cluster-admin/tools/monitoring/_index#rancher-dashboard) 查看项目的监控指标，或者直接从[Grafana](/docs/cluster-admin/tools/monitoring/_index#grafana)查看项目的监控指标。
 
+> Grafana 实例的默认用户名和密码为 "admin/admin"。然而，Grafana 仪表板是通过 Rancher 认证代理提供服务的，因此只有当前通过认证进入 Rancher 服务器的用户才能访问 Grafana 仪表板。
+
 ## 项目监控指标
 
 在激活了项目监控后，在部署工作负载的页面，您可以配置自定义指标端点，从而使项目监控可以采集到自定义指标。当然，您可以通过部署任何 Prometheus [exporters](https://prometheus.io/docs/instrumenting/exporters/)，并在 Rancher 中配置相应的自定义端点，从而监控您的服务。
