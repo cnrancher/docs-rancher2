@@ -48,8 +48,8 @@ kubernetes_version: "v1.15.5-rancher1-1"
 
 然后在命令行工具中输入 `rke up`，使用`cluster.yml`文件指定的新版本器启动 RKE。
 
-```
-$ rke up --config cluster.yml
+```shell
+rke up --config cluster.yml
 ```
 
 ## 配置升级策略
@@ -70,8 +70,8 @@ $ rke up --config cluster.yml
 
 也可以输入以下命令，快速获取支持的版本号。
 
-```
-$ rke config --list-version --all
+```shell
+rke config --list-version --all
 v1.15.3-rancher2-1
 v1.13.10-rancher1-2
 v1.14.6-rancher2-1
