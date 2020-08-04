@@ -4,7 +4,7 @@ title: 管理证书
 
 _v0.2.0 开始可用_
 
-证书是 Kubernetes 集群重要的组成部分，所有的 Kubernetes 组件需要用到证书。您可以使用 RKE 的 `rke cert`命令管理证书。
+证书是 Kubernetes 集群的重要组成部分，所有的 Kubernetes 组件都需要用到证书。您可以使用 RKE 的 `rke cert`命令管理证书。
 
 ## 生成证书签发请求（CSRs）和密钥
 
@@ -54,8 +54,8 @@ RKE 具有轮换证书的能力，您可以使用`rke cert`命令轮换服务证
 
 以下代码示例演示的是替换`kubelet`组件使用的证书：
 
-```
-$ rke cert rotate --service kubelet
+```shell
+rke cert rotate --service kubelet
 INFO[0000] Initiating Kubernetes cluster
 INFO[0000] Rotating Kubernetes cluster certificates
 INFO[0000] [certificates] Generating Node certificate
@@ -75,8 +75,8 @@ INFO[0033] [worker] Successfully restarted Worker Plane..
 - Ingress Controller pods
 - KubeDNS pods
 
-```
-$ rke cert rotate --rotate-ca
+```shell
+rke cert rotate --rotate-ca
 INFO[0000] Initiating Kubernetes cluster
 INFO[0000] Rotating Kubernetes cluster certificates
 INFO[0000] [certificates] Generating CA kubernetes certificates
