@@ -6,17 +6,17 @@ title: 备份和容灾恢复
 
 _v0.1.7 或以上版本可用_
 
-RKE 集群可以自动备份 etcd 节点的快照。在灾难场景下，您可以使用这些快照恢复集群。RKE 将快照保存本地`/opt/rke/etcd-snapshots`路径下。
+RKE 集群可以自动备份 etcd 节点的快照。在灾难场景下，您可以使用这些快照恢复集群。快照保存在集群内的其他节点上。快照会保存在本地`/opt/rke/etcd-snapshots`路径下。
 
 _v0.2.0 或以上版本可用_
 
-RKE 可将集群快照上传至 AWS S3 适配的后端机器。
+RKE 可将集群快照上传至 S3 适配的后端机器。
 
 **说明：**RKE v0.2.0 改变了[存储集群状态的方式](/docs/rke/installation/_index)，所以`pki.bundle.tar.gz`不再是必须的文件。
 
 ## 备份集群
 
-您可以[手动创建集群备份](/docs/rke/etcd-snapshots/one-time-snapshots/_index)，或为集群[创建定时快照](/docs/rke/etcd-snapshots/recurring-snapshots/_index)。
+您可以[手动创建集群备份](/docs/rke/etcd-snapshots/one-time-snapshots/_index)，或为集群配置[自动定时备份](/docs/rke/etcd-snapshots/recurring-snapshots/_index)。
 
 ## 恢复集群
 

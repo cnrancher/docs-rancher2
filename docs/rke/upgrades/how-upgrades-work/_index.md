@@ -48,7 +48,7 @@ RKE 支持逐个升级和批量升级 controlplane 节点。RKE controlplane 节
 
 举个例子，如果您有 9 个 controlplane 节点，`max_unavailable_controlplane`设置为 25%，则每一次升级的节点数量是 2，因为 9 \* 25% = 2.22，向下取整得 2 。如果您有 3 个 controlplane 节点，`max_unavailable_controlplane`设置为 1%，则每次升级的节点数量是 1，因为系统要求每次升级的节点数量不小于 1。
 
-配置批量升级和`max_unavailable_controlplane`的目的是，先完成一部分 controlplane 节点的升级，再针对剩余有问题的 controlplane 节点进行排查，然后重复升级和问题排查的过程，直至完成所有 controlplane 节点升级。相比逐个升级节点而言，批量升级效率更高，`max_unavailable_controlplane`提升了升级的容错率，不会因为单个节点失效，排查不出问题，而导致后面的所有节点都无法升级。
+配置批量升级和`max_unavailable_controlplane`的初衷是运用递归思想，先完成一部分 controlplane 节点的升级，再针对剩余有问题的 controlplane 节点进行排查，然后重复升级和问题排查的过程，直至完成所有 controlplane 节点升级。相比逐个升级节点而言，批量升级效率更高，`max_unavailable_controlplane`提升了升级的容错率，不会因为单个节点失效，排查不出问题，而导致后面的所有节点都无法升级。
 
 如果任意一个 controlplane 节点无法升级，升级流程就会停滞在这个阶段，无法进行 worker 节点升级。
 
