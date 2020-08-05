@@ -1,5 +1,5 @@
 ---
-title: Cluster.yml 文件示例
+title: cluster.yml 文件示例
 ---
 
 您可通过编辑 RKE 的集群配置文件`cluster.yml`，完成多种配置选项。以下是最小文件示例和完整文件示例。
@@ -46,31 +46,28 @@ nodes:
     labels:
       app: ingress
 
-# If set to true, RKE will not fail when unsupported Docker version
-# are found
+# 默认值为false，如果设置为true，当发现不支持的Docker版本时，RKE不会报错
 ignore_docker_version: false
 
-# Cluster level SSH private key
-# Used if no ssh information is set for the node
+# 集群级SSH私钥，如果没有为节点设置ssh信息则使用该私钥
 ssh_key_path: ~/.ssh/test
 
-# Enable use of SSH agent to use SSH private keys with passphrase
-# This requires the environment `SSH_AUTH_SOCK` configured pointing
-#to your SSH agent which has the private key added
+# 启用SSH代理，使用带有密码的SSH私钥
+# 这需要配置环境`SSH_AUTH_SOCK`，指向已添加私钥的SSH代理
 ssh_agent_auth: true
 
-# List of registry credentials
-# If you are using a Docker Hub registry, you can omit the `url`
-# or set it to `docker.io`
-# is_default set to `true` will override the system default
-# registry set in the global settings
+# 镜像仓库凭证列表
+# 如果你使用的是Docker Hub注册表，
+# 你可以省略`url`
+# 或者设置为`docker.io`is_default设置为`true`
+# 将覆盖全局设置中设置的系统默认注册表
 private_registries:
   - url: registry.com
-    user: Username
-    password: password
+    user: Username # 请替换为真实的用户名
+    password: password # 请替换为真实的密码
     is_default: true
 
-# Bastion/Jump host configuration
+# 堡垒机配置
 bastion_host:
   address: x.x.x.x
   user: ubuntu
