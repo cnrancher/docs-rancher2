@@ -19,14 +19,14 @@ _v0.2.0 以上可用_
 
 以下是分别使用两种选项的代码示例：
 
-```
+```shell
 # 如果您没有修改保存证书的路径，RKE 会使用默认路径`/cluster_certs`保存证书，自定义证书会保存在该路径
-$ rke up --custom-certs
+rke up --custom-certs
 ```
 
-```
+```shell
 # 如果您的自定义证书保存在其他路径下，可以使用这个选项将保存证书的默认路径改为您保存证书的路径
-$ rke up --custom-certs --cert-dir ~/my/own/certs
+rke up --custom-certs --cert-dir ~/my/own/certs
 ```
 
 ## 证书和密钥清单
@@ -59,8 +59,8 @@ $ rke up --custom-certs --cert-dir ~/my/own/certs
 
 2. 运行`rke cert generate-csr`命令，生成`cluster.yml`文件中提及的节点需要的证书。默认情况下，RKE 会将 CSR 和密钥保存在`./cluster_certs`路径。如果您需要将它们保存在其他路径，请在命令后添加使用 `--cert-dir <PathName>`选项，将`<PathName>`替换成其他路径名称。
 
-   ```
-   $ rke cert generate-csr
+   ```shell
+   rke cert generate-csr
    INFO[0000] Generating Kubernetes cluster CSR certificates
    INFO[0000] [certificates] Generating Kubernetes API server csr
    INFO[0000] [certificates] Generating Kube Controller csr
@@ -75,14 +75,14 @@ $ rke up --custom-certs --cert-dir ~/my/own/certs
 
 3. 运行以下命令，生成`kube-service-account-token-key.pem`密钥。
 
-   ```
-   $ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./cluster_certs/kube-service-account-token-key.pem -out ./cluster_certs/kube-service-account-token.pem
+   ```shell
+   openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./cluster_certs/kube-service-account-token-key.pem -out ./cluster_certs/kube-service-account-token.pem
    ```
 
 **结果：** 生成了多个 CSR 和密钥。它们被部署在您指定的路径。如果您没有指定路径，它们则会被部署在`./cluster_certs`。CSR 文件中包含了证书需要用到的 Alternative DNS 地址和 IP Names。您可以使用它们给证书颁发机构颁发的证书签名。完成此过程后，RKE 可以使用这些自定义证书。
 
-```
-$ tree cluster_certs
+```shell
+tree cluster_certs
 
 cluster_certs
 ├── kube-admin-csr.pem
