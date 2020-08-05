@@ -10,13 +10,13 @@ kubeconfig 文件，即 kubeconfig file，是用于配置集群访问的文件�
 
 > **说明：**如果您没有修改 RKE 默认配置，RKE 自动生成的 kubeconfig 文件文件会保存在`~/.kube/config`路径，kubectl 会检查该路径下是否存在 kubeconfig 文件`kube_config_cluster.yml`。如果您将 kubeconfig 文件保存在其他路径，可以输入以下命令，使 kubectl 使用其他路径下的 kubeconfig 文件配置集群访问。
 >
-> ```shell
+> ```
 > kubectl --kubeconfig /custom/path/kube.config get pods
 > ```
 
 运行以下命令，检查 Kubernetes 机器的版本，以确认 kubectl 的工作状态：
 
-```shell
+```
 
 kubectl --kubeconfig kube_config_cluster.yml version
 
@@ -27,7 +27,7 @@ Server Version: version.Info{Major:"1", Minor:"8+", GitVersion:"v1.8.9-rancher1"
 
 如果返回的信息中包含了 client 端和 server 端的版本号，则表示您在本地有一个`kubectl`client 端，并且能够使用它从新建的集群获取 server 版本号，kubectl 处于正常状态。现在您可以在 kubectl 命令行工具中使用[kubectl 命令](https://kubernetes.io/docs/reference/kubectl/kubectl/)控制集群，就像请求集群中的节点一样。
 
-```shell
+```
 
 kubectl --kubeconfig kube_config_cluster.yml get nodes
 NAME STATUS ROLES AGE VERSION

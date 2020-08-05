@@ -8,25 +8,25 @@ title: 启动集群报错
 
 运行以下命令以列出节点 Conditions，关于节点 Conditions 请查看[节点 Conditions](https://kubernetes.io/docs/concepts/architecture/nodes/#condition)
 
-```shell
+```
 kubectl get nodes -o go-template='{{range .items}}{{$node := .}}{{range .status.conditions}}{{$node.metadata.name}}{{": "}}{{.type}}{{":"}}{{.status}}{{"\n"}}{{end}}{{end}}'
 ```
 
 运行以下命令以列出节点有问题的 Conditions，关于节点 Conditions 请查看[节点 Conditions](https://kubernetes.io/docs/concepts/architecture/nodes/#condition)
 
-```shell
+```
 kubectl get nodes -o go-template='{{range .items}}{{$node := .}}{{range .status.conditions}}{{if ne .type "Ready"}}{{if eq .status "True"}}{{$node.metadata.name}}{{": "}}{{.type}}{{":"}}{{.status}}{{"\n"}}{{end}}{{else}}{{if ne .status "True"}}{{$node.metadata.name}}{{": "}}{{.type}}{{": "}}{{.status}}{{"\n"}}{{end}}{{end}}{{end}}{{end}}'
 ```
 
 输出示例：
 
-```shell
+```
 worker-0: DiskPressure:True
 ```
 
 您也可以运行以下命令，查看日志中是否有关于 job 报错的信息，请将命令中的日志名称`rke-network-plugin-deploy-job`替换为您的日志名称。
 
-```shell
+```
 kubectl -n kube-system get pods -l job-name=rke-network-plugin-deploy-job --no-headers -o custom-columns=NAME:.metadata.name | xargs -L1 kubectl -n kube-system logs
 ```
 

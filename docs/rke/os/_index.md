@@ -14,7 +14,7 @@ RKE 可以在大多数已安装 Docker 的 Linux 操作系统上运行。RKE 的
 
 - [SSH 用户](/docs/rke/config-options/nodes/_index) - 使用 SSH 访问节点的用户必须是节点上`docker`用户组的成员。请运行以下命令，把使用 SSH 的用户添加到`docker`用户组里面。注意，您需要将`<user_name>`占位符替换为真实的用户名称。例如，您的用户是`example_user1`，则最终输入的命令为`usermod -aG docker example_user1`。除了可以将自己添加到用户组里面，您也可以运行以下命令，将其他用户添加到用户组中，只要将`<user_name>`替换为其他用户的用户名即可。
 
-  ```shell
+  ```
   usermod -aG docker <user_name>
   ```
 
@@ -79,7 +79,7 @@ RKE 可以在大多数已安装 Docker 的 Linux 操作系统上运行。RKE 的
 
 - 运行以下命令，修改 sysctl 配置：
 
-  ```shell
+  ```
   net.bridge.bridge-nf-call-iptables=1
   ```
 
@@ -93,13 +93,13 @@ RKE 可以在大多数已安装 Docker 的 Linux 操作系统上运行。RKE 的
 
 如果您使用的是 upstream Docker，Docker 的二进制安装包名字应该是`docker-ce`或 `docker-ee`，您需要输入以下命令，查询 Docker 安装包的名称。
 
-```shell
+```
 rpm -q docker-ce
 ```
 
 如果第一条命令的返回结果显示没有这个安装包，则表示安装包的名称可能是`docker-ee`，请输入以下命令确认安装包名称：
 
-```shell
+```
 rpm -q docker-ee
 ```
 
@@ -110,33 +110,33 @@ rpm -q docker-ee
 
 如果您使用的是 Red Hat 或 CentOS 提供的 Docker 二进制安装包，则安装包的名字应该是`docker`，您需要输入以下命令，查询 Docker 安装包的名称。输入上述命令后，如果您使用的确实是`docker`，命令行工具会询问您是否安装，请选择不安装。因为在这个步骤中，我们只是在借用`rpm -q`确认安装包的名称，以确认其来源。
 
-```shell
+```
 rpm -q docker
 ```
 
 来源于 Red Hat 或 CentOS 的安装包会自动将`dockerroot` 添加到系统内。您需要创建`/etc/docker/daemon.json`文件，然后将下文代码示例中的键值添加到 JSON 文件中，创建一个名为`dockerroot`的用户组。
 
-```json
+```
 {
-  "group": "dockerroot"
+    "group": "dockerroot"
 }
 ```
 
 创建和编辑文件后，请重启 Docker。重启后，您可以打开`/var/run/docker.sock`，检查用户组权限。此时返回的信息显示已经创建 `dockerroot`用户组，该用户组有读写权限：
 
-```shell
+```
 srw-rw----. 1 root dockerroot 0 Jul  4 09:57 /var/run/docker.sock
 ```
 
 运行以下命令，将 SSH 用户添加到`dockerroot`用户组中。注意，您需要将`<user_name>`占位符替换为真实的用户名称。例如，您的用户是`example_user1`，则最终输入的命令为`usermod -aG docker example_user1`。除了可以将自己添加到用户组里面，您也可以运行以下命令，将其他用户添加到用户组中，只要将`<user_name>`替换为其他用户的用户名即可。
 
-```shell
+```
 usermod -aG dockerroot <user_name>
 ```
 
 完成添加后，您需要登出该节点，然后使用 SSH 用户的认证信息登录该节点，执行`docker ps`，应该返回如下信息：
 
-```shell
+```
 ssh <user_name>@node
 $ docker ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
@@ -154,13 +154,13 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 
 Atomic 和 RHEL、CentOS 不同，没有内置的 Docker 分组，所以也就不像 RHEL 和 CentOS 那样，不可以通过编辑用户组权限、将用户添加到用户组等操作，批量分配用户权限。但是您可以运行以下命令，允许单个用户运行 RKE。如果您需要授权多个用户，请重复运行以下命令，将用户名替换成不同的用户名即可。
 
-```shell
+```
 chown <user> /var/run/docker.sock
 ```
 
 完成权限分配后，您需要登出该节点，然后使用 SSH 用户的认证信息登录该节点，执行`docker ps`，应该返回如下信息：
 
-```shell
+```
 ssh <user_name>@node
 $ docker ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
@@ -196,7 +196,7 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 
 输入`docker version --format '{{.Server.Version}}'`，检查支持特定版本 Kubernetes 的 Docker 是否已经成功安装到您的机器上。如果已经成功安装，返回的信息应该如代码示例所示。
 
-```shell
+```
 docker version --format '{{.Server.Version}}'
 17.03.2-ce
 ```
@@ -209,7 +209,7 @@ docker version --format '{{.Server.Version}}'
 
 运行以下命令，使用 iptables 打开 TCP/6443 端口。
 
-```shell
+```
 # Open TCP/6443 for all
 iptables -A INPUT -p tcp --dport 6443 -j ACCEPT
 
@@ -221,7 +221,7 @@ iptables -A INPUT -p tcp -s your_ip_here --dport 6443 -j ACCEPT
 
 运行以下命令，使用 firewlld 打开 TCP/6443 端口。
 
-```shell
+```
 # Open TCP/6443 for all
 firewall-cmd --zone=public --add-port=6443/tcp --permanent
 firewall-cmd --reload
@@ -238,6 +238,6 @@ firewall-cmd --reload
 
 您的 SSH server 全系统配置文件，位于`/etc/ssh/sshd_config`，该文件必须包含以下代码，允许 TCP 转发。
 
-```shell
+```
 AllowTcpForwarding yes
 ```

@@ -8,18 +8,14 @@ RKE v0.2.0 或以上的版本和 v0.2.0 之前的版本创建定时快照的方�
 
 ## RKE v0.2.0 或以上的版本
 
-您可以启用`etcd-snapshot`服务，使用相关的配置参数，开启定时备份 etcd 节点快照功能。
-
-`etcd-snapshot`在`etcd`容器之外的服务容器中运行。默认设置下，`etcd-snapshot`服务会为每一个具有`etcd`角色的节点创建快照，然后将这些快照储存在本地的`/opt/rke/etcd-snapshots`路径下。如果您配置了 AWS S3 相关的参数，RKE 会将快照上传到 S3 Backend。
-
-可配置的参数在下文的表格中有详细的描述。
+您可以启用`etcd-snapshot`服务，使用相关的[配置参数](#Etcd-Snapshot-服务的可配置参数)，以开启定时备份 etcd 节点快照功能。`etcd-snapshot`在`etcd`容器之外的服务容器中运行。默认设置下，`etcd-snapshot`服务会为每一个具有`etcd`角色的节点创建快照，然后将这些快照储存在本地的`/opt/rke/etcd-snapshots`路径下。如果您配置了[AWS S3 相关的参数](#Etcd-Snapshot-服务的可配置参数)，RKE 会将快照上传到 S3 Backend。可配置的参数在下文的表格中有详细的描述。
 
 ### 快照服务日志
 
 运行已经启用`etcd-snapshot`的集群时，您可以在命令行工具中输入`docker logs etcd-rolling-snapshots`，查看`etcd-rolling-snapshots`日志，确认集群是否已开启定时快照功能。如果集群已经开启定时快照功能，输入该命令后，返回的消息包含了每个快照的创建时间、创建信息、名称和运行时间，与下方代码示例相似。
 
-```shell
-docker logs etcd-rolling-snapshots
+```
+$ docker logs etcd-rolling-snapshots
 
 time="2018-05-04T18:39:16Z" level=info msg="Initializing Rolling Backups" creation=1m0s retention=24h0m0s
 time="2018-05-04T18:40:16Z" level=info msg="Created backup" name="2018-05-04T18:40:16Z_etcd" runtime=108.332814ms
@@ -107,7 +103,7 @@ services:
 
 ## RKE v0.2.0 之前的版本
 
-您可以启用`etcd-snapshot`服务和相关的配置参数，以开启定时备份 etcd 节点快照功能。`etcd-snapshot`在`etcd`容器之外的服务容器中运行。默认设置下，`etcd-snapshot`服务会为每一个具有`etcd`角色的节点创建快照，然后将这些快照储存在本地的`/opt/rke/etcd-snapshots`路径下。
+您可以启用`etcd-snapshot`服务和相关的[配置参数](#options-for-the-etcd-snapshot-service)，以开启定时备份 etcd 节点快照功能。`etcd-snapshot`在`etcd`容器之外的服务容器中运行。默认设置下，`etcd-snapshot`服务会为每一个具有`etcd`角色的节点创建快照，然后将这些快照储存在本地的`/opt/rke/etcd-snapshots`路径下。
 
 RKE 会为证书生成备份，在同一路径下将证书保存为`pki.bundle.tar.gz`文件。恢复集群时，会用到快照和 pki 文件。
 
@@ -115,8 +111,8 @@ RKE 会为证书生成备份，在同一路径下将证书保存为`pki.bundle.t
 
 运行已经启用`etcd-snapshot`的集群时，您可以在命令行工具中输入`docker logs etcd-rolling-snapshots`，查看`etcd-rolling-snapshots`日志，确认集群是否开启定时快照功能。输入该命令后，返回的消息包含了创建时间、创建信息、快照名称和 runtime，与下方代码示例相似。
 
-```shell
-docker logs etcd-rolling-snapshots
+```
+$ docker logs etcd-rolling-snapshots
 
 time="2018-05-04T18:39:16Z" level=info msg="Initializing Rolling Backups" creation=1m0s retention=24h0m0s
 time="2018-05-04T18:40:16Z" level=info msg="Created backup" name="2018-05-04T18:40:16Z_etcd" runtime=108.332814ms
@@ -138,7 +134,7 @@ time="2018-05-04T18:43:16Z" level=info msg="Created backup" name="2018-05-04T18:
 ```yaml
 services:
   etcd:
-    snapshot: true # 布尔值，默认为false，不启动定时备份功能。将它设置为true时，会启动定时备份功能
-    creation: 5m0s # 创建快照的间隔时间，默认间隔是 5 分钟
-    retention: 24h # 保存快照的时间，默认值为`24h`，即 24 小时。当快照存活的时间超过这个限制后，会自动删除快照
+    snapshot: true
+    creation: 5m0s
+    retention: 24h
 ```
