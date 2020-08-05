@@ -4,7 +4,7 @@ title: 使用备份恢复集群
 
 使用备份恢复群集的操作步骤如下，请根据您使用的 RKE 版本获取对应的操作指导说明。
 
-## 0.2.0 +
+## RKE v0.2.0 或以上的版本
 
 如果您的 Kubernetes 集群发生了灾难，您可以使用`rke etcd snapshot-restore`来恢复您的 etcd。这个命令可以将 etcd 恢复到特定的快照，应该在遭受灾难的特定集群的 etcd 节点上运行。
 
@@ -25,8 +25,8 @@ title: 使用备份恢复集群
 
 请运行以下命令，从本地快照中还原 etcd：
 
-```
-$ rke etcd snapshot-restore --config cluster.yml --name mysnapshot
+```shell
+rke etcd snapshot-restore --config cluster.yml --name mysnapshot
 ```
 
 假设快照位于`/opt/rke/etcd-snapshots`中。
@@ -69,7 +69,12 @@ rke etcd snapshot-restore \
 | `--ssh-agent-auth`        | [使用由 SSH_AUTH_SOCK 定义的 SSH 代理授权](/docs/rke/config-options/_index) |             |
 | `--ignore-docker-version` | [禁用 Docker 版本检查](/docs/rke/config-options/_index)                     |
 
-## 0.2.0 -
+> **说明：**
+>
+> - 如果 AWS EC2 示例配置了 IAM 认证，则`--access-key`和`--secret-key`不是必填项。
+> - 表格第三列标记为"\* "的参数，是 S3 相关的参数。
+
+## RKE v0.2.0 之前的版本
 
 如果您的 Kubernetes 集群发生了灾难，您可以使用`rke etcd snapshot-restore`来恢复您的 etcd。这个命令可以将 etcd 恢复到特定的快照，应该在遭受灾难的特定集群的 etcd 节点上运行。
 
@@ -78,10 +83,10 @@ rke etcd snapshot-restore \
 - 移除旧的 etcd 集群
 - 使用本地快照重建 etcd 群集。
 
-在运行这个命令之前，您必须:
+在运行这个命令之前，您必须：
 
-- 运行 "rke remove "来移除 Kubernetes 集群并清理节点。
-- 从 S3 下载您的 etcd 快照（如果适用）。将 etcd 快照和`pki.bundle.tar.gz`文件放在`/opt/rke/etcd-snapshots`中。手动同步所有`etcd`节点的快照。
+- 运行`rke remove`命令，移除 Kubernetes 集群并清理节点。
+- 从 S3 下载您的 etcd 快照，将 etcd 快照和`pki.bundle.tar.gz`文件放在`/opt/rke/etcd-snapshots`中。手动同步所有`etcd`节点的快照。
 
 还原后，您必须使用`rke up`重建 Kubernetes 集群。
 
@@ -91,7 +96,7 @@ rke etcd snapshot-restore \
 
 请运行以下命令，从本地快照中还原 etcd：
 
-```
+```shell
 rke etcd snapshot-restore --config cluster.yml --name mysnapshot
 ```
 
