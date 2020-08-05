@@ -4,7 +4,7 @@ title: RKE Kubernetes 安装介绍
 
 RKE 是一个快速的，多功能的 Kubernetes 安装工具，您可以参考以下步骤，使用 RKE 在您的 Linux 主机上安装 Kubernetes：
 
-1. [下载 RKE 二进制安装包](#download-the-rke-binary)
+1. [下载 RKE 二进制安装包（三选一）](#download-the-rke-binary)
    - [使用 GitHub 安装 RKE](#使用-GitHub-安装-RKE)
    - [使用 Homebrew 安装 RKE](#使用-Homebrew-安装-RKE)
    - [使用 MacPorts 安装 RKE](#使用-MacPorts-安装-RKE)
@@ -16,7 +16,7 @@ RKE 是一个快速的，多功能的 Kubernetes 安装工具，您可以参考�
 
 ## 下载 RKE 二进制安装包
 
-RKE 提供了三种下载安装包的方法：使用 GitHub、Homebrew 或 MacPorts 都可以下载 RKE 安装包。使用 Github 下载对您使用的主机操作系统没有要求，而使用 Homebrew 和 MacPorts 要求您的主机操作系统必须为 MacOS。
+RKE 提供了三种下载安装包的方法：通过 GitHub、Homebrew 或 MacPorts 都可以下载 RKE 安装包。使用 Github 下载对您使用的主机操作系统没有要求，而使用 Homebrew 和 MacPorts 要求您的主机操作系统必须为 MacOS。
 
 ### 使用 GitHub 下载安装包
 
@@ -33,34 +33,34 @@ RKE 提供了三种下载安装包的方法：使用 GitHub、Homebrew 或 MacPo
 
    MacOS 用户请运行以下命令：
 
-   ```
+   ```shell
    # macOS
-   $ mv rke_darwin-amd64 rke
+   mv rke_darwin-amd64 rke
    ```
 
    Linux 用户请运行以下命令：
 
-   ```
+   ```shell
    # Linux
-   $ mv rke_linux-amd64 rke
+   mv rke_linux-amd64 rke
    ```
 
    Windows 用户请运行以下命令：
 
-   ```
+   ```shell
    # Windows PowerShell
    > mv rke_windows-amd64.exe rke.exe
    ```
 
 3. 运行以下命令，将 RKE 安装包转为可执行文件。如果您使用的 Windows 操作系统，则可以跳过这个步骤，直接查看[为 Kubernetes 集群准备节点](#为-Kubernetes-集群准备节点)。
 
-   ```
+   ```shell
    $ chmod +x rke
    ```
 
 4. 运行以下命令，检查 RKE 安装包是否已经转换成可执行文件。
 
-   ```
+   ```shell
    $ rke --version
    ```
 
@@ -72,20 +72,20 @@ RKE 提供了三种下载安装包的方法：使用 GitHub、Homebrew 或 MacPo
 
 2. 运行`brew`命令，安装 RKE。
 
-   ```
-   $ brew install rke
+   ```shell
+   brew install rke
    ```
 
 3. 完成 Homebrew 安装后，使用`brew`命令安装 Docker。
 
-   ```
-   $ brew install rke
+   ```shell
+   brew install rke
    ```
 
    如果您已经使用 Homebrew 安装过了 RKE，可以运行以下命令，升级到最新版本的 RKE。
 
-   ```
-   $ brew upgrade rke
+   ```shell
+   brew upgrade rke
    ```
 
 ### 使用 MacPorts 下载安装包
@@ -96,20 +96,20 @@ RKE 提供了三种下载安装包的方法：使用 GitHub、Homebrew 或 MacPo
 
 2. 运行`port`命令，安装 RKE。
 
-   ```
-   $ port install rke
+   ```shell
+   port install rke
    ```
 
 3. 完成 MacPorts 安装后，使用`port`命令安装 Docker：
 
    ```
-   $ port install rke
+   port install rke
    ```
 
    如果您已经使用 MacPorts 安装过了 RKE，可以运行以下命令，升级到最新版本的 RKE。
 
-   ```
-   $ port upgrade rke
+   ```shell
+   port upgrade rke
    ```
 
 ## 为 Kubernetes 集群准备节点
@@ -129,7 +129,7 @@ RKE 使用集群配置文件`cluster.yml`规划集群中的节点，例如集群
 
 运行`rke config`命令，在当前路径下创建 `cluster.yml`文件。这条命令会引导您输入创建集群所需的所有参数，详情请参考[集群配置选项](/docs/rke/config-options/_index)。
 
-```
+```shell
 rke config --name cluster.yml
 ```
 
@@ -137,13 +137,13 @@ rke config --name cluster.yml
 
 在原有创建集群配置文件命令的基础上，加上 `--empty` ，可以创建一个空白的集群配置文件。
 
-```
+```shell
 rke config --empty --name cluster.yml
 ```
 
 您也可以使用`--print`，将`cluster.yml`文件的内容显示出来。
 
-```
+```shell
 rke config --print
 ```
 

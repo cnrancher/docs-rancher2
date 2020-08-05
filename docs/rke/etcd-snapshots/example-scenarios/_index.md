@@ -30,15 +30,15 @@ title: 示例场景
 
 运行以下命令，备份集群。如果您配置了 AWS S3 相关的参数，RKE 会将快照上传到 S3 Backend。AWS S3 相关的参数的详细信息请参考本文最后一个章节。
 
-```
-$ rke etcd snapshot-save --name snapshot.db --config cluster.yml
+```shell
+rke etcd snapshot-save --name snapshot.db --config cluster.yml
 ```
 
 ### 模拟节点失效的场景
 
 运行以下命令，关闭`node2`，模拟节点失效的场景。运行命令后，`node2`的状态变更为不可用：
 
-```
+```shell
 root@node2:~# poweroff
 ```
 
@@ -72,8 +72,8 @@ nodes:
 
 将新建的节点添加到`cluster.yml`中后，运行 `rke etcd snapshot-restore`命令，从备份中启动`etcd`：
 
-```
-$ rke etcd snapshot-restore --name snapshot.db --config cluster.yml
+```shell
+rke etcd snapshot-restore --name snapshot.db --config cluster.yml
 ```
 
 默认配置下，RKE 将快照保存在`/opt/rke/etcd-snapshots`路径。
@@ -86,7 +86,7 @@ $ rke etcd snapshot-restore --name snapshot.db --config cluster.yml
 
 `rke etcd snapshot-restore`命令触发了使用新的`cluster.yml`运行`rke up`命令。请运行`kubectl get pods`确认您的 Kubernetes 集群处于正常状态。如果状态正常，返回的信息应该与以下代码示例相似：
 
-```
+```shell
 > kubectl get pods
 NAME                     READY     STATUS    RESTARTS   AGE
 nginx-65899c769f-kcdpr   1/1       Running   0          17s
@@ -113,15 +113,15 @@ nginx-65899c769f-qkhml   1/1       Running   0          17s
 
 运行以下命令，创建集群快照并保存至本地：
 
-```
-$ rke etcd snapshot-save --name snapshot.db --config cluster.yml
+```shell
+rke etcd snapshot-save --name snapshot.db --config cluster.yml
 ```
 
 ### 将集群快照保存到外部
 
 创建 `node2`的快照后，建议将这个快照保存在安全的地方，例如将备份和`pki.bundle.tar.gz`信息在一个 S3 的 bucket 里面或是磁带备份。如果您使用的是 AWS 主机并且有可用的 S3 存储，请执行以下步骤：
 
-```
+```shell
 root@node2:~# s3cmd mb s3://rke-etcd-backup
 root@node2:~# s3cmd \
   /opt/rke/etcd-snapshots/snapshot.db \
@@ -133,7 +133,7 @@ root@node2:~# s3cmd \
 
 运行以下命令，关闭`node2`，模拟节点失败的场景。运行命令后，`node2`的状态变更为不可用
 
-```
+```shell
 root@node2:~# poweroff
 ```
 
@@ -141,7 +141,7 @@ root@node2:~# poweroff
 
 运行以下命令，移除集群并清理节点。
 
-```
+```shell
 rke remove --config rancher-cluster.yml
 ```
 
@@ -149,7 +149,7 @@ rke remove --config rancher-cluster.yml
 
 在原有的集群中创建一个新的节点`node3`。获取保存在 S3 里面的备份数据，将其迁移到新节点中。
 
-```
+```shell
 # Make a Directory
 root@node3:~# mkdir -p /opt/rke/etcdbackup
 
@@ -194,8 +194,8 @@ nodes:
 
 在`cluster.yml`文件中添加了 node3 作为新节点后，运行 `rke etcd snapshot-restore`命令，从备份中启动`etcd`：
 
-```
-$ rke etcd snapshot-restore --name snapshot.db --config cluster.yml
+```shell
+rke etcd snapshot-restore --name snapshot.db --config cluster.yml
 ```
 
 每个 etcd 节点对应的快照和`pki.bundle.tar.gz` 会被保存在`/opt/rke/etcd-snapshots`路径下。
@@ -204,13 +204,13 @@ $ rke etcd snapshot-restore --name snapshot.db --config cluster.yml
 
 最后我们需要将集群的状态恢复为正常。我们需要使用修改后的`cluster.yml`运行`rke up` 命令，将 Kubernetes API 指向新建的`etcd`节点，
 
-```
-$ rke up --config cluster.yml
+```shell
+rke up --config cluster.yml
 ```
 
 请运行`kubectl get pods`确认您的 Kubernetes 集群处于正常状态。如果状态正常，返回的信息应该与以下代码示例相似：
 
-```
+```shell
 > kubectl get pods
 NAME                     READY     STATUS    RESTARTS   AGE
 nginx-65899c769f-kcdpr   1/1       Running   0          17s
@@ -231,3 +231,8 @@ nginx-65899c769f-qkhml   1/1       Running   0          17s
 | **region**         | S3 的 桶所在的区域（可选）                                                                                                                                                                                                                                                             | \*      |
 | **endpoint**       | 指定 S3 端点 URL 地址，默认值为 **s3.amazonaws.com**                                                                                                                                                                                                                                   | \*      |
 | **custom_ca**      | 自定义证书认证，用于连接 S3 端点。使用私有存储时必填，RKE v0.2.5 及以上版本可用。                                                                                                                                                                                                      | \*      |
+
+> **说明：**
+>
+> - 如果 AWS EC2 示例配置了 IAM 认证，则`--access-key`和`--secret-key`不是必填项。
+> - 表格第三列标记为"\* "的参数，是 S3 相关的参数。

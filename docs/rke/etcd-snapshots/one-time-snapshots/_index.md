@@ -13,7 +13,7 @@ v0.2.0 或以上的版本和 v0.2.0 之前的版本创建一次性快照的方�
 1. 首先，运行以下命令，在本地创建一个一次性快照：
 
    ```
-   $ rke etcd snapshot-save --config cluster.yml --name snapshot-name
+   rke etcd snapshot-save --config cluster.yml --name snapshot-name
    ```
 
    **结果：** 创建了一个快照，保存在 `/opt/rke/etcd-snapshots`路径下。
@@ -21,7 +21,7 @@ v0.2.0 或以上的版本和 v0.2.0 之前的版本创建一次性快照的方�
 2. 然后，运行以下命令，将这个快照保存到 S3。
 
    ```
-   $ rke etcd snapshot-save \
+   rke etcd snapshot-save \
    --config cluster.yml \
    --name snapshot-name \
    --s3 \
@@ -68,25 +68,25 @@ _v0.2.0 或以上的版本可用_
 
 RKE 支持使用 IAM 角色权限管理进行 S3 认证。集群的 etcd 节点必须分配有 IAM 角色，并且这个角色需要有读写 S3 存储节点快照的桶的权限。节点必须有权限访问 S3 端点。
 
-以下是[IAM 策略示例代码](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_s3_rw-bucket.html)，给节点开放了在 S3 上读取和写入备份快照的权限。
+以下是[IAM 策略示例代码](https://docs.aws.amazon.com/zh_cn/IAM/latest/UserGuide/reference_policies_examples_s3_rw-bucket.html)，给节点开放了在 S3 上读取和写入备份快照的权限。
 
-```
+```json
 {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "ListObjectsInBucket",
-            "Effect": "Allow",
-            "Action": ["s3:ListBucket"],
-            "Resource": ["arn:aws:s3:::bucket-name"]
-        },
-        {
-            "Sid": "AllObjectActions",
-            "Effect": "Allow",
-            "Action": "s3:*Object",
-            "Resource": ["arn:aws:s3:::bucket-name/*"]
-        }
-    ]
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ListObjectsInBucket",
+      "Effect": "Allow",
+      "Action": ["s3:ListBucket"],
+      "Resource": ["arn:aws:s3:::bucket-name"]
+    },
+    {
+      "Sid": "AllObjectActions",
+      "Effect": "Allow",
+      "Action": "s3:*Object",
+      "Resource": ["arn:aws:s3:::bucket-name/*"]
+    }
+  ]
 }
 ```
 
@@ -102,8 +102,8 @@ RKE 会为证书生成备份，在同一路径下将证书保存为`pki.bundle.t
 
 运行以下命令，在本地创建一次性快照：
 
-```
-$ rke etcd snapshot-save --config cluster.yml --name snapshot-name
+```shell
+ rke etcd snapshot-save --config cluster.yml --name snapshot-name
 ```
 
 **结果：** RKE 会将节点快照保存在`/opt/rke/etcd-snapshots`路径下。
