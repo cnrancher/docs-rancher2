@@ -4,9 +4,9 @@ title: 审计日志
 
 ## 概述
 
-Kubernetes 审计提供了关于集群的安全相关的时间顺序记录集。Kube-apiserver 执行审计。在其执行的每个阶段的每个请求都会产生一个事件，然后根据一定的策略进行预处理，并写入后端。策略决定了记录的内容，而后端则会将记录持久化。
+Kubernetes 审计提供了关于集群的安全相关的时间顺序记录集。Kube-apiserver 执行审计，每个请求都会产生一个事件，然后根据一定的策略进行预处理，并写入后端。策略决定了记录的内容，而后端则会将记录持久化。
 
-你可能想配置审计日志，作为遵守 CIS（Center for Internet Security）Kubernetes Benchmark 控制的一部分。
+为了遵守 CIS（Center for Internet Security）Kubernetes Benchmark，您需要配置审计日志。
 
 有关配置细节，请参考[Kubernetes 官方文档](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/)。
 
@@ -15,7 +15,7 @@ Kubernetes 审计提供了关于集群的安全相关的时间顺序记录集。
 在 RKE v1.1.0+中，使用特定 Kubernetes 版本时，审计日志是默认启用的。
 
 | RKE 版本 | Kubernetes 版本 | 是否默认启用审计日志 |
-| -------- | --------------- | -------------------- |
+| :------- | :-------------- | :------------------- |
 | v1.1.0+  | v1.17.4+        | 是                   |
 | v1.1.0 + | v1.16.8+        | 是                   |
 | v1.1.0 + | v1.15.11+       | 是                   |
@@ -74,32 +74,32 @@ services:
         path: /var/log/kube-audit/audit-log.json
         format: json
         policy:
-          apiVersion: audit.k8s.io/v1 # This is required.
+          apiVersion: audit.k8s.io/v1 # 必填
           kind: Policy
           omitStages:
             - "RequestReceived"
           rules:
-            # Log pod changes at RequestResponse level
+            # 在RequestResponse级别记录pod变化
             - level: RequestResponse
               resources:
                 - group: ""
-                  # Resource "pods" doesn't match requests to any subresource of pods,
-                  # which is consistent with the RBAC policy.
+                  # 资源 "pods "不匹配对pods的任何子资源的请求
+                  # 与RBAC策略是一致的
                   resources: ["pods"]
-            # Log "pods/log", "pods/status" at Metadata level
+            # 在元数据层记录 "pods/log"、"pods/status"
             - level: Metadata
               resources:
                 - group: ""
                   resources: ["pods/log", "pods/status"]
 
-            # Don't log requests to a configmap called "controller-leader"
+            # 不要将请求记录到名为 "controller-leader "的配置图上
             - level: None
               resources:
                 - group: ""
                   resources: ["configmaps"]
                   resourceNames: ["controller-leader"]
 
-            # Don't log watch requests by the "system:kube-proxy" on endpoints or services
+            # 不要在端点或服务上记录 "system:keube-proxy "的监视请求
             - level: None
               users: ["system:kube-proxy"]
               verbs: ["watch"]
@@ -107,38 +107,37 @@ services:
                 - group: "" # core API group
                   resources: ["endpoints", "services"]
 
-            # Don't log authenticated requests to certain non-resource URL paths.
+            # 不要记录对某些非资源URL路径的认证请求
             - level: None
               userGroups: ["system:authenticated"]
               nonResourceURLs:
                 - "/api*" # Wildcard matching.
                 - "/version"
 
-            # Log the request body of configmap changes in kube-system.
+            # 在kube-system中记录configmap变更的请求体
             - level: Request
               resources:
                 - group: "" # core API group
                   resources: ["configmaps"]
-              # This rule only applies to resources in the "kube-system" namespace.
-              # The empty string "" can be used to select non-namespaced resources.
+              # 此规则只适用于 "kube-system "命名空间中的资源
+              # 空字符串""可用于选择非命名间隔的资源
               namespaces: ["kube-system"]
 
-            # Log configmap and secret changes in all other namespaces at the Metadata level.
+            # 在元数据级别记录所有其他命名空间的configmap和密钥变化
             - level: Metadata
               resources:
                 - group: "" # core API group
                   resources: ["secrets", "configmaps"]
 
-            # Log all other resources in core and extensions at the Request level.
+            # 在请求层记录核心和扩展的所有其他资源
             - level: Request
               resources:
                 - group: "" # core API group
-                - group: "extensions" # Version of group should NOT be included.
+                - group: "extensions" # 不应包括组的版本
 
-            # A catch-all rule to log all other requests at the Metadata level.
+            # 一个全面的规则，用于记录元数据级别的所有其他请求
             - level: Metadata
-              # Long-running requests like watches that fall under this rule will not
-              # generate an audit event in RequestReceived.
+              # 在此规则下，像监控这样的长期运行的请求不会在RequestReceived中产生审计事件
               omitStages:
                 - "RequestReceived"
 ```

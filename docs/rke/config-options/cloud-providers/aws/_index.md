@@ -2,6 +2,8 @@
 title: AWS
 ---
 
+## 概述
+
 您只需要将名称设置为`aws`，就可以启用 AWS。所有群集节点必须已经配置了 [适当的 IAM 角色](#配置-IAM)，并且您的 AWS 资源必须 [标记 AWS 资源](#标记-AWS-资源)。
 
 ```yaml
@@ -130,17 +132,17 @@ AWS 云提供商使用标记来发现和管理资源，以下资源不会被 Kub
 `<CLUSTERID>`可以是你选择的任何字符串。但是，必须在标记的每个资源上使用相同的字符串。将标签值设置为`owned`会通知集群，所有用`<CLUSTERID>`标记的资源都只由这个集群拥有和管理。
 
 | Key                                 | Value  |
-| ----------------------------------- | ------ |
+| :---------------------------------- | :----- |
 | kubernetes.io/cluster/`<CLUSTERID>` | shared |
 
 如果您不在集群之间共享资源，您可以将标签改为：
 
 | Key                                 | Value |
-| ----------------------------------- | ----- |
+| :---------------------------------- | :---- |
 | kubernetes.io/cluster/`<CLUSTERID>` | owned |
 
 ## 标记负载均衡器
 
 在配置`LoadBalancer`服务时，Kubernetes 会尝试发现正确的子网，这也是通过标签来实现的，需要添加额外的子网标签，以确保在正确的子网中创建面向互联网和内部的 ELB。
 
-[AWS 负载均衡器的子网标记](https://docs.aws.amazon.com/eks/latest/userguide/load-balancing.html#subnet-tagging-for-load-balancers)
+[AWS 负载均衡器的子网标记](https://docs.aws.amazon.com/zh_cn/eks/latest/userguide/load-balancing.html#subnet-tagging-for-load-balancers)

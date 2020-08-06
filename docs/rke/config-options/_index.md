@@ -8,34 +8,34 @@ title: Kubernetes 配置选项
 
 ### 配置节点选项
 
-- [Nodes](/docs/rke/config-options/nodes/_index)
-- [Ignoring unsupported Docker versions](#支持的-Docker-版本)
-- [Private Registries](/docs/rke/config-options/private-registries/_index)
-- [Cluster Level SSH Key Path](#cluster-level-ssh-key-path)
+- [节点选项配置](/docs/rke/config-options/nodes/_index)
+- [检查 Docker 版本](#支持的-Docker-版本)
+- [私有镜像仓库](/docs/rke/config-options/private-registries/_index)
+- [集群级 SSH 密钥路径](#集群级-SSH-密钥路径)
 - [SSH Agent](#ssh-agent)
-- [Bastion Host](/docs/rke/config-options/bastion-host/_index)
+- [堡垒机配置](/docs/rke/config-options/bastion-host/_index)
 
 ### 配置 Kubernetes 集群选项
 
-- [Cluster Name](#集群名称)
-- [Kubernetes Version](#Kubernetes-版本)
-- [Prefix Path](#前缀路径)
-- [System Images](/docs/rke/config-options/system-images/_index)
-- [Services](/docs/rke/config-options/services/_index)
-- [Extra Args and Binds and Environment Variables](/docs/rke/config-options/services/services-extras/_index)
-- [External Etcd](/docs/rke/config-options/services/external-etcd/_index)
-- [Authentication](/docs/rke/config-options/authentication/_index)
-- [Authorization](/docs/rke/config-options/authorization/_index)
-- [Rate Limiting](/docs/rke/config-options/rate-limiting/_index)
-- [Cloud Providers](/docs/rke/config-options/cloud-providers/_index)
-- [Audit Log](/docs/rke/config-options/audit-log/_index)
-- [Add-ons](/docs/rke/config-options/add-ons/_index)
-  - [Network Plug-ins](/docs/rke/config-options/add-ons/network-plugins/_index)
-  - [DNS providers](/docs/rke/config-options/add-ons/dns/_index)
+- [集群名称](#集群名称)
+- [Kubernetes 版本](#Kubernetes-版本)
+- [前缀路径](#前缀路径)
+- [系统镜像](/docs/rke/config-options/system-images/_index)
+- [默认的 Kubernetes 服务](/docs/rke/config-options/services/_index)
+- [自定义参数、Docker 挂载绑定和额外的环境变量](/docs/rke/config-options/services/services-extras/_index)
+- [外部 etcd](/docs/rke/config-options/services/external-etcd/_index)
+- [认证方式](/docs/rke/config-options/authentication/_index)
+- [授权](/docs/rke/config-options/authorization/_index)
+- [配置事件速率限制](/docs/rke/config-options/rate-limiting/_index)
+- [云服务提供商](/docs/rke/config-options/cloud-providers/_index)
+- [审计日志](/docs/rke/config-options/audit-log/_index)
+- [RKE 插件](/docs/rke/config-options/add-ons/_index)
+  - [网络插件](/docs/rke/config-options/add-ons/network-plugins/_index)
+  - [DNS 提供商](/docs/rke/config-options/add-ons/dns/_index)
   - [Ingress Controllers](/docs/rke/config-options/add-ons/ingress-controllers/_index)
-  - [Metrics Server](/docs/rke/config-options/add-ons/metrics-server/_index)
-  - [User-Defined Add-ons](/docs/rke/config-options/add-ons/user-defined-add-ons/_index)
-  - [Add-ons Job Timeout](#插件-job-超时)
+  - [Metrics Server 插件](/docs/rke/config-options/add-ons/metrics-server/_index)
+  - [自定义插件](/docs/rke/config-options/add-ons/user-defined-add-ons/_index)
+  - [插件 job 连接超时](#插件-job-超时)
 
 ## 集群层级选项
 
@@ -75,7 +75,7 @@ prefix_path: /opt/custom_path
 
 ### 集群级 SSH 密钥路径
 
-RKE 使用`ssh`连接到主机。通常情况下，每个节点都会在`nodes`部分为每个 ssh 密钥设置一个独立的路径，即 `ssh_key_path`，但如果你在集群配置文件中拥有一个能够访问**所有**主机的 SSH 密钥，你可以在顶层设置该 ssh 密钥的路径。否则，你会在[nodes](/docs/rke/config-options/nodes/_index)中设置 ssh 密钥路径。
+RKE 使用`ssh`连接到主机。通常情况下，每个节点都会在`nodes`部分为每个 ssh 密钥设置一个独立的路径，即 `ssh_key_path`，但如果您在集群配置文件中拥有一个能够访问**所有**主机的 SSH 密钥，您可以在顶层设置该 ssh 密钥的路径。否则，您会在[nodes](/docs/rke/config-options/nodes/_index)中设置 ssh 密钥路径。
 
 如果在集群级和节点级都定义了 ssh 密钥路径，那么 RKE 会优先使用节点层级的密钥。
 
@@ -85,16 +85,16 @@ ssh_key_path: ~/.ssh/test
 
 ### SSH Agent
 
-RKE 支持使用本地 ssh 代理的 ssh 连接配置。这个选项的默认值是 `false`，如果你想设置使用本地 ssh 代理，请打开`cluster.yml`文件，找到`ssh_agent_auth`一栏，将默认值修改为`true`，如下方代码样例所示。
+RKE 支持使用本地 ssh 代理的 ssh 连接配置。这个选项的默认值是 `false`，如果您想设置使用本地 ssh 代理，请打开`cluster.yml`文件，找到`ssh_agent_auth`一栏，将默认值修改为`true`，如下方代码样例所示。
 
 ```yaml
 ssh_agent_auth: true
 ```
 
-如果你想使用带有口令的 SSH 私钥，你需要将你的密钥添加到`ssh-agent`中，并配置环境变量`SSH_AUTH_SOCK`。
+如果您想使用带有口令的 SSH 私钥，您需要将您的密钥添加到`ssh-agent`中，并配置环境变量`SSH_AUTH_SOCK`。
 
-```
-$ eval "$(ssh-agent -s)"
+```shell
+eval "$(ssh-agent -s)"
 Agent pid 3975
 $ ssh-add /home/user/.ssh/id_rsa
 Enter passphrase for /home/user/.ssh/id_rsa:
@@ -105,4 +105,4 @@ $ echo $SSH_AUTH_SOCK
 
 ### 插件 job 连接超时
 
-你可以定义 RKE 插件及其连接超时的时间，在 Kubernetes 集群成功运行后，RKE 以 Kubernetes [job](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/)的形式运行插件。如果连接超时，RKE 将停止尝试检索 job 状态，超时的单位是秒。默认超时值为`30`秒。
+您可以定义 RKE 插件及其连接超时的时间，在 Kubernetes 集群成功运行后，RKE 以 Kubernetes [job](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/)的形式运行插件。如果连接超时，RKE 将停止尝试检索 job 状态，超时的单位是秒。默认超时值为`30`秒。

@@ -4,9 +4,9 @@ title: 为 vSphere 虚拟机启用磁盘 UUIDs
 
 ## 概述
 
-为了用 RKE 配置节点，必须用磁盘 UUID 配置所有节点。这一点是必需的，以便连接的 VMDK 向虚拟机呈现一致的 UUID，使磁盘能够正确挂载。
+为了用 RKE 配置节点，必须用磁盘 UUID 配置所有节点，以便连接的 VMDK 向虚拟机呈现一致的 UUID，使磁盘能够正确挂载。
 
-根据您是使用 Rancher 中的 [vSphere 节点驱动程序](/docs/cluster-provisioning/rke-clusters/node-pools/vsphere/_index)还是使用自己的脚本或第三方工具来配置虚拟机，有不同的方法可以为虚拟机启用磁盘 UUID。
+有三种方法可以为虚拟机启用磁盘 UUID，请根据您配置虚拟机的方法选择一种启用磁盘 UUID 的方式。
 
 ## 使用 vSphere 控制台
 

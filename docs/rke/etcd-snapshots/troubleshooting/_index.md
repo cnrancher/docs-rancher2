@@ -8,13 +8,13 @@ title: 问题排查
 
 RKE**v0.1.8**以及之前的版本，如果恢复 etcd 节点失败了，**rke-bundle-cert**容器不会被移除。完成恢复节点的流程后，如果**rke-bundle-cert**容器依然存在，则表示恢复失败。如果您使用的 RKE 是**v0.1.8**以及之前的版本，并且在使用快照恢复 etcd 节点时碰到问题，您可以对每个 etcd 节点运行以下命令，然后再尝试恢复节点。
 
-```
+```shell
 docker container rm --force rke-bundle-cert
 ```
 
 当 etcd 节点备份成功或恢复成功时，**rke-bundle-cert**容器会被移除。如果在备份节点的时候出现问题，**rke-bundle-cert**容器则不会被移除。您可以查看日志或这个容器，看看是什么原因导致备份或恢复失败。
 
-```
+```shell
 docker container logs --follow rke-bundle-cert
 docker container inspect rke-bundle-cert
 ```

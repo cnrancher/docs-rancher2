@@ -23,7 +23,7 @@ RKE 支持在单节点模式或 HA 集群模式下运行 etcd。它还支持向�
 
 您可以启用 etcd 来[拍摄循环快照](/docs/rke/etcd-snapshots/_index)。
 
-默认情况下，RKE 会部署一个新的 etcd 服务，但你也可以使用[外部 etcd 服务](/docs/rke/config-options/services/external-etcd/_index)来运行 Kubernetes。
+默认情况下，RKE 会部署一个新的 etcd 服务，但您也可以使用[外部 etcd 服务](/docs/rke/config-options/services/external-etcd/_index)来运行 Kubernetes。
 
 ## Kubernetes API Server
 
@@ -34,14 +34,14 @@ RKE 支持在单节点模式或 HA 集群模式下运行 etcd。它还支持向�
 ```yaml
 services:
   kube-api:
-    # IP range for any services created on Kubernetes
-    # This must match the service_cluster_ip_range in kube-controller
+    # 在Kubernetes上创建的服务的IP范围。
+    # 必须与kube-controller中的service_cluster_ip_range匹配
     service_cluster_ip_range: 10.43.0.0/16
-    # Expose a different port range for NodePort services
+    # 为NodePort服务提供不同的端口范围
     service_node_port_range: 30000-32767
     pod_security_policy: false
-    # Enable AlwaysPullImages Admission controller plugin
-    # Available as of v0.2.0
+    # 启用AlwaysPullImagesAdmission controller插件
+    # v0.2.0或更新版本可用
     always_pull_images: false
     secrets_encryption_config:
       enabled: true
@@ -51,18 +51,14 @@ services:
 
 RKE 支持`kube-api`服务的以下选项。
 
-- **服务集群 IP 范围** (`service_cluster_ip_range`) - 这是将分配给 Kubernetes 上创建的服务的虚拟 IP 地址。默认情况下，服务集群 IP 范围是`10.43.0.0/16`。如果你改变了这个值，那么也必须在 Kubernetes 控制器管理器（`kube-controller`）上设置相同的值。
+- **服务集群 IP 范围** (`service_cluster_ip_range`) - 这是将分配给 Kubernetes 上创建的服务的虚拟 IP 地址。默认情况下，服务集群 IP 范围是`10.43.0.0/16`。如果您改变了这个值，那么也必须在 Kubernetes 控制器管理器（`kube-controller`）上设置相同的值。
 - **节点端口范围** (`service_node_port_range`) - 使用[type](https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types) `NodePort`创建的 Kubernetes 服务的端口范围。默认情况下，端口范围是`30000-32767`。
 - **Pod 安全策略** (`pod_security_policy`) - 启用[Kubernetes Pod 安全策略](https://kubernetes.io/docs/concepts/policy/pod-security-policy/)的选项。默认情况下，我们不会启用 pod 安全策略，因为它被设置为`false`。
-  > **注意：**如果你将`pod_security_policy`值设置为`true`，RKE 将配置一个开放的策略，允许任何 pod 在集群上工作。你需要配置你自己的策略来充分利用 PSP。
+  > **注意：**如果您将`pod_security_policy`值设置为`true`，RKE 将配置一个开放的策略，允许任何 pod 在集群上工作。您需要配置您自己的策略来充分利用 PSP。
 - **拉取镜像** (`always_pull_images`) - 启用`AlwaysPullImages` Admission 控制器插件。启用`AlwaysPullImages`是一个安全的最佳实践。它强制 Kubernetes 与远程图像注册表验证图像和拉动凭证。本地图像层缓存仍将被使用，但它确实会在启动容器拉取和比较图像哈希时增加一点开销。_注：从 v0.2.0 开始提供_。
 - **Secrets Encryption Config** (`secrets_encryption_config`) - 管理 Kubernetes 静态数据加密。文档化[这里](/docs/rke/config-options/secrets-encryption/_index)
 
 ## Kubernetes Controller Manager
-
-> **Note for Rancher 2 users** If you are configuring Cluster Options using a [Config File]({{<baseurl>}}/rancher/v2.x/en/cluster-provisioning/rke-clusters/options/#config-file) when creating [Rancher Launched Kubernetes]({{<baseurl>}}/rancher/v2.x/en/cluster-provisioning/rke-clusters/), the names of services should contain underscores only: `kube_controller`. This only applies to Rancher v2.0.5 and v2.0.6.
-
-The [Kubernetes Controller Manager](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/) service is the component responsible for running Kubernetes main control loops. The controller manager monitors the cluster desired state through the Kubernetes API server and makes the necessary changes to the current state to reach the desired state.
 
 > **Rancher 2 用户注意**如果您在创建[Rancher Launched Kubernetes](/docs/cluster-provisioning/rke-clusters/options/_index)时，在创建[Rancher Launched Kubernetes](/docs/cluster-provisioning/rke-clusters/options/_index)时，服务名称应只包含下划线：`kube_controller`。这只适用于 Rancher v2.0.5 和 v2.0.6。
 
@@ -83,7 +79,7 @@ services:
 RKE 支持`kube-controller`服务的以下选项。
 
 - **集群 CIDR** (`cluster_cidr`) - 用于为集群中的 pod 分配 IP 地址的 CIDR 池。默认情况下，集群中的每个节点都会从该池中分配一个`/24`网络，用于分配 pod IP。该选项的默认值是`10.42.0.0/16`。
-- **服务集群 IP 范围** (`service_cluster_ip_range`) - 这是将分配给 Kubernetes 上创建的服务的虚拟 IP 地址。默认情况下，服务集群 IP 范围是`10.43.0.0/16`。如果你改变了这个值，那么也必须在 Kubernetes API 服务器（`kube-api`）上设置相同的值。
+- **服务集群 IP 范围** (`service_cluster_ip_range`) - 这是将分配给 Kubernetes 上创建的服务的虚拟 IP 地址。默认情况下，服务集群 IP 范围是`10.43.0.0/16`。如果您改变了这个值，那么也必须在 Kubernetes API 服务器（`kube-api`）上设置相同的值。
 
 ## Kubelet
 
@@ -108,7 +104,7 @@ RKE 支持 "kubelet "服务的以下选项。
 
 - **集群域** (`cluster_domain`) - 集群的[基本域](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)。集群上创建的所有服务和 DNS 记录。默认情况下，域被设置为`cluster.local`。
 - **集群 DNS 服务器** (`cluster_dns_server`) - 分配给集群内 DNS 服务端点的 IP 地址。DNS 查询将被发送到这个 IP 地址，该地址被 KubeDNS 使用。这个选项的默认值是`10.43.0.10`。
-- **Fail if Swap is On** (`fail_swap_on`) - 在 Kubernetes 中，如果节点上启用了 swap，kubelet 的默认行为是**失败**。RKE 不会遵循这个默认值，而是允许在启用 swap 的节点上进行部署。默认情况下，这个值是`false`。如果你想恢复到默认的 kubelet 行为，请将此选项设置为 "true"。
+- **Fail if Swap is On** (`fail_swap_on`) - 在 Kubernetes 中，如果节点上启用了 swap，kubelet 的默认行为是**失败**。RKE 不会遵循这个默认值，而是允许在启用 swap 的节点上进行部署。默认情况下，这个值是`false`。如果您想恢复到默认的 kubelet 行为，请将此选项设置为 "true"。
 - **Generate Serving Certificate** (`generate_serving_certificate`) - 为 kubelet 生成一个由`kube-ca`证书颁发机构签署的证书作为服务器证书。这个选项的默认值是`false`。在启用这个选项之前，请参考下文的 Kubelet Serving Certificate 需求。
 
 ### Kubelet Serving Certificate 需求

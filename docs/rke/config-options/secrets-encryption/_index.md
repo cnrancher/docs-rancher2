@@ -1,5 +1,5 @@
 ---
-title: Encrypting Secret Data at Rest
+title: 加密静态数据
 ---
 
 从 v0.3.1 版本开始，RKE 增加了对静止状态下秘密数据加密管理的支持。
@@ -9,10 +9,10 @@ title: Encrypting Secret Data at Rest
 - 合规性要求
 - 附加安全层
 - 降低等节点泄露的安全影响
-- 降低等效文档备份的安全影响。
+- 降低等效文档备份的安全影响
 - 能够使用外部密钥管理系统
 
-RKE 为用户提供了两种配置路径来实现静态数据加密。
+RKE 为用户提供了两种配置路径来实现静态数据加密：
 
 - 托管式静态数据加密
 - 自定义配置，用于静态数据加密
@@ -86,7 +86,7 @@ services:
 
 ## 轮换密钥
 
-有时候，需要在你的集群中轮换加密配置。例如，密钥被泄露了，有两种方法可以轮换密钥：使用 RKE CLI 命令，或者在`cluster.yml`中禁用和重新启用加密。有两种方法可以轮换密钥：使用 RKE CLI 命令，或者在`cluster.yml`中禁用和重新启用加密。
+有时候，需要在您的集群中轮换加密配置。例如，密钥被泄露了，有两种方法可以轮换密钥：使用 RKE CLI 命令，或者在`cluster.yml`中禁用和重新启用加密。有两种方法可以轮换密钥：使用 RKE CLI 命令，或者在`cluster.yml`中禁用和重新启用加密。
 
 ### 使用 RKE CLI 命令轮换密钥
 
@@ -117,7 +117,7 @@ OPTIONS:
 
 ### 编辑 cluster.yml 轮换密钥
 
-对于启用了加密功能的集群，你可以通过更新`cluster.yml`来轮换加密密钥，如果你在`cluster.yml`中启用并重新启用了数据加密功能，RKE 将不会重复使用旧密钥。如果您在`cluster.yml`中启用并重新启用数据加密，RKE 将不会重复使用旧密钥。相反，它每次都会生成新的密钥，结果与使用 RKE CLI 进行密钥轮换的结果相同。
+对于启用了加密功能的集群，您可以通过更新`cluster.yml`来轮换加密密钥，如果您在`cluster.yml`中启用并重新启用了数据加密功能，RKE 将不会重复使用旧密钥。如果您在`cluster.yml`中启用并重新启用数据加密，RKE 将不会重复使用旧密钥。相反，它每次都会生成新的密钥，结果与使用 RKE CLI 进行密钥轮换的结果相同。
 
 ## 自定义静态数据加密配置
 
@@ -153,19 +153,19 @@ services:
               - identity: {}
 ```
 
-AWS KMS 的文档可以在[这里](https://github.com/kubernetes-sigs/aws-encryption-provider)找到。当 "自定义配置 "设置为启用 AWS KMS 提供商时，你应该考虑以下几点。
+AWS KMS 的文档可以在[这里](https://github.com/kubernetes-sigs/aws-encryption-provider)找到。当 "自定义配置 "设置为启用 AWS KMS 提供商时，您应该考虑以下几点。
 
 - 由于 RKE 在容器中运行 "kube-api "服务，因此需要您使用 "extra_binds "功能将 KMS 提供者的 socket 位置绑定安装在 "kube-api "容器内。
 - AWS KMS 提供者在集群中作为一个 pod 运行。因此，启用它的正确方法是。
   1. 在禁用静态加密的情况下部署您的集群。
   2. 部署 KMS pod，并确保其正确工作。
   3. 使用自定义加密配置更新您的集群，以利用 KMS 提供者。
-- Kube API 使用 Unix 套接字连接到 KMS 提供者。你应该将你的 KMS 部署配置为在集群中的所有`controlplane`节点上运行 pods。
-- 你的`controlplane`节点应该配置一个 AMI 配置文件，它可以访问你在配置中使用的 KMS 密钥。
+- Kube API 使用 Unix 套接字连接到 KMS 提供者。您应该将您的 KMS 部署配置为在集群中的所有`controlplane`节点上运行 pods。
+- 您的`controlplane`节点应该配置一个 AMI 配置文件，它可以访问您在配置中使用的 KMS 密钥。
 
 ### 如何预防轮换密钥后的还原故障
 
-重要的是要明白，为你的集群启用加密意味着你不能再不使用你的加密密钥来访问你的 etcd 数据库和/或 etcd 数据库备份中的加密数据。
+重要的是要明白，为您的集群启用加密意味着您不能再不使用您的加密密钥来访问您的 etcd 数据库和/或 etcd 数据库备份中的加密数据。
 
 加密配置存储在集群状态文件`cluster.rkestate`中，它与 etcd 备份解耦。例如，在以下任何一种备份情况下，还原过程将失败。
 
@@ -174,6 +174,6 @@ AWS KMS 的文档可以在[这里](https://github.com/kubernetes-sigs/aws-encryp
 
 因此，我们建议，当您启用或禁用加密时，或者当您旋转密钥时，您应该[创建快照](/docs/rke/etcd-snapshots/one-time-snapshots/_index)，以便您的备份需要您可以访问的相同密钥。
 
-这也意味着你不应该在还原过程中轮换密钥，因为你会丢失`cluster.rkestate`中的加密密钥。
+这也意味着您不应该在还原过程中轮换密钥，因为您会丢失`cluster.rkestate`中的加密密钥。
 
 这同样适用于自定义配置用例，然而在这种情况下，它将取决于用户提供的加密配置。

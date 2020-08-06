@@ -75,8 +75,8 @@ keywords:
 
 您可以使用 curl 来查看 **HEC** 是否开启：
 
-```
-$ curl http://splunk-server:8088/services/collector/event \
+```shell
+curl http://splunk-server:8088/services/collector/event \
     -H 'Authorization: Splunk 8da70994-b1b0-4a79-b154-bfaae8f93432' \
     -d '{"event": "hello world"}'
 ```

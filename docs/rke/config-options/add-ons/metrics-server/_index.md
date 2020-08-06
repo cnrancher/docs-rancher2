@@ -8,7 +8,7 @@ title: Metrics Server 插件
 
 RKE 会将 Metrics Server 部署为一个 Deployment。
 
-Metrics Server 使用的镜像在[`system_images`](/docs/rke/config-options/system-images/_index)下。对于每个 Kubernetes 版本，都有一个与 Metrics Server 相关联的默认镜像，但这些镜像可以通过更改`system_images`中的镜像标签来覆盖。
+Metrics Server 使用的镜像在[系统镜像](/docs/rke/config-options/system-images/_index)下。对于每个 Kubernetes 版本，都有一个与 Metrics Server 相关联的默认镜像，但这些镜像可以通过更改`system_images`中的镜像标签来覆盖。
 
 ## 禁用 Metrics Server
 

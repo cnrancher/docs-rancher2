@@ -1,5 +1,5 @@
 ---
-title: RKE Kubernetes 安装介绍
+title: 安装介绍
 ---
 
 RKE 是一个快速的，多功能的 Kubernetes 安装工具，您可以参考以下步骤，使用 RKE 在您的 Linux 主机上安装 Kubernetes：
