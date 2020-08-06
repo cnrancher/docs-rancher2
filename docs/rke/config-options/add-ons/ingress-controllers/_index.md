@@ -8,7 +8,7 @@ title: K8s Ingress Controllers
 
 RKE 将以 DaemonSet 的形式部署 Ingress Controller，并使用 `hostnetwork: true`，因此在部署控制器的每个节点上都会打开 `80`和`443`端口。
 
-Ingress Controller 使用的镜像在[`system_images`](/docs/rke/config-options/system-images/_index)中。对于每个 Kubernetes 版本，都有与 Ingress Controller 相关联的默认镜像，这些镜像可以通过更改`system_images`中的镜像标签来覆盖默认设置。
+Ingress Controller 使用的镜像在[系统镜像](/docs/rke/config-options/system-images/_index)中。对于每个 Kubernetes 版本，都有与 Ingress Controller 相关联的默认镜像，这些镜像可以通过更改`system_images`中的镜像标签来覆盖默认设置。
 
 ## 调度 Ingress Controller
 
@@ -39,7 +39,7 @@ ingress:
 
 ## 配置 NGINX Ingress Controller
 
-Kubernetes 中有对于 NGINX 的选项。有[NGINX 配置图的选项列表](https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md)、[命令行 extra_args](https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/cli-arguments.md)和[注释](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/)。
+Kubernetes 中有 NGINX 选项：[NGINX 配置图的选项列表](https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md)、[命令行 extra_args](https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/cli-arguments.md)和[注释](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/)。
 
 ```yaml
 ingress:

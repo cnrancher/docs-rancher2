@@ -23,8 +23,6 @@ cloud_provider:
 
 ## 覆盖主机名称
 
-Since the Azure node name must match the Kubernetes node name, you override the Kubernetes name on the node by setting the `hostname_override` for each node. If you do not set the `hostname_override`, the Kubernetes node name will be set as the `address`, which will cause the Azure cloud provider to fail.
-
 因 Azure 节点名称必须与 Kubernetes 节点名称相匹配，可以通过为每个节点设置`hostname_override`来覆盖节点上的 Kubernetes 名称。如果不设置`hostname_override`，Kubernetes 节点名将被设置为`address`，会导致 Azure 云提供商失败。
 
 ```yaml

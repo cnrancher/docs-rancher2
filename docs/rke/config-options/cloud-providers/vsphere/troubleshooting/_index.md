@@ -21,6 +21,6 @@ title: 问题排查
 3.  检查控制器-管理器和 kubelet 容器的日志，查找与 vSphere 云提供商相关的错误。
 
     ```sh
-    $ docker logs --since 15m kube-controller-manager
-    $ docker logs --since 15m kubelet
+    docker logs --since 15m kube-controller-manager
+    docker logs --since 15m kubelet
     ```

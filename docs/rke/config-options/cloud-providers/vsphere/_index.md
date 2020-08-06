@@ -1,5 +1,5 @@
 ---
-title: vSphere Cloud Provider
+title: vSphere
 ---
 
 ## 概述

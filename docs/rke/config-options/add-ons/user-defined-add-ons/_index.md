@@ -1,5 +1,5 @@
 ---
-title: 添加用户自定义插件
+title: 自定义插件
 ---
 
 除了[网络插件](/docs/rke/config-options/add-ons/network-plugins/_index)、[ingress controllers 插件](/docs/rke/config-options/add-ons/ingress-controllers/_index)、[DNS 插件](/docs/rke/config-options/add-ons/dns/_index)和[Metrics Server 插件](/docs/rke/config-options/add-ons/metrics-server/_index)之外，RKE 支持添加用户自定义插件。

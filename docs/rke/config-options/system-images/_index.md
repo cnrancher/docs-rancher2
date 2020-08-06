@@ -8,7 +8,7 @@ RKE 在部署 Kubernetes 的时候，会从镜像仓库中拉镜像。这些镜�
 
 从`v0.1.6`开始，多个系统镜像的功能被整合到一个`rancher/rke-tools`镜像中，以简化和加快部署过程。
 
-你可以配置[网络插件](/docs/rke/config-options/add-ons/network-plugins/_index)。[ingress controller](/docs/rke/config-options/add-ons/ingress-controllers/_index)和[dns provider](/docs/rke/config-options/add-ons/dns/_index)以及这些附加组件的选项分别在`cluster. yml`中，以及这些附加组件的选项。
+您可以配置[网络插件](/docs/rke/config-options/add-ons/network-plugins/_index)。[ingress controller](/docs/rke/config-options/add-ons/ingress-controllers/_index)和[dns provider](/docs/rke/config-options/add-ons/dns/_index)以及这些附加组件的选项分别在`cluster. yml`中，以及这些附加组件的选项。
 
 下面是通过 RKE 部署 Kubernetes 所使用的系统镜像列表的一个例子。Kubernetes 的默认版本是与特定版本的系统镜像绑定的。
 
@@ -79,4 +79,4 @@ system_images:
 
 ## 离线安装
 
-如果你处于离线环境，不能访问`docker.io`，你将需要在你的集群配置文件中设置你的[私有镜像仓库](/docs/rke/config-options/private-registries/_index)。设置好私有镜像仓库后，你需要更新这些镜像，以便从你的私有镜像仓库中提取最新版本的镜像。
+如果您处于离线环境，不能访问`docker.io`，您将需要在您的集群配置文件中设置您的[私有镜像仓库](/docs/rke/config-options/private-registries/_index)。设置好私有镜像仓库后，您需要更新这些镜像，以便从您的私有镜像仓库中提取最新版本的镜像。
