@@ -28,11 +28,11 @@ RKE 提供了以下三种 DNS 提供商，作为附加组件部署：
 - RKE 版本为 v1.1.0 或更新版本
 - Kubernetes 版本为 v1.15.11+、v1.16.8+或 v1.17.4+。
 
-NodeLocal DNS 是一个额外的组件，可以部署在每个节点上以提高 DNS 性能。它并不能替代`provider`参数，所以仍然需要配置一个可用的 DNS 提供商。有关 NodeLocal DNS 工作原理的更多信息，请参见[在 Kubernetes 集群中使用 NodeLocal DNS Cache](https://kubernetes.io/docs/tasks/administer-cluster/nodelocaldns/)。
+NodeLocal DNS 是一个额外的组件，可以部署在每个节点上，提高 DNS 性能。由于它不能替代`provider`参数，所以仍然需要为每个节点配置一个可用的 DNS 提供商。有关 NodeLocal DNS 工作原理的更多信息，请参见[在 Kubernetes 集群中使用 NodeLocal DNS Cache](https://kubernetes.io/zh/docs/tasks/administer-cluster/nodelocaldns/)。
 
 ### 配置 NodeLocal DNS
 
-使用`ip_address`参数配置每台主机监听的链路本地 IP 地址，确保这个 IP 地址在主机上没有被占用。
+使用`ip_address`参数配置每台主机监听的链路本地 IP 地址，请确保这个 IP 地址在主机上没有被占用。
 
 ```yaml
 dns:
@@ -47,9 +47,9 @@ dns:
 
 删除`ip_address`值就会将从集群中删除 NodeLocal DNS。
 
-> **说明：** 当删除 NodeLocal DNS 时， 可能会对 DNS 造成干扰。更新后的`/etc/resolv.conf`配置仅对删除 NodeLocal DNS 后启动的 pod 生效。在一般情况下，使用默认`dnsPolicy: ClusterFirst`将需要重新部署。
+> **说明：** 删除 NodeLocal DNS 时， 可能会对 DNS 造成干扰。更新后的`/etc/resolv.conf`配置仅对删除 NodeLocal DNS 后启动的 pod 生效。在一般情况下，使用默认`dnsPolicy: ClusterFirst`将需要重新部署。
 
-> **说明：** 如果您从一个 DNS 提供商切换到另一个 DNS 提供商，在部署新的 DNS 提供商之前，现有的 DNS 提供商将被删除。
+> **说明：** 如果您从一个 DNS 提供商切换到另一个 DNS 提供商，在部署新的 DNS 提供商之前，现有的 DNS 提供商会被删除。
 
 ## CoreDNS
 

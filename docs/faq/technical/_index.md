@@ -19,26 +19,26 @@ keywords:
 
 使用单节点 Docker 安装时：
 
-```
-$ docker exec -ti <container_id> reset-password
+```shell
+docker exec -ti <container_id> reset-password
 New password for default administrator (user-xxxxx):
 <new_password>
 ```
 
 使用 Helm 的高可用安装时：
 
-```
-$ KUBECONFIG=./kube_config_rancher-cluster.yml
-$ kubectl --kubeconfig $KUBECONFIG -n cattle-system exec $(kubectl --kubeconfig $KUBECONFIG -n cattle-system get pods -l app=rancher | grep '1/1' | head -1 | awk '{ print $1 }') -- reset-password
+```shell
+KUBECONFIG=./kube_config_rancher-cluster.yml
+kubectl --kubeconfig $KUBECONFIG -n cattle-system exec $(kubectl --kubeconfig $KUBECONFIG -n cattle-system get pods -l app=rancher | grep '1/1' | head -1 | awk '{ print $1 }') -- reset-password
 New password for default administrator (user-xxxxx):
 <new_password>
 ```
 
 使用 RKE Add-ons 的高可用安装时：
 
-```
-$ KUBECONFIG=./kube_config_rancher-cluster.yml
-$ kubectl --kubeconfig $KUBECONFIG exec -n cattle-system $(kubectl --kubeconfig $KUBECONFIG get pods -n cattle-system -o json | jq -r '.items[] | select(.spec.containers[].name=="cattle-server") | .metadata.name') -- reset-password
+```shell
+KUBECONFIG=./kube_config_rancher-cluster.yml
+kubectl --kubeconfig $KUBECONFIG exec -n cattle-system $(kubectl --kubeconfig $KUBECONFIG get pods -n cattle-system -o json | jq -r '.items[] | select(.spec.containers[].name=="cattle-server") | .metadata.name') -- reset-password
 New password for default administrator (user-xxxxx):
 <new_password>
 ```
@@ -47,8 +47,8 @@ New password for default administrator (user-xxxxx):
 
 使用单节点 Docker 安装时：
 
-```
-$ docker exec -ti <container_id> ensure-default-admin
+```shell
+docker exec -ti <container_id> ensure-default-admin
 New default administrator (user-xxxxx)
 New password for default administrator (user-xxxxx):
 <new_password>
@@ -56,18 +56,18 @@ New password for default administrator (user-xxxxx):
 
 使用 Helm 的高可用安装时：
 
-```
-$ KUBECONFIG=./kube_config_rancher-cluster.yml
-$ kubectl --kubeconfig $KUBECONFIG -n cattle-system exec $(kubectl --kubeconfig $KUBECONFIG -n cattle-system get pods -l app=rancher | grep '1/1' | head -1 | awk '{ print $1 }') -- ensure-default-admin
+```shell
+KUBECONFIG=./kube_config_rancher-cluster.yml
+kubectl --kubeconfig $KUBECONFIG -n cattle-system exec $(kubectl --kubeconfig $KUBECONFIG -n cattle-system get pods -l app=rancher | grep '1/1' | head -1 | awk '{ print $1 }') -- ensure-default-admin
 New password for default administrator (user-xxxxx):
 <new_password>
 ```
 
 使用 RKE Add-ons 的高可用安装时：
 
-```
-$ KUBECONFIG=./kube_config_rancher-cluster.yml
-$ kubectl --kubeconfig $KUBECONFIG exec -n cattle-system $(kubectl --kubeconfig $KUBECONFIG get pods -n cattle-system -o json | jq -r '.items[] | select(.spec.containers[].name=="cattle-server") | .metadata.name') -- ensure-default-admin
+```shell
+KUBECONFIG=./kube_config_rancher-cluster.yml
+kubectl --kubeconfig $KUBECONFIG exec -n cattle-system $(kubectl --kubeconfig $KUBECONFIG get pods -n cattle-system -o json | jq -r '.items[] | select(.spec.containers[].name=="cattle-server") | .metadata.name') -- ensure-default-admin
 New password for default admin user (user-xxxxx):
 <new_password>
 ```
@@ -106,8 +106,8 @@ L4 负载均衡器是通过`type: LoadBalancer`创建的。在 Kubernetes 里，
 
 解压下载后的 zip 文件，通过`id_rsa`文件连接您的节点。请确保使用正确的用户名（RancherOS 用`rancher` 或 `docker`，Ubuntu 用`ubuntu`，Amazon Linux 用`ec2-user`）
 
-```
-$ ssh -i id_rsa user@ip_of_node
+```shell
+ssh -i id_rsa user@ip_of_node
 ```
 
 ## 如何在 Rancher 里完成自动化任务？
@@ -207,16 +207,16 @@ openssl x509 -noout -in cert.pem -text | grep DNS
 
 可以。大部分 UI 可以通过键盘快捷键访问。可在 UI 任意地方中按`?`查看所有可用的快捷键。
 
-## 将kubeconfig文件复制到本地，kubectl无法使用
+## 将 kubeconfig 文件复制到本地，kubectl 无法使用
 
-Rancher 2.4.x版本使用kubectl连接kubernetes集群出现以下错误：
+Rancher 2.4.x 版本使用 kubectl 连接 kubernetes 集群出现以下错误：
 
 ```bash
 kubectl get pods
 Unable to connect to the server: x509: certificate is valid for 127.0.0.1, 172.17.0.2, 172.31.1.2, not x.x.x.x
 ```
 
-这是因为2.4.x调整了证书注册的逻辑，将首次启动rancher设置的`server-url`添加到证书当中，如果想通过其他域名或IP连接rancher，将会失败。
+这是因为 2.4.x 调整了证书注册的逻辑，将首次启动 rancher 设置的`server-url`添加到证书当中，如果想通过其他域名或 IP 连接 rancher，将会失败。
 
 解决办法：
 
@@ -232,16 +232,16 @@ kubectl -n cattle-system patch  secret serving-cert --patch '{
 
 ## 为什么命名空间无法移动到其他项目
 
-在[项目/命名空间](/docs/project-admin/namespaces/_index)页面移动命名空间，有时会出现无法移动的情况，这是因为rancher针对移动命名空间做了一些限制：
+在[项目/命名空间](/docs/project-admin/namespaces/_index)页面移动命名空间，有时会出现无法移动的情况，这是因为 rancher 针对移动命名空间做了一些限制：
 
 - Rancher 不支持将命名空间移动到已经配置了[资源配额](/docs/project-admin/resource-quotas/_index)的项目中。
 
 > 日志提示：
 >
->  ```bash
->  Move Error
->  can't move namespace. Project pp11 has resource quota set
->  ```
+> ```bash
+> Move Error
+> can't move namespace. Project pp11 has resource quota set
+> ```
 
 - 如果把命名空间从一个已经配置了配额的项目中，移动到一个没有配置配额的项目中，这个命名空间的配额将会被移除。
-- Rancher不支持移动从应用商店启动应用时创建的命名空间，选择该命名空间，`移动`按钮将变为灰色。
+- Rancher 不支持移动从应用商店启动应用时创建的命名空间，选择该命名空间，`移动`按钮将变为灰色。

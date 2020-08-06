@@ -94,8 +94,8 @@ spec:
 
 在 Rancher v2.0.7 及更高版本中创建的集群具有使用 Horizontal Pod Autoscaler 所需的全部要求（metrics-server 和 Kubernetes 集群配置）。运行以下命令以检查 mecrics 组件是否安装成功：
 
-```
-$ kubectl top nodes
+```shell
+kubectl top nodes
 NAME                              CPU(cores)   CPU%      MEMORY(bytes)   MEMORY%
 node-controlplane   196m         9%        1623Mi          42%
 node-etcd           80m          4%        1090Mi          28%

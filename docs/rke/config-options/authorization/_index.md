@@ -1,5 +1,5 @@
 ---
-title: Authorization
+title: 授权
 ---
 
 Kubernetes 支持多个[授权模块](https://kubernetes.io/docs/reference/access-authn-authz/authorization/#authorization-modules)。目前，RKE 只支持[RBAC 模块](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)。

@@ -1,5 +1,5 @@
 ---
-title: 节点
+title: 节点选项配置
 ---
 
 ## 概述
@@ -62,7 +62,7 @@ nodes:
 
 ### etcd
 
-有了这个角色，`etcd`容器就会在这些节点上运行。Etcd 保存着你的集群的状态，是你集群中最重要的组件，是你集群的单一真相来源。虽然你可以只在一个节点上运行 etcd，但通常需要 3 个、5 个或更多的节点来创建一个 HA 配置。Etcd 是一个分布式的可靠键值存储，它存储了所有 Kubernetes 的状态。[在节点上设置污点](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)与**etcd**角色如下图所示。
+有了这个角色，`etcd`容器就会在这些节点上运行。Etcd 保存着您的集群的状态，是您集群中最重要的组件，是您集群的单一真相来源。虽然您可以只在一个节点上运行 etcd，但通常需要 3 个、5 个或更多的节点来创建一个 HA 配置。Etcd 是一个分布式的可靠键值存储，它存储了所有 Kubernetes 的状态。[在节点上设置污点](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)与**etcd**角色如下图所示。
 
 | Taint Key                      | Taint Value | Taint Effect |
 | ------------------------------ | ----------- | ------------ |
@@ -100,40 +100,40 @@ nodes:
 
 ### SSH Port
 
-在每个节点中，你可以指定连接到这个节点时要使用的`端口`。默认的端口是`22`。
+在每个节点中，您可以指定连接到这个节点时要使用的`端口`。默认的端口是`22`。
 
 ### SSH Users
 
-对于每个节点，你指定连接到这个节点时要使用的`user`。这个用户必须是 Docker 组的成员，或者允许向节点的 Docker 套接字写入。
+对于每个节点，您指定连接到这个节点时要使用的`user`。这个用户必须是 Docker 组的成员，或者允许向节点的 Docker 套接字写入。
 
 ### SSH Key Path
 
-对于每个节点，你可以指定路径，即`ssh_key_path`，用于连接到这个节点时要使用的 SSH 私钥。每个节点的默认密钥路径是`~/.ssh/id_rsa`。
+对于每个节点，您可以指定路径，即`ssh_key_path`，用于连接到这个节点时要使用的 SSH 私钥。每个节点的默认密钥路径是`~/.ssh/id_rsa`。
 
 > **Note:** If you have a private key that can be used across all nodes, you can set the [SSH key path at the cluster level](/docs/rke/config-options/_index) The SSH key path set in each node will always take precedence.
 
-**注意：**如果你有一个可以在所有节点上使用的私钥，你可以设置[集群级的 SSH 密钥路径](/docs/rke/config-options/_index)。每个节点中设置的 SSH 密钥路径总是优先的。
+**注意：**如果您有一个可以在所有节点上使用的私钥，您可以设置[集群级的 SSH 密钥路径](/docs/rke/config-options/_index)。每个节点中设置的 SSH 密钥路径总是优先的。
 
 ### SSH Key
 
-你可以不设置 SSH 密钥的路径，而是指定实际的密钥，即`ssh_key`，用来连接到节点。
+您可以不设置 SSH 密钥的路径，而是指定实际的密钥，即`ssh_key`，用来连接到节点。
 
 ### SSH Certificate Path
 
-对于每个节点，你可以指定路径，即`ssh_cert_path`，用于连接到这个节点时要使用的签名 SSH 证书。
+对于每个节点，您可以指定路径，即`ssh_cert_path`，用于连接到这个节点时要使用的签名 SSH 证书。
 
 ### SSH Certificate
 
-你可以指定实际的证书，即`ssh_cert`，用来连接到节点，而不是设置签名的 SSH 证书的路径。
+您可以指定实际的证书，即`ssh_cert`，用来连接到节点，而不是设置签名的 SSH 证书的路径。
 
 ### Docker Socket
 
-如果 Docker 套接字和默认的不一样，你可以设置`docker_socket`。默认是`/var/run/docker.sock`。
+如果 Docker 套接字和默认的不一样，您可以设置`docker_socket`。默认是`/var/run/docker.sock`。
 
 ### Labels
 
-你可以为每个节点添加一个任意的标签映射。当使用[入口控制器的](/docs/rke/config-options/add-ons/ingress-controllers/_index)`node_selector`选项时，可以使用它。
+您可以为每个节点添加一个任意的标签映射。当使用[入口控制器的](/docs/rke/config-options/add-ons/ingress-controllers/_index)`node_selector`选项时，可以使用它。
 
 ### Taints
 
-你能够为每个节点添加[污点](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)。
+您能够为每个节点添加[污点](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)。
