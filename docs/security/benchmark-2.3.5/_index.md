@@ -16,7 +16,7 @@ keywords:
   - 自测指南 - v2.3.5
 ---
 
-## CIS Kubernetes Benchmark 1.5 - Rancher v2.3.5 - Kubernetes v1.15
+## CIS Kubernetes Benchmark 1.5 - Rancher 2.3.5 - Kubernetes 1.15
 
 [点击这里下载 PDF 版本的安全自测指南](https://releases.rancher.com/documents/security/2.3.5/Rancher_Benchmark_Assessment.pdf)
 
