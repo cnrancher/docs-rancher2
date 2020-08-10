@@ -1,0 +1,250 @@
+---
+title: K3s Server 配置参考
+weight: 1
+---
+
+在本节中，你将学习如何配置K3s server。
+
+> 在整个K3s文档中，你会看到一些选项可以作为命令标志和环境变量传递进来。关于传入选项的帮助，请参考[如何使用标志和环境变量。](/docs/k3s/installation/install-options/how-to-flags/_index)
+
+- [常用选项](#常用选项)
+    - [数据库](#数据库)
+    - [集群选项](#集群选项)
+    - [客户端选项](#客户端选项)
+- [Agent 选项](#agent-选项)
+    - [Agent 节点](#agent-节点)
+    - [Agent 运行时](#agent-运行时)
+    - [Agent 网络](#agent-网络)
+- [高级选项](#高级选项)
+    - [日志](#日志)
+    - [监听](#监听)
+    - [数据](#数据)
+    - [网络](#网络)
+    - [自定义选项](#自定义选项)
+    - [存储类](#存储类)
+    - [Kubernetes 组件](#kubernetes-组件)
+    - [为Kubernetes进程定制标志](#kubernetes进程定制标志)
+    - [实验性选项](#实验性选项)
+    - [废弃的选项](#废弃的选项)
+- [K3s Server Cli 帮助](#k3s-server-cli-帮助)
+
+
+## 常用选项
+
+### 数据库
+
+| Flag | 环境变量 | 描述 |
+|------|----------------------|-------------|
+|  `--datastore-endpoint` value | `K3S_DATASTORE_ENDPOINT` | 指定 etcd、Mysql、Postgres 或 Sqlite（默认）数据源名称。 |
+|  `--datastore-cafile` value | `K3S_DATASTORE_CAFILE` | TLS证书授权文件，用于确保数据存储后端通信的安全。       |
+|  `--datastore-certfile` value | `K3S_DATASTORE_CERTFILE`       | TLS认证文件，用于确保数据存储后端通信的安全。      |
+|  `--datastore-keyfile` value  | `K3S_DATASTORE_KEYFILE`        | 用于保护数据存储后端通信的TLS密钥文件。    |
+
+### 集群选项
+
+| Flag | 环境变量 | 描述 |
+|------|----------------------|-------------|
+|  `--token value, -t` value  | `K3S_TOKEN`      | 用于将server或agent加集群的共享secret。 |
+|  `--token-file` value    |  `K3S_TOKEN_FILE`   | 包含cluster-secret/token的文件      |
+
+### 客户端选项
+
+| Flag | 环境变量 | 描述 |
+|------|----------------------|-------------|
+|  `--write-kubeconfig value, -o` value  | `K3S_KUBECONFIG_OUTPUT` | 将管理客户端的kubeconfig写入这个文件。 |
+|  `--write-kubeconfig-mode` value | `K3S_KUBECONFIG_MODE` | 使用这种[模式](https://en.wikipedia.org/wiki/Chmod)写入kubeconfig。允许写入kubeconfig文件的选项对于允许将K3s集群导入Rancher很有用。示例值为644。    | 
+
+## Agent 选项
+
+K3s agent选项是可以作为server选项的，因为server内部嵌入了agent进程。
+
+### Agent 节点
+
+| Flag | 环境变量 | 描述 |
+|------|----------------------|-------------|
+|   `--node-name` value      | `K3S_NODE_NAME`        | 节点名称       |
+|   `--with-node-id`     |  N/A           | 将ID附加到节点名称         | (agent/node) 
+|   `--node-label` value   | N/A         | 用一组标签注册和启动kubelet。        | 
+|   `--node-taint` value    | N/A        | 用一组污点注册kubelet。         |
+
+### Agent 运行时
+
+| Flag |  默认值 | 描述 |
+|------|---------|-------------|
+|   `--docker`  |  N/A            |  用docker代替containerd            |     (agent/runtime) 
+|  `--container-runtime-endpoint` value  | N/A   | 禁用嵌入式containerd，使用替代的CRI实现。 |
+|   `--pause-image` value    | "docker.io/rancher/pause:3.1"          | 针对containerd或Docker的自定义pause镜像      |
+|   `--private-registry` value  | "/etc/rancher/k3s/registries.yaml"         | 私有注册表配置文件     |
+
+### Agent 网络
+
+Agent选项之所以存在，是因为server内嵌了agent进程
+
+| Flag | 环境变量 | 描述 |
+|------|----------------------|-------------|
+|   `--node-ip value, -i` value  | N/A         | 为节点发布的IP地址     |
+|   `--node-external-ip` value   |  N/A        | 对外发布节点的IP地址    | 
+|   `--resolv-conf` value   |  `K3S_RESOLV_CONF`    | Kubelet resolv.conf 文件        |
+|   `--flannel-iface` value    |  N/A         | 覆盖默认的flannel接口   | 
+|   `--flannel-conf` value   |   N/A         | 覆盖默认的flannel文件     |
+
+## 高级选项
+
+### 日志
+
+| Flag |  默认值 | 描述 |
+|------|---------|-------------|
+| `-v` value | 0  |  日志级别详细程度的数字 |
+| `--vmodule` value | N/A | 以逗号分隔的pattern=N设置列表，用于文件过滤的日志记录 |
+| `--log value, -l` value  | N/A | 记录到文件 |
+| `--alsologtostderr` | N/A | 记录到标准错误输出和文件（如果设置）。 |
+
+
+### 监听
+
+| Flag |  默认值 | 描述 |
+|------|---------|-------------|
+| `--bind-address` value | 0.0.0.0 | k3s绑定地址 |
+| `--https-listen-port` value | 6443 | HTTPS监听端口 |
+| `--advertise-address` value | node-external-ip/node-ip | apiserver用来向集群成员发布的IP地址 |
+| `--advertise-port` value | 0 | apiserver用于通告集群成员的端口(默认: listen-port) |
+| `--tls-san` value  | N/A | 在TLS证书中添加其他主机名或IP作为主题备用名称
+
+### Data
+
+| Flag |  默认值 | 描述 |
+|------|---------|-------------|
+| `--data-dir value, -d` value  | `/var/lib/rancher/k3s` 或 `${HOME}/.rancher/k3s` 如果不是root用户） | 存放数据的目录 |
+
+### 网络
+
+| Flag |  默认值 | 描述 |
+|------|---------|-------------|
+| `--cluster-cidr` value | "10.42.0.0/16"         |  用于Pod IP的网络CIDR        | 
+|  `--service-cidr` value | "10.43.0.0/16"         | 用于service IP的网络CIDR       |
+|  `--cluster-dns` value   | "10.43.0.10"         | 用于coredns服务的集群IP。应该在您的`service-cidr`范围内 |
+|  `--cluster-domain` value  | "cluster.local"        | 集群域名       | 
+|  `--flannel-backend` value   | "vxlan"      | 'none', 'vxlan', 'ipsec', 'host-gw', 或 'wireguard'中的一个       |
+
+### 定制标志
+
+| Flag |  描述 |
+|------|--------------|
+| `--kube-apiserver-arg` value | 自定义kube-apiserver进程的参数。 |
+| `--kube-scheduler-arg` value | 自定义kube-scheduler进程的参数。 |
+| `--kube-controller-manager-arg` value  | 自定义kube-controller-manager进程的参数。    |
+| `--kube-cloud-controller-manager-arg` value  | 自定义kube-cloud-controller-manager进程的参数。   |
+
+### 存储类
+
+| Flag |  描述 |
+|------|--------------|
+|   `--default-local-storage-path` value  | 本地存储类的默认存储路径     |
+
+### Kubernetes 组件
+
+| Flag |  描述 |
+|------|--------------|
+|  `--disable` value    |  不需要部署的组件，删除任何已部署的组件 (有效项目：coredns, servicelb, traefik,local-storage, metrics-server)            |
+|   `--disable-scheduler`  | 禁用Kubernetes默认调度器            | 
+|   `--disable-cloud-controller`   | 禁用k3s默认云控制管理器           | 
+|   `--disable-network-policy`  | 禁用K3S默认网络策略控制器            | 
+
+### Kubernetes进程定制标志
+
+| Flag |  描述 |
+|------|--------------|
+|  `--kubelet-arg` value      |  自定义kubelet进程的参数              |
+|  `--kube-proxy-arg` value    |   自定义kube-proxy进程的参数           |
+
+### 实验性选项
+
+| Flag | 环境变量 | 描述 |
+|------|----------------------|-------------|
+|   `--rootless`   |  N/A           |  运行 rootless           |    (experimental) 
+|   `--agent-token` value      | `K3S_AGENT_TOKEN`      |  用于将agent加入集群但不用于server的共享密钥      |
+|   `--agent-token-file` value | `K3S_AGENT_TOKEN_FILE`       | 包含agent secret的文件       |
+|   `--server value, -s` value | `K3S_URL`          |  要连接的k3s server，用于加入集群    |
+|   `--cluster-init`   |  `K3S_CLUSTER_INIT`            |   初始化为新的集群master      |
+|   `--cluster-reset`   |  `K3S_CLUSTER_RESET`            | 忽略所有节点，成为一个新集群的集群master        |
+|   `--secrets-encryption`   |   N/A        |  启用Secret加密     |
+
+### 废弃的选项
+
+| Flag | 环境变量 | 描述 |
+|------|----------------------|-------------|
+|  `--no-flannel`    |   N/A           |  使用 --flannel-backend=none       |
+|   `--no-deploy` value   | N/A             | 不需要部署的组件 (有效选项: coredns, servicelb, traefik, local-storage, metrics-server) |
+|   `--cluster-secret` value   | `K3S_CLUSTER_SECRET`        | 使用 --token        |
+
+
+## K3s Server CLI 帮助
+
+> 如果一个选项出现在下面的括号里，例如`[$K3S_TOKEN]`，则意味着该选项可以作为该名称的环境变量传递进来。
+
+```bash
+NAME:
+   k3s server - 运行K3s server
+
+USAGE:
+   k3s server [选项]
+
+选项:
+   -v value                                   (logging) 日志级别详细程度的数字 (默认: 0)
+   --vmodule value                            (logging) 以逗号分隔的pattern=N设置列表，用于文件过滤的日志记录
+   --log value, -l value                      (logging) 记录到文件
+   --alsologtostderr                          (logging) 记录到标准错误输出和文件（如果设置)
+   --bind-address value                       (listener) k3s绑定地址 (默认: 0.0.0.0)
+   --https-listen-port value                  (listener) HTTPS监听端口 (默认: 6443)
+   --advertise-address value                  (listener) apiserver用来向集群成员发布的IP地址 (默认: node-external-ip/node-ip)
+   --advertise-port value                     (listener) apiserver用于通告集群成员的端口 (默认: listen-port) (默认: 0)
+   --tls-san value                            (listener) 在TLS证书中添加其他主机名或IP作为主题备用名称
+   --data-dir value, -d value                 (data) 存放数据的目录 默认 /var/lib/rancher/k3s or ${HOME}/.rancher/k3s(如果不是root用户)
+   --cluster-cidr value                       (networking) 用于Pod IP的网络CIDR (默认: "10.42.0.0/16")
+   --service-cidr value                       (networking) 用于service IP的网络CIDR (默认: "10.43.0.0/16")
+   --cluster-dns value                        (networking) 用于coredns服务的集群IP。应该在您的`service-cidr`范围内 (默认: 10.43.0.10)
+   --cluster-domain value                     (networking) 集群域名 (默认: "cluster.local")
+   --flannel-backend value                    (networking) 'none', 'vxlan', 'ipsec', 'host-gw', 或 'wireguard'中的一个 (默认: "vxlan")
+   --token value, -t value                    (cluster) 用于将server或agent加入集群的共享secret。 [$K3S_TOKEN]
+   --token-file value                         (cluster) 包含cluster-secret/token的文件 [$K3S_TOKEN_FILE]
+   --write-kubeconfig value, -o value         (client) 将管理客户端的kubeconfig写入这个文件。 [$K3S_KUBECONFIG_OUTPUT]
+   --write-kubeconfig-mode value              (client) 用这种模式编写kubeconfig，例如：644 [$K3S_KUBECONFIG_MODE]
+   --kube-apiserver-arg value                 (flags) 自定义kube-apiserver进程的参数
+   --kube-scheduler-arg value                 (flags) 自定义kube-scheduler进程的参数
+   --kube-controller-manager-arg value        (flags) 自定义kube-controller-manager进程的参数
+   --kube-cloud-controller-manager-arg value  (flags) 自定义kube-cloud-controller-manager进程的参数
+   --datastore-endpoint value                 (db) 指定 etcd、Mysql、Postgres 或 Sqlite（默认）数据源名称 [$K3S_DATASTORE_ENDPOINT]
+   --datastore-cafile value                   (db) TLS证书授权文件，用于确保数据存储后端通信的安全 [$K3S_DATASTORE_CAFILE]
+   --datastore-certfile value                 (db) TLS认证文件，用于确保数据存储后端通信的安全 [$K3S_DATASTORE_CERTFILE]
+   --datastore-keyfile value                  (db) 用于保护数据存储后端通信的TLS密钥文件 [$K3S_DATASTORE_KEYFILE]
+   --default-local-storage-path value         (storage) 本地存储类的默认存储路径
+   --disable value                            (components) 不需要部署的组件，删除任何已部署的组件 (有效项目：coredns, servicelb, traefik,local-storage, metrics-server)
+   --disable-scheduler                        (components) 禁用Kubernetes默认调度器
+   --disable-cloud-controller                 (components) 禁用k3s默认云控制管理器
+   --disable-network-policy                   (components) 用K3S默认网络策略控制器
+   --node-name value                          (agent/node) 节点名称 [$K3S_NODE_NAME]
+   --with-node-id                             (agent/node) 将ID附加到节点名称
+   --node-label value                         (agent/node) 用一组标签注册和启动kubelet
+   --node-taint value                         (agent/node) 用一组污点注册kubelet
+   --docker                                   (agent/runtime) 用docker代替containerd
+   --container-runtime-endpoint value         (agent/runtime) 禁用嵌入式containerd，使用替代的CRI实现
+   --pause-image value                        (agent/runtime) 针对containerd或Docker的自定义pause镜像 (默认: "docker.io/rancher/pause:3.1")
+   --private-registry value                   (agent/runtime) 私有注册表配置文件 (默认: "/etc/rancher/k3s/registries.yaml")
+   --node-ip value, -i value                  (agent/networking) 为节点发布的IP地址
+   --node-external-ip value                   (agent/networking) 对外发布节点的IP地址
+   --resolv-conf value                        (agent/networking) Kubelet resolv.conf 文件 [$K3S_RESOLV_CONF]
+   --flannel-iface value                      (agent/networking) 覆盖默认的flannel接口
+   --flannel-conf value                       (agent/networking) 覆盖默认的flannel文件
+   --kubelet-arg value                        (agent/flags) 自定义kubelet进程的参数
+   --kube-proxy-arg value                     (agent/flags) 自定义kube-proxy进程的参数
+   --rootless                                 (experimental) 运行 rootless
+   --agent-token value                        (experimental/cluster) 用于将agent加入集群但不用于server的共享密钥 [$K3S_AGENT_TOKEN]
+   --agent-token-file value                   (experimental/cluster) 包含agent secret的文件 [$K3S_AGENT_TOKEN_FILE]
+   --server value, -s value                   (experimental/cluster) 要连接的k3s server，用于加入集群 [$K3S_URL]
+   --cluster-init                             (experimental/cluster) 初始化为新的集群master [$K3S_CLUSTER_INIT]
+   --cluster-reset                            (experimental/cluster) 忽略所有节点，成为一个新集群的集群master [$K3S_CLUSTER_RESET]
+   --secrets-encryption                       (experimental) 启用Secret加密
+   --no-flannel                               (deprecated) 使用 --flannel-backend=none
+   --no-deploy value                          (deprecated) 不需要部署的组件 (有效选项: coredns, servicelb, traefik, local-storage, metrics-server)
+   --cluster-secret value                     (deprecated) 使用 --token [$K3S_CLUSTER_SECRET]
+```
