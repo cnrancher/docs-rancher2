@@ -23,6 +23,13 @@ weight: 20
 curl -sfL https://get.k3s.io | sh -
 ```
 
+:::note 提示
+国内用户，可以使用以下方法加速安装：
+```
+curl -sfL https://docs.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -
+```
+:::
+
 使用此方法安装K3s时，可使用以下环境变量来配置安装:
 
 | Environment Variable | Description |
