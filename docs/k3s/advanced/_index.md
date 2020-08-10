@@ -52,6 +52,13 @@ K3s包含并默认为[containerd,](https://containerd.io/) 一个行业标准的
     curl -sfL https://get.k3s.io | sh -s - --docker
     ```
 
+    :::note 提示
+    国内用户，可以使用以下方法加速安装：
+    ```
+    curl -sfL https://docs.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -s - --docker
+    ```
+    :::
+
 1. 确认集群可用:
 
     ```
@@ -217,6 +224,13 @@ K3s agents 可以通过`--node-label`和`--node-taint`选项进行配置，这�
 ```bash
 curl -sfL https://get.k3s.io | sh -
 ```
+
+:::note 提示
+国内用户，可以使用以下方法加速安装：
+```
+curl -sfL https://docs.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -
+```
+:::
 
 当手动运行server时，你应该得到一个类似于下面的输出：
 

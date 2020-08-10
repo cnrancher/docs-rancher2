@@ -16,6 +16,14 @@ K3s提供了一个安装脚本，可以方便的在systemd或openrc的系统上�
 curl -sfL https://get.k3s.io | sh -
 ```
 
+:::note 提示
+国内用户，可以使用以下方法加速安装：
+
+```
+curl -sfL https://docs.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -
+```
+:::
+
 运行此安装后:
 
 * K3s服务将被配置为在节点重启后或进程崩溃或被杀死时自动重启。
@@ -27,6 +35,15 @@ curl -sfL https://get.k3s.io | sh -
 ```bash
 curl -sfL https://get.k3s.io | K3S_URL=https://myserver:6443 K3S_TOKEN=mynodetoken sh -
 ```
+
+:::note 提示
+国内用户，可以使用以下方法加速安装：
+
+```
+curl -sfL https://docs.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn K3S_URL=https://myserver:6443 K3S_TOKEN=mynodetoken sh -
+```
+:::
+
 设置`K3S_URL`参数会使K3s以worker模式运行。K3s agent将在所提供的URL上向监听的K3s服务器注册。`K3S_TOKEN`使用的值存储在你的服务器节点上的`/var/lib/rancher/k3s/server/node-token`。
 
 注意：每台计算机必须具有唯一的主机名。如果您的计算机没有唯一的主机名，请传递`K3S_NODE_NAME`环境变量，并为每个节点提供一个有效且唯一的主机名。

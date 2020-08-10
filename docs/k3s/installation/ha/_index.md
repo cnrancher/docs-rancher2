@@ -42,6 +42,14 @@ curl -sfL https://get.k3s.io | sh -s - server \
   --datastore-endpoint="mysql://username:password@tcp(hostname:3306)/database-name"
 ```
 
+:::note 提示
+国内用户，可以使用以下方法加速安装：
+```
+curl -sfL https://docs.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -s - server \
+  --datastore-endpoint="mysql://username:password@tcp(hostname:3306)/database-name"
+```
+:::
+
 根据数据库类型的不同，数据存储端点的格式也不同。详情请参考[数据存储端点格式](/docs/k3s/installation/datastore/_index#数据存储端点格式和功能)章节。
 
 启动server节点时，若要设置TLS证书，请参考[数据存储配置指南](/docs/k3s/installation/datastore/_index#外部数据存储配置参数)。

@@ -1,5 +1,5 @@
 ---
-title: 架构
+title: 架构介绍
 weight: 1
 ---
 

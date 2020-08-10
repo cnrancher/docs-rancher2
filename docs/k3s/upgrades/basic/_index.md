@@ -1,5 +1,5 @@
 ---
-title: "升级基础"
+title: "基础升级"
 weight: 10
 ---
 
@@ -26,6 +26,15 @@ weight: 10
 ```sh
 curl -sfL https://get.k3s.io | sh -
 ```
+
+:::note 提示
+国内用户，可以使用以下方法加速安装：
+```
+curl -sfL https://docs.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -
+```
+:::
+
+
 这将默认升级到稳定channel的较新版本。
 
 如果你想升级到一个特定channel的较新版本（如最新），你可以指定channel。

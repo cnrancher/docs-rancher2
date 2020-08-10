@@ -929,7 +929,7 @@ module.exports = {
         ],
     },
     k3s: {
-        产品介绍: ["k3s/_index"],
+        K3s介绍: ["k3s/_index"],
         架构: ["k3s/architecture/_index"],
         快速入门: ["k3s/quick-start/_index"],
         安装: [
