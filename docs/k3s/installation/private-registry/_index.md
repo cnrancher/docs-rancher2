@@ -25,7 +25,7 @@ Mirrors是一个用于定义专用注册表的名称和endpoint的指令，例�
 
 ```
 mirrors:
-  docker.io:
+  mycustomreg.com:
     endpoint:
       - "https://mycustomreg.com:5000"
 ```
