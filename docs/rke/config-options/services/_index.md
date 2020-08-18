@@ -60,7 +60,7 @@ RKE 支持`kube-api`服务的以下选项。
 
 ## Kubernetes Controller Manager
 
-> **Rancher 2 用户注意**如果您在创建[Rancher Launched Kubernetes](/docs/rancher2/cluster-provisioning/rke-clusters/options/_index)时，在创建[Rancher Launched Kubernetes](/docs/rancher2/cluster-provisioning/rke-clusters/options/_index)时，服务名称应只包含下划线：`kube_controller`。这只适用于 Rancher v2.0.5 和 v2.0.6。
+> **Rancher 2 用户注意**如果您在创建[Rancher Launched Kubernetes](/docs/cluster-provisioning/rke-clusters/options/_index)时，在创建[Rancher Launched Kubernetes](/docs/cluster-provisioning/rke-clusters/options/_index)时，服务名称应只包含下划线：`kube_controller`。这只适用于 Rancher v2.0.5 和 v2.0.6。
 
 [Kubernetes 控制器管理器](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/)服务是负责运行 Kubernetes 主控制循环的组件。控制器管理器通过 Kubernetes API 服务器监控集群所需的状态，并对当前状态进行必要的修改，以达到所需的状态。
 
