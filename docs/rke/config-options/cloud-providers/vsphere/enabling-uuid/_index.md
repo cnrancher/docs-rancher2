@@ -28,4 +28,4 @@ $ govc vm.change -vm <vm-path> -e disk.enableUUID=TRUE
 
 在 Rancher v2.0.4+ 中，磁盘 UUID 默认在 vSphere 节点模板中启用。
 
-如果您使用的是 v2.0.4 之前的 Rancher，请参考 [Rancher 文档](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/_index)，以了解有关如何在 Rancher 节点模板中启用 UUID 的详细信息。
+如果您使用的是 v2.0.4 之前的 Rancher，请参考 [Rancher 文档.](/docs/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/_index)，以了解有关如何在 Rancher 节点模板中启用 UUID 的详细信息。
