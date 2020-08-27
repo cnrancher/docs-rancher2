@@ -1,6 +1,6 @@
 ---
 title: 3、安装 Rancher
-description: Rancher 使用 Kubernetes 的 Helm 软件包管理器安装。Helm Charts 为 Kubernetes YAML 清单文档提供了模板语法。有了 Helm，我们可以创建可配置的 Deployment，而不只是使用静态文件。有关创建您自己的 Deployment 的应用商店应用的更多信息，请查看 https://helm.sh/ 中的文档。对于无法直接访问 Internet 的系统，请参阅[Rancher 离线安装](/docs/installation/other-installation-methods/air-gap/_index)。选择要安装的 Rancher 版本，请参阅[选择 Rancher 版本](/docs/installation/options/server-tags/_index)。要选择用于安装 Rancher 的 Helm 版本，请参阅[Helm 版本要求](/docs/installation/options/helm-version/_index)。
+description: Rancher 使用 Kubernetes 的 Helm 软件包管理器安装。Helm Charts 为 Kubernetes YAML 清单文档提供了模板语法。有了 Helm，我们可以创建可配置的 Deployment，而不只是使用静态文件。有关创建您自己的 Deployment 的应用商店应用的更多信息，请查看 https://helm.sh/ 中的文档。对于无法直接访问 Internet 的系统，请参阅Rancher 离线安装。选择要安装的 Rancher 版本，请参阅选择 Rancher 版本。要选择用于安装 Rancher 的 Helm 版本，请参阅Helm 版本要求。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -215,11 +215,11 @@ deployment "rancher" successfully rolled out
 
 Rancher Chart 有许多自定义安装选项以适应特定的环境。以下是一些常见的高级方案。
 
-- [HTTP 代理](/docs/installation/options/chart-options/_index)
-- [私有镜像仓库](/docs/installation/options/chart-options/_index)
-- [外部负载均衡器上的 TLS 终止](/docs/installation/options/chart-options/_index)
+- [HTTP 代理](/docs/rancher2/installation/options/chart-options/_index)
+- [私有镜像仓库](/docs/rancher2/installation/options/chart-options/_index)
+- [外部负载均衡器上的 TLS 终止](/docs/rancher2/installation/options/chart-options/_index)
 
-有关选项的完整列表，请参见[Chart 选项](/docs/installation/options/chart-options/_index)。
+有关选项的完整列表，请参见[Chart 选项](/docs/rancher2/installation/options/chart-options/_index)。
 
 ### 方式 C：使用您已有的证书
 

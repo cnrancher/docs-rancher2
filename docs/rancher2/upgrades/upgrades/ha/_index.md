@@ -72,7 +72,7 @@ keywords:
    rancher-<CHART_REPO>	https://releases.rancher.com/server-charts/<CHART_REPO>
    ```
 
-   > **注意：** 如果要切换到其他 Helm chart 仓库，请按照[切换仓库文档](/docs/installation/options/server-tags/_index)进行切换。如果要切换仓库，请确保在继续执行第 3 步之前再次列出仓库，以确保添加了正确的仓库。
+   > **注意：** 如果要切换到其他 Helm chart 仓库，请按照[切换仓库文档](/docs/rancher2/installation/options/server-tags/_index)进行切换。如果要切换仓库，请确保在继续执行第 3 步之前再次列出仓库，以确保添加了正确的仓库。
 
 1. 从 Helm chart 仓库中获取最新的 chart ，安装 Rancher。
 

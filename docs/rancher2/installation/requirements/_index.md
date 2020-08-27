@@ -283,7 +283,7 @@ K3s Server 需要开放 6443 端口供节点访问。
 
 端口要求取决于您使用的基础设施。例如，如果要在基础设施提供商托管的节点上部署 Rancher，则必须开放`22`端口，这样您才能使用 SSH。
 
-下图描述了为每种[集群类型](/docs/cluster-provisioning/_index)开放的端口。
+下图描述了为每种[集群类型](/docs/rancher2/cluster-provisioning/_index)开放的端口。
 
 <figcaption>Rancher 管理面的端口要求</figcaption>
 

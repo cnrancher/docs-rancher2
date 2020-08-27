@@ -16,7 +16,7 @@ keywords:
   - 组件列表
 ---
 
-本节中列出的命令和步骤适用于以下的[RKE 集群](/docs/cluster-provisioning/rke-clusters/_index)中的 Kubernetes 核心组件。
+本节中列出的命令和步骤适用于以下的[RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)中的 Kubernetes 核心组件。
 
 本节包括以下类别的疑难解答：
 

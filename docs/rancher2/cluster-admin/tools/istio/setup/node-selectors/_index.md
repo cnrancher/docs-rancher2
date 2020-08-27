@@ -51,4 +51,4 @@ keywords:
 
 ## 后续操作
 
-[添加部署和服务](/docs/cluster-admin/tools/istio/setup/deploy-workloads/_index)
+[添加部署和服务](/docs/rancher2/cluster-admin/tools/istio/setup/deploy-workloads/_index)

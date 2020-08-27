@@ -37,7 +37,7 @@ ConfigMap 接受通用字符串格式的键值对， 例如配置文件或者 .J
 
 1. 单击 **保存**。
 
-   > **注意：** 不要使用配置映射去存储敏感数据 [使用一个密文](/docs/k8s-in-rancher/secrets/_index)。
+   > **注意：** 不要使用配置映射去存储敏感数据 [使用一个密文](/docs/rancher2/k8s-in-rancher/secrets/_index)。
    >
    > **提示：** 您可以通过复制和粘贴的方式将多个键值对添加到 ConfigMap 中。
    >

@@ -37,7 +37,7 @@ Kubernetes 只提供了一个创建和管理容器的平台，Rancher 在此基�
 
 Rancher 可以与 Elasticsearch、Splunk、Kafka、Syslog 和 Fluentd 集成。
 
-请参考[集群日志](/docs/cluster-admin/tools/logging/_index)，获取配置 Rancher 和外部日志服务集成的详细操作步骤。
+请参考[集群日志](/docs/rancher2/cluster-admin/tools/logging/_index)，获取配置 Rancher 和外部日志服务集成的详细操作步骤。
 
 ## 监控
 

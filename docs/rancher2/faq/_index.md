@@ -1,6 +1,6 @@
 ---
 title: Rancher 2 常见问题
-description: 本章 FAQ 将回答用户关于 Rancher v2.x 常见的问题，我们将保持持续更新。关于常见的技术问题，请参阅[常见的技术问题](/docs/faq/technical/_index)。
+description: 本章 FAQ 将回答用户关于 Rancher v2.x 常见的问题，我们将保持持续更新。关于常见的技术问题，请参阅[常见的技术问题](/docs/rancher2/faq/technical/_index)。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
