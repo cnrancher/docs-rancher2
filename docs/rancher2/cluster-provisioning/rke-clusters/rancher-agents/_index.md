@@ -21,7 +21,7 @@ Rancher 纳管的集群部署有两种不同的 Agent：
 - [cattle-cluster-agent](#cattle-cluster-agent)
 - [cattle-node-agent](#cattle-node-agent)
 
-有关 Rancher Server 如何设置集群并与之通信的概述，请参阅[产品架构](rancher2/overview/architecture/_index)。
+有关 Rancher Server 如何设置集群并与之通信的概述，请参阅[产品架构](/docs/rancher2/overview/architecture/_index)。
 
 ## cattle-cluster-agent
 

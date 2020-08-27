@@ -24,7 +24,7 @@ _自 v2.0.5 起开始可用_
 >
 > - 您必须配置了 [FreeIPA Server](https://www.freeipa.org/) 服务器。
 > - 在 FreeIPA 中创建一个具有 read-only 访问权限的服务帐户。当用户使用 API​​ 密钥发出请求时，Rancher 使用此帐户来验证组成员身份。
-> - 请阅读[外部身份验证配置和用户主体](/docs/rancher2/rancher2/admin-settings/authentication/_index)。
+> - 请阅读[外部身份验证配置和用户主体](/docs/rancher2/admin-settings/authentication/_index)。
 
 1.  使用分配了`系统管理员`角色的本地用户（即本地主体）登录 Rancher。
 

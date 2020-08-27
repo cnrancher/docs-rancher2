@@ -30,7 +30,7 @@ keywords:
 
 3. 启用**Pod 安全策略支持**。
 
-   > **注意：** 此选项仅适用于[有 RKE 创建](/docs/rancher2/luster-provisioning/rke-clusters/_index)的集群。
+   > **注意：** 此选项仅适用于[由 RKE 创建的集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)。
 
 4. 从 **默认 Pod 安全策略** 下拉列表中，选择要应用到集群的策略。
 

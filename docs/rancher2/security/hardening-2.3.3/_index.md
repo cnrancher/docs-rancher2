@@ -162,7 +162,7 @@ Verify that the permissions are `700` or more restrictive.
 
 **Remediation**
 
-Follow the steps as documented in [1.4.12](rancher2/security/hardening-2.3.3/_index#1-4-12-ensure-that-the-etcd-data-directory-ownership-is-set-to-etcd-etcd) remediation.
+Follow the steps as documented in [1.4.12](/docs/rancher2/security/hardening-2.3.3/_index#1-4-12-ensure-that-the-etcd-data-directory-ownership-is-set-to-etcd-etcd) remediation.
 
 ### 1.4.12 - Ensure that the etcd data directory ownership is set to `etcd:etcd`
 

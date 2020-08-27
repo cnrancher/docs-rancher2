@@ -22,7 +22,7 @@ keywords:
 
 ## 1. 准备
 
-建议您从储存 cluster yaml、rke statefile 和 kubeconfig 的主机或堡垒机上进行高可用恢复。您需要安装 [RKE](/docs/rke/installation/_index) 和 [kubectl](docs/rancher/faq/kubectl/_index) CLI 工具。
+建议您从储存 cluster yaml、rke statefile 和 kubeconfig 的主机或堡垒机上进行高可用恢复。您需要安装 [RKE](/docs/rke/installation/_index) 和 [kubectl](/docs/rancher2/faq/kubectl/_index) CLI 工具。
 
 准备 3 个新节点作为还原的 Rancher 实例的目标。请参阅[高可用安装](/docs/rancher2/installation/k8s-install/create-nodes-lb/_index)以了解节点要求。我们建议您使用新建的节点和干净状态开始准备工作，详情请参考[节点要求](/docs/rancher2/installation/requirements/_index)。
 

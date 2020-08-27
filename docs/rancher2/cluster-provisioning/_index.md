@@ -57,7 +57,7 @@ keywords:
 
 ## 使用 Rancher 创建 Kubernetes 集群（RKE 集群）
 
-当 Rancher 在您自己的节点上配置 Kubernetes 时，Rancher 底层使用的是[Rancher Kubernetes Engine (RKE)](https://rancher.com/docs/rancher2/rke/latest/en/)。RKE 是 Rancher 自己的轻量级 Kubernetes 安装程序。
+当 Rancher 在您自己的节点上配置 Kubernetes 时，Rancher 底层使用的是[Rancher Kubernetes Engine (RKE)](/docs/rke/_index)。RKE 是 Rancher 自己的轻量级 Kubernetes 安装程序。
 
 在这种通过 Rancher 部署的集群中，Rancher 将管理整个 Kubernetes 的部署。您可以通过 Rancher 将 RKE 集群部署在任何裸金属服务器、云提供商的虚拟机或虚拟化平台上的虚拟机上。
 

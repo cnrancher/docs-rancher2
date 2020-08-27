@@ -379,6 +379,6 @@ _v2.2.4 可用_
 有两种方法可以指定附加组件:
 
 - [行内插件](/docs/rke/config-options/add-ons/user-defined-add-ons/_index)
-- [引用外部的 YAML 文件](/docs/rke/config-options/add-ons/user-defined-add-ons/#_index)
+- [引用外部的 YAML 文件](/docs/rke/config-options/add-ons/user-defined-add-ons/_index)
 
 有关如何通过编辑配置自定义网络插件的示例 `cluster.yml`，请参阅 [RKE 文档](/docs/rke/config-options/add-ons/network-plugins/custom-network-plugin-example/_index)。

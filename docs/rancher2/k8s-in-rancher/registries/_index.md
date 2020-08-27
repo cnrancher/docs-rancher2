@@ -127,4 +127,4 @@ kubectl get events
 10s         Normal    Pulled             Pod    Successfully pulled image "quay.io/<Profile name>/<image name>"
 ```
 
-详细信息请参考 Kubernetes 文档 ：[使用您的密文创建一个 Pod](https://kubernetes.io/docs/rancher2/tasks/configure-pod-container/pull-image-private-registry/#create-a-pod-that-uses-your-secret)。
+详细信息请参考 Kubernetes 文档 ：[使用您的密文创建一个 Pod](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-pod-that-uses-your-secret)。

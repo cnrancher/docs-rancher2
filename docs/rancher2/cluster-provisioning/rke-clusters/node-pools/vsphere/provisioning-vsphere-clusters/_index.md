@@ -37,7 +37,7 @@ keywords:
 - 能够访问位于实例化虚拟机的所有 ESXi 节点上的 Host API（端口 443/TCP）(_仅在使用 ISO 创建节点时需要_)。
 - 能够访问虚拟机的端口 22/TCP 和 2376/TCP。
 
-请参照[节点网络需求](/docs/rancher2/luster-provisioning/node-requirements/_index)来获取详细的端口需求。
+请参照[节点网络需求](/docs/rancher2/cluster-provisioning/node-requirements/_index)来获取详细的端口需求。
 
 ### 适用于 vSphere API 访问的有效 ESXi 许可证
 

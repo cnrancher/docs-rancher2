@@ -18,7 +18,7 @@ keywords:
 
 在使用 GitHub 的环境中，您可以配置 Rancher 允许使用 GitHub 凭据登录。
 
-> **先决条件：** 请阅读[外部身份验证配置和用户主体](/docs/rancher2/rancher2/admin-settings/authentication/_index)
+> **先决条件：** 请阅读[外部身份验证配置和用户主体](/docs/rancher2/admin-settings/authentication/_index)
 
 1.  使用具有`系统管理员`角色的本地用户（即本地主体）登录 Rancher。
 

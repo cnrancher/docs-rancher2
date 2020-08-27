@@ -46,7 +46,7 @@ keywords:
 - [证书](/docs/rancher2/k8s-in-rancher/certificates/_index)
 - [配置映射](/docs/rancher2/k8s-in-rancher/configmaps/_index)
 - [镜像仓库凭证](/docs/rancher2/k8s-in-rancher/registries/_index)
-- [密文](/docs/rancher2/rancher2/k8s-in-rancher/secrets/_index)
+- [密文](/docs/rancher2/k8s-in-rancher/secrets/_index)
 
 为了管理原生的 Kubernetes 集群中的权限，集群管理员需要为每个命名空间都配置基于角色的访问策略。使用 Rancher，用户权限将改为在项目级别分配，某个项目中都任何命名空间都将自动继承这些访问策略。
 
@@ -126,7 +126,7 @@ _从 v2.0.7 版本开始支持_
 
 ## Pod 安全策略
 
-Rancher 扩展了 Kubernetes 以允许在[项目级别](/docs/rancher2/project-admin/pod-security-policies/_index)上应用[Pod 安全策略](https://kubernetes.io/docs/rancher2/concepts/policy/pod-security-policy/)，作为[集群级别](/docs/rancher2/cluster-admin/pod-security-policy/_index)之外的安全性策略。但是，作为最佳实践，我们建议在集群级别应用 Pod 安全策略。
+Rancher 扩展了 Kubernetes 以允许在[项目级别](/docs/rancher2/project-admin/pod-security-policies/_index)上应用[Pod 安全策略](https://kubernetes.io/docs/concepts/policy/pod-security-policy/)，作为[集群级别](/docs/rancher2/cluster-admin/pod-security-policy/_index)之外的安全性策略。但是，作为最佳实践，我们建议在集群级别应用 Pod 安全策略。
 
 ## 创建项目
 
@@ -165,7 +165,7 @@ Rancher 扩展了 Kubernetes 以允许在[项目级别](/docs/rancher2/project-a
 
 1. 点击`添加成员`。
 1. 在`名称`组合框中，搜索要分配项目访问权限的用户或组。注意：只有启用了外部身份验证，您才可以搜索组。
-1. 从`角色`下拉列表中，选择一个角色。有关更多信息，请参阅[关于项目角色的文档](/docs/admin-settings/rbac/cluster-project-roles/_index)。
+1. 从`角色`下拉列表中，选择一个角色。有关更多信息，请参阅[关于项目角色的文档](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)。
 
 ### 添加资源配额
 

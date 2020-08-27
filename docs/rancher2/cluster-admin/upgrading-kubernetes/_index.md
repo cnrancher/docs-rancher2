@@ -21,7 +21,7 @@ Rancher 将使用 RKE（Rancher Kubernetes Engine）作为库来创建和编辑 
 
 ## 新功能
 
-从 Rancher v2.3.0 开始，Rancher 添加了 Kubernetes 元数据功能，该功能允许在不升级 Rancher 的情况下，获取到 Kubernetes 补丁版本。有关详细信息，请参阅关于 [Kubernetes 元数据](/docs/admin-settings/k8s-metadata/_index)的部分。
+从 Rancher v2.3.0 开始，Rancher 添加了 Kubernetes 元数据功能，该功能允许在不升级 Rancher 的情况下，获取到 Kubernetes 补丁版本。有关详细信息，请参阅关于 [Kubernetes 元数据](/docs/rancher2/admin-settings/k8s-metadata/_index)的部分。
 
 从 Rancher v2.4.0 开始，
 

@@ -23,7 +23,7 @@ Rancher v2.x 经过重新整理和编写，旨在为 Kubernetes 和 Docker 提�
 
 ## 迁移计划
 
-> **在开始之前想了解有关 Kubernetes 的更多信息?** 阅读我们的 [Kubernetes 介绍](/docs/v1.6-migration/kub-intro/_index)。
+> **在开始之前想了解有关 Kubernetes 的更多信息?** 阅读我们的 [Kubernetes 介绍](/docs/rancher2/v1.6-migration/kub-intro/_index)。
 
 - [1. 开始迁移](/docs/rancher2/v1.6-migration/get-started/_index)
 

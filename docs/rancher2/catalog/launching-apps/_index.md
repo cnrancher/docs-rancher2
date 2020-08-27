@@ -28,7 +28,7 @@ keywords:
 
 ## 从应用商店中创建应用
 
-启用[内置全局商店](/docs/catalog/built-in/_index)或[添加自定义商店](/docs/rancher2/catalog/adding-catalogs/_index)之后，可以开始部署商店的应用。
+启用[内置全局商店](/docs/rancher2/catalog/built-in/_index)或[添加自定义商店](/docs/rancher2/catalog/adding-catalogs/_index)之后，可以开始部署商店的应用。
 
 1. 从**全局**视图中，导航到要开始部署应用的项目。
 
