@@ -46,7 +46,9 @@ keywords:
 在安装 Rancher 的过程中，您需要用到以下 CLI 工具，请确保在安装 Rancher 前，已经将这些工具安装到您的环境中，并且配置到环境变量 `$PATH` 中。
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl) - Kubernetes 命令行工具。
+
 - [rke](/docs/rke/installation/_index) - Rancher Kubernetes Engine, 构建 Kubernetes 集群的 cli 工具。
+
 - [helm](https://docs.helm.sh/using_helm/#installing-helm) - Kubernetes 包管理工具。可参考[Helm 版本要求](/docs/rancher2/installation/options/helm-version/_index)来选择合适的 Helm 版本安装 Rancher。
 
 ## 安装大纲

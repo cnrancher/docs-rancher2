@@ -21,6 +21,7 @@ keywords:
 
 在运行 DNS 检查之前，请检查您集群中的[默认 DNS 插件](/docs/rancher2/cluster-provisioning/rke-clusters/options/_index)，并确保[网络运行正常](/docs/rancher2/troubleshooting/networking/_index)，因为这也可能是 DNS 解析失败的原因之一。
 
+
 ## 检查 DNS Pod 是否正在运行
 
 ```
