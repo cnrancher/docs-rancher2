@@ -43,11 +43,11 @@ keywords:
 
 - [对 Rancher 高可用进行故障排查](/docs/troubleshooting/rancherha/_index)
 
-  如果您安装遇到问题请查看 [Rancher 高可用安装](/docs/installation/k8s-install/_index)。
+  如果您安装遇到问题请查看 [Rancher 高可用安装](/docs/rancher2/installation/k8s-install/_index)。
 
 - [导入的集群](/docs/troubleshooting/imported-clusters/_index)
 
-  如果您在导入集群的时候遇到问题，请查看[导入集群](/docs/cluster-provisioning/imported-clusters/_index)。
+  如果您在导入集群的时候遇到问题，请查看[导入集群](/docs/rancher2/cluster-provisioning/imported-clusters/_index)。
 
 - [Logging](/docs/troubleshooting/logging/_index)
 

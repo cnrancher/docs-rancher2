@@ -48,7 +48,7 @@ Rancher Server 默认需要 SSL/TLS 配置来保证访问的安全性。
 
 以下有三种关于证书来源的推荐选项。
 
-> **提示：** 如果您想要将 SSL/TLS 访问在外部终止，请查看[使用外部 TLS 负载均衡器](/docs/installation/options/helm2/helm-rancher/chart-options/_index#外部-tls-termination)。
+> **提示：** 如果您想要将 SSL/TLS 访问在外部终止，请查看[使用外部 TLS 负载均衡器](/docs/rancher2/installation/options/helm2/helm-rancher/chart-options/_index#外部-tls-termination)。
 
 | 设置                                      | Chart 选项                       | 描述                                                           | 是否需要 cert-manager          |
 | ----------------------------------------- | -------------------------------- | -------------------------------------------------------------- | ------------------------------ |
@@ -126,7 +126,7 @@ cert-manager-webhook-5b5dd6999-kst4x            1/1     Running     0          3
 cert-manager-cainjector-3ba5cd2bcd-de332x       1/1     Running     0          3m
 ```
 
-如果"webhook" pod (第二行那个) 处于 ContainerCreating 状态，它可能正在等待 Secret 被 mount 到 pod 中。如果等待几分钟还是处于这种状态或者有其他的问题，请查看[cert-manager 常见问题](https://cert-manager.io/docs/faq/)。
+如果"webhook" pod (第二行那个) 处于 ContainerCreating 状态，它可能正在等待 Secret 被 mount 到 pod 中。如果等待几分钟还是处于这种状态或者有其他的问题，请查看[cert-manager 常见问题](https://cert-manager.io/docs/rancher2/faq/)。
 
 ## 证书选项
 

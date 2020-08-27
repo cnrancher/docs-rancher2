@@ -25,7 +25,7 @@ Rancher 将使用 RKE（Rancher Kubernetes Engine）作为库来创建和编辑 
 
 从 Rancher v2.4.0 开始，
 
-- 添加了将 K3s Kubernetes 集群导入 Rancher 的功能，以及在编辑这些集群时升级 Kubernetes 的功能。有关详细信息，请参阅[关于导入集群](/docs/cluster-provisioning/imported-clusters/_index)的部分。
+- 添加了将 K3s Kubernetes 集群导入 Rancher 的功能，以及在编辑这些集群时升级 Kubernetes 的功能。有关详细信息，请参阅[关于导入集群](/docs/rancher2/cluster-provisioning/imported-clusters/_index)的部分。
 - Rancher UI 中提供了用于配置 RKE 集群升级策略的新高级选项：**最大不可用工作节点**和**驱散节点**。这些选项利用了 RKE v1.1.0 的新的集群升级功能，其中节点可以进行滚动升级，以便在某些特殊情况下，保障在集群升级期间集群和应用的可用性。
 
 ## 经过测试的 Kubernetes 版本

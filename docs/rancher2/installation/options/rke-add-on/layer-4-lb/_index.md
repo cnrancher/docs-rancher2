@@ -156,7 +156,7 @@ RKE 使用`.yml`配置文件来安装和配置 Kubernetes 集群。根据要使�
 
 1. 根据您正在使用的 SSL 证书，下载以下模板之一。
 
-   - [自签名证书模板<br/> `3-node-certificate.yml`](/docs/installation/options/cluster-yml-templates/3-node-certificate/_index)
+   - [自签名证书模板<br/> `3-node-certificate.yml`](/docs/rancher2/installation/options/cluster-yml-templates/3-node-certificate/_index)
    - [由公认的 CA 签署的证书模板<br/> `3-node-certificate-recognizedca.yml`](/docs/rancher2/installation/options/cluster-yml-templates/3-node-certificate-recognizedca/_index)
 
    > **高级配置选项：**
@@ -373,7 +373,7 @@ INFO[0101] Finished building Kubernetes cluster successfully
 
 您有两种选择：
 
-- 在发生灾难的情况下，为您的 Rancher Server 创建备份：[K3s Rancher 高可用备份](/docs/backups/backups/k3s-backups/_index)。
+- 在发生灾难的情况下，为您的 Rancher Server 创建备份：[K3s Rancher 高可用备份](/docs/rancher2/backups/backups/k3s-backups/_index)。
 - 创建 Kubernetes 集群：[提供 Kubernetes 集群](/docs/rancher2/cluster-provisioning/_index)。
 
 ## 常见问题和故障排查

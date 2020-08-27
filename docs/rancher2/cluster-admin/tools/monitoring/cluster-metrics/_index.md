@@ -33,7 +33,7 @@ _自 v2.2.0 起可用_
 1. 点选对应的节点。
 1. 展开**节点指标**查看。
 
-[_获取具体的指标表达式_](/docs/cluster-admin/tools/monitoring/expression/_index)
+[_获取具体的指标表达式_](/docs/rancher2/cluster-admin/tools/monitoring/expression/_index)
 
 ### Etcd 指标
 

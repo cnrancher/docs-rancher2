@@ -2,7 +2,7 @@
 title: 项目配额工作原理
 ---
 
-Rancher 资源配额不仅包含了[原生 Kubernetes](https://kubernetes.io/docs/concepts/policy/resource-quotas/) 资源配额的所有功能，也对原生 Kubernetes 的资源配额做了扩展。在 Rancher 中，您可以把资源配额应用到[项目](/docs/cluster-admin/projects-and-namespaces/_index)层级。
+Rancher 资源配额不仅包含了[原生 Kubernetes](https://kubernetes.io/docs/concepts/policy/resource-quotas/) 资源配额的所有功能，也对原生 Kubernetes 的资源配额做了扩展。在 Rancher 中，您可以把资源配额应用到[项目](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)层级。
 
 在一个标准的 Kubernetes 部署中，资源配额是作用于每个命名空间上的。然而，原生 Kubernetes 不支持一键更新所有命名空间的资源配额。如果需要更新所有命名空间的资源配额，需要操作多次，逐个修改。
 

@@ -157,10 +157,10 @@ systemctl restart docker
 | 在`management.cattle.io` API 分组下创建的所有资源                               | ✓                               | ✓                     | ✓                   |                     |
 | 所有由 Rancher v2.x 创建的 CRD                                                  | ✓                               | ✓                     | ✓                   |                     |
 
-[1]: /docs/cluster-provisioning/rke-clusters/node-pools/_index
-[2]: /docs/cluster-provisioning/rke-clusters/custom-nodes/_index
-[3]: /docs/cluster-provisioning/hosted-kubernetes-clusters/_index
-[4]: /docs/cluster-provisioning/imported-clusters/_index
+[1]: /docs/rancher2/cluster-provisioning/rke-clusters/node-pools/_index
+[2]: /docs/rancher2/cluster-provisioning/rke-clusters/custom-nodes/_index
+[3]: /docs/rancher2/cluster-provisioning/hosted-kubernetes-clusters/_index
+[4]: /docs/rancher2/cluster-provisioning/imported-clusters/_index
 
 ## 通过 Rancher UI 从集群中删除节点
 

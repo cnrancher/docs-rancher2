@@ -44,7 +44,7 @@ $ ./rancher login https://<SERVER_URL> --token <BEARER_TOKEN>
 
 ## 选择项目
 
-在执行任何命令之前，必须选择一个 Rancher 项目(Project)来对其执行命令。要选择要运行的[项目](/docs/cluster-admin/projects-and-namespaces/_index)，请使用命令 `./rancher context switch` 切换或选择项目。输入此命令时，将显示可用项目的列表。输入数字以选择您的项目。
+在执行任何命令之前，必须选择一个 Rancher 项目(Project)来对其执行命令。要选择要运行的[项目](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)，请使用命令 `./rancher context switch` 切换或选择项目。输入此命令时，将显示可用项目的列表。输入数字以选择您的项目。
 
 例如： `./rancher context switch` 输出
 
@@ -73,7 +73,7 @@ INFO[0005] Saving config to /Users/markbishop/.rancher/cli2.json
 | :-------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `apps, [app]`                                 | 对应用商店 App 执行操作 (例如，单个[Helm charts](https://helm.sh/docs/) 或 [Rancher charts](/docs/rancher2/catalog/adding-catalogs/_index))。                                                                                                                                                |
 | `catalog`                                     | 对[应用商店](/docs/rancher2/catalog/_index)执行操作。                                                                                                                                                                                                                                        |
-| `clusters, [cluster]`                         | 对您的[集群](/docs/cluster-provisioning/_index)执行操作。                                                                                                                                                                                                                                    |
+| `clusters, [cluster]`                         | 对您的[集群](/docs/rancher2/cluster-provisioning/_index)执行操作。                                                                                                                                                                                                                           |
 | `context`                                     | 在 Rancher 的[项目](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)间切换。请看示例[选择项目](#选择项目)。                                                                                                                                                                      |
 | `inspect [OPTIONS] [RESOURCEID RESOURCENAME]` | 显示有关[Kubernetes 资源](https://kubernetes.io/docs/reference/kubectl/cheatsheet/#resource-types)或 Rancher 资源(例如：[项目](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)和[工作负载](/docs/rancher2/k8s-in-rancher/workloads/_index))的详细信息，通过名称或 ID 指定资源。 |
 | `kubectl`                                     | 执行[kubectl 指令](https://kubernetes.io/docs/reference/kubectl/overview/#operations)。                                                                                                                                                                                                      |

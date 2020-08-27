@@ -35,7 +35,7 @@ keywords:
 1. 单击**添加模板**。
 1. 选择云服务提供商，按照页面提示配置节点模板。
 
-**结果：**创建了一个节点模板，完成节点模板配置。[创建支持节点池的集群](/docs/cluster-provisioning/rke-clusters/node-pools/_index)时，可以使用这个模板。
+**结果：**创建了一个节点模板，完成节点模板配置。[创建支持节点池的集群](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/_index)时，可以使用这个模板。
 
 ## 更新节点模板
 

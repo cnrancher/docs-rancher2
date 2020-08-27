@@ -88,7 +88,7 @@ Rancher 内置了两个默认的 Pod 安全策略（PSP）：`受限`和`不受�
 - [创建集群时](/docs/rancher2/cluster-provisioning/rke-clusters/options/pod-security-policies/_index)
 - [编辑现有集群时](/docs/rancher2/cluster-admin/editing-clusters/_index)
 - [创建项目时](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)
-- [编辑现有项目时](/docs/rancher2/rancher2/project-admin/_index)
+- [编辑现有项目时](/docs/rancher2/project-admin/_index)
 
 > **注意：** 我们建议在集群和项目创建期间添加 PSP，而不是将 PSP 添加到现有的集群和项目中。
 

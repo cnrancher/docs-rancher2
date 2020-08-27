@@ -133,7 +133,7 @@ OPA 提供了一种声明性语言，您可以使用代码来定义策略，并�
 
 在接收告警之前，必须在 Rancher 中配置一个或多个通知接收者。
 
-创建集群时，Rancher 已经配置了一些内置的告警规则。为它们配置[接收者](/docs/cluster-admin/tools/notifiers/_index)后就能收到相应告警。
+创建集群时，Rancher 已经配置了一些内置的告警规则。为它们配置[接收者](/docs/rancher2/cluster-admin/tools/notifiers/_index)后就能收到相应告警。
 
 更多详情，请参阅[告警](/docs/rancher2/cluster-admin/tools/alerts/_index)文档。
 

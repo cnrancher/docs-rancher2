@@ -53,7 +53,7 @@ Rancher 维护的 [Terraform Provider](https://rancher.com/blog/2019/rancher-2-t
 
 由 Rancher 提供的 Kubernetes 集群将使用在十年内到期的证书。通过其他方式配置的集群的到期时间可能更长或更短。
 
-对于通过 Rancher 创建的 Kubernetes 集群，证书可以通过 Rancher [用户界面](/docs/cluster-admin/certificate-rotation/_index)进行更新。
+对于通过 Rancher 创建的 Kubernetes 集群，证书可以通过 Rancher [用户界面](/docs/rancher2/cluster-admin/certificate-rotation/_index)进行更新。
 
 ### 集群启用循环快照
 
