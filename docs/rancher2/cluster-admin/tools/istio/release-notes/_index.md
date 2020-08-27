@@ -22,7 +22,7 @@ keywords:
 
 当您从 Istio1.4.x 版本升级到任何一个 1.5.x 版本时，Rancher 安装程序将删除一些包括`istio-reader-service-account`在内的资源，以完成升级，此时它们将被立即重新安装。如果您的 Istio 安装使用的是这个服务账户，所有与服务账户绑定的密钥都会被删除。请注意，这将**破坏特定的[多集群部署](https://archive.istio.io/v1.4/docs/setup/install/multicluster/)**，升级为 1.5.x 后，不可降级回 1.4.x。
 
-有关 1.5 版本和从 1.4 升级的其他信息，请参见官方升级说明：https://istio.io/latest/news/releases/1.5.x/announcing-1.5.8/。
+有关 1.5 版本和从 1.4 升级的其他信息，请参见官方升级说明：https://istio.io/latest/news/releases/1.5.x/announcing-1.5.8。
 
 > **注意：** Rancher 继续使用 Helm 安装方法，它产生的架构与 istioctl 安装不同。
 

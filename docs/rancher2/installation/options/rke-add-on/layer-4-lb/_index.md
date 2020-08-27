@@ -177,7 +177,7 @@ RKE 使用`.yml`配置文件来安装和配置 Kubernetes 集群。根据要使�
     对于集群中的每个节点，更新以下占位符：`IP_ADDRESS_X`和`USER`。指定的用户应该能够访问 Docket 套接字，您可以使用指定的用户登录并运行`docker ps`来测试这一点。
 
     > **注意：**
-    > 使用 RHEL/CentOS 时，由于 https://bugzilla.redhat.com/show_bug.cgi?id=1527565 导致 SSH 用户无法成为 root 用户。有关 RHEL/CentOS 的特定需求，请参阅[操作系统要求](/docs/rke/installation/os/_index)。
+    > 使用 RHEL/CentOS 时，由于 https://bugzilla.redhat.com/show_bug.cgi?id=1527565 导致 SSH 用户无法成为 root 用户。有关 RHEL/CentOS 的特定需求，请参阅[操作系统要求](/docs/rke/os/_index)。
 
         nodes:
             # The IP address or hostname of the node

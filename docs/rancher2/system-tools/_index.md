@@ -49,7 +49,7 @@ keywords:
 
 ### 指令介绍
 
-收集 Kubernetes 日志的命令`logs`，它的用途是收集 [RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)和[高可用集群](/docs/rancher2/installation/k8s-install/kubernetes-rke/_index)节点中，核心 Kubernetes 组件的日志文件。请参考[常见故障排查](/docs/troubleshooting/_index)，查看核心 Kubernetes 组件的列表。
+收集 Kubernetes 日志的命令`logs`，它的用途是收集 [RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)和[高可用集群](/docs/rancher2/installation/k8s-install/kubernetes-rke/_index)节点中，核心 Kubernetes 组件的日志文件。请参考[常见故障排查](/docs/rancher2/troubleshooting/_index)，查看核心 Kubernetes 组件的列表。
 
 系统工具使用 kubeconfig 文件部署 DaemonSet。这个 DaemonSet 的作用是将核心 Kubernetes 组件的所有日志文件复制一遍后，打包成一个 `tar` 文件（默认文件名称是`cluster-logs.tar`）。如果您需要收集单节点的日志，您可以在命令中指定节点，例如`--node NODENAME`和 `-n NODENAME`，将`NODENAME`替换为节点名称后，可以指定单个节点，只收集该节点的日志。
 

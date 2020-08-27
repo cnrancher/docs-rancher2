@@ -19,7 +19,7 @@ keywords:
 
 _自 v2.2.0 起可用_
 
-在启用[集群监控](/docs/rancher2/cluster-admin/tools/monitoring/_index)或[项目监控](/docs/project-admin/tools/monitoring/_index)后，您将希望开始查看正在收集的监控数据。有多种查看监控数据的方式。
+在启用[集群监控](/docs/rancher2/cluster-admin/tools/monitoring/_index)或[项目监控](/docs/rancher2/project-admin/tools/monitoring/_index)后，您将希望开始查看正在收集的监控数据。有多种查看监控数据的方式。
 
 ## Rancher UI
 

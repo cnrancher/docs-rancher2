@@ -58,7 +58,7 @@ keywords:
 
 ## API 审计日志
 
-您可以为 Rancher Server 集群上的`System`项目启用 [Rancher 工具中的日志服务](/docs/project-admin/tools/logging/_index)。
+您可以为 Rancher Server 集群上的`System`项目启用 [Rancher 工具中的日志服务](/docs/rancher2/project-admin/tools/logging/_index)。
 
 ```plain
 --set auditLog.level=1

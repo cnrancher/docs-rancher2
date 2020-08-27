@@ -24,7 +24,7 @@ keywords:
 - [Rancher 文档](/docs/rancher2/overview/_index)
   - [监控](/docs/rancher2/cluster-admin/tools/monitoring/_index)
   - [备份和恢复](/docs/rancher2/backups/_index)
-  - [安全](/docs/rancher/security/_index)
+  - [安全](/docs/rancher2/security/_index)
 - [Rancher 博客](https://rancher.com/blog/)
   - [最佳实践](https://rancher.com/tags/best-practices/)
   - [Kubernetes 的 101 个安全最佳实践](https://rancher.com/blog/2019/2019-01-17-101-more-kubernetes-security-best-practices/)

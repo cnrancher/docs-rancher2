@@ -232,7 +232,7 @@ K3s Server 需要开放 6443 端口供节点访问。
 | TCP  | 2376 | 使用主机驱动创建的节点中的任何节点 IP                    | Docker Machine 使用的 Docker 守护进程的 TLS 端口 |
 | TCP  | 6443 | 托管的/导入的 Kubernetes API                             | Kubernetes API Server                            |
 
-**注意** 如果您配置了的外部[身份验证系统](/docs/admin-settings/authentication/_index)（例如 LDAP），Rancher 节点可能还需要其他出站规则。
+**注意** 如果您配置了的外部[身份验证系统](/docs/rancher2/admin-settings/authentication/_index)（例如 LDAP），Rancher 节点可能还需要其他出站规则。
 
 #### RKE 集群中节点的其他端口需求
 

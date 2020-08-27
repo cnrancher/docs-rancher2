@@ -106,7 +106,7 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
 
 仅在使用 Rancher 生成的证书 `ingress.tls.source=rancher` 或 Let's Encrypt 颁发的证书 `ingress.tls.source=letsEncrypt`时才需要 cert-manager。
 
-这些说明来自[官方的 cert-manager 文档](https://cert-manager.io/docs/rancher2/installation/kubernetes/#installing-with-helm)。
+这些说明来自[官方的 cert-manager 文档](https://cert-manager.io/docs/installation/kubernetes/#installing-with-helm)。
 
 ```
 # 安装 CustomResourceDefinition 资源

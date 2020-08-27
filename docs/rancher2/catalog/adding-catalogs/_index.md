@@ -72,7 +72,7 @@ _自 v2.1.0 起可用_
 >
 > - [系统管理员权限](/docs/rancher2/admin-settings/rbac/global-permissions/_index)
 > - [集群所有者权限](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)
-> - 包含 [Manage Cluster Catalogs](/docs/rancher2/dmin-settings/rbac/cluster-project-roles/_index) 权限的[自定义集群权限](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)。
+> - 包含 [Manage Cluster Catalogs](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index) 权限的[自定义集群权限](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)。
 
 1. 从**全局**界面，导航到要添加自定义应用商店的集群。
 2. 在导航栏中选择**工具 > 商店设置**。

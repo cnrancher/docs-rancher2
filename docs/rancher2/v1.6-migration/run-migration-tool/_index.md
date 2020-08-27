@@ -172,11 +172,11 @@ keywords:
 | [scale][5]        | 在 v1.6 中，规模是指在单个节点上运行的容器副本的数量。在 v2.x 中，此功能由副本集代替。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | start_on_create   | 没有等效的 Kubernetes。您无需采取任何措施。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 
-[1]: /docs/v1.6-migration/monitor-apps/_index
-[2]: /docs/v1.6-migration/schedule-workloads/_index
-[3]: /docs/v1.6-migration/discover-services/_index
-[4]: /docs/v1.6-migration/expose-services/_index
-[5]: /docs/v1.6-migration/schedule-workloads/_index
+[1]: /docs/rancher2/v1.6-migration/monitor-apps/_index
+[2]: /docs/rancher2/v1.6-migration/schedule-workloads/_index
+[3]: /docs/rancher2/v1.6-migration/discover-services/_index
+[4]: /docs/rancher2/v1.6-migration/expose-services/_index
+[5]: /docs/rancher2/v1.6-migration/schedule-workloads/_index
 
 <!-- MB: oops, skipped 6 -->
 

@@ -85,7 +85,7 @@ RKE 可以在大多数已安装 Docker 的 Linux 操作系统上运行。RKE 的
 
 ### RHEL、OEL、CentOS
 
-因为 Red Hat Enterprise Linux（RHEL）、Oracle Enterprise Linux （OEL）和 CentOS 存在漏洞[Bugzilla 1527565](https://bugzilla.redhat.com/show_bug.cgi?id=1527565)，所以它们不允许用户使用`root`作为[SSH 用户](docs/rke/config-options/nodes/_index#ssh-user)。
+因为 Red Hat Enterprise Linux（RHEL）、Oracle Enterprise Linux （OEL）和 CentOS 存在漏洞[Bugzilla 1527565](https://bugzilla.redhat.com/show_bug.cgi?id=1527565)，所以它们不允许用户使用`root`作为[SSH 用户](/docs/rke/config-options/nodes/_index#ssh-user)。
 
 如果您使用的操作系统是 RHEL、OEL 或 CentOS ，请参考下文。
 

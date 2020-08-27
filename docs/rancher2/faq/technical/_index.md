@@ -127,7 +127,7 @@ Rancher UI 包含静态文件，以及基于 API 响应工作。这意味着任�
 
 ## 如何向 Rancher 启动的 Kubernetes 组件添加 参数/绑定/环境变量？
 
-您可以通过[配置文件](/docs/rancher2/cluster-provisioning/rke-clusters/options/_index)集群选项添加附加参数/绑定/环境变量。更多信息请参阅 RKE 文档里的[附加参数，附加绑定和附加环境变量](/docs/rke/config-options/services/services-extras/_index)以及浏览 [Cluster.yml 示例文件](/docs/rke//example-yamls/_index)。
+您可以通过[配置文件](/docs/rancher2/cluster-provisioning/rke-clusters/options/_index)集群选项添加附加参数/绑定/环境变量。更多信息请参阅 RKE 文档里的[附加参数，附加绑定和附加环境变量](/docs/rke/config-options/services/services-extras/_index)以及浏览 [Cluster.yml 示例文件](/docs/rke/example-yamls/_index)。
 
 ## 如何检查我的证书链是有效的？
 

@@ -22,7 +22,7 @@ keywords:
 > **先决条件：** 为了管理内置应用商店或[管理全局应用商店](/docs/rancher2/catalog/adding-catalogs/_index)，您需要具有以下权限之一：
 >
 > - [管理员全局权限](/docs/rancher2/admin-settings/rbac/global-permissions/_index)
-> - 包含 [Manage Catalogs](/docs/rancher2/admin-settings/rbac/global-permissions/_index) 权限的[自定义全局权限](/docs/rancher2/dmin-settings/rbac/global-permissions/_index)。
+> - 包含 [Manage Catalogs](/docs/rancher2/admin-settings/rbac/global-permissions/_index) 权限的[自定义全局权限](/docs/rancher2/admin-settings/rbac/global-permissions/_index)。
 
 1. 从**全局**界面中，在导航栏中选择**工具 > 应用商店**。在 v2.2.0 之前的版本中，您可以直接在导航栏中选择**应用商店**。
 
