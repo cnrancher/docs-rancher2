@@ -52,7 +52,7 @@ keywords:
 1. 输入卷声明的**名称**。
 1. 选择要将持久化存储添加到的工作负载的[命名空间](/docs/rancher2/cluster-admin/projects-and-namespaces/_index/)。
 1. 在**使用现有的持久卷**中，进入**持久卷**下拉列表并选择您创建的持久卷。
-1. **可选：** 在**自 定义**中，选择要使用的[访问模式](https://kubernetes.io/docs/rancher2/concepts/storage/persistent-volumes/#access-modes)。
+1. **可选：** 在**自 定义**中，选择要使用的[访问模式](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)。
 1. 单击**创建**。
 
 **结果：** 创建了新的 PVC，可以把它附加到项目中任意的工作负载上。

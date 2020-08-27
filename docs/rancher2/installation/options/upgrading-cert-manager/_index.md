@@ -20,8 +20,8 @@ keywords:
 Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和更新 TLS 证书。从 2019 秋季开始，cert-manager 发生了三个重要的变化，如果你在此时间段前创建了 Rancher 高可用部署，您需要采取以下措施：
 
 1. [从 2019 年 11 月 1 日开始，Let's Encrypt 将阻止版本低于 0.8.0 的 cert-manager 实例。](https://community.letsencrypt.org/t/blocking-old-cert-manager-versions/98753)
-1. [Cert-manager 正在弃用并替换 certificate.spec.acme.solvers 字段。](https://cert-manager.io/docs/rancher2/installation/upgrading/upgrading-0.7-0.8/)此更改没有确切的截止日期。
-1. [Cert-manager 正在弃用`v1alpha1`API 并替换它的 API 组。](https://cert-manager.io/docs/rancher2/installation/upgrading/upgrading-0.10-0.11/)
+1. [Cert-manager 正在弃用并替换 certificate.spec.acme.solvers 字段。](https://cert-manager.io/docs/installation/upgrading/upgrading-0.7-0.8/)此更改没有确切的截止日期。
+1. [Cert-manager 正在弃用`v1alpha1`API 并替换它的 API 组。](https://cert-manager.io/docs/installation/upgrading/upgrading-0.10-0.11/)
 
 为了应对 cert-manager 的变化，本文提供了联网升级 cert-manager、离线升级 cert-manager 和 Cert-Manager API 更改和数据迁移的操作指导。
 
@@ -54,9 +54,9 @@ Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和更新 TLS
    ```
 
    > **重要提示：**
-   > 如果要从 0.11.0 之前的版本升级，请将所有备份资源上的 apiVersion 从`certmanager.k8s.io/v1alpha1`更新为`cert-manager.io/v1alpha2`。如果在其他资源上使用 cert-manager 注释，则需要对其进行更新以反映新的 API 组。有关详细信息, 请参阅有关文档[附加注释更改](https://cert-manager.io/docs/rancher2/installation/upgrading/upgrading-0.10-0.11/#additional-annotation-changes)。
+   > 如果要从 0.11.0 之前的版本升级，请将所有备份资源上的 apiVersion 从`certmanager.k8s.io/v1alpha1`更新为`cert-manager.io/v1alpha2`。如果在其他资源上使用 cert-manager 注释，则需要对其进行更新以反映新的 API 组。有关详细信息, 请参阅有关文档[附加注释更改](https://cert-manager.io/docs/installation/upgrading/upgrading-0.10-0.11/#additional-annotation-changes)。
 
-1. [卸载现有部署](https://cert-manager.io/docs/rancher2/installation/uninstall/kubernetes/#uninstalling-with-helm)
+1. [卸载现有部署](https://cert-manager.io/docs/installation/uninstall/kubernetes/#uninstalling-with-helm)
 
    ```plain
    helm uninstall cert-manager
@@ -158,7 +158,7 @@ Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和更新 TLS
    ```
 
    > **重要提示：**
-   > 如果要从 0.11.0 之前的版本升级，请将所有备份资源上的 apiVersion 从`certmanager.k8s.io/v1alpha1`更新为`cert-manager.io/v1alpha2`。如果在其他资源上使用 cert-manager 注释，则需要对其进行更新以反映新的 API 组。有关详细信息, 请参阅有关文档[附加注释更改](https://cert-manager.io/docs/rancher2/installation/upgrading/upgrading-0.10-0.11/#additional-annotation-changes)。
+   > 如果要从 0.11.0 之前的版本升级，请将所有备份资源上的 apiVersion 从`certmanager.k8s.io/v1alpha1`更新为`cert-manager.io/v1alpha2`。如果在其他资源上使用 cert-manager 注释，则需要对其进行更新以反映新的 API 组。有关详细信息, 请参阅有关文档[附加注释更改](https://cert-manager.io/docs/installation/upgrading/upgrading-0.10-0.11/#additional-annotation-changes)。
 
 1. 删除现有的 cert-manager 安装包
 
@@ -218,12 +218,12 @@ Cert-manager 已经弃用 `certificate.spec.acme.solvers` 字段，并将在即�
 
 根据 cert-manager 文档，在 v0.8 中引入了配置 ACME 证书资源的新格式。具体来说，移动了 challenge solver 配置字段。从 v0.9 开始支持旧格式和新格式，但是在即将发布的 cert-manager 中将不再支持旧格式。cert-manager 文档强烈建议在升级之后将 ACME 颁发者和证书资源更新为新格式。
 
-有关更改和迁移说明的详细信息，请参见[cert-manager v0.7 至 v0.8 升级说明](https://cert-manager.io/docs/rancher2/installation/upgrading/upgrading-0.7-0.8/)。
+有关更改和迁移说明的详细信息，请参见[cert-manager v0.7 至 v0.8 升级说明](https://cert-manager.io/docs/installation/upgrading/upgrading-0.7-0.8/)。
 
 v0.11 版本标志着删除了先前版本的 cert-manager 中使用的 v1alpha1 API，并且我们的 API 组已更改为 cert-manager.io 而不是 certmanager.k8s.io。
 
-我们还删除了对 v0.8 版本中不支持的旧配置格式的支持，这意味着在升级到 v0.11 之前，您必须转换到为 ACME 发行者使用新的 solvers 样式配置格式。有关更多信息，请参见[升级到 v0.8 指南](https://cert-manager.io/docs/rancher2/installation/upgrading/upgrading-0.7-0.8/)。
+我们还删除了对 v0.8 版本中不支持的旧配置格式的支持，这意味着在升级到 v0.11 之前，您必须转换到为 ACME 发行者使用新的 solvers 样式配置格式。有关更多信息，请参见[升级到 v0.8 指南](https://cert-manager.io/docs/installation/upgrading/upgrading-0.7-0.8/)。
 
-有关更改和迁移说明的详细信息，请参见[cert-manager v0.10 至 v0.11 升级说明](https://cert-manager.io/docs/rancher2/installation/upgrading/upgrading-0.10-0.11/)。
+有关更改和迁移说明的详细信息，请参见[cert-manager v0.10 至 v0.11 升级说明](https://cert-manager.io/docs/installation/upgrading/upgrading-0.10-0.11/)。
 
-有关更多信息，请参见[cert-manager 升级信息](https://cert-manager.io/docs/rancher2/installation/upgrading/)。
+有关更多信息，请参见[cert-manager 升级信息](https://cert-manager.io/docs/installation/upgrading/)。

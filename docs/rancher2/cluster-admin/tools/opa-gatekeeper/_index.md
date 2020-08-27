@@ -44,7 +44,7 @@ Rancher 的 Helm System Chart 里包含了 OPA Gatekeeper。启用后，它将�
 > **先决条件：**
 >
 > - 只有系统管理员和集群所有者才能启用 OPA Gatekeeper。
-> - 需要通过`dashboard`功能开关启用仪表板。有关更多信息，请参阅[启用实验性功能](/docs/rancher2/rancher2/installation/options/feature-flags/_index)的部分。
+> - 需要通过`dashboard`功能开关启用仪表板。有关更多信息，请参阅[启用实验性功能](/docs/rancher2/installation/options/feature-flags/_index)的部分。
 
 1. 导航到集群的**仪表板**视图。
 1. 在左侧菜单上，展开集群菜单，然后单击**OPA Gatekeeper**。
