@@ -1,6 +1,6 @@
 ---
 title: 管理云凭证
-description: 当您创建集群时，需要用到[节点模板](/docs/cluster-provisioning/rke-clusters/node-pools/_index)创建集群内的节点。这些模板使用 Docker Machine 中可用的配置选项，定义节点上的操作系统的镜像和配置参数。主机节点可以使用云凭证访问基础设施提供商，并创建节点。一个云凭证可用于多个节点模板。云凭证的优势是，使用同一个云服务提供商创建多个节点模板时，您不需要重复输入多次认证信息。云凭证以 Kubernetes 密文的方式存储。
+description: 当您创建集群时，需要用到[节点模板](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/_index)创建集群内的节点。这些模板使用 Docker Machine 中可用的配置选项，定义节点上的操作系统的镜像和配置参数。主机节点可以使用云凭证访问基础设施提供商，并创建节点。一个云凭证可用于多个节点模板。云凭证的优势是，使用同一个云服务提供商创建多个节点模板时，您不需要重复输入多次认证信息。云凭证以 Kubernetes 密文的方式存储。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档

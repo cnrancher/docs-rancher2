@@ -27,7 +27,7 @@ RKE 支持在单节点模式或 HA 集群模式下运行 etcd。它还支持向�
 
 ## Kubernetes API Server
 
-> **Rancher 2 用户注意**如果您在创建[Rancher Launched Kubernetes](docs/cluster-provisioning/rke-clusters/options/_index)配置集群选项时，创建[Rancher Launched Kubernetes](/docs/cluster-provisioning/rke-clusters/_index)时，服务名称应只包含下划线：`kube_api`。这只适用于 Rancher v2.0.5 和 v2.0.6。
+> **Rancher 2 用户注意**如果您在创建[Rancher Launched Kubernetes](/docs/rancher2/cluster-provisioning/rke-clusters/options/_index)配置集群选项时，创建[Rancher Launched Kubernetes](/docs/rancher2/cluster-provisioning/rke-clusters/_index)时，服务名称应只包含下划线：`kube_api`。这只适用于 Rancher v2.0.5 和 v2.0.6。
 
 [Kubernetes API](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/) REST 服务，处理所有 Kubernetes 对象的请求和数据，并为所有其他 Kubernetes 组件提供共享状态。
 

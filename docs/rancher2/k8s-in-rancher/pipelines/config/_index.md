@@ -294,7 +294,7 @@ timeout: 30
 
 _可用于 v2.2.0_
 
-**通知：** 您可以决定是否要为流水线设置通知。您可以根据流水线的构建状态，启用任何[通知](/docs/cluster-admin/tools/notifiers/_index)。在启用流水线通知之前，您需要[配置通知](/docs/cluster-admin/tools/notifiers/_index)，这样可以轻松地添加接收者。
+**通知：** 您可以决定是否要为流水线设置通知。您可以根据流水线的构建状态，启用任何[通知](/docs/rancher2/cluster-admin/tools/notifiers/_index)。在启用流水线通知之前，您需要[配置通知](/docs/rancher2/cluster-admin/tools/notifiers/_index)，这样可以轻松地添加接收者。
 
 ### 通过 UI 配置通知
 

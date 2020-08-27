@@ -16,7 +16,7 @@ keywords:
   - 直接通过下游集群进行认证
 ---
 
-本节提供了[如何设置 kubectl 来直接访问集群](/docs/cluster-admin/cluster-access/kubectl/_index)背景信息，介绍了 kubectl CLI、kubeconfig 文件和授权的集群终端如何协同工作，从而允许您直接访问下游的 Kubernetes 集群。
+本节提供了[如何设置 kubectl 来直接访问集群](/docs/rancher2/cluster-admin/cluster-access/kubectl/_index)背景信息，介绍了 kubectl CLI、kubeconfig 文件和授权的集群终端如何协同工作，从而允许您直接访问下游的 Kubernetes 集群。
 
 ## 关于 kubeconfig 文件
 

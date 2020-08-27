@@ -49,7 +49,7 @@ keywords:
 
 ## 监视集群以计划容量
 
-Rancher Server 的 Local Kubernetes 集群应该尽可能符合[系统和硬件需求](/docs/installation/requirements/_index)。您越偏离系统和硬件需求，您承担的风险就越大。
+Rancher Server 的 Local Kubernetes 集群应该尽可能符合[系统和硬件需求](/docs/rancher2/installation/requirements/_index)。您越偏离系统和硬件需求，您承担的风险就越大。
 
 但是，基于指标的容量规划分析应该是扩展 Rancher 的最终指导，因为我们发布的需求建议考虑了各种工作负载类型。
 

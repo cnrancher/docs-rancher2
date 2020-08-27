@@ -56,9 +56,9 @@ values={[
 - **恢复 etcd 和 Kubernetes 版本：** 如果由于升级 Kubernetes 版本导致集群出现故障，并且您尚未进行任何集群配置更改，则应使用此选项。
 - **恢复 etcd，Kubernetes 版本和集群配置：** 如果在升级时同时更改了 Kubernetes 版本和集群配置，则应使用此选项。
 
-回滚到 Kubernetes 之前的版本时，[升级策略选项](/docs/cluster-admin/upgrading-kubernetes/_index)是将不会生效。在将工作节点恢复到较早的 Kubernetes 版本之前，不会对其进行**暂停（Cordon）**或**驱散（Drain）**，这是为了尽快将运行状况不佳的集群恢复到健康状态。
+回滚到 Kubernetes 之前的版本时，[升级策略选项](/docs/rancher2/cluster-admin/upgrading-kubernetes/_index)是将不会生效。在将工作节点恢复到较早的 Kubernetes 版本之前，不会对其进行**暂停（Cordon）**或**驱散（Drain）**，这是为了尽快将运行状况不佳的集群恢复到健康状态。
 
-> **先决条件：** 要从 S3 恢复快照，需要将集群配置为[在 S3 上进行定期快照](/docs/cluster-admin/backing-up-etcd/_index)。
+> **先决条件：** 要从 S3 恢复快照，需要将集群配置为[在 S3 上进行定期快照](/docs/rancher2/cluster-admin/backing-up-etcd/_index)。
 
 1. 在 **全局** 视图中，导航到要恢复的集群。
 
