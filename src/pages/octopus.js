@@ -11,7 +11,7 @@ const metaTitle = "Rancher文档 | K8S文档 | Rancher";
 function findAndAppendSubGroups(all, metadata, baseUrl, subItems) {
     subItems.forEach((sub) => {
         if (typeof sub === "string") {
-            const label = metadata.docs.rke[sub];
+            const label = metadata.docs.octopus[sub];
             if (label) {
                 all.push({
                     label,
@@ -26,7 +26,7 @@ function findAndAppendSubGroups(all, metadata, baseUrl, subItems) {
 
 function getToc(sidebars, metadata, baseUrl) {
     const out = [];
-    const docs = sidebars.rke;
+    const docs = sidebars.octopus;
     Object.keys(docs).forEach((categoryKey) => {
         const allSubGroups = [];
         findAndAppendSubGroups(
@@ -35,7 +35,7 @@ function getToc(sidebars, metadata, baseUrl) {
             baseUrl,
             docs[categoryKey]
         );
-        const description = metadata.categories.rke[categoryKey];
+        const description = metadata.categories.octopus[categoryKey];
         if (description) {
             out.push({
                 key: categoryKey,
@@ -53,7 +53,7 @@ function Home() {
     const { baseUrl } = siteConfig;
     const { sidebars, metadata } = siteConfig.customFields;
     const toc = getToc(sidebars, metadata, baseUrl);
-    const title = "RKE 中文文档";
+    const title = "Octopus 中文文档";
     return (
         <Layout title={metaTitle} description={description} keywords={keywords}>
             <header className={classnames("hero", styles.heroBanner)}>
@@ -138,8 +138,8 @@ function Home() {
                                                                     >
                                                                         视频
                                                                     </span>
-                                                                ); 
-                                                            }*/
+                                                                );
+                                                            } */
                                                         })()}
                                                     </li>
                                                 );

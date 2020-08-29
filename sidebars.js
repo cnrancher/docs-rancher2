@@ -968,5 +968,27 @@ module.exports = {
         常见问题: ["k3s/faq/_index"],
         已知问题: ["k3s/known-issues/_index"],
     },
-    octopus: {},
+    octopus: {
+        产品介绍: ["octopus/about/_index"],
+        快速入门: ["octopus/quick-start/_index"],
+        安装部署: ["octopus/install/_index"],
+        DeviceLink: [
+            "octopus/device-link/_index",
+            "octopus/device-link/state-of-dl/_index",
+        ],
+        适配器: [
+            "octopus/adptors/_index",
+            "octopus/adptors/modbus/_index",
+            "octopus/adptors/opc-ua/_index",
+            "octopus/adptors/mqtt/_index",
+            "octopus/adptors/ble/_index",
+            "octopus/adptors/dummy/_index",
+            "octopus/adptors/mqtt-extension/_index",
+            "octopus/adptors/develop/_index",
+        ],
+        开发指南: ["octopus/develop/_index"],
+        关于监控: ["octopus/monitoring/_index"],
+        UI界面: ["octopus/octopus-ui/_index"],
+        常见问题: ["octopus/faq/_index"],
+    },
 };
