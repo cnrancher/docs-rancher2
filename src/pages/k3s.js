@@ -125,7 +125,7 @@ function Home() {
                                                                     </span>
                                                                 );
                                                             }
-                                                            if (
+                                                            /* if (
                                                                 "产品介绍" ===
                                                                     group.key &&
                                                                 index === 0
@@ -138,8 +138,8 @@ function Home() {
                                                                     >
                                                                         视频
                                                                     </span>
-                                                                );
-                                                            }
+                                                                ); 
+                                                            }*/
                                                         })()}
                                                     </li>
                                                 );
