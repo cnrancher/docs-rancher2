@@ -99,7 +99,7 @@ dns:
 
 RKE 将 kube-dns 部署为一个默认副本为 1 的 Deployment，该 pod 由`kubedns`、`dnsmasq`和`sidecar`共 3 个容器组成。RKE 也将 kube-dns-autoscaler 部署为 Deployment，通过使用核心和节点数量来扩展 kube-dns Deployment。详情请参考[Linear Mode](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler#linear-mode)。
 
-kube-dns 使用的镜像在[`system_images`]({{<baseurl>}}/rke/latest/en/config-options/system-images/)下。对于每个 Kubernetes 版本，都有与 kube-dns 相关联的默认镜像，但这些图片可以通过更改`system_images`中的镜像标签来覆盖。
+kube-dns 使用的镜像在[`system_images`](/docs/rke/latest/en/config-options/system-images/_index)下。对于每个 Kubernetes 版本，都有与 kube-dns 相关联的默认镜像，但这些图片可以通过更改`system_images`中的镜像标签来覆盖。
 
 ### 调度 kube-dns
 

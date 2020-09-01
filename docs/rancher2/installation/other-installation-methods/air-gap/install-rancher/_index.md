@@ -224,7 +224,7 @@ kubectl -n cattle-system apply -R -f ./rancher
 
 **步骤结果：** 如果您在安装 Rancher v2.3.0+，则安装完成。
 
-**说明：** 如果您不打算发送遥测数据，请在初始登录时选择退出[遥测](/docs/rancher2/faq/telemetry/_index)。
+**说明：** 如果您不打算发送遥测数据，请在初始登录时选择退出[遥测](/docs/rancher2/faq/telemetry/_index)。如果在离线安装的环境中让这个功能处于 active 状态，会导致无法成功打开 socket 的问题。
 
 ### 针对 Rancher 2.3.0 之前版本配置 system-chart
 

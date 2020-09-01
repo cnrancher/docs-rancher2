@@ -37,27 +37,55 @@ _v2.1.0 版本可用_
 
   > - 1：您可以选择启用这些设置中的一个或两个。
   > - 2：在配置和保存 SAML 提供者之前，不会生成 Rancher SAML 元数据。
+  >   ![keycloak-saml-client-configuration](/img/rancher/keycloak-saml-client-configuration.png)
 
-- 从 Keycloak 客户端导出`metadata.xml`文件:
+  在新的 SAML 客户端中，创建 Mappers 来暴露用户字段。
+
+  - 添加所有 "内置协议映射器"
+    ![keycloak-saml-client-builtin-mappers](/img/rancher/keycloak-saml-client-builtin-mappers.png)
+  - 创建一个新的 "组列表 "映射器，将成员属性映射到用户的组。
+    ![keycloak-saml-client-group-mapper](/img/rancher/keycloak-saml-client-group-mapper.png)
+
+- 从 Keycloak 客户端导出`metadata.xml`文件：
   在`安装`选项卡中，选择`SAML Metadata IDPSSODescriptor`格式选项并下载文件。
+
+> **说明：**
+> Keycloak 6.0.0 及以上版本不再在 "安装 "标签下提供 IDP 元数据。
+> 你仍然可以从以下网址获取 XML：
+>
+> `https://{KEYCLOAK-URL}/auth/realms/{REALM-NAME}/protocol/saml/descriptor`
+>
+> 从这个 URL 获得的 XML 包含`EntitiesDescriptor`作为根元素。Rancher 希望根元素是`EntityDescriptor`而不是`EntitiesDescriptor`。因此，在将这个 XML 传递给 Rancher 之前，请按照以下步骤调整：
+>
+> - 将`EntitiesDescriptor`中所有不存在的属性复制到 `EntityDescriptor`中。
+> - 删除开头的`<EntitiesDescriptor>`标签。
+> - 删除结尾的的`</EntitiesDescriptor>`。
+>
+> 完成后，会留下类似下面的代码：
+>
+> ```
+> <EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" entityID="https://{KEYCLOAK-URL}/auth/realms/{REALM-NAME}">
+>   ....
+> </EntityDescriptor>
+> ```
 
 ## 在 Rancher 中配置 Keycloak
 
 1.  在**全局**视图中，从主菜单中选择**安全 > 认证**。
 1.  选择**Keycloak**。
-1.  完成**配置 Keycloak 帐户**表单。Keycloak IdP 允许您指定要使用的数据存储。您可以添加数据库，也可以使用现有的 LDAP 服务器。例如，如果您选择 Active Directory (AD)服务器，下面的示例将描述如何将 AD 属性映射到 Rancher 中的字段。
+1.  完成**配置 Keycloak 帐户**表单。
 
-    | 字段             | 描述                                                    |
-    | ---------------- | ------------------------------------------------------- |
-    | 显示名称         | 包含用户 display name 的 AD 属性。                      |
-    | 用户名           | 包含用户 user name/given name 的 AD 属性                |
-    | UID              | 对每个用户唯一的 AD 属性。                              |
-    | 组               | 为管理组成员身份创建的条目。                            |
-    | Rancher API 地址 | Rancher Server 的 URL 地址                              |
-    | 私钥 / 证书      | 密钥/证书对，用于在 Rancher 和 IdP 之间创建安全 shell。 |
-    | 元数据 XML       | 从您的 IdP 服务器导出的`metadata.xml`文件。             |
+    | 字段             | 描述                                                  |
+    | :--------------- | :---------------------------------------------------- |
+    | 显示名称         | 包含用户 display name 的 属性，例如`givenName`        |
+    | 用户名           | 包含用户 user name/given name 的属性，例如`givenName` |
+    | UID              | 对每个用户唯一的属性，例如`email`                     |
+    | 组               | 为管理组成员身份创建的组，例如`team_member`           |
+    | Rancher API 地址 | Rancher Server 的 URL 地址                            |
+    | 私钥 / 证书      | 密钥/证书对，用于在 Rancher 和 IdP 之间创建安全 shell |
+    | 元数据 XML       | 从您的 IdP 服务器导出的`metadata.xml`文件。           |
 
-    > **提示：** 您可以使用 openssl 命令生成密钥/证书对。例如:
+    > **提示：** 您可以使用 openssl 命令生成密钥/证书对。例如：
     >
     >        openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout myservice.key -out myservice.cert
 
@@ -108,25 +136,3 @@ _v2.1.0 版本可用_
 
 - 检查 Keycloak 日志。
 - 如果日志显示`request validation failed: org.keycloak.common.VerificationException: SigAlg was null`，在 Keycloak 客户端中将`Client Signature Required`设置为`OFF`。
-
-### Keycloak 6.0.0+: 选项中没有 IDPSSODescriptor 设置
-
-Keycloak 6.0.0 及以上版本在“安装”选项卡下不再提供 IDP 元数据。
-您仍然可以从以下网址获取 XML:
-
-`https://{KEYCLOAK-URL}/auth/realms/{REALM-NAME}/protocol/saml/descriptor`
-
-从这个 URL 获得的 XML 包含`EntitiesDescriptor`作为根元素。Rancher 期望的根元素是`EntityDescriptor`而不是`EntitiesDescriptor`。因此，在将此 XML 传递给 Rancher 之前，请按照以下步骤进行调整:
-
-- 将所有标签从“EntitiesDescriptor”复制到“EntityDescriptor”
-- 从文件开头删除`<EntitiesDescriptor>`标签。
-- 从 xml 末尾删除`</EntitiesDescriptor>`。
-
-您会得到类似下面的示例的文件:
-
-```
-<EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" entityID="https://{KEYCLOAK-URL}/auth/realms/{REALM-NAME}">
-  ....
-
-</EntityDescriptor>
-```

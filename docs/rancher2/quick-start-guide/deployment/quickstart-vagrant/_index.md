@@ -18,6 +18,14 @@ keywords:
 
 您可以按照以下操作步骤部署 Rancher Server 和一个单节点的 Kubernetes 集群。
 
+### 说明
+
+Vagrant 需要插件来创建 VirtualBox 虚拟机，请在命令行中输入以下命令，安装插件：
+
+`vagrant plugin install vagrant-vboxmanage`
+
+`vagrant plugin install vagrant-vbguest`
+
 ## 先决条件
 
 - [Vagrant](https://www.vagrantup.com)：因为 Rancher Server 基于 Vagrantfile 运行，所以已经安装和配置好了 Vagrant 是先决条件之一。
@@ -38,7 +46,7 @@ keywords:
 
    - 修改管理员用户登录时使用的密码，对应的参数是`default_password` 。
 
-1. 执行`vagrant up`命令，运行初始化环境。
+1. 执行`vagrant up --provider=virtualbox`命令，运行初始化环境。
 
 1. 完成初始化后，打开浏览器，执行`https://172.22.101.101`，访问 Rancher UI。
 

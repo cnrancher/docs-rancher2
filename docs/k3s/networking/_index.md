@@ -7,7 +7,7 @@ weight: 35
 
 ## 开放端口
 
-请参阅[安装网络选项](/docs/k3s/installation/network-options/_index)页面，以获取有关 Flannel 配置选项和后端选择, 或如何设置自己的 CNI 的详细信息。
+请参阅[安装网络选项](/docs/k3s/installation/network-options/_index)页面，以获取有关 Flannel 配置选项和后端选择，或如何设置自己的 CNI 的详细信息。
 
 ## CoreDNS
 
@@ -58,7 +58,7 @@ Service LB 控制器会监听其他 Kubernetes Services。当它找到一个 Ser
 
 ### 用法
 
-在 K3s 中创建一个[LoadBalancer 类型的 Service。](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer)
+在 K3s 中创建一个[LoadBalancer 类型的 Service](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer)。
 
 ### 从节点中排除 Service LB
 

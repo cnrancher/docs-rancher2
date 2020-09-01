@@ -28,7 +28,6 @@ keywords:
 - [Micsoroft Azure 租户](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-create-new-tenant)：使用此链接并按照说明创建 Microsoft Azure 租户。
 - [Microsoft Azure 客户端 ID/密钥](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal)：使用此链接并按照说明创建 Microsoft Azure 客户端和密钥。
 - 安装 [Terraform](https://www.terraform.io/downloads.html)：用于在 Microsoft Azure 中配置服务器和集群。
-- 安装 [RKE Terraform Provider](https://github.com/rancher/terraform-provider-rke#installing-the-provider)：您将需要下载 RKE 的 Terraform Provider 的二进制文件，该二进制文件与您的工作站的操作系统相对应。然后，您需要将二进制文件移到 Terraform 插件目录中。目录名称将取决于您的操作系统。有关如何安装 Terraform 插件的更多信息，请参考[Terraform 文档](https://www.terraform.io/docs/plugins/basics.html#installing-a-plugin)。
 
 ## 操作步骤
 
@@ -65,7 +64,7 @@ keywords:
    Outputs:
 
    rancher_node_ip = xx.xx.xx.xx
-   rancher_server_url = https://xx-xx-xx-xx.nip.io
+   rancher_server_url = rancher.xx.xx.xx.xx.xip.io
    workload_node_ip = yy.yy.yy.yy
    ```
 

@@ -3,48 +3,26 @@ title: Helm
 weight: 42
 ---
 
-K3s _v1.17.0+k3s.1_ 增加了对Helm 3的支持。您可以在[此处](https://helm.sh/docs/intro/quickstart/)访问Helm 3文档。 
+Helm 是 Kubernetes 的首选包管理工具。Helm 图表为 Kubernetes YAML 清单文件提供了模板化语法。通过 Helm，我们可以创建可配置的部署，而不仅仅是使用静态文件。有关创建自己的部署目录的更多信息，请查看[Helm 快速入门](https://helm.sh/docs/intro/quickstart/)。
 
-Helm是Kubernetes首选的软件包管理工具。Helm charts 为Kubernetes YAML清单文件提供了模板化语法。通过Helm，我们可以创建可配置的部署，而不仅仅是使用静态文件。关于创建自己的部署目录的更多信息，请查看文档：https://helm.sh/
-
-K3s不需要任何特殊的配置就可以开始使用Helm 3。只要确保你已经按照[集群访问](../cluster-access/_index)一节正确设置了你的kubeconfig。
+K3s 不需要任何特殊的配置就可以使用 Helm 命令行工具。只要确保你已经按照[集群访问](./cluster-access)一节正确设置了你的 kubeconfig。K3s 包含了一些额外的功能，使传统的 Kubernetes 资源清单和 Helm Charts 的部署更加容易。
 
 本节涵盖以下主题：
 
-- [升级 Helm](#升级-helm)
 - [部署 manifests 和 Helm charts](#部署-manifests-和-helm-charts)
 - [使用 Helm CRD](#使用-helm-crd)
-
-## 升级 Helm
-
-如果你在早期的K3s版本中使用的是Helm v2，你可以升级到v1.17.0+k3s.1或更新版本，但Helm 2仍然可以使用。如果你想迁移到Helm 3，Helm的[这篇](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/)博客文章介绍了如何使用插件成功迁移。更多信息请参考Helm 3的[官方文档](https://helm.sh/docs/)。从v1.17.0+k3s.1开始，K3s可以同时处理Helm v2或Helm v3。只要确保你已经按照[集群访问](../cluster-access/_index)一节中的例子正确设置了你的kubeconfig。
-
-注意，Helm 3不再需要Tiller和`helm init`命令。详情请参考官方文档。
+- [使用 HelmChartConfig 自定义打包的组件](#使用-HelmChartConfig-自定义打包的组件)
+- [从 Helm v2 升级](#从-Helm-v2-升级)
 
 ## 部署 manifests 和 Helm charts
 
-在`/var/lib/rancher/k3s/server/manifests`中找到的任何文件都会以类似`kubectl apply`的方式自动部署到Kubernetes。
+在`/var/lib/rancher/k3s/server/manifests`中找到的任何 Kubernetes 清单将以类似`kubectl apply`的方式自动部署到 K3s。以这种方式部署的 manifests 是作为 AddOn 自定义资源来管理的，可以通过运行`kubectl get addon -A`来查看。你会发现打包组件的 AddOns，如 CoreDNS、Local-Storage、Traefik 等。AddOns 是由部署控制器自动创建的，并根据它们在 manifests 目录下的文件名命名。
 
-K3s也可以部署Helm charts。K3s支持一个CRD控制器来安装charts。YAML文件规范如下所示（例子摘自`/var/lib/rancher/k3s/server/manifests/traefik.yaml`）：
+也可以将 Helm 图表作为 AddOns 部署。K3s 包括一个[Helm Controller](https://github.com/rancher/helm-controller/)，它使用 HelmChart Custom Resource Definition(CRD)管理 Helm 图表。
 
-```yaml
-apiVersion: helm.cattle.io/v1
-kind: HelmChart
-metadata:
-  name: traefik
-  namespace: kube-system
-spec:
-  chart: stable/traefik
-  set:
-    rbac.enabled: "true"
-    ssl.enabled: "true"
-```
+> **注意:** K3s 版本至 v0.5.0 使用`k3s.cattle.io/v1`作为 HelmCharts 的 apiVersion。后来的版本已改为`helm.cattle.io/v1`。
 
-请记住，你的HelmChart metadata 部分中的`namespace`应该总是`kube-system`，因为K3s部署控制器配置为在此namespace中监视新的HelmChart资源。如果你想为实际的Helm release 指定namespace，你可以使用`spec`指令下的`targetNamespace`键来实现，如下面的配置示例所示。
-
-> **注意:** 为了让Helm控制器知道使用哪个版本的Helm来自动部署helm应用，请在你的YAML文件的spec中指定`helmVersion`。
-
-另外要注意的是，除了 `set`，你还可以在 `spec` 指令下使用 `valuesContent`。而且这两个可以同时使用：
+HelmChart 资源定义捕获了大多数你通常会传递给`helm`命令行工具的选项。下面是一个例子，说明如何从默认的图表资源库中部署 Grafana，覆盖一些默认的图表值。请注意，HelmChart 资源本身在 "kube-system"命名空间，但图表资源将被部署到 "monitoring"命名空间。
 
 ```yaml
 apiVersion: helm.cattle.io/v1
@@ -68,34 +46,85 @@ spec:
         enabled: true
 ```
 
-K3s版本`<= v0.5.0`对HelmCharts的API组使用`k3s.cattle.io`。后来的版本已经改为`helm.cattle.io`。
-
 ## 使用 Helm CRD
 
-你可以使用这样的例子部署第三方Helm chart：
+> **注意：**K3s 版本至 v0.5.0 使用`k3s.cattle.io/v1`作为 HelmCharts 的 apiVersion。后来的版本已改为`helm.cattle.io/v1`。
+
+Helm Chart 资源定义捕获了大多数你通常会传递给`helm`命令行工具的选项。下面是一个例子，说明如何从默认的图表资源库中部署 Grafana，覆盖一些默认的图表值。请注意，HelmChart 资源本身在 "kube-system "命名空间，但图表资源将被部署到 "monitoring "命名空间。
+
+你可以使用这样的例子部署第三方 Helm chart：
 
 ```yaml
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
-  name: nginx
+  name: grafana
   namespace: kube-system
 spec:
-  chart: nginx
-  repo: https://charts.bitnami.com/bitnami
-  targetNamespace: default
+  chart: stable/grafana
+  targetNamespace: monitoring
+  set:
+    adminPassword: "NotVerySafePassword"
+  valuesContent: |-
+    image:
+      tag: master
+    env:
+      GF_EXPLORE_ENABLED: true
+    adminUser: admin
+    sidecar:
+      datasources:
+        enabled: true
 ```
 
-你可以使用这样的例子来安装一个特定版本的Helm chart：
+### HelmChart 字段定义
+
+| 字段                 | 默认值  | 描述                                                                     | Helm Argument / Flag Equivalent |
+| :------------------- | :------ | :----------------------------------------------------------------------- | :------------------------------ |
+| name                 | N/A     | Helm Chart 名称                                                          | NAME                            |
+| spec.chart           | N/A     | 仓库中的 Helm 图表名称，或完整的 HTTPS URL（.tgz）。                     | CHART                           |
+| spec.targetNamespace | default | Helm Chart 目标命名空间                                                  | `--namespace`                   |
+| spec.version         | N/A     | Helm Chart 版本(从版本库安装时使用的版本号)                              | `--version`                     |
+| spec.repo            | N/A     | Helm Chart 版本库 URL 地址                                               | `--repo`                        |
+| spec.helmVersion     | v3      | Helm 的版本号，可选值为 `v2` 和`v3`，默认值为 `v3`                       | N/A                             |
+| spec.bootstrap       | False   | 如果需要该图表来引导集群（Cloud Controller Manager 等），则设置为 True。 | N/A                             |
+| spec.set             | N/A     | 覆盖简单的默认图表值。这些值优先于通过 valuesContent 设置的选项。        | `--set` / `--set-string`        |
+| spec.valuesContent   | N/A     | 通过 YAML 文件内容覆盖复杂的默认图表值。                                 | `--values`                      |
+| spec.chartContent    | N/A     | Base64 编码的图表存档.tgz - 覆盖 spec.chart。                            | CHART                           |
+
+放在`/var/lib/rancher/k3s/server/static/`中的内容可以通过 Kubernetes APIServer 从集群内匿名访问。这个 URL 可以使用`spec.chart`字段中的特殊变量`%{KUBERNETES_API}%`进行模板化。例如，打包后的 Traefik 组件从`https://%{KUBERNETES_API}%/static/charts/traefik-1.81.0.tgz`加载其图表。
+
+## 使用 HelmChartConfig 自定义打包的组件
+
+为了允许覆盖作为 HelmCharts（如 Traefik）部署的打包组件的值，从 v1.19.0+k3s1 开始的 K3s 版本支持通过 HelmChartConfig 资源自定义部署。HelmChartConfig 资源必须与其对应的 HelmChart 的名称和命名空间相匹配，并支持提供额外的 "valuesContent"，它作为一个额外的值文件传递给`helm`命令。
+
+> **注意：** HelmChart 的`spec.set`值覆盖了 HelmChart 和 HelmChartConfig 的`spec.valuesContent`设置。
+> 例如，要自定义打包后的 Traefik 入口配置，你可以创建一个名为`/var/lib/rancher/k3s/server/manifests/traefik-config.yaml`的文件，并将其填充为以下内容。
 
 ```yaml
 apiVersion: helm.cattle.io/v1
-kind: HelmChart
+kind: HelmChartConfig
 metadata:
-  name: stable/nginx-ingress
+  name: traefik
   namespace: kube-system
 spec:
-  chart: nginx-ingress
-  version: 1.24.4
-  targetNamespace: default
+  valuesContent: |-
+    image: traefik
+    imageTag: v1.7.26-alpine
+    proxyProtocol:
+      enabled: true
+      trustedIPs:
+        - 10.0.0.0/8
+    forwardedHeaders:
+      enabled: true
+      trustedIPs:
+        - 10.0.0.0/8
+    ssl:
+      enabled: true
+      permanentRedirect: false
 ```
+
+## 从 Helm v2 升级
+
+如果你在以前的 K3s 版本中使用的是 Helm v2，你可以升级到 v1.17.0+k3s.1 或更新版本，Helm 2 仍然可以使用。如果你想迁移到 Helm 3，[this](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/)Helm 的博文介绍了如何使用插件成功迁移。更多信息请参考 Helm 3 的官方文档[这里](https://helm.sh/docs/)。从 v1.17.0+k3s.1 开始，K3s 可以处理 Helm v2 或 Helm v3。只要确保你已经按照[集群访问](.../cluster-access)一节中的例子正确设置了你的 kubeconfig。
+
+注意，Helm 3 不再需要 Tiller 和`helm init`命令。详情请参考官方文档。

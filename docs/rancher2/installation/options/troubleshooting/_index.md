@@ -10,7 +10,7 @@ title: Rancher Server 所在 Kubernetes 集群的问题排查
 
 - `cattle-system` - `rancher` 部署和 Pod。
 - `ingress-nginx` - Ingress Controller Pod 和 SVC。
-- `kube-system` - `tiller` 和 `cert-manager` Pod。
+- `cert-manager` `cert-manager` pod。
 
 ## default backend - 404
 
@@ -76,7 +76,7 @@ kubectl -n cattle-system logs -f rancher-784d94f59b-vgqzh
 
 `cert-manager`有三个部分。
 
-- `cert-manager` 在`kube-system` 命名空间中的 Pod。
+- `cert-manager` 在`cert-manager` 命名空间中的 Pod。
 - 在`cattle-system`命名空间中的 `Issuer` 对象。
 - 在`cattle-system`命名空间中的 `Certificate` 对象。
 
