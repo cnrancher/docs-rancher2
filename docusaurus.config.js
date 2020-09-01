@@ -85,4 +85,5 @@ module.exports = {
         baseCommit:
             "7d3dea23d944c94934b3ae228d0dbd62d01d99e9 - August 27, 2020",
     },
+    plugins: ["@docusaurus/plugin-baidu-analytics"],
 };
