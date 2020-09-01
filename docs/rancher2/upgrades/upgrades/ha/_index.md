@@ -112,7 +112,14 @@ helm upgrade rancher rancher-<CHART_REPO>/rancher \
   --set hostname=rancher.my.org
 ```
 
-> **注意：** 这里将要添加很多从上一步获取的选项。
+> **注意：** 以上是一个例子，可能还有更多上一步的值需要追加。另外，也可以重用当前的值，用`--reuse-values`标志进行小的修改。例如，要只改变 Rancher 的版本：
+
+```
+helm upgrade rancher rancher-<CHART_REPO>/rancher \
+  --namespace cattle-system \
+  --reuse-values \
+  --version=2.4.5
+```
 
 ##### 选项 B - 重新安装 Rancher Chart 和 Cert Manager
 

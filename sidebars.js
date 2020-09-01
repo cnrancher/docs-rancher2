@@ -106,6 +106,16 @@ module.exports = {
                             "rancher2/installation/other-installation-methods/air-gap/install-rancher/_index",
                         ],
                     },
+                    {
+                        type: "category",
+                        label: "HTTP 代理安装 Rancher",
+                        items: [
+                            "rancher2/installation/other-installation-methods/behind-proxy/_index",
+                            "rancher2/installation/other-installation-methods/behind-proxy/prepare-nodes/_index",
+                            "rancher2/installation/other-installation-methods/behind-proxy/launch-kubernetes/_index",
+                            "rancher2/installation/other-installation-methods/behind-proxy/install-rancher/_index",
+                        ],
+                    },
                 ],
             },
             {

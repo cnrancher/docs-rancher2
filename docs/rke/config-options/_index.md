@@ -4,7 +4,7 @@ title: Kubernetes 配置选项
 
 编辑 RKE 的`cluster.yml`文件时，您可以在文件中配置多种不同的选项，控制 RKE 如何启动 Kubernetes。
 
-为了让用户对如何使用`cluster.yml`文件配置 Kubernetes 选项有更好的了解，RKE 提供了几个 yaml 示例，详情请参考[yaml 示例]({{<baseurl>}}/rke/latest/en/example-yamls/)。
+为了让用户对如何使用`cluster.yml`文件配置 Kubernetes 选项有更好的了解，RKE 提供了几个 yaml 示例，详情请参考[yaml 示例](/docs/rke/example-yamls/_index)。
 
 ### 配置节点选项
 

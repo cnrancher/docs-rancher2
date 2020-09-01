@@ -42,30 +42,40 @@ keywords:
 
     :::
 
-    1. 单击 **添加节点模板**。
+在使用 Azure 等云基础设施在 Rancher 中创建**节点模板**之前，我们必须配置 Rancher 以允许操作 Azure 订阅中的资源。
 
-    2. 完成 **Azure 选项** 表单的填写。
+为此，我们首先要在 Azure **活动目录(AD)**中创建一个新的 Azure **服务委托人(SP)**，在 Azure 中，它是拥有管理 Azure 资源权限的应用用户。
 
-       - **账户访问**用于存储您的账户信息，以便进行 Azure 的身份验证。注意：从 v2.2.0 开始，账户访问信息存储为云凭证。云凭证会存储为 Kubernetes 的 secret。多个节点模板可以使用相同的云凭证。您可以使用现有的云凭证或创建新的云凭证。要创建新的云凭证，请输入**名称**和**账户访问**数据，然后单击**创建**。
+下面是一个模板`az cli`脚本，你必须运行它来创建一个服务委托人，在这里你必须输入你的 SP 名称、角色和范围。
 
-       - **区域**用于设置您的托管集群的地理区域以及其他位置元数据。
+`az ad sp create-for-rbac --name="<Rancher ServicePrincipal name>" -- role="Contributor" --scopes="/subscriptions/<subscription Id>"`
 
-       - **网络**用于设置您的集群的网络配置。
+这个服务委托人的创建会返回三个标识信息，_应用 ID，也叫客户端 ID_，_客户端秘密_，_租户 ID_。这些信息将在下面添加**节点模板**的部分中使用。
 
-       - **实例**用于自定义您的虚拟机设定。
+1. 单击 **添加节点模板**。
 
-    3. [Docker 守护进程](https://docs.docker.com/engine/docker-overview/#the-docker-daemon)配置选项包括：
+2. 完成 **Azure 选项** 表单的填写。
 
-       - **标签：** 有关标签的信息，请参阅 [Docker 对象标签文档](https://docs.docker.com/config/labels-custom-metadata/)。
-       - **Docker 引擎安装 URL：** 决定将在实例上安装哪个 Docker 版本。注意：如果您使用的是 RancherOS，因为配置的默认 Docker 版本可能不可用，请先确认要使用的 RancherOS 版本上可用的 Docker 版本。可以使用 `sudo ros engine list` 检查。如果您在其他操作系统上安装 Docker 时遇到问题，请尝试使用配置的 Docker Engine 安装 URL 手动安装 Docker 进行故障排查。
-       - **镜像仓库加速器：** Docker 守护进程使用的 Docker 镜像仓库加速器。
-       - **其他高级选项：** 请参阅 [Docker 守护进程选项参考](https://docs.docker.com/engine/reference/commandline/dockerd/)
+   - **账户访问**用于存储您的账户信息，以便进行 Azure 的身份验证。注意：从 v2.2.0 开始，账户访问信息存储为云凭证。云凭证会存储为 Kubernetes 的 secret。多个节点模板可以使用相同的云凭证。您可以使用现有的云凭证或创建新的云凭证。要创建新的云凭证，请输入**名称**和**账户访问**数据，然后单击**创建**。
 
-    4. 单击**创建**。
+   - **区域**用于设置您的托管集群的地理区域以及其他位置元数据。
 
-    5. **可选：** 添加其他节点池。
+   - **网络**用于设置您的集群的网络配置。
 
-7.  检查您填写的信息以确保填写正确，然后单击 **创建**。
+   - **实例**用于自定义您的虚拟机设定。
+
+3. [Docker 守护进程](https://docs.docker.com/engine/docker-overview/#the-docker-daemon)配置选项包括：
+
+   - **标签：** 有关标签的信息，请参阅 [Docker 对象标签文档](https://docs.docker.com/config/labels-custom-metadata/)。
+   - **Docker 引擎安装 URL：** 决定将在实例上安装哪个 Docker 版本。注意：如果您使用的是 RancherOS，因为配置的默认 Docker 版本可能不可用，请先确认要使用的 RancherOS 版本上可用的 Docker 版本。可以使用 `sudo ros engine list` 检查。如果您在其他操作系统上安装 Docker 时遇到问题，请尝试使用配置的 Docker Engine 安装 URL 手动安装 Docker 进行故障排查。
+   - **镜像仓库加速器：** Docker 守护进程使用的 Docker 镜像仓库加速器。
+   - **其他高级选项：** 请参阅 [Docker 守护进程选项参考](https://docs.docker.com/engine/reference/commandline/dockerd/)
+
+4. 单击**创建**。
+
+5. **可选：** 添加其他节点池。
+
+6. 检查您填写的信息以确保填写正确，然后单击 **创建**。
 
 结果：
 
