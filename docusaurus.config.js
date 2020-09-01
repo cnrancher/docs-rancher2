@@ -19,13 +19,8 @@ module.exports = {
             },
             links: [
                 {
-                    href: "https://docs.rancher.cn/",
+                    href: "https://rancher2.docs.rancher.cn/",
                     label: "文档中心",
-                    position: "left",
-                },
-                {
-                    href: "https://rancher2.docs.rancher.cn/docs/rke/_index/",
-                    label: "RKE",
                     position: "left",
                 },
                 { to: "pdf", label: "获取 PDF 文档", position: "left" },
