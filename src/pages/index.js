@@ -53,95 +53,71 @@ function Home() {
     const { baseUrl } = siteConfig;
     const { sidebars, metadata } = siteConfig.customFields;
     const toc = getToc(sidebars, metadata, baseUrl);
-    const title = "Rancher 2.x 中文文档";
+    const title = "Rancher 中文文档";
     return (
         <Layout title={metaTitle} description={description} keywords={keywords}>
             <header className={classnames("hero", styles.heroBanner)}>
                 <div className="container">
-                    <img className="hero__logo" src="/img/rancher-logo-stacked-black.svg" />
-                    <p className="hero__subtitle navigation__subtitle">{title}</p>
+                    <img
+                        className="hero__logo"
+                        src="/img/rancher-logo-stacked-black.svg"
+                    />
+                    <p className="hero__subtitle navigation__subtitle">
+                        {title}
+                    </p>
                 </div>
             </header>
             <main>
                 <div className="navigation__grid">
                     <div className="navigation__item">
                         <div className="navigation__title">
-                            <a href="#">
-                                <h1>Rancher 1.x</h1>
+                            <a href="https://rancher2.docs.rancher.cn/rancher2/">
+                                <h1>Rancher 2.x</h1>
                             </a>
                         </div>
                         <div className="navigation__content">
-                            <p>Rancher帮助企业能够在生产环境中运行和管理Docker和Kubernetes，而无需从头开始构建容器服务平台。</p>
+                            <p>
+                                Rancher帮助企业能够在生产环境中运行和管理Docker和Kubernetes，而无需从头开始构建容器服务平台。
+                            </p>
                         </div>
                     </div>
                     <div className="navigation__item">
                         <div className="navigation__title">
-                            <a href="#">
-                                <h1>Rancher 1.x</h1>
+                            <a href="https://rancher2.docs.rancher.cn/rke">
+                                <h1>RKE</h1>
                             </a>
                         </div>
                         <div className="navigation__content">
-                            <p>Rancher帮助企业能够在生产环境中运行和管理Docker和Kubernetes，而无需从头开始构建容器服务平台。</p>
+                            <p>
+                                Rancher Kubernetes
+                                Engine(RKE)是一款非常简单，运行速度快的Kubernetes安装程序，支持各种运行平台。
+                            </p>
                         </div>
                     </div>
                     <div className="navigation__item">
                         <div className="navigation__title">
-                            <a href="#">
-                                <h1>Rancher 1.x</h1>
+                            <a href="https://rancher2.docs.rancher.cn/k3s">
+                                <h1>K3s</h1>
                             </a>
                         </div>
                         <div className="navigation__content">
-                            <p>Rancher帮助企业能够在生产环境中运行和管理Docker和Kubernetes，而无需从头开始构建容器服务平台。</p>
+                            <p>
+                                史上最轻量级Kubernetes，易于安装，只需512MB
+                                RAM即可运行。
+                            </p>
                         </div>
                     </div>
                     <div className="navigation__item">
                         <div className="navigation__title">
-                            <a href="#">
-                                <h1>Rancher 1.x</h1>
+                            <a href="https://rancher2.docs.rancher.cn/octopus">
+                                <h1>Octopus</h1>
                             </a>
                         </div>
                         <div className="navigation__content">
-                            <p>Rancher帮助企业能够在生产环境中运行和管理Docker和Kubernetes，而无需从头开始构建容器服务平台。</p>
-                        </div>
-                    </div>
-                    <div className="navigation__item">
-                        <div className="navigation__title">
-                            <a href="#">
-                                <h1>Rancher 1.x</h1>
-                            </a>
-                        </div>
-                        <div className="navigation__content">
-                            <p>Rancher帮助企业能够在生产环境中运行和管理Docker和Kubernetes，而无需从头开始构建容器服务平台。</p>
-                        </div>
-                    </div>
-                    <div className="navigation__item">
-                        <div className="navigation__title">
-                            <a href="#">
-                                <h1>Rancher 1.x</h1>
-                            </a>
-                        </div>
-                        <div className="navigation__content">
-                            <p>Rancher帮助企业能够在生产环境中运行和管理Docker和Kubernetes，而无需从头开始构建容器服务平台。</p>
-                        </div>
-                    </div>
-                    <div className="navigation__item">
-                        <div className="navigation__title">
-                            <a href="#">
-                                <h1>Rancher 1.x</h1>
-                            </a>
-                        </div>
-                        <div className="navigation__content">
-                            <p>Rancher帮助企业能够在生产环境中运行和管理Docker和Kubernetes，而无需从头开始构建容器服务平台。</p>
-                        </div>
-                    </div>
-                    <div className="navigation__item">
-                        <div className="navigation__title">
-                            <a href="#">
-                                <h1>Rancher 1.x</h1>
-                            </a>
-                        </div>
-                        <div className="navigation__content">
-                            <p>Rancher帮助企业能够在生产环境中运行和管理Docker和Kubernetes，而无需从头开始构建容器服务平台。</p>
+                            <p>
+                                Octopus是基于Kubernetes或k3s的开源和云原生的设备管理系统，它非常轻巧，也不需要替换Kubernetes集群的任何基础组件。
+                                部署了Octopus，集群可以将边缘设备作为自定义k8s资源进行管理。
+                            </p>
                         </div>
                     </div>
                 </div>
