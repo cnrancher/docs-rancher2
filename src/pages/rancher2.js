@@ -94,7 +94,7 @@ function Home() {
                                                             {subGroup.label}
                                                         </a>
                                                         {(() => {
-                                                            if (
+                                                            /*if (
                                                                 siteConfig
                                                                     .customFields
                                                                     .stable ===
@@ -109,7 +109,7 @@ function Home() {
                                                                         稳定版
                                                                     </span>
                                                                 );
-                                                            }
+                                                            } */
                                                             if (
                                                                 "版本说明" ===
                                                                     group.key &&
