@@ -1,5 +1,21 @@
 ---
 title: 关于 DeviceLink
+description: 一个`DeviceLink`由 3 部分组成：Adaptor，Model 和 Device spec。适配器定义了要使用的适配器（即协议）以及实际设备应连接的节点。模型描述了设备的模型，它是设备模型的TypeMeta CRD。设备参数描述了如何连接到设备及其所需的设备属性或状态，这些参数由设备模型的 CRD 来定义。
+keywords:
+  - Octopus中文文档
+  - Octopus 中文文档
+  - 边缘计算
+  - IOT
+  - edge computing
+  - Octopus中文
+  - Octopus 中文
+  - Octopus
+  - Octopus教程
+  - Octopus中国
+  - rancher
+  - Octopus 中文教程
+  - DeviceLink
+  - 关于 DeviceLink
 ---
 
 ## DeviceLink

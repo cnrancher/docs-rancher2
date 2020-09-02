@@ -55,7 +55,7 @@ Rancher 对上述特定版本的数据库进行过测试和验证，如果您使
 
 要在 Amazon 的 RDS 服务上创建 MySQL 数据库。请参考此[教程](/docs/rancher2/installation/options/rds/_index)。
 
-有关可用于配置 K3s 集群数据库的选项的完整列表，请参考[K3s 文档](https://rancher.com/docs/k3s/latest/en/installation/datastore/)。
+有关可用于配置 K3s 集群数据库的选项的完整列表，请参考[K3s 文档](/docs/k3s/installation/datastore/_index)。
 
 ### 3、配置负载均衡器
 
@@ -96,7 +96,7 @@ Rancher 对上述特定版本的数据库进行过测试和验证，如果您使
 
 Rancher 支持使用私有镜像仓库进行离线安装。您必须有自己的私有镜像仓库或使用其他方式将 Docker 镜像分发到节点。
 
-在后续步骤中，当您设置 K3s Kubernetes 集群时，您将创建一个[私有镜像仓库配置文件](https://rancher.com/docs/k3s/latest/en/installation/private-registry/)，其中包含有关此镜像仓库的信息。
+在后续步骤中，当您设置 K3s Kubernetes 集群时，您将创建一个[私有镜像仓库配置文件](/docs/k3s/installation/private-registry/_index)，其中包含有关此镜像仓库的信息。
 
 如果您需要有关创建私有 Docker 镜像仓库的帮助，请参阅 [官方 Docker 文档](https://docs.docker.com/registry/deploying/#run-an-externally-accessible-registry)。
 

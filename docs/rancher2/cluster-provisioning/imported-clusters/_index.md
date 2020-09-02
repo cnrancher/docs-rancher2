@@ -83,7 +83,7 @@ kubectl create clusterrolebinding cluster-admin-binding \
 
 ## 导入 K3s 集群
 
-您现在可以将 K3s Kubernetes 集群导入 Rancher。[K3s](http://docs.rancher.com/docs/k3s/latest/en/)是一个轻量级的，经过一致性认证的 Kubernetes 发行版。您还可以通过在 Rancher UI 中编辑 K3s 集群来升级 Kubernetes。
+您现在可以将 K3s Kubernetes 集群导入 Rancher。[K3s](/docs/k3s/_index)是一个轻量级的，经过一致性认证的 Kubernetes 发行版。您还可以通过在 Rancher UI 中编辑 K3s 集群来升级 Kubernetes。
 
 ### 导入的 K3s 集群的其他功能
 

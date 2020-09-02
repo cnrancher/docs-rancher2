@@ -135,7 +135,7 @@ users:
 kubectl --kubeconfig ~/.kube/config/k3s.yaml get pods --all-namespaces
 ```
 
-有关`kubeconfig`文件的更多信息，请参考 [K3s 文档](https://rancher.com/docs/k3s/latest/en/cluster-access/)或[官方 Kubernetes 文档](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/)中关于使用`kubeconfig`文件访问集群的部分。
+有关`kubeconfig`文件的更多信息，请参考 [K3s 集群访问](/docs/k3s/cluster-access/_index)或[官方 Kubernetes 文档](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/)中关于使用`kubeconfig`文件访问集群的部分。
 
 ### 4、检查集群 Pod 的运行状况
 

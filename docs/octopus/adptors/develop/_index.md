@@ -1,5 +1,21 @@
 ---
 title: 如何开发适配器
+description: Octopus 提供了一种开发新适配器的简单方法，运行`make template-adaptor`，在`adaptors`目录下获得一个脚手架。 脚手架的覆盖物如下
+keywords:
+  - Octopus中文文档
+  - Octopus 中文文档
+  - 边缘计算
+  - IOT
+  - edge computing
+  - Octopus中文
+  - Octopus 中文
+  - Octopus
+  - Octopus教程
+  - Octopus中国
+  - rancher
+  - Octopus 中文教程
+  - 适配器
+  - 如何开发适配器
 ---
 
 ## 脚手架

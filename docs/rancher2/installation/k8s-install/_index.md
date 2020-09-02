@@ -54,7 +54,7 @@ Rancher Server 只能在使用 RKE 或 K3s 安装的 Kubernetes 集群中运行�
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl) - Kubernetes 命令行工具.
 - [rke](/docs/rke/installation/_index) - Rancher Kubernetes Engine，用于构建 Kubernetes 集群的 cli。
-- [k3s](https://rancher.com/docs/k3s/latest/en/) - Rancher K3s。
+- [k3s](/docs/k3s/_index) - Rancher K3s。
 - [helm](https://docs.helm.sh/using_helm/#installing-helm) - Kubernetes 的软件包管理工具。请参阅[Helm 版本要求](/docs/rancher2/installation/options/helm-version/_index)选择 Helm 的版本来安装 Rancher。
 
 :::note 提示

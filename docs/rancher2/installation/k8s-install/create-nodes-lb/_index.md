@@ -47,7 +47,7 @@ keywords:
 
 要在 Amazon 的 RDS 服务上创建 MySQL 数据库。请参考此[教程](/docs/rancher2/installation/options/rds/_index)。
 
-有关可用于配置 K3s 集群数据库的选项的完整列表，请参考[K3s 文档](https://rancher.com/docs/k3s/latest/en/installation/datastore/)。
+有关可用于配置 K3s 集群数据库的选项的完整列表，请参考[K3s 文档](/docs/k3s/installation/datastore/_index)。
 
 ### 3、配置负载均衡器
 

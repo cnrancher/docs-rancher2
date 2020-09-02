@@ -74,7 +74,7 @@ Rancher 的部署可以有三种架构：
 在 Rancher 安装指南中，推荐使用 K3s 或 RKE 配置 Kubernetes 集群，并在这个集群中部署 Rancher。K3s 和 RKE 都有许多配置选项可用于自定义 Kubernetes 以适合您的特定环境。有关选项和功能的完整列表，请参见文档：
 
 - [RKE 配置选项](/docs/rke/config-options/_index)
-- [K3s 配置选项](https://rancher.com/docs/k3s/latest/en/installation/install-options/)
+- [K3s 配置选项](/docs/k3s/installation/install-options/_index)
 
 ## 在 Docker 上安装 Rancher 的更多选项
 

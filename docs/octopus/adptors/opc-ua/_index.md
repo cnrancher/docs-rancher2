@@ -1,5 +1,21 @@
 ---
 title: OPC-UA 适配器
+description: OPC-UA是由 OPC Foundation 开发的用于工业自动化的机器对机器通信协议。OPC-UA 适配器集成了gopcua并专注于与工业 OPC-UA 设备和系统进行通信，以便在边缘侧进行数据收集和数据处理。
+keywords:
+  - Octopus中文文档
+  - Octopus 中文文档
+  - 边缘计算
+  - IOT
+  - edge computing
+  - Octopus中文
+  - Octopus 中文
+  - Octopus
+  - Octopus教程
+  - Octopus中国
+  - rancher
+  - Octopus 中文教程
+  - 适配器
+  - OPC-UA 适配器
 ---
 
 ## 介绍

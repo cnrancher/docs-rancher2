@@ -2,8 +2,6 @@
 title: 关于监控
 ---
 
-import useBaseUrl from '@docusaurus/useBaseUrl';
-
 Octopus 基于[sigs.k8s.io/controller-runtime](https://github.com/kubernetes-sigs/controller-runtime)上搭建，因此某些指标与控制器运行时和[client-go](https://github.com/kubernetes/client-go)相关。 同时[github.com/prometheus/client_golang](https://github.com/prometheus/client_golang)为[Go runtime](https://golang.org/pkg/runtime/)提供了一些指标和过程状态。
 
 ## 指标类别

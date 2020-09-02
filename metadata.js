@@ -61,7 +61,7 @@ const metadata = {
         octopus: {
             产品介绍: "为您提供Octopus的产品介绍",
             快速入门: "为您提供Octopus的快速入门",
-            安装部署: "为您提供Octopus的安装指南",
+            安装指南: "为您提供Octopus的安装指南",
             DeviceLink: "为您提供DeviceLink的说明和介绍",
             适配器: "为您提供Octopus支持的适配器配置方式",
             开发指南: "为您提供Octopus的开发指南",
@@ -72,6 +72,7 @@ const metadata = {
     },
     docs: {
         rancher2: {
+            "rancher2/releases/v2.4.7": "版本说明 - v2.4.7",
             "rancher2/releases/v2.4.6": "版本说明 - v2.4.6",
             "rancher2/releases/v2.4.5": "版本说明 - v2.4.5",
             "rancher2/releases/v2.4.4": "版本说明 - v2.4.4",
@@ -318,7 +319,7 @@ const metadata = {
         octopus: {
             "octopus/about/_index": "产品介绍",
             "octopus/quick-start/_index": "快速入门",
-            "octopus/install/_index": "安装部署",
+            "octopus/install/_index": "安装指南",
             "octopus/device-link/_index": "关于DeviceLink",
             "octopus/device-link/state-of-dl/_index": "DeviceLink 的状态",
             "octopus/adptors/_index": "适配器（Adaptors）",

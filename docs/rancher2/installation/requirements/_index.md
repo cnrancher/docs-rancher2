@@ -49,9 +49,9 @@ K3s 几乎可以在任何 Linux 版本上运行。K3s 在以下操作系统及�
 - Ubuntu 18.04 (amd64)
 - Raspbian Buster (armhf)
 
-如果您在 K3s 集群上使用**Raspbian Buster**安装 Rancher，请参考[这些步骤](https://rancher.com/docs/k3s/latest/en/advanced/#enabling-legacy-iptables-on-raspbian-buster)，在 Raspbian Buster 中启用 legacy iptables。
+如果您在 K3s 集群上使用**Raspbian Buster**安装 Rancher，请参考[这些步骤](/docs/k3s/advanced/_index)，在 Raspbian Buster 中启用 legacy iptables。
 
-如果您要在 Alpine Linux 操作系统上安装 K3s 集群并安装 Rancher，您需要执行[这些额外步骤](https://rancher.com/docs/k3s/latest/en/advanced/#additional-preparation-for-alpine-linux-setup)。
+如果您要在 Alpine Linux 操作系统上安装 K3s 集群并安装 Rancher，您需要执行[这些额外步骤](/docs/k3s/advanced/_index)。
 
 有关每个 Rancher 版本测试了哪些操作系统和 Docker 版本的详细信息，请参阅[支持维护条款](https://rancher.com/support-maintenance-terms/)。
 

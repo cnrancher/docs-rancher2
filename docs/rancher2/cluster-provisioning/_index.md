@@ -103,7 +103,7 @@ Rancher 可以在 Amazon EC2、DigitalOcean、Azure、阿里云 或 vSphere 等�
 
 _自 Rancher v2.4.0 起可用_
 
-[K3s](https://rancher.com/docs/k3s/latest/en/)是轻量级的，完全兼容的 Kubernetes 发行版，现在可以将 K3s Kubernetes 集群导入 Rancher。
+[K3s](/docs/k3s/_index)是轻量级的，完全兼容的 Kubernetes 发行版，现在可以将 K3s Kubernetes 集群导入 Rancher。
 
 导入 K3s 集群时，Rancher 会将其识别为 K3s，Rancher UI 将支持全部的导入集群功能，并且针对 K3s 还将提供以下额外功能：
 

@@ -1,9 +1,20 @@
 ---
 title: "网络"
-weight: 35
+description: 已知问题会定期更新，旨在告知您有关在下一发行版本中可能不会立即解决的问题。
+keywords:
+  - k3s中文文档
+  - k3s 中文文档
+  - k3s中文
+  - k3s 中文
+  - k3s
+  - k3s教程
+  - k3s中国
+  - rancher
+  - k3s 中文教程
+  - 网络
 ---
 
-> **注意:** 本页解释了 CoreDNS、Traefik Ingress 控制器和 Klipper service load balancer 如何在 K3s 中工作。
+> **注意：** 本页解释了 CoreDNS、Traefik Ingress 控制器和 Klipper service load balancer 如何在 K3s 中工作。
 
 ## 开放端口
 

@@ -1,5 +1,21 @@
 ---
 title: 适配器与MQTT集成
+description: Octopus 提供了两种的方法与MQTT集成
+keywords:
+  - Octopus中文文档
+  - Octopus 中文文档
+  - 边缘计算
+  - IOT
+  - edge computing
+  - Octopus中文
+  - Octopus 中文
+  - Octopus
+  - Octopus教程
+  - Octopus中国
+  - rancher
+  - Octopus 中文教程
+  - 适配器
+  - 适配器与MQTT集成
 ---
 
 Octopus 提供了两种的方法与[MQTT](http://mqtt.org/)集成：

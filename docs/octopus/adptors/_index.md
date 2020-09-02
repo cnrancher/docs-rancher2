@@ -1,5 +1,21 @@
 ---
 title: 关于适配器
+description: Octopus 诞生时就考虑到了可伸缩性的必要，这种能力体现在设备模型和适配器的设计中。由于可以通过 CRD 定义设备模型，因此设备模型可以是专用设备（例如风扇，LED 等），也可以是通用协议设备（例如 BLE，ModBus，OPC-UA 设备等）。
+keywords:
+  - Octopus中文文档
+  - Octopus 中文文档
+  - 边缘计算
+  - IOT
+  - edge computing
+  - Octopus中文
+  - Octopus 中文
+  - Octopus
+  - Octopus教程
+  - Octopus中国
+  - rancher
+  - Octopus 中文教程
+  - 适配器
+  - 关于适配器
 ---
 
 ## 适配器设计
