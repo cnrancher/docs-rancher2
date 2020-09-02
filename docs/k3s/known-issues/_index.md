@@ -1,17 +1,29 @@
 ---
 title: 已知问题
-weight: 70
+description: 已知问题会定期更新，旨在告知您有关在下一发行版本中可能不会立即解决的问题。
+keywords:
+  - k3s中文文档
+  - k3s 中文文档
+  - k3s中文
+  - k3s 中文
+  - k3s
+  - k3s教程
+  - k3s中国
+  - rancher
+  - k3s 中文教程
+  - 已知问题
 ---
+
 已知问题会定期更新，旨在告知您有关在下一发行版本中可能不会立即解决的问题。
 
 **Snap Docker**
 
-如果你打算将K3s与docker一起使用，不建议通过snap软件包安装Docker，因为已知它将导致运行K3s的问题。
+如果你打算将 K3s 与 docker 一起使用，不建议通过 snap 软件包安装 Docker，因为已知它将导致运行 K3s 的问题。
 
 **Iptables**
 
-如果你在nftables模式下运行iptables，而不是传统模式，你可能会遇到问题。我们建议使用较新的iptables（如1.6.1+）来避免出现问题。
+如果你在 nftables 模式下运行 iptables，而不是传统模式，你可能会遇到问题。我们建议使用较新的 iptables（如 1.6.1+）来避免出现问题。
 
 **RootlessKit**
 
-用RootlessKit运行K3s是实验性的，有几个[已知的问题](/docs/k3s/advanced/_index#rootlesskit的已知问题)。
+用 RootlessKit 运行 K3s 是实验性的，有几个[已知的问题](/docs/k3s/advanced/_index#rootlesskit的已知问题)。

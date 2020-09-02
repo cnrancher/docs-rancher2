@@ -1,6 +1,17 @@
 ---
 title: K3s常见问题
-weight: 60
+description: 常见问题定期更新，旨在回答用户最常问到的关于 K3s 的问题。
+keywords:
+  - k3s中文文档
+  - k3s 中文文档
+  - k3s中文
+  - k3s 中文
+  - k3s
+  - k3s教程
+  - k3s中国
+  - rancher
+  - k3s 中文教程
+  - K3s常见问题
 ---
 
 常见问题定期更新，旨在回答用户最常问到的关于 K3s 的问题。
@@ -106,7 +117,7 @@ curl -sfL https://docs.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn INS
 
 可以通过`--advertise-address`设置 apiserver 向集群成员发布的 IP 地址，详细说明参考[K3s Server 配置参考](/docs/k3s/installation/install-options/server-config/_index)
 
-**Demo:**
+**Demo：**
 
 | 主机 | eth0               | eth1                          |
 | ---- | ------------------ | ----------------------------- |

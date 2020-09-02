@@ -1,5 +1,21 @@
 ---
 title: Dummy 适配器
+description: Dummy 适配器是 Octopus 一种用于测试和 Demo 的模拟适配器。
+keywords:
+  - Octopus中文文档
+  - Octopus 中文文档
+  - 边缘计算
+  - IOT
+  - edge computing
+  - Octopus中文
+  - Octopus 中文
+  - Octopus
+  - Octopus教程
+  - Octopus中国
+  - rancher
+  - Octopus 中文教程
+  - 适配器
+  - Dummy 适配器
 ---
 
 ## 概述

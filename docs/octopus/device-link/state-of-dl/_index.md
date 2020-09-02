@@ -1,5 +1,21 @@
 ---
 title: DeviceLink 的状态
+description: 在 `DeviceLink`的状态中，有下列几种条件可用于跟踪其链接的状态，NodeExisted：节点是否可用；ModelExisted：设备模型是否存在；AdaptorExisted：适配器是否可用；DeviceCreated：是否已创建设备；DeviceConnected：是否已连接设备。
+keywords:
+  - Octopus中文文档
+  - Octopus 中文文档
+  - 边缘计算
+  - IOT
+  - edge computing
+  - Octopus中文
+  - Octopus 中文
+  - Octopus
+  - Octopus教程
+  - Octopus中国
+  - rancher
+  - Octopus 中文教程
+  - DeviceLink
+  - DeviceLink 的状态
 ---
 
 ## 主要流程

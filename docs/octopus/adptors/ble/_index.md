@@ -1,5 +1,21 @@
 ---
 title: BLE 适配器
+description: BLE代表低功耗蓝牙，BLE 是一种设计用于短距离通信的无线通信形式。BLE 适配器实现了蓝牙协议的支持，并用于定义所连接的 BLE 设备的属性与配置。
+keywords:
+  - Octopus中文文档
+  - Octopus 中文文档
+  - 边缘计算
+  - IOT
+  - edge computing
+  - Octopus中文
+  - Octopus 中文
+  - Octopus
+  - Octopus教程
+  - Octopus中国
+  - rancher
+  - Octopus 中文教程
+  - 适配器
+  - BLE 适配器
 ---
 
 ## 介绍

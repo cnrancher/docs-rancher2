@@ -1,5 +1,21 @@
 ---
 title: Modbus 适配器
+description: Modbus是主/从协议，请求信息的设备称为Modbus 主设备，提供信息的设备称为Modbus 从设备。在标准的 Modbus 网络中，有 1 个主设备和最多 247 个从设备，每个从设备具有从 1 到 247 的唯一从设备地址。除了请求从设备的信息外，主设备也可以将信息写入从设备。
+keywords:
+  - Octopus中文文档
+  - Octopus 中文文档
+  - 边缘计算
+  - IOT
+  - edge computing
+  - Octopus中文
+  - Octopus 中文
+  - Octopus
+  - Octopus教程
+  - Octopus中国
+  - rancher
+  - Octopus 中文教程
+  - 适配器
+  - Modbus 适配器
 ---
 
 ## 介绍

@@ -1,5 +1,20 @@
 ---
-title: 快速入门指南
+title: 快速入门
+description: 在本演练中，我们将部署 Octopus 并通过其管理`一类虚拟设备`并执行以下任务：使用 k3d 搭建 k3s 集群、部署 Octopus、部署设备模型和设备控制器、创建 DeviceLink、管理设备。
+keywords:
+  - Octopus中文文档
+  - Octopus 中文文档
+  - 边缘计算
+  - IOT
+  - edge computing
+  - Octopus中文
+  - Octopus 中文
+  - Octopus
+  - Octopus教程
+  - Octopus中国
+  - rancher
+  - Octopus 中文教程
+  - 快速入门
 ---
 
 ## 前置条件

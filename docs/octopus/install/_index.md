@@ -1,5 +1,20 @@
 ---
-title: 安装部署
+title: 安装指南
+description: 常见问题解答会定期更新，旨在回答我们的用户最关注的问题。
+keywords:
+  - Octopus中文文档
+  - Octopus 中文文档
+  - 边缘计算
+  - IOT
+  - edge computing
+  - Octopus中文
+  - Octopus 中文
+  - Octopus
+  - Octopus教程
+  - Octopus中国
+  - rancher
+  - Octopus 中文教程
+  - 安装指南
 ---
 
 Octopus 支持两种不同的部署方式，一种是基于[Helm chart](https://helm.sh/)部署，另一种是基于[Kustomize](https://github.com/kubernetes-sigs/kustomize)部署。

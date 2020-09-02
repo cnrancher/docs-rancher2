@@ -2,8 +2,6 @@
 title: Octopus UI
 ---
 
-import useBaseUrl from '@docusaurus/useBaseUrl';
-
 :::note 说明
 Octopus-UI 当前仅适用于 k3s 集群。
 :::
@@ -43,4 +41,4 @@ rancher-octopus-api-server   LoadBalancer   10.43.98.95   172.16.1.89,192.168.0.
 
 ## 登入验证
 
-`Octopus-UI`使用 k3s 生成的用户名和密码进行身份验证，您可以从生成的 k3s[[KUBECONFIG]](https://rancher.com/docs/k3s/latest/en/cluster-access/)文件中找到它。
+`Octopus-UI`使用 k3s 生成的用户名和密码进行身份验证，您可以从生成的 k3s[[KUBECONFIG]](/docs/k3s/cluster-access/_index)文件中找到它。

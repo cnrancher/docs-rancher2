@@ -120,7 +120,7 @@ RKE 模板的目的是用于标准化 Kubernetes 和 Rancher 设置。如果您�
 
 如果将 RKE 模板定义为 YAML 文件，则可以修改此[示例 RKE 模板 YAML](/docs/rancher2/admin-settings/rke-templates/example-yaml/_index)。RKE 模板中的 YAML 使用与 Rancher 在创建 RKE 集群时相同的自定义项，但由于 YAML 要在 Rancher 的 RKE 集群中使用，因此需要将 RKE 模板自定义项嵌套在 YAML 中的`rancher_kubernetes_engine_config`参数下。
 
-RKE 文档还有[带有注释的](/docs/rke/example-yamls/_index) `cluster.yml`文件，您可以使用这些文件作为参考。
+RKE 文档还有带有注释的[cluster.yml 文件示例](/docs/rke/example-yamls/_index) `，您可以使用这些文件作为参考。
 
 有关可用的全部选项，请参阅[集群配置](/docs/rke/config-options/_index/)上的 RKE 文档。
 

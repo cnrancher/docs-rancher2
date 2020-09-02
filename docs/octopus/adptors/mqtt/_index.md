@@ -1,5 +1,21 @@
 ---
 title: MQTT 适配器
+description: MQTT是一种机器对机器(M2M)/"物联网 "连接协议。它被设计为一种极其轻量级的发布/订阅消息传输。它对于需要少量代码占用和/或网络带宽很高的远程地点的连接非常有用。
+keywords:
+  - Octopus中文文档
+  - Octopus 中文文档
+  - 边缘计算
+  - IOT
+  - edge computing
+  - Octopus中文
+  - Octopus 中文
+  - Octopus
+  - Octopus教程
+  - Octopus中国
+  - rancher
+  - Octopus 中文教程
+  - 适配器
+  - MQTT 适配器
 ---
 
 ## MQTT 介绍

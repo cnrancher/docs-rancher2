@@ -1,5 +1,20 @@
 ---
 title: 常见问题
+description: 常见问题解答会定期更新，旨在回答我们的用户最关注的问题。
+keywords:
+  - Octopus中文文档
+  - Octopus 中文文档
+  - 边缘计算
+  - IOT
+  - edge computing
+  - Octopus中文
+  - Octopus 中文
+  - Octopus
+  - Octopus教程
+  - Octopus中国
+  - rancher
+  - Octopus 中文教程
+  - 常见问题
 ---
 
 :::note 说明
@@ -20,11 +35,11 @@ Octopus 的 multi-arch 的镜像支持 AMD64，ARM64 和 ARMv7，Octopus 可以�
 
 ##### 如何从源代码构建 Octopus
 
-请参考 [Octopus 开发指南](./develop)的说明。
+请参考 [Octopus 开发指南](/docs/octopus/develop/_index)的说明。
 
 ##### 如何构建自定义设备适配器？
 
-请参考[开发适配器](./adaptors/develop)的说明。
+请参考[开发适配器](/docs/octopus/adaptors/develop/_index)的说明。
 
 ##### 是否支持本地离线访问 UI？
 

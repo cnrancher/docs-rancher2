@@ -43,4 +43,4 @@ keywords:
 mysql://username:password@tcp(hostname:port)/database-name
 ```
 
-有关为 K3s 配置数据存储的更多信息，请参考 [K3s 文档](https://rancher.com/docs/k3s/latest/en/installation/datastore/)。
+有关为 K3s 配置数据存储的更多信息，请参考 [K3s 文档](/docs/k3s/installation/datastore/_index)。

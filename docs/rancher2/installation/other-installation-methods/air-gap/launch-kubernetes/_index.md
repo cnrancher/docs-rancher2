@@ -78,7 +78,7 @@ configs:
 
 请注意，目前，K3s 仅支持安全的镜像仓库（HTTPS）。
 
-有关 K3s 的私有镜像仓库配置文件的更多信息，请参考[K3s 文档](https://rancher.com/docs/k3s/latest/en/installation/private-registry/)。
+有关 K3s 的私有镜像仓库配置文件的更多信息，请参考[K3s 文档](/docs/k3s/installation/private-registry/_index)。
 
 ### 3、安装 K3s 集群
 
@@ -142,7 +142,7 @@ users:
 kubectl --kubeconfig ~/.kube/config/k3s.yaml get pods --all-namespaces
 ```
 
-有关`kubeconfig`文件的更多信息，请参考 [K3s 文档](https://rancher.com/docs/k3s/latest/en/cluster-access/)或[官方 Kubernetes 文档](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/)中关于使用`kubeconfig`文件访问集群的部分。
+有关`kubeconfig`文件的更多信息，请参考 [K3s 文档](/docs/k3s/cluster-access/_index)或[官方 Kubernetes 文档](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/)中关于使用`kubeconfig`文件访问集群的部分。
 
 ### 升级提示
 

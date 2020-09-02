@@ -1,5 +1,20 @@
 ---
 title: 关于 Octopus
+description: Octopus 是基于Kubernetes或k3s的开源和云原生的设备管理系统，它非常轻巧，也不需要替换 Kubernetes 集群的任何基础组件。 部署了 Octopus，集群可以将边缘设备作为自定义 k8s 资源进行管理。
+keywords:
+  - Octopus中文文档
+  - Octopus 中文文档
+  - 边缘计算
+  - IOT
+  - edge computing
+  - Octopus中文
+  - Octopus 中文
+  - Octopus
+  - Octopus教程
+  - Octopus中国
+  - rancher
+  - Octopus 中文教程
+  - 关于 Octopus
 ---
 
 ## Octopus 简介
