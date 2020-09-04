@@ -69,6 +69,17 @@ const metadata = {
             UI界面: "为您提供Octopus的UI界面介绍",
             常见问题: "为您提供k3s的常见问题和解决方法",
         },
+        rancher1: {
+            产品介绍: "为您提供Rancher 1.x的产品介绍",
+            快速入门:
+                "进行简单快速的Rancher安装，即在一台Linux机器上安装Rancher，并使其能够完成所有Rancher必要功能",
+            安装指南: "提供在线安装、离线安装、启用SSL和SELinux的操作指导",
+            升级指南: "提供在线和离线升级Rancher的操作指导",
+            配置参考: "提供系统、环境、插件等配置参考",
+            基础设施: "提供基础设施的使用说明",
+            基础服务: "提供基础服务的使用说明",
+            常见问题: "提供使用Rancher时初夏您的常见问题和解决方式",
+        },
     },
     docs: {
         rancher2: {
@@ -334,6 +345,114 @@ const metadata = {
             "octopus/monitoring/_index": "关于监控",
             "octopus/octopus-ui/_index": "Octopus UI",
             "octopus/faq/_index": "常见问题",
+        },
+        rancher1: {
+            "rancher1/_index": "产品介绍",
+            "rancher1/overview/start/_index": "快速入门",
+            "rancher1/overview/native-docker/_index":
+                "使用Docker命令运行Rancher",
+            /*
+            安装指南
+            */
+            "rancher1/installation/basic-ssl-config/_index": "启用SSL",
+            "rancher1/installation/installing-server/_index": "在线安装",
+            "rancher1/installation/no-internet-access/_index": "离线安装",
+            "rancher1/installation/selinux/_index": "SELinux 模式",
+            /*
+            配置参考
+             */
+            "rancher1/configurations/catalog/_index": "应用商店",
+            "rancher1/configurations/catalog/private-catalog/_index":
+                "私有应用商店",
+            "rancher1/configurations/cli/_index": "cli",
+            "rancher1/configurations/cli/commands/_index": "命令和选项",
+            "rancher1/configurations/cli/variable-interpolation/_index":
+                "变量替换",
+            "rancher1/configurations/environment/_index": "概述",
+            "rancher1/configurations/environment/access-control/_index":
+                "访问控制",
+            "rancher1/configurations/environment/accounts/_index": "账户管理",
+            "rancher1/configurations/environment/audit-log/_index": "日志审计",
+            "rancher1/configurations/environment/certificates/_index": "证书",
+            "rancher1/configurations/environment/ecr_updater/_index":
+                "AWS ECR证书更新器",
+            "rancher1/configurations/environment/machine-drivers/_index":
+                "主机驱动",
+            "rancher1/configurations/environment/registries/_index": "镜像仓库",
+            "rancher1/configurations/environment/settings/_index": "系统设置",
+            /*
+            基础设施
+             */
+            "rancher1/infrastructure/cattle/adding-external-services/_index":
+                "",
+            "rancher1/infrastructure/cattle/adding-load-balancers/_index":
+                "添加负载均衡",
+            "rancher1/infrastructure/cattle/adding-service-alias/_index":
+                "添加服务别名",
+            "rancher1/infrastructure/cattle/adding-services/_index": "服务",
+            "rancher1/infrastructure/cattle/containers/_index": "容器",
+            "rancher1/infrastructure/cattle/external-dns-service/_index":
+                "外部DNS服务",
+            "rancher1/infrastructure/cattle/health-checks/_index": "健康检查",
+            "rancher1/infrastructure/cattle/internal-dns-service/_index":
+                "内部DNS服务",
+            "rancher1/infrastructure/cattle/lables/_index": "标签",
+            "rancher1/infrastructure/cattle/rancher-compose/_index":
+                "Rancher Compose",
+            "rancher1/infrastructure/cattle/rancher-compose/build/_index":
+                "服务",
+            "rancher1/infrastructure/cattle/rancher-compose/environment-interpolation/_index":
+                "环境插值",
+            "rancher1/infrastructure/cattle/rancher-compose/commands/_index":
+                "命令参数",
+            "rancher1/infrastructure/cattle/scheduling/_index": "服务调度",
+            "rancher1/infrastructure/cattle/secrets/_index": "密文功能",
+            "rancher1/infrastructure/cattle/stacks/_index": "应用栈",
+            "rancher1/infrastructure/cattle/upgrading/_index": "服务升级",
+            "rancher1/infrastructure/cattle/vms/_index": "虚拟主机",
+            "rancher1/infrastructure/cattle/volume/_index": "数据卷",
+            "rancher1/infrastructure/cattle/webhook-service/_index": "Webhooks",
+
+            "rancher1/infrastructure/hosts/_index": "基础服务概述",
+            "rancher1/infrastructure/hosts/amazon/_index": "添加Amazon EC2主机",
+            "rancher1/infrastructure/hosts/azure/_index": "添加Azure Hosts",
+            "rancher1/infrastructure/hosts/custom/_index": "添加Custom主机",
+            "rancher1/infrastructure/hosts/digitalocean/_index":
+                "添加digitalocean主机",
+            "rancher1/infrastructure/hosts/exoscale/_index": "添加exoscale主机",
+            "rancher1/infrastructure/hosts/other/_index": "添加other主机",
+            "rancher1/infrastructure/hosts/packet/_index": "添加packet主机",
+            "rancher1/infrastructure/hosts/rackspace/_index":
+                "添加rackspace主机",
+
+            /*
+            基础服务
+             */
+            "rancher1/rancher-service/_index": "概述",
+            "rancher1/rancher-service/dns-service/_index": "DNS服务",
+            "rancher1/rancher-service/load-balancer/_index": "负载均衡",
+            "rancher1/rancher-service/metadata-service/_index": "metadata服务",
+            "rancher1/rancher-service/network-policy/_index": "网络策略",
+            "rancher1/rancher-service/networking/_index": "网络服务",
+            "rancher1/rancher-service/scheduler/_index": "调度服务",
+            "rancher1/rancher-service/service-accounts/_index": "API KEY",
+            "rancher1/rancher-service/storage-services/_index": "存储服务",
+            "rancher1/rancher-service/storage-services/rancher-ebs/_index":
+                "Rancher EBS",
+            "rancher1/rancher-service/storage-services/rancher-nfs/_index":
+                "Rancher NFS",
+            /*
+            常见问题
+             */
+            "rancher1/faq/_index": "常见故障排查与修复方法",
+            "rancher1/faq/agents/_index": "Rancher Agent 常见问题",
+            "rancher1/faq/docker/_index": "Docker 常见问题",
+            "rancher1/faq/kubernetes/_index": "Kubernetes常见问题",
+            "rancher1/faq/server/_index": "Rancher Server常见问题",
+            /*
+            升级指南
+             */
+            "rancher1/upgrade/_index": "升级指南",
         },
     },
 };
