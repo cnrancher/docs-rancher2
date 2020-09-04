@@ -71,7 +71,6 @@ function Home() {
                 <div className="navigation__grid">
                     <div className="navigation__item">
                         <div className="navigation__title">
-
                             <a href="https://rancher2.docs.rancher.cn/rancher1/">
                                 <h1>Rancher 1.x</h1>
                             </a>
@@ -134,19 +133,6 @@ function Home() {
                             <p>
                                 Octopus是基于Kubernetes或k3s的开源和云原生的设备管理系统，它非常轻巧，也不需要替换Kubernetes集群的任何基础组件。
                                 部署了Octopus，集群可以将边缘设备作为自定义k8s资源进行管理。
-                            </p>
-                        </div>
-                    </div>
-                    <div className="navigation__item">
-                        <div className="navigation__title">
-                            <a href="https://docs.rancher.cn/os/">
-                                <h1>RancherOS</h1>
-                            </a>
-                        </div>
-                        <div className="navigation__content">
-                            <p>
-                                RancherOS是在生产环境中运行Docker的最小操作系统,
-                                RancherOS中的所有组件都是以容器运行。
                             </p>
                         </div>
                     </div>
