@@ -1,6 +1,6 @@
 # Rancher 中文文档
 
-Rancher 中文文档，包括Rancher 2.x、RKE、K3s和Octopus的中文文档，Rancher1.x和RancherOS的中文文档正在迁移中。
+Rancher 中文文档，包括Rancher1.x、Rancher 2.x、RKE、K3s和Octopus的中文文档，其中Rancher1.x的文档已经不再维护；Rancher 2.x、RKE、K3s和Octopus会定期刷新。
 
 本网站使用了 [Docusaurus 2](https://v2.docusaurus.io/) 文档框架。
 
