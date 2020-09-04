@@ -83,6 +83,7 @@ const metadata = {
     },
     docs: {
         rancher2: {
+            "rancher2/releases/v2.4.8": "版本说明 - v2.4.8",
             "rancher2/releases/v2.4.7": "版本说明 - v2.4.7",
             "rancher2/releases/v2.4.6": "版本说明 - v2.4.6",
             "rancher2/releases/v2.4.5": "版本说明 - v2.4.5",
