@@ -399,8 +399,6 @@ const metadata = {
             "rancher1/infrastructure/cattle/lables/_index": "标签",
             "rancher1/infrastructure/cattle/rancher-compose/_index":
                 "Rancher Compose",
-            "rancher1/infrastructure/cattle/rancher-compose/build/_index":
-                "服务",
             "rancher1/infrastructure/cattle/rancher-compose/environment-interpolation/_index":
                 "环境插值",
             "rancher1/infrastructure/cattle/rancher-compose/commands/_index":

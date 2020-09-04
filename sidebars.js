@@ -1068,7 +1068,6 @@ module.exports = {
                         label: "编排",
                         items: [
                             "rancher1/infrastructure/cattle/rancher-compose/_index",
-                            "rancher1/infrastructure/cattle/rancher-compose/build/_index",
                             "rancher1/infrastructure/cattle/rancher-compose/environment-interpolation/_index",
                             "rancher1/infrastructure/cattle/rancher-compose/commands/_index",
                         ],

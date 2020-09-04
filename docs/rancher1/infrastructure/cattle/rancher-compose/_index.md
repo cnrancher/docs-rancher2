@@ -67,4 +67,4 @@ $ rancher-compose --debug up -d
 
 构建 docker 镜像可以有两种方法。第一种方法是通过给 build 命令一个 git 或者 http URL 参数来利用远程资源构建，另一种方法则是让 build 利用本地目录，那么会上传构建上下文到 S3 并在需要时在各个节点执行
 
-为了可以基于 S3 来创建，您需要[设置 AWS 认证](https://github.com/aws/aws-sdk-go/#configuring-credentials)。我们提供了一个  说明怎样利用在 Rancher Compose 里使用 S3[详细例子](/docs/rancher1/infrastructure/cattle/rancher-compose/build/_index)供您参考
+为了可以基于 S3 来创建，您需要[设置 AWS 认证](https://github.com/aws/aws-sdk-go/#configuring-credentials)。
