@@ -161,7 +161,7 @@ enable_network_policy: true
 default_pod_security_policy_template_id: "restricted"
 # the nodes directive is required and will vary depending on your environment
 # documentation for node configuration can be found here:
-# https://rancher2.docs.rancher.cn/docs/rke/config-options/nodes/_index
+# https://docs.rancher.cn/docs/rke/config-options/nodes/_index
 services:
   etcd:
     uid: 52034

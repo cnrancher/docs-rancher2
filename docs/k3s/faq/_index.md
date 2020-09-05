@@ -53,7 +53,7 @@ K3s 几乎可以胜任 k8s 的所有工作, 它只是一个更轻量级的版本
 1. 使用国内安装脚本安装 k3s，详情参考[快速入门指南](/docs/k3s/quick-start/_index)
 
 ```
-curl -sfL https://docs.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -
+curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -
 ```
 
 2. 或采用[离线安装](/docs/k3s/installation/airgap/_index#)方式安装 k3s
@@ -96,7 +96,7 @@ level=error msg="Node password rejected, duplicate hostname or contents of '/etc
 1. 通过 --node-taint
 
 ```
-curl -sfL https://docs.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn INSTALL_K3S_EXEC="--node-taint k3s-controlplane=true:NoExecute" sh -
+curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn INSTALL_K3S_EXEC="--node-taint k3s-controlplane=true:NoExecute" sh -
 ```
 
 ![](https://tva1.sinaimg.cn/large/007S8ZIlly1ghns3k40ugj30sy066wf4.jpg)
@@ -104,7 +104,7 @@ curl -sfL https://docs.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn INS
 2. 通过 --disable-agent
 
 ```
-curl -sfL https://docs.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn INSTALL_K3S_EXEC="--disable-agent" sh -
+curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn INSTALL_K3S_EXEC="--disable-agent" sh -
 ```
 
 ![](https://tva1.sinaimg.cn/large/007S8ZIlly1ghns42e23nj30sy05gq3j.jpg)
@@ -127,14 +127,14 @@ curl -sfL https://docs.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn INS
 K3s1(master):
 
 ```
-# curl -sfL https://docs.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn \
+# curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn \
 INSTALL_K3S_EXEC="--advertise-address 192.168.99.211" sh –
 ```
 
 K3s2(worker):
 
 ```
-# curl -sfL https://docs.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn \
+# curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn \
 INSTALL_K3S_EXEC="--node-ip 192.168.99.212" K3S_URL=https://192.168.99.211:6443 K3S_TOKEN=mynodetoken sh -
 ```
 
@@ -144,7 +144,7 @@ K3s 使用 traefik 作为默认的 ingress controller。启动之后是通过 ip
 
 ## 为什么当 k3s 节点故障后，Pod 需要大于 5 分钟时间才能被重新调度？
 
-参考[Rancher2.x FAQ](https://rancher2.docs.rancher.cn/docs/rancher2/faq/technical/_index/#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BD%93%E4%B8%80%E4%B8%AA%E8%8A%82%E7%82%B9%E6%95%85%E9%9A%9C%E6%97%B6%EF%BC%8C%E4%B8%80%E4%B8%AA-pod-%E9%9C%80%E8%A6%81%E5%A4%A7%E4%BA%8E-5-%E5%88%86%E9%92%9F%E6%97%B6%E9%97%B4%E6%89%8D%E8%83%BD%E8%A2%AB%E9%87%8D%E6%96%B0%E8%B0%83%E5%BA%A6%EF%BC%9F)
+参考[Rancher2.x FAQ](https://docs.rancher.cn/docs/rancher2/faq/technical/_index/#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BD%93%E4%B8%80%E4%B8%AA%E8%8A%82%E7%82%B9%E6%95%85%E9%9A%9C%E6%97%B6%EF%BC%8C%E4%B8%80%E4%B8%AA-pod-%E9%9C%80%E8%A6%81%E5%A4%A7%E4%BA%8E-5-%E5%88%86%E9%92%9F%E6%97%B6%E9%97%B4%E6%89%8D%E8%83%BD%E8%A2%AB%E9%87%8D%E6%96%B0%E8%B0%83%E5%BA%A6%EF%BC%9F)
 
 可以参考下面这个示例调整`tolerationSeconds`时间：
 
