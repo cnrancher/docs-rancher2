@@ -19,7 +19,7 @@ module.exports = {
             },
             links: [
                 {
-                    href: "https://rancher2.docs.rancher.cn/",
+                    href: "https://docs.rancher.cn/",
                     label: "文档中心",
                     position: "left",
                 },

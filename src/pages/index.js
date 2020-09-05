@@ -71,7 +71,7 @@ function Home() {
                 <div className="navigation__grid">
                     <div className="navigation__item">
                         <div className="navigation__title">
-                            <a href="https://rancher2.docs.rancher.cn/rancher1/">
+                            <a href="https://docs.rancher.cn/rancher1/">
                                 <h1>Rancher 1.x</h1>
                             </a>
                         </div>
@@ -83,7 +83,7 @@ function Home() {
                     </div>
                     <div className="navigation__item">
                         <div className="navigation__title">
-                            <a href="https://rancher2.docs.rancher.cn/rancher2/">
+                            <a href="https://docs.rancher.cn/rancher2/">
                                 <h1>Rancher 2.x</h1>
                             </a>
                         </div>
@@ -99,7 +99,7 @@ function Home() {
                     </div>
                     <div className="navigation__item">
                         <div className="navigation__title">
-                            <a href="https://rancher2.docs.rancher.cn/rke">
+                            <a href="https://docs.rancher.cn/rke">
                                 <h1>RKE</h1>
                             </a>
                         </div>
@@ -112,7 +112,7 @@ function Home() {
                     </div>
                     <div className="navigation__item">
                         <div className="navigation__title">
-                            <a href="https://rancher2.docs.rancher.cn/k3s">
+                            <a href="https://docs.rancher.cn/k3s">
                                 <h1>K3s</h1>
                             </a>
                         </div>
@@ -125,7 +125,7 @@ function Home() {
                     </div>
                     <div className="navigation__item">
                         <div className="navigation__title">
-                            <a href="https://rancher2.docs.rancher.cn/octopus">
+                            <a href="https://docs.rancher.cn/octopus">
                                 <h1>Octopus</h1>
                             </a>
                         </div>
