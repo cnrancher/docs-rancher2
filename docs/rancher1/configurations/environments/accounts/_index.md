@@ -8,11 +8,11 @@ title: 账户管理
 
 #### AD 域/GitHub/OpenLDAP 验证
 
-当[AD 域](/docs/rancher1/configurations/access-control/_index#活动目录)，[Azure AD](/docs/rancher1/configurations/access-control/_index#azure-ad)，[GitHub](/docs/rancher1/configurations/access-control/_index#github)，或者[OpenLDAP](/docs/rancher1/configurations/access-control/_index#openldap)验证开启的时候，**帐户**选项卡显示已登录并针对 Rancher 进行身份认证的用户列表。为了登录，它们必须被赋予[访问站点](/docs/rancher1/configurations/access-control/_index#站点访问)的权限或被添加到[环境](/docs/rancher1/configurations/environments/_index)中。
+当[AD 域](/docs/rancher1configurations/environments/access-control/_index#活动目录)，[Azure AD](/docs/rancher1configurations/environments/access-control/_index#azure-ad)，[GitHub](/docs/rancher1configurations/environments/access-control/_index#github)，或者[OpenLDAP](/docs/rancher1configurations/environments/access-control/_index#openldap)验证开启的时候，**帐户**选项卡显示已登录并针对 Rancher 进行身份认证的用户列表。为了登录，它们必须被赋予[访问站点](/docs/rancher1configurations/environments/access-control/_index#站点访问)的权限或被添加到[环境](/docs/rancher1/configurations/environments/_index)中。
 
 #### 本地验证
 
-[启用本地身份认证](/docs/rancher1/configurations/access-control/_index#本地身份认证)后，您可以在**账号设置**中添加用户。点击**添加帐号**按钮将帐号添加到 Rancher 数据库。创建帐号时，帐号类型可以指定为管理员或用户。
+[启用本地身份认证](/docs/rancher1configurations/environments/access-control/_index#本地身份认证)后，您可以在**账号设置**中添加用户。点击**添加帐号**按钮将帐号添加到 Rancher 数据库。创建帐号时，帐号类型可以指定为管理员或用户。
 
 ### 账户类型
 

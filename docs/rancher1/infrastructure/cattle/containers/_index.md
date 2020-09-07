@@ -9,7 +9,7 @@ title: 容器
 在**Infrastructure(基础设施)** -> **Container(容器)**页面中，单击**Add Container(添加容器)**。任何 docker run 支持的参数，同样的 Rancher 也支持。
 
 1. 提供**Name(名称)**，如果需要，也可提供容器的**Description(描述)**。
-2. 提供**Image(镜像)**使用。您可以使用 DockerHub 上的任何镜像以及已添加到 Rancher 的[registries](/docs/rancher1/configurations/registries/_index) 。镜像名称的语法与任何`docker run`命令相匹配。
+2. 提供**Image(镜像)**使用。您可以使用 DockerHub 上的任何镜像以及已添加到 Rancher 的[registries](/docs/rancher1/configurations/environments/registries/_index) 。镜像名称的语法与任何`docker run`命令相匹配。
 
    镜像名称的语法。默认情况下，我们从 docker register 中拉取。如果没有指定标签，我们将拉取标签为 tag 的镜像。
 

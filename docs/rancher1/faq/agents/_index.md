@@ -45,7 +45,7 @@ rancher/agent:v0.8.2 http://SERVER_IP:8080/v1/scripts/xxxx
 
 2.云平台安全组没有放行 8080 端口;
 
-3.Agent 服务器没有开启 IP 转发规则 [为什么我的容器无法连接到网络?]:{site.baseurl}}/rancher/faqs/
+3.Agent 服务器没有开启 IP 转发规则 [为什么我的容器无法连接到网络?]:{site.baseurl}}/rancher/faq/
 troubleshooting/1 为什么我的容器无法连接到网络;
 
 =1 为开启，=0 为关闭

@@ -1,5 +1,5 @@
 ---
-title: Using Rancher EBS
+title: AWS EBS
 ---
 
 Rancher 提供对 AWS EBS 卷的支持，用户可以选择为容器选择 AWS EBS 存储。
@@ -52,7 +52,7 @@ Rancher 提供对 AWS EBS 卷的支持，用户可以选择为容器选择 AWS E
 
 #### 在服务中使用卷
 
-一旦卷在 UI 中被创建，[服务](/docs/rancher1/infrastructure/cattle/adding-services/)就可以使用该共享存储。创建一个服务时，在 **卷**选项卡中，填写**卷**以及**卷驱动**信息。
+一旦卷在 UI 中被创建，[服务](/docs/rancher1/infrastructure/cattle/adding-services/_index)就可以使用该共享存储。创建一个服务时，在 **卷**选项卡中，填写**卷**以及**卷驱动**信息。
 **卷** 语法和 Docker 语法相同，`<volume_name>:</path/in/container>`。Docker 卷默认挂载为读写模式，但是您可以通过在卷的末尾添加`:ro`将其挂载为只读模式。
 **卷驱动**和存储驱动的名字一致，为存储驱动的应用名。默认情况下，**Rancher EBS** 存储驱动名称为`rancher-ebs`。
 
@@ -65,7 +65,7 @@ Rancher 提供对 AWS EBS 卷的支持，用户可以选择为容器选择 AWS E
 
 #### 举例:应用级别存储卷，指定 size、卷类型以及 IOPS
 
-在这里例子中，我们将创建一个使用[应用级别的存储卷](/docs/rancher1/rancher-service/storage-service/_index#应用级别)的服务。所有该应用中的服务将共享同一个卷。
+在这里例子中，我们将创建一个使用[应用级别的存储卷](/docs/rancher1/rancher-service/storage-services/_index#应用级别)的服务。所有该应用中的服务将共享同一个卷。
 
 ```
 version: '2'
@@ -91,7 +91,7 @@ volumes:
 
 #### 举例:指定可用区的应用级别的存储卷
 
-在这里例子中，我们将创建一个使用[应用级别的存储卷](/docs/rancher1/rancher-service/storage-service/_index#应用级别)的服务。所有该应用中的服务将共享同一个卷。
+在这里例子中，我们将创建一个使用[应用级别的存储卷](/docs/rancher1/rancher-service/storage-services/_index#应用级别)的服务。所有该应用中的服务将共享同一个卷。
 我们将指定卷的可用区，使用该 AWS EBS 卷的所有容器将会被调度到同一台主机上。
 
 ```
@@ -113,7 +113,7 @@ volumes:
 
 #### 举例:应用级别加密卷
 
-在这里例子中，我们将创建一个使用[应用级别的存储卷](/docs/rancher1/rancher-service/storage-service/#应用级别)的服务。所有该应用中的服务将共享同一个卷。
+在这里例子中，我们将创建一个使用[应用级别的存储卷](/docs/rancher1/rancher-service/storage-services/_index#应用级别)的服务。所有该应用中的服务将共享同一个卷。
 为了加密该卷，您需要在驱动选项中启用加密并指定加密密钥的 ID 以及该密钥所在的可用区。
 使用该 AWS EBS 卷的所有容器将会被调度到同一台主机上。
 
@@ -139,7 +139,7 @@ volumes:
 
 #### 举例:基于快照的应用级别的存储卷
 
-在这里例子中，我们将创建一个使用[应用级别的存储卷](/docs/rancher1/rancher-service/storage-service/_index#应用级别)的服务。所有该应用中的服务将共享同一个卷。
+在这里例子中，我们将创建一个使用[应用级别的存储卷](/docs/rancher1/rancher-service/storage-services/_index#应用级别)的服务。所有该应用中的服务将共享同一个卷。
 该卷将基于一个已有的 AWS 快照被创建出来。您需要指定快照 ID 以及该快照所在的可用区。
 使用该 AWS EBS 卷的所有容器将会被调度到同一台主机上。
 
@@ -164,7 +164,7 @@ volumes:
 
 #### 举例:基于已有 EBS 卷的的应用级别的存储卷
 
-在这里例子中，我们将创建一个使用[应用级别的存储卷](/docs/rancher1/rancher-service/storage-service/_index#应用级别)的服务。所有该应用中的服务将共享同一个卷。
+在这里例子中，我们将创建一个使用[应用级别的存储卷](/docs/rancher1/rancher-service/storage-services/_index#应用级别)的服务。所有该应用中的服务将共享同一个卷。
 您需要指定卷 ID 以及改卷所在的可用区。
 使用该 AWS EBS 卷的所有容器将会被调度到同一台主机上。
 

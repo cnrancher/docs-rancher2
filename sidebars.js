@@ -1112,7 +1112,7 @@ module.exports = {
             "rancher1/rancher-service/service-accounts/_index",
             {
                 type: "category",
-                label: "storage-services",
+                label: "存储服务",
                 items: [
                     "rancher1/rancher-service/storage-services/_index",
                     "rancher1/rancher-service/storage-services/rancher-ebs/_index",

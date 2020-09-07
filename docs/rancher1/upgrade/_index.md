@@ -1,5 +1,5 @@
-# 升级
-
+---
+title: 升级指南
 ---
 
 > **注意:** 如果您正准备升级到 v1.6.x，请阅读我们相关的版本注解[v1.6.0](https://github.com/rancher/rancher/releases/tag/v1.6.0)。这里面有相关升级需要的注意事项。根据您安装 Rancher Server 方式的不同，您的升级步骤可能不一样。
@@ -65,7 +65,7 @@ _从 v1.6.1 开始_
    $ docker pull rancher/server:latest
    ```
 
-4. 用`rancher-data`中的数据库启动一个 Rancher Server 容器。启动之后，Rancher 中的任何变化将会被保存在`rancher-data`容器中。如果您在服务器中看到有关日志锁的异常，请参考[如何修复日志锁](/docs/rancher1/faqs/server/_index#databaselock)。
+4. 用`rancher-data`中的数据库启动一个 Rancher Server 容器。启动之后，Rancher 中的任何变化将会被保存在`rancher-data`容器中。如果您在服务器中看到有关日志锁的异常，请参考[如何修复日志锁](/docs/rancher1/faq/server/_index#databaselock)。
 
    > **注意:** 根据您 Rancher Server 时间的长短，某些数据库迁移可能需要比预期的更长的时间。 升级过程中请不要停止升级，因为下次升级时会遇到数据库迁移错误。
 
@@ -128,7 +128,7 @@ _从 v1.6.1 开始_
    docker run -d --restart=unless-stopped -p 8080:8080 -p 9345:9345 rancher/server --db-host myhost.example.com --db-port 3306 --db-user username --db-pass password --db-name cattle --advertise-address <IP_of_the_Node>
    ```
 
-   > **注意:** 当您正在一个运行[Rancher Server 1.2 之前版本的 HA](docs/rancher1/installation/installing-server/_index)时，您需要删除所有的正在运行的 Rancher HA 容器。`$ sudo docker rm -f $(sudo docker ps -a | grep rancher | awk {'print $1'})`
+   > **注意:** 当您正在一个运行[Rancher Server 1.2 之前版本的 HA](/docs/rancher1/installation/installing-server/_index)时，您需要删除所有的正在运行的 Rancher HA 容器。`$ sudo docker rm -f $(sudo docker ps -a | grep rancher | awk {'print $1'})`
 
 ## 没有互联网访问的 Rancher Server
 

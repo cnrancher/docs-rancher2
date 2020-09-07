@@ -53,7 +53,7 @@ Rancher Agent 容器在主机上启动成功之后，这台主机就连接到了
 
 ## 4. 添加主机
 
-第一次添加主机时，Rancher Server 会要求配置[主机注册地址](/docs/rancher1/configurations/settings/_index##主机注册)。这个地址可以是域名或者 IP 地址(如果 80 端口不可访问，还需要加上可访问的端口号，默认 `8080`)，能够访问 Rancher 接口即可。任何时候都可以改变 [主机注册地址](/docs/rancher1/configurations/settings/#主机注册)，相关操作可以查看 **系统管理** 下的 **系统设置**。设置好主机注册地址后，点击 **保存**.
+第一次添加主机时，Rancher Server 会要求配置[主机注册地址](/docs/rancher1/configurations/environments/settings/_index##主机注册)。这个地址可以是域名或者 IP 地址(如果 80 端口不可访问，还需要加上可访问的端口号，默认 `8080`)，能够访问 Rancher 接口即可。任何时候都可以改变 [主机注册地址](/docs/rancher1/configurations/environments/settings/#主机注册)，相关操作可以查看 **系统管理** 下的 **系统设置**。设置好主机注册地址后，点击 **保存**.
 
 Rancher 支持添加云提供商(例如 AWS，DigitalOcean，阿里云，vSphere 等)所提供的主机或者本地(例如 VirtualBox，VMWare 等)设置好的主机。对于云提供商，Rancher 可以通过`docker-machine`来添加的，所以本质上实现了 Docker Machine 驱动的厂商的云主机，都可以被添加。
 

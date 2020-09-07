@@ -14,7 +14,7 @@ Rancher 由以下四个部分组成:
 
 Rancher 可以使用任何公有云或者私有云的 Linux[主机](/docs/rancher1/infrastructure/hosts/_index)资源。Linux 主机可以是虚拟机，也可以是物理机。Rancher 仅需要主机有 CPU，内存，本地磁盘和网络资源。从 Rancher 的角度来说，一台云厂商提供的云主机和一台自己的物理机是一样的。
 
-Rancher 为运行容器化的应用实现了一层灵活的[基础设施服务](/docs/rancher1/rancher-service/_index)。Rancher 的基础设施服务包括[网络](/docs/rancher1/rancher-service/networking)， [存储](/docs/rancher1/rancher-service/storage-service/_index)， [负载均衡](/docs/rancher1/rancher-service/load-balancer/_index)， [DNS](/docs/rancher1/rancher-service/dns-service/_index)和安全模块。Rancher 的基础设施服务也是通过容器部署的，所以同样 Rancher 的基础设施服务可以运行在任何 Linux 主机上。
+Rancher 为运行容器化的应用实现了一层灵活的[基础设施服务](/docs/rancher1/rancher-service/_index)。Rancher 的基础设施服务包括[网络](/docs/_rancher1/rancher-service/networking_index)， [存储](/docs/rancher1/rancher-service/storage-services/_index)， [负载均衡](/docs/rancher1/rancher-service/load-balancer/_index)， [DNS](/docs/rancher1/rancher-service/dns-service/_index)和安全模块。Rancher 的基础设施服务也是通过容器部署的，所以同样 Rancher 的基础设施服务可以运行在任何 Linux 主机上。
 
 ## 容器编排与调度
 
@@ -28,4 +28,4 @@ Rancher 的用户可以在[应用商店](/docs/rancher1/configurations/catalog/_
 
 ## 企业级权限管理
 
-Rancher 支持灵活的插件式的用户认证。支持 Active Directory，LDAP， Github 等 [认证方式](/docs/rancher1/configurations/access-control/_index)。 Rancher 支持在[环境](/docs/rancher1/configurations/environments/_index)级别的基于角色的访问控制 (RBAC)，可以通过角色来配置某个用户或者用户组对开发环境或者生产环境的访问权限。
+Rancher 支持灵活的插件式的用户认证。支持 Active Directory，LDAP， Github 等 [认证方式](/docs/rancher1configurations/environments/access-control/_index)。 Rancher 支持在[环境](/docs/rancher1/configurations/environments/_index)级别的基于角色的访问控制 (RBAC)，可以通过角色来配置某个用户或者用户组对开发环境或者生产环境的访问权限。

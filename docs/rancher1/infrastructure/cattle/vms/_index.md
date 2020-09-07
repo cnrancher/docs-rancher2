@@ -2,8 +2,8 @@
 title: 虚拟主机
 ---
 
-By default, launching virtual machines (VMs) in Rancher is disabled. To enable launching VMs, any [admin](/docs/rancher1/configurations/access-control/_index#管理员) can enable virtual machines in Rancher in the **Admin** -> **Settings** -> **Virtual Machines** section. Select **Enabled** and click **Save**.
-默认情况下，Rancher 中启动虚拟机(VMs)的功能是停用的。任何[admin](/docs/rancher1/configurations/access-control/_index#管理员) 用户可以在 Rancher 的 **系统管理** -> **系统设置** -> **虚拟机** 下开启启动虚拟机的功能。选择 **启用** 的选择框并点击保存。
+By default, launching virtual machines (VMs) in Rancher is disabled. To enable launching VMs, any [admin](/docs/rancher1configurations/environments/access-control/_index#管理员) can enable virtual machines in Rancher in the **Admin** -> **Settings** -> **Virtual Machines** section. Select **Enabled** and click **Save**.
+默认情况下，Rancher 中启动虚拟机(VMs)的功能是停用的。任何[admin](/docs/rancher1configurations/environments/access-control/_index#管理员) 用户可以在 Rancher 的 **系统管理** -> **系统设置** -> **虚拟机** 下开启启动虚拟机的功能。选择 **启用** 的选择框并点击保存。
 
 ### 启动 VM 的主机要求
 
