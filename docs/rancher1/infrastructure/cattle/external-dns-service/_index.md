@@ -2,7 +2,7 @@
 title: 外部DNS服务
 ---
 
-在[应用商店](/docs/rancher1/configuration/catalog/_index)中，Rancher 提供了多种的 DNS 服务并且这些服务可以监听 rancher-metadata 的事件，并根据 metadata 的更变生成 DNS 记录。我们会以 Route53 作为例子说明外部 DNS 是如何工作的，但 Rancher 还有其他由其他 DNS 服务商提的供社区版服务。
+在[应用商店](/docs/rancher1/configurations/catalog/_index)中，Rancher 提供了多种的 DNS 服务并且这些服务可以监听 rancher-metadata 的事件，并根据 metadata 的更变生成 DNS 记录。我们会以 Route53 作为例子说明外部 DNS 是如何工作的，但 Rancher 还有其他由其他 DNS 服务商提的供社区版服务。
 
 ### 最佳实践
 

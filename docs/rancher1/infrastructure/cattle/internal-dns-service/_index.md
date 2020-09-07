@@ -2,7 +2,7 @@
 title: 内部DNS服务
 ---
 
-在 Rancher 中，我们拥有自己的内部 DNS 服务，允许同一个[环境](/docs/rancher1/configuration/environments/)中的任何服务都可以解析环境中的任何其他服务.
+在 Rancher 中，我们拥有自己的内部 DNS 服务，允许同一个[环境](/docs/rancher1/configurations/environments/)中的任何服务都可以解析环境中的任何其他服务.
 
 应用中的所有服务都可以通过`<服务名称>`解析，并且不需要在服务之间设置服务链接。 创建服务时，您可以定义`服务链接`以将服务链接在一起。 对于任何不同应用的服务，您可以通过`<服务名称>.<应用名称>`而不是`<服务名称>`来解析。 如果您想以不同的名称解析服务，您可以设置服务链接，以便服务可以由服务别名解析.
 
@@ -10,7 +10,7 @@ title: 内部DNS服务
 
 在 UI 中，[添加服务](/docs/rancher1/infrastructure/cattle/adding-services/_index#在ui中添加服务)时，展开**服务链接**部分，选择服务，并提供别名.
 
-如果您使用 Rancher Compose[添加服务](/docs/rancher1/infrastructure/cattle/services/_index#使用-rancher-compose-添加服务)，`docker-compose.yml`将使用`links`或`external_links`指令.
+如果您使用 Rancher Compose[添加服务](/docs/rancher1/infrastructure/cattle/adding-services/_index)，`docker-compose.yml`将使用`links`或`external_links`指令.
 
 ```
 version: '2'

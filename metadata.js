@@ -369,18 +369,19 @@ const metadata = {
             "rancher1/configurations/cli/commands/_index": "命令和选项",
             "rancher1/configurations/cli/variable-interpolation/_index":
                 "变量替换",
-            "rancher1/configurations/environment/_index": "概述",
-            "rancher1/configurations/environment/access-control/_index":
+            "rancher1/configurations/environments/_index": "概述",
+            "rancher1/configurations/environments/access-control/_index":
                 "访问控制",
-            "rancher1/configurations/environment/accounts/_index": "账户管理",
-            "rancher1/configurations/environment/audit-log/_index": "日志审计",
-            "rancher1/configurations/environment/certificates/_index": "证书",
-            "rancher1/configurations/environment/ecr_updater/_index":
+            "rancher1/configurations/environments/accounts/_index": "账户管理",
+            "rancher1/configurations/environments/audit-log/_index": "日志审计",
+            "rancher1/configurations/environments/certificates/_index": "证书",
+            "rancher1/configurations/environments/ecr_updater/_index":
                 "AWS ECR证书更新器",
-            "rancher1/configurations/environment/machine-drivers/_index":
+            "rancher1/configurations/environments/machine-drivers/_index":
                 "主机驱动",
-            "rancher1/configurations/environment/registries/_index": "镜像仓库",
-            "rancher1/configurations/environment/settings/_index": "系统设置",
+            "rancher1/configurations/environments/registries/_index":
+                "镜像仓库",
+            "rancher1/configurations/environments/settings/_index": "系统设置",
             /*
             基础设施
              */

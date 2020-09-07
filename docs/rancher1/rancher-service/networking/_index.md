@@ -138,7 +138,7 @@ MTU 的配置需要在每一个网络组件上进行设置；在主机上，在 
 }
 ```
 
-- 创建一个新的[环境模版](/docs/rancher1/configuration/environments/_index#什么是环境模版)来设置 IPsec 或者 VXLAN 基础设施服务所需的 MTU 值。
+- 创建一个新的[环境模版](/docs/rancher1/configurations/environments/_index#什么是环境模版)来设置 IPsec 或者 VXLAN 基础设施服务所需的 MTU 值。
 - 使用这个新建的环境模版来创建一个新的环境。
 
 > MTU 只能在环境模版中进行配置。不建议在已有的环境中配置一个不同的 MTU 值，因为这个值仅会在新创建的容器中生效。

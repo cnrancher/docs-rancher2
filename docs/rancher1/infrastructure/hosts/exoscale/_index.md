@@ -21,8 +21,8 @@ Rancher 支持使用 `docker machine` 来管理 [Exoscale](https://www.exoscale.
 ### Rancher 代理运行需要的端口:
 
 - 需要打开 TCP 端口 `22`来接收 Rancher 服务管理以及运行 Docker 守护进程的 `2376`端口；
-- 如果使用 IPsec [networking driver(网络驱动)](/docs/rancher1/rancher-services/networking/_index)，需要打开 UDP 端口 `500` 和 `4500`；
-- 如果使用 VXLAN [networking driver(网络驱动)](/docs/rancher1/rancher-services/networking/_index)，需要打开 UDP 端口 `4789`。
+- 如果使用 IPsec [networking driver(网络驱动)](/docs/rancher1/rancher-service/networking/_index)，需要打开 UDP 端口 `500` 和 `4500`；
+- 如果使用 VXLAN [networking driver(网络驱动)](/docs/rancher1/rancher-service/networking/_index)，需要打开 UDP 端口 `4789`。
 
 > **注意:** 当选用安全组 `rancher-machine`时，那些在安全组中匹配的端口不会被重新打开。这就意味着，当发现运行不正常时(有可能是因为主机上的端口打开不正确或者没有被打开导致的)，需要检查 Exoscale 上面的端口的情况。
 

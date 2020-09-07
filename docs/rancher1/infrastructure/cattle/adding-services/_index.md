@@ -16,11 +16,11 @@ title: 服务
 
 在`应用`中，您可以通过单击`添加服务`按钮添加服务。也可以在`应用`列表中添加服务 ，每个单个`应用`都可以看到`添加服务`按钮。
 
-在**数量**部分，您可以使用滑块来指定要为服务启动的容器的数量。或者，您可以选择**总是在每台主机上运行一个此容器的实例**。使用此选项时，您的服务将被部署到该[环境](/docs/rancher1/configuration/environments/_index)中的任何主机上。如果您在**调度**选项卡中创建了调度规则，则 Rancher 将仅在符合调度规则的主机上启动容器。
+在**数量**部分，您可以使用滑块来指定要为服务启动的容器的数量。或者，您可以选择**总是在每台主机上运行一个此容器的实例**。使用此选项时，您的服务将被部署到该[环境](/docs/rancher1/configurations/environments/_index)中的任何主机上。如果您在**调度**选项卡中创建了调度规则，则 Rancher 将仅在符合调度规则的主机上启动容器。
 
 您还需要输入**名称**，如果需要，还可以输入服务**描述**。
 
-为服务设置所需的**镜像**。您可以使用[DockerHub](https://hub.docker.com/)上的任何镜像，以及已添加到您的[环境](/docs/rancher1/configuration/environments/_index)中的任何[镜像仓库](/docs/rancher1/configuration/environments/registries/_index)。镜像名称的语法与`docker run`命令中使用的语法相同。
+为服务设置所需的**镜像**。您可以使用[DockerHub](https://hub.docker.com/)上的任何镜像，以及已添加到您的[环境](/docs/rancher1/configurations/environments/_index)中的任何[镜像仓库](/docs/rancher1/configurations/environments/registries/_index)。镜像名称的语法与`docker run`命令中使用的语法相同。
 
 镜像名称的语法。默认情况下，我们从 Dockerhub 中拉取。如果没有指定标签，我们将拉取标签为 tag 的镜像。
 

@@ -38,9 +38,9 @@ Rancher 的 NFS 驱动可以连接 Amazon 的 EFS。当我们在 Amazon EFS 上�
 
 ### 配置 Rancher NFS
 
-当设置一个[环境模版](/docs/rancher1/configuration/environments/_index#什么是环境模版)的时候，您可以选择启用**Rancher NFS**应用，这样以后用这个模版创建的环境都会包括 Rancher 的 NFS 服务。
+当设置一个[环境模版](/docs/rancher1/configurations/environments/_index#什么是环境模版)的时候，您可以选择启用**Rancher NFS**应用，这样以后用这个模版创建的环境都会包括 Rancher 的 NFS 服务。
 
-或者，如果您已经设置好了一个环境，您可以在[应用商店](/docs/rancher1/configuration/catalog/_index)中找到并部署 Rancher NFS 服务。
+或者，如果您已经设置好了一个环境，您可以在[应用商店](/docs/rancher1/configurations/catalog/_index)中找到并部署 Rancher NFS 服务。
 
 > **注意:** 某些存储服务可能与容器编排引擎不兼容(例如 Kubernetes)。环境模版会根据您选择的编排引擎显示其兼容的存储服务。但是在应用商店中可以看到全部的应用，不会按照编排引擎进行过滤。
 

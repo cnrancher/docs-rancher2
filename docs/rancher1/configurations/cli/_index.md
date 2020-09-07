@@ -4,13 +4,13 @@ title: cli
 
 # 安装
 
-Rancher 的命令行界面(CLI)是用来管理 Rancher Server 的工具。 使用此工具，您可以管理您的[环境](/docs/rancher1/configuration/environments/_index)，[主机](/docs/rancher1/infrastructure/hosts/_index)，应用，服务和容器。
+Rancher 的命令行界面(CLI)是用来管理 Rancher Server 的工具。 使用此工具，您可以管理您的[环境](/docs/rancher1/configurations/environments/_index)，[主机](/docs/rancher1/infrastructure/hosts/_index)，应用，服务和容器。
 
 二进制文件可以直接从 UI 下载。 该链接可以在 UI 中的页脚右侧找到。 我们有 Windows，Mac 和 Linux 的二进制文件。 您还可以查看我们 CLI 的[发布页面](https://github.com/rancher/cli/releases) ，您可以从该页面直接下载二进制文件。
 
 ## 配置 Rancher 命令行界面
 
-有几种方法可以配置 Rancher 命令行界面与 Rancher 进行交互时使用的参数。这些参数包括 Rancher URL 和帐户[API 密钥](/docs/rancher1/api/v2-beta/api-keys/_index)等。帐户的 API 密钥可以在 UI 中的**API**中创建。
+有几种方法可以配置 Rancher 命令行界面与 Rancher 进行交互时使用的参数。这些参数包括 Rancher URL 和帐户 API 密钥等。帐户的 API 密钥可以在 UI 中的**API**中创建。
 
 参数配置有如下的加载优先级。
 
@@ -222,4 +222,4 @@ $ rancher run --name stackA/service1 nginx
 
 ### 命令参考
 
-要了解更多的命令行支持，请查看我们的[Rancher 命令](/docs/rancher1/infrastructure/cli/commands/_index)文档.
+要了解更多的命令行支持，请查看我们的[Rancher 命令](/docs/rancher2/cli/_index)文档.

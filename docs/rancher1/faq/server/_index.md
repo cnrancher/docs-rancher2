@@ -48,7 +48,7 @@ PS:如果使用了标签调度，如果您有多台主机就有相同的调度�
 
 ## 5、我如何在代理服务器后配置主机?
 
-要在代理服务器后配置主机，您需要配置 Docker 的守护进程。详细说明参考在代理服务器后[添加自定义主机](https://docs.xtplayer.cn/rancher/installing/installing-server/#使用aws的elasticclassic-load-balancer作为rancher-server-ha的负载均衡器)。
+要在代理服务器后配置主机，您需要配置 Docker 的守护进程。详细说明参考在代理服务器后[添加自定义主机](/docs/rancher1/installation/installing-server/_index)。
 
 ## 6、为什么同一主机在 UI 中多次出现?
 
@@ -205,7 +205,7 @@ mysql> select * from setting;
 
 ## 15、我怎么样在代理服务器后运行 Rancher Server?
 
-请参照[在 HTTP 代理后方启动 Rancher Server](/docs/rancher1/installing-rancher/installing-server/_index).
+请参照[在 HTTP 代理后方启动 Rancher Server](/docs/rancher1/installation/installing-server/_index).
 
 ## 16、为什么在日志中看到 Go-Machine-Service 在不断重新启动？ 我该怎么办？
 
@@ -232,14 +232,14 @@ curl -i -u '<value of CATTLE_ACCESS_KEY>:<value of CATTLE_SECRET_KEY>' <value of
 
 ## 17、rancher catalog 多久同步一次
 
-http://X.X.X.X/v1/settings/catalog.refresh.interval.seconds 默认 300 秒 可以修改 点 setting 会立即更新
+同步的间隔时间默认为 300 秒，您可以单击 setting 修改间隔时间，修改后马上生效。
 
 ## 18、Rancher Server cattle-debug.log 文件占满磁盘的问题
 
 这个问题主要在 Rancher Server 1.6.11 之前(1.6.11 已经解决)
 
 目前是按天来创建日志文件， 如果日志文件太多会进行日志分段，每一段默认 100M， 默认情况下，系统保留 5 个分段。
-通过打开 http://rancher_url:8080/v2-beta/settings ，网页搜索 logback 可以看到以下内容，
+通过打开 `http://rancher_url:8080/v2-beta/settings` ，网页搜索 logback 可以看到以下内容，
 
 ```bash
 {
@@ -289,7 +289,7 @@ https://{username}:{password}@github.com/{repo}
 
 默认情况下，server 日志记录等级为 INFO，可以按照以下方法修改:
 
-通过打开 http://rancher_url:8080/v2-beta/settings/auth.service.log.level ,
+通过打开 `http://rancher_url:8080/v2-beta/settings/auth.service.log.level` ,
 
 ![mage-20180329174623](/img/rancher1/server.assets/image-201803291746238.png)
 
@@ -307,7 +307,7 @@ https://{username}:{password}@github.com/{repo}
 
 默认情况下，新用户第一次登录会创建 default 环境，通过设置 API 可以禁止此设置:
 
-通过打开 http://rancher_url:8080/v2-beta/settings/project.create.default
+通过打开 `http://rancher_url:8080/v2-beta/settings/project.create.default`
 
 ![mage-20180329175124](/img/rancher1/server.assets/image-201803291751248.png)
 

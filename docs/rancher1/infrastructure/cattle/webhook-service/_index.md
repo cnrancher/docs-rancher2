@@ -45,7 +45,7 @@ title: Webhooks
 
 ##### 安装 Prometheus
 
-[Rancher 应用商店](/docs/rancher1/configuration/catalog/_index) 提供了 Prometheus 监控服务，在 **应用商店** 中可以找到这个服务。选中**Prometheus** 然后启动应用商店入口。 在 Prometheus 应用中找到一个名为 `prometheus` 的服务，这个服务暴露了 `9090` 端口。在容器中找到 `/etc/prom-conf`。 Prometheus 的配置文件`prometheus.yml` 就在 `/etc/prom-conf` 目录。为了添加告警， 单独创建一个告警文件，在 `prometheus.yml` 中提供文件的路径。 比如，如果您创建了一个名为 `rules.conf` 的告警文件，把它加入到 `prometheus.yml`，在 `prometheus.yml` 末尾加入如下两行:
+[Rancher 应用商店](/docs/rancher1/configurations/catalog/_index) 提供了 Prometheus 监控服务，在 **应用商店** 中可以找到这个服务。选中**Prometheus** 然后启动应用商店入口。 在 Prometheus 应用中找到一个名为 `prometheus` 的服务，这个服务暴露了 `9090` 端口。在容器中找到 `/etc/prom-conf`。 Prometheus 的配置文件`prometheus.yml` 就在 `/etc/prom-conf` 目录。为了添加告警， 单独创建一个告警文件，在 `prometheus.yml` 中提供文件的路径。 比如，如果您创建了一个名为 `rules.conf` 的告警文件，把它加入到 `prometheus.yml`，在 `prometheus.yml` 末尾加入如下两行:
 
 ```bash
 rule_files:

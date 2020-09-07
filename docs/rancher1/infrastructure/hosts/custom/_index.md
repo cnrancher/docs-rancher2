@@ -4,7 +4,7 @@ title: 添加Custom主机
 
 如果您已经部署了 Linux 主机，并且希望将它们添加到 Rancher 中。在点击**Custom**图标之后会，Rancher 会自动生成一个`docker`命令脚本，将其拷贝到每一台主机上并运行这条命令来启动`rancher/agent`容器。
 
-如果您在使用不同的[环境](/docs/rancher1/configuration/environments/_index)，不同环境生成的添加主机命令是不一样的。
+如果您在使用不同的[环境](/docs/rancher1/configurations/environments/_index)，不同环境生成的添加主机命令是不一样的。
 
 确保您所在的环境就是您想要添加主机的环境。您所在的环境显示在 UI 的左上角。当您第一次登录进去之后，您是处于名称为**默认**的环境里。
 
@@ -38,8 +38,8 @@ http://<rancher-server-ip>:8080/v1/projects/1a5/scripts/<registrationToken>
 
 对于添加的任何主机，请确保安全组或者防火墙允许流量经过，否则 Rancher 的功能将会受限。
 
-- 如果您正在使用 IPsec[网络驱动](/docs/rancher1/rancher-services/networking/_index)，要开放所有主机上的 UDP 端口 500 和 4500。
-- 如果您正在使用 VXLAN[网络驱动](/docs/rancher1/rancher-services/networking/_index)，要开放所有主机上的 UDP 端口`4789`。
+- 如果您正在使用 IPsec[网络驱动](/docs/rancher1/rancher-service/networking/_index)，要开放所有主机上的 UDP 端口 500 和 4500。
+- 如果您正在使用 VXLAN[网络驱动](/docs/rancher1/rancher-service/networking/_index)，要开放所有主机上的 UDP 端口`4789`。
 - _k8s 主机_ :用作 K8s 的主机需要开放`10250`和`10255`端口来为`kubectl`使用。为了访问外部的服务，NodePort 使用的端口也需要开放，默认的是 TCP 端口`30000` - `32767`。
 
 <a id="samehost"></a>

@@ -6,19 +6,19 @@ title: 访问控制
 
 访问控制是用来控制哪些用户可以访问您的 Rancher 服务。在默认情况下，Rancher 没有启用访问控制。这意味着知道您的 Rancher 服务 IP 的人都可以访问您的 Rancher 服务和 API。您的 Rancher 服务是对外开放的！我们强烈建议您在启动 Rancher 后立即配置访问控制，这样您可以按照需要分享您的 Rancher 服务。用户在访问您的 Rancher 服务之前，需要进行身份认证。同时，只有拥有合法的 API 密钥才能使用 Rancher API。
 
-Rancher 认证的第一个账户将成为 **管理员** 账户。 想要获取有关详细信息，请参阅 [管理员权限](/docs/rancher1/configuration/access-control/_index#管理员)。
+Rancher 认证的第一个账户将成为 **管理员** 账户。 想要获取有关详细信息，请参阅 [管理员权限](/docs/rancher1/configurations/access-control/_index#管理员)。
 
 ### 启用访问控制
 
 在 **系统管理** 选项卡中, 点击**访问控制**。
 
-在您配置了 Rancher 的访问控制后，访问控制将被启用。访问控制使您能够管理不同的[环境](/docs/rancher1/configuration/environments/_index)并把它们分享给不同的个人或团队。
+在您配置了 Rancher 的访问控制后，访问控制将被启用。访问控制使您能够管理不同的[环境](/docs/rancher1/configurations/environments/_index)并把它们分享给不同的个人或团队。
 
-当访问控制启用后，Rancher API 将被锁定。这时需要用户进行身份认证， 或者使用[API 密钥](/docs/rancher1/api/v2-beta/api-keys/_index)来访问它。
+当访问控制启用后，Rancher API 将被锁定。这时需要用户进行身份认证， 或者使用 API 密钥来访问它。
 
 #### 活动目录
 
-选择**活动目录**图标。 如果您想要通过 TLS 来使用活动目录，请确保您已经[使用了相应的证书来启动 Rancher Server](/docs/rancher1/installing-rancher/installing-server/_index#ldap)。填写相关信息后，通过点击**身份认证**进行认证校验。 当活动目录认证成功后，您将自动以已认证的用户名身份登录。并且把您的账号设置为了管理员权限。
+选择**活动目录**图标。 如果您想要通过 TLS 来使用活动目录，请确保您已经[使用了相应的证书来启动 Rancher Server](/docs/rancher1/installation/installing-server/_index#ldap)。填写相关信息后，通过点击**身份认证**进行认证校验。 当活动目录认证成功后，您将自动以已认证的用户名身份登录。并且把您的账号设置为了管理员权限。
 
 ##### 用户搜索基址与用户组搜索基址
 
@@ -53,7 +53,7 @@ Rancher 认证的第一个账户将成为 **管理员** 账户。 想要获取�
 在使用 Shibboleth 时，您应该注意一些已知的问题。
 
 - 不支持搜索或查找功能。 在添加用户时，请确保输入的用户 ID 是准确的，这样才能保证用户被添加成功。
-- 当添加用户到一个[环境](/docs/rancher1/configuration/environments/_index)时, 不支持组 ID，除非管理员是该组的成员之一。
+- 当添加用户到一个[环境](/docs/rancher1/configurations/environments/_index)时, 不支持组 ID，除非管理员是该组的成员之一。
 
 ### 站点访问
 
@@ -67,9 +67,9 @@ Rancher 认证的第一个账户将成为 **管理员** 账户。 想要获取�
 - **允许环境成员和已授权用户和组织** - 一个环境的成员用户或拥有者用户和添加到`已授权用户和用户组`的用户一样，都有权限访问 Rancher 服务。
 - **限制访问只有已授权用户和用户组可以访问** - 只有添加到`已授权用户和用户组`的用户才能访问 Rancher 服务。 即使用户已被添加到环境中，如果没有被添加到`已授权用户和用户组`，他们将仍然无法访问 Rancher 服务。
 
-任何具有 Rancher 服务访问权限的人都将被授予 [用户](/docs/rancher1/configuration/accounts/_index#users)权限。他们将无法查看**系统管理**页面。 如果想要他们查看，您将需要明确地将其帐户更改为[管理员帐户](/docs/rancher1/configuration/accounts/_index#管理员)。
+任何具有 Rancher 服务访问权限的人都将被授予 [用户](/docs/rancher1/configurations/accounts/_index#users)权限。他们将无法查看**系统管理**页面。 如果想要他们查看，您将需要明确地将其帐户更改为[管理员帐户](/docs/rancher1/configurations/accounts/_index#管理员)。
 
-为了让用户查看不同的[环境](/docs/rancher1/configuration/environments/_index), 他们将需要被环境的[所有者](/docs/rancher1/configuration/environments/_index#所有者)添加到环境中。
+为了让用户查看不同的[环境](/docs/rancher1/configurations/environments/_index), 他们将需要被环境的[所有者](/docs/rancher1/configurations/environments/_index#所有者)添加到环境中。
 
 #### Azure AD/OpenLDAP
 
@@ -79,17 +79,17 @@ Rancher 认证的第一个账户将成为 **管理员** 账户。 想要获取�
 
 启用本地身份认证后，管理员可以通过访问**系统管理**> **账号设置**选项卡来创建其他管理员/用户。 点击**添加账号**并填写您要添加的帐户的详细信息。 您可以选择其帐户类型为**管理员**或**用户**。 管理员可以查看**系统管理**页面，普通用户无法看到该页面。
 
-一旦帐户被创建后，该账户可以被添加到任何[环境](/docs/rancher1/configuration/environments/_index)中。
+一旦帐户被创建后，该账户可以被添加到任何[环境](/docs/rancher1/configurations/environments/_index)中。
 
 ### 账户类型
 
-帐户类型决定帐户是否可以访问系统管理页面。对于 Rancher 中的每个环境，可以设置不同级别的[成员角色](/docs/rancher1/configuration/environments/_index#成员角色)来对特定环境进行访问。
+帐户类型决定帐户是否可以访问系统管理页面。对于 Rancher 中的每个环境，可以设置不同级别的[成员角色](/docs/rancher1/configurations/environments/_index#成员角色)来对特定环境进行访问。
 
 #### 管理员
 
 认证 Rancher 的第一个用户成为 Rancher 的管理员。 只有管理员才有权限查看**系统管理**页面
 
-在管理环境时，管理员可以查看 Rancher 中的所有[环境](/docs/rancher1/configuration/environments/_index)， 即使管理员没有被加入到该环境的成员中。 在非管理员的环境下拉菜单中，用户只能看到他们所在的环境。
+在管理环境时，管理员可以查看 Rancher 中的所有[环境](/docs/rancher1/configurations/environments/_index)， 即使管理员没有被加入到该环境的成员中。 在非管理员的环境下拉菜单中，用户只能看到他们所在的环境。
 
 管理员可以将其他用户添加为 Rancher 管理员。 在用户登录 Rancher 后，他们可以在 **系统管理** > **账号设置**页面上更改用户角色。 在**系统管理**> **账号设置帐户**标签中，点击帐户名称旁边的**编辑**，并将帐户类型更改为管理员。 点击**保存**。
 

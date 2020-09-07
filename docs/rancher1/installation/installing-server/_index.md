@@ -12,7 +12,7 @@ Rancher 是使用一系列的 Docker 容器进行部署的。运行 Rancher 跟�
 
 - 所有安装有[支持的 Docker 版本](/docs/rancher1/infrastructure/hosts/_index#docker版本适用对比)的现代 Linux 发行版。 [RancherOS](https://docs.rancher.com/os/), Ubuntu, RHEL/CentOS 7 都是经过严格的测试。
   - 对于 RHEL/CentOS, 默认的 storage driver, 例如 devicemapper using loopback, 并不被[Docker](https://docs.docker.com/engine/reference/commandline/dockerd/#/storage-driver-options)推荐。 请参考 Docker 的文档去修改使用其他的 storage driver。
-  - 对于 RHEL/CentOS, 如果您想使用 SELinux, 您需要[安装额外的 SELinux 组件](/docs/rancher1/installing-rancher/selinux/_index).
+  - 对于 RHEL/CentOS, 如果您想使用 SELinux, 您需要[安装额外的 SELinux 组件](/docs/rancher1/installation/selinux/_index).
 - 1GB 内存
 - MySQL 服务器需要 max_connections 的设置 > 150
   - MYSQL 配置需求
@@ -49,7 +49,7 @@ UI 以及 API 会使用 `8080` 端口对外服务。下载 Docker 镜像完成�
 
 访问如下的 URL: `http://<SERVER_IP>:8080`。`<SERVER_IP>` 是运行 Rancher Server 的主机的公共 IP 地址。
 
-当 UI 已经启动并运行，您可以先[添加主机](/docs/rancher1/infrastructure/hosts/_index) 或者在应用商店中选择一个容器编排引擎。在默认情况下，rancher 容器会将 80 端口上的请求重定向到 443 端口上。如果没有选择不同的容器编排引擎，当前环境会使用 Cattle 引擎。在主机被添加都 Rancher 中后，您可以开始添加[服务](/docs/rancher1/infrastructure/cattle/adding-services/_index)或者从[应用商店](/docs/rancher1/configuration/catalog/_index)通过应用模版启动一个应用。
+当 UI 已经启动并运行，您可以先[添加主机](/docs/rancher1/infrastructure/hosts/_index) 或者在应用商店中选择一个容器编排引擎。在默认情况下，rancher 容器会将 80 端口上的请求重定向到 443 端口上。如果没有选择不同的容器编排引擎，当前环境会使用 Cattle 引擎。在主机被添加都 Rancher 中后，您可以开始添加[服务](/docs/rancher1/infrastructure/cattle/adding-services/_index)或者从[应用商店](/docs/rancher1/configurations/catalog/_index)通过应用模版启动一个应用。
 
 ## 单容器部署 Rancher Server-使用外部数据库
 
@@ -92,7 +92,7 @@ $ sudo docker run -d --restart=unless-stopped -p 8080:8080 rancher/server \
 sudo docker run -d -v <host_vol>:/var/lib/mysql --restart=unless-stopped -p 8080:8080 rancher/server
 ```
 
-使用这条命令，数据库就会持久化在主机上。如果您有一个现有的 Rancher Server 容器并且想挂在 MySQL 的数据卷，可以参考以下的[Rancher 升级](/docs/rancher1/upgrading/#single-container-bind-mount)介绍。
+使用这条命令，数据库就会持久化在主机上。如果您有一个现有的 Rancher Server 容器并且想挂在 MySQL 的数据卷，可以参考以下的[Rancher 升级](/docs/rancher1/upgrade/_index)介绍。
 
 ## 多节点部署 Rancher Server-HA 部署
 
@@ -103,7 +103,7 @@ sudo docker run -d -v <host_vol>:/var/lib/mysql --restart=unless-stopped -p 8080
 - HA 节点:
   - 所有安装有[支持的 Docker 版本](/docs/rancher1/infrastructure/hosts/_index#docker版本适用对比)的现代 Linux 发行版 [RancherOS](https://docs.rancher.com/os/), Ubuntu, RHEL/CentOS 7 都是经过严格的测试。
   - 对于 RHEL/CentOS, 默认的 storage driver, 例如 devicemapper using loopback, 并不被[Docker](https://docs.docker.com/engine/reference/commandline/dockerd/#/storage-driver-options)推荐。 请参考 Docker 的文档去修改使用其他的 storage driver。
-  - 对于 RHEL/CentOS, 如果您想使用 SELinux, 您需要 [安装额外的 SELinux 组件](/docs/rancher1/installing-rancher/selinux/_index).
+  - 对于 RHEL/CentOS, 如果您想使用 SELinux, 您需要 [安装额外的 SELinux 组件](/docs/rancher1/installation/selinux/_index).
   - `9345`, `8080` 端口需要在各个节点之间能够互相访问
   - 1GB 内存
 - MySQL 数据库
@@ -138,7 +138,7 @@ sudo docker run -d -v <host_vol>:/var/lib/mysql --restart=unless-stopped -p 8080
 
    > **注意:** 您可以使用 `docker run rancher/server --help` 获得命令的帮助信息
 
-2. 配置一个外部的负载均衡器，这个负责均衡负责将例如`80`或`443`端口的流量，转发到运行 Rancher Server 的节点的`8080`端口中。负载均衡器必须支持 websockets 以及 forwarded-for 的 Http 请求头以支持 Rancher 的功能。参考 [使用 SSL](/docs/rancher1//installing-rancher/installing-server/basic-ssl-config/_index) 这个配置的例子。
+2. 配置一个外部的负载均衡器，这个负责均衡负责将例如`80`或`443`端口的流量，转发到运行 Rancher Server 的节点的`8080`端口中。负载均衡器必须支持 websockets 以及 forwarded-for 的 Http 请求头以支持 Rancher 的功能。参考 [使用 SSL](/docs/rancher1/installation/installing-server/_index) 这个配置的例子。
 
 ### advertise-address 选项
 
@@ -159,7 +159,7 @@ sudo docker run -d -v <host_vol>:/var/lib/mysql --restart=unless-stopped -p 8080
 
 如果您在配置 ELB 中遇到问题，我们建议您参考[terraform version](#使用terraform进行配置)。
 
-> **注意:** 如果您正在使用自签名的证书, 请参考我们 SSL 部分里的[如何在 AWS 里配置 ELB](/docs/rancher1/installing-rancher/installing-server/basic-ssl-config/_index#elb).
+> **注意:** 如果您正在使用自签名的证书, 请参考我们 SSL 部分里的[如何在 AWS 里配置 ELB](/docs/rancher1/installation/basic-ssl-config/_index)。
 
 ### Listener 配置 - Plaintext
 
@@ -251,7 +251,7 @@ sudo vi /etc/default/docker
 
 > **注意:** 如果您使用 systemd 运行 Docker, 请参考 Docker 官方的[文档](https://docs.docker.com/articles/systemd/#http-proxy) 去配置 http proxy 设置。
 
-为了使得[应用商店](/docs/rancher1/configuration/catalog/)加载正常，HTTP 代理设置必须在 Rancher Server 运行的环境变量中。
+为了使得[应用商店](/docs/rancher1/configurations/catalog/_index)加载正常，HTTP 代理设置必须在 Rancher Server 运行的环境变量中。
 
 ```bash
 sudo docker run -d \
@@ -262,7 +262,7 @@ sudo docker run -d \
     --restart=unless-stopped -p 8080:8080 rancher/server
 ```
 
-如果您不使用[应用商店](/docs/rancher1/configuration/catalog/_index)，则使用您平常的 Rancher Server 命令即可。
+如果您不使用[应用商店](/docs/rancher1/configurations/catalog/_index)，则使用您平常的 Rancher Server 命令即可。
 
 当向 Rancher[添加主机](/docs/rancher1/infrastructure/hosts/_index)时，在 HTTP 代理中不需要额外的设置和要求。
 

@@ -33,7 +33,7 @@ Rancher 提供一个基于 HAProxy 的容器来重定向流量至目标服务。
 
 点击**添加服务**旁边的下拉图标，找到**添加负载均衡**并点击它。
 
-您能使用滑块选择`数量`，就是负载均衡使用多少个容器。或者，您可以选择`总是在每台主机上运行一个此容器的实例`。使用这一个选项, 您的负载均衡容器数量将会随着您[环境](/docs/rancher1/configuration/environments/_index)下的主机数量增减而增减。如果您在**调度**部分设定了调度规则，Rancher 将会在满足规则的主机上启动负载均衡。如果您的环境下新增了一台不满足调度规则的主机，负载均衡容器不会在这一台主机中启动。
+您能使用滑块选择`数量`，就是负载均衡使用多少个容器。或者，您可以选择`总是在每台主机上运行一个此容器的实例`。使用这一个选项, 您的负载均衡容器数量将会随着您[环境](/docs/rancher1/configurations/environments/_index)下的主机数量增减而增减。如果您在**调度**部分设定了调度规则，Rancher 将会在满足规则的主机上启动负载均衡。如果您的环境下新增了一台不满足调度规则的主机，负载均衡容器不会在这一台主机中启动。
 
 > **注意:** 负载均衡容器的扩缩容不能超过环境下主机的数量，否则会造成端口冲突，负载容器服务将会被阻碍在`activating`状态。它会不断去尝试寻找可用的主机并开启端口，直到您修改它的数量或者[添加主机](/docs/rancher1/infrastructure/hosts/_index).
 
@@ -103,7 +103,7 @@ domain.com.* -> hdr_beg(host) -i domain.com.
 
 **SSL 会话终止**标签提供了添加用于`https`和`tls`协议证书的能力。在**证书**下拉框中，您可以为负载均衡选择主证书。
 
-添加证书前，请阅读[如何添加证书](/docs/rancher1/configuration/environments/certificates/_index)。
+添加证书前，请阅读[如何添加证书](/docs/rancher1/configurations/environments/certificates/_index)。
 
 为负载均衡添加多个证书是可以实现的。这样相应的证书会基于请求主机名(查看 [服务器名称指示](https://en.wikipedia.org/wiki/Server_Name_Indication))展示给客户端。这个功能可能在那些不支持 SNI(它会获取主要证书)的老客户端上失效。对于现代客户端，我们会在能匹配到的列表中提供证书，如果没有匹配成功，就会提供主证书。
 
@@ -278,8 +278,8 @@ Rancher 的负载均衡支持多种协议类型。
 
 - `http` - 默认情况下，rancher 容器会将 80 端口上的请求重定向到 443 端口上。如果没有设置任何协议，负载均衡就会使用`http`。HAProxy 不会对流量做任何解析，仅仅是转发。
 - `tcp` - HAProxy 不会对流量做任何解析，仅仅是转发。
-- `https` - 需要设置 SSL 会话终结。流量将会被 HAProxy 使用[证书](/docs/rancher1/configuration/environments/certificates/_index)解密，这个证书必须在设定负载均衡之前被添加入 Rancher。被流量负载均衡所转发的流量是没有加密的。
-- `tls` - 需要设置 SSL 会话终结。流量将会被 HAProxy 使用[证书](/docs/rancher1/configuration/environments/certificates/_index)解密，这个证书必须在设定负载均衡之前被添加入 Rancher。被流量负载均衡所转发的流量是没有加密的。
+- `https` - 需要设置 SSL 会话终结。流量将会被 HAProxy 使用[证书](/docs/rancher1/configurations/environments/certificates/_index)解密，这个证书必须在设定负载均衡之前被添加入 Rancher。被流量负载均衡所转发的流量是没有加密的。
+- `tls` - 需要设置 SSL 会话终结。流量将会被 HAProxy 使用[证书](/docs/rancher1/configurations/environments/certificates/_index)解密，这个证书必须在设定负载均衡之前被添加入 Rancher。被流量负载均衡所转发的流量是没有加密的。
 - `sni` - 流量从负载均衡到服务都是被加密的。多个证书将会被提供给负载均衡,这样负载均衡就能将合适的证书基于主机名展示给客户端。 点击[服务器名称指示](https://en.wikipedia.org/wiki/Server_Name_Indication))查看更多详情。
 - `udp` - Rancher 的 HAProxy 不支持.
 
@@ -458,7 +458,7 @@ services:
 
 #### 证书
 
-如果您需要使用`https` 或者 `tls` [协议](#协议), 您可以使用[直接加入 Rancher](/docs/rancher1/configuration/environments/certificates/_index)或者挂载在负载均衡容器中的证书。
+如果您需要使用`https` 或者 `tls` [协议](#协议), 您可以使用[直接加入 Rancher](/docs/rancher1/configurations/environments/certificates/_index)或者挂载在负载均衡容器中的证书。
 
 ##### 引用在 Rancher 中添加的证书
 
@@ -512,7 +512,7 @@ labels:
   io.rancher.lb_service.default_cert_dir: <DEFAULT_CERTIFICATE_LOCATION>
 ```
 
-证书可以通过绑定主机的挂载目录或者通过命名卷来挂在入负载均衡容器，命名卷可以以我们的[storage drivers](/docs/rancher1/rancher-services/storage-service/_index)为驱动。
+证书可以通过绑定主机的挂载目录或者通过命名卷来挂在入负载均衡容器，命名卷可以以我们的[storage drivers](/docs/rancher1/rancher-service/storage-service/_index)为驱动。
 
 ###### Example `docker-compose.yml`
 

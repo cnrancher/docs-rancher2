@@ -18,11 +18,11 @@
 
 [UI](https://github.com/rancher/ui): Rancher UI 代码库。
 
-[Rancher Catalog](https://github.com/rancher/rancher-catalog): 这个代码库包含了大多数[应用商店](/docs/rancher1/catalog/_index) [基础设施服务](/docs/rancher1/rancher-services/_index)模板。这些模板(在`infra-templates`目录中)，在[环境(environments)](/docs/rancher1/configuration/environments/_index)中被用做[环境模版](/docs/rancher1/configuration/environments/_index)的一部分。我们欢迎社区参与 Rancher 开发。
+[Rancher Catalog](https://github.com/rancher/rancher-catalog): 这个代码库包含了大多数[应用商店](/docs/rancher1/configurations/catalog/_index) [基础设施服务](/docs/rancher1/rancher-service/_index)模板。这些模板(在`infra-templates`目录中)，在[环境(environments)](/docs/rancher1/configurations/environments/_index)中被用做[环境模版](/docs/rancher1/configurations/environments/_index)的一部分。我们欢迎社区参与 Rancher 开发。
 
-[Community Catalog](https://github.com/rancher/community-catalog): 这个代码库包含了所有社区贡献的 [Rancher 应用商店](/docs/rancher1/catalog/_index)模板。我们欢迎社区参与 Rancher 应用商店模板的开发。
+[Community Catalog](https://github.com/rancher/community-catalog): 这个代码库包含了所有社区贡献的 [Rancher 应用商店](/docs/rancher1/configurations/catalog/_index)模板。我们欢迎社区参与 Rancher 应用商店模板的开发。
 
-[Rancher CLI](https://github.com/rancher/cli): [Rancher 命令行](/docs/rancher1/infrastructure/cli/_index)基于此代码库。
+[Rancher CLI](https://github.com/rancher/cli): [Rancher 命令行](/docs/rancher2/cli/_index)基于此代码库。
 
 [Rancher Compose](https://github.com/rancher/rancher-compose): [Rancher Compose](/docs/rancher1/infrastructure/cattle/rancher-compose/_index)命令行基于此代码库。 此代码库和 docker/libcompose 保持同步。
 
