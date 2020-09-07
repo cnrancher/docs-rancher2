@@ -8,7 +8,7 @@ Rancher 支持使用 `docker machine` 来管理其他云提供商的主机服务
 
 ### 添加云提供商的驱动
 
-通过 [Admin(系统管理)](/docs/rancher1/configurations/accounts/_index#管理员)的 [machine drivers(主机驱动)](/docs/rancher1/configurations/machine-drivers/_index) 页面来添加。
+通过 [Admin(系统管理)](/docs/rancher1/configurations/environments/accounts/_index#管理员)的 [machine drivers(主机驱动)](/docs/rancher1/configurations/environments/machine-drivers/_index) 页面来添加。
 
 ### 启动云提供商的主机
 

@@ -29,7 +29,7 @@ Rancher 允许用户在[环境](/docs/rancher1/configurations/environments/_inde
 
 ### 通过 API 管理网络策略规则
 
-对于[网络](/docs/rancher1/api/v2-beta/resources/network/_index)资源，`defaultPolicyAction`和`policy` 字段定义了容器间通信的工作规则。`policy`字段是内容为[网络策略规则](/docs/rancher1/api/v2-beta/resources/networkPolicyRule/_index)的有序数组。通过 Rancher 的[API](/docs/rancher1/api/v2-beta/_index)，可以配置环境的网络策略
+对于网络资源，`defaultPolicyAction`和`policy` 字段定义了容器间通信的工作规则。`policy`字段是内容为网络策略规则的有序数组。通过 Rancher 的 API，可以配置环境的网络策略
 
 #### 获取网络的 API 地址
 

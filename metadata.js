@@ -398,7 +398,7 @@ const metadata = {
             "rancher1/infrastructure/cattle/health-checks/_index": "健康检查",
             "rancher1/infrastructure/cattle/internal-dns-service/_index":
                 "内部DNS服务",
-            "rancher1/infrastructure/cattle/lables/_index": "标签",
+            "rancher1/infrastructure/cattle/labels/_index": "标签",
             "rancher1/infrastructure/cattle/rancher-compose/_index":
                 "Rancher Compose",
             "rancher1/infrastructure/cattle/rancher-compose/environment-interpolation/_index":

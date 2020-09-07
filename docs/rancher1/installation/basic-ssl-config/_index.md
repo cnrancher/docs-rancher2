@@ -246,7 +246,7 @@ Rancher Compose CLI 将需要 CA 证书，这个 CA 证书需要被添加到操�
 
 3. 使用`https`地址访问 Rancher，例如 `https://rancher.server.domain`。
 
-4. 为 SSL 更新[主机注册地址](/docs/rancher1/configurations/settings/_index#主机注册)配置
+4. 为 SSL 更新[主机注册地址](/docs/rancher1/configurations/environments/settings/_index#主机注册)配置
 
 > **注意:** 除非您的浏览器信任了该用于给 Rancher Server 签名的 CA 证书，否则在您访问 UI 的时候，浏览器会显示一个未信任的网站警告。
 

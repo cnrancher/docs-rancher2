@@ -512,7 +512,7 @@ labels:
   io.rancher.lb_service.default_cert_dir: <DEFAULT_CERTIFICATE_LOCATION>
 ```
 
-证书可以通过绑定主机的挂载目录或者通过命名卷来挂在入负载均衡容器，命名卷可以以我们的[storage drivers](/docs/rancher1/rancher-service/storage-service/_index)为驱动。
+证书可以通过绑定主机的挂载目录或者通过命名卷来挂在入负载均衡容器，命名卷可以以我们的[storage drivers](/docs/rancher1/rancher-service/storage-services/_index)为驱动。
 
 ###### Example `docker-compose.yml`
 

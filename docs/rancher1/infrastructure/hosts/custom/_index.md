@@ -10,7 +10,7 @@ title: 添加Custom主机
 
 一旦您的主机添加到 Rancher 之后，您就可以开始[添加服务](/docs/rancher1/infrastructure/cattle/adding-services/_index)了。
 
-> **注意:** 确保运行 Rancher Server 的主机和您所添加的主机的时钟是一样的并且能够正常访问主机上的容器。更多信息，请参考[在 Rancher 中访问容器的命令行和日志](/docs/rancher1/faqs/troubleshooting/_index#求助-我不能通过-rancher的界面打开-shell-或查看日志--rancher-是如何去访问容器的-shell和日志)。
+> **注意:** 确保运行 Rancher Server 的主机和您所添加的主机的时钟是一样的并且能够正常访问主机上的容器。更多信息，请参考[在 Rancher 中访问容器的命令行和日志](/docs/rancher1/faq/troubleshooting/_index#求助-我不能通过-rancher的界面打开-shell-或查看日志--rancher-是如何去访问容器的-shell和日志)。
 
 ## 主机标签
 
