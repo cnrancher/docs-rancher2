@@ -12,7 +12,7 @@ title: 数据卷
 
 ### 管理卷
 
-在这一部分，您将会了解如何创建一个可以被容器之间共享的持久化卷。在这里我们将专门使用[Rancher 命令行](/docs/rancher1/infrastructure/cli/_index)。
+在这一部分，您将会了解如何创建一个可以被容器之间共享的持久化卷。在这里我们将专门使用[Rancher 命令行](/docs/rancher2/cli/_index)。
 
 > **注意:** UI 可以用来管理除了由`local`卷驱动创建的卷。
 

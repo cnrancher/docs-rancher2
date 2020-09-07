@@ -33,7 +33,7 @@ $ sudo docker logs -f <CONTAINER_ID>
 
 Rancher UI 的默认端口是 `8080`。所以为了访问 UI，需打开`http://<SERVER_IP>:8080`。需要注意的事，如果您的浏览器和 Rancher Server 是运行在同一主机上的，您需要通过主机的**真实 IP 地址**访问，比如 `http://192.168.1.100:8080` ，而不是 `http://localhost:8080` 或`http://127.0.0.1:8080`，以防在添加主机的时候使用了不可达的 IP 而出现问题。
 
-> **注意:** 1. 初始安装时 Rancher 的访问控制并未配置，任何能够访问您的 IP 地址的人，都可以访问您的 UI 和 API。我们建议您配置 [访问控制](/docs/rancher1/configuration/access-control/_index). 2. 国内的公有云主机，如果需要使用 80 和 8080 端口，需备案后才可以使用。
+> **注意:** 1. 初始安装时 Rancher 的访问控制并未配置，任何能够访问您的 IP 地址的人，都可以访问您的 UI 和 API。我们建议您配置 [访问控制](/docs/rancher1/configurations/access-control/_index). 2. 国内的公有云主机，如果需要使用 80 和 8080 端口，需备案后才可以使用。
 
 ## 添加主机
 
@@ -51,7 +51,7 @@ Rancher UI 会给您提供一些指示，比如您的主机上应该开放的端
 
 ## 基础设施服务
 
-当您第一次登陆 Rancher 时，您将自动进入**默认**[环境](/docs/rancher1/configuration/environments/_index)。默认已经为此环境选择了 Cattle[环境模板](/docs/rancher1/configuration/environments/_index#什么是环境模版)来启动[基础设施服务](/docs/rancher1/rancher-services/_index)。要想充分利用 Rancher 的一些功能，如[DNS](/docs/rancher1/rancher-services/dns-service/_index)、[元数据](/docs/rancher1/rancher-services/metadata-service/_index)、[网络](/docs/rancher1/rancher-services/networking/_index)、[健康检查](/docs/rancher1/infrastructure/cattle/health-checks/_index)，您需要启动这些基础设施服务。这些基础设施可以在**应用栈** -> **基础设施**中找到。在主机被添加至 Rancher 之前，这些栈会处于 `unhealthy` 状态。主机添加完成后，建议等到所有基础设施服务都处于`active`状态之后再添加服务。
+当您第一次登陆 Rancher 时，您将自动进入**默认**[环境](/docs/rancher1/configurations/environments/_index)。默认已经为此环境选择了 Cattle[环境模板](/docs/rancher1/configurations/environments/_index#什么是环境模版)来启动[基础设施服务](/docs/rancher1/rancher-service/_index)。要想充分利用 Rancher 的一些功能，如[DNS](/docs/rancher1/rancher-service/dns-service/_index)、[元数据](/docs/rancher1/rancher-service/metadata-service/_index)、[网络](/docs/rancher1/rancher-service/networking/_index)、[健康检查](/docs/rancher1/infrastructure/cattle/health-checks/_index)，您需要启动这些基础设施服务。这些基础设施可以在**应用栈** -> **基础设施**中找到。在主机被添加至 Rancher 之前，这些栈会处于 `unhealthy` 状态。主机添加完成后，建议等到所有基础设施服务都处于`active`状态之后再添加服务。
 
 在主机上，所有属于基础设施服务的容器将被隐藏，除非您单击“**显示系统容器**”复选框。
 
@@ -73,7 +73,7 @@ docker run -d -it --name=second-container ubuntu:14.04.2
 
 在 UI 中，您将看到**第二个容器**在您的主机上出现！
 
-Rancher 会对 Docker 守护进程中发生的事件做出反应，调整自己以反映现实情况。您可以在此了解更多通过[Docker 原生 CLI](/docs/rancher1/infrastructure/native-docker/_index)使用 Rancher 的事宜。
+Rancher 会对 Docker 守护进程中发生的事件做出反应，调整自己以反映现实情况。您可以在此了解更多通过 Docker 原生 CLI 使用 Rancher 的事宜。
 
 如果您查看**_第二个容器_**的 IP 地址，您将发现它不在`10.42.*.*` 范围内。它的 IP 地址是 Docker 守护进程分配的常用 IP 地址。这是通过 CLI 创建 Docker 容器的预期行为。
 
@@ -107,7 +107,7 @@ docker run -d -it --label io.rancher.container.network=true ubuntu:14.04.2
 
 ## 使用 Rancher CLI 创建一个多容器应用程序
 
-在本节中，我们将介绍如何使用我们的命名行工具[Rancher CLI](/docs/rancher1/infrastructure/cli/_index)创建和部署跟上一节中我们创建的一样的[LetsChat](http://sdelements.github.io/lets-chat/)应用程序。
+在本节中，我们将介绍如何使用我们的命名行工具[Rancher CLI](/docs/rancher2/cli/_index)创建和部署跟上一节中我们创建的一样的[LetsChat](http://sdelements.github.io/lets-chat/)应用程序。
 
 当在 Rancher 中创建服务时，Rancher CLI 工具与颇受欢迎的 Docker Compose 工具的工作方式类似。 它接收相同的`docker-compose.yml`文件，并在 Rancher 上部署应用程序。 您可以在`rancher-compose.yml`文件中指定更多的属性，该文件将扩展并覆盖`docker-compose.yml`文件。
 
@@ -173,7 +173,7 @@ services:
 
 在 Rancher UI 中单击**下载 CLI**(该按钮位于页面的右下角)，即可下载 Rancher CLI 二进制文件，Windows、Mac 和 Linux 的二进制文件均可下载。
 
-若想使用 Rancher CLI 在 Rancher 中启动服务，您需要设置一些环境变量。您需要在 Rancher UI 中创建一个账户[API Key](/docs/rancher1/api/v2-beta/api-keys/_index)。单击**API** -> **密钥**。单击**添加账户 API Key**。填写一个名字，然后单击**创建**。保存**Access Key(用户名)**和**Secret Key(密码)**。通过运行`rancher config`配置 RancherCLI，使用 Rancher URL、Access Key 和 Secret Key。
+若想使用 Rancher CLI 在 Rancher 中启动服务，您需要设置一些环境变量。您需要在 Rancher UI 中创建一个账户 API Key。单击**API** -> **密钥**。单击**添加账户 API Key**。填写一个名字，然后单击**创建**。保存**Access Key(用户名)**和**Secret Key(密码)**。通过运行`rancher config`配置 RancherCLI，使用 Rancher URL、Access Key 和 Secret Key。
 
 ```bash
 # Configure Rancher CLI

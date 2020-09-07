@@ -4,7 +4,7 @@
 
 > **注意:** 如果您正准备升级到 v1.6.x，请阅读我们相关的版本注解[v1.6.0](https://github.com/rancher/rancher/releases/tag/v1.6.0)。这里面有相关升级需要的注意事项。根据您安装 Rancher Server 方式的不同，您的升级步骤可能不一样。
 
-> **注意:** 如果您在原始的 Rancher 服务中设置了任何的环境变量或者传了一个[ldap 证书](/docs/rancher1/installing-rancher/installing-server/_index#tls认证使用adopenldap)，则需要在任何新的命令中添加这些环境变量或者证书。
+> **注意:** 如果您在原始的 Rancher 服务中设置了任何的环境变量或者传了一个[ldap 证书](/docs/rancher1/installation/installing-server/_index#tls认证使用adopenldap)，则需要在任何新的命令中添加这些环境变量或者证书。
 
 ## Rancher Server 标签
 
@@ -17,7 +17,7 @@ Rancher Server 当前版本中有 2 个不同的标签。对于每一个主要�
 
 ## 基础设施服务
 
-当 Rancher Server 升级之后，您的[基础设施服务](/docs/rancher1/rancher-services/_index)可能也需要升级。我们建议在升级 Rancher Server 之后检查基础设施服务，看是否有可升级的。如果有可升级的，那么按照下面的顺序一个个升级:
+当 Rancher Server 升级之后，您的[基础设施服务](/docs/rancher1/rancher-service/_index)可能也需要升级。我们建议在升级 Rancher Server 之后检查基础设施服务，看是否有可升级的。如果有可升级的，那么按照下面的顺序一个个升级:
 
 1. `network-policy-manager` (如果安装了，这是一个可选的 Rancher 组件)
 2. `network-services`
@@ -78,7 +78,7 @@ _从 v1.6.1 开始_
 
 ## 单独升级一个容器(non-HA)-外部数据库
 
-如果您使用外部数据库启动 Rancher Server，您可以先停止原来的 Rancher Server 容器，并使用相同的[使用外部数据库的安装说明](/docs/rancher1/installing-rancher/installing-server/_index#single-container-external-database)。升级您的 Rancher Server 之前，建议您备份外部数据库。 新服务器启动并运行后，可以删除旧的 Rancher Server 容器。
+如果您使用外部数据库启动 Rancher Server，您可以先停止原来的 Rancher Server 容器，并使用相同的[使用外部数据库的安装说明](/docs/rancher1/installation/installing-server/_index#single-container-external-database)。升级您的 Rancher Server 之前，建议您备份外部数据库。 新服务器启动并运行后，可以删除旧的 Rancher Server 容器。
 
 ## 单独升级一个容器(non-HA)-绑定挂载的 MySQL 卷
 
@@ -113,13 +113,13 @@ _从 v1.6.1 开始_
 
 ## 升级 HA 架构
 
-当以[高可用(HA)](/docs/rancher1/installing-rancher/installing-server/_index#multi-nodes)的方式启动 Rancher Server，新的 Rancher HA 设置将继续使用用于安装原始 HA 设置的外部数据库。
+当以[高可用(HA)](/docs/rancher1/installation/installing-server/_index#multi-nodes)的方式启动 Rancher Server，新的 Rancher HA 设置将继续使用用于安装原始 HA 设置的外部数据库。
 
 > **注意:** 当升级 HA 架构的 Rancher Server 时，Rancher Server 在升级过程中将会停止服务。
 
 1. 升级您的 Rancher Server 之前，建议您备份外部数据库。
 
-2. 在 HA 架构中的每台 Server 节点上，停止并删除正在运行的 Rancher Server 容器，然后按照相同的[安装 HA 模式的 Rancher Server 说明](/docs/rancher1/installing-rancher/installing-server/_index#multi-nodes)来启动一个新的 Rancher 服务容器，但是使用的是一个新的 Rancher Server 镜像版本。
+2. 在 HA 架构中的每台 Server 节点上，停止并删除正在运行的 Rancher Server 容器，然后按照相同的[安装 HA 模式的 Rancher Server 说明](/docs/rancher1/installation/installing-server/_index#multi-nodes)来启动一个新的 Rancher 服务容器，但是使用的是一个新的 Rancher Server 镜像版本。
 
    ```bash
    # On all nodes, stop all Rancher Server containers
@@ -128,8 +128,8 @@ _从 v1.6.1 开始_
    docker run -d --restart=unless-stopped -p 8080:8080 -p 9345:9345 rancher/server --db-host myhost.example.com --db-port 3306 --db-user username --db-pass password --db-name cattle --advertise-address <IP_of_the_Node>
    ```
 
-   > **注意:** 当您正在一个运行[Rancher Server 1.2 之前版本的 HA](/docs/rancher1/v1.1/en/installing-rancher/installing-server/multi-nodes/_index)时，您需要删除所有的正在运行的 Rancher HA 容器。`$ sudo docker rm -f $(sudo docker ps -a | grep rancher | awk {'print $1'})`
+   > **注意:** 当您正在一个运行[Rancher Server 1.2 之前版本的 HA](docs/rancher1/installation/installing-server/_index)时，您需要删除所有的正在运行的 Rancher HA 容器。`$ sudo docker rm -f $(sudo docker ps -a | grep rancher | awk {'print $1'})`
 
 ## 没有互联网访问的 Rancher Server
 
-在没有互联网的情况下，为了能够升级成功，用户需要下载最新的[基础设施服务](/docs/rancher1/rancher-services/_index)镜像 。
+在没有互联网的情况下，为了能够升级成功，用户需要下载最新的[基础设施服务](/docs/rancher1/rancher-service/_index)镜像 。

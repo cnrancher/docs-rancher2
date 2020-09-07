@@ -24,7 +24,7 @@ Rancher 通过实时监控所有主机上 Docker 事件来更新自己的状态�
 docker run -l io.rancher.container.network=true -itd ubuntu bash
 ```
 
-请查阅[Rancher 中的网络](/docs/rancher1/rancher-services/networking/_index)了解更多关于 Rancher 管理的网络和夸主机网络的详情。
+请查阅[Rancher 中的网络](/docs/rancher1/rancher-service/networking/_index)了解更多关于 Rancher 管理的网络和夸主机网络的详情。
 
 ## 导入已有容器
 

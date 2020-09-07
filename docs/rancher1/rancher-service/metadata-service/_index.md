@@ -6,7 +6,7 @@ Rancher 通过基础设施中的 Metadata 服务为服务和容器提供数据�
 
 通过 Rancher 的 Metadata 服务，您可以进到任何使用 Rancher 托管网络的容器的命令行中，并查看运行在 Rancher 中的容器的信息。通过 Metadata 服务您可以获取容器，服务，容器所在的应用，容器所在的主机。Metadata 是 JSON 格式的。
 
-有多种方式可以将容器运行在 Rancher 托管网络中。Rancher 网络的原理详见[网络相关文档](/docs/rancher1/rancher-services/networking/_index)。
+有多种方式可以将容器运行在 Rancher 托管网络中。Rancher 网络的原理详见[网络相关文档](/docs/rancher1/rancher-service/networking/_index)。
 
 ### 如何获取 Metadata
 
@@ -182,7 +182,7 @@ $ curl --header 'Accept: application/json' 'http://rancher-metadata/2015-12-19/s
 | `stack_uuid`                  | Rancher 分配的应用的唯一标识                                                                                                                                                                        |
 | `start_count`                 | 容器启动的次数                                                                                                                                                                                      |
 | `state`                       | 容器状态                                                                                                                                                                                            |
-| `system`                      | 容器是否是 Rancher[基础设施服务](/docs/rancher1/rancher-services/_index)                                                                                                                            |
+| `system`                      | 容器是否是 Rancher[基础设施服务](/docs/rancher1/rancher-service/_index)                                                                                                                             |
 | `uuid`                        | Rancher 分配容器唯一标识                                                                                                                                                                            |
 
 #### 服务
@@ -199,7 +199,7 @@ $ curl --header 'Accept: application/json' 'http://rancher-metadata/2015-12-19/s
 | `kind`                 | Rancher 的服务类型                                                                                                                                                                                               |
 | `labels`               | [服务标签](/docs/rancher1/infrastructure/cattle/scheduling/_index#labels)列表，格式为 `key:value`.                                                                                                               |
 | `lb_config`            | [负载均衡](/docs/rancher1/infrastructure/cattle/adding-load-balancers/_index)的配置                                                                                                                              |
-| `metadata`             | [用户添加的 metadata](/docs/rancher1/rancher-services/metadata-service/_index#adding-user-metadata-to-a-service)                                                                                                 |
+| `metadata`             | [用户添加的 metadata](/docs/rancher1/rancher-service/metadata-service/_index#adding-user-metadata-to-a-service)                                                                                                  |
 | `name`                 | 服务名称                                                                                                                                                                                                         |
 | `ports`                | [服务使用的端口](/docs/rancher1/infrastructure/cattle/adding-services/_index#port-mapping)。格式`hostIP:publicIP:privateIP[/protocol]`.                                                                          |
 | `primary_service_name` | 主服务名，如果有从服务                                                                                                                                                                                           |
@@ -207,19 +207,19 @@ $ curl --header 'Accept: application/json' 'http://rancher-metadata/2015-12-19/s
 | `sidekicks`            | [从容器](/docs/rancher1/infrastructure/cattle/adding-services/_index#sidekick-服务)服务的名称列表                                                                                                                |
 | `stack_name`           | 服务所在的应用的名称                                                                                                                                                                                             |
 | `stack_uuid`           | Rancher 分配的应用的唯一标识                                                                                                                                                                                     |
-| `system`               | 是否是[基础设施服务](/docs/rancher1/rancher-services/_index)                                                                                                                                                     |
+| `system`               | 是否是[基础设施服务](/docs/rancher1/rancher-service/_index)                                                                                                                                                      |
 | `uuid`                 | Rancher 分配的服务的唯一标识                                                                                                                                                                                     |
 
 #### 应用
 
-| 属性               | 描述                                                                     |
-| ------------------ | ------------------------------------------------------------------------ |
-| `environment_name` | 应用所在的[环境](/docs/rancher1/configuration/environments/_index)的名字 |
-| `environment_uuid` | Rancher 分配的环境的唯一标识                                             |
-| `name`             | [应用](/docs/rancher1/infrastructure/cattle/stacks/_index)名称           |
-| `services`         | 应用中的服务列表                                                         |
-| `system`           | 应用是否为[基础设施服务](/docs/rancher1/rancher-services/_index)         |
-| `uuid`             | Rancher 分配的应用的唯一标识                                             |
+| 属性               | 描述                                                                      |
+| ------------------ | ------------------------------------------------------------------------- |
+| `environment_name` | 应用所在的[环境](/docs/rancher1/configurations/environments/_index)的名字 |
+| `environment_uuid` | Rancher 分配的环境的唯一标识                                              |
+| `name`             | [应用](/docs/rancher1/infrastructure/cattle/stacks/_index)名称            |
+| `services`         | 应用中的服务列表                                                          |
+| `system`           | 应用是否为[基础设施服务](/docs/rancher1/rancher-service/_index)           |
+| `uuid`             | Rancher 分配的应用的唯一标识                                              |
 
 #### 主机
 

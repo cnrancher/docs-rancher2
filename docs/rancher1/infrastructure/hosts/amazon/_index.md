@@ -23,8 +23,8 @@ Rancher 支持使用`docker machine`部署[Amazon EC2](http://aws.amazon.com/ec2
 ## Rancher 需要用到的端口:
 
 - Rancher Server 访问的 TCP 端口 `22` (通过 SSH 安装和配置 Docker)
-- 如果您正在使用 IPsec [网络驱动](/docs/rancher1/rancher-services/networking/_index), 所有主机都需要打开 UDP 端口`500`和`4500`
-- 如果您正在使用 VXLAN [网络驱动](/docs/rancher1/rancher-services/networking/_index), 所有主机需要打开 UDP 端口`4789`
+- 如果您正在使用 IPsec [网络驱动](/docs/rancher1/rancher-service/networking/_index), 所有主机都需要打开 UDP 端口`500`和`4500`
+- 如果您正在使用 VXLAN [网络驱动](/docs/rancher1/rancher-service/networking/_index), 所有主机需要打开 UDP 端口`4789`
 
 > **注意:** 如果您再次使用`rancher-machine`安全组, 之前任何丢失的端口都不会再次打开。如果主机没有正常启动，您需要检查 AWS 上的安全组。
 

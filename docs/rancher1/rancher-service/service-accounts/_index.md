@@ -11,8 +11,8 @@ title: API KEY
 
 当服务中的容器启动时，以下环境变量会被加入到容器中
 
-| Key                 | Value                                                                              |
-| ------------------- | ---------------------------------------------------------------------------------- |
-| `CATTLE_URL`        | [主机注册地址](/docs/rancher1/_index#主机注册)的 URL。                             |
-| `CATTLE_ACCESS_KEY` | 启动的服务所在[环境](/docs/rancher1/configuration/environments/_index)的访问密钥。 |
-| `CATTLE_SECRET_KEY` | 访问密钥对应的安全密钥。                                                           |
+| Key                 | Value                                                                               |
+| ------------------- | ----------------------------------------------------------------------------------- |
+| `CATTLE_URL`        | [主机注册地址](/docs/rancher1/_index#主机注册)的 URL。                              |
+| `CATTLE_ACCESS_KEY` | 启动的服务所在[环境](/docs/rancher1/configurations/environments/_index)的访问密钥。 |
+| `CATTLE_SECRET_KEY` | 访问密钥对应的安全密钥。                                                            |

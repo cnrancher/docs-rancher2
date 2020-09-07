@@ -6,11 +6,11 @@ title: 服务调度
 
 默认情况下，Rancher 将检测主机上的端口冲突，如果端口不可用，则不会将需要此端口的容器调度到这一主机上。
 
-这个核心调度逻辑内置于 Rancher，但 Rancher 还支持位于我们[外部调度器](/docs/rancher1/rancher-services/scheduler/_index)中的其他调度能力，这是我们[基础设施服务](/docs/rancher1/rancher-services/_index)的一部分。其他调度能力包括:
+这个核心调度逻辑内置于 Rancher，但 Rancher 还支持位于我们[外部调度器](/docs/rancher1/rancher-service/scheduler/_index)中的其他调度能力，这是我们[基础设施服务](/docs/rancher1/rancher-service/_index)的一部分。其他调度能力包括:
 
-- [多个 IP 的主机调度能力](/docs/rancher1/rancher-services/scheduler/_index#multiple-ips)
-- [基于资源约束的调度能力 (例如 CPU 和内存)](/docs/rancher1/rancher-services/scheduler/_index#resource-constraints)
-- [能够限制在主机上安排哪些服务](/docs/rancher1/rancher-services/scheduler/_index#restrict-services-on-host)
+- [多个 IP 的主机调度能力](/docs/rancher1/rancher-service/scheduler/_index#multiple-ips)
+- [基于资源约束的调度能力 (例如 CPU 和内存)](/docs/rancher1/rancher-service/scheduler/_index#resource-constraints)
+- [能够限制在主机上安排哪些服务](/docs/rancher1/rancher-service/scheduler/_index#restrict-services-on-host)
 
 ### 标签和调度规则
 
@@ -100,7 +100,7 @@ labels:
 
 #### 全局服务
 
-将服务提供到全局服务中相当于在 UI 中的每个主机上选择**总是在每台主机上运行一个此容器的实例**。 这意味着将在[环境](/docs/rancher1/configuration/environments/_index)中的任何主机上启动一个容器。 如果将新主机添加到环境中，并且主机满足全局服务的主机要求，则该服务将自动启动。
+将服务提供到全局服务中相当于在 UI 中的每个主机上选择**总是在每台主机上运行一个此容器的实例**。 这意味着将在[环境](/docs/rancher1/configurations/environments/_index)中的任何主机上启动一个容器。 如果将新主机添加到环境中，并且主机满足全局服务的主机要求，则该服务将自动启动。
 
 目前，全局服务只支持使用硬条件的主机标签字段。 这意味着只有在调度时才会遵守与`主机标签`相关的标签，并且**必须**或**不能**等于该值。 任何其他标签类型将被忽略。
 

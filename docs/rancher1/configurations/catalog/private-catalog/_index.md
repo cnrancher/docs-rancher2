@@ -20,7 +20,7 @@ title: 私有应用商店
 
 ## 基础设施服务模板
 
-Rancher 的[基础设施服务](/docs/rancher1/rancher-services/_index)可以从[环境模板](/docs/rancher1/configuration/environments/_index)中启用, 这些模板来自于`infra-templates`文件夹。
+Rancher 的[基础设施服务](/docs/rancher1/rancher-service/_index)可以从[环境模板](/docs/rancher1/configurations/environments/_index)中启用, 这些模板来自于`infra-templates`文件夹。
 
 这些服务从**应用商店**菜单中也可以看到, 您可以看到全部的基础设施服务包括那些和当前的编排调度引擎不兼容的服务. 我们建议从环境模板中启用基础设施服务，而不是直接从应用商店中启动。
 

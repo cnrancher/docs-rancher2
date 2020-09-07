@@ -6,7 +6,7 @@ title: 概述
 
 - 任何可以运行[支持的 Docker 版本](#docker版本适用对比)的 Linux 发行版本，例如:[RancherOS](https://docs.rancher.com/os/)，Ubuntu，RHEL/CentOS 7。不过针对 RHEL/CentOS 系列，有些需要注意的地方:
   - Docker 并不推荐使用 RHEL/CentOS 默认的存储驱动(devicemapper)，可以参考[这篇文档](https://docs.docker.com/engine/reference/commandline/dockerd/#/storage-driver-options)来修改。
-  - 如果启用 SELinux，[需要安装额外的模块](/docs/rancher1/installing-rancher/selinux/_index)。
+  - 如果启用 SELinux，[需要安装额外的模块](/docs/rancher1/installation/selinux/_index)。
   - 内核版本要求是 `3.10.0-514.2.2.el7.x86_64` 及以上，建议使用 RHEL/CentOS 7.3 或者更高的发行版本。
 - 1GB 的内存。
 - 推荐 w/AES-NI 架构的 CPU。
@@ -49,11 +49,11 @@ Rancher Agent 容器在主机上启动成功之后，这台主机就连接到了
 
 从设计的角度而言，Rancher Agent 是运行在独立于 Rancher Server 的主机上，所以 Rancher Agent 本身是不可信的。采用接口访问密钥的机制，可以确保 Rancher Agent 只访问被授权的接口，而 Rancher Server 只响应可信的请求。但是目前是单向认证，只认证从 Rancher Agent 到 Rancher Server 的请求，并没有认证从 Rancher Server 到 Rancher Agent 的响应。因此，用户可以根据需要，使用 TLS 和证书来做校验。
 
-每个[环境](/docs/rancher1/configuration/environments/_index)的注册口令，都是由 Rancher Server 生成并保存到数据库，然后和 API 密钥一起下发给 Rancher Agent 使用。Rancher Agent 和 Rancher Server 之间是采用 AES 对称加密的点对点通讯。
+每个[环境](/docs/rancher1/configurations/environments/_index)的注册口令，都是由 Rancher Server 生成并保存到数据库，然后和 API 密钥一起下发给 Rancher Agent 使用。Rancher Agent 和 Rancher Server 之间是采用 AES 对称加密的点对点通讯。
 
 ## 4. 添加主机
 
-第一次添加主机时，Rancher Server 会要求配置[主机注册地址](/docs/rancher1/configuration/settings/_index##主机注册)。这个地址可以是域名或者 IP 地址(如果 80 端口不可访问，还需要加上可访问的端口号，默认 `8080`)，能够访问 Rancher 接口即可。任何时候都可以改变 [主机注册地址](/docs/rancher1/configuration/settings/#主机注册)，相关操作可以查看 **系统管理** 下的 **系统设置**。设置好主机注册地址后，点击 **保存**.
+第一次添加主机时，Rancher Server 会要求配置[主机注册地址](/docs/rancher1/configurations/settings/_index##主机注册)。这个地址可以是域名或者 IP 地址(如果 80 端口不可访问，还需要加上可访问的端口号，默认 `8080`)，能够访问 Rancher 接口即可。任何时候都可以改变 [主机注册地址](/docs/rancher1/configurations/settings/#主机注册)，相关操作可以查看 **系统管理** 下的 **系统设置**。设置好主机注册地址后，点击 **保存**.
 
 Rancher 支持添加云提供商(例如 AWS，DigitalOcean，阿里云，vSphere 等)所提供的主机或者本地(例如 VirtualBox，VMWare 等)设置好的主机。对于云提供商，Rancher 可以通过`docker-machine`来添加的，所以本质上实现了 Docker Machine 驱动的厂商的云主机，都可以被添加。
 

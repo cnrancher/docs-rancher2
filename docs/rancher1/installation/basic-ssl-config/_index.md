@@ -8,9 +8,9 @@ title: 启用SSL
 
 ## 需求
 
-除了一般的 Rancher Server[需求](/docs/rancher1/installing-rancher/installing-server/_index#安装需求)外，您还需要:
+除了一般的 Rancher Server[需求](/docs/rancher1/installation/installing-server/_index#安装需求)外，您还需要:
 
-- 有效的 SSL 证书:如果您的证书并不是标准的 Ubuntu CA bundle，请参考以下内容[使用自签名证书](/docs/rancher1/installing-rancher/installing-server/basic-ssl-config/_index#使用自签名证书-beta)。
+- 有效的 SSL 证书:如果您的证书并不是标准的 Ubuntu CA bundle，请参考以下内容[使用自签名证书](/docs/rancher1/installation/basic-ssl-config/_index#使用自签名证书-beta)。
 - 相关域名的 DNS 配置
 
 ## Rancher Server 标签
@@ -36,8 +36,8 @@ sudo docker run -d --restart=unless-stopped --name=rancher-server rancher/server
 
 如果您需要复用现有的 Rancher Server 实例，升级的步骤会根据您如何运行原有的 Rancher 实例而不同。
 
-- 使用 [挂载 MYSQL 数据库的数据目录](/docs/rancher1/installing-rancher/installing-server/_index#single-container-bind-mount) 的实例，请参考 [升级 Rancher Server - 绑定挂载的 MYSQL 卷](/docs/rancher1/upgrading/_index#单独升级一个容器non-ha---绑定挂载的mysql卷)。
-- 对于使用外部数据库的 Rancher 实例，停止并移除现有的 Rancher 容器，新建一个容器即可 [启动 Rancher Server - 使用外部数据库](/docs/rancher1/installing-rancher/installing-server/_index#single-container-external-database)。
+- 使用 [挂载 MYSQL 数据库的数据目录](/docs/rancher1/installation/installing-server/_index#single-container-bind-mount) 的实例，请参考 [升级 Rancher Server - 绑定挂载的 MYSQL 卷](/docs/rancher1/upgrade/_index)。
+- 对于使用外部数据库的 Rancher 实例，停止并移除现有的 Rancher 容器，新建一个容器即可 [启动 Rancher Server - 使用外部数据库](/docs/rancher1/installation/installing-server/_index#single-container-external-database)。
 
 ## Nginx 配置模版
 
@@ -246,7 +246,7 @@ Rancher Compose CLI 将需要 CA 证书，这个 CA 证书需要被添加到操�
 
 3. 使用`https`地址访问 Rancher，例如 `https://rancher.server.domain`。
 
-4. 为 SSL 更新[主机注册地址](/docs/rancher1/configuration/settings/_index#主机注册)配置
+4. 为 SSL 更新[主机注册地址](/docs/rancher1/configurations/settings/_index#主机注册)配置
 
 > **注意:** 除非您的浏览器信任了该用于给 Rancher Server 签名的 CA 证书，否则在您访问 UI 的时候，浏览器会显示一个未信任的网站警告。
 

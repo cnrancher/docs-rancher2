@@ -2,13 +2,13 @@
 title: 网络策略
 ---
 
-Rancher 允许用户在[环境](/docs/rancher1/configuration/environments/_index)中配置网络策略。网络策略允许您在一个环境中定义特定的网络规则。所有的容器默认可以互相通信，但是有时您可能需要对的容器间通信做一些限制。
+Rancher 允许用户在[环境](/docs/rancher1/configurations/environments/_index)中配置网络策略。网络策略允许您在一个环境中定义特定的网络规则。所有的容器默认可以互相通信，但是有时您可能需要对的容器间通信做一些限制。
 
 ### 启动 Network Policy Manager
 
-当配置[环境模版](/docs/rancher1/configuration/environments/_index#什么是环境模版)时，您可以启动 **Network Policy Manage** 组件。
+当配置[环境模版](/docs/rancher1/configurations/environments/_index#什么是环境模版)时，您可以启动 **Network Policy Manage** 组件。
 
-如果您已经有一个启动的 Rancher 环境，您可以从[Rancher 应用商店](/docs/rancher1/configuration/catalog/_index)中启动 **Network Policy Manager**
+如果您已经有一个启动的 Rancher 环境，您可以从[Rancher 应用商店](/docs/rancher1/configurations/catalog/_index)中启动 **Network Policy Manager**
 
 > **注意:** Network Policy Manager 现在只能在使用 Cattle 编排引擎的时候使用。环境模版基于编排引擎确定哪些组件可用，Rancher 支持几乎所有的编排引擎。
 

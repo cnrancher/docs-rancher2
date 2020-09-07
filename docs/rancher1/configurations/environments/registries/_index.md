@@ -7,7 +7,7 @@ title: 镜像仓库
 ---
 
 您可以在 Rancher 配置镜像仓库的认证信息，使 Rancher 可以访问您的私有镜像仓库(DockerHub, Quay.io 和其他私有镜像库)。
-在每个[环境](/docs/rancher1/configuration/environments/_index)中，您可以给每个私有仓库地址配置一个认证信息，从而使 Rancher 可以拉取私有镜像。如果您给同一个镜像仓库配置了多个认证信息，那么 Rancher 只会使用最近添加的一个认证信息。 Rancher 支持在 Cattle 和 Kubernetes 环境中使用多种镜像仓库。
+在每个[环境](/docs/rancher1/configurations/environments/_index)中，您可以给每个私有仓库地址配置一个认证信息，从而使 Rancher 可以拉取私有镜像。如果您给同一个镜像仓库配置了多个认证信息，那么 Rancher 只会使用最近添加的一个认证信息。 Rancher 支持在 Cattle 和 Kubernetes 环境中使用多种镜像仓库。
 
 ## 添加镜像库
 
@@ -50,7 +50,7 @@ $ sudo service docker restart
 
 #### 使用亚马逊的 ECR 镜像库
 
-在 Rancher 使用亚马逊的 [EC2 容器镜像库](https://aws.amazon.com/ecr/) 需要额外的配置。ECR 使用 AWS 的原生认证服务 IAM 去管理访问权限。AWS 提供了 API，让用户可以基于请求的 IAM 权限为 Docker 生成临时的认证信息。由于认证信息在 12 小时后会无效，每 12 小时需要生成一个新的认证信息。您可以使用[AWS ECR 认证更新器](/docs/rancher1/configuration/environments/registries/ecr_updater/_index) 来发布一个自动更新认证信息的服务。
+在 Rancher 使用亚马逊的 [EC2 容器镜像库](https://aws.amazon.com/ecr/) 需要额外的配置。ECR 使用 AWS 的原生认证服务 IAM 去管理访问权限。AWS 提供了 API，让用户可以基于请求的 IAM 权限为 Docker 生成临时的认证信息。由于认证信息在 12 小时后会无效，每 12 小时需要生成一个新的认证信息。您可以使用[AWS ECR 认证更新器](/docs/rancher1/configurations/environments/registries/ecr_updater/_index) 来发布一个自动更新认证信息的服务。
 
 在 Rancher 中使用该镜像时，请使用 AWS 提供的全名地址，例如:
 

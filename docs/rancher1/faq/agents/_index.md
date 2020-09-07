@@ -37,7 +37,7 @@ sudo docker run -d -e CATTLE_AGENT_IP=<NEW_HOST_IP> --privileged \
 rancher/agent:v0.8.2 http://SERVER_IP:8080/v1/scripts/xxxx
 ```
 
-## 4、错误提示如下:INFO: Attempting to connect to: http://192.168.xx.xx:8080/v1 ERROR: http://192.168.xx.xx:8080/v1 is not accessible (Failed to connect to 192.168.xx.xx port 8080: No route to host)
+## 4、错误提示如下:INFO: Attempting to connect to: `http://192.168.xx.xx:8080/v1` ERROR: `http://192.168.xx.xx:8080/v1` is not accessible (Failed to connect to 192.168.xx.xx port 8080: No route to host)
 
 这个问题主要有以下几种情况:
 
