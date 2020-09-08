@@ -6,7 +6,7 @@ title: 访问控制
 
 访问控制是用来控制哪些用户可以访问您的 Rancher 服务。在默认情况下，Rancher 没有启用访问控制。这意味着知道您的 Rancher 服务 IP 的人都可以访问您的 Rancher 服务和 API。您的 Rancher 服务是对外开放的！我们强烈建议您在启动 Rancher 后立即配置访问控制，这样您可以按照需要分享您的 Rancher 服务。用户在访问您的 Rancher 服务之前，需要进行身份认证。同时，只有拥有合法的 API 密钥才能使用 Rancher API。
 
-Rancher 认证的第一个账户将成为 **管理员** 账户。 想要获取有关详细信息，请参阅 [管理员权限](/docs/rancher1configurations/environments/access-control/_index#管理员)。
+Rancher 认证的第一个账户将成为 **管理员** 账户。 想要获取有关详细信息，请参阅 [管理员权限](/docs/rancher1/configurations/environments/access-control/_index#管理员)。
 
 ### 启用访问控制
 
@@ -67,7 +67,7 @@ Rancher 认证的第一个账户将成为 **管理员** 账户。 想要获取�
 - **允许环境成员和已授权用户和组织** - 一个环境的成员用户或拥有者用户和添加到`已授权用户和用户组`的用户一样，都有权限访问 Rancher 服务。
 - **限制访问只有已授权用户和用户组可以访问** - 只有添加到`已授权用户和用户组`的用户才能访问 Rancher 服务。 即使用户已被添加到环境中，如果没有被添加到`已授权用户和用户组`，他们将仍然无法访问 Rancher 服务。
 
-任何具有 Rancher 服务访问权限的人都将被授予 [用户](/docs/rancher1//configurations/environments/accounts/_index#users)权限。他们将无法查看**系统管理**页面。 如果想要他们查看，您将需要明确地将其帐户更改为[管理员帐户](/docs/rancher1//configurations/environments/accounts/_index#管理员)。
+任何具有 Rancher 服务访问权限的人都将被授予 [用户](/docs/rancher1/configurations/environments/accounts/_index#users)权限。他们将无法查看**系统管理**页面。 如果想要他们查看，您将需要明确地将其帐户更改为[管理员帐户](/docs/rancher1/configurations/environments/accounts/_index#管理员)。
 
 为了让用户查看不同的[环境](/docs/rancher1/configurations/environments/_index), 他们将需要被环境的[所有者](/docs/rancher1/configurations/environments/_index#所有者)添加到环境中。
 

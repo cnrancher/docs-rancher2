@@ -2,7 +2,7 @@
 title: 日志审计
 ---
 
-只有[管理员](/docs/rancher1configurations/environments/access-control/_index#管理员)用户有权限访问审计日志。审计日志在**系统管理**->**审计日志**。
+只有[管理员](/docs/rancher1/configurations/environments/access-control/_index#管理员)用户有权限访问审计日志。审计日志在**系统管理**->**审计日志**。
 
 Rancher 的审计日志是不同事件类型的集合。
 

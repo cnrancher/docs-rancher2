@@ -17,11 +17,11 @@ Rancher 支持将资源分组归属到多个环境。每个环境具有自己独
 要添加一个环境，把鼠标移动到位于左上角的当前环境， 此时会出现一个带有所有可用的环境下拉框，以及一个 **环境管理** 连接。点击 **环境管理**。
 
 导航到 **环境** 页面后，您会看到一个环境列表和一个环境模板列表。如果您是 Rancher 的
-[管理员](/docs/rancher1//configurations/environments/accounts/_index#管理员)用户，您会看到一个所有环境的列表，即使您不是该环境的[成员](/docs/rancher1/configurations/environments/_index#成员角色)。任何环境模板都对所有用户可见。
+[管理员](/docs/rancher1/configurations/environments/accounts/_index#管理员)用户，您会看到一个所有环境的列表，即使您不是该环境的[成员](/docs/rancher1/configurations/environments/_index#成员角色)。任何环境模板都对所有用户可见。
 
 点击 **添加环境**。每个环境都有自己的名字和描述，您可以选择您要使用的环境模板。在环境模板中，您可以看到哪个基础设施服务是启用的。
 
-> **注意:** 如果没有配置 [访问控制](/docs/rancher1configurations/environments/access-control/_index)， 所有环境都可以被其它 Rancher 的用户访问到。 环境没有任何所属关系。
+> **注意:** 如果没有配置 [访问控制](/docs/rancher1/configurations/environments/access-control/_index)， 所有环境都可以被其它 Rancher 的用户访问到。 环境没有任何所属关系。
 
 有两种方法可以将成员添加到一个环境里:
 
@@ -82,9 +82,9 @@ Rancher 支持将资源分组归属到多个环境。每个环境具有自己独
 
 环境模版可以让用户定义需要部署的基础设施服务组合。基础设施服务包括(但不限于)容器编排 (即 Cattle，Kubernetes、[Mesos](/docs/rancher1/infrastructure/mesos/_index)、[Swarm](/docs/rancher1/infrastructure/swarm/_index))、[网络](/docs/rancher1/rancher-service/networking/_index)、Rancher 服务 (即 [健康检查](/docs/rancher1/infrastructure/cattle/health-checks/_index)、[DNS](/docs/rancher1/rancher-service/dns-service/_index)、[Metadata](/docs/rancher1/rancher-service/metadata-service/_index)、[调度](/docs/rancher1/infrastructure/cattle/scheduling/_index)、服务发现、[存储](/docs/rancher1/rancher-service/storage-services/_index)。
 
-容器的编排方式很多，Rancher 提供了一套默认的模版以及推荐使用的基础设施服务用于容器编排。其中的一些基础设施服务(Rancher 调度器只能在 Cattle 环境下使用 )，其他的编排引擎也依赖他们，因为这些服务被用来启动其它基础设施服务。除了默认的模版，您也可以创建自己的模版。通过自己创建模版，您可以选者环境中任何您想要的基础设施服务组合。只有[所有者](#所有者)或[管理员](/docs/rancher1configurations/environments/access-control/_index#管理员)可以查看和编辑环境的基础设施服务。
+容器的编排方式很多，Rancher 提供了一套默认的模版以及推荐使用的基础设施服务用于容器编排。其中的一些基础设施服务(Rancher 调度器只能在 Cattle 环境下使用 )，其他的编排引擎也依赖他们，因为这些服务被用来启动其它基础设施服务。除了默认的模版，您也可以创建自己的模版。通过自己创建模版，您可以选者环境中任何您想要的基础设施服务组合。只有[所有者](#所有者)或[管理员](/docs/rancher1/configurations/environments/access-control/_index#管理员)可以查看和编辑环境的基础设施服务。
 
-在和其它用户共享环境前， 我们推荐先设置好[访问控制](/docs/rancher1configurations/environments/access-control/_index)。用户被加入一个环境后, 他们就拥有了创建服务和管理资源的权限。
+在和其它用户共享环境前， 我们推荐先设置好[访问控制](/docs/rancher1/configurations/environments/access-control/_index)。用户被加入一个环境后, 他们就拥有了创建服务和管理资源的权限。
 
 > **注意:** 基础设施资源不可跨环境共享。[镜像仓库](/docs/rancher1/configurations/environments/registries/_index)、[证书](/docs/rancher1/configurations/environments/certificates/_index) 和环境 API 密钥也不能跨环境共享。
 
