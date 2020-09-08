@@ -6,7 +6,7 @@ title: Mesos
 
 ## 创建一个 Mesos 环境
 
-在左上角的环境的下拉菜单中，点击**环境管理**。通过点击**添加环境**去创建一个新的环境，需要填写**名称**，**描述**(可选)，并选择 Mesos 作为编排引擎的环境模版。如果启用了[访问控制](/docs/rancher1configurations/environments/access-control/_index)，您可以在环境中[编辑成员](/docs/rancher1/configurations/environments/_index#成员编辑)并选择他们的[成员角色](/docs/rancher1/configurations/environments/_index#成员角色)。所有被添加到成员列表的用户都能访问您的环境。
+在左上角的环境的下拉菜单中，点击**环境管理**。通过点击**添加环境**去创建一个新的环境，需要填写**名称**，**描述**(可选)，并选择 Mesos 作为编排引擎的环境模版。如果启用了[访问控制](/docs/rancher1/configurations/environments/access-control/_index)，您可以在环境中[编辑成员](/docs/rancher1/configurations/environments/_index#成员编辑)并选择他们的[成员角色](/docs/rancher1/configurations/environments/_index#成员角色)。所有被添加到成员列表的用户都能访问您的环境。
 
 在创建 Mesos 环境后，您可以在左上角环境的下拉菜单中切换到您的环境，或者在环境管理页面中，在对应环境的下拉选项中点击 **切换到此环境** 。
 

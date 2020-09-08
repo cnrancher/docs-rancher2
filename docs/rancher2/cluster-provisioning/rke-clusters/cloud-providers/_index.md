@@ -16,7 +16,7 @@ keywords:
   - 配置说明
 ---
 
-**Cloud Provider** 是 Kubernetes 中的一个模块，提供用于管理节点，负载均衡器和网络路由的接口。有关更多信息，请参考[有关 Cloud Provider 的 Kubernetes 官方文档](https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/)。
+**Cloud Provider** 是 Kubernetes 中的一个模块，提供用于管理节点，负载均衡器和网络路由的接口。有关更多信息，请参考[有关 Cloud Provider 的 Kubernetes 官方文档](https://kubernetes.io/zh/docs/concepts/cluster-administration/cloud-providers/)。
 
 在 Rancher 中设置 Cloud Provider 后，如果您使用的云提供商支持这种自动化，在部署 Kubernetes YAML 文件时，Rancher Server 可以自动创建新节点，负载均衡器或持久化存储设备。
 
@@ -44,7 +44,7 @@ Rancher 支持的 Cloud Provider 包括：
 
 ## 设置 自定义 Cloud Provider
 
-任何的 [Kubernetes Cloud Provider](https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/)，都可以通过`自定义` Cloud Provider 进行配置。
+任何的 [Kubernetes Cloud Provider](https://kubernetes.io/zh/docs/concepts/cluster-administration/cloud-providers/)，都可以通过`自定义` Cloud Provider 进行配置。
 
 对于自定义 Cloud Provider 选项，您可以参考 [RKE 文档](/docs/rke/config-options/cloud-providers/_index)，了解如何通过编辑 YAML 的方式，配置 Cloud Provider。以下还有一些更具体的 Cloud Provider 配置说明文档：
 

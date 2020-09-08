@@ -35,7 +35,8 @@ $ sudo docker logs -f <CONTAINER_ID>
 
 Rancher UI 的默认端口是 `8080`。所以为了访问 UI，需打开`http://<SERVER_IP>:8080`。需要注意的事，如果您的浏览器和 Rancher Server 是运行在同一主机上的，您需要通过主机的**真实 IP 地址**访问，比如 `http://192.168.1.100:8080` ，而不是 `http://localhost:8080` 或`http://127.0.0.1:8080`，以防在添加主机的时候使用了不可达的 IP 而出现问题。
 
-> **注意:** 1. 初始安装时 Rancher 的访问控制并未配置，任何能够访问您的 IP 地址的人，都可以访问您的 UI 和 API。我们建议您配置 [访问控制](/docs/rancher1configurations/environments/access-control/_index). 2. 国内的公有云主机，如果需要使用 80 和 8080 端口，需备案后才可以使用。
+> **注意:** 1. 初始安装时 Rancher 的访问控制并未配置，任何能够访问您的 IP 地址的人，都可以访问您的 UI 和 API。我们建议您配置 [访问控制](/docs/rancher1/configurations/environments/access-control/_index). 2. 国内的公有云主机，如果需要使用 80 和 8080 端口，需备案后才可以使用。
+
 
 ## 添加主机
 

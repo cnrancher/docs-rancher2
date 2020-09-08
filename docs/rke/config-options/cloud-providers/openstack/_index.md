@@ -103,4 +103,4 @@ Openstack 配置选项分为以下五个类别：
 | search-order    | string | 否       |
 | request-timeout | int    | 否       |
 
-更多关于 Openstack 配置选项的信息请参考[Kubernetes 官方文档](https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/#openstack)。
+更多关于 Openstack 配置选项的信息请参考[Kubernetes 官方文档](https://kubernetes.io/zh/docs/concepts/cluster-administration/cloud-providers/#openstack)。

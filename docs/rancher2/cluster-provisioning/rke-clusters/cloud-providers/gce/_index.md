@@ -1,6 +1,6 @@
 ---
 title: Google
-description: 在本部分中，您将学习如何为 Rancher 中的自定义集群启用 Google Compute Engine（GCE）Cloud Provider。在自定义集群中，Rancher 可以将 Kubernetes 集群安装在现有节点上。GCE Cloud Provider 的官方 Kubernetes 文档在[此处](https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/#gce)。
+description: 在本部分中，您将学习如何为 Rancher 中的自定义集群启用 Google Compute Engine（GCE）Cloud Provider。在自定义集群中，Rancher 可以将 Kubernetes 集群安装在现有节点上。GCE Cloud Provider 的官方 Kubernetes 文档在[此处](https://kubernetes.io/zh/docs/concepts/cluster-administration/cloud-providers/#gce)。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -18,7 +18,7 @@ keywords:
 
 在本部分中，您将学习如何为 Rancher 中的自定义集群启用 Google Compute Engine（GCE）Cloud Provider。在自定义集群中，Rancher 可以将 Kubernetes 集群安装在现有节点上。
 
-GCE Cloud Provider 的官方 Kubernetes 文档在[此处](https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/#gce)。
+GCE Cloud Provider 的官方 Kubernetes 文档在[此处](https://kubernetes.io/zh/docs/concepts/cluster-administration/cloud-providers/#gce)。
 
 > **前提条件：** GCE 上 的 `Identity and API` 服务账号需要 `Computer Admin` 权限。
 

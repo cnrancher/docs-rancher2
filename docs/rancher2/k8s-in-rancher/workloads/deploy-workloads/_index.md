@@ -51,7 +51,7 @@ keywords:
       > 挂载一个 Amazon EBS 卷:
       >
       > - 在 [Amazon AWS](https://aws.amazon.com/)，节点必须位于相同的可用性区域，并且拥有附加/卸载卷的 IAM 权限。
-      > - 集群必须配置了 [AWS Cloud Provider](https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/#aws)选项。有关启用此选项的更多信息，请参见[创建 Amazon EC2 集群](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/ec2/_index)或[创建自定义集群](/docs/rancher2/cluster-provisioning/rke-clusters/custom-nodes/_index)。
+      > - 集群必须配置了 [AWS Cloud Provider](https://kubernetes.io/zh/docs/concepts/cluster-administration/cloud-providers/#aws)选项。有关启用此选项的更多信息，请参见[创建 Amazon EC2 集群](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/ec2/_index)或[创建自定义集群](/docs/rancher2/cluster-provisioning/rke-clusters/custom-nodes/_index)。
 
 9.  点击**显示高级选项**来配置：
 

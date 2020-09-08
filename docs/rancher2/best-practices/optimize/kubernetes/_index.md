@@ -128,7 +128,7 @@ services:
       ### 以下四个参数配套使用，当节点上的可用资源少于这个值时但大于硬驱逐阈值时候，会等待eviction-soft-grace-period设置的时长；
       ### 等待中每10s检查一次，当最后一次检查还触发了软驱逐阈值就会开始驱逐，驱逐不会直接Kill POD，先发送停止信号给POD，然后等待eviction-max-pod-grace-period设置的时长；
       ### 在eviction-max-pod-grace-period时长之后，如果POD还未退出则发送强制kill POD"
-      eviction-soft: "memory.available<500Mi,nodefs.available<50%,imagefs.available<50%,nodefs.inodesFree<10%"
+      eviction-soft: "memory.available<500Mi,nodefs.available<80%,imagefs.available<80%,nodefs.inodesFree<10%"
       eviction-soft-grace-period: "memory.available=1m30s,nodefs.available=1m30s,imagefs.available=1m30s,nodefs.inodesFree=1m30s"
       eviction-max-pod-grace-period: "30"
       eviction-pressure-transition-period: "30s"

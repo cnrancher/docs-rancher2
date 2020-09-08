@@ -2,7 +2,8 @@
 title: 主机驱动
 ---
 
-[Docker-machine](https://docs.docker.com/machine/)驱动可被添加到 Rancher 中，以便这些驱动可以将主机添加到 Rancher 中。只有[管理员](/docs/rancher1configurations/environments/access-control/_index#管理员)可以设置哪些主机驱动可见，这个在**系统管理** -> **主机驱动**。
+[Docker-machine](https://docs.docker.com/machine/)驱动可被添加到 Rancher 中，以便这些驱动可以将主机添加到 Rancher 中。只有[管理员](/docs/rancher1/configurations/environments/access-control/_index#管理员)可以设置哪些主机驱动可见，这个在**系统管理** -> **主机驱动**。
+
 
 只有**启用**的主机驱动才能在**基础架构** -> **添加主机**的页面上显示出来。默认情况下，Rancher 提供了许多主机驱动，但是只有一些是**启用**状态。
 

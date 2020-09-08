@@ -14,7 +14,8 @@ Rancher 提供了一个应用商店，通过商店中的应用程序模版的可
 
 目前有两类的应用商店可以添加到 Rancher。全局应用商店以及环境应用商店。在全局的应用商店中，应用商店的模版会在所有的环境中。在环境应用商店中，应用商店的模版只会在对应的环境中生效。
 
-Rancher 的[管理员](/docs/rancher1configurations/environments/access-control/_index)可以在 **系统管理** -> **系统设置** 添加或者移除全局应用商店。
+
+Rancher 的[管理员](/docs/rancher1/configurations/environments/access-control/_index)可以在 **系统管理** -> **系统设置** 添加或者移除全局应用商店。
 
 Rancher 环境的用户可以在特定的 Rancher 环境中通过**应用商店**页面，右上角的**管理**去添加或者删除环境应用商店。
 
