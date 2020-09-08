@@ -37,6 +37,7 @@ Rancher UI 的默认端口是 `8080`。所以为了访问 UI，需打开`http://
 
 > **注意:** 1. 初始安装时 Rancher 的访问控制并未配置，任何能够访问您的 IP 地址的人，都可以访问您的 UI 和 API。我们建议您配置 [访问控制](/docs/rancher1/configurations/environments/access-control/_index). 2. 国内的公有云主机，如果需要使用 80 和 8080 端口，需备案后才可以使用。
 
+
 ## 添加主机
 
 在这里，为了简化操作，我们将添加运行着 Rancher Server 的主机为 Rancher 内的主机。在实际的生产环境中，请使用专用的主机来运行 Rancher Server。

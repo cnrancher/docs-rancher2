@@ -12,6 +12,7 @@ Rancher 通过该设置确定您的主机连接 Rancher API 所用的 URL。默�
 
 如果为 Rancher 启用了[访问控制](/docs/rancher1/configurations/environments/access-control/_index)功能，则只有**管理员**才能更改主机注册地址。默认情况下，第一个**管理员**是配置启用访问控制的用户。如果仍未配置访问控制，则该任何用户都可以更新主机注册地址。可以在**系统设置** -> **主机注册地址**选项卡中更新此选项。
 
+
 ### 应用商店
 
 默认情况下，[应用商店](/docs/rancher1/configurations/catalog/_index)有三类可使用的应用:
