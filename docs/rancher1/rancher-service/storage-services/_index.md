@@ -6,7 +6,7 @@ Rancher 提供了不同的存储服务，从而使用户可以将存储卷映射
 
 ## 配置存储服务
 
-当我们创建[环境模板](/docs/rancher1/configurations/environments/#什么是环境模版)时，用户可以从应用商店选择需要在环境中的使用存储服务。
+当我们创建[环境模板](/docs/rancher1/configurations/environments/_index#什么是环境模版)时，用户可以从应用商店选择需要在环境中的使用存储服务。
 
 或者，如果用户已经创建了一个环境，您可以从 [应用商店](/docs/rancher1/configurations/catalog/_index)中选择并启动一个存储服务。
 

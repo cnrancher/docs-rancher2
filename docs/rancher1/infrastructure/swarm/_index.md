@@ -2,7 +2,7 @@
 title: Swarm
 ---
 
-在 Rancher 中部署 Swarm，您首先需要添加一个新的[环境](/docs/rancher1/configurations/environments/)。这个环境需要使用编排引擎为**Swarm**的[环境模版](/docs/rancher1/configurations/environments/_index#什么是环境模版)进行创建。
+在 Rancher 中部署 Swarm，您首先需要添加一个新的[环境](/docs/rancher1/configurations/environments/_index)。这个环境需要使用编排引擎为**Swarm**的[环境模版](/docs/rancher1/configurations/environments/_index#什么是环境模版)进行创建。
 
 ## 需求
 

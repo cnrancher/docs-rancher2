@@ -6,7 +6,7 @@ title: 系统设置
 
 ### 主机注册
 
-在启动任何主机之前，您需要完成主机注册地址设置。主机注册地址是用来设置 Rancher Server 将如何与主机进行连接。如果您已经设置了[访问控制](/docs/rancher1/configurations/environments/access-control)，则不会提示您设置主机注册地址，因为 Rancher 假定您的 URL 是可以被访问到的。
+在启动任何主机之前，您需要完成主机注册地址设置。主机注册地址是用来设置 Rancher Server 将如何与主机进行连接。如果您已经设置了[访问控制](/docs/rancher1/configurations/environments/access-control/_index)，则不会提示您设置主机注册地址，因为 Rancher 假定您的 URL 是可以被访问到的。
 
 Rancher 通过该设置确定您的主机连接 Rancher API 所用的 URL。默认情况下，Rancher 将使用访问 UI 的 URL。如果您选择更改注册地址，请确保设置用于连接到 Rancher API 的端口。如果您使用配置了 SSL 的 Rancher Server，请确保将协议更改为`https`。此注册地址设置决定了[添加自定义主机](/docs/rancher1/infrastructure/hosts/custom/_index)的命令。
 
