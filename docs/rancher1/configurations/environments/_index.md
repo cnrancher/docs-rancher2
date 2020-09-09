@@ -81,6 +81,10 @@ Rancher 支持将资源分组归属到多个环境。每个环境具有自己独
 ## 什么是环境模版
 
 环境模版可以让用户定义需要部署的基础设施服务组合。基础设施服务包括(但不限于)容器编排 (即 Cattle，Kubernetes、[Mesos](/docs/rancher1/infrastructure/mesos/_index)、[Swarm](/docs/rancher1/infrastructure/swarm/_index))、[网络](/docs/rancher1/rancher-service/networking/_index)、Rancher 服务 (即 [健康检查](/docs/rancher1/infrastructure/cattle/health-checks/_index)、[DNS](/docs/rancher1/rancher-service/dns-service/_index)、[Metadata](/docs/rancher1/rancher-service/metadata-service/_index)、[调度](/docs/rancher1/infrastructure/cattle/scheduling/_index)、服务发现、[存储](/docs/rancher1/rancher-service/storage-services/_index)。
+<<<<<<< HEAD
+=======
+
+> > > > > > > 5612e46f7b39bd348476770715e4e7914a83d336
 
 容器的编排方式很多，Rancher 提供了一套默认的模版以及推荐使用的基础设施服务用于容器编排。其中的一些基础设施服务(Rancher 调度器只能在 Cattle 环境下使用 )，其他的编排引擎也依赖他们，因为这些服务被用来启动其它基础设施服务。除了默认的模版，您也可以创建自己的模版。通过自己创建模版，您可以选者环境中任何您想要的基础设施服务组合。只有[所有者](#所有者)或[管理员](/docs/rancher1/configurations/environments/access-control/_index#管理员)可以查看和编辑环境的基础设施服务。
 
