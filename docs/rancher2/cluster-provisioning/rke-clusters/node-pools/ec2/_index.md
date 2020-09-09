@@ -28,6 +28,8 @@ keywords:
   - [允许加密 EBS 卷的 IAM 策略示例](#允许加密-ebs-卷的-iam-策略示例)
 - 为用户添加**IAM 策略许可**。请参照[Amazon 文档：为用户添加许可](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_change-permissions.html#users_change_permissions-add-console)。
 
+> **注意：** Rancher v2.4.6 和 v2.4.7 存在一个问题，即创建、编辑或克隆 Amazon EC2 节点模板需要`kms:ListKeys`权限。这一要求在 Rancher v2.4.8 中被删除。
+
 ## 创建 EC2 集群
 
 创建集群的步骤因您的 Rancher 版本而异。
@@ -172,6 +174,8 @@ keywords:
 - **通过 kubectl CLI 和授权的集群地址访问您的集群：** 请按照[这些步骤](/docs/rancher2/cluster-admin/cluster-access/kubectl/_index)来通过 kubectl 直接访问您的集群，而不需要通过 Rancher 进行认证。我们建议您设定此方法访问集群，这样在您无法连接 Rancher 时您仍然能够访问集群。
 
 ## IAM 策略示例
+
+**注意：** Rancher v2.4.6 和 v2.4.7 存在一个问题，即创建、编辑或克隆 Amazon EC2 节点模板需要`kms:ListKeys`权限。这一要求在 Rancher v2.4.8 中被删除。
 
 ```json
 {
