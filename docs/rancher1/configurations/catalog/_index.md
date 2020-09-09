@@ -6,14 +6,14 @@ title: 应用商店
 
 ---
 
-Rancher 提供了一个应用商店，通过商店中的应用程序模版的可以简化部署复杂应用的过程。进入**应用商店**页面，您可以看到所有的[应用](/docs/rancher1/configurations/environments/settings/#应用商店)的应用模版。在**官方认证**应用商店下包含了[Rancher 认证的应用](https://github.com/rancher/rancher-catalog)中的应用模版，在**社区共享**应用商店下包含了[社区贡献的应用](https://github.com/rancher/community-catalog)的应用模版。Rancher 只维护官方认证的 _认证_ 模版。
+
+Rancher 提供了一个应用商店，通过商店中的应用程序模版的可以简化部署复杂应用的过程。进入**应用商店**页面，您可以看到所有的[应用](/docs/rancher1/configurations/environments/settings/_index#应用商店)的应用模版。在**官方认证**应用商店下包含了[Rancher 认证的应用](https://github.com/rancher/rancher-catalog)中的应用模版，在**社区共享**应用商店下包含了[社区贡献的应用](https://github.com/rancher/community-catalog)的应用模版。Rancher 只维护官方认证的 _认证_ 模版。
 
 ## 添加应用商店 Catalogs
 
 添加一个应用商店只需要添加一个应用商店名称，Git 地址和一个分支名称。Git 地址需要是`git clone`[可以处理的](https://git-scm.com/docs/git-clone#_git_urls_a_id_urls_a)。分支名称是您应用商店 Git 仓库的一个分支。如果不提供分支名称，我们默认会使用`master`。 您无论什么时候添加一个应用商店项目，它都会在您的应用商店中立刻生效。
 
 目前有两类的应用商店可以添加到 Rancher。全局应用商店以及环境应用商店。在全局的应用商店中，应用商店的模版会在所有的环境中。在环境应用商店中，应用商店的模版只会在对应的环境中生效。
-
 
 Rancher 的[管理员](/docs/rancher1/configurations/environments/access-control/_index)可以在 **系统管理** -> **系统设置** 添加或者移除全局应用商店。
 
