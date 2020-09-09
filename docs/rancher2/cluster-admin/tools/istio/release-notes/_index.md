@@ -1,5 +1,5 @@
 ---
-title: 版本说明 - v1.5.8
+title: 版本说明 - v1.5.9
 description: 本节描述访问 Istio 功能所需的权限以及如何配置对 Kiali 和 Jaeger 可视化的访问。默认情况下，只有集群管理员可以为集群启用 Istio、为 Istio 配置资源分配、查看 Prometheus，Grafana，Kiali 和 Jaeger 的 UI。
 keywords:
   - rancher 2.0中文文档
@@ -15,7 +15,7 @@ keywords:
   - 集群访问控制
   - 告警
   - Istio
-  - 版本说明 - v1.5.8
+  - 版本说明 - v1.5.9
 ---
 
 ## v1.5.x 版本重要说明
@@ -26,6 +26,14 @@ keywords:
 
 > **注意：** Rancher 继续使用 Helm 安装方法，它产生的架构与 istioctl 安装不同。
 
-## 已知问题
+## v1.5.9 已修复的问题
 
-- Kiali 流量图目前无法使用 [#24924](https://github.com/istio/istio/issues/24924)。
+- Kiali 流量图恢复正常，可以使用 [#28109](https://github.com/rancher/rancher/issues/28109)。
+
+## v1.5.9 已知问题
+
+- Kiali 流量图在 UI 中的显示的位置有偏移[#28207](https://github.com/rancher/rancher/issues/28207)。
+
+## v1.5.8 已知问题
+
+- Kiali 流量图目前无法使用[#24924](https://github.com/istio/istio/issues/24924)，已在 v1.5.9 中修复该问题。
