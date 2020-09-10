@@ -8,7 +8,7 @@ Octopus-UI 当前仅适用于 k3s 集群。
 
 ## 从 Helm 图表中安装 Octopus-UI
 
-默认情况下，`Octopus-UI`在 Octopus[Helm 图表](./install/_index)安装时会自动部署，您始终可以使用以下命令将其打开或关闭：
+默认情况下，`Octopus-UI`在 Octopus[Helm 图表](../install/_index)安装时会自动部署，您始终可以使用以下命令将其打开或关闭：
 
 ```shell script
 $ helm upgrade -n octopus-system --set octopus-ui.enabled=true octopus octopus/octopus

@@ -93,7 +93,7 @@ keywords:
 
 [Amazon 文档：标记您的 Amazon EC2 资源](https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/Using_Tags.html)
 
-> **注意：** 您无需在 Kubernetes 中配置 **Cloud Provider** 即可使用 Amazon EC2 实例。如果您想使用特定的 Kubernetes Cloud Provider 功能，则需要配置 **Cloud Provider** 。有关更多信息，请参阅 [Kubernetes Cloud Provider](https://kubernetes.io/zh/docs/concepts/cluster-administration/cloud-providers/_index)。
+> **注意：** 您无需在 Kubernetes 中配置 **Cloud Provider** 即可使用 Amazon EC2 实例。如果您想使用特定的 Kubernetes Cloud Provider 功能，则需要配置 **Cloud Provider** 。有关更多信息，请参阅 [Kubernetes Cloud Provider](https://kubernetes.io/zh/docs/concepts/cluster-administration/cloud-providers/)。
 
 以下资源需要标记上`ClusterID`：
 

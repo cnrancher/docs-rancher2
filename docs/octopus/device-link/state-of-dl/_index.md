@@ -112,7 +112,7 @@ spec:
                                       '
 ```
 
-您可以检查[Adaptor 的设计](../adaptors/adaptor)来了解`limb`如何检测适配器。 如果适配器可用，那么`limb`将尝试创建与`spec.model`相关的设备实例：
+您可以检查 Adaptor 的设计来了解`limb`如何检测适配器。 如果适配器可用，那么`limb`将尝试创建与`spec.model`相关的设备实例：
 
 ```text
            │

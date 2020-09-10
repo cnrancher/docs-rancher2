@@ -44,7 +44,7 @@ tree -d adaptors/<adaptor-name>
 
 ## Build 管理
 
-适配器遵循 Octopus 的构建管理，请查看[开发 Octopus](./develop)以获得更多详细信息。 与 Octopus 一样，Adaptor 的管理过程包括多个阶段和多个操作。 为方便起见，动作名称代表当前阶段。 动作流程的整体关系描述如下：
+适配器遵循 Octopus 的构建管理，请查看[开发 Octopus](/docs/octopus/develop/_index)以获得更多详细信息。 与 Octopus 一样，Adaptor 的管理过程包括多个阶段和多个操作。 为方便起见，动作名称代表当前阶段。 动作流程的整体关系描述如下：
 
 ```text
         generate -> mod -> lint -> build -> package -> deploy

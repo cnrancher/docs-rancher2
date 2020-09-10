@@ -226,6 +226,6 @@ spec:
 
 #### BluetoothDeviceExtension
 
-| 参数 | 描述             | 类型                                                         | 是否必填 |
-| :--- | :--------------- | :----------------------------------------------------------- | :------- |
-| mqtt | 指定 MQTT 的设置 | \*[v1alpha1.MQTTOptionsSpec](./mqtt-extension#specification) | 否       |
+| 参数 | 描述             | 类型                                                                                     | 是否必填 |
+| :--- | :--------------- | :--------------------------------------------------------------------------------------- | :------- |
+| mqtt | 指定 MQTT 的设置 | \*[v1alpha1.MQTTOptionsSpec](/docs/octopus/adaptors/mqtt-extension/_index#specification) | 否       |

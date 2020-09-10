@@ -79,7 +79,7 @@ sudo k3s kubectl proxy
 
 现在可以通过以下网址访问仪表盘：
 
-- http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+- `http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/`
 - 使用`admin-user` Bearer Token `Sign In`
 
 ### 高级：远程访问仪表板
