@@ -540,6 +540,6 @@ Octopus 提供了一个**templated topic**，以适应不同的 MQTT 发布和�
 ## 可用适配器列表
 
 - [Modbus](/docs/octopus/adaptors/modbus/_index)
-- [OPC-UA](docs/octopus/adaptors/opc-ua/_index)
-- [MQTT](docs/octopus/adaptors/mqtt/_index)
-- [Dummy](docs/octopus/adaptors/dummy/_index)
+- [OPC-UA](/docs/octopus/adaptors/opc-ua/_index)
+- [MQTT](/docs/octopus/adaptors/mqtt/_index)
+- [Dummy](/docs/octopus/adaptors/dummy/_index)
