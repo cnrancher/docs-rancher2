@@ -12,7 +12,7 @@ module.exports = {
             trackingID: "692a488c8d0d137240f1a940bde32441",
         },
         navbar: {
-            title: "Rancher 2.x",
+            title: "Rancher",
             logo: {
                 alt: "Rancher Logo",
                 src: "img/rancher-logo-cow-white.svg",
