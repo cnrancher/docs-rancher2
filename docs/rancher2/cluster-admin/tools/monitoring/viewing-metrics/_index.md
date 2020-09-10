@@ -47,7 +47,7 @@ Rancher 的指标线图在多个位置可用：
 
 ## Grafana
 
-在启用[集群监控](/docs/rancher2/cluster-admin/tools/monitoring/_index)或[项目监控](/docs/project-admin/tools/monitoring/_index)后，Rancher 会自动创建一条可跳转到 Grafana 实例的链接。Grafana 允许您查询，可视化，设置告警并最终了解您的集群和工作负载状态。有关 Grafana 及其功能的更多信息，请查看 [Grafana 网站](https://grafana.com/grafana)。
+在启用[集群监控](/docs/rancher2/cluster-admin/tools/monitoring/_index)或[项目监控](/docs/rancher2/project-admin/tools/monitoring/_index)后，Rancher 会自动创建一条可跳转到 Grafana 实例的链接。Grafana 允许您查询，可视化，设置告警并最终了解您的集群和工作负载状态。有关 Grafana 及其功能的更多信息，请查看 [Grafana 网站](https://grafana.com/grafana)。
 
 ### 访问权限
 

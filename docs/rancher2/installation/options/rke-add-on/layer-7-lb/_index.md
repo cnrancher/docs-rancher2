@@ -126,7 +126,7 @@ RKE 使用 YAML 配置文件来安装和配置 Kubernetes 集群。根据要使�
 
     > **注意：**
     >
-    > 使用 RHEL / CentOS 时，由于https://bugzilla.redhat.com/show_bug.cgi?id=1527565 导致 SSH 用户无法成为 root 用户。有关 RHEL / CentOS 的特定要求，请参阅[操作系统](/docs/rke/installation/os/_index)要求。
+    > 使用 RHEL / CentOS 时，由于https://bugzilla.redhat.com/show_bug.cgi?id=1527565 导致 SSH 用户无法成为 root 用户。有关 RHEL / CentOS 的特定要求，请参阅[操作系统](/docs/rke/os/_index)要求。
 
         nodes:
             # The IP address or hostname of the node

@@ -287,9 +287,9 @@ DummyProtocolDevicePropertyType 描述了设备属性的类型。
 
 #### DummyDeviceExtension
 
-| 参数 | 描述                 | 类型                                                         | 是否必填 |
-| :--- | :------------------- | :----------------------------------------------------------- | :------- |
-| mqtt | 说明 MQTT 插件的配置 | \*[v1alpha1.MQTTOptionsSpec](./mqtt-extension#specification) | 是       |
+| 参数 | 描述                 | 类型                                                                                     | 是否必填 |
+| :--- | :------------------- | :--------------------------------------------------------------------------------------- | :------- |
+| mqtt | 说明 MQTT 插件的配置 | \*[v1alpha1.MQTTOptionsSpec](/docs/octopus/adaptors/mqtt-extension/_index#specification) | 是       |
 
 ## Demo 演示
 

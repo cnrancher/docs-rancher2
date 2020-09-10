@@ -8,7 +8,7 @@ title: 快速入门
 
 先安装一个 64 位的 Ubuntu 16.04 Linux 主机，其内核必须高于 3.10。您可以使用笔记本、虚拟机或物理服务器。请确保该 Linux 主机内存不低于*1GB*。在该主机上安装 [支持的 Docker 版本](/docs/rancher1/infrastructure/hosts/_index#docker版本适用对比)。
 
-在主机上安装 Docker 的方法请参照[Docker](https://docs.docker.com/engine/installation/linux/ubuntulinux/_index)网站的安装说明。
+在主机上安装 Docker 的方法请参照[Docker](https://https://docs.docker.com/engine/install/ubuntu/)网站的安装说明。
 
 > **注意:** 目前 Rancher 尚不支持 Docker for Windows 以及 Docker for Mac。
 

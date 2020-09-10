@@ -35,7 +35,7 @@ Rancher 支持使用 `docker machine` 来管理 [Exoscale](https://www.exoscale.
 3. 选择 **Instance Profile(实例描述)**；
 4. 输入磁盘大小到 **Root Size(主机大小)**；
 5. 必要时，添加 **[labels(标签)](/docs/rancher1/infrastructure/hosts/_index#labels)** 来辅助管理主机以及 [调度服务或负载均衡](/docs/rancher1/infrastructure/cattle/scheduling/_index)，也可以 [通过 DNS-IP 映射来管理不在 Rancher 内启动的服务](/docs/rancher1/infrastructure/cattle/external-dns-service/_index#为外部dns使用特定的ip)；
-6. 必要时，通过 **Advanced Options(高级选项)**，定制化 [Docker engine options(Docker 引擎选项)](https://docs.docker.com/machine/reference/create/_index#specifying-configuration-options-for-the-created-docker-engine) 来控制 `docker-machine create` 时用到的选项指令；
+6. 必要时，通过 **Advanced Options(高级选项)**，定制化 [Docker engine options(Docker 引擎选项)](https://docs.docker.com/machine/reference/create/) 来控制 `docker-machine create` 时用到的选项指令；
 7. 一切准备就绪后, 点击 **Create(创建)**。
 
 > **注意:** 目前 Exoscale 的操作界面上并没有显示所有 `docker machine`的选项。Rancher 默认使用的 Exoscale 的终端(`https://api.exoscale.ch/compute`)，镜像(`ubuntu-14.04`)以及可用地域(`ch-gva-2`)。

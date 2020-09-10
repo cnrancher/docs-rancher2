@@ -20,10 +20,10 @@ keywords:
 
 Octopus 提供了两种的方法与[MQTT](http://mqtt.org/)集成：
 
-1. [modbus](./modbus)、[opcua](./opc-ua)、[ble](./ble)和[dummy](./dummy)，都支持通过 MQTT 代理同步设备状态。
-1. 如果设备支持 MQTT，则可以将[MQTT 适配器](./mqtt)用作首选。
+1. [modbus](/docs/octopus/adaptors/modbus/_index)、[opcua](/docs/octopus/adaptors/opcua/_index)、[ble](/docs/octopus/adaptors/ble/_index)和[dummy](/docs/octopus/adaptors/dummy/_index)，都支持通过 MQTT 代理同步设备状态。
+1. 如果设备支持 MQTT，则可以将[MQTT 适配器](/docs/octopus/adaptors/modbus/_index)用作首选。
 
-> 这篇文章主要概述了第一种方法的细节，如果您想了解更多关于 MQTT 适配器的信息，请查看[MQTT 适配器](./mqtt)。 如果以上开箱即用的方式无法满足您的要求，则可以按照[CONTRIBUTING](https://github.com/cnrancher/octopus/blob/master/CONTRIBUTING.md)提出您的想法，或[开发新的适配器](./develop/_index)。
+> 这篇文章主要概述了第一种方法的细节，如果您想了解更多关于 MQTT 适配器的信息，请查看[MQTT 适配器](../mqtt/_index)。 如果以上开箱即用的方式无法满足您的要求，则可以按照[CONTRIBUTING](https://github.com/cnrancher/octopus/blob/master/CONTRIBUTING.md)提出您的想法，或[开发新的适配器](/docs/octopus/adaptors/develop/_index)。
 
 > **说明：** MQTT 集成目前仅支持**write - [publish]**的模板主题。
 
@@ -59,7 +59,7 @@ Octopus 建议您参考[MQTT Essentials 中 MQTT 主题的最佳实践](https://
 
 octopus 重组了[github.com/eclipse/paho.mqtt.golang](https://github.com/eclipse/paho.mqtt.golang/blob/4c98a2381d16c21ed2f9f131cec2429b0348ab0f/options.go#L53-L87)的客户端参数，然后提供了一组配置选项。
 
-目前官方的适配器如[BLE](./ble/_index)、[Modbus](./modbus/_index)和[OPCua](./opcua/_index)都支持 MQTT 协议扩展，使用相同的配置(参考以下`spec.template.spec.extension.mqtt`)。
+目前官方的适配器如[BLE](../ble/_index)、[Modbus](../modbus/_index)和[opcua](/docs/octopus/adaptors/opcua/_index)都支持 MQTT 协议扩展，使用相同的配置(参考以下`spec.template.spec.extension.mqtt`)。
 
 ```YAML
 apiVersion: edge.cattle.io/v1alpha1
@@ -425,7 +425,7 @@ Octopus 提供了一个**templated topic**，以适应不同的 MQTT 发布和�
 - `:name`，替换为 DeviceLink 的[名称](https://github.com/kubernetes/apimachinery/blob/master/pkg/apis/meta/v1/types.go#L118)。
 - `:uid`，替换为 DeviceLink 的[UID](https://github.com/kubernetes/apimachinery/blob/master/pkg/apis/meta/v1/types.go#L167)。
 - `:path`，替换为自定义路径。
-- `:operator`，基于操作(`read` - [subscribe](https://www.hivemq.com/blog/mqtt-essentials-part-4-mqtt-publish-subscribe-unsubscribe/#subscribe), `write` - [publish](https://www.hivemq.com/blog/mqtt-essentials-part-4-mqtt-publish-subscribe-unsubscribe/#publish))进行替换。值得注意的是，`read`操作在 MQTT 扩展中不支持，但在[MQTT 适配器](./mqtt/_index)中运行良好。
+- `:operator`，基于操作(`read` - [subscribe](https://www.hivemq.com/blog/mqtt-essentials-part-4-mqtt-publish-subscribe-unsubscribe/#subscribe), `write` - [publish](https://www.hivemq.com/blog/mqtt-essentials-part-4-mqtt-publish-subscribe-unsubscribe/#publish))进行替换。值得注意的是，`read`操作在 MQTT 扩展中不支持，但在[MQTT 适配器](../mqtt/_index)中运行良好。
 
 模板化主题有以下两个特点：
 

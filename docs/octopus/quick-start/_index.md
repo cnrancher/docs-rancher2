@@ -87,7 +87,7 @@ keywords:
 
 ### 2. 部署 Octopus
 
-有[两种部署 Octopus 的方法](./install)，为方便起见，我们将通过一份 `all-in-one`的 YAML 文件来部署。 安装程序 YAML 文件位于 Github 上的[`deploy/e2e`](https://github.com/cnrancher/octopus/tree/master/deploy/e2e)目录下：
+有[两种部署 Octopus 的方法](/docs/octopus/install/_index)，为方便起见，我们将通过一份 `all-in-one`的 YAML 文件来部署。 安装程序 YAML 文件位于 Github 上的[`deploy/e2e`](https://github.com/cnrancher/octopus/tree/master/deploy/e2e)目录下：
 
 ```shell script
 kubectl apply -f https://raw.githubusercontent.com/cnrancher/octopus/master/deploy/e2e/all_in_one.yaml
@@ -310,7 +310,7 @@ spec:
 EOF
 ```
 
-DeviceLink 包含了[几种状态](./devicelink/state-of-dl)，如果我们发现其`PHASE`为**DeviceConnected**和`STATUS`为**Healthy**的状态下，我们就可以使用设备模型的 CRD 对象来查询其状态（即此处的 dummyspecialdevice）：
+DeviceLink 包含了[几种状态](/docs/octopus/device-link/state-of-dl/_index)，如果我们发现其`PHASE`为**DeviceConnected**和`STATUS`为**Healthy**的状态下，我们就可以使用设备模型的 CRD 对象来查询其状态（即此处的 dummyspecialdevice）：
 
 ```shell script
 kubectl get devicelink living-room-fan -n default

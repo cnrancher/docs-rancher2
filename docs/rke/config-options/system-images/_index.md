@@ -12,9 +12,9 @@ RKE 在部署 Kubernetes 的时候，会从镜像仓库中拉镜像。这些镜�
 
 下面是通过 RKE 部署 Kubernetes 所使用的系统镜像列表的一个例子。Kubernetes 的默认版本是与特定版本的系统镜像绑定的。
 
-- 对于 RKE v0.2.x 及以下版本，版本和系统镜像版本位于：https://github.com/rancher/types/blob/release/v2.2/apis/management.cattle.io/v3/k8s_defaults.go。
+- 对于 RKE v0.2.x 及以下版本，版本和系统镜像版本位于：https://github.com/rancher/types/blob/release/v2.2/apis/management.cattle.io/v3/k8s_defaults.go
 
-- 对于 RKE v0.3.0 及以上版本，版本和系统镜像版本位于：https://github.com/rancher/kontainer-driver-metadata/blob/master/rke/k8s_rke_system_images.go。
+- 对于 RKE v0.3.0 及以上版本，版本和系统镜像版本位于：https://github.com/rancher/kontainer-driver-metadata/blob/master/rke/k8s_rke_system_images.go
 
 > **注意：**随着 RKE 版本的发布，这些镜像的标签将不再是最新的。这个列表是针对`v1.10.3-rancher2`的。
 

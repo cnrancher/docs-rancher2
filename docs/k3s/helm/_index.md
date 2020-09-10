@@ -16,7 +16,7 @@ keywords:
 
 Helm 是 Kubernetes 的首选包管理工具。Helm 图表为 Kubernetes YAML 清单文件提供了模板化语法。通过 Helm，我们可以创建可配置的部署，而不仅仅是使用静态文件。有关创建自己的部署目录的更多信息，请查看[Helm 快速入门](https://helm.sh/docs/intro/quickstart/)。
 
-K3s 不需要任何特殊的配置就可以使用 Helm 命令行工具。只要确保你已经按照[集群访问](./cluster-access)一节正确设置了你的 kubeconfig。K3s 包含了一些额外的功能，使传统的 Kubernetes 资源清单和 Helm Charts 的部署更加容易。
+K3s 不需要任何特殊的配置就可以使用 Helm 命令行工具。只要确保你已经按照[集群访问](../cluster-access/_index)一节正确设置了你的 kubeconfig。K3s 包含了一些额外的功能，使传统的 Kubernetes 资源清单和 Helm Charts 的部署更加容易。
 
 本节涵盖以下主题：
 
@@ -136,6 +136,6 @@ spec:
 
 ## 从 Helm v2 升级
 
-如果你在以前的 K3s 版本中使用的是 Helm v2，你可以升级到 v1.17.0+k3s.1 或更新版本，Helm 2 仍然可以使用。如果你想迁移到 Helm 3，[this](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/)Helm 的博文介绍了如何使用插件成功迁移。更多信息请参考 Helm 3 的官方文档[这里](https://helm.sh/docs/)。从 v1.17.0+k3s.1 开始，K3s 可以处理 Helm v2 或 Helm v3。只要确保你已经按照[集群访问](.../cluster-access)一节中的例子正确设置了你的 kubeconfig。
+如果你在以前的 K3s 版本中使用的是 Helm v2，你可以升级到 v1.17.0+k3s.1 或更新版本，Helm 2 仍然可以使用。如果你想迁移到 Helm 3，[this](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/)Helm 的博文介绍了如何使用插件成功迁移。更多信息请参考 Helm 3 的官方文档[这里](https://helm.sh/docs/)。从 v1.17.0+k3s.1 开始，K3s 可以处理 Helm v2 或 Helm v3。只要确保你已经按照[集群访问](../cluster-access/_index)一节中的例子正确设置了你的 kubeconfig。
 
 注意，Helm 3 不再需要 Tiller 和`helm init`命令。详情请参考官方文档。

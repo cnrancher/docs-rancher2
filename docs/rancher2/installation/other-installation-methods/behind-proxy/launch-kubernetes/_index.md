@@ -62,7 +62,7 @@ sudo systemctl restart docker
 
 你需要在主机上有几个命令行工具，在那里你可以通过 SSH 访问 Linux 节点来创建集群并与之交互：
 
-- [RKE CLI binary](docs/rke/installation/_index)
+- [RKE CLI binary](/docs/rke/installation/_index)
 
 ```shell
 sudo curl -fsSL -o /usr/local/bin/rke https://github.com/rancher/rke/releases/download/v1.1.4/rke_linux-amd64

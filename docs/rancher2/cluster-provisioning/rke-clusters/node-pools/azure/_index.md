@@ -59,8 +59,8 @@ keywords:
 
 创建群集后，您可以通过 Rancher UI 访问它。作为最佳实践，我们建议设置这些替代方式来访问您的群集。
 
-- **使用 kubectl CLI 访问您的集群：**按照[这些步骤](/docs/cluster-admin/cluster-access/kubectl/_index)在您的工作站上使用 kubectl 访问集群。在这种情况下，你将通过 Rancher 服务器的认证代理进行认证，然后 Rancher 将把你连接到下游集群。这种方法可以让您在没有 Rancher 用户界面的情况下管理集群。
-- **使用 kubectl CLI 访问您的集群，使用授权的集群端点：**按照[这些步骤](/docs/cluster-admin/cluster-access/kubectl/_index)直接使用 kubectl 访问您的集群，而无需通过 Rancher 进行身份验证。我们建议设置这种替代方法来访问您的群集，这样在您无法连接到 Rancher 的情况下，您仍然可以访问群集。
+- **使用 kubectl CLI 访问您的集群：**按照[这些步骤](/docs/rancher2/cluster-admin/cluster-access/kubectl/_index)在您的工作站上使用 kubectl 访问集群。在这种情况下，你将通过 Rancher 服务器的认证代理进行认证，然后 Rancher 将把你连接到下游集群。这种方法可以让您在没有 Rancher 用户界面的情况下管理集群。
+- **使用 kubectl CLI 访问您的集群，使用授权的集群端点：**按照[这些步骤](/docs/rancher2/cluster-admin/cluster-access/kubectl/_index)直接使用 kubectl 访问您的集群，而无需通过 Rancher 进行身份验证。我们建议设置这种替代方法来访问您的群集，这样在您无法连接到 Rancher 的情况下，您仍然可以访问群集。
 
 ## 创建 Azure 节点模板
 
