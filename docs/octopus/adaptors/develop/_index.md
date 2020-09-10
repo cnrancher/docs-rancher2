@@ -51,7 +51,7 @@ tree -d adaptors/<adaptor-name>
                                        \ -> test -> verify -> e2e
 ```
 
-执行适配器的阶段可以运行`make adapter <adatpor-name> <stage name>`，例如，当对[dummy](./dummy)适配器执行`test`阶段时，请运行`make adapter dummy test `。
+执行适配器的阶段可以运行`make adapter <adatpor-name> <stage name>`，例如，当对[dummy](/docs/octopus/adaptors/dummy/_index)适配器执行`test`阶段时，请运行`make adapter dummy test `。
 
 要执行一个阶段，将执行先前序列中的所有动作，如果运行`make adapter dummy test`，则实际上包括执行`generate`，`mod`，`lint`，`build`和`test`动作。
 
