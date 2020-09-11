@@ -195,3 +195,4 @@ rancher up -d -s NewLetsChatApp
 ```
 
 在 Rancher 中，一个叫做**NewLetsChatApp**的应用将被创建，且所有服务都将在 Rancher 中运行起来。
+hi
