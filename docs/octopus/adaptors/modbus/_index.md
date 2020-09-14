@@ -32,9 +32,9 @@ Modbus 适配器实现了[goburrow/modbus](#github.com/goburrow/modbus)，支持
 
 - **离散输入寄存器**：即 DiscreteInputRegister，可读，1 位（关闭/打开）
 
-- **输入寄存器**：即 HoldingRegister，可读，16 位（0 至 65，535），本质上是测量值和状态
+- **输入寄存器**：即 InputRegister，可读可写，16 位（0 到 65，535），本质上是配置值
 
-- **保持寄存器**：即 InputRegister，可读可写，16 位（0 到 65，535），本质上是配置值
+- **保持寄存器**：即 HoldingRegister，可读，16 位（0 至 65，535），本质上是测量值和状态
 
 ## 注册信息
 
