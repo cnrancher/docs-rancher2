@@ -341,4 +341,24 @@ rpm -i https://rpm.rancher.io/k3s-selinux-0.1.1-rc1.el7.noarch.rpm
 
 你可以通过使用`--disable-selinux`标志启动 K3s 来禁用嵌入式 containerd 中的 SELinux。
 
-请注意，对 containerd 中 SELinux 的支持仍在开发中。进展情况可以在[这个 pull request](https://github.com/containerd/cri/pull/1246)中跟踪。
+要强制安装脚本记录一个警告而不是失败，您可以设置以下环境变量： `INSTALL_K3S_SELINUX_WARN=true`。`INSTALL_K3S_SELINUX_WARN=true`。
+
+启用或禁用 SELinux 的方式取决于 K3s 的版本。在 v1.19.x 之前，内置容器 d 的 SELinux 启用是自动的，但可以通过`--disable-selinux`来禁用。在 v1.19.x 及以后的版本中，启用 SELinux 必须通过`--selinux`标志或配置文件条目进行肯定的配置。同时指定"--selinux "和（已废弃）"--disable-selinux "标志的服务器和代理将无法启动。
+
+不支持在 SELinux 下使用自定义的`--data-dir`。要自定义它，你很可能需要编写自己的自定义策略。为了获得指导，你可以参考[container/container-selinux](https://github.com/containers/container-selinux)资源库，它包含了容器运行时的 SELinux 策略文件，以及[rancher/k3s-selinux](https://github.com/rancher/k3s-selinux)资源库，它包含了 K3s 的 SELinux 策略。
+
+### K3s v1.19.1+
+
+要利用实验性的 SELinux，请在启动 K3s 服务器和代理时指定`--selinux`标志。
+
+这个选项也可以在 [K3s 配置文件](/docs/k3s/installation/install-options/_index)中指定。
+
+```
+selinux: true
+```
+
+请不要使用`--disable-selinux`选项，因为它已被废弃，在未来的小版本中，它将被忽略或不被识别，从而导致错误。
+
+### K3s v1.19.1 或之前的版本
+
+你可以通过使用`--disable-selinux`标志启动 K3s 来关闭嵌入式容器 d 中的 SELinux 执行。请注意，对 containerd 中 SELinux 的支持仍在开发中。进展情况可以在[Pull Request 1246](https://github.com/containerd/cri/pull/1246)中跟踪。

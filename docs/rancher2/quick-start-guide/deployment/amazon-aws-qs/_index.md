@@ -67,7 +67,7 @@ keywords:
 
 1. 将以上输出中的`rancher_server_url`粘贴到浏览器中。在登录页面中登录（默认用户名为`admin`，密码为在`rancher_server_admin_password`中设置的密码）。
 
-**结果：**两个 Kubernetes 集群已部署到您的 AWS 帐户中，一个正在运行 Rancher Server，另一个可以用来部署您的实验应用。
+**结果：**两个 Kubernetes 集群部署到您的 AWS 账户中，一个运行 Rancher 服务器，另一个为实验部署做好准备。请注意，虽然这种设置是探索 Rancher 功能的好方法，但生产设置应遵循我们的高可用性设置指南。
 
 ## 后续操作
 

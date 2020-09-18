@@ -40,7 +40,7 @@ keywords:
 
 Traefik ingress controller 将使用主机上的 80、443 和 8080 端口（即这些端口不能用于 HostPort 或 NodePort）。
 
-Traefik 可以通过编辑`traefik.yaml`文件进行配置。为了防止 k3s 使用或覆盖修改后的版本，请使用`--no-deploy traefik`部署 k3s，并将修改后的副本存储在`k3s/server/manifests目录`中。更多信息请参考官方的[Traefik 配置参数](https://github.com/helm/charts/tree/master/stable/traefik#configuration)。
+Traefik 可以通过编辑`traefik.yaml`文件进行配置。为了防止 k3s 使用或覆盖修改后的版本，请使用`--no-deploy traefik`部署 k3s，并将修改后的副本存储在`k3s/server/manifests`目录中。更多信息请参考官方的[Traefik 配置参数](https://github.com/helm/charts/tree/master/stable/traefik#configuration)。
 
 要禁用它，请使用`--disable traefik`选项启动每个 server。
 

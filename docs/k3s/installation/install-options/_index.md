@@ -22,6 +22,8 @@ keywords:
 - [K3s server 的注册选项](#k3s-server的注册选项)
 - [K3s agent 的注册选项](#k3s-agent的注册选项)
 
+除了使用环境变量和 CLI 参数配置 K3s 外，K3s 还可以使用[配置文件](#配置文件)
+
 更多高级选项，请参阅[本页](/docs/k3s/advanced/_index)。
 
 > 在整个 K3s 文档中，你会看到一些选项可以作为命令标志和环境变量传递进来。关于传入选项的帮助，请参考[如何使用标志和环境变量](/docs/k3s/installation/install-options/how-to-flags/_index)。
@@ -91,3 +93,36 @@ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_M
 ### K3s Agent 的注册选项
 
 关于 K3s agent 的配置详情，请参考[k3s agent 配置参考](/docs/k3s/installation/install-options/agent-config/_index)
+
+### 配置文件
+
+除了使用环境变量和 CLI 参数来配置 K3s，K3s 还可以使用配置文件。
+
+默认情况下，位于`/etc/rancher/k3s/config.yaml`的 YAML 文件中的值将在安装时使用。
+
+下面是一个基本的`server`配置文件的例子。
+
+```yaml
+write-kubeconfig-mode: "0644"
+tls-san。
+  - "foo. local"
+node-label. "foo=bar
+  - "foo=bar"
+  - "something=amazing"
+```
+
+一般来说，CLI 参数映射到各自的 YAML 键，可重复的 CLI 参数被表示为 YAML 列表。
+
+下面展示了一个完全使用 CLI 参数的相同配置来证明这一点。
+
+```bash
+k3s server \
+  --write-kubeconfig-mode "0644"    \
+  --tls-san "foo.local"             \
+  --node-label "foo=bar"            \
+  --node-label "something=amazing"
+```
+
+也可以同时使用配置文件和 CLI 参数。 在这种情况下，值将从两个来源加载，但 CLI 参数将优先。 对于可重复的参数，如`--node-label`，CLI 参数将覆盖列表中的所有值。
+
+最后，配置文件的位置可以通过 cli 参数`--config FILE，-c FILE`或者环境变量`$K3S_CONFIG_FILE`来改变。
