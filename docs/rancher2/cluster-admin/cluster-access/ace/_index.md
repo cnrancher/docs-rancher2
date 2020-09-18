@@ -22,6 +22,10 @@ keywords:
 
 _kubeconfig 文件_ 用于配置集群访问信息，每个集群都有一个 kubeconfig 文件。在开启了 TLS 的集群中，每次与集群交互时都需要身份认证，生产环境一般使用证书进行认证，其认证所需要的信息会放在 kubeconfig 文件中。您可以从 Rancher 中的 Cluster 视图下载对应的 kubeconfig 文件。下载 kubeconfig 文件后，您将能够使用 kubeconfig 文件及其 Kubernetes[上下文](https://kubernetes.io/docs/reference/kubectl/cheatsheet/#kubectl-context-and-configuration)访问下游集群。
 
+_v2.4.6 可用_
+
+如果管理员有[强制执行 kubeconfig token 的 TTL](/docs/rancher2/api/api-tokens/_index)，那么 kubeconfig 文件需要[rancher cli](/docs/rancher2/cli/_index)存在于你的 PATH 中。
+
 ## RKE 集群的两种身份验证方法
 
 如果集群不是[RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)，kubeconfig 文件只允许您以一种方式访问集群：通过 Rancher Server 进行身份验证，然后 Rancher 允许您在集群上运行 kubectl 命令。

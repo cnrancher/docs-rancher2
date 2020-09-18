@@ -45,6 +45,8 @@ Rancher 的 Kubernetes 元数据包含了 Rancher 配置 [RKE 集群](/docs/ranc
 
 要强制 Rancher 刷新 Kubernetes 元数据，可以在**工具 > 驱动管理 > 刷新 Kubernetes 元数据**下执行手动刷新操作。
 
+您可以通过将 `refresh-interval-minutes`设置为 `0`（见下文的代码示例），将 Rancher 配置为只在需要时刷新元数据，并在需要时使用该按钮手动执行元数据刷新。
+
 ## 配置元数据同步
 
 > 只有管理员可以更改这些设置。

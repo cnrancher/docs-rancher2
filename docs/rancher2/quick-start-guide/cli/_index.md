@@ -21,6 +21,25 @@ Rancher CLI(命令行界面)是一个命令行工具，可用于与 Rancher 进�
 
 请确保您可以成功运行 `rancher kubectl get pods` 命令。
 
+## 使用 kubectl 和 kubeconfig token 进行 TTL 认证。
+
+_v2.4.6 可用_
+
+如果管理员有[强制执行 kubeconfig tokens 上的 TTL](/docs/rancher2/api/api-tokens/_index)，当你运行`kubectl`时，kubeconfig 文件需要[Rancher cli](/docs/rancher2/cli/_index)存在于你的 PATH 中。否则，你会看到这样的错误信息：
+
+`Unable to connect to the server: getting credentials: exec: exec: "rancher": executable file not found in \$PATH`。
+
+该功能可以让 kubectl 与 Rancher 服务器进行身份验证，并在需要时获得新的 kubeconfig 令牌。目前支持以下认证提供者。
+
+1. 本地
+2. 活动目录
+3. FreeIpa、OpenLdap
+4. SAML 供应商----Ping、Okta、ADFS、Keycloak、Shibboleth。
+
+当你第一次运行 kubectl 时，例如，`kubectl get pods`，它会要求你选择一个 auth provider 并使用 Rancher 服务器登录。
+kubeconfig 令牌被缓存在你运行 kubectl 的路径中，在`./.cache/token`下。这个令牌在[过期](/docs/rancher2/api/api-tokens/_index)或[从 Rancher 服务器删除](/docs/rancher2/api/api-tokens/_index)之前都是有效的。
+过期后，下一个`kubectl get pods`会要求你再次用 Rancher 服务器登录。
+
 ## kubectl
 
 请先安装`kubectl`，详情请参考[安装 kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl)。
