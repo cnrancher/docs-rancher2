@@ -38,6 +38,9 @@ API 密钥由以下四个部分组成：
 
    如果设置了有效期，在超出有效期限后，API 密钥会过期和失效。添加有效期限可以提高安全性。
 
+   _v2.4.6 可用_
+   过期时间将由`v3/settings/auth-token-max-ttl-minutes`约束。如果超过 max-ttl，将以 max-ttl 为到期时间创建 API 密钥。
+
    适用范围对 API 可以调用的集群作了限制。如果集群配置了认证集群端点，您可以直接使用有适用范围的 token，直接访问集群的 API 端点，而不需要通过 Rancher Server 来代理连接。详情请查看[认证集群端点](/docs/rancher2/overview/architecture/_index)。
 
 1. 单击 **创建**，创建 API 密钥。
