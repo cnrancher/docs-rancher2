@@ -18,4 +18,4 @@ keywords:
 
 RKE 使用 cluster.yml 文件安装和配置您的 Kubernetes 集群。本节提供了 cluster.yml 文件的模板供您选择。
 
-> 关于 cluster.yml 文件所有选项的详细秒睡，请查看[RKE 配置参考](/docs/rke/config-options/_index)。
+> 关于 cluster.yml 文件所有选项的详细描述，请查看[RKE 配置参考](/docs/rke/config-options/_index)。
