@@ -10,17 +10,17 @@ _v1.19.1+k3s1 可用_
 
 ### 创建快照
 
-快照是默认启用的，快照目录默认为`/server/db/snapshots`。
+快照是默认启用的。
 
 快照目录默认为`/server/db/Snapshots`。
 
-要配置快照间隔或保留的快照数量，请参考[参数](#描述)
+要配置快照间隔或保留的快照数量，请参考[参数](#参数)
 
 ### 从快照恢复集群
 
-当 K3s 从备份中恢复时，旧的数据目录将被移动到`/server/db/etcd-old/`。然后 K3s 会尝试通过创建一个新的数据目录来恢复快照，然后用一个新的 K3s 集群和一个 etcd 成员启动 etcd。
+当 K3s 从备份中恢复时，旧的数据目录将被移动到`/server/db/etcd-old/`。然后 K3s 会尝试通过创建一个新的数据目录来恢复快照，然后从一个带有一个etcd成员的新K3s集群启动etcd。
 
-要从备份中恢复集群，运行 K3s 时，要使用`--集群-reset`选项，同时给出`--集群-reset-restore-path`，如下：
+要从备份中恢复集群，运行 K3s 时，请使用`--cluster-reset`选项运行K3s，同时给出`--cluster-reset-restore-path`，如下：
 
 ```
 ./k3s server \
@@ -36,9 +36,9 @@ _v1.19.1+k3s1 可用_
 
 | 参数                            | 描述                                                                                                                                         |
 | :------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--etcd-disable-snapshots`      | 禁用 etcd 快照                                                                                                                               |
+| `--etcd-disable-snapshots`      | 禁用自动 etcd 快照                                                                                                                               |
 | `--etcd-snapshot-schedule-cron` | 以 Cron 表达式的形式配置触发定时快照的时间点，例如：每 5 小时触发一次`* */5 * * *`，默认值为每 12 小时触发一次：`0 */12 * * *`               |
 | `--etcd-snapshot-retention`     | 保留的快照数量，默认值为 5。                                                                                                                 |
-| `--etcd-snapshot-dir`           | 保存数据库快照的目录路径。(默认位置：`${data-dir}/db/Snapshots`)                                                                             |
-| `--cluster-reset`               | 忘记所有的对等体，成为新集群的唯一成员，也可以通过环境变量`[$K3S_CLUSTER_RESET]`进行设置。这也可以通过环境变量`[$K3S_CLUSTER_RESET]`来设置。 |
+| `--etcd-snapshot-dir`           | 保存数据库快照的目录路径。(默认位置：`${data-dir}/db/snapshots`)                                                                             |
+| `--cluster-reset`               | 忘记所有的对等体，成为新集群的唯一成员，也可以通过环境变量`[$K3S_CLUSTER_RESET]`进行设置。  |
 | `--cluster-reset-restore-path`  | 要恢复的快照文件的路径                                                                                                                       |
