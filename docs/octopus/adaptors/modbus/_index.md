@@ -199,21 +199,39 @@ spec:
 
 #### ModbusDevicePropertyType
 
-| 参数    | 描述                   | 类型   |
-| :------ | :--------------------- | :----- |
-| string  | 属性数据类型为 string  | string |
-| int     | 属性数据类型为 int     | string |
-| float   | 属性数据类型为 float   | string |
-| boolean | 属性数据类型为 boolean | string |
+| 参数      | 描述                                       | 类型   |
+| :-------- | :----------------------------------------- | :----- |
+| int       | 属性数据类型为 int，与 int32 相同          | string |
+| int16     | 属性数据类型为 int                         | string |
+| int32     | 属性数据类型为 int                         | string |
+| int64     | 属性数据类型为 int                         | string |
+| uint      | 属性数据类型为 uint，与 uint32 相同        | string |
+| uint16    | 属性数据类型为 uint                        | string |
+| uint32    | 属性数据类型为 uint                        | string |
+| uint64    | 属性数据类型为 uint                        | string |
+| float     | 属性数据类型为 float，32 位                | string |
+| double    | 属性数据类型为 float，64 位                | string |
+| boolean   | 属性数据类型为 bool                        | string |
+| hexString | 属性数据类型为 hex in string，例如 “CD01 ” | string |
+
+#### ModbusDevicePropertyValueEndianness
+
+| 参数             | 描述                       | 类型   |
+| :--------------- | :------------------------- | :----- |
+| BigEndian        | 属性值的字节序为大端序     | string |
+| LittleEndian     | 属性值的字节序为小端序     | string |
+| BigEndianSwap    | 属性值的字节序为大端置换序 | string |
+| LittleEndianSwap | 属性值的字节序为小端置换序 | string |
 
 #### ModbusDevicePropertyVisitor
 
-| 参数              | 描述                              | 类型                                                                | 是否必填 |
-| :---------------- | :-------------------------------- | :------------------------------------------------------------------ | :------- |
-| register          | 指定要访问的注册表                | [ModbusDeviceRegisterType](#modbusdeviceregistertype)               | 是       |
-| offset            | 指定读/写数据的寄存器的起始偏移量 | int                                                                 | 是       |
-| quantity          | 指定寄存器的数量                  | int                                                                 | 是       |
-| orderOfOperations | 指定操作的顺序                    | [ModbusDeviceArithmeticOperation](#modbusdevicearithmeticoperation) | 否       |
+| 参数              | 描述                              | 类型                                                                        | 是否必填 |
+| :---------------- | :-------------------------------- | :-------------------------------------------------------------------------- | :------- |
+| register          | 指定要访问的注册表                | [ModbusDeviceRegisterType](#modbusdeviceregistertype)                       | 是       |
+| offset            | 指定读/写数据的寄存器的起始偏移量 | int                                                                         | 是       |
+| quantity          | 指定寄存器的数量                  | int                                                                         | 是       |
+| endianness        | 指定值的字节顺序                  | [ModbusDevicePropertyValueEndianness](#ModbusDevicePropertyValueEndianness) | 否       |
+| orderOfOperations | 指定操作的顺序                    | [ModbusDeviceArithmeticOperation](#modbusdevicearithmeticoperation)         | 否       |
 
 #### ModbusDeviceRegisterType
 
