@@ -152,7 +152,7 @@ K3s 使用 traefik 作为默认的 ingress controller。启动之后是通过 ip
 kubectl create -f https://raw.githubusercontent.com/kingsd041/rancher-k3s/master/demo-busybox.yaml
 ```
 
-## 如何使用 crictl 清理未使用的景象
+## 如何使用 crictl 清理未使用的镜像
 
 ```
 k3s crictl rmi --prune
