@@ -104,9 +104,9 @@ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_M
 
 ```yaml
 write-kubeconfig-mode: "0644"
-tls-san。
-  - "foo. local"
-node-label. "foo=bar
+tls-san:
+  - "foo.local"
+node-label:
   - "foo=bar"
   - "something=amazing"
 ```
