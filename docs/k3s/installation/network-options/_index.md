@@ -50,7 +50,7 @@ Flannel 的默认后端是 VXLAN。要启用加密，请使用下面的 IPSec（
 通过在主机上运行以下命令，确保设置已被应用：
 
 ```
-cat /etc/cni/net.d/10-canal.conflist
+cat /etc/cni/net.d/10-calico.conflist
 ```
 
 你应该看到 IP 转发被设置为 true。
@@ -70,7 +70,7 @@ cat /etc/cni/net.d/10-canal.conflist
 通过在主机上运行以下命令，确保设置已被应用：
 
 ```
-cat /etc/cni/net.d/10-calico.conflist
+cat /etc/cni/net.d/10-canal.conflist
 ```
 
 你应该看到 IP 转发被设置为 true。
