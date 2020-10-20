@@ -16,7 +16,8 @@ keywords:
 
 Helm 是 Kubernetes 的首选包管理工具。Helm 图表为 Kubernetes YAML 清单文件提供了模板化语法。通过 Helm，我们可以创建可配置的部署，而不仅仅是使用静态文件。有关创建自己的部署目录的更多信息，请查看[Helm 快速入门](https://helm.sh/docs/intro/quickstart/)。
 
-K3s 不需要任何特殊的配置就可以使用 Helm 命令行工具。只要确保你已经按照[集群访问](../cluster-access/_index)一节正确设置了你的 kubeconfig。K3s 包含了一些额外的功能，使传统的 Kubernetes 资源清单和 Helm Charts 的部署更加容易。
+K3s 不需要任何特殊的配置就可以使用 Helm 命令行工具。只要确保你已经按照[集群访问](../cluster-access/_index)一节正确设置了你的 kubeconfig。
+K3s 包含了一些额外的功能，使传统的 Kubernetes 资源清单和 Helm Charts 的部署更加容易。 K3s 包含了一些额外的功能，通过[rancher/helm-release CRD](#使用-helm-crd)，使传统的Kubernetes资源清单和Helm Charts部署更加容易。
 
 本节涵盖以下主题：
 
@@ -33,7 +34,7 @@ K3s 不需要任何特殊的配置就可以使用 Helm 命令行工具。只要�
 
 > **注意:** K3s 版本至 v0.5.0 使用`k3s.cattle.io/v1`作为 HelmCharts 的 apiVersion。后来的版本已改为`helm.cattle.io/v1`。
 
-HelmChart 资源定义捕获了大多数你通常会传递给`helm`命令行工具的选项。下面是一个例子，说明如何从默认的图表资源库中部署 Grafana，覆盖一些默认的图表值。请注意，HelmChart 资源本身在 "kube-system"命名空间，但图表资源将被部署到 "monitoring"命名空间。
+[HelmChart 资源定义](https://github.com/rancher/helm-controller#helm-controller)捕获了大多数你通常会传递给`helm`命令行工具的选项。下面是一个例子，说明如何从默认的图表资源库中部署 Grafana，覆盖一些默认的图表值。请注意，HelmChart 资源本身在 "kube-system"命名空间，但图表资源将被部署到 "monitoring"命名空间。
 
 ```yaml
 apiVersion: helm.cattle.io/v1
