@@ -21,6 +21,7 @@ keywords:
 - [从二进制中安装的选项](#从二进制中安装k3s)
 - [K3s server 的注册选项](#k3s-server的注册选项)
 - [K3s agent 的注册选项](#k3s-agent的注册选项)
+- [配置文件](#配置文件)
 
 除了使用环境变量和 CLI 参数配置 K3s 外，K3s 还可以使用[配置文件](#配置文件)
 
@@ -104,9 +105,9 @@ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_M
 
 ```yaml
 write-kubeconfig-mode: "0644"
-tls-san。
-  - "foo. local"
-node-label. "foo=bar
+tls-san:
+  - "foo.local"
+node-label:
   - "foo=bar"
   - "something=amazing"
 ```

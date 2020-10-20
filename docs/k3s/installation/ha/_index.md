@@ -72,7 +72,7 @@ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_M
 
 > **注意：** 单台 server 安装时可用的安装选项也适用于高可用安装。更多详情，请参见[安装和配置选项](/docs/k3s/installation/install-options/_index)文档。
 
-默认情况下，server 节点将是可调度的，因此你的工作负载可以在它们上启动。如果你希望有一个专用的控制平面，在这个平面上不会运行用户工作负载，你可以使用 taints。`node-taint` 参数将允许你用污点配置节点，例如`--node-taint k3s-controlplane=true:NoExecute`。
+默认情况下，server 节点将是可调度的，因此你的工作负载可以在它们上启动。如果你希望有一个专用的控制平面，在这个平面上不会运行用户工作负载，你可以使用 taints。`node-taint` 参数将允许你用污点配置节点，例如`--node-taint CriticalAddonsOnly=true:NoExecute`。
 
 在所有 server 节点上启动`k3s server`进程后，用`k3s kubectl get nodes`确保集群正常运行。你应该会看到你的 server 节点处`Ready`状态。
 
