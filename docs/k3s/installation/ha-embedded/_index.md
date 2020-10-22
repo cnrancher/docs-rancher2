@@ -48,6 +48,6 @@ K3S_TOKEN=SECRET k3s server --server https://<ip or hostname of server1>:6443。
 > **警告：**在 K3s v1.19.1 版本中，实验性的 etcd 取代了实验性的 Dqlite。这是一个突破性的变化。请注意，不支持从实验性 Dqlite 升级到实验性嵌入式 etcd。如果你尝试升级，它将不会成功，数据将丢失。
 > 从 v1.0.0 开始，K3s 预览了对运行高可用控制平面的支持，而不需要外部数据库。
 
-这种架构是通过在 K3s 服务器进程中嵌入一个 Dqlite 数据库来实现的。DQLite 是 "分布式 SQLite "的简称。根据https://dqlite.io，它是"_一个快速的、嵌入式的、具有Raft共识的持久性SQL数据库，非常适合容错的物联网和边缘设备。"
+这种架构是通过在 K3s 服务器进程中嵌入一个 Dqlite 数据库来实现的。DQLite 是“嵌入式 SQLite”的简称，它是一个快速的、嵌入式的、具有 Raft 共识的持久性 SQL 数据库，非常适合容错的物联网和边缘设备。
 
 要使用嵌入式 Dqlite 数据库运行 K3s，请按照上文[嵌入式 etcd 数据库](#embedded-etcd-experimental)相同的步骤，使用 v1.0.0 和 v1.19.1 之间的 K3s 版本。

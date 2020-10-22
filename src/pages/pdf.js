@@ -46,17 +46,17 @@ function GetPDF() {
       .post(GENERATE_CODE_URL, {
         phone
       })
-      .then(function(response) {
+      .then(function (response) {
         // handle success
         setInvalidPhone(false);
         setSent(true);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         // handle error
         setInvalidPhone(true);
         console.log(error);
       })
-      .then(function() {
+      .then(function () {
         setSending(false);
       });
   }
@@ -77,17 +77,17 @@ function GetPDF() {
         email,
         code
       })
-      .then(function(response) {
+      .then(function (response) {
         // handle success
         setSubmitted(true);
         setInvalidCode(false);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         // handle error
         setInvalidCode(true);
         console.log(error);
       })
-      .then(function() {
+      .then(function () {
         setSubmitting(false);
       });
   }
@@ -129,7 +129,8 @@ function GetPDF() {
                 className="form-input"
                 name="name"
                 onChange={e => setName(e.target.value)}
-                placeholder="姓名"
+                required
+                placeholder="姓名（必填）"
               />
 
               <input
@@ -137,7 +138,8 @@ function GetPDF() {
                 className="form-input"
                 name="company"
                 onChange={e => setCompany(e.target.value)}
-                placeholder="公司"
+                required
+                placeholder="公司（必填）"
               />
 
               <input
@@ -145,7 +147,8 @@ function GetPDF() {
                 className="form-input"
                 name="position"
                 onChange={e => setPosition(e.target.value)}
-                placeholder="职位"
+                required
+                placeholder="职位（必填）"
               />
 
               <input
