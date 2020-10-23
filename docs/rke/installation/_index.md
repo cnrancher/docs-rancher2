@@ -70,19 +70,13 @@ RKE 提供了三种下载安装包的方法：通过 GitHub、Homebrew 或 MacPo
 
 1. 打开浏览器，访问[Homebrew 官方网站](https://brew.sh/)，按照网站列出的指示安装 Homebrew，通常只需要将网站上的命令复制粘贴到命令行工具中，单击回车键运行该命令即可，整个安装过程可能需要 3~5 分钟。
 
-2. 运行`brew`命令，安装 RKE。
+1. 运行`brew`命令，安装 RKE。
 
    ```shell
    brew install rke
    ```
 
-3. 完成 Homebrew 安装后，使用`brew`命令安装 Docker。
-
-   ```shell
-   brew install rke
-   ```
-
-   如果您已经使用 Homebrew 安装过了 RKE，可以运行以下命令，升级到最新版本的 RKE。
+1. 如果您已经使用 Homebrew 安装过了 RKE，可以运行以下命令，将 RKE 升级到最新版本。
 
    ```shell
    brew upgrade rke

@@ -69,4 +69,4 @@ Agent 节点将使用节点集群密钥以及在`/etc/rancher/node/password`中�
 
 ## 自动部署的清单
 
-位于目录路径`/var/lib/rancher/k3s/server/manifests` 的清单在构建时被捆绑到 K3s 二进制文件中。
+位于目录路径`/var/lib/rancher/k3s/server/manifests` 的清单在构建时被捆绑到 K3s 二进制文件中。 这些将由[rancher/helm-controller](https://github.com/rancher/helm-controller#helm-controller)在运行时安装。
