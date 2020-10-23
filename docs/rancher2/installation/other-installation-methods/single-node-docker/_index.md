@@ -48,16 +48,31 @@ keywords:
 
 如果要在不涉及身份验证的开发或测试环境中安装 Rancher，请使用其生成的自签名证书安装 Rancher。此安装选项省去了自己生成证书的麻烦。
 
-登录到 Linux 主机，然后运行下面这个非常简洁的安装命令。
-
 :::important 重要
 在使用单节点安装时，Rancher Server 的数据默认保存在容器里。这意味着，在 Rancher Server 容器被删除时，Rancher Server 的数据将会丢失。您可以通过添加 `-v` 参数以挂载目录的方式将数据保存在 Rancher Server 所在的主机上。详情请参阅 [Rancher 单节点数据持久化](/docs/rancher2/installation/other-installation-methods/single-node-docker/advanced/_index#persist-data)。
 :::
+
+#### Rancher 2.4.x 及之前的版本
+
+登录到 Linux 主机，然后运行下面这个非常简洁的安装命令。
 
 ```bash
 docker run -d --restart=unless-stopped \
 	-p 80:80 -p 443:443 \
 	rancher/rancher:latest
+```
+
+#### Rancher 2.5.x 及之后的版本
+
+登录到 Linux 主机，然后运行下面这个非常简洁的安装命令。
+
+与 2.4.x 或之前的版本相比，使用`docker run`命令安装 Rancher 2.5.x 时，需要添加`--privileged`标志变量，启用特权模式安装 Rancher。
+
+```bash
+docker run -d --restart=unless-stopped \
+  -p 80:80 -p 443:443 \
+  --privileged \
+  rancher/rancher:latest
 ```
 
 ### 选项 B - 使用已有的自签名证书
