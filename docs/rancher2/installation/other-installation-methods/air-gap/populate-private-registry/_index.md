@@ -25,7 +25,7 @@ keywords:
 
 但是同步用来创建 Linux 集群和用来创建 Windows 集群的镜像过程是不同的。所以这取决于您是否要创建 Windows 集群。默认情况下，我们假设只配置 Linux 集群，我们提供了如何推送 Linux 需要的镜像到私有镜像库的步骤。但是如果您计划创建 [Windows 集群](/docs/rancher2/cluster-provisioning/rke-clusters/windows-clusters/_index)，我们有单独的文档来介绍如何同步 Linux 和 Windows 集群所需的镜像。
 
-> **先决条件：** 已有一个 Rancher 可访问的[私有镜像仓库](https://docs.docker.com/registry/deploying/)，。
+> **先决条件：** 已有一个 Rancher 可访问的[私有镜像仓库](https://docs.docker.com/registry/deploying/)。
 
 ## 集群中仅有 Linux 节点
 

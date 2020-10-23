@@ -68,11 +68,11 @@ Rancher 需要访问您的 AWS 帐户，以便在 Amazon EKS 中创建和管理�
 
 1. 为 EKS 集群配置**账户访问**。
 
-   | 设置       | 描述                                           |
-   | ---------- | ---------------------------------------------- |
-   | 区域       | 从下拉列表中选择要在其中创建集群的地理区域。。 |
-   | Access Key | 输入之前创建的 Access Key                      |
-   | Secret Key | 输入之前创建的 Secret Key                      |
+   | 设置       | 描述                                         |
+   | ---------- | -------------------------------------------- |
+   | 区域       | 从下拉列表中选择要在其中创建集群的地理区域。 |
+   | Access Key | 输入之前创建的 Access Key                    |
+   | Secret Key | 输入之前创建的 Secret Key                    |
 
 1. 单击 **下一步: 配置集群**。然后选择[服务角色](https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html)。
 
