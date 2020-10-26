@@ -96,7 +96,7 @@ nodes:
 
 `hostname_override`用于能够提供一个友好的名称，供 RKE 在 Kubernetes 中注册节点时使用。这个 hostname 不需要是可路由地址，但必须是一个有效的[Kubernetes 资源名](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names)。如果没有设置`hostname_override`，那么在 Kubernetes 中注册节点时就会使用`address`指令。
 
-> **注意：**配置[云提供商](/docs/rke/config-options/cloud-providers/_index)时，可能需要覆盖主机名才能正确使用云提供商。[AWS 云提供商](https://kubernetes.io/zh/docs/concepts/cluster-administration/cloud-providers/#aws)有一个例外，其中`hostname_override`字段将被明确忽略。
+> **注意：**配置[云提供商](/docs/rke/config-options/cloud-providers/_index)时，可能需要覆盖主机名才能正确使用云提供商。[AWS 云提供商](https://v1-17.docs.kubernetes.io/docs/concepts/cluster-administration/cloud-providers/#aws)有一个例外，其中`hostname_override`字段将被明确忽略。
 
 ### SSH Port
 
