@@ -1,6 +1,26 @@
 ---
-title: 备份和恢复嵌入式数据存储 (实验性)
+title: 备份和恢复
 ---
+
+
+K3s的备份和恢复方式取决于使用哪种类型的数据存储。
+
+- [外部数据存储备份和还原](＃外部数据存储备份和还原)
+- [嵌入式etcd数据存储备份和还原（实验性）](＃嵌入式etcd数据存储备份和还原)
+
+# 外部数据存储备份和还原
+
+当使用外部数据存储时，备份和恢复操作是在K3s之外处理的。数据库管理员需要对外部数据库进行备份，或者从快照或转储中进行恢复。
+
+我们建议将数据库配置为执行定期快照。
+
+有关获取数据库快照和从快照还原数据库的详细信息，请参阅官方数据库文档：
+
+- [MySQL 官方文档](https://dev.mysql.com/doc/refman/8.0/en/replication-snapshot-method.html)
+- [PostgreSQL 官方文档](https://www.postgresql.org/docs/8.3/backup-dump.html)
+- [etcd 官方文档](https://github.com/etcd-io/etcd/blob/master/Documentation/op-guide/recovery.md)
+
+# 嵌入式etcd数据存储备份和还原（实验性）
 
 _v1.19.1+k3s1 可用_
 
