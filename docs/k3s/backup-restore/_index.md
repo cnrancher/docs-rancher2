@@ -8,7 +8,7 @@ K3s的备份和恢复方式取决于使用哪种类型的数据存储。
 - [外部数据存储备份和还原](＃外部数据存储备份和还原)
 - [嵌入式etcd数据存储备份和还原（实验性）](＃嵌入式etcd数据存储备份和还原)
 
-# 外部数据存储备份和还原
+## 外部数据存储备份和还原
 
 当使用外部数据存储时，备份和恢复操作是在K3s之外处理的。数据库管理员需要对外部数据库进行备份，或者从快照或转储中进行恢复。
 
@@ -20,7 +20,7 @@ K3s的备份和恢复方式取决于使用哪种类型的数据存储。
 - [PostgreSQL 官方文档](https://www.postgresql.org/docs/8.3/backup-dump.html)
 - [etcd 官方文档](https://github.com/etcd-io/etcd/blob/master/Documentation/op-guide/recovery.md)
 
-# 嵌入式etcd数据存储备份和还原（实验性）
+## 嵌入式etcd数据存储备份和还原（实验性）
 
 _v1.19.1+k3s1 可用_
 
