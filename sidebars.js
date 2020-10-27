@@ -974,7 +974,7 @@ module.exports = {
             "k3s/upgrades/basic/_index",
             "k3s/upgrades/automated/_index",
         ],
-        备份和恢复嵌入式数据存储: ["k3s/backup-restore/_index"],
+        备份和恢复: ["k3s/backup-restore/_index"],
         卷和存储: ["k3s/storage/_index"],
         网络: ["k3s/networking/_index"],
         Helm: ["k3s/helm/_index"],
