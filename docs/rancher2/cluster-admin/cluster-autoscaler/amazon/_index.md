@@ -247,7 +247,7 @@ keywords:
 
 | 参数                                  | 默认值        | 描述                                                                                                                                        |
 | :------------------------------------ | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------ |
-| cluster-name                          | -             | 配置自动弹性伸缩的群集名称                                                                                                                  |
+| cluster-name                          | -             | 配置自动弹性伸缩的集群名称                                                                                                                  |
 | address                               | :8085         | 暴露 Prometheus 指标的地址                                                                                                                  |
 | kubernetes                            | -             | Kubernetes master 节点的位置，默认情况下不需要填写                                                                                          |
 | kubeconfig                            | -             | 包含认证信息和 master 节点信息的 kubeconfig 文件的路径。                                                                                    |
@@ -267,8 +267,8 @@ keywords:
 | node-deletion-delay-timeout           | "2m"          | 在删除节点之前，cluster-autoscaler 等待删除 delay-deletion.cluster-autoscaler.ko/注释的最长时间                                             |
 | scan-interval                         | "10s"         | 对集群进行一次扩大或缩小规模的重新评估的间隔时长                                                                                            |
 | max-nodes-total                       | 0             | 所有节点组中的最大节点数，cluster-autoscaler 不会将集群扩容到超过这个数字的数量                                                             |
-| cores-total                           | "0:320000"    | 集群中的最小和最大核心数，格式为`<min>:<max>:<other...>`，集群自动扫描器不会将群集的规模扩大到这些数字之外                                  |
-| memory-total                          | "0:6400000"   | 集群中内存的最小和最大千兆字节数，格式为`<min>:<max>:<other...>`，集群自动扫描器不会将群集的规模扩大到这些数字之外                          |
+| cores-total                           | "0:320000"    | 集群中的最小和最大核心数，格式为`<min>:<max>:<other...>`，集群自动扫描器不会将集群的规模扩大到这些数字之外                                  |
+| memory-total                          | "0:6400000"   | 集群中内存的最小和最大千兆字节数，格式为`<min>:<max>:<other...>`，集群自动扫描器不会将集群的规模扩大到这些数字之外                          |
 | cloud-provider                        | -             | 云服务提供商的类型                                                                                                                          |
 | max-bulk-soft-taint-count             | 10            | 可以同时被污染/不污染 PreferNoSchedule 的节点的最大数量，设置为 0 可以关闭这种污点标记                                                      |
 | max-bulk-soft-taint-time              | "3s"          | 同时作为 PreferNoSchedule 的污点/污点节点的最大持续时间                                                                                     |

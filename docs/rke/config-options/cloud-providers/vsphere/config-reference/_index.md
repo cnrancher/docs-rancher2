@@ -8,7 +8,7 @@ title: vSphere 配置参考
 
 必须启用 vSphere 云提供商以允许动态供应卷。
 
-有关在 vSphere 上部署 Kubernetes 群集的更多详细信息，请参阅 [官方云提供商文档](https://cloud-provider-vsphere.sigs.k8s.io/tutorials/kubernetes-on-vsphere-with-kubeadm.html)。
+有关在 vSphere 上部署 Kubernetes 集群的更多详细信息，请参阅 [官方云提供商文档](https://cloud-provider-vsphere.sigs.k8s.io/tutorials/kubernetes-on-vsphere-with-kubeadm.html)。
 
 > **说明：**本文档反映了 Kubernetes v1.9 中引入的新 vSphere Cloud Provider 配置模式，与之前的版本有所不同。
 
@@ -16,7 +16,7 @@ title: vSphere 配置参考
 
 已知以下信息：
 
-- 群集中的虚拟机运行在同一个数据中心`us-west-1`，由 vCenter`vc.example.com`管理。
+- 集群中的虚拟机运行在同一个数据中心`us-west-1`，由 vCenter`vc.example.com`管理。
 - vCenter 有一个用户`provisioner`，密码`secret`，并分配了所需的角色。
 - vCenter 有一个名为`ds-1`的数据存储，应该用来存储卷的 VMDK。
 - vCenter 中存在一个`vm/kubernetes`文件夹。
@@ -73,7 +73,7 @@ vSphere 配置选项分为 5 大类：
 
 ### virtual_center
 
-此配置指令指定管理群集中节点的 vCenters。您必须至少定义一个 vCenter/ESXi 服务器。如果节点跨越多个 vCenters，则必须定义所有的 vCenters。
+此配置指令指定管理集群中节点的 vCenters。您必须至少定义一个 vCenter/ESXi 服务器。如果节点跨越多个 vCenters，则必须定义所有的 vCenters。
 
 通过在`virtual_center`指令下添加一个新条目来定义每个 vCenter，并将 vCenter IP 或 FQDN 作为名称。必须为每个 vCenter 提供所有必要的参数，除非它们已经在`global`指令下定义。
 
@@ -115,7 +115,7 @@ vSphere 配置选项分为 5 大类：
 | server                 | string | 是       | 应用于创建卷的 vCenter/ESXi 的 IP 或 FQDN。必须与`virtual_center`指令中定义的 vCenters 之一相匹配                                                                                                                                                                                                                                                                                    |
 | datacenter             | string | 是       | 应用于创建卷的数据中心的名称。对于 ESXi，请输入*ha-datacenter*                                                                                                                                                                                                                                                                                                                       |
 | folder                 | string | 是       | 用于创建用于卷供应的虚拟机的文件夹路径（相对于 vCenter 中的根文件夹），例如 "vm/kubernetes"。                                                                                                                                                                                                                                                                                        |
-| default-datastore      | string | 否       | 如果在 PVC 的卷选项中既没有指定数据存储也没有指定存储策略，则要放置 VMDK 的默认数据存储的名称。如果数据存储位于存储文件夹中，或者是数据存储群集的成员，请指定完整路径。                                                                                                                                                                                                              |
+| default-datastore      | string | 否       | 如果在 PVC 的卷选项中既没有指定数据存储也没有指定存储策略，则要放置 VMDK 的默认数据存储的名称。如果数据存储位于存储文件夹中，或者是数据存储集群的成员，请指定完整路径。                                                                                                                                                                                                              |
 | resourcepool-path      | string | 否       | 资源池的绝对或相对路径，[基于存储策略的供应](https://vmware.github.io/vsphere-storage-for-kubernetes/documentation/policy-based-mgmt.html)的虚拟机应在其中创建。如果指定了相对路径，则根据数据中心的*host*文件夹进行解析。示例： `/<dataCenter>(dataCenter) /<dataCenter>/host/<host或ClusterName>/Resources/<poolName>`、`Resources/<poolName>`。对于独立的 ESXi，指定`Resources`。 |
 
 **示例：**
@@ -143,4 +143,4 @@ network 有以下配置选项：
 
 | disk 配置选项  | 类型   | 是否必填 | 描述                                                                           |
 | :------------- | :----- | :------- | :----------------------------------------------------------------------------- |
-| public-network | string | 否       | 群集中的虚拟机所连接的公共**VM Network**的名称。用于确定虚拟机的公共 IP 地址。 |
+| public-network | string | 否       | 集群中的虚拟机所连接的公共**VM Network**的名称。用于确定虚拟机的公共 IP 地址。 |

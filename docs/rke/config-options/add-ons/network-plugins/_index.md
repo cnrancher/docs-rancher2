@@ -23,7 +23,7 @@ network:
 
 ## 禁用网络插件 Deployment
 
-您可以将群集配置中的 `plugin`设置为`none`，禁用默认的 网络插件 Deployment。
+您可以将集群配置中的 `plugin`设置为`none`，禁用默认的 网络插件 Deployment。
 
 ```yaml
 network:

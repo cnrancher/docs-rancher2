@@ -30,7 +30,7 @@ ingress:
 
 ## 禁用默认 Ingress Controller
 
-您可以在群集配置中的 Ingress`provider`设置为`none`，禁用默认的 Ingress Controller。
+您可以在集群配置中的 Ingress`provider`设置为`none`，禁用默认的 Ingress Controller。
 
 ```yaml
 ingress:

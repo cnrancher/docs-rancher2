@@ -57,10 +57,10 @@ keywords:
 
 ### 可选的后续步骤
 
-创建群集后，您可以通过 Rancher UI 访问它。作为最佳实践，我们建议设置这些替代方式来访问您的群集。
+创建集群后，您可以通过 Rancher UI 访问它。作为最佳实践，我们建议设置这些替代方式来访问您的集群。
 
 - **使用 kubectl CLI 访问您的集群：**按照[这些步骤](/docs/rancher2/cluster-admin/cluster-access/kubectl/_index)在您的工作站上使用 kubectl 访问集群。在这种情况下，你将通过 Rancher 服务器的认证代理进行认证，然后 Rancher 将把你连接到下游集群。这种方法可以让您在没有 Rancher 用户界面的情况下管理集群。
-- **使用 kubectl CLI 访问您的集群，使用授权的集群端点：**按照[这些步骤](/docs/rancher2/cluster-admin/cluster-access/kubectl/_index)直接使用 kubectl 访问您的集群，而无需通过 Rancher 进行身份验证。我们建议设置这种替代方法来访问您的群集，这样在您无法连接到 Rancher 的情况下，您仍然可以访问群集。
+- **使用 kubectl CLI 访问您的集群，使用授权的集群端点：**按照[这些步骤](/docs/rancher2/cluster-admin/cluster-access/kubectl/_index)直接使用 kubectl 访问您的集群，而无需通过 Rancher 进行身份验证。我们建议设置这种替代方法来访问您的集群，这样在您无法连接到 Rancher 的情况下，您仍然可以访问集群。
 
 ## 创建 Azure 节点模板
 
@@ -90,9 +90,9 @@ az ad sp create-for-rbac --name="<Rancher ServicePrincipal name>" --role="Contri
 
 - **Account Access**存储了您的帐户信息，以便使用 Azure 进行身份验证。注意：从 v2.2.0 开始，账户访问信息以云凭证的形式存储。云凭证存储为 Kubernetes 的秘密。多个节点模板可以使用同一个云凭证。您可以使用现有的云凭证或创建新的云凭证。要创建新的云凭证，请输入名称和账户访问数据，然后单击创建。
 
-- **Placement**设置您的群集托管的地理区域和其他位置元数据。
+- **Placement**设置您的集群托管的地理区域和其他位置元数据。
 
-- **Network**配置您的群集中使用的网络。
+- **Network**配置您的集群中使用的网络。
 
 - **Instance**自定义您的虚拟机配置。
 

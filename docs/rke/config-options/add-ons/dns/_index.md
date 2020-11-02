@@ -41,7 +41,7 @@ dns:
     ip_address: "169.254.20.10"
 ```
 
-> **说明：**当在现有群集上启用 NodeLocal DNS 时，当前正在运行的 pod 不会被修改，更新后的`/etc/resolv.conf`配置只对启用 NodeLocal DNS 后启动的 pod 生效。
+> **说明：**当在现有集群上启用 NodeLocal DNS 时，当前正在运行的 pod 不会被修改，更新后的`/etc/resolv.conf`配置只对启用 NodeLocal DNS 后启动的 pod 生效。
 
 ### 移除 NodeLocal DNS
 
@@ -143,7 +143,7 @@ dns:
 
 _v0.2.0 及更新版本可用_
 
-您可以在群集配置中的 dns`provider`设置为`none`，禁用默认的 DNS 提供商。这个操作会阻止 pods 在集群中进行名称解析。
+您可以在集群配置中的 dns`provider`设置为`none`，禁用默认的 DNS 提供商。这个操作会阻止 pods 在集群中进行名称解析。
 
 ```yaml
 dns:

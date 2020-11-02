@@ -85,7 +85,7 @@ chmod +x get_helm.sh
 sudo ./get_helm.sh
 ```
 
-接下来，创建一个描述 RKE 集群的 YAML 文件。确保节点的 IP 地址和 SSH 用户名是正确的。关于群集 YAML 的更多信息，请查看[RKE 文档](/docs/rke/example-yamls/_index)。
+接下来，创建一个描述 RKE 集群的 YAML 文件。确保节点的 IP 地址和 SSH 用户名是正确的。关于集群 YAML 的更多信息，请查看[RKE 文档](/docs/rke/example-yamls/_index)。
 
 ```
 nodes:

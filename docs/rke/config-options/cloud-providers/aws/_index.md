@@ -4,7 +4,7 @@ title: AWS
 
 ## 概述
 
-您只需要将名称设置为`aws`，就可以启用 AWS。所有群集节点必须已经配置了 [适当的 IAM 角色](#配置-IAM)，并且您的 AWS 资源必须 [标记 AWS 资源](#标记-AWS-资源)。
+您只需要将名称设置为`aws`，就可以启用 AWS。所有集群节点必须已经配置了 [适当的 IAM 角色](#配置-IAM)，并且您的 AWS 资源必须 [标记 AWS 资源](#标记-AWS-资源)。
 
 ```yaml
 cloud_provider:
@@ -13,7 +13,7 @@ cloud_provider:
 
 ## 配置 IAM
 
-在启用了 AWS 云提供商的群集中，节点必须至少拥有`ec2:Describe*`动作。
+在启用了 AWS 云提供商的集群中，节点必须至少拥有`ec2:Describe*`动作。
 
 为了使用 Kubernetes 的弹性负载均衡器(ELB)和 EBS 卷，节点需要拥有具有适当权限的 IAM 角色。
 
