@@ -1,6 +1,6 @@
 ---
 title: 简介
-description: 本文提供了使用 AWS EC2 自动缩放组在 Rancher 自定义集群上安装和使用Kubernetes cluster-autoscaler的操作指导。群集自动缩放器是一个工具，当集群满足以下条件之中的任意一条时，Rancher 会自动调整 Kubernetes 集群的大小：集群中存在因资源不足而无法运行的 pod，或集群中存在长时间未被充分利用的节点，其 pod 可以放在其他现有节点上。
+description: 本文提供了使用 AWS EC2 自动缩放组在 Rancher 自定义集群上安装和使用Kubernetes cluster-autoscaler的操作指导。集群自动缩放器是一个工具，当集群满足以下条件之中的任意一条时，Rancher 会自动调整 Kubernetes 集群的大小：集群中存在因资源不足而无法运行的 pod，或集群中存在长时间未被充分利用的节点，其 pod 可以放在其他现有节点上。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档

@@ -2,7 +2,7 @@
 title: 恢复集群
 ---
 
-使用备份恢复群集的操作步骤如下，请根据您使用的 RKE 版本获取对应的操作指导说明。
+使用备份恢复集群的操作步骤如下，请根据您使用的 RKE 版本获取对应的操作指导说明。
 
 ## RKE v0.2.0 或以上的版本
 
@@ -13,7 +13,7 @@ title: 恢复集群
 - 同步快照或从 S3 下载快照(如有必要)。
 - 跨 etcd 节点检查快照校验和，确保它们是相同的。
 - 通过运行`rke remove`删除您当前的集群并清理旧数据。这将删除整个 Kubernetes 集群，而不仅仅是 etcd 集群。
-- 从选择的快照重建 etcd 群集。
+- 从选择的快照重建 etcd 集群。
 - 通过运行`rke up`创建一个新的集群。
 - 重新启动集群系统 pod。
 
@@ -51,7 +51,7 @@ rke etcd snapshot-restore \
 --s3-endpoint s3.amazonaws.com
 ```
 
-**注：**如果您是在恢复安装了 Rancher 的群集，Rancher 用户界面应该在几分钟后启动；您不需要重新运行 Helm。
+**注：**如果您是在恢复安装了 Rancher 的集群，Rancher 用户界面应该在几分钟后启动；您不需要重新运行 Helm。
 
 ### `rke etcd snapshot-restore`的选项
 
@@ -81,7 +81,7 @@ rke etcd snapshot-restore \
 当您运行该命令时，将执行以下操作：
 
 - 移除旧的 etcd 集群
-- 使用本地快照重建 etcd 群集。
+- 使用本地快照重建 etcd 集群。
 
 在运行这个命令之前，您必须：
 

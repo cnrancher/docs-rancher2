@@ -2,7 +2,7 @@
 title: 问题排查
 ---
 
-如果在使用已启用的 vSphere Cloud Provider 配置群集时或为工作负载创建 vSphere 卷时遇到问题，应检查以下 K8s 服务的日志：
+如果在使用已启用的 vSphere Cloud Provider 配置集群时或为工作负载创建 vSphere 卷时遇到问题，应检查以下 K8s 服务的日志：
 
 - controller-manager（负责管理 vCenter 中的存储卷）
 - kubelet（负责将 vSphere 卷挂载到 pods）
