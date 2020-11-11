@@ -329,11 +329,19 @@ sudo reboot
 
 ## 实验性 SELinux 支持
 
-从 v1.17.4+k3s1 版本开始，K3s 的嵌入式 containerd 中增加了对 SELinux 的实验性支持。如果您在默认启用 SELinux 的系统上安装 K3s（如 CentOS），您必须确保安装了正确的 SELinux 策略。如果没有安装，[安装脚本](/docs/k3s/installation/install-options/_index#使用脚本安装的选项)将失败。可以使用以下命令安装必要的策略。
+从v1.17.4+k3s1版本开始，对SELinux的实验性支持已添加到K3s的嵌入式容器中。如果要在默认启用SELinux的系统上安装K3s（例如CentOS），则必须确保已经安装正确的SELinux策略。
+
+### 自动安装
+
+从v1.19.3+k3s2版本开始，如果不进行离线加装，[安装脚本]({{<baseurl>}}/k3s/latest/en/installation/install-options/#installation-script-options)将自动从Rancher RPM仓库中安装SELinux RPM。通过设置`INSTALL_K3S_SKIP_SELINUX_RPM=true`可以跳过自动安装。
+
+### 手动安装
+
+可以使用以下命令安装必要的策略：
 
 ```
-yum install -y container-selinux selinux-policy-base
-rpm -i https://rpm.rancher.io/k3s-selinux-0.1.1-rc1.el7.noarch.rpm
+yum install -y container-selinux selinux-policy-base	yum install -y container-selinux selinux-policy-base
+rpm -i https://rpm.rancher.io/k3s-selinux-0.1.1-rc1.el7.noarch.rpm	yum install -y https://rpm.rancher.io/k3s/latest/common/centos/7/noarch/k3s-selinux-0.2-1.el7_8.noarch.rpm
 ```
 
 要强制安装脚本记录一个警告而不是失败，您可以设置以下环境变量：

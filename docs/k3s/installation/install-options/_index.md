@@ -62,8 +62,10 @@ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_M
 | `INSTALL_K3S_SYSTEMD_DIR`       | 安装 systemd 服务和环境文件的目录，或者使用`/etc/systemd/system`作为默认目录。                                                                                                                                                                          |
 | `INSTALL_K3S_EXEC`              | 带有标志的命令，用于在服务中启动 K3s。如果未指定命令，并且设置了`K3S_URL`，它将默认为“agent”。如果未设置`K3S_URL`，它将默认为“server”。要获得帮助，请参考[此示例。](/docs/k3s/installation/install-options/how-to-flags/_index#示例-b-install_k3s_exec) |
 | `INSTALL_K3S_NAME`              | 要创建的 systemd 服务名称，如果以服务器方式运行 k3s，则默认为'k3s'；如果以 agent 方式运行 k3s，则默认为'k3s-agent'。如果指定了服务名，则服务名将以'k3s-'为前缀。                                                                                        |
-| `INSTALL_K3S_TYPE`              | 要创建的 systemd 服务类型，如果没有指定，将从 K3s exec 命令中默认。                                                                                                                                                                                     |
-| `INSTALL_K3S_CHANNEL_URL`       | 用于获取 K3s 下载网址的频道 URL。默认为https://update.k3s.io/v1-release/channels 。                                                                                                                                                                     |
+| `INSTALL_K3S_TYPE`              | 要创建的 systemd 服务类型，如果没有指定，将默认使用K3s exec命令。                                                                                                                                                                                     |
+| `INSTALL_K3S_SELINUX_WARN`      | 如果设置为true，则在没有找到k3s-selinux策略的情况下将继续。 |
+| `INSTALL_K3S_SKIP_SELINUX_RPM`  | 如果设置为 "true "将跳过k3s RPM的自动安装。 |
+| `INSTALL_K3S_CHANNEL_URL`       | 用于获取 K3s 下载网址的频道 URL。默认为 https://update.k3s.io/v1-release/channels 。                                                                                                                                                                     |
 | `INSTALL_K3S_CHANNEL`           | 用于获取 K3s 下载 URL 的通道。默认值为 "stable"。选项包括：`stable`, `latest`, `testing`。                                                                                                                                                              |
 
 以 "K3S\_"开头的环境变量将被保留，供 systemd 和 openrc 服务使用。
@@ -96,6 +98,8 @@ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_M
 关于 K3s agent 的配置详情，请参考[k3s agent 配置参考](/docs/k3s/installation/install-options/agent-config/_index)
 
 ### 配置文件
+
+_Available as of v1.19.1+k3s1_
 
 除了使用环境变量和 CLI 参数来配置 K3s，K3s 还可以使用配置文件。
 
