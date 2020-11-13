@@ -1,5 +1,5 @@
 ---
-title: title
+title: Monitoring and Alerting
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,8 +19,6 @@ keywords:
   - subtitles6
 ---
 
-The purpose of this section is to consolidate best practices for Rancher implementations.
+If you are using Rancher v2.5, refer to [this section.](./v2.5)
 
-If you are using Rancher v2.0-v2.4, refer to the Best Practices Guide [here.](./v2.0-v2.4)
-
-If you are using Rancher v2.5, refer to the Best Practices Guide [here.](./v2.5)
+If you are using Rancher v2.0-v2.4, refer to [this section.](./v2.0.x-v2.4.x)

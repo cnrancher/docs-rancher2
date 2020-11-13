@@ -1,5 +1,5 @@
 ---
-title: title
+title: Istio
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,8 +19,8 @@ keywords:
   - subtitles6
 ---
 
-The purpose of this section is to consolidate best practices for Rancher implementations.
+In Rancher 2.5, the Istio application was improved.
 
-If you are using Rancher v2.0-v2.4, refer to the Best Practices Guide [here.](./v2.0-v2.4)
+If you are using Rancher v2.5, refer to the Istio documentation [here.]({{<baseurl>}}/rancher/v2.x/en/istio/v2.5)
 
-If you are using Rancher v2.5, refer to the Best Practices Guide [here.](./v2.5)
+If you are using Rancher v2.3-v2.4, refer to the Istio documentation [here.]({{<baseurl>}}/rancher/v2.x/en/istio/v2.3.x-v2.4.x)

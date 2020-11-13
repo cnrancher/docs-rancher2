@@ -1,5 +1,5 @@
 ---
-title: title
+title: Helm Charts in Rancher
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,8 +19,10 @@ keywords:
   - subtitles6
 ---
 
-The purpose of this section is to consolidate best practices for Rancher implementations.
+### Apps and Marketplace
 
-If you are using Rancher v2.0-v2.4, refer to the Best Practices Guide [here.](./v2.0-v2.4)
+In Rancher v2.5, the [apps and marketplace feature](./apps-marketplace) is used to manage Helm charts, replacing the catalog system.
 
-If you are using Rancher v2.5, refer to the Best Practices Guide [here.](./v2.5)
+### Catalogs
+
+In Rancher prior to v2.5, the [catalog system](./legacy-catalogs) was used to manage Helm charts.

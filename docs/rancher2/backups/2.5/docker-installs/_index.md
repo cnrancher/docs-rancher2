@@ -19,8 +19,7 @@ keywords:
   - subtitles6
 ---
 
-The purpose of this section is to consolidate best practices for Rancher implementations.
+The steps for backing up and restoring Rancher installed with Docker did not change in Rancher v2.5.
 
-If you are using Rancher v2.0-v2.4, refer to the Best Practices Guide [here.](./v2.0-v2.4)
-
-If you are using Rancher v2.5, refer to the Best Practices Guide [here.](./v2.5)
+- [Backups](./docker-backups)
+- [Restores](./docker-restores)
