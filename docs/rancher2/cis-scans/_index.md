@@ -19,8 +19,8 @@ keywords:
   - subtitles6
 ---
 
-The purpose of this section is to consolidate best practices for Rancher implementations.
+_Available as of v2.4.0_
 
-If you are using Rancher v2.0-v2.4, refer to the Best Practices Guide [here.](./v2.0-v2.4)
+If you are using Rancher v2.5, refer to the CIS scan documentation [here.](./v2.5)
 
-If you are using Rancher v2.5, refer to the Best Practices Guide [here.](./v2.5)
+If you are using Rancher v2.4, refer to the CIS scan documentation [here.](./v2.4)
