@@ -68,11 +68,11 @@ keywords:
 
 13. 在 **Issuance Transform Rules** 表, 单击 **Add Rule...**。
 
-    ![](/img/rancher/adfs/adfs-edit-cr.png)
+    ![adfs-edit-cr](/img/rancher/adfs/adfs-edit-cr.png)
 
 14. 选择 **Send LDAP Attributes as Claims** 作为 **Claim rule template**。
 
-    ![](/img/rancher/adfs/adfs-add-tcr-1.png)
+    ![adfs-add-tcr-1](/img/rancher/adfs/adfs-add-tcr-1.png)
 
 15. 将 **Claim rule name** 设置为所需的名称 (例如, `Rancher Attributes`) 然后选择 **Active Directory** 作为 **Attribute store**。 创建以下映射以反映下表：
 
@@ -83,7 +83,7 @@ keywords:
     | Token-Groups - Qualified by Long Domain Name | Group      |
     | SAM-Account-Name                             | Name       |
 
-    ![](/img/rancher/adfs/adfs-add-tcr-2.png)
+    ![adfs-add-tcr-2](/img/rancher/adfs/adfs-add-tcr-2.png)
 
 16. 从以下位置的 AD 服务器下载： `federationmetadata.xml` ：
 
