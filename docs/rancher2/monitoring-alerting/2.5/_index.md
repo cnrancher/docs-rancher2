@@ -123,10 +123,10 @@ However, users can choose to log in to Grafana as an [Admin](https://grafana.com
 To see the Grafana UI, install `rancher-monitoring`. Then go to the **Cluster Explorer.** In the top left corner, click **Cluster Explorer > Monitoring.** Then click \*\*Grafana.
 
 <figcaption>Cluster Compute Resources Dashboard in Grafana</figcaption>
-![Cluster Compute Resources Dashboard in Grafana]({{<baseurl>}}/img/rancher/cluster-compute-resources-dashboard.png)
+![Cluster Compute Resources Dashboard in Grafana](/img/rancher/cluster-compute-resources-dashboard.png)
 
 <figcaption>Default Dashboards in Grafana</figcaption>
-![Default Dashboards in Grafana]({{<baseurl>}}/img/rancher/grafana-default-dashboard.png)
+![Default Dashboards in Grafana](/img/rancher/grafana-default-dashboard.png)
 
 To allow the Grafana dashboard to persist after it restarts, you will need to add the configuration JSON into a ConfigMap. You can add this configuration to the ConfigMap using the Rancher UI.
 
@@ -135,21 +135,21 @@ To allow the Grafana dashboard to persist after it restarts, you will need to ad
 To see the Prometheus UI, install `rancher-monitoring`. Then go to the **Cluster Explorer.** In the top left corner, click **Cluster Explorer > Monitoring.** Then click **Prometheus Graph.**
 
 <figcaption>Prometheus Graph UI</figcaption>
-![Prometheus Graph UI]({{<baseurl>}}/img/rancher/prometheus-graph-ui.png)
+![Prometheus Graph UI](/img/rancher/prometheus-graph-ui.png)
 
 ### Viewing the Prometheus Targets
 
 To see the Prometheus Targets, install `rancher-monitoring`. Then go to the **Cluster Explorer.** In the top left corner, click **Cluster Explorer > Monitoring.** Then click **Prometheus Targets.**
 
 <figcaption>Targets in the Prometheus UI</figcaption>
-![Prometheus Targets UI]({{<baseurl>}}/img/rancher/prometheus-targets-ui.png)
+![Prometheus Targets UI](/img/rancher/prometheus-targets-ui.png)
 
 ### Viewing the Prometheus Rules
 
 To see the Prometheus Rules, install `rancher-monitoring`. Then go to the **Cluster Explorer.** In the top left corner, click **Cluster Explorer > Monitoring.** Then click **Prometheus Rules.**
 
 <figcaption>Rules in the Prometheus UI</figcaption>
-![Prometheus Rules UI]({{<baseurl>}}/img/rancher/prometheus-rules-ui.png)
+![Prometheus Rules UI](/img/rancher/prometheus-rules-ui.png)
 
 ### Viewing Active Alerts in Alertmanager
 
@@ -164,7 +164,7 @@ To see the Prometheus Rules, install `rancher-monitoring`. Then go to the **Clus
 **Result:** The Alertmanager UI opens in a new tab. For help with configuration, refer to the [official Alertmanager documentation.](https://prometheus.io/docs/alerting/latest/alertmanager/)
 
 <figcaption>The Alertmanager UI</figcaption>
-![Alertmanager UI]({{<baseurl>}}/img/rancher/alertmanager-ui.png)
+![Alertmanager UI](/img/rancher/alertmanager-ui.png)
 
 # Uninstall Monitoring
 
