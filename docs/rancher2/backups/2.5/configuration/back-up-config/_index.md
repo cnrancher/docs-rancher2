@@ -21,7 +21,7 @@ keywords:
 
 The Backup Create page lets you configure a schedule, enable encryption and specify the storage location for your backups.
 
-{{< img "/img/rancher/backup_restore/backup/backup.png" "">}}
+![How it works](/img/rancher/backup_restore/backup/backup.png)
 
 - [Schedule](#schedule)
 - [Encryption](#encryptionconfigname)
@@ -43,7 +43,7 @@ Select the first option to perform a one-time backup, or select the second optio
   - Descriptors, such as `"@midnight"` or `"@every 1h30m"`
 - **Retention Count**: This value specifies how many backup files must be retained. If files exceed the given retentionCount, the oldest files will be deleted. The default value is 10.
 
-{{< img "/img/rancher/backup_restore/backup/schedule.png" "">}}
+![](/img/rancher/backup_restore/backup/schedule.png)
 
 | YAML Directive Name | Description                                               |
 | ------------------- | --------------------------------------------------------- |
@@ -77,7 +77,7 @@ This will ensure that the secret contains a key named `encryption-provider-confi
 
 The `Encryption Config Secret` dropdown will filter out and list only those Secrets that have this exact key
 
-{{< img "/img/rancher/backup_restore/backup/encryption.png" "">}}
+![](/img/rancher/backup_restore/backup/encryption.png)
 
 In the example command above, the name `encryptionconfig` can be changed to anything.
 
@@ -87,7 +87,7 @@ In the example command above, the name `encryptionconfig` can be changed to anyt
 
 # Storage Location
 
-{{< img "/img/rancher/backup_restore/backup/storageLocation.png" "">}}
+![storageLocation](/img/rancher/backup_restore/backup/storageLocation.png)
 
 If the StorageLocation is specified in the Backup, the operator will retrieve the backup location from that particular S3 bucket. If not specified, the operator will try to find this file in the default operator-level S3 store, and in the operator-level PVC store. The default storage location is configured during the deployment of the `rancher-backup` operator.
 
