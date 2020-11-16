@@ -297,45 +297,47 @@ module.exports = {
             },
         ],
         备份和恢复指南: [
-            "rancher2/backups/_index",
+            "rancher2/backups/2.0-2.4/_index",
             {
                 type: "category",
                 label: "备份",
                 items: [
-                    "rancher2/backups/backups/_index",
-                    "rancher2/backups/backups/k3s-backups/_index",
-                    "rancher2/backups/backups/ha-backups/_index",
-                    "rancher2/backups/backups/single-node-backups/_index",
+                    "rancher2/backups/2.0-2.4/_index",
+                    "rancher2/backups/2.0-2.4/k3s-backups/_index",
+                    "rancher2/backups/2.0-2.4/ha-backups/_index",
+                    "rancher2/backups/2.0-2.4/ha-backups/_index",
+                    "rancher2/backups/2.0-2.4/single-node-backups/_index",
                 ],
             },
             {
                 type: "category",
                 label: "恢复",
                 items: [
-                    "rancher2/backups/restorations/_index",
-                    "rancher2/backups/restorations/k3s-restoration/_index",
-                    "rancher2/backups/restorations/ha-restoration/_index",
-                    "rancher2/backups/restorations/single-node-restoration/_index",
+                    "rancher2/backups/2.0-2.4/restorations/_index",
+                    "rancher2/backups/2.0-2.4/restorations/k3s-restoration/_index",
+                    "rancher2/backups/2.0-2.4/restorations/ha-restoration/_index",
+                    "rancher2/backups/2.0-2.4/restorations/single-node-restoration/_index",
                 ],
             },
         ],
         最佳实践: [
-            "rancher2/best-practices/_index",
-            "rancher2/best-practices/deployment-strategies/_index",
-            "rancher2/best-practices/deployment-types/_index",
-            "rancher2/best-practices/containers/_index",
-            "rancher2/best-practices/management/_index",
+            "rancher2/best-practices/2.0-2.4/_index",
+            "rancher2/best-practices/2.0-2.4/deployment-strategies/_index",
+            "rancher2/best-practices/2.0-2.4/deployment-types/_index",
+            "rancher2/best-practices/2.0-2.4/containers/_index",
+            "rancher2/best-practices/2.0-2.4/management/_index",
+
             {
                 type: "category",
                 label: "调优",
                 items: [
-                    "rancher2/best-practices/optimize/os/_index",
-                    "rancher2/best-practices/optimize/docker/_index",
-                    "rancher2/best-practices/optimize/etcd/_index",
-                    "rancher2/best-practices/optimize/kubernetes/_index",
+                    "rancher2/best-practices/2.0-2.4/optimize/os/_index",
+                    "rancher2/best-practices/2.0-2.4/optimize/docker/_index",
+                    "rancher2/best-practices/2.0-2.4/optimize/etcd/_index",
+                    "rancher2/best-practices/2.0-2.4/optimize/kubernetes/_index",
                 ],
             },
-            "rancher2/best-practices/use-in-china/_index",
+            "rancher2/best-practices/2.0-2.4/use-in-china/_index",
         ],
         系统管理员指南: [
             "rancher2/admin-settings/_index",
@@ -794,6 +796,7 @@ module.exports = {
         ],
         常见问题: [
             "rancher2/faq/_index",
+            //"rancher2/faq/deprecated-features-25x/_index",
             "rancher2/faq/upgrades-to-2x/_index",
             "rancher2/faq/kubectl/_index",
             {
@@ -812,6 +815,89 @@ module.exports = {
             "rancher2/faq/etcd/_index",
             "rancher2/faq/install/_index",
         ],
+
+        //TODO: remove comment after translation of 2.5 docs is done, it possibly needs to readjust its position in sidebar
+        /*
+        跨集群部署:[
+                    "rancher2/deploy-across-clusters/_index",
+                    "rancher2/deploy-across-clusters/fleet/_index",
+                    "rancher2/deploy-across-clusters/multi-cluster-apps/_index",
+                ]
+        */
+
+        //TODO: remove comment after translation of 2.5 docs is done, it possibly needs to readjust its position in sidebar
+        /*
+        HelmChart:[
+            "rancher2/helm-charts/app-marketplace/_index",
+            {
+                type: "category",
+                label: "legacy catalogs",
+                items: [
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                ],
+            },
+        ]
+        */
+        //TODO: remove comment after translation of 2.5 docs is done, it possibly needs to readjust its position in sidebar
+        /*
+        monitoringalerting: [
+            {
+                type: "category",
+                label: "2.0-2.4",
+                items: ["", "", "", ""],
+            },
+            {
+                type: "category",
+                label: "2.5",
+                items: ["", "", "", ""],
+            },
+        ],
+        */
+        //TODO: remove comment after translation of 2.5 docs is done, it possibly needs to readjust its position in sidebar
+        /*
+        istio:[],
+        */
+        //TODO: remove comment after translation of 2.5 docs is done, it possibly needs to readjust its position in sidebar
+        /*
+        logging:[
+            "rancher2/logging/_index",
+            {
+                type: "category",
+                label: "2.0-2.4",
+                items: ["", "", "", ""],
+            },
+            {
+                type: "category",
+                label: "2.5",
+                items: ["", "", "", ""],
+            },
+        ],
+        */
+        //TODO: remove comment after translation of 2.5 docs is done, it possibly needs to readjust its position in sidebar
+        /*
+       cis-scans:[
+           "rancher2/cis-scans/_index",
+            {
+                type: "category",
+                label: "2.4",
+                items: ["", "", "", ""],
+            },
+            {
+                type: "category",
+                label: "2.5",
+                items: ["", "", "", ""],
+            },
+        ],
+       */
         常见故障排查: [
             "rancher2/troubleshooting/_index",
             {

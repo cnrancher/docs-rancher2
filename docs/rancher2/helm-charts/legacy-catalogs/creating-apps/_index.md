@@ -64,21 +64,19 @@ Before you create your own custom catalog, you should have a basic understanding
 
 - `app-readme.md`
 
-    A file that provides descriptive text in the chart's UI header. The following image displays the difference between a Rancher chart (which includes `app-readme.md`) and a native Helm chart (which does not).
+  A file that provides descriptive text in the chart's UI header. The following image displays the difference between a Rancher chart (which includes `app-readme.md`) and a native Helm chart (which does not).
 
-	<figcaption>Rancher Chart with <code>app-readme.md</code> (left) vs. Helm Chart without (right)</figcaption>
+  <figcaption>Rancher Chart with <code>app-readme.md</code> (left) vs. Helm Chart without (right)</figcaption>
 
-	![app-readme.md]({{<baseurl>}}/img/rancher/app-readme.png)
+  ![app-readme.md]({{<baseurl>}}/img/rancher/app-readme.png)
 
 - `questions.yml`
 
-    A file that contains questions for a form. These form questions simplify deployment of a chart. Without it, you must configure the deployment using key value pairs, which is more difficult. The following image displays the difference between a Rancher chart (which includes `questions.yml`) and a native Helm chart (which does not).
+  A file that contains questions for a form. These form questions simplify deployment of a chart. Without it, you must configure the deployment using key value pairs, which is more difficult. The following image displays the difference between a Rancher chart (which includes `questions.yml`) and a native Helm chart (which does not).
 
+  <figcaption>Rancher Chart with <code>questions.yml</code> (left) vs. Helm Chart without (right)</figcaption>
 
-	<figcaption>Rancher Chart with <code>questions.yml</code> (left) vs. Helm Chart without (right)</figcaption>
-
-	![questions.yml]({{<baseurl>}}/img/rancher/questions.png)
-
+  ![questions.yml]({{<baseurl>}}/img/rancher/questions.png)
 
 ### questions.yml
 
@@ -90,7 +88,7 @@ _Available as of v2.3.0_
 
 For each chart, you can add the minimum and/or maximum Rancher version, which determines whether or not this chart is available to be deployed from Rancher.
 
-> **Note:** Even though Rancher release versions are prefixed with a `v`, there is *no* prefix for the release version when using this option.
+> **Note:** Even though Rancher release versions are prefixed with a `v`, there is _no_ prefix for the release version when using this option.
 
 ```
 rancher_min_version: 2.3.0
@@ -101,27 +99,27 @@ rancher_max_version: 2.3.99
 
 This reference contains variables that you can use in `questions.yml` nested under `questions:`.
 
-| Variable  | Type | Required | Description |
-| ------------- | ------------- | --- |------------- |
-| 	variable          | string  | true    |  Define the variable name specified in the `values.yml` file, using `foo.bar` for nested objects. |
-| 	label             | string  | true      |  Define the UI label. |
-| 	description       | string  | false      |  Specify the description of the variable.|
-| 	type              | string  | false      |  Default to `string` if not specified (current supported types are string, multiline, boolean, int, enum, password, storageclass, hostname, pvc, and secret).|
-| 	required          | bool    | false      |  Define if the variable is required or not (true \| false)|
-| 	default           | string  | false      |  Specify the default value. |
-| 	group             | string  | false      |  Group questions by input value. |
-| 	min_length        | int     | false      | Min character length.|
-| 	max_length        | int     | false      | Max character length.|
-| 	min               | int     | false      |  Min integer length. |
-| 	max               | int     | false      |  Max integer length. |
-| 	options           | []string | false     |  Specify the options when the variable type is `enum`, for example: options:<br> - "ClusterIP" <br> - "NodePort" <br> - "LoadBalancer"|
-| 	valid_chars       | string   | false     |  Regular expression for input chars validation. |
-| 	invalid_chars     | string   | false     |  Regular expression for invalid input chars validation.|
-| 	subquestions      | []subquestion | false|  Add an array of subquestions.|
-| 	show_if           | string      | false  | Show current variable if conditional variable is true. For example `show_if: "serviceType=Nodeport"` |
-| 	show\_subquestion_if |  string  | false     | Show subquestions if is true or equal to one of the options. for example `show_subquestion_if: "true"`|
+| Variable            | Type          | Required | Description                                                                                                                                                  |
+| ------------------- | ------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| variable            | string        | true     | Define the variable name specified in the `values.yml` file, using `foo.bar` for nested objects.                                                             |
+| label               | string        | true     | Define the UI label.                                                                                                                                         |
+| description         | string        | false    | Specify the description of the variable.                                                                                                                     |
+| type                | string        | false    | Default to `string` if not specified (current supported types are string, multiline, boolean, int, enum, password, storageclass, hostname, pvc, and secret). |
+| required            | bool          | false    | Define if the variable is required or not (true \| false)                                                                                                    |
+| default             | string        | false    | Specify the default value.                                                                                                                                   |
+| group               | string        | false    | Group questions by input value.                                                                                                                              |
+| min_length          | int           | false    | Min character length.                                                                                                                                        |
+| max_length          | int           | false    | Max character length.                                                                                                                                        |
+| min                 | int           | false    | Min integer length.                                                                                                                                          |
+| max                 | int           | false    | Max integer length.                                                                                                                                          |
+| options             | []string      | false    | Specify the options when the variable type is `enum`, for example: options: - "ClusterIP" - "NodePort" - "LoadBalancer"                                      |
+| valid_chars         | string        | false    | Regular expression for input chars validation.                                                                                                               |
+| invalid_chars       | string        | false    | Regular expression for invalid input chars validation.                                                                                                       |
+| subquestions        | []subquestion | false    | Add an array of subquestions.                                                                                                                                |
+| show_if             | string        | false    | Show current variable if conditional variable is true. For example `show_if: "serviceType=Nodeport"`                                                         |
+| show_subquestion_if | string        | false    | Show subquestions if is true or equal to one of the options. for example `show_subquestion_if: "true"`                                                       |
 
->**Note:** `subquestions[]` cannot contain `subquestions` or `show_subquestions_if` keys, but all other keys in the above table are supported.
+> **Note:** `subquestions[]` cannot contain `subquestions` or `show_subquestions_if` keys, but all other keys in the above table are supported.
 
 # Tutorial: Example Custom Chart Creation
 

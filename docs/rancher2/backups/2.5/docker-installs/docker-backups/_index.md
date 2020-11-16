@@ -33,7 +33,7 @@ In this command, `<DATE>` is a placeholder for the date that the data container 
 
 Cross reference the image and reference table below to learn how to obtain this placeholder data. Write down or copy this information before starting the [procedure below](#creating-a-backup).
 
-<sup>Terminal `docker ps` Command, Displaying Where to Find `<RANCHER_CONTAINER_TAG>` and `<RANCHER_CONTAINER_NAME>`</sup>
+Terminal `docker ps` Command, Displaying Where to Find `<RANCHER_CONTAINER_TAG>` and `<RANCHER_CONTAINER_NAME>`
 ![Placeholder Reference]({{<baseurl>}}/img/rancher/placeholder-ref.png)
 
 | Placeholder                | Example           | Description                                               |
@@ -59,13 +59,13 @@ This procedure creates a backup that you can restore if Rancher encounters a dis
    docker stop <RANCHER_CONTAINER_NAME>
    ```
 
-1. <a id="backup"></a>Use the command below, replacing each [placeholder](#before-you-start), to create a data container from the Rancher container that you just stopped.
+1. Use the command below, replacing each [placeholder](#before-you-start), to create a data container from the Rancher container that you just stopped.
 
    ```
    docker create --volumes-from <RANCHER_CONTAINER_NAME> --name rancher-data-<DATE> rancher/rancher:<RANCHER_CONTAINER_TAG>
    ```
 
-1. <a id="tarball"></a>From the data container that you just created (`rancher-data-<DATE>`), create a backup tarball (`rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz`). Use the following command, replacing each [placeholder](#before-you-start).
+1. From the data container that you just created (`rancher-data-<DATE>`), create a backup tarball (`rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz`). Use the following command, replacing each [placeholder](#before-you-start).
 
    ```
    docker run  --volumes-from rancher-data-<DATE> -v $PWD:/backup:z busybox tar pzcvf /backup/rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz /var/lib/rancher
