@@ -53,7 +53,7 @@ docker stop <RANCHER_CONTAINER_NAME>
 
 ## 升级大纲
 
-在升级期间，您可以从 d 当前 Rancher 容器中创建数据的副本和备份，确保可以在升级出现问题时回滚。然后，您可以使用现有数据部署新版本的 Rancher。请按照以下步骤升级 Rancher Server：
+在升级期间，您可以从当前 Rancher 容器中创建数据的副本和备份，确保可以在升级出现问题时回滚。然后，您可以使用现有数据部署新版本的 Rancher。请按照以下步骤升级 Rancher Server：
 
 - [创建 Rancher Server 数据副本](#创建-rancher-server-数据副本)
 - [创建备份压缩包](#创建备份压缩包)
