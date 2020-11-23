@@ -82,8 +82,8 @@ This alert type monitor for events that affect one of the Kubernetes master comp
     - **Critical**: Most urgent
     - **Warning**: Normal urgency
     - **Info**: Least urgent
-    <br/>
-    <br/>
+
+
     Select the urgency level based on the importance of the service and how many nodes fill the role within your cluster. For example, if you're making an alert for the `etcd` service, select **Critical**. If you're making an alert for redundant schedulers, **Warning** is more appropriate.
 
 1. Configure advanced options. By default, the below options will apply to all alert rules within the group. You can disable these advanced options when configuring a specific rule.
@@ -114,8 +114,8 @@ This alert type monitors for specific events that are thrown from a resource typ
     - **Critical**: Most urgent
     - **Warning**: Normal urgency
     - **Info**: Least urgent
-    <br/>
-    <br/>
+
+
     Select the urgency level of the alert by considering factors such as how often the event occurs or its importance. For example:
 
     - If you set a normal alert for pods, you're likely to receive alerts often, and individual pods usually self-heal, so select an urgency of **Info**.
@@ -144,8 +144,8 @@ This alert type monitors for events that occur on a specific node.
     - **Critical**: Most urgent
     - **Warning**: Normal urgency
     - **Info**: Least urgent
-    <br/>
-    <br/>
+
+
     Select the urgency level of the alert based on its impact on operations. For example, an alert triggered when a node's CPU raises above 60% deems an urgency of **Info**, but a node that is **Not Ready** deems an urgency of **Critical**.
 
 1. Configure advanced options. By default, the below options will apply to all alert rules within the group. You can disable these advanced options when configuring a specific rule.
@@ -171,8 +171,8 @@ This alert type monitors for events that occur on any node on marked with a labe
     - **Critical**: Most urgent
     - **Warning**: Normal urgency
     - **Info**: Least urgent
-    <br/>
-    <br/>
+
+
       Select the urgency level of the alert based on its impact on operations. For example, an alert triggered when a node's CPU raises above 60% deems an urgency of **Info**, but a node that is **Not Ready** deems an urgency of **Critical**.
 
 1. Configure advanced options. By default, the below options will apply to all alert rules within the group. You can disable these advanced options when configuring a specific rule.
@@ -216,8 +216,7 @@ This alert type monitors for the overload from Prometheus expression querying, i
     - **Critical**: Most urgent
     - **Warning**: Normal urgency
     - **Info**: Least urgent
-    <br/>
-    <br/>
+
     Select the urgency level of the alert based on its impact on operations. For example, an alert triggered when a node's load expression ```sum(node_load5)  / count(node_cpu_seconds_total{mode="system"})``` raises above 0.6 deems an urgency of **Info**, but 1 deems an urgency of **Critical**.
 
 1. Configure advanced options. By default, the below options will apply to all alert rules within the group. You can disable these advanced options when configuring a specific rule.
