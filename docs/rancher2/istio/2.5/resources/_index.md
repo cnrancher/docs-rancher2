@@ -19,7 +19,7 @@ keywords:
   - subtitles6
 ---
 
-_This section applies to Istio in Rancher v2.5.0. If you are using Rancher v2.4.x, refer to [this section.]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/)_
+_This section applies to Istio in Rancher v2.5.0. If you are using Rancher v2.4.x, refer to [this section.](/rancher/v2.x/en/cluster-admin/tools/istio/)_
 
 This section describes the minimum recommended computing resources for the Istio components in a cluster.
 
@@ -53,7 +53,7 @@ You can find more information about Istio configuration in the [official Istio d
 To configure the resources allocated to an Istio component,
 
 1. In the Rancher **Cluster Explorer**, navigate to your Istio installation in **Apps & Marketplace**
-1. Click **Upgrade** to edit the base components via changes the values.yaml or add an [overlay file]({{<baseurl>}}/rancher/v2.x/en/istio/setup/enable-istio-in-cluster/#overlay-file).
+1. Click **Upgrade** to edit the base components via changes the values.yaml or add an [overlay file](/rancher/v2.x/en/istio/setup/enable-istio-in-cluster/#overlay-file).
 1. Change the CPU or memory allocations, the nodes where each component will be scheduled to, or the node tolerations.
 1. Click **Upgrade.** to rollout changes
 

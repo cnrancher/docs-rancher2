@@ -10,7 +10,7 @@ aliases:
   - /rancher/v2.x/en/logging/legacy/cluster-logging
 ---
 
-> In Rancher 2.5, the logging application was improved. There are now two ways to enable logging. The older way is documented in this section, and the new application for logging is documented [here.]({{<baseurl>}}/rancher/v2.x/en/logging/v2.5)
+> In Rancher 2.5, the logging application was improved. There are now two ways to enable logging. The older way is documented in this section, and the new application for logging is documented [here.](/rancher/v2.x/en/logging/v2.5)
 
 Logging is helpful because it allows you to:
 
@@ -60,8 +60,8 @@ Logging Driver: json-file
 
 You can configure logging at either cluster level or project level.
 
-- Cluster logging writes logs for every pod in the cluster, i.e. in all the projects. For [RKE clusters]({{<baseurl>}}/rancher/v2.x/en/cluster-provisioning/rke-clusters), it also writes logs for all the Kubernetes system components.
-- [Project logging]({{<baseurl>}}/rancher/v2.x/en/project-admin/tools/logging/) writes logs for every pod in that particular project.
+- Cluster logging writes logs for every pod in the cluster, i.e. in all the projects. For [RKE clusters](/rancher/v2.x/en/cluster-provisioning/rke-clusters), it also writes logs for all the Kubernetes system components.
+- [Project logging](/rancher/v2.x/en/project-admin/tools/logging/) writes logs for every pod in that particular project.
 
 Logs that are sent to your logging service are from the following locations:
 
@@ -70,7 +70,7 @@ Logs that are sent to your logging service are from the following locations:
 
 # Enabling Cluster Logging
 
-As an [administrator]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/global-permissions/) or [cluster owner]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles), you can configure Rancher to send Kubernetes logs to a logging service.
+As an [administrator](/rancher/v2.x/en/admin-settings/rbac/global-permissions/) or [cluster owner](/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles), you can configure Rancher to send Kubernetes logs to a logging service.
 
 1. From the **Global** view, navigate to the cluster that you want to configure cluster logging.
 
@@ -78,11 +78,11 @@ As an [administrator]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/global-p
 
 1. Select a logging service and enter the configuration. Refer to the specific service for detailed configuration. Rancher supports integration with the following services:
 
-   - [Elasticsearch]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/logging/elasticsearch/)
-   - [Splunk]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/logging/splunk/)
-   - [Kafka]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/logging/kafka/)
-   - [Syslog]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/logging/syslog/)
-   - [Fluentd]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/logging/fluentd/)
+   - [Elasticsearch](/rancher/v2.x/en/cluster-admin/tools/logging/elasticsearch/)
+   - [Splunk](/rancher/v2.x/en/cluster-admin/tools/logging/splunk/)
+   - [Kafka](/rancher/v2.x/en/cluster-admin/tools/logging/kafka/)
+   - [Syslog](/rancher/v2.x/en/cluster-admin/tools/logging/syslog/)
+   - [Fluentd](/rancher/v2.x/en/cluster-admin/tools/logging/fluentd/)
 
 1. (Optional) Instead of using the UI to configure the logging services, you can enter custom advanced configurations by clicking on **Edit as File**, which is located above the logging targets. This link is only visible after you select a logging service.
 

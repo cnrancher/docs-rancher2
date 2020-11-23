@@ -31,8 +31,8 @@ Rancher version must be v2.5.0 and up
 
 Rancher can be installed on any Kubernetes cluster, including hosted Kubernetes clusters such as Amazon EKS clusters. For help installing Kubernetes, refer to the documentation of the Kubernetes distribution. One of Rancher's Kubernetes distributions may also be used:
 
-- [RKE Kubernetes installation docs]({{<baseurl>}}/rke/latest/en/installation/)
-- [K3s Kubernetes installation docs]({{<baseurl>}}/k3s/latest/en/installation/)
+- [RKE Kubernetes installation docs](/rke/latest/en/installation/)
+- [K3s Kubernetes installation docs](/k3s/latest/en/installation/)
 
 ### 1. Install the rancher-backup Helm chart
 
@@ -102,7 +102,7 @@ kubectl apply -f migrationResource.yaml
 
 ### 3. Install cert-manager
 
-Follow the steps to [install cert-manager]({{<baseurl>}}/rancher/v2.x/en/installation/install-rancher-on-k8s/#5-install-cert-manager) in the documentation about installing cert-manager on Kubernetes.
+Follow the steps to [install cert-manager](/rancher/v2.x/en/installation/install-rancher-on-k8s/#5-install-cert-manager) in the documentation about installing cert-manager on Kubernetes.
 
 ### 4. Bring up Rancher with Helm
 

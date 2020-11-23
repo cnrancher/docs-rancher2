@@ -34,7 +34,7 @@ In this command, `<DATE>` is a placeholder for the date that the data container 
 Cross reference the image and reference table below to learn how to obtain this placeholder data. Write down or copy this information before starting the [procedure below](#creating-a-backup).
 
 Terminal `docker ps` Command, Displaying Where to Find `<RANCHER_CONTAINER_TAG>` and `<RANCHER_CONTAINER_NAME>`
-![Placeholder Reference]({{<baseurl>}}/img/rancher/placeholder-ref.png)
+![Placeholder Reference](/img/rancher/placeholder-ref.png)
 
 | Placeholder                | Example           | Description                                               |
 | -------------------------- | ----------------- | --------------------------------------------------------- |
@@ -83,4 +83,4 @@ This procedure creates a backup that you can restore if Rancher encounters a dis
    docker start <RANCHER_CONTAINER_NAME>
    ```
 
-**Result:** A backup tarball of your Rancher Server data is created. See [Restoring Backups: Docker Installs]({{<baseurl>}}/rancher/v2.x/en/backups/restorations/single-node-restoration) if you need to restore backup data.
+**Result:** A backup tarball of your Rancher Server data is created. See [Restoring Backups: Docker Installs](/rancher/v2.x/en/backups/restorations/single-node-restoration) if you need to restore backup data.

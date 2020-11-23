@@ -6,4 +6,4 @@ aliases:
 ---
 _Available as of v2.2.0_
 
-The documentation about multi-cluster apps has moved [here.]({{<baseurl>}}/rancher/v2.x/en/deploy-across-clusters/multi-cluster-apps)
+The documentation about multi-cluster apps has moved [here.](/rancher/v2.x/en/deploy-across-clusters/multi-cluster-apps)

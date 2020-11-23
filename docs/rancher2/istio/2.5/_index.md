@@ -31,7 +31,7 @@ This core service mesh provides features that include but are not limited to the
 - **Security** with resources to authenticate and authorize traffic and users, mTLS included.
 - **Observability** of logs, metrics, and distributed traffic flows.
 
-After [setting up istio]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/setup) you can leverage Istio's control plane functionality through the Cluster Explorer, `kubectl`, or `istioctl`.
+After [setting up istio](/rancher/v2.x/en/cluster-admin/tools/istio/setup) you can leverage Istio's control plane functionality through the Cluster Explorer, `kubectl`, or `istioctl`.
 
 Rancher's Istio integration comes with a comprehensive visualization aid:
 
@@ -53,7 +53,7 @@ The overall architecture of Istio has been simplified. A single component, Istio
 
 Addons that were previously installed by Istio (cert-manager, Grafana, Jaeger, Kiali, Prometheus, Zipkin) will now need to be installed separately. Istio will support installation of integrations that are from the Istio Project and will maintain compatibility with those that are not.
 
-A Prometheus integration will still be available through an installation of [Rancher Monitoring]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/), or by installing your own Prometheus operator. Rancher's Istio chart will also install Kiali by default to ensure you can get a full picture of your microservices out of the box.
+A Prometheus integration will still be available through an installation of [Rancher Monitoring](/rancher/v2.x/en/monitoring-alerting/), or by installing your own Prometheus operator. Rancher's Istio chart will also install Kiali by default to ensure you can get a full picture of your microservices out of the box.
 
 Istio has migrated away from Helm as a way to install Istio and now provides installation through the istioctl binary or Istio Operator. To ensure the easiest interaction with Istio, Rancher's Istio will maintain a Helm chart that utilizes the istioctl binary to manage your Istio installation.
 
@@ -61,15 +61,15 @@ This Helm chart will be available via the Apps and Marketplace in the UI. A user
 
 # Prerequisites
 
-Before enabling Istio, we recommend that you confirm that your Rancher worker nodes have enough [CPU and memory]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/resources) to run all of the components of Istio.
+Before enabling Istio, we recommend that you confirm that your Rancher worker nodes have enough [CPU and memory](/rancher/v2.x/en/cluster-admin/tools/istio/resources) to run all of the components of Istio.
 
 # Setup Guide
 
-Refer to the [setup guide]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/setup) for instructions on how to set up Istio and use it in a project.
+Refer to the [setup guide](/rancher/v2.x/en/cluster-admin/tools/istio/setup) for instructions on how to set up Istio and use it in a project.
 
 # Remove Istio
 
-To remove Istio components from a cluster, namespace, or workload, refer to the section on [uninstalling Istio.]({{<baseurl>}}/rancher/v2.x/en/istio/disabling-istio/)
+To remove Istio components from a cluster, namespace, or workload, refer to the section on [uninstalling Istio.](/rancher/v2.x/en/istio/disabling-istio/)
 
 # Migrate From Previous Istio Version
 
@@ -81,7 +81,7 @@ Another option is to manually uninstall istio resources one at a time, but leave
 
 # Accessing Visualizations
 
-> By default, only cluster-admins have access to Kiali. For instructions on how to allow admin, edit or views roles to access them, refer to [Access to Visualizations.]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/rbac/#access-to-visualizations)
+> By default, only cluster-admins have access to Kiali. For instructions on how to allow admin, edit or views roles to access them, refer to [Access to Visualizations.](/rancher/v2.x/en/cluster-admin/tools/istio/rbac/#access-to-visualizations)
 
 After Istio is set up in a cluster, Grafana, Prometheus,and Kiali are available in the Rancher UI.
 
@@ -89,7 +89,7 @@ To access the Grafana and Prometheus visualizations, from the **Cluster Explorer
 
 To access the Kiali visualization, from the **Cluster Explorer** navigate to the **Istio** app overview page, and click on **Kiali**. From here you can access the **Traffic Graph** tab or the **Traffic Metrics** tab to see network visualizations and metrics.
 
-By default, all namespace will picked up by prometheus and make data available for Kiali graphs. Refer to [selector/scrape config setup]({{<baseurl>}}/rancher/v2.x/en/istio/setup/enable-istio-in-cluster/#selectors-scrape-configs) if you would like to use a different configuration for prometheus data scraping.
+By default, all namespace will picked up by prometheus and make data available for Kiali graphs. Refer to [selector/scrape config setup](/rancher/v2.x/en/istio/setup/enable-istio-in-cluster/#selectors-scrape-configs) if you would like to use a different configuration for prometheus data scraping.
 
 Your access to the visualizations depend on your role. Grafana and Prometheus are only available for `cluster-admin` roles. The Kiali UI is available only to `cluster-admin` by default, but `cluster-admin` can allow other roles to access them by editing the Istio values.yaml.
 
@@ -107,10 +107,10 @@ For more information on the Istio sidecar, refer to the [Istio sidecare-injectio
 
 By default, each Rancher-provisioned cluster has one NGINX ingress controller allowing traffic into the cluster. Istio also installs an ingress gateway by default into the `istio-system` namespace. The result is that your cluster will have two ingresses in your cluster.
 
-![In an Istio-enabled cluster, you can have two ingresses: the default Nginx ingress, and the default Istio controller.]({{<baseurl>}}/img/rancher/istio-ingress.svg)
+![In an Istio-enabled cluster, you can have two ingresses: the default Nginx ingress, and the default Istio controller.](/img/rancher/istio-ingress.svg)
 
-Additional Istio Ingress gateways can be enabled via the [overlay file]({{<baseurl>}}/rancher/v2.x/en/istio/setup/enable-istio-in-cluster/#overlay-file).
+Additional Istio Ingress gateways can be enabled via the [overlay file](/rancher/v2.x/en/istio/setup/enable-istio-in-cluster/#overlay-file).
 
 ### Egress Support
 
-By default the Egress gateway is disabled, but can be enabled on install or upgrade through the values.yaml or via the [overlay file]({{<baseurl>}}/rancher/v2.x/en/istio/setup/enable-istio-in-cluster/#overlay-file).
+By default the Egress gateway is disabled, but can be enabled on install or upgrade through the values.yaml or via the [overlay file](/rancher/v2.x/en/istio/setup/enable-istio-in-cluster/#overlay-file).

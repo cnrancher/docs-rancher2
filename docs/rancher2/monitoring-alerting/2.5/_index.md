@@ -79,7 +79,7 @@ By viewing data that Prometheus scrapes from your cluster control plane, nodes, 
 
 # Enable Monitoring
 
-As an [administrator]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/global-permissions/) or [cluster owner]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles), you can configure Rancher to deploy Prometheus to monitor your Kubernetes cluster.
+As an [administrator](/rancher/v2.x/en/admin-settings/rbac/global-permissions/) or [cluster owner](/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles), you can configure Rancher to deploy Prometheus to monitor your Kubernetes cluster.
 
 > If you want to set up Alertmanager, Grafana or Ingress, it has to be done with the settings on the Helm chart deployment. It's problematic to create Ingress outside the deployment.
 

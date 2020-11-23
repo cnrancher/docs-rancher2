@@ -6,17 +6,17 @@ aliases:
   - /rancher/v2.x/en/monitoring-alerting/legacy/alerts/cluster-alerts
 ---
 
-> In Rancher 2.5, the monitoring application was improved. There are now two ways to enable monitoring and alerting. The older way is documented in this section, and the new application for monitoring and alerting is documented [here.]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting)
+> In Rancher 2.5, the monitoring application was improved. There are now two ways to enable monitoring and alerting. The older way is documented in this section, and the new application for monitoring and alerting is documented [here.](/rancher/v2.x/en/monitoring-alerting)
 
 To keep your clusters and applications healthy and driving your organizational productivity forward, you need to stay informed of events occurring in your clusters and projects, both planned and unplanned. When an event occurs, your alert is triggered, and you are sent a notification. You can then, if necessary, follow up with corrective actions.
 
-Notifiers and alerts are built on top of the [Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager/). Leveraging these tools, Rancher can notify [cluster owners]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles) and [project owners]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#project-roles) of events they need to address.
+Notifiers and alerts are built on top of the [Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager/). Leveraging these tools, Rancher can notify [cluster owners](/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles) and [project owners](/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#project-roles) of events they need to address.
 
 Before you can receive alerts, you must configure one or more notifier in Rancher.
 
-When you create a cluster, some alert rules are predefined. You can receive these alerts if you configure a [notifier]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/notifiers) for them.
+When you create a cluster, some alert rules are predefined. You can receive these alerts if you configure a [notifier](/rancher/v2.x/en/cluster-admin/tools/notifiers) for them.
 
-For details about what triggers the predefined alerts, refer to the [documentation on default alerts.]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/alerts/default-alerts)
+For details about what triggers the predefined alerts, refer to the [documentation on default alerts.](/rancher/v2.x/en/cluster-admin/tools/alerts/default-alerts)
 
 This section covers the following topics:
 
@@ -31,16 +31,16 @@ This section covers the following topics:
 
 Some examples of alert events are:
 
-- A Kubernetes [master component]({{<baseurl>}}/rancher/v2.x/en/cluster-provisioning/#kubernetes-cluster-node-components) entering an unhealthy state.
-- A node or [workload]({{<baseurl>}}/rancher/v2.x/en/k8s-in-rancher/workloads/) error occurring.
+- A Kubernetes [master component](/rancher/v2.x/en/cluster-provisioning/#kubernetes-cluster-node-components) entering an unhealthy state.
+- A node or [workload](/rancher/v2.x/en/k8s-in-rancher/workloads/) error occurring.
 - A scheduled deployment taking place as planned.
 - A node's hardware resources becoming overstressed.
 
 ### Prometheus Queries
 
-> **Prerequisite:** Monitoring must be [enabled]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/#enabling-cluster-monitoring) before you can trigger alerts with custom Prometheus queries or expressions.
+> **Prerequisite:** Monitoring must be [enabled](/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/#enabling-cluster-monitoring) before you can trigger alerts with custom Prometheus queries or expressions.
 
-When you edit an alert rule, you will have the opportunity to configure the alert to be triggered based on a Prometheus expression. For examples of expressions, refer to [this page.]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/expression)
+When you edit an alert rule, you will have the opportunity to configure the alert to be triggered based on a Prometheus expression. For examples of expressions, refer to [this page.](/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/expression)
 
 # Urgency Levels
 
@@ -48,7 +48,7 @@ You can set an urgency level for each alert. This urgency appears in the notific
 
 # Scope of Alerts
 
-The scope for alerts can be set at either the cluster level or [project level]({{<baseurl>}}/rancher/v2.x/en/project-admin/tools/alerts/).
+The scope for alerts can be set at either the cluster level or [project level](/rancher/v2.x/en/project-admin/tools/alerts/).
 
 At the cluster level, Rancher monitors components in your Kubernetes cluster, and sends you alerts related to:
 
@@ -59,9 +59,9 @@ At the cluster level, Rancher monitors components in your Kubernetes cluster, an
 
 # Adding Cluster Alerts
 
-As a [cluster owner]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles), you can configure Rancher to send you alerts for cluster events.
+As a [cluster owner](/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles), you can configure Rancher to send you alerts for cluster events.
 
->**Prerequisite:** Before you can receive cluster alerts, you must [add a notifier]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/notifiers/#adding-notifiers).
+>**Prerequisite:** Before you can receive cluster alerts, you must [add a notifier](/rancher/v2.x/en/monitoring-alerting/legacy/notifiers/#adding-notifiers).
 
 1. From the **Global** view, navigate to the cluster that you want to configure cluster alerts for. Select **Tools > Alerts**. Then click **Add Alert Group**.
 
@@ -192,7 +192,7 @@ This alert type monitors for the overload from Prometheus expression querying, i
   - [**ETCD**](https://etcd.io/docs/v3.4.0/op-guide/monitoring/)
   - [**Kubernetes Components**](https://github.com/kubernetes/metrics)
   - [**Kubernetes Resources**](https://github.com/kubernetes/kube-state-metrics)
-  - [**Fluentd**](https://docs.fluentd.org/v1.0/articles/monitoring-prometheus) (supported by [Logging]({{<baseurl>}}/rancher/v2.x//en/cluster-admin/tools/logging))
+  - [**Fluentd**](https://docs.fluentd.org/v1.0/articles/monitoring-prometheus) (supported by [Logging](/rancher/v2.x//en/cluster-admin/tools/logging))
   - [**Cluster Level Grafana**](http://docs.grafana.org/administration/metrics/)
   - **Cluster Level Prometheus**
 
@@ -230,7 +230,7 @@ This alert type monitors for the overload from Prometheus expression querying, i
 
 1. Continue adding more **Alert Rule** to the group.
 
-1. Finally, choose the [notifiers]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/notifiers/) to send the alerts to.
+1. Finally, choose the [notifiers](/rancher/v2.x/en/cluster-admin/tools/notifiers/) to send the alerts to.
 
     - You can set up multiple notifiers.
     - You can change notifier recipients on the fly.

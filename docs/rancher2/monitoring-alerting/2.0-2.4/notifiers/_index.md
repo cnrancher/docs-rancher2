@@ -7,7 +7,7 @@ aliases:
   - /rancher/v2.x/en/monitoring-alerting/legacy/notifiers
 ---
 
-> In Rancher 2.5, the notifier application was improved. There are now two ways to enable notifiers. The older way is documented in this section, and the new application for notifiers is documented [here.]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting)
+> In Rancher 2.5, the notifier application was improved. There are now two ways to enable notifiers. The older way is documented in this section, and the new application for notifiers is documented [here.](/rancher/v2.x/en/monitoring-alerting)
 
 Notifiers are services that inform you of alert events. You can configure notifiers to send alert notifications to staff best suited to take corrective action.
 
@@ -134,5 +134,5 @@ After you set up notifiers, you can manage them. From the **Global** view, open 
 
 After creating a notifier, set up alerts to receive notifications of Rancher system events.
 
-- [Cluster owners]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles) can set up alerts at the [cluster level]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/alerts/).
-- [Project owners]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#project-roles) can set up alerts at the [project level]({{<baseurl>}}/rancher/v2.x/en/project-admin/tools/alerts/).
+- [Cluster owners](/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles) can set up alerts at the [cluster level](/rancher/v2.x/en/cluster-admin/tools/alerts/).
+- [Project owners](/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#project-roles) can set up alerts at the [project level](/rancher/v2.x/en/project-admin/tools/alerts/).

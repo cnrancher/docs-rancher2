@@ -6,9 +6,9 @@ aliases:
   - /rancher/v2.x/en/monitoring-alerting/legacy/alerts/cluster-alerts/default-alerts
 ---
 
-When you create a cluster, some alert rules are predefined. These alerts notify you about signs that the cluster could be unhealthy. You can receive these alerts if you configure a [notifier]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/notifiers) for them.
+When you create a cluster, some alert rules are predefined. These alerts notify you about signs that the cluster could be unhealthy. You can receive these alerts if you configure a [notifier](/rancher/v2.x/en/cluster-admin/tools/notifiers) for them.
 
-Several of the alerts use Prometheus expressions as the metric that triggers the alert. For more information on how expressions work, you can refer to the Rancher [documentation about Prometheus expressions]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/expression/) or the Prometheus [documentation about querying metrics](https://prometheus.io/docs/prometheus/latest/querying/basics/).
+Several of the alerts use Prometheus expressions as the metric that triggers the alert. For more information on how expressions work, you can refer to the Rancher [documentation about Prometheus expressions](/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/expression/) or the Prometheus [documentation about querying metrics](https://prometheus.io/docs/prometheus/latest/querying/basics/).
 
 # Alerts for etcd
 Etcd is the key-value store that contains the state of the Kubernetes cluster. Rancher provides default alerts if the built-in monitoring detects a potential problem with etcd. You don't have to enable monitoring to receive these alerts.
@@ -47,7 +47,7 @@ Kubernetes events are objects that provide insight into what is happening inside
 
 
 # Alerts for Nodes
-Alerts can be triggered based on node metrics. Each computing resource in a Kubernetes cluster is called a node. [Nodes]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/#kubernetes-cluster-node-components) can be either bare-metal servers or virtual machines.
+Alerts can be triggered based on node metrics. Each computing resource in a Kubernetes cluster is called a node. [Nodes](/rancher/v2.x/en/cluster-admin/#kubernetes-cluster-node-components) can be either bare-metal servers or virtual machines.
 
 | Alert | Explanation |
 |-------|-------------|
@@ -56,4 +56,4 @@ Alerts can be triggered based on node metrics. Each computing resource in a Kube
 | Node disk is running full within 24 hours | A critical alert is triggered if the disk space on the node is expected to run out in the next 24 hours based on the disk growth over the last 6 hours. |
 
 # Project-level Alerts
-When you enable monitoring for the project, some project-level alerts are provided. For details, refer to the [section on project-level alerts.]({{<baseurl>}}/rancher/v2.x/en/project-admin/tools/alerts/#default-project-level-alerts)
+When you enable monitoring for the project, some project-level alerts are provided. For details, refer to the [section on project-level alerts.](/rancher/v2.x/en/project-admin/tools/alerts/#default-project-level-alerts)

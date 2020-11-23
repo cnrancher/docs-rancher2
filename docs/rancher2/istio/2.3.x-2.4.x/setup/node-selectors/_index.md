@@ -6,7 +6,7 @@ aliases:
   - /rancher/v2.x/en/istio/legacy/setup/node-selectors
 ---
 
-> **Prerequisite:** Your cluster needs a worker node that can designated for Istio. The worker node should meet the [resource requirements.]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/resources)
+> **Prerequisite:** Your cluster needs a worker node that can designated for Istio. The worker node should meet the [resource requirements.](/rancher/v2.x/en/cluster-admin/tools/istio/resources)
 
 This section describes how use node selectors to configure Istio components to be deployed on a designated node.
 
@@ -38,4 +38,4 @@ For larger deployments, it is recommended to schedule each component of Istio on
 
 **Result:** The Istio components will be deployed on the Istio node.
 
-### [Next: Add Deployments and Services]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/setup/deploy-workloads)
+### [Next: Add Deployments and Services](/rancher/v2.x/en/cluster-admin/tools/istio/setup/deploy-workloads)

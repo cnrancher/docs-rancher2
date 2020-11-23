@@ -18,7 +18,7 @@ You can route traffic into the service mesh with a load balancer or just Istio's
 
 For more information on the Istio gateway, refer to the [Istio documentation.](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) 
 
-![In an Istio-enabled cluster, you can have two ingresses: the default Nginx ingress, and the default Istio controller.]({{<baseurl>}}/img/rancher/istio-ingress.svg)
+![In an Istio-enabled cluster, you can have two ingresses: the default Nginx ingress, and the default Istio controller.](/img/rancher/istio-ingress.svg)
 
 # Enable the Istio Gateway
 
@@ -27,7 +27,7 @@ The ingress gateway is a Kubernetes service that will be deployed in your cluste
 1. Go to the cluster where you want to allow outside traffic into Istio.
 1. Click **Tools > Istio.**
 1. Expand the **Ingress Gateway** section.
-1. Under **Enable Ingress Gateway,** click **True.** The default type of service for the Istio gateway is NodePort. You can also configure it as a [load balancer.]({{<baseurl>}}/rancher/v2.x/en/k8s-in-rancher/load-balancers-and-ingress/load-balancers/)
+1. Under **Enable Ingress Gateway,** click **True.** The default type of service for the Istio gateway is NodePort. You can also configure it as a [load balancer.](/rancher/v2.x/en/k8s-in-rancher/load-balancers-and-ingress/load-balancers/)
 1. Optionally, configure the ports, service types, node selectors and tolerations, and resource requests and limits for this service. The default resource requests for CPU and memory are the minimum recommended resources.
 1. Click **Save.**
 
@@ -130,4 +130,4 @@ In the gateway resource, the selector refers to Istio's default ingress controll
 1. Within `istio-system`, there is a workload named `istio-ingressgateway`.
 1. Click the name of this workload and go to the **Labels and Annotations** section. You should see that it has the key `istio` and the value `ingressgateway`. This confirms that the selector in the Gateway resource matches Istio's default ingress controller.
 
-### [Next: Set up Istio's Components for Traffic Management]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/setup/set-up-traffic-management)
+### [Next: Set up Istio's Components for Traffic Management](/rancher/v2.x/en/cluster-admin/tools/istio/setup/set-up-traffic-management)

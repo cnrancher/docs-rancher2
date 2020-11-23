@@ -20,29 +20,29 @@ This section covers the following topics:
 
 ### Monitoring Scope
 
-Using Prometheus, you can monitor Rancher at both the [cluster level]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/) and project level. For each cluster and project that is enabled for monitoring, Rancher deploys a Prometheus server.
+Using Prometheus, you can monitor Rancher at both the [cluster level](/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/) and project level. For each cluster and project that is enabled for monitoring, Rancher deploys a Prometheus server.
 
-- [Cluster monitoring]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/) allows you to view the health of your Kubernetes cluster. Prometheus collects metrics from the cluster components below, which you can view in graphs and charts.
+- [Cluster monitoring](/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/) allows you to view the health of your Kubernetes cluster. Prometheus collects metrics from the cluster components below, which you can view in graphs and charts.
 
-    - [Kubernetes control plane]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/cluster-metrics/#kubernetes-components-metrics)
-    - [etcd database]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/cluster-metrics/#etcd-metrics)
-    - [All nodes (including workers)]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/cluster-metrics/#cluster-metrics)
+    - [Kubernetes control plane](/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/cluster-metrics/#kubernetes-components-metrics)
+    - [etcd database](/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/cluster-metrics/#etcd-metrics)
+    - [All nodes (including workers)](/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/cluster-metrics/#cluster-metrics)
 
 - Project monitoring allows you to view the state of pods running in a given project. Prometheus collects metrics from the project's deployed HTTP and TCP/UDP workloads.
 
 ### Permissions to Configure Project Monitoring
 
-Only [administrators]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/global-permissions/), [cluster owners or members]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles), or [project owners]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#project-roles) can configure project level monitoring. Project members can only view monitoring metrics.
+Only [administrators](/rancher/v2.x/en/admin-settings/rbac/global-permissions/), [cluster owners or members](/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles), or [project owners](/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#project-roles) can configure project level monitoring. Project members can only view monitoring metrics.
 
 ### Enabling Project Monitoring
 
-> **Prerequisite:** Cluster monitoring must be [enabled.]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/)
+> **Prerequisite:** Cluster monitoring must be [enabled.](/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/)
 
 1. Go to the project where monitoring should be enabled. Note: When cluster monitoring is enabled, monitoring is also enabled by default in the **System** project.
 
 1. Select **Tools > Monitoring** in the navigation bar.
 
-1. Select **Enable** to show the [Prometheus configuration options]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/prometheus/). Enter in your desired configuration options.
+1. Select **Enable** to show the [Prometheus configuration options](/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/prometheus/). Enter in your desired configuration options.
 
 1. Click **Save**.
 
@@ -54,13 +54,13 @@ Prometheus|750m| 750Mi | 1000m | 1000Mi | Yes
 Grafana | 100m | 100Mi | 200m | 200Mi | No
 
 
-**Result:** A single application,`project-monitoring`, is added as an [application]({{<baseurl>}}/rancher/v2.x/en/catalog/apps/) to the project. After the application is `active`, you can start viewing [project metrics](#project-metrics) through the [Rancher dashboard]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/#rancher-dashboard) or directly from [Grafana]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/#grafana).
+**Result:** A single application,`project-monitoring`, is added as an [application](/rancher/v2.x/en/catalog/apps/) to the project. After the application is `active`, you can start viewing [project metrics](#project-metrics) through the [Rancher dashboard](/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/#rancher-dashboard) or directly from [Grafana](/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/#grafana).
 
 > The default username and password for the Grafana instance will be `admin/admin`. However, Grafana dashboards are served via the Rancher authentication proxy, so only users who are currently authenticated into the Rancher server have access to the Grafana dashboard.
 
 ### Project Metrics
 
-[Workload metrics]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/cluster-metrics/#workload-metrics) are available for the project if monitoring is enabled at the [cluster level]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/) and at the [project level.](#enabling-project-monitoring)
+[Workload metrics](/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/cluster-metrics/#workload-metrics) are available for the project if monitoring is enabled at the [cluster level](/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/) and at the [project level.](#enabling-project-monitoring)
 
 You can monitor custom metrics from any [exporters.](https://prometheus.io/docs/instrumenting/exporters/) You can also expose some custom endpoints on deployments without needing to configure Prometheus for your project.
 

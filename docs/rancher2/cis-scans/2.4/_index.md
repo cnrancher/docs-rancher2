@@ -36,7 +36,7 @@ As of Rancher v2.5, it is deprecated and replaced with the `rancher-cis-benchmar
 
 # Prerequisites
 
-To run security scans on a cluster and access the generated reports, you must be an [Administrator]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/global-permissions/) or [Cluster Owner.]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/)
+To run security scans on a cluster and access the generated reports, you must be an [Administrator](/rancher/v2.x/en/admin-settings/rbac/global-permissions/) or [Cluster Owner.](/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/)
 
 Rancher can only run security scans on clusters that were created with RKE, which includes custom clusters and clusters that Rancher created in an infrastructure provider such as Amazon EC2 or GCE. Imported clusters and clusters in hosted Kubernetes providers can't be scanned by Rancher.
 
@@ -121,7 +121,7 @@ Rancher provides a set of alerts for cluster scans. which are not configured to 
 - A scheduled cluster scan was completed
 - A scheduled cluster scan has failures
 
-> **Prerequisite:** You need to configure a [notifier]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/notifiers/) before configuring, sending, or receiving alerts.
+> **Prerequisite:** You need to configure a [notifier](/rancher/v2.x/en/cluster-admin/tools/notifiers/) before configuring, sending, or receiving alerts.
 
 To activate an existing alert for a CIS scan result,
 
@@ -143,11 +143,11 @@ To create a new alert,
 1. Enter a name for the alert.
 1. In the **Is** field, set the alert to be triggered when a scan is completed or when a scan has a failure.
 1. In the **Send a** field, set the alert as a **Critical,** **Warning,** or **Info** alert level.
-1. Choose a [notifier]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/notifiers/) for the alert.
+1. Choose a [notifier](/rancher/v2.x/en/cluster-admin/tools/notifiers/) for the alert.
 
 **Result:** The alert is created and activated. The notifications will be triggered when the a scan is run on a cluster and the active alerts have satisfied conditions.
 
-For more information about alerts, refer to [this page.]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/alerts/)
+For more information about alerts, refer to [this page.](/rancher/v2.x/en/cluster-admin/tools/alerts/)
 
 # Deleting a Report
 
@@ -165,4 +165,4 @@ For more information about alerts, refer to [this page.]({{<baseurl>}}/rancher/v
 
 # List of Skipped and Not Applicable Tests
 
-For a list of skipped and not applicable tests, refer to <a href="{{<baseurl>}}/rancher/v2.x/en/cis-scans/legacy/skipped-tests" target="_blank">this page.</a>
+For a list of skipped and not applicable tests, refer to <a href="/rancher/v2.x/en/cis-scans/legacy/skipped-tests" target="_blank">this page.</a>

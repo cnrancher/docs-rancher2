@@ -41,7 +41,7 @@ The following figure from the [Banzai documentation](https://banzaicloud.com/doc
 
 <figcaption>How the Banzai Cloud Logging Operator Works with Fluentd and Fluent Bit</figcaption>
 
-![How the Banzai Cloud Logging Operator Works with Fluentd]({{<baseurl>}}/img/rancher/banzai-cloud-logging-operator.png)
+![How the Banzai Cloud Logging Operator Works with Fluentd](/img/rancher/banzai-cloud-logging-operator.png)
 
 # Enabling Logging for Rancher Managed Clusters
 

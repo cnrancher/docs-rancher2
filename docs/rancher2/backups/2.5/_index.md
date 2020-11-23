@@ -58,8 +58,8 @@ For Rancher installed with Docker, refer to the same steps used up till 2.5 for 
 
 For Rancher prior to v2.5, the way that Rancher is backed up and restored differs based on the way that Rancher was installed. Our legacy backup and restore documentation is here:
 
-- For Rancher installed on an RKE Kubernetes cluster, refer to the legacy [backup]({{<baseurl>}}/rancher/v2.x/en/backups/legacy/backup/ha-backups) and [restore]({{<baseurl>}}/rancher/v2.x/en/backups/legacy/restore/rke-restore) documentation.
-- For Rancher installed on a K3s Kubernetes cluster, refer to the legacy [backup]({{<baseurl>}}/rancher/v2.x/en/backups/legacy/backup/k3s-backups) and [restore]({{<baseurl>}}/rancher/v2.x/en/backups/legacy/restore/k3s-restore) documentation.
+- For Rancher installed on an RKE Kubernetes cluster, refer to the legacy [backup](/rancher/v2.x/en/backups/legacy/backup/ha-backups) and [restore](/rancher/v2.x/en/backups/legacy/restore/rke-restore) documentation.
+- For Rancher installed on a K3s Kubernetes cluster, refer to the legacy [backup](/rancher/v2.x/en/backups/legacy/backup/k3s-backups) and [restore](/rancher/v2.x/en/backups/legacy/restore/k3s-restore) documentation.
 
 # How Backups and Restores Work
 

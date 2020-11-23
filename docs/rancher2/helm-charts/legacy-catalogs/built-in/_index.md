@@ -12,14 +12,14 @@ Within Rancher, there are default catalogs packaged as part of Rancher. These ca
 
 >**Prerequisites:** In order to manage the built-in catalogs or manage global catalogs, you need _one_ of the following permissions:
 >
->- [Administrator Global Permissions]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/global-permissions/)
->- [Custom Global Permissions]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/global-permissions/#custom-global-permissions) with the [Manage Catalogs]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/global-permissions/#custom-global-permissions-reference) role assigned.
+>- [Administrator Global Permissions](/rancher/v2.x/en/admin-settings/rbac/global-permissions/)
+>- [Custom Global Permissions](/rancher/v2.x/en/admin-settings/rbac/global-permissions/#custom-global-permissions) with the [Manage Catalogs](/rancher/v2.x/en/admin-settings/rbac/global-permissions/#custom-global-permissions-reference) role assigned.
 
 1. From the **Global** view, choose **Tools > Catalogs** in the navigation bar. In versions prior to v2.2.0, you can select **Catalogs** directly in the navigation bar.
 
 2. Toggle the default catalogs that you want to be enabled or disabled:
 
-    - **Library:**	The Library Catalog includes charts curated by Rancher. Rancher stores charts in a Git repository to expedite the fetch and update of charts. This catalog features Rancher Charts, which include some [notable advantages]({{<baseurl>}}/rancher/v2.x/en/catalog/creating-apps/#rancher-charts) over native Helm charts.
+    - **Library:**	The Library Catalog includes charts curated by Rancher. Rancher stores charts in a Git repository to expedite the fetch and update of charts. This catalog features Rancher Charts, which include some [notable advantages](/rancher/v2.x/en/catalog/creating-apps/#rancher-charts) over native Helm charts.
     - **Helm Stable:** This catalog, which is maintained by the Kubernetes community, includes native [Helm charts](https://helm.sh/docs/chart_template_guide/). This catalog features the largest pool of apps.
     - **Helm Incubator:** Similar in user experience to Helm Stable, but this catalog is filled with applications in **beta**.
 

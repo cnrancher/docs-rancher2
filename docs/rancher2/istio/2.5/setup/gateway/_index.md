@@ -31,7 +31,7 @@ You can route traffic into the service mesh with a load balancer or use Istio's 
 
 For more information on the Istio gateway, refer to the [Istio documentation.](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/)
 
-![In an Istio-enabled cluster, you can have two Ingresses: the default Nginx Ingress, and the default Istio controller.]({{<baseurl>}}/img/rancher/istio-ingress.svg)
+![In an Istio-enabled cluster, you can have two Ingresses: the default Nginx Ingress, and the default Istio controller.](/img/rancher/istio-ingress.svg)
 
 # Enable an Istio Gateway
 
@@ -156,4 +156,4 @@ In the gateway resource, the selector refers to Istio's default ingress controll
 1. Scroll down to the `istio-system` namespace.
 1. Within `istio-system`, there is a workload named `istio-ingressgateway`. Click the name of this workload and go to the **Labels and Annotations** section. You should see that it has the key `istio` and the value `ingressgateway`. This confirms that the selector in the Gateway resource matches Istio's default ingress controller.
 
-### [Next: Set up Istio's Components for Traffic Management]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/setup/set-up-traffic-management)
+### [Next: Set up Istio's Components for Traffic Management](/rancher/v2.x/en/cluster-admin/tools/istio/setup/set-up-traffic-management)

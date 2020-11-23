@@ -5,9 +5,9 @@ aliases:
   - /rancher/v2.x/en/catalog/launching-apps
 ---
 
-Within a project, when you want to deploy applications from catalogs, the applications available in your project will be based on the [scope of the catalogs]({{<baseurl>}}/rancher/v2.x/en/catalog/#catalog-scope).
+Within a project, when you want to deploy applications from catalogs, the applications available in your project will be based on the [scope of the catalogs](/rancher/v2.x/en/catalog/#catalog-scope).
 
-If your application is using ingresses, you can program the ingress hostname to an external DNS by setting up a [Global DNS entry]({{<baseurl>}}/rancher/v2.x/en/catalog/globaldns/).
+If your application is using ingresses, you can program the ingress hostname to an external DNS by setting up a [Global DNS entry](/rancher/v2.x/en/catalog/globaldns/).
 
 - [Prerequisites](#prerequisites)
 - [Launching a catalog app](#launching-a-catalog-app)
@@ -19,10 +19,10 @@ When Rancher deploys a catalog app, it launches an ephemeral instance of a Helm 
 
 To launch an app from a catalog in Rancher, you must have at least one of the following permissions:
 
-- A [project-member role]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#project-roles) in the target cluster, which gives you the ability to create, read, update, and delete the workloads
-- A [cluster owner role]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles) for the cluster that include the target project
+- A [project-member role](/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#project-roles) in the target cluster, which gives you the ability to create, read, update, and delete the workloads
+- A [cluster owner role](/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles) for the cluster that include the target project
 
-Before launching an app, you'll need to either [enable a built-in global catalog]({{<baseurl>}}/rancher/v2.x/en/catalog/built-in) or [add your own custom catalog.]({{<baseurl>}}/rancher/v2.x/en/catalog/adding-catalogs)
+Before launching an app, you'll need to either [enable a built-in global catalog](/rancher/v2.x/en/catalog/built-in) or [add your own custom catalog.](/rancher/v2.x/en/catalog/adding-catalogs)
 
 # Launching a Catalog App
 
@@ -64,7 +64,7 @@ If the Helm chart that you are deploying contains a `questions.yml` file, Ranche
 
 ### Key Value Pairs for Native Helm Charts
 
-For native Helm charts (i.e., charts from the **Helm Stable** or **Helm Incubator** catalogs or a [custom Helm chart repository]({{<baseurl>}}/rancher/v2.x/en/catalog/custom/#custom-helm-chart-repository)), answers are provided as key value pairs in the **Answers** section. These answers are used to override the default values.
+For native Helm charts (i.e., charts from the **Helm Stable** or **Helm Incubator** catalogs or a [custom Helm chart repository](/rancher/v2.x/en/catalog/custom/#custom-helm-chart-repository)), answers are provided as key value pairs in the **Answers** section. These answers are used to override the default values.
 
 {{% /tab %}}
 {{% tab "Editing YAML Files" %}}

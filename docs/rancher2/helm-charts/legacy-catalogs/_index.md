@@ -11,7 +11,7 @@ aliases:
   - /rancher/v2.x/en/catalog/apps
 ---
 
-> As of Rancher v2.5, the catalog system is deprecated and has been replaced with [Apps and Marketplace]({{<baseurl>}}/rancher/v2.x/en/helm-charts/apps-marketplace) in the Cluster Explorer.
+> As of Rancher v2.5, the catalog system is deprecated and has been replaced with [Apps and Marketplace](/rancher/v2.x/en/helm-charts/apps-marketplace) in the Cluster Explorer.
 
 Rancher provides the ability to use a catalog of Helm charts that make it easy to repeatedly deploy applications.
 
@@ -46,7 +46,7 @@ Project | This specific cluster can access the Helm charts in this catalog |  v2
 
 _Applicable as of v2.4.0_
 
-In November 2019, Helm 3 was released, and some features were deprecated or refactored. It is not fully [backwards compatible]({{<baseurl>}}/rancher/v2.x/en/catalog#helm-3-backwards-compatibility) with Helm 2. Therefore, catalogs in Rancher need to be separated, with each catalog only using one Helm version. This will help reduce app deployment issues as your Rancher users will not need to know which version of your chart is compatible with which Helm version - they can just select a catalog, select an app and deploy a version that has already been vetted for compatibility.
+In November 2019, Helm 3 was released, and some features were deprecated or refactored. It is not fully [backwards compatible](/rancher/v2.x/en/catalog#helm-3-backwards-compatibility) with Helm 2. Therefore, catalogs in Rancher need to be separated, with each catalog only using one Helm version. This will help reduce app deployment issues as your Rancher users will not need to know which version of your chart is compatible with which Helm version - they can just select a catalog, select an app and deploy a version that has already been vetted for compatibility.
 
 When you create a custom catalog, you will have to configure the catalog to use either Helm 2 or Helm 3. This version cannot be changed later. If the catalog is added with the wrong Helm version, it will need to be deleted and re-added.
 
@@ -77,23 +77,23 @@ apiVersion `v2` is now reserved for Helm 3 charts. This apiVersion enforcement c
 
 # Built-in Global Catalogs
 
-Within Rancher, there are default catalogs packaged as part of Rancher. These can be enabled or disabled by an administrator. For details, refer to the section on managing [built-in global catalogs.]({{<baseurl>}}/rancher/v2.x/en/catalog/built-in)
+Within Rancher, there are default catalogs packaged as part of Rancher. These can be enabled or disabled by an administrator. For details, refer to the section on managing [built-in global catalogs.](/rancher/v2.x/en/catalog/built-in)
 
 # Custom Catalogs
 
-There are two types of catalogs in Rancher: [Built-in global catalogs]({{<baseurl>}}/rancher/v2.x/en/catalog/built-in/) and [custom catalogs.]({{<baseurl>}}/rancher/v2.x/en/catalog/adding-catalogs/)
+There are two types of catalogs in Rancher: [Built-in global catalogs](/rancher/v2.x/en/catalog/built-in/) and [custom catalogs.](/rancher/v2.x/en/catalog/adding-catalogs/)
 
-Any user can create custom catalogs to add into Rancher.  Custom catalogs can be added into Rancher at the global level, cluster level, or project level. For details, refer to the [section on adding custom catalogs]({{<baseurl>}}/rancher/v2.x/en/catalog/adding-catalogs) and the [catalog configuration reference.]({{<baseurl>}}/rancher/v2.x/en/catalog/catalog-config)
+Any user can create custom catalogs to add into Rancher.  Custom catalogs can be added into Rancher at the global level, cluster level, or project level. For details, refer to the [section on adding custom catalogs](/rancher/v2.x/en/catalog/adding-catalogs) and the [catalog configuration reference.](/rancher/v2.x/en/catalog/catalog-config)
 
 # Creating and Launching Applications
 
 In Rancher, applications are deployed from the templates in a catalog. This section covers the following topics:
 
-* [Multi-cluster applications]({{<baseurl>}}/rancher/v2.x/en/catalog/multi-cluster-apps/)
-* [Creating catalog apps]({{<baseurl>}}/rancher/v2.x/en/catalog/creating-apps)
-* [Launching catalog apps within a project]({{<baseurl>}}/rancher/v2.x/en/catalog/launching-apps)
-* [Managing catalog apps]({{<baseurl>}}/rancher/v2.x/en/catalog/managing-apps)
-* [Tutorial: Example custom chart creation]({{<baseurl>}}/rancher/v2.x/en/catalog/tutorial)
+* [Multi-cluster applications](/rancher/v2.x/en/catalog/multi-cluster-apps/)
+* [Creating catalog apps](/rancher/v2.x/en/catalog/creating-apps)
+* [Launching catalog apps within a project](/rancher/v2.x/en/catalog/launching-apps)
+* [Managing catalog apps](/rancher/v2.x/en/catalog/managing-apps)
+* [Tutorial: Example custom chart creation](/rancher/v2.x/en/catalog/tutorial)
 
 # Chart Compatibility with Rancher
 
@@ -105,4 +105,4 @@ _Available as v2.2.0_
 
 When creating applications that span multiple Kubernetes clusters, a Global DNS entry can be created to route traffic to the endpoints in all of the different clusters. An external DNS server will need be programmed to assign a fully qualified domain name (a.k.a FQDN) to your application. Rancher will use the FQDN you provide and the IP addresses where your application is running to program the DNS. Rancher will gather endpoints from all the Kubernetes clusters running your application and program the DNS.
 
-For more information on how to use this feature, see [Global DNS]({{<baseurl>}}/rancher/v2.x/en/catalog/globaldns/).
+For more information on how to use this feature, see [Global DNS](/rancher/v2.x/en/catalog/globaldns/).

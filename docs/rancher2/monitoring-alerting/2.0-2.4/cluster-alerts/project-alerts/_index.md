@@ -8,11 +8,11 @@ aliases:
 
 To keep your clusters and applications healthy and driving your organizational productivity forward, you need to stay informed of events occurring in your clusters and projects, both planned and unplanned. When an event occurs, your alert is triggered, and you are sent a notification. You can then, if necessary, follow up with corrective actions.
 
-Notifiers and alerts are built on top of the [Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager/). Leveraging these tools, Rancher can notify [cluster owners]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles) and [project owners]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#project-roles) of events they need to address.
+Notifiers and alerts are built on top of the [Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager/). Leveraging these tools, Rancher can notify [cluster owners](/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles) and [project owners](/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#project-roles) of events they need to address.
 
-Before you can receive alerts, one or more [notifier]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/notifiers) must be configured at the cluster level.
+Before you can receive alerts, one or more [notifier](/rancher/v2.x/en/cluster-admin/tools/notifiers) must be configured at the cluster level.
 
-Only [administrators]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/global-permissions/), [cluster owners or members]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles), or [project owners]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#project-roles) can manage project alerts.
+Only [administrators](/rancher/v2.x/en/admin-settings/rbac/global-permissions/), [cluster owners or members](/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles), or [project owners](/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#project-roles) can manage project alerts.
 
 This section covers the following topics:
 
@@ -23,7 +23,7 @@ This section covers the following topics:
 
 ## Alerts Scope
 
-The scope for alerts can be set at either the [cluster level]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/alerts/) or project level.
+The scope for alerts can be set at either the [cluster level](/rancher/v2.x/en/cluster-admin/tools/alerts/) or project level.
 
 At the project level, Rancher monitors specific deployments and sends alerts for:
 
@@ -34,14 +34,14 @@ At the project level, Rancher monitors specific deployments and sends alerts for
 
 ## Default Project-level Alerts
 
-When you enable monitoring for the project, some project-level alerts are provided. You can receive these alerts if a [notifier]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/notifiers) for them is configured at the cluster level.
+When you enable monitoring for the project, some project-level alerts are provided. You can receive these alerts if a [notifier](/rancher/v2.x/en/cluster-admin/tools/notifiers) for them is configured at the cluster level.
 
 | Alert                             | Explanation                                                                                                                                                                                                                                    |
 | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Less than half workload available | A critical alert is triggered if less than half of a workload is available, based on workloads where the key is `app` and the value is `workload`.                                                                                             |
 | Memory usage close to the quota   | A warning alert is triggered if the workload's memory usage exceeds the memory resource quota that is set for the workload. You can see the memory limit in the Rancher UI if you go to the workload under the **Security & Host Config** tab. |
 
-For information on other default alerts, refer to the section on [cluster-level alerts.]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/alerts/default-alerts)
+For information on other default alerts, refer to the section on [cluster-level alerts.](/rancher/v2.x/en/cluster-admin/tools/alerts/default-alerts)
 
 ## Adding Project Alerts
 
@@ -118,13 +118,13 @@ This alert type monitors for the availability of all workloads marked with tags 
 
 _Available as of v2.2.4_
 
-If you enable [project monitoring]({{<baseurl>}}/rancher/v2.x/en/project-admin/tools/#monitoring), this alert type monitors for the overload from Prometheus expression querying.
+If you enable [project monitoring](/rancher/v2.x/en/project-admin/tools/#monitoring), this alert type monitors for the overload from Prometheus expression querying.
 
 1. Input or select an **Expression**, the drop down shows the original metrics from Prometheus, including:
 
 - [**Container**](https://github.com/google/cadvisor)
 - [**Kubernetes Resources**](https://github.com/kubernetes/kube-state-metrics)
-- [**Customize**]({{<baseurl>}}/rancher/v2.x/en/project-admin/tools/monitoring/#project-metrics)
+- [**Customize**](/rancher/v2.x/en/project-admin/tools/monitoring/#project-metrics)
 - [**Project Level Grafana**](http://docs.grafana.org/administration/metrics/)
 - **Project Level Prometheus**
 
@@ -159,7 +159,7 @@ If you enable [project monitoring]({{<baseurl>}}/rancher/v2.x/en/project-admin/t
 
 1.  Continue adding more **Alert Rule** to the group.
 
-1.  Finally, choose the [notifiers]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/notifiers/) that send you alerts.
+1.  Finally, choose the [notifiers](/rancher/v2.x/en/cluster-admin/tools/notifiers/) that send you alerts.
 
     - You can set up multiple notifiers.
     - You can change notifier recipients on the fly.

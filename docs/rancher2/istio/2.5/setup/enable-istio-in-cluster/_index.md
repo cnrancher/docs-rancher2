@@ -24,7 +24,7 @@ keywords:
 1. From the **Cluster Explorer**, navigate to available **Charts** in **Apps & Marketplace**
 1. Select the Istio chart from the rancher provided charts
 1. If you have not already installed your own monitoring app, you will be prompted to install the rancher-monitoring app. Optional: Set your Selector or Scrape config options on rancher-monitoring app install.
-1. Optional: Configure member access and [resource limits]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/resources/) for the Istio components. Ensure you have enough resources on your worker nodes to enable Istio.
+1. Optional: Configure member access and [resource limits](/rancher/v2.x/en/cluster-admin/tools/istio/resources/) for the Istio components. Ensure you have enough resources on your worker nodes to enable Istio.
 1. Optional: Make additional configuration changes to values.yaml if needed
 1. Optional: Add additional resources or configuration via the [overlay file](#overlay-file)
 1. Click **Install**.
@@ -35,7 +35,7 @@ Automatic sidecar injection is disabled by default. To enable this, set the `sid
 
 **Note:** In clusters where:
 
-- The [Canal network plug-in]({{<baseurl>}}/rancher/v2.x/en/cluster-provisioning/rke-clusters/options/#canal) is in use.
+- The [Canal network plug-in](/rancher/v2.x/en/cluster-provisioning/rke-clusters/options/#canal) is in use.
 - The Project Network Isolation option is enabled.
 - You install the Istio Ingress module
 

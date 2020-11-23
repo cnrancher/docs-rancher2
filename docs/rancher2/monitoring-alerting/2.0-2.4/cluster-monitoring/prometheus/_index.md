@@ -10,7 +10,7 @@ aliases:
 _Available as of v2.2.0_
 
 
-While configuring monitoring at either the [cluster level]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/#enabling-cluster-monitoring) or [project level]({{<baseurl>}}/rancher/v2.x/en/project-admin/tools/monitoring/#enabling-project-monitoring), there are multiple options that can be configured.
+While configuring monitoring at either the [cluster level](/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/#enabling-cluster-monitoring) or [project level](/rancher/v2.x/en/project-admin/tools/monitoring/#enabling-project-monitoring), there are multiple options that can be configured.
 
 Option | Description
 -------|-------------
@@ -24,7 +24,7 @@ Prometheus [CPU Reservation](https://kubernetes.io/docs/concepts/configuration/m
 Prometheus [Memory Limit](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-memory) | Memory resource limit for the Prometheus pod.
 Prometheus [Memory Reservation](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-memory) | Memory resource requests for the Prometheus pod.
 Selector | Ability to select the nodes in which Prometheus and Grafana pods are deployed to. To use this option, the nodes must have labels.
-Advanced Options | Since monitoring is an [application](https://github.com/rancher/system-charts/tree/dev/charts/rancher-monitoring) from the [Rancher catalog]({{<baseurl>}}/rancher/v2.x/en/catalog/), it can be [configured like any other catalog application]({{<baseurl>}}/rancher/v2.x/en/catalog/catalog-config/). _Warning: Any modification to the application without understanding the entire application can lead to catastrophic errors._
+Advanced Options | Since monitoring is an [application](https://github.com/rancher/system-charts/tree/dev/charts/rancher-monitoring) from the [Rancher catalog](/rancher/v2.x/en/catalog/), it can be [configured like any other catalog application](/rancher/v2.x/en/catalog/catalog-config/). _Warning: Any modification to the application without understanding the entire application can lead to catastrophic errors._
 
 ## Node Exporter
 
@@ -36,11 +36,11 @@ When configuring Prometheus and enabling the node exporter, enter a host port in
 
 ## Persistent Storage
 
->**Prerequisite:** Configure one or more [storage class]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/volumes-and-storage/#adding-storage-classes) to use as [persistent storage]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/volumes-and-storage/) for your Prometheus or Grafana pod.
+>**Prerequisite:** Configure one or more [storage class](/rancher/v2.x/en/cluster-admin/volumes-and-storage/#adding-storage-classes) to use as [persistent storage](/rancher/v2.x/en/cluster-admin/volumes-and-storage/) for your Prometheus or Grafana pod.
 
 By default, when you enable Prometheus for either a cluster or project, all monitoring data that Prometheus collects is stored on its own pod. With local storage, if the Prometheus or Grafana pods fail, all the data is lost. Rancher recommends configuring an external persistent storage to the cluster. With the external persistent storage, if the Prometheus or Grafana pods fail, the new pods can recover using data from the persistent storage.
 
-When enabling persistent storage for Prometheus or Grafana, specify the size of the persistent volume and select the [storage class]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/volumes-and-storage/#storage-classes).
+When enabling persistent storage for Prometheus or Grafana, specify the size of the persistent volume and select the [storage class](/rancher/v2.x/en/cluster-admin/volumes-and-storage/#storage-classes).
 
 ## Remote Storage
 
