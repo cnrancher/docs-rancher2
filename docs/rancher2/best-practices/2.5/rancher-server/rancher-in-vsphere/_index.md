@@ -1,5 +1,5 @@
 ---
-title: title
+title: 在 vSphere 环境中安装 Rancher
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,88 +19,88 @@ keywords:
   - subtitles6
 ---
 
-This guide outlines a reference architecture for installing Rancher on an RKE Kubernetes cluster in a vSphere environment, in addition to standard vSphere best practices as documented by VMware.
+本指南概述了在vSphere环境中的RKE Kubernetes集群上安装Rancher的参考架构，以及VMware记录的标准vSphere最佳实践。
 
-- [1. Load Balancer Considerations](#1-load-balancer-considerations)
-- [2. VM Considerations](#2-vm-considerations)
-- [3. Network Considerations](#3-network-considerations)
-- [4. Storage Considerations](#4-storage-considerations)
-- [5. Backups and Disaster Recovery](#5-backups-and-disaster-recovery)
+- [1. 负载均衡器的注意事项](#1-负载均衡器的注意事项)
+- [2. VM 注意事项](#2-vm-注意事项)
+- [3. 网络注意事项](#3-网络注意事项)
+- [4. 储存注意事项](#4-储存注意事项)
+- [5. 备份和灾难恢复](#5-备份和灾难恢复)
 
-<figcaption>Solution Overview</figcaption>
+**解决方案概述**
 
 ![Solution Overview](/img/rancher/rancher-on-prem-vsphere.svg)
 
-# 1. Load Balancer Considerations
+## 1. 负载均衡器的注意事项
 
-A load balancer is required to direct traffic to the Rancher workloads residing on the RKE nodes.
+需要一个负载均衡器将流量引导到RKE节点上的Rancher工作负载。
 
-### Leverage Fault Tolerance and High Availability
+#### 利用容错和高可用性
 
-Leverage the use of an external (hardware or software) load balancer that has inherit high-availability functionality (F5, NSX-T, Keepalived, etc).
+充分利用具有继承高可用功能的外部（硬件或软件）负载均衡器（如：F5、NSX-T、Keepalived等）。
 
-### Back Up Load Balancer Configuration
+#### 备份负载均衡器配置
 
-In the event of a Disaster Recovery activity, availability of the Load balancer configuration will expedite the recovery process.
+在发生灾难恢复时，负载均衡器配置的可用性将加快恢复过程。
 
-### Configure Health Checks
+#### 配置健康检查
 
-Configure the Load balancer to automatically mark nodes as unavailable if a health check is failed. For example, NGINX can facilitate this with:
+配置负载均衡器在健康检查失败时自动将节点标记为不可用。例如，NGINX可以通过以下配置来实现这一功能：
 
 `max_fails=3 fail_timeout=5s`
 
-### Leverage an External Load Balancer
+#### 充分利用外部负载均衡器
 
-Avoid implementing a software load balancer within the management cluster.
+避免在管理集群内实施软件负载均衡器。
 
-### Secure Access to Rancher
+#### 安全访问Rancher
 
-Configure appropriate Firewall / ACL rules to only expose access to Rancher
+配置适当的防火墙/ACL规则，只允许对Rancher的访问。
 
-# 2. VM Considerations
+## 2. VM 注意事项
 
-### Size the VM's According to Rancher Documentation
+#### 根据Rancher文档确定虚拟机的大小
 
 https://rancher.com/docs/rancher/v2.x/en/installation/requirements/
 
-### Leverage VM Templates to Construct the Environment
+#### 充分利用虚拟机模板来构建环境
 
-To facilitate consistency across the deployed Virtual Machines across the environment, consider the use of "Golden Images" in the form of VM templates. Packer can be used to accomplish this, adding greater customisation options.
+为了促进整个环境中部署的虚拟机的一致性，可以考虑使用虚拟机模板形式的 "Golden Images"。可以使用Packer来实现这一点，增加更多的自定义选项。
 
-### Leverage DRS Anti-Affinity Rules (Where Possible) to Separate Rancher Cluster Nodes Across ESXi Hosts
+#### 利用 DRS 反亲和规则（如果可能）在 ESXi 主机上分离 Rancher 集群节点
 
-Doing so will ensure node VM's are spread across multiple ESXi hosts - preventing a single point of failure at the host level.
+这样做将确保节点虚拟机分布在多台ESXi主机上--防止主机级别的单点故障。
 
-### Leverage DRS Anti-Affinity Rules (Where Possible) to Separate Rancher Cluster Nodes Across Datastores
+#### 利用 DRS 反亲和规则（如果可能）在整个数据存储区中分离Rancher群集节点
 
-Doing so will ensure node VM's are spread across multiple datastores - preventing a single point of failure at the datastore level.
+这样做可以确保节点虚拟机分布在多个数据存储上，防止在数据存储层面出现单点故障。
 
-### Configure VM's as Appropriate for Kubernetes
+#### 为Kubernetes配置合适的虚拟机
 
-It’s important to follow K8s and etcd best practices when deploying your nodes, including disabling swap, double-checking you have full network connectivity between all machines in the cluster, using unique hostnames, MAC addresses, and product_uuids for every node.
+在部署节点时，遵循K8s和etcd的最佳实践是很重要的，包括禁用swap，仔细检查你在集群中的所有机器之间有完好的网络连接，为每个节点使用唯一的主机名、MAC地址和product_uuids。
 
-# 3. Network Considerations
+## 3. 网络注意事项
 
-### Leverage Low Latency, High Bandwidth Connectivity Between ETCD Nodes
+#### 利用ETCD节点之间的低延迟、高带宽连接
 
-Deploy etcd members within a single data center where possible to avoid latency overheads and reduce the likelihood of network partitioning. For most setups, 1Gb connections will suffice. For large clusters, 10Gb connections can reduce the time taken to restore from backup.
+尽可能在单个数据中心内部署etcd成员，以避免延迟开销并减少网络分区的可能性。对于大多数设置，1Gb连接就足够了。对于大型集群，10Gb连接可以减少从备份恢复所需的时间。
 
-### Consistent IP Addressing for VM's
+#### 为虚拟机提供固定的IP地址
 
-Each node used should have a static IP configured. In the case of DHCP, each node should have a DHCP reservation to make sure the node gets the same IP allocated.
+使用的每个节点都应该配置一个静态IP。在DHCP的情况下，每个节点应该有一个DHCP预留，以确保节点获得相同的IP分配。
 
-# 4. Storage Considerations
+## 4. 储存注意事项
 
-### Leverage SSD Drives for ETCD Nodes
+#### 建议ETCD节点使用SSD硬盘
 
-ETCD is very sensitive to write latency. Therefore, leverage SSD disks where possible.
+ETCD对写入延迟非常敏感。因此，尽可能地使用SSD磁盘。
 
-# 5. Backups and Disaster Recovery
+## 5. 备份和灾难恢复
 
-### Perform Regular Management Cluster Backups
+#### 定期执行管理集群备份
 
-Rancher stores its data in the ETCD datastore of the Kubernetes cluster it resides on. Like with any Kubernetes cluster, perform frequent, tested backups of this cluster.
+Rancher将其数据存储在其所在的Kubernetes集群的ETCD数据存储中。与任何Kubernetes群集一样，对该群集执行频繁且经过测试的备份。
 
-### Back up Rancher Cluster Node VMs
+#### 备份Rancher集群节点虚拟机
 
-Incorporate the Rancher management node VM's within a standard VM backup policy.
+将Rancher管理节点的虚拟机纳入标准的虚拟机备份策略中。
