@@ -29,8 +29,6 @@ This guide outlines a reference architecture for installing Rancher on an RKE Ku
 
 <figcaption>Solution Overview</figcaption>
 
-![Solution Overview](/img/rancher/rancher-on-prem-vsphere.svg)
-
 # 1. Load Balancer Considerations
 
 A load balancer is required to direct traffic to the Rancher workloads residing on the RKE nodes.
