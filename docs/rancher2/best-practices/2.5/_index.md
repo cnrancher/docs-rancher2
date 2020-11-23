@@ -1,5 +1,5 @@
 ---
-title: title
+title: Rancher v2.5 最佳实践指南
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,18 +19,19 @@ keywords:
   - subtitles6
 ---
 
-The purpose of this section is to consolidate best practices for Rancher implementations. This also includes recommendations for related technologies, such as Kubernetes, Docker, containers, and more. The objective is to improve the outcome of a Rancher implementation using the operational experience of Rancher and its customers.
+本节的目的是整合Rancher实施的最佳实践。这也包括相关技术的建议，如Kubernetes、Docker、容器等。目的是利用Rancher及其客户的操作经验来改善Rancher实施的结果。
 
-If you have any questions about how these might apply to your use case, please contact your Customer Success Manager or Support.
+如果您对这些应用案例有任何疑问，请联系您的客户经理或技术支持部门。
 
-Use the navigation bar on the left to find the current best practices for managing and deploying the Rancher Server.
+使用左侧的导航栏查找当前管理和部署 Rancher Server的最佳实践。
 
-For more guidance on best practices, you can consult these resources:
+关于最佳实战的更多指导，你可以参考这些资源:
 
-- [Security]({{<baseurl>}}/rancher/v2.x/en/security/)
-- [Rancher Blog](https://rancher.com/blog/)
-  - [Articles about best practices on the Rancher blog](https://rancher.com/tags/best-practices/)
-  - [101 More Security Best Practices for Kubernetes](https://rancher.com/blog/2019/2019-01-17-101-more-kubernetes-security-best-practices/)
-- [Rancher Forum](https://forums.rancher.com/)
-- [Rancher Users Slack](https://slack.rancher.io/)
-- [Rancher Labs YouTube Channel - Online Meetups, Demos, Training, and Webinars](https://www.youtube.com/channel/UCh5Xtp82q8wjijP8npkVTBA/featured)
+- [安全](/docs/rancher2/security/_index)
+- [Rancher 博客](https://rancher.com/blog/)
+  - [更多Kubernetes的101种安全最佳实践](https://rancher.com/blog/2019/2019-01-17-101-more-kubernetes-security-best-practices/)
+- [Rancher 论坛](https://forums.rancher.com/)
+- [Rancher 中文论坛](https://forums.cnrancher.com/)
+- [Rancher 免费在线培训视频](https://space.bilibili.com/430496045)
+- [Rancher 实用教程](https://mp.weixin.qq.com/mp/homepage?__biz=MzIyMTUwMDMyOQ==&hid=3&sn=2698abdc0a64455c730a1dfecdba3f76&scene=18)
+- [Rancher 用户 Slack](https://slack.rancher.io/)

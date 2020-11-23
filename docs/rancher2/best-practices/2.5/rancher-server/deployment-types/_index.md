@@ -1,5 +1,5 @@
 ---
-title: title
+title: 运行Rancher的技巧
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,40 +19,40 @@ keywords:
   - subtitles6
 ---
 
-This guide is geared toward use cases where Rancher is used to manage downstream Kubernetes clusters. The high-availability setup is intended to prevent losing access to downstream clusters if the Rancher server is not available.
+本指南面向的是使用Rancher管理下游Kubernetes集群的用例。高可用设置可以防止在Rancher Server不可用时失去对下游集群的访问。
 
-A high-availability Kubernetes installation, defined as an installation of Rancher on a Kubernetes cluster with at least three nodes, should be used in any production installation of Rancher, as well as any installation deemed "important." Multiple Rancher instances running on multiple nodes ensure high availability that cannot be accomplished with a single node environment.
+高可用Rancher安装，定义为在至少有三个节点的Kubernetes集群上安装Rancher，应该适用于Rancher的任何生产安装，以及任何被认为 "重要"的安装。运行在多个节点上的多个Rancher实例可以确保单节点环境无法实现的高可用性。
 
-If you are installing Rancher in a vSphere environment, refer to the best practices documented [here.](../rancher-in-vsphere)
+如果您在vSphere环境中安装Rancher，请参考[这里](../rancher-in-vsphere/_index)的最佳实践。
 
-When you set up your high-availability Rancher installation, consider the following:
+当您设置高可用的Rancher安装时，请考虑以下问题：
 
-### Run Rancher on a Separate Cluster
+### 在单独的集群上运行Rancher
 
-Don't run other workloads or microservices in the Kubernetes cluster that Rancher is installed on.
+不要在Rancher安装的Kubernetes集群中运行其他工作负载或微服务。
 
-### Make sure nodes are configured correctly for Kubernetes
+### 确保Kubernetes节点配置正确
 
-It's important to follow K8s and etcd best practices when deploying your nodes, including disabling swap, double checking you have full network connectivity between all machines in the cluster, using unique hostnames, MAC addresses, and product_uuids for every node, checking that all correct ports are opened, and deploying with ssd backed etcd. More details can be found in the [kubernetes docs](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#before-you-begin) and [etcd's performance op guide](https://github.com/etcd-io/etcd/blob/master/Documentation/op-guide/performance.md)
+在部署节点时，遵循K8s和etcd的最佳实践是很重要的，包括禁用swap，仔细检查集群中所有机器之间具有完整的网络连接，为每个节点使用唯一的主机名、MAC地址和product_uuids，检查所有正确的端口都被打开，以及使用ssd支持的etcd进行部署。更多细节可以参考 [kubernetes 文档](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#before-you-begin)和 [etcd的性能操作指南](https://github.com/etcd-io/etcd/blob/master/Documentation/op-guide/performance.md)。
 
-### When using RKE: Back up the Statefile
+### 使用RKE时：备份状态文件
 
-RKE keeps record of the cluster state in a file called `cluster.rkestate`. This file is important for the recovery of a cluster and/or the continued maintenance of the cluster through RKE. Because this file contains certificate material, we strongly recommend encrypting this file before backing up. After each run of `rke up` you should backup the state file.
+RKE在一个名为 `cluster.rkestate` 的文件中保留了集群状态的记录。这个文件对于集群的恢复和/或通过RKE继续维护集群是非常重要的。由于这个文件包含证书，我们强烈建议在备份前对这个文件进行加密。每次运行 `rke up` 后，你应该备份状态文件。
 
-### Run All Nodes in the Cluster in the Same Datacenter
+### 在同一数据中心中运行集群中的所有节点
 
-For best performance, run all three of your nodes in the same geographic datacenter. If you are running nodes in the cloud, such as AWS, run each node in a separate Availability Zone. For example, launch node 1 in us-west-2a, node 2 in us-west-2b, and node 3 in us-west-2c.
+为了获得最佳性能，请在同一地理数据中心中运行所有三个节点。如果您在云（如 AWS）中运行节点，请在一个单独的可用区中运行每个节点。例如，在 us-west-2a 中启动节点 1，在 us-west-2b 中启动节点 2，在 us-west-2c 中启动节点 3。
 
-### Development and Production Environments Should be Similar
+### 开发和生产环境应该相似
 
-It's strongly recommended to have a "staging" or "pre-production" environment of the Kubernetes cluster that Rancher runs on. This environment should mirror your production environment as closely as possible in terms of software and hardware configuration.
+强烈建议拥有一个Rancher运行的Kubernetes集群的 "staging" 或 "pre-production" 环境。这个环境应该在软件和硬件配置方面尽可能的接近你的生产环境。
 
-### Monitor Your Clusters to Plan Capacity
+### 监控集群以规划容量
 
-The Rancher server's Kubernetes cluster should run within the [system and hardware requirements]({{<baseurl>}}/rancher/v2.x/en/installation/requirements/) as closely as possible. The more you deviate from the system and hardware requirements, the more risk you take.
+Rancher服务器的Kubernetes集群应该尽可能满足[系统和硬件要求](/docs/rancher2/installation/requirements/_index)。你越是偏离系统和硬件要求，你所承担的风险就越大。
 
-However, metrics-driven capacity planning analysis should be the ultimate guidance for scaling Rancher, because the published requirements take into account a variety of workload types.
+但是，基于度量的容量规划分析应该成为扩展Rancher的最终指南，因为已发布的需求考虑各种工作负载类型。
 
-Using Rancher, you can monitor the state and processes of your cluster nodes, Kubernetes components, and software deployments through integration with Prometheus, a leading open-source monitoring solution, and Grafana, which lets you visualize the metrics from Prometheus.
+使用Rancher，您可以通过与领先的开源监控解决方案Prometheus和Grafana的集成来监视集群节点、Kubernetes组件和软件部署的状态和过程，从而可以可视化Prometheus的指标。
 
-After you [enable monitoring]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/) in the cluster, you can set up [a notification channel]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/notifiers/) and [cluster alerts]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/alerts/) to let you know if your cluster is approaching its capacity. You can also use the Prometheus and Grafana monitoring framework to establish a baseline for key metrics as you scale.
+在集群中[启用监控](/docs/rancher2/monitoring-alerting/legacy/monitoring/cluster-monitoring/_index)后，可以设置[通知](/docs/rancher2/cluster-admin/tools/notifiers/_index)和[告警](/docs/rancher2/cluster-admin/tools/alerts/_index)来让您知道您的群集是否接近其容量。您还可以使用Prometheus和Grafana监控框架，在您扩展时建立关键指标的基线。

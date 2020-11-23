@@ -1,5 +1,5 @@
 ---
-title: title
+title: 日志最佳实践
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,54 +19,54 @@ keywords:
   - subtitles6
 ---
 
-In this guide, we recommend best practices for cluster-level logging and application logging.
+在本指南中，我们推荐了集群级别日志记录和应用日志记录的最佳实践。
 
-- [Changes in Logging in Rancher v2.5](#changes-in-logging-in-rancher-v2-5)
-- [Cluster-level Logging](#cluster-level-logging)
-- [Application Logging](#application-logging)
-- [General Best Practices](#general-best-practices)
+- [Rancher v2.5中日志记录的变化](#rancher-v2.5中日志记录的变化)
+- [集群级别日志](#集群级别日志)
+- [应用程序日志](#应用程序日志)
+- [通用最佳实践](#通用最佳实践)
 
-# Changes in Logging in Rancher v2.5
+## Rancher v2.5中日志记录的变化
 
-Prior to Rancher v2.5, logging in Rancher has historically been a pretty static integration. There were a fixed list of aggregators to choose from (ElasticSearch, Splunk, Kafka, Fluentd and Syslog), and only two configuration points to choose (Cluster-level and Project-level).
+在Rancher v2.5之前，Rancher中的日志记录是一个非常静态的集成。有一个固定的聚合器列表可供选择（ElasticSearch、Splunk、Kafka、Fluentd和Syslog），而且只有两个配置点可供选择（集群级别和项目级别）。
 
-Logging in 2.5 has been completely overhauled to provide a more flexible experience for log aggregation. With the new logging feature, administrators and users alike can deploy logging that meets fine-grained collection criteria while offering a wider array of destinations and configuration options.
+2.5中的日志记录已经被彻底改写，为日志聚合提供了更灵活的体验。通过新的日志记录功能，管理员和用户都可以部署符合细粒度收集标准的日志记录，同时提供更多的目的地和配置选项。
 
-"Under the hood", Rancher logging uses the Banzai Cloud logging operator. We provide manageability of this operator (and its resources), and tie that experience in with managing your Rancher clusters.
+Rancher日志使用的是Banzai Cloud logging operator。我们提供了这个operator（及其资源）的可管理性，并将这种经验与管理你的Rancher集群联系起来。
 
-# Cluster-level Logging
+## 集群级别日志
 
-### Cluster-wide Scraping
+### 抓取集群范围内日志
 
-For some users, it is desirable to scrape logs from every container running in the cluster. This usually coincides with your security team's request (or requirement) to collect all logs from all points of execution.
+对于一些用户来说，最好是从集群中运行的每个容器中抓取日志。这通常与你的安全团队从所有执行点收集所有日志的请求（或要求）相吻合。
 
-In this scenario, it is recommended to create at least two _ClusterOutput_ objects - one for your security team (if you have that requirement), and one for yourselves, the cluster administrators. When creating these objects take care to choose an output endpoint that can handle the significant log traffic coming from the entire cluster. Also make sure to choose an appropriate index to receive all these logs.
+在这种情况下，建议至少创建两个 _ClusterOutput_ 对象，一个用于你的安全团队（如果有此要求），另一个用于你自己（集群管理员）。在创建这些对象时要注意选择一个能够处理来自整个集群的大量日志流量的输出端点。同时要确保选择一个合适的索引来接收所有这些日志。
 
-Once you have created these _ClusterOutput_ objects, create a _ClusterFlow_ to collect all the logs. Do not define any _Include_ or _Exclude_ rules on this flow. This will ensure that all logs from across the cluster are collected. If you have two _ClusterOutputs_, make sure to send logs to both of them.
+一旦创建了这些 _ClusterOutput_ 对象，请创建一个 _ClusterFlow_ 来收集所有的日志。不要在这个 flow 上定义任何 _Include_ 或 _Exclude_ 规则。这将确保整个集群的所有日志都被收集。如果您有两个 _ClusterOutputs_ ，请确保将日志发送到它们两个。
 
-### Kubernetes Components
+### Kubernetes 组件
 
-_ClusterFlows_ have the ability to collect logs from all containers on all hosts in the Kubernetes cluster. This works well in cases where those containers are part of a Kubernetes pod; however, RKE containers exist outside of the scope of Kubernetes.
+_ClusterFlows_ 可以收集Kubernetes集群中所有主机上所有容器的日志。在这些容器是Kubernetes pod的一部分的情况下，这很好用；但是，RKE容器存在于Kubernetes的范围之外。
 
-Currently (as of v2.5.1) the logs from RKE containers are collected, but are not able to easily be filtered. This is because those logs do not contain information as to the source container (e.g. `etcd` or `kube-apiserver`).
+目前(从v2.5.1开始)，RKE容器的日志被收集，但不能轻易过滤。这是因为这些日志不包含源容器的信息（如`etcd`或`kube-apiserver`）。
 
-A future release of Rancher will include the source container name which will enable filtering of these component logs. Once that change is made, you will be able to customize a _ClusterFlow_ to retrieve **only** the Kubernetes component logs, and direct them to an appropriate output.
+Rancher的未来版本将包含源容器名称，这将使这些组件日志的过滤成为可能。进行更改后，您将能够自定义 _ClusterFlow_ 以**仅**检索Kubernetes组件日志，并将它们引导到一个适当的输出。
 
-# Application Logging
+## 应用程序日志
 
-Best practice not only in Kubernetes but in all container-based applications is to direct application logs to `stdout`/`stderr`. The container runtime will then trap these logs and do **something** with them - typically writing them to a file. Depending on the container runtime (and its configuration), these logs can end up in any number of locations.
+不仅在Kubernetes中，而且在所有基于容器的应用程序中的最佳做法是将应用程序日志引导到`stdout`/`stderr`。然后，容器运行时将捕获这些日志，并对它们进行处理--通常将它们写入一个文件。根据容器运行时（及其配置）的不同，这些日志可以放置在任意位置。
 
-In the case of writing the logs to a file, Kubernetes helps by creating a `/var/log/containers` directory on each host. This directory symlinks the log files to their actual destination (which can differ based on configuration or container runtime).
+在将日志写入文件的情况下，Kubernetes通过在每个主机上创建一个`/var/log/containers`目录来提供帮助。这个目录将日志文件symlinks到它们的实际目的地（可以根据配置或容器运行时而有所不同）。
 
-Rancher logging will read all log entries in `/var/log/containers`, ensuring that all log entries from all containers (assuming a default configuration) will have the opportunity to be collected and processed.
+Rancher日志记录将读取`/var/log/containers`中的所有日志条目，确保来自所有容器的所有日志条目（假设默认配置）将有机会被收集和处理。
 
-### Specific Log Files
+### 特定日志文件
 
-Log collection only retrieves `stdout`/`stderr` logs from pods in Kubernetes. But what if we want to collect logs from other files that are generated by applications? Here, a log streaming sidecar (or two) may come in handy.
+日志收集只能从Kubernetes中的pod中检索`stdout`/`stderr`日志。但是，如果我们想从应用程序生成的其他文件中收集日志呢？这里，一个（或两个）日志流sidecar可能会派上用场。
 
-The goal of setting up a streaming sidecar is to take log files that are written to disk, and have their contents streamed to `stdout`. This way, the Banzai Logging Operator can pick up those logs and send them to your desired output.
+设置日志流sidecar的目的是获取写入磁盘的日志文件，并将其内容传输到`stdout`。这样一来，Banzai Logging Operator就可以接收这些日志，并把它们发送到你想要的输出。
 
-To set this up, edit your workload resource (e.g. Deployment) and add the following sidecar definition:
+要设置这一点，请编辑您的工作负载资源（如Deployment）并添加以下sidecar定义：
 
 ```
 ...
@@ -84,9 +84,9 @@ containers:
 ...
 ```
 
-This will add a container to your workload definition that will now stream the contents of (in this example) `/path/to/your/log/file.log` to `stdout`.
+这将为你的工作负载添加一个容器，现在将把`/path/to/your/log/file.log`的内容（在本例中）传输到`stdout`。
 
-This log stream is then automatically collected according to any _Flows_ or _ClusterFlows_ you have setup. You may also wish to consider creating a _Flow_ specifically for this log file by targeting the name of the container. See example:
+然后根据您设置的任何 _Flows_ 或 _ClusterFlows_ 自动收集该日志流。您还可以考虑通过针对容器的名称，专门为该日志文件创建一个 _Flow_。请参见示例：
 
 ```
 ...
@@ -98,10 +98,10 @@ spec:
 ...
 ```
 
-# General Best Practices
+## 通用最佳实践
 
-- Where possible, output structured log entries (e.g. `syslog`, JSON). This makes handling of the log entry easier as there are already parsers written for these formats.
-- Try to provide the name of the application that is creating the log entry, in the entry itself. This can make troubleshooting easier as Kubernetes objects do not always carry the name of the application as the object name. For instance, a pod ID may be something like `myapp-098kjhsdf098sdf98` which does not provide much information about the application running inside the container.
-- Except in the case of collecting all logs cluster-wide, try to scope your _Flow_ and _ClusterFlow_ objects tightly. This makes it easier to troubleshoot when problems arise, and also helps ensure unrelated log entries do not show up in your aggregator. An example of tight scoping would be to constrain a _Flow_ to a single _Deployment_ in a namespace, or perhaps even a single container within a _Pod_.
-- Keep the log verbosity down except when troubleshooting. High log verbosity poses a number of issues, chief among them being **noise**: significant events can be drowned out in a sea of `DEBUG` messages. This is somewhat mitigated with automated alerting and scripting, but highly verbose logging still places an inordinate amount of stress on the logging infrastructure.
-- Where possible, try to provide a transaction or request ID with the log entry. This can make tracing application activity across multiple log sources easier, especially when dealing with distributed applications.
+- 在可能的情况下，输出结构化的日志条目（例如`syslog`，JSON）。这使得日志条目的处理更容易，因为已经有了为这些格式编写的解析器。
+- 尽量提供创建日志条目的应用程序的名称。这可以使故障排除更容易，因为Kubernetes对象并不总是将应用程序的名称作为对象名称。例如，一个pod ID可能是像`myapp-098kjhsdf098sdf98`这样的东西，它并没有提供太多关于容器内运行的应用程序的信息。
+- 除了在整个集群范围内收集所有日志的情况下，尽量将您的 _Flow_ 和 _ClusterFlow_ 对象严格限定范围。这使得在出现问题时更容易进行故障排除，也有助于确保不相关的日志条目不会出现在您的聚合器中。严格限定范围的一个例子是将 _Flow_ 限制在一个命名空间中的单个 _Deployment_ ，甚至可能是一个 _Pod_ 中的单个容器。
+- 除非故障排查，否则不要让日志太长。冗长的日志会带来许多问题，其中最主要的是**干扰**：重要事件可能会被淹没在海量的 "DEBUG "消息中。这种情况在一定程度上可以通过自动警报和脚本得到缓解，但高度啰嗦的日志记录仍然会给日志记录基础设施带来过大的压力。
+- 在可能的情况下，尽量在日志条目中提供一个事务或请求ID。这可以使跨多个日志源追踪应用程序活动变得更容易，特别是在处理分布式应用程序时。

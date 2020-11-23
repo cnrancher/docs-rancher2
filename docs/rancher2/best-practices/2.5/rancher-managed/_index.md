@@ -1,5 +1,5 @@
 ---
-title: title
+title: Rancher管理集群的最佳实践
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,18 +19,18 @@ keywords:
   - subtitles6
 ---
 
-### Logging
+### 日志
 
-Refer to [this guide](./logging) for our recommendations for cluster-level logging and application logging.
+请参阅[本指南](./logging/_index)，了解我们对集群级日志和应用程序日志的建议。
 
-### Monitoring
+### 监控
 
-Configuring sensible monitoring and alerting rules is vital for running any production workloads securely and reliably. Refer to this [guide](./monitoring) for our recommendations.
+配置合理的监控和告警规则对于安全、可靠地运行任何生产工作负载至关重要。请参考本[指南](./monitoring/_index)了解我们的建议。
 
-### Tips for Setting Up Containers
+### 设置容器的技巧
 
-Running well built containers can greatly impact the overall performance and security of your environment. Refer to this [guide](./containers) for tips.
+运行构建良好的容器可以极大地影响环境的整体性能和安全性。参考这个[指南](./containers/_index)获取提示。
 
-### Best Practices for Rancher Managed vSphere Clusters
+### Rancher托管vSphere集群的最佳实践
 
-This [guide](./managed-vsphere) outlines a reference architecture for provisioning downstream Rancher clusters in a vSphere environment, in addition to standard vSphere best practices as documented by VMware.
+本[指南](./managed-vsphere/_index)除了VMware记录的标准vSphere最佳实践外，还概述了在vSphere环境中配置下游Rancher集群的参考架构。
