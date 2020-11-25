@@ -1,5 +1,5 @@
 ---
-title: title
+title: Rancher v2.5
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,110 +19,88 @@ keywords:
   - subtitles6
 ---
 
----
+Rancher 可以运行安全扫描，检查 Kubernetes 是否按照 CIS Kubernetes 基准中定义的安全最佳实践进行部署。
 
-title: CIS Scans in Rancher v2.5
-shortTitle: Rancher v2.5
-weight: 1
+`rancher-cis-benchmark`应用程序利用 kube-bench 一个来自 Aqua Security 的开源工具，检查集群是否符合 CIS Kubernetes 基准。此外，为了生成整个集群的报告，该应用程序利用 Sonobuoy 进行报告汇总。
 
----
+## Rancher v2.5 中的变化
 
-Rancher can run a security scan to check whether Kubernetes is deployed according to security best practices as defined in the CIS Kubernetes Benchmark.
+我们现在支持在任何 Kubernetes 集群上运行 CIS 扫描，包括托管的 Kubernetes 提供商，如 EKS、AKS 和 GKE。以前只支持在 RKE Kubernetes 集群上运行 CIS 扫描。
 
-The `rancher-cis-benchmark` app leverages <a href="https://github.com/aquasecurity/kube-bench" target="_blank">kube-bench,</a> an open-source tool from Aqua Security, to check clusters for CIS Kubernetes Benchmark compliance. Also, to generate a cluster-wide report, the application utilizes <a href="https://github.com/vmware-tanzu/sonobuoy" target="_blank">Sonobuoy</a> for report aggregation.
+在 Rancher v2.4 中，CIS 扫描工具可在 Rancher UI 中的**集群管理器**中使用。现在，它在**集群资源管理器**中可用，并且可以使用 Helm 图启用和部署。它可以从 Rancher UI 中安装，但也可以独立于 Rancher 安装。它为集群部署 CIS 扫描操作员，并为集群扫描部署 Kubernetes 自定义资源。自定义资源可以直接从集群资源管理器中进行管理。
 
-- [Changes in Rancher v2.5](#changes-in-rancher-v2-5)
-- [About the CIS Benchmark](#about-the-cis-benchmark)
-- [Installing rancher-cis-benchmark](#installing-rancher-cis-benchmark)
-- [Uninstalling rancher-cis-benchmark](#uninstalling-rancher-cis-benchmark)
-- [Running a Scan](#running-a-scan)
-- [Skipping Tests](#skipping-tests)
-- [Viewing Reports](#viewing-reports)
-- [About the generated report](#about-the-generated-report)
-- [Test Profiles](#test-profiles)
-- [About Skipped and Not Applicable Tests](#about-skipped-and-not-applicable-tests)
-- [Roles-based access control](./rbac)
-- [Configuration](./configuration)
+在 Rancher v2.4 中通过集群管理器提供的 CIS 扫描工具的 v1 版本中，可以调度重复扫描。在 Rancher v2.5 中，还不能使用调度重复扫描的功能。
 
-### Changes in Rancher v2.5
+Rancher v2.5 中尚未提供对群集扫描结果的警报支持。
 
-We now support running CIS scans on any Kubernetes cluster, including hosted Kubernetes providers such as EKS, AKS, and GKE. Previously it was only supported to run CIS scans on RKE Kubernetes clusters.
+增加了更多测试配置文件。在 Rancher v2.4 中，包含了允许的和硬化的配置文件。在 Rancher v2.5 中，提供了以下配置文件。
 
-In Rancher v2.4, the CIS scan tool was available from the **cluster manager** in the Rancher UI. Now it is available in the **Cluster Explorer** and it can be enabled and deployed using a Helm chart. It can be installed from the Rancher UI, but it can also be installed independently of Rancher. It deploys a CIS scan operator for the cluster, and deploys Kubernetes custom resources for cluster scans. The custom resources can be managed directly from the **Cluster Explorer.**
-
-In v1 of the CIS scan tool, which was available in Rancher v2.4 through the cluster manager, recurring scans could be scheduled. The ability to schedule recurring scans is not yet available in Rancher v2.5.
-
-Support for alerting for the cluster scan results is not available for Rancher v2.5 yet.
-
-More test profiles were added. In Rancher v2.4, permissive and hardened profiles were included. In Rancher v2.5, the following profiles are available:
-
-- Generic CIS 1.5
-- RKE permissive
-- RKE hardened
+- 通用 CIS 1.5
+- RKE 允许的
+- RKE 硬化
 - EKS
 - GKE
 
-The default profile depends on the type of cluster that will be scanned:
+默认配置文件取决于要扫描的群集类型。
 
-- For RKE Kubernetes clusters, the RKE permissive profile is the default.
-- EKS and GKE have their own CIS Benchmarks published by `kube-bench`. The corresponding test profiles are used by default for those clusters.
-- For cluster types other than RKE, EKS and GKE, the Generic CIS 1.5 profile will be used by default.
+- 对于 RKE Kubernetes 集群，RKE 允许的配置文件是默认的。
+- EKS 和 GKE 有自己的 CIS 基准，由`kube-bench`发布。这些集群默认使用相应的测试配置文件。
+- 对于 RKE、EKS 和 GKE 以外的集群类型，默认使用通用 CIS 1.5 配置文件。
 
-The `rancher-cis-benchmark` currently supports the CIS 1.5 Benchmark version.
+`rancher-sis-benchmark`目前支持 CIS 1.5 基准版本。
 
-> **Note:** CIS v1 cannot run on a cluster when CIS v2 is deployed. In other words, after `rancher-cis-benchmark` is installed, you can't run scans by going to the Cluster Manager view in the Rancher UI and clicking **Tools > CIS Scans.**
+> 注意：部署 CIS v2 时，CIS v1 不能在集群上运行。换句话说，安装了 "rancher-cis-benchmark "后，进入 Rancher UI 中的群集管理视图，点击工具>CIS 扫描，就不能运行扫描了。
 
-# About the CIS Benchmark
+## 关于 CIS 基准
 
-The Center for Internet Security is a 501(c)(3) nonprofit organization, formed in October 2000, with a mission is to "identify, develop, validate, promote, and sustain best practice solutions for cyber defense and build and lead communities to enable an environment of trust in cyberspace". The organization is headquartered in East Greenbush, New York, with members including large corporations, government agencies, and academic institutions.
+CIS 是一个非营利组织，成立于 2000 年 10 月，其使命是 "确定、开发、验证、促进和维持网络防御的最佳做法解决方案，并建立和领导社区，以促成网络空间的信任环境"。该组织总部设在纽约东格林布什，成员包括大公司、政府机构和学术机构。
 
-CIS Benchmarks are best practices for the secure configuration of a target system. CIS Benchmarks are developed through the generous volunteer efforts of subject matter experts, technology vendors, public and private community members, and the CIS Benchmark Development team.
+CIS 基准是目标系统安全配置的最佳实践。CIS 基准是由主题专家、技术供应商、公共和私人社区成员以及 CIS 基准开发团队慷慨的志愿工作而制定的。
 
-The official Benchmark documents are available through the CIS website. The sign-up form to access the documents is
-<a href="https://learn.cisecurity.org/benchmarks" target="_blank">here.</a>
+正式的基准文件可通过 CIS 网站获取。获取文件的注册表是
 
-# Installing rancher-cis-benchmark
+## 安装 rancher-cis-benchmark
 
-1. In the Rancher UI, go to the **Cluster Explorer.**
-1. Click **Apps.**
-1. Click `rancher-cis-benchmark`.
-1. Click **Install.**
+1. 在 Rancher UI 中，进入**群集浏览器.**。
+1. 单击**应用程序.**。
+1. 点击`rancher-cis-benchmark`。
+1. 点击**安装**。
 
-**Result:** The CIS scan application is deployed on the Kubernetes cluster.
+**结果：**CIS 扫描应用程序部署在 Kubernetes 集群上。
 
-# Uninstalling rancher-cis-benchmark
+## 卸载 rancher-cis-benchmark
 
-1. From the **Cluster Explorer,** go to the top left dropdown menu and click **Apps & Marketplace.**
-1. Click **Installed Apps.**
-1. Go to the `cis-operator-system` namespace and check the boxes next to `rancher-cis-benchmark-crd` and `rancher-cis-benchmark`.
-1. Click **Delete** and confirm **Delete.**
+1. 从**集群资源管理器中，**进入左上角的下拉菜单，并单击\*\*应用程序和市场。
+1. 单击**安装的应用程序.**。
+1. 进入 "cis-operator-system "命名空间，选中 "rancher-cis-benchmark-crd "和 "rancher-cis-benchmark "旁边的方框。
+1. 点击**Delete**，确认**Delete.**。
 
-**Result:** The `rancher-cis-benchmark` application is uninstalled.
+**结果：** `rancher-cis-benchmark`应用程序已被卸载。
 
-# Running a Scan
+## 运行扫描
 
-When a ClusterScan custom resource is created, it launches a new CIS scan on the cluster for the chosen ClusterScanProfile.
+当创建 ClusterScan 自定义资源时，它会为所选的 ClusterScanProfile 在群集上启动新的 CIS 扫描。
 
-Note: There is currently a limitation of running only one CIS scan at a time for a cluster. If you create multiple ClusterScan custom resources, they will be run one after the other by the operator, and until one scan finishes, the rest of the ClusterScan custom resources will be in the "Pending" state.
+注意：目前有一个限制，即一次只能为一个集群运行一个 CIS 扫描。如果您创建了多个 ClusterScan 自定义资源，操作员将一个接一个地运行它们，直到一个扫描结束，其余的 ClusterScan 自定义资源将处于 "等待 "状态。
 
-To run a scan,
+要运行一个扫描。
 
-1. Go to the **Cluster Explorer** in the Rancher UI. In the top left dropdown menu, click **Cluster Explorer > CIS Benchmark.**
-1. In the **Scans** section, click **Create.**
-1. Choose a cluster scan profile. The profile determines which CIS Benchmark version will be used and which tests will be performed. If you choose the Default profile, then the CIS Operator will choose a profile applicable to the type of Kubernetes cluster it is installed on.
-1. Click **Create.**
+1. 进入 Rancher UI 中的**群集资源管理器**。在左上角下拉菜单中，单击**群集资源管理器>CIS 基准.**。
+1. 在**扫描**部分，单击**创建.**。
+1. 选择一个群集扫描配置文件。配置文件决定将使用哪个 CIS Benchmark 版本以及将执行哪些测试。如果您选择了默认配置文件，那么 CIS 操作员将选择适用于其安装的 Kubernetes 集群类型的配置文件。
+1. 单击**Create.**。
 
-**Result:** A report is generated with the scan results. To see the results, click the name of the scan that appears.
+2.**结果：**会生成一份包含扫描结果的报告。要查看结果，请单击出现的扫描名称。
 
-# Skipping Tests
+## 跳过测试
 
-CIS scans can be run using test profiles with user-defined skips.
+可以使用带有用户定义跳过的测试配置文件运行 CIS 扫描。
 
-To skip tests, you will create a custom CIS scan profile. A profile contains the configuration for the CIS scan, which includes the benchmark versions to use and any specific tests to skip in that benchmark.
+要跳过测试，您将创建一个自定义 CIS 扫描配置文件。配置文件包含 CIS 扫描的配置，其中包括要使用的基准版本和该基准中要跳过的任何特定测试。
 
-1. In the **Cluster Explorer,** go to the top-left dropdown menu and click **CIS Benchmark.**
-1. Click **Profiles.**
-1. From here, you can create a profile in multiple ways. To make a new profile, click **Create** and fill out the form in the UI. To make a new profile based on an existing profile, go to the existing profile, click the three vertical dots, and click **Clone as YAML.** If you are filling out the form, add the tests to skip using the test IDs, using the relevant CIS Benchmark as a reference. If you are creating the new test profile as YAML, you will add the IDs of the tests to skip in the `skipTests` directive. You will also give the profile a name:
+1. 在**群组资源管理器中，**转到左上角下拉菜单，然后单击**CIS 基准.**。
+1. 单击**配置文件.**。
+1. 从这里，您可以以多种方式创建配置文件。要创建一个新的配置文件，点击**创建**并在用户界面中填写表格。要基于现有的配置文件制作新的配置文件，请进入现有的配置文件，单击三个垂直点，然后单击**克隆为 YAML.**如果您正在填写表格，请使用测试 ID 添加要跳过的测试，使用相关的 CIS 基准作为参考。如果您是以 YAML 形式创建新的测试配置文件，您将在`skipTests`指令中添加要跳过的测试的 ID。你也要给这个配置文件一个名字。
 
    ```yaml
    apiVersion: cis.cattle.io/v1
@@ -141,32 +119,32 @@ To skip tests, you will create a custom CIS scan profile. A profile contains the
        - "1.1.21"
    ```
 
-1. Click **Create.**
+1. 单击**Create.**。
 
-**Result:** A new CIS scan profile is created.
+**结果：**一个新的 CIS 扫描配置文件已经创建。
 
-When you [run a scan](#running-a-scan) that uses this profile, the defined tests will be skipped during the scan. The skipped tests will be marked in the generated report as `Skip`.
+当您[运行扫描](#running-a-scan)使用该配置文件时，定义的测试将在扫描期间跳过。跳过的测试将在生成的报告中标记为 "跳过"。
 
-# Viewing Reports
+## 查看报告
 
-To view the generated CIS scan reports,
+要查看生成的 CIS 扫描报告。
 
-1. In the **Cluster Explorer,** go to the top left dropdown menu and click **Cluster Explorer > CIS Benchmark.**
-1. The **Scans** page will show the generated reports. To see a detailed report, go to a scan report and click the name.
+1. 在**群资源管理器中，**进入左上角下拉菜单，点击\*\*群资源管理器>CIS 基准。
+1. 在**扫描**页面将显示生成的报告。要查看详细的报告，请转到扫描报告并点击名称。
 
-One can download the report from the Scans list or from the scan detail page.
+可以从扫描列表或扫描详情页面下载报告。
 
-# About the Generated Report
+## 关于生成的报告
 
-Each scan generates a report can be viewed in the Rancher UI and can be downloaded in CSV format.
+E 扫描生成的报告可以在 Rancher 用户界面中查看，也可以以 CSV 格式下载。
 
-In Rancher v2.5, the scan will use the CIS Benchmark v1.5. The Benchmark version is included in the generated report.
+在 Rancher v2.5 中，扫描将使用 CIS Benchmark v1.5。基准版本包含在生成的报告中。
 
-The Benchmark provides recommendations of two types: Scored and Not Scored. Recommendations marked as Not Scored in the Benchmark are not included in the generated report.
+该基准提供两种类型的建议。得分和不得分。在基准中标记为 "不得分 "的建议不包括在生成的报告中。
 
-Some tests are designated as "Not Applicable." These tests will not be run on any CIS scan because of the way that Rancher provisions RKE clusters. For information on how test results can be audited, and why some tests are designated to be not applicable, refer to Rancher's <a href="{{<baseurl>}}/rancher/v2.x/en/security/#the-cis-benchmark-and-self-assessment" target="_blank">self-assessment guide for the corresponding Kubernetes version.</a>
+有些测试被指定为 "不适用"。由于 Rancher 提供 RKE 集群的方式，这些测试不会在任何 CIS 扫描上运行。有关如何审核测试结果，以及为什么某些测试被指定为 "不适用 "的信息，请参阅 Rancher 的相应 Kubernetes 版本的自我评估指南。
 
-The report contains the following information:
+该报告包含以下信息：
 
 | Column in Report  | Description                                                                                                                                                                             |
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -183,43 +161,43 @@ The report contains the following information:
 | `actual_value`    | The test's actual value, present if reported by `kube-bench`.                                                                                                                           |
 | `expected_result` | The test's expected result, present if reported by `kube-bench`.                                                                                                                        |
 
-Refer to <a href="{{<baseurl>}}/rancher/v2.x/en/security/" target="_blank">the table in the cluster hardening guide</a> for information on which versions of Kubernetes, the Benchmark, Rancher, and our cluster hardening guide correspond to each other. Also refer to the hardening guide for configuration files of CIS-compliant clusters and information on remediating failed tests.
+请参阅表格，了解 Kubernetes、Benchmark、Rancher 和我们的集群加固指南的哪些版本相互对应。此外，还请参考硬化指南，了解符合 CIS 标准的集群的配置文件和有关补救失败测试的信息。
 
-# Test Profiles
+## ＃＃测试配置文件
 
-The following profiles are available:
+可提供以下配置文件。
 
-- Generic CIS 1.5 (default)
-- RKE permissive
-- RKE hardened
+- 通用 CIS 1.5（默认）
+- 允许性 RKE
+- RKE 硬化
 - EKS
 - GKE
 
-You also have the ability to customize a profile by saving a set of tests to skip.
+您还可以通过保存一组要跳过的测试来自定义配置文件。
 
-All profiles will have a set of not applicable tests that will be skipped during the CIS scan. These tests are not applicable based on how a RKE cluster manages Kubernetes.
+所有配置文件都会有一组不适用的测试，这些测试将在 CIS 扫描期间被跳过。根据 RKE 集群管理 Kubernetes 的方式，这些测试是不适用的。
 
-There are 2 types of RKE cluster scan profiles:
+有 2 种类型的 RKE 集群扫描配置文件。
 
-- **Permissive:** This profile has a set of tests that have been will be skipped as these tests will fail on a default RKE Kubernetes cluster. Besides the list of skipped tests, the profile will also not run the not applicable tests.
-- **Hardened:** This profile will not skip any tests, except for the non-applicable tests.
+- **Permissive:**这个配置文件有一组测试将被跳过，因为这些测试在默认的 RKE Kubernetes 集群上会失败。除了跳过的测试列表，该配置文件也不会运行不适用的测试。
+- 硬化：\*\*该配置文件将不会跳过任何测试，除了不适用的测试。
 
-The EKS and GKE cluster scan profiles are based on CIS Benchmark versions that are specific to those types of clusters.
+EKS 和 GKE 群集扫描配置文件基于这些类型群集特有的 CIS Benchmark 版本。
 
-In order to pass the "Hardened" profile, you will need to follow the steps on the <a href="{{<baseurl>}}/rancher/v2.x/en/security/#rancher-hardening-guide" target="_blank">hardening guide</a> and use the `cluster.yml` defined in the hardening guide to provision a hardened cluster.
+为了通过 "硬化 "配置文件，您需要按照步骤进行操作，并使用硬化指南中定义的`cluster.yml`来配置硬化集群。
 
-# About Skipped and Not Applicable Tests
+## 关于跳过和不适用的测试
 
-For a list of skipped and not applicable tests, refer to <a href="{{<baseurl>}}/rancher/v2.x/en/cis-scans/skipped-tests" target="_blank">this page.</a>
+关于跳过的和不适用的测试列表，请参考 本页面。
 
-For now, only user-defined skipped tests are marked as skipped in the generated report.
+目前，只有用户定义的跳过测试才会在生成的报告中标记为跳过。
 
-Any skipped tests that are defined as being skipped by one of the default profiles are marked as not applicable.
+任何被默认配置文件定义为跳过的测试都被标记为不适用。
 
-# Roles-based Access Control
+## 基于角色的访问控制
 
-For information about permissions, refer to <a href="{{<baseurl>}}/rancher/v2.x/en/cis-scans/rbac" target="_blank">this page.</a>
+有关权限的信息，请参考。
 
-# Configuration
+## 配置
 
-For more information about configuring the custom resources for the scans, profiles, and benchmark versions, refer to <a href="{{<baseurl>}}/rancher/v2.x/en/cis-scans/configuration" target="_blank">this page.</a>
+有关为扫描、配置文件和基准版本配置自定义资源的更多信息，请参阅本页面。

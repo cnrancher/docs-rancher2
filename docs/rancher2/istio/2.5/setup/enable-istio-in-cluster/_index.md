@@ -1,5 +1,5 @@
 ---
-title: Enable Istio in the Cluster
+title: 在群集中启用Istio
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,88 +19,94 @@ keywords:
   - subtitles6
 ---
 
-> **Prerequisite:** Only a user with the `cluster-admin` [Kubernetes default role](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#user-facing-roles) assigned can configure and install Istio in a Kubernetes cluster.
+## 安装 Istio
 
-1. From the **Cluster Explorer**, navigate to available **Charts** in **Apps & Marketplace**
-1. Select the Istio chart from the rancher provided charts
-1. If you have not already installed your own monitoring app, you will be prompted to install the rancher-monitoring app. Optional: Set your Selector or Scrape config options on rancher-monitoring app install.
-1. Optional: Configure member access and [resource limits]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/resources/) for the Istio components. Ensure you have enough resources on your worker nodes to enable Istio.
-1. Optional: Make additional configuration changes to values.yaml if needed
-1. Optional: Add additional resources or configuration via the [overlay file](#overlay-file)
-1. Click **Install**.
+> **前提条件：**只有分配了`cluster-admin`[Kubernetes 默认角色](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#user-facing-roles)的用户才能在 Kubernetes 集群中配置和安装 Istio。
 
-**Result:** Istio is installed at the cluster level.
+1. 从**集群资源管理器**导航到**应用程市场**中的可用**Chart**。
+1. 选择 Istio 图表。
+1. 如果您还没有安装自己的监控应用，系统会提示您安装牧场主-监控应用。可选。在安装 rancher-监控应用时设置您的选择器或 Scrape 配置选项。
+1. 可选：配置成员权限和资源限额。为 Istio 组件配置成员访问和[资源限额]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/resources/)。确保你的工作节点上有足够的资源来启用 Istio。
+1. 可选：如果需要，对 values.yaml 进行额外的配置更改。
+1. 可选：通过[覆盖文件](#overlay-file)添加额外的资源或配置。
+1. 点击**安装**。
 
-Automatic sidecar injection is disabled by default. To enable this, set the `sidecarInjectorWebhook.enableNamespacesByDefault=true` in the values.yaml on install or upgrade. This automatically enables Istio sidecar injection into all new namespaces that are deployed.
+**结果：** Istio 已在群集级别安装。
 
-**Note:** In clusters where:
+默认情况下，自动 sidecar 注入是被禁用的。要启用这个功能，请在安装或升级时在 values.yaml 中设置`sidecarInjectorWebhook.enableNamespacesByDefault=true`。这将自动启用 Istio sidecar 注入到所有新部署的命名空间中。
 
-- The [Canal network plug-in]({{<baseurl>}}/rancher/v2.x/en/cluster-provisioning/rke-clusters/options/#canal) is in use.
-- The Project Network Isolation option is enabled.
-- You install the Istio Ingress module
+## 启用 Istio sidecar
 
-The Istio Ingress Gateway pod won't be able to redirect ingress traffic to the workloads by default. This is because all the namespaces will be innacessible from the namespace where Istio is installed. You have two options.
+默认情况下，自动 sidecar 注入是被禁用的。要启用这个功能，请在安装或升级时在 values.yaml 中设置`sidecarInjectorWebhook.enableNamespacesByDefault=true`。这将自动启用 Istio sidecar 注入到所有新部署的命名空间中。
 
-The first option is to add a new Network Policy in each of the namespaces where you intend to have ingress controlled by Istio. Your policy should include the following lines:
+**注意：**在以下集群中。
 
-```
+- 正在使用[Canal 网络插件]({{<baseurl>}}/rancher/v2.x/en/cluster-provisioning/rke-clusters/options/#canal)。
+- 项目网络隔离选项已启用。
+- 你安装了 Istio Ingress 模块
+
+Istio Ingress Gateway pod 默认情况下无法将入口流量重定向到工作负载。这是因为所有的命名空间都无法从安装 Istio 的命名空间中获得。您有两个选择。
+
+第一个选项是在您打算由 Istio 控制入口的每个命名空间中添加一个新的网络策略。您的策略应该包括以下几行内容。
+
+```yaml
 - podSelector:
     matchLabels:
       app: istio-ingressgateway
 ```
 
-The second option is to move the `istio-system` namespace to the `system` project, which by default is excluded from the network isolation
+第二种选择是将 `istio-system` 命名空间移到 `system` 项目中，默认情况下， `system` 项目被排除在网络隔离之外。
 
-## Additonal Config Options
+## 其他配置选项
 
 ### Overlay File
 
-An Overlay File is designed to support extensive configuration of your Istio installation. It allows you to make changes to any values available in the [IstioOperator API](https://istio.io/latest/docs/reference/config/istio.operator.v1alpha1/). This will ensure you can customize the default installation to fit any scenario.
+Overlay File 的设计是为了支持您的 Istio 安装的广泛配置。它允许您对[IstioOperator API](https://istio.io/latest/docs/reference/config/istio.operator.v1alpha1/)中的任何值进行更改。这将确保您可以自定义默认安装以适应任何情况。
 
-The Overlay File will add configuration on top of the default installation that is provided from the Istio chart installation. This means you do not need to redefine the components that already defined for installation.
+Overlay File 将在 Istio 图表安装提供的默认安装之上添加配置。这意味着你不需要重新定义已经定义安装的组件。
 
-For more information on Overlay Files, refer to the [documentation](https://istio.io/latest/docs/setup/install/istioctl/#configure-component-settings)
+关于 Overlay File 的更多信息，请参考[文档](https://istio.io/latest/docs/setup/install/istioctl/#configure-component-settings)。
 
-## Selectors & Scrape Configs
+## Selectors 和 Scrape 配置
 
-The Monitoring app sets `prometheus.prometheusSpec.ignoreNamespaceSelectors=false` which enables monitoring across all namespaces by default. This ensures you can view traffic, metrics and graphs for resources deployed in a namespace with `istio-injection=enabled` label.
+监控应用程序设置`prometheus.prometheusSpec.ignoreNamespaceSelectors=false`，默认情况下可以跨所有命名空间进行监控。这确保你可以查看部署在带有`istio-injection=enabled`标签的命名空间中的资源的流量、指标和图表。
 
-If you would like to limit prometheus to specific namespaces, set `prometheus.prometheusSpec.ignoreNamespaceSelectors=true`. Once you do this, you will need to add additional configuration to continue to monitor your resources.
+如果你想将 prometheus 限制在特定的命名空间，请设置`prometheus.prometheusSpec.ignoreNamespaceSelectors=true`。一旦你这样做，你将需要添加额外的配置来继续监控你的资源。
 
-**Set ingnoreNamspaceSelectors to True**
+**将 ingnoreNamspaceSelectors 设置为 True**
 
-This limits monitoring to specific namespaces.
+这将监控限制在特定的命名空间。
 
-1. From the **Cluster Explorer**, navigate to **Installed Apps** if Monitoring is already installed, or **Charts** in **Apps & Marketplace**
-1. If starting a new install, **Click** the **rancher-monitoring** chart, then in **Chart Options** click **Edit as Yaml**.
-1. If updating an existing installation, click on **Upgrade**, then in **Chart Options** click **Edit as Yaml**.
-1. Set`prometheus.prometheusSpec.ignoreNamespaceSelectors=true`
-1. Complete install or upgrade
+1. 在**群集资源管理器**中，如果已经安装了监控，请导航到**安装的应用程序**，或**应用程序和市场**中的**图表**。
+1. 如果开始新的安装，**点击**rancher-monitoring**图表，然后在**图表选项中**点击**编辑为 Yaml\*\*。
+1. 如果更新现有的安装，请点击**升级**，然后在**图表选项**中点击**编辑为 Yaml**。
+1. 设置`prometheus.prometheusSpec.ignoreNamespaceSelectors=true`。
+1. 完成安装或升级
 
-**Result:** Prometheus will be limited to specific namespaces which means one of the following configurations will need to be set up to continue to view data in various dashboards
+**结果：** Prometheus 将被限制在特定的命名空间，这意味着需要设置以下配置之一，以继续在各种仪表板中查看数据。
 
-There are two different ways to enable prometheus to detect resources in other namespaces when `prometheus.prometheusSpec.ignoreNamespaceSelectors=true`:
+当`prometheus.prometheusSpec.ignoreNamespaceSelectors=true`时，有两种不同的方法可以让 prometheus 检测其他命名空间的资源。
 
-1. Add a Service Monitor or Pod Monitor in the namespace with the targets you want to scrape.
-1. Add an `additionalScrapeConfig` to your rancher-monitoring instance to scrape all targets in all namespaces.
+1. 在有你要搜刮的目标的命名空间中添加一个 Service Monitor 或 Pod Monitor。
+1. 在您的 rancher-monitoring 实例中添加一个`additionalScrapeConfig`，以刮取所有命名空间中的所有目标。
 
-**Option 1: Create a Service Monitor or Pod Monitor**
+**选项 1：创建服务监控或 Pod 监控**。
 
-This option allows you to define which specific services or pods you would like monitored in a specific namespace.
+此选项允许您定义您希望在特定命名空间中监控的特定服务或 pod。
 
-> Usability tradeoff is that you have to create the service monitor / pod monitor per namespace since you cannot monitor across namespaces.
+> 可用性的权衡是，你必须为每个命名空间创建服务监控器/pod 监控器，因为你不能跨命名空间监控。
 
-**Pre Requisite:** define a ServiceMonitor or PodMonitor for `<your namespace>`. Example ServiceMonitor is provided below.
+**前提是：**为`<你的命名空间>定义一个 ServiceMonitor 或 PodMonitor。下面提供了 ServiceMonitor 的示例。
 
-1. From the **Cluster Explorer**, open the kubectl shell
-1. Run `kubectl create -f <name of service/pod monitor file>.yaml` if the file is stored locally in your cluster.
-1. Or run `cat<< EOF | kubectl apply -f -`, paste the file contents into the terminal, then run `EOF` to complete the command.
-1. If starting a new install, **Click** the **rancher-monitoring** chart and scroll down to **Preview Yaml**.
-1. Run `kubectl label namespace <your namespace> istio-injection=enabled` to enable the envoy sidecar injection
+1. 从**集群资源管理器**，打开 kubectl shell。
+   如果该文件存储在您的集群中的本地，请运行`kubectl create -f <name of service/pod monitor file>.yaml`。
+1. 或者运行`cat<< EOF | kubectl apply -f -`，将文件内容粘贴到终端，然后运行`EOF`完成命令。
+1. 如果开始新的安装，**点击**rancher-monitoring**图，向下滚动到**Preview Yaml\*\*。
+1. 运行`kubectl label namespace <your namespace> istio-injection=enabled`启用 envoy sidecar 注入。
 
-**Result:** `<your namspace>` can be scraped by prometheus.
+**结果:** `<你的namspace>`可以被普罗米修斯刮到。
 
-**Example Service Monitor for Istio Proxies**
+**Istio 代理的服务监控示例**
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -135,21 +141,21 @@ spec:
           targetLabel: pod_name
 ```
 
-**Option 3: Set ingnoreNamspaceSelectors to False**
+**选项 3: 将 ingnoreNamspaceSelectors 设置为 False**
 
-This enables monitoring accross namespaces by giving prometheus additional scrape configurations.
+通过给 prometheus 提供额外的 scrape 配置，可以跨命名空间进行监控。
 
-> Usability tradeoff is that all of prometheus' `additionalScrapeConfigs` are maintained in a single Secret. This could make upgrading difficult if monitoring is already deployed with additionalScrapeConfigs prior to installing Istio.
+> 可用性的权衡是，所有 prometheus 的 "additionalScrapeConfigs "都维护在一个 Secret 中。如果在安装 Istio 之前，监控已经部署了额外的 ScrapeConfigs，这可能会给升级带来困难。
 
-1. If starting a new install, **Click** the **rancher-monitoring** chart, then in **Chart Options** click **Edit as Yaml**.
-1. If updating an existing installation, click on **Upgrade**, then in **Chart Options** click **Edit as Yaml**.
-1. If updating an existing installation, click on **Upgrade** and then **Preview Yaml**.
-1. Set`prometheus.prometheusSpec.additionalScrapeConfigs` array to the **Additional Scrape Config** provided below.
-1. Complete install or upgrade
+1. 如果开始新的安装，**点击**rancher-monitoring**图表，然后在**图表选项中点击**编辑为 Yaml**。
+1. 如果更新现有的安装，请点击**升级**，然后在**图表选项**中点击**编辑为 Yaml**。
+1. 如果更新现有的安装，点击**升级**，然后点击**预览 Yaml**。
+1. 设置`prometheus.prometheusSpec.additionalScrapeConfigs`数组为下面提供的**Additional Scrape Config**。
+1. 完成安装或升级
 
-**Result:** All namespaces with the `istio-injection=enabled` label will be scraped by prometheus.
+**结果:**所有带有 "istio-injection=enabled "标签的命名空间都将被 prometheus 刮除。
 
-**Additional Scrape Config:**
+**附加的 Scrape 配置：**
 
 ```yaml
 - job_name: "istio/envoy-stats"

@@ -1,5 +1,5 @@
 ---
-title: Set up Istio's Components for Traffic Management
+title: 设置 Istio 的流量管理组件
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,24 +19,22 @@ keywords:
   - subtitles6
 ---
 
-A central advantage of traffic management in Istio is that it allows dynamic request routing. Some common applications for dynamic request routing include canary deployments and blue/green deployments. The two key resources in Istio traffic management are _virtual services_ and _destination rules_.
+Istio 中流量管理的一个核心优势是它允许动态请求路由。动态请求路由的一些常见应用包括金丝雀部署和蓝绿部署。Istio 流量管理中的两个关键资源是 _虚拟服务_ 和 _目的规则_ 。
 
-- [Virtual services](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/) intercept and direct traffic to your Kubernetes services, allowing you to divide percentages of traffic from a request to different services. You can use them to define a set of routing rules to apply when a host is addressed.
-- [Destination rules](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/) serve as the single source of truth about which service versions are available to receive traffic from virtual services. You can use these resources to define policies that apply to traffic that is intended for a service after routing has occurred.
+- 虚拟服务](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/)拦截并引导流量到你的Kubernetes服务，允许你将请求中的流量百分比分配给不同的服务。您可以使用它们来定义一组路由规则，以便在主机被寻址时应用。
+- 目的地规则](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/)作为关于哪些服务版本可用于接收来自虚拟服务的流量的单一真相来源。您可以使用这些资源来定义策略，这些策略适用于路由发生后打算用于服务的流量。
 
-This section describes how to add an example virtual service that corresponds to the `reviews` microservice in the sample BookInfo app. The purpose of this service is to divide traffic between two versions of the `reviews` service.
+本节介绍了如何添加与示例 BookInfo 应用程序中的 `reviews`微服务相对应的虚拟服务示例。该服务的目的是在`reviews`服务的两个版本之间分配流量。
 
-In this example, we take the traffic to the `reviews` service and intercept it so that 50 percent of it goes to `v1` of the service and 50 percent goes to `v2`.
+在这个例子中，我们把流量带到`reviews`服务，并拦截它，使 50%的流量流向服务的`v1`，50%的流量流向`v2`。
 
-After this virtual service is deployed, we will generate traffic and see from the Kiali visualization that traffic is being routed evenly between the two versions of the service.
+部署完这个虚拟服务后，我们会产生流量，从 Kiali 可视化中可以看到，流量在两个版本的服务之间被均匀地路由。
 
-To deploy the virtual service and destination rules for the `reviews` service,
-
-1. From the **Cluster Explorer**, select **Istio** from the nav dropdown.
-1. Click **DestinationRule** in the side nav bar.
-1. Click **Create from Yaml**.
-1. Copy and paste the DestinationRule yaml provided below.
-1. Click **Create**.
+1. 从**集群资源管理器**，从导航下拉菜单中选择**Istio**。
+1. 点击侧面导航栏中的**DestinationRule**。
+1. 单击**Create from Yaml**。
+1. 复制并粘贴下面提供的 DestinationRule yaml。
+1. 点击**Create**。
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -57,12 +55,12 @@ spec:
         version: v3
 ```
 
-Then to deploy the VirtualService that provides the traffic routing that utilizes the DestinationRule
+然后部署 VirtualService，提供利用 DestinationRule 的流量路由。
 
-1. Click **VirtualService** in the side nav bar.
-1. Click **Create from Yaml**.
-1. Copy and paste the VirtualService yaml provided below.
-1. Click **Create**.
+1. 点击侧面导航栏中的**VirtualService**。
+1. 点击**Create from Yaml**。
+1. 复制并粘贴下面提供的 VirtualService yaml。
+1. 点击**Create**。
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -86,6 +84,8 @@ spec:
 
 ```
 
-**Result:** When you generate traffic to this service (for example, by refreshing the ingress gateway URL), the Kiali traffic graph will reflect that traffic to the `reviews` service is divided evenly between `v1` and `v3`.
+**结果：**当你为该服务产生流量时（例如，通过刷新入口网关 URL），Kiali 流量图将反映出 "reviews "服务的流量在 "v1 "和 "v3 "之间平均分配。
 
-### [Next: Generate and View Traffic]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/setup/view-traffic)
+## 后续操作
+
+[查看 Istio 管理的流量]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/setup/view-traffic)

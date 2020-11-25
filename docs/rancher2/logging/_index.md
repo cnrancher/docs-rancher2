@@ -1,5 +1,5 @@
 ---
-title: Rancher Integration with Logging Services
+title: Rancher与日志服务的集成
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,6 +19,6 @@ keywords:
   - subtitles6
 ---
 
-If you are using Rancher v2.5, refer to [this section.](./v2.5)
+如果您使用的是 Rancher v2.5，请参考[本节。](./v2.5)
 
-If you are using Rancher v2.0-v2.4, refer to [this section.](./v2.0.x-v2.4.x)
+如果您使用的是 Rancher v2.0-v2.4，请参考[本节](./v2.0.x-v2.4.x)

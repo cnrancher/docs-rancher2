@@ -1,5 +1,5 @@
 ---
-title: Logging in Rancher v2.5
+title: Rancher v2.5 的日志功能
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,87 +19,80 @@ keywords:
   - subtitles6
 ---
 
-- [Changes in Rancher v2.5](#changes-in-rancher-v2-5)
-- [Enabling Logging for Rancher Managed Clusters](#enabling-logging-for-rancher-managed-clusters)
-- [Uninstall Logging](#uninstall-logging)
-- [Role-based Access Control](#role-based-access-control)
-- [Configuring the Logging Application](#configuring-the-logging-application)
-- [Working with Taints and Tolerations](#working-with-taints-and-tolerations)
+## Changes in Rancher v2.5
 
-# Changes in Rancher v2.5
+在 Rancher v2.5 中，日志记录被引入了以下变化。
 
-The following changes were introduced to logging in Rancher v2.5:
+- Banzai Cloud Logging operator](https://banzaicloud.com/docs/one-eye/logging-operator/)现在是Rancher日志记录的动力，取代了以前的内部日志记录解决方案。
+- [Fluent Bit](https://fluentbit.io/)现在用于汇总日志。Fluentd](https://www.fluentd.org/)用于过滤消息并将其路由到输出。以前只使用Fluentd。
+- 日志记录可以用 Kubernetes 清单配置，因为现在日志记录使用的是 Kubernetes 操作符与自定义资源定义。
+- 我们现在支持过滤日志。
+- 我们现在支持将日志写入多个输出。
+- 我们现在总是收集 Control Plane 和 etcd 日志。
 
-- The [Banzai Cloud Logging operator](https://banzaicloud.com/docs/one-eye/logging-operator/) now powers Rancher's logging in place of the former, in-house logging solution.
-- [Fluent Bit](https://fluentbit.io/) is now used to aggregate the logs. [Fluentd](https://www.fluentd.org/) is used for filtering the messages and routing them to the outputs. Previously, only Fluentd was used.
-- Logging can be configured with a Kubernetes manifest, because now the logging uses a Kubernetes operator with Custom Resource Definitions.
-- We now support filtering logs.
-- We now support writing logs to multiple outputs.
-- We now always collect Control Plane and etcd logs.
+下图来自[Banzai 文档](https://banzaicloud.com/docs/one-eye/logging-operator/#architecture)，显示了新的日志架构。
 
-The following figure from the [Banzai documentation](https://banzaicloud.com/docs/one-eye/logging-operator/#architecture) shows the new logging architecture:
-
-<figcaption>How the Banzai Cloud Logging Operator Works with Fluentd and Fluent Bit</figcaption>
+<figcaption>Banzai Cloud日志Operator如何与Fluentd和Fluent Bit协作？</figcaption>
 
 ![How the Banzai Cloud Logging Operator Works with Fluentd]({{<baseurl>}}/img/rancher/banzai-cloud-logging-operator.png)
 
-# Enabling Logging for Rancher Managed Clusters
+## 为 Rancher 管理的集群启用日志记录
 
-You can enable the logging for a Rancher managed cluster by going to the Apps page and installing the logging app.
+您可以通过进入 "应用程序 "页面并安装日志应用程序，为 Rancher 管理的集群启用日志记录。
 
-1. In the Rancher UI, go to the cluster where you want to install logging and click **Cluster Explorer.**
-1. Click **Apps.**
-1. Click the `rancher-logging` app.
-1. Scroll to the bottom of the Helm chart README and click **Install.**
+1. 在 Rancher UI 中，进入要安装日志记录的群集，然后单击 **群集资源管理器.**。
+1. 点击**应用程序.**。
+1. 点击`rancher-logging`应用程序。
+1. 滚动到 Helm chart README 底部，点击**安装.**。
 
-**Result:** The logging app is deployed in the `cattle-logging-system` namespace.
+**结果：**日志应用部署在`cattle-logging-system`命名空间中。
 
-# Uninstall Logging
+## 卸载记录
 
-1. From the **Cluster Explorer,** click **Apps & Marketplace.**
-1. Click **Installed Apps.**
-1. Go to the `cattle-logging-system` namespace and check the boxes for `rancher-logging` and `rancher-logging-crd`.
-1. Click **Delete.**
-1. Confirm **Delete.**
+1. 从**群组资源管理器中，**单击\*\*应用程序和市场。
+1. 单击**安装的应用程序.**。
+1. 进入 "cattle-logging-system "命名空间，选中 "rancher-logging "和 "rancher-logging-crd "的方框。
+1. 点击**Delete.**。
+1. 确认 **Delete.** 1.
 
-**Result** `rancher-logging` is uninstalled.
+**结果：** `rancher-logging`被卸载。
 
-# Role-based Access Control
+## 基于角色的访问控制
 
-Rancher logging has two roles, `logging-admin` and `logging-view`.
+Rancher 日志记录有两个角色，`logging-admin`和`logging-view`。
 
-`logging-admin` allows users full access to namespaced flows and outputs.
+`logging-admin`允许用户完全访问命名间隔的流量和输出。
 
-The `logging-view` role allows users to view namespaced flows and outputs, and cluster flows and outputs.
+`logging-view`角色允许用户查看命名间隔流和输出，以及集群流和输出。
 
-Edit access to the cluster flow and cluster output resources is powerful as it allows any user with edit access control of all logs in the cluster.
+对集群流和集群输出资源的编辑访问是非常强大的，因为它允许任何具有编辑访问权限的用户控制集群中的所有日志。
 
-In Rancher, the cluster administrator role is the only role with full access to all rancher-logging resources.
+在 Rancher 中，群集管理员角色是唯一对所有 rancher-logging 资源具有完全访问权限的角色。
 
-Cluster members are not able to edit or read any logging resources.
+群集成员无法编辑或读取任何日志资源。
 
-Project owners are able to create namespaced flows and outputs in the namespaces under their projects. This means that project owners can collect logs from anything in their project namespaces. Project members are able to view the flows and outputs in the namespaces under their projects. Project owners and project members require at least 1 namespace in their project to use logging. If they do not have at least one namespace in their project they may not see the logging button in the top nav dropdown.
+项目所有者能够在其项目下的命名空间中创建命名空间的流和输出。这意味着项目所有者可以从其项目命名空间中的任何东西收集日志。项目成员能够查看其项目下命名空间中的流程和输出。项目所有者和项目成员需要在他们的项目中至少有一个命名空间才能使用日志记录。如果他们的项目中没有至少一个命名空间，他们可能看不到顶部导航下拉菜单中的日志记录按钮。
 
-# Configuring the Logging Application
+## 配置记录应用程序
 
-To configure the logging application, go to the **Cluster Explorer** in the Rancher UI. In the upper left corner, click **Cluster Explorer > Logging.**
+要配置日志应用，请转到 Rancher UI 中的 **群集资源管理器**。在左上角，单击**群集资源管理器 > 日志**。
 
-### Overview of Logging Custom Resources
+## 日志自定义资源概述
 
-The following Custom Resource Definitions are used to configure logging:
+以下自定义资源定义用于配置日志记录。
 
-- [Flow and ClusterFlow](https://banzaicloud.com/docs/one-eye/logging-operator/crds/#flows-clusterflows)
+- [Flow 和 ClusterFlow](https://banzaicloud.com/docs/one-eye/logging-operator/crds/#flows-clusterflows)
 - [Output and ClusterOutput](https://banzaicloud.com/docs/one-eye/logging-operator/crds/#outputs-clusteroutputs)
 
-According to the [Banzai Cloud documentation,](https://banzaicloud.com/docs/one-eye/logging-operator/#architecture)
+根据【万载云文档】(https://banzaicloud.com/docs/one-eye/logging-operator/#architecture)
 
-> You can define `outputs` (destinations where you want to send your log messages, for example, Elasticsearch, or and Amazon S3 bucket), and `flows` that use filters and selectors to route log messages to the appropriate outputs. You can also define cluster-wide outputs and flows, for example, to use a centralized output that namespaced users cannot modify.
+> 你可以定义 "输出"（你想发送日志消息的目的地，例如 Elasticsearch 或 Amazon S3 bucket）和 "流"，使用过滤器和选择器将日志消息路由到适当的输出。你也可以定义集群范围内的输出和流，例如，使用一个集中的输出，而名字间隔的用户不能修改。
 
-### Examples
+##例子
 
-Let's say you wanted to send all logs in your cluster to an elasticsearch cluster.
+假设你想把集群中的所有日志发送到 elasticsearch 集群。
 
-First lets create our cluster output:
+首先让我们创建我们的集群输出。
 
 ```yaml
 apiVersion: logging.banzaicloud.io/v1beta1
@@ -114,9 +107,9 @@ spec:
     scheme: http
 ```
 
-We have created a cluster output, without elasticsearch configuration, in the same namespace as our operator `cattle-logging-system.`. Any time we create a cluster flow or cluster output we have to put it in the `cattle-logging-system` namespace.
+我们已经创建了一个集群输出，没有弹性搜索配置，与我们的操作符`cattle-logging-system.`在同一个命名空间。任何时候我们创建一个集群流或集群输出，我们都必须把它放在`cattle-logging-system`命名空间中。
 
-Now we have configured where we want the logs to go, lets configure all logs to go to that output.
+现在我们已经配置好了我们想要的日志的去向，让我们配置好所有的日志都去那个输出。
 
 ```yaml
 apiVersion: logging.banzaicloud.io/v1beta1
@@ -129,11 +122,11 @@ spec:
     - "example-es
 ```
 
-We should now see our configured index with logs in it.
+现在我们应该看到我们配置的索引，里面有日志。
 
-What if we have an application team who only wants logs from a specific namespaces sent to a splunk server? For this case can use namespaced outputs and flows.
+如果我们有一个应用团队只想把来自特定命名空间的日志发送到 splunk 服务器上，怎么办？对于这种情况，可以使用命名空间的输出和流。
 
-Before we start lets set up a scenario.
+在开始之前，我们先设置一个场景。
 
 ```yaml
 apiVersion: v1
@@ -163,7 +156,7 @@ spec:
           image: paynejacob/loggenerator:latest
 ```
 
-like before we start with an output, unlike cluster outputs we create our output in our application's namespace:
+像之前我们开始输出一样，与集群输出不同的是，我们在应用程序的命名空间中创建我们的输出。
 
 ```yaml
 apiVersion: logging.banzaicloud.io/v1beta1
@@ -178,7 +171,7 @@ spec:
     protocol: http
 ```
 
-Once again, lets give our output some logs:
+再一次，让我们给我们的输出一些日志。
 
 ```yaml
 apiVersion: logging.banzaicloud.io/v1beta1
@@ -191,7 +184,7 @@ spec:
     - "devteam-splunk"
 ```
 
-For the final example we create an output to write logs to a destination that is not supported out of the box (e.g. syslog):
+在最后一个例子中，我们创建了一个输出，将日志写入一个不支持的目标（如 syslog）。
 
 ```yaml
 apiVersion: v1
@@ -279,22 +272,22 @@ spec:
     ignore_network_errors_at_startup: false
 ```
 
-if we break down what is happening, first we create a deployment of a container that has the additional syslog plugin and accepts logs forwarded from another fluentd. Next we create an output configured as a forwarder to our deployment. The deployment fluentd will then forward all logs to the configured syslog destination.
+如果我们分解一下发生了什么，首先我们创建一个容器的部署，该容器有额外的 syslog 插件，并接受从另一个 fluentd 转发的日志。接下来，我们创建一个输出配置为我们的部署的转发者。然后，部署的 fluentd 会将所有日志转发到配置的 syslog 目的地。
 
-# Working with Taints and Tolerations
+## 与污染和容忍的工作
 
-"Tainting" a Kubernetes node causes pods to repel running on that node.
-Unless the pods have a `toleration` for that node's taint, they will run on other nodes in the cluster.
-[Taints and tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) can work in conjunction with the `nodeSelector` [field](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector) within the `PodSpec`, which enables the _opposite_ effect of a taint.
-Using `nodeSelector` gives pods an affinity towards certain nodes.
-Both provide choice for the what node(s) the pod will run on.
+"污点 "一个 Kubernetes 节点会导致 pods 排斥在该节点上运行。
+除非 pods 对该节点的污点有 "容忍"，否则它们将在集群中的其他节点上运行。
+[污点和容忍](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)可以与`PodSpec`中的`nodeSelector`[字段](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector)一起工作，它可以实现污点的\_相反效果。
+使用`nodeSelector`使豆荚对某些节点有亲和力。
+两者都为 pod 运行的节点提供了选择。
 
-### Default Implementation in Rancher's Logging Stack
+## Rancher 日志堆栈中的默认实现
 
-By default, Rancher taints all Linux nodes with `cattle.io/os=linux`, and does not taint Windows nodes.
-The logging stack pods have `tolerations` for this taint, which enables them to run on Linux nodes.
-Moreover, we can populate the `nodeSelector` to ensure that our pods _only_ run on Linux nodes.
-Let's look at an example pod YAML file with these settings...
+默认情况下，Rancher 会用`cattle.io/os=linux`污染所有 Linux 节点，而不会污染 Windows 节点。
+日志堆栈 pods 对这个污点有`tolerations`，这使得它们可以在 Linux 节点上运行。
+此外，我们可以填充`nodeSelector`来确保我们的 pods*only*运行在 Linux 节点上。
+让我们看看一个带有这些设置的示例 pod YAML 文件......
 
 ```yaml
 apiVersion: v1
@@ -311,19 +304,19 @@ spec:
     kubernetes.io/os: linux
 ```
 
-In the above example, we ensure that our pod only runs on Linux nodes, and we add a `toleration` for the taint we have on all of our Linux nodes.
-You can do the same with Rancher's existing taints, or with your own custom ones.
+在上面的例子中，我们确保我们的 pod 只运行在 Linux 节点上，并且我们为我们所有的 Linux 节点上的污点添加一个 "toleration"。
+你可以用 Rancher 现有的污点做同样的事情，或者用你自己的自定义污点。
 
-### Windows Support
+### Windows
 
-Clusters with Windows worker support logging with some small caveats:
+带有 Windows worker 的集群支持日志记录，但有一些小的注意事项。
 
-1. Windows node logs are currently unable to be exported.
-2. `fluentd-configcheck` pod(s) will fail due to an [upstream issue](https://github.com/banzaicloud/logging-operator/issues/592), where `tolerations` and `nodeSelector` settings are not inherited from the `logging-operator`.
+1. Windows 节点日志目前无法导出。
+2. 2. 由于[上游问题](https://github.com/banzaicloud/logging-operator/issues/592)，"tolerations "和 "nodeSelector "设置没有从 "logging-operator "中继承，"fluentd-configcheck "pod(s)将失败。
 
-### Adding NodeSelector Settings and Tolerations for Custom Taints
+## 为自定义污点添加 NodeSelector 设置和容忍度
 
-If you would like to add your own `nodeSelector` settings, or if you would like to add `tolerations` for additional taints, you can pass the following to the chart's values.
+如果你想添加你自己的 "节点选择器 "设置，或者如果你想为额外的污点添加 "容忍"，你可以将以下内容传递给图表的值。
 
 ```yaml
 tolerations:
@@ -332,10 +325,10 @@ nodeSelector:
   # insert nodeSelector settings
 ```
 
-These values will add both settings to the `fluentd`, `fluentbit`, and `logging-operator` containers.
-Essentially, these are global settings for all pods in the logging stack.
+这些值将把这两个设置添加到`fluentd`、`fluentbit`和`logging-operator`容器中。
+本质上，这些都是日志堆栈中所有 pods 的全局设置。
 
-However, if you would like to add tolerations for _only_ the `fluentbit` container, you can add the following to the chart's values.
+但是，如果你想只为`fluentbit`容器添加容忍度，你可以在图表的值中添加以下内容。
 
 ```yaml
 fluentbit_tolerations:

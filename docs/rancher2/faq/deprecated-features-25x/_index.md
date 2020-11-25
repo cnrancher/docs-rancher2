@@ -15,14 +15,14 @@ keywords:
   - Rancher 2.5已弃用的功能
 ---
 
-### What is Rancher's Deprecation policy?
+## Rancher 的废弃政策是什么？
 
-Starting in Rancher 2.5 we have published our official deprecation policy in the support [terms of service](https://rancher.com/support-maintenance-terms).
+从 Rancher 2.5 开始，我们在支持[服务条款](https://rancher.com/support-maintenance-terms)中发布了官方的废弃政策。
 
-### Where can I find out which features have been deprecated in Rancher 2.5?
+## 我在哪里可以找到 Rancher 2.5 中哪些功能已经被废弃？
 
-Rancher will publish deprecated features as part of the [release notes](https://github.com/rancher/rancher/releases/tag/v2.5.0) for Rancher found on GitHub.
+Rancher 将在 GitHub 上的 Rancher[发布说明](https://github.com/rancher/rancher/releases/tag/v2.5.0)中发布已废弃的功能。
 
-### What can I expect when a feature is marked for deprecation?
+## 当一个功能被标记为废弃时，我可以期待什么？
 
-In the release where functionality is marked as Deprecated it will still be available and supported allowing upgrades to follow the usual procedure. Once upgraded, users/admins should start planning to move away from the deprecated functionality before upgrading to the release it marked as removed. The recommendation for new deployments is to not use the deprecated feature.
+在被标记为弃用的功能的版本中，它仍然可以使用和支持，允许按照通常的程序进行升级。一旦升级，用户/管理员应该在升级到被标记为删除的版本之前，开始计划从废弃的功能中移除。对于新的部署，建议不要使用被废弃的功能。

@@ -1,5 +1,5 @@
 ---
-title: Release Notes
+title: 版本说明
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,26 +19,28 @@ keywords:
   - subtitles6
 ---
 
-# Istio 1.5.9 release notes
+## Istio 1.5.9
 
-**Bug fixes**
+**问题修复**
 
-- The Kiali traffic graph is now working [#28109](https://github.com/rancher/rancher/issues/28109)
+- Kiali 流量图现在可以使用了 [#28109](https://github.com/rancher/rancher/issues/28109)
 
-**Known Issues**
+**已知问题**
 
-- The Kiali traffic graph is offset in the UI [#28207](https://github.com/rancher/rancher/issues/28207)
+- Kiali 流量图在 UI 中偏移[#28207](https://github.com/rancher/rancher/issues/28207)
 
-# Istio 1.5.8
+## Istio 1.5.8
 
-### Important note on 1.5.x versions
+### 1.5.x 的重要说明
 
-When upgrading from any 1.4 version of Istio to any 1.5 version, the Rancher installer will delete several resources in order to complete the upgrade, at which point they will be immediately re-installed. This includes the `istio-reader-service-account`. If your Istio installation is using this service account be aware that any secrets tied to the service account will be deleted. Most notably this will **break specific [multi-cluster deployments](https://archive.istio.io/v1.4/docs/setup/install/multicluster/)**. Downgrades back to 1.4 are not possible.
+当从 Istio 的任何一个 1.4 版本升级到任何一个 1.5 版本时，Rancher 安装程序将删除一些资源以完成升级，此时它们将被立即重新安装。这包括`istio-reader-service-account`。如果您的 Istio 安装使用的是这个服务账户，请注意任何与服务账户绑定的秘密都将被删除。最值得注意的是，这将**破坏特定的[多集群部署](https://archive.istio.io/v1.4/docs/setup/install/multicluster/)**。不可能降级回 1.4。
 
-See the official upgrade notes for additional information on the 1.5 release and upgrading from 1.4: https://istio.io/latest/news/releases/1.5.x/announcing-1.5/upgrade-notes/
+有关 1.5 版本和从 1.4 升级的更多信息，请参见官方升级说明：https://istio.io/latest/news/releases/1.5.x/announcing-1.5/upgrade-notes/。
 
-> **Note:** Rancher continues to use the Helm installation method, which produces a different architecture from an istioctl installation.
+:::note 说明
+Rancher 继续使用 Helm 安装方法，它产生的架构与 istioctl 安装不同。
+:::
 
-### Known Issues
+### 已知问题
 
-- The Kiali traffic graph is currently not working [#24924](https://github.com/istio/istio/issues/24924)
+- Kiali 流量图目前无法使用[#24924](https://github.com/istio/istio/issues/24924)

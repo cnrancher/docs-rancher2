@@ -19,8 +19,8 @@ keywords:
   - subtitles6
 ---
 
-In Rancher 2.5, the Istio application was improved.
+在 Rancher 2.5 中，Istio 应用得到了改进。
 
-If you are using Rancher v2.5, refer to the Istio documentation [here.]({{<baseurl>}}/rancher/v2.x/en/istio/v2.5)
+如果您使用的是 Rancher v2.5，请参考[这里](/docs/rancher2/istio/2.5/_index)。
 
-If you are using Rancher v2.3-v2.4, refer to the Istio documentation [here.]({{<baseurl>}}/rancher/v2.x/en/istio/v2.3.x-v2.4.x)
+如果您使用的是 Rancher v2.3-v2.4，请参考[这里](/docs/rancher2/istio/2.3.x-2.4.x/_index)。

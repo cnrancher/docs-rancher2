@@ -1,5 +1,5 @@
 ---
-title: Migrating to Rancher v2.5 Logging
+title: 迁移至Rancher v2.5日志
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,75 +19,75 @@ keywords:
   - subtitles6
 ---
 
-Starting in v2.5, the logging feature available within Rancher has been completely overhauled. The [logging operator](https://github.com/banzaicloud/logging-operator) from Banzai Cloud has been adopted; Rancher configures this tooling for use when deploying logging.
+从 v2.5 开始，Rancher 中可用的日志记录功能已经完全改观。采用了万载云的[logging operator](https://github.com/banzaicloud/logging-operator)；Rancher 在部署 logging 时，配置了这个工具来使用。
 
-Among the many features and changes in the new logging functionality is the removal of project-specific logging configurations. Instead, one now configures logging at the namespace level. Cluster-level logging remains available, but configuration options differ.
+在新的日志功能的众多特性和变化中，有一项是取消了特定项目的日志配置。取而代之的是，现在人们在命名空间级别配置日志记录。集群级日志记录仍然可用，但配置选项有所不同。
 
-> Note: The pre-v2.5 user interface is now referred to as the _Cluster Manager_. The v2.5+ dashboard is referred to as the _Cluster Explorer_.
+> 注意：v2.5 之前的用户界面现在被称为*集群管理器。v2.5+的仪表板被称为\_Cluster Explorer*。
 
-## Installation
+## 安装
 
-To install logging in Rancher v2.5+, refer to [installation instructions]({{<baseurl>}}/rancher/v2.x/en/logging/v2.5/#enabling-logging-for-rancher-managed-clusters).
+要在 Rancher v2.5+中安装日志，请参考[安装说明]({{<baseurl>}}/rancher/v2.x/en/logging/v2.5/#enabling-logging-for-rancher-managed-clusters)。
 
-## Terminology & Familiarity
+## 术语
 
-In v2.5, logging configuration is centralized under a _Logging_ menu option available in the _Cluster Explorer_. It is from this menu option that logging for both cluster and namespace is configured.
+在 v2.5 中，日志配置集中在*群集浏览器*中的*日志*菜单选项下。群集和命名空间的日志记录都是通过这个菜单选项来配置的。
 
-> Note: Logging is installed on a per-cluster basis. You will need to navigate between clusters to configure logging for each cluster.
+> 注意：日志记录是以每个集群为基础安装的。您需要在群集之间进行导航，以便为每个群集配置日志记录。
 
-There are four key concepts to understand for v2.5+ logging:
+对于 v2.5 以上的日志记录，有四个关键概念需要理解。
 
 1. Outputs
 
-   _Outputs_ are a configuration resource that determine a destination for collected logs. This is where settings for aggregators such as ElasticSearch, Kafka, etc. are stored. _Outputs_ are namespaced resources.
+   Outputs 是一个配置资源，它决定了收集到的日志的目的地。这是存储 ElasticSearch、Kafka 等聚合器的设置的地方。Outputs 是命名空间的资源。
 
 2. Flows
 
-   _Flows_ are a configuration resource that determine collection, filtering, and destination rules for logs. It is within a flow that one will configure what logs to collect, how to mutate or filter them, and which outputs to send the logs to. _Flows_ are namespaced resources, and can connect either to an _Output_ in the same namespace, or a _ClusterOutput_.
+   流量是一种配置资源，用于确定日志的收集、过滤和目标规则。在一个流中，人们将配置要收集哪些日志，如何突变或过滤它们，以及将日志发送到哪些输出。流*是命名空间的资源，既可以连接到同一命名空间的\_Output*，也可以连接到*ClusterOutput*。
 
 3. ClusterOutputs
 
-   _ClusterOutputs_ serve the same functionality as _Outputs_, except they are a cluster-scoped resource. _ClusterOutputs_ are necessary when collecting logs cluster-wide, or if you wish to provide an output to all namespaces in your cluster.
+   *ClusterOutputs*的功能与*Outputs*相同，只是它们是一种群集范围的资源。当在整个群集范围内收集日志时，或者如果你希望向你的群集中的所有命名空间提供一个输出，那么*ClusterOutputs*是必要的。
 
 4. ClusterFlows
 
-   _ClusterFlows_ serve the same function as _Flows_, but at the cluster level. They are used to configure log collection for an entire cluster, instead of on a per-namespace level. _ClusterFlows_ are also where mutations and filters are defined, same as _Flows_ (in functionality).
+   *ClusterFlows*的功能与*Flows*相同，但在群集层面。它们用于配置整个集群的日志收集，而不是每个命名空间级别的。*ClusterFlows*也是定义突变和过滤器的地方，与*Flows*一样。in functionality).
 
-# Cluster Logging
+## 集群日志
 
-To configure cluster-wide logging for v2.5+ logging, one needs to setup a _ClusterFlow_. This object defines the source of logs, any transformations or filters to be applied, and finally the output(s) for the logs.
+要配置 v2.5+日志记录的集群范围，需要设置一个*ClusterFlow*。这个对象定义了日志的来源，任何要应用的转换或过滤器，以及最终的日志输出。
 
-> Important: _ClusterFlows_ must be defined within the `cattle-logging-system` namespace. _ClusterFlows_ will not work if defined in any other namespace.
+> 重要：*ClusterFlows*必须在`cattle-logging-system`命名空间中定义。如果在任何其他命名空间中定义，*ClusterFlows*将不起作用。
 
-In legacy logging, in order to collect logs from across the entire cluster, one only needed to enable cluster-level logging and define the desired output. This basic approach remains in v2.5+ logging. To replicate legacy cluster-level logging, follow these steps:
+在传统的日志记录中，为了从整个集群中收集日志，只需要启用集群级日志记录并定义所需的输出。这一基本方法在 v2.5+日志记录中仍然存在。要复制遗留的群集级日志记录，请遵循以下步骤。
 
-1. Define a _ClusterOutput_ according to the instructions found under [Output Configuration](#output-configuration)
-2. Create a _ClusterFlow_, ensuring that it is set to be created in the `cattle-logging-system` namespace
-   1. Remove all _Include_ and _Exclude_ rules from the flow definition. This ensures that all logs are gathered.
-   2. You do not need to configure any filters if you do not wish - default behavior does not require their creation
-   3. Define your cluster output(s)
+1. 根据[输出配置](#output-configuration)下的说明定义一个*ClusterOutput*。
+2. 创建一个*ClusterFlow*，确保设置为在`cattle-logging-system`命名空间中创建。
+   1. 从流程定义中删除所有的*Include*和*Exclude*规则。这样可以确保所有的日志都被收集。
+   2. 如果您不希望配置任何过滤器，您不需要配置任何过滤器--默认行为不需要创建它们
+   3. 定义你的群组产出
 
-This will result in logs from all sources in the cluster (all pods, and all system components) being collected and sent to the output(s) you defined in the _ClusterFlow_.
+这将导致收集来自集群中所有来源（所有 pods 和所有系统组件）的日志，并将其发送到您在 _ClusterFlow_ 中定义的输出。
 
-# Project Logging
+## 项目日志
 
-Logging in v2.5+ is not project-aware. This means that in order to collect logs from pods running in project namespaces, you will need to define _Flows_ for those namespaces.
+在 v2.5+中，日志记录不是项目感知的。这意味着，为了收集在项目命名空间中运行的 pod 的日志，您需要为这些命名空间定义 _Flows_。
 
-To collect logs from a specific namespace, follow these steps:
+要从特定的命名空间收集日志，请按照以下步骤进行。
 
-1. Define an _Output_ or _ClusterOutput_ according to the instructions found under [Output Configuration](#output-configuration)
-2. Create a _Flow_, ensuring that it is set to be created in the namespace in which you want to gather logs.
-   1. If you wish to define _Include_ or _Exclude_ rules, you may do so. Otherwise, removal of all rules will result in all pods in the target namespace having their logs collected.
-   2. You do not need to configure any filters if you do not wish - default behavior does not require their creation
-   3. Define your output(s) - these can be either _ClusterOutput_ or _Output_ objects.
+1. 根据[输出配置](#output-configuration)下的说明，定义一个*Output*或*ClusterOutput*。
+2. 创建一个*Flow*，确保它被设置为在你要收集日志的命名空间中创建。
+   1. 如果您希望定义*Include*或*Exclude*规则，您可以这样做。否则，删除所有规则将导致目标命名空间中的所有豆荚的日志都被收集。
+   2. 2. 如果您不希望，您不需要配置任何过滤器--默认行为不需要创建它们。
+   3. 3. 定义你的输出--这些输出可以是*ClusterOutput*或*Output*对象。
 
-This will result in logs from all sources in the namespace (pods) being collected and sent to the output(s) you defined in your _Flow_.
+这将导致收集命名空间（pods）中所有来源的日志，并将其发送到你在*Flow*中定义的输出。
 
-> To collect logs from a project, repeat the above steps for every namespace within the project. Alternatively, you can label your project workloads with a common label (e.g. `project=my-project`) and use a _ClusterFlow_ to collect logs from all pods matching this label.
+> 要从一个项目中收集日志，请对项目中的每个命名空间重复上述步骤。或者，您可以用一个通用的标签来标记您的项目工作负载（例如：`project=my-project`），然后使用*ClusterFlow*来收集与此标签相匹配的所有 pod 的日志。
 
-# Output Configuration
+## 输出配置
 
-In legacy logging, there are five logging destinations to choose from: Elasticsearch, Splunk, Kafka, Fluentd, and Syslog. With the exception of Syslog, all of these destinations are available in logging v2.5+.
+在传统的日志记录中，有五个日志记录目的地可供选择：Elasticsearch、Splunk、Kafka、Fluentd 和 Syslog。除了 Syslog 之外，所有这些目的地都可以在日志记录 v2.5+中使用。
 
 ## Elasticsearch
 
@@ -101,9 +101,9 @@ In legacy logging, there are five logging destinations to choose from: Elasticse
 | SSL Configuration -> Client Key Password      | SSL -> Client Key Pass            | Password must now be stored in a secret                   |
 | SSL Configuration -> Enabled SSL Verification | SSL -> Certificate Authority File | Certificate must now be stored in a secret                |
 
-In legacy logging, indices were automatically created according to the format in the "Index Patterns" section. In v2.5 logging, default behavior has been changed to logging to a single index. You can still configure index pattern functionality on the output object by editing as YAML and inputting the following values:
+在传统的日志记录中，索引是根据 "索引模式 "部分的格式自动创建的。在 v2.5 日志记录中，默认行为已改为记录到单个索引。您仍然可以通过编辑为 YAML 并输入以下值来配置输出对象上的索引模式功能。
 
-```
+```yaml
 ...
 spec:
   elasticsearch:
@@ -113,7 +113,7 @@ spec:
     logstash_dateformat: "%Y-%m-%d"
 ```
 
-Replace `<desired prefix>` with the prefix for the indices that will be created. In legacy logging, this defaulted to the name of the cluster.
+用将要创建的索引的前缀替换 `<desired prefix>`。在传统的日志记录中，这默认为群集的名称。
 
 ## Splunk
 
@@ -128,9 +128,9 @@ Replace `<desired prefix>` with the prefix for the indices that will be created.
 | SSL Configuration -> Client Key Password | _Not Supported_                        | Specifying a password for the client private key is not currently supported.           |
 | SSL Configuration -> SSL Verify          | Edit as YAML -> `ca_file` or `ca_path` | `ca_file` or `ca_path` field must be added as YAML key under `spec.splunkHec`. See (2) |
 
-_(1) `client_key` and `client_cert` values must be paths to the key and cert files, respectively. These files must be mounted into the `rancher-logging-fluentd` pod in order to be used._
+\_(1) "client_key "和 "client_cert "的值必须分别是密钥和证书文件的路径。这些文件必须挂载到`rancher-logging-fluentd` pod 中才能使用。
 
-_(2) Users can configure either `ca_file` (a path to a PEM-encoded CA certificate) or `ca_path` (a path to a directory containing CA certificates in PEM format). These files must be mounted into the `rancher-logging-fluentd` pod in order to be used._
+\_(2) 用户可以配置 "ca_file"(PEM 编码的 CA 证书的路径)或 "ca_path"(PEM 格式的 CA 证书目录的路径)。这些文件必须挂载到`rancher-logging-fluentd` pod 中才能使用。
 
 ## Kafka
 
@@ -148,7 +148,7 @@ _(2) Users can configure either `ca_file` (a path to a PEM-encoded CA certificat
 
 ## Fluentd
 
-As of v2.5.2, it is only possible to add a single Fluentd server using the "Edit as Form" option. To add multiple servers, edit the output as YAML and input multiple servers.
+从 v2.5.2 开始，只能使用 "编辑为表单 "选项来添加一个 Fluentd 服务器。要添加多个服务器，请将输出编辑为 YAML 并输入多个服务器。
 
 | Legacy Logging                           | v2.5+ Logging                                       | Notes                                                                |
 | ---------------------------------------- | --------------------------------------------------- | -------------------------------------------------------------------- |
@@ -166,30 +166,30 @@ As of v2.5.2, it is only possible to add a single Fluentd server using the "Edit
 | SSL Configuration -> CA Certificate PEM  | Edit as YAML -> `tls_cert_path`                     | Field set as YAML key under `spec.forward`. See (1)                  |
 | Enable Gzip Compression                  | -                                                   | No longer supported in v2.5+ logging                                 |
 
-_(1) These values are to be specified as paths to files. Those files must be mounted into the `rancher-logging-fluentd` pod in order to be used._
+\_(1) 这些值是作为文件的路径来指定的，这些文件必须安装到`rancher-logging-fluentd` pod 中才能使用。这些文件必须安装到`rancher-logging-fluentd` pod 中才能使用。
 
 ## Syslog
 
-As of v2.5.2, syslog is not currently supported as an output using v2.5+ logging.
+从 v2.5.2 开始，目前不支持使用 v2.5 以上的日志作为输出。
 
-## Custom Log Fields
+## 自定义日志字段
 
-In order to add custom log fields, you will need to add the following YAML to your flow configuration:
+为了添加自定义日志字段，你将需要添加以下 YAML 到你的流程配置中。
 
-```
-...
+```yaml
+---
 spec:
   filters:
     - record_modifier:
         records:
-        - foo: "bar"
+          - foo: "bar"
 ```
 
-(replace `foo: "bar"` with custom log fields you wish to add)
+（将 `foo: "bar"`替换为您希望添加的自定义日志字段）
 
-# System Logging
+## 系统日志
 
-In legacy logging, collecting logs from system components was accomplished by checking a box labeled "Include System Log" when setting up cluster logging. In v2.5+ logging, system logs are gathered in one of two ways:
+在传统的日志记录中，从系统组件收集日志是通过在设置群集日志记录时勾选 "包括系统日志 "的框来完成的。在 v2.5+日志记录中，系统日志的收集方式有两种。
 
-1. Gather all cluster logs, not specifying any match or exclusion rules. This results in all container logs from the cluster being collected, which includes system logs.
-2. Specifically target system logs by adding match rules for system components. Specific match rules depend on the component being collected.
+1. 收集所有群集日志，不指定任何匹配或排除规则。这样做的结果是收集集群的所有容器日志，其中包括系统日志。
+2. 通过为系统组件添加匹配规则，专门针对系统日志。具体的匹配规则取决于被收集的组件。
