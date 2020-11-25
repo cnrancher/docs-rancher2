@@ -1,5 +1,5 @@
 ---
-title: title
+title: 设置容器的技巧
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,52 +19,50 @@ keywords:
   - subtitles6
 ---
 
-Running well built containers can greatly impact the overall performance and security of your environment.
+运行构建良好的容器会极大的影响环境的整体性能和安全性。
 
-Below are a few tips for setting up your containers.
+关于容器安全的详细信息，也可以参考Rancher的[容器安全指南](https://rancher.com/complete-guide-container-security)。以下是一些设置容器的技巧。
 
-For a more detailed discussion of security for containers, you can also refer to Rancher's [Guide to Container Security.](https://rancher.com/complete-guide-container-security)
+### 使用通用容器操作系统
 
-### Use a Common Container OS
+在可能的情况下，你应该尽量在一个通用的容器基础操作系统上进行标准化。
 
-When possible, you should try to standardize on a common container base OS.
+Alpine和BusyBox等较小的发行版减少了容器镜像的大小，并且通常具有较小的漏洞。
 
-Smaller distributions such as Alpine and BusyBox reduce container image size and generally have a smaller attack/vulnerability surface.
+流行的发行版如Ubuntu、Fedora和CentOS等都经过了大量的测试，并提供了许多的功能。
 
-Popular distributions such as Ubuntu, Fedora, and CentOS are more field-tested and offer more functionality.
+### 从零开始的容器
 
-### Start with a FROM scratch container
+如果你的微服务是一个独立的静态二进制，你应该使用`FROM scratch`容器。
 
-If your microservice is a standalone static binary, you should use a FROM scratch container.
+`FROM scratch`容器是一个[官方Docker镜像](https://hub.docker.com/_/scratch)，它是空的，这样你就可以用它来设计最小的镜像。
 
-The FROM scratch container is an [official Docker image](https://hub.docker.com/_/scratch) that is empty so that you can use it to design minimal images.
+这将具有最小的攻击层和最小的图像尺寸。
 
-This will have the smallest attack surface and smallest image size.
+### 以非特权方式运行容器进程
 
-### Run Container Processes as Unprivileged
+在可能的情况下，在容器内运行进程时使用非特权用户。虽然容器运行时提供了隔离，但仍然可能存在漏洞和攻击。如果容器以root身份运行，无意中或意外的主机挂载也会受到影响。有关为 pod 或容器配置安全上下文的详细信息，请参考 [Kubernetes 文档](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)。
 
-When possible, use a non-privileged user when running processes within your container. While container runtimes provide isolation, vulnerabilities and attacks are still possible. Inadvertent or accidental host mounts can also be impacted if the container is running as root. For details on configuring a security context for a pod or container, refer to the [Kubernetes docs](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
+### 定义资源限制
 
-### Define Resource Limits
+将CPU和内存限制应用于你的Pod。这可以帮助管理工作节点上的资源，并避免发生故障的微服务影响其他微服务。
 
-Apply CPU and memory limits to your pods. This can help manage the resources on your worker nodes and avoid a malfunctioning microservice from impacting other microservices.
+在标准Kubernetes中，您可以在命名空间级别上设置资源限制。在Rancher中，您可以在项目级别上设置资源限制，它们将继承到项目内的所有命名空间。详情请参考Rancher文档。
 
-In standard Kubernetes, you can set resource limits on the namespace level. In Rancher, you can set resource limits on the project level and they will propagate to all the namespaces within the project. For details, refer to the Rancher docs.
+在设置资源配额时，如果您在项目或命名空间上设置了任何与 CPU 或内存相关的内容（即限制或保留），所有容器都需要在创建期间设置各自的 CPU 或内存字段。为了避免在创建工作负载期间对每个容器设置这些限制，可以在命名空间上指定一个默认的容器资源限制。
 
-When setting resource quotas, if you set anything related to CPU or Memory (i.e. limits or reservations) on a project or namespace, all containers will require a respective CPU or Memory field set during creation. To avoid setting these limits on each and every container during workload creation, a default container resource limit can be specified on the namespace.
+Kubernetes文档中有许多关于如何在[容器级别](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container)和命名空间级别设置资源限制的资料。
 
-The Kubernetes docs have more information on how resource limits can be set at the [container level](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container) and the namespace level.
+### 定义资源需求
 
-### Define Resource Requirements
+你应该将CPU和内存需求应用到你的pod上。这对于通知调度器需要将你的pod放置在哪种类型的计算节点上，并确保它不会过度配置该节点资源至关重要。在Kubernetes中，你可以通过在pod的容器规范的资源请求字段中定义`resources.requests`来设置资源需求。详情请参考[Kubernetes 文档](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container)。
 
-You should apply CPU and memory requirements to your pods. This is crucial for informing the scheduler which type of compute node your pod needs to be placed on, and ensuring it does not over-provision that node. In Kubernetes, you can set a resource requirement by defining `resources.requests` in the resource requests field in a pod's container spec. For details, refer to the [Kubernetes docs](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container).
+> **注意：** 如果您为 pod 所部署的命名空间设置了资源限制，而容器没有特定的资源请求，则不允许启动 pod。为了避免在创建工作负载时对每个容器设置这些字段，可以在命名空间上指定一个默认的容器资源限制。
 
-> **Note:** If you set a resource limit for the namespace that the pod is deployed in, and the container doesn't have a specific resource request, the pod will not be allowed to start. To avoid setting these fields on each and every container during workload creation, a default container resource limit can be specified on the namespace.
+建议在容器级别上定义资源需求，否则，调度程序会做出一些假设，这些假设可能会在群集加载时对您的应用程序没有帮助。
 
-It is recommended to define resource requirements on the container level because otherwise, the scheduler makes assumptions that will likely not be helpful to your application when the cluster experiences load.
+### Liveness 和 Readiness Probes
 
-### Liveness and Readiness Probes
+为你的容器设置liveness和readiness probes。除非你的容器完全崩溃，否则Kubernetes不会知道它是不健康的，除非你创建一个可以报告容器状态的端点或机制。或者，确保你的容器在不健康的情况下停止并崩溃。
 
-Set up liveness and readiness probes for your container. Unless your container completely crashes, Kubernetes will not know it's unhealthy unless you create an endpoint or mechanism that can report container status. Alternatively, make sure your container halts and crashes if unhealthy.
-
-The Kubernetes docs show how to [configure liveness and readiness probes for containers.](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/)
+Kubernetes文档展示了如何[为容器配置liveness和readiness probes。](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/)

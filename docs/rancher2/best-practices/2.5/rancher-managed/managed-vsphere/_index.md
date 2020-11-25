@@ -1,5 +1,5 @@
 ---
-title: title
+title: Rancher托管vSphere群集的最佳实践
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,57 +19,57 @@ keywords:
   - subtitles6
 ---
 
-This guide outlines a reference architecture for provisioning downstream Rancher clusters in a vSphere environment, in addition to standard vSphere best practices as documented by VMware.
+除了VMware记录的标准vSphere最佳实践外，本指南还概述了在vSphere环境中配置下游Rancher集群的参考架构。
 
-- [1. VM Considerations](#1-vm-considerations)
-- [2. Network Considerations](#2-network-considerations)
-- [3. Storage Considerations](#3-storage-considerations)
-- [4. Backups and Disaster Recovery](#4-backups-and-disaster-recovery)
+- [1. 虚拟机注意事项](#1-虚拟机注意事项)
+- [2. 网络注意事项](#2-网络注意事项)
+- [3. 储存注意事项](#3-储存注意事项)
+- [4. 备份和灾难恢复](#4-备份和灾难恢复)
 
-<figcaption>Solution Overview</figcaption>
+**解决方案概述**
 
 ![Solution Overview](/img/rancher/solution_overview.drawio.svg)
 
-# 1. VM Considerations
+## 1. 虚拟机注意事项
 
-### Leverage VM Templates to Construct the Environment
+### 充分利用模板来构建环境
 
-To facilitate consistency across the deployed Virtual Machines across the environment, consider the use of "Golden Images" in the form of VM templates. Packer can be used to accomplish this, adding greater customisation options.
+为了促进整个环境中部署的虚拟机的一致性，可以考虑使用虚拟机模板形式的 "Golden Images"。可以使用Packer来实现这一点，增加更多的自定义选项。
 
-### Leverage DRS Anti-Affinity Rules (Where Possible) to Separate Downstream Cluster Nodes Across ESXi Hosts
+### 利用 DRS 反亲和规则（如果可能）在 ESXi 主机上分离下游集群节点
 
-Doing so will ensure node VM's are spread across multiple ESXi hosts - preventing a single point of failure at the host level.
+这样做将确保节点虚拟机分布在多台ESXi主机上--防止主机级别的单点故障。
 
-### Leverage DRS Anti-Affinity Rules (Where Possible) to Separate Downstream Cluster Nodes Across Datastores
+### 利用 DRS 反亲和规则（如果可能）在整个数据存储区中分离下游群集节点
 
-Doing so will ensure node VM's are spread across multiple datastores - preventing a single point of failure at the datastore level.
+这样做可以确保节点虚拟机分布在多个数据存储上，防止在数据存储层面出现单点故障。
 
-### Configure VM's as Appropriate for Kubernetes
+#### 为Kubernetes配置合适的虚拟机
 
-It’s important to follow K8s and etcd best practices when deploying your nodes, including disabling swap, double-checking you have full network connectivity between all machines in the cluster, using unique hostnames, MAC addresses, and product_uuids for every node.
+在部署节点时，遵循K8s和etcd的最佳实践是很重要的，包括禁用swap，仔细检查你在集群中的所有机器之间有完好的网络连接，为每个节点使用唯一的主机名、MAC地址和product_uuids。
 
-# 2. Network Considerations
+## 2. 网络注意事项
 
-### Leverage Low Latency, High Bandwidth Connectivity Between ETCD Nodes
+#### 利用ETCD节点之间的低延迟、高带宽连接
 
-Deploy etcd members within a single data center where possible to avoid latency overheads and reduce the likelihood of network partitioning. For most setups, 1Gb connections will suffice. For large clusters, 10Gb connections can reduce the time taken to restore from backup.
+尽可能在单个数据中心内部署etcd成员，以避免延迟开销并减少网络分区的可能性。对于大多数设置，1Gb连接就足够了。对于大型集群，10Gb连接可以减少从备份恢复所需的时间。
 
-### Consistent IP Addressing for VM's
+### 为虚拟机提供固定的IP地址
 
-Each node used should have a static IP configured. In the case of DHCP, each node should have a DHCP reservation to make sure the node gets the same IP allocated.
+使用的每个节点都应该配置一个静态IP。在DHCP的情况下，每个节点应该有一个DHCP预留，以确保节点获得相同的IP分配。
 
-# 3. Storage Considerations
+## 3. 储存注意事项
 
-### Leverage SSD Drives for ETCD Nodes
+#### 建议ETCD节点使用SSD硬盘
 
-ETCD is very sensitive to write latency. Therefore, leverage SSD disks where possible.
+ETCD对写入延迟非常敏感。因此，尽可能地使用SSD磁盘。
 
-# 4. Backups and Disaster Recovery
+## 4. 备份和灾难恢复
 
-### Perform Regular Downstream Cluster Backups
+### 定期执行下游集群备份
 
-Kubernetes uses etcd to store all its data - from configuration, state and metadata. Backing this up is crucial in the event of disaster recovery.
+Kubernetes使用etcd来存储其所有数据--从配置、状态和元数据。在灾难恢复的情况下，备份这些数据是至关重要的。
 
-### Back up Downstream Node VMs
+### 备份下游节点虚拟机
 
-Incorporate the Rancher downstream node VM's within a standard VM backup policy.
+将Rancher下游节点虚拟机纳入标准虚拟机备份策略中。

@@ -1,5 +1,5 @@
 ---
-title: title
+title: 监控最佳实践
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,118 +19,118 @@ keywords:
   - subtitles6
 ---
 
-Configuring sensible monitoring and alerting rules is vital for running any production workloads securely and reliably. This is not different when using Kubernetes and Rancher. Fortunately the integrated monitoring and alerting functionality makes this whole process a lot easier.
+配置合理的监控和告警规则对于安全、可靠地运行生产工作负载至关重要。在使用Kubernetes和Rancher时也是如此。幸运的是，集成的监控和告警功能使整个过程变得更加简单。
 
-The [Rancher Documentation]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/v2.5/) describes in detail, how you can set up a complete Prometheus and Grafana stack. Out of the box this will scrape monitoring data from all system and Kubernetes components in your cluster and provide sensible dashboards and alerts for them to get started. But for a reliable setup, you also need to monitor your own workloads and adapt Prometheus and Grafana to your own specific use cases and cluster sizes. This document aims to give you best practices for this.
+[Rancher文档](/docs/rancher2/monitoring-alerting/2.5/_index)详细描述了如何设置一个完整的Prometheus和Grafana。开箱即用，它将从群集中的所有系统和Kubernetes组件中抓取监控数据，并提供合理的仪表盘和告警。但为了实现可靠的设置，您还需要监控自己的工作负载并使Prometheus和Grafana适应您自己的特定用例和集群大小。本文档将为您提供这方面的最佳实践。
 
-- [What to Monitor](#what-to-monitor)
-- [Configuring Prometheus Resource Usage](#configuring-prometheus-resource-usage)
-- [Scraping Custom Workloads](#scraping-custom-workloads)
-- [Monitoring in a (Micro)Service Architecture](#monitoring-in-a-micro-service-architecture)
-- [Real User Monitoring](#real-user-monitoring)
-- [Security Monitoring](#security-monitoring)
-- [Setting up Alerts](#setting-up-alerts)
+- [需要监测的内容](#需要监测的内容)
+- [配置 Prometheus 资源使用](#配置-prometheus-资源使用)
+- [抓取自定义工作负载](#抓取自定义工作负载)
+- [（微）服务架构中的监控](#（微）服务架构中的监控)
+- [真实用户监控](#真实用户监控)
+- [安全监控](#安全监控)
+- [设置告警](#设置告警)
 
-# What to Monitor
+## 需要监测的内容
 
-Kubernetes itself, as well as applications running inside of it, form a distributed system where different components interact with each other. For the whole system and each individual component, you have to ensure performance, availability, reliability and scalability. A good resource with more details and information is Google's free [Site Reliability Engineering Book](https://landing.google.com/sre/sre-book/), especially the chapter about [Monitoring distributed systems](https://landing.google.com/sre/sre-book/chapters/monitoring-distributed-systems/).
+Kubernetes本身以及运行在其内部的应用，构成了一个分布式系统，不同的组件之间相互影响。对于整个系统和每个单独的组件，你必须确保性能、可用性、可靠性和可扩展性。更多细节和信息的参考Google免费的[Site Reliability Engineering Book](https://landing.google.com/sre/sre-book/)，尤其是关于[监控分布式系统](https://landing.google.com/sre/sre-book/chapters/monitoring-distributed-systems/)这一章。
 
-# Configuring Prometheus Resource Usage
+## 配置 Prometheus 资源使用
 
-When installing the integrated monitoring stack, Rancher allows to configure several settings that are dependent on the size of your cluster and the workloads running in it. This chapter covers these in more detail.
+在安装集成监控时，Rancher 允许配置一些设置，这些设置取决于您的集群的大小和其中运行的工作负载。本章将详细介绍这些设置。
 
-### Storage and Data Retention
+### 存储和数据保留
 
-The amount of storage needed for Prometheus directly correlates to the amount of time series and labels that you store and the data retention you have configured. It is important to note that Prometheus is not meant to be used as a long-term metrics storage. Data retention time is usually only a couple of days and not weeks or months. The reason for this is, that Prometheus does not perform any aggregation on its stored metrics. This is great because aggregation can dilute data, but it also means that the needed storage grows linearly over time without retention.
+Prometheus 所需的存储空间与您存储的时间序列和标签的数量以及您配置的数据保留量直接相关。需要注意的是，Prometheus并不是用来作为长期指标存储的。数据保留时间通常只有几天，而不是几周或几个月。原因是，Prometheus不会对其存储的指标进行任何聚合。这很好，因为聚合会稀释数据，但这也意味着所需的存储空间随着时间的推移线性增长而没有保留。
 
-One way to calculate the necessary storage is to look at the average size of a storage chunk in Prometheus with this query
+计算所需存储空间的一种方法是通过以下查询来查看Prometheus中存储块的平均大小：
 
 ```
 rate(prometheus_tsdb_compaction_chunk_size_bytes_sum[1h]) / rate(prometheus_tsdb_compaction_chunk_samples_sum[1h])
 ```
 
-Next, find out your data ingestion rate per second:
+接下来，找出你每秒的数据摄取率：
 
 ```
 rate(prometheus_tsdb_head_samples_appended_total[1h])
 ```
 
-and then multiply this with the retention time, adding a few percentage points as buffer:
+然后与保留时间相乘，并添加几个百分点作为缓冲区：
 
 ```
-average chunk size in bytes * ingestion rate per second * retention time in seconds * 1.1 = necessary storage in bytes
+平均块大小（以字节为单位）*每秒的摄取速率*保留时间（以秒为单位）* 1.1 =必需的存储空间（以字节为单位）
 ```
 
-You can find more information about how to calculate the necessary storage in this [blog post](https://www.robustperception.io/how-much-disk-space-do-prometheus-blocks-use).
+你可以在这篇[博客文章](https://www.robustperception.io/how-much-disk-space-do-prometheus-blocks-use)中找到更多关于如何计算必要存储的信息。
 
-You can read more about the Prometheus storage concept in the [Prometheus documentation](https://prometheus.io/docs/prometheus/latest/storage).
+你可以在[Prometheus文档](https://prometheus.io/docs/prometheus/latest/storage)中阅读更多关于Prometheus存储概念的内容。
 
-### CPU and Memory Requests and Limits
+### CPU和内存的请求和限制
 
-In larger Kubernetes clusters Prometheus can consume quite a bit of memory. The amount of memory Prometheus needs directly correlates to the amount of time series and amount of labels it stores and the scrape interval in which these are filled.
+在较大的Kubernetes集群中，Prometheus会消耗大量内存。 Prometheus需要的内存直接与它存储的时间序列和标签的数量以及填充这些标签的scrape间隔有关。
 
-You can find more information about how to calculate the necessary memory in this [blog post](https://www.robustperception.io/how-much-ram-does-prometheus-2-x-need-for-cardinality-and-ingestion).
+你可以在这个[博客文章](https://www.robustperception.io/how-much-ram-does-prometheus-2-x-need-for-cardinality-and-ingestion)中找到更多关于如何计算所需内存的信息。
 
-The amount of necessary CPUs correlate with the amount of queries you are performing.
+所需的CPU数量与您正在执行的查询数量相关。
 
-### Federation and Long-term Storage
+### 长期储存
 
-Prometheus is not meant to store metrics for a long amount of time, but should only be used for short term storage.
+Prometheus并不是为了长期存储指标，而只用于短期存储。
 
-In order to store some, or all metrics for a long time, you can leverage Prometheus' [remote read/write](https://prometheus.io/docs/prometheus/latest/storage/#remote-storage-integrations) capabilities to connect it to storage systems like [Thanos](https://thanos.io/), [InfluxDB](https://www.influxdata.com/), [M3DB](https://www.m3db.io/), or others. You can find an example setup in this [blog post](https://rancher.com/blog/2020/prometheus-metric-federation).
+为了长期存储一些或所有的指标，你可以利用Prometheus的[远程读/写](https://prometheus.io/docs/prometheus/latest/storage/#remote-storage-integrations)功能将其连接到存储系统，如[Thanos](https://thanos.io/)、[InfluxDB](https://www.influxdata.com/)、[M3DB](https://www.m3db.io/)或其他系统。你可以在这篇[博客文章](https://rancher.com/blog/2020/prometheus-metric-federation)中找到一个示例设置。
 
-# Scraping Custom Workloads
+## 抓取自定义工作负载
 
-While the integrated Rancher Monitoring already scrapes system metrics from a cluster's nodes and system components, the custom workloads that you deploy on Kubernetes should also be scraped for data. For that you can configure Prometheus to do an HTTP request to an endpoint of your applications in a certain interval. These endpoints should then return their metrics in a Prometheus format.
+虽然集成的Rancher Monitoring已经可以从集群的节点和系统组件中抓取系统指标，但你部署在Kubernetes上的自定义工作负载也应该被抓取数据。为此，你可以配置Prometheus在一定的时间间隔内对你的应用程序的端点进行HTTP请求。然后，这些端点应该以Prometheus格式返回它们的指标。
 
-In general, you want to scrape data from all the workloads running in your cluster so that you can use them for alerts or debugging issues. Oftentimes, you recognize, that you need some data only when you actually need the metrics during an incident. It is good, if it is already scraped and stored. Since Prometheus is only meant to be a short-term metrics storage, scraping and keeping lots of data is usually not that expensive. If you are using a long-term storage solution with Prometheus, you can then still decide which data you are actually persisting and keeping there.
+一般来说，您要从集群中运行的所有工作负载中抓取数据，以便可以将它们用于告警或调试问题。很多时候，你会认识到，只有当你在事件中真正需要指标的时候，你才需要一些数据。如果它已经被抓取并存储了，那就好办了。由于Prometheus只是为了成为一个短期的指标存储，所以抓取和保存大量数据通常并不那么昂贵。如果你使用的是Prometheus的长期存储方案，那么你仍然可以决定数据的存储位置。
 
-### About Prometheus Exporters
+### 关于 Prometheus Exporters
 
-A lot of 3rd party workloads like databases, queues or web-servers either already support exposing metrics in a Prometheus format, or there are so called exporters available that translate between the tool's metrics and the format that Prometheus understands. Usually you can add these exporters as additional sidecar containers to the workload's Pods. A lot of helm charts already include options to deploy the correct exporter. Additionally you can find a curated list of exports by SysDig on [promcat.io](https://promcat.io/) and on [ExporterHub](https://exporterhub.io/).
+许多第三方工作负载，如数据库、队列或Web服务器，要么已经支持以 Prometheus 格式公开指标，要么有所谓的exporter，可以在工具的指标和 Prometheus 理解的格式之间进行转换。通常，您可以将这些exporter作为额外的sidecar容器添加到工作负载的Pods中。很多helm charts已经包含了部署exporter的选项。此外，你还可以在[promcat.io](https://promcat.io/)和[ExporterHub](https://exporterhub.io/)上找到一个由SysDig策划的exporter列表。
 
-### Prometheus support in Programming Languages and Frameworks
+### Prometheus在编程语言和框架中的支持
 
-To get your own custom application metrics into Prometheus, you have to collect and expose these metrics directly from your applications code. Fortunately, there are already libraries and integrations available to help with this for most popular programming languages and frameworks. One example for this is the Prometheus support in the [Spring Framework](https://docs.spring.io/spring-metrics/docs/current/public/prometheus).
+要想把自己的自定义应用指标放到Prometheus中，你必须直接从你的应用代码中收集和暴露这些指标。幸运的是，对于大多数流行的编程语言和框架来说，已经有一些库和集成可以帮助解决这个问题。其中一个例子是[Spring框架](https://docs.spring.io/spring-metrics/docs/current/public/prometheus)中的Prometheus支持。
 
-### ServiceMonitors and PodMonitors
+### ServiceMonitors 和 PodMonitors
 
-Once all your workloads expose metrics in a Prometheus format, you have to configure Prometheus to scrape it. Under the hood Rancher is using the [prometheus-operator](https://github.com/prometheus-operator/prometheus-operator). This makes it easy to add additional scraping targets with ServiceMonitors and PodMonitors. A lot of helm charts already include an option to create these monitors directly. You can also find more information in the [Rancher Documentation](TODO).
+一旦所有工作负载都以Prometheus格式公开了指标后，你必须配置 Prometheus 来获取它。 Rancher使用[prometheus-operator](https://github.com/prometheus-operator/prometheus-operator)，这使得使用ServiceMonitors和PodMonitors添加额外的目标变得容易。很多helm charts已经包含了一个选项来直接创建这些监控器。你也可以在[Rancher文档](TODO)中找到更多信息。
 
 ### Prometheus Push Gateway
 
-There are some workloads that are traditionally hard to scrape by Prometheus. Examples for these are short lived workloads like Jobs and CronJobs, or applications that do not allow sharing data between individual handled incoming requests, like PHP applications.
+有些工作负载的指标很难被 Prometheus 获取。就像 Jobs 和 CronJobs 这样的短期工作负载，或者是不允许在单个处理的传入请求之间共享数据的应用程序，如 PHP 应用程序。
 
-To still get metrics for these use cases, you can set up [prometheus-pushgateways](https://github.com/prometheus/pushgateway). The CronJob or PHP application would push metric updates to the pushgateway. The pushgateway aggregates and exposes them through an HTTP endpoint, which then can be scraped by Prometheus.
+要想获得这些用例的指标，你可以设置 [prometheus-pushgateways](https://github.com/prometheus/pushgateway)。CronJob或PHP应用程序将把指标更新推送到 pushgateway。pushgateway 汇总并通过 HTTP 端点暴露它们，然后可以由 Prometheus 获取。
 
 ### Prometheus Blackbox Monitor
 
-Sometimes it is useful to monitor workloads from the outside. For this, you can use the [Prometheus blackbox-exporter](https://github.com/prometheus/blackbox_exporter) which allows probing any kind of endpoint over HTTP, HTTPS, DNS, TCP and ICMP.
+有时，从外部监控工作负载是很有用的。为此，您可以使用[Prometheus blackbox-exporter](https://github.com/prometheus/blackbox_exporter)，它允许通过HTTP、HTTPS、DNS、TCP和ICMP探测任何类型的端点。
 
-# Monitoring in a (Micro)Service Architecture
+## （微）服务架构中的监控
 
-If you have a (micro)service architecture where multiple individual workloads within your cluster are communicating with each other, it is really important to have detailed metrics and traces about this traffic to understand how all these workloads are communicating with each other and where a problem or bottleneck may be.
+如果你有一个（微）服务架构，群集中的多个单独的工作负载相互通信，那么拥有关于这些流量的详细指标和跟踪非常很重要，这是为了解所有这些工作负载是如何相互通信的，以及问题或瓶颈可能在哪里。
 
-Of course you can monitor all this internal traffic in all your workloads and expose these metrics to Prometheus. But this can quickly become quite work intensive. Service Meshes like Istio, which can be installed with [a click](https://rancher.com/docs/rancher/v2.x/en/cluster-admin/tools/istio/) in Rancher, can do this automatically and provide rich telemetry about the traffic between all services.
+当然，你可以监控所有工作负载中的所有内部流量，并将这些指标暴露给 Prometheus，但这相当耗费精力。像Istio这样的服务网格，可以通过[点击](https://rancher.com/docs/rancher/v2.x/en/cluster-admin/tools/istio/)在Rancher中安装，可以自动完成这项工作，并提供关于所有服务之间的流量的丰富的遥测数据。
 
-# Real User Monitoring
+## 真实用户监控
 
-Monitoring the availability and performance of all your internal workloads is vitally important to run stable, reliable and fast applications. But these metrics only show you parts of the picture. To get a complete view it is also necessary to know how your end users are actually perceiving it. For this you can look into various [Real user monitoring solutions](https://en.wikipedia.org/wiki/Real_user_monitoring).
+监控所有内部工作负载的可用性和性能对于运行稳定、可靠和快速的应用程序至关重要。但这些指标只能向你展示部分情况。要想获得一个完整的视图，还必须知道你的最终用户是如何实际感知的。为此，你可以研究各种[真实用户监控解决方案](https://en.wikipedia.org/wiki/Real_user_monitoring)。
 
-# Security Monitoring
+## 安全监控
 
-In addition to monitoring workloads to detect performance, availability or scalability problems, the cluster and the workloads running into it should also be monitored for potential security problems. A good starting point is to frequently run and alert on [CIS Scans]({{<baseurl>}}/rancher/v2.x/en/cis-scans/v2.5/) which check if the cluster is configured according to security best practices.
+除了监控工作负载以检测性能、可用性或可扩展性的问题外，还应该监控集群和运行到集群中的工作负载，这可以发现一些潜在的安全问题。一个好的起点是经常运行[CIS扫描](/docs/rancher2/cis-scans/v2.5/_index)并发出告警，检查集群是否按照安全最佳实践进行配置。
 
-For the workloads, you can have a look at Kubernetes and Container security solutions like [Falko](https://falco.org/), [Aqua Kubernetes Security](https://www.aquasec.com/solutions/kubernetes-container-security/), [SysDig](https://sysdig.com/).
+对于工作负载，你可以看看Kubernetes和Container安全解决方案，比如[Falko](https://falco.org/)、[Aqua Kubernetes Security](https://www.aquasec.com/solutions/kubernetes-container-security/)、[SysDig](https://sysdig.com/)。
 
-# Setting up Alerts
+## 设置告警
 
-Getting all the metrics into a monitoring systems and visualizing them in dashboards is great, but you also want to be pro-actively alerted if something goes wrong.
+将所有的指标纳入监控系统并在仪表盘中可视化是很棒的做法，但你也希望在出现问题时能主动提醒。
 
-The integrated Rancher monitoring already configures a sensible set of alerts that make sense in any Kubernetes cluster. You should extend these to cover your specific workloads and use cases.
+集成的Rancher监控已经配置了一套合理的告警，这些告警在任何Kubernetes集群中都是可用的。您应该扩展这些内容并且覆盖您的特定工作负载和用例。
 
-When setting up alerts, configure them for all the workloads that are critical to the availability of your applications. But also make sure that they are not too noisy. Ideally every alert you are receiving should be because of a problem that needs your attention and needs to be fixed. If you have alerts that are firing all the time but are not that critical, there is a danger that you start ignoring your alerts all together and then miss the real important ones. Less may be more here. Start to focus on the real important metrics first, for example alert if your application is offline. Fix all the problems that start to pop up and then start to create more detailed alerts.
+在设置告警时，应为所有至关重要的工作负载配置告警。但也要确保它们不会太频发送告警通知。理想情况下，你收到的每一个告警都应该是因为一个需要你关注并需要解决的问题。如果你的告警一直在发送，但并不是那么关键，那么你就有可能开始完全忽略你的告警，然后错过真正重要的告警。先开始关注真正重要的指标，比如说如果你的应用离线了就发出告警。修复所有开始出现的问题，然后开始创建更详细的告警。
 
-If an alert starts firing, but there is nothing you can do about it at the moment, it's also fine to silence the alert for a certain amount of time, so that you can look at it later.
+如果告警开始发送，但你暂时无法处理，也可以将告警静默一定时间，以便以后查看。
 
-You can find more information on how to set up alerts and notification channels in the [Rancher Documentation]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/v2.5).
+您可以在[Rancher文档](/docs/rancher2/monitoring-alerting/2.5/_index)中找到更多关于如何设置告警和通知的信息。
