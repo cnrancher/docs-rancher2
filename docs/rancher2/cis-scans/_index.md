@@ -1,5 +1,5 @@
 ---
-title: title
+title: CIS 扫描
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,8 +19,8 @@ keywords:
   - subtitles6
 ---
 
-_Available as of v2.4.0_
+从 v2.4.0 开始提供。
 
-If you are using Rancher v2.5, refer to the CIS scan documentation [here.](./v2.5)
+如果您使用的是 Rancher v2.5，请参考 CIS 扫描文档[这里](./v2.5)
 
-If you are using Rancher v2.4, refer to the CIS scan documentation [here.](./v2.4)
+如果您使用的是 Rancher v2.4，请参考 CIS 扫描文档[这里](./v2.4)

@@ -1,5 +1,5 @@
 ---
-title: title
+title: RBAC
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,45 +19,45 @@ keywords:
   - subtitles6
 ---
 
-This section describes the permissions required to use the rancher-cis-benchmark App.
+本节介绍了使用 rancher-cis-benchmark App 所需的权限。
 
-The rancher-cis-benchmark is a cluster-admin only feature by default.
+rancher-cis-benchmark 默认情况下是一个只有集群管理员的功能。
 
-However, the `rancher-cis-benchmark` chart installs these two default `ClusterRoles`:
+但是，`rancher-cis-benchmark`图安装了这两个默认的`ClusterRoles`。
 
 - cis-admin
-- cis-view
+- Home
 
-In Rancher, only cluster owners and global administrators have `cis-admin` access by default.
+在 Rancher 中，只有群集所有者和全局管理员默认拥有`cis-admin`访问权限。
 
-Note: If you were using the `cis-edit` role added in Rancher v2.5 setup, it has now been removed since
-Rancher v2.5.2 because it essentially is same as `cis-admin`. If you happen to create any clusterrolebindings
-for `cis-edit`, please update them to use `cis-admin` ClusterRole instead.
+注意：如果您使用的是 Rancher v2.5 设置中添加的 "cis-edit "角色，那么它现在已经被删除了，原因是
+Rancher v2.5.2，因为它本质上和`cis-admin`是一样的。如果你碰巧创建了任何 clusterrolebindings。
+对于 "cis-edit"，请更新为使用 "cis-admin "ClusterRole。
 
-# Cluster-Admin Access
+## Cluster-Admin 权限
 
-Rancher CIS Scans is a cluster-admin only feature by default.
-This means only the Rancher global admins, and the cluster’s cluster-owner can:
+Rancher CIS 扫描在默认情况下是一个仅有群集管理员的功能。
+这意味着只有 Rancher 全局管理员，以及群集的群集所有者可以。
 
-- Install/Uninstall the rancher-cis-benchmark App
-- See the navigation links for CIS Benchmark CRDs - ClusterScanBenchmarks, ClusterScanProfiles, ClusterScans
-- List the default ClusterScanBenchmarks and ClusterScanProfiles
-- Create/Edit/Delete new ClusterScanProfiles
-- Create/Edit/Delete a new ClusterScan to run the CIS scan on the cluster
-- View and Download the ClusterScanReport created after the ClusterScan is complete
+- 安装/卸载 Rancher -CIS -benchmark 应用。
+- 请参阅 CIS 基准 CRD 的导航链接--ClusterScanBenchmarks, ClusterScanProfiles, ClusterScans。
+- 列出默认的 ClusterScanBenchmarks 和 ClusterScanProfiles。
+- 创建/编辑/删除新的 ClusterScanProfiles。
+- 创建/编辑/删除一个新的 ClusterScan，以便在集群上运行 CIS 扫描。
+- 查看和下载在 ClusterScan 完成后创建的 ClusterScanReport。
 
-# Summary of Default Permissions for Kubernetes Default Roles
+## Kubernetes 默认角色的默认权限摘要
 
-The rancher-cis-benchmark creates three `ClusterRoles` and adds the CIS Benchmark CRD access to the following default K8s `ClusterRoles`:
+rancher-sis-benchmark 创建了三个`ClusterRoles`，并将 CIS 基准 CRD 的访问权限添加到以下默认的 K8s`ClusterRoles`中。
 
 | ClusterRole created by chart | Default K8s ClusterRole | Permissions given with Role                                                                        |
 | ---------------------------- | ----------------------- | -------------------------------------------------------------------------------------------------- |
 | `cis-admin`                  | `admin`                 | Ability to CRUD clusterscanbenchmarks, clusterscanprofiles, clusterscans, clusterscanreports CR    |
 | `cis-view`                   | `view `                 | Ability to List(R) clusterscanbenchmarks, clusterscanprofiles, clusterscans, clusterscanreports CR |
 
-By default only cluster-owner role will have ability to manage and use `rancher-cis-benchmark` feature.
+默认情况下，只有集群所有者角色才有能力管理和使用 "rancher-cis-benchmark "功能。
 
-The other Rancher roles (cluster-member, project-owner, project-member) do not have any default permissions to manage and use rancher-cis-benchmark resources.
+其他 Rancher 角色（集群成员、项目所有者、项目成员）没有任何默认权限来管理和使用 rancher-cis-benchmark 资源。
 
-But if a cluster-owner wants to delegate access to other users, they can do so by creating ClusterRoleBindings between these users and the above CIS ClusterRoles manually.
-There is no automatic role aggregation supported for the `rancher-cis-benchmark` ClusterRoles.
+但是如果集群所有者想要将访问权委托给其他用户，可以通过在这些用户和上述 CIS 集群角色之间手动创建 ClusterRoleBindings 来实现。
+对于 "rancher-cis-benchmark "ClusterRoles 不支持自动角色聚合。

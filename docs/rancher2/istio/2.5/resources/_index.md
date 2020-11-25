@@ -1,5 +1,5 @@
 ---
-title: CPU and Memory Allocations
+title: CPU和内存分配
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,42 +19,42 @@ keywords:
   - subtitles6
 ---
 
-_This section applies to Istio in Rancher v2.5.0. If you are using Rancher v2.4.x, refer to [this section.]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/)_
+## 概述
 
-This section describes the minimum recommended computing resources for the Istio components in a cluster.
+_本节适用于 Rancher v2.5.0 中的 Istio。如果您正在使用 Rancher v2.4.x，请参考[本节]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/)_。
 
-The CPU and memory allocations for each component are [configurable.](#configuring-resource-allocations)
+本节描述了集群中 Istio 组件的最低推荐计算资源。
 
-Before enabling Istio, we recommend that you confirm that your Rancher worker nodes have enough CPU and memory to run all of the components of Istio.
+每个组件的 CPU 和内存分配是[可配置的](#configuring-resource-allocations)
 
-> **Tip:** In larger deployments, it is strongly advised that the infrastructure be placed on dedicated nodes in the cluster by adding a node selector for each Istio component.
+在启用 Istio 之前，我们建议您确认您的 Rancher 工作节点有足够的 CPU 和内存来运行 Istio 的所有组件。
 
-The table below shows a summary of the minimum recommended resource requests and limits for the CPU and memory of each core Istio component.
+> **提示：**在较大规模的部署中，强烈建议通过为每个 Istio 组件添加节点选择器，将基础设施放在集群中的专用节点上。
 
-In Kubernetes, the resource request indicates that the workload will not deployed on a node unless the node has at least the specified amount of memory and CPU available. If the workload surpasses the limit for CPU or memory, it can be terminated or evicted from the node. For more information on managing resource limits for containers, refer to the [Kubernetes documentation.](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/)
+下表显示了每个核心 Istio 组件的 CPU 和内存的最低推荐资源请求和限制的摘要。
 
-|             Workload | CPU - Request | Mem - Request | CPU - Limit |  Mem - Limit | Configurable |
-| -------------------: | ------------: | ------------: | ----------: | -----------: | -----------: |
-|               Istiod |          610m |        2186Mi |       4000m |       2048Mi |            Y | Y |
-|         Istio-policy |         1000m |        1024Mi |       4800m |       4096Mi |            Y |
-|      Istio-telemetry |         1000m |       10214Mi |       4800m |       4096Mi |            Y |
-| Istio-ingressgateway |         2000m |        1024Mi |         10m |         40Mi |            Y |
-|               Others |          500m |         500Mi |           - |            - |            Y |
-|            **Total** |     **4500m** |    **5620Mi** | **>12300m** | **>14848Mi** |        **-** |
+在 Kubernetes 中，资源请求表示工作负载不会部署在节点上，除非该节点至少有指定的内存和 CPU 可用量。如果工作负载超过了 CPU 或内存的限制，就会被终止或从节点上驱逐。有关管理容器的资源限制的更多信息，请参考[Kubernetes 文档。](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/)
 
-# Configuring Resource Allocations
+| 工作负载             | CPU 要求  | Mem 要求   | CPU 限额    | Mem 限额     | 是否可配置 |
+| :------------------- | :-------- | :--------- | :---------- | :----------- | :--------- |
+| Istiod               | 610m      | 2186Mi     | 4000m       | 2048Mi       | 是         |
+| Istio-policy         | 1000m     | 1024Mi     | 4800m       | 4096Mi       | 是         |
+| Istio-telemetry      | 1000m     | 10214Mi    | 4800m       | 4096Mi       | 是         |
+| Istio-ingressgateway | 2000m     | 1024Mi     | 10m         | 40Mi         | 是         |
+| Others               | 500m      | 500Mi      | -           | -            | 是         |
+| **总计**             | **4500m** | **5620Mi** | **>12300m** | **>14848Mi** | **-**      |
 
-You can individually configure the resource allocation for each type of Istio component. This section includes the default resource allocations for each component.
+## 配置资源分配
 
-To make it easier to schedule the workloads to a node, a cluster-admin can reduce the CPU and memory resource requests for the component. However, the default CPU and memory allocations are the minimum that we recommend.
+您可以单独为每种类型的 Istio 组件配置资源分配。本节包括每个组件的默认资源分配。
 
-You can find more information about Istio configuration in the [official Istio documentation](https://istio.io/).
+为了更容易地将工作负载调度到节点上，集群管理员可以减少组件的 CPU 和内存资源请求。然而，默认的 CPU 和内存分配是我们推荐的最低限度。
 
-To configure the resources allocated to an Istio component,
+你可以在[Istio 官方文档](https://istio.io/)中找到更多关于 Istio 配置的信息。
 
-1. In the Rancher **Cluster Explorer**, navigate to your Istio installation in **Apps & Marketplace**
-1. Click **Upgrade** to edit the base components via changes the values.yaml or add an [overlay file]({{<baseurl>}}/rancher/v2.x/en/istio/setup/enable-istio-in-cluster/#overlay-file).
-1. Change the CPU or memory allocations, the nodes where each component will be scheduled to, or the node tolerations.
-1. Click **Upgrade.** to rollout changes
+1. 在 Rancher **集群资源管理器**中，在**应用程序和市场**中导航到您的 Istio 安装。
+1. 点击**升级**，通过修改数值来编辑基础组件.yaml 或添加[覆盖文件]({{<baseurl>}}/rancher/v2.x/en/istio/setup/enable-istio-in-cluster/#overlay-file)。
+1. 更改 CPU 或内存分配，每个组件将被调度到的节点，或节点容忍度。
+1. 点击**Upgrade**完成更改。
 
-**Result:** The resource allocations for the Istio components are updated.
+**结果：**Istio 组件的资源分配得到更新。

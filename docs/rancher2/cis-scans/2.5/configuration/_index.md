@@ -1,5 +1,5 @@
 ---
-title: title
+title: 配置
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,17 +19,17 @@ keywords:
   - subtitles6
 ---
 
-This configuration reference is intended to help you manage the custom resources created by the `rancher-cis-benchmark` application. These resources are used for performing CIS scans on a cluster, skipping tests, setting the test profile that will be used during a scan, and other customization.
+本配置参考旨在帮助您管理由`rancher-cis-benchmark`应用程序创建的自定义资源。这些资源用于在集群上执行 CIS 扫描、跳过测试、设置将在扫描期间使用的测试配置文件以及其他自定义。
 
-To configure the custom resources, go to the **Cluster Explorer** in the Rancher UI. In dropdown menu in the top left corner, click **Cluster Explorer > CIS Benchmark.**
+要配置自定义资源，请进入 Rancher UI 中的**集群资源管理器**。在左上角的下拉菜单中，单击**群集资源管理器 > CIS 基准**。
 
-### Scans
+## 扫描
 
-A scan is created to trigger a CIS scan on the cluster based on the defined profile. A report is created after the scan is completed.
+创建扫描以根据定义的配置文件在群集上触发 CIS 扫描。扫描完成后会创建一份报告。
 
-When configuring a scan, you need to define the name of the scan profile that will be used with the `scanProfileName` directive.
+在配置扫描时，您需要定义扫描配置文件的名称，该名称将与`scanProfileName`指令一起使用。
 
-An example ClusterScan custom resource is below:
+下面是一个 ClusterScan 自定义资源的例子。
 
 ```yaml
 apiVersion: cis.cattle.io/v1
@@ -40,19 +40,19 @@ spec:
   scanProfileName: rke-profile-hardened
 ```
 
-### Profiles
+## 档案
 
-A profile contains the configuration for the CIS scan, which includes the benchmark version to use and any specific tests to skip in that benchmark.
+一个配置文件包含 CIS 扫描的配置，其中包括要使用的基准版本和该基准中要跳过的任何特定测试。
 
-> By default, a few ClusterScanProfiles are installed as part of the `rancher-cis-benchmark` chart. If a user edits these default benchmarks or profiles, the next chart update will reset them back. So it is advisable for users to not edit the default ClusterScanProfiles.
+> 默认情况下，一些 ClusterScanProfiles 被安装为`rancher-cis-benchmark`图表的一部分。如果用户编辑了这些默认的基准或配置文件，下一次的图表更新将重新设置它们。所以建议用户不要编辑默认的 ClusterScanProfiles。
 
-Users can clone the ClusterScanProfiles to create custom profiles.
+用户可以克隆 ClusterScanProfiles 来创建自定义配置文件。
 
-Skipped tests are listed under the `skipTests` directive.
+跳过的测试会在`skipTests`指令下列出。
 
-When you create a new profile, you will also need to give it a name.
+当你创建一个新的配置文件时，你还需要给它一个名字。
 
-An example `ClusterScanProfile` is below:
+下面是一个`ClusterScanProfile`的例子。
 
 ```yaml
 apiVersion: cis.cattle.io/v1
@@ -71,23 +71,23 @@ spec:
     - "1.1.21"
 ```
 
-### Benchmark Versions
+## 基线版本
 
-A benchmark version is the name of benchmark to run using `kube-bench`, as well as the valid configuration parameters for that benchmark.
+基准版本是指使用`kube-bench`运行的基准名称，以及该基准的有效配置参数。
 
-A `ClusterScanBenchmark` defines the CIS `BenchmarkVersion` name and test configurations. The `BenchmarkVersion` name is a parameter provided to the `kube-bench` tool.
+`ClusterScanBenchmark`定义了 CIS`BenchmarkVersion`名称和测试配置。`BenchmarkVersion`名称是提供给`kube-bench`工具的参数。
 
-By default, a few `BenchmarkVersion` names and test configurations are packaged as part of the CIS scan application. When this feature is enabled, these default BenchmarkVersions will be automatically installed and available for users to create a ClusterScanProfile.
+默认情况下，一些`BenchmarkVersion`名称和测试配置被打包为 CIS 扫描应用程序的一部分。启用该功能后，这些默认的 BenchmarkVersions 将被自动安装，并供用户创建 ClusterScanProfile 时使用。
 
-> If the default BenchmarkVersions are edited, the next chart update will reset them back. Therefore we don't recommend editing the default ClusterScanBenchmarks.
+> 如果编辑了默认的 BenchmarkVersions，下一次的图表更新将重新设置它们。因此我们不建议编辑默认的 ClusterScanBenchmarks。
 
-A ClusterScanBenchmark consists of the fields:
+一个 ClusterScanBenchmark 由以下字段组成。
 
-- `ClusterProvider`: This is the cluster provider name for which this benchmark is applicable. For example: RKE, EKS, GKE, etc. Leave it empty if this benchmark can be run on any cluster type.
-- `MinKubernetesVersion`: Specifies the cluster's minimum kubernetes version necessary to run this benchmark. Leave it empty if there is no dependency on a particular Kubernetes version.
-- `MaxKubernetesVersion`: Specifies the cluster's maximum Kubernetes version necessary to run this benchmark. Leave it empty if there is no dependency on a particular k8s version.
+- `ClusterProvider`。这是本基准适用的集群提供者名称。例如： `ClusterProvider`：这是本基准适用的集群提供者名称。RKE、EKS、GKE 等。如果该基准可以在任何集群类型上运行，则留空。
+- `MinKubernetesVersion`。指定运行该基准所需的集群最低 kubernetes 版本。如果不依赖特定的 Kubernetes 版本，则留空。
+- `MaxKubernetesVersion`。指定运行该基准所需的集群最大 Kubernetes 版本。如果对特定 k8s 版本没有依赖性，则留空。
 
-An example `ClusterScanBenchmark` is below:
+下面是一个`ClusterScanBenchmark`的例子。
 
 ```yaml
 apiVersion: cis.cattle.io/v1

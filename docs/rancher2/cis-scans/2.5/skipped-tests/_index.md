@@ -1,5 +1,5 @@
 ---
-title: title
+title: 跳过的测试
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,11 +19,11 @@ keywords:
   - subtitles6
 ---
 
-This section lists the tests that are skipped in the permissive test profile for RKE.
+本节列出了 RKE 的允许性测试配置文件中跳过的测试。
 
-> All the tests that are skipped and not applicable on this page will be counted as Not Applicable in the v2.5 generated report. The skipped test count will only mention the user-defined skipped tests. This allows user-skipped tests to be distinguished from the tests that are skipped by default in the RKE permissive test profile.
+> 所有跳过的测试和不适用的测试在 v2.5 生成的报告中都会被算作 "不适用"，跳过的测试数量只会提到用户定义的跳过测试。跳过的测试计数将只提及用户定义的跳过测试。这可以将用户跳过的测试与 RKE 允许测试配置文件中默认跳过的测试区分开来。
 
-# CIS Benchmark v1.5
+## CIS Benchmark v1.5
 
 ### CIS Benchmark v1.5 Skipped Tests
 

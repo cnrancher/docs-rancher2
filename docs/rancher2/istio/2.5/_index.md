@@ -1,5 +1,5 @@
 ---
-title: Istio in Rancher v2.5
+title: Istio
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,98 +19,92 @@ keywords:
   - subtitles6
 ---
 
-[Istio](https://istio.io/) is an open-source tool that makes it easier for DevOps teams to observe, secure, control, and troubleshoot the traffic within a complex network of microservices.
+## 概述
 
-As a network of microservices changes and grows, the interactions between them can become increasingly difficult to manage and understand. In such a situation, it is useful to have a service mesh as a separate infrastructure layer. Istio's service mesh lets you manipulate traffic between microservices without changing the microservices directly.
+[Istio](https://istio.io/)是一个开源工具，它使 DevOps 团队更容易查看、保护、控制和排除复杂的微服务网络中的流量。
 
-Our integration of Istio is designed so that a Rancher operator, such as an administrator or cluster owner, can deliver Istio to a team of developers. Then developers can use Istio to enforce security policies, troubleshoot problems, or manage traffic for green/blue deployments, canary deployments, or A/B testing.
+随着微服务网络的变化和增长，它们之间的交互会变得越来越难以管理和理解。在这种情况下，拥有一个服务网状结构作为一个独立的基础设施层是非常有用的。Istio 的服务网状结构可以让你在不直接改变微服务的情况下操纵微服务之间的流量。
 
-This core service mesh provides features that include but are not limited to the following:
+我们对 Istio 的集成设计为，Rancher 操作员，如管理员或集群所有者，可以将 Istio 交付给开发人员团队。然后，开发人员可以使用 Istio 来执行安全策略，排除问题，或管理蓝绿部署、金丝雀部署或 A/B 测试。
 
-- **Traffic Management** such as ingress and egress routing, circuit breaking, mirroring.
-- **Security** with resources to authenticate and authorize traffic and users, mTLS included.
-- **Observability** of logs, metrics, and distributed traffic flows.
+该核心服务网提供的功能包括但不限于以下内容：
 
-After [setting up istio]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/setup) you can leverage Istio's control plane functionality through the Cluster Explorer, `kubectl`, or `istioctl`.
+- **流量管理**，如入口和出口路由、断路、镜像。
+- **安全**，有资源对流量和用户进行认证和授权，包括 mTLS。
+- **可观察性**，观察日志、度量和分布式流量。
 
-Rancher's Istio integration comes with a comprehensive visualization aid:
+在[设置 istio](/docs/rancher2/cluster-admin/tools/istio/setup/_index)之后，您可以通过群集资源管理器、`kubectl`或`istioctl`来利用 Istio 的 controlplane 功能。
 
-- **Get the full picture of your microservice architecture with Kiali.** [Kiali](https://www.kiali.io/) provides a diagram that shows the services within a service mesh and how they are connected, including the traffic rates and latencies between them. You can check the health of the service mesh, or drill down to see the incoming and outgoing requests to a single component.
+Rancher 的 Istio 集成带有一个全面的可视化辅助工具：
 
-Istio needs to be set up by a `cluster-admin` before it can be used in a project.
+- **通过 Kiali 获取微服务架构的全貌。** [Kiali](https://www.kiali.io/)提供了一个图表，显示了服务网状结构中的服务以及它们之间的连接方式，包括它们之间的流量速率和延迟。您可以检查服务网状结构的健康状况，或者深入查看对单个组件的传入和传出请求。
 
-- [What's New in Rancher v2.5](#what-s-new-in-rancher-v2-5)
-- [Prerequisites](#prerequisites)
-- [Setup Guide](#setup-guide)
-- [Remove Istio](#remove-istio)
-- [Migrate from Previous Istio Version](#migrate-from-previous-istio-version)
-- [Accessing Visualizations](#accessing-visualizations)
-- [Architecture](#architecture)
+Istio 在项目中使用之前，需要由`cluster-admin`进行设置。
 
-# What's New in Rancher v2.5
+## Rancher 2.5 的新功能
 
-The overall architecture of Istio has been simplified. A single component, Istiod, has been created by combining Pilot, Citadel, Galley and the sidecar injector. Node Agent functionality has also been merged into istio-agent.
+Istio 的整体架构已被简化。通过合并 Pilot、Citadel、Galley 和 sidecar injector，创建了一个单一的组件 Istiod。节点代理功能也被合并到 istio-agent 中。
 
-Addons that were previously installed by Istio (cert-manager, Grafana, Jaeger, Kiali, Prometheus, Zipkin) will now need to be installed separately. Istio will support installation of integrations that are from the Istio Project and will maintain compatibility with those that are not.
+之前由 Istio 安装的插件（cert-manager、Grafana、Jaeger、Kiali、Prometheus、Zipkin）现在需要单独安装。Istio 将支持安装来自 Istio 项目的集成，并将保持与那些非集成的兼容性。
 
-A Prometheus integration will still be available through an installation of [Rancher Monitoring]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/), or by installing your own Prometheus operator. Rancher's Istio chart will also install Kiali by default to ensure you can get a full picture of your microservices out of the box.
+通过安装[Rancher 监控](/docs/rancher2/monitoring-alerting/_index)，或者安装自己的 Prometheus，仍然可以使用 Prometheus 集成。Rancher 的 Istio 图也会默认安装 Kiali，以确保你可以在开箱即获得微服务的全貌。
 
-Istio has migrated away from Helm as a way to install Istio and now provides installation through the istioctl binary or Istio Operator. To ensure the easiest interaction with Istio, Rancher's Istio will maintain a Helm chart that utilizes the istioctl binary to manage your Istio installation.
+Istio 已经脱离了 Helm 作为安装 Istio 的方式，现在通过 istioctl 二进制或 Istio Operator 提供安装。为了确保与 Istio 进行最简单的交互，Rancher 的 Istio 将维护一个利用 istioctl 二进制来管理您的 Istio 安装的 Helm chart。
 
-This Helm chart will be available via the Apps and Marketplace in the UI. A user that has access to the Rancher Chart's catalog will need to set up Istio before it can be used in the project.
+这个 Helm chart 将通过 UI 中的 Apps 和 Marketplace 提供。有权限访问 Rancher 图表的目录的用户需要在项目中使用 Istio 之前对其进行设置。
 
-# Prerequisites
+## 前提条件
 
-Before enabling Istio, we recommend that you confirm that your Rancher worker nodes have enough [CPU and memory]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/resources) to run all of the components of Istio.
+在启用 Istio 之前，我们建议您确认您的 Rancher 工作节点有足够的[CPU 和内存](/docs/rancher2/cluster-admin/tools/istio/resources/_index)来运行 Istio 的所有组件。
 
-# Setup Guide
+## 配置指南
 
-Refer to the [setup guide]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/setup) for instructions on how to set up Istio and use it in a project.
+参考[Istio 配置指南](/docs/rancher2/cluster-admin/tools/istio/setup/_index)了解如何设置 Istio 并在项目中使用它。
 
-# Remove Istio
+## 移除 Istio
 
-To remove Istio components from a cluster, namespace, or workload, refer to the section on [uninstalling Istio.]({{<baseurl>}}/rancher/v2.x/en/istio/disabling-istio/)
+从集群、命名空间或工作负载中移除 Istio 组件，请参考 [卸载 Istio](/docs/rancher2/cluster-admin/tools/istio/disabling-istio/_index)。
 
-# Migrate From Previous Istio Version
+## 从以前的 Istio 版本迁移
 
-There is no upgrade path for Istio versions less than 1.7.x. To successfully install Istio in the **Cluster Explorer**, you will need to disable your existing Istio in the **Cluster Manager**.
+要在**群组资源管理器**中成功安装 Istio，您需要在**群组管理器**中禁用您现有的 Istio。
 
-If you have a significant amount of additional Istio CRDs you might consider manually migrating CRDs that are supported in both versions of Istio. You can do this by running `kubectl get <resource> -n istio-system -o yaml`, save the output yaml and re-apply in the new version.
+如果你有大量额外的 Istio CRD，你可以考虑手动迁移两个版本 Istio 都支持的 CRD。你可以通过运行`kubectl get <resource> -n istio-system -o yaml`，保存输出的 yaml 并在新版本中重新应用来实现。
 
-Another option is to manually uninstall istio resources one at a time, but leave the resources that are supported in both versions of Istio and that will not be installed by the newest version. This method is more likely to result in issues installing the new version, but could be a good option depending on your situation.
+另一种方法是每次手动卸载 istio 资源，但要保留两个版本的 Istio 都支持的资源，而最新版本不会安装的资源。这种方法更容易导致安装新版本的问题，但根据你的情况，可能是一个不错的选择。
 
-# Accessing Visualizations
+## 访问可视化
 
-> By default, only cluster-admins have access to Kiali. For instructions on how to allow admin, edit or views roles to access them, refer to [Access to Visualizations.]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/rbac/#access-to-visualizations)
+> 默认情况下，只有集群管理员才有权限访问 Kiali。关于如何允许管理员、编辑或视图角色访问它们的说明，请参阅[访问可视化](/docs/rancher2/cluster-admin/tools/istio/rbac/_index)。
 
-After Istio is set up in a cluster, Grafana, Prometheus,and Kiali are available in the Rancher UI.
+在集群中设置 Istio 后，Grafana、Prometheus 和 Kiali 可在 Rancher UI 中使用。
 
-To access the Grafana and Prometheus visualizations, from the **Cluster Explorer** navigate to the **Monitoring** app overview page, and click on **Grafana** or **Prometheus**
+要访问 Grafana 和 Prometheus 可视化，请从**群集资源管理器**导航到**监控**应用程序概览页，并单击**Grafana**或**Prometheus**。
 
-To access the Kiali visualization, from the **Cluster Explorer** navigate to the **Istio** app overview page, and click on **Kiali**. From here you can access the **Traffic Graph** tab or the **Traffic Metrics** tab to see network visualizations and metrics.
+要访问 Kiali 可视化，请从**集群资源管理器**导航到**Istio**应用程序概览页面，然后单击**Kiali**。从这里，您可以访问**流量图**选项卡或**流量指标**选项卡来查看网络可视化和指标。
 
-By default, all namespace will picked up by prometheus and make data available for Kiali graphs. Refer to [selector/scrape config setup]({{<baseurl>}}/rancher/v2.x/en/istio/setup/enable-istio-in-cluster/#selectors-scrape-configs) if you would like to use a different configuration for prometheus data scraping.
+默认情况下，所有命名空间将被 prometheus 拾取并使数据可用于 Kiali 图。如果你想为 prometheus 数据刮取使用不同的配置，请参考[选择器/刮取配置设置](/docs/rancher2/cluster-admin/tools/istio/setup/enable-istio-in-cluster/_index)。
 
-Your access to the visualizations depend on your role. Grafana and Prometheus are only available for `cluster-admin` roles. The Kiali UI is available only to `cluster-admin` by default, but `cluster-admin` can allow other roles to access them by editing the Istio values.yaml.
+您对可视化的访问取决于您的角色。Grafana 和 Prometheus 只适用于`cluster-admin`角色。Kiali UI 默认只对`cluster-admin`有效，但`cluster-admin`可以通过编辑 Istio values.yaml 允许其他角色访问它们。
 
-# Architecture
+## 架构
 
-Istio installs a service mesh that uses [Envoy](https://www.envoyproxy.io/learn/service-mesh) sidecar proxies to intercept traffic to each workload. These sidecars intercept and manage service-to-service communication, allowing fine-grained observation and control over traffic within the cluster.
+Istio 安装了一个服务网状结构，使用[Envoy](https://www.envoyproxy.io/learn/service-mesh)sidecar 代理来拦截每个工作负载的流量。这些 sidecars 拦截和管理服务到服务的通信，允许对集群内的流量进行细粒度的观察和控制。
 
-Only workloads that have the Istio sidecar injected can be tracked and controlled by Istio.
+只有注入了 Istio sidecar 的工作负载才能被 Istio 跟踪和控制。
 
-When a namespace has Istio enabled, new workloads deployed in the namespace will automatically have the Istio sidecar. You need to manually enable Istio in preexisting workloads.
+当一个命名空间启用了 Istio 后，部署在该命名空间中的新工作负载将自动拥有 Istio sidecar。您需要在预先存在的工作负载中手动启用 Istio。
 
-For more information on the Istio sidecar, refer to the [Istio sidecare-injection docs](https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/) and for more information on Istio's architecture, refer to the [Istio Architecture docs](https://istio.io/latest/docs/ops/deployment/architecture/)
+有关 Istio sidecar 的更多信息，请参考[Istio sidecare-injection docs](https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/)，有关 Istio 架构的更多信息，请参考[Istio Architecture docs](https://istio.io/latest/docs/ops/deployment/architecture/)。
 
-### Multiple Ingresses
+## 多个 Ingresses
 
-By default, each Rancher-provisioned cluster has one NGINX ingress controller allowing traffic into the cluster. Istio also installs an ingress gateway by default into the `istio-system` namespace. The result is that your cluster will have two ingresses in your cluster.
+默认情况下，每个 Rancher 提供的集群都有一个 NGINX 入口控制器，允许流量进入集群。Istio 也默认安装一个入口网关到`istio-system`命名空间。其结果是，您的集群中会有两个入口。
 
-![In an Istio-enabled cluster, you can have two ingresses: the default Nginx ingress, and the default Istio controller.]({{<baseurl>}}/img/rancher/istio-ingress.svg)
+![在启用Istio的集群中，你可以有两个入口：默认的Nginx入口和默认的Istio控制器。]({{<baseurl>}}/img/rancher/istio-ingress.svg)
 
-Additional Istio Ingress gateways can be enabled via the [overlay file]({{<baseurl>}}/rancher/v2.x/en/istio/setup/enable-istio-in-cluster/#overlay-file).
+通过[覆盖文件]({{<baseurl>}}/rancher/v2.x/en/istio/setup/enable-istio-in-cluster/#overlay-file)可以启用额外的 Istio Ingress 网关。
 
-### Egress Support
+## Egress 支持
 
-By default the Egress gateway is disabled, but can be enabled on install or upgrade through the values.yaml or via the [overlay file]({{<baseurl>}}/rancher/v2.x/en/istio/setup/enable-istio-in-cluster/#overlay-file).
+默认情况下，Egress 网关是禁用的，但可以在安装或升级时通过 values.yaml 或[overlay 文件]({{<baseurl>}}/rancher/v2.x/en/istio/setup/enable-istio-in-cluster/#overlay-file)启用。

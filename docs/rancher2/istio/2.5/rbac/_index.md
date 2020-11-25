@@ -1,5 +1,5 @@
 ---
-title: Role-based Access Control
+title: 基于角色的访问控制策略（RBAC）
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,34 +19,34 @@ keywords:
   - subtitles6
 ---
 
-This section describes the permissions required to access Istio features.
+本节介绍了访问 Istio 功能所需的权限。
 
-The rancher istio chart installs three `ClusterRoles`
+rancher istio chart 安装了三个`ClusterRoles`。
 
-## Cluster-Admin Access
+## 集群管理群星
 
-By default, only those with the `cluster-admin` `ClusterRole` can:
+默认情况下，只有那些拥有` cluster-admin``ClusterRole `的人才可以:
 
-- Install istio app in a cluster
-- Configure resource allocations for Istio
+- 在集群中安装 istio 应用
+- 为 Istio 配置资源分配
 
-## Admin and Edit access
+## 管理和编辑权限
 
-By default, only Admin and Edit roles can:
+默认情况下，只有管理员和编辑角色可以。
 
-- Enable and disable Istio sidecar auto-injection for namespaces
-- Add the Istio sidecar to workloads
-- View the traffic metrics and traffic graph for the cluster
-- Configure Istio's resources (such as the gateway, destination rules, or virtual services)
+- 启用和禁用 Istio 侧边框自动注入命名空间的功能
+- 将 Istio sidecar 添加到工作负载中。
+- 查看该集群的流量指标和流量图。
+- 配置 Istio 的资源（如网关、目标规则或虚拟服务）。
 
-## Summary of Default Permissions for Kubernetes Default roles
+## Kubernetes 的默认权限摘要
 
-Istio creates three `ClusterRoles` and adds Istio CRD access to the following default K8s `ClusterRole`:
+Istio 创建了三个`ClusterRoles`，并将 Istio CRD 访问权限添加到以下默认的 K8s`ClusterRole`中。
 
-| ClusterRole create by chart | Default K8s ClusterRole |   Rancher Role |
-| --------------------------: | ----------------------: | -------------: |
-|               `istio-admin` |                   admin |  Project Owner |
-|                `istio-edit` |                    edit | Project Member |
-|                `istio-view` |                    view |      Read-only |
+| 通过 chart 创建 ClusterRole | 默认 K8s ClusterRole | Rancher 角色 |
+| :-------------------------- | :------------------- | :----------- |
+| `istio-admin`               | admin                | 项目所有者   |
+| `istio-edit`                | edit                 | 项目成员     |
+| `istio-view`                | view                 | 只读         |
 
-Rancher will continue to use cluster-owner, cluster-member, project-owner, project-member, etc as role names, but will utilize default roles to determine access. For each default K8s `ClusterRole` there are different Istio CRD permissions and K8s actions (Create ( C ), Get ( G ), List ( L ), Watch ( W ), Update ( U ), Patch ( P ), Delete( D ), All ( \* )) that can be performed.
+Rancher 将继续使用集群所有者、集群成员、项目所有者、项目成员等作为角色名称，但将利用默认角色来确定访问权限。对于每个默认的 K8s`ClusterRole`都有不同的 Istio CRD 权限和 K8s 动作（Create（C）、Get（G）、List（L）、Watch（W）、Update（U）、Patch（P）、Delete（D）、All（\*））可以执行。
