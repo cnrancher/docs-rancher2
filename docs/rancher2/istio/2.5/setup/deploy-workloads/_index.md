@@ -11,23 +11,25 @@ keywords:
   - rancher中国
   - rancher 2.0
   - rancher2.0 中文教程
-  - subtitles1
-  - subtitles2
-  - subtitles3
-  - subtitles4
-  - subtitles5
-  - subtitles6
+  - Istio
+  - 使用Istio Sidecar添加部署和服务
 ---
 
-> **前提条件：**要为工作负载启用 Istio，群集和命名空间必须安装 Istio 应用程序。
+**前提条件：**已在集群层级和命名空间层级安装 Istio。
 
-在命名空间中启用 Istio 仅能为新的工作负载自动注入 sidecar。要为现有工作负载启用 Envoy 侧载，您需要为每个工作负载手动启用它。
+## 为已有的工作负载配置 Istio sidecar
 
-要在命名空间中的现有工作负载上注入 Istio 侧 ecar，请从 **Cluster Explorer** 进入工作负载，单击 **&#8942;,** 并单击 **Redeploy.** 当工作负载被重新部署时，它将自动注入 Envoy 侧 ecar。
+在命名空间中启用 Istio 后只会对新增的工作负载自动注入 sidecar。如果要为已有的工作负载启用 sidecar，需要重新部署该工作负载。
 
-等待几分钟后，工作负载将升级为拥有 istio sidecar。点击它并进入 "容器 "部分。你应该可以看到`istio-proxy`和你原来的工作负载一起。这意味着工作负载的 Istio sidecar 已经启用。Istio 正在为 sidecar envoy 做所有的布线工作。现在 Istio 可以自动完成所有的功能，如果你在 yaml 中启用它们。
+1. 从 **Cluster Explorer** 进入工作负载，单击 **&#8942;,** 并单击 **Redeploy**，重新部署工作负载
 
-### 添加部署和服务
+2. 在重新部署工作负载的过程中，它将自动注入 sidecar。
+
+3. 等待几分钟后，工作负载将升级为拥有 istio sidecar。点击它并进入`container`部分。你应该可以看到`istio-proxy`和你原来的工作负载一起。
+
+**结果：**已为现有的工作负载启用的 Istio sidecar。
+
+## 添加部署和服务
 
 有几种方法可以在你的命名空间中添加新的**部署**。
 
@@ -37,7 +39,7 @@ keywords:
 1. 填写表格，或**编辑为 Yaml**。
 1. 点击**创建**
 
-或者，您可以从 worklod > specific workload 中选择您要部署的特定工作负载，并从那里创建。
+或者，您可以从 “workload > specific workload”中选择您要部署的特定工作负载，并从那里创建。
 
 在您的命名空间中添加一个**服务**。
 
@@ -52,7 +54,7 @@ keywords:
 1. 如果您的文件存储在集群的本地，请运行`kubectl create -f <服务/部署文件的名称>.yaml`。
 1. 或者运行`cat<< EOF | kubectl apply -f -`，将文件内容粘贴到终端，然后运行`EOF`完成命令。
 
-### 部署和服务示例
+## 部署和服务示例
 
 接下来我们在 Istio 的文档中为 BookInfo 应用的示例部署和服务添加 Kubernetes 资源。
 
@@ -63,19 +65,19 @@ keywords:
 
 这将设置 Istio 的示例 BookInfo 应用程序中的以下示例资源。
 
-详细的服务和部署。
+`details`服务和部署：
 
-- 一个`details` Service
+- `details` Service
 - "bookinfo-details "的 ServiceAccount。
 - `details-v1`部署。
 
-评级服务和部署。
+评级服务和部署：
 
 - 一个 `ratings`Service
 - `bookinfo-ratings`的 ServiceAccount。
 - 一个`ratings-v1`部署
 
-审查服务和部署（三个版本）。
+审查服务和部署（三个版本）：
 
 - `reviews`Service
 - 一个 `bookinfo-reviews`的 ServiceAccount。
@@ -83,7 +85,7 @@ keywords:
 - 一个`reviews-v2`部署
 - 一个`reviews-v3`部署
 
-产品页面服务和部署。
+产品页面服务和部署：
 
 这是应用程序的主页面，它将从 Web 浏览器中可见。其他服务将从这个页面调用。
 
@@ -91,7 +93,7 @@ keywords:
 - 一个`bookinfo-productpage`的 ServiceAccount
 - 一个`productpage-v1` Deployment
 
-### 资源 YAML
+## 资源 YAML
 
 ```yaml
 # Copyright 2017 Istio Authors
@@ -361,6 +363,6 @@ spec:
 
 ```
 
-### 后续操作
+## 后续操作
 
-[设置 Istio 网关]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/setup/gateway)
+[设置 Istio 网关](/docs/rancher2/istio/2.5/setup/gateway/_index)

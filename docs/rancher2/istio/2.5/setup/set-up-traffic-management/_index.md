@@ -19,16 +19,22 @@ keywords:
   - subtitles6
 ---
 
-Istio 中流量管理的一个核心优势是它允许动态请求路由。动态请求路由的一些常见应用包括金丝雀部署和蓝绿部署。Istio 流量管理中的两个关键资源是 _虚拟服务_ 和 _目的规则_ 。
+## 概述
 
-- 虚拟服务](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/)拦截并引导流量到你的Kubernetes服务，允许你将请求中的流量百分比分配给不同的服务。您可以使用它们来定义一组路由规则，以便在主机被寻址时应用。
-- 目的地规则](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/)作为关于哪些服务版本可用于接收来自虚拟服务的流量的单一真相来源。您可以使用这些资源来定义策略，这些策略适用于路由发生后打算用于服务的流量。
+Istio 中流量管理的一个核心优势是它允许动态请求路由。动态请求路由的一些常见应用包括金丝雀部署和蓝绿部署。Istio 流量管理中的两个关键资源是**虚拟服务**和**目的规则**。
+
+- [虚拟服务](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/)拦截并引导流量到你的 Kubernetes 服务，允许你将请求中的流量百分比分配给不同的服务。您可以使用它们来定义一组路由规则，以便在主机被寻址时应用。
+- [目的地规则](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/)作为关于哪些服务版本可用于接收来自虚拟服务的流量的单一真相来源。您可以使用这些资源来定义策略，这些策略适用于路由发生后打算用于服务的流量。
 
 本节介绍了如何添加与示例 BookInfo 应用程序中的 `reviews`微服务相对应的虚拟服务示例。该服务的目的是在`reviews`服务的两个版本之间分配流量。
 
 在这个例子中，我们把流量带到`reviews`服务，并拦截它，使 50%的流量流向服务的`v1`，50%的流量流向`v2`。
 
 部署完这个虚拟服务后，我们会产生流量，从 Kiali 可视化中可以看到，流量在两个版本的服务之间被均匀地路由。
+
+## 操作步骤
+
+### 创建 Istio
 
 1. 从**集群资源管理器**，从导航下拉菜单中选择**Istio**。
 1. 点击侧面导航栏中的**DestinationRule**。
@@ -54,6 +60,8 @@ spec:
       labels:
         version: v3
 ```
+
+### 部署 VirtualService
 
 然后部署 VirtualService，提供利用 DestinationRule 的流量路由。
 
@@ -84,8 +92,8 @@ spec:
 
 ```
 
-**结果：**当你为该服务产生流量时（例如，通过刷新入口网关 URL），Kiali 流量图将反映出 "reviews "服务的流量在 "v1 "和 "v3 "之间平均分配。
+**结果：**当你为该服务产生流量时（例如，通过刷新入口网关 URL），Kiali 流量图将反映出`reviews`服务的流量在`v1`和 `v3`之间平均分配。
 
 ## 后续操作
 
-[查看 Istio 管理的流量]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/setup/view-traffic)
+[查看 Istio 管理的流量](/docs/rancher2/istio/2.5/setup/view-traffic/_index)
