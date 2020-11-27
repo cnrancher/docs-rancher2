@@ -19,9 +19,11 @@ keywords:
   - subtitles6
 ---
 
-每个集群的网关可以有自己的端口或负载均衡器，这与服务网状结构无关。默认情况下，每个 Rancher 提供的集群有一个 NGINX 入口控制器，允许流量进入集群。
+## 概述
 
-您可以在安装或不安装 Istio 的情况下使用 Nginx Ingress 控制器。如果这是您的集群的唯一网关，Istio 将能够将流量从服务路由到服务，但 Istio 将无法接收来自集群外部的流量。
+每个集群的网关可以有自己的端口或负载均衡器，这与服务网格无关。默认情况下，每个 Rancher 提供的集群有 1 个 NGINX 入口控制器，允许流量进入集群。
+
+无论是否已经安装了 Istio。您都可以使用 Nginx Ingress controller。如果这是您的集群的唯一网关，Istio 将能够将流量从服务路由到服务，但 Istio 将无法接收来自集群外部的流量。
 
 要允许 Istio 接收外部流量，您需要启用 Istio 的网关，它作为外部流量的南北代理。当您启用 Istio 网关时，结果是您的集群将有两个 Ingresses。
 
@@ -31,19 +33,19 @@ keywords:
 
 有关 Istio 网关的更多信息，请参阅[Istio 文档](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/)。
 
-![In an Istio-enabled cluster, you can have two Ingresses: the default Nginx Ingress, and the default Istio controller.]({{<baseurl>}}/img/rancher/istio-ingress.svg)
+![In an Istio-enabled cluster, you can have two Ingresses: the default Nginx Ingress, and the default Istio controller.](/img/rancher/istio-ingress.svg)
 
 ## 启用 Istio 网关
 
-入口网关是将部署在您的集群中的 Kubernetes 服务。Istio 网关允许更广泛的定制和灵活性。
+入口网关是将部署在您的集群中的 Kubernetes 服务。Istio 网关兼容更多的自定义扩展插件，更加灵活。
 
-1. 从**群集资源管理器**，从导航下拉菜单中选择**Istio**。
+1. 导航到**群集资源管理器**，从下拉菜单中选择**Istio**。
 1. 单击侧面导航栏中的**网关**。
 1. 点击**从 Yaml 创建**。
-1. 粘贴您的 Istio 网关 yaml，或**从文件中读取**。
-1. 点击 **Create**。
+1. 粘贴您的 Istio 网关 yaml，或选择**从文件中读取**，上传 yaml 文件。
+1. 点击 **Create**，创建 Istio 网关。
 
-**结果：** 网关已经部署，现在将使用应用的规则来路由流量。
+**结果：** 已经部署网关，现在将使用应用的规则来路由流量。
 
 ## 示例
 
@@ -127,11 +129,9 @@ bookinfo-gateway   64m
 
 ## 从 Web 浏览器访问 ProductPage 服务
 
-要测试并查看 BookInfo 应用是否部署正确，可以使用 Istio 控制器 IP 和端口，结合 Kubernetes 网关资源中指定的请求名称，通过 Web 浏览器查看该应用。
+要测试并查看 BookInfo 应用是否部署正确，可以使用 Istio 控制器 IP 和端口，结合 Kubernetes 网关资源中指定的请求名称，通过 Web 浏览器查看该应用：
 
 `http://<Istio控制器的IP>:<istio控制器的端口>/productpage`。
-
-要获得入口网关的 URL 和端口。
 
 1. 从**群集资源管理器**，单击**工作负载 > 概述**。
 1. 向下滚动到`istio-system`命名空间。
@@ -144,11 +144,9 @@ bookinfo-gateway   64m
 
 ## 问题排查
 
-Istio 官方文档](https://istio.io/docs/tasks/traffic-management/ingress/ingress-control/#troubleshooting)建议使用`kubectl`命令检查外部请求的正确入口主机和入口端口。
+[Istio 官方文档](https://istio.io/docs/tasks/traffic-management/ingress/ingress-control/#troubleshooting)建议使用`kubectl`命令检查外部请求的正确入口主机和入口端口。
 
-## 确认 Kubernetes 网关与 Istio 的 Ingress 控制器匹配。
-
-你可以尝试本节的步骤来确保 Kubernetes 网关的配置正确。
+## 确认 Kubernetes 网关与 Istio 的 Ingress 控制器匹配
 
 在网关资源中，选择器通过标签来引用 Istio 的默认入口控制器，其中标签的键是`istio`，值是`ingressgateway`。为了确保标签适合网关，请进行以下操作。
 
@@ -158,4 +156,4 @@ Istio 官方文档](https://istio.io/docs/tasks/traffic-management/ingress/ingre
 
 ## 后续操作
 
-[设置 Istio 的流量管理组件]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/setup/set-up-traffic-management)
+[设置 Istio 的流量管理组件](/docs/rancher2/istio/2.5/setup/set-up-traffic-management/_index)

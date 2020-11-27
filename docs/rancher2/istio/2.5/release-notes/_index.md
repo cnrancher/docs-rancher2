@@ -23,11 +23,11 @@ keywords:
 
 **问题修复**
 
-- Kiali 流量图现在可以使用了 [#28109](https://github.com/rancher/rancher/issues/28109)
+- 修复了 Kiali 流量图无法使用的问题[#28109](https://github.com/rancher/rancher/issues/28109)。
 
 **已知问题**
 
-- Kiali 流量图在 UI 中偏移[#28207](https://github.com/rancher/rancher/issues/28207)
+- Kiali 流量图在 UI 中偏移[#28207](https://github.com/rancher/rancher/issues/28207)。
 
 ## Istio 1.5.8
 

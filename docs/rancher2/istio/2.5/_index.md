@@ -21,11 +21,11 @@ keywords:
 
 ## 概述
 
-[Istio](https://istio.io/)是一个开源工具，它使 DevOps 团队更容易查看、保护、控制和排除复杂的微服务网络中的流量。
+[Istio](https://istio.io/)是一个开源工具，它简化了 DevOps 团队查看、保护、控制和排除复杂的微服务网络中流量的过程。
 
-随着微服务网络的变化和增长，它们之间的交互会变得越来越难以管理和理解。在这种情况下，拥有一个服务网状结构作为一个独立的基础设施层是非常有用的。Istio 的服务网状结构可以让你在不直接改变微服务的情况下操纵微服务之间的流量。
+随着微服务网络的变化和增长，微服务网络之间的交互会变得越来越难以管理。在这种情况下，使用服务网格作为一个独立的基础设施层是非常有用的。Istio 可以让你在不直接改变微服务的情况下控制微服务之间的流量。
 
-我们对 Istio 的集成设计为，Rancher 操作员，如管理员或集群所有者，可以将 Istio 交付给开发人员团队。然后，开发人员可以使用 Istio 来执行安全策略，排除问题，或管理蓝绿部署、金丝雀部署或 A/B 测试。
+我们对 Istio 的集成设计为，Rancher 管理员或集群所有者，可以将 Istio 交付给开发人员团队。然后，开发人员可以使用 Istio 来执行安全策略，排除问题，或管理蓝绿部署、金丝雀部署或 A/B 测试。
 
 该核心服务网提供的功能包括但不限于以下内容：
 
@@ -35,23 +35,21 @@ keywords:
 
 在[设置 istio](/docs/rancher2/cluster-admin/tools/istio/setup/_index)之后，您可以通过群集资源管理器、`kubectl`或`istioctl`来利用 Istio 的 controlplane 功能。
 
-Rancher 的 Istio 集成带有一个全面的可视化辅助工具：
+Rancher 集成的 Istio 带有一个全面的可视化辅助工具[Kiali](https://www.kiali.io/)。Kiali 提供了一个图表，显示了服务网状结构中的服务以及它们之间的连接方式，包括它们之间的流量速率和延迟。您可以检查服务网状结构的健康状况，或者深入查看对单个组件的传入和传出请求。
 
-- **通过 Kiali 获取微服务架构的全貌。** [Kiali](https://www.kiali.io/)提供了一个图表，显示了服务网状结构中的服务以及它们之间的连接方式，包括它们之间的流量速率和延迟。您可以检查服务网状结构的健康状况，或者深入查看对单个组件的传入和传出请求。
-
-Istio 在项目中使用之前，需要由`cluster-admin`进行设置。
+在项目中使用 Istio 之前，需要由`cluster-admin`（集群管理员）进行设置。
 
 ## Rancher 2.5 的新功能
 
 Istio 的整体架构已被简化。通过合并 Pilot、Citadel、Galley 和 sidecar injector，创建了一个单一的组件 Istiod。节点代理功能也被合并到 istio-agent 中。
 
-之前由 Istio 安装的插件（cert-manager、Grafana、Jaeger、Kiali、Prometheus、Zipkin）现在需要单独安装。Istio 将支持安装来自 Istio 项目的集成，并将保持与那些非集成的兼容性。
+之前由 Istio 安装的插件（cert-manager、Grafana、Jaeger、Kiali、Prometheus、Zipkin）现在需要单独安装。Istio 将支持安装来自 Istio 项目的集成组件，并将保持与那些非集成组件的兼容性。
 
-通过安装[Rancher 监控](/docs/rancher2/monitoring-alerting/_index)，或者安装自己的 Prometheus，仍然可以使用 Prometheus 集成。Rancher 的 Istio 图也会默认安装 Kiali，以确保你可以在开箱即获得微服务的全貌。
+通过安装[Rancher 监控](/docs/rancher2/monitoring-alerting/_index)，或者自己安装的 Prometheus，仍然可以使用 Prometheus 集成。Rancher 的 Istio 图也会默认安装 Kiali，以确保你可以在开箱即获得微服务的全貌。
 
 Istio 已经脱离了 Helm 作为安装 Istio 的方式，现在通过 istioctl 二进制或 Istio Operator 提供安装。为了确保与 Istio 进行最简单的交互，Rancher 的 Istio 将维护一个利用 istioctl 二进制来管理您的 Istio 安装的 Helm chart。
 
-这个 Helm chart 将通过 UI 中的 Apps 和 Marketplace 提供。有权限访问 Rancher 图表的目录的用户需要在项目中使用 Istio 之前对其进行设置。
+这个 Helm chart 将通过 UI 中的应用市场提供。有权限访问 Rancher 图表的目录的用户需要在项目中使用 Istio 之前对其进行设置。
 
 ## 前提条件
 
@@ -71,11 +69,11 @@ Istio 已经脱离了 Helm 作为安装 Istio 的方式，现在通过 istioctl 
 
 如果你有大量额外的 Istio CRD，你可以考虑手动迁移两个版本 Istio 都支持的 CRD。你可以通过运行`kubectl get <resource> -n istio-system -o yaml`，保存输出的 yaml 并在新版本中重新应用来实现。
 
-另一种方法是每次手动卸载 istio 资源，但要保留两个版本的 Istio 都支持的资源，而最新版本不会安装的资源。这种方法更容易导致安装新版本的问题，但根据你的情况，可能是一个不错的选择。
+另一种方法是每次手动卸载 istio 资源，但要保留两个版本的 Istio 都支持的资源，而最新版本不会安装的资源。这种方法容易导致安装新版本之后，在迁移资源的时候出现问题。如果新旧版本的 istio 兼容您的所有资源，这种方式可能是一个更好的选择。
 
-## 访问可视化
+## 查看可视化数据的权限
 
-> 默认情况下，只有集群管理员才有权限访问 Kiali。关于如何允许管理员、编辑或视图角色访问它们的说明，请参阅[访问可视化](/docs/rancher2/cluster-admin/tools/istio/rbac/_index)。
+默认情况下，只有集群管理员才有权限访问 Kiali。关于如何允许管理员、编辑或视图角色访问它们的说明，请参阅[访问可视化](/docs/rancher2/cluster-admin/tools/istio/rbac/_index)。
 
 在集群中设置 Istio 后，Grafana、Prometheus 和 Kiali 可在 Rancher UI 中使用。
 
@@ -83,9 +81,9 @@ Istio 已经脱离了 Helm 作为安装 Istio 的方式，现在通过 istioctl 
 
 要访问 Kiali 可视化，请从**集群资源管理器**导航到**Istio**应用程序概览页面，然后单击**Kiali**。从这里，您可以访问**流量图**选项卡或**流量指标**选项卡来查看网络可视化和指标。
 
-默认情况下，所有命名空间将被 prometheus 拾取并使数据可用于 Kiali 图。如果你想为 prometheus 数据刮取使用不同的配置，请参考[选择器/刮取配置设置](/docs/rancher2/cluster-admin/tools/istio/setup/enable-istio-in-cluster/_index)。
+默认情况下，所有命名空间将被 prometheus 拾取并使数据可用于 Kiali 图。如果你想为 prometheus 数据拉取使用不同的配置，请参考[选择器/刮取配置设置](/docs/rancher2/cluster-admin/tools/istio/setup/enable-istio-in-cluster/_index)。
 
-您对可视化的访问取决于您的角色。Grafana 和 Prometheus 只适用于`cluster-admin`角色。Kiali UI 默认只对`cluster-admin`有效，但`cluster-admin`可以通过编辑 Istio values.yaml 允许其他角色访问它们。
+您对可视化的访问权限由您的角色决定。Grafana 和 Prometheus 只适用于`cluster-admin`角色。Kiali UI 默认只对`cluster-admin`有效，但`cluster-admin`可以通过编辑 Istio values.yaml 允许其他角色访问它们。
 
 ## 架构
 
@@ -101,10 +99,10 @@ Istio 安装了一个服务网状结构，使用[Envoy](https://www.envoyproxy.i
 
 默认情况下，每个 Rancher 提供的集群都有一个 NGINX 入口控制器，允许流量进入集群。Istio 也默认安装一个入口网关到`istio-system`命名空间。其结果是，您的集群中会有两个入口。
 
-![在启用Istio的集群中，你可以有两个入口：默认的Nginx入口和默认的Istio控制器。]({{<baseurl>}}/img/rancher/istio-ingress.svg)
+![在启用Istio的集群中，你可以有两个入口：默认的Nginx入口和默认的Istio控制器。](/static/img/rancher/istio-ingress.svg)
 
 通过[覆盖文件]({{<baseurl>}}/rancher/v2.x/en/istio/setup/enable-istio-in-cluster/#overlay-file)可以启用额外的 Istio Ingress 网关。
 
 ## Egress 支持
 
-默认情况下，Egress 网关是禁用的，但可以在安装或升级时通过 values.yaml 或[overlay 文件]({{<baseurl>}}/rancher/v2.x/en/istio/setup/enable-istio-in-cluster/#overlay-file)启用。
+默认情况下，Egress 网关是禁用的，但可以在安装或升级时通过 `values.yaml` 或[overlay 文件]({{<baseurl>}}/rancher/v2.x/en/istio/setup/enable-istio-in-cluster/#overlay-file)启用。

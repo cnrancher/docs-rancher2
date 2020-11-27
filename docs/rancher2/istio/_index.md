@@ -1,5 +1,5 @@
 ---
-title: Istio
+title: Istio 使用说明
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -11,15 +11,10 @@ keywords:
   - rancher中国
   - rancher 2.0
   - rancher2.0 中文教程
-  - subtitles1
-  - subtitles2
-  - subtitles3
-  - subtitles4
-  - subtitles5
-  - subtitles6
+  - Istio 使用说明
 ---
 
-在 Rancher 2.5 中，Istio 应用得到了改进。
+请根据您使用的 Rancher 版本获取对应的 Istio 使用说明：
 
 如果您使用的是 Rancher v2.5，请参考[这里](/docs/rancher2/istio/2.5/_index)。
 
