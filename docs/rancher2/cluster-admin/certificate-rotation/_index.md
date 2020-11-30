@@ -209,7 +209,7 @@ _可用版本: rke v0.2.0+_
 
        ```bash
        docker exec -ti <rancher_server_id> mv /var/lib/rancher/k3s/server/tls /var/lib/rancher/k3s/server/tlsbak
-       # 执行俩次,第一次申请证书，第二次用来加载证书启动
+       # 执行两侧次，第一次申请证书，第二次加载证书启动
        docker restart <rancher_server_id>
        ```
 
