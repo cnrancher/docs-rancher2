@@ -19,60 +19,62 @@ keywords:
   - subtitles6
 ---
 
-If you previously enabled Monitoring, Alerting, or Notifiers in Rancher prior to v2.5, there is no automatic upgrade path for switching to the new monitoring/alerting solution. Before deploying the new monitoring solution via Cluster Explore, you will need to disable and remove all existing custom alerts, notifiers and monitoring installations for the whole cluster and in all projects.
+## 概述
 
-### Monitoring Prior to Rancher v2.5
+如果您在 Rancher v2.5 之前曾在 Rancher 中启用过监控、警报或通知器，则没有自动升级路径来切换到新的监控/警报解决方案。在通过 Cluster Explore 部署新的监控解决方案之前，您需要禁用和删除整个集群和所有项目中所有现有的自定义警报、通知器和监控安装。
 
-As of v2.2.0, Rancher's Cluster Manager allowed users to enable Monitoring & Alerting V1 (both powered by [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator)) independently within a cluster. For more information on how to configure Monitoring & Alerting V1, see the [docs about monitoring prior to Rancher v2.5](/rancher/v2.x/en/monitoring-alerting/v2.0.x-v2.4.x).
+## Rancher v2.5 之前的监控
 
-When Monitoring is enabled, Monitoring V1 deploys [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/docs/grafana/latest/getting-started/what-is-grafana/) onto a cluster to monitor the state of processes of your cluster nodes, Kubernetes components, and software deployments and create custom dashboards to make it easy to visualize collected metrics.
+从 v2.2.0 开始，Rancher 的群集管理器允许用户在群集内独立启用监控和警报 V1（均由[Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator)提供支持）。有关如何配置 Monitoring & Alerting V1 的更多信息，请参阅[关于 Rancher v2.5 之前的监控的文档](/rancher/v2.x/en/monitoring-alerting/v2.0.x-v2.4.x)。
 
-Monitoring V1 could be configured on both a cluster-level and on a project-level and would automatically scrape certain workloads deployed as Apps on the Rancher cluster.
+启用 Monitoring 后，Monitoring V1 会将[Prometheus](https://prometheus.io/)和[Grafana](https://grafana.com/docs/grafana/latest/getting-started/what-is-grafana/)部署到集群上，以监控集群节点、Kubernetes 组件和软件部署的进程状态，并创建自定义仪表盘，使其易于可视化收集的指标。
 
-When Alerts or Notifiers are enabled, Alerting V1 deploys [Prometheus Alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/) and a set of Rancher controllers onto a cluster that allows users to define alerts and configure alert-based notifications via Email, Slack, PagerDuty, etc. Users can choose to create different types of alerts depending on what needs to be monitored (e.g. System Services, Resources, CIS Scans, etc.); however, PromQL Expression-based alerts can only be created if Monitoring V1 is enabled.
+监控 V1 可以在集群级别和项目级别上配置，并将自动刮取 Rancher 集群上部署为 Apps 的某些工作负载。
 
-### Monitoring/Alerting via Cluster Explorer in Rancher 2.5
+当启用 Alerts 或 Notifiers 时，Alerting V1 会将[Prometheus Alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/)和一组 Rancher 控制器部署到集群上，用户可以通过 Email、Slack、PagerDuty 等方式定义警报和配置基于警报的通知。用户可以根据需要监控的内容（如系统服务、资源、CIS 扫描等）选择创建不同类型的告警；但是，只有在启用了监控 V1 的情况下，才能创建基于 PromQL 表达式的告警。
 
-As of v2.5.0, Rancher's Cluster Explorer now allows users to enable Monitoring & Alerting V2 (both powered by [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator)) together within a cluster.
+## 通过 Rancher 2.5 中的群集浏览器进行监控/报警
 
-Unlike in Monitoring & Alerting V1, both features are packaged in a single Helm chart found [here](https://github.com/rancher/charts/blob/main/charts/rancher-monitoring). The behavior of this chart and configurable fields closely matches [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack), a Prometheus Community Helm chart, and any deviations from the upstream chart can be found in the [CHANGELOG.md](https://github.com/rancher/charts/blob/main/charts/rancher-monitoring/CHANGELOG.md) maintained with the chart.
+从 v2.5.0 开始，Rancher 的群集浏览器现在允许用户在群集内同时启用监控和警报 V2（均由[Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator)提供支持）。
 
-Monitoring V2 can only be configured on the cluster level. Project-level monitoring and alerting is no longer supported.
+与 Monitoring & Alerting V1 不同的是，这两个功能都打包在一个单一的 Helm 图表中，可以在[这里](https://github.com/rancher/charts/blob/main/charts/rancher-monitoring)找到。该图表和可配置字段的行为与[kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack)、Prometheus Community Helm 图表紧密匹配，任何与上游图表的偏差都可以在与该图表一起维护的[CHANGELOG.md](https://github.com/rancher/charts/blob/main/charts/rancher-monitoring/CHANGELOG.md)中找到。
 
-For more information on how to configure Monitoring & Alerting V2, see [this page.]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/v2.5/configuration)
+监控 V2 只能在群集层面进行配置。不再支持项目级监控和警报。
 
-### Changes to Role-based Access Control
+有关如何配置 Monitoring & Alerting V2 的更多信息，请参阅 [本页。]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/v2.5/configuration)
 
-Project owners and members no longer get access to Grafana or Prometheus by default. If view-only users had access to Grafana, they would be able to see data from any namespace. For Kiali, any user can edit things they don’t own in any namespace.
+## 基于角色的访问控制的变更
 
-For more information about role-based access control in `rancher-monitoring`, refer to [this page.](../rbac)
+项目所有者和成员不再能默认访问 Grafana 或 Prometheus。如果仅有视图的用户可以访问 Grafana，他们将能够看到任何命名空间的数据。对于 Kiali，任何用户都可以在任何命名空间中编辑他们不拥有的东西。
 
-### Migrating from Monitoring V1 to Monitoring V2
+关于`rancher-monitoring`中基于角色的访问控制的更多信息，请参考[本页。](./rbac)
 
-While there is no automatic migration available, it is possible to manually migrate custom Grafana dashboards and alerts that were created in Monitoring V1 to Monitoring V2.
+## 从监控 V1 迁移到监控 V2
 
-Before you can install Monitoring V2, Monitoring V1 needs to be uninstalled completely. In order to uninstall Monitoring V1:
+虽然没有自动迁移功能，但可以将在 Monitoring V1 中创建的自定义 Grafana 仪表盘和警报手动迁移到 Monitoring V2 中。
 
-- Remove all cluster and project specific alerts and alerts groups
-- Remove all notifiers
-- Disable all project monitoring installations under Cluster -> Project -> Tools -> Monitoring
-- Ensure that all project-monitoring apps in all projects have been removed and are not recreated after a few minutes
-- Disable the cluster monitoring installation under Cluster -> Tools -> Monitoring
-- Ensure that the cluster-monitoring app and the monitoring-operator app in the System project have been removed and are not recreated after a few minutes
+在安装 Monitoring V2 之前，需要彻底卸载 Monitoring V1。为了卸载 Monitoring V1。
 
-#### Migrating Grafana Dashboards
+- 移除所有集群和项目的警报和警报组
+- 删除所有通知器
+- 在群集->项目->工具->监控下禁用所有项目监控安装。
+- 确保所有项目中的所有项目监控应用都已被删除，并且在几分钟后不再重新创建。
+- 在群集->工具->监控下禁用群集监控安装。
+- 确保系统项目中的集群监控应用和监控操作应用已经被删除，并且在几分钟后不重新创建。
 
-You can migrate any dashboard added to Grafana in Monitoring V1 to Monitoring V2. In Monitoring V1 you can export an existing dashboard like this:
+### 迁移 Grafana 仪表盘
 
-- Sign into Grafana
-- Navigate to the dashboard you want to export
-- Go to the dashboard settings
-- Copy the [JSON Model](https://grafana.com/docs/grafana/latest/dashboards/json-model/)
+您可以将监控 V1 中添加到 Grafana 的任何仪表盘迁移到监控 V2 中。在 Monitoring V1 中，您可以像这样导出现有的仪表盘。
 
-In the JSON Model, change all `datasource` fields from `RANCHER_MONITORING` to `Prometheus`. You can easily do this by replacing all occurrences of `"datasource": "RANCHER_MONITORING"` with `"datasource": "Prometheus"`.
+- 登录到 Grafana
+- 导航到您要导出的仪表盘。
+- 进入仪表板设置
+- 复制[JSON 模型](https://grafana.com/docs/grafana/latest/dashboards/json-model/)
 
-If Grafana is backed by a persistent volume, you can now [import](https://grafana.com/docs/grafana/latest/dashboards/export-import/) this JSON Model into the Monitoring V2 Grafana UI.
-It is recommended to provide the dashboard to Grafana with a ConfigMap in the `cattle-dashboards` namespace that has the label `grafana_dashboard: "1"`:
+在 JSON 模型中，将所有`datasource'字段从`RANCHER_MONITORING'改为`Prometheus'。你可以通过替换所有出现的`"datasource "来轻松做到这一点。"RANCHER_MONITORING"`替换为`"datasource": "Prometheus"`。
+
+如果 Grafana 是由一个持久卷支持的，你现在可以[导入](https://grafana.com/docs/grafana/latest/dashboards/export-import/)这个 JSON 模型到 Monitoring V2 Grafana UI 中。
+建议在`cattle-dashboards`命名空间中向 Grafana 提供一个 ConfigMap，该 ConfigMap 的标签为`grafana_dashboard。"1"`:
 
 ```yaml
 apiVersion: v1
@@ -89,17 +91,17 @@ data:
     }
 ```
 
-Once this ConfigMap is created, the dashboard will automatically be added to Grafana.
+一旦创建此 ConfigMap，仪表板将自动添加到 Grafana 中。
 
-#### Migrating Alerts
+### 迁移告警
 
-It is only possible to directly migrate expression-based alerts to Monitoring V2. Fortunately, the event-based alerts that could be set up to alert on system component, node or workload events, are already covered out-of-the-box by the alerts that are part of Monitoring V2. So it is not necessary to migrate them.
+只有将基于表达式的警报直接迁移到 Monitoring V2 中才有可能。幸运的是，基于事件的警报可以设置为对系统组件、节点或工作负载事件进行警报，这些警报已经被 Monitoring V2 的一部分所覆盖。所以没有必要迁移它们。
 
-To migrate the following expression alert
+要迁移以下表达式警报
 
 ![alert_2.4_to_2.5_source](/img/rancher/monitoring/migration/alert_2.4_to_2.5_source.png)
 
-you have to either create a PrometheusRule configuration like this in any namespace
+你必须在任何命名空间创建一个像这样的 PrometheusRule 配置。
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -120,12 +122,12 @@ spec:
             summary: "The result of prometheus_query has been larger than 5 for 5m. Current value {{ $value }}"
 ```
 
-or add the Prometheus Rule through the Cluster Explorer
+或通过群集浏览器添加 Prometheus 规则。
 
 ![alert_2.4_to_2.5_target](/img/rancher/monitoring/migration/alert_2.4_to_2.5_target.png)
 
-For more details on how to configure PrometheusRules in Monitoring V2 see [Monitoring Configuration]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/v2.5/configuration#prometheusrules).
+有关如何在监控 V2 中配置 PrometheusRules 的更多细节，请参见[监控配置]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/v2.5/configuration#prometheusrules)。
 
-#### Migrating notifiers
+### 迁移通知器
 
-There is no direct equivalent for how notifiers work in Monitoring V1. Instead you have to replicate the desired setup with [Routes and Receivers]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/v2.5/configuration#alertmanager-config) in Monitoring V2.
+在 Monitoring V1 中，没有直接对应的通知器工作方式。相反，你必须在 Monitoring V2 中用[Routes and Receivers]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/v2.5/configuration#alertmanager-config)复制所需的设置。
