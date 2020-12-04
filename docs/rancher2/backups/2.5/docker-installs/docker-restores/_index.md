@@ -1,5 +1,5 @@
 ---
-title: title
+title: 恢复备份-Docker安装
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,11 +19,11 @@ keywords:
   - subtitles6
 ---
 
-If you encounter a disaster scenario, you can restore your Rancher Server to your most recent backup.
+如果遇到灾难情况，您可以将 Rancher Server 恢复到最新的备份。
 
-## Before You Start
+## 在开始之前
 
-During restore of your backup, you'll enter a series of commands, filling placeholders with data from your environment. These placeholders are denoted with angled brackets and all capital letters (`<EXAMPLE>`). Here's an example of a command with a placeholder:
+在还原备份期间，您将输入一系列命令，用环境中的数据填充占位符。这些占位符用斜括号和所有大写字母 (`<EXAMPLE>`) 表示。下面是一个带有占位符的命令的例子：
 
 ```
 docker run  --volumes-from <RANCHER_CONTAINER_NAME> -v $PWD:/backup \
@@ -31,43 +31,42 @@ busybox sh -c "rm /var/lib/rancher/* -rf  && \
 tar pzxvf /backup/rancher-data-backup-<RANCHER_VERSION>-<DATE>"
 ```
 
-In this command, `<RANCHER_CONTAINER_NAME>` and `<RANCHER_VERSION>-<DATE>` are environment variables for your Rancher deployment.
+在此命令中，`<RANCHER_CONTAINER_NAME>`和`<RANCHER_VERSION>-<DATE>`是Rancher部署的环境变量。
 
-Cross reference the image and reference table below to learn how to obtain this placeholder data. Write down or copy this information before starting the procedure below.
+请参考下面的图像和参考表，了解如何获取该占位符数据。在开始下面的程序之前，请记下或复制这些信息。
 
-Terminal `docker ps` Command, Displaying Where to Find `<RANCHER_CONTAINER_TAG>` and `<RANCHER_CONTAINER_NAME>`
-![Placeholder Reference]({{<baseurl>}}/img/rancher/placeholder-ref.png)
+在终端执行`docker ps`命令，显示哪里可以找到`<RANCHER_CONTAINER_TAG>`和`<RANCHER_CONTAINER_NAME>`。
+![Placeholder Reference](/img/rancher/placeholder-ref.png)
 
 | Placeholder                | Example           | Description                                               |
 | -------------------------- | ----------------- | --------------------------------------------------------- |
-| `<RANCHER_CONTAINER_TAG>`  | `v2.0.5`          | The rancher/rancher image you pulled for initial install. |
-| `<RANCHER_CONTAINER_NAME>` | `festive_mestorf` | The name of your Rancher container.                       |
-| `<RANCHER_VERSION>`        | `v2.0.5`          | The version number for your Rancher backup.               |
-| `<DATE>`                   | `9-27-18`         | The date that the data container or backup was created.   |
+| `<RANCHER_CONTAINER_TAG>`  | `v2.0.5`          | 你在初始安装时使用的rancher/rancher镜像。                      |
+| `<RANCHER_CONTAINER_NAME>` | `festive_mestorf` | Rancher容器的名称。                                         |
+| `<RANCHER_VERSION>`        | `v2.0.5`          | 您要创建备份的Rancher版本。                                   |
+| `<DATE>`                   | `9-27-18`         | 数据容器或备份的创建日期。                                     |
 
-<br/>
+您可以通过远程连接登录到您的Rancher服务器，并输入命令查看正在运行的容器：`docker ps`，从而获得`<RANCHER_CONTAINER_TAG>`和`<RANCHER_CONTAINER_NAME>`。你也可以用`docker ps -a`来查看被停止的容器。在创建备份时，可以随时使用这些命令寻求帮助。
 
-You can obtain `<RANCHER_CONTAINER_TAG>` and `<RANCHER_CONTAINER_NAME>` by logging into your Rancher Server by remote connection and entering the command to view the containers that are running: `docker ps`. You can also view containers that are stopped using a different command: `docker ps -a`. Use these commands for help anytime during while creating backups.
+## 恢复备份
 
-## Restoring Backups
+使用之前创建的[备份](../docker-backups/_index)，将Rancher恢复到最后已知的健康状态。
 
-Using a [backup]({{<baseurl>}}/rancher/v2.x/en/backups/backups/single-node-backups/) that you created earlier, restore Rancher to its last known healthy state.
+1. 使用远程终端连接，登录到运行 Rancher Server 的节点。
 
-1. Using a remote Terminal connection, log into the node running your Rancher Server.
-
-1. Stop the container currently running Rancher Server. Replace `<RANCHER_CONTAINER_NAME>` with the [name of your Rancher container](#before-you-start).
+1. 停止当前运行 Rancher Server 的容器。将`<RANCHER_CONTAINER_NAME>`替换为[你的 Rancher 容器的名称](#在开始之前)。
 
    ```
    docker stop <RANCHER_CONTAINER_NAME>
    ```
 
-1. Move the backup tarball that you created during completion of [Creating Backups—Docker Installs]({{<baseurl>}}/rancher/v2.x/en/backups/backups/single-node-backups/) onto your Rancher Server. Change to the directory that you moved it to. Enter `dir` to confirm that it's there.
+将[创建备份-Docker 安装](../docker-backups/_index)时创建的备份压缩包移动到 Rancher 服务器上。输入 `dir` 来确认它是否在那里。
+   如果你按照我们在[创建备份-Docker 安装](../docker-backups/_index)中建议的命名习惯，它的名字会类似于`rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz`。
 
-   If you followed the naming convention we suggested in [Creating Backups—Docker Installs]({{<baseurl>}}/rancher/v2.x/en/backups/backups/single-node-backups/), it will have a name similar to `rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz`.
+1. 输入以下命令删除当前状态数据，并用备份数据替换，替换[占位符](#在开始之前)。不要忘记关闭引号。
 
-1. Enter the following command to delete your current state data and replace it with your backup data, replacing the [placeholders](#before-you-start). Don't forget to close the quotes.
-
-   > **Warning!** This command deletes all current state data from your Rancher Server container. Any changes saved after your backup tarball was created will be lost.
+   :::note 注意：
+   该命令将删除 Rancher Server 容器中的所有当前状态数据。创建备份压缩包后保存的任何更改都将丢失。
+   :::
 
    ```
    docker run  --volumes-from <RANCHER_CONTAINER_NAME> -v $PWD:/backup \
@@ -75,12 +74,12 @@ Using a [backup]({{<baseurl>}}/rancher/v2.x/en/backups/backups/single-node-backu
    tar pzxvf /backup/rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz"
    ```
 
-   **Step Result:** A series of commands should run.
+   **步骤结果:** 屏幕上将运行命令流。
 
-1. Restart your Rancher Server container, replacing the [placeholder](#before-you-start). It will restart using your backup data.
+1. 重新启动 Rancher Server 容器，替换[占位符](#在开始之前)。它将使用您的备份数据重新启动。
 
    ```
    docker start <RANCHER_CONTAINER_NAME>
    ```
 
-1. Wait a few moments and then open Rancher in a web browser. Confirm that the restore succeeded and that your data is restored.
+1. 等待片刻，然后在浏览器中打开 Rancher UI。确认还原成功，您的数据已经恢复。

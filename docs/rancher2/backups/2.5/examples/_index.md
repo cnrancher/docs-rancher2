@@ -1,5 +1,5 @@
 ---
-title: title
+title: 示例
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,35 +19,35 @@ keywords:
   - subtitles6
 ---
 
-This section contains examples of Backup and Restore custom resources.
+本节包含Backup和Restore自定义资源的示例。
 
-The default backup storage location is configured when the `rancher-backup` operator is installed or upgraded.
+默认的备份存储位置是在安装或升级`rancher-backup` operator时配置的。
 
-Encrypted backups can only be restored if the Restore custom resource uses the same encryption configuration secret that was used to create the backup.
+只有Restore自定义资源使用与创建备份相同的加密配置secret时，才能还原加密的备份。
 
-- [Backup](#backup)
-  - [Backup in the default location with encryption](#backup-in-the-default-location-with-encryption)
-  - [Recurring backup in the default location](#recurring-backup-in-the-default-location)
-  - [Encrypted recurring backup in the default location](#encrypted-recurring-backup-in-the-default-location)
-  - [Encrypted backup in Minio](#encrypted-backup-in-minio)
-  - [Backup in S3 using AWS credential secret](#backup-in-s3-using-aws-credential-secret)
-  - [Recurring backup in S3 using AWS credential secret](#recurring-backup-in-s3-using-aws-credential-secret)
-  - [Backup from EC2 nodes with IAM permission to access S3](#backup-from-ec2-nodes-with-iam-permission-to-access-s3)
-- [Restore](#restore)
-  - [Restore using the default backup file location](#restore-using-the-default-backup-file-location)
-  - [Restore for Rancher migration](#restore-for-rancher-migration)
-  - [Restore from encrypted backup](#restore-from-encrypted-backup)
-  - [Restore an encrypted backup from Minio](#restore-an-encrypted-backup-from-minio)
-  - [Restore from backup using an AWS credential secret to access S3](#restore-from-backup-using-an-aws-credential-secret-to-access-s3)
-  - [Restore from EC2 nodes with IAM permissions to access S3](#restore-from-ec2-nodes-with-iam-permissions-to-access-s3)
-- [Example Credential Secret for Storing Backups in S3](#example-credential-secret-for-storing-backups-in-s3)
-- [Example EncryptionConfiguration](#example-encryptionconfiguration)
+- [备份](#备份)
+  - [在默认位置进行加密备份](#在默认位置进行加密备份)
+  - [在默认位置进行定期备份](#在默认位置进行定期备份)
+  - [在默认位置进行加密的定期备份](#在默认位置进行加密的定期备份)
+  - [Minio中的加密备份](#minio中的加密备份)
+  - [使用AWS Credential Secret在S3中备份](#使用aws-credential-secret在s3中备份)
+  - [使用AWS Credential Secret在S3中进行定期备份](#使用aws-credential-secret在s3中进行定期备份)
+  - [从具有访问S3的IAM权限的EC2节点进行备份](#从具有访问s3的iam权限的ec2节点进行备份)
+- [恢复](#恢复)
+  - [使用默认备份文件位置还原](#使用默认备份文件位置还原)
+  - [恢复Rancher迁移](#恢复rancher迁移])
+  - [从加密的备份中恢复](#从加密的备份中恢复)
+  - [从Minio恢复加密的备份](#从minio恢复加密的备份)
+  - [使用AWS凭证Secre访问S3从备份中还原](#使用aws凭证secre访问s3从备份中还原)
+  - [从具有IAM权限的EC2节点还原以访问S3](#从具有iam权限的ec2节点还原以访问s3)
+- [在S3中存储备份的凭证Secret示例](#在s3中存储备份的凭证secret示例)
+- [EncryptionConfiguration示例](#encryptionconfiguration示例)
 
-# Backup
+## 备份
 
-This section contains example Backup custom resources.
+本节包含Backup自定义资源的示例。
 
-### Backup in the Default Location with Encryption
+### 在默认位置进行加密备份
 
 ```yaml
 apiVersion: resources.cattle.io/v1
@@ -59,7 +59,7 @@ spec:
   encryptionConfigSecretName: encryptionconfig
 ```
 
-### Recurring Backup in the Default Location
+### 在默认位置进行定期备份
 
 ```yaml
 apiVersion: resources.cattle.io/v1
@@ -72,7 +72,7 @@ spec:
   retentionCount: 10
 ```
 
-### Encrypted Recurring Backup in the Default Location
+### 在默认位置进行加密的定期备份
 
 ```yaml
 apiVersion: resources.cattle.io/v1
@@ -86,7 +86,7 @@ spec:
   retentionCount: 3
 ```
 
-### Encrypted Backup in Minio
+### Minio中的加密备份
 
 ```yaml
 apiVersion: resources.cattle.io/v1
@@ -105,7 +105,7 @@ spec:
   encryptionConfigSecretName: encryptionconfig
 ```
 
-### Backup in S3 Using AWS Credential Secret
+### 使用AWS Credential Secret在S3中备份
 
 ```yaml
 apiVersion: resources.cattle.io/v1
@@ -125,7 +125,7 @@ spec:
   encryptionConfigSecretName: encryptionconfig
 ```
 
-### Recurring Backup in S3 Using AWS Credential Secret
+### 使用AWS Credential Secret在S3中进行定期备份
 
 ```yaml
 apiVersion: resources.cattle.io/v1
@@ -147,9 +147,9 @@ spec:
   retentionCount: 10
 ```
 
-### Backup from EC2 Nodes with IAM Permission to Access S3
+### 从具有访问S3的IAM权限的EC2节点进行备份
 
-This example shows that the AWS credential secret does not have to be provided to create a backup if the nodes running `rancher-backup` have [these permissions for access to S3.](../configuration/backup-config/#iam-permissions-for-ec2-nodes-to-access-s3)
+这个例子表明，如果运行 `rancher-backup` 的节点拥有[这些访问S3的权限](./../configuration/back-up-config/_index#ec2节点访问s3的iam权限设置)，就不必提供AWS的凭证secret来创建备份。
 
 ```yaml
 apiVersion: resources.cattle.io/v1
@@ -167,11 +167,11 @@ spec:
   encryptionConfigSecretName: encryptionconfig
 ```
 
-# Restore
+## 恢复
 
-This section contains example Restore custom resources.
+本节包含Restore自定义资源的示例。
 
-### Restore Using the Default Backup File Location
+### 使用默认备份文件位置还原
 
 ```yaml
 apiVersion: resources.cattle.io/v1
@@ -183,7 +183,7 @@ spec:
 #  encryptionConfigSecretName: test-encryptionconfig
 ```
 
-### Restore for Rancher Migration
+### 恢复Rancher迁移
 
 ```yaml
 apiVersion: resources.cattle.io/v1
@@ -203,7 +203,7 @@ spec:
       endpoint: s3.us-west-2.amazonaws.com
 ```
 
-### Restore from Encrypted Backup
+### 从加密的备份中恢复
 
 ```yaml
 apiVersion: resources.cattle.io/v1
@@ -215,7 +215,7 @@ spec:
   encryptionConfigSecretName: encryptionconfig
 ```
 
-### Restore an Encrypted Backup from Minio
+### 从Minio恢复加密的备份
 
 ```yaml
 apiVersion: resources.cattle.io/v1
@@ -234,7 +234,7 @@ spec:
   encryptionConfigSecretName: test-encryptionconfig
 ```
 
-### Restore from Backup Using an AWS Credential Secret to Access S3
+### 使用AWS凭证Secre访问S3从备份中还原
 
 ```yaml
 apiVersion: resources.cattle.io/v1
@@ -254,9 +254,9 @@ spec:
   encryptionConfigSecretName: test-encryptionconfig
 ```
 
-### Restore from EC2 Nodes with IAM Permissions to Access S3
+### 从具有IAM权限的EC2节点还原以访问S3
 
-This example shows that the AWS credential secret does not have to be provided to restore from backup if the nodes running `rancher-backup` have [these permissions for access to S3.](../configuration/backup-config/#iam-permissions-for-ec2-nodes-to-access-s3)
+这个例子表明，如果运行 `rancher-backup` 的节点拥有[这些访问S3的权限](./../configuration/back-up-config/_index#ec2节点访问s3的iam权限设置)，就不必提供AWS的凭证secret来从备份中还原。
 
 ```yaml
 apiVersion: resources.cattle.io/v1
@@ -274,7 +274,7 @@ spec:
   encryptionConfigSecretName: test-encryptionconfig
 ```
 
-# Example Credential Secret for Storing Backups in S3
+## 在S3中存储备份的凭证Secret示例
 
 ```yaml
 apiVersion: v1
@@ -287,7 +287,7 @@ data:
   secretKey: <Enter your secret key>
 ```
 
-# Example EncryptionConfiguration
+## EncryptionConfiguration示例
 
 ```yaml
 apiVersion: apiserver.config.k8s.io/v1

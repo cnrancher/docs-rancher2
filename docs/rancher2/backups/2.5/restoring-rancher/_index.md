@@ -1,5 +1,5 @@
 ---
-title: title
+title: 恢复 Rancher
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,19 +19,19 @@ keywords:
   - subtitles6
 ---
 
-A restore is performed by creating a Restore custom resource.
+通过创建Restore自定义资源来进行还原。
 
-> **Important**
->
-> - Follow the instructions from this page for restoring rancher on the same cluster where it was backed up from. In order to migrate rancher to a new cluster, follow the steps to [migrate rancher.](../migrating-rancher)
-> - While restoring rancher on the same setup, the operator will scale down the rancher deployment when restore starts, and it will scale back up the deployment once restore completes. So Rancher will be unavailable during the restore.
+:::important 重要：
+- 请按照此页面上的说明在已备份的同一群集上恢复rancher。为了将rancher迁移到新的集群，请按照步骤进行[迁移rancher.](./../migrating-rancher/_index)
+- 在使用相同设置还原Rancher时，operator将在还原开始时缩减Rancher deployment，还原完成后又会扩展deployment。因此，Rancher在还原期间将不可用。
+:::
 
-### Create the Restore Custom Resource
+### 创建 Restore 自定义资源
 
-1. In the **Cluster Explorer,** go to the dropdown menu in the upper left corner and click **Rancher Backups.**
-1. Click **Restore.**
-1. Create the Restore with the form, or with YAML. For creating the Restore resource using form, refer to the [configuration reference](../configuration/restore-config) and to the [examples.](../examples/#restore)
-1. For using the YAML editor, we can click **Create > Create from YAML.** Enter the Restore YAML.
+1. 在**Cluster Explorer**中，进入左上角的下拉菜单，点击**Rancher Backups.**。
+1. 点击 **Restore.**
+1. 使用表单或YAML创建Restore。关于使用表单创建Restore资源，请参考[配置参考](./../configuration/restore-config/_index)和[示例.](./../examples/_index#恢复)。
+1. 使用YAML编辑器，我们可以点击**Create > Create from YAML。** 进入Restore YAML。
 
    ```yaml
    apiVersion: resources.cattle.io/v1
@@ -51,17 +51,17 @@ A restore is performed by creating a Restore custom resource.
          endpoint: s3.us-west-2.amazonaws.com
    ```
 
-   For help configuring the Restore, refer to the [configuration reference](../configuration/restore-config) and to the [examples.](../examples/#restore)
+   有关配置Restore的帮助，请参阅[配置参考](./../configuration/restore-config/_index)和[示例.](./../examples/_index#恢复)。
 
-1. Click **Create.**
+1. 点击 **Create.**
 
-**Result:** The rancher-operator scales down the rancher deployment during restore, and scales it back up once the restore completes. The resources are restored in this order:
+**结果：**rancher-operator在还原过程中缩减了rancher deployment，并在还原完成后将其扩展。资源的恢复顺序是这样的：
 
-1. Custom Resource Definitions (CRDs)
-2. Cluster-scoped resources
-3. Namespaced resources
+1. 自定义资源对象 (CRDs)
+2. 集群范围内的资源
+3. 命名空间资源
 
-To check how the restore is progressing, you can check the logs of the operator. Follow these steps to get the logs:
+要查看还原的进展情况，可以查看operator的日志。请按照以下步骤来获取日志：
 
 ```yaml
 kubectl get pods -n cattle-resources-system

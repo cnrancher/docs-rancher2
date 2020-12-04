@@ -1,5 +1,5 @@
 ---
-title: title
+title: Rancher备份配置参考
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,7 +19,7 @@ keywords:
   - subtitles6
 ---
 
-- [Backup configuration](./backup-config)
-- [Restore configuration](./restore-config)
-- [Storage location configuration](./storage-config)
-- [Example Backup and Restore Custom Resources](../examples)
+- [备份配置](./back-up-config/_index)
+- [恢复配置](./restore-config/_index)
+- [存储位置配置](./storage-config/_index)
+- [备份和恢复自定义资源示例](../examples/_index)
