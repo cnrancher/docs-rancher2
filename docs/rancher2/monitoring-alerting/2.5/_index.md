@@ -19,183 +19,167 @@ keywords:
   - subtitles6
 ---
 
-Using Rancher, you can quickly deploy leading open-source monitoring & alerting solutions such as [Prometheus](https://prometheus.io/), [Alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/), and [Grafana](https://grafana.com/docs/grafana/latest/getting-started/what-is-grafana/) onto your cluster.
+## 概述
 
-Rancher's solution (powered by [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator)) allows users to:
+使用 Rancher，您可以在您的集群上快速部署领先的开源监控和警报解决方案，如 [Prometheus](https://prometheus.io/)、[Alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/)和 [Grafana](https://grafana.com/docs/grafana/latest/getting-started/what-is-grafana/)。
 
-- Monitor the state and processes of your cluster nodes, Kubernetes components, and software deployments via [Prometheus](https://prometheus.io/), a leading open-source monitoring solution.
+Rancher 的解决方案（由[Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator)提供支持）允许用户：
 
-- Defines alerts based on metrics collected via [Prometheus](https://prometheus.io/)
-- Creates custom dashboards to make it easy to visualize collected metrics via [Grafana](https://grafana.com/docs/grafana/latest/getting-started/what-is-grafana/)
-- Configures alert-based notifications via Email, Slack, PagerDuty, etc. using [Prometheus Alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/)
-- Defines precomputed frequently needed / computationally expensive expressions as new time series based on metrics collected via [Prometheus](https://prometheus.io/) (only available in 2.5.x)
-- Exposes collected metrics from Prometheus to the Kubernetes Custom Metrics API via [Prometheus Adapter](https://github.com/DirectXMan12/k8s-prometheus-adapter) for use in HPA (only available in 2.5)
+- 通过[Prometheus](https://prometheus.io/)这个领先的开源监控解决方案，监控您的集群节点、Kubernetes 组件和软件部署的状态和进程。
 
-More information about the resources that get deployed onto your cluster to support this solution can be found in the [`rancher-monitoring`](https://github.com/rancher/charts/tree/main/charts/rancher-monitoring) Helm chart, which closely tracks the upstream [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) Helm chart maintained by the Prometheus community with certain changes tracked in the [CHANGELOG.md](https://github.com/rancher/charts/blob/main/charts/rancher-monitoring/CHANGELOG.md).
+- 根据通过[Prometheus](https://prometheus.io/)收集的指标定义警报。
+- 通过[Grafana](https://grafana.com/docs/grafana/latest/getting-started/what-is-grafana/)创建自定义仪表盘，使其能够轻松地将收集的指标可视化。
+- 使用[Prometheus Alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/)通过 Email、Slack、PagerDuty 等配置基于警报的通知。
+- 根据通过 [Prometheus](https://prometheus.io/)收集到的度量，将预先计算出的经常需要/计算成本高的表达式定义为新的时间序列（仅在 2.5.x 中可用）。
+- 通过[Prometheus Adapter](https://github.com/DirectXMan12/k8s-prometheus-adapter)将从 Prometheus 收集到的指标暴露给 Kubernetes Custom Metrics API，以便在 HPA 中使用（仅在 2.5 中可用）。
 
-This page describes how to enable monitoring & alerting within a cluster using Rancher's new monitoring application, which was introduced in Rancher v2.5.
+关于部署到集群上以支持该解决方案的资源的更多信息，可以在 [`rancher-monitoring`](https://github.com/rancher/charts/tree/main/charts/rancher-monitoring) Helm 图表中找到，该图表密切跟踪 Prometheus 社区维护的上游 [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) Helm 图表，并在 [CHANGELOG.md](https://github.com/rancher/charts/blob/main/charts/rancher-monitoring/CHANGELOG.md) 中跟踪某些变化。
 
-If you previously enabled Monitoring, Alerting, or Notifiers in Rancher prior to v2.5, there is no upgrade path for switching to the new monitoring/ alerting solution. You will need to disable monitoring/ alerting/notifiers in Cluster Manager before deploying the new monitoring solution via Cluster Explorer.
+本页介绍了如何使用 Rancher v2.5 中引入的新监控应用程序在集群中启用监控和警报。
 
-For more information about upgrading the Monitoring app in Rancher 2.5, please refer to the [migration docs](./migrating).
+如果您在 v2.5 之前在 Rancher 中启用了监控、警报或通知器，则没有升级路径可以切换到新的监控/警报解决方案。在通过群集资源管理器部署新的监控解决方案之前，您需要在群集管理器中禁用监控/警报/通知器。
 
-> Before enabling monitoring, be sure to review the resource requirements. The default values in [this section](#setting-resource-limits-and-requests) are the minimum required resource limits and requests.
+有关 Rancher 2.5 中监控应用升级的更多信息，请参考【迁移文档】(./migrating)。
 
-- [Monitoring Components](#monitoring-components)
-  - [Prometheus](#about-prometheus)
-  - [Grafana](#about-grafana)
-  - [Alertmanager](#about-alertmanager)
-  - [Prometheus Operator](#about-prometheus-operator)
-  - [Prometheus Adapter](#about-prometheus-adapter)
-- [Enable Monitoring](#enable-monitoring)
-  - [Default Alerts, Targets and Grafana Dashboards](#default-alerts-targets-and-grafana-dashboards)
-- [Using Monitoring](#using-monitoring)
-  - [Grafana UI](#grafana-ui)
-  - [Prometheus UI](#prometheus-ui)
-  - [Viewing the Prometheus Targets](#viewing-the-prometheus-targets)
-  - [Viewing the Prometheus Rules](#viewing-the-prometheus-rules)
-  - [Viewing Active Alerts in Alertmanager](#viewing-active-alerts-in-alertmanager)
-- [Uninstall Monitoring](#uninstall-monitoring)
-- [Setting Resource Limits and Requests](#setting-resource-limits-and-requests)
-- [Known Issues](#known-issues)
+> 启用监控之前，请务必确认资源需求。本节](#setting-resource-limits-and-requests)中的默认值是所需的最小资源限制和请求。
 
-# Monitoring Components
+## 监控组件介绍
 
-The `rancher-monitoring` operator is powered by Prometheus, Grafana, Alertmanager, the Prometheus Operator, and the Prometheus adapter.
+`rancher-monitoring` operator 由 Prometheus、Grafana、Alertmanager、Prometheus 操作员和 Prometheus 适配器提供动力。
 
-### About Prometheus
+### 关于 Prometheus
 
-Prometheus provides a time series of your data, which is, according to the [Prometheus documentation:](https://prometheus.io/docs/concepts/data_model/)
+Prometheus 提供了你的数据的时间序列，根据[Prometheus](https://prometheus.io/docs/concepts/data_model/)
 
-> A stream of timestamped values belonging to the same metric and the same set of labeled dimensions, along with comprehensive statistics and metrics of the monitored cluster.
+> 属于同一个度量和同一组标注维度的时间戳值流，以及被监控集群的综合统计和度量。
 
-In other words, Prometheus lets you view metrics from your different Rancher and Kubernetes objects. Using timestamps, Prometheus lets you query and view these metrics in easy-to-read graphs and visuals, either through the Rancher UI or Grafana, which is an analytics viewing platform deployed along with Prometheus.
+换句话说，Prometheus 让您可以查看来自不同 Rancher 和 Kubernetes 对象的度量。使用时间戳，Prometheus 让您可以通过 Rancher UI 或 Grafana（与 Prometheus 一起部署的分析查看平台）以易于阅读的图形和可视化方式查询和查看这些指标。
 
-By viewing data that Prometheus scrapes from your cluster control plane, nodes, and deployments, you can stay on top of everything happening in your cluster. You can then use these analytics to better run your organization: stop system emergencies before they start, develop maintenance strategies, restore crashed servers, etc.
+通过查看 Prometheus 从集群控制平面、节点和部署中抓取的数据，您可以随时了解集群中发生的一切。然后，您可以使用这些分析来更好地运行您的组织：在系统紧急情况开始之前阻止它们，制定维护策略，恢复崩溃的服务器等。
 
-### About Grafana
+### 关于 Grafana
 
-[Grafana](https://grafana.com/grafana/) allows you to query, visualize, alert on and understand your metrics no matter where they are stored. Create, explore, and share dashboards with your team and foster a data driven culture.
+[Grafana](https://grafana.com/grafana/)允许您查询、可视化、提醒和了解您的指标，无论它们存储在哪里。与您的团队一起创建、探索和共享仪表盘，培养数据驱动的文化。
 
-# Enable Monitoring
+## 启用 Monitoring
 
-As an [administrator]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/global-permissions/) or [cluster owner]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles), you can configure Rancher to deploy Prometheus to monitor your Kubernetes cluster.
+作为[管理员]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/global-permissions/)或[集群所有者]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles)，您可以配置 Rancher 部署 Prometheus 来监控您的 Kubernetes 集群。
 
-> If you want to set up Alertmanager, Grafana or Ingress, it has to be done with the settings on the Helm chart deployment. It's problematic to create Ingress outside the deployment.
+> 如果要设置 Alertmanager、Grafana 或 Ingress，必须在 Helm 图部署上进行设置。在部署之外创建 Ingress 是有问题的。
 
-> **Prerequisites:**
+> **先决条件：**
 >
-> - Make sure that you are allowing traffic on port 9796 for each of your nodes because Prometheus will scrape metrics from here.
-> - Make sure your cluster fulfills the resource requirements. The cluster should have at least 1950Mi memory available, 2700m CPU, and 50Gi storage. A breakdown of the resource limits and requests is [here.](#resource-requirements)
+> - 确保你允许你的每个节点在 9796 端口上的流量，因为 Prometheus 会从这里刮取指标。
+> - 确保你的集群满足资源要求。集群应该有至少 1950Mi 的可用内存，2700m 的 CPU 和 50Gi 的存储。资源限制和请求的细目是[这里](#resource-requirements)
 
-1. In the Rancher UI, go to the cluster where you want to install monitoring and click **Cluster Explorer.**
-1. Click **Apps.**
-1. Click the `rancher-monitoring` app.
-1. Optional: Click **Chart Options** and configure alerting, Prometheus and Grafana. For help, refer to the [configuration reference.](./configuration)
-1. Scroll to the bottom of the Helm chart README and click **Install.**
+1. 在 Rancher UI 中，进入要安装监控的群集，然后单击**群集资源管理器.**。
+1. 单击**应用程序.**。
+1. 点击`rancher-monitoring`应用程序。
+1. 可选。点击**图表选项**，配置警报、Prometheus 和 Grafana。如需帮助，请参阅[配置参考](./配置)
+1. 滚动到 Helm chart README 底部，点击**安装.**。
 
-**Result:** The monitoring app is deployed in the `cattle-monitoring-system` namespace.
+**结果：**监控应用部署在`cattle-monitoring-system`命名空间中。
 
-### Default Alerts, Targets and Grafana Dashboards
+### 默认告警、目标和 Grafana 仪表盘
 
-By default, Rancher Monitoring deploys exporters (such as [node-exporter](https://github.com/prometheus/node_exporter) and [kube-state-metrics](https://github.com/kubernetes/kube-state-metrics)) as well as default Prometheus alerts and Grafana dashboards (curated by the [kube-prometheus](https://github.com/prometheus-operator/kube-prometheus) project) onto a cluster.
+默认情况下，Rancher Monitoring 将导出器（如 [node-exporter](https://github.com/prometheus/node_exporter) 和 [kube-state-metrics](https://github.com/kubernetes/kube-state-metrics)）以及默认的 Prometheus 警报和 Grafana 仪表板（由 [kube-prometheus](https://github.com/prometheus-operator/kube-prometheus) 项目策划）部署到集群上。
 
-To see the default alerts, go to the [Alertmanager UI](#alertmanager-ui) and click **Expand all groups.**
+要查看默认的警报，请进入[Alertmanager UI](#alertmanager-ui)并点击展开所有组。
 
-To see what services you are monitoring, you will need to see your targets. To view the default targets, refer to [Viewing the Prometheus Targets.](#viewing-the-prometheus-targets)
+要查看你正在监控哪些服务，你需要查看你的目标。要查看默认目标，请参考[查看 Prometheus 目标。](#viewing-the-prometheus-targets)
 
-To see the default dashboards, go to the [Grafana UI.](#grafana-ui) In the left navigation bar, click the icon with four boxes and click **Manage.**
+要查看默认的仪表盘，请进入【Grafana UI.】(#grafana-ui)在左侧导航栏中，点击有四个方框的图标，然后点击**管理.**。
 
-### Next Steps
+### 下一步
 
-To configure Prometheus resources from the Rancher UI, click **Apps & Marketplace > Monitoring** in the upper left corner.
+要从 Rancher 用户界面配置 Prometheus 资源，请单击左上角的**Apps & Marketplace > Monitoring**。
 
-# Using Monitoring
+## 使用监控
 
-Installing `rancher-monitoring` makes the following dashboards available from the Rancher UI.
+安装 "rancher-monitoring "后，在 Rancher 用户界面中可以使用以下仪表盘。
 
 ### Grafana UI
 
-Rancher allows any users who are authenticated by Kubernetes and have access the Grafana service deployed by the Rancher Monitoring chart to access Grafana via the Rancher Dashboard UI. By default, all users who are able to access Grafana are given the [Viewer](https://grafana.com/docs/grafana/latest/permissions/organization_roles/#viewer-role) role, which allows them to view any of the default dashboards deployed by Rancher.
+Rancher 允许任何通过 Kubernetes 认证并能够访问 Rancher 监控图部署的 Grafana 服务的用户通过 Rancher Dashboard UI 访问 Grafana。默认情况下，所有能够访问 Grafana 的用户都被赋予[Viewer](https://grafana.com/docs/grafana/latest/permissions/organization_roles/#viewer-role)角色，允许他们查看 Rancher 部署的任何默认仪表板。
 
-However, users can choose to log in to Grafana as an [Admin](https://grafana.com/docs/grafana/latest/permissions/organization_roles/#admin-role) if necessary. The default Admin username and password for the Grafana instance will be `admin`/`prom-operator`, but alternative credentials can also be supplied on deploying or upgrading the chart.
+但是，如果有必要，用户可以选择以[Admin](https://grafana.com/docs/grafana/latest/permissions/organization_roles/#admin-role)的身份登录 Grafana。Grafana 实例的默认 Admin 用户名和密码将是`admin`/`prom-operator`，但也可以在部署或升级图表时提供其他凭证。
 
-To see the Grafana UI, install `rancher-monitoring`. Then go to the **Cluster Explorer.** In the top left corner, click **Cluster Explorer > Monitoring.** Then click \*\*Grafana.
+要查看 Grafana 用户界面，安装`rancher-monitoring`。然后进入**群资源管理器.**在左上角，点击**群资源管理器>监控**然后点击 Grafana。
 
-<figcaption>Cluster Compute Resources Dashboard in Grafana</figcaption>
+<figcaption>Grafana中的集群计算资源仪表盘</figcaption>
 ![Cluster Compute Resources Dashboard in Grafana](/img/rancher/cluster-compute-resources-dashboard.png)
 
-<figcaption>Default Dashboards in Grafana</figcaption>
+<figcaption>Grafana中的默认仪表盘</figcaption>
 ![Default Dashboards in Grafana](/img/rancher/grafana-default-dashboard.png)
 
-To allow the Grafana dashboard to persist after it restarts, you will need to add the configuration JSON into a ConfigMap. You can add this configuration to the ConfigMap using the Rancher UI.
+要允许 Grafana 仪表板在重启后持续存在，您需要将配置 JSON 添加到 ConfigMap 中。您可以使用 Rancher UI 将此配置添加到 ConfigMap 中。
 
 ### Prometheus UI
 
-To see the Prometheus UI, install `rancher-monitoring`. Then go to the **Cluster Explorer.** In the top left corner, click **Cluster Explorer > Monitoring.** Then click **Prometheus Graph.**
+要查看 Prometheus 用户界面，安装`rancher-monitoring`。然后进入**群组资源管理器.**在左上角，点击**群组资源管理器>监控.**然后点击**Prometheus Graph**。
 
 <figcaption>Prometheus Graph UI</figcaption>
 ![Prometheus Graph UI](/img/rancher/prometheus-graph-ui.png)
 
-### Viewing the Prometheus Targets
+### 查看 Prometheus 目标
 
-To see the Prometheus Targets, install `rancher-monitoring`. Then go to the **Cluster Explorer.** In the top left corner, click **Cluster Explorer > Monitoring.** Then click **Prometheus Targets.**
+要查看 Prometheus Targets，安装`rancher-monitoring`。然后进入**群组资源管理器.**在左上角，点击**群组资源管理器>监控.**然后点击**Prometheus Targets.**。
 
 <figcaption>Targets in the Prometheus UI</figcaption>
 ![Prometheus Targets UI](/img/rancher/prometheus-targets-ui.png)
 
-### Viewing the Prometheus Rules
+### 查看 Prometheus 规则
 
-To see the Prometheus Rules, install `rancher-monitoring`. Then go to the **Cluster Explorer.** In the top left corner, click **Cluster Explorer > Monitoring.** Then click **Prometheus Rules.**
+要查看 Prometheus 规则，安装`rancher-monitoring`。然后进入**群组资源管理器.**在左上角，点击**群组资源管理器>监控.**然后点击**Prometheus 规则.**。
 
 <figcaption>Rules in the Prometheus UI</figcaption>
 ![Prometheus Rules UI](/img/rancher/prometheus-rules-ui.png)
 
-### Viewing Active Alerts in Alertmanager
+### 查看 Alertmanager 中的活动警报
 
-When `rancher-monitoring` is installed, the Prometheus Alertmanager UI is deployed.
+安装 "rancher-monitoring "后，部署了 Prometheus Alertmanager 用户界面。
 
-The Alertmanager handles alerts sent by client applications such as the Prometheus server. It takes care of deduplicating, grouping, and routing them to the correct receiver integration such as email, PagerDuty, or OpsGenie. It also takes care of silencing and inhibition of alerts.
+Alertmanager 处理客户端应用程序（如 Prometheus 服务器）发送的警报。它负责重复复制、分组，并将它们路由到正确的接收器集成，如电子邮件、PagerDuty 或 OpsGenie。它还负责警报的沉默和抑制。
 
-In the Alertmanager UI, you can view your alerts and the current Alertmanager configuration.
+在 Alertmanager UI 中，您可以查看您的警报和当前 Alertmanager 配置。
 
-To see the Prometheus Rules, install `rancher-monitoring`. Then go to the **Cluster Explorer.** In the top left corner, click **Cluster Explorer > Monitoring.** Then click **Alertmanager.**
+要查看 Prometheus 规则，安装`rancher-monitoring`。然后进入**集群资源管理器.**在左上角，点击**集群资源管理器>监控.**然后点击**Alertmanager.**。
 
-**Result:** The Alertmanager UI opens in a new tab. For help with configuration, refer to the [official Alertmanager documentation.](https://prometheus.io/docs/alerting/latest/alertmanager/)
+**结果：** Alertmanager 用户界面在新标签页中打开。有关配置方面的帮助，请参阅 [官方 Alertmanager 文档。](https://prometheus.io/docs/alerting/latest/alertmanager/)
 
 <figcaption>The Alertmanager UI</figcaption>
 ![Alertmanager UI](/img/rancher/alertmanager-ui.png)
 
-# Uninstall Monitoring
+## 卸载监控
 
-1. From the **Cluster Explorer,** click Apps & Marketplace.
-1. Click **Installed Apps.**
-1. Go to the `cattle-monitoring-system` namespace and check the boxes for `rancher-monitoring-crd` and `rancher-monitoring`.
-1. Click **Delete.**
-1. Confirm **Delete.**
+1. 从**群组资源管理器中，**单击应用程序和市场。
+1. 单击**安装的应用程序.**。
+1. 进入 "牛群监控系统 "命名空间，选中 "牧场主监控-crd "和 "牧场主监控 "的方框。
+1. 点击**Delete.**。
+1. 确认 **Delete** 。
 
-**Result:** `rancher-monitoring` is uninstalled.
+**结果：** `rancher-monitoring`被卸载。
 
-# Setting Resource Limits and Requests
+## 配置资源限额和资源需求
 
-The resource requests and limits can be configured when installing `rancher-monitoring`.
+资源请求和限制可以在安装`rancher-monitoring`时进行配置。
 
-The default values are in the [values.yaml](https://github.com/rancher/charts/blob/main/charts/rancher-monitoring/values.yaml) in the `rancher-monitoring` Helm chart.
+默认值在`rancher-monitoring`Helm 图表的[values.yaml](https://github.com/rancher/charts/blob/main/charts/rancher-monitoring/values.yaml)中。
 
-The default values in the table below are the minimum required resource limits and requests.
+下表中的默认值是最小的资源限制和请求。
 
-| Resource Name                     | Memory Limit | CPU Limit | Memory Request | CPU Request |
-| --------------------------------- | ------------ | --------- | -------------- | ----------- |
-| alertmanager                      | 500Mi        | 1000m     | 100Mi          | 100m        |
-| grafana                           | 200Mi        | 200m      | 100Mi          | 100m        |
-| kube-state-metrics subchart       | 200Mi        | 100m      | 130Mi          | 100m        |
-| prometheus-node-exporter subchart | 50Mi         | 200m      | 30Mi           | 100m        |
-| prometheusOperator                | 500Mi        | 200m      | 100Mi          | 100m        |
-| prometheus                        | 2500Mi       | 1000m     | 1750Mi         | 750m        |
-| **Total**                         | **3950Mi**   | **2700m** | **2210Mi**     | **1250m**   |
+| 资源名称                          | 内存限额   | CPU 限额  | 内存需求   | CPU 需求  |
+| :-------------------------------- | :--------- | :-------- | :--------- | :-------- |
+| alertmanager                      | 500Mi      | 1000m     | 100Mi      | 100m      |
+| grafana                           | 200Mi      | 200m      | 100Mi      | 100m      |
+| kube-state-metrics subchart       | 200Mi      | 100m      | 130Mi      | 100m      |
+| prometheus-node-exporter subchart | 50Mi       | 200m      | 30Mi       | 100m      |
+| prometheusOperator                | 500Mi      | 200m      | 100Mi      | 100m      |
+| prometheus                        | 2500Mi     | 1000m     | 1750Mi     | 750m      |
+| **Total**                         | **3950Mi** | **2700m** | **2210Mi** | **1250m** |
 
-At least 50Gi storage is recommended.
+建议为资源预留 5 至少 0Gi 存储。
 
-# Known Issues
+## 已知问题
 
-There is a [known issue](https://github.com/rancher/rancher/issues/28787#issuecomment-693611821) that K3s clusters require more default memory. If you are enabling monitoring on a K3s cluster, we recommend to setting `prometheus.prometheusSpec.resources.memory.limit` to 2500Mi`and`prometheus.prometheusSpec.resources.memory.request` to 1750Mi.
+有一个[已知问题](https://github.com/rancher/rancher/issues/28787#issuecomment-693611821)，K3s 集群需要更多的默认内存。如果你在 K3s 集群上启用监控，我们建议将`prometheus.prometheusSpec.resources.memory.limit`设置为 2500Mi`和`prometheus.prometheusSpec.resources.memory.request`设置为 1750Mi。

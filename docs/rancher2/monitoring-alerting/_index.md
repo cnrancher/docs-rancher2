@@ -1,5 +1,5 @@
 ---
-title: Monitoring and Alerting
+title: 监控和告警
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,6 +19,6 @@ keywords:
   - subtitles6
 ---
 
-If you are using Rancher v2.5, refer to [this section.](./v2.5)
+如果您使用的是 Rancher v2.5，请参考[本节](/docs/rancher2/monitoring-alerting/2.5/_index)。
 
-If you are using Rancher v2.0-v2.4, refer to [this section.](./v2.0.x-v2.4.x)
+如果您使用的是 Rancher v2.0-v2.4，请参考[本节](/docs/rancher2/monitoring-alerting/2.0-2.4/_index)。

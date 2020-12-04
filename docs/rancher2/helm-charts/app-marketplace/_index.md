@@ -1,5 +1,5 @@
 ---
-title: Apps and Marketplace
+title: 应用市场
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,40 +19,42 @@ keywords:
   - subtitles6
 ---
 
-_Available as of v2.5_
+## 概述
 
-In this section, you'll learn how to manage Helm chart repositories and applications in Rancher.
+_适用于 Rancher v2.5+_
 
-In the cluster manager Rancher uses a catalog system to import bundles of charts and then uses those charts to either deploy custom helm applications or Rancher's tools such as Monitoring or Istio. Now in the Cluster Explorer, Rancher uses a similar but simplified version of the same system. Repositories can be added in the same way that catalogs were, but are specific to the current cluster. Rancher tools come as pre-loaded repositories which deploy as standalone helm charts.
+在本节中，您将学习如何在 Rancher 中管理 Helm 图表库和应用程序。
 
-### Charts
+在集群管理器中，Rancher 使用目录系统导入应用，然后使用这些 chart 部署自定义的 helm chart 应用程序或 Rancher 的工具，如监控或 Istio。现在，在群集资源管理器中，Rancher 使用了类似但简化版的同一系统。Repositories 可以以与目录相同的方式添加，但具体到当前集群。Rancher 工具作为预加载的存储库，作为独立的 helm chart 进行部署。
 
-From the top-left menu select _"Apps & Marketplace"_ and you will be taken to the Charts page.
+## Charts
 
-The charts page contains all Rancher, Partner, and Custom Charts.
+从左上角菜单中选择**应用市场**，进入图表页面。
 
-- Rancher tools such as Logging or Monitoring are included under the Rancher label
-- Partner charts reside under the Partners label
-- Custom charts will show up under the name of the repository
+图表页面包含所有 Rancher、合作伙伴和自定义 Chart。
 
-All three types are deployed and managed in the same way.
+- Rancher 工具，如日志或监控，都包含在 Rancher 标签下。
+- 合作伙伴图表位于合作伙伴标签下
+- 自定义图表将显示在版本库的名称下。
 
-### Repositories
+这三种类型都是以相同的方式部署和管理的。
 
-From the left sidebar select _"Repositories"_.
+## helm 仓库
 
-These items represent helm repositories, and can be either traditional helm endpoints which have an index.yaml, or git repositories which will be cloned and can point to a specific branch. In order to use custom charts, simply add your repository here and they will become available in the Charts tab under the name of the repository.
+从左侧边栏选择**Repositories**。
 
-### Helm compatilbitiy
+这些项目代表了 helm 仓库，可以是传统的 helm 端点，它有一个 index.yaml；也可以是 git 仓库，它将被克隆，克隆时可以指定分支名称。只需在这里添加你的版本库，它们就会在版本库名称下的 Charts 选项卡中显示出来。
 
-The Cluster Explorer only supports Helm 3 compatible charts.
+## Helm 兼容性
 
-### Deployment and Upgrades
+Cluster Explorer 只支持 Helm 3 兼容的图表。
 
-From the _"Charts"_ tab select a Chart to install. Rancher and Partner charts may have extra configurations available through custom pages or questions.yaml files, but all chart installations can modify the values.yaml and other basic settings. Once you click install, a helm operation job is deployed, and the console for the job is displayed.
+## 部署和升级
 
-To view all recent changes, go to the _"Recent Operations"_ tab. From there you can view the call that was made, conditions, events, and logs.
+从**图表**选项卡中选择一个 chart 进行安装。chart 可能会通过自定义页面或 question.yaml 文件提供额外的配置，但所 chart 安装都可以修改 values.yaml 和其他基本设置。一旦点击安装，就会部署一个 helm operation ，并显示这个 job 的控制台。
 
-After installing a chart, you can find it in the _"Installed Apps"_ tab. In this section you can upgrade or delete the installation, and see further details. When choosing to upgrade, the form and values presented will be the same as installation.
+要查看最近的所有更改，请转到**最近的操作**标签。从那里你可以查看最近发出的请求、状态、事件和日志。
 
-Most Rancher tools have additional pages located in the toolbar below the _"Apps & Marketplace"_ section to help manage and use the features. These pages include links to dashboards, forms to easily add Custom Resources, and additional information.
+安装 chart 后，您可以在**已安装的应用程序**选项卡中找到它。在这个部分，你可以升级、删除或安装应用程序，并查看进一步的细节。选择升级时，所呈现的形式和数值将与安装相同。
+
+大多数 Rancher 工具都有额外的页面，位于**应用程序和市场**部分下方的工具栏中，以帮助管理和使用功能。这些页面包括到仪表盘的链接、轻松添加自定义资源的表单以及其他信息。

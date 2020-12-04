@@ -1,5 +1,5 @@
 ---
-title: Helm Charts in Rancher
+title: Helm Charts
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,10 +19,10 @@ keywords:
   - subtitles6
 ---
 
-### Apps and Marketplace
+## Rancher v2.5
 
-In Rancher v2.5, the [apps and marketplace feature](./apps-marketplace) is used to manage Helm charts, replacing the catalog system.
+在 Rancher v2.5 中，请参考[本文](/docs/rancher2/helm-charts/apps-marketplace/_index)获取应用市场的使用指南。
 
-### Catalogs
+## Rancher v2.4 及之前的版本
 
-In Rancher prior to v2.5, the [catalog system](./legacy-catalogs) was used to manage Helm charts.
+在 Rancher v2.4 及之前的版本中，请参考[本文](/docs/rancher2/helm-charts/apps-marketplace/_index)获取应用市场的使用指南。
