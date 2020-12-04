@@ -1,5 +1,5 @@
 ---
-title: title
+title: 将Rancher迁移到新集群
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,22 +19,22 @@ keywords:
   - subtitles6
 ---
 
-If you are migrating Rancher to a new Kubernetes cluster, you don't need to install Rancher on the new cluster first. If Rancher is restored to a new cluster with Rancher already installed, it can cause problems.
+如果你要将Rancher迁移到一个新的Kubernetes集群，你不需要先在新集群上安装Rancher。如果将Rancher还原到一个已经安装了Rancher的新集群上，可能会引起问题。
 
-### Prerequisites
+### 先决条件
 
-These instructions assume you have [created a backup](../back-up-rancher) and you have already installed a new Kubernetes cluster where Rancher will be deployed.
+这些说明假设你已经[创建了一个备份](./../back-up-rancher/_index)，并且已经安装了将在其中部署Rancher的新Kubernetes集群。
 
-It is required to use the same hostname that was set as the server URL in the first cluster.
+要求使用与第一个群集中设置的服务器URL相同的hostname。
 
-Rancher version must be v2.5.0 and up
+Rancher版本必须是v2.5.0及以上。
 
-Rancher can be installed on any Kubernetes cluster, including hosted Kubernetes clusters such as Amazon EKS clusters. For help installing Kubernetes, refer to the documentation of the Kubernetes distribution. One of Rancher's Kubernetes distributions may also be used:
+Rancher 可以安装在任何 Kubernetes 集群上，包括托管的 Kubernetes 集群，如 Amazon EKS 集群。有关安装Kubernetes的帮助，请参考Kubernetes发行版的文档。也可以使用Rancher的Kubernetes发行版之一：
 
-- [RKE Kubernetes installation docs]({{<baseurl>}}/rke/latest/en/installation/)
-- [K3s Kubernetes installation docs]({{<baseurl>}}/k3s/latest/en/installation/)
+- [RKE Kubernetes 安装文档](/docs/rancher2/installation/_index)
+- [K3s Kubernetes 安装文档](/docs/k3s/installation/_index)
 
-### 1. Install the rancher-backup Helm chart
+### 1. 安装 rancher-backup Helm chart
 
 ```
 helm repo add rancher-charts https://charts.rancher.io
@@ -43,9 +43,9 @@ helm install rancher-backup-crd rancher-charts/rancher-backup-crd -n cattle-reso
 helm install rancher-backup rancher-charts/rancher-backup -n cattle-resources-system
 ```
 
-### 2. Restore from backup using a Restore custom resource
+### 2. 使用Restore自定义资源从备份中还原
 
-If you are using an S3 store as the backup source, and need to use your S3 credentials for restore, create a secret in this cluster using your S3 credentials. The Secret data must have two keys, `accessKey` and `secretKey` containing the s3 credentials like this:
+如果你使用S3存储作为备份源，并且需要使用你的S3凭证进行还原，请使用你的S3凭证在这个集群中创建一个Secret。Secret数据必须有两个key，`accessKey`和`secretKey`，包含s3凭证，像这样：
 
 ```yaml
 apiVersion: v1
@@ -58,11 +58,11 @@ data:
   secretKey: <Enter your secret key>
 ```
 
-This secret can be created in any namespace, with the above example it will get created in the default namespace
+这个secret可以在任何命名空间中创建，上面的例子中，它将在默认的命名空间中创建。
 
-In the Restore custom resource, `prune` must be set to false.
+在Restore自定义资源中，`prune`必须设置为false。
 
-Create a Restore custom resource like the example below:
+创建一个像下面例子一样的Restore自定义资源：
 
 ```yaml
 # migrationResource.yaml
@@ -84,9 +84,11 @@ spec:
       endpoint: s3.us-west-2.amazonaws.com
 ```
 
-> **Important:** The field `encryptionConfigSecretName` must be set only if your backup was created with encryption enabled. Provide the name of the Secret containing the encryption config file. If you only have the encryption config file, but don't have a secret created with it in this cluster, use the following steps to create the secret:
+:::important 重要：
+只有在创建备份时启用了加密功能时，才必须设置 `encryptionConfigSecretName` 字段。提供包含加密配置文件的Secret名称。如果您只有加密配置文件，但在此群集中没有用它创建的Secret，请使用以下步骤创建secret:
+:::
 
-1. The encryption configuration file must be named `encryption-provider-config.yaml`, and the `--from-file` flag must be used to create this secret. So save your `EncryptionConfiguration` in a file called `encryption-provider-config.yaml` and run this command:
+1. 加密配置文件必须命名为`encryption-provider-config.yaml`，并且必须使用`--from-file`标志来创建这个secret。因此，将你的`EncryptionConfiguration`保存在一个名为`encryption-provider-config.yaml`的文件中，然后运行这个命令:
 
 ```
 kubectl create secret generic encryptionconfig \
@@ -94,19 +96,19 @@ kubectl create secret generic encryptionconfig \
   -n cattle-resources-system
 ```
 
-Then apply the resource:
+然后应用资源:
 
 ```
 kubectl apply -f migrationResource.yaml
 ```
 
-### 3. Install cert-manager
+### 3. 安装 cert-manager
 
-Follow the steps to [install cert-manager]({{<baseurl>}}/rancher/v2.x/en/installation/install-rancher-on-k8s/#5-install-cert-manager) in the documentation about installing cert-manager on Kubernetes.
+按照文档中关于在Kubernetes上安装cert-manager的步骤[安装cert-manager](/docs/rancher2/installation/install-rancher-on-k8s/_index#5-install-cert-manager)。
 
-### 4. Bring up Rancher with Helm
+### 4. 使用helm安装rancher
 
-Use the same version of Helm to install Rancher, that was used on the first cluster.
+使用与第一个集群上使用的相同版本的Helm来安装Rancher。
 
 ```
 helm install rancher rancher-latest/rancher \

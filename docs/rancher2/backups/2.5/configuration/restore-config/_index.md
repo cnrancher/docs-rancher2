@@ -1,5 +1,5 @@
 ---
-title: title
+title: 恢复配置
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,81 +19,82 @@ keywords:
   - subtitles6
 ---
 
-The Restore Create page lets you provide details of the backup to restore from
+Restore Create页面提供要还原的备份的详细信息
 
 ![restore](/img/rancher/backup_restore/restore/restore.png)
 
-- [Backup Source](#backup-source)
-  - [An Existing Backup Config](#an-existing-backup-config)
-  - [The default storage target](#the-default-storage-target)
-  - [An S3-compatible object store](#an-s3-compatible-object-store)
-- [Encryption](#encryption)
+- [备份源](#备份源)
+  - [现有的备份配置](#现有的备份配置)
+  - [默认存储目标](#默认存储目标)
+  - [S3兼容的对象存储](#s3兼容的对象存储)
+- [加密](#encryption)
 - [Prune during restore](#prune-during-restore)
-- [Getting the Backup Filename from S3](#getting-the-backup-filename-from-s3)
+- [从S3获取备份文件名](#从s3获取备份文件名)
 
-# Backup Source
+## 备份源
 
-Provide details of the backup file and its storage location, which the operator will then use to perform the restore. Select from the following options to provide these details
+提供备份文件和备份文件存储位置的详细信息，然后operator将使用这个文件执行还原。从以下选项中选择这些详细信息。
 
-### An existing backup config
+### 现有的备份配置
 
-Selecting this option will populate the **Target Backup** dropdown with the Backups available in this cluster. Select the Backup from the dropdown, and that will fill out the **Backup Filename** field for you, and will also pass the backup source information from the selected Backup to the operator.
+选择该选项将在**目标备份**下拉菜单中填充该群集中可用的备份。从下拉菜单中选择备份，自动为您填写**备份文件名**字段，还将把所选Backup的备份源信息传递给operator。
 
 ![existing](/img/rancher/backup_restore/restore/existing.png)
 
-If the Backup custom resource does not exist in the cluster, you need to get the exact filename and provide the backup source details with the default storage target or an S3-compatible object store.
+如果Backup自定义资源在集群中不存在，则需要获取准确的文件名，并提供备份源详细信息，并提供默认的存储目标或与S3兼容的对象存储。
 
-### The default storage target
+### 默认存储目标
 
-Select this option if you are restoring from a backup file that exists in the default storage location configured at the operator-level. The operator-level configuration is the storage location that was configured when the `rancher-backup` operator was installed or upgraded. Provide the exact filename in the **Backup Filename** field.
+如果您要从operator级别配置的默认存储位置的备份文件中恢复，请选择此选项。operator级别的配置是指安装或升级 `rancher-backup` operator时配置的存储位置。在**备份文件名**字段中提供准确的文件名。
 
 ![default](/img/rancher/backup_restore/restore/default.png)
 
-### An S3-compatible object store
+### S3兼容的对象存储
 
-Select this option if no default storage location is configured at the operator-level, OR if the backup file exists in a different S3 bucket than the one configured as the default storage location. Provide the exact filename in the **Backup Filename** field. Refer to [this section](#getting-the-backup-filename-from-s3) for exact steps on getting the backup filename from s3. Fill in all the details for the S3 compatible object store. Its fields are exactly same as ones for the `backup.StorageLocation` configuration in the [Backup custom resource.](../../configuration/backup-config/#storagelocation)
+如果在operator级别没有配置默认存储位置，或者如果备份文件与配置为默认存储位置不同的 S3 桶中，请选择此选项。在**备份文件名**字段中提供准确的文件名。请参阅[本节](#从s3获取备份文件名)了解从S3获取备份文件名的具体步骤。填写S3兼容对象存储的所有细节。它的字段与[备份自定义资源](./../back-up-config/_index#存储位置)中`backup.StorageLocation`配置的字段完全相同。
 
 ![s3store](/img/rancher/backup_restore/restore/s3store.png)
 
-# Encryption
+## 加密
 
-If the backup was created with encryption enabled, its file will have `.enc` suffix. Choosing such a Backup, or providing a backup filename with `.enc` suffix will display another dropdown named **Encryption Config Secret**.
+如果备份是在启用加密的情况下创建的，其文件后缀为`.enc`。选择这样的备份，或提供后缀为`.enc`的备份文件名，将显示另一个名为**加密配置Secret**的下拉菜单。
 
 ![encryption](/img/rancher/backup_restore/restore/encryption.png)
 
-The Secret selected from this dropdown must have the same contents as the one used for the Backup custom resource while performing the backup. If the encryption configuration doesn't match, the restore will fail
+从该下拉菜单中选择的Secret必须与执行备份时用于Backup自定义资源的Secret内容相同。如果加密配置不匹配，还原将失败。
 
-The `Encryption Config Secret` dropdown will filter out and list only those Secrets that have this exact key
+`加密配置Secret`下拉菜单将过滤出并仅列出那些拥有此密钥的Secret。
 
-| YAML Directive Name          | Description                                                                                                        |
+| YAML指令名称          | 说明                                                                                                        |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `encryptionConfigSecretName` | Provide the name of the Secret from `cattle-resources-system` namespace, that contains the encryption config file. |
+| `encryptionConfigSecretName` | 提供 `cattle-resources-system` 命名空间中包含加密配置文件的Secret名称。 |
 
-> **Important**
-> This field should only be set if the backup was created with encryption enabled. Providing the incorrect encryption config will cause the restore to fail.
+:::important 重要：
+此字段仅在备份创建时启用了加密功能时才应设置。提供错误的加密配置将导致还原失败。
+:::
 
-# Prune During Restore
+## Prune During Restore
 
-- **Prune**: In order to fully restore Rancher from a backup, and to go back to the exact state it was at when the backup was performed, we need to delete any additional resources that were created by Rancher after the backup was taken. The operator does so if the **Prune** flag is enabled. Prune is enabled by default and it is recommended to keep it enabled.
-- **Delete Timeout**: This is the amount of time the operator will wait while deleting a resource before editing the resource to remove finalizers and attempt deletion again.
+- **Prune**: 为了从备份中完全恢复Rancher，并回到备份时的确切状态，我们需要删除Rancher在备份后创建的任何额外资源。如果**Prune**标志被启用，operator就会这样做。Prune默认是启用的，建议保持启用。
+- **删除超时**: 这是operator在删除资源时等待的时间。
 
-| YAML Directive Name    | Description                                                                                                                                  |
+| YAML指令名称    | 说明                                                                                                                                  |
 | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `prune`                | Delete the resources managed by Rancher that are not present in the backup (Recommended).                                                    |
-| `deleteTimeoutSeconds` | Amount of time the operator will wait while deleting a resource before editing the resource to remove finalizers and attempt deletion again. |
+| `prune`                | 删除备份中不存在的由Rancher管理的资源（推荐）。                                                    |
+| `deleteTimeoutSeconds` | operator在删除资源时等待的时间。 |
 
-# Getting the Backup Filename from S3
+## 从S3获取备份文件名
 
-This is the name of the backup file that the `rancher-backup` operator will use to perform the restore.
+这是 `rancher-backup` operator用来执行还原的备份文件的名称。
 
-To obtain this file name from S3, go to your S3 bucket (and folder if it was specified while performing backup).
+要从S3获取这个文件名，请进入你的S3桶（如果在执行备份时指定了文件夹）。
 
-Copy the filename and store it in your Restore custom resource. So assuming the name of your backup file is `backupfile`,
+复制文件名并将其存储在你的Restore自定义资源中。所以假设你的备份文件的名字是`backupfile`，
 
-- If your bucket name is `s3bucket` and no folder was specified, then the `backupFilename` to use will be `backupfile`.
-- If your bucket name is `s3bucket` and the base folder is`s3folder`, the `backupFilename` to use is only `backupfile` .
-- If there is a subfolder inside `s3Folder` called `s3sub`, and that has your backup file, then the `backupFilename` to use is `s3sub/backupfile`.
+- 如果你的桶名称是`s3bucket`而没有指定文件夹，那么要使用的`备份文件名称`将是`backupfile`。
+- 如果你的桶名称是`s3bucket`，基础文件夹是`s3folder`，那么要使用的`备份文件名称`只有`backupfile`。
+- 如果在`s3Folder`内有一个名为`s3sub`的子文件夹，里面有你的备份文件，那么要使用的`备份文件名称`就是`s3sub/backupfile`。
 
-| YAML Directive Name | Description                                                                                             |
+| YAML指令名称 | 说明                                                                                             |
 | ------------------- | ------------------------------------------------------------------------------------------------------- |
-| `backupFilename`    | This is the name of the backup file that the `rancher-backup` operator will use to perform the restore. |
+| `backupFilename`    | 这是 `rancher-backup` operator将用来执行还原的备份文件的名称。 |

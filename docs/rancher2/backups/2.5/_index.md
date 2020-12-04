@@ -1,5 +1,5 @@
 ---
-title: title
+title: Rancher v2.5中的备份和还原
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -19,87 +19,87 @@ keywords:
   - subtitles6
 ---
 
-In this section, you'll learn how to create backups of Rancher, how to restore Rancher from backup, and how to migrate Rancher to a new Kubernetes cluster.
+在本节中，您将学习如何创建Rancher的备份，如何从备份中恢复Rancher，以及如何将Rancher迁移到新的Kubernetes集群。
 
-As of Rancher v2.5, the `rancher-backup` operator is used to backup and restore Rancher. The `rancher-backup` Helm chart is [here.](https://github.com/rancher/charts/tree/main/charts/rancher-backup)
+从Rancher v2.5开始，`rancher-backup` operator用来备份和恢复Rancher。`rancher-backup` Helm chart在[这里。](https://github.com/rancher/charts/tree/main/charts/rancher-backup)
 
-The backup-restore operator needs to be installed in the local cluster, and only backs up the Rancher app. The backup and restore operations are performed only in the local Kubernetes cluster.
+备份还原operator需要安装在local集群中，并且只对Rancher应用进行备份。备份和还原操作只在local Kubernetes集群中进行。
 
-The Rancher version must be v2.5.0 and up to use this approach of backing up and restoring Rancher.
+Rancher版本必须是v2.5.0及以上，才能使用这种备份和恢复Rancher的方法。
 
-- [Changes in Rancher v2.5](#changes-in-rancher-v2-5)
-  - [Backup and Restore for Rancher v2.5 installed with Docker](#backup-and-restore-for-rancher-v2-5-installed-with-docker)
-  - [Backup and Restore for Rancher installed on a Kubernetes Cluster Prior to v2.5](#backup-and-restore-for-rancher-installed-on-a-kubernetes-cluster-prior-to-v2-5)
-- [How Backups and Restores Work](#how-backups-and-restores-work)
-- [Installing the rancher-backup Operator](#installing-the-rancher-backup-operator)
-  - [Installing rancher-backup with the Rancher UI](#installing-rancher-backup-with-the-rancher-ui)
-  - [Installing rancher-backup with the Helm CLI](#installing-rancher-backup-with-the-helm-cli)
-- [Backing up Rancher](#backing-up-rancher)
-- [Restoring Rancher](#restoring-rancher)
-- [Migrating Rancher to a New Cluster](#migrating-rancher-to-a-new-cluster)
-- [Default Storage Location Configuration](#default-storage-location-configuration)
-  - [Example values.yaml for the rancher-backup Helm Chart](#example-values-yaml-for-the-rancher-backup-helm-chart)
+- [Rancher v2.5中的变化](#rancher-v25中的变化)
+  - [使用Docker安装的Rancher v2.5的备份和还原](#使用docker安装的rancher-v25的备份和还原)
+  - [在v2.5之前安装在Kubernetes集群上的Rancher的备份和还原](#在v25之前安装在kubernetes集群上的rancher的备份和还原)
+- [备份和恢复如何工作](#备份和恢复如何工作)
+- [安装 rancher-backup Operator](#安装-rancher-backup-operator)
+  - [使用Rancher UI安装rancher-backup](#使用rancher-ui安装rancher-backup)
+  - [使用Helm CLI安装rancher-backup](#使用helm-cli安装rancher-backup)
+- [备份 Rancher](#备份-rancher)
+- [恢复 Rancher](#恢复-rancher)
+- [将Rancher迁移到新的集群](#将rancher迁移到新的集群)
+- [配置默认存储位置](#配置默认存储位置)
+  - [Rancher-backup Helm Chart的values.yaml示例](#rancher-backup-helm-chart的valuesyaml示例)
 
-# Changes in Rancher v2.5
+## Rancher v2.5中的变化
 
-The new `rancher-backup` operator allows Rancher to be backed up and restored on any Kubernetes cluster. This application is a Helm chart, and it can be deployed through the Rancher **Apps & Marketplace** page, or by using the Helm CLI.
+新的`rancher-backup` operator允许Rancher在任何Kubernetes集群上进行备份和恢复。这个应用是一个Helm chart，它可以通过Rancher **应用和市场**页面部署，或者使用Helm CLI部署。
 
-Previously, the way that cluster data was backed up depended on the type of Kubernetes cluster that was used.
+以前，集群数据的备份方式取决于所使用的Kubernetes集群的类型。
 
-In Rancher v2.4, it was only supported to install Rancher on two types of Kubernetes clusters: an RKE cluster, or a K3s cluster with an external database. If Rancher was installed on an RKE cluster, RKE would be used to take a snapshot of the etcd database and restore the cluster. If Rancher was installed on a K3s cluster with an external database, the database would need to be backed up and restored using the upstream documentation for the database.
+在Rancher v2.4中，只支持在两种类型的Kubernetes集群上安装Rancher：一个RKE集群，或者一个带有外部数据库的K3s集群。如果Rancher安装在RKE集群上，RKE用来获取etcd数据库的快照并恢复集群。如果Rancher安装在具有外部数据库的K3s集群上，则需要使用数据库的上游文档备份和恢复数据库。
 
-In Rancher v2.5, it is now supported to install Rancher hosted Kubernetes clusters, such as Amazon EKS clusters, which do not expose etcd to a degree that would allow snapshots to be created by an external tool. etcd doesn't need to be exposed for `rancher-backup` to work, because the operator gathers resources by making calls to `kube-apiserver`.
+在Rancher v2.5中，现在支持安装Rancher托管的Kubernetes集群，比如Amazon EKS集群，这些集群不会将etcd公开到允许外部工具创建快照的程度。`rancher-backup` 工作时不需要暴露etcd，因为operator通过调用 `kube-apiserver` 来收集资源。
 
-### Backup and Restore for Rancher v2.5 installed with Docker
+### 使用Docker安装的Rancher v2.5的备份和还原
 
-For Rancher installed with Docker, refer to the same steps used up till 2.5 for [backups](./docker-installs/docker-backups) and [restores.](./docker-installs/docker-backups)
+对于使用Docker安装的Rancher，请参考2.5之前的[备份](./docker-installs/docker-backups/_index)和[恢复](./docker-installs/docker-restores/_index)的相同步骤。
 
-### Backup and Restore for Rancher installed on a Kubernetes Cluster Prior to v2.5
+### 在v2.5之前安装在Kubernetes集群上的Rancher的备份和还原
 
-For Rancher prior to v2.5, the way that Rancher is backed up and restored differs based on the way that Rancher was installed. Our legacy backup and restore documentation is here:
+对于V2.5之前的Rancher，根据Rancher的安装方式，Rancher的备份和还原方式有所不同。我们的传统备份和恢复文档在这里：
 
-- For Rancher installed on an RKE Kubernetes cluster, refer to the legacy [backup]({{<baseurl>}}/rancher/v2.x/en/backups/legacy/backup/ha-backups) and [restore]({{<baseurl>}}/rancher/v2.x/en/backups/legacy/restore/rke-restore) documentation.
-- For Rancher installed on a K3s Kubernetes cluster, refer to the legacy [backup]({{<baseurl>}}/rancher/v2.x/en/backups/legacy/backup/k3s-backups) and [restore]({{<baseurl>}}/rancher/v2.x/en/backups/legacy/restore/k3s-restore) documentation.
+- 对于安装在RKE Kubernetes集群上的Rancher，请参考传统的[备份](/docs/rancher2/backups/legacy/backup/ha-backups/_index)和[恢复](/docs/rancher2/backups/legacy/restore/rke-restore/_index)文档。
+- 对于安装在K3s Kubernetes集群上的Rancher，请参考传统的[备份](/docs/rancher2/backups/2.0-2.4/k3s-backups/_index)和[恢复](/docs/rancher2/backups/2.0-2.4/restorations/k3s-restoration/_index)文档。
 
-# How Backups and Restores Work
+## 备份和恢复如何工作
 
-The `rancher-backup` operator introduces three custom resources: Backups, Restores, and ResourceSets. The following cluster-scoped custom resource definitions are added to the cluster:
+`rancher-backup` operator 引入了三种自定义资源。Backups、Restores和ResourceSets。下列群集范围的自定义资源定义被添加到群集中：
 
 - `backups.resources.cattle.io`
 - `resourcesets.resources.cattle.io`
 - `restores.resources.cattle.io`
 
-The ResourceSet defines which Kubernetes resources need to be backed up. The ResourceSet is not available to be configured in the Rancher UI because the values required to back up Rancher are predefined. This ResourceSet should not be modified.
+ResourceSet 定义了哪些 Kubernetes 资源需要备份。由于备份 Rancher 所需的值是预定义的，因此该 ResourceSet 无法在 Rancher UI 中进行配置。这个 ResourceSet 不应该被修改。
 
-When a Backup custom resource is created, the `rancher-backup` operator calls the `kube-apiserver` to get the resources in the ResourceSet (specifically, the predefined `rancher-resource-set`) that the Backup custom resource refers to.
+当创建一个Backup自定义资源时，`rancher-backup` operator 会调用 `kube-apiserver` 来获取Backup自定义资源所指向的ResourceSet（具体是预定义的 `rancher-resource-set`）中的资源。
 
-The operator then creates the backup file in the .tar.gz format and stores it in the location configured in the Backup resource.
+然后，operator 以 `.tar.gz` 格式创建备份文件，并将其存储在Backup资源中配置的位置。
 
-When a Restore custom resource is created, the operator accesses the backup .tar.gz file specified by the Restore, and restores the application from that file.
+创建 Restore 自定义资源时，operator访问 Restore 指定的备份 `.tar.gz` 文件，并从该文件中还原应用程序。
 
-The Backup and Restore custom resources can be created in the Rancher UI, or by using `kubectl apply`.
+Backup 和 Restore自定义资源可以在 Rancher UI中创建，或者使用 `kubectl apply` 创建。
 
-# Installing the rancher-backup Operator
+## 安装 rancher-backup operator
 
-The `rancher-backup` operator can be installed from the Rancher UI, or with the Helm CLI. In both cases, the `rancher-backup` Helm chart is installed on the Kubernetes cluster running the Rancher server. It is a cluster-admin only feature and available only for the **local** cluster. (_If you do not see `rancher-backup` in the Rancher UI, you may have selected the wrong cluster._)
+`rancher-backup` operator 可以从Rancher UI安装，也可以用Helm CLI安装。在这两种情况下，`rancher-backup` Helm chart 安装在运行 Rancher server 的 Kubernetes 集群上。它是一个集群管理员专用的功能，只对 **local** 集群可用。(如果您在Rancher用户界面中没有看到`rancher-backup`，您可能选择了错误的集群)
 
-### Installing rancher-backup with the Rancher UI
+### 使用Rancher UI安装rancher-backup
 
-1. In the Rancher UI's Cluster Manager, choose the cluster named **local**
-1. On the upper-right click on the **Cluster Explorer.**
-1. Click **Apps.**
-1. Click the `rancher-backup` operator.
-1. Optional: Configure the default storage location. For help, refer to the [configuration section.](./configuration/storage-config)
+1. 在Rancher UI的 **Cluster Manager** 中，选择名为**local**的群集。
+1. 在右上角点击 **Cluster Explorer**。
+1. 点击 **Apps.**
+1. 点击 `rancher-backup` operator.
+1. （可选）配置默认的存储位置。有关帮助，请参阅[配置部分](./configuration/storage-config/_index)
 
-**Result:** The `rancher-backup` operator is installed.
+**结果：**安装了 `rancher-backup` operator。
 
-From the **Cluster Explorer,** you can see the `rancher-backup` operator listed under **Deployments.**
+从**Cluster Explorer**中，您可以看到在**deployment**中列出了`rancher-backup` operator。
 
-To configure the backup app in Rancher, click **Cluster Explorer** in the upper left corner and click **Rancher Backups.**
+要在Rancher中配置备份应用程序，请单击左上角的 **Cluster Explorer**，然后单击 **Rancher Backups.**
 
-### Installing rancher-backup with the Helm CLI
+### 使用Helm CLI安装rancher-backup
 
-Install the backup app as a Helm chart:
+使用Helm chart安装backup：
 
 ```
 helm repo add rancher-charts https://charts.rancher.io
@@ -110,30 +110,30 @@ helm install rancher-backup rancher-charts/rancher-backup -n cattle-resources-sy
 
 ### RBAC
 
-Only the rancher admins, and local cluster’s cluster-owner can:
+只有rancher管理员，和本地集群的集群所有者可以：
 
-- Install the Chart
-- See the navigation links for Backup and Restore CRDs
-- Perform a backup or restore by creating a Backup CR and Restore CR respectively, list backups/restores performed so far
+- 安装 Chart
+- 参阅导航链接，了解备份和恢复CRD。
+- 通过分别创建Backup CR和Restore CR来执行备份或还原，列出到目前为止已执行的备份/还原。
 
-# Backing up Rancher
+## 备份 Rancher
 
-A backup is performed by creating a Backup custom resource. For a tutorial, refer to [this page.](./back-up-rancher)
+通过创建一个Backup自定义资源来进行备份。有关教程，请参考[本页。](./back-up-rancher/_index)
 
-# Restoring Rancher
+## 恢复 Rancher
 
-A restore is performed by creating a Restore custom resource. For a tutorial, refer to [this page.](./restoring-rancher)
+通过创建Restore自定义资源来进行还原。有关教程，请参考[本页。](./restoring-rancher/_index)
 
-# Migrating Rancher to a New Cluster
+## 将Rancher迁移到新的集群
 
-A migration is performed by following [these steps.](./migrating-rancher)
+按照[这些步骤](./migrating-rancher/_index)进行迁移。
 
-# Default Storage Location Configuration
+## 配置默认存储位置
 
-Configure a storage location where all backups are saved by default. You will have the option to override this with each backup, but will be limited to using an S3-compatible or Minio object store.
+配置一个默认保存所有备份的存储位置。您可以选择对每个备份进行覆盖，但仅限于使用 S3 或 Minio 对象存储。
 
-For information on configuring these options, refer to [this page.](./configuration/storage-config)
+有关配置这些选项的信息，请参阅[本页。](./configuration/storage-config/_index)
 
-### Example values.yaml for the rancher-backup Helm Chart
+### Rancher-backup Helm Chart的values.yaml示例
 
-The example [values.yaml file](./configuration/storage-config/#example-values-yaml-for-the-rancher-backup-helm-chart) can be used to configure the `rancher-backup` operator when the Helm CLI is used to install it.
+当使用Helm CLI安装时，可以使用示例[values.yaml文件](./configuration/storage-config/_index#rancher-backup-helm-chart的valuesyaml示例)来配置`rancher-backup` operator。
