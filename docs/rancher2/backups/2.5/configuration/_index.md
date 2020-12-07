@@ -11,12 +11,8 @@ keywords:
   - rancher中国
   - rancher 2.0
   - rancher2.0 中文教程
-  - subtitles1
-  - subtitles2
-  - subtitles3
-  - subtitles4
-  - subtitles5
-  - subtitles6
+  - 备份与恢复
+  - rancher2.5
 ---
 
 - [备份配置](./back-up-config/_index)

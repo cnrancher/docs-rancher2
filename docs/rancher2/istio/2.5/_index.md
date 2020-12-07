@@ -33,7 +33,7 @@ keywords:
 - **安全**，有资源对流量和用户进行认证和授权，包括 mTLS。
 - **可观察性**，观察日志、度量和分布式流量。
 
-在[设置 istio](/docs/rancher2/cluster-admin/tools/istio/setup/_index)之后，您可以通过群集资源管理器、`kubectl`或`istioctl`来利用 Istio 的 controlplane 功能。
+在[设置 istio](/docs/rancher2/cluster-admin/tools/istio/setup/_index)之后，您可以通过集群资源管理器、`kubectl`或`istioctl`来利用 Istio 的 controlplane 功能。
 
 Rancher 集成的 Istio 带有一个全面的可视化辅助工具[Kiali](https://www.kiali.io/)。Kiali 提供了一个图表，显示了服务网状结构中的服务以及它们之间的连接方式，包括它们之间的流量速率和延迟。您可以检查服务网状结构的健康状况，或者深入查看对单个组件的传入和传出请求。
 
@@ -77,7 +77,7 @@ Istio 已经脱离了 Helm 作为安装 Istio 的方式，现在通过 istioctl 
 
 在集群中设置 Istio 后，Grafana、Prometheus 和 Kiali 可在 Rancher UI 中使用。
 
-要访问 Grafana 和 Prometheus 可视化，请从**群集资源管理器**导航到**监控**应用程序概览页，并单击**Grafana**或**Prometheus**。
+要访问 Grafana 和 Prometheus 可视化，请从**集群资源管理器**导航到**监控**应用程序概览页，并单击**Grafana**或**Prometheus**。
 
 要访问 Kiali 可视化，请从**集群资源管理器**导航到**Istio**应用程序概览页面，然后单击**Kiali**。从这里，您可以访问**流量图**选项卡或**流量指标**选项卡来查看网络可视化和指标。
 

@@ -1,6 +1,6 @@
 ---
-title: 备份存储位置配置
-description: description
+title: 配置备份存储位置
+description: 配置一个默认保存所有备份的存储位置。您可以选择对每个备份进行覆盖，但仅限于使用与 S3 兼容的对象存储。在 operator 级别只能配置一个存储位置。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -11,45 +11,32 @@ keywords:
   - rancher中国
   - rancher 2.0
   - rancher2.0 中文教程
-  - subtitles1
-  - subtitles2
-  - subtitles3
-  - subtitles4
-  - subtitles5
-  - subtitles6
+  - 备份与恢复
+  - rancher2.5
+  - 配置备份存储位置
 ---
 
-配置一个默认保存所有备份的存储位置。您可以选择对每个备份进行覆盖，但仅限于使用与 S3 兼容的对象存储。
+配置一个默认保存所有备份的存储位置。您可以选择对每个备份进行覆盖，但仅限于使用与 S3 兼容的对象存储。在 operator 级别只能配置一个存储位置。
 
-在operator级别只能配置一个存储位置。
-
-- [存储位置配置](#存储位置配置)
-  - [无默认存储位置](#无默认存储位置)
-  - [S3兼容的对象存储](#s3兼容的对象存储)
-  - [现有的 StorageClass](#现有的storageclass)
-  - [现有的持久卷](#现有的持久卷)
-- [加密](#加密)
-- [Rancher-backup Helm Chart的values.yaml示例](#rancher-backup-helm-chart的valuesyaml示例)
-
-## 存储位置配置
+## 配置存储位置
 
 ### 无默认存储位置
 
-您可以选择不配置任何operator级别存储位置。如果选择此选项，您必须配置一个与 S3 兼容的对象存储作为每个单独备份的存储位置。
+您可以选择不配置任何 operator 级别存储位置。如果选择此选项，您必须配置一个与 S3 兼容的对象存储作为每个单独备份的存储位置。
 
-### S3兼容的对象存储
+### S3 兼容的对象存储
 
-| 参数             | 说明                                                                                                                                                      |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Credential Secret     | 从 Rancher 的 secret 中选择 S3 的凭证。                                                                                                      |
+| 参数                  | 说明                                                                                                                        |
+| :-------------------- | :-------------------------------------------------------------------------------------------------------------------------- |
+| Credential Secret     | 从 Rancher 的 secret 中选择 S3 的凭证。                                                                                     |
 | Bucket Name           | 存储备份的 [S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html) 的名称。默认值：`rancherbackups`。 |
-| Region                | S3 桶所在的 [AWS 区域](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/)。                                             |
-| Folder                | 存储备份的 [S3 bucket 中的文件夹](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/using-folders.html)。                       |
-| Endpoint              | [S3 端点](https://docs.aws.amazon.com/general/latest/gr/s3.html)，例如，`s3.us-west-2.amazonaws.com`。                                              |
-| Endpoint CA           | 用于 S3 端点的 CA 证书。默认值：base64 编码的 CA 证书                                                                                         |
-| insecureTLSSkipVerify | 如果你不使用 TLS ，则设置为true。                                                                                                                            |
+| Region                | S3 桶所在的 [AWS 区域](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/)。                                |
+| Folder                | 存储备份的 [S3 bucket 中的文件夹](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/using-folders.html)。              |
+| Endpoint              | [S3 端点](https://docs.aws.amazon.com/general/latest/gr/s3.html)，例如，`s3.us-west-2.amazonaws.com`。                      |
+| Endpoint CA           | 用于 S3 端点的 CA 证书。默认值：base64 编码的 CA 证书                                                                       |
+| insecureTLSSkipVerify | 如果你不使用 TLS ，则设置为 true。                                                                                          |
 
-### 现有的StorageClass
+### 现有的 StorageClass
 
 通过选择 StorageClass 选项安装 `rancher-backup` chart，将创建一个 Persistent Volume Claim(PVC)，Kubernetes 又会动态地提供一个 Persistent Volume(PV)，所有的备份都将默认保存在这个 PV 中。
 
@@ -65,10 +52,10 @@ keywords:
 选择一个将用于存储备份的现有持久卷（PV）。有关在 Rancher 中创建 PersistentVolumes 的信息，请参阅[本节。](/docs/rancher2/cluster-admin/volumes-and-storage/attaching-existing-storage/#2-add-a-persistent-volume-that-refers-to-the-persistent-storage)
 
 :::important 重要：
-强烈建议使用回收策略为 "Retain" 的持久卷。否则，如果 `rancher-backup` chart 创建的PVC被删除（无论是在应用程序升级期间，还是意外），PV 也会被删除，这意味着所有保存在其中的备份都会被删除。
+强烈建议使用回收策略为 "Retain" 的持久卷。否则，如果 `rancher-backup` chart 创建的 PVC 被删除（无论是在应用程序升级期间，还是意外），PV 也会被删除，这意味着所有保存在其中的备份都会被删除。
 :::
 
-## Rancher-backup Helm Chart的values.yaml示例
+## Rancher-backup Helm Chart 的 values.yaml 示例
 
 当使用 Helm CLI 安装时，这个 values.yaml 文件可以用来配置 `rancher-backup` operator。
 
@@ -112,7 +99,7 @@ persistence:
 
   ## 只有某些StorageClass允许调整PV的大小；
   ##   请参考：https://kubernetes.io/blog/2018/07/12/resizing-persistent-volumes-using-kubernetes/。
-  
+
   size: 2Gi
 
 global:

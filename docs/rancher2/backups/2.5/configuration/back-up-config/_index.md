@@ -1,6 +1,6 @@
 ---
 title: 备份配置
-description: description
+description: 通过 Backup Create 页面，您可以配置计划、启用加密和指定备份的存储位置。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -11,112 +11,99 @@ keywords:
   - rancher中国
   - rancher 2.0
   - rancher2.0 中文教程
-  - subtitles1
-  - subtitles2
-  - subtitles3
-  - subtitles4
-  - subtitles5
-  - subtitles6
+  - 备份与恢复
+  - rancher2.5
+  - 备份配置
 ---
 
-通过Backup Create页面，您可以配置计划、启用加密和指定备份的存储位置。
+通过 Backup Create 页面，您可以配置计划、启用加密和指定备份的存储位置。
 
 ![How it works](/img/rancher/backup_restore/backup/backup.png)
-
-- [定时调度](#定时调度)
-- [加密](#加密)
-- [存储位置](#存储位置)
-  - [S3](#s3)
-  - [S3存储配置示例](#s3存储配置示例)
-  - [MinIO配置示例](#minio配置示例)
-  - [CredentialSecret 示例](#credentialsecret-示例)
-  - [EC2节点访问S3的IAM权限设置](#ec2节点访问s3的iam权限设置)
-- [示例](#示例)
 
 ## 定时调度
 
 选择第一个选项可执行一次性备份，或选择第二个选项可安排定期备份。选择**定期备份**可让您配置以下两个字段：
 
-- **定时调度**: 该字段接受
+- **定时调度**： 该字段接受
   - 标准 [cron 表达式](https://en.wikipedia.org/wiki/Cron), 如 `"0 * * * *"`
-  - 描述符, 如 `"@midnight"` 或 `"@every 1h30m"`
-- **备份保留数量**: 指定必须保留多少个备份文件。如果文件超过给定的 retentionCount，最旧的文件将被删除。默认值为 10。
+  - 描述符，如 `"@midnight"` 或 `"@every 1h30m"`
+- **备份保留数量**： 指定必须保留多少个备份文件。如果文件超过给定的 retentionCount，最旧的文件将被删除。默认值为 10。
 
 ![](/img/rancher/backup_restore/backup/schedule.png)
 
-| YAML指令名称 | 说明                                               |
-| ------------------- | --------------------------------------------------------- |
-| `schedule`          | 提供用于调度定期备份的 cron 字符串。 |
-| `retentionCount`    | 提供要保留的备份文件数量。        |
+| YAML 指令名称    | 说明                                 |
+| :--------------- | :----------------------------------- |
+| `schedule`       | 提供用于调度定期备份的 cron 字符串。 |
+| `retentionCount` | 提供要保留的备份文件数量。           |
 
 ## 加密
 
-rancher-backup通过调用kube-apiserver来收集资源。apiserver返回的对象会被解密，所以即使启用了[加密静止状态](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/)，备份收集的加密对象也会是明文。
+rancher-backup 通过调用 kube-apiserver 来收集资源。apiserver 返回的对象会被解密，所以即使启用了[加密静止状态](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/)，备份收集的加密对象也会是明文。
 
 为避免以明文形式存储它们，您可以使用静态加密的相同 encryptionConfig 文件，对备份中的某些资源进行加密。
 
-:::important 重要：
-你必须保存encryptionConfig文件，因为它不会被rancher-backup operator保存。执行还原时需要使用相同的加密文件。
+:::important 重要
+你必须保存 encryptionConfig 文件，因为它不会被 rancher-backup operator 保存。执行还原时需要使用相同的加密文件。
 :::
 
-Operator将这个encryptionConfig用作Kubernetes Secret，Secret必须在operator的命名空间中。Rancher在 `cattle-resources-system` 命名空间中安装了 `rancher-backup` operator，所以在该命名空间中创建这个encryptionConfig secret。
+Operator 将这个 encryptionConfig 用作 Kubernetes Secret，Secret 必须在 operator 的命名空间中。Rancher 在 `cattle-resources-system` 命名空间中安装了 `rancher-backup` operator，所以在该命名空间中创建这个 encryptionConfig secret。
 
-对于 `EncryptionConfiguration`，你可以使用[Kubernetes文档中提供的示例文件。](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#understanding-the-encryption-at-rest-configuration)
+对于 `EncryptionConfiguration`，你可以使用[Kubernetes 文档中提供的示例文件](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#understanding-the-encryption-at-rest-configuration)。
 
-要创建Secret，加密配置文件必须命名为`encryption-provider-config.yaml`，并且必须使用`--from-file`标志来创建这个secret。
+要创建 Secret，加密配置文件必须命名为`encryption-provider-config.yaml`，并且必须使用`--from-file`标志来创建这个 secret。
 
 将 `EncryptionConfiguration` 保存在名为 `encryption-provider-config.yaml` 的文件中，并运行此命令：
 
-```
+```bash
 kubectl create secret generic encryptionconfig \
   --from-file=./encryption-provider-config.yaml \
   -n cattle-resources-system
 ```
 
-这将确保secret中包含一个名为`encryption-provider-config.yaml`的密钥，operator将使用这个密钥来获取加密配置。
+这将确保 secret 中包含一个名为`encryption-provider-config.yaml`的密钥，operator 将使用这个密钥来获取加密配置。
 
-`加密配置秘钥` 下拉菜单将过滤出并仅列出那些拥有此确切密钥的secrets。
+`加密配置秘钥` 下拉菜单将过滤出并仅列出那些拥有此确切密钥的 secrets。
 
 ![](/img/rancher/backup_restore/backup/encryption.png)
 
 在上面的示例命令中，`encryptionconfig` 这个名字可以改成任何东西。
 
-| YAML指令名称          | 说明                                                                                                        |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `encryptionConfigSecretName` | 提供 `cattle-resources-system` 命名空间中包含加密配置文件的secret名称。 |
+| YAML 指令名称                | 说明                                                                      |
+| :--------------------------- | :------------------------------------------------------------------------ |
+| `encryptionConfigSecretName` | 提供 `cattle-resources-system` 命名空间中包含加密配置文件的 secret 名称。 |
 
 ## 存储位置
 
 ![storageLocation](/img/rancher/backup_restore/backup/storageLocation.png)
 
-如果在备份中指定了存储位置，operator将从特定的S3桶中检索备份位置。如果没有指定，operator将尝试在默认的operator级别的S3存储和operator级别的PVC存储中找到这个文件。默认的存储位置是在部署`rancher-backup` operator时配置的。
+如果在备份中指定了存储位置，operator 将从特定的 S3 桶中检索备份位置。如果没有指定，operator 将尝试在默认的 operator 级别的 S3 存储和 operator 级别的 PVC 存储中找到这个文件。默认的存储位置是在部署`rancher-backup` operator 时配置的。
 
-选择第一个选项可以将备份存储在安装rancher-backup chart时配置的存储位置。第二个选项可以让您配置不同的兼容s3的对象存储作为存储位置。
+选择第一个选项可以将备份存储在安装 rancher-backup chart 时配置的存储位置。第二个选项可以让您配置不同的兼容 s3 的对象存储作为存储位置。
 
 ### S3
 
-S3存储位置包含以下配置字段：
+S3 存储位置包含以下配置字段：
 
-1. **秘钥凭证** (可选)：如果你需要使用AWS Access keys 和 Secret keys访问s3桶，请使用带有密钥以及指令`accessKey`和`secretKey`的凭证创建密钥，它可以是在任何命名空间。[这里](#credentialsecret-示例)有一个示例secret。如果运行operator的节点在EC2中，并且设置了IAM权限，允许它们访问S3，则此指令是不必要的，如[本节所述.](#ec2节点访问s3的iam权限设置)
-1. **桶名称**: 存储备份文件的S3桶的名称。
-1. **区域** (可选)：S3 桶所在的AWS [region](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/)。配置 MinIO 时不需要该字段。
-1. **文件夹** (可选)：S3桶中存储备份文件的文件夹名称。
-1. **端点**: 用于访问存储桶区域中的S3的[端点](https://docs.aws.amazon.com/general/latest/gr/s3.html)。
-1. **端点 CA** （可选）：这应该是Base64编码的CA证书。有关示例，请参阅[示例S3兼容配置](#s3存储配置示例)。
-1. **跳过 TLS 验证** (可选)：如果你不使用TLS，则设置为 "true"。
+1. **秘钥凭证** (可选)：如果你需要使用 AWS Access keys 和 Secret keys 访问 s3 桶，请使用带有密钥以及指令`accessKey`和`secretKey`的凭证创建密钥，它可以是在任何命名空间。[这里](#credentialsecret-示例)有一个示例 secret。如果运行 operator 的节点在 EC2 中，并且设置了 IAM 权限，允许它们访问 S3，则此指令是不必要的，如[本节所述.](#ec2节点访问s3的iam权限设置)
+1. **桶名称**: 存储备份文件的 S3 桶的名称。
+1. **区域** (可选)：S3 桶所在的 AWS [region](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/)。配置 MinIO 时不需要该字段。
+1. **文件夹** (可选)：S3 桶中存储备份文件的文件夹名称。
+1. **端点**: 用于访问存储桶区域中的 S3 的[端点](https://docs.aws.amazon.com/general/latest/gr/s3.html)。
+1. **端点 CA** （可选）：这应该是 Base64 编码的 CA 证书。有关示例，请参阅[示例 S3 兼容配置](#s3存储配置示例)。
+1. **跳过 TLS 验证** (可选)：如果你不使用 TLS，则设置为 "true"。
 
-| YAML指令名称         | 说明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Required |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| `credentialSecretName`      | 如果你需要使用AWS Access keys Secret keys来访问s3 桶，用你的凭证与keys和指令`accessKey`和`secretKey`创建一个secret。它可以在任何命名空间中，只要你在`credentialSecretNamespace`中提供该命名空间。一个secret的例子是[这里.](#credentialsecret-示例)如果运行你的operator的节点在EC2中，并且设置了IAM权限，允许他们访问S3，这个指令是不必要的，如[本节所述.](#ec2节点访问s3的iam权限设置) |          |
-| `credentialSecretNamespace` | 包含访问S3的凭证的secret的命名空间。如果运行operator的节点在EC2中，并且设置了IAM权限，允许它们访问S3，则不需要此指令，如[本节所述。](#ec2节点访问s3的iam权限设置)                                                                                                                                                                                                                                                           |          |
-| `bucketName`                | 存储备份文件的S3桶的名称。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | ✓        |
-| `folder`                    | S3 桶中存储备份文件的文件夹名称。                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |          |
-| `region`                    | S3 桶所在的AWS[区域](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/)。                                                                                                                                                                                                                                                                                                                                                                                                                                    | ✓        |
-| `endpoint`                  | 用于访问存储桶区域中的S3的[端点](https://docs.aws.amazon.com/general/latest/gr/s3.html)。                                                                                                                                                                                                                                                                                                                                                                                                                         | ✓        |
-| `endpointCA`                | 这应该是Base64编码的CA证书。有关示例，请参阅[示例S3兼容配置。](#s3存储配置示例)                                                                                                                                                                                                                                                                                                                                                                                             |          |
-| `insecureTLSSkipVerify`     | 如果你不使用TLS，则设置为true。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |          |
+| YAML 指令名称               | 说明                                                                                                                                                                                                                                                                                                                                                                                                  | 是否必填 |
+| :-------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------- |
+| `credentialSecretName`      | 如果你需要使用 AWS Access keys Secret keys 来访问 s3 桶，用你的凭证与 keys 和指令`accessKey`和`secretKey`创建一个 secret。它可以在任何命名空间中，只要你在`credentialSecretNamespace`中提供该命名空间。一个 secret 的例子是[这里.](#credentialsecret-示例)如果运行你的 operator 的节点在 EC2 中，并且设置了 IAM 权限，允许他们访问 S3，这个指令是不必要的，如[本节所述.](#ec2节点访问s3的iam权限设置) | 否       |
+| `credentialSecretNamespace` | 包含访问 S3 的凭证的 secret 的命名空间。如果运行 operator 的节点在 EC2 中，并且设置了 IAM 权限，允许它们访问 S3，则不需要此指令，如[本节所述。](#ec2节点访问s3的iam权限设置)                                                                                                                                                                                                                          | 否       |
+| `bucketName`                | 存储备份文件的 S3 桶的名称。                                                                                                                                                                                                                                                                                                                                                                          | 是       |
+| `folder`                    | S3 桶中存储备份文件的文件夹名称。                                                                                                                                                                                                                                                                                                                                                                     | 否       |
+| `region`                    | S3 桶所在的 AWS[区域](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/)。                                                                                                                                                                                                                                                                                                           | 是       |
+| `endpoint`                  | 用于访问存储桶区域中的 S3 的[端点](https://docs.aws.amazon.com/general/latest/gr/s3.html)。                                                                                                                                                                                                                                                                                                           | 是       |
+| `endpointCA`                | 这应该是 Base64 编码的 CA 证书。有关示例，请参阅[示例 S3 兼容配置。](#s3存储配置示例)                                                                                                                                                                                                                                                                                                                 | 否       |
+| `insecureTLSSkipVerify`     | 如果你不使用 TLS，则设置为 true。                                                                                                                                                                                                                                                                                                                                                                     | 否       |
 
-### S3存储配置示例
+### S3 存储配置示例
 
 ```yaml
 s3:
@@ -128,7 +115,7 @@ s3:
   endpoint: s3.us-west-2.amazonaws.com
 ```
 
-### MinIO配置示例
+### MinIO 配置示例
 
 ```yaml
 s3:
@@ -151,15 +138,15 @@ data:
   secretKey: <Enter your secret key>
 ```
 
-### EC2节点访问S3的IAM权限设置
+### EC2 节点访问 S3 的 IAM 权限设置
 
-有两种方法可以设置`rancher-backup` operator使用S3作为备份的存储位置。
+有两种方法可以设置`rancher-backup` operator 使用 S3 作为备份的存储位置。
 
-一种方法是在Backup自定义资源中配置`credentialSecretName`，它指的是可以访问S3的AWS凭证。
+一种方法是在 Backup 自定义资源中配置`credentialSecretName`，它指的是可以访问 S3 的 AWS 凭证。
 
-如果集群节点在Amazon EC2中，也可以通过给EC2节点分配IAM权限来设置S3访问，使其可以访问S3。
+如果集群节点在 Amazon EC2 中，也可以通过给 EC2 节点分配 IAM 权限来设置 S3 访问，使其可以访问 S3。
 
-要允许节点访问S3，请按照[AWS文档](https://aws.amazon.com/premiumsupport/knowledge-center/ec2-instance-access-s3-bucket/)中的说明为EC2创建一个IAM角色。当您向角色添加自定义策略时，添加以下权限，并将 `Resource` 替换为您的桶名：
+要允许节点访问 S3，请按照[AWS 文档](https://aws.amazon.com/premiumsupport/knowledge-center/ec2-instance-access-s3-bucket/)中的说明为 EC2 创建一个 IAM 角色。当您向角色添加自定义策略时，添加以下权限，并将 `Resource` 替换为您的桶名：
 
 ```json
 {
@@ -184,8 +171,8 @@ data:
 }
 ```
 
-在创建角色并将相应的实例配置文件附加 EC2 实例后，Backup自定义资源中的`credentialSecretName`指令可以留空。
+在创建角色并将相应的实例配置文件附加 EC2 实例后，Backup 自定义资源中的`credentialSecretName`指令可以留空。
 
 ## 示例
 
-Backup自定义资源，请参考[本页面](./../../examples/_index#备份)
+Backup 自定义资源，请参考[本页面](./../../examples/_index#备份)

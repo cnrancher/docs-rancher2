@@ -25,7 +25,7 @@ _适用于 Rancher v2.5+_
 
 在本节中，您将学习如何在 Rancher 中管理 Helm 图表库和应用程序。
 
-在集群管理器中，Rancher 使用目录系统导入应用，然后使用这些 chart 部署自定义的 helm chart 应用程序或 Rancher 的工具，如监控或 Istio。现在，在群集资源管理器中，Rancher 使用了类似但简化版的同一系统。Repositories 可以以与目录相同的方式添加，但具体到当前集群。Rancher 工具作为预加载的存储库，作为独立的 helm chart 进行部署。
+在集群管理器中，Rancher 使用目录系统导入应用，然后使用这些 chart 部署自定义的 helm chart 应用程序或 Rancher 的工具，如监控或 Istio。现在，在集群资源管理器中，Rancher 使用了类似但简化版的同一系统。Repositories 可以以与目录相同的方式添加，但具体到当前集群。Rancher 工具作为预加载的存储库，作为独立的 helm chart 进行部署。
 
 ## Charts
 

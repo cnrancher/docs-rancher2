@@ -25,7 +25,7 @@ keywords:
 
 ## Rancher v2.5 之前的监控
 
-从 v2.2.0 开始，Rancher 的群集管理器允许用户在群集内独立启用监控和警报 V1（均由[Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator)提供支持）。有关如何配置 Monitoring & Alerting V1 的更多信息，请参阅[关于 Rancher v2.5 之前的监控的文档](/rancher/v2.x/en/monitoring-alerting/v2.0.x-v2.4.x)。
+从 v2.2.0 开始，Rancher 的集群管理器允许用户在集群内独立启用监控和警报 V1（均由[Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator)提供支持）。有关如何配置 Monitoring & Alerting V1 的更多信息，请参阅[关于 Rancher v2.5 之前的监控的文档](/rancher/v2.x/en/monitoring-alerting/v2.0.x-v2.4.x)。
 
 启用 Monitoring 后，Monitoring V1 会将[Prometheus](https://prometheus.io/)和[Grafana](https://grafana.com/docs/grafana/latest/getting-started/what-is-grafana/)部署到集群上，以监控集群节点、Kubernetes 组件和软件部署的进程状态，并创建自定义仪表盘，使其易于可视化收集的指标。
 
@@ -33,13 +33,13 @@ keywords:
 
 当启用 Alerts 或 Notifiers 时，Alerting V1 会将[Prometheus Alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/)和一组 Rancher 控制器部署到集群上，用户可以通过 Email、Slack、PagerDuty 等方式定义警报和配置基于警报的通知。用户可以根据需要监控的内容（如系统服务、资源、CIS 扫描等）选择创建不同类型的告警；但是，只有在启用了监控 V1 的情况下，才能创建基于 PromQL 表达式的告警。
 
-## 通过 Rancher 2.5 中的群集浏览器进行监控/报警
+## 通过 Rancher 2.5 中的集群浏览器进行监控/报警
 
-从 v2.5.0 开始，Rancher 的群集浏览器现在允许用户在群集内同时启用监控和警报 V2（均由[Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator)提供支持）。
+从 v2.5.0 开始，Rancher 的集群浏览器现在允许用户在集群内同时启用监控和警报 V2（均由[Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator)提供支持）。
 
 与 Monitoring & Alerting V1 不同的是，这两个功能都打包在一个单一的 Helm 图表中，可以在[这里](https://github.com/rancher/charts/blob/main/charts/rancher-monitoring)找到。该图表和可配置字段的行为与[kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack)、Prometheus Community Helm 图表紧密匹配，任何与上游图表的偏差都可以在与该图表一起维护的[CHANGELOG.md](https://github.com/rancher/charts/blob/main/charts/rancher-monitoring/CHANGELOG.md)中找到。
 
-监控 V2 只能在群集层面进行配置。不再支持项目级监控和警报。
+监控 V2 只能在集群层面进行配置。不再支持项目级监控和警报。
 
 有关如何配置 Monitoring & Alerting V2 的更多信息，请参阅 [本页。]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/v2.5/configuration)
 
@@ -57,9 +57,9 @@ keywords:
 
 - 移除所有集群和项目的警报和警报组
 - 删除所有通知器
-- 在群集->项目->工具->监控下禁用所有项目监控安装。
+- 在集群->项目->工具->监控下禁用所有项目监控安装。
 - 确保所有项目中的所有项目监控应用都已被删除，并且在几分钟后不再重新创建。
-- 在群集->工具->监控下禁用群集监控安装。
+- 在集群->工具->监控下禁用集群监控安装。
 - 确保系统项目中的集群监控应用和监控操作应用已经被删除，并且在几分钟后不重新创建。
 
 ### 迁移 Grafana 仪表盘
@@ -122,7 +122,7 @@ spec:
             summary: "The result of prometheus_query has been larger than 5 for 5m. Current value {{ $value }}"
 ```
 
-或通过群集浏览器添加 Prometheus 规则。
+或通过集群浏览器添加 Prometheus 规则。
 
 ![alert_2.4_to_2.5_target](/img/rancher/monitoring/migration/alert_2.4_to_2.5_target.png)
 
