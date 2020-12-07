@@ -33,7 +33,7 @@ Prometheus Operator 引入了一组自定义资源定义，允许用户通过在
 
 Prometheus Operator 会根据这些自定义资源的实时状态自动更新您的 Prometheus 配置。
 
-还有某些特殊类型的 ConfigMaps/Secrets，如对应于 Grafana Dashboards、Grafana Datasources 和 Alertmanager Configs 的 ConfigMaps/Secrets，它们将通过 sidecar 代理观察您群集内这些资源的实时状态，自动更新您的 Prometheus 配置。
+还有某些特殊类型的 ConfigMaps/Secrets，如对应于 Grafana Dashboards、Grafana Datasources 和 Alertmanager Configs 的 ConfigMaps/Secrets，它们将通过 sidecar 代理观察您集群内这些资源的实时状态，自动更新您的 Prometheus 配置。
 
 默认情况下，这些资源（由 kube-prometheus 项目策划）的一组会被部署到您的集群上，作为安装 Rancher 监控应用程序的一部分，以建立基本的监控/警报堆栈。有关如何在部署图表后配置自定义目标、警报、通知器和仪表盘的更多信息，请参阅下文。
 
@@ -43,7 +43,7 @@ Prometheus Operator 会根据这些自定义资源的实时状态自动更新您
 
 ### 配置 ServiceMonitors
 
-该 CRD 声明性地指定了应如何监控 Kubernetes 服务组。群集中任何符合 ServiceMonitor `selector`字段中标签的服务都将根据 ServiceMonitor 上指定的`endpoints`进行监控。有关可以指定哪些字段的详细信息，请查看 Prometheus Operator 提供的 [spec](https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#servicemonitor)。
+该 CRD 声明性地指定了应如何监控 Kubernetes 服务组。集群中任何符合 ServiceMonitor `selector`字段中标签的服务都将根据 ServiceMonitor 上指定的`endpoints`进行监控。有关可以指定哪些字段的详细信息，请查看 Prometheus Operator 提供的 [spec](https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#servicemonitor)。
 
 有关 ServiceMonitors 工作方式的更多信息，请参阅 [Prometheus Operator 文档](https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/user-guides/running-exporters.md)。
 

@@ -1,5 +1,5 @@
 ---
-title: title
+title: 最佳实践及使用技巧
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -11,16 +11,11 @@ keywords:
   - rancher中国
   - rancher 2.0
   - rancher2.0 中文教程
-  - subtitles1
-  - subtitles2
-  - subtitles3
-  - subtitles4
-  - subtitles5
-  - subtitles6
+  - 最佳实践及使用技巧
 ---
 
-The purpose of this section is to consolidate best practices for Rancher implementations.
+本节的目的是整合 Rancher 实施的最佳实践及使用技巧。
 
-If you are using Rancher v2.0-v2.4, refer to the Best Practices Guide [here.](./v2.0-v2.4)
+如果您使用的是 Rancher v2.0-v2.4，请参考[最佳实践指南：v2.0-v2.4](/docs/rancher2/best-practices/2.0-2.4/_index)。
 
-If you are using Rancher v2.5, refer to the Best Practices Guide [here.](./v2.5)
+如果您使用的是 Rancher v2.5，请参考[最佳实践指南：v2.5](/docs/rancher2/best-practices/2.5/_index)。

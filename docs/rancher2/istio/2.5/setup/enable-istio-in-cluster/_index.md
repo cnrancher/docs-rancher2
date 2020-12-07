@@ -1,5 +1,5 @@
 ---
-title: 在群集中启用Istio
+title: 在集群中启用Istio
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -12,7 +12,7 @@ keywords:
   - rancher 2.0
   - rancher2.0 中文教程
   - Istio
-  - 在群集中启用Istio
+  - 在集群中启用Istio
 ---
 
 ## 安装 Istio
@@ -69,7 +69,7 @@ Overlay File 将在 Istio 图表安装提供的默认安装之上添加配置。
 
 将监控限制在特定的命名空间：
 
-1. 在**群集资源管理器**中，如果已经安装了监控，请导航到**安装的应用程序**，或**应用商店**中的**Chart**。
+1. 在**集群资源管理器**中，如果已经安装了监控，请导航到**安装的应用程序**，或**应用商店**中的**Chart**。
 1. 如果开始新的安装，点击**rancher-monitoring**chart，然后在**chart 选项**中点击**以 Yaml 形式编辑**。
 1. 如果更新现有的安装，请点击**升级**，然后在**图 chart 选项**中点击**以 Yaml 形式编辑**。
 1. 设置`prometheus.prometheusSpec.ignoreNamespaceSelectors=true`。
