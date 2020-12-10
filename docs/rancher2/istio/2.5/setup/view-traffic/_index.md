@@ -1,6 +1,6 @@
 ---
 title: 查看 Istio 管理的流量
-description: description
+description: 本节介绍如何查看 Istio 管理的流量。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -11,12 +11,10 @@ keywords:
   - rancher中国
   - rancher 2.0
   - rancher2.0 中文教程
-  - subtitles1
-  - subtitles2
-  - subtitles3
-  - subtitles4
-  - subtitles5
-  - subtitles6
+  - rancher 2.5
+  - Istio
+  - 配置 Istio
+  - 查看 Istio 管理的流量
 ---
 
 ## 概述
@@ -42,4 +40,4 @@ Istio 概览页提供了一个到 Kiali 仪表盘的链接。您可以通过 Kia
 
 如果你多次刷新 BookInfo 应用程序的 URL，你应该能够在 Kiali 图上看到绿色箭头，显示 `review`服务的`v1`和`v3`的流量。图表右侧的控制面板可让您配置细节，包括最近的流量应在图形上显示多少分钟。
 
-对于其他工具和可视化，您可以从**监控** > **概览**页面进入 Grafana，和 Prometheus 仪表盘。
+对于其他工具和可视化，您可以进入**监控** > **概览**页面，查看 Grafana 和 Prometheus 仪表盘。

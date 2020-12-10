@@ -1,6 +1,6 @@
 ---
-title: Disabling Istio
-description: description
+title: 禁用Istio
+description: 本节介绍了如何在集群中卸载 Istio 以及如何在命名空间或工作负载中禁用 Istio。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -11,25 +11,24 @@ keywords:
   - rancher中国
   - rancher 2.0
   - rancher2.0 中文教程
-  - subtitles1
-  - subtitles2
-  - subtitles3
-  - subtitles4
-  - subtitles5
-  - subtitles6
+  - rancher 2.5
+  - Istio
+  - 基于角色的访问控制策略
 ---
+
+## 概述
 
 本节介绍了如何在集群中卸载 Istio 以及如何在命名空间或工作负载中禁用 Istio。
 
 ## 在集群中卸载 Istio
 
-1. 从**集群资源管理器中，**导航到**应用市场**中的**安装的应用程序**，并找到`rancher-istio`。
+1. 从**集群资源管理器**导航到**应用市场**中的**安装的应用程序**，并找到`rancher-istio`。
 1. 选择`istio-system`命名空间中的所有应用程序，并点击**删除**。
 
 **结果：**集群中的`rancher-istio`应用程序被删除。Istio sidecar 不能部署在集群的任何工作负载上。
 
 :::note 说明
-你不能再禁用和重新启用你的 Istio 安装。如果你想为将来的安装保存你的设置，请查看并保存单个 YAML，以便为将来的安装提供参考/重用。
+不能再禁用和重新启用你的 Istio 安装。如果你想为将来的安装保存你的设置，请查看并保存单个 YAML，以便为将来的安装提供参考/重用。
 :::
 
 ## 在命名空间禁用 Istio

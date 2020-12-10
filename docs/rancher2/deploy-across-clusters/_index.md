@@ -1,6 +1,6 @@
 ---
-title: Deploying Applications across Clusters
-description: description
+title: 跨集群部署应用程序概述
+description: 多集群应用程序功能用于跨集群部署应用程序
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -11,22 +11,19 @@ keywords:
   - rancher中国
   - rancher 2.0
   - rancher2.0 中文教程
-  - subtitles1
-  - subtitles2
-  - subtitles3
-  - subtitles4
-  - subtitles5
-  - subtitles6
+  - rancher 2.5
+  - 跨集群部署应用程序
+  - 概述
 ---
 
-### Fleet
+## Fleet
 
-_Available in v2.5_
+_Rancher v2.5 可用_
 
-Rancher v2.5 introduced Fleet, a new way to deploy applications across clusters.
+Rancher v2.5 引入了 Fleet，这是一种跨集群部署应用的新方式。
 
-Fleet is GitOps at scale. For more information, refer to the [Fleet section.](./fleet)
+Fleet 是规模化的 GitOps，更多信息请参考[Fleet 部分](/docs/rancher2/deploy-across-clusters/fleet/_index)。
 
-### Multi-cluster Apps
+## 多集群应用程序
 
-In Rancher prior to v2.5, the multi-cluster apps feature was used to deploy applications across clusters. Refer to the documentation [here.](./multi-cluster-apps)
+在 v2.5 之前的 Rancher 中，多集群应用程序功能用于跨集群部署应用程序。请参考文档[这里](/docs/rancher2/deploy-across-clusters/multi-cluster-apps/_index)。

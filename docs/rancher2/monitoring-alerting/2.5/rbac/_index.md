@@ -1,6 +1,6 @@
 ---
-title: RBAC
-description: description
+title: 基于角色的访问控制
+description: 本文介绍了 RBAC 在 Rancher 监控中起到的作用。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -11,12 +11,9 @@ keywords:
   - rancher中国
   - rancher 2.0
   - rancher2.0 中文教程
-  - subtitles1
-  - subtitles2
-  - subtitles3
-  - subtitles4
-  - subtitles5
-  - subtitles6
+  - rancher 2.5
+  - 监控和告警
+  - RBAC
 ---
 
 ## 概述
@@ -25,18 +22,17 @@ keywords:
 
 ## 集群管理员
 
-默认情况下，只有那些拥有 cluster-admin`ClusterRole`的人才能做到。
+集群管理员有权限进行以下操作：
 
-- 在集群上安装 "rancher-monitoring "App，并在图表部署上进行所有其他相关配置。
-  - 例如，是否创建了默认的仪表盘，在集群上部署了哪些导出器来收集指标等。
+- 在集群上安装 "rancher-monitoring "App，并在图表部署上进行所有其他相关配置。例如，是否创建了默认的仪表盘，在集群上部署了哪些导出器来收集指标等。
 - 通过 Prometheus CRs 在集群中创建/修改/删除 Prometheus 部署。
 - 通过 Alertmanager CRs 在集群中创建/修改/删除 Alertmanager 部署。
 - 通过在适当的命名空间中创建 ConfigMaps 来坚持新的 Grafana 仪表盘或数据资源。
 - 通过`cattle-monitoring-system`命名空间中的秘密，将某些 Prometheus 指标暴露给 HPA 的 K8s 自定义指标 API。
 
-## 具有基于 k8s 集群角色的权限的用户
+## 默认的 K8s ClusterRole
 
-`rancher-monitoring`图表安装了以下三个`ClusterRoles`。默认情况下，它们会聚集到相应的 k8s`ClusterRoles`中。
+`rancher-monitoring`chart 安装了以下三个`ClusterRoles`。默认情况下，它们与默认的 K8s ClusterRole 的对应关系如下表所示。
 
 | ClusterRole        | 默认的 K8s ClusterRole |
 | ------------------ | ---------------------- |
@@ -44,37 +40,35 @@ keywords:
 | `monitoring-edit`  | `edit`                 |
 | `monitoring-view`  | `view `                |
 
-这些 "群组角色 "根据可以执行的行动，提供了对监测 CRD 的不同级别的访问。
+这些`ClusterRoles`根据可以执行的行动，提供了对监测 CRD 的不同级别的访问。
 
 | CRDs (monitoring.coreos.com)                                                        | Admin            | Edit             | View             |
 | ----------------------------------------------------------------------------------- | ---------------- | ---------------- | ---------------- |
 | <ul><li>`prometheuses`</li><li>`alertmanagers`</li></ul>                            | Get, List, Watch | Get, List, Watch | Get, List, Watch |
 | <ul><li>`servicemonitors`</li><li>`podmonitors`</li><li>`prometheusrules`</li></ul> | \*               | \*               | Get, List, Watch |
 
-在高层次上，以下权限是默认分配的结果。
-
 ### 拥有 k8s admin/edit 权限的用户
 
-只有那些拥有集群-admin/admin/编辑`ClusterRole`的人才能做到。
+拥有集群管理员、`admin`或`edit`权限的用户有权限执行以下操作：
 
-- 通过 ServiceMonitor 和 PodMonitor CRs 修改 Prometheus 部署的刮擦配置。
-- 通过 PrometheusRules CRs 修改 Prometheus 部署的警报/记录规则。
+- 通过 ServiceMonitor 和 PodMonitor CRs 修改 Prometheus 部署的拉取配置。
+- 通过 PrometheusRules CRs 修改 Prometheus 部署的告警和记录规则。
 
 ### 拥有 k8s view 权限的用户
 
-只有那些有一些 k8s`ClusterRole`的人应该可以。
+拥有 k8s`view`或的用户有权限执行以下操作：
 
 - 查看部署在集群内的 Prometheuses 的配置。
 - 查看部署在集群中的警报器管理员的配置。
-- 通过 ServiceMonitor 和 PodMonitor CRs 查看 Prometheus 部署的刮擦配置。
-- 通过 PrometheusRules CRs 查看 Prometheus 部署的警报/记录规则。
+- 通过 ServiceMonitor 和 PodMonitor CRs 查看 Prometheus 部署的拉取配置。
+- 通过 PrometheusRules CRs 查看 Prometheus 部署的告警/记录规则。
 
 ## 其他角色的权限说明
 
 监测还创建了六个额外的 "角色"，这些角色不是默认分配给用户的，而是在集群内创建的。管理员应使用这些角色为用户提供更精细的访问。
 
 | 角色                       | 目的                                                                                                                                                                                                                                                  |
-| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| :------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | monitoring-config-admin    | 允许管理员给用户分配角色，使其能够查看/修改 cattle-monitoring-system 命名空间内的 Secrets 和 ConfigMaps。在这个命名空间中修改 Secrets / ConfigMaps 可以让用户改变集群的 Alertmanager 配置、Prometheus 适配器配置、额外的 Grafana 数据源、TLS 秘密等。 |
 | monitoring-config-edit     | 允许管理员给用户分配角色，使其能够查看/修改 cattle-monitoring-system 命名空间内的 Secrets 和 ConfigMaps。在这个命名空间中修改 Secrets / ConfigMaps 可以让用户改变集群的 Alertmanager 配置、Prometheus 适配器配置、额外的 Grafana 数据源、TLS 秘密等。 |
 | monitoring-config-view     | 允许管理员给用户分配角色，使其能够在 cattle-monitoring-system 命名空间内查看 Secrets 和 ConfigMaps。在这个命名空间中查看秘密/配置图可以让用户观察集群的 Alertmanager 配置、Prometheus 适配器配置、额外的 Grafana 数据源、TLS 秘密等。                 |
@@ -84,10 +78,10 @@ keywords:
 
 ## 具有基于 Rancher 集群管理器权限的用户
 
-Rancher 集群管理器部署的默认角色（即集群-所有者、集群-成员、项目-所有者、项目-成员）、默认的 k8s 角色和 rancher-监控图部署的角色之间的关系详见下表。
+Rancher 集群管理器部署的默认角色（即集群所有者、集群成员、项目所有者和项目成员）、默认的 k8s 角色和 rancher-监控图部署的角色之间的关系详见下表。
 
 | Cluster Manager Role | k8s Role      | Monitoring ClusterRole / Role | ClusterRoleBinding or RoleBinding?   |
-| -------------------- | ------------- | ----------------------------- | ------------------------------------ |
+| :------------------- | :------------ | :---------------------------- | :----------------------------------- |
 | cluster-owner        | cluster-admin | N/A                           | ClusterRoleBinding                   |
 | cluster-member       | admin         | monitoring-admin              | ClusterRoleBinding                   |
 | project-owner        | edit          | monitoring-admin              | RoleBinding within Project namespace |
@@ -95,13 +89,13 @@ Rancher 集群管理器部署的默认角色（即集群-所有者、集群-成�
 
 ### 2.5.x 中的差异
 
-在 Rancher 2.5.x 中，分配了项目成员或项目所有者角色的用户将无法访问 Prometheus 或 Grafana，因为我们只在集群级别创建 Grafana 或 Prometheus。
+Rancher 2.5.x 对项目监控进行了改造，所以在 2.5.x 中，**项目成员或项目所有者**将无法访问 Prometheus 或 Grafana，因为我们只在集群级别创建 Grafana 或 Prometheus。
 
-此外，虽然项目所有者仍然只能添加默认在其项目的命名空间内搜刮资源的 ServiceMonitors/PodMonitors，但 PrometheusRules 的范围并不限于单个命名空间/项目。因此，项目所有者在其项目命名空间内创建的任何警报规则或记录规则将适用于整个集群，尽管他们将无法查看/编辑/删除在项目命名空间之外创建的任何规则。
+此外，虽然项目所有者仍然只能添加默认在其项目的命名空间内拉取资源的 ServiceMonitors/PodMonitors，但 PrometheusRules 的范围并不限于单个命名空间/项目。因此，项目所有者在其项目命名空间内创建的任何警报规则或记录规则将适用于整个集群，尽管他们将无法查看、编辑或删除在项目命名空间之外创建的任何规则。
 
 ### 分配额外的权限
 
-如果集群管理员想为 rancher-监控图提供的角色之外的用户提供额外的管理/编辑访问权限，下表确定了潜在的影响。
+如果集群管理员想为 rancher-监控图提供的角色之外的用户提供额外的管理和编辑访问权限，下表确定了潜在的影响。
 
 | CRDs (monitoring.coreos.com)                              | 它是否会在命名空间/项目之外造成影响？                                                   | 影响                                                                                                                                                                           |
 | --------------------------------------------------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |

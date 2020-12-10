@@ -1,6 +1,6 @@
 ---
 title: 基于角色的访问控制策略（RBAC）
-description: description
+description: 本节介绍了访问 Istio 功能所需的权限。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -11,6 +11,7 @@ keywords:
   - rancher中国
   - rancher 2.0
   - rancher2.0 中文教程
+  - rancher 2.5
   - Istio
   - 基于角色的访问控制策略
 ---
@@ -21,7 +22,7 @@ keywords:
 
 ## 集群管理权限
 
-默认情况下，拥有`cluster-admin`角色的人可以执行以下操作：
+默认情况下，`cluster-admin`可以执行以下操作：
 
 - 在集群中安装 istio 应用。
 - 为 Istio 配置资源分配。
@@ -45,7 +46,7 @@ Istio 创建了三个`ClusterRoles`，并将 Istio CRD 访问权限添加到以�
 | `istio-edit`                | edit                 | 项目成员     |
 | `istio-view`                | view                 | 只读         |
 
-Rancher 将继续使用集群所有者、集群成员、项目所有者、项目成员等作为角色名称，但将利用默认角色来确定访问权限。对于每个默认的 K8s`ClusterRole`都有不同的 Istio CRD 权限和 K8s 动作（Create（C）、Get（G）、List（L）、Watch（W）、Update（U）、Patch（P）、Delete（D）、All（\*））可以执行。详情请参考下表：
+Rancher 将继续使用集群所有者、集群成员、项目所有者、项目成员等作为角色名称，但将利用默认角色来确定访问权限。对于每个默认的 K8s`ClusterRole`都有不同的 Istio CRD 权限和 K8s 操作权限（Create（C）、Get（G）、List（L）、Watch（W）、Update（U）、Patch（P）、Delete（D）、All（\*））可以执行。详情请参考下表：
 
 | CRDs                   | admin | edit | view |
 | :--------------------- | :---- | :--- | :--- |

@@ -1,6 +1,6 @@
 ---
 title: Istio
-description: description
+description: 随着微服务网络的变化和增长，微服务网络之间的交互会变得越来越难以管理。在这种情况下，使用服务网格作为一个独立的基础设施层是非常有用的。Istio 可以让你在不直接改变微服务的情况下控制微服务之间的流量。我们对 Istio 的集成设计为，Rancher 管理员或集群所有者，可以将 Istio 交付给开发人员团队。然后，开发人员可以使用 Istio 来执行安全策略，排除问题，或管理蓝绿部署、金丝雀部署或 A/B 测试。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -11,17 +11,13 @@ keywords:
   - rancher中国
   - rancher 2.0
   - rancher2.0 中文教程
-  - subtitles1
-  - subtitles2
-  - subtitles3
-  - subtitles4
-  - subtitles5
-  - subtitles6
+  - Istio
+  - rancher 2.5
 ---
 
 ## 概述
 
-[Istio](https://istio.io/)是一个开源工具，它简化了 DevOps 团队查看、保护、控制和排除复杂的微服务网络中流量的过程。
+[Istio](https://istio.io/)是一个开源工具，它简化了 DevOps 团队查看、保护、控制和排除复杂的微服务网络中流量的过程。Istio 允许您连接、保护、控制和观察服务。
 
 随着微服务网络的变化和增长，微服务网络之间的交互会变得越来越难以管理。在这种情况下，使用服务网格作为一个独立的基础设施层是非常有用的。Istio 可以让你在不直接改变微服务的情况下控制微服务之间的流量。
 
@@ -47,9 +43,9 @@ Istio 的整体架构已被简化。通过合并 Pilot、Citadel、Galley 和 si
 
 通过安装[Rancher 监控](/docs/rancher2/monitoring-alerting/_index)，或者自己安装的 Prometheus，仍然可以使用 Prometheus 集成。Rancher 的 Istio 图也会默认安装 Kiali，以确保你可以在开箱即获得微服务的全貌。
 
-Istio 已经脱离了 Helm 作为安装 Istio 的方式，现在通过 istioctl 二进制或 Istio Operator 提供安装。为了确保与 Istio 进行最简单的交互，Rancher 的 Istio 将维护一个利用 istioctl 二进制来管理您的 Istio 安装的 Helm chart。
+在 Rancher 2.5 中，安装 Istio 的方式发生了变化：Istio 已经脱离了 Helm 作为安装 Istio 的方式，现在通过 istioctl 二进制或 Istio Operator 安装 Istio。为了确保与 Istio 进行最简单的交互，Rancher 的 Istio 将维护一个利用 istioctl 二进制来管理您的 Istio 安装的 Helm chart。
 
-这个 Helm chart 将通过 UI 中的应用市场提供。有权限访问 Rancher 图表的目录的用户需要在项目中使用 Istio 之前对其进行设置。
+这个 Helm chart 将通过 UI 中的应用市场提供。有权限访问 Rancher 应用市场的用户需要在项目中使用 Istio 之前对其进行设置。
 
 ## 前提条件
 
@@ -57,7 +53,7 @@ Istio 已经脱离了 Helm 作为安装 Istio 的方式，现在通过 istioctl 
 
 ## 配置指南
 
-参考[Istio 配置指南](/docs/rancher2/cluster-admin/tools/istio/setup/_index)了解如何设置 Istio 并在项目中使用它。
+参考[Istio 配置指南](/docs/rancher2/cluster-admin/tools/istio/setup/_index)了解如何设置 Istio 并在项目中使用 Istio。
 
 ## 移除 Istio
 
@@ -65,7 +61,7 @@ Istio 已经脱离了 Helm 作为安装 Istio 的方式，现在通过 istioctl 
 
 ## 从以前的 Istio 版本迁移
 
-要在**群组资源管理器**中成功安装 Istio，您需要在**群组管理器**中禁用您现有的 Istio。
+要在**集群资源管理器**中成功安装 Istio，您需要在**集群管理器**中禁用您现有的 Istio。
 
 如果你有大量额外的 Istio CRD，你可以考虑手动迁移两个版本 Istio 都支持的 CRD。你可以通过运行`kubectl get <resource> -n istio-system -o yaml`，保存输出的 yaml 并在新版本中重新应用来实现。
 
@@ -101,8 +97,8 @@ Istio 安装了一个服务网状结构，使用[Envoy](https://www.envoyproxy.i
 
 ![在启用Istio的集群中，你可以有两个入口：默认的Nginx入口和默认的Istio控制器。](/static/img/rancher/istio-ingress.svg)
 
-通过[覆盖文件]({{<baseurl>}}/rancher/v2.x/en/istio/setup/enable-istio-in-cluster/#overlay-file)可以启用额外的 Istio Ingress 网关。
+通过[覆盖文件](/docs/rancher2/istio/2.5/setup/enable-istio-in-cluster/_index)可以启用额外的 Istio Ingress 网关。
 
 ## Egress 支持
 
-默认情况下，Egress 网关是禁用的，但可以在安装或升级时通过 `values.yaml` 或[overlay 文件]({{<baseurl>}}/rancher/v2.x/en/istio/setup/enable-istio-in-cluster/#overlay-file)启用。
+默认情况下，Egress 网关是禁用的，但可以在安装或升级时通过 `values.yaml` 或[overlay 文件](/docs/rancher2/istio/2.5/setup/enable-istio-in-cluster/_index)启用。

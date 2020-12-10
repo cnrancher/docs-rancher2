@@ -1,6 +1,6 @@
 ---
 title: 使用Istio Sidecar添加部署和服务
-description: description
+description: 在命名空间中启用 Istio 后只会对新增的工作负载自动注入 sidecar。如果要为已有的工作负载启用 sidecar，需要重新部署该工作负载。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -15,7 +15,9 @@ keywords:
   - 使用Istio Sidecar添加部署和服务
 ---
 
-**前提条件：**已在集群层级和命名空间层级安装 Istio。
+## 前提条件
+
+已在集群层级和命名空间层级安装 Istio。
 
 ## 为已有的工作负载配置 Istio sidecar
 
@@ -33,13 +35,13 @@ keywords:
 
 有几种方法可以在你的命名空间中添加新的**部署**。
 
-1. 从**集群资源管理器**中单击 "工作负载">"概述"。
+1. 从**集群资源管理器**中单击 “**工作负载 > 概述**”。
 1. 点击**创建**
 1. 从各种工作负载选项中选择**部署**。
 1. 填写表格，或**编辑为 Yaml**。
 1. 点击**创建**
 
-或者，您可以从 “workload > specific workload”中选择您要部署的特定工作负载，并从那里创建。
+或者，您可以进入 “**workload > specific workload**” ，选择您要部署的特定工作负载，并从那里创建。
 
 在您的命名空间中添加一个**服务**。
 
@@ -61,14 +63,14 @@ keywords:
 1. 从**集群资源管理器**，打开 kubectl **shell**。
 1. 运行`cat<< EOF | kubectl apply -f -`。
 1. 将以下资源复制到 shell 中
-1. 运行 "EOF"。
+1. 运行 `EOF`。
 
 这将设置 Istio 的示例 BookInfo 应用程序中的以下示例资源。
 
 `details`服务和部署：
 
 - `details` Service
-- "bookinfo-details "的 ServiceAccount。
+- `bookinfo-details` 的 ServiceAccount。
 - `details-v1`部署。
 
 评级服务和部署：

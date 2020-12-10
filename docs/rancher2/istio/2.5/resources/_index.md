@@ -11,6 +11,7 @@ keywords:
   - rancher中国
   - rancher 2.0
   - rancher2.0 中文教程
+  - rancher 2.5
   - Istio
   - 分配CPU和内存
 ---
@@ -21,7 +22,7 @@ keywords:
 
 本节描述了集群中 Istio 组件的所需的最低计算资源。每个组件的 CPU 和内存分配是[可配置的](#配置资源分配)。在启用 Istio 之前，我们建议您确认您的 Rancher 工作节点有足够的 CPU 和内存来运行 Istio 的所有组件。
 
-:::tip 提示：
+:::tip 提示
 在较大规模的部署中，强烈建议通过为每个 Istio 组件添加节点选择器，将基础设施放在集群中的专用节点上。
 :::
 
@@ -49,7 +50,7 @@ keywords:
 你可以在[Istio 官方文档](https://istio.io/)中找到更多关于 Istio 配置的信息。
 
 1. 在 Rancher **集群资源管理器**中，在**应用程序和市场**中导航到您的 Istio 安装。
-1. 点击**升级**，通过修改数值来编辑基础组件.yaml 或添加[覆盖文件](/docs/rancher2/istio/2.5/setup/enable-istio-in-cluster/_index)。
+1. 点击**升级**，通过修改数值来编辑`value.yaml` 或添加[覆盖文件](/docs/rancher2/istio/2.5/setup/enable-istio-in-cluster/_index)。
 1. 更改 CPU 或内存分配，每个组件将被调度到的节点，或节点容忍度。
 1. 点击**Upgrade**完成更改。
 
