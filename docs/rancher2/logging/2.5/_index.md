@@ -1,6 +1,6 @@
 ---
 title: Rancher v2.5 的日志功能
-description: description
+description: 本文描述了日志功能在Rancher2.5中的变化，提供了启用和卸载日志的操作指导。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -11,49 +11,44 @@ keywords:
   - rancher中国
   - rancher 2.0
   - rancher2.0 中文教程
-  - subtitles1
-  - subtitles2
-  - subtitles3
-  - subtitles4
-  - subtitles5
-  - subtitles6
+  - rancher 2.5
+  - 日志服务
+  - Rancher v2.5 的日志功能
 ---
 
-## Changes in Rancher v2.5
+## 日志优化
 
-在 Rancher v2.5 中，日志记录被引入了以下变化。
+在 Rancher v2.5 中，日志有以下变化：
 
-- Banzai Cloud Logging operator](https://banzaicloud.com/docs/one-eye/logging-operator/)现在是Rancher日志记录的动力，取代了以前的内部日志记录解决方案。
-- [Fluent Bit](https://fluentbit.io/)现在用于汇总日志。Fluentd](https://www.fluentd.org/)用于过滤消息并将其路由到输出。以前只使用Fluentd。
+- [Banzai Cloud Logging operator](https://banzaicloud.com/docs/one-eye/logging-operator/)现在是 Rancher 日志记录的动力，取代了以前的内部日志记录解决方案。
+- [Fluent Bit](https://fluentbit.io/)用于汇总日志。[Fluentd](https://www.fluentd.org/)用于过滤消息并将其路由到输出。以前只使用 Fluentd。
 - 日志记录可以用 Kubernetes 清单配置，因为现在日志记录使用的是 Kubernetes 操作符与自定义资源定义。
 - 我们现在支持过滤日志。
 - 我们现在支持将日志写入多个输出。
 - 我们现在总是收集 Control Plane 和 etcd 日志。
 
-下图来自[Banzai 文档](https://banzaicloud.com/docs/one-eye/logging-operator/#architecture)，显示了新的日志架构。
+下图来自[Banzai 文档](https://banzaicloud.com/docs/one-eye/logging-operator/#architecture)，展示了新的日志架构。
 
-<figcaption>Banzai Cloud日志Operator如何与Fluentd和Fluent Bit协作？</figcaption>
+![How the Banzai Cloud Logging Operator Works with Fluentd](/img/rancher/banzai-cloud-logging-operator.png)
 
-![How the Banzai Cloud Logging Operator Works with Fluentd]({{<baseurl>}}/img/rancher/banzai-cloud-logging-operator.png)
+## 启用日志
 
-## 为 Rancher 管理的集群启用日志记录
+您可以通过进入“应用市场”页面并安装日志应用程序，为 Rancher 管理的集群启用日志记录。
 
-您可以通过进入 "应用程序 "页面并安装日志应用程序，为 Rancher 管理的集群启用日志记录。
-
-1. 在 Rancher UI 中，进入要安装日志记录的集群，然后单击 **集群资源管理器.**。
-1. 点击**应用程序.**。
+1. 在 Rancher UI 中，进入要安装日志记录的集群，然后单击 **集群资源管理器**。
+1. 点击**应用**。
 1. 点击`rancher-logging`应用程序。
-1. 滚动到 Helm chart README 底部，点击**安装.**。
+1. 滚动到 Helm chart README 底部，点击**安装**。
 
 **结果：**日志应用部署在`cattle-logging-system`命名空间中。
 
-## 卸载记录
+## 卸载日志
 
-1. 从**群组资源管理器中，**单击\*\*应用程序和市场。
-1. 单击**安装的应用程序.**。
-1. 进入 "cattle-logging-system "命名空间，选中 "rancher-logging "和 "rancher-logging-crd "的方框。
-1. 点击**Delete.**。
-1. 确认 **Delete.** 1.
+1. 从**群组资源管理器**中，单击**应用市场**。
+1. 单击**安装的应用程序**。
+1. 进入`cattle-logging-system`命名空间，选中`rancher-logging`和`rancher-logging-crd`的方框。
+1. 点击**删除**。
+1. 确认 **删除**。
 
 **结果：** `rancher-logging`被卸载。
 
@@ -84,11 +79,11 @@ Rancher 日志记录有两个角色，`logging-admin`和`logging-view`。
 - [Flow 和 ClusterFlow](https://banzaicloud.com/docs/one-eye/logging-operator/crds/#flows-clusterflows)
 - [Output and ClusterOutput](https://banzaicloud.com/docs/one-eye/logging-operator/crds/#outputs-clusteroutputs)
 
-根据【万载云文档】(https://banzaicloud.com/docs/one-eye/logging-operator/#architecture)
+根据[banzaicloud 文档](https://banzaicloud.com/docs/one-eye/logging-operator/#architecture)
 
-> 你可以定义 "输出"（你想发送日志消息的目的地，例如 Elasticsearch 或 Amazon S3 bucket）和 "流"，使用过滤器和选择器将日志消息路由到适当的输出。你也可以定义集群范围内的输出和流，例如，使用一个集中的输出，而名字间隔的用户不能修改。
+你可以定义 "输出"（你想发送日志消息的目的地，例如 Elasticsearch 或 Amazon S3 bucket）和 "流"，使用过滤器和选择器将日志消息路由到适当的输出。你也可以定义集群范围内的输出和流，例如，使用一个集中的输出，而名字间隔的用户不能修改。
 
-##例子
+## 示例
 
 假设你想把集群中的所有日志发送到 elasticsearch 集群。
 
@@ -171,7 +166,7 @@ spec:
     protocol: http
 ```
 
-再一次，让我们给我们的输出一些日志。
+让我们给我们的输出一些日志。
 
 ```yaml
 apiVersion: logging.banzaicloud.io/v1beta1
@@ -274,10 +269,10 @@ spec:
 
 如果我们分解一下发生了什么，首先我们创建一个容器的部署，该容器有额外的 syslog 插件，并接受从另一个 fluentd 转发的日志。接下来，我们创建一个输出配置为我们的部署的转发者。然后，部署的 fluentd 会将所有日志转发到配置的 syslog 目的地。
 
-## 与污染和容忍的工作
+## 污点和容忍度
 
-"污点 "一个 Kubernetes 节点会导致 pods 排斥在该节点上运行。
-除非 pods 对该节点的污点有 "容忍"，否则它们将在集群中的其他节点上运行。
+`taint`一个 Kubernetes 节点会导致 pods 排斥在该节点上运行。
+除非 pods 对该节点的污点有`tolerance`，否则它们将在集群中的其他节点上运行。
 [污点和容忍](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)可以与`PodSpec`中的`nodeSelector`[字段](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector)一起工作，它可以实现污点的\_相反效果。
 使用`nodeSelector`使豆荚对某些节点有亲和力。
 两者都为 pod 运行的节点提供了选择。
@@ -312,11 +307,11 @@ spec:
 带有 Windows worker 的集群支持日志记录，但有一些小的注意事项。
 
 1. Windows 节点日志目前无法导出。
-2. 2. 由于[上游问题](https://github.com/banzaicloud/logging-operator/issues/592)，"tolerations "和 "nodeSelector "设置没有从 "logging-operator "中继承，"fluentd-configcheck "pod(s)将失败。
+2. 由于[上游问题](https://github.com/banzaicloud/logging-operator/issues/592)，`tolerations`和`nodeSelector`设置没有从 `logging-operator`中继承，`fluentd-configcheck` pod(s)将失败。
 
 ## 为自定义污点添加 NodeSelector 设置和容忍度
 
-如果你想添加你自己的 "节点选择器 "设置，或者如果你想为额外的污点添加 "容忍"，你可以将以下内容传递给图表的值。
+如果你想添加你自己的 "节点选择器 "设置，或者如果你想为额外的污点添加 "容忍"，你可以将以下内容传递给 chart 的值。
 
 ```yaml
 tolerations:
@@ -328,7 +323,7 @@ nodeSelector:
 这些值将把这两个设置添加到`fluentd`、`fluentbit`和`logging-operator`容器中。
 本质上，这些都是日志堆栈中所有 pods 的全局设置。
 
-但是，如果你想只为`fluentbit`容器添加容忍度，你可以在图表的值中添加以下内容。
+但是，如果你想只为`fluentbit`容器添加容忍度，你可以在 chart 的值中添加以下内容。
 
 ```yaml
 fluentbit_tolerations:

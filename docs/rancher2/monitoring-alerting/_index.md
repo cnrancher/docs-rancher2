@@ -11,12 +11,8 @@ keywords:
   - rancher中国
   - rancher 2.0
   - rancher2.0 中文教程
-  - subtitles1
-  - subtitles2
-  - subtitles3
-  - subtitles4
-  - subtitles5
-  - subtitles6
+  - rancher 2.5
+  - 监控和告警
 ---
 
 如果您使用的是 Rancher v2.5，请参考[本节](/docs/rancher2/monitoring-alerting/2.5/_index)。

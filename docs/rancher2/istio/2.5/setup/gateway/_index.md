@@ -1,6 +1,6 @@
 ---
 title: 设置Istio网关
-description: description
+description: 每个集群的网关可以有自己的端口或负载均衡器，这与服务网格无关。默认情况下，每个 Rancher 提供的集群有 1 个 NGINX 入口控制器，允许流量进入集群。无论是否已经安装了 Istio。您都可以使用 Nginx Ingress controller。如果这是您的集群的唯一网关，Istio 将能够将流量从服务路由到服务，但 Istio 将无法接收来自集群外部的流量。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -11,21 +11,19 @@ keywords:
   - rancher中国
   - rancher 2.0
   - rancher2.0 中文教程
-  - subtitles1
-  - subtitles2
-  - subtitles3
-  - subtitles4
-  - subtitles5
-  - subtitles6
+  - rancher 2.5
+  - Istio
+  - 配置 Istio
+  - 设置Istio网关
 ---
 
 ## 概述
 
-每个集群的网关可以有自己的端口或负载均衡器，这与服务网格无关。默认情况下，每个 Rancher 提供的集群有 1 个 NGINX 入口控制器，允许流量进入集群。
+每个集群的网关可以有自己的端口或负载均衡器，这与服务网格无关。默认情况下，每个 Rancher 提供的集群有 1 个 Nginx Ingress controller，允许流量进入集群。
 
-无论是否已经安装了 Istio。您都可以使用 Nginx Ingress controller。如果这是您的集群的唯一网关，Istio 将能够将流量从服务路由到服务，但 Istio 将无法接收来自集群外部的流量。
+无论是否已经安装了 Istio。您都可以使用 Nginx Ingress controller。如果这是您的集群的唯一网关，Istio 将能够将流量从集群内部的服务路由到集群内部的另一个服务，但 Istio 将无法接收来自集群外部的流量。
 
-要允许 Istio 接收外部流量，您需要启用 Istio 的网关，它作为外部流量的南北代理。当您启用 Istio 网关时，结果是您的集群将有两个 Ingresses。
+您可以启用 Istio 网关，作为外部流量的南北代理，以允许 Istio 接收外部流量。启用 Istio 网关后，您的集群会有两个 Ingress。
 
 你还需要为你的服务设置一个 Kubernetes 网关。这个 Kubernetes 资源指向 Istio 对集群的 Ingress 网关的实现。
 
@@ -48,6 +46,8 @@ keywords:
 **结果：** 已经部署网关，现在将使用应用的规则来路由流量。
 
 ## 示例
+
+### 添加 Istio 网关
 
 我们在通过工作负载示例时，在服务中添加 BookInfo 应用部署。接下来我们添加一个 Istio 网关，以便应用程序可以从您的集群外部访问。
 
@@ -75,6 +75,8 @@ spec:
 ---
 
 ```
+
+### 部署 VirtualService
 
 然后部署为网关提供流量路由的 VirtualService。
 
@@ -114,20 +116,22 @@ spec:
 
 **结果:**您已经配置了您的网关资源，使 Istio 可以接收来自集群外部的流量。
 
+### 验证资源是否存在
+
 通过运行以下命令确认资源是否存在：
 
-```shell
+```bash
 kubectl get gateway -A
 ```
 
 结果应该是这样的：
 
-```shell
+```bash
 NAME               AGE
 bookinfo-gateway   64m
 ```
 
-## 从 Web 浏览器访问 ProductPage 服务
+### 从 Web 浏览器访问 ProductPage 服务
 
 要测试并查看 BookInfo 应用是否部署正确，可以使用 Istio 控制器 IP 和端口，结合 Kubernetes 网关资源中指定的请求名称，通过 Web 浏览器查看该应用：
 
