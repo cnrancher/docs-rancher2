@@ -8,13 +8,13 @@ title: 通知和告警
 
 通知和告警是基于[Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager/)构建的，借助这些工具，Rancher 可以通知[集群所有者](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index#cluster-roles)和[项目所有者](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index#project-roles)集群内发生的事件，由他们决定如何处理触发告警的事件。
 
-收到告警信息之前，您需要在集群层级设置至少一个[通知](/docs/rancher2/cluster-admin/tools/notifiers/_index)。
+收到告警信息之前，您需要在集群层级设置至少一个[通知](/docs/rancher2/monitoring-alerting/2.0-2.4/notifiers/_index)。
 
 只有[Rancher 管理员](/docs/rancher2/admin-settings/rbac/global-permissions/_index)、[集群所有者或集群成员](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index#cluster-roles)或[项目所有者](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index#project-roles)有权限管理告警。
 
 ## 告警的作用范围
 
-Rancher 的告警可以作用于[集群层级](/docs/rancher2/cluster-admin/tools/alerts/_index)或项目层级。
+Rancher 的告警可以作用于[集群层级](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/_index)或项目层级。
 
 在项目层级，Rancher 监控特定的部署，发出的告警信息主要和以下几个方面相关：
 
@@ -32,7 +32,7 @@ Rancher 的告警可以作用于[集群层级](/docs/rancher2/cluster-admin/tool
 | Less than half workload available | 工作负载的键值对是 `app` 和 `workload`时，如果只有少于一半的工作负载可以使用，Rancher 会触发这条重要的告警。                           |
 | Memory usage close to the quota   | 如果工作负载占用的内存超过了工作负载的内存资源配额，会触发这条告警。您可以从 Rancher UI 中的**安全和主机配置**查看工作负载的内存限制。 |
 
-除了上述的默认告警以外，Rancher 还有其他的默认告警，详情请参考[集群监控的默认告警](/docs/rancher2/cluster-admin/tools/alerts/default-alerts/_index)。
+除了上述的默认告警以外，Rancher 还有其他的默认告警，详情请参考[集群监控的默认告警](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/default-alerts/_index)。
 
 ## 添加项目告警组
 
@@ -167,7 +167,7 @@ _v2.2.4 或更新版本可用_
 
 1.  （可选）添加其他**告警规则** 到这个告警组内。
 
-1.  返回告警组页面，单击 **... > 升级** ，进入编辑告警组页面，在页面最下方**告警 到**旁边的文本框中选择发送告警消息的[方式](/docs/rancher2/cluster-admin/tools/notifiers/_index)，和告警消息的收件人。您可以选择多种方式发送告警信息， 也可以随时修改收件人的名单。
+1.  返回告警组页面，单击 **... > 升级** ，进入编辑告警组页面，在页面最下方**告警 到**旁边的文本框中选择发送告警消息的[方式](/docs/rancher2/monitoring-alerting/2.0-2.4/notifiers/_index)，和告警消息的收件人。您可以选择多种方式发送告警信息， 也可以随时修改收件人的名单。
 
 **结果：** 完成告警和告警信息的配置。触发告警时，告警信息会通过您指定的方式发送给指定的收件人。
 

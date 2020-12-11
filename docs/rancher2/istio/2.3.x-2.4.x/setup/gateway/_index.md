@@ -1,45 +1,58 @@
 ---
-title: 5. Set up the Istio Gateway
-weight: 5
-aliases:
-  - /rancher/v2.x/en/cluster-admin/tools/istio/setup/gateway
-  - /rancher/v2.x/en/istio/legacy/setup/gateway
+title: 5、设置 Istio 网关
+description: 每个集群的网关可以拥有自己的端口或负载均衡器，与服务网格无关。默认情况下，每个 Rancher 配置的集群都有一个 NGINX Ingress 控制器，允许流量进入集群。您可以在安装或不安装 Istio 的情况下使用 NGINX Ingress 控制器。如果这是集群的唯一网关，则 Istio 将能够在服务之间路由通信，但是 Istio 将无法从集群外部接收通信。要允许 Istio 接收外部流量，您需要启用 Istio 的网关，该网关充当外部流量的南北代理。当您启用 Istio 网关时，结果是您的集群将有两个入口。您还需要为您的服务设置一个 Kubernetes 网关。这一 Kubernetes 资源指向 Istio 对集群的入口网关的实现。您可以使用负载均衡器或者 Istio 的 NodePort 网关将流量路由到服务网格中。本节介绍如何设置 NodePort 网关。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 集群管理员指南
+  - 集群访问控制
+  - 告警
+  - Istio
+  - Istio使用指南
+  - 设置 Istio 网关
 ---
 
-The gateway to each cluster can have its own port or load balancer, which is unrelated to a service mesh. By default, each Rancher-provisioned cluster has one NGINX ingress controller allowing traffic into the cluster. 
+每个集群的网关可以拥有自己的端口或负载均衡器，与服务网格无关。默认情况下，每个 Rancher 配置的集群都有一个 NGINX Ingress 控制器，允许流量进入集群。
 
-You can use the NGINX ingress controller with or without Istio installed. If this is the only gateway to your cluster, Istio will be able to route traffic from service to service, but Istio will not be able to receive traffic from outside the cluster.
+您可以在安装或不安装 Istio 的情况下使用 NGINX Ingress 控制器。如果这是集群的唯一网关，则 Istio 将能够在服务之间路由通信，但是 Istio 将无法从集群外部接收通信。
 
-To allow Istio to receive external traffic, you need to enable Istio's gateway, which works as a north-south proxy for external traffic. When you enable the Istio gateway, the result is that your cluster will have two ingresses.
+要允许 Istio 接收外部流量，您需要启用 Istio 的网关，该网关充当外部流量的南北代理。当您启用 Istio 网关时，结果是您的集群将有两个入口。
 
-You will also need to set up a Kubernetes gateway for your services. This Kubernetes resource points to Istio's implementation of the ingress gateway to the cluster.
+您还需要为您的服务设置一个 Kubernetes 网关。这一 Kubernetes 资源指向 Istio 对集群的入口网关的实现。
 
-You can route traffic into the service mesh with a load balancer or just Istio's NodePort gateway. This section describes how to set up the NodePort gateway.
+您可以使用负载均衡器或者 Istio 的 NodePort 网关将流量路由到服务网格中。本节介绍如何设置 NodePort 网关。
 
-For more information on the Istio gateway, refer to the [Istio documentation.](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) 
+有关 Istio 网关的更多信息，请参阅[Istio 文档](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/)。
 
-![In an Istio-enabled cluster, you can have two ingresses: the default Nginx ingress, and the default Istio controller.]({{<baseurl>}}/img/rancher/istio-ingress.svg)
+![在启用Istio的集群中，您可以有两个入口：默认的Nginx Ingress和默认的Istio控制器](/img/rancher/istio-ingress.svg)。
 
-# Enable the Istio Gateway
+## 启用 Istio 网关
 
-The ingress gateway is a Kubernetes service that will be deployed in your cluster. There is only one Istio gateway per cluster.
+Ingress 网关是将在您的集群中部署的 Kubernetes 服务。每个集群只有一个 Istio 网关。
 
-1. Go to the cluster where you want to allow outside traffic into Istio.
-1. Click **Tools > Istio.**
-1. Expand the **Ingress Gateway** section.
-1. Under **Enable Ingress Gateway,** click **True.** The default type of service for the Istio gateway is NodePort. You can also configure it as a [load balancer.]({{<baseurl>}}/rancher/v2.x/en/k8s-in-rancher/load-balancers-and-ingress/load-balancers/)
-1. Optionally, configure the ports, service types, node selectors and tolerations, and resource requests and limits for this service. The default resource requests for CPU and memory are the minimum recommended resources.
-1. Click **Save.**
+1. 转到要允许外部流量进入 Istio 的集群。
+1. 单击**工具 > Istio**。
+1. 展开**Ingress 网关**部分。
+1. 在**启用 Ingress 网关**部分，单击**是**。Istio 网关的默认服务类型是 NodePort。您也可以将其配置为[负载均衡器](/docs/rancher2/k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index)。
+1. （可选）配置该服务的端口，服务类型，节点选择器和容忍以及资源请求和限制。建议的最低资源是对 CPU 和内存的默认资源请求。
+1. 单击**保存**。
 
-**Result:** The gateway is deployed, which allows Istio to receive traffic from outside the cluster.
+**结果：** 部署了网关， Istio 可以从集群外部接收流量。
 
-# Add a Kubernetes Gateway that Points to the Istio Gateway
+## 添加一个指向 Istio 网关的 Kubernetes 网关
 
-To allow traffic to reach Ingress, you will also need to provide a Kubernetes gateway resource in your YAML that points to Istio's implementation of the ingress gateway to the cluster.
+为了允许流量到达 Ingress，您还需要在 YAML 中提供一个 Kubernetes 网关资源，该资源指向 Istio 对集群的 Ingress 网关的实现。
 
-1. Go to the namespace where you want to deploy the Kubernetes gateway and click **Import YAML.**
-1. Upload the gateway YAML as a file or paste it into the form. An example gateway YAML is provided below.
-1.  Click **Import.**
+1. 转到要在其中部署 Kubernetes 网关的命名空间，然后单击**导入 YAML**。
+1. 将网关 YAML 作为文件上传或粘贴到表单中。下面提供了示例网关 YAML。
+1. 单击**导入**。
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -63,71 +76,75 @@ metadata:
   name: bookinfo
 spec:
   hosts:
-  - "*"
+    - "*"
   gateways:
-  - bookinfo-gateway
+    - bookinfo-gateway
   http:
-  - match:
-    - uri:
-        exact: /productpage
-    - uri:
-        prefix: /static
-    - uri:
-        exact: /login
-    - uri:
-        exact: /logout
-    - uri:
-        prefix: /api/v1/products
-    route:
-    - destination:
-        host: productpage
-        port:
-          number: 9080
+    - match:
+        - uri:
+            exact: /productpage
+        - uri:
+            prefix: /static
+        - uri:
+            exact: /login
+        - uri:
+            exact: /logout
+        - uri:
+            prefix: /api/v1/products
+      route:
+        - destination:
+            host: productpage
+            port:
+              number: 9080
 ```
 
-**Result:** You have configured your gateway resource so that Istio can receive traffic from outside the cluster.
+**结果：** 您已经配置了网关资源，以便 Istio 可以从集群外部接收流量。
 
-Confirm that the resource exists by running:
+通过运行以下命令确认资源是否存在：
+
 ```
 kubectl get gateway -A
 ```
 
-The result should be something like this:
+预期的结果是输出与下方类似的信息：
+
 ```
 NAME               AGE
 bookinfo-gateway   64m
 ```
 
-### Access the ProductPage Service from a Web Browser
+## 从 Web 浏览器访问 ProductPage 服务
 
-To test and see if the BookInfo app deployed correctly, the app can be viewed a web browser using the Istio controller IP and port, combined with the request name specified in your Kubernetes gateway resource:
+要测试并查看 BookInfo 应用程序是否正确部署，可以使用 Istio 控制器 IP 和端口以及您的 Kubernetes 网关资源中指定的请求名称，在 Web 浏览器中查看该应用程序：
 
 `http://<IP of Istio controller>:<Port of istio controller>/productpage`
 
-To get the ingress gateway URL and port,
+要获取入口网关的 URL 和端口，
 
-1. Go to the `System` project in your cluster.
-1. Within the `System` project, go to `Resources` > `Workloads` then scroll down to the `istio-system` namespace. 
-1. Within `istio-system`, there is a workload named `istio-ingressgateway`. Under the name of this workload, you should see links, such as `80/tcp`.
-1. Click one of those links. This should show you the URL of the ingress gateway in your web browser. Append `/productpage` to the URL.
+1. 转到集群中的`系统`项目。
+1. 在`系统`项目中，转到`资源` > `工作负载`，然后向下滚动到`istio-system`命名空间。
+1. 在`istio-system`内，有一个名为`istio-ingressgateway`的工作负载。在此工作负载的名称下，您应该看到像`80/tcp`这样的链接。
+1. 单击这些链接之一。这将在您的 Web 浏览器中显示入口网关的 URL。将`/productpage`附加到 URL。
 
-**Result:** You should see the BookInfo app in the web browser.
+**结果：** 您应该在 Web 浏览器中看到 BookInfo 应用。
 
-For help inspecting the Istio controller URL and ports, try the commands the [Istio documentation.](https://istio.io/docs/tasks/traffic-management/ingress/ingress-control/#determining-the-ingress-ip-and-ports)
+关于如何获取 Istio 控制器的 URL 和端口，请参阅[Istio 文档](https://istio.io/docs/tasks/traffic-management/ingress/ingress-control/#determining-the-ingress-ip-and-ports)中的指令。
 
-# Troubleshooting
+## 故障排查
 
-The [official Istio documentation](https://istio.io/docs/tasks/traffic-management/ingress/ingress-control/#troubleshooting) suggests `kubectl` commands to inspect the correct ingress host and ingress port for external requests.
+[Istio 官方文档](https://istio.io/docs/tasks/traffic-management/ingress/ingress-control/#troubleshooting)建议使用`kubectl`命令检查正确的入口主机和入口端口是否有外部请求。
 
-### Confirming that the Kubernetes Gateway Matches Istio's Ingress Controller
+## 确认 Kubernetes 网关与 Istio 的 Ingress 控制器匹配
 
-You can try the steps in this section to make sure the Kubernetes gateway is configured properly.
+您可以尝试执行本节中的步骤，以确保正确配置 Kubernetes 网关。
 
-In the gateway resource, the selector refers to Istio's default ingress controller by its label, in which the key of the label is `istio` and the value is `ingressgateway`.  To make sure the label is appropriate for the gateway, do the following:
+在网关资源中，选择器通过其标签引用 Istio 的默认 Ingress 控制器，其中标签的键为`istio`，值为`ingressgateway`。为确保标签适用于网关，请执行以下操作：
 
-1. Go to the `System` project in your cluster.
-1. Within the `System` project, go to the namespace `istio-system`. 
-1. Within `istio-system`, there is a workload named `istio-ingressgateway`.
-1. Click the name of this workload and go to the **Labels and Annotations** section. You should see that it has the key `istio` and the value `ingressgateway`. This confirms that the selector in the Gateway resource matches Istio's default ingress controller.
+1. 转到集群中的`系统`项目。
+1. 在`系统`项目中，转到命名空间`istio-system`。
+1. 在`istio-system`命名空间中，找到一个名为`istio-ingressgateway`的工作负载。
+1. 单击此工作负载的名称，然后转到**标签/注释**部分。您应该看到它具有键`istio`和值`ingressgateway`。这确认网关资源中的选择器与 Istio 的默认 Ingress 控制器匹配。
 
-### [Next: Set up Istio's Components for Traffic Management]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/setup/set-up-traffic-management)
+## 后续操作
+
+[设置 Istio 的流量管理组件](/docs/rancher2/istio/2.3.x-2.4.x/setup/set-up-traffic-management/_index)

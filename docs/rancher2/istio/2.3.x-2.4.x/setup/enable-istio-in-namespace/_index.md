@@ -1,51 +1,63 @@
 ---
-title: 2. Enable Istio in a Namespace
-weight: 2
-aliases:
-  - /rancher/v2.x/en/cluster-admin/tools/istio/setup/enable-istio-in-namespace
-  - /rancher/v2.x/en/istio/legacy/setup/enable-istio-in-namespace
+title: 2、在命名空间中启用 Istio
+description: 对于想要交由 Istio 跟踪或控制的命名空间,您需要在每个命名空间手动启用 Istio。在命名空间中启用 Istio 时，Envoy sidecar 代理将自动注入到该命名空间中部署的所有新工作负载中。这一命名空间设置只会影响命名空间中的新工作负载。所有先前存在的工作负载需要重新部署，以利用 Sidecar 自动注入功能。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 集群管理员指南
+  - 集群访问控制
+  - 告警
+  - Istio
+  - Istio使用指南
+  - 在命名空间中启用 Istio
 ---
 
-You will need to manually enable Istio in each namespace that you want to be tracked or controlled by Istio. When Istio is enabled in a namespace, the Envoy sidecar proxy will be automatically injected into all new workloads that are deployed in the namespace.
+对于想要交由 Istio 跟踪或控制的命名空间,您需要在每个命名空间手动启用 Istio。在命名空间中启用 Istio 时，Envoy sidecar 代理将自动注入到该命名空间中部署的所有新工作负载中。
 
-This namespace setting will only affect new workloads in the namespace. Any preexisting workloads will need to be re-deployed to leverage the sidecar auto injection.
+这一命名空间设置会影响命名空间中的新工作负载，所有先前存在的工作负载需要重新部署，以利用 Sidecar 自动注入功能。
 
-> **Prerequisite:** To enable Istio in a namespace, the cluster must have Istio enabled.  
+> **先决条件:** 要在命名空间中启用 Istio，集群必须启用 Istio。
 
-1. In the Rancher UI, go to the cluster view. Click the **Projects/Namespaces** tab.
-1. Go to the namespace where you want to enable the Istio sidecar auto injection and click the **&#8942;.**
-1. Click **Edit.**
-1. In the **Istio sidecar auto injection** section, click **Enable.**
-1. Click **Save.**
+1. 在 Rancher UI 中，转到集群视图。单击**项目/命名空间**标签页。
+1. 找到要启用 Istio sidecar 自动注入的命名空间，然后单击**省略号 (...)**。
+1. 单击**编辑**。
+1. 在**Istio sidecar 自动注入**部分，单击**启用**。
+1. 单击**保存**。
 
-**Result:** The namespace now has the label `istio-injection=enabled`. All new workloads deployed in this namespace will have the Istio sidecar injected by default.
+**结果：** 现在，该命名空间带上了`istio-injection = enabled`标签。默认情况下，在此命名空间中部署的所有新工作负载都将注入 Istio sidecar。
 
-### Verifying that Automatic Istio Sidecar Injection is Enabled
+## 验证是否启用了 Istio Sidecar 的自动注入
 
-To verify that Istio is enabled, deploy a hello-world workload in the namespace. Go to the workload and click the pod name. In the **Containers** section, you should see the `istio-proxy` container.
+要验证是否启用了 Istio，请在命名空间中部署 hello-world 工作负载。找到该工作负载，然后单击 Pod 名称。在**容器**部分，您应该看到`istio-proxy`容器。
 
-### Excluding Workloads from Being Injected with the Istio Sidecar
+## 避免 Istio sidecar 自动注入到某些工作负载
 
-If you need to exclude a workload from getting injected with the Istio sidecar, use the following annotation on the workload:
+如果您需要避免 Istio sidecar 自动注入到某个工作负载，请在该工作负载上添加如下注释（annotation）：
 
 ```
-sidecar.istio.io/inject: “false”
+sidecar.istio.io/inject: "false"
 ```
 
-To add the annotation to a workload,
+1. 从**全局**视图中，打开工作负载所在的项目。
+1. 单击**资源 > 工作负载**。
+1. 找到不应该有 sidecar 注入的工作负载，单击**省略号 (...) > 编辑**。
+1. 单击**显示高级选项**，然后展开**标签/注释**部分。
+1. 单击**添加注释**。
+1. 在**键**文本框，填入`sidecar.istio.io/inject`。
+1. 在**值**文本框，填入`false`。
+1. 单击**保存**。
 
-1. From the **Global** view, open the project that has the workload that should not have the sidecar.
-1. Click **Resources > Workloads.**
-1. Go to the workload that should not have the sidecar and click **&#8942; > Edit.**
-1. Click **Show Advanced Options.** Then expand the **Labels & Annotations** section.
-1. Click **Add Annotation.**
-1. In the **Key** field, enter `sidecar.istio.io/inject`.
-1. In the **Value** field, enter `false`.
-1. Click **Save.**
+**结果：** Istio sidecar 不会被注入到该工作负载中。
 
-**Result:** The Istio sidecar will not be injected into the workload.
+> **说明：** 如果您启用了 Istio，而且部署了 Job 之后，Job 的状态一直没有变更为**Completed**，您需要参考[这些步骤](/docs/rancher2/istio/2.3.x-2.4.x/setup/enable-istio-in-namespace/_index)手动添加 annotation。因为 Istio Sidecarh 会无休止地运行，即使 Job 的任务完成了，它的状态也不能被视为**Completed**。上述步骤是在短期内处理这个问题的方法，它禁止了 Istio 和添加了 annotation 的 Pod 之间的通信。如果您使用了这种方式解决这个问题，这个 Job 就没有权限访问 service mesh，不能够用于集成测试。
 
-> **NOTE:** If you are having issues with a Job you deployed not completing, you will need to add this annotation to your pod using the provided steps. Since Istio Sidecars run indefinitely, a Job cannot be considered complete even after its task has completed. 
+## 后续操作
 
-
-### [Next: Select the Nodes ]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/setup/node-selectors)
+[选择部署 Istio 组件的节点](/docs/rancher2/istio/2.3.x-2.4.x/setup/node-selectors/_index)

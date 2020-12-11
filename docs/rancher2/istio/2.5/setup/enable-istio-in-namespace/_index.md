@@ -59,4 +59,4 @@ sidecar.istio.io/inject: “false”
 
 ## 后续步骤
 
-[选择节点](/docs/rancher2/cluster-admin/tools/istio/setup/node-selectors/_index)
+[选择节点](/docs/rancher2/istio/2.3.x-2.4.x/setup/node-selectors/_index)

@@ -843,8 +843,6 @@ module.exports = {
 
         监控和告警: [
             "rancher2/monitoring-alerting/_index",
-            // not ready yet
-            /*
             {
                 type: "category",
                 label: "2.0-2.4",
@@ -852,22 +850,24 @@ module.exports = {
                     "rancher2/monitoring-alerting/2.0-2.4/_index",
                     {
                         type: "category",
-                        label: "cluster alerts",
+                        label: "集群告警",
                         items: [
                             "rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/_index",
                             "rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/default-alerts/_index",
-                            "rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/_index",
+                            //need traslations
+                            //"rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/project-alerts/_index",
                         ],
                     },
                     {
                         type: "category",
-                        label: "cluster monitoring",
+                        label: "集群监控",
                         items: [
                             "rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/_index",
                             "rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/cluster-metrics/_index",
                             "rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/custom-metrics/_index",
                             "rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/expression/_index",
-                            "rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/project-monitoring/_index",
+                            //need traslations
+                            //"rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/project-monitoring/_index",
                             "rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/prometheus/_index",
                             "rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/viewing-metrics/_index",
                         ],
@@ -875,7 +875,6 @@ module.exports = {
                     "rancher2/monitoring-alerting/2.0-2.4/notifiers/_index",
                 ],
             },
-*/
             {
                 type: "category",
                 label: "2.5",
@@ -887,10 +886,66 @@ module.exports = {
                 ],
             },
         ],
-        //TODO: remove comment after translation of 2.5 docs is done, it possibly needs to readjust its position in sidebar
-        /*
-        istio:[],
-        */
+        Istio: [
+            "rancher2/istio/_index",
+            {
+                type: "category",
+                label: "2.3.x-2.4.x",
+                items: [
+                    "rancher2/istio/2.3.x-2.4.x/release-notes/_index",
+                    "rancher2/istio/2.3.x-2.4.x/_index",
+                    "rancher2/istio/2.3.x-2.4.x/resources/_index",
+                    {
+                        type: "category",
+                        label: "Istio指南",
+                        items: [
+                            "rancher2/istio/2.3.x-2.4.x/setup/_index",
+                            {
+                                type: "category",
+                                label: "1、在集群中启用istio",
+                                items: [
+                                    "rancher2/istio/2.3.x-2.4.x/setup/enable-istio-in-cluster/_index",
+                                    "rancher2/istio/2.3.x-2.4.x/setup/enable-istio-in-cluster/enable-istio-with-psp/_index",
+                                ],
+                            },
+                            "rancher2/istio/2.3.x-2.4.x/setup/enable-istio-in-namespace/_index",
+                            "rancher2/istio/2.3.x-2.4.x/setup/node-selectors/_index",
+                            "rancher2/istio/2.3.x-2.4.x/setup/deploy-workloads/_index",
+                            "rancher2/istio/2.3.x-2.4.x/setup/gateway/_index",
+                            "rancher2/istio/2.3.x-2.4.x/setup/set-up-traffic-management/_index",
+                            "rancher2/istio/2.3.x-2.4.x/setup/view-traffic/_index",
+                        ],
+                    },
+                    "rancher2/istio/2.3.x-2.4.x/disabling-istio/_index",
+                    "rancher2/istio/2.3.x-2.4.x/rbac/_index",
+                ],
+            },
+
+            {
+                type: "category",
+                label: "2.5",
+                items: [
+                    "rancher2/istio/2.5/release-notes/_index",
+                    "rancher2/istio/2.5/_index",
+                    "rancher2/istio/2.5/resources/_index",
+                    {
+                        type: "category",
+                        label: "Istio指南",
+                        items: [
+                            "rancher2/istio/2.5/setup/_index",
+                            "rancher2/istio/2.5/setup/enable-istio-in-cluster/_index",
+                            "rancher2/istio/2.5/setup/enable-istio-in-namespace/_index",
+                            "rancher2/istio/2.5/setup/deploy-workloads/_index",
+                            "rancher2/istio/2.5/setup/gateway/_index",
+                            "rancher2/istio/2.5/setup/set-up-traffic-management/_index",
+                            "rancher2/istio/2.5/setup/view-traffic/_index",
+                        ],
+                    },
+                    "rancher2/istio/2.5/rbac/_index",
+                    "rancher2/istio/2.5/disabling-istio/_index",
+                ],
+            },
+        ],
         //TODO: remove comment after translation of 2.5 docs is done, it possibly needs to readjust its position in sidebar
         /*
         logging:[

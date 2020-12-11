@@ -1,5 +1,5 @@
 ---
-title: 禁用Istio
+title: 停用Istio
 description: 本节介绍了如何在集群中卸载 Istio 以及如何在命名空间或工作负载中禁用 Istio。
 keywords:
   - rancher 2.0中文文档

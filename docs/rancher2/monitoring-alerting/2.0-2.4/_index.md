@@ -1,15 +1,13 @@
 ---
-title: Monitoring in Rancher v2.0-v2.4
+title: v2.0-v2.4
 shortTitle: Rancher v2.0-v2.4
 weight: 2
 ---
 
-This section contains documentation related to the monitoring features available in Rancher prior to v2.5.
+本节包含与 Rancher v2.5 之前的监控功能相关的文档。
 
-
-
-- [Cluster Monitoring](./cluster-monitoring)
-  - [Project Monitoring](./cluster-monitoring/project-monitoring)
-- [Cluster Alerts](./cluster-alerts)
-  - [Project Alerts](./cluster-alerts/project-alerts)
-- [Notifiers](./notifiers)
+- [群集监控](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/_index)
+- [项目监控](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/project-monitoring/_index)
+- [集群告警](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/project-alerts/_index)
+- [项目告警](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/project-alerts/_index)
+- [通知](/docs/rancher2/monitoring-alerting/2.0-2.4/notifiers/_index)

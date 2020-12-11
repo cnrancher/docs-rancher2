@@ -17,7 +17,7 @@ keywords:
   - Prometheus 表达式
 ---
 
-此文档中的 PromQL 表达式可用于配置[告警](/docs/rancher2/cluster-admin/tools/alerts/_index)。
+此文档中的 PromQL 表达式可用于配置[告警](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/_index)。
 
 > 在将表达式用于告警之前，必须启用监控。有关更多信息，请参阅有关在[集群级别](/docs/rancher2/cluster-admin/tools/monitoring/_index)或[项目级别](/docs/rancher2/project-admin/tools/monitoring/_index)启用监控的文档。
 
