@@ -12,6 +12,7 @@ keywords:
   - rancher 2.0
   - rancher2.0 中文教程
   - CIS 扫描
+  - rancher 2.5
 ---
 
 Rancher 可以运行安全扫描，检查 Kubernetes 是否按照 CIS Kubernetes 基准中定义的安全最佳实践进行部署。
