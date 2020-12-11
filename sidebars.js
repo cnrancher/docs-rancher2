@@ -815,17 +815,11 @@ module.exports = {
             "rancher2/faq/etcd/_index",
             "rancher2/faq/install/_index",
         ],
-
-        //TODO: remove comment after translation of 2.5 docs is done, it possibly needs to readjust its position in sidebar
-
         跨集群部署: [
             "rancher2/deploy-across-clusters/_index",
             "rancher2/deploy-across-clusters/fleet/_index",
-            //"rancher2/deploy-across-clusters/multi-cluster-apps/_index",
+            "rancher2/deploy-across-clusters/multi-cluster-apps/_index",
         ],
-
-        //TODO: remove comment after translation of 2.5 docs is done, it possibly needs to readjust its position in sidebar
-
         HelmChart: [
             "rancher2/helm-charts/legacy-catalogs/_index",
             "rancher2/helm-charts/app-marketplace/_index",
