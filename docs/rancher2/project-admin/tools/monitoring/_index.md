@@ -45,7 +45,7 @@ Prometheus 监控可以应用于 Rancher [集群层级](/docs/rancher2/cluster-a
 | Prometheus | 750m         | 750Mi        | 1000m        | 1000Mi   | 是           |
 | Grafana    | 100m         | 100Mi        | 200m         | 200Mi    | 否           |
 
-**结果：**完成监控资源配置以后，Rancher 会把一个叫做`project-monitoring`的项目层级监控，以[应用商店应用](/docs/rancher2/catalog/launching-apps/_index)的形式添加到了项目中。当这个应用的状态变成了`active` ，您可以通过 [Rancher UI](/docs/rancher2/cluster-admin/tools/monitoring/_index#rancher-dashboard) 查看项目的监控指标，或者直接从[Grafana](/docs/rancher2/cluster-admin/tools/monitoring/_index#grafana)查看项目的监控指标。
+**结果：**完成监控资源配置以后，Rancher 会把一个叫做`project-monitoring`的项目层级监控，以[应用商店应用](/docs/rancher2/helm-charts/legacy-catalogs/launching-apps/_index)的形式添加到了项目中。当这个应用的状态变成了`active` ，您可以通过 [Rancher UI](/docs/rancher2/cluster-admin/tools/monitoring/_index#rancher-dashboard) 查看项目的监控指标，或者直接从[Grafana](/docs/rancher2/cluster-admin/tools/monitoring/_index#grafana)查看项目的监控指标。
 
 > Grafana 实例的默认用户名和密码为 "admin/admin"。然而，Grafana 仪表板是通过 Rancher 认证代理提供服务的，因此只有当前通过认证进入 Rancher 服务器的用户才能访问 Grafana 仪表板。
 

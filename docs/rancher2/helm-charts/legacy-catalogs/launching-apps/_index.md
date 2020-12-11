@@ -1,104 +1,93 @@
 ---
-title: Launching Catalog Apps
-weight: 700
-aliases:
-  - /rancher/v2.x/en/catalog/launching-apps
+title: 部署项目级别应用
+description: 在项目层级内部署应用商店应用时，显示的可用应用列表是由商店作用范围决定的。如果您的应用使用Ingress，则可以通过设置全局将主机名编程到外部 DNS。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 应用商店
+  - 部署项目级别应用
 ---
 
-Within a project, when you want to deploy applications from catalogs, the applications available in your project will be based on the [scope of the catalogs]({{<baseurl>}}/rancher/v2.x/en/catalog/#catalog-scope).
+在项目层级内部署应用商店应用时，显示的可用应用列表是由[商店作用范围](/docs/rancher2/helm-charts/legacy-catalogs/_index)决定的。
 
-If your application is using ingresses, you can program the ingress hostname to an external DNS by setting up a [Global DNS entry]({{<baseurl>}}/rancher/v2.x/en/catalog/globaldns/).
+如果您的应用使用 Ingress，则可以通过设置[全局 DNS](/docs/rancher2/helm-charts/legacy-catalogs/globaldns/_index) 将主机名编程到外部 DNS。
 
-- [Prerequisites](#prerequisites)
-- [Launching a catalog app](#launching-a-catalog-app)
-- [Configuration options](#configuration-options)
+## 先决条件
 
-# Prerequisites
+要在 Rancher2.x 中部署项目级别应用，必须满足以下一个权限：
 
-When Rancher deploys a catalog app, it launches an ephemeral instance of a Helm service account that has the permissions of the user deploying the catalog app. Therefore, a user cannot gain more access to the cluster through Helm or a catalog application than they otherwise would have.
+- 目标集群的[项目成员角色](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)，使您能够创建，读取，更新和删除工作负载
+- 目标集群的[集群所有者角色](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)
 
-To launch an app from a catalog in Rancher, you must have at least one of the following permissions:
+## 从应用商店中创建应用
 
-- A [project-member role]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#project-roles) in the target cluster, which gives you the ability to create, read, update, and delete the workloads
-- A [cluster owner role]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles) for the cluster that include the target project
+启用[内置全局商店](/docs/rancher2/helm-charts/legacy-catalogs/built-in/_index)或[添加自定义商店](/docs/rancher2/helm-charts/legacy-catalogs/adding-catalogs/_index)之后，可以开始部署商店的应用。
 
-Before launching an app, you'll need to either [enable a built-in global catalog]({{<baseurl>}}/rancher/v2.x/en/catalog/built-in) or [add your own custom catalog.]({{<baseurl>}}/rancher/v2.x/en/catalog/adding-catalogs)
+1. 从**全局**视图中，导航到要开始部署应用的项目。
 
-# Launching a Catalog App
+2. 从主导航栏中，选择**应用商店**。在 v2.2.0 之前的版本中，在主导航栏上选择**应用商店**。点击**启动**。
 
-1. From the **Global** view, open the project that you want to deploy an app to.
+3. 找到您要启动的应用，然后单击**查看详细信息**。
 
-2. From the main navigation bar, choose **Apps**. In versions prior to v2.2.0, choose **Catalog Apps** on the main navigation bar. Click **Launch**.
+4. (可选)查看详细说明，该说明来自 Helm 应用的**README**。
 
-3. Find the app that you want to launch, and then click **View Now**.
+5. 在**配置选项**下，输入**名称**。默认情况下，该名称还用于为应用创建 Kubernetes 命名空间。
 
-4. Under **Configuration Options** enter a **Name**. By default, this name is also used to create a Kubernetes namespace for the application.
+   - 如果您想更改**命名空间**，请单击**自定义**并更改命名空间的名称。
+   - 如果要使用已经存在的其他命名空间，请单击 **自定义**，然后单击**使用现有的命名空间**。从列表中选择一个命名空间。
 
-    * If you would like to change the **Namespace**, click **Customize** and enter a new name.
-    * If you want to use a different namespace that already exists, click **Customize**, and then click **Use an existing namespace**. Choose a namespace from the list.
+6. 选择一个**模板版本**。
 
-5. Select a **Template Version**.
+7. 完成其余的**配置选项**。Rancher 会根据自定义应用是否包含 questions.yml 文件来处理配置选项。
 
-6. Complete the rest of the **Configuration Options**.
+8. 可以在**预览**部分中查看 Chart 中到 YAML 文件。如果确认，请单击**启动**。
 
-    * For native Helm charts (i.e., charts from the **Helm Stable** or **Helm Incubator** catalogs), answers are provided as key value pairs in the **Answers** section.
-    * Keys and values are available within **Detailed Descriptions**.
-    * When entering answers, you must format them using the syntax rules found in [Using Helm: The format and limitations of --set](https://helm.sh/docs/intro/using_helm/#the-format-and-limitations-of---set), as Rancher passes them as `--set` flags to Helm. For example, when entering an answer that includes two values separated by a comma (i.e., `abc, bcd`), wrap the values with double quotes (i.e., `"abc, bcd"`).
+**结果：** 您的应用已部署到所选的命名空间。您可以从项目的以下位置查看应用状态：
 
-7. Review the files in **Preview**. When you're satisfied, click **Launch**.
+- **资源 > 工作负载**
+- **应用商店 > 应用列表**
 
-**Result**: Your application is deployed to your chosen namespace. You can view the application status from the project's **Workloads** view or **Apps** view. In versions prior to v2.2.0, this is the **Catalog Apps** view.
+#### 配置选项
 
-# Configuration Options
+对于每个 Helm Chart，输入答案时，必须遵守[使用 Helm：--set 的格式和限制](https://helm.sh/docs/intro/using_helm/#the-format-and-limitations-of-set)，因为 Rancher 将其作为`--set`标志传递给 Helm。
 
-For each Helm chart, there are a list of desired answers that must be entered in order to successfully deploy the chart. When entering answers, you must format them using the syntax rules found in [Using Helm: The format and limitations of –set](https://helm.sh/docs/intro/using_helm/#the-format-and-limitations-of---set), as Rancher passes them as `--set` flags to Helm.
+> 例如，当输入包含两个用逗号分隔的值(即`abc, bcd`)的答案时，要求用双引号将这些值引起来(即`"abc，bcd"`)。
 
-> For example, when entering an answer that includes two values separated by a comma (i.e. `abc, bcd`), it is required to wrap the values with double quotes (i.e., ``"abc, bcd"``).
+### 通过 UI 配置参数
 
-{{% tabs %}}
-{{% tab "UI" %}}
+#### 使用`questions.yml`文件
 
-### Using a questions.yml file
+如果您要部署的 Helm 应用包含了一个`questions.yml`文件，则 Rancher UI 将转换该文件，并允许用户以表单的形式来填写答案。
 
-If the Helm chart that you are deploying contains a `questions.yml` file, Rancher's UI will translate this file to display an easy to use UI to collect the answers for the questions.
+#### 原生 Helm Chart 的键值对
 
-### Key Value Pairs for Native Helm Charts
+对于原生的 Helm Chart(即，来自**Helm Stable**或**Helm Incubator**的应用或没有配置`questions.yml`文件的[自定义的应用商店](/docs/rancher2/helm-charts/legacy-catalogs/adding-catalogs/_index)，答案在“答案”部分中需要通过键值对的方式进行配置。这些答案用于覆盖应用的默认值。
 
-For native Helm charts (i.e., charts from the **Helm Stable** or **Helm Incubator** catalogs or a [custom Helm chart repository]({{<baseurl>}}/rancher/v2.x/en/catalog/custom/#custom-helm-chart-repository)), answers are provided as key value pairs in the **Answers** section. These answers are used to override the default values.
+### 通过 YAML 配置参数
 
-{{% /tab %}}
-{{% tab "Editing YAML Files" %}}
+_自 v2.1.0 起可用_
 
-_Available as of v2.1.0_
+如果您不想使用表单输入答案，则可以选择**编辑 YAML**选项。您可以通过 YAML 直接覆盖应用参数。
 
-If you do not want to input answers using the UI, you can choose the **Edit as YAML** option.
+示例 YAML：
 
-With this example YAML:
-
-```YAML
+```yaml
 outer:
   inner: value
 servers:
-- port: 80
-  host: example
+  - port: 80
+    host: example
 ```
 
-### Key Value Pairs
+#### 使用 YAML 文件
 
-You can have a YAML file that translates these fields to match how to [format custom values so that it can be used with `--set`](https://github.com/helm/helm/blob/master/docs/using_helm.md#the-format-and-limitations-of---set).
+_自 v2.1.0 起可用_
 
-These values would be translated to:
-
-```
-outer.inner=value
-servers[0].port=80
-servers[0].host=example
-```
-
-### YAML files
-
-_Available as of v2.2.0_
-
-You can directly paste that YAML formatted structure into the YAML editor. By allowing custom values to be set using a YAML formatted structure, Rancher has the ability to easily customize for more complicated input values (e.g. multi-lines, array and JSON objects).
-{{% /tab %}}
-{{% /tabs %}}
+您可以直接将 YAML 格式的内容粘贴到 YAML 编辑器中。通过使用 YAML 格式设置自定参数，您能够轻松的自定义更复杂的输入值（例如，多行，数组和 JSON 对象）。

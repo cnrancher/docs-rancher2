@@ -1,108 +1,100 @@
 ---
-title: Rancher v2.0-v2.4 Catalogs (Deprecated)
-shortTitle: Rancher v2.0-v2.4
-description: Rancher enables the use of catalogs to repeatedly deploy applications easily. Catalogs are GitHub or Helm Chart repositories filled with deployment-ready apps.
-weight: 1
-aliases:
-  - /rancher/v2.x/en/concepts/global-configuration/catalog/
-  - /rancher/v2.x/en/concepts/catalogs/
-  - /rancher/v2.x/en/tasks/global-configuration/catalog/
-  - /rancher/v2.x/en/catalog
-  - /rancher/v2.x/en/catalog/apps
+title: 功能介绍
+description: Rancher 提供了基于 Helm 的应用商店的功能，该功能使部署和管理相同的应用变得更加容易。应用商店可以是 GitHub 代码库或 Helm Chart 库，其中包含了可部署的应用。应用打包在称为Helm Chart的对象中。Helm Charts是描述一组相关 Kubernetes 资源的文件的集合。单个 Chart 可能用于部署简单的内容（例如 Mencached Pod）或复杂的内容（例如带有 HTTP 服务，数据库，缓存等的完整的 Web 应用）。Rancher 改进了 Helm 应用商店和 Chart。所有原生 Helm Chart 都可以在 Rancher 中使用，但是 Rancher 添加了一些增强功能以改善用户体验。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 应用商店
+  - 功能介绍
 ---
 
-> As of Rancher v2.5, the catalog system is deprecated and has been replaced with [Apps and Marketplace]({{<baseurl>}}/rancher/v2.x/en/helm-charts/apps-marketplace) in the Cluster Explorer.
+Rancher 提供了基于 Helm 的应用商店的功能，该功能使部署和管理相同的应用变得更加容易。
 
-Rancher provides the ability to use a catalog of Helm charts that make it easy to repeatedly deploy applications.
+- **应用商店**可以是 GitHub 代码库或 Helm Chart 库，其中包含了可部署的应用。应用打包在称为 **Helm Chart** 的对象中。
+- **Helm Charts** 是描述一组相关 Kubernetes 资源的文件的集合。单个 Chart 可能用于部署简单的内容（例如 Mencached Pod）或复杂的内容（例如带有 HTTP 服务，数据库，缓存等的完整的 Web 应用）。
 
-- **Catalogs** are GitHub repositories or Helm Chart repositories filled with applications that are ready-made for deployment. Applications are bundled in objects called _Helm charts_.
-- **Helm charts** are a collection of files that describe a related set of Kubernetes resources. A single chart might be used to deploy something simple, like a memcached pod, or something complex, like a full web app stack with HTTP servers, databases, caches, and so on.
+Rancher 改进了 Helm 应用商店和 Chart。所有原生 Helm Chart 都可以在 Rancher 中使用，但是 Rancher 添加了一些增强功能以改善用户体验。
 
-Rancher improves on Helm catalogs and charts. All native Helm charts can work within Rancher, but Rancher adds several enhancements to improve their user experience.
+## 应用商店范围
 
-This section covers the following topics:
+在 Rancher 中，您可以在三个不同的范围内管理应用商店。全局应用商店在所有集群和项目之间共享。在某些用例中，您可能不想跨不同集群甚至不想在同一集群中的项目共享应用商店。通过利用集群和项目范围的应用商店，您将能够为特定团队提供应用，而无需与所有集群和/或项目共享它们。
 
-- [Catalog scopes](#catalog-scopes)
-- [Catalog Helm Deployment Versions](#catalog-helm-deployment-versions)
-- [When to use Helm 3](#when-to-use-helm-3)
-- [Helm 3 Backwards Compatibility](#helm-3-backwards-compatibility)
-- [Built-in global catalogs](#built-in-global-catalogs)
-- [Custom catalogs](#custom-catalogs)
-- [Creating and launching applications](#creating-and-launching-applications)
-- [Chart compatibility with Rancher](#chart-compatibility-with-rancher)
-- [Global DNS](#global-dns)
+| 范围 | 描述                                                    | 可用版本 |
+| ---- | ------------------------------------------------------- | -------- |
+| 全局 | 所有集群和所有项目都可以访问此应用商店中的 Helm Chart   | v2.0.0   |
+| 集群 | 特定集群中的所有项目都可以访问此应用商店中的 Helm Chart | v2.2.0   |
+| 项目 | 该特定集群中的特定项目可以访问此应用商店中的 Helm Chart | v2.2.0   |
 
-# Catalog Scopes
+## 应用商店使用的 Helm 版本
 
-Within Rancher, you can manage catalogs at three different scopes. Global catalogs are shared across all clusters and project. There are some use cases where you might not want to share catalogs between different clusters or even projects in the same cluster. By leveraging cluster and project scoped catalogs, you will be able to provide applications for specific teams without needing to share them with all clusters and/or projects.
+_自 v2.4.0 起可用_
 
-Scope |  Description | Available As of |
---- |  --- | --- |
-Global | All clusters and all projects can access the Helm charts in this catalog | v2.0.0 |
-Cluster | All projects in the specific cluster can access the Helm charts in this catalog | v2.2.0 |
-Project | This specific cluster can access the Helm charts in this catalog |  v2.2.0 |
+Helm 3 在 2019 年 11 月发布，并且 Helm2 某些功能已被弃用或重构。它并不可以[完全向后兼容 Helm 2](#Helm-3-向后兼容性)。因此，Rancher 中的应用商店需要进行区分，每个应用商店仅可以使用一个指定的 Helm 版本。这将有助于减少应用商店中应用部署相关的问题，因为您的 Rancher 用户不需要知道您的 Charts 的哪个版本与哪个 Helm 版本的兼容。用户只需选择应用商店，选择其中的应用，然后就可以部署已经过兼容性验证的版本。
 
-# Catalog Helm Deployment Versions
+创建自定义应用商店时，必须将应用商店配置为使用 Helm 2 或 Helm3。设置了此版本以后就不能更改。如果使用错误的 Helm 版本添加了应用商店，则需要将其删除并重新添加。
 
-_Applicable as of v2.4.0_
+从应用商店启动新应用时，Rancher 根据应用商店的 Helm 版本进行不同的处理。Rancher 将使用 Helm 2 来管理所有 Helm 2 应用商店。Rancher 将使用 Helm 3 来管理所有 Helm 3 应用商店。
 
-In November 2019, Helm 3 was released, and some features were deprecated or refactored. It is not fully [backwards compatible]({{<baseurl>}}/rancher/v2.x/en/catalog#helm-3-backwards-compatibility) with Helm 2. Therefore, catalogs in Rancher need to be separated, with each catalog only using one Helm version. This will help reduce app deployment issues as your Rancher users will not need to know which version of your chart is compatible with which Helm version - they can just select a catalog, select an app and deploy a version that has already been vetted for compatibility.
+默认情况下，应用将使用 Helm 2 进行部署的。如果您在 v2.4.0 之前的 Rancher 中运行了某个应用，然后升级到 Rancher v2.4.0+，则该应用仍将由 Helm 2 管理。如果应用已经使用了 Helm 3 Chart（API 版本 2），它将在 v2.4.0+ 中不能正常工作。您必须降 Chart 的 API 版本或重新创建 Helm 3 的应用商店。
 
-When you create a custom catalog, you will have to configure the catalog to use either Helm 2 or Helm 3. This version cannot be changed later. If the catalog is added with the wrong Helm version, it will need to be deleted and re-added.
+只能将 Helm 2 的 Chart 添加到 Helm 2 的应用商店中。同样，Helm 3 的 Chart 仅能添加到 Helm 3 的应用商店中。
 
-When you launch a new app from a catalog, the app will be managed by the catalog's Helm version. A Helm 2 catalog will use Helm 2 to manage all of the apps, and a Helm 3 catalog will use Helm 3 to manage all apps.
+## 什么时候使用 Helm 3
 
-By default, catalogs are assumed to be deployed using Helm 2. If you run an app in Rancher prior to v2.4.0, then upgrade to Rancher v2.4.0+, the app will still be managed by Helm 2. If the app was already using a Helm 3 Chart (API version 2) it will no longer work in v2.4.0+. You must either downgrade the chart's API version or recreate the catalog to use Helm 3.
+_自 v2.4.0 起可用_
 
-Charts that are specific to Helm 2 should only be added to a Helm 2 catalog, and Helm 3 specific charts should only be added to a Helm 3 catalog.
+- 如果要使用基于 kubeconfig 的安全权限
+- 如果您想使用 apiVersion `v2`的功能（Helm 3 使用 v2 API），例如创建 Library Chart 以减少重复的代码，或者将 requirements 从`requirements.yaml`移至`Chart.yaml`
 
-# When to use Helm 3
+总体而言，Helm 3 是朝着更加标准化的 Kubernetes 迈进的一步。随着 Kubernetes 社区的发展，标准和最佳实践也随之发展。Helm 3 试图采用这些标准和最佳实践，并简化 Charts 的维护方式。
 
-_Applicable as of v2.4.0_
+## Helm 3 向后兼容性
 
-- If you want to ensure that the security permissions are being pulled from the kubeconfig file
-- If you want to utilize apiVersion `v2` features such as creating a library chart to reduce code duplication, or moving your requirements from the `requirements.yaml` into the `Chart.yaml`
+_自 v2.4.0 起可用_
 
-Overall Helm 3 is a movement towards a more standardized Kubernetes feel. As the Kubernetes community has evolved, standards and best practices have as well. Helm 3 is an attempt to adopt those practices and streamline how charts are maintained.
+Helm 3 通过使用 OpenAPI schema 来验证渲染的模板，所以有些在 Helm 2 中可以正常工作的 Charts 可能在 Helm 3 中不能正常工作。这将需要您更新 Chart 模板以满足新的验证要求。这是我们在 Rancher 2.4.x 中同时支持 Helm 2 和 Helm 3 的主要原因之一，因为并非所有 Charts 都可以立即通过 Helm 3 中部署。
 
-# Helm 3 Backwards Compatibility
+Helm 3 不会自动为您创建命名空间，因此您必须提供一个现有的命名空间。如果您将代码与 Helm 2 集成在了一起，则可能会遇到问题，因为您可能需要更改您的代码逻辑以确保为 Helm 3 创建并传递了命名空间。如果您通过 Rancher 使用 Helm，您可以不用考虑这个事情，Rancher 将继续管理 Helm 所需的命名空间，并确保不会影响到您的应用部署。
 
-_Applicable as of v2.4.0_
+Helm 3 Charts 使用 apiVersion `v2`。在某些较旧的 Helm 2 版本中，并没有校验 `Chart.yaml` 文件中的 apiVersion，因此您在使用中可能会遇到问题。通常，您的 Helm 2 Charts 中的 apiVersion 应该设置为 `v1`，而 Helm 3 Charts 的 apiVersion 应该设置为`v2`。您可以使用 Helm 3 安装带有 apiVersion `v1` 的 Charts，但不能在 Helm 2 中安装带有 apiVersion `v2` 的 Charts。
 
-With the use of the OpenAPI schema to validate your rendered templates in Helm 3, you will find charts that worked in Helm 2 may not work in Helm 3. This will require you to update your chart templates to meet the new validation requirements. This is one of the main reasons support for Helm 2 and Helm 3 was provided starting in Rancher 2.4.x, as not all charts can be deployed immediately in Helm 3.
+## 内置的全局应用商店
 
-Helm 3 does not create a namespace for you, so you will have to provide an existing one. This can cause issues if you have integrated code with Helm 2, as you will need to make code changes to ensure a namespace is being created and passed in for Helm 3. Rancher will continue to manage namespaces for Helm to ensure this does not impact your app deployment.  
+在 Rancher 中，有一些默认应用商店作为 Rancher 的一部分。这些可以由系统管理员启用或禁用。有关详细信息，请参阅关于管理[内置的全局应用商店](/docs/rancher2/helm-charts/legacy-catalogs/built-in/_index)的文档。
 
-apiVersion `v2` is now reserved for Helm 3 charts. This apiVersion enforcement could cause issues as older versions of Helm 2 did not validate the apiVersion in the `Chart.yaml` file. In general, your Helm 2 chart’s apiVersion should be set to `v1` and your Helm 3 chart’s apiVersion should be set to `v2`. You can install charts with apiVersion `v1` with Helm 3, but you cannot install `v2` charts into Helm 2.
+## 自定义应用商店
 
-# Built-in Global Catalogs
+Ranhcer 中有两种类型的应用商店：[内置的全局应用商店](/docs/rancher2/helm-charts/legacy-catalogs/built-in/_index)和[自定义应用商店](/docs/rancher2/helm-charts/legacy-catalogs/adding-catalogs/_index)。
 
-Within Rancher, there are default catalogs packaged as part of Rancher. These can be enabled or disabled by an administrator. For details, refer to the section on managing [built-in global catalogs.]({{<baseurl>}}/rancher/v2.x/en/catalog/built-in)
+任何用户都可以创建自定义应用商店并添加到 Rancher 中。可以在全局级别，集群级别或项目级别将自定义应用商店添加到 Rancher 中。有关详细信息，请参阅[添加自定义商店](/docs/rancher2/helm-charts/legacy-catalogs/adding-catalogs/_index)和[应用商店配置参考](/docs/rancher2/helm-charts/legacy-catalogs/catalog-config/_index)。
 
-# Custom Catalogs
+## 创建并部署应用
 
-There are two types of catalogs in Rancher: [Built-in global catalogs]({{<baseurl>}}/rancher/v2.x/en/catalog/built-in/) and [custom catalogs.]({{<baseurl>}}/rancher/v2.x/en/catalog/adding-catalogs/)
+在 Rancher 中，应用是从应用商店中的模板部署的。本节涵盖以下主题：
 
-Any user can create custom catalogs to add into Rancher.  Custom catalogs can be added into Rancher at the global level, cluster level, or project level. For details, refer to the [section on adding custom catalogs]({{<baseurl>}}/rancher/v2.x/en/catalog/adding-catalogs) and the [catalog configuration reference.]({{<baseurl>}}/rancher/v2.x/en/catalog/catalog-config)
+- [多集群应用](/docs/rancher2/helm-charts/legacy-catalogs/multi-cluster-apps/_index)
+- [创建应用商店应用](/docs/rancher2/helm-charts/legacy-catalogs/creating-apps/_index)
+- [在项目级别部署应用](/docs/rancher2/helm-charts/legacy-catalogs/launching-apps/_index)
+- [管理应用](/docs/rancher2/helm-charts/legacy-catalogs/managing-apps/_index)
+- [教程：创建应用的示例](/docs/rancher2/helm-charts/legacy-catalogs/tutorial/_index)
 
-# Creating and Launching Applications
+## 与 Rancher 的兼容性
 
-In Rancher, applications are deployed from the templates in a catalog. This section covers the following topics:
+Chart 现在支持在 [questions.yml](https://github.com/rancher/integration-test-charts/blob/master/charts/chartmuseum/v1.6.0/questions.yml) 文件中，设置`rancher_min_version`和`rancher_max_version`字段，以指定 Chart 兼容的 Rancher 版本。
 
-* [Multi-cluster applications]({{<baseurl>}}/rancher/v2.x/en/catalog/multi-cluster-apps/)
-* [Creating catalog apps]({{<baseurl>}}/rancher/v2.x/en/catalog/creating-apps)
-* [Launching catalog apps within a project]({{<baseurl>}}/rancher/v2.x/en/catalog/launching-apps)
-* [Managing catalog apps]({{<baseurl>}}/rancher/v2.x/en/catalog/managing-apps)
-* [Tutorial: Example custom chart creation]({{<baseurl>}}/rancher/v2.x/en/catalog/tutorial)
+使用 Rancher UI 部署应用时，将仅显示对当前运行的 Rancher 版本有效的应用版本，从而禁止启动不满足 Rancher 版本要求的应用。如果在升级 Rancher 前已经部署了应用，但这个应用不支持新版本的 Rancher，在这种情况下升级 Rancher 不会影响这个已有应用。
 
-# Chart Compatibility with Rancher
+## 全局 DNS
 
-Charts now support the fields `rancher_min_version` and `rancher_max_version` in the [`questions.yml` file](https://github.com/rancher/integration-test-charts/blob/master/charts/chartmuseum/v1.6.0/questions.yml) to specify the versions of Rancher that the chart is compatible with. When using the UI, only app versions that are valid for the version of Rancher running will be shown. API validation is done to ensure apps that don't meet the Rancher requirements cannot be launched. An app that is already running will not be affected on a Rancher upgrade if the newer Rancher version does not meet the app's requirements.
+_自 v2.2.0 起可用_
 
-# Global DNS
+当创建跨多个 Kubernetes 集群的应用时，可以创建一个全局 DNS 记录以将流量路由到所有不同集群中的端点。将需要对外部 DNS 服务器进行编程，以为您的应用分配域名（FQDN）。Rancher 将使用您提供的 FQDN 和应用的所在的 IP 地址来对 DNS 进行编程。Rancher 将从运行您的应用的所有 Kubernetes 集群中找到端点，并对 DNS 进行编程。
 
-_Available as v2.2.0_
-
-When creating applications that span multiple Kubernetes clusters, a Global DNS entry can be created to route traffic to the endpoints in all of the different clusters. An external DNS server will need be programmed to assign a fully qualified domain name (a.k.a FQDN) to your application. Rancher will use the FQDN you provide and the IP addresses where your application is running to program the DNS. Rancher will gather endpoints from all the Kubernetes clusters running your application and program the DNS.
-
-For more information on how to use this feature, see [Global DNS]({{<baseurl>}}/rancher/v2.x/en/catalog/globaldns/).
+有关如何使用此功能的更多信息，请参见[全局 DNS](/docs/rancher2/helm-charts/legacy-catalogs/globaldns/_index)。

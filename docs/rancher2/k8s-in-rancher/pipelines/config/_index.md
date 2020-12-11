@@ -143,7 +143,7 @@ stages:
 
 _可用于 v2.2.0_
 
-**发布应用模板** 步骤将应用商店模板的版本文件（即 Helm chart）发布到[git 托管的 chart 代码库](/docs/rancher2/catalog/adding-catalogs/_index)。Rancher 将生成一个 git commit 并将其推送到您的 chart 代码库。此过程需要在源代码库中有一个 chart 文件夹。并且需要您在流水线专用的命名空间中预先配置的好可以访问 git 的密文。您可以在 chart 文件夹中的任何文件中使用[流水线变量替换功能](#流水线变量替换列表)。
+**发布应用模板** 步骤将应用商店模板的版本文件（即 Helm chart）发布到[git 托管的 chart 代码库](/docs/rancher2/helm-charts/legacy-catalogs/adding-catalogs/_index)。Rancher 将生成一个 git commit 并将其推送到您的 chart 代码库。此过程需要在源代码库中有一个 chart 文件夹。并且需要您在流水线专用的命名空间中预先配置的好可以访问 git 的密文。您可以在 chart 文件夹中的任何文件中使用[流水线变量替换功能](#流水线变量替换列表)。
 
 ### 通过 UI 设置发布应用模板
 

@@ -1,108 +1,106 @@
 ---
-title: Creating Custom Catalogs
-weight: 200
-aliases:
-  - /rancher/v2.x/en/tasks/global-configuration/catalog/adding-custom-catalogs/
-  - /rancher/v2.x/en/catalog/custom/adding
-  - /rancher/v2.x/en/catalog/adding-catalogs
-  - /rancher/v2.x/en/catalog/custom/
+title: 添加自定义应用商店
+description: 添加应用商店，只需要添加应用商店名称，URL 和分支名称。添加自定义 Git 仓库。it URL 必须是`git clone`可以处理的 URL，并且必须以.git 结尾。分支名称必须是应用商店 URL 中的一个分支。如果没有提供分支名称，则默认使用`master`分支。每当您将应用商店添加到 Rancher 时，它将几乎立即可用。添加自定义 Helm 仓库。Helm Chart 仓库是一个 HTTP 服务器，其中包含一个或多个打包的 Chart。可以提供 YAML 文件和 tar 文件并可以处理 GET 请求的任何 HTTP 服务器都可以用作应用商店仓库。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 应用商店
+  - 添加自定义应用商店
 ---
 
-Custom catalogs can be added into Rancher at a global scope, cluster scope, or project scope.
+[自定义应用商店](/docs/rancher2/helm-charts/legacy-catalogs/adding-catalogs/_index)可以被添加到 Rancher 的全局范围，集群范围或者项目范围。
 
-- [Adding catalog repositories](#adding-catalog-repositories)
-  - [Add custom Git repositories](#add-custom-git-repositories)
-  - [Add custom Helm chart repositories](#add-custom-helm-chart-repositories)
-  - [Add private Git/Helm chart repositories](#add-private-git-helm-chart-repositories)
-- [Adding global catalogs](#adding-global-catalogs)
-- [Adding cluster level catalogs](#adding-cluster-level-catalogs)
-- [Adding project level catalogs](#adding-project-level-catalogs)
-- [Custom catalog configuration reference](#custom-catalog-configuration-reference)
+**提示：** [系统管理员](/docs/rancher2/admin-settings/rbac/global-permissions/_index)可以在 Rancher 中的任何范围内管理应用商店，包括全局级别，集群级别或者项目级别的应用商店。
 
-# Adding Catalog Repositories
+## 添加应用商店仓库
 
-Adding a catalog is as simple as adding a catalog name, a URL and a branch name.
+添加应用商店，只需要添加应用商店名称，URL 和分支名称。
 
-**Prerequisite:** An [admin]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/global-permissions/) of Rancher has the ability to add or remove catalogs globally in Rancher.
+### 添加自定义 Git 仓库
 
-### Add Custom Git Repositories
-The Git URL needs to be one that `git clone` [can handle](https://git-scm.com/docs/git-clone#_git_urls_a_id_urls_a) and must end in `.git`. The branch name must be a branch that is in your catalog URL. If no branch name is provided, it will use the `master` branch by default. Whenever you add a catalog to Rancher, it will be available immediately.
+Git URL 必须是`git clone`[可以处理的 URL](https://git-scm.com/docs/git-clone#_git_urls_a_id_urls_a)，并且必须以.git 结尾。分支名称必须是应用商店 URL 中的一个分支。如果没有提供分支名称，则默认使用`master`分支。每当您将应用商店添加到 Rancher 时，它将几乎立即可用。
 
-### Add Custom Helm Chart Repositories
+### 添加自定义 Helm 仓库
 
-A Helm chart repository is an HTTP server that houses one or more packaged charts. Any HTTP server that can serve YAML files and tar files and can answer GET requests can be used as a repository server.
+Helm Chart 仓库是一个 HTTP 服务器，其中包含一个或多个打包的 Chart。可以提供 YAML 文件和 tar 文件并可以处理 GET 请求的任何 HTTP 服务器都可以用作应用商店仓库。
 
-Helm comes with built-in package server for developer testing (helm serve). The Helm team has tested other servers, including Google Cloud Storage with website mode enabled, S3 with website mode enabled or hosting custom chart repository server using open-source projects like [ChartMuseum](https://github.com/helm/chartmuseum).
+Helm 带有用于开发人员测试的内置软件包服务器（`helm serve`）。Helm 团队已经测试了其他服务器，包括启用了网站模式的 Google Cloud Storage，启用了网站模式的 S3 或使用 [ChartMuseum](https://github.com/helm/chartmuseum) 等开源项目托管自定义应用商店 Chart 的服务器。
 
-In Rancher, you can add the custom Helm chart repository with only a catalog name and the URL address of the chart repository.
+在 Rancher 中，您可以仅使用名称和 Chart 仓库的 URL 地址添加自定义 Helm 应用商店。
 
-### Add Private Git/Helm Chart Repositories
-_Available as of v2.2.0_
+### 添加私有 Git/Helm 仓库
 
-Private catalog repositories can be added using credentials like Username and Password. You may also want to use the OAuth token if your Git or Helm repository server supports that.
+_自 v2.2.0 起可用_
 
-For more information on private Git/Helm catalogs, refer to the [custom catalog configuration reference.]({{<baseurl>}}/rancher/v2.x/en/catalog/catalog-config)
+Rancher v2.2.0 起，用户可以使用任一凭据（即`用户名`和`密码`）将私有 Git 或 Helm Chart 库添加到 Rancher 中。私有 Git 库还支持使用 OAuth 令牌进行身份验证。
 
- 1. From the **Global** view, choose **Tools > Catalogs** in the navigation bar. In versions prior to v2.2.0, you can select **Catalogs** directly in the navigation bar.
- 2. Click **Add Catalog**.
- 3. Complete the form and click **Create**.
+[阅读有关添加私有 Git/Helm 应用商店的更多信息](/docs/rancher2/helm-charts/legacy-catalogs/adding-catalogs/_index)
 
- **Result:** Your catalog is added to Rancher.
+1. 从**全局**视图中，在导航栏中选择**工具>应用商店**。在 v2.2.0 之前的版本中，您可以直接在导航栏中选择**应用商店**。
+2. 单击**添加**。
+3. 填写表格，然后单击**创建**。
 
-# Adding Global Catalogs
+**结果**：您的应用商店已添加到 Rancher。
 
->**Prerequisites:** In order to manage the [built-in catalogs]({{<baseurl>}}/rancher/v2.x/en/catalog/built-in/) or manage global catalogs, you need _one_ of the following permissions:
+## 添加全局应用商店
+
+> **先决条件：** 为了激活内置的应用商店或[管理全局应用商店](/docs/rancher2/helm-charts/legacy-catalogs/adding-catalogs/_index)，您需要具有以下权限之一：
 >
->- [Administrator Global Permissions]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/global-permissions/)
->- [Custom Global Permissions]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/global-permissions/#custom-global-permissions) with the [Manage Catalogs]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/global-permissions/#global-permissions-reference) role assigned.
+> - [系统管理员权限](/docs/rancher2/admin-settings/rbac/global-permissions/_index)。
+> - 包含 [Manage Catalogs](/docs/rancher2/admin-settings/rbac/global-permissions/_index) 权限的[自定义全局权限](/docs/rancher2/admin-settings/rbac/global-permissions/_index)。
 
- 1. From the **Global** view, choose **Tools > Catalogs** in the navigation bar. In versions prior to v2.2.0, you can select **Catalogs** directly in the navigation bar.
- 2. Click **Add Catalog**.
- 3. Complete the form. Select the Helm version that will be used to launch all of the apps in the catalog. For more information about the Helm version, refer to [this section.](
-{{<baseurl>}}/rancher/v2.x/en/catalog/#catalog-helm-deployment-versions)
-4. Click **Create**.
+1. 从**全局**界面中，在导航栏中选择**工具 > 应用商店**。在 v2.2.0 之前的版本中，您可以直接在导航栏中选择**应用商店**。
 
- **Result**: Your custom global catalog is added to Rancher. Once it is in `Active` state, it has completed synchronization and you will be able to start deploying [multi-cluster apps]({{<baseurl>}}/rancher/v2.x/en/catalog/multi-cluster-apps/) or [applications in any project]({{<baseurl>}}/rancher/v2.x/en/catalog/launching-apps/) from this catalog.
+2. 单击**添加应用商店**。
 
-# Adding Cluster Level Catalogs
+3. 填写表格，然后单击**创建**。
 
-_Available as of v2.2.0_
+**结果：** 您的自定义全局级别应用商店已添加到 Rancher。**Active** 状态，代表已经完成了同步，您将可以开始部署[多集群应用](/docs/rancher2/helm-charts/legacy-catalogs/multi-cluster-apps/_index)或[项目级别应用](/docs/rancher2/helm-charts/legacy-catalogs/launching-apps/_index)。
 
->**Prerequisites:** In order to manage cluster scoped catalogs, you need _one_ of the following permissions:
+## 添加集群级别应用商店
+
+_自 v2.1.0 起可用_
+
+> **先决条件：** 为了管理集群范围的应用商店，您需要具有以下权限之一：
 >
->- [Administrator Global Permissions]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/global-permissions/)
->- [Cluster Owner Permissions]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles)
->- [Custom Cluster Permissions]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles) with the [Manage Cluster Catalogs]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-role-reference) role assigned.
+> - [系统管理员权限](/docs/rancher2/admin-settings/rbac/global-permissions/_index)
+> - [集群所有者权限](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)
+> - 包含 [Manage Cluster Catalogs](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index) 权限的[自定义集群权限](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)。
 
-1. From the **Global** view, navigate to your cluster that you want to start adding custom catalogs.
-2. Choose the **Tools > Catalogs** in the navigation bar.
-2. Click **Add Catalog**.
-3. Complete the form. By default, the form will provide the ability to select `Scope` of the catalog. When you have added a catalog from the **Cluster** scope, it is defaulted to `Cluster`. Select the Helm version that will be used to launch all of the apps in the catalog. For more information about the Helm version, refer to [this section.](
-{{<baseurl>}}/rancher/v2.x/en/catalog/#catalog-helm-deployment-versions)
-5. Click **Create**.
+1. 从**全局**界面，导航到要添加自定义应用商店的集群。
+2. 在导航栏中选择**工具 > 商店设置**。
+3. 单击**添加应用商店**。
+4. 填写表格。 默认情况下，在该表格中可以选择应用商店的**范围**。当您从**集群**范围添加应用商店时，默认为`cluster`。
+5. 单击**创建**。
 
-**Result**: Your custom cluster catalog is added to Rancher. Once it is in `Active` state, it has completed synchronization and you will be able to start deploying  [applications in any project in that cluster]({{<baseurl>}}/rancher/v2.x/en/catalog/apps/) from this catalog.
+**结果：** 您的自定义集群级别应用商店已添加到 Rancher。**Active** 状态，代表已经完成了同步，您将可以从此应用商店在该集群的任何项目中部署[项目级别应用](/docs/rancher2/helm-charts/legacy-catalogs/launching-apps/_index)。
 
-# Adding Project Level Catalogs
+## 添加项目级别应用商店
 
-_Available as of v2.2.0_
+_自 v2.1.0 起可用_
 
->**Prerequisites:** In order to manage project scoped catalogs, you need _one_ of the following permissions:
+> **先决条件：** 为了管理项目范围的应用商店，您需要具有以下权限之一：
 >
->- [Administrator Global Permissions]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/global-permissions/)
->- [Cluster Owner Permissions]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles)
->- [Project Owner Permissions]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#project-roles)
->- [Custom Project Permissions]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles) with the [Manage Project Catalogs]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#project-role-reference) role assigned.
+> - [系统管理员权限](/docs/rancher2/admin-settings/rbac/global-permissions/_index)
+> - [集群所有者权限](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)
+> - [项目所有者权限](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)
+> - 包含 [Manage Project Catalogs](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index) 权限的[自定义项目权限](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)。
 
-1. From the **Global** view, navigate to your project that you want to start adding custom catalogs.
-2. Choose the **Tools > Catalogs** in the navigation bar.
-2. Click **Add Catalog**.
-3. Complete the form. By default, the form will provide the ability to select `Scope` of the catalog. When you have added a catalog from the **Project** scope, it is defaulted to `Cluster`. Select the Helm version that will be used to launch all of the apps in the catalog. For more information about the Helm version, refer to [this section.](
-{{<baseurl>}}/rancher/v2.x/en/catalog/#catalog-helm-deployment-versions)
-5. Click **Create**.
+1. 从**全局**界面，导航到要添加自定义应用商店的项目。
+2. 在导航栏中选择**工具 > 商店设置**。
+3. 单击**添加应用商店**。
+4. 填写表格。默认情况下，在该表格中可以选择应用商店的**范围**。当您从**项目**范围添加应用商店时，默认范围为`project`。
+5. 单击**创建**。
 
-**Result**: Your custom project catalog is added to Rancher. Once it is in `Active` state, it has completed synchronization and you will be able to start deploying  [applications in that project]({{<baseurl>}}/rancher/v2.x/en/catalog/apps/) from this catalog.
+**结果**：您的自定义项目级别应用商店已添加到 Rancher。**Active** 状态，代表已经完成了同步，您将可以从此应用商店在该项目中部署[项目级别应用](/docs/rancher2/helm-charts/legacy-catalogs/launching-apps/_index)。
 
-# Custom Catalog Configuration Reference
+## 自定义应用商店配置参考
 
-Refer to [this page]({{<baseurl>}}/rancher/v2.x/en/catalog/catalog-config) more information on configuring custom catalogs.
+有关配置自定义应用商店的更多信息，请参考[本页](/docs/rancher2/helm-charts/legacy-catalogs/catalog-config/_index)。

@@ -1,51 +1,60 @@
 ---
-title: "Tutorial: Example Custom Chart Creation"
-weight: 800
-aliases:
-  - /rancher/v2.x/en/catalog/tutorial
+title: 教程：创建应用的示例
+description: 在本教程中，您将学习如何创建 Helm Chart 并将其推送到仓库。该仓库可用作 Rancher 中自定义应用商店的源。您可以把 Helm Chart 或 Rancher Chart 添加到应用商店里，但是我们建议使用 Rancher Chart，因为它们的用户体验更好。有关开发 Chart 的完整步骤，请参阅Helm Chart开发人员参考。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 应用商店
+  - 创建应用的示例
+  - 示例
 ---
 
-In this tutorial, you'll learn how to create a Helm chart and deploy it to a repository. The repository can then be used as a source for a custom catalog in Rancher.
+在本教程中，您将学习如何创建 Helm Chart 并将其推送到仓库。该仓库可用作 Rancher 中自定义应用商店的源。
 
-You can fill your custom catalogs with either Helm Charts or Rancher Charts, although we recommend Rancher Charts due to their enhanced user experience.
+您可以把 Helm Chart 或 Rancher Chart 添加到应用商店里，但是我们建议使用 Rancher Chart，因为它们的用户体验更好。
 
-> For a complete walkthrough of developing charts, see the upstream Helm chart [developer reference](https://helm.sh/docs/chart_template_guide/).
+> **注意：** 有关开发 Chart 的完整步骤，请参阅 Helm Chart [开发指南](https://helm.sh/docs/chart_template_guide/)。
 
-1. Within the GitHub repo that you're using as your custom catalog, create a directory structure that mirrors the structure listed in [Chart Directory Structure]({{<baseurl>}}/rancher/v2.x/en/helm-charts/legacy-catalogs/adding-catalogs/#chart-directory-structure).
+1. 在您应用商店的 GitHub 仓库中，创建应用商店结构，该应用商店结构请参考[应用商店的文件结构](/docs/rancher2/helm-charts/legacy-catalogs/creating-apps/_index)中列出的结构。`app-readme.md`和`questions.yml`是可选的。
 
-   Rancher requires this directory structure, although `app-readme.md` and `questions.yml` are optional.
-
-   > **Tip:**
+   > **提示：**
    >
-   > - To begin customizing a chart, copy one from either the [Rancher Library](https://github.com/rancher/charts) or the [Helm Stable](https://github.com/kubernetes/charts/tree/master/stable).
-   > - For a complete walk through of developing charts, see the upstream Helm chart [developer reference](https://docs.helm.sh/developing_charts/).
+   > - 要创建自定义 Chart，请从 [Rancher Library](https://github.com/rancher/charts) 或 [Helm Stable](https://github.com/kubernetes/charts/tree/master/stable) 复制一个 Chart。
+   > - 有关开发 Chart 的完整介绍，请参见上游 Helm Chart [开发指南](https://helm.sh/docs/chart_template_guide/)。
 
-2. **Recommended:** Create an `app-readme.md` file.
+2. **推荐：** 创建一个`app-readme.md`文件。
 
-   Use this file to create custom text for your chart's header in the Rancher UI. You can use this text to notify users that the chart is customized for your environment or provide special instruction on how to use it.
+   使用此文件可为 Rancher UI 中的 chart 标题创建自定义文本。您可以使用此文本来通知用户该 chart 是针对您的环境定制的，或者提供有关如何使用它的特殊说明。
 
-   **Example**:
+   **例如** ：
 
-   ```
+   ```bash
    $ cat ./app-readme.md
 
    # Wordpress ROCKS!
    ```
 
-3. **Recommended:** Create a `questions.yml` file.
+3. **推荐：** 添加一个`questions.yml`文件。
 
-   This file creates a form for users to specify deployment parameters when they deploy the custom chart. Without this file, users **must** specify the parameters manually using key value pairs, which isn't user-friendly.
+   该文件为用户创建一个表单，供用户在部署自定义 Chart 时指定部署参数。如果没有此文件，则用户**必须**使用键值对手动指定参数，这对用户不友好。
 
-   The example below creates a form that prompts users for persistent volume size and a storage class.
+   下面的示例创建一个表单，提示用户输入持久卷大小和存储类。
 
-   For a list of variables you can use when creating a `questions.yml` file, see [Question Variable Reference]({{<baseurl>}}/rancher/v2.x/en/catalog/creating-apps/#question-variable-reference).
+   有关创建`questions.yml`文件时可以使用的变量列表，请参见[问题变量参考](/docs/rancher2/helm-charts/legacy-catalogs/creating-apps/_index)
 
    ```yaml
-       categories:
-       - Blog
-       - CMS
-       questions:
-       - variable: persistence.enabled
+   categories:
+     - Blog
+     - CMS
+   questions:
+     - variable: persistence.enabled
        default: "false"
        description: "Enable persistent volume for WordPress"
        type: boolean
@@ -54,18 +63,18 @@ You can fill your custom catalogs with either Helm Charts or Rancher Charts, alt
        show_subquestion_if: true
        group: "WordPress Settings"
        subquestions:
-       - variable: persistence.size
+         - variable: persistence.size
            default: "10Gi"
            description: "WordPress Persistent Volume Size"
            type: string
            label: WordPress Volume Size
-       - variable: persistence.storageClass
+         - variable: persistence.storageClass
            default: ""
            description: "If undefined or null, uses the default StorageClass. Default to null"
            type: storageclass
            label: Default StorageClass for WordPress
    ```
 
-4. Check the customized chart into your GitHub repo.
+4. 将自定义的 Chart 推送到 GitHub 仓库中。
 
-**Result:** Your custom chart is added to the repo. Your Rancher Server will replicate the chart within a few minutes.
+**结果：** 您的自定义 Chart 已添加到仓库中。您的 Rancher Server 将在几分钟内同步 Chart。您可以在 Rancher UI 上手动刷新该应用商店，强制刷新。

@@ -1,82 +1,84 @@
 ---
-title: Managing Catalog Apps
-weight: 500
-aliases:
-  - /rancher/v2.x/en/catalog/managing-apps
+title: 管理项目级别应用
+description: 部署应用之后，与管理单独的工作负载/资源相比，使用应用商店的好处之一是能够轻松统一管理许多工作负载和资源。您可以克隆，升级或回滚应用。部署应用后，您可以轻松升级到其他模板版本。升级应用后，您可以轻松回滚到之前的某个修订版本。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 应用商店
+  - 管理项目级别应用
 ---
 
-After deploying an application, one of the benefits of using an application versus individual workloads/resources is the ease of being able to manage many workloads/resources applications. Apps can be cloned, upgraded or rolled back.
+部署应用之后，与管理单独的工作负载/资源相比，使用应用商店的好处之一是能够轻松统一管理许多工作负载和资源。您可以克隆，升级或回滚应用。
 
-- [Cloning catalog applications](#cloning-catalog-applications)
-- [Upgrading catalog applications](#upgrading-catalog-applications)
-- [Rolling back catalog applications](#rolling-back-catalog-applications)
-- [Deleting catalog application deployments](#deleting-catalog-application-deployments)
+## 克隆应用
 
-### Cloning Catalog Applications
+部署应用后，您可以轻松的克隆它，以使用几乎相同的配置创建另一个应用。它节省了您手动填写重复信息的时间。
 
-After an application is deployed, you can easily clone it to use create another application with almost the same configuration. It saves you the work of manually filling in duplicate information.
+## 升级应用
 
-### Upgrading Catalog Applications
+部署应用后，您可以轻松升级到其他模板版本。
 
-After an application is deployed, you can easily upgrade to a different template version.
+1. 从**全局**视图中，导航到要升级的应用所在项目。
 
-1. From the **Global** view, navigate to the project that contains the catalog application that you want to upgrade.
+1. 在主导航栏中，选择**应用商店**，点击**启动**。
 
-1. From the main navigation bar, choose **Apps**. In versions prior to v2.2.0, choose **Catalog Apps** on the main navigation bar. Click **Launch**.
+1. 找到要升级的应用，然后单击省略号以找到**升级**。
 
-3. Find the application that you want to upgrade, and then click the &#8942; to find **Upgrade**.
+1. 选择要部署的**模板版本**。
 
-4. Select the **Template Version** that you want to deploy.
+1. （可选）更新您的**配置选项**。
 
-5. (Optional) Update your **Configuration Options**.
+1. （可选）通过选中**在升级过程中需要时，删除并重新创建资源**。复选框，选择是否要强制升级应用。
 
-6. (Optional) Select whether or not you want to force the catalog application to be upgraded by checking the box for **Delete and recreate resources if needed during the upgrade**.
+   > 在 Kubernetes 中，某些字段被设计为不可变的或无法直接更新。从 v2.2.0 开始，无论这些字段如何，您现在都可以强制更新应用商店的应用。Helm 会根据需要判断是否应该删除并重新创建资源。
 
-    > In Kubernetes, some fields are designed to be immutable or cannot be updated directly. As of v2.2.0, you can now force your catalog application to be updated regardless of these fields. This will cause the catalog apps to be deleted and resources to be re-created if needed during the upgrade.
+1. 可以通过**预览**部分，查看 Chart 中的 YAML 文件。如果确认，请单击**启动**。
 
-7. Review the files in the **Preview** section. When you're satisfied, click **Launch**.
+**结果：** 您的应用已更新。您可以从项目的以下位置查看应用状态：
 
-**Result**: Your application is updated. You can view the application status from the project's:
+- **资源 > 工作负载**
+- **应用商店 > 应用列表**
 
-- **Workloads** view
-- **Apps** view. In versions prior to v2.2.0, this is the **Catalog Apps** view.
+## 回滚应用
 
+升级应用后，您可以轻松回滚到之前的某个修订版本。
 
-### Rolling Back Catalog Applications
+1. 从**全局**视图中，导航到要回滚的应用所在的项目。
 
-After an application has been upgraded, you can easily rollback to a different template version.
+1. 在主导航栏中，选择**应用商店**。
 
-1. From the **Global** view, navigate to the project that contains the catalog application that you want to upgrade.
+1. 找到要回滚的应用，然后单击省略号以找到**回滚**。
 
-1. From the main navigation bar, choose **Apps**. In versions prior to v2.2.0, choose **Catalog Apps** on the main navigation bar. Click **Launch**.
+1. 选择要回滚的**版本**。默认情况下，Rancher 最多保存最近的 10 个修订版本。
 
-3. Find the application that you want to rollback, and then click the &#8942; to find **Rollback**.
+1. （可选）通过选中**在回滚过程中需要时，删除并重新创建资源**复选框，选择是否要强制回滚应用。
 
-4. Select the **Revision** that you want to roll back to. By default, Rancher saves up to the last 10 revisions.
+1. 确定并点击**回滚**.
 
-5. (Optional) Select whether or not you want to force the catalog application to be upgraded by checking the box for **Delete and recreate resources if needed during the upgrade**.
+**结果**：您的应用已更新。您可以从项目的以下位置查看应用状态：
 
-    > In Kubernetes, some fields are designed to be immutable or cannot be updated directly. As of v2.2.0, you can now force your catalog application to be updated regardless of these fields. This will cause the catalog apps to be deleted and resources to be re-created if needed during the rollback.
+- **资源 > 工作负载**
+- **应用商店 > 应用列表**
 
-7. Click **Rollback**.
+## 删除应用
 
-**Result**: Your application is updated. You can view the application status from the project's:
+为了防止您无意中删除共享命名空间的其他应用，删除应用本身不会删除应用所在的命名空间。
 
-- **Workloads** view
-- **Apps** view. In versions prior to v2.2.0, this is the **Catalog Apps** view.
+因此，如果要删除一个应用和其部署的命名空间，应分别删除该应用和命名空间：
 
-### Deleting Catalog Application Deployments
+1. 使用应用的**删除**功能来删除应用。
 
-As a safeguard to prevent you from unintentionally deleting other catalog applications that share a namespace, deleting catalog applications themselves does not delete the namespace they're assigned to.
+1. 从**全局**视图中，导航到要删除的应用所在的项目。
 
-Therefore, if you want to delete both an app and the namespace that contains the app, you should remove the app and the namespace separately:
+1. 从主菜单中，选择**命名空间**。
 
-1. Uninstall the app using the app's `uninstall` function.
+1. 查找运行您的应用的命名空间。选择它，然后单击**删除**。
 
-1. From the **Global** view, navigate to the project that contains the catalog application that you want to delete.
-
-1. From the main menu, choose **Namespaces**.
-
-1. Find the namespace running your catalog app. Select it and click **Delete**.
-
-**Result:** The catalog application deployment and its namespace are deleted.
+**结果：** 应用的部署及其命名空间被删除。

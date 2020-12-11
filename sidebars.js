@@ -817,36 +817,36 @@ module.exports = {
         ],
 
         //TODO: remove comment after translation of 2.5 docs is done, it possibly needs to readjust its position in sidebar
-        /*
-        跨集群部署:[
-                    "rancher2/deploy-across-clusters/_index",
-                    "rancher2/deploy-across-clusters/fleet/_index",
-                    "rancher2/deploy-across-clusters/multi-cluster-apps/_index",
-                ]
-        */
+
+        跨集群部署: [
+            "rancher2/deploy-across-clusters/_index",
+            "rancher2/deploy-across-clusters/fleet/_index",
+            //"rancher2/deploy-across-clusters/multi-cluster-apps/_index",
+        ],
 
         //TODO: remove comment after translation of 2.5 docs is done, it possibly needs to readjust its position in sidebar
-        /*
-        HelmChart:[
+
+        HelmChart: [
+            "rancher2/helm-charts/legacy-catalogs/_index",
             "rancher2/helm-charts/app-marketplace/_index",
             {
                 type: "category",
-                label: "legacy catalogs",
+                label: "旧版应用商店",
                 items: [
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
+                    "rancher2/helm-charts/legacy-catalogs/_index",
+                    "rancher2/helm-charts/legacy-catalogs/built-in/_index",
+                    "rancher2/helm-charts/legacy-catalogs/adding-catalogs/_index",
+                    "rancher2/helm-charts/legacy-catalogs/catalog-config/_index",
+                    "rancher2/helm-charts/legacy-catalogs/creating-apps/_index",
+                    "rancher2/helm-charts/legacy-catalogs/managing-apps/_index",
+                    "rancher2/helm-charts/legacy-catalogs/multi-cluster-apps/_index",
+                    "rancher2/helm-charts/legacy-catalogs/launching-apps/_index",
+                    "rancher2/helm-charts/legacy-catalogs/tutorial/_index",
+                    "rancher2/helm-charts/legacy-catalogs/globaldns/_index",
                 ],
             },
-        ]
-        */
+        ],
+
         //TODO: remove comment after translation of 2.5 docs is done, it possibly needs to readjust its position in sidebar
         /*
         monitoringalerting: [

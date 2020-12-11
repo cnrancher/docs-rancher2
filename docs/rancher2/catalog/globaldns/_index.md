@@ -35,7 +35,7 @@ Rancher 的全局 DNS 功能提供了一种对外部 DNS 提供商进行编程�
 
 ## 全局 DNS 服务
 
-要将流量路由到的每个应用程序，您需要创建一个全局 DNS 服务。此服务将使用来自全局 DNS 提供商的域名（也称为 FQDN）来定位应用程序。这些应用程序可以为一个[多集群应用](/docs/rancher2/catalog/multi-cluster-apps/_index)或指定的一个或多个项目中的应用。您必须向 Ingress [添加特定的注释](#添加特定的注释)，以将流量正确路由到应用程序。没有此注释，DNS 服务的自动编程将无法进行。
+要将流量路由到的每个应用程序，您需要创建一个全局 DNS 服务。此服务将使用来自全局 DNS 提供商的域名（也称为 FQDN）来定位应用程序。这些应用程序可以为一个[多集群应用](/docs/rancher2/helm-charts/legacy-catalogs/multi-cluster-apps/_index)或指定的一个或多个项目中的应用。您必须向 Ingress [添加特定的注释](#添加特定的注释)，以将流量正确路由到应用程序。没有此注释，DNS 服务的自动编程将无法进行。
 
 ## 全局 DNS 提供商/服务的权限
 
@@ -87,7 +87,7 @@ Rancher 的全局 DNS 功能提供了一种对外部 DNS 提供商进行编程�
 1. 点击**添加 DNS 记录**。
 1. 输入要在外部 DNS 上编程的 **FQDN**。
 1. 从列表中选择一个全局 DNS **提供商**。
-1. 选择此 DNS 服务是用于[多集群应用](/docs/rancher2/catalog/multi-cluster-apps/_index)还是用于不同[项目](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)。您必须向目标应用程序的 Ingress 中[添加特定的注释](#添加特定的注释)。
+1. 选择此 DNS 服务是用于[多集群应用](/docs/rancher2/helm-charts/legacy-catalogs/multi-cluster-apps/_index)还是用于不同[项目](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)。您必须向目标应用程序的 Ingress 中[添加特定的注释](#添加特定的注释)。
 1. 以秒为单位配置**DNS TTL**值。默认情况下为 300 秒。
 1. 在**成员访问**下，搜索您希望能够管理此全局 DNS 服务的所有用户。
 
@@ -99,7 +99,7 @@ Rancher 的全局 DNS 功能提供了一种对外部 DNS 提供商进行编程�
 1. 为了对 DNS 进行编程，必须满足以下要求：
    - 必须在 Ingress 路由规则中的使用与全局 DNS 服务的 FQDN 匹配的`主机名`。
    - Ingress 必须具有注释（`rancher.io/globalDNS.hostname`），并且此注释的值应与全局 DNS 服务的 FQDN 相同。
-1. 一旦您的[多集群应用](/docs/rancher2/catalog/multi-cluster-apps/_index)或目标项目中的 Ingress 处于`Active`状态，Rancher 将对这个 FDQN 进行编程，自动在外部 DNS 上配置好 Ingress 的 IP 地址。
+1. 一旦您的[多集群应用](/docs/rancher2/helm-charts/legacy-catalogs/multi-cluster-apps/_index)或目标项目中的 Ingress 处于`Active`状态，Rancher 将对这个 FDQN 进行编程，自动在外部 DNS 上配置好 Ingress 的 IP 地址。
 
 ## 编辑全局 DNS 提供商
 
