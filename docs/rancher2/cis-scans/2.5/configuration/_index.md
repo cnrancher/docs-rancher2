@@ -1,6 +1,6 @@
 ---
 title: 配置
-description: description
+description: 本配置参考旨在帮助您管理由rancher-cis-benchmark应用程序创建的自定义资源。这些资源用于在集群上执行 CIS 扫描、跳过测试、设置将在扫描期间使用的测试配置文件以及其他自定义。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -11,15 +11,12 @@ keywords:
   - rancher中国
   - rancher 2.0
   - rancher2.0 中文教程
-  - subtitles1
-  - subtitles2
-  - subtitles3
-  - subtitles4
-  - subtitles5
-  - subtitles6
+  - CIS 扫描
+  - rancher 2.5
+  - 配置
 ---
 
-本配置参考旨在帮助您管理由`rancher-cis-benchmark`应用程序创建的自定义资源。这些资源用于在集群上执行 CIS 扫描、跳过测试、设置将在扫描期间使用的测试配置文件以及其他自定义。
+本配置参考旨在帮助您管理由`rancher-cis-benchmark`应用程序创建的自定义资源。这些资源用于在集群上执行 CIS 扫描、跳过测试、设置将在扫描期间使用的测试配置文件以及其他自定义配置。
 
 要配置自定义资源，请进入 Rancher UI 中的**集群资源管理器**。在左上角的下拉菜单中，单击**集群资源管理器 > CIS 基准**。
 
@@ -44,7 +41,7 @@ spec:
 
 一个配置文件包含 CIS 扫描的配置，其中包括要使用的基准版本和该基准中要跳过的任何特定测试。
 
-> 默认情况下，一些 ClusterScanProfiles 被安装为`rancher-cis-benchmark`图表的一部分。如果用户编辑了这些默认的基准或配置文件，下一次的图表更新将重新设置它们。所以建议用户不要编辑默认的 ClusterScanProfiles。
+默认情况下，一些 ClusterScanProfiles 被安装为`rancher-cis-benchmark`图表的一部分。如果用户编辑了这些默认的基准或配置文件，下一次的图表更新将重新设置它们。所以建议用户不要编辑默认的 ClusterScanProfiles。
 
 用户可以克隆 ClusterScanProfiles 来创建自定义配置文件。
 

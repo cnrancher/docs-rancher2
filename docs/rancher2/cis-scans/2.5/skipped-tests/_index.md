@@ -1,6 +1,6 @@
 ---
 title: 跳过的测试
-description: description
+description: 本节列出了 RKE 的允许性测试配置文件中跳过的测试。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -11,24 +11,21 @@ keywords:
   - rancher中国
   - rancher 2.0
   - rancher2.0 中文教程
-  - subtitles1
-  - subtitles2
-  - subtitles3
-  - subtitles4
-  - subtitles5
-  - subtitles6
+  - CIS 扫描
+  - rancher 2.5
+  - 跳过的测试
 ---
 
 本节列出了 RKE 的允许性测试配置文件中跳过的测试。
 
-> 所有跳过的测试和不适用的测试在 v2.5 生成的报告中都会被算作 "不适用"，跳过的测试数量只会提到用户定义的跳过测试。跳过的测试计数将只提及用户定义的跳过测试。这可以将用户跳过的测试与 RKE 允许测试配置文件中默认跳过的测试区分开来。
+所有跳过的测试和不适用的测试在 v2.5 生成的报告中都会被算作 "不适用"，跳过的测试数量只会提到用户定义的跳过测试。跳过的测试计数将只提及用户定义的跳过测试。这可以将用户跳过的测试与 RKE 允许测试配置文件中默认跳过的测试区分开来。
 
 ## CIS Benchmark v1.5
 
 ### CIS Benchmark v1.5 Skipped Tests
 
-| Number | Description                                                                                         | Reason for Skipping                                                                                                                                             |
-| ------ | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 号码   | 跳过改测试的原因                                                                                    |
+| :----- | :-------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1.1.12 | Ensure that the etcd data directory ownership is set to etcd:etcd (Scored)                          | A system service account is required for etcd data directory ownership. Refer to Rancher's hardening guide for more details on how to configure this ownership. |
 | 1.2.6  | Ensure that the --kubelet-certificate-authority argument is set as appropriate (Scored)             | When generating serving certificates, functionality could break in conjunction with hostname overrides which are required for certain cloud providers.          |
 | 1.2.16 | Ensure that the admission control plugin PodSecurityPolicy is set (Scored)                          | Enabling Pod Security Policy can cause applications to unexpectedly fail.                                                                                       |
