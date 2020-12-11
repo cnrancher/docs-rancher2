@@ -39,9 +39,9 @@ Prometheus 让您可以查看 Rancher 及其纳管的各个 Kubernetes 集群的
 
 - 集群监控可让您查看 Kubernetes 集群的运行状况。Prometheus 从下面的集群组件中收集指标，您可以在图表中查看这些指标。
 
-  - [Kubernetes Control Plane](/docs/rancher2/cluster-admin/tools/monitoring/cluster-metrics/_index)
-  - [etcd 数据库](/docs/rancher2/cluster-admin/tools/monitoring/cluster-metrics/_index)
-  - [所有节点](/docs/rancher2/cluster-admin/tools/monitoring/cluster-metrics/_index)
+  - [Kubernetes Control Plane](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/cluster-metrics/_index)
+  - [etcd 数据库](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/cluster-metrics/_index)
+  - [所有节点](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/cluster-metrics/_index)
 
 - [项目监控](/docs/rancher2/project-admin/tools/monitoring/_index)允许您查看在具体某个项目内运行的 Pods 的状态。项目级别的 Prometheus 可以从本项目内部署的工作负载中采集自定义指标，这些工作负载必须通过 HTTP 和 TCP/UDP 暴露指标。
 
@@ -53,10 +53,10 @@ Prometheus 让您可以查看 Rancher 及其纳管的各个 Kubernetes 集群的
 
 1. 在**全局**页面中导航到您想要配置的集群。
 1. 在导航栏中下拉**工具**，选择**监控**。
-1. 查看[资源消耗建议](#资源消耗)，以确保您有足够的资源用于 Prometheus 及其相关组件。根据需要，配置 [Prometheus 选项](/docs/rancher2/cluster-admin/tools/monitoring/prometheus/_index)。
+1. 查看[资源消耗建议](#资源消耗)，以确保您有足够的资源用于 Prometheus 及其相关组件。根据需要，配置 [Prometheus 选项](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/expression/_index)。
 1. 点击**启动**。
 
-**结果：**将部署 Prometheus 服务以及两个监控[应用商店应用](/docs/rancher2/helm-charts/legacy-catalogs/launching-apps/_index)。这两个监控应用商店应用是`cluster-monitoring`和`monitoring-operator`，它们会被添加到集群的`系统（System）`项目中。当这两个应用处于`Active`后，您可以通过 [Rancher 集群仪表盘](/docs/rancher2/cluster-admin/tools/monitoring/viewing-metrics/_index)开始查看[集群指标](/docs/rancher2/cluster-admin/tools/monitoring/cluster-metrics/_index)或直接从 [Grafana](/docs/rancher2/cluster-admin/tools/monitoring/_index)中查看。
+**结果：**将部署 Prometheus 服务以及两个监控[应用商店应用](/docs/rancher2/helm-charts/legacy-catalogs/launching-apps/_index)。这两个监控应用商店应用是`cluster-monitoring`和`monitoring-operator`，它们会被添加到集群的`系统（System）`项目中。当这两个应用处于`Active`后，您可以通过 [Rancher 集群仪表盘](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/viewing-metrics/_indexx)开始查看[集群指标](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/cluster-metrics/_index)或直接从 [Grafana](/docs/rancher2/cluster-admin/tools/monitoring/_index)中查看。
 
 > Grafana 实例的默认用户名和密码为 "admin/admin"。然而，Grafana 仪表板是通过 Rancher 认证代理提供服务的，因此只有当前通过认证进入 Rancher 服务器的用户才能访问 Grafana 仪表板
 

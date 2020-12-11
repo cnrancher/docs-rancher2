@@ -294,7 +294,7 @@ timeout: 30
 
 _可用于 v2.2.0_
 
-**通知：** 您可以决定是否要为流水线设置通知。您可以根据流水线的构建状态，启用任何[通知](/docs/rancher2/cluster-admin/tools/notifiers/_index)。在启用流水线通知之前，您需要[配置通知](/docs/rancher2/cluster-admin/tools/notifiers/_index)，这样可以轻松地添加接收者。
+**通知：** 您可以决定是否要为流水线设置通知。您可以根据流水线的构建状态，启用任何[通知](/docs/rancher2/monitoring-alerting/2.0-2.4/notifiers/_index)。在启用流水线通知之前，您需要[配置通知](/docs/rancher2/monitoring-alerting/2.0-2.4/notifiers/_index)，这样可以轻松地添加接收者。
 
 ### 通过 UI 配置通知
 
@@ -304,7 +304,7 @@ _可用于 v2.2.0_
 
 1. 选择通知的条件。您可以选择获得下列状态的通知：`Failed`，`Success`，`Changed`。例如，如果您想在执行失败时接收通知，请选择**Failed**.
 
-1. 如果您没有任何现有的[通知](/docs/rancher2/cluster-admin/tools/notifiers/_index)，Rancher 将警告您未设置任何通知，并提供一个链接，可转到设置通知页面。按照[相关说明文档](/docs/rancher2/cluster-admin/tools/notifiers/_index)添加通知。如果您已有接收者，则可以通过单击**添加接收者**按钮将其添加到通知中。
+1. 如果您没有任何现有的[通知](/docs/rancher2/monitoring-alerting/2.0-2.4/notifiers/_index)，Rancher 将警告您未设置任何通知，并提供一个链接，可转到设置通知页面。按照[相关说明文档](/docs/rancher2/monitoring-alerting/2.0-2.4/notifiers/_index)添加通知。如果您已有接收者，则可以通过单击**添加接收者**按钮将其添加到通知中。
 
    > **注意：**通知是在集群级别配置的，需要不同级别的权限。
 

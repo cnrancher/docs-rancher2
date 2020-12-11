@@ -1,5 +1,5 @@
 ---
-title: Istio
+title: 功能介绍
 description: 随着微服务网络的变化和增长，微服务网络之间的交互会变得越来越难以管理。在这种情况下，使用服务网格作为一个独立的基础设施层是非常有用的。Istio 可以让你在不直接改变微服务的情况下控制微服务之间的流量。我们对 Istio 的集成设计为，Rancher 管理员或集群所有者，可以将 Istio 交付给开发人员团队。然后，开发人员可以使用 Istio 来执行安全策略，排除问题，或管理蓝绿部署、金丝雀部署或 A/B 测试。
 keywords:
   - rancher 2.0中文文档
@@ -29,7 +29,7 @@ keywords:
 - **安全**，有资源对流量和用户进行认证和授权，包括 mTLS。
 - **可观察性**，观察日志、度量和分布式流量。
 
-在[设置 istio](/docs/rancher2/cluster-admin/tools/istio/setup/_index)之后，您可以通过集群资源管理器、`kubectl`或`istioctl`来利用 Istio 的 controlplane 功能。
+在[设置 istio](/docs/rancher2/istio/2.3.x-2.4.x/setup/_index)之后，您可以通过集群资源管理器、`kubectl`或`istioctl`来利用 Istio 的 controlplane 功能。
 
 Rancher 集成的 Istio 带有一个全面的可视化辅助工具[Kiali](https://www.kiali.io/)。Kiali 提供了一个图表，显示了服务网状结构中的服务以及它们之间的连接方式，包括它们之间的流量速率和延迟。您可以检查服务网状结构的健康状况，或者深入查看对单个组件的传入和传出请求。
 
@@ -49,15 +49,15 @@ Istio 的整体架构已被简化。通过合并 Pilot、Citadel、Galley 和 si
 
 ## 前提条件
 
-在启用 Istio 之前，我们建议您确认您的 Rancher 工作节点有足够的[CPU 和内存](/docs/rancher2/cluster-admin/tools/istio/resources/_index)来运行 Istio 的所有组件。
+在启用 Istio 之前，我们建议您确认您的 Rancher 工作节点有足够的[CPU 和内存](/docs/rancher2/istio/2.3.x-2.4.x/resources/_index)来运行 Istio 的所有组件。
 
 ## 配置指南
 
-参考[Istio 配置指南](/docs/rancher2/cluster-admin/tools/istio/setup/_index)了解如何设置 Istio 并在项目中使用 Istio。
+参考[Istio 配置指南](/docs/rancher2/istio/2.3.x-2.4.x/setup/_index)了解如何设置 Istio 并在项目中使用 Istio。
 
 ## 移除 Istio
 
-从集群、命名空间或工作负载中移除 Istio 组件，请参考 [卸载 Istio](/docs/rancher2/cluster-admin/tools/istio/disabling-istio/_index)。
+从集群、命名空间或工作负载中移除 Istio 组件，请参考 [卸载 Istio](/docs/rancher2/istio/2.3.x-2.4.x/disabling-istio/_index)。
 
 ## 从以前的 Istio 版本迁移
 
@@ -69,7 +69,7 @@ Istio 的整体架构已被简化。通过合并 Pilot、Citadel、Galley 和 si
 
 ## 查看可视化数据的权限
 
-默认情况下，只有集群管理员才有权限访问 Kiali。关于如何允许管理员、编辑或视图角色访问它们的说明，请参阅[访问可视化](/docs/rancher2/cluster-admin/tools/istio/rbac/_index)。
+默认情况下，只有集群管理员才有权限访问 Kiali。关于如何允许管理员、编辑或视图角色访问它们的说明，请参阅[访问可视化](/docs/rancher2/istio/2.3.x-2.4.x/rbac/_index)。
 
 在集群中设置 Istio 后，Grafana、Prometheus 和 Kiali 可在 Rancher UI 中使用。
 
@@ -77,7 +77,7 @@ Istio 的整体架构已被简化。通过合并 Pilot、Citadel、Galley 和 si
 
 要访问 Kiali 可视化，请从**集群资源管理器**导航到**Istio**应用程序概览页面，然后单击**Kiali**。从这里，您可以访问**流量图**选项卡或**流量指标**选项卡来查看网络可视化和指标。
 
-默认情况下，所有命名空间将被 prometheus 拾取并使数据可用于 Kiali 图。如果你想为 prometheus 数据拉取使用不同的配置，请参考[选择器/刮取配置设置](/docs/rancher2/cluster-admin/tools/istio/setup/enable-istio-in-cluster/_index)。
+默认情况下，所有命名空间将被 prometheus 拾取并使数据可用于 Kiali 图。如果你想为 prometheus 数据拉取使用不同的配置，请参考[选择器/刮取配置设置](/docs/rancher2/istio/2.3.x-2.4.x/setup/enable-istio-in-cluster/_index)。
 
 您对可视化的访问权限由您的角色决定。Grafana 和 Prometheus 只适用于`cluster-admin`角色。Kiali UI 默认只对`cluster-admin`有效，但`cluster-admin`可以通过编辑 Istio values.yaml 允许其他角色访问它们。
 

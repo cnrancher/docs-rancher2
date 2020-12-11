@@ -14,9 +14,9 @@ Prometheus 监控可以应用于 Rancher [集群层级](/docs/rancher2/cluster-a
 
 - [集群监控](/docs/rancher2/cluster-admin/tools/monitoring/_index)允许用户查看 Kubernetes 集群的健康状况。Prometheus 从以下的集群组件中收集健康数据，用户可以通过 Rancher 用户界面的图表查看集群的健康状况。
 
-  - [Kubernetes 监控指标](/docs/rancher2/cluster-admin/tools/monitoring/cluster-metrics/_index#kubernetes-components-metrics)
-  - [etcd 数据库](/docs/rancher2/cluster-admin/tools/monitoring/cluster-metrics/_index#etcd-metrics)
-  - [全部节点（包括 worker 节点）](/docs/rancher2/cluster-admin/tools/monitoring/cluster-metrics/_index#cluster-metrics)
+  - [Kubernetes 监控指标](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/cluster-metrics/_index#kubernetes-components-metrics)
+  - [etcd 数据库](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/cluster-metrics/_index#etcd-metrics)
+  - [全部节点（包括 worker 节点）](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/cluster-metrics/_index#cluster-metrics)
 
 * 项目监控允许用户查看项目内 Pod 的运行状态。项目级别的 Prometheus 可以从通过 HTTP(S)协议采集，项目中部署的工作负载的自定义指标。
 
@@ -34,7 +34,7 @@ Prometheus 监控可以应用于 Rancher [集群层级](/docs/rancher2/cluster-a
 
 1. 在导航栏选择**工具 > 监控**。
 
-1. 选择 **启用**，控制台上会出现[Prometheus 配置选项](/docs/rancher2/cluster-admin/tools/monitoring/prometheus/_index)，输入您需要配置的监控参数。
+1. 选择 **启用**，控制台上会出现[Prometheus 配置选项](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/expression/_index)，输入您需要配置的监控参数。
 
 1. 单击**保存**，保存修改后的参数配置。
 

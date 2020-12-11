@@ -1,27 +1,42 @@
 ---
-title: 1. Enable Istio in the Cluster
-weight: 1
-aliases:
-  - /rancher/v2.x/en/cluster-admin/tools/istio/setup/enable-istio-in-cluster
-  - /rancher/v2.x/en/istio/legacy/setup/enable-istio-in-cluster
+title: 启用 Istio
+description: 该集群使用默认的 Nginx 控制器来允许流量进入集群。Rancher的管理员或者集群所有者可以在一个 Kubernetes 集群中部署 Istio。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 集群管理员指南
+  - 集群访问控制
+  - 告警
+  - Istio
+  - Istio使用指南
+  - 启用 Istio
 ---
 
-This cluster uses the default Nginx controller to allow traffic into the cluster.
+## 操作步骤
 
-A Rancher [administrator]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/global-permissions/) or [cluster owner]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles) can configure Rancher to deploy Istio in a Kubernetes cluster.
+Rancher 的[管理员](/docs/rancher2/admin-settings/rbac/global-permissions/_index)或者[集群所有者](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)可以在一个 Kubernetes 集群中部署 Istio。
 
-> If the cluster has a Pod Security Policy enabled there are [prerequisites steps]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/setup/enable-istio-in-cluster/enable-istio-with-psp/)
+> 如果集群启用了 Pod 安全策略，则有[先决条件步骤](/docs/rancher2/istio/2.3.x-2.4.x/setup/enable-istio-in-cluster/enable-istio-with-psp/_index)
 
-1. From the **Global** view, navigate to the **cluster** where you want to enable Istio.
-1. Click **Tools > Istio.**
-1. Optional: Configure member access and [resource limits]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/resources/) for the Istio components. Ensure you have enough resources on your worker nodes to enable Istio.
-1. Click **Enable**.
-1. Click **Save**.
+1. 从**全局**视图中，导航到要启用 Istio 的集群。
+1. 单击**工具 > Istio**。
+1. 可选: 为 Istio 组件配置成员访问权限和[资源限制](/docs/rancher2/istio/2.3.x-2.4.x/resources/_index)。确保您的 worker 节点上有足够的资源来启用 Istio。
+1. 单击**启用**。
+1. 单击**保存**。
 
-**Result:** Istio is enabled at the cluster level.
+**结果：** 在集群层级启用了 Istio。
 
-The Istio application, `cluster-istio`, is added as an application to the cluster's `system` project.
+Istio 会作为一个名为`cluster-istio`的应用添加到该集群的`系统`项目中。
 
-When Istio is enabled in the cluster, the label for Istio sidecar auto injection,`istio-injection=enabled`, will be automatically added to each new namespace in this cluster. This automatically enables Istio sidecar injection in all new workloads that are deployed in those namespaces. You will need to manually enable Istio in preexisting namespaces and workloads.
+在集群中启用 Istio 时，Istio sidecar 自动注入的标签`istio-injection = enabled`将自动添加到该集群中的每个新的命名空间。这会自动在这些命名空间中部署的所有新工作负载中启用 Istio sidecar 注入。您将需要在预先存在的命名空间和工作负载中手动启用 Istio。
 
-### [Next: Enable Istio in a Namespace]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/setup/enable-istio-in-namespace)
+## 后续操作
+
+[在命名空间中启用 Istio](/docs/rancher2/istio/2.3.x-2.4.x/setup/enable-istio-in-namespace/_index)
