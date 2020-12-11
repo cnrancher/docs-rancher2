@@ -796,7 +796,7 @@ module.exports = {
         ],
         常见问题: [
             "rancher2/faq/_index",
-            //"rancher2/faq/deprecated-features-25x/_index",
+            "rancher2/faq/deprecated-features-25x/_index",
             "rancher2/faq/upgrades-to-2x/_index",
             "rancher2/faq/kubectl/_index",
             {
@@ -841,21 +841,52 @@ module.exports = {
             },
         ],
 
-        //TODO: remove comment after translation of 2.5 docs is done, it possibly needs to readjust its position in sidebar
-        /*
-        monitoringalerting: [
+        监控和告警: [
+            "rancher2/monitoring-alerting/_index",
+            // not ready yet
+            /*
             {
                 type: "category",
                 label: "2.0-2.4",
-                items: ["", "", "", ""],
+                items: [
+                    "rancher2/monitoring-alerting/2.0-2.4/_index",
+                    {
+                        type: "category",
+                        label: "cluster alerts",
+                        items: [
+                            "rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/_index",
+                            "rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/default-alerts/_index",
+                            "rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/_index",
+                        ],
+                    },
+                    {
+                        type: "category",
+                        label: "cluster monitoring",
+                        items: [
+                            "rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/_index",
+                            "rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/cluster-metrics/_index",
+                            "rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/custom-metrics/_index",
+                            "rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/expression/_index",
+                            "rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/project-monitoring/_index",
+                            "rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/prometheus/_index",
+                            "rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/viewing-metrics/_index",
+                        ],
+                    },
+                    "rancher2/monitoring-alerting/2.0-2.4/notifiers/_index",
+                ],
             },
+*/
             {
                 type: "category",
                 label: "2.5",
-                items: ["", "", "", ""],
+                items: [
+                    "rancher2/monitoring-alerting/2.5/_index",
+                    "rancher2/monitoring-alerting/2.5/configuration/_index",
+                    "rancher2/monitoring-alerting/2.5/migrating/_index",
+                    "rancher2/monitoring-alerting/2.5/rbac/_index",
+                ],
             },
         ],
-        */
         //TODO: remove comment after translation of 2.5 docs is done, it possibly needs to readjust its position in sidebar
         /*
         istio:[],
