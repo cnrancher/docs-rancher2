@@ -1,5 +1,5 @@
 ---
-title: Skipped and Not Applicable Tests
+title: 跳过和不适用的测试
 description: description
 keywords:
   - rancher 2.0中文文档
@@ -11,22 +11,16 @@ keywords:
   - rancher中国
   - rancher 2.0
   - rancher2.0 中文教程
-  - subtitles1
-  - subtitles2
-  - subtitles3
-  - subtitles4
-  - subtitles5
-  - subtitles6
+  - cis说明
+  - rancher 2.4
+  - 跳过和不适用的测试
 ---
 
-This section lists the tests that are skipped in the permissive test profile for RKE.
+本节列出了 RKE 的允许测试配置文件中跳过的测试。
 
-All the tests that are skipped and not applicable on this page will be counted as Not Applicable in the v2.5 generated report. The skipped test count will only mention the user-defined skipped tests. This allows user-skipped tests to be distinguished from the tests that are skipped by default in the RKE permissive test profile.
+所有跳过的测试和本页不适用的测试，在 v2.5 生成的报告中都会被算作不适用。跳过的测试计数将只提及用户定义的跳过测试。这允许用户跳过的测试与 RKE 允许的测试配置文件中默认跳过的测试区分开来。
 
-- [CIS Benchmark v1.5](#cis-benchmark-v1-5)
-- [CIS Benchmark v1.4](#cis-benchmark-v1-4)
-
-# CIS Benchmark v1.5
+## CIS Benchmark v1.5
 
 ### CIS Benchmark v1.5 Skipped Tests
 
@@ -72,7 +66,7 @@ All the tests that are skipped and not applicable on this page will be counted a
 | 4.1.10 | Ensure that the kubelet configuration file ownership is set to root:root (Scored)                                 | Clusters provisioned by RKE doesn’t require or maintain a configuration file for the kubelet. All configuration is passed in as arguments at container run time.         |
 | 4.2.12 | Ensure that the RotateKubeletServerCertificate argument is set to true (Scored)                                   | Clusters provisioned by RKE handles certificate rotation directly through RKE.                                                                                           |
 
-# CIS Benchmark v1.4
+## CIS Benchmark v1.4
 
 The skipped and not applicable tests for CIS Benchmark v1.4 are as follows:
 

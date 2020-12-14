@@ -6,78 +6,73 @@ aliases:
   - /rancher/v2.x/en/monitoring-alerting/v2.0.x-v2.4.x/monitoring/project-monitoring
 ---
 
-_Available as of v2.2.4_
+\_从 v2.2.4 开始提供。
 
-Using Rancher, you can monitor the state and processes of your cluster nodes, Kubernetes components, and software deployments through integration with [Prometheus](https://prometheus.io/), a leading open-source monitoring solution.
+## 概述
 
-This section covers the following topics:
+使用 Rancher，您可以通过与领先的开源监控解决方案[Prometheus](https://prometheus.io/)的集成，监控集群节点、Kubernetes 组件和软件部署的状态和进程。
 
-- [Monitoring scope](#monitoring-scope)
-- [Permissions to configure project monitoring](#permissions-to-configure-project-monitoring)
-- [Enabling project monitoring](#enabling-project-monitoring)
-- [Project-level monitoring resource requirements](#project-level-monitoring-resource-requirements)
-- [Project metrics](#project-metrics)
+## 监测范围
 
-### Monitoring Scope
+使用 Prometheus，您可以在 [群集级别]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/) 和项目级别上监控 Rancher。对于每个启用监控的集群和项目，Rancher 都会部署一个 Prometheus 服务器。
 
-Using Prometheus, you can monitor Rancher at both the [cluster level]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/) and project level. For each cluster and project that is enabled for monitoring, Rancher deploys a Prometheus server.
+- [集群监控]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/)允许您查看 Kubernetes 集群的健康状况。Prometheus 从下面的集群组件中收集指标，你可以在图形和图表中查看这些指标。
 
-- [Cluster monitoring]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/) allows you to view the health of your Kubernetes cluster. Prometheus collects metrics from the cluster components below, which you can view in graphs and charts.
+  - [Kubernetes 控制平面]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/cluster-metrics/#kubernetes-components-metrics)
+  - [etcd 数据库]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/cluster-metrics/#etcd-metrics)
+  - [所有节点（包括 worker）]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/cluster-metrics/#cluster-metrics)
 
-  - [Kubernetes control plane]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/cluster-metrics/#kubernetes-components-metrics)
-  - [etcd database]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/cluster-metrics/#etcd-metrics)
-  - [All nodes (including workers)]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/cluster-metrics/#cluster-metrics)
+- 项目监控允许您查看特定项目中运行的 pod 的状态。Prometheus 从项目部署的 HTTP 和 TCP/UDP 工作负载中收集指标。
 
-- Project monitoring allows you to view the state of pods running in a given project. Prometheus collects metrics from the project's deployed HTTP and TCP/UDP workloads.
+## 配置项目监测的权限
 
-### Permissions to Configure Project Monitoring
+只有[管理员]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/global-permissions/)、[集群所有者或成员]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles)，或者[项目所有者]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#project-roles)可以配置项目级监控。项目成员只能查看监控指标。
 
-Only [administrators]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/global-permissions/), [cluster owners or members]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles), or [project owners]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#project-roles) can configure project level monitoring. Project members can only view monitoring metrics.
+## 启用项目监控
 
-### Enabling Project Monitoring
+> **前提条件：**集群监控必须[启用]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/)
 
-> **Prerequisite:** Cluster monitoring must be [enabled.]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/)
+1. 转到应启用监控的项目。注意：启用群集监控后，**系统**项目中也默认启用监控。
 
-1. Go to the project where monitoring should be enabled. Note: When cluster monitoring is enabled, monitoring is also enabled by default in the **System** project.
+1. 在导航栏中选择**工具 > 监视**。
 
-1. Select **Tools > Monitoring** in the navigation bar.
+1. 选择**启用**，显示[Prometheus 配置选项]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/prometheus/)。输入你需要的配置选项。
 
-1. Select **Enable** to show the [Prometheus configuration options]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/prometheus/). Enter in your desired configuration options.
+1. 点击**保存**。
 
-1. Click **Save**.
+## 项目级的监测资源需求
 
-### Project-Level Monitoring Resource Requirements
+| 容器       | CPU 需求 | 内存需求 | CPU 限额 | 内存限额 | 是否可更改 |
+| :--------- | :------- | :------- | :------- | :------- | :--------- |
+| Prometheus | 750m     | 750Mi    | 1000m    | 1000Mi   | 是         |
+| Grafana    | 100m     | 100Mi    | 200m     | 200Mi    | 否         |
 
-| Container  | CPU - Request | Mem - Request | CPU - Limit | Mem - Limit | Configurable |
-| ---------- | ------------- | ------------- | ----------- | ----------- | ------------ |
-| Prometheus | 750m          | 750Mi         | 1000m       | 1000Mi      | Yes          |
-| Grafana    | 100m          | 100Mi         | 200m        | 200Mi       | No           |
+**结果:**一个单一的应用程序 "项目监控"，作为一个[应用程序]({{<baseurl>}}/rancher/v2.x/en/catalog/apps/)添加到项目中。应用被 "激活 "后，可以通过[Rancher 仪表盘]({{<baseurl>}}/rancher/v2.x/en/monitoring-catalog/apps)开始查看[项目指标](#project-metrics)。 x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/#rancher-dashboard）或直接从[Grafana]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/#grafana)查看。)
 
-**Result:** A single application,`project-monitoring`, is added as an [application]({{<baseurl>}}/rancher/v2.x/en/catalog/apps/) to the project. After the application is `active`, you can start viewing [project metrics](#project-metrics) through the [Rancher dashboard]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/#rancher-dashboard) or directly from [Grafana]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/#grafana).
+> Grafana 实例的默认用户名和密码是`admin/admin`。然而，Grafana 仪表板是通过 Rancher 身份验证代理提供服务的，因此只有当前通过身份验证进入 Rancher 服务器的用户才能访问 Grafana 仪表板。
 
-> The default username and password for the Grafana instance will be `admin/admin`. However, Grafana dashboards are served via the Rancher authentication proxy, so only users who are currently authenticated into the Rancher server have access to the Grafana dashboard.
+## 项目指标
 
-### Project Metrics
+如果在[集群级别]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/cluster-metrics/#workload-metrics)和
+[项目级别]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/)和[项目级](#enabling-project-monitoring)启用监控。
 
-[Workload metrics]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/cluster-metrics/#workload-metrics) are available for the project if monitoring is enabled at the [cluster level]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/) and at the [project level.](#enabling-project-monitoring)
+您可以从任何[导出器](https://prometheus.io/docs/instrumenting/exporters/)监控自定义指标。您还可以在部署上暴露一些自定义端点，而无需为项目配置 Prometheus。
 
-You can monitor custom metrics from any [exporters.](https://prometheus.io/docs/instrumenting/exporters/) You can also expose some custom endpoints on deployments without needing to configure Prometheus for your project.
+> **示例：** 一个 [Redis](https://redis.io/)。
+> 一个 [Redis](https://redis.io/) 应用程序被部署在项目`Datacenter`中的命名空间`redis-app`中。通过[Redis exporter](https://github.com/oliver006/redis_exporter)对其进行监控。启用项目监控后，您可以编辑应用程序来配置高级选项->自定义指标部分。输入 "容器端口 "和 "路径 "并选择 "协议"。
 
-> **Example:**
-> A [Redis](https://redis.io/) application is deployed in the namespace `redis-app` in the project `Datacenter`. It is monitored via [Redis exporter](https://github.com/oliver006/redis_exporter). After enabling project monitoring, you can edit the application to configure the <b>Advanced Options -> Custom Metrics</b> section. Enter the `Container Port` and `Path` and select the `Protocol`.
+访问项目级 Grafana 实例。
 
-To access a project-level Grafana instance,
+1. 从**全球**视图中，导航到已启用监控的群集。
 
-1. From the **Global** view, navigate to a cluster that has monitoring enabled.
+1. 转到已启用监控的项目。
 
-1. Go to a project that has monitoring enabled.
+1. 从项目视图中，单击**Apps**在 v2.2.0 之前的版本中，选择主导航栏上的**Catalog Apps**。
 
-1. From the project view, click **Apps.** In versions prior to v2.2.0, choose **Catalog Apps** on the main navigation bar.
+1. 进入 "项目监控 "应用程序。
 
-1. Go to the `project-monitoring` application.
+1. 在 "项目监控 "应用程序中，有两个`/index.html`链接：一个指向 Grafana 实例，一个指向 Prometheus 实例。当你点击 Grafana 链接时，它会将你重定向到 Grafana 的新网页，该网页显示了集群的指标。
 
-1. In the `project-monitoring` application, there are two `/index.html` links: one that leads to a Grafana instance and one that leads to a Prometheus instance. When you click the Grafana link, it will redirect you to a new webpage for Grafana, which shows metrics for the cluster.
+1. 您将自动登录到 Grafana 实例。默认用户名是`admin`，默认密码是`admin`。为了安全起见，我们建议您退出 Grafana，用`admin`密码重新登录，并更改密码。
 
-1. You will be signed in to the Grafana instance automatically. The default username is `admin` and the default password is `admin`. For security, we recommend that you log out of Grafana, log back in with the `admin` password, and change your password.
-
-**Results:** You will be logged into Grafana from the Grafana instance. After logging in, you can view the preset Grafana dashboards, which are imported via the [Grafana provisioning mechanism](http://docs.grafana.org/administration/provisioning/#dashboards), so you cannot modify them directly. For now, if you want to configure your own dashboards, clone the original and modify the new copy.
+**结果：**您将从 Grafana 实例登录到 Grafana。登录后，可以查看预设的 Grafana 仪表盘，这些仪表盘是通过[Grafana 供应机制](http://docs.grafana.org/administration/provisioning/#dashboards)导入的，所以不能直接修改。目前，如果您想配置自己的仪表盘，请克隆原来的仪表盘，然后修改新的副本。
