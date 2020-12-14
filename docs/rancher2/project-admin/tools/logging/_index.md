@@ -57,11 +57,11 @@ Rancher 支持启用集群层级的日志功能和项目层级的日志功能，
 1. 在导航栏单击**工具 > 日志**，进入日志配置页面。如果您使用的是 Rancher v2.2.0 以前的版本，您需要在航栏单击**资源 > 日志**，进入日志配置页面。
 1. 选择一个日志服务，输入配置参数。每个日志服务需要输入的参数都不一样，请参考每个日志服务的操作文档输入参数。Rancher 支持的日志服务有以下几种：
 
-   - [Elasticsearch](/docs/rancher2/cluster-admin/tools/logging/elasticsearch/_index)
-   - [Splunk](/docs/rancher2/cluster-admin/tools/logging/splunk/_index)
-   - [Kafka](/docs/rancher2/cluster-admin/tools/logging/kafka/_index)
-   - [Syslog](/docs/rancher2/cluster-admin/tools/logging/syslog/_index)
-   - [Fluentd](/docs/rancher2/cluster-admin/tools/logging/fluentd/_index)
+   - [Elasticsearch](/docs/rancher2/logging/2.0.x-2.4.x/cluster-logging/elasticsearch/_index)
+   - [Splunk](/docs/rancher2/logging/2.0.x-2.4.x/cluster-logging/splunk/_index)
+   - [Kafka](/docs/rancher2/logging/2.0.x-2.4.x/cluster-logging/kafka/_index)
+   - [Syslog](/docs/rancher2/logging/2.0.x-2.4.x/cluster-logging/syslog/_index)
+   - [Fluentd](/docs/rancher2/logging/2.0.x-2.4.x/cluster-logging/fluentd/_index)
 
 1. （可选）您可以使用 Rancher UI 配置日志服务的常规参数，也可以在选定日志服务后，单击**编辑文件**，输入自定义高级配置。
 
