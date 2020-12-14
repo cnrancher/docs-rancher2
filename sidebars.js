@@ -947,37 +947,66 @@ module.exports = {
             },
         ],
         //TODO: remove comment after translation of 2.5 docs is done, it possibly needs to readjust its position in sidebar
-        /*
-        logging:[
+
+        日志: [
             "rancher2/logging/_index",
+            //need traslations
+            /*
             {
                 type: "category",
                 label: "2.0-2.4",
-                items: ["", "", "", ""],
+                items: [
+                    "rancher2/logging/2.0.x-2.4.x/_index",
+                    {
+                        type: "category",
+                        label: "集群日志",
+                        items: [
+                            "rancher2/logging/2.0.x-2.4.x/cluster-logging/_index",
+                            "rancher2/logging/2.0.x-2.4.x/cluster-logging/elasticsearch/_index",
+                            "rancher2/logging/2.0.x-2.4.x/cluster-logging/fluentd/_index",
+                            "rancher2/logging/2.0.x-2.4.x/cluster-logging/kafka/_index",
+                            "rancher2/logging/2.0.x-2.4.x/cluster-logging/splunk/_index",
+                            "rancher2/logging/2.0.x-2.4.x/cluster-logging/syslog/_index",
+                        ],
+                    },
+                    "rancher2/logging/2.0.x-2.4.x/project-logging/_index",
+                ],
             },
+            */
             {
                 type: "category",
                 label: "2.5",
-                items: ["", "", "", ""],
+                items: [
+                    "rancher2/logging/2.5/_index",
+                    "rancher2/logging/2.5/migrating/_index",
+                ],
             },
         ],
-        */
-        //TODO: remove comment after translation of 2.5 docs is done, it possibly needs to readjust its position in sidebar
-        /*
-       cis-scans:[
-           "rancher2/cis-scans/_index",
+
+        CIS扫描: [
+            "rancher2/cis-scans/_index",
+            //need traslations
+            /*
             {
                 type: "category",
                 label: "2.4",
-                items: ["", "", "", ""],
+                items: [
+                    "rancher2/cis-scans/2.4/_index",
+                    "rancher2/cis-scans/2.4/skipped-tests/_index",
+                ],
             },
+            */
             {
                 type: "category",
                 label: "2.5",
-                items: ["", "", "", ""],
+                items: [
+                    "rancher2/cis-scans/2.5/_index",
+                    "rancher2/cis-scans/2.5/configuration/_index",
+                    "rancher2/cis-scans/2.5/rbac/_index",
+                    "rancher2/cis-scans/2.5/skipped-tests/_index",
+                ],
             },
         ],
-       */
         常见故障排查: [
             "rancher2/troubleshooting/_index",
             {
