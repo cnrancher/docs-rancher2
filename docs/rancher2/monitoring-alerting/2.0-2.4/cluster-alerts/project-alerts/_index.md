@@ -1,177 +1,183 @@
 ---
-title: Project Alerts
-weight: 2526
-aliases:
-  - /rancher/v2.x/en/project-admin/tools/alerts
-  - /rancher/v2.x/en/monitoring-alerting/legacy/alerts/project-alerts
+title: 项目告警
+description:
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 集群管理员指南
+  - 集群访问控制
+  - 告警
+  - 项目告警
 ---
 
-To keep your clusters and applications healthy and driving your organizational productivity forward, you need to stay informed of events occurring in your clusters and projects, both planned and unplanned. When an event occurs, your alert is triggered, and you are sent a notification. You can then, if necessary, follow up with corrective actions.
+## 概述
 
-Notifiers and alerts are built on top of the [Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager/). Leveraging these tools, Rancher can notify [cluster owners]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles) and [project owners]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#project-roles) of events they need to address.
+为了使您的集群和应用程序保持健康，并推动您的组织生产力向前发展，您需要随时了解集群和项目中发生的事件，包括计划内和计划外的事件。当事件发生时，您的警报会被触发，并向您发送通知。然后，如果有必要，您可以通过纠正行动进行跟进。
 
-Before you can receive alerts, one or more [notifier]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/notifiers) must be configured at the cluster level.
+通知器和警报建立在[Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager/)之上。利用这些工具，Rancher 可以通知 [集群所有者]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles) 和 [项目所有者]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#project-roles) 他们需要处理的事件。
 
-Only [administrators]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/global-permissions/), [cluster owners or members]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles), or [project owners]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#project-roles) can manage project alerts.
+在接收警报之前，必须在群集级别配置一个或多个 [notifier]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/notifiers)。
 
-This section covers the following topics:
+只有[管理员]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/global-permissions/)、[集群所有者或成员]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#cluster-roles)，或者[项目所有者]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/#project-roles)可以管理项目提醒。
 
-- [Alerts scope](#alerts-scope)
-- [Default project-level alerts](#default-project-level-alerts)
-- [Adding project alerts](#adding-project-alerts)
-- [Managing project alerts](#managing-project-alerts)
+## 告警范围
 
-## Alerts Scope
+警报的范围可以在[集群级别]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/alerts/)或项目级别设置。
 
-The scope for alerts can be set at either the [cluster level]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/alerts/) or project level.
+在项目级别，Rancher 会监控特定的部署，并发送警报。
 
-At the project level, Rancher monitors specific deployments and sends alerts for:
-
-- Deployment availability
-- Workloads status
-- Pod status
-- The Prometheus expression cross the thresholds
+- 部署可用性
+- 工作量状况
+- 花苞状态
+- 普罗米修斯的表达方式跨越了门槛。
 
 ## Default Project-level Alerts
 
 When you enable monitoring for the project, some project-level alerts are provided. You can receive these alerts if a [notifier]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/notifiers) for them is configured at the cluster level.
 
-| Alert                             | Explanation                                                                                                                                                                                                                                    |
-| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Less than half workload available | A critical alert is triggered if less than half of a workload is available, based on workloads where the key is `app` and the value is `workload`.                                                                                             |
-| Memory usage close to the quota   | A warning alert is triggered if the workload's memory usage exceeds the memory resource quota that is set for the workload. You can see the memory limit in the Rancher UI if you go to the workload under the **Security & Host Config** tab. |
+| 告警                              | 说明                                                                                                                                                                    |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Less than half workload available | 如果只有不到一半的工作负载可用，就会触发关键警报，其依据是键为`app`，值为`workload`的工作负载。                                                                         |
+| Memory usage close to the quota   | 如果工作负载的内存使用量超过了为工作负载设置的内存资源配额，就会触发警告警报。如果您进入**安全和主机配置**选项卡下的工作负载，您可以在 Rancher 用户界面中看到内存限制。 |
 
-For information on other default alerts, refer to the section on [cluster-level alerts.]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/alerts/default-alerts)
+关于其他默认警报的信息，请参考[集群级警报]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/alerts/default-alerts)一节。
 
-## Adding Project Alerts
+## 添加项目警报
 
-> **Prerequisite:** Before you can receive project alerts, you must add a notifier.
+**前提条件：**在接收项目提醒之前，您必须添加一个通知器。
 
-1. From the **Global** view, navigate to the project that you want to configure project alerts for. Select **Tools > Alerts**. In versions prior to v2.2.0, you can choose **Resources > Alerts**.
+1. 从**全局**视图中，导航到您要配置项目警报的项目。选择**工具 > 警报**。在 v2.2.0 之前的版本中，您可以选择**资源 > 警报**。
 
-1. Click **Add Alert Group**.
+1. 点击**添加告警组**。
 
-1. Enter a **Name** for the alert that describes its purpose, you could group alert rules for the different purpose.
+1. 为警报输入描述其目的的**名称**，您可以为不同目的的警报规则分组。
 
-1. Based on the type of alert you want to create, complete one of the instruction subsets below.
+1. 根据您要创建的警报类型，完成以下指令子集之一。
 
-This alert type monitors for the status of a specific pod.
+该警报类型监控特定 pod 的状态。
 
-1. Select the **Pod** option, and then select a pod from the drop-down.
-1. Select a pod status that triggers an alert:
+1. 选择 **Pod** 选项，然后从下拉列表中选择一个 pod。
+1. 1. 选择触发警报的 pod 状态。
 
-   - **Not Running**
-   - **Not Scheduled**
-   - **Restarted `<x>` times with the last `<x>` Minutes**
+   - **未运行**
+   - **未安排**
+   - **最近 x 分钟重启 y 次**。
 
-1. Select the urgency level of the alert. The options are:
+1. 选择警报的紧急程度。选项包括
 
-   - **Critical**: Most urgent
-   - **Warning**: Normal urgency
-   - **Info**: Least urgent
+   - **危急**：最紧急
+   - **警告**：正常紧急状态
+   - **信息**：最不紧急
 
-   Select the urgency level of the alert based on pod state. For example, select **Info** for Job pod which stop running after job finished. However, if an important pod isn't scheduled, it may affect operations, so choose **Critical**.
+   根据 pod 状态选择警报的紧急程度。例如，对于作业结束后停止运行的作业 pod，选择 **Info**。但是，如果一个重要的 pod 没有被安排，可能会影响操作，因此选择 **Critical**。
 
-1. Configure advanced options. By default, the below options will apply to all alert rules within the group. You can disable these advanced options when configuring a specific rule.
+1. 配置高级选项。默认情况下，以下选项将适用于组内的所有警报规则。配置特定规则时，可以禁用这些高级选项。
 
-   - **Group Wait Time**: How long to wait to buffer alerts of the same group before sending initially, default to 30 seconds.
-   - **Group Interval Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 30 seconds.
-   - **Repeat Wait Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 1 hour.
+   - **组等待时间**。在最初发送之前，等待多长时间来缓冲同一组的警报，默认为 30 秒。
+   - **组间隔时间**：在发送警报前等待多长时间，默认为 30 秒。在发送已添加到包含已发射的警报的组的警报前要等待多长时间，默认为 30 秒。
+   - **重复等待时间**：在发送警报前等待多长时间，默认为 30 秒。**重复等待时间**：在向包含已触发警报的组发送警报前需要等待多长时间，默认为 1 小时。
 
-This alert type monitors for the availability of a workload.
+该警报类型监控工作负载的可用性。
 
-1. Choose the **Workload** option. Then choose a workload from the drop-down.
+1. 选择 **Workload** 选项。然后从下拉菜单中选择一个工作负载。
 
-1. Choose an availability percentage using the slider. The alert is triggered when the workload's availability on your cluster nodes drops below the set percentage.
+1. 使用滑块选择可用性百分比。当工作负载在您的群集节点上的可用性下降到低于设定的百分比时，将触发警报。
 
-1. Select the urgency level of the alert.
+1. 1. 选择警报的紧急程度。
 
-   - **Critical**: Most urgent
-   - **Warning**: Normal urgency
-   - **Info**: Least urgent
+   - **危急**。最紧急
+   - **警告**。正常紧急状态
+   - **信息**。最不紧急
 
-   Select the urgency level of the alert based on the percentage you choose and the importance of the workload.
+   根据您选择的百分比和工作量的重要性选择警报的紧急程度。
 
-1. Configure advanced options. By default, the below options will apply to all alert rules within the group. You can disable these advanced options when configuring a specific rule.
+1. 配置高级选项。默认情况下，以下选项将适用于组内的所有警报规则。您可以在配置特定规则时禁用这些高级选项。
 
-   - **Group Wait Time**: How long to wait to buffer alerts of the same group before sending initially, default to 30 seconds.
-   - **Group Interval Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 30 seconds.
-   - **Repeat Wait Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 1 hour.
+   - **组等待时间**。在最初发送之前，等待多长时间来缓冲同一组的警报，默认为 30 秒。
+   - 组间隔时间\*\*：在发送警报前等待多长时间，默认为 30 秒。在发送已添加到包含已发射的警报的组的警报前要等待多长时间，默认为 30 秒。
+   - 重复等待时间**：在发送警报前等待多长时间，默认为 30 秒。重复等待时间**：在发送已添加到包含已触发警报的组的警报前要等待多长时间，默认为 1 小时。
 
-This alert type monitors for the availability of all workloads marked with tags that you've specified.
+此警报类型可监控您指定的标记为标签的所有工作负载的可用性。
 
-1. Select the **Workload Selector** option, and then click **Add Selector** to enter the key value pair for a label. If one of the workloads drops below your specifications, an alert is triggered. This label should be applied to one or more of your workloads.
+1. 选择**工作负载选择器**选项，然后单击**添加选择器**，输入标签的键值对。如果其中一个工作负载降至低于您的规格，则会触发警报。此标签应应用于您的一个或多个工作负载。
 
-1. Select the urgency level of the alert.
+1. 1. 选择警报的紧急程度。
 
-   - **Critical**: Most urgent
-   - **Warning**: Normal urgency
-   - **Info**: Least urgent
+   - **危急**。最紧急
+   - **警告**。正常紧急状态
+   - **信息**。最不紧急
 
-   Select the urgency level of the alert based on the percentage you choose and the importance of the workload.
+   根据您选择的百分比和工作量的重要性选择警报的紧急程度。
 
-1. Configure advanced options. By default, the below options will apply to all alert rules within the group. You can disable these advanced options when configuring a specific rule.
+1. 配置高级选项。默认情况下，以下选项将适用于组内的所有警报规则。您可以在配置特定规则时禁用这些高级选项。
 
-   - **Group Wait Time**: How long to wait to buffer alerts of the same group before sending initially, default to 30 seconds.
-   - **Group Interval Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 30 seconds.
-   - **Repeat Wait Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 1 hour.
+   - **组等待时间**。在最初发送之前，等待多长时间来缓冲同一组的警报，默认为 30 秒。
+   - 组间隔时间\*\*：在发送警报前等待多长时间，默认为 30 秒。在发送已添加到包含已发射的警报的组的警报前要等待多长时间，默认为 30 秒。
+   - 重复等待时间**：在发送警报前等待多长时间，默认为 30 秒。重复等待时间**：在向包含已触发警报的组发送警报前需要等待多长时间，默认为 1 小时。
 
-_Available as of v2.2.4_
+\_从 v2.2.4 开始提供。
 
-If you enable [project monitoring]({{<baseurl>}}/rancher/v2.x/en/project-admin/tools/#monitoring), this alert type monitors for the overload from Prometheus expression querying.
+如果启用了[项目监控]({{<baseurl>}}/rancher/v2.x/en/project-admin/tools/#monitoring)，该警报类型可以监控 Prometheus 表达式查询的超载情况。
 
-1. Input or select an **Expression**, the drop down shows the original metrics from Prometheus, including:
+1. 输入或选择一个**表达式**，下拉显示来自 Prometheus 的原始指标，包括。
 
-- [**Container**](https://github.com/google/cadvisor)
-- [**Kubernetes Resources**](https://github.com/kubernetes/kube-state-metrics)
-- [**Customize**]({{<baseurl>}}/rancher/v2.x/en/project-admin/tools/monitoring/#project-metrics)
-- [**Project Level Grafana**](http://docs.grafana.org/administration/metrics/)
-- **Project Level Prometheus**
+- [**容器**](https://github.com/google/cadvisor)
+- [**Kubernetes 资源**](https://github.com/kubernetes/kube-state-metrics)
+- [**自定义**]({{<baseurl>}}/rancher/v2.x/en/project-admin/tools/monitoring/#project-metrics)
+- [**项目级 Grafana**](http://docs.grafana.org/administration/metrics/)
+- **项目级普罗米修斯**。
 
-1. Choose a comparison.
+1. 选择比较。
 
-- **Equal**: Trigger alert when expression value equal to the threshold.
-- **Not Equal**: Trigger alert when expression value not equal to the threshold.
-- **Greater Than**: Trigger alert when expression value greater than to threshold.
-- **Less Than**: Trigger alert when expression value equal or less than the threshold.
-- **Greater or Equal**: Trigger alert when expression value greater to equal to the threshold.
-- **Less or Equal**: Trigger alert when expression value less or equal to the threshold.
+- 2.**等于**。当表达式的值等于阈值时，触发警报。
+- 不等于\*\*。当表达式的值不等于阈值时，触发警报。
+- 大于\*\*：当表达式的值大于阈值时触发警报。当表达式的值大于阈值时触发警报。
+- 小于**：当表达式的值等于或小于**时，触发警报。当表达式的值等于或小于阈值时，触发警报。
+- 大于或等于**：当表达式的值大于或小于阈值时触发警报。大于或等于**: 当表达式的值大于或等于阈值时触发警报。
+- 小于或等于\*\*：当表达式的值小于或等于阈值时，触发警报。当表情值小于或等于阈值时，触发警报。
 
-1.  Input a **Threshold**, for trigger alert when the value of expression cross the threshold.
+1.  1.输入**阈值**，当表达式的值超过阈值时触发警报。
 
-1.  Choose a **Comparison**.
+1.  选择一个**比较**。
 
-1.  Select a **Duration**, for trigger alert when expression value crosses the threshold longer than the configured duration.
+1.  选择**持续时间**，当表达式的值超过阈值时，触发警报。
 
-1.  Select the urgency level of the alert.
+1.  选择警报的紧急程度。
 
-    - **Critical**: Most urgent
-    - **Warning**: Normal urgency
-    - **Info**: Least urgent
+    - 选择**紧急**。最紧急
+    - **警告**。正常紧急状态
+    - **信息**。最不紧急
 
-      Select the urgency level of the alert based on its impact on operations. For example, an alert triggered when a expression for container memory close to the limit raises above 60% deems an urgency of **Info**, but raised about 95% deems an urgency of **Critical**.
+      根据警报对操作的影响，选择警报的紧急程度。例如，当容器内存接近极限的表达式提高到 60%以上时触发的警报认为是**信息**的紧急程度，但提高到 95%左右则认为是**关键**的紧急程度。
 
-1.  Configure advanced options. By default, the below options will apply to all alert rules within the group. You can disable these advanced options when configuring a specific rule.
+1.  配置高级选项。默认情况下，以下选项将适用于组内的所有警报规则。您可以在配置特定规则时禁用这些高级选项。
 
-        - **Group Wait Time**: How long to wait to buffer alerts of the same group before sending initially, default to 30 seconds.
-        - **Group Interval Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 30 seconds.
-        - **Repeat Wait Time**: How long to wait before sending an alert that has been added to a group which contains already fired alerts, default to 1 hour.
+        - **组等待时间**。在最初发送之前，等待多长时间来缓冲同一组的警报，默认为30秒。
+        - 组间隔时间**：在发送警报前等待多长时间，默认为30秒。在发送已添加到包含已发射的警报的组的警报前要等待多长时间，默认为30秒。
+        - 重复等待时间**：在发送警报前等待多长时间，默认为30秒。重复等待时间**：在发送已被添加到包含已触发警报的组的警报前需要等待多长时间，默认为1小时。
 
-1.  Continue adding more **Alert Rule** to the group.
+1.  继续向组中添加更多**警报规则**。
 
-1.  Finally, choose the [notifiers]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/notifiers/) that send you alerts.
+1.  最后，选择向你发送警报的[notifiers]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/notifiers/)。
 
-    - You can set up multiple notifiers.
-    - You can change notifier recipients on the fly.
+    - 你可以设置多个通知器。
+    - 你可以随时更改通知者的收件人。
 
-**Result:** Your alert is configured. A notification is sent when the alert is triggered.
+**结果:**您的警报已被配置。当警报被触发时，将发送一个通知。
 
-## Managing Project Alerts
+## 管理项目警报
 
-To manage project alerts, browse to the project that alerts you want to manage. Then select **Tools > Alerts**. In versions prior to v2.2.0, you can choose **Resources > Alerts**. You can:
+要管理项目警报，请浏览到您要管理警报的项目。然后选择**工具 > 警报**。在 v2.2.0 之前的版本中，您可以选择**资源 > 警报**。您可以
 
-- Deactivate/Reactive alerts
-- Edit alert settings
-- Delete unnecessary alerts
-- Mute firing alerts
-- Unmute muted alerts
+- 停用/被动警报
+- 编辑警报设置
+- 删除不必要的警报
+- 静音射击警报
+- 静音静音警报

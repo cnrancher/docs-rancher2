@@ -860,7 +860,7 @@ module.exports = {
                         items: [
                             "rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/_index",
                             "rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/default-alerts/_index",
-                            //need traslations
+                            //need translations
                             //"rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/project-alerts/_index",
                         ],
                     },
@@ -872,7 +872,7 @@ module.exports = {
                             "rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/cluster-metrics/_index",
                             "rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/custom-metrics/_index",
                             "rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/expression/_index",
-                            //need traslations
+                            //need translations
                             //"rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/project-monitoring/_index",
                             "rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/prometheus/_index",
                             "rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/viewing-metrics/_index",
@@ -956,7 +956,6 @@ module.exports = {
 
         日志: [
             "rancher2/logging/_index",
-            //need traslations
             {
                 type: "category",
                 label: "2.0-2.4",
@@ -974,7 +973,7 @@ module.exports = {
                             "rancher2/logging/2.0.x-2.4.x/cluster-logging/syslog/_index",
                         ],
                     },
-                    //need traslations
+                    //need translations
                     //"rancher2/logging/2.0.x-2.4.x/project-logging/_index",
                 ],
             },
@@ -990,7 +989,7 @@ module.exports = {
 
         CIS扫描: [
             "rancher2/cis-scans/_index",
-            //need traslations
+            //need translations
             /*
             {
                 type: "category",

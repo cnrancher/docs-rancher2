@@ -1,6 +1,7 @@
 ---
-title: CIS Scans in Rancher v2.4 (Deprecated)
-description: description
+title: Rancher v2.4 中的CIS扫描（已弃用）
+description: 本节包含 Rancher v2.4 中发布的 CIS 扫描工具的遗留文档，可在群集管理器顶部导航栏的工具菜单下获得。从 Rancher v2.5 开始，它已被废弃，并被 rancher-cis-benchmark应用程序所取代。
+
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -11,66 +12,52 @@ keywords:
   - rancher中国
   - rancher 2.0
   - rancher2.0 中文教程
-  - subtitles1
-  - subtitles2
-  - subtitles3
-  - subtitles4
-  - subtitles5
-  - subtitles6
+  - cis说明
+  - rancher 2.4
+  - 跳过和不适用的测试
 ---
 
-_Available as of v2.4.0_
+_从 v2.4.0 开始提供_
 
-This section contains the legacy documentation for the CIS Scan tool that was released in Rancher v2.4, and was available under the **Tools** menu in the top navigation bar of the cluster manager.
+本节包含 Rancher v2.4 中发布的 CIS 扫描工具的遗留文档，可在群集管理器顶部导航栏的**工具**菜单下获得。
 
-As of Rancher v2.5, it is deprecated and replaced with the `rancher-cis-benchmark` application.
+从 Rancher v2.5 开始，它已被废弃，并被 `rancher-cis-benchmark` 应用程序所取代。
 
-- [Prerequisites](#prerequisites)
-- [Running a scan](#running-a-scan)
-- [Scheduling recurring scans](#scheduling-recurring-scans)
-- [Skipping tests](#skipping-tests)
-- [Setting alerts](#setting-alerts)
-- [Deleting a report](#deleting-a-report)
-- [Downloading a report](#downloading-a-report)
-- [List of skipped and not applicable tests](#list-of-skipped-and-not-applicable-tests)
+## 先决条件
 
-# Prerequisites
+要在群集上运行安全扫描并访问生成的报告，您必须是[管理员](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)。
 
-To run security scans on a cluster and access the generated reports, you must be an [Administrator]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/global-permissions/) or [Cluster Owner.]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/cluster-project-roles/)
+Rancher 只能在使用 RKE 创建的集群上运行安全扫描，其中包括自定义集群和 Rancher 在 Amazon EC2 或 GCE 等基础设施提供商中创建的集群。导入的集群和托管的 Kubernetes 提供商中的集群不能被 Rancher 扫描。
 
-Rancher can only run security scans on clusters that were created with RKE, which includes custom clusters and clusters that Rancher created in an infrastructure provider such as Amazon EC2 or GCE. Imported clusters and clusters in hosted Kubernetes providers can't be scanned by Rancher.
+安全扫描无法在具有 Windows 节点的集群中运行。
 
-The security scan cannot run in a cluster that has Windows nodes.
+您只能看到您可以访问的集群的 CIS 扫描报告。
 
-You will only be able to see the CIS scan reports for clusters that you have access to.
+## 运行扫描
 
-# Running a Scan
+1. 从 Rancher 中的群集视图中，单击**工具 > CIS 扫描**。
+1. 单击**运行扫描**。
+1. 选择一个 CIS 扫描配置文件。
 
-1. From the cluster view in Rancher, click **Tools > CIS Scans.**
-1. Click **Run Scan.**
-1. Choose a CIS scan profile.
+**结果：**会生成一份报告，并显示在**CIS 扫描**页中。要查看报告的详细信息，请单击报告的名称。
 
-**Result:** A report is generated and displayed in the **CIS Scans** page. To see details of the report, click the report's name.
+## 设置定时扫描
 
-# Scheduling Recurring Scans
+您可以计划在任何 RKE Kubernetes 集群上运行重复扫描。
 
-Recurring scans can be scheduled to run on any RKE Kubernetes cluster.
+要启用循环扫描，请在创建群集期间或创建群集后编辑群集配置中的高级选项。
 
-To enable recurring scans, edit the advanced options in the cluster configuration during cluster creation or after the cluster has been created.
+1. 转到 Rancher 中的群集视图。
+1. 单击**工具 > CIS 扫描**。
+1. 单击**Add Schedule**这将带您进入群集编辑页面中适用于配置 CIS 扫描时间表的部分。(也可以通过进入群集视图，单击 **&#8942** > 编辑，并进入**高级选项**)到达此部分。
+1. 在**CIS 扫描启用**字段中，单击\*\*是。
+1. 在**CIS 扫描配置文件**字段中，选择**允许**或**硬化**配置文件。配置文件名称中包含相应的 CIS 基准版本。注意：无论选择**Permissive**还是**Hardened**配置文件，任何跳过的测试[在单独的 ConfigMap 中定义](#skipping-tests)都将被跳过。当选择允许的配置文件时，您应该看到哪些测试被 Rancher 跳过（RKE 集群默认跳过的测试），哪些测试被 Rancher 用户跳过。在硬性测试配置文件中，只有跳过的测试会被用户跳过。
+1. 在**CIS 扫描间隔(cron)**工作中，输入[cron 表达式](https://en.wikipedia.org/wiki/Cron#CRON_expression)来定义集群的扫描频率。
+1. 在**CIS 扫描报告保留**字段中，输入应保留的过去报告的数量。
 
-To schedule scans for an existing cluster:
+**结果：**安全扫描将按预定的时间间隔运行并生成报告。
 
-1. Go to the cluster view in Rancher.
-1. Click **Tools > CIS Scans.**
-1. Click **Add Schedule.** This takes you to the section of the cluster editing page that is applicable to configuring a schedule for CIS scans. (This section can also be reached by going to the cluster view, clicking **&#8942; > Edit,** and going to the **Advanced Options.**)
-1. In the **CIS Scan Enabled** field, click **Yes.**
-1. In the **CIS Scan Profile** field, choose a **Permissive** or **Hardened** profile. The corresponding CIS Benchmark version is included in the profile name. Note: Any skipped tests [defined in a separate ConfigMap](#skipping-tests) will be skipped regardless of whether a **Permissive** or **Hardened** profile is selected. When selecting the the permissive profile, you should see which tests were skipped by Rancher (tests that are skipped by default for RKE clusters) and which tests were skipped by a Rancher user. In the hardened test profile, the only skipped tests will be skipped by users.
-1. In the **CIS Scan Interval (cron)** job, enter a [cron expression](https://en.wikipedia.org/wiki/Cron#CRON_expression) to define how often the cluster will be scanned.
-1. In the **CIS Scan Report Retention** field, enter the number of past reports that should be kept.
-
-**Result:** The security scan will run and generate reports at the scheduled intervals.
-
-The test schedule can be configured in the `cluster.yml`:
+T 测试计划可以在`cluster.yml`中配置：
 
 ```yaml
 scheduled_cluster_scan:
@@ -84,21 +71,19 @@ scheduled_cluster_scan:
         retention: 24
 ```
 
-# Skipping Tests
+## 跳过测试
 
-You can define a set of tests that will be skipped by the CIS scan when the next report is generated.
+您可以定义一组测试，在生成下一份报告时，CIS 扫描将跳过这些测试。
 
-These tests will be skipped for subsequent CIS scans, including both manually triggered and scheduled scans, and the tests will be skipped with any profile.
+这些测试将在随后的 CIS 扫描中跳过，包括手动触发和计划扫描，任何配置文件都将跳过这些测试。
 
-The skipped tests will be listed alongside the test profile name in the cluster configuration options when a test profile is selected for a recurring cluster scan. The skipped tests will also be shown every time a scan is triggered manually from the Rancher UI by clicking **Run Scan.** The display of skipped tests allows you to know ahead of time which tests will be run in each scan.
+当为循环群集扫描选择测试配置文件时，跳过的测试将与测试配置文件名称一起在群集配置选项中列出。跳过的测试也将在每次从 Rancher UI 中通过单击 **Run Scan**手动触发扫描时显示。 跳过的测试的显示可以让您提前知道哪些测试将在每次扫描中运行。
 
-To skip tests, you will need to define them in a Kubernetes ConfigMap resource. Each skipped CIS scan test is listed in the ConfigMap alongside the version of the CIS benchmark that the test belongs to.
+要跳过测试，您需要在 Kubernetes ConfigMap 资源中定义它们。每一个跳过的 CIS 扫描测试都会在 ConfigMap 中与该测试所属的 CIS 基准版本一起列出。
 
-To skip tests by editing a ConfigMap resource,
-
-1. Create a `security-scan` namespace.
-1. Create a ConfigMap named `security-scan-cfg`.
-1. Enter the skip information under the key `config.json` in the following format:
+1. 创建一个 `security-scan`命名空间。
+1. 创建一个名为`security-scan-cfg`的 ConfigMap。
+1. 在`config.json`键下输入跳过信息，格式如下：
 
    ```json
    {
@@ -108,61 +93,61 @@ To skip tests by editing a ConfigMap resource,
    }
    ```
 
-   In the example above, the CIS benchmark version is specified alongside the tests to be skipped for that version.
+   在上面的例子中，CIS 基准版本与该版本要跳过的测试一起指定。
 
-**Result:** These tests will be skipped on subsequent scans that use the defined CIS Benchmark version.
+**结果：**这些测试将在使用定义的 CIS 基准版本的后续扫描中跳过。
 
-# Setting Alerts
+## 设置警报
 
-Rancher provides a set of alerts for cluster scans. which are not configured to have notifiers by default:
+Rancher 为群集扫描提供了一组警报，默认情况下没有配置为具有通知器。
 
-- A manual cluster scan was completed
-- A manual cluster scan has failures
-- A scheduled cluster scan was completed
-- A scheduled cluster scan has failures
+- 一个手动集群扫描已经完成
+- 手动集群扫描有故障
+- 完成了预定的群集扫描
+- 预定的群集扫描有故障
 
-> **Prerequisite:** You need to configure a [notifier]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/notifiers/) before configuring, sending, or receiving alerts.
+> **前提条件：**您需要在配置、发送或接收警报之前配置[通知](/docs/rancher2/cluster-admin/tools/notifiers/_index)。
 
-To activate an existing alert for a CIS scan result,
+要激活 CIS 扫描结果的现有警报。
 
-1. From the cluster view in Rancher, click **Tools > Alerts.**
-1. Go to the section called **A set of alerts for cluster scans.**
-1. Go to the alert you want to activate and click **&#8942; > Activate.**
-1. Go to the alert rule group **A set of alerts for cluster scans** and click **&#8942; > Edit.**
-1. Scroll down to the **Alert** section. In the **To** field, select the notifier that you would like to use for sending alert notifications.
-1. Optional: To limit the frequency of the notifications, click on **Show advanced options** and configure the time interval of the alerts.
-1. Click **Save.**
+1. 从 Rancher 中的群集视图中，单击 **工具 > 警报**。
+1. 转到名为**群集扫描的一组警报的部分**。
+1. 转到您要激活的警报，然后单击 **&#8942；>激活**。
+1. 转到警报规则组 **群集扫描的一组警报**，然后单击 **&#8942; > 编辑**。
+1. 向下滚动到**警报**部分。在**至**字段中，选择要用于发送警报通知的通知器。
+1. 可选。要限制通知的频率，请点击**显示高级选项**，配置警报的时间间隔。
+1. 点击**保存**。
 
-**Result:** The notifications will be triggered when the a scan is run on a cluster and the active alerts have satisfied conditions.
+**结果：**在群集上运行扫描且活动警报满足条件时，将触发通知。
 
-To create a new alert,
+要创建一个新的警报。
 
-1. Go to the cluster view and click **Tools > CIS Scans.**
-1. Click **Add Alert.**
-1. Fill out the form.
-1. Enter a name for the alert.
-1. In the **Is** field, set the alert to be triggered when a scan is completed or when a scan has a failure.
-1. In the **Send a** field, set the alert as a **Critical,** **Warning,** or **Info** alert level.
-1. Choose a [notifier]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/notifiers/) for the alert.
+1. 转到群集视图，然后单击**工具 > CIS 扫描**。
+1. 单击**添加警报**。
+1. 填写表格。
+1. 输入警报的名称。
+1. 在 **是**字段中，设置警报在扫描完成或扫描失败时触发。
+1. 在 **Send a** 字段中，将警报设置为 **Critical、** **Warning、** 或 **Info** 警报级别。
+1. 为警报选择一个[通知](/docs/rancher2/cluster-admin/tools/notifiers/_index)。
 
-**Result:** The alert is created and activated. The notifications will be triggered when the a scan is run on a cluster and the active alerts have satisfied conditions.
+**结果：**创建并激活了警报。当扫描在群集上运行且活动的警报满足条件时，将触发通知。
 
-For more information about alerts, refer to [this page.]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/alerts/)
+有关警报的更多信息，请参阅[通知](/docs/rancher2/cluster-admin/tools/notifiers/_index)。
 
-# Deleting a Report
+## 删除报告
 
-1. From the cluster view in Rancher, click **Tools > CIS Scans.**
-1. Go to the report that should be deleted.
-1. Click the **&#8942; > Delete.**
-1. Click **Delete.**
+1. 从 Rancher 中的群集视图中，单击**工具 > CIS 扫描**。
+1. 转到应该删除的报告。
+1. 单击 **&#8942；> 删除**。
+1. 点击**删除**。
 
-# Downloading a Report
+## 下载报告
 
-1. From the cluster view in Rancher, click **Tools > CIS Scans.**
-1. Go to the report that you want to download. Click **&#8942; > Download.**
+1. 从 Rancher 中的群集视图中，单击**工具 > CIS 扫描**。
+1. 转到您要下载的报告。单击 **&#8942;>下载**。
 
-**Result:** The report is downloaded in CSV format. For more information on each columns, refer to the [section about the generated report.](#about-the-generated-report)
+**结果：**报告以 CSV 格式下载。关于各栏的详细信息，请参考[关于生成报告的部分](#关于生成报告)。
 
-# List of Skipped and Not Applicable Tests
+# 跳过和不适用的测试清单
 
-For a list of skipped and not applicable tests, refer to <a href="{{<baseurl>}}/rancher/v2.x/en/cis-scans/legacy/skipped-tests" target="_blank">this page.</a>
+关于跳过的和不适用的测试清单，请参考[跳过和不适用的测试](/docs/rancher2/cis-scans/2.4/skipped-tests/_index)。
