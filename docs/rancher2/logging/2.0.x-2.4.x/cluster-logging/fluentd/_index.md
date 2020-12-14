@@ -1,37 +1,46 @@
 ---
 title: Fluentd
-weight: 600
-aliases:
-    - /rancher/v2.x/en/cluster-admin/tools/logging/fluentd
-    - /rancher/v2.x/en/logging/legacy/cluster-logging/fluentd
+description: 如果您的组织使用Fluentd， 则可以配置 Rancher 向其发送 Kubernetes 日志。然后，您可以在 Fluentd 服务器中查看日志。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 集群管理员指南
+  - 集群工具
+  - 日志
+  - fluentd
 ---
 
-If your organization uses [Fluentd](https://www.fluentd.org/), you can configure Rancher to send it Kubernetes logs.  Afterwards, you can log into your Fluentd server to view logs.
+如果您的组织使用 [Fluentd](https://www.fluentd.org/)， 则可以配置 Rancher 向其发送 Kubernetes 日志。完成配置后，您可以在 Fluentd 服务器中查看日志。
 
->**Prerequisites:** Configure Fluentd input forward to receive the event stream.
->
->See [Fluentd Documentation](https://docs.fluentd.org/v1.0/articles/in_forward) for details.
+> **前提：** 配置 Fluentd 接收日志。有关详细信息，请参见 [Fluentd 文档](https://docs.fluentd.org/v1.0/articles/in_forward)。
 
-## Fluentd Configuration
+### Fluentd 配置
 
-You can add multiple Fluentd Servers. If you want to add additional Fluentd servers, click **Add Fluentd Server**. For each Fluentd server, complete the configuration information:
+您可以添加多个 Fluentd 服务器。如果要添加其他 Fluentd 服务器，请单击**添加 Fluentd 服务器**。请参考以下步骤，输入每个 Fluentd 服务器的配置信息：
 
-1. In the **Endpoint** field, enter the address and port of your Fluentd instance, e.g. `http://Fluentd-server:24224`.
+1. 在**访问地址**字段中，输入 Fluentd 实例的地址和端口，例如 `http://Fluentd-server:24224`.
 
-1. Enter the **Shared Key** if your Fluentd Server is using a shared key for authentication.
+1. 如果您的 Fluentd Server 使用共享密钥进行身份验证，请输入**共享密钥**。
 
-1. Enter the **Username** and **Password** if your Fluentd Server is using username and password for authentication.
+1. 如果您的 Fluentd Server 使用用户名和密码进行身份验证，请输入**用户名**和**密码**。
 
-1. **Optional:** Enter the **Hostname** of the Fluentd server.
+1. **可选：** 输入 Fluentd 服务器的**主机名**。
 
-1. Enter the load balancing **Weight** of the Fluentd server. If the weight of one server is 20 and the other server is 30, events will be sent in a 2:3 ratio. If you do not enter a weight, the default weight is 60.
+1. 输入 Fluentd 服务器的负载均衡**权重**。如果一台服务器的权重为 20，另一台服务器的权重为 30，则事件将以 2：3 的比率发送。如果不输入权重，则默认权重为 60。
 
-1. If this server is a standby server, check **Use as Standby Only**. Standby servers are used when all other servers are not available.
+1. 如果该服务器是备用服务器，勾选**仅用作备用服务器**。当所有其他服务器都不可用时，将使用备用服务器。
 
-After adding all the Fluentd servers, you have the option to select **Enable Gzip Compression**. By default, this is enabled because the transferred payload size will be reduced.
+添加所有 Fluentd 服务器之后，您可以选择**启用 Gzip 压缩**。默认启用以减少传输数据。
 
-## SSL Configuration
+### SSL 配置
 
-If your Fluentd servers are using TLS, you need to select **Use TLS**. If you are using a self-signed certificate, provide the **CA Certificate PEM**. You can copy and paste the certificate or upload it using the **Read from a file** button.
+如果您的 Fluentd 服务器正在使用 TLS，勾选**启用 TLS**。如果您使用的是自签名证书，请提供**PEM 格式的 CA 证书**。您可以复制和粘贴证书，也可以使用**从文件读取**按钮上传证书。
 
->**Note:** Fluentd does not support self-signed certificates when client authentication is enabled. 
+> **注意：** 启用客户端身份验证后，Fluentd 不支持自签名证书。

@@ -8,6 +8,11 @@
 module.exports = {
     rancher2: {
         版本说明: [
+            // need to add release notes for 2.5.x
+            //"rancher2/releases/v2.5.2",
+            //"rancher2/releases/v2.5.1",
+            //"rancher2/releases/v2.5.0",
+            //"rancher2/releases/v2.4.9",
             "rancher2/releases/v2.4.8",
             "rancher2/releases/v2.4.7",
             "rancher2/releases/v2.4.6",
@@ -609,6 +614,7 @@ module.exports = {
                             "rancher2/cluster-admin/tools/istio/disabling-istio/_index",
                         ],
                     },
+                    //old logging, need to replace with new logging
                     {
                         type: "category",
                         label: "日志",
@@ -951,7 +957,6 @@ module.exports = {
         日志: [
             "rancher2/logging/_index",
             //need traslations
-            /*
             {
                 type: "category",
                 label: "2.0-2.4",
@@ -969,10 +974,10 @@ module.exports = {
                             "rancher2/logging/2.0.x-2.4.x/cluster-logging/syslog/_index",
                         ],
                     },
-                    "rancher2/logging/2.0.x-2.4.x/project-logging/_index",
+                    //need traslations
+                    //"rancher2/logging/2.0.x-2.4.x/project-logging/_index",
                 ],
             },
-            */
             {
                 type: "category",
                 label: "2.5",

@@ -4,8 +4,7 @@ shortTitle: Rancher v2.0-v2.4
 weight: 2
 ---
 
+本节包含 Rancherv2.0-v2.4 中可用的日志功能的文档。
 
-This section contains documentation for the logging features that were available in Rancher prior to v2.5.
-
-- [Cluster logging](./cluster-logging)
-- [Project logging](./project-logging)
+- [集群日志](/docs/rancher2/logging/2.0.x-2.4.x/cluster-logging/_index)
+- [项目日志](docs/rancher2/logging/2.0.x-2.4.x/project-logging/_index)
