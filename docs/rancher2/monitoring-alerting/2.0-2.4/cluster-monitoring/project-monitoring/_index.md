@@ -24,9 +24,9 @@ Using Prometheus, you can monitor Rancher at both the [cluster level]({{<baseurl
 
 - [Cluster monitoring]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/) allows you to view the health of your Kubernetes cluster. Prometheus collects metrics from the cluster components below, which you can view in graphs and charts.
 
-    - [Kubernetes control plane]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/cluster-metrics/#kubernetes-components-metrics)
-    - [etcd database]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/cluster-metrics/#etcd-metrics)
-    - [All nodes (including workers)]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/cluster-metrics/#cluster-metrics)
+  - [Kubernetes control plane]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/cluster-metrics/#kubernetes-components-metrics)
+  - [etcd database]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/cluster-metrics/#etcd-metrics)
+  - [All nodes (including workers)]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/cluster-metrics/#cluster-metrics)
 
 - Project monitoring allows you to view the state of pods running in a given project. Prometheus collects metrics from the project's deployed HTTP and TCP/UDP workloads.
 
@@ -48,11 +48,10 @@ Only [administrators]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/global-p
 
 ### Project-Level Monitoring Resource Requirements
 
-Container| CPU - Request | Mem - Request | CPU - Limit | Mem - Limit | Configurable
----------|---------------|---------------|-------------|-------------|-------------
-Prometheus|750m| 750Mi | 1000m | 1000Mi | Yes
-Grafana | 100m | 100Mi | 200m | 200Mi | No
-
+| Container  | CPU - Request | Mem - Request | CPU - Limit | Mem - Limit | Configurable |
+| ---------- | ------------- | ------------- | ----------- | ----------- | ------------ |
+| Prometheus | 750m          | 750Mi         | 1000m       | 1000Mi      | Yes          |
+| Grafana    | 100m          | 100Mi         | 200m        | 200Mi       | No           |
 
 **Result:** A single application,`project-monitoring`, is added as an [application]({{<baseurl>}}/rancher/v2.x/en/catalog/apps/) to the project. After the application is `active`, you can start viewing [project metrics](#project-metrics) through the [Rancher dashboard]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/#rancher-dashboard) or directly from [Grafana]({{<baseurl>}}/rancher/v2.x/en/monitoring-alerting/legacy/monitoring/cluster-monitoring/#grafana).
 
