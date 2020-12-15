@@ -1,6 +1,6 @@
 ---
 title: 最佳实践及使用技巧
-description: description
+description: 本节的目的是整合 Rancher 实施的最佳实践及使用技巧。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档

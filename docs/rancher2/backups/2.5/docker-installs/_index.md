@@ -1,6 +1,6 @@
 ---
 title: Docker安装的Rancher的备份和还原
-description: description
+description: 在 Rancher v2.5 中，用 Docker 安装的 Rancher 的备份和恢复步骤并没有改变。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档

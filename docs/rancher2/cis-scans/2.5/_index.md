@@ -29,7 +29,7 @@ Rancher 可以运行安全扫描，检查 Kubernetes 是否按照 CIS Kubernetes
 
 Rancher v2.5 中尚未提供对集群扫描结果的警报支持。
 
-增加了更多测试配置文件。在 Rancher v2.4 中，包含了允许的和硬化的配置文件。在 Rancher v2.5 中，提供了以下配置文件。
+增加了更多测试配置文件。在 Rancher v2.4 中，包含了允许的和加固的配置文件。在 Rancher v2.5 中，提供了以下配置文件。
 
 - Generic CIS 1.5
 - RKE permissive
@@ -159,7 +159,7 @@ E 扫描生成的报告可以在 Rancher 用户界面中查看，也可以以 CS
 | `actual_value`    | 测试的实际值，如果由`kube-bench'报告，则为当前值。                                                                                 |
 | `expected_result` | 测试的预期结果，如果由`kube-bench`报告，则存在。                                                                                   |
 
-请参阅表格，了解 Kubernetes、Benchmark、Rancher 和我们的集群加固指南的哪些版本相互对应。此外，还请参考硬化指南，了解符合 CIS 标准的集群的配置文件和有关补救失败测试的信息。
+请参阅表格，了解 Kubernetes、Benchmark、Rancher 和我们的集群加固指南的哪些版本相互对应。此外，还请参考加固指南，了解符合 CIS 标准的集群的配置文件和有关补救失败测试的信息。
 
 ## 测试配置文件
 
@@ -182,7 +182,7 @@ E 扫描生成的报告可以在 Rancher 用户界面中查看，也可以以 CS
 
 EKS 和 GKE 集群扫描配置文件基于这些类型集群特有的 CIS Benchmark 版本。
 
-为了通过`hardened`配置文件，您需要按照步骤进行操作，并使用硬化指南中定义的`cluster.yml`来配置 hardened 集群。
+为了通过`hardened`配置文件，您需要按照步骤进行操作，并使用加固指南中定义的`cluster.yml`来配置 hardened 集群。
 
 ## 关于跳过和不适用的测试
 

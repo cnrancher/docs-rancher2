@@ -292,7 +292,7 @@ _注意，通过 ISO 创建 VM 时不支持使用 cloud-init 选项_
 
 > **注意：**
 >
-> 如果您的集群启用了 DRS，推荐设置[VM-VM 关联性规则](https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.resmgmt.doc/GUID-7297C302-378F-4AF2-9BD6-6EDB1E0A850A.html)。这些规则使分配了 etcd 和控制平面角色的 VM 在分配给不同的节点池时可以在单独的 ESXi 节点上运行。这种做法可确保单个物理机的故障不会影响这些平面的可用性。
+> 如果您的集群启用了 DRS，推荐设置[VM-VM 关联性规则](https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.resmgmt.doc/GUID-7297C302-378F-4AF2-9BD6-6EDB1E0A850A.html)。这些规则使分配了 etcd 和 control-plane 角色的 VM 在分配给不同的节点池时可以在单独的 ESXi 节点上运行。这种做法可确保单个物理机的故障不会影响这些平面的可用性。
 
 #### B. 配置 Kubernetes 选项
 

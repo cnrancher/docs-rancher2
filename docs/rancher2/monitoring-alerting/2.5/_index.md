@@ -55,7 +55,7 @@ Prometheus 提供了你的数据的时间序列，根据[Prometheus](https://pro
 
 Prometheus 让您可以查看来自不同 Rancher 和 Kubernetes 对象的度量。使用时间戳，Prometheus 让您可以通过 Rancher UI 或 Grafana（与 Prometheus 一起部署的分析查看平台）以易于阅读的图形和可视化方式查询和查看这些指标。
 
-通过查看 Prometheus 从集群控制平面、节点和部署中抓取的数据，您可以随时了解集群中发生的一切。然后，您可以使用这些分析来更好地运行您的组织：在系统紧急情况开始之前阻止它们，制定维护策略，恢复崩溃的服务器等。
+通过查看 Prometheus 从集群 control-plane、节点和部署中抓取的数据，您可以随时了解集群中发生的一切。然后，您可以使用这些分析来更好地运行您的组织：在系统紧急情况开始之前阻止它们，制定维护策略，恢复崩溃的服务器等。
 
 ### 关于 Grafana
 
