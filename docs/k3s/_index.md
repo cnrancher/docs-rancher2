@@ -35,7 +35,7 @@ K3s 是一个完全符合 Kubernetes 的发行版，有以下增强功能。
 - 封装在简单的启动程序中，该启动程序处理很多复杂的 TLS 和选项。
 - 默认情况下是安全的，对轻量级环境有合理的默认值。
 - 添加了简单但功能强大的“batteries-included”功能，例如：本地存储提供程序，服务负载均衡器，Helm controller 和 Traefik ingress controller。
-- 所有 Kubernetes 控制平面组件的操作都封装在单个二进制文件和进程中。这使 K3s 可以自动化和管理复杂的集群操作，例如分发证书。
+- 所有 Kubernetes control-plane 组件的操作都封装在单个二进制文件和进程中。这使 K3s 可以自动化和管理复杂的集群操作，例如分发证书。
 - 外部依赖性已最小化（仅需要现代内核和 cgroup 挂载）。 K3s 软件包需要依赖项，包括：
   - containerd
   - Flannel

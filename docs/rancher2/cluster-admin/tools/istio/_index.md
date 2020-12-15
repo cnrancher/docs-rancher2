@@ -35,7 +35,7 @@ Rancher 与 Istio 的集成旨在使 Rancher 运维人员（例如管理员或�
 - 负载均衡
 - 自动重试，退避和断路
 
-在集群中启用 Istio 之后，您可以通过 `kubectl` 来使用 Istio 的控制平面功能。
+在集群中启用 Istio 之后，您可以通过 `kubectl` 来使用 Istio 的 control-plane 功能。
 
 Rancher 的 Istio 集成附带了全面的可视化辅助工具：
 

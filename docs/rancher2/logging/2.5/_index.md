@@ -274,7 +274,7 @@ spec:
 `taint`一个 Kubernetes 节点会导致 pods 排斥在该节点上运行。
 除非 pods 对该节点的污点有`tolerance`，否则它们将在集群中的其他节点上运行。
 [污点和容忍](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)可以与`PodSpec`中的`nodeSelector`[字段](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector)一起工作，它可以实现污点的\_相反效果。
-使用`nodeSelector`使豆荚对某些节点有亲和力。
+使用`nodeSelector`使 Pod 对某些节点有亲和力。
 两者都为 pod 运行的节点提供了选择。
 
 ## Rancher 日志堆栈中的默认实现

@@ -98,7 +98,7 @@ kubectl --kubeconfig /custom/path/kube.config --context <CLUSTER_NAME>-fqdn get 
 
 ### 直接连接到没有 FQDN 的集群
 
-如果没有为集群定义 FQDN，则会创建引用控制平面中每个节点的 IP 地址的额外上下文。每个上下文将被命名为 `<CLUSTER_NAME>-<NODE_NAME>`。当您想使用 `kubectl` 来访问这个集群而不需要 Rancher 时，您将需要使用这个上下文。
+如果没有为集群定义 FQDN，则会创建引用 control-plane 中每个节点的 IP 地址的额外上下文。每个上下文将被命名为 `<CLUSTER_NAME>-<NODE_NAME>`。当您想使用 `kubectl` 来访问这个集群而不需要 Rancher 时，您将需要使用这个上下文。
 
 假设 kubeconfig 文件位于 `~/.kube/config`：
 

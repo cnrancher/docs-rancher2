@@ -135,7 +135,7 @@ Rancher 支持与以下日志收集目标服务集成：
 - 随时了解容器崩溃，Pod 驱逐或节点死亡等事件
 - 更轻松地调试和排除故障
 
-**详情请参考[集群日志](/docs/rancher2/cluster-admin/tools/logging/_index)。**
+**详情请参考[集群日志](/docs/rancher2/logging/2.0.x-2.4.x/project-logging/_index)。**
 
 ### 配置告警
 

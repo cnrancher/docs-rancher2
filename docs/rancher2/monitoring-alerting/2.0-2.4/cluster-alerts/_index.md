@@ -190,7 +190,7 @@ keywords:
         - [**ETCD**](https://etcd.io/docs/v3.4.0/op-guide/monitoring/)
         - [**Kubernetes 组件**](https://github.com/kubernetes/metrics)
         - [**Kubernetes 资源**](https://github.com/kubernetes/kube-state-metrics)
-        - [**Fluentd**](https://docs.fluentd.org/v1.0/articles/monitoring-prometheus) ([日志](/docs/rancher2/cluster-admin/tools/logging/_index)中用到的)
+        - [**Fluentd**](https://docs.fluentd.org/v1.0/articles/monitoring-prometheus) ([日志](/docs/rancher2/logging/2.0.x-2.4.x/project-logging/_index)中用到的)
         - [**集群级别 Grafana**](http://docs.grafana.org/administration/metrics/)
         - **集群级别 Prometheus**
 

@@ -17,7 +17,13 @@ const metadata = {
             集群管理员指南: "为您提供Rancher容器平台集群管理功能的操作指导",
             项目管理员指南: "为您提供指Rancher容器平台项目管理功能的操作指导",
             用户指南: "为您提供Rancher容器平台普通用户功能的操作指导",
-            应用商店: "为您介绍Rancher容器平台中的应用商店、Helm Chart和应用",
+            //应用商店: "为您介绍Rancher容器平台中的应用商店、Helm Chart和应用",
+            Helm_Chart: "为您介绍Rancher容器平台中的应用商店、Helm Chart和应用",
+            跨集群部署: "多集群应用程序功能用于跨集群部署应用程序",
+            监控和告警: "为您提供监控和告警的配置指南",
+            Istio: "为您提供Istio的配置指南",
+            日志: "为您提供日志的配置指南",
+            OPA_Gatekeeper: "为您提供OPA Gatekeeper的配置指南",
             Rancher命令行: "为您提供Rancher命令行工具（Rancher CLI）的操作指导",
             系统工具:
                 "为您介绍如何使用Rancher容器平台自带的系统工具收集日志、监控集群资源和移除Kubernetes资源",
@@ -125,6 +131,14 @@ const metadata = {
                 "回滚高可用 Rancher",
             "rancher2/upgrades/rollbacks/single-node-rollbacks/_index":
                 "回滚单节点 Rancher",
+            //add 备份和恢复指南
+            "rancher2/backups/_index": "概述",
+            "rancher2/backups/2.0-2.4/_index": "v2.0-v2.4",
+            "rancher2/backups/2.5/_index": "v2.5",
+            //add 最佳实践
+            "rancher2/best-practices/_index": "最佳实践及使用技巧",
+            "rancher2/best-practices/2.0-2.4/_index": "v2.0-v2.4",
+            "rancher2/best-practices/2.5/_index": "v2.5",
             "rancher2/backups/backups/ha-backups/_index":
                 "备份 RKE 高可用 Rancher",
             "rancher2/backups/backups/k3s-backups/_index":
@@ -194,6 +208,36 @@ const metadata = {
             "rancher2/project-admin/pipelines/_index": "CI/CD 流水线",
             "rancher2/project-admin/pod-security-policies/_index":
                 "Pod 安全策略",
+            //add 跨集群部署
+            "rancher2/deploy-across-clusters/_index": "概述",
+            "rancher2/deploy-across-clusters/fleet/_index": "Fleet",
+            "rancher2/deploy-across-clusters/multi-cluster-apps/_index":
+                "部署多集群应用",
+            //end
+            //add 监控和告警
+            "rancher2/monitoring-alerting/2.0-2.4/notifiers/_index": "通知",
+            "rancher2/monitoring-alerting/2.0-2.4/_index": "v2.0-v2.4",
+            "rancher2/monitoring-alerting/2.5/_index": "v2.5.x",
+            //end
+            //add Istio
+            "rancher2/istio/_index": "Istio 使用说明",
+            "rancher2/istio/2.3.x-2.4.x/_index": "v2.3.x-v2.4.x",
+            "rancher2/istio/2.5/_index": "v2.5",
+            //end
+            //add 日志
+            "rancher2/logging/_index": "Rancher与日志服务的集成",
+            "rancher2/logging/2.0.x-2.4.x/_index": "v2.0.x-v2.4.x",
+            "rancher2/logging/2.5/_index": "v2.5",
+            //end
+            //add OPA Gatekeeper
+            "rancher2/opa-gatekeeper/_index": "OPA Gatekeeper",
+            //end
+            //add helm chart
+            "rancher2/helm-charts/_index": "概述",
+            "rancher2/helm-charts/app-marketplace/_index": "应用市场",
+            "rancher2/helm-charts/legacy-catalogs/_index":
+                "Rancher v2.4 及之前的应用市场",
+            //end
             "rancher2/k8s-in-rancher/workloads/_index": "工作负载",
             "rancher2/k8s-in-rancher/horitzontal-pod-autoscaler/_index":
                 "Pod 弹性伸缩",
@@ -205,12 +249,15 @@ const metadata = {
             "rancher2/k8s-in-rancher/configmaps/_index": "配置管理",
             "rancher2/k8s-in-rancher/secrets/_index": "密文",
             "rancher2/k8s-in-rancher/registries/_index": "镜像仓库凭证",
+            /*
+            remove
             "rancher2/catalog/built-in/_index": "内置应用商店",
             "rancher2/catalog/creating-apps/_index": "创建自己的应用",
             "rancher2/catalog/adding-catalogs/_index": "添加应用商店",
             "rancher2/catalog/multi-cluster-apps/_index": "多集群应用",
             "rancher2/catalog/launching-apps/_index": "项目级别应用",
             "rancher2/catalog/globaldns/_index": "全局 DNS",
+            */
             "rancher2/cli/_index": "Rancher CLI",
             "rancher2/system-tools/_index": "系统工具",
             "rancher2/user-settings/api-keys/_index": "API 密钥",
