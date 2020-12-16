@@ -63,8 +63,8 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
 | 端口                        | `443`             |
 | 目标类型                    | `实例`            |
 | VPC                         | 选择您的 VPC      |
-| 协议(运行状况检查)          | `HTTP`            |
-| 路径(运行状况检查)          | `/healthz`        |
+| 协议<br/>(运行状况检查)     | `HTTP`            |
+| 路径<br/>(运行状况检查)     | `/healthz`        |
 | 端口 (高级运行状况检查)     | `覆盖`,`80`       |
 | 正常阈值 (高级运行状况检查) | `3`               |
 | 不正常阈值 (高级)           | `3`               |
@@ -76,11 +76,15 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
 
 **屏幕快照目标组 TCP 端口 443 设置**
 
+<br/>
+
 ![Target group 443](/img/rancher/ha/nlb/create-targetgroup-443.png)
 
 <hr />
 
 **屏幕快照目标组 TCP 端口 443 高级设置**
+
+<br/>
 
 ![Target group 443 Advanced](/img/rancher/ha/nlb/create-targetgroup-443-advanced.png)
 
@@ -99,8 +103,8 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
 | 端口                        | `80`             |
 | 目标类型                    | `实例`           |
 | VPC                         | 选择您的 VPC     |
-| 协议(运行状况检查)          | `HTTP`           |
-| 路径(运行状况检查)          | `/healthz`       |
+| 协议<br/>(运行状况检查)     | `HTTP`           |
+| 路径<br/>(运行状况检查)     | `/healthz`       |
 | 端口 (高级运行状况检查)     | `流量端口`       |
 | 正常阈值 (高级运行状况检查) | `3`              |
 | 不正常阈值 (高级)           | `3`              |
@@ -112,11 +116,15 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
 
 **屏幕快照目标组 TCP 端口 80 设置**
 
+<br/>
+
 ![Target group 80](/img/rancher/ha/nlb/create-targetgroup-80.png)
 
 <hr />
 
 **屏幕快照目标组 TCP 端口 80 高级设置**
+
+<br/>
 
 ![Target group 80 Advanced](/img/rancher/ha/nlb/create-targetgroup-80-advanced.png)
 
@@ -136,11 +144,15 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
 
 **屏幕快照将目标添加到目标组 TCP 端口 443**
 
+<br/>
+
 ![Add targets to target group 443](/img/rancher/ha/nlb/add-targets-targetgroup-443.png)
 
 <hr />
 
 **屏幕快照已将目标添加到目标组 TCP 端口 443**
+
+<br/>
 
 ![Added targets to target group 443](/img/rancher/ha/nlb/added-targets-targetgroup-443.png)
 

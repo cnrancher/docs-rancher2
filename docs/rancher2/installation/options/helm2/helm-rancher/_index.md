@@ -36,6 +36,8 @@ keywords:
 - `stable`: 推荐生产环境中使用。（推荐）
 - `alpha`: 未来版本的实验性预览。
 
+<br/>
+
 ```
 helm repo add rancher-<CHART_REPO> https://releases.rancher.com/server-charts/<CHART_REPO>
 ```
@@ -48,11 +50,11 @@ Rancher Server 默认需要 SSL/TLS 配置来保证访问的安全性。
 
 > **提示：** 如果您想要将 SSL/TLS 访问在外部终止，请查看[使用外部 TLS 负载均衡器](/docs/rancher2/installation/options/helm2/helm-rancher/chart-options/_index#外部-tls-termination)。
 
-| 设置                                      | Chart 选项                       | 描述                                                      | 是否需要 cert-manager          |
-| ----------------------------------------- | -------------------------------- | --------------------------------------------------------- | ------------------------------ |
-| [Rancher 自签名证书](#rancher-自签名证书) | `ingress.tls.source=rancher`     | 使用 Rancher 生成的 CA 签发的自签名证书此项为**默认选项** | [是](#选装：安装-cert-manager) |
-| [Let’s Encrypt](#lets-encrypt)            | `ingress.tls.source=letsEncrypt` | 使用[Let's Encrypt](https://letsencrypt.org/)颁发的证书   | [是](#选装：安装-cert-manager) |
-| [您已有的证书](#您已有的证书)             | `ingress.tls.source=secret`      | 使用您的已有证书（Kubernetes 密文）                       | 否                             |
+| 设置                                      | Chart 选项                       | 描述                                                           | 是否需要 cert-manager          |
+| ----------------------------------------- | -------------------------------- | -------------------------------------------------------------- | ------------------------------ |
+| [Rancher 自签名证书](#rancher-自签名证书) | `ingress.tls.source=rancher`     | 使用 Rancher 生成的 CA 签发的自签名证书<br/>此项为**默认选项** | [是](#选装：安装-cert-manager) |
+| [Let’s Encrypt](#lets-encrypt)            | `ingress.tls.source=letsEncrypt` | 使用[Let's Encrypt](https://letsencrypt.org/)颁发的证书        | [是](#选装：安装-cert-manager) |
+| [您已有的证书](#您已有的证书)             | `ingress.tls.source=secret`      | 使用您的已有证书（Kubernetes 密文）                            | 否                             |
 
 :::important 重要
 Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress.tls.source=secret` 这种方式，从而减少对 cert-manager 的运维成本。
