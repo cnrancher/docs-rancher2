@@ -123,7 +123,7 @@ OPA 提供了一种声明性语言，您可以使用代码来定义策略，并�
 - 执行单元测试
 - 执行回归测试
 
-更多详情，请参阅[流水线](/docs/rancher2/k8s-in-rancher/pipelines/_index)文档。
+更多详情，请参阅[流水线](/docs/rancher2/pipelines/_index)文档。
 
 ### 告警
 
