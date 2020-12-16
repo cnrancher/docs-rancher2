@@ -751,7 +751,6 @@ module.exports = {
             "rancher2/project-admin/pipelines/_index",
             "rancher2/project-admin/pod-security-policies/_index",
         ],
-        //todo: pipeline 从 k8s-in-rancher 用户指南中挪了出来作为独立章节, missing
         流水线: [
             "rancher2/pipelines/_index",
             "rancher2/pipelines/concepts/_index",
@@ -761,7 +760,6 @@ module.exports = {
             "rancher2/pipelines/storage/_index",
             "rancher2/pipelines/docs-for-v2.0.x/_index",
         ],
-        //end, remember to delete pipleline related links in k8s-in-rancher, add pipeline in metadata, and delete pipeline in k8s in rancher in metadata.js
         HelmChart: [
             "rancher2/helm-charts/app-marketplace/_index",
             {
