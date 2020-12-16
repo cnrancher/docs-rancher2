@@ -566,7 +566,7 @@ stages:
 
 ## 项目级别流水线执行配置
 
-配置了版本控制提供商 后，您可以配置一些项目级别的[流水线](/docs/rancher2/pipelines/_index)相关的选项。
+配置了版本控制提供商 后，您可以配置一些项目级别的[流水线](/docs/rancher2/k8s-in-rancher/pipelines/_index)相关的选项。
 
 1. 从全局页面导航到需要配置流水线的项目。
 
@@ -598,7 +598,7 @@ _v2.2.0 或更新版本可用_
 
 您可以在`.rancher-pipeline.yml`文件中配置流水线步骤容器的计算资源。
 
-在[步骤类型](/docs/rancher2/pipelines/_index)中，您需要提供以下预留和限制：
+在[步骤类型](/docs/rancher2/k8s-in-rancher/pipelines/_index)中，您需要提供以下预留和限制：
 
 - **CPU 预留**: 预留给流水线步骤容器的 CPU 配额。
 - **CPU 限制**: 流水线步骤容器的能使用 CPU 的最大限额。
@@ -651,8 +651,8 @@ _v2.2.0 或更新版本可用_
 
 Docker 镜像仓库和 MinIO 工作负载默认使用临时存储，临时存储足以应对对大多数情况。如果您希望流水线内嵌的镜像仓库中的镜像和流水线日志在节点失败的情况下能被保存下来，您可以给镜像日志配置持久存储。下文提供了配置持久存储的操作指导。
 
-有关为流水线设置持久化存储的详细信息，请参阅[此页面](/docs/rancher2/pipelines/storage/_index)。
+有关为流水线设置持久化存储的详细信息，请参阅[此页面](/docs/rancher2/k8s-in-rancher/pipelines/storage/_index)。
 
 ## rancher-pipeline.yml 示例
 
-[本页](/docs/rancher2/pipelines/example/_index)上有一个示例流水线配置文件。
+[本页](/docs/rancher2/k8s-in-rancher/pipelines/example/_index)上有一个示例流水线配置文件。
