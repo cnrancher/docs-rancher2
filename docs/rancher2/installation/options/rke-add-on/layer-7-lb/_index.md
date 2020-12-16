@@ -51,12 +51,12 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
 - **SPDY** / **HTTP/2** 协议
 - 传递/设置以下请求头：
 
-  | HTTP 请求头         | 值                       | 描述                                                                                                                               |
-  | :------------------ | :----------------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
-  | `Host`              | 可达 Rancher 的 hostname | 接收请求的 Rancher Server。                                                                                                        |
-  | `X-Forwarded-Proto` | `https`                  | 标识客户端用来连接到负载均衡器或代理的协议。<br /> <br/> **注意：**如果存在此标头，则`rancher/rancher`不会将 HTTP 重定向到 HTTPS。 |
-  | `X-Forwarded-Port`  | 可达 Rancher 的端口      | 标识客户端用来连接到负载均衡器或代理的端口。                                                                                       |
-  | `X-Forwarded-For`   | 请求端 IP 地址           | 请求端的原始 IP。                                                                                                                  |
+  | HTTP 请求头         | 值                       | 描述                                                                                                                         |
+  | :------------------ | :----------------------- | :--------------------------------------------------------------------------------------------------------------------------- |
+  | `Host`              | 可达 Rancher 的 hostname | 接收请求的 Rancher Server。                                                                                                  |
+  | `X-Forwarded-Proto` | `https`                  | 标识客户端用来连接到负载均衡器或代理的协议。<br /> **注意：**如果存在此标头，则`rancher/rancher`不会将 HTTP 重定向到 HTTPS。 |
+  | `X-Forwarded-Port`  | 可达 Rancher 的端口      | 标识客户端用来连接到负载均衡器或代理的端口。                                                                                 |
+  | `X-Forwarded-For`   | 请求端 IP 地址           | 请求端的原始 IP。                                                                                                            |
 
   可以在节点的`/healthz`端点上执行健康检查，这将返回 HTTP 200。
 
@@ -105,8 +105,8 @@ RKE 使用 YAML 配置文件来安装和配置 Kubernetes 集群。根据要使�
 
 1. 下载以下模板之一，具体取决于您使用的 SSL 证书。
 
-   - [自签名证书模板<br/> `3-node-certificate.yml`](/docs/rancher2/installation/options/cluster-yml-templates/3-node-certificate/_index)
-   - [由公认的 CA 签署的证书模板<br/> `3-node-certificate-recognizedca.yml`](/docs/rancher2/installation/options/cluster-yml-templates/3-node-certificate-recognizedca/_index)
+   - [自签名证书模板 `3-node-certificate.yml`](/docs/rancher2/installation/options/cluster-yml-templates/3-node-certificate/_index)
+   - [由公认的 CA 签署的证书模板 `3-node-certificate-recognizedca.yml`](/docs/rancher2/installation/options/cluster-yml-templates/3-node-certificate-recognizedca/_index)
      > **高级配置选项：**
      >
      > - 想要记录 Rancher API 的所有事务? 通过编辑 RKE 配置文件来启用[API 审计日志](/docs/rancher2/installation/options/api-audit-log/_index)功能。有关更多信息，请参见如何在[RKE 配置文件中](/docs/rancher2/installation/options/api-audit-log/_index)中启用它。
