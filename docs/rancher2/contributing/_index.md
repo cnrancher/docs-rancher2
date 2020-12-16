@@ -52,7 +52,8 @@ keywords:
 
 ![Rancher diagram](/img/rancher/ranchercomponentsdiagram.svg)
 
-<sup>用于配置/管理 Kubernetes 集群的 Rancher 组件。</sup>
+<br/>
+<sup>用于配置/管理Kubernetes集群的Rancher组件。</sup>
 
 ## 编译，构建源代码
 

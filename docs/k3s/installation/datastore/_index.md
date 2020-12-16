@@ -87,7 +87,7 @@ K3s 支持以下数据存储选项：
 
 以上假设是一个典型的三节点 etcd 集群。该参数可以再接受一个以逗号分隔的 etcd URL。
 
-基于上述情况，可以使用下面的示例命令来启动一个连接到名为 k3s 的 PostgresSQL 数据库的 k3s server 实例:
+<br/>基于上述情况，可以使用下面的示例命令来启动一个连接到名为 k3s 的 PostgresSQL 数据库的 k3s server 实例:
 
 ```
 K3S_DATASTORE_ENDPOINT='postgres://username:password@hostname:5432/k3s' k3s server
