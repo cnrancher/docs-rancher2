@@ -238,7 +238,6 @@ const metadata = {
             "rancher2/k8s-in-rancher/load-balancers-and-ingress/_index":
                 "负载均衡和 Ingress",
             "rancher2/k8s-in-rancher/service-discovery/_index": "服务发现",
-            //"rancher2/k8s-in-rancher/pipelines/_index": "CI/CD 流水线",
             "rancher2/k8s-in-rancher/certificates/_index": "证书，加密HTTP通信",
             "rancher2/k8s-in-rancher/configmaps/_index": "配置管理",
             "rancher2/k8s-in-rancher/secrets/_index": "密文",
