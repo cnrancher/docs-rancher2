@@ -109,15 +109,11 @@ Rancher 仅支持使用 Amazon NLB 以 **tcp** 模式终止 443 端口流量。�
 
 **将目标添加到目标组 TCP 端口 443**
 
-<br/>
-
 ![Add targets to target group 443](/img/rancher/ha/nlb/add-targets-targetgroup-443.png)
 
 <hr />
 
 **已将目标添加到目标组 TCP 端口 443**
-
-<br/>
 
 ![Added targets to target group 443](/img/rancher/ha/nlb/added-targets-targetgroup-443.png)
 

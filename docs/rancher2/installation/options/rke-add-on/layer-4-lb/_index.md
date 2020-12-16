@@ -116,7 +116,7 @@ docker run -d --restart=unless-stopped \
 
 ## 3. 配置 DNS
 
-选择要用于访问 Rancher 的完全限定域名(FQDN)(例如，`rancher.yourdomain.com`)。<br/><br/>
+选择要用于访问 Rancher 的完全限定域名(FQDN)(例如，`rancher.yourdomain.com`)。
 
 1. 登录到 DNS 服务器，创建一个指向您的[负载均衡器]的 IP 地址的`DNS A`记录(#2-configure-load-balancer)。
 
@@ -136,8 +136,6 @@ docker run -d --restart=unless-stopped \
    Address: HOSTNAME.DOMAIN.COM
    ```
 
-<br/>
-
 ## 4. 安装 RKE
 
 RKE(Rancher Kubernetes 引擎)是一个快速、通用的 Kubernetes 安装程序，您可以使用它在您的 Linux 主机上安装 Kubernetes。我们将使用 RKE 来设置集群并运行 Rancher。
@@ -156,8 +154,8 @@ RKE 使用`.yml`配置文件来安装和配置 Kubernetes 集群。根据要使�
 
 1. 根据您正在使用的 SSL 证书，下载以下模板之一。
 
-   - [自签名证书模板<br/> `3-node-certificate.yml`](/docs/rancher2/installation/options/cluster-yml-templates/3-node-certificate/_index)
-   - [由公认的 CA 签署的证书模板<br/> `3-node-certificate-recognizedca.yml`](/docs/rancher2/installation/options/cluster-yml-templates/3-node-certificate-recognizedca/_index)
+   - [自签名证书模板 `3-node-certificate.yml`](/docs/rancher2/installation/options/cluster-yml-templates/3-node-certificate/_index)
+   - [由公认的 CA 签署的证书模板 `3-node-certificate-recognizedca.yml`](/docs/rancher2/installation/options/cluster-yml-templates/3-node-certificate-recognizedca/_index)
 
    > **高级配置选项：**
    >
