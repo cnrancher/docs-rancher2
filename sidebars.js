@@ -8,13 +8,10 @@
 module.exports = {
     rancher2: {
         版本说明: [
-            // need to add release notes for 2.5.x and 2.4.x
-            //"rancher2/releases/v2.5.3",
+            // need to add release notes for 2.5.x
             //"rancher2/releases/v2.5.2",
             //"rancher2/releases/v2.5.1",
             //"rancher2/releases/v2.5.0",
-            //"rancher2/releases/v2.4.11",
-            //"rancher2/releases/v2.4.10",
             //"rancher2/releases/v2.4.9",
             "rancher2/releases/v2.4.8",
             "rancher2/releases/v2.4.7",
@@ -752,16 +749,6 @@ module.exports = {
             "rancher2/project-admin/pod-security-policies/_index",
         ],
         //todo: pipeline 从 k8s-in-rancher 用户指南中挪了出来作为独立章节, missing
-        流水线: [
-            "rancher2/pipelines/_index",
-            "rancher2/pipelines/concepts/_index",
-            "rancher2/pipelines/config/_index",
-            "rancher2/pipelines/example-repos/_index",
-            "rancher2/pipelines/example/_index",
-            "rancher2/pipelines/storage/_index",
-            "rancher2/pipelines/docs-for-v2.0.x/_index",
-        ],
-        //end, remember to delete pipleline related links in k8s-in-rancher, add pipeline in metadata, and delete pipeline in k8s in rancher in metadata.js
         HelmChart: [
             "rancher2/helm-charts/app-marketplace/_index",
             {
