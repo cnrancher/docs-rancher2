@@ -12,4 +12,4 @@ title: CI/CD 流水线
 - 执行单元测试
 - 执行回归测试
 
-有关详细信息，请参阅[流水线](/docs/rancher2/k8s-in-rancher/pipelines/_index)。
+有关详细信息，请参阅[流水线](/docs/rancher2/pipelines/_index)。
