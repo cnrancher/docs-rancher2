@@ -749,6 +749,15 @@ module.exports = {
             "rancher2/project-admin/pod-security-policies/_index",
         ],
         //todo: pipeline 从 k8s-in-rancher 用户指南中挪了出来作为独立章节, missing
+        流水线: [
+            "rancher2/pipelines/_index",
+            "rancher2/pipelines/concepts/_index",
+            "rancher2/pipelines/config/_index",
+            "rancher2/pipelines/example-repos/_index",
+            "rancher2/pipelines/example/_index",
+            "rancher2/pipelines/storage/_index",
+            "rancher2/pipelines/docs-for-v2.0.x/_index",
+        ],
         HelmChart: [
             "rancher2/helm-charts/app-marketplace/_index",
             {
@@ -968,6 +977,10 @@ module.exports = {
             "rancher2/k8s-in-rancher/configmaps/_index",
             "rancher2/k8s-in-rancher/secrets/_index",
             "rancher2/k8s-in-rancher/registries/_index",
+            //TODO
+            //remove this pipelines-related stuff after merging from preview to master
+            //remove pipelines-related stuff in 'k8s-in-rancher' folder after merging from preview to master as well
+            /*
             {
                 type: "category",
                 label: "流水线",
@@ -981,6 +994,7 @@ module.exports = {
                     "rancher2/k8s-in-rancher/pipelines/docs-for-v2.0.x/_index",
                 ],
             },
+            */
         ],
         安全: [
             "rancher2/security/_index",
