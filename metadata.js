@@ -17,7 +17,6 @@ const metadata = {
             集群管理员指南: "为您提供Rancher容器平台集群管理功能的操作指导",
             项目管理员指南: "为您提供指Rancher容器平台项目管理功能的操作指导",
             用户指南: "为您提供Rancher容器平台普通用户功能的操作指导",
-            //应用商店: "为您介绍Rancher容器平台中的应用商店、Helm Chart和应用",
             Helm_Chart: "为您介绍Rancher容器平台中的应用商店、Helm Chart和应用",
             跨集群部署: "多集群应用程序功能用于跨集群部署应用程序",
             监控和告警: "为您提供监控和告警的配置指南",
@@ -206,57 +205,34 @@ const metadata = {
             "rancher2/project-admin/pipelines/_index": "CI/CD 流水线",
             "rancher2/project-admin/pod-security-policies/_index":
                 "Pod 安全策略",
-            //add 跨集群部署
             "rancher2/deploy-across-clusters/_index": "概述",
             "rancher2/deploy-across-clusters/fleet/_index": "Fleet",
             "rancher2/deploy-across-clusters/multi-cluster-apps/_index":
                 "部署多集群应用",
-            //end
-            //add 监控和告警
             "rancher2/monitoring-alerting/2.0-2.4/notifiers/_index": "通知",
             "rancher2/monitoring-alerting/2.0-2.4/_index": "v2.0-v2.4",
             "rancher2/monitoring-alerting/2.5/_index": "v2.5.x",
-            //end
-            //add Istio
             "rancher2/istio/_index": "Istio 使用说明",
             "rancher2/istio/2.3.x-2.4.x/_index": "v2.3.x-v2.4.x",
             "rancher2/istio/2.5/_index": "v2.5",
-            //end
-            //add 日志
             "rancher2/logging/_index": "Rancher与日志服务的集成",
             "rancher2/logging/2.0.x-2.4.x/_index": "v2.0.x-v2.4.x",
             "rancher2/logging/2.5/_index": "v2.5",
-            //end
-            //add OPA Gatekeeper
             "rancher2/opa-gatekeeper/_index": "OPA Gatekeeper",
-            //end
-            //add helm chart
             "rancher2/helm-charts/_index": "概述",
             "rancher2/helm-charts/app-marketplace/_index": "应用市场",
             "rancher2/helm-charts/legacy-catalogs/_index":
                 "Rancher v2.4 及之前的应用市场",
-            //end
             "rancher2/k8s-in-rancher/workloads/_index": "工作负载",
             "rancher2/k8s-in-rancher/horitzontal-pod-autoscaler/_index":
                 "Pod 弹性伸缩",
             "rancher2/k8s-in-rancher/load-balancers-and-ingress/_index":
                 "负载均衡和 Ingress",
             "rancher2/k8s-in-rancher/service-discovery/_index": "服务发现",
-            //TODO: revmove this pipeline link below
-            //"rancher2/k8s-in-rancher/pipelines/_index": "CI/CD 流水线",
             "rancher2/k8s-in-rancher/certificates/_index": "证书，加密HTTP通信",
             "rancher2/k8s-in-rancher/configmaps/_index": "配置管理",
             "rancher2/k8s-in-rancher/secrets/_index": "密文",
             "rancher2/k8s-in-rancher/registries/_index": "镜像仓库凭证",
-            /*
-            remove
-            "rancher2/catalog/built-in/_index": "内置应用商店",
-            "rancher2/catalog/creating-apps/_index": "创建自己的应用",
-            "rancher2/catalog/adding-catalogs/_index": "添加应用商店",
-            "rancher2/catalog/multi-cluster-apps/_index": "多集群应用",
-            "rancher2/catalog/launching-apps/_index": "项目级别应用",
-            "rancher2/catalog/globaldns/_index": "全局 DNS",
-            */
             "rancher2/cli/_index": "Rancher CLI",
             "rancher2/system-tools/_index": "系统工具",
             "rancher2/user-settings/api-keys/_index": "API 密钥",
@@ -400,16 +376,10 @@ const metadata = {
             "rancher1/overview/start/_index": "快速入门",
             "rancher1/overview/native-docker/_index":
                 "使用Docker命令运行Rancher",
-            /*
-            安装指南
-            */
             "rancher1/installation/basic-ssl-config/_index": "启用SSL",
             "rancher1/installation/installing-server/_index": "在线安装",
             "rancher1/installation/no-internet-access/_index": "离线安装",
             "rancher1/installation/selinux/_index": "SELinux 模式",
-            /*
-            配置参考
-             */
             "rancher1/configurations/catalog/_index": "应用商店",
             "rancher1/configurations/catalog/private-catalog/_index":
                 "私有应用商店",
@@ -430,11 +400,8 @@ const metadata = {
             "rancher1/configurations/environments/registries/_index":
                 "镜像仓库",
             "rancher1/configurations/environments/settings/_index": "系统设置",
-            /*
-            基础设施
-             */
             "rancher1/infrastructure/cattle/adding-external-services/_index":
-                "",
+                "添加外部服务",
             "rancher1/infrastructure/cattle/adding-load-balancers/_index":
                 "添加负载均衡",
             "rancher1/infrastructure/cattle/adding-service-alias/_index":
@@ -472,10 +439,6 @@ const metadata = {
             "rancher1/infrastructure/hosts/packet/_index": "添加packet主机",
             "rancher1/infrastructure/hosts/rackspace/_index":
                 "添加rackspace主机",
-
-            /*
-            基础服务
-             */
             "rancher1/rancher-service/_index": "概述",
             "rancher1/rancher-service/dns-service/_index": "DNS服务",
             "rancher1/rancher-service/load-balancer/_index": "负载均衡",
@@ -489,17 +452,11 @@ const metadata = {
                 "Rancher EBS",
             "rancher1/rancher-service/storage-services/rancher-nfs/_index":
                 "Rancher NFS",
-            /*
-            常见问题
-             */
             "rancher1/faq/_index": "常见故障排查与修复方法",
             "rancher1/faq/agents/_index": "Rancher Agent 常见问题",
             "rancher1/faq/docker/_index": "Docker 常见问题",
             "rancher1/faq/kubernetes/_index": "Kubernetes常见问题",
             "rancher1/faq/server/_index": "Rancher Server常见问题",
-            /*
-            升级指南
-             */
             "rancher1/upgrade/_index": "升级指南",
         },
     },
