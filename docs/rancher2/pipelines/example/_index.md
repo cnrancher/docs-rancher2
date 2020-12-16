@@ -11,7 +11,6 @@ keywords:
   - rancher中国
   - rancher 2.0
   - rancher2.0 中文教程
-  - 用户指南
   - 流水线
   - YAML 文件示例
 ---
