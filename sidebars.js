@@ -979,6 +979,19 @@ module.exports = {
             "rancher2/k8s-in-rancher/configmaps/_index",
             "rancher2/k8s-in-rancher/secrets/_index",
             "rancher2/k8s-in-rancher/registries/_index",
+            {
+                type: "category",
+                label: "流水线",
+                items: [
+                    "rancher2/k8s-in-rancher/pipelines/_index",
+                    "rancher2/k8s-in-rancher/pipelines/concepts/_index",
+                    "rancher2/k8s-in-rancher/pipelines/config/_index",
+                    "rancher2/k8s-in-rancher/pipelines/example-repos/_index",
+                    "rancher2/k8s-in-rancher/pipelines/example/_index",
+                    "rancher2/k8s-in-rancher/pipelines/storage/_index",
+                    "rancher2/k8s-in-rancher/pipelines/docs-for-v2.0.x/_index",
+                ],
+            },
         ],
         安全: [
             "rancher2/security/_index",

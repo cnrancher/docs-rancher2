@@ -30,5 +30,5 @@ keywords:
 
 ## Kubernetes 组件图
 
-![Cluster diagram](/img/rancher/clusterdiagram.svg)
+![Cluster diagram](/img/rancher/clusterdiagram.svg)<br/>
 <sup>线条显示了组件之间的流量。 线条颜色仅用于辅助</sup>

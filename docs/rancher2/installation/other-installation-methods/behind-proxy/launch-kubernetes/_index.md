@@ -140,7 +140,7 @@ default backend - 404
 
 - `rancher-cluster.yml`： RKE 集群配置文件。
 - `kube_config_rancher-cluster.yml`: 集群的[Kubeconfig 文件](/docs/rke/kubeconfig/_index)，此文件包含用于访问集群的凭据。
-- `rancher-cluster.rkestate`： [Kubernetes 集群状态文件](/docs/rke/installation/_index)，此文件包含用于完全访问集群的凭据。_Kubernetes 集群状态文件仅在使用 RKE v0.2.0 或更高版本时创建。_
+- `rancher-cluster.rkestate`： [Kubernetes 集群状态文件](/docs/rke/installation/_index)，此文件包含用于完全访问集群的凭据。<br/><br/>_Kubernetes 集群状态文件仅在使用 RKE v0.2.0 或更高版本时创建。_
 
 > **注意：** 后两个文件名的“rancher-cluster”部分取决于您如何命名 RKE 集群的配置文件。
 
