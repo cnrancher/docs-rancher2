@@ -16,6 +16,7 @@ const metadata = {
             创建集群: "为您介绍如何通过多种方式创建您所需要的Kubernetes集群",
             集群管理员指南: "为您提供Rancher容器平台集群管理功能的操作指导",
             项目管理员指南: "为您提供指Rancher容器平台项目管理功能的操作指导",
+            流水线: "为您提供指Rancher容器平台流水线的操作指导",
             用户指南: "为您提供Rancher容器平台普通用户功能的操作指导",
             //应用商店: "为您介绍Rancher容器平台中的应用商店、Helm Chart和应用",
             Helm_Chart: "为您介绍Rancher容器平台中的应用商店、Helm Chart和应用",
@@ -208,6 +209,14 @@ const metadata = {
             "rancher2/project-admin/pipelines/_index": "CI/CD 流水线",
             "rancher2/project-admin/pod-security-policies/_index":
                 "Pod 安全策略",
+            "rancher2/pipelines/_index": "功能介绍",
+            "rancher2/pipelines/concepts/_index": "流水线中的概念",
+            "rancher2/pipelines/config/_index": "流水线配置参考",
+            "rancher2/pipelines/example_repos/_index": "示例代码库",
+            "rancher2/pipelines/example/_index": "YAML 文件示例",
+            "rancher2/pipelines/storage/_index": "配置流水线组件的持久存储",
+            "rancher2/pipelines/docs-for-v2.0.x/_index":
+                "v2.0.x 版本中的流水线",
             //add 跨集群部署
             "rancher2/deploy-across-clusters/_index": "概述",
             "rancher2/deploy-across-clusters/fleet/_index": "Fleet",
@@ -215,7 +224,7 @@ const metadata = {
                 "部署多集群应用",
             //end
             //add 监控和告警
-            "rancher2/monitoring-alerting/2.0-2.4/notifiers/_index": "通知",
+            "rancher2/monitoring-alerting/_index": "监控和告警",
             "rancher2/monitoring-alerting/2.0-2.4/_index": "v2.0-v2.4",
             "rancher2/monitoring-alerting/2.5/_index": "v2.5.x",
             //end
@@ -244,7 +253,7 @@ const metadata = {
             "rancher2/k8s-in-rancher/load-balancers-and-ingress/_index":
                 "负载均衡和 Ingress",
             "rancher2/k8s-in-rancher/service-discovery/_index": "服务发现",
-            "rancher2/k8s-in-rancher/pipelines/_index": "CI/CD 流水线",
+            //"rancher2/pipelines/_index": "CI/CD 流水线",
             "rancher2/k8s-in-rancher/certificates/_index": "证书，加密HTTP通信",
             "rancher2/k8s-in-rancher/configmaps/_index": "配置管理",
             "rancher2/k8s-in-rancher/secrets/_index": "密文",
