@@ -18,7 +18,6 @@ const metadata = {
             项目管理员指南: "为您提供指Rancher容器平台项目管理功能的操作指导",
             流水线: "为您提供指Rancher容器平台流水线的操作指导",
             用户指南: "为您提供Rancher容器平台普通用户功能的操作指导",
-            //应用商店: "为您介绍Rancher容器平台中的应用商店、Helm Chart和应用",
             Helm_Chart: "为您介绍Rancher容器平台中的应用商店、Helm Chart和应用",
             跨集群部署: "多集群应用程序功能用于跨集群部署应用程序",
             监控和告警: "为您提供监控和告警的配置指南",
@@ -200,7 +199,7 @@ const metadata = {
             "rancher2/cluster-admin/tools/alerts/_index": "集群告警",
             "rancher2/cluster-admin/tools/istio/_index": "服务网格（Istio）",
             "rancher2/cluster-admin/tools/opa-gatekeeper/_index":
-                "政策管理（OPA Gatekeeper）",
+                "OPA Gatekeeper",
             "rancher2/cluster-admin/certificate-rotation/_index": "轮换证书",
             "rancher2/cluster-admin/backing-up-etcd/_index": "备份集群",
             "rancher2/cluster-admin/restoring-etcd/_index": "恢复集群",

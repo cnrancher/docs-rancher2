@@ -24,7 +24,7 @@ keywords:
 | :------------ | :------------- | :----------------- | :-------------- |
 | 加固指南 v2.1 | Rancher v2.1.x | Benchmark v1.3.0   | Kubernetes 1.11 |
 
-[点击这里下载 PDF 版本的加固指南](https://releases.rancher.com/documents/security/2.1.x/Rancher_Hardening_Guide.pdf)
+[单击这里下载 PDF 版本的加固指南](https://releases.rancher.com/documents/security/2.1.x/Rancher_Hardening_Guide.pdf)
 
 下面的安全加固指南是针对在生产环境的 Rancher v2.1.x 中使用 Kubernetes 1.11 版本的集群。它概述了如何满足互联网安全中心（CIS）提出的 Kubernetes 安全标准。
 

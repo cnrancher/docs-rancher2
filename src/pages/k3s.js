@@ -61,7 +61,7 @@ function Home() {
                     <h1 className="hero__title">{title}</h1>
                     <p className="hero__subtitle">{siteConfig.tagline}</p>
                     <div className="text-xs text-gray">
-                        在任何页面，您都可以点击左上角的logo回到本页。想要下载离线文档，请点击导航栏中的“获取
+                        在任何页面，您都可以单击左上角的logo回到本页。想要下载离线文档，请单击导航栏中的“获取
                         PDF 文档”。
                     </div>
                 </div>

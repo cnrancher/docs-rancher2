@@ -75,7 +75,7 @@ kubectl -n cattle-system logs -f rancher-84d886bdbb-s4s69 rancher-audit-log
 
    ![Local Cluster: System Project](/img/rancher/audit_logs_gui/context_local_system.png)
 
-1. 在主导航栏中，选择 **资源 > 工作负载** (在 v2.3.0 之前的版本, 在主导航栏中选择 **工作负载** )。找到 `cattle-system` 命名空间。找到 `rancher` 工作负载，点击它的链接。
+1. 在主导航栏中，选择 **资源 > 工作负载** (在 v2.3.0 之前的版本, 在主导航栏中选择 **工作负载** )。找到 `cattle-system` 命名空间。找到 `rancher` 工作负载，单击它的链接。
 
    ![Rancher Workload](/img/rancher/audit_logs_gui/rancher_workload.png)
 

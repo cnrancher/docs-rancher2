@@ -63,9 +63,9 @@ keywords:
 
 1. 登录到 Splunk 服务器。
 
-1. 点击**Search & Reporting**。**Indexed Events**的数量应在增加。
+1. 单击**Search & Reporting**。**Indexed Events**的数量应在增加。
 
-1. 点击 Data Summary 选择 Sources 选项卡。
+1. 单击 Data Summary 选择 Sources 选项卡。
    ![View Logs](/img/rancher/splunk/splunk4.jpg)
 
 1. 要查看实际的日志，请选择您先前声明的数据源名字。

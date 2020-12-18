@@ -70,7 +70,7 @@ _自 v2.0.3 版本起可用_
 
 1. 从**设置**页中，选择**键**。
 
-1. 点击 **New client secret**。
+1. 单击 **New client secret**。
 
    ![Create new client secret](/img/rancher/select-client-secret.png)
 
@@ -94,7 +94,7 @@ _自 v2.0.3 版本起可用_
 
    ![Open Required Permissions](/img/rancher/select-required-permissions.png)
 
-1. 点击 **Add a permission**。
+1. 单击 **Add a permission**。
 
 1. 从 **Azure Active Directory Graph**，选中以下的 **Delegated Permissions**：
 

@@ -28,7 +28,7 @@ Rancher 支持以下服务：
 - syslog
 - Fluentd
 
-**注意：**您只能为每个群集或每个项目配置一个日志服务。
+**注意：**您只能为每个集群或每个项目配置一个日志服务。
 
 只有[管理员](/docs/rancher2/admin-settings/rbac/global-permissions/_index)、[集群所有者或成员](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)，或者[项目所有者](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)可以配置 Rancher 将 Kubernetes 日志发送到日志服务。
 
@@ -48,7 +48,7 @@ Logging Driver: json-file
 - 将 Kubernetes 基础设施中的错误和警告记录到一个 stream 中。该 stream 会通知你容器崩溃、pod eviction 或节点死亡等事件。
 - 允许您捕获和分析集群的状态，并使用日志流寻找环境中的变化趋势。
 - 可以帮助您进行故障排除或调试时。
-- 将您的日志保存到群集之外的安全位置，这样即使您的群集遇到问题，您仍然可以访问它们。
+- 将您的日志保存到集群之外的安全位置，这样即使您的集群遇到问题，您仍然可以访问它们。
 
 ## 记录范围
 
@@ -78,7 +78,7 @@ Logging Driver: json-file
     - [Syslog](/docs/rancher2/logging/2.0.x-2.4.x/project-logging/syslog/_index)
     - [Fluentd](/docs/rancher2/logging/2.0.x-2.4.x/project-logging/fluentd/_index)
 
-1.  (可选)不使用用户界面配置日志服务，而是点击位于日志目标上方的**编辑为文件**，进入自定义高级配置。该链接只有在您选择日志服务后才可见。
+1.  (可选)不使用用户界面配置日志服务，而是单击位于日志目标上方的**编辑为文件**，进入自定义高级配置。该链接只有在您选择日志服务后才可见。
 
     - 通过文件编辑器，输入任何日志服务的原始 fluentd 配置。关于如何设置输出配置，请参考每个日志服务的文档。
 
@@ -110,7 +110,7 @@ Logging Driver: json-file
 
     1. **包括系统日志**。系统项目和 RKE 组件中的 pods 的日志将被发送到目标。取消勾选则不包括系统日志。
 
-1.  点击**测试**。Rancher 向服务发送测试日志。
+1.  单击**测试**。Rancher 向服务发送测试日志。
 
          **注意：**如果您使用自定义配置编辑器，该按钮将被*Dry Run*替换。在这种情况下，Rancher 会调用 fluentd dry run 命令来验证配置。
 

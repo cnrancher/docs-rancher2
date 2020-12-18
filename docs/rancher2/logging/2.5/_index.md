@@ -36,9 +36,9 @@ keywords:
 您可以通过进入“应用市场”页面并安装日志应用程序，为 Rancher 管理的集群启用日志记录。
 
 1. 在 Rancher UI 中，进入要安装日志记录的集群，然后单击 **集群资源管理器**。
-1. 点击**应用**。
-1. 点击`rancher-logging`应用程序。
-1. 滚动到 Helm chart README 底部，点击**安装**。
+1. 单击**应用**。
+1. 单击`rancher-logging`应用程序。
+1. 滚动到 Helm chart README 底部，单击**安装**。
 
 **结果：**日志应用部署在`cattle-logging-system`命名空间中。
 
@@ -47,7 +47,7 @@ keywords:
 1. 从**群组资源管理器**中，单击**应用市场**。
 1. 单击**安装的应用程序**。
 1. 进入`cattle-logging-system`命名空间，选中`rancher-logging`和`rancher-logging-crd`的方框。
-1. 点击**删除**。
+1. 单击**删除**。
 1. 确认 **删除**。
 
 **结果：** `rancher-logging`被卸载。

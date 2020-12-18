@@ -19,7 +19,7 @@ keywords:
 
 ## 仪表盘
 
-仪表盘会显示 Prometheus 收集到的监控数据。点击右边的 Grafana 图标，浏览器会打开一个新的页签，在 Grafana 里呈现这些监控数据。
+仪表盘会显示 Prometheus 收集到的监控数据。单击右边的 Grafana 图标，浏览器会打开一个新的页签，在 Grafana 里呈现这些监控数据。
 
 ![仪表盘](/img/rancher/dashboard.png)
 

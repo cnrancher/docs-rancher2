@@ -78,8 +78,8 @@ Overlay File 将在 Istio chart 安装提供的默认安装之上添加配置。
 将 `ingnoreNamspaceSelectors` 设置为 True，可以将监控限制在特定的命名空间：
 
 1. 在**集群资源管理器**中，如果已经安装了监控，请导航到**安装的应用程序**，或**应用商店**中的**Chart**。
-1. 如果开始新的安装，点击**rancher-monitoring**chart，然后在**chart 选项**中点击**以 Yaml 形式编辑**。
-1. 如果更新现有的安装，请点击**升级**，然后在**chart 选项**中点击**以 Yaml 形式编辑**。
+1. 如果开始新的安装，单击**rancher-monitoring**chart，然后在**chart 选项**中单击**以 Yaml 形式编辑**。
+1. 如果更新现有的安装，请单击**升级**，然后在**chart 选项**中单击**以 Yaml 形式编辑**。
 1. 设置`prometheus.prometheusSpec.ignoreNamespaceSelectors=true`。
 1. 完成安装或升级。
 
@@ -101,7 +101,7 @@ Overlay File 将在 Istio chart 安装提供的默认安装之上添加配置。
 1. 从**集群资源管理器**，打开 kubectl shell。
    如果该文件存储在您的集群中的本地，请运行`kubectl create -f <name of service/pod monitor file>.yaml`。
 1. 或者运行`cat<< EOF | kubectl apply -f -`，将文件内容粘贴到终端，然后运行`EOF`完成命令。
-1. 如果开始新的安装，**点击**rancher-monitoring**图，向下滚动到**Preview Yaml\*\*。
+1. 如果开始新的安装，**单击**rancher-monitoring**图，向下滚动到**Preview Yaml\*\*。
 1. 运行`kubectl label namespace <your namespace> istio-injection=enabled`启用 envoy sidecar 注入。
 
 **结果:** `<namspace>`可以被 prometheus 拉取。
@@ -146,8 +146,8 @@ spec:
 将 `ingnoreNamspaceSelectors` 设置为 False，并给 prometheus 提供额外的 scrape 配置，可以跨命名空间进行监控：
 
 1. 在**集群资源管理器**中，如果已经安装了监控，请导航到**安装的应用程序**，或**应用商店**中的**Chart**。
-1. 如果开始新的安装，点击**rancher-monitoring**chart，然后在**chart 选项**中点击**以 Yaml 形式编辑**。
-1. 如果更新现有的安装，请点击**升级**，然后在**chart 选项**中点击**以 Yaml 形式编辑**。
+1. 如果开始新的安装，单击**rancher-monitoring**chart，然后在**chart 选项**中单击**以 Yaml 形式编辑**。
+1. 如果更新现有的安装，请单击**升级**，然后在**chart 选项**中单击**以 Yaml 形式编辑**。
 1. 设置`prometheus.prometheusSpec.ignoreNamespaceSelectors=false`。
 1. 完成安装或升级。
 

@@ -49,7 +49,7 @@ _从 v2.2.4 开始提供_
 
 1. 选择**启用**，显示[Prometheus 配置选项](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/_indexprometheus/)。输入你需要的配置选项。
 
-1. 点击**保存**。
+1. 单击**保存**。
 
 ## 项目级的监控资源需求
 
@@ -82,7 +82,7 @@ Grafana 实例的默认用户名和密码是`admin/admin`。然而，Grafana 仪
 
 1. 进入`project-monitoring`应用程序。
 
-1. 在 `project-monitoring`应用程序中，有两个`/index.html`链接：一个指向 Grafana 实例，一个指向 Prometheus 实例。当你点击 Grafana 链接时，它会将你重定向到 Grafana 仪表盘，显示集群的参数。
+1. 在 `project-monitoring`应用程序中，有两个`/index.html`链接：一个指向 Grafana 实例，一个指向 Prometheus 实例。当你单击 Grafana 链接时，它会将你重定向到 Grafana 仪表盘，显示集群的参数。
 
 1. 您将自动登录到 Grafana 实例。默认用户名是`admin`，默认密码是`admin`。为了安全起见，我们建议您退出 Grafana，用`admin`密码重新登录，并更改密码。
 

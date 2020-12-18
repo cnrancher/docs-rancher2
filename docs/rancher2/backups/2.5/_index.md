@@ -69,9 +69,9 @@ Backup 和 Restore 自定义资源可以在 Rancher UI 中创建，或者使用 
 ### 使用 Rancher UI 安装 rancher-backup
 
 1. 在 Rancher UI 的 **Cluster Manager** 中，选择名为**local**的集群。
-1. 在右上角点击 **Cluster Explorer**。
-1. 点击 **Apps**。
-1. 点击 `rancher-backup` operator。
+1. 在右上角单击 **Cluster Explorer**。
+1. 单击 **Apps**。
+1. 单击 `rancher-backup` operator。
 1. （可选）配置默认的存储位置。有关帮助，请参阅[配置部分](/configuration/storage-config/_index)。
 
 **结果：**安装了 `rancher-backup` operator。

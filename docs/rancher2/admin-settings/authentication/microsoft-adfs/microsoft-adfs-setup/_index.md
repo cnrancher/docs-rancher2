@@ -21,7 +21,7 @@ keywords:
 
 1. 以管理用户身份登录到 AD 服务器。
 
-2. 打开 **AD FS Management** 控制台。从 **Actions** 菜单中选择 **Add Relying Party Trust...**，点击 **Start**。
+2. 打开 **AD FS Management** 控制台。从 **Actions** 菜单中选择 **Add Relying Party Trust...**，单击 **Start**。
 
    ![](/img/rancher/adfs/adfs-overview.png)
 
@@ -58,11 +58,11 @@ keywords:
 
     ![](/img/rancher/adfs/adfs-add-rpt-9.png)
 
-11. 查看完设置后, 点击 **Next** 以添加以添加依赖方信任。
+11. 查看完设置后, 单击 **Next** 以添加以添加依赖方信任。
 
     ![](/img/rancher/adfs/adfs-add-rpt-10.png)
 
-12. 在 **Open the Edit Claim Rules...** 然后点击 **Close**。
+12. 在 **Open the Edit Claim Rules...** 然后单击 **Close**。
 
     ![](/img/rancher/adfs/adfs-add-rpt-11.png)
 

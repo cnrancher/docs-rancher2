@@ -27,10 +27,10 @@ keywords:
 
 ## 创建 Restore 自定义资源
 
-1. 在**Cluster Explorer**中，进入左上角的下拉菜单，点击**Rancher Backups.**。
-1. 点击 **Restore.**
+1. 在**Cluster Explorer**中，进入左上角的下拉菜单，单击**Rancher Backups.**。
+1. 单击 **Restore.**
 1. 使用表单或 YAML 创建 Restore。关于使用表单创建 Restore 资源，请参考[配置参考](./../configuration/restore-config/_index)和[示例](./../examples/_index#恢复)。
-1. 使用 YAML 编辑器，我们可以点击**Create > Create from YAML。** 进入 Restore YAML。
+1. 使用 YAML 编辑器，我们可以单击**Create > Create from YAML。** 进入 Restore YAML。
 
    ```yaml
    apiVersion: resources.cattle.io/v1
@@ -52,7 +52,7 @@ keywords:
 
    有关配置 Restore 的帮助，请参阅[配置参考](./../configuration/restore-config/_index)和[示例.](./../examples/_index#恢复)。
 
-1. 点击 **Create**。
+1. 单击 **Create**。
 
 **结果：**rancher-operator 在还原过程中缩减了 rancher deployment，并在还原完成后将其扩展。资源的恢复顺序是这样的：
 

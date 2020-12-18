@@ -39,9 +39,9 @@ keywords:
 
 1. 导航到**集群资源管理器**，从下拉菜单中选择**Istio**。
 1. 单击侧面导航栏中的**网关**。
-1. 点击**从 Yaml 创建**。
+1. 单击**从 Yaml 创建**。
 1. 粘贴您的 Istio 网关 yaml，或选择**从文件中读取**，上传 yaml 文件。
-1. 点击 **Create**，创建 Istio 网关。
+1. 单击 **Create**，创建 Istio 网关。
 
 **结果：** 已经部署网关，现在将使用应用的规则来路由流量。
 
@@ -52,10 +52,10 @@ keywords:
 我们在通过工作负载示例时，在服务中添加 BookInfo 应用部署。接下来我们添加一个 Istio 网关，以便应用程序可以从您的集群外部访问。
 
 1. 从**集群资源管理器**，从导航下拉菜单中选择**Istio**。
-1. 点击侧面导航栏中的**网关**。
-1. 点击**从 Yaml 创建**。
+1. 单击侧面导航栏中的**网关**。
+1. 单击**从 Yaml 创建**。
 1. 复制并粘贴下面提供的网关 yaml。
-1. 点击**Create**。
+1. 单击**Create**。
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -80,10 +80,10 @@ spec:
 
 然后部署为网关提供流量路由的 VirtualService。
 
-1. 点击侧面导航栏中的**VirtualService**。
-1. 点击**Create from Yaml**。
+1. 单击侧面导航栏中的**VirtualService**。
+1. 单击**Create from Yaml**。
 1. 复制并粘贴下面提供的 VirtualService yaml。
-1. 点击**Create**。
+1. 单击**Create**。
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -140,7 +140,7 @@ bookinfo-gateway   64m
 1. 从**集群资源管理器**，单击**工作负载 > 概述**。
 1. 向下滚动到`istio-system`命名空间。
 1. 在`istio-system`中，有一个名为`istio-ingressgateway`的工作负载。在这个工作负载的名称下，你应该看到一些链接，比如`80/tcp`。
-1. 点击其中的一个链接。这应该会在你的 Web 浏览器中显示出 ingress gateway 的 URL。将`/productpage`附加到 URL 上。
+1. 单击其中的一个链接。这应该会在你的 Web 浏览器中显示出 ingress gateway 的 URL。将`/productpage`附加到 URL 上。
 
 **结果：**您应该在 Web 浏览器中看到 BookInfo 应用程序。
 
@@ -156,7 +156,7 @@ bookinfo-gateway   64m
 
 1. 从**集群资源管理器**，单击**工作负载>概述**。
 1. 向下滚动到`istio-system`命名空间。
-1. 在`istio-system`内，有一个名为`istio-ingressgateway`的工作负载。点击这个工作负载的名称，进入**标签和注释**部分。你应该看到它有键`istio`和值`ingressgateway`。这确认了网关资源中的选择器与 Istio 的默认入口控制器相匹配。
+1. 在`istio-system`内，有一个名为`istio-ingressgateway`的工作负载。单击这个工作负载的名称，进入**标签和注释**部分。你应该看到它有键`istio`和值`ingressgateway`。这确认了网关资源中的选择器与 Istio 的默认入口控制器相匹配。
 
 ## 后续操作
 

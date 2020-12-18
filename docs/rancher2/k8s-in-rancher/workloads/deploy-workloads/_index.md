@@ -20,7 +20,7 @@ keywords:
 
 1.  在**全局**视图中，打开要部署工作负载的项目。
 
-2.  点击**资源 > 工作负载**(在 v2.3.0 之前的版本中，单击**工作负载**选项卡)。在**工作负载**视图中，点击**部署**。
+2.  单击**资源 > 工作负载**(在 v2.3.0 之前的版本中，单击**工作负载**选项卡)。在**工作负载**视图中，单击**部署**。
 
 3.  为工作负载输入一个**名称**。
 
@@ -53,13 +53,13 @@ keywords:
       > - 在 [Amazon AWS](https://aws.amazon.com/)，节点必须位于相同的可用性区域，并且拥有附加/卸载卷的 IAM 权限。
       > - 集群必须配置了 [AWS Cloud Provider](https://v1-17.docs.kubernetes.io/docs/concepts/cluster-administration/cloud-providers/#aws)选项。有关启用此选项的更多信息，请参见[创建 Amazon EC2 集群](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/ec2/_index)或[创建自定义集群](/docs/rancher2/cluster-provisioning/rke-clusters/custom-nodes/_index)。
 
-9.  点击**显示高级选项**来配置：
+9.  单击**显示高级选项**来配置：
 
     - **命令**
     - **网络**
     - **标签/注释**
     - **安全和主机配置**
 
-10. 点击 **启动**。
+10. 单击 **启动**。
 
 **结果：** 工作负载被部署到所选的命名空间。您可以从项目的**工作负载**视图中查看工作负载的状态。
