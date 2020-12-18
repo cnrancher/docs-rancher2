@@ -91,6 +91,13 @@ const metadata = {
     },
     docs: {
         rancher2: {
+            "rancher2/releases/v2.5.3": "版本说明 - v2.5.3",
+            "rancher2/releases/v2.5.2": "版本说明 - v2.5.2",
+            "rancher2/releases/v2.5.1": "版本说明 - v2.5.1",
+            "rancher2/releases/v2.5.0": "版本说明 - v2.5.0",
+            "rancher2/releases/v2.4.11": "版本说明 - v2.4.11",
+            "rancher2/releases/v2.4.10": "版本说明 - v2.4.10",
+            "rancher2/releases/v2.4.9": "版本说明 - v2.4.9",
             "rancher2/releases/v2.4.8": "版本说明 - v2.4.8",
             "rancher2/releases/v2.4.7": "版本说明 - v2.4.7",
             "rancher2/releases/v2.4.6": "版本说明 - v2.4.6",
@@ -132,11 +139,9 @@ const metadata = {
                 "回滚高可用 Rancher",
             "rancher2/upgrades/rollbacks/single-node-rollbacks/_index":
                 "回滚单节点 Rancher",
-            //add 备份和恢复指南
             "rancher2/backups/_index": "概述",
             "rancher2/backups/2.0-2.4/_index": "v2.0-v2.4",
             "rancher2/backups/2.5/_index": "v2.5",
-            //add 最佳实践
             "rancher2/best-practices/_index": "最佳实践及使用技巧",
             "rancher2/best-practices/2.0-2.4/_index": "v2.0-v2.4",
             "rancher2/best-practices/2.5/_index": "v2.5",
@@ -217,56 +222,34 @@ const metadata = {
             "rancher2/pipelines/storage/_index": "配置流水线组件的持久存储",
             "rancher2/pipelines/docs-for-v2.0.x/_index":
                 "v2.0.x 版本中的流水线",
-            //add 跨集群部署
             "rancher2/deploy-across-clusters/_index": "概述",
             "rancher2/deploy-across-clusters/fleet/_index": "Fleet",
             "rancher2/deploy-across-clusters/multi-cluster-apps/_index":
                 "部署多集群应用",
-            //end
-            //add 监控和告警
             "rancher2/monitoring-alerting/_index": "监控和告警",
             "rancher2/monitoring-alerting/2.0-2.4/_index": "v2.0-v2.4",
             "rancher2/monitoring-alerting/2.5/_index": "v2.5.x",
-            //end
-            //add Istio
             "rancher2/istio/_index": "Istio 使用说明",
             "rancher2/istio/2.3.x-2.4.x/_index": "v2.3.x-v2.4.x",
             "rancher2/istio/2.5/_index": "v2.5",
-            //end
-            //add 日志
             "rancher2/logging/_index": "Rancher与日志服务的集成",
             "rancher2/logging/2.0.x-2.4.x/_index": "v2.0.x-v2.4.x",
             "rancher2/logging/2.5/_index": "v2.5",
-            //end
-            //add OPA Gatekeeper
             "rancher2/opa-gatekeeper/_index": "OPA Gatekeeper",
-            //end
-            //add helm chart
             "rancher2/helm-charts/_index": "概述",
             "rancher2/helm-charts/app-marketplace/_index": "应用市场",
             "rancher2/helm-charts/legacy-catalogs/_index":
                 "Rancher v2.4 及之前的应用市场",
-            //end
             "rancher2/k8s-in-rancher/workloads/_index": "工作负载",
             "rancher2/k8s-in-rancher/horitzontal-pod-autoscaler/_index":
                 "Pod 弹性伸缩",
             "rancher2/k8s-in-rancher/load-balancers-and-ingress/_index":
                 "负载均衡和 Ingress",
             "rancher2/k8s-in-rancher/service-discovery/_index": "服务发现",
-            //"rancher2/pipelines/_index": "CI/CD 流水线",
             "rancher2/k8s-in-rancher/certificates/_index": "证书，加密HTTP通信",
             "rancher2/k8s-in-rancher/configmaps/_index": "配置管理",
             "rancher2/k8s-in-rancher/secrets/_index": "密文",
             "rancher2/k8s-in-rancher/registries/_index": "镜像仓库凭证",
-            /*
-            remove
-            "rancher2/catalog/built-in/_index": "内置应用商店",
-            "rancher2/catalog/creating-apps/_index": "创建自己的应用",
-            "rancher2/catalog/adding-catalogs/_index": "添加应用商店",
-            "rancher2/catalog/multi-cluster-apps/_index": "多集群应用",
-            "rancher2/catalog/launching-apps/_index": "项目级别应用",
-            "rancher2/catalog/globaldns/_index": "全局 DNS",
-            */
             "rancher2/cli/_index": "Rancher CLI",
             "rancher2/system-tools/_index": "系统工具",
             "rancher2/user-settings/api-keys/_index": "API 密钥",
