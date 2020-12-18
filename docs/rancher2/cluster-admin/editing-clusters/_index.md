@@ -90,7 +90,7 @@ keywords:
 高级用户可以创建一个 RKE 配置文件，而不是使用 Rancher UI 为集群选择 Kubernetes 选项。通过使用配置文件，可以在 YAML 中指定 RKE 安装中可用的任何选项，system_images 配置除外。
 
 - 要直接从 Rancher UI 编辑 RKE 配置文件，请单击 **编辑 YAML**。
-- 要从现有的 RKE 文件中读取，请点击 **从文件读取**。
+- 要从现有的 RKE 文件中读取，请单击 **从文件读取**。
 
 Rancher v2.0.0-v2.2.x，配置文件与[Rancher Kubernetes Engine 的集群配置文件](/docs/rke/config-options/_index)相同，Rancher 使用该配置文件来创建集群。在 Rancher v2.3.0 中，RKE 信息仍然包含在配置文件中，但是它与其他选项分离，因此 RKE 集群配置选项嵌套在`rancher_kubernetes_engine_config` 指令下。有关更多信息，请参阅[集群配置参考资料](/docs/rancher2/cluster-provisioning/rke-clusters/options/_index)。
 

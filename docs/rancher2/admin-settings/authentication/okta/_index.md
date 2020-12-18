@@ -53,7 +53,7 @@ _v2.2.0 版本可用_
     >
     >     openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout myservice.key -out myservice.cert
 
-1.  完成**配置 Okta 账户**表单后，点击页面底部的**启用 Okta 认证**。
+1.  完成**配置 Okta 账户**表单后，单击页面底部的**启用 Okta 认证**。
 
     Rancher 会将您重定向到 IdP 登录页面。输入使用 Okta IdP 进行身份验证的凭据，以验证您的 Rancher Okta 配置。
 

@@ -73,7 +73,7 @@ Rancher 默认使用 github 上的 repo 作为应用商店的 URL，如果出现
 **如何修改`Catalog URL`：**
 
 1. 导航到全局或项目级别的`Apps` -> `Manage Catalogs`
-2. 点击列表右侧的省略号 -> `Edit`
+2. 单击列表右侧的省略号 -> `Edit`
 3. 将`Catalog URL`替换成码云中的地址即可，`Save`
 4. 此时，对应的 Catalog 的状态变为了`Refreshed`，等待变为`Active`之后即可正常使用
 

@@ -8,11 +8,11 @@ title: 主机驱动
 
 ### 添加主机驱动
 
-您可以通过点击**添加主机驱动**轻松添加自己的主机驱动。
+您可以通过单击**添加主机驱动**轻松添加自己的主机驱动。
 
 1. 提供**下载 URL**。这个地址是 64 位 Linux 驱动的二进制文件的地址。
 2. (可选) 为驱动提供自定义添加主机界面的**自定义 UI 的 URL**。参考[ui-driver-skel repository](https://github.com/rancher/ui-driver-skel)以了解更多信息。
 3. (可选) 提供一个**校验和**以检验下载的驱动是否匹配期望的校验和。
-4. 完成之后，点击**创建**。
+4. 完成之后，单击**创建**。
 
-点击创建后，Rancher 就会添加这个额外的驱动，并将其显示在[添加主机](/docs/rancher1/infrastructure/hosts/other/_index)页面的**驱动**选项里。
+单击创建后，Rancher 就会添加这个额外的驱动，并将其显示在[添加主机](/docs/rancher1/infrastructure/hosts/other/_index)页面的**驱动**选项里。

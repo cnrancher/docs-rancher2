@@ -36,7 +36,7 @@ keywords:
 
 ## 验证自动 Istio Sidecar 注入是否已启用
 
-要验证 Istio 是否已启用，请在命名空间中部署 hello-world 工作负载。进入工作负载并点击 pod 名称。在**容器**部分，你应该看到`istio-proxy`容器。
+要验证 Istio 是否已启用，请在命名空间中部署 hello-world 工作负载。进入工作负载并单击 pod 名称。在**容器**部分，你应该看到`istio-proxy`容器。
 
 ## 排除工作负载被 Istio Sidecar 注入的可能性
 
@@ -49,7 +49,7 @@ sidecar.istio.io/inject: “false”
 1. 从**集群资源管理器**视图中，使用侧边导航选择工作负载的**视图**页。
 1. 转到不应该有 sidecar 的工作负载，并编辑为 yaml。
 1. 在工作负载上添加以下键和值`sidecar.istio.io/inject: false`作为注解。
-1. 点击**保存**。
+1. 单击**保存**。
 
 **结果：** Istio sidecar 将不会被注入到工作负载中。
 

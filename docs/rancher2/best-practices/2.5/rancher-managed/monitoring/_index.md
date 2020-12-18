@@ -99,7 +99,7 @@ Prometheus 并不是为了长期存储指标，而只用于短期存储。
 
 如果你有一个（微）服务架构，集群中的多个单独的工作负载相互通信，那么拥有关于这些流量的详细指标和跟踪非常很重要，这是为了解所有这些工作负载是如何相互通信的，以及问题或瓶颈可能在哪里。
 
-当然，你可以监控所有工作负载中的所有内部流量，并将这些指标暴露给 Prometheus，但这相当耗费精力。像 Istio 这样的服务网格，可以通过[点击](https://rancher.com/docs/rancher/v2.x/en/cluster-admin/tools/istio/)在 Rancher 中安装，可以自动完成这项工作，并提供关于所有服务之间的流量的丰富的遥测数据。
+当然，你可以监控所有工作负载中的所有内部流量，并将这些指标暴露给 Prometheus，但这相当耗费精力。像 Istio 这样的服务网格，可以通过[单击](https://rancher.com/docs/rancher/v2.x/en/cluster-admin/tools/istio/)在 Rancher 中安装，可以自动完成这项工作，并提供关于所有服务之间的流量的丰富的遥测数据。
 
 ## 真实用户监控
 

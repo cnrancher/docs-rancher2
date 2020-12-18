@@ -48,7 +48,7 @@ keywords:
 
 1. 单击**工具>商店设置**。
 
-1. System Charts 以 `system-library` 名称显示。要编辑 System Charts 的配置，请点击**省略号 (...) > 升级**。
+1. System Charts 以 `system-library` 名称显示。要编辑 System Charts 的配置，请单击**省略号 (...) > 升级**。
 
 1. 在**商店 URL 地址**字段中，输入`system-charts`存储库的 Git 镜像的位置。
 

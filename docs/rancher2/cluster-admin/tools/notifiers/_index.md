@@ -22,7 +22,7 @@ Rancher 集成了多种通知服务，包括：
 
 1. 在**全局视图**中，打开要添加通知的集群。
 
-1. 在主菜单中，选择**工具>通知**。然后点击**添加通知**。
+1. 在主菜单中，选择**工具>通知**。然后单击**添加通知**。
 
 1. 选择要用作接收者的服务，然后填入所需配置。
 
@@ -33,7 +33,7 @@ Rancher 集成了多种通知服务，包括：
      1. 在 Rancher 中，输入您的 Slack Webhook **URL**。
      1. 以以下格式输入要发送告警的频道名称: `#<channelname>`。
         支持公有和私有频道。
-     1. 点击**测试**。如果测试成功，则您配置的 Slack 频道将收到 `Slack setting validated`。
+     1. 单击**测试**。如果测试成功，则您配置的 Slack 频道将收到 `Slack setting validated`。
 
    - 邮件
 
@@ -51,13 +51,13 @@ Rancher 集成了多种通知服务，包括：
      1. 从 PagerDuty 创建一个 Prometheus 集成。有关说明，请参阅 [PagerDuty 文档](https://www.pagerduty.com/docs/guides/prometheus-integration-guide/)。
      1. 从 PagerDuty 中，复制 Prometheus 集成的 **Integration Key**。
      1. 在 Rancher 中，在 **Service Key** 中输入密钥。
-     1. 点击 **测试**。如果测试成功，则您的 PagerDuty 端点将输出 `PagerDuty setting validated`.
+     1. 单击 **测试**。如果测试成功，则您的 PagerDuty 端点将输出 `PagerDuty setting validated`.
 
    - WebHook
 
      1. 输入通知接收者的**名称**。
      1. 输入您的 Webhook **URL**。
-     1. 点击 **测试**。如果测试成功，您配置的 Webhook 地址将会收到 `Webhook setting validated`。
+     1. 单击 **测试**。如果测试成功，您配置的 Webhook 地址将会收到 `Webhook setting validated`。
 
    - WeChat
 
@@ -69,7 +69,7 @@ Rancher 集成了多种通知服务，包括：
      1. 选择**接收者类型**然后在**默认接收者**字段中输入相应的 ID，例如，您要接收通知的参与者 ID，标签 ID 或部门 ID。您可以从[联系人页面](https://work.weixin.qq.com/wework_admin/frame#contacts)获取联系信息。
 
 1. _自 v2.3.0 起可用_ - 如果希望通知已解决的告警，请勾选**发送已解决的告警**
-1. 点击**添加**以完成添加通知接收者。
+1. 单击**添加**以完成添加通知接收者。
 
 **结果：** 您的通知接收者已添加到 Rancher。
 

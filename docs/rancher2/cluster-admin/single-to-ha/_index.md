@@ -51,11 +51,11 @@ keywords:
    这一步很关键。如果 Rancher 切换到 HA 后，因为地址或者 token 或者证书的变更，将会导致 Agent 无法连接 Rancher Server。在迁移到 HA 后，需要通过 kubectl 去编辑配置文件更新一些 Agent 相关的参数。默认 UI 上的 kube 配置文件是通过 Agent 代理连接到 K8S，如果 Agent 无法连接 Rancher Server，则通过这个 KUBE 配置文件无法访问 K8S 集群。开启授权集群访问地址功能会生成多个 Contexts Cluster，这些 Contexts Cluster 是直连 K8S，不通过 Agent 代理。如果业务集群未开启这个功能，可以通过编辑集群来开启这个功能。
    :::
 
-1. 点击 下一步 ，根据预先分配的节点角色选择需要的角色，然后复制命令到主机终端执行。
+1. 单击 下一步 ，根据预先分配的节点角色选择需要的角色，然后复制命令到主机终端执行。
 
    ![image-20191016143133778](/img/rancher/single-to-ha.assets/image-20191016143133778.png)
 
-1. 集群部署完成后，进入集群首页，点击`kubeconfig文件`按钮。在弹窗页面中复制 kubeconfg 配置文件到文本编辑备用。
+1. 集群部署完成后，进入集群首页，单击`kubeconfig文件`按钮。在弹窗页面中复制 kubeconfg 配置文件到文本编辑备用。
 
    ![image-20191016143513361](/img/rancher/single-to-ha.assets/image-20191016143513361.png)
 

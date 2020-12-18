@@ -65,7 +65,7 @@ _自 v2.2.0 起可用_
 
 阅读[使用 Git 的 OAuth 验证](https://github.blog/2012-09-21-easier-builds-and-deployments-using-git-over-https-and-oauth/)了解更多有关使用 OAuth 身份验证的信息。
 
-1. 创建一个[OAuth 凭据](https://github.com/settings/tokens)。选择`repo`权限，然后点击`生成凭据`。
+1. 创建一个[OAuth 凭据](https://github.com/settings/tokens)。选择`repo`权限，然后单击`生成凭据`。
 
 2. [添加应用商店](/docs/rancher2/helm-charts/legacy-catalogs/adding-catalogs/_index)时，选中`使用私有应用商店`复选框。
 

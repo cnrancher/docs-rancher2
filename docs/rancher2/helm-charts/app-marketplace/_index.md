@@ -22,7 +22,7 @@ _适用于 Rancher v2.5+_
 
 在本节中，您将学习如何在 Rancher 中管理 Helm Chart 和应用程序。
 
-在集群管理器中，Rancher 使用 catalog 导入应用，然后使用这些 chart 部署自定义的 helm chart 应用程序或 Rancher 的工具，如监控或 Istio。现在，在群集资源管理器中，Rancher 使用了类似但简化版的同一系统。Repositories 可以以与目录相同的方式添加，但具体到当前集群。Rancher 工具作为预加载的存储库，作为独立的 helm chart 进行部署。
+在集群管理器中，Rancher 使用 catalog 导入应用，然后使用这些 chart 部署自定义的 helm chart 应用程序或 Rancher 的工具，如监控或 Istio。现在，在集群资源管理器中，Rancher 使用了类似但简化版的同一系统。Repositories 可以以与目录相同的方式添加，但具体到当前集群。Rancher 工具作为预加载的存储库，作为独立的 helm chart 进行部署。
 
 ## Charts
 
@@ -48,7 +48,7 @@ Cluster Explorer 只支持 Helm 3 兼容的图表。
 
 ## 部署和升级
 
-从**chart**选项卡中选择一个 chart 进行安装。chart 可能会通过自定义页面或 `question.yaml` 文件提供额外的配置，但所 chart 安装都可以修改 `values.yaml` 和其他基本设置。一旦点击安装，就会部署一个 helm operation ，并显示这个 job 的控制台。
+从**chart**选项卡中选择一个 chart 进行安装。chart 可能会通过自定义页面或 `question.yaml` 文件提供额外的配置，但所 chart 安装都可以修改 `values.yaml` 和其他基本设置。一旦单击安装，就会部署一个 helm operation ，并显示这个 job 的控制台。
 
 要查看最近的所有更改，请转到**最近的操作**标签。从那里你可以查看最近发出的请求、状态、事件和日志。
 

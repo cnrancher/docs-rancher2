@@ -23,7 +23,7 @@ keywords:
 
 通知器和告警建立在[Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager/)之上。利用这些工具，Rancher 可以通知 [集群所有者](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index) 和 [项目所有者](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index) 他们需要处理的事件。
 
-在接收告警之前，必须在群集级别配置一个或多个 [通知](/docs/rancher2/cluster-admin/tools/notifiers/_index)。
+在接收告警之前，必须在集群级别配置一个或多个 [通知](/docs/rancher2/cluster-admin/tools/notifiers/_index)。
 
 只有[管理员](/docs/rancher2/admin-settings/rbac/global-permissions/_index)、[集群所有者或成员](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)，或者[项目所有者](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)可以管理项目提醒。
 
@@ -55,7 +55,7 @@ keywords:
 
 1. 从**全局**视图中，导航到您要配置项目告警的项目。选择**工具 > 告警**。在 v2.2.0 之前的版本中，您可以选择**资源 > 告警**。
 
-1. 点击**添加告警组**。
+1. 单击**添加告警组**。
 
 1. 为告警输入描述其目的的**名称**，您可以为不同目的的告警规则分组。
 
@@ -92,7 +92,7 @@ keywords:
 
 1. 选择 **Workload** 选项，然后从下拉菜单中选择一个工作负载。
 
-1. 选择可用性百分比。当工作负载在您的群集节点上的可用性下降到低于设定的百分比时，将触发告警。
+1. 选择可用性百分比。当工作负载在您的集群节点上的可用性下降到低于设定的百分比时，将触发告警。
 
 1. 选择告警的紧急程度：
 

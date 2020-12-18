@@ -106,13 +106,13 @@ keywords:
 
 完成创建后，请为目标群组添加 Linux 节点。
 
-1. 选择 **rancher-tcp-443** 的目标群组，点击 **目标** 选项卡然后选择 **编辑**。
+1. 选择 **rancher-tcp-443** 的目标群组，单击 **目标** 选项卡然后选择 **编辑**。
 
     <figcaption> 图 5： 编辑 TCP 端口 443 目标群组 </figcaption>
 
    ![编辑目标群组 443](/img/rancher/ha/nlb/edit-targetgroup-443.png)
 
-2. 选择您想添加的实例（Linux 节点）, 点击 **添加到已注册**。
+2. 选择您想添加的实例（Linux 节点）, 单击 **添加到已注册**。
 
    <figcaption> 图 6：添加目标到 TCP 端口 443 目标群组</figcaption>
 

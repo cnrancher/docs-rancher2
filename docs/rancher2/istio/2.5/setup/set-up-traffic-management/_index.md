@@ -35,10 +35,10 @@ Istio 中流量管理的一个核心优势是它允许动态请求路由。动�
 ### 创建 Istio
 
 1. 从**集群资源管理器**，从导航下拉菜单中选择**Istio**。
-1. 点击侧面导航栏中的**DestinationRule**。
+1. 单击侧面导航栏中的**DestinationRule**。
 1. 单击**Create from Yaml**。
 1. 复制并粘贴下面提供的 DestinationRule yaml。
-1. 点击**Create**。
+1. 单击**Create**。
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -63,10 +63,10 @@ spec:
 
 然后部署 VirtualService，提供利用 DestinationRule 的流量路由。
 
-1. 点击侧面导航栏中的**VirtualService**。
-1. 点击**Create from Yaml**。
+1. 单击侧面导航栏中的**VirtualService**。
+1. 单击**Create from Yaml**。
 1. 复制并粘贴下面提供的 VirtualService yaml。
-1. 点击**Create**。
+1. 单击**Create**。
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3

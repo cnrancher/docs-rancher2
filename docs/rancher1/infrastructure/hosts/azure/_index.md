@@ -31,7 +31,7 @@ Follow the steps below to create an App registration and the corresponding **Cli
 
 1. 打开您刚创建好的应用注册。
 1. 在**Settings**页，打开**Keys**。
-1. 输入一个**Key description**，并且选择一个过期时间，点击**Save**。
+1. 输入一个**Key description**，并且选择一个过期时间，单击**Save**。
 1. **Value**列中显示的自动生产的值就是您需要的**Client Secret**。这个值仅仅会被显示一次。
 
 最后一件事是给您的应用注册合适的权限。
@@ -41,7 +41,7 @@ Follow the steps below to create an App registration and the corresponding **Cli
 1. 选择**Add**。
 1. **Role**那栏选择`Contributor`。
 1. **Select**那栏选择您创建的应用注册名称。
-1. 点击**Save**.
+1. 单击**Save**.
 
 ## 启动 Azure 主机
 
@@ -57,6 +57,6 @@ Follow the steps below to create an App registration and the corresponding **Cli
 1. 您可以修改**Docker 端口**和**存储类型**。
 1. (可选)向主机添加**[标签](/docs/rancher1/infrastructure/hosts/_index#labels)**，以帮助组织主机并[调度服务/负载均衡器](/docs/rancher1/infrastructure/cattle/scheduling/_index)或者是[使用除主机 IP 之外的其他 IP 解析外部 DNS 记录](/docs/rancher1/infrastructure/cattle/external-dns-service/_index#为外部dns使用特定的ip).
 1. (可选)在**高级选项**中，您可以利用[Docker 引擎选项](https://docs.docker.com/machine/reference/create/#specifying-configuration-options-for-the-created-docker-engine)定制您的`docker-machine create`工具。
-1. 所有的完成之后，点击**创建**。
+1. 所有的完成之后，单击**创建**。
 
-一旦您点击创建，Rancher 将会创建 Azure 虚拟机，并在实例中开启 _rancher-agent_ 容器。几分钟之后，主机将会启动并可以[添加服务](/docs/rancher1/infrastructure/cattle/adding-services/_index)。
+一旦您单击创建，Rancher 将会创建 Azure 虚拟机，并在实例中开启 _rancher-agent_ 容器。几分钟之后，主机将会启动并可以[添加服务](/docs/rancher1/infrastructure/cattle/adding-services/_index)。

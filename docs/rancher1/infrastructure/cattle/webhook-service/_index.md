@@ -6,13 +6,13 @@ title: Webhooks
 
 ### 添加接收器钩子
 
-要创建一个接收器钩子，导航到，**API** -> **Webhooks**，点击 **添加接收器**
+要创建一个接收器钩子，导航到，**API** -> **Webhooks**，单击 **添加接收器**
 
 - 填写接收器 **名称** 以方便识别。
 - 选择您要创建的接收器 **类型**。
 - 基于接收器的类型确定接收器事件。
 
-点击 **创建**。创建成功后，就可以在新创建接收器钩子旁边看到相应的 URL。
+单击 **创建**。创建成功后，就可以在新创建接收器钩子旁边看到相应的 URL。
 
 ### 使用接收器钩子
 
@@ -73,7 +73,7 @@ ANNOTATIONS {
 
 ##### 添加报警管理程序
 
-要调用接受器钩子， 报警管理程序需要先启用。 您可以把它加入到 Prometheus 应用. 在 Prometheus 应用中点击 **添加服务**。用 `prom/alertmanager` 添加服务。添加服务的时记得映射端口`9093:9093`。服务启动后，在容器中执行命令，更新 `etc/alertmanager/config.yml`。 在 `etc/alertmanager/config.yml` 中添加 webhook 的 URL 。这样，当告警被触发时报警管理程序就会向这个 URL 发送 `POST` 请求。在 `etc/alertmanager/config.yml` 添加 URL 信息后需要重启服务。
+要调用接受器钩子， 报警管理程序需要先启用。 您可以把它加入到 Prometheus 应用. 在 Prometheus 应用中单击 **添加服务**。用 `prom/alertmanager` 添加服务。添加服务的时记得映射端口`9093:9093`。服务启动后，在容器中执行命令，更新 `etc/alertmanager/config.yml`。 在 `etc/alertmanager/config.yml` 中添加 webhook 的 URL 。这样，当告警被触发时报警管理程序就会向这个 URL 发送 `POST` 请求。在 `etc/alertmanager/config.yml` 添加 URL 信息后需要重启服务。
 
 ###### 示例 `etc/alertmanager/config.yml`
 

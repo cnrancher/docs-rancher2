@@ -76,9 +76,9 @@ Prometheus 让您可以查看来自不同 Rancher 和 Kubernetes 对象的度量
 
 1. 在 Rancher UI 中，进入要安装监控的集群，然后单击**集群资源管理器**。
 1. 单击**应用程序**。
-1. 点击`rancher-monitoring`应用程序。
-1. （可选）点击**图表选项**，配置警报、Prometheus 和 Grafana。如需帮助，请参阅[配置参考](/docs/rancher2/monitoring-alerting/2.5/configuration/_index)
-1. 滚动到 Helm chart README 底部，点击**安装**。
+1. 单击`rancher-monitoring`应用程序。
+1. （可选）单击**图表选项**，配置警报、Prometheus 和 Grafana。如需帮助，请参阅[配置参考](/docs/rancher2/monitoring-alerting/2.5/configuration/_index)
+1. 滚动到 Helm chart README 底部，单击**安装**。
 
 **结果：**监控应用部署在`cattle-monitoring-system`命名空间中。
 
@@ -86,11 +86,11 @@ Prometheus 让您可以查看来自不同 Rancher 和 Kubernetes 对象的度量
 
 默认情况下，Rancher Monitoring 将 exporter（如 [node-exporter](https://github.com/prometheus/node_exporter) 和 [kube-state-metrics](https://github.com/kubernetes/kube-state-metrics)）以及默认的 Prometheus 警报和 Grafana 仪表板（由 [kube-prometheus](https://github.com/prometheus-operator/kube-prometheus) 项目策划）部署到集群上。
 
-要查看默认的警报，请进入[查看 Alertmanager 中的活动警报](#查看-Alertmanager-中的活动警报)并点击展开所有组。
+要查看默认的警报，请进入[查看 Alertmanager 中的活动警报](#查看-Alertmanager-中的活动警报)并单击展开所有组。
 
 要查看你正在监控哪些服务，你需要查看你的目标。要查看默认目标，请参考[查看 Prometheus 目标](#查看-Prometheus-目标)。
 
-要查看默认的仪表盘，请进入[Grafana UI](#grafana-ui)在左侧导航栏中，点击有四个方框的图标，然后点击**管理**。
+要查看默认的仪表盘，请进入[Grafana UI](#grafana-ui)在左侧导航栏中，单击有四个方框的图标，然后单击**管理**。
 
 ### 下一步
 
@@ -106,7 +106,7 @@ Rancher 允许任何通过 Kubernetes 认证并能够访问 Rancher 监控图部
 
 但是，如果有必要，用户可以选择以[Admin](https://grafana.com/docs/grafana/latest/permissions/organization_roles/#admin-role)的身份登录 Grafana。Grafana 实例的默认 Admin 用户名和密码将是`admin`/`prom-operator`，但也可以在部署或升级图表时提供其他凭证。
 
-要查看 Grafana 用户界面，安装`rancher-monitoring`。然后进入**群资源管理器.**在左上角，点击**群资源管理器>监控**然后点击 Grafana。
+要查看 Grafana 用户界面，安装`rancher-monitoring`。然后进入**群资源管理器.**在左上角，单击**群资源管理器>监控**然后单击 Grafana。
 
 <figcaption>Grafana中的集群计算资源仪表盘</figcaption>
 
@@ -120,19 +120,19 @@ Rancher 允许任何通过 Kubernetes 认证并能够访问 Rancher 监控图部
 
 ### Prometheus UI
 
-要查看 Prometheus 用户界面，安装`rancher-monitoring`。然后进入**群组资源管理器.**在左上角，点击**群组资源管理器>监控.**然后点击**Prometheus Graph**。
+要查看 Prometheus 用户界面，安装`rancher-monitoring`。然后进入**群组资源管理器.**在左上角，单击**群组资源管理器>监控.**然后单击**Prometheus Graph**。
 
 ![Prometheus Graph UI](/img/rancher/prometheus-graph-ui.png)
 
 ### 查看 Prometheus 目标
 
-要查看 Prometheus Targets，安装`rancher-monitoring`。然后进入**群组资源管理器.**在左上角，点击**群组资源管理器>监控.**然后点击**Prometheus Targets.**。
+要查看 Prometheus Targets，安装`rancher-monitoring`。然后进入**群组资源管理器.**在左上角，单击**群组资源管理器>监控.**然后单击**Prometheus Targets.**。
 
 ![Prometheus Targets UI](/img/rancher/prometheus-targets-ui.png)
 
 ### 查看 Prometheus 规则
 
-要查看 Prometheus 规则，安装`rancher-monitoring`。然后进入**群组资源管理器.**在左上角，点击**群组资源管理器>监控.**然后点击**Prometheus 规则**。
+要查看 Prometheus 规则，安装`rancher-monitoring`。然后进入**群组资源管理器.**在左上角，单击**群组资源管理器>监控.**然后单击**Prometheus 规则**。
 
 ![Prometheus Rules UI](/img/rancher/prometheus-rules-ui.png)
 
@@ -144,7 +144,7 @@ Alertmanager 处理客户端应用程序（如 Prometheus 服务器）发送的�
 
 在 Alertmanager UI 中，您可以查看您的警报和当前 Alertmanager 配置。
 
-要查看 Prometheus 规则，安装`rancher-monitoring`。然后进入**集群资源管理器.**在左上角，点击**集群资源管理器>监控.**然后点击**Alertmanager.**。
+要查看 Prometheus 规则，安装`rancher-monitoring`。然后进入**集群资源管理器.**在左上角，单击**集群资源管理器>监控.**然后单击**Alertmanager.**。
 
 **结果：** Alertmanager 用户界面在新标签页中打开。有关配置方面的帮助，请参阅 [官方 Alertmanager 文档。](https://prometheus.io/docs/alerting/latest/alertmanager/)
 
@@ -155,7 +155,7 @@ Alertmanager 处理客户端应用程序（如 Prometheus 服务器）发送的�
 1. 从**集群资源管理器中**，单击应用程序和市场。
 1. 单击**安装的应用程序**。
 1. 进入`cattle-monitoring-system`命名空间，选中`rancher-monitoring-crd`和 `rancher-monitoring`的方框。
-1. 点击**删除**。
+1. 单击**删除**。
 1. 确认 **删除** 。
 
 **结果：** `rancher-monitoring`被卸载。
