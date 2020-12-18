@@ -8,11 +8,13 @@
 module.exports = {
     rancher2: {
         版本说明: [
-            // need to add release notes for 2.5.x
-            //"rancher2/releases/v2.5.2",
-            //"rancher2/releases/v2.5.1",
-            //"rancher2/releases/v2.5.0",
-            //"rancher2/releases/v2.4.9",
+            "rancher2/releases/v2.5.3",
+            "rancher2/releases/v2.5.2",
+            "rancher2/releases/v2.5.1",
+            "rancher2/releases/v2.5.0",
+            "rancher2/releases/v2.4.11",
+            "rancher2/releases/v2.4.10",
+            "rancher2/releases/v2.4.9",
             "rancher2/releases/v2.4.8",
             "rancher2/releases/v2.4.7",
             "rancher2/releases/v2.4.6",
