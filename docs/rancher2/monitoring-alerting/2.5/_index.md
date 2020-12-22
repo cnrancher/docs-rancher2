@@ -17,7 +17,7 @@ keywords:
 
 ## 概述
 
-使用 Rancher，您可以在您的集群上快速部署领先的开源监控和警报解决方案，如 [Prometheus](https://prometheus.io/)、[Alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/)和 [Grafana](https://grafana.com/docs/grafana/latest/getting-started/what-is-grafana/)。
+使用 Rancher，您可以在您的集群上快速部署领先的开源监控和警报解决方案，如 [Prometheus](https://prometheus.io/)、[Alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/)和 [Grafana](https://grafana.com/docs/grafana/latest/getting-started/)。
 
 Rancher 的解决方案（由[Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator)提供支持）允许用户：
 
@@ -25,7 +25,7 @@ Rancher 的解决方案（由[Prometheus Operator](https://github.com/prometheus
 
 - 根据[Prometheus](https://prometheus.io/)收集的指标创建定义告警。
 
-- 通过[Grafana](https://grafana.com/docs/grafana/latest/getting-started/what-is-grafana/)创建自定义仪表盘，使其能够轻松地将收集的指标可视化。
+- 通过[Grafana](https://grafana.com/docs/grafana/latest/getting-started/)创建自定义仪表盘，使其能够轻松地将收集的指标可视化。
 
 - 使用[Prometheus Alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/)通过 Email、Slack、PagerDuty 等配置基于警报的通知。
 

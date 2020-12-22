@@ -47,7 +47,7 @@ _从 v2.2.4 开始提供_
 
 1. 在导航栏中选择**工具 > 监视**。
 
-1. 选择**启用**，显示[Prometheus 配置选项](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/_indexprometheus/)。输入你需要的配置选项。
+1. 选择**启用**，显示[Prometheus 配置选项](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/prometheus/_index)。输入你需要的配置选项。
 
 1. 单击**保存**。
 
@@ -64,7 +64,7 @@ Grafana 实例的默认用户名和密码是`admin/admin`。然而，Grafana 仪
 
 ## 项目指标
 
-如果在[集群级别](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/_indexcluster-metrics/#workload-metrics)和
+如果在[集群级别](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/cluster-metrics/_index#workload-metrics)和
 [项目级别](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/_index)和[项目级](#enabling-project-monitoring)启用监控。
 
 您可以从任何[导出器](https://prometheus.io/docs/instrumenting/exporters/)监控自定义指标。您还可以在部署上暴露一些自定义端点，而无需为项目配置 Prometheus。

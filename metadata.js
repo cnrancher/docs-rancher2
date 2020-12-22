@@ -144,17 +144,17 @@ const metadata = {
             "rancher2/best-practices/_index": "最佳实践及使用技巧",
             "rancher2/best-practices/2.0-2.4/_index": "v2.0-v2.4",
             "rancher2/best-practices/2.5/_index": "v2.5",
-            "rancher2/backups/backups/ha-backups/_index":
+            "rancher2/backups/2.0-2.4/ha-backups/_index":
                 "备份 RKE 高可用 Rancher",
-            "rancher2/backups/backups/k3s-backups/_index":
+            "rancher2/backups/2.0-2.4/backups/k3s-backups/_index":
                 "备份 K3s 高可用 Rancher",
-            "rancher2/backups/backups/single-node-backups/_index":
+            "rancher2/backups/2.0-2.4/single-node-backups/_index":
                 "备份单节点 Rancher",
-            "rancher2/backups/restorations/ha-restoration/_index":
+            "rancher2/backups/2.0-2.4/restorations/ha-restoration/_index":
                 "恢复 RKE 高可用 Rancher",
             "rancher2/backups/restorations/k3s-restoration/_index":
                 "恢复 K3s 高可用 Rancher",
-            "rancher2/backups/restorations/single-node-restoration/_index":
+            "rancher2/backups/2.0-2.4/restorations/single-node-restoration/_index":
                 "恢复单节点 Rancher",
             "rancher2/best-practices/deployment-strategies/_index":
                 "Rancher 部署策略",

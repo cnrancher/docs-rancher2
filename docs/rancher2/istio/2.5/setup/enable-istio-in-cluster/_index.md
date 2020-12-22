@@ -1,6 +1,6 @@
 ---
 title: 在集群中启用Istio
-description: description
+description: 只有分配了cluster-admin Kubernetes默认角色的用户才能在 Kubernetes 集群中配置和安装 Istio
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -24,7 +24,7 @@ keywords:
 1. 从**集群资源管理器**导航到**应用市场**中的可用**Chart**。
 1. 选择 Istio chart。
 1. 如果您还没有安装自己的监控应用，系统会提示您安装`rancher-monitoring-app`。可选：在安装 rancher-monitoring 应用时设置您的选择器或 Scrape 配置选项。
-1. 可选：配置成员权限和资源限额。为 Istio 组件配置成员访问和[资源限额]({{<baseurl>}}/rancher/v2.x/en/cluster-admin/tools/istio/resources/)。确保你的工作节点上有足够的资源来启用 Istio。
+1. 可选：配置成员权限和资源限额。为 Istio 组件配置成员访问和[资源限额](/docs/rancher2/istio/2.5/resources/_index)。确保你的工作节点上有足够的资源来启用 Istio。
 1. 可选：如果需要，对 values.yaml 进行额外的配置更改。
 1. 可选：通过[覆盖文件](#overlay-file)添加额外的资源或配置。
 1. 单击**安装**。

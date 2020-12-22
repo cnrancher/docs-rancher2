@@ -83,7 +83,7 @@ Istio 的整体架构已被简化。通过合并 Pilot、Citadel、Galley 和 si
 
 ## 架构
 
-Istio 安装了一个服务网状结构，使用[Envoy](https://www.envoyproxy.io/learn/service-mesh)sidecar 代理来拦截每个工作负载的流量。这些 sidecars 拦截和管理服务到服务的通信，允许对集群内的流量进行细粒度的观察和控制。
+Istio 安装了一个服务网状结构，使用[Envoy](https://www.envoyproxy.io/docs/envoy/latest/start/start)sidecar 代理来拦截每个工作负载的流量。这些 sidecars 拦截和管理服务到服务的通信，允许对集群内的流量进行细粒度的观察和控制。
 
 只有注入了 Istio sidecar 的工作负载才能被 Istio 跟踪和控制。
 

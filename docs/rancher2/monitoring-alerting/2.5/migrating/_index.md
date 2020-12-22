@@ -24,7 +24,7 @@ keywords:
 
 从 v2.2.0 开始，Rancher 的集群管理器允许用户在集群内独立启用监控和告警 V1（均由[Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator)提供支持）。有关如何配置 Monitoring & Alerting V1 的更多信息，请参阅[关于 Rancher v2.5 之前的监控的文档](/docs/rancher2/monitoring-alerting/2.0-2.4/_index)。
 
-启用 Monitoring 后，Monitoring V1 会将[Prometheus](https://prometheus.io/)和[Grafana](https://grafana.com/docs/grafana/latest/getting-started/what-is-grafana/)部署到集群上，以监控集群节点、Kubernetes 组件和软件部署的进程状态，并创建自定义仪表盘，使其易于可视化收集的指标。
+启用 Monitoring 后，Monitoring V1 会将[Prometheus](https://prometheus.io/)和[Grafana](https://grafana.com/docs/grafana/latest/getting-started/)部署到集群上，以监控集群节点、Kubernetes 组件和软件部署的进程状态，并创建自定义仪表盘，使其易于可视化收集的指标。
 
 Monitoring V1 可以在集群级别和项目级别上配置，并将自动拉取 Rancher 集群上部署为 Apps 的某些工作负载。
 

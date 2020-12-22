@@ -11,6 +11,7 @@ keywords:
   - rancher中国
   - rancher 2.0
   - rancher2.0 中文教程
+  - 多集群应用
 ---
 
-详情请参考[多集群应用](docs/rancher2/helm-charts/legacy-catalogs/multi-cluster-apps/_index)。
+详情请参考[多集群应用](/docs/rancher2/helm-charts/legacy-catalogs/multi-cluster-apps/_index)。

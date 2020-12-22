@@ -83,7 +83,7 @@ Prometheus 并不是为了长期存储指标，而只用于短期存储。
 
 ### ServiceMonitors 和 PodMonitors
 
-一旦所有工作负载都以 Prometheus 格式公开了指标后，你必须配置 Prometheus 来获取它。 Rancher 使用[prometheus-operator](https://github.com/prometheus-operator/prometheus-operator)，这使得使用 ServiceMonitors 和 PodMonitors 添加额外的目标变得容易。很多 helm charts 已经包含了一个选项来直接创建这些监控器。你也可以在[Rancher 文档](TODO)中找到更多信息。
+一旦所有工作负载都以 Prometheus 格式公开了指标后，你必须配置 Prometheus 来获取它。 Rancher 使用[prometheus-operator](https://github.com/prometheus-operator/prometheus-operator)，这使得使用 ServiceMonitors 和 PodMonitors 添加额外的目标变得容易。很多 helm charts 已经包含了一个选项来直接创建这些监控器。你也可以在 Rancher 文档中找到更多信息。
 
 ### Prometheus Push Gateway
 
@@ -107,7 +107,7 @@ Prometheus 并不是为了长期存储指标，而只用于短期存储。
 
 ## 安全监控
 
-除了监控工作负载以检测性能、可用性或可扩展性的问题外，还应该监控集群和运行到集群中的工作负载，这可以发现一些潜在的安全问题。一个好的起点是经常运行[CIS 扫描](/docs/rancher2/cis-scans/v2.5/_index)并发出告警，检查集群是否按照安全最佳实践进行配置。
+除了监控工作负载以检测性能、可用性或可扩展性的问题外，还应该监控集群和运行到集群中的工作负载，这可以发现一些潜在的安全问题。一个好的起点是经常运行[CIS 扫描](/docs/rancher2/cis-scans/2.5/_index)并发出告警，检查集群是否按照安全最佳实践进行配置。
 
 对于工作负载，你可以看看 Kubernetes 和 Container 安全解决方案，比如[Falko](https://falco.org/)、[Aqua Kubernetes Security](https://www.aquasec.com/solutions/kubernetes-container-security/)、[SysDig](https://sysdig.com/)。
 
