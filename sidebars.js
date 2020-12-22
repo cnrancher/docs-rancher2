@@ -316,7 +316,6 @@ module.exports = {
                             "rancher2/backups/2.0-2.4/_index",
                             "rancher2/backups/2.0-2.4/k3s-backups/_index",
                             "rancher2/backups/2.0-2.4/ha-backups/_index",
-                            "rancher2/backups/2.0-2.4/ha-backups/_index",
                             "rancher2/backups/2.0-2.4/single-node-backups/_index",
                         ],
                     },
