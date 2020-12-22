@@ -72,7 +72,7 @@ Backup 和 Restore 自定义资源可以在 Rancher UI 中创建，或者使用 
 1. 在右上角单击 **Cluster Explorer**。
 1. 单击 **Apps**。
 1. 单击 `rancher-backup` operator。
-1. （可选）配置默认的存储位置。有关帮助，请参阅[配置部分](rancher2/backups/2.5/configuration/storage-config/_index)。
+1. （可选）配置默认的存储位置。有关帮助，请参阅[配置部分](/docs/rancher2/backups/2.5/configuration/storage-config/_index)。
 
 **结果：**安装了 `rancher-backup` operator。
 
@@ -101,22 +101,22 @@ helm install rancher-backup rancher-charts/rancher-backup -n cattle-resources-sy
 
 ## 备份 Rancher
 
-通过创建一个 Backup 自定义资源来进行备份。有关教程，请参考[本页](/rancher2/backups/2.5/back-up-rancher/_index)。
+通过创建一个 Backup 自定义资源来进行备份。有关教程，请参考[本页](/docs/rancher2/backups/2.5/back-up-rancher/_index)。
 
 ## 恢复 Rancher
 
-通过创建 Restore 自定义资源来进行还原。有关教程，请参考[本页](/rancher2/backups/2.5/restoring-rancher/_index)。
+通过创建 Restore 自定义资源来进行还原。有关教程，请参考[本页](/docs/rancher2/backups/2.5/restoring-rancher/_index)。
 
 ## 将 Rancher 迁移到新的集群
 
-按照[这些步骤](/rancher2/backups/2.5/migrating-rancher/_index)进行迁移。
+按照[这些步骤](/docs/rancher2/backups/2.5/migrating-rancher/_index)进行迁移。
 
 ## 配置默认存储位置
 
 配置一个默认保存所有备份的存储位置。您可以选择对每个备份进行覆盖，但仅限于使用 S3 或 Minio 对象存储。
 
-有关配置这些选项的信息，请参阅[本页](/rancher2/backups/2.5/configuration/storage-config/_index)。
+有关配置这些选项的信息，请参阅[本页](/docs/rancher2/backups/2.5/configuration/storage-config/_index)。
 
 ### Rancher-backup Helm Chart 的 values.yaml 示例
 
-当使用 Helm CLI 安装时，可以使用示例[values.yaml 文件](/rancher2/backups/2.5/configuration/storage-config/_index#rancher-backup-helm-chart的valuesyaml示例)来配置`rancher-backup` operator。
+当使用 Helm CLI 安装时，可以使用示例[values.yaml 文件](/docs/rancher2/backups/2.5/configuration/storage-config/_index#rancher-backup-helm-chart的valuesyaml示例)来配置`rancher-backup` operator。

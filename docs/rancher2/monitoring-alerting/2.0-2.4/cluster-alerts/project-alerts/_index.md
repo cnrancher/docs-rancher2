@@ -171,7 +171,7 @@ keywords:
 
 1.  继续向组中添加更多**告警规则**。
 
-1.  最后，选择向你发送告警的[通知](/docs/rancher2/cluster-admin/tools/notifiers/)。
+1.  最后，选择向你发送告警的[通知](/docs/rancher2/cluster-admin/tools/notifiers/_index)。
 
     - 你可以设置多个通知器。
     - 你可以随时更改通知者的收件人。

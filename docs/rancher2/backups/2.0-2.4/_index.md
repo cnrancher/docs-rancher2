@@ -17,7 +17,7 @@ keywords:
 
 本节包含如何创建 Rancher 数据备份以及如何在灾难场景中恢复数据。
 
-- [基于 K3s 的 Rancher 高可用备份](/docs/rancher2/backups/2.0-2.4/backups/k3s-backups/_index)
+- [基于 K3s 的 Rancher 高可用备份](/docs/rancher2/backups/2.0-2.4/k3s-backups/_index)
 - [基于 RKE 的 Rancher 高可用备份](/docs/rancher2/backups/2.0-2.4/ha-backups/_index)
 - [Rancher 单节点备份](/docs/rancher2/backups/2.0-2.4/single-node-backups/_index)
 

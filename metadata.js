@@ -146,7 +146,7 @@ const metadata = {
             "rancher2/best-practices/2.5/_index": "v2.5",
             "rancher2/backups/2.0-2.4/ha-backups/_index":
                 "备份 RKE 高可用 Rancher",
-            "rancher2/backups/2.0-2.4/backups/k3s-backups/_index":
+            "rancher2/backups/2.0-2.4/k3s-backups/_index":
                 "备份 K3s 高可用 Rancher",
             "rancher2/backups/2.0-2.4/single-node-backups/_index":
                 "备份单节点 Rancher",
