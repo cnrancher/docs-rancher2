@@ -85,7 +85,8 @@ rm -rf /etc/ceph \
     /var/log/containers \
     /var/log/kube-audit \
     /var/log/pods \
-    /var/run/calico
+    /var/run/calico \
+    /usr/libexec/kubernetes
 
 # 清理网络接口
 no_del_net_inter='

@@ -26,7 +26,7 @@ keywords:
 
 3.  选择 **GitHub**。
 
-4.  在**设置 Github 应用**中，点击 **点击此处**，Rancher 会帮您重定向到 GitHub 以完成注册。
+4.  在**设置 Github 应用**中，单击 **单击此处**，Rancher 会帮您重定向到 GitHub 以完成注册。
 
     > **什么是授权回调 URL？**
     >
@@ -38,9 +38,9 @@ keywords:
 
     > **从哪里获取 Client ID 和 Client Secret?**
     >
-    > 从 GitHub 页面，选择 Settings > Developer Settings > OAuth Apps。点击 `new OAuth app` 来为 Rancher 创建对应的 Client ID 和 Client Secret。
+    > 从 GitHub 页面，选择 Settings > Developer Settings > OAuth Apps。单击 `new OAuth app` 来为 Rancher 创建对应的 Client ID 和 Client Secret。
 
-6.  点击 **启用 GitHub 认证**.
+6.  单击 **启用 GitHub 认证**.
 
 7.  使用**访问控制**选项来配置用户授权范围.
 
@@ -56,7 +56,7 @@ keywords:
 
       只有添加到**授权的用户和组织**中的 GitHub 用户或组才能登录到 Rancher。
 
-8.  点击**保存**。
+8.  单击**保存**。
 
 **结果：**
 

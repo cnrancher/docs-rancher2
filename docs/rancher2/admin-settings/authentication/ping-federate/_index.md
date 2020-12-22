@@ -56,7 +56,7 @@ _v2.0.7 版本可用_
 
    1. **元数据 XML**： [从您的 IdP 服务器导出](https://documentation.pingidentity.com/pingfederate/pf83/index.shtml#concept_exportingMetadata.html)的`metadata.xml`文件。
 
-1. 完成**配置 Ping 帐号**表单后，点击页面底部的**启用 Ping 认证**。
+1. 完成**配置 Ping 帐号**表单后，单击页面底部的**启用 Ping 认证**。
 
    Rancher 会将您重定向到 IdP 登录页面。输入使用 Ping IdP 进行身份验证的凭据，以验证您的 Rancher PingIdentity 配置。
 

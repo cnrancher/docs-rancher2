@@ -18,7 +18,7 @@ description:
 
 ## CIS Kubernetes Benchmark 1.4.1 - Rancher 2.3 - Kubernetes 1.15
 
-[点击这里下载 PDF 版本的安全自测指南](https://releases.rancher.com/documents/security/2.3.x/Rancher_Benchmark_Assessment.pdf)
+[单击这里下载 PDF 版本的安全自测指南](https://releases.rancher.com/documents/security/2.3.x/Rancher_Benchmark_Assessment.pdf)
 
 ## 概述
 

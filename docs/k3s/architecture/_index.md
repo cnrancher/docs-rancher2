@@ -40,9 +40,9 @@ K3s server 节点被定义为运行`k3s server`命令的机器（裸机或虚拟
 
 ## 具有外部数据库的高可用 K3s server
 
-单节点 k3s 集群可以满足各种用例，但对于 Kubernetes 控制平面的正常运行至关重要的环境，您可以在 HA 配置中运行 K3s。一个 HA K3s 集群由以下几个部分组成：
+单节点 k3s 集群可以满足各种用例，但对于 Kubernetes control-plane 的正常运行至关重要的环境，您可以在 HA 配置中运行 K3s。一个 HA K3s 集群由以下几个部分组成：
 
-- 两个或更多`server节点`将为 Kubernetes API 提供服务并运行其他控制平面服务
+- 两个或更多`server节点`将为 Kubernetes API 提供服务并运行其他 control-plane 服务
 - `外部数据存储`（与单节点 k3s 设置中使用的嵌入式 SQLite 数据存储相反）
 
 <figcaption>K3s高可用架构</figcaption>

@@ -14,9 +14,9 @@ Prometheus 监控可以应用于 Rancher [集群层级](/docs/rancher2/cluster-a
 
 - [集群监控](/docs/rancher2/cluster-admin/tools/monitoring/_index)允许用户查看 Kubernetes 集群的健康状况。Prometheus 从以下的集群组件中收集健康数据，用户可以通过 Rancher 用户界面的图表查看集群的健康状况。
 
-  - [Kubernetes 监控指标](/docs/rancher2/cluster-admin/tools/monitoring/cluster-metrics/_index#kubernetes-components-metrics)
-  - [etcd 数据库](/docs/rancher2/cluster-admin/tools/monitoring/cluster-metrics/_index#etcd-metrics)
-  - [全部节点（包括 worker 节点）](/docs/rancher2/cluster-admin/tools/monitoring/cluster-metrics/_index#cluster-metrics)
+  - [Kubernetes 监控指标](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/cluster-metrics/_index#kubernetes-components-metrics)
+  - [etcd 数据库](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/cluster-metrics/_index#etcd-metrics)
+  - [全部节点（包括 worker 节点）](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/cluster-metrics/_index#cluster-metrics)
 
 * 项目监控允许用户查看项目内 Pod 的运行状态。项目级别的 Prometheus 可以从通过 HTTP(S)协议采集，项目中部署的工作负载的自定义指标。
 
@@ -34,7 +34,7 @@ Prometheus 监控可以应用于 Rancher [集群层级](/docs/rancher2/cluster-a
 
 1. 在导航栏选择**工具 > 监控**。
 
-1. 选择 **启用**，控制台上会出现[Prometheus 配置选项](/docs/rancher2/cluster-admin/tools/monitoring/prometheus/_index)，输入您需要配置的监控参数。
+1. 选择 **启用**，控制台上会出现[Prometheus 配置选项](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/expression/_index)，输入您需要配置的监控参数。
 
 1. 单击**保存**，保存修改后的参数配置。
 
@@ -45,7 +45,7 @@ Prometheus 监控可以应用于 Rancher [集群层级](/docs/rancher2/cluster-a
 | Prometheus | 750m         | 750Mi        | 1000m        | 1000Mi   | 是           |
 | Grafana    | 100m         | 100Mi        | 200m         | 200Mi    | 否           |
 
-**结果：**完成监控资源配置以后，Rancher 会把一个叫做`project-monitoring`的项目层级监控，以[应用商店应用](/docs/rancher2/catalog/launching-apps/_index)的形式添加到了项目中。当这个应用的状态变成了`active` ，您可以通过 [Rancher UI](/docs/rancher2/cluster-admin/tools/monitoring/_index#rancher-dashboard) 查看项目的监控指标，或者直接从[Grafana](/docs/rancher2/cluster-admin/tools/monitoring/_index#grafana)查看项目的监控指标。
+**结果：**完成监控资源配置以后，Rancher 会把一个叫做`project-monitoring`的项目层级监控，以[应用商店应用](/docs/rancher2/helm-charts/legacy-catalogs/launching-apps/_index)的形式添加到了项目中。当这个应用的状态变成了`active` ，您可以通过 [Rancher UI](/docs/rancher2/cluster-admin/tools/monitoring/_index#rancher-dashboard) 查看项目的监控指标，或者直接从[Grafana](/docs/rancher2/cluster-admin/tools/monitoring/_index#grafana)查看项目的监控指标。
 
 > Grafana 实例的默认用户名和密码为 "admin/admin"。然而，Grafana 仪表板是通过 Rancher 认证代理提供服务的，因此只有当前通过认证进入 Rancher 服务器的用户才能访问 Grafana 仪表板。
 

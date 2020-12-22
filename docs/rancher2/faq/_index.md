@@ -33,7 +33,7 @@ keywords:
 
 **Rancher 支持 Istio 服务网格吗？**
 
-自 Rancher 2.3.0 起，我们支持 [Istio](/docs/rancher2/cluster-admin/tools/istio/_index)。
+自 Rancher 2.3.0 起，我们支持 [Istio](/docs/rancher2/istio/2.3.x-2.4.x/_index)。
 
 另外，Istio 也可以通过 Rancher 的 mico-PaaS 产品 Rio 来使用。Rio 可以在 Rancher 或者任何通过 CNCF 一致性审核的 Kubernetes 集群上运行。详细信息可以参考 [Rio 网站](https://rio.io/)。
 

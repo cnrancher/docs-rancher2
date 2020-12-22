@@ -65,7 +65,7 @@ Rancher 的流水线提供了简单的 CI / CD 体验。使用它可以自动拉
 - 执行单元测试
 - 执行回归测试
 
-**详情请参考[流水线功能介绍](/docs/rancher2/k8s-in-rancher/pipelines/_index)。**
+**详情请参考[流水线功能介绍](/docs/rancher2/pipelines/_index)。**
 
 ### Pod 弹性伸缩（horizontal pod autoscaler)
 
@@ -113,7 +113,7 @@ Kubernetes 将工作负载分为不同类型。Kubernetes 支持的类型包括�
 - 部署 YAML
 - 部署应用商店应用
 
-**详情请参考[流水线配置参考](/docs/rancher2/k8s-in-rancher/pipelines/config/_index)。**
+**详情请参考[流水线配置参考](/docs/rancher2/pipelines/config/_index)。**
 
 ## 集群管理员指南
 
@@ -135,13 +135,13 @@ Rancher 支持与以下日志收集目标服务集成：
 - 随时了解容器崩溃，Pod 驱逐或节点死亡等事件
 - 更轻松地调试和排除故障
 
-**详情请参考[集群日志](/docs/rancher2/cluster-admin/tools/logging/_index)。**
+**详情请参考[集群日志](/docs/rancher2/logging/2.0.x-2.4.x/project-logging/_index)。**
 
 ### 配置告警
 
 通知和告警功能是基于 [Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager/) 的。利用这些工具，Rancher 可以通知[集群所有者](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)和[项目所有者](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)有需要处理的告警。
 
-**详情请参考[配置告警](/docs/rancher2/cluster-admin/tools/alerts/_index)。**
+**详情请参考[配置告警](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/_index)。**
 
 ### 通过 Kubectl 和 kubeconfig 访问集群
 

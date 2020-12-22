@@ -35,7 +35,7 @@ Rancher 与 Istio 的集成旨在使 Rancher 运维人员（例如管理员或�
 - 负载均衡
 - 自动重试，退避和断路
 
-在集群中启用 Istio 之后，您可以通过 `kubectl` 来使用 Istio 的控制平面功能。
+在集群中启用 Istio 之后，您可以通过 `kubectl` 来使用 Istio 的 control-plane 功能。
 
 Rancher 的 Istio 集成附带了全面的可视化辅助工具：
 
@@ -46,19 +46,19 @@ Rancher 的 Istio 集成附带了全面的可视化辅助工具：
 
 ## 先决条件
 
-在启用 Istio 之前，我们建议您确认 Rancher worker 节点具有足够的 [CPU 和内存](/docs/rancher2/cluster-admin/tools/istio/resources/_index)以运行 Istio 的所有组件。
+在启用 Istio 之前，我们建议您确认 Rancher worker 节点具有足够的 [CPU 和内存](/docs/rancher2/istio/2.3.x-2.4.x/resources/_index)以运行 Istio 的所有组件。
 
 ## 设定指南
 
-有关如何设置 Istio 并将其在项目中使用的说明，请参考[设定指南](/docs/rancher2/cluster-admin/tools/istio/setup/_index)。
+有关如何设置 Istio 并将其在项目中使用的说明，请参考[设定指南](/docs/rancher2/istio/2.3.x-2.4.x/setup/_index)。
 
 ## 禁用 Istio
 
-要从集群，命名空间或工作负载中删除 Istio 组件，请参阅[禁用 Istio](/docs/rancher2/cluster-admin/tools/istio/disabling-istio/_index)。
+要从集群，命名空间或工作负载中删除 Istio 组件，请参阅[禁用 Istio](/docs/rancher2/istio/2.3.x-2.4.x/disabling-istio/_index)。
 
 ## 访问可视化
 
-> 默认情况下，只有集群所有者才能访问 Jaeger 和 Kiali。关于如何允许项目成员访问它们的说明，请参阅[访问可视化](/docs/rancher2/cluster-admin/tools/istio/rbac/_index)。
+> 默认情况下，只有集群所有者才能访问 Jaeger 和 Kiali。关于如何允许项目成员访问它们的说明，请参阅[访问可视化](/docs/rancher2/istio/2.3.x-2.4.x/rbac/_index)。
 
 在集群中设置 Istio 之后，Rancher UI 中将提供 Grafana，Prometheus，Jaeger 和 Kiali 访问。
 
@@ -92,7 +92,7 @@ Istio 只能跟踪和控制已注入 Istio sidecar 的工作负载。
 
 有关 Istio sidecar 的更多信息，请参阅 [Istio 文档](https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/)。
 
-#### 两个入口
+## 两个入口
 
 默认情况下，每个 Rancher 配置的集群都有一个 NGINX ingress 控制器，允许流量进入集群。要允许 Istio 接收外部流量，您需要为集群启用 Istio ingress 网关。结果是您的集群将有两个入口。
 

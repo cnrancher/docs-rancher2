@@ -21,7 +21,7 @@ keywords:
 
 1. 以管理用户身份登录到 AD 服务器。
 
-2. 打开 **AD FS Management** 控制台。从 **Actions** 菜单中选择 **Add Relying Party Trust...**，点击 **Start**。
+2. 打开 **AD FS Management** 控制台。从 **Actions** 菜单中选择 **Add Relying Party Trust...**，单击 **Start**。
 
    ![](/img/rancher/adfs/adfs-overview.png)
 
@@ -58,21 +58,21 @@ keywords:
 
     ![](/img/rancher/adfs/adfs-add-rpt-9.png)
 
-11. 查看完设置后, 点击 **Next** 以添加以添加依赖方信任。
+11. 查看完设置后, 单击 **Next** 以添加以添加依赖方信任。
 
     ![](/img/rancher/adfs/adfs-add-rpt-10.png)
 
-12. 在 **Open the Edit Claim Rules...** 然后点击 **Close**。
+12. 在 **Open the Edit Claim Rules...** 然后单击 **Close**。
 
     ![](/img/rancher/adfs/adfs-add-rpt-11.png)
 
 13. 在 **Issuance Transform Rules** 表, 单击 **Add Rule...**。
 
-    ![](/img/rancher/adfs/adfs-edit-cr.png)
+    ![adfs-edit-cr](/img/rancher/adfs/adfs-edit-cr.png)
 
 14. 选择 **Send LDAP Attributes as Claims** 作为 **Claim rule template**。
 
-    ![](/img/rancher/adfs/adfs-add-tcr-1.png)
+    ![adfs-add-tcr-1](/img/rancher/adfs/adfs-add-tcr-1.png)
 
 15. 将 **Claim rule name** 设置为所需的名称 (例如, `Rancher Attributes`) 然后选择 **Active Directory** 作为 **Attribute store**。 创建以下映射以反映下表：
 
@@ -83,7 +83,7 @@ keywords:
     | Token-Groups - Qualified by Long Domain Name | Group      |
     | SAM-Account-Name                             | Name       |
 
-    ![](/img/rancher/adfs/adfs-add-tcr-2.png)
+    ![adfs-add-tcr-2](/img/rancher/adfs/adfs-add-tcr-2.png)
 
 16. 从以下位置的 AD 服务器下载： `federationmetadata.xml` ：
 

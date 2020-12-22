@@ -52,7 +52,7 @@ keywords:
 
 4. 通过**成员角色**来设置用户访问集群的权限。
 
-   - 点击**添加成员**将需要访问这个集群的用户添加到成员中。
+   - 单击**添加成员**将需要访问这个集群的用户添加到成员中。
    - 在**角色**下拉菜单中选择每个用户的权限。
 
 5. 使用**集群选项**设置 Kubernetes 的版本，网络插件以及是否要启用项目网络隔离。要查看更多集群选项，请单击**显示高级选项**。
@@ -62,7 +62,7 @@ keywords:
    > - 请参阅[启用 Windows 支持选项](/docs/rancher2/cluster-provisioning/rke-clusters/windows-clusters/_index)。
    > - 唯一可用于支持 Windows 的集群的网络插件是 Flannel。请参阅[网络选项](/docs/rancher2/cluster-provisioning/rke-clusters/windows-clusters/_index)。
 
-6. 点击 **下一步** 。
+6. 单击 **下一步** 。
 
 7. 从**节点角色**中，选择需要的集群节点角色。
 
@@ -71,7 +71,7 @@ keywords:
    > - 使用 Windows 主机作为 Kubernetes Worker 节点? 请参阅[节点配置](/docs/rancher2/cluster-provisioning/rke-clusters/windows-clusters/_index)。
    > - 裸金属服务器提醒：如果您计划将裸金属服务器专用于每个角色，则必须为每个角色配置裸金属服务器（即配置多个裸金属服务器）。
 
-8. **可选**：点击**[显示高级选项](/docs/rancher2/cluster-provisioning/rke-clusters/custom-nodes/agent-options/_index)**以指定注册节点时要使用的 IP 地址、重写节点的主机名或添加[标签](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)或[污点](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)到节点上。
+8. **可选**：单击**[显示高级选项](/docs/rancher2/cluster-provisioning/rke-clusters/custom-nodes/agent-options/_index)**以指定注册节点时要使用的 IP 地址、重写节点的主机名或添加[标签](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)或[污点](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)到节点上。
 
 9. 复制屏幕上显示的命令到剪贴板。
 
@@ -79,7 +79,7 @@ keywords:
 
     > **注意：** 如果要将特定主机专用于特定节点角色，请重复步骤 7-10。根据需要多次重复这些步骤。
 
-11. 当您完成在 Linux 主机上运行该命令时，点击 **完成**。
+11. 当您完成在 Linux 主机上运行该命令时，单击 **完成**。
 
 结果：
 

@@ -128,7 +128,7 @@ Windows 集群中的工作负载通常部署在 Windows（`worker`）节点中�
 
 您将配置三个节点：
 
-- 一个 Linux 节点，用于部署 Kubernetes 控制平面和`etcd`
+- 一个 Linux 节点，用于部署 Kubernetes control-plane 和`etcd`
 - 第二个 Linux 节点，它将是一个工作节点
 - Windows 节点，它将用来运行 Windows 容器。
 

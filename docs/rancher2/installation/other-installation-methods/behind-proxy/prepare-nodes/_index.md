@@ -30,7 +30,7 @@ etcd 数据库需要奇数个节点，这样它总能选出一个拥有大多数
 
 您还需要设置一个负载平衡器，将流量引导到两个节点上的 Rancher 副本。这将防止任何一个单一节点的中断导致与 Rancher 管理服务器的通信中断。
 
-当 Kubernetes 在后面的步骤中得到设置时，RKE 工具将部署一个 NGINX Ingress 控制器。这个控制器将监听工人节点的 80 和 443 端口，回答指向特定主机名的流量。
+当 Kubernetes 在后面的步骤中得到设置时，RKE 工具将部署一个 NGINX Ingress 控制器。这个控制器将监听 worker 节点的 80 和 443 端口，回答指向特定主机名的流量。
 
 当安装 Rancher 时（也在后面的步骤中），Rancher 系统会创建一个 Ingress 资源。该 Ingress 告诉 NGINX Ingress 控制器监听指向 Rancher 主机名的流量。NGINX Ingress 控制器在接收到指向 Rancher 主机名的流量时，会将该流量转发到集群中正在运行的 Rancher pod。
 

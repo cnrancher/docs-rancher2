@@ -39,8 +39,8 @@ _自 v2.3.0 版本起可用_
 
 ### 添加 Rancher 为授权域
 
-1. 点击[这里](https://console.developers.google.com/apis/credentials)转到您的 Google 域的凭证页面。
-1. 选择您的项目并点击**OAuth consent screen.**
+1. 单击[这里](https://console.developers.google.com/apis/credentials)转到您的 Google 域的凭证页面。
+1. 选择您的项目并单击**OAuth consent screen.**
    ![OAuth同意屏幕](/img/rancher/Google-OAuth-consent-screen-tab.png)
 1. 进入**授权域**，并在列表中输入您的 Rancher Server URL 的顶级私有域。顶级私有域是最右边的超级域。例如，www.foo.co.uk 是 foo.co.uk 的顶级私有域。有关顶级域的更多信息，请参考[本文](https://github.com/google/guava/wiki/InternetDomainNameExplained#public-suffixes-private-domains)。
 1. 进入**Scopes for Google APIs**，确保**email**, **profile**和**openid**被启用。
@@ -59,7 +59,7 @@ _自 v2.3.0 版本起可用_
 - 在**授权的 JavaScript 源**一栏，输入您的 Rancher Server 的 URL。
 - 在**授权的重定向 URI**一栏，输入您的 Rancher Server 的 URL 并附加路径`verify-auth`。例如，如果您的 URI 是`https://rancherServer`，您需要输入`https://rancherServer/verify-auth`。
 
-1. 点击**创建**。
+1. 单击**创建**。
 1. 创建凭据之后，您将看到一个页面，其中显示您的凭据列表。选择刚刚创建的凭据，然后在最右边的行中单击**下载 JSON**保存文件，以便您可以在 Rancher 中设置这些凭据。
 
 **结果:** 您的 OAuth 凭据已成功创建。
@@ -78,10 +78,10 @@ _自 v2.3.0 版本起可用_
 - 为服务帐户创建一个密钥并下载 JSON 格式的凭据
 
 1. 单击[此处](https://console.developers.google.com/iam-admin/serviceaccounts)并选择生成 OAuth 凭据的项目。
-1. 点击**Create Service Account**。
+1. 单击**Create Service Account**。
 1. 输入名称并单击**Create**。
    ![服务账户创建步骤1](/img/rancher/Google-svc-acc-step1.png)
-1. 不要在**Service account permissions**页面设置任何角色，点击**Continue**。
+1. 不要在**Service account permissions**页面设置任何角色，单击**Continue**。
    ![服务账户创建步骤2](/img/rancher/Google-svc-acc-step2.png)
 1. 单击**Create Key**并选择 JSON 选项。下载 JSON 文件并保存它，以便您可以将其作为服务帐户凭据提供给 Rancher。
    ![服务帐户创建步骤3](/img/rancher/Google-svc-acc-step3-key-creation.png)
@@ -104,7 +104,7 @@ _自 v2.3.0 版本起可用_
    ```
    openid,profile,email,https://www.googleapis.com/auth/admin.directory.user.readonly,https://www.googleapis.com/auth/admin.directory.group.readonly
    ```
-1. 点击**Authorize**。
+1. 单击**Authorize**。
 
 **结果:** 服务帐户在您的 G Suite 帐户中注册为 OAuth 客户端。
 
@@ -112,7 +112,7 @@ _自 v2.3.0 版本起可用_
 
 1. 使用分配了[administrator](/docs/rancher2/admin-settings/rbac/global-permissions/_index)角色的本地用户登录到 Rancher。这个用户也称为本地主体。
 1. 在**全局**视图中，从主菜单中单击**安全 > 认证**。
-1. 点击**Google** ，UI 中的说明涵盖了使用 Google OAuth 设置身份验证的步骤。
+1. 单击**Google** ，UI 中的说明涵盖了使用 Google OAuth 设置身份验证的步骤。
 
 - 管理电子邮件：从您的 GSuite 设置中提供管理员账户的电子邮件。为了执行用户和组查找，谷歌 api 需要管理员的电子邮件和服务帐户密钥。
 - 域：提供配置了 G Suite 的域。请提供准确的域，而不是任何别名。
@@ -122,6 +122,6 @@ _自 v2.3.0 版本起可用_
 - **第三步**提供在[本节](#3-创建服务帐户凭证)的末尾下载的服务帐户凭据 JSON。仅当您成功按照[将服务帐户密钥注册为 OAuth 客户端](#4-将服务账户密钥注册为-oauth-客户端)步骤将其注册为 G Suite OAuth 客户端时，凭证才能正常工作。
 
 1. 单击**使用 Googler 认证**。
-1. 点击**保存**。
+1. 单击**保存**。
 
 **结果:** Google 认证配置成功。
