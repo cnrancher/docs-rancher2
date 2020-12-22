@@ -35,7 +35,7 @@ keywords:
 
 ### 网络插件
 
-集群使用的[网络插件](https://kubernetes.io/docs/concepts/cluster-administration/networking/)。有关不同网络提供商的更多详细信息，请查看我们的[网络常见问题解答](/docs/rancher2/faq/networking/cni-providers/_index)。
+集群使用的[网络插件](https://kubernetes.io/zh/docs/concepts/cluster-administration/networking/)。有关不同网络提供商的更多详细信息，请查看我们的[网络常见问题解答](/docs/rancher2/faq/networking/cni-providers/_index)。
 
 :::important 重要
 启动集群后，您无法更改网络插件，请谨慎选择要使用的网络插件。Kubernetes 不支持切换网络插件。创建集群后，如果您需要更改网络插件，只能删除整个集群及其所有应用程序，重新创建集群和配置网络插件。

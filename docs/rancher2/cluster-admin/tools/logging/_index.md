@@ -117,4 +117,4 @@ Logging Driver: json-file
 
 ## 相关链接
 
-[日志架构](https://kubernetes.io/docs/concepts/cluster-administration/logging/)
+[日志架构](https://kubernetes.io/zh/docs/concepts/cluster-administration/logging/)

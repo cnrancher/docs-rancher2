@@ -105,4 +105,4 @@ Rancher 支持启用集群层级的日志功能和项目层级的日志功能，
 
 ## 相关链接
 
-[Kubernetes 官方文档-日志架构](https://kubernetes.io/docs/concepts/cluster-administration/logging/)
+[Kubernetes 官方文档-日志架构](https://kubernetes.io/zh/docs/concepts/cluster-administration/logging/)

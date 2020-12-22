@@ -46,7 +46,7 @@ keywords:
 
     2. 完成 **Digital Ocean 选项** 表单的填写。
 
-       - **访问令牌** 会存储您的 Digital Ocean 个人访问令牌. 请参照[DigitalOcean 说明：如何生成个人令牌](https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-api-v2#how-to-generate-a-personal-access-token)。
+       - **访问令牌** 会存储您的 Digital Ocean 个人访问令牌. 请参照[DigitalOcean 说明：如何生成个人令牌](https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-api-v2-with-ansible-2-0-on-ubuntu-16-04#how-to-generate-a-personal-access-token)。
 
        - **Droplet 选项** 设置集群的地理区域和规格。
 
