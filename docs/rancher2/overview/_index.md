@@ -72,10 +72,10 @@ Rancher API Server 是基于嵌入式 Kubernetes API Server 和 ETCD 数据库�
 ### 使用 Kubernetes 的功能
 
 - **运行 Kubernetes 集群：** Rancher API server 可以在已有节点上运行 [Kubernetes 集群](/docs/rancher2/cluster-provisioning/_index) ，或对 Kubernetes 进行[版本升级](/docs/rancher2/cluster-admin/upgrading-kubernetes/_index)。
-- **应用商店管理：** Rancher 可以使用[Helm Charts 应用商店](/docs/rancher2/catalog/_index)重复部署应用。
+- **应用商店管理：** Rancher 可以使用[Helm Charts 应用商店](/docs/rancher2/helm-charts/legacy-catalogs/_index)重复部署应用。
 - **项目管理：** 项目，是 Rancher 中的一个概念，Kubernetes 中并没有这个概念。项目由一个集群内的多个命名空间和多个访问控制策略组成，允许用户以组为单位，一次管理多个命名空间，对其进行 Kubernetes 相关操作。Rancher 用户界面提供了 [项目管理](/docs/rancher2/project-admin/_index) 和 [项目内应用管理](/docs/rancher2/k8s-in-rancher/_index) 两个功能。
 - **流水线：** [流水线](/docs/rancher2/project-admin/pipelines/_index) 可以帮助开发者快速高效地上线新软件。Rancher 支持给每一个项目单独配置流水线。
-- **Istio：** [Rancher 与 Istio 集成](/docs/rancher2/cluster-admin/tools/istio/_index)，管理员或集群所有者可以将 Istio 交给开发者，然后开发者使用 Istio 执行安全策略，排查问题，或为快速发布、灰度发布和 A/B 测试进行流量控制。
+- **Istio：** [Rancher 与 Istio 集成](/docs/rancher2/istio/2.3.x-2.4.x/_index)，管理员或集群所有者可以将 Istio 交给开发者，然后开发者使用 Istio 执行安全策略，排查问题，或为快速发布、灰度发布和 A/B 测试进行流量控制。
 
 ### 配置云端基础信息
 
@@ -84,9 +84,9 @@ Rancher API Server 是基于嵌入式 Kubernetes API Server 和 ETCD 数据库�
 
 ### 查看集群信息
 
-- **日志：** Rancher 可以跟多种主流日志工具集成，您可以设置 [集群日志](/docs/rancher2/cluster-admin/tools/logging/_index) 或 [项目日志](/docs/rancher2/project-admin/tools/logging/_index)。
+- **日志：** Rancher 可以跟多种主流日志工具集成，您可以设置 [集群日志](/docs/rancher2/logging/2.0.x-2.4.x/project-logging/_index) 或 [项目日志](/docs/rancher2/project-admin/tools/logging/_index)。
 - **监控：** 使用 Rancher，您可以通过 Prometheus 监控集群节点、Kubernetes 组件、软件部署的状态和进度。您可以设置 [集群监控](/docs/rancher2/cluster-admin/tools/monitoring/_index) 或 [项目监控](/docs/rancher2/project-admin/tools/monitoring/_index)。
-- **告警信息：** 您需要随时知道集群和项目的计划和非计划事件，才可以提高公司的运行效率。您可以设置[集群告警](/docs/rancher2/cluster-admin/tools/alerts/_index) 或 [项目告警](/docs/rancher2/project-admin/tools/alerts/_index)。
+- **告警信息：** 您需要随时知道集群和项目的计划和非计划事件，才可以提高公司的运行效率。您可以设置[集群告警](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/_index) 或 [项目告警](/docs/rancher2/project-admin/tools/alerts/_index)。
 
 ## 编辑下游集群
 
@@ -100,7 +100,7 @@ Rancher API Server 是基于嵌入式 Kubernetes API Server 和 ETCD 数据库�
 | [管理节点](/docs/rancher2/cluster-admin/nodes/_index)                                                             | ✓                                                                                                    | ✓                                                                                               | ✓                                                                                      |
 | [管理持久卷和存储类](/docs/rancher2/cluster-admin/volumes-and-storage/_index)                                     | ✓                                                                                                    | ✓                                                                                               | ✓                                                                                      |
 | [管理项目和命名空间](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)                                 | ✓                                                                                                    | ✓                                                                                               | ✓                                                                                      |
-| [使用应用商店](/docs/rancher2/catalog/_index)                                                                     | ✓                                                                                                    | ✓                                                                                               | ✓                                                                                      |
+| [使用应用商店](/docs/rancher2/helm-charts/legacy-catalogs/_index)                                                 | ✓                                                                                                    | ✓                                                                                               | ✓                                                                                      |
 | [使用配置工具（告警、通知、日志、监控和 Istio）](#使用配置工具)                                                   | ✓                                                                                                    | ✓                                                                                               | ✓                                                                                      |
 | [克隆集群](/docs/rancher2/cluster-admin/cloning-clusters/_index)                                                  | ✓                                                                                                    | ✓                                                                                               |                                                                                        |
 | [证书轮换的能力](/docs/rancher2/cluster-admin/certificate-rotation/_index)                                        | ✓                                                                                                    |                                                                                                 |                                                                                        |

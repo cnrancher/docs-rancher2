@@ -1,6 +1,6 @@
 ---
 title: 创建亚马逊 EKS 集群
-description: Amazon EKS 为 Kubernetes 集群提供了一个托管的控制平面。为了确保高可用性，Amazon EKS 中的 Kubernetes 控制平面实例运行在多个可用区。Rancher 为部署和管理 Amazon EKS 中运行的 Kubernetes 集群提供了直观的用户界面。通过本指南，您将使用 Rancher 在您的 AWS 帐户中快速轻松地启动 Amazon EKS Kubernetes 集群。有关 Amazon EKS 的更多信息，参考EKS文档。
+description: Amazon EKS 为 Kubernetes 集群提供了一个托管的control-plane。为了确保高可用性，Amazon EKS 中的 Kubernetes control-plane实例运行在多个可用区。Rancher 为部署和管理 Amazon EKS 中运行的 Kubernetes 集群提供了直观的用户界面。通过本指南，您将使用 Rancher 在您的 AWS 帐户中快速轻松地启动 Amazon EKS Kubernetes 集群。有关 Amazon EKS 的更多信息，参考EKS文档。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -16,7 +16,7 @@ keywords:
   - 创建亚马逊 EKS 集群
 ---
 
-Amazon EKS 为 Kubernetes 集群提供了一个托管的控制平面。为了确保高可用性，Amazon EKS 中的 Kubernetes 控制平面实例运行在多个可用区。Rancher 为部署和管理 Amazon EKS 中运行的 Kubernetes 集群提供了直观的用户界面。通过本指南，您将使用 Rancher 在您的 AWS 帐户中快速轻松地启动 Amazon EKS Kubernetes 集群。有关 Amazon EKS 的更多信息，参考[文档](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html)。
+Amazon EKS 为 Kubernetes 集群提供了一个托管的 control-plane。为了确保高可用性，Amazon EKS 中的 Kubernetes control-plane 实例运行在多个可用区。Rancher 为部署和管理 Amazon EKS 中运行的 Kubernetes 集群提供了直观的用户界面。通过本指南，您将使用 Rancher 在您的 AWS 帐户中快速轻松地启动 Amazon EKS Kubernetes 集群。有关 Amazon EKS 的更多信息，参考[文档](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html)。
 
 ## 先决条件
 
@@ -63,7 +63,7 @@ Rancher 需要访问您的 AWS 帐户，以便在 Amazon EKS 中创建和管理�
 
 1. 通过**成员角色**来设置用户访问集群的权限。
 
-   - 点击**添加成员**将需要访问这个集群的用户添加到成员中。
+   - 单击**添加成员**将需要访问这个集群的用户添加到成员中。
    - 在**角色**下拉菜单中选择每个用户的权限。
 
 1. 为 EKS 集群配置**账户访问**。
@@ -85,10 +85,10 @@ Rancher 需要访问您的 AWS 帐户，以便在 Amazon EKS 中创建和管理�
 
 1. 为**Worker 节点的公网 IP**选择一个选项。您对此选项的选择决定了**VPC 和 Subnet**可用的选项。
 
-   | 选择          | 描述                                                                                                                                                                                                                |
-   | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | 是            | 当您的集群节点被配置时，它们将被分配一个内网 IP 地址和一个外网 IP 地址。                                                                                                                                            |
-   | 否：仅私有 IP | 当您的集群节点被配置时，它们将会只被分配一个内网 IP 地址。<br/><br/>如果您选择此选项，您还必须选择一个**VPC & Subnet**来允许您的实例访问 internet。此访问是必需的，以便您的工作节点可以连接到 Kubernetes 控制平面。 |
+   | 选择          | 描述                                                                                                                                                                                                                     |
+   | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+   | 是            | 当您的集群节点被配置时，它们将被分配一个内网 IP 地址和一个外网 IP 地址。                                                                                                                                                 |
+   | 否：仅私有 IP | 当您的集群节点被配置时，它们将会只被分配一个内网 IP 地址。<br/><br/>如果您选择此选项，您还必须选择一个**VPC & Subnet**来允许您的实例访问 internet。此访问是必需的，以便您的工作节点可以连接到 Kubernetes control-plane。 |
 
 1. 现在选择**VPC & Subnet**。有关更多信息，请参阅 AWS 文档中的[集群 VPC 注意事项](https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html)。根据上一步的选择，按照下面的说明进行操作。
 
@@ -118,7 +118,7 @@ Rancher 需要访问您的 AWS 帐户，以便在 Amazon EKS 中创建和管理�
 
    - **Worker 节点的公网 IP：否：仅私有 IP**
 
-     如果您选择此选项，您还必须选择允许您的实例访问 internet 的**VPC & Subnet**。这个访问是必需的，这样您的工作节点才可以连接到 Kubernetes 控制平面。步骤如下：
+     如果您选择此选项，您还必须选择允许您的实例访问 internet 的**VPC & Subnet**。这个访问是必需的，这样您的工作节点才可以连接到 Kubernetes control-plane。步骤如下：
 
      > **提示:** 仅使用私有 IP 地址时，为了使您的节点可以访问 internet，您可以创建一个由两个子网组成的 VPC，一个共有子网，一个私有子网。公有子网内的网络地址转换 (NAT) 实例，可让私有子网中的实例发起到 Internet 的流量。有关私有子网路由流量的更多信息，请查看 [官方 AWS 文档](https://docs.aws.amazon.com/zh_cn/vpc/latest/userguide/VPC_NAT_Instance.html)。
 

@@ -97,7 +97,7 @@ NODE1 cannot reach NODE3
 - `Failed to connect to proxy`
 - `read tcp: i/o timeout`
 
-点击查看有关在 Rancher 和集群节点之间使用 Google Cloud VPN 时如何正确配置 MTU 的示例 [Google Cloud VPN：MTU 问题](https://cloud.google.com/vpn/docs/concepts/mtu-considerations#gateway_mtu_vs_system_mtu) 。
+单击查看有关在 Rancher 和集群节点之间使用 Google Cloud VPN 时如何正确配置 MTU 的示例 [Google Cloud VPN：MTU 问题](https://cloud.google.com/vpn/docs/concepts/mtu-considerations#gateway_mtu_vs_system_mtu) 。
 
 ## 已知问题
 

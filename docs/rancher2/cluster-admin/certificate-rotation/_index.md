@@ -205,6 +205,13 @@ _可用版本: rke v0.2.0+_
        ```bash
        docker exec -ti <rancher_server_id> mv /var/lib/rancher/management-state/tls/localhost.crt /var/lib/rancher/management-state/tls/localhost.crt-bak
        ```
+     - 2.3 +
+
+       ```bash
+       docker exec -ti <rancher_server_id> mv /var/lib/rancher/k3s/server/tls /var/lib/rancher/k3s/server/tlsbak
+       # 执行两侧次，第一次申请证书，第二次加载证书启动
+       docker restart <rancher_server_id>
+       ```
 
   3. 重启 Rancher Server 容器
      ```bash

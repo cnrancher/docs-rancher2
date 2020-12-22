@@ -50,11 +50,11 @@ _v2.4.6+ 可用_
 
 从 Rancher v2.4.6 开始，管理员可以对 Kubeconfig 令牌设置全局 TTL。一旦令牌过期，kubectl 命令将要求用户对 Rancher 进行验证。
 
-1. 在 Rancher API 视图`https://<Rancher-Server-IP/v3/settings/kubeconfig-generate-token>中禁用 kubeconfig-generate-token 设置。该设置指示 Rancher 不再在用户点击下载 kubeconfig 文件时自动生成令牌。kubeconfig 文件现在将提供登录 Rancher 的命令。
+1. 在 Rancher API 视图`https://<Rancher-Server-IP/v3/settings/kubeconfig-generate-token>中禁用 kubeconfig-generate-token 设置。该设置指示 Rancher 不再在用户单击下载 kubeconfig 文件时自动生成令牌。kubeconfig 文件现在将提供登录 Rancher 的命令。
 
 2. 编辑该设置，并将该值设置为 `false`。
 
 3. 在 Rancher API 视图中进入设置 kubeconfig-token-ttl-minutes，网址为`https://<Rancher-Server-IP/v3/settings/kubeconfig-token-ttl-minutes`。默认情况下，kubeconfig-token-ttl-minutes 为 960 分钟（16 小时）。
 
 4. 编辑设置并将其设置为所需的持续时间，单位为分钟。
-   ***注意：***这个值不能超过 API 令牌的最大长度。(`https://<Rancher-Server-IP/v3/settings/auth-token-max-ttl-minutes`)。在 Rancher v2.4.6 中，auth-token-max-ttl-minutes 默认设置为 1440（24 小时）。从 Rancher v2.4.7 开始，auth-token-max-ttl-minutes 将默认为 0，允许令牌永不过期，与 v2.4.5 类似。
+   **_注意：_**这个值不能超过 API 令牌的最大长度。(`https://<Rancher-Server-IP/v3/settings/auth-token-max-ttl-minutes`)。在 Rancher v2.4.6 中，auth-token-max-ttl-minutes 默认设置为 1440（24 小时）。从 Rancher v2.4.7 开始，auth-token-max-ttl-minutes 将默认为 0，允许令牌永不过期，与 v2.4.5 类似。

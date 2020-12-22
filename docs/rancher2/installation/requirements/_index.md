@@ -33,7 +33,7 @@ keywords:
   - [节点 IP 地址](#节点-ip-地址)
   - [端口要求](#端口要求)
 
-有关在生产环境中运行 Rancher Server 的最佳实践，请参阅[最佳实践](/docs/rancher2/best-practices/deployment-types/_index)部分。
+有关在生产环境中运行 Rancher Server 的最佳实践，请参阅[最佳实践](/docs/rancher2/best-practices/2.0-2.4/deployment-types/_index)部分。
 
 建议在 Chrome 或 Firefox 中使用 Rancher UI。
 

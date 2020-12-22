@@ -174,7 +174,9 @@ _驱散_ 的过程是首先暂停节点，然后驱散节点上所有的 Pod。�
 
 一旦驱散成功完成，节点将处于`已驱散（drained）`状态。然后可以关闭或删除节点。
 
-> **想知道更多关于暂停和驱散的信息吗?** 请查阅[Kubernetes 文档](https://kubernetes.io/zh/docs/concepts/cluster-administration/#maintenance-on-a-node)。
+
+> **想知道更多关于暂停和驱散的信息吗?** 请查阅[Kubernetes 文档](https://kubernetes.io/zh/docs/tasks/administer-cluster/#maintenance-on-a-node)。
+
 
 ## 标记需要被 Rancher 忽略的节点
 

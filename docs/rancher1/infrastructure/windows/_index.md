@@ -10,9 +10,9 @@ title: Windows (实验性)
 
 ## 创建一个 Windows 环境
 
-在左上角的环境的下拉菜单中，点击**环境管理**。通过点击**添加环境**去创建一个新的环境，需要填写**名称**，**描述**(可选)，并选择 Windows 作为编排引擎的环境模版。如果启用了[访问控制](/docs/rancher1/configurations/environments/access-control/_index)，您可以在环境中[编辑成员](/docs/rancher1/configurations/environments/_index#成员编辑)并选择他们的[成员角色](/docs/rancher1/configurations/environments/_index#成员角色)。所有被添加到成员列表的用户都能访问您的环境。
+在左上角的环境的下拉菜单中，单击**环境管理**。通过单击**添加环境**去创建一个新的环境，需要填写**名称**，**描述**(可选)，并选择 Windows 作为编排引擎的环境模版。如果启用了[访问控制](/docs/rancher1/configurations/environments/access-control/_index)，您可以在环境中[编辑成员](/docs/rancher1/configurations/environments/_index#成员编辑)并选择他们的[成员角色](/docs/rancher1/configurations/environments/_index#成员角色)。所有被添加到成员列表的用户都能访问您的环境。
 
-在创建 Windows 环境后，您可以在左上角环境的下拉菜单中切换到您的环境，或者在环境管理页面中，在对应环境的下拉选项中点击**切换到此环境**。
+在创建 Windows 环境后，您可以在左上角环境的下拉菜单中切换到您的环境，或者在环境管理页面中，在对应环境的下拉选项中单击**切换到此环境**。
 
 > **注意:** Rancher 支持多种容器编排引擎框架，但 Rancher 目前不支持在已有运行服务的环境里切换容器编排引擎。
 
@@ -39,4 +39,4 @@ title: Windows (实验性)
 目前，默认的 **Windows** 环境模版支持名为 transparent 的透明网络
 这个透明网络是在运行 `docker network create -d transparent transparent`时创建的。
 
-如果您要创建一个名字不是 `transparent` 的透明网络，您需要创建一个新的环境模版，并把 Windows 设为容器编排平台。选择**Windows**后，您可以点击 **编辑配置** 来更改透明网络的名字。您可以用这个环境模版创建一个环境。但在 Rancher UI 中这个透明网络的默认名字依然是 `transparent`。 因此，您需要把命令更新为 `docker network create -d transparent <NEW_NAME_IN_TEMPLATE`.
+如果您要创建一个名字不是 `transparent` 的透明网络，您需要创建一个新的环境模版，并把 Windows 设为容器编排平台。选择**Windows**后，您可以单击 **编辑配置** 来更改透明网络的名字。您可以用这个环境模版创建一个环境。但在 Rancher UI 中这个透明网络的默认名字依然是 `transparent`。 因此，您需要把命令更新为 `docker network create -d transparent <NEW_NAME_IN_TEMPLATE`.

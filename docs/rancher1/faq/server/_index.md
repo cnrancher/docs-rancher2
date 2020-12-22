@@ -33,7 +33,7 @@ docker exec <CONTAINER_ID_OF_SERVER> mysqldump cattle > dump.sql
 
 ## 3、我正在运行的 Rancher 是什么版本的?
 
-Rancher 的版本位于 UI 的页脚的左侧。 如果您点击版本号，将可以查看其他组件的详细版本。
+Rancher 的版本位于 UI 的页脚的左侧。 如果您单击版本号，将可以查看其他组件的详细版本。
 
 ## 4、如果我没有在 Rancher UI 中删除主机而是直接删除会发生什么?
 
@@ -81,7 +81,7 @@ docker cp <container_id>:/var/lib/cattle/logs /local/path
 
 如果更改了 Rancher Server 的 IP 地址，您需要用新的 IP 重新注册主机。
 
-在 Rancher 中，点击**系统管理**->**系统设置**更新 Rancher Server 的**主机注册地址**。注意必须包括 Rancher Server 暴露的端口号。默认情况下我们建议按照安装手册中使用 8080 端口。
+在 Rancher 中，单击**系统管理**->**系统设置**更新 Rancher Server 的**主机注册地址**。注意必须包括 Rancher Server 暴露的端口号。默认情况下我们建议按照安装手册中使用 8080 端口。
 
 主机注册更新后，进入**基础架构**->**添加主机**->**自定义**。 添加主机的`docker run`命令将会更新。 使用更新的命令，在 Rancher Server 的所有环境中的所有主机上运行该命令。
 
@@ -109,7 +109,7 @@ Rancher Server 会自动清理几个数据库表，以防止数据库增长太�
 
 默认情况下，`process_instance`表在 1 天前产生的数据将会被删除，在 API 中的设置是以秒为单位的(`86400`)。API 中的设置为`process_instance.purge.after.seconds`.
 
-为了更新 API 中的设置，您可以跳转到`http://<rancher-server-ip>:8080/v1/settings`页面， 搜索要更新的设置，点击`links -> self`跳转到您点击的链接去设置，点击侧面的“编辑”更改'值'。 请记住，值是以秒为单位。
+为了更新 API 中的设置，您可以跳转到`http://<rancher-server-ip>:8080/v1/settings`页面， 搜索要更新的设置，单击`links -> self`跳转到您单击的链接去设置，单击侧面的“编辑”更改'值'。 请记住，值是以秒为单位。
 
 ## 12、为什么 Rancher Server 升级失败导致数据库被锁定？
 
@@ -273,7 +273,7 @@ curl -i -u '<value of CATTLE_ACCESS_KEY>:<value of CATTLE_SECRET_KEY>' <value of
 },
 ```
 
-点击 self 后的相应类型，比如"self": "…/v2-beta/settings/logback.max.history" 可以做相应参数调整。
+单击 self 后的相应类型，比如"self": "…/v2-beta/settings/logback.max.history" 可以做相应参数调整。
 
 相应 issue:https://github.com/rancher/rancher/issues/9887
 
@@ -293,13 +293,13 @@ https://{username}:{password}@github.com/{repo}
 
 ![mage-20180329174623](/img/rancher1/server.assets/image-201803291746238.png)
 
-点击编辑 修改
+单击编辑 修改
 
 ![mage-20180329174705](/img/rancher1/server.assets/image-201803291747058.png)
 
 ![mage-20180329174723](/img/rancher1/server.assets/image-201803291747230.png)
 
-点击 show Request，再点击 send Request.
+单击 show Request，再单击 send Request.
 
 ![mage-20180329174815](/img/rancher1/server.assets/image-201803291748154.png)
 

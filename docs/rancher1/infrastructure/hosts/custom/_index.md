@@ -2,7 +2,7 @@
 title: 添加Custom主机
 ---
 
-如果您已经部署了 Linux 主机，并且希望将它们添加到 Rancher 中。在点击**Custom**图标之后会，Rancher 会自动生成一个`docker`命令脚本，将其拷贝到每一台主机上并运行这条命令来启动`rancher/agent`容器。
+如果您已经部署了 Linux 主机，并且希望将它们添加到 Rancher 中。在单击**Custom**图标之后会，Rancher 会自动生成一个`docker`命令脚本，将其拷贝到每一台主机上并运行这条命令来启动`rancher/agent`容器。
 
 如果您在使用不同的[环境](/docs/rancher1/configurations/environments/_index)，不同环境生成的添加主机命令是不一样的。
 
