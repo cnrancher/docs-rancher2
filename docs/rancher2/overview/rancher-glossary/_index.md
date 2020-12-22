@@ -1,5 +1,5 @@
 ---
-title: Rancher名词解释
+title: Rancher 名词解释
 description: 本文提供了使用 Rancher 过程中针对Rancher常见的名词和对应的解析。
 keywords:
   - rancher 2.0中文文档
@@ -12,14 +12,14 @@ keywords:
   - rancher 2.0
   - rancher2.0 中文教程
   - 产品介绍
-  - Rancher名词解释
+  - Rancher 名词解释
 ---
 
 本文提供了使用 Rancher 过程中针对 Rancher 常见的名词和对应的解析。
 
 ## 仪表盘
 
-仪表盘会显示 Prometheus 收集到的监控数据。点击右边的 Grafana 图标，浏览器会打开一个新的页签，在 Grafana 里呈现这些监控数据。
+仪表盘会显示 Prometheus 收集到的监控数据。单击右边的 Grafana 图标，浏览器会打开一个新的页签，在 Grafana 里呈现这些监控数据。
 
 ![仪表盘](/img/rancher/dashboard.png)
 
@@ -47,7 +47,7 @@ keywords:
 
 通常，大多数应用都部署在单个 Kubernetes 集群上，但是有时您可能希望跨不同的集群和/或项目部署同一个应用的多个副本。在 Rancher 中多集群应用使用 Helm Chart ，并可以跨多个集群部署应用。因为能够跨多个集群部署相同的应用，因此可以避免在对每个集群上重复执行相同的操作期间引入的人为错误。使用多集群应用，您可以确保应用在所有项目/集群中具有相同的配置，并能够根据目标项目来覆盖不同的参数。由于多集群应用被视为单个应用，因此易于管理和维护。
 
-更多详情，请参阅[多集群应用](/docs/rancher2/catalog/multi-cluster-apps/_index)文档。
+更多详情，请参阅[多集群应用](/docs/rancher2/helm-charts/legacy-catalogs/multi-cluster-apps/_index)文档。
 
 ## 应用商店
 
@@ -58,7 +58,7 @@ Rancher 提供了基于 Helm 的应用商店的功能，该功能使部署和管
 
 Rancher 改进了 Helm 应用商店和 Chart。所有原生 Helm Chart 都可以在 Rancher 中使用，但是 Rancher 添加了一些增强功能以改善用户体验。
 
-更多详情，请参阅[应用商店](/docs/rancher2/catalog/_index)文档。
+更多详情，请参阅[应用商店](/docs/rancher2/helm-charts/legacy-catalogs/_index)文档。
 
 ## Rancher Server URL
 
@@ -123,7 +123,7 @@ OPA 提供了一种声明性语言，您可以使用代码来定义策略，并�
 - 执行单元测试
 - 执行回归测试
 
-更多详情，请参阅[流水线](/docs/rancher2/k8s-in-rancher/pipelines/_index)文档。
+更多详情，请参阅[流水线](/docs/rancher2/pipelines/_index)文档。
 
 ### 告警
 
@@ -133,9 +133,9 @@ OPA 提供了一种声明性语言，您可以使用代码来定义策略，并�
 
 在接收告警之前，必须在 Rancher 中配置一个或多个通知接收者。
 
-创建集群时，Rancher 已经配置了一些内置的告警规则。为它们配置[接收者](/docs/rancher2/cluster-admin/tools/notifiers/_index)后就能收到相应告警。
+创建集群时，Rancher 已经配置了一些内置的告警规则。为它们配置[接收者](/docs/rancher2/monitoring-alerting/2.0-2.4/notifiers/_index)后就能收到相应告警。
 
-更多详情，请参阅[告警](/docs/rancher2/cluster-admin/tools/alerts/_index)文档。
+更多详情，请参阅[告警](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/_index)文档。
 
 ### 日志
 
@@ -155,7 +155,7 @@ Rancher 支持与以下日志收集目标服务集成：
 - Syslog
 - Fluentd
 
-关于更多集群日志详情，请参阅[集群日志](/docs/rancher2/cluster-admin/tools/logging/_index)文档，项目日志请参阅[项目日志](/docs/rancher2/project-admin/tools/logging/_index)文档
+关于更多集群日志详情，请参阅[集群日志](/docs/rancher2/logging/2.0.x-2.4.x/project-logging/_index)文档，项目日志请参阅[项目日志](/docs/rancher2/project-admin/tools/logging/_index)文档
 
 ### 监控
 
@@ -175,4 +175,4 @@ Rancher 集成了多种通知服务，包括：
 - **WebHooks**： 将告警发送到 Webhook 服务器。
 - **WeChat**： 向您的企业微信联系人发送告警通知。
 
-更多详情，请参阅[通知](/docs/rancher2/cluster-admin/tools/notifiers/_index)文档。
+更多详情，请参阅[通知](/docs/rancher2/monitoring-alerting/2.0-2.4/notifiers/_index)文档。

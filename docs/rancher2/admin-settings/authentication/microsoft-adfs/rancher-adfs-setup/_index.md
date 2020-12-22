@@ -47,7 +47,7 @@ _自 v2.0.7 版本起可用_
     >
     >        openssl req -x509 -newkey rsa:2048 -keyout myservice.key -out myservice.cert -days 365 -nodes -subj "/CN=myservice.example.com"
 
-4.  完成 **配置 AD FS 帐户** 表单后, 点击 **使用 AD FS 进行身份验证**按钮。
+4.  完成 **配置 AD FS 帐户** 表单后, 单击 **使用 AD FS 进行身份验证**按钮。
 
     Rancher 将您重定向到 AD FS 登录页面。输入通过 Microsoft AD FS 进行身份验证的凭据，以验证 Rancher AD FS 配置。
 

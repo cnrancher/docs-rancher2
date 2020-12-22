@@ -14,7 +14,7 @@ Rancher 允许用户在[环境](/docs/rancher1/configurations/environments/_inde
 
 ### 通过 UI 管理网络策略规则
 
-网络策略规则可以在每个环境设置页面中配置。点击左上角下拉列表中的**环境管理**，然后在需要配置的环境右侧点击编辑按钮
+网络策略规则可以在每个环境设置页面中配置。单击左上角下拉列表中的**环境管理**，然后在需要配置的环境右侧单击编辑按钮
 
 在界面上有四个选择，`允许`允许网络通信，`禁止`限制网络通信
 
@@ -41,11 +41,11 @@ http://<RANCHER_SERVER_IP>/v2-beta/projects/<PROJECT_ID>/networks/<NETWORK_ID>`
 
 怎么查找需要配置的网络的 URL:
 
-1. 点击**API**打开**高级选项**。在 **环境 API Keys**，点击 **Endpoint (v2-beta)**.
+1. 单击**API**打开**高级选项**。在 **环境 API Keys**，单击 **Endpoint (v2-beta)**.
    > **注意:**: 在 UI 上是`环境`，在 API 是`project`。
-2. 在环境的 links 属性中查找**networks**，点击链接。
-3. 查询您环境中启动的网络驱动的名字。例如:可能为 `ipsec`。点击该网络驱动的**self**
-4. 在右边的**Operations**中，点击**Edit**，在`defaultPolicyAction`中，您可以修改默认的网络策略，同时在`policy`字段，您可以管理您的网络策略规则。
+2. 在环境的 links 属性中查找**networks**，单击链接。
+3. 查询您环境中启动的网络驱动的名字。例如:可能为 `ipsec`。单击该网络驱动的**self**
+4. 在右边的**Operations**中，单击**Edit**，在`defaultPolicyAction`中，您可以修改默认的网络策略，同时在`policy`字段，您可以管理您的网络策略规则。
 
 ### 默认策略
 

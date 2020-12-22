@@ -24,7 +24,7 @@ keywords:
 | :-------------- | :------------- | :----------------- | :--------------- |
 | 加固指南 v2.4.0 | Rancher v2.4.0 | Benchmark v1.5     | Kubernetes v1.15 |
 
-[点击这里下载 PDF 版本的加固指南](https://releases.rancher.com/documents/security/2.4/Rancher_Hardening_Guide.pdf)
+[单击这里下载 PDF 版本的加固指南](https://releases.rancher.com/documents/security/2.4/Rancher_Hardening_Guide.pdf)
 
 ## 概览
 

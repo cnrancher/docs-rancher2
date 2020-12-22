@@ -37,7 +37,7 @@ keywords:
 
    ![编辑](/img/rancher/airgap/edit-system-default-registry.png)
 
-4. 将该值更改为您的镜像仓库(例如`registry.yourdomain.com：port`)。不要在镜像仓库前面加上`http://`或`https://`。点击**保存**。
+4. 将该值更改为您的镜像仓库(例如`registry.yourdomain.com：port`)。不要在镜像仓库前面加上`http://`或`https://`。单击**保存**。
 
    ![保存](/img/rancher/airgap/enter-system-default-registry.png)
 
@@ -50,6 +50,6 @@ keywords:
 1. 通过 Rancher UI 创建集群时，转到`私有镜像仓库`部分。
 2. 在**启用私有镜像仓库**部分中，单击 **启用**。
 3. 输入镜像仓库 URL 和凭据。
-4. 点击 **保存**。
+4. 单击 **保存**。
 
 **结果：** 新集群将能够从私有镜像仓库中拉取镜像。

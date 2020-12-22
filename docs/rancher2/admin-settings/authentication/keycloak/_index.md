@@ -110,7 +110,7 @@ _v2.1.0 版本可用_
 
 ### 没有被重定向到 Keycloak
 
-当您点击**启用 Keycloak 认证**时，没有被重定向到 Keycloak IdP。
+当您单击**启用 Keycloak 认证**时，没有被重定向到 Keycloak IdP。
 
 - 验证您的 Keycloak 客户端配置。
 - 确保`Force Post Binding`设置为`OFF`。
