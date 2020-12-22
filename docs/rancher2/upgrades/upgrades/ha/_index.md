@@ -44,7 +44,7 @@ keywords:
 
 ### 备份集群
 
-为运行 Rancher Server 的 Kubernetes 集群[保存一次快照](/docs/rancher2/backups/backups/ha-backups/_index)。如果升级过程中出现问题，则可以使用快照用作为还原点，回滚至升级前的状态。
+为运行 Rancher Server 的 Kubernetes 集群[保存一次快照](/docs/rancher2/backups/2.0-2.4/ha-backups/_index)。如果升级过程中出现问题，则可以使用快照用作为还原点，回滚至升级前的状态。
 
 ### 更新 Helm chart 仓库
 

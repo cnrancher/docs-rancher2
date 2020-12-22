@@ -115,7 +115,7 @@ RKE 每个节点至少需要一个角色，但并不强制每个节点只能有�
 
 因为这个集群中只部署了 Rancher server，没有其他程序或应用，这个集群已经足以应对大多数情况。所以这个集群并不需要像我们建议的下游集群那样的可扩展性和可靠性。
 
-请查看 [生产环境清单](/docs/rancher2/cluster-provisioning/production/_index) 或 [最佳实践](/docs/rancher2/best-practices/management/_index#tips-for-scaling-and-reliability)，获取下游集群配置的更多最佳实践。
+请查看 [生产环境清单](/docs/rancher2/cluster-provisioning/production/_index) 或 [最佳实践](/docs/rancher2/best-practices/2.0-2.4/management/_index#tips-for-scaling-and-reliability)，获取下游集群配置的更多最佳实践。
 
 ## 授权集群端点的架构
 

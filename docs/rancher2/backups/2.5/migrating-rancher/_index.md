@@ -20,7 +20,7 @@ keywords:
 
 ### 先决条件
 
-这些说明假设你已经[创建了一个备份](./../back-up-rancher/_index)，并且已经安装了将在其中部署 Rancher 的新 Kubernetes 集群。
+这些说明假设你已经[创建了一个备份](/rancher2/backups/2.5/back-up-rancher/_index)，并且已经安装了将在其中部署 Rancher 的新 Kubernetes 集群。
 
 要求使用与第一个集群中设置的服务器 URL 相同的 hostname。
 
@@ -101,7 +101,7 @@ kubectl apply -f migrationResource.yaml
 
 ### 3. 安装 cert-manager
 
-按照文档中关于在 Kubernetes 上安装 cert-manager 的步骤[安装 cert-manager](/docs/rancher2/installation/install-rancher-on-k8s/_index#5-install-cert-manager)。
+按照文档中关于在 Kubernetes 上安装 cert-manager 的步骤[安装 cert-manager](/docs/rancher2/installation/k8s-install/helm-rancher/_index#5-install-cert-manager)。
 
 ### 4. 使用 helm 安装 rancher
 

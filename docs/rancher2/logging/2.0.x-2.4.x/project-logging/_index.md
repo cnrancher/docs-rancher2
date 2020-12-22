@@ -18,7 +18,7 @@ keywords:
 
 Rancher 可以与您的 Kubernetes 集群之外存在的各种流行的日志服务和工具集成。
 
-有关日志集成如何工作的背景信息，请参阅[集群管理部分](/docs/rancher2/logging/2.0.x-2.4.x/project-logging/_index)。
+有关日志集成如何工作的背景信息，请参阅[集群管理部分](/docs/rancher2/logging/2.0.x-2.4.x/cluster-logging/_index)。
 
 Rancher 支持以下服务：
 
@@ -72,11 +72,11 @@ Logging Driver: json-file
 
 1.  选择一个日志记录服务并进入配置。详细配置请参考具体服务。Rancher 支持以下服务。
 
-    - [Elasticsearch](/docs/rancher2/logging/2.0.x-2.4.x/project-logging/elasticsearch/_index)
-    - [Splunk](/docs/rancher2/logging/2.0.x-2.4.x/project-logging/splunk/_index)
-    - [Kafka](/docs/rancher2/logging/2.0.x-2.4.x/project-logging/kafka/_index)
-    - [Syslog](/docs/rancher2/logging/2.0.x-2.4.x/project-logging/syslog/_index)
-    - [Fluentd](/docs/rancher2/logging/2.0.x-2.4.x/project-logging/fluentd/_index)
+    - [Elasticsearch](/docs/rancher2/logging/2.0.x-2.4.x/cluster-logging/elasticsearch/_index)
+    - [Splunk](/docs/rancher2/logging/2.0.x-2.4.x/cluster-logging/splunk/_index)
+    - [Kafka](/docs/rancher2/logging/2.0.x-2.4.x/cluster-logging/kafka/_index)
+    - [Syslog](/docs/rancher2/logging/2.0.x-2.4.x/cluster-logging/syslog/_index)
+    - [Fluentd](/docs/rancher2/logging/2.0.x-2.4.x/cluster-logging/fluentd/_index)
 
 1.  (可选)不使用用户界面配置日志服务，而是单击位于日志目标上方的**编辑为文件**，进入自定义高级配置。该链接只有在您选择日志服务后才可见。
 

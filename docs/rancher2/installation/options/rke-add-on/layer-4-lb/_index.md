@@ -373,7 +373,7 @@ INFO[0101] Finished building Kubernetes cluster successfully
 
 您有两种选择：
 
-- 在发生灾难的情况下，为您的 Rancher Server 创建备份：[K3s Rancher 高可用备份](/docs/rancher2/backups/backups/k3s-backups/_index)。
+- 在发生灾难的情况下，为您的 Rancher Server 创建备份：[K3s Rancher 高可用备份](/docs/rancher2/backups/2.0-2.4/backups/k3s-backups/_index)。
 - 创建 Kubernetes 集群：[提供 Kubernetes 集群](/docs/rancher2/cluster-provisioning/_index)。
 
 ## 常见问题和故障排查
