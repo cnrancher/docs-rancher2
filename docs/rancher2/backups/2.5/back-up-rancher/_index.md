@@ -31,7 +31,7 @@ Rancher 版本必须是 v2.5.0 及以上。
 1. 在 Rancher UI 中，进入**Cluster Explorer**。
 1. 单击 **Apps**。
 1. 单击 `rancher-backup`。
-1. 配置默认的存储位置。有关帮助，请参阅[存储配置部分](/rancher2/backups/2.5/configuration/storage-config/_index)。
+1. 配置默认的存储位置。有关帮助，请参阅[存储配置部分](/docs/rancher2/backups/2.5/configuration/storage-config/_index)。
 
 ## 步骤 2：执行备份
 

@@ -95,7 +95,7 @@ Istio 安装了一个服务网状结构，使用[Envoy](https://www.envoyproxy.i
 
 默认情况下，每个 Rancher 提供的集群都有一个 NGINX 入口控制器，允许流量进入集群。Istio 也默认安装一个入口网关到`istio-system`命名空间。其结果是，您的集群中会有两个入口。
 
-![在启用Istio的集群中，你可以有两个入口：默认的Nginx入口和默认的Istio控制器。](/static/img/rancher/istio-ingress.svg)
+![在启用Istio的集群中，你可以有两个入口：默认的Nginx入口和默认的Istio控制器。](/img/rancher/istio-ingress.svg)
 
 通过[覆盖文件](/docs/rancher2/istio/2.5/setup/enable-istio-in-cluster/_index)可以启用额外的 Istio Ingress 网关。
 
