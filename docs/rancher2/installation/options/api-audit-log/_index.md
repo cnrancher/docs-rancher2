@@ -75,7 +75,7 @@ kubectl -n cattle-system logs -f rancher-84d886bdbb-s4s69 rancher-audit-log
 
    ![Local Cluster: System Project](/img/rancher/audit_logs_gui/context_local_system.png)
 
-1. 在主导航栏中，选择 **资源 > 工作负载** (在 v2.3.0 之前的版本, 在主导航栏中选择 **工作负载** )。找到 `cattle-system` 命名空间。找到 `rancher` 工作负载，点击它的链接。
+1. 在主导航栏中，选择 **资源 > 工作负载** (在 v2.3.0 之前的版本, 在主导航栏中选择 **工作负载** )。找到 `cattle-system` 命名空间。找到 `rancher` 工作负载，单击它的链接。
 
    ![Rancher Workload](/img/rancher/audit_logs_gui/rancher_workload.png)
 
@@ -90,7 +90,7 @@ kubectl -n cattle-system logs -f rancher-84d886bdbb-s4s69 rancher-audit-log
 #### 收集审计日志
 
 可以为集群启用 Rancher 的内置日志收集功能，将审计和其他服务日志发送到受支持的日志收集服务端。
-详情请参考[Rancher 工具 - 日志](/docs/rancher2/cluster-admin/tools/logging/_index)。
+详情请参考[Rancher 工具 - 日志](/docs/rancher2/logging/2.0.x-2.4.x/project-logging/_index)。
 
 ## 审计日志样本
 

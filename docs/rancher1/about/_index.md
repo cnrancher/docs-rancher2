@@ -30,4 +30,4 @@
 
 如果您发现缺陷，或遇到任何问题，请在 Github 上提[Issue](https://github.com/rancher/rancher/issues/new)。 虽然我们有很多 Rancher 相关的代码库，但我们希望您把所有的 issue 都提交到 [Rancher 代码库](https://github.com/rancher/rancher)里，以免我们遗漏。
 
-如果您想要更新 Rancher 的文档，请提交 PR 到我们的[文档代码库](https://github.com/loganhz/loganhz.github.io)或点击**编辑此页**直接跳转到编辑页面。
+如果您想要更新 Rancher 的文档，请提交 PR 到我们的[文档代码库](https://github.com/loganhz/loganhz.github.io)或单击**编辑此页**直接跳转到编辑页面。

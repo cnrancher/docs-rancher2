@@ -15,15 +15,15 @@ Rancher 支持多种负载均衡驱动，通过在它之上建立代理规则，
 
 我们将为我们在[添加服务部分](/docs/rancher1/infrastructure/cattle/adding-services/_index#在ui中添加服务)中创建的“letschat”应用新增一个负载均衡.
 
-首先，我们从添加一个负载均衡服务开始，点击”添加服务“旁边的下拉图标，找到**添加负载均衡**并点击它。
+首先，我们从添加一个负载均衡服务开始，单击”添加服务“旁边的下拉图标，找到**添加负载均衡**并单击它。
 
 进入添加页面后，容器`数量`默认是 1，填入“名称”，如“LetsChatLB”。
 
 `端口规则`下，`访问`选择默认的`公开`，`协议`选择默认的`HTTP`。请求`端口`填入`80`，`目标`选择`letschat`服务， 并且端口填入`8080`。
 
-点击**创建**。
+单击**创建**。
 
-现在，让我们来实际感受一下负载均衡。在应用视图下， 有一个连接到`80`端口的超链接，这是负载均衡中的源端口。如果您点击它，将会在您的浏览器中自动新开一个页签，并指向负载均衡服务所在的主机。请求将会被重定向到其中一个”LetsChat“容器。如果您刷新浏览器，负载均衡服务会把新的请求重定向到“LetsChat”服务下的其他容器中。
+现在，让我们来实际感受一下负载均衡。在应用视图下， 有一个连接到`80`端口的超链接，这是负载均衡中的源端口。如果您单击它，将会在您的浏览器中自动新开一个页签，并指向负载均衡服务所在的主机。请求将会被重定向到其中一个”LetsChat“容器。如果您刷新浏览器，负载均衡服务会把新的请求重定向到“LetsChat”服务下的其他容器中。
 
 ### 页面上的负载均衡选项
 
@@ -31,7 +31,7 @@ Rancher 提供一个基于 HAProxy 的容器来重定向流量至目标服务。
 
 > **注意:** 负载均衡只会在那些使用`托管`网络的服务中生效，其他网络模式都不会生效。
 
-点击**添加服务**旁边的下拉图标，找到**添加负载均衡**并点击它。
+单击**添加服务**旁边的下拉图标，找到**添加负载均衡**并单击它。
 
 您能使用滑块选择`数量`，就是负载均衡使用多少个容器。或者，您可以选择`总是在每台主机上运行一个此容器的实例`。使用这一个选项, 您的负载均衡容器数量将会随着您[环境](/docs/rancher1/configurations/environments/_index)下的主机数量增减而增减。如果您在**调度**部分设定了调度规则，Rancher 将会在满足规则的主机上启动负载均衡。如果您的环境下新增了一台不满足调度规则的主机，负载均衡容器不会在这一台主机中启动。
 
@@ -109,7 +109,7 @@ domain.com.* -> hdr_beg(host) -i domain.com.
 
 #### 负载均衡的会话粘性
 
-您可以点击选择负载均衡的**会话粘性**。会话粘性就是您的 cookie 策略。
+您可以单击选择负载均衡的**会话粘性**。会话粘性就是您的 cookie 策略。
 
 Rancher 支持以下两种选项:
 
@@ -148,13 +148,13 @@ backend customUUID
 
 #### 标签／调度负载均衡
 
-我们支持向负载均衡添加标签并且调度负载均衡在哪启动。点击[这里](/docs/rancher1/infrastructure/cattle/scheduling/_index#在ui中调度选项)查看更多关于标签和调度的信息。
+我们支持向负载均衡添加标签并且调度负载均衡在哪启动。单击[这里](/docs/rancher1/infrastructure/cattle/scheduling/_index#在ui中调度选项)查看更多关于标签和调度的信息。
 
 ### 用 Rancher Compose 添加负载均衡
 
 在这，我们将一步步为我们之前在[创建服务章节](/docs/rancher1/infrastructure/cattle/adding-services/_index#使用-rancher-compose-添加服务)创建的"letschat"应用设置一个负载均衡。
 
-点击[这里](/docs/rancher1/infrastructure/cattle/rancher-compose/_index)查看更多关于如何配置一个 Rancher Compose。
+单击[这里](/docs/rancher1/infrastructure/cattle/rancher-compose/_index)查看更多关于如何配置一个 Rancher Compose。
 
 > **注意:**: 在我们的例子中，我们会使用`<version>`作为负载均衡镜像的标签。每一个 Rancher 版本都有特定的，被负载均衡所支持的`lb-service-haproxy`版本。
 
@@ -197,7 +197,7 @@ Rancher 提供一个基于 HAProxy 的容器来做负载均衡。
 
 > **注意:** 负载均衡仅仅在使用托管网络的服务中生效。其他的网络选择都不会生效。
 
-负载均衡可以像其他任何一个服务一样被调度。点击[这里](/docs/rancher1/infrastructure/cattle/scheduling/_index#在rancher-compose中添加标签)获取更多关于在 Rancher Compose 中使用负载均衡的例子。
+负载均衡可以像其他任何一个服务一样被调度。单击[这里](/docs/rancher1/infrastructure/cattle/scheduling/_index#在rancher-compose中添加标签)获取更多关于在 Rancher Compose 中使用负载均衡的例子。
 
 负载均衡由暴露在主机上的端口和负载均衡配置组成，这些配置包括针对不同目标服务的特定端口规则，自定义配置和会话粘性策略。
 
@@ -280,7 +280,7 @@ Rancher 的负载均衡支持多种协议类型。
 - `tcp` - HAProxy 不会对流量做任何解析，仅仅是转发。
 - `https` - 需要设置 SSL 会话终结。流量将会被 HAProxy 使用[证书](/docs/rancher1/configurations/environments/certificates/_index)解密，这个证书必须在设定负载均衡之前被添加入 Rancher。被流量负载均衡所转发的流量是没有加密的。
 - `tls` - 需要设置 SSL 会话终结。流量将会被 HAProxy 使用[证书](/docs/rancher1/configurations/environments/certificates/_index)解密，这个证书必须在设定负载均衡之前被添加入 Rancher。被流量负载均衡所转发的流量是没有加密的。
-- `sni` - 流量从负载均衡到服务都是被加密的。多个证书将会被提供给负载均衡,这样负载均衡就能将合适的证书基于主机名展示给客户端。 点击[服务器名称指示](https://en.wikipedia.org/wiki/Server_Name_Indication))查看更多详情。
+- `sni` - 流量从负载均衡到服务都是被加密的。多个证书将会被提供给负载均衡,这样负载均衡就能将合适的证书基于主机名展示给客户端。 单击[服务器名称指示](https://en.wikipedia.org/wiki/Server_Name_Indication))查看更多详情。
 - `udp` - Rancher 的 HAProxy 不支持.
 
 其他的负载均衡驱动可能只支持以上的几种。
@@ -566,7 +566,7 @@ services:
 
 #### 自定义配置
 
-高阶用户可以在`rancher-compose.yml`中声明自定义的配置。点击[HAProxy 配置文档](http://cbonte.github.io/haproxy-dconv/configuration-1.5.html)查看更多详情。
+高阶用户可以在`rancher-compose.yml`中声明自定义的配置。单击[HAProxy 配置文档](http://cbonte.github.io/haproxy-dconv/configuration-1.5.html)查看更多详情。
 
 ##### Example `rancher-compose.yml`
 

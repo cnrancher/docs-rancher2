@@ -64,7 +64,7 @@ keywords:
 --set auditLog.level=1
 ```
 
-默认情况下，启用`审计日志`将在 Rancher pod 中创建一个 sidecar 容器。这个容器（`rancher-audit-log`）会将日志流传输到`stdout`。您可以像收集任何容器日志一样收集此日志。将 sidecar 用作审计日志时，`hostPath`，`maxAge`，`maxBackups`和`maxSize`选项不适用。建议使用您的操作系统或 Docker 守护进程的日志轮换功能来控制磁盘空间的使用。为 Rancher Server 启用[Rancher 工具中的集群日志服务](/docs/rancher2/cluster-admin/tools/logging/_index)或[Rancher 工具中的项目日志服务](/docs/rancher2/project-admin/tools/logging/_index)。
+默认情况下，启用`审计日志`将在 Rancher pod 中创建一个 sidecar 容器。这个容器（`rancher-audit-log`）会将日志流传输到`stdout`。您可以像收集任何容器日志一样收集此日志。将 sidecar 用作审计日志时，`hostPath`，`maxAge`，`maxBackups`和`maxSize`选项不适用。建议使用您的操作系统或 Docker 守护进程的日志轮换功能来控制磁盘空间的使用。为 Rancher Server 启用[Rancher 工具中的集群日志服务](/docs/rancher2/logging/2.0.x-2.4.x/project-logging/_index)或[Rancher 工具中的项目日志服务](/docs/rancher2/project-admin/tools/logging/_index)。
 
 将`auditLog.destination`设置为`hostPath`的值，以将日志转发至与主机系统共享的卷，而不是流至 Sidecar 容器。将目标设置为`hostPath`时，您可能需要调整其他 auditLog 参数以进行日志轮换。
 

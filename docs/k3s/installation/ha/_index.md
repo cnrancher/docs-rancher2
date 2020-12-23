@@ -1,6 +1,6 @@
 ---
 title: 使用外部数据库实现高可用安装
-description: 本节介绍了如何使用外部数据库安装一个高可用的 K3s 集群。单节点 k3s server 集群可以满足各种用例，但是对于需要 Kubernetes 控制平面稳定运行的重要环境，您可以在 HA 配置中运行 K3s。一个 K3s HA 集群由以下几个部分组成
+description: 本节介绍了如何使用外部数据库安装一个高可用的 K3s 集群。单节点 k3s server 集群可以满足各种用例，但是对于需要 Kubernetes control-plane稳定运行的重要环境，您可以在 HA 配置中运行 K3s。一个 K3s HA 集群由以下几个部分组成
 keywords:
   - k3s中文文档
   - k3s 中文文档
@@ -19,9 +19,9 @@ keywords:
 
 本节介绍了如何使用外部数据库安装一个高可用的 K3s 集群。
 
-单节点 k3s server 集群可以满足各种用例，但是对于需要 Kubernetes 控制平面稳定运行的重要环境，您可以在 HA 配置中运行 K3s。一个 K3s HA 集群由以下几个部分组成：
+单节点 k3s server 集群可以满足各种用例，但是对于需要 Kubernetes control-plane 稳定运行的重要环境，您可以在 HA 配置中运行 K3s。一个 K3s HA 集群由以下几个部分组成：
 
-- 两个或多个**server 节点**，将为 Kubernetes API 提供服务并运行其他控制平面服务。
+- 两个或多个**server 节点**，将为 Kubernetes API 提供服务并运行其他 control-plane 服务。
 - 零个或多个**agent 节点**，用于运行您的应用和服务。
 - **外部数据存储** (与单个 k3s server 设置中使用的嵌入式 SQLite 数据存储相反)
 - **固定的注册地址**，位于 server 节点的前面，以允许 agent 节点向集群注册
@@ -72,7 +72,7 @@ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_M
 
 > **注意：** 单台 server 安装时可用的安装选项也适用于高可用安装。更多详情，请参见[安装和配置选项](/docs/k3s/installation/install-options/_index)文档。
 
-默认情况下，server 节点将是可调度的，因此你的工作负载可以在它们上启动。如果你希望有一个专用的控制平面，在这个平面上不会运行用户工作负载，你可以使用 taints。`node-taint` 参数将允许你用污点配置节点，例如`--node-taint CriticalAddonsOnly=true:NoExecute`。
+默认情况下，server 节点将是可调度的，因此你的工作负载可以在它们上启动。如果你希望有一个专用的 control-plane，在这个平面上不会运行用户工作负载，你可以使用 taints。`node-taint` 参数将允许你用污点配置节点，例如`--node-taint CriticalAddonsOnly=true:NoExecute`。
 
 在所有 server 节点上启动`k3s server`进程后，用`k3s kubectl get nodes`确保集群正常运行。你应该会看到你的 server 节点处`Ready`状态。
 

@@ -34,7 +34,7 @@ keywords:
 
 > 建议把 webhooks 作为系统服务运行在`system`项目下
 
-1. 登录 Rancher UI 切换到`system`项目下，然后依次进入 `资源\配置映射`，点击页面右上角的`添加配置映射`。
+1. 登录 Rancher UI 切换到`system`项目下，然后依次进入 `资源\配置映射`，单击页面右上角的`添加配置映射`。
 1. 修改模板中对应的参数:
 
    - `<webhooks_id>`: 此`webhooks-id`具有唯一性，不能重复。建议设置为服务名，比如`cnrancher_website`；
@@ -157,7 +157,7 @@ keywords:
 
 ## 3. webhooks 安装
 
-依次点击 `system项目\工作负载\工作负载`，点击右侧部署服务。
+依次单击 `system项目\工作负载\工作负载`，单击右侧部署服务。
 
 1. 配置服务名称和镜像
 
@@ -219,7 +219,7 @@ keywords:
 
    ![image-20190314174834334](/img/rancher/old-doc/image-20190314174834334.png)
 
-1. 最后点击启动，启动后查看日志，可以看到当前监听的服务
+1. 最后单击启动，启动后查看日志，可以看到当前监听的服务
 
    ![image-20190314175308608](/img/rancher/old-doc/image-20190314175308608.png)
 
@@ -235,7 +235,7 @@ keywords:
 
    ![image-20190314212124745](/img/rancher/old-doc/image-20190314212124745.png)
 
-   - 最后点击`保存`
+   - 最后单击`保存`
 
 ## 4. webhooks 触发地址
 
@@ -271,7 +271,7 @@ repo_type=<repo_type>
 
 1. 浏览器访问`https://cr.console.aliyun.com`进入容器镜像服务管理界面；
 
-1. 选择一个需要添加自动触发功能的仓库，点击右侧的管理；
+1. 选择一个需要添加自动触发功能的仓库，单击右侧的管理；
 
 1. 在切换的新窗口左上角选择触发器；
 
@@ -303,11 +303,11 @@ repo_type=<repo_type>
 
 1. 浏览器访问https://cloud.docker.com/repository/list，输入账号和密码后将进入仓库列表;
 
-1. 点击需要添加 webhooks 仓库，然后点击 webhooks;
+1. 单击需要添加 webhooks 仓库，然后单击 webhooks;
 
    ![image-20190314182034766](/img/rancher/old-doc/image-20190314182034766.png)
 
-1. 填写相关参数，点击右侧的加号；
+1. 填写相关参数，单击右侧的加号；
 
    ![image-20190314182530479](/img/rancher/old-doc/image-20190314182530479.png)
 
