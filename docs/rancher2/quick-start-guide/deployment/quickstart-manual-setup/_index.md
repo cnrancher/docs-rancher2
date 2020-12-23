@@ -48,8 +48,20 @@ keywords:
 1.  使用 shell 工具（如 PuTTy 或其他连接工具）登录 Linux 主机。
 
 2.  执行以下命令：
+    如果您使用的 Rancher 2.5.x 及更新版本，需要开启特权模式安装 Rancher，请执行以下命令：
 
+    ```bash
+    #如果您使用的 Rancher 2.5.x 及更新版本，需要开启特权模式安装 Rancher，请执行以下命令：
+    docker run -d --restart=unless-stopped \
+      -p 80:80 -p 443:443 \
+      --privileged \
+      rancher/rancher:latest
     ```
+
+    如果您使用的 Rancher 2.4.x 及之前的版本，请执行以下命令：
+
+    ```bash
+    #如果您使用的 Rancher 2.4.x 及之前的版本，请执行以下命令：
     sudo docker run -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher
     ```
 
