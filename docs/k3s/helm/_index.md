@@ -17,7 +17,7 @@ keywords:
 Helm 是 Kubernetes 的首选包管理工具。Helm 图表为 Kubernetes YAML 清单文件提供了模板化语法。通过 Helm，我们可以创建可配置的部署，而不仅仅是使用静态文件。有关创建自己的部署目录的更多信息，请查看[Helm 快速入门](https://helm.sh/docs/intro/quickstart/)。
 
 K3s 不需要任何特殊的配置就可以使用 Helm 命令行工具。只要确保你已经按照[集群访问](../cluster-access/_index)一节正确设置了你的 kubeconfig。
-K3s 包含了一些额外的功能，使传统的 Kubernetes 资源清单和 Helm Charts 的部署更加容易。 K3s 包含了一些额外的功能，通过[rancher/helm-release CRD](#使用-helm-crd)，使传统的Kubernetes资源清单和Helm Charts部署更加容易。
+K3s 包含了一些额外的功能，使传统的 Kubernetes 资源清单和 Helm Charts 的部署更加容易。 K3s 包含了一些额外的功能，通过[rancher/helm-release CRD](#使用-helm-crd)，使传统的 Kubernetes 资源清单和 Helm Charts 部署更加容易。
 
 本节涵盖以下主题：
 
@@ -100,6 +100,7 @@ spec:
 | spec.helmVersion     | v3      | Helm 的版本号，可选值为 `v2` 和`v3`，默认值为 `v3`                       | N/A                             |
 | spec.bootstrap       | False   | 如果需要该图表来引导集群（Cloud Controller Manager 等），则设置为 True。 | N/A                             |
 | spec.set             | N/A     | 覆盖简单的默认图表值。这些值优先于通过 valuesContent 设置的选项。        | `--set` / `--set-string`        |
+| spec.jobImage        |         | 指定安装 helm chart 时要使用的镜像。如：rancher/klipper-helm:v0.3.0。    |                                 |
 | spec.valuesContent   | N/A     | 通过 YAML 文件内容覆盖复杂的默认图表值。                                 | `--values`                      |
 | spec.chartContent    | N/A     | Base64 编码的图表存档.tgz - 覆盖 spec.chart。                            | CHART                           |
 
