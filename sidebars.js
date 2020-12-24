@@ -1257,7 +1257,14 @@ module.exports = {
         快速入门: ["k3s/quick-start/_index"],
         安装: [
             "k3s/installation/_index",
-            "k3s/installation/installation-requirements/_index",
+            {
+                type: "category",
+                label: "安装要求",
+                items: [
+                    "k3s/installation/installation-requirements/_index",
+                    "k3s/installation/installation-requirements/resource-profiling/_index",
+                ],
+            },
             {
                 type: "category",
                 label: "安装选项",
