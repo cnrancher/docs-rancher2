@@ -1756,4 +1756,20 @@ module.exports = {
             "rancher1/faq/server/_index",
         ],
     },
+    harvester: {
+        产品介绍: ["harverster/_index"],
+        认证: ["harverster/authentication/_index"],
+        镜像上传: ["harverster/upload-images/_index"],
+        安装指南: [
+            "harverster/installation/_index",
+            "harverster/installation/app-mode/_index",
+            "harverster/installation/iso-mode/_index",
+        ],
+        虚拟机管理: [
+            "harverster/vm-management/_index",
+            "harverster/vm-management/create-vm/_index",
+            "harverster/vm-management/access-vm/_index",
+        ],
+        视频教程: ["harverster/demo/_index"],
+    },
 };

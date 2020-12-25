@@ -87,6 +87,14 @@ const metadata = {
             基础服务: "提供基础服务的使用说明",
             常见问题: "提供使用Rancher时的常见问题和解决方式",
         },
+        harvester: {
+            产品介绍: "为您提供Harvester的产品介绍",
+            认证: "为您提供Harvester认证身份的操作指导",
+            镜像上传: "为您提供在Harvester中上传镜像的操作指导",
+            安装指南: "为您提供安装Harvester的操作指导",
+            虚拟机管理: "为您提供在Harvester中管理虚拟机的操作指导",
+            视频教程: "为您提供视频操作指导",
+        },
     },
     docs: {
         rancher2: {
@@ -509,6 +517,18 @@ const metadata = {
             升级指南
              */
             "rancher1/upgrade/_index": "升级指南",
+        },
+        harvester: {
+            "harverster/_index": "产品介绍",
+            "harverster/authentication/_index": "认证",
+            "harverster/demo/_index": "视频教程",
+            "harverster/installation/_index": "概述",
+            "harverster/installation/app-mode/_index": "APP 模式",
+            "harverster/installation/iso-mode/_index": "ISO 模式",
+            "harverster/upload-images/_index": "上传镜像",
+            "harverster/vm-management/_index": "管理虚拟机",
+            "harverster/vm-management/create-vm/_index": "创建虚拟机",
+            "harverster/vm-management/access-vm/_index": "访问虚拟机",
         },
     },
 };
