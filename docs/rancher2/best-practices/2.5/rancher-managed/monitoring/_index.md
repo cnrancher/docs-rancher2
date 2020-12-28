@@ -21,7 +21,7 @@ keywords:
 
 ## 需要监测的内容
 
-Kubernetes 本身以及运行在其内部的应用，构成了一个分布式系统，不同的组件之间相互影响。对于整个系统和每个单独的组件，你必须确保性能、可用性、可靠性和可扩展性。更多细节和信息的参考 Google 免费的[Site Reliability Engineering Book](https://landing.google.com/sre/sre-book/)，尤其是关于[监控分布式系统](https://landing.google.com/sre/sre-book/chapters/monitoring-distributed-systems/)这一章。
+Kubernetes 本身以及运行在其内部的应用，构成了一个分布式系统，不同的组件之间相互影响。对于整个系统和每个单独的组件，你必须确保性能、可用性、可靠性和可扩展性。更多细节和信息的参考 Google 免费的[Site Reliability Engineering Book](https://sre.google/)，尤其是关于[监控分布式系统](https://sre.google/chapters/monitoring-distributed-systems/)这一章。
 
 ## 配置 Prometheus 资源使用
 
