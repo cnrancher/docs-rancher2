@@ -41,7 +41,7 @@ Rancher 版本必须是 v2.5.0 及以上，才能使用这种备份和恢复 Ran
 
 对于 V2.5 之前的 Rancher，根据 Rancher 的安装方式，Rancher 的备份和还原方式有所不同。我们的传统备份和恢复文档在这里：
 
-- 对于安装在 RKE Kubernetes 集群上的 Rancher，请参考传统的[备份](/docs/rancher2/backups/2.0-2.4/ha-backups/_index)和[恢复](/docs/rancher2/backups/2.0-2.4/restorations/rke-restoration/_index)文档。
+- 对于安装在 RKE Kubernetes 集群上的 Rancher，请参考传统的[备份](/docs/rancher2/backups/2.0-2.4/ha-backups/_index)和[恢复](/docs/rancher2/backups/2.0-2.4/restorations/ha-restoration/_index)文档。
 - 对于安装在 K3s Kubernetes 集群上的 Rancher，请参考传统的[备份](/docs/rancher2/backups/2.0-2.4/k3s-backups/_index)和[恢复](/docs/rancher2/backups/2.0-2.4/restorations/k3s-restoration/_index)文档。
 
 ## 备份和恢复的工作原理
