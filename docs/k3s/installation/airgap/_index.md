@@ -44,7 +44,7 @@ sudo mkdir -p /var/lib/rancher/k3s/agent/images/
 sudo cp ./k3s-airgap-images-$ARCH.tar /var/lib/rancher/k3s/agent/images/
 ```
 
-将 k3s 二进制文件放在/usr/local/bin/k3s，并确保拥有可执行权限。
+将 k3s 二进制文件放在 `/usr/local/bin/k3s`，并确保拥有可执行权限。
 
 按照下一节的步骤来安装 K3s。
 

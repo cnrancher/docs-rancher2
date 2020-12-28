@@ -45,7 +45,7 @@ keywords:
 System-upgrade-controller 可以作为 deployment 安装到您的集群中。Deployment 需要一个 service-account、clusterRoleBinding 和一个 configmap。要安装这些组件，请运行以下命令:
 
 ```
-kubectl apply -f https://github.com/rancher/system-upgrade-controller/releases/download/v0.4.0/system-upgrade-controller.yaml
+kubectl apply -f https://github.com/rancher/system-upgrade-controller/releases/download/v0.6.2/system-upgrade-controller.yaml
 ```
 
 控制器可以通过前面提到的 configmap 进行配置和定制，但控制器必须重新部署才能应用更改。
