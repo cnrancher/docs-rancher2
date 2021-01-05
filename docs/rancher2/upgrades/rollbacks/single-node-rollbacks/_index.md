@@ -15,6 +15,11 @@ keywords:
   - 单节点回滚
 ---
 
+如果 Rancher 升级没有成功完成，你必须回滚到你在[Docker 升级]({{<baseurl>}}/rancher/v2.x/en/upgrades/upgrades/single-nod-upgrade)之前使用的 Rancher 设置。回滚还原。
+
+- 您之前的 Rancher 版本。
+- 您在升级前创建的数据备份。
+
 ## 概述
 
 如果升级 Rancher 的过程中出现问题，导致升级失败，则必须回滚到[升级 Rancher 单节点](/docs/rancher2/upgrades/upgrades/single-node/_index)前使用的 Rancher 版本及设置。执行回滚操作之前，您需要获取升级前 Rancher 的版本号（如 v2.0.5)，和升级前创建的数据备份。
