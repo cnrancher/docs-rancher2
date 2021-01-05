@@ -11,8 +11,10 @@ keywords:
   - rancher中国
   - rancher 2.0
   - rancher2.0 中文教程
-  - 升级和回滚
-  - 单节点回滚
+  - 安装指南
+  - 其他安装方法
+  - 单节点docker安装
+  - 单节点docker回滚
 ---
 
 如果 Rancher 升级没有成功完成，你必须回滚到你在[Docker 升级]({{<baseurl>}}/rancher/v2.x/en/upgrades/upgrades/single-nod-upgrade)之前使用的 Rancher 设置。回滚还原。
@@ -26,7 +28,7 @@ keywords:
 
 回滚到较早版本的 Rancher 期间，您需要输入一系列命令，按照实际情况替换命令中的占位符，获取升级前的 Rancher 版本号和数据备份。这些占位符用尖括号和大写字母（`<EXAMPLE>`）表示，以下是带有占位符的命令示例：
 
-```
+```shell
 docker pull rancher/rancher:<PRIOR_RANCHER_VERSION>
 ```
 
