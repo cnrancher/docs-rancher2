@@ -5,26 +5,26 @@ aliases:
   - /rancher/v2.x/en/installation/options
 ---
 
-### Docker Installations
+## Docker 安装
 
-The [single-node Docker installation]({{<baseurl>}}/rancher/v2.x/en/installation/other-installation-methods/single-node-docker) is for Rancher users that are wanting to test out Rancher. Instead of running on a Kubernetes cluster using Helm, you install the Rancher server component on a single node using a `docker run` command.
+[单节点 Docker 安装]({{<baseurl>}}/rancher/v2.x/en/installation/other-installation-methods/single-node-docker)是为想要测试 Rancher 的用户准备的。你不需要使用 Helm 在 Kubernetes 集群上运行，而是使用`docker run`命令在单个节点上安装 Rancher 服务器组件。
 
-Since there is only one node and a single Docker container, if the node goes down, there is no copy of the etcd data available on other nodes and you will lose all the data of your Rancher server.
+由于只有一个节点和一个 Docker 容器，如果节点宕机，其他节点上就没有可用的 etcd 数据副本，你将失去 Rancher 服务器的所有数据。
 
-### Air Gapped Installations
+## 离线安装
 
-Follow [these steps]({{<baseurl>}}/rancher/v2.x/en/installation/other-installation-methods/air-gap) to install the Rancher server in an air gapped environment.
+按照[这些步骤]({{<baseurl>}}/rancher/v2.x/en/安装/其他安装方法/air-gap)将 Rancher 服务器安装在一个离线环境中。
 
-An air gapped environment could be where Rancher server will be installed offline, behind a firewall, or behind a proxy.
+离线环境可能是指 Rancher 服务器将被安装在离线、防火墙后或代理服务器后。
 
-### Advanced Options
+## 高级选项
 
-When installing Rancher, there are several advanced options that can be enabled during installation. Within each install guide, these options are presented. Learn more about these options:
+在安装 Rancher 时，可以在安装过程中启用一些高级选项。在每个安装指南中，已经介绍过这些选项了。下面可以了解这些选项的更多信息：
 
-| Advanced Option                                                                                                         | Available as of |
-| ----------------------------------------------------------------------------------------------------------------------- | --------------- |
-| [Custom CA Certificate]({{<baseurl>}}/rancher/v2.x/en/installation/options/custom-ca-root-certificate/)                 | v2.0.0          |
-| [API Audit Log]({{<baseurl>}}/rancher/v2.x/en/installation/options/api-audit-log/)                                      | v2.0.0          |
-| [TLS Settings]({{<baseurl>}}/rancher/v2.x/en/installation/options/tls-settings/)                                        | v2.1.7          |
-| [etcd configuration]({{<baseurl>}}/rancher/v2.x/en/installation/options/etcd/)                                          | v2.2.0          |
-| [Local System Charts for Air Gap Installations]({{<baseurl>}}/rancher/v2.x/en/installation/options/local-system-charts) | v2.3.0          |
+| 高级选项                                                                                 | 截至版本 |
+| :--------------------------------------------------------------------------------------- | :------- |
+| [自定义 CA 证书](/docs/rancher2/installation/options/custom-ca-root-certificate/_index)  | v2.0.0   |
+| [API 审计日志](/docs/rancher2/installation/options/api-audit-log/_index)                 | v2.0.0   |
+| [TLS 设置](/docs/rancher2/installation/options/tls-settings/_index)                      | v2.1.7   |
+| [etcd 配置](/docs/rancher2/installation/options/etcd/_index)                             | v2.2.0   |
+| [离线部署 System Charts](/docs/rancher2/installation/options/local-system-charts/_index) | v2.3.0   |
