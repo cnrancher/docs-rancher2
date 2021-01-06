@@ -1,6 +1,5 @@
 ---
-title: Advanced
-weight: 5
+title: 高级配置选项
 ---
 
-The documents in this section contain resources for less common use cases.
+本节中的文件包含了不太常见的用例资源。
