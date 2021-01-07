@@ -1,51 +1,49 @@
 ---
-title: Setting up a High-availability K3s Kubernetes Cluster for Rancher
-shortTitle: Set up K3s for Rancher
-weight: 2
+title: 为 Rancher 设置高可用 K3s Kubernetes 集群
 ---
 
-This section describes how to install a Kubernetes cluster according to the [best practices for the Rancher server environment.]({{<baseurl>}}/rancher/v2.x/en/overview/architecture-recommendations/#environment-for-kubernetes-installations)
+本节介绍了如何根据[Rancher 服务器环境的最佳实践]({{<baseurl>}}/rancher/v2.x/en/overview/architecture-recommendations/#environment-for-kubernetes-installations)安装 Kubernetes 集群。
 
-For systems without direct internet access, refer to the air gap installation instructions.
+如果你的系统处于离线环境，不能直接上网，请参考离线安装说明。
 
-> **Single-node Installation Tip:**
-> In a single-node Kubernetes cluster, the Rancher server does not have high availability, which is important for running Rancher in production. However, installing Rancher on a single-node cluster can be useful if you want to save resources by using a single node in the short term, while preserving a high-availability migration path.
->
-> To set up a single-node K3s cluster, run the Rancher server installation command on just one node instead of two nodes.
->
-> In both single-node setups, Rancher can be installed with Helm on the Kubernetes cluster in the same way that it would be installed on any other cluster.
+**单节点安装提示**
+在单节点 Kubernetes 集群中，Rancher 服务器不具备高可用性，这对于在生产中运行 Rancher 非常重要。然而，如果你想在短期内通过使用单节点来节省资源，同时保留高可用性的迁移路径，在单节点集群上安装 Rancher 是很有用的。
 
-# Prerequisites
+要建立单节点 K3s 集群，只需在一个节点上运行 Rancher 服务器安装命令，而不是两个节点。
 
-These instructions assume you have set up two nodes, a load balancer, a DNS record, and an external MySQL database as described in [this section.]({{<baseurl>}}/rancher/v2.x/en/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha-with-external-db/)
+在这两种单节点设置中，Rancher 可以与 Helm 一起安装在 Kubernetes 集群上，就像安装在任何其他集群上一样。
 
-# Installing Kubernetes
+## 先决条件
 
-### 1. Install Kubernetes and Set up the K3s Server
+这些说明假设你已经设置了两个节点、一个负载均衡器、一个 DNS 记录和一个外部 MySQL 数据库，如[本节所述]({{<baseurl>}}/rancher/v2.x/en/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha-with-external-db/)。
 
-When running the command to start the K3s Kubernetes API server, you will pass in an option to use the external datastore that you set up earlier.
+## 安装 Kubernetes
 
-1. Connect to one of the Linux nodes that you have prepared to run the Rancher server.
-1. On the Linux node, run this command to start the K3s server and connect it to the external datastore:
+### 步骤 1：安装 Kubernetes 并设置 K3s 服务器
 
-```
-curl -sfL https://get.k3s.io | sh -s - server \
-  --datastore-endpoint="mysql://username:password@tcp(hostname:3306)/database-name"
-```
+在运行命令启动 K3s Kubernetes API 服务器时，会传入使用之前设置的外部数据存储的选项。
 
-Note: The datastore endpoint can also be passed in using the environment variable `$K3S_DATASTORE_ENDPOINT`.
+1. 连接到你准备运行 Rancher 服务器的一个 Linux 节点。
+1. 在 Linux 节点上，运行此命令来启动 K3s 服务器，并将其连接到外部数据存储。
 
-1. Repeat the same command on your second K3s server node.
+   ```
+   curl -sfL https://get.k3s.io | sh -s - server \
+   --datastore-endpoint="mysql://username:password@tcp(hostname:3306)/database-name"
+   ```
 
-### 2. Confirm that K3s is Running
+   注意：也可以使用环境变量`$K3S_DATASTORE_ENDPOINT`来传递数据存储端点。
 
-To confirm that K3s has been set up successfully, run the following command on either of the K3s server nodes:
+1. 在你的第二个 K3s 服务器节点上重复同样的命令。
+
+### 步骤 2：确认 K3s 正在运行
+
+请在 K3s 服务器节点上运行以下命令，确认 K3s 已经设置成功。
 
 ```
 sudo k3s kubectl get nodes
 ```
 
-Then you should see two nodes with the master role:
+然后你应该看到两个具有 master role 的节点。
 
 ```
 ubuntu@ip-172-31-60-194:~$ sudo k3s kubectl get nodes
@@ -54,23 +52,21 @@ ip-172-31-60-194   Ready    master   44m    v1.17.2+k3s1
 ip-172-31-63-88    Ready    master   6m8s   v1.17.2+k3s1
 ```
 
-Then test the health of the cluster pods:
+然后测试集群 pods 的健康状况。
 
 ```
 sudo k3s kubectl get pods --all-namespaces
 ```
 
-**Result:** You have successfully set up a K3s Kubernetes cluster.
+**结果：** 您已经成功建立了一个 K3s Kubernetes 集群。
 
-### 3. Save and Start Using the kubeconfig File
+### 步骤 3：保存并开始使用 kubeconfig 文件
 
-When you installed K3s on each Rancher server node, a `kubeconfig` file was created on the node at `/etc/rancher/k3s/k3s.yaml`. This file contains credentials for full access to the cluster, and you should save this file in a secure location.
+当您在每个 Rancher server 节点上安装 K3s 时，会在节点上创建了一个`/etc/rancher/k3s/k3s.yaml`的`kubeconfig`文件。这个文件包含了完全访问集群的凭证，你应该把这个文件保存在一个安全的位置。
 
-To use this `kubeconfig` file,
-
-1. Install [kubectl,](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl) a Kubernetes command-line tool.
-2. Copy the file at `/etc/rancher/k3s/k3s.yaml` and save it to the directory `~/.kube/config` on your local machine.
-3. In the kubeconfig file, the `server` directive is defined as localhost. Configure the server as the DNS of your load balancer, referring to port 6443. (The Kubernetes API server will be reached at port 6443, while the Rancher server will be reached at ports 80 and 443.) Here is an example `k3s.yaml`:
+1. 安装[kubectl]（https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl）。
+2. 复制`/etc/rancher/k3s/k3s.yaml`处的文件，并保存到本地机器上的`~/.kube/config`目录下。
+3. 在 kubeconfig 文件中，`server`指令定义为 localhost。将服务器配置为你的负载均衡器的 DNS，参考端口 6443。Kubernetes API 服务器将通过端口 6443 到达，而 Rancher 服务器将通过端口 80 和 443 到达）。下面是一个例子`k3s.yaml`：
 
 ```yml
 apiVersion: v1
@@ -94,19 +90,19 @@ users:
     username: admin
 ```
 
-**Result:** You can now use `kubectl` to manage your K3s cluster. If you have more than one kubeconfig file, you can specify which one you want to use by passing in the path to the file when using `kubectl`:
+**结果：** 现在你可以使用`kubectl`来管理你的 K3s 集群。如果你有多个的 kubeconfig 文件，你可以在使用`kubectl`时通过传递文件的路径来指定你要使用的文件。
 
 ```
 kubectl --kubeconfig ~/.kube/config/k3s.yaml get pods --all-namespaces
 ```
 
-For more information about the `kubeconfig` file, refer to the [K3s documentation]({{<baseurl>}}/k3s/latest/en/cluster-access/) or the [official Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/) about organizing cluster access using `kubeconfig` files.
+关于`kubeconfig`文件的更多信息，请参考[K3s 文档]({{<baseurl>}}/k3s/latest/en/cluster-access/)或[Kubernetes 官方文档](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/)中关于使用`kubeconfig`文件组织集群访问的内容。
 
-### 4. Check the Health of Your Cluster Pods
+### 4. 检查您集群内 Pods 的健康状况
 
-Now that you have set up the `kubeconfig` file, you can use `kubectl` to access the cluster from your local machine.
+现在你已经设置了`kubeconfig`文件，你可以使用`kubectl`从你的本地机器访问集群。
 
-Check that all the required pods and containers are healthy are ready to continue:
+检查所有需要的 pods 和容器是否健康，准备继续：
 
 ```
 ubuntu@ip-172-31-60-194:~$ sudo kubectl get pods --all-namespaces
@@ -116,4 +112,4 @@ kube-system     local-path-provisioner-58fb86bdfd-fmkvd   1/1     Running   0   
 kube-system     coredns-d798c9dd-ljjnf                    1/1     Running   0          8d
 ```
 
-**Result:** You have confirmed that you can access the cluster with `kubectl` and the K3s cluster is running successfully. Now the Rancher management server can be installed on the cluster.
+**结果：** 您已经可以使用`kubectl`访问集群，并且 K3s 集群正在运行。现在可以在集群上安装 Rancher 管理服务器。
