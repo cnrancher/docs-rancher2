@@ -48,7 +48,7 @@ title: 为高可用K3s集群配置基础设施
 对于您的实施，请考虑您是否想要或需要使用第 4 层或第 7 层负载均衡器。
 
 - **4 层负载均衡器**是两种选择中比较简单的一种，其中你是将 TCP 流量转发到你的节点上。我们建议将您的负载均衡器配置为第 4 层均衡器，将流量转发到 TCP/80 和 TCP/443 端口，再转发到 Rancher 管理集群节点。集群上的 Ingress 控制器将把 HTTP 流量重定向到 HTTPS，并在 TCP/443 端口上终止 SSL/TLS。Ingress 控制器将把 TCP/80 端口的流量转发到 Rancher 部署中的 Ingress pod。
-- 第 7 层负载均衡器\*\*比较复杂，但可以提供您可能需要的功能。例如，第 7 层负载均衡器能够在负载均衡器上处理 TLS 终止，而不是 Rancher 自己做 TLS 终止。如果你想在你的基础设施中集中处理 TLS 终止，这可能是有益的。第 7 层负载均衡还为您的负载均衡器提供了基于 HTTP 属性（如 Cookie 等）的决策能力，而第 4 层负载均衡器是无法关注这些属性的。如果你决定在第 7 层负载均衡器上终止 SSL/TLS 流量，在后面的步骤中安装 Rancher 时，你需要使用`--set tls=external`选项。更多信息请参考【Rancher Helm 图表选项】({{<baseurl>}}/rancher/v2.x/en/installation/options/chart-options/#external-tls-termination)
+- **第 7 层负载均衡器**比较复杂，但可以提供您可能需要的功能。例如，第 7 层负载均衡器能够在负载均衡器上处理 TLS 终止，而不是 Rancher 自己做 TLS 终止。如果你想在你的基础设施中集中处理 TLS 终止，这可能是有益的。第 7 层负载均衡还为您的负载均衡器提供了基于 HTTP 属性（如 Cookie 等）的决策能力，而第 4 层负载均衡器是无法关注这些属性的。如果你决定在第 7 层负载均衡器上终止 SSL/TLS 流量，在后面的步骤中安装 Rancher 时，你需要使用`--set tls=external`选项。更多信息请参考[Rancher Helm 图表选项]({{<baseurl>}}/rancher/v2.x/en/installation/options/chart-options/#external-tls-termination)
 
 关于如何设置 NGINX 负载均衡器的例子，请参考[本页]({{<baseurl>}}/rancher/v2.x/en/installation/options/nginx/)
 
