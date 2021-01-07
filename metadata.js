@@ -131,9 +131,8 @@ const metadata = {
                 "单节点安装",
             "rancher2/installation/other-installation-methods/air-gap/_index":
                 "离线安装",
-            "rancher2/upgrades/upgrades/ha/_index": "升级高可用 Rancher",
-            "rancher2/upgrades/upgrades/single-node/_index":
-                "升级单节点 Rancher",
+            //"rancher2/upgrades/upgrades/ha/_index": "升级高可用 Rancher",
+            //"rancher2/upgrades/upgrades/single-node/_index":"升级单节点 Rancher",
             "rancher2/upgrades/rollbacks/ha-server-rollbacks/_index":
                 "回滚高可用 Rancher",
             "rancher2/upgrades/rollbacks/single-node-rollbacks/_index":

@@ -279,7 +279,8 @@ module.exports = {
                 type: "category",
                 label: "升级",
                 items: [
-                    "rancher2/upgrades/upgrades/_index",
+                    //"rancher2/upgrades/upgrades/_index",
+                    /*
                     {
                         type: "category",
                         label: "升级高可用 Rancher",
@@ -288,9 +289,10 @@ module.exports = {
                             "rancher2/upgrades/upgrades/ha/helm2/_index",
                         ],
                     },
-                    "rancher2/upgrades/upgrades/single-node/_index",
-                    "rancher2/upgrades/upgrades/migrating-from-rke-add-on/_index",
-                    "rancher2/upgrades/upgrades/namespace-migration/_index",
+                    */
+                    //"rancher2/upgrades/upgrades/single-node/_index",
+                    //"rancher2/upgrades/upgrades/migrating-from-rke-add-on/_index",
+                    //"rancher2/upgrades/upgrades/namespace-migration/_index",
                 ],
             },
             {
