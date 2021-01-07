@@ -31,7 +31,7 @@ keywords:
 这是带有占位符的命令的**示例**：
 
 ```bash
-docker stop <RANCHER_CONTAINER_NAME>
+`docker stop <RANCHER_CONTAINER_NAME>`
 ```
 
 在此命令中，`<RANCHER_CONTAINER_NAME>` 是您的 Rancher 容器的名称。
