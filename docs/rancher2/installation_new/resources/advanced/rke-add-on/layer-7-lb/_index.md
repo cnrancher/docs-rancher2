@@ -1,5 +1,5 @@
 ---
-title: 安装指南
+title: Rancher 高可用 7层LB 安装指南
 description: 此过程将引导您使用 Rancher Kubernetes Engine（RKE）设置 3 节点的集群。该集群的唯一目的是运行 Rancher Server 的 Pod。
 keywords:
   - rancher 2.0中文文档

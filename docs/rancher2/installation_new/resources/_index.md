@@ -1,5 +1,5 @@
 ---
-title: Resources
+title: 资源及高级选项配置
 weight: 4
 aliases:
   - /rancher/v2.x/en/installation/options

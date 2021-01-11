@@ -1,89 +1,105 @@
 ---
-title: Rollbacks
-weight: 1010
-aliases:
-  - /rancher/v2.x/en/upgrades/rollbacks
+title: 回滚必读
+description: 本节包含有关如何将 Rancher Server 回滚到以前版本的信息。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 升级和回滚
+  - 回滚必读
 ---
 
-This section contains information about how to roll back your Rancher server to a previous version.
+## 概述
 
-If you upgrade Rancher and the upgrade does not complete successfully, you may need to [restore Rancher from backup.](../../backups/restores)
+本节包含有关如何将 Rancher Server 回滚到以前版本的信息。
 
-Restoring a snapshot of the Rancher Server cluster will revert Rancher to the version and state at the time of the snapshot.
+- [回滚单节点 Rancher](/docs/rancher2/upgrades/rollbacks/single-node-rollbacks/_index)
+- [回滚高可用 Rancher](/docs/rancher2/upgrades/rollbacks/ha-server-rollbacks/_index)
+- [回滚到特定版本的 Rancher](#回滚到特定版本的Rancher)
 
->**Note:** Managed clusters are authoritative for their state. This means restoring the rancher server will not revert workload deployments or changes made on managed clusters after the snapshot was taken.
+## 回滚到特定版本
 
-- [Rolling back Rancher installed with Docker]({{<baseurl>}}/rancher/v2.x/en/installation/other-installation-methods/single-node-docker/single-node-rollbacks)
-- [Rolling back Rancher installed on a Kubernetes cluster]({{<baseurl>}}/rancher/v2.x/en/upgrades/rollbacks/ha-server-rollbacks/)
+如果回滚在这两种情况下，则必须遵循一些额外的说明才能使集群正常工作。
 
-### Special Scenarios regarding Rollbacks
+- 从 v2.1.6+ 回滚到 v2.1.0-v2.1.5 或 v2.0.0-v2.0.10 之间的任何版本。
+- 从 v2.0.11+ 回滚到 v2.0.0-v2.0.10 之间的任何版本。
 
-If you are rolling back to versions in either of these scenarios, you must follow some extra instructions in order to get your clusters working.
+由于早期的 Rancher 版本存在安全漏洞[CVE-2018-20321](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20321)，如果用户需要回滚到存在此漏洞的 Rancher 的早期版本。则需要采取特殊步骤，步骤如下：
 
-- Rolling back from v2.1.6+ to any version between v2.1.0 - v2.1.5 or v2.0.0 - v2.0.10.
-- Rolling back from v2.0.11+ to any version between v2.0.0 - v2.0.10.  
+1. 记录每个集群的`serviceAccountToken`。为此，将以下脚本保存在运行 rancher 容器（单节点）或可以通过 kubectl 访问 Rancher 管理平面（高可用）的计算机上，并且运行它们。在运行命令之前，请确保已安装 了 JQ。这些命令取决于您的 Rancher 安装方式。
 
-Because of the changes necessary to address [CVE-2018-20321](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20321), special steps are necessary if the user wants to roll back to a previous version of Rancher where this vulnerability exists. The steps are as follows:
+   **单节点 Rancher**
 
-1. Record the `serviceAccountToken` for each cluster.  To do this, save the following script on a machine with `kubectl` access to the Rancher management plane and execute it.  You will need to run these commands on the machine where the rancher container is running. Ensure JQ is installed before running the command. The commands will vary depending on how you installed Rancher.
+   ```
+   docker exec <NAME OF RANCHER CONTAINER> kubectl get clusters -o json | jq '[.items[] | select(any(.status.conditions[]; .type == "ServiceAccountMigrated")) | {name: .metadata.name, token: .status.serviceAccountToken}]' > tokens.json
+   ```
 
+   **高可用 Rancher**
 
-    **Rancher Installed with Docker**
-    ```
-    docker exec <NAME OF RANCHER CONTAINER> kubectl get clusters -o json | jq '[.items[] | select(any(.status.conditions[]; .type == "ServiceAccountMigrated")) | {name: .metadata.name, token: .status.serviceAccountToken}]' > tokens.json
-    ```
+   ```
+   kubectl get clusters -o json | jq '[.items[] | select(any(.status.conditions[]; .type == "ServiceAccountMigrated")) | {name: .metadata.name, token: .status.serviceAccountToken}]' > tokens.json
+   ```
 
-    **Rancher Installed on a Kubernetes Cluster**
-    ```
-    kubectl get clusters -o json | jq '[.items[] | select(any(.status.conditions[]; .type == "ServiceAccountMigrated")) | {name: .metadata.name, token: .status.serviceAccountToken}]' > tokens.json
-    ```
+1. 执行命令后，将创建一个`tokens.json`文件。重要！在安全的地方备份此文件。**回滚 Rancher 后，需要使用它来恢复集群功能。如果丢失此文件，则可能无法访问集群。**
 
-2. After executing the command a `tokens.json` file will be created.  Important! Back up this file in a safe place.** You will need it to restore functionality to your clusters after rolling back Rancher.  **If you lose this file, you may lose access to your clusters.**
+1. 按照[正常回滚流程](/docs/rancher2/upgrades/rollbacks/_index)回滚 Rancher。
 
-3. Rollback Rancher following the [normal instructions]({{<baseurl>}}/rancher/v2.x/en/upgrades/rollbacks/).
+1. 一旦 Rancher 恢复正常，由 Rancher 管理的每个集群（导入集群除外）将处于`Unvailable`状态。
 
-4. Once Rancher comes back up, every cluster managed by Rancher (except for Imported clusters) will be in an `Unavailable` state.
+1. 根据您安装 Rancher 的方式应用备份的 tokens。
 
-5. Apply the backed up tokens based on how you installed Rancher.
+   **单节点 Rancher**
 
-    **Rancher Installed with Docker**
+   将以下脚本另存为`apply_tokens.sh`，然后保存到运行 Rancher docker 容器的机器上。并且将先前创建的`tokens.json`文件复制到脚本所在的目录。
 
-    Save the following script as `apply_tokens.sh` to the machine where the Rancher docker container is running. Also copy the `tokens.json` file created previously to the same directory as the script.
-    ```
-    set -e
+   ```
+   set -e
 
-    tokens=$(jq .[] -c tokens.json)
-    for token in $tokens; do
-        name=$(echo $token | jq -r .name)
-        value=$(echo $token | jq -r .token)
+   tokens=$(jq .[] -c tokens.json)
+   for token in $tokens; do
+       name=$(echo $token | jq -r .name)
+       value=$(echo $token | jq -r .token)
 
-        docker exec $1 kubectl patch --type=merge clusters $name -p "{\"status\": {\"serviceAccountToken\": \"$value\"}}"
-    done
-    ```
-     the script to allow execution (`chmod +x apply_tokens.sh`) and execute the script as follows:
-    ```
-    ./apply_tokens.sh <DOCKER CONTAINER NAME>
-    ```
-    After a few moments the clusters will go from Unavailable back to Available.
+       docker exec $1 kubectl patch --type=merge clusters $name -p "{\"status\": {\"serviceAccountToken\": \"$value\"}}"
+   done
+   ```
 
-    **Rancher Installed on a Kubernetes Cluster**
+   允许执行脚本(`chmod +x apply_tokens.sh`)并执行脚本，如下所示：
 
-    Save the following script as `apply_tokens.sh` to a machine with kubectl access to the Rancher management plane. Also copy the `tokens.json` file created previously to the same directory as the script.
-    ```
-    set -e
+   ```
+   ./apply_tokens.sh <DOCKER CONTAINER NAME>
+   ```
 
-    tokens=$(jq .[] -c tokens.json)
-    for token in $tokens; do
-        name=$(echo $token | jq -r .name)
-        value=$(echo $token | jq -r .token)
+   片刻之后，集群将从`Unavailable`状态回到`Available`状态。
 
-       kubectl patch --type=merge clusters $name -p "{\"status\": {\"serviceAccountToken\": \"$value\"}}"
-    done
-    ```
-    Set the script to allow execution (`chmod +x apply_tokens.sh`) and execute the script as follows:
-    ```
-    ./apply_tokens.sh
-    ```
-    After a few moments the clusters will go from `Unavailable` back to `Available`.
+   **高可用 Rancher**
 
-6. Continue using Rancher as normal.
+   将以下脚本另存为`apply_tokens.sh`，并复制到可以通过 kubectl 访问 Rancher 管理平面的计算机上。并且将先前创建的`tokens.json`文件复制到脚本所在的目录。
+
+   ```
+   set -e
+
+   tokens=$(jq .[] -c tokens.json)
+   for token in $tokens; do
+       name=$(echo $token | jq -r .name)
+       value=$(echo $token | jq -r .token)
+
+   kubectl patch --type=merge clusters $name -p "{\"status\": {\"serviceAccountToken\": \"$value\"}}"
+   done
+   ```
+
+   允许执行脚本(`chmod +x apply_tokens.sh`)并执行脚本，如下所示：
+
+   ```
+   ./apply_tokens.sh
+   ```
+
+   片刻之后，集群将从`Unavailable`状态回到`Available`状态。
+
+1. 开始使用 Rancher。
