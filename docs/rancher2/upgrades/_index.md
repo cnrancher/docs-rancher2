@@ -19,12 +19,12 @@ keywords:
 
 Rancher 提供了以下手册，帮助您升级或回滚集群：
 
-- [升级必读](/docs/rancher2/upgrades/upgrades/_index)
-- [高可用升级指南](/docs/rancher2/upgrades/upgrades/ha/_index)
-- [高可用升级指南（Helm2）](/docs/rancher2/upgrades/upgrades/ha/helm2/_index)
-- [升级单节点 Rancher](/docs/rancher2/upgrades/upgrades/namespace-migration/_index)
-- [从 RKE Add-on 安装迁移到 Helm 安装](/docs/rancher2/upgrades/upgrades/migrating-from-rke-add-on/_index)
-- [升级到 v2.0.7+ 版本时的命名空间迁移](/docs/rancher2/upgrades/upgrades/namespace-migration/_index)
+- [升级必读](/docs/rancher2/installation_new/upgrades-rollbacks/upgrades/_index)
+- [高可用升级指南](/docs/rancher2/installation_new/upgrades-rollbacks/upgrades/ha/_index)
+- [高可用升级指南（Helm2）](/docs/rancher2/installation_new/upgrades-rollbacks/upgrades/ha/helm2/_index)
+- [升级单节点 Rancher](/docs/rancher2/installation_new/upgrades-rollbacks/upgrades/namespace-migration/_index)
+- [从 RKE Add-on 安装迁移到 Helm 安装](/docs/rancher2/installation_new/upgrades-rollbacks/upgrades/migrating-from-rke-add-on/_index)
+- [升级到 v2.0.7+ 版本时的命名空间迁移](/docs/rancher2/installation_new/upgrades-rollbacks/upgrades/namespace-migration/_index)
 
 ## 回滚失败的升级
 

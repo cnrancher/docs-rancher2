@@ -134,6 +134,9 @@ const metadata = {
                 "单节点安装",
             "rancher2/installation_new/other-installation-methods/behind-proxy/_index":
                 "HTTP 代理安装",
+
+            "rancher2/installation_new/install-rancher-on-linux/_index":
+                "Linux安装",
             "rancher2/installation_new/resources/advanced/helm2/_index":
                 "安装指南（Helm2）",
             "rancher2/installation_new/resources/advanced/air-gap-helm2/_index":
