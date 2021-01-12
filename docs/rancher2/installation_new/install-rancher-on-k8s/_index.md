@@ -22,13 +22,13 @@ keywords:
 群集要求取决于 Rancher 版本。
 
 - **从 Rancher v2.5 开始，** Rancher 可以安装在任何 Kubernetes 集群上。这个集群可以使用上游 Kubernetes，也可以使用 Rancher 的 Kubernetes 发行版之一，也可以是来自 Amazon EKS 等提供商的托管 Kubernetes 集群。
-  > **注意：**要在托管的 Kubernetes 集群（如 EKS、GKE 或 AKS）上部署 Rancher v2.5，应该先部署一个兼容的 Ingress 控制器来配置[Rancher 上的 SSL 终止。]({{<baseurl>}}/rancher/v2.x/en/installation/install-rancher-on-k8s/#4-choose-your-ssl-configuration)。
+  > **注意：**要在托管的 Kubernetes 集群（如 EKS、GKE 或 AKS）上部署 Rancher v2.5，应该先部署一个兼容的 Ingress 控制器来配置[Rancher 上的 SSL 终止。](/docs/rancher2/installation_new/install-rancher-on-k8s/_index)。
 - 在 Rancher v2.4.x 中，Rancher 需要安装在 K3s Kubernetes 集群或 RKE Kubernetes 集群上。
 - 在 Rancher v2.4 之前，Rancher 需要安装在 RKE Kubernetes 集群上。
 
-有关安装 RKE Kubernetes 集群的教程，请参考[本页]({{<baseurl>}}/rancher/v2.x/en/安装/资源/k8s-tutorials/ha-rke/)有关为高可用性 RKE 集群设置基础设施的帮助，请参考[本页。 ]({{<baseurl>}}/rancher/v2.x/en/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha)
+有关安装 RKE Kubernetes 集群的教程，请参考[本页](/docs/rancher2/installation_new/k8s-tutorials/ha-rke/_index)有关为高可用性 RKE 集群设置基础设施的帮助，请参考[本页](/docs/rancher2/installation_new/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha/_index)。
 
-安装 K3s Kubernetes 集群的教程，请参考[本页面]({{<baseurl>}}/rancher/v2.x/en/installation/resources/k8s-tutorials/ha-with-external-db) 如需帮助设置高可用性 K3s 集群的基础架构，请参考[本页]({{<baseurl>}}/rancher/v2.x/en/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha-with-external-db)
+安装 K3s Kubernetes 集群的教程，请参考[本页面](/docs/rancher2/installation_new/resources/k8s-tutorials/ha-with-external-db/_index) 如需帮助设置高可用性 K3s 集群的基础架构，请参考[本页](/docs/rancher2/installation_new/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha-with-external-db/_index)
 
 ## 安装 Rancher Helm Chart
 

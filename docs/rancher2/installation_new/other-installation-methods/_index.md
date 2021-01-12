@@ -22,11 +22,11 @@ keywords:
 
 由于只有一个节点和一个 Docker 容器，因此，如果该节点发生故障，并且其他节点上没有可用的 Rancher 数据副本，您将丢失 Rancher Server 的所有数据。
 
-The ability to migrate Rancher to a high-availability cluster depends on the Rancher version:
+将 Rancher 迁移到高可用性集群的能力取决于 Rancher 版本。
 
-- For Rancher v2.0-v2.4, there was no migration path from a Docker installation to a high-availability installation. Therefore, if you are using Rancher prior to v2.5, you may want to use a Kubernetes installation from the start.
+- 对于 Rancher v2.0-v2.4，没有从 Docker 安装到高可用性安装的迁移路径。因此，如果您使用的是 v2.5 之前的 Rancher，您可能希望从一开始就使用 Kubernetes 安装。
 
-- For Rancher v2.5+, the Rancher backup operator can be used to migrate Rancher from the single Docker container install to an installation on a high-availability Kubernetes cluster. For details, refer to the documentation on [migrating Rancher to a new cluster.]({{<baseurl>}}/rancher/v2.x/en/backups/v2.5/migrating-rancher/)
+- 对于 Rancher v2.5+，可以使用 Rancher 备份操作员将 Rancher 从单个 Docker 容器安装迁移到高可用性 Kubernetes 集群上的安装。有关详细信息，请参考[将 Rancher 迁移到新的集群。](/docs/rancher2/backups/v2.5/migrating-rancher/_index)的文档。
 
 ## 私有环境安装
 
