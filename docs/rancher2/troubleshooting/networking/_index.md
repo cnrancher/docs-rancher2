@@ -119,7 +119,7 @@ kubectl get nodes -o json | jq '.items[].metadata | select(.annotations["flannel
 
 已知问题 [GitHub #15146](https://github.com/rancher/rancher/issues/15146)。
 
-如果系统命名空间中的 Pod 无法与其他系统命名空间中的 Pod 通信，则需要按照[升级到 v2.0.7+ ：命名空间迁移](/docs/rancher2/installation_new/upgrades-rollbacks/upgrades/namespace-migration/_index)描述的方式恢复连接。症状包括：
+如果系统命名空间中的 Pod 无法与其他系统命名空间中的 Pod 通信，则需要按照[升级到 v2.0.7+ ：命名空间迁移](/docs/rancher2/upgrades/upgrades/namespace-migration/_index)描述的方式恢复连接。症状包括：
 
 - NGINX ingress controller 在访问时显示 `504 Gateway Time-out`。
 - NGINX ingress controller 访问时日志打印 `upstream timed out (110: Connection timed out) while connecting to upstream`。

@@ -82,7 +82,7 @@ module.exports = {
         sidebars,
         metadata,
         stable: "版本说明 - v2.4.7",
-        baseCommit: "3628024211c453c2f0447896292d51f2ad5f3f00 - Jan 12, 2021",
+        baseCommit: "9844eb315ee788efa011e5776b3dcba5b9411a10 - Sept 21, 2020",
         k3sBaseCommit:
             "1203cf0bb163b71b198382b44e6e543cd3672f33 - Dec 24, 2020",
     },
