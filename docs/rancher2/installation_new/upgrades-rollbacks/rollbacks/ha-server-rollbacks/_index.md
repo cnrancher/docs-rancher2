@@ -17,9 +17,9 @@ keywords:
 
 如果您升级了 Rancher，但升级没有成功完成，您可能需要将 Rancher 服务器回滚到其最后的健康状态。
 
-要恢复 V2.5 之前的 Rancher，请遵循这里的详细步骤。[恢复备份-Kubernetes 安装]({{<baseurl>}}/rancher/v2.x/en/backups/restorations/ha-restoration)。
+要恢复 V2.5 之前的 Rancher，请遵循这里的详细步骤。[恢复备份-Kubernetes 安装](/docs/rancher2/backups/restorations/ha-restoration)。
 
-要恢复 Rancher v2.5，可以使用 `rancher-backup`应用程序，根据[本节]({{<baseurl>}}/rancher/v2.x/en/backups/restoring-rancher/)从备份中恢复 Rancher。
+要恢复 Rancher v2.5，可以使用 `rancher-backup`应用程序，根据[本节](/docs/rancher2/backups/restoring-rancher/)从备份中恢复 Rancher。
 
 恢复 Rancher 服务器集群的快照将使 Rancher 恢复到快照时的版本和状态。
 

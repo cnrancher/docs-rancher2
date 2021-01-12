@@ -2,7 +2,7 @@
 title: 为 Rancher 设置高可用 K3s Kubernetes 集群
 ---
 
-本节介绍了如何根据[Rancher 服务器环境的最佳实践]({{<baseurl>}}/rancher/v2.x/en/overview/architecture-recommendations/#environment-for-kubernetes-installations)安装 Kubernetes 集群。
+本节介绍了如何根据[Rancher 服务器环境的最佳实践](/docs/rancher2/overview/architecture-recommendations/#environment-for-kubernetes-installations)安装 Kubernetes 集群。
 
 如果你的系统处于离线环境，不能直接上网，请参考离线安装说明。
 
@@ -15,7 +15,7 @@ title: 为 Rancher 设置高可用 K3s Kubernetes 集群
 
 ## 先决条件
 
-这些说明假设你已经设置了两个节点、一个负载均衡器、一个 DNS 记录和一个外部 MySQL 数据库，如[本节所述]({{<baseurl>}}/rancher/v2.x/en/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha-with-external-db/)。
+这些说明假设你已经设置了两个节点、一个负载均衡器、一个 DNS 记录和一个外部 MySQL 数据库，如[本节所述](/docs/rancher2/installation_new/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha-with-external-db/_index)。
 
 ## 安装 Kubernetes
 
@@ -96,7 +96,7 @@ users:
 kubectl --kubeconfig ~/.kube/config/k3s.yaml get pods --all-namespaces
 ```
 
-关于`kubeconfig`文件的更多信息，请参考[K3s 文档]({{<baseurl>}}/k3s/latest/en/cluster-access/)或[Kubernetes 官方文档](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/)中关于使用`kubeconfig`文件组织集群访问的内容。
+关于`kubeconfig`文件的更多信息，请参考[K3s 文档](/docs/k3s/cluster-access/_index)或[Kubernetes 官方文档](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/)中关于使用`kubeconfig`文件组织集群访问的内容。
 
 ### 4. 检查您集群内 Pods 的健康状况
 

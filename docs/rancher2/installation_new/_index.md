@@ -1,9 +1,5 @@
 ---
-title: Installing/Upgrading Rancher
-description: Learn how to install Rancher in development and production environments. Read about single node and high availability installation
-weight: 3
-aliases:
-  - /rancher/v2.x/en/installation/how-ha-works/
+title: 安装介绍
 ---
 
 本节整体概述了 Rancher 各种安装方式，并介绍了每个选项的优点。
@@ -22,7 +18,7 @@ aliases:
 
 对于 Docker 安装，本地 Kubernetes 集群安装在单个 Docker 容器中，Rancher 安装在本地集群上。
 
-增加了`restrictedAdmin`Helm 图表选项。当此选项设置为 "true "时，初始 Rancher 用户对本地 Kubernetes 集群的访问受到限制，以防止权限升级。更多信息，请参见[restricted-admin 角色]({{<baseurl>}}/rancher/v2.x/en/admin-settings/rbac/global-permissions/#restricted-admin)一节。
+增加了`restrictedAdmin`Helm 图表选项。当此选项设置为 "true "时，初始 Rancher 用户对本地 Kubernetes 集群的访问受到限制，以防止权限升级。更多信息，请参见[restricted-admin 角色](/docs/rancher2/admin-settings/rbac/global-permissions/_index)一节。
 
 ## 安装选项概述
 

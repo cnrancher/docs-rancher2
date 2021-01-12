@@ -7,13 +7,13 @@ aliases:
 
 ## Docker 安装
 
-[单节点 Docker 安装]({{<baseurl>}}/rancher/v2.x/en/installation/other-installation-methods/single-node-docker)是为想要测试 Rancher 的用户准备的。你不需要使用 Helm 在 Kubernetes 集群上运行，而是使用`docker run`命令在单个节点上安装 Rancher 服务器组件。
+[单节点 Docker 安装](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/_index)是为想要测试 Rancher 的用户准备的。你不需要使用 Helm 在 Kubernetes 集群上运行，而是使用`docker run`命令在单个节点上安装 Rancher 服务器组件。
 
 由于只有一个节点和一个 Docker 容器，如果节点宕机，其他节点上就没有可用的 etcd 数据副本，你将失去 Rancher 服务器的所有数据。
 
 ## 离线安装
 
-按照[这些步骤]({{<baseurl>}}/rancher/v2.x/en/安装/其他安装方法/air-gap)将 Rancher 服务器安装在一个离线环境中。
+按照[这些步骤](/docs/rancher2/installation_new/other-installation-methods/air-gap/_index)将 Rancher 服务器安装在一个离线环境中。
 
 离线环境可能是指 Rancher 服务器将被安装在离线、防火墙后或代理服务器后。
 
