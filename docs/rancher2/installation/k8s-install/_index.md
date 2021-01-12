@@ -69,7 +69,7 @@ Rancher Server 只能在使用 RKE 或 K3s 安装的 Kubernetes 集群中运行�
 
 ## 其他安装选项
 
-- [从 RKE Add-on 安装的 Rancher 高可用迁移到 Helm 安装](/docs/rancher2/upgrades/upgrades/migrating-from-rke-add-on/_index)
+- [从 RKE Add-on 安装的 Rancher 高可用迁移到 Helm 安装](/docs/rancher2/installation_new/upgrades-rollbacks/upgrades/migrating-from-rke-add-on/_index)
 - [使用 Helm 2 安装 Rancher 高可用](/docs/rancher2/installation/options/helm2/_index)：本节提供了使用 Helm 2 安装高可用 Rancher 的说明，如果无法升级到 Helm 3，则可以使用该说明。
 
 ## 已经弃用的安装方法
@@ -80,4 +80,4 @@ Rancher Server 只能在使用 RKE 或 K3s 安装的 Kubernetes 集群中运行�
 >
 > 请使用 Rancher Helm Chart 在 Kubernetes 集群上安装 Rancher 高可用。更多信息请参阅[Rancher 高可用安装](/docs/rancher2/installation/k8s-install/_index)
 >
-> 如果您当前正在使用 RKE add-on 安装方式，请参阅[从 RKE Add-on 安装的 Rancher 高可用迁移到 Helm 安装](/docs/rancher2/upgrades/upgrades/migrating-from-rke-add-on/_index)以获取有关如何使用 Helm Chart 的详细信息。
+> 如果您当前正在使用 RKE add-on 安装方式，请参阅[从 RKE Add-on 安装的 Rancher 高可用迁移到 Helm 安装](/docs/rancher2/installation_new/upgrades-rollbacks/upgrades/migrating-from-rke-add-on/_index)以获取有关如何使用 Helm Chart 的详细信息。

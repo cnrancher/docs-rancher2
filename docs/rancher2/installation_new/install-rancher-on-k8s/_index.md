@@ -26,7 +26,7 @@ keywords:
 - 在 Rancher v2.4.x 中，Rancher 需要安装在 K3s Kubernetes 集群或 RKE Kubernetes 集群上。
 - 在 Rancher v2.4 之前，Rancher 需要安装在 RKE Kubernetes 集群上。
 
-有关安装 RKE Kubernetes 集群的教程，请参考[本页](/docs/rancher2/installation_new/k8s-tutorials/ha-rke/_index)有关为高可用性 RKE 集群设置基础设施的帮助，请参考[本页](/docs/rancher2/installation_new/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha/_index)。
+有关安装 RKE Kubernetes 集群的教程，请参考[本页](/docs/rancher2/installation_new/resources/k8s-tutorials/ha-rke/_index)有关为高可用性 RKE 集群设置基础设施的帮助，请参考[本页](/docs/rancher2/installation_new/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha/_index)。
 
 安装 K3s Kubernetes 集群的教程，请参考[本页面](/docs/rancher2/installation_new/resources/k8s-tutorials/ha-with-external-db/_index) 如需帮助设置高可用性 K3s 集群的基础架构，请参考[本页](/docs/rancher2/installation_new/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha-with-external-db/_index)
 
