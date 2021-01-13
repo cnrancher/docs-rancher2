@@ -19,7 +19,7 @@ keywords:
 
 设置 Rancher 服务器的本地 Kubernetes 集群。
 
-群集要求取决于 Rancher 版本。
+集群要求取决于 Rancher 版本。
 
 - **从 Rancher v2.5 开始，** Rancher 可以安装在任何 Kubernetes 集群上。这个集群可以使用上游 Kubernetes，也可以使用 Rancher 的 Kubernetes 发行版之一，也可以是来自 Amazon EKS 等提供商的托管 Kubernetes 集群。
   > **注意：**要在托管的 Kubernetes 集群（如 EKS、GKE 或 AKS）上部署 Rancher v2.5，应该先部署一个兼容的 Ingress 控制器来配置[Rancher 上的 SSL 终止。](/docs/rancher2/installation_new/install-rancher-on-k8s/_index)。

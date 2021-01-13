@@ -149,8 +149,8 @@ kubectl get pod -n cattle-system
 
 - 在 "cattle-system "命名空间的 "helm-operation "pods。
 - `cattle-system`命名空间中的`rancher`pod 和`rancher-webhook`pod。
-- 在 "fleet-system "命名空间中的 "fleet-agent"、"fleet-controller "和 "gitjob "荚。
-- `rancher-operator-system`命名空间中的`rancher-operator`荚。
+- 在 "fleet-system "命名空间中的 `fleet-agent`、`fleet-controller`和 `gitjob`pod。
+- `rancher-operator-system`命名空间中的`rancher-operator`pod。
 
 ### 5. 设置 Rancher 的初始密码
 
@@ -168,7 +168,7 @@ rancherd reset-admin
 
 如果您计划使用 Rancher 服务器来管理下游的 Kubernetes 集群，Rancher 需要具有高可用性。在这些步骤中，您将添加更多节点以实现高可用性集群。由于 Rancher 是作为守护进程运行的，因此它将在您添加的节点上自动启动。
 
-需要奇数的节点，因为包含集群数据的 etcd 集群需要大多数的活节点以避免失去法定人数。失去法定人数可能需要从备份中恢复群集。因此，我们建议使用三个节点。
+需要奇数的节点，因为包含集群数据的 etcd 集群需要大多数的活节点以避免失去法定人数。失去法定人数可能需要从备份中恢复集群。因此，我们建议使用三个节点。
 
 当遵循这些步骤时，您仍应以 root 身份登录。
 

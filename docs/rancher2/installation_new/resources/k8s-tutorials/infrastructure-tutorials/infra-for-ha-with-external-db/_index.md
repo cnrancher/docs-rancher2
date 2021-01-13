@@ -55,7 +55,7 @@ title: 为高可用K3s集群配置基础设施
 有关如何设置 Amazon ELB 网络负载均衡器的指南，请参阅[本页](/docs/rancher2/installation_new/resources/k8s-tutorials/infrastructure-tutorials/nlb/_index)
 
 **重要：**
-不要在安装后使用此负载平衡器（即 "本地 "群集 Ingress）来平衡 Rancher 以外的应用程序。与其他应用程序共享此 Ingress 可能会导致其他应用程序的 Ingress 配置重载后 Rancher 出现 websocket 错误。我们建议将`local`集群专用于 Rancher，而不是其他应用程序。
+不要在安装后使用此负载平衡器（即 "本地 "集群 Ingress）来平衡 Rancher 以外的应用程序。与其他应用程序共享此 Ingress 可能会导致其他应用程序的 Ingress 配置重载后 Rancher 出现 websocket 错误。我们建议将`local`集群专用于 Rancher，而不是其他应用程序。
 
 ## 步骤 4：配置 DNS 记录
 
