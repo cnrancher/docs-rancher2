@@ -147,9 +147,9 @@ kubectl get pod -n cattle-system
 
 如果你注意观察 Pod，你会看到安装了以下 Pods：
 
-- 在 "cattle-system "命名空间的 "helm-operation "pods。
+- 在`cattle-system`命名空间的 "helm-operation "pods。
 - `cattle-system`命名空间中的`rancher`pod 和`rancher-webhook`pod。
-- 在 "fleet-system "命名空间中的 `fleet-agent`、`fleet-controller`和 `gitjob`pod。
+- 在`fleet-system`命名空间中的 `fleet-agent`、`fleet-controller`和 `gitjob`pod。
 - `rancher-operator-system`命名空间中的`rancher-operator`pod。
 
 ### 5. 设置 Rancher 的初始密码
