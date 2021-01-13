@@ -120,14 +120,14 @@ rancherd server [OPTIONS]
 | ------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
 | `--cluster-cidr value`   | 用于 pod IP 的网络 CIDR（默认："10.42.0.0/16"）。                                                                           |
 | `--service-cidr value`   | 服务 IP 使用的网络 CIDR（默认："10.43.0.0/16"）。                                                                           |
-| `--cluster-dns value`    | coredns 服务的群集 IP，应该在您的 service-cidr 范围内（默认：10.43.0.10）。应该在你的 service-cidr 范围内(默认：10.43.0.10) |
+| `--cluster-dns value`    | coredns 服务的集群 IP，应该在您的 service-cidr 范围内（默认：10.43.0.10）。应该在你的 service-cidr 范围内(默认：10.43.0.10) |
 | `--cluster-domain value` | 集群域（默认："cluster.local"）。                                                                                           |
 
 ### 集群
 
 | 选项                      | 描述                                   |
 | ------------------------- | -------------------------------------- |
-| `--token value, -t value` | 用于将服务器或代理加入群集的共享密钥。 |
+| `--token value, -t value` | 用于将服务器或代理加入集群的共享密钥。 |
 | `--token-file value`      | 包含集群密钥或 token 的文件            |
 
 ### Client
@@ -254,7 +254,7 @@ rancherd agent [OPTIONS]
 
 | 选项                      | 描述                                   |
 | ------------------------- | -------------------------------------- |
-| `--token value, -t value` | 用于将服务器或代理加入群集的共享密钥。 |
+| `--token value, -t value` | 用于将服务器或代理加入集群的共享密钥。 |
 | `--token-file value`      | 包含集群密钥或 token 的文件            |
 
 ### Agent 节点
