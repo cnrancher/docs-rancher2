@@ -33,7 +33,7 @@ Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和更新 TLS
 3. 安装更新版本的 Rancher 和 cert-manager
 
 原因是当 Helm 升级 Rancher 时，如果运行的 Rancher 应用程序与用于安装它的 chart 模板不匹配，它将拒绝升级并显示错误消息。因为 cert-manager 更改了它的 API 组，并且我们不能修改 Rancher 的已发布的 chart，所以 cert-manager 的 API 版本始终不匹配，因此升级将被拒绝。
-要使用 Helm 重新安装 Rancher，请在升级 Rancher 部分下选中[选项 B: 重新安装 Rancher Chart](/docs/rancher2/installation_new/upgrades-rollbacks/upgrades/ha/_index)。
+要使用 Helm 重新安装 Rancher，请在升级 Rancher 部分下选中[选项 B: 重新安装 Rancher Chart](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/ha/_index)。
 :::
 
 ## 升级 Cert-Manager

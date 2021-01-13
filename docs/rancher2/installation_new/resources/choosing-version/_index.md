@@ -82,7 +82,7 @@ Rancher Helm Chart 版本必须匹配 Rancher 版本（即`appVersion`）。
    helm repo add rancher-<CHART_REPO> https://releases.rancher.com/server-charts/<CHART_REPO>
    ```
 
-4. 继续按照这个步骤从新的 Helm Chart 仓库[升级 Rancher](/docs/rancher2/installation_new/upgrades-rollbacks/upgrades/ha/_index)。
+4. 继续按照这个步骤从新的 Helm Chart 仓库[升级 Rancher](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/ha/_index)。
 
 ## Docker 镜像
 

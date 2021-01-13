@@ -20,17 +20,17 @@ keywords:
 
 要升级 Kubernetes 集群中的组件，[Kubernetes 服务](/docs/rke/config-options/services/_index)或[add-ons](/docs/rke/config-options/add-ons/_index)，请参阅[RKE 的升级文档](/docs/rke/upgrades/_index)。
 
-如果您使用 RKE Add-on 的方式安装了 Rancher，请按照[迁移或升级](/docs/rancher2/installation_new/upgrades-rollbacks/upgrades/migrating-from-rke-add-on/_index)的说明进行操作。
+如果您使用 RKE Add-on 的方式安装了 Rancher，请按照[迁移或升级](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/migrating-from-rke-add-on/_index)的说明进行操作。
 
 > **注意：**
 >
 > - [Let's Encrypt 于 2019 年 11 月 1 日开始屏蔽早于 0.8.0 版本的 cert-manager 实例。](https://community.letsencrypt.org/t/blocking-old-cert-manager-versions/98753) 按照[这些说明](/docs/rancher2/installation/options/upgrading-cert-manager/_index)升级 cert-manager 到最新版本。
-> - 升级指南假定您使用的是 Helm3。如果您是使用 Helm 2 安装的 Rancher，并希望迁移到 Helm 3，请参阅官方的[从 Helm 2 迁移到 Helm 3 的文档](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/)。如果升级到 Helm 3 对您来说是不可行的，我们在[高可用升级指南（ Helm 2）](/docs/rancher2/installation_new/upgrades-rollbacks/upgrades/ha/helm2/_index)也提供了使用 Helm 2 的升级指南。
+> - 升级指南假定您使用的是 Helm3。如果您是使用 Helm 2 安装的 Rancher，并希望迁移到 Helm 3，请参阅官方的[从 Helm 2 迁移到 Helm 3 的文档](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/)。如果升级到 Helm 3 对您来说是不可行的，我们在[高可用升级指南（ Helm 2）](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/ha/helm2/_index)也提供了使用 Helm 2 的升级指南。
 > - 如果要将 Rancher 从 v2.x 升级到 v2.3+，并且正在使用外部 TLS 终止，则需要编辑 cluster.yml 文件，来[配置 Ingress 使用 use-forwarded-headers](/docs/rancher2/installation/options/chart-options/_index)。
 
 ## 先决条件
 
-- 从 Rancher 文档中的 **[已知升级问题](/docs/rancher2/installation_new/upgrades-rollbacks/upgrades/_index#已知的升级问题) 和 [警告](/docs/rancher2/installation_new/upgrades-rollbacks/upgrades/_index#警告)** 查看升级 Rancher 中最值得注意的问题。可以在[GitHub](https://github.com/rancher/rancher/releases) 和 [Rancher 论坛](https://forums.rancher.com/c/announcements/12)的发行说明中找到每个 Rancher 版本的已知问题的更完整列表。
+- 从 Rancher 文档中的 **[已知升级问题](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/_index#已知的升级问题) 和 [警告](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/_index#警告)** 查看升级 Rancher 中最值得注意的问题。可以在[GitHub](https://github.com/rancher/rancher/releases) 和 [Rancher 论坛](https://forums.rancher.com/c/announcements/12)的发行说明中找到每个 Rancher 版本的已知问题的更完整列表。
 - **[仅对于离线安装](/docs/rancher2/installation/other-installation-methods/air-gap/_index)，拉取并上传新的 Rancher Server 版本的镜像**。请按照指南[准备私有仓库](/docs/rancher2/installation/other-installation-methods/air-gap/populate-private-registry/_index)，来准备您要升级的版本的镜像。
 
 ## 升级大纲
@@ -208,7 +208,7 @@ helm upgrade rancher rancher-<CHART_REPO>/rancher \
 
 > **升级后您的下游集群中有网络问题吗？**
 >
-> 如果您是从 v2.0.6 或更旧的版本升级上来的，请参阅[还原集群网络](/docs/rancher2/installation_new/upgrades-rollbacks/upgrades/namespace-migration/_index)。
+> 如果您是从 v2.0.6 或更旧的版本升级上来的，请参阅[还原集群网络](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/namespace-migration/_index)。
 
 ### 回滚
 

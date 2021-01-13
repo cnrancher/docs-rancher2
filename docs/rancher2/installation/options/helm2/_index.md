@@ -58,7 +58,7 @@ keywords:
 
 ## 其他安装选项
 
-- [从 RKE Add-on 安装迁移到 Helm 安装](/docs/rancher2/installation_new/upgrades-rollbacks/upgrades/migrating-from-rke-add-on/_index)
+- [从 RKE Add-on 安装迁移到 Helm 安装](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/migrating-from-rke-add-on/_index)
 
 ## 较早的安装方法
 
@@ -68,4 +68,4 @@ keywords:
 >
 > 请在 Kubernetes 集群中使用 Rancher Helm Chart 来安装 Rancher。更多内容，请参考[Rancher 高可用安装](/docs/rancher2/installation/options/helm2/_index)。
 >
-> 如果您当前正在使用 RKE add-on 安装方法，请参考[从 RKE Add-on 安装迁移到 Helm 安装](/docs/rancher2/installation_new/upgrades-rollbacks/upgrades/migrating-from-rke-add-on/_index)。
+> 如果您当前正在使用 RKE add-on 安装方法，请参考[从 RKE Add-on 安装迁移到 Helm 安装](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/migrating-from-rke-add-on/_index)。
