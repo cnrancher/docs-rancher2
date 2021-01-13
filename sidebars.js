@@ -70,7 +70,6 @@ module.exports = {
         ],
         安装指南: [
             "rancher2/installation_new/_index",
-
             {
                 type: "category",
                 label: "安装要求",
@@ -80,42 +79,7 @@ module.exports = {
                     "rancher2/installation_new/requirements/ports/_index",
                 ],
             },
-            {
-                type: "category",
-                label: "安装 Rancher",
-                items: [
-                    "rancher2/installation_new/install-rancher-on-k8s/_index",
-                    "rancher2/installation_new/install-rancher-on-k8s/chart-options/_index",
-                    {
-                        type: "category",
-                        label: "升级指南",
-                        items: [
-                            "rancher2/installation_new/install-rancher-on-k8s/upgrades/_index",
-                            "rancher2/installation_new/install-rancher-on-k8s/upgrades/migrating-from-rke-add-on/_index",
-                            "rancher2/installation_new/install-rancher-on-k8s/upgrades/namespace-migration/_index",
-                            {
-                                type: "category",
-                                label: "高可用升级指南",
-                                items: [
-                                    "rancher2/installation_new/install-rancher-on-k8s/upgrades/ha/_index",
-                                    "rancher2/installation_new/install-rancher-on-k8s/upgrades/ha/helm2/_index",
-                                ],
-                            },
-                        ],
-                    },
-                    "rancher2/installation_new/install-rancher-on-k8s/rollbacks/_index",
-                ],
-            },
-            {
-                type: "category",
-                label: "在Linux操作系统上安装Rancher",
-                items: [
-                    "rancher2/installation_new/install-rancher-on-linux/_index",
-                    "rancher2/installation_new/install-rancher-on-linux/rancherd-configuration/_index",
-                    "rancher2/installation_new/install-rancher-on-linux/upgrades/_index",
-                    "rancher2/installation_new/install-rancher-on-linux/upgrades/_index",
-                ],
-            },
+            "rancher2/installation_new/install-rancher-on-k8s/_index",
             {
                 type: "category",
                 label: "安装方式",
@@ -331,7 +295,7 @@ module.exports = {
                     "rancher2/installation_new/resources/local-system-charts/_index",
                 ],
             },
-            /* 升级和回归 拆分了，删除这部分
+
             {
                 type: "category",
                 label: "升级回滚指南",
@@ -365,7 +329,6 @@ module.exports = {
                     },
                 ],
             },
-            */
         ],
         /*
         旧版安装指南，已弃用，上线新版之后，需要删除

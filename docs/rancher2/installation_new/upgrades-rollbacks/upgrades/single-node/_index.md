@@ -21,7 +21,7 @@ keywords:
 
 ## 先决条件
 
-- 从 Rancher 文档中的 **[已知升级问题](/docs/rancher2/installation_new/upgrades-rollbacks/upgrades/_index#已知的升级问题) 和 [警告](/docs/rancher2/installation_new/upgrades-rollbacks/upgrades/_index#警告)** 查看升级 Rancher 中最值得注意的问题。可以在[GitHub](https://github.com/rancher/rancher/releases) 和 [Rancher 论坛](https://forums.rancher.com/c/announcements/12)的发行说明中找到每个 Rancher 版本的已知问题的更完整列表。
+- 从 Rancher 文档中的 **[已知升级问题](/docs/rancher2/upgrades/upgrades/_index#已知的升级问题) 和 [警告](/docs/rancher2/upgrades/upgrades/_index#警告)** 查看升级 Rancher 中最值得注意的问题。可以在[GitHub](https://github.com/rancher/rancher/releases) 和 [Rancher 论坛](https://forums.rancher.com/c/announcements/12)的发行说明中找到每个 Rancher 版本的已知问题的更完整列表。
 - **[仅对于离线安装](/docs/rancher2/installation/other-installation-methods/air-gap/_index)，拉取并上传新的 Rancher Server 版本的镜像**。请按照指南[准备私有仓库](/docs/rancher2/installation/other-installation-methods/air-gap/populate-private-registry/_index)，来准备您要升级的版本的镜像。
 
 ## 占位符
@@ -308,7 +308,7 @@ docker run -d --volumes-from rancher-data \
 
 > **升级后您的下游集群中有网络问题吗？**
 >
-> 如果您是从 v2.0.6 或更旧的版本升级上来的，请参阅[还原集群网络](/docs/rancher2/installation_new/upgrades-rollbacks/upgrades/namespace-migration/_index)。
+> 如果您是从 v2.0.6 或更旧的版本升级上来的，请参阅[还原集群网络](/docs/rancher2/upgrades/upgrades/namespace-migration/_index)。
 
 ### 删除旧的 Rancher Server 容器
 
