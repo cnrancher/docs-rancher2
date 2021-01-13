@@ -73,7 +73,7 @@ keywords:
 
 1. 在每个已经给系统命名空间分配了项目的集群中重复这些步骤。
 
-**结果：** 在 Rancher 项目中移出了所有系统命名空间。现在，您可以安全地开始[升级](/docs/rancher2/installation_new/upgrades-rollbacks/upgrades/_index)。
+**结果：** 在 Rancher 项目中移出了所有系统命名空间。现在，您可以安全地开始[升级](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/_index)。
 
 ## 恢复集群网络
 
