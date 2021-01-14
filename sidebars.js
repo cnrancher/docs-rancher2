@@ -1443,8 +1443,8 @@ module.exports = {
     },
     harvester: {
         产品介绍: ["harverster/_index"],
-        认证: ["harverster/authentication/_index"],
-        镜像上传: ["harverster/upload-images/_index"],
+        鉴权与认证: ["harverster/authentication/_index"],
+        上传镜像: ["harverster/upload-images/_index"],
         安装指南: [
             "harverster/installation/_index",
             "harverster/installation/app-mode/_index",

@@ -1,5 +1,5 @@
 ---
-title: 身份认证
+title: 鉴权与认证
 description:
 keywords:
   - rancher 2.0中文文档
@@ -12,7 +12,7 @@ keywords:
   - rancher 2.0
   - rancher2.0 中文教程
   - Harvester
-  - 身份认证
+  - 鉴权与认证
 ---
 
 ## 概述
