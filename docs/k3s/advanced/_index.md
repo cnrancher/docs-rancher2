@@ -24,10 +24,11 @@ keywords:
 - [使用 RootlessKit 运行 K3s (实验)](#使用rootlesskit运行k3s-实验)
 - [节点标签和污点](#节点标签和污点)
 - [使用安装脚本启动 server 节点](#使用安装脚本启动server节点)
-- [Alpine Linux 安装的额外准备工作](#alpine-linux安装的额外准备工作)
+- [Alpine Linux 安装的额外准备工作](#alpine-linux-安装的额外准备工作)
 - [运行 K3d（Docker 中的 K3s）和 docker-compose](#运行k3d（docker中的k3s）和docker-compose)
-- [在 Raspbian Buster 上启用旧版的 iptables](#在raspbian-buster上启用旧版的iptables)
-- [实验性 SELinux 支持](#实验性selinux支持)
+- [在 Raspbian Buster 上启用旧版的 iptables](#在-raspbian-buster-上启用旧版的-iptables)
+- [为 Raspbian Buster 启用 cgroup](#为-raspbian-buster-启用-cgroup)
+- [SELinux 支持](#selinux-支持)
 
 ## 证书轮换
 
@@ -327,48 +328,61 @@ sudo update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
 sudo reboot
 ```
 
-## 实验性 SELinux 支持
+## 为 Raspbian Buster 启用 cgroup
 
-从 v1.17.4+k3s1 版本开始，对 SELinux 的实验性支持已添加到 K3s 的嵌入式容器中。如果要在默认启用 SELinux 的系统上安装 K3s（例如 CentOS），则必须确保已经安装正确的 SELinux 策略。
+标准的 Raspbian Buster 安装没有启用 `cgroups`。**K3S** 需要`cgroups`来启动 systemd 服务。在`/boot/cmdline.txt`中添加`cgroup_memory=1 cgroup_enable=memory`就可以启用`cgroups`。
+
+### /boot/cmdline.txt 的示例
+
+```
+console=serial0,115200 console=tty1 root=PARTUUID=58b06195-02 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait cgroup_memory=1 cgroup_enable=memory
+```
+
+## SELinux 支持
+
+_从 v1.19.4+k3s1 开始支持。从 v1.17.4+k3s1 开始是试验性的。_
+
+如果您在默认启用 SELinux 的系统（如 CentOS）上安装 K3s，您必须确保安装了正确的 SELinux 策略。
 
 ### 自动安装
 
-从 v1.19.3+k3s2 版本开始，如果不进行离线加装，[安装脚本](/docs/k3s/installation/install-options/_index)将自动从 Rancher RPM 仓库中安装 SELinux RPM。通过设置`INSTALL_K3S_SKIP_SELINUX_RPM=true`可以跳过自动安装。
+_从 v1.19.3+k3s2 开始可用_。
+
+如果在兼容的系统上，如果不执行离线安装，则[安装脚本](/docs/k3s/installation/install-options/_index#使用脚本安装的选项)将从 Rancher RPM 存储库自动安装 SELinux RPM。可以通过设置 `INSTALL_K3S_SKIP_SELINUX_RPM=true` 来跳过自动安装。
 
 ### 手动安装
 
 可以使用以下命令安装必要的策略：
 
 ```
-yum install -y container-selinux selinux-policy-base	yum install -y container-selinux selinux-policy-base
-rpm -i https://rpm.rancher.io/k3s-selinux-0.1.1-rc1.el7.noarch.rpm	yum install -y https://rpm.rancher.io/k3s/latest/common/centos/7/noarch/k3s-selinux-0.2-1.el7_8.noarch.rpm
+yum install -y container-selinux selinux-policy-base
+yum install -y https://rpm.rancher.io/k3s/latest/common/centos/7/noarch/k3s-selinux-0.2-1.el7_8.noarch.rpm
 ```
 
-要强制安装脚本记录一个警告而不是失败，您可以设置以下环境变量：
-`INSTALL_K3S_SELINUX_WARN=true`
+要强制安装脚本记录警告而不是失败，您可以设置以下环境变量： `INSTALL_K3S_SELINUX_WARN=true`。
 
-你可以通过使用`--disable-selinux`标志启动 K3s 来禁用嵌入式 containerd 中的 SELinux。
+### 启用和禁用 SELinux Enforcement
 
-要强制安装脚本记录一个警告而不是失败，您可以设置以下环境变量： `INSTALL_K3S_SELINUX_WARN=true`。`INSTALL_K3S_SELINUX_WARN=true`。
+SELinux enforcement 的启用或禁用方式取决于 K3s 的版本。
 
-启用或禁用 SELinux 的方式取决于 K3s 的版本。在 v1.19.x 之前，内置容器的 SELinux 启用是自动的，但可以通过`--disable-selinux`来禁用。在 v1.19.x 及以后的版本中，启用 SELinux 必须通过`--selinux`标志或配置文件条目进行肯定的配置。同时指定`--selinux`和（已废弃）`--disable-selinux`标志的 server 和 agent 将无法启动。
+#### K3s v1.19.1+k3s1
 
-不支持在 SELinux 下使用自定义的`--data-dir`。要自定义它，你很可能需要编写自己的自定义策略。为了获得指导，你可以参考[container/container-selinux](https://github.com/containers/container-selinux)存储库，它包含了容器运行时的 SELinux 策略文件，以及[rancher/k3s-selinux](https://github.com/rancher/k3s-selinux)存储库，它包含了 K3s 的 SELinux 策略。
+要使用 SELinux，请在启动 K3s server 和 agent 时指定`--selinux`标志。
 
-### K3s v1.19.1+
-
-要利用实验性的 SELinux，请在启动 K3s server 和 agent 时指定`--selinux`标志。
-
-这个选项也可以在 [K3s 配置文件](/docs/k3s/installation/install-options/_index)中指定：
+这个选项也可以在 K3s[配置文件](/docs/k3s/installation/install-options/_index#配置文件)中指定：
 
 ```
 selinux: true
 ```
 
-请不要使用`--disable-selinux`选项，因为它已被废弃，在未来的小版本中，它将被忽略或不被识别，从而导致错误。
+不要使用`--disable-selinux`选项。它已经被废弃，在未来的小版本中，它可能会因为被忽略或不被识别，从而导致错误。
 
-### K3s v1.19.1 或之前的版本
+在 SELinux 下不支持使用自定义的`--data-dir`。要自定义它，你很可能需要编写自己的自定义策略。为了获得指导，你可以参考[container/container-selinux](https://github.com/containers/container-selinux)资源库，它包含了容器运行时的 SELinux 策略文件，以及[rancher/k3s-selinux](https://github.com/rancher/k3s-selinux)资源库，它包含了 K3s 的 SELinux 策略。
 
-你可以通过使用`--disable-selinux`标志启动 K3s 来关闭嵌入式容器中的 SELinux 执行。
+#### V1.19.1+k3s1 之前的 K3s
 
-请注意，对 containerd 中 SELinux 的支持仍在开发中。进展情况可以在[Pull Request 1246](https://github.com/containerd/cri/pull/1246)中跟踪。
+内置 containerd 会自动启用 SELinux。
+
+要关闭嵌入式 containerd 中的 SELinux enforcement，请使用`--disable-selinux`标志启动 K3s。
+
+在 SELinux 下不支持使用自定义的`--data-dir`。要自定义它，你很可能需要编写自己的自定义策略。为了获得指导，你可以参考[container/container-selinux](https://github.com/containers/container-selinux)资源库，它包含了容器运行时的 SELinux 策略文件，以及[rancher/k3s-selinux](https://github.com/rancher/k3s-selinux)资源库，它包含了 K3s 的 SELinux 策略。

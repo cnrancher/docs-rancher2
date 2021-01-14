@@ -99,12 +99,6 @@ kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/master/depl
 
 Longhorn 将被安装在命名空间`longhorn-system`中。
 
-在创建 PVC 之前，我们将用这个 yaml 为 Longhorn 创建一个存储类：
-
-```
-kubectl create -f https://raw.githubusercontent.com/longhorn/longhorn/master/examples/storageclass.yaml
-```
-
 应用 yaml 创建 PVC 和 pod：
 
 ```
