@@ -89,8 +89,8 @@ const metadata = {
         },
         harvester: {
             产品介绍: "为您提供Harvester的产品介绍",
-            认证: "为您提供Harvester认证身份的操作指导",
-            镜像上传: "为您提供在Harvester中上传镜像的操作指导",
+            鉴权与认证: "为您提供Harvester鉴权与认证的操作指导",
+            上传镜像: "为您提供在Harvester中上传镜像的操作指导",
             安装指南: "为您提供安装Harvester的操作指导",
             虚拟机管理: "为您提供在Harvester中管理虚拟机的操作指导",
             视频教程: "为您提供视频操作指导",

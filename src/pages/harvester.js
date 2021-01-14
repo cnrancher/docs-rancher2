@@ -6,7 +6,12 @@ import styles from "./styles.module.css";
 
 const description =
     "Rancher中文文档由Rancher中国研发团队翻译并重新编排，每周更新，与Rancher英文文档保持同步。另一方面，Rancher中文文档也是Kubernetes入门的重要性内容文档，用户可以从中获得K8S相关的有用知识。";
-const keywords = ["Rancher文档", "k8s文档", "容器管理平台", "Kubernetes集群"];
+const keywords = [
+    "超融合平台",
+    "Kubernetes虚拟化管理",
+    "虚拟化",
+    "Kubernetes集群",
+];
 const metaTitle = " Harvester文档 | Rancher";
 function findAndAppendSubGroups(all, metadata, baseUrl, subItems) {
     subItems.forEach((sub) => {

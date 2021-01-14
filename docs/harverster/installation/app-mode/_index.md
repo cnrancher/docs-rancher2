@@ -25,14 +25,7 @@ App 模式用于测试和开发的目的。
 - 已为整群都安装了 multus，并创建了相应的 NetworkAttachmentDefinition CRD。
 - 如果你使用的是[RKE](/docs/rke/_index)集群，请确保 CNI 插件启用了`ipv4.ip_forward`，这样 pod 网络才能正常工作。
 - 硬件需要满足以下要求，才可以启动和运行 Harvester。
-
-| 硬件类型 | 要求                                                    |
-| :------- | :------------------------------------------------------ |
-| CPU      | 至少 4 核，首选 16 核或以上。                           |
-| 内存     | 至少 8 GB，首选 32 GB 或以上 。                         |
-| 磁盘     | 至少 120 GB ，首选 500 GB 或以上 。                     |
-| 网卡     | 至少 1 Gbps Ethernet，建议选择 10Gbps Ethernet 或以上。 |
-| 网关     | VLAN 支持所需的端口中继。                               |
+- Node 节点支持嵌套虚拟化。
 
 ## 以应用程序的形式安装
 
@@ -58,7 +51,7 @@ cat /proc/cpuinfo | grep vmx
 1.  克隆 GitHub 仓库：
 
     ```
-    $ git clone https://github.com/rancher/harvester.git --depth=1`
+    $ git clone https://github.com/rancher/harvester.git --depth=1
     ```
 
 1.  进入 Helm chart。
