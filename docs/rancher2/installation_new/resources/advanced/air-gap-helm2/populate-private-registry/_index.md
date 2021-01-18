@@ -65,7 +65,7 @@ keywords:
 
 1.  获取最新的`cert-manager` Helm chart，并解析模板以获取镜像详细信息：
 
-    > **注意：** 由于`cert-manager`最近的改动，您需要升级`cert-manager`版本。果您要升级 Rancher 并且使用`cert-manager`的版本低于 v0.12.0，请看我们的[升级文档](/docs/rancher2/installation_new/options/upgrading-cert-manager/_index)。
+    > **注意：** 由于`cert-manager`最近的改动，您需要升级`cert-manager`版本。果您要升级 Rancher 并且使用`cert-manager`的版本低于 v0.12.0，请看我们的[升级文档](/docs/rancher2/installation_new/resources/upgrading-cert-manager/_index)。
 
     ```plain
     helm repo add jetstack https://charts.jetstack.io
@@ -230,7 +230,7 @@ Linux 镜像需要从 Linux 主机上收集和推送，但是必须先将 Window
 
 1.  获取最新的`cert-manager` Helm chart，并解析模板以获取镜像详细信息：
 
-    > **注意：** 由于`cert-manager`最近的改动，您需要升级`cert-manager`版本。如果您要升级 Rancher 并且使用`cert-manager`的版本低于 v0.12.0，请看我们的[升级文档](/docs/rancher2/installation_new/options/upgrading-cert-manager/_index)。
+    > **注意：** 由于`cert-manager`最近的改动，您需要升级`cert-manager`版本。如果您要升级 Rancher 并且使用`cert-manager`的版本低于 v0.12.0，请看我们的[升级文档](/docs/rancher2/installation_new/resources/upgrading-cert-manager/_index)。
 
     ```plain
     helm repo add jetstack https://charts.jetstack.io
@@ -286,6 +286,6 @@ Linux 镜像需要从 Linux 主机上收集和推送，但是必须先将 Window
 
 ## 后续操作
 
-[安装 Rancher 高可用](/docs/rancher2/installation_new/options/air-gap-helm2/launch-kubernetes/_index)
+[安装 Rancher 高可用](/docs/rancher2/installation_new/resources/advanced/air-gap-helm2/launch-kubernetes/_index)
 或
-[安装 Rancher 单节点](/docs/rancher2/installation_new/options/air-gap-helm2/install-rancher/_index)
+[安装 Rancher 单节点](/docs/rancher2/installation_new/resources/advanced/air-gap-helm2/install-rancher/_index)

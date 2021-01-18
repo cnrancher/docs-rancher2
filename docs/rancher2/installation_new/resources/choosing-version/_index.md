@@ -18,15 +18,15 @@ keywords:
 
 我们建议在生产环境中使用 Rancher 高可用安装，在开发环境和测试环境中使用单节点安装。
 
-- 高可用安装：使用 **Helm Chart** 将 Rancher 安装在 Kubernetes 集群上。请参阅[Helm 版本要求](/docs/rancher2/installation_new/options/helm-version/_index)，选择安装 Rancher 的 Helm 版本。
+- 高可用安装：使用 **Helm Chart** 将 Rancher 安装在 Kubernetes 集群上。请参阅[Helm 版本要求](/docs/rancher2/installation_new/resources/helm-version/_index)，选择安装 Rancher 的 Helm 版本。
 
 - 单节点安装：对于使用 Docker 安装的单节点 Rancher，一般用于开发和测试，Rancher 将以 **Docker 镜像**的形式安装。
 
 ## Helm Charts
 
-在安装、升级或回滚[Rancher 高可用](/docs/rancher2/installation_new/k8s-install/_index)时，您将使用 **Helm Chart** 在 Kubernetes 集群上对 Rancher 进行操作。因此，在准备安装或升级 Rancher 高可用时，必须添加包含用于安装 Rancher 的 Helm Chart 的 Helm Chart 仓库。
+在安装、升级或回滚[Rancher 高可用](/docs/rancher2/installation_new/install-rancher-on-k8s/_index)时，您将使用 **Helm Chart** 在 Kubernetes 集群上对 Rancher 进行操作。因此，在准备安装或升级 Rancher 高可用时，必须添加包含用于安装 Rancher 的 Helm Chart 的 Helm Chart 仓库。
 
-请参阅[Helm 版本要求](/docs/rancher2/installation_new/options/helm-version/_index)，选择用于安装 Rancher 的 Helm 版本。
+请参阅[Helm 版本要求](/docs/rancher2/installation_new/resources/helm-version/_index)，选择用于安装 Rancher 的 Helm 版本。
 
 ### Helm Chart 仓库
 

@@ -271,7 +271,7 @@ Docker 单节点安装适用于想要对 Rancher 进行`测试`的 Rancher 用�
 | `<RANCHER_VERSION_TAG>`          | 您要安装的[Rancher 版本](/docs/rancher2/installation/options/server-tags/_index)。 |
 
 ```
-docker run -d --restart=unless-stopped \
+docker run -d --privileged --restart=unless-stopped \
     -p 80:80 -p 443:443 \
     -e CATTLE_SYSTEM_DEFAULT_REGISTRY=<REGISTRY.YOURDOMAIN.COM:PORT> \ # 设置默认的系统镜像仓库
     -e CATTLE_SYSTEM_CATALOG=bundled \ # 自v2.3.0可用，使用内嵌的 Rancher system charts
@@ -300,7 +300,7 @@ docker run -d --restart=unless-stopped \
 | `<RANCHER_VERSION_TAG>`          | 您要安装的[Rancher 版本](/docs/rancher2/installation/options/server-tags/_index) |
 
 ```
-docker run -d --restart=unless-stopped \
+docker run -d --privileged --restart=unless-stopped \
     -p 80:80 -p 443:443 \
     -v /<CERT_DIRECTORY>/<FULL_CHAIN.pem>:/etc/rancher/ssl/cert.pem \
     -v /<CERT_DIRECTORY>/<PRIVATE_KEY.pem>:/etc/rancher/ssl/key.pem \
@@ -329,7 +329,7 @@ docker run -d --restart=unless-stopped \
 > **注意：**使用`--no-cacerts`作为容器的参数来禁用 Rancher 生成的默认 CA 证书。
 
 ```
-docker run -d --restart=unless-stopped \
+docker run -d --privileged --restart=unless-stopped \
     -p 80:80 -p 443:443 \
     --no-cacerts \
     -v /<CERT_DIRECTORY>/<FULL_CHAIN.pem>:/etc/rancher/ssl/cert.pem \

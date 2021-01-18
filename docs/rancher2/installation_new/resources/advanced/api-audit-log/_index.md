@@ -24,7 +24,7 @@ keywords:
 
 - [Rancher 单节点](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/_index)
 
-- [Rancher 高可用](/docs/rancher2/installation_new/options/chart-options/_index)
+- [Rancher 高可用](/docs/rancher2/installation_new/resources/chart-options/_index)
 
 ## API 审计日志选项
 

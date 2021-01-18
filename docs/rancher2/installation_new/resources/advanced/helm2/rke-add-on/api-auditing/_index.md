@@ -19,7 +19,7 @@ keywords:
 
 :::important 重要提示
 RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
-请使用 Rancher helm chart 将 Rancher 安装在 Kubernetes 集群上。有关详细信息，请参见[Rancher 高可用安装](/docs/rancher2/installation_new/k8s-install/_index)。
+请使用 Rancher helm chart 将 Rancher 安装在 Kubernetes 集群上。有关详细信息，请参见[Rancher 高可用安装](/docs/rancher2/installation_new/install-rancher-on-k8s/_index)。
 如果您当前正在使用 RKE add-on 安装方法，参见[将 RKE add-on 安装的 Rancher 迁移到 Helm 安装](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/migrating-from-rke-add-on/_index)，获取有关如何使用 Helm chart 的详细信息。
 :::
 
@@ -35,7 +35,7 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
 - 在容器的 `volumeMounts` 指令中声明一个 `mountPath`。
 - 在 `volumes` 指令中声明一个 `path`。
 
-有关每个参数的说明、使用参数的语法以及如何查看 API 审计日志的更多信息，请参阅[Rancher v2.0 文档：API 审计日志](/docs/rancher2/installation_new/options/api-audit-log/_index)。
+有关每个参数的说明、使用参数的语法以及如何查看 API 审计日志的更多信息，请参阅[Rancher v2.0 文档：API 审计日志](/docs/rancher2/installation_new/resources/advanced/api-audit-log/_index)。
 
 ```yaml
 ...

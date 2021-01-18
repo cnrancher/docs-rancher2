@@ -31,11 +31,11 @@ v2.x 的新功能，与 Rancher Server 的所有通信均已加密。以下过�
 
 对于开发环境，可以使用 Docker 将 Rancher 安装在单个节点上。此安装过程将单个 Rancher 容器部署到您的主机。
 
-- [Kubernetes 安装](/docs/rancher2/installation_new/k8s-install/_index)
+- [Kubernetes 安装](/docs/rancher2/installation_new/install-rancher-on-k8s/_index)
 
 对于用户需要不断访问集群的生产环境，我们推荐采用高可用 Kubernetes 集群安装的方式安装 Rancher。此安装过程将设置一个三节点集群，并使用 Helm chart 在每个节点上安装 Rancher。
 
-> **重要区别:** 尽管您可以在每个节点上使用外部数据库和 Docker 命令以高可用 Kubernetes 配置来安装 Rancher v1.6，但 Kubernetes 安装中的 Rancher v2.x 需要现有的 Kubernetes 集群。查阅[Kubernetes 安装](/docs/rancher2/installation_new/k8s-install/_index) 以满足所有要求。
+> **重要区别:** 尽管您可以在每个节点上使用外部数据库和 Docker 命令以高可用 Kubernetes 配置来安装 Rancher v1.6，但 Kubernetes 安装中的 Rancher v2.x 需要现有的 Kubernetes 集群。查阅[Kubernetes 安装](/docs/rancher2/installation_new/install-rancher-on-k8s/_index) 以满足所有要求。
 
 ## 配置身份验证
 

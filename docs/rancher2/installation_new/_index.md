@@ -30,11 +30,11 @@ Rancher 的部署可以有三种架构：
 
 关于在私有环境中或 HTTP 代理后面安装 Rancher，我们有单独的说明文档：
 
-| 网络访问水平        | 基于 Kubernetes 安装（推荐）                                                                                                                     | 基于 Docker 安装                                                                                                                                                                                                 |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 可直接访问 Internet | [文档](/docs/rancher2/installation_new/k8s-install/_index)                                                                                       | [文档](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/_index)                                                                                                                     |
-| 依托 HTTP 代理      | 基于[此文档](/docs/rancher2/installation_new/k8s-install/_index)，并附加[相关配置](/docs/rancher2/installation_new/options/chart-options/_index) | 基于[此文档](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/_index)，并附加[相关配置](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/proxy/_index) |
-| 私有网络环境        | [文档](/docs/rancher2/installation_new/other-installation-methods/air-gap/_index)                                                                | [文档](/docs/rancher2/installation_new/other-installation-methods/air-gap/_index)                                                                                                                                |
+| 网络访问水平        | 基于 Kubernetes 安装（推荐）                                                                                                                                  | 基于 Docker 安装                                                                                                                                                                                                 |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 可直接访问 Internet | [文档](/docs/rancher2/installation_new/install-rancher-on-k8s/_index)                                                                                         | [文档](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/_index)                                                                                                                     |
+| 依托 HTTP 代理      | 基于[此文档](/docs/rancher2/installation_new/install-rancher-on-k8s/_index)，并附加[相关配置](/docs/rancher2/installation_new/resources/chart-options/_index) | 基于[此文档](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/_index)，并附加[相关配置](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/proxy/_index) |
+| 私有网络环境        | [文档](/docs/rancher2/installation_new/other-installation-methods/air-gap/_index)                                                                             | [文档](/docs/rancher2/installation_new/other-installation-methods/air-gap/_index)                                                                                                                                |
 
 我们建议在 Kubernetes 集群上安装 Rancher，因为在多节点集群中，Rancher Server 可以实现高可用。这种高可用配置可以提升访问下游集群的稳定性。
 
@@ -42,7 +42,7 @@ Rancher 的部署可以有三种架构：
 
 为了测试或演示目的，您可以在单个节点上通过 Docker 安装 Rancher，这个过程非常简洁，基本上可以实现开箱即用。
 
-我们的[在 Kubernetes 上安装 Rancher 的说明](/docs/rancher2/installation_new/k8s-install/_index)描述了如何使用 K3s 或 RKE 创建和管理 Kubernetes 集群，然后在这个集群上安装 Rancher。
+我们的[在 Kubernetes 上安装 Rancher 的说明](/docs/rancher2/installation_new/install-rancher-on-k8s/_index)描述了如何使用 K3s 或 RKE 创建和管理 Kubernetes 集群，然后在这个集群上安装 Rancher。
 
 当 Kubernetes 集群中的节点正在运行并满足[节点要求](/docs/rancher2/installation_new/requirements/_index)时，您可以使用 Helm 将 Rancher 部署到 Kubernetes 上。Helm 使用 Rancher 的 Helm Chart 在 Kubernetes 集群的每个节点上安装 Rancher 的副本。我们建议使用负载均衡器将流量定向到集群中每个 Rancher 副本。
 
@@ -60,11 +60,11 @@ Rancher 的部署可以有三种架构：
 
 ## 在 Kubernetes 上安装 Rancher 的更多选项
 
-关于在 Kubernetes 上安装 Rancher 的详细配置，请参考[Helm Chart 选项](/docs/rancher2/installation_new/options/chart-options/_index)：
+关于在 Kubernetes 上安装 Rancher 的详细配置，请参考[Helm Chart 选项](/docs/rancher2/installation_new/resources/chart-options/_index)：
 
-- [开启 API 审计日志](/docs/rancher2/installation_new/options/chart-options/_index)
-- [在负载均衡器上做 TLS termination](/docs/rancher2/installation_new/options/chart-options/_index)
-- [自定义 Ingress](/docs/rancher2/installation_new/options/chart-options/_index)
+- [开启 API 审计日志](/docs/rancher2/installation_new/resources/chart-options/_index)
+- [在负载均衡器上做 TLS termination](/docs/rancher2/installation_new/resources/chart-options/_index)
+- [自定义 Ingress](/docs/rancher2/installation_new/resources/chart-options/_index)
 
 在 Rancher 安装指南中，推荐使用 K3s 或 RKE 配置 Kubernetes 集群，并在这个集群中部署 Rancher。K3s 和 RKE 都有许多配置选项可用于自定义 Kubernetes 以适合您的特定环境。有关选项和功能的完整列表，请参见文档：
 
@@ -76,5 +76,5 @@ Rancher 的部署可以有三种架构：
 有关其详细配置，请参考 [Docker 单节点安装](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/_index)：
 
 - [开启 API 审计](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/_index)
-- [外部负载均衡](/docs/rancher2/installation_new/options/single-node-install-external-lb/_index)
+- [外部负载均衡](/docs/rancher2/installation_new/resources/advanced/single-node-install-external-lb/_index)
 - [持久化存储](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/_index)

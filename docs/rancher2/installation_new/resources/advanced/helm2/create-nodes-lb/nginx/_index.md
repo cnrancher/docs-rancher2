@@ -34,7 +34,7 @@ keywords:
 
 1.  打开一个文本编辑器（如 Notepad++），复制下面的代码模板，粘贴到文本编辑器中，将其另存为`nginx.conf`。
 
-2.  在`nginx.conf`中, 使用[节点](/docs/rancher2/installation_new/options/helm2/create-nodes-lb/_index)IP 地址 替换(端口 80 和 端口 443)的`<IP_NODE_1>`, `<IP_NODE_2>`, 和`<IP_NODE_3>`。
+2.  在`nginx.conf`中, 使用[节点](/docs/rancher2/installation_new/resources/advanced/helm2/create-nodes-lb/_index)IP 地址 替换(端口 80 和 端口 443)的`<IP_NODE_1>`, `<IP_NODE_2>`, 和`<IP_NODE_3>`。
 
     > **注意事项:** 可配置项请参考[NGINX 文档: TCP and UDP Load Balancing](https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/)。
 
@@ -90,7 +90,7 @@ keywords:
 完成 IP 地址替换后，将文件另存为`/etc/nginx.conf`，运行以下命令即可启动 NGINX 容器。使用 NGINX v1.15 时，请将最后一行的“1.14”替换为“1.15”。
 
 ```
-docker run -d --restart=unless-stopped \
+docker run -d --privileged --restart=unless-stopped \
   -p 80:80 -p 443:443 \
   -v /etc/nginx.conf:/etc/nginx/nginx.conf \
   nginx:1.14

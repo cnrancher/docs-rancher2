@@ -137,7 +137,8 @@ const metadata = {
             "rancher2/quick-start-guide/workload/_index": "部署工作负载",
             //新版安装指南
             "rancher2/installation_new/requirements/_index": "安装要求",
-            "rancher2/installation_new/k8s-install/_index": "高可用安装",
+            "rancher2/installation_new/install-rancher-on-k8s/_index":
+                "高可用安装",
             "rancher2/installation_new/other-installation-methods/air-gap/prepare-nodes/_index":
                 "离线安装",
             "rancher2/installation_new/other-installation-methods/single-node-docker/_index":

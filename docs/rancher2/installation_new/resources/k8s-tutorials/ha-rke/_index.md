@@ -219,7 +219,7 @@ ingress:
 >
 > 请参阅[RKE 文档](/docs/rke/config-options/_index)来了解 RKE 的选项和功能的完整列表。
 >
-> 要为大规模 Rancher 安装 etcd 集群，请参阅[etcd 设置指南](/docs/rancher2/installation_new/options/etcd/_index)。
+> 要为大规模 Rancher 安装 etcd 集群，请参阅[etcd 设置指南](/docs/rancher2/installation_new/resources/advanced/etcd/_index)。
 
 ### 3、运行 RKE
 
@@ -301,6 +301,6 @@ kube-system     rke-network-plugin-deploy-job-6pbgj       0/1       Completed   
 
 ### 遇到问题或错误？
 
-请参阅[故障排查](/docs/rancher2/installation_new/options/troubleshooting/_index)页面。
+请参阅[故障排查](/docs/rancher2/installation_new/other-installation-methods/troubleshooting/_index)页面。
 
-## [下一步：安装 Rancher](/docs/rancher2/installation_new/k8s-install/helm-rancher/_index)
+## [下一步：安装 Rancher](/docs/rancher2/installation_new/resources/advanced/helm2/helm-rancher/_index)

@@ -21,7 +21,7 @@ keywords:
 
 > **如何配置单节点安装的外部负载均衡？**
 >
-> 请参阅[使用外部负载均器的单节点安装](/docs/rancher2/installation_new/options/single-node-install-external-lb/_index)。
+> 请参阅[使用外部负载均器的单节点安装](/docs/rancher2/installation_new/resources/advanced/single-node-install-external-lb/_index)。
 
 ## 操作系统、Docker、硬件和网络的要求
 
@@ -57,7 +57,7 @@ keywords:
 登录到 Linux 主机，然后运行下面这个非常简洁的安装命令。
 
 ```bash
-docker run -d --restart=unless-stopped \
+docker run -d --privileged --restart=unless-stopped \
 	-p 80:80 -p 443:443 \
 	rancher/rancher:latest
 ```
@@ -69,7 +69,7 @@ docker run -d --restart=unless-stopped \
 与 2.4.x 或之前的版本相比，使用`docker run`命令安装 Rancher 2.5.x 时，需要添加`--privileged`标志变量，启用特权模式安装 Rancher。
 
 ```bash
-docker run -d --restart=unless-stopped \
+docker run -d --privileged --restart=unless-stopped \
   -p 80:80 -p 443:443 \
   --privileged \
   rancher/rancher:latest
@@ -99,7 +99,7 @@ docker run -d --restart=unless-stopped \
 :::
 
 ```bash
-docker run -d --restart=unless-stopped \
+docker run -d --privileged --restart=unless-stopped \
 	-p 80:80 -p 443:443 \
 	-v /<CERT_DIRECTORY>/<FULL_CHAIN.pem>:/etc/rancher/ssl/cert.pem \
 	-v /<CERT_DIRECTORY>/<PRIVATE_KEY.pem>:/etc/rancher/ssl/key.pem \
@@ -132,7 +132,7 @@ docker run -d --restart=unless-stopped \
 :::
 
 ```bash
-docker run -d --restart=unless-stopped \
+docker run -d --privileged --restart=unless-stopped \
 	-p 80:80 -p 443:443 \
 	-v /<CERT_DIRECTORY>/<FULL_CHAIN.pem>:/etc/rancher/ssl/cert.pem \
 	-v /<CERT_DIRECTORY>/<PRIVATE_KEY.pem>:/etc/rancher/ssl/key.pem \
@@ -163,7 +163,7 @@ docker run -d --restart=unless-stopped \
 :::
 
 ```
-docker run -d --restart=unless-stopped \
+docker run -d --privileged --restart=unless-stopped \
 	-p 80:80 -p 443:443 \
 	rancher/rancher:latest \
 	--acme-domain <YOUR.DNS.NAME>

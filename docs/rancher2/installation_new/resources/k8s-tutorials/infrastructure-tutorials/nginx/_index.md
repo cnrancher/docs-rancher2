@@ -34,7 +34,7 @@ keywords:
 
 1. 将下面的配置示例复制并粘贴到您喜欢的文本编辑器中，保存为`nginx.conf`。
 
-2. 在 nginx.conf 配置中，用之前准备的[节点](/docs/rancher2/installation_new/k8s-install/create-nodes-lb/_index)的 IP 替换 `<IP_NODE_1>`，`<IP_NODE_2>`和`<IP_NODE_3>`。
+2. 在 nginx.conf 配置中，用之前准备的[节点](/docs/rancher2/installation_new/resources/advanced/helm2/create-nodes-lb/_index)的 IP 替换 `<IP_NODE_1>`，`<IP_NODE_2>`和`<IP_NODE_3>`。
 
    > **注意:** 有关所有配置选项，请参见[NGINX 文档：TCP 和 UDP 负载均衡。](https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/)
 
@@ -87,7 +87,7 @@ keywords:
 除了可以将 NGINX 作为软件包安装在操作系统上外，您也可以将其作为 Docker 容器运行。将已编辑的**示例 NGINX 配置**另存为`/etc/nginx.conf`并运行以下命令启动 NGINX 容器：
 
 ```bash
-docker run -d --restart=unless-stopped \
+docker run -d --privileged --restart=unless-stopped \
   -p 80:80 -p 443:443 \
   -v /etc/nginx.conf:/etc/nginx/nginx.conf \
   nginx:1.14
