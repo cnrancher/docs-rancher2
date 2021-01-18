@@ -76,7 +76,7 @@ Rancher 对上述特定版本的数据库进行过测试和验证，如果您使
 
 - 有关如何配置 F5 作为 Rancher 前端 7 层负载均衡器的示例，请参考[本页](/docs/rancher2/installation_new/resources/F5-7-layer-loadbalancer/_index)。
 
-- 有关如何为 F5 启动 WAF 功能的示例，请参考[本页](/rancher2/installation_new/resources/F5-WAF/_index)。
+- 有关如何为 F5 启动 WAF 功能的示例，请参考[本页](docs/rancher2/installation_new/resources/F5-WAF/_index)。
 
 :::important 重要提示
 安装后，请勿使用 `local` 集群的 Ingress 对 Rancher 以外的应用进行负载均衡。与其他应用共享此 Ingress 可能会在其他应用的 Ingress 配置重新加载后，导致 Rancher 出现 websocket 错误。我们强烈建议将 `local` 集群专用于 Rancher，而不应在 `local` 集群内部署任何其他应用。
@@ -144,7 +144,7 @@ etcd 数据库需要奇数个节点，因此它始终可以选举出被大多数
 
 - 有关如何配置 F5 作为 Rancher 前端 7 层负载均衡器的示例，请参考[本页](/docs/rancher2/installation_new/resources/F5-7-layer-loadbalancer/_index)。
 
-- 有关如何为 F5 启动 WAF 功能的示例，请参考[本页](/rancher2/installation_new/resources/F5-WAF/_index)。
+- 有关如何为 F5 启动 WAF 功能的示例，请参考[本页](docs/rancher2/installation_new/resources/F5-WAF/_index)。
 
 :::important 重要提示
 安装后，请勿使用 `local` 集群的 Ingress 对 Rancher 以外的应用进行负载均衡。与其他应用共享此 Ingress 可能会在其他应用的 Ingress 配置重新加载后，导致 Rancher 出现 websocket 错误。我们强烈建议将 `local` 集群专用于 Rancher，而不应在 `local` 集群内部署任何其他应用。
