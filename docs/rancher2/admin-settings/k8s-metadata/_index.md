@@ -113,6 +113,6 @@ To sync Rancher with a local mirror of the RKE metadata, an administrator would 
 1. 要下载私有镜像仓库所需的镜像，请单击 Rancher UI 左下角的 Rancher Server 版本。
 1. 下载 Linux 或 Windows 操作系统的特定镜像列表。
 1. 下载`rancher-images.txt`。
-1. 使用与[离线安装](/docs/rancher2/installation/other-installation-methods/air-gap/populate-private-registry/_index)过程中相同的步骤准备私有镜像仓库，但不要使用发布公告页面中的`rancher-images.txt`，而是使用从前面步骤获得的镜像列表。
+1. 使用与[离线安装](/docs/rancher2/installation_new/other-installation-methods/air-gap/populate-private-registry/_index)过程中相同的步骤准备私有镜像仓库，但不要使用发布公告页面中的`rancher-images.txt`，而是使用从前面步骤获得的镜像列表。
 
 **结果：** Rancher 的离线安装现在可以同步 Kubernetes 元数据了。如果在新版本的 Kubernetes 发布后，更新了本地的 RKE 元数据 Git 库，并且在私有镜像仓库中同步了新的镜像，那么您可以在无需升级 Rancher Server 版本的情况下使用新版本的 Kubernetes 配置集群。

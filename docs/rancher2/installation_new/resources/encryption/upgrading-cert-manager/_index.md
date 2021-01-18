@@ -40,7 +40,7 @@ Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和更新 TLS
 
 这些说明中使用的命名空间取决于当前安装了 cert-manager 的命名空间。如果它在 kube-system 中，请在以下说明中使用。您可以通过运行`kubectl get pods --all-namespaces`来验证，并检查 cert-manager-\* pods 列在哪个命名空间中。请勿更改正在运行 cert-manager 的命名空间，否则可能会导致问题。
 
-> 这些说明已针对 Helm 3 进行了更新。如果您仍在使用 Helm 2，请参阅[以下说明](/docs/rancher2/installation/options/upgrading-cert-manager/helm-2-instructions/_index)。
+> 这些说明已针对 Helm 3 进行了更新。如果您仍在使用 Helm 2，请参阅[以下说明](/docs/rancher2/installation_new/options/upgrading-cert-manager/helm-2-instructions/_index)。
 
 要升级 cert-manager，请遵循以下说明：
 
@@ -116,7 +116,7 @@ Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和更新 TLS
 
 在执行升级之前，您必须通过将必要的容器镜像添加到私有镜像仓库中并下载或渲染所需的 Kubernetes manifest 文件来准备离线环境。
 
-1. 按照指南[准备私有镜像仓库](/docs/rancher2/installation/other-installation-methods/air-gap/populate-private-registry/_index)准备升级所需的镜像。
+1. 按照指南[准备私有镜像仓库](/docs/rancher2/installation_new/other-installation-methods/air-gap/populate-private-registry/_index)准备升级所需的镜像。
 
 1. 从连接到 Internet 的系统中，将 cert-manager 仓库添加到 Helm
 

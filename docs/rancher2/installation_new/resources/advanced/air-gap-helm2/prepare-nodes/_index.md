@@ -29,7 +29,7 @@ keywords:
 
 #### 操作系统、Docker、硬件和网络
 
-确保您的节点满足[安装要求](/docs/rancher2/installation/requirements/_index)。
+确保您的节点满足[安装要求](/docs/rancher2/installation_new/requirements/_index)。
 
 #### 私有仓库
 
@@ -43,13 +43,13 @@ Kubernetes 安装需要以下 CLI 工具。确保这些工具已安装在您的�
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl) - Kubernetes 命令行工具。
 - [rke](/docs/rke/installation/_index) - Rancher Kubernetes 引擎，用于构建 Kubernetes 集群的 cli。
-- [helm](https://docs.helm.sh/using_helm/#installing-helm) - Kubernetes 的软件包管理。请参阅[Helm 版本要求](/docs/rancher2/installation/options/helm-version/_index)以选择 Helm 的版本来安装 Rancher。
+- [helm](https://docs.helm.sh/using_helm/#installing-helm) - Kubernetes 的软件包管理。请参阅[Helm 版本要求](/docs/rancher2/installation_new/options/helm-version/_index)以选择 Helm 的版本来安装 Rancher。
 
 ### Docker 安装
 
 #### 操作系统、Docker、硬件和网络
 
-确保您的节点满足[安装要求](/docs/rancher2/installation/requirements/_index)。
+确保您的节点满足[安装要求](/docs/rancher2/installation_new/requirements/_index)。
 
 #### 私有仓库
 
@@ -78,7 +78,7 @@ Rancher 建议在 Kubernetes 集群上安装 Rancher。一个高可用的 Kubern
 
 这些主机将与 Internet 断开连接，但需要能够与您的私有仓库连接。
 
-在[需求](/docs/rancher2/installation/requirements/_index)中查看每个集群节点的硬件和软件需求。
+在[需求](/docs/rancher2/installation_new/requirements/_index)中查看每个集群节点的硬件和软件需求。
 
 #### B. 设置您的负载均衡器
 
@@ -91,13 +91,13 @@ Rancher 建议在 Kubernetes 集群上安装 Rancher。一个高可用的 Kubern
 
 **负载均衡器配置示例：**
 
-- 有关如何设置 NGINX 负载均衡器的示例，请参考[本页](/docs/rancher2/installation/options/nginx/_index)。
+- 有关如何设置 NGINX 负载均衡器的示例，请参考[本页](/docs/rancher2/installation_new/options/nginx/_index)。
 
-- 有关如何设置 Amazon ELB Network Load Balancer 的示例，请参考[本页](/docs/rancher2/installation/options/nlb/_index)。
+- 有关如何设置 Amazon ELB Network Load Balancer 的示例，请参考[本页](/docs/rancher2/installation_new/options/nlb/_index)。
 
-- 有关如何配置 F5 作为 Rancher 前端 7 层负载均衡器的示例，请参考[本页](/docs/rancher2/installation/options/F5-7-layer-loadbalancer/_index)。
+- 有关如何配置 F5 作为 Rancher 前端 7 层负载均衡器的示例，请参考[本页](/docs/rancher2/installation_new/options/F5-7-layer-loadbalancer/_index)。
 
-- 有关如何为 F5 启动 WAF 功能的示例，请参考[本页](/docs/rancher2/installation/options/F5-WAF/_index)。
+- 有关如何为 F5 启动 WAF 功能的示例，请参考[本页](/docs/rancher2/installation_new/options/F5-WAF/_index)。
 
 ### Docker 安装
 
@@ -111,8 +111,8 @@ Docker 安装适用于想要测试 Rancher 的 Rancher 用户。您可以使用`
 
 这些主机将与 Internet 断开连接，但需要能够与您的私有仓库连接。
 
-在[需求](/docs/rancher2/installation/requirements/_index)中查看每个集群节点的硬件和软件需求。
+在[需求](/docs/rancher2/installation_new/requirements/_index)中查看每个集群节点的硬件和软件需求。
 
 ## 后续步骤
 
-[同步镜像到私有镜像仓库](/docs/rancher2/installation/options/air-gap-helm2/populate-private-registry/_index)
+[同步镜像到私有镜像仓库](/docs/rancher2/installation_new/options/air-gap-helm2/populate-private-registry/_index)

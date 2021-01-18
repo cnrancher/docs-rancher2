@@ -18,7 +18,7 @@ keywords:
   - 安装 Kubernetes
 ---
 
-本文讲述了使用 RKE 安装具有高可用 etcd 配置的 Kubernetes 的操作步骤。请检查您的网络环境是否可以直接访问互联网，如果您使用的局域网或离线环境，请参考[离线环境安装](/docs/rancher2/installation/other-installation-methods/air-gap/_index)。
+本文讲述了使用 RKE 安装具有高可用 etcd 配置的 Kubernetes 的操作步骤。请检查您的网络环境是否可以直接访问互联网，如果您使用的局域网或离线环境，请参考[离线环境安装](/docs/rancher2/installation_new/other-installation-methods/air-gap/_index)。
 
 ## 创建 `rancher-cluster.yml` 文件
 
@@ -60,7 +60,7 @@ services:
 
 ### RKE 节点高级配置
 
-RKE 有许多配置选项可用于自定义安装以适合您的特定环境。选项和功能的完整列表，请参考[RKE 文档](/docs/rke/config-options/_index)。为大型 Rancher 安装而调整 etcd 集群的信息，请参考[etcd 配置文档](/docs/rancher2/installation/options/etcd/_index)。
+RKE 有许多配置选项可用于自定义安装以适合您的特定环境。选项和功能的完整列表，请参考[RKE 文档](/docs/rke/config-options/_index)。为大型 Rancher 安装而调整 etcd 集群的信息，请参考[etcd 配置文档](/docs/rancher2/installation_new/options/etcd/_index)。
 
 ## 运行 RKE
 
@@ -137,8 +137,8 @@ kube-system     rke-network-plugin-deploy-job-6pbgj       0/1       Completed   
 
 ## 遇到的问题或错误?
 
-如果您在安装 Kubernetes 的过程中遇到问题，请参考[问题排查](/docs/rancher2/installation/options/helm2/kubernetes-rke/troubleshooting/_index)。
+如果您在安装 Kubernetes 的过程中遇到问题，请参考[问题排查](/docs/rancher2/installation_new/options/helm2/kubernetes-rke/troubleshooting/_index)。
 
 ## 后续操作
 
-[下一步: 初始化 Helm (安装 tiller)](/docs/rancher2/installation/options/helm2/helm-init/_index)
+[下一步: 初始化 Helm (安装 tiller)](/docs/rancher2/installation_new/options/helm2/helm-init/_index)

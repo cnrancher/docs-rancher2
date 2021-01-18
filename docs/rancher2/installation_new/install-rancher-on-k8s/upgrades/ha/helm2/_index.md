@@ -33,13 +33,13 @@ keywords:
 
 > **注意：**
 >
-> - [Let's Encrypt 于 2019 年 11 月 1 日开始屏蔽早于 0.8.0 版本的 cert-manager 实例。](https://community.letsencrypt.org/t/blocking-old-cert-manager-versions/98753) 按照[这些说明](/docs/rancher2/installation/options/upgrading-cert-manager/_index)升级 cert-manager 到最新版本。
-> - 如果要将 Rancher 从 v2.x 升级到 v2.3+，并且正在使用外部 TLS 终止，则需要编辑 cluster.yml 文件，来[配置 Ingress 使用 use-forwarded-headers](/docs/rancher2/installation/options/chart-options/_index)。
+> - [Let's Encrypt 于 2019 年 11 月 1 日开始屏蔽早于 0.8.0 版本的 cert-manager 实例。](https://community.letsencrypt.org/t/blocking-old-cert-manager-versions/98753) 按照[这些说明](/docs/rancher2/installation_new/options/upgrading-cert-manager/_index)升级 cert-manager 到最新版本。
+> - 如果要将 Rancher 从 v2.x 升级到 v2.3+，并且正在使用外部 TLS 终止，则需要编辑 cluster.yml 文件，来[配置 Ingress 使用 use-forwarded-headers](/docs/rancher2/installation_new/options/chart-options/_index)。
 
 ## 先决条件
 
 - 从 Rancher 文档中的 **[已知升级问题](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/_index#已知的升级问题) 和 [警告](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/_index#警告)** 查看升级 Rancher 中最值得注意的问题。可以在[GitHub](https://github.com/rancher/rancher/releases) 和 [Rancher 论坛](https://forums.rancher.com/c/announcements/12)的发行说明中找到每个 Rancher 版本的已知问题的更完整列表。
-- **[仅对于离线安装](/docs/rancher2/installation/other-installation-methods/air-gap/_index)，拉取并上传新的 Rancher Server 版本的镜像**。请按照指南[准备私有仓库](/docs/rancher2/installation/other-installation-methods/air-gap/populate-private-registry/_index)，来准备您要升级的版本的镜像。
+- **[仅对于离线安装](/docs/rancher2/installation_new/other-installation-methods/air-gap/_index)，拉取并上传新的 Rancher Server 版本的镜像**。请按照指南[准备私有仓库](/docs/rancher2/installation_new/other-installation-methods/air-gap/populate-private-registry/_index)，来准备您要升级的版本的镜像。
 
 ## 升级大纲
 
@@ -65,7 +65,7 @@ keywords:
 
 1. 获取用于安装 Rancher 的仓库名称。
 
-   请替换命令中的`<CHART_REPO>`，替换为`latest`，`stable`或`alpha`。有关仓库及其差异的信息，请参见[Helm Chart 仓库](/docs/rancher2/installation/options/server-tags/_index)。
+   请替换命令中的`<CHART_REPO>`，替换为`latest`，`stable`或`alpha`。有关仓库及其差异的信息，请参见[Helm Chart 仓库](/docs/rancher2/installation_new/options/server-tags/_index)。
 
    - `latest`: 推荐在尝试新功能时使用。
    - `stable`: 推荐生产环境中使用。（推荐）
@@ -81,7 +81,7 @@ keywords:
    rancher-<CHART_REPO>	https://releases.rancher.com/server-charts/<CHART_REPO>
    ```
 
-   > **注意：** 如果要切换到其他 Helm chart 仓库，请按照[切换仓库文档](/docs/rancher2/installation/options/server-tags/_index)进行切换。如果要切换仓库，请确保在继续执行第 3 步之前再次列出仓库，以确保添加了正确的仓库。
+   > **注意：** 如果要切换到其他 Helm chart 仓库，请按照[切换仓库文档](/docs/rancher2/installation_new/options/server-tags/_index)进行切换。如果要切换仓库，请确保在继续执行第 3 步之前再次列出仓库，以确保添加了正确的仓库。
 
 1. 从 Helm chart 仓库中获取最新的 chart 以安装 Rancher。
 
@@ -133,7 +133,7 @@ helm upgrade --install rancher rancher-<CHART_REPO>/rancher \
    helm delete rancher -n cattle-system
    ```
 
-1. 参考[升级 Cert-Manager](/docs/rancher2/installation/options/upgrading-cert-manager/_index)，卸载并且重新安装`cert-manager`。
+1. 参考[升级 Cert-Manager](/docs/rancher2/installation_new/options/upgrading-cert-manager/_index)，卸载并且重新安装`cert-manager`。
 
 1. 使用所有的选项将 Rancher 重新安装到最新版本。获取步骤 1 中的所有值，然后使用`--set key=value`。将它们附加到命令中。
 

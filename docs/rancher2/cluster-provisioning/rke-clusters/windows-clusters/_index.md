@@ -71,7 +71,7 @@ _从 v2.3.0 开始支持_
 
 ### 网络要求
 
-在配置新集群之前，请确保已经安装了 Rancher。并且确保节点可以与 Rancher 通信。如果尚未安装 Rancher，请参考[安装文档](/docs/rancher2/installation/_index)进行安装。
+在配置新集群之前，请确保已经安装了 Rancher。并且确保节点可以与 Rancher 通信。如果尚未安装 Rancher，请参考[安装文档](/docs/rancher2/installation_new/_index)进行安装。
 
 Rancher 仅支持在 Windows 集群中使用 Flannel 作为网络插件。
 

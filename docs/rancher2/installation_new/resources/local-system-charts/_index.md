@@ -24,7 +24,7 @@ keywords:
 
 在 Rancher v2.3.0 中，`system-charts`的本地副本已打包到`rancher/rancher`容器中。为了能够在离线安装中使用这些功能，您将需要运行带有额外环境变量`CATTLE_SYSTEM_CATALOG=bundled`的 Rancher 安装命令，该变量将告诉 Rancher 使用图表的本地副本，而不是尝试从 GitHub 上获取它们。
 
-[离线安装指南](/docs/rancher2/installation/other-installation-methods/air-gap/install-rancher/_index)中包含用于带有捆绑的`system-charts`的 Rancher 安装的示例命令。
+[离线安装指南](/docs/rancher2/installation_new/other-installation-methods/air-gap/install-rancher/_index)中包含用于带有捆绑的`system-charts`的 Rancher 安装的示例命令。
 
 > **注意：** 当需要从内置 `system-charts` 切换到外部 `system-charts` 时，需要更新 rancher server 容器，添加环境变量：`CATTLE_SYSTEM_CATALOG=external`。
 

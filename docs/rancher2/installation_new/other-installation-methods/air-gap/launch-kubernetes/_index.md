@@ -174,7 +174,7 @@ kubectl --kubeconfig ~/.kube/config/k3s.yaml get pods --all-namespaces
 
 该文件是 RKE 配置文件，其中包括了您将要部署的集群的配置。
 
-使用您创建的[3 个节点](/docs/rancher2/installation/other-installation-methods/air-gap/prepare-nodes/_index)的 IP 地址或 DNS 名称，替换下面的代码示例中的值。
+使用您创建的[3 个节点](/docs/rancher2/installation_new/other-installation-methods/air-gap/prepare-nodes/_index)的 IP 地址或 DNS 名称，替换下面的代码示例中的值。
 
 > **提示：**有关可用选项的更多详细信息，请参见 RKE [配置选项](/docs/rke/config-options/_index)。
 
@@ -238,8 +238,8 @@ rke up --config ./rancher-cluster.yml
 
 ## 问题排查
 
-请查看[问题排查](/docs/rancher2/installation/options/troubleshooting/_index)页面，获取常见问题和解决方法。
+请查看[问题排查](/docs/rancher2/installation_new/options/troubleshooting/_index)页面，获取常见问题和解决方法。
 
 ## 后续操作
 
-[安装 Rancher](/docs/rancher2/installation/other-installation-methods/air-gap/install-rancher/_index)
+[安装 Rancher](/docs/rancher2/installation_new/other-installation-methods/air-gap/install-rancher/_index)
