@@ -17,7 +17,7 @@ keywords:
   - 单节点安装的高级选项
 ---
 
-安装 Rancher 时，您可以启用以下几个[高级选项](/docs/rancher2/installation_new/advanced/_index)：
+安装 Rancher 时，您可以启用以下几个[高级选项](/docs/rancher2/installation_new/resources/advanced/_index)：
 
 - [自定义 CA 证书](#自定义-ca-证书)
 - [API 审计日志](#api-审计日志)
