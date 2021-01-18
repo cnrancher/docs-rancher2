@@ -332,7 +332,7 @@ module.exports = {
                     "rancher2/installation_new/resources/troubleshooting/_index",
                     "rancher2/installation_new/resources/local-system-charts/_index",
                     "rancher2/installation_new/resources/F5-7-layer-loadbalancer/_index",
-                    "rancher2/installation_new/resources/advanced/F5-WAF/_index",
+                    "rancher2/installation_new/resources/F5-WAF/_index",
                 ],
             },
         ],
