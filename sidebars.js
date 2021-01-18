@@ -84,7 +84,7 @@ module.exports = {
             },
             {
                 type: "category",
-                label: "安装 Rancher",
+                label: "高可用安装",
                 items: [
                     "rancher2/installation_new/install-rancher-on-k8s/_index",
                     "rancher2/installation_new/install-rancher-on-k8s/chart-options/_index",
@@ -114,7 +114,6 @@ module.exports = {
                 items: [
                     "rancher2/installation_new/install-rancher-on-linux/_index",
                     "rancher2/installation_new/install-rancher-on-linux/rancherd-configuration/_index",
-                    "rancher2/installation_new/install-rancher-on-linux/upgrades/_index",
                     "rancher2/installation_new/install-rancher-on-linux/upgrades/_index",
                 ],
             },
@@ -284,6 +283,7 @@ module.exports = {
                                 ],
                             },
                             "rancher2/installation_new/resources/advanced/firewall/_index",
+                            "rancher2/installation_new/resources/advanced/self-signed-ssl/_index",
                             {
                                 type: "category",
                                 label: "使用Helm2离线安装",
@@ -331,286 +331,11 @@ module.exports = {
                     },
                     "rancher2/installation_new/resources/troubleshooting/_index",
                     "rancher2/installation_new/resources/local-system-charts/_index",
-                ],
-            },
-            /* 升级和回归 拆分了，删除这部分
-            {
-                type: "category",
-                label: "升级回滚指南",
-                items: [
-                    "rancher2/installation_new/upgrades-rollbacks/_index",
-                    {
-                        type: "category",
-                        label: "升级指南",
-                        items: [
-                            "rancher2/installation_new/upgrades-rollbacks/upgrades/_index",
-                            {
-                                type: "category",
-                                label: "高可用升级",
-                                items: [
-                                    "rancher2/installation_new/upgrades-rollbacks/upgrades/ha/_index",
-                                    "rancher2/installation_new/upgrades-rollbacks/upgrades/ha/helm2/_index",
-                                ],
-                            },
-                            "rancher2/installation_new/upgrades-rollbacks/upgrades/migrating-from-rke-add-on/_index",
-                            "rancher2/installation_new/upgrades-rollbacks/upgrades/namespace-migration/_index",
-                            "rancher2/installation_new/upgrades-rollbacks/upgrades/single-node/_index",
-                        ],
-                    },
-                    {
-                        type: "category",
-                        label: "回滚指南",
-                        items: [
-                            "rancher2/installation_new/upgrades-rollbacks/rollbacks/_index",
-                            "rancher2/installation_new/upgrades-rollbacks/rollbacks/ha-server-rollbacks/_index",
-                        ],
-                    },
-                ],
-            },
-            */
-        ],
-        /*
-        旧版安装指南，已弃用，上线新版之后，需要删除
-        安装指南: [
-            "rancher2/installation/_index",
-            {
-                type: "category",
-                label: "安装要求",
-                items: [
-                    "rancher2/installation/requirements/_index",
-                    "rancher2/installation/requirements/installing-docker/_index",
-                    "rancher2/installation/requirements/ports/_index",
-                ],
-            },
-            "rancher2/installation/how-ha-works/_index",
-            {
-                type: "category",
-                label: "Rancher 高可用安装",
-                items: [
-                    "rancher2/installation/k8s-install/_index",
-                    "rancher2/installation/k8s-install/create-nodes-lb/_index",
-                    "rancher2/installation/k8s-install/kubernetes-rke/_index",
-                    "rancher2/installation/k8s-install/helm-rancher/_index",
-                ],
-            },
-            {
-                type: "category",
-                label: "其他安装方法",
-                items: [
-                    "rancher2/installation/other-installation-methods/_index",
-                    {
-                        type: "category",
-                        label: "Rancher 单节点安装",
-                        items: [
-                            "rancher2/installation/other-installation-methods/single-node-docker/_index",
-                            "rancher2/installation/other-installation-methods/single-node-docker/troubleshooting/_index",
-                            "rancher2/installation/other-installation-methods/single-node-docker/advanced/_index",
-                            "rancher2/installation/other-installation-methods/single-node-docker/proxy/_index",
-                        ],
-                    },
-                    {
-                        type: "category",
-                        label: "Rancher 离线安装",
-                        items: [
-                            "rancher2/installation/other-installation-methods/air-gap/_index",
-                            "rancher2/installation/other-installation-methods/air-gap/prepare-nodes/_index",
-                            "rancher2/installation/other-installation-methods/air-gap/populate-private-registry/_index",
-                            "rancher2/installation/other-installation-methods/air-gap/launch-kubernetes/_index",
-                            "rancher2/installation/other-installation-methods/air-gap/install-rancher/_index",
-                        ],
-                    },
-                    {
-                        type: "category",
-                        label: "HTTP 代理安装 Rancher",
-                        items: [
-                            "rancher2/installation/other-installation-methods/behind-proxy/_index",
-                            "rancher2/installation/other-installation-methods/behind-proxy/prepare-nodes/_index",
-                            "rancher2/installation/other-installation-methods/behind-proxy/launch-kubernetes/_index",
-                            "rancher2/installation/other-installation-methods/behind-proxy/install-rancher/_index",
-                        ],
-                    },
-                ],
-            },
-            {
-                type: "category",
-                label: "其他资料和高级选项",
-                items: [
-                    "rancher2/installation/options/_index",
-                    {
-                        type: "category",
-                        label: "Rancher 高可用 Helm2 安装",
-                        items: [
-                            "rancher2/installation/options/helm2/_index",
-                            {
-                                type: "category",
-                                label: "1、配置基础设施",
-                                items: [
-                                    "rancher2/installation/options/helm2/create-nodes-lb/_index",
-                                    "rancher2/installation/options/helm2/create-nodes-lb/nginx/_index",
-                                    "rancher2/installation/options/helm2/create-nodes-lb/nlb/_index",
-                                ],
-                            },
-                            {
-                                type: "category",
-                                label: "2、安装 Kubernetes",
-                                items: [
-                                    "rancher2/installation/options/helm2/kubernetes-rke/_index",
-                                    "rancher2/installation/options/helm2/kubernetes-rke/troubleshooting/_index",
-                                ],
-                            },
-                            {
-                                type: "category",
-                                label: "3、Helm 初始化",
-                                items: [
-                                    "rancher2/installation/options/helm2/helm-init/_index",
-                                    "rancher2/installation/options/helm2/helm-init/troubleshooting/_index",
-                                ],
-                            },
-                            {
-                                type: "category",
-                                label: "4、安装 Rancher",
-                                items: [
-                                    "rancher2/installation/options/helm2/helm-rancher/_index",
-                                    "rancher2/installation/options/helm2/helm-rancher/tls-secrets/_index",
-                                    "rancher2/installation/options/helm2/helm-rancher/chart-options/_index",
-                                    "rancher2/installation/options/helm2/helm-rancher/troubleshooting/_index",
-                                ],
-                            },
-                        ],
-                    },
-                    {
-                        type: "category",
-                        label: "Rancher 高可用 Helm2 离线安装",
-                        items: [
-                            "rancher2/installation/options/air-gap-helm2/_index",
-                            "rancher2/installation/options/air-gap-helm2/prepare-nodes/_index",
-                            "rancher2/installation/options/air-gap-helm2/populate-private-registry/_index",
-                            "rancher2/installation/options/air-gap-helm2/launch-kubernetes/_index",
-                            "rancher2/installation/options/air-gap-helm2/install-rancher/_index",
-                        ],
-                    },
-                    "rancher2/installation/options/etcd/_index",
-                    "rancher2/installation/options/server-tags/_index",
-                    "rancher2/installation/options/single-node-install-external-lb/_index",
-                    "rancher2/installation/options/nginx/_index",
-                    "rancher2/installation/options/F5-7-layer-loadbalancer/_index",
-                    "rancher2/installation/options/F5-WAF/_index",
-                    "rancher2/installation/options/tls-secrets/_index",
-                    "rancher2/installation/options/chart-options/_index",
-                    {
-                        type: "category",
-                        label: "RKE Add-On 安装",
-                        items: [
-                            "rancher2/installation/options/rke-add-on/_index",
-                            {
-                                type: "category",
-                                label: "Rancher 高可用 - 4层 LB",
-                                items: [
-                                    "rancher2/installation/options/rke-add-on/layer-4-lb/_index",
-                                    "rancher2/installation/options/rke-add-on/layer-4-lb/nlb/_index",
-                                ],
-                            },
-                            {
-                                type: "category",
-                                label: "Rancher 高可用 - 7层 LB",
-                                items: [
-                                    "rancher2/installation/options/rke-add-on/layer-7-lb/_index",
-                                    "rancher2/installation/options/rke-add-on/layer-7-lb/alb/_index",
-                                    "rancher2/installation/options/rke-add-on/layer-7-lb/nginx/_index",
-                                ],
-                            },
-                            "rancher2/installation/options/rke-add-on/proxy/_index",
-                            "rancher2/installation/options/rke-add-on/api-auditing/_index",
-                            {
-                                type: "category",
-                                label: "问题排查",
-                                items: [
-                                    "rancher2/installation/options/rke-add-on/troubleshooting/_index",
-                                    "rancher2/installation/options/rke-add-on/troubleshooting/generic-troubleshooting/_index",
-                                    "rancher2/installation/options/rke-add-on/troubleshooting/job-complete-status/_index",
-                                    "rancher2/installation/options/rke-add-on/troubleshooting/404-default-backend/_index",
-                                ],
-                            },
-                        ],
-                    },
-                    "rancher2/installation/options/troubleshooting/_index",
-                    "rancher2/installation/options/nlb/_index",
-                    "rancher2/installation/options/ec2-node/_index",
-                    "rancher2/installation/options/rds/_index",
-                    "rancher2/installation/options/helm-version/_index",
-                    "rancher2/installation/options/custom-ca-root-certificate/_index",
-                    "rancher2/installation/options/local-system-charts/_index",
-                    {
-                        type: "category",
-                        label: "升级 Cert-Manager",
-                        items: [
-                            "rancher2/installation/options/upgrading-cert-manager/_index",
-                            "rancher2/installation/options/upgrading-cert-manager/helm-2-instructions/_index",
-                        ],
-                    },
-                    "rancher2/installation/options/arm64-platform/_index",
-                    {
-                        type: "category",
-                        label: "功能开关",
-                        items: [
-                            "rancher2/installation/options/feature-flags/_index",
-                            "rancher2/installation/options/feature-flags/enable-not-default-storage-drivers/_index",
-                            "rancher2/installation/options/feature-flags/istio-virtual-service-ui/_index",
-                        ],
-                    },
-                    "rancher2/installation/options/api-audit-log/_index",
-                    "rancher2/installation/options/tls-settings/_index",
-                    "rancher2/installation/options/firewall/_index",
-                    "rancher2/installation/options/self-signed-ssl/_index",
-                    {
-                        type: "category",
-                        label: "cluster.yml 文件模板",
-                        items: [
-                            "rancher2/installation/options/cluster-yml-templates/_index",
-                            "rancher2/installation/options/cluster-yml-templates/3-node-certificate/_index",
-                            "rancher2/installation/options/cluster-yml-templates/3-node-certificate-recognizedca/_index",
-                            "rancher2/installation/options/cluster-yml-templates/3-node-externalssl-certificate/_index",
-                            "rancher2/installation/options/cluster-yml-templates/3-node-externalssl-recognizedca/_index",
-                        ],
-                    },
+                    "rancher2/installation_new/resources/F5-7-layer-loadbalancer/_index",
+                    "rancher2/installation_new/resources/F5-WAF/_index",
                 ],
             },
         ],
-        */
-        /*
-        新版的升级和回滚指南已经挪到了安装指南内，上线新版之后，需要删除。
-        升级和回滚: [
-            "rancher2/upgrades/_index",
-            {
-                type: "category",
-                label: "升级",
-                items: [
-                    //"rancher2/upgrades/upgrades/_index",
-                    /*
-                    {
-                        type: "category",
-                        label: "升级高可用 Rancher",
-                        items: [
-                            "rancher2/upgrades/upgrades/ha/_index",
-                            "rancher2/upgrades/upgrades/ha/helm2/_index",
-                        ],
-                    },
-                    //"rancher2/upgrades/upgrades/single-node/_index",
-                    //"rancher2/upgrades/upgrades/migrating-from-rke-add-on/_index",
-                    //"rancher2/upgrades/upgrades/namespace-migration/_index",
-                ],
-            },
-            {
-                type: "category",
-                label: "回滚",
-                items: [
-                    "rancher2/upgrades/rollbacks/_index",
-                    "rancher2/upgrades/rollbacks/ha-server-rollbacks/_index",
-                    "rancher2/upgrades/rollbacks/single-node-rollbacks/_index",
-                ],
-            },
-        ],
-        */
         备份和恢复指南: [
             "rancher2/backups/_index",
             {

@@ -101,7 +101,7 @@ kubectl apply -f migrationResource.yaml
 
 ### 3. 安装 cert-manager
 
-按照文档中关于在 Kubernetes 上安装 cert-manager 的步骤[安装 cert-manager](/docs/rancher2/installation_new/k8s-install/helm-rancher/_index#5-install-cert-manager)。
+按照文档中关于在 Kubernetes 上安装 cert-manager 的步骤[安装 cert-manager](/docs/rancher2/installation_new/resources/advanced/helm2/helm-rancher/_index#5-install-cert-manager)。
 
 ### 4. 使用 helm 安装 rancher
 

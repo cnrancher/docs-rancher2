@@ -41,7 +41,7 @@ keywords:
 以下示例使用了可以通过`http://192.168.0.1:3128`访问的代理服务器，并且在访问网络范围“192.168.10.0/24”以及域“example.com”下的每个主机名时，不使用代理。
 
 ```
-docker run -d --restart=unless-stopped \
+docker run -d --privileged --restart=unless-stopped \
   -p 80:80 -p 443:443 \
   -e HTTP_PROXY="http://192.168.10.1:3128" \
   -e HTTPS_PROXY="http://192.168.10.1:3128" \

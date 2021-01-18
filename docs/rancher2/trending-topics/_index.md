@@ -33,13 +33,13 @@ Rancher 的离线安装有四个步骤：
 
 ### 高可用安装 Helm Chart 选项
 
-高可用安装 Helm Chart 选项包括一般选项和高级选项，如果您使用的安装方式是高可用 Helm Chart，请参考[高可用安装 Helm Chart 选项](/docs/rancher2/installation_new/options/chart-options/_index)完成相关的选项配置。
+高可用安装 Helm Chart 选项包括一般选项和高级选项，如果您使用的安装方式是高可用 Helm Chart，请参考[高可用安装 Helm Chart 选项](/docs/rancher2/installation_new/resources/chart-options/_index)完成相关的选项配置。
 
 ### 配置 NGINX 负载均衡
 
 我们将使用 NGINX 作为`L4`层负载均衡器(TCP)，它将请求轮训转发到后端的 Rancher server 节点。在此配置中，负载均衡器位于 Rancher server 节点的前面。负载均衡器可以是任何能够运行 NGINX 的主机。我们不建议使用任意一个 Rancher server 节点作为负载均衡器节点，因为默认配置下每个 K8S 节点都会运行 ingress 控制器，而 ingress 控制器以为`host`网络模式运行，并默认监听了`80`和`443`端口，所以默认情况下会出现端口冲突。如果一定要将 NGINX 安装在 Rancher server 某个节点上，那么可以编辑 ingress 控制器配置文件，在`args`中添加参数，端口根据实际情况修改 `--http-port=8880 --http-port=8443`。 ingress 控制器修改默认端口后，nginx 配置中代理的后端 server 端口也需要一并修改。
 
-**详情请参考[配置 NGINX 负载均衡](/docs/rancher2/installation_new/options/nginx/_index)。**
+**详情请参考[配置 NGINX 负载均衡](/docs/rancher2/installation_new/resources/advanced/helm2/create-nodes-lb/nginx/_index)。**
 
 ## 用户指南
 

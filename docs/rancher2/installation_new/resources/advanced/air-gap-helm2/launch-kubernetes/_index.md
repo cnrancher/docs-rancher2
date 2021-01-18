@@ -29,7 +29,7 @@ keywords:
 
 在可以访问主机节点上的端口 22 / tcp 和 6443 / tcp 的系统上，使用以下示例创建一个名为`rancher-cluster.yml`的新文件。该文件是 Rancher Kubernetes Engine 的配置文件（RKE 配置文件）。
 
-使用您创建的[3 个节点](/docs/rancher2/installation_new/options/air-gap-helm2/prepare-nodes/_index)的 IP 地址或 DNS 名称，替换下面的代码示例中的值。
+使用您创建的[3 个节点](/docs/rancher2/installation_new/resources/advanced/air-gap-helm2/prepare-nodes/_index)的 IP 地址或 DNS 名称，替换下面的代码示例中的值。
 
 > **提示：**有关可用选项的更多详细信息，请参见 RKE [配置选项](/docs/rke/config-options/_index)。
 
@@ -90,8 +90,8 @@ rke up --config ./rancher-cluster.yml
 
 ## 遇到了问题？
 
-如果您在使 Helm 2 离线安装 Rancher 的过程中碰到问题，请查看[问题排查](/docs/rancher2/installation_new/options/troubleshooting/_index)。
+如果您在使 Helm 2 离线安装 Rancher 的过程中碰到问题，请查看[问题排查](/docs/rancher2/installation_new/other-installation-methods/troubleshooting/_index)。
 
 ## 后续操作
 
-[安装 Rancher](/docs/rancher2/installation_new/options/air-gap-helm2/install-rancher/_index)
+[安装 Rancher](/docs/rancher2/installation_new/resources/advanced/air-gap-helm2/install-rancher/_index)

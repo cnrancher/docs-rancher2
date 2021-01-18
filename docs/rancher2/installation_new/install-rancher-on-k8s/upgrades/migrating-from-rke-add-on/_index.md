@@ -116,5 +116,5 @@ addons: |-
 
 从这里开始执行标准安装步骤。
 
-- [3 - 初始化 Helm](/docs/rancher2/installation_new/options/helm2/helm-init/_index)
-- [4 - 安装 Rancher](/docs/rancher2/installation_new/options/helm2/helm-rancher/_index)
+- [3 - 初始化 Helm](/docs/rancher2/installation_new/resources/advanced/helm2/helm-init/_index)
+- [4 - 安装 Rancher](/docs/rancher2/installation_new/resources/advanced/helm2/helm-rancher/_index)

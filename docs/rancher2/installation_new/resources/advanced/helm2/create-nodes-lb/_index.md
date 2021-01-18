@@ -39,9 +39,9 @@ RKE 将在每个节点上配置一个 Ingress controller pod。Ingress controlle
 
 ## 示例
 
-- [Nginx](/docs/rancher2/installation_new/options/helm2/create-nodes-lb/nginx/_index)
-- [Amazon NLB](/docs/rancher2/installation_new/options/helm2/create-nodes-lb/nlb/_index)
+- [Nginx](/docs/rancher2/installation_new/resources/advanced/helm2/create-nodes-lb/nginx/_index)
+- [Amazon NLB](/docs/rancher2/installation_new/resources/advanced/helm2/create-nodes-lb/nlb/_index)
 
 ## 后续步骤
 
-[使用 RKE 安装 Kubernetes](/docs/rancher2/installation_new/options/helm2/kubernetes-rke/_index)
+[使用 RKE 安装 Kubernetes](/docs/rancher2/installation_new/resources/advanced/helm2/kubernetes-rke/_index)

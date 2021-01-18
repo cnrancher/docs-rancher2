@@ -238,7 +238,7 @@ rke up --config ./rancher-cluster.yml
 
 ## 问题排查
 
-请查看[问题排查](/docs/rancher2/installation_new/options/troubleshooting/_index)页面，获取常见问题和解决方法。
+请查看[问题排查](/docs/rancher2/installation_new/other-installation-methods/troubleshooting/_index)页面，获取常见问题和解决方法。
 
 ## 后续操作
 
