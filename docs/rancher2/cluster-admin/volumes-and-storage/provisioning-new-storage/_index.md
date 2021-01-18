@@ -40,7 +40,7 @@ Rancher 默认启用以下云服务存储卷：
 | Network File System    | `nfs`                  |
 | hostPath               | `host-path`            |
 
-如果需要使用不在上述列表内的存储提供者，您需要使用功能开关来[启用不被默认启动存储驱动](/docs/rancher2/installation/options/feature-flags/enable-not-default-storage-drivers/_index)。不在上述列表内的存储服务没有经过 Rancher 的测试和验证，属于实验性功能，Rancher 不能保证使用过程中是否会出现问题，请谨慎使用不在上表内的存储服务。
+如果需要使用不在上述列表内的存储提供者，您需要使用功能开关来[启用不被默认启动存储驱动](/docs/rancher2/installation_new/options/feature-flags/enable-not-default-storage-drivers/_index)。不在上述列表内的存储服务没有经过 Rancher 的测试和验证，属于实验性功能，Rancher 不能保证使用过程中是否会出现问题，请谨慎使用不在上表内的存储服务。
 
 ## 配置存储类
 

@@ -150,7 +150,7 @@ keywords:
 
 - IAM 角色：`K8sMasterRole。[K8sMasterProfile,K8sAutoscalerProfile]`。
 
-  - 安全组：`K8sMasterSg`更多信息请见[RKE ports (custom nodes tab)](/docs/rancher2/installation/requirements/ports/_index)
+  - 安全组：`K8sMasterSg`更多信息请见[RKE ports (custom nodes tab)](/docs/rancher2/installation_new/requirements/ports/_index)
   - 标签：
     `kubernetes.io/cluster/<clusterID>: owned`。
   - 用户数据：`K8sMasterUserData`Ubuntu 18.04(ami-0e11cbb34015ff725)，安装 docker 并将 etcd+controlplane 节点添加到 k8s 集群中。- IAM 角色：`K8sMasterRole。[K8sMasterProfile,K8sAutoscalerProfile]`。
@@ -182,7 +182,7 @@ keywords:
 
 - IAM 角色：`K8sWorkerRole: [K8sWorkerProfile]`
 
-  - 安全组：`K8sWorkerSg` 更多信息请见 [RKE ports (custom nodes tab)](/docs/rancher2/installation/requirements/ports/_index)
+  - 安全组：`K8sWorkerSg` 更多信息请见 [RKE ports (custom nodes tab)](/docs/rancher2/installation_new/requirements/ports/_index)
   - 标签：
 
     - `kubernetes.io/cluster/<clusterID>: owned`
@@ -246,7 +246,7 @@ keywords:
 下表说明了用于微调的集群 cluster-autoscaler 参数：
 
 | 参数                                  | 默认值        | 描述                                                                                                                                        |
-| :------------------------------------ | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------ |
+| :------------------------------------ | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------ |
 | cluster-name                          | -             | 配置自动弹性伸缩的集群名称                                                                                                                  |
 | address                               | :8085         | 暴露 Prometheus 指标的地址                                                                                                                  |
 | kubernetes                            | -             | Kubernetes master 节点的位置，默认情况下不需要填写                                                                                          |

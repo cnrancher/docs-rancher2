@@ -22,9 +22,9 @@ keywords:
 
 您可以向 Rancher Server 容器中传入环境变量，开启和配置审计日志功能。请参考以下链接，在安装时开启该特性。
 
-- [Rancher 单节点](/docs/rancher2/installation/other-installation-methods/single-node-docker/_index)
+- [Rancher 单节点](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/_index)
 
-- [Rancher 高可用](/docs/rancher2/installation/options/chart-options/_index)
+- [Rancher 高可用](/docs/rancher2/installation_new/options/chart-options/_index)
 
 ## API 审计日志选项
 

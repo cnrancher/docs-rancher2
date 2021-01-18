@@ -22,7 +22,7 @@ keywords:
 ## 先决条件
 
 - 从 Rancher 文档中的 **[已知升级问题](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/_index#已知的升级问题) 和 [警告](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/_index#警告)** 查看升级 Rancher 中最值得注意的问题。可以在[GitHub](https://github.com/rancher/rancher/releases) 和 [Rancher 论坛](https://forums.rancher.com/c/announcements/12)的发行说明中找到每个 Rancher 版本的已知问题的更完整列表。
-- **[仅对于离线安装](/docs/rancher2/installation/other-installation-methods/air-gap/_index)，拉取并上传新的 Rancher Server 版本的镜像**。请按照指南[准备私有仓库](/docs/rancher2/installation/other-installation-methods/air-gap/populate-private-registry/_index)，来准备您要升级的版本的镜像。
+- **[仅对于离线安装](/docs/rancher2/installation_new/other-installation-methods/air-gap/_index)，拉取并上传新的 Rancher Server 版本的镜像**。请按照指南[准备私有仓库](/docs/rancher2/installation_new/other-installation-methods/air-gap/populate-private-registry/_index)，来准备您要升级的版本的镜像。
 
 ## 占位符
 
@@ -103,9 +103,9 @@ keywords:
 
 拉取要升级到的 Rancher 版本的映像。
 
-| 占位符                  | 描述                                                                                            |
-| :---------------------- | :---------------------------------------------------------------------------------------------- |
-| `<RANCHER_VERSION_TAG>` | 您要升级到的[Rancher 版本](/docs/rancher2/installation/options/server-tags/_index) 的发行标签。 |
+| 占位符                  | 描述                                                                                                |
+| :---------------------- | :-------------------------------------------------------------------------------------------------- |
+| `<RANCHER_VERSION_TAG>` | 您要升级到的[Rancher 版本](/docs/rancher2/installation_new/options/server-tags/_index) 的发行标签。 |
 
 ```bash
 docker pull rancher/rancher:<RANCHER_VERSION_TAG>
@@ -117,11 +117,11 @@ docker pull rancher/rancher:<RANCHER_VERSION_TAG>
 
 > **重要提示：** _不要_ 在启动升级后停止升级，即使升级过程似乎比预期的要长。停止升级可能会导致将来在升级期间出现数据库迁移错误。
 
-如果使用代理，请参阅 [HTTP 代理配置](/docs/rancher2/installation/other-installation-methods/single-node-docker/proxy/_index)。
+如果使用代理，请参阅 [HTTP 代理配置](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/proxy/_index)。
 
-如果您配置了自定义 CA 根证书来访问服务，请参阅[自定义 CA 根证书](/docs/rancher2/installation/other-installation-methods/single-node-docker/advanced/_index)。
+如果您配置了自定义 CA 根证书来访问服务，请参阅[自定义 CA 根证书](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/advanced/_index)。
 
-如果您在通过 Rancher API 记录操作事件，请参阅 [API 审计](/docs/rancher2/installation/other-installation-methods/single-node-docker/advanced/_index)。
+如果您在通过 Rancher API 记录操作事件，请参阅 [API 审计](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/advanced/_index)。
 
 要查看启动新的 Rancher Server 容器时要使用的命令，请从以下选项中选择：
 
@@ -136,9 +136,9 @@ docker pull rancher/rancher:<RANCHER_VERSION_TAG>
 
 如果选择使用 Rancher 生成的自签名证书，则在启动原始 Rancher Server 容器的命令中添加`--volumes-from rancher-data`。
 
-| 占位符                  | 描述                                                                                           |
-| :---------------------- | :--------------------------------------------------------------------------------------------- |
-| `<RANCHER_VERSION_TAG>` | 您要升级到的[Rancher 版本](/docs/rancher2/installation/options/server-tags/_index)的发行标签。 |
+| 占位符                  | 描述                                                                                               |
+| :---------------------- | :------------------------------------------------------------------------------------------------- |
+| `<RANCHER_VERSION_TAG>` | 您要升级到的[Rancher 版本](/docs/rancher2/installation_new/options/server-tags/_index)的发行标签。 |
 
 ```bash
 docker run -d --volumes-from rancher-data \
@@ -151,16 +151,16 @@ docker run -d --volumes-from rancher-data \
 
 如果您选择携带自己的自签名证书，则在启动原始 Rancher Server 容器的命令中添加`--volumes-from rancher-data`，并需要可以访问到原始安装时使用的证书。
 
-> **证书先决条件提示：** 证书文件必须为[PEM 格式](/docs/rancher2/installation/other-installation-methods/single-node-docker/_index)。在您的证书文件中，包括链中的所有中间证书。您需要对您的证书进行排序，把您的证书放在最签名，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/rancher2/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
+> **证书先决条件提示：** 证书文件必须为[PEM 格式](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/_index)。在您的证书文件中，包括链中的所有中间证书。您需要对您的证书进行排序，把您的证书放在最签名，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/troubleshooting/_index)。
 
-| 占位符                  | 描述                                                                                           |
-| :---------------------- | :--------------------------------------------------------------------------------------------- |
-| `<CERT_DIRECTORY>`      | 包含证书文件的目录的路径。                                                                     |
-| `<FULL_CHAIN.pem>`      | 完整证书链的路径。                                                                             |
-| `<PRIVATE_KEY.pem>`     | 证书私钥的路径。                                                                               |
-| `<CA_CERTS.pem>`        | 证书颁发机构的证书的路径。                                                                     |
-| `<RANCHER_VERSION_TAG>` | 您要升级到的[Rancher 版本](/docs/rancher2/installation/options/server-tags/_index)的发行标签。 |
-|                         |                                                                                                |
+| 占位符                  | 描述                                                                                               |
+| :---------------------- | :------------------------------------------------------------------------------------------------- |
+| `<CERT_DIRECTORY>`      | 包含证书文件的目录的路径。                                                                         |
+| `<FULL_CHAIN.pem>`      | 完整证书链的路径。                                                                                 |
+| `<PRIVATE_KEY.pem>`     | 证书私钥的路径。                                                                                   |
+| `<CA_CERTS.pem>`        | 证书颁发机构的证书的路径。                                                                         |
+| `<RANCHER_VERSION_TAG>` | 您要升级到的[Rancher 版本](/docs/rancher2/installation_new/options/server-tags/_index)的发行标签。 |
+|                         |                                                                                                    |
 
 ```bash
 docker run -d --volumes-from rancher-data \
@@ -176,15 +176,15 @@ docker run -d --volumes-from rancher-data \
 
 如果选择使用由可信 CA 签名的证书，则将 `--volumes-from rancher-data` 添加到启动原始 Rancher Server 容器的命令中，并需要可以访问到原始安装时使用的证书。请记住，要在容器启动命令中包含`--no-cacerts`参数，以禁用 Rancher 生成的默认 CA 证书。
 
-> **证书先决条件提示：** 证书文件必须为[PEM 格式](/docs/rancher2/installation/other-installation-methods/single-node-docker/_index)。在您的证书文件中，包括可信 CA 提供的所有中间证书。您需要对您的证书进行排序，把您的证书放在最签名，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/rancher2/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
+> **证书先决条件提示：** 证书文件必须为[PEM 格式](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/_index)。在您的证书文件中，包括可信 CA 提供的所有中间证书。您需要对您的证书进行排序，把您的证书放在最签名，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/troubleshooting/_index)。
 
-| 占位符                  | 描述                                                                                           |
-| :---------------------- | :--------------------------------------------------------------------------------------------- |
-| `<CERT_DIRECTORY>`      | 包含证书文件的目录的路径。                                                                     |
-| `<FULL_CHAIN.pem>`      | 完整证书链的路径。                                                                             |
-| `<PRIVATE_KEY.pem>`     | 证书私钥的路径。                                                                               |
-| `<RANCHER_VERSION_TAG>` | 您要升级到的[Rancher 版本](/docs/rancher2/installation/options/server-tags/_index)的发行标签。 |
-|                         |                                                                                                |
+| 占位符                  | 描述                                                                                               |
+| :---------------------- | :------------------------------------------------------------------------------------------------- |
+| `<CERT_DIRECTORY>`      | 包含证书文件的目录的路径。                                                                         |
+| `<FULL_CHAIN.pem>`      | 完整证书链的路径。                                                                                 |
+| `<PRIVATE_KEY.pem>`     | 证书私钥的路径。                                                                                   |
+| `<RANCHER_VERSION_TAG>` | 您要升级到的[Rancher 版本](/docs/rancher2/installation_new/options/server-tags/_index)的发行标签。 |
+|                         |                                                                                                    |
 
 ```bash
 docker run -d --volumes-from rancher-data \
@@ -207,10 +207,10 @@ docker run -d --volumes-from rancher-data \
 > - 在您的 DNS 中创建一条记录，将您的 Linux 主机 IP 地址绑定到您要用于 Rancher 访问的主机名（例如，`rancher.mydomain.com`）。
 > - 在 Linux 主机上打开端口 `TCP/80`。Let's Encrypt 的 http-01 challenge 可以来自任何源 IP 地址，因此端口`TCP/80`必须对所有 IP 地址开放。
 
-| 占位符                  | 描述                                                                                           |
-| :---------------------- | :--------------------------------------------------------------------------------------------- |
-| `<RANCHER_VERSION_TAG>` | 您要升级到的[Rancher 版本](/docs/rancher2/installation/options/server-tags/_index)的发行标签。 |
-| `<YOUR.DNS.NAME>`       | 您最初开始使用的域地址                                                                         |
+| 占位符                  | 描述                                                                                               |
+| :---------------------- | :------------------------------------------------------------------------------------------------- |
+| `<RANCHER_VERSION_TAG>` | 您要升级到的[Rancher 版本](/docs/rancher2/installation_new/options/server-tags/_index)的发行标签。 |
+| `<YOUR.DNS.NAME>`       | 您最初开始使用的域地址                                                                             |
 
 ```bash
 docker run -d --volumes-from rancher-data \
@@ -224,7 +224,7 @@ docker run -d --volumes-from rancher-data \
 
 为了安全起见，使用 Rancher 时需要 SSL（安全套接字层）。SSL 保护所有 Rancher 网络通信的安全，例如在您登录集群或与集群交互时。
 
-> 对于从 v2.2.0 到 v2.2.x 的 Rancher 版本，您需要将`system-charts`代码库镜像到网络中 Rancher 可以访问的位置。然后，在安装 Rancher 之后，您将需要配置 Rancher 以使用该代码库。有关详细信息，请参考 [在 v2.3.0 之前为 Rancher 设置 System Charts](/docs/rancher2/installation/options/local-system-charts/_index)。
+> 对于从 v2.2.0 到 v2.2.x 的 Rancher 版本，您需要将`system-charts`代码库镜像到网络中 Rancher 可以访问的位置。然后，在安装 Rancher 之后，您将需要配置 Rancher 以使用该代码库。有关详细信息，请参考 [在 v2.3.0 之前为 Rancher 设置 System Charts](/docs/rancher2/installation_new/options/local-system-charts/_index)。
 
 启动新的 Rancher Server 容器时，请从以下选项中选择：
 
@@ -232,10 +232,10 @@ docker run -d --volumes-from rancher-data \
 
 如果选择使用 Rancher 生成的自签名证书，则在启动原始 Rancher Server 容器的命令中添加`--volumes-from rancher-data`。
 
-| 占位符                           | 描述                                                                                           |
-| :------------------------------- | :--------------------------------------------------------------------------------------------- |
-| `<REGISTRY.YOURDOMAIN.COM:PORT>` | 您的私有仓库 URL 和端口。                                                                      |
-| `<RANCHER_VERSION_TAG>`          | 您要升级到的[Rancher 版本](/docs/rancher2/installation/options/server-tags/_index)的发行标签。 |
+| 占位符                           | 描述                                                                                               |
+| :------------------------------- | :------------------------------------------------------------------------------------------------- |
+| `<REGISTRY.YOURDOMAIN.COM:PORT>` | 您的私有仓库 URL 和端口。                                                                          |
+| `<RANCHER_VERSION_TAG>`          | 您要升级到的[Rancher 版本](/docs/rancher2/installation_new/options/server-tags/_index)的发行标签。 |
 
 ```bash
   docker run -d --volumes-from rancher-data \
@@ -250,16 +250,16 @@ docker run -d --volumes-from rancher-data \
 
 如果您选择携带自己的自签名证书，则在启动原始 Rancher Server 容器的命令中添加`--volumes-from rancher-data`，并需要可以访问到原始安装时使用的证书。
 
-> **证书先决条件提示：** 证书文件必须为[PEM 格式](/docs/rancher2/installation/other-installation-methods/single-node-docker/_index)。在您的证书文件中，包括链中的所有中间证书。您需要对您的证书进行排序，把您的证书放在最签名，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/rancher2/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
+> **证书先决条件提示：** 证书文件必须为[PEM 格式](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/_index)。在您的证书文件中，包括链中的所有中间证书。您需要对您的证书进行排序，把您的证书放在最签名，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/troubleshooting/_index)。
 
-| 占位符                           | 描述                                                                                           |
-| :------------------------------- | :--------------------------------------------------------------------------------------------- |
-| `<CERT_DIRECTORY>`               | 包含证书文件的目录的路径。                                                                     |
-| `<FULL_CHAIN.pem>`               | 完整证书链的路径。                                                                             |
-| `<PRIVATE_KEY.pem>`              | 证书私钥的路径。                                                                               |
-| `<CA_CERTS.pem>`                 | 证书颁发机构的证书的路径。                                                                     |
-| `<REGISTRY.YOURDOMAIN.COM:PORT>` | 您的私有仓库 URL 和端口。                                                                      |
-| `<RANCHER_VERSION_TAG>`          | 您要升级到的[Rancher 版本](/docs/rancher2/installation/options/server-tags/_index)的发行标签。 |
+| 占位符                           | 描述                                                                                               |
+| :------------------------------- | :------------------------------------------------------------------------------------------------- |
+| `<CERT_DIRECTORY>`               | 包含证书文件的目录的路径。                                                                         |
+| `<FULL_CHAIN.pem>`               | 完整证书链的路径。                                                                                 |
+| `<PRIVATE_KEY.pem>`              | 证书私钥的路径。                                                                                   |
+| `<CA_CERTS.pem>`                 | 证书颁发机构的证书的路径。                                                                         |
+| `<REGISTRY.YOURDOMAIN.COM:PORT>` | 您的私有仓库 URL 和端口。                                                                          |
+| `<RANCHER_VERSION_TAG>`          | 您要升级到的[Rancher 版本](/docs/rancher2/installation_new/options/server-tags/_index)的发行标签。 |
 
 ```bash
 docker run -d --restart=unless-stopped \
@@ -276,15 +276,15 @@ docker run -d --restart=unless-stopped \
 
 如果选择使用由可信 CA 签名的证书，则将 `--volumes-from rancher-data` 添加到启动原始 Rancher Server 容器的命令中，并需要可以访问到原始安装时使用的证书。请记住，要在容器启动命令中包含`--no-cacerts`参数，以禁用 Rancher 生成的默认 CA 证书。
 
-> **证书先决条件提示：** 证书文件必须为[PEM 格式](/docs/rancher2/installation/other-installation-methods/single-node-docker/_index)。在您的证书文件中，包括可信 CA 提供的所有中间证书。您需要对您的证书进行排序，把您的证书放在最签名，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/rancher2/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
+> **证书先决条件提示：** 证书文件必须为[PEM 格式](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/_index)。在您的证书文件中，包括可信 CA 提供的所有中间证书。您需要对您的证书进行排序，把您的证书放在最签名，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/troubleshooting/_index)。
 
-| 占位符                           | 描述                                                                                            |
-| :------------------------------- | :---------------------------------------------------------------------------------------------- |
-| `<CERT_DIRECTORY>`               | 包含证书文件的目录的路径。                                                                      |
-| `<FULL_CHAIN.pem>`               | 完整证书链的路径。                                                                              |
-| `<PRIVATE_KEY.pem>`              | 证书私钥的路径。                                                                                |
-| `<REGISTRY.YOURDOMAIN.COM:PORT>` | 您的私有仓库 URL 和端口。                                                                       |
-| `<RANCHER_VERSION_TAG>`          | 您要升级到的[Rancher 版本](/docs/rancher2/installation/options/server-tags/_index) 的发行标签。 |
+| 占位符                           | 描述                                                                                                |
+| :------------------------------- | :-------------------------------------------------------------------------------------------------- |
+| `<CERT_DIRECTORY>`               | 包含证书文件的目录的路径。                                                                          |
+| `<FULL_CHAIN.pem>`               | 完整证书链的路径。                                                                                  |
+| `<PRIVATE_KEY.pem>`              | 证书私钥的路径。                                                                                    |
+| `<REGISTRY.YOURDOMAIN.COM:PORT>` | 您的私有仓库 URL 和端口。                                                                           |
+| `<RANCHER_VERSION_TAG>`          | 您要升级到的[Rancher 版本](/docs/rancher2/installation_new/options/server-tags/_index) 的发行标签。 |
 
 > **注意：** 使用`--no-cacerts`作为容器的参数来禁用 Rancher 生成的默认 CA 证书。
 

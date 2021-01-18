@@ -59,13 +59,13 @@ K3s 几乎可以在任何 Linux 版本上运行。K3s 在以下操作系统及�
 
 我们建议安装 `ntp` (Network Time Protocol)，这样可以防止在客户端和服务器之间因为时钟不同步而发生证书验证错误。
 
-一些 Linux 发行版可能有默认的防火墙规则。这些规则可能会屏蔽掉 Helm 的通信。这个[操作指南](/docs/rancher2/installation/options/firewall/_index)展示了如何检查 Oracle Linux 的默认防火墙规则，以及在必要时如何使用`firewalld`开放端口。
+一些 Linux 发行版可能有默认的防火墙规则。这些规则可能会屏蔽掉 Helm 的通信。这个[操作指南](/docs/rancher2/installation_new/options/firewall/_index)展示了如何检查 Oracle Linux 的默认防火墙规则，以及在必要时如何使用`firewalld`开放端口。
 
-如果计划在 ARM64 上运行 Rancher，请参阅[在 ARM64 上运行（实验性）](/docs/rancher2/installation/options/arm64-platform/_index)。
+如果计划在 ARM64 上运行 Rancher，请参阅[在 ARM64 上运行（实验性）](/docs/rancher2/installation_new/options/arm64-platform/_index)。
 
 #### 安装 Docker
 
-您可以按照[Docker 官方文档](https://docs.docker.com/)中的步骤安装 Docker。Rancher 也提供了使用命令安装 Docker 的[脚本](/docs/rancher2/installation/requirements/installing-docker/_index)。
+您可以按照[Docker 官方文档](https://docs.docker.com/)中的步骤安装 Docker。Rancher 也提供了使用命令安装 Docker 的[脚本](/docs/rancher2/installation_new/requirements/installing-docker/_index)。
 
 ## 硬件要求
 
@@ -77,7 +77,7 @@ K3s 几乎可以在任何 Linux 版本上运行。K3s 在以下操作系统及�
 
 ### RKE 高可用安装的 CPU 和 内存要求
 
-这些要求适用于[安装了 Rancher Server 的 RKE Kubernetes 集群](/docs/rancher2/installation/k8s-install/_index)中的每个主机。
+这些要求适用于[安装了 Rancher Server 的 RKE Kubernetes 集群](/docs/rancher2/installation_new/k8s-install/_index)中的每个主机。
 
 在 Rancher v2.4.0 中提高了性能。有关 v2.4.0 之前的 Rancher 的要求，请参阅[本节](#rancher-v240-之前的-rke-高可用安装的-cpu-和内存要求)。
 
@@ -93,7 +93,7 @@ K3s 几乎可以在任何 Linux 版本上运行。K3s 在以下操作系统及�
 
 ### K3s 高可用安装的 CPU 和 内存要求
 
-这些要求适用于[安装了 Rancher Server 的 K3s Kubernetes 集群](/docs/rancher2/installation/k8s-install/_index)中的每个主机。
+这些要求适用于[安装了 Rancher Server 的 K3s Kubernetes 集群](/docs/rancher2/installation_new/k8s-install/_index)中的每个主机。
 
 | 部署规模 | 集群         | 节点           | vCPUs | 内存   | 数据库规模               |
 | :------- | :----------- | :------------- | :---- | :----- | :----------------------- |
@@ -107,7 +107,7 @@ K3s 几乎可以在任何 Linux 版本上运行。K3s 在以下操作系统及�
 
 ### 单节点安装的 CPU 和 内存要求
 
-这些要求适用于使用 Docker 安装 Rancher 的[单节点安装](/docs/rancher2/installation/other-installation-methods/single-node-docker/_index)。
+这些要求适用于使用 Docker 安装 Rancher 的[单节点安装](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/_index)。
 
 | 部署规模 | 集群       | 节点        | vCPUs | 内存 |
 | :------- | :--------- | :---------- | :---- | :--- |

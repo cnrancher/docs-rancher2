@@ -17,7 +17,7 @@ keywords:
 
 本页描述了安装您的应用和服务所在节点的要求。`下游集群` 是指运行您的应用程序的集群，它应该与运行 Rancher Server 的高可用集群或单节点分开。
 
-> 如果 Rancher 安装在 Kubernetes 集群上，Rancher Server 集群和下游集群有不同的要求。有关 Rancher Server 安装要求，请参阅[高可用安装要求](/docs/rancher2/installation/requirements/_index)。
+> 如果 Rancher 安装在 Kubernetes 集群上，Rancher Server 集群和下游集群有不同的要求。有关 Rancher Server 安装要求，请参阅[高可用安装要求](/docs/rancher2/installation_new/requirements/_index)。
 
 请确保 Rancher Server 的节点满足以下要求。
 
@@ -29,11 +29,11 @@ Rancher 已经过测试，并官方支持在 Ubuntu，CentOS，Oracle Linux，Ra
 
 所有受支持的操作系统都是 64-bit x86 系统。
 
-如果您计划使用 ARM64，请参阅[在 ARM64 上运行（实验性）](/docs/rancher2/installation/options/arm64-platform/_index)。
+如果您计划使用 ARM64，请参阅[在 ARM64 上运行（实验性）](/docs/rancher2/installation_new/options/arm64-platform/_index)。
 
 有关如何安装 Docker 的信息，请参阅官方[Docker 文档](https://docs.docker.com/)。
 
-一些 RHEL 衍生的 Linux 发行版，可能有默认的防火墙规则，可能会屏蔽掉 Helm 的通信。这个[操作指南](/docs/rancher2/installation/options/firewall/_index)展示了如何检查 Oracle Linux 的默认防火墙规则，以及在必要时如何使用`firewalld`开放端口。
+一些 RHEL 衍生的 Linux 发行版，可能有默认的防火墙规则，可能会屏蔽掉 Helm 的通信。这个[操作指南](/docs/rancher2/installation_new/options/firewall/_index)展示了如何检查 Oracle Linux 的默认防火墙规则，以及在必要时如何使用`firewalld`开放端口。
 
 SUSE Linux 可能有默认阻止所有端口的防火墙。在这种情况下，请按照[以下步骤](#开放-suse-linux-端口)，开放将添加到自定义集群的主机的端口。
 
