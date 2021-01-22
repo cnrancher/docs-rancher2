@@ -69,7 +69,7 @@ docker run -d --privileged --restart=unless-stopped \
 与 2.4.x 或之前的版本相比，使用`docker run`命令安装 Rancher 2.5.x 时，需要添加`--privileged`标志变量，启用特权模式安装 Rancher。
 
 ```bash
-docker run -d --privileged --restart=unless-stopped \
+docker run -d --restart=unless-stopped \
   -p 80:80 -p 443:443 \
   --privileged \
   rancher/rancher:latest
