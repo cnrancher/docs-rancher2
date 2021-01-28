@@ -1,5 +1,5 @@
 ---
-title: 为 Rancher 配置 AD FS
+title: 1. 为 Rancher 配置 AD FS
 description: 在配置 Rancher 以支持 AD FS 用户之前，必须将 Rancher 添加为 AD FS 中的 Relying Party Trust。
 keywords:
   - rancher 2.0中文文档

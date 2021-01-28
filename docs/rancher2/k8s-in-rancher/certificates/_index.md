@@ -17,7 +17,7 @@ keywords:
   - 证书
 ---
 
-在 Rancher 和 Kubernetes 中创建 Ingress 时，如果需要对 HTTP 通信进行加密，您必须提供包含 TLS 私钥和证书的密文。该私钥和证书用于加密和解密通过 Ingress 进行的通信。您可以导航到某个[项目](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)或[命名空间](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)，然后上传证书，以使证书可供 Ingress 使用。然后，您可以将证书添加到 Ingress 中。
+在 Rancher 和 Kubernetes 中创建 Ingress 时，如果需要对 HTTP 通信进行加密，您必须提供包含 TLS 私钥和证书的密文。该私钥和证书用于加密和解密通过 Ingress 进行的通信。您可以导航到某个[项目](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)或命名空间](/docs/rancher2/cluster-admin/projects-and-namespaces/\_index)，然后上传证书，以使证书可供 Ingress 使用。然后，您可以将证书添加到 Ingress 中。
 
 ## 添加证书
 
@@ -37,7 +37,7 @@ keywords:
 
    - **此项目所有命名空间：** 该证书可用于项目中任何命名空间中的任何工作负载。
 
-   - **单个命名空间：** 该证书仅可用于一个[命名空间](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)中的工作负载。如果选择此选项，请从下拉列表中选择一个**命名空间**，或单击**创建新的命名空间**以将证书添加到新创建的命名空间中。
+   - **单个命名空间：** 该证书仅可用于一个命名空间中的工作负载。如果选择此选项，请从下拉列表中选择一个**命名空间**，或单击**创建新的命名空间**以将证书添加到新创建的命名空间中。
 
 5. 在**私钥**里，将证书的私钥复制并粘贴到文本框中（包括头部和尾部），或单击**从文件读取**以浏览到文件系统上的私钥。如果可能的话，我们建议使用**从文件读取**，以减少出错的可能性。
 

@@ -1,6 +1,6 @@
 ---
 title: 恢复配置
-description: Restore Create 页面提供要还原的备份的详细信息。
+description: 性页面提供要还原的备份的详细信息。
 keywords:
   - rancher 2.0中文文档
   - rancher 2.x 中文文档
@@ -16,7 +16,7 @@ keywords:
   - 恢复配置
 ---
 
-Restore Create 页面提供要还原的备份的详细信息。
+性页面提供要还原的备份的详细信息。
 
 ![restore](/img/rancher/backup_restore/restore/restore.png)
 

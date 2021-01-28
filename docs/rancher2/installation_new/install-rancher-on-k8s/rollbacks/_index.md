@@ -15,17 +15,19 @@ keywords:
   - 回滚必读
 ---
 
-## 概述
+## 回滚到 v2.5+
 
-本节包含有关如何将 Rancher Server 回滚到以前版本的信息。
+要回滚到 Rancher v2.5+，请使用`rancher-backup`应用程序，并根据[恢复 Rancher](/docs/rancher2/backups/2.5/restoring-rancher/_index)从备份中恢复 Rancher。
 
-- [回滚单节点 Rancher](/docs/rancher2/upgrades/rollbacks/single-node-rollbacks/_index)
-- [回滚高可用 Rancher](/docs/rancher2/upgrades/rollbacks/ha-server-rollbacks/_index)
-- [回滚到特定版本的 Rancher](#回滚到特定版本的Rancher)
+要回滚到 v2.5 之前的 Rancher，请按照这里的详细步骤进行：[恢复备份--Kubernetes 安装](/docs/rancher2/backups/2.0-2.4/ha-backups/_index)恢复 Rancher 服务器集群的快照将使 Rancher 恢复到快照时的版本和状态。
 
-## 回滚到特定版本
+有关如何回滚单节点安装的 Rancher 的信息，请参阅[本页](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/single-node-rollbacks/_index)
 
-如果回滚在这两种情况下，则必须遵循一些额外的说明才能使集群正常工作。
+受管集群对其状态具有权威性。这意味着恢复 rancher 服务器将不会恢复快照后在托管集群上进行的工作负载部署或更改。
+
+## 回滚到 v2.0.0-v2.1.5
+
+如果这两种情况下回滚在，则必须遵循一些额外的说明才能使集群正常工作。
 
 - 从 v2.1.6+ 回滚到 v2.1.0-v2.1.5 或 v2.0.0-v2.0.10 之间的任何版本。
 - 从 v2.0.11+ 回滚到 v2.0.0-v2.0.10 之间的任何版本。

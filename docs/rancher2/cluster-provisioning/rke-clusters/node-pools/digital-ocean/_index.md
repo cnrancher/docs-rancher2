@@ -16,52 +16,80 @@ keywords:
   - DigitalOcean
 ---
 
-使用 Rancher 在 DigitalOcean 中创建 Kubernetes 集群。
+## 概述
 
-1.  在`集群列表`界面中，单击`添加集群`。
+首先，您将在 Rancher 中设置您的 DigitalOcean 云证书。然后，您将使用您的云凭证创建一个节点模板，Rancher 将使用该模板在 DigitalOcean 中配置新节点。
 
-2.  选择 **DigitalOcean**。
+然后，您将在 Rancher 中创建一个 DigitalOcean 集群，在配置新集群时，您将为其定义节点池。每个节点池都会有一个 etcd、controlplane 或 worker 的 Kubernetes 角色。Rancher 将在新节点上安装 RKE Kubernetes，它将用节点池定义的 Kubernetes 角色来设置每个节点。
 
-3.  输入**集群名称**。
+## 创建 DigitalOcean 集群
 
-4.  通过**成员角色**来设置用户访问集群的权限。
+### v2.2.0+
 
-    - 单击**添加成员**把需要访问这个集群的用户添加到成员列表中。
-    - 在**角色**下拉菜单中选择每个用户的角色，每个角色对应不同的权限。
+#### 1. 创建云凭证
 
-5.  使用**集群选项**设置 Kubernetes 的版本，网络插件以及是否要启用项目网络隔离。要查看更多集群选项，请单击**显示高级选项**。
+1. 在 Rancher UI 中，单击右上角的用户配置文件按钮，然后单击 Cloud Credentials。
+1. 单击添加云凭证。
+1. 输入云凭证的名称。
+1. 在云凭证类型字段中，选择 DigitalOcean。
+1. 输入您的 DigitalOcean 凭证。
+1. 单击创建。
 
-6.  将一个或多个节点池添加到您的集群。
+结果：您已经创建了云凭证，将用于供应集群中的节点。您已创建了云凭证，该凭证将用于在集群中配置节点。您可以为其他节点模板或在其他集群中重复使用这些凭证。
 
-    **节点池**是基于节点模板的节点的集合。节点模板定义节点的配置，例如要使用的操作系统，CPU 数量和内存量。每个节点池必须分配一个或多个节点角色。
+#### 2. 使用您的云凭证创建节点模板
 
-    :::important 注意：
+为 Azure 创建节点模板将允许 Rancher 在 Azure 中配置新节点。节点模板可以为其他集群重复使用。
 
-    - 每个节点角色（即 `etcd`，`Control Plane` 和 `Worker`）应分配给不同的节点池。尽管可以为一个节点池分配多个节点角色，但是不应对生产集群执行此操作。
-    - 推荐的设置是拥有一个具有`etcd`节点角色且数量为 3 的节点池，一个具有`Control Plane`节点角色且数量至少为 2 的节点池，以及具有`Worker`节点角色且数量为 1 的节点池。至少两个。关于 `etcd` 节点角色，请参考 [etcd 管理指南](https://etcd.io/#optimal-cluster-size)。
+1. 在 Rancher UI 中，单击右上角的用户配置文件按钮，然后单击节点模板。
+2. 单击 "添加模板"。
+3. 填写 Azure 的节点模板。有关填写帮助，请参阅 Azure 节点模板配置。
 
-    :::
+结果：完成创建节点模板看，可以在集群创建过程中使用这个模板。
 
-    1. 单击 **添加节点模板**。注意：从 v2.2.0 开始，账户访问信息存储为云凭证。云凭证会存储为 Kubernetes 的 secret。多个节点模板可以使用相同的云凭证。您可以使用现有的云凭证或创建新的云凭证。要创建新的云凭证，请输入**名称**和**账户访问**数据，然后单击**创建**。
+#### 3. 使用节点模板创建一个具有节点池的集群
 
-    2. 完成 **Digital Ocean 选项** 表单的填写。
+1. 在`集群列表`界面中，单击`添加集群`。
 
-       - **访问令牌** 会存储您的 Digital Ocean 个人访问令牌. 请参照[DigitalOcean 说明：如何生成个人令牌](https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-api-v2-with-ansible-2-0-on-ubuntu-16-04#how-to-generate-a-personal-access-token)。
+1. 选择 **DigitalOcean**。
 
-       - **Droplet 选项** 设置集群的地理区域和规格。
+1. 输入**集群名称**。
 
-    3. [Docker 守护进程](https://docs.docker.com/engine/docker-overview/#the-docker-daemon)配置选项包括：
+1. 通过**成员角色**来设置用户访问集群的权限。
 
-       - **标签：** 有关标签的信息，请参阅 [Docker 对象标签文档](https://docs.docker.com/config/labels-custom-metadata/)。
-       - **Docker 引擎安装 URL：** 决定将在实例上安装哪个 Docker 版本。注意：如果您使用的是 RancherOS，因为配置的默认 Docker 版本可能不可用，请先确认要使用的 RancherOS 版本上可用的 Docker 版本。可以使用 `sudo ros engine list` 检查。如果您在其他操作系统上安装 Docker 时遇到问题，请尝试使用配置的 Docker Engine 安装 URL 手动安装 Docker 进行故障排查。
-       - **镜像仓库加速器：** Docker 守护进程使用的 Docker 镜像仓库加速器。
-       - **其他高级选项：** 请参阅 [Docker 守护进程选项参考](https://docs.docker.com/engine/reference/commandline/dockerd/)
+   - 单击**添加成员**把需要访问这个集群的用户添加到成员列表中。
+   - 在**角色**下拉菜单中选择每个用户的角色，每个角色对应不同的权限。
 
-    4. 单击**创建**。
+1. 使用**集群选项**设置 Kubernetes 的版本，网络插件以及是否要启用项目网络隔离。要查看更多集群选项，请单击**显示高级选项**。
 
-    5. **可选:** 添加其他节点池。
+1. 将一个或多个节点池添加到您的集群。
 
-7.  检查您填写的信息以确保填写正确，然后单击 **创建**。
+1. 检查您填写的信息以确保填写正确，然后单击 **创建**。
+
+结果：
+
+- 您的集群已创建并进入为 **Provisioning** 的状态。Rancher 正在启动您的集群。
+- 您可以在集群的状态更新为 **Active** 后访问它。
+- Rancher 为活动的集群分配了两个项目，即 `Default`（包含命名空间 `default`）和 `System`（包含命名空间 `cattle-system`，`ingress-nginx`，`kube-public` 和 `kube-system`，如果命名空间存在）。
+
+### v2.2.0 之前的版本
+
+1. 在`集群列表`界面中，单击`添加集群`。
+
+1. 选择 **DigitalOcean**。
+
+1. 输入**集群名称**。
+
+1. 通过**成员角色**来设置用户访问集群的权限。
+
+   - 单击**添加成员**把需要访问这个集群的用户添加到成员列表中。
+   - 在**角色**下拉菜单中选择每个用户的角色，每个角色对应不同的权限。
+
+1. 使用**集群选项**设置 Kubernetes 的版本，网络插件以及是否要启用项目网络隔离。要查看更多集群选项，请单击**显示高级选项**。
+
+1. 将一个或多个节点池添加到您的集群。
+
+1. 检查您填写的信息以确保填写正确，然后单击 **创建**。
 
 结果：
 

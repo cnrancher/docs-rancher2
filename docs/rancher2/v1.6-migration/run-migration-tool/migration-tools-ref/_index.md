@@ -51,7 +51,7 @@ migration-tools [global options] command [command options] [arguments...]
 | ---------------------- | ----- | --------------------------------------------------------------------------------------------------- |
 | `--url <VALUE>`        | ✓     | Rancher API 端点 URL (`<RANCHER_URL>`).                                                             |
 | `--access-key <VALUE>` | ✓     | Rancher API 访问密钥。使用帐户 API 密钥可导出所有 cattle 环境中的所有堆栈 (`<RANCHER_ACCESS_KEY>`). |
-| `--secret-key <VALUE>` | ✓     | 与访问密钥关联的 Rancher API 秘密密钥。(`<RANCHER_SECRET_KEY>`).                                    |
+| `--secret-key <VALUE>` | ✓     | 与访问密钥关联的 Rancher API 密钥密钥。(`<RANCHER_SECRET_KEY>`).                                    |
 | `--export-dir <VALUE>` |       | 组成文件导出到的基本目录，该目录在每个环境/堆栈创建的子目录下 (默认: `Export`).                     |
 | `--all`, `--a`         |       | 导出所有堆栈。使用此标志可以导出处于不活跃，已停止或正在移除状态的所有堆栈。                        |
 | `--system`, `--s`      |       | 导出系统和基础结构堆栈。                                                                            |

@@ -16,7 +16,13 @@ keywords:
   - Amazon EC2
 ---
 
-使用 Rancher 在 Amazon EC2 中创建 Kubernetes 集群。
+## 概述
+
+在本节中，您将学习如何使用 Rancher 在 Amazon EC2 中安装 RKE Kubernetes 集群。
+
+首先，您将在 Rancher 中设置您的 EC2 云凭证。然后，您将使用您的云凭证创建一个节点模板，Rancher 将使用该模板在 EC2 中配置新节点。
+
+然后您将在 Rancher 中创建一个 EC2 集群，在配置新集群时，您将为其定义节点池。每个节点池都会有一个 etcd、controlplane 或 worker 的 Kubernetes 角色。Rancher 将在新节点上安装 RKE Kubernetes，它将用节点池定义的 Kubernetes 角色来设置每个节点。
 
 ## 先决条件
 

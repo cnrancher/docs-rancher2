@@ -35,7 +35,7 @@ keywords:
 
    > **注意:** Kubernetes 将密文，证书和镜像库凭证分类为[Secret](https://kubernetes.io/docs/concepts/configuration/secret/)，并且项目或命名空间中的两个 secret 都不能有重复的名称。因此，为防止冲突，镜像库凭证必须在工作空间内的所有 secret 中具有唯一的名称。
 
-4. 为这个密文选择一个**范围**。您可以设置此密文作用于此项目所有[命名空间](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)或单个[命名空间](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)。
+4. 为这个密文选择一个**范围**。您可以设置此密文作用于此项目所有命名空间或单个命名空间。
 
 5. 从 **密文**，单击 **添加密文** 去添加一个键值对。也可以根据需要添加任意多个值。
 

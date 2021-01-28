@@ -11,6 +11,8 @@ title: 安装介绍
 - **Rancher Server：** 是用于管理和配置 Kubernetes 集群。您可以通过 Rancher Server 的 UI 与下游 Kubernetes 集群进行交互。
 - **RKE（Rancher Kubernetes Engine)：**是经过认证的 Kubernetes 发行版，它拥有对应的 CLI 工具可用于创建和管理 Kubernetes 集群。在 Rancher UI 中创建集群时，它将调用 RKE 来配置 Rancher 启动的 Kubernetes 集群。
 - **K3s (轻量级 Kubernetes)：** 和 RKE 类似，也是经过认证的 Kubernetes 发行版。它比 RKE 更新，更易用且更轻量化，全部组件都在一个小于 100 MB 的二进制文件中。从 Rancher v2.4 开始，Rancher 可以安装在 K3s 集群上。
+- **RKE2**是一个完全合规的 Kubernetes 发行版，专注于美国联邦政府部门的安全和合规性。
+- **RancherD**是安装 Rancher 的新工具，从 Rancher v2.5.4 开始提供。它是一个实验性功能。RancherD 是一个二进制文件，它首先启动一个 RKE2 Kubernetes 集群，然后在集群上安装 Rancher 服务器 Helm 图。
 
 ## Rancher v2.5 的变化
 
@@ -22,11 +24,21 @@ title: 安装介绍
 
 ## 安装选项概述
 
-Rancher 的部署可以有三种架构：
+Rancher 的部署可以有三种架构：使用 Helm CLI 进行高可用 Kubernetes 安装、使用 RancherD 进行高可用 Kubernetes 安装或使用 Kubernetes 进行单节点安装
 
-- **高可用 Kubernetes 安装：** 我们建议使用 Kubernetes 程序包管理器 [Helm](/docs/rancher2/overview/concepts/_index) 在专用的 Kubernetes 集群上安装 Rancher。在 RKE 集群中，需要使用三个节点以实现高可用性。在 K3s 集群中，仅需要两个节点即可。
-- **单节点 Kubernetes 安装：** 另一个选择是在 Kubernetes 集群上使用 Helm 安装 Rancher，仅在集群中使用单个节点。虽然在这种情况下的 Rancher Server 不具有高可用性，但是这种架构既节省了资源，又保留了可扩展性。如果您想在短期内通过使用单个节点来节省资源，同时又保留高可用性迁移路径，最合适的架构就是单节点 Kubernetes 安装。
-- **单节点 Docker 安装：** 将 Rancher 与 Docker 一起安装在单个节点上。这种安装方式的优点是开箱即用，建议您在测试和演示环境中使用这种架构。它的缺点也非常明显，单节点 Docker 安装和 Kubernetes 安装之间无法迁移。如果您已经决定了要在生产环境中使用 Rancher，我们推荐您在上述的两种 Kubernetes 安装中选择一种，在生产环境中使用。
+### 使用 Helm CLI 进行高可用 Kubernetes 安装
+
+我们建议使用 Kubernetes 程序包管理器 [Helm](/docs/rancher2/overview/concepts/_index) 在专用的 Kubernetes 集群上安装 Rancher。在 RKE 集群中，需要使用三个节点以实现高可用性。在 K3s 集群中，仅需要两个节点即可。
+
+### 使用 RancherD 进行高可用 Kubernetes 安装
+
+_从 v2.5.4 开始提供_
+
+RancherD 是一个的二进制文件，它首先启动一个 RKE2 Kubernetes 集群，然后在集群上安装 Rancher 服务器的 Helm 图表。这是一个实验性的功能。在 RancherD 安装和 Helm CLI 安装中，Rancher 都是作为 Helm 图安装在 Kubernetes 集群上。使用 RancherD 也简化了配置和升级。当您升级 RancherD 二进制时，Kubernetes 集群和 Rancher Helm 图表都会升级。
+
+### 使用 Kubernetes 进行单节点安装
+
+另一个选择是在 Kubernetes 集群上使用 Helm 安装 Rancher，仅在集群中使用单个节点。虽然在这种情况下的 Rancher Server 不具有高可用性，但是这种架构既节省了资源，又保留了可扩展性。如果您想在短期内通过使用单个节点来节省资源，同时又保留高可用性迁移路径，最合适的架构就是单节点 Kubernetes 安装。
 
 关于在私有环境中或 HTTP 代理后面安装 Rancher，我们有单独的说明文档：
 

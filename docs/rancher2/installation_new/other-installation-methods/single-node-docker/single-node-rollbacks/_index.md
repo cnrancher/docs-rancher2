@@ -91,7 +91,10 @@ docker pull rancher/rancher:<PRIOR_RANCHER_VERSION>
 
    ```
    docker run -d --volumes-from rancher-data \
-   --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher:<PRIOR_RANCHER_VERSION>
+    --restart=unless-stopped \
+    -p 80:80 -p 443:443 \
+    --privileged \
+    rancher/rancher:<PRIOR_RANCHER_VERSION>
    ```
 
    > **注意：** 不要在启动回滚后停止回滚，即使回滚过程似乎比预期的要长。停止回滚可能导致在将来的升级时产生数据库问题。

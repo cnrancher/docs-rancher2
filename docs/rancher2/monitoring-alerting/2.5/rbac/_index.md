@@ -28,7 +28,7 @@ keywords:
 - 通过 Prometheus CRs 在集群中创建/修改/删除 Prometheus 部署。
 - 通过 Alertmanager CRs 在集群中创建/修改/删除 Alertmanager 部署。
 - 通过在适当的命名空间中创建 ConfigMaps 来坚持新的 Grafana 仪表盘或数据资源。
-- 通过`cattle-monitoring-system`命名空间中的秘密，将某些 Prometheus 指标暴露给 HPA 的 K8s 自定义指标 API。
+- 通过`cattle-monitoring-system`命名空间中的密钥，将某些 Prometheus 指标暴露给 HPA 的 K8s 自定义指标 API。
 
 ## 默认的 K8s ClusterRole
 
@@ -69,9 +69,9 @@ keywords:
 
 | 角色                       | 目的                                                                                                                                                                                                                                                  |
 | :------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| monitoring-config-admin    | 允许管理员给用户分配角色，使其能够查看/修改 cattle-monitoring-system 命名空间内的 Secrets 和 ConfigMaps。在这个命名空间中修改 Secrets / ConfigMaps 可以让用户改变集群的 Alertmanager 配置、Prometheus 适配器配置、额外的 Grafana 数据源、TLS 秘密等。 |
-| monitoring-config-edit     | 允许管理员给用户分配角色，使其能够查看/修改 cattle-monitoring-system 命名空间内的 Secrets 和 ConfigMaps。在这个命名空间中修改 Secrets / ConfigMaps 可以让用户改变集群的 Alertmanager 配置、Prometheus 适配器配置、额外的 Grafana 数据源、TLS 秘密等。 |
-| monitoring-config-view     | 允许管理员给用户分配角色，使其能够在 cattle-monitoring-system 命名空间内查看 Secrets 和 ConfigMaps。在这个命名空间中查看秘密/配置图可以让用户观察集群的 Alertmanager 配置、Prometheus 适配器配置、额外的 Grafana 数据源、TLS 秘密等。                 |
+| monitoring-config-admin    | 允许管理员给用户分配角色，使其能够查看/修改 cattle-monitoring-system 命名空间内的 Secrets 和 ConfigMaps。在这个命名空间中修改 Secrets / ConfigMaps 可以让用户改变集群的 Alertmanager 配置、Prometheus 适配器配置、额外的 Grafana 数据源、TLS 密钥等。 |
+| monitoring-config-edit     | 允许管理员给用户分配角色，使其能够查看/修改 cattle-monitoring-system 命名空间内的 Secrets 和 ConfigMaps。在这个命名空间中修改 Secrets / ConfigMaps 可以让用户改变集群的 Alertmanager 配置、Prometheus 适配器配置、额外的 Grafana 数据源、TLS 密钥等。 |
+| monitoring-config-view     | 允许管理员给用户分配角色，使其能够在 cattle-monitoring-system 命名空间内查看 Secrets 和 ConfigMaps。在这个命名空间中查看密钥/配置图可以让用户观察集群的 Alertmanager 配置、Prometheus 适配器配置、额外的 Grafana 数据源、TLS 密钥等。                 |
 | monitoring-dashboard-admin | 允许管理员将角色分配给用户，以便能够编辑/查看 cattle-dashboards 命名空间中的 ConfigMaps。该命名空间中的 ConfigMaps 将对应于持久化到集群上的 Grafana Dashboards。                                                                                      |
 | monitoring-dashboard-edit  | 允许管理员将角色分配给用户，以便能够编辑/查看 cattle-dashboards 命名空间中的 ConfigMaps。该命名空间中的 ConfigMaps 将对应于持久化到集群上的 Grafana Dashboards。                                                                                      |
 | monitoring-dashboard-view  | 允许管理员将角色分配给用户，以便能够查看 cattle-dashboards 命名空间内的 ConfigMaps。此命名空间中的 ConfigMaps 将对应于持久化到集群上的 Grafana Dashboards。                                                                                           |

@@ -37,7 +37,7 @@ keywords:
 - 可以使用 `-e KEY = VALUE` 或 `--env KEY = VALUE` 将环境变量传递到 Rancher 容器。
 - 使用`-v host-source-directory:container-destination-directory`或`--volume host-source-directory:container-destination-directory`，可以在容器内挂载主机目录。
 
-以下示例是将主机上的`/host/certs`目录中的 CA 根证书，挂载到 Rancher 容器中的`/container/certs`上。
+以下示例是将主机上的`/host/certs`目录中的 CA 根证书，挂载到 Rancher 容器中的`/container/certs`上。使用`docker run`命令安装 Rancher 2.5.x 时，需要添加`--privileged`标志变量，启用特权模式安装 Rancher。
 
 ```
 docker run -d --privileged --restart=unless-stopped \
@@ -51,7 +51,7 @@ docker run -d --privileged --restart=unless-stopped \
 
 API 审计日志记录通过 Rancher Server 进行的所有用户请求和系统事务。
 
-默认情况下，API 审计日志会写入 rancher 容器内的`/var/log/auditlog`中。您可以设置`AUDIT_LEVEL`以启用日志，并将该目录作为卷共享。
+默认情况下，API 审计日志会写入 rancher 容器内的`/var/log/auditlog`中。您可以设置`AUDIT_LEVEL`以启用日志，并将该目录作为卷共享。使用`docker run`命令安装 Rancher 2.5.x 时，需要添加`--privileged`标志变量，启用特权模式。
 
 参考[API 审计日志](/docs/rancher2/installation/options/api-audit-log/_index)获取更多信息。
 
@@ -67,7 +67,7 @@ docker run -d --privileged --restart=unless-stopped \
 
 _v2.1.7 可用_
 
-要设置其他 TLS 配置，您可以使用`CATTLE_TLS_MIN_VERSION`和`CATTLE_TLS_CIPHERS`环境变量。例如，要将 TLS 1.0 配置为可接受的最低 TLS 版本：
+要设置其他 TLS 配置，您可以使用`CATTLE_TLS_MIN_VERSION`和`CATTLE_TLS_CIPHERS`环境变量。使用`docker run`命令安装 Rancher 2.5.x 时，需要添加`--privileged`标志变量，启用特权模式。例如，要将 TLS 1.0 配置为可接受的最低 TLS 版本：
 
 ```
 docker run -d --privileged --restart=unless-stopped \
@@ -90,7 +90,7 @@ docker run -d --privileged --restart=unless-stopped \
 
 ## 持久化数据
 
-Rancher 使用 etcd 作为数据存储。使用 Docker 安装时，将使用嵌入式 etcd。持久数据位于容器中的以下路径中：`/var/lib/rancher`。您可以将主机卷挂载到该位置，以将数据保留在运行 Rancher Server 容器的主机上。使用 RancherOS 时，请检查哪些[持久性存储目录](https://rancher.com/docs/os/v1.x/en/installation/system-services/system-docker-volumes/#user-volumes)可用。
+Rancher 使用 etcd 作为数据存储。使用 Docker 安装时，将使用嵌入式 etcd。持久数据位于容器中的以下路径中：`/var/lib/rancher`。您可以将主机卷挂载到该位置，以将数据保留在运行 Rancher Server 容器的主机上。使用 RancherOS 时，请检查哪些[持久性存储目录](https://rancher.com/docs/os/v1.x/en/installation/system-services/system-docker-volumes/#user-volumes)可用。使用`docker run`命令安装 Rancher 2.5.x 时，需要添加`--privileged`标志变量，启用特权模式。
 
 命令：
 
@@ -108,6 +108,8 @@ docker run -d --privileged --restart=unless-stopped \
 如果将节点添加到集群中，它将部署使用端口 80 和 443 的 nginx ingress 控制器。这将与我们建议为`rancher/ rancher`容器公开的默认端口冲突。
 
 请注意，不建议将此设置用于生产环境，这种方式仅用来方便进行开发/演示。
+
+使用`docker run`命令安装 Rancher 2.5.x 时，需要添加`--privileged`标志变量，启用特权模式。
 
 要更改主机端口映射，请将以下部分`-p 80:80 -p 443:443`替换为`-p 8080:80 -p 8443:443`：
 

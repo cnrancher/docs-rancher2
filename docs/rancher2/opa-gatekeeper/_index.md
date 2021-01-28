@@ -16,8 +16,6 @@ keywords:
 
 _自 v2.4.0 起可用_
 
-> 这是 Rancher v2.4 版本的实验性功能。
-
 为了确保一致性和合规性，每个组织都需要具有在其环境中定义和执行策略的能力。[OPA](https://www.openpolicyagent.org/)（Open Policy Agent）是一种策略引擎，可对云原生环境进行基于策略的控制。Rancher 提供了在 Kubernetes 集群中启用 OPA Gatekeeper 的功能，并且还安装了一些内置策略定义，也称为约束模板。
 
 OPA 提供了一种声明性语言，您可以使用代码来定义策略，并具有扩展简单 API 的能力以减轻策略决策的负担。

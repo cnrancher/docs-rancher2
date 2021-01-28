@@ -27,10 +27,10 @@ keywords:
 4.  选择一个[工作负载类型](/docs/rancher2/k8s-in-rancher/workloads/_index)。工作负载默认为可伸缩的部署，通过单击**更多选项**可以更改工作负载类型。
 
 5.  在**Docker 镜像**字段中，输入要部署到项目的 Docker 镜像的名称，可以选择使用镜像库地址作为前缀 (例如 `quay.io`，`registry.gitlab.com`等)。在部署期间，Rancher 将从指定的公共或私有镜像仓库获取此镜像。如果没有指定镜像仓库，Rancher 将从[Docker Hub](https://hub.docker.com/explore/)获取镜像。请输入与镜像库中的镜像名称完全相同的名称，包括所需的路径和所需的标记 (例如，`registry.gitlab.com/user/path/image:tag`)。如果没有提供标签，则会自动使用`latest`的标签。
-6.  选择一个现有的[命名空间](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)，或者单击**添加一个新的命名空间**创建一个新的命名空间。
+6.  选择一个现有的命名空间，或者单击**添加一个新的命名空间**创建一个新的命名空间。
 7.  单击**添加端口**输入端口映射，允许在集群内外访问应用程序。获取更多信息，请参见[服务](/docs/rancher2/k8s-in-rancher/workloads/_index)。
 
-8.  配置其余选项:
+8.  配置其余选项：
 
     - **环境变量**
 

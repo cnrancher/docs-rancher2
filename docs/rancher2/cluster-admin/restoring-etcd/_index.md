@@ -97,7 +97,7 @@ values={[
 
 ## 在没有快照的情况下恢复 etcd
 
-如果 etcd 节点组没有保持法定的成员数（quorum），即超过半数以上的 etcd 节点组成员丢失，Kubernetes 集群将报告失败，因为在 Kubernetes 集群中不能执行任何操作，例如部署工作负载。请查看 Kubernetes 集群中的[etcd 节点数量](/docs/rancher2/cluster-provisioning/production/_index)的最佳实践。如果您想恢复您的 etcd 节点集，请遵循以下说明：
+如果 etcd 节点组失去 quorum，Kubernetes 集群将报告失败，因为在 Kubernetes 集群中不能执行任何操作，例如部署工作负载。集群应该有三个 etcd 节点，以防止失去 quorum。如果你想恢复你的一组 etcd 节点，请按照以下说明进行操作。
 
 1. 通过删除所有其他 etcd 节点，在集群中只保留一个 etcd 节点。
 

@@ -49,19 +49,19 @@ docker run  --volumes-from rancher-data-<DATE> -v $PWD:/backup busybox tar pzcvf
 
 1. 使用远程终端连接，登录到运行 Rancher Server 的节点。
 
-1. 停止当前运行 Rancher Server 的容器。将`<RANCHER_CONTAINER_NAME>`替换为[你的 Rancher 容器的名称](#在开始之前)。
+1. 停止当前运行 Rancher Server 的容器。将`<RANCHER_CONTAINER_NAME>`替换为你的 Rancher 容器的名称。
 
    ```bash
    docker stop <RANCHER_CONTAINER_NAME>
    ```
 
-1. 使用下面的命令，替换每个[占位符](#在开始之前)，从刚刚停止的 Rancher 容器创建一个数据容器。
+1. 使用下面的命令，替换每个占位符，从刚刚停止的 Rancher 容器创建一个数据容器。
 
    ```bash
    docker create --volumes-from <RANCHER_CONTAINER_NAME> --name rancher-data-<DATE> rancher/rancher:<RANCHER_CONTAINER_TAG>
    ```
 
-1. 从你刚刚创建的数据容器(`rancher-data-<DATE>`)中，创建一个备份 tar 包(`rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz`)。使用以下命令，替换每个[占位符](#在开始之前)。
+1. 从你刚刚创建的数据容器(`rancher-data-<DATE>`)中，创建一个备份 tar 包(`rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz`)。使用以下命令，替换每个占位符。
 
    ```bash
    docker run  --volumes-from rancher-data-<DATE> -v $PWD:/backup:z busybox tar pzcvf /backup/rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz /var/lib/rancher
@@ -73,7 +73,7 @@ docker run  --volumes-from rancher-data-<DATE> -v $PWD:/backup busybox tar pzcvf
 
 1. 将您的备份压缩包移动到 Rancher 服务器外部的安全位置。然后从 Rancher 服务器中删除`rancher-data-<DATE>`容器。
 
-1. 重新启动 Rancher Server。将`<RANCHER_CONTAINER_NAME>`替换为你的 [Rancher 容器](#在开始之前)的名称。
+1. 重新启动 Rancher Server。将`<RANCHER_CONTAINER_NAME>`替换为 Rancher 容器的名称。
 
    ```bash
    docker start <RANCHER_CONTAINER_NAME>

@@ -48,3 +48,9 @@ _v0.2.3 或更新版本可用_
 | kube-dns       | - `beta.kubernetes.io/os:NotIn:windows`<br/>- `node-role.kubernetes.io/worker` `Exists` | none                          | - `NoSchedule:Exists`<br/>- `NoExecute:Exists`<br/>- `CriticalAddonsOnly:Exists` |
 | nginx-ingress  | - `beta.kubernetes.io/os:NotIn:windows`<br/>- `node-role.kubernetes.io/worker` `Exists` | none                          | - `NoSchedule:Exists`<br/>- `NoExecute:Exists`                                   |
 | metrics-server | - `beta.kubernetes.io/os:NotIn:windows`<br/>- `node-role.kubernetes.io/worker` `Exists` | none                          | - `NoSchedule:Exists`<br/>- `NoExecute:Exists`                                   |
+
+## 容忍度
+
+_从 v1.2.4 开始提供_
+
+可根据每个附加组件配置容忍度，并适用于部署资源。已配置的容忍度将取代现有的容忍度，因此请确保配置了所有需要的容忍度。请参阅具体的附加组件文档页面了解更多信息。

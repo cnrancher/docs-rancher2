@@ -50,7 +50,7 @@ keywords:
 你可以在[Istio 官方文档](https://istio.io/)中找到更多关于 Istio 配置的信息。
 
 1. 在 Rancher **集群资源管理器**中，在**应用程序和市场**中导航到您的 Istio 安装。
-1. 单击**升级**，通过修改数值来编辑`value.yaml` 或添加[覆盖文件](/docs/rancher2/istio/2.5/setup/enable-istio-in-cluster/_index)。
+1. 单击**升级**，通过修改数值来编辑`value.yaml` 或添加[覆盖文件](/docs/rancher2/istio/2.5/configuration-reference/_index)。
 1. 更改 CPU 或内存分配，每个组件将被调度到的节点，或节点容忍度。
 1. 单击**Upgrade**完成更改。
 

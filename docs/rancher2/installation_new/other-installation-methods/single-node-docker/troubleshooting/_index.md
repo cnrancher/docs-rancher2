@@ -1,5 +1,5 @@
 ---
-title: 常见问题和问题排查
+title: 证书相关的问题排查
 description: 常见问题和问题排查
 keywords:
   - rancher 2.0中文文档

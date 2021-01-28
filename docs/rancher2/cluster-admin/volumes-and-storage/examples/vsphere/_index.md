@@ -19,6 +19,8 @@ keywords:
 
 在为 StatefulSet 提供 vSphere 存储时，建议创建 vSphereVolume [存储类](/docs/rancher2/cluster-admin/volumes-and-storage/_index)。当工作负载通过[持久卷声明](/docs/rancher2/cluster-admin/volumes-and-storage/how-storage-works/_index)请求卷时，此做法可动态配置 vSphere 存储。
 
+要在 vSphere 中动态配置存储，必须 [启用](/docs/rancher2/cluster-provisioning/rke-clusters/cloud-providers/vsphere/_index)vSphere。
+
 ## 先决条件
 
 在 [RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)中配置 vSphere 卷时，需要先在[集群选项](/docs/rancher2/cluster-provisioning/rke-clusters/options/_index)中配置好[vSphere Cloud Provider](/docs/rke/config-options/cloud-providers/vsphere/_index)的信息。

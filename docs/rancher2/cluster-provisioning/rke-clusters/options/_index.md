@@ -1,5 +1,5 @@
 ---
-title: 集群参数
+title: RKE集群参数
 description: 当您在 Rancher 中使用 RKE 启动集群时，您可以选择自定义 Kubernetes 选项。您可以通过Rancher UI或集群配置文件配置 Kubernetes 选项。
 keywords:
   - rancher 2.0中文文档
@@ -105,6 +105,10 @@ _v2.2.0 可用_
 有关授权的集群端点如何工作以及使用它的原因的更多详细信息，请参阅[产品架构](/docs/rancher2/overview/architecture/_index)。
 
 我们建议将负载均衡器与授权的集群端点一起使用。有关详细信息，请参阅[推荐架构](/docs/rancher2/overview/architecture-recommendations/_index)。
+
+### 节点池
+
+有关使用 Rancher UI 在 RKE 集群中设置节点池的信息，请参阅 [本页。](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/_index)。
 
 ## 高级选项
 

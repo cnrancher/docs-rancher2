@@ -17,6 +17,8 @@ title: 为 Rancher 设置高可用 K3s Kubernetes 集群
 
 这些说明假设你已经设置了两个节点、一个负载均衡器、一个 DNS 记录和一个外部 MySQL 数据库，如[本节所述](/docs/rancher2/installation_new/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha-with-external-db/_index)。
 
+Rancher 需要安装在支持的 Kubernetes 版本上。要了解您的 Rancher 版本支持哪些版本的 Kubernetes，请参考[支持维护条款]。(https://rancher.com/support-maintenance-terms/)。要指定 K3s 版本，请在运行 K3s 安装脚本时使用 INSTALL_K3S_VERSION 环境变量。
+
 ## 安装 Kubernetes
 
 ### 步骤 1：安装 Kubernetes 并设置 K3s 服务器
@@ -31,7 +33,14 @@ title: 为 Rancher 设置高可用 K3s Kubernetes 集群
    --datastore-endpoint="mysql://username:password@tcp(hostname:3306)/database-name"
    ```
 
-   注意：也可以使用环境变量`$K3S_DATASTORE_ENDPOINT`来传递数据存储端点。
+   要指定 K3s 版本，请在运行 K3s 安装脚本时使用 INSTALL_K3S_VERSION 环境变量：
+
+   ```sh
+   curl -sfL https://get.k3s.io |  INSTALL_K3S_VERSION=vX.Y.Z sh -s - server \
+     --datastore-endpoint="mysql://username:password@tcp(hostname:3306)/database-name"
+   ```
+
+注意：也可以使用环境变量`$K3S_DATASTORE_ENDPOINT`来传递数据存储端点。
 
 1. 在你的第二个 K3s 服务器节点上重复同样的命令。
 
@@ -39,24 +48,30 @@ title: 为 Rancher 设置高可用 K3s Kubernetes 集群
 
 请在 K3s 服务器节点上运行以下命令，确认 K3s 已经设置成功。
 
-```
+````
+
 sudo k3s kubectl get nodes
+
 ```
 
 然后你应该看到两个具有 master role 的节点。
 
 ```
+
 ubuntu@ip-172-31-60-194:~$ sudo k3s kubectl get nodes
-NAME               STATUS   ROLES    AGE    VERSION
-ip-172-31-60-194   Ready    master   44m    v1.17.2+k3s1
-ip-172-31-63-88    Ready    master   6m8s   v1.17.2+k3s1
+NAME STATUS ROLES AGE VERSION
+ip-172-31-60-194 Ready master 44m v1.17.2+k3s1
+ip-172-31-63-88 Ready master 6m8s v1.17.2+k3s1
+
 ```
 
 然后测试集群 pods 的健康状况。
 
 ```
+
 sudo k3s kubectl get pods --all-namespaces
-```
+
+````
 
 **结果：** 您已经成功建立了一个 K3s Kubernetes 集群。
 
