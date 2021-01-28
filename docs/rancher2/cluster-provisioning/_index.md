@@ -107,3 +107,15 @@ _自 Rancher v2.4.0 起可用_
 - 在 UI 中查看（只读）集群中每个节点的 K3s 配置参数和环境变量。
 
 有关更多信息，请参阅[导入现有 K3s 集群](/docs/rancher2/cluster-provisioning/imported-clusters/_index)一节。
+
+## 登记现有的集群
+
+_从 v2.5.0 起可用_
+
+集群注册功能取代了导入集群的功能。
+
+注册 EKS 集群现在提供了额外的好处。在大多数情况下，注册的 EKS 集群和在 Rancher 中创建的 EKS 集群在 Rancher UI 中的处理方式是一样的，除了删除。
+
+当您删除在 Rancher 中创建的 EKS 集群时，该集群将被销毁。当您删除在 Rancher 中注册的 EKS 集群时，它将与 Rancher 服务器断开连接，但它仍然存在，您仍然可以以在 Rancher 中注册之前的方式访问它。
+
+有关更多信息，请参阅[本页。](/docs/rancher2/cluster-provisioning/registered-clusters/_index)。

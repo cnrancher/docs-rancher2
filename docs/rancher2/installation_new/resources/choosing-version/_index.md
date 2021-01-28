@@ -22,6 +22,8 @@ keywords:
 
 - 单节点安装：对于使用 Docker 安装的单节点 Rancher，一般用于开发和测试，Rancher 将以 **Docker 镜像**的形式安装。
 
+- Helm chart 版本也适用于 RancherD 的安装，因为 RancherD 将 Rancher Helm Chart 安装在 Kubernetes 集群上。
+
 ## Helm Charts
 
 在安装、升级或回滚[Rancher 高可用](/docs/rancher2/installation_new/install-rancher-on-k8s/_index)时，您将使用 **Helm Chart** 在 Kubernetes 集群上对 Rancher 进行操作。因此，在准备安装或升级 Rancher 高可用时，必须添加包含用于安装 Rancher 的 Helm Chart 的 Helm Chart 仓库。

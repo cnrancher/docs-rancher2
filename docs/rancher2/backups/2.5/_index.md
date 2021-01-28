@@ -93,7 +93,7 @@ helm install rancher-backup rancher-charts/rancher-backup -n cattle-resources-sy
 
 ### RBAC
 
-只有 rancher 管理员，和本地集群的集群所有者具有以下权限：
+只有 rancher 管理员和本地集群的集群所有者具有以下权限：
 
 - 安装 Chart
 - 参阅导航链接，了解备份和恢复 CRD。

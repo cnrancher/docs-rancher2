@@ -33,6 +33,7 @@ values={[
 { label: 'K3s', value: 'k3s', },
 { label: 'RKE', value: 'rke', },
 { label: 'Docker', value: 'docker', },
+{ label: 'RancherD', value: 'RancherD', },
 ]}>
 
 <TabItem value="k3s">
@@ -74,6 +75,31 @@ K3s Server 需要开放 6443 端口供节点访问。
 | TCP  | 443          | `35.160.43.145/32`，`35.167.242.46/32`，`52.33.59.17/32` | git.rancher.io (应用商店)                        |
 | TCP  | 2376         | 使用主机驱动创建的节点中的任何节点 IP                    | Docker Machine 使用的 Docker 守护进程的 TLS 端口 |
 | TCP  | 取决于供应商 | 托管集群的 Kubernetes API 端口                           | Kubernetes API                                   |
+
+</TabItem>
+
+<TabItem value="RancherD">
+RancherD（或RKE2）服务器需要6443和9345端口才能被集群中的其他节点访问。
+
+当使用 Flannel VXLAN 时，所有节点都需要能够通过 UDP 端口 8472 到达其他节点。
+
+如果希望利用度量服务器，则需要在每个节点上打开 10250 端口。
+
+重要的是：节点上的 VXLAN 端口不应该暴露在世界范围内，因为它打开了你的集群网络，任何人都可以访问。在防火墙/安全组后面运行您的节点，禁止访问端口 8472。
+
+RancherD 或 RKE2 服务器节点的入站规则如下：
+
+| 协议  | 端口        | 源                                                                                                                 | 描述                                                                                     |
+| ----- | ----------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- |
+| TCP   | 9345        | RancherD/RKE2 agent nodes                                                                                          | Kubernetes API                                                                           |
+| TCP   | 6443        | RancherD/RKE2 agent nodes                                                                                          | Kubernetes API                                                                           |
+| UDP   | 8472        | RancherD/RKE2 server and agent nodes                                                                               | Required only for Flannel VXLAN                                                          |
+| TCP   | 10250       | RancherD/RKE2 server and agent nodes                                                                               | kubelet                                                                                  |
+| TCP   | 2379        | RancherD/RKE2 server nodes                                                                                         | etcd client port                                                                         |
+| TCP   | 2380        | RancherD/RKE2 server nodes                                                                                         | etcd peer port                                                                           |
+| TCP   | 30000-32767 | RancherD/RKE2 server and agent nodes                                                                               | NodePort port range                                                                      |
+| HTTP  | 8080        | Load balancer/proxy that does external SSL termination                                                             | Rancher UI/API when external SSL termination is used                                     |
+| HTTPS | 8443        | <ul><li>hosted/imported Kubernetes</li><li>any source that needs to be able to use the Rancher UI or API</li></ul> | Rancher agent, Rancher UI/API, kubectl. Not needed if you have LB doing TLS termination. |
 
 </TabItem>
 
@@ -202,3 +228,13 @@ import PortsImportedHosted from '@theme/PortsImportedHosted';
 | 自定义 TCP 规则 | TCP  | 30000-32767 | 0.0.0.0/0              |   入站   |
 | 自定义 UDP 规则 | UDP  | 30000-32767 | 0.0.0.0/0              |   入站   |
 | 全部流量        | All  |     All     | 0.0.0.0/0              |   出站   |
+
+### 打开 SUSE Linux Portslink
+
+SUSE Linux 可能有一个默认情况下会阻止所有端口的防火墙。要打开将主机添加到自定义集群所需的端口。
+
+1. SSH 进入实例。
+2. 编辑/etc/sysconfig/SuSEfirewall2，打开所需端口。在本例中，也打开 9796 和 10250 端口进行监控。FW_SERVICES_EXT_TCP="22 80 443 2376 2379 2380 6443 9099 9796 10250 10254 30000:32767" FW_SERVICES_EXT_UDP="8472 30000:32767" FW_ROUTE=yes
+3. 用新的端口重新启动防火墙。SuSEfirewall2
+
+结果：该节点拥有添加到自定义集群所需的开放端口。节点有开放的端口，需要添加到自定义集群。

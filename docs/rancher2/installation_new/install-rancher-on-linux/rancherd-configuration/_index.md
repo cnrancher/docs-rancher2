@@ -192,11 +192,11 @@ rancherd server [OPTIONS]
 
 ### Agent Runtime
 
-| 选项                                 | 描述                                                              |
-| ------------------------------------ | ----------------------------------------------------------------- |
-| `--container-runtime-endpoint value` | 禁用嵌入式容器，使用替代的 CRI 实现。                             |
-| `--snapshotter value`                | 覆盖默认的容器 d snapshotter（默认："overlayfs"）。               |
-| `--private-registry value`           | 私人注册表配置文件（默认："/etc/rancher/rke2/registries.yaml"）。 |
+| 选项                                 | 描述                                                                |
+| ------------------------------------ | ------------------------------------------------------------------- |
+| `--container-runtime-endpoint value` | 禁用嵌入式容器，使用替代的 CRI 实现。                               |
+| `--snapshotter value`                | 覆盖默认的容器 d snapshotter（默认："overlayfs"）。                 |
+| `--private-registry value`           | 私有镜像仓库配置文件（默认："/etc/rancher/rke2/registries.yaml"）。 |
 
 ### Agent 网络
 
@@ -269,11 +269,11 @@ rancherd agent [OPTIONS]
 
 ### Agent Runtime
 
-| 选项                                 | 描述                                                              |
-| ------------------------------------ | ----------------------------------------------------------------- |
-| `--container-runtime-endpoint value` | 禁用嵌入式容器，使用替代的 CRI 实现。                             |
-| `--snapshotter value`                | 覆盖默认的容器 d snapshotter（默认："overlayfs"）。               |
-| `--private-registry value`           | 私人注册表配置文件（默认："/etc/rancher/rke2/registries.yaml"）。 |
+| 选项                                 | 描述                                                                |
+| ------------------------------------ | ------------------------------------------------------------------- |
+| `--container-runtime-endpoint value` | 禁用嵌入式容器，使用替代的 CRI 实现。                               |
+| `--snapshotter value`                | 覆盖默认的容器 d snapshotter（默认："overlayfs"）。                 |
+| `--private-registry value`           | 私有镜像仓库配置文件（默认："/etc/rancher/rke2/registries.yaml"）。 |
 
 ### Agent 网络
 

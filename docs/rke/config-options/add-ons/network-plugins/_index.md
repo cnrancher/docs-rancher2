@@ -49,6 +49,32 @@ network:
 通过设置`canal_iface`，可以配置主机间通信使用的接口。
 `canal_flannel_backend_type`选项允许你指定要使用的[flannel backend](https://github.com/coreos/flannel/blob/master/Documentation/backends.md)的类型。默认情况下使用`vxlan`后端。
 
+## Canal 网络插件容忍度
+
+_从 v1.2.4 开始提供_
+
+配置的容忍度适用于`calico-kube-controllers`部署。
+
+```yaml
+network:
+  plugin: canal
+  tolerations:
+    - key: "node.kubernetes.io/unreachable"
+      operator: "Exists"
+      effect: "NoExecute"
+      tolerationseconds: 300
+    - key: "node.kubernetes.io/not-ready"
+      operator: "Exists"
+      effect: "NoExecute"
+      tolerationseconds: 300
+```
+
+要检查 `calico-kube-controllers`部署上的应用容忍度，请使用以下命令。
+
+```bash
+kubectl -n kube-system get deploy calico-kube-controllers -o jsonpath='{.spec.template.spec.tolerations}'
+```
+
 ### Flannel 插件选项
 
 ```yaml
@@ -81,6 +107,32 @@ Calico 目前只支持 2 个云提供商，AWS 或 GCE，可以使用`calico_clo
 
 - `aws`
 - `gce`
+
+## Canal 网络插件容忍度
+
+_从 v1.2.4 开始提供_
+
+配置的容忍度适用于`calico-kube-controllers`部署。
+
+```yaml
+network:
+  plugin: canal
+  tolerations:
+    - key: "node.kubernetes.io/unreachable"
+      operator: "Exists"
+      effect: "NoExecute"
+      tolerationseconds: 300
+    - key: "node.kubernetes.io/not-ready"
+      operator: "Exists"
+      effect: "NoExecute"
+      tolerationseconds: 300
+```
+
+要检查 `calico-kube-controllers`部署上的应用容忍度，请使用以下命令。
+
+```bash
+kubectl -n kube-system get deploy calico-kube-controllers -o jsonpath='{.spec.template.spec.tolerations}'
+```
 
 ### Weave 插件选项
 

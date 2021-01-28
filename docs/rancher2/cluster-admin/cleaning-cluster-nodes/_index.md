@@ -19,7 +19,7 @@ keywords:
 
 当您使用 Rancher [创建集群节点](/docs/rancher2/cluster-provisioning/_index) 时，将创建资源(容器/虚拟网络接口)和配置项(证书/配置文件)。
 
-当从您的 Rancher 启动的 Kubernetes 集群中删除节点时(假设它们处于“活动”状态)，这些资源将被自动清除，所需的唯一操作是重新启动节点。当一个节点变得不可访问并且不能使用自动清理过程时，我们将再次说明将该节点添加到集群之前需要执行的步骤。
+当从您的 Rancher 启动的 Kubernetes 集群中删除节点时(假设它们处于`active`状态)，这些资源将被自动清除，所需的唯一操作是重新启动节点。当一个节点变得不可访问并且不能使用自动清理过程时，我们将再次说明将该节点添加到集群之前需要执行的步骤。
 
 ## 清理脚本
 
@@ -193,7 +193,7 @@ $ sudo shutdown -r now
 
 > **警告：** 此过程将从您的集群中删除数据。在执行命令之前，请确保您已经创建了要保存的文件备份，因为数据将会丢失。
 
-在使用 Rancher UI(或 API)开始删除 [导入的集群](/docs/rancher2/cluster-provisioning/_index) 之后, 将发生以下事件。
+在使用 Rancher UI(或 API)开始删除导入的集群之后, 将发生以下事件。
 
 1. Rancher 创建了一个 `serviceAccount` 用于从集群中删除 Rancher 组件。这个帐户分配了删除 Rancher 组件所需要的[clusterRole](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#role-and-clusterrole) 和 [clusterRoleBinding](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#rolebinding-and-clusterrolebinding) 权限。
 

@@ -37,7 +37,7 @@ Rancher 的全局 DNS 功能提供了一种对外部 DNS 提供商进行编程�
 
 要将流量路由到的每个应用程序，您需要创建一个全局 DNS 服务。此服务将使用来自全局 DNS 提供商的域名（也称为 FQDN）来定位应用程序。这些应用程序可以为一个[多集群应用](/docs/rancher2/helm-charts/legacy-catalogs/multi-cluster-apps/_index)或指定的一个或多个项目中的应用。您必须向 Ingress [添加特定的注释](#添加特定的注释)，以将流量正确路由到应用程序。没有此注释，DNS 服务的自动编程将无法进行。
 
-## 全局 DNS 提供商/服务的权限
+## 全局 DNS 提供商和服务的权限
 
 默认情况下，只有[系统管理员](/docs/rancher2/admin-settings/rbac/global-permissions/_index)和全局 DNS 提供商或全局 DNS 服务的创建者有权使用，编辑和删除它们。创建 DNS 提供者或 DNS 服务时，创建者可以添加其他用户，以便这些用户访问和管理他们。默认情况下，这些成员将具有`所有者`角色来管理它们。
 

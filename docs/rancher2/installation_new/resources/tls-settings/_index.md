@@ -13,9 +13,9 @@ _自 v2.1.7 起可用_
 
 - [使用 Docker 在单个节点上安装 Rancher](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/_index)
 
-- [在 Kubernetes 上安装 Rancher](/docs/rancher2/installation_new/resources/chart-options/_index)
+- [Helm Chart 中的 TLS 设置](/docs/rancher2/installation_new/install-rancher-on-k8s/chart-options/_index)
 
-## TLS 设置
+## TLS 环境变量参数说明
 
 | 参数                     | 描述                | 默认值                                                                                                                                                                                                                                                                       | 可用选项                                                                   |
 | :----------------------- | :------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------- |

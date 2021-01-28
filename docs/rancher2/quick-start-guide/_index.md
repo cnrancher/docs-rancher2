@@ -21,6 +21,6 @@ Rancher 提供这些快速入门手册的目的是帮助您快速地建造一个
 
 - [部署 Rancher Server](/docs/rancher2/quick-start-guide/deployment/_index)：使用对您来说最方便的方式运行 Rancher Server。
 
-- [部署工作负载](/docs/rancher2/quick-start-guide/workload/_index)：部署一个简单的工作负载，然后暴露工作负载，这样您就可以从集群外部访问工作负载。
+- [部署工作负载](/docs/rancher2/quick-start-guide/workload/_index)：部署一个简单的[工作负载](projects-and-namespaces/resource-quotas/)，然后暴露工作负载，这样您就可以从集群外部访问工作负载。
 
 - [命令行工具](/docs/rancher2/quick-start-guide/cli/_index)：使用`kubectl`或 Rancher 命令行工具（Rancher CLI）管理 Rancher 实例。

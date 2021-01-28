@@ -28,6 +28,33 @@ ingress:
     app: ingress
 ```
 
+### 容忍度
+
+_从 v1.2.4 开始提供_
+
+配置的容忍度适用于`kube-dns`和`kube-dns-autoscaler`部署。
+
+```yaml
+dns:
+  provider: kube-dns
+  tolerations:
+    - key: "node.kubernetes.io/unreachable"
+      operator: "Exists"
+      effect: "NoExecute"
+      tolerationseconds: 300
+    - key: "node.kubernetes.io/not-ready"
+      operator: "Exists"
+      effect: "NoExecute"
+      tolerationseconds: 300
+```
+
+要检查`coredns`和 `coredns-autoscaler`部署的应用容忍度，请使用以下命令：
+
+```
+kubectl get deploy kube-dns -n kube-system -o jsonpath='{.spec.template.spec.tolerations}'。
+kubectl get deploy kube-dns-autoscaler -n kube-system -o jsonpath='{.spec.template.spec.tolerations}'。
+```
+
 ## 禁用默认 Ingress Controller
 
 您可以在集群配置中的 Ingress`provider`设置为`none`，禁用默认的 Ingress Controller。
@@ -50,6 +77,17 @@ ingress:
   extra_args:
     enable-ssl-passthrough: ""
 ```
+
+### 禁用 NGINX Ingress 默认后端
+
+从 v0.20.0 开始，你可以禁用入口控制器的[默认后台服务](https://kubernetes.github.io/ingress-nginx/user-guide/default-backend/)，这是因为`ingress-nginx`会回到本地 404 页面，而不需要后台服务。这是可能的，因为`ingress-nginx`将返回到本地 404 页面，并且不需要后端服务。该服务可以通过布尔值来启用和禁用。
+
+```yaml
+ingress:
+  default_backend: false
+```
+
+如果省略该字段会发生什么情况？这保持了旧版本`rke`的行为。然而，未来版本的`rke`将把默认值改为`false`。
 
 ## 配置 NGINX 默认证书
 
@@ -100,3 +138,7 @@ ingress:
    ```
    kubectl delete pod -l app=ingress-nginx -n ingress-nginx
    ```
+
+```
+
+```

@@ -166,6 +166,48 @@ $ docker ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 ```
 
+### Flatcar Container Linux
+
+当使用 Flatcar Container Linux 节点时，需要在集群配置文件中使用以下配置
+
+#### Canal
+
+```yaml
+rancher_kubernetes_engine_config:
+  network:
+    plugin: canal
+    options:
+      canal_flex_volume_plugin_dir: /opt/kubernetes/kubelet-plugins/volume/exec/nodeagent~uds
+      flannel_backend_type: vxlan
+  services:
+    kube-controller:
+      extra_args:
+        flex-volume-plugin-dir: /opt/kubernetes/kubelet-plugins/volume/exec/
+```
+
+#### Calico
+
+```yaml
+rancher_kubernetes_engine_config:
+  network:
+    plugin: calico
+    options:
+      calico_flex_volume_plugin_dir: /opt/kubernetes/kubelet-plugins/volume/exec/nodeagent~uds
+      flannel_backend_type: vxlan
+  services:
+    kube-controller:
+      extra_args:
+        flex-volume-plugin-dir: /opt/kubernetes/kubelet-plugins/volume/exec/
+```
+
+#### Docker
+
+还需要启用 Docker 服务，你可以使用以下命令启用 Docker 服务。
+
+```
+systemctl enable docker.service
+```
+
 ## 软件要求
 
 本节描述了 RKE 对于 Docker、Kubernetes 和 SSH 的要求。

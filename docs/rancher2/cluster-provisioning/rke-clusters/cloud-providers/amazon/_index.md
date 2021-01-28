@@ -27,12 +27,12 @@ keywords:
 
 ## 1、创建 IAM 角色并附加到实例
 
-添加到集群的所有节点必须能够与 EC2 交互，这样它们才可以创建和删除资源。您可以使用附加到实例的 IAM 角色来启用此交互。请参阅[Amazon 文档：创建 IAM Role](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#create-iam-role)了解如何创建 IAM 角色。有两个示例策略：
+添加到集群的所有节点必须能够与 EC2 交互，这样它们才可以创建和删除资源。您可以使用附加到实例的 IAM 角色来启用此交互。请参阅[Amazon 文档：创建 IAM Role](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html)了解如何创建 IAM 角色。有两个示例策略：
 
 - 第一个策略是针对具有`controlplane`角色的节点。这些节点必须能够创建和删除 EC2 资源。下面的 IAM 策略是一个例子，请在例子中删除任何不需要的权限。
 - 第二个策略是针对具有`etcd`或`worker`角色的节点。这些节点只需要能够从 EC2 检索信息。
 
-创建 [Amazon EC2 集群](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/ec2/_index)时，必须在创建**节点模板**时填写创建的 IAM 角色的**IAM 实例配置文件名称**（而不是 ARN）。
+创建 Amazon EC2 集群时，必须在创建**节点模板**时填写创建的 IAM 角色的**IAM 实例配置文件名称**（而不是 ARN）。
 
 创建[自定义集群](/docs/rancher2/cluster-provisioning/rke-clusters/custom-nodes/_index)时，必须手动将 IAM 角色附加到实例。
 

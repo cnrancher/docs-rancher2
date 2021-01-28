@@ -109,7 +109,16 @@ keywords:
 
 1. 运行完成后，回到 Rancher 界面，单击**完成**。
 
-**结果：** 在 Rancher 中创建了一个 Kubernetes 集群。
+**结果:**
+
+您的集群已创建，并分配给您的集群一个状态为**Provisioning**，Rancher 正在建立您的集群。
+
+您可以在集群的状态更新为**Active**后访问它。
+
+**Active**集群被分配了两个项目：
+
+- `Default`，包含`default`命名空间。
+- `System`，包含`cattle-system`、`ingress-nginx`、`kube-public`和`kube-system`等命名空间。
 
 ## 后续操作
 

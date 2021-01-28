@@ -20,7 +20,7 @@ _从 v2.2.0 开始可用_
 
 您可以使用 Rancher 创建一个托管于 华为云容器引擎（CCE）中的集群。Rancher 已经为 CCE 实现并打包了针对 CCE 的[集群驱动](/docs/rancher2/admin-settings/drivers/cluster-drivers/_index)，但是默认情况下，这个集群驱动是`未启用的`。为了启动 CCE 集群，您需要先[启用 CCE 集群驱动程序](/docs/rancher2/admin-settings/drivers/cluster-drivers/_index)。启用集群驱动后，才可以开始配置 CCE 集群。
 
-### 先决条件
+## 先决条件
 
 > **注意**
 > 部署到 CCE 将会产生费用。
@@ -29,11 +29,11 @@ _从 v2.2.0 开始可用_
 
 2. 创建[访问密钥](https://support.huaweicloud.com/api-iam/iam_03_0001.html).
 
-### 局限性
+## 局限性
 
 华为 CCE 服务不支持通过 API 创建具有公共访问权限的集群。您需要在与要配置的 CCE 集群相同的 VPC 中运行 Rancher Server。
 
-### 创建一个 CCE 集群
+## 创建 CCE 集群
 
 1. 从 **集群** 页面，单击 **添加集群**。
 

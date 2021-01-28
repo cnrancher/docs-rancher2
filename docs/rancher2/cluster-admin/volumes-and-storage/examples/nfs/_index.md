@@ -81,4 +81,4 @@ keywords:
 
 ## 后续操作
 
-在 Rancher 中，将 NFS 服务器添加为[存储卷](/docs/rancher2/cluster-admin/volumes-and-storage/_index)又或者[存储类](/docs/rancher2/cluster-admin/volumes-and-storage/_index)。添加服务器后，可以将其用于部署存储。
+在 Rancher 中，将 NFS 服务器添加为存储卷或存储类。添加服务器后，您可以将其用于部署的存储。

@@ -95,6 +95,33 @@ dns:
     - 8.8.4.4
 ```
 
+### 容忍度
+
+_从 v1.2.4 开始提供_
+
+配置的容忍度适用于`coredns`和`coredns-autoscaler`部署。
+
+```yaml
+dns:
+  provider: coredns
+  tolerations:
+    - key: "node.kubernetes.io/unreachable"
+      operator: "Exists"
+      effect: "NoExecute"
+      tolerationseconds: 300
+    - key: "node.kubernetes.io/not-ready"
+      operator: "Exists"
+      effect: "NoExecute"
+      tolerationseconds: 300
+```
+
+要检查`coredns`和 `coredns-autoscaler`部署的应用容忍度，请使用以下命令：
+
+```bash
+kubectl -n kube-system get deploy coredns -o jsonpath='{.spec.template.spec.tolerations}'。
+kubectl -n kube-system get deploy coredns-autoscaler -o jsonpath='{.spec.template.spec.tolerations}'。
+```
+
 ## kube-dns
 
 RKE 将 kube-dns 部署为一个默认副本为 1 的 Deployment，该 pod 由`kubedns`、`dnsmasq`和`sidecar`共 3 个容器组成。RKE 也将 kube-dns-autoscaler 部署为 Deployment，通过使用核心和节点数量来扩展 kube-dns Deployment。详情请参考[Linear Mode](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler#linear-mode)。
@@ -123,7 +150,7 @@ dns:
 
 ### 配置 kube-dns
 
-#### 上游名称服务器
+#### upstreamnameservers
 
 _v0.2.0 及更新版本可用_
 
@@ -137,6 +164,33 @@ dns:
   upstreamnameservers:
     - 1.1.1.1
     - 8.8.4.4
+```
+
+### 容忍度
+
+_从 v1.2.4 开始提供_
+
+配置的容忍度适用于`kube-dns`和`kube-dns-autoscaler`部署。
+
+```yaml
+dns:
+  provider: kube-dns
+  tolerations:
+    - key: "node.kubernetes.io/unreachable"
+      operator: "Exists"
+      effect: "NoExecute"
+      tolerationseconds: 300
+    - key: "node.kubernetes.io/not-ready"
+      operator: "Exists"
+      effect: "NoExecute"
+      tolerationseconds: 300
+```
+
+要检查`coredns`和 `coredns-autoscaler`部署的应用容忍度，请使用以下命令：
+
+```
+kubectl get deploy kube-dns -n kube-system -o jsonpath='{.spec.template.spec.tolerations}'。
+kubectl get deploy kube-dns-autoscaler -n kube-system -o jsonpath='{.spec.template.spec.tolerations}'。
 ```
 
 ## 禁用 DNS provider 的 Deployment

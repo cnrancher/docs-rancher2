@@ -29,7 +29,7 @@ Istio 概览页提供了一个到 Kiali 仪表盘的链接。您可以通过 Kia
 
 要使流量显示在图表中，请确保在集群中安装了 prometheus。Rancher-istio 安装的 Kiali 默认配置为与 rancher-monitoring 图表一起工作。您可以使用 rancher-monitoring 或安装自己的监控解决方案。
 
-可选：您可以通过设置[选择器和拉取配置](/docs/rancher2/istio/2.5/setup/enable-istio-in-namespace/_index)选项来改变数据拉取方式的配置。
+可选：您可以通过设置[选择器和拉取配置](/docs/rancher2/istio/2.5/configuration-reference/selectors-and-scrape/_index)选项来改变数据拉取方式的配置。
 
 ## 操作步骤
 

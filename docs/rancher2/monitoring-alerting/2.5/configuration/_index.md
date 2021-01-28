@@ -44,7 +44,7 @@ keywords:
 
 该 CRD 声明性地指定了应如何监测 pods 组。您集群中的任何符合 PodMonitor`selector`字段中标签的 Pod 将根据 PodMonitor 上指定的`podMetricsEndpoints`进行监控。关于可以指定哪些字段的更多信息，请查看 Prometheus Operator 提供的[规范](https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#podmonitorspec)。
 
-### 配置 PrometheusRules
+## 配置 PrometheusRules
 
 此 CRD 定义了一组 Prometheus 警报和记录规则。
 
@@ -57,27 +57,9 @@ keywords:
 
 有关可指定哪些字段的详细信息，请查看 [Prometheus Operator spec.](https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#prometheusrulespec)
 
-### 配置 Alertmanager Config
+## 配置 Alertmanager Config
 
-[Alertmanager Config](https://prometheus.io/docs/alerting/latest/configuration/#configuration-file) Secret 包含 Alertmanager 实例的配置，该实例根据从 Prometheus 收到的警报发送通知。
-
-默认情况下，Rancher Monitoring 将单个 Alertmanager 部署到使用默认 Alertmanager Config Secret 的集群上。作为 chart 部署选项的一部分，您可以选择增加部署到您的集群上的 Alertmanager 的副本数量，这些副本都可以使用相同的基础 Alertmanager 配置秘籍进行管理。
-
-这个密钥应该随时更新或修改。
-
-- 添加新的通知器或接收器。
-- 更改应发送至特定通知者或接收者的警报。
-- 更改发送的警报群组。
-
-默认情况下，您可以选择提供一个现有的 Alertmanager Config Secret（即 "cattle-monitoring-system "命名空间中的任何 Secret），或者允许 Rancher Monitoring 在您的集群上部署一个默认的 Alertmanager Config Secret。默认情况下，Rancher 创建的 Alertmanager Config Secret 将永远不会在升级或卸载`rancher-monitoring`图表时被修改或删除，以防止用户在图表上执行操作时丢失或覆盖其警报配置。
-
-关于这个密钥中可以指定哪些字段的更多信息，请查看[Prometheus Alertmanager docs](https://prometheus.io/docs/alerting/latest/alertmanager/)。
-
-Alertmanager 配置文件的完整规格以及它所包含的内容可以在[这里](https://prometheus.io/docs/alerting/latest/configuration/#configuration-file)找到。
-
-通知集成是通过`receiver`来配置的，这一点在文件中已有说明[这里](https://prometheus.io/docs/alerting/latest/configuration/#receiver)。
-
-更多信息，请参考[关于配置路由的 Prometheus 官方文档](https://www.prometheus.io/docs/alerting/latest/configuration/#route)
+详情请参考[配置 Alertmanager](/docs/rancher2/monitoring-alerting/2.5/configuration/alert-manager/_index)。
 
 ## 为通知添加 CA 证书
 
@@ -109,25 +91,12 @@ Istio 就是一个可以使用这个配置的例子。更多信息，请参见[�
 
 ### PrometheusRule
 
-Prometheus 规则文件保存在 PrometheusRule 自定义资源中。使用 Prometheus 对象中的标签选择器字段 ruleSelector 来定义您要装入 Prometheus 的规则文件。PrometheusRule 的示例在 [本页](https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/user-guides/alerting.md)。
+对于熟悉 Prometheus 的用户来说，一个 PrometheusRule 包含了您通常放在 [Prometheus 规则文件](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/)中的警报和记录规则。
+
+为了在您的集群内更精细地应用 PrometheusRules，Prometheus 资源上的 ruleSelector 字段允许您根据附加在 PrometheusRules 资源上的标签选择哪些 PrometheusRules 应加载到 Prometheus 上。
+
+PrometheusRule 的示例在 [本页](https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/user-guides/alerting.md)。
 
 ### Alertmanager Config
 
-要通过 Slack 设置通知，需要将以下 Alertmanager 配置 YAML 放入 Alertmanager 配置秘籍的`alertmanager.yaml`键中，其中`api_url`应更新为使用 Slack 中的 Webhook URL。
-
-```yaml
-route:
-  group_by: ["job"]
-  group_wait: 30s
-  group_interval: 5m
-  repeat_interval: 3h
-  receiver: "slack-notifications"
-receivers:
-  - name: "slack-notifications"
-    slack_configs:
-      - send_resolved: true
-        text: '{{ template "slack.rancher.text" . }}'
-        api_url: <user-provided slack webhook url here>
-templates:
-  - /etc/alertmanager/config/*.tmpl
-```
+详情请参考[配置 Alertmanager](/docs/rancher2/monitoring-alerting/2.5/configuration/alert-manager/_index)。
