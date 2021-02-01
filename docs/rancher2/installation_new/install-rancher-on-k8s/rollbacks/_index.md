@@ -17,7 +17,7 @@ keywords:
 
 ## 回滚到 v2.5+
 
-要回滚到 Rancher v2.5+，请使用`rancher-backup`应用程序，并根据[恢复 Rancher](/docs/rancher2/backups/2.5/restoring-rancher/_index)从备份中恢复 Rancher。
+要回滚到 Rancher v2.5+，请使用`rancher-backup`应用程序，并根据[恢复 Rancher](/docs/rancher2/backups/2.5/restoring-rancher/_index)从备份中恢复 Rancher。在使用 Rancher 备份操作员进行回滚后，Rancher 必须以较低/以前的版本启动。
 
 要回滚到 v2.5 之前的 Rancher，请按照这里的详细步骤进行：[恢复备份--Kubernetes 安装](/docs/rancher2/backups/2.0-2.4/ha-backups/_index)恢复 Rancher 服务器集群的快照将使 Rancher 恢复到快照时的版本和状态。
 

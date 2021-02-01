@@ -43,7 +43,7 @@ Rancher 应用可以兼容当前任何流行的 Linux 发行版。
 
 对于将运行 K3s 或 RKE Kubernetes 集群的节点，需要使用 Docker。对于 RancherD 安装来说，Docker 不是必需的。
 
-有关每个 Rancher 版本测试了哪些操作系统和 Docker 版本的详细信息，请参阅[支持维护条款](https://rancher.com/support-maintenance-terms/)。
+Rancher 需要安装在支持的 Kubernetes 版本上。要了解你的 Rancher 版本支持哪些 Kubernetes 版本，请参考[这里](https://rancher.com/support-maintenance-terms/)。
 
 所有受支持的操作系统都是 64-bit x86。
 
