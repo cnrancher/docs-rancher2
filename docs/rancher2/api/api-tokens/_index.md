@@ -50,6 +50,11 @@ _v2.4.6+ 可用_
 
 从 Rancher v2.4.6 开始，管理员可以对 Kubeconfig 令牌设置全局 TTL。一旦令牌过期，kubectl 命令将要求用户对 Rancher 进行验证。
 
+:::note 说明
+现有的 kubeconfig 标记不会随着新的 TTL 而更新。管理员可以删除旧的 kubeconfig 标记。
+
+:::
+
 1. 在 Rancher API 视图`https://<Rancher-Server-IP/v3/settings/kubeconfig-generate-token>中禁用 kubeconfig-generate-token 设置。该设置指示 Rancher 不再在用户单击下载 kubeconfig 文件时自动生成令牌。kubeconfig 文件现在将提供登录 Rancher 的命令。
 
 2. 编辑该设置，并将该值设置为 `false`。

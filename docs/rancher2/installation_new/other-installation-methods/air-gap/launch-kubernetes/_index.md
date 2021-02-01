@@ -17,7 +17,7 @@ keywords:
   - 安装 Kubernetes 集群
 ---
 
-:::important 提示！
+:::important 提示
 如果要使用 Docker 在单个节点上安装 Rancher，请跳过本节。
 :::
 
@@ -81,6 +81,10 @@ configs:
 有关 K3s 的私有镜像仓库配置文件的更多信息，请参考[K3s 文档](/docs/k3s/installation/private-registry/_index)。
 
 ### 3、安装 K3s 集群
+
+Rancher 需要安装在支持的 Kubernetes 版本上。要了解你的 Rancher 版本支持哪些 Kubernetes 版本，请参考[这里](https://rancher.com/support-maintenance-terms/)。
+
+要指定 K3s 的版本，请在运行 K3s 安装脚本时使用 INSTALL_K3S_VERSION 环境变量。
 
 1. 从[版本发布](https://github.com/rancher/k3s/releases)页面获取 K3s 二进制文件，找到与版本对应的镜像`tar`文件包，并通过 https://get.k3s.io 获取 K3s 安装脚本。
 

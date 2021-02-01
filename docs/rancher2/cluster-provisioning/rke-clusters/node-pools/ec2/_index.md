@@ -197,7 +197,8 @@ keywords:
         "ec2:CreateKeyPair",
         "ec2:CreateSecurityGroup",
         "ec2:CreateTags",
-        "ec2:DeleteKeyPair"
+        "ec2:DeleteKeyPair",
+        "ec2:ModifyInstanceMetadataOptions"
       ],
       "Resource": "*"
     },
@@ -247,7 +248,8 @@ keywords:
         "ec2:CreateKeyPair",
         "ec2:CreateSecurityGroup",
         "ec2:CreateTags",
-        "ec2:DeleteKeyPair"
+        "ec2:DeleteKeyPair",
+        "ec2:ModifyInstanceMetadataOptions"
       ],
       "Resource": "*"
     },

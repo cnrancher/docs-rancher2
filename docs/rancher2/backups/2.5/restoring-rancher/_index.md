@@ -16,7 +16,7 @@ keywords:
   - 恢复 Rancher
 ---
 
-通过创建 Restore 自定义资源来进行还原。
+通过创建 Restore 自定义资源来进行还原。请按照以下步骤恢复 Rancher：首先，创建 Restore 自定义资源。然后使用之前的 Rancher 版本重新启动 Rancher。
 
 :::important 重要
 
@@ -65,4 +65,33 @@ keywords:
 ```yaml
 kubectl get pods -n cattle-resources-system
 kubectl logs <pod name from above command> -n cattle-resources-system -f
+```
+
+### 重启 Rancher
+
+Rancher 必须在使用 Rancher 备份操作员进行回滚后，以较低/以前的版本启动。它应该用与前次安装相同的 Helm 图表值启动。
+
+从当前安装的 Rancher Helm 图表中获取用`--set`传递的值。
+
+```
+helm get values rancher -n cattle-system
+hostname: rancher.my.org
+```
+
+:::note
+这个命令会列出更多的值。这只是其中一个值的例子。
+另外，也可以将当前的值导出到一个文件中，并在升级时引用该文件。例如，要只改变 Rancher 的版本。
+:::
+
+```
+helm get values rancher -n cattle-system -o yaml > values.yaml。
+```
+
+然后将舵手图升级到以前的 Rancher 版本，使用以前的值。在这个例子中，这些值是从文件中提取的。
+
+```
+helm upgrade rancher rancher-<CHART_REPO>/rancher \
+  --namespace cattle-system
+  -f values.yaml ．
+  --version=X.Y.Z
 ```

@@ -68,6 +68,8 @@ keywords:
 
 将`auditLog.destination`设置为`hostPath`的值，以将日志转发至与主机系统共享的卷，而不是流至 Sidecar 容器。将目标设置为`hostPath`时，您可能需要调整其他 auditLog 参数以进行日志轮换。
 
+在离线环境中，在 Helm 安装或升级过程中需要提供`--set busyboxImage`值，以引用 busybox 容器映像的私有镜像仓库位置，该镜像用于 sidecar 容器。
+
 ## 设置额外环境变量
 
 _自 v2.2.0 起可用_
