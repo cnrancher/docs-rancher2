@@ -13,9 +13,9 @@ Istio CNI 插件消除了每个应用 pod 拥有特权的`NET_ADMIN`容器的需
 ### 前提条件
 
 - 该集群必须是一个 RKE Kubernetes 集群。
-- 群集必须是用默认的 PodSecurityPolicy 创建的。
+- 集群必须是用默认的 PodSecurityPolicy 创建的。
 
-要在 Rancher UI 中创建 Kubernetes 群集时启用 pod 安全策略支持，请转到 Advanced Options。在 Pod Security Policy Supportsection 中，单击 Enabled.然后选择一个默认的 pod 安全策略。
+要在 Rancher UI 中创建 Kubernetes 集群时启用 pod 安全策略支持，请转到 Advanced Options。在 Pod Security Policy Supportsection 中，单击 Enabled.然后选择一个默认的 pod 安全策略。
 
 ### 步骤 1：将 PodSecurityPolicy 设置为非限制性
 
@@ -23,7 +23,7 @@ Istio CNI 插件消除了每个应用 pod 拥有特权的`NET_ADMIN`容器的需
 
 在安装了 Istio 的项目或你打算安装 Istio 的项目中，将 PSP 设置为`unrestricted`，就可以将 Pod 安全策略修改为不受限制。
 
-1. 从**群集管理器的群集视图中**，选择 **项目/命名空间**。
+1. 从**集群管理器的集群视图中**，选择 **项目/命名空间**。
 1. 找到**项目 > 系统**，并选择 **&#8942 > 编辑**。
 1. 将 Pod 安全策略 选项改为`unrestricted`，然后单击**保存**。
 
@@ -52,15 +52,15 @@ Istio 应该在集群中启用 CNI 后成功安装。
 ### 前提条件
 
 - 该集群必须是一个 RKE Kubernetes 集群。
-- 群集必须是用默认的 PodSecurityPolicy 创建的。
+- 集群必须是用默认的 PodSecurityPolicy 创建的。
 
-要在 Rancher UI 中创建 Kubernetes 群集时启用 pod 安全策略支持，请转到 **高级选项**在 **Pod 安全策略支持**部分，单击 **启用**然后选择默认的 pod 安全策略。
+要在 Rancher UI 中创建 Kubernetes 集群时启用 pod 安全策略支持，请转到 **高级选项**在 **Pod 安全策略支持**部分，单击 **启用**然后选择默认的 pod 安全策略。
 
 ### 步骤 1：配置系统项目策略
 
 您需要将系统项目策略修改为不受限，以允许项目安装 Istio。
 
-1. 从**群集管理器**的群集视图中，选择 **项目/命名空间**。
+1. 从**集群管理器**的集群视图中，选择 **项目/命名空间**。
 1. 找到**项目 > 系统**，并选择 **&#8942 > 编辑**。
 1. 将 Pod 安全策略选项改为不受限制，然后单击 "保存"。
 
