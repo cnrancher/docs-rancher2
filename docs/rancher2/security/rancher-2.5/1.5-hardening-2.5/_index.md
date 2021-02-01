@@ -1,30 +1,43 @@
 ---
-title: Hardening Guide with CIS 1.6 Benchmark
-weight: 100
+title: 安全加固指南 - v2.5.0
+description: 本文讲解了如何使您的集群符合互联网安全中心发布的 Kubernetes 安全基准，保护集群中节点的安全。安装 Kubernetes 之前，请按照本指南进行操作。加固指南旨在与特定版本的 CIS Kubernetes Benchmark，Kubernetes 和 Rancher 一起使用。
+keywords:
+  - rancher 2.0中文文档
+  - rancher 2.x 中文文档
+  - rancher中文
+  - rancher 2.0中文
+  - rancher2
+  - rancher教程
+  - rancher中国
+  - rancher 2.0
+  - rancher2.0 中文教程
+  - 安全
+  - 安全加固指南
+  - 安全加固指南 - v2.5.0
 ---
 
 本文讲解了如何使您的集群符合互联网安全中心发布的 Kubernetes 安全基准，保护集群中节点的安全。安装 Kubernetes 之前，请按照本指南进行操作。加固指南旨在与特定版本的 CIS Kubernetes Benchmark，Kubernetes 和 Rancher 一起使用。
 
 加固指南旨在与特定版本的 CIS Kubernetes Benchmark，Kubernetes 和 Rancher 一起使用：
 
-| Rancher 版本   | CIS Benchmark 版本 | Kubernetes 版本  |
-| -------------- | ------------------ | ---------------- |
-| Rancher v2.5.4 | Benchmark 1.6      | Kubernetes v1.18 |
+| 加固指南版本    | Rancher 版本   | CIS Benchmark 版本 | Kubernetes 版本  |
+| :-------------- | :------------- | :----------------- | :--------------- |
+| 加固指南 v2.5.0 | Rancher v2.5.0 | Benchmark v1.5     | Kubernetes v1.15 |
 
-[单击这里下载 PDF 版本的加固指南](https://releases.rancher.com/documents/security/2.5/Rancher_Hardening_Guide_CIS_1.6.pdf)
+[单击这里下载 PDF 版本的加固指南](https://releases.rancher.com/documents/security/2.5/Rancher_Hardening_Guide.pdf)
 
 ## 概览
 
-下面的安全加固指南是针对在生产环境的 Rancher v2.5.4 中使用 Kubernetes v1.15 版本的集群。它概述了如何满足互联网安全中心（CIS）提出的 Kubernetes 安全标准。
+下面的安全加固指南是针对在生产环境的 Rancher v2.5.0 中使用 Kubernetes v1.15 版本的集群。它概述了如何满足互联网安全中心（CIS）提出的 Kubernetes 安全标准。
 
-有关如果根据官方 CIS 基准评估集群的更多详细信息，请参阅[CIS Benchmark Rancher 自测指南 - Rancher v2.5.4](/docs/rancher2/security/rancher-2.5/1.6-benchmark-2.5/_index)。
+有关如果根据官方 CIS 基准评估集群的更多详细信息，请参阅[CIS Benchmark Rancher 自测指南 - Rancher v2.5.0](/docs/rancher2/security/benchmark-2.5/_index)。
 
 ## 已知问题
 
-如果注册自定义节点时只提供了公共 IP，在 CIS 1.6 加固设置中，将无法正常在 Rancher UI 中使用**执行命令行**和**查看日志**功能。
+如果注册自定义节点时只提供了公共 IP，在 CIS 1.5 加固设置中，将无法正常在 Rancher UI 中使用**执行命令行**和**查看日志**功能。
 
-- 如果注册自定义节点时只提供了公共 IP，在 CIS 1.6 加固设置中，将无法正常在 Rancher UI 中使用**执行命令行**和**查看日志**功能。如果想要使用上述两个功能，请在注册自定义节点时提供私有 IP 地址。
-- `default_pod_security_policy_template_id:`为 `restricted`时，Rancher 在默认的 service account 中创建**角色绑定**和**集群角色绑定**。CIS 1.6 要求默认 service account 没有绑定任何角色，不提供 service account 的 token，不分配特定的权限。
+- 如果注册自定义节点时只提供了公共 IP，在 CIS 1.5 加固设置中，将无法正常在 Rancher UI 中使用**执行命令行**和**查看日志**功能。如果想要使用上述两个功能，请在注册自定义节点时提供私有 IP 地址。
+- `default_pod_security_policy_template_id:`为 `restricted`时，Rancher 在默认的 service account 中创建**角色绑定**和**集群角色绑定**。CIS 1.5 要求默认 service account 没有绑定任何角色，不提供 service account 的 token，不分配特定的权限。
 
 ## 配置内核运行时参数
 
@@ -143,107 +156,135 @@ done
 ```yaml
 # If you intend to deploy Kubernetes in an air-gapped environment,
 # please consult the documentation on how to configure custom RKE images.
-# https://rancher.com/docs/rke/latest/en/installation/
+kubernetes_version: "v1.15.9-rancher1-1"
+enable_network_policy: true
+default_pod_security_policy_template_id: "restricted"
 # the nodes directive is required and will vary depending on your environment
 # documentation for node configuration can be found here:
-# https://rancher.com/docs/rke/latest/en/config-options/nodes
-nodes: []
+# https://docs.rancher.cn/docs/rke/config-options/nodes/_index
 services:
   etcd:
-    image: ""
-    extra_args: {}
-    extra_binds: []
-    extra_env: []
-    win_extra_args: {}
-    win_extra_binds: []
-    win_extra_env: []
-    external_urls: []
-    ca_cert: ""
-    cert: ""
-    key: ""
-    path: ""
     uid: 52034
     gid: 52034
-    snapshot: true
-    retention: ""
-    creation: ""
-    backup_config: null
   kube-api:
-    image: ""
-    extra_args: {}
-    extra_binds: []
-    extra_env: []
-    win_extra_args: {}
-    win_extra_binds: []
-    win_extra_env: []
-    service_cluster_ip_range: ""
-    service_node_port_range: ""
     pod_security_policy: true
-    always_pull_images: false
     secrets_encryption_config:
       enabled: true
-      custom_config: null
     audit_log:
       enabled: true
-      configuration: null
-    admission_configuration: null
+    admission_configuration:
     event_rate_limit:
       enabled: true
-      configuration: null
   kube-controller:
-    image: ""
     extra_args:
-      feature-gates: RotateKubeletServerCertificate=true
-    extra_binds: []
-    extra_env: []
-    win_extra_args: {}
-    win_extra_binds: []
-    win_extra_env: []
-    cluster_cidr: ""
-    service_cluster_ip_range: ""
+      feature-gates: "RotateKubeletServerCertificate=true"
   scheduler:
     image: ""
     extra_args: {}
     extra_binds: []
     extra_env: []
-    win_extra_args: {}
-    win_extra_binds: []
-    win_extra_env: []
   kubelet:
-    image: ""
+    generate_serving_certificate: true
     extra_args:
-      feature-gates: RotateKubeletServerCertificate=true
+      feature-gates: "RotateKubeletServerCertificate=true"
       protect-kernel-defaults: "true"
-      tls-cipher-suites: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256
+      tls-cipher-suites: "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256"
     extra_binds: []
     extra_env: []
-    win_extra_args: {}
-    win_extra_binds: []
-    win_extra_env: []
-    cluster_domain: cluster.local
+    cluster_domain: ""
     infra_container_image: ""
     cluster_dns_server: ""
     fail_swap_on: false
-    generate_serving_certificate: true
   kubeproxy:
     image: ""
     extra_args: {}
     extra_binds: []
     extra_env: []
-    win_extra_args: {}
-    win_extra_binds: []
-    win_extra_env: []
 network:
   plugin: ""
   options: {}
   mtu: 0
   node_selector: {}
-  update_strategy: null
 authentication:
   strategy: ""
   sans: []
   webhook: null
 addons: |
+  ---
+  apiVersion: v1
+  kind: Namespace
+  metadata:
+    name: ingress-nginx
+  ---
+  apiVersion: rbac.authorization.k8s.io/v1
+  kind: Role
+  metadata:
+    name: default-psp-role
+    namespace: ingress-nginx
+  rules:
+  - apiGroups:
+    - extensions
+    resourceNames:
+    - default-psp
+    resources:
+    - podsecuritypolicies
+    verbs:
+    - use
+  ---
+  apiVersion: rbac.authorization.k8s.io/v1
+  kind: RoleBinding
+  metadata:
+    name: default-psp-rolebinding
+    namespace: ingress-nginx
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: Role
+    name: default-psp-role
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:serviceaccounts
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:authenticated
+  ---
+  apiVersion: v1
+  kind: Namespace
+  metadata:
+    name: cattle-system
+  ---
+  apiVersion: rbac.authorization.k8s.io/v1
+  kind: Role
+  metadata:
+    name: default-psp-role
+    namespace: cattle-system
+  rules:
+  - apiGroups:
+    - extensions
+    resourceNames:
+    - default-psp
+    resources:
+    - podsecuritypolicies
+    verbs:
+    - use
+  ---
+  apiVersion: rbac.authorization.k8s.io/v1
+  kind: RoleBinding
+  metadata:
+    name: default-psp-rolebinding
+    namespace: cattle-system
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: Role
+    name: default-psp-role
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:serviceaccounts
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:authenticated
+  ---
   apiVersion: policy/v1beta1
   kind: PodSecurityPolicy
   metadata:
@@ -270,25 +311,55 @@ addons: |
     - configMap
     - projected
   ---
-  apiVersion: networking.k8s.io/v1
-  kind: NetworkPolicy
+  apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRole
   metadata:
-    name: default-allow-all
-  spec:
-    podSelector: {}
-    ingress:
-    - {}
-    egress:
-    - {}
-    policyTypes:
-    - Ingress
-    - Egress
+    name: psp:restricted
+  rules:
+  - apiGroups:
+    - extensions
+    resourceNames:
+    - restricted
+    resources:
+    - podsecuritypolicies
+    verbs:
+    - use
+  ---
+  apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    name: psp:restricted
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: psp:restricted
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:serviceaccounts
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:authenticated
   ---
   apiVersion: v1
   kind: ServiceAccount
   metadata:
-    name: default
-  automountServiceAccountToken: false
+    name: tiller
+    namespace: kube-system
+  ---
+  apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    name: tiller
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+    name: tiller
+    namespace: kube-system
+
 addons_include: []
 system_images:
   etcd: ""
@@ -302,7 +373,6 @@ system_images:
   kubedns_autoscaler: ""
   coredns: ""
   coredns_autoscaler: ""
-  nodelocal: ""
   kubernetes: ""
   flannel: ""
   flannel_cni: ""
@@ -313,7 +383,6 @@ system_images:
   calico_flexvol: ""
   canal_node: ""
   canal_cni: ""
-  canal_controllers: ""
   canal_flannel: ""
   canal_flexvol: ""
   weave_node: ""
@@ -330,7 +399,6 @@ authorization:
   mode: ""
   options: {}
 ignore_docker_version: false
-kubernetes_version: v1.18.12-rancher1-1
 private_registries: []
 ingress:
   provider: ""
@@ -341,15 +409,8 @@ ingress:
   extra_envs: []
   extra_volumes: []
   extra_volume_mounts: []
-  update_strategy: null
-  http_port: 0
-  https_port: 0
-  network_mode: ""
-cluster_name:
-cloud_provider:
-  name: ""
+cluster_name: ""
 prefix_path: ""
-win_prefix_path: ""
 addon_job_timeout: 0
 bastion_host:
   address: ""
@@ -363,17 +424,10 @@ monitoring:
   provider: ""
   options: {}
   node_selector: {}
-  update_strategy: null
-  replicas: null
 restore:
   restore: false
   snapshot_name: ""
 dns: null
-upgrade_strategy:
-  max_unavailable_worker: ""
-  max_unavailable_controlplane: ""
-  drain: null
-  node_drain_input: null
 ```
 
 ## 安全加固的 RKE 模板配置参考
@@ -393,9 +447,159 @@ enable_network_policy: true
 # Rancher Config
 #
 rancher_kubernetes_engine_config:
-  addon_job_timeout: 45
+  addon_job_timeout: 30
+  addons: |-
+    ---
+    apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: ingress-nginx
+    ---
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: Role
+    metadata:
+      name: default-psp-role
+      namespace: ingress-nginx
+    rules:
+    - apiGroups:
+      - extensions
+      resourceNames:
+      - default-psp
+      resources:
+      - podsecuritypolicies
+      verbs:
+      - use
+    ---
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: RoleBinding
+    metadata:
+      name: default-psp-rolebinding
+      namespace: ingress-nginx
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: Role
+      name: default-psp-role
+    subjects:
+    - apiGroup: rbac.authorization.k8s.io
+      kind: Group
+      name: system:serviceaccounts
+    - apiGroup: rbac.authorization.k8s.io
+      kind: Group
+      name: system:authenticated
+    ---
+    apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: cattle-system
+    ---
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: Role
+    metadata:
+      name: default-psp-role
+      namespace: cattle-system
+    rules:
+    - apiGroups:
+      - extensions
+      resourceNames:
+      - default-psp
+      resources:
+      - podsecuritypolicies
+      verbs:
+      - use
+    ---
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: RoleBinding
+    metadata:
+      name: default-psp-rolebinding
+      namespace: cattle-system
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: Role
+      name: default-psp-role
+    subjects:
+    - apiGroup: rbac.authorization.k8s.io
+      kind: Group
+      name: system:serviceaccounts
+    - apiGroup: rbac.authorization.k8s.io
+      kind: Group
+      name: system:authenticated
+    ---
+    apiVersion: policy/v1beta1
+    kind: PodSecurityPolicy
+    metadata:
+      name: restricted
+    spec:
+      requiredDropCapabilities:
+      - NET_RAW
+      privileged: false
+      allowPrivilegeEscalation: false
+      defaultAllowPrivilegeEscalation: false
+      fsGroup:
+        rule: RunAsAny
+      runAsUser:
+        rule: MustRunAsNonRoot
+      seLinux:
+        rule: RunAsAny
+      supplementalGroups:
+        rule: RunAsAny
+      volumes:
+      - emptyDir
+      - secret
+      - persistentVolumeClaim
+      - downwardAPI
+      - configMap
+      - projected
+    ---
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    metadata:
+      name: psp:restricted
+    rules:
+    - apiGroups:
+      - extensions
+      resourceNames:
+      - restricted
+      resources:
+      - podsecuritypolicies
+      verbs:
+      - use
+    ---
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      name: psp:restricted
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: psp:restricted
+    subjects:
+    - apiGroup: rbac.authorization.k8s.io
+      kind: Group
+      name: system:serviceaccounts
+    - apiGroup: rbac.authorization.k8s.io
+      kind: Group
+      name: system:authenticated
+    ---
+    apiVersion: v1
+    kind: ServiceAccount
+    metadata:
+      name: tiller
+      namespace: kube-system
+    ---
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      name: tiller
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: cluster-admin
+    subjects:
+    - kind: ServiceAccount
+      name: tiller
+      namespace: kube-system
   ignore_docker_version: true
-  kubernetes_version: v1.18.12-rancher1-1
+  kubernetes_version: v1.15.9-rancher1-1
   #
   #   If you are using calico on AWS
   #
@@ -421,7 +625,6 @@ rancher_kubernetes_engine_config:
   network:
     mtu: 0
     plugin: canal
-  rotate_encryption_key: false
   #
   #    services:
   #      kube-api:
@@ -460,19 +663,27 @@ rancher_kubernetes_engine_config:
       service_node_port_range: 30000-32767
     kube_controller:
       extra_args:
+        address: 127.0.0.1
         feature-gates: RotateKubeletServerCertificate=true
+        profiling: "false"
+        terminated-pod-gc-threshold: "1000"
     kubelet:
       extra_args:
+        anonymous-auth: "false"
+        event-qps: "0"
         feature-gates: RotateKubeletServerCertificate=true
+        make-iptables-util-chains: "true"
         protect-kernel-defaults: "true"
+        streaming-connection-idle-timeout: 1800s
         tls-cipher-suites: >-
           TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256
       fail_swap_on: false
       generate_serving_certificate: true
+    scheduler:
+      extra_args:
+        address: 127.0.0.1
+        profiling: "false"
   ssh_agent_auth: false
-  upgrade_strategy:
-    max_unavailable_controlplane: "1"
-    max_unavailable_worker: 10%
 windows_prefered_cluster: false
 ```
 
@@ -482,39 +693,24 @@ windows_prefered_cluster: false
 
 ```yaml
 #cloud-config
-apt:
-  sources:
-    docker.list:
-      source: deb [arch=amd64] http://download.docker.com/linux/ubuntu $RELEASE stable
-      keyid: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
-system_info:
-  default_user:
-    groups:
-      - docker
+packages:
+  - curl
+  - jq
+runcmd:
+  - sysctl -w vm.overcommit_memory=1
+  - sysctl -w kernel.panic=10
+  - sysctl -w kernel.panic_on_oops=1
+  - curl https://releases.rancher.com/install-docker/18.09.sh | sh
+  - usermod -aG docker ubuntu
+  - return=1; while [ $return != 0 ]; do sleep 2; docker ps; return=$?; done
+  - addgroup --gid 52034 etcd
+  - useradd --comment "etcd service account" --uid 52034 --gid 52034 etcd
 write_files:
-  - path: "/etc/apt/preferences.d/docker"
-    owner: root:root
-    permissions: "0600"
-    content: |
-      Package: docker-ce
-      Pin: version 5:19*
-      Pin-Priority: 800
-  - path: "/etc/sysctl.d/90-kubelet.conf"
+  - path: /etc/sysctl.d/kubelet.conf
     owner: root:root
     permissions: "0644"
     content: |
       vm.overcommit_memory=1
-      vm.panic_on_oom=0
       kernel.panic=10
       kernel.panic_on_oops=1
-      kernel.keys.root_maxbytes=25000000
-package_update: true
-packages:
-  - docker-ce
-  - docker-ce-cli
-  - containerd.io
-runcmd:
-  - sysctl -p /etc/sysctl.d/90-kubelet.conf
-  - groupadd --gid 52034 etcd
-  - useradd --comment "etcd service account" --uid 52034 --gid 52034 etcd
 ```

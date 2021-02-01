@@ -282,11 +282,20 @@ const metadata = {
             "rancher2/user-settings/preferences/_index": "偏好设置",
             "rancher2/api/_index": "如何调用 Rancher API",
             "rancher2/api/api-tokens/_index": "API Tokens",
+            //安全 OLD
+            /*
             "rancher2/security/_index": "安全说明",
             "rancher2/security/security-scan/_index": "安全扫描",
             "rancher2/security/hardening-2.3.5/_index": "安全加固指南",
             "rancher2/security/benchmark-2.3.5/_index": "CIS 自测指南",
             "rancher2/security/cve/_index": "安全漏洞和解决方法",
+            */
+            //安全 NEW
+            "rancher2/security/_index": "安全说明",
+            "rancher2/security/security-scan/_index": "安全扫描",
+            "rancher2/security/cve/_index": "安全漏洞和解决方法",
+            "": "",
+            //
             "rancher2/faq/kubectl/_index": "安装和配置 kubectl",
             "rancher2/faq/networking/_index": "网络问题",
             "rancher2/faq/technical/_index": "技术问题",
@@ -374,7 +383,7 @@ const metadata = {
             "k3s/installation/install-options/_index": "安装选项",
             "k3s/installation/network-options/_index": "网络选项",
             "k3s/installation/ha/_index": "使用外部数据库实现高可用",
-            "k3s/installation/ha-embedded/_index": "嵌入式DB的高可用（实验）",
+            "k3s/installation/ha-embedded/_index": "嵌入式DB的高可用",
             "k3s/installation/datastore/_index": "集群数据存储选项",
             "k3s/installation/private-registry/_index": "私有注册表配置",
             "k3s/installation/airgap/_index": "离线安装",

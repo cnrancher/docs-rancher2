@@ -1,34 +1,20 @@
 ---
-title: 自测指南 - v2.4.0
-description: 本文档是对 Rancher v2.4.0 安全加固指南的补充。加固指南提供了用于加固 Rancher 的生产环境集群的指南，该基准自测指南旨在帮助您针对安全基准中的每个控制，来评估加固集群的安全级别。本指南将逐步介绍各种控制，并提供更新的示例命令以审核 Rancher 创建的集群中的合规性。此文档的适用人群是：Rancher 运维人员、安全团队、审核员和决策者。
-keywords:
-  - rancher 2.0 中文文档
-  - rancher 2.x 中文文档
-  - rancher 中文
-  - rancher 2.0 中文
-  - rancher2
-  - rancher 教程
-  - rancher 中国
-  - rancher 2.0
-  - rancher2.0 中文教程
-  - 安全
-  - CIS 自测指南
-  - 自测指南 - v2.4.0
+title: CIS 1.5 Benchmark - Self-Assessment Guide - Rancher v2.5
 ---
 
-## CIS Kubernetes Benchmark v1.5 - Rancher v2.4 with Kubernetes v1.15
+## CIS v1.5 Kubernetes Benchmark - Rancher v2.5 with Kubernetes v1.15
 
-[单击这里下载 PDF 版本的安全自测指南](https://releases.rancher.com/documents/security/2.4/Rancher_Benchmark_Assessment.pdf)
+[单击这里下载 PDF 版本的安全自测指南](https://releases.rancher.com/documents/security/2.5/Rancher_1.5_Benchmark_Assessment.pdf)
 
 ## 概述
 
-本文档是对 Rancher v2.4.0 安全加固指南的补充。加固指南提供了用于加固 Rancher 的生产环境集群的指南，该基准自测指南旨在帮助您针对安全基准中的每个控制，来评估加固集群的安全级别。本指南将逐步介绍各种控制，并提供更新的示例命令以审核 Rancher 创建的集群中的合规性。此文档的适用人群是：Rancher 运维人员、安全团队、审核员和决策者。
+本文档是对 Rancher v2.5 安全加固指南的补充。加固指南提供了用于加固 Rancher 的生产环境集群的指南，该基准自测指南旨在帮助您针对安全基准中的每个控制，来评估加固集群的安全级别。本指南将逐步介绍各种控制，并提供更新的示例命令以审核 Rancher 创建的集群中的合规性。此文档的适用人群是：Rancher 运维人员、安全团队、审核员和决策者。
 
 加固指南旨在与特定版本的安全加固指南，CIS Kubernetes Benchmark，Kubernetes 和 Rancher 一起使用：
 
-| 自测指南版本    | Rancher 版本   | 安全加固指南版本    | Kubernetes 版本  | CIS Benchmark 版本 |
-| :-------------- | :------------- | :------------------ | :--------------- | :----------------- |
-| 自测指南 v2.4.0 | Rancher v2.4.0 | 安全加固指南 v2.4.0 | Kubernetes v1.15 | Benchmark v1.5     |
+| 自测指南版本  | Rancher 版本 | 安全加固指南版本  | Kubernetes 版本  | CIS Benchmark 版本 |
+| :------------ | :----------- | :---------------- | :--------------- | :----------------- |
+| 自测指南 v2.5 | Rancher v2.5 | 安全加固指南 v2.5 | Kubernetes v1.15 | Benchmark v1.5     |
 
 由于 Rancher 和 RKE 以容器的方式安装 Kubernetes，因此 CIS Kubernetes Benchmark 中的许多控制验证检查均不适用，完成 CIS 扫描后，这些检测对应的结论是`Not Applicable`（不适用）。
 
@@ -41,6 +27,10 @@ Rancher 和 RKE 通过 Docker 容器安装 Kubernetes 服务。配置在初始�
 如果控制审核与原始 CIS 基准不同，则将提供 Rancher Labs 特定的审核命令以进行测试。执行测试时，您将需要访问所有三个 RKE 角色的主机上的 Docker 命令行。这些命令还利用了[jq](https://stedolan.github.io/jq/)和[kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)（使用有效的 kubeconfig 文件）来测试和评估测试结果。
 
 > 说明：本文只包含了得分的测试。
+
+### Controls
+
+---
 
 ## 1 Master Node Security Configuration
 
@@ -944,7 +934,7 @@ on the master node and set the `--service-account-key-file` parameter
 to the public key file for service accounts:
 
 ```bash
---service-account-key-file=<filename>
+`--service-account-key-file=<filename>`
 ```
 
 **Audit:**
@@ -1208,7 +1198,7 @@ on the master node and set the `--service-account-private-key-file` parameter
 to the private key file for service accounts.
 
 ```bash
---service-account-private-key-file=<filename>
+`--service-account-private-key-file=<filename>`
 ```
 
 **Audit:**
@@ -1644,7 +1634,7 @@ chown root:root /etc/kubernetes/ssl/kubecfg-kube-node.yaml
 Run the following command to modify the file permissions of the
 
 ```bash
---client-ca-file chmod 644 <filename>
+`--client-ca-file chmod 644 <filename>`
 ```
 
 **Audit:**
@@ -1667,7 +1657,7 @@ stat -c %a /etc/kubernetes/ssl/kube-ca.pem
 Run the following command to modify the ownership of the `--client-ca-file`.
 
 ```bash
-chown root:root <filename>
+chown root:root `<filename>`
 ```
 
 **Audit:**
@@ -2056,7 +2046,7 @@ systemctl restart kubelet.service
 
 #### 5.1.5 Ensure that default service accounts are not actively used. (Scored)
 
-**Result:** FAIL
+**Result:** PASS
 
 **Remediation:**
 Create explicit service accounts wherever a Kubernetes workload requires specific access
