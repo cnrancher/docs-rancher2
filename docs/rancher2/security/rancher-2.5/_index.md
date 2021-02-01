@@ -1,33 +1,32 @@
 ---
 title: Rancher v2.5
-weight: 1
 ---
 
-Rancher v2.5 introduced the capability to deploy Rancher on any Kubernetes cluster. For that reason, we now provide separate security hardening guides for Rancher deployments on each of Rancher's Kubernetes distributions.
-Rancher has the following Kubernetes distributions:
+Rancher v2.5 引入了在任何 Kubernetes 集群上部署 Rancher 的功能。出于这个原因，我们现在为 Rancher 在每个 Rancher 的 Kubernetes 发行版上的部署提供单独的安全加固指南。
+Rancher 有以下 Kubernetes 发行版。
 
-- [**RKE,**]({{<baseurl>}}/rke/latest/en/) Rancher Kubernetes Engine, is a CNCF-certified Kubernetes distribution that runs entirely within Docker containers.
-- [**K3s,**]({{<baseurl>}}/k3s/latest/en/) is a fully conformant, lightweight Kubernetes distribution. It is easy to install, with half the memory of upstream Kubernetes, all in a binary of less than 100 MB.
-- [**RKE2**](https://docs.rke2.io/) is a fully conformant Kubernetes distribution that focuses on security and compliance within the U.S. Federal Government sector.
-  To harden a Kubernetes cluster outside of Rancher's distributions, refer to your Kubernetes provider docs.
+- [**RKE,**]({{<baseurl>}}/rke/latest/en/) Rancher Kubernetes Engine，是一个经过 CNCF 认证的 Kubernetes 发行版，完全在 Docker 容器内运行。
+- [**K3s,**]({{<baseurl>}}/k3s/latest/en/)是一个完全符合要求的轻量级 Kubernetes 发行版。它易于安装，内存只有上游 Kubernetes 的一半，所有的二进制文件不到 100MB。
+- [**RKE2**](https://docs.rke2.io/)是一个完全符合的 Kubernetes 发行版，专注于美国联邦政府部门内的安全和合规性。
+  要在 Rancher 发行版之外加固 Kubernetes 集群，请参考您的 Kubernetes 提供商文档。
 
-## Guides
+## 指南
 
-These guides have been tested along with the Rancher v2.5 release. Each self-assessment guide is accompanied with a hardening guide and tested on a specific Kubernetes version and CIS benchmark version. If a CIS benchmark has not been validated for your Kubernetes version, you can choose to use the existing guides until a newer version is added.
+这些指南已经和 Rancher v2.5 版本一起进行了测试。每个自评指南都附有硬化指南，并在特定的 Kubernetes 版本和 CIS 基准版本上进行了测试。如果您的 Kubernetes 版本的 CIS 基准尚未得到验证，您可以选择使用现有的指南，直到有更新的版本加入。
 
-### RKE Guides
+### RKE 指南
 
-| Kubernetes Version | CIS Benchmark Version | Self Assessment Guide       | Hardening Guides            |
+| Kubernetes 版本｜ CIS 基准版｜自评指南｜硬化指南｜ Kubernetes 版本｜自评指南
 | ------------------ | --------------------- | --------------------------- | --------------------------- |
-| Kubernetes v1.15+  | CIS v1.5              | [Link](./1.5-benchmark-2.5) | [Link](./1.5-hardening-2.5) |
-| Kubernetes v1.18+  | CIS v1.6              | [Link](./1.6-benchmark-2.5) | [Link](./1.6-hardening-2.5) |
+| Kubernetes v1.15+ | CIS v1.5 | [链接](./1.5-benchmark-2.5) | [链接](./1.5-hardening-2.5) | [链接](./1.5-hardening-2.5)。
+| Kubernetes v1.18+ | CIS v1.6 | [链接](./1.6-benchmark-2.5) | [链接](./1.6-hardening-2.5) | [链接](./1.6-hardening-2.5)。
 
-### RKE2 Guides
+### RKE2 指南
 
-| Kubernetes Version | CIS Benchmark Version | Self Assessment Guide                                      | Hardening Guides                                       |
+| Kubernetes 版本｜ CIS 基准版｜自评指南｜硬化指南｜ Kubernetes 版本｜自评指南
 | ------------------ | --------------------- | ---------------------------------------------------------- | ------------------------------------------------------ |
-| Kubernetes v1.18   | CIS v1.5              | [Link](https://docs.rke2.io/security/cis_self_assessment/) | [Link](https://docs.rke2.io/security/hardening_guide/) |
+| Kubernetes v1.18 | CIS v1.5 - [链接](https://docs.rke2.io/security/cis_self_assessment/) - [链接](https://docs.rke2.io/security/hardening_guide/) - [链接](https://docs.rke2.io/security/hardening_guide/) - [链接](https://docs.rke2.io/security/hardening_guide/)
 
-### K3s Guides
+### K3s 指南
 
-The K3s security guides will be added soon.
+K3s 的安全指南即将添加。

@@ -84,10 +84,20 @@ module.exports = {
             },
             {
                 type: "category",
+                label: "在Linux操作系统上安装Rancher",
+                items: [
+                    "rancher2/installation_new/install-rancher-on-linux/_index",
+                    "rancher2/installation_new/install-rancher-on-linux/rancherd-configuration/_index",
+                    "rancher2/installation_new/install-rancher-on-linux/upgrades/_index",
+                ],
+            },
+            {
+                type: "category",
                 label: "高可用安装",
                 items: [
                     "rancher2/installation_new/install-rancher-on-k8s/_index",
                     "rancher2/installation_new/install-rancher-on-k8s/chart-options/_index",
+
                     {
                         type: "category",
                         label: "升级指南",
@@ -110,16 +120,7 @@ module.exports = {
             },
             {
                 type: "category",
-                label: "在Linux操作系统上安装Rancher",
-                items: [
-                    "rancher2/installation_new/install-rancher-on-linux/_index",
-                    "rancher2/installation_new/install-rancher-on-linux/rancherd-configuration/_index",
-                    "rancher2/installation_new/install-rancher-on-linux/upgrades/_index",
-                ],
-            },
-            {
-                type: "category",
-                label: "安装方式",
+                label: "其他安装方式",
                 items: [
                     "rancher2/installation_new/other-installation-methods/_index",
                     {
@@ -173,20 +174,20 @@ module.exports = {
                         label: "K8s使用教程",
                         items: [
                             "rancher2/installation_new/resources/k8s-tutorials/_index",
-                            "rancher2/installation_new/resources/k8s-tutorials/ha-rke/_index",
-                            "rancher2/installation_new/resources/k8s-tutorials/ha-with-external-db/_index",
                             "rancher2/installation_new/resources/k8s-tutorials/how-ha-works/_index",
+                            "rancher2/installation_new/resources/k8s-tutorials/ha-with-external-db/_index",
+                            "rancher2/installation_new/resources/k8s-tutorials/ha-rke/_index",
                             {
                                 type: "category",
                                 label: "基础设施教程",
                                 items: [
                                     "rancher2/installation_new/resources/k8s-tutorials/infrastructure-tutorials/_index",
-                                    "rancher2/installation_new/resources/k8s-tutorials/infrastructure-tutorials/ec2-node/_index",
-                                    "rancher2/installation_new/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha/_index",
                                     "rancher2/installation_new/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha-with-external-db/_index",
+                                    "rancher2/installation_new/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha/_index",
+                                    "rancher2/installation_new/resources/k8s-tutorials/infrastructure-tutorials/ec2-node/_index",
+                                    "rancher2/installation_new/resources/k8s-tutorials/infrastructure-tutorials/rds/_index",
                                     "rancher2/installation_new/resources/k8s-tutorials/infrastructure-tutorials/nginx/_index",
                                     "rancher2/installation_new/resources/k8s-tutorials/infrastructure-tutorials/nlb/_index",
-                                    "rancher2/installation_new/resources/k8s-tutorials/infrastructure-tutorials/rds/_index",
                                 ],
                             },
                         ],
@@ -199,6 +200,20 @@ module.exports = {
                             "rancher2/installation_new/resources/upgrading-cert-manager/helm-2-instructions/_index",
                         ],
                     },
+                    {
+                        type: "category",
+                        label: "启用实验功能",
+                        items: [
+                            "rancher2/installation_new/resources/feature-flags/_index",
+                            "rancher2/installation_new/resources/feature-flags/enable-not-default-storage-drivers/_index",
+                            "rancher2/installation_new/resources/feature-flags/istio-virtual-service-ui/_index",
+                        ],
+                    },
+                    "rancher2/installation_new/resources/chart-options/_index",
+                    "rancher2/installation_new/resources/local-system-charts/_index",
+                    "rancher2/installation_new/resources/F5-7-layer-loadbalancer/_index",
+                    "rancher2/installation_new/resources/F5-WAF/_index",
+                    "rancher2/installation_new/resources/troubleshooting/_index",
                     {
                         type: "category",
                         label: "高级配置选项",
@@ -283,7 +298,6 @@ module.exports = {
                                 ],
                             },
                             "rancher2/installation_new/resources/advanced/firewall/_index",
-                            "rancher2/installation_new/resources/advanced/self-signed-ssl/_index",
                             {
                                 type: "category",
                                 label: "使用Helm2离线安装",
@@ -299,6 +313,7 @@ module.exports = {
                             "rancher2/installation_new/resources/advanced/arm64-platform/_index",
                             "rancher2/installation_new/resources/advanced/api-audit-log/_index",
                             "rancher2/installation_new/resources/advanced/single-node-install-external-lb/_index",
+                            "rancher2/installation_new/resources/advanced/self-signed-ssl/_index",
                             {
                                 type: "category",
                                 label: "cluster.yml 文件模板",
@@ -320,19 +335,6 @@ module.exports = {
                             },
                         ],
                     },
-                    {
-                        type: "category",
-                        label: "启用实验功能",
-                        items: [
-                            "rancher2/installation_new/resources/feature-flags/_index",
-                            "rancher2/installation_new/resources/feature-flags/enable-not-default-storage-drivers/_index",
-                            "rancher2/installation_new/resources/feature-flags/istio-virtual-service-ui/_index",
-                        ],
-                    },
-                    "rancher2/installation_new/resources/troubleshooting/_index",
-                    "rancher2/installation_new/resources/local-system-charts/_index",
-                    "rancher2/installation_new/resources/F5-7-layer-loadbalancer/_index",
-                    "rancher2/installation_new/resources/F5-WAF/_index",
                 ],
             },
         ],
@@ -1011,6 +1013,7 @@ module.exports = {
             "rancher2/k8s-in-rancher/secrets/_index",
             "rancher2/k8s-in-rancher/registries/_index",
         ],
+        /*
         安全: [
             "rancher2/security/_index",
             "rancher2/security/security-scan/_index",
@@ -1039,6 +1042,76 @@ module.exports = {
                     "rancher2/security/benchmark-2.1/_index",
                 ],
             },
+        ],
+        */
+        //new
+        安全: [
+            {
+                type: "category",
+                label: "v2.1",
+                items: [
+                    "rancher2/security/rancher-2.1/benchmark-2.1/_index",
+                    "rancher2/security/rancher-2.1/hardening-2.1/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "v2.2",
+                items: [
+                    "rancher2/security/rancher-2.2/benchmark-2.2/_index",
+                    "rancher2/security/rancher-2.2/hardening-2.2/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "v2.3",
+                items: [
+                    {
+                        type: "category",
+                        label: "2.3.0",
+                        items: [
+                            "rancher2/security/rancher-2.3.x/2.3.0/benchmark-2.3/_index",
+                            "rancher2/security/rancher-2.3.x/2.3.0/hardening-2.3/_index",
+                        ],
+                    },
+                    {
+                        type: "category",
+                        label: "2.3.3",
+                        items: [
+                            "rancher2/security/rancher-2.3.x/2.3.3/benchmark-2.3.3/_index",
+                            "rancher2/security/rancher-2.3.x/2.3.3/hardening-2.3.3/_index",
+                        ],
+                    },
+                    {
+                        type: "category",
+                        label: "2.3.5",
+                        items: [
+                            "rancher2/security/rancher-2.3.x/2.3.5/benchmark-2.3.5/_index",
+                            "rancher2/security/rancher-2.3.x/2.3.5/hardening-2.3.5/_index",
+                        ],
+                    },
+                ],
+            },
+            {
+                type: "category",
+                label: "v2.4",
+                items: [
+                    "rancher2/security/rancher-2.4/benchmark-2.4/_index",
+                    "rancher2/security/rancher-2.4/hardening-2.4/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "v2.5",
+                items: [
+                    "rancher2/security/rancher-2.5/1.5-benchmark-2.5/_index",
+                    "rancher2/security/rancher-2.5/1.5-hardening-2.5/_index",
+                    "rancher2/security/rancher-2.5/1.6-benchmark-2.5/_index",
+                    "rancher2/security/rancher-2.5/1.6-hardening-2.5/_index",
+                ],
+            },
+            "rancher2/security/cve/_index",
+            "rancher2/security/security-scan/_index",
         ],
         Rancher命令行: ["rancher2/cli/_index"],
         系统工具: ["rancher2/system-tools/_index"],
@@ -1144,6 +1217,7 @@ module.exports = {
             "rancher2/api/api-custom-cluster/_index",
             "rancher2/api/api-import-cluster/_index",
         ],
+        /*
         安全: [
             "rancher2/security/_index",
             "rancher2/security/security-scan/_index",
@@ -1173,6 +1247,7 @@ module.exports = {
                 ],
             },
         ],
+        */
         常见问题: [
             "rancher2/faq/_index",
             "rancher2/faq/deprecated-features-25x/_index",
