@@ -4,7 +4,7 @@ title: 升级指南
 
 ## 概述
 
-当 RancherD 升级时，Rancher 舵机控制器和舰队舱都会升级。
+当 RancherD 升级时，Rancher Helm controller 和 Fleet pod 都会升级。
 
 在 RancherD 升级过程中，停机时间非常少，但 RKE2 有可能会停机一分钟，在此期间，您可能会失去对 Rancher 的访问。
 

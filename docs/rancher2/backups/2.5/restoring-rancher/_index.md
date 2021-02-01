@@ -87,7 +87,7 @@ hostname: rancher.my.org
 helm get values rancher -n cattle-system -o yaml > values.yaml。
 ```
 
-然后将舵手图升级到以前的 Rancher 版本，使用以前的值。在这个例子中，这些值是从文件中提取的。
+然后将 Helm Chart 升级到以前的 Rancher 版本，使用以前的值。在这个例子中，这些值是从文件中提取的。
 
 ```
 helm upgrade rancher rancher-<CHART_REPO>/rancher \

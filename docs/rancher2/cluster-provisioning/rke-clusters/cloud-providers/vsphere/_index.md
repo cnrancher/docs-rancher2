@@ -4,7 +4,7 @@ title: vSphere
 
 在本节中，您将了解如何在 vSphere 中为 Rancher 管理的 RKE Kubernetes 集群设置 vSphere 云提供商。
 
-在 Rancher 中创建 vSphere 群集时，请遵循这些步骤：
+在 Rancher 中创建 vSphere 集群时，请遵循这些步骤：
 
 1. 将**云提供商**选项设置为 "custom"。
 1. 单击**以 YAML 形式编辑**。
@@ -18,4 +18,4 @@ title: vSphere
        vsphereCloudProvider: [Insert provider configuration]
    ```
 
-Rancher 使用 RKE（Rancher Kubernetes Engine）来配置 Kubernetes 群集。有关`vsphereCloudProvider`指令属性的详细信息，请参考[RKE 文档中的 vSphere 配置参考](/docs/rke/config-options/cloud-providers/vsphere/config-reference/_index)。
+Rancher 使用 RKE（Rancher Kubernetes Engine）来配置 Kubernetes 集群。有关`vsphereCloudProvider`指令属性的详细信息，请参考[RKE 文档中的 vSphere 配置参考](/docs/rke/config-options/cloud-providers/vsphere/config-reference/_index)。
