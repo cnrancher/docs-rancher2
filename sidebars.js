@@ -627,6 +627,7 @@ module.exports = {
                 ],
             },
             "rancher2/cluster-provisioning/imported-clusters/_index",
+            "rancher2/cluster-provisioning/registered-clusters/_index",
         ],
         集群管理员指南: [
             "rancher2/cluster-admin/_index",
