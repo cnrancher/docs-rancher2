@@ -133,7 +133,7 @@ _v2.2.4 或更新版本可用_
    - [**容器**](https://github.com/google/cadvisor)
    - [**Kubernetes 资源**](https://github.com/kubernetes/kube-state-metrics)
    - [**自定义指标**](/docs/rancher2/project-admin/tools/monitoring/_index#project-metrics)
-   - [**项目级别 Grafana 的指标**](http://docs.grafana.org/administration/metrics/)
+   - [**项目级别 Grafana 的指标**](https://grafana.com/docs/grafana/latest/administration/view-server/internal-metrics/#internal-grafana-metrics)
    - **项目级别 Prometheus 的指标**
 
 1. 选择触发告警的方式。

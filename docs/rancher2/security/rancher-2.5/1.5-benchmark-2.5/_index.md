@@ -4,7 +4,7 @@ title: CIS 1.5 Benchmark - Self-Assessment Guide - Rancher v2.5
 
 ## CIS v1.5 Kubernetes Benchmark - Rancher v2.5 with Kubernetes v1.15
 
-[单击这里下载 PDF 版本的安全自测指南](https://releases.rancher.com/documents/security/2.5/Rancher_1.5_Benchmark_Assessment.pdf)
+[单击这里下载 PDF 版本的安全自测指南](https://releases.rancher.com/documents/security/2.5/Rancher_1.5_Benchmark_Assessment.pdf)。
 
 ## 概述
 

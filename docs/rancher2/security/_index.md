@@ -60,14 +60,14 @@ Rancher 的安全加固指南是根据 CIS（互联网安全中心）发布的<a
 
 每个版本的加固指南都是针对特定版本的 CIS Kubernetes 安全标准，特定版本的 Kubernetes 和 特定版本的 Rancher 设计的：
 
-| 加固指南版本                                                      | Rancher 版本          | CIS 安全标准版本          | Kubernetes 版本                  |
-| :---------------------------------------------------------------- | :-------------------- | :------------------------ | :------------------------------- |
-| [加固指南 v2.4.0](/docs/rancher2/security/hardening-2.4/_index)   | Rancher v2.4.0        | Benchmark v1.5            | Kubernetes v1.15                 |
-| [加固指南 v2.3.5](/docs/rancher2/security/hardening-2.3.5/_index) | Rancher v2.3.5        | Benchmark v1.5            | Kubernetes v1.15                 |
-| [加固指南 v2.3.3](/docs/rancher2/security/hardening-2.3.3/_index) | Rancher v2.3.3        | Benchmark v1.4.1          | Kubernetes v1.14, v1.15 和 v1.16 |
-| [加固指南 v2.3](/docs/rancher2/security/hardening-2.3/_index)     | Rancher v2.3.0-v2.3.2 | Benchmark v1.4.1          | Kubernetes v1.15                 |
-| [加固指南 v2.2](/docs/rancher2/security/hardening-2.2/_index)     | Rancher v2.2.x        | Benchmark v1.4.1 和 1.4.0 | Kubernetes v1.13                 |
-| [加固指南 v2.1](/docs/rancher2/security/hardening-2.1/_index)     | Rancher v2.1.x        | Benchmark v1.3.0          | Kubernetes v1.11                 |
+| 加固指南版本                                                                          | Rancher 版本          | CIS 安全标准版本          | Kubernetes 版本                  |
+| :------------------------------------------------------------------------------------ | :-------------------- | :------------------------ | :------------------------------- |
+| [加固指南 v2.4.0](/docs/rancher2/security/rancher-2.4/hardening-2.4/_index)           | Rancher v2.4.0        | Benchmark v1.5            | Kubernetes v1.15                 |
+| [加固指南 v2.3.5](/docs/rancher2/security/rancher-2.3.x/2.3.5/hardening-2.3.5/_index) | Rancher v2.3.5        | Benchmark v1.5            | Kubernetes v1.15                 |
+| [加固指南 v2.3.3](/docs/rancher2/security/rancher-2.3.x/2.3.3/hardening-2.3.3/_index) | Rancher v2.3.3        | Benchmark v1.4.1          | Kubernetes v1.14, v1.15 和 v1.16 |
+| [加固指南 v2.3](/docs/rancher2/security/rancher-2.3.x/2.3.0/hardening-2.3/_index)     | Rancher v2.3.0-v2.3.2 | Benchmark v1.4.1          | Kubernetes v1.15                 |
+| [加固指南 v2.2](/docs/rancher2/security/rancher-2.2/hardening-2.2/_index)             | Rancher v2.2.x        | Benchmark v1.4.1 和 1.4.0 | Kubernetes v1.13                 |
+| [加固指南 v2.1](/docs/rancher2/security/rancher-2.1/hardening-2.1/_index)             | Rancher v2.1.x        | Benchmark v1.3.0          | Kubernetes v1.11                 |
 
 ## CIS Benchmark 和自测指南
 

@@ -12,7 +12,7 @@ title: 升级指南
 
 要升级 Kubernetes 集群中的组件，或者定义[Kubernetes 服务](/docs/rke/config-options/services/_index)或[附加组件](/docs/rke/config-options/add-ons/_index)。参考 Rancher Kubernetes 引擎的[RKE 的升级文档](/docs/rke/upgrades/_index)。
 
-如果你使用 RKE 附加组件 yaml 安装了 Rancher，请按照[迁移或升级](docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/migrating-from-rke-add-on/_index)的指示进行。
+如果你使用 RKE 附加组件 yaml 安装了 Rancher，请按照[迁移或升级](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/migrating-from-rke-add-on/_index)的指示进行。
 
 ## 前提条件
 
@@ -62,7 +62,7 @@ kubeconfig 也可以通过`--kubeconfig`标签来手动针对预定的集群，�
 
 对于 Rancher v2.5+，使用[备份应用程序](/docs/rancher2/backups/2.5/back-up-rancher/_index)来备份 Rancher。
 
-对于 Rancher v2.0-v2.4，使用[一次性快照](/docs/rancher2/v2.0.x-v2.4.x/backup/rke-backups/_index)进行备份。
+对于 Rancher v2.0-v2.4，使用[一次性快照](/docs/rancher2/backups/2.0-2.4/ha-backups/_index)进行备份。
 运行 Rancher 服务器的 Kubernetes 集群的备份。
 
 如果在升级过程中出现问题，您将使用备份作为恢复点。
