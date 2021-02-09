@@ -55,11 +55,11 @@ https://www.youtube.com/watch?v=dPIwg6x1AlU&feature=emb_logo
 
 ## 创建一个 vSphere Cluster
 
-在 [本节](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/_index) 中，您将学习如何使用 Rancher 在 vSphere 中安装 [RKE]({{<baseurl>}}/rke/latest/en/) Kubernetes 集群。
+在 [本节](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/_index) 中，您将学习如何使用 Rancher 在 vSphere 中安装 [RKE](/docs/rke/_index) Kubernetes 集群。
 
 ## 配置存储
 
-有关如何使用 Rancher 在 vSphere 中供应存储的示例，请参阅 [本节](/docs/rancher2/cluster-admin/volumes-and-storage/examples/vsphere/_index)。为了在 vSphere 中动态供应存储，必须 [启用 vSphere provider](/docs/rancher2/cluster-provisioning/rk-clusters/cloud-providers/vsphere/_index)
+有关如何使用 Rancher 在 vSphere 中供应存储的示例，请参阅 [本节](/docs/rancher2/cluster-admin/volumes-and-storage/examples/vsphere/_index)。为了在 vSphere 中动态供应存储，必须 [启用 vSphere provider](/docs/rancher2/cluster-provisioning/rke-clusters/cloud-providers/vsphere/_index)
 
 ## 启用 vSphere Cloud Provider
 

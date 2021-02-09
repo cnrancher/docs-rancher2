@@ -137,7 +137,7 @@ keywords:
 - [**容器**](https://github.com/google/cadvisor)
 - [**Kubernetes 资源**](https://github.com/kubernetes/kube-state-metrics)
 - [**自定义**](/docs/rancher2/project-admin/tools/monitoring/_index)
-- [**项目级 Grafana**](http://docs.grafana.org/administration/metrics/)
+- [**项目级 Grafana**](https://grafana.com/docs/grafana/latest/administration/view-server/internal-metrics/#internal-grafana-metrics)
 - **项目级普罗米修斯**
 
 1. 选择比较：
