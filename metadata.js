@@ -206,6 +206,8 @@ const metadata = {
                 "通过主机驱动创建 RKE 集群",
             "rancher2/cluster-provisioning/imported-clusters/_index":
                 "导入已有集群",
+            "rancher2/cluster-provisioning/registered-clusters/_index":
+                "注册集群",
             "rancher2/cluster-provisioning/rke-clusters/windows-clusters/_index":
                 "创建 Windows 集群",
             "rancher2/cluster-provisioning/rke-clusters/cloud-providers/_index":
