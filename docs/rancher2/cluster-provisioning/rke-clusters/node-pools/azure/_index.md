@@ -26,7 +26,7 @@ keywords:
 
 有关配置 Rancher 将在 Azure 节点上安装的 Kubernetes 集群的更多信息，请参考 [RKE 集群配置参考](/docs/rancher2/cluster-provisioning/rke-clusters/options/_index)。
 
-有关配置 Azure 节点模板的更多信息，请参阅 [Azure 节点模板配置参考](./azure-node-template-config)
+有关配置 Azure 节点模板的更多信息，请参阅 [Azure 节点模板配置参考](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/azure/azure-node-template-config/_index)
 
 ## 准备工作
 

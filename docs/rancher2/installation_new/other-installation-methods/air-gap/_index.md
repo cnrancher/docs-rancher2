@@ -30,7 +30,7 @@ keywords:
 
 ## 升级 Rancher
 
-要在离线环境中使用 Helm CLI 升级 Rancher，请按照[这个页面](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/_index.md)进行操作。
+要在离线环境中使用 Helm CLI 升级 Rancher，请按照[这个页面](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/_index)进行操作。
 
 ## 后续操作
 

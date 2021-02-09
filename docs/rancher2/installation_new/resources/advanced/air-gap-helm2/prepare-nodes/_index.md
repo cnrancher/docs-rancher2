@@ -97,7 +97,7 @@ Rancher 建议在 Kubernetes 集群上安装 Rancher。一个高可用的 Kubern
 
 - 有关如何配置 F5 作为 Rancher 前端 7 层负载均衡器的示例，请参考[本页](/docs/rancher2/installation_new/resources/F5-7-layer-loadbalancer/_index)。
 
-- 有关如何为 F5 启动 WAF 功能的示例，请参考[本页](docs/rancher2/installation_new/resources/F5-WAF/_index)。
+- 有关如何为 F5 启动 WAF 功能的示例，请参考[本页](/docs/rancher2/installation_new/resources/F5-WAF/_index)。
 
 ### Docker 安装
 

@@ -46,7 +46,7 @@ _适用于 v2.5.4 及更高版本_
 | `cattle-cluster-agent` | `beta.kubernetes.io/os:NotIn:windows` | none       | **注意：**这些是默认的容忍度，将由与应用于控制平面节点的污点相匹配的容忍度取代。<br/><br/>`effect:NoSchedule`<br/>`key:node-role.kubernetes.io/controlplane`<br/>`value:true`<br/><br/>`effect:NoSchedule`<br/>`key:node-role.kubernetes.io/control-plane`<br/>`operator:Exists`<br/><br/>`effect:NoSchedule`<br/>`key:node-role.kubernetes.io/master`<br/>`operator:Exists` |
 | `cattle-node-agent`    | `beta.kubernetes.io/os:NotIn:windows` | none       | `operator:Exists`                                                                                                                                                                                                                                                                                                                                                            |
 
-`cattle-cluster-agent`部署有优先调度规则，使用`preferredDuringSchedulingIgnoredDuringExecution`，倾向于在有`controlplane`节点的节点上调度。当集群中没有可见的 controlplane 节点时（这通常是使用[Clusters from Hosted Kubernetes Providers]({{<baseurl>}}/rancher/v2.x/en/cluster-provisioning/hosted-kubernetes-clusters/)时的情况），可以在节点上添加标签`cattle.io/cluster-agent=true`，倾向于将`cattle-cluster-agent` pod 调度到该节点上。
+`cattle-cluster-agent`部署有优先调度规则，使用`preferredDuringSchedulingIgnoredDuringExecution`，倾向于在有`controlplane`节点的节点上调度。当集群中没有可见的 controlplane 节点时（这通常是使用[Clusters from Hosted Kubernetes Providers](/docs/rancher2/cluster-provisioning/hosted-kubernetes-clusters/_index)时的情况），可以在节点上添加标签`cattle.io/cluster-agent=true`，倾向于将`cattle-cluster-agent` pod 调度到该节点上。
 
 参见[Kubernetes: Assigning Pods to Nodes](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/)，可以找到更多关于调度规则的信息。
 
