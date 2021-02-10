@@ -77,14 +77,14 @@ Rancher 的安全加固指南是根据 CIS（互联网安全中心）发布的<a
 
 每个版本的自测指南都是针对特定版本的加固指南，特定版本的 Kubernetes，特定版本的 Rancher 和特定版本的 CIS Kubernetes 安全标准进行的：
 
-| 自测指南版本                                                      | Rancher 版本         | 加固指南版本    | Kubernetes 版本  | CIS 安全标准版本          |
-| :---------------------------------------------------------------- | :------------------- | :-------------- | :--------------- | :------------------------ |
-| [自测指南 v2.4](/docs/rancher2/security/benchmark-2.4/_index)     | Rancher v2.4         | 加固指南 v2.4   | Kubernetes v1.15 | 安全标准 v1.5.0           |
-| [自测指南 v2.3.5](/docs/rancher2/security/benchmark-2.3.5/_index) | Rancher v2.3.5       | 加固指南 v2.3.5 | Kubernetes v1.15 | 安全标准 v1.5.0           |
-| [自测指南 v2.3.3](/docs/rancher2/security/benchmark-2.3.3/_index) | Rancher v2.3.3       | 加固指南 v2.3.3 | Kubernetes v1.16 | 安全标准 v1.4.1           |
-| [自测指南 v2.3](/docs/rancher2/security/benchmark-2.3/_index)     | Rancher v2.3.0-2.3.2 | 加固指南 v2.3   | Kubernetes v1.15 | 安全标准 v1.4.1           |
-| [自测指南 v2.2](/docs/rancher2/security/benchmark-2.2/_index)     | Rancher v2.2.x       | 加固指南 v2.2   | Kubernetes v1.13 | 安全标准 v1.4.0 和 v1.4.1 |
-| [自测指南 v2.1](/docs/rancher2/security/benchmark-2.1/_index)     | Rancher v2.1.x       | 加固指南 v2.1   | Kubernetes v1.11 | 安全标准 1.3.0            |
+| 自测指南版本                                                                          | Rancher 版本         | 加固指南版本    | Kubernetes 版本  | CIS 安全标准版本          |
+| :------------------------------------------------------------------------------------ | :------------------- | :-------------- | :--------------- | :------------------------ |
+| [自测指南 v2.4](/docs/rancher2/security/rancher-2.4/benchmark-2.4/_index)             | Rancher v2.4         | 加固指南 v2.4   | Kubernetes v1.15 | 安全标准 v1.5.0           |
+| [自测指南 v2.3.5](/docs/rancher2/security/rancher-2.3.x/2.3.5/benchmark-2.3.5/_index) | Rancher v2.3.5       | 加固指南 v2.3.5 | Kubernetes v1.15 | 安全标准 v1.5.0           |
+| [自测指南 v2.3.3](/docs/rancher2/security/rancher-2.3.x/2.3.3/benchmark-2.3.5/_index) | Rancher v2.3.3       | 加固指南 v2.3.3 | Kubernetes v1.16 | 安全标准 v1.4.1           |
+| [自测指南 v2.3](/docs/rancher2/security/rancher-2.3.x/2.3.0/benchmark-2.3.5/_index)   | Rancher v2.3.0-2.3.2 | 加固指南 v2.3   | Kubernetes v1.15 | 安全标准 v1.4.1           |
+| [自测指南 v2.2](/docs/rancher2/security/rancher-2.2/benchmark-2.2/_index)             | Rancher v2.2.x       | 加固指南 v2.2   | Kubernetes v1.13 | 安全标准 v1.4.0 和 v1.4.1 |
+| [自测指南 v2.1](/docs/rancher2/security/rancher-2.1/benchmark-2.1/_index)             | Rancher v2.1.x       | 加固指南 v2.1   | Kubernetes v1.11 | 安全标准 1.3.0            |
 
 ## 第三方安全测试报告
 

@@ -2,10 +2,6 @@
 title: CIS 1.5 Benchmark - Self-Assessment Guide - Rancher v2.5
 ---
 
-## CIS v1.5 Kubernetes Benchmark - Rancher v2.5 with Kubernetes v1.15
-
-[单击这里下载 PDF 版本的安全自测指南](https://releases.rancher.com/documents/security/2.5/Rancher_1.5_Benchmark_Assessment.pdf)。
-
 ## 概述
 
 本文档是对 Rancher v2.5 安全加固指南的补充。加固指南提供了用于加固 Rancher 的生产环境集群的指南，该基准自测指南旨在帮助您针对安全基准中的每个控制，来评估加固集群的安全级别。本指南将逐步介绍各种控制，并提供更新的示例命令以审核 Rancher 创建的集群中的合规性。此文档的适用人群是：Rancher 运维人员、安全团队、审核员和决策者。

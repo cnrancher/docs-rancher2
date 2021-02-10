@@ -301,7 +301,7 @@ keywords:
 
 ## 部署
 
-基于[cluster-autoscaler-run-on-master.yaml](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/aws/examples/cluster-autoscaler-run-on-master.yaml)的例子，我们创建了自己的`cluster-autoscaler-deployment.yaml`，使用首选的[auto-discovery setup](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler/cloudprovider/aws#auto-discovery-setup)，更新容忍度、nodeSelector、镜像版本和命令配置。
+基于[cluster-autoscaler-run-on-master.yaml](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler/cloudprovider/aws/examples)的例子，我们创建了自己的`cluster-autoscaler-deployment.yaml`，使用首选的[auto-discovery setup](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler/cloudprovider/aws#auto-discovery-setup)，更新容忍度、nodeSelector、镜像版本和命令配置。
 
 ```yml
 ---
