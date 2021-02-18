@@ -2,15 +2,15 @@
 title: 流水线配置参考
 description: 在每个阶段中，您可以任意添加多个步骤。在一个阶段中有多个步骤时，它们会同时运行。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 用户指南
   - 流水线
   - 流水线配置参考

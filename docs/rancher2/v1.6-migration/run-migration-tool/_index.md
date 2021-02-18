@@ -2,15 +2,15 @@
 title: 迁移服务
 description: 尽管默认情况下 v1.6 提供的服务将无法在 Rancher v2.x 中运行，但这并不意味着您必须重新开始在 v2.x 中手动重建应用程序。为了帮助从 v1.6 迁移到 v2.x，Rancher 开发了一个迁移工具。迁移工具 CLI 是一个实用程序，可帮助您在 Rancher v2.x 中重新创建应用程序。该工具将您的 Rancher v1.6 服务导出为 Compose 文件，并将它们转换为 Rancher v2.x 可以使用的 Kubernetes 清单。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 版本迁移
   - 迁移服务
 ---

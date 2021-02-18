@@ -2,15 +2,15 @@
 title: Rancher 单节点恢复
 description: 如果遇到灾难场景，可以通过备份文件恢复 Rancher Server 数据。在还原备份期间，您将输入一系列命令，以环境中的数据替换占位符。这些占位符用尖括号和所有大写字母（`<EXAMPLE>`）表示。这是带有占位符的命令示例。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 备份和恢复指南
   - 恢复
   - Rancher 单节点恢复

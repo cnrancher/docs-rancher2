@@ -2,15 +2,15 @@
 title: 备份集群
 description: 在 Rancher UI 中，可以轻松执行RKE 集群的备份和恢复。Rancher 建议为所有生产集群配置定期的`etcd`快照。此外，您也还可以轻松制作一次性快照。etcd 数据库的快照将保存在本地到 etcd 节点上或S3 备份中。配置 S3 的优点是，如果所有 etcd 节点都丢失了，因为快照在远程保存，所以在这种情况下也可以用于还原集群。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 备份集群
 ---

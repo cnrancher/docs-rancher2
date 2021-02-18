@@ -2,15 +2,15 @@
 title: 如何选择 Rancher 版本
 description: 我们建议在生产环境中使用 Rancher 高可用安装，在开发环境和测试环境中使用单节点安装。高可用安装：使用Helm Chart 将 Rancher 安装在 Kubernetes 集群上。请参阅Helm 版本要求，选择安装 Rancher 的 Helm 版本。单节点安装：对于使用 Docker 安装的单节点 Rancher，一般用于开发和测试，Rancher 将以Docker 镜像的形式安装。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 安装指南
   - 资料、参考和高级选项
   - 如何选择 Rancher 版本

@@ -2,15 +2,15 @@
 title: 配置用于监控的自定义资源
 description: 本文讲述了一些配置监控的自定义资源时使用到的重要配置选项，如配置 Prometheus、为通知添加 CA 证书和配置拉取参数，并且提供了示例代码。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - rancher 2.5
   - 监控和告警
   - 配置用于监控的自定义资源

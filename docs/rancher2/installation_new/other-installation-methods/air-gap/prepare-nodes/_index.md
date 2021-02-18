@@ -2,15 +2,15 @@
 title: "1、配置基础设施和私有镜像仓库"
 description: 离线环境是指在没有外网访问的环境，或在防火墙后安装 Rancher Server 的环境。本文提供了在离线环境中为 Rancher Server 配置基础设施和私有 Docker 镜像仓库的操作指导。基础设施取决于安装 Rancher 的方式：K3s Kubernetes 集群、RKE Kubernetes 集群或单个 Docker 容器上安装 Rancher。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 安装指南
   - 其他安装方法
   - 离线安装

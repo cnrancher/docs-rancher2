@@ -2,15 +2,15 @@
 title: 将用户添加到集群中
 description: 如果希望为用户提供对集群中的所有项目、节点和资源的访问和权限，请为该用户分配集群成员资格。以下两种情况下，您可以添加集群成员。向新集群添加成员，您可以在创建集群时将成员添加到集群中。向现有集群添加成员，在集群创建之后，随时可以向集群添加成员。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 集群访问控制
   - 将用户添加到集群中

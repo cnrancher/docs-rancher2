@@ -2,15 +2,15 @@
 title: 访问集群
 description: 您可以通过多种方式与由 Rancher 管理的 Kubernetes 集群进行交互，例如，Rancher UI、kubectl、Rancher kubectl shell、终端远程连接、Rancher CLI、Rancher API等。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 集群访问控制
   - 访问集群

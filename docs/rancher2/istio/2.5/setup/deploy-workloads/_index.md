@@ -2,15 +2,15 @@
 title: 使用Istio Sidecar添加部署和服务
 description: 在命名空间中启用 Istio 后只会对新增的工作负载自动注入 sidecar。如果要为已有的工作负载启用 sidecar，需要重新部署该工作负载。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - Istio
   - 使用Istio Sidecar添加部署和服务
 ---

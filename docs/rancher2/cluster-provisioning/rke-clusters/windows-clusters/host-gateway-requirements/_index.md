@@ -2,15 +2,15 @@
 title: Host Gateway（L2bridge）的网络要求
 description: 本节介绍如何配置使用 _Host Gateway（L2bridge）_ 模式的自定义 Windows 集群.
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 创建集群
   - 创建RKE集群
   - Windows 集群

@@ -2,15 +2,15 @@
 title: 恢复集群
 description: 在 RKE 集群中可以很容易地执行 etcd 备份和恢复。etcd 数据库的快照被获取并保存到本地的 etcd 节点或 S3 兼容的目标上。配置 S3 的优点是，即使所有的 etcd 节点都丢失了，因为您的快照保存在远程，您仍然可以用它来恢复集群。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 集群访问控制
   - 恢复集群

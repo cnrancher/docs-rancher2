@@ -2,15 +2,15 @@
 title: 启用API审计日志记录系统事件
 description: 启用 API 审计日志，系统会将每个用户发起的系统事件信息记录下来。您可以知道发生了什么事件、事件的发生时间、事件的发起人是谁和事件对集群的影响。您可以在 Rancher 安装或升级时开启 API 审计日志功能，开启特性后，所有 Rancher API 的请求和响应信息都会写入到日志文件中。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 安装指南
   - 资料、参考和高级选项
   - 启用API审计日志记录系统事件

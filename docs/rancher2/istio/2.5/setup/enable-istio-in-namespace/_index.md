@@ -2,15 +2,15 @@
 title: 在命名空间中启用Istio
 description: 您需要在每个您希望被 Istio 跟踪或控制的命名空间中手动启用 Istio。当在命名空间中启用 Istio 时，Envoy sidecar 代理将被自动注入到命名空间中部署的所有新工作负载中。此命名空间设置将只影响命名空间中的新工作负载。任何先前存在的工作负载将需要重新部署，以利用 sidecar 自动注入。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - rancher 2.5
   - Istio
   - 配置 Istio

@@ -2,15 +2,15 @@
 title: 使用说明
 description: 本节介绍如何启用 Istio 并开始在项目中使用它。本节假定您已安装 Rancher，并且您有一个要设置 Istio 的 Rancher 创建的 Kubernetes 集群。如果使用 Istio 进行流量管理，则需要允许外部流量进入集群。在这种情况下，您将需要执行以下所有步骤。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 集群访问控制
   - 告警

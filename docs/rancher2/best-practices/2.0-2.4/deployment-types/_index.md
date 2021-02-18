@@ -2,15 +2,15 @@
 title: 运行 Rancher 的建议
 description: 运行在多个节点上的多个 Rancher 实例确保了单节点环境无法实现的高可用性，所以在生产环境或者一些很重要的环境中部署 Rancher 时，应该使用至少有三个节点的高可用 Kubernetes 集群，并在这个集群上面安装 Rancher。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 最佳实践
   - 运行 Rancher 的建议
 ---

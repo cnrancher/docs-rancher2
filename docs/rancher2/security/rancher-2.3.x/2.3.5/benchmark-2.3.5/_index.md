@@ -2,15 +2,15 @@
 title: 自测指南 - v2.3.5
 description: 本文档是对 Rancher v2.3.5 安全加固指南的补充。加固指南提供了用于加固 Rancher 的生产环境集群的指南，该基准自测指南旨在帮助您针对安全基准中的每个控制，来评估加固集群的安全级别。本指南将逐步介绍各种控制，并提供更新的示例命令以审核 Rancher 创建的集群中的合规性。此文档的适用人群是：Rancher 运维人员、安全团队、审核员和决策者。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 安全
   - CIS自测指南
   - 自测指南 - v2.3.5

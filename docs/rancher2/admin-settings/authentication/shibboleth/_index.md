@@ -2,15 +2,15 @@
 title: 配置指南
 description: 如果您的组织使用 Shibboleth 认证系统（IdP）进行用户身份验证，可以将 Rancher 与 Shibboleth 进行对接，从而允许用户使用 Shibboleth 凭据登录到 Rancher。在此配置中，当 Rancher 用户登录时，他们将被重定向到 Shibboleth IdP 以输入其凭据。身份验证结束后，它们将被重定向回 Rancher UI。如果您将 OpenLDAP 配置为了 Shibboleth 的后端，它将返回一个 SAML 断言给 Rancher，其中包含用户的属性（其中包括用户所在的组的信息）。 然后，通过身份验证的用户将能够访问其所在的组有权访问的 Rancher 中的资源。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 系统管理员指南
   - 登录认证
   - 对接 OpenLDAP

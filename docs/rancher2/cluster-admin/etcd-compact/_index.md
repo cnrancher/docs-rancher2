@@ -2,15 +2,15 @@
 title: ETCD 数据压缩
 description: etcd默认不会自动进行数据压缩，etcd保存了keys的历史信息，数据频繁的改动会导致数据版本越来越多，相对应的数据库就会越来越大。etcd数据库大小默认2GB，当在etcd容器或者rancher ui出现以下日志时，说明数据库空间占满，需要进行数据压缩腾出空间。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 集群访问控制
   - ETCD数据压缩

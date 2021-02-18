@@ -2,15 +2,15 @@
 title: 配置 Pod 安全策略
 description: 以下选项仅对使用 RKE 启动的集群可用。当您的集群运行具有安全敏感配置的 pods 时，为它分配一个pod 安全策略，这是一组用于监视 pods 中的条件和设置的规则。如果 pods 不符合策略中指定的规则，策略将不允许它继续运行。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 集群访问控制
   - 配置 Pod 安全策略

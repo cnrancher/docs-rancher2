@@ -2,15 +2,15 @@
 title: 单节点安装的高级选项
 description: 安装 Rancher 时，可以启用几个高级选项：自定义 CA 证书、API 审计日志、TLS 配置、离线环境、持久化数据。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 安装指南
   - 其他安装方法
   - 单节点安装

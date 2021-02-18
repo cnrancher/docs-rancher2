@@ -2,15 +2,15 @@
 title: API 密钥
 description: 如果您需要通过其他应用访问 Rancher 中的集群、项目或者其他组件，您可以使用 Rancher API。在使用前，您需要提供密钥进行认证。您可以在 Rancher UI 中创建 API 密钥。如果您使用的是 Rancher 命令行工具（Rancher CLI），您也需要提供 API 密钥进行认证。API 密钥由以下四个部分组成
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 用户设置
   - API 密钥
 ---

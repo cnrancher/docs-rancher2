@@ -2,15 +2,15 @@
 title: 身份验证
 description: Rancher 向 Kubernetes 添加的关键特性之一是集中式用户身份验证。该特性允许您的用户使用一组凭证对任何 Rancher 管理的 Kubernetes 集群进行身份验证。这种集中式的用户身份验证是使用 Rancher 身份验证代理完成的，该代理与 Rancher 的其他组件一起安装。这个代理验证您的用户，并使用一个服务帐户将用户请求转发到您的 Kubernetes 集群。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 系统管理员指南
   - 登录认证
   - 身份验证

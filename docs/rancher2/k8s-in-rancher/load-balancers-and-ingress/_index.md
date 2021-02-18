@@ -2,15 +2,15 @@
 title: 工作原理
 description: 在集群内启动一个应用程序后，该应用程序仅在集群中可用，无法从集群外部访问该应用程序。负载均衡器和 Ingress 可以重定向服务请求。如果希望可以从外部访问您的应用程序，您可以将负载均衡器或 Ingress 添加到集群中。只要用户知道负载均衡器的 IP 地址和应用程序的端口号，就可以通过负载均衡器创建的网关访问您的集群。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 用户指南
   - 负载均衡和Ingress
   - 工作原理

@@ -2,15 +2,15 @@
 title: 配置
 description: 本配置参考旨在帮助您管理由rancher-cis-benchmark应用程序创建的自定义资源。这些资源用于在集群上执行 CIS 扫描、跳过测试、设置将在扫描期间使用的测试配置文件以及其他自定义。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - CIS 扫描
   - rancher 2.5
   - 配置
