@@ -2,15 +2,15 @@
 title: 功能介绍
 description: 随着微服务网络的变化和增长，微服务网络之间的交互会变得越来越难以管理。在这种情况下，使用服务网格作为一个独立的基础设施层是非常有用的。Istio 可以让你在不直接改变微服务的情况下控制微服务之间的流量。我们对 Istio 的集成设计为，Rancher 管理员或集群所有者，可以将 Istio 交付给开发人员团队。然后，开发人员可以使用 Istio 来执行安全策略，排除问题，或管理蓝绿部署、金丝雀部署或 A/B 测试。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - Istio
   - rancher 2.5
 ---

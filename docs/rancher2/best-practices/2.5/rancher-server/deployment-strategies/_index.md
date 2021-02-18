@@ -2,15 +2,15 @@
 title: Rancher 部署策略
 description: 本文提供了两种部署 Rancher 的策略：轴心方式拓扑和区域性拓扑，每种方法都有优缺点，请按照您的场景选择最适合的部署策略。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 最佳实践及使用技巧
   - Rancher 部署策略
 ---

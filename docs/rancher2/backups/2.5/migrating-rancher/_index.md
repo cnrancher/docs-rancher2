@@ -2,15 +2,15 @@
 title: 将Rancher迁移到新集群
 description: 如果你要将 Rancher 迁移到一个新的 Kubernetes 集群，你不需要先在新集群上安装 Rancher。如果将 Rancher 还原到一个已经安装了 Rancher 的新集群上，可能会引起问题。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 备份和恢复
   - rancher 2.5
   - 将Rancher迁移到新集群

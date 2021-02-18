@@ -2,15 +2,15 @@
 title: 迁移到Rancher v2.5监控
 description: 如果您在 Rancher v2.5 之前曾在 Rancher 中启用过监控、告警或通知器，则没有自动升级路径来切换到新的监控/告警解决方案。在通过 Cluster Explore 部署新的监控解决方案之前，您需要禁用和删除整个集群和所有项目中所有现有的自定义告警、通知器和监控安装。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - rancher 2.5
   - 监控和告警
   - 迁移到Rancher v2.5监控

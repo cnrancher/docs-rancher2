@@ -2,15 +2,15 @@
 title: 覆盖模板设置
 description: 用户创建 RKE 模板时，模板中的每个参数设置在 Rancher UI 中都有一个开关，指示用户在使用该模板创建集群时，是否可以修改该参数。打开开关表示用户可以修改对应的参数，关闭开关表示用户无权修改对应的参数。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 系统管理员指南
   - RKE模板
   - 覆盖模板设置

@@ -2,15 +2,15 @@
 title: 负载均衡
 description: Kubernetes 通过四层负载均衡和七层负载均衡两种方式支持负载均衡。四层负载均衡器（或外部负载均衡器）将流量转发到 Pod 端口。第四层负载均衡器允许您转发 HTTP 和 TCP 通信。七层负载均衡器（或 Ingress 控制器）支持基于主机和路径的负载均衡以及 SSL 终止。第七层负载均衡器仅转发 HTTP 和 HTTPS 通信，因此它们仅侦听端口 80 和 443。像 Amazon 和 Google 这样的云提供商都支持七层负载均衡器。另外，RKE 集群会部署 Nginx Ingress 控制器作为七层负载均衡器。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 用户指南
   - 负载均衡和Ingress
   - 负载均衡

@@ -2,15 +2,15 @@
 title: 自定义 CA 根证书
 description: 如果 Rancher 的使用环境是内网，而不是公网，那么您可以使用私有证书颁发机构（CA）的证书。如果 Rancher 访问的服务配置的是自定义/内部 CA 根证书（也称为自签名证书），而且 Rancher 无法验证服务中提供的证书，会显示如下的错误信息：x509:certificate signed by unknown authority。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 安装指南
   - 资料、参考和高级选项
   - 自定义 CA 根证书

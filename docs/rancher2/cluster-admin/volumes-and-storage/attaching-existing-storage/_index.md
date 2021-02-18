@@ -2,15 +2,15 @@
 title: 使用已有存储
 description: 本章节描述了如何在 Rancher 里为工作负载配置现有的持久化存储。请按照以下步骤配置持久卷和持久卷声明。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 存储卷和存储类
   - 使用已有存储

@@ -2,15 +2,15 @@
 title: 内置全局应用商店
 description: 我们默认将一些全局应用商店打包到了 Rancher 中。这些应用商店可以由系统管理员启用或禁用。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 应用商店
   - 内置全局应用商店
 ---

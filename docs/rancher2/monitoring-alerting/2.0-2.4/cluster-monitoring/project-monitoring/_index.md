@@ -2,15 +2,15 @@
 title: 项目监控
 description: 使用 Rancher，您可以通过与领先的开源监控解决方案Prometheus的集成，监控集群节点、Kubernetes 组件和软件部署的状态和进程。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 集群访问控制
   - 集群监控

@@ -2,15 +2,15 @@
 title: 配置 NGINX
 description: 负载均衡器可以是任何能够运行 NGINX 的主机。本文讲述了如何将 NGINX 配置为 4 层负载均衡器(TCP)，将流量转发到其中一个 Rancher Server 节点的过程。在此配置中，负载均衡器位于节点的前面请勿将 Rancher 节点用作负载均衡器。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 安装指南
   - 资料、参考和高级选项
   - Rancher高可用Helm2安装

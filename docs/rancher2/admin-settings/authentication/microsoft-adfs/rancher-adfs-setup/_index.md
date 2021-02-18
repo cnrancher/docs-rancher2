@@ -2,15 +2,15 @@
 title: 2. 配置 Rancher 使用 AD FS
 description: 完成在 Microsoft AD FS 中配置 Rancher 对接后，将您的 AD FS 信息输入 Rancher，以允许 Rancher 通过 AD FS 进行身份验证。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 系统管理员指南
   - 登录认证
   - AD FS（SAML）

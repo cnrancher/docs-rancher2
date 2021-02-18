@@ -2,15 +2,15 @@
 title: 自定义角色
 description: 在 Rancher 中，角色决定了用户可以在集群或项目中执行哪些操作。请注意，角色与访问权限不同，后者决定了您可以访问哪些集群和项目。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 系统管理员指南
   - 基于角色的访问控制
   - 自定义角色

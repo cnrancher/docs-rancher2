@@ -2,15 +2,15 @@
 title: 介绍
 description: 在 Rancher 中，每个用户都有一系列的配置信息可以使用，例如用户偏好、API 密钥等。您可以从 **主菜单 > 用户配置**中查看、调整或使用这些参数。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 用户设置
   - 介绍
 ---

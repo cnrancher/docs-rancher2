@@ -2,15 +2,15 @@
 title: "1、准备节点"
 description: 本节介绍如何为离线安装 Rancher 准备您的节点。Rancher Server可能会离线安装在防火墙或代理之后的封闭环境。这里有两个选择，用于高可用性安装（推荐）或 单节点 Docker 安装。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 安装指南
   - 资料、参考和高级选项
   - Rancher 高可用 Helm2 离线安装

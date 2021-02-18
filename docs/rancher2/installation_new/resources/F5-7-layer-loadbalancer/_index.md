@@ -2,15 +2,15 @@
 title: 配置 F5 作为 Rancher 前端 7 层 LB
 description: 本文档基于 `BIGIP-15.0.1-0.0.11.ALL-vmware` 虚拟机版本编写，架构如下图所示。本文讲述了如何配置 F5 作为 Rancher 前端 7 层 LB。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 安装指南
   - 资料、参考和高级选项
   - 配置 F5 作为 Rancher 前端 7 层 LB

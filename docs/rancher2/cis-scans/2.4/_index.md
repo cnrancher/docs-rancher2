@@ -2,15 +2,15 @@
 title: Rancher v2.4 中的CIS扫描（已弃用）
 description: 本节包含 Rancher v2.4 中发布的 CIS 扫描工具的遗留文档，可在集群管理器顶部导航栏的工具菜单下获得。从 Rancher v2.5 开始，它已被废弃，并被 rancher-cis-benchmark应用程序所取代。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - cis说明
   - rancher 2.4
   - Rancher v2.4 中的CIS扫描（已弃用）

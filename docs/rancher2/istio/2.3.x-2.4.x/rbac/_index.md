@@ -2,15 +2,15 @@
 title: 基于角色的访问控制
 description: 本节描述访问 Istio 功能所需的权限以及如何配置对 Kiali 和 Jaeger 可视化的访问。默认情况下，只有集群管理员可以为集群启用 Istio、为 Istio 配置资源分配、查看 Prometheus，Grafana，Kiali 和 Jaeger 的 UI。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - Istio
   - 基于角色的访问控制
 ---

@@ -2,15 +2,15 @@
 title: 添加 Kubernetes TLS 密文
 description: 只有当我们在 `cattle-system` 命名空间，将自签名证书和对应密钥配置到 `tls-rancher-ingress` 的密文中，Kubernetes 才会为 Rancher 创建所有的对象和服务。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 安装指南
   - 资料、参考和高级选项
   - Rancher高可用Helm2安装

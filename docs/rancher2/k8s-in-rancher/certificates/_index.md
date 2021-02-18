@@ -2,15 +2,15 @@
 title: 证书，加密HTTP通信
 description: 您可以将 SSL 证书添加到项目，命名空间或同时添加到两者。如果添加的是项目范围的证书，您将可以在该项目下所有命名空间里使用该证书。现在，您可以在当前项目或命名空间中创建 Ingress 时添加证书。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 用户指南
   - 证书，加密HTTP通信
   - 加密HTTP通信

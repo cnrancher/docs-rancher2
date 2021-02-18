@@ -2,15 +2,15 @@
 title: RKE 集群说明
 description: 您可以让 Rancher 使用任何节点启动 Kubernetes 集群。Rancher 使用Rancher Kubernetes Engine（RKE）来部署 Kubernetes 集群，这是 Rancher 自己的轻量级 Kubernetes 安装程序。它可以在任何计算机上启动 Kubernetes，包括：裸金属服务器、本地虚拟机、由云服务商托管的虚拟机。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 创建集群
   - 创建RKE集群
   - RKE集群说明

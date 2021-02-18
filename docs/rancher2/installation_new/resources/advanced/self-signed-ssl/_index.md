@@ -2,15 +2,15 @@
 title: 生成自签名 SSL 证书
 description: 要保证 Web 浏览器到服务器的安全连接，HTTPS 几乎是唯一选择。HTTPS 其实就是 HTTP over SSL，也就是让 HTTP 连接建立在 SSL 安全连接之上。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 安装指南
   - 资料、参考和高级选项
   - 自签名ssl证书

@@ -2,15 +2,15 @@
 title: 配置告警
 description: 为了保证集群和应用程序的健康，提高组织的生产力，您需要随时了解集群和项目里计划内和计划外发生的事件。发生事件时，将触发您的告警，并向您发送通知。然后，您可以根据需要采取应对措施。通知和告警功能是基于 Prometheus Alertmanager实现的。利用这些工具，Rancher 可以通知集群所有者和项目所有者有需要处理的告警。在接收告警之前，必须在 Rancher 中配置一个或多个通知接收者。创建集群时，Rancher 已经配置了一些内置的告警规则。为它们配置接收者后就能收到相应告警。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 集群访问控制
   - 告警

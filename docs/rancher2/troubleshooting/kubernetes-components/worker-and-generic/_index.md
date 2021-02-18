@@ -2,15 +2,15 @@
 title: Worker 节点和其他组件问题排查
 description: 本节适用于每个节点，因为它包括在具有任何角色的节点上运行的组件。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 常见故障排查
   - Kubernetes组件
   - Worker 节点和其他组件问题排查

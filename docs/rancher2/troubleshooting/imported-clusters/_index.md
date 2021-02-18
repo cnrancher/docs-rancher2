@@ -2,15 +2,15 @@
 title: 导入集群
 description: 此页面上列出的命令/步骤可用于检查要导入的集群或在 Rancher 中导入的集群。确保您配置了正确的 kubeconfig (例如，`export KUBECONFIG=$PWD/kubeconfig_from_imported_cluster.yml`)
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 常见故障排查
   - 导入集群
 ---

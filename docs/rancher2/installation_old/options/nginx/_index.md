@@ -2,15 +2,15 @@
 title: 配置 NGINX 负载均衡
 description: 我们将使用 NGINX 作为 4 层负载均衡器(TCP)，它将连接转发到您的某一台 Rancher 节点。在此配置中，负载均衡器位于节点的前面。负载均衡器可以是任何能够运行 NGINX 的主机。一个警告：不要使用任意一个 Rancher 节点作为负载均衡器节点，这会出现端口冲突。在这些示例中，负载均衡器将被配置为将流量定向到三个 Rancher Server 节点。如果将 Rancher 安装在 RKE Kubernetes 集群上，则需要三个节点。如果将 Rancher 安装在 K3s Kubernetes 集群上，则仅需要两个节点。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 安装指南
   - 资料、参考和高级选项
   - 配置 NGINX 负载均衡

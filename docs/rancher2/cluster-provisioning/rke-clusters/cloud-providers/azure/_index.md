@@ -2,15 +2,15 @@
 title: Azure
 description: 使用 `Azure` Cloud Provider 时，您可以使用以下功能：**负载均衡：** 在特定网络安全组中启动 Azure 负载均衡器。**持久卷：** 支持使用具有标准和高级存储帐户的 Azure Blob 磁盘和 Azure 托管磁盘。**网络存储：** 通过 CIFS 挂载支持 Azure 文件。Azure 订阅不支持以下帐户类型：单租户帐户（即没有订阅的帐户）。多订阅帐户。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 创建集群
   - 配置 Cloud Provider
   - Azure

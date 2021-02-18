@@ -2,15 +2,15 @@
 title: 迁移至Rancher v2.5日志
 description: 从 v2.5 开始，Rancher 中可用的日志功能已经完全改观。采用了banzai cloud的logging operator；Rancher 在部署 logging 时，配置了这个工具来使用。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - rancher 2.5
   - 日志服务
   - 迁移至Rancher v2.5日志

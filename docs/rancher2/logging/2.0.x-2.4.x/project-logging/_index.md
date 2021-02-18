@@ -2,15 +2,15 @@
 title: 项目日志
 description: Rancher 支持与以下日志收集目标服务集成：Elasticsearch、Splunk、Kafka、Syslog、Fluentd。日志服务提供了以下功能：捕获并分析集群的状态、在您的环境中分析趋势，寻找集群变化的规律、将日志保存到集群外的安全位置、随时了解容器崩溃，Pod 驱逐或节点死亡等事件、更轻松地调试和排除故障。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 集群工具
   - 项目日志

@@ -2,15 +2,15 @@
 title: 5、设置 Istio 网关
 description: 每个集群的网关可以拥有自己的端口或负载均衡器，与服务网格无关。默认情况下，每个 Rancher 配置的集群都有一个 NGINX Ingress 控制器，允许流量进入集群。您可以在安装或不安装 Istio 的情况下使用 NGINX Ingress 控制器。如果这是集群的唯一网关，则 Istio 将能够在服务之间路由通信，但是 Istio 将无法从集群外部接收通信。要允许 Istio 接收外部流量，您需要启用 Istio 的网关，该网关充当外部流量的南北代理。当您启用 Istio 网关时，结果是您的集群将有两个入口。您还需要为您的服务设置一个 Kubernetes 网关。这一 Kubernetes 资源指向 Istio 对集群的入口网关的实现。您可以使用负载均衡器或者 Istio 的 NodePort 网关将流量路由到服务网格中。本节介绍如何设置 NodePort 网关。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 集群访问控制
   - 告警

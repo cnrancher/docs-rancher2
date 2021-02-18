@@ -2,15 +2,15 @@
 title: 1、开始迁移
 description: 通过安装 Rancher 并配置新的 Rancher 环境，来开始迁移到 Rancherv2.x。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 版本迁移
   - 开始迁移
 ---

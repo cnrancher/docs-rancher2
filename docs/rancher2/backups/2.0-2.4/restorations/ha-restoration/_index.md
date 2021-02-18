@@ -2,15 +2,15 @@
 title: RKE Rancher 高可用恢复
 description: 此过程描述了如何使用 RKE 还原 Rancher Kubernetes 集群的快照。集群快照将包括 Kubernetes 配置以及 Rancher 数据库和状态。此外，由于 v0.2.0 更改了Kubernetes 集群状态的存储方式，因此不再需要使用 `pki.bundle.tar.gz` 文件。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 备份和恢复指南
   - 恢复
   - RKE Rancher 高可用恢复

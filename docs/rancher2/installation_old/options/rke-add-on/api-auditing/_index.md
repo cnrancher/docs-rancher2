@@ -2,15 +2,15 @@
 title: 启用 API 审计日志
 description: 如果使用 RKE 安装 Rancher，则可以使用指令为 Rancher 安装启用 API 审计日志。您可以知道容器中发生了什么事件，何时发生，事件发起人是谁以及它影响了哪些集群。API 审计日志记录了与 Rancher API 之间的所有请求和响应，包括对 Rancher UI 的使用以及通过程序使用对 Rancher API 的任何其他使用。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 安装指南
   - 资料、参考和高级选项
   - RKE Add-on 安装

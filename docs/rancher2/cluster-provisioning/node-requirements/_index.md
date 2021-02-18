@@ -2,15 +2,15 @@
 title: Rancher 管理的 Kubernetes 集群节点要求
 description: 本页描述了安装您的应用和服务所在节点的要求。在本章节，`下游集群` 是指运行您的应用程序的集群，它应该与运行 Rancher Server 的集群（或单个节点）分开。如果 Rancher 安装在 Kubernetes 集群上，Rancher Server 集群和下游集群有不同的要求。有关 Rancher Server 安装要求，请参阅高可用安装要求。请确保 Rancher Server 的节点满足以下要求。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 创建集群
   - 下游集群节点要求
 ---

@@ -2,15 +2,15 @@
 title: 升级回滚 Kubernetes 版本
 description: 升级到最新版本的 Rancher 之后，下游 Kubernetes 集群可以升级为 Rancher 支持的最新的 Kubernetes 版本。Rancher 将使用 RKE（Rancher Kubernetes Engine）作为库来创建和编辑 RKE 集群。有关为 RKE 集群配置升级策略的更多信息，请参考 RKE 文档。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 升级回滚 Kubernetes 版本
 ---

@@ -2,15 +2,15 @@
 title: 概述
 description: 使用以下指南之一在您选择的供应商中部署和配置 Rancher 和 Kubernetes 集群。在 AWS 上快速部署、在 DigitalOcean 上快速部署、在 Azure 上快速部署、在 GCP 上快速部署、使用 Vagrant 进行快速部署、在已有主机上手动部署。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 快速入门
   - 部署Rancher Server
   - 概述

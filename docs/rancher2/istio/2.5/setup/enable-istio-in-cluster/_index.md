@@ -2,15 +2,15 @@
 title: 在集群中启用Istio
 description: 只有分配了cluster-admin Kubernetes默认角色的用户才能在 Kubernetes 集群中配置和安装 Istio
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - rancher 2.5
   - Istio
   - 配置 Istio

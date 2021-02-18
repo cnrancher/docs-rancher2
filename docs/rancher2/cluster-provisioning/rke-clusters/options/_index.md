@@ -2,15 +2,15 @@
 title: RKE集群参数
 description: 当您在 Rancher 中使用 RKE 启动集群时，您可以选择自定义 Kubernetes 选项。您可以通过Rancher UI或集群配置文件配置 Kubernetes 选项。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 创建集群
   - 集群配置参数
   - 集群参数

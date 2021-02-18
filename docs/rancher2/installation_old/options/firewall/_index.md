@@ -2,15 +2,15 @@
 title: 通过 firewalld 放行端口
 description: Linux 的一些发行版源自 RHEL，包括 Oracle Linux，可能有默认的防火墙规则来阻止与 Helm 的通信。例如，AWS 中的一个 Oracle Linux 映像具有 REJECT 规则，可阻止 Helm 与 Tiller 通信
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 安装指南
   - 资料、参考和高级选项
   - 功能开关

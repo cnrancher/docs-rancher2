@@ -2,15 +2,15 @@
 title: RKE 模板和基础设施
 description: 在 Rancher 中，RKE 模板用于提供 Kubernetes 和定义 Rancher 设置，而节点模板用于配置节点。因此，即使启用了 RKE 模板强制，最终用户在创建 Rancher 集群时仍然可以灵活地选择底层硬件。RKE 模板的最终用户仍然可以选择基础设施提供商和他们想要使用的节点。如果要标准化集群中的硬件，请将 RKE 模板与节点模板或服务器配置工具(如 Terraform)结合使用。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 系统管理员指南
   - RKE模板
   - RKE 模板和基础设施

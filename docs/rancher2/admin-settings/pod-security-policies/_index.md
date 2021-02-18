@@ -2,15 +2,15 @@
 title: Pod 安全策略
 description: Pod 安全策略是控制 Pod 安全的规范（如是否可以使用 root 权限等）的对象。如果 Pod 不符合 PSP 中指定的条件，Kubernetes 将不允许其启动，并且 Rancher 中将显示错误消息Pod <NAME> is forbidden unable to validate...。RKE 元数据功能允许您在发布新版本的 Kubernetes 后立即为集群配置它们，而无需升级 Rancher。此功能对于使用 Kubernetes 的补丁版本非常有用，例如，如果您希望在仅支持 Kubernetes v1.14.6 的 Rancher Server 版本中，将业务集群升级到 Kubernetes v1.14.7。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 系统管理员指南
   - Pod 安全策略
 ---
