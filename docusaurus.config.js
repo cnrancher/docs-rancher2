@@ -86,5 +86,16 @@ module.exports = {
         k3sBaseCommit:
             "1203cf0bb163b71b198382b44e6e543cd3672f33 - Dec 24, 2020",
     },
-    plugins: ["@docusaurus/plugin-baidu-analytics"],
+    plugins: [
+        "@docusaurus/plugin-baidu-analytics",
+        [
+            "@docusaurus/plugin-sitemap",
+            {
+                cacheTime: 600 * 1000, // 600 sec - cache purge period
+                changefreq: "weekly",
+                priority: 0.5,
+                trailingSlash: false,
+            },
+        ],
+    ],
 };
