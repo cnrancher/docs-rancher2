@@ -2,15 +2,15 @@
 title: v2.0.x 版本中的流水线
 description: 流水线把软件开发变成了一套自动化的流程。您可以使用 Rancher 和 GitHub 集成，创建流水线。您可以配置您的流水线，运行若干个阶段和步骤，测试您的代码，然后部署新版本的软件。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 用户指南
   - 流水线
   - v2.0.x 版本中的流水线

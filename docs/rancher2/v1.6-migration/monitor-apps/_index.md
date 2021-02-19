@@ -2,15 +2,15 @@
 title: 4、健康检查
 description: Rancher v1.6 使用其自身的健康检查微服务在您的节点和服务上提供 TCP 和 HTTP 健康检查。这些健康检查监控您的容器，以确认它们是否按预期运行。如果一个容器没有通过健康检查，Rancher 将销毁不健康的容器，然后复制一个健康的容器来替换它。对于 Rancher v2.x，我们已取代了健康检查微服务，而是利用 Kubernetes 原生的健康检查进行支持。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 版本迁移
   - 负载均衡
 ---

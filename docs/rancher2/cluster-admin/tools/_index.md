@@ -2,15 +2,15 @@
 title: 集群工具
 description: Kubernetes 只提供了一个创建和管理容器的平台，Rancher 在此基础上集成了通知和告警、日志、监控等工具，让容器的运维和管理变得更加简单。同时，Rancher 也可以与外部服务集成，使集群运行更加高效。Rancher 内置的工具包括以下几类：通知和告警、日志、监控、Istio、OPA Gatekeeper。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 集群工具
 ---

@@ -2,15 +2,15 @@
 title: Amazon EC2
 description: 使用 Rancher 在 Amazon EC2 中创建 Kubernetes 集群。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 创建集群
   - 创建节点和集群
   - Amazon EC2

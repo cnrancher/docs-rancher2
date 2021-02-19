@@ -2,15 +2,15 @@
 title: 运行Rancher的技巧
 description: 本指南面向的是使用 Rancher 管理下游 Kubernetes 集群的用例。高可用设置可以防止在 Rancher Server 不可用时失去对下游集群的访问。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 最佳实践
   - 运行Rancher的技巧
 ---

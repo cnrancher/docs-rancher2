@@ -2,15 +2,15 @@
 title: 热点问题
 description: Rancher 整理了近期微信粉丝群内经常提及的问题和用户经常访问的页面，并将这些热点问题汇总到本文这个页面。初次整理出来的热点问题囊括了安装指南、用户指南、集群管理员指南、创建集群、和常见问题这 5 本手册中，用户经常访问的页面。尽管初次整理的过程比较繁琐，但是我们希望这个页面的内容能够帮助新手用户或是之前没了解过相关模块的用户，解决在使用 Rancher 的过程中碰到的问题。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 热点问题
 ---
 

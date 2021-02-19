@@ -2,15 +2,15 @@
 title: 最佳实践指南
 description: 本节的目的是整合 Rancher 使用的最佳实践。这还包括对相关技术的建议，如 Kubernetes、Docker、容器等。目的是利用 Rancher 及其客户的操作经验来改进 Rancher 实施的结果。使用左边的导航栏查找当前管理和部署 Rancher Server 的最佳实践。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 最佳实践
   - 最佳实践指南
 ---

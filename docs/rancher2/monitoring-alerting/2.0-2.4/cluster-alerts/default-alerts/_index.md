@@ -2,15 +2,15 @@
 title: 内置集群告警
 description: 创建集群时，Rancher 已经配置了一些默认告警规则。集群内发生的可疑事件会触发这些告警规则，然后 Rancher 会将这些告警信息发送到您关联的接收者邮箱、手机、slack、钉钉等消息工具中。有一些告警使用 Prometheus 表达式作为触发指标。表达式如何工作的详情，参考 Rancher Prometheus 表达式有关文档或者查询Prometheus 表达式文档。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 集群访问控制
   - 告警

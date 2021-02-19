@@ -2,15 +2,15 @@
 title: 服务发现
 description: 对于创建的每个工作负载，都会创建一个相应的服务发现。此服务发现使用以下命名约定为工作负载的容器启用 DNS 解析`<workload>.<namespace>.svc.cluster.local`。您还可以创建其他服务发现。您可以使用这些 DNS 记录，让用户可以通过 DNS 解析到一个或多个外部 IP 地址，外部主机名，另一个 DNS 记录的别名，其他工作负载或一组与您创建的选择器匹配的 Pod。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 用户指南
   - 服务发现
 ---

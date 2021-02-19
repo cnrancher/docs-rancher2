@@ -2,15 +2,15 @@
 title: 工作负载类型
 description: 您可以使用以下两种基本结构在 Kubernetes 中构建任何复杂的容器化应用程序：Pod 和工作负载。构建应用程序后，可以使用第三个结构：服务（Kubernetes Service）将其暴露以供在同一集群中或外网上访问。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 用户指南
   - 工作负载
   - 工作负载类型

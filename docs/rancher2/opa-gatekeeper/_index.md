@@ -2,15 +2,15 @@
 title: OPA Gatekeeper
 description: 为了确保一致性和合规性，每个组织都需要具有在其环境中定义和执行策略的能力。OPA（Open Policy Agent）是一种策略引擎，可对云原生环境进行基于策略的控制。Rancher 提供了在 Kubernetes 集群中启用 OPA Gatekeeper 的功能，并且还安装了一些内置策略定义，也称为约束模板。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - OPA Gatekeeper
 ---
 

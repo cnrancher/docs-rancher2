@@ -2,15 +2,15 @@
 title: 针对大型部署的 etcd 调优
 description: etcd 的默认的 keyspace 大小为 2GB，上限为 8GB。当您运行具有 15 个或更多集群的大型 Rancher 安装时，建议您扩大 keyspace 容量和主机大小。如果您预计在垃圾回收间隔期间容器的变化率很高，在较小的安装中也可以调整 keyspace 大小，适应变化率。Kubernetes 每隔五分钟会自动清理一次 etcd 数据集。如果发生了部署抖动，Kubernetes 会在垃圾回收发生之前，将足够多的事件写入 etcd。五分钟后，Kubernetes 执行自动清理时，会将 etcd 数据集删除，清理所有内容，导致 keyspace 被填满。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 安装指南
   - 资料、参考和高级选项
   - 针对大型部署的 etcd 调优

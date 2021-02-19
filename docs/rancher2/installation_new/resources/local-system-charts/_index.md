@@ -2,15 +2,15 @@
 title: 离线环境中使用本地 System Charts
 description: System Charts 存储库包含监控、日志、告警和全局 DNS 等功能所需的所有应用项。在 Rancher 的离线安装中，您将需要配置 Rancher 以使用 System Charts 的本地副本。本节介绍如何在 Rancher v2.3.0 中使用 CLI 标志以及在 v2.3.0 之前的 Rancher 版本中使用 Git 镜像来使用本地 System Charts
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 安装指南
   - 资料、参考和高级选项
   - 离线环境中使用本地 System Charts （System Charts）

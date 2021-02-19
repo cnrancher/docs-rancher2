@@ -2,15 +2,15 @@
 title: 添加 Ingress
 description: 集群内的服务（service）和 pod 仅有集群内互相访问的 IP 地址，只能实现集群内部之间的通信。Ingress 为集群内的所有服务提供了外网访问的入口，允许用户通过外网访问集群内的服务。Ingress 具有这些功能：提供服务外部访问的 URL、负载均衡、SSL 和提供基于主机和路径的路由。请参考下文，为您的工作负载添加 Ingress。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 用户指南
   - 负载均衡和Ingress
   - 添加 Ingress

@@ -2,15 +2,15 @@
 title: 7 层 LB TLS 终止（单节点安装）
 description: 对于需要在负载均衡器而不是在 Rancher Server 容器里终止 TLS / SSL 的特殊开发和测试环境，请部署 Rancher 并配置负载均衡器以与其配合使用。如果要在基础设施中对 TLS 进行终结，7 层负载均衡器可能会很有帮助。7 层负载均衡可以提供基于 HTTP 属性（例如 cookie 等）的路由决策能力，这是 4 层负载均衡器无法实现的。本文将引导您使用单个容器完成 Rancher 的部署，并且提供了一个 7 层 Nginx 负载均衡器的示例配置。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 安装指南
   - 资料、参考和高级选项
   - 7 层 LB TLS 终止（单节点安装）

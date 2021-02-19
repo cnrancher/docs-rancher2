@@ -2,15 +2,15 @@
 title: 多集群应用
 description: 通常，大多数应用都部署在单个 Kubernetes 集群上，但是有时您可能希望跨不同的集群和/或项目部署同一个应用的多个副本。在 Rancher 中多集群应用使用 Helm Chart ，并可以跨多个集群部署应用。因为能够跨多个集群部署相同的应用，因此可以避免在对每个集群上重复执行相同的操作期间引入的人为错误。使用多集群应用，您可以确保应用在所有项目/集群中具有相同的配置，并能够根据目标项目来覆盖不同的参数。由于多集群应用被视为单个应用，因此易于管理和维护。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 应用商店
   - 多集群应用
 ---

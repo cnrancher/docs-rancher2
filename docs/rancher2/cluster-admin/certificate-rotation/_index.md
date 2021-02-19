@@ -2,15 +2,15 @@
 title: 轮换证书
 description: 默认情况下，Kubernetes 集群所需要的证书由 Rancher 生成，如果出现证书过期，或证书泄露等情况，则需要使用新的证书轮换掉有问题的证书。轮换证书后，Kubernetes 组件将自动重新启动。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 轮换证书
 ---

@@ -2,15 +2,15 @@
 title: 安全说明
 description: 安全是 Rancher 全部功能的核心。Rancher 集成了全部的主流认证工具和服务，并且提供了企业级的RBAC 能力，可以让您的 Kubernetes 集群更安全。安全策略：Rancher Labs 会对安全漏洞及时做出响应，并努力在合理的时间内解决所有问题。漏洞报告流程：如果您发现了疑似安全漏洞，请发送邮件到security@rancher.com提交可能的安全漏洞。为了帮助我们更快地定位和复现问题，请尽可能详细地描述您发现的疑似问题，包括使用环境、Rancher 版本、Kubernetes 版本的等信息。漏洞公布：请订阅Rancher 发布论坛获取发布信息。我们提供了安全相关的文档，以及帮助您安全加固 Rancher Server 和下游 Kubernetes 集群的相关资料。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 安全
   - 安全说明
 ---

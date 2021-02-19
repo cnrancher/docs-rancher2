@@ -2,15 +2,15 @@
 title: 密文
 description: 密文用于存储敏感数据，例如密码，令牌或密钥。它们可能包含一个或多个键值对。配置工作负载时，您将能够选择要包括的密文。与配置映射一样，工作负载可以将密文引用为环境变量或以数据卷挂载的方式使用。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 用户指南
   - 密文
 ---

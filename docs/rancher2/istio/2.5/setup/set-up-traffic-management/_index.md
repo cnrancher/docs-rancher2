@@ -2,15 +2,15 @@
 title: 设置 Istio 的流量管理组件
 description: Istio 中流量管理的一个核心优势是它允许动态请求路由。动态请求路由的一些常见应用包括金丝雀部署和蓝绿部署。Istio 流量管理中的两个关键资源是virtual service和destination rule。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - rancher 2.5
   - Istio
   - 配置 Istio

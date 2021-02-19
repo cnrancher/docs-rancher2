@@ -2,15 +2,15 @@
 title: Helm 版本要求
 description: 本节包含对 Helm 的版本要求。Helm 是用于在 Kubernetes 集群上安装 Rancher 高可用的工具。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 安装指南
   - 资料、参考和高级选项
   - 功能开关

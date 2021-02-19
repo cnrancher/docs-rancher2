@@ -2,15 +2,15 @@
 title: 安全加固指南 - v2.3.3
 description: 本文讲解了如何使您的集群符合互联网安全中心发布的 Kubernetes 安全基准，保护集群中节点的安全。安装 Kubernetes 之前，请按照本指南进行操作。加固指南旨在与特定版本的 CIS Kubernetes Benchmark，Kubernetes 和 Rancher 一起使用。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 安全
   - 安全加固指南
   - 安全加固指南 - v2.3.3

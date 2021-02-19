@@ -2,15 +2,15 @@
 title: 在 Amazon RDS 中创建 MySQL 数据库
 description: 本教程介绍了如何在 Amazon RDS 中创建 MySQL 数据库。该数据库可以用作高可用 K3s Kubernetes 集群的外部数据存储。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 安装指南
   - 资料、参考和高级选项
   - 在 Amazon RDS 中创建 MySQL 数据库

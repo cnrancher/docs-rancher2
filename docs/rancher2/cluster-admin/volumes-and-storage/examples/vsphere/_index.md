@@ -2,15 +2,15 @@
 title: vSphere 存储
 description: 在为 StatefulSet 提供 vSphere 存储时，建议创建 vSphereVolume存储类。当工作负载通过持久卷声明请求卷时，此做法可动态配置 vSphere 存储。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 存储卷和存储类
   - 创建存储示例

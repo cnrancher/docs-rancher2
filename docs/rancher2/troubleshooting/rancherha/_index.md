@@ -2,15 +2,15 @@
 title: Rancher 高可用
 description: 此页面上列出的命令/步骤可用于检查 Rancher Kubernetes 的安装。确保您配置了正确的 kubeconfig(例如，`export KUBECONFIG=$PWD/kube_config_rancher-cluster.yml`) 或者通过 Rancher UI 使用内嵌的 kubectl。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 常见故障排查
   - Rancher 高可用
 ---

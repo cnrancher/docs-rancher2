@@ -2,15 +2,15 @@
 title: Google
 description: 在本部分中，您将学习如何为 Rancher 中的自定义集群启用 Google Compute Engine（GCE）Cloud Provider。在自定义集群中，Rancher 可以将 Kubernetes 集群安装在现有节点上。GCE Cloud Provider 的官方 Kubernetes 文档在[此处](https://v1-17.docs.kubernetes.io/docs/concepts/cluster-administration/cloud-providers/#gce)。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 创建集群
   - 配置 Cloud Provider
   - Google Compute Engine（GCE）

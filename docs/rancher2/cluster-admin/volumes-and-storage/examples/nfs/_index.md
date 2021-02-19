@@ -2,15 +2,15 @@
 title: NFS 存储
 description: 您必须先配置 NFS 服务器，然后才能将 NFS 存储卷插件用于 Rancher 部署。如果您已经拥有 NFS 共享，则无需配置新的 NFS 服务器即可使用 Rancher 中的 NFS 卷插件。同时，请跳过本章节的其余部分并进行存储添加。虽然您可以将本章节的说明用在其他 Linux 发行版（例如 Debian，RHEL，Arch Linux 等）上，但是本章节的所有内容都是基于 Ubuntu 来演示如何设置 NFS 服务器。有关如何使用其他 Linux 发行版创建 NFS 服务器的官方说明，请查阅发行版的文档。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 存储卷和存储类
   - 创建存储示例

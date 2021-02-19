@@ -2,15 +2,15 @@
 title: 使用 AWS Auto Scaling 组进行集群弹性伸缩
 description: 本指南提供了使用 AWS EC2 自动伸缩组在 Rancher 自定义集群上安装和使用Kubernetes cluster-autoscaler的操作指导。我们将安装一个 Rancher RKE 自定义集群，其中有一个固定数量的节点，采用 etcd 和 controlplane 角色，还有一个可变的节点，采用 worker 角色，由cluster-autoscaler管理。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 集群弹性伸缩
   - 使用 AWS Auto Scaling 组进行集群弹性伸缩

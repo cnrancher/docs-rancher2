@@ -2,15 +2,15 @@
 title: 管理节点模版
 description: 在新节点上启动集群时，需要用到创建集群内的节点。每个节点都是一台主机。这些模板使用 Docker Machine 支持的配置选项来定义主机操作系统镜像和主机配置。创建节点模板的方式有两种：创建节点池集群的同时，创建节点模板；或通过 UI 界面菜单栏的用户设置，创建节点模板。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 用户设置
   - 管理节点模版
 ---

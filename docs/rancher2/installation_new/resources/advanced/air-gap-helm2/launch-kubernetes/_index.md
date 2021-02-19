@@ -2,15 +2,15 @@
 title: "3、安装 Kubernetes 集群"
 description: 本节介绍如何准备启动 Kubernetes 集群，该集群用于为私有环境部署 Rancher Server。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 安装指南
   - 资料、参考和高级选项
   - Rancher 高可用 Helm2 离线安装

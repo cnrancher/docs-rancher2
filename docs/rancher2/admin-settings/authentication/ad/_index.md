@@ -2,15 +2,15 @@
 title: 对接 Active Directory
 description: 如果您的组织使用 Microsoft Active Directory 作为中心用户存储库，则可以将 Rancher 配置为与 Active Directory 服务器通信以对用户进行身份验证。这使 Rancher 管理员可以对外部用户系统中的用户和组进行集群和项目的访问控制，同时允许最终用户在登录 Rancher UI 时使用其 Active Directory 凭据进行身份验证。Rancher 使用 LDAP 与 Active Directory 服务器通信。因此，Active Directory 的身份验证流与 OpenLDAP 认证的身份验证流相同。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 系统管理员指南
   - 登录认证
   - 对接 Active Directory

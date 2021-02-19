@@ -2,15 +2,15 @@
 title: 4、添加带Istio sidecar 的部署和服务
 description: 在命名空间中启用 Istio 后仅对新的工作负载启用自动 Sidecar 注入。要为现有工作负载启用 Envoy Sidecar，您需要为每个工作负载手动启用它。要将 Istio sidecar 注入命名空间中的现有工作负载，请转到工作负载页面，单击省略号 (...)，然后单击重新部署。重新部署工作负载时，Envoy sidecar 会自动注入。等待几分钟，以使工作负载升级到带有 Istio sidecar。单击该工作负载，然后转到容器部分。您应该能够在工作负载中看到 istio-init 和 istio-proxy 容器。这意味着已为工作负载启用了 Istio sidecar。Istio 正在为 Envoy sidecar 进行所有接线。现在，如果您通过 Yaml 中使用了 Istio 的功能，则 Istio 可以自动执行。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 集群访问控制
   - 告警

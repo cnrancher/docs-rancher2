@@ -2,15 +2,15 @@
 title: 注册集群
 description: 从 Rancher v2.5.0 开始，注册集群代替了原有的导入集群功能。Rancher 具有管理这些已注册集群的权限。具体权限取决于集群类型。相对 Rancher v2.5.0 之前提供的导入集群功能来说，注册集群更加方便使用和管理。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 创建集群
   - 注册集群
 ---

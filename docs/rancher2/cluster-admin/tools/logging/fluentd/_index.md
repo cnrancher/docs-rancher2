@@ -2,15 +2,15 @@
 title: Fluentd
 description: 如果您的组织使用Fluentd， 则可以配置 Rancher 向其发送 Kubernetes 日志。然后，您可以在 Fluentd 服务器中查看日志。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 集群工具
   - 日志
