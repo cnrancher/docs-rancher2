@@ -85,7 +85,7 @@ kubectl get pvc
 
 ## 设置 Longhorn
 
-> **注意：** 目前 Longhorn 只支持 amd64。
+> **注意：** 目前 Longhorn 只支持 amd64 和 arm64（实验性）。
 
 K3s 支持 [Longhorn](https://github.com/longhorn/longhorn). Longhorn 是 Kubernetes 的一个开源分布式块存储系统。
 
