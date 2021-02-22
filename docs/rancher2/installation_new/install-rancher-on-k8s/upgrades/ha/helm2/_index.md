@@ -77,7 +77,7 @@ keywords:
    helm repo list
 
    NAME          	        URL
-   stable        	        https://kubernetes-charts.storage.googleapis.com
+   stable        	        https://charts.helm.sh/stable
    rancher-<CHART_REPO>	https://releases.rancher.com/server-charts/<CHART_REPO>
    ```
 
@@ -130,7 +130,7 @@ helm upgrade --install rancher rancher-<CHART_REPO>/rancher \
 1. 卸载 Rancher
 
    ```
-   helm delete rancher -n cattle-system
+   helm delete rancher
    ```
 
 1. 参考[升级 Cert-Manager](/docs/rancher2/installation_new/resources/upgrading-cert-manager/_index)，卸载并且重新安装`cert-manager`。

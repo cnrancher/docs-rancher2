@@ -47,9 +47,13 @@ keywords:
 1. 选择一个新的或现有的密钥对，以后将用于连接到您的实例。如果您使用的是现有的密钥对，请确保您已经可以访问相应的私钥。
 1. 单击**启动实例**。
 
-**结果：** 您已经创建了满足 OS、硬件和网络要求的 Rancher 节点。接下来，您将在每个节点上安装 Docker。
+**结果：** 您已经创建了满足 OS、硬件和网络要求的 Rancher 节点。
 
-## 3、安装 Docker 并创建用户
+:::note 说明：
+如果节点被用于 RKE Kubernetes 集群，请在下一步在每个节点上安装 Docker。对于 K3s Kubernetes 集群，现在节点已经准备好安装 K3s。
+:::
+
+## 3、为 RKE Kubernetes 集群节点安装 Docker 并创建用户
 
 1. 在[AWS EC2 控制台](https://console.aws.amazon.com/ec2/)中，单击左侧面板中的**实例**。
 1. 转到要在其上安装 Docker 的实例。选择实例，然后单击**操作 > 连接**。
@@ -71,7 +75,7 @@ keywords:
    curl https://releases.rancher.com/install-docker/18.09.sh | sh
    ```
 
-1. 重复步骤 1~步骤 5，在运行 Rancher 管理面的服务器的每个节点上安装 Docker。
+1. 重复步骤 1 ~ 步骤 5，在运行 Rancher 管理面的服务器的每个节点上安装 Docker。
 
 > 要了解是否有可用于安装指定的 Docker 版本的脚本，请参阅此[GitHub 代码库](https://github.com/rancher/install-docker)，其中包含所有 Rancher 的 Docker 安装脚本。
 

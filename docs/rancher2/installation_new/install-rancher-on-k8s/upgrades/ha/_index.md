@@ -68,7 +68,7 @@ keywords:
    helm repo list
 
    NAME          	        URL
-   stable        	        https://kubernetes-charts.storage.googleapis.com
+   stable        	        https://charts.helm.sh/stable
    rancher-<CHART_REPO>	https://releases.rancher.com/server-charts/<CHART_REPO>
    ```
 

@@ -31,3 +31,7 @@ kubectl -n cattle-system create secret generic tls-ca \
 ```
 
 > **注意：** Rancher 在启动时检索`tls-ca`密文。如果您的 Rancher Server 正在运行中，您需要重新启动 Rancher Server Pod 才能使新的 CA 生效。
+
+## 更新私有 CA 签发证书
+
+按照[本页](/docs/rancher2/installation_new/resources/update-ca-cert/_index)上的步骤更新 Rancher[高可用性 Kubernetes 安装](/docs/rancher2/installation_new/install-rancher-on-k8s/_index)中的入口的 SSL 证书，或从默认的自签名证书切换到自定义证书。

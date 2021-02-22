@@ -131,6 +131,22 @@ RancherD 或 RKE2 服务器节点的入站规则如下：
 > - Kubernetes 建议将 TCP 30000-32767 用于节点端口服务（NodePort svc）。
 > - 可能需要对防火墙进行配置，启用在集群和 Pod CIDR 中的流量。
 
+### Ports for Rancher Server in GCP GKE
+
+When deploying Rancher into a Google Kubernetes Engine [private cluster](https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters), the nodes where Rancher runs must be accessible from the control plane:
+
+| Protocol | Port | Source                     | Description      |
+| -------- | ---- | -------------------------- | ---------------- |
+| TCP      | 9443 | The GKE master `/28` range | Rancher webhooks |
+
+### GCP GKE 中 Rancher Server 端口
+
+当把 Rancher 部署到 GKE [私有集群](https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters)中时，Rancher 运行的节点必须可以从 controlplane 访问。
+
+| 协议｜端口｜来源｜描述 |
+| :--------------------- | :--- | :------------------------- | :--------------- |
+| TCP                    | 9443 | The GKE master `/28` range | Rancher webhooks |
+
 ## 下游 Kubernetes 集群节点
 
 下游 Kubernetes 集群可运行您的业务应用。本节介绍需要在下游集群中的节点上开放哪些端口，以便 Rancher 可以与它们进行通信。
