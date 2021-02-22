@@ -164,6 +164,7 @@ module.exports = {
                 items: [
                     "rancher2/installation_new/resources/_index",
                     "rancher2/installation_new/resources/custom-ca-root-certificate/_index",
+                    "rancher2/installation_new/resources/update-ca-cert/_index",
                     "rancher2/installation_new/resources/choosing-version/_index",
                     "rancher2/installation_new/requirements/installing-docker/_index",
                     "rancher2/installation_new/resources/tls-secrets/_index",
@@ -360,7 +361,14 @@ module.exports = {
                         items: [
                             "rancher2/backups/2.0-2.4/restorations/_index",
                             "rancher2/backups/2.0-2.4/restorations/k3s-restoration/_index",
-                            "rancher2/backups/2.0-2.4/restorations/ha-restoration/_index",
+                            {
+                                type: "category",
+                                label: "高可用Rancher恢复",
+                                items: [
+                                    "rancher2/backups/2.0-2.4/restorations/ha-restoration/_index",
+                                    "rancher2/backups/2.0-2.4/restorations/ha-restoration/2.0-2.1/_index",
+                                ],
+                            },
                             "rancher2/backups/2.0-2.4/restorations/single-node-restoration/_index",
                         ],
                     },

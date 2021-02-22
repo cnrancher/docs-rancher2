@@ -2,7 +2,7 @@
 title: 在Linux操作系统上安装Rancher
 ---
 
-_从 Rancher v2.5.4 开始提供。_
+_从 Rancher v2.5.4 开始提供_
 
 ## 概述
 

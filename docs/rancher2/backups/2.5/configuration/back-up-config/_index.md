@@ -138,6 +138,12 @@ data:
   secretKey: <Enter your secret key>
 ```
 
+请运行以下代码，使用 base64 在 YAML 文件中对密钥进行加密：
+
+```
+echo -n "your_key" |base64
+```
+
 ### EC2 节点访问 S3 的 IAM 权限设置
 
 有两种方法可以设置`rancher-backup` operator 使用 S3 作为备份的存储位置。
@@ -175,4 +181,4 @@ data:
 
 ## 示例
 
-Backup 自定义资源，请参考[本页面](./../../examples/_index#备份)
+Backup 自定义资源，请参考[本页面](/docs/rancher2/backups/2.5/examples/_index)

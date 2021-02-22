@@ -22,7 +22,7 @@ keywords:
 这是对安装 Rancher Server 的节点的要求。如果您要创建用来运行您自己的应用的集群，请参阅[下游集群的节点要求](/docs/rancher2/cluster-provisioning/node-requirements/_index)。
 :::
 
-请确保 Rancher Server 的节点满足以下要求:
+请确保 Rancher Server 的节点满足以下要求：
 
 - [操作系统和容器运行时要求](#操作系统和-docker-要求)
 - [硬件要求](#硬件要求)
@@ -167,7 +167,7 @@ Rancher 的性能取决于 etcd 在集群中的性能。为了确保最佳速度
 
 在 SELinux Enforcing CentOS 8 节点或 RHEL 8 节点上安装 Rancher 之前，必须安装容器-selinux 和 iptables。
 
-```
+```bash
 sudo yum install iptables
 sudo yum install container-selinux
 ```
