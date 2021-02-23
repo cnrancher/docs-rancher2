@@ -24,7 +24,7 @@ keywords:
 
 集群管理员有权限进行以下操作：
 
-- 在集群上安装 "rancher-monitoring "App，并在图表部署上进行所有其他相关配置。例如，是否创建了默认的仪表盘，在集群上部署了哪些导出器来收集指标等。
+- 在集群上安装 "rancher-monitoring "App，并在 Chart 部署上进行所有其他相关配置。例如，是否创建了默认的仪表盘，在集群上部署了哪些导出器来收集指标等。
 - 通过 Prometheus CRs 在集群中创建/修改/删除 Prometheus 部署。
 - 通过 Alertmanager CRs 在集群中创建/修改/删除 Alertmanager 部署。
 - 通过在适当的命名空间中创建 ConfigMaps 来坚持新的 Grafana 仪表盘或数据资源。

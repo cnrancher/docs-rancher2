@@ -1,5 +1,5 @@
 ---
-title: 使用 Helm CLI 离线安装指南
+title: 离线安装概述
 description: 本节介绍使用 Helm CLI 在离线环境中安装 Rancher Server 的操作步骤。具体步骤因安装方式而异，有关每个安装选项的更多信息，详情请参考安装介绍。
 keywords:
   - rancher
@@ -14,7 +14,7 @@ keywords:
   - 安装指南
   - 其他安装方法
   - 离线安装
-  - 离线安装指南
+  - 离线安装概述
 ---
 
 本节介绍使用 Helm CLI 在离线环境中安装 Rancher Server 的操作步骤。具体步骤因安装方式而异，详情请参考[安装介绍](/docs/rancher2/installation_new/_index)。

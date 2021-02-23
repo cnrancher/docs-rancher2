@@ -16,13 +16,13 @@ title: 配置选项
 
 overlay file 的设计是为了支持您的 Istio 安装的广泛配置。它允许您对[IstioOperator API](https://istio.io/latest/docs/reference/config/istio.operator.v1alpha1/)中的任何值进行更改。这将确保您可以自定义默认安装以适应任何情况。
 
-overlay file 将在 Istio 图表安装提供的默认安装之上添加配置。这意味着你不需要重新定义已经定义安装的组件。
+overlay file 将在 Istio Chart 安装提供的默认安装之上添加配置。这意味着你不需要重新定义已经定义安装的组件。
 
 有关 Overlay 文件的更多信息，请参考[Istio 文档](https://istio.io/latest/docs/setup/install/istioctl/#configure-component-settings)。
 
 ## 选择器和拉取配置
 
-监控应用程序设置`prometheus.prometheusSpec.ignoreNamespaceSelectors=false`，默认情况下可以跨所有命名空间进行监控。这确保您可以查看部署在带有`istio-injection=enabled`标签的命名空间中的资源的流量、指标和图表。
+监控应用程序设置`prometheus.prometheusSpec.ignoreNamespaceSelectors=false`，默认情况下可以跨所有命名空间进行监控。这确保您可以查看部署在带有`istio-injection=enabled`标签的命名空间中的资源的流量、指标和 Chart。
 
 如果你想将 Prometheus 限制在特定的命名空间，请设置`prometheus.prometheusSpec.ignoreNamespaceSelectors=true`。一旦你这样做，你将需要添加额外的配置来继续监控你的资源。
 

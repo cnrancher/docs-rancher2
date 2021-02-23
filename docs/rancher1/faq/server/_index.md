@@ -228,7 +228,7 @@ curl -i -u '<value of CATTLE_ACCESS_KEY>:<value of CATTLE_SECRET_KEY>' <value of
 
 您应该得到一个 json 响应和 200 个响应代码。
 如果 curl 命令失败，那么在`go-machine-service`和 Rancher API server 之间存在连接问题。
-如果 curl 命令没有失败，则问题可能是因为 go-machine-service 尝试建立 websocket 连接而不是普通的 http 连接。 如果在 go-machine-service 和 Rancher API 服务器之间有代理或负载平衡，请验证代理是否支持 websocket 连接。
+如果 curl 命令没有失败，则问题可能是因为 go-machine-service 尝试建立 websocket 连接而不是普通的 http 连接。 如果在 go-machine-service 和 Rancher API 服务器之间有代理或负载均衡，请验证代理是否支持 websocket 连接。
 
 ## 17、rancher catalog 多久同步一次
 

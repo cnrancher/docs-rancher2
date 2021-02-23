@@ -1,6 +1,6 @@
 ---
 title: Helm
-description: Helm 是 Kubernetes 的首选包管理工具。Helm 图表为 Kubernetes YAML 清单文件提供了模板化语法。通过 Helm，我们可以创建可配置的部署，而不仅仅是使用静态文件。
+description: Helm 是 Kubernetes 的首选包管理工具。Helm Chart为 Kubernetes YAML 清单文件提供了模板化语法。通过 Helm，我们可以创建可配置的部署，而不仅仅是使用静态文件。
 keywords:
   - k3s中文文档
   - k3s 中文文档
@@ -14,7 +14,7 @@ keywords:
   - K3s常见问题
 ---
 
-Helm 是 Kubernetes 的首选包管理工具。Helm 图表为 Kubernetes YAML 清单文件提供了模板化语法。通过 Helm，我们可以创建可配置的部署，而不仅仅是使用静态文件。有关创建自己的部署目录的更多信息，请查看[Helm 快速入门](https://helm.sh/docs/intro/quickstart/)。
+Helm 是 Kubernetes 的首选包管理工具。Helm Chart 为 Kubernetes YAML 清单文件提供了模板化语法。通过 Helm，我们可以创建可配置的部署，而不仅仅是使用静态文件。有关创建自己的部署目录的更多信息，请查看[Helm 快速入门](https://helm.sh/docs/intro/quickstart/)。
 
 K3s 不需要任何特殊的配置就可以使用 Helm 命令行工具。只要确保你已经按照[集群访问](../cluster-access/_index)一节正确设置了你的 kubeconfig。
 K3s 包含了一些额外的功能，使传统的 Kubernetes 资源清单和 Helm Charts 的部署更加容易。 K3s 包含了一些额外的功能，通过[rancher/helm-release CRD](#使用-helm-crd)，使传统的 Kubernetes 资源清单和 Helm Charts 部署更加容易。
@@ -30,11 +30,11 @@ K3s 包含了一些额外的功能，使传统的 Kubernetes 资源清单和 Hel
 
 在`/var/lib/rancher/k3s/server/manifests`中找到的任何 Kubernetes 清单将以类似`kubectl apply`的方式自动部署到 K3s。以这种方式部署的 manifests 是作为 AddOn 自定义资源来管理的，可以通过运行`kubectl get addon -A`来查看。你会发现打包组件的 AddOns，如 CoreDNS、Local-Storage、Traefik 等。AddOns 是由部署控制器自动创建的，并根据它们在 manifests 目录下的文件名命名。
 
-也可以将 Helm 图表作为 AddOns 部署。K3s 包括一个[Helm Controller](https://github.com/rancher/helm-controller/)，它使用 HelmChart Custom Resource Definition(CRD)管理 Helm 图表。
+也可以将 Helm Chart 作为 AddOns 部署。K3s 包括一个[Helm Controller](https://github.com/rancher/helm-controller/)，它使用 HelmChart Custom Resource Definition(CRD)管理 Helm Chart。
 
 > **注意:** K3s 版本至 v0.5.0 使用`k3s.cattle.io/v1`作为 HelmCharts 的 apiVersion。后来的版本已改为`helm.cattle.io/v1`。
 
-[HelmChart 资源定义](https://github.com/rancher/helm-controller#helm-controller)捕获了大多数你通常会传递给`helm`命令行工具的选项。下面是一个例子，说明如何从默认的图表资源库中部署 Grafana，覆盖一些默认的图表值。请注意，HelmChart 资源本身在 "kube-system"命名空间，但图表资源将被部署到 "monitoring"命名空间。
+[HelmChart 资源定义](https://github.com/rancher/helm-controller#helm-controller)捕获了大多数你通常会传递给`helm`命令行工具的选项。下面是一个例子，说明如何从默认的 Chart 资源库中部署 Grafana，覆盖一些默认的 Chart 值。请注意，HelmChart 资源本身在 "kube-system"命名空间，但 Chart 资源将被部署到 "monitoring"命名空间。
 
 ```yaml
 apiVersion: helm.cattle.io/v1
@@ -62,7 +62,7 @@ spec:
 
 > **注意：**K3s 版本至 v0.5.0 使用`k3s.cattle.io/v1`作为 HelmCharts 的 apiVersion。后来的版本已改为`helm.cattle.io/v1`。
 
-Helm Chart 资源定义捕获了大多数你通常会传递给`helm`命令行工具的选项。下面是一个例子，说明如何从默认的图表资源库中部署 Grafana，覆盖一些默认的图表值。请注意，HelmChart 资源本身在 "kube-system "命名空间，但图表资源将被部署到 "monitoring "命名空间。
+Helm Chart 资源定义捕获了大多数你通常会传递给`helm`命令行工具的选项。下面是一个例子，说明如何从默认的 Chart 资源库中部署 Grafana，覆盖一些默认的 Chart 值。请注意，HelmChart 资源本身在 "kube-system "命名空间，但 Chart 资源将被部署到 "monitoring "命名空间。
 
 你可以使用这样的例子部署第三方 Helm chart：
 
@@ -90,21 +90,21 @@ spec:
 
 ### HelmChart 字段定义
 
-| 字段                 | 默认值  | 描述                                                                     | Helm Argument / Flag Equivalent |
-| :------------------- | :------ | :----------------------------------------------------------------------- | :------------------------------ |
-| name                 | N/A     | Helm Chart 名称                                                          | NAME                            |
-| spec.chart           | N/A     | 仓库中的 Helm 图表名称，或完整的 HTTPS URL（.tgz）。                     | CHART                           |
-| spec.targetNamespace | default | Helm Chart 目标命名空间                                                  | `--namespace`                   |
-| spec.version         | N/A     | Helm Chart 版本(从版本库安装时使用的版本号)                              | `--version`                     |
-| spec.repo            | N/A     | Helm Chart 版本库 URL 地址                                               | `--repo`                        |
-| spec.helmVersion     | v3      | Helm 的版本号，可选值为 `v2` 和`v3`，默认值为 `v3`                       | N/A                             |
-| spec.bootstrap       | False   | 如果需要该图表来引导集群（Cloud Controller Manager 等），则设置为 True。 | N/A                             |
-| spec.set             | N/A     | 覆盖简单的默认图表值。这些值优先于通过 valuesContent 设置的选项。        | `--set` / `--set-string`        |
-| spec.jobImage        |         | 指定安装 helm chart 时要使用的镜像。如：rancher/klipper-helm:v0.3.0。    |                                 |
-| spec.valuesContent   | N/A     | 通过 YAML 文件内容覆盖复杂的默认图表值。                                 | `--values`                      |
-| spec.chartContent    | N/A     | Base64 编码的图表存档.tgz - 覆盖 spec.chart。                            | CHART                           |
+| 字段                 | 默认值  | 描述                                                                        | Helm Argument / Flag Equivalent |
+| :------------------- | :------ | :-------------------------------------------------------------------------- | :------------------------------ |
+| name                 | N/A     | Helm Chart 名称                                                             | NAME                            |
+| spec.chart           | N/A     | 仓库中的 Helm Chart 名称，或完整的 HTTPS URL（.tgz）。                      | CHART                           |
+| spec.targetNamespace | default | Helm Chart 目标命名空间                                                     | `--namespace`                   |
+| spec.version         | N/A     | Helm Chart 版本(从版本库安装时使用的版本号)                                 | `--version`                     |
+| spec.repo            | N/A     | Helm Chart 版本库 URL 地址                                                  | `--repo`                        |
+| spec.helmVersion     | v3      | Helm 的版本号，可选值为 `v2` 和`v3`，默认值为 `v3`                          | N/A                             |
+| spec.bootstrap       | False   | 如果需要该 Chart 来引导集群（Cloud Controller Manager 等），则设置为 True。 | N/A                             |
+| spec.set             | N/A     | 覆盖简单的默认 Chart 值。这些值优先于通过 valuesContent 设置的选项。        | `--set` / `--set-string`        |
+| spec.jobImage        |         | 指定安装 helm chart 时要使用的镜像。如：rancher/klipper-helm:v0.3.0。       |                                 |
+| spec.valuesContent   | N/A     | 通过 YAML 文件内容覆盖复杂的默认 Chart 值。                                 | `--values`                      |
+| spec.chartContent    | N/A     | Base64 编码的 Chart 存档.tgz - 覆盖 spec.chart。                            | CHART                           |
 
-放在`/var/lib/rancher/k3s/server/static/`中的内容可以通过 Kubernetes APIServer 从集群内匿名访问。这个 URL 可以使用`spec.chart`字段中的特殊变量`%{KUBERNETES_API}%`进行模板化。例如，打包后的 Traefik 组件从`https://%{KUBERNETES_API}%/static/charts/traefik-1.81.0.tgz`加载其图表。
+放在`/var/lib/rancher/k3s/server/static/`中的内容可以通过 Kubernetes APIServer 从集群内匿名访问。这个 URL 可以使用`spec.chart`字段中的特殊变量`%{KUBERNETES_API}%`进行模板化。例如，打包后的 Traefik 组件从`https://%{KUBERNETES_API}%/static/charts/traefik-1.81.0.tgz`加载其 Chart。
 
 ## 使用 HelmChartConfig 自定义打包的组件
 

@@ -12,9 +12,7 @@ keywords:
   - rancher 中文文档
   - rancher cn
   - 安装指南
-  - 资料、参考和高级选项
-  - Rancher高可用Helm2安装
-  - 安装 Rancher
+  - 高可用安装指南
   - Chart 安装选项
 ---
 

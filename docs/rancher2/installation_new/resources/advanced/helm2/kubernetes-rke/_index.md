@@ -15,7 +15,6 @@ keywords:
   - 资料、参考和高级选项
   - Rancher高可用Helm2安装
   - 安装 Kubernetes
-  - 安装 Kubernetes
 ---
 
 本文讲述了使用 RKE 安装具有高可用 etcd 配置的 Kubernetes 的操作步骤。请检查您的网络环境是否可以直接访问互联网，如果您使用的局域网或离线环境，请参考[离线环境安装](/docs/rancher2/installation_new/other-installation-methods/air-gap/_index)。

@@ -1,5 +1,5 @@
 ---
-title: "安装 Rancher"
+title: 安装 Rancher
 description: 可以使用 Kubernetes 的 helm 包管理工具来管理 Rancher 的安装。使用 `helm` 来一键安装 Rancher 及其依赖组件。
 keywords:
   - rancher
@@ -14,7 +14,6 @@ keywords:
   - 安装指南
   - 资料、参考和高级选项
   - Rancher高可用Helm2安装
-  - 安装 Rancher
   - 安装 Rancher
 ---
 

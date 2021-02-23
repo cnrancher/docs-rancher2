@@ -11,7 +11,8 @@ keywords:
   - rancher 中文
   - rancher 中文文档
   - rancher cn
-  - 升级和回滚
+  - 安装指南
+  - 升级指南
   - 升级高可用Rancher
   - 高可用升级指南（Helm 3）
 ---

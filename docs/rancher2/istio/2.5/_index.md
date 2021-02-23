@@ -47,7 +47,7 @@ Istio 的整体架构已被简化。通过合并 Pilot、Citadel、Galley 和 si
 
 ## Istio 附带的工具
 
-我们的[Istio](https://istio.io/)安装程序将 istioctl 二进制命令封装在一个方便的 Helm 图表中，包括一个覆盖文件选项，以允许复杂的自定义。
+我们的[Istio](https://istio.io/)安装程序将 istioctl 二进制命令封装在一个方便的 Helm Chart 中，包括一个覆盖文件选项，以允许复杂的自定义。
 
 它还包括以下这些工具。
 

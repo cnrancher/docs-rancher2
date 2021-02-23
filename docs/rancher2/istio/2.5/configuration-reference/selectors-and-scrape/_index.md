@@ -6,7 +6,7 @@ title: Selectors和拉取配置
 
 监控应用设置`prometheus.prometheusSpec.ignoreNamespaceSelectors=false`，默认情况下可以跨所有命名空间进行监控。
 
-这确保你可以查看部署在带有`istio-injection=enabled`标签的命名空间中的资源的流量、指标和图表。
+这确保你可以查看部署在带有`istio-injection=enabled`标签的命名空间中的资源的流量、指标和 Chart。
 
 如果你想将 Prometheus 限制在特定的命名空间，请设置`prometheus.prometheusSpec.ignoreNamespaceSelectors=true`。一旦你这样做，你将需要添加额外的配置来继续监控你的资源。
 
@@ -14,9 +14,9 @@ title: Selectors和拉取配置
 
 这会将监控限制在特定的命名空间：
 
-1. 在**集群资源管理器**中，如果已经安装了监控，请导航到**安装的应用程序**，或**应用程序和市场**中的**图表**。
-1. 如果开始新的安装，**点击**rancher-monitoring 图表，然后在**图表选项中**点击**编辑为 Yaml**。
-1. 如果更新现有的安装，请点击**升级**，然后在**图表选项**中点击**编辑为 Yaml**。
+1. 在**集群资源管理器**中，如果已经安装了监控，请导航到**安装的应用程序**，或**应用程序和市场**中的**Chart**。
+1. 如果开始新的安装，**点击**rancher-monitoring Chart，然后在**Chart 选项中**点击**编辑为 Yaml**。
+1. 如果更新现有的安装，请点击**升级**，然后在**Chart 选项**中点击**编辑为 Yaml**。
 1. 设置`prometheus.prometheusSpec.ignoreNamespaceSelectors=true`。
 1. 完成安装或升级
 
@@ -86,8 +86,8 @@ spec:
 
 可用性的权衡是，所有 Prometheus 的 "additionalScrapeConfigs "都维护在一个 Secret 中。如果在安装 Istio 之前已经使用 additionalScrapeConfigs 部署了监控，这可能会给升级带来困难。
 
-1. 如果开始新的安装，点击**rancher-monitoring**图表，然后在**图表选项中**点击**编辑为 Yaml**。
-1. 如果更新现有的安装，请点击**升级**，然后在**图表选项**中点击**编辑为 Yaml**。
+1. 如果开始新的安装，点击**rancher-monitoring**Chart，然后在**Chart 选项中**点击**编辑为 Yaml**。
+1. 如果更新现有的安装，请点击**升级**，然后在**Chart 选项**中点击**编辑为 Yaml**。
 1. 如果更新现有的安装，点击**升级**，然后点击**预览 Yaml**。
 1. 设置`prometheus.prometheusSpec.additionalScrapeConfigs`数组为下面提供的**Additional Scrape Config**。
 1. 完成安装或升级

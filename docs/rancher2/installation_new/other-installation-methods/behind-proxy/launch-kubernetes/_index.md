@@ -1,6 +1,20 @@
 ---
-title: "2. 安装Kubernetes"
-weight: 200
+title: 2. 安装Kubernetes
+description: 基础设施准备就绪后，您可以继续设置一个 RKE 集群来安装 Rancher。首先，你必须在所有三个 Linux 节点上安装 Docker 并设置 HTTP 代理。为此在所有三个节点上执行以下步骤。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - 安装指南
+  - 其他安装方法
+  - HTTP代理安装
+  - 安装Kubernetes
 ---
 
 基础设施准备就绪后，您可以继续设置一个 RKE 集群来安装 Rancher。
