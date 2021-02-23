@@ -16,93 +16,80 @@ keywords:
   - 回滚必读
 ---
 
-## 回滚到 v2.5+
+## 回滚到 v2.5.0+
 
-要回滚到 Rancher v2.5+，请使用`rancher-backup`应用程序，并根据[恢复 Rancher](/docs/rancher2/backups/2.5/restoring-rancher/_index)从备份中恢复 Rancher。在使用 Rancher 备份操作员进行回滚后，Rancher 必须以较低/以前的版本启动。
+要回滚到 Rancher v2.5.0+，请使用`rancher-backup`应用程序并从备份中恢复 Rancher。
 
-要回滚到 v2.5 之前的 Rancher，请按照这里的详细步骤进行：[恢复备份--Kubernetes 安装](/docs/rancher2/backups/2.0-2.4/ha-backups/_index)恢复 Rancher 服务器集群的快照将使 Rancher 恢复到快照时的版本和状态。
+回滚后，Rancher 必须以较低/以前的版本启动。
 
-有关如何回滚单节点安装的 Rancher 的信息，请参阅[本页](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/single-node-rollbacks/_index)
+通过创建 Restore 自定义资源进行还原。
 
-受管集群对其状态具有权威性。这意味着恢复 rancher 服务器将不会恢复快照后在托管集群上进行的工作负载部署或更改。
+:::important 重要
 
-## 回滚到 v2.0.0-v2.1.5
+- 请按照此页面上的说明在已备份的同一集群上恢复 rancher。为了将 rancher 迁移到新的集群，请按照步骤进行[迁移 rancher](/docs/rancher2/backups/2.5/migrating-rancher/_index)。
+- 在使用相同设置还原 Rancher 时，operator 将在还原开始时缩减 Rancher deployment，还原完成后又会扩展 deployment。因此，Rancher 在还原期间将不可用。
 
-如果这两种情况下回滚在，则必须遵循一些额外的说明才能使集群正常工作。
+:::
 
-- 从 v2.1.6+ 回滚到 v2.1.0-v2.1.5 或 v2.0.0-v2.0.10 之间的任何版本。
-- 从 v2.0.11+ 回滚到 v2.0.0-v2.0.10 之间的任何版本。
+### 创建 Restore 自定义资源
 
-由于早期的 Rancher 版本存在安全漏洞[CVE-2018-20321](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20321)，如果用户需要回滚到存在此漏洞的 Rancher 的早期版本。则需要采取特殊步骤，步骤如下：
+1. 在**Cluster Explorer**中，进入左上角的下拉菜单，单击**Rancher Backups**。
+1. 单击 **Restore**。
+1. 使用表单或 YAML 创建 Restore。关于使用表单创建 Restore 资源，请参考[配置参考](./../configuration/restore-config/_index)和[示例](./../examples/_index#恢复)。
+1. 使用 YAML 编辑器，我们可以单击**Create > Create from YAML** 进入 Restore YAML。
 
-1. 记录每个集群的`serviceAccountToken`。为此，将以下脚本保存在运行 rancher 容器（单节点）或可以通过 kubectl 访问 Rancher 管理平面（高可用）的计算机上，并且运行它们。在运行命令之前，请确保已安装 了 JQ。这些命令取决于您的 Rancher 安装方式。
-
-   **单节点 Rancher**
-
-   ```
-   docker exec <NAME OF RANCHER CONTAINER> kubectl get clusters -o json | jq '[.items[] | select(any(.status.conditions[]; .type == "ServiceAccountMigrated")) | {name: .metadata.name, token: .status.serviceAccountToken}]' > tokens.json
-   ```
-
-   **高可用 Rancher**
-
-   ```
-   kubectl get clusters -o json | jq '[.items[] | select(any(.status.conditions[]; .type == "ServiceAccountMigrated")) | {name: .metadata.name, token: .status.serviceAccountToken}]' > tokens.json
-   ```
-
-1. 执行命令后，将创建一个`tokens.json`文件。重要！在安全的地方备份此文件。**回滚 Rancher 后，需要使用它来恢复集群功能。如果丢失此文件，则可能无法访问集群。**
-
-1. 按照[正常回滚流程](/docs/rancher2/upgrades/rollbacks/_index)回滚 Rancher。
-
-1. 一旦 Rancher 恢复正常，由 Rancher 管理的每个集群（导入集群除外）将处于`Unvailable`状态。
-
-1. 根据您安装 Rancher 的方式应用备份的 tokens。
-
-   **单节点 Rancher**
-
-   将以下脚本另存为`apply_tokens.sh`，然后保存到运行 Rancher docker 容器的机器上。并且将先前创建的`tokens.json`文件复制到脚本所在的目录。
-
-   ```
-   set -e
-
-   tokens=$(jq .[] -c tokens.json)
-   for token in $tokens; do
-       name=$(echo $token | jq -r .name)
-       value=$(echo $token | jq -r .token)
-
-       docker exec $1 kubectl patch --type=merge clusters $name -p "{\"status\": {\"serviceAccountToken\": \"$value\"}}"
-   done
+   ```yaml
+   apiVersion: resources.cattle.io/v1
+   kind: Restore
+   metadata:
+     name: restore-migration
+   spec:
+     backupFilename: backup-b0450532-cee1-4aa1-a881-f5f48a007b1c-2020-09-15T07-27-09Z.tar.gz
+     encryptionConfigSecretName: encryptionconfig
+     storageLocation:
+       s3:
+         credentialSecretName: s3-creds
+         credentialSecretNamespace: default
+         bucketName: rancher-backups
+         folder: rancher
+         region: us-west-2
+         endpoint: s3.us-west-2.amazonaws.com
    ```
 
-   允许执行脚本(`chmod +x apply_tokens.sh`)并执行脚本，如下所示：
+   有关配置 Restore 的帮助，请参阅[配置参考](./../configuration/restore-config/_index)和[示例](./../examples/_index#恢复)。
 
-   ```
-   ./apply_tokens.sh <DOCKER CONTAINER NAME>
-   ```
+1. 单击 **Create**。
 
-   片刻之后，集群将从`Unavailable`状态回到`Available`状态。
+**结果：**rancher-operator 在还原过程中缩减了 rancher deployment，并在还原完成后将其扩展。资源的恢复顺序是这样的：
 
-   **高可用 Rancher**
+1. 自定义资源对象 (CRDs)
+2. 集群范围内的资源
+3. 命名空间资源
 
-   将以下脚本另存为`apply_tokens.sh`，并复制到可以通过 kubectl 访问 Rancher 管理平面的计算机上。并且将先前创建的`tokens.json`文件复制到脚本所在的目录。
+要查看还原的进展情况，可以查看 operator 的日志。请按照以下步骤来获取日志：
 
-   ```
-   set -e
+```yaml
+kubectl get pods -n cattle-resources-system
+kubectl logs <pod name from above command> -n cattle-resources-system -f
+```
 
-   tokens=$(jq .[] -c tokens.json)
-   for token in $tokens; do
-       name=$(echo $token | jq -r .name)
-       value=$(echo $token | jq -r .token)
+### 回滚到上一个版本
 
-   kubectl patch --type=merge clusters $name -p "{\"status\": {\"serviceAccountToken\": \"$value\"}}"
-   done
-   ```
+您可以使用 Rancher UI 回滚。
 
-   允许执行脚本(`chmod +x apply_tokens.sh`)并执行脚本，如下所示：
+1. 在 Rancher UI 中，进入本地集群。
+1. 进入系统项目。
+1. 编辑 Rancher 部署，并将镜像修改为您要回滚到的版本。
+1. 保存所做的更改。
 
-   ```
-   ./apply_tokens.sh
-   ```
+## 回滚到 v2.2.x-v2.4.x
 
-   片刻之后，集群将从`Unavailable`状态回到`Available`状态。
+要回滚到 v2.5 之前的 Rancher，请按照这里的步骤进行。[恢复备份 - Kubernetes 安装](/docs/rancher2/backups/2.0-2.4/restorations/ha-restoration/_index) 恢复 Rancher 服务器集群的快照会将 Rancher 恢复到快照时的版本和状态。
 
-1. 开始使用 Rancher。
+有关如何回滚安装了 Docker 的 Rancher 的信息，请参考[本页](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/single-node-rollbacks/_index)
+
+> 受管集群对其状态具有权威性。这意味着恢复 rancher 服务器不会恢复工作负载部署或快照后在托管集群上所做的更改。
+
+## 回滚到 v2.0.x-v2.1.x
+
+不再支持回滚到 Rancher v2.0-v2.1。回滚到这些版本的说明保留在[这里](/docs/rancher2/backups/2.0-2.4/restorations/ha-restoration/2.0-2.1/_index)，仅用于升级到 Rancher v2.2+不可行的情况。

@@ -16,7 +16,7 @@ keywords:
   - 恢复 Rancher
 ---
 
-通过创建 Restore 自定义资源来进行还原。请按照以下步骤恢复 Rancher：首先，创建 Restore 自定义资源。然后使用之前的 Rancher 版本重新启动 Rancher。
+请按照以下步骤恢复 Rancher。
 
 :::important 重要
 
@@ -27,10 +27,10 @@ keywords:
 
 ## 创建 Restore 自定义资源
 
-1. 在**Cluster Explorer**中，进入左上角的下拉菜单，单击**Rancher Backups.**。
-1. 单击 **Restore.**
+1. 在**Cluster Explorer**中，进入左上角的下拉菜单，单击**Rancher Backups**。
+1. 单击 **Restore**。
 1. 使用表单或 YAML 创建 Restore。关于使用表单创建 Restore 资源，请参考[配置参考](./../configuration/restore-config/_index)和[示例](./../examples/_index#恢复)。
-1. 使用 YAML 编辑器，我们可以单击**Create > Create from YAML。** 进入 Restore YAML。
+1. 使用 YAML 编辑器，我们可以单击**Create > Create from YAML** 进入 Restore YAML。
 
    ```yaml
    apiVersion: resources.cattle.io/v1
@@ -50,7 +50,7 @@ keywords:
          endpoint: s3.us-west-2.amazonaws.com
    ```
 
-   有关配置 Restore 的帮助，请参阅[配置参考](./../configuration/restore-config/_index)和[示例.](./../examples/_index#恢复)。
+   有关配置 Restore 的帮助，请参阅[配置参考](./../configuration/restore-config/_index)和[示例](./../examples/_index#恢复)。
 
 1. 单击 **Create**。
 

@@ -68,7 +68,7 @@ Rancher Helm Chart 版本必须匹配 Rancher 版本（即`appVersion`）。
    helm repo list
 
    NAME          	        URL
-   stable        	        https://kubernetes-charts.storage.googleapis.com
+   stable
    rancher-<CHART_REPO>	https://releases.rancher.com/server-charts/<CHART_REPO>
    ```
 

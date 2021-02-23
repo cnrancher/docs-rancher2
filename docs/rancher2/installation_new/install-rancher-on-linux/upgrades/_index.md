@@ -15,6 +15,8 @@ keywords:
   - 升级指南
 ---
 
+RancherD 是一个实验性功能。
+
 ## 概述
 
 当 RancherD 升级时，Rancher Helm controller 和 Fleet pod 都会升级。

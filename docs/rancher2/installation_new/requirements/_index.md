@@ -167,7 +167,7 @@ Rancher 的性能取决于 etcd 在集群中的性能。为了确保最佳速度
 
 在 SELinux Enforcing CentOS 8 节点或 RHEL 8 节点上安装 Rancher 之前，必须安装容器-selinux 和 iptables。
 
-```
+```bash
 sudo yum install iptables
 sudo yum install container-selinux
 ```

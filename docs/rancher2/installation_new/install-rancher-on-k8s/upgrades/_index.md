@@ -95,7 +95,7 @@ kubeconfig 也可以通过`--kubeconfig`标签来手动针对预定的集群，�
    ```
    helm repo list
    NAME          	       URL
-   stable        	       https://kubernetes-charts.storage.googleapis.com
+   stable        	       https://charts.helm.sh/stable
    rancher-<CHART_REPO>	 https://releases.rancher.com/server-charts/<CHART_REPO>
    ```
 
