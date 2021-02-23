@@ -43,7 +43,7 @@ curl -i <Host Registration URL you set in UI>/v1
 
 您应该得到一个 json 响应。 如果开启了认证，响应代码应为 401。如果认证未打开，则响应代码应为 200。
 
-**注意:** 普通的 HTTP 请求和 websocket 连接(ws://)都将被使用。 如果此 URL 指向代理或负载平衡器，请确保它们可以支持 Websocket 连接。
+**注意:** 普通的 HTTP 请求和 websocket 连接(ws://)都将被使用。 如果此 URL 指向代理或负载均衡器，请确保它们可以支持 Websocket 连接。
 
 ## Kuberbetes UI 显示 Service unavailable
 

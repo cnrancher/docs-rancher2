@@ -1,5 +1,19 @@
 ---
 title: HTTP代理安装
+description: 在很多企业环境中，运行在企业内部的服务器或虚拟机不能直接访问互联网，但出于安全考虑，必须通过 HTTP(S)代理连接到外部服务。本教程将逐步介绍如何在这样的环境中设置高可用的 Rancher 安装。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - 安装指南
+  - 其他安装方法
+  - HTTP代理安装
 ---
 
 ## 概述

@@ -26,13 +26,13 @@ _适用于 Rancher v2.5+_
 
 ## Charts
 
-从左上角菜单中选择**应用市场**，进入图表页面。
+从左上角菜单中选择**应用市场**，进入 Chart 页面。
 
-图表页面包含所有 Rancher、合作伙伴和自定义 Chart。
+Chart 页面包含所有 Rancher、合作伙伴和自定义 Chart。
 
 - Rancher 工具，如日志或监控，都包含在 Rancher 标签下。
-- 合作伙伴图表位于合作伙伴标签下
-- 自定义图表将显示在版本库的名称下。
+- 合作伙伴 Chart 位于合作伙伴标签下
+- 自定义 Chart 将显示在版本库的名称下。
 
 这三种类型都是以相同的方式部署和管理的。
 
@@ -44,7 +44,7 @@ _适用于 Rancher v2.5+_
 
 ## Helm 兼容性
 
-Cluster Explorer 只支持 Helm 3 兼容的图表。
+Cluster Explorer 只支持 Helm 3 兼容的 Chart。
 
 ## 部署和升级
 
