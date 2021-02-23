@@ -37,7 +37,7 @@ Rancher 的解控和告警解决方案允许用户执行以下操作：
 
 - 通过[Prometheus Adapter](https://github.com/DirectXMan12/k8s-prometheus-adapter)将从 Prometheus 收集到的指标暴露给 Kubernetes Custom Metrics API，以便在 HPA 中使用（仅在 2.5 中可用）。
 
-关于部署到集群上以支持该解决方案的资源的更多信息，可以在 [`rancher-monitoring`](https://github.com/rancher/charts/tree/main/charts/rancher-monitoring) Helm 图表中找到，该图表密切跟踪 Prometheus 社区维护的上游 [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) Helm 图表，并在 [CHANGELOG.md](https://github.com/rancher/charts/blob/main/charts/rancher-monitoring/CHANGELOG.md) 中跟踪某些变化。
+关于部署到集群上以支持该解决方案的资源的更多信息，可以在 [`rancher-monitoring`](https://github.com/rancher/charts/tree/main/charts/rancher-monitoring) Helm Chart 中找到，该 Chart 密切跟踪 Prometheus 社区维护的上游 [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) Helm Chart，并在 [CHANGELOG.md](https://github.com/rancher/charts/blob/main/charts/rancher-monitoring/CHANGELOG.md) 中跟踪某些变化。
 
 如果您在 v2.5 之前在 Rancher 中启用了监控、警报或通知器，则没有升级路径可以切换到新的监控/警报解决方案。在通过集群资源管理器部署新的监控解决方案之前，您需要在集群管理器中禁用监控/警报/通知器。
 
@@ -71,7 +71,7 @@ Prometheus 让您可以查看来自不同 Rancher 和 Kubernetes 对象的度量
 1. 在 Rancher UI 中，进入要安装监控的集群，然后单击**集群资源管理器**。
 1. 单击**应用程序**。
 1. 单击`rancher-monitoring`应用程序。
-1. （可选）单击**图表选项**，配置警报、Prometheus 和 Grafana。如需帮助，请参阅[配置参考](/docs/rancher2/monitoring-alerting/2.5/configuration/_index)
+1. （可选）单击**Chart 选项**，配置警报、Prometheus 和 Grafana。如需帮助，请参阅[配置参考](/docs/rancher2/monitoring-alerting/2.5/configuration/_index)
 1. 滚动到 Helm chart README 底部，单击**安装**。
 
 **结果：**监控应用部署在`cattle-monitoring-system`命名空间中。
@@ -100,7 +100,7 @@ Prometheus 让您可以查看来自不同 Rancher 和 Kubernetes 对象的度量
 
 Rancher 允许任何通过 Kubernetes 认证并能够访问 Rancher 监控图部署的 Grafana 服务的用户通过 Rancher Dashboard UI 访问 Grafana。默认情况下，所有能够访问 Grafana 的用户都被赋予[Viewer](https://grafana.com/docs/grafana/latest/permissions/organization_roles/#viewer-role)角色，允许他们查看 Rancher 部署的任何默认仪表板。
 
-但是，如果有必要，用户可以选择以[Admin](https://grafana.com/docs/grafana/latest/permissions/organization_roles/#admin-role)的身份登录 Grafana。Grafana 实例的默认 Admin 用户名和密码将是`admin`/`prom-operator`，但也可以在部署或升级图表时提供其他凭证。
+但是，如果有必要，用户可以选择以[Admin](https://grafana.com/docs/grafana/latest/permissions/organization_roles/#admin-role)的身份登录 Grafana。Grafana 实例的默认 Admin 用户名和密码将是`admin`/`prom-operator`，但也可以在部署或升级 Chart 时提供其他凭证。
 
 要查看 Grafana 用户界面，安装`rancher-monitoring`。然后进入**群资源管理器.**在左上角，单击**群资源管理器>监控**然后单击 Grafana。
 
@@ -160,7 +160,7 @@ Alertmanager 处理客户端应用程序（如 Prometheus 服务器）发送的�
 
 资源请求和限制可以在安装`rancher-monitoring`时进行配置。
 
-默认值在`rancher-monitoring`Helm 图表的[values.yaml](https://github.com/rancher/charts/blob/main/charts/rancher-monitoring/values.yaml)中。
+默认值在`rancher-monitoring`Helm Chart 的[values.yaml](https://github.com/rancher/charts/blob/main/charts/rancher-monitoring/values.yaml)中。
 
 下表中的默认值是最小的资源限制和请求。
 

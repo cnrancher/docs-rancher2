@@ -41,7 +41,7 @@ spec:
 
 一个配置文件包含 CIS 扫描的配置，其中包括要使用的基准版本和该基准中要跳过的任何特定测试。
 
-默认情况下，一些 ClusterScanProfiles 被安装为`rancher-cis-benchmark`图表的一部分。如果用户编辑了这些默认的基准或配置文件，下一次的图表更新将重新设置它们。所以建议用户不要编辑默认的 ClusterScanProfiles。
+默认情况下，一些 ClusterScanProfiles 被安装为`rancher-cis-benchmark`Chart 的一部分。如果用户编辑了这些默认的基准或配置文件，下一次的 Chart 更新将重新设置它们。所以建议用户不要编辑默认的 ClusterScanProfiles。
 
 用户可以克隆 ClusterScanProfiles 来创建自定义配置文件。
 
@@ -76,7 +76,7 @@ spec:
 
 默认情况下，一些`BenchmarkVersion`名称和测试配置被打包为 CIS 扫描应用程序的一部分。启用该功能后，这些默认的 BenchmarkVersions 将被自动安装，并供用户创建 ClusterScanProfile 时使用。
 
-> 如果编辑了默认的 BenchmarkVersions，下一次的图表更新将重新设置它们。因此我们不建议编辑默认的 ClusterScanBenchmarks。
+> 如果编辑了默认的 BenchmarkVersions，下一次的 Chart 更新将重新设置它们。因此我们不建议编辑默认的 ClusterScanBenchmarks。
 
 一个 ClusterScanBenchmark 由以下字段组成。
 

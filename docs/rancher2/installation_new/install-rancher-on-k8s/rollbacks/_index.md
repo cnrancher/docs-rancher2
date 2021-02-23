@@ -11,7 +11,8 @@ keywords:
   - rancher 中文
   - rancher 中文文档
   - rancher cn
-  - 升级和回滚
+  - 安装指南
+  - 高可用安装指南
   - 回滚必读
 ---
 

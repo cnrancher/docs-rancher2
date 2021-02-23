@@ -24,7 +24,7 @@ keywords:
 
 例如，此命令可用于在 Ubuntu 上安装 Docker 19.03：
 
-```
+```bash
 curl https://releases.rancher.com/install-docker/19.03.sh | sh
 ```
 

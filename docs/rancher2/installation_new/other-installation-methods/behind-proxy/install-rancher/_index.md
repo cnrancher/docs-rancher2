@@ -1,5 +1,20 @@
 ---
 title: 3. 安装Rancher
+description: 现在您已经有了一个正在运行的 RKE 集群，您可以在其中安装 Rancher。出于安全考虑，所有到 Rancher 的流量必须用 TLS 加密。在本教程中，您将通过cert-manager自动签发自签名证书。在实际使用情况下，您可能会使用 Let's Encrypt 或提供自己的证书。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - 安装指南
+  - 其他安装方法
+  - HTTP代理安装
+  - 安装 Rancher
 ---
 
 ## 概述

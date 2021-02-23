@@ -22,7 +22,7 @@ keywords:
 这是对安装 Rancher Server 的节点的要求。如果您要创建用来运行您自己的应用的集群，请参阅[下游集群的节点要求](/docs/rancher2/cluster-provisioning/node-requirements/_index)。
 :::
 
-请确保 Rancher Server 的节点满足以下要求:
+请确保 Rancher Server 的节点满足以下要求：
 
 - [操作系统和容器运行时要求](#操作系统和-docker-要求)
 - [硬件要求](#硬件要求)

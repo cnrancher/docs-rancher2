@@ -1,6 +1,6 @@
 ---
 title: "安装介绍"
-description: Helm 是 Kubernetes 的首选包管理工具。Helm 图表为 Kubernetes YAML 清单文件提供了模板化语法。通过 Helm，我们可以创建可配置的部署，而不仅仅是使用静态文件。
+description: Helm 是 Kubernetes 的首选包管理工具。Helm Chart为 Kubernetes YAML 清单文件提供了模板化语法。通过 Helm，我们可以创建可配置的部署，而不仅仅是使用静态文件。
 keywords:
   - k3s中文文档
   - k3s 中文文档

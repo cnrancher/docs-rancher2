@@ -1,5 +1,18 @@
 ---
 title: RancherD配置参考
+description: 在 RancherD 中，服务器节点被定义为运行`rancherd server`命令的机器（裸机或虚拟）。服务器运行 Kubernetes API 以及 Kubernetes 工作负载。agent 节点被定义为运行`rancherd agent`命令的机器。它们不运行 Kubernetes API。要添加指定运行您的应用程序和服务的节点，请将代理节点加入到您的集群中。在 RancherD 安装说明中，我们建议在 Rancher 服务器集群中运行三个服务器节点。代理节点不是必需的。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - 在Linux操作系统上安装Rancher
+  - RancherD配置参考
 ---
 
 ## 概述
@@ -33,11 +46,11 @@ node-taint:
 
 ## 自定义 RancherD Helm Chart
 
-Rancher 是作为一个[Helm](https://helm.sh/)图表启动的，使用集群的[Helm 集成](https://docs.rke2.io/helm/)。这意味着你可以通过一个描述你的自定义参数的 manifest 文件轻松地定制应用程序。
+Rancher 是作为一个[Helm](https://helm.sh/)Chart 启动的，使用集群的[Helm 集成](https://docs.rke2.io/helm/)。这意味着你可以通过一个描述你的自定义参数的 manifest 文件轻松地定制应用程序。
 
-RancherD 图表在守护进程中提供了 Rancher。它将主机端口`8080/8443`公开到容器端口（`80/443`），如果需要的话，使用 hostpath 来挂载 certs。
+RancherD Chart 在守护进程中提供了 Rancher。它将主机端口`8080/8443`公开到容器端口（`80/443`），如果需要的话，使用 hostpath 来挂载 certs。
 
-RancherD 使用`helm-controller`来引导 RancherD 图表。要提供一个自定义的`values.yaml`文件，必须通过`helm-controller`自定义资源定义来传递配置选项。
+RancherD 使用`helm-controller`来引导 RancherD Chart。要提供一个自定义的`values.yaml`文件，必须通过`helm-controller`自定义资源定义来传递配置选项。
 
 下面是一个例子：
 

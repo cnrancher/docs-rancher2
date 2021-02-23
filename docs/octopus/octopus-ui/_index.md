@@ -6,9 +6,9 @@ title: Octopus UI
 Octopus-UI 当前仅适用于 k3s 集群。
 :::
 
-## 从 Helm 图表中安装 Octopus-UI
+## 从 Helm Chart 中安装 Octopus-UI
 
-默认情况下，`Octopus-UI`在 Octopus[Helm 图表](../install/_index)安装时会自动部署，您始终可以使用以下命令将其打开或关闭：
+默认情况下，`Octopus-UI`在 Octopus[Helm Chart](../install/_index)安装时会自动部署，您始终可以使用以下命令将其打开或关闭：
 
 ```shell script
 $ helm upgrade -n octopus-system --set octopus-ui.enabled=true octopus octopus/octopus
@@ -41,4 +41,4 @@ rancher-octopus-api-server   LoadBalancer   10.43.98.95   172.16.1.89,192.168.0.
 
 ## 登入验证
 
-`Octopus-UI`使用 k3s 生成的用户名和密码进行身份验证，您可以从生成的 k3s[[KUBECONFIG]](/docs/k3s/cluster-access/_index)文件中找到它。
+`Octopus-UI`使用 k3s 生成的用户名和密码进行身份验证，您可以从生成的 k3s[[KUBECONFIG]](/docs/k3s/cluster-access/\_index)文件中找到它。

@@ -1,5 +1,17 @@
 ---
 title: 在Linux操作系统上安装Rancher
+description: RancherD 是一种新的、更简单的安装 Rancher 的方法，这是一个实验性功能。RancherD 是一个二进制文件，它首先启动一个 RKE2 Kubernetes 集群，然后在集群上安装 Rancher 服务器 Helm Chart。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - 在Linux操作系统上安装Rancher
 ---
 
 _从 Rancher v2.5.4 开始提供。_
@@ -16,7 +28,7 @@ RancherD 是一个二进制文件，它首先启动一个 RKE2 Kubernetes 集群
 
 在 RancherD 安装和 Helm CLI 安装中，Rancher 都是作为 Helm 图安装在 Kubernetes 集群上。
 
-使用 RancherD 也简化了配置和升级。当您升级 RancherD 二进制时，Kubernetes 集群和 Rancher Helm 图表都会升级。
+使用 RancherD 也简化了配置和升级。当您升级 RancherD 二进制时，Kubernetes 集群和 Rancher Helm Chart 都会升级。
 
 在本说明的第一部分，您将学习如何在单个节点上启动 RancherD。按照第一部分的步骤进行操作的结果是一个安装了 Rancher 服务器的单节点[RKE2](https://docs.rke2.io/)Kubernetes 集群。这个集群以后可以很容易地变成高可用性。如果 Rancher 只需要管理本地 Kubernetes 集群，那么安装就完成了。
 
@@ -90,7 +102,7 @@ tls-san:
 
 以这种方式安装 Rancher 将使用 Rancher 生成的证书。要使用自己的自签名或受信任的证书，请参考[配置指南](/docs/rancher2/installation_new/install-rancher-on-linux/rancherd-configuration/_index)
 
-关于自定义 RancherD Helm 图表值.yaml 的信息，请参考[本节](/docs/rancher2/installation_new/install-rancher-on-linux/rancherd-configuration/_index)
+关于自定义 RancherD Helm Chart 值.yaml 的信息，请参考[本节](/docs/rancher2/installation_new/install-rancher-on-linux/rancherd-configuration/_index)
 
 ### 2. 启动第一个服务器节点
 
@@ -215,7 +227,7 @@ systemctl start rancherd-server.service。
 
 ## 配置
 
-有关如何配置证书、节点污点、Rancher Helm 图表选项或 RancherD CLI 选项的信息，请参考[配置参考](/docs/rancher2/installation_new/install-rancher-on-linux/rancherd-configuration/_index)
+有关如何配置证书、节点污点、Rancher Helm Chart 选项或 RancherD CLI 选项的信息，请参考[配置参考](/docs/rancher2/installation_new/install-rancher-on-linux/rancherd-configuration/_index)
 
 ## 卸载
 

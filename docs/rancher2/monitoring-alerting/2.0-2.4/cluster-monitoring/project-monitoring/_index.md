@@ -27,7 +27,7 @@ _从 v2.2.4 开始提供_
 
 使用 Prometheus，您可以在集群级别和项目级别上监控 Rancher。对于每个启用监控的集群和项目，Rancher 都会部署一个 Prometheus 服务器。
 
-- [集群监控](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/_index)允许您查看 Kubernetes 集群的健康状况。Prometheus 从下面的集群组件中收集指标，你可以在图形和图表中查看这些指标：
+- [集群监控](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/_index)允许您查看 Kubernetes 集群的健康状况。Prometheus 从下面的集群组件中收集指标，你可以在图形和 Chart 中查看这些指标：
 
   - [Kubernetes control-plane](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/custom-metrics/_index)
   - [etcd 数据库](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/custom-metrics/_index)

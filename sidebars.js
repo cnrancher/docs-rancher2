@@ -127,6 +127,7 @@ module.exports = {
                         type: "category",
                         label: "离线安装",
                         items: [
+                            "rancher2/installation_new/other-installation-methods/air-gap/_index",
                             "rancher2/installation_new/other-installation-methods/air-gap/prepare-nodes/_index",
                             "rancher2/installation_new/other-installation-methods/air-gap/populate-private-registry/_index",
                             "rancher2/installation_new/other-installation-methods/air-gap/launch-kubernetes/_index",

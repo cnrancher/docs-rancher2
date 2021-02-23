@@ -1,10 +1,23 @@
 ---
 title: 升级指南
+description: 以下说明将指导您升级使用 Helm 安装在 Kubernetes 集群上的 Rancher 服务器。这些步骤也适用于使用 Helm 进行的离线安装。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - 安装指南
+  - 升级指南
 ---
 
 ## 概述
 
-以下说明将指导您升级使用 Helm 安装在 Kubernetes 集群上的 Rancher 服务器。这些步骤也适用于使用 Helm 进行的气隙安装。
+以下说明将指导您升级使用 Helm 安装在 Kubernetes 集群上的 Rancher 服务器。这些步骤也适用于使用 Helm 进行的离线安装。
 
 有关使用 RancherD 升级安装在 Kubernetes 上的 Rancher 的说明，请参考[本页](/docs/rancher2/installation_new/install-rancher-on-linux/upgrades/_index)
 

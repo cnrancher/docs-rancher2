@@ -69,9 +69,9 @@ kubectl logs <pod name from above command> -n cattle-resources-system -f
 
 ### 重启 Rancher
 
-Rancher 必须在使用 Rancher 备份操作员进行回滚后，以较低/以前的版本启动。它应该用与前次安装相同的 Helm 图表值启动。
+Rancher 必须在使用 Rancher 备份操作员进行回滚后，以较低/以前的版本启动。它应该用与前次安装相同的 Helm Chart 值启动。
 
-从当前安装的 Rancher Helm 图表中获取用`--set`传递的值。
+从当前安装的 Rancher Helm Chart 中获取用`--set`传递的值。
 
 ```
 helm get values rancher -n cattle-system
