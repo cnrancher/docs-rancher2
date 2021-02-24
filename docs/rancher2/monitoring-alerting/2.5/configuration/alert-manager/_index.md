@@ -6,7 +6,7 @@ title: Alertmanager
 
 ## 概述
 
-默认情况下，Rancher Monitoring 将单个 Alertmanager 部署到使用默认 Alertmanager Config Secret 的集群上。作为图表部署选项的一部分，您可以选择增加部署到集群上的 Alertmanager 的副本数量，这些副本都可以使用相同的底层 Alertmanager Config Secret 进行管理。
+默认情况下，Rancher Monitoring 将单个 Alertmanager 部署到使用默认 Alertmanager Config Secret 的集群上。作为 Chart 部署选项的一部分，您可以选择增加部署到集群上的 Alertmanager 的副本数量，这些副本都可以使用相同的底层 Alertmanager Config Secret 进行管理。
 
 这个密钥应该随时更新或修改：
 
@@ -14,7 +14,7 @@ title: Alertmanager
 - 更改应发送至特定通知者或接收者的告警。
 - 更改发送的告警群组。
 
-默认情况下，您可以选择提供一个现有的 Alertmanager Config Secret（即`cattle-monitoring-system`命名空间中的任何 Secret），或者允许 Rancher Monitoring 在您的集群上部署一个默认的 Alertmanager Config Secret。默认情况下，Rancher 创建的 Alertmanager Config Secret 将永远不会在升级/卸载`rancher-monitoring`图表时被修改/删除，以防止用户在图表上执行操作时丢失或覆盖其告警配置。
+默认情况下，您可以选择提供一个现有的 Alertmanager Config Secret（即`cattle-monitoring-system`命名空间中的任何 Secret），或者允许 Rancher Monitoring 在您的集群上部署一个默认的 Alertmanager Config Secret。默认情况下，Rancher 创建的 Alertmanager Config Secret 将永远不会在升级/卸载`rancher-monitoring`Chart 时被修改/删除，以防止用户在 Chart 上执行操作时丢失或覆盖其告警配置。
 
 关于这个密钥中可以指定哪些字段的更多信息，请看[Prometheus Alertmanager docs.](https://prometheus.io/docs/alerting/latest/alertmanager/)
 

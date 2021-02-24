@@ -40,7 +40,7 @@ Rancher 与 Istio 的集成旨在使 Rancher 运维人员（例如管理员或�
 Rancher 的 Istio 集成附带了全面的可视化辅助工具：
 
 - **使用 Jaeger 跟踪错误的根本原因。** [Jaeger](https://www.jaegertracing.io/) 是一个开放源代码工具，它为分布式跟踪系统提供 UI，这对于根本原因分析和确定导致性能下降的原因很有用。分布式跟踪使您可以查看整个调用链，这些调用可能源于用户请求并遍历数十个微服务。
-- **使用 Kiali 全面了解您的微服务架构。** [Kiali](https://www.kiali.io/) 提供了一个图表，显示了服务网格中的服务及其连接方式，包括流量速率和它们之间的延迟。您可以检查服务网格的运行状况，或深入查看单个组件的传入和传出请求。
+- **使用 Kiali 全面了解您的微服务架构。** [Kiali](https://www.kiali.io/) 提供了一个 Chart，显示了服务网格中的服务及其连接方式，包括流量速率和它们之间的延迟。您可以检查服务网格的运行状况，或深入查看单个组件的传入和传出请求。
 - **使用 Grafana 仪表板从时间序列分析中获得见解。** [Grafana](https://grafana.com/) 是一个分析平台，可让您查询，可视化，警告和了解 Prometheus 收集的数据。
 - **使用 Prometheus UI 编写时间序列数据的自定义查询。** [Prometheus](https://prometheus.io/) 是系统监视和警报工具包。Prometheus 会从您的集群中抓取数据，然后由 Grafana 使用。Prometheus UI 也集成到 Rancher 中，使您可以编写时间序列数据的自定义查询并在 UI 中查看结果。
 

@@ -1,5 +1,18 @@
 ---
 title: 升级指南
+description: 当 RancherD 升级时，Rancher Helm controller 和 Fleet pod 都会升级。在 RancherD 升级过程中，停机时间非常少，但 RKE2 有可能会停机一分钟，在此期间，您可能会失去对 Rancher 的访问。当 Rancher 与 RancherD 一起安装时，底层的 Kubernetes 集群不能从 Rancher UI 中升级。它需要使用 RancherD CLI 进行升级。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - 在Linux操作系统上安装Rancher
+  - 升级指南
 ---
 
 RancherD 是一个实验性功能。
@@ -21,13 +34,13 @@ RancherD 是一个实验性功能。
 > - 使用[备份应用程序](/docs/rancher2/backups/2.5/back-up-rancher/_index)创建 Rancher 服务器的备份。
 > - 查看您要升级到的 Rancher 版本的已知问题。已知问题列在[GitHub](https://github.com/rancher/rancher/releases)和[Rancher 论坛](https://forums.rancher.com/c/announcements/12)的发布说明中。
 
-1. 用 Helm 卸载图表。
+1. 用 Helm 卸载 Chart。
 
    ```
     helm uninstall rancher
    ```
 
-2. 用 Helm 重新安装 Rancher 图表。要安装特定的 Rancher 版本，使用`--version`标签。比如说
+2. 用 Helm 重新安装 Rancher Chart。要安装特定的 Rancher 版本，使用`--version`标签。比如说
 
    ```
    helm install rancher rancher-latest/rancher\

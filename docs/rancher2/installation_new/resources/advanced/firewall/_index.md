@@ -13,7 +13,6 @@ keywords:
   - rancher cn
   - 安装指南
   - 资料、参考和高级选项
-  - 功能开关
   - 通过 firewalld 放行端口
 ---
 
