@@ -16,7 +16,7 @@ keywords:
 
 ## 概述
 
-Rancher 整理了近期微信粉丝群内经常提及的问题和用户经常访问的页面，并将这些热点问题汇总到本文这个页面。初次整理出来的热点问题囊括了安装指南、用户指南、集群管理员指南、创建集群、和常见问题这 5 本手册中，用户经常访问的页面。尽管初次整理的过程比较繁琐，但是我们希望这个页面的内容能够帮助新手用户或是之前没了解过相关模块的用户，解决在使用 Rancher 的过程中碰到的问题。
+Rancher 整理了近期微信粉丝群内经常提及的问题和用户经常访问的页面，并将这些热点问题汇总到本文这个页面。整理出来的热点问题囊括了安装指南、用户指南、集群管理员指南、创建集群、和常见问题这 5 本手册中，用户经常访问的页面。尽管整理的过程比较繁琐，但是我们希望这个页面的内容能够帮助新手用户或是之前没了解过相关模块的用户，解决在使用 Rancher 的过程中碰到的问题。我们会定期更新这个页面，以保证这些问题能够满足大多数用户的需求。
 
 ## 安装指南
 
@@ -67,7 +67,7 @@ Rancher 的流水线提供了简单的 CI / CD 体验。使用它可以自动拉
 
 **详情请参考[流水线功能介绍](/docs/rancher2/pipelines/_index)。**
 
-### Pod 弹性伸缩（horizontal pod autoscaler)
+### Pod 弹性伸缩（HPA)
 
 [Pod 弹性伸缩器](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)（HPA）是 Kubernetes 的一项功能，可以对您的应用进行自动扩容和自动缩容。
 
@@ -116,6 +116,14 @@ Kubernetes 将工作负载分为不同类型。Kubernetes 支持的类型包括�
 **详情请参考[流水线配置参考](/docs/rancher2/pipelines/config/_index)。**
 
 ## 集群管理员指南
+
+### 轮换证书
+
+默认情况下，Kubernetes 集群所需要的证书由 Rancher 生成，如果出现证书过期，或证书泄露等情况，则需要使用新的证书轮换掉有问题的证书。轮换证书后，Kubernetes 组件将自动重新启动。
+
+目前 Rancher 中文官方文档提供了 Rancher v2.0.x、Rancher v2.1.x 和 Rancher v2.2.x 这三个版本的轮换证书操作指导。
+
+**详情请参考[轮换证书](/docs/rancher2/cluster-admin/certificate-rotation/_index)。**
 
 ### 集群日志
 
