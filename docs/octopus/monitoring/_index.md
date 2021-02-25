@@ -115,11 +115,11 @@ Octopus 基于[sigs.k8s.io/controller-runtime](https://github.com/kubernetes-sig
 
 ### 与 Prometheus Operator 集成
 
-使用[prometheus-operator HELM 图表](https://github.com/helm/charts/blob/master/stable/prometheus-operator)，您可以轻松地设置 Prometheus Operator 来监视 Octopus。 以下步骤演示了如何在本地 Kubernetes 集群上运行 Prometheus Operator：
+使用[prometheus-operator HELM Chart](https://github.com/helm/charts/blob/master/stable/prometheus-operator)，您可以轻松地设置 Prometheus Operator 来监视 Octopus。 以下步骤演示了如何在本地 Kubernetes 集群上运行 Prometheus Operator：
 
 1. 使用[`cluster-k3d-spinup.sh`](https://github.com/cnrancher/octopus/blob/master/hack/cluster-k3d-spinup.sh)通过[k3d](https://github.com/rancher/k3s)创建本地 Kubernetes 集群。
-1. 按照[HELM 的安装指南](https://helm.sh/docs/intro/install/)安装 helm 工具，然后使用`helm fetch --untar --untardir /tmp stable/prometheus-operator` 将 prometheus-operator 图表移至本地`/ tmp`目录。
-1. 从 prometheus-operator 图表生成部署 YAML，如下所示。
+1. 按照[HELM 的安装指南](https://helm.sh/docs/intro/install/)安装 helm 工具，然后使用`helm fetch --untar --untardir /tmp stable/prometheus-operator` 将 prometheus-operator Chart 移至本地`/ tmp`目录。
+1. 从 prometheus-operator Chart 生成部署 YAML，如下所示。
    ```shell
    helm template --namespace octopus-monitoring \
      --name octopus \

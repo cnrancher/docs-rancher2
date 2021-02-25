@@ -22,14 +22,14 @@ Octopus 支持两种不同的部署方式，一种是基于[Helm chart](https://
 ## 基于 Helm chart 部署
 
 :::note 说明
-此仓库中的图表需要 Helm 3.x 或更高版本。请阅读并遵循[Helm 安装指南](https://helm.sh/docs/intro/install/)。
+此仓库中的 Chart 需要 Helm 3.x 或更高版本。请阅读并遵循[Helm 安装指南](https://helm.sh/docs/intro/install/)。
 :::
 
-[Octopus-Chart](https://github.com/cnrancher/octopus-chart)项目包含了[Octopus](https://github.com/cnrancher/octopus)的官方 Helm 图表。 这些图表用于将 Octopus 部署到 Kubernetes 或 k3s 集群。
+[Octopus-Chart](https://github.com/cnrancher/octopus-chart)项目包含了[Octopus](https://github.com/cnrancher/octopus)的官方 Helm Chart。 这些 Chart 用于将 Octopus 部署到 Kubernetes 或 k3s 集群。
 
 ### 添加 Octopus Helm 仓库
 
-为了能够使用此存储库中的图表，请将下列名称和 URL 添加到您的 Helm 客户端：
+为了能够使用此存储库中的 Chart，请将下列名称和 URL 添加到您的 Helm 客户端：
 
 ```console
 helm repo add octopus http://charts.cnrancher.com/octopus
