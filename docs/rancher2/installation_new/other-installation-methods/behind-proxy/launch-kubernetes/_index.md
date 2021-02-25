@@ -87,17 +87,17 @@ sudo ./get_helm.sh
 
 接下来，创建一个描述 RKE 集群的 YAML 文件。确保节点的 IP 地址和 SSH 用户名是正确的。关于集群 YAML 的更多信息，请查看[RKE 文档](/docs/rke/example-yamls/_index)。
 
-```
+```yaml
 nodes:
   - address: 10.0.1.200
     user: ubuntu
-    role: [controlplane,worker,etcd]
+    role: [controlplane, worker, etcd]
   - address: 10.0.1.201
     user: ubuntu
-    role: [controlplane,worker,etcd]
+    role: [controlplane, worker, etcd]
   - address: 10.0.1.202
     user: ubuntu
-    role: [controlplane,worker,etcd]
+    role: [controlplane, worker, etcd]
 services:
   etcd:
     backup_config:
