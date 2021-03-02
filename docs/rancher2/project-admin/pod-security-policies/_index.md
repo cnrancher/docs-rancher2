@@ -10,7 +10,7 @@ title: Pod 安全策略
 
 - 已经在 Rancher 内创建了 Pod 安全策略。给项目分配 Pod 安全策略之前，您需要先在 Rancher 内完成 Pod 安全策略的创建。如果您还未创建 Pod 安全策略，请参考[如何创建 Pod 安全策略](/docs/rancher2/admin-settings/pod-security-policies/_index)。
 
-- 已经给项目所属的集群分配了默认 Pod 安全策略。如果没有给集群分配默认 Pod 安全策略，会无法配置项目级的 Pod 安全策略。如果您还未给项目所属的集群配置默认 Pod 安全策略，请参考[如何配置集群默认 Pod 安全策略](/docs/rancher2/cluster-admin/editing-clusters/_index)。
+- 已经给项目所属的集群分配了默认 Pod 安全策略。如果没有给集群分配默认 Pod 安全策略，会无法配置项目级的 Pod 安全策略。如果您还未给项目所属的集群配置默认 Pod 安全策略，请参考[如何配置集群默认 Pod 安全策略](/docs/rancher2/cluster-admin/pod-security-policy/_index)。
 
 ## 应用 Pod 安全策略
 

@@ -61,7 +61,12 @@ K3s server 节点被定义为运行`k3s server`命令的机器（裸机或虚拟
 
 Agent 节点用`k3s agent`进程发起的 websocket 连接注册，连接由作为代理进程一部分运行的客户端负载均衡器维护。
 
-Agent 节点将使用节点集群密钥以及在`/etc/rancher/node/password`中存储的随机生成的节点密码向服务器注册。服务器会将每个节点的密码存储在`/var/lib/rancher/k3s/server/cred/node-passwd`中，任何后续尝试都必须使用相同的密码。
+Agent 将使用节点集群 secret 以及随机生成的节点密码向 k3s server 注册，密码存储在 `/etc/rancher/node/password`。K3s server 将把各个节点的密码存储为 Kubernetes secrets，随后的任何尝试都必须使用相同的密码。节点密码秘密存储在`kube-system`命名空间中，名称使用模板`<host>.node-password.k3s`。
+
+:::note 注意：
+
+在 K3s v1.20.2 之前，K3s server 将密码存储在`/var/lib/rancher/k3s/server/cred/node-passwd`的磁盘上。
+:::
 
 如果删除了 agent 的`/etc/rancher/node`目录，则应为该 agent 重新创建密码文件，或者从 server 中删除该条目。
 

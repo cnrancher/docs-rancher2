@@ -2,15 +2,15 @@
 title: 动态创建持久卷
 description: 本章节描述了如何为 Rancher 中的工作负载配置新的持久化存储。本章节假定您已了解 Kubernetes 持久卷声明和存储类型的概念。 有关更多信息，请参阅存储是如何工作的。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 存储卷和存储类
   - 动态创建持久卷
@@ -40,11 +40,11 @@ Rancher 默认启用以下云服务存储卷：
 | Network File System    | `nfs`                  |
 | hostPath               | `host-path`            |
 
-如果需要使用不在上述列表内的存储提供者，您需要使用功能开关来[启用不被默认启动存储驱动](/docs/rancher2/installation/options/feature-flags/enable-not-default-storage-drivers/_index)。不在上述列表内的存储服务没有经过 Rancher 的测试和验证，属于实验性功能，Rancher 不能保证使用过程中是否会出现问题，请谨慎使用不在上表内的存储服务。
+如果需要使用不在上述列表内的存储提供者，您需要使用功能开关来[启用不被默认启动存储驱动](/docs/rancher2/installation_new/resources/feature-flags/enable-not-default-storage-drivers/_index)。不在上述列表内的存储服务没有经过 Rancher 的测试和验证，属于实验性功能，Rancher 不能保证使用过程中是否会出现问题，请谨慎使用不在上表内的存储服务。
 
 ## 配置存储类
 
-1. 进入要为其设置动态持久化存储卷的集群。
+1. 单击**Cluster Explorer**，找到并单击要为其设置动态持久化存储卷的集群。
 1. 在集群页面中，单击**存储**，选择**存储类**，单击**添加类**。
 1. 输入存储类**名称**。
 1. 从**提供者**下拉列表中，选择要用于动态配置存储卷的服务。例如，您有一个 Amazon EC2 集群，并且想要为其使用云存储，请使用**Amazon EBS Disk**提供者。
@@ -57,10 +57,10 @@ Rancher 默认启用以下云服务存储卷：
 
 ## 添加持久卷声明
 
-1. 进入包含要向其添加 PVC 的工作负载的项目。
+1. 进入**Cluster Manager**到包含您要添加 PVC 的工作负载的项目。
 1. 在导航栏中，下拉**资源**，选择**工作负载**（在早于 v2.3.0 的版本中，在导航栏中选择**工作负载**）。然后选择**卷**页签，单击**添加卷**。
 1. 输入卷声明**名称**。
-1. 选择卷声明的[命名空间](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)。
+1. 选择卷声明的命名空间。
 1. 在**源**中，单击**使用存储类来置备新的持久卷**。
 1. 单击**存储类**下拉菜单，然后选择您创建的存储类。
 1. 输入卷**容量**。
@@ -77,7 +77,7 @@ Rancher 默认启用以下云服务存储卷：
 
 1. 按照[部署工作负载](/docs/rancher2/k8s-in-rancher/workloads/deploy-workloads/_index)的流程来创建工作负载.
 1. 在**工作负载类型**中，选择**StatefulSet**，Pod 数量 为 1。
-1. 展开**卷**列表，并单击**添加卷**，选择**添加新的永久卷（声明）**。
+1. 展开**卷**列表，并单击**添加卷**，选择**添加一个新的持久卷（声明）**。
 1. 在**持久卷声明**中，选择附加到存储类的新创建的持久卷声明。
 1. 在**挂载点**中，输入工作负载将用来访问卷的路径。
 1. 单击**启动**。

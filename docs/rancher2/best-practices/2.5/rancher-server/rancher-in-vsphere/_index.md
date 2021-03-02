@@ -2,15 +2,15 @@
 title: 在 vSphere 环境中安装 Rancher
 description: 本指南概述了在 vSphere 环境中的 RKE Kubernetes 集群上安装 Rancher 的参考架构，以及 VMware 记录的标准 vSphere 最佳实践。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 最佳实践
   - 在 vSphere 环境中安装 Rancher
 ---
@@ -51,7 +51,7 @@ keywords:
 
 ### 根据 Rancher 文档确定虚拟机的大小
 
-请参考[安装 Rancher Server 节点的软件，硬件和网络要求](/docs/rancher2/installation/requirements/_index)，确定虚拟机的大小。
+请参考[安装 Rancher Server 节点的软件，硬件和网络要求](/docs/rancher2/installation_new/requirements/_index)，确定虚拟机的大小。
 
 ### 充分利用虚拟机模板来构建环境
 

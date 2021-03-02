@@ -2,15 +2,15 @@
 title: 单节点迁移至 RKE HA
 description:
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 集群访问控制
   - 单节点迁移HA
@@ -103,7 +103,7 @@ keywords:
 
 ## 6. LOCAL K8S 集群部署
 
-1. 根据文档[示例配置](/docs/rancher2/installation/k8s-install/kubernetes-rke/_index#2、创建-rke-配置文件) 创建 RKE 配置文件。
+1. 根据文档[示例配置](/docs/rancher2/installation_new/resources/advanced/helm2/kubernetes-rke/_index#2、创建-rke-配置文件) 创建 RKE 配置文件。
 
 1. 执行 rke 命令创建 LOCAL K8S 集群
 
@@ -124,8 +124,8 @@ keywords:
 Rancher HA 的版本需要大于或者等于 Rancher 单节点的版本。
 :::
 
-1. 根据[自签名 ssl 证书](/docs/rancher2/installation/options/self-signed-ssl/_index)文档创建自签名证书或者配置权威证书；
-2. 根据[安装文档](/docs/rancher2/installation/k8s-install/_index)进行 Rancher HA 安装；
+1. 根据[自签名 ssl 证书](/docs/rancher2/installation_new/resources/advanced/self-signed-ssl/_index)文档创建自签名证书或者配置权威证书；
+2. 根据[安装文档](/docs/rancher2/installation_new/install-rancher-on-k8s/_index)进行 Rancher HA 安装；
 3. 安装完成后访问 Rancher UI，可以看到之前添加的`test`集群。（错误提示是因为 Rancher URL 改变，cluster Agent 无法连接 Rancher Server。）
 
    ![image-20191016170347456](/img/rancher/single-to-ha.assets/image-20191016170347456.png)

@@ -8,7 +8,7 @@ const metadata = {
             快速入门:
                 "为您提供Rancher容器平台的基本使用方法，通过简易demo教学，帮助您体验Rancher容器平台",
             安装指南: "为您提供在不同环境中安装Rancher容器平台的操作指导",
-            升级和回滚: "为您提供升级和回滚Rancher容器平台的操作指导",
+            //升级和回滚: "为您提供升级和回滚Rancher容器平台的操作指导",
             备份和恢复指南: "为您提供备份和恢复Rancher容器平台数据的操作指导",
             最佳实践: "为您提供Rancher容器平台的部署策略和配置建议",
             系统管理员指南:
@@ -87,9 +87,19 @@ const metadata = {
             基础服务: "提供基础服务的使用说明",
             常见问题: "提供使用Rancher时的常见问题和解决方式",
         },
+        harvester: {
+            产品介绍: "为您提供Harvester的产品介绍",
+            鉴权与认证: "为您提供Harvester鉴权与认证的操作指导",
+            上传镜像: "为您提供在Harvester中上传镜像的操作指导",
+            安装指南: "为您提供安装Harvester的操作指导",
+            虚拟机管理: "为您提供在Harvester中管理虚拟机的操作指导",
+            视频教程: "为您提供视频操作指导",
+        },
     },
     docs: {
         rancher2: {
+            "rancher2/releases/v2.5.5": "版本说明 - v2.5.5",
+            "rancher2/releases/v2.5.4": "版本说明 - v2.5.4",
             "rancher2/releases/v2.5.3": "版本说明 - v2.5.3",
             "rancher2/releases/v2.5.2": "版本说明 - v2.5.2",
             "rancher2/releases/v2.5.1": "版本说明 - v2.5.1",
@@ -125,19 +135,46 @@ const metadata = {
             "rancher2/quick-start-guide/deployment/_index":
                 "部署 Rancher 和 Kubernetes",
             "rancher2/quick-start-guide/workload/_index": "部署工作负载",
-            "rancher2/installation/requirements/_index": "安装要求",
-            "rancher2/installation/k8s-install/_index": "高可用安装",
-            "rancher2/installation/other-installation-methods/single-node-docker/_index":
-                "单节点安装",
-            "rancher2/installation/other-installation-methods/air-gap/_index":
+            //新版安装指南
+            "rancher2/installation_new/requirements/_index": "安装要求",
+            "rancher2/installation_new/install-rancher-on-k8s/_index":
+                "高可用安装",
+            "rancher2/installation_new/other-installation-methods/air-gap/prepare-nodes/_index":
                 "离线安装",
-            "rancher2/upgrades/upgrades/ha/_index": "升级高可用 Rancher",
-            "rancher2/upgrades/upgrades/single-node/_index":
-                "升级单节点 Rancher",
-            "rancher2/upgrades/rollbacks/ha-server-rollbacks/_index":
-                "回滚高可用 Rancher",
-            "rancher2/upgrades/rollbacks/single-node-rollbacks/_index":
-                "回滚单节点 Rancher",
+            "rancher2/installation_new/other-installation-methods/single-node-docker/_index":
+                "单节点安装",
+            "rancher2/installation_new/other-installation-methods/behind-proxy/_index":
+                "HTTP 代理安装",
+
+            "rancher2/installation_new/install-rancher-on-linux/_index":
+                "Linux安装",
+            "rancher2/installation_new/resources/advanced/helm2/_index":
+                "安装指南（Helm2）",
+            "rancher2/installation_new/resources/advanced/air-gap-helm2/_index":
+                "离线安装指南（Helm2）",
+            "rancher2/installation_new/resources/_index":
+                "其他资料及高级配置选项",
+            "rancher2/installation_new/resources/advanced/cluster-yml-templates/_index":
+                "cluster.yml 文件模板",
+            "rancher2/installation_new/resources/advanced/rke-add-on/layer-4-lb/_index":
+                "四层负载均衡安装指南",
+            "rancher2/installation_new/resources/advanced/rke-add-on/layer-7-lb/_index":
+                "七层负载均衡安装指南",
+            "rancher2/installation_new/upgrades-rollbacks/_index":
+                "升级回滚指南",
+            //结束新版安装指南
+            //旧版安装指南
+            //"rancher2/installation/requirements/_index": "安装要求",
+            //"rancher2/installation/k8s-install/_index": "高可用安装",
+            //"rancher2/installation/other-installation-methods/single-node-docker/_index":
+            //   "单节点安装",
+            //"rancher2/installation/other-installation-methods/air-gap/_index":
+            //   "离线安装",
+            //"rancher2/upgrades/upgrades/ha/_index": "升级高可用 Rancher",
+            //"rancher2/upgrades/upgrades/single-node/_index":"升级单节点 Rancher",
+            //"rancher2/upgrades/rollbacks/ha-server-rollbacks/_index":"回滚高可用 Rancher",
+            //"rancher2/upgrades/rollbacks/single-node-rollbacks/_index":"回滚单节点 Rancher",
+            //结束旧版安装指南
             "rancher2/backups/_index": "概述",
             "rancher2/backups/2.0-2.4/_index": "v2.0-v2.4",
             "rancher2/backups/2.5/_index": "v2.5",
@@ -169,6 +206,8 @@ const metadata = {
                 "通过主机驱动创建 RKE 集群",
             "rancher2/cluster-provisioning/imported-clusters/_index":
                 "导入已有集群",
+            "rancher2/cluster-provisioning/registered-clusters/_index":
+                "注册集群",
             "rancher2/cluster-provisioning/rke-clusters/windows-clusters/_index":
                 "创建 Windows 集群",
             "rancher2/cluster-provisioning/rke-clusters/cloud-providers/_index":
@@ -245,11 +284,20 @@ const metadata = {
             "rancher2/user-settings/preferences/_index": "偏好设置",
             "rancher2/api/_index": "如何调用 Rancher API",
             "rancher2/api/api-tokens/_index": "API Tokens",
+            //安全 OLD
+            /*
             "rancher2/security/_index": "安全说明",
             "rancher2/security/security-scan/_index": "安全扫描",
             "rancher2/security/hardening-2.3.5/_index": "安全加固指南",
             "rancher2/security/benchmark-2.3.5/_index": "CIS 自测指南",
             "rancher2/security/cve/_index": "安全漏洞和解决方法",
+            */
+            //安全 NEW
+            "rancher2/security/_index": "安全说明",
+            "rancher2/security/security-scan/_index": "安全扫描",
+            "rancher2/security/cve/_index": "安全漏洞和解决方法",
+            "": "",
+            //
             "rancher2/faq/kubectl/_index": "安装和配置 kubectl",
             "rancher2/faq/networking/_index": "网络问题",
             "rancher2/faq/technical/_index": "技术问题",
@@ -337,7 +385,7 @@ const metadata = {
             "k3s/installation/install-options/_index": "安装选项",
             "k3s/installation/network-options/_index": "网络选项",
             "k3s/installation/ha/_index": "使用外部数据库实现高可用",
-            "k3s/installation/ha-embedded/_index": "嵌入式DB的高可用（实验）",
+            "k3s/installation/ha-embedded/_index": "嵌入式DB的高可用",
             "k3s/installation/datastore/_index": "集群数据存储选项",
             "k3s/installation/private-registry/_index": "私有注册表配置",
             "k3s/installation/airgap/_index": "离线安装",
@@ -481,6 +529,18 @@ const metadata = {
             升级指南
              */
             "rancher1/upgrade/_index": "升级指南",
+        },
+        harvester: {
+            "harverster/_index": "产品介绍",
+            "harverster/authentication/_index": "认证",
+            "harverster/demo/_index": "视频教程",
+            "harverster/installation/_index": "概述",
+            "harverster/installation/app-mode/_index": "APP 模式",
+            "harverster/installation/iso-mode/_index": "ISO 模式",
+            "harverster/upload-images/_index": "上传镜像",
+            "harverster/vm-management/_index": "管理虚拟机",
+            "harverster/vm-management/create-vm/_index": "创建虚拟机",
+            "harverster/vm-management/access-vm/_index": "访问虚拟机",
         },
     },
 };

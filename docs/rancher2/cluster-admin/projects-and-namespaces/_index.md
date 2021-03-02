@@ -2,15 +2,15 @@
 title: 项目和命名空间
 description: 命名空间是 Kubernetes 的概念，它允许在集群中创建虚拟集群，这对于将集群划分为单独的“虚拟集群”非常有用，每个虚拟集群都有自己的访问控制和资源配额。项目是一组命名空间，是 Rancher 引入的一个概念。项目使您可以将多个命名空间作为一个组进行管理，并在其中执行 Kubernetes 操作。您可以使用项目来支持多租户，例如设置团队可以访问集群中的某个项目，但不能访问同一集群中的其他项目。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 集群访问控制
   - 项目和命名空间

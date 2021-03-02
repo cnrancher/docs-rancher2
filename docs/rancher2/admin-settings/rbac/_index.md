@@ -2,15 +2,15 @@
 title: 基于角色的访问控制
 description: 在 Rancher 中，每个人都以一个用户身份进行身份验证，它是授予您访问 Rancher 权限的登录名。如身份验证中所述，用户可以是本地用户，也可以是外部用户。配置外部身份验证后，在用户页面上显示的用户会发生变化。如果您以本地用户身份登录，则仅显示本地用户。如果您以外部用户身份登录，则同时显示外部用户和本地用户。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 系统管理员指南
   - 基于角色的访问控制
 ---

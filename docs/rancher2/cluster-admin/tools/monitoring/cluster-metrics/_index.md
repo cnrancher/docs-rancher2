@@ -61,7 +61,7 @@ Kubernetes 组件指标用于展示集群里各个 Kubernetes 组件的监控数
 
 > **注意：** 仅支持通过 [Rancher 安装的 Kubernetes 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)。
 
-当分析 Kubernetes 组件指标时，不能仅关注图表内的某时刻的单个独立指标。相反，您应该观察一段时间以确立"指标基准"，通过它们来观察异常的增量。这些增量通常表明集群可能存在问题，您需要进行调查。
+当分析 Kubernetes 组件指标时，不能仅关注 Chart 内的某时刻的单个独立指标。相反，您应该观察一段时间以确立"指标基准"，通过它们来观察异常的增量。这些增量通常表明集群可能存在问题，您需要进行调查。
 
 下面几个重要的组件指标需要做些说明：
 
@@ -75,7 +75,7 @@ Kubernetes 组件指标用于展示集群里各个 Kubernetes 组件的监控数
 
 - **Scheduler 抢占请求**
 
-  如果看到 Scheduler 抢占请求图表内出现高峰，则表明硬件资源已消耗完，Kubernetes 没有足够的资源来运行所有 Pod，只能优先处理更重要的 Pod。
+  如果看到 Scheduler 抢占请求 Chart 内出现高峰，则表明硬件资源已消耗完，Kubernetes 没有足够的资源来运行所有 Pod，只能优先处理更重要的 Pod。
 
 - **Pods 调度失败次数**
 

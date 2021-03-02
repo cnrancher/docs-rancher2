@@ -2,15 +2,15 @@
 title: 通过 Kubectl 管理 HPA
 description: 本节介绍了使用 `kubectl` 进行的 HPA 管理。本文档包含有关如何执行以下操作的说明
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 用户指南
   - Pod 弹性伸缩
   - 通过 Kubectl 管理 HPA
@@ -122,7 +122,7 @@ I1002 12:55:32.925630       1 heapster.go:101] Starting Heapster API server...
 I1002 12:55:32.928597       1 serve.go:85] Serving securely on 0.0.0.0:443
 ```
 
-如果您是在 Rancher v2.0.6 或更早版本中创建的集群，请参阅 [手动安装](#v207-之前的-rancher-的说明)
+如果您是在 Rancher v2.0.6 或更早版本中创建的集群，请参阅 [v2.0.7 之前的 Rancher 的说明](#v207-之前的-rancher-的说明)
 
 ## 配置 HPA 以使用 Prometheus 的自定义指标进行弹性扩缩容
 

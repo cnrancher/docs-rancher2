@@ -2,15 +2,15 @@
 title: 备份配置
 description: 通过 Backup Create 页面，您可以配置计划、启用加密和指定备份的存储位置。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 备份与恢复
   - rancher2.5
   - 备份配置
@@ -138,6 +138,12 @@ data:
   secretKey: <Enter your secret key>
 ```
 
+请运行以下代码，使用 base64 在 YAML 文件中对密钥进行加密：
+
+```
+echo -n "your_key" |base64
+```
+
 ### EC2 节点访问 S3 的 IAM 权限设置
 
 有两种方法可以设置`rancher-backup` operator 使用 S3 作为备份的存储位置。
@@ -175,4 +181,4 @@ data:
 
 ## 示例
 
-Backup 自定义资源，请参考[本页面](./../../examples/_index#备份)
+Backup 自定义资源，请参考[本页面](/docs/rancher2/backups/2.5/examples/_index)

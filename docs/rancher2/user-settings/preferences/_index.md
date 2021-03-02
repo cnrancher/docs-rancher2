@@ -2,15 +2,15 @@
 title: 用户偏好
 description: 每个用户都可以设置自己的用户偏好，按照自己的喜好调整 Rancher UI 界面。单击顶部菜单右侧的用户头像，选择设置，然后可以配置 UI 的主题、修改登录密码或修改页面显示的表格行数。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 用户设置
   - 用户偏好
 ---

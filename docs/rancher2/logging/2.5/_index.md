@@ -2,15 +2,15 @@
 title: Rancher v2.5 的日志功能
 description: 本文描述了日志功能在Rancher2.5中的变化，提供了启用和卸载日志的操作指导。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - rancher 2.5
   - 日志服务
   - Rancher v2.5 的日志功能
@@ -85,6 +85,8 @@ Rancher 日志记录有两个角色，`logging-admin`和`logging-view`。
 
 ## 示例
 
+### 将集群中的所有日志发送到 elasticsearch
+
 假设你想把集群中的所有日志发送到 elasticsearch 集群。
 
 首先让我们创建我们的集群输出。
@@ -116,6 +118,8 @@ spec:
   globalOutputRefs:
     - "example-es
 ```
+
+### 将集群中的所有日志发送到 splunk
 
 现在我们应该看到我们配置的索引，里面有日志。
 
@@ -268,6 +272,8 @@ spec:
 ```
 
 如果我们分解一下发生了什么，首先我们创建一个容器的部署，该容器有额外的 syslog 插件，并接受从另一个 fluentd 转发的日志。接下来，我们创建一个输出配置为我们的部署的转发者。然后，部署的 fluentd 会将所有日志转发到配置的 syslog 目的地。
+
+Rancher 官方的`syslog`支持将在 Rancher v2.5.4 中出现。然而，这个例子仍然提供了一个关于使用不支持的插件的概述。
 
 ## 污点和容忍度
 

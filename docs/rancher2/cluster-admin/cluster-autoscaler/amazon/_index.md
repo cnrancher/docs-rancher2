@@ -2,15 +2,15 @@
 title: 使用 AWS Auto Scaling 组进行集群弹性伸缩
 description: 本指南提供了使用 AWS EC2 自动伸缩组在 Rancher 自定义集群上安装和使用Kubernetes cluster-autoscaler的操作指导。我们将安装一个 Rancher RKE 自定义集群，其中有一个固定数量的节点，采用 etcd 和 controlplane 角色，还有一个可变的节点，采用 worker 角色，由cluster-autoscaler管理。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 集群弹性伸缩
   - 使用 AWS Auto Scaling 组进行集群弹性伸缩
@@ -150,7 +150,7 @@ keywords:
 
 - IAM 角色：`K8sMasterRole。[K8sMasterProfile,K8sAutoscalerProfile]`。
 
-  - 安全组：`K8sMasterSg`更多信息请见[RKE ports (custom nodes tab)](/docs/rancher2/installation/requirements/ports/_index)
+  - 安全组：`K8sMasterSg`更多信息请见[RKE ports (custom nodes tab)](/docs/rancher2/installation_new/requirements/ports/_index)
   - 标签：
     `kubernetes.io/cluster/<clusterID>: owned`。
   - 用户数据：`K8sMasterUserData`Ubuntu 18.04(ami-0e11cbb34015ff725)，安装 docker 并将 etcd+controlplane 节点添加到 k8s 集群中。- IAM 角色：`K8sMasterRole。[K8sMasterProfile,K8sAutoscalerProfile]`。
@@ -182,7 +182,7 @@ keywords:
 
 - IAM 角色：`K8sWorkerRole: [K8sWorkerProfile]`
 
-  - 安全组：`K8sWorkerSg` 更多信息请见 [RKE ports (custom nodes tab)](/docs/rancher2/installation/requirements/ports/_index)
+  - 安全组：`K8sWorkerSg` 更多信息请见 [RKE ports (custom nodes tab)](/docs/rancher2/installation_new/requirements/ports/_index)
   - 标签：
 
     - `kubernetes.io/cluster/<clusterID>: owned`
@@ -246,7 +246,7 @@ keywords:
 下表说明了用于微调的集群 cluster-autoscaler 参数：
 
 | 参数                                  | 默认值        | 描述                                                                                                                                        |
-| :------------------------------------ | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------ |
+| :------------------------------------ | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------ |
 | cluster-name                          | -             | 配置自动弹性伸缩的集群名称                                                                                                                  |
 | address                               | :8085         | 暴露 Prometheus 指标的地址                                                                                                                  |
 | kubernetes                            | -             | Kubernetes master 节点的位置，默认情况下不需要填写                                                                                          |
@@ -301,7 +301,7 @@ keywords:
 
 ## 部署
 
-基于[cluster-autoscaler-run-on-master.yaml](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/aws/examples/cluster-autoscaler-run-on-master.yaml)的例子，我们创建了自己的`cluster-autoscaler-deployment.yaml`，使用首选的[auto-discovery setup](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler/cloudprovider/aws#auto-discovery-setup)，更新容忍度、nodeSelector、镜像版本和命令配置。
+基于[cluster-autoscaler-run-on-master.yaml](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler/cloudprovider/aws/examples)的例子，我们创建了自己的`cluster-autoscaler-deployment.yaml`，使用首选的[auto-discovery setup](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler/cloudprovider/aws#auto-discovery-setup)，更新容忍度、nodeSelector、镜像版本和命令配置。
 
 ```yml
 ---

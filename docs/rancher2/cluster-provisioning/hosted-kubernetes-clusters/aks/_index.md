@@ -2,15 +2,15 @@
 title: 创建微软 AKS 集群
 description: 您可以使用 Rancher 创建一个托管在 Microsoft Azure Kubernetes Service (AKS) 中的集群。要与 Azure API 交互，AKS 集群需要 Azure 活动目录 （AD） 服务主体。需要服务主体来动态创建和管理其他 Azure 资源，它为您的集群提供了与 AKS 通信的凭证。有关服务主体的详细信息，请参阅AKS 文档。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 创建集群
   - 创建托管集群
   - 创建微软 AKS 集群
@@ -152,6 +152,8 @@ az ad sp create-for-rbac \
 
 **结果：**
 
-- 您的集群创建成功并进入到**Provisioning**（启动中）的状态。Rancher 正在拉起您的集群。
+- 您的集群创建成功并进入到**Provisioning**（启动中）的状态，Rancher 正在拉起您的集群。
 - 在集群状态变为**Active**（激活）状态后，您将可以开始访问您的集群。
-- 在**Active**的集群中，有两个默认项目：`Default`项目（包括`default`命名空间）和`System`项目（包括`cattle-system`、`ingress-nginx`、`kube-public` 和 `kube-system`）。
+- 在**Active**的集群中，有两个默认项目：
+  - `Default`项目（包括`default`命名空间）。
+  - `System`项目（包括`cattle-system`、`ingress-nginx`、`kube-public` 和 `kube-system`）。

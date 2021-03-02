@@ -2,15 +2,15 @@
 title: AD FS（SAML）
 description: 如果您的公司使用 Microsoft Active Directory Federation Services（AD FS）进行用户身份验证，则可以将 Rancher 配置为允许用户使用其 AD FS 凭据登录。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 系统管理员指南
   - 登录认证
   - AD FS（SAML）
@@ -37,8 +37,8 @@ _自 v2.0.7 版本起可用_
 
 使用 Rancher Server 设置 Microsoft AD FS 要求在 Active Directory 服务器上配置 AD FS，并配置 Rancher 来使用 AD FS 服务器。以下页面为在 Rancher 中设置 Microsoft AD FS 身份验证的指南。
 
-- [1、为 Rancher 配置 AD FS](/docs/rancher2/admin-settings/authentication/microsoft-adfs/microsoft-adfs-setup/_index)
-- [2、配置 Rancher 使用 AD FS](/docs/rancher2/admin-settings/authentication/microsoft-adfs/rancher-adfs-setup/_index)
+- [1. 为 Rancher 配置 AD FS](/docs/rancher2/admin-settings/authentication/microsoft-adfs/microsoft-adfs-setup/_index)
+- [2. 配置 Rancher 使用 AD FS](/docs/rancher2/admin-settings/authentication/microsoft-adfs/rancher-adfs-setup/_index)
 
 ## 后续操作
 

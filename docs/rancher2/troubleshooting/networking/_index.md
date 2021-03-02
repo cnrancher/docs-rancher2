@@ -2,15 +2,15 @@
 title: 网络
 description: 此页面上列出的命令/步骤可用于检查集群中与网络相关的问题。确保您配置了正确的 kubeconfig(例如，在使用 Rancher 高可用时，`export KUBECONFIG=$PWD/kube_config_rancher-cluster.yml`) 或者通过 Rancher UI 使用内嵌的 kubectl。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 常见故障排查
   - 网络
 ---
@@ -119,7 +119,7 @@ kubectl get nodes -o json | jq '.items[].metadata | select(.annotations["flannel
 
 已知问题 [GitHub #15146](https://github.com/rancher/rancher/issues/15146)。
 
-如果系统命名空间中的 Pod 无法与其他系统命名空间中的 Pod 通信，则需要按照[升级到 v2.0.7+ ：命名空间迁移](/docs/rancher2/upgrades/upgrades/namespace-migration/_index)描述的方式恢复连接。症状包括：
+如果系统命名空间中的 Pod 无法与其他系统命名空间中的 Pod 通信，则需要按照[升级到 v2.0.7+ ：命名空间迁移](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/namespace-migration/_index)描述的方式恢复连接。症状包括：
 
 - NGINX ingress controller 在访问时显示 `504 Gateway Time-out`。
 - NGINX ingress controller 访问时日志打印 `upstream timed out (110: Connection timed out) while connecting to upstream`。

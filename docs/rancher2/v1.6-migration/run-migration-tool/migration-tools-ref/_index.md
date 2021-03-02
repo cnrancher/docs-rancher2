@@ -2,15 +2,15 @@
 title: 迁移 CLI 工具指南
 description: 迁移工具 CLI 含有多种命令和选项，以帮助您从 Rancher v1.6 迁移到 Rancherv2.x。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 版本迁移
   - 迁移服务
   - 迁移 CLI 工具指南
@@ -51,7 +51,7 @@ migration-tools [global options] command [command options] [arguments...]
 | ---------------------- | ----- | --------------------------------------------------------------------------------------------------- |
 | `--url <VALUE>`        | ✓     | Rancher API 端点 URL (`<RANCHER_URL>`).                                                             |
 | `--access-key <VALUE>` | ✓     | Rancher API 访问密钥。使用帐户 API 密钥可导出所有 cattle 环境中的所有堆栈 (`<RANCHER_ACCESS_KEY>`). |
-| `--secret-key <VALUE>` | ✓     | 与访问密钥关联的 Rancher API 秘密密钥。(`<RANCHER_SECRET_KEY>`).                                    |
+| `--secret-key <VALUE>` | ✓     | 与访问密钥关联的 Rancher API 密钥密钥。(`<RANCHER_SECRET_KEY>`).                                    |
 | `--export-dir <VALUE>` |       | 组成文件导出到的基本目录，该目录在每个环境/堆栈创建的子目录下 (默认: `Export`).                     |
 | `--all`, `--a`         |       | 导出所有堆栈。使用此标志可以导出处于不活跃，已停止或正在移除状态的所有堆栈。                        |
 | `--system`, `--s`      |       | 导出系统和基础结构堆栈。                                                                            |

@@ -2,21 +2,27 @@
 title: Amazon EC2
 description: 使用 Rancher 在 Amazon EC2 中创建 Kubernetes 集群。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 创建集群
   - 创建节点和集群
   - Amazon EC2
 ---
 
-使用 Rancher 在 Amazon EC2 中创建 Kubernetes 集群。
+## 概述
+
+在本节中，您将学习如何使用 Rancher 在 Amazon EC2 中安装 RKE Kubernetes 集群。
+
+首先，您将在 Rancher 中设置您的 EC2 云凭证。然后，您将使用您的云凭证创建一个节点模板，Rancher 将使用该模板在 EC2 中配置新节点。
+
+然后您将在 Rancher 中创建一个 EC2 集群，在配置新集群时，您将为其定义节点池。每个节点池都会有一个 etcd、controlplane 或 worker 的 Kubernetes 角色。Rancher 将在新节点上安装 RKE Kubernetes，它将用节点池定义的 Kubernetes 角色来设置每个节点。
 
 ## 先决条件
 
@@ -191,7 +197,8 @@ keywords:
         "ec2:CreateKeyPair",
         "ec2:CreateSecurityGroup",
         "ec2:CreateTags",
-        "ec2:DeleteKeyPair"
+        "ec2:DeleteKeyPair",
+        "ec2:ModifyInstanceMetadataOptions"
       ],
       "Resource": "*"
     },
@@ -241,7 +248,8 @@ keywords:
         "ec2:CreateKeyPair",
         "ec2:CreateSecurityGroup",
         "ec2:CreateTags",
-        "ec2:DeleteKeyPair"
+        "ec2:DeleteKeyPair",
+        "ec2:ModifyInstanceMetadataOptions"
       ],
       "Resource": "*"
     },

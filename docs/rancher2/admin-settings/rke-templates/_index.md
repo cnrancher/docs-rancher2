@@ -2,15 +2,15 @@
 title: 功能介绍
 description: RKE 的全称是Rancher Kubernetes Engine，它是 Rancher 用来创建 Kubernetes 集群的工具。RKE 集群模板制定了 DevOps 和安全团队的标准，简化了 Kubernetes 集群的创建过程。多集群管理面临着如何强制实施安全策略和附加配置的挑战，在将集群移交给最终用户之前，管理员需要标准化这些配置。RKE 集群模板提供了标准化集群配置的方式。无论是使用 Rancher UI、Rancher API 还是自动化流程创建的集群，Rancher 都将保证从 RKE 集群模板创建的每个集群在生成方式上是一致的。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 系统管理员指南
   - RKE模板
 ---

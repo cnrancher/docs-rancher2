@@ -2,15 +2,15 @@
 title: 关于规模，安全，可靠性的建议
 description: Rancher 允许您设置许多配置组合。有些配置更适合于开发和测试，而对于生产环境，还有其他一些最佳实践可以获得最大的可用性和容错能力。生产应该遵循以下最佳实践。这些建议可以帮助您在问题发生之前解决它们。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 最佳实践
   - 关于规模，安全，可靠性的建议
 ---
@@ -23,7 +23,7 @@ Rancher 允许您设置许多配置组合，有些配置适用于开发和测试
 
 ### 在支持的 OS 和 Docker 版本上运行 Rancher
 
-Rancher 是基于容器的，可以在任何基于 linux 的操作系统上运行。但是，您应该只在[需求文档](/docs/rancher2/installation/requirements/_index)中列出的操作系统以及支持的 Docker 版本上运行 Rancher。这些版本经过了最彻底的测试，可以得到 Rancher Support 团队的支持。
+Rancher 是基于容器的，可以在任何基于 linux 的操作系统上运行。但是，您应该只在[需求文档](/docs/rancher2/installation_new/requirements/_index)中列出的操作系统以及支持的 Docker 版本上运行 Rancher。这些版本经过了最彻底的测试，可以得到 Rancher Support 团队的支持。
 
 ### 升级 Kubernetes 版本
 

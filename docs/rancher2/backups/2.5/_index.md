@@ -2,15 +2,15 @@
 title: Rancher v2.5中的备份和恢复
 description: description
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 备份和恢复
   - Rancher v2.5中的备份和恢复
 ---
@@ -93,7 +93,7 @@ helm install rancher-backup rancher-charts/rancher-backup -n cattle-resources-sy
 
 ### RBAC
 
-只有 rancher 管理员，和本地集群的集群所有者具有以下权限：
+只有 rancher 管理员和本地集群的集群所有者具有以下权限：
 
 - 安装 Chart
 - 参阅导航链接，了解备份和恢复 CRD。

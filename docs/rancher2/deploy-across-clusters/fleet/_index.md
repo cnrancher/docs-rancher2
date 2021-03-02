@@ -2,15 +2,15 @@
 title: Fleet 介绍
 description: Fleet 是轻量级的集群管理工具，您可以使用 Fleet 管理多达一百万个集群。Fleet 是一个独立于 Rancher 的项目，可以用 Helm 安装在任何 Kubernetes 集群上。Fleet 可以从 git 管理原始 Kubernetes YAML、Helm chart 或 Kustomize 或三者的任意组合的部署。无论来源如何，所有的资源都会被动态地转化为 Helm chart，并以 Helm 作为引擎，来实现部署集群中的一切。这给了一个高度的控制，一致性和可审计性。Fleet 不仅关注于扩展能力，还关注于给人高度的控制和可视性，以确切地了解集群上安装了什么。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 跨集群部署应用
   - Fleet
 ---

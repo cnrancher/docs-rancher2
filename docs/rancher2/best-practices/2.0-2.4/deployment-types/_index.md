@@ -2,15 +2,15 @@
 title: 运行 Rancher 的建议
 description: 运行在多个节点上的多个 Rancher 实例确保了单节点环境无法实现的高可用性，所以在生产环境或者一些很重要的环境中部署 Rancher 时，应该使用至少有三个节点的高可用 Kubernetes 集群，并在这个集群上面安装 Rancher。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 最佳实践
   - 运行 Rancher 的建议
 ---
@@ -29,7 +29,7 @@ keywords:
 
 ## 确保 Kubernetes 的节点配置正确
 
-当您部署节点时需要遵循 Kubernetes 和 etcd 最佳实践，比如：禁用 swap、反复检查集群中的所有机器之间的网络连接、使用唯一的主机名、使用唯一的 MAC 地址、使用唯一的 product_uuids、检查所有需要的端口被打开，部署使用 ssd 的 etcd。更多的细节可以在 [Kubernetes 文档](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm) 和 [etcd 的性能操作指南](https://github.com/etcd-io/etcd/blob/master/Documentation/op-guide/performance.md) 中找到。
+当您部署节点时需要遵循 Kubernetes 和 etcd 最佳实践，比如：禁用 swap、反复检查集群中的所有机器之间的网络连接、使用唯一的主机名、使用唯一的 MAC 地址、使用唯一的 product_uuids、检查所有需要的端口被打开，部署使用 ssd 的 etcd。更多的细节可以在 [Kubernetes 文档](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm) 和 [etcd 的性能操作指南](https://github.com/etcd-io/website/blob/master/content/docs/current/op-guide/performance.md) 中找到。
 
 ## 使用 RKE 备份状态文件
 
@@ -49,7 +49,7 @@ keywords:
 
 ## 监视集群以计划容量
 
-Rancher Server 的 Local Kubernetes 集群应该尽可能符合[系统和硬件需求](/docs/rancher2/installation/requirements/_index)。您越偏离系统和硬件需求，您承担的风险就越大。
+Rancher Server 的 Local Kubernetes 集群应该尽可能符合[系统和硬件需求](/docs/rancher2/installation_new/requirements/_index)。您越偏离系统和硬件需求，您承担的风险就越大。
 
 但是，基于指标的容量规划分析应该是扩展 Rancher 的最终指导，因为我们发布的需求建议考虑了各种工作负载类型。
 

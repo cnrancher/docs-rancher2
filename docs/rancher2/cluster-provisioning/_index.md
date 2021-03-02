@@ -2,15 +2,15 @@
 title: 创建集群的几种方式
 description: 创建集群的步骤通常是复杂而繁琐的，用户需要输入多个配置参数才可以完成集群创建。Rancher 创建集群的过程则非常简单快捷，您只需要通过 Rancher UI 界面，填写一些简单的的参数即可创建集群。而且 Rancher 支持的集群种类繁多，包括云供应商托管的 Kubernetes 集群、RKE 集群、基础设施提供商创建节点并创建 Kubernetes 集群、在自定义节点上创建 Kubernetes 集群、导入现有 Kubernetes 集群和导入 K3s 集群。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 创建集群
   - 创建集群的几种方式
 ---
@@ -107,3 +107,15 @@ _自 Rancher v2.4.0 起可用_
 - 在 UI 中查看（只读）集群中每个节点的 K3s 配置参数和环境变量。
 
 有关更多信息，请参阅[导入现有 K3s 集群](/docs/rancher2/cluster-provisioning/imported-clusters/_index)一节。
+
+## 登记现有的集群
+
+_从 v2.5.0 起可用_
+
+集群注册功能取代了导入集群的功能。
+
+注册 EKS 集群现在提供了额外的好处。在大多数情况下，注册的 EKS 集群和在 Rancher 中创建的 EKS 集群在 Rancher UI 中的处理方式是一样的，除了删除。
+
+当您删除在 Rancher 中创建的 EKS 集群时，该集群将被销毁。当您删除在 Rancher 中注册的 EKS 集群时，它将与 Rancher 服务器断开连接，但它仍然存在，您仍然可以以在 Rancher 中注册之前的方式访问它。
+
+有关更多信息，请参阅[本页。](/docs/rancher2/cluster-provisioning/registered-clusters/_index)。

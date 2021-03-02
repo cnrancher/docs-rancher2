@@ -2,15 +2,15 @@
 title: 创建 Windows 集群
 description: 当使用 Rancher 初始化一个[自定义集群](/docs/rancher2/cluster-provisioning/rke-clusters/custom-nodes/_index)时，Rancher 会在您的基础设施上，使用 RKE（Rancher Kubernetes Engine）进行 Kubernetes 集群初始化。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 创建集群
   - 创建RKE集群
   - Windows 集群
@@ -71,7 +71,7 @@ _从 v2.3.0 开始支持_
 
 ### 网络要求
 
-在配置新集群之前，请确保已经安装了 Rancher。并且确保节点可以与 Rancher 通信。如果尚未安装 Rancher，请参考[安装文档](/docs/rancher2/installation/_index)进行安装。
+在配置新集群之前，请确保已经安装了 Rancher。并且确保节点可以与 Rancher 通信。如果尚未安装 Rancher，请参考[安装文档](/docs/rancher2/installation_new/_index)进行安装。
 
 Rancher 仅支持在 Windows 集群中使用 Flannel 作为网络插件。
 

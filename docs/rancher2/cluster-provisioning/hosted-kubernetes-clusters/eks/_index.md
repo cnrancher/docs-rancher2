@@ -2,15 +2,15 @@
 title: 创建亚马逊 EKS 集群
 description: Amazon EKS 为 Kubernetes 集群提供了一个托管的control-plane。为了确保高可用性，Amazon EKS 中的 Kubernetes control-plane实例运行在多个可用区。Rancher 为部署和管理 Amazon EKS 中运行的 Kubernetes 集群提供了直观的用户界面。通过本指南，您将使用 Rancher 在您的 AWS 帐户中快速轻松地启动 Amazon EKS Kubernetes 集群。有关 Amazon EKS 的更多信息，参考EKS文档。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 创建集群
   - 创建托管集群
   - 创建亚马逊 EKS 集群
@@ -66,7 +66,7 @@ Rancher 需要访问您的 AWS 帐户，以便在 Amazon EKS 中创建和管理�
    - 单击**添加成员**将需要访问这个集群的用户添加到成员中。
    - 在**角色**下拉菜单中选择每个用户的权限。
 
-1. 为 EKS 集群配置**账户访问**。
+1. 为 EKS 集群配置**账户权限**。
 
    | 设置       | 描述                                         |
    | ---------- | -------------------------------------------- |
@@ -78,8 +78,8 @@ Rancher 需要访问您的 AWS 帐户，以便在 Amazon EKS 中创建和管理�
 
    | 服务角色                       | 描述                                                                                                                                                                                                                                                |
    | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | 标准: Rancher 生成的服务角色。 | 如果选择此角色，Rancher 会自动添加一个服务角色以用于集群。                                                                                                                                                                                          |
-   | 自定义: 从现有服务角色中选择。 | 如果您选择此角色，Rancher 允许您从已经在 AWS 中创建的服务角色中进行选择。有关在 AWS 中创建自定义服务角色的详细信息，参考[亚马逊文档](https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html#create-service-linked-role)。 |
+   | 标准：Rancher 生成的服务角色。 | 如果选择此角色，Rancher 会自动添加一个服务角色以用于集群。                                                                                                                                                                                          |
+   | 自定义：从现有服务角色中选择。 | 如果您选择此角色，Rancher 允许您从已经在 AWS 中创建的服务角色中进行选择。有关在 AWS 中创建自定义服务角色的详细信息，参考[亚马逊文档](https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html#create-service-linked-role)。 |
 
 1. 单击 **下一步: 选择 VPC 和 Subnet**。
 

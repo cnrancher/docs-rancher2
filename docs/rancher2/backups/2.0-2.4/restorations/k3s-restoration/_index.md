@@ -2,15 +2,15 @@
 title: K3s Rancher 高可用恢复
 description: 当将 Rancher 安装在高可用 Kubernetes 集群上时，我们建议使用外部数据库存储集群数据。数据库管理员将需要备份外部数据库，并在需要时从快照或 dump 中还原它。我们建议定期对数据库进行快照拍摄。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 备份和恢复指南
   - 恢复
   - K3s Rancher 高可用恢复
@@ -28,4 +28,4 @@ keywords:
 
 - [MySQL 官方文档](https://dev.mysql.com/doc/refman/8.0/en/replication-snapshot-method.html)
 - [PostgreSQL 官方文档](https://www.postgresql.org/docs/8.3/backup-dump.html)
-- [官方 etcd 文档](https://github.com/etcd-io/etcd/blob/master/Documentation/op-guide/recovery.md)
+- [官方 etcd 文档](https://github.com/etcd-io/website/blob/master/content/docs/current/op-guide/recovery.md)

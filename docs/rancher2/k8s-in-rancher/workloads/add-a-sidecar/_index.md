@@ -2,15 +2,15 @@
 title: 添加 Sidecar
 description: Sidecar是在 Pod 中延伸或增强主容器的容器。主容器和Sidecar共享一个Pod，因此共享相同的网络空间和存储空间。您可以使用添加Sidecar选项将Sidecar添加到现有的工作负载中。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 用户指南
   - 工作负载
   - 添加 Sidecar

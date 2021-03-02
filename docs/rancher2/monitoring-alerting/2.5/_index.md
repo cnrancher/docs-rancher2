@@ -2,24 +2,28 @@
 title: 监控和告警-v2.5
 description: description
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 监控和告警
   - rancher2.5
 ---
 
 ## 概述
 
-使用 Rancher，您可以在您的集群上快速部署领先的开源监控和警报解决方案，如 [Prometheus](https://prometheus.io/)、[Alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/)和 [Grafana](https://grafana.com/docs/grafana/latest/getting-started/)。
+使用 Rancher，您可以在您的集群上快速部署领先的开源监控和告警解决方案。
 
 Rancher 的解决方案（由[Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator)提供支持）允许用户：
+
+Rancher v2.5 中引入的 `rancher-monitoring`operator 由[Prometheus](https://prometheus.io/)、[Grafana](https://grafana.com/grafana/)、[Alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/)、[Prometheus 操作员](https://github.com/prometheus-operator/prometheus-operator)和[Prometheus 适配器](https://github.com/DirectXMan12/k8s-prometheus-adapter)驱动。
+
+Rancher 的解控和告警解决方案允许用户执行以下操作：
 
 - 通过[Prometheus](https://prometheus.io/)，监控您的集群节点、Kubernetes 组件和软件部署的状态和进程。
 
@@ -33,9 +37,7 @@ Rancher 的解决方案（由[Prometheus Operator](https://github.com/prometheus
 
 - 通过[Prometheus Adapter](https://github.com/DirectXMan12/k8s-prometheus-adapter)将从 Prometheus 收集到的指标暴露给 Kubernetes Custom Metrics API，以便在 HPA 中使用（仅在 2.5 中可用）。
 
-关于部署到集群上以支持该解决方案的资源的更多信息，可以在 [`rancher-monitoring`](https://github.com/rancher/charts/tree/main/charts/rancher-monitoring) Helm 图表中找到，该图表密切跟踪 Prometheus 社区维护的上游 [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) Helm 图表，并在 [CHANGELOG.md](https://github.com/rancher/charts/blob/main/charts/rancher-monitoring/CHANGELOG.md) 中跟踪某些变化。
-
-本页介绍了如何使用 Rancher v2.5 中引入的新监控应用程序在集群中启用监控和警报。
+关于部署到集群上以支持该解决方案的资源的更多信息，可以在 [`rancher-monitoring`](https://github.com/rancher/charts/tree/main/charts/rancher-monitoring) Helm Chart 中找到，该 Chart 密切跟踪 Prometheus 社区维护的上游 [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) Helm Chart，并在 [CHANGELOG.md](https://github.com/rancher/charts/blob/main/charts/rancher-monitoring/CHANGELOG.md) 中跟踪某些变化。
 
 如果您在 v2.5 之前在 Rancher 中启用了监控、警报或通知器，则没有升级路径可以切换到新的监控/警报解决方案。在通过集群资源管理器部署新的监控解决方案之前，您需要在集群管理器中禁用监控/警报/通知器。
 
@@ -43,11 +45,7 @@ Rancher 的解决方案（由[Prometheus Operator](https://github.com/prometheus
 
 启用监控之前，请务必确认[配置资源限额和资源需求](#配置资源限额和资源需求)中的默认值是所需的最小资源限制和请求。
 
-## 监控组件介绍
-
-`rancher-monitoring` operator 由 Prometheus、Grafana、Alertmanager、Prometheus 操作员和 Prometheus 适配器提供动力。
-
-### 关于 Prometheus
+## 关于 Prometheus
 
 Prometheus 提供了你的数据的时间序列，根据[Prometheus](https://prometheus.io/docs/concepts/data_model/)
 
@@ -56,10 +54,6 @@ Prometheus 提供了你的数据的时间序列，根据[Prometheus](https://pro
 Prometheus 让您可以查看来自不同 Rancher 和 Kubernetes 对象的度量。使用时间戳，Prometheus 让您可以通过 Rancher UI 或 Grafana（与 Prometheus 一起部署的分析查看平台）以易于阅读的图形和可视化方式查询和查看这些指标。
 
 通过查看 Prometheus 从集群 control-plane、节点和部署中抓取的数据，您可以随时了解集群中发生的一切。然后，您可以使用这些分析来更好地运行您的组织：在系统紧急情况开始之前阻止它们，制定维护策略，恢复崩溃的服务器等。
-
-### 关于 Grafana
-
-[Grafana](https://grafana.com/grafana/)允许您查询、可视化、提醒和了解您的指标，无论它们存储在哪里。与您的团队一起创建、探索和共享仪表盘，培养数据驱动的文化。
 
 ## 启用 Monitoring
 
@@ -77,7 +71,7 @@ Prometheus 让您可以查看来自不同 Rancher 和 Kubernetes 对象的度量
 1. 在 Rancher UI 中，进入要安装监控的集群，然后单击**集群资源管理器**。
 1. 单击**应用程序**。
 1. 单击`rancher-monitoring`应用程序。
-1. （可选）单击**图表选项**，配置警报、Prometheus 和 Grafana。如需帮助，请参阅[配置参考](/docs/rancher2/monitoring-alerting/2.5/configuration/_index)
+1. （可选）单击**Chart 选项**，配置警报、Prometheus 和 Grafana。如需帮助，请参阅[配置参考](/docs/rancher2/monitoring-alerting/2.5/configuration/_index)
 1. 滚动到 Helm chart README 底部，单击**安装**。
 
 **结果：**监控应用部署在`cattle-monitoring-system`命名空间中。
@@ -98,13 +92,15 @@ Prometheus 让您可以查看来自不同 Rancher 和 Kubernetes 对象的度量
 
 ## 使用监控
 
-安装 "rancher-monitoring "后，在 Rancher 用户界面中可以使用以下仪表盘。
+安装 `rancher-monitoring`后，在 Rancher 用户界面中可以使用以下仪表盘。
 
 ### Grafana UI
 
+[Grafana](https://grafana.com/grafana/)允许您查询、可视化、提醒和了解您的指标，无论它们存储在哪里。与您的团队一起创建、探索和共享仪表盘，培养数据驱动的文化。
+
 Rancher 允许任何通过 Kubernetes 认证并能够访问 Rancher 监控图部署的 Grafana 服务的用户通过 Rancher Dashboard UI 访问 Grafana。默认情况下，所有能够访问 Grafana 的用户都被赋予[Viewer](https://grafana.com/docs/grafana/latest/permissions/organization_roles/#viewer-role)角色，允许他们查看 Rancher 部署的任何默认仪表板。
 
-但是，如果有必要，用户可以选择以[Admin](https://grafana.com/docs/grafana/latest/permissions/organization_roles/#admin-role)的身份登录 Grafana。Grafana 实例的默认 Admin 用户名和密码将是`admin`/`prom-operator`，但也可以在部署或升级图表时提供其他凭证。
+但是，如果有必要，用户可以选择以[Admin](https://grafana.com/docs/grafana/latest/permissions/organization_roles/#admin-role)的身份登录 Grafana。Grafana 实例的默认 Admin 用户名和密码将是`admin`/`prom-operator`，但也可以在部署或升级 Chart 时提供其他凭证。
 
 要查看 Grafana 用户界面，安装`rancher-monitoring`。然后进入**群资源管理器.**在左上角，单击**群资源管理器>监控**然后单击 Grafana。
 
@@ -164,7 +160,7 @@ Alertmanager 处理客户端应用程序（如 Prometheus 服务器）发送的�
 
 资源请求和限制可以在安装`rancher-monitoring`时进行配置。
 
-默认值在`rancher-monitoring`Helm 图表的[values.yaml](https://github.com/rancher/charts/blob/main/charts/rancher-monitoring/values.yaml)中。
+默认值在`rancher-monitoring`Helm Chart 的[values.yaml](https://github.com/rancher/charts/blob/main/charts/rancher-monitoring/values.yaml)中。
 
 下表中的默认值是最小的资源限制和请求。
 

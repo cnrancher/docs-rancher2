@@ -2,15 +2,15 @@
 title: 推荐的集群架构
 description: 有三个角色可以分配给节点：`etcd`，`controlplane`和`worker`。在设计集群时，您有两个选择，为每个角色使用专用节点。这可确保指定角色所需的组件的资源可用性；将`etcd`和`controlplane`角色分配给相同的节点。这些节点必须满足这两个角色的硬件需求。无论在哪种情况下，都不应该把`worker`角色，添加到具有 `etcd` 或 `controlplane` 角色的节点中。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 创建集群
   - 生产环境检查清单
   - 推荐的集群架构
@@ -75,7 +75,7 @@ keywords:
 
 ### 为什么对生产环境的 Rancher 集群和下游集群有着不通的要求？
 
-您可能已经注意到，我们的[Rancehr Server 高可用安装指南](/docs/rancher2/installation/k8s-install/_index)并不符合我们对生产就绪集群的定义。因为没有专用的节点作为`worker`节点。但是，对于 Rancehr Server 的部署，这三个节点的集群是有效的，因为：
+您可能已经注意到，我们的[Rancehr Server 高可用安装指南](/docs/rancher2/installation_new/install-rancher-on-k8s/_index)并不符合我们对生产就绪集群的定义。因为没有专用的节点作为`worker`节点。但是，对于 Rancehr Server 的部署，这三个节点的集群是有效的，因为：
 
 - 它允许一个`etcd`节点失败。
 - 它通过拥有多个`controlplane`节点来维护 master 组件的多个实例。

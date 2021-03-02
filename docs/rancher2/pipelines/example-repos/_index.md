@@ -2,15 +2,15 @@
 title: 示例代码库
 description: Rancher 附带了几个示例代码库，您可以使用它们来熟悉流水线（Pipeline）。在生产环境使用您自己的代码库之前，我们建议您先使用下面的示例代码库来进行配置和测试。您可以把这个示例代码库作为一个配置沙箱，用来进行构建演示等。Rancher 包括以下示例代码库。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 用户指南
   - 流水线
   - 示例代码库

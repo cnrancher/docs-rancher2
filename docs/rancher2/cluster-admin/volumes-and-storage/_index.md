@@ -2,15 +2,15 @@
 title: 持久化存储
 description: 在部署需要保留数据的应用程序时，您需要创建永久性存储。持久化存储允许您将应用程序数据存储在运行应用程序的 Pod 外部。即使应用程序的 Pod 发生故障，这种存储方法也可以使您维护应用程序数据。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 存储卷和存储类
   - 持久化存储

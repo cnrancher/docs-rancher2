@@ -2,15 +2,15 @@
 title: 应用市场
 description: description
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - rancher 2.5
   - Helm Charts
   - 应用市场
@@ -26,13 +26,13 @@ _适用于 Rancher v2.5+_
 
 ## Charts
 
-从左上角菜单中选择**应用市场**，进入图表页面。
+从左上角菜单中选择**应用市场**，进入 Chart 页面。
 
-图表页面包含所有 Rancher、合作伙伴和自定义 Chart。
+Chart 页面包含所有 Rancher、合作伙伴和自定义 Chart。
 
 - Rancher 工具，如日志或监控，都包含在 Rancher 标签下。
-- 合作伙伴图表位于合作伙伴标签下
-- 自定义图表将显示在版本库的名称下。
+- 合作伙伴 Chart 位于合作伙伴标签下
+- 自定义 Chart 将显示在版本库的名称下。
 
 这三种类型都是以相同的方式部署和管理的。
 
@@ -44,7 +44,7 @@ _适用于 Rancher v2.5+_
 
 ## Helm 兼容性
 
-Cluster Explorer 只支持 Helm 3 兼容的图表。
+Cluster Explorer 只支持 Helm 3 兼容的 Chart。
 
 ## 部署和升级
 

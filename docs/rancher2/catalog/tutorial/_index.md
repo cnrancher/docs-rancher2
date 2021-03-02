@@ -2,15 +2,15 @@
 title: 教程：创建应用的示例
 description: 在本教程中，您将学习如何创建 Helm Chart 并将其推送到仓库。该仓库可用作 Rancher 中自定义应用商店的源。您可以把 Helm Chart 或 Rancher Chart 添加到应用商店里，但是我们建议使用 Rancher Chart，因为它们的用户体验更好。有关开发 Chart 的完整步骤，请参阅Helm Chart开发人员参考。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 应用商店
   - 创建应用的示例
   - 示例

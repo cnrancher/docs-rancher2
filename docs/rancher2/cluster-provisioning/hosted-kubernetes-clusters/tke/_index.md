@@ -2,15 +2,15 @@
 title: 创建腾讯 TKE 集群
 description: 您可以使用 Rancher 创建一个托管于 Tencent Kubernetes Engine（TKE）中的集群。Rancher 已经为 TKE 实现并打包了针对 TKE 的集群驱动，但是默认情况下，这个集群驱动是`未启用的`。为了启动 TKE 集群，您需要先启用 TKE 集群驱动程序。启用集群驱动后，可以开始配置 TKE 集群。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 创建集群
   - 创建托管集群
   - 创建腾讯 TKE 集群
@@ -20,7 +20,7 @@ _从 v2.2.0 开始可用_
 
 您可以使用 Rancher 创建一个托管于 Tencent Kubernetes Engine（TKE）中的集群。Rancher 已经为 TKE 实现并打包了针对 TKE 的[集群驱动](/docs/rancher2/admin-settings/drivers/cluster-drivers/_index)，但是默认情况下，这个集群驱动是`未启用的`。为了启动 TKE 集群，您需要先[启用 TKE 集群驱动程序](/docs/rancher2/admin-settings/drivers/cluster-drivers/_index)。启用集群驱动后，可以开始配置 TKE 集群。
 
-### 先决条件
+## 先决条件
 
 > **注意**
 > 创建腾讯 TKE 集群会产生费用。
@@ -33,7 +33,7 @@ _从 v2.2.0 开始可用_
 
 1. 创建[SSH 密钥对](https://cloud.tencent.com/document/product/213/6092)，此密钥用于访问 Kubernetes 集群中的节点。
 
-### 创建 TKE 集群
+## 创建 TKE 集群
 
 1. 从 **集群** 页面，单击 **添加集群**。
 
@@ -46,7 +46,7 @@ _从 v2.2.0 开始可用_
    - 单击**添加成员**将需要访问这个集群的用户添加到成员中。
    - 在**角色**下拉菜单中选择每个用户的权限。
 
-1. 为 TKE 集群配置**帐户访问**。使用[先决条件](#先决条件)中获得的信息完成每个下拉列表和字段。
+1. 为 TKE 集群配置**帐户权限**。使用先决条件中获得的信息完成每个下拉列表和字段。
 
    | 选项       | 描述                                         |
    | :--------- | :------------------------------------------- |

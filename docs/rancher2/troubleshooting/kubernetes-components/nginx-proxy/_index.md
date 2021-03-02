@@ -2,15 +2,15 @@
 title: NGINX 代理问题排查
 description: nginx-proxy 容器部署在除了controlplane角色的所有节点上。他通过动态生成 NGINX 的配置，从而提供对controlplane角色节点的访问。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 常见故障排查
   - Kubernetes组件
   - NGINX 代理问题排查

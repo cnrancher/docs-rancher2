@@ -2,15 +2,15 @@
 title: CIS 扫描
 description: description
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - CIS 扫描
   - rancher 2.5
 ---
@@ -25,11 +25,15 @@ Rancher 可以运行安全扫描，检查 Kubernetes 是否按照 CIS Kubernetes
 
 在 Rancher v2.4 中，CIS 扫描工具可在 Rancher UI 中的**集群管理器**中使用。现在，它在**集群资源管理器**中可用，并且可以使用 Helm 图启用和部署。它可以从 Rancher UI 中安装，但也可以独立于 Rancher 安装。它为集群部署 CIS 扫描操作员，并为集群扫描部署 Kubernetes 自定义资源。自定义资源可以直接从集群资源管理器中进行管理。
 
-在 Rancher v2.4 中通过集群管理器提供的 CIS 扫描工具的 v1 版本中，可以调度重复扫描。在 Rancher v2.5 中，还不能使用调度重复扫描的功能。
+在 Rancher v2.4 通过集群管理器提供的 CIS 扫描工具 v1 中，可以重复扫描。现在，从 Rancher v2.5.4 开始，CIS v2 也具备了重复扫描的功能。
 
-Rancher v2.5 中尚未提供对集群扫描结果的警报支持。
+Rancher v2.5 提供对集群扫描结果的警报。
 
-增加了更多测试配置文件。在 Rancher v2.4 中，包含了允许的和加固的配置文件。在 Rancher v2.5 中，提供了以下配置文件。
+### Rancher v2.5 允许的和加固的配置文件
+
+在 Rancher v2.4 中，包含了允许的和加固的配置文件。在 Rancher v2.5.0-v2.5.3 和 v2.5.4 中，包含了更多的配置文件。
+
+#### v2.5.0-v2.5.3
 
 - Generic CIS 1.5
 - RKE permissive
@@ -37,16 +41,42 @@ Rancher v2.5 中尚未提供对集群扫描结果的警报支持。
 - EKS
 - GKE
 
+#### v2.5.4
+
+- Generic CIS 1.5
+- Generic CIS 1.6
+- RKE permissive 1.5
+- RKE hardened 1.5
+- RKE permissive 1.6
+- RKE hardened 1.6
+- EKS
+- GKE
+- RKE2 permissive 1.5
+- RKE2 permissive 1.5
+
+### Rancher v2.5 默认配置文件
+
 默认配置文件取决于要扫描的集群类型。
+
+#### v2.5.0-v2.5.3
+
+`rancher-sis-benchmark`目前支持 CIS 1.5 基准版本。
 
 - 对于 RKE Kubernetes 集群，RKE 允许的配置文件是默认的。
 - EKS 和 GKE 有自己的 CIS 基准，由`kube-bench`发布。这些集群默认使用相应的测试配置文件。
 - 对于 RKE、EKS 和 GKE 以外的集群类型，默认使用通用 CIS 1.5 配置文件。
 
-`rancher-sis-benchmark`目前支持 CIS 1.5 基准版本。
+#### v2.5.4
+
+`rancher-sis-benchmark`目前支持 CIS 1.6 基准版本。
+
+- 对于 RKE Kubernetes 集群，RKE 允许的配置文件是 1.6。
+- EKS 和 GKE 有自己的 CIS 基准，由 kube-bench 发布。这些集群默认使用相应的测试配置文件。
+- 对于 RKE2 Kubernetes 集群，默认使用 RKE2 Permissive 1.5 配置文件。
+- 对于 RKE、RKE2、EKS 和 GKE 以外的集群类型，默认使用通用 CIS 1.5 配置文件。
 
 :::note 注意
-部署 CIS v2 时，CIS v1 不能在集群上运行。换句话说，安装了 "rancher-cis-benchmark "后，进入 Rancher UI 中的集群管理视图，单击工**具 > CIS 扫描**，就不能运行扫描了。
+部署 CIS v2 时，CIS v1 不能在集群上运行。也就是说，安装了`rancher-sis-benchmark`后，进入 Rancher UI 中的集群管理视图，单击**工具 > CIS 扫描**，就不能运行扫描了。
 :::
 
 ## 关于 CIS 基准
@@ -134,7 +164,7 @@ CIS 基准是目标系统安全配置的最佳实践。CIS 基准是由主题专
 
 ## 关于生成的报告
 
-E 扫描生成的报告可以在 Rancher 用户界面中查看，也可以以 CSV 格式下载。
+扫描生成的报告可以在 Rancher 用户界面中查看，也可以以 CSV 格式下载。
 
 在 Rancher v2.5 中，扫描将使用 CIS Benchmark v1.5。基准版本包含在生成的报告中。
 

@@ -2,15 +2,15 @@
 title: Rancher管理集群的最佳实践
 description: 本文提供了日志、监控、设置容器的集群以及 Rancher 托管 vSphere 集群的最佳实践。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - rancher2.0 中文教程
   - 最佳实践
   - Rancher管理集群的最佳实践

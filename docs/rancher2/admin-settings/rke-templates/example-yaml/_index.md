@@ -2,15 +2,15 @@
 title: YAML 示例
 description: 下面是一个示例 RKE 模板配置文件供参考。RKE 模板中的 YAML 使用与创建 RKE 集群时相同的自定义项。但是，由于 YAML 是在 Rancher 创建的 RKE 集群的上下文中使用，因此来自 RKE 文档的设置需要嵌套在`rancher_kubernetes_engine_config`指令下。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 系统管理员指南
   - RKE模板
   - YAML 示例

@@ -2,15 +2,15 @@
 title: 迁移到Rancher v2.5监控
 description: 如果您在 Rancher v2.5 之前曾在 Rancher 中启用过监控、告警或通知器，则没有自动升级路径来切换到新的监控/告警解决方案。在通过 Cluster Explore 部署新的监控解决方案之前，您需要禁用和删除整个集群和所有项目中所有现有的自定义告警、通知器和监控安装。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - rancher 2.5
   - 监控和告警
   - 迁移到Rancher v2.5监控
@@ -34,7 +34,7 @@ Monitoring V1 可以在集群级别和项目级别上配置，并将自动拉取
 
 从 v2.5.0 开始，Rancher 的集群浏览器现在允许用户在集群内同时启用 Monitoring & Alerting V2（均由[Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator)提供支持）。
 
-与 Monitoring & Alerting V1 不同的是，这两个功能都打包在一个单一的 Helm 图表中，可以在[这里](https://github.com/rancher/charts/blob/main/charts/rancher-monitoring)找到。该图表和可配置字段的行为与[kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack)、Prometheus Community Helm 图表紧密匹配，任何与上游图表的偏差都可以在与该图表一起维护的[CHANGELOG.md](https://github.com/rancher/charts/blob/main/charts/rancher-monitoring/CHANGELOG.md)中找到。
+与 Monitoring & Alerting V1 不同的是，这两个功能都打包在一个单一的 Helm Chart 中，可以在[这里](https://github.com/rancher/charts/blob/main/charts/rancher-monitoring)找到。该 Chart 和可配置字段的行为与[kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack)、Prometheus Community Helm Chart 紧密匹配，任何与上游 Chart 的偏差都可以在与该 Chart 一起维护的[CHANGELOG.md](https://github.com/rancher/charts/blob/main/charts/rancher-monitoring/CHANGELOG.md)中找到。
 
 监控 V2 只能在集群层面进行配置。不再支持项目级监控和告警。
 

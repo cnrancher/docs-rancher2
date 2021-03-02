@@ -2,15 +2,15 @@
 title: v2.1 和v2.2 版本中的 Windows 支持（实验性）
 description: 本节介绍如何在 Rancher v2.1.x 和 v2.2.x 版本中配置 Windows 集群。如果您正在使用 Rancher v2.3.0 或更高版本的 Rancher，请参阅新的 Windows 文档[v2.3.0 或更高版本](/docs/rancher2/cluster-provisioning/rke-clusters/windows-clusters/_index)。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 创建集群
   - 创建RKE集群
   - Windows 集群
@@ -45,13 +45,13 @@ _适用于 v2.1.0 到 v2.1.9 和 v2.2.0 到 v2.2.3 版本_
 
 ### 1、创建节点
 
-开始创建支持 Windows 的自定义集群前，请先准备您的节点服务器。根据我们的[需求](/docs/rancher2/installation/requirements/_index)提供三个节点，两个 Linux 节点，一个 Windows 节点。您的节点可以是：
+开始创建支持 Windows 的自定义集群前，请先准备您的节点服务器。根据我们的[需求](/docs/rancher2/installation_new/requirements/_index)提供三个节点，两个 Linux 节点，一个 Windows 节点。您的节点可以是：
 
 - 云主机
 - 虚拟化平台中的虚拟机
 - 裸金属服务器
 
-下表列出了您将分配给每个节点的[Kubernetes 角色](/docs/rancher2/cluster-provisioning/_index)，尽管在创建节点过程中，您不会启用这些角色。但我们只是通知您每个节点的用途。第一个节点是 Linux 节点，主要负责 Kubernetes 控制面，不过，在这个用例中，我们将在这个节点上安装所有三个角色。节点 2 还是一个 Linux 工作节点，负责 Ingress Controller 等组件的支持。最后，第三个节点是 Windows 工作节点，它将运行您的 Windows 应用程序。
+下表列出了您将分配给每个节点的 Kubernetes 角色，尽管在创建节点过程中，您不会启用这些角色。但我们只是通知您每个节点的用途。第一个节点是 Linux 节点，主要负责 Kubernetes 控制面，不过，在这个用例中，我们将在这个节点上安装所有三个角色。节点 2 还是一个 Linux 工作节点，负责 Ingress Controller 等组件的支持。最后，第三个节点是 Windows 工作节点，它将运行您的 Windows 应用程序。
 
 | 节点   | 操作系统                                              | 集群角色                         |
 | :----- | :---------------------------------------------------- | :------------------------------- |
@@ -61,7 +61,7 @@ _适用于 v2.1.0 到 v2.1.9 和 v2.2.0 到 v2.2.3 版本_
 
 #### 要求
 
-- 您可以在[安装指南](/docs/rancher2/installation/requirements/_index)中查看 Linux 和 Windows 节点的节点要求。
+- 您可以在[安装指南](/docs/rancher2/installation_new/requirements/_index)中查看 Linux 和 Windows 节点的节点要求。
 - 虚拟化或裸金属的节点都必须使用 2 层网络连接。
 - 为了支持[Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/ingress/)，您的集群必须包含至少一个专门用于 worker 角色的 Linux 节点。
 - 尽管我们推荐上表中只列出的三个节点的架构，但是您可以添加额外的 Linux 和 Windows 节点来扩展您的集群，来实现冗余。

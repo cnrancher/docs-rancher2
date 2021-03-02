@@ -2,15 +2,15 @@
 title: 使用已有存储
 description: 本章节描述了如何在 Rancher 里为工作负载配置现有的持久化存储。请按照以下步骤配置持久卷和持久卷声明。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 存储卷和存储类
   - 使用已有存储
@@ -50,7 +50,7 @@ keywords:
 1. 进入包含要向其添加持久性批量声明的工作负载的项目。
 1. 单击**卷**页签，然后单击**添加卷**(在早于 v2.3.0 的版本中，可以单击导航栏上的**工作负载**，然后单击**卷**)。
 1. 输入卷声明的**名称**。
-1. 选择要将持久化存储添加到的工作负载的[命名空间](/docs/rancher2/cluster-admin/projects-and-namespaces/_index/)。
+1. 选择要将持久化存储添加到的工作负载的命名空间。
 1. 在**使用现有的持久卷**中，进入**持久卷**下拉列表并选择您创建的持久卷。
 1. **可选：** 在**自 定义**中，选择要使用的[访问模式](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)。
 1. 单击**创建**。

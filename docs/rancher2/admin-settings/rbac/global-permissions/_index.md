@@ -2,15 +2,15 @@
 title: 全局权限
 description: 权限是在为用户选择自定义权限时可以分配的单独访问权限。全局权限定义在任何特定集群范围之外的用户授权。Rancher 中有两个开箱即用的默认全局权限：系统管理员和标准用户。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 系统管理员指南
   - 基于角色的访问控制
   - 全局权限

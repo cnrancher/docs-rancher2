@@ -2,15 +2,15 @@
 title: 7、负载均衡
 description: 如果您的应用程序是面向公众的并且消耗大量流量，则应在集群之前放置一个负载均衡器，以便用户始终可以访问其应用程序而不会中断服务。通常，您可以通过对您的部署进行[水平扩容](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)来满足大量服务请求，随着流量的增加它会增加应用程序容器的实例。然而，此技术需要路由以高效地在您的节点之间分配流量。如果您需要根据公网流量进行扩容或者缩容，那么您需要一个负载均衡器。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 版本迁移
   - 负载均衡
 ---

@@ -2,15 +2,15 @@
 title: Istio 使用说明
 description: 请根据您使用的 Rancher 版本获取对应的 Istio 使用说明
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - rancher 2.5
   - Istio
   - Istio 使用说明

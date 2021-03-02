@@ -2,15 +2,15 @@
 title: 功能介绍
 description: 安装 Rancher 后，系统管理员需要配置 Rancher Server URL、全局私有镜像仓库、身份验证、用户访问权限、Pod 安全策略、节点和集群驱动程序、RKE 元数据和实验性功能。第一次登录 Rancher 后，Rancher 将提示您输入一个Rancher Server URL。您应该将 URL 设置为 Rancher Server 的主入口点。当负载均衡器位于 Rancher Server 集群前面时，URL 应该设置为负载均衡地址。系统将自动尝试从运行 Rancher Server 的主机的 IP 地址或主机名推断 Rancher Server 的 URL。但只有在运行单个节点的 Rancher Server 安装时才，上述推断才正确。因此，在大多数情况下，您需要自己将 Rancher Server URL 设置为正确的值。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 系统管理员指南
   - 功能介绍
 ---
@@ -95,7 +95,7 @@ Rancher 用于配置[RKE 集群](/docs/rancher2/cluster-provisioning/rke-cluster
 
 _v2.3.0 版本可用_
 
-Rancher 包含一些在默认情况下禁用的实验性功能。该功能开关让您能够尝试这些新功能。有关更多信息，请参考关于[功能开关](/docs/rancher2/installation/options/feature-flags/_index)的章节。
+Rancher 包含一些在默认情况下禁用的实验性功能。该功能开关让您能够尝试这些新功能。有关更多信息，请参考关于[功能开关](/docs/rancher2/installation_new/resources/feature-flags/_index)的章节。
 
 ## 轮换 Rancher Server 证书
 

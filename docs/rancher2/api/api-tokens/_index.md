@@ -2,15 +2,15 @@
 title: API Tokens
 description: 我们建议您在创建 API KEY 时，给它设置一个有效时间。但是一些 API Tokens 是永久有效(`ttl=0`)，除非删除它们，否则永不失效，并且 API Tokens 不会因更改用户密码而失效。您可以通过删除 API Tokens 或禁用用户来禁用它们。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - API
   - API Tokens
   - API指南
@@ -49,6 +49,11 @@ keywords:
 _v2.4.6+ 可用_
 
 从 Rancher v2.4.6 开始，管理员可以对 Kubeconfig 令牌设置全局 TTL。一旦令牌过期，kubectl 命令将要求用户对 Rancher 进行验证。
+
+:::note 说明
+现有的 kubeconfig 标记不会随着新的 TTL 而更新。管理员可以删除旧的 kubeconfig 标记。
+
+:::
 
 1. 在 Rancher API 视图`https://<Rancher-Server-IP/v3/settings/kubeconfig-generate-token>中禁用 kubeconfig-generate-token 设置。该设置指示 Rancher 不再在用户单击下载 kubeconfig 文件时自动生成令牌。kubeconfig 文件现在将提供登录 Rancher 的命令。
 

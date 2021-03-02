@@ -81,10 +81,21 @@ module.exports = {
     customFields: {
         sidebars,
         metadata,
-        stable: "版本说明 - v2.4.7",
-        baseCommit: "9844eb315ee788efa011e5776b3dcba5b9411a10 - Sept 21, 2020",
+        stable: "版本说明 - v2.5.5",
+        baseCommit: "aede5d5a53de050752ed0acda275be73e00b28c5 - Feb 22, 2021",
         k3sBaseCommit:
-            "1203cf0bb163b71b198382b44e6e543cd3672f33 - Dec 24, 2020",
+            "aede5d5a53de050752ed0acda275be73e00b28c5 - Feb 22, 2021",
     },
-    plugins: ["@docusaurus/plugin-baidu-analytics"],
+    plugins: [
+        "@docusaurus/plugin-baidu-analytics",
+        [
+            "@docusaurus/plugin-sitemap",
+            {
+                cacheTime: 600 * 1000, // 600 sec - cache purge period
+                changefreq: "weekly",
+                priority: 0.5,
+                trailingSlash: false,
+            },
+        ],
+    ],
 };

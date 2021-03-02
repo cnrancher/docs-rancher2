@@ -2,15 +2,15 @@
 title: 手动快速部署
 description: 手动快速部署 Rancher Server 包括以下四个步骤。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 快速入门
   - 部署Rancher Server
   - 手动快速部署
@@ -39,7 +39,7 @@ keywords:
   >
   > 有关业务集群的端口的详细要求，请参考[下游集群节点要求](/docs/rancher2/cluster-provisioning/node-requirements/_index)。
 
-  请按照[具体要求](/docs/rancher2/installation/requirements/_index)配置 Linux 主机。
+  请按照[具体要求](/docs/rancher2/installation_new/requirements/_index)配置 Linux 主机。
 
 ## 安装 Rancher 2.x
 
@@ -52,7 +52,7 @@ keywords:
 
     ```bash
     #如果您使用的 Rancher 2.5.x 及更新版本，需要开启特权模式安装 Rancher，请执行以下命令：
-    docker run -d --restart=unless-stopped \
+    docker run -d --privileged --restart=unless-stopped \
       -p 80:80 -p 443:443 \
       --privileged \
       rancher/rancher:latest
@@ -89,7 +89,7 @@ keywords:
 
 1. 访问**集群**页面，单击**添加集群**。
 
-1. 选择**自定义**选项。
+1. 选择**已有节点**选项。
 
 1. 输入**集群名称**。
 
@@ -109,7 +109,16 @@ keywords:
 
 1. 运行完成后，回到 Rancher 界面，单击**完成**。
 
-**结果：** 在 Rancher 中创建了一个 Kubernetes 集群。
+**结果：**
+
+您的集群已创建，并分配给您的集群一个状态为**Provisioning**，Rancher 正在建立您的集群。
+
+您可以在集群的状态更新为**Active**后访问它。
+
+**Active**集群被分配了两个项目：
+
+- `Default`，包含`default`命名空间。
+- `System`，包含`cattle-system`、`ingress-nginx`、`kube-public`和`kube-system`等命名空间。
 
 ## 后续操作
 

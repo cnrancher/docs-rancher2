@@ -2,15 +2,15 @@
 title: 复制集群
 description: 如果您在 Rancher 中有已经创建了一个集群，并希望用这个集群作为模板，创建其他集群，您可以使用 Rancher CLI 复制该集群的配置，对其进行编辑，快速创建集群。复制集群的功能适用于创建多个具有相似参数的集群，该功能的最终目的是简化创建集群的过程，减少用户在创建多个参数类似的集群的过程中所面临的重复工作。因此，我们建议仅编辑本文档中明确列出的值，编辑其他值可能会使配置文件无效，导致集群部署失败。如果您需要创建的多个集群中包含的参数差异较大，建议您参考“创建集群”章节的操作步骤，重头开始创建集群，而不是使用复制集群的功能创建集群。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 复制集群
 ---

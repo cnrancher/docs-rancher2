@@ -2,15 +2,15 @@
 title: Kubernetes 介绍
 description: Rancher v2.x 建立在[Kubernetes](https://kubernetes.io/docs/home/?path=users&persona=app-developer&level=foundational)上的容器调度编排。v2.x 底层技术与 v1.6 有很大的不同，后者支持了几种流行的容器编排工具。由于 Rancher v2.x 现在完全基于 Kubernetes，因此学习 Kubernetes 基础很有帮助。下表介绍并定义了一些关键的 Kubernetes 概念。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 版本迁移
   - Kubernetes 介绍
 ---

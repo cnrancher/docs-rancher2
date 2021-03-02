@@ -2,15 +2,15 @@
 title: 恢复集群
 description: 在 RKE 集群中可以很容易地执行 etcd 备份和恢复。etcd 数据库的快照被获取并保存到本地的 etcd 节点或 S3 兼容的目标上。配置 S3 的优点是，即使所有的 etcd 节点都丢失了，因为您的快照保存在远程，您仍然可以用它来恢复集群。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 集群访问控制
   - 恢复集群
@@ -97,7 +97,7 @@ values={[
 
 ## 在没有快照的情况下恢复 etcd
 
-如果 etcd 节点组没有保持法定的成员数（quorum），即超过半数以上的 etcd 节点组成员丢失，Kubernetes 集群将报告失败，因为在 Kubernetes 集群中不能执行任何操作，例如部署工作负载。请查看 Kubernetes 集群中的[etcd 节点数量](/docs/rancher2/cluster-provisioning/production/_index)的最佳实践。如果您想恢复您的 etcd 节点集，请遵循以下说明：
+如果 etcd 节点组失去 quorum，Kubernetes 集群将报告失败，因为在 Kubernetes 集群中不能执行任何操作，例如部署工作负载。集群应该有三个 etcd 节点，以防止失去 quorum。如果你想恢复你的一组 etcd 节点，请按照以下说明进行操作。
 
 1. 通过删除所有其他 etcd 节点，在集群中只保留一个 etcd 节点。
 

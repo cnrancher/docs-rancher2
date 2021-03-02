@@ -2,15 +2,15 @@
 title: 部署带有 NodePort 的工作负载
 description: 以下步骤讲解了如何在 Rancher Server 中部署带有 NodePort 的工作负载。本文部署的工作负载是一个“Hello-World”应用。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 快速入门
   - 部署工作负载
   - 部署带有 NodePort 的工作负载
@@ -22,7 +22,7 @@ keywords:
 
 ## 部署工作负载
 
-参考前文完成[Rancher Server 的快速部署](/docs/rancher2/quick-start-guide/deployment/_index)后，您可以创建 _工作负载_。工作负载即 Kubernetes 对一组 Pod 的抽象模型，用于描述业务的运行载体，包括 Deployment、Statefulset、Daemonset、Job、CronJob 等多种类型，详情请参考[名词解释](/docs/rancher2/overview/glossary/_index)。
+参考前文完成[Rancher Server 的快速部署](/docs/rancher2/quick-start-guide/deployment/_index)后，您可以创建 Kubernetes [工作负载](https://kubernetes.io/docs/concepts/workloads/)。工作负载即 Kubernetes 对一组 Pod 的抽象模型，用于描述业务的运行载体，包括 Deployment、Statefulset、Daemonset、Job、CronJob 等多种类型，详情请参考[名词解释](/docs/rancher2/overview/glossary/_index)。
 
 以下步骤讲解了如何在 Rancher Server 中部署带有 NodePort 的工作负载。本文部署的工作负载是一个“Hello-World”应用。
 

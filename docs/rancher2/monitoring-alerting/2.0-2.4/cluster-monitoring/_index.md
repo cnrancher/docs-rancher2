@@ -2,15 +2,15 @@
 title: 功能介绍
 description: 通过 Rancher 您可以使用先进的开源监控解决方案Prometheus来监控集群节点，Kubernetes 组件和软件部署的状态和过程。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 集群工具
   - 监控
@@ -27,7 +27,7 @@ _自 v2.2.0 起可用_
 
 因此您可以配置 Prometheus 去收集集群级别或者项目级别的监控数据。本章节将介绍如何启用对集群的监控。有关对项目的监控，可以浏览[项目管理部分](/docs/rancher2/project-admin/tools/monitoring/_index)。
 
-Prometheus 让您可以查看 Rancher 及其纳管的各个 Kubernetes 集群的指标。通过时间戳，您可以使用 Rancher UI 或者 [Grafana](https://grafana.com/)（这是一种与分析工具一起部署的分析查看平台）通过易于阅读的图表和可视化仪表盘查询这些指标。
+Prometheus 让您可以查看 Rancher 及其纳管的各个 Kubernetes 集群的指标。通过时间戳，您可以使用 Rancher UI 或者 [Grafana](https://grafana.com/)（这是一种与分析工具一起部署的分析查看平台）通过易于阅读的 Chart 和可视化仪表盘查询这些指标。
 
 通过查看 Prometheus 从集群 control-plane，节点和部署的工作负载中刮取的监控数据，您可以掌握集群中发生的所有事情。然后，您可以使用这些数据进行分析，从而更好地进行管控工作：在系统紧急情况发生之前阻止它们，制定维护策略，还原崩溃的服务器等。
 
@@ -37,7 +37,7 @@ Prometheus 让您可以查看 Rancher 及其纳管的各个 Kubernetes 集群的
 
 通过 Prometheus，您可以在 Rancher 上在集群级别和[项目级别](/docs/rancher2/project-admin/tools/monitoring/_index)进行监控。对于每个启用了监控的集群和项目，Rancher 都会部署一个 Prometheus 服务。
 
-- 集群监控可让您查看 Kubernetes 集群的运行状况。Prometheus 从下面的集群组件中收集指标，您可以在图表中查看这些指标。
+- 集群监控可让您查看 Kubernetes 集群的运行状况。Prometheus 从下面的集群组件中收集指标，您可以在 Chart 中查看这些指标。
 
   - [Kubernetes Control Plane](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/cluster-metrics/_index)
   - [etcd 数据库](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/cluster-metrics/_index)

@@ -2,21 +2,21 @@
 title: 介绍
 description: 安装 Rancher 的方式有两种：单节点安装和高可用集群安装。因为单节点安装只适用于测试和 demo 环境，而且单节点安装和高可用集群安装之间不能进行数据迁移，所以我们推荐从一开始就使用高可用集群安装的方式安装 Rancher。本文将详细介绍高可用集群安装的配置方式。如果您仍然准备在单节点上安装 Rancher，本文只有分开部署 Rancher 与下游集群的部分适用于单节点安装。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 系统工具
 ---
 
 ## 概述
 
-系统工具是 Rancher 自带的运维工具，您可以使用系统工具管理[RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)和[高可用集群](/docs/rancher2/installation/k8s-install/kubernetes-rke/_index)。系统工具提供了`logs`、`stats`和`remove`三类指令，分别对应以下三种用途：
+系统工具是 Rancher 自带的运维工具，您可以使用系统工具管理[RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)和[高可用集群](/docs/rancher2/installation_new/resources/advanced/helm2/kubernetes-rke/_index)。系统工具提供了`logs`、`stats`和`remove`三类指令，分别对应以下三种用途：
 
 - [收集 Kubernetes 日志](#收集-kubernetes-日志)：从节点收集 Kubernetes 集群组件的日志。
 - [查看节点系统指标](#查看节点系统指标)：从节点收集系统指标。
@@ -49,7 +49,7 @@ keywords:
 
 ### 指令介绍
 
-收集 Kubernetes 日志的命令`logs`，它的用途是收集 [RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)和[高可用集群](/docs/rancher2/installation/k8s-install/kubernetes-rke/_index)节点中，核心 Kubernetes 组件的日志文件。请参考[常见故障排查](/docs/rancher2/troubleshooting/_index)，查看核心 Kubernetes 组件的列表。
+收集 Kubernetes 日志的命令`logs`，它的用途是收集 [RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)和[高可用集群](/docs/rancher2/installation_new/resources/advanced/helm2/kubernetes-rke/_index)节点中，核心 Kubernetes 组件的日志文件。请参考[常见故障排查](/docs/rancher2/troubleshooting/_index)，查看核心 Kubernetes 组件的列表。
 
 系统工具使用 kubeconfig 文件部署 DaemonSet。这个 DaemonSet 的作用是将核心 Kubernetes 组件的所有日志文件复制一遍后，打包成一个 `tar` 文件（默认文件名称是`cluster-logs.tar`）。如果您需要收集单节点的日志，您可以在命令中指定节点，例如`--node NODENAME`和 `-n NODENAME`，将`NODENAME`替换为节点名称后，可以指定单个节点，只收集该节点的日志。
 
@@ -71,7 +71,7 @@ keywords:
 
 ### 指令介绍
 
-查看节点系统指标的命令`stats`，它的用途是查看[RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)和[高可用集群](/docs/rancher2/installation/k8s-install/kubernetes-rke/_index)中，节点的系统指标。
+查看节点系统指标的命令`stats`，它的用途是查看[RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)和[高可用集群](/docs/rancher2/installation_new/resources/advanced/helm2/kubernetes-rke/_index)中，节点的系统指标。
 
 系统工具部署的 DaemonSet，会运行基于`sar`（System Activity Report）的预先定义好的指令，收集和显示系统指标。
 

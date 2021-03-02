@@ -2,15 +2,15 @@
 title: 全局 DNS
 description: Rancher 的全局 DNS 功能提供了一种对外部 DNS 提供商进行编程的方法，以将流量路由到您的 Kubernetes 应用程序。由于 DNS 编程支持跨不同 Kubernetes 集群的应用程序，因此需要在全局级别配置全局 DNS。一个应用程序可以变得高度可用，因为它允许您在不同的 Kubernetes 集群上运行同一个应用程序。如果您的 Kubernetes 集群中有一个集群发生了故障，该应用程序仍可以正常对外提供服务。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 应用商店
   - 全局 DNS
 ---
@@ -19,7 +19,7 @@ _自 v2.2.0 起可用_
 
 Rancher 的全局 DNS 功能提供了一种对外部 DNS 提供商进行编程的方法，以将流量路由到您的 Kubernetes 应用程序。由于 DNS 编程支持跨不同 Kubernetes 集群的应用程序，因此需要在全局级别配置全局 DNS。一个应用程序可以变得高度可用，因为它允许您在不同的 Kubernetes 集群上运行同一个应用程序。如果您的 Kubernetes 集群中有一个集群发生了故障，该应用程序仍可以正常对外提供服务。
 
-> **注意：** 全局 DNS 仅在启用了 [local](/docs/rancher2/installation/options/chart-options/_index) 集群的[高可用安装](/docs/rancher2/installation/k8s-install/_index)中可用。
+> **注意：** 全局 DNS 仅在启用了 [local](/docs/rancher2/installation_new/resources/chart-options/_index) 集群的[高可用安装](/docs/rancher2/installation_new/install-rancher-on-k8s/_index)中可用。
 
 ## 全局 DNS 提供商
 
@@ -78,7 +78,7 @@ Rancher 的全局 DNS 功能提供了一种对外部 DNS 提供商进行编程�
 
         > **注意：**
         >
-        > - 阿里云 SDK 使用 TZ 数据。它必须存在于运行 [local](/docs/rancher2/installation/options/chart-options/_index) 集群的节点的`/usr/share/zoneinfo`路径中，并挂载到外部 DNS 容器。如果 TZ 数据在节点上不可用，请按照[说明](https://www.ietf.org/timezones/tzdb-2018f/tz-link.html)进行准备。
+        > - 阿里云 SDK 使用 TZ 数据。它必须存在于运行 [local](/docs/rancher2/installation_new/resources/chart-options/_index) 集群的节点的`/usr/share/zoneinfo`路径中，并挂载到外部 DNS 容器。如果 TZ 数据在节点上不可用，请按照[说明](https://www.ietf.org/timezones/tzdb-2018f/tz-link.html)进行准备。
         > - 不同类型的阿里 DNS 具有不同的允许 TTL 范围，其中全局 DNS 服务的默认 TTL 可能无效。在添加 阿里 DNS 服务之前，请参阅[参考](https://www.alibabacloud.com/help/doc-detail/34338.htm)。
 
 ### 添加全局 DNS 服务

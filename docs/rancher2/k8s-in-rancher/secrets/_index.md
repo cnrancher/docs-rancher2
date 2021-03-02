@@ -2,15 +2,15 @@
 title: 密文
 description: 密文用于存储敏感数据，例如密码，令牌或密钥。它们可能包含一个或多个键值对。配置工作负载时，您将能够选择要包括的密文。与配置映射一样，工作负载可以将密文引用为环境变量或以数据卷挂载的方式使用。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 用户指南
   - 密文
 ---
@@ -35,7 +35,7 @@ keywords:
 
    > **注意:** Kubernetes 将密文，证书和镜像库凭证分类为[Secret](https://kubernetes.io/docs/concepts/configuration/secret/)，并且项目或命名空间中的两个 secret 都不能有重复的名称。因此，为防止冲突，镜像库凭证必须在工作空间内的所有 secret 中具有唯一的名称。
 
-4. 为这个密文选择一个**范围**。您可以设置此密文作用于此项目所有[命名空间](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)或单个[命名空间](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)。
+4. 为这个密文选择一个**范围**。您可以设置此密文作用于此项目所有命名空间或单个命名空间。
 
 5. 从 **密文**，单击 **添加密文** 去添加一个键值对。也可以根据需要添加任意多个值。
 

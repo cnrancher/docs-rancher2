@@ -2,15 +2,15 @@
 title: 卸载 Rancher
 description: 本节旨在回答关于当您不再需要 Rancher，不想集群被 Rancher 管理或 Rancher Server 被删除时该怎么做的问题。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 常见问题
   - 卸载 Rancher
 ---
@@ -33,7 +33,7 @@ keywords:
 
 ## 不再需要 Rancher 时该怎么做？
 
-如果您是[Rancher 高可用安装](/docs/rancher2/installation/k8s-install/_index)，可通过[系统工具](/docs/rancher2/system-tools/_index) 的 `remove` 子命令移除 Rancher。
+如果您是[Rancher 高可用安装](/docs/rancher2/installation_new/install-rancher-on-k8s/_index)，可通过[系统工具](/docs/rancher2/system-tools/_index) 的 `remove` 子命令移除 Rancher。
 
 如果您通过 Docker 单节点安装的 Rancher，可以通过移除 Docker 容器的方式移除 Rancher。
 

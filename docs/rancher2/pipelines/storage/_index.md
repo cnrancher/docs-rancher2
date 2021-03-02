@@ -2,21 +2,21 @@
 title: 配置流水线组件的持久存储
 description: Docker 镜像仓库和 Minio 工作负载默认使用临时存储，临时存储足以应对对大多数情况。如果您希望流水线内嵌的镜像仓库中的镜像和流水线日志在节点失败的情况下能被保存下来，您可以给镜像日志配置持久存储。下文提供了配置持久存储的操作指导。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 用户指南
   - 流水线
   - 配置流水线组件的持久存储
 ---
 
-Docker 镜像仓库和 Minio 工作负载默认使用临时存储，临时存储足以应对大多数情况。如果您希望流水线内嵌的镜像仓库中的镜像和流水线日志在节点失败的情况下能被保存下来，您可以给镜像日志配置持久存储。下文提供了配置持久存储的操作指导。
+流水先的 Docker 镜像仓库和 Minio 工作负载默认使用临时存储，临时存储足以应对大多数情况。如果您希望流水线内嵌的镜像仓库中的镜像和流水线日志在节点失败的情况下能被保存下来，您可以给镜像日志配置持久存储。下文提供了配置持久存储的操作指导。
 
 本节假定您了解持久存储在 Kubernetes 中的工作方式。有关更多信息，请参阅[存储如何工作](/docs/rancher2/cluster-admin/volumes-and-storage/how-storage-works/_index)部分。
 

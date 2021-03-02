@@ -2,15 +2,15 @@
 title: 项目告警
 description: 为了使您的集群和应用程序保持健康，并推动您的组织生产力向前发展，您需要随时了解集群和项目中发生的事件，包括计划内和计划外的事件。当事件发生时，您的告警会被触发，并向您发送通知。然后，如果有必要，您可以通过纠正行动进行跟进。
 keywords:
-  - rancher 2.0中文文档
-  - rancher 2.x 中文文档
+  - rancher
   - rancher中文
-  - rancher 2.0中文
-  - rancher2
-  - rancher教程
-  - rancher中国
-  - rancher 2.0
-  - rancher2.0 中文教程
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
   - 集群管理员指南
   - 集群访问控制
   - 告警
@@ -137,7 +137,7 @@ keywords:
 - [**容器**](https://github.com/google/cadvisor)
 - [**Kubernetes 资源**](https://github.com/kubernetes/kube-state-metrics)
 - [**自定义**](/docs/rancher2/project-admin/tools/monitoring/_index)
-- [**项目级 Grafana**](http://docs.grafana.org/administration/metrics/)
+- [**项目级 Grafana**](https://grafana.com/docs/grafana/latest/administration/view-server/internal-metrics/#internal-grafana-metrics)
 - **项目级普罗米修斯**
 
 1. 选择比较：
