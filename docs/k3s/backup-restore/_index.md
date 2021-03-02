@@ -26,7 +26,7 @@ K3s 的备份和恢复方式由您使用的数据存储类型决定。本文提�
 
 - [MySQL 官方文档](https://dev.mysql.com/doc/refman/8.0/en/replication-snapshot-method.html)
 - [PostgreSQL 官方文档](https://www.postgresql.org/docs/8.3/backup-dump.html)
-- [etcd 官方文档](https://github.com/etcd-io/etcd/blob/master/Documentation/op-guide/recovery.md)
+- [etcd 官方文档](https://github.com/etcd-io/website/blob/master/content/docs/current/op-guide/recovery.md)
 
 ## 嵌入式 etcd 数据存储备份和还原（实验性）
 

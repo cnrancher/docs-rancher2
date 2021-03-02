@@ -35,7 +35,7 @@ keywords:
 
 1. 在**Cluster Explorer**中，进入左上角的下拉菜单，单击**Rancher Backups**。
 1. 单击 **Restore**。
-1. 使用表单或 YAML 创建 Restore。关于使用表单创建 Restore 资源，请参考[配置参考](./../configuration/restore-config/_index)和[示例](./../examples/_index#恢复)。
+1. 使用表单或 YAML 创建 Restore。关于使用表单创建 Restore 资源，请参考[配置参考](/docs/rancher2/backups/2.5/configuration/restore-config/_index)和[示例](/docs/rancher2/backups/2.5/examples/_index)。
 1. 使用 YAML 编辑器，我们可以单击**Create > Create from YAML** 进入 Restore YAML。
 
    ```yaml
@@ -56,7 +56,7 @@ keywords:
          endpoint: s3.us-west-2.amazonaws.com
    ```
 
-   有关配置 Restore 的帮助，请参阅[配置参考](./../configuration/restore-config/_index)和[示例](./../examples/_index#恢复)。
+   有关配置 Restore 的帮助，请参阅[配置参考](/docs/rancher2/backups/2.5/configuration/restore-config/_index)和[示例](/docs/rancher2/backups/2.5/examples/_index)。
 
 1. 单击 **Create**。
 

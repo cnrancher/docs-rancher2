@@ -29,7 +29,7 @@ keywords:
 
 ## 确保 Kubernetes 的节点配置正确
 
-当您部署节点时需要遵循 Kubernetes 和 etcd 最佳实践，比如：禁用 swap、反复检查集群中的所有机器之间的网络连接、使用唯一的主机名、使用唯一的 MAC 地址、使用唯一的 product_uuids、检查所有需要的端口被打开，部署使用 ssd 的 etcd。更多的细节可以在 [Kubernetes 文档](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm) 和 [etcd 的性能操作指南](https://github.com/etcd-io/etcd/blob/master/Documentation/op-guide/performance.md) 中找到。
+当您部署节点时需要遵循 Kubernetes 和 etcd 最佳实践，比如：禁用 swap、反复检查集群中的所有机器之间的网络连接、使用唯一的主机名、使用唯一的 MAC 地址、使用唯一的 product_uuids、检查所有需要的端口被打开，部署使用 ssd 的 etcd。更多的细节可以在 [Kubernetes 文档](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm) 和 [etcd 的性能操作指南](https://github.com/etcd-io/website/blob/master/content/docs/current/op-guide/performance.md) 中找到。
 
 ## 使用 RKE 备份状态文件
 
