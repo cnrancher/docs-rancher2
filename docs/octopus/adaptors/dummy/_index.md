@@ -312,7 +312,7 @@ DummyProtocolDevicePropertyType 描述了设备属性的类型。
    kubectl apply -f https://raw.githubusercontent.com/cnrancher/octopus/master/adaptors/dummy/deploy/e2e/dl_specialdevice_with_mqtt.yaml
    ```
 
-   使用[`mosquitto_sub`](https://mosquitto.org/man/mosquitto_sub-1.html)工具观看同步状态。
+   使用`mosquitto_sub`工具观看同步状态。
 
    ```shell script
    # get mqtt broker server
@@ -339,7 +339,7 @@ DummyProtocolDevicePropertyType 描述了设备属性的类型。
    kubectl apply -f https://raw.githubusercontent.com/cnrancher/octopus/master/adaptors/dummy/deploy/e2e/dl_protocoldevice_with_mqtt.yaml
    ```
 
-   使用[`mosquitto_sub`](https://mosquitto.org/man/mosquitto_sub-1.html)工具观看同步的结果。
+   使用`mosquitto_sub`工具观看同步的结果。
 
    ```shell script
    # get mqtt broker server

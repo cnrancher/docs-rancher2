@@ -154,7 +154,7 @@ $ kubectl edit -n cattle-system deployment/cluster-agent。
 
 使用这种方法，您是通过在每个下游集群的控制平面节点上运行一组命令来重新创建 Rancher 代理。
 
-首先，按照这里的描述生成代理定义：https://gist.github.com/superseb/076f20146e012f1d4e289f5bd1bd4971。
+首先，按照这里的描述生成代理定义：https://gist.github.com/superseb/076f20146e012f1d4e289f5bd1bd4971 。
 
 然后，通过 SSH 连接到下游集群的控制板节点，创建 Kubeconfig 并应用定义。
 https://gist.github.com/superseb/b14ed3b5535f621ad3d2aa6a4cd6443b
