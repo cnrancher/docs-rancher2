@@ -16,7 +16,7 @@ keywords:
   - 恢复配置
 ---
 
-性页面提供要还原的备份的详细信息。
+本页面提供还原备份的详细信息。
 
 ![restore](/img/rancher/backup_restore/restore/restore.png)
 
