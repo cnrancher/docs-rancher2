@@ -83,7 +83,94 @@ RKE 可以在大多数已安装 Docker 的 Linux 操作系统上运行。RKE 的
   net.bridge.bridge-nf-call-iptables=1
   ```
 
-### RHEL、OEL、CentOS
+### SUSE Linux Enterprise Server (SLES) / openSUSE
+
+如果您使用的是 SUSE Linux Enterprise Server 或 openSUSE，请遵循以下说明。
+
+#### 使用的 Docker
+
+如果你使用的是上游的 Docker，包名是`docker-ce`或`docker-ee`。你可以通过执行以下命令来检查安装的软件包。
+
+```
+rpm -q docker-ce
+```
+
+使用上游 Docker 包时，请按照[以非 root 用户身份管理 Docker](https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user)。
+
+#### 使用 SUSE/openSUSE 打包的 docker
+
+如果你使用的是 SUSE/openSUSE 提供的 Docker 包，包名是`docker`。你可以通过执行以下命令来检查安装的软件包。
+
+```
+rpm -q docker
+```
+
+#### 为 docker 添加软件仓库
+
+在 SUSE Linux Enterprise Server 15 SP2 中，docker 位于 Containers 模块中。
+在安装 docker 之前，需要添加该模块。
+
+要列出可用的模块，您可以运行 SUSEConnect 来列出扩展和激活命令。
+
+```
+node:~ # SUSEConnect --list-extensions
+AVAILABLE EXTENSIONS AND MODULES
+
+    Basesystem Module 15 SP2 x86_64 (Activated)
+    Deactivate with: SUSEConnect -d -p sle-module-basesystem/15.2/x86_64
+
+        Containers Module 15 SP2 x86_64
+        Activate with: SUSEConnect -p sle-module-containers/15.2/x86_64
+```
+
+运行这个 SUSEConnect 命令来激活 Containers 模块。
+
+```
+node:~ # SUSEConnect -p sle-module-containers/15.2/x86_64
+Registering system to registration proxy https://rmt.seader.us
+
+Updating system details on https://rmt.seader.us ...
+
+Activating sle-module-containers 15.2 x86_64 ...
+-> Adding service to system ...
+-> Installing release package ...
+
+Successfully registered system
+```
+
+为了用你的用户运行 docker cli 命令，那么你需要将这个用户添加到`docker`组中。
+最好不要使用 root 用户。
+
+```
+usermod -aG docker <user_name>
+```
+
+要验证用户是否正确配置，退出节点，使用 SSH 或其他方法登录，并执行`docker ps`。
+
+```
+ssh user@node
+user@node:~> docker ps
+CONTAINER ID        IMAGE       COMMAND             CREATED             STATUS              PORTS               NAMES
+user@node:~>
+```
+
+### openSUSE MicroOS/Kubic (Atomic)
+
+请参考 openSUSE MicroOS 和 Kubic 的项目页面进行安装。
+
+#### openSUSE MicroOS
+
+openSUSE MicroOS 专为托管容器工作负载而设计，具有自动管理和补丁功能。安装 openSUSE MicroOS，您将获得一个快速、小型的环境，用于部署容器，或任何其他受益于事务性更新的工作负载。作为滚动发行版，软件始终是最新的。
+https://microos.opensuse.org
+
+#### openSUSE Kubic
+
+基于 MicroOS，但不是滚动发行版。在设计上也有同样的考虑，但也是认证的 Kubernetes 发行版。
+https://kubic.opensuse.org  
+安装说明。
+https://kubic.opensuse.org/blog/2021-02-08-MicroOS-Kubic-Rancher-RKE/
+
+### RHEL、OEL 或 CentOS
 
 因为 Red Hat Enterprise Linux（RHEL）、Oracle Enterprise Linux （OEL）和 CentOS 存在漏洞[Bugzilla 1527565](https://bugzilla.redhat.com/show_bug.cgi?id=1527565)，所以它们不允许用户使用`root`作为[SSH 用户](/docs/rke/config-options/nodes/_index#ssh-user)。
 

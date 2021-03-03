@@ -77,7 +77,7 @@ INSTALL_K3S_SKIP_DOWNLOAD=true K3S_URL=https://myserver:6443 K3S_TOKEN=mynodetok
 
 #### 高可用配置
 
-参考 [使用外部数据库实现高可用](/docs/k3s/installation/ha/_index)或 [嵌入式 DB 的高可用（实验）](/docs/k3s/installation/ha-embedded/_index)指南。您将调整安装命令，以便指定`INSTALL_K3S_SKIP_DOWNLOAD=true`并在本地运行安装脚本，而不是通过 curl。您还将利用`INSTALL_K3S_EXEC='args'`为 k3s 提供其他参数。
+参考 [使用外部数据库实现高可用](/docs/k3s/installation/ha/_index)或 [嵌入式 DB 的高可用](/docs/k3s/installation/ha-embedded/_index)指南。您将调整安装命令，以便指定`INSTALL_K3S_SKIP_DOWNLOAD=true`并在本地运行安装脚本，而不是通过 curl。您还将利用`INSTALL_K3S_EXEC='args'`为 k3s 提供其他参数。
 
 例如，"使用外部数据库实现高可用"指南的第二步提到了以下内容：
 

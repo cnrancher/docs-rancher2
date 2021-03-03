@@ -19,7 +19,7 @@ keywords:
 
 - 如果你的团队没有操作 etcd 的专业知识，可以选择 MySQL 或 PostgreSQL 等企业级 SQL 数据库。
 - 如果您需要在 CI/CD 环境中运行一个简单的、短暂的集群，您可以使用嵌入式 SQLite 数据库。
-- 如果你希望在边缘部署 Kubernetes，并需要一个高可用的解决方案，但又无法承担在边缘管理数据库的操作开销，你可以使用 K3s 建立在嵌入式 etcd 之上的嵌入式 HA 数据存储（目前是实验性的）。
+- 如果你希望在边缘部署 Kubernetes，并需要一个高可用的解决方案，但又无法承担在边缘管理数据库的操作开销，你可以使用 K3s 建立在嵌入式 etcd 之上的嵌入式 HA 数据存储。
 
 K3s 支持以下数据存储选项：
 
@@ -28,7 +28,7 @@ K3s 支持以下数据存储选项：
 - [MySQL](https://www.mysql.com/) (经过认证的版本：5.7)
 - [MariaDB](https://mariadb.org/) (经过认证的版本：10.3.20)
 - [etcd](https://etcd.io/) (经过认证的版本：3.3.15)
-- 嵌入式 etcd 高可用（实验性）
+- 嵌入式 etcd 高可用
 
 ## 外部数据存储配置参数
 
@@ -102,6 +102,6 @@ K3S_DATASTORE_KEYFILE='/path/to/client.key' \
 k3s server
 ```
 
-## 嵌入式 DB 的高可用（实验）
+## 嵌入式 DB 的高可用
 
-请参阅[嵌入式 DB 的高可用（实验）](/docs/k3s/installation/ha-embedded/_index)了解如何使用该选项运行。
+请参阅[嵌入式 DB 的高可用](/docs/k3s/installation/ha-embedded/_index)了解如何使用该选项运行。
