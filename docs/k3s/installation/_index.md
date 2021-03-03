@@ -20,7 +20,7 @@ keywords:
 
 [外部数据库的高可用](/docs/k3s/installation/ha/_index)详细介绍了如何设置一个由外部数据存储（如 MySQL、PostgreSQL 或 etcd）支持的 K3s HA 集群。
 
-[嵌入式 DB 的高可用（实验）](/docs/k3s/installation/ha-embedded/_index)详细介绍了如何建立一个利用内置分布式数据库的 K3s HA 集群。
+[嵌入式 DB 的高可用](/docs/k3s/installation/ha-embedded/_index)详细介绍了如何建立一个利用内置分布式数据库的 K3s HA 集群。
 
 [离线安装](/docs/k3s/installation/airgap/_index) 详细介绍了如何在不能直接接入互联网的环境中设置 K3s。
 

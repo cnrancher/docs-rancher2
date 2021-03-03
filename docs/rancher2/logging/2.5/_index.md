@@ -112,11 +112,11 @@ spec:
 apiVersion: logging.banzaicloud.io/v1beta1
 kind: ClusterFlow
 metadata:
-    name: "all-logs"
-    namespace: "cattle-logging-system"
+  name: "all-logs"
+  namespace: "cattle-logging-system"
 spec:
   globalOutputRefs:
-    - "example-es
+    - "example-es"
 ```
 
 ### 将集群中的所有日志发送到 splunk

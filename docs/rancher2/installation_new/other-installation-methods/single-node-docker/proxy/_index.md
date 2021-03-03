@@ -37,14 +37,19 @@ keywords:
 - `127.0.0.1`
 - `0.0.0.0`
 - `10.0.0.0/8`
+- `cattle-system.svc`
+- `.svc`
+- `.cluster.local`
 
 以下示例使用了可以通过`http://192.168.0.1:3128`访问的代理服务器，并且在访问网络范围“192.168.10.0/24”以及域“example.com”下的每个主机名时，不使用代理。
 
-```
- --restart=unless-stopped \
+```bash
+docker run -d --restart=unless-stopped \
   -p 80:80 -p 443:443 \
   -e HTTP_PROXY="http://192.168.10.1:3128" \
   -e HTTPS_PROXY="http://192.168.10.1:3128" \
-  -e NO_PROXY="localhost,127.0.0.1,0.0.0.0,10.0.0.0/8,192.168.10.0/24,example.com" \
+  -e NO_PROXY="localhost,127.0.0.1,0.0.0.0,10.0.0.0/8,192.168.10.0/24,.svc,.cluster.local,example.com" \
+  -e NO_PROXY="localhost,127.0.0.1,0.0.0.0,10.0.0.0/8,cattle-system.svc,192.168.10.0/24,.svc,.cluster.local,example.com" \
+  --privileged \
   rancher/rancher:latest
 ```
