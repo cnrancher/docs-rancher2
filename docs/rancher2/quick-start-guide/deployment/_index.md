@@ -24,7 +24,7 @@ keywords:
 - [在 GCP 上快速部署 ](/docs/rancher2/quick-start-guide/deployment/google-gcp-qs/_index)（使用 Terraform）
 - [使用 Vagrant 进行快速部署](/docs/rancher2/quick-start-guide/deployment/quickstart-vagrant/_index)
 
-如果您愿意，以下指南将分步向您介绍相同的过程。如果您想在其他供应商中运行 Rancher，或者时在自己的数据中心运行 Rancher，或者您只想看看启动 Rancher 到底有多简单，请使用以下功能。
+如果您愿意，以下指南将分步向您介绍相同的过程。如果您想在其他供应商中运行 Rancher，或者是在自己的数据中心运行 Rancher，或者您只想看看启动 Rancher 到底有多简单，请使用以下功能。
 
 - [在已有主机上手动部署](/docs/rancher2/quick-start-guide/deployment/quickstart-manual-setup/_index)
 
