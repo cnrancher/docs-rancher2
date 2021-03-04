@@ -54,7 +54,6 @@ keywords:
     #如果您使用的 Rancher 2.5.x 及更新版本，需要开启特权模式安装 Rancher，请执行以下命令：
     docker run -d --privileged --restart=unless-stopped \
       -p 80:80 -p 443:443 \
-      --privileged \
       rancher/rancher:latest
     ```
 
