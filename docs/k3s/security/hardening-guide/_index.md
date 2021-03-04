@@ -579,4 +579,4 @@ k3s server \
 
 ## Conclusion
 
-If you have followed this guide, your K3s cluster will be configured to comply with the CIS Kubernetes Benchmark. You can review the [CIS Benchmark Self-Assessment Guide](../self_assessment/) to understand the expectations of each of the benchmarks and how you can do the same on your cluster.
+If you have followed this guide, your K3s cluster will be configured to comply with the CIS Kubernetes Benchmark. You can review the [CIS Benchmark Self-Assessment Guide](/docs/k3s/security/self-assessment/_index) to understand the expectations of each of the benchmarks and how you can do the same on your cluster.
