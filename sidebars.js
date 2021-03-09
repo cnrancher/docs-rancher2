@@ -8,7 +8,7 @@
 module.exports = {
     rancher2: {
         版本说明: [
-            "rancher2/releases/summary",
+            "rancher2/_index",
             "rancher2/releases/v2.5.6",
             "rancher2/releases/v2.5.5",
             "rancher2/releases/v2.5.4",
