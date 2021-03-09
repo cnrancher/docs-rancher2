@@ -64,3 +64,44 @@ K3s 默认启用快照。快照目录默认为`/server/db/Snapshots`。要配置
 | `--etcd-snapshot-dir`           | 保存数据库快照的目录路径。(默认位置：`${data-dir}/db/snapshots`)                                                               |
 | `--cluster-reset`               | 忘记所有的对等体，成为新集群的唯一成员，也可以通过环境变量`[$K3S_CLUSTER_RESET]`进行设置。                                     |
 | `--cluster-reset-restore-path`  | 要恢复的快照文件的路径                                                                                                         |
+
+### S3 兼容 API 支持
+
+K3s 支持向具有 S3 兼容 API 的系统写入 etcd 快照和从系统中恢复 etcd 快照。S3 支持按需和计划快照。
+
+下面的参数已经被添加到`server`子命令中。这些标志也存在于`etcd-snapshot`子命令中，但是`--etcd-s3`部分被删除以避免冗余。
+
+| 选项                        | 描述                                              |
+| --------------------------- | ------------------------------------------------- |
+| `--etcd-s3`                 | 启用备份到 S3                                     |
+| `--etcd-s3-endpoint`        | S3 endpoint url                                   |
+| `--etcd-s3-endpoint-ca`     | S3 自定义 CA 证书连接到 S3 endpoint               |
+| `--etcd-s3-skip-ssl-verify` | 禁用 S3 SSL 证书验证                              |
+| `--etcd-s3-access-key`      | S3 access key                                     |
+| `--etcd-s3-secret-key`      | S3 secret key                                     |
+| `--etcd-s3-bucket`          | S3 bucket name                                    |
+| `--etcd-s3-region`          | S3 region/bucket 的位置（可选）。默认为 us-east-1 |
+| `--etcd-s3-folder`          | S3 文件夹                                         |
+
+执行按需的 etcd 快照并将其保存到 S3：
+
+```
+k3s etcd-snapshot \
+  --s3 \
+  --s3-bucket=<S3-BUCKET-NAME> \
+  --s3-access-key=<S3-ACCESS-KEY> \
+  --s3-secret-key=<S3-SECRET-KEY>
+```
+
+要从 S3 中执行按需的 etcd 快照还原，首先确保 K3s 没有运行。然后运行以下命令：
+
+```
+k3s server \
+  --cluster-init \
+  --cluster-reset \
+  --etcd-s3 \
+  --cluster-reset-restore-path=<SNAPSHOT-NAME> \
+  --etcd-s3-bucket=<S3-BUCKET-NAME> \
+  --etcd-s3-access-key=<S3-ACCESS-KEY> \
+  --etcd-s3-secret-key=<S3-SECRET-KEY>
+```

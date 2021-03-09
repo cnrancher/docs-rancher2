@@ -83,7 +83,7 @@ module.exports = {
         metadata,
         stable: "版本说明 - v2.5.6",
         baseCommit: "c0e67713aec743cc019dac28586d681933b97e65 - Mar 3, 2021",
-        k3sBaseCommit: "c0e67713aec743cc019dac28586d681933b97e65 - Mar 3, 2021",
+        k3sBaseCommit: "70eeb7a19117f56d4473e4cd9314fb996b69d736 - Mar 9, 2021",
     },
     plugins: [
         "@docusaurus/plugin-baidu-analytics",
