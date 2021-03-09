@@ -113,7 +113,7 @@ function Home() {
                                                             if (
                                                                 "版本说明" ===
                                                                     group.key &&
-                                                                index === 0
+                                                                index === 1
                                                             ) {
                                                                 return (
                                                                     <span
