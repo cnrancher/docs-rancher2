@@ -1,6 +1,6 @@
 ---
 title: 版本概述
-description:
+description: Rancher 2.x 目前有三个大版本：2.3.x、2.4.x 和 2.5.x，每个大版本中有多个小版本，如 2.3.0、2.4.0 和 2.5.0。本文按照版本的发布时间由新到旧罗列了 Rancher 2.3.x、2.4.x 和 2.5.x 中所包含的所有小版本及对应的版本说明。
 keywords:
   - rancher
   - rancher中文
@@ -12,7 +12,7 @@ keywords:
   - rancher 中文文档
   - rancher cn
   - 版本说明
-  - 入门必读
+  - 版本概述
 ---
 
 ## 概述
