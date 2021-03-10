@@ -6,7 +6,8 @@
     "start": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy"
+    "deploy": "docusaurus deploy",
+    "generate": "rm -rf build_docs && ./pdf-generate.js"
   },
   "dependencies": {
     "@docusaurus/core": "^2.0.0-alpha.50",
@@ -15,6 +16,8 @@
     "@docusaurus/preset-classic": "^2.0.0-alpha.50",
     "axios": "0.21.1",
     "classnames": "^2.2.6",
+    "docusaurus-pdf": "1.2.0",
+    "puppeteer": "^2.1.1",
     "react": "^16.8.4",
     "react-dom": "^16.8.4"
   },
