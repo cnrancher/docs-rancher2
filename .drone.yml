@@ -89,6 +89,7 @@ steps:
       noproxy: localhost
     commands:
       - yarn add puppeteer@^2.1.1 --save-dev
+      - ln -s /website/build ./build
       - yarn generate
     volumes:
       - name: vol
