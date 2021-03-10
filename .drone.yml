@@ -107,11 +107,8 @@ steps:
       access_key_secret:
         from_secret: ACCESS_KEY_SECRET
     when:
-      ref:
-        include:
-          - "refs/heads/master"
       event:
-        - push
+        - tag
 
 volumes:
   - name: vol
