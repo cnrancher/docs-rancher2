@@ -120,7 +120,7 @@ helm upgrade rancher rancher-stable/rancher \
 
 方法 1 是最简单的方法，但需要在证书轮换后将所有集群连接到 Rancher。如果该过程是在更新 Rancher 部署后立即执行的（步骤 3），通常会出现这种情况。
 
-如果群集已经失去了与 Rancher 的连接，但你已经启用了[授权群集端点](/docs/rancher2/cluster-admin/cluster-access/ace/_index)，那么就采用方法 2。
+如果集群已经失去了与 Rancher 的连接，但你已经启用了[授权集群端点](/docs/rancher2/cluster-admin/cluster-access/ace/_index)，那么就采用方法 2。
 
 如果方法 1 和 2 不可行，可以将方法 3 作为后备方法。
 
