@@ -18,18 +18,18 @@ keywords:
 
 本章节描述了如何在 Rancher 里为工作负载配置现有的持久化存储。请按照以下步骤配置持久卷和持久卷声明。
 
-> 本章节假定您已了解 Kubernetes 持久卷和持久卷声明的概念，如果您想了解持久卷和持久卷声明的工作原理，请参考[存储是如何工作的](/docs/rancher2/cluster-admin/volumes-and-storage/how-storage-works/_index)。
+> 本章节假定您已了解 Kubernetes 持久卷和持久卷声明的概念，如果您想了解持久卷和持久卷声明的工作原理，请参考[存储是如何工作的](/docs/rancher2.5/cluster-admin/volumes-and-storage/how-storage-works/_index)。
 
 ## 先决条件
 
-- 配置持久化存储前，请检查您的账户是否有 `管理卷（Manage Volumes）` 权限，具有该权限的[角色](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)可以配置持久化存储。
+- 配置持久化存储前，请检查您的账户是否有 `管理卷（Manage Volumes）` 权限，具有该权限的[角色](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)可以配置持久化存储。
 - 如果要在基础设施提供商托管的集群中设置存储，则需要保证存储和集群主机是来自同一个基础设施提供商。
 
 ## 设置持久化存储
 
 在 Rancher 中，创建 PV 并不会创建真正的存储卷，它只会创建一个 Kubernetes 资源，映射到现有的卷。因此，必须先配置存储，然后再创建 PV。
 
-设置持久化存储设备的步骤将根据基础设施而有所不同。我们提供了一些例子来展示如何进行存储设置：[NFS](/docs/rancher2/cluster-admin/volumes-and-storage/examples/nfs/_index)，[vSphere](/docs/rancher2/cluster-admin/volumes-and-storage/examples/vsphere/_index) 以及[亚马逊 EBS](/docs/rancher2/cluster-admin/volumes-and-storage/examples/ebs/_index)。
+设置持久化存储设备的步骤将根据基础设施而有所不同。我们提供了一些例子来展示如何进行存储设置：[NFS](/docs/rancher2.5/cluster-admin/volumes-and-storage/examples/nfs/_index)，[vSphere](/docs/rancher2.5/cluster-admin/volumes-and-storage/examples/vsphere/_index) 以及[亚马逊 EBS](/docs/rancher2.5/cluster-admin/volumes-and-storage/examples/ebs/_index)。
 
 ## 添加持久卷
 

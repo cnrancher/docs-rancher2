@@ -21,7 +21,7 @@ keywords:
 
 ## 仔细检查是否在主机防火墙中打开了所有必需的端口
 
-仔细检查是否所有[所需的端口](/docs/rancher2/cluster-provisioning/node-requirements/_index)在主机防火墙中打开。与其他所有必需的 TCP 端口相比，Overlay 网络使用 UDP。
+仔细检查是否所有[所需的端口](/docs/rancher2.5/cluster-provisioning/node-requirements/_index)在主机防火墙中打开。与其他所有必需的 TCP 端口相比，Overlay 网络使用 UDP。
 
 ## 检查 Overlay 网络是否正常运行
 
@@ -70,7 +70,7 @@ keywords:
    => End network overlay test
    ```
 
-如果您在输出中看到错误，则表示用于 Overlay 网络的[所需的端口](/docs/rancher2/cluster-provisioning/node-requirements/_index)在指示的主机之间没有打开。
+如果您在输出中看到错误，则表示用于 Overlay 网络的[所需的端口](/docs/rancher2.5/cluster-provisioning/node-requirements/_index)在指示的主机之间没有打开。
 
 NODE1 的 UDP 端口被阻塞的情况的示例错误输出。
 
@@ -119,7 +119,7 @@ kubectl get nodes -o json | jq '.items[].metadata | select(.annotations["flannel
 
 已知问题 [GitHub #15146](https://github.com/rancher/rancher/issues/15146)。
 
-如果系统命名空间中的 Pod 无法与其他系统命名空间中的 Pod 通信，则需要按照[升级到 v2.0.7+ ：命名空间迁移](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/namespace-migration/_index)描述的方式恢复连接。症状包括：
+如果系统命名空间中的 Pod 无法与其他系统命名空间中的 Pod 通信，则需要按照[升级到 v2.0.7+ ：命名空间迁移](/docs/rancher2.5/installation_new/install-rancher-on-k8s/upgrades/namespace-migration/_index)描述的方式恢复连接。症状包括：
 
 - NGINX ingress controller 在访问时显示 `504 Gateway Time-out`。
 - NGINX ingress controller 访问时日志打印 `upstream timed out (110: Connection timed out) while connecting to upstream`。

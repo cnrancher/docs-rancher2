@@ -53,9 +53,9 @@ Rancher 将发现和显示由 `kubectl` 创建的资源。但是，这些资源�
 
 ## 直接使用下游集群进行身份验证
 
-本节的目的是帮助您设置另一种方法来访问[RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)。
+本节的目的是帮助您设置另一种方法来访问[RKE 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)。
 
-此方法仅对启用了[已授权的集群端点](/docs/rancher2/overview/architecture/_index) 的 RKE 集群可用，当 Rancher 创建这个 RKE 集群时，它会生成一个 kubeconfig 文件，其中包含用于访问您的集群的其他 kubectl 上下文。这个额外的上下文允许您使用 kubectl 与下游集群进行身份验证，而无需通过 Rancher 进行身份验证。有关授权的集群端点如何工作的详细说明，请参阅[此页](/docs/rancher2/cluster-admin/cluster-access/ace/_index)。
+此方法仅对启用了[已授权的集群端点](/docs/rancher2.5/overview/architecture/_index) 的 RKE 集群可用，当 Rancher 创建这个 RKE 集群时，它会生成一个 kubeconfig 文件，其中包含用于访问您的集群的其他 kubectl 上下文。这个额外的上下文允许您使用 kubectl 与下游集群进行身份验证，而无需通过 Rancher 进行身份验证。有关授权的集群端点如何工作的详细说明，请参阅[此页](/docs/rancher2.5/cluster-admin/cluster-access/ace/_index)。
 
 我们建议，作为一种最佳实践，您应该设置此方法来访问您的 RKE 集群，以便万一无法连接到 Rancher 时，您仍然可以访问集群。
 
@@ -74,7 +74,7 @@ CURRENT   NAME                        CLUSTER                     AUTHINFO     N
 
 对于第二个上下文 `my-cluster-controlplane-1`，您将使用授权的集群端点进行身份验证，直接与下游 RKE 集群通信。
 
-我们建议使用具有经过授权的集群端点的负载均衡器。有关详细信息，请参阅[推荐的架构部分](/docs/rancher2/overview/architecture-recommendations/_index)。
+我们建议使用具有经过授权的集群端点的负载均衡器。有关详细信息，请参阅[推荐的架构部分](/docs/rancher2.5/overview/architecture-recommendations/_index)。
 
 现在您已经有了直接使用集群进行身份验证所需的上下文的名称，您可以在运行 kubectl 命令时将上下文的名称作为一个选项传递进来。这些命令将根据您的集群是否定义了 FQDN 而有所不同。下面几节提供了示例。
 

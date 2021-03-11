@@ -21,7 +21,7 @@ _自 v2.3.0 起可用_
 
 此功能允许您使用默认没有被启用的存储提供商的存储类和存储卷类型。
 
-要启用或禁用此功能，请参阅[关于启用实验性功能的主页](/docs/rancher2/installation_new/resources/feature-flags/_index)。
+要启用或禁用此功能，请参阅[关于启用实验性功能的主页](/docs/rancher2.5/installation_new/resources/feature-flags/_index)。
 
 | 环境变量 Key                  | 默认值  | 描述                                                   |
 | :---------------------------- | :------ | :----------------------------------------------------- |

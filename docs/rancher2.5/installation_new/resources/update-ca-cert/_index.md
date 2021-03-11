@@ -21,7 +21,7 @@ keywords:
 
 ## 概述
 
-请按照这些步骤更新 Rancher[高可用 Kubernetes 安装](/docs/rancher2/installation_new/install-rancher-on-k8s/_index)中的入口的 SSL 证书，或者从默认的自签名证书切换到自定义证书。
+请按照这些步骤更新 Rancher[高可用 Kubernetes 安装](/docs/rancher2.5/installation_new/install-rancher-on-k8s/_index)中的入口的 SSL 证书，或者从默认的自签名证书切换到自定义证书。
 
 具体步骤总结如下：
 
@@ -92,7 +92,7 @@ $ helm ls -A
 
 使用原始配置值升级 Helm 应用实例，并确保指定`ingress.tls.source=secret`以及当前 chart 版本，以防止应用升级。
 
-如果证书是由私有 CA 签署的，也要添加`set privateCA=true`参数。另外，请务必阅读描述使用[自定义证书](/docs/rancher2/installation_new/install-rancher-on-k8s/_index)进行初始安装的文档。
+如果证书是由私有 CA 签署的，也要添加`set privateCA=true`参数。另外，请务必阅读描述使用[自定义证书](/docs/rancher2.5/installation_new/install-rancher-on-k8s/_index)进行初始安装的文档。
 
 ```bash
 helm upgrade rancher rancher-stable/rancher \
@@ -120,7 +120,7 @@ helm upgrade rancher rancher-stable/rancher \
 
 方法 1 是最简单的方法，但需要在证书轮换后将所有集群连接到 Rancher。如果该过程是在更新 Rancher 部署后立即执行的（步骤 3），通常会出现这种情况。
 
-如果集群已经失去了与 Rancher 的连接，但你已经启用了[授权集群端点](/docs/rancher2/cluster-admin/cluster-access/ace/_index)，那么就采用方法 2。
+如果集群已经失去了与 Rancher 的连接，但你已经启用了[授权集群端点](/docs/rancher2.5/cluster-admin/cluster-access/ace/_index)，那么就采用方法 2。
 
 如果方法 1 和 2 不可行，可以将方法 3 作为后备方法。
 

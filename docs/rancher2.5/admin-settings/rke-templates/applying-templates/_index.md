@@ -16,13 +16,13 @@ keywords:
   - 使用模板
 ---
 
-创建 RKE 集群时，您可以使用自己创建的 RKE 模板或已[共享的模板](/docs/rancher2/admin-settings/rke-templates/template-access-and-sharing/_index)创建集群。
+创建 RKE 集群时，您可以使用自己创建的 RKE 模板或已[共享的模板](/docs/rancher2.5/admin-settings/rke-templates/template-access-and-sharing/_index)创建集群。
 
 从 Rancher v2.3.3 开始，您可以[将现有集群的配置保存为 RKE 模板](#将现有集群转换为使用-rke-模板)，只有更新模板时才能更改集群的设置。使用模板创建集群后，只能将集群更新为同一模板的新版本，不能将集群更改为使用其他 RKE 模板。
 
 ## 从 RKE 模板创建集群
 
-要使用 RKE 模板添加[RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)，请使用以下步骤:
+要使用 RKE 模板添加[RKE 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)，请使用以下步骤:
 
 1. 从**全局**视图，转到**集群**选项卡。
 1. 单击**添加集群**，然后选择基础设施提供商。
@@ -36,7 +36,7 @@ keywords:
 
 当模板所有者创建模板时，每个设置在 Rancher UI 中都有一个开关，指示用户是否可以覆盖该设置。
 
-- 如果设置允许用户覆盖，则可以通过[编辑集群](/docs/rancher2/cluster-admin/editing-clusters/_index)更新集群中的这些设置
+- 如果设置允许用户覆盖，则可以通过[编辑集群](/docs/rancher2.5/cluster-admin/editing-clusters/_index)更新集群中的这些设置
 - 如果该开关处于关闭状态，则除非集群所有者创建了允许您覆盖这些设置的模板修订版，否则无法更改这些设置。如果有要更改的设置，但没有此选项，则需要与模板所有者联系以获取模板的新版本。
 
 如果集群是从 RKE 模板创建的，则可以编辑集群以将集群更新为模板的新版本。
@@ -61,4 +61,4 @@ RKE 模板不能应用于现有集群，除非将现有集群的设置保存为 
 
 - 将创建一个新的 RKE 模板。
 - 将转换集群以使用新模板。
-- 可以[从新模板创建新集群](/docs/rancher2/admin-settings/rke-templates/applying-templates/_index)。
+- 可以[从新模板创建新集群](/docs/rancher2.5/admin-settings/rke-templates/applying-templates/_index)。

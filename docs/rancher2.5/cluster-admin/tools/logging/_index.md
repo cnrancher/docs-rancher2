@@ -55,8 +55,8 @@ Logging Driver: json-file
 
 您可以在集群级别或项目级别配置日志收集范围。
 
-- 集群日志采集集群中所有 Pod 的日志，即包含所有项目。对于 [RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)，它还会收集所有 Kubernetes 系统组件的日志。
-- [项目级别的日志](/docs/rancher2/project-admin/tools/logging/_index)收集所有在这个项目下的 Pod 的日志。
+- 集群日志采集集群中所有 Pod 的日志，即包含所有项目。对于 [RKE 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)，它还会收集所有 Kubernetes 系统组件的日志。
+- [项目级别的日志](/docs/rancher2.5/project-admin/tools/logging/_index)收集所有在这个项目下的 Pod 的日志。
 
 发送到外部日志服务的日志来源于：
 
@@ -65,7 +65,7 @@ Logging Driver: json-file
 
 ## 开启集群级别的日志
 
-作为[系统管理员](/docs/rancher2/admin-settings/rbac/global-permissions/_index)或者[集群所有者](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)，您可以配置 Rancher 把集群的日志发送到外部的日志服务。
+作为[系统管理员](/docs/rancher2.5/admin-settings/rbac/global-permissions/_index)或者[集群所有者](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)，您可以配置 Rancher 把集群的日志发送到外部的日志服务。
 
 1. 从**全局**视图中，进入要收集日志的集群。
 
@@ -73,11 +73,11 @@ Logging Driver: json-file
 
 1. 选择一个日志服务，然后输入配置。有关详细的配置，请参考特定的服务。Rancher 支持与以下日志服务集成：
 
-   - [Elasticsearch 配置指南](/docs/rancher2/logging/2.0.x-2.4.x/cluster-logging/elasticsearch/_index)
-   - [Splunk 配置指南](/docs/rancher2/logging/2.0.x-2.4.x/cluster-logging/splunk/_index)
-   - [Kafka 配置指南](/docs/rancher2/logging/2.0.x-2.4.x/cluster-logging/kafka/_index)
-   - [Syslog 配置指南](/docs/rancher2/logging/2.0.x-2.4.x/cluster-logging/syslog/_index)
-   - [Fluentd 配置指南](/docs/rancher2/logging/2.0.x-2.4.x/cluster-logging/fluentd/_index)
+   - [Elasticsearch 配置指南](/docs/rancher2.5/logging/2.0.x-2.4.x/cluster-logging/elasticsearch/_index)
+   - [Splunk 配置指南](/docs/rancher2.5/logging/2.0.x-2.4.x/cluster-logging/splunk/_index)
+   - [Kafka 配置指南](/docs/rancher2.5/logging/2.0.x-2.4.x/cluster-logging/kafka/_index)
+   - [Syslog 配置指南](/docs/rancher2.5/logging/2.0.x-2.4.x/cluster-logging/syslog/_index)
+   - [Fluentd 配置指南](/docs/rancher2.5/logging/2.0.x-2.4.x/cluster-logging/fluentd/_index)
 
 1. （可选）您可以通过单击位于日志记录目标上方的**以文件形式编辑**，输入自定义高级配置。此链接仅在选择日志服务后可见。使用文件编辑器，为任何日志服务输入原始的 Fluentd 配置。有关如何设置输出配置，请参阅每个日志服务的文档。
 

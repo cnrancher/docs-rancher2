@@ -143,7 +143,7 @@ stages:
 
 _可用于 v2.2.0_
 
-**发布应用模板** 步骤将应用商店模板的版本文件（即 Helm chart）发布到[git 托管的 chart 代码库](/docs/rancher2/helm-charts/legacy-catalogs/adding-catalogs/_index)。Rancher 将生成一个 git commit 并将其推送到您的 chart 代码库。此过程需要在源代码库中有一个 chart 文件夹。并且需要您在流水线专用的命名空间中预先配置的好可以访问 git 的密文。您可以在 chart 文件夹中的任何文件中使用[流水线变量替换功能](#流水线变量替换列表)。
+**发布应用模板** 步骤将应用商店模板的版本文件（即 Helm chart）发布到[git 托管的 chart 代码库](/docs/rancher2.5/helm-charts/legacy-catalogs/adding-catalogs/_index)。Rancher 将生成一个 git commit 并将其推送到您的 chart 代码库。此过程需要在源代码库中有一个 chart 文件夹。并且需要您在流水线专用的命名空间中预先配置的好可以访问 git 的密文。您可以在 chart 文件夹中的任何文件中使用[流水线变量替换功能](#流水线变量替换列表)。
 
 ### 通过 UI 设置发布应用模板
 
@@ -294,7 +294,7 @@ timeout: 30
 
 _可用于 v2.2.0_
 
-**通知：** 您可以决定是否要为流水线设置通知。您可以根据流水线的构建状态，启用任何[通知](/docs/rancher2/monitoring-alerting/2.0-2.4/notifiers/_index)。在启用流水线通知之前，您需要[配置通知](/docs/rancher2/monitoring-alerting/2.0-2.4/notifiers/_index)，这样可以轻松地添加接收者。
+**通知：** 您可以决定是否要为流水线设置通知。您可以根据流水线的构建状态，启用任何[通知](/docs/rancher2.5/monitoring-alerting/2.0-2.4/notifiers/_index)。在启用流水线通知之前，您需要[配置通知](/docs/rancher2.5/monitoring-alerting/2.0-2.4/notifiers/_index)，这样可以轻松地添加接收者。
 
 ### 通过 UI 配置通知
 
@@ -304,7 +304,7 @@ _可用于 v2.2.0_
 
 1. 选择通知的条件。您可以选择获得下列状态的通知：`Failed`，`Success`，`Changed`。例如，如果您想在执行失败时接收通知，请选择**Failed**.
 
-1. 如果您没有任何现有的[通知](/docs/rancher2/monitoring-alerting/2.0-2.4/notifiers/_index)，Rancher 将警告您未设置任何通知，并提供一个链接，可转到设置通知页面。按照[相关说明文档](/docs/rancher2/monitoring-alerting/2.0-2.4/notifiers/_index)添加通知。如果您已有接收者，则可以通过单击**添加接收者**按钮将其添加到通知中。
+1. 如果您没有任何现有的[通知](/docs/rancher2.5/monitoring-alerting/2.0-2.4/notifiers/_index)，Rancher 将警告您未设置任何通知，并提供一个链接，可转到设置通知页面。按照[相关说明文档](/docs/rancher2.5/monitoring-alerting/2.0-2.4/notifiers/_index)添加通知。如果您已有接收者，则可以通过单击**添加接收者**按钮将其添加到通知中。
 
    > **注意：**通知是在集群级别配置的，需要不同级别的权限。
 
@@ -504,7 +504,7 @@ stages:
 
 ## 密文
 
-如果您需要在流水线脚本中使用对安全敏感的信息（例如密码），则可以使用 Kubernetes [密文](/docs/rancher2/k8s-in-rancher/secrets/_index)传递它们。
+如果您需要在流水线脚本中使用对安全敏感的信息（例如密码），则可以使用 Kubernetes [密文](/docs/rancher2.5/k8s-in-rancher/secrets/_index)传递它们。
 
 ### 先决条件
 
@@ -566,7 +566,7 @@ stages:
 
 ## 项目级别流水线执行配置
 
-配置了版本控制提供商 后，您可以配置一些项目级别的[流水线](/docs/rancher2/k8s-in-rancher/pipelines/_index)相关的选项。
+配置了版本控制提供商 后，您可以配置一些项目级别的[流水线](/docs/rancher2.5/k8s-in-rancher/pipelines/_index)相关的选项。
 
 1. 从全局页面导航到需要配置流水线的项目。
 
@@ -598,7 +598,7 @@ _v2.2.0 或更新版本可用_
 
 您可以在`.rancher-pipeline.yml`文件中配置流水线步骤容器的计算资源。
 
-在[步骤类型](/docs/rancher2/k8s-in-rancher/pipelines/_index)中，您需要提供以下预留和限制：
+在[步骤类型](/docs/rancher2.5/k8s-in-rancher/pipelines/_index)中，您需要提供以下预留和限制：
 
 - **CPU 预留**: 预留给流水线步骤容器的 CPU 配额。
 - **CPU 限制**: 流水线步骤容器的能使用 CPU 的最大限额。
@@ -651,8 +651,8 @@ _v2.2.0 或更新版本可用_
 
 Docker 镜像仓库和 MinIO 工作负载默认使用临时存储，临时存储足以应对对大多数情况。如果您希望流水线内嵌的镜像仓库中的镜像和流水线日志在节点失败的情况下能被保存下来，您可以给镜像日志配置持久存储。下文提供了配置持久存储的操作指导。
 
-有关为流水线设置持久化存储的详细信息，请参阅[此页面](/docs/rancher2/k8s-in-rancher/pipelines/storage/_index)。
+有关为流水线设置持久化存储的详细信息，请参阅[此页面](/docs/rancher2.5/k8s-in-rancher/pipelines/storage/_index)。
 
 ## rancher-pipeline.yml 示例
 
-[本页](/docs/rancher2/k8s-in-rancher/pipelines/example/_index)上有一个示例流水线配置文件。
+[本页](/docs/rancher2.5/k8s-in-rancher/pipelines/example/_index)上有一个示例流水线配置文件。

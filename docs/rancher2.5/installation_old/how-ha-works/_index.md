@@ -17,7 +17,7 @@ keywords:
 
 ## 概述
 
-我们建议使用[Helm](/docs/rancher2/overview/concepts/_index#关于-helm) (Kubernetes 包管理器)在专用的 Kubernetes 集群上安装 Rancher。因为通过在多个节点上运行 Rancher 可以提高可用性，这个安装方式叫做“高可用 Kubernetes 安装”。
+我们建议使用[Helm](/docs/rancher2.5/overview/concepts/_index#关于-helm) (Kubernetes 包管理器)在专用的 Kubernetes 集群上安装 Rancher。因为通过在多个节点上运行 Rancher 可以提高可用性，这个安装方式叫做“高可用 Kubernetes 安装”。
 
 在标准安装中，首先将 Kubernetes 安装在基础设施提供商（例如 Amazon 的 EC2 或 Google Compute Engine）中托管的三个节点上。
 
@@ -25,7 +25,7 @@ keywords:
 
 Rancher server 数据存储在 etcd 或 MySQL 中（适用于 v2.4.0 及更新版本)。etcd 数据库可以在所有三个节点上运行，并且需要奇数个节点，这样它就可以由大多数节点选举出 etcd 集群的 leader。如果 etcd 数据库不能选出 leader，则 etcd 可能会失败，从而需要从备份中还原集群。
 
-有关 Rancher 如何工作的说明（与安装方法无关），请参阅 Rancher 的[产品架构](/docs/rancher2/overview/architecture/_index)。
+有关 Rancher 如何工作的说明（与安装方法无关），请参阅 Rancher 的[产品架构](/docs/rancher2.5/overview/architecture/_index)。
 
 ## 推荐架构
 

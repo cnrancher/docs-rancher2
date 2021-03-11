@@ -53,8 +53,8 @@ Rancher 内置了两个默认的 Pod 安全策略（PSP）：`受限`和`不受�
 
 ### 前提条件
 
-- Rancher 只能为[使用 RKE 启动的集群分配 Pod 安全策略](/docs/rancher2/cluster-provisioning/rke-clusters/_index)
-- 在将 PSP 分配给项目之前，你必须先在集群层面启用 PSP。这可以通过[编辑集群](/docs/rancher2/cluster-admin/editing-clusters/_index)来配置。
+- Rancher 只能为[使用 RKE 启动的集群分配 Pod 安全策略](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)
+- 在将 PSP 分配给项目之前，你必须先在集群层面启用 PSP。这可以通过[编辑集群](/docs/rancher2.5/cluster-admin/editing-clusters/_index)来配置。
 - 最好的做法是在集群层面设置 PSP。
 - 我们建议在集群和项目创建期间添加 PSP，而不是将其添加到现有的项目中。
 
@@ -72,9 +72,9 @@ Rancher 内置了两个默认的 Pod 安全策略（PSP）：`受限`和`不受�
 
 您可以在以下场景中中添加 Pod 安全策略（PSP)：
 
-- [创建集群时](/docs/rancher2/cluster-provisioning/rke-clusters/options/pod-security-policies/_index)
-- [编辑现有集群时](/docs/rancher2/cluster-admin/editing-clusters/_index)
-- [创建项目时](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)
-- [编辑现有项目时](/docs/rancher2/project-admin/_index)
+- [创建集群时](/docs/rancher2.5/cluster-provisioning/rke-clusters/options/pod-security-policies/_index)
+- [编辑现有集群时](/docs/rancher2.5/cluster-admin/editing-clusters/_index)
+- [创建项目时](/docs/rancher2.5/cluster-admin/projects-and-namespaces/_index)
+- [编辑现有项目时](/docs/rancher2.5/project-admin/_index)
 
 > **注意：** 我们建议在集群和项目创建期间添加 PSP，而不是将 PSP 添加到现有的集群和项目中。

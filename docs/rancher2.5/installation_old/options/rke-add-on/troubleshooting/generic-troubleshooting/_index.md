@@ -20,15 +20,15 @@ keywords:
 
 :::important 重要提示
 RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
-请使用 Rancher helm chart 将 Rancher 安装在 Kubernetes 集群上。有关详细信息，请参见[Rancher 高可用安装](/docs/rancher2/installation/k8s-install/_index)。
-如果您当前正在使用 RKE add-on 安装方法，参见[将 RKE add-on 安装的 Rancher 迁移到 Helm 安装](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/migrating-from-rke-add-on/_index)，获取有关如何使用 Helm chart 的详细信息。
+请使用 Rancher helm chart 将 Rancher 安装在 Kubernetes 集群上。有关详细信息，请参见[Rancher 高可用安装](/docs/rancher2.5/installation/k8s-install/_index)。
+如果您当前正在使用 RKE add-on 安装方法，参见[将 RKE add-on 安装的 Rancher 迁移到 Helm 安装](/docs/rancher2.5/installation_new/install-rancher-on-k8s/upgrades/migrating-from-rke-add-on/_index)，获取有关如何使用 Helm chart 的详细信息。
 :::
 
 您可以按下列步骤定位您集群中的问题。
 
 ## 防火墙端口是否打开
 
-仔细检查[所需端口](/docs/rancher2/cluster-provisioning/node-requirements/_index)是否已在主机防火墙或 VPC 安全组中打开。
+仔细检查[所需端口](/docs/rancher2.5/cluster-provisioning/node-requirements/_index)是否已在主机防火墙或 VPC 安全组中打开。
 
 ## 节点是否处于 Ready 状态
 
@@ -158,7 +158,7 @@ Pod 可以被调度到集群中的任何主机，这就意味着 NGINX ingress c
      => End
    ```
 
-如果在输出中看到错误，则表示在测试的主机之间未打开 Overlay 网络的[所需端口](/docs/rancher2/cluster-provisioning/node-requirements/_index)。
+如果在输出中看到错误，则表示在测试的主机之间未打开 Overlay 网络的[所需端口](/docs/rancher2.5/cluster-provisioning/node-requirements/_index)。
 
 下面是当 NODE1 的 UDP 端口被禁用时的错误示例：
 

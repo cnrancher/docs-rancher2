@@ -66,7 +66,7 @@ keywords:
 
 ## 分配自定义集群角色
 
-管理员[设置自定义集群角色](/docs/rancher2/admin-settings/rbac/default-custom-roles/_index)后，集群所有者和管理员可以将这些角色分配给集群成员。
+管理员[设置自定义集群角色](/docs/rancher2.5/admin-settings/rbac/default-custom-roles/_index)后，集群所有者和管理员可以将这些角色分配给集群成员。
 
 可以使用 Rancher UI，将自定义角色分配给新的集群成员。要修改现有成员的权限，您将需要使用 Rancher API 视图。
 
@@ -152,7 +152,7 @@ keywords:
 
 有两种更改默认集群/项目角色的方法：
 
-- **分配自定义角色**：为您的[集群](#自定义集群角色)或[项目](#自定义项目角色)创建一个[自定义角色](/docs/rancher2/admin-settings/rbac/default-custom-roles/_index)，然后将自定义角色设置为默认角色。
+- **分配自定义角色**：为您的[集群](#自定义集群角色)或[项目](#自定义项目角色)创建一个[自定义角色](/docs/rancher2.5/admin-settings/rbac/default-custom-roles/_index)，然后将自定义角色设置为默认角色。
 
 - **分配单独的角色**：将多个[集群](#集群角色参考)/[项目](#项目角色参考)角色配置为默认角色，以分配给创建用户。
 
@@ -160,7 +160,7 @@ keywords:
 
 > **注意：**
 >
-> - 尽管您可以[锁定](/docs/rancher2/admin-settings/rbac/locked-roles/_index)默认角色，但系统仍会将该角色分配给创建集群/项目的用户。
+> - 尽管您可以[锁定](/docs/rancher2.5/admin-settings/rbac/locked-roles/_index)默认角色，但系统仍会将该角色分配给创建集群/项目的用户。
 > - 只有创建集群/项目的用户才能继承其角色。此后添加到集群/项目成员资格的用户必须明确分配其角色。
 
 ## 为集群和项目创建者配置默认角色

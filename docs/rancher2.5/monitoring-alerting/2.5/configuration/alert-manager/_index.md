@@ -206,4 +206,4 @@ spec:
 #    key: string
 ```
 
-关于为 "rancher-cis-benchmark "启用警报的更多信息，请参见[本节](/docs/rancher2/cis-scans/2.5/_index)
+关于为 "rancher-cis-benchmark "启用警报的更多信息，请参见[本节](/docs/rancher2.5/cis-scans/2.5/_index)

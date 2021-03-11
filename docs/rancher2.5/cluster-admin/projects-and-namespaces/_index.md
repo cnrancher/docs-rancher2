@@ -39,18 +39,18 @@ keywords:
 
 您可以将以下资源直接分配给命名空间：
 
-- [工作负载](/docs/rancher2/k8s-in-rancher/workloads/_index)
-- [负载均衡/Ingress](/docs/rancher2/k8s-in-rancher/load-balancers-and-ingress/_index)
-- [服务发现](/docs/rancher2/k8s-in-rancher/service-discovery/_index)
-- [PVC](/docs/rancher2/cluster-admin/volumes-and-storage/how-storage-works/_index)
-- [证书](/docs/rancher2/k8s-in-rancher/certificates/_index)
-- [配置映射](/docs/rancher2/k8s-in-rancher/configmaps/_index)
-- [镜像仓库凭证](/docs/rancher2/k8s-in-rancher/registries/_index)
-- [密文](/docs/rancher2/k8s-in-rancher/secrets/_index)
+- [工作负载](/docs/rancher2.5/k8s-in-rancher/workloads/_index)
+- [负载均衡/Ingress](/docs/rancher2.5/k8s-in-rancher/load-balancers-and-ingress/_index)
+- [服务发现](/docs/rancher2.5/k8s-in-rancher/service-discovery/_index)
+- [PVC](/docs/rancher2.5/cluster-admin/volumes-and-storage/how-storage-works/_index)
+- [证书](/docs/rancher2.5/k8s-in-rancher/certificates/_index)
+- [配置映射](/docs/rancher2.5/k8s-in-rancher/configmaps/_index)
+- [镜像仓库凭证](/docs/rancher2.5/k8s-in-rancher/registries/_index)
+- [密文](/docs/rancher2.5/k8s-in-rancher/secrets/_index)
 
 为了管理原生的 Kubernetes 集群中的权限，集群管理员需要为每个命名空间都配置基于角色的访问策略。使用 Rancher，用户权限将改为在项目级别分配，某个项目中都任何命名空间都将自动继承这些访问策略。
 
-有关创建和移动命名空间的更多信息，请参见[命名空间](/docs/rancher2/project-admin/namespaces/_index)。
+有关创建和移动命名空间的更多信息，请参见[命名空间](/docs/rancher2.5/project-admin/namespaces/_index)。
 
 ### 命名空间和 kubectl 的基于角色的访问控制问题
 
@@ -58,7 +58,7 @@ keywords:
 
 这意味着当具有项目范围权限的标准用户使用`kubectl`创建命名空间时，新的命名空间可能无法使用，因为`kubectl`不需要将新命名空间限制在特定项目中。
 
-如果您的权限仅限于项目级别，则最好[通过 Rancher 创建命名空间](/docs/rancher2/project-admin/namespaces/_index)，从而确保您有权访问命名空间。
+如果您的权限仅限于项目级别，则最好[通过 Rancher 创建命名空间](/docs/rancher2.5/project-admin/namespaces/_index)，从而确保您有权访问命名空间。
 
 如果标准用户是项目所有者，则该用户将能够在该项目中创建命名空间。 Rancher UI 将阻止该用户在他们有权访问的项目范围之外创建命名空间。
 
@@ -77,8 +77,8 @@ keywords:
 
 您可以使用项目执行以下操作：
 
-- 将用户分配到一组命名空间（例如，[项目成员](/docs/rancher2/project-admin/project-members/_index)）。
-- 在项目中为用户分配特定角色。角色可以是所有者，成员，只读或[自定义角色](/docs/rancher2/admin-settings/rbac/default-custom-roles/_index)。
+- 将用户分配到一组命名空间（例如，[项目成员](/docs/rancher2.5/project-admin/project-members/_index)）。
+- 在项目中为用户分配特定角色。角色可以是所有者，成员，只读或[自定义角色](/docs/rancher2.5/admin-settings/rbac/default-custom-roles/_index)。
 - 为项目分配资源配额。
 - 分配 Pod 安全策略。
 
@@ -112,7 +112,7 @@ _从 v2.0.7 版本开始支持_
 
 > **注意：** 如果集群满足以下两个条件：
 >
-> - 正在使用 [Canal 网络插件](/docs/rancher2/cluster-provisioning/rke-clusters/options/_index)。
+> - 正在使用 [Canal 网络插件](/docs/rancher2.5/cluster-provisioning/rke-clusters/options/_index)。
 > - 启用了项目网络隔离选项。
 >
 > `System` 项目将覆盖项目网络隔离选项，以便它可以与其他项目通信，从而收集日志并检查运行状况。
@@ -126,7 +126,7 @@ _从 v2.0.7 版本开始支持_
 
 ## Pod 安全策略
 
-Rancher 扩展了 Kubernetes 以允许在[项目级别](/docs/rancher2/project-admin/pod-security-policies/_index)上应用[Pod 安全策略](https://kubernetes.io/docs/concepts/policy/pod-security-policy/)，作为[集群级别](/docs/rancher2/cluster-admin/pod-security-policy/_index)之外的安全性策略。但是，作为最佳实践，我们建议在集群级别应用 Pod 安全策略。
+Rancher 扩展了 Kubernetes 以允许在[项目级别](/docs/rancher2.5/project-admin/pod-security-policies/_index)上应用[Pod 安全策略](https://kubernetes.io/docs/concepts/policy/pod-security-policy/)，作为[集群级别](/docs/rancher2.5/cluster-admin/pod-security-policy/_index)之外的安全性策略。但是，作为最佳实践，我们建议在集群级别应用 Pod 安全策略。
 
 ## 创建项目
 
@@ -142,7 +142,7 @@ Rancher 扩展了 Kubernetes 以允许在[项目级别](/docs/rancher2/project-a
 
 ### 可选：选择一个 Pod 安全策略
 
-仅当您已经创建了 Pod 安全策略时，此选项才可用。有关说明，请参阅[创建 Pod 安全策略](/docs/rancher2/admin-settings/pod-security-policies/_index)。
+仅当您已经创建了 Pod 安全策略时，此选项才可用。有关说明，请参阅[创建 Pod 安全策略](/docs/rancher2.5/admin-settings/pod-security-policies/_index)。
 
 将 PSP 分配给项目将：
 
@@ -159,24 +159,24 @@ Rancher 扩展了 Kubernetes 以允许在[项目级别](/docs/rancher2/project-a
 > **关于权限的说明：**
 >
 > - 为项目分配了`所有者`或`成员`角色的用户会自动继承`命名空间创建`角色。但是，此角色是 [Kubernetes ClusterRole](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#role-and-clusterrole)，这意味着它的作用域扩展到了集群中的所有项目。因此，在某个项目中明确分配了`所有者`或`成员`角色的用户，即使在其他项目中仅分配了`只读`角色，这些用户也可以在这些项目中创建命名空间。
-> - 选择`自定义`以动态创建自定义角色：[自定义项目角色](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)。
+> - 选择`自定义`以动态创建自定义角色：[自定义项目角色](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)。
 
 要添加成员：
 
 1. 单击`添加成员`。
 1. 在`名称`组合框中，搜索要分配项目访问权限的用户或组。注意：只有启用了外部身份验证，您才可以搜索组。
-1. 从`角色`下拉列表中，选择一个角色。有关更多信息，请参阅[关于项目角色的文档](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)。
+1. 从`角色`下拉列表中，选择一个角色。有关更多信息，请参阅[关于项目角色的文档](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)。
 
 ### 添加资源配额
 
 _从 v2.1.0 版本开始支持_
 
-资源配额限制了项目（及其命名空间）可以消耗的资源。详情请参考请[资源配额](/docs/rancher2/project-admin/resource-quotas/quota-type-reference/_index)。
+资源配额限制了项目（及其命名空间）可以消耗的资源。详情请参考请[资源配额](/docs/rancher2.5/project-admin/resource-quotas/quota-type-reference/_index)。
 
 1. 单击**添加配额**。
-1. 选择[资源类型](/docs/rancher2/project-admin/resource-quotas/_index)。
+1. 选择[资源类型](/docs/rancher2.5/project-admin/resource-quotas/_index)。
 1. 输入`项目限制`和`命名空间默认限制`的值。
-1. **可选：**指定**容器默认资源限制**，它将应用于项目中启动的每个容器。如果您在资源配额中设置了 CPU 或内存相关的限制，则建议使用此参数。您可以在单个命名空间或容器级别上覆盖它。有关更多信息，请参见[容器默认资源限制](/docs/rancher2/project-admin/resource-quotas/_index)，注：此选项自 v2.2.0 起可用。
+1. **可选：**指定**容器默认资源限制**，它将应用于项目中启动的每个容器。如果您在资源配额中设置了 CPU 或内存相关的限制，则建议使用此参数。您可以在单个命名空间或容器级别上覆盖它。有关更多信息，请参见[容器默认资源限制](/docs/rancher2.5/project-admin/resource-quotas/_index)，注：此选项自 v2.2.0 起可用。
 1. 单击**创建**。
 
 **结果：**您的项目已创建。您可以从集群的**项目/命名空间**视图中查看它。

@@ -36,7 +36,7 @@ keywords:
 | `replicas`                     | 3                                                        | `int` - Rancher Pods 的数量                                                                                                                             |
 | `auditLog.destination`         | "sidecar"                                                | `string` - 使日志流导向到 sidecar 容器的 console 或者 hostPath 卷 - "sidecar， hostPath"                                                                |
 | `auditLog.hostPath`            | "/var/log/rancher/audit"                                 | `string` - 主机上的日志文件地址 (仅当`auditLog.destination`设置为`hostPath`时适用)                                                                      |
-| `auditLog.level`               | 0                                                        | `int` - 设置[API 审计日志](/docs/rancher2/installation/options/api-audit-log/_index)等级。0 表示关闭。可选值为 0 ～ 3。                                 |
+| `auditLog.level`               | 0                                                        | `int` - 设置[API 审计日志](/docs/rancher2.5/installation/options/api-audit-log/_index)等级。0 表示关闭。可选值为 0 ～ 3。                               |
 | `auditLog.maxAge`              | 1                                                        | `int` - 保留旧审计日志文件的最大天数 (仅当 `auditLog.destination` 设置为 `hostPath`时适用)                                                              |
 | `auditLog.maxBackups`          | 1                                                        | `int` - 要保留的审计日志最大文件数 (仅当 `auditLog.destination` 设置为 `hostPath`时适用)                                                                |
 | `auditLog.maxSize`             | 100                                                      | `int` - 轮换之前审计日志文件的最大大小（以兆字节为单位）(仅当 `auditLog.destination` 设置为 `hostPath`)                                                 |
@@ -60,15 +60,15 @@ keywords:
 
 ## 审计日志 API
 
-启用[审计日志 API](/docs/rancher2/installation/options/api-audit-log/_index)。
+启用[审计日志 API](/docs/rancher2.5/installation/options/api-audit-log/_index)。
 
-您可以像收集任何容器日志一样收集审计日志，在 Rancher Server Cluster 中为`System` 项目启用[Rancher 工具中的日志服务](/docs/rancher2/logging/2.0.x-2.4.x/project-logging/_index)。
+您可以像收集任何容器日志一样收集审计日志，在 Rancher Server Cluster 中为`System` 项目启用[Rancher 工具中的日志服务](/docs/rancher2.5/logging/2.0.x-2.4.x/project-logging/_index)。
 
 ```plain
 --set auditLog.level=1
 ```
 
-默认情况下，启用审计日志会在 Rancher pod 中创建一个 sidecar 容器。这个容器(`rancher-audit-log`)会将日志流传输到`stdout`。将 sidecar 用作审计日志目标时，`hostPath`， `maxAge`， `maxBackups`，和 `maxSize`选项将会被忽略。建议使用您的操作系统或 Docker 守护程序的日志轮换功能来控制磁盘空间的使用。为 Rancher Server 集群或 System 项目启用[Rancher 工具中的日志服务](/docs/rancher2/logging/2.0.x-2.4.x/project-logging/_index)。
+默认情况下，启用审计日志会在 Rancher pod 中创建一个 sidecar 容器。这个容器(`rancher-audit-log`)会将日志流传输到`stdout`。将 sidecar 用作审计日志目标时，`hostPath`， `maxAge`， `maxBackups`，和 `maxSize`选项将会被忽略。建议使用您的操作系统或 Docker 守护程序的日志轮换功能来控制磁盘空间的使用。为 Rancher Server 集群或 System 项目启用[Rancher 工具中的日志服务](/docs/rancher2.5/logging/2.0.x-2.4.x/project-logging/_index)。
 
 将`auditLog.destination`设置为`hostPath`，会将日志转发至与主机系统共享的卷中，而不是流至一个 sidecar 容器中。当将目标设置为`hostPath`时，您可能需要调整其他 auditLog 参数以进行日志轮换。
 
@@ -94,7 +94,7 @@ _自 v2.2.0 起可用_
 --set 'extraEnv[0].value=1.0'
 ```
 
-有关更多信息和选项，请参见[TLS 设置](/docs/rancher2/installation/options/tls-settings/_index)。
+有关更多信息和选项，请参见[TLS 设置](/docs/rancher2.5/installation/options/tls-settings/_index)。
 
 ## 导入 `local` 集群
 
@@ -154,8 +154,8 @@ kubectl -n cattle-system create secret generic tls-ca-additional --from-file=ca-
 
 有关使用私有 Registry 安装 Rancher，参见：
 
-- [离线：单节点安装](/docs/rancher2/installation/other-installation-methods/air-gap/_index)
-- [离线：高可用安装](/docs/rancher2/installation/other-installation-methods/air-gap/_index)
+- [离线：单节点安装](/docs/rancher2.5/installation/other-installation-methods/air-gap/_index)
+- [离线：高可用安装](/docs/rancher2.5/installation/other-installation-methods/air-gap/_index)
 
 ## 在外部终止 TLS
 
@@ -165,7 +165,7 @@ kubectl -n cattle-system create secret generic tls-ca-additional --from-file=ca-
 
 > **注意：**
 >
-> 如果您使用的是私有 CA 签名证书，请添加`--set privateCA=true`，然后参阅[添加 TLS 密文 - 使用私有 CA 签发的证书](/docs/rancher2/installation/options/tls-secrets/_index)来为 Rancher 添加 CA 证书。
+> 如果您使用的是私有 CA 签名证书，请添加`--set privateCA=true`，然后参阅[添加 TLS 密文 - 使用私有 CA 签发的证书](/docs/rancher2.5/installation/options/tls-secrets/_index)来为 Rancher 添加 CA 证书。
 
 您的负载均衡器必须支持 websocket 长连接，并切需要插入代理头信息以便 Rancher 可以正确路由链接。
 

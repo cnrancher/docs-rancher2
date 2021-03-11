@@ -22,10 +22,10 @@ keywords:
 
 Rancher 支持两种类型的负载均衡器：
 
-- [4 层负载均衡器](/docs/rancher2/k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index)
-- [7 层负载均衡器](/docs/rancher2/k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index)
+- [4 层负载均衡器](/docs/rancher2.5/k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index)
+- [7 层负载均衡器](/docs/rancher2.5/k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index)
 
-详情请参考[负载均衡器](/docs/rancher2/k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index)。
+详情请参考[负载均衡器](/docs/rancher2.5/k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index)。
 
 ## 负载均衡器的使用限制
 
@@ -35,9 +35,9 @@ Rancher 支持两种类型的负载均衡器：
 
 - 如果要在托管的 Kubernetes 集群中（例如，GKE，EKS 或 AKS）使用负载均衡器，则负载均衡器必须在该云提供商的基础架构中运行。请根据配置集群的方式查看有关负载均衡器支持的兼容性表：
 
-  - [支持 4 层负载均衡](/docs/rancher2/k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index)
+  - [支持 4 层负载均衡](/docs/rancher2.5/k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index)
 
-  - [支持 7 层负载均衡](/docs/rancher2/k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index)
+  - [支持 7 层负载均衡](/docs/rancher2.5/k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index)
 
 ## Ingress
 
@@ -63,6 +63,6 @@ Ingress 还可以提供其他功能，例如 SSL 终止，基于名称的虚拟�
 >
 > 请勿将 Ingress 添加到`local`集群中。Rancher 使用的 Nginx Ingress Controller 充当 了 Rancher 管理的**全部**集群（包括`local`集群）的全局入口点。因此，当用户配置访问应用程序的 Ingress 时，它会导致 Nginx 重新加载配置，您的 Rancher 连接可能会断开。我们建议仅在下游集群中部署业务应用程序。
 
-- 有关如何在 Rancher 中设置 Ingress 的更多信息, 请参见 [Ingress](/docs/rancher2/k8s-in-rancher/load-balancers-and-ingress/ingress/_index)。
+- 有关如何在 Rancher 中设置 Ingress 的更多信息, 请参见 [Ingress](/docs/rancher2.5/k8s-in-rancher/load-balancers-and-ingress/ingress/_index)。
 - 有关 Ingress 和 Ingress 控制器的完整信息，请参见 [Kubernetes Ingress 文档](https://kubernetes.io/docs/concepts/services-networking/ingress/)。
-- 在项目中使用 Ingress 时，可以设置全局 DNS 条目，从而对外部 DNS 进行编程动态设置 Ingress。请参见[全局 DNS](/docs/rancher2/helm-charts/legacy-catalogs/globaldns/_index)。
+- 在项目中使用 Ingress 时，可以设置全局 DNS 条目，从而对外部 DNS 进行编程动态设置 Ingress。请参见[全局 DNS](/docs/rancher2.5/helm-charts/legacy-catalogs/globaldns/_index)。

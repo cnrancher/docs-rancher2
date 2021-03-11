@@ -85,4 +85,4 @@ Kubernetes 在集群中部署了 DNS pod 和服务，这类似于[Rancher v1.6 D
 | 指向另一个工作负载         |                  | ✓             |
 | 指向另一个 DNS 记录的别名  |                  | ✓             |
 
-## [下一步: 负载均衡](/docs/rancher2/v1.6-migration/load-balancing/_index)
+## [下一步: 负载均衡](/docs/rancher2.5/v1.6-migration/load-balancing/_index)

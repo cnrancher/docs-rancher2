@@ -21,9 +21,9 @@ _自 v2.3.0 起可用_
 
 此功能可以使用 UI 创建、读取、更新和删除虚拟服务和目标规则，负责 Istio 的流量管理功能。
 
-> **先决条件：** 打开此功能不会启用 Istio。集群管理员需要[为集群启用 Istio](/docs/rancher2/istio/2.3.x-2.4.x/setup/_index)才能使用该功能。
+> **先决条件：** 打开此功能不会启用 Istio。集群管理员需要[为集群启用 Istio](/docs/rancher2.5/istio/2.3.x-2.4.x/setup/_index)才能使用该功能。
 
-要启用或禁用此功能，请参阅[关于启用实验性功能的主页](/docs/rancher2/installation_new/resources/feature-flags/_index)。
+要启用或禁用此功能，请参阅[关于启用实验性功能的主页](/docs/rancher2.5/installation_new/resources/feature-flags/_index)。
 
 | 环境变量 Key               | 默认值  | 状态   | 可用版本 |
 | :------------------------- | :------ | :----- | :------- |

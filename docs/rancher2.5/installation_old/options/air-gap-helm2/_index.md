@@ -40,11 +40,11 @@ Docker 安装适用于想要测试 Rancher 的用户。您可以使用 docker ru
 
 ## 安装概要
 
-- [1、准备节点](/docs/rancher2/installation/options/air-gap-helm2/prepare-nodes/_index)
-- [2、同步镜像到私有镜像库](/docs/rancher2/installation/options/air-gap-helm2/populate-private-registry/_index)
-- [3、安装 Kubernetes 集群](/docs/rancher2/installation/options/air-gap-helm2/launch-kubernetes/_index)
-- [4、安装 Rancher](/docs/rancher2/installation/options/air-gap-helm2/install-rancher/_index)
+- [1、准备节点](/docs/rancher2.5/installation/options/air-gap-helm2/prepare-nodes/_index)
+- [2、同步镜像到私有镜像库](/docs/rancher2.5/installation/options/air-gap-helm2/populate-private-registry/_index)
+- [3、安装 Kubernetes 集群](/docs/rancher2.5/installation/options/air-gap-helm2/launch-kubernetes/_index)
+- [4、安装 Rancher](/docs/rancher2.5/installation/options/air-gap-helm2/install-rancher/_index)
 
 ## 后续步骤
 
-[准备节点](/docs/rancher2/installation/options/air-gap-helm2/prepare-nodes/_index)
+[准备节点](/docs/rancher2.5/installation/options/air-gap-helm2/prepare-nodes/_index)

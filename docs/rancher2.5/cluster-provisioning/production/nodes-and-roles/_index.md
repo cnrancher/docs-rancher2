@@ -18,7 +18,7 @@ keywords:
 
 本节描述 Kubernetes 中的 `etcd` 节点、 `controlplane` 节点和 `worker` 节点的角色，以及这些角色如何在集群中协同工作。
 
-这个图适用于[Rancher 通过 RKE 部署的 Kubernetes 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)。
+这个图适用于[Rancher 通过 RKE 部署的 Kubernetes 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)。
 
 ![集群图片](/img/rancher/clusterdiagram.svg)
 

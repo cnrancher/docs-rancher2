@@ -17,7 +17,7 @@ keywords:
 
 [密文](https://kubernetes.io/docs/concepts/configuration/secret/#overview-of-secrets)用于存储敏感数据，例如密码，令牌或密钥。它们可能包含一个或多个键值对。
 
-> 本页主要是关于密文的文档。有关设置私有镜像库的详细信息，请参阅[镜像仓库凭证](/docs/rancher2/k8s-in-rancher/registries/_index)。
+> 本页主要是关于密文的文档。有关设置私有镜像库的详细信息，请参阅[镜像仓库凭证](/docs/rancher2.5/k8s-in-rancher/registries/_index)。
 
 配置工作负载时，您可以选择要包括的密文。与配置映射一样，工作负载可以将密文引用为环境变量或以数据卷挂载的方式使用。
 
@@ -53,4 +53,4 @@ keywords:
 
 现在您已经有一个密文被添加到项目或命名空间，您可以添加它到部署的工作负载中。
 
-有关向工作负载添加密文的更多信息，请查看[部署工作负载](/docs/rancher2/k8s-in-rancher/workloads/deploy-workloads/_index)。
+有关向工作负载添加密文的更多信息，请查看[部署工作负载](/docs/rancher2.5/k8s-in-rancher/workloads/deploy-workloads/_index)。

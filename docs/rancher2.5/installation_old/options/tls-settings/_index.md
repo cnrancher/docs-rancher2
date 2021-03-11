@@ -11,9 +11,9 @@ _自 v2.1.7 起可用_
 
 可通过将环境变量传递到 Rancher Server 容器来启用和配置审计日志。请参阅以下内容以启用安装。
 
-- [使用 Docker 在单个节点上安装 Rancher](/docs/rancher2/installation/other-installation-methods/single-node-docker/_index)
+- [使用 Docker 在单个节点上安装 Rancher](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/_index)
 
-- [在 Kubernetes 上安装 Rancher](/docs/rancher2/installation/options/chart-options/_index)
+- [在 Kubernetes 上安装 Rancher](/docs/rancher2.5/installation/options/chart-options/_index)
 
 ## TLS 设置
 

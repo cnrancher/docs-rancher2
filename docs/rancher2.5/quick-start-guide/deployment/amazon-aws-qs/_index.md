@@ -71,7 +71,7 @@ keywords:
 
 ## 后续操作
 
-使用 Rancher 部署工作负载，详情请参考[部署工作负载](/docs/rancher2/quick-start-guide/workload/_index)。
+使用 Rancher 部署工作负载，详情请参考[部署工作负载](/docs/rancher2.5/quick-start-guide/workload/_index)。
 
 ## 清理环境
 

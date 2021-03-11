@@ -20,7 +20,7 @@ keywords:
 
 **Pod 安全策略** (PSP) 是控制 Pod 安全的规范（如是否可以使用 root 权限等）的对象。如果 Pod 不符合 PSP 中指定的条件，Kubernetes 将不允许其启动，并且 Rancher 中将显示错误消息`Pod <NAME> is forbidden: unable to validate...`。
 
-当您的集群运行具有安全敏感配置的 pods 时，请为它分配一个[pod 安全策略](/docs/rancher2/admin-settings/pod-security-policies/_index)，监视 pods 中的条件和设置的规则。如果 pods 不符合策略中指定的规则，策略将不允许它继续运行。
+当您的集群运行具有安全敏感配置的 pods 时，请为它分配一个[pod 安全策略](/docs/rancher2.5/admin-settings/pod-security-policies/_index)，监视 pods 中的条件和设置的规则。如果 pods 不符合策略中指定的规则，策略将不允许它继续运行。
 
 在创建集群时，您可以为集群分配 pod 安全策略。如果您需修改 pod 的安全性，可以在编辑集群时更新 pod 安全策略。
 
@@ -30,11 +30,11 @@ keywords:
 
 3. 启用**Pod 安全策略支持**。
 
-   > **注意：** 此选项仅适用于[由 RKE 创建的集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)。
+   > **注意：** 此选项仅适用于[由 RKE 创建的集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)。
 
 4. 从 **默认 Pod 安全策略** 下拉列表中，选择要应用到集群的策略。
 
-   Rancher 提供了`受限` 和 `不受限`两种默认[策略](/docs/rancher2/admin-settings/pod-security-policies/_index)，您也可以自行创建自定义策略，详情请参考[创建自定义策略](/docs/rancher2/admin-settings/pod-security-policies/_index)。
+   Rancher 提供了`受限` 和 `不受限`两种默认[策略](/docs/rancher2.5/admin-settings/pod-security-policies/_index)，您也可以自行创建自定义策略，详情请参考[创建自定义策略](/docs/rancher2.5/admin-settings/pod-security-policies/_index)。
 
 5. 单击 **保存**。
 

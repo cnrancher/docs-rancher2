@@ -30,7 +30,7 @@ keywords:
 
 - 为用户的访问密钥**创建 IAM 策略**。请参照[Amazon 文档: 创建 IAM 策略](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html#access_policies_create-start)。下面是三个 JSON 策略的实例：
   - [IAM 策略示例](#iam-策略示例)
-  - [包含 PassRole 的 IAM 策略示例](#包含-passrole-的-iam-策略示例) (如果您想要使用 [Kubernetes Cloud Provider](/docs/rancher2/cluster-provisioning/rke-clusters/cloud-providers/_index) 或 IAM 实例配置文件)
+  - [包含 PassRole 的 IAM 策略示例](#包含-passrole-的-iam-策略示例) (如果您想要使用 [Kubernetes Cloud Provider](/docs/rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/_index) 或 IAM 实例配置文件)
   - [允许加密 EBS 卷的 IAM 策略示例](#允许加密-ebs-卷的-iam-策略示例)
 - 为用户添加**IAM 策略许可**。请参照[Amazon 文档：为用户添加许可](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_change-permissions.html#users_change_permissions-add-console)。
 
@@ -68,10 +68,10 @@ keywords:
 1. 在**云凭证**选项中，选择您创建的云凭证。
 1. 单击**下一步：认证 & 设置节点**
 1. 选择您的集群的可用区和网络设置。单击 **下一步: 选择安全组**。
-1. 选择默认的安全组或配置一个新的安全组。请根据文档 [Amazon EC2 使用节点驱动时的安全组](/docs/rancher2/cluster-provisioning/node-requirements/_index) 来查看 `rancher-nodes` 安全组创建的规则。然后单击**下一步: 设置实例选项**。
+1. 选择默认的安全组或配置一个新的安全组。请根据文档 [Amazon EC2 使用节点驱动时的安全组](/docs/rancher2.5/cluster-provisioning/node-requirements/_index) 来查看 `rancher-nodes` 安全组创建的规则。然后单击**下一步: 设置实例选项**。
 1. 配置将要创建的实例。确保为选择的 AMI 配置正确的**SSH 用户**。
 
-> 如果您需要设定 <b>IAM 实例配置名称</b> (不是 ARN)，例如当您需要使用 [Kubernetes Cloud Provider](/docs/rancher2/cluster-provisioning/rke-clusters/cloud-providers/_index)，在您的策略中需要额外的许可。请参照[包含 PassRole 的 IAM 策略示例](#包含-passrole-的-iam-策略示例)。
+> 如果您需要设定 <b>IAM 实例配置名称</b> (不是 ARN)，例如当您需要使用 [Kubernetes Cloud Provider](/docs/rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/_index)，在您的策略中需要额外的许可。请参照[包含 PassRole 的 IAM 策略示例](#包含-passrole-的-iam-策略示例)。
 
 可选：在节点模板的**引擎选项**部分中，您可以配置 Docker 守护程序。您可能需要指定 Docker 版本或 Docker 镜像仓库地址。
 
@@ -100,7 +100,7 @@ keywords:
 
 1. 使用**角色**下拉菜单来为每个用户设定权限。
 
-1. 通过**集群选项**来选择 Kubernetes 版本，网络插件及是否开启网络隔离。请参照[选择 Cloud Providers](/docs/rancher2/cluster-provisioning/rke-clusters/cloud-providers/_index) 来设置 Kubernetes Cloud Provider。
+1. 通过**集群选项**来选择 Kubernetes 版本，网络插件及是否开启网络隔离。请参照[选择 Cloud Providers](/docs/rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/_index) 来设置 Kubernetes Cloud Provider。
 
 1. [Docker 守护进程](https://docs.docker.com/engine/docker-overview/#the-docker-daemon)配置选项包括：
 
@@ -130,7 +130,7 @@ keywords:
    - 单击**添加成员**将需要访问这个集群的用户添加到成员中。
    - 在**角色**下拉菜单中选择每个用户的权限。
 
-1. 使用**集群选项**设置 Kubernetes 的版本，网络插件以及是否要启用项目网络隔离。要查看更多集群选项，请单击**显示高级选项**。请参照[选择 Cloud Providers](/docs/rancher2/cluster-provisioning/rke-clusters/cloud-providers/_index) 来设置 Kubernetes Cloud Provider。
+1. 使用**集群选项**设置 Kubernetes 的版本，网络插件以及是否要启用项目网络隔离。要查看更多集群选项，请单击**显示高级选项**。请参照[选择 Cloud Providers](/docs/rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/_index) 来设置 Kubernetes Cloud Provider。
 
 1. 将一个或多个节点池添加到您的集群。
 
@@ -149,10 +149,10 @@ keywords:
 
    - **账户许可** 选项用于配置创建节点的区域及云凭证。关于如何创建访问密钥和权限，请参照[先决条件](#先决条件)。
    - **区域和网络** 选项用于配置您的集群可用区和网络设置。
-   - **安全组** 选项用于配置您的节点的安全组。请参照 [Amazon EC2 使用节点驱动的安全组](/docs/rancher2/cluster-provisioning/node-requirements/_index) 来查看`rancher-nodes`安全组中创建了哪些规则。
+   - **安全组** 选项用于配置您的节点的安全组。请参照 [Amazon EC2 使用节点驱动的安全组](/docs/rancher2.5/cluster-provisioning/node-requirements/_index) 来查看`rancher-nodes`安全组中创建了哪些规则。
    - **实例** 选项用于配置将要创建的实例。确保为选择的 AMI 配置正确的**SSH 用户**。
 
-   如果您需要设定 **IAM 实例配置名称** (不是 ARN)，例如当您需要使用[Kubernetes Cloud Provider](/docs/rancher2/cluster-provisioning/rke-clusters/cloud-providers/_index)，在您的策略中需要额外的许可。请参照[包含 PassRole 的 IAM 策略示例](#包含-passrole-的-iam-策略示例)。
+   如果您需要设定 **IAM 实例配置名称** (不是 ARN)，例如当您需要使用[Kubernetes Cloud Provider](/docs/rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/_index)，在您的策略中需要额外的许可。请参照[包含 PassRole 的 IAM 策略示例](#包含-passrole-的-iam-策略示例)。
 
 1. [Docker 守护进程](https://docs.docker.com/engine/docker-overview/#the-docker-daemon)配置选项包括：
 
@@ -175,9 +175,9 @@ keywords:
 
 创建集群后，您可以通过 Rancher UI 访问它。作为最佳实践，我们建议同时设置以下访问集群的替代方法：
 
-- **通过 kubectl CLI 访问集群：** 请按照[这些步骤](/docs/rancher2/cluster-admin/cluster-access/kubectl/_index)来通过 kubectl 访问您的集群。在这种情况下，您将通过 Rancher Server 的身份验证代理进行身份验证，然后 Rancher 会将您连接到下游集群。此方法使您无需 Rancher UI 即可管理集群。
+- **通过 kubectl CLI 访问集群：** 请按照[这些步骤](/docs/rancher2.5/cluster-admin/cluster-access/kubectl/_index)来通过 kubectl 访问您的集群。在这种情况下，您将通过 Rancher Server 的身份验证代理进行身份验证，然后 Rancher 会将您连接到下游集群。此方法使您无需 Rancher UI 即可管理集群。
 
-- **通过 kubectl CLI 和授权的集群地址访问您的集群：** 请按照[这些步骤](/docs/rancher2/cluster-admin/cluster-access/kubectl/_index)来通过 kubectl 直接访问您的集群，而不需要通过 Rancher 进行认证。我们建议您设定此方法访问集群，这样在您无法连接 Rancher 时您仍然能够访问集群。
+- **通过 kubectl CLI 和授权的集群地址访问您的集群：** 请按照[这些步骤](/docs/rancher2.5/cluster-admin/cluster-access/kubectl/_index)来通过 kubectl 直接访问您的集群，而不需要通过 Rancher 进行认证。我们建议您设定此方法访问集群，这样在您无法连接 Rancher 时您仍然能够访问集群。
 
 ## IAM 策略示例
 

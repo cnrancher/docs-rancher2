@@ -31,9 +31,9 @@ _自 v2.0.5 起开始可用_
 
 ## 在 Rancher 中配置 OpenLDAP
 
-配置 OpenLDAP 服务器，组和用户的设置。有关填写每个字段的帮助，请参阅[配置参考](/docs/rancher2/admin-settings/authentication/openldap/openldap-config/_index)。
+配置 OpenLDAP 服务器，组和用户的设置。有关填写每个字段的帮助，请参阅[配置参考](/docs/rancher2.5/admin-settings/authentication/openldap/openldap-config/_index)。
 
-> 在开始之前，请阅读并了解[外部身份验证配置和用户主体](/docs/rancher2/admin-settings/authentication/_index)。
+> 在开始之前，请阅读并了解[外部身份验证配置和用户主体](/docs/rancher2.5/admin-settings/authentication/_index)。
 
 1. 使用初始本地`admin`帐户登录 Rancher UI
 2. 在**全局**视图中，导航至**安全 > 认证**
@@ -61,4 +61,4 @@ _自 v2.0.5 起开始可用_
 
 ## 故障排查
 
-如果在测试与 OpenLDAP 服务器的连接时遇到问题，请首先仔细检查为服务帐户输入的凭据以及 Search Base 配置。您也可以检查 Rancher 日志以帮助查明问题原因。debug 日志可能包含有关该错误的更多详细信息。请参阅本文档中的[如何开启 debug 级别日志](/docs/rancher2/faq/technical/_index)。
+如果在测试与 OpenLDAP 服务器的连接时遇到问题，请首先仔细检查为服务帐户输入的凭据以及 Search Base 配置。您也可以检查 Rancher 日志以帮助查明问题原因。debug 日志可能包含有关该错误的更多详细信息。请参阅本文档中的[如何开启 debug 级别日志](/docs/rancher2.5/faq/technical/_index)。

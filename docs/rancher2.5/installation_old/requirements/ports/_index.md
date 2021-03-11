@@ -101,7 +101,7 @@ K3s Server 需要开放 6443 端口供节点访问。
 
 > **注意：**
 >
-> - 如果您配置了的外部[身份验证系统](/docs/rancher2/admin-settings/authentication/_index)（例如 LDAP），Rancher 节点可能还需要其他出站规则。
+> - 如果您配置了的外部[身份验证系统](/docs/rancher2.5/admin-settings/authentication/_index)（例如 LDAP），Rancher 节点可能还需要其他出站规则。
 > - Kubernetes 建议将 TCP 30000-32767 用于节点端口服务（NodePort svc）。
 > - 可能需要对防火墙进行配置，启用在集群和 Pod CIDR 中的流量。
 
@@ -109,7 +109,7 @@ K3s Server 需要开放 6443 端口供节点访问。
 
 下游 Kubernetes 集群可运行您的业务应用。本节介绍需要在下游集群中的节点上开放哪些端口，以便 Rancher 可以与它们进行通信。
 
-集群节点需要开放的端口会根据集群的启动方式而变化。下面列出了需要为不同[集群创建类型](/docs/rancher2/cluster-provisioning/_index)开放的端口。
+集群节点需要开放的端口会根据集群的启动方式而变化。下面列出了需要为不同[集群创建类型](/docs/rancher2.5/cluster-provisioning/_index)开放的端口。
 
 > **提示：**
 >
@@ -117,7 +117,7 @@ K3s Server 需要开放 6443 端口供节点访问。
 
 ### 节点池中节点的端口要求
 
-下表描述了在[基础设施提供商](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/_index)中创建节点用于[Rancher 启动 Kubernetes](/docs/rancher2/cluster-provisioning/rke-clusters/_index)的端口需求。
+下表描述了在[基础设施提供商](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/_index)中创建节点用于[Rancher 启动 Kubernetes](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)的端口需求。
 
 > **注意：**
 > 在 Amazon EC2 或阿里云等云提供商中创建集群时，Rancher 会自动开放所需的端口。
@@ -128,7 +128,7 @@ import PortsIaasNodes from '@theme/PortsIaasNodes';
 
 ### 自定义节点的端口要求
 
-下表描述了带有[自定义节点](/docs/rancher2/cluster-provisioning/rke-clusters/custom-nodes/_index)的[RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)的端口要求。
+下表描述了带有[自定义节点](/docs/rancher2.5/cluster-provisioning/rke-clusters/custom-nodes/_index)的[RKE 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)的端口要求。
 
 import PortsCustomNodes from '@theme/PortsCustomNodes';
 
@@ -136,7 +136,7 @@ import PortsCustomNodes from '@theme/PortsCustomNodes';
 
 ### 托管集群的端口要求
 
-下表描述了[托管集群](/docs/rancher2/cluster-provisioning/hosted-kubernetes-clusters/_index)的端口要求。
+下表描述了[托管集群](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/_index)的端口要求。
 
 import PortsImportedHosted from '@theme/PortsImportedHosted';
 
@@ -144,7 +144,7 @@ import PortsImportedHosted from '@theme/PortsImportedHosted';
 
 ### 导入集群的端口要求
 
-下表描述了[导入集群](/docs/rancher2/cluster-provisioning/imported-clusters/_index)的端口要求。
+下表描述了[导入集群](/docs/rancher2.5/cluster-provisioning/imported-clusters/_index)的端口要求。
 
 <PortsImportedHosted/>
 
@@ -185,7 +185,7 @@ import PortsImportedHosted from '@theme/PortsImportedHosted';
 
 ### Rancher AWS EC2 安全组
 
-在使用[AWS EC2 主机驱动](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/ec2/_index)在 Rancher 中配置集群节点时，您可以选择让 Rancher 创建一个名为 rancher-nodes 的安全组。以下规则将自动添加到此安全组。
+在使用[AWS EC2 主机驱动](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/ec2/_index)在 Rancher 中配置集群节点时，您可以选择让 Rancher 创建一个名为 rancher-nodes 的安全组。以下规则将自动添加到此安全组。
 
 | 类型            | 协议 |  端口范围   | 源/目的                | 规则类型 |
 | --------------- | :--: | :---------: | ---------------------- | :------: |

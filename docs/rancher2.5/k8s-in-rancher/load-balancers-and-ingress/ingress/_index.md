@@ -18,7 +18,7 @@ keywords:
 
 集群内的服务（service）和 pod 仅有集群内互相访问的 IP 地址，只能实现集群内部之间的通信。Ingress 为集群内的所有服务提供了外网访问的入口，允许用户通过外网访问集群内的服务。Ingress 具有这些功能：提供服务外部访问的 URL、负载均衡、SSL 和提供基于主机和路径的路由。请参考下文，为您的工作负载添加 Ingress。
 
-在项目中使用 Ingress 时，可以设置全局 DNS 条目，从而对外部 DNS 进行编程动态设置 Ingress。请参考[全局 DNS 条目](/docs/rancher2/helm-charts/legacy-catalogs/globaldns/_index)。
+在项目中使用 Ingress 时，可以设置全局 DNS 条目，从而对外部 DNS 进行编程动态设置 Ingress。请参考[全局 DNS 条目](/docs/rancher2.5/helm-charts/legacy-catalogs/globaldns/_index)。
 
 1. 在**全局**视图中，打开要添加 Ingress 的项目。
 
@@ -28,7 +28,7 @@ keywords:
 
 1. 从下拉列表中选择一个现有的**命名空间**。
 
-   > 如果您还没有命名空间，或您想将 Ingress 添加到新的命名空间，请单击**添加到新的命名空间**，参考[命名空间](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)，创建新的命名空间。完成创建后，参考下文，添加 Ingress。
+   > 如果您还没有命名空间，或您想将 Ingress 添加到新的命名空间，请单击**添加到新的命名空间**，参考[命名空间](/docs/rancher2.5/cluster-admin/projects-and-namespaces/_index)，创建新的命名空间。完成创建后，参考下文，添加 Ingress。
 
 1. 创建 Ingress **转发规则**。
 
@@ -74,7 +74,7 @@ keywords:
 
 1. 如果您的任何 Ingress 规则需要处理加密端口的请求，请添加证书以加密/解密通信。
 
-   > **注意：**您必须具有一个 SSL 证书，Ingress 可用它来加密/解密通信。有关更多信息，请参见[添加 SSL 证书](/docs/rancher2/k8s-in-rancher/certificates/_index)。
+   > **注意：**您必须具有一个 SSL 证书，Ingress 可用它来加密/解密通信。有关更多信息，请参见[添加 SSL 证书](/docs/rancher2.5/k8s-in-rancher/certificates/_index)。
 
    1. 单击**添加证书**。
 

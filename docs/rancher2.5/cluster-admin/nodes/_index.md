@@ -16,13 +16,13 @@ keywords:
   - 节点和节点池
 ---
 
-在 Rancher 中启动 Kubernetes 集群后，您可以在集群的节点页面中管理各个节点。根据[创建集群的方式](/docs/rancher2/cluster-provisioning/_index)的不同，有不同的节点选项可用。
+在 Rancher 中启动 Kubernetes 集群后，您可以在集群的节点页面中管理各个节点。根据[创建集群的方式](/docs/rancher2.5/cluster-provisioning/_index)的不同，有不同的节点选项可用。
 
-> 如果要管理的是*集群*而不是单个节点，请参阅[设置集群](/docs/rancher2/cluster-admin/editing-clusters/_index)。
+> 如果要管理的是*集群*而不是单个节点，请参阅[设置集群](/docs/rancher2.5/cluster-admin/editing-clusters/_index)。
 
 ## 每种类型集群的节点选项
 
-下表列出了 Rancher 中每个[类型的集群](/docs/rancher2/cluster-provisioning/_index)可用的节点选项，”✓“表示该类型的集群可以使用这种节点选项，空白表示不支持这种节点选项。单击 **选项** 列中的链接以获得关于每个功能模块的更详细信息。
+下表列出了 Rancher 中每个[类型的集群](/docs/rancher2.5/cluster-provisioning/_index)可用的节点选项，”✓“表示该类型的集群可以使用这种节点选项，空白表示不支持这种节点选项。单击 **选项** 列中的链接以获得关于每个功能模块的更详细信息。
 
 | 选项                                           | [由基础设施提供商托管的节点][1] | [自定义的节点][2] | [托管的集群][3] | [导入的节点][4] | 描述                                           |
 | :--------------------------------------------- | :------------------------------ | :---------------- | :-------------- | :-------------- | ---------------------------------------------- |
@@ -34,28 +34,28 @@ keywords:
 | [下载 Keys](#ssh-到由基础设施提供商托管的节点) | ✓                               |                   |                 |                 | 下载 SSH 密钥以便 SSH 到节点。                 |
 | [节点缩放](#缩放节点)                          | ✓                               |                   |                 |                 | 增加或减少节点池中的节点数。                   |
 
-[1]: /docs/rancher2/cluster-provisioning/rke-clusters/node-pools/_index
-[2]: /docs/rancher2/cluster-provisioning/rke-clusters/custom-nodes/_index
-[3]: /docs/rancher2/cluster-provisioning/hosted-kubernetes-clusters/_index
-[4]: /docs/rancher2/cluster-provisioning/imported-clusters/_index
+[1]: /docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/_index
+[2]: /docs/rancher2.5/cluster-provisioning/rke-clusters/custom-nodes/_index
+[3]: /docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/_index
+[4]: /docs/rancher2.5/cluster-provisioning/imported-clusters/_index
 
 ### 基础设施提供商托管的节点
 
-如果您的集群是 RKE 集群，并且其中的节点是由 Rancher 通过节点驱动在[基础设施提供商中创建的](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/_index)，那么**节点池**在这个集群中可用。
+如果您的集群是 RKE 集群，并且其中的节点是由 Rancher 通过节点驱动在[基础设施提供商中创建的](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/_index)，那么**节点池**在这个集群中可用。
 
-编辑节点池可以对[节点池](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/_index)进行扩容或者缩容。
+编辑节点池可以对[节点池](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/_index)进行扩容或者缩容。
 
-如果启用了[节点自动替换](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/_index)功能，则节点池还可以自动维护在初始集群配置期间设置的节点规模。`scale` 值定义了 Rancher 要为集群维护的活动节点数量。
+如果启用了[节点自动替换](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/_index)功能，则节点池还可以自动维护在初始集群配置期间设置的节点规模。`scale` 值定义了 Rancher 要为集群维护的活动节点数量。
 
-Rancher 使用[节点模板](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/_index)来替换节点池中的节点。每个节点模板都需要配置基础设施提供商的相关凭据，从而允许 Rancher 在基础设施中配置节点。
+Rancher 使用[节点模板](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/_index)来替换节点池中的节点。每个节点模板都需要配置基础设施提供商的相关凭据，从而允许 Rancher 在基础设施中配置节点。
 
 ### 托管的 Kubernetes 集群的节点
 
-在 Rancher 中，管理由 [Kubernetes 供应商托管的集群](/docs/rancher2/cluster-provisioning/hosted-kubernetes-clusters/_index)中的节点时，将会受到一些限制。例如，您不能在 Rancher UI 里单击”+“或”-“调整节点的数目，而需要直接编辑集群。
+在 Rancher 中，管理由 [Kubernetes 供应商托管的集群](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/_index)中的节点时，将会受到一些限制。例如，您不能在 Rancher UI 里单击”+“或”-“调整节点的数目，而需要直接编辑集群。
 
 ### 导入的 Kubernetes 集群的节点
 
-虽然您可以使用 Rancher 将工作负载部署到[导入的集群](/docs/rancher2/cluster-provisioning/imported-clusters/_index)，但无法直接管理这类集群的节点。导入集群节点的所有管理必须在 Rancher 之外进行。
+虽然您可以使用 Rancher 将工作负载部署到[导入的集群](/docs/rancher2.5/cluster-provisioning/imported-clusters/_index)，但无法直接管理这类集群的节点。导入集群节点的所有管理必须在 Rancher 之外进行。
 
 ## 管理和编辑单个节点
 
@@ -70,11 +70,11 @@ Rancher 使用[节点模板](/docs/rancher2/cluster-provisioning/rke-clusters/no
 
 ### 查看节点 API
 
-选择此选项以查看节点的[API endpoints](/docs/rancher2/api/_index)。
+选择此选项以查看节点的[API endpoints](/docs/rancher2.5/api/_index)。
 
 ### 删除节点
 
-可以单击**删除**在基础设施提供商托管的节点池中删除有缺陷的节点。当启用了[节点自动替换](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/_index)功能时，一个有缺陷的节点被删除后，Rancher 会自动添加一个具有相同配置的好的节点。
+可以单击**删除**在基础设施提供商托管的节点池中删除有缺陷的节点。当启用了[节点自动替换](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/_index)功能时，一个有缺陷的节点被删除后，Rancher 会自动添加一个具有相同配置的好的节点。
 
 > **提示:** 如果您的集群由基础设施提供商托管，并且您希望降低集群规模，而不是删除有缺陷的节点，那么[降低规模](#缩放节点)而不是删除。
 
@@ -84,7 +84,7 @@ Rancher 使用[节点模板](/docs/rancher2/cluster-provisioning/rke-clusters/no
 
 ### SSH 到由基础设施提供商托管的节点
 
-对于[由基础设施提供商托管的节点](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/_index)，您可以选择下载它的 SSH 密钥，然后使用密钥远程访问该节点。
+对于[由基础设施提供商托管的节点](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/_index)，您可以选择下载它的 SSH 密钥，然后使用密钥远程访问该节点。
 
 1. 在由基础设施提供商托管的集群中，从主菜单中选择 **节点**。
 
@@ -104,7 +104,7 @@ Rancher 使用[节点模板](/docs/rancher2/cluster-provisioning/rke-clusters/no
 
 ### 节点池节点注意事项
 
-如果您使用了[这个节点池选项](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/_index)，那么 Rancher 会自动维护创建的集群在初始集群配置期间设置的节点规模。这个 `scale` 值决定了 Rancher 为集群维护的活动节点的数量。
+如果您使用了[这个节点池选项](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/_index)，那么 Rancher 会自动维护创建的集群在初始集群配置期间设置的节点规模。这个 `scale` 值决定了 Rancher 为集群维护的活动节点的数量。
 
 ### 暂停节点
 

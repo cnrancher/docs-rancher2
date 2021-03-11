@@ -17,7 +17,7 @@ keywords:
 
 _从 v2.2.0 版本开始支持_
 
-在 Rancher UI 中，可以轻松执行 [RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)的备份和恢复。
+在 Rancher UI 中，可以轻松执行 [RKE 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)的备份和恢复。
 
 Rancher 建议为所有生产集群配置定期的`etcd`快照。此外，您也还可以轻松制作一次性快照。
 
@@ -71,7 +71,7 @@ Rancher 创建快照时，这个快照里包含三个组件：
 
 您可以配置定期制作快照的频率以及保留多少快照。时间量以小时为单位。用户可以使用这些带时间戳的快照，将集群状态恢复到某个时间点。
 
-默认情况下，[RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)配置为定期拍摄快照（保存到本地磁盘）。为了防止本地磁盘故障，建议使用[S3 备份](#s3-备份)或对这个磁盘路径通过某种方式进行冗余备份。
+默认情况下，[RKE 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)配置为定期拍摄快照（保存到本地磁盘）。为了防止本地磁盘故障，建议使用[S3 备份](#s3-备份)或对这个磁盘路径通过某种方式进行冗余备份。
 
 在创建集群或编辑集群期间，可以在**集群选项**的高级部分找到快照的配置。单击**显示高级选项**。
 
@@ -103,7 +103,7 @@ Rancher 支持两种不同的备份目标：
 
 ### 本地磁盘备份
 
-默认情况下，选择 `local(本地)` 备份目标。此选项的好处是没有额外的配置。快照会自动保存到[RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)的 etcd 节点中的 `/opt/rke/etcd-snapshots` 路径。所有定期快照均以配置的时间间隔拍摄。使用 `local(本地)` 备份目标的不利之处在于，如果发生灾难，并且 _所有的_ etcd 节点丢失，则无法恢复集群。
+默认情况下，选择 `local(本地)` 备份目标。此选项的好处是没有额外的配置。快照会自动保存到[RKE 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)的 etcd 节点中的 `/opt/rke/etcd-snapshots` 路径。所有定期快照均以配置的时间间隔拍摄。使用 `local(本地)` 备份目标的不利之处在于，如果发生灾难，并且 _所有的_ etcd 节点丢失，则无法恢复集群。
 
 ### S3 备份
 
@@ -153,4 +153,4 @@ _从 v2.3.0 开始支持_
 
 ## 在 Rancher v2.2.0 之前的版本中创建的集群里启用定期快照
 
-如果您有任何使用 v2.2.0 之前创建的 Rancher 启动的 Kubernetes 集群（RKE 集群），在升级 Rancher 之后，您必须编辑集群并且**保存**它，以启用更新的快照功能。即使您已经在 v2.2.0 之前创建了快照，也必须执行此步骤，否则您在[通过 UI 还原集群](/docs/rancher2/cluster-admin/restoring-etcd/_index)时，无法使用较早版本中创建的快照。
+如果您有任何使用 v2.2.0 之前创建的 Rancher 启动的 Kubernetes 集群（RKE 集群），在升级 Rancher 之后，您必须编辑集群并且**保存**它，以启用更新的快照功能。即使您已经在 v2.2.0 之前创建了快照，也必须执行此步骤，否则您在[通过 UI 还原集群](/docs/rancher2.5/cluster-admin/restoring-etcd/_index)时，无法使用较早版本中创建的快照。

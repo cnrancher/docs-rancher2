@@ -50,9 +50,9 @@ keywords:
 
 ![system-registry](/img/rancher/expansion/007S8ZIlly1gek021xwzij31tq0k8gm1.jpg)
 
-- `system-default-registry:` 参数请参考[官方文档](/docs/rancher2/admin-settings/config-private-registry/_index)
+- `system-default-registry:` 参数请参考[官方文档](/docs/rancher2.5/admin-settings/config-private-registry/_index)
 
-1. 接下来我们就可以按照官方文档去[添加自定义集群](/docs/rancher2/cluster-provisioning/rke-clusters/custom-nodes/_index)，我们只需要等待集群启动成功即可。下图中列出了 system-project 中所有的 workload，这些 workload 均使用了阿里云的镜像仓库`registry.cn-hangzhou.aliyuncs.com`内的镜像
+1. 接下来我们就可以按照官方文档去[添加自定义集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/custom-nodes/_index)，我们只需要等待集群启动成功即可。下图中列出了 system-project 中所有的 workload，这些 workload 均使用了阿里云的镜像仓库`registry.cn-hangzhou.aliyuncs.com`内的镜像
 
 ![system-workload](/img/rancher/expansion/007S8ZIlly1gejx15bo0yj313f0u00y5.jpg)
 
@@ -83,7 +83,7 @@ Rancher 默认使用 github 上的 repo 作为应用商店的 URL，如果出现
 
 ![kontainer-driver-metadata](/img/rancher/expansion/007S8ZIlly1get57kqscwj31nk0jo0t6.jpg)
 
-要解决这个问题只需要参考[获取新的 Kubernetes 版本](/docs/rancher2/admin-settings/k8s-metadata/_index)将 rke-metadata-config 地址修改成[gitee](https://gitee.com/rancher/kontainer-driver-metadata/)上的地址即可，例如：
+要解决这个问题只需要参考[获取新的 Kubernetes 版本](/docs/rancher2.5/admin-settings/k8s-metadata/_index)将 rke-metadata-config 地址修改成[gitee](https://gitee.com/rancher/kontainer-driver-metadata/)上的地址即可，例如：
 
 ```bash
 {
@@ -98,7 +98,7 @@ Rancher 默认使用 github 上的 repo 作为应用商店的 URL，如果出现
 
 ## 使用国内 Rancher Chart 地址添加 Helm Chart 仓库
 
-在国内使用 helm 安装 rancher，[添加 Helm Chart 仓库](/docs/rancher2/installation_new/resources/advanced/helm2/helm-rancher/_index)时有时候会因为访问国外网络导致 Rancher Chart 添加失败，如下:
+在国内使用 helm 安装 rancher，[添加 Helm Chart 仓库](/docs/rancher2.5/installation_new/resources/advanced/helm2/helm-rancher/_index)时有时候会因为访问国外网络导致 Rancher Chart 添加失败，如下:
 
 ```
 helm repo add rancher-stable https://releases.rancher.com/server-charts/stable

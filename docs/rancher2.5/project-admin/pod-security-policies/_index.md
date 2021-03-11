@@ -2,15 +2,15 @@
 title: Pod 安全策略
 ---
 
-> 本文只适用于[使用 RKE 创建的集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)。
+> 本文只适用于[使用 RKE 创建的集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)。
 
 您可以在创建项目时设置 Pod 安全策略，您也可以先创建项目，再设置项目的 Pod 安全策略，或随时修改已有项目的 Pod 安全策略。
 
 ## 先决条件
 
-- 已经在 Rancher 内创建了 Pod 安全策略。给项目分配 Pod 安全策略之前，您需要先在 Rancher 内完成 Pod 安全策略的创建。如果您还未创建 Pod 安全策略，请参考[如何创建 Pod 安全策略](/docs/rancher2/admin-settings/pod-security-policies/_index)。
+- 已经在 Rancher 内创建了 Pod 安全策略。给项目分配 Pod 安全策略之前，您需要先在 Rancher 内完成 Pod 安全策略的创建。如果您还未创建 Pod 安全策略，请参考[如何创建 Pod 安全策略](/docs/rancher2.5/admin-settings/pod-security-policies/_index)。
 
-- 已经给项目所属的集群分配了默认 Pod 安全策略。如果没有给集群分配默认 Pod 安全策略，会无法配置项目级的 Pod 安全策略。如果您还未给项目所属的集群配置默认 Pod 安全策略，请参考[如何配置集群默认 Pod 安全策略](/docs/rancher2/cluster-admin/pod-security-policy/_index)。
+- 已经给项目所属的集群分配了默认 Pod 安全策略。如果没有给集群分配默认 Pod 安全策略，会无法配置项目级的 Pod 安全策略。如果您还未给项目所属的集群配置默认 Pod 安全策略，请参考[如何配置集群默认 Pod 安全策略](/docs/rancher2.5/cluster-admin/pod-security-policy/_index)。
 
 ## 应用 Pod 安全策略
 

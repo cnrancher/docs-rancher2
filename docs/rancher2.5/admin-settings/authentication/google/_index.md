@@ -22,7 +22,7 @@ _自 v2.3.0 版本起可用_
 
 只有 G Suite 域的管理员才能访问管理 SDK。因此，只有 G Suite 管理员可以配置 Rancher 的 Google OAuth。
 
-在 Rancher 中，只有具有**Manage Authentication** [全局角色](/docs/rancher2/admin-settings/rbac/global-permissions/_index)的管理员或用户才能配置身份验证。
+在 Rancher 中，只有具有**Manage Authentication** [全局角色](/docs/rancher2.5/admin-settings/rbac/global-permissions/_index)的管理员或用户才能配置身份验证。
 
 ## 先决条件
 
@@ -110,7 +110,7 @@ _自 v2.3.0 版本起可用_
 
 ## 在 Rancher 中配置 Google OAuth
 
-1. 使用分配了[administrator](/docs/rancher2/admin-settings/rbac/global-permissions/_index)角色的本地用户登录到 Rancher。这个用户也称为本地主体。
+1. 使用分配了[administrator](/docs/rancher2.5/admin-settings/rbac/global-permissions/_index)角色的本地用户登录到 Rancher。这个用户也称为本地主体。
 1. 在**全局**视图中，从主菜单中单击**安全 > 认证**。
 1. 单击**Google** ，UI 中的说明涵盖了使用 Google OAuth 设置身份验证的步骤。
 

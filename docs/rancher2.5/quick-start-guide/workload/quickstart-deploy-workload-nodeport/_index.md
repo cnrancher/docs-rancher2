@@ -22,7 +22,7 @@ keywords:
 
 ## 部署工作负载
 
-参考前文完成[Rancher Server 的快速部署](/docs/rancher2/quick-start-guide/deployment/_index)后，您可以创建 Kubernetes [工作负载](https://kubernetes.io/docs/concepts/workloads/)。工作负载即 Kubernetes 对一组 Pod 的抽象模型，用于描述业务的运行载体，包括 Deployment、Statefulset、Daemonset、Job、CronJob 等多种类型，详情请参考[名词解释](/docs/rancher2/overview/glossary/_index)。
+参考前文完成[Rancher Server 的快速部署](/docs/rancher2.5/quick-start-guide/deployment/_index)后，您可以创建 Kubernetes [工作负载](https://kubernetes.io/docs/concepts/workloads/)。工作负载即 Kubernetes 对一组 Pod 的抽象模型，用于描述业务的运行载体，包括 Deployment、Statefulset、Daemonset、Job、CronJob 等多种类型，详情请参考[名词解释](/docs/rancher2.5/overview/glossary/_index)。
 
 以下步骤讲解了如何在 Rancher Server 中部署带有 NodePort 的工作负载。本文部署的工作负载是一个“Hello-World”应用。
 
@@ -162,6 +162,6 @@ gettingstarted@rancher:~$
 
 使用完您通过快速入门搭建的 Rancher 沙盒后，您可能想要清理遗留在环境中与 Rancher 相关的资源，并删除 Rancher Server 和您的集群，请单击下方链接查看操作指导。
 
-- [清理环境：Amazon AWS](/docs/rancher2/quick-start-guide/deployment/amazon-aws-qs/_index)
-- [清理环境：DigitalOcean](/docs/rancher2/quick-start-guide/deployment/digital-ocean-qs/_index)
-- [清理环境：Vagrant](/docs/rancher2/quick-start-guide/deployment/quickstart-vagrant/_index)
+- [清理环境：Amazon AWS](/docs/rancher2.5/quick-start-guide/deployment/amazon-aws-qs/_index)
+- [清理环境：DigitalOcean](/docs/rancher2.5/quick-start-guide/deployment/digital-ocean-qs/_index)
+- [清理环境：Vagrant](/docs/rancher2.5/quick-start-guide/deployment/quickstart-vagrant/_index)

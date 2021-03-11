@@ -19,11 +19,11 @@ keywords:
 
 本节介绍如何配置私有镜像仓库，以便在安装 Rancher 时，Rancher 可以从此私有镜像仓库中拉取所需的镜像。
 
-默认情况下，Rancher 中所有用于[创建 Kubernetes 集群](/docs/rancher2/cluster-provisioning/_index)或运行任何[工具](/docs/rancher2/cluster-admin/tools/_index)的镜像都从 Docker Hub 中拉取，如： 监控、日志、告警、流水线等镜像。在离线环境下安装 Rancher，您需要一个私有镜像库，这个私有镜像库应该位于 Rancher 中的节点能访问的位置上。然后您需要载入所有镜像到这个私有镜像库里。
+默认情况下，Rancher 中所有用于[创建 Kubernetes 集群](/docs/rancher2.5/cluster-provisioning/_index)或运行任何[工具](/docs/rancher2.5/cluster-admin/tools/_index)的镜像都从 Docker Hub 中拉取，如： 监控、日志、告警、流水线等镜像。在离线环境下安装 Rancher，您需要一个私有镜像库，这个私有镜像库应该位于 Rancher 中的节点能访问的位置上。然后您需要载入所有镜像到这个私有镜像库里。
 
 对于高可用安装和单节点安装，同步镜像到私有镜像仓库的过程是相同的。
 
-但是同步用来创建 Linux 集群和用来创建 Windows 集群的镜像过程是不同的。所以这取决于您是否要创建 Windows 集群。默认情况下，我们假设只配置 Linux 集群，我们提供了如何推送 Linux 需要的镜像到私有镜像库的步骤。但是如果您计划创建 [Windows 集群](/docs/rancher2/cluster-provisioning/rke-clusters/windows-clusters/_index)，我们有单独的文档来介绍如何同步 Linux 和 Windows 集群所需的镜像。
+但是同步用来创建 Linux 集群和用来创建 Windows 集群的镜像过程是不同的。所以这取决于您是否要创建 Windows 集群。默认情况下，我们假设只配置 Linux 集群，我们提供了如何推送 Linux 需要的镜像到私有镜像库的步骤。但是如果您计划创建 [Windows 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/windows-clusters/_index)，我们有单独的文档来介绍如何同步 Linux 和 Windows 集群所需的镜像。
 
 > **先决条件：** 已有一个 Rancher 可访问的[私有镜像仓库](https://docs.docker.com/registry/deploying/)。
 
@@ -62,7 +62,7 @@ keywords:
 
 1.  获取最新的`cert-manager` Helm chart，解析模板,获取镜像详细信息：
 
-    > **注意：** 由于`cert-manager`最近的改动，您需要升级`cert-manager`版本。如果您要升级 Rancher 并且使用`cert-manager`的版本低于 v0.12.0，请看我们的[升级文档](/docs/rancher2/installation/options/upgrading-cert-manager/_index)。
+    > **注意：** 由于`cert-manager`最近的改动，您需要升级`cert-manager`版本。如果您要升级 Rancher 并且使用`cert-manager`的版本低于 v0.12.0，请看我们的[升级文档](/docs/rancher2.5/installation/options/upgrading-cert-manager/_index)。
 
     ```plain
     helm repo add jetstack https://charts.jetstack.io
@@ -231,7 +231,7 @@ Linux 镜像需要从 Linux 主机上收集和推送，但是必须先将 Window
 
 1. 获取最新的`cert-manager` Helm chart，并解析模板以获取镜像详细信息：
 
-   > **注意：** 由于`cert-manager`最近的改动，您需要升级`cert-manager`版本。如果您要升级 Rancher 并且使用`cert-manager`的版本低于 v0.12.0，请看我们的[升级文档](/docs/rancher2/installation/options/upgrading-cert-manager/_index)。
+   > **注意：** 由于`cert-manager`最近的改动，您需要升级`cert-manager`版本。如果您要升级 Rancher 并且使用`cert-manager`的版本低于 v0.12.0，请看我们的[升级文档](/docs/rancher2.5/installation/options/upgrading-cert-manager/_index)。
 
    ```plain
    helm repo add jetstack https://charts.jetstack.io
@@ -287,6 +287,6 @@ Linux 镜像需要从 Linux 主机上收集和推送，但是必须先将 Window
 
 ## 后续操作
 
-[安装 Rancher 高可用的下一步](/docs/rancher2/installation/other-installation-methods/air-gap/launch-kubernetes/_index)
+[安装 Rancher 高可用的下一步](/docs/rancher2.5/installation/other-installation-methods/air-gap/launch-kubernetes/_index)
 
-[安装 Rancher 单节点的下一步](/docs/rancher2/installation/other-installation-methods/air-gap/install-rancher/_index)
+[安装 Rancher 单节点的下一步](/docs/rancher2.5/installation/other-installation-methods/air-gap/install-rancher/_index)

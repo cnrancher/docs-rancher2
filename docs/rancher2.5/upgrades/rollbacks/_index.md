@@ -19,8 +19,8 @@ keywords:
 
 本节包含有关如何将 Rancher Server 回滚到以前版本的信息。
 
-- [回滚单节点 Rancher](/docs/rancher2/upgrades/rollbacks/single-node-rollbacks/_index)
-- [回滚高可用 Rancher](/docs/rancher2/upgrades/rollbacks/ha-server-rollbacks/_index)
+- [回滚单节点 Rancher](/docs/rancher2.5/upgrades/rollbacks/single-node-rollbacks/_index)
+- [回滚高可用 Rancher](/docs/rancher2.5/upgrades/rollbacks/ha-server-rollbacks/_index)
 - [回滚到特定版本的 Rancher](#回滚到特定版本的Rancher)
 
 ## 回滚到特定版本
@@ -48,7 +48,7 @@ keywords:
 
 1. 执行命令后，将创建一个`tokens.json`文件。重要！在安全的地方备份此文件。**回滚 Rancher 后，需要使用它来恢复集群功能。如果丢失此文件，则可能无法访问集群。**
 
-1. 按照[正常回滚流程](/docs/rancher2/upgrades/rollbacks/_index)回滚 Rancher。
+1. 按照[正常回滚流程](/docs/rancher2.5/upgrades/rollbacks/_index)回滚 Rancher。
 
 1. 一旦 Rancher 恢复正常，由 Rancher 管理的每个集群（导入集群除外）将处于`Unvailable`状态。
 

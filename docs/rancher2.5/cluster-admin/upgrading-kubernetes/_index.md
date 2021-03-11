@@ -21,11 +21,11 @@ Rancher 将使用 RKE（Rancher Kubernetes Engine）作为库来创建和编辑 
 
 ## 新功能
 
-从 Rancher v2.3.0 开始，Rancher 添加了 Kubernetes 元数据功能，该功能允许在不升级 Rancher 的情况下，获取到 Kubernetes 补丁版本。有关详细信息，请参阅关于 [Kubernetes 元数据](/docs/rancher2/admin-settings/k8s-metadata/_index)的部分。
+从 Rancher v2.3.0 开始，Rancher 添加了 Kubernetes 元数据功能，该功能允许在不升级 Rancher 的情况下，获取到 Kubernetes 补丁版本。有关详细信息，请参阅关于 [Kubernetes 元数据](/docs/rancher2.5/admin-settings/k8s-metadata/_index)的部分。
 
 从 Rancher v2.4.0 开始，
 
-- 添加了将 K3s Kubernetes 集群导入 Rancher 的功能，以及在编辑这些集群时升级 Kubernetes 的功能。有关详细信息，请参阅[关于导入集群](/docs/rancher2/cluster-provisioning/imported-clusters/_index)的部分。
+- 添加了将 K3s Kubernetes 集群导入 Rancher 的功能，以及在编辑这些集群时升级 Kubernetes 的功能。有关详细信息，请参阅[关于导入集群](/docs/rancher2.5/cluster-provisioning/imported-clusters/_index)的部分。
 - Rancher UI 中提供了用于配置 RKE 集群升级策略的新高级选项：**最大不可用工作节点**和**驱散节点**。这些选项利用了 RKE v1.1.0 的新的集群升级功能，其中节点可以进行滚动升级，以便在某些特殊情况下，保障在集群升级期间集群和应用的可用性。
 
 ## 经过测试的 Kubernetes 版本
@@ -67,8 +67,8 @@ RKE v1.1.0 更改了集群升级方式。
 
 > **先决条件：**
 >
-> - 以下选项仅适用于 [RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)和[导入的 K3s Kubernetes 集群](/docs/rancher2/cluster-provisioning/imported-clusters/_index)。
-> - 升级 Kubernetes 之前，请[备份您的集群](/docs/rancher2/backups/_index)。
+> - 以下选项仅适用于 [RKE 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)和[导入的 K3s Kubernetes 集群](/docs/rancher2.5/cluster-provisioning/imported-clusters/_index)。
+> - 升级 Kubernetes 之前，请[备份您的集群](/docs/rancher2.5/backups/_index)。
 
 1. 从**全局**视图中，找到要升级 Kubernetes 版本的集群。选择 **省略号 > 编辑**。
 1. 点开**集群选项**。
@@ -83,8 +83,8 @@ _自 v2.4 起可用_
 
 可以使用备份将集群还原到先前的状态，并使用之前的 Kubernetes 版本。有关更多信息，请参阅以下部分：
 
-- [备份集群](/docs/rancher2/cluster-admin/backing-up-etcd/_index)
-- [从备份恢复集群](/docs/rancher2/cluster-admin/restoring-etcd/_index)
+- [备份集群](/docs/rancher2.5/cluster-admin/backing-up-etcd/_index)
+- [从备份恢复集群](/docs/rancher2.5/cluster-admin/restoring-etcd/_index)
 
 > Rancher v2.4.0 之前的版本中，需要编辑 YAML 才能回滚 Kubernetes 版本。
 
@@ -114,7 +114,7 @@ _自 v2.4 起可用_
 1. 转到 Rancher UI 中的集群视图。
 1. 单击**省略号>编辑**。
 1. 在**高级选项**部分中，转到**驱散**字段，然后单击**是**。
-1. 选择安全或激进的驱散选项。有关每个选项的更多信息，请参考[本节](/docs/rancher2/cluster-admin/nodes/_index)。
+1. 选择安全或激进的驱散选项。有关每个选项的更多信息，请参考[本节](/docs/rancher2.5/cluster-admin/nodes/_index)。
 1. （可选）配置优雅停止时长。优雅停止时长是分配给每个 Pod 进行清理的超时时间，因此 Pod 将有机会优雅地退出。Pod 可能需要完成所有未完成的请求，回滚事务或将状态保存到某些外部存储。如果此值为负数，则将使用每个 Pod 中自己定义的优雅停止时长。
 1. （可选）配置超时，该超时是驱散节点的最长的等待的时间。超过这个时间后，即使无法完成驱散节点，也将对节点进行升级。
 1. 单击**保存**。

@@ -16,7 +16,7 @@ keywords:
   - iSCSI 卷
 ---
 
-本章节仅适用于[由 RKE 创建的集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)。
+本章节仅适用于[由 RKE 创建的集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)。
 
 将数据存储到 iSCSI 卷时，您可能会遇到一个问题：`kubelet` 无法自动连接 iSCSI 卷。造成此问题的原因很可能是 iSCSI 启动器工具不兼容。您可以在集群的每个节点上安装 iSCSI 启动器工具，解决这个问题。
 

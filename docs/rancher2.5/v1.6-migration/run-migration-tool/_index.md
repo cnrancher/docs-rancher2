@@ -59,7 +59,7 @@ keywords:
 
    **步骤结果:** 迁移工具导出`--export-dir`目录中每个堆栈的 Compose 文件（`docker-compose.yml`和`rancher-compose.yml`）。如果省略此选项，则 Compose 文件将输出到当前目录。
 
-   为每个环境和堆栈创建一个唯一的目录。例如，如果我们从 Rancher v1.6 中导出每个[环境/堆栈](/docs/rancher2/v1.6-migration/_index)，则创建以下目录结构：
+   为每个环境和堆栈创建一个唯一的目录。例如，如果我们从 Rancher v1.6 中导出每个[环境/堆栈](/docs/rancher2.5/v1.6-migration/_index)，则创建以下目录结构：
 
    ```
    export/                            # migration-tools --export-dir
@@ -80,7 +80,7 @@ keywords:
 
    > **注意:** 如果您从命令中省略了`--docker-file`和 `--rancher-file`选项，则迁移工具将使用当前工作目录来查找 Compose 文件。
 
-> **想要迁移工具 CLI 的完整用法和选项?** 查看 [迁移工具 CLI 参考文档](/docs/rancher2/v1.6-migration/run-migration-tool/migration-tools-ref/_index)。
+> **想要迁移工具 CLI 的完整用法和选项?** 查看 [迁移工具 CLI 参考文档](/docs/rancher2.5/v1.6-migration/run-migration-tool/migration-tools-ref/_index)。
 
 ### 迁移工具 CLI 的输出
 
@@ -99,7 +99,7 @@ keywords:
 
 #### 迁移示例文件输出
 
-如果我们从[迁移示例文件](/docs/rancher2/v1.6-migration/_index)中解析两个示例文件`docker-compose.yml`和`rancher-compose.yml`，则以下文件输出：
+如果我们从[迁移示例文件](/docs/rancher2.5/v1.6-migration/_index)中解析两个示例文件`docker-compose.yml`和`rancher-compose.yml`，则以下文件输出：
 
 | 文件                       | 描述                                                                 |
 | -------------------------- | -------------------------------------------------------------------- |
@@ -129,7 +129,7 @@ keywords:
 
 - 通过 Rancher CLI 部署
 
-  > **先决条件:** 为 Rancher v2.x [安装 Rancher CLI](/docs/rancher2/cli/_index)
+  > **先决条件:** 为 Rancher v2.x [安装 Rancher CLI](/docs/rancher2.5/cli/_index)
 
   使用以下 Rancher CLI 命令让 Rancher v2.x 部署应用程序。对于迁移工具 CLI 输出的每个 Kubernetes 清单，请输入以下命令之一，以将其导入 Rancherv2.x。
 
@@ -155,7 +155,7 @@ keywords:
 
 如[迁移工具 CLI 输出](#迁移工具-cli-的输出)中所述，解析过程中生成的 output.txt 文件列出了每个部署必须执行的手动步骤。查看接下来的议题，以获取有关手动编辑 Kubernetes Spec 的更多信息。
 
-打开您的`output.txt`文件并查看其内容。将 Compose 文件解析为 Kubernetes 清单时，迁移工具 CLI 会为其 Kubernetes 创建的每个工作负载输出清单。例如，当我们将[迁移示例文件](/docs/rancher2/v1.6-migration/_index)解析为 Kubernetes 清单时，`output.txt`列出了每个解析后的 Kubernetes 清单文件（即工作负载）。每个工作负载均具有一系列 Action，以在 v2.x 中还原该工作负载的功能。
+打开您的`output.txt`文件并查看其内容。将 Compose 文件解析为 Kubernetes 清单时，迁移工具 CLI 会为其 Kubernetes 创建的每个工作负载输出清单。例如，当我们将[迁移示例文件](/docs/rancher2.5/v1.6-migration/_index)解析为 Kubernetes 清单时，`output.txt`列出了每个解析后的 Kubernetes 清单文件（即工作负载）。每个工作负载均具有一系列 Action，以在 v2.x 中还原该工作负载的功能。
 
 <figcaption>Output.txt 示例</figcaption>
 
@@ -172,16 +172,16 @@ keywords:
 | [scale][5]        | 在 v1.6 中，规模是指在单个节点上运行的容器副本的数量。在 v2.x 中，此功能由副本集代替。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | start_on_create   | 没有等效的 Kubernetes。您无需采取任何措施。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 
-[1]: /docs/rancher2/v1.6-migration/monitor-apps/_index
-[2]: /docs/rancher2/v1.6-migration/schedule-workloads/_index
-[3]: /docs/rancher2/v1.6-migration/discover-services/_index
-[4]: /docs/rancher2/v1.6-migration/expose-services/_index
-[5]: /docs/rancher2/v1.6-migration/schedule-workloads/_index
+[1]: /docs/rancher2.5/v1.6-migration/monitor-apps/_index
+[2]: /docs/rancher2.5/v1.6-migration/schedule-workloads/_index
+[3]: /docs/rancher2.5/v1.6-migration/discover-services/_index
+[4]: /docs/rancher2.5/v1.6-migration/expose-services/_index
+[5]: /docs/rancher2.5/v1.6-migration/schedule-workloads/_index
 
 <!-- MB: oops, skipped 6 -->
 
-[7]: /docs/rancher2/v1.6-migration/schedule-workloads/_index
-[8]: /docs/rancher2/v1.6-migration/schedule-workloads/_index
-[9]: /docs/rancher2/v1.6-migration/schedule-workloads/_index
+[7]: /docs/rancher2.5/v1.6-migration/schedule-workloads/_index
+[8]: /docs/rancher2.5/v1.6-migration/schedule-workloads/_index
+[9]: /docs/rancher2.5/v1.6-migration/schedule-workloads/_index
 
-## [下一步: 暴露您的服务](/docs/rancher2/v1.6-migration/expose-services/_index)
+## [下一步: 暴露您的服务](/docs/rancher2.5/v1.6-migration/expose-services/_index)

@@ -14,4 +14,4 @@ keywords:
   - 多集群应用
 ---
 
-详情请参考[多集群应用](/docs/rancher2/helm-charts/legacy-catalogs/multi-cluster-apps/_index)。
+详情请参考[多集群应用](/docs/rancher2.5/helm-charts/legacy-catalogs/multi-cluster-apps/_index)。

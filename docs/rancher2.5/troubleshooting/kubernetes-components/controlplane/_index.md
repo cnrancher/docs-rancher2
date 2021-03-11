@@ -43,7 +43,7 @@ bdf3898b8063        rancher/hyperkube:v1.11.5-rancher1   "/opt/rke-tools/en..." 
 
 ## Controlplane 容器日志
 
-> **注意：** 如果是 `controlplane` 角色的节点， `kube-controller-manager` 和 `kube-scheduler` 会通过选举选举出 leader 节点。 只有 leader 节点会记录当前操作的日志信息。查看 [Kubernetes leader 选举](/docs/rancher2/troubleshooting/kubernetes-resources/_index)可以知道如何查看当前的 leader 节点。
+> **注意：** 如果是 `controlplane` 角色的节点， `kube-controller-manager` 和 `kube-scheduler` 会通过选举选举出 leader 节点。 只有 leader 节点会记录当前操作的日志信息。查看 [Kubernetes leader 选举](/docs/rancher2.5/troubleshooting/kubernetes-resources/_index)可以知道如何查看当前的 leader 节点。
 
 通过下面命令查看容器日志信息可以查看到可能包含的错误信息：
 

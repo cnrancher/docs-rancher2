@@ -21,7 +21,7 @@ RKE 元数据功能允许您在发布新版本的 Kubernetes 后，无需升级 
 
 > **注意：** Kubernetes API 可能在次要版本之间发生变化。因此，我们不支持获取 Kubernetes 次要版本，例如在 Rancher Server 当前仅支持 v1.14。如果想要使用 Kubernetes v1.15。您需要升级 Rancher Server 以添加对新的次要 Kubernetes 版本的支持。
 
-Rancher 的 Kubernetes 元数据包含了 Rancher 配置 [RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)时可以使用的 Kubernetes 版本信息。Rancher 定期同步数据，并为**系统镜像** **服务选项**和**插件模板**创建自定义资源定义（CRD）。因此，当新的 Kubernetes 版本与 Rancher Server 版本兼容时，Kubernetes 元数据使 Rancher 可以使用新的 Kubernetes 版本来配置集群。元数据概述了 [Rancher Kubernetes Engine](/docs/rke/_index)（RKE）用于部署各种 Kubernetes 版本的信息。
+Rancher 的 Kubernetes 元数据包含了 Rancher 配置 [RKE 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)时可以使用的 Kubernetes 版本信息。Rancher 定期同步数据，并为**系统镜像** **服务选项**和**插件模板**创建自定义资源定义（CRD）。因此，当新的 Kubernetes 版本与 Rancher Server 版本兼容时，Kubernetes 元数据使 Rancher 可以使用新的 Kubernetes 版本来配置集群。元数据概述了 [Rancher Kubernetes Engine](/docs/rke/_index)（RKE）用于部署各种 Kubernetes 版本的信息。
 
 下表描述了受定期数据同步影响的 CRD。
 
@@ -41,7 +41,7 @@ Rancher 的 Kubernetes 元数据包含了 Rancher 配置 [RKE 集群](/docs/ranc
 
 ## 刷新 Kubernetes 元数据
 
-默认情况下，刷新 Kubernetes 元数据的选项可供系统管理员使用，也可供具有**管理集群驱动**[全局权限](/docs/rancher2/admin-settings/rbac/global-permissions/_index)的任何用户使用。
+默认情况下，刷新 Kubernetes 元数据的选项可供系统管理员使用，也可供具有**管理集群驱动**[全局权限](/docs/rancher2.5/admin-settings/rbac/global-permissions/_index)的任何用户使用。
 
 要强制 Rancher 刷新 Kubernetes 元数据，可以在**工具 > 驱动管理 > 刷新 Kubernetes 元数据**下执行手动刷新操作。
 
@@ -113,6 +113,6 @@ To sync Rancher with a local mirror of the RKE metadata, an administrator would 
 1. 要下载私有镜像仓库所需的镜像，请单击 Rancher UI 左下角的 Rancher Server 版本。
 1. 下载 Linux 或 Windows 操作系统的特定镜像列表。
 1. 下载`rancher-images.txt`。
-1. 使用与[离线安装](/docs/rancher2/installation_new/other-installation-methods/air-gap/populate-private-registry/_index)过程中相同的步骤准备私有镜像仓库，但不要使用发布公告页面中的`rancher-images.txt`，而是使用从前面步骤获得的镜像列表。
+1. 使用与[离线安装](/docs/rancher2.5/installation_new/other-installation-methods/air-gap/populate-private-registry/_index)过程中相同的步骤准备私有镜像仓库，但不要使用发布公告页面中的`rancher-images.txt`，而是使用从前面步骤获得的镜像列表。
 
 **结果：** Rancher 的离线安装现在可以同步 Kubernetes 元数据了。如果在新版本的 Kubernetes 发布后，更新了本地的 RKE 元数据 Git 库，并且在私有镜像仓库中同步了新的镜像，那么您可以在无需升级 Rancher Server 版本的情况下使用新版本的 Kubernetes 配置集群。

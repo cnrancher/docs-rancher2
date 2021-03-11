@@ -19,13 +19,13 @@ keywords:
 
 ## 如何使用 API
 
-API 具有独立的用户界面，您可从 Web 浏览器访问它。这是查看资源、执行操作以及查看等效 cURL 或 HTTP 请求和响应的最简便方法。要访问它，请单击右上角用户头像，在 **API & Keys** 下，您可以找到 API 访问地址，并且可以创建[API KEY](/docs/rancher2/user-settings/api-keys/_index)。
+API 具有独立的用户界面，您可从 Web 浏览器访问它。这是查看资源、执行操作以及查看等效 cURL 或 HTTP 请求和响应的最简便方法。要访问它，请单击右上角用户头像，在 **API & Keys** 下，您可以找到 API 访问地址，并且可以创建[API KEY](/docs/rancher2.5/user-settings/api-keys/_index)。
 
 ## 认证
 
-API 请求必须包含身份验证信息。身份验证是通过使用带有[API KEY](/docs/rancher2/user-settings/api-keys/_index)的 HTTP 的基本验证（Basic Auth）完成的。API KEY 可以创建新的集群，并可以通过`/v3/clusters/`访问多个集群。可以将[集群和项目角色](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)绑定到这些 KEY 上，从而限制用户可以看到哪些集群和项目，以及它们可以执行哪些操作。
+API 请求必须包含身份验证信息。身份验证是通过使用带有[API KEY](/docs/rancher2.5/user-settings/api-keys/_index)的 HTTP 的基本验证（Basic Auth）完成的。API KEY 可以创建新的集群，并可以通过`/v3/clusters/`访问多个集群。可以将[集群和项目角色](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)绑定到这些 KEY 上，从而限制用户可以看到哪些集群和项目，以及它们可以执行哪些操作。
 
-默认情况下，一些集群级别的 API KEY 是永不过期的，因为他们使用`ttl=0`生成。如不再需要这些 API KEY，可以删除这些 KEY 使其失效，有关操作说明请阅读[API Token 页面](/docs/rancher2/api/api-tokens/_index)。
+默认情况下，一些集群级别的 API KEY 是永不过期的，因为他们使用`ttl=0`生成。如不再需要这些 API KEY，可以删除这些 KEY 使其失效，有关操作说明请阅读[API Token 页面](/docs/rancher2.5/api/api-tokens/_index)。
 
 ## 发送请求
 

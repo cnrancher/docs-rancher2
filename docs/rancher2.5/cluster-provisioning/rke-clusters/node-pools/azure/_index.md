@@ -24,9 +24,9 @@ keywords:
 
 然后，你将在 Rancher 中创建一个 Azure 集群，在配置新集群时，你将为其定义节点池。每个节点池都会有一个 etcd、controlplane 或 worker 的 Kubernetes 角色。Rancher 将在新节点上安装 Kubernetes，它将用节点池定义的 Kubernetes 角色来设置每个节点。
 
-有关配置 Rancher 将在 Azure 节点上安装的 Kubernetes 集群的更多信息，请参考 [RKE 集群配置参考](/docs/rancher2/cluster-provisioning/rke-clusters/options/_index)。
+有关配置 Rancher 将在 Azure 节点上安装的 Kubernetes 集群的更多信息，请参考 [RKE 集群配置参考](/docs/rancher2.5/cluster-provisioning/rke-clusters/options/_index)。
 
-有关配置 Azure 节点模板的更多信息，请参阅 [Azure 节点模板配置参考](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/azure/azure-node-template-config/_index)
+有关配置 Azure 节点模板的更多信息，请参阅 [Azure 节点模板配置参考](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/azure/azure-node-template-config/_index)
 
 ## 准备工作
 
@@ -83,7 +83,7 @@ az ad sp create-for-rbac \
     - 单击**添加成员**，把需要访问这个集群的用户添加到成员列表中。
     - 在**角色**下拉菜单中选择每个用户的角色，每个角色对应不同的权限。
 
-5.  使用**集群选项**设置 Kubernetes 的版本，网络插件以及是否要启用项目网络隔离。更多信息，请参见[集群配置参考](/docs/rancher2/cluster-provisioning/rke-clusters/options/_index)
+5.  使用**集群选项**设置 Kubernetes 的版本，网络插件以及是否要启用项目网络隔离。更多信息，请参见[集群配置参考](/docs/rancher2.5/cluster-provisioning/rke-clusters/options/_index)
 
 6.  将一个或多个节点池添加到您的集群。
 
@@ -119,7 +119,7 @@ az ad sp create-for-rbac \
     - 单击**添加成员**，把需要访问这个集群的用户添加到成员列表中。
     - 在**角色**下拉菜单中选择每个用户的角色，每个角色对应不同的权限。
 
-5.  使用**集群选项**设置 Kubernetes 的版本，网络插件以及是否要启用项目网络隔离。更多信息，请参见[集群配置参考](/docs/rancher2/cluster-provisioning/rke-clusters/options/_index)
+5.  使用**集群选项**设置 Kubernetes 的版本，网络插件以及是否要启用项目网络隔离。更多信息，请参见[集群配置参考](/docs/rancher2.5/cluster-provisioning/rke-clusters/options/_index)
 
 6.  将一个或多个节点池添加到您的集群。
 
@@ -146,5 +146,5 @@ az ad sp create-for-rbac \
 
 创建集群后，您可以通过 Rancher UI 访问它。作为最佳实践，我们建议设置这些替代方式来访问您的集群。
 
-- **使用 kubectl CLI 访问您的集群：**按照[这些步骤](/docs/rancher2/cluster-admin/cluster-access/kubectl/_index)在您的工作站上使用 kubectl 访问集群。在这种情况下，你将通过 Rancher 服务器的认证代理进行认证，然后 Rancher 将把你连接到下游集群。这种方法可以让您在没有 Rancher 用户界面的情况下管理集群。
-- **使用 kubectl CLI 访问您的集群，使用授权的集群端点：**按照[这些步骤](/docs/rancher2/cluster-admin/cluster-access/kubectl/_index)直接使用 kubectl 访问您的集群，而无需通过 Rancher 进行身份验证。我们建议设置这种替代方法来访问您的集群，这样在您无法连接到 Rancher 的情况下，您仍然可以访问集群。
+- **使用 kubectl CLI 访问您的集群：**按照[这些步骤](/docs/rancher2.5/cluster-admin/cluster-access/kubectl/_index)在您的工作站上使用 kubectl 访问集群。在这种情况下，你将通过 Rancher 服务器的认证代理进行认证，然后 Rancher 将把你连接到下游集群。这种方法可以让您在没有 Rancher 用户界面的情况下管理集群。
+- **使用 kubectl CLI 访问您的集群，使用授权的集群端点：**按照[这些步骤](/docs/rancher2.5/cluster-admin/cluster-access/kubectl/_index)直接使用 kubectl 访问您的集群，而无需通过 Rancher 进行身份验证。我们建议设置这种替代方法来访问您的集群，这样在您无法连接到 Rancher 的情况下，您仍然可以访问集群。

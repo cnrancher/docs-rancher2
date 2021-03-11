@@ -32,7 +32,7 @@ RancherD 是一个二进制文件，它首先启动一个 RKE2 Kubernetes 集群
 
 在本说明的第一部分，您将学习如何在单个节点上启动 RancherD。按照第一部分的步骤进行操作的结果是一个安装了 Rancher 服务器的单节点[RKE2](https://docs.rke2.io/)Kubernetes 集群。这个集群以后可以很容易地变成高可用性。如果 Rancher 只需要管理本地 Kubernetes 集群，那么安装就完成了。
 
-第二部分介绍了如何将单节点的 Rancher 安装转换成高可用性安装。如果 Rancher 服务器将管理下游的 Kubernetes 集群，则必须遵循这些步骤。关于高可用 Rancher 部署的推荐架构的讨论可以在我们的[最佳实践指南](/docs/rancher2/best-practices/2.5/_index)中找到。
+第二部分介绍了如何将单节点的 Rancher 安装转换成高可用性安装。如果 Rancher 服务器将管理下游的 Kubernetes 集群，则必须遵循这些步骤。关于高可用 Rancher 部署的推荐架构的讨论可以在我们的[最佳实践指南](/docs/rancher2.5/best-practices/2.5/_index)中找到。
 
 ## 先决条件
 
@@ -40,9 +40,9 @@ RancherD 是一个二进制文件，它首先启动一个 RKE2 Kubernetes 集群
 
 RancherD 必须在 Linux 操作系统上启动。目前只支持利用 systemd 的操作系统。
 
-Linux 节点需要满足硬件和网络的[安装要求](/docs/rancher2/installation_new/requirements/_index)。RancherD 的安装不需要 Docker。
+Linux 节点需要满足硬件和网络的[安装要求](/docs/rancher2.5/installation_new/requirements/_index)。RancherD 的安装不需要 Docker。
 
-要在 SELinux Enforcing CentOS 8 节点或 RHEL 8 节点上安装 RancherD，需要一些[附加步骤](/docs/rancher2/installation_new/requirements/_index)。
+要在 SELinux Enforcing CentOS 8 节点或 RHEL 8 节点上安装 RancherD，需要一些[附加步骤](/docs/rancher2.5/installation_new/requirements/_index)。
 
 ### root 权限
 
@@ -100,9 +100,9 @@ tls-san:
 
 要指定自己的预共享密钥作为标记，请在启动时设置`token`参数。
 
-以这种方式安装 Rancher 将使用 Rancher 生成的证书。要使用自己的自签名或受信任的证书，请参考[配置指南](/docs/rancher2/installation_new/install-rancher-on-linux/rancherd-configuration/_index)
+以这种方式安装 Rancher 将使用 Rancher 生成的证书。要使用自己的自签名或受信任的证书，请参考[配置指南](/docs/rancher2.5/installation_new/install-rancher-on-linux/rancherd-configuration/_index)
 
-关于自定义 RancherD Helm Chart 值.yaml 的信息，请参考[本节](/docs/rancher2/installation_new/install-rancher-on-linux/rancherd-configuration/_index)
+关于自定义 RancherD Helm Chart 值.yaml 的信息，请参考[本节](/docs/rancher2.5/installation_new/install-rancher-on-linux/rancherd-configuration/_index)
 
 ### 2. 启动第一个服务器节点
 
@@ -223,11 +223,11 @@ systemctl start rancherd-server.service。
 
 ## 升级
 
-有关升级和回滚的信息，请参考[本页。](/docs/rancher2/installation_new/install-rancher-on-linux/upgrades/_index)
+有关升级和回滚的信息，请参考[本页。](/docs/rancher2.5/installation_new/install-rancher-on-linux/upgrades/_index)
 
 ## 配置
 
-有关如何配置证书、节点污点、Rancher Helm Chart 选项或 RancherD CLI 选项的信息，请参考[配置参考](/docs/rancher2/installation_new/install-rancher-on-linux/rancherd-configuration/_index)
+有关如何配置证书、节点污点、Rancher Helm Chart 选项或 RancherD CLI 选项的信息，请参考[配置参考](/docs/rancher2.5/installation_new/install-rancher-on-linux/rancherd-configuration/_index)
 
 ## 卸载
 

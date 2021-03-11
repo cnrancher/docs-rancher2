@@ -181,4 +181,4 @@ echo -n "your_key" |base64
 
 ## 示例
 
-Backup 自定义资源，请参考[本页面](/docs/rancher2/backups/2.5/examples/_index)
+Backup 自定义资源，请参考[本页面](/docs/rancher2.5/backups/2.5/examples/_index)

@@ -17,31 +17,31 @@ keywords:
 
 创建集群的步骤通常是复杂而繁琐的，用户需要输入多个配置参数才可以完成集群创建，但是使用 Rancher 创建集群的过程非常简单快捷，您只需要通过 Rancher UI 界面，填写一些简单的的参数即可创建集群。而且 Rancher 支持的集群种类繁多：云供应商托管的 Kubernetes 集群、RKE 集群、基础设施提供商创建节点并创建 Kubernetes 集群、在自定义节点上创建 Kubernetes 集群、导入现有 Kubernetes 集群和导入 K3s 集群，都是 Rancher 支持的创建集群的方式。
 
-> 本节假设您基本熟悉 Docker 和 Kubernetes，有关 Kubernetes 组件如何协同工作的简要说明，请参阅[Kubernetes 概念](/docs/rancher2/overview/concepts/_index)页面。
+> 本节假设您基本熟悉 Docker 和 Kubernetes，有关 Kubernetes 组件如何协同工作的简要说明，请参阅[Kubernetes 概念](/docs/rancher2.5/overview/concepts/_index)页面。
 
-有关 Rancher Server 是如何创建集群以及使用什么工具来创建集群的概述，请参阅[产品架构](/docs/rancher2/overview/architecture/_index)页面。
+有关 Rancher Server 是如何创建集群以及使用什么工具来创建集群的概述，请参阅[产品架构](/docs/rancher2.5/overview/architecture/_index)页面。
 
 下表总结了每种集群类型的可用选项，“✓”表示支持该操作，“\*”表示在特定情况下支持该操作，详情请参考注释，空白格表示暂不支持该操作。
 
-| 功能                                                                                                              | [Rancher 启动的 Kubernetes 集群 (RKE 集群)](/docs/rancher2/cluster-provisioning/rke-clusters/_index) | [托管的 Kubernetes 集群](/docs/rancher2/cluster-provisioning/hosted-kubernetes-clusters/_index) | [导入的 Kubernetes 集群](/docs/rancher2/cluster-provisioning/imported-clusters/_index) |
-| ----------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| [使用 kubectl 和 kubeconfig 文件访问集群](/docs/rancher2/cluster-admin/cluster-access/kubectl/_index)             | ✓                                                                                                    | ✓                                                                                               | ✓                                                                                      |
-| [添加集群成员](/docs/rancher2/cluster-admin/cluster-access/cluster-members/_index)                                | ✓                                                                                                    | ✓                                                                                               | ✓                                                                                      |
-| [编辑集群](/docs/rancher2/cluster-admin/editing-clusters/_index)                                                  | ✓                                                                                                    | ✓                                                                                               | \*                                                                                     |
-| [管理节点](/docs/rancher2/cluster-admin/nodes/_index)                                                             | ✓                                                                                                    | ✓                                                                                               | ✓                                                                                      |
-| [管理持久卷和存储类](/docs/rancher2/cluster-admin/volumes-and-storage/_index)                                     | ✓                                                                                                    | ✓                                                                                               | ✓                                                                                      |
-| [管理项目和命名空间](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)                                 | ✓                                                                                                    | ✓                                                                                               | ✓                                                                                      |
-| [使用应用商店](/docs/rancher2/helm-charts/legacy-catalogs/_index)                                                 | ✓                                                                                                    | ✓                                                                                               | ✓                                                                                      |
-| [使用配置工具（告警、通知、日志、监控和 Istio）](#使用配置工具)                                                   | ✓                                                                                                    | ✓                                                                                               | ✓                                                                                      |
-| [克隆集群](/docs/rancher2/cluster-admin/cloning-clusters/_index)                                                  | ✓                                                                                                    | ✓                                                                                               |                                                                                        |
-| [证书轮换的能力](/docs/rancher2/cluster-admin/certificate-rotation/_index)                                        | ✓                                                                                                    |                                                                                                 |                                                                                        |
-| [备份您的 Kubernetes 集群的能力](/docs/rancher2/cluster-admin/backing-up-etcd/_index)                             | ✓                                                                                                    |                                                                                                 |                                                                                        |
-| [恢复和还原 etcd 的能力](/docs/rancher2/cluster-admin/restoring-etcd/_index)                                      | ✓                                                                                                    |                                                                                                 |                                                                                        |
-| [当集群不再能从 Rancher 访问时，清理 Kubernetes 组件](/docs/rancher2/cluster-admin/cleaning-cluster-nodes/_index) | ✓                                                                                                    |                                                                                                 |                                                                                        |
-| [配置 Pod 安全策略](/docs/rancher2/cluster-admin/pod-security-policy/_index)                                      | ✓                                                                                                    |                                                                                                 |                                                                                        |
-| [运行安全扫描](/docs/rancher2/security/security-scan/_index)                                                      | ✓                                                                                                    |                                                                                                 |                                                                                        |
+| 功能                                                                                                                | [Rancher 启动的 Kubernetes 集群 (RKE 集群)](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index) | [托管的 Kubernetes 集群](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/_index) | [导入的 Kubernetes 集群](/docs/rancher2.5/cluster-provisioning/imported-clusters/_index) |
+| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| [使用 kubectl 和 kubeconfig 文件访问集群](/docs/rancher2.5/cluster-admin/cluster-access/kubectl/_index)             | ✓                                                                                                      | ✓                                                                                                 | ✓                                                                                        |
+| [添加集群成员](/docs/rancher2.5/cluster-admin/cluster-access/cluster-members/_index)                                | ✓                                                                                                      | ✓                                                                                                 | ✓                                                                                        |
+| [编辑集群](/docs/rancher2.5/cluster-admin/editing-clusters/_index)                                                  | ✓                                                                                                      | ✓                                                                                                 | \*                                                                                       |
+| [管理节点](/docs/rancher2.5/cluster-admin/nodes/_index)                                                             | ✓                                                                                                      | ✓                                                                                                 | ✓                                                                                        |
+| [管理持久卷和存储类](/docs/rancher2.5/cluster-admin/volumes-and-storage/_index)                                     | ✓                                                                                                      | ✓                                                                                                 | ✓                                                                                        |
+| [管理项目和命名空间](/docs/rancher2.5/cluster-admin/projects-and-namespaces/_index)                                 | ✓                                                                                                      | ✓                                                                                                 | ✓                                                                                        |
+| [使用应用商店](/docs/rancher2.5/helm-charts/legacy-catalogs/_index)                                                 | ✓                                                                                                      | ✓                                                                                                 | ✓                                                                                        |
+| [使用配置工具（告警、通知、日志、监控和 Istio）](#使用配置工具)                                                     | ✓                                                                                                      | ✓                                                                                                 | ✓                                                                                        |
+| [克隆集群](/docs/rancher2.5/cluster-admin/cloning-clusters/_index)                                                  | ✓                                                                                                      | ✓                                                                                                 |                                                                                          |
+| [证书轮换的能力](/docs/rancher2.5/cluster-admin/certificate-rotation/_index)                                        | ✓                                                                                                      |                                                                                                   |                                                                                          |
+| [备份您的 Kubernetes 集群的能力](/docs/rancher2.5/cluster-admin/backing-up-etcd/_index)                             | ✓                                                                                                      |                                                                                                   |                                                                                          |
+| [恢复和还原 etcd 的能力](/docs/rancher2.5/cluster-admin/restoring-etcd/_index)                                      | ✓                                                                                                      |                                                                                                   |                                                                                          |
+| [当集群不再能从 Rancher 访问时，清理 Kubernetes 组件](/docs/rancher2.5/cluster-admin/cleaning-cluster-nodes/_index) | ✓                                                                                                      |                                                                                                   |                                                                                          |
+| [配置 Pod 安全策略](/docs/rancher2.5/cluster-admin/pod-security-policy/_index)                                      | ✓                                                                                                      |                                                                                                   |                                                                                          |
+| [运行安全扫描](/docs/rancher2.5/security/security-scan/_index)                                                      | ✓                                                                                                      |                                                                                                   |                                                                                          |
 
-\*：除了 [K3s 集群](/docs/rancher2/cluster-provisioning/imported-clusters/_index#导入的-K3s-集群的其他功能)外，Rancher 不支持为其他类型的导入集群配置集群选项。
+\*：除了 [K3s 集群](/docs/rancher2.5/cluster-provisioning/imported-clusters/_index#导入的-K3s-集群的其他功能)外，Rancher 不支持为其他类型的导入集群配置集群选项。
 
 ## 创建云供应商托管的 Kubernetes 集群
 
@@ -49,7 +49,7 @@ keywords:
 
 如果您使用 Kubernetes 提供商(例如：谷歌 GKE)提供的集群，Rancher 将与相应的云 API 对接。Rancher 允许您通过 Rancher UI 在托管的集群中创建和管理基于角色的访问控制。
 
-有关更多信息，请参阅[托管的 Kubernetes 集群](/docs/rancher2/cluster-provisioning/hosted-kubernetes-clusters/_index)一节。
+有关更多信息，请参阅[托管的 Kubernetes 集群](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/_index)一节。
 
 ## 使用 Rancher 创建 Kubernetes 集群（RKE 集群）
 
@@ -61,23 +61,23 @@ keywords:
 
 如果您已经有了要添加到 RKE 集群中的节点，则可以通过在其上运行 Rancher Agent 容器将其添加到集群中。
 
-有关详细信息，请参阅有关[RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)的部分。
+有关详细信息，请参阅有关[RKE 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)的部分。
 
 ## 通过基础设施提供商创建节点并创建 Kubernetes 集群
 
 Rancher 可以在 Amazon EC2、DigitalOcean、Azure、阿里云 或 vSphere 等基础设施提供商中动态地创建节点，然后在这些节点上安装 Kubernetes。
 
-使用 Rancher，您可以基于[节点模版](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/_index)来创建节点池。此模板定义了要在云提供商中创建的节点的参数。
+使用 Rancher，您可以基于[节点模版](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/_index)来创建节点池。此模板定义了要在云提供商中创建的节点的参数。
 
 使用基础设施提供商托管的节点的一个好处是，如果节点失去与集群的连接，Rancher 可以自动替换它，维护预期的集群配置。
 
-是否可以通过某云提供商创建节点模版取决于在 Rancher UI 中是否有状态为 Active 的相应的[主机驱动](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/_index)。
+是否可以通过某云提供商创建节点模版取决于在 Rancher UI 中是否有状态为 Active 的相应的[主机驱动](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/_index)。
 
-有关更多信息，请参阅关于[由设备提供商托管的节点](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/_index)。
+有关更多信息，请参阅关于[由设备提供商托管的节点](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/_index)。
 
 ## 在现有的自定义节点上创建 Kubernetes 集群
 
-在设置这种类型的集群时，Rancher 会在现有的[自定义节点](/docs/rancher2/cluster-provisioning/rke-clusters/custom-nodes/_index)上安装 Kubernetes，这将创建一个自定义集群。
+在设置这种类型的集群时，Rancher 会在现有的[自定义节点](/docs/rancher2.5/cluster-provisioning/rke-clusters/custom-nodes/_index)上安装 Kubernetes，这将创建一个自定义集群。
 
 您可以使用任何节点，在 Rancher 中创建一个集群。
 
@@ -93,7 +93,7 @@ Rancher 可以在 Amazon EC2、DigitalOcean、Azure、阿里云 或 vSphere 等�
 
 在 Rancher v2.4 中，可以通过在 Rancher UI 中编辑导入的 K3s 集群，来升级它的 Kubernetes 版本。
 
-有关更多信息，请参阅[导入现有集群](/docs/rancher2/cluster-provisioning/imported-clusters/_index)一节。
+有关更多信息，请参阅[导入现有集群](/docs/rancher2.5/cluster-provisioning/imported-clusters/_index)一节。
 
 ## 导入并编辑 K3s 集群
 
@@ -106,7 +106,7 @@ _自 Rancher v2.4.0 起可用_
 - 在 UI 中升级 K3s 版本
 - 在 UI 中查看（只读）集群中每个节点的 K3s 配置参数和环境变量。
 
-有关更多信息，请参阅[导入现有 K3s 集群](/docs/rancher2/cluster-provisioning/imported-clusters/_index)一节。
+有关更多信息，请参阅[导入现有 K3s 集群](/docs/rancher2.5/cluster-provisioning/imported-clusters/_index)一节。
 
 ## 登记现有的集群
 
@@ -118,4 +118,4 @@ _从 v2.5.0 起可用_
 
 当您删除在 Rancher 中创建的 EKS 集群时，该集群将被销毁。当您删除在 Rancher 中注册的 EKS 集群时，它将与 Rancher 服务器断开连接，但它仍然存在，您仍然可以以在 Rancher 中注册之前的方式访问它。
 
-有关更多信息，请参阅[本页。](/docs/rancher2/cluster-provisioning/registered-clusters/_index)。
+有关更多信息，请参阅[本页。](/docs/rancher2.5/cluster-provisioning/registered-clusters/_index)。

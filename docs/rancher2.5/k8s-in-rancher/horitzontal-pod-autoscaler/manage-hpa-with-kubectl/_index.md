@@ -26,11 +26,11 @@ keywords:
 
 ## 对于 Rancher v2.3.x 版本的说明
 
-在 Rancher v2.3.x 版本中，您可以从 Rancher UI 中创建，查看和删除 HPA。您还可以配置它们以根据 Rancher UI 中的 CPU 或内存使用量进行扩展。有关更多信息，请参阅[使用 Rancher UI 管理 HPA](/docs/rancher2/k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-rancher-ui/_index)。如果需要基于 CPU 或内存以外的其他指标扩展 HPA，您仍然需要使用 `kubectl` 工具。
+在 Rancher v2.3.x 版本中，您可以从 Rancher UI 中创建，查看和删除 HPA。您还可以配置它们以根据 Rancher UI 中的 CPU 或内存使用量进行扩展。有关更多信息，请参阅[使用 Rancher UI 管理 HPA](/docs/rancher2.5/k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-rancher-ui/_index)。如果需要基于 CPU 或内存以外的其他指标扩展 HPA，您仍然需要使用 `kubectl` 工具。
 
 ## v2.0.7 之前的 Rancher 的说明
 
-使用较早版本的 Rancher 创建的集群不会自动满足创建 HPA 的所有要求。要在这些集群上安装 HPA，请参考 [在 Rancher v2.0.7 之前创建的集群的手动 HPA 安装](/docs/rancher2/k8s-in-rancher/horitzontal-pod-autoscaler/hpa-for-rancher-before-2_0_7/_index)。
+使用较早版本的 Rancher 创建的集群不会自动满足创建 HPA 的所有要求。要在这些集群上安装 HPA，请参考 [在 Rancher v2.0.7 之前创建的集群的手动 HPA 安装](/docs/rancher2.5/k8s-in-rancher/horitzontal-pod-autoscaler/hpa-for-rancher-before-2_0_7/_index)。
 
 ## 管理 HPA 的基本 kubectl 命令
 

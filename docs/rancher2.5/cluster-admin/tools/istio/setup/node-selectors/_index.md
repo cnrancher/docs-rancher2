@@ -19,7 +19,7 @@ keywords:
   - 选择部署 Istio 组件的节点
 ---
 
-> **先决条件：** 您的集群需要一个可以为 Istio 指定的 worker 节点。Worker 结点应满足[资源要求](/docs/rancher2/istio/2.3.x-2.4.x/resources/_index)。
+> **先决条件：** 您的集群需要一个可以为 Istio 指定的 worker 节点。Worker 结点应满足[资源要求](/docs/rancher2.5/istio/2.3.x-2.4.x/resources/_index)。
 
 在较大型的部署中，我们建议通过为每个 Istio 组件添加节点选择器，将 Istio 的基础结构放置在集群中的专用节点上。
 
@@ -51,4 +51,4 @@ keywords:
 
 ## 后续操作
 
-[添加部署和服务](/docs/rancher2/istio/2.3.x-2.4.x/setup/deploy-workloads/_index)
+[添加部署和服务](/docs/rancher2.5/istio/2.3.x-2.4.x/setup/deploy-workloads/_index)

@@ -21,7 +21,7 @@ keywords:
 
 > **注意：**
 >
-> - 如果您已经拥有 NFS 共享，则无需配置新的 NFS 服务器即可使用 Rancher 中的 NFS 卷插件。同时，请跳过本章节的其余部分并进行[存储添加](/docs/rancher2/cluster-admin/volumes-and-storage/_index)。
+> - 如果您已经拥有 NFS 共享，则无需配置新的 NFS 服务器即可使用 Rancher 中的 NFS 卷插件。同时，请跳过本章节的其余部分并进行[存储添加](/docs/rancher2.5/cluster-admin/volumes-and-storage/_index)。
 >
 > - 虽然您可以将本章节的说明用在其他 Linux 发行版（例如 Debian，RHEL，Arch Linux 等）上，但是本章节的所有内容都是基于 Ubuntu 来演示如何设置 NFS 服务器。有关如何使用其他 Linux 发行版创建 NFS 服务器的官方说明，请查阅发行版的文档。
 >

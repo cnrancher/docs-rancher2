@@ -20,7 +20,7 @@ keywords:
 
 - **强制使用模板：** 如果管理员希望所有新的 Rancher 创建的集群都具有这些设置，可以[强制每个人使用一个或多个模板来创建集群](#强制执行模板设置)。
 - **与不同的用户共享不同的模板：** 管理员可以给[基本用户和高级用户提供不同的模板](#基本和高级用户模板)，这样基本用户会有更多受限选项，高级用户在创建集群时可以使用更多选项。
-- **更新模板设置：** 如果组织的安全和 DevOps 团队决定将最佳实践嵌入到新集群所需的设置中，则这些最佳实践可能会随时间而改变。如果最佳实践发生变化，[模板可以更新为新版本](#更新模板和集群)并且从模板创建的集群可以[升级到新版本](/docs/rancher2/admin-settings/rke-templates/creating-and-revising/_index)模板。
+- **更新模板设置：** 如果组织的安全和 DevOps 团队决定将最佳实践嵌入到新集群所需的设置中，则这些最佳实践可能会随时间而改变。如果最佳实践发生变化，[模板可以更新为新版本](#更新模板和集群)并且从模板创建的集群可以[升级到新版本](/docs/rancher2.5/admin-settings/rke-templates/creating-and-revising/_index)模板。
 - **共享模板的所有权：** 当模板所有者不再希望维护模板或希望共享模板的所有权时，此场景描述如何[共享模板所有权](#允许其他用户控制和共享模板)。
 
 ## 强制执行模板设置
@@ -34,7 +34,7 @@ keywords:
 **结果：**
 
 - 组织中的所有 Rancher 用户都可以访问该模板。
-- [标准用户](/docs/rancher2/admin-settings/rbac/global-permissions/_index)使用此模板创建的所有新集群都将使用 Kubernetes 1.14，它们无法使用其他 Kubernetes 版本。默认情况下，标准用户没有创建模板的权限，因此除非与他们共享更多模板，否则此模板将是唯一可以使用的模板。
+- [标准用户](/docs/rancher2.5/admin-settings/rbac/global-permissions/_index)使用此模板创建的所有新集群都将使用 Kubernetes 1.14，它们无法使用其他 Kubernetes 版本。默认情况下，标准用户没有创建模板的权限，因此除非与他们共享更多模板，否则此模板将是唯一可以使用的模板。
 - 所有标准用户必须使用集群模板创建新集群。如果不使用模板，则无法创建集群。
 
 通过这种方式，系统管理员在整个组织中强制使用 Kubernetes 版本，同时仍然允许最终用户配置其他所有内容。
@@ -43,7 +43,7 @@ keywords:
 
 假设一个组织有基本用户和高级用户。管理员希望基本用户必须使用模板，而高级用户和管理员可以根据自己的需要创建集群。
 
-1. 首先，管理员打开 [RKE 模板强制](/docs/rancher2/admin-settings/rke-templates/enforcement/_index)。这意味着 Rancher 中的每个[标准用户](/docs/rancher2/admin-settings/rbac/global-permissions/_index)在创建集群时都需要使用 RKE 模板。
+1. 首先，管理员打开 [RKE 模板强制](/docs/rancher2.5/admin-settings/rke-templates/enforcement/_index)。这意味着 Rancher 中的每个[标准用户](/docs/rancher2.5/admin-settings/rbac/global-permissions/_index)在创建集群时都需要使用 RKE 模板。
 1. 然后，管理员创建两个模板：
 
    - 一个基本用户模板，除了访问密钥之外，几乎所有选项都被指定了
@@ -72,12 +72,12 @@ keywords:
 
 Bob 是一个高级用户，可以对集群配置做出明智的决策。随着最佳实践的不断更新，Alice 相信 Bob 会创建新的模板修订版。因此，她决定让 Bob 成为模板的所有者。
 
-要与 Bob 共享模板的所有权，Alice [将 Bob 添加为模板的所有者](/docs/rancher2/admin-settings/rke-templates/template-access-and-sharing/_index)
+要与 Bob 共享模板的所有权，Alice [将 Bob 添加为模板的所有者](/docs/rancher2.5/admin-settings/rke-templates/template-access-and-sharing/_index)
 
 结果是，作为模板所有者，Bob 负责该模板的版本控制。Bob 现在可以执行以下所有操作：
 
-- 在最佳实践更改时，[修改模板](/docs/rancher2/admin-settings/rke-templates/creating-and-revising/_index)。
-- [禁用过时的修订版](/docs/rancher2/admin-settings/rke-templates/creating-and-revising/_index)模板，以便不能用它创建新的集群。
-- [删除整个模板](/docs/rancher2/admin-settings/rke-templates/creating-and-revising/_index)如果组织希望朝不同的方向发展。
-- 当用户使用它创建集群时，[将某个修订设置为默认值](/docs/rancher2/admin-settings/rke-templates/creating-and-revising/_index)。模板的最终用户仍可以选择要使用哪个修订版创建集群。
-- [共享模板](/docs/rancher2/admin-settings/rke-templates/template-access-and-sharing/_index)与指定用户共享模板，使所有 Rancher 用户都可以使用该模板，或与其他用户共享该模板的所有权。
+- 在最佳实践更改时，[修改模板](/docs/rancher2.5/admin-settings/rke-templates/creating-and-revising/_index)。
+- [禁用过时的修订版](/docs/rancher2.5/admin-settings/rke-templates/creating-and-revising/_index)模板，以便不能用它创建新的集群。
+- [删除整个模板](/docs/rancher2.5/admin-settings/rke-templates/creating-and-revising/_index)如果组织希望朝不同的方向发展。
+- 当用户使用它创建集群时，[将某个修订设置为默认值](/docs/rancher2.5/admin-settings/rke-templates/creating-and-revising/_index)。模板的最终用户仍可以选择要使用哪个修订版创建集群。
+- [共享模板](/docs/rancher2.5/admin-settings/rke-templates/template-access-and-sharing/_index)与指定用户共享模板，使所有 Rancher 用户都可以使用该模板，或与其他用户共享该模板的所有权。

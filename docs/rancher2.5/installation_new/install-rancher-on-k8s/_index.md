@@ -22,13 +22,13 @@ keywords:
 集群要求取决于 Rancher 版本。
 
 - **从 Rancher v2.5 开始，** Rancher 可以安装在任何 Kubernetes 集群上。这个集群可以使用上游 Kubernetes，也可以使用 Rancher 的 Kubernetes 发行版之一，也可以是来自 Amazon EKS 等提供商的托管 Kubernetes 集群。
-  > **注意：**要在托管的 Kubernetes 集群（如 EKS、GKE 或 AKS）上部署 Rancher v2.5，应该先部署一个兼容的 Ingress 控制器来配置[Rancher 上的 SSL 终止。](/docs/rancher2/installation_new/install-rancher-on-k8s/_index)。
+  > **注意：**要在托管的 Kubernetes 集群（如 EKS、GKE 或 AKS）上部署 Rancher v2.5，应该先部署一个兼容的 Ingress 控制器来配置[Rancher 上的 SSL 终止。](/docs/rancher2.5/installation_new/install-rancher-on-k8s/_index)。
 - 在 Rancher v2.4.x 中，Rancher 需要安装在 K3s Kubernetes 集群或 RKE Kubernetes 集群上。
 - 在 Rancher v2.4 之前，Rancher 需要安装在 RKE Kubernetes 集群上。
 
-有关安装 RKE Kubernetes 集群的教程，请参考[本页](/docs/rancher2/installation_new/resources/k8s-tutorials/ha-rke/_index)有关为高可用性 RKE 集群设置基础设施的帮助，请参考[本页](/docs/rancher2/installation_new/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha/_index)。
+有关安装 RKE Kubernetes 集群的教程，请参考[本页](/docs/rancher2.5/installation_new/resources/k8s-tutorials/ha-rke/_index)有关为高可用性 RKE 集群设置基础设施的帮助，请参考[本页](/docs/rancher2.5/installation_new/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha/_index)。
 
-安装 K3s Kubernetes 集群的教程，请参考[本页面](/docs/rancher2/installation_new/resources/k8s-tutorials/ha-with-external-db/_index) 如需帮助设置高可用性 K3s 集群的基础架构，请参考[本页](/docs/rancher2/installation_new/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha-with-external-db/_index)
+安装 K3s Kubernetes 集群的教程，请参考[本页面](/docs/rancher2.5/installation_new/resources/k8s-tutorials/ha-with-external-db/_index) 如需帮助设置高可用性 K3s 集群的基础架构，请参考[本页](/docs/rancher2.5/installation_new/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha-with-external-db/_index)
 
 ## 安装 Rancher Helm Chart
 
@@ -36,14 +36,14 @@ Rancher 使用 Kubernetes 的 Helm 软件包管理器安装。Helm Charts 为 Ku
 
 有了 Helm，我们可以创建可配置的 Deployment，而不只是使用静态文件。有关创建您自己的 Deployment 的应用商店应用的更多信息，请查看 https://helm.sh/ 中的文档。
 
-对于无法直接访问 Internet 的系统，请参阅[Rancher 离线安装](/docs/rancher2/installation_new/other-installation-methods/air-gap/_index)。
+对于无法直接访问 Internet 的系统，请参阅[Rancher 离线安装](/docs/rancher2.5/installation_new/other-installation-methods/air-gap/_index)。
 
-选择要安装的 Rancher 版本，请参阅[选择 Rancher 版本](/docs/rancher2/installation_new/resources/choosing-version/_index)。
+选择要安装的 Rancher 版本，请参阅[选择 Rancher 版本](/docs/rancher2.5/installation_new/resources/choosing-version/_index)。
 
-要选择用于安装 Rancher 的 Helm 版本，请参阅[Helm 版本要求](/docs/rancher2/installation_new/resources/helm-version/_index)。
+要选择用于安装 Rancher 的 Helm 版本，请参阅[Helm 版本要求](/docs/rancher2.5/installation_new/resources/helm-version/_index)。
 
 :::important 注意
-本安装指南假定您使用的是 Helm3。有关从 Helm 2 迁移到 Helm 3 的方法，请参阅官方的[Helm 2 到 3 迁移文档](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/)。这个[指南](/docs/rancher2/installation_new/resources/advanced/helm2/_index)提供了使用 Helm 2 在 RKE Kubernetes 集群上安装 Rancher 的较旧的安装指南，适用于无法升级到 Helm 3 的情况。
+本安装指南假定您使用的是 Helm3。有关从 Helm 2 迁移到 Helm 3 的方法，请参阅官方的[Helm 2 到 3 迁移文档](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/)。这个[指南](/docs/rancher2.5/installation_new/resources/advanced/helm2/_index)提供了使用 Helm 2 在 RKE Kubernetes 集群上安装 Rancher 的较旧的安装指南，适用于无法升级到 Helm 3 的情况。
 :::
 
 ## 1、安装需要的 CLI 工具
@@ -53,7 +53,7 @@ Rancher 使用 Kubernetes 的 Helm 软件包管理器安装。Helm Charts 为 Ku
 请查看 [Helm 项目提供的安装指南](https://helm.sh/docs/intro/install/)，来在您的平台上进行安装。
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl) - Kubernetes 命令行工具。
-- [helm](https://docs.helm.sh/using_helm/#installing-helm) - Kubernetes 的软件包管理工具。请参阅 [Helm 版本要求](/docs/rancher2/installation_new/resources/helm-version/_index)以选择要安装 Rancher 的 Helm 版本。
+- [helm](https://docs.helm.sh/using_helm/#installing-helm) - Kubernetes 的软件包管理工具。请参阅 [Helm 版本要求](/docs/rancher2.5/installation_new/resources/helm-version/_index)以选择要安装 Rancher 的 Helm 版本。
 
 :::note 提示
 国内用户，可以导航到 http://mirror.cnrancher.com 下载所需资源
@@ -63,7 +63,7 @@ Rancher 使用 Kubernetes 的 Helm 软件包管理器安装。Helm Charts 为 Ku
 
 使用`helm repo add`命令添加含有 Rancher Chart 的 Helm Chart 仓库。
 
-请将命令中的`<CHART_REPO>`，替换为`latest`，`stable`或`alpha`。更多信息，请查看[选择 Rancher 版本](/docs/rancher2/installation_new/resources/choosing-version/_index)来选择最适合您的仓库。
+请将命令中的`<CHART_REPO>`，替换为`latest`，`stable`或`alpha`。更多信息，请查看[选择 Rancher 版本](/docs/rancher2.5/installation_new/resources/choosing-version/_index)来选择最适合您的仓库。
 
 - `latest`: 推荐在尝试新功能时使用。
 - `stable`: 推荐生产环境中使用。（推荐）
@@ -96,7 +96,7 @@ kubectl create namespace cattle-system
 
 Rancher Server 默认需要 SSL/TLS 配置来保证访问的安全性。
 
-> **提示：** 如果您想要将 SSL/TLS 访问在外部终止，请查看[使用外部 TLS 负载均衡器](/docs/rancher2/installation_new/resources/chart-options/_index)。
+> **提示：** 如果您想要将 SSL/TLS 访问在外部终止，请查看[使用外部 TLS 负载均衡器](/docs/rancher2.5/installation_new/resources/chart-options/_index)。
 
 有三种关于证书来源的推荐选项，证书将用来在 Rancher Server 中终止 TLS：
 
@@ -117,7 +117,7 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
 ## 5、安装 cert-manager
 
 :::note 提示
-如果您使用自己的证书文件 `ingress.tls.source=secret`或者[使用外部 TLS 负载均衡器](/docs/rancher2/installation_new/resources/chart-options/_index)可以跳过此步骤。
+如果您使用自己的证书文件 `ingress.tls.source=secret`或者[使用外部 TLS 负载均衡器](/docs/rancher2.5/installation_new/resources/chart-options/_index)可以跳过此步骤。
 :::
 
 仅在使用 Rancher 生成的证书 `ingress.tls.source=rancher` 或 Let's Encrypt 颁发的证书 `ingress.tls.source=letsEncrypt`时才需要 cert-manager。
@@ -196,11 +196,11 @@ deployment "rancher" successfully rolled out
 
 Rancher Chart 有许多自定义安装选项以适应特定的环境。以下是一些常见的高级方案。
 
-- [HTTP 代理](/docs/rancher2/installation_new/resources/chart-options/_index)
-- [私有镜像仓库](/docs/rancher2/installation_new/resources/chart-options/_index)
-- [外部负载均衡器上的 TLS 终止](/docs/rancher2/installation_new/resources/chart-options/_index)
+- [HTTP 代理](/docs/rancher2.5/installation_new/resources/chart-options/_index)
+- [私有镜像仓库](/docs/rancher2.5/installation_new/resources/chart-options/_index)
+- [外部负载均衡器上的 TLS 终止](/docs/rancher2.5/installation_new/resources/chart-options/_index)
 
-有关选项的完整列表，请参见[Chart 选项](/docs/rancher2/installation_new/resources/chart-options/_index)。
+有关选项的完整列表，请参见[Chart 选项](/docs/rancher2.5/installation_new/resources/chart-options/_index)。
 
 ### 方式 B：使用 Let's Encrypt 证书
 
@@ -231,11 +231,11 @@ deployment "rancher" successfully rolled out
 
 Rancher Chart 有许多自定义安装选项以适应特定的环境。以下是一些常见的高级方案。
 
-- [HTTP 代理](/docs/rancher2/installation_new/resources/chart-options/_index)
-- [私有镜像仓库](/docs/rancher2/installation_new/resources/chart-options/_index)
-- [外部负载均衡器上的 TLS 终止](/docs/rancher2/installation_new/resources/chart-options/_index)
+- [HTTP 代理](/docs/rancher2.5/installation_new/resources/chart-options/_index)
+- [私有镜像仓库](/docs/rancher2.5/installation_new/resources/chart-options/_index)
+- [外部负载均衡器上的 TLS 终止](/docs/rancher2.5/installation_new/resources/chart-options/_index)
 
-有关选项的完整列表，请参见[Chart 选项](/docs/rancher2/installation_new/resources/chart-options/_index)。
+有关选项的完整列表，请参见[Chart 选项](/docs/rancher2.5/installation_new/resources/chart-options/_index)。
 
 ### 方式 C：使用您已有的证书
 
@@ -245,7 +245,7 @@ Rancher Chart 有许多自定义安装选项以适应特定的环境。以下是
 
 尽管技术上仅需要`Subject Alternative Names`中有一个条目，但是拥有一个匹配的 `Common Name` 可以最大程度的提高与旧版浏览器/应用程序的兼容性。
 
-> 如果您想检查证书是否正确，请查看[如何在服务器证书中检查 Common Name 和 Subject Alternative Names](/docs/rancher2/faq/technical/_index)。
+> 如果您想检查证书是否正确，请查看[如何在服务器证书中检查 Common Name 和 Subject Alternative Names](/docs/rancher2.5/faq/technical/_index)。
 
 - 设置 `hostname`。
 - 将 `ingress.tls.source` 选项设置为 `secret`。
@@ -268,15 +268,15 @@ helm install rancher rancher-latest/rancher \
   --set privateCA=true
 ```
 
-现在已经部署了 Rancher，请参阅[添加 TLS 密文](/docs/rancher2/installation_new/resources/tls-secrets/_index)发布证书文件，以便 Rancher 和 ingress 控制器可以使用它们。
+现在已经部署了 Rancher，请参阅[添加 TLS 密文](/docs/rancher2.5/installation_new/resources/tls-secrets/_index)发布证书文件，以便 Rancher 和 ingress 控制器可以使用它们。
 
 Rancher Chart 有许多自定义安装选项以适应特定的环境。以下是一些常见的高级方案。
 
-- [HTTP 代理](/docs/rancher2/installation_new/resources/chart-options/_index)
-- [私有镜像仓库](/docs/rancher2/installation_new/resources/chart-options/_index)
-- [外部负载均衡器上的 TLS 终止](/docs/rancher2/installation_new/resources/chart-options/_index)
+- [HTTP 代理](/docs/rancher2.5/installation_new/resources/chart-options/_index)
+- [私有镜像仓库](/docs/rancher2.5/installation_new/resources/chart-options/_index)
+- [外部负载均衡器上的 TLS 终止](/docs/rancher2.5/installation_new/resources/chart-options/_index)
 
-有关选项的完整列表，请参见[Chart 选项](/docs/rancher2/installation_new/resources/chart-options/_index)。
+有关选项的完整列表，请参见[Chart 选项](/docs/rancher2.5/installation_new/resources/chart-options/_index)。
 
 ## 7、验证 Rancher Server 是否已成功部署
 
@@ -308,4 +308,4 @@ rancher 3 3 3 3 3m
 
 打开浏览器，访问您的 DNS，这个 DNS 会将流量转发到您的负载均衡器，您应该会看到一个色彩丰富的登录页面。
 
-遇到了问题？查看[故障排查](/docs/rancher2/installation_new/other-installation-methods/troubleshooting/_index)页面。
+遇到了问题？查看[故障排查](/docs/rancher2.5/installation_new/other-installation-methods/troubleshooting/_index)页面。

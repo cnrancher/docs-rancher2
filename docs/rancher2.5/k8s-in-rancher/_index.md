@@ -15,19 +15,19 @@ keywords:
   - 资源类型
 ---
 
-在您的项目建立之后，[项目成员](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)可以开始管理项目中的应用程序和其他的所有组件。
+在您的项目建立之后，[项目成员](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)可以开始管理项目中的应用程序和其他的所有组件。
 
 ## 工作负载
 
-使用[工作负载](/docs/rancher2/k8s-in-rancher/workloads/_index)将应用程序部署到集群节点，工作负载包含运行应用程序的 Pod 的对象，以及为部署行为设置规则的元数据。工作负载可以部署在整个集群范围里，也可以部署在一个命名空间内。
+使用[工作负载](/docs/rancher2.5/k8s-in-rancher/workloads/_index)将应用程序部署到集群节点，工作负载包含运行应用程序的 Pod 的对象，以及为部署行为设置规则的元数据。工作负载可以部署在整个集群范围里，也可以部署在一个命名空间内。
 
-在部署工作负载时，可以使用任何镜像进行部署。有多种类型的[工作负载](/docs/rancher2/k8s-in-rancher/workloads/_index)可供选择，它们决定应用程序的运行方式。
+在部署工作负载时，可以使用任何镜像进行部署。有多种类型的[工作负载](/docs/rancher2.5/k8s-in-rancher/workloads/_index)可供选择，它们决定应用程序的运行方式。
 
 在部署了工作负载之后，您可以继续使用它。您可以：
 
-- [升级](/docs/rancher2/k8s-in-rancher/workloads/upgrade-workloads/_index)，将工作负载正在运行的应用程序升级到新的版本。
-- [回滚](/docs/rancher2/k8s-in-rancher/workloads/rollback-workloads/_index)，如果升级期间发生问题，则将工作负载回滚到以前的版本。
-- [添加一个从容器](/docs/rancher2/k8s-in-rancher/workloads/add-a-sidecar/_index)，它是在 Pod 中延伸或增强主容器的容器。
+- [升级](/docs/rancher2.5/k8s-in-rancher/workloads/upgrade-workloads/_index)，将工作负载正在运行的应用程序升级到新的版本。
+- [回滚](/docs/rancher2.5/k8s-in-rancher/workloads/rollback-workloads/_index)，如果升级期间发生问题，则将工作负载回滚到以前的版本。
+- [添加一个从容器](/docs/rancher2.5/k8s-in-rancher/workloads/add-a-sidecar/_index)，它是在 Pod 中延伸或增强主容器的容器。
 
 ## 负载均衡和 Ingress
 
@@ -39,10 +39,10 @@ keywords:
 
 Rancher 支持两种负载均衡器:
 
-- [4 层负载均衡](/docs/rancher2/k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index)
-- [7 层负载均衡](/docs/rancher2/k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index)
+- [4 层负载均衡](/docs/rancher2.5/k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index)
+- [7 层负载均衡](/docs/rancher2.5/k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index)
 
-有关更多信息，请参见[负载均衡](/docs/rancher2/k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index)。
+有关更多信息，请参见[负载均衡](/docs/rancher2.5/k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index)。
 
 ### Ingress
 
@@ -50,29 +50,29 @@ Rancher 支持两种负载均衡器:
 
 Ingress 通过一组规则定义实现负载均衡。Ingress 协同一个或多个 Ingress 控制器来动态路由服务请求。当 Ingress 接收到一个请求时，在您的集群中的 Ingress 控制器根据您配置的服务子域或路径规则引导请求到正确的服务。
 
-有关更多信息，请参见 [Ingress](/docs/rancher2/k8s-in-rancher/load-balancers-and-ingress/ingress/_index)。
+有关更多信息，请参见 [Ingress](/docs/rancher2.5/k8s-in-rancher/load-balancers-and-ingress/ingress/_index)。
 
 在项目中使用 Ingress 时，可以设置全局 DNS 条目，从而对外部 DNS 进行编程动态设置 Ingress。
 
-有关更多信息，请参见[全局 DNS](/docs/rancher2/helm-charts/legacy-catalogs/globaldns/_index)。
+有关更多信息，请参见[全局 DNS](/docs/rancher2.5/helm-charts/legacy-catalogs/globaldns/_index)。
 
 ## 服务发现
 
 通过 Pod IP 地址访问 Pod 的方式是不稳定的。要创建可解析到 Pod 的主机名，您必须创建一个服务记录，该记录可以将任意 IP 地址、外部主机名、DNS 记录别名、工作负载或通过选择器选择的 Pod 映射到特定的主机名。
 
-有关更多信息，请参见[服务发现](/docs/rancher2/k8s-in-rancher/service-discovery/_index)。
+有关更多信息，请参见[服务发现](/docs/rancher2.5/k8s-in-rancher/service-discovery/_index)。
 
 ## 流水线
 
-在对接了[版本控制工具](/docs/rancher2/project-admin/pipelines/_index)后，您可以添加代码库并开始为每个代码库配置流水线。
+在对接了[版本控制工具](/docs/rancher2.5/project-admin/pipelines/_index)后，您可以添加代码库并开始为每个代码库配置流水线。
 
-有关更多信息，请参见[流水线](/docs/rancher2/pipelines/_index)。
+有关更多信息，请参见[流水线](/docs/rancher2.5/pipelines/_index)。
 
 ## 应用商店
 
 除了启动应用程序的各个组件外，还可以使用 Rancher 应用商店启动应用程序，应用商店就是 Helm Charts。
 
-有关更多信息，请参见[项目中的应用商店](/docs/rancher2/helm-charts/legacy-catalogs/launching-apps/_index)。
+有关更多信息，请参见[项目中的应用商店](/docs/rancher2.5/helm-charts/legacy-catalogs/launching-apps/_index)。
 
 ## Kubernetes 资源
 
@@ -82,7 +82,7 @@ Ingress 通过一组规则定义实现负载均衡。Ingress 协同一个或多�
 
 资源包括：
 
-- [证书](/docs/rancher2/k8s-in-rancher/certificates/_index): 用于加密/解密进入或离开集群的数据的文件。
-- [配置映射](/docs/rancher2/k8s-in-rancher/configmaps/_index): 存储一般配置信息的文件，比如一组配置文件。
-- [密文](/docs/rancher2/k8s-in-rancher/secrets/_index): 存储密码、证书或密钥等敏感数据的文件。
-- [镜像仓库凭证](/docs/rancher2/k8s-in-rancher/registries/_index): 带有用于使用私有镜像仓库进行身份验证的凭据的文件。
+- [证书](/docs/rancher2.5/k8s-in-rancher/certificates/_index): 用于加密/解密进入或离开集群的数据的文件。
+- [配置映射](/docs/rancher2.5/k8s-in-rancher/configmaps/_index): 存储一般配置信息的文件，比如一组配置文件。
+- [密文](/docs/rancher2.5/k8s-in-rancher/secrets/_index): 存储密码、证书或密钥等敏感数据的文件。
+- [镜像仓库凭证](/docs/rancher2.5/k8s-in-rancher/registries/_index): 带有用于使用私有镜像仓库进行身份验证的凭据的文件。

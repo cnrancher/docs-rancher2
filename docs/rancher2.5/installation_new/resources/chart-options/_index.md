@@ -18,4 +18,4 @@ keywords:
   - Chart 安装选项
 ---
 
-Rancher Helm chart 选项参考移至[本页](/docs/rancher2/installation_new/install-rancher-on-k8s/chart-options/_index)。
+Rancher Helm chart 选项参考移至[本页](/docs/rancher2.5/installation_new/install-rancher-on-k8s/chart-options/_index)。

@@ -23,8 +23,8 @@ keywords:
 
 ## 先决条件
 
-- 拥有[系统管理员权限](/docs/rancher2/admin-settings/rbac/global-permissions/_index)
-- 分配了[管理节点驱动](/docs/rancher2/admin-settings/rbac/global-permissions/_index)角色的[自定义全局权限](/docs/rancher2/admin-settings/rbac/global-permissions/_index)。
+- 拥有[系统管理员权限](/docs/rancher2.5/admin-settings/rbac/global-permissions/_index)
+- 分配了[管理节点驱动](/docs/rancher2.5/admin-settings/rbac/global-permissions/_index)角色的[自定义全局权限](/docs/rancher2.5/admin-settings/rbac/global-permissions/_index)。
 
 ## 激活/停用节点驱动
 

@@ -216,7 +216,7 @@ EKS 和 GKE 集群扫描配置文件基于这些类型集群特有的 CIS Benchm
 
 ## 关于跳过和不适用的测试
 
-关于跳过的和不适用的测试列表，请参考[本页面](/docs/rancher2/cis-scans/2.5/skipped-tests/_index)。
+关于跳过的和不适用的测试列表，请参考[本页面](/docs/rancher2.5/cis-scans/2.5/skipped-tests/_index)。
 
 目前，只有用户定义的跳过测试才会在生成的报告中标记为跳过。
 
@@ -224,8 +224,8 @@ EKS 和 GKE 集群扫描配置文件基于这些类型集群特有的 CIS Benchm
 
 ## 基于角色的访问控制
 
-有关权限的信息，请参考[本页面](/docs/rancher2/cis-scans/2.5/rbac/_index)。
+有关权限的信息，请参考[本页面](/docs/rancher2.5/cis-scans/2.5/rbac/_index)。
 
 ## 配置
 
-有关为扫描、配置文件和基准版本配置自定义资源的更多信息，请参阅[本页面](/docs/rancher2/cis-scans/2.5/configuration/_index)。
+有关为扫描、配置文件和基准版本配置自定义资源的更多信息，请参阅[本页面](/docs/rancher2.5/cis-scans/2.5/configuration/_index)。

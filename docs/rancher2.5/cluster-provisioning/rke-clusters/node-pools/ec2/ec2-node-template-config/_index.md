@@ -12,7 +12,7 @@ title: EC2 Node Template Configuration
 
 ### 云凭证（Cloud Credential）
 
-您的 AWS 账户访问信息，存储在[云凭证](/docs/rancher2/user-settings/cloud-credentials/_index)中。
+您的 AWS 账户访问信息，存储在[云凭证](/docs/rancher2.5/user-settings/cloud-credentials/_index)中。
 
 请参阅 [Amazon Documentation: Creating Access Keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) 如何创建访问密钥和秘钥。
 
@@ -22,9 +22,9 @@ title: EC2 Node Template Configuration
 
 请参考以下三个 JSON 策略示例：
 
-- [示例 IAM 策略](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/ec2/_index)
-- [示例 IAM 策略与 PassRole](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/ec2/_index)（如果你想使用[Kubernetes Cloud Provider](/docs/rancher2/cluster-provisioning/rke-clusters/options/cloud-providers/_index)，或者想要将 IAM Profile 传递给实例时，需要用到。)
-- [允许加密 EBS 卷的 IAM 策略示例](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/ec2/_index)策略给用户。
+- [示例 IAM 策略](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/ec2/_index)
+- [示例 IAM 策略与 PassRole](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/ec2/_index)（如果你想使用[Kubernetes Cloud Provider](/docs/rancher2.5/cluster-provisioning/rke-clusters/options/cloud-providers/_index)，或者想要将 IAM Profile 传递给实例时，需要用到。)
+- [允许加密 EBS 卷的 IAM 策略示例](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/ec2/_index)策略给用户。
 
 ### 验证和配置节点
 
@@ -34,13 +34,13 @@ title: EC2 Node Template Configuration
 
 选择默认的安全组或配置安全组。
 
-请参考[使用节点驱动时的 Amazon EC2 安全组](/docs/rancher2/installation/requirements/ports/_index)，查看`rancher-nodes`安全组中创建了哪些规则。
+请参考[使用节点驱动时的 Amazon EC2 安全组](/docs/rancher2.5/installation/requirements/ports/_index)，查看`rancher-nodes`安全组中创建了哪些规则。
 
 ### 实例选项
 
 配置将要创建的实例。确保为配置的 AMI 配置正确的**SSH 用户**。
 
-如果您需要传递**IAM 实例配置文件名**（而不是 ARN），例如，当您要使用[Kubernetes 云提供商](/docs/rancher2/cluster-provisioning/rke-clusters/options/cloud-providers/_index)时，您将需要在策略中增加一个权限。请参阅[带 PassRole 的 IAM 策略示例](#example-iam-policy-with-passrole)以了解
+如果您需要传递**IAM 实例配置文件名**（而不是 ARN），例如，当您要使用[Kubernetes 云提供商](/docs/rancher2.5/cluster-provisioning/rke-clusters/options/cloud-providers/_index)时，您将需要在策略中增加一个权限。请参阅[带 PassRole 的 IAM 策略示例](#example-iam-policy-with-passrole)以了解
 一个政策范例。
 
 ### 引擎选项
@@ -61,9 +61,9 @@ title: EC2 Node Template Configuration
 
 请参考以下三个 JSON 策略示例：
 
-- [示例 IAM 策略](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/ec2/_index)
-- [示例 IAM 策略与 PassRole](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/ec2/_index)（如果你想使用[Kubernetes Cloud Provider](/docs/rancher2/cluster-provisioning/rke-clusters/options/cloud-providers/_index)，或者想要将 IAM Profile 传递给实例时，需要用到。)
-- [允许加密 EBS 卷的 IAM 策略示例](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/ec2/_index)策略给用户。
+- [示例 IAM 策略](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/ec2/_index)
+- [示例 IAM 策略与 PassRole](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/ec2/_index)（如果你想使用[Kubernetes Cloud Provider](/docs/rancher2.5/cluster-provisioning/rke-clusters/options/cloud-providers/_index)，或者想要将 IAM Profile 传递给实例时，需要用到。)
+- [允许加密 EBS 卷的 IAM 策略示例](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/ec2/_index)策略给用户。
 
 ### 可用区和网络
 
@@ -73,7 +73,7 @@ title: EC2 Node Template Configuration
 
 选择默认的安全组或配置安全组。
 
-请参考[使用节点驱动时的 Amazon EC2 安全组](/docs/rancher2/installation/requirements/ports/_index)，查看`rancher-nodes`安全组中创建了哪些规则。
+请参考[使用节点驱动时的 Amazon EC2 安全组](/docs/rancher2.5/installation/requirements/ports/_index)，查看`rancher-nodes`安全组中创建了哪些规则。
 
 ### 实例
 
@@ -85,7 +85,7 @@ title: EC2 Node Template Configuration
 
 ### IAM 实例配置文件名称
 
-如果您需要传递**IAM 实例配置文件名**（而不是 ARN），例如，当您要使用[Kubernetes 云提供商](/docs/rancher2/cluster-provisioning/rke-clusters/options/cloud-providers/_index)时，您将需要在策略中增加一个权限。请参阅 [Example-iam-policy-with-passrole](#example-iam-policy-with-passrole)，了解一个策略的示例。
+如果您需要传递**IAM 实例配置文件名**（而不是 ARN），例如，当您要使用[Kubernetes 云提供商](/docs/rancher2.5/cluster-provisioning/rke-clusters/options/cloud-providers/_index)时，您将需要在策略中增加一个权限。请参阅 [Example-iam-policy-with-passrole](#example-iam-policy-with-passrole)，了解一个策略的示例。
 
 ### Docker 守护程序
 

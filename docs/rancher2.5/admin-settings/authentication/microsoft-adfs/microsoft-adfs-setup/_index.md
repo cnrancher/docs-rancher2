@@ -95,4 +95,4 @@ keywords:
 
 ## 后续操作
 
-[配置 Rancher 使用 AD FS](/docs/rancher2/admin-settings/authentication/microsoft-adfs/rancher-adfs-setup/_index)
+[配置 Rancher 使用 AD FS](/docs/rancher2.5/admin-settings/authentication/microsoft-adfs/rancher-adfs-setup/_index)

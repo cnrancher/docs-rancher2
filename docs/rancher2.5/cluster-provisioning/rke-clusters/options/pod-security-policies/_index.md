@@ -23,7 +23,7 @@ _Pod 安全策略_ 可以用来控制安全敏感的 Pod 字段（如 root 权�
 当您创建一个新的 RKE 集群时，您可以立即配置集群使用 PSP。创建集群时，使用 **集群选项** 启用 PSP。分配给集群的 PSP 将成为该集群中项目的默认 PSP。
 
 **先决条件：**
-在 Rancher 中创建 Pod 安全策略。在将默认 PSP 分配给新集群之前，必须有可用于分配的 PSP。有关说明，请参阅[创建 Pod 安全策略](/docs/rancher2/admin-settings/pod-security-policies/_index).
+在 Rancher 中创建 Pod 安全策略。在将默认 PSP 分配给新集群之前，必须有可用于分配的 PSP。有关说明，请参阅[创建 Pod 安全策略](/docs/rancher2.5/admin-settings/pod-security-policies/_index).
 
 > **注意：**
 > 出于安全考虑，我们建议您在创建集群时分配 PSP。

@@ -25,7 +25,7 @@ keywords:
 
 当 Rancher Server 安装在 Kubernetes 集群上时，它不应该在托管的 Kubernetes 环境中运行，比如谷歌的 GKE、Amazon 的 EKS 或 Microsoft 的 AKS。这些托管的 Kubernetes 解决方案没有将 etcd 开放到 Rancher 可以管理的程度，并且它们的自定义设置可能会干扰 Rancher 的操作。
 
-建议使用托管的基础设施，如 Amazon 的 EC2 或谷歌的 GCE。在基础设施提供者上使用 RKE 创建集群时，您可以配置集群创建 etcd 快照作为备份。然后，您可以使用 [RKE](/docs/rke/etcd-snapshots/recurring-snapshots/_index) 或 [Rancher](/docs/rancher2/backups/2.0-2.4/restorations/_index) 从这些快照之一恢复您的集群。在托管的 Kubernetes 环境中，不支持这种备份和恢复功能。
+建议使用托管的基础设施，如 Amazon 的 EC2 或谷歌的 GCE。在基础设施提供者上使用 RKE 创建集群时，您可以配置集群创建 etcd 快照作为备份。然后，您可以使用 [RKE](/docs/rke/etcd-snapshots/recurring-snapshots/_index) 或 [Rancher](/docs/rancher2.5/backups/2.0-2.4/restorations/_index) 从这些快照之一恢复您的集群。在托管的 Kubernetes 环境中，不支持这种备份和恢复功能。
 
 ## 确保 Kubernetes 的节点配置正确
 
@@ -49,10 +49,10 @@ keywords:
 
 ## 监视集群以计划容量
 
-Rancher Server 的 Local Kubernetes 集群应该尽可能符合[系统和硬件需求](/docs/rancher2/installation_new/requirements/_index)。您越偏离系统和硬件需求，您承担的风险就越大。
+Rancher Server 的 Local Kubernetes 集群应该尽可能符合[系统和硬件需求](/docs/rancher2.5/installation_new/requirements/_index)。您越偏离系统和硬件需求，您承担的风险就越大。
 
 但是，基于指标的容量规划分析应该是扩展 Rancher 的最终指导，因为我们发布的需求建议考虑了各种工作负载类型。
 
 使用 Rancher，您可以通过与领先的开源监控解决方案 Prometheus 和 Grafana 的集成来监控集群节点、Kubernetes 组件和软件部署的状态和过程，Grafana 可以可视化来自 Prometheus 的指标。
 
-在集群中[启用监控](/docs/rancher2/cluster-admin/tools/monitoring/_index)之后，您可以设置[通知](/docs/rancher2/monitoring-alerting/2.0-2.4/notifiers/_index)和[告警](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/_index)，让您知道您的集群是否接近其容量。您还可以使用 Prometheus 和 Grafana 监控框架来建立适合您的规模的关键指标基准。
+在集群中[启用监控](/docs/rancher2.5/cluster-admin/tools/monitoring/_index)之后，您可以设置[通知](/docs/rancher2.5/monitoring-alerting/2.0-2.4/notifiers/_index)和[告警](/docs/rancher2.5/monitoring-alerting/2.0-2.4/cluster-alerts/_index)，让您知道您的集群是否接近其容量。您还可以使用 Prometheus 和 Grafana 监控框架来建立适合您的规模的关键指标基准。

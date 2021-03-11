@@ -20,11 +20,11 @@ keywords:
 
 Helm 是 Kubernetes 首选的包管理工具。Helm Charts 为 Kubernetes YAML 文件提供了模板语法。我们可以使用 Helm 代替静态文件，部署可配置的工作负载。如果您想创建自己的私有应用商店，请参照文档 [Helm 官方文档](https://helm.sh/) 。使用 Helm 前，您需要在集群安装 `tiller` 服务端组件。
 
-对于无法访问互联网的环境，请查看[Helm - 离线安装](/docs/rancher2/installation/options/air-gap-helm2/install-rancher/_index)获取更多安装信息。
+对于无法访问互联网的环境，请查看[Helm - 离线安装](/docs/rancher2.5/installation/options/air-gap-helm2/install-rancher/_index)获取更多安装信息。
 
-请参阅[Helm 版本要求](/docs/rancher2/installation/options/helm-version/_index)，选择安装 Rancher 的 Helm 版本。
+请参阅[Helm 版本要求](/docs/rancher2.5/installation/options/helm-version/_index)，选择安装 Rancher 的 Helm 版本。
 
-> **提示：** 安装指南基于 Helm 2 写作，如果您在使用 Helm 3，请参照[此说明](/docs/rancher2/installation/k8s-install/helm-rancher/_index)。
+> **提示：** 安装指南基于 Helm 2 写作，如果您在使用 Helm 3，请参照[此说明](/docs/rancher2.5/installation/k8s-install/helm-rancher/_index)。
 
 ## 在集群中安装 Tiller
 
@@ -82,8 +82,8 @@ Server: &version.Version{SemVer:"v2.12.1", GitCommit:"02a47c7249b1fc6d8fd3b94e6b
 
 ## 问题排查
 
-请查看[问题排查](/docs/rancher2/installation/options/helm2/helm-init/troubleshooting/_index)。
+请查看[问题排查](/docs/rancher2.5/installation/options/helm2/helm-init/troubleshooting/_index)。
 
 ## 后续操作
 
-[ 安装 Rancher](/docs/rancher2/installation/options/helm2/helm-rancher/_index)
+[ 安装 Rancher](/docs/rancher2.5/installation/options/helm2/helm-rancher/_index)

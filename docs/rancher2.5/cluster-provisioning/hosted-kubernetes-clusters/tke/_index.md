@@ -18,7 +18,7 @@ keywords:
 
 _从 v2.2.0 开始可用_
 
-您可以使用 Rancher 创建一个托管于 Tencent Kubernetes Engine（TKE）中的集群。Rancher 已经为 TKE 实现并打包了针对 TKE 的[集群驱动](/docs/rancher2/admin-settings/drivers/cluster-drivers/_index)，但是默认情况下，这个集群驱动是`未启用的`。为了启动 TKE 集群，您需要先[启用 TKE 集群驱动程序](/docs/rancher2/admin-settings/drivers/cluster-drivers/_index)。启用集群驱动后，可以开始配置 TKE 集群。
+您可以使用 Rancher 创建一个托管于 Tencent Kubernetes Engine（TKE）中的集群。Rancher 已经为 TKE 实现并打包了针对 TKE 的[集群驱动](/docs/rancher2.5/admin-settings/drivers/cluster-drivers/_index)，但是默认情况下，这个集群驱动是`未启用的`。为了启动 TKE 集群，您需要先[启用 TKE 集群驱动程序](/docs/rancher2.5/admin-settings/drivers/cluster-drivers/_index)。启用集群驱动后，可以开始配置 TKE 集群。
 
 ## 先决条件
 

@@ -15,6 +15,6 @@ Istio 提供了很多功能，包括但不限于：
 - 负载均衡
 - 自动重试，限流和熔断
 
-在 Rancher 项目中使用 Istio 的流量控制、[全面数据可视化](/docs/rancher2/istio/2.3.x-2.4.x/_index)或其他功能之前，需要 Rancher 管理员或集群管理员在集群中一键启用 Istio。
+在 Rancher 项目中使用 Istio 的流量控制、[全面数据可视化](/docs/rancher2.5/istio/2.3.x-2.4.x/_index)或其他功能之前，需要 Rancher 管理员或集群管理员在集群中一键启用 Istio。
 
-如果您想了解更多关于 Istio 在 Rancher 中是如何集成的，请参考[Istio 相关章节](/docs/rancher2/istio/2.3.x-2.4.x/_index)。
+如果您想了解更多关于 Istio 在 Rancher 中是如何集成的，请参考[Istio 相关章节](/docs/rancher2.5/istio/2.3.x-2.4.x/_index)。

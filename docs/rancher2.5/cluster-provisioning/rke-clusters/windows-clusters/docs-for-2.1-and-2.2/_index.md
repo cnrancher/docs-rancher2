@@ -1,6 +1,6 @@
 ---
 title: v2.1 和v2.2 版本中的 Windows 支持（实验性）
-description: 本节介绍如何在 Rancher v2.1.x 和 v2.2.x 版本中配置 Windows 集群。如果您正在使用 Rancher v2.3.0 或更高版本的 Rancher，请参阅新的 Windows 文档[v2.3.0 或更高版本](/docs/rancher2/cluster-provisioning/rke-clusters/windows-clusters/_index)。
+description: 本节介绍如何在 Rancher v2.1.x 和 v2.2.x 版本中配置 Windows 集群。如果您正在使用 Rancher v2.3.0 或更高版本的 Rancher，请参阅新的 Windows 文档[v2.3.0 或更高版本](/docs/rancher2.5/cluster-provisioning/rke-clusters/windows-clusters/_index)。
 keywords:
   - rancher
   - rancher中文
@@ -20,9 +20,9 @@ keywords:
 
 _适用于 v2.1.0 到 v2.1.9 和 v2.2.0 到 v2.2.3 版本_
 
-本节介绍如何在 Rancher v2.1.x 和 v2.2.x 版本中配置 Windows 集群。如果您正在使用 Rancher v2.3.0 或更高版本的 Rancher，请参阅新的 Windows 文档[v2.3.0 或更高版本](/docs/rancher2/cluster-provisioning/rke-clusters/windows-clusters/_index)。
+本节介绍如何在 Rancher v2.1.x 和 v2.2.x 版本中配置 Windows 集群。如果您正在使用 Rancher v2.3.0 或更高版本的 Rancher，请参阅新的 Windows 文档[v2.3.0 或更高版本](/docs/rancher2.5/cluster-provisioning/rke-clusters/windows-clusters/_index)。
 
-当您创建一个[自定义集群](/docs/rancher2/cluster-provisioning/rke-clusters/custom-nodes/_index) （Rancher 使用 RKE (Rancher Kubernetes Engine) 在现有的节点上配置 Kubernetes 集群）时，您可以通过将 Linux 和 Windows 节点混合使用来创建自定义 Windows 集群。
+当您创建一个[自定义集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/custom-nodes/_index) （Rancher 使用 RKE (Rancher Kubernetes Engine) 在现有的节点上配置 Kubernetes 集群）时，您可以通过将 Linux 和 Windows 节点混合使用来创建自定义 Windows 集群。
 
 > **重要:** 在 v2.3 之前的 Rancher 版本中，对 Windows 节点的支持是实验性的。因此，如果您在 v2.3 之前使用 Rancher，则不建议在生产环境中使用 Windows 节点。
 
@@ -45,7 +45,7 @@ _适用于 v2.1.0 到 v2.1.9 和 v2.2.0 到 v2.2.3 版本_
 
 ### 1、创建节点
 
-开始创建支持 Windows 的自定义集群前，请先准备您的节点服务器。根据我们的[需求](/docs/rancher2/installation_new/requirements/_index)提供三个节点，两个 Linux 节点，一个 Windows 节点。您的节点可以是：
+开始创建支持 Windows 的自定义集群前，请先准备您的节点服务器。根据我们的[需求](/docs/rancher2.5/installation_new/requirements/_index)提供三个节点，两个 Linux 节点，一个 Windows 节点。您的节点可以是：
 
 - 云主机
 - 虚拟化平台中的虚拟机
@@ -61,7 +61,7 @@ _适用于 v2.1.0 到 v2.1.9 和 v2.2.0 到 v2.2.3 版本_
 
 #### 要求
 
-- 您可以在[安装指南](/docs/rancher2/installation_new/requirements/_index)中查看 Linux 和 Windows 节点的节点要求。
+- 您可以在[安装指南](/docs/rancher2.5/installation_new/requirements/_index)中查看 Linux 和 Windows 节点的节点要求。
 - 虚拟化或裸金属的节点都必须使用 2 层网络连接。
 - 为了支持[Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/ingress/)，您的集群必须包含至少一个专门用于 worker 角色的 Linux 节点。
 - 尽管我们推荐上表中只列出的三个节点的架构，但是您可以添加额外的 Linux 和 Windows 节点来扩展您的集群，来实现冗余。
@@ -80,7 +80,7 @@ _适用于 v2.1.0 到 v2.1.9 和 v2.2.0 到 v2.2.3 版本_
 
 ### 3、创建自定义集群
 
-要创建支持 Windows 节点的自定义集群，请按照[使用自定义节点创建集群](/docs/rancher2/cluster-provisioning/rke-clusters/custom-nodes/_index)中的说明操作，创建自定义集群，创建支持 Windows 节点的集群。
+要创建支持 Windows 节点的自定义集群，请按照[使用自定义节点创建集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/custom-nodes/_index)中的说明操作，创建自定义集群，创建支持 Windows 节点的集群。
 
 #### 启用 Windows 支持选项
 
@@ -90,7 +90,7 @@ _适用于 v2.1.0 到 v2.1.9 和 v2.2.0 到 v2.2.3 版本_
 
 当为支持 Windows 的集群选择网络插件时，唯一可用的选项是 Flannel，因为我们要用到[host-gw](https://github.com/coreos/flannel/blob/master/Documentation/backends.md#host-gw)来进行 IP 路由。
 
-如果您的节点由云提供商托管，并且您希望获得额外自动化功能，例如负载均衡器或持久存储设备等，有关配置信息，请参阅[Cloud Provider 设置](/docs/rancher2/cluster-provisioning/rke-clusters/cloud-providers/_index)。
+如果您的节点由云提供商托管，并且您希望获得额外自动化功能，例如负载均衡器或持久存储设备等，有关配置信息，请参阅[Cloud Provider 设置](/docs/rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/_index)。
 
 #### 节点配置
 

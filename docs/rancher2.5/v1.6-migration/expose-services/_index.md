@@ -105,4 +105,4 @@ NodePort 在 Kubernetes 集群中的节点的内部 IP 可用。如果要在集�
 
 ![设置NodePort](/img/rancher/set-nodeport.gif)
 
-## [下一步: 配置健康检查](/docs/rancher2/v1.6-migration/monitor-apps/_index)
+## [下一步: 配置健康检查](/docs/rancher2.5/v1.6-migration/monitor-apps/_index)

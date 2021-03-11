@@ -18,11 +18,11 @@ keywords:
 
 流水先的 Docker 镜像仓库和 Minio 工作负载默认使用临时存储，临时存储足以应对大多数情况。如果您希望流水线内嵌的镜像仓库中的镜像和流水线日志在节点失败的情况下能被保存下来，您可以给镜像日志配置持久存储。下文提供了配置持久存储的操作指导。
 
-本节假定您了解持久存储在 Kubernetes 中的工作方式。有关更多信息，请参阅[存储如何工作](/docs/rancher2/cluster-admin/volumes-and-storage/how-storage-works/_index)部分。
+本节假定您了解持久存储在 Kubernetes 中的工作方式。有关更多信息，请参阅[存储如何工作](/docs/rancher2.5/cluster-admin/volumes-and-storage/how-storage-works/_index)部分。
 
 > **先决条件：**
 >
-> 集群必须有可用的[持久存储](/docs/rancher2/cluster-admin/volumes-and-storage/_index)。
+> 集群必须有可用的[持久存储](/docs/rancher2.5/cluster-admin/volumes-and-storage/_index)。
 
 ## 配置内置镜像仓库的持久存储
 
@@ -43,7 +43,7 @@ keywords:
 
 1. 选择持久卷的**源**
 
-   - 如果您选择的是**使用存储类创建新的持久卷**，您需要选择[存储类](/docs/rancher2/cluster-admin/volumes-and-storage/_index)，输入**容量**。
+   - 如果您选择的是**使用存储类创建新的持久卷**，您需要选择[存储类](/docs/rancher2.5/cluster-admin/volumes-and-storage/_index)，输入**容量**。
 
    - 如果您选择 **使用现有的持久卷**，请直接输入**容量**。
 
@@ -84,7 +84,7 @@ keywords:
 
 1. 选择持久卷的**源**
 
-   - 如果您选择的是**使用存储类创建新的持久卷**，您需要选择[存储类](/docs/rancher2/cluster-admin/volumes-and-storage/_index)，输入**容量**。
+   - 如果您选择的是**使用存储类创建新的持久卷**，您需要选择[存储类](/docs/rancher2.5/cluster-admin/volumes-and-storage/_index)，输入**容量**。
 
    - 如果您选择 **使用现有的持久卷**，请直接输入**容量**。
 

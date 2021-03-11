@@ -16,7 +16,7 @@ keywords:
   - 集群参数
 ---
 
-[使用 RKE 启动](/docs/rancher2/cluster-provisioning/rke-clusters/_index)的集群时，您可以选择自定义 Kubernetes 选项，通过 Rancher UI 或集群配置文件配置 Kubernetes 选项。
+[使用 RKE 启动](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)的集群时，您可以选择自定义 Kubernetes 选项，通过 Rancher UI 或集群配置文件配置 Kubernetes 选项。
 
 - [Rancher UI](#rancher-ui)：通过 Rancher UI 设置 Kubernetes 集群的通用自定义的选项。
 - [集群配置文件](#集群配置文件)：除了 Rancher UI 之外，高级用户还可以通过 RKE 配置文件，在 YAML 中指定 RKE 安装中可用的任何选项，`system_images`参数除外。
@@ -27,7 +27,7 @@ keywords:
 
 ## Rancher UI
 
-创建 [RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)时，您可以使用**集群选项**部分配置基本的 Kubernetes 选项。
+创建 [RKE 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)时，您可以使用**集群选项**部分配置基本的 Kubernetes 选项。
 
 ### Kubernetes 版本
 
@@ -35,7 +35,7 @@ keywords:
 
 ### 网络插件
 
-集群使用的[网络插件](https://kubernetes.io/zh/docs/concepts/cluster-administration/networking/)。有关不同网络提供商的更多详细信息，请查看我们的[网络常见问题解答](/docs/rancher2/faq/networking/cni-providers/_index)。
+集群使用的[网络插件](https://kubernetes.io/zh/docs/concepts/cluster-administration/networking/)。有关不同网络提供商的更多详细信息，请查看我们的[网络常见问题解答](/docs/rancher2.5/faq/networking/cni-providers/_index)。
 
 :::important 重要
 启动集群后，您无法更改网络插件，请谨慎选择要使用的网络插件。Kubernetes 不支持切换网络插件。创建集群后，如果您需要更改网络插件，只能删除整个集群及其所有应用程序，重新创建集群和配置网络插件。
@@ -50,9 +50,9 @@ keywords:
 
 **Canal 注意事项：**
 
-在 v2.0.0-v2.0.4 和 v2.0.6 中，使用 Canal 时，默认的集群网络隔离选项是开启的阻止了[项目](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)之间的 Pod 通过 Pod IP 直接通信。
+在 v2.0.0-v2.0.4 和 v2.0.6 中，使用 Canal 时，默认的集群网络隔离选项是开启的阻止了[项目](/docs/rancher2.5/cluster-admin/projects-and-namespaces/_index)之间的 Pod 通过 Pod IP 直接通信。
 
-从 v2.0.7 开始，如果您使用 Canal，您还可以选择使用**网络隔离**，自行决定[项目](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)中的 Pod 是否可以通过 Pod IP 直接通信。
+从 v2.0.7 开始，如果您使用 Canal，您还可以选择使用**网络隔离**，自行决定[项目](/docs/rancher2.5/cluster-admin/projects-and-namespaces/_index)中的 Pod 是否可以通过 Pod IP 直接通信。
 
 > **Rancher v2.0.0 - v2.0.6 请用户注意：**
 >
@@ -65,11 +65,11 @@ Flannel 是 Rancher v2.0.5 默认使用的网络插件，不会阻止项目之�
 
 **Weave 注意事项：**
 
-当 Weave 被选为网络插件时，Rancher 将通过生成随机密码自动启用加密。如果要手动指定密码，请参考如何使用[RKE 配置文件](/docs/rancher2/cluster-provisioning/rke-clusters/options/_index)和[Weave 网络插件选项](/docs/rke/config-options/add-ons/network-plugins/_index)配置集群。
+当 Weave 被选为网络插件时，Rancher 将通过生成随机密码自动启用加密。如果要手动指定密码，请参考如何使用[RKE 配置文件](/docs/rancher2.5/cluster-provisioning/rke-clusters/options/_index)和[Weave 网络插件选项](/docs/rke/config-options/add-ons/network-plugins/_index)配置集群。
 
 ### Kubernetes Cloud Provider
 
-您可以配置[Kubernetes Cloud Provider](/docs/rancher2/cluster-provisioning/rke-clusters/cloud-providers/_index)。如果您想要在 Kubernetes 中使用[卷和存储](/docs/rancher2/cluster-admin/volumes-and-storage/_index), 通常，您必须选择特定的 Cloud Provider 才能使用它。例如，如果您想使用 Amazon EBS，则需要选择 `aws` Cloud Provider。
+您可以配置[Kubernetes Cloud Provider](/docs/rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/_index)。如果您想要在 Kubernetes 中使用[卷和存储](/docs/rancher2.5/cluster-admin/volumes-and-storage/_index), 通常，您必须选择特定的 Cloud Provider 才能使用它。例如，如果您想使用 Amazon EBS，则需要选择 `aws` Cloud Provider。
 
 > **注意：** 如果您要使用的 Cloud Provider 不在 UI 的选项，则需要使用 [RKE 配置文件](#集群配置文件)来配置 Cloud Provider。请参考 [RKE Cloud Provider 文档](/docs/rke/config-options/cloud-providers/_index)了解如何配置 Cloud Provider。
 
@@ -81,7 +81,7 @@ _v2.2.0 可用_
 
 集群级别的私有镜像仓库配置仅用于启动集群。
 
-在 Rancher 中设置私有镜像仓库的主要方法有两种：通过**全局**视图中的**设置**选项卡设置[全局默认镜像仓库](/docs/rancher2/admin-settings/config-private-registry/_index)，以及通过集群级别设置中的高级选项设置私有镜像仓库。全局默认镜像仓库旨在用于不需要登录认证的镜像仓库的离线安装。集群级别的私有镜像仓库旨在用于所有需要登录认证的私有镜像仓库。
+在 Rancher 中设置私有镜像仓库的主要方法有两种：通过**全局**视图中的**设置**选项卡设置[全局默认镜像仓库](/docs/rancher2.5/admin-settings/config-private-registry/_index)，以及通过集群级别设置中的高级选项设置私有镜像仓库。全局默认镜像仓库旨在用于不需要登录认证的镜像仓库的离线安装。集群级别的私有镜像仓库旨在用于所有需要登录认证的私有镜像仓库。
 
 如果您的私有镜像仓库需要登录认证，则需要通过编辑从镜像仓库中提取镜像的每个集群的集群选项，并将登录认证信息传递给 Rancher。
 
@@ -98,17 +98,17 @@ _v2.2.0 可用_
 
 授权集群端点可用于直接访问 Kubernetes API Server，无需通过 Rancher 进行通信。
 
-> 授权的集群端点仅适用于 Rancher 启动的 Kubernetes 集群。换句话说，它只适用于 Rancher [使用 RKE](/docs/rancher2/overview/architecture/_index)来配置集群的集群。它不适用于托管的 Kubernetes 集群，例如 Amazon 的 EKS。
+> 授权的集群端点仅适用于 Rancher 启动的 Kubernetes 集群。换句话说，它只适用于 Rancher [使用 RKE](/docs/rancher2.5/overview/architecture/_index)来配置集群的集群。它不适用于托管的 Kubernetes 集群，例如 Amazon 的 EKS。
 
 这在 Rancher 启动的 Kubernetes 集群中默认启用，使用具有`controlplane` 角色的节点的 IP 和默认的 Kubernetes 自签名证书。
 
-有关授权的集群端点如何工作以及使用它的原因的更多详细信息，请参阅[产品架构](/docs/rancher2/overview/architecture/_index)。
+有关授权的集群端点如何工作以及使用它的原因的更多详细信息，请参阅[产品架构](/docs/rancher2.5/overview/architecture/_index)。
 
-我们建议将负载均衡器与授权的集群端点一起使用。有关详细信息，请参阅[推荐架构](/docs/rancher2/overview/architecture-recommendations/_index)。
+我们建议将负载均衡器与授权的集群端点一起使用。有关详细信息，请参阅[推荐架构](/docs/rancher2.5/overview/architecture-recommendations/_index)。
 
 ### 节点池
 
-有关使用 Rancher UI 在 RKE 集群中设置节点池的信息，请参阅 [本页。](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/_index)。
+有关使用 Rancher UI 在 RKE 集群中设置节点池的信息，请参阅 [本页。](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/_index)。
 
 ## 高级选项
 
@@ -128,11 +128,11 @@ _v2.2.0 可用_
 
 ### Pod 安全策略
 
-启用并选择默认的[Pod 安全策略](/docs/rancher2/admin-settings/pod-security-policies/_index)的选项。必须先配置 Pod 安全策略，然后才能使用此选项。
+启用并选择默认的[Pod 安全策略](/docs/rancher2.5/admin-settings/pod-security-policies/_index)的选项。必须先配置 Pod 安全策略，然后才能使用此选项。
 
 ### 节点 Docker 版本检查
 
-要求在添加到集群的集群节点上安装[受支持的 Docker 版本](/docs/rancher2/installation_new/requirements/_index)或允许在集群节点上安装不受支持的 Docker 版本。
+要求在添加到集群的集群节点上安装[受支持的 Docker 版本](/docs/rancher2.5/installation_new/requirements/_index)或允许在集群节点上安装不受支持的 Docker 版本。
 
 ### Docker 根目录
 
@@ -355,7 +355,7 @@ _v2.2.0 可用_
 
 ### enable_cluster_monitoring
 
-启用或禁用[集群监控](/docs/rancher2/cluster-admin/tools/monitoring/_index)选项。
+启用或禁用[集群监控](/docs/rancher2.5/cluster-admin/tools/monitoring/_index)选项。
 
 ### enable_network_policy
 

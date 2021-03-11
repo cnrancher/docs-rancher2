@@ -16,7 +16,7 @@ keywords:
 
 ## 概述
 
-系统工具是 Rancher 自带的运维工具，您可以使用系统工具管理[RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)和[高可用集群](/docs/rancher2/installation_new/resources/advanced/helm2/kubernetes-rke/_index)。系统工具提供了`logs`、`stats`和`remove`三类指令，分别对应以下三种用途：
+系统工具是 Rancher 自带的运维工具，您可以使用系统工具管理[RKE 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)和[高可用集群](/docs/rancher2.5/installation_new/resources/advanced/helm2/kubernetes-rke/_index)。系统工具提供了`logs`、`stats`和`remove`三类指令，分别对应以下三种用途：
 
 - [收集 Kubernetes 日志](#收集-kubernetes-日志)：从节点收集 Kubernetes 集群组件的日志。
 - [查看节点系统指标](#查看节点系统指标)：从节点收集系统指标。
@@ -49,7 +49,7 @@ keywords:
 
 ### 指令介绍
 
-收集 Kubernetes 日志的命令`logs`，它的用途是收集 [RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)和[高可用集群](/docs/rancher2/installation_new/resources/advanced/helm2/kubernetes-rke/_index)节点中，核心 Kubernetes 组件的日志文件。请参考[常见故障排查](/docs/rancher2/troubleshooting/_index)，查看核心 Kubernetes 组件的列表。
+收集 Kubernetes 日志的命令`logs`，它的用途是收集 [RKE 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)和[高可用集群](/docs/rancher2.5/installation_new/resources/advanced/helm2/kubernetes-rke/_index)节点中，核心 Kubernetes 组件的日志文件。请参考[常见故障排查](/docs/rancher2.5/troubleshooting/_index)，查看核心 Kubernetes 组件的列表。
 
 系统工具使用 kubeconfig 文件部署 DaemonSet。这个 DaemonSet 的作用是将核心 Kubernetes 组件的所有日志文件复制一遍后，打包成一个 `tar` 文件（默认文件名称是`cluster-logs.tar`）。如果您需要收集单节点的日志，您可以在命令中指定节点，例如`--node NODENAME`和 `-n NODENAME`，将`NODENAME`替换为节点名称后，可以指定单个节点，只收集该节点的日志。
 
@@ -71,7 +71,7 @@ keywords:
 
 ### 指令介绍
 
-查看节点系统指标的命令`stats`，它的用途是查看[RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)和[高可用集群](/docs/rancher2/installation_new/resources/advanced/helm2/kubernetes-rke/_index)中，节点的系统指标。
+查看节点系统指标的命令`stats`，它的用途是查看[RKE 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)和[高可用集群](/docs/rancher2.5/installation_new/resources/advanced/helm2/kubernetes-rke/_index)中，节点的系统指标。
 
 系统工具部署的 DaemonSet，会运行基于`sar`（System Activity Report）的预先定义好的指令，收集和显示系统指标。
 
@@ -93,7 +93,7 @@ keywords:
 
 ### 指令介绍
 
-> **警告：** 这条命令会从 etcd 中移除数据。执行这条命令前，请检查是否已经完成[etcd 节点备份](/docs/rancher2/backups/2.0-2.4/restorations/_index)。
+> **警告：** 这条命令会从 etcd 中移除数据。执行这条命令前，请检查是否已经完成[etcd 节点备份](/docs/rancher2.5/backups/2.0-2.4/restorations/_index)。
 
 当您在 Kubernetes 集群中安装 Rancher 的时候，Rancher 会创建 Kubernetes 资源，用于运行 Rancher Server 和配置存储。如果您需要删除集群中的 Rancher，您可以使用`remove`命令，移除 Kubernetes 资源。执行`remove`命令会移除以下资源：
 
@@ -113,7 +113,7 @@ keywords:
 
 执行`remove` 命名后，会从集群中移除上述的所有资源。
 
-> **警告：** 这条命令会从 etcd 中移除数据。执行这条命令前，请检查是否已经完成[etcd 节点备份](/docs/rancher2/backups/2.0-2.4/restorations/_index)
+> **警告：** 这条命令会从 etcd 中移除数据。执行这条命令前，请检查是否已经完成[etcd 节点备份](/docs/rancher2.5/backups/2.0-2.4/restorations/_index)
 
 ```
 ./system-tools remove --kubeconfig <KUBECONFIG> --namespace <NAMESPACE>

@@ -16,6 +16,6 @@ keywords:
 
 本节的目的是整合 Rancher 实施的最佳实践及使用技巧。
 
-如果您使用的是 Rancher v2.0-v2.4，请参考[最佳实践指南：v2.0-v2.4](/docs/rancher2/best-practices/2.0-2.4/_index)。
+如果您使用的是 Rancher v2.0-v2.4，请参考[最佳实践指南：v2.0-v2.4](/docs/rancher2.5/best-practices/2.0-2.4/_index)。
 
-如果您使用的是 Rancher v2.5，请参考[最佳实践指南：v2.5](/docs/rancher2/best-practices/2.5/_index)。
+如果您使用的是 Rancher v2.5，请参考[最佳实践指南：v2.5](/docs/rancher2.5/best-practices/2.5/_index)。

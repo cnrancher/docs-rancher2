@@ -17,13 +17,13 @@ keywords:
   - vSphere 存储
 ---
 
-在为 StatefulSet 提供 vSphere 存储时，建议创建 vSphereVolume [存储类](/docs/rancher2/cluster-admin/volumes-and-storage/_index)。当工作负载通过[持久卷声明](/docs/rancher2/cluster-admin/volumes-and-storage/how-storage-works/_index)请求卷时，此做法可动态配置 vSphere 存储。
+在为 StatefulSet 提供 vSphere 存储时，建议创建 vSphereVolume [存储类](/docs/rancher2.5/cluster-admin/volumes-and-storage/_index)。当工作负载通过[持久卷声明](/docs/rancher2.5/cluster-admin/volumes-and-storage/how-storage-works/_index)请求卷时，此做法可动态配置 vSphere 存储。
 
-要在 vSphere 中动态配置存储，必须 [启用](/docs/rancher2/cluster-provisioning/rke-clusters/cloud-providers/vsphere/_index)vSphere。
+要在 vSphere 中动态配置存储，必须 [启用](/docs/rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/vsphere/_index)vSphere。
 
 ## 先决条件
 
-在 [RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)中配置 vSphere 卷时，需要先在[集群选项](/docs/rancher2/cluster-provisioning/rke-clusters/options/_index)中配置好[vSphere Cloud Provider](/docs/rke/config-options/cloud-providers/vsphere/_index)的信息。
+在 [RKE 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)中配置 vSphere 卷时，需要先在[集群选项](/docs/rancher2.5/cluster-provisioning/rke-clusters/options/_index)中配置好[vSphere Cloud Provider](/docs/rke/config-options/cloud-providers/vsphere/_index)的信息。
 
 ## 创建存储类
 
@@ -43,7 +43,7 @@ keywords:
 
 ## 使用 vSphere 卷创建工作负载
 
-1. 在配置了 vSphere 存储的集群里，按照[部署工作负载](/docs/rancher2/k8s-in-rancher/workloads/deploy-workloads/_index)的流程来创建工作负载。
+1. 在配置了 vSphere 存储的集群里，按照[部署工作负载](/docs/rancher2.5/k8s-in-rancher/workloads/deploy-workloads/_index)的流程来创建工作负载。
 2. 在**工作负载类型**中，选择**StatefulSet**，Pod 数量为 1。
 3. 展开**卷**列表，并单击**添加卷**。
 4. 选择**添加一个新的持久卷(声明)**. 在部署工作负载后，该选项将隐式地创建一个卷声明。

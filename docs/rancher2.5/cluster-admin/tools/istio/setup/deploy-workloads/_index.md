@@ -340,4 +340,4 @@ spec:
 
 ## 后续操作
 
-[设置 Istio 网关](/docs/rancher2/istio/2.3.x-2.4.x/setup/gateway/_index)
+[设置 Istio 网关](/docs/rancher2.5/istio/2.3.x-2.4.x/setup/gateway/_index)

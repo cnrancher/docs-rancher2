@@ -28,7 +28,7 @@ keywords:
 
 下面的安全加固指南是针对在生产环境的 Rancher v2.3.3 中使用 Kubernetes 1.14，1.15 和 1.16 版本的集群。它概述了如何满足互联网安全中心（CIS）提出的 Kubernetes 安全标准。
 
-有关如果根据官方 CIS 基准评估集群的更多详细信息，请参阅[CIS Benchmark Rancher 自测指南 - Rancher v2.3.3](/docs/rancher2/security/rancher-2.3.x/2.3.3/benchmark-2.3.3/_index)。
+有关如果根据官方 CIS 基准评估集群的更多详细信息，请参阅[CIS Benchmark Rancher 自测指南 - Rancher v2.3.3](/docs/rancher2.5/security/rancher-2.3.x/2.3.3/benchmark-2.3.3/_index)。
 
 ## Profile Definitions
 
@@ -162,7 +162,7 @@ Verify that the permissions are `700` or more restrictive.
 
 **Remediation**
 
-Follow the steps as documented in [1.4.12](/docs/rancher2/security/rancher-2.3.x/2.3.3/hardening-2.3.3/_index) remediation.
+Follow the steps as documented in [1.4.12](/docs/rancher2.5/security/rancher-2.3.x/2.3.3/hardening-2.3.3/_index) remediation.
 
 ### 1.4.12 - Ensure that the etcd data directory ownership is set to `etcd:etcd`
 

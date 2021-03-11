@@ -14,6 +14,6 @@ keywords:
   - 备份和恢复
 ---
 
-如果您使用的是 Rancher v2.5，请参考[本节](/docs/rancher2/backups/2.5/_index)。
+如果您使用的是 Rancher v2.5，请参考[本节](/docs/rancher2.5/backups/2.5/_index)。
 
-如果您使用的是 Rancher v2.0-v2.4，请参考[本节](/docs/rancher2/backups/2.0-2.4/_index)。
+如果您使用的是 Rancher v2.0-v2.4，请参考[本节](/docs/rancher2.5/backups/2.0-2.4/_index)。

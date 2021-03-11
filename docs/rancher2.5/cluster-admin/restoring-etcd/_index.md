@@ -18,9 +18,9 @@ keywords:
 
 _从 v2.2.0 开始可用_
 
-etcd 数据库简化了[RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)执行 etcd 备份和恢复的过程。etcd 数据库的快照被获取并保存到本地的 etcd 节点或 S3 兼容的目标上，即使所有的 etcd 节点都丢失了，因为您的快照保存在云端，您可以用它恢复集群。
+etcd 数据库简化了[RKE 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)执行 etcd 备份和恢复的过程。etcd 数据库的快照被获取并保存到本地的 etcd 节点或 S3 兼容的目标上，即使所有的 etcd 节点都丢失了，因为您的快照保存在云端，您可以用它恢复集群。
 
-Rancher 建议启用[对 etcd 进行定期快照的功能](/docs/rancher2/cluster-admin/backing-up-etcd/_index)，但是您也可以轻松的进行[一次性快照](/docs/rancher2/cluster-admin/backing-up-etcd/_index)。Rancher 允许从[已保存的快照](#从快照恢复集群)恢复数据，或者如果您没有任何快照，您仍然可以[恢复 etcd](#在没有快照的情况下恢复-etcd)。
+Rancher 建议启用[对 etcd 进行定期快照的功能](/docs/rancher2.5/cluster-admin/backing-up-etcd/_index)，但是您也可以轻松的进行[一次性快照](/docs/rancher2.5/cluster-admin/backing-up-etcd/_index)。Rancher 允许从[已保存的快照](#从快照恢复集群)恢复数据，或者如果您没有任何快照，您仍然可以[恢复 etcd](#在没有快照的情况下恢复-etcd)。
 
 从 Rancher v2.4.0 开始，您还可以还原集群的 Kubernetes 版本和集群配置。
 
@@ -56,9 +56,9 @@ values={[
 - **恢复 etcd 和 Kubernetes 版本：** 如果由于升级 Kubernetes 版本导致集群出现故障，并且您尚未进行任何集群配置更改，则应使用此选项。
 - **恢复 etcd，Kubernetes 版本和集群配置：** 如果在升级时同时更改了 Kubernetes 版本和集群配置，则应使用此选项。
 
-回滚到 Kubernetes 之前的版本时，[升级策略选项](/docs/rancher2/cluster-admin/upgrading-kubernetes/_index)是将不会生效。在将工作节点恢复到较早的 Kubernetes 版本之前，不会对其进行**暂停（Cordon）**或**驱散（Drain）**，这是为了尽快将运行状况不佳的集群恢复到健康状态。
+回滚到 Kubernetes 之前的版本时，[升级策略选项](/docs/rancher2.5/cluster-admin/upgrading-kubernetes/_index)是将不会生效。在将工作节点恢复到较早的 Kubernetes 版本之前，不会对其进行**暂停（Cordon）**或**驱散（Drain）**，这是为了尽快将运行状况不佳的集群恢复到健康状态。
 
-> **先决条件：** 要从 S3 恢复快照，需要将集群配置为[在 S3 上进行定期快照](/docs/rancher2/cluster-admin/backing-up-etcd/_index)。
+> **先决条件：** 要从 S3 恢复快照，需要将集群配置为[在 S3 上进行定期快照](/docs/rancher2.5/cluster-admin/backing-up-etcd/_index)。
 
 1. 在 **全局** 视图中，导航到要恢复的集群。
 
@@ -78,8 +78,8 @@ values={[
 
 > **先决条件：**
 >
-> - 确保您的 etcd 节点运行状况良好。如果要还原的集群中的 etcd 节点不可用，建议在尝试还原之前从 Rancher 中删除所有 etcd 节点。如果您使用的是通过节点池[在基础设施中创建节点](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/_index)的集群，那么新的 etcd 节点将自动创建。对于[自定义集群](/docs/rancher2/cluster-provisioning/rke-clusters/custom-nodes/_index)，请确保将新的 etcd 节点添加到集群。
-> - 要从 S3 恢复快照，需要将集群配置为[在 S3 上进行定期快照](/docs/rancher2/cluster-admin/backing-up-etcd/_index)
+> - 确保您的 etcd 节点运行状况良好。如果要还原的集群中的 etcd 节点不可用，建议在尝试还原之前从 Rancher 中删除所有 etcd 节点。如果您使用的是通过节点池[在基础设施中创建节点](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/_index)的集群，那么新的 etcd 节点将自动创建。对于[自定义集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/custom-nodes/_index)，请确保将新的 etcd 节点添加到集群。
+> - 要从 S3 恢复快照，需要将集群配置为[在 S3 上进行定期快照](/docs/rancher2.5/cluster-admin/backing-up-etcd/_index)
 
 1. 在 **全局** 视图中，导航到要恢复的集群。
 
@@ -123,8 +123,8 @@ values={[
 
 5. 运行修改后的命令。
 
-6. 在单个节点启动并运行之后，Rancher 建议向集群添加额外的 etcd 节点。如果您有一个[自定义集群](/docs/rancher2/cluster-provisioning/rke-clusters/custom-nodes/_index)并且希望重用旧节点，则需要在尝试将它们重新添加回集群之前[清理节点](/docs/rancher2/cluster-admin/cleaning-cluster-nodes/_index)。
+6. 在单个节点启动并运行之后，Rancher 建议向集群添加额外的 etcd 节点。如果您有一个[自定义集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/custom-nodes/_index)并且希望重用旧节点，则需要在尝试将它们重新添加回集群之前[清理节点](/docs/rancher2.5/cluster-admin/cleaning-cluster-nodes/_index)。
 
 ## 在 Rancher v2.2.0 之前的版本中创建的集群里启用定期快照
 
-如果您有任何在 v2.2.0 之前创建的 Rancher 启动的 Kubernetes 集群（RKE 集群），在升级 Rancher 之后，您必须[编辑集群](/docs/rancher2/cluster-admin/editing-clusters/_index)并且**保存**它，以启用更新的快照功能。即使您已经在 v2.2.0 之前创建了快照，也必须执行此步骤，因为在[通过 UI 还原集群](/docs/rancher2/cluster-admin/restoring-etcd/_index)时，无法使用较早版本中创建的快照。
+如果您有任何在 v2.2.0 之前创建的 Rancher 启动的 Kubernetes 集群（RKE 集群），在升级 Rancher 之后，您必须[编辑集群](/docs/rancher2.5/cluster-admin/editing-clusters/_index)并且**保存**它，以启用更新的快照功能。即使您已经在 v2.2.0 之前创建了快照，也必须执行此步骤，因为在[通过 UI 还原集群](/docs/rancher2.5/cluster-admin/restoring-etcd/_index)时，无法使用较早版本中创建的快照。

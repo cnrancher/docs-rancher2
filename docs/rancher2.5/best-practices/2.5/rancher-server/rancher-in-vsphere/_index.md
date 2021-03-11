@@ -51,7 +51,7 @@ keywords:
 
 ### 根据 Rancher 文档确定虚拟机的大小
 
-请参考[安装 Rancher Server 节点的软件，硬件和网络要求](/docs/rancher2/installation_new/requirements/_index)，确定虚拟机的大小。
+请参考[安装 Rancher Server 节点的软件，硬件和网络要求](/docs/rancher2.5/installation_new/requirements/_index)，确定虚拟机的大小。
 
 ### 充分利用虚拟机模板来构建环境
 

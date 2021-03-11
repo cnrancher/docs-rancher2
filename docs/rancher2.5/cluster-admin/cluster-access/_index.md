@@ -30,18 +30,18 @@ Rancher 为与集群交互提供了直观的用户界面。UI 中所有可用的
 
 通过启动 Rancher UI 中可用的 kubectl Shell 与集群进行交互。此选项不需要您进行任何配置操作。
 
-有关更多信息，请参见 [使用 kubectl Shell 访问集群](/docs/rancher2/cluster-admin/cluster-access/kubectl/_index).
+有关更多信息，请参见 [使用 kubectl Shell 访问集群](/docs/rancher2.5/cluster-admin/cluster-access/kubectl/_index).
 
 ### 终端远程连接
 
 您还可以通过在本地桌面安装 [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) 来与集群进行交互，然后将集群的 kubeconfig 文件复制到本地 `~/.kube/config` 目录中。
 
-有关更多信息，请参见[使用 kubectl 和 kubeconfig 文件访问集群](/docs/rancher2/cluster-admin/cluster-access/kubectl/_index)。
+有关更多信息，请参见[使用 kubectl 和 kubeconfig 文件访问集群](/docs/rancher2.5/cluster-admin/cluster-access/kubectl/_index)。
 
 ## Rancher CLI
 
-您可以使用 Rancher CLI 控制集群，[Rancher CLI](/docs/rancher2/cli/_index)。 这个 CLI 工具可以直接与不同的集群和项目交互，或者向它们传递 `kubectl` 命令。
+您可以使用 Rancher CLI 控制集群，[Rancher CLI](/docs/rancher2.5/cli/_index)。 这个 CLI 工具可以直接与不同的集群和项目交互，或者向它们传递 `kubectl` 命令。
 
 ## Rancher API
 
-您可以通过 Rancher API 与集群进行交互。在使用 API 之前，您必须获得一个 [API Key](/docs/rancher2/user-settings/api-keys/_index)，要查看 API 对象的不同资源字段和操作，请打开 API UI，可以通过单击 **View in API** 来访问任何 Rancher UI 对象
+您可以通过 Rancher API 与集群进行交互。在使用 API 之前，您必须获得一个 [API Key](/docs/rancher2.5/user-settings/api-keys/_index)，要查看 API 对象的不同资源字段和操作，请打开 API UI，可以通过单击 **View in API** 来访问任何 Rancher UI 对象

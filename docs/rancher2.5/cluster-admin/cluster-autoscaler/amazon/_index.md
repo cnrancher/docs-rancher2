@@ -150,7 +150,7 @@ keywords:
 
 - IAM 角色：`K8sMasterRole。[K8sMasterProfile,K8sAutoscalerProfile]`。
 
-  - 安全组：`K8sMasterSg`更多信息请见[RKE ports (custom nodes tab)](/docs/rancher2/installation_new/requirements/ports/_index)
+  - 安全组：`K8sMasterSg`更多信息请见[RKE ports (custom nodes tab)](/docs/rancher2.5/installation_new/requirements/ports/_index)
   - 标签：
     `kubernetes.io/cluster/<clusterID>: owned`。
   - 用户数据：`K8sMasterUserData`Ubuntu 18.04(ami-0e11cbb34015ff725)，安装 docker 并将 etcd+controlplane 节点添加到 k8s 集群中。- IAM 角色：`K8sMasterRole。[K8sMasterProfile,K8sAutoscalerProfile]`。
@@ -182,7 +182,7 @@ keywords:
 
 - IAM 角色：`K8sWorkerRole: [K8sWorkerProfile]`
 
-  - 安全组：`K8sWorkerSg` 更多信息请见 [RKE ports (custom nodes tab)](/docs/rancher2/installation_new/requirements/ports/_index)
+  - 安全组：`K8sWorkerSg` 更多信息请见 [RKE ports (custom nodes tab)](/docs/rancher2.5/installation_new/requirements/ports/_index)
   - 标签：
 
     - `kubernetes.io/cluster/<clusterID>: owned`
@@ -209,13 +209,13 @@ keywords:
   sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run rancher/rancher-agent: <RANCHER_VERSION> --server https://<RANCHER_URL> --token <RANCHER_TOKEN> --ca-checksum <RANCHER_CA_CHECKCSUM> --address ${PUBLIC_IP} --internal-address ${PRIVATE_IP} ${K8S_ROLES}`
   ```
 
-更多信息请参见[AWS 上的 RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/cloud-providers/amazon/_index)和[AWS 上的 Cluster Autoscaler](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/aws/README.md)。
+更多信息请参见[AWS 上的 RKE 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/amazon/_index)和[AWS 上的 Cluster Autoscaler](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/aws/README.md)。
 
 ## 部署节点
 
 配置了 AWS 后，需要创建虚拟机来引导集群。
 
-- master（etcd+controlplane）节点：部署三个 master 实例。更多信息请参见[生产就绪集群的建议](/docs/rancher2/cluster-provisioning/production/_index)。
+- master（etcd+controlplane）节点：部署三个 master 实例。更多信息请参见[生产就绪集群的建议](/docs/rancher2.5/cluster-provisioning/production/_index)。
 
   - IAM 角色：`K8sMasterRole`
   - 安全组：`K8sMasterSg`

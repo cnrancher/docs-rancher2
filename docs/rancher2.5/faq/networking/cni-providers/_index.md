@@ -65,7 +65,7 @@ Canal 是一种结合了 Flannel 和 Calico 优点的 CNI 网络方案。它允�
 
 Canal 网络为 Rancher 中默认的 CNI 网络插件，并默认采用 Flannel VXLAN 封装。
 
-Kubernetes 节点应该开放 UDP 端口`8472` (VXLAN) 和 TCP 端口`9099` (健康检查)。详细要求请参见[下游集群端口要求.](/docs/rancher2/cluster-provisioning/node-requirements/_index)
+Kubernetes 节点应该开放 UDP 端口`8472` (VXLAN) 和 TCP 端口`9099` (健康检查)。详细要求请参见[下游集群端口要求.](/docs/rancher2.5/cluster-provisioning/node-requirements/_index)
 
 ![Canal Diagram](/img/rancher/canal-diagram.png)
 
@@ -79,7 +79,7 @@ Flannel 一个为 Kubernetes 设计的简单易配置的 L3 网络方案。Flann
 
 封装的数据流默认是未加密的。但是，Flannel 提供了一种实验性的加密 backend，[IPSec](https://github.com/coreos/flannel/blob/master/Documentation/backends.md#ipsec)。IPsec 通过[strongSwan](https://www.strongswan.org/)在 Kubernetes 节点间建立加密 IPsec 隧道。
 
-Kubernetes 节点应该开放 UDP 端口`8472` (VXLAN) 和 TCP 端口`9099` (健康检查)。详细要求请参见[下游集群端口要求](/docs/rancher2/cluster-provisioning/node-requirements/_index)。
+Kubernetes 节点应该开放 UDP 端口`8472` (VXLAN) 和 TCP 端口`9099` (健康检查)。详细要求请参见[下游集群端口要求](/docs/rancher2.5/cluster-provisioning/node-requirements/_index)。
 
 ![Flannel Diagram](/img/rancher/flannel-diagram.png)
 
@@ -93,7 +93,7 @@ Calico 为跨云的 Kubernetes 集群提供了网络连通和网络策略。Cali
 
 Calico 也提供了无状态的 IP-in-IP 封装模式，同时提供隔离策略，这样被可以在使用 ingress 和 egress 策略来更安全地管理您的工作负载。
 
-Kubernetes 节点应该开启 TCP 端口`179` (BGP)。详细要求请参见[下游集群端口要求](/docs/rancher2/cluster-provisioning/node-requirements/_index)。
+Kubernetes 节点应该开启 TCP 端口`179` (BGP)。详细要求请参见[下游集群端口要求](/docs/rancher2.5/cluster-provisioning/node-requirements/_index)。
 
 ![Calico Diagram](/img/rancher/calico-diagram.svg)
 
@@ -110,7 +110,7 @@ _自 v2.2.0 版本支持_
 
 Weave 网络为跨云 Kubernetes 集群提供了网络连通和网络策略。另外，Weave 支持 peer 通信加密。
 
-Kubernetes 节点应该开启 TCP 端口`6783` (控制端口)和 UDP 端口 `6783` 和 `6784`(数据端口)。详细要求请参见[下游集群端口要求](/docs/rancher2/cluster-provisioning/node-requirements/_index)。
+Kubernetes 节点应该开启 TCP 端口`6783` (控制端口)和 UDP 端口 `6783` 和 `6784`(数据端口)。详细要求请参见[下游集群端口要求](/docs/rancher2.5/cluster-provisioning/node-requirements/_index)。
 
 更多信息，请参阅下列网页：
 
@@ -160,4 +160,4 @@ Kubernetes 节点应该开启 TCP 端口`6783` (控制端口)和 UDP 端口 `678
 
 ## 如何配置 CNI 网络方案？
 
-请参阅 [Cluster 选项](/docs/rancher2/cluster-provisioning/rke-clusters/options/_index)，获取关于如何配置 CNI 网络方案的指导。高级配置选项请参阅[配置文件](/docs/rancher2/cluster-provisioning/rke-clusters/options/_index)和[网络插件](/docs/rke/config-options/add-ons/network-plugins/_index)相关文档。
+请参阅 [Cluster 选项](/docs/rancher2.5/cluster-provisioning/rke-clusters/options/_index)，获取关于如何配置 CNI 网络方案的指导。高级配置选项请参阅[配置文件](/docs/rancher2.5/cluster-provisioning/rke-clusters/options/_index)和[网络插件](/docs/rke/config-options/add-ons/network-plugins/_index)相关文档。

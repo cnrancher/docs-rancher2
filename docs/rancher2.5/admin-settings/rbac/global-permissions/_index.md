@@ -52,7 +52,7 @@ keywords:
 
 使用自定义权限可以为用户配置在 Rancher 中的更受限的或指定的访问权限。
 
-来自[外部认证系统](/docs/rancher2/admin-settings/authentication/_index)的用户首次登录 Rancher 时，会自动为用户分配一组全局权限（以下称权限）。默认情况下，在用户首次登录后，将以用户身份创建用户并为其分配默认的**用户**权限。标准的**用户**权限允许用户登录并创建集群。
+来自[外部认证系统](/docs/rancher2.5/admin-settings/authentication/_index)的用户首次登录 Rancher 时，会自动为用户分配一组全局权限（以下称权限）。默认情况下，在用户首次登录后，将以用户身份创建用户并为其分配默认的**用户**权限。标准的**用户**权限允许用户登录并创建集群。
 
 但是，在某些组织中，这些权限可能会被认为有过多的访问权限。您可以为用户分配一组限制性更强的自定义全局权限，而不是为用户分配**系统管理员**或**标准用户**的默认全局权限。
 
@@ -145,8 +145,8 @@ _自 v2.4.0 起可用_
 
 > **先决条件：** 您只能在以下情况下为用户组分配全局角色：
 >
-> - 您已经设置了[外部身份验证系统](/docs/rancher2/admin-settings/authentication/_index)。
-> - 外部身份验证系统支持[用户组](/docs/rancher2/admin-settings/authentication/user-groups/_index/)。
+> - 您已经设置了[外部身份验证系统](/docs/rancher2.5/admin-settings/authentication/_index)。
+> - 外部身份验证系统支持[用户组](/docs/rancher2.5/admin-settings/authentication/user-groups/_index/)。
 > - 您已经通过身份验证系统建立了至少一个用户组。
 
 要将自定义全局角色分配给组，请按照下列步骤操作：

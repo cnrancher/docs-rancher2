@@ -71,7 +71,7 @@ _自 v2.3.3 起可用_
 
 使用 Rancher，您可以基于[节点模板](#节点模板)创建节点池。
 
-每个节点池都分配有一个[节点组件](/docs/rancher2/cluster-provisioning/_index)以指定如何为 Kubernetes 集群配置这些节点。
+每个节点池都分配有一个[节点组件](/docs/rancher2.5/cluster-provisioning/_index)以指定如何为 Kubernetes 集群配置这些节点。
 
 节点模板定义了节点的配置，比如使用什么操作系统，CPU 数量和内存数量。
 
@@ -151,10 +151,10 @@ _从 Rancher v2.2.0 开始可用_
 
 - 多个节点模板可以共享相同的云凭据来创建节点池。如果您的密钥已被盗用或过期，您可以在一个位置更新云凭证，从而可以立即更新所有使用它的节点模板。
 
-> **注意：** 从 v2.2.0 开始，默认的`活动`的[节点驱动](/docs/rancher2/admin-settings/drivers/node-drivers/_index)和其他节点驱动中，标记为`密码`的字段都要求使用云凭证。如果您是升级到 v2.2.0 版本，已有的节点模板将继续使用以前的帐户访问信息，但是在编辑该节点模板时，您需要创建云凭证并且该节点模板将开始使用它。
+> **注意：** 从 v2.2.0 开始，默认的`活动`的[节点驱动](/docs/rancher2.5/admin-settings/drivers/node-drivers/_index)和其他节点驱动中，标记为`密码`的字段都要求使用云凭证。如果您是升级到 v2.2.0 版本，已有的节点模板将继续使用以前的帐户访问信息，但是在编辑该节点模板时，您需要创建云凭证并且该节点模板将开始使用它。
 
-创建云凭证后，用户可以开始[管理他们创建的云凭证](/docs/rancher2/user-settings/cloud-credentials/_index)。
+创建云凭证后，用户可以开始[管理他们创建的云凭证](/docs/rancher2.5/user-settings/cloud-credentials/_index)。
 
 ## 节点驱动
 
-如果您找不到想要使用的节点驱动，您可以在 Rancher 的[内置节点驱动](/docs/rancher2/admin-settings/drivers/node-drivers/_index)中查看它是否可用并激活它，或者您可以[添加自定义节点驱动](/docs/rancher2/admin-settings/drivers/node-drivers/_index)。
+如果您找不到想要使用的节点驱动，您可以在 Rancher 的[内置节点驱动](/docs/rancher2.5/admin-settings/drivers/node-drivers/_index)中查看它是否可用并激活它，或者您可以[添加自定义节点驱动](/docs/rancher2.5/admin-settings/drivers/node-drivers/_index)。

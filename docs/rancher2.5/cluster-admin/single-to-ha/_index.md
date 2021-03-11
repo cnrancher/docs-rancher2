@@ -81,7 +81,7 @@ keywords:
 
 ## 5. ETCD 数据恢复
 
-1. 将 Rancher 备份文件拷贝到需要部署 Rancher HA 的主机上，比如放在`/home/`目录，所有节点都要拷贝。如果节点之前安装过 K8S 集群，请确保节点已经初始化过（了解[节点清理](/docs/rancher2/cluster-admin/cleaning-cluster-nodes/_index)）。
+1. 将 Rancher 备份文件拷贝到需要部署 Rancher HA 的主机上，比如放在`/home/`目录，所有节点都要拷贝。如果节点之前安装过 K8S 集群，请确保节点已经初始化过（了解[节点清理](/docs/rancher2.5/cluster-admin/cleaning-cluster-nodes/_index)）。
 
    ![image-20191016145903388](/img/rancher/single-to-ha.assets/image-20191016145903388.png)
 
@@ -103,7 +103,7 @@ keywords:
 
 ## 6. LOCAL K8S 集群部署
 
-1. 根据文档[示例配置](/docs/rancher2/installation_new/resources/advanced/helm2/kubernetes-rke/_index#2、创建-rke-配置文件) 创建 RKE 配置文件。
+1. 根据文档[示例配置](/docs/rancher2.5/installation_new/resources/advanced/helm2/kubernetes-rke/_index#2、创建-rke-配置文件) 创建 RKE 配置文件。
 
 1. 执行 rke 命令创建 LOCAL K8S 集群
 
@@ -124,8 +124,8 @@ keywords:
 Rancher HA 的版本需要大于或者等于 Rancher 单节点的版本。
 :::
 
-1. 根据[自签名 ssl 证书](/docs/rancher2/installation_new/resources/advanced/self-signed-ssl/_index)文档创建自签名证书或者配置权威证书；
-2. 根据[安装文档](/docs/rancher2/installation_new/install-rancher-on-k8s/_index)进行 Rancher HA 安装；
+1. 根据[自签名 ssl 证书](/docs/rancher2.5/installation_new/resources/advanced/self-signed-ssl/_index)文档创建自签名证书或者配置权威证书；
+2. 根据[安装文档](/docs/rancher2.5/installation_new/install-rancher-on-k8s/_index)进行 Rancher HA 安装；
 3. 安装完成后访问 Rancher UI，可以看到之前添加的`test`集群。（错误提示是因为 Rancher URL 改变，cluster Agent 无法连接 Rancher Server。）
 
    ![image-20191016170347456](/img/rancher/single-to-ha.assets/image-20191016170347456.png)

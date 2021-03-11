@@ -20,7 +20,7 @@ keywords:
 
 如果希望为用户提供对集群中的 _所有_ 项目、节点和资源的访问和权限，请为该用户分配集群成员资格。
 
-> **提示:** 希望为用户提供对集群中 _特定_ 项目的访问权限？ 请参见 [添加项目成员](/docs/rancher2/project-admin/project-members/_index)。
+> **提示:** 希望为用户提供对集群中 _特定_ 项目的访问权限？ 请参见 [添加项目成员](/docs/rancher2.5/project-admin/project-members/_index)。
 
 以下两种情况下，您可以添加集群成员：
 
@@ -44,23 +44,23 @@ keywords:
 
     如果配置了外部认证：
 
-    - Rancher 在您登录时可以从 [外部身份验证](/docs/rancher2/admin-settings/authentication/_index) 源获取相应的用户信息。
+    - Rancher 在您登录时可以从 [外部身份验证](/docs/rancher2.5/admin-settings/authentication/_index) 源获取相应的用户信息。
 
       > **使用 AD 却找不到您的用户？**
-      > 您的搜索属性配置可能存在问题.请参见 [配置 Active Directory 身份验证:步骤 5](/docs/rancher2/admin-settings/authentication/ad/_index).
+      > 您的搜索属性配置可能存在问题.请参见 [配置 Active Directory 身份验证:步骤 5](/docs/rancher2.5/admin-settings/authentication/ad/_index).
 
     - 下拉菜单允许您添加用户组，而不是单个用户。下拉列表只列出登录用户所属的组。
 
-      > **注意:** 如果您是以本地用户登录的，那么外部用户不会显示在您的搜索结果中。更多信息，请参见 [外部身份验证配置和主要用户](/docs/rancher2/admin-settings/authentication/_index).
+      > **注意:** 如果您是以本地用户登录的，那么外部用户不会显示在您的搜索结果中。更多信息，请参见 [外部身份验证配置和主要用户](/docs/rancher2.5/admin-settings/authentication/_index).
 
 4.  给用户或组分配 **集群** 角色。
 
-    [什么是集群角色？](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)
+    [什么是集群角色？](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)
 
     > **提示：** 对于自定义角色，您可以修改可用于分配的各个角色的列表。
     >
-    > - 将角色添加到列表中， [添加自定义角色](/docs/rancher2/admin-settings/rbac/default-custom-roles/_index).
-    > - 要从列表中删除角色， [锁定/解锁角色](/docs/rancher2/admin-settings/rbac/locked-roles/_index).
+    > - 将角色添加到列表中， [添加自定义角色](/docs/rancher2.5/admin-settings/rbac/default-custom-roles/_index).
+    > - 要从列表中删除角色， [锁定/解锁角色](/docs/rancher2.5/admin-settings/rbac/locked-roles/_index).
 
 **结果：** 选择的用户被添加到集群中。
 

@@ -29,7 +29,7 @@ RKE 的全称是[Rancher Kubernetes Engine](/docs/rke/_index)，它是 Rancher �
 
 集群和模板之间存在多对一的关系，用户可以使用一个模板创建多个集群，而每个集群有且只有一个对应的模板。确认使用的模板后，无法修改。例如，“集群 A”是用户使用“模板 a”创建的，那么在编辑集群时，用户不能将集群 A”对应的“模板 a”，修改为其他模板。管理员可以通过编辑集群模板的方式更新集群模板，应用该模板创建的集群就会自动适配新模板的参数。
 
-从 Rancher v2.3.3 开始，您可以[将现有集群的配置另存为 RKE 模板](/docs/rancher2/admin-settings/rke-templates/applying-templates/_index)。只有在更新模板后，才能更改集群的设置。新模板也可以用于启动新集群。
+从 Rancher v2.3.3 开始，您可以[将现有集群的配置另存为 RKE 模板](/docs/rancher2.5/admin-settings/rke-templates/applying-templates/_index)。只有在更新模板后，才能更改集群的设置。新模板也可以用于启动新集群。
 
 RKE 模板的核心功能使 DevOps 和安全团队能够：
 
@@ -60,24 +60,24 @@ RKE 模板的[插件部分](#插件)功能特别强大，因为它允许多种�
 
 Rancher 创建的集群支持 RKE 模板。模板可用于创建 RKE 集群（自定义集群和在云供应商上通过节点驱动创建的集群）。
 
-RKE 模板用于定义 Kubernetes 和 Rancher 设置。节点模板负责配置节点。有关如何将 RKE 模板与硬件结合使用的参考，请参阅 [RKE 模板和硬件](/docs/rancher2/admin-settings/rke-templates/rke-templates-and-hardware/_index)。
+RKE 模板用于定义 Kubernetes 和 Rancher 设置。节点模板负责配置节点。有关如何将 RKE 模板与硬件结合使用的参考，请参阅 [RKE 模板和硬件](/docs/rancher2.5/admin-settings/rke-templates/rke-templates-and-hardware/_index)。
 
 可以从头开始创建 RKE 模板来预先定义集群配置。它们可以用于启动新集群，也可以从现有的 RKE 集群导出模板。
 
-从 v2.3.3 开始，现有 RKE 集群的设置可以[保存为 RKE 模板](/docs/rancher2/admin-settings/rke-templates/applying-templates/_index)。这将创建新的模板并将集群设置绑定到该模板。因此，只有通过更新[模板](/docs/rancher2/admin-settings/rke-templates/creating-and-revising/_index)并且将这个集群[升级到新版本的模板](/docs/rancher2/admin-settings/rke-templates/creating-and-revising/_index)，才能编辑这个集群。
+从 v2.3.3 开始，现有 RKE 集群的设置可以[保存为 RKE 模板](/docs/rancher2.5/admin-settings/rke-templates/applying-templates/_index)。这将创建新的模板并将集群设置绑定到该模板。因此，只有通过更新[模板](/docs/rancher2.5/admin-settings/rke-templates/creating-and-revising/_index)并且将这个集群[升级到新版本的模板](/docs/rancher2.5/admin-settings/rke-templates/creating-and-revising/_index)，才能编辑这个集群。
 
 ## 示例场景
 
 当组织同时拥有基本和高级 Rancher 用户时，管理员可能希望为高级用户提供更多创建集群的选项，同时限制基本用户的选项。
 
-这些[示例场景](/docs/rancher2/admin-settings/rke-templates/example-scenarios/_index)描述了组织如何使用模板来标准化集群创建。
+这些[示例场景](/docs/rancher2.5/admin-settings/rke-templates/example-scenarios/_index)描述了组织如何使用模板来标准化集群创建。
 
 一些示例场景包括：
 
-- **强制使用模板：** 如果管理员希望所有新的 Rancher 创建的集群都具有这些设置，则管理员可能希望[强制每个人使用一个或多个模板来创建集群](/docs/rancher2/admin-settings/rke-templates/example-scenarios/_index)。
-- **与不同的用户共享不同的模板：** 管理员可以为[基本用户和高级用户提供不同的模板](/docs/rancher2/admin-settings/rke-templates/example-scenarios/_index)，这样基本用户会有更多受限的选项，高级用户在创建集群时可以更谨慎地使用更多选项。
-- **更新模板设置：** 如果组织的安全和 DevOps 团队决定将最佳实践嵌入到新集群所需的设置中，则这些最佳实践可能会随时间而改变。如果最佳实践发生变化，[模板可以更新为新版本](/docs/rancher2/admin-settings/rke-templates/example-scenarios/_index)并且从模板创建的集群可以[升级到新版本](/docs/rancher2/admin-settings/rke-templates/creating-and-revising/_index)模板。
-- **共享模板的所有权：** 当模板所有者不再希望维护模板或希望共享模板的所有权时，此场景描述如何[共享模板所有权](/docs/rancher2/admin-settings/rke-templates/example-scenarios/_index)。
+- **强制使用模板：** 如果管理员希望所有新的 Rancher 创建的集群都具有这些设置，则管理员可能希望[强制每个人使用一个或多个模板来创建集群](/docs/rancher2.5/admin-settings/rke-templates/example-scenarios/_index)。
+- **与不同的用户共享不同的模板：** 管理员可以为[基本用户和高级用户提供不同的模板](/docs/rancher2.5/admin-settings/rke-templates/example-scenarios/_index)，这样基本用户会有更多受限的选项，高级用户在创建集群时可以更谨慎地使用更多选项。
+- **更新模板设置：** 如果组织的安全和 DevOps 团队决定将最佳实践嵌入到新集群所需的设置中，则这些最佳实践可能会随时间而改变。如果最佳实践发生变化，[模板可以更新为新版本](/docs/rancher2.5/admin-settings/rke-templates/example-scenarios/_index)并且从模板创建的集群可以[升级到新版本](/docs/rancher2.5/admin-settings/rke-templates/creating-and-revising/_index)模板。
+- **共享模板的所有权：** 当模板所有者不再希望维护模板或希望共享模板的所有权时，此场景描述如何[共享模板所有权](/docs/rancher2.5/admin-settings/rke-templates/example-scenarios/_index)。
 
 ## 模板管理
 
@@ -93,32 +93,32 @@ RKE 模板更新通过修订系统处理。如果要更改或更新模板，请�
 
 本节中的文件解释了 RKE 模板管理的细节：
 
-- [获取创建模板的权限](/docs/rancher2/admin-settings/rke-templates/creator-permissions/_index)
-- [创建和修改模板](/docs/rancher2/admin-settings/rke-templates/creating-and-revising/_index)
-- [强制使用模板](/docs/rancher2/admin-settings/rke-templates/enforcement/_index)
-- [覆盖模板设置](/docs/rancher2/admin-settings/rke-templates/overrides/_index)
-- [与集群创建者共享模板](/docs/rancher2/admin-settings/rke-templates/template-access-and-sharing/_index)
-- [共享模板所有权](/docs/rancher2/admin-settings/rke-templates/template-access-and-sharing/_index)
+- [获取创建模板的权限](/docs/rancher2.5/admin-settings/rke-templates/creator-permissions/_index)
+- [创建和修改模板](/docs/rancher2.5/admin-settings/rke-templates/creating-and-revising/_index)
+- [强制使用模板](/docs/rancher2.5/admin-settings/rke-templates/enforcement/_index)
+- [覆盖模板设置](/docs/rancher2.5/admin-settings/rke-templates/overrides/_index)
+- [与集群创建者共享模板](/docs/rancher2.5/admin-settings/rke-templates/template-access-and-sharing/_index)
+- [共享模板所有权](/docs/rancher2.5/admin-settings/rke-templates/template-access-and-sharing/_index)
 
-这里有一个[RKE 模板的示例 YAML 文件](/docs/rancher2/admin-settings/rke-templates/example-yaml/_index)以供参考。
+这里有一个[RKE 模板的示例 YAML 文件](/docs/rancher2.5/admin-settings/rke-templates/example-yaml/_index)以供参考。
 
 ## 应用模板
 
-您可以使用自己创建的模板来[创建集群](/docs/rancher2/admin-settings/rke-templates/applying-templates/_index)，也可以从[与您共享的模板](/docs/rancher2/admin-settings/rke-templates/template-access-and-sharing/_index)创建集群。
+您可以使用自己创建的模板来[创建集群](/docs/rancher2.5/admin-settings/rke-templates/applying-templates/_index)，也可以从[与您共享的模板](/docs/rancher2.5/admin-settings/rke-templates/template-access-and-sharing/_index)创建集群。
 
-如果 RKE 模板所有者创建了模板的新版本，则可以[将集群升级到该版本](/docs/rancher2/admin-settings/rke-templates/applying-templates/_index)。
+如果 RKE 模板所有者创建了模板的新版本，则可以[将集群升级到该版本](/docs/rancher2.5/admin-settings/rke-templates/applying-templates/_index)。
 
 可以从头开始创建 RKE 模板来预先定义集群配置。它们可以应用于启动新的集群，也可以从现有的集群导出 RKE 模板。
 
-从 Rancher v2.3.3 开始，您可以[将现有的集群另存为 RKE 模板](/docs/rancher2/admin-settings/rke-templates/applying-templates/_index)，然后只有通过更新模板，才能更改集群的设置。
+从 Rancher v2.3.3 开始，您可以[将现有的集群另存为 RKE 模板](/docs/rancher2.5/admin-settings/rke-templates/applying-templates/_index)，然后只有通过更新模板，才能更改集群的设置。
 
 ## 标准化硬件
 
-RKE 模板的目的是用于标准化 Kubernetes 和 Rancher 设置。如果您还想标准化您的基础设施，可以将 RKE 模板和[其他工具](/docs/rancher2/admin-settings/rke-templates/rke-templates-and-hardware/_index)一起使用，来实现这个目的。
+RKE 模板的目的是用于标准化 Kubernetes 和 Rancher 设置。如果您还想标准化您的基础设施，可以将 RKE 模板和[其他工具](/docs/rancher2.5/admin-settings/rke-templates/rke-templates-and-hardware/_index)一起使用，来实现这个目的。
 
 ## YAML 定制
 
-如果将 RKE 模板定义为 YAML 文件，则可以修改此[示例 RKE 模板 YAML](/docs/rancher2/admin-settings/rke-templates/example-yaml/_index)。RKE 模板中的 YAML 使用与 Rancher 在创建 RKE 集群时相同的自定义项，但由于 YAML 要在 Rancher 的 RKE 集群中使用，因此需要将 RKE 模板自定义项嵌套在 YAML 中的`rancher_kubernetes_engine_config`参数下。
+如果将 RKE 模板定义为 YAML 文件，则可以修改此[示例 RKE 模板 YAML](/docs/rancher2.5/admin-settings/rke-templates/example-yaml/_index)。RKE 模板中的 YAML 使用与 Rancher 在创建 RKE 集群时相同的自定义项，但由于 YAML 要在 Rancher 的 RKE 集群中使用，因此需要将 RKE 模板自定义项嵌套在 YAML 中的`rancher_kubernetes_engine_config`参数下。
 
 RKE 文档还有带有注释的[cluster.yml 文件示例](/docs/rke/example-yamls/_index) `，您可以使用这些文件作为参考。
 

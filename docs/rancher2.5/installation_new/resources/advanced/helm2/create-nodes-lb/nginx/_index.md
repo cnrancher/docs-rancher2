@@ -34,7 +34,7 @@ keywords:
 
 1.  打开一个文本编辑器（如 Notepad++），复制下面的代码模板，粘贴到文本编辑器中，将其另存为`nginx.conf`。
 
-2.  在`nginx.conf`中, 使用[节点](/docs/rancher2/installation_new/resources/advanced/helm2/create-nodes-lb/_index)IP 地址 替换(端口 80 和 端口 443)的`<IP_NODE_1>`, `<IP_NODE_2>`, 和`<IP_NODE_3>`。
+2.  在`nginx.conf`中, 使用[节点](/docs/rancher2.5/installation_new/resources/advanced/helm2/create-nodes-lb/_index)IP 地址 替换(端口 80 和 端口 443)的`<IP_NODE_1>`, `<IP_NODE_2>`, 和`<IP_NODE_3>`。
 
     > **注意事项:** 可配置项请参考[NGINX 文档: TCP and UDP Load Balancing](https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/)。
 

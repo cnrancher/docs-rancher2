@@ -22,11 +22,11 @@ keywords:
 
 ## 1. 准备
 
-建议您从储存 cluster yaml、rke statefile 和 kubeconfig 的主机或堡垒机上进行高可用恢复。您需要安装 [RKE](/docs/rke/installation/_index) 和 [kubectl](/docs/rancher2/faq/kubectl/_index) CLI 工具。
+建议您从储存 cluster yaml、rke statefile 和 kubeconfig 的主机或堡垒机上进行高可用恢复。您需要安装 [RKE](/docs/rke/installation/_index) 和 [kubectl](/docs/rancher2.5/faq/kubectl/_index) CLI 工具。
 
-准备 3 个新节点作为还原的 Rancher 实例的目标。请参阅[高可用安装](/docs/rancher2/installation_new/resources/advanced/helm2/create-nodes-lb/_index)以了解节点要求。我们建议您使用新建的节点和干净状态开始准备工作，详情请参考[节点要求](/docs/rancher2/installation_new/requirements/_index)。
+准备 3 个新节点作为还原的 Rancher 实例的目标。请参阅[高可用安装](/docs/rancher2.5/installation_new/resources/advanced/helm2/create-nodes-lb/_index)以了解节点要求。我们建议您使用新建的节点和干净状态开始准备工作，详情请参考[节点要求](/docs/rancher2.5/installation_new/requirements/_index)。
 
-您也可以使用已有的节点进行准备工作，但是您需要清理节点内的数据和 Rancher 配置。该操作会抹去已有节点内的所有数据和配置，请谨慎使用。清理节点的详细操作指导请参考[清理节点](/docs/rancher2/cluster-admin/cleaning-cluster-nodes/_index/)。
+您也可以使用已有的节点进行准备工作，但是您需要清理节点内的数据和 Rancher 配置。该操作会抹去已有节点内的所有数据和配置，请谨慎使用。清理节点的详细操作指导请参考[清理节点](/docs/rancher2.5/cluster-admin/cleaning-cluster-nodes/_index/)。
 
 > **重要:** 在开始还原之前，请确保旧集群节点上的所有 Kubernetes 服务都已停止。我们建议关闭这些旧的节点。
 
@@ -147,7 +147,7 @@ rke up --config ./rancher-cluster-restore.yml
 
 ### 测试集群
 
-RKE 完成后，它将在本地目录中创建一个凭证文件。配置`kubectl`以使用`kube_config_rancher-cluster-restore.yml`凭据文件并检查集群的状态。有关详细信息，请参见[安装和配置 kubectl](/docs/rancher2/faq/kubectl/_index)）。
+RKE 完成后，它将在本地目录中创建一个凭证文件。配置`kubectl`以使用`kube_config_rancher-cluster-restore.yml`凭据文件并检查集群的状态。有关详细信息，请参见[安装和配置 kubectl](/docs/rancher2.5/faq/kubectl/_index)）。
 
 您的新集群将需要几分钟才能稳定下来。一旦看到新的“目标节点”过渡到`Ready`，并在`NotReady`中看到三个旧节点，您就可以继续。
 
@@ -226,7 +226,7 @@ rke up --config ./rancher-cluster-restore.yml
 
 ## 完成
 
-Rancher 现在应该正在运行，并且可以用来管理 Kubernetes 集群。查看高可用安装的[推荐架构](/docs/rancher2/installation_new/install-rancher-on-k8s/_index)并更新 Rancher DNS 或负载均衡器的端点，从而定位到新集群。端点更新后，纳管的集群上的代理应自动重新连接。由于重新连接回退超时，这可能需要 10 到 15 分钟。
+Rancher 现在应该正在运行，并且可以用来管理 Kubernetes 集群。查看高可用安装的[推荐架构](/docs/rancher2.5/installation_new/install-rancher-on-k8s/_index)并更新 Rancher DNS 或负载均衡器的端点，从而定位到新集群。端点更新后，纳管的集群上的代理应自动重新连接。由于重新连接回退超时，这可能需要 10 到 15 分钟。
 
 :::important 重要
 请记住将新的 RKE 配置 `rancher-cluster-restore.yml` 和 Kubectl 凭据 `kube_config_rancher-cluster-restore.yml` 保存在安全的地方，以备将来维护。

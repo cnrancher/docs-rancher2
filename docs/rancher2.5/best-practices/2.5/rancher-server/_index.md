@@ -21,12 +21,12 @@ keywords:
 
 ## 建议的结构和基础设施
 
-请参考本[运行 Rancher 的技巧](/docs/rancher2/best-practices/2.5/rancher-server/deployment-types/_index)，了解我们在高可用 Kubernetes 集群上设置 Rancher Server 的一般建议。
+请参考本[运行 Rancher 的技巧](/docs/rancher2.5/best-practices/2.5/rancher-server/deployment-types/_index)，了解我们在高可用 Kubernetes 集群上设置 Rancher Server 的一般建议。
 
 ## 部署策略
 
-[部署策略](/docs/rancher2/best-practices/2.5/rancher-server/deployment-strategies/_index)旨在帮助您选择轴心方式拓扑还是区域性拓扑更适合管理下游 Kubernetes 集群的 Rancher Server。
+[部署策略](/docs/rancher2.5/best-practices/2.5/rancher-server/deployment-strategies/_index)旨在帮助您选择轴心方式拓扑还是区域性拓扑更适合管理下游 Kubernetes 集群的 Rancher Server。
 
 ## 在 vSphere 环境中安装 Rancher
 
-[在 vSphere 环境中安装 Rancher](/docs/rancher2/best-practices/2.5/rancher-server/rancher-in-vsphere/_index)概述了在 vSphere 环境中安装 Rancher 的参考架构，以及 VMware 记录的标准 vSphere 最佳实践。
+[在 vSphere 环境中安装 Rancher](/docs/rancher2.5/best-practices/2.5/rancher-server/rancher-in-vsphere/_index)概述了在 vSphere 环境中安装 Rancher 的参考架构，以及 VMware 记录的标准 vSphere 最佳实践。

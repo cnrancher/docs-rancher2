@@ -16,9 +16,9 @@ keywords:
   - Rancher Agent 参数
 ---
 
-Rancher 在每个节点上部署一个 Agent 来与节点通信。本页描述了可以传递给 Agent 的选项。要使用这些选项，您需要[使用自定义节点创建集群](/docs/rancher2/cluster-provisioning/rke-clusters/custom-nodes/_index)，并在添加节点时将选项添加到生成的`docker run`命令中。
+Rancher 在每个节点上部署一个 Agent 来与节点通信。本页描述了可以传递给 Agent 的选项。要使用这些选项，您需要[使用自定义节点创建集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/custom-nodes/_index)，并在添加节点时将选项添加到生成的`docker run`命令中。
 
-有关 Rancher 如何使用 Node Agent 与下游集群通信的概述，请参阅[产品架构](/docs/rancher2/overview/architecture/_index)。
+有关 Rancher 如何使用 Node Agent 与下游集群通信的概述，请参阅[产品架构](/docs/rancher2.5/overview/architecture/_index)。
 
 ## 通用选项
 

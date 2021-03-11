@@ -33,7 +33,7 @@ keywords:
 
 在继续创建集群之前，必须确保您的 vSphere 账户拥有足够的权限。当您设置节点模板时，该模板将需要使用这些 vSphere 凭证。
 
-有关如何在 vSphere 中创建具有所需权限的用户，请参考此[使用指南](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/creating-credentials/_index)。通过这些步骤您将创建出需要提供给 Rancher 的用户名和密码，从而允许 Rancher 在 vSphere 中创建资源。
+有关如何在 vSphere 中创建具有所需权限的用户，请参考此[使用指南](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/creating-credentials/_index)。通过这些步骤您将创建出需要提供给 Rancher 的用户名和密码，从而允许 Rancher 在 vSphere 中创建资源。
 
 ### 网络权限
 
@@ -43,7 +43,7 @@ keywords:
 - 能够访问位于实例化虚拟机的所有 ESXi 节点上的 Host API（端口 443/TCP）(_仅在使用 ISO 创建节点时需要_)。
 - 能够访问虚拟机的端口 22/TCP 和 2376/TCP。
 
-请参照[节点网络需求](/docs/rancher2/cluster-provisioning/node-requirements/_index)来获取详细的端口需求。
+请参照[节点网络需求](/docs/rancher2.5/cluster-provisioning/node-requirements/_index)来获取详细的端口需求。
 
 ### 适用于 vSphere API 访问的有效 ESXi 许可证
 
@@ -113,6 +113,6 @@ vSphere 服务器必须具生效的，经过评估的 ESXi 许可证。免费的
 
 创建集群后，您可以通过 Rancher UI 访问它。作为最佳实践，我们建议同时设置以下访问集群的替代方法：
 
-- **通过 kubectl CLI 访问集群：** 请按照[这些步骤](/docs/rancher2/cluster-admin/cluster-access/kubectl/_index)来通过 kubectl 访问您的集群。在这种情况下，您将通过 Rancher Server 的身份验证代理进行身份验证，然后 Rancher 会将您连接到下游集群。此方法使您无需 Rancher UI 即可管理集群。
+- **通过 kubectl CLI 访问集群：** 请按照[这些步骤](/docs/rancher2.5/cluster-admin/cluster-access/kubectl/_index)来通过 kubectl 访问您的集群。在这种情况下，您将通过 Rancher Server 的身份验证代理进行身份验证，然后 Rancher 会将您连接到下游集群。此方法使您无需 Rancher UI 即可管理集群。
 
-- **通过 kubectl CLI 和授权的集群地址访问您的集群：** 请按照[这些步骤](/docs/rancher2/cluster-admin/cluster-access/kubectl/_index)来通过 kubectl 直接访问您的集群，而不需要通过 Rancher 进行认证。我们建议您设定此方法访问集群，这样在您无法连接 Rancher 时您仍然能够访问集群。
+- **通过 kubectl CLI 和授权的集群地址访问您的集群：** 请按照[这些步骤](/docs/rancher2.5/cluster-admin/cluster-access/kubectl/_index)来通过 kubectl 直接访问您的集群，而不需要通过 Rancher 进行认证。我们建议您设定此方法访问集群，这样在您无法连接 Rancher 时您仍然能够访问集群。

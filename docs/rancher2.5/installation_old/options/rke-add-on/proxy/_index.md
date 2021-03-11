@@ -19,8 +19,8 @@ keywords:
 
 :::important 重要提示
 RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
-请使用 Rancher helm chart 将 Rancher 安装在 Kubernetes 集群上。有关详细信息，请参见[Rancher 高可用安装](/docs/rancher2/installation/k8s-install/_index)。
-如果您当前正在使用 RKE add-on 安装方法，参见[将 RKE add-on 安装的 Rancher 迁移到 Helm 安装](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/migrating-from-rke-add-on/_index)，获取有关如何使用 Helm chart 的详细信息。
+请使用 Rancher helm chart 将 Rancher 安装在 Kubernetes 集群上。有关详细信息，请参见[Rancher 高可用安装](/docs/rancher2.5/installation/k8s-install/_index)。
+如果您当前正在使用 RKE add-on 安装方法，参见[将 RKE add-on 安装的 Rancher 迁移到 Helm 安装](/docs/rancher2.5/installation_new/install-rancher-on-k8s/upgrades/migrating-from-rke-add-on/_index)，获取有关如何使用 Helm chart 的详细信息。
 :::
 
 如果您在代理后面操作 Rancher，并且想要通过代理访问服务（例如拉取应用商店），则必须提供有关 Rancher 代理的信息。 Rancher 是用 Go 语言编写的，因此它使用了常见的代理环境变量，如下表所示：
@@ -35,8 +35,8 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
 
 使用 Kubernetes 安装时，需要将环境变量添加到 RKE 配置文件的模板中。
 
-- [使用外部负载均衡器（TCP / Layer 4）RKE 配置文件模板进行 Rancher 高可用](/docs/rancher2/installation/options/rke-add-on/layer-4-lb/_index)
-- [使用外部负载均衡器（HTTPS / Layer 7）RKE 配置文件模板进行 Rancher 高可用](/docs/rancher2/installation/options/rke-add-on/layer-7-lb/_index)
+- [使用外部负载均衡器（TCP / Layer 4）RKE 配置文件模板进行 Rancher 高可用](/docs/rancher2.5/installation/options/rke-add-on/layer-4-lb/_index)
+- [使用外部负载均衡器（HTTPS / Layer 7）RKE 配置文件模板进行 Rancher 高可用](/docs/rancher2.5/installation/options/rke-add-on/layer-7-lb/_index)
 
 环境变量应在 RKE 配置文件模板内部的 `Deployment` 定义。您只需将它添加到从 `env:` 开头(但不包括)到 `ports:`结束的部分。确保缩进与前面的 `name:` 相同。需要配置 `NO_PROXY` 的值为:
 

@@ -16,6 +16,6 @@ keywords:
 
 从 v2.4.0 开始提供。
 
-如果您使用的是 Rancher v2.5，请参考 CIS 扫描文档[这里](/docs/rancher2/cis-scans/2.4/_index)
+如果您使用的是 Rancher v2.5，请参考 CIS 扫描文档[这里](/docs/rancher2.5/cis-scans/2.4/_index)
 
-如果您使用的是 Rancher v2.4，请参考 CIS 扫描文档[这里](/docs/rancher2/cis-scans/2.5/_index)
+如果您使用的是 Rancher v2.4，请参考 CIS 扫描文档[这里](/docs/rancher2.5/cis-scans/2.5/_index)
