@@ -14,6 +14,9 @@ keywords:
   - 备份和恢复
 ---
 
-如果您使用的是 Rancher v2.5，请参考[本节](/docs/rancher2/backups/2.5/_index)。
+This section is devoted to protecting your data in a disaster scenario.
 
-如果您使用的是 Rancher v2.0-v2.4，请参考[本节](/docs/rancher2/backups/2.0-2.4/_index)。
+To protect yourself from a disaster scenario, you should create backups on a regular basis.
+
+- [Backup](./backup)
+- [Restore](./restore)
