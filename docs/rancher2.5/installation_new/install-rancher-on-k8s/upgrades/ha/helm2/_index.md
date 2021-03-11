@@ -53,7 +53,7 @@ keywords:
 
 ### 备份运行 Rancher Server 的 Kubernetes 集群
 
-为运行 Rancher Server 的 Kubernetes 集群[创建快照](/docs/rancher2.5/backups/2.0-2.4/ha-backups/_index)。
+为运行 Rancher Server 的 Kubernetes 集群[创建快照](/docs/rancher2/backups/2.0-2.4/ha-backups/_index)。
 如果升级过程中出现问题，则使用快照回滚至升级前的版本。
 
 ### 更新 Helm chart 仓库

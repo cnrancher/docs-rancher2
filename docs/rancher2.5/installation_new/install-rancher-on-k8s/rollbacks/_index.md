@@ -26,7 +26,7 @@ keywords:
 
 :::important 重要
 
-- 请按照此页面上的说明在已备份的同一集群上恢复 rancher。为了将 rancher 迁移到新的集群，请按照步骤进行[迁移 rancher](/docs/rancher2.5/backups/2.5/migrating-rancher/_index)。
+- 请按照此页面上的说明在已备份的同一集群上恢复 rancher。为了将 rancher 迁移到新的集群，请按照步骤进行[迁移 rancher](/docs/rancher2.5/backups/migrating-rancher/_index)。
 - 在使用相同设置还原 Rancher 时，operator 将在还原开始时缩减 Rancher deployment，还原完成后又会扩展 deployment。因此，Rancher 在还原期间将不可用。
 
 :::
@@ -35,7 +35,7 @@ keywords:
 
 1. 在**Cluster Explorer**中，进入左上角的下拉菜单，单击**Rancher Backups**。
 1. 单击 **Restore**。
-1. 使用表单或 YAML 创建 Restore。关于使用表单创建 Restore 资源，请参考[配置参考](/docs/rancher2.5/backups/2.5/configuration/restore-config/_index)和[示例](/docs/rancher2.5/backups/2.5/examples/_index)。
+1. 使用表单或 YAML 创建 Restore。关于使用表单创建 Restore 资源，请参考[配置参考](/docs/rancher2.5/backups/configuration/restore-config/_index)和[示例](/docs/rancher2.5/backups/examples/_index)。
 1. 使用 YAML 编辑器，我们可以单击**Create > Create from YAML** 进入 Restore YAML。
 
    ```yaml
@@ -56,7 +56,7 @@ keywords:
          endpoint: s3.us-west-2.amazonaws.com
    ```
 
-   有关配置 Restore 的帮助，请参阅[配置参考](/docs/rancher2.5/backups/2.5/configuration/restore-config/_index)和[示例](/docs/rancher2.5/backups/2.5/examples/_index)。
+   有关配置 Restore 的帮助，请参阅[配置参考](/docs/rancher2.5/backups/configuration/restore-config/_index)和[示例](/docs/rancher2.5/backups/examples/_index)。
 
 1. 单击 **Create**。
 
@@ -84,7 +84,7 @@ kubectl logs <pod name from above command> -n cattle-resources-system -f
 
 ## 回滚到 v2.2.x-v2.4.x
 
-要回滚到 v2.5 之前的 Rancher，请按照这里的步骤进行。[恢复备份 - Kubernetes 安装](/docs/rancher2.5/backups/2.0-2.4/restorations/ha-restoration/_index) 恢复 Rancher 服务器集群的快照会将 Rancher 恢复到快照时的版本和状态。
+要回滚到 v2.5 之前的 Rancher，请按照这里的步骤进行。[恢复备份 - Kubernetes 安装](/docs/rancher2/backups/2.0-2.4/restorations/ha-restoration/_index) 恢复 Rancher 服务器集群的快照会将 Rancher 恢复到快照时的版本和状态。
 
 有关如何回滚安装了 Docker 的 Rancher 的信息，请参考[本页](/docs/rancher2.5/installation_new/other-installation-methods/single-node-docker/single-node-rollbacks/_index)
 
@@ -92,4 +92,4 @@ kubectl logs <pod name from above command> -n cattle-resources-system -f
 
 ## 回滚到 v2.0.x-v2.1.x
 
-不再支持回滚到 Rancher v2.0-v2.1。回滚到这些版本的说明保留在[这里](/docs/rancher2.5/backups/2.0-2.4/restorations/ha-restoration/2.0-2.1/_index)，仅用于升级到 Rancher v2.2+不可行的情况。
+不再支持回滚到 Rancher v2.0-v2.1。回滚到这些版本的说明保留在[这里](/docs/rancher2/backups/2.0-2.4/restorations/ha-restoration/2.0-2.1/_index)，仅用于升级到 Rancher v2.2+不可行的情况。

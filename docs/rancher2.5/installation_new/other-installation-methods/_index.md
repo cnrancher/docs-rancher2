@@ -26,7 +26,7 @@ keywords:
 
 - 对于 Rancher v2.0-v2.4，没有从 Docker 安装到高可用性安装的迁移路径。因此，如果您使用的是 v2.5 之前的 Rancher，您可能希望从一开始就使用 Kubernetes 安装。
 
-- 对于 Rancher v2.5+，可以使用 Rancher 备份操作员将 Rancher 从单个 Docker 容器安装迁移到高可用性 Kubernetes 集群上的安装。有关详细信息，请参考[将 Rancher 迁移到新的集群。](/docs/rancher2.5/backups/2.5/migrating-rancher/_index)的文档。
+- 对于 Rancher v2.5+，可以使用 Rancher 备份操作员将 Rancher 从单个 Docker 容器安装迁移到高可用性 Kubernetes 集群上的安装。有关详细信息，请参考[将 Rancher 迁移到新的集群。](/docs/rancher2.5/backups/migrating-rancher/_index)的文档。
 
 ## 私有环境安装
 
