@@ -27,6 +27,16 @@ steps:
     image: node:12.16.2
     environment:
       PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
+      HTTP_PROXY:
+        from_secret: proxy
+      HTTPS_PROXY:
+        from_secret: proxy
+      http_proxy:
+        from_secret: proxy
+      https_proxy:
+        from_secret: proxy
+      NOPROXY: localhost
+      noproxy: localhost
     commands:
       - yarn install
       - yarn build
