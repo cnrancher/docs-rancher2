@@ -31,7 +31,7 @@ RancherD 是一个实验性功能。
 
 > 在升级之前，我们建议您应该。
 >
-> - 使用[备份应用程序](/docs/rancher2.5/backups/2.5/back-up-rancher/_index)创建 Rancher 服务器的备份。
+> - 使用[备份应用程序](/docs/rancher2.5/backups/back-up-rancher/_index)创建 Rancher 服务器的备份。
 > - 查看您要升级到的 Rancher 版本的已知问题。已知问题列在[GitHub](https://github.com/rancher/rancher/releases)和[Rancher 论坛](https://forums.rancher.com/c/announcements/12)的发布说明中。
 
 1. 用 Helm 卸载 Chart。
@@ -51,7 +51,7 @@ RancherD 是一个实验性功能。
 
 **结果:** Rancher 已升级到新版本。
 
-如果需要，请按照[这些步骤](/docs/rancher2.5/backups/2.5/restoring-rancher/_index)从备份中恢复 Rancher。
+如果需要，请按照[这些步骤](/docs/rancher2.5/backups/restoring-rancher/_index)从备份中恢复 Rancher。
 
 ### 升级 Rancher 和底层集群
 
@@ -59,7 +59,7 @@ RancherD 是一个实验性功能。
 
 > 在升级之前，我们建议您应该。
 >
-> - 使用[备份应用程序](/docs/rancher2.5/backups/2.5/back-up-rancher/_index)创建 Rancher 服务器的备份。
+> - 使用[备份应用程序](/docs/rancher2.5/backups/back-up-rancher/_index)创建 Rancher 服务器的备份。
 > - 查看您要升级到的 Rancher 版本的已知问题。已知问题列在[GitHub](https://github.com/rancher/rancher/releases)和[Rancher 论坛](https://forums.rancher.com/c/announcements/12)的发布说明中。
 
 ```

@@ -93,7 +93,7 @@ keywords:
 
 ### 指令介绍
 
-> **警告：** 这条命令会从 etcd 中移除数据。执行这条命令前，请检查是否已经完成[etcd 节点备份](/docs/rancher2.5/backups/2.0-2.4/restorations/_index)。
+> **警告：** 这条命令会从 etcd 中移除数据。执行这条命令前，请检查是否已经完成[etcd 节点备份](/docs/rancher2/backups/2.0-2.4/restorations/_index)。
 
 当您在 Kubernetes 集群中安装 Rancher 的时候，Rancher 会创建 Kubernetes 资源，用于运行 Rancher Server 和配置存储。如果您需要删除集群中的 Rancher，您可以使用`remove`命令，移除 Kubernetes 资源。执行`remove`命令会移除以下资源：
 
@@ -113,7 +113,7 @@ keywords:
 
 执行`remove` 命名后，会从集群中移除上述的所有资源。
 
-> **警告：** 这条命令会从 etcd 中移除数据。执行这条命令前，请检查是否已经完成[etcd 节点备份](/docs/rancher2.5/backups/2.0-2.4/restorations/_index)
+> **警告：** 这条命令会从 etcd 中移除数据。执行这条命令前，请检查是否已经完成[etcd 节点备份](/docs/rancher2/backups/2.0-2.4/restorations/_index)
 
 ```
 ./system-tools remove --kubeconfig <KUBECONFIG> --namespace <NAMESPACE>

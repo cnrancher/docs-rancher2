@@ -20,7 +20,7 @@ keywords:
 
 ### 先决条件
 
-这些说明假设你已经[创建了一个备份](/docs/rancher2.5/backups/2.5/back-up-rancher/_index)，并且已经安装了将在其中部署 Rancher 的新 Kubernetes 集群。
+这些说明假设你已经[创建了一个备份](/docs/rancher2.5/backups/back-up-rancher/_index)，并且已经安装了将在其中部署 Rancher 的新 Kubernetes 集群。
 
 要求使用与第一个集群中设置的服务器 URL 相同的 hostname。
 
