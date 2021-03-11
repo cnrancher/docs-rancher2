@@ -74,7 +74,7 @@ New password for default admin user (user-xxxxx):
 
 ## 如何开启 debug 调试日志？
 
-请参阅[问题排查：日志级别](/docs/rancher2/troubleshooting/logging/_index)。
+请参阅[问题排查：日志级别](/docs/rancher2.5/troubleshooting/logging/_index)。
 
 ## 我不能 ping 通 ClusterIP
 
@@ -86,7 +86,7 @@ ClusterIP 是一个虚拟 IP，不能够回应 ping。更好的测试 ClusterIP 
 
 ## 为什么创建的 L4 负载均衡器一直处在`Pending`状态？
 
-L4 负载均衡器是通过`type: LoadBalancer`创建的。在 Kubernetes 里，它需要一个公有云提供商或者类似控制器（例如：MetalLB）来响应创建需求，否则就会一直处在`Pending`状态。更多信息请参阅[公有云提供商](/docs/rancher2/cluster-provisioning/rke-clusters/cloud-providers/_index)或[创建外部负载均衡器](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/)。
+L4 负载均衡器是通过`type: LoadBalancer`创建的。在 Kubernetes 里，它需要一个公有云提供商或者类似控制器（例如：MetalLB）来响应创建需求，否则就会一直处在`Pending`状态。更多信息请参阅[公有云提供商](/docs/rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/_index)或[创建外部负载均衡器](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/)。
 
 ## Rancher 的状态数据存储在哪里？
 
@@ -121,13 +121,13 @@ Rancher UI 包含静态文件，以及基于 API 响应工作。这意味着任�
 
 节点必须配置一个静态 IP（或者 DHCP 预留的 IP）。如果节点 IP 改变了，您必须从集群中移除它并再次添加。当您移除节点后，Rancher 会更新集群到正确的状态。当集群不再显示`Provisioning`状态，表示节点已完全从集群中移除。
 
-当节点 IP 改变时，Rancher 会丢失节点连接，所以无法在 Rancher 完全清理节点。请查阅[清理集群节点](/docs/rancher2/cluster-admin/cleaning-cluster-nodes/_index)来完全清理节点。
+当节点 IP 改变时，Rancher 会丢失节点连接，所以无法在 Rancher 完全清理节点。请查阅[清理集群节点](/docs/rancher2.5/cluster-admin/cleaning-cluster-nodes/_index)来完全清理节点。
 
 当节点已经从集群中移除，并完全清理后，您就可以再次添加节点到集群中。
 
 ## 如何向 Rancher 启动的 Kubernetes 组件添加 参数/绑定/环境变量？
 
-您可以通过[配置文件](/docs/rancher2/cluster-provisioning/rke-clusters/options/_index)集群选项添加附加参数/绑定/环境变量。更多信息请参阅 RKE 文档里的[附加参数，附加绑定和附加环境变量](/docs/rke/config-options/services/services-extras/_index)以及浏览 [Cluster.yml 示例文件](/docs/rke/example-yamls/_index)。
+您可以通过[配置文件](/docs/rancher2.5/cluster-provisioning/rke-clusters/options/_index)集群选项添加附加参数/绑定/环境变量。更多信息请参阅 RKE 文档里的[附加参数，附加绑定和附加环境变量](/docs/rke/config-options/services/services-extras/_index)以及浏览 [Cluster.yml 示例文件](/docs/rke/example-yamls/_index)。
 
 ## 如何检查我的证书链是有效的？
 
@@ -232,9 +232,9 @@ kubectl -n cattle-system patch  secret serving-cert --patch '{
 
 ## 为什么命名空间无法移动到其他项目
 
-在[项目/命名空间](/docs/rancher2/project-admin/namespaces/_index)页面移动命名空间，有时会出现无法移动的情况，这是因为 rancher 针对移动命名空间做了一些限制：
+在[项目/命名空间](/docs/rancher2.5/project-admin/namespaces/_index)页面移动命名空间，有时会出现无法移动的情况，这是因为 rancher 针对移动命名空间做了一些限制：
 
-- Rancher 不支持将命名空间移动到已经配置了[资源配额](/docs/rancher2/project-admin/resource-quotas/_index)的项目中。
+- Rancher 不支持将命名空间移动到已经配置了[资源配额](/docs/rancher2.5/project-admin/resource-quotas/_index)的项目中。
 
 > 日志提示：
 >

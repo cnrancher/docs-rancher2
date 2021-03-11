@@ -18,7 +18,7 @@ keywords:
 
 ## 步骤 1：准备全部集群的直连 kubeconfig 配置文件
 
-在默认情况下， Rancher UI 上复制的 kubeconfig 通过`cluster agent`代理连接到 K8S 集群。变更 SSL 证书会导致`cluster agent`无法连接 Rancher Server，从而导致`kubectl`无法使用 Rancher UI 上复制的 kubeconfig 去操作 K8S 集群。用户需要通过`kubectl`命令行修改配置，解决这个问题。在执行域名或 IP 变更之前，请准备好所有集群的直连 kubeconfig 配置文件，详情考参考：[恢复 kubectl 配置文件](/docs/rancher2/cluster-admin/restore-kubecfg/_index)
+在默认情况下， Rancher UI 上复制的 kubeconfig 通过`cluster agent`代理连接到 K8S 集群。变更 SSL 证书会导致`cluster agent`无法连接 Rancher Server，从而导致`kubectl`无法使用 Rancher UI 上复制的 kubeconfig 去操作 K8S 集群。用户需要通过`kubectl`命令行修改配置，解决这个问题。在执行域名或 IP 变更之前，请准备好所有集群的直连 kubeconfig 配置文件，详情考参考：[恢复 kubectl 配置文件](/docs/rancher2.5/cluster-admin/restore-kubecfg/_index)
 
 :::note 警告
 
@@ -26,7 +26,7 @@ keywords:
 
    ![image-20190309173154246](/img/rancher/old-doc/image-20190309173154246.png)
 
-2. 执行域名变更或 IP 变更之前，请备份 Rancher Server，详情请参考[备份和恢复](/docs/rancher2/backups/_index)。
+2. 执行域名变更或 IP 变更之前，请备份 Rancher Server，详情请参考[备份和恢复](/docs/rancher2.5/backups/_index)。
 
 :::
 
@@ -219,13 +219,13 @@ SSL 证书与`域名或IP`之间存在绑定关系，客户端通过`域名或IP
 
 ### 3.2. Rancher 单节点运行（外置自签名 SSL 证书）
 
-> 注意：操作前先备份，[备份和恢复](/docs/rancher2/backups/_index)。
+> 注意：操作前先备份，[备份和恢复](/docs/rancher2.5/backups/_index)。
 
 如果是以`映射证书文件`的方式运行的单容器 Rancher Server，只需要停止原有 Rancher Server 容器，用新证书替换旧证书，保持文件名不变，然后重新运行容器即可。
 
 ### 3.3. Rancher HA 运行
 
-> 注意：操作前先备份，[备份和恢复](/docs/rancher2/backups/_index)。
+> 注意：操作前先备份，[备份和恢复](/docs/rancher2.5/backups/_index)。
 
 1. 备份原有证书 YAML 文件
 

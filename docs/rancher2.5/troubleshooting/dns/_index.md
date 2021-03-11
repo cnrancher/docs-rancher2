@@ -19,7 +19,7 @@ keywords:
 
 确保您配置了正确的 kubeconfig（例如，使用 Rancher 高可用时，`export KUBECONFIG=$PWD/kube_config_rancher-cluster.yml` ) 或者通过 Rancher UI 使用内嵌 kubectl。
 
-在运行 DNS 检查之前，请检查您集群中的[默认 DNS 插件](/docs/rancher2/cluster-provisioning/rke-clusters/options/_index)，并确保[网络运行正常](/docs/rancher2/troubleshooting/networking/_index)，因为这也可能是 DNS 解析失败的原因之一。
+在运行 DNS 检查之前，请检查您集群中的[默认 DNS 插件](/docs/rancher2.5/cluster-provisioning/rke-clusters/options/_index)，并确保[网络运行正常](/docs/rancher2.5/troubleshooting/networking/_index)，因为这也可能是 DNS 解析失败的原因之一。
 
 ## 检查 DNS Pod 是否正在运行
 
@@ -213,7 +213,7 @@ services:
 
 > **注意：** 由于 kubelet 在容器中运行，因此/etc 和/usr 中的文件的路径位于 kubelet 容器中的/host/etc 和/host/usr 中。
 
-查看[集群 YAML](/docs/rancher2/cluster-admin/editing-clusters/_index)可以看到如何更改这个配置。集群的配置完成后，您必须删除 kube-dns pod 才能使用 pod 中的新设置：
+查看[集群 YAML](/docs/rancher2.5/cluster-admin/editing-clusters/_index)可以看到如何更改这个配置。集群的配置完成后，您必须删除 kube-dns pod 才能使用 pod 中的新设置：
 
 ```
 kubectl delete pods -n kube-system -l k8s-app=kube-dns

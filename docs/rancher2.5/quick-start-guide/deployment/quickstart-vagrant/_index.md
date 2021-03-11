@@ -56,7 +56,7 @@ Vagrant 需要插件来创建 VirtualBox 虚拟机，请在命令行中输入以
 
 ## 后续操作
 
-完成安装 Rancher Server 和 Kubernetes 集群的步骤后，您可以使用 Rancher 部署工作负载，详情请参考[部署工作负载](/docs/rancher2/quick-start-guide/workload/_index)。
+完成安装 Rancher Server 和 Kubernetes 集群的步骤后，您可以使用 Rancher 部署工作负载，详情请参考[部署工作负载](/docs/rancher2.5/quick-start-guide/workload/_index)。
 
 ## 清理环境
 

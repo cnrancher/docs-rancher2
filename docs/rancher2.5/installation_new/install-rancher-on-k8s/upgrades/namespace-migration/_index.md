@@ -42,7 +42,7 @@ keywords:
 
 - 要在升级后解决此问题，请参阅[恢复集群网络](#恢复集群网络)。
 
-> **注意：** 如果要从 Rancher v2.0.13 或更早版本或 v2.1.8 或更早版本升级，并且集群的证书已过期，则需要执行[其他步骤](/docs/rancher2/cluster-admin/certificate-rotation/_index)轮换证书。
+> **注意：** 如果要从 Rancher v2.0.13 或更早版本或 v2.1.8 或更早版本升级，并且集群的证书已过期，则需要执行[其他步骤](/docs/rancher2.5/cluster-admin/certificate-rotation/_index)轮换证书。
 
 ## 防止集群网络问题
 
@@ -74,7 +74,7 @@ keywords:
 
 1. 在每个已经给系统命名空间分配了项目的集群中重复这些步骤。
 
-**结果：** 在 Rancher 项目中移出了所有系统命名空间。现在，您可以安全地开始[升级](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/_index)。
+**结果：** 在 Rancher 项目中移出了所有系统命名空间。现在，您可以安全地开始[升级](/docs/rancher2.5/installation_new/install-rancher-on-k8s/upgrades/_index)。
 
 ## 恢复集群网络
 
@@ -187,8 +187,8 @@ keywords:
 
 如果您可以访问 Rancher，但是使用 Rancher 启动的一个或多个 RKE 集群没有网络，则可以通过下面的方法修复它们。
 
-- 通过集群的[内嵌的 kubectl shell](/docs/rancher2/cluster-admin/cluster-access/kubectl/_index#在-rancher-ui-中使用-kubectl-shell-访问集群)。
-- 在工作站中[下载集群 kubeconfig 文件](/docs/rancher2/cluster-admin/cluster-access/kubectl/_index#从您的虚拟机上使用-kubectl-访问集群)并运行它。
+- 通过集群的[内嵌的 kubectl shell](/docs/rancher2.5/cluster-admin/cluster-access/kubectl/_index#在-rancher-ui-中使用-kubectl-shell-访问集群)。
+- 在工作站中[下载集群 kubeconfig 文件](/docs/rancher2.5/cluster-admin/cluster-access/kubectl/_index#从您的虚拟机上使用-kubectl-访问集群)并运行它。
 
   ```
   for namespace in $(kubectl --kubeconfig kube_config_rancher-cluster.yml get ns -o custom-columns=NAME:.metadata.name --no-headers); do

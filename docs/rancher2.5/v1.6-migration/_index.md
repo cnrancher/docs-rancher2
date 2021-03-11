@@ -23,20 +23,20 @@ Rancher v2.x 经过重新整理和编写，旨在为 Kubernetes 和 Docker 提�
 
 ## 迁移计划
 
-> **在开始之前想了解有关 Kubernetes 的更多信息?** 阅读我们的 [Kubernetes 介绍](/docs/rancher2/v1.6-migration/kub-intro/_index)。
+> **在开始之前想了解有关 Kubernetes 的更多信息?** 阅读我们的 [Kubernetes 介绍](/docs/rancher2.5/v1.6-migration/kub-intro/_index)。
 
-- [1. 开始迁移](/docs/rancher2/v1.6-migration/get-started/_index)
+- [1. 开始迁移](/docs/rancher2.5/v1.6-migration/get-started/_index)
 
   > **在版本 v1.6 时已经是 Kubernetes 的使用者?**
   >
   > _开始使用_ 是您为迁移到 v2.x 唯一需要看的部分。您可以跳过其他所有内容
 
-* [2. 迁移服务](/docs/rancher2/v1.6-migration/run-migration-tool/_index)
-* [3. 暴露服务](/docs/rancher2/v1.6-migration/expose-services/_index)
-* [4. 健康检查](/docs/rancher2/v1.6-migration/monitor-apps/_index)
-* [5. 调度服务](/docs/rancher2/v1.6-migration/schedule-workloads/_index)
-* [6. 服务发现](/docs/rancher2/v1.6-migration/discover-services/_index)
-* [7. 负载均衡](/docs/rancher2/v1.6-migration/load-balancing/_index)
+* [2. 迁移服务](/docs/rancher2.5/v1.6-migration/run-migration-tool/_index)
+* [3. 暴露服务](/docs/rancher2.5/v1.6-migration/expose-services/_index)
+* [4. 健康检查](/docs/rancher2.5/v1.6-migration/monitor-apps/_index)
+* [5. 调度服务](/docs/rancher2.5/v1.6-migration/schedule-workloads/_index)
+* [6. 服务发现](/docs/rancher2.5/v1.6-migration/discover-services/_index)
+* [7. 负载均衡](/docs/rancher2.5/v1.6-migration/load-balancing/_index)
 
 ## 迁移示例文件
 
@@ -56,4 +56,4 @@ Rancher v2.x 经过重新整理和编写，旨在为 Kubernetes 和 Docker 提�
 
   用于 Rancher 特定功能的文件，例如运行健康检查和负载均衡器。Rancher v2.x 无法读取这些文件，因此不必担心它们的内容--我们正丢弃它们，然后使用 v2.x UI 重新创建。
 
-## [下一步: 开始迁移](/docs/rancher2/v1.6-migration/get-started/_index)
+## [下一步: 开始迁移](/docs/rancher2.5/v1.6-migration/get-started/_index)

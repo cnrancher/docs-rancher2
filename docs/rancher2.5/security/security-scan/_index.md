@@ -39,7 +39,7 @@ Rancher 通过使用 Aqua Security 的开源工具 [kube-bench](https://github.c
 
 基准提供两种类型的建议：`计分`和`不记分`。在基准中标记为`不记分`的建议不包括在生成的报告中。
 
-一些测试被指定为“不适用”。由于 Rancher 通过容器的方式启动 RKE 集群，这些测试将不会在任何 CIS 扫描上运行。有关如何审核测试结果以及为何指定某些测试不适用的信息，请参阅 Rancher 的[相应 Kubernetes 版本的自测报告](/docs/rancher2/security/_index)。
+一些测试被指定为“不适用”。由于 Rancher 通过容器的方式启动 RKE 集群，这些测试将不会在任何 CIS 扫描上运行。有关如何审核测试结果以及为何指定某些测试不适用的信息，请参阅 Rancher 的[相应 Kubernetes 版本的自测报告](/docs/rancher2.5/security/_index)。
 
 该报告包含以下信息：
 
@@ -54,7 +54,7 @@ Rancher 通过使用 Aqua Security 的开源工具 [kube-bench](https://github.c
 | 通过的节点 | 测试通过的节点的名称。                                                                                                             |
 | 失败的节点 | 测试失败的节点的名称。                                                                                                             |
 
-请参阅[集群安全加固指南表格](/docs/rancher2/security/_index)，获取有关哪个版本的 Kubernetes、Benchmark 和 Rancher，与我们的安全加固指南版本相互对应。另请参阅包括 CIS 合规的集群的配置文件的安全强化指南以及有关修复失败测试的相关信息。
+请参阅[集群安全加固指南表格](/docs/rancher2.5/security/_index)，获取有关哪个版本的 Kubernetes、Benchmark 和 Rancher，与我们的安全加固指南版本相互对应。另请参阅包括 CIS 合规的集群的配置文件的安全强化指南以及有关修复失败测试的相关信息。
 
 ## 安全扫描配置文件
 
@@ -67,7 +67,7 @@ CIS 有两种类型的配置文件：
 
 由于 RKE 通过容器的方式启动 Kubernetes ，所有的配置文件都有一组`不适用`的测试，在 CIS 扫描期间将跳过这些测试。
 
-为了通过`Hardened`配置文件，您需要遵循[安全加固指南](/docs/rancher2/security/_index)上的步骤，使用加固指南中定义的`cluster.yml`来配置安全加固的集群。
+为了通过`Hardened`配置文件，您需要遵循[安全加固指南](/docs/rancher2.5/security/_index)上的步骤，使用加固指南中定义的`cluster.yml`来配置安全加固的集群。
 
 ## 跳过和不适用的测试
 
@@ -117,7 +117,7 @@ CIS 有两种类型的配置文件：
 
 ## 先决条件
 
-- 如果想要对集群运行安全扫描并生成报告，您必须是[系统管理员](/docs/rancher2/admin-settings/rbac/global-permissions/_index)或[集群管理员](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)。
+- 如果想要对集群运行安全扫描并生成报告，您必须是[系统管理员](/docs/rancher2.5/admin-settings/rbac/global-permissions/_index)或[集群管理员](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)。
 
 - Rancher 只能在通过 RKE 创建的集群中执行安全扫描。这些集群包括自定义集群和 Rancher 在云提供商的虚拟机上创建的集群例如 Amazon EC2 或 GCE。您不能通过 Rancher 对导入的集群和托管的 Kubernetes 集群进行安全扫描。
 
@@ -202,7 +202,7 @@ Rancher 为集群扫描提供了一组告警。默认情况下，这些告警没
 - 定期集群扫描已完成
 - 定期集群扫描失败
 
-> **先决条件：**您需要在配置，发送或接收告警之前配置[通知](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/_index)。
+> **先决条件：**您需要在配置，发送或接收告警之前配置[通知](/docs/rancher2.5/monitoring-alerting/2.0-2.4/cluster-alerts/_index)。
 
 要为 CIS 扫描结果激活现有告警，
 
@@ -224,11 +224,11 @@ Rancher 为集群扫描提供了一组告警。默认情况下，这些告警没
 1. 输入告警的名称。
 1. 在**是**字段中，设置在扫描完成或扫描失败时触发的告警。
 1. 在**发送**字段中，将告警级别设置为**严重**，**警告**或**信息**。
-1. 为告警选择一个[通知](/docs/rancher2/monitoring-alerting/2.0-2.4/notifiers/_index)。
+1. 为告警选择一个[通知](/docs/rancher2.5/monitoring-alerting/2.0-2.4/notifiers/_index)。
 
 **结果：** 告警已创建并激活。当在集群上运行扫描并且满足报警条件时，将触发通知。
 
-有关告警的更多信息，请参考[本页](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/_index)。
+有关告警的更多信息，请参考[本页](/docs/rancher2.5/monitoring-alerting/2.0-2.4/cluster-alerts/_index)。
 
 ## 删除报告
 

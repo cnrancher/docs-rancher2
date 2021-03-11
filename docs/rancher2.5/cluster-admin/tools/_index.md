@@ -21,9 +21,9 @@ Kubernetes 只提供了一个创建和管理容器的平台，Rancher 在此基�
 
 通知和告警是两个协同工作的功能，向您通知 Rancher 系统中的事件。
 
-[通知](/docs/rancher2/monitoring-alerting/2.0-2.4/notifiers/_index)是通知您告警事件的服务。您可以配置通知接收者，以将告警通知发送给最适合采取措施的人员。目前 Rancher 支持的通知发送方式包括：Slack、电子邮件、PagerDuty、微信、钉钉和 Webhooks。
+[通知](/docs/rancher2.5/monitoring-alerting/2.0-2.4/notifiers/_index)是通知您告警事件的服务。您可以配置通知接收者，以将告警通知发送给最适合采取措施的人员。目前 Rancher 支持的通知发送方式包括：Slack、电子邮件、PagerDuty、微信、钉钉和 Webhooks。
 
-[告警](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/_index)是触发通知的规则。在接收告警之前，必须在 Rancher 中配置一个或多个通知接收者。告警范围可以在集群或项目级别设置。
+[告警](/docs/rancher2.5/monitoring-alerting/2.0-2.4/cluster-alerts/_index)是触发通知的规则。在接收告警之前，必须在 Rancher 中配置一个或多个通知接收者。告警范围可以在集群或项目级别设置。
 
 ## 日志
 
@@ -37,18 +37,18 @@ Kubernetes 只提供了一个创建和管理容器的平台，Rancher 在此基�
 
 Rancher 可以与 Elasticsearch、Splunk、Kafka、Syslog 和 Fluentd 集成。
 
-请参考[集群日志](/docs/rancher2/logging/2.0.x-2.4.x/project-logging/_index)，获取配置 Rancher 和外部日志服务集成的详细操作步骤。
+请参考[集群日志](/docs/rancher2.5/logging/2.0.x-2.4.x/project-logging/_index)，获取配置 Rancher 和外部日志服务集成的详细操作步骤。
 
 ## 监控
 
 _自 v2.2.0 起可用_
 
-您可以通过领先的开源监控解决方案 [Prometheus](https://prometheus.io/) 监控集群节点、Kubernetes 系统组件、软件部署的状态和过程。请参考[Rancher 监控概述](/docs/rancher2/cluster-admin/tools/monitoring/_index)，获取配置 Rancher 和 Prometheus 对接的详细操作步骤。
+您可以通过领先的开源监控解决方案 [Prometheus](https://prometheus.io/) 监控集群节点、Kubernetes 系统组件、软件部署的状态和过程。请参考[Rancher 监控概述](/docs/rancher2.5/cluster-admin/tools/monitoring/_index)，获取配置 Rancher 和 Prometheus 对接的详细操作步骤。
 
 ## Istio
 
-[Istio](https://istio.io/) 是一个开源工具，可使 DevOps 团队更轻松地观察，控制，排查故障和在复杂的微服务网络中的保证流量传输。有关如何在 Rancher 中启用 Istio 的详细信息，请参阅[Istio 功能介绍](/docs/rancher2/istio/_index)。
+[Istio](https://istio.io/) 是一个开源工具，可使 DevOps 团队更轻松地观察，控制，排查故障和在复杂的微服务网络中的保证流量传输。有关如何在 Rancher 中启用 Istio 的详细信息，请参阅[Istio 功能介绍](/docs/rancher2.5/istio/_index)。
 
 ## OPA Gatekeeper
 
-[OPA Gatekeeper](https://github.com/open-policy-agent/gatekeeper) 是一个开源项目，它对 OPA 和 Kubernetes 进行了集成，以通过准入控制器 Webhooks 提供策略控制。有关如何在 Rancher 中启用 Gatekeeper 的详细信息，请参阅[OPA Gatekeeper](/docs/rancher2/cluster-admin/tools/opa-gatekeeper/_index)。
+[OPA Gatekeeper](https://github.com/open-policy-agent/gatekeeper) 是一个开源项目，它对 OPA 和 Kubernetes 进行了集成，以通过准入控制器 Webhooks 提供策略控制。有关如何在 Rancher 中启用 Gatekeeper 的详细信息，请参阅[OPA Gatekeeper](/docs/rancher2.5/cluster-admin/tools/opa-gatekeeper/_index)。

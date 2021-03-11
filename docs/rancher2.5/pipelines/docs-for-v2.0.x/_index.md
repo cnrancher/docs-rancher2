@@ -16,7 +16,7 @@ keywords:
   - v2.0.x 版本中的流水线
 ---
 
-> **说明：**本文提供了配置**Rancher v2.0.x**流水线的操作步骤。 Rancher v2.1 改进了流水线，如果您使用的是 Rancher v2.1 或更新版本，请参考[Rancher v2.1 流水线相关操作](/docs/rancher2/project-admin/pipelines/_index)。
+> **说明：**本文提供了配置**Rancher v2.0.x**流水线的操作步骤。 Rancher v2.1 改进了流水线，如果您使用的是 Rancher v2.1 或更新版本，请参考[Rancher v2.1 流水线相关操作](/docs/rancher2.5/project-admin/pipelines/_index)。
 
 ## 概述
 

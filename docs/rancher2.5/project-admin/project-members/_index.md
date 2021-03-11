@@ -2,11 +2,11 @@
 title: 添加项目成员
 ---
 
-如果您需要给用户提供访问某个集群内特定项目和项目资源的权限，您需要将该用户添加到项目成员列表中。在 Rancher 中，项目和项目成员存在多对多的映射关系，也就是说，一个用户可以是多个项目的成员，与此同时，一个项目也可以有多个项目成员。本文主要介绍在新建的项目和已有的项目中添加成员的操作步骤。如果您需要将同一个集群的全部项目的权限开放给一个用户，请参考[添加集群成员](/docs/rancher2/cluster-admin/cluster-access/cluster-members/_index)。
+如果您需要给用户提供访问某个集群内特定项目和项目资源的权限，您需要将该用户添加到项目成员列表中。在 Rancher 中，项目和项目成员存在多对多的映射关系，也就是说，一个用户可以是多个项目的成员，与此同时，一个项目也可以有多个项目成员。本文主要介绍在新建的项目和已有的项目中添加成员的操作步骤。如果您需要将同一个集群的全部项目的权限开放给一个用户，请参考[添加集群成员](/docs/rancher2.5/cluster-admin/cluster-access/cluster-members/_index)。
 
 ## 新建项目时添加成员
 
-我们建议用户在创建项目的时候添加项目成员。关于如何创建项目，请参考[集群管理员指南](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)。若您想先创建项目，再添加项目成员，请参考下文的操作指导。
+我们建议用户在创建项目的时候添加项目成员。关于如何创建项目，请参考[集群管理员指南](/docs/rancher2.5/cluster-admin/projects-and-namespaces/_index)。若您想先创建项目，再添加项目成员，请参考下文的操作指导。
 
 ## 在已有项目中添加成员
 
@@ -28,7 +28,7 @@ title: 添加项目成员
 
 4. 分配用户或用户组的项目角色。
 
-   [什么是项目角色？](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)
+   [什么是项目角色？](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)
 
    > **说明：**
    >
@@ -36,8 +36,8 @@ title: 添加项目成员
    >
    > - 对于`自定义`角色，您可以修改可分配的单个角色的列表。
    >
-   >   - 向这个列表中添加角色的详细步骤请参考[添加自定义角色](/docs/rancher2/admin-settings/rbac/default-custom-roles/_index)。
-   >   - 将角色从这个列表中删除的详细步骤请参考[锁定/解锁角色](/docs/rancher2/admin-settings/rbac/locked-roles/_index)。
+   >   - 向这个列表中添加角色的详细步骤请参考[添加自定义角色](/docs/rancher2.5/admin-settings/rbac/default-custom-roles/_index)。
+   >   - 将角色从这个列表中删除的详细步骤请参考[锁定/解锁角色](/docs/rancher2.5/admin-settings/rbac/locked-roles/_index)。
 
 **结果：** 用户分配到了指定的角色，成为了指定项目的成员。
 

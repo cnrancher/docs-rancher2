@@ -24,31 +24,31 @@ Rancher 向 Kubernetes 添加的关键特性之一是集中式用户身份验证
 
 Rancher 身份验证代理支持与以下外部身份验证服务集成。下表列出了每个身份验证服务 Rancher 支持的最初版本。
 
-| 外部身份验证服务                                                                      | 以下版本后可用 |
-| ------------------------------------------------------------------------------------- | -------------- |
-| [Microsoft Active Directory](/docs/rancher2/admin-settings/authentication/ad/_index)  | v2.0.0         |
-| [GitHub](/docs/rancher2/admin-settings/authentication/github/_index)                  | v2.0.0         |
-| [Microsoft Azure AD](/docs/rancher2/admin-settings/authentication/azure-ad/_index)    | v2.0.3         |
-| [FreeIPA](/docs/rancher2/admin-settings/authentication/freeipa/_index)                | v2.0.5         |
-| [OpenLDAP](/docs/rancher2/admin-settings/authentication/openldap/_index)              | v2.0.5         |
-| [Microsoft AD FS](/docs/rancher2/admin-settings/authentication/microsoft-adfs/_index) | v2.0.7         |
-| [PingIdentity](/docs/rancher2/admin-settings/authentication/ping-federate/_index)     | v2.0.7         |
-| [Keycloak](/docs/rancher2/admin-settings/authentication/keycloak/_index)              | v2.1.0         |
-| [Okta](/docs/rancher2/admin-settings/authentication/okta/_index)                      | v2.2.0         |
-| [Google OAuth](/docs/rancher2/admin-settings/authentication/google/_index)            | v2.3.0         |
-| [Shibboleth](/docs/rancher2/admin-settings/authentication/shibboleth/_index)          | v2.4.0         |
+| 外部身份验证服务                                                                        | 以下版本后可用 |
+| --------------------------------------------------------------------------------------- | -------------- |
+| [Microsoft Active Directory](/docs/rancher2.5/admin-settings/authentication/ad/_index)  | v2.0.0         |
+| [GitHub](/docs/rancher2.5/admin-settings/authentication/github/_index)                  | v2.0.0         |
+| [Microsoft Azure AD](/docs/rancher2.5/admin-settings/authentication/azure-ad/_index)    | v2.0.3         |
+| [FreeIPA](/docs/rancher2.5/admin-settings/authentication/freeipa/_index)                | v2.0.5         |
+| [OpenLDAP](/docs/rancher2.5/admin-settings/authentication/openldap/_index)              | v2.0.5         |
+| [Microsoft AD FS](/docs/rancher2.5/admin-settings/authentication/microsoft-adfs/_index) | v2.0.7         |
+| [PingIdentity](/docs/rancher2.5/admin-settings/authentication/ping-federate/_index)     | v2.0.7         |
+| [Keycloak](/docs/rancher2.5/admin-settings/authentication/keycloak/_index)              | v2.1.0         |
+| [Okta](/docs/rancher2.5/admin-settings/authentication/okta/_index)                      | v2.2.0         |
+| [Google OAuth](/docs/rancher2.5/admin-settings/authentication/google/_index)            | v2.3.0         |
+| [Shibboleth](/docs/rancher2.5/admin-settings/authentication/shibboleth/_index)          | v2.4.0         |
 
-同时，Rancher 也提供了[本地认证](/docs/rancher2/admin-settings/authentication/local/_index)。
+同时，Rancher 也提供了[本地认证](/docs/rancher2.5/admin-settings/authentication/local/_index)。
 
 在大多数情况下，应该使用外部身份验证服务，而不是本地身份验证，因为外部身份验证允许对用户进行集中管理。但是您可能需要一些本地身份验证用户，以便在特定的情况下管理 Rancher，例如在外部身份验证系统不可用或正在进行维护的情况下。
 
 ## 用户和组
 
-Rancher 依赖于用户和组以确定谁被允许登录到 Rancher，以及他们可以访问哪些资源。当使用外部系统进行身份验证时，将由外部系统提供用户和组。这些用户和组被赋予集群、项目、多集群应用程序、全局 DNS 提供者等资源的特定角色。当您授予对某个组的访问权时，身份验证提供程序中属于该组的所有用户都将能够使用您指定的权限访问该资源。有关角色和权限的更多信息，请参见[基于角色的访问控制](/docs/rancher2/admin-settings/rbac/_index)。
+Rancher 依赖于用户和组以确定谁被允许登录到 Rancher，以及他们可以访问哪些资源。当使用外部系统进行身份验证时，将由外部系统提供用户和组。这些用户和组被赋予集群、项目、多集群应用程序、全局 DNS 提供者等资源的特定角色。当您授予对某个组的访问权时，身份验证提供程序中属于该组的所有用户都将能够使用您指定的权限访问该资源。有关角色和权限的更多信息，请参见[基于角色的访问控制](/docs/rancher2.5/admin-settings/rbac/_index)。
 
 > **注:** 本地认证不支持创建或管理用户组。
 
-有关更多信息，请参考[用户和组](/docs/rancher2/admin-settings/authentication/user-groups/_index)。
+有关更多信息，请参考[用户和组](/docs/rancher2.5/admin-settings/authentication/user-groups/_index)。
 
 ## Rancher 授权范围
 

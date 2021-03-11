@@ -24,8 +24,8 @@ keywords:
 
 要完成此页面上的操作时，需要以下权限之一：
 
-- [系统管理员权限](/docs/rancher2/admin-settings/rbac/global-permissions/_index)。
-- 分配了 [Manage Roles](/docs/rancher2/admin-settings/rbac/global-permissions/_index) 角色的[自定义全局权限](/docs/rancher2/admin-settings/rbac/global-permissions/_index)。
+- [系统管理员权限](/docs/rancher2.5/admin-settings/rbac/global-permissions/_index)。
+- 分配了 [Manage Roles](/docs/rancher2.5/admin-settings/rbac/global-permissions/_index) 角色的[自定义全局权限](/docs/rancher2.5/admin-settings/rbac/global-permissions/_index)。
 
 ## 为集群或项目创建自定义角色
 
@@ -70,7 +70,7 @@ Rancher 提供了一组开箱即用的默认用户角色，您也可以创建默
 
 3. 输入角色的**名称**。
 
-4. 选择是否将角色设置为[已锁定](/docs/rancher2/admin-settings/rbac/locked-roles/_index)。
+4. 选择是否将角色设置为[已锁定](/docs/rancher2.5/admin-settings/rbac/locked-roles/_index)。
 
    > **注意：** 无法将锁定角色分配给用户。
 
@@ -154,8 +154,8 @@ _自 v2.4.0 起可用_
 
 > **先决条件：** 您只能在以下情况下为组分配全局角色：
 >
-> - 您已经设置了[外部身份验证系统](/docs/rancher2/admin-settings/authentication/_index)。
-> - 外部身份验证系统支持[用户组](/docs/rancher2/admin-settings/authentication/user-groups/_index)。
+> - 您已经设置了[外部身份验证系统](/docs/rancher2.5/admin-settings/authentication/_index)。
+> - 外部身份验证系统支持[用户组](/docs/rancher2.5/admin-settings/authentication/user-groups/_index)。
 > - 您已经通过身份验证系统建立了至少一个用户组。
 
 要将自定义全局角色分配给组，请按照下列步骤操作：

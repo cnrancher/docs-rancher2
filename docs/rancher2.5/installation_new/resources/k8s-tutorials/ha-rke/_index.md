@@ -16,7 +16,7 @@ keywords:
   - 安装 Kubernetes
 ---
 
-本节描述了如何根据我们的 [Rancher Server 环境的最佳实践](/docs/rancher2/overview/architecture-recommendations/_index)来安装 Kubernetes 集群。该集群应专用于运行 Rancher Server。
+本节描述了如何根据我们的 [Rancher Server 环境的最佳实践](/docs/rancher2.5/overview/architecture-recommendations/_index)来安装 Kubernetes 集群。该集群应专用于运行 Rancher Server。
 
 对于 v2.4 之前的 Rancher，Rancher 应该安装在 [RKE](/docs/rke/_index)（Rancher Kubernetes Engine）Kubernetes 集群上。RKE 是经过 CNCF 认证的 Kubernetes 发行版，并且全部组件完全在 Docker 容器内运行。
 
@@ -24,7 +24,7 @@ keywords:
 
 Rancher Server 只能在使用 RKE 或 K3s 安装的 Kubernetes 集群中运行。不支持在托管的 Kubernetes 集群（例如 EKS）上使用 Rancher。
 
-对于无法直接访问 Internet 的系统，请参阅 [Rancher 离线安装指南](/docs/rancher2/installation_new/other-installation-methods/air-gap/_index)。
+对于无法直接访问 Internet 的系统，请参阅 [Rancher 离线安装指南](/docs/rancher2.5/installation_new/other-installation-methods/air-gap/_index)。
 
 > **单节点 Kubernetes 集群安装提示：**
 >
@@ -219,7 +219,7 @@ ingress:
 >
 > 请参阅[RKE 文档](/docs/rke/config-options/_index)来了解 RKE 的选项和功能的完整列表。
 >
-> 要为大规模 Rancher 安装 etcd 集群，请参阅[etcd 设置指南](/docs/rancher2/installation_new/resources/advanced/etcd/_index)。
+> 要为大规模 Rancher 安装 etcd 集群，请参阅[etcd 设置指南](/docs/rancher2.5/installation_new/resources/advanced/etcd/_index)。
 
 ### 3、运行 RKE
 
@@ -301,6 +301,6 @@ kube-system     rke-network-plugin-deploy-job-6pbgj       0/1       Completed   
 
 ### 遇到问题或错误？
 
-请参阅[故障排查](/docs/rancher2/installation_new/other-installation-methods/troubleshooting/_index)页面。
+请参阅[故障排查](/docs/rancher2.5/installation_new/other-installation-methods/troubleshooting/_index)页面。
 
-## [下一步：安装 Rancher](/docs/rancher2/installation_new/resources/advanced/helm2/helm-rancher/_index)
+## [下一步：安装 Rancher](/docs/rancher2.5/installation_new/resources/advanced/helm2/helm-rancher/_index)

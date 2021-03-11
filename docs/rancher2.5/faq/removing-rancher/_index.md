@@ -29,11 +29,11 @@ keywords:
 
 - **托管的 Kubernetes 集群：** 如果您是在公有云提供商（例如 EKS，GKE 或者 AKS）中创建的集群，您可以继续使用公有云厂商提供的凭证访问集群。
 
-- **RKE 集群：** 要访问[RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)，集群必须开启[授权集群端点](/docs/rancher2/overview/architecture/_index) ，而且您必须从 Rancher UI 上下载集群的 kubeconfig 文件（RKE 集群的授权集群端点是默认开启的）。您可以通过授权集群端口用 kubectl 访问 Kubernets 集群，而不必通过 Rancher 的[认证代理](/docs/rancher2/overview/architecture/_index) 。更多关于如何配置 kubectl 使用授权集群端点的指导，请参阅[通过 Kubectl 和 kubeconfig 访问集群](/docs/rancher2/cluster-admin/cluster-access/kubectl/_index)章节中配置 kubectl 直接访问集群的部分。当 Rancher 被删除时这些集群会创建一个授权快照。
+- **RKE 集群：** 要访问[RKE 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)，集群必须开启[授权集群端点](/docs/rancher2.5/overview/architecture/_index) ，而且您必须从 Rancher UI 上下载集群的 kubeconfig 文件（RKE 集群的授权集群端点是默认开启的）。您可以通过授权集群端口用 kubectl 访问 Kubernets 集群，而不必通过 Rancher 的[认证代理](/docs/rancher2.5/overview/architecture/_index) 。更多关于如何配置 kubectl 使用授权集群端点的指导，请参阅[通过 Kubectl 和 kubeconfig 访问集群](/docs/rancher2.5/cluster-admin/cluster-access/kubectl/_index)章节中配置 kubectl 直接访问集群的部分。当 Rancher 被删除时这些集群会创建一个授权快照。
 
 ## 不再需要 Rancher 时该怎么做？
 
-如果您是[Rancher 高可用安装](/docs/rancher2/installation_new/install-rancher-on-k8s/_index)，可通过[系统工具](/docs/rancher2/system-tools/_index) 的 `remove` 子命令移除 Rancher。
+如果您是[Rancher 高可用安装](/docs/rancher2.5/installation_new/install-rancher-on-k8s/_index)，可通过[系统工具](/docs/rancher2.5/system-tools/_index) 的 `remove` 子命令移除 Rancher。
 
 如果您通过 Docker 单节点安装的 Rancher，可以通过移除 Docker 容器的方式移除 Rancher。
 

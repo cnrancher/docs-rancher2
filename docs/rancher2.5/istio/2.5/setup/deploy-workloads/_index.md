@@ -367,4 +367,4 @@ spec:
 
 ## 后续操作
 
-[设置 Istio 网关](/docs/rancher2/istio/2.5/setup/gateway/_index)
+[设置 Istio 网关](/docs/rancher2.5/istio/2.5/setup/gateway/_index)

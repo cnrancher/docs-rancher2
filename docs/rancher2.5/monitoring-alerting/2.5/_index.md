@@ -41,7 +41,7 @@ Rancher 的解控和告警解决方案允许用户执行以下操作：
 
 如果您在 v2.5 之前在 Rancher 中启用了监控、警报或通知器，则没有升级路径可以切换到新的监控/警报解决方案。在通过集群资源管理器部署新的监控解决方案之前，您需要在集群管理器中禁用监控/警报/通知器。
 
-有关 Rancher 2.5 中监控应用升级的更多信息，请参考[迁移文档](/docs/rancher2/monitoring-alerting/2.5/migrating/_index)。
+有关 Rancher 2.5 中监控应用升级的更多信息，请参考[迁移文档](/docs/rancher2.5/monitoring-alerting/2.5/migrating/_index)。
 
 启用监控之前，请务必确认[配置资源限额和资源需求](#配置资源限额和资源需求)中的默认值是所需的最小资源限制和请求。
 
@@ -57,7 +57,7 @@ Prometheus 让您可以查看来自不同 Rancher 和 Kubernetes 对象的度量
 
 ## 启用 Monitoring
 
-[管理员](/docs/rancher2/admin-settings/rbac/global-permissions/_index)或[集群所有者](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index#cluster-roles)可以配置 Rancher 部署 Prometheus，监控 Kubernetes 集群。
+[管理员](/docs/rancher2.5/admin-settings/rbac/global-permissions/_index)或[集群所有者](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index#cluster-roles)可以配置 Rancher 部署 Prometheus，监控 Kubernetes 集群。
 
 如果要设置 Alertmanager、Grafana 或 Ingress，必须在 Helm chart 部署上进行设置。在部署之外创建 Ingress 是有问题的。
 
@@ -71,7 +71,7 @@ Prometheus 让您可以查看来自不同 Rancher 和 Kubernetes 对象的度量
 1. 在 Rancher UI 中，进入要安装监控的集群，然后单击**集群资源管理器**。
 1. 单击**应用程序**。
 1. 单击`rancher-monitoring`应用程序。
-1. （可选）单击**Chart 选项**，配置警报、Prometheus 和 Grafana。如需帮助，请参阅[配置参考](/docs/rancher2/monitoring-alerting/2.5/configuration/_index)
+1. （可选）单击**Chart 选项**，配置警报、Prometheus 和 Grafana。如需帮助，请参阅[配置参考](/docs/rancher2.5/monitoring-alerting/2.5/configuration/_index)
 1. 滚动到 Helm chart README 底部，单击**安装**。
 
 **结果：**监控应用部署在`cattle-monitoring-system`命名空间中。

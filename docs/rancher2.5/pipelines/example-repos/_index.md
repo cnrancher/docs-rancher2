@@ -22,7 +22,7 @@ Rancher 附带了几个示例代码库，您可以使用它们来熟悉流水线
 - Maven
 - php
 
-> **注意:** 示例代码库仅在您[对接版本管理工具](/docs/rancher2/project-admin/pipelines/_index)之前可用。
+> **注意:** 示例代码库仅在您[对接版本管理工具](/docs/rancher2.5/project-admin/pipelines/_index)之前可用。
 
 使用这些示例代码库，请按照以下步骤操作。
 
@@ -81,4 +81,4 @@ Rancher 附带了几个示例代码库，您可以使用它们来熟悉流水线
 
 ## 下一步是什么?
 
-有关为代码库设置自己的流水线的详细信息，请查阅[对接版本管理工具](/docs/rancher2/project-admin/pipelines/_index)，[配置代码库](#配置代码库)和[配置流水线](/docs/rancher2/k8s-in-rancher/pipelines/_index)相关的文档。
+有关为代码库设置自己的流水线的详细信息，请查阅[对接版本管理工具](/docs/rancher2.5/project-admin/pipelines/_index)，[配置代码库](#配置代码库)和[配置流水线](/docs/rancher2.5/k8s-in-rancher/pipelines/_index)相关的文档。

@@ -84,7 +84,7 @@ kubectl -n cattle-system patch  daemonsets cattle-node-agent --patch '{
 
 ## 创建 Kubernetes 集群，ETCD 无法启动
 
-通过[rke 创建 Kubernetes 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)，集群状态为`Provisioning`，并且 UI 显示如下错误信息：
+通过[rke 创建 Kubernetes 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)，集群状态为`Provisioning`，并且 UI 显示如下错误信息：
 
 ```bash
 [etcd] Failed to bring up Etcd Plane: etcd cluster is unhealthy: hosts [10.0.2.15] failed to report healthy. Check etcd container logs on each host for more information
@@ -110,4 +110,4 @@ kubectl -n cattle-system patch  daemonsets cattle-node-agent --patch '{
 **解决办法：**
 
 1. 检查主机时钟，并使各主机时钟同步。
-2. 参考[清理节点](/docs/rancher2/cluster-admin/cleaning-cluster-nodes/_index)说明，将主机数据残留数据清理干净，然后再从新添加集群。
+2. 参考[清理节点](/docs/rancher2.5/cluster-admin/cleaning-cluster-nodes/_index)说明，将主机数据残留数据清理干净，然后再从新添加集群。

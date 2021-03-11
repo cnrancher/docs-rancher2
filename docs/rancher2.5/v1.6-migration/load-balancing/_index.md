@@ -112,7 +112,7 @@ kubectl get ingress
 
 Rancher v2.x Ingress 功能支持 HTTPS 协议，但如果要使用它，则需要使用有效的 SSL/TLS 证书。在配置 Ingress 规则时，请使用**SSL/TLS 证书**部分来配置证书。
 
-- 我们推荐[上传由可信 CA 签发的证书](/docs/rancher2/k8s-in-rancher/certificates/_index)（必须在配置 Ingress 之前执行此操作）。然后，在配置负载均衡器时，使用**选择证书**选项，然后选择要使用的上传了的证书。
+- 我们推荐[上传由可信 CA 签发的证书](/docs/rancher2.5/k8s-in-rancher/certificates/_index)（必须在配置 Ingress 之前执行此操作）。然后，在配置负载均衡器时，使用**选择证书**选项，然后选择要使用的上传了的证书。
 - 如果已配置 [NGINX 默认证书](/docs/rke/config-options/add-ons/ingress-controllers/_index)，您可以选择**使用默认的 Ingress 证书**.
 
 <figcaption>负载均衡配置：SSL/TLS证书部分</figcaption>
@@ -123,7 +123,7 @@ Rancher v2.x Ingress 功能支持 HTTPS 协议，但如果要使用它，则需�
 
 #### 四层负载均衡器
 
-对于 TCP 协议，Rancher v2.x 支持配置 4 层负载均衡器。这个 4 层负载均衡器是由您的集群所在的云服务提供商提供的。在您配置了 Cloud Provider 之后，当您在部署工作负载时，您可以选择`4 层负载均衡器`选项进行端口映射时。Rancher 会自动创建相应的负载均衡服务。该服务将连接相应的云提供商，来配置负载均衡器，从而将请求路由到适当的 pod。有关如何为您的云提供商配置 Cloud Provider，查看[配置 Cloud Provider](/docs/rancher2/cluster-provisioning/rke-clusters/cloud-providers/_index)。
+对于 TCP 协议，Rancher v2.x 支持配置 4 层负载均衡器。这个 4 层负载均衡器是由您的集群所在的云服务提供商提供的。在您配置了 Cloud Provider 之后，当您在部署工作负载时，您可以选择`4 层负载均衡器`选项进行端口映射时。Rancher 会自动创建相应的负载均衡服务。该服务将连接相应的云提供商，来配置负载均衡器，从而将请求路由到适当的 pod。有关如何为您的云提供商配置 Cloud Provider，查看[配置 Cloud Provider](/docs/rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/_index)。
 
 例如，如果我们创建名为`myapp`的部署并在**端口映射**部分中指定 4 层负载均衡器，则 Rancher 会自动将一个名为`myapp-loadbalancer`的条目添加到**负载均衡器**选项卡中。
 

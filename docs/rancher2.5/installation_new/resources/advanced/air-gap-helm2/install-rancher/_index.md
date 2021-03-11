@@ -39,13 +39,13 @@ Rancher 建议在 Kubernetes 集群上安装 Rancher。高可用的 Kubernetes �
 
 从可以访问 Internet 的系统中，获取最新的 Rancher Helm Chart，然后将内容复制到可以访问 Rancher Server 集群的系统中。
 
-1. 如果您还没有在有互联网访问的系统上进行 helm 初始化。请运行下面的命令。注意：请参考[Helm 版本要求](/docs/rancher2/installation_new/resources/helm-version/_index)来选择一个 Helm 版本来安装 Rancher。
+1. 如果您还没有在有互联网访问的系统上进行 helm 初始化。请运行下面的命令。注意：请参考[Helm 版本要求](/docs/rancher2.5/installation_new/resources/helm-version/_index)来选择一个 Helm 版本来安装 Rancher。
 
    ```plain
    helm init -c
    ```
 
-1. 使用`helm repo add`来添加仓库，不同的地址适应不同的 Rancher 版本，请替换命令中的`<CHART_REPO>`，替换为`latest`，`stable`或`alpha`。更多信息请参考[如何选择 Rancher 版本](/docs/rancher2/installation_new/resources/choosing-version/_index)。
+1. 使用`helm repo add`来添加仓库，不同的地址适应不同的 Rancher 版本，请替换命令中的`<CHART_REPO>`，替换为`latest`，`stable`或`alpha`。更多信息请参考[如何选择 Rancher 版本](/docs/rancher2.5/installation_new/resources/choosing-version/_index)。
 
    - `latest`: 推荐在尝试新功能时使用。
    - `stable`: 推荐生产环境中使用。（推荐）
@@ -61,7 +61,7 @@ Rancher 建议在 Kubernetes 集群上安装 Rancher。高可用的 Kubernetes �
    helm fetch rancher-<CHART_REPO>/rancher
    ```
 
-> 是否需要其他选项？您需要进行故障排查的帮助吗？请参阅[高可用安装 - 高级选项](/docs/rancher2/installation_new/resources/advanced/helm2/helm-rancher/_index)。
+> 是否需要其他选项？您需要进行故障排查的帮助吗？请参阅[高可用安装 - 高级选项](/docs/rancher2.5/installation_new/resources/advanced/helm2/helm-rancher/_index)。
 
 ### 选择您的 SSL 配置
 
@@ -69,7 +69,7 @@ Rancher Server 在默认情况下被设计为安全的，并且需要 SSL/TLS �
 
 当在离线环境的 Kubernetes 中安装 Rancher 时，推荐两种证书生成方式。
 
-> **注意：**如果要在外部终止 SSL/TLS，请参阅[在外部负载均衡器上终止 TLS](/docs/rancher2/installation_new/resources/chart-options/_index)。
+> **注意：**如果要在外部终止 SSL/TLS，请参阅[在外部负载均衡器上终止 TLS](/docs/rancher2.5/installation_new/resources/chart-options/_index)。
 
 | 设置                     | Chart 选项                   | 描述                                                                                                       | 是否需要 cert-manager？ |
 | :----------------------- | :--------------------------- | :--------------------------------------------------------------------------------------------------------- | :---------------------- |
@@ -97,7 +97,7 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
 默认情况下，Rancher 会生成一个 CA 并使用 cert-manager 颁发证书以访问 Rancher Server 界面。
 
 > **注意：**
-> 由于 cert-manager 最近的改动，您需要进行升级。如果您要升级 Rancher 并在使用版本低于 v0.11.0 的 cert-manager，请参阅我们的[升级 cert-manager 文档](/docs/rancher2/installation_new/resources/upgrading-cert-manager/_index)。
+> 由于 cert-manager 最近的改动，您需要进行升级。如果您要升级 Rancher 并在使用版本低于 v0.11.0 的 cert-manager，请参阅我们的[升级 cert-manager 文档](/docs/rancher2.5/installation_new/resources/upgrading-cert-manager/_index)。
 
 1. 在可以连接互联网的系统中，添加 cert-manager 仓库
 
@@ -185,7 +185,7 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
     --set useBundledSystemChart=true # 自v2.3.0可用，使用内嵌的 Rancher system charts
 ```
 
-然后请参考[添加 TLS 密文](/docs/rancher2/installation_new/resources/tls-secrets/_index)发布证书文件，以便 Rancher 和 ingress controller 可以使用它们。
+然后请参考[添加 TLS 密文](/docs/rancher2.5/installation_new/resources/tls-secrets/_index)发布证书文件，以便 Rancher 和 ingress controller 可以使用它们。
 
 ### 安装 Rancher
 
@@ -231,15 +231,15 @@ kubectl -n cattle-system apply -R -f ./rancher
 
 ### 针对 Rancher 2.3.0 之前版本配置 system-chart
 
-如果要安装 v2.3.0 之前的 Rancher 版本，则将无法使用内置打包的 system-charts。由于 Rancher system-charts 托管在 Github 中，因此，离线安装将无法访问 charts。因此，您必须[配置 Rancher system-charts](/docs/rancher2/installation_new/resources/local-system-charts/_index)。
+如果要安装 v2.3.0 之前的 Rancher 版本，则将无法使用内置打包的 system-charts。由于 Rancher system-charts 托管在 Github 中，因此，离线安装将无法访问 charts。因此，您必须[配置 Rancher system-charts](/docs/rancher2.5/installation_new/resources/local-system-charts/_index)。
 
 ### 其他资源
 
 这些资源在安装 Rancher 时可能会有所帮助：
 
-- [Rancher Helm Chart 选项](/docs/rancher2/installation_new/resources/chart-options/_index)
-- [添加 TLS 密文](/docs/rancher2/installation_new/resources/tls-secrets/_index)
-- [安装过程的故障排查](/docs/rancher2/installation_new/other-installation-methods/troubleshooting/_index)
+- [Rancher Helm Chart 选项](/docs/rancher2.5/installation_new/resources/chart-options/_index)
+- [添加 TLS 密文](/docs/rancher2.5/installation_new/resources/tls-secrets/_index)
+- [安装过程的故障排查](/docs/rancher2.5/installation_new/other-installation-methods/troubleshooting/_index)
 
 ## 单节点安装
 
@@ -254,10 +254,10 @@ Docker 单节点安装适用于想要对 Rancher 进行`测试`的 Rancher 用�
 
 > **相关链接**
 >
-> - 配置自定义 CA 根证书以访问您的服务？ 请参阅[自定义 CA 根证书](/docs/rancher2/installation_new/resources/custom-ca-root-certificate/_index)。
-> - 开启 API 审计日志，请参阅[API 审计日志](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/advanced/_index#api-审计日志)。
+> - 配置自定义 CA 根证书以访问您的服务？ 请参阅[自定义 CA 根证书](/docs/rancher2.5/installation_new/resources/custom-ca-root-certificate/_index)。
+> - 开启 API 审计日志，请参阅[API 审计日志](/docs/rancher2.5/installation_new/other-installation-methods/single-node-docker/advanced/_index#api-审计日志)。
 
-- 对于 v2.3.0 之前的 Rancher，您需要设置 Git 镜像将 system-charts 置于网络中 Rancher 可以访问的位置。然后，在安装 Rancher 之后，您将需要配置 Rancher 以使用该 Git 仓库。有关详细信息，请参阅[在 v2.3.0 之前为 Rancher 设置 system-charts。](/docs/rancher2/installation_new/resources/local-system-charts/_index)
+- 对于 v2.3.0 之前的 Rancher，您需要设置 Git 镜像将 system-charts 置于网络中 Rancher 可以访问的位置。然后，在安装 Rancher 之后，您将需要配置 Rancher 以使用该 Git 仓库。有关详细信息，请参阅[在 v2.3.0 之前为 Rancher 设置 system-charts。](/docs/rancher2.5/installation_new/resources/local-system-charts/_index)
 
 #### 使用 Rancher 默认的自签名证书
 
@@ -265,10 +265,10 @@ Docker 单节点安装适用于想要对 Rancher 进行`测试`的 Rancher 用�
 
 登录到 Linux 主机，然后运行下面的安装命令。输入命令时，请参考下面的配置。
 
-| 占位符                           | 描述                                                                                          |
-| :------------------------------- | :-------------------------------------------------------------------------------------------- |
-| `<REGISTRY.YOURDOMAIN.COM:PORT>` | 私有镜像库地址                                                                                |
-| `<RANCHER_VERSION_TAG>`          | 您要安装的[Rancher 版本](/docs/rancher2/installation_new/resources/choosing-version/_index)。 |
+| 占位符                           | 描述                                                                                            |
+| :------------------------------- | :---------------------------------------------------------------------------------------------- |
+| `<REGISTRY.YOURDOMAIN.COM:PORT>` | 私有镜像库地址                                                                                  |
+| `<RANCHER_VERSION_TAG>`          | 您要安装的[Rancher 版本](/docs/rancher2.5/installation_new/resources/choosing-version/_index)。 |
 
 ```
 docker run -d --privileged --restart=unless-stopped \
@@ -285,19 +285,19 @@ docker run -d --privileged --restart=unless-stopped \
 > **先决条件：**
 > 在具有互联网连接的计算机上，使用[OpenSSL](https://www.openssl.org/)或您选择的其他方法创建自签名证书。
 >
-> - 证书文件必须为[PEM 格式](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/troubleshooting/_index)。
-> - 其他证书问题[SSL 常见问题和问题排查](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/troubleshooting/_index)。
+> - 证书文件必须为[PEM 格式](/docs/rancher2.5/installation_new/other-installation-methods/single-node-docker/troubleshooting/_index)。
+> - 其他证书问题[SSL 常见问题和问题排查](/docs/rancher2.5/installation_new/other-installation-methods/single-node-docker/troubleshooting/_index)。
 
 创建证书后，登录到 Linux 主机，然后运行以下安装命令。输入命令时，请使用下表替换每个占位符。使用`-v`标志并提供证书的路径以将其安装在容器中。
 
-| 占位符                           | 描述                                                                                        |
-| :------------------------------- | :------------------------------------------------------------------------------------------ |
-| `<CERT_DIRECTORY>`               | 证书文件所在目录                                                                            |
-| `<FULL_CHAIN.pem>`               | 证书链文件路径                                                                              |
-| `<PRIVATE_KEY.pem>`              | 证书私有密钥路径                                                                            |
-| `<CA_CERTS.pem>`                 | 证书颁发机构的证书的路径                                                                    |
-| `<REGISTRY.YOURDOMAIN.COM:PORT>` | 私有镜像库                                                                                  |
-| `<RANCHER_VERSION_TAG>`          | 您要安装的[Rancher 版本](/docs/rancher2/installation_new/resources/choosing-version/_index) |
+| 占位符                           | 描述                                                                                          |
+| :------------------------------- | :-------------------------------------------------------------------------------------------- |
+| `<CERT_DIRECTORY>`               | 证书文件所在目录                                                                              |
+| `<FULL_CHAIN.pem>`               | 证书链文件路径                                                                                |
+| `<PRIVATE_KEY.pem>`              | 证书私有密钥路径                                                                              |
+| `<CA_CERTS.pem>`                 | 证书颁发机构的证书的路径                                                                      |
+| `<REGISTRY.YOURDOMAIN.COM:PORT>` | 私有镜像库                                                                                    |
+| `<RANCHER_VERSION_TAG>`          | 您要安装的[Rancher 版本](/docs/rancher2.5/installation_new/resources/choosing-version/_index) |
 
 ```
 docker run -d --privileged --restart=unless-stopped \
@@ -314,17 +314,17 @@ docker run -d --privileged --restart=unless-stopped \
 
 在要公开展示应用程序的开发或测试环境中，请使用由公认的 CA 签名的证书，这样您的用户群就不会遇到安全警告。
 
-> **先决条件：** 证书文件必须为[PEM 格式](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/troubleshooting/_index)。
+> **先决条件：** 证书文件必须为[PEM 格式](/docs/rancher2.5/installation_new/other-installation-methods/single-node-docker/troubleshooting/_index)。
 
 获得证书后，登录到 Linux 主机，然后运行下面的安装命令。由于您的证书是由公认的 CA 签名的，因此不需要安装其他 CA 证书文件。
 
-| 占位符                           | 描述                                                                                        |
-| -------------------------------- | ------------------------------------------------------------------------------------------- |
-| `<CERT_DIRECTORY>`               | 证书文件所在目录                                                                            |
-| `<FULL_CHAIN.pem>`               | 证书链文件路径                                                                              |
-| `<PRIVATE_KEY.pem>`              | 证书私有密钥路径                                                                            |
-| `<REGISTRY.YOURDOMAIN.COM:PORT>` | 私有镜像库                                                                                  |
-| `<RANCHER_VERSION_TAG>`          | 您要安装的[Rancher 版本](/docs/rancher2/installation_new/resources/choosing-version/_index) |
+| 占位符                           | 描述                                                                                          |
+| -------------------------------- | --------------------------------------------------------------------------------------------- |
+| `<CERT_DIRECTORY>`               | 证书文件所在目录                                                                              |
+| `<FULL_CHAIN.pem>`               | 证书链文件路径                                                                                |
+| `<PRIVATE_KEY.pem>`              | 证书私有密钥路径                                                                              |
+| `<REGISTRY.YOURDOMAIN.COM:PORT>` | 私有镜像库                                                                                    |
+| `<RANCHER_VERSION_TAG>`          | 您要安装的[Rancher 版本](/docs/rancher2.5/installation_new/resources/choosing-version/_index) |
 
 > **注意：**使用`--no-cacerts`作为容器的参数来禁用 Rancher 生成的默认 CA 证书。
 
@@ -341,4 +341,4 @@ docker run -d --privileged --restart=unless-stopped \
 
 如果您要安装 Rancher v2.3.0+，则安装完成。
 
-如果要安装 v2.3.0 之前的 Rancher 版本，则将无法使用内置的 system-charts。由于 Rancher system-charts 托管在 Github 中，因此，离线安装将无法访问这些 charts。所以，您必须[配置 Rancher system-charts](/docs/rancher2/installation_new/resources/local-system-charts/_index)。
+如果要安装 v2.3.0 之前的 Rancher 版本，则将无法使用内置的 system-charts。由于 Rancher system-charts 托管在 Github 中，因此，离线安装将无法访问这些 charts。所以，您必须[配置 Rancher system-charts](/docs/rancher2.5/installation_new/resources/local-system-charts/_index)。

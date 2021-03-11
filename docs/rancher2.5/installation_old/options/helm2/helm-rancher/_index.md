@@ -20,17 +20,17 @@ keywords:
 
 可以使用 Kubernetes 的 helm 包管理工具来管理 Rancher 的安装。使用 `helm` 来一键安装 Rancher 及其依赖组件。
 
-对于无法访问互联网的环境，请查看[Rancher 高可用 Helm2 离线安装](/docs/rancher2/installation/options/air-gap-helm2/install-rancher/_index)。
+对于无法访问互联网的环境，请查看[Rancher 高可用 Helm2 离线安装](/docs/rancher2.5/installation/options/air-gap-helm2/install-rancher/_index)。
 
-请参阅[Helm 版本要求](/docs/rancher2/installation/options/helm-version/_index) 来选择安装 Rancher 的 Helm 版本。
+请参阅[Helm 版本要求](/docs/rancher2.5/installation/options/helm-version/_index) 来选择安装 Rancher 的 Helm 版本。
 
-> **提示：** 当前安装指南假定您使用的是 Helm 2。如果您在使用 Helm 3，请参照[此说明](/docs/rancher2/installation/k8s-install/helm-rancher/_index)。
+> **提示：** 当前安装指南假定您使用的是 Helm 2。如果您在使用 Helm 3，请参照[此说明](/docs/rancher2.5/installation/k8s-install/helm-rancher/_index)。
 
 ## 添加 Helm Chart 仓库
 
 使用 `helm repo add` 命令添加包含 Rancher Chart 的 Helm 仓库来安装 Rancher。
 
-请替换命令中的`<CHART_REPO>`，替换为`latest`，`stable`或`alpha`。更多信息，请查看[选择 Rancher 版本](/docs/rancher2/installation/options/server-tags/_index)来选择最适合您的仓库。
+请替换命令中的`<CHART_REPO>`，替换为`latest`，`stable`或`alpha`。更多信息，请查看[选择 Rancher 版本](/docs/rancher2.5/installation/options/server-tags/_index)来选择最适合您的仓库。
 
 - `latest`: 推荐在尝试新功能时使用。
 - `stable`: 推荐生产环境中使用。（推荐）
@@ -48,7 +48,7 @@ Rancher Server 默认需要 SSL/TLS 配置来保证访问的安全性。
 
 以下有三种关于证书来源的推荐选项。
 
-> **提示：** 如果您想要将 SSL/TLS 访问在外部终止，请查看[使用外部 TLS 负载均衡器](/docs/rancher2/installation/options/helm2/helm-rancher/chart-options/_index#外部-tls-termination)。
+> **提示：** 如果您想要将 SSL/TLS 访问在外部终止，请查看[使用外部 TLS 负载均衡器](/docs/rancher2.5/installation/options/helm2/helm-rancher/chart-options/_index#外部-tls-termination)。
 
 | 设置                                      | Chart 选项                       | 描述                                                           | 是否需要 cert-manager          |
 | ----------------------------------------- | -------------------------------- | -------------------------------------------------------------- | ------------------------------ |
@@ -63,14 +63,14 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
 ## 选装：安装 cert-manager
 
 :::note 提示
-仅由 Rancher 生成的 CA `ingress.tls.source=rancher` 和 Let's Encrypt 颁发的证书 `ingress.tls.source=letsEncrypt` 才需要 cert-manager。如果您使用自己的证书文件 `ingress.tls.source=secret` 或者[使用外部 TLS 负载均衡器](/docs/rancher2/installation/options/helm2/helm-rancher/chart-options/_index#外部-tls-termination)可以跳过此步骤。
+仅由 Rancher 生成的 CA `ingress.tls.source=rancher` 和 Let's Encrypt 颁发的证书 `ingress.tls.source=letsEncrypt` 才需要 cert-manager。如果您使用自己的证书文件 `ingress.tls.source=secret` 或者[使用外部 TLS 负载均衡器](/docs/rancher2.5/installation/options/helm2/helm-rancher/chart-options/_index#外部-tls-termination)可以跳过此步骤。
 :::
 
 > **重要：**
 >
 > 由于 Helm v2.12.0 和 cert-manager 的问题，请使用 Helm v2.12.1 或更高版本。
 >
-> cert-manager 最近的更改需要升级版本。如果您正在升级 Rancher 并且使用低于 v0.12.0 版本的 cert-manager，请参考[升级文档](/docs/rancher2/installation/options/upgrading-cert-manager/_index)。
+> cert-manager 最近的更改需要升级版本。如果您正在升级 Rancher 并且使用低于 v0.12.0 版本的 cert-manager，请参考[升级文档](/docs/rancher2.5/installation/options/upgrading-cert-manager/_index)。
 
 Rancher 依靠[cert-manager](https://github.com/jetstack/cert-manager)使用 Rancher CA 生成证书或者请求 Let's Encrypt 签发的证书。
 
@@ -184,7 +184,7 @@ deployment "rancher" successfully rolled out
 
 根据您已有的证书创建 Kubernetes 密文以供 Rancher 使用。
 
-> **提示：** 服务器证书中的 `Common Name` 或 `Subject Alternative Names` 必须与 `hostname` 选项一致, 否则 ingress controller 将无法正确配置。尽管技术上仅需要`Subject Alternative Names`中有一个条目，但是拥有一个匹配的 `Common Name` 可以最大程度的提高与旧版浏览器/应用程序的兼容性。如果您想检查证书是否正确，请查看[如何在服务器证书中检查 Common Name 和 Subject Alternative Names](/docs/rancher2/faq/technical/_index)。
+> **提示：** 服务器证书中的 `Common Name` 或 `Subject Alternative Names` 必须与 `hostname` 选项一致, 否则 ingress controller 将无法正确配置。尽管技术上仅需要`Subject Alternative Names`中有一个条目，但是拥有一个匹配的 `Common Name` 可以最大程度的提高与旧版浏览器/应用程序的兼容性。如果您想检查证书是否正确，请查看[如何在服务器证书中检查 Common Name 和 Subject Alternative Names](/docs/rancher2.5/faq/technical/_index)。
 
 - 设置 `hostname` 并且将 `ingress.tls.source` 选项设置为 `secret`。
 - 如果您在安装 `alpha` 版本，需要把`--devel` 选项添加到下面到 Helm 命令中。
@@ -208,7 +208,7 @@ helm install rancher-<CHART_REPO>/rancher \
   --set privateCA=true
 ```
 
-现在已经部署完 Rancher，请参见[添加 Kubernetes TLS 密文](/docs/rancher2/installation/options/helm2/helm-rancher/tls-secrets/_index)来发布证书文件，以便 Rancher 与 ingress controller 可以使用证书。
+现在已经部署完 Rancher，请参见[添加 Kubernetes TLS 密文](/docs/rancher2.5/installation/options/helm2/helm-rancher/tls-secrets/_index)来发布证书文件，以便 Rancher 与 ingress controller 可以使用证书。
 
 添加完密文后，检查 Rancher 是否运行成功：
 
@@ -232,11 +232,11 @@ rancher   3         3         3            3           3m
 
 Rancher chart 配置有许多选项可用于自定义安装 Rancher 来适配您的环境。以下是一些常见的高级场景。
 
-- [HTTP Proxy](/docs/rancher2/installation/options/helm2/helm-rancher/chart-options/_index#http-代理)
-- [私有镜像仓库](/docs/rancher2/installation/options/helm2/helm-rancher/chart-options/_index#私有镜像仓库registry和离线安装)
-- [使用外部负载均衡器终止 TLS](/docs/rancher2/installation/options/helm2/helm-rancher/chart-options/_index)
+- [HTTP Proxy](/docs/rancher2.5/installation/options/helm2/helm-rancher/chart-options/_index#http-代理)
+- [私有镜像仓库](/docs/rancher2.5/installation/options/helm2/helm-rancher/chart-options/_index#私有镜像仓库registry和离线安装)
+- [使用外部负载均衡器终止 TLS](/docs/rancher2.5/installation/options/helm2/helm-rancher/chart-options/_index)
 
-关于完整的 Chart 选项，请参见[Chart 安装选项](/docs/rancher2/installation/options/helm2/helm-rancher/chart-options/_index)。
+关于完整的 Chart 选项，请参见[Chart 安装选项](/docs/rancher2.5/installation/options/helm2/helm-rancher/chart-options/_index)。
 
 ## 保存配置选项
 
@@ -246,4 +246,4 @@ Rancher chart 配置有许多选项可用于自定义安装 Rancher 来适配您
 
 通过上面的操作，您应该已经完成了 Rancher server 的安装。在浏览器中输入您配置的域名，便可以访问 Rancher 的登录页面了。
 
-如果无法访问 Rancher 登录页面，请查看[问题排查](/docs/rancher2/installation/options/helm2/helm-rancher/troubleshooting/_index)页面，排查安装 Rancher Server 的过程中引起的问题。
+如果无法访问 Rancher 登录页面，请查看[问题排查](/docs/rancher2.5/installation/options/helm2/helm-rancher/troubleshooting/_index)页面，排查安装 Rancher Server 的过程中引起的问题。

@@ -18,7 +18,7 @@ keywords:
 
 Rancher 可以与您的 Kubernetes 集群之外存在的各种流行的日志服务和工具集成。
 
-有关日志集成如何工作的背景信息，请参阅[集群管理部分](/docs/rancher2/logging/2.0.x-2.4.x/cluster-logging/_index)。
+有关日志集成如何工作的背景信息，请参阅[集群管理部分](/docs/rancher2.5/logging/2.0.x-2.4.x/cluster-logging/_index)。
 
 Rancher 支持以下服务：
 
@@ -30,7 +30,7 @@ Rancher 支持以下服务：
 
 **注意：**您只能为每个集群或每个项目配置一个日志服务。
 
-只有[管理员](/docs/rancher2/admin-settings/rbac/global-permissions/_index)、[集群所有者或成员](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)，或者[项目所有者](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)可以配置 Rancher 将 Kubernetes 日志发送到日志服务。
+只有[管理员](/docs/rancher2.5/admin-settings/rbac/global-permissions/_index)、[集群所有者或成员](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)，或者[项目所有者](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)可以配置 Rancher 将 Kubernetes 日志发送到日志服务。
 
 ## 所需资源
 
@@ -54,7 +54,7 @@ Logging Driver: json-file
 
 你可以在集群级或项目级配置日志记录。
 
-- [集群日志](/docs/rancher2/cluster-admin/tools/_index)为集群中的每个 pod 写日志，也就是在所有的项目中。对于[RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)，它还为所有 Kubernetes 系统组件写日志。
+- [集群日志](/docs/rancher2.5/cluster-admin/tools/_index)为集群中的每个 pod 写日志，也就是在所有的项目中。对于[RKE 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)，它还为所有 Kubernetes 系统组件写日志。
 
 - 项目日志为指定项目中的每个 pod 写日志。
 
@@ -72,11 +72,11 @@ Logging Driver: json-file
 
 1.  选择一个日志记录服务并进入配置。详细配置请参考具体服务。Rancher 支持以下服务。
 
-    - [Elasticsearch](/docs/rancher2/logging/2.0.x-2.4.x/cluster-logging/elasticsearch/_index)
-    - [Splunk](/docs/rancher2/logging/2.0.x-2.4.x/cluster-logging/splunk/_index)
-    - [Kafka](/docs/rancher2/logging/2.0.x-2.4.x/cluster-logging/kafka/_index)
-    - [Syslog](/docs/rancher2/logging/2.0.x-2.4.x/cluster-logging/syslog/_index)
-    - [Fluentd](/docs/rancher2/logging/2.0.x-2.4.x/cluster-logging/fluentd/_index)
+    - [Elasticsearch](/docs/rancher2.5/logging/2.0.x-2.4.x/cluster-logging/elasticsearch/_index)
+    - [Splunk](/docs/rancher2.5/logging/2.0.x-2.4.x/cluster-logging/splunk/_index)
+    - [Kafka](/docs/rancher2.5/logging/2.0.x-2.4.x/cluster-logging/kafka/_index)
+    - [Syslog](/docs/rancher2.5/logging/2.0.x-2.4.x/cluster-logging/syslog/_index)
+    - [Fluentd](/docs/rancher2.5/logging/2.0.x-2.4.x/cluster-logging/fluentd/_index)
 
 1.  (可选)不使用用户界面配置日志服务，而是单击位于日志目标上方的**编辑为文件**，进入自定义高级配置。该链接只有在您选择日志服务后才可见。
 

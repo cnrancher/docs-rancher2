@@ -22,8 +22,8 @@ _Rancher v2.5 可用_
 
 Rancher v2.5 引入了 Fleet，这是一种跨集群部署应用的新方式。
 
-Fleet 是规模化的 GitOps，更多信息请参考[Fleet 部分](/docs/rancher2/deploy-across-clusters/fleet/_index)。
+Fleet 是规模化的 GitOps，更多信息请参考[Fleet 部分](/docs/rancher2.5/deploy-across-clusters/fleet/_index)。
 
 ## 多集群应用程序
 
-在 v2.5 之前的 Rancher 中，多集群应用程序功能用于跨集群部署应用程序。请参考文档[这里](/docs/rancher2/deploy-across-clusters/multi-cluster-apps/_index)。
+在 v2.5 之前的 Rancher 中，多集群应用程序功能用于跨集群部署应用程序。请参考文档[这里](/docs/rancher2.5/deploy-across-clusters/multi-cluster-apps/_index)。

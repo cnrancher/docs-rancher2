@@ -24,7 +24,7 @@ keywords:
 
 ## 节点模板
 
-[节点模板](/docs/rancher2/user-settings/node-templates/_index)负责 Rancher 中的节点配置和节点设置。从用户配置文件中，可以设置节点模板以定义在每个节点池中使用的模板。启用节点池后，可以确保每个节点池中都有所需数量的节点，并确保池中的所有节点都相同。
+[节点模板](/docs/rancher2.5/user-settings/node-templates/_index)负责 Rancher 中的节点配置和节点设置。从用户配置文件中，可以设置节点模板以定义在每个节点池中使用的模板。启用节点池后，可以确保每个节点池中都有所需数量的节点，并确保池中的所有节点都相同。
 
 ## Terraform
 
@@ -68,7 +68,7 @@ Terraform 是用扩展名为`.tf`的文件编写的。它是用 HashiCorp 配置
 
 本节描述了一种方法，可以使安全合规的配置文件为集群的标准配置文件。
 
-创建 [符合 CIS 基准的集群时](/docs/rancher2/security/_index)，有一个加密配置文件和一个审计日志配置文件。
+创建 [符合 CIS 基准的集群时](/docs/rancher2.5/security/_index)，有一个加密配置文件和一个审计日志配置文件。
 您的基础设施配置系统可以将这些文件写入磁盘。然后在 RKE 模板中，指定这些文件的位置，然后将加密配置文件和审计日志配置文件作为额外的挂载添加到`kube-api-server`。
 
 然后确保 RKE 模板中的`kube-api-server`标志使用符合 CIS 的配置文件。

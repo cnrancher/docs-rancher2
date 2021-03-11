@@ -15,20 +15,20 @@ keywords:
   - 部署项目级别应用
 ---
 
-在项目层级内部署应用商店应用时，显示的可用应用列表是由[商店作用范围](/docs/rancher2/helm-charts/legacy-catalogs/_index)决定的。
+在项目层级内部署应用商店应用时，显示的可用应用列表是由[商店作用范围](/docs/rancher2.5/helm-charts/legacy-catalogs/_index)决定的。
 
-如果您的应用使用 Ingress，则可以通过设置[全局 DNS](/docs/rancher2/helm-charts/legacy-catalogs/globaldns/_index) 将主机名编程到外部 DNS。
+如果您的应用使用 Ingress，则可以通过设置[全局 DNS](/docs/rancher2.5/helm-charts/legacy-catalogs/globaldns/_index) 将主机名编程到外部 DNS。
 
 ## 先决条件
 
 要在 Rancher2.x 中部署项目级别应用，必须满足以下一个权限：
 
-- 目标集群的[项目成员角色](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)，使您能够创建，读取，更新和删除工作负载
-- 目标集群的[集群所有者角色](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)
+- 目标集群的[项目成员角色](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)，使您能够创建，读取，更新和删除工作负载
+- 目标集群的[集群所有者角色](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)
 
 ## 从应用商店中创建应用
 
-启用[内置全局商店](/docs/rancher2/helm-charts/legacy-catalogs/built-in/_index)或[添加自定义商店](/docs/rancher2/helm-charts/legacy-catalogs/adding-catalogs/_index)之后，可以开始部署商店的应用。
+启用[内置全局商店](/docs/rancher2.5/helm-charts/legacy-catalogs/built-in/_index)或[添加自定义商店](/docs/rancher2.5/helm-charts/legacy-catalogs/adding-catalogs/_index)之后，可以开始部署商店的应用。
 
 1. 从**全局**视图中，导航到要开始部署应用的项目。
 
@@ -68,7 +68,7 @@ keywords:
 
 #### 原生 Helm Chart 的键值对
 
-对于原生的 Helm Chart(即，来自**Helm Stable**或**Helm Incubator**的应用或没有配置`questions.yml`文件的[自定义的应用商店](/docs/rancher2/helm-charts/legacy-catalogs/adding-catalogs/_index)，答案在“答案”部分中需要通过键值对的方式进行配置。这些答案用于覆盖应用的默认值。
+对于原生的 Helm Chart(即，来自**Helm Stable**或**Helm Incubator**的应用或没有配置`questions.yml`文件的[自定义的应用商店](/docs/rancher2.5/helm-charts/legacy-catalogs/adding-catalogs/_index)，答案在“答案”部分中需要通过键值对的方式进行配置。这些答案用于覆盖应用的默认值。
 
 ### 通过 YAML 配置参数
 

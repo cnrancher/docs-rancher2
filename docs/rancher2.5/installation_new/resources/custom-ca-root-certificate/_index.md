@@ -30,5 +30,5 @@ Rancher 需要访问的服务如下：
 
 有关使用私有 CA 证书启动 Rancher 容器的详细信息，请参阅安装文档：
 
-- [Docker 安装 自定义 CA 证书选项](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/advanced/_index)
-- [附加受信任 CA 的 Kubernetes 安装选项](/docs/rancher2/installation_new/resources/chart-options/_index)
+- [Docker 安装 自定义 CA 证书选项](/docs/rancher2.5/installation_new/other-installation-methods/single-node-docker/advanced/_index)
+- [附加受信任 CA 的 Kubernetes 安装选项](/docs/rancher2.5/installation_new/resources/chart-options/_index)

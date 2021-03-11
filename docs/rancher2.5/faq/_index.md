@@ -1,6 +1,6 @@
 ---
 title: Rancher 2 常见问题
-description: 本章 FAQ 将回答用户关于 Rancher v2.x 常见的问题，我们将保持持续更新。关于常见的技术问题，请参阅[常见的技术问题](/docs/rancher2/faq/technical/_index)。
+description: 本章 FAQ 将回答用户关于 Rancher v2.x 常见的问题，我们将保持持续更新。关于常见的技术问题，请参阅[常见的技术问题](/docs/rancher2.5/faq/technical/_index)。
 keywords:
   - rancher
   - rancher中文
@@ -17,7 +17,7 @@ keywords:
 
 本文罗列了用户在使用 Rancher 的过程中出现的常见问题，我们会持续更新常见问题。
 
-关于常见的技术问题，请参阅[常见的技术问题](/docs/rancher2/faq/technical/_index)。
+关于常见的技术问题，请参阅[常见的技术问题](/docs/rancher2.5/faq/technical/_index)。
 
 **Rancher v2.x 支持 Docker Swarm 和 Mesos 作为环境类型吗？**
 
@@ -29,11 +29,11 @@ keywords:
 
 **Rancher 支持 Windows 容器吗？**
 
-自 Rancher 2.3.0 起，我们支持在 Windows Server 1809 服务器上运行 Windows 容器。关于如何创建一个包含 Windows Workder 节点的集群，请参见[配置自定义 Windows 集群](/docs/rancher2/cluster-provisioning/rke-clusters/windows-clusters/_index)章节。
+自 Rancher 2.3.0 起，我们支持在 Windows Server 1809 服务器上运行 Windows 容器。关于如何创建一个包含 Windows Workder 节点的集群，请参见[配置自定义 Windows 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/windows-clusters/_index)章节。
 
 **Rancher 支持 Istio 服务网格吗？**
 
-自 Rancher 2.3.0 起，我们支持 [Istio](/docs/rancher2/istio/2.3.x-2.4.x/_index)。
+自 Rancher 2.3.0 起，我们支持 [Istio](/docs/rancher2.5/istio/2.3.x-2.4.x/_index)。
 
 另外，Istio 也可以通过 Rancher 的 mico-PaaS 产品 Rio 来使用。Rio 可以在 Rancher 或者任何通过 CNCF 一致性审核的 Kubernetes 集群上运行。详细信息可以参考 [Rio 网站](https://rio.io/)。
 

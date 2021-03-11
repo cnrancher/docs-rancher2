@@ -16,7 +16,7 @@ keywords:
   - 备份 Rancher
 ---
 
-在本节中，你将学习如何备份运行在任何 Kubernetes 集群上的 Rancher。要备份通过 Docker 安装的 Rancher，请参考[单节点备份](/docs/rancher2/backups/2.5/docker-installs/docker-backups/_index)的说明。
+在本节中，你将学习如何备份运行在任何 Kubernetes 集群上的 Rancher。要备份通过 Docker 安装的 Rancher，请参考[单节点备份](/docs/rancher2.5/backups/2.5/docker-installs/docker-backups/_index)的说明。
 
 ## 先决条件
 
@@ -31,7 +31,7 @@ Rancher 版本必须是 v2.5.0 及以上。
 1. 在 Rancher UI 中，进入**Cluster Explorer**。
 1. 单击 **Apps**。
 1. 单击 `Rancher Backups`。
-1. 配置默认的存储位置。有关帮助，请参阅[存储配置部分](/docs/rancher2/backups/2.5/configuration/storage-config/_index)。
+1. 配置默认的存储位置。有关帮助，请参阅[存储配置部分](/docs/rancher2.5/backups/2.5/configuration/storage-config/_index)。
 
 ## 步骤 2：执行备份
 

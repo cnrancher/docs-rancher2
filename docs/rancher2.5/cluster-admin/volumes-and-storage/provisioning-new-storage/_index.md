@@ -18,12 +18,12 @@ keywords:
 
 本章节描述了如何为 Rancher 中的工作负载配置新的持久化存储。
 
-> 本章节假定您已了解 Kubernetes 持久卷和持久卷声明的概念，如果您想了解持久卷和持久卷声明的工作原理，请参考[存储是如何工作的](/docs/rancher2/cluster-admin/volumes-and-storage/how-storage-works/_index)。
+> 本章节假定您已了解 Kubernetes 持久卷和持久卷声明的概念，如果您想了解持久卷和持久卷声明的工作原理，请参考[存储是如何工作的](/docs/rancher2.5/cluster-admin/volumes-and-storage/how-storage-works/_index)。
 
 ## 先决条件
 
-- 配置持久化存储前，请检查您的账户是否有 `管理卷（Manage Volumes）` 权限，具有该权限的[角色](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)可以配置持久化存储。
-- 如果要在基础设施提供商托管的集群中设置存储，则需要保证存储和集群主机是来自同一个基础设施提供商。并且必须启用 Cloud Provider。有关启用 Cloud Provider 的详细信息，请参阅[文档](/docs/rancher2/cluster-provisioning/rke-clusters/cloud-providers/_index)。
+- 配置持久化存储前，请检查您的账户是否有 `管理卷（Manage Volumes）` 权限，具有该权限的[角色](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)可以配置持久化存储。
+- 如果要在基础设施提供商托管的集群中设置存储，则需要保证存储和集群主机是来自同一个基础设施提供商。并且必须启用 Cloud Provider。有关启用 Cloud Provider 的详细信息，请参阅[文档](/docs/rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/_index)。
 - 确保存储提供者是已启用的。
 
 Rancher 默认启用以下云服务存储卷：
@@ -40,7 +40,7 @@ Rancher 默认启用以下云服务存储卷：
 | Network File System    | `nfs`                  |
 | hostPath               | `host-path`            |
 
-如果需要使用不在上述列表内的存储提供者，您需要使用功能开关来[启用不被默认启动存储驱动](/docs/rancher2/installation_new/resources/feature-flags/enable-not-default-storage-drivers/_index)。不在上述列表内的存储服务没有经过 Rancher 的测试和验证，属于实验性功能，Rancher 不能保证使用过程中是否会出现问题，请谨慎使用不在上表内的存储服务。
+如果需要使用不在上述列表内的存储提供者，您需要使用功能开关来[启用不被默认启动存储驱动](/docs/rancher2.5/installation_new/resources/feature-flags/enable-not-default-storage-drivers/_index)。不在上述列表内的存储服务没有经过 Rancher 的测试和验证，属于实验性功能，Rancher 不能保证使用过程中是否会出现问题，请谨慎使用不在上表内的存储服务。
 
 ## 配置存储类
 
@@ -75,7 +75,7 @@ Rancher 默认启用以下云服务存储卷：
 
 以下的步骤描述了如何将 PVC 分配给有状态的新工作负载：
 
-1. 按照[部署工作负载](/docs/rancher2/k8s-in-rancher/workloads/deploy-workloads/_index)的流程来创建工作负载.
+1. 按照[部署工作负载](/docs/rancher2.5/k8s-in-rancher/workloads/deploy-workloads/_index)的流程来创建工作负载.
 1. 在**工作负载类型**中，选择**StatefulSet**，Pod 数量 为 1。
 1. 展开**卷**列表，并单击**添加卷**，选择**添加一个新的持久卷（声明）**。
 1. 在**持久卷声明**中，选择附加到存储类的新创建的持久卷声明。

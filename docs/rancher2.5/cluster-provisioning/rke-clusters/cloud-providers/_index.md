@@ -33,19 +33,19 @@ Rancher 支持的 Cloud Provider 包括：
 
 ## 设置 Amazon Cloud Provider
 
-有关启用 Amazon Cloud Provider 的详细信息，请参阅[此页面](/docs/rancher2/cluster-provisioning/rke-clusters/cloud-providers/amazon/_index)。
+有关启用 Amazon Cloud Provider 的详细信息，请参阅[此页面](/docs/rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/amazon/_index)。
 
 ## 设置 Azure Cloud Provider
 
-有关启用 Azure Cloud Provider 的详细信息，请参阅[此页面](/docs/rancher2/cluster-provisioning/rke-clusters/cloud-providers/azure/_index)。
+有关启用 Azure Cloud Provider 的详细信息，请参阅[此页面](/docs/rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/azure/_index)。
 
 ## 设置 GCE Cloud Provider
 
-有关启用 Google Compute Engine Cloud Provider 的详细信息，请参阅[此页面](/docs/rancher2/cluster-provisioning/rke-clusters/cloud-providers/gce/_index)。
+有关启用 Google Compute Engine Cloud Provider 的详细信息，请参阅[此页面](/docs/rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/gce/_index)。
 
 ### 设置 vSphere Cloud Provider
 
-有关启用 vSphere Cloud Provider 的详细信息，请参阅[此页面](/docs/rancher2/cluster-provisioning/rke-clusters/cloud-providers/vsphere/_index)。
+有关启用 vSphere Cloud Provider 的详细信息，请参阅[此页面](/docs/rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/vsphere/_index)。
 
 ## 设置 自定义 Cloud Provider
 

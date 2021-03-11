@@ -102,7 +102,7 @@ etcdctl defrag
 Finished defragmenting etcd member[127.0.0.1:2379]
 ```
 
-- [释放数据库空间](/docs/rancher2/cluster-admin/etcd-compact/_index)
+- [释放数据库空间](/docs/rancher2.5/cluster-admin/etcd-compact/_index)
 
 ## 修改网络优先级
 

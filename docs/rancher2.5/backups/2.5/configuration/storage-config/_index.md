@@ -40,7 +40,7 @@ keywords:
 
 通过选择 StorageClass 选项安装 `rancher-backup` chart，将创建一个 Persistent Volume Claim(PVC)，Kubernetes 又会动态地提供一个 Persistent Volume(PV)，所有的备份都将默认保存在这个 PV 中。
 
-关于创建存储类的信息，请参考[本节](/docs/rancher2/cluster-admin/volumes-and-storage/provisioning-new-storage/_index#1-add-a-storage-class-and-configure-it-to-use-your-storag-provider)
+关于创建存储类的信息，请参考[本节](/docs/rancher2.5/cluster-admin/volumes-and-storage/provisioning-new-storage/_index#1-add-a-storage-class-and-configure-it-to-use-your-storag-provider)
 
 :::important 重要：
 强烈建议使用回收策略为 "Retain" 的 StorageClass。否则，如果 `rancher-backup` chart 创建的 PVC 被删除（无论是在应用程序升级期间，还是意外），PV 也会被删除，这意味着所有保存在其中的备份都会被删除。
@@ -49,7 +49,7 @@ keywords:
 
 ### 现有的持久卷
 
-选择一个将用于存储备份的现有持久卷（PV）。有关在 Rancher 中创建 PersistentVolumes 的信息，请参阅[本节。](/docs/rancher2/cluster-admin/volumes-and-storage/attaching-existing-storage/_index#2-add-a-persistent-volume-that-refers-to-the-persistent-storage)
+选择一个将用于存储备份的现有持久卷（PV）。有关在 Rancher 中创建 PersistentVolumes 的信息，请参阅[本节。](/docs/rancher2.5/cluster-admin/volumes-and-storage/attaching-existing-storage/_index#2-add-a-persistent-volume-that-refers-to-the-persistent-storage)
 
 :::important 重要：
 强烈建议使用回收策略为 "Retain" 的持久卷。否则，如果 `rancher-backup` chart 创建的 PVC 被删除（无论是在应用程序升级期间，还是意外），PV 也会被删除，这意味着所有保存在其中的备份都会被删除。

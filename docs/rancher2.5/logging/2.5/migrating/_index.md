@@ -26,7 +26,7 @@ v2.5 之前的用户界面现在被称为**集群管理器**。v2.5+的仪表板
 
 ## 安装
 
-要在 Rancher v2.5+中安装日志，请参考[安装说明](/docs/rancher2/logging/2.5/_index)。
+要在 Rancher v2.5+中安装日志，请参考[安装说明](/docs/rancher2.5/logging/2.5/_index)。
 
 ## 术语
 

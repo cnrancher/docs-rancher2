@@ -38,7 +38,7 @@ _Sidecar_ 是在 Pod 中延伸或增强主容器的容器。主容器和 Sidecar
 
 1. 在 **Docker 镜像**字段，输入要部署以支持主容器的 Docker 镜像的名称。在部署期间，Rancher 将从镜像库中获取与输入完全相同的镜像。
 
-1. 设置其余选项。详情请参阅[部署工作负载](/docs/rancher2/k8s-in-rancher/workloads/deploy-workloads/_index)。
+1. 设置其余选项。详情请参阅[部署工作负载](/docs/rancher2.5/k8s-in-rancher/workloads/deploy-workloads/_index)。
 
 1. 单击 **启动**。
 

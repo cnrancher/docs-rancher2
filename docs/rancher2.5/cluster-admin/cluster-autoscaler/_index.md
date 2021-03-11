@@ -37,4 +37,4 @@ Cluster Autoscaler 提供对不同云提供商的支持。有关更多信息，�
 
 ### 在 AWS 上设置集群 autoscaler
 
-有关在 AWS 上运行集群弹性伸缩的详细操作指导，请参考[本页](/docs/rancher2/cluster-admin/cluster-autoscaler/amazon/_index)。
+有关在 AWS 上运行集群弹性伸缩的详细操作指导，请参考[本页](/docs/rancher2.5/cluster-admin/cluster-autoscaler/amazon/_index)。

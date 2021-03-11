@@ -16,7 +16,7 @@ keywords:
   - 模板创建者权限
 ---
 
-系统管理员有权创建 RKE 模板，只有系统管理员可以将该权限授予其他用户。有关管理员权限的详细信息，请参阅[全局权限文档](/docs/rancher2/admin-settings/rbac/global-permissions/_index)。
+系统管理员有权创建 RKE 模板，只有系统管理员可以将该权限授予其他用户。有关管理员权限的详细信息，请参阅[全局权限文档](/docs/rancher2.5/admin-settings/rbac/global-permissions/_index)。
 
 ## 授予用户创建模板的权限
 
@@ -24,7 +24,7 @@ keywords:
 
 系统管理员具有创建模板的全局权限，只有系统管理员可以将该权限授予其他用户。
 
-有关允许用户修改现有模板的信息，请参阅[共享模板](/docs/rancher2/admin-settings/rke-templates/template-access-and-sharing/_index)。
+有关允许用户修改现有模板的信息，请参阅[共享模板](/docs/rancher2.5/admin-settings/rke-templates/template-access-and-sharing/_index)。
 
 管理员可以通过两种方式授予用户创建 RKE 模板的权限：
 

@@ -4,7 +4,7 @@ title: 3. 安装Rancher
 
 ## 概述
 
-现在您已经有了一个正在运行的 RKE 集群，您可以在其中安装 Rancher。出于安全考虑，所有到 Rancher 的流量必须用 TLS 加密。在本教程中，您将通过[cert-manager](https://cert-manager.io/)自动签发自签名证书。在实际使用情况下，您可能会使用 Let's Encrypt 或提供自己的证书。更多细节请参见[SSL 配置](/docs/rancher2/installation/k8s-install/helm-rancher/_index)。
+现在您已经有了一个正在运行的 RKE 集群，您可以在其中安装 Rancher。出于安全考虑，所有到 Rancher 的流量必须用 TLS 加密。在本教程中，您将通过[cert-manager](https://cert-manager.io/)自动签发自签名证书。在实际使用情况下，您可能会使用 Let's Encrypt 或提供自己的证书。更多细节请参见[SSL 配置](/docs/rancher2.5/installation/k8s-install/helm-rancher/_index)。
 
 > **注意：**以下步骤基于 Helm 3 写作。
 
@@ -76,12 +76,12 @@ kubectl rollout status deployment -n cattle-system rancher
 
 现在你可以导航到`https://rancher.example.com`，开始使用 Rancher。
 
-> **注意：**如果您不打算发送遥测数据，请在初始登录时选择退出[遥测](/docs/rancher2/faq/telemetry/_index)。如果在空口环境中保持这个状态，可能会导致无法成功打开 socket 的问题。
+> **注意：**如果您不打算发送遥测数据，请在初始登录时选择退出[遥测](/docs/rancher2.5/faq/telemetry/_index)。如果在空口环境中保持这个状态，可能会导致无法成功打开 socket 的问题。
 
 ## 相关链接
 
 These resources could be helpful when installing Rancher:
 
-- [高可用安装 Helm Chart 选项](/docs/rancher2/installation/options/chart-options/_index)
-- [添加 TLS 密文](/docs/rancher2/installation/options/tls-secrets/_index)
-- [Rancher Server 所在 Kubernetes 集群的问题排查](/docs/rancher2/installation/options/troubleshooting/_index)
+- [高可用安装 Helm Chart 选项](/docs/rancher2.5/installation/options/chart-options/_index)
+- [添加 TLS 密文](/docs/rancher2.5/installation/options/tls-secrets/_index)
+- [Rancher Server 所在 Kubernetes 集群的问题排查](/docs/rancher2.5/installation/options/troubleshooting/_index)

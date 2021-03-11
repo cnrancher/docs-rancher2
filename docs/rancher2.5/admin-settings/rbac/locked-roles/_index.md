@@ -37,7 +37,7 @@ keywords:
 
 您可以在两种情况下锁定角色：
 
-- [添加自定义角色](/docs/rancher2/admin-settings/rbac/default-custom-roles/_index)时。
+- [添加自定义角色](/docs/rancher2.5/admin-settings/rbac/default-custom-roles/_index)时。
 - 编辑现有角色时（请参见下文）。
 
 1. 从**全局**视图中，选择**安全**>**角色**。

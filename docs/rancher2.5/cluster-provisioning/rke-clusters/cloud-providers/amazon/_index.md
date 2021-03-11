@@ -34,7 +34,7 @@ keywords:
 
 创建 Amazon EC2 集群时，必须在创建**节点模板**时填写创建的 IAM 角色的**IAM 实例配置文件名称**（而不是 ARN）。
 
-创建[自定义集群](/docs/rancher2/cluster-provisioning/rke-clusters/custom-nodes/_index)时，必须手动将 IAM 角色附加到实例。
+创建[自定义集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/custom-nodes/_index)时，必须手动将 IAM 角色附加到实例。
 
 具有`controlplane`角色的节点的 IAM 策略：
 
@@ -141,7 +141,7 @@ keywords:
 
   > **注意：** 不要标记多个安全组。创建弹性负载均衡器时，标记多个组会产生错误。
 
-创建 [Amazon EC2 集群](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/ec2/_index)时，Rancher 将为创建的节点自动设置`ClusterID`。其他资源仍然需要手动标记。
+创建 [Amazon EC2 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/ec2/_index)时，Rancher 将为创建的节点自动设置`ClusterID`。其他资源仍然需要手动标记。
 
 应该使用的标签是：
 

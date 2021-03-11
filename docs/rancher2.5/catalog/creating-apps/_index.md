@@ -128,4 +128,4 @@ rancher_max_version: 2.3.99
 
 ## 教程：创建应用的示例
 
-有关将自定义应用添加到自定义应用商店的教程，请参阅[此页面](/docs/rancher2/helm-charts/legacy-catalogs/tutorial/_index)。
+有关将自定义应用添加到自定义应用商店的教程，请参阅[此页面](/docs/rancher2.5/helm-charts/legacy-catalogs/tutorial/_index)。

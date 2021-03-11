@@ -21,15 +21,15 @@ keywords:
 
 为了使您的集群和应用程序保持健康，并推动您的组织生产力向前发展，您需要随时了解集群和项目中发生的事件，包括计划内和计划外的事件。当事件发生时，您的告警会被触发，并向您发送通知。然后，如果有必要，您可以通过纠正行动进行跟进。
 
-通知器和告警建立在[Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager/)之上。利用这些工具，Rancher 可以通知 [集群所有者](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index) 和 [项目所有者](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index) 他们需要处理的事件。
+通知器和告警建立在[Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager/)之上。利用这些工具，Rancher 可以通知 [集群所有者](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index) 和 [项目所有者](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index) 他们需要处理的事件。
 
-在接收告警之前，必须在集群级别配置一个或多个 [通知](/docs/rancher2/cluster-admin/tools/notifiers/_index)。
+在接收告警之前，必须在集群级别配置一个或多个 [通知](/docs/rancher2.5/cluster-admin/tools/notifiers/_index)。
 
-只有[管理员](/docs/rancher2/admin-settings/rbac/global-permissions/_index)、[集群所有者或成员](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)，或者[项目所有者](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)可以管理项目提醒。
+只有[管理员](/docs/rancher2.5/admin-settings/rbac/global-permissions/_index)、[集群所有者或成员](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)，或者[项目所有者](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)可以管理项目提醒。
 
 ## 告警范围
 
-告警的范围可以在[集群级别](/docs/rancher2/cluster-admin/tools/alerts/_index)或项目级别设置。
+告警的范围可以在[集群级别](/docs/rancher2.5/cluster-admin/tools/alerts/_index)或项目级别设置。
 
 在项目级别，Rancher 会监控特定的部署，并在发生以下几种事件时发送告警：
 
@@ -40,14 +40,14 @@ keywords:
 
 ## 默认项目级警报
 
-当你为项目启用监控时，会提供一些项目级的告警。如果在集群级别为这些告警配置了[通知](/docs/rancher2/cluster-admin/tools/notifiers/_index)，您就可以接收这些告警。
+当你为项目启用监控时，会提供一些项目级的告警。如果在集群级别为这些告警配置了[通知](/docs/rancher2.5/cluster-admin/tools/notifiers/_index)，您就可以接收这些告警。
 
 | 告警                              | 说明                                                                                                                                                                    |
 | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Less than half workload available | 如果只有不到一半的工作负载可用，就会触发关键告警，其依据是键为`app`，值为`workload`的工作负载。                                                                         |
 | Memory usage close to the quota   | 如果工作负载的内存使用量超过了为工作负载设置的内存资源配额，就会触发警告告警。如果您进入**安全和主机配置**选项卡下的工作负载，您可以在 Rancher 用户界面中看到内存限制。 |
 
-关于其他默认告警的信息，请参考[集群级告警](/docs/rancher2/cluster-admin/tools/alerts/default-alerts/_index)一节。
+关于其他默认告警的信息，请参考[集群级告警](/docs/rancher2.5/cluster-admin/tools/alerts/default-alerts/_index)一节。
 
 ## 添加项目告警
 
@@ -130,13 +130,13 @@ keywords:
 
 从 v2.2.4 开始提供。
 
-如果启用了[项目监控](/docs/rancher2/project-admin/tools/_index)，该告警类型可以监控 Prometheus 表达式查询的超载情况。
+如果启用了[项目监控](/docs/rancher2.5/project-admin/tools/_index)，该告警类型可以监控 Prometheus 表达式查询的超载情况。
 
 1. 输入或选择一个**表达式**，下拉显示来自 Prometheus 的原始指标，包括。
 
 - [**容器**](https://github.com/google/cadvisor)
 - [**Kubernetes 资源**](https://github.com/kubernetes/kube-state-metrics)
-- [**自定义**](/docs/rancher2/project-admin/tools/monitoring/_index)
+- [**自定义**](/docs/rancher2.5/project-admin/tools/monitoring/_index)
 - [**项目级 Grafana**](https://grafana.com/docs/grafana/latest/administration/view-server/internal-metrics/#internal-grafana-metrics)
 - **项目级普罗米修斯**
 
@@ -171,7 +171,7 @@ keywords:
 
 1.  继续向组中添加更多**告警规则**。
 
-1.  最后，选择向你发送告警的[通知](/docs/rancher2/cluster-admin/tools/notifiers/_index)。
+1.  最后，选择向你发送告警的[通知](/docs/rancher2.5/cluster-admin/tools/notifiers/_index)。
 
     - 你可以设置多个通知器。
     - 你可以随时更改通知者的收件人。

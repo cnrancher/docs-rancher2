@@ -27,4 +27,4 @@ keywords:
 
 **结果：**持久化存储创建了 EBS 持久化存储。
 
-关于如何在 Rancher 里创建新的存储，可以浏览[配置现有的存储](/docs/rancher2/cluster-admin/volumes-and-storage/attaching-existing-storage/_index)。
+关于如何在 Rancher 里创建新的存储，可以浏览[配置现有的存储](/docs/rancher2.5/cluster-admin/volumes-and-storage/attaching-existing-storage/_index)。

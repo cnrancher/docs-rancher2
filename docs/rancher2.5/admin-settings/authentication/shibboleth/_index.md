@@ -26,7 +26,7 @@ _自 v2.4.0 起可用_
 
 如果您将 OpenLDAP 配置为 Shibboleth 的后端，它将返回一个 SAML 断言给 Rancher，其中包含用户的属性（其中包括用户所在的组的信息）。 然后，通过身份验证的用户将能够访问其所在的组有权访问的 Rancher 中的资源。
 
-> 本节中的说明假定您了解 Rancher，Shibboleth 和 OpenLDAP 是如何协同工作的。有关其工作原理的详细说明，请参阅[本页](/docs/rancher2/admin-settings/authentication/shibboleth/about/_index)。
+> 本节中的说明假定您了解 Rancher，Shibboleth 和 OpenLDAP 是如何协同工作的。有关其工作原理的详细说明，请参阅[本页](/docs/rancher2.5/admin-settings/authentication/shibboleth/about/_index)。
 
 ## 在 Rancher 中设置 Shibboleth
 
@@ -104,9 +104,9 @@ _自 v2.4.0 起可用_
 
 ### 在 Rancher 中配置 OpenLDAP
 
-配置 OpenLDAP 服务器，组和用户的设置。有关填写每个字段的帮助，请参考[配置参考](/docs/rancher2/admin-settings/authentication/openldap/openldap-config/_index)。注意，嵌套的组成员身份不适用于 Shibboleth。
+配置 OpenLDAP 服务器，组和用户的设置。有关填写每个字段的帮助，请参考[配置参考](/docs/rancher2.5/admin-settings/authentication/openldap/openldap-config/_index)。注意，嵌套的组成员身份不适用于 Shibboleth。
 
-> 在进行配置之前，请阅读并了解[外部身份验证配置和用户主体](/docs/rancher2/admin-settings/authentication/_index)
+> 在进行配置之前，请阅读并了解[外部身份验证配置和用户主体](/docs/rancher2.5/admin-settings/authentication/_index)
 
 1. 使用默认本地`admin`帐户登录 Rancher UI。
 
@@ -116,4 +116,4 @@ _自 v2.4.0 起可用_
 
 # 故障排查
 
-如果在测试 Rancher 与 OpenLDAP 服务器的连接时遇到问题，请首先仔细检查输入的服务帐户的凭据以及搜索起点配置。您也可以检查 Rancher 日志以帮助查明问题原因。调试日志可能包含有关该错误的更多详细信息。请参阅本文档中的[如何启用 debug 级别日志](/docs/rancher2/faq/technical/_index)。
+如果在测试 Rancher 与 OpenLDAP 服务器的连接时遇到问题，请首先仔细检查输入的服务帐户的凭据以及搜索起点配置。您也可以检查 Rancher 日志以帮助查明问题原因。调试日志可能包含有关该错误的更多详细信息。请参阅本文档中的[如何启用 debug 级别日志](/docs/rancher2.5/faq/technical/_index)。

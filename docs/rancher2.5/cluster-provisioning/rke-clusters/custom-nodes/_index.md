@@ -18,7 +18,7 @@ keywords:
 
 当您创建自定义集群时，Rancher 使用 RKE（Rancher Kubernetes Engine）在本地裸金属服务器、本地虚拟机或云提供商托管的任何节点中创建 Kubernetes 集群。
 
-要使用此选项，您需要访问将要在 Kubernetes 集群中使用的服务器。根据[要求](/docs/rancher2/cluster-provisioning/node-requirements/_index)配置每个服务器，其中包括一些硬件规格和 Docker 版本等。在每台服务器上安装 Docker 后，运行 Rancher UI 中提供的命令，将每台服务器转换为 Kubernetes 节点。
+要使用此选项，您需要访问将要在 Kubernetes 集群中使用的服务器。根据[要求](/docs/rancher2.5/cluster-provisioning/node-requirements/_index)配置每个服务器，其中包括一些硬件规格和 Docker 版本等。在每台服务器上安装 Docker 后，运行 Rancher UI 中提供的命令，将每台服务器转换为 Kubernetes 节点。
 
 本节介绍如何设置自定义集群。
 
@@ -26,7 +26,7 @@ keywords:
 
 > **想要使用 Windows 主机作为 Kubernetes Worker 节点？**
 >
-> 在开始之前，请参阅[配置 Windows 自定义集群](/docs/rancher2/cluster-provisioning/rke-clusters/windows-clusters/_index)。
+> 在开始之前，请参阅[配置 Windows 自定义集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/windows-clusters/_index)。
 
 ### 1. 设置 Linux 主机
 
@@ -37,10 +37,10 @@ keywords:
 - 裸金属服务器
 
 :::important 重要
-如果要重复使用以前的自定义集群中的节点，再次在集群中使用之前请[清理节点](/docs/rancher2/faq/removing-rancher/_index)。如果重复使用尚未清理的节点，则启动集群可能会失败。
+如果要重复使用以前的自定义集群中的节点，再次在集群中使用之前请[清理节点](/docs/rancher2.5/faq/removing-rancher/_index)。如果重复使用尚未清理的节点，则启动集群可能会失败。
 :::
 
-再次检查节点是否满足[安装要求](/docs/rancher2/cluster-provisioning/node-requirements/_index)和[生产就绪集群检查清单](/docs/rancher2/cluster-provisioning/production/_index)。
+再次检查节点是否满足[安装要求](/docs/rancher2.5/cluster-provisioning/node-requirements/_index)和[生产就绪集群检查清单](/docs/rancher2.5/cluster-provisioning/production/_index)。
 
 ### 2. 创建自定义集群
 
@@ -59,8 +59,8 @@ keywords:
 
    > **使用 Windows 主机作为 Kubernetes Worker 节点？**
    >
-   > - 请参阅[启用 Windows 支持选项](/docs/rancher2/cluster-provisioning/rke-clusters/windows-clusters/_index)。
-   > - 唯一可用于支持 Windows 的集群的网络插件是 Flannel。请参阅[网络选项](/docs/rancher2/cluster-provisioning/rke-clusters/windows-clusters/_index)。
+   > - 请参阅[启用 Windows 支持选项](/docs/rancher2.5/cluster-provisioning/rke-clusters/windows-clusters/_index)。
+   > - 唯一可用于支持 Windows 的集群的网络插件是 Flannel。请参阅[网络选项](/docs/rancher2.5/cluster-provisioning/rke-clusters/windows-clusters/_index)。
 
 6. 单击 **下一步** 。
 
@@ -68,10 +68,10 @@ keywords:
 
    > **注意：**
    >
-   > - 使用 Windows 主机作为 Kubernetes Worker 节点? 请参阅[节点配置](/docs/rancher2/cluster-provisioning/rke-clusters/windows-clusters/_index)。
+   > - 使用 Windows 主机作为 Kubernetes Worker 节点? 请参阅[节点配置](/docs/rancher2.5/cluster-provisioning/rke-clusters/windows-clusters/_index)。
    > - 裸金属服务器提醒：如果您计划将裸金属服务器专用于每个角色，则必须为每个角色配置裸金属服务器（即配置多个裸金属服务器）。
 
-8. **可选**：单击**[显示高级选项](/docs/rancher2/cluster-provisioning/rke-clusters/custom-nodes/agent-options/_index)**以指定注册节点时要使用的 IP 地址、重写节点的主机名或添加[标签](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)或[污点](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)到节点上。
+8. **可选**：单击**[显示高级选项](/docs/rancher2.5/cluster-provisioning/rke-clusters/custom-nodes/agent-options/_index)**以指定注册节点时要使用的 IP 地址、重写节点的主机名或添加[标签](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)或[污点](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)到节点上。
 
 9. 复制屏幕上显示的命令到剪贴板。
 
@@ -121,6 +121,6 @@ Key=kubernetes.io/cluster/CLUSTERID, Value=shared
 
 创建集群后，您可以通过 Rancher UI 访问它。作为最佳实践，我们建议同时设置以下访问集群的替代方法：
 
-- **通过 kubectl CLI 访问集群：** 请按照[这些步骤](/docs/rancher2/cluster-admin/cluster-access/kubectl/_index)来通过 kubectl 访问您的集群。在这种情况下，您将通过 Rancher Server 的身份验证代理进行身份验证，然后 Rancher 会将您连接到下游集群。此方法使您无需 Rancher UI 即可管理集群。
+- **通过 kubectl CLI 访问集群：** 请按照[这些步骤](/docs/rancher2.5/cluster-admin/cluster-access/kubectl/_index)来通过 kubectl 访问您的集群。在这种情况下，您将通过 Rancher Server 的身份验证代理进行身份验证，然后 Rancher 会将您连接到下游集群。此方法使您无需 Rancher UI 即可管理集群。
 
-- **通过 kubectl CLI 和授权的集群地址访问您的集群：** 请按照[这些步骤](/docs/rancher2/cluster-admin/cluster-access/kubectl/_index)来通过 kubectl 直接访问您的集群，而不需要通过 Rancher 进行认证。我们建议您设定此方法访问集群，这样在您无法连接 Rancher 时您仍然能够访问集群。
+- **通过 kubectl CLI 和授权的集群地址访问您的集群：** 请按照[这些步骤](/docs/rancher2.5/cluster-admin/cluster-access/kubectl/_index)来通过 kubectl 直接访问您的集群，而不需要通过 Rancher 进行认证。我们建议您设定此方法访问集群，这样在您无法连接 Rancher 时您仍然能够访问集群。

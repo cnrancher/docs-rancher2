@@ -8,7 +8,7 @@ _Rancher v2.1.0 或更新版本可用_
 
 本文描述了如何在现有项目中创建资源配额的操作指导。
 
-新建项目的时候也可以配置资源配额，详情请见[新建项目](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)。
+新建项目的时候也可以配置资源配额，详情请见[新建项目](/docs/rancher2.5/cluster-admin/projects-and-namespaces/_index)。
 
 > Rancher 的资源配额包括了[原生 Kubernetes](https://kubernetes.io/docs/concepts/policy/resource-quotas/)的资源配额功能。但是 Rancher 把资源配额扩展到了项目层级。请参考下文了解如何配置项目级的资源配额。
 

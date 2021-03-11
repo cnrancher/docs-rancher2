@@ -24,7 +24,7 @@ _从 v2.4.0 开始提供_
 
 ## 先决条件
 
-- 您必须是[管理员](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)。
+- 您必须是[管理员](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)。
 
 - Rancher 只能在使用 RKE 创建的集群上运行安全扫描，其中包括自定义集群和 Rancher 在 Amazon EC2 或 GCE 等基础设施提供商中创建的集群。导入的集群和托管的 Kubernetes 提供商中的集群不能被 Rancher 扫描。
 
@@ -108,7 +108,7 @@ Rancher 为集群扫描提供了一组警报，默认情况下没有配置为具
 - 完成了预定的集群扫描
 - 预定的集群扫描有故障
 
-> **前提条件：**您需要在配置、发送或接收警报之前配置[通知](/docs/rancher2/cluster-admin/tools/notifiers/_index)。
+> **前提条件：**您需要在配置、发送或接收警报之前配置[通知](/docs/rancher2.5/cluster-admin/tools/notifiers/_index)。
 
 要激活 CIS 扫描结果的现有警报。
 
@@ -130,11 +130,11 @@ Rancher 为集群扫描提供了一组警报，默认情况下没有配置为具
 1. 输入警报的名称。
 1. 在 **是**字段中，设置警报在扫描完成或扫描失败时触发。
 1. 在 **Send a** 字段中，将警报设置为 **Critical、** **Warning、** 或 **Info** 警报级别。
-1. 为警报选择一个[通知](/docs/rancher2/cluster-admin/tools/notifiers/_index)。
+1. 为警报选择一个[通知](/docs/rancher2.5/cluster-admin/tools/notifiers/_index)。
 
 **结果：**创建并激活了警报。当扫描在集群上运行且活动的警报满足条件时，将触发通知。
 
-有关警报的更多信息，请参阅[通知](/docs/rancher2/cluster-admin/tools/notifiers/_index)。
+有关警报的更多信息，请参阅[通知](/docs/rancher2.5/cluster-admin/tools/notifiers/_index)。
 
 ## 删除报告
 
@@ -152,4 +152,4 @@ Rancher 为集群扫描提供了一组警报，默认情况下没有配置为具
 
 ## 跳过和不适用的测试清单
 
-关于跳过的和不适用的测试清单，请参考[跳过和不适用的测试](/docs/rancher2/cis-scans/2.4/skipped-tests/_index)。
+关于跳过的和不适用的测试清单，请参考[跳过和不适用的测试](/docs/rancher2.5/cis-scans/2.4/skipped-tests/_index)。

@@ -17,7 +17,7 @@ keywords:
   - 证书
 ---
 
-在 Rancher 和 Kubernetes 中创建 Ingress 时，如果需要对 HTTP 通信进行加密，您必须提供包含 TLS 私钥和证书的密文。该私钥和证书用于加密和解密通过 Ingress 进行的通信。您可以导航到某个[项目](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)或命名空间](/docs/rancher2/cluster-admin/projects-and-namespaces/\_index)，然后上传证书，以使证书可供 Ingress 使用。然后，您可以将证书添加到 Ingress 中。
+在 Rancher 和 Kubernetes 中创建 Ingress 时，如果需要对 HTTP 通信进行加密，您必须提供包含 TLS 私钥和证书的密文。该私钥和证书用于加密和解密通过 Ingress 进行的通信。您可以导航到某个[项目](/docs/rancher2.5/cluster-admin/projects-and-namespaces/_index)或命名空间](/docs/rancher2.5/cluster-admin/projects-and-namespaces/\_index)，然后上传证书，以使证书可供 Ingress 使用。然后，您可以将证书添加到 Ingress 中。
 
 ## 添加证书
 
@@ -55,4 +55,4 @@ keywords:
 
 ## 添加 Ingress
 
-现在，您可以在当前项目或命名空间中创建 Ingress 时添加证书。有关更多信息，请参阅[添加 Ingress](/docs/rancher2/k8s-in-rancher/load-balancers-and-ingress/ingress/_index)。
+现在，您可以在当前项目或命名空间中创建 Ingress 时添加证书。有关更多信息，请参阅[添加 Ingress](/docs/rancher2.5/k8s-in-rancher/load-balancers-and-ingress/ingress/_index)。

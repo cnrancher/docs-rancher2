@@ -49,7 +49,7 @@ tar pzxvf /backup/rancher-data-backup-<RANCHER_VERSION>-<DATE>"
 
 ## 恢复备份
 
-使用您先前创建的[备份文件](/docs/rancher2/backups/2.0-2.4/single-node-backups/_index)，将 Rancher 恢复到已知的最后的健康状态。
+使用您先前创建的[备份文件](/docs/rancher2.5/backups/2.0-2.4/single-node-backups/_index)，将 Rancher 恢复到已知的最后的健康状态。
 
 1. 使用远程终端连接，登录到运行 Rancher Server 的节点。
 
@@ -59,7 +59,7 @@ tar pzxvf /backup/rancher-data-backup-<RANCHER_VERSION>-<DATE>"
    docker stop <RANCHER_CONTAINER_NAME>
    ```
 
-1. 将 [Rancher 单节点备份](/docs/rancher2/backups/2.0-2.4/single-node-backups/_index)保存的的压缩文件拷贝到 Rancher Server 所在主机上，通过`cd`命令切换到压缩文件所在的目录，并执行`ls`命令，确认文件存在。如果您按照我们在[Rancher 单节点备份](/docs/rancher2/backups/2.0-2.4/single-node-backups/_index)中建议的命名约定，它的名称将类似于`rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz`。
+1. 将 [Rancher 单节点备份](/docs/rancher2.5/backups/2.0-2.4/single-node-backups/_index)保存的的压缩文件拷贝到 Rancher Server 所在主机上，通过`cd`命令切换到压缩文件所在的目录，并执行`ls`命令，确认文件存在。如果您按照我们在[Rancher 单节点备份](/docs/rancher2.5/backups/2.0-2.4/single-node-backups/_index)中建议的命名约定，它的名称将类似于`rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz`。
 
 1. 替换占位符，输入以下命令以删除当前状态数据并将其替换为备份数据。不要忘记关闭引号。
 

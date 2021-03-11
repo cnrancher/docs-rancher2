@@ -17,7 +17,7 @@ keywords:
 
 如果您丢失了 Rancher Server 的数据，您可以通过备份的数据进行恢复。
 
-- [Rancher 单节点恢复](/docs/rancher2/backups/2.0-2.4/restorations/single-node-restoration/_index)
-- [Rancher 高可用恢复](/docs/rancher2/backups/2.0-2.4/restorations/ha-restoration/_index)
+- [Rancher 单节点恢复](/docs/rancher2.5/backups/2.0-2.4/restorations/single-node-restoration/_index)
+- [Rancher 高可用恢复](/docs/rancher2.5/backups/2.0-2.4/restorations/ha-restoration/_index)
 
-如果您想恢复[RKE 下游集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)，请参考[此处](/docs/rancher2/cluster-admin/restoring-etcd/_index)。
+如果您想恢复[RKE 下游集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)，请参考[此处](/docs/rancher2.5/cluster-admin/restoring-etcd/_index)。

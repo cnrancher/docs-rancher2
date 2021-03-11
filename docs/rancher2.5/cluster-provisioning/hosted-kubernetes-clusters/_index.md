@@ -37,9 +37,9 @@ Rancher 目前支持以下 Kubernetes 供应商：
 
 当使用 Rancher 创建由提供商托管的集群时，会提示您输入身份验证信息。Rancher 将用这个信息来访问云厂商的 API，详情请参阅以下文档：
 
-- [创建 GKE 集群](/docs/rancher2/cluster-provisioning/hosted-kubernetes-clusters/gke/_index)
-- [创建 EKS 集群](/docs/rancher2/cluster-provisioning/hosted-kubernetes-clusters/eks/_index)
-- [创建 AKS 集群](/docs/rancher2/cluster-provisioning/hosted-kubernetes-clusters/aks/_index)
-- [创建 ACK 集群](/docs/rancher2/cluster-provisioning/hosted-kubernetes-clusters/ack/_index)
-- [创建 TKE 集群](/docs/rancher2/cluster-provisioning/hosted-kubernetes-clusters/tke/_index)
-- [创建 CCE 集群](/docs/rancher2/cluster-provisioning/hosted-kubernetes-clusters/cce/_index)
+- [创建 GKE 集群](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/gke/_index)
+- [创建 EKS 集群](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/eks/_index)
+- [创建 AKS 集群](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/aks/_index)
+- [创建 ACK 集群](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/ack/_index)
+- [创建 TKE 集群](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/tke/_index)
+- [创建 CCE 集群](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/cce/_index)

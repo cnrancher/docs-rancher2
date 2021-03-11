@@ -18,7 +18,7 @@ keywords:
 
 ## 概述
 
-使用 Rancher 中的驱动，您可以管理可以使用哪些供应商来创建[托管的 Kubernetes 集群](/docs/rancher2/cluster-provisioning/hosted-kubernetes-clusters/_index)或[节点](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/_index)，以允许 Rancher 部署和管理 Kubernetes。
+使用 Rancher 中的驱动，您可以管理可以使用哪些供应商来创建[托管的 Kubernetes 集群](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/_index)或[节点](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/_index)，以允许 Rancher 部署和管理 Kubernetes。
 
 Rancher 有两种驱动：
 
@@ -31,19 +31,19 @@ Rancher 有两种驱动：
 
 _自 v2.2.0 起可用_
 
-集群驱动用于配置[托管的 Kubernetes 集群](/docs/rancher2/cluster-provisioning/hosted-kubernetes-clusters/_index)，例如 GKE，EKS，AKS 等。在创建集群时显示哪个供应商的可用性是根据集群驱动的状态决定的。在创建托管 Kubernetes 集群的选项中，UI 仅显示集群驱动状态为`Active`的选项。默认情况下，Rancher 与几个现有的集群驱动打包在一起，但是您也可以创建自定义集群驱动，并添加到 Rancher 中。
+集群驱动用于配置[托管的 Kubernetes 集群](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/_index)，例如 GKE，EKS，AKS 等。在创建集群时显示哪个供应商的可用性是根据集群驱动的状态决定的。在创建托管 Kubernetes 集群的选项中，UI 仅显示集群驱动状态为`Active`的选项。默认情况下，Rancher 与几个现有的集群驱动打包在一起，但是您也可以创建自定义集群驱动，并添加到 Rancher 中。
 
 默认情况下，Rancher 已激活了多个托管的 Kubernetes 云供应商，包括：
 
-- [Amazon EKS](/docs/rancher2/cluster-provisioning/hosted-kubernetes-clusters/eks/_index)
-- [Google GKE](/docs/rancher2/cluster-provisioning/hosted-kubernetes-clusters/gke/_index)
-- [Azure AKS](/docs/rancher2/cluster-provisioning/hosted-kubernetes-clusters/aks/_index)
+- [Amazon EKS](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/eks/_index)
+- [Google GKE](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/gke/_index)
+- [Azure AKS](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/aks/_index)
 
 还有其他一些托管的 Kubernetes 云供应商默认情况下被禁用的，但打包在了 Rancher 中，您可以手动激活它们：
 
-- [阿里巴巴 ACK](/docs/rancher2/cluster-provisioning/hosted-kubernetes-clusters/ack/_index)
-- [华为 CCE](/docs/rancher2/cluster-provisioning/hosted-kubernetes-clusters/cce/_index)
-- [腾讯 TKE](/docs/rancher2/cluster-provisioning/hosted-kubernetes-clusters/tke/_index)
+- [阿里巴巴 ACK](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/ack/_index)
+- [华为 CCE](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/cce/_index)
+- [腾讯 TKE](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/tke/_index)
 - 百度 CCE
 
 ## 节点驱动
@@ -54,9 +54,9 @@ _自 v2.2.0 起可用_
 
 Rancher 支持几个主要的云供应商，默认情况下，这些节点驱动是激活的并可用于部署：
 
-- [Amazon EC2](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/ec2/_index)
-- [Azure](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/azure/_index)
-- [Digital Ocean](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/digital-ocean/_index)
-- [vSphere](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/vsphere/_index)
+- [Amazon EC2](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/ec2/_index)
+- [Azure](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/azure/_index)
+- [Digital Ocean](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/digital-ocean/_index)
+- [vSphere](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/vsphere/_index)
 - 阿里云 （需要手动激活）
 - 平安云 （需要手动激活）

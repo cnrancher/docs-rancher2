@@ -17,7 +17,7 @@ keywords:
 
 ## Rancher CLI
 
-Rancher CLI(命令行界面)是一个命令行工具，可用于与 Rancher 进行交互。使用此工具，您可以用命令行而不是 GUI 来操作 Rancher，详情请参考 [Rancher 命令行工具](/docs/rancher2/cli/_index)。
+Rancher CLI(命令行界面)是一个命令行工具，可用于与 Rancher 进行交互。使用此工具，您可以用命令行而不是 GUI 来操作 Rancher，详情请参考 [Rancher 命令行工具](/docs/rancher2.5/cli/_index)。
 
 请确保您可以成功运行 `rancher kubectl get pods` 命令。
 
@@ -25,7 +25,7 @@ Rancher CLI(命令行界面)是一个命令行工具，可用于与 Rancher 进�
 
 _v2.4.6 可用_
 
-如果管理员有[强制执行 kubeconfig tokens 上的 TTL](/docs/rancher2/api/api-tokens/_index)，当你运行`kubectl`时，kubeconfig 文件需要[Rancher cli](/docs/rancher2/cli/_index)存在于你的 PATH 中。否则，你会看到这样的错误信息：
+如果管理员有[强制执行 kubeconfig tokens 上的 TTL](/docs/rancher2.5/api/api-tokens/_index)，当你运行`kubectl`时，kubeconfig 文件需要[Rancher cli](/docs/rancher2.5/cli/_index)存在于你的 PATH 中。否则，你会看到这样的错误信息：
 
 `Unable to connect to the server: getting credentials: exec: exec: "rancher": executable file not found in \$PATH`。
 
@@ -37,7 +37,7 @@ _v2.4.6 可用_
 4. SAML 供应商----Ping、Okta、ADFS、Keycloak、Shibboleth。
 
 当你第一次运行 kubectl 时，例如，`kubectl get pods`，它会要求你选择一个 auth provider 并使用 Rancher 服务器登录。
-kubeconfig 令牌被缓存在你运行 kubectl 的路径中，在`./.cache/token`下。这个令牌在[过期](/docs/rancher2/api/api-tokens/_index)或[从 Rancher 服务器删除](/docs/rancher2/api/api-tokens/_index)之前都是有效的。
+kubeconfig 令牌被缓存在你运行 kubectl 的路径中，在`./.cache/token`下。这个令牌在[过期](/docs/rancher2.5/api/api-tokens/_index)或[从 Rancher 服务器删除](/docs/rancher2.5/api/api-tokens/_index)之前都是有效的。
 过期后，下一个`kubectl get pods`会要求你再次用 Rancher 服务器登录。
 
 ## kubectl
@@ -62,6 +62,6 @@ kubeconfig 令牌被缓存在你运行 kubectl 的路径中，在`./.cache/token
 
 ### 已知问题
 
-1. 如果为 RKE 集群启用[授权集群端点](/docs/rancher2/overview/architecture/_index)，以[直接与下游集群进行认证](/docs/rancher2/cluster-admin/cluster-access/kubectl/index），Rancher 服务器宕机，kubeconfig 令牌过期后，所有 kubectl 调用都会失败。如果 Rancher 服务器无法访问，则无法生成新的 kubeconfig 令牌。
+1. 如果为 RKE 集群启用[授权集群端点](/docs/rancher2.5/overview/architecture/_index)，以[直接与下游集群进行认证](/docs/rancher2.5/cluster-admin/cluster-access/kubectl/index），Rancher 服务器宕机，kubeconfig 令牌过期后，所有 kubectl 调用都会失败。如果 Rancher 服务器无法访问，则无法生成新的 kubeconfig 令牌。
 
-2. 如果从 Rancher [API tokens](/docs/rancher2/api/api-tokens/_index)页面中删除了 kubeconfig 令牌，而令牌仍在缓存中，那么在令牌过期或被删除之前，cli 不会要求你再次登录。`kubectl`调用将导致类似`error: You must be logged in to the server (the server has asked for the client to provide credentials`。可以使用`rancher token delete`删除令牌。
+2. 如果从 Rancher [API tokens](/docs/rancher2.5/api/api-tokens/_index)页面中删除了 kubeconfig 令牌，而令牌仍在缓存中，那么在令牌过期或被删除之前，cli 不会要求你再次登录。`kubectl`调用将导致类似`error: You must be logged in to the server (the server has asked for the client to provide credentials`。可以使用`rancher token delete`删除令牌。

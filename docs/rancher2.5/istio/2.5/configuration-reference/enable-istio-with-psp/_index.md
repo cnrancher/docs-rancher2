@@ -87,6 +87,6 @@ excludeNamespaces:
 
 ### 3. 安装 Istio
 
-按照[主要说明](/docs/rancher2/cluster-admin/tools/istio/setup/enable-istio-in-cluster/_index)，添加自定义答案。`istio_cni.enabled: true`。
+按照[主要说明](/docs/rancher2.5/cluster-admin/tools/istio/setup/enable-istio-in-cluster/_index)，添加自定义答案。`istio_cni.enabled: true`。
 
 当 Istio 安装完成后，在系统项目中的 Apps 页面应该会显示 istio 和`istio-cni`应用程序部署成功。Sidecar 注入现在可以使用了。

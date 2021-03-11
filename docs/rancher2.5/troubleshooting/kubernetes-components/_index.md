@@ -16,17 +16,17 @@ keywords:
   - 组件列表
 ---
 
-本节中列出的命令和步骤适用于以下的[RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)中的 Kubernetes 核心组件。
+本节中列出的命令和步骤适用于以下的[RKE 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)中的 Kubernetes 核心组件。
 
 本节包括以下类别的疑难解答：
 
-- [对 etcd 节点进行故障排查](/docs/rancher2/troubleshooting/kubernetes-components/etcd/_index)
+- [对 etcd 节点进行故障排查](/docs/rancher2.5/troubleshooting/kubernetes-components/etcd/_index)
 
-- [对 Controlplane 节点组件进行故障排查](/docs/rancher2/troubleshooting/kubernetes-components/controlplane/_index)
+- [对 Controlplane 节点组件进行故障排查](/docs/rancher2.5/troubleshooting/kubernetes-components/controlplane/_index)
 
-- [对 nginx-proxy 进行故障排查](/docs/rancher2/troubleshooting/kubernetes-components/nginx-proxy/_index)
+- [对 nginx-proxy 进行故障排查](/docs/rancher2.5/troubleshooting/kubernetes-components/nginx-proxy/_index)
 
-- [对工作节点组件以及通用组件进行故障排查](/docs/rancher2/troubleshooting/kubernetes-components/worker-and-generic/_index)
+- [对工作节点组件以及通用组件进行故障排查](/docs/rancher2.5/troubleshooting/kubernetes-components/worker-and-generic/_index)
 
 ## Kubernetes 组件图
 

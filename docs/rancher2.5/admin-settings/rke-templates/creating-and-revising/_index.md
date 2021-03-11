@@ -26,19 +26,19 @@ keywords:
 
 ## 先决条件
 
-用户需要有**创建 RKE 模板**权限，才可以**创建 RKE 模板**，该权限可以[由系统管理员配置](/docs/rancher2/admin-settings/rke-templates/creator-permissions/_index)。
+用户需要有**创建 RKE 模板**权限，才可以**创建 RKE 模板**，该权限可以[由系统管理员配置](/docs/rancher2.5/admin-settings/rke-templates/creator-permissions/_index)。
 
-如果您是模板的所有者，则可以修改、共享或删除模板，详情请参考[有关共享模板所有权的文档](/docs/rancher2/admin-settings/rke-templates/template-access-and-sharing/_index)。
+如果您是模板的所有者，则可以修改、共享或删除模板，详情请参考[有关共享模板所有权的文档](/docs/rancher2.5/admin-settings/rke-templates/template-access-and-sharing/_index)。
 
 ## 创建模板
 
 1. 在**全局**视图中，单击**工具 > RKE 集群模板**。
 2. 单击**添加模板**。
 3. 输入模板的**名称**。Rancher 为模板的第一个版本提供了自动生成的名称，您也可以按个人喜好修改名称，该名称随该模板一起创建。
-4. 可选：通过[将其他用户或组添加为成员](/docs/rancher2/admin-settings/rke-templates/template-access-and-sharing/_index)与其他用户或组共享模板。您还可以将模板公开，以与 Rancher 中的所有用户共享。
+4. 可选：通过[将其他用户或组添加为成员](/docs/rancher2.5/admin-settings/rke-templates/template-access-and-sharing/_index)与其他用户或组共享模板。您还可以将模板公开，以与 Rancher 中的所有用户共享。
 5. 按照屏幕上的表单将集群配置参数保存为模板修订版的一部分。可以将该版本标记为该模板的默认版本。
 
-**结果：** 配置了一个修订版的 RKE 模板。当您启动[RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)时，可以使用此 RKE 模板修订版。通过 RKE 模板管理集群后，集群无法解除与模板的绑定，并且无法取消选中**使用现有 RKE 模板和修订版**。
+**结果：** 配置了一个修订版的 RKE 模板。当您启动[RKE 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)时，可以使用此 RKE 模板修订版。通过 RKE 模板管理集群后，集群无法解除与模板的绑定，并且无法取消选中**使用现有 RKE 模板和修订版**。
 
 ## 编辑模板
 
@@ -124,7 +124,7 @@ keywords:
 
 ## 升级集群以使用新修订版
 
-> 本节假定您已经有一个集群，其中该集群[已应用 RKE 模板](/docs/rancher2/admin-settings/rke-templates/applying-templates/_index)。
+> 本节假定您已经有一个集群，其中该集群[已应用 RKE 模板](/docs/rancher2.5/admin-settings/rke-templates/applying-templates/_index)。
 > 本节还假设您已经[更新了集群使用的模板](#更新模板)，以便可以使用新的模板修订版。
 
 升级集群以使用新修订版的前提条件是：
@@ -141,7 +141,7 @@ keywords:
 
 ## 从已有集群中导出到新的 RKE 模板并进行修订
 
-您可以将现有集群的设置另存为 RKE 模板。这会将集群的设置导出为新的 RKE 模板，并且将集群绑定到该模板。然后，只有在[更新了 RKE 模板](/docs/rancher2/admin-settings/rke-templates/creating-and-revising/_index)且集群将升级到较新版本的模板时才可以修改集群。
+您可以将现有集群的设置另存为 RKE 模板。这会将集群的设置导出为新的 RKE 模板，并且将集群绑定到该模板。然后，只有在[更新了 RKE 模板](/docs/rancher2.5/admin-settings/rke-templates/creating-and-revising/_index)且集群将升级到较新版本的模板时才可以修改集群。
 
 1. 从 Rancher 的**全局**视图中，单击**集群**选项卡。
 2. 转到将转换为使用 RKE 模板的集群。单击**省略号(...) > 另存为 RKE 模板**。
@@ -151,4 +151,4 @@ keywords:
 
 - 创建了一个新的 RKE 模板。
 - 将集群转换为使用该新模板。
-- 可以[从新模板和修订版中创建新集群](/docs/rancher2/admin-settings/rke-templates/applying-templates/_index)。
+- 可以[从新模板和修订版中创建新集群](/docs/rancher2.5/admin-settings/rke-templates/applying-templates/_index)。

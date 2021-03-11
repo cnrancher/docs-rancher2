@@ -4,7 +4,7 @@ title: 覆盖命名空间默认资源限制
 
 **命名空间默认资源限制**是从项目传递到每个命名空间的，但是在某些场景下，您可能需要增强或降低特定命名空间的性能。在这种情况下，您可以修改命名空间资源限制，覆盖原有的默认资源限制。
 
-下图中，Rancher 管理员有一个已经生效的项目资源限制。但是管理员需要提升 `Namespace 3` 的性能，所以需要 `Namespace 3` 使用更多的资源。这与命名空间默认资源限制冲突了。因此，管理员[提高了命名空间资源限制](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)，`Namespace 3` 就可以使用更多资源了。
+下图中，Rancher 管理员有一个已经生效的项目资源限制。但是管理员需要提升 `Namespace 3` 的性能，所以需要 `Namespace 3` 使用更多的资源。这与命名空间默认资源限制冲突了。因此，管理员[提高了命名空间资源限制](/docs/rancher2.5/cluster-admin/projects-and-namespaces/_index)，`Namespace 3` 就可以使用更多资源了。
 
 <sup>覆盖命名空间默认资源限制</sup>
 
@@ -12,7 +12,7 @@ title: 覆盖命名空间默认资源限制
 
 ## 编辑命名空间资源配额
 
-如果项目中已经配置了[资源配额](/docs/rancher2/project-admin/resource-quotas/_index)，您可以覆盖命名空间资源限制，让特定的命名空间有权限使用更多或更少的项目资源。
+如果项目中已经配置了[资源配额](/docs/rancher2.5/project-admin/resource-quotas/_index)，您可以覆盖命名空间资源限制，让特定的命名空间有权限使用更多或更少的项目资源。
 
 1. 访问 Rancher UI **全局** 页面，找到项目和命名空间所属的集群。
 
@@ -22,7 +22,7 @@ title: 覆盖命名空间默认资源限制
 
 1. 编辑资源**限制**。这些限制决定了命名空间能够使用的资源数量，命名空间的资源限制不能和已生效的项目资源限制冲突。
 
-   关于**资源类型**的详情，请参考[资源配额类型](/docs/rancher2/project-admin/resource-quotas/_index)。
+   关于**资源类型**的详情，请参考[资源配额类型](/docs/rancher2.5/project-admin/resource-quotas/_index)。
 
    > **说明**
    >

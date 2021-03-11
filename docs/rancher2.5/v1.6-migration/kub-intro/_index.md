@@ -45,4 +45,4 @@ Rancher v2.x 建立在[Kubernetes](https://kubernetes.io/docs/home/?path=users&p
 
 有关 Kubernetes 概念的更多详细信息，请参见[Kubernetes 概念文档](https://kubernetes.io/docs/concepts/).
 
-## [下一步: 开始使用](/docs/rancher2/v1.6-migration/get-started/_index)
+## [下一步: 开始使用](/docs/rancher2.5/v1.6-migration/get-started/_index)

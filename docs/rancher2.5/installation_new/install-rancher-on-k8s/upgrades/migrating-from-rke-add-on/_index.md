@@ -29,7 +29,7 @@ keywords:
 > **注意：**
 >
 > - 本指南假定安装了标准的 Rancher。如果您修改了任何对象名称或命名空间，请进行相应的调整。
-> - 如果要从 Rancher v2.0.13 或更早版本或 v2.1.8 或更早版本升级，并且集群的证书已过期，则需要执行[其他步骤](/docs/rancher2/cluster-admin/certificate-rotation/_index) 以轮换证书。
+> - 如果要从 Rancher v2.0.13 或更早版本或 v2.1.8 或更早版本升级，并且集群的证书已过期，则需要执行[其他步骤](/docs/rancher2.5/cluster-admin/certificate-rotation/_index) 以轮换证书。
 
 ## 将 kubectl 指向 Rancher 集群
 
@@ -69,7 +69,7 @@ kubectl -n cattle-system get secret cattle-keys-server -o jsonpath --template='{
 
 删除由 RKE 安装创建的 Kubernetes 对象。
 
-> **注意：** 删除这些 Kubernetes 组件不会影响 Rancher 的配置或数据库，但是在进行任何维护后，最好事先创建数据备份。有关详细信息，请参见[备份高可用 Rancher](/docs/rancher2/backups/2.0-2.4/ha-backups/_index)。
+> **注意：** 删除这些 Kubernetes 组件不会影响 Rancher 的配置或数据库，但是在进行任何维护后，最好事先创建数据备份。有关详细信息，请参见[备份高可用 Rancher](/docs/rancher2.5/backups/2.0-2.4/ha-backups/_index)。
 
 ```
 kubectl -n cattle-system delete ingress cattle-ingress-http
@@ -117,5 +117,5 @@ addons: |-
 
 从这里开始执行标准安装步骤。
 
-- [3 - 初始化 Helm](/docs/rancher2/installation_new/resources/advanced/helm2/helm-init/_index)
-- [4 - 安装 Rancher](/docs/rancher2/installation_new/resources/advanced/helm2/helm-rancher/_index)
+- [3 - 初始化 Helm](/docs/rancher2.5/installation_new/resources/advanced/helm2/helm-init/_index)
+- [4 - 安装 Rancher](/docs/rancher2.5/installation_new/resources/advanced/helm2/helm-rancher/_index)

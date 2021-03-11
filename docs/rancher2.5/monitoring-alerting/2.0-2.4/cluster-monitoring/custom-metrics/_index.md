@@ -2,7 +2,7 @@
 title: Prometheus自定义监控指标适配器
 ---
 
-启用了[集群层级的监控](/docs/rancher2/cluster-admin/tools/monitoring/_index)以后，您可以查看 Rancher 的监控指标。您也可以部署 Prometheus 自定义监控指标适配器，然后配合储存在集群内的监控指标，使用 HPA。
+启用了[集群层级的监控](/docs/rancher2.5/cluster-admin/tools/monitoring/_index)以后，您可以查看 Rancher 的监控指标。您也可以部署 Prometheus 自定义监控指标适配器，然后配合储存在集群内的监控指标，使用 HPA。
 
 ## 部署 Prometheus 自定义监控指标适配器
 

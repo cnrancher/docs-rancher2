@@ -24,13 +24,13 @@ keywords:
 - 所有标准用户必须使用 RKE 模板创建新集群。
 - 标准用户不能在不使用模板的情况下创建集群。
 
-用户需要管理员[授予创建模板的权限](/docs/rancher2/admin-settings/rke-templates/creator-permissions/_index)，才可以创建新模板。
+用户需要管理员[授予创建模板的权限](/docs/rancher2.5/admin-settings/rke-templates/creator-permissions/_index)，才可以创建新模板。
 
-使用 RKE 模板创建集群后，集群创建者无法编辑模板中定义的设置。创建集群后更改这些设置的唯一方法是[将集群升级到相同模板的新版本](/docs/rancher2/admin-settings/rke-templates/applying-templates/_index)。如果集群创建者想要更改模板定义的设置，他们需要联系模板所有者以获取模板的新版本。有关模板修订工作方式的详细信息，请参阅[修订模板文档](/docs/rancher2/admin-settings/rke-templates/creating-and-revising/_index)。
+使用 RKE 模板创建集群后，集群创建者无法编辑模板中定义的设置。创建集群后更改这些设置的唯一方法是[将集群升级到相同模板的新版本](/docs/rancher2.5/admin-settings/rke-templates/applying-templates/_index)。如果集群创建者想要更改模板定义的设置，他们需要联系模板所有者以获取模板的新版本。有关模板修订工作方式的详细信息，请参阅[修订模板文档](/docs/rancher2.5/admin-settings/rke-templates/creating-and-revising/_index)。
 
 ## 要求新集群使用 RKE 模板
 
-要求用户创建新集群时使用模板，可以确保[标准用户](/docs/rancher2/admin-settings/rbac/global-permissions/_index)启动的任何集群都将使用经过管理员审核的 Kubernetes 和 Rancher 设置。
+要求用户创建新集群时使用模板，可以确保[标准用户](/docs/rancher2.5/admin-settings/rbac/global-permissions/_index)启动的任何集群都将使用经过管理员审核的 Kubernetes 和 Rancher 设置。
 
 管理员可以通过以下步骤启用 RKE 模板强制，要求用户必须使用模板创建集群时：
 

@@ -20,7 +20,7 @@ keywords:
 
 :::important 重要
 
-- 请按照此页面上的说明在已备份的同一集群上恢复 rancher。为了将 rancher 迁移到新的集群，请按照步骤进行[迁移 rancher](/docs/rancher2/backups/2.5/migrating-rancher/_index)。
+- 请按照此页面上的说明在已备份的同一集群上恢复 rancher。为了将 rancher 迁移到新的集群，请按照步骤进行[迁移 rancher](/docs/rancher2.5/backups/2.5/migrating-rancher/_index)。
 - 在使用相同设置还原 Rancher 时，operator 将在还原开始时缩减 Rancher deployment，还原完成后又会扩展 deployment。因此，Rancher 在还原期间将不可用。
 
 :::
@@ -29,7 +29,7 @@ keywords:
 
 1. 在**Cluster Explorer**中，进入左上角的下拉菜单，单击**Rancher Backups**。
 1. 单击 **Restore**。
-1. 使用表单或 YAML 创建 Restore。关于使用表单创建 Restore 资源，请参考[配置参考](/docs/rancher2/backups/2.5/configuration/restore-config/_index)和[示例](/docs/rancher2/backups/2.5/examples/_index)。
+1. 使用表单或 YAML 创建 Restore。关于使用表单创建 Restore 资源，请参考[配置参考](/docs/rancher2.5/backups/2.5/configuration/restore-config/_index)和[示例](/docs/rancher2.5/backups/2.5/examples/_index)。
 1. 使用 YAML 编辑器，我们可以单击**Create > Create from YAML** 进入 Restore YAML。
 
    ```yaml
@@ -50,7 +50,7 @@ keywords:
          endpoint: s3.us-west-2.amazonaws.com
    ```
 
-   有关配置 Restore 的帮助，请参阅[配置参考](/docs/rancher2/backups/2.5/configuration/restore-config/_index)和[示例](/docs/rancher2/backups/2.5/examples/_index)。
+   有关配置 Restore 的帮助，请参阅[配置参考](/docs/rancher2.5/backups/2.5/configuration/restore-config/_index)和[示例](/docs/rancher2.5/backups/2.5/examples/_index)。
 
 1. 单击 **Create**。
 

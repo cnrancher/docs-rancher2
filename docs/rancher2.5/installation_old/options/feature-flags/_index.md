@@ -19,7 +19,7 @@ keywords:
 
 _自 v2.3.0 起可用_
 
-Rancher 包含一些实验性功能，默认状态下，这些功能是禁用的。在某些情况下，您可能想要启用这些功能。例如，如果您决定使用的[Rancher 技术支持团队不支持的存储类型](/docs/rancher2/installation/options/feature-flags/enable-not-default-storage-drivers/_index)所带来的好处大于风险，则可能需要启用这些未被测试过的功能。功能开关，使您可以尝试使用默认情况下未启用的功能。
+Rancher 包含一些实验性功能，默认状态下，这些功能是禁用的。在某些情况下，您可能想要启用这些功能。例如，如果您决定使用的[Rancher 技术支持团队不支持的存储类型](/docs/rancher2.5/installation/options/feature-flags/enable-not-default-storage-drivers/_index)所带来的好处大于风险，则可能需要启用这些未被测试过的功能。功能开关，使您可以尝试使用默认情况下未启用的功能。
 
 可以通过三种方式启用这些功能：
 
@@ -43,9 +43,9 @@ Rancher 包含一些实验性功能，默认状态下，这些功能是禁用的
 以下是 Rancher 中可用的功能开关的列表：
 
 - `dashboard`：此功能将启用下一代的实验性 UI。仪表板还使用了 Rancher 中的新 API，该 API 允许 UI 访问默认的 Kubernetes 资源，而不经过 Rancher 的任何干预。
-- `unsupported-storage-drivers`: 启用[允许不受支持的存储驱动程序](/docs/rancher2/installation/options/feature-flags/enable-not-default-storage-drivers/_index)。换句话说，它启用了默认情况下未启用的 storage providers 和 provisioners 的类型。
+- `unsupported-storage-drivers`: 启用[允许不受支持的存储驱动程序](/docs/rancher2.5/installation/options/feature-flags/enable-not-default-storage-drivers/_index)。换句话说，它启用了默认情况下未启用的 storage providers 和 provisioners 的类型。
 - `proxy`：此功能使 Rancher 使用新的简化的代理模块，这有助于增强性能和安全性。但是目前有一个已知问题，新的代理功能会导致 Helm 不能正常工作，这会导致包括 Rancher 工具（如监控，日志，Istio 等）在内的任何应用商店应用部署失败。
-- `istio-virtual-service-ui`：启用 Istio 的流量管理功能：[通过 UI 创建，读取，更新和删除 Istio 虚拟服务和目标规则](/docs/rancher2/installation/options/feature-flags/istio-virtual-service-ui/_index)。
+- `istio-virtual-service-ui`：启用 Istio 的流量管理功能：[通过 UI 创建，读取，更新和删除 Istio 虚拟服务和目标规则](/docs/rancher2.5/installation/options/feature-flags/istio-virtual-service-ui/_index)。
 
 下表显示了在 Rancher 中功能开关的可用版本和默认值：
 
@@ -80,7 +80,7 @@ helm install rancher-latest/rancher \
 
 #### 在离线安装时渲染 Helm Chart
 
-对于离线安装 Rancher，通过 Helm 安装 Rancher 之前，需要添加一个 Helm chart 仓库，渲染一个 Helm 模板。有关详细信息，请参阅[离线安装文档。](/docs/rancher2/installation/other-installation-methods/air-gap/install-rancher/_index)
+对于离线安装 Rancher，通过 Helm 安装 Rancher 之前，需要添加一个 Helm chart 仓库，渲染一个 Helm 模板。有关详细信息，请参阅[离线安装文档。](/docs/rancher2.5/installation/other-installation-methods/air-gap/install-rancher/_index)
 
 在下面的示例中，通过传递功能开关名称（用逗号分隔）来启用两个功能。
 

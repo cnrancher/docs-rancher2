@@ -21,6 +21,6 @@ Rancher 支持具有各种卷插件的持久存储。但是，在使用这些插
 
 Rancher 提供了一些关于如何配置常用的存储服务的文档，供您参考：
 
-- [NFS](/docs/rancher2/cluster-admin/volumes-and-storage/examples/nfs/_index)
-- [vSphere](/docs/rancher2/cluster-admin/volumes-and-storage/examples/vsphere/_index)
-- [亚马逊 EBS](/docs/rancher2/cluster-admin/volumes-and-storage/examples/ebs/_index)
+- [NFS](/docs/rancher2.5/cluster-admin/volumes-and-storage/examples/nfs/_index)
+- [vSphere](/docs/rancher2.5/cluster-admin/volumes-and-storage/examples/vsphere/_index)
+- [亚马逊 EBS](/docs/rancher2.5/cluster-admin/volumes-and-storage/examples/ebs/_index)

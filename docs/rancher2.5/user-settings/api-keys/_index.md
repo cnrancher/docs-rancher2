@@ -41,7 +41,7 @@ API 密钥由以下四个部分组成：
    _v2.4.6 可用_
    过期时间将由`v3/settings/auth-token-max-ttl-minutes`约束。如果超过 max-ttl，将以 max-ttl 为到期时间创建 API 密钥。
 
-   适用范围对 API 可以调用的集群作了限制。如果集群配置了认证集群端点，您可以直接使用有适用范围的 token，直接访问集群的 API 端点，而不需要通过 Rancher Server 来代理连接。详情请查看[认证集群端点](/docs/rancher2/overview/architecture/_index)。
+   适用范围对 API 可以调用的集群作了限制。如果集群配置了认证集群端点，您可以直接使用有适用范围的 token，直接访问集群的 API 端点，而不需要通过 Rancher Server 来代理连接。详情请查看[认证集群端点](/docs/rancher2.5/overview/architecture/_index)。
 
 1. 单击 **创建**，创建 API 密钥。
 
@@ -63,4 +63,4 @@ API 密钥由以下四个部分组成：
 ## 后续操作
 
 - 选择**通过 API 查看**，学习更多关于 Rancher API 的端点和参数知识。
-- API 密钥用于 API 调用和 [Rancher 命令行工具](/docs/rancher2/cli/_index)。
+- API 密钥用于 API 调用和 [Rancher 命令行工具](/docs/rancher2.5/cli/_index)。

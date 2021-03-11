@@ -2,7 +2,7 @@
 title: 项目配额工作原理
 ---
 
-Rancher 资源配额不仅包含了[原生 Kubernetes](https://kubernetes.io/docs/concepts/policy/resource-quotas/) 资源配额的所有功能，也对原生 Kubernetes 的资源配额做了扩展。在 Rancher 中，您可以把资源配额应用到[项目](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)层级。
+Rancher 资源配额不仅包含了[原生 Kubernetes](https://kubernetes.io/docs/concepts/policy/resource-quotas/) 资源配额的所有功能，也对原生 Kubernetes 的资源配额做了扩展。在 Rancher 中，您可以把资源配额应用到[项目](/docs/rancher2.5/cluster-admin/projects-and-namespaces/_index)层级。
 
 在一个标准的 Kubernetes 部署中，资源配额是作用于每个命名空间上的。然而，原生 Kubernetes 不支持一键更新所有命名空间的资源配额。如果需要更新所有命名空间的资源配额，需要操作多次，逐个修改。
 
@@ -12,7 +12,7 @@ Rancher 资源配额不仅包含了[原生 Kubernetes](https://kubernetes.io/doc
 
 ![原生 Kubernetes 资源配额实现过程](/img/rancher/kubernetes-resource-quota.svg)
 
-和原生 Kubernetes 相比，Rancher 的资源配额有一些不同。在 Rancher 中，您可以把资源配额应用到[项目](/docs/rancher2/cluster-admin/projects-and-namespaces/_index)层级，然后资源配额会传播到项目内的每一个命名空间。而原生 Kubernetes 只能在命名空间层级应用资源配额，如果需要修改指定命名空间的资源配额，您还可以使用 Rancher [覆盖命名空间默认资源配额](/docs/rancher2/project-admin/resource-quotas/override-namespace-default/_index)。
+和原生 Kubernetes 相比，Rancher 的资源配额有一些不同。在 Rancher 中，您可以把资源配额应用到[项目](/docs/rancher2.5/cluster-admin/projects-and-namespaces/_index)层级，然后资源配额会传播到项目内的每一个命名空间。而原生 Kubernetes 只能在命名空间层级应用资源配额，如果需要修改指定命名空间的资源配额，您还可以使用 Rancher [覆盖命名空间默认资源配额](/docs/rancher2.5/project-admin/resource-quotas/override-namespace-default/_index)。
 
 资源配额包括两个限制：项目资源限制和命名空间默认资源限制，创建或修改项目时可以修改。
 
@@ -22,7 +22,7 @@ Rancher 资源配额不仅包含了[原生 Kubernetes](https://kubernetes.io/doc
 
 - **命名空间默认资源限制：**
 
-  它是每个命名空间的默认资源限制。创建了项目层级的资源限制后，命名空间默认资源限制会自动下发到项目内的每个命名空间。每个命名空间的资源限制都是这个值，除非您手动修改，[覆盖命名空间默认资源限制](/docs/rancher2/project-admin/resource-quotas/override-namespace-default/_index)。
+  它是每个命名空间的默认资源限制。创建了项目层级的资源限制后，命名空间默认资源限制会自动下发到项目内的每个命名空间。每个命名空间的资源限制都是这个值，除非您手动修改，[覆盖命名空间默认资源限制](/docs/rancher2.5/project-admin/resource-quotas/override-namespace-default/_index)。
 
 下图说明了 Rancher 管理员给项目内所有命名空间（ `Namespace 1-4` ）配置统一的 CPU 限额和内存限额的过程。管理员可以设置项目资源配额（ `Project Resource Quota` ），而不是单独设置每个命名空间的资源配额。完成项目资源配额的设置以后，配额包括的项目整体的项目资源限制（ `Project Limit` ），和每个命名空间的命名空间默认资源限制（ `Namespace Default Limit` ）。然后 Rancher 把命名空间默认资源限制( `Namespace Default Limit` )下发到每个命名空间( `Namespace Resource Quota` )。
 

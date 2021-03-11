@@ -24,7 +24,7 @@ keywords:
 
 ## 节点要求
 
-在 [节点需求](/docs/rancher2/installation/requirements/_index) 中查看运行 Rancher 的节点支持的操作系统和硬件/软件/网络需求。
+在 [节点需求](/docs/rancher2.5/installation/requirements/_index) 中查看运行 Rancher 的节点支持的操作系统和硬件/软件/网络需求。
 
 在 [RKE 需求](/docs/rke/os/_index) 中查看 RKE 的操作系统需求。
 
@@ -39,9 +39,9 @@ RKE 将在每个节点上配置一个 Ingress controller pod。Ingress controlle
 
 ## 示例
 
-- [Nginx](/docs/rancher2/installation/options/helm2/create-nodes-lb/nginx/_index)
-- [Amazon NLB](/docs/rancher2/installation/options/helm2/create-nodes-lb/nlb/_index)
+- [Nginx](/docs/rancher2.5/installation/options/helm2/create-nodes-lb/nginx/_index)
+- [Amazon NLB](/docs/rancher2.5/installation/options/helm2/create-nodes-lb/nlb/_index)
 
 ## 后续步骤
 
-[使用 RKE 安装 Kubernetes](/docs/rancher2/installation/options/helm2/kubernetes-rke/_index)
+[使用 RKE 安装 Kubernetes](/docs/rancher2.5/installation/options/helm2/kubernetes-rke/_index)

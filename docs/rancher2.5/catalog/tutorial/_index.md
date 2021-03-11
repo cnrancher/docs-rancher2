@@ -22,7 +22,7 @@ keywords:
 
 > **注意：** 有关开发 Chart 的完整步骤，请参阅 Helm Chart [开发指南](https://helm.sh/docs/chart_template_guide/)。
 
-1. 在您应用商店的 GitHub 仓库中，创建应用商店结构，该应用商店结构请参考[应用商店的文件结构](/docs/rancher2/helm-charts/legacy-catalogs/creating-apps/_index)中列出的结构。`app-readme.md`和`questions.yml`是可选的。
+1. 在您应用商店的 GitHub 仓库中，创建应用商店结构，该应用商店结构请参考[应用商店的文件结构](/docs/rancher2.5/helm-charts/legacy-catalogs/creating-apps/_index)中列出的结构。`app-readme.md`和`questions.yml`是可选的。
 
    > **提示：**
    >
@@ -47,7 +47,7 @@ keywords:
 
    下面的示例创建一个表单，提示用户输入持久卷大小和存储类。
 
-   有关创建`questions.yml`文件时可以使用的变量列表，请参见[问题变量参考](/docs/rancher2/helm-charts/legacy-catalogs/creating-apps/_index)
+   有关创建`questions.yml`文件时可以使用的变量列表，请参见[问题变量参考](/docs/rancher2.5/helm-charts/legacy-catalogs/creating-apps/_index)
 
    ```yaml
    categories:

@@ -23,7 +23,7 @@ Rancher 允许您设置许多配置组合，有些配置适用于开发和测试
 
 ### 在支持的 OS 和 Docker 版本上运行 Rancher
 
-Rancher 是基于容器的，可以在任何基于 linux 的操作系统上运行。但是，您应该只在[需求文档](/docs/rancher2/installation_new/requirements/_index)中列出的操作系统以及支持的 Docker 版本上运行 Rancher。这些版本经过了最彻底的测试，可以得到 Rancher Support 团队的支持。
+Rancher 是基于容器的，可以在任何基于 linux 的操作系统上运行。但是，您应该只在[需求文档](/docs/rancher2.5/installation_new/requirements/_index)中列出的操作系统以及支持的 Docker 版本上运行 Rancher。这些版本经过了最彻底的测试，可以得到 Rancher Support 团队的支持。
 
 ### 升级 Kubernetes 版本
 
@@ -53,11 +53,11 @@ Rancher 维护的 [Terraform Provider](https://rancher.com/blog/2019/rancher-2-t
 
 由 Rancher 提供的 Kubernetes 集群将使用在十年内到期的证书。通过其他方式配置的集群的到期时间可能更长或更短。
 
-对于通过 Rancher 创建的 Kubernetes 集群，证书可以通过 Rancher [用户界面](/docs/rancher2/cluster-admin/certificate-rotation/_index)进行更新。
+对于通过 Rancher 创建的 Kubernetes 集群，证书可以通过 Rancher [用户界面](/docs/rancher2.5/cluster-admin/certificate-rotation/_index)进行更新。
 
 ### 集群启用循环快照
 
-确保启用 etcd 循环快照， 将快照保持时间延长到满足业务需求的一段时间。在发生灾难性故障或数据删除时，这是您进行恢复的唯一途径。有关配置快照的详细信息，请参阅 [RKE 文档](/docs/rke/etcd-snapshots/_index) 或者 [Rancher 备份](/docs/rancher2/backups/_index)。
+确保启用 etcd 循环快照， 将快照保持时间延长到满足业务需求的一段时间。在发生灾难性故障或数据删除时，这是您进行恢复的唯一途径。有关配置快照的详细信息，请参阅 [RKE 文档](/docs/rke/etcd-snapshots/_index) 或者 [Rancher 备份](/docs/rancher2.5/backups/_index)。
 
 ### Rancher 部署 Kubernetes 集群
 
@@ -109,13 +109,13 @@ Kubernetes 集群最好使用低延迟网络。对于 control plane 组件和 et
 
 ### 监控集群
 
-根据需要密切监控和扩展节点。您应该启用[集群监控](/docs/rancher2/cluster-admin/tools/monitoring/_index)并使用 Prometheus 指标和 Grafana 可视化选项。
+根据需要密切监控和扩展节点。您应该启用[集群监控](/docs/rancher2.5/cluster-admin/tools/monitoring/_index)并使用 Prometheus 指标和 Grafana 可视化选项。
 
 ## 安全提示
 
 下面是一些提高 Rancher 安全的基本技巧。有关保护集群的更详细信息，请参考以下参考资料：
 
-- Rancher 的[Kubernetes 安全加固指南](/docs/rancher2/security/_index)
+- Rancher 的[Kubernetes 安全加固指南](/docs/rancher2.5/security/_index)
 - [Kubernetes 安全最佳实践](https://rancher.com/blog/2019/2019-01-17-101-more-kubernetes-security-best-practices/)
 
 ### 更新 Rancher 安全补丁

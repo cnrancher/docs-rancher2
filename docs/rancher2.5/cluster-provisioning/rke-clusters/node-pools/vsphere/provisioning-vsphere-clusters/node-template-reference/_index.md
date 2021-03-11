@@ -23,9 +23,9 @@ keywords:
 
 ### Rancher v2.2.0+
 
-| 参数   | 必填 | 描述                                                                                               |
-| :----- | :--: | :------------------------------------------------------------------------------------------------- |
-| 云凭证 |  \*  | 您的 vSphere 账户访问信息, 保存为[云凭证](/docs/rancher2/user-settings/cloud-credentials/_index)。 |
+| 参数   | 必填 | 描述                                                                                                 |
+| :----- | :--: | :--------------------------------------------------------------------------------------------------- |
+| 云凭证 |  \*  | 您的 vSphere 账户访问信息, 保存为[云凭证](/docs/rancher2.5/user-settings/cloud-credentials/_index)。 |
 
 ### Rancher v2.2.0 之前的版本
 
@@ -47,7 +47,7 @@ keywords:
 | CPUs               |  \*  | 虚拟机使用的 vCPUS 数量。                                                                                                                                                                                                                                                                                |
 | 内存               |  \*  | 虚拟机使用的内存数量。                                                                                                                                                                                                                                                                                   |
 | 磁盘               |  \*  | 虚拟机使用的磁盘大小（MB）。                                                                                                                                                                                                                                                                             |
-| 创建方式           |  \*  | 在节点上配置操作系统的方法。可以从 ISO 或 VM 模板安装操作系统。根据创建方法的不同，您还必须指定 VM 模板，内容库，现有 VM 或 ISO。有关创建方法的更多信息，请参考[配置实例](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/_index)一节。                |
+| 创建方式           |  \*  | 在节点上配置操作系统的方法。可以从 ISO 或 VM 模板安装操作系统。根据创建方法的不同，您还必须指定 VM 模板，内容库，现有 VM 或 ISO。有关创建方法的更多信息，请参考[配置实例](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/_index)一节。              |
 | Cloud Init         |      | `cloud-config.yml`文件的 URL 或用提供 VM 的 URL。此文件允许进一步自定义操作系统，例如网络配置，DNS 服务器或系统守护进程。操作系统必须支持`cloud-init`。                                                                                                                                                  |
 | 网络               |      | 创建的 VM 使用的网络。                                                                                                                                                                                                                                                                                   |
 | guestinfo 配置参数 |      | VM 的配置参数。这些配置对应在 vSphere 控制台中的[高级设定](https://kb.vmware.com/s/article/1016098)。举例来说包括创建 RancherOS [guestinfo](https://rancher.com/docs/os/v1.x/en/installation/running-rancheros/cloud/vmware-esxi/#vmware-guestinfo) 参数或为 VM 开启磁盘 UUIDs(`disk.EnableUUID=TRUE`)。 |

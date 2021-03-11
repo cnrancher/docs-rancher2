@@ -17,7 +17,7 @@ keywords:
 
 本文主要介绍 Rancher Server 架构和各个组件的功能，例如：用户如何通过 Rancher Server 或授权集群端点控制下游集群，以及如何通过授权集群访问端点管理下游集群。
 
-> 本文默认读者已经对 Docker 和 Kubernetes 有一定的了解。如果您需要了解 Kubernetes 组件的工作机制和原理，请查阅 [Kubernetes 概念](/docs/rancher2/overview/concepts/_index)。
+> 本文默认读者已经对 Docker 和 Kubernetes 有一定的了解。如果您需要了解 Kubernetes 组件的工作机制和原理，请查阅 [Kubernetes 概念](/docs/rancher2.5/overview/concepts/_index)。
 
 ## Rancher Server 架构
 
@@ -65,7 +65,7 @@ Rancher Server 由认证代理（Authentication Proxy）、Rancher API Server、
 
 Rancher 使用 [Service Account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/) （Service Accout 提供了一种方便的认证机制）和 Kubernetes 进行交互。
 
-默认状态下，Rancher 生成一个包含认证信息的[kubeconfig](/docs/rancher2/cluster-admin/cluster-access/kubectl/_index)文件，为 Rancher Server 和下游集群的 Kubernetes API Server 之间的通信提供认证。该文件包含了访问集群的所有权限。
+默认状态下，Rancher 生成一个包含认证信息的[kubeconfig](/docs/rancher2.5/cluster-admin/cluster-access/kubectl/_index)文件，为 Rancher Server 和下游集群的 Kubernetes API Server 之间的通信提供认证。该文件包含了访问集群的所有权限。
 
 ### 集群控制器和集群 Agent
 
@@ -107,7 +107,7 @@ Rancher Server 和下游集群之间有明显的延迟，或 Rancher Server 不�
 
 为下游集群开启授权集群端点后，Rancher 会在“kubeconfig”文件中额外生成一段 Kubernetes context，来允许用户直接连接到集群。kubeconfig 这个文件中含有 `kubectl` 和 `helm` 的认证信息。
 
-如果 Rancher 出现问题，无法连接，您需要使用 kubeconfig 中的 context 帮助您访问集群。因此，我们建议您导出一份 kubeconfig 文件副本，保存到本地，以备不时之需。更多详细信息请参考 [kubectl 和 kubeconfig 文件](/docs/rancher2/cluster-admin/cluster-access/kubectl/_index)。
+如果 Rancher 出现问题，无法连接，您需要使用 kubeconfig 中的 context 帮助您访问集群。因此，我们建议您导出一份 kubeconfig 文件副本，保存到本地，以备不时之需。更多详细信息请参考 [kubectl 和 kubeconfig 文件](/docs/rancher2.5/cluster-admin/cluster-access/kubectl/_index)。
 
 ## 重要文件
 
@@ -119,7 +119,7 @@ Rancher Server 和下游集群之间有明显的延迟，或 Rancher Server 不�
 
 > **注意：** 后两个文件名的“rancher-cluster”部分取决于您如何命名 RKE 集群的配置文件。
 
-更多详细信息请参考[kubeconfig 文件](/docs/rancher2/cluster-admin/cluster-access/kubectl/_index)。
+更多详细信息请参考[kubeconfig 文件](/docs/rancher2.5/cluster-admin/cluster-access/kubectl/_index)。
 
 ## 启动 Kubernetes 集群所需工具
 
@@ -157,4 +157,4 @@ Rancher 的 GitHub 源代码仓库如下：
 - [Rancher 命令行](https://github.com/rancher/cli)
 - [应用商店](https://github.com/rancher/helm)
 
-上面只列举了 Rancher 最重要的组件。请查看[参与 Rancher 开源贡献](/docs/rancher2/contributing/_index#源代码仓库)，获取详细信息。请查看 `rancher/rancher` 代码库中的 [ `go.mod` 文件](https://github.com/rancher/rancher/blob/master/go.mod)，获取 Rancher 使用的所有库和项目。
+上面只列举了 Rancher 最重要的组件。请查看[参与 Rancher 开源贡献](/docs/rancher2.5/contributing/_index#源代码仓库)，获取详细信息。请查看 `rancher/rancher` 代码库中的 [ `go.mod` 文件](https://github.com/rancher/rancher/blob/master/go.mod)，获取 Rancher 使用的所有库和项目。

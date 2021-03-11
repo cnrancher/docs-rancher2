@@ -37,9 +37,9 @@ keywords:
   >
   > 如果您使用的是云端虚拟机，请开放 **80 端口**和 **443 端口**的流入流量，详情请参考云服务提供商的文档。
   >
-  > 有关业务集群的端口的详细要求，请参考[下游集群节点要求](/docs/rancher2/cluster-provisioning/node-requirements/_index)。
+  > 有关业务集群的端口的详细要求，请参考[下游集群节点要求](/docs/rancher2.5/cluster-provisioning/node-requirements/_index)。
 
-  请按照[具体要求](/docs/rancher2/installation_new/requirements/_index)配置 Linux 主机。
+  请按照[具体要求](/docs/rancher2.5/installation_new/requirements/_index)配置 Linux 主机。
 
 ## 安装 Rancher 2.x
 
@@ -121,4 +121,4 @@ keywords:
 
 ## 后续操作
 
-创建了集群后，您可以使用 Rancher 部署工作负载，详情请参考[部署工作负载](/docs/rancher2/quick-start-guide/workload/_index)。
+创建了集群后，您可以使用 Rancher 部署工作负载，详情请参考[部署工作负载](/docs/rancher2.5/quick-start-guide/workload/_index)。

@@ -16,6 +16,6 @@ keywords:
   - Rancher与日志服务的集成
 ---
 
-如果您使用的是 Rancher v2.5，请参考[本节](/docs/rancher2/logging/2.5/_index)。
+如果您使用的是 Rancher v2.5，请参考[本节](/docs/rancher2.5/logging/2.5/_index)。
 
-如果您使用的是 Rancher v2.0-v2.4，请参考[本节](/docs/rancher2/logging/2.0.x-2.4.x/_index)。
+如果您使用的是 Rancher v2.0-v2.4，请参考[本节](/docs/rancher2.5/logging/2.0.x-2.4.x/_index)。

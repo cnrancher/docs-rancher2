@@ -24,11 +24,11 @@ keywords:
 
 > 不需要使用外部负载均衡器？
 >
-> 请看[Rancher 单节点安装指南](/docs/rancher2/installation/other-installation-methods/single-node-docker/_index)
+> 请看[Rancher 单节点安装指南](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/_index)
 
 ## 关于操作系统、Docker、硬件、网络的需求
 
-确保您的节点满足常规的[安装要求](/docs/rancher2/installation/requirements/_index)。
+确保您的节点满足常规的[安装要求](/docs/rancher2.5/installation/requirements/_index)。
 
 ## 安装概要
 
@@ -38,7 +38,7 @@ keywords:
 
 ## 1、设置 Linux 节点
 
-根据 Rancher 的[要求](/docs/rancher2/installation/requirements/_index)设置一台 Linux 主机，以启动 Rancher Server。
+根据 Rancher 的[要求](/docs/rancher2.5/installation/requirements/_index)设置一台 Linux 主机，以启动 Rancher Server。
 
 ## 2、选择一个 SSL 选项并安装 Rancher
 
@@ -60,7 +60,7 @@ keywords:
 > **先决条件：**
 > 创建自签名证书
 >
-> - 证书必须是 [PEM 格式](/docs/rancher2/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
+> - 证书必须是 [PEM 格式](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
 
 **基于自签名证书安装 Rancher：**
 
@@ -80,7 +80,7 @@ keywords:
 > **先决条件：**
 > 创建自签名证书
 >
-> - 证书必须是 [PEM 格式](/docs/rancher2/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
+> - 证书必须是 [PEM 格式](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
 
 **基于机构颁发证书安装 Rancher：**
 
@@ -170,8 +170,8 @@ http {
 
 ## 相关链接
 
-- **推荐阅读：** [单节点备份和还原](/docs/rancher2/backups/2.0-2.4/single-node-backups/_index)。尽管您现在没有任何数据需要备份，但是我们建议您在常规 Rancher 使用之后创建备份。
-- [创建 Kubernetes 集群](/docs/rancher2/cluster-provisioning/_index)。
+- **推荐阅读：** [单节点备份和还原](/docs/rancher2.5/backups/2.0-2.4/single-node-backups/_index)。尽管您现在没有任何数据需要备份，但是我们建议您在常规 Rancher 使用之后创建备份。
+- [创建 Kubernetes 集群](/docs/rancher2.5/cluster-provisioning/_index)。
 
 ## 常见问题和问题排查
 
@@ -258,7 +258,7 @@ openssl s_client -CAfile ca.pem -connect rancher.yourdomain.com:443
 
 ### API 审计日志
 
-如果要使用 Rancher API 记录所有事务，请通过在安装命令中添加以下标志来启用[API 审计](/docs/rancher2/installation/options/rke-add-on/api-auditing/_index)功能。
+如果要使用 Rancher API 记录所有事务，请通过在安装命令中添加以下标志来启用[API 审计](/docs/rancher2.5/installation/options/rke-add-on/api-auditing/_index)功能。
 
     -e AUDIT_LEVEL=1 \
     -e AUDIT_LOG_PATH=/var/log/auditlog/rancher-api-audit.log \
@@ -268,7 +268,7 @@ openssl s_client -CAfile ca.pem -connect rancher.yourdomain.com:443
 
 ### 离线安装
 
-如果要访问此页面以完成[离线安装](/docs/rancher2/installation/other-installation-methods/air-gap/_index/)，则在您运行安装命令时，必须在 server 镜像之前添加私有镜像库的 URL。例如在您的`rancher/rancher:latest`前面添加带有您的私有镜像库的 URL`<REGISTRY.DOMAIN.COM:PORT>`。
+如果要访问此页面以完成[离线安装](/docs/rancher2.5/installation/other-installation-methods/air-gap/_index/)，则在您运行安装命令时，必须在 server 镜像之前添加私有镜像库的 URL。例如在您的`rancher/rancher:latest`前面添加带有您的私有镜像库的 URL`<REGISTRY.DOMAIN.COM:PORT>`。
 
 **示例：**
 

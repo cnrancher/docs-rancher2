@@ -1,6 +1,6 @@
 ---
 title: 创建 Windows 集群
-description: 当使用 Rancher 初始化一个[自定义集群](/docs/rancher2/cluster-provisioning/rke-clusters/custom-nodes/_index)时，Rancher 会在您的基础设施上，使用 RKE（Rancher Kubernetes Engine）进行 Kubernetes 集群初始化。
+description: 当使用 Rancher 初始化一个[自定义集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/custom-nodes/_index)时，Rancher 会在您的基础设施上，使用 RKE（Rancher Kubernetes Engine）进行 Kubernetes 集群初始化。
 keywords:
   - rancher
   - rancher中文
@@ -21,7 +21,7 @@ keywords:
 
 _从 v2.3.0 开始支持_
 
-当使用 Rancher 初始化一个[自定义集群](/docs/rancher2/cluster-provisioning/rke-clusters/custom-nodes/_index)时，Rancher 会在您的基础设施上，使用 RKE（Rancher Kubernetes Engine）进行 Kubernetes 集群初始化。
+当使用 Rancher 初始化一个[自定义集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/custom-nodes/_index)时，Rancher 会在您的基础设施上，使用 RKE（Rancher Kubernetes Engine）进行 Kubernetes 集群初始化。
 
 ## 使用限制
 
@@ -45,7 +45,7 @@ _从 v2.3.0 开始支持_
 
 ## Windows 集群要求
 
-对于自定义集群，网络，操作系统和 Docker 的一般节点要求与[下游集群的节点要求](/docs/rancher2/cluster-provisioning/node-requirements/_index)相同。
+对于自定义集群，网络，操作系统和 Docker 的一般节点要求与[下游集群的节点要求](/docs/rancher2.5/cluster-provisioning/node-requirements/_index)相同。
 
 ### 操作系统和 Docker
 
@@ -71,13 +71,13 @@ _从 v2.3.0 开始支持_
 
 ### 网络要求
 
-在配置新集群之前，请确保已经安装了 Rancher。并且确保节点可以与 Rancher 通信。如果尚未安装 Rancher，请参考[安装文档](/docs/rancher2/installation_new/_index)进行安装。
+在配置新集群之前，请确保已经安装了 Rancher。并且确保节点可以与 Rancher 通信。如果尚未安装 Rancher，请参考[安装文档](/docs/rancher2.5/installation_new/_index)进行安装。
 
 Rancher 仅支持在 Windows 集群中使用 Flannel 作为网络插件。
 
 您需要在[**Host Gateway (L2bridge)**](https://github.com/coreos/flannel/blob/master/Documentation/backends.md#host-gw) 和 [**VXLAN (Overlay)**](https://github.com/coreos/flannel/blob/master/Documentation/backends.md#vxlan)中选择一个作为 Rancher 的网络模式。
 
-如果您选用**Host Gateway (L2bridge)** 网络模式，最好对所有节点使用相同的第 2 层网络。否则，您需要为其配置路由规则。有关详细信息，请参阅[配置云托管的 VM 路由](/docs/rancher2/cluster-provisioning/rke-clusters/windows-clusters/host-gateway-requirements/_index)，如果您使用的是亚马逊 EC2，Google GCE 或 Azure VM，还需要[禁用私有 IP 地址检查](/docs/rancher2/cluster-provisioning/rke-clusters/windows-clusters/host-gateway-requirements/_index)。
+如果您选用**Host Gateway (L2bridge)** 网络模式，最好对所有节点使用相同的第 2 层网络。否则，您需要为其配置路由规则。有关详细信息，请参阅[配置云托管的 VM 路由](/docs/rancher2.5/cluster-provisioning/rke-clusters/windows-clusters/host-gateway-requirements/_index)，如果您使用的是亚马逊 EC2，Google GCE 或 Azure VM，还需要[禁用私有 IP 地址检查](/docs/rancher2.5/cluster-provisioning/rke-clusters/windows-clusters/host-gateway-requirements/_index)。
 
 **VXLAN (Overlay)** 模式是默认选项。如果您选用 **VXLAN (Overlay)** 网络，必须安装[KB4489899](https://support.microsoft.com/en-us/help/4489899)补丁，大多数云托管的虚拟机已经安装了这个补丁。
 
@@ -89,11 +89,11 @@ Windows 集群中的工作负载通常部署在 Windows（`worker`）节点中�
 
 下表中是一个由三个节点组成的集群，您可以添加其他 Linux 和 Windows 节点来扩展集群，实现冗余：
 
-| 节点   | 操作系统                                 | 集群角色                                                                                                                                                              | 目的                                                           |
-| :----- | :--------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------- |
-| Node 1 | Linux (推荐 Ubuntu Server 18.04)         | [Control Plane](/docs/rancher2/cluster-provisioning/_index), [etcd](/docs/rancher2/cluster-provisioning/_index), [Worker](/docs/rancher2/cluster-provisioning/_index) | 管理 Kubernetes 集群                                           |
-| Node 2 | Linux (推荐 Ubuntu Server 18.04)         | [Worker](/docs/rancher2/cluster-provisioning/_index)                                                                                                                  | 用来部署 Rancher Cluster Agent，Metrics server，DNS 和 Ingress |
-| Node 3 | Windows (Windows Server 1809 或以上版本) | [Worker](/docs/rancher2/cluster-provisioning/_index)                                                                                                                  | 运行 Windows 容器                                              |
+| 节点   | 操作系统                                 | 集群角色                                                                                                                                                                    | 目的                                                           |
+| :----- | :--------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------- |
+| Node 1 | Linux (推荐 Ubuntu Server 18.04)         | [Control Plane](/docs/rancher2.5/cluster-provisioning/_index), [etcd](/docs/rancher2.5/cluster-provisioning/_index), [Worker](/docs/rancher2.5/cluster-provisioning/_index) | 管理 Kubernetes 集群                                           |
+| Node 2 | Linux (推荐 Ubuntu Server 18.04)         | [Worker](/docs/rancher2.5/cluster-provisioning/_index)                                                                                                                      | 用来部署 Rancher Cluster Agent，Metrics server，DNS 和 Ingress |
+| Node 3 | Windows (Windows Server 1809 或以上版本) | [Worker](/docs/rancher2.5/cluster-provisioning/_index)                                                                                                                      | 运行 Windows 容器                                              |
 
 ### 容器要求
 
@@ -101,18 +101,18 @@ Windows 集群中的工作负载通常部署在 Windows（`worker`）节点中�
 
 ### Cloud Providers
 
-如果您在集群中设置 Kubernetes Cloud Provider，则需要执行一些其他步骤。如果要利用云提供商的功能（例如，为集群自动配置存储，负载均衡器或其他基础设施），则可能需要设置 Cloud Provider。请参阅[本页](/docs/rancher2/cluster-provisioning/rke-clusters/cloud-providers/_index)，以获取有关如何配置 Cloud Provider 的详细信息。
+如果您在集群中设置 Kubernetes Cloud Provider，则需要执行一些其他步骤。如果要利用云提供商的功能（例如，为集群自动配置存储，负载均衡器或其他基础设施），则可能需要设置 Cloud Provider。请参阅[本页](/docs/rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/_index)，以获取有关如何配置 Cloud Provider 的详细信息。
 
 如果您使用的是 GCE（Google Compute Engine）云提供商，则必须执行以下操作：
 
-- 按照[这些步骤](/docs/rancher2/cluster-provisioning/rke-clusters/cloud-providers/gce/_index)在`cluster.yml`中启用 GCE Cloud Provider。
+- 按照[这些步骤](/docs/rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/gce/_index)在`cluster.yml`中启用 GCE Cloud Provider。
 - 在 Rancher 中配置集群时，请在 Rancher UI 中选择“自定义云提供商”作为云提供商。
 
 ## 创建 Windows 集群
 
 本教程将介绍如何使用三个节点创建 Windows 集群。
 
-使用 Rancher 设置自定义集群时，将通过在每个集群上安装[Rancher Agent](/docs/rancher2/cluster-provisioning/rke-clusters/custom-nodes/agent-options/_index)将节点添加到集群中。从 Rancher UI 创建或编辑集群时，您将看到一个**自定义节点启动命令**，您可以在每个服务器上运行该命令以将其添加到自定义集群中。
+使用 Rancher 设置自定义集群时，将通过在每个集群上安装[Rancher Agent](/docs/rancher2.5/cluster-provisioning/rke-clusters/custom-nodes/agent-options/_index)将节点添加到集群中。从 Rancher UI 创建或编辑集群时，您将看到一个**自定义节点启动命令**，您可以在每个服务器上运行该命令以将其添加到自定义集群中。
 
 要创建支持 Windows 节点和容器的自定义集群，您需要完成以下任务。
 
@@ -138,11 +138,11 @@ Windows 集群中的工作负载通常部署在 Windows（`worker`）节点中�
 | Node 2 | Linux (推荐 Ubuntu Server 18.04)                  |
 | Node 3 | Windows (Windows Server Core Version 1809 或以上) |
 
-如果您的节点由**云供应商**托管，并且您需要自动化支持（例如负载均衡器或永久性存储设备），则您的节点还有其他配置要求。有关详细信息，请参阅[设置 Cloud Provider](/docs/rancher2/cluster-provisioning/rke-clusters/cloud-providers/_index)。
+如果您的节点由**云供应商**托管，并且您需要自动化支持（例如负载均衡器或永久性存储设备），则您的节点还有其他配置要求。有关详细信息，请参阅[设置 Cloud Provider](/docs/rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/_index)。
 
 ### 2. 创建自定义集群
 
-创建支持 Windows 节点的自定义集群的说明与一般[创建自定义集群的说明](/docs/rancher2/cluster-provisioning/rke-clusters/custom-nodes/_index)基本相同，但是具有一些特定于 Windows 的要求。
+创建支持 Windows 节点的自定义集群的说明与一般[创建自定义集群的说明](/docs/rancher2.5/cluster-provisioning/rke-clusters/custom-nodes/_index)基本相同，但是具有一些特定于 Windows 的要求。
 
 仅当集群使用 Kubernetes v1.15+ 和 Flannel 网络插件时才可以启用 Windows 支持。
 
@@ -162,7 +162,7 @@ Windows 集群中的工作负载通常部署在 Windows（`worker`）节点中�
 
 1. 单击 **下一步**.
 
-> **重要提示：** 对于 **Host Gateway (L2bridge)**网络，最好对所有节点使用相同的第 2 层网络。否则，您需要为其配置路由规则。有关详细信息，请参阅[配置云托管的 VM 路由](/docs/rancher2/cluster-provisioning/rke-clusters/windows-clusters/host-gateway-requirements/_index)。如果您使用的是亚马逊 EC2，Google GCE 或 Azure VM，还需要[禁用私有 IP 地址检查](/docs/rancher2/cluster-provisioning/rke-clusters/windows-clusters/host-gateway-requirements/_index)。
+> **重要提示：** 对于 **Host Gateway (L2bridge)**网络，最好对所有节点使用相同的第 2 层网络。否则，您需要为其配置路由规则。有关详细信息，请参阅[配置云托管的 VM 路由](/docs/rancher2.5/cluster-provisioning/rke-clusters/windows-clusters/host-gateway-requirements/_index)。如果您使用的是亚马逊 EC2，Google GCE 或 Azure VM，还需要[禁用私有 IP 地址检查](/docs/rancher2.5/cluster-provisioning/rke-clusters/windows-clusters/host-gateway-requirements/_index)。
 
 ### 3. 在集群上添加节点
 
@@ -178,7 +178,7 @@ Windows 集群中的工作负载通常部署在 Windows（`worker`）节点中�
 
 1. 在**节点角色**部分中，至少选择**etcd**和**Control Plane**。选择所有角色。
 
-1. 可选：如果您单击**显示高级选项**，则可以自定义 [Rancher Agent](/docs/rancher2/cluster-provisioning/rke-clusters/rancher-agents/_index) 和[节点标签](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)等。
+1. 可选：如果您单击**显示高级选项**，则可以自定义 [Rancher Agent](/docs/rancher2.5/cluster-provisioning/rke-clusters/rancher-agents/_index) 和[节点标签](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)等。
 
 1. 将屏幕上显示的命令复制到剪贴板。
 
@@ -246,17 +246,17 @@ Windows 集群中的工作负载通常部署在 Windows（`worker`）节点中�
 
 创建集群后，您可以通过 Rancher UI 访问它。作为最佳实践，我们建议同时设置以下访问集群的替代方法：
 
-- **通过 kubectl CLI 访问集群：** 请按照[这些步骤](/docs/rancher2/cluster-admin/cluster-access/kubectl/_index)来通过 kubectl 访问您的集群。在这种情况下，您将通过 Rancher Server 的身份验证代理进行身份验证，然后 Rancher 会将您连接到下游集群。此方法使您无需 Rancher UI 即可管理集群。
+- **通过 kubectl CLI 访问集群：** 请按照[这些步骤](/docs/rancher2.5/cluster-admin/cluster-access/kubectl/_index)来通过 kubectl 访问您的集群。在这种情况下，您将通过 Rancher Server 的身份验证代理进行身份验证，然后 Rancher 会将您连接到下游集群。此方法使您无需 Rancher UI 即可管理集群。
 
-- **通过 kubectl CLI 和授权的集群地址访问您的集群：** 请按照[这些步骤](/docs/rancher2/cluster-admin/cluster-access/kubectl/_index)来通过 kubectl 直接访问您的集群，而不需要通过 Rancher 进行认证。我们建议您设定此方法访问集群，这样在您无法连接 Rancher 时您仍然能够访问集群。
+- **通过 kubectl CLI 和授权的集群地址访问您的集群：** 请按照[这些步骤](/docs/rancher2.5/cluster-admin/cluster-access/kubectl/_index)来通过 kubectl 直接访问您的集群，而不需要通过 Rancher 进行认证。我们建议您设定此方法访问集群，这样在您无法连接 Rancher 时您仍然能够访问集群。
 
 ## Azure 中存储类的配置
 
-如果您为节点使用 Azure VM，则可以将[Azure File](https://docs.microsoft.com/en-us/azure/aks/azure-files-dynamic-pv)用作[存储类](/docs/rancher2/cluster-admin/volumes-and-storage/_index)。
+如果您为节点使用 Azure VM，则可以将[Azure File](https://docs.microsoft.com/en-us/azure/aks/azure-files-dynamic-pv)用作[存储类](/docs/rancher2.5/cluster-admin/volumes-and-storage/_index)。
 
 为了使 Azure 平台创建所需的存储资源，请按照下列步骤操作：
 
-1. [配置 Azure Cloud Provider](/docs/rancher2/cluster-provisioning/rke-clusters/cloud-providers/_index)。
+1. [配置 Azure Cloud Provider](/docs/rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/_index)。
 
 1. 配置`kubectl`连接到您的集群。
 

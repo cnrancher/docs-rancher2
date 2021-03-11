@@ -79,9 +79,9 @@ Rancher 中有几种可用的服务。以下说明来自 [Kubernetes 文档](htt
 
 文档的此部分包含有关部署工作负载和使用工作负载选项的说明。
 
-- [部署工作负载](/docs/rancher2/k8s-in-rancher/workloads/deploy-workloads/_index)
-- [升级工作负载](/docs/rancher2/k8s-in-rancher/workloads/upgrade-workloads/_index)
-- [回滚工作负载](/docs/rancher2/k8s-in-rancher/workloads/rollback-workloads/_index)
+- [部署工作负载](/docs/rancher2.5/k8s-in-rancher/workloads/deploy-workloads/_index)
+- [升级工作负载](/docs/rancher2.5/k8s-in-rancher/workloads/upgrade-workloads/_index)
+- [回滚工作负载](/docs/rancher2.5/k8s-in-rancher/workloads/rollback-workloads/_index)
 
 ## 其他链接
 

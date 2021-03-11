@@ -94,11 +94,11 @@ Rancher 具有管理这些已注册集群的权限。具体权限取决于集群
 
 完成注册后，集群所有者具有以下权限：
 
-- 通过基于角色的访问控制，[管理集群访问权限](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)。
-- 启用[监控、告警和通知](/docs/rancher2/monitoring-alerting/2.5/_index)。
-- 启用[日志](/docs/rancher2/logging/2.5/_index)。
-- 启用[Istio](/docs/rancher2/istio/2.5/_index)。
-- 使用[流水线](/docs/rancher2/project-admin/pipelines/_index)。
+- 通过基于角色的访问控制，[管理集群访问权限](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)。
+- 启用[监控、告警和通知](/docs/rancher2.5/monitoring-alerting/2.5/_index)。
+- 启用[日志](/docs/rancher2.5/logging/2.5/_index)。
+- 启用[Istio](/docs/rancher2.5/istio/2.5/_index)。
+- 使用[流水线](/docs/rancher2.5/project-admin/pipelines/_index)。
 - 管理项目和工作负载。
 
 ### K3s 集群
@@ -107,7 +107,7 @@ Rancher 具有管理这些已注册集群的权限。具体权限取决于集群
 
 当一个 K3s 集群在 Rancher 中注册后，Rancher 会将其识别为 K3s。集群所有者对于 K3s 拥有上述的所有权限，除此之外，还有以下权限用于编辑和升级 K3s 集群：
 
-- 能够[升级 K3s 版本](/docs/rancher2/cluster-admin/upgrading-kubernetes/_index)
+- 能够[升级 K3s 版本](/docs/rancher2.5/cluster-admin/upgrading-kubernetes/_index)
 - 能够配置同时升级的最大节点数量。
 - 能够看到 K3s 集群的配置参数和环境变量的只读版本，用于启动集群中的每个节点。
 
@@ -119,7 +119,7 @@ Amazon EKS 集群现在可以在 Rancher 中注册。在大多数情况下，注
 
 当您删除在 Rancher 中创建的 EKS 集群时，该集群将被销毁。当您删除在 Rancher 中注册的 EKS 集群时，它将与 Rancher 服务器断开连接，但它仍然存在，您仍然可以以在 Rancher 中注册之前的方式访问它。
 
-已注册的 EKS 集群的功能列在[本页](/docs/rancher2/cluster-provisioning/_index)的表格中。
+已注册的 EKS 集群的功能列在[本页](/docs/rancher2.5/cluster-provisioning/_index)的表格中。
 
 ## 配置 K3s 集群升级
 

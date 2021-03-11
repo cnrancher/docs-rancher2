@@ -132,13 +132,13 @@ W0705 23:04:58.240571       7 backend_ssl.go:49] error obtaining PEM from secret
 
 ## 没有匹配的 “Issuer”
 
-如果您选择的 [SSL 配置](/docs/rancher2/installation/k8s-install/helm-rancher/_index)选项需要 cert-manager，则您需要在安装 Rancher 之前安装 [cert-manager](/docs/rancher2/installation/k8s-install/helm-rancher/_index)，否则将显示以下错误：
+如果您选择的 [SSL 配置](/docs/rancher2.5/installation/k8s-install/helm-rancher/_index)选项需要 cert-manager，则您需要在安装 Rancher 之前安装 [cert-manager](/docs/rancher2.5/installation/k8s-install/helm-rancher/_index)，否则将显示以下错误：
 
 ```
 Error: validation failed: unable to recognize "": no matches for kind "Issuer" in version "certmanager.k8s.io/v1alpha1"
 ```
 
-请先安装 [cert-manager](/docs/rancher2/installation/k8s-install/helm-rancher/_index)， 然后再次尝试安装 Rancher。
+请先安装 [cert-manager](/docs/rancher2.5/installation/k8s-install/helm-rancher/_index)， 然后再次尝试安装 Rancher。
 
 ## Canal Pod 显示 READY 2/3
 

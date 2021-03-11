@@ -18,11 +18,11 @@ keywords:
 
 如果您的组织使用 Microsoft Active Directory 作为中心用户存储库，您可以将 Rancher 配置为与 Active Directory 服务器通信以对用户进行身份验证。这使 Rancher 管理员可以对外部用户系统中的用户和组进行集群和项目的访问控制，同时允许最终用户在登录 Rancher UI 时使用其 Active Directory 凭据进行身份验证。
 
-Rancher 使用 LDAP 与 Active Directory 服务器通信。因此，Active Directory 的身份验证流与 [OpenLDAP 认证](/docs/rancher2/admin-settings/authentication/openldap/_index)的身份验证流相同。
+Rancher 使用 LDAP 与 Active Directory 服务器通信。因此，Active Directory 的身份验证流与 [OpenLDAP 认证](/docs/rancher2.5/admin-settings/authentication/openldap/_index)的身份验证流相同。
 
 > **注意：**
 >
-> 在开始之前，请熟悉[外部身份验证配置和用户主体](/docs/rancher2/admin-settings/authentication/_index)的概念。
+> 在开始之前，请熟悉[外部身份验证配置和用户主体](/docs/rancher2.5/admin-settings/authentication/_index)的概念。
 
 ## 先决条件
 
@@ -208,4 +208,4 @@ $ ldapsearch -x -D "acme\jdoe" -w "secret" -p 389 \
 
 ## 附件：故障排查
 
-如果在测试与 Active Directory 服务器的连接时遇到问题，请首先仔细检查为服务帐户输入的凭据以及搜索起点配置。您还可以检查 Rancher 日志，以帮助查明问题的原因。调试日志可能包含有关错误的更详细信息。请参阅本文档中的[如何启用调试日志](/docs/rancher2/faq/technical/_index)。
+如果在测试与 Active Directory 服务器的连接时遇到问题，请首先仔细检查为服务帐户输入的凭据以及搜索起点配置。您还可以检查 Rancher 日志，以帮助查明问题的原因。调试日志可能包含有关错误的更详细信息。请参阅本文档中的[如何启用调试日志](/docs/rancher2.5/faq/technical/_index)。

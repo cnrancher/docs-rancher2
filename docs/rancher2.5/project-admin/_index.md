@@ -19,19 +19,19 @@ Rancher 的项目功能允许您在项目层级进行应用资源配置和权限
 
 您可以使用项目进行如下操作：
 
-- [设置用户访问权限](/docs/rancher2/project-admin/project-members/_index)
-- [设置用户角色](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)，默认的角色包括：项目所有者、项目成员和只读权限，您也可以通过[自定义角色](/docs/rancher2/admin-settings/rbac/default-custom-roles/_index)，创建新的角色，然后将其分配给其他用户。
-- [设置项目资源配额](/docs/rancher2/project-admin/resource-quotas/_index)
-- [管理命名空间](/docs/rancher2/project-admin/namespaces/_index)
-- [设置日志、监控等工具](/docs/rancher2/project-admin/tools/_index)
-- [设置流水线和 CI/CD 环境](/docs/rancher2/project-admin/pipelines/_index)
-- [设置 Pod 安全策略](/docs/rancher2/project-admin/pod-security-policies/_index)
+- [设置用户访问权限](/docs/rancher2.5/project-admin/project-members/_index)
+- [设置用户角色](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)，默认的角色包括：项目所有者、项目成员和只读权限，您也可以通过[自定义角色](/docs/rancher2.5/admin-settings/rbac/default-custom-roles/_index)，创建新的角色，然后将其分配给其他用户。
+- [设置项目资源配额](/docs/rancher2.5/project-admin/resource-quotas/_index)
+- [管理命名空间](/docs/rancher2.5/project-admin/namespaces/_index)
+- [设置日志、监控等工具](/docs/rancher2.5/project-admin/tools/_index)
+- [设置流水线和 CI/CD 环境](/docs/rancher2.5/project-admin/pipelines/_index)
+- [设置 Pod 安全策略](/docs/rancher2.5/project-admin/pod-security-policies/_index)
 
 ## 认证授权
 
-非 admin 用户在[管理员](/docs/rancher2/admin-settings/rbac/global-permissions/_index)、[集群所有者](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)和[项目所有者](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)将用户加入到项目成员名单中之前，都不能访问项目内的任何内容。
+非 admin 用户在[管理员](/docs/rancher2.5/admin-settings/rbac/global-permissions/_index)、[集群所有者](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)和[项目所有者](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)将用户加入到项目成员名单中之前，都不能访问项目内的任何内容。
 
-创建项目的人将自动成为[项目所有者](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)。
+创建项目的人将自动成为[项目所有者](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)。
 
 ## 切换项目
 
