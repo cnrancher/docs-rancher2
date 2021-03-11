@@ -40,7 +40,7 @@ Ingress 网关是将在您的集群中部署的 Kubernetes 服务。每个集群
 1. 转到要允许外部流量进入 Istio 的集群。
 1. 单击**工具 > Istio**。
 1. 展开**Ingress 网关**部分。
-1. 在**启用 Ingress 网关**部分，单击**是**。Istio 网关的默认服务类型是 NodePort。您也可以将其配置为[负载均衡器](/docs/rancher2.5/k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index)。
+1. 在**启用 Ingress 网关**部分，单击**是**。Istio 网关的默认服务类型是 NodePort。您也可以将其配置为[负载均衡器](/docs/rancher2/k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index)。
 1. （可选）配置该服务的端口，服务类型，节点选择器和容忍以及资源请求和限制。建议的最低资源是对 CPU 和内存的默认资源请求。
 1. 单击**保存**。
 
@@ -147,4 +147,4 @@ bookinfo-gateway   64m
 
 ## 后续操作
 
-[设置 Istio 的流量管理组件](/docs/rancher2.5/istio/2.3.x-2.4.x/setup/set-up-traffic-management/_index)
+[设置 Istio 的流量管理组件](/docs/rancher2/istio/2.3.x-2.4.x/setup/set-up-traffic-management/_index)

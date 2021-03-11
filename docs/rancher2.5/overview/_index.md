@@ -86,7 +86,7 @@ Rancher API Server 是基于嵌入式 Kubernetes API Server 和 ETCD 数据库�
 
 - **日志：** Rancher 可以跟多种主流日志工具集成，您可以设置 [集群日志](/docs/rancher2.5/logging/2.0.x-2.4.x/project-logging/_index) 或 [项目日志](/docs/rancher2.5/project-admin/tools/logging/_index)。
 - **监控：** 使用 Rancher，您可以通过 Prometheus 监控集群节点、Kubernetes 组件、软件部署的状态和进度。您可以设置 [集群监控](/docs/rancher2.5/cluster-admin/tools/monitoring/_index) 或 [项目监控](/docs/rancher2.5/project-admin/tools/monitoring/_index)。
-- **告警信息：** 您需要随时知道集群和项目的计划和非计划事件，才可以提高公司的运行效率。您可以设置[集群告警](/docs/rancher2.5/monitoring-alerting/2.0-2.4/cluster-alerts/_index) 或 [项目告警](/docs/rancher2.5/project-admin/tools/alerts/_index)。
+- **告警信息：** 您需要随时知道集群和项目的计划和非计划事件，才可以提高公司的运行效率。您可以设置[集群告警](/docs/rancher2.5/monitoring-alerting/cluster-alerts/_index) 或 [项目告警](/docs/rancher2.5/project-admin/tools/alerts/_index)。
 
 ## 编辑下游集群
 

@@ -21,7 +21,7 @@ keywords:
 
 创建集群时，Rancher 已经配置了一些默认告警规则。集群内发生的可疑事件会触发这些告警规则，然后 Rancher 会将这些告警信息发送到您关联的接收者邮箱、手机、slack、钉钉等消息工具中。
 
-有一些告警使用 Prometheus 表达式作为触发指标，请参考 [Rancher Prometheus 表达式有关文档](/docs/rancher2.5/monitoring-alerting/2.0-2.4/cluster-monitoring/expression/_index)或者查询 [Prometheus 表达式文档](https://prometheus.io/docs/prometheus/latest/querying/basics/)，获取表达式的使用指南。
+有一些告警使用 Prometheus 表达式作为触发指标，请参考 [Rancher Prometheus 表达式有关文档](/docs/rancher2.5/monitoring-alerting/cluster-monitoring/expression/_index)或者查询 [Prometheus 表达式文档](https://prometheus.io/docs/prometheus/latest/querying/basics/)，获取表达式的使用指南。
 
 ## etcd 告警
 
@@ -61,7 +61,7 @@ Kubernetes 事件是可以深入了解集群内部事件的对象，例如调度
 
 ## 节点告警
 
-可以基于节点指标触发告警。Kubernetes 集群中的每个计算资源都称为一个节点。[节点](/docs/rancher2.5/cluster-admin/_index)可以是物理机或虚拟机。
+可以基于节点指标触发告警。Kubernetes 集群中的每个计算资源都称为一个节点。[节点](/docs/rancher2/cluster-admin/_index)可以是物理机或虚拟机。
 
 | 告警                                      | 说明                                                                                                |
 | :---------------------------------------- | :-------------------------------------------------------------------------------------------------- |
@@ -71,4 +71,4 @@ Kubernetes 事件是可以深入了解集群内部事件的对象，例如调度
 
 ## 项目级别告警
 
-启用对项目的监视时，将提供一些项目级别的告警。有关详细信息，请参阅[项目级别告警](/docs/rancher2.5/project-admin/tools/alerts/_index)。
+启用对项目的监视时，将提供一些项目级别的告警。有关详细信息，请参阅[项目级别告警](/docs/rancher2/project-admin/tools/alerts/_index)。
