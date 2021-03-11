@@ -53,7 +53,8 @@ fs.readdirSync("docs").forEach((dirname) => {
                     "./build/",
                     url,
                     "",
-                    filename
+                    filename,
+                    ["--no-sandbox"]
                 );
                 console.log("pdf generated for", filename);
             } catch (err) {

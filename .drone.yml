@@ -24,7 +24,7 @@ steps:
       NOPROXY: localhost
       noproxy: localhost
   - name: build
-    image: node:12.16.0
+    image: node:12.16.2
     environment:
       PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
     commands:
@@ -75,20 +75,10 @@ steps:
       event:
         - push
   - name: build-pdf
-    image: node:12.16.0
+    image: reg.cnrancher.com/tool/node-chrome:12.16.0-stable
     environment:
-      HTTP_PROXY:
-        from_secret: proxy
-      HTTPS_PROXY:
-        from_secret: proxy
-      http_proxy:
-        from_secret: proxy
-      https_proxy:
-        from_secret: proxy
-      NOPROXY: localhost
-      noproxy: localhost
+      PUPPETEER_EXECUTABLE_PATH: /usr/bin/google-chrome
     commands:
-      - yarn add puppeteer@^2.1.1 --save-dev
       - ln -s /website/build ./build
       - yarn generate
     volumes:
