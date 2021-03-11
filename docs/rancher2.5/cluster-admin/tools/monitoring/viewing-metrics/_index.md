@@ -19,11 +19,11 @@ keywords:
 
 _自 v2.2.0 起可用_
 
-在启用[集群监控](/docs/rancher2.5/cluster-admin/tools/monitoring/_index)或[项目监控](/docs/rancher2.5/project-admin/tools/monitoring/_index)后，您将希望开始查看正在收集的监控数据。有多种查看监控数据的方式。
+在启用[集群监控](/docs/rancher2/cluster-admin/tools/monitoring/_index)或[项目监控](/docs/rancher2/project-admin/tools/monitoring/_index)后，您将希望开始查看正在收集的监控数据。有多种查看监控数据的方式。
 
 ## Rancher UI
 
-> **注意：** 仅当您启用了[集群监控](/docs/rancher2.5/cluster-admin/tools/monitoring/_index)后，此方式才可用。[项目监控](/docs/rancher2.5/project-admin/tools/monitoring/_index)采集到的自定义指标必须使用项目监控部署的 Grafana 来进行查看。
+> **注意：** 仅当您启用了[集群监控](/docs/rancher2/cluster-admin/tools/monitoring/_index)后，此方式才可用。[项目监控](/docs/rancher2/project-admin/tools/monitoring/_index)采集到的自定义指标必须使用项目监控部署的 Grafana 来进行查看。
 
 Rancher 的指标线图在多个位置可用：
 
@@ -47,11 +47,11 @@ Rancher 的指标线图在多个位置可用：
 
 ## Grafana
 
-在启用[集群监控](/docs/rancher2.5/cluster-admin/tools/monitoring/_index)或[项目监控](/docs/rancher2.5/project-admin/tools/monitoring/_index)后，Rancher 会自动创建一条可跳转到 Grafana 实例的链接。Grafana 允许您查询，可视化，设置告警并最终了解您的集群和工作负载状态。有关 Grafana 及其功能的更多信息，请查看 [Grafana 网站](https://grafana.com/grafana)。
+在启用[集群监控](/docs/rancher2/cluster-admin/tools/monitoring/_index)或[项目监控](/docs/rancher2/project-admin/tools/monitoring/_index)后，Rancher 会自动创建一条可跳转到 Grafana 实例的链接。Grafana 允许您查询，可视化，设置告警并最终了解您的集群和工作负载状态。有关 Grafana 及其功能的更多信息，请查看 [Grafana 网站](https://grafana.com/grafana)。
 
 ### 访问权限
 
-Rancher 通过根据用户的[角色](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)，确定用户是否可以访问 Grafana 实例以及在其中可查看的数据。换句话说，用户在 Grafana 中的访问权限反映了他们在 Rancher 中的访问权限。
+Rancher 通过根据用户的[角色](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)，确定用户是否可以访问 Grafana 实例以及在其中可查看的数据。换句话说，用户在 Grafana 中的访问权限反映了他们在 Rancher 中的访问权限。
 
 #### 集群级别 Grafana
 

@@ -32,7 +32,7 @@ RancherD 是一个二进制文件，它首先启动一个 RKE2 Kubernetes 集群
 
 在本说明的第一部分，您将学习如何在单个节点上启动 RancherD。按照第一部分的步骤进行操作的结果是一个安装了 Rancher 服务器的单节点[RKE2](https://docs.rke2.io/)Kubernetes 集群。这个集群以后可以很容易地变成高可用性。如果 Rancher 只需要管理本地 Kubernetes 集群，那么安装就完成了。
 
-第二部分介绍了如何将单节点的 Rancher 安装转换成高可用性安装。如果 Rancher 服务器将管理下游的 Kubernetes 集群，则必须遵循这些步骤。关于高可用 Rancher 部署的推荐架构的讨论可以在我们的[最佳实践指南](/docs/rancher2.5/best-practices/2.5/_index)中找到。
+第二部分介绍了如何将单节点的 Rancher 安装转换成高可用性安装。如果 Rancher 服务器将管理下游的 Kubernetes 集群，则必须遵循这些步骤。关于高可用 Rancher 部署的推荐架构的讨论可以在我们的[最佳实践指南](/docs/rancher2.5/best-practices/_index)中找到。
 
 ## 先决条件
 

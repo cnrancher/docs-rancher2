@@ -55,6 +55,6 @@ keywords:
 
 ## 安装 Istio
 
-按照[启动 Istio](/docs/rancher2.5/istio/2.5/configuration-reference/selectors-and-scrape/_index) 的说明执行，并添加一个自定义答案：`istio_cni.enabled = true`。
+按照[启动 Istio](/docs/rancher2/istio/2.5/configuration-reference/selectors-and-scrape/_index) 的说明执行，并添加一个自定义答案：`istio_cni.enabled = true`。
 
 Istio 完成安装后，系统项目中的应用商店页面应显示成功部署了的 istio 和`istio-cni`应用。Istio 的 Sidecar 自动注入功能现在应该可以正常工作了。

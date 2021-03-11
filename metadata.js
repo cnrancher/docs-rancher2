@@ -272,7 +272,6 @@ const metadata = {
             "rancher2/logging/2.5/_index": "v2.5",
             "rancher2/opa-gatekeeper/_index": "OPA Gatekeeper",
             "rancher2/helm-charts/_index": "概述",
-            "rancher2/helm-charts/app-marketplace/_index": "应用市场",
             "rancher2/helm-charts/legacy-catalogs/_index":
                 "Rancher v2.4 及之前的应用市场",
             "rancher2/k8s-in-rancher/workloads/_index": "工作负载",

@@ -149,7 +149,7 @@ Rancher 支持与以下日志收集目标服务集成：
 
 通知和告警功能是基于 [Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager/) 的。利用这些工具，Rancher 可以通知[集群所有者](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)和[项目所有者](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)有需要处理的告警。
 
-**详情请参考[配置告警](/docs/rancher2.5/monitoring-alerting/2.0-2.4/cluster-alerts/_index)。**
+**详情请参考[配置告警](/docs/rancher2.5/monitoring-alerting/cluster-alerts/_index)。**
 
 ### 通过 Kubectl 和 kubeconfig 访问集群
 

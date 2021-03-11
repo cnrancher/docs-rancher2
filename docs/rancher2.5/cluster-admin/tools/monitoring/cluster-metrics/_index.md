@@ -33,11 +33,11 @@ _自 v2.2.0 起可用_
 1. 点选对应的节点。
 1. 展开**节点指标**查看。
 
-[_获取具体的指标表达式_](/docs/rancher2.5/monitoring-alerting/2.0-2.4/cluster-monitoring/expression/_index)
+[_获取具体的指标表达式_](/docs/rancher2.5/monitoring-alerting/cluster-monitoring/expression/_index)
 
 ### Etcd 指标
 
-> **注意：** 仅支持通过 [Rancher 安装的 Kubernetes 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)。
+> **注意：** 仅支持通过 [Rancher 安装的 Kubernetes 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)。
 
 Etcd 指标用于展示 etcd 数据库的操作情况。当确立了 etcd 数据库操作的"基准指标"后，您就可以通过这些"基准指标"来观察异常的增量。当出现异常的增量时，这表明 etcd 集群可能存在问题，您应该尽快予以解决。
 
@@ -53,13 +53,13 @@ Etcd 指标用于展示 etcd 数据库的操作情况。当确立了 etcd 数据
 
   如果该统计数字突然增长，通常表明网络通信问题不断迫使 etcd 集群选举新的领导者。
 
-[_获取具体的指标表达式_](/docs/rancher2.5/monitoring-alerting/2.0-2.4/cluster-monitoring/expression/_index)
+[_获取具体的指标表达式_](/docs/rancher2.5/monitoring-alerting/cluster-monitoring/expression/_index)
 
 ### Kubernetes 组件指标
 
 Kubernetes 组件指标用于展示集群里各个 Kubernetes 组件的监控数据。它表示每个组件的链接和延迟的信息：API Server，Controller Manager，Scheduler 以及 Ingress Controller。
 
-> **注意：** 仅支持通过 [Rancher 安装的 Kubernetes 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)。
+> **注意：** 仅支持通过 [Rancher 安装的 Kubernetes 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)。
 
 当分析 Kubernetes 组件指标时，不能仅关注 Chart 内的某时刻的单个独立指标。相反，您应该观察一段时间以确立"指标基准"，通过它们来观察异常的增量。这些增量通常表明集群可能存在问题，您需要进行调查。
 
@@ -85,13 +85,13 @@ Kubernetes 组件指标用于展示集群里各个 Kubernetes 组件的监控数
 
   Ingress 路由请求到集群内的速度。
 
-[_获取具体的指标表达式_](/docs/rancher2.5/monitoring-alerting/2.0-2.4/cluster-monitoring/expression/_index)
+[_获取具体的指标表达式_](/docs/rancher2.5/monitoring-alerting/cluster-monitoring/expression/_index)
 
 ## Rancher 日志指标
 
-Rancher 日志指标可以展示日志服务相关组件的操作情况，前提是您需要[为 Rancher 启用日志服务](/docs/rancher2.5/logging/2.0.x-2.4.x/project-logging/_index)。
+Rancher 日志指标可以展示日志服务相关组件的操作情况，前提是您需要[为 Rancher 启用日志服务](/docs/rancher2/logging/2.0.x-2.4.x/project-logging/_index)。
 
-[_获取具体的指标表达式_](/docs/rancher2.5/monitoring-alerting/2.0-2.4/cluster-monitoring/expression/_index)
+[_获取具体的指标表达式_](/docs/rancher2.5/monitoring-alerting/cluster-monitoring/expression/_index)
 
 ## 查看某个工作负载的指标
 
@@ -112,4 +112,4 @@ Rancher 日志指标可以展示日志服务相关组件的操作情况，前提
    - 如果需要再进一步查看 **容器指标**，可以点选该 Pod 的**容器**部分，
      - 展开**容器指标**查看。
 
-[_获取具体的指标表达式_](/docs/rancher2.5/monitoring-alerting/2.0-2.4/cluster-monitoring/expression/_index)
+[_获取具体的指标表达式_](/docs/rancher2.5/monitoring-alerting/cluster-monitoring/expression/_index)

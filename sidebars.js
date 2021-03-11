@@ -812,7 +812,6 @@ module.exports = {
             "rancher2/pipelines/docs-for-v2.0.x/_index",
         ],
         HelmChart: [
-            "rancher2/helm-charts/app-marketplace/_index",
             {
                 type: "category",
                 label: "旧版应用商店",

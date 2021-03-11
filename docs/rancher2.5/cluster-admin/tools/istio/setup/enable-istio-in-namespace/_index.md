@@ -56,8 +56,8 @@ sidecar.istio.io/inject: "false"
 
 **结果：** Istio sidecar 不会被注入到该工作负载中。
 
-> **说明：** 如果您启用了 Istio，而且部署了 Job 之后，Job 的状态一直没有变更为**Completed**，您需要参考[这些步骤](/docs/rancher2.5/istio/2.3.x-2.4.x/setup/enable-istio-in-namespace/_index)手动添加 annotation。因为 Istio Sidecarh 会无休止地运行，即使 Job 的任务完成了，它的状态也不能被视为**Completed**。上述步骤是在短期内处理这个问题的方法，它禁止了 Istio 和添加了 annotation 的 Pod 之间的通信。如果您使用了这种方式解决这个问题，这个 Job 就没有权限访问 service mesh，不能够用于集成测试。
+> **说明：** 如果您启用了 Istio，而且部署了 Job 之后，Job 的状态一直没有变更为**Completed**，您需要参考[这些步骤](/docs/rancher2/istio/2.3.x-2.4.x/setup/enable-istio-in-namespace/_index)手动添加 annotation。因为 Istio Sidecarh 会无休止地运行，即使 Job 的任务完成了，它的状态也不能被视为**Completed**。上述步骤是在短期内处理这个问题的方法，它禁止了 Istio 和添加了 annotation 的 Pod 之间的通信。如果您使用了这种方式解决这个问题，这个 Job 就没有权限访问 service mesh，不能够用于集成测试。
 
 ## 后续操作
 
-[选择部署 Istio 组件的节点](/docs/rancher2.5/istio/2.3.x-2.4.x/setup/node-selectors/_index)
+[选择部署 Istio 组件的节点](/docs/rancher2/istio/2.3.x-2.4.x/setup/node-selectors/_index)
