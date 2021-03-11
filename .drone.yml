@@ -104,6 +104,3 @@ steps:
 volumes:
   - name: vol
     temp: {}
-
-node:
-  instance: agent-amd64
