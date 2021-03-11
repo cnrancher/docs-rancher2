@@ -25,6 +25,9 @@ steps:
       noproxy: localhost
   - name: build
     image: node:12.16.2
+    resources:
+      limits:
+        cpu: 0.8
     environment:
       PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
       HTTP_PROXY:
