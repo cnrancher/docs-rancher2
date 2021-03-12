@@ -1,15 +1,9 @@
 ---
-title: Restore
-weight: 1010
-aliases:
-  - /rancher/v2.0-v2.4/en/backups/restorations
-  - /rancher/v2.0-v2.4/en/backups/legacy/restore
-  - /rancher/v2.0-v2.4/en/backups/v2.0.x-v2.4.x/restore
+title: 概述
 ---
-If you lose the data on your Rancher Server, you can restore it if you have backups stored in a safe location.
 
-- [Restoring backups for Rancher installed with Docker](./docker-restores)
-- [Restoring backups for Rancher installed on an RKE Kubernetes cluster](./rke-restore)
-- [Restoring backups for Rancher installed on a K3s Kubernetes cluster](./k3s-restore)
+如果您在安全位置存储了备份，丢失了 Ranche Server 上的数据时，您可以使用这些备份恢复数据。
 
-If you are looking to restore your [Rancher launched Kubernetes cluster]({{<baseurl>}}/rancher/v2.0-v2.4/en/cluster-provisioning/rke-clusters/), please refer to [this section]({{<baseurl>}}/rancher/v2.0-v2.4/en/cluster-admin/restoring-etcd/).
+- [单节点 Rancher 高可用恢复](/docs/rancher2/backups/restore/docker-restore/_index)
+- [RKE Rancher 高可用恢复](/docs/rancher2/backups/restore/ha-restore/_index)
+- [K3s Rancher 高可用恢复](/docs/rancher2/backups/restore/k3s-restore/_index)

@@ -1,23 +1,34 @@
 ---
-title: Longhorn - Cloud native distributed block storage for Kubernetes
-shortTitle: Longhorn Storage
-weight: 19
+title: Longhorn - Kubernetes的云端原生分布式块存储
+description:
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - rancher 2.5
+  - Longhorn
 ---
 
-[Longhorn](https://longhorn.io/) is a lightweight, reliable and easy-to-use distributed block storage system for Kubernetes.
+[Longhorn](https://longhorn.io/)是一个轻量级的、可靠的、易于使用的 Kubernetes 分布式块存储系统。
 
-Longhorn is free, open source software. Originally developed by Rancher Labs, it is now being developed as a sandbox project of the Cloud Native Computing Foundation. It can be installed on any Kubernetes cluster with Helm, with kubectl, or with the Rancher UI. You can learn more about its architecture [here.](https://longhorn.io/docs/1.0.2/concepts/)
+Longhorn 是一款免费的开源软件。它最初由 Rancher Labs 开发，现在作为云原生计算基金会的沙盒项目进行开发。它可以用 Helm、用 kubectl 或用 Rancher UI 安装在任何 Kubernetes 集群上。你可以了单击[这里](https://longhorn.io/docs/1.0.2/concepts/)了解更多关于它的架构。
 
-With Longhorn, you can:
+Longhorn 具有以下功能：
 
-- Use Longhorn volumes as persistent storage for the distributed stateful applications in your Kubernetes cluster
-- Partition your block storage into Longhorn volumes so that you can use Kubernetes volumes with or without a cloud provider
-- Replicate block storage across multiple nodes and data centers to increase availability
-- Store backup data in external storage such as NFS or AWS S3
-- Create cross-cluster disaster recovery volumes so that data from a primary Kubernetes cluster can be quickly recovered from backup in a second Kubernetes cluster
-- Schedule recurring snapshots of a volume, and schedule recurring backups to NFS or S3-compatible secondary storage
-- Restore volumes from backup
-- Upgrade Longhorn without disrupting persistent volumes
+- 使用 Longhorn 卷作为 Kubernetes 集群中分布式有状态应用程序的持久性存储。
+- 将您的块存储分区为 Longhorn 卷，这样您就可以在有或没有云提供商的情况下使用 Kubernetes 卷。
+- 在多个节点和数据中心之间复制块存储，以提高可用性。
+- 将备份数据存储在外部存储中，如 NFS 或 AWS S3。
+- 创建跨集群灾难恢复卷，以便从主 Kubernetes 集群中的数据可以快速从第二个 Kubernetes 集群的备份中恢复。
+- 安排卷执行定时快照，并安排定时备份到 NFS 或 S3 兼容的二级存储。
+- 从备份中恢复卷。
+- 升级 Longhorn 而不破坏持久卷。
 
 <figcaption>Longhorn Dashboard</figcaption>
 ![Longhorn Dashboard](/img/rancher/longhorn-screenshot.png)

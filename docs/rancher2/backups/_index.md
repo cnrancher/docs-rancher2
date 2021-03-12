@@ -14,9 +14,9 @@ keywords:
   - 备份和恢复
 ---
 
-This section is devoted to protecting your data in a disaster scenario.
+本节专门介绍如何在灾难情况下保护您的数据。
 
-To protect yourself from a disaster scenario, you should create backups on a regular basis.
+为了保护自己免受灾难情景的影响，您应该定期创建备份。
 
-- [Backup](./backup)
-- [Restore](./restore)
+- [备份](/docs/rancher2/backups/backup/_index)
+- [恢复](/docs/rancher2/backups/restore/_index)

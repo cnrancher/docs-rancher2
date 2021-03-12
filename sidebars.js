@@ -470,7 +470,6 @@ module.exports = {
         ],
         创建集群: [
             "rancher2/cluster-provisioning/_index",
-            "rancher2/cluster-provisioning/cluster-capabilities-table/index",
             "rancher2/cluster-provisioning/node-requirements/_index",
             {
                 type: "category",
