@@ -15,8 +15,8 @@ title: Selectors和拉取配置
 这会将监控限制在特定的命名空间：
 
 1. 在**集群资源管理器**中，如果已经安装了监控，请导航到**安装的应用程序**，或**应用程序和市场**中的**Chart**。
-1. 如果开始新的安装，**点击**rancher-monitoring Chart，然后在**Chart 选项中**点击**编辑为 Yaml**。
-1. 如果更新现有的安装，请点击**升级**，然后在**Chart 选项**中点击**编辑为 Yaml**。
+1. 如果开始新的安装，**单击**rancher-monitoring Chart，然后在**Chart 选项中**单击**编辑为 Yaml**。
+1. 如果更新现有的安装，请单击**升级**，然后在**Chart 选项**中单击**编辑为 Yaml**。
 1. 设置`prometheus.prometheusSpec.ignoreNamespaceSelectors=true`。
 1. 完成安装或升级
 
@@ -40,7 +40,7 @@ title: Selectors和拉取配置
 1. 在**集群资源管理器**中，打开 kubectl shell。
    如果该文件存储在您的集群中的本地，请运行`kubectl create -f <name of service/pod monitor file>.yaml`。
 1. 或者运行`cat<< EOF | kubectl apply -f -`，将文件内容粘贴到终端，然后运行`EOF`完成命令。
-1. 如果开始新的安装，**点击**rancher-monitoring**图，向下滚动到**Preview Yaml\*\*。
+1. 如果开始新的安装，**单击**rancher-monitoring**图，向下滚动到**Preview Yaml\*\*。
 1. 运行`kubectl label namespace <your namespace> istio-injection=enabled`启用 envoy sidecar 注入。
 
 **结果：** `<your namespace>`可以被 Prometheus 拉取到。
@@ -86,9 +86,9 @@ spec:
 
 可用性的权衡是，所有 Prometheus 的 "additionalScrapeConfigs "都维护在一个 Secret 中。如果在安装 Istio 之前已经使用 additionalScrapeConfigs 部署了监控，这可能会给升级带来困难。
 
-1. 如果开始新的安装，点击**rancher-monitoring**Chart，然后在**Chart 选项中**点击**编辑为 Yaml**。
-1. 如果更新现有的安装，请点击**升级**，然后在**Chart 选项**中点击**编辑为 Yaml**。
-1. 如果更新现有的安装，点击**升级**，然后点击**预览 Yaml**。
+1. 如果开始新的安装，单击**rancher-monitoring**Chart，然后在**Chart 选项中**单击**编辑为 Yaml**。
+1. 如果更新现有的安装，请单击**升级**，然后在**Chart 选项**中单击**编辑为 Yaml**。
+1. 如果更新现有的安装，单击**升级**，然后单击**预览 Yaml**。
 1. 设置`prometheus.prometheusSpec.additionalScrapeConfigs`数组为下面提供的**Additional Scrape Config**。
 1. 完成安装或升级
 

@@ -37,7 +37,7 @@ kubectl create clusterrolebinding cluster-admin-binding \
 
 然后再运行`kubectl`命令注册这个集群。
 
-默认情况下，GKE 用户不具有此权限，因此您需要在注册 GKE 集群之前运行该命令。要了解更多关于 GKE 的基于角色的访问控制，请点击[这里](https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control)。
+默认情况下，GKE 用户不具有此权限，因此您需要在注册 GKE 集群之前运行该命令。要了解更多关于 GKE 的基于角色的访问控制，请单击[这里](https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control)。
 
 如果你要注册一个 K3s 集群，请确保`cluster.yml`是可读的。默认情况下，它是受保护的。详情请参考[配置一个 K3s 集群以启用导入 Rancher](#配置一个-K3s-集群以启用导入-Rancher)。
 
