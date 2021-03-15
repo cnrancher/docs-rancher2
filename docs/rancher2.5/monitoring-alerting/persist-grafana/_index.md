@@ -25,9 +25,9 @@ keywords:
 ## 操作步骤
 
 1. 打开 Grafana 仪表盘。导航到**Cluster Explore > 群组资源管理器 > 监控**。
-1. 登录到 Grafana，Grafana 实例的默认 Admin 用户名和密码为 "admin/prom-operator"。Rancher 中的群集管理员权限然需要访问 Grafana 实例。也可以在部署或升级 chart 时提供其他凭证。
-1. 转到您要持久化的仪表板。在顶部导航菜单中，通过点击齿轮图标进入仪表板设置页面。
-1. 在左侧导航菜单中，点击**JSON Model**。
+1. 登录到 Grafana，Grafana 实例的默认 Admin 用户名和密码为 "admin/prom-operator"。Rancher 中的集群管理员权限然需要访问 Grafana 实例。也可以在部署或升级 chart 时提供其他凭证。
+1. 转到您要持久化的仪表板。在顶部导航菜单中，通过单击齿轮图标进入仪表板设置页面。
+1. 在左侧导航菜单中，单击**JSON Model**。
 1. 复制出现的 JSON 数据结构。
 1. 在`cattle-dashboards`命名空间中创建一个 ConfigMap。ConfigMap 需要有标签`grafana_dashboard: "1"`。将 JSON 按照下图所示格式粘贴到 ConfigMap 中。
 

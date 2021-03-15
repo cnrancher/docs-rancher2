@@ -2,7 +2,7 @@
 title: 在RKE2集群上安装Istio的操作步骤
 ---
 
-1. 点击**组件**。
+1. 单击**组件**。
 1. 勾选 "**启用 CNI**"旁边的方框。
 1. 添加自定义覆盖文件，指定`cniBinDir`和`cniConfDir`。关于这些选项的详细信息，请参考[Istio 文档](https://istio.io/latest/docs/setup/additional-setup/cni/#helm-chart-parameters)。下面是一个例子。
 

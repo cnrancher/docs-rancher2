@@ -1,84 +1,82 @@
 ---
-title: Creating a Custom Benchmark Version for Running a Cluster Scan
-weight: 4
-aliases:
-  - /rancher/v2.5/en/cis-scans/v2.5/custom-benchmark
+title: 创建自定义基线版本
 ---
 
-_Available as of v2.5.4_
+_v2.5.4 开始支持_
 
-Each Benchmark Version defines a set of test configuration files that define the CIS tests to be run by the <a href="https://github.com/aquasecurity/kube-bench" target="_blank">kube-bench</a> tool.
-The `rancher-cis-benchmark` application installs a few default Benchmark Versions which are listed under CIS Benchmark application menu.
- 
-But there could be some Kubernetes cluster setups that require custom configurations of the Benchmark tests. For example, the path to the Kubernetes config files or certs might be different than the standard location where the upstream CIS Benchmarks look for them.
+## 概述
 
-It is now possible to create a custom Benchmark Version for running a cluster scan using the `rancher-cis-benchmark` application.
+每个基线版本都定义了一组测试配置文件，这些文件定义了 CIS 测试要由[kube-bench](https://github.com/aquasecurity/kube-bench)工具运行。
 
-When a cluster scan is run, you need to select a Profile which points to a specific Benchmark Version. 
+`rancher-cis-benchmark`应用程序安装了一些默认的 Benchmark 版本，这些版本列在 CIS Benchmark 应用程序菜单下。
 
-Follow all the steps below to add a custom Benchmark Version and run a scan using it.
+但可能有一些 Kubernetes 集群设置需要自定义配置 Benchmark 测试。例如，Kubernetes 配置文件或证书的路径可能与上游 CIS Benchmarks 寻找它们的标准位置不同。
 
-1. [Prepare the Custom Benchmark Version ConfigMap](#1-prepare-the-custom-benchmark-version-configmap)
-2. [Add a Custom Benchmark Version to a Cluster](#2-add-a-custom-benchmark-version-to-a-cluster)
-3. [Create a New Profile for the Custom Benchmark Version](#3-create-a-new-profile-for-the-custom-benchmark-version)
-4. [Run a Scan Using the Custom Benchmark Version](#4-run-a-scan-using-the-custom-benchmark-version)
+现在可以使用`rancher-cis-benchmark`应用程序创建一个自定义的 Benchmark 版本来运行集群扫描。
 
-### 1. Prepare the Custom Benchmark Version ConfigMap
+当集群扫描运行时，你需要选择一个指向特定 Benchmark 版本的 Profile。
 
-To create a custom benchmark version, first you need to create a ConfigMap containing the benchmark version's config files and upload it to your Kubernetes cluster where you want to run the scan.
+按照下面的所有步骤添加一个自定义的 Benchmark 版本，并使用它来运行扫描。
 
-To prepare a custom benchmark version ConfigMap, suppose we want to add a custom Benchmark Version named `foo`.
+## 1. 准备自定义基线版本所需的 Configmap
 
-1. Create a directory named `foo` and inside this directory, place all the config YAML files that the <a href="https://github.com/aquasecurity/kube-bench" target="_blank">kube-bench</a> tool looks for. For example, here are the config YAML files for a Generic CIS 1.5 Benchmark Version https://github.com/aquasecurity/kube-bench/tree/master/cfg/cis-1.5
-1. Place the complete `config.yaml` file, which includes all the components that should be tested. 
-1. Add the Benchmark version name to the `target_mapping` section of the `config.yaml`:
+要创建一个自定义基线版本，首先你需要创建一个包含基线版本配置文件的 ConfigMap，并将其上传到你要运行扫描的 Kubernetes 集群。
 
-    ```yaml
-    target_mapping:
-      "foo":
-        - "master"
-        - "node"
-        - "controlplane"
-        - "etcd"
-        - "policies"
-    ```
-1. Upload this directory to your Kubernetes Cluster by creating a ConfigMap:
+假设我们要添加一个名为`foo`的自定义基线版本：
 
-    ```yaml
-    kubectl create configmap -n <namespace> foo --from-file=<path to directory foo>
-    ```
+1. 创建一个名为`foo`的目录，在这个目录里面，放置[kube-bench](https://github.com/aquasecurity/kube-bench)工具寻找的所有配置 YAML 文件。例如，这里是通用 CIS 1.5 基线版的配置 YAML 文件https://github.com/aquasecurity/kube-bench/tree/master/cfg/cis-1.5。
 
-### 2. Add a Custom Benchmark Version to a Cluster
+1. 放置完整的`config.yaml`文件，其中包括所有应该测试的组件。
 
-1. Once the ConfigMap has been created in your cluster, navigate to the **Cluster Explorer** in the Rancher UI. 
-1. In the top left dropdown menu, click **Cluster Explorer > CIS Benchmark.**
-1. In the **Benchmark Versions** section, click **Create.**
-1. Enter the **Name** and a description for your custom benchmark version.
-1. Choose the cluster provider that your benchmark version applies to.
-1. Choose the ConfigMap you have uploaded from the dropdown.
-1. Add the minimum and maximum Kubernetes version limits applicable, if any.
-1. Click **Create.**
+1. 将 Benchmark 版本名称添加到`config.yaml`的`target_mapping`部分。
 
-### 3. Create a New Profile for the Custom Benchmark Version
+   ```yaml
+   target_mapping:
+     "foo":
+       - "master"
+       - "node"
+       - "controlplane"
+       - "etcd"
+       - "policies"
+   ```
 
-To run a scan using your custom benchmark version, you need to add a new Profile pointing to this benchmark version.
+1. 通过创建一个 ConfigMap 将这个目录上传到你的 Kubernetes Cluster。
 
-1. Once the custom benchmark version has been created in your cluster, navigate to the **Cluster Explorer** in the Rancher UI. 
-1. In the top left dropdown menu, click **Cluster Explorer > CIS Benchmark.**
-1. In the **Profiles** section, click **Create.**
-1. Provide a **Name** and description. In this example, we name it `foo-profile`.
-1. Choose the Benchmark Version `foo` from the dropdown.
-1. Click **Create.**
+   ```yaml
+   kubectl create configmap -n <namespace> foo --from-file=<path to directory foo>
+   ```
 
-### 4. Run a Scan Using the Custom Benchmark Version
+## 2. 将自定义基线版本添加到集群中
 
-Once the Profile pointing to your custom benchmark version `foo` has been created, you can create a new Scan to run the custom test configs in the Benchmark Version.
+1. 在您的集群中创建了 ConfigMap 后，请导航到 Rancher UI 中的**Cluster Explorer**。
+1. 在左上角的下拉菜单中，单击**Cluster Explorer > CIS Benchmark**。
+1. 在**Benchmark Versions**部分，单击**Create**。
+1. 为您的自定义基线版本输入**Name**和描述。
+1. 选择您的基线版本所适用的集群提供商。
+1. 从下拉菜单中选择您上传的 ConfigMap。
+1. 添加适用的最小和最大 Kubernetes 版本限制（可选）。
+1. 单击**Create**。
 
-To run a scan,
+## 3. 为自定义基线版本创建一个新的配置文件
 
-1. Go to the **Cluster Explorer** in the Rancher UI. In the top left dropdown menu, click **Cluster Explorer > CIS Benchmark.**
-1. In the **Scans** section, click **Create.**
-1. Choose the new cluster scan profile `foo-profile`.
-1. Click **Create.**
+要使用您的自定义基线版本运行扫描，您需要添加一个指向此基线版本的新 Profile。
 
-**Result:** A report is generated with the scan results. To see the results, click the name of the scan that appears.
+1. 一旦在您的集群中创建了自定义基线版本，请导航到 Rancher UI 中的 **Cluster Explorer**。
+1. 在左上角的下拉菜单中，单击**Cluster Explorer > CIS Benchmark**。
+1. 在**Profiles**部分，单击**Create**。
+1. 提供一个**名称**和描述。在本例中，我们将其命名为`foo-profile`。
+1. 从下拉菜单中选择基线版本`foo`。
+1. 单击**Create**，创建一个新的配置文件。
+
+## 4. 使用自定义基线版本运行扫描
+
+您可以创建一个新的 Scan 来运行基线版本中的自定义测试配置。
+
+1. 进入 Rancher UI 中的**Cluster Explorer**。在左上角下拉菜单中，单击**Cluster Explorer >CIS Benchmark**。
+1. 在**Scans**部分，单击**Create**。
+1. 选择新的集群扫描配置文件`foo-profile`。
+1. 单击**Create**。
+
+## 结果
+
+生成包含扫描结果的报告，请单击出现的报告名称查看结果。
