@@ -37,6 +37,7 @@ const metadata = {
                 "为您提供在使用本服务的过程中，可能会遇到的典型报错，以及排查和定位问题的方法",
             版本迁移: "为您介绍如何从Rancher容器平台1.6版本迁移到2.x版本",
         },
+        rancher2_5: {},
         rke: {
             产品介绍: "为您提供RKE的产品介绍",
             安装要求: "为您提供安装RKE需要满足的前提条件",
@@ -329,6 +330,7 @@ const metadata = {
             "rancher2/troubleshooting/logging/_index": "配置日志等级",
             "rancher2/v1.6-migration/_index": "从 v1.6 迁移到 v2.x",
         },
+        rancher2_5: {},
         rke: {
             "rke/_index": "产品简介",
             "rke/os/_index": "安装要求",
