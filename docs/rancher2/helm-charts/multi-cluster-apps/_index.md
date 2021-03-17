@@ -38,7 +38,7 @@ _自 v2.2.0 起可用_
 
 3. （可选）查看详细说明，这些详细说明来自于 Helm Chart 的**README**。
 
-4. 在**配置选项**下，为多集群应用输入**名称**。默认情况下，该名称还用于在多集群应用的每个[目标项目](#目标项目)中创建 Kubernetes 命名空间。该命名空间名称为`<MULTI-CLUSTER_APPLICATION_NAME>-<PROJECT_ID>。
+4. 在**配置选项**下，为多集群应用输入**名称**。默认情况下，该名称还用于在多集群应用的每个[目标项目](#目标项目)中创建 Kubernetes 命名空间。该命名空间名称为`<MULTI-CLUSTER_APPLICATION_NAME>-<PROJECT_ID>`。
 
 5. 选择一个**模板版本**。
 
