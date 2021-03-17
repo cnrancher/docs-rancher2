@@ -39,7 +39,7 @@ keywords:
   >
   > 有关业务集群的端口的详细要求，请参考[下游集群节点要求](/docs/rancher2.5/cluster-provisioning/node-requirements/_index)。
 
-  请按照[具体要求](/docs/rancher2.5/installation_new/requirements/_index)配置 Linux 主机。
+  请按照[具体要求](/docs/rancher2.5/installation/requirements/_index)配置 Linux 主机。
 
 ## 安装 Rancher 2.x
 

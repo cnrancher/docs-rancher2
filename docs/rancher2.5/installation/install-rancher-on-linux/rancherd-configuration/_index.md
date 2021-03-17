@@ -71,7 +71,7 @@ spec:
 
 | 参数                     | 默认值                                                | 描述                                                                                                                    |
 | ------------------------ | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `addLocal`               | "auto"                                                | **_string_** - 让 Rancher 检测并[导入本地集群](/docs/rancher2.5/installation_new/resources/chart-options/_index)        |
+| `addLocal`               | "auto"                                                | **_string_** - 让 Rancher 检测并[导入本地集群](/docs/rancher2.5/installation/resources/chart-options/_index)            |
 | `auditLog.destination`   | "sidecar"                                             | **_string_** - 流到 sidecar 容器控制台或 hostPath 卷 - _"sidecar, hostPath"_。                                          |
 | `auditLog.hostPath`      | "/var/log/rancher/audit"                              | **_string_** - 主机上的日志文件目的地（只有当**auditLog.destination**被设置为**hostPath**时才会适用）                   |
 | `auditLog.level`         | 0                                                     | **_int_** - 设置[API 审核日志级别](https://rancher.com/docs/rancher/v2.x/en/installation/api-auditing)。0 为关闭。[0-3] |

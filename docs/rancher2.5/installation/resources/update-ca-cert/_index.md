@@ -21,7 +21,7 @@ keywords:
 
 ## 概述
 
-请按照这些步骤更新 Rancher[高可用 Kubernetes 安装](/docs/rancher2.5/installation_new/install-rancher-on-k8s/_index)中的入口的 SSL 证书，或者从默认的自签名证书切换到自定义证书。
+请按照这些步骤更新 Rancher[高可用 Kubernetes 安装](/docs/rancher2.5/installation/install-rancher-on-k8s/_index)中的入口的 SSL 证书，或者从默认的自签名证书切换到自定义证书。
 
 具体步骤总结如下：
 
@@ -92,7 +92,7 @@ $ helm ls -A
 
 使用原始配置值升级 Helm 应用实例，并确保指定`ingress.tls.source=secret`以及当前 chart 版本，以防止应用升级。
 
-如果证书是由私有 CA 签署的，也要添加`set privateCA=true`参数。另外，请务必阅读描述使用[自定义证书](/docs/rancher2.5/installation_new/install-rancher-on-k8s/_index)进行初始安装的文档。
+如果证书是由私有 CA 签署的，也要添加`set privateCA=true`参数。另外，请务必阅读描述使用[自定义证书](/docs/rancher2.5/installation/install-rancher-on-k8s/_index)进行初始安装的文档。
 
 ```bash
 helm upgrade rancher rancher-stable/rancher \

@@ -16,7 +16,7 @@ keywords:
   - 在 Amazon EC2 中配置节点
 ---
 
-在本教程中，您将学习一种为 Rancher 管理面的服务器创建 Linux 节点的方法。这些节点将满足 Rancher 对 [操作系统和容器运行时要求](/docs/rancher2.5/installation_new/requirements/_index)。
+在本教程中，您将学习一种为 Rancher 管理面的服务器创建 Linux 节点的方法。这些节点将满足 Rancher 对 [操作系统和容器运行时要求](/docs/rancher2.5/installation/requirements/_index)。
 
 - 如果要将 Rancher Server 安装在 RKE Kubernetes 集群上，则应创建三个实例。
 
@@ -28,7 +28,7 @@ keywords:
 
 - **创建 IAM 角色：** 要允许 Rancher 操作 AWS 资源，例如创建新存储或新节点，您需要将 Amazon 配置为 Cloud Provider。在 EC2 上设置 Cloud Provider 需要做几件事，此过程的一部分是为 Rancher Server 节点设置 IAM 角色。有关设置 Cloud Provider 的完整详细信息，请参阅[创建托管的 Kubernetes 集群](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/_index)。
 
-* **创建安全组：** 我们还建议为 Rancher 节点设置一个符合 [Rancher 节点端口要求](/docs/rancher2.5/installation_new/requirements/_index)的安全组。确切的端口要求会有所不同，具体取决于您要使用 RKE 还是 K3s 来安装 Kubernetes。
+* **创建安全组：** 我们还建议为 Rancher 节点设置一个符合 [Rancher 节点端口要求](/docs/rancher2.5/installation/requirements/_index)的安全组。确切的端口要求会有所不同，具体取决于您要使用 RKE 还是 K3s 来安装 Kubernetes。
 
 ## 2、创建实例
 
@@ -41,7 +41,7 @@ keywords:
 1. 在**实例数量**字段中，输入实例数。创建高可用 K3s 集群仅需要两个实例，而创建高可用 RKE 集群则需要三个实例。
 1. 可选：如果您为 Rancher 创建了一个 IAM 角色来操作 AWS 资源，请在**IAM 角色**字段中选择新的 IAM 角色。
 1. 单击**下一步：添加存储**，**下一步：添加标签**，**下一步：配置安全组**。
-1. 在**步骤 6：配置安全组**中，选择一个符合[端口要求的](/docs/rancher2.5/installation_new/requirements/_index)安全组。
+1. 在**步骤 6：配置安全组**中，选择一个符合[端口要求的](/docs/rancher2.5/installation/requirements/_index)安全组。
 1. 单击**查看并启动**。
 1. 单击**启动**。
 1. 选择一个新的或现有的密钥对，以后将用于连接到您的实例。如果您使用的是现有的密钥对，请确保您已经可以访问相应的私钥。

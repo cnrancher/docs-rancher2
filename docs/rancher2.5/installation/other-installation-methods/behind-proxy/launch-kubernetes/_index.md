@@ -160,7 +160,7 @@ default backend - 404
 
 ## 问题排查
 
-请参见[故障排查](/docs/rancher2.5/installation_new/other-installation-methods/troubleshooting/_index)页面。
+请参见[故障排查](/docs/rancher2.5/installation/other-installation-methods/troubleshooting/_index)页面。
 
 ### 后续步骤
 

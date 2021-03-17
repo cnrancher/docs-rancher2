@@ -16,7 +16,7 @@ keywords:
 ---
 
 本页描述了 Rancher 管理的 Kubernetes 集群的要求，您的应用程序和服务将安装在这些集群中。这些下游集群应该与运行 Rancher 的集群（或单节点）分开。
-如果 Rancher 安装在 Kubernetes 集群上，Rancher Server 集群和下游集群有不同的要求。有关 Rancher Server 安装要求，请参阅[高可用安装要求](/docs/rancher2.5/installation_new/requirements/_index)。
+如果 Rancher 安装在 Kubernetes 集群上，Rancher Server 集群和下游集群有不同的要求。有关 Rancher Server 安装要求，请参阅[高可用安装要求](/docs/rancher2.5/installation/requirements/_index)。
 
 请确保 Rancher Server 的节点满足以下要求。
 
@@ -28,7 +28,7 @@ Rancher 已经过测试，并官方支持在 Ubuntu，CentOS，Oracle Linux，Ra
 
 所有受支持的操作系统都是 64-bit x86 系统。
 
-如果您计划使用 ARM64，请参阅[在 ARM64 上运行（实验性）](/docs/rancher2.5/installation_new/resources/advanced/arm64-platform/_index)。
+如果您计划使用 ARM64，请参阅[在 ARM64 上运行（实验性）](/docs/rancher2.5/installation/resources/advanced/arm64-platform/_index)。
 
 有关如何安装 Docker 的信息，请参阅官方[Docker 文档](https://docs.docker.com/)。
 
@@ -38,7 +38,7 @@ Rancher 已经过测试，并官方支持在 Ubuntu，CentOS，Oracle Linux，Ra
 
 ### SUSE Linux 节点
 
-SUSE Linux 可能有一个默认屏蔽所有端口的防火墙。在这种情况下，请参考[端口要求-打开 SUSE Linux Portslink](/docs/rancher2.5/installation_new/requirements/ports/_index)，打开向自定义集群添加主机所需的端口。
+SUSE Linux 可能有一个默认屏蔽所有端口的防火墙。在这种情况下，请参考[端口要求-打开 SUSE Linux Portslink](/docs/rancher2.5/installation/requirements/ports/_index)，打开向自定义集群添加主机所需的端口。
 
 ### Flatcar Container Linux 节点
 

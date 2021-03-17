@@ -19,7 +19,7 @@ keywords:
 
 离线环境是指在没有外网访问的环境，或在防火墙后安装 Rancher Server 的环境。本文提供了在离线环境中为 Rancher Server 配置基础设施和私有 Docker 镜像仓库的操作指导。
 
-基础设施取决于安装 Rancher 的方式：K3s Kubernetes 集群、RKE Kubernetes 集群或单个 Docker 容器上安装 Rancher。有关每个安装选项的更多信息，请参考[安装介绍](/docs/rancher2.5/installation_new/_index)。
+基础设施取决于安装 Rancher 的方式：K3s Kubernetes 集群、RKE Kubernetes 集群或单个 Docker 容器上安装 Rancher。有关每个安装选项的更多信息，请参考[安装介绍](/docs/rancher2.5/installation/_index)。
 
 ## K3s 高可用集群
 
@@ -35,9 +35,9 @@ keywords:
 
 这些主机可以与 Internet 断开连接，但需要能够与您的私有镜像仓库连接。
 
-确保您的节点满足 [OS、Docker、硬件和网络](/docs/rancher2.5/installation_new/requirements/_index)的常规安装要求。
+确保您的节点满足 [OS、Docker、硬件和网络](/docs/rancher2.5/installation/requirements/_index)的常规安装要求。
 
-要在 Amazon EC2 中的创建节点，请参考[在 Amazon EC2 中配置节点](/docs/rancher2.5/installation_new/resources/k8s-tutorials/infrastructure-tutorials/ec2-node/_index)。
+要在 Amazon EC2 中的创建节点，请参考[在 Amazon EC2 中配置节点](/docs/rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/ec2-node/_index)。
 
 ### 2、配置外部数据库
 
@@ -53,7 +53,7 @@ Rancher 对上述特定版本的数据库进行过测试和验证，如果您使
 
 在安装 Kubernetes 时，您需要传入有关 K3s 数据库连接的详细信息。
 
-要在 Amazon 的 RDS 服务上创建 MySQL 数据库。请参考此[教程](/docs/rancher2.5/installation_new/resources/k8s-tutorials/infrastructure-tutorials/rds/_index)。
+要在 Amazon 的 RDS 服务上创建 MySQL 数据库。请参考此[教程](/docs/rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/rds/_index)。
 
 有关可用于配置 K3s 集群数据库的选项的完整列表，请参考[K3s 文档](/docs/k3s/installation/datastore/_index)。
 
@@ -68,15 +68,15 @@ Rancher 对上述特定版本的数据库进行过测试和验证，如果您使
 对于实现，请考虑是否要使用 4 层或 7 层负载均衡器：
 
 - **4 层负载均衡器** 是一种相对简单的负载均衡，它将 TCP 流量转发到您到节点。我们建议使用 4 层负载均衡器，将流量从 TCP / 80 端口和 TCP / 443 端口转发到 Rancher 管理面的集群节点上。集群上的 Ingress 控制器会将 HTTP 流量重定向到 HTTPS，并在 TCP / 443 端口上终止 SSL / TLS。Ingress 控制器会将流量转发到 Rancher Server Pod 的 TCP / 443 端口。
-- **7 层负载均衡器** 是一种相对复杂的负载均衡，但功能更加全面。例如，与 Rancher 本身进行 TLS 终止相反，7 层负载均衡器能够在负载均衡器处处理 TLS 终止。如果要在基础设施中进行 TLS 终止，7 层负载均衡可能会很有用。7 层负载均衡还可以为您的负载均衡器提供基于 HTTP 属性（例如 cookie 等）做出决策的能力，而 4 层负载均衡器不提供这种功能。如果决定在 7 层负载均衡器上终止 SSL / TLS 流量，则在安装 Rancher 时（后续步骤）需要使用`--set tls=external`选项。有关更多信息，请参阅[Rancher Helm Chart 选项](/docs/rancher2.5/installation_new/resources/chart-options/_index)。
+- **7 层负载均衡器** 是一种相对复杂的负载均衡，但功能更加全面。例如，与 Rancher 本身进行 TLS 终止相反，7 层负载均衡器能够在负载均衡器处处理 TLS 终止。如果要在基础设施中进行 TLS 终止，7 层负载均衡可能会很有用。7 层负载均衡还可以为您的负载均衡器提供基于 HTTP 属性（例如 cookie 等）做出决策的能力，而 4 层负载均衡器不提供这种功能。如果决定在 7 层负载均衡器上终止 SSL / TLS 流量，则在安装 Rancher 时（后续步骤）需要使用`--set tls=external`选项。有关更多信息，请参阅[Rancher Helm Chart 选项](/docs/rancher2.5/installation/resources/chart-options/_index)。
 
-- 有关如何设置 NGINX 负载均衡器的示例，请参考[本页](/docs/rancher2.5/installation_new/resources/advanced/helm2/create-nodes-lb/nginx/_index)。
+- 有关如何设置 NGINX 负载均衡器的示例，请参考[本页](/docs/rancher2.5/installation/resources/advanced/helm2/create-nodes-lb/nginx/_index)。
 
-- 有关如何设置 Amazon ELB Network Load Balancer 的示例，请参考[本页](/docs/rancher2.5/installation_new/resources/k8s-tutorials/infrastructure-tutorials/nlb/_index)。
+- 有关如何设置 Amazon ELB Network Load Balancer 的示例，请参考[本页](/docs/rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/nlb/_index)。
 
-- 有关如何配置 F5 作为 Rancher 前端 7 层负载均衡器的示例，请参考[本页](/docs/rancher2.5/installation_new/resources/F5-7-layer-loadbalancer/_index)。
+- 有关如何配置 F5 作为 Rancher 前端 7 层负载均衡器的示例，请参考[本页](/docs/rancher2.5/installation/resources/F5-7-layer-loadbalancer/_index)。
 
-- 有关如何为 F5 启动 WAF 功能的示例，请参考[本页](/docs/rancher2.5/installation_new/resources/F5-WAF/_index)。
+- 有关如何为 F5 启动 WAF 功能的示例，请参考[本页](/docs/rancher2.5/installation/resources/F5-WAF/_index)。
 
 :::important 重要提示
 安装后，请勿使用 `local` 集群的 Ingress 对 Rancher 以外的应用进行负载均衡。与其他应用共享此 Ingress 可能会在其他应用的 Ingress 配置重新加载后，导致 Rancher 出现 websocket 错误。我们强烈建议将 `local` 集群专用于 Rancher，而不应在 `local` 集群内部署任何其他应用。
@@ -121,9 +121,9 @@ etcd 数据库需要奇数个节点，因此它始终可以选举出被大多数
 
 这些主机可以与 Internet 断开连接，但需要能够与您的私有镜像仓库连接。
 
-确保您的节点满足 [操作系统和容器运行时要求](/docs/rancher2.5/installation_new/requirements/_index)的常规安装要求。
+确保您的节点满足 [操作系统和容器运行时要求](/docs/rancher2.5/installation/requirements/_index)的常规安装要求。
 
-要在 Amazon EC2 中的创建节点，请参考[这个教程](/docs/rancher2.5/installation_new/resources/k8s-tutorials/infrastructure-tutorials/ec2-node/_index)。
+要在 Amazon EC2 中的创建节点，请参考[这个教程](/docs/rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/ec2-node/_index)。
 
 ### 2、配置负载均衡器
 
@@ -136,15 +136,15 @@ etcd 数据库需要奇数个节点，因此它始终可以选举出被大多数
 对于实现，请考虑是否要使用 4 层或 7 层负载均衡器：
 
 - **4 层负载均衡器** 是一种相对简单的负载均衡，它将 TCP 流量转发到您到节点。我们建议使用 4 层负载均衡器，将流量从 TCP / 80 端口和 TCP / 443 端口转发到 Rancher 管理面的集群节点上。集群上的 Ingress 控制器会将 HTTP 流量重定向到 HTTPS，并在 TCP / 443 端口上终止 SSL / TLS。Ingress 控制器会将流量转发到 Rancher Server Pod 的 TCP / 443 端口。
-- **7 层负载均衡器** 是一种相对复杂的负载均衡，但功能更加全面。例如，与 Rancher 本身进行 TLS 终止相反，7 层负载均衡器能够在负载均衡器处处理 TLS 终止。如果要在基础设施中进行 TLS 终止，7 层负载均衡可能会很有用。7 层负载均衡还可以为您的负载均衡器提供基于 HTTP 属性（例如 cookie 等）做出决策的能力，而 4 层负载均衡器不提供这种功能。如果决定在 7 层负载均衡器上终止 SSL / TLS 流量，则在安装 Rancher 时（后续步骤）需要使用`--set tls=external`选项。有关更多信息，请参阅[Rancher Helm Chart 选项](/docs/rancher2.5/installation_new/resources/chart-options/_index)。
+- **7 层负载均衡器** 是一种相对复杂的负载均衡，但功能更加全面。例如，与 Rancher 本身进行 TLS 终止相反，7 层负载均衡器能够在负载均衡器处处理 TLS 终止。如果要在基础设施中进行 TLS 终止，7 层负载均衡可能会很有用。7 层负载均衡还可以为您的负载均衡器提供基于 HTTP 属性（例如 cookie 等）做出决策的能力，而 4 层负载均衡器不提供这种功能。如果决定在 7 层负载均衡器上终止 SSL / TLS 流量，则在安装 Rancher 时（后续步骤）需要使用`--set tls=external`选项。有关更多信息，请参阅[Rancher Helm Chart 选项](/docs/rancher2.5/installation/resources/chart-options/_index)。
 
-- 有关如何设置 NGINX 负载均衡器的示例，请参考[本页](/docs/rancher2.5/installation_new/resources/advanced/helm2/create-nodes-lb/nginx/_index)。
+- 有关如何设置 NGINX 负载均衡器的示例，请参考[本页](/docs/rancher2.5/installation/resources/advanced/helm2/create-nodes-lb/nginx/_index)。
 
-- 有关如何设置 Amazon ELB Network Load Balancer 的示例，请参考[本页](/docs/rancher2.5/installation_new/resources/k8s-tutorials/infrastructure-tutorials/nlb/_index)。
+- 有关如何设置 Amazon ELB Network Load Balancer 的示例，请参考[本页](/docs/rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/nlb/_index)。
 
-- 有关如何配置 F5 作为 Rancher 前端 7 层负载均衡器的示例，请参考[本页](/docs/rancher2.5/installation_new/resources/F5-7-layer-loadbalancer/_index)。
+- 有关如何配置 F5 作为 Rancher 前端 7 层负载均衡器的示例，请参考[本页](/docs/rancher2.5/installation/resources/F5-7-layer-loadbalancer/_index)。
 
-- 有关如何为 F5 启动 WAF 功能的示例，请参考[本页](/docs/rancher2.5/installation_new/resources/F5-WAF/_index)。
+- 有关如何为 F5 启动 WAF 功能的示例，请参考[本页](/docs/rancher2.5/installation/resources/F5-WAF/_index)。
 
 :::important 重要提示
 安装后，请勿使用 `local` 集群的 Ingress 对 Rancher 以外的应用进行负载均衡。与其他应用共享此 Ingress 可能会在其他应用的 Ingress 配置重新加载后，导致 Rancher 出现 websocket 错误。我们强烈建议将 `local` 集群专用于 Rancher，而不应在 `local` 集群内部署任何其他应用。
@@ -178,9 +178,9 @@ Rancher 支持使用私有镜像仓库进行离线安装。您必须有自己的
 
 这些主机可以与 Internet 断开连接，但需要能够与您的私有镜像仓库连接。
 
-确保您的节点满足 [操作系统和容器运行时要求](/docs/rancher2.5/installation_new/requirements/_index)的常规安装要求。
+确保您的节点满足 [操作系统和容器运行时要求](/docs/rancher2.5/installation/requirements/_index)的常规安装要求。
 
-要在 Amazon EC2 中的创建节点，请参考[这个教程](/docs/rancher2.5/installation_new/resources/k8s-tutorials/infrastructure-tutorials/ec2-node/_index)。
+要在 Amazon EC2 中的创建节点，请参考[这个教程](/docs/rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/ec2-node/_index)。
 
 ### 2、配置私有 Docker 镜像仓库
 
@@ -190,4 +190,4 @@ Rancher 支持使用私有镜像仓库进行离线安装。您必须有自己的
 
 ## 后续操作
 
-[同步镜像到私有镜像仓库](/docs/rancher2.5/installation_new/other-installation-methods/air-gap/populate-private-registry/_index)
+[同步镜像到私有镜像仓库](/docs/rancher2.5/installation/other-installation-methods/air-gap/populate-private-registry/_index)

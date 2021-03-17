@@ -28,7 +28,7 @@ Rancher 版本必须是 v2.5.0 及以上。
 
 Rancher 可以安装在任何 Kubernetes 集群上，包括托管的 Kubernetes 集群，如 Amazon EKS 集群。有关安装 Kubernetes 的帮助，请参考 Kubernetes 发行版的文档。也可以使用 Rancher 的 Kubernetes 发行版之一：
 
-- [RKE Kubernetes 安装文档](/docs/rancher2.5/installation_new/_index)
+- [RKE Kubernetes 安装文档](/docs/rancher2.5/installation/_index)
 - [K3s Kubernetes 安装文档](/docs/k3s/installation/_index)
 
 ### 1. 安装 rancher-backup Helm chart
@@ -101,7 +101,7 @@ kubectl apply -f migrationResource.yaml
 
 ### 3. 安装 cert-manager
 
-按照文档中关于在 Kubernetes 上安装 cert-manager 的步骤[安装 cert-manager](/docs/rancher2.5/installation_new/resources/advanced/helm2/helm-rancher/_index#5-install-cert-manager)。
+按照文档中关于在 Kubernetes 上安装 cert-manager 的步骤[安装 cert-manager](/docs/rancher2.5/installation/resources/advanced/helm2/helm-rancher/_index#5-install-cert-manager)。
 
 ### 4. 使用 helm 安装 rancher
 

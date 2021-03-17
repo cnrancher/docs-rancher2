@@ -9,6 +9,7 @@ module.exports = {
     rancher2: {
         版本说明: [
             "rancher2/_index",
+            "rancher2/releases/v2.4.15",
             "rancher2/releases/v2.4.14",
             "rancher2/releases/v2.4.13",
             "rancher2/releases/v2.4.12",
@@ -611,7 +612,24 @@ module.exports = {
                 label: "集群工具",
                 items: [
                     "rancher2/cluster-admin/tools/_index",
-                    "rancher2/cluster-admin/tools/notifiers/_index",
+                    {
+                        type: "category",
+                        label: "监控",
+                        items: [
+                            "rancher2/cluster-admin/tools/cluster-monitoring/_index",
+                            {
+                                type: "category",
+                                label: "集群参数",
+                                items: [
+                                    "rancher2/cluster-admin/tools/cluster-monitoring/cluster-metrics/_index",
+                                    "rancher2/cluster-admin/tools/cluster-monitoring/cluster-metrics/custom-metrics/_index",
+                                ],
+                            },
+                            "rancher2/cluster-admin/tools/cluster-monitoring/expression/_index",
+                            "rancher2/cluster-admin/tools/cluster-monitoring/prometheus/_index",
+                            "rancher2/cluster-admin/tools/cluster-monitoring/viewing-metrics/_index",
+                        ],
+                    },
                     {
                         type: "category",
                         label: "告警",
@@ -620,6 +638,7 @@ module.exports = {
                             "rancher2/cluster-admin/tools/cluster-alerts/default-alerts/_index",
                         ],
                     },
+                    "rancher2/cluster-admin/tools/notifiers/_index",
                     {
                         type: "category",
                         label: "Istio",
@@ -652,24 +671,7 @@ module.exports = {
                             "rancher2/cluster-admin/tools/istio/disabling-istio/_index",
                         ],
                     },
-                    {
-                        type: "category",
-                        label: "监控",
-                        items: [
-                            "rancher2/cluster-admin/tools/cluster-monitoring/_index",
-                            {
-                                type: "category",
-                                label: "集群参数",
-                                items: [
-                                    "rancher2/cluster-admin/tools/cluster-monitoring/cluster-metrics/_index",
-                                    "rancher2/cluster-admin/tools/cluster-monitoring/cluster-metrics/custom-metrics/_index",
-                                ],
-                            },
-                            "rancher2/cluster-admin/tools/cluster-monitoring/expression/_index",
-                            "rancher2/cluster-admin/tools/cluster-monitoring/prometheus/_index",
-                            "rancher2/cluster-admin/tools/cluster-monitoring/viewing-metrics/_index",
-                        ],
-                    },
+
                     "rancher2/cluster-admin/tools/opa-gatekeeper/_index",
                 ],
             },
@@ -926,7 +928,7 @@ module.exports = {
     rancher2_5: {
         版本说明: [
             "rancher2.5/_index",
-            //"rancher2.5/releases/v2.5.7",
+            "rancher2.5/releases/v2.5.7",
             "rancher2.5/releases/v2.5.6",
             "rancher2.5/releases/v2.5.5",
             "rancher2.5/releases/v2.5.4",
@@ -993,6 +995,16 @@ module.exports = {
             },
             {
                 type: "category",
+                label: "在Linux操作系统上安装Rancher",
+                items: [
+                    "rancher2.5/installation/install-rancher-on-linux/_index",
+                    "rancher2.5/installation/install-rancher-on-linux/rancherd-configuration/_index",
+                    "rancher2.5/installation/install-rancher-on-linux/upgrades/_index",
+                    "rancher2.5/installation/install-rancher-on-linux/rollbacks/_index",
+                ],
+            },
+            {
+                type: "category",
                 label: "其他安装方式",
                 items: [
                     "rancher2.5/installation/other-installation-methods/_index",
@@ -1038,7 +1050,6 @@ module.exports = {
                 items: [
                     "rancher2.5/installation/resources/_index",
                     "rancher2.5/installation/resources/custom-ca-root-certificate/_index",
-                    "rancher2.5/installation/resources/update-ca-cert/_index",
                     "rancher2.5/installation/resources/choosing-version/_index",
                     "rancher2.5/installation/resources/installing-docker/_index",
                     "rancher2.5/installation/resources/tls-secrets/_index",
@@ -1075,6 +1086,7 @@ module.exports = {
                             "rancher2.5/installation/resources/upgrading-cert-manager/helm-2-instructions/_index",
                         ],
                     },
+                    "rancher2.5/installation/resources/update-ca-cert/_index",
                     {
                         type: "category",
                         label: "启用实验功能",
@@ -1105,41 +1117,17 @@ module.exports = {
                 ],
             },
         ],
-        备份和恢复指南: [
-            "rancher2.5/backups/_index",
-            {
-                type: "category",
-                label: "备份",
-                items: [
-                    "rancher2.5/backups/back-up-rancher/_index",
-
-                    {
-                        type: "category",
-                        label: "Rancher备份配置参考",
-                        items: [
-                            "rancher2.5/backups/configuration/back-up-config/_index",
-                            "rancher2.5/backups/configuration/restore-config/_index",
-                            "rancher2.5/backups/configuration/storage-config/_index",
-                        ],
-                    },
-                ],
-            },
-            {
-                type: "category",
-                label: "Docker安装的Rancher的备份和还原",
-                items: [
-                    "rancher2.5/backups/docker-installs/_index",
-                    "rancher2.5/backups/docker-installs/docker-backups/_index",
-                    "rancher2.5/backups/docker-installs/docker-backups/_index",
-                ],
-            },
-            "rancher2.5/backups/examples/_index",
-            "rancher2.5/backups/migrating-rancher/_index",
-            "rancher2.5/backups/restoring-rancher/_index",
-            "rancher2.5/backups/migrating-rancher/_index",
-            "rancher2.5/backups/restoring-rancher/_index",
-        ],
         最佳实践: [
+            {
+                type: "category",
+                label: "Rancher Server 的最佳实践",
+                items: [
+                    "rancher2.5/best-practices/rancher-server/_index",
+                    "rancher2.5/best-practices/rancher-server/deployment-strategies/_index",
+                    "rancher2.5/best-practices/rancher-server/deployment-types/_index",
+                    "rancher2.5/best-practices/rancher-server/rancher-in-vsphere/_index",
+                ],
+            },
             {
                 type: "category",
                 label: "Rancher管理集群的最佳实践",
@@ -1151,18 +1139,38 @@ module.exports = {
                     "rancher2.5/best-practices/rancher-managed/monitoring/_index",
                 ],
             },
+        ],
+        备份和恢复指南: [
+            "rancher2.5/backups/_index",
             {
                 type: "category",
-                label: "Rancher Server 的最佳实践",
+                label: "备份",
                 items: [
-                    "rancher2.5/best-practices/rancher-server/_index",
-                    "rancher2.5/best-practices/rancher-server/deployment-strategies/_index",
-                    "rancher2.5/best-practices/rancher-server/deployment-types/_index",
-                    "rancher2.5/best-practices/rancher-server/rancher-in-vsphere/_index",
+                    "rancher2.5/backups/back-up-rancher/_index",
+                    "rancher2.5/backups/restoring-rancher/_index",
+                    "rancher2.5/backups/migrating-rancher/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "Rancher备份配置参考",
+                items: [
+                    "rancher2.5/backups/configuration/back-up-config/_index",
+                    "rancher2.5/backups/configuration/restore-config/_index",
+                    "rancher2.5/backups/configuration/storage-config/_index",
+                ],
+            },
+            "rancher2.5/backups/examples/_index",
+            {
+                type: "category",
+                label: "Docker安装的Rancher的备份和还原",
+                items: [
+                    "rancher2.5/backups/docker-installs/_index",
+                    "rancher2.5/backups/docker-installs/docker-backups/_index",
+                    "rancher2.5/backups/docker-installs/docker-restores/_index",
                 ],
             },
         ],
-
         系统管理员指南: [
             "rancher2.5/admin-settings/_index",
             "rancher2.5/admin-settings/config-private-registry/_index",
@@ -1389,6 +1397,7 @@ module.exports = {
                 label: "集群工具",
                 items: [
                     "rancher2.5/cluster-admin/tools/_index",
+                    "rancher2.5/cluster-admin/tools/logging/_index",
                     "rancher2.5/cluster-admin/tools/notifiers/_index",
                     {
                         type: "category",
@@ -1482,10 +1491,74 @@ module.exports = {
             "rancher2.5/project-admin/tools/_index",
             "rancher2.5/project-admin/pipelines/_index",
             "rancher2.5/project-admin/pod-security-policies/_index",
-            "rancher2.5/project-admin/pipelines/_index",
+        ],
+        流水线: [
+            "rancher2.5/pipelines/_index",
+            "rancher2.5/pipelines/concepts/_index",
+            "rancher2.5/pipelines/example-repos/_index",
+            "rancher2.5/pipelines/example/_index",
+            "rancher2.5/pipelines/storage/_index",
         ],
         HelmChart: ["rancher2.5/helm-charts/_index"],
         跨集群部署: ["rancher2.5/deploy-across-clusters/_index"],
+        监控和告警: [
+            "rancher2.5/monitoring-alerting/_index",
+            {
+                type: "category",
+                label: "配置用于监控的自定义资源",
+                items: [
+                    "rancher2.5/monitoring-alerting/configuration/_index",
+                    "rancher2.5/monitoring-alerting/configuration/alert-manager/_index",
+                    "rancher2.5/monitoring-alerting/configuration/prometheusrules/_index",
+                    "rancher2.5/monitoring-alerting/configuration/expression/_index",
+                ],
+            },
+            "rancher2.5/monitoring-alerting/rbac/_index",
+            "rancher2.5/monitoring-alerting/persist-grafana/_index",
+            "rancher2.5/monitoring-alerting/migrating/_index",
+        ],
+        Istio: [
+            "rancher2.5/istio/_index",
+            "rancher2.5/istio/resources/_index",
+            {
+                type: "category",
+                label: "配置 Istio",
+                items: [
+                    "rancher2.5/istio/setup/enable-istio-in-cluster/_index",
+                    "rancher2.5/istio/setup/enable-istio-in-namespace/_index",
+                    "rancher2.5/istio/setup/deploy-workloads/_index",
+                    "rancher2.5/istio/setup/gateway/_index",
+                    "rancher2.5/istio/setup/set-up-traffic-management/_index",
+                    "rancher2.5/istio/setup/view-traffic/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "配置选项",
+                items: [
+                    "rancher2.5/istio/configuration-reference/_index",
+                    "rancher2.5/istio/configuration-reference/enable-istio-with-psp/_index",
+                    "rancher2.5/istio/configuration-reference/selectors-and-scrape/_index",
+                    "rancher2.5/istio/configuration-reference/rke2/_index",
+                    "rancher2.5/istio/configuration-reference/canal-and-project-network/_index",
+                ],
+            },
+            "rancher2.5/istio/rbac/_index",
+            "rancher2.5/istio/disabling-istio/_index",
+            "rancher2.5/istio/release-notes/_index",
+        ],
+        日志: [
+            "rancher2.5/logging/_index",
+            "rancher2.5/logging/migrating/_index",
+        ],
+        OPAGatekeeper: ["rancher2.5/opa-gatekeeper/_index"],
+        CIS扫描: [
+            "rancher2.5/cis-scans/_index",
+            "rancher2.5/cis-scans/configuration/_index",
+            "rancher2.5/cis-scans/rbac/_index",
+            "rancher2.5/cis-scans/skipped-tests/_index",
+            "rancher2.5/cis-scans/custom-benchmark/_index",
+        ],
         用户指南: [
             "rancher2.5/k8s-in-rancher/_index",
             {
@@ -1526,15 +1599,22 @@ module.exports = {
             "rancher2.5/k8s-in-rancher/secrets/_index",
             "rancher2.5/k8s-in-rancher/registries/_index",
         ],
+        Longhorn: ["rancher2.5/longhorn/_index"],
         安全: [
             "rancher2.5/security/_index",
+            {
+                type: "category",
+                label: "Rancher v2.5",
+                items: [
+                    "rancher2.5/security/rancher-2.5/_index",
+                    "rancher2.5/security/rancher-2.5/1.5-benchmark-2.5/_index",
+                    "rancher2.5/security/rancher-2.5/1.5-hardening-2.5/_index",
+                    "rancher2.5/security/rancher-2.5/1.6-benchmark-2.5/_index",
+                    "rancher2.5/security/rancher-2.5/1.6-hardening-2.5/_index",
+                ],
+            },
+            "rancher2.5/security/security-scan/_index",
             "rancher2.5/security/cve/_index",
-            "rancher2.5/security/security-scan/_index",
-            "rancher2.5/security/rancher-2.5/1.5-benchmark-2.5/_index",
-            "rancher2.5/security/rancher-2.5/1.5-hardening-2.5/_index",
-            "rancher2.5/security/rancher-2.5/1.6-benchmark-2.5/_index",
-            "rancher2.5/security/rancher-2.5/1.6-hardening-2.5/_index",
-            "rancher2.5/security/security-scan/_index",
         ],
         Rancher命令行: ["rancher2.5/cli/_index"],
         系统工具: ["rancher2.5/system-tools/_index"],
@@ -1572,7 +1652,6 @@ module.exports = {
             "rancher2.5/troubleshooting/imported-clusters/_index",
             "rancher2.5/troubleshooting/logging/_index",
         ],
-        参与Rancher开源项目: ["rancher2.5/contributing/_index"],
         Rancher命令行: ["rancher2/cli/_index"],
         系统工具: ["rancher2.5/system-tools/_index"],
         用户设置: [
@@ -1609,6 +1688,7 @@ module.exports = {
             "rancher2.5/faq/etcd/_index",
             "rancher2.5/faq/install/_index",
         ],
+        参与Rancher开源项目: ["rancher2.5/contributing/_index"],
     },
     rke: {
         产品介绍: ["rke/_index"],

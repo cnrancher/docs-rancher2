@@ -150,7 +150,7 @@ keywords:
 
 - IAM 角色：`K8sMasterRole。[K8sMasterProfile,K8sAutoscalerProfile]`。
 
-  - 安全组：`K8sMasterSg`更多信息请见[RKE ports (custom nodes tab)](/docs/rancher2.5/installation_new/requirements/ports/_index)
+  - 安全组：`K8sMasterSg`更多信息请见[RKE ports (custom nodes tab)](/docs/rancher2.5/installation/requirements/ports/_index)
   - 标签：
     `kubernetes.io/cluster/<clusterID>: owned`。
   - 用户数据：`K8sMasterUserData`Ubuntu 18.04(ami-0e11cbb34015ff725)，安装 docker 并将 etcd+controlplane 节点添加到 k8s 集群中。- IAM 角色：`K8sMasterRole。[K8sMasterProfile,K8sAutoscalerProfile]`。
@@ -182,7 +182,7 @@ keywords:
 
 - IAM 角色：`K8sWorkerRole: [K8sWorkerProfile]`
 
-  - 安全组：`K8sWorkerSg` 更多信息请见 [RKE ports (custom nodes tab)](/docs/rancher2.5/installation_new/requirements/ports/_index)
+  - 安全组：`K8sWorkerSg` 更多信息请见 [RKE ports (custom nodes tab)](/docs/rancher2.5/installation/requirements/ports/_index)
   - 标签：
 
     - `kubernetes.io/cluster/<clusterID>: owned`

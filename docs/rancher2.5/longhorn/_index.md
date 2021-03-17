@@ -1,5 +1,5 @@
 ---
-title: Longhorn - Kubernetes的云端原生分布式块存储
+title: 产品介绍
 description:
 keywords:
   - rancher
@@ -32,7 +32,8 @@ Longhorn 具有以下功能：
 - 从备份中恢复卷。
 - 升级 Longhorn 而不破坏持久卷。
 
-<figcaption>Longhorn Dashboard</figcaption>
+<figcaption>Longhorn 仪表盘</figcaption>
+
 ![Longhorn Dashboard](/img/rancher/longhorn-screenshot.png)
 
 ## 在 Rancher v2.5.x 中安装 Longhorn
@@ -67,7 +68,7 @@ Longhorn 具有以下功能：
 1. 进入 `longhorn-system`命名空间，选中`longhorn`和 `longhorn-crd`应用程序旁边的方框。
 1. 单击**Delete**并确认。
 
-**结果：**Delete 已被卸载。
+**结果：**Longhorn 已被卸载。
 
 ## GitHub Repository
 
@@ -79,11 +80,12 @@ Longhorn 具有以下功能：
 
 ## 架构
 
-Longhorn 为每个卷创建一个专用的存储控制器，并在多个节点上存储的多个副本上同步复制该卷。
+Longhorn 为每个卷创建一个专用的存储控制器，并在多个节点上存储的多个副本上同步复制该卷， Longhorn 架构如下图所示。
 
 存储控制器和副本本身使用 Kubernetes 进行协调。
 
 详情请参考[Longhorn 架构](https://longhorn.io/docs/1.0.2/concepts/)。
 
-<figcaption>Longhorn Architecture</figcaption>
-![Longhorn Architecture]({{}}/img/rancher/longhorn-architecture.svg)
+<figcaption>Longhorn 架构</figcaption>
+
+![Longhorn Architecture](/img/rancher/longhorn-architecture.svg)

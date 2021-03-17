@@ -1,6 +1,6 @@
 ---
 title: 入门必读
-description: Rancher提供这些快速入门手册的目的是帮助您快速地建造一个 Rancher 的沙盒，您可以在这个沙盒中评估 Rancher 是否满足您的需求。请注意，快速入门手册不适用于正式的生产环境，请参考[安装介绍](/docs/rancher2.5/installation_new/_index)获取适用于正式的生产环境的操作指导。
+description: Rancher提供这些快速入门手册的目的是帮助您快速地建造一个 Rancher 的沙盒，您可以在这个沙盒中评估 Rancher 是否满足您的需求。请注意，快速入门手册不适用于正式的生产环境，请参考[安装介绍](/docs/rancher2.5/installation/_index)获取适用于正式的生产环境的操作指导。
 keywords:
   - rancher
   - rancher中文
@@ -15,7 +15,7 @@ keywords:
   - 入门必读
 ---
 
-Rancher 提供这些快速入门手册的目的是帮助您快速地建造一个 Rancher 的沙盒，您可以在这个沙盒中评估 Rancher 是否满足您的需求。请注意，快速入门手册不适用于正式的生产环境，请参考[安装介绍](/docs/rancher2.5/installation_new/_index)获取适用于正式的生产环境的操作指导。
+Rancher 提供这些快速入门手册的目的是帮助您快速地建造一个 Rancher 的沙盒，您可以在这个沙盒中评估 Rancher 是否满足您的需求。请注意，快速入门手册不适用于正式的生产环境，请参考[安装介绍](/docs/rancher2.5/installation/_index)获取适用于正式的生产环境的操作指导。
 
 目前 Rancher 提供了以下三本快速入门手册：
 

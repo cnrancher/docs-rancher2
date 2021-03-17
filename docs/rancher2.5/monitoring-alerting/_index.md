@@ -1,5 +1,5 @@
 ---
-title: 监控和告警-v2.5
+title: 监控和告警
 description: description
 keywords:
   - rancher

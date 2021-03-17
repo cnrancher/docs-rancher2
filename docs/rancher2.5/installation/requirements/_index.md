@@ -49,9 +49,9 @@ Rancher 需要安装在支持的 Kubernetes 版本上。要了解你的 Rancher 
 
 我们建议安装 `ntp` (Network Time Protocol)，这样可以防止在客户端和服务器之间因为时钟不同步而发生证书验证错误。
 
-一些 Linux 发行版可能有默认的防火墙规则。这些规则可能会屏蔽掉 Helm 的通信。这个[操作指南](/docs/rancher2.5/installation_new/resources/advanced/firewall/_index)展示了如何检查 Oracle Linux 的默认防火墙规则，以及在必要时如何使用`firewalld`开放端口。
+一些 Linux 发行版可能有默认的防火墙规则。这些规则可能会屏蔽掉 Helm 的通信。这个[操作指南](/docs/rancher2.5/installation/resources/advanced/firewall/_index)展示了如何检查 Oracle Linux 的默认防火墙规则，以及在必要时如何使用`firewalld`开放端口。
 
-如果计划在 ARM64 上运行 Rancher，请参阅[在 ARM64 上运行（实验性）](/docs/rancher2.5/installation_new/resources/advanced/arm64-platform/_index)。
+如果计划在 ARM64 上运行 Rancher，请参阅[在 ARM64 上运行（实验性）](/docs/rancher2.5/installation/resources/advanced/arm64-platform/_index)。
 
 ### RKE 要求
 
@@ -79,7 +79,7 @@ RancherD 安装时不需要 Docker。
 
 ### 安装 Docker
 
-您可以按照[Docker 官方文档](https://docs.docker.com/)中的步骤安装 Docker。Rancher 也提供了使用命令安装 Docker 的[脚本](/docs/rancher2.5/installation_new/requirements/installing-docker/_index)。
+您可以按照[Docker 官方文档](https://docs.docker.com/)中的步骤安装 Docker。Rancher 也提供了使用命令安装 Docker 的[脚本](/docs/rancher2.5/installation/requirements/installing-docker/_index)。
 
 ## 硬件要求
 
@@ -91,7 +91,7 @@ RancherD 安装时不需要 Docker。
 
 ### RKE 高可用安装的 CPU 和 内存要求
 
-这些要求适用于[安装了 Rancher Server 的 RKE Kubernetes 集群](/docs/rancher2.5/installation_new/install-rancher-on-k8s/_index)中的每个主机。
+这些要求适用于[安装了 Rancher Server 的 RKE Kubernetes 集群](/docs/rancher2.5/installation/install-rancher-on-k8s/_index)中的每个主机。
 
 在 Rancher v2.4.0 中提高了性能。有关 v2.4.0 之前的 Rancher 的要求，请参阅[本节](#rancher-v240-之前的-rke-高可用安装的-cpu-和内存要求)。
 
@@ -107,7 +107,7 @@ RancherD 安装时不需要 Docker。
 
 ### K3s 高可用安装的 CPU 和 内存要求
 
-这些要求适用于[安装了 Rancher Server 的 K3s Kubernetes 集群](/docs/rancher2.5/installation_new/install-rancher-on-k8s/_index)中的每个主机。
+这些要求适用于[安装了 Rancher Server 的 K3s Kubernetes 集群](/docs/rancher2.5/installation/install-rancher-on-k8s/_index)中的每个主机。
 
 | 部署规模 | 集群         | 节点           | vCPUs | 内存   | 数据库规模               |
 | :------- | :----------- | :------------- | :---- | :----- | :----------------------- |
@@ -128,7 +128,7 @@ RancherD 安装时不需要 Docker。
 
 ### 单节点安装的 CPU 和 内存要求
 
-这些要求适用于使用 Docker 安装 Rancher 的[单节点安装](/docs/rancher2.5/installation_new/other-installation-methods/single-node-docker/_index)。
+这些要求适用于使用 Docker 安装 Rancher 的[单节点安装](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/_index)。
 
 | 部署规模 | 集群       | 节点        | vCPUs | 内存 |
 | :------- | :--------- | :---------- | :---- | :--- |
@@ -161,7 +161,7 @@ Rancher 的性能取决于 etcd 在集群中的性能。为了确保最佳速度
 
 ### 端口要求
 
-为了正常运行，Rancher 需要在 Rancher 节点和下游 Kubernetes 集群节点上开放一些端口。端口需求列出了不同集群类型的 Rancher 和下游集群的所有必要端口。详情请参考[端口要求](/docs/rancher2.5/installation_new/requirements/ports/_index)
+为了正常运行，Rancher 需要在 Rancher 节点和下游 Kubernetes 集群节点上开放一些端口。端口需求列出了不同集群类型的 Rancher 和下游集群的所有必要端口。详情请参考[端口要求](/docs/rancher2.5/installation/requirements/ports/_index)
 
 ## RancherD 在 SELinux 上强制执行 CentOS 8 或 RHEL 8 节点
 

@@ -8,7 +8,6 @@ const metadata = {
             快速入门:
                 "为您提供Rancher容器平台的基本使用方法，通过简易demo教学，帮助您体验Rancher容器平台",
             安装指南: "为您提供在不同环境中安装Rancher容器平台的操作指导",
-            //升级和回滚: "为您提供升级和回滚Rancher容器平台的操作指导",
             备份和恢复指南: "为您提供备份和恢复Rancher容器平台数据的操作指导",
             最佳实践: "为您提供Rancher容器平台的部署策略和配置建议",
             系统管理员指南:
@@ -37,7 +36,46 @@ const metadata = {
                 "为您提供在使用本服务的过程中，可能会遇到的典型报错，以及排查和定位问题的方法",
             版本迁移: "为您介绍如何从Rancher容器平台1.6版本迁移到2.x版本",
         },
-        rancher2_5: {},
+        rancher2_5: {
+            版本说明: "为您介绍Rancher容器平台每个版本的功能和新增特性",
+            热点问题: "为您介绍Rancher用户近期的热点问题和解决方法",
+            产品介绍:
+                "为您提供Rancher容器平台的产品介绍、产品架构、推荐架构和Kubernetes基础概念",
+            快速入门:
+                "为您提供Rancher容器平台的基本使用方法，通过简易demo教学，帮助您体验Rancher容器平台",
+            安装指南: "为您提供在不同环境中安装Rancher容器平台的操作指导",
+            备份和恢复指南: "为您提供备份和恢复Rancher容器平台数据的操作指导",
+            最佳实践: "为您提供Rancher容器平台的部署策略和配置建议",
+            备份和恢复指南: "为您提供备份和恢复Rancher容器平台数据的操作指导",
+            系统管理员指南:
+                "指导系统管理员如何使用Rancher容器平台提供的系统管理功能",
+            创建集群: "为您介绍如何通过多种方式创建您所需要的Kubernetes集群",
+            集群管理员指南: "为您提供Rancher容器平台集群管理功能的操作指导",
+            项目管理员指南: "为您提供指Rancher容器平台项目管理功能的操作指导",
+            流水线: "为您提供指Rancher容器平台流水线的操作指导",
+            HelmChart: "为您介绍Rancher容器平台中的应用商店、Helm Chart和应用",
+            跨集群部署: "多集群应用程序功能用于跨集群部署应用程序",
+            监控和告警: "为您提供监控和告警的配置指南",
+            Istio: "为您提供Istio的配置指南",
+            日志: "为您提供日志的配置指南",
+            OPA_Gatekeeper: "为您提供OPA Gatekeeper的配置指南",
+            CIS扫描: "为您提供CIS扫描的操作指导",
+            用户指南: "为您提供Rancher容器平台普通用户功能的操作指导",
+            Longhorn: "为您提供Longhorn的产品介绍",
+            安全:
+                "为您提供Rancher容器平台的安全报告、安全加固指南、安全扫描报告和性能测试报告",
+            Rancher命令行: "为您提供Rancher命令行工具（Rancher CLI）的操作指导",
+            系统工具:
+                "为您介绍如何使用Rancher容器平台自带的系统工具收集日志、监控集群资源和移除Kubernetes资源",
+            用户设置: "为您介绍Rancher容器平台提供的用户设置功能",
+            API: "如何使用Rancher容器平台API",
+            常见故障排查:
+                "为您提供在使用本服务的过程中，可能会遇到的典型报错，以及排查和定位问题的方法",
+            常见问题:
+                "为您提供在使用本服务的过程中，可能会遇到典型问题和解决方法",
+            参与Rancher开源项目:
+                "为您介绍 Rancher 2.x 的源代码仓库，如何构建源代码以及在提交 Issue 时要包括哪些信息",
+        },
         rke: {
             产品介绍: "为您提供RKE的产品介绍",
             安装要求: "为您提供安装RKE需要满足的前提条件",
@@ -101,13 +139,7 @@ const metadata = {
     docs: {
         rancher2: {
             "rancher2/_index": "概述",
-            "rancher2/releases/v2.5.6": "版本说明 - v2.5.6",
-            "rancher2/releases/v2.5.5": "版本说明 - v2.5.5",
-            "rancher2/releases/v2.5.4": "版本说明 - v2.5.4",
-            "rancher2/releases/v2.5.3": "版本说明 - v2.5.3",
-            "rancher2/releases/v2.5.2": "版本说明 - v2.5.2",
-            "rancher2/releases/v2.5.1": "版本说明 - v2.5.1",
-            "rancher2/releases/v2.5.0": "版本说明 - v2.5.0",
+            "rancher2/releases/v2.4.15": "版本说明 - v2.4.15",
             "rancher2/releases/v2.4.14": "版本说明 - v2.4.14",
             "rancher2/releases/v2.4.13": "版本说明 - v2.4.13",
             "rancher2/releases/v2.4.12": "版本说明 - v2.4.12",
@@ -145,46 +177,29 @@ const metadata = {
             "rancher2/quick-start-guide/deployment/_index":
                 "部署 Rancher 和 Kubernetes",
             "rancher2/quick-start-guide/workload/_index": "部署工作负载",
-            //新版安装指南
-            "rancher2/installation_new/requirements/_index": "安装要求",
-            "rancher2/installation_new/install-rancher-on-k8s/_index":
-                "高可用安装",
-            "rancher2/installation_new/other-installation-methods/air-gap/prepare-nodes/_index":
+            "rancher2/installation/requirements/_index": "安装要求",
+            "rancher2/installation/install-rancher-on-k8s/_index": "高可用安装",
+            "rancher2/installation/other-installation-methods/air-gap/prepare-nodes/_index":
                 "离线安装",
-            "rancher2/installation_new/other-installation-methods/single-node-docker/_index":
+            "rancher2/installation/other-installation-methods/single-node-docker/_index":
                 "单节点安装",
-            "rancher2/installation_new/other-installation-methods/behind-proxy/_index":
+            "rancher2/installation/other-installation-methods/behind-proxy/_index":
                 "HTTP 代理安装",
 
-            "rancher2/installation_new/install-rancher-on-linux/_index":
+            "rancher2/installation/install-rancher-on-linux/_index":
                 "Linux安装",
-            "rancher2/installation_new/resources/advanced/helm2/_index":
+            "rancher2/installation/resources/advanced/helm2/_index":
                 "安装指南（Helm2）",
-            "rancher2/installation_new/resources/advanced/air-gap-helm2/_index":
+            "rancher2/installation/resources/advanced/air-gap-helm2/_index":
                 "离线安装指南（Helm2）",
-            "rancher2/installation_new/resources/_index":
-                "其他资料及高级配置选项",
-            "rancher2/installation_new/resources/advanced/cluster-yml-templates/_index":
+            "rancher2/installation/resources/_index": "其他资料及高级配置选项",
+            "rancher2/installation/resources/advanced/cluster-yml-templates/_index":
                 "cluster.yml 文件模板",
-            "rancher2/installation_new/resources/advanced/rke-add-on/layer-4-lb/_index":
+            "rancher2/installation/resources/advanced/rke-add-on/layer-4-lb/_index":
                 "四层负载均衡安装指南",
-            "rancher2/installation_new/resources/advanced/rke-add-on/layer-7-lb/_index":
+            "rancher2/installation/resources/advanced/rke-add-on/layer-7-lb/_index":
                 "七层负载均衡安装指南",
-            "rancher2/installation_new/upgrades-rollbacks/_index":
-                "升级回滚指南",
-            //结束新版安装指南
-            //旧版安装指南
-            //"rancher2/installation/requirements/_index": "安装要求",
-            //"rancher2/installation/k8s-install/_index": "高可用安装",
-            //"rancher2/installation/other-installation-methods/single-node-docker/_index":
-            //   "单节点安装",
-            //"rancher2/installation/other-installation-methods/air-gap/_index":
-            //   "离线安装",
-            //"rancher2/upgrades/upgrades/ha/_index": "升级高可用 Rancher",
-            //"rancher2/upgrades/upgrades/single-node/_index":"升级单节点 Rancher",
-            //"rancher2/upgrades/rollbacks/ha-server-rollbacks/_index":"回滚高可用 Rancher",
-            //"rancher2/upgrades/rollbacks/single-node-rollbacks/_index":"回滚单节点 Rancher",
-            //结束旧版安装指南
+            "rancher2/installation/upgrades-rollbacks/_index": "升级回滚指南",
             "rancher2/backups/_index": "概述",
             "rancher2/backups/2.0-2.4/_index": "v2.0-v2.4",
             "rancher2/backups/2.5/_index": "v2.5",
@@ -231,9 +246,10 @@ const metadata = {
             "rancher2/cluster-admin/nodes/_index": "节点和节点池",
             "rancher2/cluster-admin/projects-and-namespaces/_index":
                 "项目和 Kubernetes 命名空间",
-            "rancher2/cluster-admin/tools/monitoring/_index": "集群监控",
+            "rancher2/cluster-admin/tools/cluster-monitoring/_index":
+                "集群监控",
             "rancher2/cluster-admin/tools/logging/_index": "集群日志",
-            "rancher2/cluster-admin/tools/alerts/_index": "集群告警",
+            "rancher2/cluster-admin/tools/cluster-alerts/_index": "集群告警",
             "rancher2/cluster-admin/tools/istio/_index": "服务网格（Istio）",
             "rancher2/cluster-admin/tools/opa-gatekeeper/_index":
                 "OPA Gatekeeper",
@@ -293,20 +309,9 @@ const metadata = {
             "rancher2/user-settings/preferences/_index": "偏好设置",
             "rancher2/api/_index": "如何调用 Rancher API",
             "rancher2/api/api-tokens/_index": "API Tokens",
-            //安全 OLD
-            /*
-            "rancher2/security/_index": "安全说明",
-            "rancher2/security/security-scan/_index": "安全扫描",
-            "rancher2/security/hardening-2.3.5/_index": "安全加固指南",
-            "rancher2/security/benchmark-2.3.5/_index": "CIS 自测指南",
-            "rancher2/security/cve/_index": "安全漏洞和解决方法",
-            */
-            //安全 NEW
             "rancher2/security/_index": "安全说明",
             "rancher2/security/security-scan/_index": "安全扫描",
             "rancher2/security/cve/_index": "安全漏洞和解决方法",
-            "": "",
-            //
             "rancher2/faq/kubectl/_index": "安装和配置 kubectl",
             "rancher2/faq/networking/_index": "网络问题",
             "rancher2/faq/technical/_index": "技术问题",
@@ -330,7 +335,129 @@ const metadata = {
             "rancher2/troubleshooting/logging/_index": "配置日志等级",
             "rancher2/v1.6-migration/_index": "从 v1.6 迁移到 v2.x",
         },
-        rancher2_5: {},
+        rancher2_5: {
+            "rancher2.5/_index": "概述",
+            "rancher2.5/releases/v2.5.7": "版本说明 - v2.5.7",
+            "rancher2.5/releases/v2.5.6": "版本说明 - v2.5.6",
+            "rancher2.5/releases/v2.5.5": "版本说明 - v2.5.5",
+            "rancher2.5/releases/v2.5.4": "版本说明 - v2.5.4",
+            "rancher2.5/releases/v2.5.3": "版本说明 - v2.5.3",
+            "rancher2.5/releases/v2.5.2": "版本说明 - v2.5.2",
+            "rancher2.5/releases/v2.5.1": "版本说明 - v2.5.1",
+            "rancher2.5/releases/v2.5.0": "版本说明 - v2.5.0",
+            "rancher2.5/trending-topics/_index": "热点问题",
+            "rancher2.5/overview/_index": "产品简介",
+            "rancher2.5/overview/architecture/_index": "产品架构",
+            "rancher2.5/overview/architecture-recommendations/_index":
+                "推荐架构",
+            "rancher2.5/overview/concepts/_index": "Kubernetes 概念",
+            "rancher2.5/overview/glossary/_index": "名词解释",
+            "rancher2.5/uick-start-guide/_index": "入门必读",
+            "rancher2.5/quick-start-guide/cli/_index": "命令行工具",
+            "rancher2.5/quick-start-guide/deployment/_index":
+                "部署 Rancher 和 Kubernetes",
+            "rancher2.5/quick-start-guide/workload/_index": "部署工作负载",
+            "rancher2.5/installation/requirements/_index": "安装要求",
+            "rancher2.5/installation/install-rancher-on-k8s/_index":
+                "高可用安装",
+            "rancher2.5/installation/other-installation-methods/air-gap/prepare-nodes/_index":
+                "离线安装",
+            "rancher2.5/installation/other-installation-methods/single-node-docker/_index":
+                "单节点安装",
+            "rancher2.5/installation/other-installation-methods/behind-proxy/_index":
+                "HTTP 代理安装",
+
+            "rancher2.5/installation/install-rancher-on-linux/_index":
+                "Linux安装",
+            "rancher2.5/installation/resources/advanced/helm2/_index":
+                "安装指南（Helm2）",
+            "rancher2.5/installation/resources/advanced/air-gap-helm2/_index":
+                "离线安装指南（Helm2）",
+            "rancher2.5/installation/resources/_index":
+                "其他资料及高级配置选项",
+            "rancher2.5/installation/resources/advanced/cluster-yml-templates/_index":
+                "cluster.yml 文件模板",
+            "rancher2.5/installation/resources/advanced/rke-add-on/layer-4-lb/_index":
+                "四层负载均衡安装指南",
+            "rancher2.5/installation/resources/advanced/rke-add-on/layer-7-lb/_index":
+                "七层负载均衡安装指南",
+            "rancher2.5/installation/upgrades-rollbacks/_index": "升级回滚指南",
+            "rancher2.5/backups/_index": "概述",
+            "rancher2.5/backups/back-up-rancher/_index": "备份 Rancher",
+            "rancher2.5/backups/configuration/_index": "Rancher备份配置参考",
+            "rancher2.5/backups/docker-installs/_index":
+                "Docker安装的Rancher的备份和还原",
+            "rancher2.5/backups/examples/_index": "示例",
+            "rancher2.5/backups/migrating-rancher/_index":
+                "将Rancher迁移到新集群",
+            "rancher2.5/backups/restoring-rancher/_index": "恢复 Rancher",
+            "rancher2.5/rancher2/admin-settings/_index": "功能介绍",
+            "rancher2.5/admin-settings/config-private-registry/_index":
+                "全局私有镜像库",
+            "rancher2.5/rancher2/admin-settings/authentication/_index":
+                "对接用户认证系统",
+            "rancher2.5/admin-settings/rbac/_index": "角色权限控制",
+            "rancher2.5/admin-settings/pod-security-policies/_index":
+                "Pod 安全策略",
+            "rancher2.5/admin-settings/rke-templates/_index": "RKE 集群模板",
+            "rancher2.5/admin-settings/drivers/_index": "驱动管理",
+            "rancher2.5/admin-settings/replace-ip-domain/_index":
+                "变更 Rancher Server IP 或域名",
+            "rancher2.5/cluster-provisioning/_index": "创建集群的几种方式",
+            "rancher2.5/cluster-provisioning/node-requirements/_index":
+                "Rancher 管理的 Kubernetes 集群节点要求",
+            "rancher2.5/cluster-provisioning/production/_index":
+                "创建生产可用集群",
+            "rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/_index":
+                "创建托管集群",
+            "rancher2.5/cluster-provisioning/rke-clusters/custom-nodes/_index":
+                "在现有节点上创建 RKE 集群",
+            "rancher2.5/cluster-provisioning/rke-clusters/node-pools/_index":
+                "通过主机驱动创建 RKE 集群",
+            "rancher2.5/cluster-provisioning/imported-clusters/_index":
+                "导入已有集群",
+            "rancher2.5/cluster-provisioning/registered-clusters/_index":
+                "注册集群",
+            "rancher2.5/cluster-provisioning/rke-clusters/windows-clusters/_index":
+                "创建 Windows 集群",
+            "rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/_index":
+                "配置 Cloud Provider",
+            "rancher2.5/cluster-admin/cluster-access/_index": "访问控制",
+            "rancher2.5/cluster-admin/upgrading-kubernetes/_index":
+                "升级 Kubernetes 版本",
+            "rancher2.5/cluster-admin/pod-security-policy/_index":
+                "设置 Pod 安全策略",
+            "rancher2.5/cluster-admin/editing-clusters/_index": "编辑集群",
+            "rancher2.5/cluster-admin/nodes/_index": "节点和节点池",
+            "rancher2.5/cluster-admin/projects-and-namespaces/_index":
+                "项目和 Kubernetes 命名空间",
+            "rancher2.5/cluster-admin/tools/cluster-monitoring/_index":
+                "集群监控",
+            "rancher2.5/cluster-admin/tools/logging/_index": "集群日志",
+            "rancher2.5/cluster-admin/tools/cluster-alerts/_index": "集群告警",
+            "rancher2.5/cluster-admin/tools/istio/_index": "服务网格（Istio）",
+            "rancher2.5/cluster-admin/tools/opa-gatekeeper/_index":
+                "OPA Gatekeeper",
+            "rancher2.5/cluster-admin/certificate-rotation/_index": "轮换证书",
+            "rancher2.5/cluster-admin/backing-up-etcd/_index": "备份集群",
+            "rancher2.5/cluster-admin/restoring-etcd/_index": "恢复集群",
+            "rancher2.5/cluster-admin/cleaning-cluster-nodes/_index":
+                "清理节点",
+            "rancher2.5/project-admin/_index": "项目管理",
+            "rancher2.5/project-admin/project-members/_index": "添加项目成员",
+            "rancher2.5/project-admin/resource-quotas/_index":
+                "管理项目资源配额",
+            "rancher2.5/project-admin/namespaces/_index": "命名空间",
+            "rancher2.5/project-admin/tools/_index":
+                "日志、监控和可视化工具介绍",
+            "rancher2.5/project-admin/tools/alerts/_index": "项目告警",
+            "rancher2.5/project-admin/tools/logging/_index": "项目日志",
+            "rancher2.5/project-admin/tools/monitoring/_index": "项目监控",
+            "rancher2.5/project-admin/istio/_index": "服务网格（Istio）",
+            "rancher2.5/project-admin/pipelines/_index": "CI/CD 流水线",
+            "rancher2.5/project-admin/pod-security-policies/_index":
+                "Pod 安全策略",
+        },
         rke: {
             "rke/_index": "产品简介",
             "rke/os/_index": "安装要求",

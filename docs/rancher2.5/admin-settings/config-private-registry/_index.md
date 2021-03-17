@@ -21,7 +21,7 @@ keywords:
 
 本文介绍了配置全局默认私有镜像仓库的操作步骤和注意事项，并且重点介绍在安装 Rancher 之后如何从 Rancher UI 配置默认镜像仓库。
 
-有关在 Rancher 的安装过程中使用命令行选项设置私有镜像仓库的说明，请参阅[单节点离线安装](/docs/rancher2.5/installation_new/other-installation-methods/air-gap/_index)或[高可用离线安装](/docs/rancher2.5/installation_new/other-installation-methods/air-gap/_index)说明。
+有关在 Rancher 的安装过程中使用命令行选项设置私有镜像仓库的说明，请参阅[单节点离线安装](/docs/rancher2.5/installation/other-installation-methods/air-gap/_index)或[高可用离线安装](/docs/rancher2.5/installation/other-installation-methods/air-gap/_index)说明。
 
 如果您的私有镜像仓库需要凭据，则不能将其设置为全局默认镜像仓库。没有全局的方法来为每个 Rancher 所配置的集群设置具有授权认证的私有镜像仓库。因此，如果您希望由 Rancher 配置的集群从具有授权认证的私有镜像仓库中拉取镜像，则必须通过高级集群选项传递镜像仓库凭据。
 

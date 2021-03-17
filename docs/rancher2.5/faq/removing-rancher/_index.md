@@ -33,7 +33,7 @@ keywords:
 
 ## 不再需要 Rancher 时该怎么做？
 
-如果您是[Rancher 高可用安装](/docs/rancher2.5/installation_new/install-rancher-on-k8s/_index)，可通过[系统工具](/docs/rancher2.5/system-tools/_index) 的 `remove` 子命令移除 Rancher。
+如果您是[Rancher 高可用安装](/docs/rancher2.5/installation/install-rancher-on-k8s/_index)，可通过[系统工具](/docs/rancher2.5/system-tools/_index) 的 `remove` 子命令移除 Rancher。
 
 如果您通过 Docker 单节点安装的 Rancher，可以通过移除 Docker 容器的方式移除 Rancher。
 
