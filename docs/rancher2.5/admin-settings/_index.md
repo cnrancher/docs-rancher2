@@ -95,7 +95,7 @@ Rancher 用于配置[RKE 集群](/docs/rancher2.5/cluster-provisioning/rke-clust
 
 _v2.3.0 版本可用_
 
-Rancher 包含一些在默认情况下禁用的实验性功能。该功能开关让您能够尝试这些新功能。有关更多信息，请参考关于[功能开关](/docs/rancher2.5/installation_new/resources/feature-flags/_index)的章节。
+Rancher 包含一些在默认情况下禁用的实验性功能。该功能开关让您能够尝试这些新功能。有关更多信息，请参考关于[功能开关](/docs/rancher2.5/installation/resources/feature-flags/_index)的章节。
 
 ## 轮换 Rancher Server 证书
 

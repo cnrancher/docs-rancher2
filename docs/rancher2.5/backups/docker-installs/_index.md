@@ -18,5 +18,5 @@ keywords:
 
 在 Rancher v2.5 中，用 Docker 安装的 Rancher 的备份和恢复步骤并没有改变。
 
-- [备份](./docker-backups/_index)
-- [恢复](./docker-restores/_index)
+- [备份](/docs/rancher2.5/backups/docker-installs/docker-backups/_index)
+- [恢复](/docs/rancher2.5/backups/docker-installs/docker-restores/_index)

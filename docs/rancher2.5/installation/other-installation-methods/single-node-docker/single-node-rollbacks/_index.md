@@ -17,14 +17,14 @@ keywords:
   - 单节点docker回滚
 ---
 
-如果 Rancher 升级没有成功完成，你必须回滚到你在[Docker 升级](/docs/rancher2.5/installation_new/install-rancher-on-k8s/upgrades/single-node/_index)之前使用的 Rancher 设置。回滚还原。
+如果 Rancher 升级没有成功完成，你必须回滚到你在[Docker 升级](/docs/rancher2.5/installation/install-rancher-on-k8s/upgrades/single-node/_index)之前使用的 Rancher 设置。回滚还原。
 
 - 您之前的 Rancher 版本。
 - 您在升级前创建的数据备份。
 
 ## 概述
 
-如果升级 Rancher 的过程中出现问题，导致升级失败，则必须回滚到[升级 Rancher 单节点](/docs/rancher2.5/installation_new/install-rancher-on-k8s/upgrades/single-node/_index)前使用的 Rancher 版本及设置。执行回滚操作之前，您需要获取升级前 Rancher 的版本号（如 v2.0.5)，和升级前创建的数据备份。
+如果升级 Rancher 的过程中出现问题，导致升级失败，则必须回滚到[升级 Rancher 单节点](/docs/rancher2.5/installation/install-rancher-on-k8s/upgrades/single-node/_index)前使用的 Rancher 版本及设置。执行回滚操作之前，您需要获取升级前 Rancher 的版本号（如 v2.0.5)，和升级前创建的数据备份。
 
 回滚到较早版本的 Rancher 期间，您需要输入一系列命令，按照实际情况替换命令中的占位符，获取升级前的 Rancher 版本号和数据备份。这些占位符用尖括号和大写字母（`<EXAMPLE>`）表示，以下是带有占位符的命令示例：
 
@@ -75,9 +75,9 @@ docker pull rancher/rancher:<PRIOR_RANCHER_VERSION>
 
    您可以在命令行工具输入`docker ps`，获得 Rancher 容器的名称。
 
-1. 将[升级单节点 Rancher](/docs/rancher2.5/installation_new/install-rancher-on-k8s/upgrades/single-node/_index)时生成的备份压缩包移动到 Rancher Server 上。切换到目标目录，输入`ls`指令，确认将备份压缩包移动到了正确的路径。
+1. 将[升级单节点 Rancher](/docs/rancher2.5/installation/install-rancher-on-k8s/upgrades/single-node/_index)时生成的备份压缩包移动到 Rancher Server 上。切换到目标目录，输入`ls`指令，确认将备份压缩包移动到了正确的路径。
 
-   如果您遵循了我们在[升级单节点 Rancher](/docs/rancher2.5/installation_new/install-rancher-on-k8s/upgrades/single-node/_index)中建议的命名约定，则其命名类似于(`rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz`)。
+   如果您遵循了我们在[升级单节点 Rancher](/docs/rancher2.5/installation/install-rancher-on-k8s/upgrades/single-node/_index)中建议的命名约定，则其命名类似于(`rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz`)。
 
 1. 运行以下命令，替换[占位符](#在回滚之前)，别忘了关闭引号。从而将`rancher-data`容器中的数据替换为备份压缩包中的数据。
 

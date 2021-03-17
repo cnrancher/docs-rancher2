@@ -17,6 +17,8 @@ keywords:
 
 在您的项目建立之后，[项目成员](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)可以开始管理项目中的应用程序和其他的所有组件。
 
+Cluster Explorer 是 Rancher v2.5 中的一项新功能，它允许您从 Rancher 用户界面查看和操作 Kubernetes 集群中的所有自定义资源和 CRD。本节将进行更新，以反映 Rancher v2.5 中处理 Kubernetes 资源的方式。
+
 ## 工作负载
 
 使用[工作负载](/docs/rancher2.5/k8s-in-rancher/workloads/_index)将应用程序部署到集群节点，工作负载包含运行应用程序的 Pod 的对象，以及为部署行为设置规则的元数据。工作负载可以部署在整个集群范围里，也可以部署在一个命名空间内。
