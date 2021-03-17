@@ -1050,7 +1050,6 @@ module.exports = {
                             "rancher2.5/installation/other-installation-methods/behind-proxy/install-rancher/_index",
                         ],
                     },
-                    "rancher2.5/installation/other-installation-methods/troubleshooting/_index",
                 ],
             },
             {
@@ -1132,9 +1131,9 @@ module.exports = {
                 label: "Rancher Server 的最佳实践",
                 items: [
                     "rancher2.5/best-practices/rancher-server/_index",
+                    "rancher2.5/best-practices/rancher-server/rancher-in-vsphere/_index",
                     "rancher2.5/best-practices/rancher-server/deployment-strategies/_index",
                     "rancher2.5/best-practices/rancher-server/deployment-types/_index",
-                    "rancher2.5/best-practices/rancher-server/rancher-in-vsphere/_index",
                 ],
             },
             {
@@ -1142,24 +1141,18 @@ module.exports = {
                 label: "Rancher管理集群的最佳实践",
                 items: [
                     "rancher2.5/best-practices/rancher-managed/_index",
-                    "rancher2.5/best-practices/rancher-managed/containers/_index",
                     "rancher2.5/best-practices/rancher-managed/logging/_index",
-                    "rancher2.5/best-practices/rancher-managed/managed-vsphere/_index",
                     "rancher2.5/best-practices/rancher-managed/monitoring/_index",
+                    "rancher2.5/best-practices/rancher-managed/containers/_index",
+                    "rancher2.5/best-practices/rancher-managed/managed-vsphere/_index",
                 ],
             },
         ],
         备份和恢复指南: [
             "rancher2.5/backups/_index",
-            {
-                type: "category",
-                label: "备份",
-                items: [
-                    "rancher2.5/backups/back-up-rancher/_index",
-                    "rancher2.5/backups/restoring-rancher/_index",
-                    "rancher2.5/backups/migrating-rancher/_index",
-                ],
-            },
+            "rancher2.5/backups/back-up-rancher/_index",
+            "rancher2.5/backups/restoring-rancher/_index",
+            "rancher2.5/backups/migrating-rancher/_index",
             {
                 type: "category",
                 label: "Rancher备份配置参考",
@@ -1237,7 +1230,17 @@ module.exports = {
                     "rancher2.5/admin-settings/rbac/locked-roles/_index",
                 ],
             },
+            "rancher2.5/admin-settings/k8s-metadata/_index",
             "rancher2.5/admin-settings/pod-security-policies/_index",
+            {
+                type: "category",
+                label: "集群和节点驱动",
+                items: [
+                    "rancher2.5/admin-settings/drivers/_index",
+                    "rancher2.5/admin-settings/drivers/cluster-drivers/_index",
+                    "rancher2.5/admin-settings/drivers/node-drivers/_index",
+                ],
+            },
             {
                 type: "category",
                 label: "RKE 集群模板",
@@ -1252,15 +1255,6 @@ module.exports = {
                     "rancher2.5/admin-settings/rke-templates/applying-templates/_index",
                     "rancher2.5/admin-settings/rke-templates/example-yaml/_index",
                     "rancher2.5/admin-settings/rke-templates/rke-templates-and-hardware/_index",
-                ],
-            },
-            {
-                type: "category",
-                label: "驱动管理",
-                items: [
-                    "rancher2.5/admin-settings/drivers/_index",
-                    "rancher2.5/admin-settings/drivers/cluster-drivers/_index",
-                    "rancher2.5/admin-settings/drivers/node-drivers/_index",
                 ],
             },
             "rancher2.5/admin-settings/replace-ip-domain/_index",
@@ -1401,6 +1395,7 @@ module.exports = {
                 ],
             },
             "rancher2.5/cluster-admin/projects-and-namespaces/_index",
+            "rancher2.5/cluster-admin/tools/_index",
             {
                 type: "category",
                 label: "集群工具",
@@ -1509,7 +1504,11 @@ module.exports = {
             "rancher2.5/pipelines/storage/_index",
         ],
         HelmChart: ["rancher2.5/helm-charts/_index"],
-        跨集群部署: ["rancher2.5/deploy-across-clusters/_index"],
+        跨集群部署: [
+            "rancher2.5/deploy-across-clusters/_index",
+            "rancher2.5/deploy-across-clusters/fleet/_index",
+            "rancher2.5/deploy-across-clusters/multi-cluster-apps/_index",
+        ],
         监控和告警: [
             "rancher2.5/monitoring-alerting/_index",
             {
@@ -1595,7 +1594,7 @@ module.exports = {
             },
             {
                 type: "category",
-                label: "负载均衡和 Ingress",
+                label: "配置负载均衡和 Ingress",
                 items: [
                     "rancher2.5/k8s-in-rancher/load-balancers-and-ingress/_index",
                     "rancher2.5/k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index",
@@ -1641,6 +1640,25 @@ module.exports = {
             "rancher2.5/api/api-custom-cluster/_index",
             "rancher2.5/api/api-import-cluster/_index",
         ],
+        常见问题: [
+            "rancher2.5/faq/_index",
+            "rancher2.5/faq/deprecated-features-25x/_index",
+            "rancher2.5/faq/kubectl/_index",
+            {
+                type: "category",
+                label: "网络",
+                items: [
+                    "rancher2.5/faq/networking/_index",
+                    "rancher2.5/faq/networking/cni-providers/_index",
+                ],
+            },
+            "rancher2.5/faq/technical/_index",
+            "rancher2.5/faq/security/_index",
+            "rancher2.5/faq/telemetry/_index",
+            "rancher2.5/faq/removing-rancher/_index",
+            "rancher2.5/faq/etcd/_index",
+            "rancher2.5/faq/install/_index",
+        ],
         常见故障排查: [
             "rancher2.5/troubleshooting/_index",
             {
@@ -1660,42 +1678,6 @@ module.exports = {
             "rancher2.5/troubleshooting/rancherha/_index",
             "rancher2.5/troubleshooting/imported-clusters/_index",
             "rancher2.5/troubleshooting/logging/_index",
-        ],
-        Rancher命令行: ["rancher2/cli/_index"],
-        系统工具: ["rancher2.5/system-tools/_index"],
-        用户设置: [
-            "rancher2.5/user-settings/_index",
-            "rancher2.5/user-settings/api-keys/_index",
-            "rancher2.5/user-settings/node-templates/_index",
-            "rancher2.5/user-settings/cloud-credentials/_index",
-            "rancher2.5/user-settings/preferences/_index",
-        ],
-        API: [
-            "rancher2.5/api/_index",
-            "rancher2.5/api/api-tokens/_index",
-            "rancher2.5/api/api-resources/_index",
-            "rancher2.5/api/api-custom-cluster/_index",
-            "rancher2.5/api/api-import-cluster/_index",
-        ],
-        常见问题: [
-            "rancher2.5/faq/_index",
-            "rancher2.5/faq/upgrades-to-2x/_index",
-            "rancher2.5/faq/kubectl/_index",
-            {
-                type: "category",
-                label: "网络",
-                items: [
-                    "rancher2.5/faq/networking/_index",
-                    "rancher2.5/faq/networking/cni-providers/_index",
-                    "rancher2.5/faq/networking/mtu/_index",
-                ],
-            },
-            "rancher2.5/faq/technical/_index",
-            "rancher2.5/faq/security/_index",
-            "rancher2.5/faq/telemetry/_index",
-            "rancher2.5/faq/removing-rancher/_index",
-            "rancher2.5/faq/etcd/_index",
-            "rancher2.5/faq/install/_index",
         ],
         参与Rancher开源项目: ["rancher2.5/contributing/_index"],
     },

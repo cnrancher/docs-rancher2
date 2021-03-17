@@ -1,6 +1,5 @@
 ---
-title: Hardening Guide with CIS 1.6 Benchmark
-weight: 100
+title: 安全加固指南 - v2.5.0 - CIS1.6
 ---
 
 本文讲解了如何使您的集群符合互联网安全中心发布的 Kubernetes 安全基准，保护集群中节点的安全。安装 Kubernetes 之前，请按照本指南进行操作。加固指南旨在与特定版本的 CIS Kubernetes Benchmark，Kubernetes 和 Rancher 一起使用。
