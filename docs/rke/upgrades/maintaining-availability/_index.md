@@ -30,7 +30,6 @@ RKE v1.1.0+优化了升级集群的流程，提供了不宕机升级的功能。
 工作负载必须满足以下条件：
 
 1. 应用和 Ingress 部署在至少一个节点上。
-1. The applications must make use of liveness and readiness probes.
 1. 应用必须使用存活探针（liveness probes）和就绪探针（readiness probes）。
 
 ## 相关链接
