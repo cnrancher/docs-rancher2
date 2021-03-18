@@ -129,19 +129,6 @@ function Home() {
                     </div>
                     <div className="navigation__item">
                         <div className="navigation__title">
-                            <a href="/octopus">
-                                <h1>Octopus</h1>
-                            </a>
-                        </div>
-                        <div className="navigation__content">
-                            <p>
-                                Octopus是基于Kubernetes或k3s的开源和云原生的设备管理系统，它非常轻巧，也不需要替换Kubernetes集群的任何基础组件。
-                                部署了Octopus，集群可以将边缘设备作为自定义k8s资源进行管理。
-                            </p>
-                        </div>
-                    </div>
-                    <div className="navigation__item">
-                        <div className="navigation__title">
                             <a href="/harvester">
                                 <h1>Harvester</h1>
                             </a>
@@ -150,6 +137,23 @@ function Home() {
                             <p>
                                 Harvester是由Rancher提供的基于Kubernetes构建的100%开源的超融合基础架构（HCI）软件。
                                 它是vSphere和Nutanix的开源替代方案。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <main>
+                <div className="navigation__grid">
+                    <div className="navigation__item">
+                        <div className="navigation__title">
+                            <a href="/octopus">
+                                <h1>Octopus</h1>
+                            </a>
+                        </div>
+                        <div className="navigation__content">
+                            <p>
+                                Octopus是基于Kubernetes或k3s的开源和云原生的设备管理系统，它非常轻巧，也不需要替换Kubernetes集群的任何基础组件。
+                                部署了Octopus，集群可以将边缘设备作为自定义k8s资源进行管理。
                             </p>
                         </div>
                     </div>
