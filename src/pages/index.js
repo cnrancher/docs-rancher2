@@ -60,7 +60,7 @@ function Home() {
                 <div className="container">
                     <img
                         className="hero__logo"
-                        src="/img/rancher-logo-stacked-black.svg"
+                        src="/img/rancher-logo-stacked-color.svg"
                     />
                     <p className="hero__subtitle navigation__subtitle">
                         {title}
@@ -71,20 +71,24 @@ function Home() {
                 <div className="navigation__grid">
                     <div className="navigation__item">
                         <div className="navigation__title">
-                            <a href="/rancher1">
-                                <h1>Rancher 1.x</h1>
+                            <a href="/rancher2.5">
+                                <h1>Rancher 2.5</h1>
                             </a>
                         </div>
                         <div className="navigation__content">
                             <p>
-                                Rancher帮助企业能够在生产环境中运行和管理Docker和Kubernetes，而无需从头开始构建容器服务平台。Rancher不再维护1.x版本的文档，建议您升级至2.x后，配合2.x文档使用新版Rancher。
+                                Rancher
+                                是为使用容器的公司打造的容器管理平台。Rancher
+                                简化了使用 Kubernetes 的流程，开发者可以随处运行
+                                Kubernetes（Run Kubernetes Everywhere），满足 IT
+                                需求规范，赋能 DevOps 团队。
                             </p>
                         </div>
                     </div>
                     <div className="navigation__item">
                         <div className="navigation__title">
                             <a href="/rancher2">
-                                <h1>Rancher 2.x</h1>
+                                <h1>Rancher 2.0-2.4</h1>
                             </a>
                         </div>
                         <div className="navigation__content">
@@ -146,6 +150,18 @@ function Home() {
                             <p>
                                 Harvester是由Rancher提供的基于Kubernetes构建的100%开源的超融合基础架构（HCI）软件。
                                 它是vSphere和Nutanix的开源替代方案。
+                            </p>
+                        </div>
+                    </div>
+                    <div className="navigation__item">
+                        <div className="navigation__title">
+                            <a href="/rancher1">
+                                <h1>Rancher 1.x</h1>
+                            </a>
+                        </div>
+                        <div className="navigation__content">
+                            <p>
+                                Rancher帮助企业能够在生产环境中运行和管理Docker和Kubernetes，而无需从头开始构建容器服务平台。Rancher不再维护1.x版本的文档，建议您升级至2.x后，配合2.x文档使用新版Rancher。
                             </p>
                         </div>
                     </div>

@@ -1395,7 +1395,6 @@ module.exports = {
                 ],
             },
             "rancher2.5/cluster-admin/projects-and-namespaces/_index",
-            "rancher2.5/cluster-admin/tools/_index",
             {
                 type: "category",
                 label: "集群工具",
