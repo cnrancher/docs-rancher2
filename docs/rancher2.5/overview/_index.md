@@ -30,10 +30,10 @@ Rancher 通过支持集群的身份验证和基于角色的访问控制（RBAC�
 总而言之，Rancher 是一个全栈式的 Kubernetes 容器管理平台，也是一个可以在任何地方都能成功运行 Kubernetes 的工具。
 
 <div class="text-center">
-<iframe width="444" height="250" src="//player.bilibili.com/player.html?aid=94394330&cid=161139480&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+<iframe width="444" height="250" src="//player.bilibili.com/player.html?aid=802107543&bvid=BV1Ey4y1E77g&cid=307605166&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 </div>
 <div class="text-center">
-<a href="https://www.bilibili.com/video/av94394330/"> Rancher v2.3.5 Demo 视频 </a>
+<a href="https://www.bilibili.com/video/BV1Ey4y1E77g"> Rancher v2.5.6 Demo 视频 </a>
 </div>
 
 更多视频教程，请前往 [Bilibili](https://space.bilibili.com/430496045/video?tid=0&page=1&keyword=&order=pubdate) 查看。
