@@ -80,7 +80,7 @@ v1.16.0-beta.1-rancher1-1
 
 ## Kubernetes 版本优先级
 
-如果在`kubernetes_version`和`system_images`中都定义了 Kubernetes 版本，`system_images`中定义的版本会生效，而`kubernetes_version`中定义的版本不会生效。如果两者都没有定义 Kubernetes 版本，RKE 会使用默认的 Kubernetes 版本。总体来说，选取 Kubernetes 版本的优先级从高到底的排序是这样的：`kubernetes_version` > `system_images` > 默认版本。
+如果在`kubernetes_version`和`system_images`中都定义了 Kubernetes 版本，`system_images`中定义的版本会生效，而`kubernetes_version`中定义的版本不会生效。如果两者都没有定义 Kubernetes 版本，RKE 会使用默认的 Kubernetes 版本。
 
 ## 使用不支持的 Kubernetes 版本 Using an Unsupported Kubernetes Version
 
