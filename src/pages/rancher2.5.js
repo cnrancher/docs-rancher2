@@ -53,7 +53,7 @@ function Home() {
     const { baseUrl } = siteConfig;
     const { sidebars, metadata } = siteConfig.customFields;
     const toc = getToc(sidebars, metadata, baseUrl);
-    const title = "Rancher 2.5 中文文档（alpha）";
+    const title = "Rancher 2.5 中文文档";
     return (
         <Layout title={metaTitle} description={description} keywords={keywords}>
             <header className={classnames("hero", styles.heroBanner)}>
