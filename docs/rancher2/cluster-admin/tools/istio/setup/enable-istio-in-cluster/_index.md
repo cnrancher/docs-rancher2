@@ -23,11 +23,11 @@ keywords:
 
 Rancher 的[管理员](/docs/rancher2/admin-settings/rbac/global-permissions/_index)或者[集群所有者](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)可以在一个 Kubernetes 集群中部署 Istio。
 
-> 如果集群启用了 Pod 安全策略，则有[先决条件步骤](/docs/rancher2/istio/2.3.x-2.4.x/setup/enable-istio-in-cluster/enable-istio-with-psp/_index)
+> 如果集群启用了 Pod 安全策略，则有[先决条件步骤](/docs/rancher2/cluster-admin/tools/istio/setup/enable-istio-in-cluster/enable-istio-with-psp/_index)
 
 1. 从**全局**视图中，导航到要启用 Istio 的集群。
 1. 单击**工具 > Istio**。
-1. 可选: 为 Istio 组件配置成员访问权限和[资源限制](/docs/rancher2/istio/2.3.x-2.4.x/resources/_index)。确保您的 worker 节点上有足够的资源来启用 Istio。
+1. 可选: 为 Istio 组件配置成员访问权限和[资源限制](/docs/rancher2/cluster-admin/tools/istio/resources/_index)。确保您的 worker 节点上有足够的资源来启用 Istio。
 1. 单击**启用**。
 1. 单击**保存**。
 
@@ -39,4 +39,4 @@ Istio 会作为一个名为`cluster-istio`的应用添加到该集群的`系统`
 
 ## 后续操作
 
-[在命名空间中启用 Istio](/docs/rancher2/istio/2.3.x-2.4.x/setup/enable-istio-in-namespace/_index)
+[在命名空间中启用 Istio](/docs/rancher2/cluster-admin/tools/istio/setup/enable-istio-in-namespace/_index)

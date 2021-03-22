@@ -23,9 +23,7 @@ keywords:
 
 关于安装了 Docker 的 Rancher 的升级说明，请参考[本页](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/single-node-upgrades/_index)
 
-要升级 Kubernetes 集群中的组件，或者定义[Kubernetes 服务](/docs/rke/config-options/services/_index)或[附加组件](/docs/rke/config-options/add-ons/_index)。参考 Rancher Kubernetes 引擎的[RKE 的升级文档](/docs/rke/upgrades/_index)。
-
-如果你使用 RKE 附加组件 yaml 安装了 Rancher，请按照[迁移或升级](/docs/rancher2.5/installation/install-rancher-on-k8s/upgrades/migrating-from-rke-add-on/_index)的指示进行。
+要升级 Kubernetes 集群中的组件，或者定义[Kubernetes 服务](/docs/rke/config-options/services/_index)或[附加组件](/docs/rke/config-options/add-ons/_index)，请参考[RKE 的升级文档](/docs/rke/upgrades/_index)。
 
 ## 前提条件
 
@@ -49,7 +47,7 @@ kubeconfig 也可以通过`--kubeconfig`标签来手动针对预定的集群，�
 
 本文基于 Helm 3 写作。如果您使用的是 Helm2，在按照本文进行升级之前，请先将 Helm 2 升级为 Helm 3。Helm 升级的具体操作步骤请参考[Helm 官方文档-从 Helm 2 迁移到 Helm 3](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/)。
 
-如果您希望保留 Helm2，我们也提供了基于 Helm2 升级的操作指导，详情请参考[Helm 2 升级指南](/docs/rancher2.5/installation/install-rancher-on-k8s/upgrades/ha/helm2/_index)。
+如果您希望保留 Helm2，我们也提供了基于 Helm2 升级的操作指导，详情请参考[Helm 2 升级指南](/docs/rancher2/installation/install-rancher-on-k8s/upgrades/ha/helm2/_index)。
 
 ### 同步镜像到私有镜像仓库
 
@@ -243,7 +241,7 @@ kubectl -n cattle-system apply -R -f ./rancher
 
 登录 Rancher，确认升级成功。
 
-如果升级之后出现了网络问题，请参考[恢复集群网络](/docs/rancher2.5/installation/install-rancher-on-k8s/upgrades/namespace-migration/_index)。
+如果升级之后出现了网络问题，请参考[恢复集群网络](/docs/rancher2/installation/install-rancher-on-k8s/upgrades/namespace-migration/_index)。
 
 ## 已知问题
 
@@ -255,4 +253,4 @@ kubectl -n cattle-system apply -R -f ./rancher
 | 升级到 v2.3.0+                  | 任何用户供应的集群将在任何编辑后自动更新，因为容忍被添加到用于 Kubernetes 供应的图像中。                                                                                                                                                                                                                                                                       |
 | 升级到 v2.2.0-v2.2.x            | Rancher 引入了[system charts](https://github.com/rancher/system-charts)存储库，其中包含监控、日志、警报和全局 DNS 等功能所需的所有目录项。为了能够在 air gap 安装中使用这些功能，您需要在本地镜像`system-charts`资源库，并配置 Rancher 使用该资源库。请按照说明[配置 Rancher 系统 chart](/docs/rancher2.5/installation/resources/local-system-charts/_index)。 |
 | 从 v2.0.13 或更早的版本进行升级 | 如果你的集群的证书已经过期，你需要执行[这些步骤](/docs/rancher2.5/cluster-admin/certificate-rotation/_index)来轮换证书。                                                                                                                                                                                                                                       |
-| 从 v2.0.7 或更早的版本进行升级  | Rancher 引入了`system`项目，这是一个自动创建的项目，用于存储 Kubernetes 运行所需的重要命名空间。在升级到 v2.0.7+的过程中，Rancher 希望这些命名空间能够从所有项目中取消分配。在开始升级之前，请检查您的系统命名空间，确保它们未被分配，以[防止集群网络问题](/docs/rancher2.5/installation/install-rancher-on-k8s/upgrades/namespace-migration/_index)。         |
+| 从 v2.0.7 或更早的版本进行升级  | Rancher 引入了`system`项目，这是一个自动创建的项目，用于存储 Kubernetes 运行所需的重要命名空间。在升级到 v2.0.7+的过程中，Rancher 希望这些命名空间能够从所有项目中取消分配。在开始升级之前，请检查您的系统命名空间，确保它们未被分配，以[防止集群网络问题](/docs/rancher2/installation/install-rancher-on-k8s/upgrades/namespace-migration/_index)。           |

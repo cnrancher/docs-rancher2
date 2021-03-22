@@ -122,5 +122,5 @@ Rancher 集成了多种通知服务，包括：
 
 创建通知程序接收者后，设置告警以接收 Rancher 告警事件。
 
-- [集群所有者](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)可以设置[集群级别](/docs/rancher2.5/monitoring-alerting/cluster-alerts/_index)的告警。
+- [集群所有者](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)可以设置[集群级别](/docs/rancher2.5/cluster-admin/tools/cluster-alerts/_index)的告警。
 - [项目所有者](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)可以设置[项目级别](/docs/rancher2/project-admin/tools/alerts/_index)的告警。

@@ -24,7 +24,7 @@ _v2.5.4 开始支持_
 
 假设我们要添加一个名为`foo`的自定义基线版本：
 
-1. 创建一个名为`foo`的目录，在这个目录里面，放置[kube-bench](https://github.com/aquasecurity/kube-bench)工具寻找的所有配置 YAML 文件。例如，这里是通用 CIS 1.5 基线版的配置 YAML 文件https://github.com/aquasecurity/kube-bench/tree/master/cfg/cis-1.5。
+1. 创建一个名为`foo`的目录，在这个目录里面，放置[kube-bench](https://github.com/aquasecurity/kube-bench)工具寻找的所有配置 YAML 文件。例如，这里是通用 CIS 1.5 基线版的配置 YAML 文件https://github.com/aquasecurity/kube-bench/tree/master/cfg/cis-1.5 。
 
 1. 放置完整的`config.yaml`文件，其中包括所有应该测试的组件。
 

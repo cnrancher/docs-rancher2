@@ -103,7 +103,7 @@ keywords:
 
 ## 6. LOCAL K8S 集群部署
 
-1. 根据文档[示例配置](/docs/rancher2.5/installation/resources/advanced/helm2/kubernetes-rke/_index#2、创建-rke-配置文件) 创建 RKE 配置文件。
+1. 根据文档[示例配置](/docs/rancher2.5/installation/install-rancher-on-k8s/_index#2、创建-rke-配置文件) 创建 RKE 配置文件。
 
 1. 执行 rke 命令创建 LOCAL K8S 集群
 

@@ -56,8 +56,6 @@ Ingress 通过一组规则定义实现负载均衡。Ingress 协同一个或多�
 
 在项目中使用 Ingress 时，可以设置全局 DNS 条目，从而对外部 DNS 进行编程动态设置 Ingress。
 
-有关更多信息，请参见[全局 DNS](/docs/rancher2.5/helm-charts/legacy-catalogs/globaldns/_index)。
-
 ## 服务发现
 
 通过 Pod IP 地址访问 Pod 的方式是不稳定的。要创建可解析到 Pod 的主机名，您必须创建一个服务记录，该记录可以将任意 IP 地址、外部主机名、DNS 记录别名、工作负载或通过选择器选择的 Pod 映射到特定的主机名。
@@ -74,7 +72,7 @@ Ingress 通过一组规则定义实现负载均衡。Ingress 协同一个或多�
 
 除了启动应用程序的各个组件外，还可以使用 Rancher 应用商店启动应用程序，应用商店就是 Helm Charts。
 
-有关更多信息，请参见[项目中的应用商店](/docs/rancher2.5/helm-charts/legacy-catalogs/launching-apps/_index)。
+有关更多信息，请参见[项目中的应用商店](/docs/rancher2.5/helm-charts/_index)。
 
 ## Kubernetes 资源
 

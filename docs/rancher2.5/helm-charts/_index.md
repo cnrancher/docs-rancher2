@@ -20,9 +20,11 @@ _适用于 Rancher v2.5+_
 
 ## 概述
 
-在本节中，您将学习如何在 Rancher 中管理 Helm Chart 和应用程序。
+在 Rancher v2.5 中，应用程序和市场功能（Apps and Marketplace）取代了 catalog system。
 
-在集群管理器中，Rancher 使用 catalog 导入应用，然后使用这些 chart 部署自定义的 helm chart 应用程序或 Rancher 的工具，如监控或 Istio。现在，在集群资源管理器中，Rancher 使用了类似但简化版的同一系统。Repositories 可以以与目录相同的方式添加，但具体到当前集群。Rancher 工具作为预加载的存储库，作为独立的 helm chart 进行部署。
+在集群管理器中，Rancher 使用 catalog system 导入捆绑的图表，然后使用这些图表来部署自定义的 Helm 应用程序或 Rancher 的工具，如监控或 Istio。在 Rancher v2.5 中，catalog system 在集群管理器中仍然可用，但它已被废弃。
+
+现在在集群资源管理器中，Rancher 使用了一个类似但简化的相同系统版本。可以以与目录相同的方式添加存储库，但是是针对当前集群的。Rancher 工具作为预加载的存储库，作为独立的 Helm chart 部署。
 
 ## Charts
 

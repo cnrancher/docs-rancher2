@@ -95,9 +95,9 @@ Rancher 具有管理这些已注册集群的权限。具体权限取决于集群
 完成注册后，集群所有者具有以下权限：
 
 - 通过基于角色的访问控制，[管理集群访问权限](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)。
-- 启用[监控、告警和通知](/docs/rancher2.5/monitoring-alerting/2.5/_index)。
-- 启用[日志](/docs/rancher2.5/logging/2.5/_index)。
-- 启用[Istio](/docs/rancher2.5/istio/2.5/_index)。
+- 启用[监控、告警和通知](/docs/rancher2.5/monitoring-alerting/_index)。
+- 启用[日志](/docs/rancher2.5/logging/_index)。
+- 启用[Istio](/docs/rancher2.5/istio/_index)。
 - 使用[流水线](/docs/rancher2.5/project-admin/pipelines/_index)。
 - 管理项目和工作负载。
 

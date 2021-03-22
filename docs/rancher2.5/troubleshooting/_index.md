@@ -47,7 +47,7 @@ keywords:
 
 - [导入的集群](/docs/rancher2.5/troubleshooting/imported-clusters/_index)
 
-  如果您在导入集群的时候遇到问题，请查看[导入集群](/docs/rancher2.5/cluster-provisioning/imported-clusters/_index)。
+  如果您在导入集群的时候遇到问题，请查看[导入集群](/docs/rancher2/cluster-provisioning/imported-clusters/_index)。
 
 - [Logging](/docs/rancher2.5/troubleshooting/logging/_index)
 

@@ -258,7 +258,7 @@ openssl s_client -CAfile ca.pem -connect rancher.yourdomain.com:443
 
 ### API 审计日志
 
-如果要使用 Rancher API 记录所有事务，请通过在安装命令中添加以下标志来启用[API 审计](/docs/rancher2.5/installation/resources/advanced/helm2/rke-add-on/api-auditing/_index)功能。
+如果要使用 Rancher API 记录所有事务，请通过在安装命令中添加以下标志来启用[API 审计](/docs/rancher2.5/installation/resources/advanced/api-audit-log/_index)功能。
 
     -e AUDIT_LEVEL=1 \
     -e AUDIT_LOG_PATH=/var/log/auditlog/rancher-api-audit.log \

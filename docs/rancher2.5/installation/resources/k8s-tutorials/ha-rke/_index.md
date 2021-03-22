@@ -303,4 +303,4 @@ kube-system     rke-network-plugin-deploy-job-6pbgj       0/1       Completed   
 
 请参阅[故障排查](/docs/rancher2.5/installation/other-installation-methods/troubleshooting/_index)页面。
 
-## [下一步：安装 Rancher](/docs/rancher2.5/installation/resources/advanced/helm2/helm-rancher/_index)
+## [下一步：安装 Rancher](/docs/rancher2.5/installation/install-rancher-on-k8s/_index)

@@ -43,7 +43,7 @@ Rancher 使用 Kubernetes 的 Helm 软件包管理器安装。Helm Charts 为 Ku
 要选择用于安装 Rancher 的 Helm 版本，请参阅[Helm 版本要求](/docs/rancher2.5/installation/resources/helm-version/_index)。
 
 :::important 注意
-本安装指南假定您使用的是 Helm3。有关从 Helm 2 迁移到 Helm 3 的方法，请参阅官方的[Helm 2 到 3 迁移文档](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/)。这个[指南](/docs/rancher2.5/installation/resources/advanced/helm2/_index)提供了使用 Helm 2 在 RKE Kubernetes 集群上安装 Rancher 的较旧的安装指南，适用于无法升级到 Helm 3 的情况。
+本安装指南假定您使用的是 Helm3。有关从 Helm 2 迁移到 Helm 3 的方法，请参阅官方的[Helm 2 到 3 迁移文档](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/)。这个[指南](/docs/rancher2.5/installation/resources/helm-version/_index)提供了使用 Helm 2 在 RKE Kubernetes 集群上安装 Rancher 的较旧的安装指南，适用于无法升级到 Helm 3 的情况。
 :::
 
 ## 1、安装需要的 CLI 工具

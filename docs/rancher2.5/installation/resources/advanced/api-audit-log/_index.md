@@ -90,7 +90,7 @@ kubectl -n cattle-system logs -f rancher-84d886bdbb-s4s69 rancher-audit-log
 #### 收集审计日志
 
 可以为集群启用 Rancher 的内置日志收集功能，将审计和其他服务日志发送到受支持的日志收集服务端。
-详情请参考[Rancher 工具 - 日志](/docs/rancher2.5/logging/2.0.x-2.4.x/project-logging/_index)。
+详情请参考[Rancher 工具 - 日志](/docs/rancher2.5/logging/migrating/_index)。
 
 ## 审计日志样本
 

@@ -160,4 +160,4 @@ bookinfo-gateway   64m
 
 ## 后续操作
 
-[设置 Istio 的流量管理组件](/docs/rancher2.5/istio/2.5/setup/set-up-traffic-management/_index)
+[设置 Istio 的流量管理组件](/docs/rancher2.5/istio/setup/set-up-traffic-management/_index)

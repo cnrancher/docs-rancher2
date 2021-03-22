@@ -29,11 +29,11 @@ keywords:
 
 ## 安装 Istio
 
-**快速设置** 如果您不需要外部流量到达 Istio，而只是想设置 Istio 来监控和追踪集群内的流量，请跳过[设置 Istio 网关](/docs/rancher2.5/istio/2.5/setup/gateway/_index)和[设置 Istio 的流量管理组件](/docs/rancher2.5/istio/2.5/setup/set-up-traffic-management/_index)的步骤。
+**快速设置** 如果您不需要外部流量到达 Istio，而只是想设置 Istio 来监控和追踪集群内的流量，请跳过[设置 Istio 网关](/docs/rancher2.5/istio/setup/gateway/_index)和[设置 Istio 的流量管理组件](/docs/rancher2.5/istio/setup/set-up-traffic-management/_index)的步骤。
 
-1. [在集群中启用 Istio](/docs/rancher2.5/istio/2.5/setup/enable-istio-in-cluster/_index)。
-1. [在你想使用 Istio 的所有命名空间中启用 Istio](/docs/rancher2.5/istio/2.5/setup/enable-istio-in-namespace/_index)。
-1. [添加注入了 Istio sidecar 的部署和服务](/docs/rancher2.5/istio/2.5/setup/deploy-workloads/_index)。
-1. [设置 Istio 网关](/docs/rancher2.5/istio/2.5/setup/gateway/_index)。
-1. [设置 Istio 的流量管理组件](/docs/rancher2.5/istio/2.5/setup/set-up-traffic-management/_index)。
-1. [产生流量并看到 Istio 在行动](/docs/rancher2.5/istio/2.5/setup/view-traffic/_index)。
+1. [在集群中启用 Istio](/docs/rancher2.5/istio/setup/enable-istio-in-cluster/_index)。
+1. [在你想使用 Istio 的所有命名空间中启用 Istio](/docs/rancher2.5/istio/setup/enable-istio-in-namespace/_index)。
+1. [添加注入了 Istio sidecar 的部署和服务](/docs/rancher2.5/istio/setup/deploy-workloads/_index)。
+1. [设置 Istio 网关](/docs/rancher2.5/istio/setup/gateway/_index)。
+1. [设置 Istio 的流量管理组件](/docs/rancher2.5/istio/setup/set-up-traffic-management/_index)。
+1. [产生流量并看到 Istio 在行动](/docs/rancher2.5/istio/setup/view-traffic/_index)。

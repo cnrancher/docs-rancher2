@@ -186,7 +186,7 @@ import PortsImportedHosted from '@theme/PortsImportedHosted';
 
 ### 导入集群的端口要求
 
-下表描述了[导入集群](/docs/rancher2.5/cluster-provisioning/imported-clusters/_index)的端口要求。
+下表描述了[导入集群](/docs/rancher2/cluster-provisioning/imported-clusters/_index)的端口要求。
 
 <PortsImportedHosted/>
 

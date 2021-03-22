@@ -46,19 +46,19 @@ Rancher 的 Istio 集成附带了全面的可视化辅助工具：
 
 ## 先决条件
 
-在启用 Istio 之前，我们建议您确认 Rancher worker 节点具有足够的 [CPU 和内存](/docs/rancher2/istio/2.3.x-2.4.x/resources/_index)以运行 Istio 的所有组件。
+在启用 Istio 之前，我们建议您确认 Rancher worker 节点具有足够的 [CPU 和内存](/docs/rancher2/cluster-admin/tools/istio/resources/_index)以运行 Istio 的所有组件。
 
 ## 设定指南
 
-有关如何设置 Istio 并将其在项目中使用的说明，请参考[设定指南](/docs/rancher2/istio/2.3.x-2.4.x/setup/_index)。
+有关如何设置 Istio 并将其在项目中使用的说明，请参考[设定指南](/docs/rancher2/cluster-admin/tools/istio/setup/_index)。
 
 ## 禁用 Istio
 
-要从集群，命名空间或工作负载中删除 Istio 组件，请参阅[禁用 Istio](/docs/rancher2/istio/2.3.x-2.4.x/disabling-istio/_index)。
+要从集群，命名空间或工作负载中删除 Istio 组件，请参阅[禁用 Istio](/docs/rancher2/cluster-admin/tools/istio/disabling-istio/_index)。
 
 ## 访问可视化
 
-> 默认情况下，只有集群所有者才能访问 Jaeger 和 Kiali。关于如何允许项目成员访问它们的说明，请参阅[访问可视化](/docs/rancher2/istio/2.3.x-2.4.x/rbac/_index)。
+> 默认情况下，只有集群所有者才能访问 Jaeger 和 Kiali。关于如何允许项目成员访问它们的说明，请参阅[访问可视化](/docs/rancher2/cluster-admin/tools/istio/rbac/_index)。
 
 在集群中设置 Istio 之后，Rancher UI 中将提供 Grafana，Prometheus，Jaeger 和 Kiali 访问。
 
