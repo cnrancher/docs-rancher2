@@ -19,7 +19,7 @@ keywords:
 
 ## 概述
 
-现在您已经有了一个正在运行的 RKE 集群，您可以在其中安装 Rancher。出于安全考虑，所有到 Rancher 的流量必须用 TLS 加密。在本教程中，您将通过[cert-manager](https://cert-manager.io/)自动签发自签名证书。在实际使用情况下，您可能会使用 Let's Encrypt 或提供自己的证书。更多细节请参见[SSL 配置](/docs/rancher2.5/installation/resources/advanced/helm2/helm-rancher/_index)。
+现在您已经有了一个正在运行的 RKE 集群，您可以在其中安装 Rancher。出于安全考虑，所有到 Rancher 的流量必须用 TLS 加密。在本教程中，您将通过[cert-manager](https://cert-manager.io/)自动签发自签名证书。在实际使用情况下，您可能会使用 Let's Encrypt 或提供自己的证书。更多细节请参见[SSL 配置](/docs/rancher2.5/installation/install-rancher-on-k8s/_index)。
 
 > **注意：**以下步骤基于 Helm 3 写作。
 

@@ -5,8 +5,8 @@ title: Rancher v2.5
 Rancher v2.5 引入了在任何 Kubernetes 集群上部署 Rancher 的功能。出于这个原因，我们现在为 Rancher 在每个 Rancher 的 Kubernetes 发行版上的部署提供单独的安全加固指南。
 Rancher 有以下 Kubernetes 发行版。
 
-- [**RKE,**]({{<baseurl>}}/rke/latest/en/) Rancher Kubernetes Engine，是一个经过 CNCF 认证的 Kubernetes 发行版，完全在 Docker 容器内运行。
-- [**K3s,**]({{<baseurl>}}/k3s/latest/en/)是一个完全符合要求的轻量级 Kubernetes 发行版。它易于安装，内存只有上游 Kubernetes 的一半，所有的二进制文件不到 100MB。
+- [**RKE,**](/docs/rke/_index) Rancher Kubernetes Engine，是一个经过 CNCF 认证的 Kubernetes 发行版，完全在 Docker 容器内运行。
+- [**K3s,**](/docs/k3s/_index)是一个完全符合要求的轻量级 Kubernetes 发行版。它易于安装，内存只有上游 Kubernetes 的一半，所有的二进制文件不到 100MB。
 - [**RKE2**](https://docs.rke2.io/)是一个完全符合的 Kubernetes 发行版，专注于美国联邦政府部门内的安全和合规性。
   要在 Rancher 发行版之外加固 Kubernetes 集群，请参考您的 Kubernetes 提供商文档。
 

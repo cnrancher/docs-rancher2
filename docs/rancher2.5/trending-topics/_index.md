@@ -39,7 +39,7 @@ Rancher 的离线安装有四个步骤：
 
 我们将使用 NGINX 作为`L4`层负载均衡器(TCP)，它将请求轮训转发到后端的 Rancher server 节点。在此配置中，负载均衡器位于 Rancher server 节点的前面。负载均衡器可以是任何能够运行 NGINX 的主机。我们不建议使用任意一个 Rancher server 节点作为负载均衡器节点，因为默认配置下每个 K8S 节点都会运行 ingress 控制器，而 ingress 控制器以为`host`网络模式运行，并默认监听了`80`和`443`端口，所以默认情况下会出现端口冲突。如果一定要将 NGINX 安装在 Rancher server 某个节点上，那么可以编辑 ingress 控制器配置文件，在`args`中添加参数，端口根据实际情况修改 `--http-port=8880 --http-port=8443`。 ingress 控制器修改默认端口后，nginx 配置中代理的后端 server 端口也需要一并修改。
 
-**详情请参考[配置 NGINX 负载均衡](/docs/rancher2.5/installation/resources/advanced/helm2/create-nodes-lb/nginx/_index)。**
+**详情请参考[配置 NGINX 负载均衡](/docs/rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/nginx/_index)。**
 
 ## 用户指南
 
@@ -143,13 +143,13 @@ Rancher 支持与以下日志收集目标服务集成：
 - 随时了解容器崩溃，Pod 驱逐或节点死亡等事件
 - 更轻松地调试和排除故障
 
-**详情请参考[集群日志](/docs/rancher2.5/logging/2.0.x-2.4.x/project-logging/_index)。**
+**详情请参考[集群日志](/docs/rancher2.5/logging/_index)。**
 
 ### 配置告警
 
 通知和告警功能是基于 [Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager/) 的。利用这些工具，Rancher 可以通知[集群所有者](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)和[项目所有者](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)有需要处理的告警。
 
-**详情请参考[配置告警](/docs/rancher2.5/monitoring-alerting/cluster-alerts/_index)。**
+**详情请参考[配置告警](/docs/rancher2.5/cluster-admin/tools/cluster-alerts/_index)。**
 
 ### 通过 Kubectl 和 kubeconfig 访问集群
 
@@ -186,7 +186,7 @@ Rancher 的集群管理基于角色的访问控制策略，策略管理和工作
 
 对于除 K3s 集群外的所有导入的 Kubernetes 集群，必须在 Rancher 外部编辑集群的配置，您需要自己在集群中修改 Kubernetes 组件的参数、升级 Kubernetes 版本以及添加或删除节点。
 
-**详情请参考[项目和命名空间](/docs/rancher2.5/cluster-provisioning/imported-clusters/_index)。**
+**详情请参考[项目和命名空间](/docs/rancher2/cluster-provisioning/imported-clusters/_index)。**
 
 ### 在自定义节点上启动集群
 

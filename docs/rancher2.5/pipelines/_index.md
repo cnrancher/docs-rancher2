@@ -36,7 +36,7 @@ Rancher 的流水线提供了简单的持续集成\持续交付（CI/CD）体验
 
 ## 概念
 
-有关本节中使用的概念和术语的说明，请参阅[本页](/docs/rancher2.5/k8s-in-rancher/pipelines/concepts/_index)。
+有关本节中使用的概念和术语的说明，请参阅[本页](/docs/rancher2.5/pipelines/_index)。
 
 ## 流水线的工作原理
 
@@ -44,7 +44,7 @@ Rancher 项目启用了流水线功能后，您可以给每一个 Rancher 项目
 
 流水线是配置到源代码仓库的一组文件。用户可以使用 Rancher UI 配置流水线，或在代码库中添加一个`.rancher-pipeline.yml`，配置流水线。
 
-在设置任何流水线之前，请确保此项目已经对接了您的版本管理工具，例如，GitHub，GitLab，Bitbucket。如果您没有配置版本管理工具，您可以使用[Rancher 提供的示例代码库](/docs/rancher2.5/k8s-in-rancher/pipelines/example-repos/_index)去预览一些常见的流水线部署流程。
+在设置任何流水线之前，请确保此项目已经对接了您的版本管理工具，例如，GitHub，GitLab，Bitbucket。如果您没有配置版本管理工具，您可以使用[Rancher 提供的示例代码库](/docs/rancher2.5/pipelines/example-repos/_index)去预览一些常见的流水线部署流程。
 
 当您配置项目流水线的时候，Rancher 会自动创建一个供流水线使用的命名空间。以下的组件会部署到这个命名空间里面：
 
@@ -62,7 +62,7 @@ Rancher 项目启用了流水线功能后，您可以给每一个 Rancher 项目
 
   Minio 是存储 Rancher 流水线日志的组件。
 
-  > **说明：** 托管的 Jenkins 实例的工作负载是无状态的，所以您不用担心数据持久化的问题。Docker 镜像仓库和 Minio 实例默认使用临时存储，临时存储足以应对对大多数情况。如果您希望保证流水线日志在节点失败的情况下能被保存下来，您可以给日志配置持久存储，详情请参考[流水线组件数据持久存储](/docs/rancher2.5/k8s-in-rancher/pipelines/storage/_index)。
+  > **说明：** 托管的 Jenkins 实例的工作负载是无状态的，所以您不用担心数据持久化的问题。Docker 镜像仓库和 Minio 实例默认使用临时存储，临时存储足以应对对大多数情况。如果您希望保证流水线日志在节点失败的情况下能被保存下来，您可以给日志配置持久存储，详情请参考[流水线组件数据持久存储](/docs/rancher2.5/pipelines/storage/_index)。
 
 ## 流水线的基于角色的访问控制
 
@@ -161,7 +161,7 @@ _v2.2.0 或更新版本可用_
 > 1. 配置 Rancher Server 的时候，使用可信任证书颁发机构发出的证书。
 > 1. 如果您使用的是自签名证书，请将 Rancher Server 的证书导入到 Bitbucket Server，详情请参考[如何配置自签名证书](https://confluence.atlassian.com/bitbucketserver/if-you-use-self-signed-certificates-938028692.html)。
 
-**结果：** 完成版本控制工具提供商认证后，Rancher 会重新导向到开始[配置代码库](/docs/rancher2.5/k8s-in-rancher/pipelines/_index)的页面。启用代码库后，您可以开始[配置流水线](/docs/rancher2.5/k8s-in-rancher/pipelines/_index)。
+**结果：** 完成版本控制工具提供商认证后，Rancher 会重新导向到开始[配置代码库](/docs/rancher2.5/pipelines/_index)的页面。启用代码库后，您可以开始[配置流水线](/docs/rancher2.5/pipelines/_index)。
 
 ### 2、配置代码库
 
@@ -191,7 +191,7 @@ _v2.2.0 或更新版本可用_
 
 1. 找到您想设置流水线的代码库。
 
-1. 通过 UI 或者使用代码库中的 yml 文件，例如 `.rancher-pipeline.yml` 或者 `.rancher-pipeline.yaml`进行流水线的配置。流水线的配置分为`阶段`和`步骤`。在进入下一个`阶段`之前，当前`阶段`必须全部完成，但是一个`阶段`中的`步骤`是同时运行的。对于每个阶段，您可以添加不同的步骤类型。注意：在构建每个步骤时，根据步骤类型有不同的高级选项。高级选项包括触发规则，环境变量和密文。有关通过 UI 或 YAML 文件配置流水线的更多信息，请参考[流水线配置参考](/docs/rancher2.5/k8s-in-rancher/pipelines/config/_index)。
+1. 通过 UI 或者使用代码库中的 yml 文件，例如 `.rancher-pipeline.yml` 或者 `.rancher-pipeline.yaml`进行流水线的配置。流水线的配置分为`阶段`和`步骤`。在进入下一个`阶段`之前，当前`阶段`必须全部完成，但是一个`阶段`中的`步骤`是同时运行的。对于每个阶段，您可以添加不同的步骤类型。注意：在构建每个步骤时，根据步骤类型有不同的高级选项。高级选项包括触发规则，环境变量和密文。有关通过 UI 或 YAML 文件配置流水线的更多信息，请参考[流水线配置参考](/docs/rancher2.5/pipelines/config/_index)。
 
    - 如果您正在使用 UI，选择 **省略号 (...) > 编辑配置** 来使用 UI 配置流水线，流水线配置之后，您需要查看 YAML 文件并推送此文件到远端代码库。您也可以直接在 Rancher UI 上将更新后的 YAML 文件同步到代码库中。
    - 如果正在使用 YAML 文件，选择 **省略号(...) > 查看/编辑 YAML** 来配置流水线。如果您选择使用 YAML 文件，您需要在进行任何更改后将其推送到代码库中。您也可以直接在 Rancher UI 上将更新后的 YAML 文件同步到代码库中。当编辑流水线配置时，Rancher 会花一些时间去检查现有流水线配置。
@@ -210,7 +210,7 @@ _v2.2.0 或更新版本可用_
 
 ## 流水线配置参考
 
-请参考[流水线配置参考](/docs/rancher2.5/k8s-in-rancher/pipelines/config/_index)，了解更多关于如何配置流水线的细节。
+请参考[流水线配置参考](/docs/rancher2.5/pipelines/config/_index)，了解更多关于如何配置流水线的细节。
 
 - 运行脚本
 - 构建和发布镜像
@@ -248,7 +248,7 @@ _v2.2.0 或更新版本可用_
 - **Pull Request**: 每当对代码库提 Pull Request 时，触发流水线。
 - **Tag**: 在代码库中创建 tag 时，触发流水线。
 
-> **注意：** 对于 Rancher 的[示例代码库](/docs/rancher2.5/k8s-in-rancher/pipelines/example-repos/_index)，流水线的`设置`项不存在。
+> **注意：** 对于 Rancher 的[示例代码库](/docs/rancher2.5/pipelines/example-repos/_index)，流水线的`设置`项不存在。
 
 ### 修改代码库的触发事件
 

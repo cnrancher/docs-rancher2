@@ -18,7 +18,7 @@ keywords:
 
 流水线（Pipelines）能够通过 Rancher UI 或者使用代码仓库中的 YMAL 文件，即 `.rancher-pipeline.yml` 或 `.rancher-pipeline.yaml` 的方式进行配置。
 
-在[流水线配置参考](/docs/rancher2.5/k8s-in-rancher/pipelines/config/_index)中，我们提供了通过 Rancher UI 或 YAML 来配置流水线的每个可用特性的示例。
+在[流水线配置参考](/docs/rancher2.5/pipelines/config/_index)中，我们提供了通过 Rancher UI 或 YAML 来配置流水线的每个可用特性的示例。
 
 这是一个完整的`rancher-pipeline.yml`示例供大家使用参考，适合那些想直接开始的用户。
 

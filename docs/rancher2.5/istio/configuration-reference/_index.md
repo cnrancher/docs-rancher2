@@ -26,16 +26,16 @@ overlay file 将在 Istio Chart 安装提供的默认安装之上添加配置。
 
 如果你想将 Prometheus 限制在特定的命名空间，请设置`prometheus.prometheusSpec.ignoreNamespaceSelectors=true`。一旦你这样做，你将需要添加额外的配置来继续监控你的资源。
 
-详情请参考[本节](/docs/rancher2.5/istio/2.5/configuration-reference/selectors-and-scrape/_index)
+详情请参考[本节](/docs/rancher2.5/istio/configuration-reference/selectors-and-scrape/_index)
 
 ## 启用 Istio 与 Pod 安全策略
 
-参考[本节](/docs/rancher2.5/istio/2.5/configuration-reference/enable-istio-with-psp/_index)
+参考[本节](/docs/rancher2.5/istio/configuration-reference/enable-istio-with-psp/_index)
 
 ## 在 RKE2 集群上安装 Istio 的额外步骤
 
-参见[本节](/docs/rancher2.5/istio/2.5/configuration-reference/rke2/_index)
+参见[本节](/docs/rancher2.5/istio/configuration-reference/rke2/_index)
 
 ## Canal 网络插件与项目网络隔离的额外步骤
 
-参见[本节](/docs/rancher2.5/istio/2.5/configuration-reference/canal-and-project-network/_index)
+参见[本节](/docs/rancher2.5/istio/configuration-reference/canal-and-project-network/_index)

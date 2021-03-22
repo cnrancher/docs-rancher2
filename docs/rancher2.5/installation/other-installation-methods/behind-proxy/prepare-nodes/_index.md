@@ -55,7 +55,7 @@ etcd 数据库需要奇数个节点，这样它总能选出一个拥有大多数
 
 - 第 7 层负载均衡器比较复杂，但可以提供您可能需要的功能。例如，第 7 层负载均衡器能够在负载均衡器上处理 TLS 终止，而不是 Rancher 自己做 TLS 终止。如果你想在你的基础设施中集中处理 TLS 终止，这可能是有益的。第 7 层负载均衡还为您的负载均衡器提供了基于 HTTP 属性（如 Cookie 等）的决策能力，而第 4 层负载均衡器是无法关注这些属性的。如果你决定在第 7 层负载均衡器上终止 SSL/TLS 流量，在后面的步骤中安装 Rancher 时，你需要使用`--set tls=external`选项。更多信息请参考[Rancher Helm Chart 选项](/docs/rancher2.5/installation/resources/chart-options/_index)
 
-关于如何设置 NGINX 负载均衡器的例子，请参考[本页](/docs/rancher2.5/installation/resources/advanced/helm2/create-nodes-lb/nginx/_index)
+关于如何设置 NGINX 负载均衡器的例子，请参考[本页](/docs/rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/nginx/_index)
 
 有关如何设置 Amazon ELB 网络负载均衡器的指南，请参阅[本页](/docs/rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/nlb/_index)
 

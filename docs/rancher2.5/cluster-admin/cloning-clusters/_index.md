@@ -26,7 +26,7 @@ Rancher 支持复制的集群类型如下表所示：
 | [节点运行在基础设施供应商上的集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/_index) | 是           |
 | [托管的 Kubernetes 集群](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/_index)        | 是           |
 | [自定义集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/custom-nodes/_index)                     | 是           |
-| [导入的集群](/docs/rancher2.5/cluster-provisioning/imported-clusters/_index)                             | 否           |
+| [导入的集群](/docs/rancher2/cluster-provisioning/imported-clusters/_index)                               | 否           |
 
 :::note 警告
 复制集群的功能适用于创建多个具有相似参数的集群，该功能的最终目的是简化创建集群的过程，减少用户在创建多个参数类似的集群的过程中所面临的重复工作。因此，我们建议仅编辑本文档中明确列出的值，编辑其他值可能会使配置文件无效，导致集群部署失败。如果您需要创建的多个集群中包含的参数差异较大，建议您参考“创建集群”章节的操作步骤，重头开始创建集群，而不是使用复制集群的功能创建集群。

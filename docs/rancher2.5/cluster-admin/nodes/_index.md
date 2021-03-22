@@ -37,7 +37,7 @@ keywords:
 [1]: /docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/_index
 [2]: /docs/rancher2.5/cluster-provisioning/rke-clusters/custom-nodes/_index
 [3]: /docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/_index
-[4]: /docs/rancher2.5/cluster-provisioning/imported-clusters/_index
+[4]: /docs/rancher2/cluster-provisioning/imported-clusters/_index
 
 ### 基础设施提供商托管的节点
 
@@ -55,7 +55,7 @@ Rancher 使用[节点模板](/docs/rancher2.5/cluster-provisioning/rke-clusters/
 
 ### 导入的 Kubernetes 集群的节点
 
-虽然您可以使用 Rancher 将工作负载部署到[导入的集群](/docs/rancher2.5/cluster-provisioning/imported-clusters/_index)，但无法直接管理这类集群的节点。导入集群节点的所有管理必须在 Rancher 之外进行。
+虽然您可以使用 Rancher 将工作负载部署到[导入的集群](/docs/rancher2/cluster-provisioning/imported-clusters/_index)，但无法直接管理这类集群的节点。导入集群节点的所有管理必须在 Rancher 之外进行。
 
 ## 管理和编辑单个节点
 

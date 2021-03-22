@@ -38,13 +38,13 @@ Monitoring V1 可以在集群级别和项目级别上配置，并将自动拉取
 
 监控 V2 只能在集群层面进行配置。不再支持项目级监控和告警。
 
-有关如何配置 Monitoring & Alerting V2 的更多信息，请参阅 [配置用于监控的自定义资源](/docs/rancher2.5/monitoring-alerting/2.5/configuration/_index)。
+有关如何配置 Monitoring & Alerting V2 的更多信息，请参阅 [配置用于监控的自定义资源](/docs/rancher2.5/monitoring-alerting/configuration/_index)。
 
 ## 基于角色的访问控制的变更
 
 项目所有者和成员不再能默认访问 Grafana 或 Prometheus。如果仅有视图的用户可以访问 Grafana，他们将能够看到任何命名空间的数据。对于 Kiali，任何用户都可以在任何命名空间中编辑他们不拥有的东西。
 
-关于`rancher-monitoring`中基于角色的访问控制的更多信息，请参考[基于角色的访问控制](/docs/rancher2.5/monitoring-alerting/2.5/rbac/_index)。
+关于`rancher-monitoring`中基于角色的访问控制的更多信息，请参考[基于角色的访问控制](/docs/rancher2.5/monitoring-alerting/rbac/_index)。
 
 ## 从监控 V1 迁移到监控 V2
 
@@ -123,8 +123,8 @@ data:
 
   ![alert_2.4_to_2.5_source](/img/rancher/monitoring/migration/alert_2.4_to_2.5_source.png)
 
-有关如何在监控 V2 中配置 PrometheusRules 的更多细节，请参见[监控配置](/docs/rancher2.5/monitoring-alerting/2.5/configuration/_index)。
+有关如何在监控 V2 中配置 PrometheusRules 的更多细节，请参见[监控配置](/docs/rancher2.5/monitoring-alerting/configuration/_index)。
 
 ### 迁移 notifier
 
-在 Monitoring V1 中，没有直接对应的通知器工作方式。相反，你必须在 Monitoring V2 中用[Routes and Receivers](/docs/rancher2.5/monitoring-alerting/2.5/configuration/_index#配置-Alertmanager-Config)复制所需的设置。
+在 Monitoring V1 中，没有直接对应的通知器工作方式。相反，你必须在 Monitoring V2 中用[Routes and Receivers](/docs/rancher2.5/monitoring-alerting/configuration/_index#配置-Alertmanager-Config)复制所需的设置。

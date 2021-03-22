@@ -94,4 +94,4 @@ spec:
 
 ## 后续操作
 
-[查看 Istio 管理的流量](/docs/rancher2.5/istio/2.5/setup/view-traffic/_index)
+[查看 Istio 管理的流量](/docs/rancher2.5/istio/setup/view-traffic/_index)

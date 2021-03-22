@@ -355,7 +355,7 @@ _v2.2.0 可用_
 
 ### enable_cluster_monitoring
 
-启用或禁用[集群监控](/docs/rancher2.5/cluster-admin/tools/monitoring/_index)选项。
+启用或禁用[集群监控](/docs/rancher2.5/cluster-admin/tools/cluster-monitoring/_index)选项。
 
 ### enable_network_policy
 

@@ -161,7 +161,7 @@ systemctl restart docker
 [1]: /docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/_index
 [2]: /docs/rancher2.5/cluster-provisioning/rke-clusters/custom-nodes/_index
 [3]: /docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/_index
-[4]: /docs/rancher2.5/cluster-provisioning/imported-clusters/_index
+[4]: /docs/rancher2/cluster-provisioning/imported-clusters/_index
 
 ## 通过 Rancher UI 从集群中删除节点
 

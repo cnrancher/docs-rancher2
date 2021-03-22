@@ -308,7 +308,7 @@ docker run -d --privileged --volumes-from rancher-data \
 
 > **升级后您的下游集群中有网络问题吗？**
 >
-> 如果您是从 v2.0.6 或更旧的版本升级上来的，请参阅[还原集群网络](/docs/rancher2.5/installation/install-rancher-on-k8s/upgrades/namespace-migration/_index)。
+> 如果您是从 v2.0.6 或更旧的版本升级上来的，请参阅[还原集群网络](/docs/rancher2/installation/install-rancher-on-k8s/upgrades/namespace-migration/_index)。
 
 ### 删除旧的 Rancher Server 容器
 
@@ -316,4 +316,4 @@ docker run -d --privileged --volumes-from rancher-data \
 
 ## 回滚
 
-如果升级未成功完成，则可以将 Rancher Server 及其数据回滚到最后的正常状态。有关更多信息，请参阅[单节点回滚](/docs/rancher2.5/upgrades/rollbacks/single-node-rollbacks/_index)。
+如果升级未成功完成，则可以将 Rancher Server 及其数据回滚到最后的正常状态。有关更多信息，请参阅[单节点回滚](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/single-node-rollbacks/_index)。

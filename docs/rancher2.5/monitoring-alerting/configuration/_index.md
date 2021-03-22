@@ -59,7 +59,7 @@ keywords:
 
 ## 配置 Alertmanager Config
 
-详情请参考[配置 Alertmanager](/docs/rancher2.5/monitoring-alerting/2.5/configuration/alert-manager/_index)。
+详情请参考[配置 Alertmanager](/docs/rancher2.5/monitoring-alerting/configuration/alert-manager/_index)。
 
 ## 为通知添加 CA 证书
 
@@ -77,7 +77,7 @@ keywords:
 
 一个[scrape_config 部分](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config)指定了一组目标和描述如何拉取它们的参数。在一般情况下，一个 scrape 配置指定了一个 job。
 
-Istio 就是一个可以使用这个配置的例子。更多信息，请参见[在集群中启用 Istio](/docs/rancher2.5/istio/2.5/setup/enable-istio-in-cluster/_index)。
+Istio 就是一个可以使用这个配置的例子。更多信息，请参见[在集群中启用 Istio](/docs/rancher2.5/istio/setup/enable-istio-in-cluster/_index)。
 
 ## 示例
 
@@ -99,4 +99,4 @@ PrometheusRule 的示例在 [本页](https://github.com/prometheus-operator/prom
 
 ### Alertmanager Config
 
-详情请参考[配置 Alertmanager](/docs/rancher2.5/monitoring-alerting/2.5/configuration/alert-manager/_index)。
+详情请参考[配置 Alertmanager](/docs/rancher2.5/monitoring-alerting/configuration/alert-manager/_index)。

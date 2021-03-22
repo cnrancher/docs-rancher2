@@ -56,13 +56,13 @@ keywords:
 
 ## API 审计日志
 
-您可以为 Rancher Server 集群上的`System`项目启用 [Rancher 工具中的日志服务](/docs/rancher2.5/project-admin/tools/logging/_index)。
+您可以为 Rancher Server 集群上的`System`项目启用 [Rancher 工具中的日志服务](/docs/rancher2.5/logging/_index)。
 
 ```plain
 --set auditLog.level=1
 ```
 
-默认情况下，启用`审计日志`将在 Rancher pod 中创建一个 sidecar 容器。这个容器（`rancher-audit-log`）会将日志流传输到`stdout`。您可以像收集任何容器日志一样收集此日志。将 sidecar 用作审计日志时，`hostPath`，`maxAge`，`maxBackups`和`maxSize`选项不适用。建议使用您的操作系统或 Docker 守护进程的日志轮换功能来控制磁盘空间的使用。为 Rancher Server 启用[Rancher 工具中的集群日志服务](/docs/rancher2.5/logging/2.0.x-2.4.x/project-logging/_index)或[Rancher 工具中的项目日志服务](/docs/rancher2.5/project-admin/tools/logging/_index)。
+默认情况下，启用`审计日志`将在 Rancher pod 中创建一个 sidecar 容器。这个容器（`rancher-audit-log`）会将日志流传输到`stdout`。您可以像收集任何容器日志一样收集此日志。将 sidecar 用作审计日志时，`hostPath`，`maxAge`，`maxBackups`和`maxSize`选项不适用。建议使用您的操作系统或 Docker 守护进程的日志轮换功能来控制磁盘空间的使用。请为 Rancher Server 启用[日志服务](/docs/rancher2.5/logging/migrating/_index)。
 
 将`auditLog.destination`设置为`hostPath`的值，以将日志转发至与主机系统共享的卷，而不是流至 Sidecar 容器。将目标设置为`hostPath`时，您可能需要调整其他 auditLog 参数以进行日志轮换。
 
@@ -157,7 +157,7 @@ kubectl -n cattle-system create secret generic tls-ca-additional --from-file=ca-
 
 您可以在 Rancher 集群（ingress）外部的 L7 负载均衡器上终止 SSL/TLS。使用`--set tls=external`选项，将负载均衡器指向所有 Rancher 集群节点上的端口 http 80。这将在 http 端口 80 上公开 Rancher 接口。请注意，允许直接连接到 Rancher 集群的客户端将不会被加密。如果您选择这样做，我们建议您将网络级别上的直接访问限制为仅用于您的负载均衡器。
 
-> **注意事项:** 如果您使用的是专用 CA 签名的证书，请添加`--set privateCA=true`并参阅[添加 TLS 密文 - 使用私有的 CA 签名证书](/docs/rancher2.5/installation/resources/advanced/helm2/helm-rancher/tls-secrets/_index)来完成给 Rancher 添加 CA 证书。
+> **注意事项:** 如果您使用的是专用 CA 签名的证书，请添加`--set privateCA=true`并参阅[添加 TLS 密文 - 使用私有的 CA 签名证书](/docs/rancher2.5/installation/resources/tls-secrets/_index)来完成给 Rancher 添加 CA 证书。
 
 您的负载均衡器必须支持长期存在的 Websocket 连接，并且需要插入代理标头，以便 Rancher 可以正确路由链接。
 

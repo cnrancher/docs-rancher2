@@ -73,4 +73,4 @@ spec:
 
 **结果：** 当您为此服务生成流量时（例如通过刷新入口网关 URL），Kiali 流量图将反映出对`reviews`服务的流量在`v1`和`v3`之间平均分配。
 
-#### [下一步：产生并查看流量](/docs/rancher2/istio/2.3.x-2.4.x/setup/view-traffic/_index)
+#### [下一步：产生并查看流量](/docs/rancher2/cluster-admin/tools/istio/setup/view-traffic/_index)

@@ -17,7 +17,7 @@ keywords:
 
 配置合理的监控和告警规则对于安全、可靠地运行生产工作负载至关重要。在使用 Kubernetes 和 Rancher 时也是如此。幸运的是，集成的监控和告警功能使整个过程变得更加简单。
 
-[Rancher 文档](/docs/rancher2.5/monitoring-alerting/2.5/_index)详细描述了如何设置一个完整的 Prometheus 和 Grafana。开箱即用，它将从集群中的所有系统和 Kubernetes 组件中抓取监控数据，并提供合理的仪表盘和告警。但为了实现可靠的设置，您还需要监控自己的工作负载并使 Prometheus 和 Grafana 适应您自己的特定用例和集群大小。本文档将为您提供这方面的最佳实践。
+[Rancher 文档](/docs/rancher2.5/monitoring-alerting/_index)详细描述了如何设置一个完整的 Prometheus 和 Grafana。开箱即用，它将从集群中的所有系统和 Kubernetes 组件中抓取监控数据，并提供合理的仪表盘和告警。但为了实现可靠的设置，您还需要监控自己的工作负载并使 Prometheus 和 Grafana 适应您自己的特定用例和集群大小。本文档将为您提供这方面的最佳实践。
 
 ## 需要监测的内容
 
@@ -121,4 +121,4 @@ Prometheus 并不是为了长期存储指标，而只用于短期存储。
 
 如果告警开始发送，但你暂时无法处理，也可以将告警静默一定时间，以便以后查看。
 
-您可以在[Rancher 文档](/docs/rancher2.5/monitoring-alerting/2.5/_index)中找到更多关于如何设置告警和通知的信息。
+您可以在[Rancher 文档](/docs/rancher2.5/monitoring-alerting/_index)中找到更多关于如何设置告警和通知的信息。

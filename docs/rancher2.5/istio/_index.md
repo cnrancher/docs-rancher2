@@ -29,7 +29,7 @@ keywords:
 - **安全**，有资源对流量和用户进行认证和授权，包括 mTLS。
 - **可观察性**，观察日志、度量和分布式流量。
 
-在[设置 istio](/docs/rancher2.5/istio/2.3.x-2.4.x/setup/_index)之后，您可以通过集群资源管理器、`kubectl`或`istioctl`来利用 Istio 的 controlplane 功能。
+在[设置 istio](/docs/rancher2.5/cluster-admin/tools/istio/setup/_index)之后，您可以通过集群资源管理器、`kubectl`或`istioctl`来利用 Istio 的 controlplane 功能。
 
 在项目中使用 Istio 之前，需要由`cluster-admin`（集群管理员）进行设置。
 
@@ -67,17 +67,17 @@ _从 v2.5.4 开始提供_
 
 ## 前提条件
 
-在启用 Istio 之前，我们建议您确认您的 Rancher 工作节点有足够的[CPU 和内存](/docs/rancher2.5/istio/2.3.x-2.4.x/resources/_index)来运行 Istio 的所有组件。
+在启用 Istio 之前，我们建议您确认您的 Rancher 工作节点有足够的[CPU 和内存](/docs/rancher2.5/cluster-admin/tools/istio/resources/_index)来运行 Istio 的所有组件。
 
 如果您要在 RKE2 集群上安装 Istio，需要一些额外的步骤。详情请参阅[本节](#additional-steps-for-install-istio-on-an-rke2-cluster)。
 
 ## 配置指南
 
-参考[Istio 配置指南](/docs/rancher2.5/istio/2.3.x-2.4.x/setup/_index)了解如何设置 Istio 并在项目中使用 Istio。
+参考[Istio 配置指南](/docs/rancher2.5/cluster-admin/tools/istio/setup/_index)了解如何设置 Istio 并在项目中使用 Istio。
 
 ## 移除 Istio
 
-从集群、命名空间或工作负载中移除 Istio 组件，请参考 [卸载 Istio](/docs/rancher2.5/istio/2.3.x-2.4.x/disabling-istio/_index)。
+从集群、命名空间或工作负载中移除 Istio 组件，请参考 [卸载 Istio](/docs/rancher2.5/cluster-admin/tools/istio/disabling-istio/_index)。
 
 ## 从以前的 Istio 版本迁移
 
@@ -89,7 +89,7 @@ _从 v2.5.4 开始提供_
 
 ## 查看可视化数据的权限
 
-默认情况下，只有集群管理员才有权限访问 Kiali。关于如何允许管理员、编辑或视图角色访问它们的说明，请参阅[访问可视化](/docs/rancher2.5/istio/2.3.x-2.4.x/rbac/_index)。
+默认情况下，只有集群管理员才有权限访问 Kiali。关于如何允许管理员、编辑或视图角色访问它们的说明，请参阅[访问可视化](/docs/rancher2.5/cluster-admin/tools/istio/rbac/_index)。
 
 在集群中设置 Istio 后，Grafana、Prometheus 和 Kiali 可在 Rancher UI 中使用。
 
@@ -97,7 +97,7 @@ _从 v2.5.4 开始提供_
 
 要访问 Kiali 可视化，请从**集群资源管理器**导航到**Istio**应用程序概览页面，然后单击**Kiali**。从这里，您可以访问**流量图**选项卡或**流量指标**选项卡来查看网络可视化和指标。
 
-默认情况下，所有命名空间将被 prometheus 拾取并使数据可用于 Kiali 图。如果你想为 prometheus 数据拉取使用不同的配置，请参考[选择器/刮取配置设置](/docs/rancher2.5/istio/2.5/configuration-reference/selectors-and-scrape/_index)。
+默认情况下，所有命名空间将被 prometheus 拾取并使数据可用于 Kiali 图。如果你想为 prometheus 数据拉取使用不同的配置，请参考[选择器/刮取配置设置](/docs/rancher2.5/istio/configuration-reference/selectors-and-scrape/_index)。
 
 您对可视化的访问权限由您的角色决定。Grafana 和 Prometheus 只适用于`cluster-admin`角色。Kiali UI 默认只对`cluster-admin`有效，但`cluster-admin`可以通过编辑 Istio values.yaml 允许其他角色访问它们。
 
@@ -117,8 +117,8 @@ Istio 安装了一个服务网状结构，使用[Envoy](https://www.envoyproxy.i
 
 ![在启用Istio的集群中，你可以有两个入口：默认的Nginx入口和默认的Istio控制器。](/img/rancher/istio-ingress.svg)
 
-通过[覆盖文件](/docs/rancher2.5/istio/2.5/configuration-reference/_index)可以启用额外的 Istio Ingress 网关。
+通过[覆盖文件](/docs/rancher2.5/istio/configuration-reference/_index)可以启用额外的 Istio Ingress 网关。
 
 ## Egress 支持
 
-默认情况下，Egress 网关是禁用的，但可以在安装或升级时通过 `values.yaml` 或[overlay 文件](/docs/rancher2.5/istio/2.5/setup/enable-istio-in-cluster/_index)启用。
+默认情况下，Egress 网关是禁用的，但可以在安装或升级时通过 `values.yaml` 或[overlay 文件](/docs/rancher2.5/istio/setup/enable-istio-in-cluster/_index)启用。
