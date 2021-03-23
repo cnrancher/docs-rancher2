@@ -16,10 +16,10 @@ Rancher 有以下 Kubernetes 发行版。
 
 ### RKE 指南
 
-| Kubernetes 版本   | CIS 基准版 | 自评指南                           | 加固指南                          |
-| :---------------- | :--------- | :--------------------------------- | :-------------------------------- |
-| Kubernetes v1.15+ | CIS v1.5   | [链接](./1.5-benchmark-2.5/_index) | [链接](./1.5-hardening-2.5_index) |
-| Kubernetes v1.18+ | CIS v1.6   | [链接](./1.6-benchmark-2.5/_index) | [链接](./1.6-hardening-2.5/index) |
+| Kubernetes 版本   | CIS 基准版 | 自评指南                                                   | 加固指南                                                               |
+| :---------------- | :--------- | :--------------------------------------------------------- | :--------------------------------------------------------------------- |
+| Kubernetes v1.15+ | CIS v1.5   | [链接](/docs/rancher2.5/security/1.5-benchmark-2.5/_index) | [链接](/docs/rancher2.5/security/rancher-2.5/1.5-hardening-2.5/_index) |
+| Kubernetes v1.18+ | CIS v1.6   | [链接](/docs/rancher2.5/security/1.6-benchmark-2.5/_index) | [链接](/docs/rancher2.5/security/rancher-2.5/1.6-hardening-2.5/_index) |
 
 ### RKE2 指南
 
