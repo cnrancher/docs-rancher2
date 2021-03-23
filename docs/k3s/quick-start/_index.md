@@ -14,9 +14,13 @@ keywords:
   - 快速入门指南
 ---
 
+## 概述
+
 本指南将帮助您使用默认选项快速启动集群。安装部分将详细介绍如何设置 K3s。
 
 有关 K3s 组件如何协同工作的信息，请参阅[架构部分](/docs/k3s/architecture/_index#具有外部数据库的高可用k3s-server)。
+
+如果您使用的云厂商是 Alibaba、Tencent 或 AWS，建议您使用 AutoK3s 进行快速入门，详情请参考[AutoK3s 使用指南](/docs/k3s/autok3s/_index)
 
 > Kubernetes 的新手？ Kubernetes 官方文档已经有一些很棒的教程，在[这里](https://kubernetes.io/docs/tutorials/kubernetes-basics/)概述了基础知识。
 

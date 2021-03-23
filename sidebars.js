@@ -1773,6 +1773,13 @@ module.exports = {
         K3s介绍: ["k3s/_index"],
         架构: ["k3s/architecture/_index"],
         快速入门: ["k3s/quick-start/_index"],
+        AutoK3s: [
+            "k3s/autok3s/_index",
+            "k3s/autok3s/alibaba/_index",
+            "k3s/autok3s/aws/_index",
+            "k3s/autok3s/tencent/_index",
+            "k3s/autok3s/native/_index",
+        ],
         安装: [
             "k3s/installation/_index",
             {
