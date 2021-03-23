@@ -89,6 +89,8 @@ const metadata = {
             K3s介绍: "为您提供k3s的产品介绍",
             架构: "为您提供k3s的产品架构",
             快速入门: "为您提供k3s的快速入门",
+            AutoK3s:
+                "提供使用AutoK3s在多个云提供商中创建和初始化K3s集群的操作指导",
             安装: "为您提供k3s的安装指南",
             集群访问: "为您提供k3s的集群访问",
             升级: "为您提供k3s的升级指南",
@@ -686,6 +688,13 @@ const metadata = {
             "k3s/_index": "产品介绍",
             "k3s/architecture/_index": "产品架构",
             "k3s/quick-start/_index": "快速入门指南",
+
+            "k3s/autok3s/_index": "功能介绍",
+            "k3s/autok3s/alibaba/_index": "创建阿里云集群",
+            "k3s/autok3s/aws/_index": "创建AWS集群",
+            "k3s/autok3s/tencent/_index": "创建腾讯云集群",
+            "k3s/autok3s/native/_index": "创建Native集群",
+
             "k3s/installation/_index": "安装介绍",
             "k3s/installation/installation-requirements/_index": "安装要求",
             "k3s/installation/install-options/_index": "安装选项",
