@@ -20,6 +20,9 @@ module.exports = {
         },
         baiduAnalytics: {
             trackingID: "692a488c8d0d137240f1a940bde32441",
+            changefreq: "weekly",
+            priority: 0.5,
+            trailingSlash: false,
         },
         navbar: {
             title: "Rancher",
