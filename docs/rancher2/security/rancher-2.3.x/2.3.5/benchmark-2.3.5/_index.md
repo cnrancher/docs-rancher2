@@ -2212,7 +2212,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-for namespace in $(kubectl get namespaces -A -o json | jq -r '.items[].metadata.name'); do
+for namespace in $(kubectl get namespaces -o custom-columns=NAME:.metadata.name --no-headers); do
   policy_count=$(kubectl get networkpolicy -n ${namespace} -o json | jq '.items | length')
   if [ ${policy_count} -eq 0 ]; then
     echo "fail: ${namespace}"

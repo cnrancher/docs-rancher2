@@ -52,7 +52,6 @@ keywords:
    - `azure_location` - Microsoft Azure 区域，默认的 Microsoft Azure 区域不一定是距离您最近的区域，建议选择距离您最近的区域，降低延迟。
    - `prefix` - 全部创建资源的前缀。
    - `instance_type` - 使用的计算实例规格，最小规格为`Standard_DS2_v2`。如果在预算范围内，建议使用`Standard_DS2_v3`或`Standard_DS3_v2`。
-   - `ssh_key_file_name` - 使用指定的 SSH 密钥而不是`~/.ssh/id_rsa`（假设公共密钥为`${ssh_key_file_name}.pub`）
 
 1. 执行`terraform init`。
 
@@ -69,6 +68,7 @@ keywords:
    ```
 
 1. 将以上输出中的`rancher_server_url`粘贴到浏览器中。在登录页面中登录（默认用户名为`admin`，密码为在`rancher_server_admin_password`中设置的密码）。
+1. 使用`quickstart/azure` 生成的`id_rsa`密钥，SSH 连接到 Rancher Server。
 
 **结果：**两个 Kubernetes 集群已部署到您的 Azure 帐户中，一个正在运行 Rancher Server，另一个可以用来部署您的实验应用。
 

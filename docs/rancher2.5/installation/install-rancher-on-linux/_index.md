@@ -90,7 +90,7 @@ sudo -s
 ```yaml
 token: my-shared-secret
 tls-san:
-  - https://my-fixed-registration-address.com
+  - my-fixed-registration-address.com
   - Another-kubernetes-domain.com
 ```
 

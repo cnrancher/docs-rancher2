@@ -55,7 +55,7 @@ Prometheus 让您可以查看来自不同 Rancher 和 Kubernetes 对象的度量
 
 通过查看 Prometheus 从集群 control-plane、节点和部署中抓取的数据，您可以随时了解集群中发生的一切。然后，您可以使用这些分析来更好地运行您的组织：在系统紧急情况开始之前阻止它们，制定维护策略，恢复崩溃的服务器等。
 
-## 启用 Monitoring
+## 启用监控
 
 [管理员](/docs/rancher2.5/admin-settings/rbac/global-permissions/_index)或[集群所有者](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index#cluster-roles)可以配置 Rancher 部署 Prometheus，监控 Kubernetes 集群。
 
@@ -65,6 +65,7 @@ Prometheus 让您可以查看来自不同 Rancher 和 Kubernetes 对象的度量
 
 - 确保你允许你的每个节点在 9796 端口上的流量，因为 Prometheus 会从这里拉取指标。
 - 确保你的集群满足资源要求。集群应该有至少 1950Mi 的可用内存，2700m 的 CPU 和 50Gi 的存储。
+- 在 RKE 集群中使用 RancherOS 或 Flatcar Linux 节点安装监控时，请将 etcd 节点证书的路径改为`/opt/rke/etc/kubernetes/ssl`。
 
 ### 操作步骤
 
