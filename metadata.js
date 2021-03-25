@@ -688,13 +688,11 @@ const metadata = {
             "k3s/_index": "产品介绍",
             "k3s/architecture/_index": "产品架构",
             "k3s/quick-start/_index": "快速入门指南",
-
             "k3s/autok3s/_index": "功能介绍",
             "k3s/autok3s/alibaba/_index": "创建阿里云集群",
             "k3s/autok3s/aws/_index": "创建AWS集群",
             "k3s/autok3s/tencent/_index": "创建腾讯云集群",
             "k3s/autok3s/native/_index": "创建Native集群",
-
             "k3s/installation/_index": "安装介绍",
             "k3s/installation/installation-requirements/_index": "安装要求",
             "k3s/installation/install-options/_index": "安装选项",
