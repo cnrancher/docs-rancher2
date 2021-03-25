@@ -52,6 +52,6 @@ _v2.4.6 可用_
 
 _适用于 v2.3.0 及以上版本_
 
-| 组件          | nodeAffinity nodeSelectorTerms                                                             | nodeSelector | Tolerations       |
-| :------------ | :----------------------------------------------------------------------------------------- | :----------- | :---------------- |
-| kube-api-auth | `beta.kubernetes.io/os:NotIn:windows`<br/>`node-role.kubernetes.io/controlplane:In:"true"` | none         | `operator:Exists` |
+| 组件          | nodeAffinity nodeSelectorTerms                                                          | nodeSelector | Tolerations       |
+| :------------ | :-------------------------------------------------------------------------------------- | :----------- | :---------------- |
+| kube-api-auth | ` beta.kubernetes.io/os:NotIn:windows``node-role.kubernetes.io/controlplane:In:"true" ` | none         | `operator:Exists` |
