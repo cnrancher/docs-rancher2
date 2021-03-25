@@ -72,8 +72,6 @@ keywords:
    - `stable`: 推荐生产环境中使用。（推荐）
    - `alpha`: 未来版本的实验性预览。
 
-   <br/>
-
    ```
    helm repo list
 
