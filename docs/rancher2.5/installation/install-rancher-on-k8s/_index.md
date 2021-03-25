@@ -69,8 +69,6 @@ Rancher 使用 Kubernetes 的 Helm 软件包管理器安装。Helm Charts 为 Ku
 - `stable`: 推荐生产环境中使用。（推荐）
 - `alpha`: 未来版本的实验性预览。
 
-<br/>
-
 ```
 helm repo add rancher-<CHART_REPO> https://releases.rancher.com/server-charts/<CHART_REPO>
 ```
@@ -104,11 +102,11 @@ Rancher Server 默认需要 SSL/TLS 配置来保证访问的安全性。
 - **Let's Encrypt：** Let's Encrypt 选项也需要使用`cert-manager`。但是，在这种情况下，`cert-manager`与特殊的 Issuer 结合使用，`cert-manager`将执行获取 Let's Encrypt 发行的证书所需的所有操作（包括申请和验证）。此配置使用 HTTP 验证（`HTTP-01`），因此负载均衡器必须具有可以从公网访问的公共 DNS 记录。
 - **使用您自己的证书：** 此选项使您可以使用自己的权威 CA 颁发的证书或自签名 CA 证书。 Rancher 将使用该证书来保护 WebSocket 和 HTTPS 流量。在这种情况下，您必须上传名称分别为`tls.crt`和`tls.key`的 PEM 格式的证书以及相关的密钥。如果使用私有 CA，则还必须上传该证书。这是由于您的节点可能不信任此私有 CA。 Rancher 将获取该 CA 证书，并从中生成一个校验和，各种 Rancher 组件将使用该校验和来验证其与 Rancher 的连接。
 
-| 设置                     | Chart 选项                       | 描述                                                           | 是否需要 cert-manager          |
-| :----------------------- | :------------------------------- | :------------------------------------------------------------- | :----------------------------- |
-| Rancher 生成的自签名证书 | `ingress.tls.source=rancher`     | 使用 Rancher 生成的 CA 签发的自签名证书<br/>此项为**默认选项** | [是](#可选：安装-cert-manager) |
-| Let’s Encrypt            | `ingress.tls.source=letsEncrypt` | 使用[Let's Encrypt](https://letsencrypt.org/)颁发的证书        | [是](#可选：安装-cert-manager) |
-| 您已有的证书             | `ingress.tls.source=secret`      | 使用您的自己的证书（Kubernetes 密文）                          | 否                             |
+| 设置                     | Chart 选项                       | 描述                                                      | 是否需要 cert-manager          |
+| :----------------------- | :------------------------------- | :-------------------------------------------------------- | :----------------------------- |
+| Rancher 生成的自签名证书 | `ingress.tls.source=rancher`     | 使用 Rancher 生成的 CA 签发的自签名证书此项为**默认选项** | [是](#可选：安装-cert-manager) |
+| Let’s Encrypt            | `ingress.tls.source=letsEncrypt` | 使用[Let's Encrypt](https://letsencrypt.org/)颁发的证书   | [是](#可选：安装-cert-manager) |
+| 您已有的证书             | `ingress.tls.source=secret`      | 使用您的自己的证书（Kubernetes 密文）                     | 否                             |
 
 :::important 重要
 Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress.tls.source=secret` 这种方式，从而减少对 cert-manager 的运维成本。
