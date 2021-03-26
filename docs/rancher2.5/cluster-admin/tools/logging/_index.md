@@ -73,11 +73,11 @@ Logging Driver: json-file
 
 1. 选择一个日志服务，然后输入配置。有关详细的配置，请参考特定的服务。Rancher 支持与以下日志服务集成：
 
-   - [Elasticsearch 配置指南](/rancher2/cluster-admin/tools/cluster-logging/elasticsearch/_index)
-   - [Splunk 配置指南](/rancher2/cluster-admin/tools/cluster-logging/splunk/_index)
-   - [Kafka 配置指南](/rancher2/cluster-admin/tools/cluster-logging/kafka/_index)
-   - [Syslog 配置指南](/rancher2/cluster-admin/tools/cluster-logging/syslog/_index)
-   - [Fluentd 配置指南](/rancher2/cluster-admin/tools/cluster-logging/fluentd/_index)
+   - [Elasticsearch 配置指南](/docs/rancher2/cluster-admin/tools/cluster-logging/elasticsearch/_index)
+   - [Splunk 配置指南](/docs/rancher2/cluster-admin/tools/cluster-logging/splunk/_index)
+   - [Kafka 配置指南](/docs/rancher2/cluster-admin/tools/cluster-logging/kafka/_index)
+   - [Syslog 配置指南](/docs/rancher2/cluster-admin/tools/cluster-logging/syslog/_index)
+   - [Fluentd 配置指南](/docs/rancher2/cluster-admin/tools/cluster-logging/fluentd/_index)
 
 1. （可选）您可以通过单击位于日志记录目标上方的**以文件形式编辑**，输入自定义高级配置。此链接仅在选择日志服务后可见。使用文件编辑器，为任何日志服务输入原始的 Fluentd 配置。有关如何设置输出配置，请参阅每个日志服务的文档。
 
