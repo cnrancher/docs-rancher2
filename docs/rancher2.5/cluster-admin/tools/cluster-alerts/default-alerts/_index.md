@@ -71,4 +71,4 @@ Kubernetes 事件是可以深入了解集群内部事件的对象，例如调度
 
 ## 项目级别告警
 
-启用对项目的监视时，将提供一些项目级别的告警。有关详细信息，请参阅[项目级别告警](/docs/rancher2/project-admin/tools/alerts/_index)。
+启用对项目的监视时，将提供一些项目级别的告警。有关详细信息，请参阅[项目级别告警](/docs/rancher2/project-admin/tools/project-alerts/_index)。

@@ -4,7 +4,7 @@ title: 日志
 
 Rancher 可以跟 Kubernetes 集群外部的多种主流日志服务或日志工具集成。
 
-如果您需要了解 Rancher 与日志服务或工具集成的工作原理，请参考[集群管理员章节](/docs/rancher2/logging/2.0.x-2.4.x/project-logging/_index)相关文档。
+如果您需要了解 Rancher 与日志服务或工具集成的工作原理，请参考[集群管理员章节](/docs/rancher2/project-admin/tools/project-logging/_index)相关文档。
 
 Rancher 支持与下列日志服务集成：
 
@@ -40,7 +40,7 @@ Logging Driver: json-file
 
 Rancher 支持启用集群层级的日志功能和项目层级的日志功能，而且您可以同时启用两个层级日志功能。
 
-- [集群日志](/docs/rancher2/logging/2.0.x-2.4.x/project-logging/_index)记录了包括集群中每一个项目，每一个 Pod 的活动。[RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)开启了日志功能后，会记录 Kubernetes 系统组件的活动。
+- [集群日志](/docs/rancher2/project-admin/tools/project-logging/_index)记录了包括集群中每一个项目，每一个 Pod 的活动。[RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)开启了日志功能后，会记录 Kubernetes 系统组件的活动。
 
 - 项目日志记录了该项目内每一个 Pod 的活动。
 

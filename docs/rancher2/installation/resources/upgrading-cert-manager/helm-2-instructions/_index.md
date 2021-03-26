@@ -32,7 +32,7 @@ Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和更新 TLS
 3. 安装更新版本的 Rancher 和 cert-manager
 
 因为 Helm 升级 Rancher 时，如果运行的 Rancher 应用程序与用于安装它的 chart 模板不匹配，它将拒绝升级并显示错误消息。因为 cert-manager 更改了它的 API 组，并且我们不能修改 Rancher 的已发布的 chart，所以 cert-manager 的 API 版本始终不匹配，因此无法升级 Rancher。
-要使用 Helm 重新安装 Rancher，请在升级 Rancher 部分下选中[选项 B: 重新安装 Rancher Chart](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/ha/_index)。
+要使用 Helm 重新安装 Rancher，请在升级 Rancher 部分下选中[选项 B: 重新安装 Rancher Chart](/docs/rancher2/installation/install-rancher-on-k8s/upgrades/ha/_index)。
 :::
 
 ## 升级 Cert-Manager
@@ -89,7 +89,7 @@ Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和更新 TLS
 
 在执行升级之前，您必须通过将必要的容器镜像添加到私有镜像仓库中并下载或渲染所需的 Kubernetes manifest 文件来准备离线环境。
 
-1. 按照指南[准备私有镜像仓库](/docs/rancher2/installation_new/other-installation-methods/air-gap/populate-private-registry/_index)准备升级所需的镜像。
+1. 按照指南[准备私有镜像仓库](/docs/rancher2/installation/other-installation-methods/air-gap/populate-private-registry/_index)准备升级所需的镜像。
 
 1. 从连接到 Internet 的系统中，将 cert-manager 存储库添加到 Helm
 

@@ -15,7 +15,7 @@ title: 为 Rancher 设置高可用 K3s Kubernetes 集群
 
 ## 先决条件
 
-这些说明假设你已经设置了两个节点、一个负载均衡器、一个 DNS 记录和一个外部 MySQL 数据库，如[本节所述](/docs/rancher2/installation_new/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha-with-external-db/_index)。
+这些说明假设你已经设置了两个节点、一个负载均衡器、一个 DNS 记录和一个外部 MySQL 数据库，如[本节所述](/docs/rancher2/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha-with-external-db/_index)。
 
 Rancher 需要安装在支持的 Kubernetes 版本上。要了解您的 Rancher 版本支持哪些版本的 Kubernetes，请参考[支持维护条款]。(https://rancher.com/support-maintenance-terms/)。要指定 K3s 版本，请在运行 K3s 安装脚本时使用 INSTALL_K3S_VERSION 环境变量。
 

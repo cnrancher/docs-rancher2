@@ -36,7 +36,7 @@ keywords:
 
 ## Prometheus 表达式
 
-> **先决条件：** 监控必须被[启用](/docs/rancher2/cluster-admin/tools/monitoring/_index)，您才能使用自定义 Prometheus 查询或表达式触发告警。
+> **先决条件：** 监控必须被[启用](/docs/rancher2/cluster-admin/tools/cluster-monitoring/_index)，您才能使用自定义 Prometheus 查询或表达式触发告警。
 
 当您编辑告警规则时，您将有机会根据 Prometheus 表达式配置要触发的告警。有关表达式的示例，请参考[本页](/docs/rancher2.5/cluster-admin/tools/cluster-monitoring/expression/_index)。
 
@@ -46,7 +46,7 @@ keywords:
 
 ## 告警层级
 
-告警包含集群级别和[项目级别](/docs/rancher2/project-admin/tools/alerts/_index)告警
+告警包含集群级别和[项目级别](/docs/rancher2/project-admin/tools/project-alerts/_index)告警
 
 在集群级别，Rancher 监控 Kubernetes 集群中的组件，并向您发送与以下内容有关的告警：
 
@@ -188,7 +188,7 @@ keywords:
         - [**ETCD**](https://etcd.io/docs/v3.4.0/op-guide/monitoring/)
         - [**Kubernetes 组件**](https://github.com/kubernetes/metrics)
         - [**Kubernetes 资源**](https://github.com/kubernetes/kube-state-metrics)
-        - [**Fluentd**](https://docs.fluentd.org/v1.0/articles/monitoring-prometheus) ([日志](/docs/rancher2/logging/2.0.x-2.4.x/project-logging/_index)中用到的)
+        - [**Fluentd**](https://docs.fluentd.org/v1.0/articles/monitoring-prometheus) ([日志](/docs/rancher2/project-admin/tools/project-logging/_index)中用到的)
         - [**集群级别 Grafana**](https://grafana.com/docs/grafana/latest/administration/view-server/internal-metrics/#internal-grafana-metrics)
         - **集群级别 Prometheus**
 

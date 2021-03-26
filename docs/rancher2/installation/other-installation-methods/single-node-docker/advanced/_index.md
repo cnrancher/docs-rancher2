@@ -17,7 +17,7 @@ keywords:
   - 单节点安装的高级选项
 ---
 
-安装 Rancher 时，您可以启用以下几个[高级选项](/docs/rancher2/installation_new/resources/advanced/_index)：
+安装 Rancher 时，您可以启用以下几个[高级选项](/docs/rancher2/installation/resources/advanced/_index)：
 
 - [自定义 CA 证书](#自定义-ca-证书)
 - [API 审计日志](#api-审计日志)
@@ -53,7 +53,7 @@ API 审计日志记录通过 Rancher Server 进行的所有用户请求和系统
 
 默认情况下，API 审计日志会写入 rancher 容器内的`/var/log/auditlog`中。您可以设置`AUDIT_LEVEL`以启用日志，并将该目录作为卷共享。
 
-参考[API 审计日志](/docs/rancher2/installation_new/resources/advanced/api-audit-log/_index)获取更多信息。
+参考[API 审计日志](/docs/rancher2/installation/resources/advanced/api-audit-log/_index)获取更多信息。
 
 ```
  --restart=unless-stopped \
@@ -76,7 +76,7 @@ _v2.1.7 可用_
   rancher/rancher:latest
 ```
 
-参考[TLS 配置](/docs/rancher2/installation_new/resources/tls-settings/_index)查看更多信息和参数。
+参考[TLS 配置](/docs/rancher2/installation/resources/tls-settings/_index)查看更多信息和参数。
 
 ## 离线环境
 

@@ -65,4 +65,4 @@ Ingress 还可以提供其他功能，例如 SSL 终止，基于名称的虚拟�
 
 - 有关如何在 Rancher 中设置 Ingress 的更多信息, 请参见 [Ingress](/docs/rancher2/k8s-in-rancher/load-balancers-and-ingress/ingress/_index)。
 - 有关 Ingress 和 Ingress 控制器的完整信息，请参见 [Kubernetes Ingress 文档](https://kubernetes.io/docs/concepts/services-networking/ingress/)。
-- 在项目中使用 Ingress 时，可以设置全局 DNS 条目，从而对外部 DNS 进行编程动态设置 Ingress。请参见[全局 DNS](/docs/rancher2/helm-charts/legacy-catalogs/globaldns/_index)。
+- 在项目中使用 Ingress 时，可以设置全局 DNS 条目，从而对外部 DNS 进行编程动态设置 Ingress。请参见[全局 DNS](/docs/rancher2/helm-charts/globaldns/_index)。

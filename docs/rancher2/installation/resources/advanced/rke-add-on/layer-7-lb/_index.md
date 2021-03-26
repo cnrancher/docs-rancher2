@@ -20,8 +20,8 @@ keywords:
 
 :::important 重要提示
 RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
-请使用 Rancher helm chart 将 Rancher 安装在 Kubernetes 集群上。有关详细信息，请参见[Rancher 高可用安装](/docs/rancher2/installation_new/install-rancher-on-k8s/_index)。
-如果您当前正在使用 RKE add-on 安装方法，参见[将 RKE add-on 安装的 Rancher 迁移到 Helm 安装](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/migrating-from-rke-add-on/_index)，获取有关如何使用 Helm chart 的详细信息。
+请使用 Rancher helm chart 将 Rancher 安装在 Kubernetes 集群上。有关详细信息，请参见[Rancher 高可用安装](/docs/rancher2/installation/install-rancher-on-k8s/_index)。
+如果您当前正在使用 RKE add-on 安装方法，参见[将 RKE add-on 安装的 Rancher 迁移到 Helm 安装](/docs/rancher2/installation/install-rancher-on-k8s/upgrades/migrating-from-rke-add-on/_index)，获取有关如何使用 Helm chart 的详细信息。
 :::
 
 此过程将引导您使用 Rancher Kubernetes Engine（RKE）设置 3 节点的集群。该集群的唯一目的是运行 Rancher Server 的 Pod。这个安装基于：
@@ -37,7 +37,7 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
 
 ## 1. 配置 Linux 主机
 
-根据我们的[要求](/docs/rancher2/installation_new/requirements/_index)配置三台 Linux 主机。
+根据我们的[要求](/docs/rancher2/installation/requirements/_index)配置三台 Linux 主机。
 
 ## 2. 配置负载均衡器
 
@@ -62,8 +62,8 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
 
 我们为以下负载均衡器提供了示例配置：
 
-- [配置 Amazon ALB](/docs/rancher2/installation_new/resources/advanced/helm2/rke-add-on/layer-7-lb/alb/_index)
-- [配置 NGINX](/docs/rancher2/installation_new/resources/advanced/helm2/rke-add-on/layer-7-lb/nginx/_index)
+- [配置 Amazon ALB](/docs/rancher2/installation/resources/advanced/helm2/rke-add-on/layer-7-lb/alb/_index)
+- [配置 NGINX](/docs/rancher2/installation/resources/advanced/helm2/rke-add-on/layer-7-lb/nginx/_index)
 
 ## 3. 配置 DNS
 
@@ -105,11 +105,11 @@ RKE 使用 YAML 配置文件来安装和配置 Kubernetes 集群。根据要使�
 
 1. 下载以下模板之一，具体取决于您使用的 SSL 证书。
 
-   - [自签名证书模板 `3-node-certificate.yml`](/docs/rancher2/installation_new/resources/advanced/cluster-yml-templates/3-node-certificate/_index)
-   - [由公认的 CA 签署的证书模板 `3-node-certificate-recognizedca.yml`](/docs/rancher2/installation_new/resources/advanced/cluster-yml-templates/3-node-certificate-recognizedca/_index)
+   - [自签名证书模板 `3-node-certificate.yml`](/docs/rancher2/installation/resources/advanced/cluster-yml-templates/3-node-certificate/_index)
+   - [由公认的 CA 签署的证书模板 `3-node-certificate-recognizedca.yml`](/docs/rancher2/installation/resources/advanced/cluster-yml-templates/3-node-certificate-recognizedca/_index)
      > **高级配置选项：**
      >
-     > - 想要记录 Rancher API 的所有事务? 通过编辑 RKE 配置文件来启用[API 审计日志](/docs/rancher2/installation_new/resources/advanced/api-audit-log/_index)功能。有关更多信息，请参见如何在[RKE 配置文件中](/docs/rancher2/installation_new/resources/advanced/api-audit-log/_index)中启用它。
+     > - 想要记录 Rancher API 的所有事务? 通过编辑 RKE 配置文件来启用[API 审计日志](/docs/rancher2/installation/resources/advanced/api-audit-log/_index)功能。有关更多信息，请参见如何在[RKE 配置文件中](/docs/rancher2/installation/resources/advanced/api-audit-log/_index)中启用它。
      > - 想知道您的 RKE 模板可用的其他配置选项吗？ 请参阅[RKE 文档：配置选项](/docs/rke/config-options/_index)。
 
 2. 将文件重命名为 `rancher-cluster.yml`。
