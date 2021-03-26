@@ -19,7 +19,8 @@ keywords:
 
 以下说明将指导您升级使用 Helm 安装在 Kubernetes 集群上的 Rancher 服务器。这些步骤也适用于使用 Helm 进行的离线安装。
 
-有关使用 RancherD 升级安装在 Kubernetes 上的 Rancher 的说明，请参考[本页](/docs/rancher2/installation/install-rancher-on-linux/upgrades/_index)
+有关使用 RancherD 升级安装在 Kubernetes 上的 Rancher 的说明，请参考[本页](/docs/rancher2.5/installation/install-rancher-on-linux/upgrades/_index)
+
 
 关于安装了 Docker 的 Rancher 的升级说明，请参考[本页](/docs/rancher2/installation/other-installation-methods/single-node-docker/single-node-upgrades/_index)
 
@@ -73,9 +74,7 @@ kubeconfig 也可以通过`--kubeconfig`标签来手动针对预定的集群，�
 
 ### 步骤 1：备份正在运行 Rancher Server 的 Kubernetes 集群
 
-对于 Rancher v2.5+，使用[备份应用程序](/docs/rancher2/backups/2.5/back-up-rancher/_index)来备份 Rancher。
-
-对于 Rancher v2.0-v2.4，使用[一次性快照](/docs/rancher2/backups/2.0-2.4/ha-backups/_index)进行备份。
+对于 Rancher v2.0-v2.4，使用[一次性快照](/docs/rancher2/backups/backup/ha-backups/_index)进行备份。
 运行 Rancher 服务器的 Kubernetes 集群的备份。
 
 如果在升级过程中出现问题，您将使用备份作为恢复点。

@@ -32,7 +32,7 @@ Rancher 的告警可以作用于[集群层级](/docs/rancher2/cluster-admin/tool
 | Less than half workload available | 工作负载的键值对是 `app` 和 `workload`时，如果只有少于一半的工作负载可以使用，Rancher 会触发这条重要的告警。                           |
 | Memory usage close to the quota   | 如果工作负载占用的内存超过了工作负载的内存资源配额，会触发这条告警。您可以从 Rancher UI 中的**安全和主机配置**查看工作负载的内存限制。 |
 
-除了上述的默认告警以外，Rancher 还有其他的默认告警，详情请参考[集群监控的默认告警](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/default-alerts/_index)。
+除了上述的默认告警以外，Rancher 还有其他的默认告警，详情请参考[集群监控的默认告警](/docs/rancher2/cluster-admin/tools/cluster-alerts/default-alerts/_index)。
 
 ## 添加项目告警组
 

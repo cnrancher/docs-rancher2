@@ -47,7 +47,7 @@ _自 v2.2.0 起可用_
 
 ## Istio
 
-[Istio](https://istio.io/) 是一个开源工具，可使 DevOps 团队更轻松地观察，控制，排查故障和在复杂的微服务网络中的保证流量传输。有关如何在 Rancher 中启用 Istio 的详细信息，请参阅[Istio 功能介绍](/docs/rancher2/istio/_index)。
+[Istio](https://istio.io/) 是一个开源工具，可使 DevOps 团队更轻松地观察，控制，排查故障和在复杂的微服务网络中的保证流量传输。有关如何在 Rancher 中启用 Istio 的详细信息，请参阅[Istio 功能介绍](/docs/rancher2/cluster-admin/tools/istio/_index)。
 
 ## OPA Gatekeeper
 

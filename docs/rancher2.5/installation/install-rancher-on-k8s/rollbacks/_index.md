@@ -84,7 +84,7 @@ kubectl logs <pod name from above command> -n cattle-resources-system -f
 
 ## 回滚到 v2.2.x-v2.4.x
 
-要回滚到 v2.5 之前的 Rancher，请按照这里的步骤进行。[恢复备份 - Kubernetes 安装](/docs/rancher2/backups/2.0-2.4/restorations/ha-restoration/_index) 恢复 Rancher 服务器集群的快照会将 Rancher 恢复到快照时的版本和状态。
+要回滚到 v2.5 之前的 Rancher，请按照这里的步骤进行。[恢复备份 - Kubernetes 安装](/docs/rancher2/backups/restore/ha-restore/_index) 恢复 Rancher 服务器集群的快照会将 Rancher 恢复到快照时的版本和状态。
 
 有关如何回滚安装了 Docker 的 Rancher 的信息，请参考[本页](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/single-node-rollbacks/_index)
 
@@ -92,4 +92,4 @@ kubectl logs <pod name from above command> -n cattle-resources-system -f
 
 ## 回滚到 v2.0.x-v2.1.x
 
-不再支持回滚到 Rancher v2.0-v2.1。回滚到这些版本的说明保留在[这里](/docs/rancher2/backups/2.0-2.4/restorations/ha-restoration/2.0-2.1/_index)，仅用于升级到 Rancher v2.2+不可行的情况。
+不再支持回滚到 Rancher v2.0-v2.1。回滚到这些版本的说明保留在[这里](/docs/rancher2/backups/restore/ha-restore/2.0-2.1/_index)，仅用于升级到 Rancher v2.2+不可行的情况。

@@ -152,4 +152,4 @@ Rancher 为集群扫描提供了一组警报，默认情况下没有配置为具
 
 ## 跳过和不适用的测试清单
 
-关于跳过的和不适用的测试清单，请参考[跳过和不适用的测试](/docs/rancher2/cis-scans/2.4/skipped-tests/_index)。
+关于跳过的和不适用的测试清单，请参考[跳过和不适用的测试](/docs/rancher2/cluster-admin/tools/cis-scans/skipped-tests/_index)。

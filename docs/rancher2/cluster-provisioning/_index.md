@@ -118,4 +118,4 @@ _从 v2.5.0 起可用_
 
 当您删除在 Rancher 中创建的 EKS 集群时，该集群将被销毁。当您删除在 Rancher 中注册的 EKS 集群时，它将与 Rancher 服务器断开连接，但它仍然存在，您仍然可以以在 Rancher 中注册之前的方式访问它。
 
-有关更多信息，请参阅[本页。](/docs/rancher2/cluster-provisioning/registered-clusters/_index)。
+有关更多信息，请参阅[本页。](/docs/rancher2.5/cluster-provisioning/registered-clusters/_index)。

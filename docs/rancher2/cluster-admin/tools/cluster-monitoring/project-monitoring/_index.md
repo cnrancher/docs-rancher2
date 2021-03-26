@@ -27,11 +27,11 @@ _从 v2.2.4 开始提供_
 
 使用 Prometheus，您可以在集群级别和项目级别上监控 Rancher。对于每个启用监控的集群和项目，Rancher 都会部署一个 Prometheus 服务器。
 
-- [集群监控](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/_index)允许您查看 Kubernetes 集群的健康状况。Prometheus 从下面的集群组件中收集指标，你可以在图形和 Chart 中查看这些指标：
+- [集群监控](/docs/rancher2/cluster-admin/tools/cluster-monitoring/_index)允许您查看 Kubernetes 集群的健康状况。Prometheus 从下面的集群组件中收集指标，你可以在图形和 Chart 中查看这些指标：
 
-  - [Kubernetes control-plane](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/custom-metrics/_index)
-  - [etcd 数据库](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/custom-metrics/_index)
-  - [所有节点（包括 worker）](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/custom-metrics/_index)
+  - [Kubernetes control-plane](/docs/rancher2/cluster-admin/tools/cluster-monitoring/custom-metrics/_index)
+  - [etcd 数据库](/docs/rancher2/cluster-admin/tools/cluster-monitoring/custom-metrics/_index)
+  - [所有节点（包括 worker）](/docs/rancher2/cluster-admin/tools/cluster-monitoring/custom-metrics/_index)
 
 - 项目监控允许您查看特定项目中运行的 pod 的状态。Prometheus 从项目部署的 HTTP 和 TCP/UDP 工作负载中收集指标。
 
@@ -41,13 +41,13 @@ _从 v2.2.4 开始提供_
 
 ## 启用项目监控
 
-> **前提条件：**已启用[集群监控](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/_index)。
+> **前提条件：**已启用[集群监控](/docs/rancher2/cluster-admin/tools/cluster-monitoring/_index)。
 
 1. 转到应启用监控的项目。注意：启用集群监控后，**系统**项目中也默认启用监控。
 
 1. 在导航栏中选择**工具 > 监视**。
 
-1. 选择**启用**，显示[Prometheus 配置选项](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/prometheus/_index)。输入你需要的配置选项。
+1. 选择**启用**，显示[Prometheus 配置选项](/docs/rancher2/cluster-admin/tools/cluster-monitoring/prometheus/_index)。输入你需要的配置选项。
 
 1. 单击**保存**。
 
@@ -58,14 +58,15 @@ _从 v2.2.4 开始提供_
 | Prometheus | 750m     | 750Mi    | 1000m    | 1000Mi   | 是         |
 | Grafana    | 100m     | 100Mi    | 200m     | 200Mi    | 否         |
 
-**结果：**项目中添加了一个`project-monitoring`[应用程序](/docs/rancher2/helm-charts/_index)。应用被激活后，可以通过[Rancher 仪表盘](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/project-monitoring/_index)开始查看[项目指标](#项目指标)。或直接从[Grafana](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/_index#grafana)查看。
+
+**结果：**项目中添加了一个`project-monitoring`[应用程序](/docs/rancher2/helm-charts/_index)。应用被激活后，可以通过[Rancher 仪表盘](/docs/rancher2/cluster-admin/tools/cluster-monitoring/project-monitoring/_index)开始查看[项目指标](#项目指标)。或直接从[Grafana](/docs/rancher2/cluster-admin/tools/cluster-monitoring/_index#grafana)查看。
 
 Grafana 实例的默认用户名和密码是`admin/admin`。然而，Grafana 仪表板是通过 Rancher 身份验证代理提供服务的，因此只有当前通过身份验证进入 Rancher 服务器的用户才能访问 Grafana 仪表板。
 
 ## 项目指标
 
-如果在[集群级别](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/cluster-metrics/_index#workload-metrics)和
-[项目级别](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/_index)和[项目级](#enabling-project-monitoring)启用监控。
+如果在[集群级别](/docs/rancher2/cluster-admin/tools/cluster-monitoring/cluster-metrics/_index#workload-metrics)和
+[项目级别](/docs/rancher2/cluster-admin/tools/cluster-monitoring/_index)和[项目级](#enabling-project-monitoring)启用监控。
 
 您可以从任何[导出器](https://prometheus.io/docs/instrumenting/exporters/)监控自定义指标。您还可以在部署上暴露一些自定义端点，而无需为项目配置 Prometheus。
 
