@@ -58,6 +58,7 @@ _从 v2.2.4 开始提供_
 | Prometheus | 750m     | 750Mi    | 1000m    | 1000Mi   | 是         |
 | Grafana    | 100m     | 100Mi    | 200m     | 200Mi    | 否         |
 
+
 **结果：**项目中添加了一个`project-monitoring`[应用程序](/docs/rancher2/helm-charts/_index)。应用被激活后，可以通过[Rancher 仪表盘](/docs/rancher2/cluster-admin/tools/cluster-monitoring/project-monitoring/_index)开始查看[项目指标](#项目指标)。或直接从[Grafana](/docs/rancher2/cluster-admin/tools/cluster-monitoring/_index#grafana)查看。
 
 Grafana 实例的默认用户名和密码是`admin/admin`。然而，Grafana 仪表板是通过 Rancher 身份验证代理提供服务的，因此只有当前通过身份验证进入 Rancher 服务器的用户才能访问 Grafana 仪表板。

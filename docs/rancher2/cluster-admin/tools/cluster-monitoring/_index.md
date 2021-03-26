@@ -56,7 +56,9 @@ Prometheus 让您可以查看 Rancher 及其纳管的各个 Kubernetes 集群的
 1. 查看[资源消耗建议](#资源消耗)，以确保您有足够的资源用于 Prometheus 及其相关组件。根据需要，配置 [Prometheus 选项](/docs/rancher2/cluster-admin/tools/cluster-monitoring/expression/_index)。
 1. 单击**启动**。
 
+
 **结果：**将部署 Prometheus 服务以及两个监控[应用商店应用](/docs/rancher2/helm-charts/_index)。这两个监控应用商店应用是`cluster-monitoring`和`monitoring-operator`，它们会被添加到集群的`系统（System）`项目中。当这两个应用处于`Active`后，您可以通过 [Rancher 集群仪表盘](/docs/rancher2/cluster-admin/tools/cluster-monitoring/viewing-metrics/_index)开始查看[集群指标](/docs/rancher2/cluster-admin/tools/cluster-monitoring/cluster-metrics/_index)或直接从 [Grafana](/docs/rancher2/cluster-admin/tools/cluster-monitoring/_index)中查看。
+
 
 > Grafana 实例的默认用户名和密码为 "admin/admin"。然而，Grafana 仪表板是通过 Rancher 认证代理提供服务的，因此只有当前通过认证进入 Rancher 服务器的用户才能访问 Grafana 仪表板
 
