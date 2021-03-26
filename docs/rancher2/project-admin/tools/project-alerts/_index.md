@@ -8,13 +8,13 @@ title: 通知和告警
 
 通知和告警是基于[Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager/)构建的，借助这些工具，Rancher 可以通知[集群所有者](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index#cluster-roles)和[项目所有者](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index#project-roles)集群内发生的事件，由他们决定如何处理触发告警的事件。
 
-收到告警信息之前，您需要在集群层级设置至少一个[通知](/docs/rancher2/monitoring-alerting/2.0-2.4/notifiers/_index)。
+收到告警信息之前，您需要在集群层级设置至少一个[通知](/docs/rancher2/cluster-admin/tools/notifiers/_index)。
 
 只有[Rancher 管理员](/docs/rancher2/admin-settings/rbac/global-permissions/_index)、[集群所有者或集群成员](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index#cluster-roles)或[项目所有者](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index#project-roles)有权限管理告警。
 
 ## 告警的作用范围
 
-Rancher 的告警可以作用于[集群层级](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/_index)或项目层级。
+Rancher 的告警可以作用于[集群层级](/docs/rancher2/cluster-admin/tools/cluster-alerts/_index)或项目层级。
 
 在项目层级，Rancher 监控特定的部署，发出的告警信息主要和以下几个方面相关：
 
@@ -132,7 +132,7 @@ _v2.2.4 或更新版本可用_
 
    - [**容器**](https://github.com/google/cadvisor)
    - [**Kubernetes 资源**](https://github.com/kubernetes/kube-state-metrics)
-   - [**自定义指标**](/docs/rancher2/project-admin/tools/monitoring/_index#project-metrics)
+   - [**自定义指标**](/docs/rancher2/cluster-admin/tools/cluster-monitoring/project-monitoring/_index#project-metrics)
    - [**项目级别 Grafana 的指标**](https://grafana.com/docs/grafana/latest/administration/view-server/internal-metrics/#internal-grafana-metrics)
    - **项目级别 Prometheus 的指标**
 
@@ -167,7 +167,7 @@ _v2.2.4 或更新版本可用_
 
 1.  （可选）添加其他**告警规则** 到这个告警组内。
 
-1.  返回告警组页面，单击 **... > 升级** ，进入编辑告警组页面，在页面最下方**告警 到**旁边的文本框中选择发送告警消息的[方式](/docs/rancher2/monitoring-alerting/2.0-2.4/notifiers/_index)，和告警消息的收件人。您可以选择多种方式发送告警信息， 也可以随时修改收件人的名单。
+1.  返回告警组页面，单击 **... > 升级** ，进入编辑告警组页面，在页面最下方**告警 到**旁边的文本框中选择发送告警消息的[方式](/docs/rancher2/cluster-admin/tools/notifiers/_index)，和告警消息的收件人。您可以选择多种方式发送告警信息， 也可以随时修改收件人的名单。
 
 **结果：** 完成告警和告警信息的配置。触发告警时，告警信息会通过您指定的方式发送给指定的收件人。
 

@@ -22,7 +22,7 @@ keywords:
 有关最佳实践的更多信息，您可以参考以下资源：
 
 - [Rancher 文档](/docs/rancher2/overview/_index)
-  - [监控](/docs/rancher2/cluster-admin/tools/monitoring/_index)
+  - [监控](/docs/rancher2/cluster-admin/tools/cluster-monitoring/_index)
   - [备份和恢复](/docs/rancher2/backups/_index)
   - [安全](/docs/rancher2/security/_index)
 - [Rancher 博客](https://rancher.com/blog/)

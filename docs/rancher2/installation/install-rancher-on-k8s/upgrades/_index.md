@@ -19,13 +19,13 @@ keywords:
 
 以下说明将指导您升级使用 Helm 安装在 Kubernetes 集群上的 Rancher 服务器。这些步骤也适用于使用 Helm 进行的离线安装。
 
-有关使用 RancherD 升级安装在 Kubernetes 上的 Rancher 的说明，请参考[本页](/docs/rancher2/installation_new/install-rancher-on-linux/upgrades/_index)
+有关使用 RancherD 升级安装在 Kubernetes 上的 Rancher 的说明，请参考[本页](/docs/rancher2/installation/install-rancher-on-linux/upgrades/_index)
 
-关于安装了 Docker 的 Rancher 的升级说明，请参考[本页](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/single-node-upgrades/_index)
+关于安装了 Docker 的 Rancher 的升级说明，请参考[本页](/docs/rancher2/installation/other-installation-methods/single-node-docker/single-node-upgrades/_index)
 
 要升级 Kubernetes 集群中的组件，或者定义[Kubernetes 服务](/docs/rke/config-options/services/_index)或[附加组件](/docs/rke/config-options/add-ons/_index)。参考 Rancher Kubernetes 引擎的[RKE 的升级文档](/docs/rke/upgrades/_index)。
 
-如果你使用 RKE 附加组件 yaml 安装了 Rancher，请按照[迁移或升级](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/migrating-from-rke-add-on/_index)的指示进行。
+如果你使用 RKE 附加组件 yaml 安装了 Rancher，请按照[迁移或升级](/docs/rancher2/installation/install-rancher-on-k8s/upgrades/migrating-from-rke-add-on/_index)的指示进行。
 
 ## 前提条件
 
@@ -43,17 +43,17 @@ kubeconfig 也可以通过`--kubeconfig`标签来手动针对预定的集群，�
 
 在[GitHub](https://github.com/rancher/rancher/releases)和[Rancher 论坛](https://forums.rancher.com/c/announcements/12)上的发布说明中，可以找到每个 Rancher 版本的更完整的已知问题列表。
 
-请注意，不支持升级到[rancher-alpha 仓库](/docs/rancher2/installation_new/install-rancher-on-k8s/chart-options/_index)中的任何 chart。
+请注意，不支持升级到[rancher-alpha 仓库](/docs/rancher2/installation/install-rancher-on-k8s/chart-options/_index)中的任何 chart。
 
 ### Helm 版本
 
 本文基于 Helm 3 写作。如果您使用的是 Helm2，在按照本文进行升级之前，请先将 Helm 2 升级为 Helm 3。Helm 升级的具体操作步骤请参考[Helm 官方文档-从 Helm 2 迁移到 Helm 3](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/)。
 
-如果您希望保留 Helm2，我们也提供了基于 Helm2 升级的操作指导，详情请参考[Helm 2 升级指南](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/ha/helm2/_index)。
+如果您希望保留 Helm2，我们也提供了基于 Helm2 升级的操作指导，详情请参考[Helm 2 升级指南](/docs/rancher2/installation/install-rancher-on-k8s/upgrades/ha/helm2/_index)。
 
 ### 同步镜像到私有镜像仓库
 
-这个前提条件只适用于离线高可用安装。同步镜像到私有镜像仓库之后，在安装 Rancher 时，Rancher 可以从此私有镜像仓库中拉取所需的镜像。详情请参考[同步镜像到私有镜像仓库](/docs/rancher2/installation_new/other-installation-methods/air-gap/populate-private-registry/_index)
+这个前提条件只适用于离线高可用安装。同步镜像到私有镜像仓库之后，在安装 Rancher 时，Rancher 可以从此私有镜像仓库中拉取所需的镜像。详情请参考[同步镜像到私有镜像仓库](/docs/rancher2/installation/other-installation-methods/air-gap/populate-private-registry/_index)
 
 ### 升级 Rancher Server 并使用隐藏的本地集群
 
@@ -61,7 +61,7 @@ kubeconfig 也可以通过`--kubeconfig`标签来手动针对预定的集群，�
 
 ### 使用外部的 TLS 终端代理从 v2.0-v2.2 升级到 v2.3+
 
-如果您将 Rancher 从 v2.x 升级到 v2.3+，并且您正在使用外部 TLS 终端，您需要编辑`cluster.yml`到[启用使用转发主机头](/docs/rancher2/installation_new/install-rancher-on-k8s/chart-options/_index)。
+如果您将 Rancher 从 v2.x 升级到 v2.3+，并且您正在使用外部 TLS 终端，您需要编辑`cluster.yml`到[启用使用转发主机头](/docs/rancher2/installation/install-rancher-on-k8s/chart-options/_index)。
 
 ### 使用 cert-manager v0.8.0 之前的版本升级
 
@@ -90,7 +90,7 @@ kubeconfig 也可以通过`--kubeconfig`标签来手动针对预定的集群，�
 
 1. 获取你用来安装 Rancher 的仓库名称。
 
-   关于资源库及其区别，请参见[Helm Chart Repositories](/docs/rancher2/installation_new/install-rancher-on-k8s/chart-options/_index)。
+   关于资源库及其区别，请参见[Helm Chart Repositories](/docs/rancher2/installation/install-rancher-on-k8s/chart-options/_index)。
 
    ```
    helm repo list
@@ -99,7 +99,7 @@ kubeconfig 也可以通过`--kubeconfig`标签来手动针对预定的集群，�
    rancher-<CHART_REPO>	 https://releases.rancher.com/server-charts/<CHART_REPO>
    ```
 
-   > **注意：**如果你想切换到不同的 Helm chart 仓库，请按照[如何切换仓库的步骤](/docs/rancher2/installation_new/resources/choosing-version/_index)。如果你切换了资源库，请确保在继续步骤 3 之前再次列出资源库，以确保你添加的资源库是正确的。
+   > **注意：**如果你想切换到不同的 Helm chart 仓库，请按照[如何切换仓库的步骤](/docs/rancher2/installation/resources/choosing-version/_index)。如果你切换了资源库，请确保在继续步骤 3 之前再次列出资源库，以确保你添加的资源库是正确的。
 
 1. 从 Helm chart 库中获取最新的 chart 来安装 Rancher。
 
@@ -166,7 +166,7 @@ helm upgrade rancher rancher-<CHART_REPO>/rancher \
    helm delete rancher -n cattle-system
    ```
 
-2. 按照[升级 Cert-Manager](/docs/rancher2/installation_new/resources/upgrading-cert-manager/_index)页面的说明，卸载并重新安装 cert-manager。
+2. 按照[升级 Cert-Manager](/docs/rancher2/installation/resources/upgrading-cert-manager/_index)页面的说明，卸载并重新安装 cert-manager。
 
 3. 重新安装 Rancher 到最新版本，并进行所有设置。将步骤 1 中的所有值用`--set key=value`追加到命令中。注意：步骤 1 中还有很多选项需要追加。
 
@@ -243,24 +243,24 @@ kubectl -n cattle-system apply -R -f ./rancher
 
 登录 Rancher，确认升级成功。
 
-如果升级之后出现了网络问题，请参考[恢复集群网络](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/namespace-migration/_index)。
+如果升级之后出现了网络问题，请参考[恢复集群网络](/docs/rancher2/installation/install-rancher-on-k8s/upgrades/namespace-migration/_index)。
 
 ## 已知问题
 
 下表列出了升级 Rancher 时需要考虑的一些最值得注意的问题。每个 Rancher 版本的已知问题的更完整列表可以在[GitHub](https://github.com/rancher/rancher/releases)上的发布说明和[Rancher 论坛](https://forums.rancher.com/c/announcements/12)上找到。
 
-| 升级场景                        | 问题描述                                                                                                                                                                                                                                                                                                                                                         |
-| :------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 升级到 v2.4.6 或 v2.4.7         | 这些 Rancher 版本存在一个问题，即创建、编辑或克隆 Amazon EC2 节点模板需要`kms:ListKeys`权限。这一要求在 v2.4.8 中被删除。建议跳过 v2.4.6 或 v2.4.7，直接升级到 v2.4.8+。                                                                                                                                                                                         |
-| 升级到 v2.3.0+                  | 任何用户供应的集群将在任何编辑后自动更新，因为容忍被添加到用于 Kubernetes 供应的图像中。                                                                                                                                                                                                                                                                         |
-| 升级到 v2.2.0-v2.2.x            | Rancher 引入了[system charts](https://github.com/rancher/system-charts)存储库，其中包含监控、日志、警报和全局 DNS 等功能所需的所有目录项。为了能够在 air gap 安装中使用这些功能，您需要在本地镜像`system-charts`资源库，并配置 Rancher 使用该资源库。请按照说明[配置 Rancher 系统 chart](/docs/rancher2/installation_new/resources/local-system-charts/_index)。 |
-| 从 v2.0.13 或更早的版本进行升级 | 如果你的集群的证书已经过期，你需要执行[这些步骤](/docs/rancher2/cluster-admin/certificate-rotation/_index)来轮换证书。                                                                                                                                                                                                                                           |
-| 从 v2.0.7 或更早的版本进行升级  | Rancher 引入了`system`项目，这是一个自动创建的项目，用于存储 Kubernetes 运行所需的重要命名空间。在升级到 v2.0.7+的过程中，Rancher 希望这些命名空间能够从所有项目中取消分配。在开始升级之前，请检查您的系统命名空间，确保它们未被分配，以[防止集群网络问题。](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/namespace-migration/_index)         |
+| 升级场景                        | 问题描述                                                                                                                                                                                                                                                                                                                                                     |
+| :------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 升级到 v2.4.6 或 v2.4.7         | 这些 Rancher 版本存在一个问题，即创建、编辑或克隆 Amazon EC2 节点模板需要`kms:ListKeys`权限。这一要求在 v2.4.8 中被删除。建议跳过 v2.4.6 或 v2.4.7，直接升级到 v2.4.8+。                                                                                                                                                                                     |
+| 升级到 v2.3.0+                  | 任何用户供应的集群将在任何编辑后自动更新，因为容忍被添加到用于 Kubernetes 供应的图像中。                                                                                                                                                                                                                                                                     |
+| 升级到 v2.2.0-v2.2.x            | Rancher 引入了[system charts](https://github.com/rancher/system-charts)存储库，其中包含监控、日志、警报和全局 DNS 等功能所需的所有目录项。为了能够在 air gap 安装中使用这些功能，您需要在本地镜像`system-charts`资源库，并配置 Rancher 使用该资源库。请按照说明[配置 Rancher 系统 chart](/docs/rancher2/installation/resources/local-system-charts/_index)。 |
+| 从 v2.0.13 或更早的版本进行升级 | 如果你的集群的证书已经过期，你需要执行[这些步骤](/docs/rancher2/cluster-admin/certificate-rotation/_index)来轮换证书。                                                                                                                                                                                                                                       |
+| 从 v2.0.7 或更早的版本进行升级  | Rancher 引入了`system`项目，这是一个自动创建的项目，用于存储 Kubernetes 运行所需的重要命名空间。在升级到 v2.0.7+的过程中，Rancher 希望这些命名空间能够从所有项目中取消分配。在开始升级之前，请检查您的系统命名空间，确保它们未被分配，以[防止集群网络问题。](/docs/rancher2/installation/install-rancher-on-k8s/upgrades/namespace-migration/_index)         |
 
 ## 使用 RKE Add-on 安装 Rancher
 
 **重要：RKE 插件安装只支持到 Rancher v2.0.8**。
 
-请使用 Rancher Helm Chart 在 Kubernetes 集群上安装 Rancher。详情请参见[Kubernetes 安装](/docs/rancher2/installation_new/install-rancher-on-k8s/_index)。
+请使用 Rancher Helm Chart 在 Kubernetes 集群上安装 Rancher。详情请参见[Kubernetes 安装](/docs/rancher2/installation/install-rancher-on-k8s/_index)。
 
-如果您当前使用的是 RKE 加载方式，请参见 [从 RKE add-on 迁移](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/migrating-from-rke-add-on/_index)，了解如何迁移到使用 Helm Chart 的详细信息。
+如果您当前使用的是 RKE 加载方式，请参见 [从 RKE add-on 迁移](/docs/rancher2/installation/install-rancher-on-k8s/upgrades/migrating-from-rke-add-on/_index)，了解如何迁移到使用 Helm Chart 的详细信息。

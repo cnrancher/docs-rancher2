@@ -67,23 +67,23 @@ Helm 3 Charts 使用 apiVersion `v2`。在某些较旧的 Helm 2 版本中，并
 
 ## 内置的全局应用商店
 
-在 Rancher 中，有一些默认应用商店作为 Rancher 的一部分。这些可以由系统管理员启用或禁用。有关详细信息，请参阅关于管理[内置的全局应用商店](/docs/rancher2/helm-charts/legacy-catalogs/built-in/_index)的文档。
+在 Rancher 中，有一些默认应用商店作为 Rancher 的一部分。这些可以由系统管理员启用或禁用。有关详细信息，请参阅关于管理[内置的全局应用商店](/docs/rancher2/helm-charts/built-in/_index)的文档。
 
 ## 自定义应用商店
 
-Ranhcer 中有两种类型的应用商店：[内置的全局应用商店](/docs/rancher2/helm-charts/legacy-catalogs/built-in/_index)和[自定义应用商店](/docs/rancher2/helm-charts/legacy-catalogs/adding-catalogs/_index)。
+Ranhcer 中有两种类型的应用商店：[内置的全局应用商店](/docs/rancher2/helm-charts/built-in/_index)和[自定义应用商店](/docs/rancher2/helm-charts/adding-catalogs/_index)。
 
-任何用户都可以创建自定义应用商店并添加到 Rancher 中。可以在全局级别，集群级别或项目级别将自定义应用商店添加到 Rancher 中。有关详细信息，请参阅[添加自定义商店](/docs/rancher2/helm-charts/legacy-catalogs/adding-catalogs/_index)和[应用商店配置参考](/docs/rancher2/helm-charts/legacy-catalogs/catalog-config/_index)。
+任何用户都可以创建自定义应用商店并添加到 Rancher 中。可以在全局级别，集群级别或项目级别将自定义应用商店添加到 Rancher 中。有关详细信息，请参阅[添加自定义商店](/docs/rancher2/helm-charts/adding-catalogs/_index)和[应用商店配置参考](/docs/rancher2/helm-charts/catalog-config/_index)。
 
 ## 创建并部署应用
 
 在 Rancher 中，应用是从应用商店中的模板部署的。本节涵盖以下主题：
 
-- [多集群应用](/docs/rancher2/helm-charts/legacy-catalogs/multi-cluster-apps/_index)
-- [创建应用商店应用](/docs/rancher2/helm-charts/legacy-catalogs/creating-apps/_index)
-- [在项目级别部署应用](/docs/rancher2/helm-charts/legacy-catalogs/launching-apps/_index)
-- [管理应用](/docs/rancher2/helm-charts/legacy-catalogs/managing-apps/_index)
-- [教程：创建应用的示例](/docs/rancher2/helm-charts/legacy-catalogs/tutorial/_index)
+- [多集群应用](/docs/rancher2/helm-charts/multi-cluster-apps/_index)
+- [创建应用商店应用](/docs/rancher2/helm-charts/creating-apps/_index)
+- [在项目级别部署应用](/docs/rancher2/helm-charts/_index)
+- [管理应用](/docs/rancher2/helm-charts/managing-apps/_index)
+- [教程：创建应用的示例](/docs/rancher2/helm-charts/tutorial/_index)
 
 ## 与 Rancher 的兼容性
 
@@ -97,4 +97,4 @@ _自 v2.2.0 起可用_
 
 当创建跨多个 Kubernetes 集群的应用时，可以创建一个全局 DNS 记录以将流量路由到所有不同集群中的端点。将需要对外部 DNS 服务器进行编程，以为您的应用分配域名（FQDN）。Rancher 将使用您提供的 FQDN 和应用的所在的 IP 地址来对 DNS 进行编程。Rancher 将从运行您的应用的所有 Kubernetes 集群中找到端点，并对 DNS 进行编程。
 
-有关如何使用此功能的更多信息，请参见[全局 DNS](/docs/rancher2/helm-charts/legacy-catalogs/globaldns/_index)。
+有关如何使用此功能的更多信息，请参见[全局 DNS](/docs/rancher2/helm-charts/globaldns/_index)。

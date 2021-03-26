@@ -23,7 +23,7 @@ Rancher 允许您设置许多配置组合，有些配置适用于开发和测试
 
 ### 在支持的 OS 和 Docker 版本上运行 Rancher
 
-Rancher 是基于容器的，可以在任何基于 linux 的操作系统上运行。但是，您应该只在[需求文档](/docs/rancher2/installation_new/requirements/_index)中列出的操作系统以及支持的 Docker 版本上运行 Rancher。这些版本经过了最彻底的测试，可以得到 Rancher Support 团队的支持。
+Rancher 是基于容器的，可以在任何基于 linux 的操作系统上运行。但是，您应该只在[需求文档](/docs/rancher2/installation/requirements/_index)中列出的操作系统以及支持的 Docker 版本上运行 Rancher。这些版本经过了最彻底的测试，可以得到 Rancher Support 团队的支持。
 
 ### 升级 Kubernetes 版本
 
@@ -109,7 +109,7 @@ Kubernetes 集群最好使用低延迟网络。对于 control plane 组件和 et
 
 ### 监控集群
 
-根据需要密切监控和扩展节点。您应该启用[集群监控](/docs/rancher2/cluster-admin/tools/monitoring/_index)并使用 Prometheus 指标和 Grafana 可视化选项。
+根据需要密切监控和扩展节点。您应该启用[集群监控](/docs/rancher2/cluster-admin/tools/cluster-monitoring/_index)并使用 Prometheus 指标和 Grafana 可视化选项。
 
 ## 安全提示
 

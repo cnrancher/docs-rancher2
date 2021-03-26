@@ -132,7 +132,7 @@ _v2.2.0 可用_
 
 ### 节点 Docker 版本检查
 
-要求在添加到集群的集群节点上安装[受支持的 Docker 版本](/docs/rancher2/installation_new/requirements/_index)或允许在集群节点上安装不受支持的 Docker 版本。
+要求在添加到集群的集群节点上安装[受支持的 Docker 版本](/docs/rancher2/installation/requirements/_index)或允许在集群节点上安装不受支持的 Docker 版本。
 
 ### Docker 根目录
 
@@ -355,7 +355,7 @@ _v2.2.0 可用_
 
 ### enable_cluster_monitoring
 
-启用或禁用[集群监控](/docs/rancher2/cluster-admin/tools/monitoring/_index)选项。
+启用或禁用[集群监控](/docs/rancher2/cluster-admin/tools/cluster-monitoring/_index)选项。
 
 ### enable_network_policy
 

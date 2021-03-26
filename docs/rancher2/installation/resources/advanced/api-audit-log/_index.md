@@ -22,9 +22,9 @@ keywords:
 
 您可以向 Rancher Server 容器中传入环境变量，开启和配置审计日志功能。请参考以下链接，在安装时开启该特性。
 
-- [Rancher 单节点](/docs/rancher2/installation_new/other-installation-methods/single-node-docker/_index)
+- [Rancher 单节点](/docs/rancher2/installation/other-installation-methods/single-node-docker/_index)
 
-- [Rancher 高可用](/docs/rancher2/installation_new/resources/chart-options/_index)
+- [Rancher 高可用](/docs/rancher2/installation/resources/chart-options/_index)
 
 ## API 审计日志选项
 
@@ -90,7 +90,7 @@ kubectl -n cattle-system logs -f rancher-84d886bdbb-s4s69 rancher-audit-log
 #### 收集审计日志
 
 可以为集群启用 Rancher 的内置日志收集功能，将审计和其他服务日志发送到受支持的日志收集服务端。
-详情请参考[Rancher 工具 - 日志](/docs/rancher2/logging/2.0.x-2.4.x/project-logging/_index)。
+详情请参考[Rancher 工具 - 日志](/docs/rancher2/project-admin/tools/project-logging/_index)。
 
 ## 审计日志样本
 

@@ -23,9 +23,9 @@ _自 v2.2.0 起可用_
 
 通常，大多数应用都部署在单个 Kubernetes 集群上，但是有时您可能希望跨不同的集群和/或项目部署同一个应用的多个副本。在 Rancher 中**多集群应用**使用 Helm Chart ，并可以跨多个集群部署应用。因为能够跨多个集群部署相同的应用，因此可以避免在对每个集群上重复执行相同的操作期间引入的人为错误。使用多集群应用，您可以确保应用在所有项目/集群中具有相同的配置，并能够根据目标项目来覆盖不同的参数。由于多集群应用被视为单个应用，因此易于管理和维护。
 
-[全局应用商店](/docs/rancher2/helm-charts/legacy-catalogs/_index)中的任何 Helm Chart 均可作为多集群应用来进行部署和管理。
+[全局应用商店](/docs/rancher2/helm-charts/_index)中的任何 Helm Chart 均可作为多集群应用来进行部署和管理。
 
-创建多集群应用之后，可以对[全局 DNS](/docs/rancher2/helm-charts/legacy-catalogs/globaldns/_index) 进行编程，以使其更易于访问该应用。
+创建多集群应用之后，可以对[全局 DNS](/docs/rancher2/helm-charts/globaldns/_index) 进行编程，以使其更易于访问该应用。
 
 ## 先决条件
 
@@ -74,7 +74,7 @@ Rancher 将多集群应用的配置选项分为几个部分。
 
 ### 角色
 
-在**角色**部分中，定义多集群应用的角色。通常，当用户[启动应用商店应用](/docs/rancher2/helm-charts/legacy-catalogs/launching-apps/_index)时，该特定用户的权限将用于创建该应用所需的所有工作负载/资源。
+在**角色**部分中，定义多集群应用的角色。通常，当用户[启动应用商店应用](/docs/rancher2/helm-charts/_index)时，该特定用户的权限将用于创建该应用所需的所有工作负载/资源。
 
 对于多集群应用，该应用由**系统用户**部署，并被分配为所有基础资源的创建者。使用系统用户是因为实际用户有可能会被从目标项目中移除。比如，如果直接使用实际用户的话，如果实际用户被从某个项目中移除了，这个用户就不能管理多集群应用在这个项目中的副本了。
 
@@ -100,7 +100,7 @@ Rancher 将让您从**角色**的两个选项中进行选择：**项目**和**�
 
 ### 使用原生 Helm Chart 键值对
 
-对于原生的 Helm Chart(即，来自**Helm Stable**或**Helm Incubator**的应用或没有配置`questions.yml`文件的[自定义的应用商店](/docs/rancher2/helm-charts/legacy-catalogs/adding-catalogs/_index)，答案在“答案”部分中需要通过键值对的方式进行配置。这些答案用于覆盖应用的默认值。
+对于原生的 Helm Chart(即，来自**Helm Stable**或**Helm Incubator**的应用或没有配置`questions.yml`文件的[自定义的应用商店](/docs/rancher2/helm-charts/adding-catalogs/_index)，答案在“答案”部分中需要通过键值对的方式进行配置。这些答案用于覆盖应用的默认值。
 
 ### 成员
 

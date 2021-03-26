@@ -170,7 +170,7 @@ http {
 
 ## 相关链接
 
-- **推荐阅读：** [单节点备份和还原](/docs/rancher2/backups/2.0-2.4/single-node-backups/_index)。尽管您现在没有任何数据需要备份，但是我们建议您在常规 Rancher 使用之后创建备份。
+- **推荐阅读：** [单节点备份和还原](/docs/rancher2/backups/backup/docker-backups/_index)。尽管您现在没有任何数据需要备份，但是我们建议您在常规 Rancher 使用之后创建备份。
 - [创建 Kubernetes 集群](/docs/rancher2.5/cluster-provisioning/_index)。
 
 ## 常见问题和问题排查

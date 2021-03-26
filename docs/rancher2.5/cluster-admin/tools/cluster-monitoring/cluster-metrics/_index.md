@@ -89,7 +89,7 @@ Kubernetes 组件指标用于展示集群里各个 Kubernetes 组件的监控数
 
 ## Rancher 日志指标
 
-Rancher 日志指标可以展示日志服务相关组件的操作情况，前提是您需要[为 Rancher 启用日志服务](/docs/rancher2/logging/2.0.x-2.4.x/project-logging/_index)。
+Rancher 日志指标可以展示日志服务相关组件的操作情况，前提是您需要[为 Rancher 启用日志服务](/docs/rancher2/project-admin/tools/project-logging/_index)。
 
 [_获取具体的指标表达式_](/docs/rancher2.5/cluster-admin/tools/cluster-monitoring/expression/_index)
 
