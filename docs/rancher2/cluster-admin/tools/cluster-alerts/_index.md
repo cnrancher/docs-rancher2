@@ -25,7 +25,7 @@ keywords:
 
 创建集群时，Rancher 已经配置了一些内置的告警规则。为它们配置[接收者](/docs/rancher2/cluster-admin/tools/notifiers/_index)后就能收到相应告警。
 
-有关触发内置告警的详细信息，请参阅[内置告警](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/default-alerts/_index)。
+有关触发内置告警的详细信息，请参阅[内置告警](/docs/rancher2/cluster-admin/tools/cluster-alerts/default-alerts/_index)。
 
 ## 告警示例
 
@@ -38,7 +38,7 @@ keywords:
 
 > **先决条件：** 监控必须被[启用](/docs/rancher2/cluster-admin/tools/cluster-monitoring/_index)，您才能使用自定义 Prometheus 查询或表达式触发告警。
 
-当您编辑告警规则时，您将有机会根据 Prometheus 表达式配置要触发的告警。有关表达式的示例，请参考[本页](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/expression/_index)。
+当您编辑告警规则时，您将有机会根据 Prometheus 表达式配置要触发的告警。有关表达式的示例，请参考[本页](/docs/rancher2/cluster-admin/tools/cluster-monitoring/expression/_index)。
 
 ## 紧急程度
 
