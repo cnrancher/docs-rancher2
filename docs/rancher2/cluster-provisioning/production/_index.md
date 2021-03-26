@@ -32,7 +32,7 @@ keywords:
 
 ## 备份 etcd
 
-- 启用 etcd 快照。验证快照是否被创建成功，并且进行一次灾难恢复来验证快照是否有效。etcd 中存储了您集群状态，丢失 etcd 数据意味着丢失集群。请确保为您的集群配置了[etcd 循环快照](/docs/rancher2/backups/2.0-2.4/ha-backups/_index)，并确保快照存储在外部（节点之外）。
+- 启用 etcd 快照。验证快照是否被创建成功，并且进行一次灾难恢复来验证快照是否有效。etcd 中存储了您集群状态，丢失 etcd 数据意味着丢失集群。请确保为您的集群配置了[etcd 循环快照](/docs/rancher2/backups/backup/ha-backups/_index)，并确保快照存储在外部（节点之外）。
 
 ## 集群架构
 

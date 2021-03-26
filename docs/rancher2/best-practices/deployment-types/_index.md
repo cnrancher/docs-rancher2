@@ -25,7 +25,7 @@ keywords:
 
 当 Rancher Server 安装在 Kubernetes 集群上时，它不应该在托管的 Kubernetes 环境中运行，比如谷歌的 GKE、Amazon 的 EKS 或 Microsoft 的 AKS。这些托管的 Kubernetes 解决方案没有将 etcd 开放到 Rancher 可以管理的程度，并且它们的自定义设置可能会干扰 Rancher 的操作。
 
-建议使用托管的基础设施，如 Amazon 的 EC2 或谷歌的 GCE。在基础设施提供者上使用 RKE 创建集群时，您可以配置集群创建 etcd 快照作为备份。然后，您可以使用 [RKE](/docs/rke/etcd-snapshots/recurring-snapshots/_index) 或 [Rancher](/docs/rancher2/backups/2.0-2.4/restorations/_index) 从这些快照之一恢复您的集群。在托管的 Kubernetes 环境中，不支持这种备份和恢复功能。
+建议使用托管的基础设施，如 Amazon 的 EC2 或谷歌的 GCE。在基础设施提供者上使用 RKE 创建集群时，您可以配置集群创建 etcd 快照作为备份。然后，您可以使用 [RKE](/docs/rke/etcd-snapshots/recurring-snapshots/_index) 或 [Rancher](/docs/rancher2/backups/restore/_index) 从这些快照之一恢复您的集群。在托管的 Kubernetes 环境中，不支持这种备份和恢复功能。
 
 ## 确保 Kubernetes 的节点配置正确
 

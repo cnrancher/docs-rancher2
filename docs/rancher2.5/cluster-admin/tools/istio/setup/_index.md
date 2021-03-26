@@ -26,7 +26,7 @@ keywords:
 
 > **快速设置** 如果不需要外部流量到达 Istio，而只想设置 Istio 来监控和跟踪集群中的流量，请跳过[设置 Istio 网关](/docs/rancher2/cluster-admin/tools/istio/setup/gateway/_index)和[设置 Istio 流量管理组件](/docs/rancher2/cluster-admin/tools/istio/setup/set-up-traffic-management/_index)的步骤。
 
-1. [在集群中启用 Istio](/docs/rancher2/istio/2.5/configuration-reference/selectors-and-scrape/_index)。
+1. [在集群中启用 Istio](/docs/rancher2/cluster-admin/tools/istio/setup/_index)。
 1. [在所有要使用 Istio 的命名空间中启用它](/docs/rancher2/cluster-admin/tools/istio/setup/enable-istio-in-namespace/_index)。
 1. [选择部署主要 Istio 组件的节点](/docs/rancher2/cluster-admin/tools/istio/setup/node-selectors/_index)。
 1. [添加有 Istio sidecar 注入的部署和服务](/docs/rancher2/cluster-admin/tools/istio/setup/deploy-workloads/_index)。

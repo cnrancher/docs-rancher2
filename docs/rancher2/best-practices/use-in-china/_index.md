@@ -83,7 +83,7 @@ Rancher 默认使用 github 上的 repo 作为应用商店的 URL，如果出现
 
 ![kontainer-driver-metadata](/img/rancher/expansion/007S8ZIlly1get57kqscwj31nk0jo0t6.jpg)
 
-要解决这个问题只需要参考[获取新的 Kubernetes 版本](/docs/rancher2/admin-settings/k8s-metadata/_index)将 rke-metadata-config 地址修改成[gitee](https://gitee.com/rancher/kontainer-driver-metadata/)上的地址即可，例如：
+要解决这个问题只需要参考[获取新的 Kubernetes 版本](/docs/rancher2.5/admin-settings/k8s-metadata/_index)将 rke-metadata-config 地址修改成[gitee](https://gitee.com/rancher/kontainer-driver-metadata/)上的地址即可，例如：
 
 ```bash
 {
