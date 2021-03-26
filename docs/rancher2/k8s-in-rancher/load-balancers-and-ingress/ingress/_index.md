@@ -18,7 +18,7 @@ keywords:
 
 集群内的服务（service）和 pod 仅有集群内互相访问的 IP 地址，只能实现集群内部之间的通信。Ingress 为集群内的所有服务提供了外网访问的入口，允许用户通过外网访问集群内的服务。Ingress 具有这些功能：提供服务外部访问的 URL、负载均衡、SSL 和提供基于主机和路径的路由。请参考下文，为您的工作负载添加 Ingress。
 
-在项目中使用 Ingress 时，可以设置全局 DNS 条目，从而对外部 DNS 进行编程动态设置 Ingress。请参考[全局 DNS 条目](/docs/rancher2/helm-charts/legacy-catalogs/globaldns/_index)。
+在项目中使用 Ingress 时，可以设置全局 DNS 条目，从而对外部 DNS 进行编程动态设置 Ingress。请参考[全局 DNS 条目](/docs/rancher2/helm-charts/globaldns/_index)。
 
 1. 在**全局**视图中，打开要添加 Ingress 的项目。
 

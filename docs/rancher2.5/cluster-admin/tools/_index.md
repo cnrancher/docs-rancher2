@@ -37,13 +37,13 @@ Kubernetes 只提供了一个创建和管理容器的平台，Rancher 在此基�
 
 Rancher 可以与 Elasticsearch、Splunk、Kafka、Syslog 和 Fluentd 集成。
 
-请参考[集群日志](/docs/rancher2/logging/2.0.x-2.4.x/project-logging/_index)，获取配置 Rancher 和外部日志服务集成的详细操作步骤。
+请参考[集群日志](/docs/rancher2/project-admin/tools/project-logging/_index)，获取配置 Rancher 和外部日志服务集成的详细操作步骤。
 
 ## 监控
 
 _自 v2.2.0 起可用_
 
-您可以通过领先的开源监控解决方案 [Prometheus](https://prometheus.io/) 监控集群节点、Kubernetes 系统组件、软件部署的状态和过程。请参考[Rancher 监控概述](/docs/rancher2/cluster-admin/tools/monitoring/_index)，获取配置 Rancher 和 Prometheus 对接的详细操作步骤。
+您可以通过领先的开源监控解决方案 [Prometheus](https://prometheus.io/) 监控集群节点、Kubernetes 系统组件、软件部署的状态和过程。请参考[Rancher 监控概述](/docs/rancher2/cluster-admin/tools/cluster-monitoring/_index)，获取配置 Rancher 和 Prometheus 对接的详细操作步骤。
 
 ## Istio
 

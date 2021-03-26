@@ -40,7 +40,7 @@ Rancher 不再支持回滚到 Rancher v2.0-v2.1。这里保留了回滚到这些
 
 2. 执行该命令后，将创建一个`tokens.json`文件。请将此文件备份到安全的地方。**您将需要它来恢复 Rancher 回滚后集群的功能。**如果您丢失了这个文件，您可能会失去对集群的访问权限。
 
-3. 按照[回滚说明](/docs/rancher2/upgrades/rollbacks/_index)回滚 Rancher。
+3. 按照[回滚说明](/docs/rancher2/installation/install-rancher-on-k8s/rollbacks/_index)回滚 Rancher。
 
 4. 一旦 Rancher 恢复，Rancher 管理的每一个集群（除了导入的集群）都将处于`Unavailable` 不可用状态。
 

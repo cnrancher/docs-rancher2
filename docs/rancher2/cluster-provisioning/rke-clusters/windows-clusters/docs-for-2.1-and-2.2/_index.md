@@ -45,7 +45,7 @@ _适用于 v2.1.0 到 v2.1.9 和 v2.2.0 到 v2.2.3 版本_
 
 ### 1、创建节点
 
-开始创建支持 Windows 的自定义集群前，请先准备您的节点服务器。根据我们的[需求](/docs/rancher2/installation_new/requirements/_index)提供三个节点，两个 Linux 节点，一个 Windows 节点。您的节点可以是：
+开始创建支持 Windows 的自定义集群前，请先准备您的节点服务器。根据我们的[需求](/docs/rancher2/installation/requirements/_index)提供三个节点，两个 Linux 节点，一个 Windows 节点。您的节点可以是：
 
 - 云主机
 - 虚拟化平台中的虚拟机
@@ -61,7 +61,7 @@ _适用于 v2.1.0 到 v2.1.9 和 v2.2.0 到 v2.2.3 版本_
 
 #### 要求
 
-- 您可以在[安装指南](/docs/rancher2/installation_new/requirements/_index)中查看 Linux 和 Windows 节点的节点要求。
+- 您可以在[安装指南](/docs/rancher2/installation/requirements/_index)中查看 Linux 和 Windows 节点的节点要求。
 - 虚拟化或裸金属的节点都必须使用 2 层网络连接。
 - 为了支持[Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/ingress/)，您的集群必须包含至少一个专门用于 worker 角色的 Linux 节点。
 - 尽管我们推荐上表中只列出的三个节点的架构，但是您可以添加额外的 Linux 和 Windows 节点来扩展您的集群，来实现冗余。

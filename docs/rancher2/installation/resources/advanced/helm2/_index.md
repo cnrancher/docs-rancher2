@@ -47,25 +47,25 @@ keywords:
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl) - Kubernetes 命令行工具。
 - [rke](/docs/rke/installation/_index) - Rancher Kubernetes Engine, 构建 Kubernetes 集群的 cli 工具。
-- [helm](https://docs.helm.sh/using_helm/#installing-helm) - Kubernetes 包管理工具。可参考[Helm 版本要求](/docs/rancher2/installation_new/resources/helm-version/_index)来选择合适的 Helm 版本安装 Rancher。
+- [helm](https://docs.helm.sh/using_helm/#installing-helm) - Kubernetes 包管理工具。可参考[Helm 版本要求](/docs/rancher2/installation/resources/helm-version/_index)来选择合适的 Helm 版本安装 Rancher。
 
 ## 安装大纲
 
-- [创建节点和负载均衡](/docs/rancher2/installation_new/resources/advanced/helm2/create-nodes-lb/_index)
-- [使用 rke 安装 Kubernetes](/docs/rancher2/installation_new/resources/advanced/helm2/kubernetes-rke/_index)
-- [初始化 Helm (tiller)](/docs/rancher2/installation_new/resources/advanced/helm2/helm-init/_index)
-- [安装 Rancher](/docs/rancher2/installation_new/resources/advanced/helm2/helm-rancher/_index)
+- [创建节点和负载均衡](/docs/rancher2/installation/resources/advanced/helm2/create-nodes-lb/_index)
+- [使用 rke 安装 Kubernetes](/docs/rancher2/installation/resources/advanced/helm2/kubernetes-rke/_index)
+- [初始化 Helm (tiller)](/docs/rancher2/installation/resources/advanced/helm2/helm-init/_index)
+- [安装 Rancher](/docs/rancher2/installation/resources/advanced/helm2/helm-rancher/_index)
 
 ## 其他安装选项
 
-- [从 RKE Add-on 安装迁移到 Helm 安装](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/migrating-from-rke-add-on/_index)
+- [从 RKE Add-on 安装迁移到 Helm 安装](/docs/rancher2/installation/install-rancher-on-k8s/upgrades/migrating-from-rke-add-on/_index)
 
 ## 较早的安装方法
 
-[RKE add-on 安装](/docs/rancher2/installation_new/resources/advanced/helm2/rke-add-on/_index/)
+[RKE add-on 安装](/docs/rancher2/installation/resources/advanced/helm2/rke-add-on/_index/)
 
 > **重要: RKE add-on 安装方式仅支持到 Rancher v2.0.8**
 >
-> 请在 Kubernetes 集群中使用 Rancher Helm Chart 来安装 Rancher。更多内容，请参考[Rancher 高可用安装](/docs/rancher2/installation_new/resources/advanced/helm2/_index)。
+> 请在 Kubernetes 集群中使用 Rancher Helm Chart 来安装 Rancher。更多内容，请参考[Rancher 高可用安装](/docs/rancher2/installation/resources/advanced/helm2/_index)。
 >
-> 如果您当前正在使用 RKE add-on 安装方法，请参考[从 RKE Add-on 安装迁移到 Helm 安装](/docs/rancher2/installation_new/install-rancher-on-k8s/upgrades/migrating-from-rke-add-on/_index)。
+> 如果您当前正在使用 RKE add-on 安装方法，请参考[从 RKE Add-on 安装迁移到 Helm 安装](/docs/rancher2/installation/install-rancher-on-k8s/upgrades/migrating-from-rke-add-on/_index)。

@@ -202,7 +202,7 @@ Rancher 为集群扫描提供了一组告警。默认情况下，这些告警没
 - 定期集群扫描已完成
 - 定期集群扫描失败
 
-> **先决条件：**您需要在配置，发送或接收告警之前配置[通知](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/_index)。
+> **先决条件：**您需要在配置，发送或接收告警之前配置[通知](/docs/rancher2/cluster-admin/tools/cluster-alerts/_index)。
 
 要为 CIS 扫描结果激活现有告警，
 
@@ -224,11 +224,11 @@ Rancher 为集群扫描提供了一组告警。默认情况下，这些告警没
 1. 输入告警的名称。
 1. 在**是**字段中，设置在扫描完成或扫描失败时触发的告警。
 1. 在**发送**字段中，将告警级别设置为**严重**，**警告**或**信息**。
-1. 为告警选择一个[通知](/docs/rancher2/monitoring-alerting/2.0-2.4/notifiers/_index)。
+1. 为告警选择一个[通知](/docs/rancher2/cluster-admin/tools/notifiers/_index)。
 
 **结果：** 告警已创建并激活。当在集群上运行扫描并且满足报警条件时，将触发通知。
 
-有关告警的更多信息，请参考[本页](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/_index)。
+有关告警的更多信息，请参考[本页](/docs/rancher2/cluster-admin/tools/cluster-alerts/_index)。
 
 ## 删除报告
 

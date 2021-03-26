@@ -7,7 +7,7 @@ title: 问题排查
 - controller-manager（负责管理 vCenter 中的存储卷）
 - kubelet（负责将 vSphere 卷挂载到 pods）
 
-如果你的集群没有配置外部[集群日志](/docs/rancher2/logging/2.0.x-2.4.x/project-logging/_index)，你将需要通过 SSH 进入节点来获取 `kube-controller-manager`和 `kubelet`的日志。
+如果你的集群没有配置外部[集群日志](/docs/rancher2/project-admin/tools/project-logging/_index)，你将需要通过 SSH 进入节点来获取 `kube-controller-manager`和 `kubelet`的日志。
 
 使用 Rancher CLI 工具与节点创建 SSH 会话的是最简单方法。
 

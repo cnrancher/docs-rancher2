@@ -23,7 +23,7 @@ keywords:
 
 在接收告警之前，必须在 Rancher 中配置一个或多个通知接收者。
 
-创建集群时，Rancher 已经配置了一些内置的告警规则。为它们配置[接收者](/docs/rancher2/monitoring-alerting/2.0-2.4/notifiers/_index)后就能收到相应告警。
+创建集群时，Rancher 已经配置了一些内置的告警规则。为它们配置[接收者](/docs/rancher2/cluster-admin/tools/notifiers/_index)后就能收到相应告警。
 
 有关触发内置告警的详细信息，请参阅[内置告警](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-alerts/default-alerts/_index)。
 
@@ -36,7 +36,7 @@ keywords:
 
 ## Prometheus 表达式
 
-> **先决条件：** 监控必须被[启用](/docs/rancher2/cluster-admin/tools/monitoring/_index)，您才能使用自定义 Prometheus 查询或表达式触发告警。
+> **先决条件：** 监控必须被[启用](/docs/rancher2/cluster-admin/tools/cluster-monitoring/_index)，您才能使用自定义 Prometheus 查询或表达式触发告警。
 
 当您编辑告警规则时，您将有机会根据 Prometheus 表达式配置要触发的告警。有关表达式的示例，请参考[本页](/docs/rancher2/monitoring-alerting/2.0-2.4/cluster-monitoring/expression/_index)。
 
@@ -46,7 +46,7 @@ keywords:
 
 ## 告警层级
 
-告警包含集群级别和[项目级别](/docs/rancher2/project-admin/tools/alerts/_index)告警
+告警包含集群级别和[项目级别](/docs/rancher2/project-admin/tools/project-alerts/_index)告警
 
 在集群级别，Rancher 监控 Kubernetes 集群中的组件，并向您发送与以下内容有关的告警：
 
@@ -59,7 +59,7 @@ keywords:
 
 作为[集群所有者](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)，您可以配置 Rancher 向您发送有关集群事件的告警。
 
-> **前提：** 在收到集群告警之前，您必须[添加接收者](/docs/rancher2/monitoring-alerting/2.0-2.4/notifiers/_index)。
+> **前提：** 在收到集群告警之前，您必须[添加接收者](/docs/rancher2/cluster-admin/tools/notifiers/_index)。
 
 1. 从 **全局** 视图，进入您需要配置告警的集群。选择 **工具 > 告警**。然后单击 **添加告警组**。
 
@@ -188,7 +188,7 @@ keywords:
         - [**ETCD**](https://etcd.io/docs/v3.4.0/op-guide/monitoring/)
         - [**Kubernetes 组件**](https://github.com/kubernetes/metrics)
         - [**Kubernetes 资源**](https://github.com/kubernetes/kube-state-metrics)
-        - [**Fluentd**](https://docs.fluentd.org/v1.0/articles/monitoring-prometheus) ([日志](/docs/rancher2/logging/2.0.x-2.4.x/project-logging/_index)中用到的)
+        - [**Fluentd**](https://docs.fluentd.org/v1.0/articles/monitoring-prometheus) ([日志](/docs/rancher2/project-admin/tools/project-logging/_index)中用到的)
         - [**集群级别 Grafana**](https://grafana.com/docs/grafana/latest/administration/view-server/internal-metrics/#internal-grafana-metrics)
         - **集群级别 Prometheus**
 
@@ -221,7 +221,7 @@ keywords:
 
 1. 继续向该组添加更多的**告警规则**。
 
-1. 最后，选择[接收者](/docs/rancher2/monitoring-alerting/2.0-2.4/notifiers/_index)。
+1. 最后，选择[接收者](/docs/rancher2/cluster-admin/tools/notifiers/_index)。
 
    - 您可以设置多个接收者。
    - 您可以更改接收者的收件人。
