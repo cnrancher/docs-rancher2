@@ -317,4 +317,4 @@ docker run -d --privileged --volumes-from rancher-data \
 
 ## 回滚
 
-如果升级未成功完成，则可以将 Rancher Server 及其数据回滚到最后的正常状态。有关更多信息，请参阅[单节点回滚](/docs/rancher2/upgrades/rollbacks/single-node-rollbacks/_index)。
+如果升级未成功完成，则可以将 Rancher Server 及其数据回滚到最后的正常状态。有关更多信息，请参阅[单节点回滚](/docs/rancher2/installation/other-installation-methods/single-node-docker/single-node-rollbacks/_index)。

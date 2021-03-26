@@ -89,4 +89,4 @@ docker ps
    docker start <RANCHER_CONTAINER_NAME>
    ```
 
-1. 如果需要恢复数据，请访问[Rancher 单节点恢复](/docs/rancher2/backups/2.0-2.4/restorations/single-node-restoration/_index)。
+1. 如果需要恢复数据，请访问[Rancher 单节点恢复](/docs/rancher2/backups/backup/docker-backups/_index)。

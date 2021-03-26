@@ -44,7 +44,7 @@ Rancher 的部署可以有三种架构：使用 Helm CLI 进行高可用 Kuberne
 
 当 Kubernetes 集群中的节点正在运行并满足[节点要求](/docs/rancher2/installation/requirements/_index)时，您可以使用 Helm 将 Rancher 部署到 Kubernetes 上。Helm 使用 Rancher 的 Helm Chart 在 Kubernetes 集群的每个节点上安装 Rancher 的副本。我们建议使用负载均衡器将流量定向到集群中每个 Rancher 副本。
 
-有关 Rancher 部署架构的详细讨论，请参考[产品架构](/docs/rancher2/overview/architecture/_index)、[推荐架构](/docs/rancher2/overview/architecture-recommendations/_index)或[最佳实践指南](/docs/rancher2/best-practices/2.0-2.4/deployment-types/_index)。
+有关 Rancher 部署架构的详细讨论，请参考[产品架构](/docs/rancher2/overview/architecture/_index)、[推荐架构](/docs/rancher2/overview/architecture-recommendations/_index)或[最佳实践指南](/docs/rancher2/best-practices/deployment-types/_index)。
 
 ## 先决条件
 

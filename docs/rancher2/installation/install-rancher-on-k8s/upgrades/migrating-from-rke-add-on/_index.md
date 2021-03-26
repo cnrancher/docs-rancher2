@@ -69,7 +69,7 @@ kubectl -n cattle-system get secret cattle-keys-server -o jsonpath --template='{
 
 删除由 RKE 安装创建的 Kubernetes 对象。
 
-> **注意：** 删除这些 Kubernetes 组件不会影响 Rancher 的配置或数据库，但是在进行任何维护后，最好事先创建数据备份。有关详细信息，请参见[备份高可用 Rancher](/docs/rancher2/backups/2.0-2.4/ha-backups/_index)。
+> **注意：** 删除这些 Kubernetes 组件不会影响 Rancher 的配置或数据库，但是在进行任何维护后，最好事先创建数据备份。有关详细信息，请参见[备份高可用 Rancher](/docs/rancher2/backups/backup/ha-backups/_index)。
 
 ```
 kubectl -n cattle-system delete ingress cattle-ingress-http

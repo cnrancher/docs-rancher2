@@ -73,7 +73,7 @@ kubeconfig 也可以通过`--kubeconfig`标签来手动针对预定的集群，�
 
 对于 Rancher v2.5+，使用[备份应用程序](/docs/rancher2.5/backups/back-up-rancher/_index)来备份 Rancher。
 
-对于 Rancher v2.0-v2.4，使用[一次性快照](/docs/rancher2/backups/2.0-2.4/ha-backups/_index)进行备份。
+对于 Rancher v2.0-v2.4，使用[一次性快照](/docs/rancher2/backups/backup/ha-backups/_index)进行备份。
 运行 Rancher 服务器的 Kubernetes 集群的备份。
 
 如果在升级过程中出现问题，您将使用备份作为恢复点。
