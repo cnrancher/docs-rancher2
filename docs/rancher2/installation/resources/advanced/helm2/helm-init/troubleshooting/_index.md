@@ -35,4 +35,4 @@ helm version --server
 Error: could not find tiller
 ```
 
-当您确认已经删除 `tiller` 后，请按照 [Helm 初始化(安装 Tiller)](/docs/rancher2/installation_new/resources/advanced/helm2/helm-init/_index) 中提供的步骤，使用正确的 `ServiceAccount` 来安装 `tiller` 。
+当您确认已经删除 `tiller` 后，请按照 [Helm 初始化(安装 Tiller)](/docs/rancher2/installation/resources/advanced/helm2/helm-init/_index) 中提供的步骤，使用正确的 `ServiceAccount` 来安装 `tiller` 。

@@ -56,7 +56,7 @@ Logging Driver: json-file
 您可以在集群级别或项目级别配置日志收集范围。
 
 - 集群日志采集集群中所有 Pod 的日志，即包含所有项目。对于 [RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)，它还会收集所有 Kubernetes 系统组件的日志。
-- [项目级别的日志](/docs/rancher2/project-admin/tools/logging/_index)收集所有在这个项目下的 Pod 的日志。
+- [项目级别的日志](/docs/rancher2/project-admin/tools/project-logging/_index)收集所有在这个项目下的 Pod 的日志。
 
 发送到外部日志服务的日志来源于：
 
