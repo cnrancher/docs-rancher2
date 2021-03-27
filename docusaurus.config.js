@@ -8,6 +8,12 @@ module.exports = {
     url: "https://www.rancher.cn",
     favicon: "img/favicon.ico",
     themeConfig: {
+        algoliasearch: {
+            trackingID: "692a488c8d0d137240f1a940bde32441",
+            changefreq: "weekly",
+            priority: 0.5,
+            trailingSlash: false,
+        },
         hideableSidebar: true,
         prism: {
             defaultLanguage: "bash",
@@ -92,16 +98,6 @@ module.exports = {
             "0f45bd147dd3ea4b9961e463ce31780bd17ba486 - Mar 24, 2021",
     },
     plugins: [
-        "@docusaurus/plugin-baidu-analytics",
-        [
-            "@docusaurus/plugin-sitemap",
-            {
-                //cacheTime: 600 * 1000, // 600 sec - cache purge period
-                //`cacheTime` in sitemap config is deprecated.
-                changefreq: "weekly",
-                priority: 0.5,
-                trailingSlash: false,
-            },
-        ],
+        "@docusaurus/plugin-baidu-analytics"
     ],
 };
