@@ -164,31 +164,23 @@ When deploying Rancher into a Google Kubernetes Engine [private cluster](https:/
 > **注意：**
 > 在 Amazon EC2 或阿里云等云提供商中创建集群时，Rancher 会自动开放所需的端口。
 
-import PortsIaasNodes from '@theme/PortsIaasNodes';
 
-<PortsIaasNodes/>
 
 ### 自定义节点的端口要求
 
 下表描述了带有[自定义节点](/docs/rancher2/cluster-provisioning/rke-clusters/custom-nodes/_index)的[RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)的端口要求。
 
-import PortsCustomNodes from '@theme/PortsCustomNodes';
-
-<PortsCustomNodes/>
 
 ### 托管集群的端口要求
 
 下表描述了[托管集群](/docs/rancher2/cluster-provisioning/hosted-kubernetes-clusters/_index)的端口要求。
 
-import PortsImportedHosted from '@theme/PortsImportedHosted';
-
-<PortsImportedHosted/>
 
 ### 导入集群的端口要求
 
 下表描述了[导入集群](/docs/rancher2/cluster-provisioning/imported-clusters/_index)的端口要求。
 
-<PortsImportedHosted/>
+
 
 ## 其他端口注意事项
 
