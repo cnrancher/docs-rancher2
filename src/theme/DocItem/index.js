@@ -20,32 +20,32 @@ const LINK_CLASS_NAME = 'contents__link';
 const ACTIVE_LINK_CLASS_NAME = 'contents__link--active';
 const TOP_OFFSET = 100;
 
-function DocTOC({ toc }) {
+function DocTOC({ headings }) {
   useTOCHighlight(LINK_CLASS_NAME, ACTIVE_LINK_CLASS_NAME, TOP_OFFSET);
   return (
     <div className="col col--3">
       <div className={styles.tableOfContents}>
-        <Headings toc={toc} />
+        <Headings headings={headings} />
       </div>
     </div>
   );
 }
 
 /* eslint-disable jsx-a11y/control-has-associated-label */
-function Headings({ toc, isChild }) {
-  if (!toc.length) {
+function Headings({ headings, isChild }) {
+  if (!headings.length) {
     return null;
   }
   return (
     <ul className={isChild ? '' : 'contents contents__left-border'}>
-      {toc.map(heading => (
+      {headings.map(heading => (
         <li key={heading.id}>
           <a
             href={`#${heading.id}`}
             className={LINK_CLASS_NAME}
             dangerouslySetInnerHTML={{ __html: heading.value }}
           />
-          <Headings isChild toc={heading.children} />
+          <Headings isChild headings={heading.children} />
         </li>
       ))}
     </ul>
@@ -198,8 +198,8 @@ function DocItem(props) {
                 </div>
               </div>
             </div>
-            {!hideTableOfContents && DocContent.toc && (
-              <DocTOC toc={DocContent.toc} />
+            {!hideTableOfContents && DocContent.rightToc && (
+              <DocTOC headings={DocContent.rightToc} />
             )}
           </div>
         </div>
