@@ -96,7 +96,8 @@ module.exports = {
         [
             "@docusaurus/plugin-sitemap",
             {
-                cacheTime: 600 * 1000, // 600 sec - cache purge period
+                //cacheTime: 600 * 1000, // 600 sec - cache purge period
+                //`cacheTime` in sitemap config is deprecated.
                 changefreq: "weekly",
                 priority: 0.5,
                 trailingSlash: false,
