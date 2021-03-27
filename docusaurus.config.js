@@ -8,16 +8,21 @@ module.exports = {
     url: "https://www.rancher.cn",
     favicon: "img/favicon.ico",
     themeConfig: {
+        hideableSidebar: true,
+        prism: {
+            defaultLanguage: "bash",
+        },
         baiduAnalytics: {
             trackingID: "692a488c8d0d137240f1a940bde32441",
         },
         navbar: {
+            hideOnScroll: true,
             title: "Rancher",
             logo: {
                 alt: "Rancher Logo",
                 src: "img/rancher-logo-cow-white.svg",
             },
-            links: [
+            items: [
                 {
                     href: "https://docs.rancher.cn/",
                     label: "文档中心",
