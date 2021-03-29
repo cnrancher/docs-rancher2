@@ -628,6 +628,7 @@ module.exports = {
                             "rancher2/cluster-admin/tools/cluster-monitoring/expression/_index",
                             "rancher2/cluster-admin/tools/cluster-monitoring/prometheus/_index",
                             "rancher2/cluster-admin/tools/cluster-monitoring/viewing-metrics/_index",
+                            "rancher2/cluster-admin/tools/cluster-monitoring/project-monitoring/_index",
                         ],
                     },
                     {

@@ -22,7 +22,6 @@ module.exports = {
             trackingID: "692a488c8d0d137240f1a940bde32441",
         },
         navbar: {
-            hideOnScroll: true,
             title: "Rancher",
             logo: {
                 alt: "Rancher Logo",
