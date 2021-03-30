@@ -137,7 +137,7 @@ autok3s -d join --provider alibaba --name myk3s --worker 1
 
 _此模式正在开发中_
 
-在这种模式下，您可以将 AutokK3s 放入[Rancher](https://github.com/rancher/rancher)。
+在这种模式下，您可以将 AutoK3s 放入[Rancher](https://github.com/rancher/rancher)。
 它将作为 Rancher 的扩展，使您可以构建一套托管 K3s 服务。
 
 AutoK3s 创建的 K3s 集群可以自动导入 Rancher，并充分利用 Rancher 的 Kubernetes 管理功能。
