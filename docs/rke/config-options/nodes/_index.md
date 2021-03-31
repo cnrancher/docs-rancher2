@@ -70,7 +70,7 @@ nodes:
 
 ### Controlplane
 
-通过这个角色，用于部署 Kubernetes 的无状态组件将在这些节点上运行。这些组件用于运行 API 服务器、调度器和控制器。在节点上设置的污点](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)与**controlplane**角色如下图所示。
+通过这个角色，用于部署 Kubernetes 的无状态组件将在这些节点上运行。这些组件用于运行 API 服务器、调度器和控制器。[在节点上设置的污点](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)与**controlplane**角色如下图所示。
 
 | Taint Key                              | Taint Value | Taint Effect |
 | -------------------------------------- | ----------- | ------------ |
