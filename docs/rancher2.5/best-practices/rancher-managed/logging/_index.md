@@ -45,7 +45,7 @@ Rancher 日志使用的是 Banzai Cloud logging operator。我们提供了这个
 
 _ClusterFlows_ 可以收集 Kubernetes 集群中所有主机上所有容器的日志。在这些容器是 Kubernetes pod 的一部分的情况下，这很好用；但是，RKE 容器存在于 Kubernetes 的范围之外。
 
-目前(从 v2.5.1 开始)，Rancher 会 📱RKE 容器的日志，但不能轻易过滤。这是因为这些日志不包含源容器的信息（如`etcd`或`kube-apiserver`）。
+目前(从 v2.5.1 开始)，Rancher 会搜集 RKE 容器的日志，但不能轻易过滤。这是因为这些日志不包含源容器的信息（如`etcd`或`kube-apiserver`）。
 
 Rancher 的未来版本将包含源容器名称，这将使这些组件日志的过滤成为可能。进行更改后，您将能够自定义 _ClusterFlow_ 以**仅**检索 Kubernetes 组件日志，并将它们引导到一个适当的输出。
 
