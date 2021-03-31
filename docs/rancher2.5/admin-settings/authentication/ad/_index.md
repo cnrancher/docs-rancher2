@@ -62,7 +62,7 @@ Rancher 使用 LDAP 与 Active Directory 服务器通信。因此，Active Direc
 | 服务器连接超时 | Rancher 在认为无法访问 AD 服务器之前等待的持续时间(秒)。                                                                                                                                                                                                             |
 | 服务帐户用户名 | 输入对域分区具有只读访问权限的 AD 帐户的用户名。请参阅[先决条件](#先决条件)。用户名可以用 NetBIOS 格式（例如“DOMAIN\serviceaccount”）或 UPN 格式（例如“serviceaccount@domain.com”）输入。                                                                            |
 | 服务帐户密码   | 服务帐户的密码。                                                                                                                                                                                                                                                     |
-| 默认登录域     | 当您使用 AD 域的 NetBIOS 名称配置此字段时，当绑定到 AD 服务器时，在没有域的情况下输入的用户名(例如“jdoe”)将自动转换为斜杠的 NetBIOS 登录（例如，“LOGIN_DOMAIN\jdoe”）。如果您的用户以 UPN（例如，“jdoe@acme.com”）作为用户名进行身份验证，则此字段**必**须保留为空。 |
+| 默认登录域     | 当您使用 AD 域的 NetBIOS 名称配置此字段时，当绑定到 AD 服务器时，在没有域的情况下输入的用户名(例如“jdoe”)将自动转换为斜杠的 NetBIOS 登录（例如，“LOGIN_DOMAIN\jdoe”）。如果您的用户以 UPN（例如，`jdoe@acme.com`）作为用户名进行身份验证，则此字段**必**须保留为空。 |
 | 用户搜索起点   | 目录树中开始搜索用户对象的节点的可分辨名称。所有用户都必须是此基本 DN 的后代。例如：“ou=people,dc=acme,dc=com”                                                                                                                                                       |
 | 组搜索起点     | 如果组位于`用户搜索起点`下配置的节点之外的其他节点下，则需要在此处提供可分辨名称。否则将其留空。例如：“ou=groups,dc=acme,dc=com”                                                                                                                                     |
 
