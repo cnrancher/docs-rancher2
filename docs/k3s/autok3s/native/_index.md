@@ -1,6 +1,6 @@
 ---
 title: 创建Native集群
-description: 本文介绍了如何在 AWS EC2 中创建和初始化 K3s 集群，以及为已有的 K3s 集群添加节点的操作步骤。除此之外，本文还提供了在 AWS EC2 上运行 AutoK3s 的进阶操作指导，如配置私有镜像仓库、、启用 AWS CCM 和启用 UI 组件。
+description: 本文介绍了如何在其他 VM 中创建和初始化 K3s 集群，以及为已有的 K3s 集群添加节点的操作步骤。
 keywords:
   - k3s中文文档
   - k3s 中文文档
@@ -25,9 +25,9 @@ keywords:
 
 提供一个运行主流操作系统（如 **Ubuntu、Debian、Raspbian** 等）的 VM，并为它们注册或设置`SSH密钥/密码`。
 
-### 设置安全组
+### 网络
 
-VM 实例**至少**需要应用以下安全组规则：
+VM 实例**至少**需要应用以下入站及出站规则：
 
 ```bash
 Rule        Protocol    Port      Source             Description
@@ -40,21 +40,99 @@ InBound     TCP         2379,2380 K3s server nodes   (Optional) Required only fo
 OutBound    ALL         ALL       ALL                Allow All
 ```
 
-## 创建集群
+## UI 使用说明
 
-请使用`autok3s create`命令在 VM 实例中创建集群。
+接下来我们将基于 AutoK3s 本地 UI 介绍如何使用 AutoK3s 工具，在任意主机上创建和管理 K3s 集群。如果您想了解 CLI 的使用，请移步到 [CLI 使用说明](#cli-使用说明)
+
+您可以通过[快速体验](/docs/k3s/autok3s/_index#快速体验)中的描述，通过 Docker 或者 CLI 启动本地 UI，打开浏览器，访问目标端口 `8080` 即可。
+
+### 自定义参数创建
+
+您可以在集群列表页点击 **Create** 按钮进入自定义参数页面进行更多参数的设置。
+
+使用 Native 模式创建 K3s 集群的自定义参数配置分为三项，VM 配置、K3s集群配置、高级选项。接下来对每个配置项进行详细说明。
+
+#### VM 配置
+
+实例配置主要配置的内容为 VM 的连接信息。
+
+![](/img/k3s/custom-create-cluster-instance-native.png)
+
+**表 3：实例配置参数**
+
+| 参数 | 说明 | 默认值
+| :------------- | :----------------------- |:------------- 
+| Master IPs | Master 主机 IP 列表 | 
+| Worker IPs | Worker 主机 IP 列表 |
+| SSH User | SSH 用户 | `root`
+| SSH Port | SSH 端口 | `22`
+| SSH Key Path | SSH 私钥目录 | `~/.ssh/id_rsa`
+| SSH Key Passphrase | 如果您的私钥需要密码验证，请在这里输入密码 |
+| SSH Password | 如果您使用Password连接到虚拟机，请输入密码 |
+| SSH Agent Auth | 如果您配置 SSH 代理程序，可以开启此项配置 | false
+| SSH Cert Path | 如果您配置了 ssh certificate，在这里您需要将 certificate path 传入进来，以保证 AutoK3s 可以通过ssh连接到远程虚拟机 |
+
+#### K3s 参数配置
+
+K3s 参数配置项主要对 K3s 集群进行设置，例如是否部署 HA 模式、K3s 安装版本等。
+
+![](/img/k3s/custom-create-cluster-k3s-native.png)
+
+**表 4：K3s 配置参数**
+
+| 参数 | 说明 | 默认值
+| :------------- | :------------------ |:------------- 
+| K3s Channel | 用于获取 K3s 下载 URL 的通道。选项包括：`stable`, `latest`, `testing`。 | `stable`
+| K3s Version | 安装的 K3s 版本，如果设置则覆盖 Channel 选项 |
+| Cluster | 启用嵌入式 DB 高可用 K3s（即开启 `--cluster-init` 设置） | false
+| Datastore | 指定 etcd、Mysql、Postgres 或 Sqlite（默认）数据源名称 |
+| Master Extra Args | Master 节点额外参数设置，例如 `--no-deploy traefik` |
+| Worker Extra Args | Worker 节点额外参数设置，例如 `--node-taint key=value:NoExecute` |
+| IP | K3s server IP，用于加入已有集群 |
+| Token | 用于将server或agent加入集群的共享secret，如果不设置，会自动生成一个Token |
+| Registry | 私有镜像仓库配置 |
+
+#### 高级选项
+
+配置是否开启 UI（kubernetes-dashboard）。
+
+![](/img/k3s/custom-create-cluster-additional-native.png)
+
+**表 4：高级选项**
+
+| 参数 | 说明 | 默认值
+| :------------- | :------------------- |:------------- 
+| UI | 是否部署 Kubernetes Dashboard | false
+
+### 集群模板
+
+Native 模式不支持集群模板功能。
+
+### 集群管理
+
+Native 模式不支持集群列表管理功能，但您可以使用 Kubectl 功能操作和管理集群资源。
+
+#### Kubectl
+
+如果您想操作 K3s 集群数据，可以点击右上角 **Launch Kubectl** 按钮，在下拉框中选择要操作的集群后，便可以在 UI 控制台操作选中的集群了。
+
+![](/img/k3s/launch-kubectl.png)
+
+## CLI 使用说明
+
+更多参数请运行`autok3s <sub-command> --provider native --help`命令。
 
 ### 创建普通集群
 
-运行以下命令，在 VM 上创建并启动创建一个名为 “myk3s”的集群，并为该集群配置 2 个 master 节点和 2 个 worker 节点。
+运行以下命令，在 VM 上创建并启动创建一个名为 “myk3s”的集群，并为该集群配置 1 个 master 节点和 1 个 worker 节点。
 
 ```bash
 autok3s -d create \
     --provider native \
     --name myk3s \
     --ssh-key-path <ssh-key-path> \
-    --master-ips <master-ip-1,master-ip-2> \
-    --worker-ips <worker-ip-1,worker-ip-2>
+    --master-ips <master-ip-1> \
+    --worker-ips <worker-ip-1>
 ```
 
 ### 创建高可用 K3s 集群
@@ -94,11 +172,11 @@ autok3s -d create \
     --datastore "mysql://<user>:<password>@tcp(<ip>:<port>)/<db>"
 ```
 
-## 添加 K3s 节点
+### 添加 K3s 节点
 
 请使用`autok3s join`命令为已有集群添加 K3s 节点。
 
-### 普通集群
+#### 普通集群
 
 运行以下命令，为“myk3s”集群添加 2 个 worker 节点。
 
@@ -111,11 +189,11 @@ autok3s -d join \
     --worker-ips <worker-ip-2,worker-ip-3>
 ```
 
-### 高可用 K3s 集群
+#### 高可用 K3s 集群
 
 添加 K3s 节点的命令分为两种，取决于您选择使用的是内置的 etcd 还是外部数据库。
 
-#### 嵌入式 etcd
+##### 嵌入式 etcd
 
 运行以下命令，为高可用集群（嵌入式 etcd: k3s 版本 >= 1.19.1-k3s1）“myk3s”集群添加 2 个 master 节点。
 
@@ -128,7 +206,7 @@ autok3s -d join \
     --master-ips <master-ip-2,master-ip-3>
 ```
 
-#### 外部数据库
+##### 外部数据库
 
 运行以下命令，为高可用集群（外部数据库）“myk3s”集群添加 2 个 master 节点。值得注意的是，添加节点时需要指定参数`--datastore`，提供外部数据库的存储路径。
 
@@ -142,7 +220,7 @@ autok3s -d join \
     --datastore "mysql://<user>:<password>@tcp(<ip>:<port>)/<db>"
 ```
 
-## Kubectl
+### Kubectl
 
 群创建完成后，`autok3s` 会自动合并 `kubeconfig` 文件。
 
@@ -158,15 +236,11 @@ autok3s kubectl config get-contexts
 autok3s kubectl config use-context <context>
 ```
 
-## 其他功能
-
-更多参数请运行`autok3s <sub-command> --provider native --help`命令。
-
-## 进阶使用
+### 进阶使用
 
 AutoK3s 集成了一些与当前 provider 有关的高级组件，例如私有镜像仓库和 UI。
 
-### 配置私有镜像仓库
+#### 配置私有镜像仓库
 
 在运行`autok3s create`或`autok3s join`时，通过传递`--registry /etc/autok3s/registries.yaml`参数以使用私有镜像仓库，例如：
 
@@ -198,7 +272,7 @@ configs:
       ca_file:   # path to the ca file used in the registry
 ```
 
-### 启用 UI 组件
+#### 启用 UI 组件
 
 该参数会启用 [kubernetes/dashboard](https://github.com/kubernetes/dashboard) 图形界面。
 访问 Token 等设置请参考 [此文档](https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md) 。
