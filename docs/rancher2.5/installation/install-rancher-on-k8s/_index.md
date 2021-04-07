@@ -14,21 +14,35 @@ keywords:
   - 高可用安装指南
   - 安装 Rancher
 ---
-
 ## 先决条件
+### Kubernetes集群
 
-设置 Rancher 服务器的本地 Kubernetes 集群。
+设置Rancher服务器的本地Kubernetes集群。
 
-集群要求取决于 Rancher 版本。
+Rancher可以安装在任何Kubernetes集群上。这个集群可以使用上游Kubernetes，也可以使用Rancher的Kubernetes发行版之一，也可以是来自Amazon EKS等提供商的托管Kubernetes集群。
 
-- **从 Rancher v2.5 开始，** Rancher 可以安装在任何 Kubernetes 集群上。这个集群可以使用上游 Kubernetes，也可以使用 Rancher 的 Kubernetes 发行版之一，也可以是来自 Amazon EKS 等提供商的托管 Kubernetes 集群。
-  > **注意：**要在托管的 Kubernetes 集群（如 EKS、GKE 或 AKS）上部署 Rancher v2.5，应该先部署一个兼容的 Ingress 控制器来配置[Rancher 上的 SSL 终止。](/docs/rancher2.5/installation/install-rancher-on-k8s/_index)。
-- 在 Rancher v2.4.x 中，Rancher 需要安装在 K3s Kubernetes 集群或 RKE Kubernetes 集群上。
-- 在 Rancher v2.4 之前，Rancher 需要安装在 RKE Kubernetes 集群上。
+对于设置Kubernetes集群的帮助，我们提供这些教程：
+- RKE：有关安装 RKE Kubernetes 集群的教程，请参考[本页](/docs/rancher2.5/installation/resources/k8s-tutorials/ha-rke/_index)有关为高可用性 RKE 集群设置基础设施的帮助，请参考[本页](/docs/rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha/_index)。
+- K3s：安装 K3s Kubernetes 集群的教程，请参考[本页面](/docs/rancher2.5/installation/resources/k8s-tutorials/ha-with-external-db/_index)。如需帮助设置高可用性 K3s 集群的基础架构，请参考[本页](/docs/rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha-with-external-db/_index)
+- Amazon EKS： 在EKS上安装Kubernetes 集群的教程，请参考[本页面](/docs/rancher2.5/installation/install-rancher-on-k8s/amazon-eks/_index)。
+- RKE2：在RKE2安装Kubernetes 集群的教程，请参考[本页面](https://rancher.com/docs/rancher/v2.5/en/installation/install-rancher-on-k8s/amazon-eks/)。如需帮助设置高可用性 K3s 集群的基础架构，请参考[本页](https://rancher.com/docs/rancher/v2.5/en/installation/resources/k8s-tutorials/ha-rke2/)。
+### CLI
+以下 CLI 工具是创建 Kubernetes 集群所必需的。请确保这些工具已安装并在您的`$PATH`中可用。
 
-有关安装 RKE Kubernetes 集群的教程，请参考[本页](/docs/rancher2.5/installation/resources/k8s-tutorials/ha-rke/_index)有关为高可用性 RKE 集群设置基础设施的帮助，请参考[本页](/docs/rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha/_index)。
+请查看 [Helm 项目提供的安装指南](https://helm.sh/docs/intro/install/)，来在您的平台上进行安装。
 
-安装 K3s Kubernetes 集群的教程，请参考[本页面](/docs/rancher2.5/installation/resources/k8s-tutorials/ha-with-external-db/_index) 如需帮助设置高可用性 K3s 集群的基础架构，请参考[本页](/docs/rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha-with-external-db/_index)
+- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl) - Kubernetes 命令行工具。
+- [helm](https://docs.helm.sh/using_helm/#installing-helm) - Kubernetes 的软件包管理工具。请参阅 [Helm 版本要求](/docs/rancher2.5/installation/resources/helm-version/_index)以选择要安装 Rancher 的 Helm 版本。
+
+:::note 提示
+国内用户，可以导航到 http://mirror.cnrancher.com 下载所需资源
+:::
+### Ingress Controller
+_适用于托管在云厂商上的集群_
+
+要在托管的Kubernetes集群（如EKS、GKE或AKS）上部署Rancher v2.5+，应先部署一个兼容的Ingress控制器，在Rancher上配置SSL终止。
+
+For more information about deploying Rancher on EKS, refer to this page.
 
 ## 安装 Rancher Helm Chart
 
@@ -46,20 +60,10 @@ Rancher 使用 Kubernetes 的 Helm 软件包管理器安装。Helm Charts 为 Ku
 本安装指南假定您使用的是 Helm3。有关从 Helm 2 迁移到 Helm 3 的方法，请参阅官方的[Helm 2 到 3 迁移文档](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/)。这个[指南](/docs/rancher2.5/installation/resources/helm-version/_index)提供了使用 Helm 2 在 RKE Kubernetes 集群上安装 Rancher 的较旧的安装指南，适用于无法升级到 Helm 3 的情况。
 :::
 
-## 1、安装需要的 CLI 工具
 
-以下 CLI 工具是创建 Kubernetes 集群所必需的。请确保这些工具已安装并在您的`$PATH`中可用。
 
-请查看 [Helm 项目提供的安装指南](https://helm.sh/docs/intro/install/)，来在您的平台上进行安装。
 
-- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl) - Kubernetes 命令行工具。
-- [helm](https://docs.helm.sh/using_helm/#installing-helm) - Kubernetes 的软件包管理工具。请参阅 [Helm 版本要求](/docs/rancher2.5/installation/resources/helm-version/_index)以选择要安装 Rancher 的 Helm 版本。
-
-:::note 提示
-国内用户，可以导航到 http://mirror.cnrancher.com 下载所需资源
-:::
-
-## 2、添加 Helm Chart 仓库
+## 1. 添加 Helm Chart 仓库
 
 使用`helm repo add`命令添加含有 Rancher Chart 的 Helm Chart 仓库。
 
@@ -82,7 +86,7 @@ helm repo add rancher-<CHART_REPO> http://rancher-mirror.oss-cn-beijing.aliyuncs
 
 :::
 
-## 3、为 Rancher 创建 Namespace
+## 2. 为 Rancher 创建 Namespace
 
 我们需要定义一个 Kubernetes Namespace，在 Namespace 中安装由 Chart 创建的资源。这个命名空间的名称为`cattle-system`：
 
@@ -90,7 +94,7 @@ helm repo add rancher-<CHART_REPO> http://rancher-mirror.oss-cn-beijing.aliyuncs
 kubectl create namespace cattle-system
 ```
 
-## 4、选择您的 SSL 选项
+## 3. 选择您的 SSL 选项
 
 Rancher Server 默认需要 SSL/TLS 配置来保证访问的安全性。
 
@@ -112,7 +116,7 @@ Rancher Server 默认需要 SSL/TLS 配置来保证访问的安全性。
 Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress.tls.source=secret` 这种方式，从而减少对 cert-manager 的运维成本。
 :::
 
-## 5、安装 cert-manager
+## 4. 安装 cert-manager
 
 :::note 提示
 如果您使用自己的证书文件 `ingress.tls.source=secret`或者[使用外部 TLS 负载均衡器](/docs/rancher2.5/installation/resources/chart-options/_index)可以跳过此步骤。
@@ -166,7 +170,7 @@ cert-manager-cainjector-577f6d9fd7-tr77l 1/1 Running 0 2m
 cert-manager-webhook-787858fcdb-nlzsq 1/1 Running 0 2m
 ```
 
-## 6、根据您选择的 SSL 选项，通过 Helm 安装 Rancher
+## 5. 根据您选择的 SSL 选项，通过 Helm 安装 Rancher
 
 ### 方式 A：使用 Rancher 生成的自签名证书
 
@@ -276,7 +280,7 @@ Rancher Chart 有许多自定义安装选项以适应特定的环境。以下是
 
 有关选项的完整列表，请参见[Chart 选项](/docs/rancher2.5/installation/resources/chart-options/_index)。
 
-## 7、验证 Rancher Server 是否已成功部署
+## 6. 验证 Rancher Server 是否已成功部署
 
 检查 Rancher Server 是否运行成功：
 
@@ -296,7 +300,7 @@ rancher 3 3 3 3 3m
 
 `DESIRED`和`AVAILABLE`应该显示相同的个数。
 
-## 8、保存您的选项
+## 7. 保存您的选项
 
 请保存您使用的全部`--set`选项。使用 Helm 升级 Rancher 到新版本时，您将需要使用相同的选项。
 
