@@ -110,6 +110,7 @@ module.exports = {
                         ],
                     },
                     "rancher2/installation/install-rancher-on-k8s/rollbacks/_index",
+                    "rancher2/installation/install-rancher-on-k8s/amazon-eks/_index",
                 ],
             },
             {
@@ -1001,6 +1002,7 @@ module.exports = {
                     "rancher2.5/installation/install-rancher-on-k8s/chart-options/_index",
                     "rancher2.5/installation/install-rancher-on-k8s/upgrades/_index",
                     "rancher2.5/installation/install-rancher-on-k8s/rollbacks/_index",
+                    "rancher2.5/installation/install-rancher-on-k8s/amazon-eks/_index",
                 ],
             },
             {

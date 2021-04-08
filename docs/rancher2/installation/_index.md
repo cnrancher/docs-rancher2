@@ -16,11 +16,15 @@ title: 安装介绍
 
 ## 安装选项概述
 
-Rancher 的部署可以有三种架构：使用 Helm CLI 进行高可用 Kubernetes 安装、使用 RancherD 进行高可用 Kubernetes 安装或使用 Kubernetes 进行单节点安装
+Rancher 的部署有以下几种架构：使用 Helm CLI 进行高可用 Kubernetes 安装和使用 Kubernetes 进行单节点安装或使用Amazon EKS进行安装。
 
 ### 使用 Helm CLI 进行高可用 Kubernetes 安装
 
 我们建议使用 Kubernetes 程序包管理器 [Helm](/docs/rancher2/overview/concepts/_index) 在专用的 Kubernetes 集群上安装 Rancher。在 RKE 集群中，需要使用三个节点以实现高可用性。在 K3s 集群中，仅需要两个节点即可。
+
+### 使用Amazon EKS进行安装
+
+Rancher和Amazon合作制定了一份快速入门指南，用于在EKS Kubernetes集群上按照AWS最佳实践部署Rancher。详情请参考[Rancher on the AWS Cloud](https://aws-quickstart.github.io/quickstart-eks-rancher/)。
 
 ### 使用 Kubernetes 进行单节点安装
 

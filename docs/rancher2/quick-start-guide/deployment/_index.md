@@ -18,6 +18,16 @@ keywords:
 
 使用以下指南之一在您选择的供应商中部署和配置 Rancher 和 Kubernetes 集群。
 
+## 在Amazon EKS上部署Rancher
+
+Rancher和AWS合作制定了一份快速入门指南，用于在EKS Kubernetes集群上按照AWS最佳实践部署Rancher。详情请参考[部署指南](https://aws-quickstart.github.io/quickstart-eks-rancher/)。
+
+## 在虚拟机上安装Rancher
+
+以下指南使用自动化工具在虚拟机上部署Rancher服务器。
+
+这些指南并没有将Rancher部署在单独的Kubernetes集群上，这是Rancher服务器**需要管理下游Kubernetes集群**的情况下的最佳实践。
+
 - [在 AWS 上快速部署](/docs/rancher2/quick-start-guide/deployment/amazon-aws-qs/_index)（使用 Terraform）
 - [在 DigitalOcean 上快速部署 ](/docs/rancher2/quick-start-guide/deployment/digital-ocean-qs/_index)（使用 Terraform）
 - [在 Azure 上快速部署 ](/docs/rancher2/quick-start-guide/deployment/microsoft-azure-qs/_index)（使用 Terraform）
