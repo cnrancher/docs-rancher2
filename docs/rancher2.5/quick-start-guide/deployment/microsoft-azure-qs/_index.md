@@ -70,7 +70,7 @@ keywords:
 
 1. 将以上输出中的`rancher_server_url`粘贴到浏览器中。在登录页面中登录（默认用户名为`admin`，密码为在`rancher_server_admin_password`中设置的密码）。
 
-1. 使用 `quickstart/azure`中生成的 `id_rsa` 密钥对Rancher服务器进行ssh。
+1. 使用 `quickstart/azure`中生成的 `id_rsa` 密钥对 Rancher 服务器进行 ssh。
 
 **结果：**两个 Kubernetes 集群已部署到您的 Azure 帐户中，一个正在运行 Rancher Server，另一个可以用来部署您的实验应用。
 
