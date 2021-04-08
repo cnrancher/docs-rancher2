@@ -15,58 +15,54 @@ keywords:
   - 高可用安装指南
   - 在 Amazon EKS 上安装 Rancher
 ---
+
 ## 概述
 
 本文介绍了在 EKS 上安装 Rancher 的两种方法。
 
-第一种方法是使用CloudFormation在EKS集群上部署Rancher服务器的指南。本指南是与Amazon Web Services合作创建的，旨在展示如何按照最佳实践部署Rancher。
+第一种方法是使用 CloudFormation 在 EKS 集群上部署 Rancher 服务器的指南。本指南是与 Amazon Web Services 合作创建的，旨在展示如何按照最佳实践部署 Rancher。
 
+第二种方法是使用命令行工具安装带有入口的 EKS 集群的指南。如果您想在 EKS 上试用 Rancher 时使用较少的资源，请使用这种方式部署 Rancher。
 
-第二种方法是使用命令行工具安装带有入口的 EKS 集群的指南。如果您想在 EKS 上试用 Rancher 时使用较少的资源，请使用这种方式部署Rancher。
+如果您已经有一个 EKS Kubernetes 集群，请跳转到[5. 安装 Ingress](#安装Ingress)章节。然后按照[高可用安装指南](/docs/rancher2.5/installation/install-rancher-on-k8s/_index#安装-Rancher-Helm-Chart)上的说明安装 Rancher Helm Chart。
 
+## 使用 AWS 最佳实践自动快速启动
 
-如果您已经有一个EKS Kubernetes集群，请跳转到[5. 安装Ingress](#安装Ingress)章节。然后按照[高可用安装指南](/docs/rancher2.5/installation/install-rancher-on-k8s/_index#安装-Rancher-Helm-Chart)上的说明安装Rancher Helm Chart。
-
-
-## 使用AWS最佳实践自动快速启动
-
-
-Rancher和AWS合作编写了一份快速入门指南，用于按照AWS最佳实践在EKS集群上部署Rancher，详情请参考[部署指南](https://aws-quickstart.github.io/quickstart-eks-rancher/)。
+Rancher 和 AWS 合作编写了一份快速入门指南，用于按照 AWS 最佳实践在 EKS 集群上部署 Rancher，详情请参考[部署指南](https://aws-quickstart.github.io/quickstart-eks-rancher/)。
 
 快速入门指南提供了在 EKS 上部署 Rancher 的三个选项。
 
-- **将Rancher部署到新的VPC和新的Amazon EKS集群中**：该选项构建了一个由VPC、子网、NAT网关、安全组、堡垒主机、Amazon EKS集群和其他基础设施组件组成的全新AWS环境。然后将Rancher部署到这个新的EKS集群中。
+- **将 Rancher 部署到新的 VPC 和新的 Amazon EKS 集群中**：该选项构建了一个由 VPC、子网、NAT 网关、安全组、堡垒主机、Amazon EKS 集群和其他基础设施组件组成的全新 AWS 环境。然后将 Rancher 部署到这个新的 EKS 集群中。
 - **将 Rancher 部署到现有 VPC 和新的 Amazon EKS 群集中**：此选项在现有 AWS 基础架构中提供 Rancher。
-- **将Rancher部署到现有的VPC和现有的Amazon EKS集群中**：此选项可在您现有的 AWS 基础架构中提供 Rancher。
-
+- **将 Rancher 部署到现有的 VPC 和现有的 Amazon EKS 集群中**：此选项可在您现有的 AWS 基础架构中提供 Rancher。
 
 使用默认参数为新的虚拟私有云 (VPC) 和新的 Amazon EKS 群集部署此快速入门，可在 AWS 云中构建以下 Rancher 环境。
 
-- 跨越三个可用区的高可用架构。*
-- 根据AWS最佳实践，配置了公共和私有子网的VPC，为您提供AWS上自己的虚拟网络。*
+- 跨越三个可用区的高可用架构。\*
+- 根据 AWS 最佳实践，配置了公共和私有子网的 VPC，为您提供 AWS 上自己的虚拟网络。\*
 - 公共子网
-  - 在公共子网中： 管理网络地址转换（NAT）网关，以允许资源的外向互联网访问。*
-  - 自动扩展组中的 Linux 堡垒主机，允许对公共和私有子网中的 Amazon Elastic Compute Cloud (Amazon EC2) 实例进行入站安全 Shell (SSH) 访问。*
+  - 在公共子网中： 管理网络地址转换（NAT）网关，以允许资源的外向互联网访问。\*
+  - 自动扩展组中的 Linux 堡垒主机，允许对公共和私有子网中的 Amazon Elastic Compute Cloud (Amazon EC2) 实例进行入站安全 Shell (SSH) 访问。\*
 - 私有子网中
-  - 自动扩展组中的Kubernetes节点。*
-  - 网络负载均衡器（未显示），用于访问Rancher控制台。
-- 使用AWS Systems Manager自动化进行Rancher部署。
-- 用于EKS集群的Amazon EKS服务，它提供了Kubernetes controlplane一个用于访问Rancher控制台的Amazon Route 53 DNS记录（未显示）。*
-- 用于访问Rancher部署的Amazon Route 53 DNS记录。
+  - 自动扩展组中的 Kubernetes 节点。\*
+  - 网络负载均衡器（未显示），用于访问 Rancher 控制台。
+- 使用 AWS Systems Manager 自动化进行 Rancher 部署。
+- 用于 EKS 集群的 Amazon EKS 服务，它提供了 Kubernetes controlplane 一个用于访问 Rancher 控制台的 Amazon Route 53 DNS 记录（未显示）。\*
+- 用于访问 Rancher 部署的 Amazon Route 53 DNS 记录。
 
 :::note 说明
-将快速启动部署到现有亚马逊 EKS 群集中的 CloudForm 模板会跳过标有星号（*）的组件，并提示您查看现有 VPC 配置。
+将快速启动部署到现有亚马逊 EKS 群集中的 CloudForm 模板会跳过标有星号（\*）的组件，并提示您查看现有 VPC 配置。
 :::
+
 ## 为 Rancher Server 创建 EKS 集群
 
-在本节中，您将使用命令行工具安装一个带有入口的EKS集群。如果您想在EKS上试用Rancher时使用较少的资源，本指南会很有用。
+在本节中，您将使用命令行工具安装一个带有入口的 EKS 集群。如果您想在 EKS 上试用 Rancher 时使用较少的资源，本指南会很有用。
 
 ### 前提条件
 
-1. 已有一个AWS账户。
-1. 建议使用IAM用户而不是AWS根账户。您将需要IAM用户的访问密钥和秘钥来配置AWS命令行界面。
-1. IAM用户需要官方[eksctl文档](https://eksctl.io/usage/minimum-iam-policies/)中描述的最低IAM策略。
-
+1. 已有一个 AWS 账户。
+1. 建议使用 IAM 用户而不是 AWS 根账户。您将需要 IAM 用户的访问密钥和秘钥来配置 AWS 命令行界面。
+1. IAM 用户需要官方[eksctl 文档](https://eksctl.io/usage/minimum-iam-policies/)中描述的最低 IAM 策略。
 
 ### 1. 准备好您的工作站
 
@@ -79,7 +75,6 @@ Rancher和AWS合作编写了一份快速入门指南，用于按照AWS最佳实�
 
 ### 2. 配置 AWS CLI
 
-
 运行以下命令，配置 AWS CLI：
 
 ```bash
@@ -88,18 +83,16 @@ aws configure
 
 然后输入以下参数：
 
-
-| 变量 | 描述 |
-|:-------|:-------------|
-| AWS Access Key ID | 具有EKS权限的IAM用户的访问密钥凭证。具有EKS权限的IAM用户的访问密钥凭证。 |
-| AWS Secret Access Key | 具有EKS权限的IAM用户的密匙凭证。 |
-| Default region name | 集群节点所在的[AWS区域](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html#Concepts.RegionsAndAvailabilityZones.Regions)。 |
-| Default output format | 输入 `json`。 |
+| 变量                  | 描述                                                                                                                                                                      |
+| :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| AWS Access Key ID     | 具有 EKS 权限的 IAM 用户的访问密钥凭证。具有 EKS 权限的 IAM 用户的访问密钥凭证。                                                                                          |
+| AWS Secret Access Key | 具有 EKS 权限的 IAM 用户的密匙凭证。                                                                                                                                      |
+| Default region name   | 集群节点所在的[AWS 区域](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html#Concepts.RegionsAndAvailabilityZones.Regions)。 |
+| Default output format | 输入 `json`。                                                                                                                                                             |
 
 ### 3. 创建 EKS 集群
 
-请运行以下命令，创建EKS集群，请使用适用于您的用例的 AWS 区域。
-
+请运行以下命令，创建 EKS 集群，请使用适用于您的用例的 AWS 区域。
 
 ```
 eksctl create cluster \
@@ -113,7 +106,7 @@ eksctl create cluster \
   --managed
 ```
 
-集群需要一些时间才能使用CloudFormation进行部署。
+集群需要一些时间才能使用 CloudFormation 进行部署。
 
 ### 4. 验证集群是否可用
 
@@ -135,9 +128,9 @@ rancher-server-cluster		us-west-2	True
 
 ### 5. 安装 Ingress
 
-集群需要一个Ingress，这样就可以从集群外部访问Rancher。
+集群需要一个 Ingress，这样就可以从集群外部访问 Rancher。
 
-下面的命令安装了一个`nginx-ingress-controller`和一个LoadBalancer服务。这将导致在NGINX前面有一个ELB（Elastic Load Balancer）。
+下面的命令安装了一个`nginx-ingress-controller`和一个 LoadBalancer 服务。这将导致在 NGINX 前面有一个 ELB（Elastic Load Balancer）。
 
 ```
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
@@ -150,9 +143,9 @@ helm upgrade --install \
   --create-namespace
 ```
 
-### 6. 获取负载均衡器的IP地址
+### 6. 获取负载均衡器的 IP 地址
 
-运行以下命令获取负载均衡器的IP地址：
+运行以下命令获取负载均衡器的 IP 地址：
 
 ```
 kubectl get service ingress-nginx-controller --namespace=ingress-nginx
@@ -161,24 +154,24 @@ kubectl get service ingress-nginx-controller --namespace=ingress-nginx
 返回结果跟下方示例代码类似：
 
 ```
-NAME                       TYPE           CLUSTER-IP     EXTERNAL-IP                                                              PORT(S)                     
+NAME                       TYPE           CLUSTER-IP     EXTERNAL-IP                                                              PORT(S)
  AGE
-ingress-nginx-controller   LoadBalancer   10.100.90.18   a904a952c73bf4f668a17c46ac7c56ab-962521486.us-west-2.elb.amazonaws.com   80:31229/TCP,443:31050/TCP  
+ingress-nginx-controller   LoadBalancer   10.100.90.18   a904a952c73bf4f668a17c46ac7c56ab-962521486.us-west-2.elb.amazonaws.com   80:31229/TCP,443:31050/TCP
  27m
 ```
 
-`EXTERNAL-IP`就是负载均衡器的IP地址，请妥善保存。
+`EXTERNAL-IP`就是负载均衡器的 IP 地址，请妥善保存。
 
 ### 7. 配置 DNS
 
-到Rancher服务器的外部流量需要指向您创建的负载均衡器。
+到 Rancher 服务器的外部流量需要指向您创建的负载均衡器。
 
-设置一个DNS，指向您保存的外部IP。这个DNS将被用作Rancher服务器的URL。
+设置一个 DNS，指向您保存的外部 IP。这个 DNS 将被用作 Rancher 服务器的 URL。
 
-设置 DNS 的有效方法有很多。有关帮助，请参考AWS文档中关于[将流量路由到ELB负载平衡器](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-elb-load-balancer.html)的内容。
+设置 DNS 的有效方法有很多。有关帮助，请参考 AWS 文档中关于[将流量路由到 ELB 负载平衡器](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-elb-load-balancer.html)的内容。
 
 ### 8. 安装 Rancher Helm Chart
 
-按照[本页](/docs/rancher2.5/installation/install-rancher-on-k8s/_index)上的说明安装Rancher Helm Chart。Helm说明与在任何Kubernetes发行版上安装Rancher相同。
+按照[本页](/docs/rancher2.5/installation/install-rancher-on-k8s/_index)上的说明安装 Rancher Helm Chart。Helm 说明与在任何 Kubernetes 发行版上安装 Rancher 相同。
 
-安装Rancher时，使用上一步中的那个DNS名称作为Rancher服务器的URL。它可以作为Helm选项传递进来。例如，如果DNS名是`rancher.my.org`，你可以用`--set hostname=rancher.my.org`这个选项运行Helm安装命令。
+安装 Rancher 时，使用上一步中的那个 DNS 名称作为 Rancher 服务器的 URL。它可以作为 Helm 选项传递进来。例如，如果 DNS 名是`rancher.my.org`，你可以用`--set hostname=rancher.my.org`这个选项运行 Helm 安装命令。

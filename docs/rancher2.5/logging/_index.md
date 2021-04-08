@@ -344,12 +344,12 @@ fluentbit_tolerations:
 
 解决办法是删除管理集群中集群特定命名空间中的所有`clusterloggings.management.cattle.io`和`projectloggings.management.cattle.io`自定义资源。
 
-这些自定义资源的存在导致Rancher在下游集群中创建`cattle-logging`命名空间。
+这些自定义资源的存在导致 Rancher 在下游集群中创建`cattle-logging`命名空间。
 
-集群命名空间与集群ID相匹配，所以我们需要找到每个集群的集群ID。
+集群命名空间与集群 ID 相匹配，所以我们需要找到每个集群的集群 ID。
 
-1. 在您的Web浏览器中，在集群管理器用户界面或集群资源管理器用户界面中导航到您的集群。
-2. 从下面的一个URL中复制`<cluster-id>`部分。`<cluster-id>`部分是集群命名空间名称。
+1. 在您的 Web 浏览器中，在集群管理器用户界面或集群资源管理器用户界面中导航到您的集群。
+2. 从下面的一个 URL 中复制`<cluster-id>`部分。`<cluster-id>`部分是集群命名空间名称。
 
 ```bash
 # Cluster Management UI
@@ -358,7 +358,7 @@ https://<your-url>/c/<cluster-id>/
 https://<your-url>/dashboard/c/<cluster-id>/
 ```
 
-现在我们有了`<cluster-id>`命名空间，我们可以删除导致`cattle-logging`不断被重新创建的CR。
+现在我们有了`<cluster-id>`命名空间，我们可以删除导致`cattle-logging`不断被重新创建的 CR。
 
 :::warning 警告
 确保日志，从集群管理器用户界面安装的版本，目前没有在使用。

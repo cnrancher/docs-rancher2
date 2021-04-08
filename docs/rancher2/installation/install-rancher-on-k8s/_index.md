@@ -17,19 +17,21 @@ keywords:
 
 ## 先决条件
 
-### Kubernetes集群
+### Kubernetes 集群
 
-设置Rancher服务器的本地Kubernetes集群。
+设置 Rancher 服务器的本地 Kubernetes 集群。
 
-Rancher可以安装在任何Kubernetes集群上。这个集群可以使用上游Kubernetes，也可以使用Rancher的Kubernetes发行版之一，也可以是来自Amazon EKS等提供商的托管Kubernetes集群。
+Rancher 可以安装在任何 Kubernetes 集群上。这个集群可以使用上游 Kubernetes，也可以使用 Rancher 的 Kubernetes 发行版之一，也可以是来自 Amazon EKS 等提供商的托管 Kubernetes 集群。
 
-对于设置Kubernetes集群的帮助，我们提供这些教程：
+对于设置 Kubernetes 集群的帮助，我们提供这些教程：
+
 - RKE：有关安装 RKE Kubernetes 集群的教程，请参考[本页](/docs/rancher2.5/installation/resources/k8s-tutorials/ha-rke/_index)有关为高可用性 RKE 集群设置基础设施的帮助，请参考[本页](/docs/rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha/_index)。
 - K3s：安装 K3s Kubernetes 集群的教程，请参考[本页面](/docs/rancher2.5/installation/resources/k8s-tutorials/ha-with-external-db/_index)。如需帮助设置高可用性 K3s 集群的基础架构，请参考[本页](/docs/rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha-with-external-db/_index)
-- Amazon EKS： 在EKS上安装Kubernetes 集群的教程，请参考[本页面](/docs/rancher2.5/installation/install-rancher-on-k8s/amazon-eks/_index)。
-- RKE2：在RKE2安装Kubernetes 集群的教程，请参考[本页面](https://rancher.com/docs/rancher/v2.5/en/installation/install-rancher-on-k8s/amazon-eks/)。如需帮助设置高可用性 K3s 集群的基础架构，请参考[本页](https://rancher.com/docs/rancher/v2.5/en/installation/resources/k8s-tutorials/ha-rke2/)。
+- Amazon EKS： 在 EKS 上安装 Kubernetes 集群的教程，请参考[本页面](/docs/rancher2.5/installation/install-rancher-on-k8s/amazon-eks/_index)。
+- RKE2：在 RKE2 安装 Kubernetes 集群的教程，请参考[本页面](https://rancher.com/docs/rancher/v2.5/en/installation/install-rancher-on-k8s/amazon-eks/)。如需帮助设置高可用性 K3s 集群的基础架构，请参考[本页](https://rancher.com/docs/rancher/v2.5/en/installation/resources/k8s-tutorials/ha-rke2/)。
 
 ### CLI
+
 以下 CLI 工具是创建 Kubernetes 集群所必需的。请确保这些工具已安装并在您的`$PATH`中可用。
 
 请查看 [Helm 项目提供的安装指南](https://helm.sh/docs/intro/install/)，来在您的平台上进行安装。
@@ -40,10 +42,12 @@ Rancher可以安装在任何Kubernetes集群上。这个集群可以使用上游
 :::note 提示
 国内用户，可以导航到 http://mirror.cnrancher.com 下载所需资源
 :::
+
 ### Ingress Controller
+
 _适用于托管在云厂商上的集群_
 
-要在托管的Kubernetes集群（如EKS、GKE或AKS）上部署Rancher v2.5+，应先部署一个兼容的Ingress控制器，在Rancher上配置SSL终止。
+要在托管的 Kubernetes 集群（如 EKS、GKE 或 AKS）上部署 Rancher v2.5+，应先部署一个兼容的 Ingress 控制器，在 Rancher 上配置 SSL 终止。
 
 For more information about deploying Rancher on EKS, refer to this page.
 
@@ -62,9 +66,6 @@ Rancher 使用 Kubernetes 的 Helm 软件包管理器安装。Helm Charts 为 Ku
 :::important 注意
 本安装指南假定您使用的是 Helm3。有关从 Helm 2 迁移到 Helm 3 的方法，请参阅官方的[Helm 2 到 3 迁移文档](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/)。这个[指南](/docs/rancher2.5/installation/resources/helm-version/_index)提供了使用 Helm 2 在 RKE Kubernetes 集群上安装 Rancher 的较旧的安装指南，适用于无法升级到 Helm 3 的情况。
 :::
-
-
-
 
 ## 1. 添加 Helm Chart 仓库
 
