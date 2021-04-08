@@ -15,6 +15,7 @@ keywords:
   - 安装 Rancher
 ---
 ## 先决条件
+
 ### Kubernetes集群
 
 设置Rancher服务器的本地Kubernetes集群。
@@ -26,6 +27,7 @@ Rancher可以安装在任何Kubernetes集群上。这个集群可以使用上游
 - K3s：安装 K3s Kubernetes 集群的教程，请参考[本页面](/docs/rancher2.5/installation/resources/k8s-tutorials/ha-with-external-db/_index)。如需帮助设置高可用性 K3s 集群的基础架构，请参考[本页](/docs/rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha-with-external-db/_index)
 - Amazon EKS： 在EKS上安装Kubernetes 集群的教程，请参考[本页面](/docs/rancher2.5/installation/install-rancher-on-k8s/amazon-eks/_index)。
 - RKE2：在RKE2安装Kubernetes 集群的教程，请参考[本页面](https://rancher.com/docs/rancher/v2.5/en/installation/install-rancher-on-k8s/amazon-eks/)。如需帮助设置高可用性 K3s 集群的基础架构，请参考[本页](https://rancher.com/docs/rancher/v2.5/en/installation/resources/k8s-tutorials/ha-rke2/)。
+
 ### CLI
 以下 CLI 工具是创建 Kubernetes 集群所必需的。请确保这些工具已安装并在您的`$PATH`中可用。
 
