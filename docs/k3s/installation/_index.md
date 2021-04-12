@@ -23,6 +23,7 @@ keywords:
 [嵌入式 DB 的高可用](/docs/k3s/installation/ha-embedded/_index)详细介绍了如何建立一个利用内置分布式数据库的 K3s HA 集群。
 
 [离线安装](/docs/k3s/installation/airgap/_index) 详细介绍了如何在不能直接接入互联网的环境中设置 K3s。
+[禁用组件标志](docs/k3s/installation/disable-flags/_index) 详细介绍了如何在 K3s 上单独设置 etcd 节点和 controlplane 节点。
 
 ## 卸载 K3s
 

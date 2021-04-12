@@ -46,6 +46,7 @@ Longhorn 具有以下功能：
 
 ## 使用 Rancher 安装 Longhorn
 
+1. 满足所有[安装要求](https://longhorn.io/docs/1.1.0/deploy/install/#installation-requirements) 。
 1. 进入 Rancher UI 中的**Cluster Explorer**。
 1. 单击**Apps**。
 1. 单击 `longhorn`。

@@ -29,6 +29,7 @@ keywords:
 - [在 Raspbian Buster 上启用旧版的 iptables](#在-raspbian-buster-上启用旧版的-iptables)
 - [为 Raspbian Buster 启用 cgroup](#为-raspbian-buster-启用-cgroup)
 - [SELinux 支持](#selinux-支持)
+- [Red Hat 和 CentOS 的额外准备](#Red-Hat-和-CentOS-的额外准备)
 
 ## 证书轮换
 
@@ -386,3 +387,11 @@ selinux: true
 要关闭嵌入式 containerd 中的 SELinux enforcement，请使用`--disable-selinux`标志启动 K3s。
 
 在 SELinux 下不支持使用自定义的`--data-dir`。要自定义它，你很可能需要编写自己的自定义策略。为了获得指导，你可以参考[container/container-selinux](https://github.com/containers/container-selinux)资源库，它包含了容器运行时的 SELinux 策略文件，以及[rancher/k3s-selinux](https://github.com/rancher/k3s-selinux)资源库，它包含了 K3s 的 SELinux 策略。
+
+## Red Hat 和 CentOS 的额外准备
+
+建议运行以下命令，关闭 firewalld：
+
+```bash
+systemctl disable firewalld --now
+```
