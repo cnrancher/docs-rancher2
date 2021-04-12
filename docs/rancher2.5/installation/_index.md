@@ -24,7 +24,7 @@ title: 安装介绍
 
 ## 安装选项概述
 
-Rancher 的部署可以有三种架构：使用 Helm CLI 进行高可用 Kubernetes 安装、使用 RancherD 进行高可用 Kubernetes 安装或使用 Kubernetes 进行单节点安装
+Rancher 的部署有以下四种架构：使用 Helm CLI 进行高可用 Kubernetes 安装、使用 RancherD 进行高可用 Kubernetes 安装、使用 Kubernetes 进行单节点安装或使用 Amazon EKS 进行安装。
 
 ### 使用 Helm CLI 进行高可用 Kubernetes 安装
 
@@ -35,6 +35,10 @@ Rancher 的部署可以有三种架构：使用 Helm CLI 进行高可用 Kuberne
 _从 v2.5.4 开始提供_
 
 RancherD 是一个的二进制文件，它首先启动一个 RKE2 Kubernetes 集群，然后在集群上安装 Rancher 服务器的 Helm Chart。这是一个实验性的功能。在 RancherD 安装和 Helm CLI 安装中，Rancher 都是作为 Helm 图安装在 Kubernetes 集群上。使用 RancherD 也简化了配置和升级。当您升级 RancherD 二进制时，Kubernetes 集群和 Rancher Helm Chart 都会升级。
+
+### 使用 Amazon EKS 进行安装
+
+Rancher 和 Amazon 合作制定了一份快速入门指南，用于在 EKS Kubernetes 集群上按照 AWS 最佳实践部署 Rancher。详情请参考[Rancher on the AWS Cloud](https://aws-quickstart.github.io/quickstart-eks-rancher/)。
 
 ### 使用 Kubernetes 进行单节点安装
 
