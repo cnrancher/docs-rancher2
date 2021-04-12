@@ -32,6 +32,7 @@ K3s 有望在大多数现代 Linux 系统上运行。
 
 - 如果您使用的是**Raspbian Buster**，请按照[这些步骤](/docs/k3s/advanced/_index#在-raspbian-buster-上启用旧版的-iptables)切换到传统的 iptables。
 - 如果您使用的是**Alpine Linux**，请按照[这些步骤](/docs/k3s/advanced/_index#alpine-linux-安装的额外准备工作)进行额外设置。
+- 如果您使用的是**Red Hat/CentOS**，请按照[这些步骤](/docs/k3s/advanced/_index#Red-Hat-和-CentOS-的额外准备)进行额外设置。
 
 关于 Rancher 管理的 K3s 集群测试了哪些操作系统的更多信息，请参考[Rancher 支持和维护条款。](https://rancher.com/support-maintenance-terms/)
 
@@ -42,7 +43,7 @@ K3s 有望在大多数现代 Linux 系统上运行。
 - 内存： 最低 512MB（建议至少为 1GB）
 - CPU： 最低 1
 
-[本节](./resource-profiling/_index)的测试结果是为了确定 K3s agent、具有工作负载的 K3s server 和具有一个 agent 的 K3s server 的最低资源要求。它还包含了有关对 K3s server 和 agent 利用率产生最大影响的分析，以及如何保护集群数据存储免受 agent 和工作负载的干扰。
+[本节](/docs/k3s/installation/installation-requirements/resource-profiling/_index)的测试结果是为了确定 K3s agent、具有工作负载的 K3s server 和具有一个 agent 的 K3s server 的最低资源要求。它还包含了有关对 K3s server 和 agent 利用率产生最大影响的分析，以及如何保护集群数据存储免受 agent 和工作负载的干扰。
 
 ### 磁盘
 

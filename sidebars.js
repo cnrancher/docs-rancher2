@@ -1809,6 +1809,7 @@ module.exports = {
             "k3s/installation/datastore/_index",
             "k3s/installation/private-registry/_index",
             "k3s/installation/airgap/_index",
+            "k3s/installation/disable-flags/_index",
             "k3s/installation/kube-dashboard/_index",
             "k3s/installation/uninstall/_index",
         ],

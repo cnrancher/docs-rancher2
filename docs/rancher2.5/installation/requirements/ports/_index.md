@@ -69,12 +69,12 @@ K3s Server 需要开放 6443 端口供节点访问。
 
 <figcaption>Rancher 节点的出站规则</figcaption>
 
-| 协议 | 端口         | 目的                                                     | 描述                                             |
-| ---- | ------------ | -------------------------------------------------------- | ------------------------------------------------ |
-| TCP  | 22           | 使用主机驱动创建的节点中的任何节点 IP                    | 使用主机驱动通过 SSH 进行节点配置                |
-| TCP  | 443          | `35.160.43.145/32`，`35.167.242.46/32`，`52.33.59.17/32` | git.rancher.io (应用商店)                        |
-| TCP  | 2376         | 使用主机驱动创建的节点中的任何节点 IP                    | Docker Machine 使用的 Docker 守护进程的 TLS 端口 |
-| TCP  | 取决于供应商 | 托管集群的 Kubernetes API 端口                           | Kubernetes API                                   |
+| 协议 | 端口         | 目的                                  | 描述                                             |
+| ---- | ------------ | ------------------------------------- | ------------------------------------------------ |
+| TCP  | 22           | 使用主机驱动创建的节点中的任何节点 IP | 使用主机驱动通过 SSH 进行节点配置                |
+| TCP  | 443          | git.rancher.io                        | Rancher Catalog                                  |
+| TCP  | 2376         | 使用主机驱动创建的节点中的任何节点 IP | Docker Machine 使用的 Docker 守护进程的 TLS 端口 |
+| TCP  | 取决于供应商 | 托管集群的 Kubernetes API 端口        | Kubernetes API                                   |
 
 </TabItem>
 
@@ -114,12 +114,12 @@ RancherD 或 RKE2 服务器节点的入站规则如下：
 
 <figcaption>Rancher 节点的出站规则</figcaption>
 
-| 协议 | 端口         | 目的                                                     | 描述                                             |
-| ---- | ------------ | -------------------------------------------------------- | ------------------------------------------------ |
-| TCP  | 22           | 使用主机驱动创建的节点中的任何节点 IP                    | 使用主机驱动通过 SSH 进行节点配置                |
-| TCP  | 443          | `35.160.43.145/32`，`35.167.242.46/32`，`52.33.59.17/32` | git.rancher.io (应用商店)                        |
-| TCP  | 2376         | 使用主机驱动创建的节点中的任何节点 IP                    | Docker Machine 使用的 Docker 守护进程的 TLS 端口 |
-| TCP  | 取决于供应商 | 托管集群的 Kubernetes API 端口                           | Kubernetes API                                   |
+| 协议 | 端口         | 目的                                  | 描述                                             |
+| ---- | ------------ | ------------------------------------- | ------------------------------------------------ |
+| TCP  | 22           | 使用主机驱动创建的节点中的任何节点 IP | 使用主机驱动通过 SSH 进行节点配置                |
+| TCP  | 443          | git.rancher.io                        | Rancher 应用商店                                 |
+| TCP  | 2376         | 使用主机驱动创建的节点中的任何节点 IP | Docker Machine 使用的 Docker 守护进程的 TLS 端口 |
+| TCP  | 取决于供应商 | 托管集群的 Kubernetes API 端口        | Kubernetes API                                   |
 
 </TabItem>
 
@@ -164,23 +164,17 @@ When deploying Rancher into a Google Kubernetes Engine [private cluster](https:/
 > **注意：**
 > 在 Amazon EC2 或阿里云等云提供商中创建集群时，Rancher 会自动开放所需的端口。
 
-
-
 ### 自定义节点的端口要求
 
 下表描述了带有[自定义节点](/docs/rancher2.5/cluster-provisioning/rke-clusters/custom-nodes/_index)的[RKE 集群](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)的端口要求。
-
 
 ### 托管集群的端口要求
 
 下表描述了[托管集群](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/_index)的端口要求。
 
-
 ### 导入集群的端口要求
 
 下表描述了[导入集群](/docs/rancher2/cluster-provisioning/imported-clusters/_index)的端口要求。
-
-
 
 ## 其他端口注意事项
 

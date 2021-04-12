@@ -37,7 +37,7 @@ cloud_provider:
     workspace:
       server: vc.example.com
       folder: /eu-west-1/folder/myvmfolder
-      default-datastore: /eu-west-1/datastore/ds-1
+      default-datastore: ds-1
       datacenter: /eu-west-1
       resourcepool-path: /eu-west-1/host/hn1/resources/myresourcepool
 

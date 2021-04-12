@@ -63,16 +63,16 @@ keywords:
    sudo ssh -i [path-to-private-key] ubuntu@[public-DNS-of-instance]
    ```
 
-1. 连接到实例后，在实例上运行以下命令以创建用户：
-
-   ```
-   sudo usermod -aG docker ubuntu
-   ```
-
 1. 在实例上运行以下命令，使用 Rancher 的安装脚本之一安装 Docker：
 
    ```
    curl https://releases.rancher.com/install-docker/18.09.sh | sh
+   ```
+
+1. 连接到实例后，在实例上运行以下命令以创建用户：
+
+   ```
+   sudo usermod -aG docker ubuntu
    ```
 
 1. 重复步骤 1 ~ 步骤 5，在运行 Rancher 管理面的服务器的每个节点上安装 Docker。
