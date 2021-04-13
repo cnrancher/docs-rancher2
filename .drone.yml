@@ -45,7 +45,7 @@ steps:
       - name: vol
         path: /website
   - name: preview
-    image: loganhz/drone-oss:0.0.4
+    image: kingsd/drone-oss:v0.0.6
     settings:
       dist: /website/build
       dist_ignore: img/
@@ -65,7 +65,7 @@ steps:
       event:
         - push
   - name: production
-    image: loganhz/drone-oss:0.0.4
+    image: kingsd/drone-oss:v0.0.6
     settings:
       dist: /website/build
       dist_ignore: img/
@@ -98,7 +98,7 @@ steps:
       event:
         - tag
   - name: push-pdf
-    image: loganhz/drone-oss:0.0.4
+    image: kingsd/drone-oss:v0.0.6
     settings:
       dist: ./build_docs
       path: pdf-rancher-private
