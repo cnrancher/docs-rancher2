@@ -1,5 +1,19 @@
 ---
 title: 升级必读
+description: 使用 RKE 部署 Kubernetes 后，您可以升级 Kubernetes 集群中组件的版本、编辑Kubernetes services 列表或编辑插件。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 升级指南
+  - 升级必读
 ---
 
 ## 概述

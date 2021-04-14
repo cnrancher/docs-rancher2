@@ -1,5 +1,18 @@
 ---
 title: 安装要求
+description: 本文讲述了 RKE 对操作系统、软件、端口和 SSH 配置的要求，安装 RKE 前，请检查您的节点是否满足这些要求。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 安装要求
 ---
 
 ## 概述

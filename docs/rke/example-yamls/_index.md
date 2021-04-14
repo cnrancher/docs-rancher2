@@ -1,5 +1,18 @@
 ---
 title: cluster.yml 文件示例
+description: 您可通过编辑 RKE 的集群配置文件`cluster.yml`，完成多种配置选项。以下是最小文件示例和完整文件示例。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - cluster.yml 文件示例
 ---
 
 您可通过编辑 RKE 的集群配置文件`cluster.yml`，完成多种配置选项。以下是最小文件示例和完整文件示例。

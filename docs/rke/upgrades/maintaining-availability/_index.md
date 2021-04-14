@@ -1,5 +1,19 @@
 ---
 title: 不宕机升级集群
+description: RKE v1.1.0+优化了升级集群的流程，提供了不宕机升级的功能。本节讲述了如何在使用`rke up`命令升级集群的时候保证集群内的 pods 可用，实现不宕机升级。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 升级指南
+  - 不宕机升级集群
 ---
 
 _v1.1.0 开始可用_

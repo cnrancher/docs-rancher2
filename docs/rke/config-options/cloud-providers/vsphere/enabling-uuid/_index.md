@@ -1,5 +1,21 @@
 ---
 title: 为 vSphere 虚拟机启用磁盘 UUIDs
+description: 本文介绍了为 vSphere 虚拟机启用磁盘 UUIDs的操作步骤。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 配置选项
+  - 云服务提供商
+  - vSphere
+  - 为 vSphere 虚拟机启用磁盘 UUIDs
 ---
 
 ## 概述

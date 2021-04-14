@@ -1,5 +1,22 @@
 ---
 title: 自定义的网络插件示例
+description: 下面的例子展示了如何在`cluster.yml`中配置自定义网络插件与内嵌式插件。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 配置选项
+  - 插件
+  - RKE 插件
+  - 网络插件
+  - 自定义的网络插件示例
 ---
 
 下面的例子展示了如何在`cluster.yml`中配置自定义网络插件与内嵌式插件。

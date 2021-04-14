@@ -1,5 +1,19 @@
 ---
 title: 自定义证书
+description: 默认情况下，Kubernetes 集群需要用到证书，而 RKE 会自动为所有集群组件生成证书。您也可以使用自定义证书。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 安装指南
+  - 自定义证书
 ---
 
 _v0.2.0 以上可用_

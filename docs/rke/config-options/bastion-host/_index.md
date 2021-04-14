@@ -1,5 +1,19 @@
 ---
 title: 堡垒机配置
+description: 由于 RKE 使用 "ssh "连接到节点，所以您可以配置`cluster.yml`，使 RKE 使用堡垒主机。请注意，RKE 节点的端口要求会移动到配置的堡垒主机上。我们的私有 SSH 密钥只需要存在运行 RKE 的主机上。您不需要将您的 SSH 私钥复制到堡垒主机上。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 配置选项
+  - 堡垒机配置
 ---
 
 ## 概述

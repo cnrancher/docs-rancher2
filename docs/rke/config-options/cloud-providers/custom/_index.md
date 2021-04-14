@@ -1,5 +1,20 @@
 ---
 title: 自定义云服务提供商
+description: 本文介绍了配置自定义云服务提供商的操作步骤。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 配置选项
+  - 云服务提供商
+  - 自定义云服务提供商
 ---
 
 如果您想启用其他的云提供商，RKE 允许用户配置自定义云提供商选项。用必须提供一个名称，自定义云提供商选项可以作为`customCloudProvider`中的多行字符串传递进来。

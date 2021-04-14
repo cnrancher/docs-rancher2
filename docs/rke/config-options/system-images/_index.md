@@ -1,5 +1,19 @@
 ---
 title: 系统镜像
+description: RKE 在部署 Kubernetes 的时候，会从镜像仓库中拉镜像。这些镜像被用作 Kubernetes 系统组件，同时也帮助部署这些系统组件。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 配置选项
+  - 系统镜像
 ---
 
 ## 概述

@@ -1,5 +1,18 @@
 ---
 title: kubeconfig文件
+description: 与 Kubernetes 集群通信前，您需要在本地机器中下载和安装`kubectl`文件。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - kubeconfig文件
 ---
 
 与 Kubernetes 集群通信前，您需要在本地机器中下载和安装`kubectl`文件，请单击[此处](https://kubernetes.io/docs/tasks/tools/install-kubectl/)下载`kubectl`。

@@ -1,5 +1,19 @@
 ---
 title: 配置升级策略
+description: 本文讲述了如何配置 RKE 集群的升级策略，包括如何配置最大不可用节点数量、如何在升级节点前驱逐节点和如何为 RKE 插件配置副本（replicas）等操作，并且为用户提供了示例代码。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 升级指南
+  - 配置升级策略
 ---
 
 本文讲述了如何配置 RKE 集群的升级策略，包括如何配置最大不可用节点数量、如何在升级节点前驱逐节点和如何为 RKE 插件配置副本（replicas）等操作，并且为用户提供了示例代码。

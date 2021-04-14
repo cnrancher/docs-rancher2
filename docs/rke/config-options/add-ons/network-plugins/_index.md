@@ -1,5 +1,21 @@
 ---
 title: 网络插件
+description: RKE 提供了以下网络插件，作为附加组件部署：Flannel、Calico、Canal和Weave。默认情况下，RKE 使用的网络插件是`canal`。如果你想使用另一个网络插件，你需要在`cluster.yml`中指定在集群级别启用哪个网络插件。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 配置选项
+  - 插件
+  - RKE 插件
+  - 网络插件
 ---
 
 RKE 提供了以下网络插件，作为附加组件部署：

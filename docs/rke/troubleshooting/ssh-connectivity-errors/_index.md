@@ -1,5 +1,19 @@
 ---
 title: SSH 连接报错
+description: 本文讲述了 RKE SSH 连接报错问题排查。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 常见问题排查
+  - SSH 连接报错
 ---
 
 ### Failed to set up SSH tunneling for host [xxx.xxx.xxx.xxx]: Can't retrieve Docker Info

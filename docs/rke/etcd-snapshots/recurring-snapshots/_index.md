@@ -1,5 +1,19 @@
 ---
 title: 创建定时快照
+description: RKE v0.2.0 或以上的版本和 v0.2.0 之前的版本创建定时快照的方式不同，请阅读下文对应的章节获取对应信息。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 备份和恢复
+  - 创建定时快照
 ---
 
 ## 概述

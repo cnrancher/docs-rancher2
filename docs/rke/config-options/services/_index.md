@@ -1,5 +1,19 @@
 ---
 title: 默认的Kubernetes服务
+description: 为了部署 Kubernetes，RKE 在节点上的 Docker 容器中部署了几个核心组件或服务。根据节点的角色，部署的容器可能不同。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 配置选项
+  - 默认的Kubernetes服务
 ---
 
 为了部署 Kubernetes，RKE 在节点上的 Docker 容器中部署了几个核心组件或服务。根据节点的角色，部署的容器可能不同。

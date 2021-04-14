@@ -1,5 +1,18 @@
 ---
 title: 证书管理
+description: 证书是 Kubernetes 集群的重要组成部分，所有的 Kubernetes 组件都需要用到证书。您可以使用 RKE 的 rke cert命令管理证书。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 证书管理
 ---
 
 _v0.2.0 开始可用_

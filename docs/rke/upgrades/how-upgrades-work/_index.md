@@ -1,5 +1,19 @@
 ---
 title: 工作原理
+description: 本文讲述了升级 RKE 集群时，RKE 内部发生的事项，用户输入升级 RKE 集群的命令`rke up`以后，etcd 节点、controlplane 节点、worker 节点和插件在升级的过程中经历了哪些步骤。以 v1.1.0 为分界，RKE v1.1.0 及以上的版本和 RKE v1.1.0 以下的版本在升级集群的过程中触发的事项不同，请阅读对应的章节获取不同版本升级流程。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 升级指南
+  - 工作原理
 ---
 
 ## 简介
