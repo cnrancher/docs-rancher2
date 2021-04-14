@@ -1,5 +1,19 @@
 ---
 title: 启动集群报错
+description: 本文讲述了 RKE 启动集群报错问题排查。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 常见问题排查
+  - 启动集群报错
 ---
 
 ## Failed to get job complete status 无法获取”job complete“状态

@@ -1,5 +1,19 @@
 ---
 title: 云服务提供商
+description: RKE 支持为 Kubernetes 集群设置特定的云服务提供商。这些云服务提供商有特定的配置参数。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 配置选项
+  - 云服务提供商
 ---
 
 RKE 支持为 Kubernetes 集群设置特定的[云服务提供商](https://v1-17.docs.kubernetes.io/docs/concepts/cluster-administration/cloud-providers/)。这些云服务提供商有特定的配置参数。

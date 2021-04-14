@@ -1,5 +1,19 @@
 ---
 title: 认证方式
+description: RKE 支持 x509 认证策略。您可以额外定义一个 SAN（Subject Alternative Names）列表，以添加到 Kubernetes API Server PKI 证书中。举个例子，这允许你通过负载均衡器而不是单个节点连接到你的 Kubernetes 集群 API Server。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 配置选项
+  - 认证方式
 ---
 
 RKE 支持 x509 认证策略。您可以额外定义一个 SAN（Subject Alternative Names）列表，以添加到 Kubernetes API Server PKI 证书中。举个例子，这允许你通过负载均衡器而不是单个节点连接到你的 Kubernetes 集群 API Server。

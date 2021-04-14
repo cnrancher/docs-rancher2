@@ -1,5 +1,21 @@
 ---
 title: Metrics Server 插件
+description: 默认情况下，RKE 会部署Metrics Server来提供集群中资源的指标。RKE 会将 Metrics Server 部署为一个 Deployment。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 配置选项
+  - 插件
+  - RKE 插件
+  - Metrics Server 插件
 ---
 
 ## 概述

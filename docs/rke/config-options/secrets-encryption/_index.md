@@ -1,10 +1,24 @@
 ---
 title: 加密静态数据
+description: 从 v0.3.1 版本开始，RKE 增加了对静止状态下密钥数据加密管理的支持。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 配置选项
+  - 加密静态数据
 ---
 
 从 v0.3.1 版本开始，RKE 增加了对静止状态下密钥数据加密管理的支持。
 
-静止状态下的数据加密是需要的。
+静止状态下的数据加密满足了以下需求：
 
 - 合规性要求
 - 附加安全层

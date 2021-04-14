@@ -1,12 +1,27 @@
 ---
 title: 外部etcd
+description: 为了部署 Kubernetes，RKE 在节点上的 Docker 容器中部署了几个核心组件或服务。根据节点的角色，部署的容器可能不同。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 配置选项
+  - 默认的Kubernetes服务
+  - 外部etcd
 ---
 
 ## 概述
 
-默认情况下，RKE 会启动 etcd 服务器，但 RKE 也支持使用外部 etcd。RKE 只支持连接到启用 TLS 的 etcd 设置。
+为了部署 Kubernetes，RKE 在节点上的 Docker 容器中部署了几个核心组件或服务。根据节点的角色，部署的容器可能不同。
 
-> **注意：** RKE 不接受外部 etcd 服务器与[节点](/docs/rke/config-options/nodes/_index)一起使用`etcd`角色。
+**注意：** RKE 不接受外部 etcd 服务器与[节点](/docs/rke/config-options/nodes/_index)一起使用`etcd`角色。
 
 ```yaml
 services:

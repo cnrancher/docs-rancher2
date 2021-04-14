@@ -1,5 +1,21 @@
 ---
 title: vSphere 配置参考
+description: 本文介绍了vSphere 配置参考。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 配置选项
+  - 云服务提供商
+  - vSphere
+  - vSphere 配置参考
 ---
 
 ## 概述

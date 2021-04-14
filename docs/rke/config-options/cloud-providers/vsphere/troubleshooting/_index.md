@@ -1,5 +1,21 @@
 ---
 title: 问题排查
+description: 本文介绍了为 vSphere 虚拟机启用磁盘 UUIDs的操作步骤。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 配置选项
+  - 云服务提供商
+  - vSphere
+  - 问题排查
 ---
 
 如果在使用已启用的 vSphere Cloud Provider 配置集群时或为工作负载创建 vSphere 卷时遇到问题，应检查以下 K8s 服务的日志：

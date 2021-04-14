@@ -1,5 +1,19 @@
 ---
 title: 备份和恢复
+description: RKE 集群可以自动备份 etcd 节点的快照。在灾难场景下，您可以使用这些快照恢复集群。RKE 将快照保存本地`/opt/rke/etcd-snapshots`路径下。RKE 可将集群快照上传至 AWS S3 适配的后端机器。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 备份和恢复
+  - 概述
 ---
 
 ## 概述

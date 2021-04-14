@@ -1,5 +1,19 @@
 ---
 title: 问题排查
+description: 本文提供了 RKE v0.1.9+ 和 RKE v0.1.8 的常见问题和解决方法。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 备份和恢复
+  - 问题排查
 ---
 
 本文提供了 RKE v0.1.9+ 和 RKE v0.1.8 的常见问题和解决方法。

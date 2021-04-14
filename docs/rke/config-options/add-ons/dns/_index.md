@@ -1,5 +1,21 @@
 ---
 title: DNS提供商
+description: RKE 提供了以下三种 DNS 提供商，作为附加组件部署：NodeLocal DNS、CoreDNS和kube-dns。在 RKE v0.2.5 及更新版本中，使用 Kubernetes 1.14 及以上版本时，CoreDNS 是默认 DNS 提供商。如果使 RKE 版本低于 v0.2.5，则 kube-dns 是默认 DNS 提供商。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 配置选项
+  - 插件
+  - RKE 插件
+  - DNS插件
 ---
 
 ## 概述

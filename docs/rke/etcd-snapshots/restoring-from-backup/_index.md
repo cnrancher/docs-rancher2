@@ -1,5 +1,19 @@
 ---
 title: 恢复集群
+description: 使用备份恢复集群的操作步骤如下，请根据您使用的 RKE 版本获取对应的操作指导说明。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 备份和恢复
+  - 恢复集群
 ---
 
 使用备份恢复集群的操作步骤如下，请根据您使用的 RKE 版本获取对应的操作指导说明。

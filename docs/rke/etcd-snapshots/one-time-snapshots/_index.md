@@ -1,5 +1,19 @@
 ---
 title: 创建一次性快照
+description: v0.2.0 或以上的版本和 v0.2.0 之前的版本创建一次性快照的方式不同，请阅读下文对应的章节获取创建一次性快照的信息。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 备份和恢复
+  - 创建一次性快照
 ---
 
 ## 概述

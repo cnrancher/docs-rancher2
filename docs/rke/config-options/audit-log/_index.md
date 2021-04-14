@@ -1,5 +1,19 @@
 ---
 title: 审计日志
+description: Kubernetes 审计提供了关于集群的安全相关的时间顺序记录集。Kube-apiserver 执行审计，每个请求都会产生一个事件，然后根据一定的策略进行预处理，并写入后端。策略决定了记录的内容，而后端则会将记录持久化。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 配置选项
+  - 审计日志
 ---
 
 ## 概述

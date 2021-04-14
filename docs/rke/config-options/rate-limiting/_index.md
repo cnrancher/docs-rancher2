@@ -1,5 +1,19 @@
 ---
 title: 配置事件速率限制
+description: 使用 `EventRateLimit`接纳控制对 API 服务器在特定时间段内接受的事件数量进行限制。在一个大型多租户集群中，可能会有一小部分租户用事件请求淹没服务器，这可能会对集群的整体性能产生重大影响。因此，建议限制 API 服务器接受事件的速率。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 配置选项
+  - 配置事件速率限制
 ---
 
 ## 概述

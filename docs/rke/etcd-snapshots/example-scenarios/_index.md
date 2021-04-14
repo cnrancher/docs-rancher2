@@ -1,5 +1,19 @@
 ---
 title: 示例场景
+description: 本文提供了使用 RKE 备份和恢复集群的场景。示例场景使用的是部署在两个 AWS 节点上的 Kubernetes 集群：`node1` 和`node2`。我们会模拟`node2`失效的场景，创建一个新的节点`node3`并将`node2`的快照备份迁移到`node3`。具体的操作步骤因 RKE 版本而异，请按照您使用的 RKE 版本阅读对应的章节。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 备份和恢复
+  - 示例场景
 ---
 
 ## 概述

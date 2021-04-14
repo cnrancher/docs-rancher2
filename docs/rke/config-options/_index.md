@@ -1,5 +1,19 @@
 ---
 title: Kubernetes 配置选项
+description: 编辑 RKE 的`cluster.yml`文件时，您可以在文件中配置多种不同的选项，控制 RKE 如何启动 Kubernetes。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 配置选项
+  - Kubernetes 配置选项
 ---
 
 编辑 RKE 的`cluster.yml`文件时，您可以在文件中配置多种不同的选项，控制 RKE 如何启动 Kubernetes。

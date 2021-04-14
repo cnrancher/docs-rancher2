@@ -1,5 +1,21 @@
 ---
 title: K8s Ingress Controllers
+description: 默认情况下，RKE 会在所有可调度节点上部署 NGINX ingress controller。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 配置选项
+  - 插件
+  - RKE 插件
+  - Ingress 插件
 ---
 
 默认情况下，RKE 会在所有可调度节点上部署 NGINX ingress controller。
@@ -138,7 +154,3 @@ ingress:
    ```
    kubectl delete pod -l app=ingress-nginx -n ingress-nginx
    ```
-
-```
-
-```

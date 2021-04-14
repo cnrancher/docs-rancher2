@@ -1,5 +1,20 @@
 ---
 title: 自定义参数、Docker挂载绑定和额外的环境变量
+description: RKE 支持用户添加自定义参数、挂载存储卷和添加额外的环境变量。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 配置选项
+  - 默认的Kubernetes服务
+  - 自定义参数、Docker挂载绑定和额外的环境变量
 ---
 
 RKE 支持用户添加自定义参数、挂载存储卷和添加额外的环境变量。

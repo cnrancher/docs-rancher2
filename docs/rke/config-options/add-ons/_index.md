@@ -1,5 +1,20 @@
 ---
 title: RKE 插件
+description: RKE 支持在集群 yaml 文件中配置插件选项，这些插件用于部署多种集群组件，包括：网络插件、Ingress controller 插件、DNS 提供商插件和Metrics Server 插件。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE
+  - 配置选项
+  - 插件
+  - RKE 插件
 ---
 
 RKE 支持在集群 yaml 文件中配置插件选项，这些插件用于部署多种集群组件，包括：
