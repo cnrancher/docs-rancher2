@@ -20,7 +20,7 @@ keywords:
 
 本文描述了安装 Rancher Server 节点的软件、硬件和网络要求。Rancher Server 可以安装在单个节点或高可用的 Kubernetes 集群上。
 
-有关在生产环境中运行 Rancher Server 的最佳实践，请参阅[最佳实践](/docs/rancher2.5/best-practices/deployment-types/_index)部分。
+有关在生产环境中运行 Rancher Server 的最佳实践，请参阅[最佳实践](/docs/rancher2.5/best-practices/rancher-server/deployment-types/_index)部分。
 
 建议在 Chrome 或 Firefox 浏览器中使用 Rancher UI。
 
