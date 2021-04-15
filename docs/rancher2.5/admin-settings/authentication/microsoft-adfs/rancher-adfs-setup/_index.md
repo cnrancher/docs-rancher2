@@ -53,7 +53,7 @@ _自 v2.0.7 版本起可用_
 | 密钥 / 证书      | 这是用于在 Rancher 和您的 AD FS 之间创建安全 shell 的密钥证书对。确保将通用名称（CN）设置为 Rancher Server URL。                                     |
 | 元数据 XML       | 从 AD FS 服务器导出的`federationmetadata.xml`文件。 您可以在这里找到此文件 `https://<AD_SERVER>/federationmetadata/2007-06/federationmetadata.xml`。 |
 
-:::note 提示
+:::tip 提示
 
 您可以使用 openssl 命令生成证书。例如：
 

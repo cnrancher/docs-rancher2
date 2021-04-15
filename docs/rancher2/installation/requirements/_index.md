@@ -1,6 +1,6 @@
 ---
 title: 具体要求
-description: 这个页面描述了安装 Rancher Server 节点的软件，硬件和网络要求。Rancher Server 可以安装在单个节点或高可用的 Kubernetes 集群上。
+description: 本文描述了安装 Rancher Server 节点的软件、硬件和网络要求。Rancher Server 可以安装在单个节点或高可用的 Kubernetes 集群上。
 keywords:
   - rancher
   - rancher中文
@@ -16,30 +16,21 @@ keywords:
   - 具体要求
 ---
 
-这个页面描述了安装 Rancher Server 节点的软件，硬件和网络要求。Rancher Server 可以安装在单个节点或高可用的 Kubernetes 集群上。
+## 概述
 
-:::important 注意
-这是对安装 Rancher Server 的节点的要求。如果您要创建用来运行您自己的应用的集群，请参阅[下游集群的节点要求](/docs/rancher2/cluster-provisioning/node-requirements/_index)。
-:::
-
-请确保 Rancher Server 的节点满足以下要求：
-
-- [操作系统和容器运行时要求](#操作系统和-docker-要求)
-- [硬件要求](#硬件要求)
-  - [CPU 和 Memory](#cpu-和-内存)
-  - [Rancher 2.4.0 之前版本的 CPU 和 Memory](#rancher-v240-之前的-rke-高可用安装的-cpu-和内存要求)
-  - [磁盘](#磁盘)
-- [网络要求](#网络要求)
-  - [节点 IP 地址](#节点-ip-地址)
-  - [端口要求](#端口要求)
+本文描述了安装 Rancher Server 节点的软件、硬件和网络要求。Rancher Server 可以安装在单个节点或高可用的 Kubernetes 集群上。
 
 有关在生产环境中运行 Rancher Server 的最佳实践，请参阅[最佳实践](/docs/rancher2/best-practices/deployment-types/_index)部分。
 
-建议在 Chrome 或 Firefox 中使用 Rancher UI。
+建议在 Chrome 或 Firefox 浏览器中使用 Rancher UI。
+
+:::important 注意
+这是对 Rancher Server 节点的要求。如果您要创建用来运行您自己的应用的集群，请参阅[下游集群的节点要求](/docs/rancher2/cluster-provisioning/node-requirements/_index)，获取对于下游集群的节点要求。
+:::
 
 ## 操作系统和容器运行时要求
 
-Rancher 应用可以兼容当前任何流行的 Linux 发行版。
+Rancher 可以兼容当前任何流行的 Linux 发行版。
 
 对于将运行 K3s 或 RKE Kubernetes 集群的节点，需要使用 Docker。对于 RancherD 安装来说，Docker 不是必需的。
 
@@ -47,7 +38,7 @@ Rancher 需要安装在支持的 Kubernetes 版本上。要了解你的 Rancher 
 
 所有受支持的操作系统都是 64-bit x86。
 
-我们建议安装 `ntp` (Network Time Protocol)，这样可以防止在客户端和服务器之间因为时钟不同步而发生证书验证错误。
+为了防止在客户端和服务器之间因为时钟不同步而发生证书验证错误，建议您安装 `ntp` (Network Time Protocol)。
 
 一些 Linux 发行版可能有默认的防火墙规则。这些规则可能会屏蔽掉 Helm 的通信。这个[操作指南](/docs/rancher2/installation/resources/advanced/firewall/_index)展示了如何检查 Oracle Linux 的默认防火墙规则，以及在必要时如何使用`firewalld`开放端口。
 
@@ -59,7 +50,7 @@ RKE 可以兼容当前的所有 Docker 版本。
 
 ### K3s 要求
 
-K3s 兼容当前的所有 Docker 版本或 containerd。
+K3s 兼容当前的所有 Docker 版本和 containerd。
 
 Rancher 需要安装在受支持的 Kubernetes 版本上。要了解您的 Rancher 版本支持哪些版本的 Kubernetes，请参考[支持维护条款](https://rancher.com/support-maintenance-terms/)。要指定 K3s 版本，请在运行 K3s 安装脚本时使用 INSTALL_K3S_VERSION 环境变量。
 

@@ -38,7 +38,7 @@ keywords:
 curl -sfL https://get.k3s.io | sh -
 ```
 
-:::note 提示
+:::tip 提示
 国内用户，可以使用以下方法加速安装：
 
 ```

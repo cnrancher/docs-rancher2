@@ -25,10 +25,10 @@ Rancher 可以安装在任何 Kubernetes 集群上。这个集群可以使用上
 
 对于设置 Kubernetes 集群的帮助，我们提供这些教程：
 
-- RKE：有关安装 RKE Kubernetes 集群的教程，请参考[本页](/docs/rancher2.5/installation/resources/k8s-tutorials/ha-rke/_index)有关为高可用性 RKE 集群设置基础设施的帮助，请参考[本页](/docs/rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha/_index)。
-- K3s：安装 K3s Kubernetes 集群的教程，请参考[本页面](/docs/rancher2.5/installation/resources/k8s-tutorials/ha-with-external-db/_index)。如需帮助设置高可用性 K3s 集群的基础架构，请参考[本页](/docs/rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha-with-external-db/_index)
-- Amazon EKS： 在 EKS 上安装 Kubernetes 集群的教程，请参考[本页面](/docs/rancher2.5/installation/install-rancher-on-k8s/amazon-eks/_index)。
-- RKE2：在 RKE2 安装 Kubernetes 集群的教程，请参考[本页面](https://rancher.com/docs/rancher/v2.5/en/installation/install-rancher-on-k8s/amazon-eks/)。如需帮助设置高可用性 K3s 集群的基础架构，请参考[本页](https://rancher.com/docs/rancher/v2.5/en/installation/resources/k8s-tutorials/ha-rke2/)。
+- RKE：有关安装 RKE Kubernetes 集群的教程，请参考[本页](/docs/rancher2.5/installation/resources/k8s-tutorials/ha-rke/_index)，有关为高可用性 RKE 集群设置基础设施的帮助，请参考[本页](/docs/rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha/_index)。
+- K3s：安装 K3s Kubernetes 集群的教程，请参考[本页](/docs/rancher2.5/installation/resources/k8s-tutorials/ha-with-external-db/_index)。如需帮助设置高可用性 K3s 集群的基础架构，请参考[本页](/docs/rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha-with-external-db/_index)
+- Amazon EKS： 在 EKS 上安装 Kubernetes 集群的教程，请参考[本页](/docs/rancher2.5/installation/install-rancher-on-k8s/amazon-eks/_index)。
+- RKE2：在 RKE2 安装 Kubernetes 集群的教程，请参考[本页](https://rancher.com/docs/rancher/v2.5/en/installation/install-rancher-on-k8s/amazon-eks/)。如需帮助设置高可用性 K3s 集群的基础架构，请参考[本页](https://rancher.com/docs/rancher/v2.5/en/installation/resources/k8s-tutorials/ha-rke2/)。
 
 ### CLI
 
@@ -39,8 +39,8 @@ Rancher 可以安装在任何 Kubernetes 集群上。这个集群可以使用上
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl) - Kubernetes 命令行工具。
 - [helm](https://docs.helm.sh/using_helm/#installing-helm) - Kubernetes 的软件包管理工具。请参阅 [Helm 版本要求](/docs/rancher2.5/installation/resources/helm-version/_index)以选择要安装 Rancher 的 Helm 版本。
 
-:::note 提示
-国内用户，可以导航到 http://mirror.cnrancher.com 下载所需资源
+:::tip 提示
+国内用户，可以导航到 http://mirror.cnrancher.com 下载所需资源。
 :::
 
 ### Ingress Controller
@@ -49,7 +49,7 @@ _适用于托管在云厂商上的集群_
 
 要在托管的 Kubernetes 集群（如 EKS、GKE 或 AKS）上部署 Rancher v2.5+，应先部署一个兼容的 Ingress 控制器，在 Rancher 上配置 SSL 终止。
 
-For more information about deploying Rancher on EKS, refer to this page.
+请参考[本页](https://rancher.com/docs/rancher/v2.5/en/installation/install-rancher-on-k8s/amazon-eks/)，获取关于在 AWS EKS 上部署 Rancher 的详细操作步骤。
 
 ## 安装 Rancher Helm Chart
 
@@ -73,18 +73,18 @@ Rancher 使用 Kubernetes 的 Helm 软件包管理器安装。Helm Charts 为 Ku
 
 请将命令中的`<CHART_REPO>`，替换为`latest`，`stable`或`alpha`。更多信息，请查看[选择 Rancher 版本](/docs/rancher2.5/installation/resources/choosing-version/_index)来选择最适合您的仓库。
 
-- `latest`: 推荐在尝试新功能时使用。
-- `stable`: 推荐生产环境中使用。（推荐）
+- `latest`: 建议在尝试新功能时使用。
+- `stable`: 建议在生产环境中使用。（推荐）
 - `alpha`: 未来版本的实验性预览。
 
-```
+```shell
 helm repo add rancher-<CHART_REPO> https://releases.rancher.com/server-charts/<CHART_REPO>
 ```
 
-:::note 提示
+:::tip 提示
 国内用户，可以使用放在国内的 Rancher Chart 加速安装：
 
-```
+```shell
 helm repo add rancher-<CHART_REPO> http://rancher-mirror.oss-cn-beijing.aliyuncs.com/server-charts/<CHART_REPO>
 ```
 
@@ -94,7 +94,7 @@ helm repo add rancher-<CHART_REPO> http://rancher-mirror.oss-cn-beijing.aliyuncs
 
 我们需要定义一个 Kubernetes Namespace，在 Namespace 中安装由 Chart 创建的资源。这个命名空间的名称为`cattle-system`：
 
-```
+```shell
 kubectl create namespace cattle-system
 ```
 
@@ -102,9 +102,12 @@ kubectl create namespace cattle-system
 
 Rancher Server 默认需要 SSL/TLS 配置来保证访问的安全性。
 
-> **提示：** 如果您想要将 SSL/TLS 访问在外部终止，请查看[使用外部 TLS 负载均衡器](/docs/rancher2.5/installation/resources/chart-options/_index)。
+:::tip 提示
+如果您想要将 SSL/TLS 访问在外部终止，请参考：[使用外部 TLS 负载均衡器](/docs/rancher2.5/installation/resources/chart-options/_index)。
 
-有三种关于证书来源的推荐选项，证书将用来在 Rancher Server 中终止 TLS：
+:::
+
+您可以从以下三种证书来源中选择一种，证书将用来在 Rancher Server 中终止 TLS：
 
 - **Rancher 生成的自签名证书：** 在这种情况下，您需要在集群中安装`cert-manager`。 Rancher 利用`cert-manager`签发并维护证书。Rancher 将生成自己的 CA 证书，并使用该 CA 签署证书。然后，`cert-manager`负责管理该证书。
 - **Let's Encrypt：** Let's Encrypt 选项也需要使用`cert-manager`。但是，在这种情况下，`cert-manager`与特殊的 Issuer 结合使用，`cert-manager`将执行获取 Let's Encrypt 发行的证书所需的所有操作（包括申请和验证）。此配置使用 HTTP 验证（`HTTP-01`），因此负载均衡器必须具有可以从公网访问的公共 DNS 记录。
@@ -122,7 +125,7 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
 
 ## 4. 安装 cert-manager
 
-:::note 提示
+:::tip 提示
 如果您使用自己的证书文件 `ingress.tls.source=secret`或者[使用外部 TLS 负载均衡器](/docs/rancher2.5/installation/resources/chart-options/_index)可以跳过此步骤。
 :::
 
@@ -130,7 +133,7 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
 
 这些说明来自[官方的 cert-manager 文档](https://cert-manager.io/docs/installation/kubernetes/#installing-with-helm)。
 
-```
+```shell
 # 安装 CustomResourceDefinition 资源
 
 kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.15.0/cert-manager.crds.yaml
@@ -165,7 +168,7 @@ helm install \
 
 安装完 cert-manager 后，您可以通过检查 cert-manager 命名空间中正在运行的 Pod 来验证它是否已正确部署：
 
-```
+```shell
 kubectl get pods --namespace cert-manager
 
 NAME READY STATUS RESTARTS AGE
@@ -186,7 +189,7 @@ Rancher 的默认值是生成 CA 并使用`cert-manager`颁发证书，并将证
 - 如果您在安装 `alpha` 版本，需要把`--devel` 选项添加到下面到 Helm 命令中。
 - 要安装指定版本的 Rancher，请使用`--version`选项，例如：`--version 2.3.6`。
 
-```
+```shell
 helm install rancher rancher-<CHART_REPO>/rancher \
  --namespace cattle-system \
  --set hostname=rancher.my.org
@@ -194,7 +197,7 @@ helm install rancher rancher-<CHART_REPO>/rancher \
 
 等待 Rancher 运行：
 
-```
+```shell
 kubectl -n cattle-system rollout status deploy/rancher
 Waiting for deployment "rancher" rollout to finish: 0 of 3 updated replicas are available...
 deployment "rancher" successfully rolled out
@@ -202,11 +205,11 @@ deployment "rancher" successfully rolled out
 
 Rancher Chart 有许多自定义安装选项以适应特定的环境。以下是一些常见的高级方案。
 
-- [HTTP 代理](/docs/rancher2.5/installation/resources/chart-options/_index)
-- [私有镜像仓库](/docs/rancher2.5/installation/resources/chart-options/_index)
-- [外部负载均衡器上的 TLS 终止](/docs/rancher2.5/installation/resources/chart-options/_index)
+- [HTTP 代理](/docs/rancher2/installation/install-rancher-on-k8s/chart-options/_index)
+- [私有镜像仓库](/docs/rancher2/installation/resources/advanced/air-gap-helm2/populate-private-registry/_index)
+- [外部负载均衡器上的 TLS 终止](/docs/rancher2/installation/resources/tls-settings/_index)
 
-有关选项的完整列表，请参见[Chart 选项](/docs/rancher2.5/installation/resources/chart-options/_index)。
+有关选项的完整列表，请参见[Chart 选项](/docs/rancher2/installation/install-rancher-on-k8s/chart-options/_index)。
 
 ### 方式 B：使用 Let's Encrypt 证书
 
@@ -219,7 +222,7 @@ Rancher Chart 有许多自定义安装选项以适应特定的环境。以下是
 - 将 `letsEncrypt.email` 设置为可通讯的电子邮件地址，方便发送通知（例如证书到期的通知）。
 - 如果您在安装 `alpha` 版本，需要把`--devel` 选项添加到下面到 Helm 命令中。
 
-```
+```shell
 helm install rancher rancher-<CHART_REPO>/rancher \
  --namespace cattle-system \
  --set hostname=rancher.my.org \
@@ -229,7 +232,7 @@ helm install rancher rancher-<CHART_REPO>/rancher \
 
 等待 Rancher 运行：
 
-```
+```shell
 kubectl -n cattle-system rollout status deploy/rancher
 Waiting for deployment "rancher" rollout to finish: 0 of 3 updated replicas are available...
 deployment "rancher" successfully rolled out
@@ -251,13 +254,13 @@ Rancher Chart 有许多自定义安装选项以适应特定的环境。以下是
 
 尽管技术上仅需要`Subject Alternative Names`中有一个条目，但是拥有一个匹配的 `Common Name` 可以最大程度的提高与旧版浏览器/应用程序的兼容性。
 
-> 如果您想检查证书是否正确，请查看[如何在服务器证书中检查 Common Name 和 Subject Alternative Names](/docs/rancher2.5/faq/technical/_index)。
+如果您想检查证书是否正确，请查看[如何在服务器证书中检查 Common Name 和 Subject Alternative Names](/docs/rancher2.5/faq/technical/_index)。
 
 - 设置 `hostname`。
 - 将 `ingress.tls.source` 选项设置为 `secret`。
 - 如果您在安装 `alpha` 版本，需要把`--devel` 选项添加到下面到 Helm 命令中。
 
-```
+```shell
 helm install rancher rancher-<CHART_REPO>/rancher \
  --namespace cattle-system \
  --set hostname=rancher.my.org \
@@ -266,7 +269,7 @@ helm install rancher rancher-<CHART_REPO>/rancher \
 
 如果您使用的是私有 CA 证书，请在命令中增加 `--set privateCA=true`。
 
-```
+```shell
 helm install rancher rancher-latest/rancher \
   --namespace cattle-system \
   --set hostname=rancher.my.org \
@@ -288,7 +291,7 @@ Rancher Chart 有许多自定义安装选项以适应特定的环境。以下是
 
 检查 Rancher Server 是否运行成功：
 
-```
+```shell
 kubectl -n cattle-system rollout status deploy/rancher
 Waiting for deployment "rancher" rollout to finish: 0 of 3 updated replicas are available...
 deployment "rancher" successfully rolled out
@@ -296,7 +299,7 @@ deployment "rancher" successfully rolled out
 
 如果看到以下错误： `error: deployment "rancher" exceeded its progress deadline`, 您可以通过运行以下命令来检查 deployment 的状态：
 
-```
+```shell
 kubectl -n cattle-system get deploy rancher
 NAME DESIRED CURRENT UP-TO-DATE AVAILABLE AGE
 rancher 3 3 3 3 3m
@@ -314,4 +317,4 @@ rancher 3 3 3 3 3m
 
 打开浏览器，访问您的 DNS，这个 DNS 会将流量转发到您的负载均衡器，您应该会看到一个色彩丰富的登录页面。
 
-遇到了问题？查看[故障排查](/docs/rancher2.5/installation/other-installation-methods/troubleshooting/_index)页面。
+如果在安装过程中碰到了问题，请查看[故障排查](/docs/rancher2.5/installation/other-installation-methods/troubleshooting/_index)页面。

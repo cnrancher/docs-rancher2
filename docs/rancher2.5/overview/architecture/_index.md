@@ -17,13 +17,13 @@ keywords:
 
 本文主要介绍 Rancher Server 架构和各个组件的功能，例如：用户如何通过 Rancher Server 或授权集群端点控制下游集群，以及如何通过授权集群访问端点管理下游集群。
 
-> 本文默认读者已经对 Docker 和 Kubernetes 有一定的了解。如果您需要了解 Kubernetes 组件的工作机制和原理，请查阅 [Kubernetes 概念](/docs/rancher2.5/overview/concepts/_index)。
+本文默认读者已经对 Docker 和 Kubernetes 有一定的了解。如果您需要了解 Kubernetes 组件的工作机制和原理，请查阅 [Kubernetes 概念](/docs/rancher2.5/overview/concepts/_index)。
 
 ## Rancher Server 架构
 
 Rancher Server 由认证代理（Authentication Proxy）、Rancher API Server、集群控制器（Cluster Controller）、etcd 节点和集群 Agent（Cluster Agent） 组成。除了集群 Agent 以外，其他组件都部署在 Rancher Server 中。
 
-图中描述的是用户通过 Rancher Server 管控 Rancher 部署的 Kubernetes 集群（RKE 集群）和托管的 Kubernetes 集群的（EKS）集群的流程。以用户下发指令为例，指令的流动路径如下：
+下图描述的是用户通过 Rancher Server 管控 Rancher 部署的 Kubernetes 集群（RKE 集群）和托管的 Kubernetes 集群的（EKS）集群的流程。以用户下发指令为例，指令的流动路径如下：
 
 1. 首先，用户通过 Rancher UI（即 Rancher 控制台） Rancher 命令行工具（Rancher CLI）输入指令；直接调用 Rancher API 接口也可以达到相同的效果。
 2. 用户通过 Rancher 的代理认证后，指令会进一步下发到 Rancher Server 。
@@ -97,16 +97,17 @@ Rancher 使用 [Service Account](https://kubernetes.io/docs/tasks/configure-pod-
 
 Rancher Server 和下游集群之间有明显的延迟，或 Rancher Server 不可用时，用户可以通过授权集群端点连接下游集群，实现 Rancher Server 和集群之间的通信，降低网络延迟。
 
-> 需要注意的是，只有 Rancher 部署的 Kubernetes 集群（RKE 集群）可以使用授权集群端点这个功能。其他类型的集群，如导入的集群、托管的集群等，并不能够使用此功能。
+需要注意的是，只有 Rancher 部署的 Kubernetes 集群（RKE 集群）可以使用授权集群端点这个功能。其他类型的集群，如导入的集群、托管的集群等，并不能够使用此功能。
 
 `kube-api-auth` 微服务向授权集群端点提供了用户认证功能。使用 `kubectl` 访问下游集群时，集群的 Kubernetes API Server 通过 `kube-api-auth` 对用户进行认证。
 
 与授权集群端点类似， `kube-api-auth` 认证功能只在 Rancher 部署的 Kubernetes 集群（RKE 集群）中有效。
 
-> 使用场景举例：假设 Rancher Server 位于美国，用户“Alice”和她管理的下游集群“User Cluster 1”位于澳大利亚。虽然 Alice 可以使用 Rancher 控制台管理 User Cluster 1 中的资源，但是她发出的请求要从澳大利亚发送到美国的 Server 端，然后再由 Server 代理回澳大利亚的集群端，澳大利亚集群端处理完请求后，再返回给美国的 Server 端，最后才能返回给澳大利亚的“Alice”。因为美澳之间的距离非常遥远，所以发送的请求和返回的请求结果都会存在显著的延迟。Alice 可以使用授权集群端点，降低延迟，更好地掌控她的下游集群。
+#### 使用场景示例：
+
+假设 Rancher Server 位于美国，用户“Alice”和她管理的下游集群“User Cluster 1”位于澳大利亚。虽然 Alice 可以使用 Rancher 控制台管理 User Cluster 1 中的资源，但是她发出的请求要从澳大利亚发送到美国的 Server 端，然后再由 Server 代理回澳大利亚的集群端，澳大利亚集群端处理完请求后，再返回给美国的 Server 端，最后才能返回给澳大利亚的“Alice”。因为美澳之间的距离非常遥远，所以发送的请求和返回的请求结果都会存在显著的延迟。Alice 可以使用授权集群端点，降低延迟，更好地掌控她的下游集群。
 
 为下游集群开启授权集群端点后，Rancher 会在“kubeconfig”文件中额外生成一段 Kubernetes context，来允许用户直接连接到集群。kubeconfig 这个文件中含有 `kubectl` 和 `helm` 的认证信息。
-
 如果 Rancher 出现问题，无法连接，您需要使用 kubeconfig 中的 context 帮助您访问集群。因此，我们建议您导出一份 kubeconfig 文件副本，保存到本地，以备不时之需。更多详细信息请参考 [kubectl 和 kubeconfig 文件](/docs/rancher2.5/cluster-admin/cluster-access/kubectl/_index)。
 
 ## 重要文件

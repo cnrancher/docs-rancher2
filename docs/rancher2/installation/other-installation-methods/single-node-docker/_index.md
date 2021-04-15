@@ -17,30 +17,28 @@ keywords:
   - 安装指南
 ---
 
+## 概述
+
 在开发和测试环境中，您可以运行单个 Docker 容器安装 Rancher。在这种安装方案中，您将 Docker 安装在单个 Linux 主机上，然后使用一个 Docker 容器在您的主机上部署 Rancher。
 
-> **如何配置单节点安装的外部负载均衡？**
->
-> 请参阅[使用外部负载均器的单节点安装](/docs/rancher2/installation/resources/advanced/single-node-install-external-lb/_index)。
+有关请配置单节点安装的外部负载均衡的详细说明，请参阅[使用外部负载均器的单节点安装](/docs/rancher2/installation/resources/advanced/single-node-install-external-lb/_index)。
 
 ## 操作系统、Docker、硬件和网络的要求
 
-确保您的节点满足常规的[安装要求](/docs/rancher2/installation/requirements/_index)。
+确保您的节点满足常规的[操作系统、Docker、硬件和网络的要求](/docs/rancher2/installation/requirements/_index)。
 
 ## 配置 Linux 主机
 
-根据我们的[要求](/docs/rancher2/installation/requirements/_index)配置一个 Linux 主机，以启动 Rancher Server。
+根据我们的操作系统、Docker、硬件和网络的要求配置一个 Linux 主机，用于启动 Rancher Server。
 
 ## 选择一个 SSL 选项并安装 Rancher
 
-为了安全起见，使用 Rancher 时需要 SSL。SSL 保护所有 Rancher 网络通信的安全，例如在您登录集群或与集群交互时。
+为了安全起见，使用 Rancher 时需要 SSL。SSL 保护所有 Rancher 网络通信的安全，例如在您登录集群或与集群交互时：
 
-> **您想要...**
-
-- 使用代理？请参阅 [HTTP 代理配置](/docs/rancher2/installation/other-installation-methods/single-node-docker/proxy/_index)
-- 配置自定义 CA 根证书以访问您的服务？请参阅[自定义 CA 根证书](/docs/rancher2/installation/other-installation-methods/single-node-docker/advanced/_index)
-- 在离线环境下安装 Rancher？请参阅[单节点离线安装](/docs/rancher2/installation/other-installation-methods/air-gap/_index)
-- 查看所有 Rancher API 的审计日志？请参阅[审计日志](/docs/rancher2/installation/other-installation-methods/single-node-docker/advanced/_index)
+- 如果需要使用代理，请参阅 [HTTP 代理配置](/docs/rancher2/installation/other-installation-methods/single-node-docker/proxy/_index)。
+- 如果需要配置自定义 CA 根证书，请参阅[自定义 CA 根证书](/docs/rancher2/installation/other-installation-methods/single-node-docker/advanced/_index)。
+- 如果需要在离线环境下安装 Rancher，请参阅[单节点离线安装](/docs/rancher2/installation/other-installation-methods/air-gap/_index)。
+- 如果需要查看所有 Rancher API 的审计日志，请参阅[审计日志](/docs/rancher2/installation/other-installation-methods/single-node-docker/advanced/_index)。
 
 选择下面的一个选项：
 
@@ -190,5 +188,3 @@ docker run -d --privileged --restart=unless-stopped \
 
 - **推荐：** 查看[单节点备份和还原](/docs/rancher2/backups/backup/docker-backups/_index)。尽管您现在没有任何数据需要备份，但是我们建议您在常规使用 Rancher 之后创建备份。
 - 创建 Kubernetes 集群：[创建 Kubernetes 集群](/docs/rancher2/cluster-provisioning/_index)。
-
-*

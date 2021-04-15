@@ -39,7 +39,7 @@ keywords:
 curl -sfL https://get.k3s.io | sh -
 ```
 
-:::note 提示
+:::tip 提示
 国内用户，可以使用以下方法加速安装：
 
 ```
@@ -67,9 +67,9 @@ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_M
 | `INSTALL_K3S_SKIP_SELINUX_RPM`  | 如果设置为 "true "将跳过 k3s RPM 的自动安装。                                                                                                                                                                                                           |
 | `INSTALL_K3S_CHANNEL_URL`       | 用于获取 K3s 下载网址的频道 URL。默认为 https://update.k3s.io/v1-release/channels 。                                                                                                                                                                    |
 | `INSTALL_K3S_CHANNEL`           | 用于获取 K3s 下载 URL 的通道。默认值为 "stable"。选项包括：`stable`, `latest`, `testing`。                                                                                                                                                              |
-| `K3S_CONFIG_FILE`               | 指定配置文件的位置。默认目录为`/etc/rancher/k3s/config.yaml`。  |
-| `K3S_TOKEN`                     | 用于将 server 或 agent 加入集群的共享 secret。 |
-| `K3S_TOKEN_FILE`                | 指定 `cluster-secret`,`token` 的文件目录。 |
+| `K3S_CONFIG_FILE`               | 指定配置文件的位置。默认目录为`/etc/rancher/k3s/config.yaml`。                                                                                                                                                                                          |
+| `K3S_TOKEN`                     | 用于将 server 或 agent 加入集群的共享 secret。                                                                                                                                                                                                          |
+| `K3S_TOKEN_FILE`                | 指定 `cluster-secret`,`token` 的文件目录。                                                                                                                                                                                                              |
 
 以 "K3S\_"开头的环境变量将被保留，供 systemd 和 openrc 服务使用。
 

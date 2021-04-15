@@ -56,7 +56,7 @@ curl -sfL https://get.k3s.io | sh -s - server \
   --datastore-endpoint="mysql://username:password@tcp(hostname:3306)/database-name"
 ```
 
-:::note 提示
+:::tip 提示
 国内用户，可以使用以下方法加速安装：
 
 ```

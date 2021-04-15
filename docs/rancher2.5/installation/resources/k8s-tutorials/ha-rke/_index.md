@@ -56,7 +56,7 @@ Rancher Server 只能在使用 RKE 或 K3s 安装的 Kubernetes 集群中运行�
 
    注意：您也可以通过环境变量`$K3S_DATASTORE_ENDPOINT`来配置数据库端点。
 
-:::note 提示
+:::tip 提示
 国内用户，可以使用以下方法加速安装：
 
 ```
@@ -163,7 +163,7 @@ kube-system     coredns-d798c9dd-ljjnf                    1/1     Running   0   
 
 请按照[RKE 文档](/docs/rke/installation/_index)中的说明安装 RKE。
 
-:::note 提示
+:::tip 提示
 国内用户，可以导航到 http://mirror.cnrancher.com 下载所需资源
 :::
 
