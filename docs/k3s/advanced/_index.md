@@ -61,7 +61,7 @@ K3s 包含并默认为[containerd](https://containerd.io/)， 一个行业标准
    curl -sfL https://get.k3s.io | sh -s - --docker
    ```
 
-   :::note 提示
+   :::tip 提示
    国内用户，可以使用以下方法加速安装：
 
    ```
@@ -237,7 +237,7 @@ K3s agents 可以通过`--node-label`和`--node-taint`选项进行配置，这�
 curl -sfL https://get.k3s.io | sh -
 ```
 
-:::note 提示
+:::tip 提示
 国内用户，可以使用以下方法加速安装：
 
 ```
@@ -268,20 +268,20 @@ INFO[2019-01-22T15:16:20.541049100-07:00] Run: k3s kubectl
 
 ## Alpine Linux 安装的额外准备工作
 
-为了设置 Alpine Linux，需要进行以下准备工作：
+设置 Alpine Linux 前，您需要进行以下准备工作：
 
-更新 **/etc/update-extlinux.conf** 添加：
+1. 更新 **/etc/update-extlinux.conf** 添加：
 
-```
-default_kernel_opts="...  cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory"
-```
+   ```shell
+   default_kernel_opts="...  cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory"
+   ```
 
-然后更新配置，重启：
+1. 更新配置并重启：
 
-```bash
-update-extlinux
-reboot
-```
+   ```shell
+   update-extlinux
+   reboot
+   ```
 
 ## 运行 K3d（Docker 中的 K3s）和 docker-compose
 
@@ -289,34 +289,38 @@ reboot
 
 它可以通过 MacOS 上的[brew](https://brew.sh/)工具安装：
 
-```
+```shell
 brew install k3d
 ```
 
-`rancher/k3s`镜像也可用于从 Docker 运行 K3s server 和 agent。
+`rancher/k3s`镜像也可用于在 Docker 运行的 K3s server 和 agent。
 
 在 K3s repo 的根目录下有一个`docker-compose.yml`，作为如何从 Docker 运行 K3s 的示例。要从这个 repo 中运行`docker-compose`，请运行：
 
-    docker-compose up --scale agent=3
+```shell
+docker-compose up --scale agent=3
     # kubeconfig is written to current dir
 
-    kubectl --kubeconfig kubeconfig.yaml get node
+kubectl --kubeconfig kubeconfig.yaml get node
 
     NAME           STATUS   ROLES    AGE   VERSION
     497278a2d6a2   Ready    <none>   11s   v1.13.2-k3s2
     d54c8b17c055   Ready    <none>   11s   v1.13.2-k3s2
     db7a5a5a5bdd   Ready    <none>   12s   v1.13.2-k3s2
+```
 
 要只在 Docker 中运行 agent，使用`docker-compose up agent`。
 
 或者，也可以使用`docker run`命令：
 
-    sudo docker run \
-      -d --tmpfs /run \
-      --tmpfs /var/run \
-      -e K3S_URL=${SERVER_URL} \
-      -e K3S_TOKEN=${NODE_TOKEN} \
-      --privileged rancher/k3s:vX.Y.Z
+```
+sudo docker run \
+  -d --tmpfs /run \
+  --tmpfs /var/run \
+  -e K3S_URL=${SERVER_URL} \
+  -e K3S_TOKEN=${NODE_TOKEN} \
+  --privileged rancher/k3s:vX.Y.Z
+```
 
 ## 在 Raspbian Buster 上启用旧版的 iptables
 
@@ -372,7 +376,7 @@ SELinux enforcement 的启用或禁用方式取决于 K3s 的版本。
 
 这个选项也可以在 K3s[配置文件](/docs/k3s/installation/install-options/_index#配置文件)中指定：
 
-```
+```shell
 selinux: true
 ```
 
@@ -392,6 +396,6 @@ selinux: true
 
 建议运行以下命令，关闭 firewalld：
 
-```bash
+```shell
 systemctl disable firewalld --now
 ```

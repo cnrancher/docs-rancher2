@@ -59,7 +59,7 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
 
 ## 选装：安装 cert-manager
 
-:::note 提示
+:::tip 提示
 仅由 Rancher 生成的 CA `ingress.tls.source=rancher` 和 Let's Encrypt 颁发的证书 `ingress.tls.source=letsEncrypt` 才需要 cert-manager。如果您使用自己的证书文件 `ingress.tls.source=secret` 或者[使用外部 TLS 负载均衡器](/docs/rancher2/installation/resources/advanced/helm2/helm-rancher/chart-options/_index#外部-tls-termination)可以跳过此步骤。
 :::
 

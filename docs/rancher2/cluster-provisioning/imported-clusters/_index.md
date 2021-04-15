@@ -118,7 +118,7 @@ _自 v2.4.0 起可用_
 curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
 ```
 
-:::note 提示
+:::tip 提示
 国内用户，可以使用以下方法加速安装：
 
 ```shell
@@ -133,7 +133,7 @@ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_M
 curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" sh -s -
 ```
 
-:::note 提示
+:::tip 提示
 国内用户，可以使用以下方法加速安装：
 
 ```shell

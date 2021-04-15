@@ -42,7 +42,7 @@ Rancher Server 只能在使用 RKE 或 K3s 安装的 Kubernetes 集群中运行�
 
 1. 从[版本发布](https://github.com/rancher/k3s/releases)页面获取要运行的 K3s 版本的镜像`tar`文件。
 
-:::note 提示
+:::tip 提示
 国内用户，可以导航到 http://mirror.cnrancher.com 下载所需资源
 :::
 
@@ -88,7 +88,7 @@ Rancher 需要安装在支持的 Kubernetes 版本上。要了解你的 Rancher 
 
 1. 从[版本发布](https://github.com/rancher/k3s/releases)页面获取 K3s 二进制文件，找到与版本对应的镜像`tar`文件包，并通过 https://get.k3s.io 获取 K3s 安装脚本。
 
-:::note 提示
+:::tip 提示
 国内用户，可以导航到 http://mirror.cnrancher.com 下载所需资源
 :::
 
@@ -154,7 +154,7 @@ kubectl --kubeconfig ~/.kube/config/k3s.yaml get pods --all-namespaces
 
 - 从[版本发布](https://github.com/rancher/k3s/releases)页面下载要升级的 K3s 版本的新镜像包（`tar`文件）。将`tar`包放在每个节点上的`/var/lib/rancher/k3s/agent/images/`目录中。删除旧的 `tar` 文件。
 
-:::note 提示
+:::tip 提示
 国内用户，可以导航到 http://mirror.cnrancher.com 下载资源
 :::
 

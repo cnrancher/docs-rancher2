@@ -44,7 +44,7 @@ kubeconfig 令牌被缓存在你运行 kubectl 的路径中，在`./.cache/token
 
 请先安装`kubectl`，详情请参考[安装 kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl)。
 
-:::note 提示
+:::tip 提示
 国内用户，可以导航到 http://mirror.cnrancher.com 下载所需资源
 :::
 
