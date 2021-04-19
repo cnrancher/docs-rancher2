@@ -86,6 +86,7 @@ K3s 参数配置项主要对 K3s 集群进行设置，例如是否部署 HA 模�
 | K3s Version | 安装的 K3s 版本，如果设置则覆盖 Channel 选项 |
 | Cluster | 启用嵌入式 DB 高可用 K3s（即开启 `--cluster-init` 设置） | false
 | Datastore | 指定 etcd、Mysql、Postgres 或 Sqlite（默认）数据源名称 |
+| K3s Install Script | K3s 安装脚本，对于中国区用户，可以通过下拉菜单选择 `rancher-mirror` 脚本来安装 | `https://get.k3s.io`
 | Master Extra Args | Master 节点额外参数设置，例如 `--no-deploy traefik` |
 | Worker Extra Args | Worker 节点额外参数设置，例如 `--node-taint key=value:NoExecute` |
 | IP | K3s server IP，用于加入已有集群 |
