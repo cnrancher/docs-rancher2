@@ -89,7 +89,7 @@ curl -sfL https://get.k3s.io | sh -s - server \
 相反，您将修改如下示例：
 
 ```
-INSTALL_K3S_SKIP_DOWNLOAD=true INSTALL_K3S_EXEC='server --datastore-endpoint="mysql://username:password@tcp(hostname:3306)/database-name"' ./install.sh
+INSTALL_K3S_SKIP_DOWNLOAD=true INSTALL_K3S_EXEC='server --datastore-endpoint=mysql://username:password@tcp(hostname:3306)/database-name' ./install.sh
 ```
 
 > **注意：** K3s 还为 kubelets 提供了一个`--resolv-conf`标志，这可能有助于在离线网络中配置 DNS。
