@@ -2,10 +2,6 @@
 title: Docker命令运行Rancher
 ---
 
-# Docker 命令运行 Rancher
-
----
-
 Rancher 整合了原生 Docker CLI，所以 Rancher 可以和其它 DevOps 和 Docker 工具同时使用。从高层次上，这意味着如果您在 Rancher 外启动、停止、或销毁一个容器，Rancher 能检测到相应的变化和更新。
 
 ## Docker 事件监控

@@ -2,8 +2,6 @@
 title: 在线安装
 ---
 
-# 在线安装
-
 Rancher 是使用一系列的 Docker 容器进行部署的。运行 Rancher 跟启动两个容器一样简单。一个容器作为管理服务器部署，另外一个作为集群节点的 Agent 部署。
 
 > **注意:** 您可以运行 Rancher Server 的容器的命令`docker run rancher/server --help`来获得所有选项以及帮助信息。

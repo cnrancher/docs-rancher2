@@ -2,8 +2,6 @@
 title: AWS ECR证书更新器
 ---
 
-# AWS ECR 证书更新器
-
 ECR 证书更新器是一个容器服务，它会间歇性自动测验 AWS ECR API 并拉取新的 Docker 注册证书. 更新器通过 IAM 证书向 AWS 验证，IAM 证书能让更新器获取请求 Docker 证书的权限。Docker 证书假设发起请求的 IAM 用户有相同的镜像仓库权限。IAM 用户至少要有对所有 ECR 镜像库的读权限用户才能在 Rancher 中从代码库拉取镜像. 请查阅 [Amazon ECR IAM Policies and Roles](http://docs.aws.amazon.com/AmazonECR/latest/userguide/ECR_IAM_policies.html) 获取关于许可权的详情。
 
 > **注意:**: 如果不启动 ECR 更新器。任何添加到 Rancher 的注册 token 都会过期，以至不能再拉取镜像.

@@ -2,7 +2,7 @@
 title: cli
 ---
 
-# 安装
+## 安装
 
 Rancher 的命令行界面(CLI)是用来管理 Rancher Server 的工具。 使用此工具，您可以管理您的[环境](/docs/rancher1/configurations/environments/_index)，[主机](/docs/rancher1/infrastructure/hosts/_index)，应用，服务和容器。
 

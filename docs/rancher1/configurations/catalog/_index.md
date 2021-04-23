@@ -2,10 +2,6 @@
 title: 应用商店
 ---
 
-# 应用商店
-
----
-
 Rancher 提供了一个应用商店，通过商店中的应用程序模版的可以简化部署复杂应用的过程。进入**应用商店**页面，您可以看到所有的[应用](/docs/rancher1/configurations/environments/settings/_index#应用商店)的应用模版。在**官方认证**应用商店下包含了[Rancher 认证的应用](https://github.com/rancher/rancher-catalog)中的应用模版，在**社区共享**应用商店下包含了[社区贡献的应用](https://github.com/rancher/community-catalog)的应用模版。Rancher 只维护官方认证的 _认证_ 模版。
 
 ## 添加应用商店 Catalogs

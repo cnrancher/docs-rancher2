@@ -2,8 +2,6 @@
 title: 启用SSL
 ---
 
-# 启用 SSL
-
 为了在 Rancher Server 启用 `https` 访问，您需要在 Rancher Server 前使用一个代理服务器代理 https 请求，并能设置 http 的头参数。我们会在以下的内容中提供一个使用 NGINX、HAProxy 或者 Apache 作为代理的例子。当然了，其他工具也是可以的。
 
 ## 需求

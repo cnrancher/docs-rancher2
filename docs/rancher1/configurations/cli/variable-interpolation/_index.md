@@ -2,8 +2,6 @@
 title: 变量替换
 ---
 
-# 变量替换
-
 使用`rancher up`时，可以在`docker-compose.yml`和`rancher-compose.yml`文件中使用运行`rancher`命令的机器中的环境变量。 这仅仅在`rancher`命令中支持，在 Rancher UI 中不支持。
 
 ## 如何使用

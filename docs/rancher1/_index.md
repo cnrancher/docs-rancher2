@@ -2,10 +2,6 @@
 title: Rancher 1.x Docs
 ---
 
-# Rancher 1.x Docs
-
----
-
 Rancher 是一个开源的企业级容器管理平台。通过 Rancher，企业再也不必自己使用一系列的开源软件去从头搭建容器服务平台。Rancher 提供了在生产环境中使用的管理 Docker 和 Kubernetes 的全栈化容器部署与管理平台。
 
 Rancher 由以下四个部分组成:

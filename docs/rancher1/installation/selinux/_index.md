@@ -2,8 +2,6 @@
 title: SELinux 模式
 ---
 
-# SELinux 模式
-
 _从 1.6+版本后支持_ 在 SELinux 模式下安装 Rancher-RHEL/CentOS
 
 为了使 Rancher 在 RHEL/CentOS 的 SELinux 模式下正常工作，您需要在安装有 RPM 包`container-selinux-2.14`(或更高的版本)的主机上运行 Rancher Server 容器。同时，全部的 agent[主机](/docs/rancher1/infrastructure/hosts/_index)也要安装这个包。如果您安装了较低版本的`container-selinux`包，您需要构建额外的 SELinux 模块，从而使 Rancher 正常工作。

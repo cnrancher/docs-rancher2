@@ -2,10 +2,6 @@
 title: 镜像仓库
 ---
 
-# 镜像仓库
-
----
-
 您可以在 Rancher 配置镜像仓库的认证信息，使 Rancher 可以访问您的私有镜像仓库(DockerHub, Quay.io 和其他私有镜像库)。
 在每个[环境](/docs/rancher1/configurations/environments/_index)中，您可以给每个私有仓库地址配置一个认证信息，从而使 Rancher 可以拉取私有镜像。如果您给同一个镜像仓库配置了多个认证信息，那么 Rancher 只会使用最近添加的一个认证信息。 Rancher 支持在 Cattle 和 Kubernetes 环境中使用多种镜像仓库。
 
