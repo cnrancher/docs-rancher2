@@ -18,10 +18,10 @@
         "prettier:diff": "prettier --config .prettierrc --list-different \"**/*.{js,jsx,ts,tsx,md,mdx}\""
     },
     "dependencies": {
-        "@docusaurus/core": "^2.0.0-alpha.72",
+        "@docusaurus/core": "^2.0.0-alpha.73",
         "@docusaurus/plugin-baidu-analytics": "https://github.com/thxcode/docusaurus-plugin-baidu-analytics",
-        "@docusaurus/plugin-sitemap": "^2.0.0-alpha.72",
-        "@docusaurus/preset-classic": "^2.0.0-alpha.72",
+        "@docusaurus/plugin-sitemap": "^2.0.0-alpha.73",
+        "@docusaurus/preset-classic": "^2.0.0-alpha.73",
         "axios": "0.21.1",
         "classnames": "^2.2.6",
         "docusaurus-pdf": "1.2.0",
