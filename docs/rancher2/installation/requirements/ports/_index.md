@@ -44,7 +44,9 @@ K3s Server 需要开放 6443 端口供节点访问。
 
 如果要使用指标服务器（Metrics Server），则需要在每个节点上开放端口 10250。
 
-> **重要：** 节点上的 VXLAN 端口不应暴露给外界，因为这会开放集群网络，任何人都可以访问它。请在禁止访问 8472 端口的防火墙/安全组后面运行节点。
+:::important 重要
+节点上的 VXLAN 端口不应暴露给外界，因为这会开放集群网络，任何人都可以访问它。请在禁止访问 8472 端口的防火墙/安全组后面运行节点。
+:::
 
 <figcaption> Rancher Server 节点的入站规则</figcaption>
 
@@ -125,11 +127,13 @@ RancherD 或 RKE2 服务器节点的入站规则如下：
 
 </Tabs>
 
-> **注意：**
->
-> - 如果您配置了的外部[身份验证系统](/docs/rancher2/admin-settings/authentication/_index)（例如 LDAP），Rancher 节点可能还需要其他出站规则。
-> - Kubernetes 建议将 TCP 30000-32767 用于节点端口服务（NodePort svc）。
-> - 可能需要对防火墙进行配置，启用在集群和 Pod CIDR 中的流量。
+:::note 注意
+
+- 如果您配置了的外部[身份验证系统](/docs/rancher2/admin-settings/authentication/_index)（例如 LDAP），Rancher 节点可能还需要其他出站规则。
+- Kubernetes 建议将 TCP 30000-32767 用于节点端口服务（NodePort svc）。
+- 可能需要对防火墙进行配置，启用在集群和 Pod CIDR 中的流量。
+
+:::
 
 ### Ports for Rancher Server in GCP GKE
 
@@ -153,28 +157,45 @@ When deploying Rancher into a Google Kubernetes Engine [private cluster](https:/
 
 集群节点需要开放的端口会根据集群的启动方式而变化。下面列出了需要为不同[集群创建类型](/docs/rancher2/cluster-provisioning/_index)开放的端口。
 
-> **提示：**
->
-> 如果安全不是一个大问题，并且可以开放一些其他端口，可以将[常用端口](#常用端口)作为端口参考，而不是使用下面的完整列表。
+:::tip 提示
+如果安全不是一个大问题，并且可以开放一些其他端口，可以将[常用端口](#常用端口)作为端口参考，而不是使用下面的完整列表。
+:::
 
 ### 节点池中节点的端口要求
 
 下表描述了在[基础设施提供商](/docs/rancher2/cluster-provisioning/rke-clusters/node-pools/_index)中创建节点用于[Rancher 启动 Kubernetes](/docs/rancher2/cluster-provisioning/rke-clusters/_index)的端口需求。
 
-> **注意：**
-> 在 Amazon EC2 或阿里云等云提供商中创建集群时，Rancher 会自动开放所需的端口。
+import PortsIaasNodes from '@theme/PortsIaasNodes';
+
+<PortsIaasNodes/>
+
+:::note 注意
+在 Amazon EC2 或阿里云等云提供商中创建集群时，Rancher 会自动开放所需的端口。
+:::
 
 ### 自定义节点的端口要求
 
 下表描述了带有[自定义节点](/docs/rancher2/cluster-provisioning/rke-clusters/custom-nodes/_index)的[RKE 集群](/docs/rancher2/cluster-provisioning/rke-clusters/_index)的端口要求。
 
+import PortsCustomNodes from '@theme/PortsCustomNodes';
+
+<PortsCustomNodes/>
+
 ### 托管集群的端口要求
 
 下表描述了[托管集群](/docs/rancher2/cluster-provisioning/hosted-kubernetes-clusters/_index)的端口要求。
 
+import PortsHosted from '@theme/PortsHosted';
+
+<PortsHosted/>
+
 ### 导入集群的端口要求
 
 下表描述了[导入集群](/docs/rancher2/cluster-provisioning/imported-clusters/_index)的端口要求。
+
+import PortsImported from '@theme/PortsImported';
+
+<PortsImported/>
 
 ## 其他端口注意事项
 
@@ -182,23 +203,21 @@ When deploying Rancher into a Google Kubernetes Engine [private cluster](https:/
 
 通常情况下，可以将这些端口在 Kubernetes 节点上开放，无论它是哪种类型的集群。
 
-|  协议   |    端口     | 描述                                             |
-| :-----: | :---------: | ------------------------------------------------ |
-|   TCP   |     22      | 使用主机驱动通过 SSH 进行节点配置                |
-|   TCP   |    2376     | 主机驱动与 Docker 守护进程通信的 TLS 端口        |
-|   TCP   |    2379     | etcd 客户端请求                                  |
-|   TCP   |    2380     | etcd 节点通信                                    |
-|   UDP   |    8472     | Canal/Flannel VXLAN overlay 网络                 |
-|   UDP   |    4789     | Windows 集群中 Flannel VXLAN overlay 网络        |
-|   TCP   |    9099     | Canal/Flannel 健康检查                           |
-|   TCP   |    9796     | 集群监控拉取节点指标的默认端口（仅需要内网可达） |
-|   TCP   |    6783     | Weave 端口                                       |
-|   UDP   |  6783-6784  | Weave UDP 端口                                   |
-|   TCP   |    10250    | kubelet API                                      |
-|   TCP   |    10254    | Ingress controller 健康检查                      |
+| 协议    | 端口        | 描述                                             |
+| :------ | :---------- | :----------------------------------------------- |
+| TCP     | 22          | 使用主机驱动通过 SSH 进行节点配置                |
+| TCP     | 2376        | 主机驱动与 Docker 守护进程通信的 TLS 端口        |
+| TCP     | 2379        | etcd 客户端请求                                  |
+| TCP     | 2380        | etcd 节点通信                                    |
+| UDP     | 8472        | Canal/Flannel VXLAN overlay 网络                 |
+| UDP     | 4789        | Windows 集群中 Flannel VXLAN overlay 网络        |
+| TCP     | 9099        | Canal/Flannel 健康检查                           |
+| TCP     | 9796        | 集群监控拉取节点指标的默认端口（仅需要内网可达） |
+| TCP     | 6783        | Weave 端口                                       |
+| UDP     | 6783-6784   | Weave UDP 端口                                   |
+| TCP     | 10250       | kubelet API                                      |
+| TCP     | 10254       | Ingress controller 健康检查                      |
 | TCP/UDP | 30000-32767 | NodePort 端口范围                                |
-
----
 
 ### 本地节点流量
 
