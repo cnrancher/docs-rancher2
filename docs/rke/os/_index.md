@@ -178,7 +178,7 @@ https://microos.opensuse.org
 
 #### openSUSE Kubic
 
-基于 MicroOS，但不是滚动发行版。在设计上也有同样的考虑，但也是认证的 Kubernetes 发行版。
+基于 openSUSE MicroOS，设计时考虑到了同样的事情，但专注于成为一个认证的 Kubernetes 发行版。
 https://kubic.opensuse.org  
 安装说明。
 https://kubic.opensuse.org/blog/2021-02-08-MicroOS-Kubic-Rancher-RKE/

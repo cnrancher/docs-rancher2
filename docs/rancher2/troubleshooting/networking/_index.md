@@ -27,33 +27,33 @@ keywords:
 
 可以将 Pod 调度到集群的任何主机上，在 Overlay 网络上意味着 NGINX Ingress Controller 需要能够将请求从`NODE_1`路由到`NODE_2`。如果 Overlay 网络不起作用，可能导致 NGINX Ingress Controller 无法将请求路由到 Pod，您将遇到间歇性的 TCP/HTTP 连接失败。
 
-要测试 Overlay 网络，您可以根据以下 yaml 文件启动一个`DaemonSet`。这将在每个主机上运行一个`busybox`容器，我们将在所有主机上的容器之间运行一个`ping`测试。
+要测试 Overlay 网络，您可以根据以下 yaml 文件启动一个`DaemonSet`。这将在每个主机上运行一个`swiss-army-knife`容器（该镜像由 Rancher 工程师开发，可以在这里找到：https://github.com/rancherlabs/swiss-army-knife），我们将用它在所有主机上的容器之间运行`ping`测试。
 
 1. 将以下文件另存为`ds-overlaytest.yml`
 
-   ```
-   apiVersion: apps/v1
-   kind: DaemonSet
-   metadata:
-     name: overlaytest
-   spec:
-     selector:
-         matchLabels:
-           name: overlaytest
-     template:
-       metadata:
-         labels:
-           name: overlaytest
-       spec:
+```
+    apiVersion: apps/v1
+    kind: DaemonSet
+    metadata:
+      name: overlaytest
+    spec:
+      selector:
+          matchLabels:
+            name: overlaytest
+      template:
+        metadata:
+          labels:
+            name: overlaytest
+        spec:
          tolerations:
          - operator: Exists
          containers:
-         - image: busybox:1.28
-           imagePullPolicy: Always
-           name: busybox
-           command: ["sh", "-c", "tail -f /dev/null"]
-           terminationMessagePath: /dev/termination-log
-   ```
+         - image: rancherlabs/swiss-army-knife
+            imagePullPolicy: Always
+            name: overlaytest
+            command: ["sh", "-c", "tail -f /dev/null"]
+            terminationMessagePath: /dev/termination-log
+```
 
 2. 使用`kubectl`启动它`kubectl create -f ds-overlaytest.yml`。
 3. 等待，直到 `kubectl rollout status ds/overlaytest -w` 返回： `daemon set "overlaytest" successfully rolled out`。

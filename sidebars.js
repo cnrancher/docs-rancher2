@@ -1073,6 +1073,7 @@ module.exports = {
                             "rancher2.5/installation/resources/k8s-tutorials/_index",
                             "rancher2.5/installation/resources/k8s-tutorials/how-ha-works/_index",
                             "rancher2.5/installation/resources/k8s-tutorials/ha-with-external-db/_index",
+                            "rancher2.5/installation/resources/k8s-tutorials/ha-rke2/_index",
                             "rancher2.5/installation/resources/k8s-tutorials/ha-rke/_index",
                             {
                                 type: "category",

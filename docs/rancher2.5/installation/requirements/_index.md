@@ -32,7 +32,7 @@ keywords:
 
 Rancher 可以兼容当前任何流行的 Linux 发行版。
 
-对于将运行 K3s 或 RKE Kubernetes 集群的节点，需要使用 Docker。对于 RancherD 安装来说，Docker 不是必需的。
+对于将运行 K3s 或 RKE Kubernetes 集群的节点，需要使用 Docker。对于 RancherD 安装 和 RKE2 安装来说，Docker 不是必需的。
 
 Rancher 需要安装在支持的 Kubernetes 版本上。要了解你的 Rancher 版本支持哪些 Kubernetes 版本，请参考[这里](https://rancher.com/support-maintenance-terms/)。
 
@@ -67,6 +67,16 @@ RancherD 安装从 v2.5.4 开始可用。这是一个实验性功能。
 RancherD 安装时不需要 Docker。
 
 要在 SELinux Enforcing CentOS 8 或 RHEL 8 节点上安装 RancherD，需要一些额外的步骤。
+
+## RKE2 具体要求
+
+RKE2 安装从 v2.5.6 开始可用。
+
+关于哪些操作系统版本在 RKE2 中进行了测试，请参考[支持维护条款](https://rancher.com/support-maintenance-terms/)。
+
+RKE2 的安装不需要 Docker。
+
+Ingress 应该被部署为 DaemonSet，以确保你的负载平衡器能够成功地将流量路由到所有节点。目前，RKE2 默认将 nginx-ingress 部署为一个部署，所以你需要按照[这些步骤](/docs/rancher2.5/installation/resources/k8s-tutorials/ha-rke2/_index)将其部署为一个 DaemonSet。
 
 ### 安装 Docker
 
@@ -117,6 +127,15 @@ RancherD 安装时不需要 Docker。
 | 小       | 最多 5 个  | 最多 50 个  | 2     | 4 GB |
 | 中       | 最多 15 个 | 最多 200 个 | 3     | 8 GB |
 
+### RKE2 Kubernetes
+
+这些 CPU 和内存要求适用于每个安装了 RKE2 的实例。这里列出了建议的最低配置要求。
+
+| 部署规模 | 集群    | 节点     | vCPUs | 内存 | RAM |
+| :------- | :------ | :------- | :---- | :--- | :-- |
+| 小       | 最多 5  | 最多 50  | 2     | 5 GB |
+| 中       | 最多 15 | 最多 200 | 3     | 9 GB |
+
 ### 单节点安装的 CPU 和 内存要求
 
 这些要求适用于使用 Docker 安装 Rancher 的[单节点安装](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/_index)。
@@ -125,6 +144,24 @@ RancherD 安装时不需要 Docker。
 | :------- | :--------- | :---------- | :---- | :--- |
 | 小       | 最多 5 个  | 最多 50 个  | 1     | 4 GB |
 | 中       | 最多 15 个 | 最多 200 个 | 2     | 8 GB |
+
+## Ingress
+
+Rancher 安装的 Kubernetes 集群中的每个节点都应该运行一个 Ingress。
+
+Ingress 应被部署为 DaemonSet，以确保你的负载平衡器能够成功地将流量路由到所有节点。
+
+对于 RKE、K3s 和 RancherD 的安装，你不需要手动安装 Ingress，因为它是默认安装的。
+
+对于托管的 Kubernetes 集群（EKS、GKE、AKS）和 RKE2 Kubernetes 安装，你将需要设置 Ingress。
+
+### Ingress for RKE2
+
+目前，RKE2 默认将 nginx-ingress 部署为一个 deployment，所以你需要按照[这些步骤](/docs/rancher2.5/installation/resources/k8s-tutorials/ha-rke2/_index)将其部署为一个 DaemonSet。
+
+### Ingress for EKS
+
+关于如何部署带有 LoadBalancer 服务的 nginx-ingress-controller 的例子，请参阅[本节](/docs/rancher2.5/installation/resources/k8s-tutorials/ha-rke2/_index)。
 
 ### Rancher v2.4.0 之前的 RKE 高可用安装的 CPU 和内存要求
 

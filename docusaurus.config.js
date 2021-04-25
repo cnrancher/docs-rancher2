@@ -92,9 +92,9 @@ module.exports = {
         sidebars,
         metadata,
         stable: "版本说明 - v2.5.6",
-        baseCommit: "10e5ef35af10c4c622af3d1314a40e6c92ae4dbe - Apr 12, 2021",
+        baseCommit: "67b003efc6b175288d9c6e3d9c051486db65270c - Apr 25, 2021",
         k3sBaseCommit:
-            "10e5ef35af10c4c622af3d1314a40e6c92ae4dbe - Apr 12, 2021",
+            "67b003efc6b175288d9c6e3d9c051486db65270c - Apr 25, 2021",
     },
     plugins: ["@docusaurus/plugin-baidu-analytics"],
 };
