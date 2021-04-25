@@ -19,7 +19,7 @@
     },
     "dependencies": {
         "@docusaurus/core": "^2.0.0-alpha.72",
-        "@docusaurus/plugin-baidu-analytics": "^2.0.0-alpha.72",
+        "@docusaurus/plugin-baidu-analytics": "https://github.com/thxcode/docusaurus-plugin-baidu-analytics",
         "@docusaurus/plugin-sitemap": "^2.0.0-alpha.72",
         "@docusaurus/preset-classic": "^2.0.0-alpha.72",
         "axios": "0.21.1",
