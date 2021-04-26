@@ -26,7 +26,7 @@ keywords:
 
 [离线安装](/docs/k3s/installation/airgap/_index) 详细介绍了如何在不能直接接入互联网的环境中设置 K3s。
 
-[禁用组件标志](docs/k3s/installation/disable-flags/_index) 详细介绍了如何在 K3s 上单独设置 etcd 节点和 controlplane 节点。
+[禁用组件标志](/docs/k3s/installation/disable-flags/_index) 详细介绍了如何在 K3s 上单独设置 etcd 节点和 controlplane 节点。
 
 ## 卸载 K3s
 
