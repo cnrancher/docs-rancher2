@@ -90,7 +90,7 @@ Rancher 使用 LDAP 查询来搜索和检索关于 Active Directory 中的用户
 | 用户名属性     | 其值适合作为显示名称的用户属性。                                                                                                                                                                                                                                                                                                                                                                                      |
 | 登录属性       | 其值与用户登录 Rancher 时输入的凭据的用户名部分匹配的属性。如果您的用户以其 UPN（例如`jdoe@acme.com`）作为用户名进行身份验证，则此字段通常必须设置为`userPrincipalName`。否则，对于旧的 NetBIOS 风格的登录名（例如`jdoe`），通常是`sAMAccountName`。                                                                                                                                                                  |
 | 用户成员属性   | 包含用户所属组的属性。                                                                                                                                                                                                                                                                                                                                                                                                |
-| 搜索属性       | 当用户输入文本以在用户界面中添加用户或组时，Rancher 会查询 AD 服务器，并尝试根据此设置中提供的属性匹配用户。可以通过使用管道(“\|”)符号分隔属性来指定多个属性。要匹配 UPN 用户名(例如 jdoe@acme.com)，通常应将此字段的值设置为`userPrincipalName`。                                                                                                                                                                    |
+| 搜索属性       | 当用户输入文本以在用户界面中添加用户或组时，Rancher 会查询 AD 服务器，并尝试根据此设置中提供的属性匹配用户。可以通过使用管道(“\|”)符号分隔属性来指定多个属性。要匹配 UPN 用户名(例如 `jdoe@acme.com`)，通常应将此字段的值设置为`userPrincipalName`。                                                                                                                                                                  |
 | 搜索筛选器     | 当 Rancher 尝试将用户添加到网站访问列表或尝试将成员添加到集群或项目时，此筛选器将应用于搜索的用户列表。例如，用户搜索过滤器可以是 <code>(&#124;(memberOf=CN=group1,CN=Users,DC=testad,DC=rancher,DC=io)(memberOf=CN=group2,CN=Users,DC=testad,DC=rancher,DC=io))</code>。注意：如果搜索筛选器未使用[有效的 AD 搜索语法](https://docs.microsoft.com/en-us/windows/win32/adsi/search-filter-syntax)，则用户列表将为空。 |
 | 用户启用属性   | 它是一个整数值，用来标识用户帐户。Rancher 使用此选项来确定用户帐户是否已禁用。通常应将此设置为 AD 标准的`userAccountControl`。                                                                                                                                                                                                                                                                                        |
 | 禁用状态位掩码 | 这是指定禁用用户帐户的`用户启用属性`的值。通常，您应该将此设置为 Microsoft Active Directory 架构中指定的默认值`2`（请参见[此处](https://docs.microsoft.com/en-us/windows/win32/adschema/a-useraccountcontrol#remarks)）。                                                                                                                                                                                             |
@@ -177,7 +177,7 @@ $ ldapsearch -x -D "acme\jdoe" -w "secret" -p 389 \
 
 > **注意：**
 >
-> 如果我们组织中的 AD 用户使用其 UPN（例如 jdoe@acme.com）而不是短登录名进行身份验证，则我们必须将`登录属性`设置为**userPrincipalName**。
+> 如果我们组织中的 AD 用户使用其 UPN（例如 `jdoe@acme.com`）而不是短登录名进行身份验证，则我们必须将`登录属性`设置为**userPrincipalName**。
 
 我们还将`搜索属性`参数设置为**sAMAccountName | name**。这样，用户可以通过输入用户名或全名添加到 Rancher UI 中的集群/项目中。
 
