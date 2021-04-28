@@ -42,7 +42,7 @@ _自 v2.3.0 版本起可用_
 1. 单击[这里](https://console.developers.google.com/apis/credentials)转到您的 Google 域的凭证页面。
 1. 选择您的项目并单击**OAuth consent screen.**
    ![OAuth同意屏幕](/img/rancher/Google-OAuth-consent-screen-tab.png)
-1. 进入**授权域**，并在列表中输入您的 Rancher Server URL 的顶级私有域。顶级私有域是最右边的超级域。例如，www.foo.co.uk 是 foo.co.uk 的顶级私有域。有关顶级域的更多信息，请参考[本文](https://github.com/google/guava/wiki/InternetDomainNameExplained#public-suffixes-private-domains)。
+1. 进入**授权域**，并在列表中输入您的 Rancher Server URL 的顶级私有域。顶级私有域是最右边的超级域。例如，`www.foo.co.uk` 是 `foo.co.uk` 的顶级私有域。有关顶级域的更多信息，请参考[本文](https://github.com/google/guava/wiki/InternetDomainNameExplained#public-suffixes-private-domains)。
 1. 进入**Scopes for Google APIs**，确保**email**, **profile**和**openid**被启用。
 
 **结果:** Rancher 已被添加为 Admin SDK API 的授权域。

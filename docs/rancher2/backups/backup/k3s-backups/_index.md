@@ -38,4 +38,4 @@ keywords:
 
 - [MySQL 官方文档](https://dev.mysql.com/doc/refman/8.0/en/replication-snapshot-method.html)
 - [PostgreSQL 官方文档](https://www.postgresql.org/docs/8.3/backup-dump.html)
-- [etcd 官方文档](https://github.com/etcd-io/website/tree/master/content/docs)
+- [etcd 官方文档](https://github.com/etcd-io/website/tree/master/content/en/docs)
