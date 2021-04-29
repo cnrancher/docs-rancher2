@@ -54,41 +54,41 @@ RKE 可以在大多数已安装 Docker 的 Linux 操作系统上运行。RKE 的
         done
     ```
 
-返回的模组应该包括下列的所有模组：
+    返回的模组应该包括下列的所有模组：
 
-| 模组名称               |
-| :--------------------- |
-| br_netfilter           |
-| ip6_udp_tunnel         |
-| ip_set                 |
-| ip_set_hash_ip         |
-| ip_set_hash_net        |
-| iptable_filter         |
-| iptable_nat            |
-| iptable_mangle         |
-| iptable_raw            |
-| nf_conntrack_netlink   |
-| nf_conntrack           |
-| nf_conntrack_ipv4      |
-| nf_defrag_ipv4         |
-| nf_nat                 |
-| nf_nat_ipv4            |
-| nf_nat_masquerade_ipv4 |
-| nfnetlink              |
-| udp_tunnel             |
-| veth                   |
-| vxlan                  |
-| x_tables               |
-| xt_addrtype            |
-| xt_conntrack           |
-| xt_comment             |
-| xt_mark                |
-| xt_multiport           |
-| xt_nat                 |
-| xt_recent              |
-| xt_set                 |
-| xt_statistic           |
-| xt_tcpudp              |
+    | 模组名称               |
+    | :--------------------- |
+    | br_netfilter           |
+    | ip6_udp_tunnel         |
+    | ip_set                 |
+    | ip_set_hash_ip         |
+    | ip_set_hash_net        |
+    | iptable_filter         |
+    | iptable_nat            |
+    | iptable_mangle         |
+    | iptable_raw            |
+    | nf_conntrack_netlink   |
+    | nf_conntrack           |
+    | nf_conntrack_ipv4      |
+    | nf_defrag_ipv4         |
+    | nf_nat                 |
+    | nf_nat_ipv4            |
+    | nf_nat_masquerade_ipv4 |
+    | nfnetlink              |
+    | udp_tunnel             |
+    | veth                   |
+    | vxlan                  |
+    | x_tables               |
+    | xt_addrtype            |
+    | xt_conntrack           |
+    | xt_comment             |
+    | xt_mark                |
+    | xt_multiport           |
+    | xt_nat                 |
+    | xt_recent              |
+    | xt_set                 |
+    | xt_statistic           |
+    | xt_tcpudp              |
 
 - 运行以下命令，修改 sysctl 配置：
 
@@ -110,7 +110,7 @@ rpm -q docker-ce
 
 使用上游 Docker 包时，请按照[以非 root 用户身份管理 Docker](https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user)。
 
-#### 使用 SUSE/openSUSE 打包的 docker
+#### 使用 SUSE/openSUSE 打包的 Docker
 
 如果你使用的是 SUSE/openSUSE 提供的 Docker 包，包名是`docker`。你可以通过执行以下命令来检查安装的软件包。
 
