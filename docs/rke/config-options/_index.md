@@ -16,11 +16,13 @@ keywords:
   - Kubernetes 配置选项
 ---
 
+## 概述
+
 编辑 RKE 的`cluster.yml`文件时，您可以在文件中配置多种不同的选项，控制 RKE 如何启动 Kubernetes。
 
 为了让用户对如何使用`cluster.yml`文件配置 Kubernetes 选项有更好的了解，RKE 提供了几个 yaml 示例，详情请参考[yaml 示例](/docs/rke/example-yamls/_index)。
 
-### 配置节点选项
+## 配置节点选项
 
 - [节点选项配置](/docs/rke/config-options/nodes/_index)
 - [检查 Docker 版本](#支持的-Docker-版本)
@@ -29,7 +31,7 @@ keywords:
 - [SSH Agent](#ssh-agent)
 - [堡垒机配置](/docs/rke/config-options/bastion-host/_index)
 
-### 配置 Kubernetes 集群选项
+## 配置 Kubernetes 集群选项
 
 - [集群名称](#集群名称)
 - [Kubernetes 版本](#Kubernetes-版本)
@@ -63,7 +65,11 @@ cluster_name: mycluster
 
 ### 检查 Docker 版本
 
-默认情况下，RKE 会检查所有主机上已安装的 Docker 的版本号，如果 Kubernetes 不支持该版本的 Docker，会导致 RKE 运行失败并且报错。请参考[RKE 支持的 Docker 版本](https://github.com/rancher/rke/blob/master/docker/docker.go#L37-L41)，找到您正在使用的 RKE 版本、它支持的 Docker 版本号和 Kubernetes 版本号。如果您不希望在运行 RKE 之前检查 Docker 版本号，您可以打开`cluster.yml`文件，找到`ignore_docker_version`一栏，并将它的值设定为`true`。`ignore_docker_version`是一个 boolean 类型的参数，表示在运行 RKE 前是否执行 Docker 版本检测，可选值为`true`和`false`，默认值为`false`。以下代码示例省略了`cluster.yaml`文件中的其他参数，展示了如何将`ignore_docker_version`的值修改为`true`。修改后不会在运行 RKE 前检查所有主机的 Docker 版本号。
+默认情况下，RKE 会检查所有主机上已安装的 Docker 的版本号，如果 Kubernetes 不支持该版本的 Docker，会导致 RKE 运行失败并且报错。请参考[RKE 支持的 Docker 版本](https://github.com/rancher/rke/blob/master/docker/docker.go#L37-L41)，找到您正在使用的 RKE 版本、它支持的 Docker 版本号和 Kubernetes 版本号。
+
+`ignore_docker_version`是一个 boolean 类型的参数，表示在运行 RKE 前是否执行 Docker 版本检测，可选值为`true`和`false`，默认值为`false`。
+
+如果您不希望在运行 RKE 之前检查 Docker 版本号，您可以打开`cluster.yml`文件，找到`ignore_docker_version`一栏，并将它的值设定为`true`。以下代码示例展示了如何将`ignore_docker_version`的值修改为`true`，修改后不会在运行 RKE 前检查所有主机的 Docker 版本号。
 
 ```yaml
 ignore_docker_version: true
