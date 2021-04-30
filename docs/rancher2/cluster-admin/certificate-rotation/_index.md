@@ -28,7 +28,7 @@ keywords:
 - kube-scheduler
 - kube-controller-manager
 
-:::note 警告
+:::warning 警告
 轮换 Kubernetes 证书可能会导致集群在重新启动组件时暂时不可用。对于生产环境，建议在维护时段内执行此操作。
 :::
 
@@ -104,7 +104,7 @@ _可用版本: rke v0.2.0+_
 
 > **注意** 如果以前是通过`rke v0.2.0`之前的版本创建的 Kubernetes 集群，在轮换证书前先执行`rke up`操作，参考[证书管理](/docs/rke/cert-mgmt/_index)
 
-- 通过 RKE 轮换证书，目前支持:
+- 通过 RKE 轮换证书，目前支持的操作包括：
 
   - 批量更新所有服务证书(CA 证书不变)
   - 更新某个指定服务(CA 证书不变)
@@ -216,14 +216,15 @@ _可用版本: rke v0.2.0+_
 
      - 2.4 +
 
-       1. exec 到rancher server
+       1. exec 到 rancher server
 
        ```bash
        kubectl --insecure-skip-tls-verify -n kube-system delete secrets k3s-serving
        kubectl --insecure-skip-tls-verify delete secret serving-cert -n cattle-system
        rm -f /var/lib/rancher/k3s/server/tls/dynamic-cert.json
        ```
-       2. 重启rancher-server
+
+       2. 重启 rancher-server
 
        3. 执行以下命令刷新参数
 
