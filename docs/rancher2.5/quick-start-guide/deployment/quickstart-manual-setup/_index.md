@@ -25,7 +25,7 @@ keywords:
 - [登录 Rancher 2.x 并配置初始设置](#登录-rancher-界面并配置初始设置)
 - [创建业务集群](#创建业务集群)
 
-## 运行 Linux 主机:
+## 运行 Linux 主机
 
 首先，您需要运行一台 Linux 主机，Rancher 支持的 Linux 主机类型包括：
 
@@ -33,13 +33,13 @@ keywords:
 - 本地数据中心的虚拟机
 - 裸金属服务器（BMS）
 
-  > **说明：**
-  >
-  > 如果您使用的是云端虚拟机，请开放 **80 端口**和 **443 端口**的流入流量，详情请参考云服务提供商的文档。
-  >
-  > 有关业务集群的端口的详细要求，请参考[下游集群节点要求](/docs/rancher2.5/cluster-provisioning/node-requirements/_index)。
+:::note 说明
 
-  请按照[具体要求](/docs/rancher2.5/installation/requirements/_index)配置 Linux 主机。
+1. 如果您使用的是云端虚拟机，请开放 **80 端口**和 **443 端口**的流入流量，详情请参考云服务提供商的文档。
+1. 有关业务集群的端口的详细要求，请参考[下游集群节点要求](/docs/rancher2/cluster-provisioning/node-requirements/_index)。
+1. 请按照[具体要求](/docs/rancher2/installation/requirements/_index)配置 Linux 主机。
+
+:::
 
 ## 安装 Rancher 2.x
 
@@ -48,20 +48,11 @@ keywords:
 1.  使用 shell 工具（如 PuTTy 或其他连接工具）登录 Linux 主机。
 
 2.  执行以下命令：
-    如果您使用的 Rancher 2.5.x 及更新版本，需要开启特权模式安装 Rancher，请执行以下命令：
 
     ```bash
-    #如果您使用的 Rancher 2.5.x 及更新版本，需要开启特权模式安装 Rancher，请执行以下命令：
     docker run -d --privileged --restart=unless-stopped \
       -p 80:80 -p 443:443 \
       rancher/rancher:latest
-    ```
-
-    如果您使用的 Rancher 2.4.x 及之前的版本，请执行以下命令：
-
-    ```bash
-    #如果您使用的 Rancher 2.4.x 及之前的版本，请执行以下命令：
-    sudo docker run -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher
     ```
 
 **结果：** Rancher 已经安装在了 Linux 主机上。
