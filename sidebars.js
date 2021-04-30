@@ -46,7 +46,7 @@ module.exports = {
             "rancher2/installation/requirements/_index",
             "rancher2/quick-start-guide/deployment/quickstart-manual-setup/_index",
             "rancher2/quick-start-guide/cli/_index",
-            "rancher2.5/installation/other-installation-methods/single-node-docker/_index",
+            "rancher2/installation/other-installation-methods/single-node-docker/_index",
         ],
         产品介绍: [
             "rancher2/overview/_index",
