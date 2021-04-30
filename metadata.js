@@ -166,8 +166,24 @@ const metadata = {
             "rancher2/releases/v2.3.1": "版本说明 - v2.3.1",
             "rancher2/releases/v2.3.0": "版本说明 - v2.3.0",
             // end of this section
-            //热点问题
+            //热点问题，需要定时刷新
             "rancher2/trending-topics/_index": "热点问题",
+            "rancher2/cluster-admin/certificate-rotation/_index":
+                "如何为Rancher轮换证书？",
+            "rancher2/cluster-admin/cleaning-cluster-nodes/_index":
+                "如何清理节点？",
+            "rancher2/quick-start-guide/deployment/_index":
+                "如何部署Rancher Server？",
+            "rancher2/installation/install-rancher-on-k8s/_index":
+                "如何安装高可用Rancher？",
+            "rancher2/installation/requirements/_index":
+                "我的机器需要满足哪些条件才能安装Rancher？",
+            "rancher2/quick-start-guide/deployment/quickstart-manual-setup/_index":
+                "如何手动快速部署Rancher Server？",
+            "rancher2/quick-start-guide/cli/_index":
+                "如何通过Rancher CLI控制Rancher？",
+            "rancher2/installation/other-installation-methods/single-node-docker/_index":
+                "如何安装单节点Rancher？",
             // end of this section
             //产品介绍
             "rancher2/overview/_index": "产品简介",
@@ -402,7 +418,28 @@ const metadata = {
             "rancher2.5/releases/v2.5.2": "版本说明 - v2.5.2",
             "rancher2.5/releases/v2.5.1": "版本说明 - v2.5.1",
             "rancher2.5/releases/v2.5.0": "版本说明 - v2.5.0",
+            //热点问题，需定时刷新
             "rancher2.5/trending-topics/_index": "热点问题",
+            "rancher2.5/cluster-admin/certificate-rotation/_index":
+                "如何为Rancher轮换证书？",
+            "rancher2.5/cluster-admin/cleaning-cluster-nodes/_index":
+                "如何清理节点？",
+            "rancher2.5/quick-start-guide/deployment/_index":
+                "如何部署Rancher Server？",
+            "rancher2.5/installation/install-rancher-on-k8s/_index":
+                "如何安装高可用Rancher？",
+            "rancher2.5/installation/requirements/_index":
+                "我的机器需要满足哪些条件才能安装Rancher？",
+            "rancher2.5/quick-start-guide/deployment/quickstart-manual-setup/_index":
+                "如何手动快速部署Rancher Server？",
+            "rancher2.5/quick-start-guide/cli/_index":
+                "如何通过Rancher CLI控制Rancher？",
+            "rancher2.5/installation/other-installation-methods/single-node-docker/_index":
+                "如何安装单节点Rancher？",
+            "rancher2.5/installation/install-rancher-on-linux/_index":
+                "如何在Linux操作系统上安装Rancher？",
+
+            //
             "rancher2.5/overview/_index": "产品简介",
             "rancher2.5/overview/architecture/_index": "产品架构",
             "rancher2.5/overview/architecture-recommendations/_index":
@@ -777,7 +814,7 @@ const metadata = {
             基础设施
              */
             "rancher1/infrastructure/cattle/adding-external-services/_index":
-                "",
+                "添加外部服务",
             "rancher1/infrastructure/cattle/adding-load-balancers/_index":
                 "添加负载均衡",
             "rancher1/infrastructure/cattle/adding-service-alias/_index":
