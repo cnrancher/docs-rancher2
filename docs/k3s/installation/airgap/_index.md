@@ -140,4 +140,4 @@ K3s 还为 kubelets 提供了一个`--resolv-conf`标志，这可能有助于在
    rancher/kubectl:v0.17.0
    ```
 
-1. 将必要的 rancher/k3s-upgrade、rancher/system-upgrade-controller 和 rancher/kubectl 镜像添加到您的私有镜像仓库中 yihou ，就可以按照[K3s 自动升级指南](/docs/k3s/upgrades/automated/_index)进行操作。
+1. 将必要的 rancher/k3s-upgrade、rancher/system-upgrade-controller 和 rancher/kubectl 镜像添加到您的私有镜像仓库中以后 ，就可以按照[K3s 自动升级指南](/docs/k3s/upgrades/automated/_index)进行操作。
