@@ -26,7 +26,7 @@ _2021.4.30 更新_
     请参考[证书轮换](/docs/rancher2.5/trending-topics/certificate-rotation/_index)页面，获取轮换证书的操作指导。
 
 1.  如何清理节点？
-    请参考[清理节点](/docs/rancher2.5/cluster-admin/trending-topics/_index)获取清理节点的操作指导。
+    请参考[清理节点](/docs/rancher2.5/trending-topics/cleaning-cluster-nodes/_index)获取清理节点的操作指导。
 
 1.  如何部署 Rancher Server？
     请参考[部署 Rancher Server](/docs/rancher2.5/trending-topics/deployment/_index)，获取部署 Rancher Server 的操作指导。
