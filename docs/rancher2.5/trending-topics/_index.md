@@ -23,28 +23,28 @@ Rancher 整理了近期微信粉丝群内经常提及的问题和用户经常访
 _2021.4.30 更新_
 
 1.  如何为 Rancher 轮换证书？
-    请参考[证书轮换](/docs/rancher2.5/cluster-admin/certificate-rotation/_index)页面，获取轮换证书的操作指导。
+    请参考[证书轮换](/docs/rancher2.5/trending-topics/certificate-rotation/_index)页面，获取轮换证书的操作指导。
 
 1.  如何清理节点？
-    请参考[清理节点](/docs/rancher2.5/cluster-admin/cleaning-cluster-nodes/_index)获取清理节点的操作指导。
+    请参考[清理节点](/docs/rancher2.5/cluster-admin/trending-topics/_index)获取清理节点的操作指导。
 
 1.  如何部署 Rancher Server？
-    请参考[部署 Rancher Server](/docs/rancher2.5/quick-start-guide/deployment/_index)，获取部署 Rancher Server 的操作指导。
+    请参考[部署 Rancher Server](/docs/rancher2.5/trending-topics/deployment/_index)，获取部署 Rancher Server 的操作指导。
 
 1.  如何安装高可用 Rancher？
-    请参考[高可用安装指南](/docs/rancher2.5/installation/install-rancher-on-k8s/_index)，获取高可用安装操作指导。
+    请参考[高可用安装指南](/docs/rancher2.5/trending-topics/install-rancher-on-k8s/_index)，获取高可用安装操作指导。
 
 1.  我的机器需要满足哪些条件才能安装 Rancher？
-    请参考[安装要求](/docs/rancher2.5/installation/requirements/_index)。
+    请参考[安装要求](/docs/rancher2.5/trending-topics/requirements/_index)。
 
 1.  如何手动快速部署 Rancher Server？
-    请参考[手动快速部署](/docs/rancher2.5/quick-start-guide/deployment/quickstart-manual-setup/_index)，获取手动快速部署 Rancher Server 的操作指导。
+    请参考[手动快速部署](/docs/rancher2.5/trending-topics/quickstart-manual-setup/_index)，获取手动快速部署 Rancher Server 的操作指导。
 
 1.  如何通过 Rancher CLI 控制 Rancher？
-    请参考[命令行工具](/docs/rancher2.5/quick-start-guide/cli/_index)，获取 Rancher CLI 使用指南。
+    请参考[命令行工具](/docs/rancher2.5/trending-topics/cli/_index)，获取 Rancher CLI 使用指南。
 
 1.  如何安装单节点 Rancher？
-    请参考[单节点安装指南](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/_index)，获取安装单节点 Rancher 的操作指导。
+    请参考[单节点安装指南](/docs/rancher2.5/trending-topics/single-node-docker/_index)，获取安装单节点 Rancher 的操作指导。
 
 1.  如何在 Linux 操作系统上安装 Rancher？
-    请参考[在 Linux 操作系统上安装 Rancher](/docs/rancher2.5/installation/install-rancher-on-linux/_index)，获取在 Linux 操作系统上安装 Rancher 的操作指导。
+    请参考[在 Linux 操作系统上安装 Rancher](/docs/rancher2.5/trending-topics/install-rancher-on-linux/_index)，获取在 Linux 操作系统上安装 Rancher 的操作指导。
