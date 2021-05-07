@@ -949,6 +949,7 @@ module.exports = {
     rancher2_5: {
         版本说明: [
             "rancher2.5/_index",
+            "rancher2.5/releases/v2.5.8",
             "rancher2.5/releases/v2.5.7",
             "rancher2.5/releases/v2.5.6",
             "rancher2.5/releases/v2.5.5",
