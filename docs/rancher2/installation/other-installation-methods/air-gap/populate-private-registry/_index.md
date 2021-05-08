@@ -91,6 +91,18 @@ keywords:
    ./rancher-save-images.sh --image-list ./rancher-images.txt
    ```
 
+   :::tip 提示
+   国内用户，可以从 http://mirror.rancher.cn --> rancher --> [rancher 版本] 下载 rancher-save-images.sh，该脚本支持通过参数 `--from-aliyun true` 来指定从阿里云镜像仓库拉去rancher镜像（从rancher/rancher release下载的rancher-save-images.sh不支持该参数），例如：
+
+   ```
+   ./rancher-save-images.sh --image-list ./rancher-images.txt --from-aliyun true
+   Image pull success: registry.cn-hangzhou.aliyuncs.com/rancher/busybox
+   Image pull success: registry.cn-hangzhou.aliyuncs.com/rancher/backup-restore-operator:v1.0.4-rc4
+   ...
+   ```
+
+   :::
+
    **结果：** Docker 会开始拉取用于离线安装所需的镜像。这个过程会花费几分钟时间。完成时，您的当前目录会输出名为`rancher-images.tar.gz`的压缩包。请确认输出文件是否存在。
 
 #### 4、推送镜像到私有镜像库
@@ -259,6 +271,18 @@ Linux 镜像需要从 Linux 主机上收集和推送，但是必须先将 Window
    ```plain
    ./rancher-save-images.sh --image-list ./rancher-images.txt
    ```
+
+   :::tip 提示
+   国内用户，可以从 http://mirror.rancher.cn --> rancher --> [rancher 版本] 下载 rancher-save-images.sh，该脚本支持通过参数 `--from-aliyun true` 来指定从阿里云镜像仓库拉去rancher镜像（从rancher/rancher release下载的rancher-save-images.sh不支持该参数），例如：
+
+   ```
+   ./rancher-save-images.sh --image-list ./rancher-images.txt --from-aliyun true
+   Image pull success: registry.cn-hangzhou.aliyuncs.com/rancher/busybox
+   Image pull success: registry.cn-hangzhou.aliyuncs.com/rancher/backup-restore-operator:v1.0.4-rc4
+   ...
+   ```
+
+   :::
 
    **结果：** Docker 会开始拉取用于离线安装所需的镜像。这个过程会花费几分钟时间。完成时，您的当前目录会输出名为 rancher-images.tar.gz 的压缩包。请确认文件是否存在。
 
