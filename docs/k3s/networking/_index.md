@@ -45,6 +45,10 @@ Traefik 可以通过编辑`traefik.yaml`文件进行配置。为了防止 k3s �
 
 要禁用它，请使用`--disable traefik`选项启动每个 server。
 
+如果未禁用Traefik，则K3s 1.20及更早版本将安装Traefik v1，而K3s 1.21及更高版本将安装Traefik v2（如果v1不存在）。
+
+要从较旧的Traefik v1实例进行迁移，请参考[Traefik文档](https://doc.traefik.io/traefik/migration/v1-to-v2/) 和[迁移工具](https://github.com/traefik/traefik-migration-tool)。
+
 ## Service Load Balancer
 
 在你的 Kubernetes 集群中可以使用 service load balancer（LB）。K3s 提供了一个名为[Klipper Load Balancer](https://github.com/rancher/klipper-lb)的负载均衡器，它可以使用可用的主机端口。

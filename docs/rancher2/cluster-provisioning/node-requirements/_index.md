@@ -112,7 +112,7 @@ Windows 节点只能用于工作节点。详情请参阅[配置自定义 Windows
 
 有关 kubernetes 集群中 etcd 节点、controlplane 节点和 worker 节点的端口要求的详细信息，请参阅 [Rancher Kubernetes Engine 的端口要求](/docs/rke/os/_index)。
 
-有关在每种情况下使用哪些端口的详细信息，请参阅[端口要求](/docs/rancher2/cluster-provisioning/node-requirements/_index)。
+有关在每种情况下使用哪些端口的详细信息，请参阅[端口要求](/docs/rancher2/installation/requirements/ports/_index#下游-kubernetes-集群节点)。
 
 ## 可选：安全加固指南
 
