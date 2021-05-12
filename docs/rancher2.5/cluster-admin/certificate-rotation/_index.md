@@ -213,6 +213,24 @@ _可用版本: rke v0.2.0+_
        # 执行两侧，第一次用于申请证书，第二次用于加载证书并启动
        docker restart <rancher_server_id>
        ```
+       
+     - 2.4 +
+
+       1. exec 到 rancher server
+
+       ```bash
+       kubectl --insecure-skip-tls-verify -n kube-system delete secrets k3s-serving
+       kubectl --insecure-skip-tls-verify delete secret serving-cert -n cattle-system
+       rm -f /var/lib/rancher/k3s/server/tls/dynamic-cert.json
+       ```
+
+       2. 重启 rancher-server
+
+       3. 执行以下命令刷新参数
+
+       ```bash
+       curl --insecure -sfL https://server-url/v3
+       ```
 
   3. 重启 Rancher Server 容器
      ```bash

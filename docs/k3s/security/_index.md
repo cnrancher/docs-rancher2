@@ -3,7 +3,9 @@ title: "Security"
 weight: 90
 ---
 
-This section describes the methodology and means of securing a K3s cluster. It's broken into 2 sections.
+本节介绍了保护K3s集群的方法和手段。它分为两个部分。这些指南假定K3s是以嵌入式etcd运行的。
+
+下面的文件同时适用于CIS 1.5和1.6。
 
 - [Hardening Guide](/docs/k3s/security/hardening-guide/_index)
 - [CIS Benchmark Self-Assessment Guide](/docs/k3s/security/self-assessment/_index)
