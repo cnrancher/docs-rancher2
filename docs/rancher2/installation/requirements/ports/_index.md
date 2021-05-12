@@ -135,21 +135,13 @@ RancherD 或 RKE2 服务器节点的入站规则如下：
 
 :::
 
-### Ports for Rancher Server in GCP GKE
-
-When deploying Rancher into a Google Kubernetes Engine [private cluster](https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters), the nodes where Rancher runs must be accessible from the control plane:
-
-| Protocol | Port | Source                     | Description      |
-| -------- | ---- | -------------------------- | ---------------- |
-| TCP      | 9443 | The GKE master `/28` range | Rancher webhooks |
-
 ### GCP GKE 中 Rancher Server 端口
 
 当把 Rancher 部署到 GKE [私有集群](https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters)中时，Rancher 运行的节点必须可以从 controlplane 访问。
 
-| 协议｜端口｜来源｜描述 |
-| :--------------------- | :--- | :------------------------- | :--------------- |
-| TCP                    | 9443 | The GKE master `/28` range | Rancher webhooks |
+| 协议 | 端口 | 来源                       | 描述             |
+| :--- | :--- | :------------------------- | :--------------- |
+| TCP  | 9443 | The GKE master `/28` range | Rancher webhooks |
 
 ## 下游 Kubernetes 集群节点
 
