@@ -40,7 +40,7 @@ Rancher 版本必须是 v2.5.0 及以上。
 1. 在**Cluster Explorer**中，进入左上角的下拉菜单，单击**Rancher Backups**。
 1. 单击 **Backup**。
 1. 使用表单或 YAML 编辑器创建 Backup。
-1. 要使用该表单配置 Backup 详细信息，请单击**Create**，然后参考[配置参考](./../configuration/back-up-config/_index)和[范例](./../examples/_index#备份)。
+1. 要使用该表单配置 Backup 详细信息，请单击**Create**，然后参考[配置参考](/docs/rancher2.5/backups/configuration/back-up-config/_index)和[范例](/docs/rancher2.5/backups/examples/_index)。
 1. 要使用 YAML 编辑器，我们可以单击**Create > Create from YAML**，输入 Backup YAML。这个例子备份自定义资源将在 S3 中创建加密的定期备份：
 
    ```yaml

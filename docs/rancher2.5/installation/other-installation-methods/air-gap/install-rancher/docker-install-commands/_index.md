@@ -33,7 +33,7 @@ Docker 安装是为那些想测试 Rancher 的用户准备的。
 | `CATTLE_SYSTEM_DEFAULT_REGISTRY` | `<REGISTRY.YOURDOMAIN.COM:PORT>` | 配置 Rancher Server，使其在配置集群时总是从你的私有镜像仓库中提取。                                                                                                                                                                                                                                                                         |
 | `CATTLE_SYSTEM_CATALOG`          | `bundled`                        | 配置 Rancher Server 以使用 Helm System Chart 的打包拷贝。[system charts](https://github.com/rancher/system-charts)资源库包含了监控、日志、警报和全局 DNS 等功能所需的所有目录项。这些[Helm charts](https://github.com/rancher/system-charts)位于 GitHub 中，但由于你处在离线环境中，使用 Rancher 内捆绑的 chart 要比设置 Git 镜像容易得多。 |
 
-- 如果需要配置自定义 CA 根证书来访问您的服务，请参考[自定义 CA 根证书](/docs/rancher2.5/installation/options/custom-ca-root-certificate/_index)。
+- 如果需要配置自定义 CA 根证书来访问您的服务，请参考[自定义 CA 根证书](/docs/rancher2.5/installation/resources/custom-ca-root-certificate/_index)。
 
 - 如果需要记录所有与 Rancher API 的交易，请参考[API 审计](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/advanced/_index) 。
 

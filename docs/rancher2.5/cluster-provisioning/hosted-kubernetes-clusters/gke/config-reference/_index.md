@@ -94,7 +94,7 @@ Pod IP 地址的现有二级范围的名称。如果选择，**集群 Pod 地址
 
 #### 私有集群
 
-> 警告：私有集群需要 Rancher 之外的额外规划和配置。请参考[私有集群指南]({{< baseurl >}}/rancher/v2.5/en/cluster-provisioning/hosted-kubernetes-clusters/gke/private-clusters/) 。
+> 警告：私有集群需要 Rancher 之外的额外规划和配置。请参考[私有集群指南](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/gke/private-clusters/_index) 。
 
 只给节点分配内部 IP 地址。除非在 GCP 中采取额外的网络步骤，否则私有集群节点不能访问公共互联网。
 
