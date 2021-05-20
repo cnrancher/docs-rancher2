@@ -140,7 +140,7 @@ _从 v2.5.8 版起可用_
 
 为了能够完全部署 Windows 的 Monitoring V2，你的所有 Windows 主机必须有至少[wins](https://github.com/rancher/wins) v0.1.0 的版本。
 
-有关如何在现有 Windows 主机上升级 wins 的更多细节，请参阅 [Windows 集群对监控 V2 的支持](./windows-clusters) 一节。
+有关如何在现有 Windows 主机上升级 wins 的更多细节，请参阅 [Windows 集群对监控 V2 的支持](/docs/rancher2.5/monitoring-alerting/windows-clusters/_index) 一节。
 
 ## 使用监控
 
