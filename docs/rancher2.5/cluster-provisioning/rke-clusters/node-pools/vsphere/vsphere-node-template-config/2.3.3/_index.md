@@ -56,7 +56,7 @@ Your cloud credential has these fields:
 - **从 Data Center 模板部署**：选择您选择的数据中心中存在的虚拟机模板。
 - **从 Content Library 模板部署**首先，选择包含您的模板的[内容库](https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.vm_admin.doc/GUID-254B2CE8-20A8-43F0-90E8-3F6776C2C896.html)，然后从弹出的列表中选择模板**库模板**。
 - **克隆一个现有的虚拟机：**在**Virtual machine**字段中，选择一个现有的虚拟机，新的虚拟机将从该虚拟机中克隆出来。
-- **从 boot2docker ISO 安装**：** 确保 **OS ISO URL\*\* 字段包含 RancherOS 的 VMware ISO 版本的 URL (`rancheros-vmware.iso`)。请注意，此 URL 必须可以从运行 Rancher 服务器安装的节点访问。
+- **从 boot2docker ISO 安装**：确保 **OS ISO URL**字段包含 RancherOS 的 VMware ISO 版本的 URL (`rancheros-vmware.iso`)。请注意，此 URL 必须可以从运行 Rancher 服务器安装的节点访问。
 
 ## 网络
 

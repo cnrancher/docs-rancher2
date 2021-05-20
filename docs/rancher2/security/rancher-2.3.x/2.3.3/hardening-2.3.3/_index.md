@@ -451,7 +451,7 @@ rke up --config cluster.yml
 
 Set the appropriate arguments on the Kubernetes controller manager.
 
-5\*NOTE:\*\* Setting `--address` to `127.0.0.1` will prevent Rancher cluster monitoring from scraping this endpoint.
+**NOTE:** Setting `--address` to `127.0.0.1` will prevent Rancher cluster monitoring from scraping this endpoint.
 
 **Rationale**
 
@@ -1132,7 +1132,7 @@ rke up --config cluster.yml
 
 Set the appropriate arguments on the Kubernetes controller manager.
 
-5\*NOTE:\*\* Setting `--address` to `127.0.0.1` will prevent Rancher cluster monitoring from scraping this endpoint.
+**NOTE:** Setting `--address` to `127.0.0.1` will prevent Rancher cluster monitoring from scraping this endpoint.
 
 **Rationale**
 

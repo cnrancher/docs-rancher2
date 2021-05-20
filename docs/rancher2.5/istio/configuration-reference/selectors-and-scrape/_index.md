@@ -40,7 +40,7 @@ title: Selectors和拉取配置
 1. 在**集群资源管理器**中，打开 kubectl shell。
    如果该文件存储在您的集群中的本地，请运行`kubectl create -f <name of service/pod monitor file>.yaml`。
 1. 或者运行`cat<< EOF | kubectl apply -f -`，将文件内容粘贴到终端，然后运行`EOF`完成命令。
-1. 如果开始新的安装，**单击**rancher-monitoring**图，向下滚动到**Preview Yaml\*\*。
+1. 如果开始新的安装，单击**rancher-monitoring**图，向下滚动到**Preview Yaml**。
 1. 运行`kubectl label namespace <your namespace> istio-injection=enabled`启用 envoy sidecar 注入。
 
 **结果：** `<your namespace>`可以被 Prometheus 拉取到。
