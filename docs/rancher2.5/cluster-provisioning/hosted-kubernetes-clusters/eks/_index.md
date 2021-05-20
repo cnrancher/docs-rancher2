@@ -267,7 +267,7 @@ Rancher 需要访问您的 AWS 帐户，以便在 Amazon EKS 中创建和管理�
 
 | 选项         | 描述                                                                                                                                                   | 是否必填 |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- |
-| 实例类型     | 为你要配置的实例选择[硬件规格]（https://aws.amazon.com/ec2/instance-types/）。                                                                         | 是       |
+| 实例类型     | 为你要配置的实例选择[硬件规格](https://aws.amazon.com/ec2/instance-types/)。                                                                           | 是       |
 | Image ID     | 为节点指定一个自定义 AMI。与 EKS 一起使用的自定义 AMI 必须是[正确配置的](https://aws.amazon.com/premiumsupport/knowledge-center/eks-custom-linux-ami/) | 否       |
 | 节点卷大小   | 启动模板必须指定一个具有所需大小的 EBS 卷                                                                                                              | 是       |
 | SSH 密钥     | 一个将被添加到实例的密钥，以提供对节点的 SSH 访问                                                                                                      | 否       |
@@ -485,7 +485,7 @@ Spot 实例现在[由 EKS 支持](https://docs.aws.amazon.com/eks/latest/usergui
 
 | 选项            | 描述                                                                                                                                                                                                                                                                                       |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 实例类型        | 为你要配置的实例选择[硬件规格]（https://aws.amazon.com/ec2/instance-types/）。                                                                                                                                                                                                             |
+| 实例类型        | 为你要配置的实例选择[硬件规格](https://aws.amazon.com/ec2/instance-types/)。                                                                                                                                                                                                               |
 | 自定义 AMI 覆盖 | 如果你想使用一个自定义的[Amazon Machine Image](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html#creating-an-ami)(AMI)，请在这里指定它。默认情况下，Rancher 将使用你选择的 EKS 版本的[EKS 优化 AMI](https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html)。 |
 | 期待 ASG 大小   | 你的集群将提供的实例的数量。                                                                                                                                                                                                                                                               |
 | User Data       | 可以通过自定义命令来执行自动配置任务 **警告：修改这个可能会导致你的节点无法加入集群。** \_注意：从 v2.2.0 开始可用。                                                                                                                                                                       |

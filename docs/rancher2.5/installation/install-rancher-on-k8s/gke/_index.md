@@ -49,7 +49,7 @@ Cloud Shell 是一个用于管理谷歌云上托管的资源的壳环境。Cloud
 
 要安装`gcloud`和`kubectl`，请执行以下步骤。
 
-1. 按照[这些步骤]（https://cloud.google.com/sdk/docs/install）安装 Cloud SDK。Cloud SDK 包括`gcloud`命令行工具。根据你的操作系统，步骤有所不同。
+1. 按照[这些步骤](https://cloud.google.com/sdk/docs/install)安装 Cloud SDK。Cloud SDK 包括`gcloud`命令行工具。根据你的操作系统，步骤有所不同。
 1. 安装 Cloud SDK 后，通过运行以下命令安装`kubectl`命令行工具。
 
    ```
