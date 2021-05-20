@@ -50,6 +50,21 @@ _从 v2.5.4 开始提供_
 
 Rancher v2.5.4 引入了通过在 Rancher 用户界面中填写表格来配置接收机的功能。
 
+### Native vs. Non-native Receivers
+
+默认情况下，AlertManager 提供与一些接收器的本地集成，这些接收器列在[本节](https://prometheus.io/docs/alerting/latest/configuration/#receiver)所有本地支持的接收器都可以通过 Rancher 用户界面进行配置。
+
+对于 AlertManager 不支持的通知机制，可以通过[webhook 接收器](https://prometheus.io/docs/alerting/latest/configuration/#webhook_config)实现集成。提供这种集成的第三方驱动列表可以在[这里](https://prometheus.io/docs/operating/integrations/#alertmanager-webhook-receiver)通过 Alerting Drivers 应用提供对这些驱动及其相关集成的访问。一旦启用，配置非本地接收器也可以通过 Rancher 用户界面完成。
+
+目前，Rancher Alerting Drivers 应用提供对以下集成的访问。
+
+- Microsoft Teams，基于[prom2teams](https://github.com/idealista/prom2teams)驱动程序
+- SMS，基于[Sachet](https://github.com/messagebird/sachet)驱动程序
+
+### v2.5.8
+
+Rancher v2.5.8 在 Rancher 用户界面中增加了 Microsoft Teams 和 SMS 作为可配置的接收者。
+
 ### v2.5.4+
 
 在 Rancher 用户界面中可以配置以下类型的接收器：
@@ -124,6 +139,73 @@ Rancher v2.5.4 引入了通过在 Rancher 用户界面中填写表格来配置�
 #### 自动预定义 YAML
 
 这里提供的 YAML 将直接附加到你的接收器的配置密钥中。
+
+#### Microsoft Teams
+
+**为 Rancher 管理的集群启用 Teams 接收器**。
+Teams 接收器不是一个本地接收器，必须在使用前启用。你可以为 Rancher 管理的集群启用 Teams 接收器，方法是进入应用程序页面，安装选择 Teams 选项的 rancher-alerting-drivers 应用程序。
+
+1. 在 Rancher 用户界面中，进入你想安装 rancher-alerting-drivers 的集群，点击集群资源管理器。
+1. 单击应用程序。
+1. 点击 Alerting Drivers 应用程序。
+1. 单击 "Helm Deploy Options "标签
+1. 选择团队选项，然后点击安装。
+1. 注意所使用的命名空间，因为在后面的步骤中需要它。
+
+**配置 Teams 接收器**。
+Teams 接收器可以通过更新其 ConfigMap 进行配置。例如，以下是一个最小的 Teams 接收器配置。
+
+```
+[Microsoft Teams]
+teams-instance-1: https://your-teams-webhook-url
+When configuration is complete, add the receiver using the steps in this section.
+```
+
+使用下面的例子作为 URL，其中：
+
+- `ns-1`被替换为安装`rancher-alerting-drivers`应用程序的命名空间
+
+```
+url: http://rancher-alerting-drivers-prom2teams.ns-1.svc:8089/v2/teams-instance-1
+```
+
+#### SMS
+
+**为 Rancher 管理的集群启用 SMS 接收器**。
+短信接收器不是一个本地接收器，必须在使用前启用。你可以为 Rancher 管理的集群启用短信接收器，方法是进入应用程序页面，安装 rancher-alerting-drivers 应用程序并选择短信选项。
+
+在 Rancher 用户界面，进入你想安装 rancher-alerting-drivers 的集群，点击集群资源管理器。
+点击应用程序。
+点击 Alerting Drivers 应用程序。
+点击 Helm 部署选项标签
+选择 SMS 选项并点击安装。
+注意所使用的命名空间，因为在后面的步骤中会需要它。
+**配置短信接收器**。
+SMS 接收器可以通过更新其 ConfigMap 来配置。例如，下面是一个最小的 SMS 接收器配置。
+
+```
+providers:
+  telegram:
+    token: 'your-token-from-telegram'
+
+receivers:
+- name: 'telegram-receiver-1'
+  provider: 'telegram'
+  to:
+    - '123456789'
+```
+
+配置完成后，使用本节中的步骤添加接收器。
+
+使用下面的例子作为名称和 URL，其中：
+
+- 分配给接收机的名称，如 telegram-receiver-1，必须与 ConfigMap 中 receivers.name 字段中的名称一致，如 telegram-receiver-1
+- URL 中的 ns-1 被替换为安装 rancher-alerting-drivers 应用程序的命名空间
+
+```
+name: telegram-receiver-1
+url http://rancher-alerting-drivers-sachet.ns-1.svc:9876/alert
+```
 
 ### v2.5.0-2.5.3
 

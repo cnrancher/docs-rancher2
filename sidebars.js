@@ -1021,10 +1021,12 @@ module.exports = {
                 label: "高可用安装",
                 items: [
                     "rancher2.5/installation/install-rancher-on-k8s/_index",
+                    "rancher2.5/installation/install-rancher-on-k8s/upgrades/air-gap-upgrade/_index",
                     "rancher2.5/installation/install-rancher-on-k8s/chart-options/_index",
                     "rancher2.5/installation/install-rancher-on-k8s/upgrades/_index",
                     "rancher2.5/installation/install-rancher-on-k8s/rollbacks/_index",
                     "rancher2.5/installation/install-rancher-on-k8s/amazon-eks/_index",
+                    "rancher2.5/installation/install-rancher-on-k8s/gke/_index",
                 ],
             },
             {
@@ -1051,6 +1053,7 @@ module.exports = {
                             "rancher2.5/installation/other-installation-methods/air-gap/populate-private-registry/_index",
                             "rancher2.5/installation/other-installation-methods/air-gap/launch-kubernetes/_index",
                             "rancher2.5/installation/other-installation-methods/air-gap/install-rancher/_index",
+                            "rancher2.5/installation/other-installation-methods/air-gap/install-rancher/docker-install-commands/_index",
                         ],
                     },
                     {
@@ -1350,6 +1353,7 @@ module.exports = {
                         items: [
                             "rancher2.5/cluster-provisioning/rke-clusters/windows-clusters/_index",
                             "rancher2.5/cluster-provisioning/rke-clusters/windows-clusters/host-gateway-requirements/_index",
+                            "rancher2.5/cluster-provisioning/rke-clusters/windows-clusters/windows-parity/_index",
                         ],
                     },
                     {
@@ -1373,6 +1377,7 @@ module.exports = {
                     "rancher2.5/cluster-provisioning/rke-clusters/rancher-agents/_index",
                 ],
             },
+            "rancher2.5/cluster-provisioning/syncing/_index",
         ],
         集群管理员指南: [
             "rancher2.5/cluster-admin/_index",
@@ -1547,6 +1552,7 @@ module.exports = {
                 ],
             },
             "rancher2.5/monitoring-alerting/rbac/_index",
+            "rancher2.5/monitoring-alerting/windows-clusters/_index",
             "rancher2.5/monitoring-alerting/persist-grafana/_index",
             "rancher2.5/monitoring-alerting/migrating/_index",
         ],
@@ -1644,6 +1650,7 @@ module.exports = {
                     "rancher2.5/security/rancher-2.5/1.5-hardening-2.5/_index",
                     "rancher2.5/security/rancher-2.5/1.6-benchmark-2.5/_index",
                     "rancher2.5/security/rancher-2.5/1.6-hardening-2.5/_index",
+                    "rancher2.5/security/selinux/_index",
                 ],
             },
             "rancher2.5/security/security-scan/_index",

@@ -49,7 +49,7 @@ RKE 使用 Kubernetes job 的方式部署插件。在某些情况下，部署插
 addon_job_timeout: 30
 ```
 
-## Add-on 位置
+## 插件位置
 
 _v0.2.3 或更新版本可用_
 

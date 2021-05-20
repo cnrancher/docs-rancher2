@@ -40,7 +40,7 @@ keywords:
 | `monitoring-edit`  | `edit`                 |
 | `monitoring-view`  | `view `                |
 
-这些`ClusterRoles`根据可以执行的行动，提供了对监测 CRD 的不同级别的访问。
+这些`ClusterRoles`根据可以执行的行动，提供了对监控 CRD 的不同级别的访问。
 
 | CRDs (monitoring.coreos.com)                                                        | Admin            | Edit             | View             |
 | ----------------------------------------------------------------------------------- | ---------------- | ---------------- | ---------------- |
@@ -65,7 +65,9 @@ keywords:
 
 ## 其他角色的权限说明
 
-监测还创建了六个额外的 "角色"，这些角色不是默认分配给用户的，而是在集群内创建的。管理员应使用这些角色为用户提供更精细的访问。
+监控还创建了六个额外的 "角色"，这些角色不是默认分配给用户的，而是在集群内创建的。管理员应使用这些角色为用户提供更精细的访问。
+
+### 额外的监控角色
 
 | 角色                       | 目的                                                                                                                                                                                                                                                  |
 | :------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -75,6 +77,12 @@ keywords:
 | monitoring-dashboard-admin | 允许管理员将角色分配给用户，以便能够编辑/查看 cattle-dashboards 命名空间中的 ConfigMaps。该命名空间中的 ConfigMaps 将对应于持久化到集群上的 Grafana Dashboards。                                                                                      |
 | monitoring-dashboard-edit  | 允许管理员将角色分配给用户，以便能够编辑/查看 cattle-dashboards 命名空间中的 ConfigMaps。该命名空间中的 ConfigMaps 将对应于持久化到集群上的 Grafana Dashboards。                                                                                      |
 | monitoring-dashboard-view  | 允许管理员将角色分配给用户，以便能够查看 cattle-dashboards 命名空间内的 ConfigMaps。此命名空间中的 ConfigMaps 将对应于持久化到集群上的 Grafana Dashboards。                                                                                           |
+
+### 额外的监控集群角色
+
+| 角色            | 目的                                                                                                                                                                                                           |
+| :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| monitoring-view | 从 Monitoring v2 14.5.100+开始提供对外部 Monitoring UIs 的只读访问，给予用户列出 Prometheus、Alertmanager 和 Grafana 端点的权限，并通过 Rancher 代理向 Prometheus、Grafana 和 Alertmanager UIs 发出 GET 请求。 |
 
 ## 具有基于 Rancher 集群管理器权限的用户
 
@@ -86,6 +94,16 @@ Rancher 集群管理器部署的默认角色（即集群所有者、集群成员
 | cluster-member       | admin         | monitoring-admin              | ClusterRoleBinding                   |
 | project-owner        | edit          | monitoring-admin              | RoleBinding within Project namespace |
 | project-member       | view          | monitoring-edit               | RoleBinding within Project namespace |
+
+除了这些默认角色外，以下额外的 Rancher 项目角色可以应用于你的集群成员，以提供对监控的额外访问。这些 Rancher 角色将与监控图部署的 ClusterRoles 联系在一起。
+
+<figcaption>非默认的Rancher权限和对应的Kubernetes ClusterRoles</figcaption>
+
+| Cluster Manager Role | Kubernetes ClusterRole                    | Available In Rancher From | Available in Monitoring v2 From |
+| -------------------- | ----------------------------------------- | ------------------------- | ------------------------------- |
+| View Monitoring\*    | [monitoring-ui-view](#monitoring-ui-view) | 2.4.8+                    | 9.4.204+                        |
+
+\* 绑定到**查看监控**Rancher 角色的用户只有在被提供到外部监控 UI 的链接时才有权限访问这些 UI。为了访问集群资源管理器上的监控窗格以获得这些链接，用户必须是至少一个项目的项目成员。
 
 ### 2.5.x 中的差异
 

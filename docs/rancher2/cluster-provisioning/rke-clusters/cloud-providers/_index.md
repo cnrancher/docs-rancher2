@@ -54,4 +54,4 @@ Rancher 支持的 Cloud Provider 包括：
 对于自定义 Cloud Provider 选项，您可以参考 [RKE 文档](/docs/rke/config-options/cloud-providers/_index)，了解如何通过编辑 YAML 的方式，配置 Cloud Provider。以下还有一些更具体的 Cloud Provider 配置说明文档：
 
 - [vSphere](/docs/rke/config-options/cloud-providers/vsphere/_index)
-- [Openstack](/docs/rke/config-options/cloud-providers/openstack/_index)
+- [OpenStack](/docs/rke/config-options/cloud-providers/openstack/_index)

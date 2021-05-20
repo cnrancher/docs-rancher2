@@ -35,6 +35,17 @@ RKE 提供了以下三种 DNS 提供商，作为附加组件部署：
 
 在 RKE v0.2.5 及更新版本中，使用 Kubernetes 1.14 及以上版本时，CoreDNS 是默认 DNS 提供商。如果使 RKE 版本低于 v0.2.5，则 kube-dns 是默认 DNS 提供商。
 
+## 禁用 DNS provider 的 Deployment
+
+_v0.2.0 及更新版本可用_
+
+您可以在集群配置中的 dns`provider`设置为`none`，禁用默认的 DNS 提供商。这个操作会阻止 pods 在集群中进行名称解析。
+
+```yaml
+dns:
+  provider: none
+```
+
 ## NodeLocal DNS
 
 ### 先决条件
@@ -58,6 +69,20 @@ dns:
 ```
 
 > **说明：**当在现有集群上启用 NodeLocal DNS 时，当前正在运行的 pod 不会被修改，更新后的`/etc/resolv.conf`配置只对启用 NodeLocal DNS 后启动的 pod 生效。
+
+### NodeLocal Priority Class Name
+
+_从 RKE v1.2.6+开始可用_
+
+[pod 优先级](https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#pod-priority)是通过在`options`下配置一个优先级类名来设置的。
+
+```yaml
+dns:
+  options:
+    nodelocal_autoscaler_priority_class_name: system-cluster-critical
+    nodelocal_priority_class_name: system-cluster-critical
+  provider: coredns # 必须配置一个DNS提供商
+```
 
 ### 移除 NodeLocal DNS
 
@@ -138,6 +163,20 @@ kubectl -n kube-system get deploy coredns -o jsonpath='{.spec.template.spec.tole
 kubectl -n kube-system get deploy coredns-autoscaler -o jsonpath='{.spec.template.spec.tolerations}'。
 ```
 
+### CoreDNS 优先级类名称
+
+_从 RKE v1.2.6+开始可用_
+
+[pod 优先级](https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#pod-priority)是通过在`options`下配置一个优先级类名称来设置的。
+
+```yaml
+dns:
+  options:
+    coredns_autoscaler_priority_class_name: system-cluster-critical
+    coredns_priority_class_name: system-cluster-critical
+  provider: coredns
+```
+
 ## kube-dns
 
 RKE 将 kube-dns 部署为一个默认副本为 1 的 Deployment，该 pod 由`kubedns`、`dnsmasq`和`sidecar`共 3 个容器组成。RKE 也将 kube-dns-autoscaler 部署为 Deployment，通过使用核心和节点数量来扩展 kube-dns Deployment。详情请参考[Linear Mode](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler#linear-mode)。
@@ -209,13 +248,16 @@ kubectl get deploy kube-dns -n kube-system -o jsonpath='{.spec.template.spec.tol
 kubectl get deploy kube-dns-autoscaler -n kube-system -o jsonpath='{.spec.template.spec.tolerations}'。
 ```
 
-## 禁用 DNS provider 的 Deployment
+### kube-dns 优先级类别名称
 
-_v0.2.0 及更新版本可用_
+_RKE v1.2.6+开始可用_
 
-您可以在集群配置中的 dns`provider`设置为`none`，禁用默认的 DNS 提供商。这个操作会阻止 pods 在集群中进行名称解析。
+[pod 优先级](https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#pod-priority)是通过在`options`下配置优先级类名称来设置的。
 
 ```yaml
 dns:
-  provider: none
+  options:
+    kube_dns_autoscaler_priority_class_name: system-cluster-critical
+    kube_dns_priority_class_name: system-cluster-critical
+  provider: kube-dns
 ```

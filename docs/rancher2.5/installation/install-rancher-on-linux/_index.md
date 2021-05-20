@@ -1,5 +1,5 @@
 ---
-title: 在Linux操作系统上安装Rancher
+title: 使用RancherD安装Rancher
 description: RancherD 是一种新的、更简单的安装 Rancher 的方法，这是一个实验性功能。RancherD 是一个二进制文件，它首先启动一个 RKE2 Kubernetes 集群，然后在集群上安装 Rancher 服务器 Helm Chart。
 keywords:
   - rancher
@@ -11,7 +11,7 @@ keywords:
   - rancher 中文
   - rancher 中文文档
   - rancher cn
-  - 在Linux操作系统上安装Rancher
+  - 使用RancherD安装Rancher
 ---
 
 _从 Rancher v2.5.4 开始提供_

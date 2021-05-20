@@ -126,10 +126,10 @@ helm upgrade rancher rancher-stable/rancher \
 
 ### 方法 1：Kubectl 命令
 
-对于 Rancher 管理下的每个集群(包括`local`)，使用 Rancher 管理集群(RKE 或 K3S)的 Kubeconfig 文件运行以下命令。
+对于 Rancher 管理下的每个集群(除了`local`Rancher 管理集群之外)，使用 Rancher 管理集群(RKE 或 K3S)的 Kubeconfig 文件运行以下命令。
 
-```
-kubectl patch cluster <REPLACE_WITH_CLUSTERID> -p '{"status":{"agentImage": "dummy"}}' --type merge
+```shell
+kubectl patch clusters.management.cattle.io <REPLACE_WITH_CLUSTERID> -p '{"status":{"agentImage":"dummy"}}' --type merge
 ```
 
 该命令将使所有 Agent Kubernetes 资源用新证书的校验和重新配置。
@@ -138,7 +138,7 @@ kubectl patch cluster <REPLACE_WITH_CLUSTERID> -p '{"status":{"agentImage": "dum
 
 通过更新`CATTLE_CA_CHECKSUM`环境变量，将与新 CA 证书的校验值相匹配的值，手动为代理 Kubernetes 资源打上补丁。像这样生成新的校验值。
 
-```
+```shell
 $ curl -k -s -fL <RANCHER_SERVER>/v3/settings/cacerts | jq -r .value > cacert.tmp。
 $ sha256sum cacert.tmp | awk '{print $1}'。
 ```

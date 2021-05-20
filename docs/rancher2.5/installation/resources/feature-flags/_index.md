@@ -42,20 +42,22 @@ Rancher 包含一些实验性功能，默认状态下，这些功能是禁用的
 
 以下是 Rancher 中可用的功能开关的列表：
 
-- `dashboard`：此功能将启用下一代的实验性 UI。仪表板还使用了 Rancher 中的新 API，该 API 允许 UI 访问默认的 Kubernetes 资源，而不经过 Rancher 的任何干预。
-- `unsupported-storage-drivers`: 启用[允许不受支持的存储驱动程序](/docs/rancher2.5/installation/resources/feature-flags/enable-not-default-storage-drivers/_index)。换句话说，它启用了默认情况下未启用的 storage providers 和 provisioners 的类型。
-- `proxy`：此功能使 Rancher 使用新的简化的代理模块，这有助于增强性能和安全性。但是目前有一个已知问题，新的代理功能会导致 Helm 不能正常工作，这会导致包括 Rancher 工具（如监控，日志，Istio 等）在内的任何应用商店应用部署失败。
-- `istio-virtual-service-ui`：启用 Istio 的流量管理功能：[通过 UI 创建，读取，更新和删除 Istio 虚拟服务和目标规则](/docs/rancher2.5/installation/resources/feature-flags/istio-virtual-service-ui/_index)。
+- `Fleet`：Rancher 在 v2.5+版本中预装了 Fleet。
+- `istio-virtual-service-ui`：该功能可以实现 UI 来创建、读取、更新和删除 Istio 虚拟服务和目标规则，这是 Istio 的流量管理功能。
+- `unsupported-storage-drivers`：该功能允许不支持的存储驱动。换句话说，它启用了默认不启用的存储提供商和供应者的类型。
 
 下表显示了在 Rancher 中功能开关的可用版本和默认值：
 
-| 功能开关名                    | 默认值  | 状态   | 可用版本 | 是否需要重启 Rancher? |
-| :---------------------------- | :------ | :----- | :------- | :-------------------- |
-| `dashboard`                   | `true`  | 实验性 | v2.4.0   | 是                    |
-| `istio-virtual-service-ui`    | `false` | 实验性 | v2.3.0   | 否                    |
-| `istio-virtual-service-ui`    | `true`  | GA     | v2.3.2   | 否                    |
-| `proxy`                       | `false` | 实验性 | v2.4.0   | 否                    |
-| `unsupported-storage-drivers` | `false` | 实验性 | v2.3.0   | 否                    |
+| 功能开关名                    | 默认值  | 状态     | 可用版本 | 是否需要重启 Rancher? |
+| :---------------------------- | :------ | :------- | :------- | :-------------------- |
+| `dashboard`                   | `true`  | 实验性   | v2.4.0   | 是                    |
+| `dashboard`                   | `true`  | 实验性   | v2.4.0   | 是                    |
+| `istio-virtual-service-ui`    | `false` | 实验性   | v2.3.0   | 否                    |
+| `istio-virtual-service-ui`    | `true`  | GA       | v2.3.2   | 否                    |
+| `proxy`                       | `false` | 实验性   | v2.4.0   | 否                    |
+| `proxy`                       | N/A     | 暂停开发 | v2.5.0   | 否                    |
+| `unsupported-storage-drivers` | `false` | 实验性   | v2.3.0   | 否                    |
+| `fleet`                       | `true`  | GA       | v2.5.0   | 否                    |
 
 ## 启动 Rancher 时启用功能
 
@@ -67,7 +69,7 @@ Rancher 包含一些实验性功能，默认状态下，这些功能是禁用的
 
 当通过 Helm chart 安装 Rancher 时，请使用`--features`选项。在下面的示例中，通过传递功能开关名称（用逗号分隔）来启用两个功能：
 
-```
+```shell
 helm install rancher-latest/rancher \
   --name rancher \
   --namespace cattle-system \
@@ -80,13 +82,14 @@ helm install rancher-latest/rancher \
 
 #### 在离线安装时渲染 Helm Chart
 
-对于离线安装 Rancher，通过 Helm 安装 Rancher 之前，需要添加一个 Helm chart 仓库，渲染一个 Helm 模板。有关详细信息，请参阅[离线安装文档。](/docs/rancher2.5/installation/other-installation-methods/air-gap/install-rancher/_index)
+对于离线安装 Rancher，通过 Helm 安装 Rancher 之前，需要添加一个 Helm chart 仓库，渲染一个 Helm 模板。有关详细信息，请参阅[离线安装文档](/docs/rancher2.5/installation/other-installation-methods/air-gap/install-rancher/_index)。
 
 在下面的示例中，通过传递功能开关名称（用逗号分隔）来启用两个功能。
 
+**2.5.8 之前**：
 Helm 3 命令如下：
 
-```
+```shell
 helm template rancher ./rancher-<VERSION>.tgz --output-dir . \
   --namespace cattle-system \
   --set hostname=<RANCHER.YOURDOMAIN.COM> \
@@ -100,7 +103,7 @@ helm template rancher ./rancher-<VERSION>.tgz --output-dir . \
 
 Helm 2 命令如下：
 
-```
+```shell
 helm template ./rancher-<VERSION>.tgz --output-dir . \
   --name rancher \
   --namespace cattle-system \
@@ -111,6 +114,36 @@ helm template ./rancher-<VERSION>.tgz --output-dir . \
   --set useBundledSystemChart=true # 自 v2.3.0 起可用，使用Rancher内嵌的system charts
   --set 'extraEnv[0].name=CATTLE_FEATURES' # 自 v2.3.0 起可用
   --set 'extraEnv[0].value=<FEATURE-FLAG-NAME-1>=true,<FEATURE-FLAG-NAME-2>=true' # 自 v2.3.0 起可用
+```
+
+**2.5.8 及之后**：
+Helm 3 命令如下：
+
+```shell
+helm template rancher ./rancher-<VERSION>.tgz --output-dir . \
+  --no-hooks \ # prevent files for Helm hooks from being generated
+  --namespace cattle-system \
+  --set hostname=<RANCHER.YOURDOMAIN.COM> \
+  --set rancherImage=<REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher \
+  --set ingress.tls.source=secret \
+  --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # Set a default private registry to be used in Rancher
+  --set useBundledSystemChart=true # Use the packaged Rancher system charts
+  --set 'extraEnv[0].name=CATTLE_FEATURES'
+  --set 'extraEnv[0].value=<FEATURE-FLAG-NAME-1>=true,<FEATURE-FLAG-NAME-2>=true'
+```
+
+Helm 2 命令如下：
+
+```shell
+helm template rancher ./rancher-<VERSION>.tgz --output-dir . \
+  --namespace cattle-system \
+  --set hostname=<RANCHER.YOURDOMAIN.COM> \
+  --set rancherImage=<REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher \
+  --set ingress.tls.source=secret \
+  --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # Set a default private registry to be used in Rancher
+  --set useBundledSystemChart=true # Use the packaged Rancher system charts
+  --set 'extraEnv[0].name=CATTLE_FEATURES'
+  --set 'extraEnv[0].value=<FEATURE-FLAG-NAME-1>=true,<FEATURE-FLAG-NAME-2>=true'
 ```
 
 ### 单节点安装
