@@ -93,7 +93,7 @@ Prometheus 让您可以查看来自不同 Rancher 和 Kubernetes 对象的度量
 
 **启用监控，以便与 SSL 一起使用**。
 
-1. 按照[本页](/docs/rancher2.5//k8s-in-rancher/secrets/_index)上的步骤，创建一个密钥，以便 SSL 用于警报。
+1. 按照[本页](/docs/rancher2.5/k8s-in-rancher/secrets/_index)上的步骤，创建一个密钥，以便 SSL 用于警报。
 
 - 密钥应该在`cattle-monitoring-system`命名空间中创建。如果它不存在，先创建它。
 - 将 `ca`、`cert`和`key`文件添加到密钥中。

@@ -29,7 +29,7 @@ Rancher 可以安装在任何 Kubernetes 集群上。这个集群可以使用上
 - K3s：安装 K3s Kubernetes 集群的教程，请参考[本页](/docs/rancher2.5/installation/resources/k8s-tutorials/ha-with-external-db/_index)。如需帮助设置高可用性 K3s 集群的基础架构，请参考[本页](/docs/rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha-with-external-db/_index)
 - RKE2：在 RKE2 安装 Kubernetes 集群的教程，请参考[本页](https://rancher.com/docs/rancher/v2.5/en/installation/install-rancher-on-k8s/amazon-eks/)。如需帮助设置高可用性 K3s 集群的基础架构，请参考[本页](https://rancher.com/docs/rancher/v2.5/en/installation/resources/k8s-tutorials/ha-rke2/)。
 - Amazon EKS： 在 EKS 上安装 Kubernetes 集群的教程，请参考[本页](/docs/rancher2.5/installation/install-rancher-on-k8s/amazon-eks/_index)。
-- **GKE:**关于如何用谷歌 Kubernetes 引擎安装 Rancher 的细节，包括如何安装一个入口以便可以访问 Rancher 服务器，请参考[本页](docs/rancher2.5/installation/install-rancher-on-k8s//gke/_index)
+- **GKE:**关于如何用谷歌 Kubernetes 引擎安装 Rancher 的细节，包括如何安装一个入口以便可以访问 Rancher 服务器，请参考[本页](/docs/rancher2.5/installation/install-rancher-on-k8s/gke/_index)
 
 ### CLI
 
