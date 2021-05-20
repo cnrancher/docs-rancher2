@@ -25,7 +25,9 @@ RKE 提供了以下网络插件，作为附加组件部署：
 - Canal
 - Weave
 
-> **注意：**启动集群后，不能更改网络提供商。因此，请仔细选择您要使用的网络提供商，因为 Kubernetes 不允许切换网络提供商之。一旦使用网络提供商创建集群，更换网络提供商就需要重建整个集群及其所有应用。
+在你启动集群后，你不能改变你的网络供应商。因此，仔细选择你要使用的网络供应商，因为 Kubernetes 不允许在网络供应商之间切换。一旦用网络提供商创建了一个集群，改变网络提供商将需要你拆掉整个集群及其所有的应用程序。
+
+## 修改默认插件
 
 默认情况下，RKE 使用的网络插件是`canal`。如果你想使用另一个网络插件，你需要在`cluster.yml`中指定在集群级别启用哪个网络插件。
 
@@ -58,6 +60,8 @@ network:
   options:
     canal_iface: eth1
     canal_flannel_backend_type: vxlan
+    canal_autoscaler_priority_class_name: system-cluster-critical # Available as of RKE v1.2.6+
+    canal_priority_class_name: system-cluster-critical # Available as of RKE v1.2.6+
 ```
 
 ### Canal 接口
@@ -99,6 +103,8 @@ network:
   options:
     flannel_iface: eth1
     flannel_backend_type: vxlan
+    flannel_autoscaler_priority_class_name: system-cluster-critical # Available as of RKE v1.2.6+
+    flannel_priority_class_name: system-cluster-critical # Available as of RKE v1.2.6+
 ```
 
 ### Flannel 接口
@@ -113,6 +119,8 @@ network:
   plugin: calico
   options:
     calico_cloud_provider: aws
+    calico_autoscaler_priority_class_name: system-cluster-critical # Available as of RKE v1.2.6+
+    calico_priority_class_name: system-cluster-critical # Available as of RKE v1.2.6+
 ```
 
 ### Calico 云服务提供商
@@ -155,6 +163,9 @@ kubectl -n kube-system get deploy calico-kube-controllers -o jsonpath='{.spec.te
 ```yaml
 network:
   plugin: weave
+  options:
+    weave_autoscaler_priority_class_name: system-cluster-critical # Available as of RKE v1.2.6+
+    weave_priority_class_name: system-cluster-critical # Available as of RKE v1.2.6+
   weave_network_provider:
     password: "Q]SZ******oijz"
 ```

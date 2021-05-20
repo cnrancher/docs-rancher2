@@ -69,6 +69,8 @@ Prometheus 让您可以查看来自不同 Rancher 和 Kubernetes 对象的度量
 
 ### 操作步骤
 
+#### 2.5.0-2.5.7
+
 1. 在 Rancher UI 中，进入要安装监控的集群，然后单击**集群资源管理器**。
 1. 单击**应用程序**。
 1. 单击`rancher-monitoring`应用程序。
@@ -76,6 +78,45 @@ Prometheus 让您可以查看来自不同 Rancher 和 Kubernetes 对象的度量
 1. 滚动到 Helm chart README 底部，单击**安装**。
 
 **结果：**监控应用部署在`cattle-monitoring-system`命名空间中。
+
+#### 2.5.8
+
+**启用监控，以便在没有 SSL 的情况下使用**。
+
+1. 在 Rancher 用户界面中，进入你想安装监控的集群，点击**集群浏览器**。
+1. 单击**应用程序**。
+1. 点击 `rancher-monitoring`应用程序。
+1. 可选的。点击**图表选项**，配置警报、Prometheus 和 Grafana。如需帮助，请参考[配置参考。](./configuration)
+1. 滚动到 Helm 图表 README 的底部，点击\*\*安装。
+
+**结果：**监控应用被部署在`cattle-monitoring-system`命名空间。
+
+**启用监控，以便与 SSL 一起使用**。
+
+1. 按照[本页](/docs/rancher2.5//k8s-in-rancher/secrets/_index)上的步骤，创建一个密钥，以便 SSL 用于警报。
+
+- 密钥应该在`cattle-monitoring-system`命名空间中创建。如果它不存在，先创建它。
+- 将 `ca`、`cert`和`key`文件添加到密钥中。
+
+1. 在 Rancher 用户界面中，进入你要安装监控的集群，点击**集群浏览器**。
+1. 单击**应用程序**。
+1. 点击`rancher-monitoring`应用程序。
+1. 单击**警报**。
+1. 单击**附加密钥**并添加先前创建的密钥。
+
+**结果：**监控应用程序被部署在`cattle-monitoring-system`命名空间。
+
+当[创建接收器时](/docs/rancher2.5/monitoring-alerting/configuration/alertmanager/_index)，支持 SSL 的接收器，如电子邮件或 webhook，将有一个**SSL**部分，有**CA 文件路径**、**Cert 文件路径和**密钥文件路径的字段。在这些字段中填写 "CA"、"cert "和 "key "的路径。路径的形式为`/etc/alertmanager/secrets/name-of-file-in-secret`。
+
+例如，如果你用这些键值对创建了一个密钥。
+
+```yaml
+ca.crt=`base64-content`
+cert.pem=`base64-content`
+key.pfx=`base64-content`
+```
+
+那么**Cert 文件路径**将被设置为`/etc/alertmanager/secrets/cert.pem`。
 
 ### 默认告警、目标和 Grafana 仪表盘
 
@@ -90,6 +131,16 @@ Prometheus 让您可以查看来自不同 Rancher 和 Kubernetes 对象的度量
 ### 下一步
 
 要从 Rancher 用户界面配置 Prometheus 资源，请单击左上角的**Apps & Marketplace > Monitoring**。
+
+## 支持 Windows 集群
+
+_从 v2.5.8 版起可用_
+
+当部署到 RKE1 Windows 集群时，Monitoring V2 现在会自动部署一个[windows-exporter](https://github.com/prometheus-community/windows_exporter) DaemonSet，并设置一个 ServiceMonitor 来收集每个部署的 Pod 的指标。这将为 Prometheus 提供`windows_`指标，与 Linux 主机的[node_exporter](https://github.com/prometheus/node_exporter)导出的`node_`指标相似。
+
+为了能够完全部署 Windows 的 Monitoring V2，你的所有 Windows 主机必须有至少[wins](https://github.com/rancher/wins) v0.1.0 的版本。
+
+有关如何在现有 Windows 主机上升级 wins 的更多细节，请参阅 [Windows 集群对监控 V2 的支持](./windows-clusters) 一节。
 
 ## 使用监控
 
@@ -156,6 +207,8 @@ Alertmanager 处理客户端应用程序（如 Prometheus 服务器）发送的�
 1. 确认 **删除** 。
 
 **结果：** `rancher-monitoring`被卸载。
+
+> **关于持久化 Grafana 仪表盘的注意事项：**对于使用 Monitoring V2 v9.4.203 或以下版本的用户，卸载 Monitoring Chart 将删除 cattle-dashboards 命名空间，这将删除所有持久化的仪表盘，除非该命名空间被标记为注释`helm.sh/resource-policy。"keep"`。这个注释在 Monitoring V2 v14.5.100+中是默认添加的，但是如果你的集群中目前安装了旧版本的监控图，可以在卸载前手动应用到 cattle-dashboards 命名空间。
 
 ## 配置资源限额和资源需求
 

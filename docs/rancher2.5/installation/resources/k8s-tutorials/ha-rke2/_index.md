@@ -88,7 +88,7 @@ systemctl start rke2-server.service
         --kubeconfig /etc/rancher/rke2/rke2.yaml get nodes
 ```
 
-你应该看到你的服务器节点处于就绪状态。然后测试群集 Pod 的健康状况。
+你应该看到你的服务器节点处于就绪状态。然后测试集群 Pod 的健康状况。
 
 ```
 /var/lib/rancher/rke2/bin/kubectl \

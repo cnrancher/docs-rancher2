@@ -26,6 +26,7 @@ keywords:
 我们提供了安全相关的文档，以及帮助您安全加固 Rancher Server 和下游 Kubernetes 集群的相关资料：
 
 - [在 Kubernetes 集群中执行 CIS 安全扫描](#在-kubernetes-集群中执行-cis-安全扫描)
+- [SELinux RPM](#selinux-rpm)
 - [Rancher 安全加固指南](#rancher-安全加固指南)
 - [CIS Benchmark 和自测指南](#cis-benchmark-和自测指南)
 - [第三方安全机构发布的 Rancher 安全测试报告](#第三方安全测试报告)
@@ -49,6 +50,12 @@ CIS 基准测试是安全配置目标系统的最佳实践。CIS 基准是通过
 当 Rancher 对一个集群进行 CIS 安全扫描时，它会生成一个展示每个测试结果的报告。报告中包括`通过`，`跳过`和`失败`的测试数量的汇总。报告中同时也给`失败`的测试提供了补救办法。
 
 更多详情，请参阅[安全扫描](/docs/rancher2.5/security/security-scan/_index)文档。
+
+## SELinux RPM
+
+[安全增强型 Linux（SELinux）](https://en.wikipedia.org/wiki/Security-Enhanced_Linux)是对 Linux 的安全增强。在历史上被政府机构使用后，SELinux 现在是行业标准，在 CentOS 7 和 8 上默认启用。
+
+我们提供了两个 RPM（红帽软件包），使 Rancher 产品能够在支持 SELinux 的主机上正常运行。`rancher-selinux`和`rke2-selinux`。详情请见[本页](/docs/rancher2.5/security/selinux/_index)。
 
 ## Rancher 安全加固指南
 

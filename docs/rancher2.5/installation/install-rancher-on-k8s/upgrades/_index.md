@@ -117,6 +117,8 @@ kubeconfig 也可以通过`--kubeconfig`标签来手动针对预定的集群，�
 
 本节介绍了如何使用 Helm 升级 Rancher 的普通（互联网连接）或离线安装。
 
+> **离线说明：**如果你在离线环境中安装 Rancher，请跳过本页的其余部分，按照[本页](/docs/rancher2.5/installation/install-rancher-on-k8s/upgrades/air-gap-upgrade/_index)上的说明渲染 Helm 模板。
+
 #### 升级 Kubernetes
 
 从当前安装的 Rancher Helm chart 中获取用`--set`传递的值。
@@ -174,70 +176,7 @@ helm upgrade rancher rancher-<CHART_REPO>/rancher \
    --set hostname=rancher.my.org
    ```
 
-#### 离线升级
-
-使用安装 Rancher 时选择的相同选项来渲染 Rancher 模板。使用下面的参考表来替换每个占位符。Rancher 需要配置为使用私有注册表，以便为任何 Rancher 启动的 Kubernetes 集群或 Rancher 工具提供服务。
-
-根据您在安装过程中做出的选择，完成以下程序之一。
-
-| 占位符                           | 说明                                    |
-| :------------------------------- | :-------------------------------------- |
-| `<VERSION>`                      | 输出压缩包的版本号。                    |
-| `<RANCHER.YOURDOMAIN.COM>`       | 指向负载均衡器的 DNS 名称。             |
-| `<REGISTRY.YOURDOMAIN.COM:PORT>` | 您的私有镜像仓库的 DNS 名称。           |
-| `<CERTMANAGER_VERSION>`          | 在 k8s 集群上运行的 Cert-manager 版本。 |
-
-##### 选项 1：使用默认的自签名证书
-
-```plain
-helm template ./rancher-<VERSION>.tgz --output-dir . \
---name rancher \
---namespace cattle-system \
---set hostname=<RANCHER.YOURDOMAIN.COM> \
---set certmanager.version=<CERTMANAGER_VERSION> \
---set rancherImage=<REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher \
---set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # Available as of v2.2.0, set a default private registry to be used in Rancher
---set useBundledSystemChart=true # Available as of v2.3.0, use the packaged Rancher system charts
-```
-
-##### 选项 2：使用 Kubernetes Secrets 从文件中获取证书
-
-```plain
-helm template ./rancher-<VERSION>.tgz --output-dir . \
---name rancher \
---namespace cattle-system \
---set hostname=<RANCHER.YOURDOMAIN.COM> \
---set rancherImage=<REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher \
---set ingress.tls.source=secret \
---set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # Available as of v2.2.0, set a default private registry to be used in Rancher
---set useBundledSystemChart=true # Available as of v2.3.0, use the packaged Rancher system charts
-```
-
-如果你使用的是私人 CA 签名的证书，请在`--set ingress.tls.source=secret`后面添加`--set privateCA=true`。
-
-```plain
-helm template ./rancher-<VERSION>.tgz --output-dir . \
---name rancher \
---namespace cattle-system \
---set hostname=<RANCHER.YOURDOMAIN.COM> \
---set rancherImage=<REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher \
---set ingress.tls.source=secret \
---set privateCA=true \
---set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # Available as of v2.2.0, set a default private registry to be used in Rancher
---set useBundledSystemChart=true # Available as of v2.3.0, use the packaged Rancher system charts
-```
-
-### 步骤 3：应用渲染的模板
-
-将渲染的清单目录复制到可以访问 Rancher 服务器集群的系统中，并应用渲染的模板。
-
-使用 "kubectl "应用渲染的清单。
-
-```plain
-kubectl -n cattle-system apply -R -f ./rancher
-```
-
-### 步骤 4：验证升级是否成功
+### 步骤 3：验证升级是否成功
 
 登录 Rancher，确认升级成功。
 

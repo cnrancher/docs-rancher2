@@ -44,6 +44,18 @@ ingress:
     app: ingress
 ```
 
+### 入站优先级类别名称
+
+_从 RKE v1.2.6+开始可用_
+
+[pod priority](https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#pod-priority)是通过配置优先级类名称来设置的。
+
+```yaml
+ingress:
+  provider: nginx
+  ingress_priority_class_name: system-cluster-critical
+```
+
 ### 容忍度
 
 _从 v1.2.4 开始提供_
@@ -154,3 +166,7 @@ ingress:
    ```
    kubectl delete pod -l app=ingress-nginx -n ingress-nginx
    ```
+
+```
+
+```

@@ -52,6 +52,24 @@ keywords:
 
 **结果：** `rancher-logging`被卸载。
 
+## Windows 集群日志功能增强
+
+### v2.5.0- v2.5.7
+
+带有 Windows worker 节点的集群支持从 Linux 节点导出日志，但 Windows 节点的日志目前无法导出。只有 Linux 节点的日志能够被导出。
+
+为了允许在 Linux 节点上调度日志 Pod，必须向 Pod 添加容错。请参阅 "使用污点和容忍度 "一节，以了解细节和例子。
+
+### v2.5.8 及之后
+
+从 Rancher v2.5.8 开始，增加了对 Windows 集群的日志支持，可以从 Windows 节点收集日志。
+
+#### 启用和禁用 Windows 节点日志记录
+
+你可以通过在 values.yaml 中设置 `global.cattle.windows.enabled` 为 `true` 或 `false` 来启用或禁用 Windows 节点日志记录。默认情况下，如果使用 Cluster Explorer 用户界面在 Windows 集群上安装日志应用程序，Windows 节点日志将被启用。在这种情况下，将 `global.cattle.windows.enabled` 设置为 false 将禁用集群上的 Windows 节点日志记录。当禁用时，仍然会从 Windows 集群内的 Linux 节点收集日志。
+
+注意：目前存在一个问题，即在 Windows 集群中禁用 Windows 日志后执行 Helm 升级时，Windows nodeAgents 不会被删除。在这种情况下，如果已经安装了 Windows nodeAgents，用户可能需要手动删除它们。
+
 ## 基于角色的访问控制
 
 Rancher 日志记录有两个角色，`logging-admin`和`logging-view`。
@@ -271,9 +289,146 @@ spec:
     ignore_network_errors_at_startup: false
 ```
 
+### 将集群中的所有日志发送到 Syslog
+
+假设你想把集群中的所有日志发送到一个`syslog`服务器。首先，我们创建一个集群输出。
+
+```yaml
+apiVersion: logging.banzaicloud.io/v1beta1
+    kind: ClusterOutput
+    metadata:
+      name: "example-syslog"
+      namespace: "cattle-logging-system"
+    spec:
+      syslog:
+        buffer:
+          timekey: 30s
+          timekey_use_utc: true
+          timekey_wait: 10s
+          flush_interval: 5s
+        format:
+          type: json
+          app_name_field: test
+        host: syslog.example.com
+        insecure: true
+        port: 514
+        transport: tcp
+```
+
+现在我们已经配置好了我们想要的日志去向，让我们把所有的日志都配置到该输出端。
+
+```yaml
+apiVersion: logging.banzaicloud.io/v1beta1
+    kind: ClusterFlow
+    metadata:
+      name: "all-logs"
+      namespace: cattle-logging-system
+    spec:
+      globalOutputRefs:
+        - "example-syslog"
+```
+
+### 不支持的 Output
+
+在最后一个例子中，我们创建了一个输出，将日志写到一个不支持开箱的目的地。
+
+> **关于 syslog 的说明**从 Rancher v2.5.4 开始，`syslog`是一个支持的输出。然而，这个例子仍然提供了一个关于使用不支持的插件的概述。
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: syslog-config
+  namespace: cattle-logging-system
+type: Opaque
+stringData:
+  fluent-bit.conf: |
+    [INPUT]
+        Name              forward
+        Port              24224
+
+    [OUTPUT]
+        Name              syslog
+        InstanceName      syslog-output
+        Match             *
+        Addr              syslog.example.com
+        Port              514
+        Cluster           ranchers
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fluentbit-syslog-forwarder
+  namespace: cattle-logging-system
+  labels:
+    output: syslog
+spec:
+  selector:
+    matchLabels:
+      output: syslog
+  template:
+    metadata:
+      labels:
+        output: syslog
+    spec:
+      containers:
+        - name: fluentbit
+          image: paynejacob/fluent-bit-out-syslog:latest
+          ports:
+            - containerPort: 24224
+          volumeMounts:
+            - mountPath: "/fluent-bit/etc/"
+              name: configuration
+      volumes:
+        - name: configuration
+          secret:
+            secretName: syslog-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: syslog-forwarder
+  namespace: cattle-logging-system
+spec:
+  selector:
+    output: syslog
+  ports:
+    - protocol: TCP
+      port: 24224
+      targetPort: 24224
+---
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: ClusterFlow
+metadata:
+  name: all-logs
+  namespace: cattle-logging-system
+spec:
+  globalOutputRefs:
+    - syslog
+---
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: ClusterOutput
+metadata:
+  name: syslog
+  namespace: cattle-logging-system
+spec:
+  forward:
+    servers:
+      - host: "syslog-forwarder.cattle-logging-system"
+    require_ack_response: false
+    ignore_network_errors_at_startup: false
+```
+
 如果我们分解一下发生了什么，首先我们创建一个容器的部署，该容器有额外的 syslog 插件，并接受从另一个 fluentd 转发的日志。接下来，我们创建一个输出配置为我们的部署的转发者。然后，部署的 fluentd 会将所有日志转发到配置的 syslog 目的地。
 
 Rancher 官方的`syslog`支持将在 Rancher v2.5.4 中出现。然而，这个例子仍然提供了一个关于使用不支持的插件的概述。
+
+## 使用自定义的 Docker 根目录
+
+_适用于 v2.5.6 以上版本_
+
+如果使用自定义的 Docker 根目录，你可以在 `values.yaml` 中设置 `global.dockerRootDirectory`。这将确保创建的日志 CR 将使用你指定的路径，而不是默认的 Docker 数据根目录。注意，这只影响到 Linux 节点。如果集群中存在任何 Windows 节点，该更改将不适用于这些节点。
 
 ## 污点和容忍度
 
@@ -285,10 +440,13 @@ Rancher 官方的`syslog`支持将在 Rancher v2.5.4 中出现。然而，这个
 
 ## Rancher 日志堆栈中的默认实现
 
-默认情况下，Rancher 会用`cattle.io/os=linux`污染所有 Linux 节点，而不会污染 Windows 节点。
+**2.5.8**：默认情况下，Rancher 会用`cattle.io/os=linux`污染所有 Linux 节点，而不会污染 Windows 节点。
 日志堆栈 pods 对这个污点有`tolerations`，这使得它们可以在 Linux 节点上运行。
 此外，我们可以填充`nodeSelector`来确保我们的 pods*only*运行在 Linux 节点上。
-让我们看看一个带有这些设置的示例 pod YAML 文件......
+
+**2.5.0-2.5.7**：默认情况下，Rancher 会用`cattle.io/os=linux`污染所有 Linux 节点，而不会污染 Windows 节点。日志堆栈的 pods 对这种污点有容忍度，这使得它们能够在 Linux 节点上运行。此外，我们可以填充 nodeSelector 以确保我们的 pod 只在 Linux 节点上运行。
+
+让我们看看一个带有这些设置的示例 pod YAML 文件：
 
 ```yaml
 apiVersion: v1
@@ -307,13 +465,6 @@ spec:
 
 在上面的例子中，我们确保我们的 pod 只运行在 Linux 节点上，并且我们为我们所有的 Linux 节点上的污点添加一个 "toleration"。
 你可以用 Rancher 现有的污点做同样的事情，或者用你自己的自定义污点。
-
-### Windows
-
-带有 Windows worker 的集群支持日志记录，但有一些小的注意事项。
-
-1. Windows 节点日志目前无法导出。
-2. 由于[上游问题](https://github.com/banzaicloud/logging-operator/issues/592)，`tolerations`和`nodeSelector`设置没有从 `logging-operator`中继承，`fluentd-configcheck` pod(s)将失败。
 
 ## 为自定义污点添加 NodeSelector 设置和容忍度
 
@@ -335,6 +486,39 @@ nodeSelector:
 fluentbit_tolerations:
   # insert tolerations list for fluentbit containers only
 ```
+
+## 带有 SELinux 的日志 V2
+
+_从 v2.5.8 开始可用_
+
+> **要求：** Logging v2 在 RHEL/CentOS 7 和 8 上用 SELinux 测试。
+
+[安全增强型 Linux（SELinux）](https://en.wikipedia.org/wiki/Security-Enhanced_Linux)是对 Linux 的安全增强。在历史上被政府机构使用后，SELinux 现在是行业标准，在 CentOS 7 和 8 上默认启用。
+
+要在 SELinux 下使用 Logging v2，我们建议按照[本页](/docs/rancher2.5/security/selinux/_index)上的说明安装`rancher-selinux` RPM。
+
+然后你需要配置日志应用程序，使其与 SELinux 一起工作，如[本节](/docs/rancher2.5/security/selinux/_index)
+
+## 额外的日志来源
+
+默认情况下，Rancher 为所有集群类型的[控制平面组件](https://kubernetes.io/docs/concepts/overview/components/#control-plane-components)和[节点组件](https://kubernetes.io/docs/concepts/overview/components/#node-components)收集日志。
+在某些情况下，Rancher 可能会收集额外的日志。
+
+下表总结了每个节点类型可能收集额外日志的来源。
+
+| 日志来源 | Linux 节点（包括在 Windows 集群中的节点） | Windows 节点 |
+| -------- | ----------------------------------------- | ------------ |
+| RKE      | ✓                                         | ✓            |
+| RKE2     | ✓                                         |              |
+| K3s      | ✓                                         |              |
+| AKS      | ✓                                         |              |
+| EKS      | ✓                                         |              |
+| GKE      | ✓                                         |              |
+
+要启用托管的 Kubernetes 提供商作为额外的日志来源，请到**集群资源管理器>日志>图表选项**，选择**启用增强的云提供商日志**选项。
+启用后，Rancher 会收集供应商提供的所有额外的节点和控制平面日志，不同的供应商可能会有所不同。
+
+如果你已经在使用云提供商自己的日志解决方案，如 AWS CloudWatch 或谷歌云操作套件（以前的 Stackdriver），就没有必要启用这个选项，因为本地解决方案将不受限制地访问所有日志。
 
 ## 常见问题及解决方法
 

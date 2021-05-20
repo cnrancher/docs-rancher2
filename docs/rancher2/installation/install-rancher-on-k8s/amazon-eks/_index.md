@@ -33,10 +33,10 @@ Rancher 和 AWS 合作编写了一份快速入门指南，用于按照 AWS 最�
 快速入门指南提供了在 EKS 上部署 Rancher 的三个选项。
 
 - **将 Rancher 部署到新的 VPC 和新的 Amazon EKS 集群中**：该选项构建了一个由 VPC、子网、NAT 网关、安全组、堡垒主机、Amazon EKS 集群和其他基础设施组件组成的全新 AWS 环境。然后将 Rancher 部署到这个新的 EKS 集群中。
-- **将 Rancher 部署到现有 VPC 和新的 Amazon EKS 群集中**：此选项在现有 AWS 基础架构中提供 Rancher。
+- **将 Rancher 部署到现有 VPC 和新的 Amazon EKS 集群中**：此选项在现有 AWS 基础架构中提供 Rancher。
 - **将 Rancher 部署到现有的 VPC 和现有的 Amazon EKS 集群中**：此选项可在您现有的 AWS 基础架构中提供 Rancher。
 
-使用默认参数为新的虚拟私有云 (VPC) 和新的 Amazon EKS 群集部署此快速入门，可在 AWS 云中构建以下 Rancher 环境。
+使用默认参数为新的虚拟私有云 (VPC) 和新的 Amazon EKS 集群部署此快速入门，可在 AWS 云中构建以下 Rancher 环境。
 
 - 跨越三个可用区的高可用架构。\*
 - 根据 AWS 最佳实践，配置了公共和私有子网的 VPC，为您提供 AWS 上自己的虚拟网络。\*
@@ -51,7 +51,7 @@ Rancher 和 AWS 合作编写了一份快速入门指南，用于按照 AWS 最�
 - 用于访问 Rancher 部署的 Amazon Route 53 DNS 记录。
 
 :::note 说明
-将快速启动部署到现有亚马逊 EKS 群集中的 CloudForm 模板会跳过标有星号（\*）的组件，并提示您查看现有 VPC 配置。
+将快速启动部署到现有亚马逊 EKS 集群中的 CloudForm 模板会跳过标有星号（\*）的组件，并提示您查看现有 VPC 配置。
 :::
 
 ## 为 Rancher Server 创建 EKS 集群

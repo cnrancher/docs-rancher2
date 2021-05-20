@@ -49,6 +49,10 @@ _从 v2.3.0 开始支持_
 
 ### 操作系统和 Docker
 
+**Rancher v2.5.8+**：我们对 Windows Server 和 Windows 容器的支持与微软官方的 LTSC（长期服务渠道）和 SAC（半年度渠道）的生命周期一致。
+
+**Rancher v2.5.8 之前**：关于 Windows Server 的支持生命周期日期，请参见[微软文档。](https://docs.microsoft.com/en-us/windows-server/get-started/windows-server-release-info)
+
 为了将 Windows 节点添加到集群，该节点必须运行以下 Windows Server 版本之一，并且使用相应版本的 Docker 企业版（EE）：
 
 - 具有 Windows Server 核心版本 1809 的节点应使用 Docker EE-basic 18.09 或 Docker EE-basic 19.03。

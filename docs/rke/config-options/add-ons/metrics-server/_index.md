@@ -26,6 +26,18 @@ RKE 会将 Metrics Server 部署为一个 Deployment。
 
 Metrics Server 使用的镜像在[系统镜像](/docs/rke/config-options/system-images/_index)下。对于每个 Kubernetes 版本，都有一个与 Metrics Server 相关联的默认镜像，但这些镜像可以通过更改`system_images`中的镜像标签来覆盖。
 
+## 度量衡服务器优先级类别名称
+
+_从 RKE v1.2.6+开始可用_
+
+[pod priority](https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#pod-priority)是通过配置优先级类名来设置的。
+
+```yaml
+monitoring:
+  provider: metrics-server
+  metrics_server_priority_class_name: system-cluster-critical
+```
+
 ## 容忍度
 
 _从 v1.2.4 开始提供_

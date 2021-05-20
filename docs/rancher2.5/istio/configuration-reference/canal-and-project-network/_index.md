@@ -1,11 +1,12 @@
 ---
-title: 配置Canal 网络插件与项目网络隔离的额外步骤
+title: 配置项目网络隔离的额外步骤
 ---
 
 如果您的集群满足以下条件：
 
-- 正在使用 Canal 网络插件。
+- 已启用 Canal 网络插件。
 - 启用了项目网络隔离选项。
+- 在 Rancher v2.5.8 之前使用 Rancher 的 Canal 网络插件，或者你在 V2.5.8 以上使用 Rancher 与任何支持执行 Kubernetes 网络策略的 RKE 网络插件，如 Canal 或 Cisco ACI 插件。
 - 安装了 Istio Ingress 模块。
 
 Istio Ingress Gateway pod 在默认情况下无法将入口流量重定向到工作负载。这是因为所有的命名空间都无法从安装 Istio 的命名空间访问。您有两个选择：

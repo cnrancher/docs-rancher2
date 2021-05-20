@@ -36,6 +36,6 @@ overlay file 将在 Istio Chart 安装提供的默认安装之上添加配置。
 
 参见[本节](/docs/rancher2.5/istio/configuration-reference/rke2/_index)
 
-## Canal 网络插件与项目网络隔离的额外步骤
+## 启用项目网络隔离的额外步骤
 
 参见[本节](/docs/rancher2.5/istio/configuration-reference/canal-and-project-network/_index)
