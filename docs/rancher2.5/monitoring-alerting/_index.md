@@ -86,8 +86,8 @@ Prometheus 让您可以查看来自不同 Rancher 和 Kubernetes 对象的度量
 1. 在 Rancher 用户界面中，进入你想安装监控的集群，点击**集群浏览器**。
 1. 单击**应用程序**。
 1. 点击 `rancher-monitoring`应用程序。
-1. 可选的。点击**图表选项**，配置警报、Prometheus 和 Grafana。如需帮助，请参考[配置参考。](./configuration)
-1. 滚动到 Helm 图表 README 的底部，点击\*\*安装。
+1. 可选的。点击**图表选项**，配置警报、Prometheus 和 Grafana。如需帮助，请参考[配置参考。](/docs/rancher2.5/monitoring-alerting/configuration/_index)
+1. 滚动到 Helm 图表 README 的底部，点击**安装**。
 
 **结果：**监控应用被部署在`cattle-monitoring-system`命名空间。
 
@@ -106,7 +106,7 @@ Prometheus 让您可以查看来自不同 Rancher 和 Kubernetes 对象的度量
 
 **结果：**监控应用程序被部署在`cattle-monitoring-system`命名空间。
 
-当[创建接收器时](/docs/rancher2.5/monitoring-alerting/configuration/alertmanager/_index)，支持 SSL 的接收器，如电子邮件或 webhook，将有一个**SSL**部分，有**CA 文件路径**、**Cert 文件路径和**密钥文件路径的字段。在这些字段中填写 "CA"、"cert "和 "key "的路径。路径的形式为`/etc/alertmanager/secrets/name-of-file-in-secret`。
+当[创建接收器时](/docs/rancher2.5/monitoring-alerting/configuration/alert-manager/_index)，支持 SSL 的接收器，如电子邮件或 webhook，将有一个**SSL**部分，有**CA 文件路径**、**Cert 文件路径和**密钥文件路径的字段。在这些字段中填写 "CA"、"cert "和 "key "的路径。路径的形式为`/etc/alertmanager/secrets/name-of-file-in-secret`。
 
 例如，如果你用这些键值对创建了一个密钥。
 

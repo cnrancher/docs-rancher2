@@ -83,7 +83,7 @@ keywords:
 
 ### 私有集群
 
-Private GKE clusters are supported. Note: This advanced setup can require more steps during the cluster provisioning process. For details, see [this section.](./private-clusters)
+支持私有 GKE 集群。注意：这种高级设置在集群配置过程中可能需要更多步骤。详情请见[本节](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/gke/private-clusters/_index)。
 
 ### 配置参考
 
