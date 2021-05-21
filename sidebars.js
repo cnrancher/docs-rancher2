@@ -1812,6 +1812,7 @@ module.exports = {
             "k3s/autok3s/aws/_index",
             "k3s/autok3s/tencent/_index",
             "k3s/autok3s/native/_index",
+            "k3s/autok3s/k3d/_index",
         ],
         安装: [
             "k3s/installation/_index",
