@@ -21,4 +21,4 @@ keywords:
 请参考以下链接，获取对应的安装说明：
 
 - [ISO 模式](/docs/harverster/installation/iso-mode/_index)
-- [App 模式](/docs/harverster/installation/app-mode/_index)
+- [PXE 模式](/docs/harvester_new/installation/pxe-mode/_index)
