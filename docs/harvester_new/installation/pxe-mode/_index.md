@@ -1,5 +1,5 @@
 ---
-title: PXE Boot安装
+title: PXE Boot 安装
 keywords:
   - Harvester
   - harvester
@@ -8,61 +8,61 @@ keywords:
   - Install Harverster
   - Installing Harverster
   - Harverster Installation
-  - PXE Boot Install
-Description: Starting from version `0.2.0`, Harvester can be installed in a mass manner. This document provides an example to do the automatic installation with PXE boot.
+  - PXE Boot 安装
+Description: 从`0.2.0`版本开始，Harvester 支持批量安装。本文提供了一个使用 PXE 启动进行自动安装的例子。
 ---
 
-## PXE Boot Install
+## 概述
 
-Starting from version `0.2.0`, Harvester can be installed in a mass manner. This document provides an example to do the automatic installation with PXE boot.
+从`0.2.0`版本开始，Harvester 支持批量安装。本文提供了一个使用 PXE 启动进行自动安装的例子。
 
-We recommend using [iPXE](https://ipxe.org/) to perform the network boot. It has more features than the traditional PXE Boot program and is likely available in modern NIC cards. If NIC cards don't come with iPXE firmware, iPXE firmware images can be loaded from the TFTP server first.
+我们推荐使用[iPXE](https://ipxe.org/)来执行网络启动。它比传统的 PXE 启动程序有更多的功能，而且可能在现代的网卡中都有。如果网卡没有附带 iPXE 固件，可以先从 TFTP 服务器加载 iPXE 固件镜像。
 
-To see sample iPXE scripts, please visit https://github.com/harvester/ipxe-examples.
+请访问[iPXE 示例](https://github.com/harvester/ipxe-examples)，获取 iPXE 脚本样本示例。
 
-## Preparing HTTP Servers
+## 准备 HTTP Servers
 
-An HTTP server is required to serve boot files. Please ensure these servers are set up correctly before continuing.
+您需要一个 HTTP 服务器来提供启动文件。在继续之前，请确保这些服务器的设置是正确的。
 
-Let's assume an NGINX HTTP server's IP is `10.100.0.10`, and it serves `/usr/share/nginx/html/` folder at the path `http://10.100.0.10/`.
+我们假设一个 NGINX HTTP 服务器的 IP 是`10.100.0.10`，它为`/usr/share/nginx/html/`文件夹提供服务，路径是`http://10.100.0.10/`。
 
 ## 准备 boot 文件
 
-- Download the required files from https://github.com/harvester/harvester/releases. Choose an appropriate version.
+- 从https://github.com/harvester/harvester/releases 下载所需文件。选择一个合适的版本。
 
-  - The ISO: `harvester-amd64.iso`
-  - The kernel: `harvester-vmlinuz-amd64`
-  - The initrd: `harvester-initrd-amd64`
+  - ISO：`harvester-amd64.iso`.
+  - 内核：`harvester-vmlinuz-amd64`。
+  - initrd：`harvester-initrd-amd64`。
 
-- Serve the files.
+- 传送文件。
 
-  Copy or move the downloaded files to an appropriate location so they can be downloaded via the HTTP server. e.g.,
+  将下载的文件复制或移动到一个适当的位置，以便它们可以通过 HTTP 服务器下载。
 
-  ```
-  sudo mkdir -p /usr/share/nginx/html/harvester/
-  sudo cp /path/to/harvester-amd64.iso /usr/share/nginx/html/harvester/
+  ```bash
+  sudo mkdir -p /usr/share/nginx/html/harvester/...。
+  sudo cp /path/to/harvester-amd64.iso /usr/share/nginx/html/harvester/。
   sudo cp /path/to/harvester-vmlinuz-amd64 /usr/share/nginx/html/harvester/
   sudo cp /path/to/harvester-initrd-amd64 /usr/share/nginx/html/harvester/
   ```
 
 ## 准备 iPXE boot 脚本
 
-When performing automatic installation, there are two modes:
+当执行自动安装时，有两种模式：
 
-- `CREATE`: we are installing a node to construct an initial Harvester cluster.
-- `JOIN`: we are installing a node to join an existing Harvester cluster.
+- `CREATE`：安装一个节点，并且构建一个初始 Harvester 集群。
+- `JOIN`：安装一个节点，并且将该节点加入到现有的 Harvester 集群。
 
 ### 前提条件
 
-Nodes need to have at least **8G** of RAM because the full ISO file is loaded into tmpfs during the installation.
+节点需要有至少**8G**的内存，因为在安装过程中，完整的 ISO 文件会被加载到 tmpfs 中。
 
-### CREATE mode
+### CREATE 模式
 
-:::warn
-**Security Risks**: The configuration file below contains credentials which should be kept secretly. Please do not make the configuration file publicly accessible at the moment.
+:::warning
+以下的配置文件包含了密钥凭证。请不要公开配置文件。
 :::
 
-Create a [Harvester configuration file](/docs/harvester_new/installation/harvester-configuration/_index) `config-create.yaml` for `CREATE` mode. Modify the values as needed:
+创建一个[Harvester 配置文件](/docs/harvester_new/installation/harvester-configuration/_index) `config-create.yaml`用于`CREATE`模式。根据需要修改这些值。
 
 ```YAML
 # cat /usr/share/nginx/html/harvester/config-create.yaml
@@ -80,23 +80,24 @@ install:
 
 ```
 
-For machines that needs to be installed as `CREATE` mode, the following is an iPXE script that boots the kernel with the above config:
+对于需要以`CREATE`模式安装的机器，下面是一个 iPXE 脚本，用上述配置启动内核。
 
-```
+```bash
 #!ipxe
 kernel vmlinuz k3os.mode=install console=ttyS0 console=tty1 harvester.install.automatic=true harvester.install.config_url=http://10.100.0.10/harvester/config-create.yaml
 initrd initrd
 boot
 ```
 
-Let's assume the iPXE script is stored in `/usr/share/nginx/html/harvester/ipxe-create`
+我们假设 iPXE 脚本存储在`/usr/share/nginx/html/harvester/ipxe-create`中。
 
-### JOIN mode
+### JOIN 模式
 
-!!! warning
-**Security Risks**: The configuration file below contains credentials which should be kept secretly. Please do not make the configuration file publicly accessible at the moment.
+:::warning
+以下的配置文件包含了密钥凭证。请不要公开配置文件。
+:::
 
-Create a [Harvester configuration file](/docs/harvester_new/installation/pxe-mode/_index) `config-join.yaml` for `JOIN` mode. Modify the values as needed:
+创建一个[Harvester 配置文件](/docs/harvester_new/installation/pxe-mode/_index) `config-join.yaml`用于`JOIN`模式。根据需要修改这些值。
 
 ```YAML
 # cat /usr/share/nginx/html/harvester/config-join.yaml
@@ -117,22 +118,22 @@ install:
   iso_url: http://10.100.0.10/harvester/harvester-amd64.iso
 ```
 
-Note that the `mode` is `join` and the `server_url` needs to be provided.
+注意`mode`是`join`，`server_url`需要被提供。
 
-For machines that needs to be installed in `JOIN` mode, the following is an iPXE script that boots the kernel with the above config:
+对于需要在`JOIN`模式下安装的机器，下面是一个 iPXE 脚本，用上述配置启动内核。
 
-```
+```bash
 #!ipxe
 kernel vmlinuz k3os.mode=install console=ttyS0 console=tty1 harvester.install.automatic=true harvester.install.config_url=http://10.100.0.10/harvester/config-join.yaml
 initrd initrd
 boot
 ```
 
-Let's assume the iPXE script is stored in `/usr/share/nginx/html/harvester/ipxe-join`.
+我们假设 iPXE 脚本存储在`/usr/share/nginx/html/harvester/ipxe-join`。
 
-**TROUBLESHOOTING**
+**问题排查**
 
-- Sometimes the installer might be not able to fetch the Harvester configuration file because the network stack is not ready yet. To work around this, please add a `boot_cmd` parameter to the iPXE script, e.g.,
+- 有时安装程序可能无法获取 Harvester 配置文件，因为网络堆栈还没有准备好。为了解决这个问题，请在 iPXE 脚本中增加一个`boot_cmd`参数，例如：
 
   ```
   #!ipxe
@@ -141,9 +142,9 @@ Let's assume the iPXE script is stored in `/usr/share/nginx/html/harvester/ipxe-
   boot
   ```
 
-## DHCP server configuration
+## 配置 DHCP server
 
-Here is an example to configure the ISC DHCP server to offer iPXE scripts:
+下面是一个配置 ISC DHCP 服务器以提供 iPXE 脚本的例子。
 
 ```sh
 option architecture-type code 93 = unsigned integer 16;
@@ -202,32 +203,32 @@ group {
 }
 ```
 
-The config file declares a subnet and two groups. The first group is for hosts to boot with `CREATE` mode and the other one is for `JOIN` mode. By default, the iPXE path is chosen, but if it sees a PXE client, it also offers the iPXE image according to client architecture. Please prepare those images and a tftp server first.
+配置文件声明了一个子网和两个组。第一组是用于主机以`CREATE`模式启动，另一组是用于`JOIN`模式。默认情况下，选择 iPXE 路径，但如果它看到一个 PXE 客户端，它也会根据客户端架构提供 iPXE 镜像。请先准备好这些镜像和一个 tftp 服务器。
 
-## Harvester configuration
+## 配置 Harvester
 
-For more information about Harvester configuration, please refer to the [Harvester configuration](/docs/harvester_new/installation/pxe-mode/_index).
+关于 Harvester 配置的更多信息，请参考[Harvester 配置](/docs/harvester_new/installation/pxe-mode/_index)。
 
-Users can also provide configuration via kernel parameters. For example, to specify the `CREATE` install mode, the user can pass the `harvester.install.mode=create` kernel parameter when booting. Values passed through kernel parameters have higher priority than values specified in the config file.
+用户也可以通过内核参数提供配置。例如，为了指定`CREATE`安装模式，用户可以在启动时传递`harvester.install.mode=create`内核参数。通过内核参数传递的值比在配置文件中指定的值具有更高的优先级。
 
-## UEFI HTTP Boot support
+## UEFI HTTP Boot 支持
 
-UEFI firmware supports loading a boot image from HTTP server. This section demonstrates how to use UEFI HTTP boot to load the iPXE program and perform the automatic installation.
+UEFI 固件支持从 HTTP 服务器加载一个启动镜像。本节演示了如何使用 UEFI 的 HTTP 启动来加载 iPXE 程序并执行自动安装。
 
 ### Serve the iPXE program
 
-Download the iPXE uefi program from http://boot.ipxe.org/ipxe.efi and make `ipxe.efi` can be downloaded from the HTTP server. e.g.:
+从http://boot.ipxe.org/ipxe.efi 下载 iPXE uefi 程序，并使`ipxe.efi`可以从 HTTP 服务器下载。
 
 ```bash
 cd /usr/share/nginx/html/harvester/
 wget http://boot.ipxe.org/ipxe.efi
 ```
 
-The file now can be downloaded from http://10.100.0.10/harvester/ipxe.efi
+该文件可以从`http://10.100.0.10/harvester/ipxe.efi`下载。
 
-### DHCP server configuration
+### 配置 DHCP server
 
-If the user plans to use the UEFI HTTP boot feature by getting a dynamic IP first, the DHCP server needs to provides the iPXE program URL when it sees such a request. Here is an updated ISC DHCP server group example:
+如果用户计划通过先获得一个动态 IP 来使用 UEFI HTTP 启动功能，DHCP 服务器在看到这样的请求时需要提供 iPXE 程序的 URL。下面是一个更新的 ISC DHCP 服务器组的例子。
 
 ```sh
 group {
@@ -258,17 +259,17 @@ group {
 }
 ```
 
-The `elsif substring` statement is new, and it offers `http://10.100.0.10/harvester/ipxe.efi` when it sees a UEFI HTTP boot DHCP request. After the client fetches the iPXE program and runs it, the iPXE program will send a DHCP request again and load the iPXE script from URL `http://10.100.0.10/harvester/ipxe-create-efi`.
+`elsif substring`语句是新的，它在看到 UEFI HTTP 启动 DHCP 请求时提供`http://10.100.0.10/harvester/ipxe.efi`。在客户端获取 iPXE 程序并运行后，iPXE 程序将再次发送 DHCP 请求，并从 URL`http://10.100.0.10/harvester/ipxe-create-efi`加载 iPXE 脚本。
 
 ### The iPXE script for UEFI boot
 
-It's mandatory to specify the initrd image for UEFI boot in the kernel parameters. Here is an updated version of iPXE script for `CREATE` mode.
+在内核参数中指定 UEFI 启动的 initrd 镜像是必须的。这里有一个更新的 iPXE 脚本，用于 "CREATE "模式。
 
-```
+```bash
 #!ipxe
 kernel vmlinuz initrd=initrd k3os.mode=install console=ttyS0 console=tty1 harvester.install.automatic=true harvester.install.config_url=http://10.100.0.10/harvester/config-create.yaml
 initrd initrd
 boot
 ```
 
-The parameter `initrd=initrd` is required for initrd to be chrooted.
+参数`initrd=initrd`是 initrd 被 chroot 的必要条件。

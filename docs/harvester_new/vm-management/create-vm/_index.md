@@ -30,6 +30,32 @@ keywords:
 
 ![](/img/harvester/create-vm.png)
 
+## 配置示例
+
+配置默认用户的密码。
+
+```YAML
+#cloud-config
+password: password
+chpasswd: { expire: False }
+ssh_pwauth: True
+```
+
+使用 DHCP 的网络数据配置。
+
+```YAML
+version: 1
+config:
+  - type: physical
+    name: eth0
+    subnets:
+      - type: dhcp
+  - type: physical
+    name: eth1
+    subnets:
+      - type: dhcp
+```
+
 ## 网络
 
 ### 管理网络
