@@ -1,6 +1,6 @@
 ---
 title: 访问虚拟机
-description:
+description: 虚拟机启动并运行后，您可以通过 VNC 或 Harvester 用户界面的串行控制台进行访问。也可以直接从电脑的 SSH 客户端连接。
 keywords:
   - rancher
   - rancher中文

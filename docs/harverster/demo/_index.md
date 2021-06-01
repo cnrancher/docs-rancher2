@@ -1,6 +1,6 @@
 ---
 title: 视频教程
-description:
+description: 目前 Harvester 提供的视频教程如下，请单击下方链接获取对应教程
 keywords:
   - rancher
   - rancher中文

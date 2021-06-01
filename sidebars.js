@@ -2014,18 +2014,29 @@ module.exports = {
     },
     harvester: {
         产品介绍: ["harverster/_index"],
-        鉴权与认证: ["harverster/authentication/_index"],
-        上传镜像: ["harverster/upload-images/_index"],
         安装指南: [
             "harverster/installation/_index",
-            "harverster/installation/app-mode/_index",
             "harverster/installation/iso-mode/_index",
+            "harverster/installation/pxe-mode/_index",
+            "harverster/installation/harvester-configuration/_index",
         ],
+        鉴权与认证: ["harverster/authentication/_index"],
+        升级指南: ["harverster/upgrade/_index"],
+        网络: ["harverster/harvester-network/_index"],
+        上传镜像: ["harverster/upload-images/_index"],
         虚拟机管理: [
             "harverster/vm-management/_index",
             "harverster/vm-management/create-vm/_index",
             "harverster/vm-management/access-vm/_index",
+            "harverster/vm-management/backup-restore/_index",
+            "harverster/vm-management/live-migration/_index",
         ],
+        Rancher集成: [
+            "harverster/rancher-integration/_index",
+            "harverster/rancher-integration/node-driver/_index",
+        ],
+        开发者模式: ["harverster/dev_mode/_index"],
         视频教程: ["harverster/demo/_index"],
+        API参考: ["harverster/api-reference/_index"],
     },
 };
