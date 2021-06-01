@@ -1,6 +1,6 @@
 ---
 title: 产品介绍
-description:
+description: Harvester 是由 Rancher 提供的基于 Kubernetes 构建的 100%开源的超融合基础架构（HCI）软件。 它是 vSphere 和 Nutanix 的开源替代方案。Harvester 支持在裸机服务器上实施 HCI。
 keywords:
   - rancher
   - rancher中文
@@ -27,7 +27,7 @@ Harvester 支持在裸机服务器上实施 HCI。以下是 Harvester 的一些�
 
 - 虚拟机生命周期管理，包括 SSH-Key 注入、Cloud-init 和图形、串行端口控制台。
 - 分布式块存储。
-- 支持管理网络与 VLAN 的多网卡管理
+- 支持管理网络与 VLAN 的多网卡管理。
 - 内置镜像仓库。
 - 虚拟机模板。
 

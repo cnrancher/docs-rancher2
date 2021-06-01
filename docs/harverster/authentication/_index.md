@@ -1,6 +1,6 @@
 ---
 title: 鉴权与认证
-description:
+description: 在 ISO 安装模式下，用户在第一次登录时将被提示为默认的`admin`用户设置密码。
 keywords:
   - rancher
   - rancher中文
@@ -15,18 +15,22 @@ keywords:
   - 鉴权与认证
 ---
 
-## 概述
+## Authentication
 
-Harvester 仪表盘支持 `local auth`模式的身份验证，默认的用户名和密码是`admin/password`。
+_从 v0.2.0 开始可用_
 
-Harvester 的登录页面如下图所示：
+在 ISO 安装模式下，用户在第一次登录时将被提示为默认的`admin`用户设置密码。
+
+![auth](/img/harvester/first-log-in.png)
+
+用户首次登录 Harvester 所看见的页面如下图所示：
 
 ![auth](/img/harvester/authentication.png)
 
-## App Mode 的认证选项
+## 开发者模式
 
-在仅用于开发和测试目的的 `App mode`中，您可以使用环境变量`HARVESTER_AUTHENTICATION_MODE`配置其他的认证模式。
+开发者模式，即`developer mode`。在仅用于开发和测试目的的 `developer mode`中，可通过环境变量 `HARVESTER_AUTHENTICATION_MODE`配置更多的认证模式。
 
-目前支持的选项是`localUser`（与`local auth`模式相同）和`kubernetesCredentials`。
+默认情况下，Harvester Dashboard 使用`local auth`模式进行认证。默认的用户名和密码是`admin/password`。目前支持的选项是`localUser`（与`local auth`模式相同）和`kubernetesCredentials`。
 
-如果使用`kubernetesCredentials`认证选项，无论是 kubconfig 文件还是 bearer token 都可以提供对 Harvester 的访问。
+如果使用`kubernetesCredentials`认证选项，`kubeconfig`文件或承载令牌可以提供对 Harvester 的访问。
