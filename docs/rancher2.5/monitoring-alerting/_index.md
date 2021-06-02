@@ -19,11 +19,9 @@ keywords:
 
 使用 Rancher，您可以在您的集群上快速部署领先的开源监控和告警解决方案。
 
-Rancher 的解决方案（由[Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator)提供支持）允许用户：
-
 Rancher v2.5 中引入的 `rancher-monitoring`operator 由[Prometheus](https://prometheus.io/)、[Grafana](https://grafana.com/grafana/)、[Alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/)、[Prometheus 操作员](https://github.com/prometheus-operator/prometheus-operator)和[Prometheus 适配器](https://github.com/DirectXMan12/k8s-prometheus-adapter)驱动。
 
-Rancher 的解控和告警解决方案允许用户执行以下操作：
+Rancher 的监控和告警解决方案（由[Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator)提供支持）允许用户执行以下操作：
 
 - 通过[Prometheus](https://prometheus.io/)，监控您的集群节点、Kubernetes 组件和软件部署的状态和进程。
 
