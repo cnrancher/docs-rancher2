@@ -1,6 +1,6 @@
 ---
 title: 安装指南
-description:
+description: 目前有两种方式可以安装 Harvester：您可以通过 ISO 模式 或 PXE 模式 安装 Harvester。
 keywords:
   - rancher
   - rancher中文
@@ -16,9 +16,9 @@ keywords:
   - 概述
 ---
 
-目前有两种方式可以安装 Harvester：您可以通过 ISO mode 或 App mode 安装 Harvester，其中 App mode 适用于测试和开发环境，不建议在生产环境中使用。
+目前有两种方式可以安装 Harvester：您可以通过 ISO 模式 或 PXE 模式 安装 Harvester。
 
 请参考以下链接，获取对应的安装说明：
 
 - [ISO 模式](/docs/harverster/installation/iso-mode/_index)
-- [App 模式](/docs/harverster/installation/app-mode/_index)
+- [PXE 模式](/docs/harverster/installation/pxe-mode/_index)

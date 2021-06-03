@@ -1,6 +1,6 @@
 ---
 title: 创建虚拟机
-description:
+description: 本文提供了创建虚拟机的操作指导。
 keywords:
   - rancher
   - rancher中文
@@ -29,6 +29,32 @@ keywords:
 1. （可选）在**高级选项**部分配置高级选项，如主机名和 cloud-init 数据。
 
 ![](/img/harvester/create-vm.png)
+
+## 配置示例
+
+配置默认用户的密码。
+
+```YAML
+#cloud-config
+password: password
+chpasswd: { expire: False }
+ssh_pwauth: True
+```
+
+使用 DHCP 的网络数据配置。
+
+```YAML
+version: 1
+config:
+  - type: physical
+    name: eth0
+    subnets:
+      - type: dhcp
+  - type: physical
+    name: eth1
+    subnets:
+      - type: dhcp
+```
 
 ## 网络
 

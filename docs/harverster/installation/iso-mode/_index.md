@@ -1,6 +1,6 @@
 ---
 title: ISO 模式
-description:
+description: 硬件需要满足以下要求，才可以启动和运行 Harvester。在安装过程中，你可以选择组建一个新的集群，或者将节点加入到现有的集群中。
 keywords:
   - rancher
   - rancher中文
@@ -34,12 +34,16 @@ keywords:
 
 在安装过程中，你可以选择组建一个新的集群，或者将节点加入到现有的集群中。
 
-注意：这个[视频](https://youtu.be/97ADieBX6bE)展示了 ISO 安装的过程。
+这个[视频](https://youtu.be/97ADieBX6bE)展示了 ISO 安装的过程。
+
+<iframe width="444" height="250" src="https://www.youtube.com/embed/97ADieBX6bE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 1. 挂载 Harvester ISO 盘，选择`Harvester Installer`启动服务器。
    ![iso-install.png](/img/harvester/iso-install.png)
 1. 创建一个新的 Harvester 集群或加入一个现有的集群，然后选择安装模式。
 1. 选择要格式化 Harvester 的安装设备。
+1. 配置主机名，选择管理网络的网络接口，IP 地址可以通过 DHCP 或静态方法配置。
+   ![iso-installed.png](/img/harvester/iso-nic-config.png)
 1. 配置`cluster token`，用于添加其他节点到集群中。
 1. 配置主机的登录密码，默认的 ssh 用户是`rancher`。
 1. （可选）你可以选择从远程 URL 服务器导入 SSH 密钥。你的 GitHub 公钥可以用`https://github.com/<username>.keys`。
@@ -48,4 +52,7 @@ keywords:
 1. (可选) 如果需要使用 cloud-init config 自定义主机，请在此处输入 HTTP URL。
 1. 确认安装选项，Harvester 将被安装到你的主机上。安装可能需要几分钟才能完成。
 1. 安装完成后，将重启主机，并显示一个包含管理 URL 和状态的控制台界面。你可以使用 F12 在 Harvester 控制台和 Shell 之间切换。
+1. 网络界面的默认 URL 是`https://your-host-ip:30443`。
    ![iso-installed.png](/img/harvester/iso-installed.png)
+1. 用户在第一次登录时将被提示为默认的`admin`用户设置密码。
+   ![first-login.png](/img/harvester/first-log-in.png)
