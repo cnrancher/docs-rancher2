@@ -1,4 +1,21 @@
-# 高级选项和配置
+---
+title: 高级选项和配置
+description: 本节包含描述运行和管理 RKE2 的不同方式的高级信息。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE2
+  - rke2
+  - 高级选项和配置
+---
+
 
 本节包含描述运行和管理 RKE2 的不同方式的高级信息。
 

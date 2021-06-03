@@ -1,4 +1,20 @@
-# 网络
+---
+title: 网络
+description: 本页解释了 CoreDNS 和 Nginx-Ingress controller 如何在 RKE2 中工作。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE2
+  - 网络
+---
+
 
 本页解释了 CoreDNS 和 Nginx-Ingress controller 如何在 RKE2 中工作。
 

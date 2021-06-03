@@ -1,4 +1,22 @@
-# Containerd 注册表配置
+---
+title: Containerd 注册表配置
+description: Containerd 可以配置连接到私有注册表，并使用它们在每个节点上提取私有镜像。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE2
+  - Containerd 注册表配置
+  - Containerd
+  - 注册表
+---
+
 
 Containerd 可以配置连接到私有注册表，并使用它们在每个节点上提取私有镜像。
 

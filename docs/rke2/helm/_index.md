@@ -1,4 +1,21 @@
-# Helm 集成
+---
+title: Helm 集成
+description: Helm 是 Kubernetes 的首选软件包管理工具。Helm chart 为 Kubernetes YAML 清单文件提供模板语法。通过 Helm，我们可以创建可配置的部署，而不是仅仅使用静态文件。关于创建自己的部署目录的更多信息，请查看[https://helm.sh/docs/intro/quickstart/](https://helm.sh/docs/intro/quickstart/)的文档。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE2
+  - Helm 集成
+  - Helm
+---
+
 
 Helm 是 Kubernetes 的首选软件包管理工具。Helm chart 为 Kubernetes YAML 清单文件提供模板语法。通过 Helm，我们可以创建可配置的部署，而不是仅仅使用静态文件。关于创建自己的部署目录的更多信息，请查看[https://helm.sh/docs/intro/quickstart/](https://helm.sh/docs/intro/quickstart/)的文档。
 

@@ -1,5 +1,19 @@
-# 升级RKE2集群
-
+---
+title: 升级RKE2集群
+description: 本节介绍了如何升级你的rke2集群。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE2
+  - 升级RKE2集群
+---
 
 
 本节介绍了如何升级你的rke2集群。

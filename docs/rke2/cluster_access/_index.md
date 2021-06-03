@@ -1,4 +1,20 @@
-# Cluster Access
+---
+title: 访问集群
+description: 存储在`/etc/rancher/rke2/rke2.yaml`的 kubeconfig 文件用来配置对 Kubernetes 集群的访问。 如果你已经安装了上游的 Kubernetes 命令行工具，如 kubectl 或 helm，你将需要用正确的 kubeconfig 路径配置它们。这可以通过导出`KUBECONFIG`环境变量或调用`--kubeconfig`命令行标志来完成。详情请参考下面的例子。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE2
+  - 访问集群
+---
+
 
 存储在`/etc/rancher/rke2/rke2.yaml`的 kubeconfig 文件用来配置对 Kubernetes 集群的访问。 如果你已经安装了上游的 Kubernetes 命令行工具，如 kubectl 或 helm，你将需要用正确的 kubeconfig 路径配置它们。这可以通过导出`KUBECONFIG`环境变量或调用`--kubeconfig`命令行标志来完成。详情请参考下面的例子。
 

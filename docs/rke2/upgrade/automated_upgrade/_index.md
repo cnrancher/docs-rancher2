@@ -1,4 +1,20 @@
-# 自动升级
+---
+title: 自动升级
+description: 你可以使用 Rancher 的 system-upgrade-controller 来管理 rke2 集群的升级。这是一种 Kubernetes 原生的集群升级方法。它利用[自定义资源定义（CRD）](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#custom-resources)、`计划` 和[控制器](https://kubernetes.io/docs/concepts/architecture/controller/)，根据配置的计划来安排升级。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE2
+  - 自动升级
+---
+
 
 ### 概述
 

@@ -1,4 +1,21 @@
-# 离线安装
+---
+title: 离线安装
+description: RKE2 可以通过两种不同的方式安装在一个离线环境中。你可以通过`rke2-airgap-images` tarball release artifacts 进行部署，也可以通过使用私有注册表。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE2
+  - 离线安装
+  - airgap
+---
+
 
 **重要说明：**如果你的节点安装并启用了 NetworkManager，[确保它被配置为忽略 CNI 管理的接口。](https://docs.rke2.io/known_issues/#networkmanager)
 

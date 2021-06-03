@@ -1,6 +1,20 @@
 ---
 title: SELinux
+description: RKE2 可以在支持 SELinux 的系统上运行，这是在 CentOS/RHEL 7/8 上安装时的默认设置。支持该策略的[policy](https://github.com/rancher/rke2-selinux)是针对 containerd 的[container-selinux](https://github.com/containers/container-selinux)策略的一个特殊版本。它说明了 containerd 安装的非标准位置，并将持久性和短暂性的状态。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE2
+  - SELinux
 ---
+
 
 RKE2 可以在支持 SELinux 的系统上运行，这是在 CentOS/RHEL 7/8 上安装时的默认设置。支持该策略的[policy](https://github.com/rancher/rke2-selinux)是针对 containerd 的[container-selinux](https://github.com/containers/container-selinux)策略的一个特殊版本。它说明了 containerd 安装的非标准位置，并将持久性和短暂性的状态。
 

@@ -1,4 +1,22 @@
-# 高可用
+---
+title: 高可用安装
+description: 本节介绍如何安装一个高可用性（HA）的 RKE2 集群。一个高可用的 RKE2 集群由以下部分组成
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE2
+  - 高可用安装
+  - 高可用
+  - HA
+---
+
 
 本节介绍如何安装一个高可用性（HA）的 RKE2 集群。一个高可用的 RKE2 集群由以下部分组成：
 
