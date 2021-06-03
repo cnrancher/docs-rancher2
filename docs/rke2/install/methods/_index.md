@@ -1,6 +1,20 @@
 ---
 title: 安装方式
+description: RKE2 可以通过多种方式安装到系统中，其中两种方式是首选和支持的。这两种方法是 tarball 和 RPM。快速入门中提到的安装脚本是对这两种方法的一种封装。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE2
+  - 安装方式
 ---
+
 
 **重要说明:** 如果你的节点已安装并启用 NetworkManager，[确保它被配置为忽略 CNI 管理的接口。](https://docs.rke2.io/known_issues/#networkmanager)
 

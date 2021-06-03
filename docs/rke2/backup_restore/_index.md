@@ -1,10 +1,28 @@
-# Etcd 备份和恢复
+---
+title: Etcd 备份和恢复
+description: 在本节中，你将学习如何创建 rke2 集群数据的备份并从备份中恢复集群。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE2
+  - Etcd 备份和恢复
+  - 备份和恢复
+  - 备份
+  - 恢复
+---
 
 在本节中，你将学习如何创建 rke2 集群数据的备份并从备份中恢复集群。
 
 **注意：** `/var/lib/rancher/rke2`是 rke2 的默认数据目录，但它可以通过`data-dir`参数进行配置。
 
-### 创建快照
+## 创建快照
 
 快照在默认情况下是启用的。
 
@@ -25,7 +43,7 @@ rke2 server --cluster-reset
 
 **结果：**日志中的一条消息说，RKE2 可以在没有标志的情况下重新启动。再次启动 rke2，它应该将 rke2 启动为一个 1 个成员的集群。
 
-### 从快照中恢复群集
+## 从快照中恢复群集
 
 当 RKE2 从备份中恢复时，旧的数据目录将被移到`/var/lib/rancher/rke2/server/db/etcd-old-%date%/`。然后，RKE2 将试图通过创建一个新的数据目录来恢复快照，然后用一个新的 RKE2 集群启动 etcd，并有一个 etcd 成员。
 
@@ -41,7 +59,7 @@ rke2 server \
 
 当 rke2 重置集群时，它会在`/var/lib/rancher/rke2/server/db/etc/reset-file`处创建一个文件。如果你想再次重置集群，你将需要删除这个文件。
 
-### 选项
+## 选项
 
 这些选项可以在配置文件中设置：
 
@@ -54,7 +72,7 @@ rke2 server \
 | `cluster-reset`                     | 成为新集群的唯一成员。这也可以通过环境变量`[$RKE2_CLUSTER_RESET]`来设置。. |
 | `cluster-reset-restore-path` value  | 要恢复的快照文件的路径                                                     |
 
-### 支持 S3 兼容的 API
+## 支持 S3 兼容的 API
 
 rke2 支持将 etcd 快照写入具有 S3 兼容 API 的系统，并从该系统恢复 etcd 快照。S3 支持按需和计划快照。
 

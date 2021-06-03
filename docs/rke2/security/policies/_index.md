@@ -1,6 +1,20 @@
 ---
 title: 默认的政策配置
+description: 本文介绍了 RKE2 如何配置 PodSecurityPolicies 和 NetworkPolicies，以实现默认安全，同时也为运营商提供了最大的配置灵活性。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE2
+  - 默认的政策配置
 ---
+
 
 本文介绍了 RKE2 如何配置 PodSecurityPolicies 和 NetworkPolicies，以实现默认安全，同时也为运营商提供了最大的配置灵活性。
 

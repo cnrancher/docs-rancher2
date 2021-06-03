@@ -1,3 +1,21 @@
+---
+title: 安装要求
+description: RKE2 非常轻便，但有一些最低要求，如下所述。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE2
+  - 安装要求
+---
+
+
 RKE2 非常轻便，但有一些最低要求，如下所述。
 
 ## 先决条件

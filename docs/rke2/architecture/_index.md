@@ -1,9 +1,24 @@
 ---
 title: 下一代 Kubernetes 发行版剖析
-weight: 204
+description: 在 RKE2 中，我们吸取了开发和维护轻量级Kubernetes发行版K3s的经验教训，并将其应用于构建一个具有K3s易用性的企业级发行版。这意味着，RKE2 在最简单的情况下是一个单一的二进制文件，需要在所有参与Kubernetes集群的节点上安装和配置。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE2
+  - rke2
+  - rke2 架构
+  - 架构
 ---
 
-### 架构概述
+
+## 架构概述
 
 在 RKE2 中，我们吸取了开发和维护轻量级[Kubernetes][io-kubernetes]发行版[K3s][io-k3s]的经验教训，并将其应用于构建一个具有[K3s][io-k3s]易用性的企业级发行版。这意味着，RKE2 在最简单的情况下是一个单一的二进制文件，需要在所有参与[Kubernetes][io-kubernetes]集群的节点上安装和配置。一旦启动，RKE2 就能够引导和监督每个节点上的角色合适的 agent，同时从网络上获取所需的内容。
 
@@ -30,7 +45,7 @@ RKE2 汇集了一些开源技术来实现这一切：
 
 除了 NGINX Ingress Controller，所有这些都是用[Go+BoringCrypto][gh-goboring]编译和静态链接的。
 
-### 进程生命周期
+## 进程生命周期
 
 #### Content Bootstrap
 

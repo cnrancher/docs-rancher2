@@ -1,6 +1,21 @@
 ---
 title: 卸载
+description: 根据安装 RKE2 的安装方式不同，卸载过程也不同。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE2
+  - 卸载rke2
+  - 卸载
 ---
+
 
 # 卸载
 

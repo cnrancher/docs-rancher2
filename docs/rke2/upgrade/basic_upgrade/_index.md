@@ -1,4 +1,19 @@
-# 基础升级
+---
+title: 基础升级
+description: 你可以通过使用安装脚本来升级rke2，或者通过手动安装所需版本的二进制文件。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE2
+  - 基础升级
+---
 
 
 你可以通过使用安装脚本来升级rke2，或者通过手动安装所需版本的二进制文件。

@@ -1,4 +1,21 @@
-# 概述
+---
+title: 安装配置选项
+description: 本页主要介绍设置 RKE2 时的配置选项
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE2
+  - 安装配置选项
+  - 配置选项
+---
+
 
 本页主要介绍设置 RKE2 时的配置选项:
 

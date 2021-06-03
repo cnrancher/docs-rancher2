@@ -1,6 +1,20 @@
 ---
-title: Quick Start
+title: 快速开始
+description: 本指南将帮助你用默认选项快速启动一个集群。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE2
+  - 快速开始
 ---
+
 
 本指南将帮助你用默认选项快速启动一个集群。
 
@@ -11,8 +25,6 @@ title: Quick Start
 请确保你的环境满足[要求](https://docs.rke2.io/install/requirements/)。如果在主机上安装并启用了 NetworkManager，[确保它被配置为忽略 CNI 管理的接口](https://docs.rke2.io/known_issues/#networkmanager)。
 
 ### Server 节点安装
-
----
 
 RKE2 提供了一个安装脚本，这是一个在基于 systemd 的系统上将其作为服务安装的便捷方式。这个脚本可以从https://get.rke2.io获得。使要使用此方法安装RKE2，请执行以下操作：
 

@@ -1,6 +1,20 @@
 ---
 title: FIPS 140-2 启用
+description: FIPS 140-2 是美国联邦政府的安全标准，用于批准加密模块。这份文件解释了 RKE2 是如何使用 FIPS 验证的加密库构建的。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE2
+  - FIPS 140-2 启用
 ---
+
 
 FIPS 140-2 是美国联邦政府的安全标准，用于批准加密模块。这份文件解释了 RKE2 是如何使用 FIPS 验证的加密库构建的。
 

@@ -1,8 +1,22 @@
 ---
 title: Server 配置参考
+description: 这是对可用于配置 rke2 server的所有参数的引用。请注意，虽然这是对命令行参数的引用，但配置 RKE2 的最佳方式是使用配置文件
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE2
+  - Server 配置参考
 ---
 
-这是对可用于配置 rke2 服务器的所有参数的引用。请注意，虽然这是对命令行参数的引用，但配置 RKE2 的最佳方式是使用[配置文件]（install_options.md#configuration-file）。
+
+这是对可用于配置 rke2 server的所有参数的引用。请注意，虽然这是对命令行参数的引用，但配置 RKE2 的最佳方式是使用[配置文件]（install_options.md#configuration-file）。
 
 ### RKE2 Server CLI 帮助
 

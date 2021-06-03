@@ -1,6 +1,20 @@
 ---
-title: CIS自我评估指南
+title: CIS自我评估指南 v1.6
+description: 本文件是RKE2安全加固指南的配套文件。硬化指南为RKE2的生产安装提供了规范性的指导，而本基准指南旨在帮助你根据CIS Kubernetes基准中的每一项控制来评估硬化后的集群的安全水平。它将被RKE2运营商、安全团队、审计师和决策者使用。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE2
+  - CIS自我评估指南 v1.6
 ---
+
 
 ### CIS Kubernetes基准测试 v1.6 - RKE2 v1.20
 

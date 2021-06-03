@@ -129,6 +129,18 @@ function Home() {
                     </div>
                     <div className="navigation__item">
                         <div className="navigation__title">
+                            <a href="/rke2">
+                                <h1>RKE2</h1>
+                            </a>
+                        </div>
+                        <div className="navigation__content">
+                            <p>
+                            RKE2，也被称为 RKE Government，是 Rancher 的下一代 Kubernetes 发行版。
+                            </p>
+                        </div>
+                    </div>
+                    <div className="navigation__item">
+                        <div className="navigation__title">
                             <a href="/harvester">
                                 <h1>Harvester</h1>
                             </a>

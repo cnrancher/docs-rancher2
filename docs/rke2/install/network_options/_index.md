@@ -1,3 +1,20 @@
+---
+title: 网络选项
+description: 默认情况下，RKE2 将 Canal 作为 cni 运行，VXLAN 作为默认后端，Canal 在主要组件启动并运行后通过 Helm 图表安装，可以通过修改 helm chart 选项进行自定义。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE2
+  - 网络选项
+---
+
 # 网络选项
 
 默认情况下，RKE2 将 Canal 作为 cni 运行，VXLAN 作为默认后端，Canal 在主要组件启动并运行后通过 Helm 图表安装，可以通过修改 helm chart 选项进行自定义。
