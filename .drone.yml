@@ -40,9 +40,9 @@ steps:
       NOPROXY: localhost
       noproxy: localhost
     commands:
-      - echo "### $NODE_OPTIONS, $max_old_space_size"
+      - which yarn
       - yarn install
-      - yarn build
+      - node --max_old_space_size=4096 /usr/local/bin/yarn build
       - mv ./build /website
     volumes:
       - name: vol
