@@ -60,4 +60,4 @@ RKE2 系统的大部分组件都是用 GoBoring Go 编译器实现静态编译�
 
 ## Ingress
 
-RKE2 中包含的 NGINX Ingress 目前没有启用 FIPS。然而，它可以被集群运营商/所有者[禁用和替换]（.../advanced.md#disabling-server-charts）。
+RKE2 中包含的 NGINX Ingress 目前没有启用 FIPS。然而，它可以被集群运营商/所有者[禁用和替换]（/docs/rke2/advanced/_index#disabling-server-charts）。
