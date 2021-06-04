@@ -40,6 +40,7 @@ steps:
       NOPROXY: localhost
       noproxy: localhost
     commands:
+      - echo "### $NODE_OPTIONS, $max_old_space_size"
       - yarn install
       - yarn build
       - mv ./build /website
