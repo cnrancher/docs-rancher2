@@ -35,6 +35,6 @@ kubectl --kubeconfig /etc/rancher/rke2/rke2.yaml get pods --all-namespaces
 helm --kubeconfig /etc/rancher/rke2/rke2.yaml ls --all-namespaces
 ```
 
-### 使用 kubectl 从外部访问集群
+## 使用 kubectl 从外部访问集群
 
 将`/etc/rancher/rke2/rke2.yaml`复制到你位于集群外的机器上，作为`~/.kube/config`。然后将`127.0.0.1`替换为你的 RKE2 服务器的 IP 或主机名。`kubectl`现在可以管理你的 RKE2 集群了。

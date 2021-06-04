@@ -106,7 +106,7 @@ tls-san:
 
 因为 RKE2 server 节点默认是可调度的，所以一个 HA 的 RKE2 server 集群的最小节点数是 3 个 server 节点和 0 个 agent 节点。要添加指定的节点来运行你的应用程序和服务，请将 agent 节点加入你的集群。
 
-在 HA 集群中加入 agent 节点与[在单个 server 集群中加入 agent 节点](/docs/rke2/install/quickstart/_index#agent-worker-node-installation)是一样的。你只需要指定 agent 应该注册的 URL 和它应该使用的 token。
+在 HA 集群中加入 agent 节点与[在单个 server 集群中加入 agent 节点](/docs/rke2/install/quickstart/_index#agent（worker）节点的安装)是一样的。你只需要指定 agent 应该注册的 URL 和它应该使用的 token。
 
 ```yaml
 server: https://my-kubernetes-domain.com:9345

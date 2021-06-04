@@ -15,13 +15,12 @@ keywords:
   - 网络选项
 ---
 
-# 网络选项
 
 默认情况下，RKE2 将 Canal 作为 cni 运行，VXLAN 作为默认后端，Canal 在主要组件启动并运行后通过 Helm 图表安装，可以通过修改 helm chart 选项进行自定义。
 
 也可以选择用 Cilium 代替 Canal 作为 cni。
 
-# Canal 选项
+## Canal 选项
 
 要覆盖 Canal 选项，你应该能够创建 HelmChartConfig 资源，HelmChartConfig 资源必须与其对应的 HelmChart 的名称和命名空间相匹配，例如，要覆盖 Canal 选项，您可以创建以下配置：
 
@@ -46,7 +45,7 @@ cp rke2-canal-config.yml /var/lib/rancher/rke2/server/manifests/
 
 关于 Canal 配置的全部选项的更多信息，请参考[rke2-charts](https://github.com/rancher/rke2-charts/blob/main-source/packages/rke2-canal/charts/values.yaml)。
 
-# 用 Cilium 或 Calico 代替 Canal
+## 用 Cilium 或 Calico 代替 Canal
 
 从 RKE2 v1.21 开始，不同的 CNI 插件可以代替 Canal 进行部署。要做到这一点，需要传递`cilium`或`calico`作为`--cni`标志的值。要覆盖默认选项，请使用 HelmChartConfig 资源，如上节所述。请注意，HelmChartConfig 资源名称必须与你所选择的 CNI 的 chart 名称相匹配 - `rke2-cilium`，`rke2-calico`，等等。
 
@@ -54,7 +53,7 @@ cp rke2-canal-config.yml /var/lib/rancher/rke2/server/manifests/
 
 有关 Calico chart 可用 value 的更多信息，请参考[rke2-charts 资源库](https://github.com/rancher/rke2-charts/blob/main/charts/rke2-calico/rke2-calico/v3.18.1-103/values.yaml)
 
-# 使用 Multus
+## 使用 Multus
 
 从 RKE2 v1.21 开始，可以部署 Multus CNI meta-plugin。请注意，这是为高级用户准备的。
 
@@ -66,13 +65,13 @@ Multus 不能独立部署。它总是需要至少一个传统的 CNI 插件，�
 
 关于 Multus 的更多信息，请参考[multus-cni](https://github.com/k8snetworkplumbingwg/multus-cni/tree/master/docs)文档。
 
-## 使用 Multus 与 containernetworking 插件
+### 使用 Multus 与 containernetworking 插件
 
 任何 CNI 插件都可以作为 Multus 的次要 CNI 插件，以提供连接到一个 pod 的额外网络接口。然而，最常见的是使用由 containernetworking 团队维护的 CNI 插件（bridge、host-device、macvlan 等）作为 Multus 的辅助 CNI 插件。这些 containernetworking 插件会在安装 Multus 时自动部署。关于这些插件的更多信息，请参阅 [containernetworking plugins](https://www.cni.dev/plugins/current) 文档。
 
 要使用这些插件中的任何一个，需要创建一个适当的 NetworkAttachmentDefinition 对象来定义二级网络的配置。然后，该定义被 pod 注释所引用，Multus 将使用这些注释来为该 pod 提供额外的接口。[multus-cni 存储库](https://github.com/k8snetworkplumbingwg/multus-cni/blob/master/docs/quickstart.md#storing-a-configuration-as-a-custom-resource)中提供了将 Macvlan cni 插件与 Mu 一起使用的示例。
 
-## 将 Multus 与 SR-IOV 一起使用
+### 将 Multus 与 SR-IOV 一起使用
 
 将 SR-IOV CNI 与 Multus 一起使用可以帮助解决数据平面加速的用例，在 Pod 中提供一个额外的接口，可以实现非常高的吞吐量。SR-IOV 并非在所有环境中都有效，并且必须满足一些要求才能将节点视为具有 SR-IOV 功能的节点：
 

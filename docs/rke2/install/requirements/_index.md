@@ -45,7 +45,7 @@ RKE2 已经在以下操作系统及其后续非主要版本上进行了测试和
 
 RKE2 的性能取决于数据库的性能，由于 RKE2 以嵌入式方式运行 etcd，并将数据目录存储在磁盘上，我们建议尽可能使用 SSD 以确保最佳性能。
 
-## 联网
+## 网络
 
 **重要的是：** 如果你的节点安装并启用了 NetworkManager，[确保它被配置为忽略 CNI 管理的接口。](https://docs.rke2.io/known_issues/#networkmanager)
 

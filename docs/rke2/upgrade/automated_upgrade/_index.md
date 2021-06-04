@@ -16,7 +16,7 @@ keywords:
 ---
 
 
-### 概述
+## 概述
 
 你可以使用 Rancher 的 system-upgrade-controller 来管理 rke2 集群的升级。这是一种 Kubernetes 原生的集群升级方法。它利用[自定义资源定义（CRD）](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#custom-resources)、`计划` 和[控制器](https://kubernetes.io/docs/concepts/architecture/controller/)，根据配置的计划来安排升级。
 
@@ -24,11 +24,13 @@ keywords:
 
 控制器通过监控计划和选择节点来运行升级[job](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/)来安排升级。一个计划通过一个[标签选择器](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)定义哪些节点应该被升级。当一个 job 成功运行完成后，控制器将对运行该 job 的节点进行相应的标记。
 
-> **注意：** 启动的升级 job 必须具有高权限。它配置如下：
+:::note 注意：
+**启动的升级 job 必须具有高权限。它配置如下:**
 
 - 主机`IPC`、`NET`和`PID`命名空间
 - `CAP_SYS_BOOT`能力
 - 主机根目录安装在`/host`，有读写权限
+:::
 
 关于 system-upgrade-controller 的设计和架构或其与 rke2 集成的更多细节，请参见以下 Git 仓库。
 
@@ -40,7 +42,7 @@ keywords:
 1. 在你的集群中安装 system-upgrade-controller
 1. 配置计划
 
-### 安装 system-upgrade-controller
+## 安装 system-upgrade-controller
 
 system-upgrade-controller 可以通过 deployment 的方式安装到你的集群中。该 deployment 需要一个 service-account、clusterRoleBinding 和 configmap。要安装这些组件，请运行以下命令：
 
@@ -50,7 +52,7 @@ kubectl apply -f https://github.com/rancher/system-upgrade-controller/releases/d
 
 可以通过前面提到的 configmap 来配置和自定义控制器，但必须重新部署控制器才能应用这些变化。
 
-### 配置计划
+## 配置计划
 
 建议你至少创建两个计划：一个用于升级 server(master)节点的计划，一个用于升级 agent(worker)节点的计划。根据需要，你可以创建额外的计划来控制各节点的升级。下面的两个计划例子将把你的集群升级到 rke2 v1.17.4+k3s1。一旦计划被创建，控制器将接收它们并开始升级你的集群。
 

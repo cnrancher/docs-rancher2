@@ -35,7 +35,7 @@ RKE2 可以通过两种不同的方式安装在一个离线环境中。你可以
    - 如果启用 vSphere CPI/CSI charts（`--cloud-provider-name=vsphere`），您还必须下载`rke2-images-vsphere`。
 2. 确保节点上存在`/var/lib/rancher/rke2/agent/images/`目录。
 3. 将压缩档案复制到节点上的`/var/lib/rancher/rke2/agent/images/`，确保保留文件扩展名。
-4. [安装 RKE2](#install-rke2)
+4. [安装 RKE2](#安装-rke2)
 
 ## 私有注册表方式
 
@@ -45,11 +45,11 @@ RKE2 可以通过两种不同的方式安装在一个离线环境中。你可以
 
 1. 将所有需要的系统镜像添加到你的私有注册表。镜像列表可以从上面提到的每个 tarball 对应的`.txt`文件中获得，或者你可以`docker load` 离线镜像 tarballs，然后标记并推送加载的镜像。
 2. 如果在 registry 上使用私有或自签名的证书，请将 registry 的 CA 证书添加到 containerd registry 配置中，如果是 v1.20 之前的版本，则添加操作系统的可信证书。
-3. 使用`system-default-registry`参数[安装 RKE2](#install-rke2)，或使用[containerd registry 配置](/docs/rke2/install/containerd_registry_configuration/_index)将你的 registry 作为 docker.io 的一个镜像。
+3. 使用`system-default-registry`参数[安装 RKE2](#安装-rke2)，或使用[containerd registry 配置](/docs/rke2/install/containerd_registry_configuration/_index)将你的 registry 作为 docker.io 的一个镜像。
 
 ## 安装 RKE2
 
-这些步骤只能在完成[Tarball 方式](#tarball-method)或[私有注册表方式](#private-registry-method)中的一项后执行。
+这些步骤只能在完成[Tarball 方式](#tarball-方式)或[私有注册表方式](#私有注册表方式)中的一项后执行。
 
 1. 获得 rke2 的二进制文件`rke2.linux-amd64`。
 2. 确保二进制文件被命名为 `rke2`，并将其放在 `/usr/local/bin` 中。确保它是可执行的。
@@ -59,4 +59,6 @@ RKE2 可以通过两种不同的方式安装在一个离线环境中。你可以
 system-default-registry: "registry.example.com:5000"
 ```
 
-**注意：** `system-default-registry`参数必须只指定有效的 RFC 3986 URI 授权，即一个主机和可选的端口。
+:::note 注意：
+`system-default-registry`参数必须只指定有效的 RFC 3986 URI 授权，即一个主机和可选的端口。
+:::

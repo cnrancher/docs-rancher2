@@ -22,7 +22,7 @@ RKE2 可以通过多种方式安装到系统中，其中两种方式是首选和
 
 本文件更详细地解释了这些安装方法。
 
-### Tarball
+## Tarball
 
 要安装 RKE2，你首先需要获得安装脚本。这可以通过多种方式实现。
 
@@ -39,7 +39,7 @@ curl -sfL https://get.rke2.io --output install.sh
 chmod +x install.sh
 ```
 
-#### 安装
+### 安装
 
 默认安装最新的 RKE2 版本，不需要其他限定符。然而，如果你想指定一个版本，则应该设置`INSTALL_RKE2_CHANNEL`环境变量。下面是一个例子：
 
@@ -59,19 +59,19 @@ Tarball 结构/内容
 
 要进一步配置系统，你需要参考[server](/docs/rke2/install/install_options/server_config/_index)或[agent](/docs/rke2/install/install_options/agent_config/_index)文档。
 
-### RPM
+## RPM
 
 为了启动 RPM 的安装过程，你需要得到上面提到的安装脚本。该脚本将检查你的系统是否有 `rpm`、`yum` 或 `dnf`，如果有的话，它将确定该系统是基于 Redhat 的，并启动 RPM 安装过程。
 
 文件的安装前缀为`/usr`，而不是`/usr/local`。
 
-#### Repositories
+### 存储库
 
 在 RPM 存储库`rpm-testing.rancher.io`和`rpm.rancher.io`中为 RKE2 发布了已签名的 RPM。如果你在支持 RPM 的节点上运行https://get.rke2.io 脚本，它将默认使用这些 RPM rpeos。但你也可以自己安装它们。
 
 RPM 提供了用于管理 `rke2` 的 `systemd` 单元，但是在首次启动服务之前，需要通过配置文件进行配置。
 
-#### Enterprise Linux 7
+### Enterprise Linux 7
 
 为了使用 RPM 资源库，在 CentOS 7 或 RHEL 7 系统上，运行以下 bash 片段：
 
@@ -93,7 +93,7 @@ gpgkey=https://rpm.rancher.io/public.key
 EOF
 ```
 
-#### Enterprise Linux 8
+### Enterprise Linux 8
 
 为了使用 RPM 资源库，在 CentOS 8 或 RHEL 8 系统上，运行以下 bash 片段：
 
@@ -115,7 +115,7 @@ gpgkey=https://rpm.rancher.io/public.key
 EOF
 ```
 
-#### 安装
+### 安装
 
 存储库配置好后，你可以运行以下任一命令：
 
@@ -130,6 +130,6 @@ yum -y install rke2-agent
 
 RPM 会安装一个相应的`rke2-server.service`或`rke2-agent.service`系统单元，可以像这样调用：`systemctl start rke2-server`。在启动 rke2 之前，请确保按照下面的`配置文件`说明对其进行配置。
 
-### 手动
+## 手动
 
 RKE2 二进制文件是静态编译和链接的，这使得 RKE2 二进制文件可以在不同的 Linux 发行版中移植，而不必担心依赖性问题。最简单的安装方法是下载二进制文件，确保其可执行，并将其复制到`${PATH}`，一般是`/usr/local/bin`。第一次执行后，RKE2 将创建所有必要的目录和文件。要进一步配置系统，你需要参考[配置文件](/docs/rke2/install/install_options/install_options/_index)文档。
