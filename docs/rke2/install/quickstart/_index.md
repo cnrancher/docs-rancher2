@@ -62,7 +62,7 @@ journalctl -u rke2-server -f
 - 一个[kubeconfig](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/)文件将被写入`/etc/rancher/rke2/rke2.yaml`。
 - 一个可用于注册其他 server 或 agent 节点的令牌将在`/var/lib/rancher/rke2/server/node-token`文件中创建。
 
-**注意：** 如果你要添加额外的 server 节点，则总数必须为奇数。需要奇数来维持法定人数。更多细节请参见[高可用文档](ha.md) 。
+**注意：** 如果你要添加额外的 server 节点，则总数必须为奇数。需要奇数来维持法定人数。更多细节请参见[高可用文档](/docs/rke2/install/ha/_index) 。
 
 ### Agent（Worker）节点的安装
 
@@ -110,4 +110,4 @@ journalctl -u rke2-agent -f
 
 **注意：** 每台机器必须有一个唯一的主机名。如果你的机器没有唯一的主机名，请在`config.yaml`文件中设置`node-name`参数，并为每个节点提供一个有效和唯一的主机名。
 
-要阅读更多关于 config.yaml 文件的信息，请参见[安装选项文档。](./install_options/install_options.md#configuration-file)
+要阅读更多关于 config.yaml 文件的信息，请参见[安装选项文档。](/docs/rke2/install/install_options/install_options/_index#configuration-file)

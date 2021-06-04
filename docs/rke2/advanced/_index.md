@@ -29,7 +29,7 @@ keywords:
 
 在`/var/lib/rancher/rke2/server/manifests`中找到的任何文件都会自动部署到 Kubernetes，其方式类似于`kubectl apply`。
 
-关于使用 manifests 目录部署 Helm chart 的信息，请参考关于[Helm.](helm.md)的部分。
+关于使用 manifests 目录部署 Helm chart 的信息，请参考关于[Helm.](/docs/rke2/helm/_index)的部分。
 
 ## 配置 containerd
 
@@ -118,7 +118,7 @@ systemctl start rke2-server
 - `rke2-kube-proxy `
 - `rke2-metrics-server`
 
-请注意，集群操作者谨慎禁用或被替换组件，因为 server chart 在集群的可操作性方面起着重要作用。 请参考[架构概述](architecture/architecture.md#server-charts)，了解更多关于集群中各个系统 chart 作用的信息。
+请注意，集群操作者谨慎禁用或被替换组件，因为 server chart 在集群的可操作性方面起着重要作用。 请参考[架构概述](architecture/architecture/_index.md#server-charts)，了解更多关于集群中各个系统 chart 作用的信息。
 
 ## 在分类的 AWS region 或具有自定义 AWS API 端点的网络上安装
 
@@ -165,6 +165,6 @@ cloud-provider-name: aws
 cloud-provider-config: "/etc/rancher/rke2/cloud.conf"
 ```
 
-4. 正常[安装](install/methods.md)RKE2 (很可能是以[airgapped](install/airgap.md)的身份安装)
+4. 正常[安装](install/methods/_index.md)RKE2 (很可能是以[airgapped](install/airgap/_index.md)的身份安装)
 
 5. 通过使用`kubectl get nodes --show-labels` 确认集群节点标签上是否存在 AWS 元数据来验证安装是否成功

@@ -19,7 +19,7 @@ keywords:
 
 本文档为 RKE2 的生产安装提供了规范性的指导。它概述了应对信息安全中心（CIS）的 Kubernetes 基准控制所需的配置和控制。
 
-更多关于根据 CIS 官方基准评估加固集群的细节，请参考 CIS 基准 Rancher 自我评估指南[v1.5](cis_self_assessment15.md)或[v1.6](cis_self_assessment16.md)。
+更多关于根据 CIS 官方基准评估加固集群的细节，请参考 CIS 基准 Rancher 自我评估指南[v1.5](cis_self_assessment15/_index.md)或[v1.6](cis_self_assessment16/_index.md)。
 
 RKE2 被设计为 "默认加固"，无需修改即可通过大部分 Kubernetes 的 CIS 控制。但有几个例外，需要人工干预才能完全通过 CIS 基准测试。
 
@@ -151,4 +151,4 @@ done
 
 ## 结论
 
-如果你遵循本指南，你的 RKE2 集群将被配置为通过 CIS Kubernetes 基准测试。你可以查看我们的 CIS 基准自我评估指南[v1.5](cis_self_assessment15.md)或[v1.6](cis_self_assessment16.md)，了解我们是如何验证每项基准的，以及你如何在你的集群上做同样的事情。
+如果你遵循本指南，你的 RKE2 集群将被配置为通过 CIS Kubernetes 基准测试。你可以查看我们的 CIS 基准自我评估指南[v1.5](/docs/rke2/security/cis_self_assessment15/_index)或[v1.6](/docs/rke2/security/cis_self_assessment16/_index)，了解我们是如何验证每项基准的，以及你如何在你的集群上做同样的事情。

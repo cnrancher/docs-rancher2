@@ -39,13 +39,13 @@ RKE2 可以通过两种不同的方式安装在一个离线环境中。你可以
 
 ## 私有注册表方式
 
-从 RKE2 v1.20 开始，私有注册表支持来自[containerd 注册表配置](containerd_registry_configuration.md)中的所有设置。这包括 endpoint 覆盖和传输协议（HTTP/HTTPS）、认证、证书验证等。
+从 RKE2 v1.20 开始，私有注册表支持来自[containerd 注册表配置](/docs/rke2/install/containerd_registry_configuration/_index)中的所有设置。这包括 endpoint 覆盖和传输协议（HTTP/HTTPS）、认证、证书验证等。
 
 在 RKE2 v1.20 之前，私有注册表必须使用 TLS，并使用由主机 CA 捆绑信任的 cert。如果 registry 使用的是自签名的证书，你可以用`update-ca-certificates`将该证书添加到主机 CA 捆绑中。registry 还必须允许匿名（未认证）访问。
 
 1. 将所有需要的系统镜像添加到你的私有注册表。镜像列表可以从上面提到的每个 tarball 对应的`.txt`文件中获得，或者你可以`docker load` 离线镜像 tarballs，然后标记并推送加载的镜像。
 2. 如果在 registry 上使用私有或自签名的证书，请将 registry 的 CA 证书添加到 containerd registry 配置中，如果是 v1.20 之前的版本，则添加操作系统的可信证书。
-3. 使用`system-default-registry`参数[安装 RKE2](#install-rke2)，或使用[containerd registry 配置](containerd_registry_configuration.md)将你的 registry 作为 docker.io 的一个镜像。
+3. 使用`system-default-registry`参数[安装 RKE2](#install-rke2)，或使用[containerd registry 配置](/docs/rke2/install/containerd_registry_configuration/_index)将你的 registry 作为 docker.io 的一个镜像。
 
 ## 安装 RKE2
 

@@ -54,11 +54,11 @@ curl -sfL https://get.rke2.io | sh -
 
 ### 配置 RKE2 server 节点
 
-关于配置 RKE2 server 的细节，请参考[server 配置参考。](server_config.md)
+关于配置 RKE2 server 的细节，请参考[server 配置参考。](/docs/rke2/install/install_options/server_config/_index)
 
 ### 配置 RKE2 agent 节点
 
-关于配置 RKE2 agent 的细节，请参考[agent 配置参考](agent_config.md)
+关于配置 RKE2 agent 的细节，请参考[agent 配置参考](/docs/rke2/install/install_options/agent_config/_index)
 
 ### 配置文件
 

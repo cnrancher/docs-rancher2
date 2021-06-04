@@ -21,8 +21,8 @@ RKE2，也被称为 RKE Government，是 Rancher 的下一代 Kubernetes 发行�
 
 为了实现这些目标，RKE2 做了以下工作:
 
-- 提供[默认值和配置选项](./security/hardening_guide/_index)，允许集群在最小的操作干预下通过 CIS Kubernetes Benchmark [v1.5](security/cis_self_assessment15.md)或[v1.6](security/cis_self_assessment16.md)
-- 启用 [FIPS 140-2 标准](security/fips_support.md)
+- 提供[默认值和配置选项](/docs/rke2/security/hardening_guide/_index)，允许集群在最小的操作干预下通过 CIS Kubernetes Benchmark [v1.5](/docs/rke2/security/cis_self_assessment15/_index)或[v1.6](/docs/rke2/security/cis_self_assessment16/_index)
+- 启用 [FIPS 140-2 标准](/docs/rke2/security/fips_support/_index)
 - 在我们的构建管道中使用[trivy](https://github.com/aquasecurity/trivy)定期扫描组件的 CVEs。
 
 ## 这与 RKE 或 K3s 有什么不同？

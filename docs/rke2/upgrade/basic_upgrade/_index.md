@@ -22,7 +22,7 @@ keywords:
 
 ### Release Channels
 
-通过安装脚本或使用我们的[自动升级](automatic_upgrade.md)功能进行的升级可以绑定到不同的release channels。
+通过安装脚本或使用我们的[自动升级](/docs/rke2/upgrade/automated_upgrade/_index)功能进行的升级可以绑定到不同的release channels。
 
 对于一个详尽的、最新的channel列表，你可以访问[rke2 channel服务API](https://update.rke2.io/v1-release/channels)。关于channel如何工作的更多技术细节，你可以参考[channelserver项目](https://github.com/rancher/channelserver)。
 

@@ -19,7 +19,7 @@ keywords:
 
 Helm 是 Kubernetes 的首选软件包管理工具。Helm chart 为 Kubernetes YAML 清单文件提供模板语法。通过 Helm，我们可以创建可配置的部署，而不是仅仅使用静态文件。关于创建自己的部署目录的更多信息，请查看[https://helm.sh/docs/intro/quickstart/](https://helm.sh/docs/intro/quickstart/)的文档。
 
-RKE2 在使用 Helm 命令行工具时不需要任何特殊配置。只要确保你已经按照[访问集群](.../cluster-access)一节的规定正确设置了你的 kubeconfig。RKE2 包括一些额外的功能，使用[rancher/helm-release CRD.](#using-thehelm-crd)更容易部署传统的 Kubernetes 资源清单和 Helm Charts。
+RKE2 在使用 Helm 命令行工具时不需要任何特殊配置。只要确保你已经按照[访问集群](/docs/rke2/cluster_access/_index)一节的规定正确设置了你的 kubeconfig。RKE2 包括一些额外的功能，使用[rancher/helm-release CRD.](#using-thehelm-crd)更容易部署传统的 Kubernetes 资源清单和 Helm Charts。
 
 本节包括以下主题：
 
