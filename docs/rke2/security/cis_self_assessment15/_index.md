@@ -1657,7 +1657,7 @@ Ensure that a minimal audit policy is created (Scored)
 Logging is an important detective control for all systems, to detect potential unauthorised access.
 </details>
 
-**Result:** Does not pass. See the [known issue](hardening_guide/_index.md#control-321) for details.
+**Result:** Does not pass. See the [known issue](/docs/rke2/security/hardening_guide/_index#control-321) for details.
 
 **Audit:**
 Run the below command on the master node.

@@ -118,7 +118,7 @@ systemctl start rke2-server
 - `rke2-kube-proxy `
 - `rke2-metrics-server`
 
-请注意，集群操作者谨慎禁用或被替换组件，因为 server chart 在集群的可操作性方面起着重要作用。 请参考[架构概述](architecture/architecture/_index.md#server-charts)，了解更多关于集群中各个系统 chart 作用的信息。
+请注意，集群操作者谨慎禁用或被替换组件，因为 server chart 在集群的可操作性方面起着重要作用。 请参考[架构概述](/docs/rke2/architecture/_index#server-charts)，了解更多关于集群中各个系统 chart 作用的信息。
 
 ## 在分类的 AWS region 或具有自定义 AWS API 端点的网络上安装
 
@@ -165,6 +165,6 @@ cloud-provider-name: aws
 cloud-provider-config: "/etc/rancher/rke2/cloud.conf"
 ```
 
-4. 正常[安装](install/methods/_index.md)RKE2 (很可能是以[airgapped](install/airgap/_index.md)的身份安装)
+4. 正常[安装](/docs/rke2/install/methods/_index)RKE2 (很可能是以[airgapped](/docs/rke2/install/airgap/_index)的身份安装)
 
 5. 通过使用`kubectl get nodes --show-labels` 确认集群节点标签上是否存在 AWS 元数据来验证安装是否成功
