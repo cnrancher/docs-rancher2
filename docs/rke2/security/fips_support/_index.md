@@ -24,7 +24,7 @@ FIPS 140-2 是美国联邦政府的安全标准，用于批准加密模块。这
 
 这个版本的 Go 用经过 FIPS 验证的 BoringCrypto 模块取代了标准 Go 密码库。更多细节请参见 [readme](https://github.com/golang/go/blob/dev.boringcrypto/README.boringcrypto.md) 。
 
-此外，这个模块目前正在[重新验证](/docs/rke2/assets/fips_engagement.pdf)，作为 Rancher Kubernetes 加密库，用于 RKE2 支持的其他平台和系统。
+此外，这个模块目前正在[重新验证](https://docs.rke2.io/assets/fips_engagement.pdf)，作为 Rancher Kubernetes 加密库，用于 RKE2 支持的其他平台和系统。
 
 ### 集群组件中的 FIPS 支持
 
