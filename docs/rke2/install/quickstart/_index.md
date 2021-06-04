@@ -20,11 +20,11 @@ keywords:
 
 > 刚接触 Kubernetes？Kubernetes 官方文档已经有一些很好的教程，[这里](https://kubernetes.io/docs/tutorials/kubernetes-basics/)概述了基础知识。
 
-### 先决条件
+## 先决条件
 
 请确保你的环境满足[要求](https://docs.rke2.io/install/requirements/)。如果在主机上安装并启用了 NetworkManager，[确保它被配置为忽略 CNI 管理的接口](https://docs.rke2.io/known_issues/#networkmanager)。
 
-### Server 节点安装
+## Server 节点安装
 
 RKE2 提供了一个安装脚本，这是一个在基于 systemd 的系统上将其作为服务安装的便捷方式。这个脚本可以从https://get.rke2.io获得。使要使用此方法安装RKE2，请执行以下操作：
 
@@ -62,9 +62,11 @@ journalctl -u rke2-server -f
 - 一个[kubeconfig](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/)文件将被写入`/etc/rancher/rke2/rke2.yaml`。
 - 一个可用于注册其他 server 或 agent 节点的令牌将在`/var/lib/rancher/rke2/server/node-token`文件中创建。
 
-**注意：** 如果你要添加额外的 server 节点，则总数必须为奇数。需要奇数来维持法定人数。更多细节请参见[高可用文档](/docs/rke2/install/ha/_index) 。
+:::warning 注意：
+如果你要添加额外的 server 节点，则总数必须为奇数。需要奇数来维持选举数。更多细节请参见[高可用文档](/docs/rke2/install/ha/_index) 。
+:::
 
-### Agent（Worker）节点的安装
+## Agent（Worker）节点的安装
 
 #### 1. 运行安装程序
 
@@ -94,7 +96,9 @@ server: https://<server>:9345
 token: <token from server node>
 ```
 
-**注意：** `rke2 server`进程通过端口`9345`监听新节点的注册。正常情况下，Kubernetes API 仍可在端口 6443 上使用。
+:::note 注意：
+`rke2 server`进程通过端口`9345`监听新节点的注册。正常情况下，Kubernetes API 仍可在端口 6443 上使用。
+:::
 
 #### 4. 启动服务
 
@@ -108,6 +112,8 @@ systemctl start rke2-agent.service
 journalctl -u rke2-agent -f
 ```
 
-**注意：** 每台机器必须有一个唯一的主机名。如果你的机器没有唯一的主机名，请在`config.yaml`文件中设置`node-name`参数，并为每个节点提供一个有效和唯一的主机名。
+:::warning 注意：
+每台机器必须有一个唯一的主机名。如果你的机器没有唯一的主机名，请在`config.yaml`文件中设置`node-name`参数，并为每个节点提供一个有效和唯一的主机名。
+:::
 
-要阅读更多关于 config.yaml 文件的信息，请参见[安装选项文档。](/docs/rke2/install/install_options/install_options/_index#configuration-file)
+要阅读更多关于 config.yaml 文件的信息，请参见[安装选项文档。](/docs/rke2/install/install_options/install_options/_index#配置文件)

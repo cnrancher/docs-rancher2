@@ -20,7 +20,9 @@ keywords:
 
 在本节中，你将学习如何创建 rke2 集群数据的备份并从备份中恢复集群。
 
-**注意：** `/var/lib/rancher/rke2`是 rke2 的默认数据目录，但它可以通过`data-dir`参数进行配置。
+:::note 注意：
+`/var/lib/rancher/rke2`是 rke2 的默认数据目录，但它可以通过`data-dir`参数进行配置。
+:::
 
 ## 创建快照
 

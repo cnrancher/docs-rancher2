@@ -24,7 +24,7 @@ keywords:
 
 - [CoreDNS](#coredns)
 - [Nginx Ingress Controller](#nginx-ingress-controller)
-- [没有主机名的节点](#nodes-without-a-hostname)
+- [没有主机名的节点](#没有主机名的节点)
 
 ## CoreDNS
 
@@ -38,7 +38,7 @@ CoreDNS 是在启动 server 时默认部署的。要禁用，请在运行每台 
 
 在启动 server 时，`nginx-ingress` 被默认部署。端口 80 和 443 将在其默认配置中由 Ingress controller 绑定，使得这些端口无法用于集群中的 HostPort 或 NodePort 服务。
 
-配置选项可以通过创建[HelmChartConfig manifest](/docs/rke2/install/requirements/_index#customizing-packaged-components-with-helmchartconfig)来自定义`rke2-ingress-nginx` HelmChart 值。例如，在`/var/lib/rancher/rke2/server/manifests/rke2-ingress-nginx-config.yaml`中的 HelmChartConfig 有如下内容，在存储 NGINX 配置的 ConfigMap 中，将`use-forwarded-headers`设为`true`：
+配置选项可以通过创建[HelmChartConfig manifest](/docs/rke2/helm/_index#使用-helmchartconfig-自定义打包的组件)来自定义`rke2-ingress-nginx` HelmChart 值。例如，在`/var/lib/rancher/rke2/server/manifests/rke2-ingress-nginx-config.yaml`中的 HelmChartConfig 有如下内容，在存储 NGINX 配置的 ConfigMap 中，将`use-forwarded-headers`设为`true`：
 
 ```yaml
 # /var/lib/rancher/rke2/server/manifests/rke2-ingress-nginx-config.yaml

@@ -47,7 +47,7 @@ RKE2 汇集了一些开源技术来实现这一切：
 
 ## 进程生命周期
 
-#### Content Bootstrap
+### Content Bootstrap
 
 RKE2 从 RKE2 Runtime 镜像中提取二进制文件和清单来运行*server*和*agent*节点。这意味着 RKE2 默认扫描`/var/lib/rancher/rke2/agent/images/*.tar`以获取[`rancher/rke2-runtime`](https://hub.docker.com/r/rancher/rke2-runtime/tags)镜像（带有与 `rke2 --version` 输出相关的标签），如果找不到它，就尝试从网络（也就是 Docker Hub）上拉取。RKE2 然后从镜像中提取`/bin/`，将其解压到`/var/lib/rancher/rke2/data/${RKE2_DATA_KEY}/bin`，其中`${RKE2_DATA_KEY}`代表识别镜像的唯一字符串。
 
@@ -69,53 +69,53 @@ RKE2 从 RKE2 Runtime 镜像中提取二进制文件和清单来运行*server*�
 
 在二进制文件被提取后，RKE2 将从镜像中提取 `charts` 到`/var/lib/rancher/rke2/server/manifests`目录。
 
-#### 初始化 Server
+### 初始化 Server
 
 在嵌入式 K3s 引擎中，server 是专门的 agent 进程，这意味着后续启动将推迟到节点容器运行时启动。
 
-##### 组件准备
+#### 组件准备
 
-###### `kube-apiserver`
+##### `kube-apiserver`
 
 拉取 `kube-apiserver` 镜像（如果不存在），并启动一个 goroutine 来等待 `etcd`，然后在`/var/lib/rancher/rke2/agent/pod-manifests/`中写入静态 pod 定义。
 
-###### `kube-controller-manager`
+##### `kube-controller-manager`
 
 拉取 `kube-controller-manager` 镜像（如果不存在），并启动一个 goroutine 来等待`kube-apiserver`，然后在`/var/lib/rancher/rke2/agent/pod-manifests/`中写入静态 pod 定义。
 
-###### `kube-scheduler`
+##### `kube-scheduler`
 
 拉取 `kube-scheduler` 镜像（如果不存在），并启动一个 goroutine 来等待 `kube-apiserver`，然后在`/var/lib/rancher/rke2/agent/pod-manifests/`中写入静态 pod 定义。
 
-##### 启动群集
+#### 启动群集
 
 在一个 goroutine 中启动一个 HTTP 服务器，以监听其他集群 server/agent，然后初始化/加入集群。
 
-###### `etcd `
+##### `etcd `
 
 拉取 `etcd` 镜像（如果不存在），启动一个 goroutine 来等待 `kubelet`，然后在`/var/lib/rancher/rke2/agent/pod-manifests/`中写入静态 pod 定义。
 
-###### `helm-controller`。
+##### `helm-controller`。
 
 在等待`kube-apiserver`准备就绪后，启动 goroutine 来启动嵌入式 `helm-controller`。
 
-#### 初始化 Agent
+### 初始化 Agent
 
 Agent 进程的入口点。对于 server 进程，嵌入式 K3s 引擎直接调用它。
 
-##### 容器运行时间
+#### 容器运行时间
 
-###### `containerd`
+##### `containerd`
 
 生成`containerd`进程并监听终止。如果`containerd`退出，那么`rke2`进程也将退出。
 
-##### 节点 Agent
+#### 节点 Agent
 
-###### `kubelet`
+##### `kubelet`
 
 生成并监督`kubelet`进程。如果`kubelet`退出，那么`rke2`将尝试重新启动它。一旦 `kubelet` 运行，它将启动任何可用的静态 pod。对于 server 来说，这意味着`etcd`和`kube-apiserver`将依次启动，允许其余通过静态 pod 启动的组件连接到`kube-apiserver`并开始处理。
 
-##### Server Charts
+#### Server Charts
 
 在 server 节点上，`helm-controller`可以将在`/var/lib/rancher/rke2/server/manifests`中找到的任何 charts 应用到集群中。
 
@@ -125,7 +125,7 @@ Agent 进程的入口点。对于 server 进程，嵌入式 K3s 引擎直接调�
 - rke2-kube-proxy.yaml (daemonset, bootstrap)
 - rke2-metrics-server.yaml (deployment)
 
-#### Daemon Process
+### Daemon Process
 
 RKE2 进程现在将无限期地运行，直到它收到 SIGTERM 或 SIGKILL 或者`containerd`进程退出。
 

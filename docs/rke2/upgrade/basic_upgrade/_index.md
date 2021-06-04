@@ -18,15 +18,17 @@ keywords:
 
 你可以通过使用安装脚本来升级rke2，或者通过手动安装所需版本的二进制文件。
 
->**注意：** 先升级server节点，一次一个。一旦所有server都被升级，你就可以升级agent节点。
+:::warning 注意：
+先升级server节点，一次一个。一旦所有server都被升级，你就可以升级agent节点。
+:::
 
-### Release Channels
+## Release Channels
 
 通过安装脚本或使用我们的[自动升级](/docs/rke2/upgrade/automated_upgrade/_index)功能进行的升级可以绑定到不同的release channels。
 
 对于一个详尽的、最新的channel列表，你可以访问[rke2 channel服务API](https://update.rke2.io/v1-release/channels)。关于channel如何工作的更多技术细节，你可以参考[channelserver项目](https://github.com/rancher/channelserver)。
 
-### 使用安装脚本升级rke2
+## 使用安装脚本升级rke2
 
 要从旧版本升级rke2，你可以使用相同的标志重新运行安装脚本，例如:
 
@@ -46,7 +48,7 @@ curl -sfL https://get.rke2.io | INSTALL_RKE2_CHANNEL=latest sh -
 curl -sfL https://get.rke2.io | INSTALL_RKE2_VERSION=vX.Y.Z-rc1 sh -
 ```
 
-### 使用二进制文件手动升级rke2
+## 使用二进制文件手动升级rke2
 
 或者手动升级rke2。
 
@@ -55,7 +57,7 @@ curl -sfL https://get.rke2.io | INSTALL_RKE2_VERSION=vX.Y.Z-rc1 sh -
 3. 停止旧的rke2二进制文件
 4. 启动新的rke2二进制文件
 
-### 重启rke2
+## 重启rke2
 
 systemd 的安装脚本支持重启 rke2。
 

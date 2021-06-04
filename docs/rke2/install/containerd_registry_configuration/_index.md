@@ -24,7 +24,9 @@ Containerd 可以配置连接到私有注册表，并使用它们在每个节点
 
 注意，server 节点默认是可调度的。如果你没有 tainted server 节点，并在 server 上运行工作负载，请确保你也在每个 server 上创建`registries.yaml`文件。
 
-**注意：**在 RKE2 v1.20 之前，containerd 注册表配置并不支持初始的 RKE2 节点引导，只适用于节点加入集群后启动的 Kubernetes 工作负载。如果你打算使用这个 containerd 注册表功能来引导节点，请参考[离线安装文档](/docs/rke2/install/airgap/_index)。
+:::note 注意：
+在 RKE2 v1.20 之前，containerd 注册表配置并不支持初始的 RKE2 节点引导，只适用于节点加入集群后启动的 Kubernetes 工作负载。如果你打算使用这个 containerd 注册表功能来引导节点，请参考[离线安装文档](/docs/rke2/install/airgap/_index)。
+:::
 
 containerd 中的配置可用于通过 TLS 连接和启用身份验证的注册表连接到私有注册表。下一节将解释`registries.yaml`文件，并给出在 RKE2 中使用私有注册表配置的不同例子。
 
@@ -53,7 +55,9 @@ mirrors:
 
 每个镜像必须有一个名称和一组 endpoint。当从注册表中提取镜像时，containerd 将逐一尝试这些 endpoint URL，并使用第一个有效的 URL。
 
-**注意：**如果没有配置 endpoint，containerd 会假定注册表可以通过 443 端口的 HTTPS 匿名访问，并且使用主机操作系统信任的证书。欲了解更多信息，你可以[查阅 containerd 文档](https://github.com/containerd/containerd/blob/master/docs/cri/registry.md#configure-registry-endpoint)。
+:::note 注意：
+如果没有配置 endpoint，containerd 会假定注册表可以通过 443 端口的 HTTPS 匿名访问，并且使用主机操作系统信任的证书。欲了解更多信息，你可以[查阅 containerd 文档](https://github.com/containerd/containerd/blob/master/docs/cri/registry.md#configure-registry-endpoint)。
+:::
 
 ### Configs
 

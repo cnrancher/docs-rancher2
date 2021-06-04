@@ -19,17 +19,17 @@ keywords:
 
 本页主要介绍设置 RKE2 时的配置选项:
 
-- [配置安装脚本](#configuring-the-installation-script)
-- [配置 RKE2 server 节点](#configuring-rke2-server-nodes)
-- [配置 RKE2 agent 节点](#configuring-rke2-agent-nodes)
-- [使用配置文件](#configuration-file)
-- [直接运行二进制时的配置](#configuring-when-running-the-binary-directly)
+- [配置安装脚本](#配置安装脚本)
+- [配置 RKE2 server 节点](#配置-rke2-server-节点)
+- [配置 RKE2 agent 节点](#配置-rke2-agent-节点)
+- [使用配置文件](#配置文件)
+- [直接运行二进制时的配置](#直接运行二进制文件时的配置)
 
-配置 RKE2 的主要方式是通过其[配置文件](#configuration-file)。也可以使用命令行参数和环境变量，但是 RKE2 是作为 systemd 服务安装的，因此使用起来并不容易。
+配置 RKE2 的主要方式是通过其[配置文件](#配置文件)。也可以使用命令行参数和环境变量，但是 RKE2 是作为 systemd 服务安装的，因此使用起来并不容易。
 
-### 配置安装脚本
+## 配置安装脚本
 
-正如[快速入门指南]（.../.../install/quickstart.md）中提到的，你可以使用https://get.rke2.io，将RKE2作为服务进行安装。
+正如[快速入门指南](/docs/rke2/install/quickstart/_index)中提到的，你可以使用 https://get.rke2.io ，将RKE2作为服务进行安装。
 
 这个命令的最简单形式如下：
 
@@ -52,15 +52,15 @@ curl -sfL https://get.rke2.io | sh -
 1. 根据上述参数，获取所需的版本进行安装。如果没有提供参数，将使用最新的官方版本。
 2. 确定并执行安装方法。有两种方法：rpm 和 tar。如果设置了 `INSTALL_RKE2_METHOD` 变量，则将遵循该变量，否则，在使用该软件包管理系统的操作系统上将使用 "rpm"。在所有其他系统上，将使用 tar。在使用 tar 方法的情况下，脚本将简单地解压与所需版本相关的 tar 归档文件。在使用 rpm 的情况下，将建立一个 yum 仓库，并使用 yum 安装 rpm。
 
-### 配置 RKE2 server 节点
+## 配置 RKE2 server 节点
 
 关于配置 RKE2 server 的细节，请参考[server 配置参考。](/docs/rke2/install/install_options/server_config/_index)
 
-### 配置 RKE2 agent 节点
+## 配置 RKE2 agent 节点
 
 关于配置 RKE2 agent 的细节，请参考[agent 配置参考](/docs/rke2/install/install_options/agent_config/_index)
 
-### 配置文件
+## 配置文件
 
 默认情况下，RKE2 将使用位于`/etc/rancher/rke2/config.yaml`的 YAML 文件中的值启动。
 
@@ -91,7 +91,7 @@ rke2 server \
 
 最后，配置文件的位置可以通过 CLI 参数`--config FILE, -c FILE`，或者环境变量`$RKE2_CONFIG_FILE`来改变。
 
-### 直接运行二进制文件时的配置
+## 直接运行二进制文件时的配置
 
 如前所述，安装脚本主要是为了配置 RKE2 作为一个服务来运行。如果你选择不使用脚本，你可以通过从我们的[发布页](https://github.com/rancher/rke2/releases/latest)下载二进制文件，把它放在你的路径上，然后执行它。RKE2 二进制文件支持以下命令：
 

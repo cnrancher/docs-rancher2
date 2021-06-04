@@ -18,7 +18,7 @@ keywords:
 
 本文介绍了 RKE2 如何配置 PodSecurityPolicies 和 NetworkPolicies，以实现默认安全，同时也为运营商提供了最大的配置灵活性。
 
-#### Pod 安全策略
+## Pod 安全策略
 
 RKE2 可以在有或没有 `profile: cis-1.5` 配置参数的情况下运行。这将导致它在启动时应用不同的 PodSecurityPolicies（PSPs）。
 
@@ -147,7 +147,7 @@ spec:
 kubectl get psp -A
 ```
 
-#### 网络策略
+## 网络策略
 
 当 RKE2 以 `profile: cis-1.5` 参数运行时，它将对 `kube-system`、`kube-public` 和 `default` 命名空间应用两个网络策略，并应用相关注释。这些策略和注解的逻辑与 PSP 相同。启动时，检查每个命名空间的注释是否存在，如果存在，RKE2 不采取任何行动。如果注解不存在，RKE2 会检查策略是否存在，如果存在，则重新创建它。
 
