@@ -67,7 +67,7 @@ RKE2 从 RKE2 Runtime 镜像中提取二进制文件和清单来运行*server*�
 - **`kubectl`** (kubernetes 集群维护和检查)
 - **`socat`** (由`containerd`需要，用于端口转发)
 
-在二进制文件被提取后，RKE2 将从镜像中提取[`/charts/`](./charts/)到`/var/lib/rancher/rke2/server/manifests`目录。
+在二进制文件被提取后，RKE2 将从镜像中提取 `charts` 到`/var/lib/rancher/rke2/server/manifests`目录。
 
 #### 初始化 Server
 
@@ -117,7 +117,7 @@ Agent 进程的入口点。对于 server 进程，嵌入式 K3s 引擎直接调�
 
 ##### Server Charts
 
-在 server 节点上，`helm-controller`可以将在`/var/lib/rancher/rke2/server/manifests`中找到的任何[charts](.../charts/)应用到集群中。
+在 server 节点上，`helm-controller`可以将在`/var/lib/rancher/rke2/server/manifests`中找到的任何 charts 应用到集群中。
 
 - rke2-canal.yaml or rke2-cilium.yaml (daemonset, bootstrap)
 - rke2-coredns.yaml (deployment, bootstrap)
