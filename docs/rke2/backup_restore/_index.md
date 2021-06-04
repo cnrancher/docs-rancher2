@@ -28,7 +28,7 @@ keywords:
 
 快照目录默认为`/var/lib/rancher/rke2/server/db/snapshots`。
 
-要配置快照时间间隔或保留的快照数量，请参考[options.](#options)
+要配置快照时间间隔或保留的快照数量，请参考[options.](#选项)
 
 ## 集群重置
 

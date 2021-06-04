@@ -16,7 +16,7 @@ keywords:
 ---
 
 
-这是对所有可用于配置 rke2 agent 的参数的参考。请注意，虽然这是命令行参数的参考，但配置 RKE2 的最佳方式是使用[配置文件](install_options.md#configuration-file)。
+这是对所有可用于配置 rke2 agent 的参数的参考。请注意，虽然这是命令行参数的参考，但配置 RKE2 的最佳方式是使用[配置文件](/docs/rke2/install/install_options/install_options/_index#configuration-file)。
 
 ### RKE2 Agent CLI 帮助
 

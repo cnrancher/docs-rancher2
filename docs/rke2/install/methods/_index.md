@@ -57,7 +57,7 @@ Tarball 结构/内容
 - lib - 包含 server 和 agent 的 systemd 单元文件
 - share - 包含 RKE2 许可证以及用于在 CIS 模式下运行 RKE2 时使用的 sysctl 配置文件
 
-要进一步配置系统，你需要参考[server](install_options/server_config.md)或[agent](install_options/agent_config.md)文档。
+要进一步配置系统，你需要参考[server](/docs/rke2/install/install_options/server_config/_index)或[agent](/docs/rke2/install/install_options/agent_config/_index)文档。
 
 ### RPM
 
@@ -132,4 +132,4 @@ RPM 会安装一个相应的`rke2-server.service`或`rke2-agent.service`系统�
 
 ### 手动
 
-RKE2 二进制文件是静态编译和链接的，这使得 RKE2 二进制文件可以在不同的 Linux 发行版中移植，而不必担心依赖性问题。最简单的安装方法是下载二进制文件，确保其可执行，并将其复制到`${PATH}`，一般是`/usr/local/bin`。第一次执行后，RKE2 将创建所有必要的目录和文件。要进一步配置系统，你需要参考[配置文件](install_options/install_options.md)文档。
+RKE2 二进制文件是静态编译和链接的，这使得 RKE2 二进制文件可以在不同的 Linux 发行版中移植，而不必担心依赖性问题。最简单的安装方法是下载二进制文件，确保其可执行，并将其复制到`${PATH}`，一般是`/usr/local/bin`。第一次执行后，RKE2 将创建所有必要的目录和文件。要进一步配置系统，你需要参考[配置文件](/docs/rke2/install/install_options/install_options/_index)文档。
