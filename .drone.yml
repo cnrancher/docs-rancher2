@@ -27,6 +27,8 @@ steps:
     image: node:12.16.2
     environment:
       PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
+      NODE_OPTIONS:
+        max_old_space_size: 4096
       HTTP_PROXY:
         from_secret: proxy
       HTTPS_PROXY:
