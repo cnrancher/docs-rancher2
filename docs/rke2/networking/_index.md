@@ -15,7 +15,6 @@ keywords:
   - 网络
 ---
 
-
 本页解释了 CoreDNS 和 Nginx-Ingress controller 如何在 RKE2 中工作。
 
 请参考[安装网络选项](/docs/rke2/install/network_options/_index)页面，了解 Canal 配置选项的详细信息，或者如何设置你自己的 CNI。
@@ -55,7 +54,7 @@ spec:
         use-forwarded-headers: "true"
 ```
 
-更多信息请参考官方的[nginx-ingress Helm 配置参数]（https://github.com/kubernetes/ingress-nginx/tree/9c0a39636da11b7e262ddf0b4548c79ae9fa1667/charts/ingress-nginx#configuration）。
+更多信息请参考官方的[nginx-ingress Helm 配置参数](https://github.com/kubernetes/ingress-nginx/tree/9c0a39636da11b7e262ddf0b4548c79ae9fa1667/charts/ingress-nginx#configuration)。
 
 要禁用 NGINX ingress controller，在配置文件中加入 `disable: rke2-ingress-nginx` 选项，启动每台 server。
 

@@ -16,7 +16,6 @@ keywords:
   - 高级选项和配置
 ---
 
-
 本节包含描述运行和管理 RKE2 的不同方式的高级信息。
 
 ## 证书轮换
@@ -29,7 +28,7 @@ keywords:
 
 在`/var/lib/rancher/rke2/server/manifests`中找到的任何文件都会自动部署到 Kubernetes，其方式类似于`kubectl apply`。
 
-关于使用 manifests 目录部署 Helm chart 的信息，请参考关于[Helm.](/docs/rke2/helm/_index)的部分。
+关于使用 manifests 目录部署 Helm chart 的信息，请参考关于[Helm](/docs/rke2/helm/_index)的部分。
 
 ## 配置 containerd
 
@@ -76,7 +75,7 @@ RKE2 支持对 Secrets 进行静态加密，并会自动完成以下工作：
 
 ## 节点标签和污点
 
-RKE2 agent 可以通过配置`node-label`和`node-ta`为 kubelet 添加标签和污点。这两个选项只在注册时添加标签和/或污点，而且只能添加一次，之后不能通过 rke2 命令删除。
+RKE2 agent 可以通过配置`node-label`和`node-taint`为 kubelet 添加标签和污点。这两个选项只在注册时添加标签和/或污点，而且只能添加一次，之后不能通过 rke2 命令删除。
 
 如果你想在节点注册后改变节点标签和污点，你应该使用`kubectl`。关于如何添加[污点](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)和[节点标签](https://kubernetes.io/docs/tasks/configure-pod-container/assign-pods-nodes/#add-a-label-to-a-node)的细节，请参考 Kubernetes 官方文档。
 
@@ -126,9 +125,9 @@ systemctl start rke2-server
 
 当在分类 region（如 SC2S 或 C2S）安装 RKE2 时，有一些额外的前提条件需要注意，以确保 RKE2 知道如何以及在哪里与适当的 AWS 端点进行安全的通信。
 
-0. 确保所有常见的 AWS 云供应商[先决条件](https://rancher.com/docs/rke/latest/en/config-options/cloud-providers/aws/)得到满足。 这些与 region 无关，并且始终是必需的。
+1. 确保所有常见的 AWS 云供应商[先决条件](https://rancher.com/docs/rke/latest/en/config-options/cloud-providers/aws/)得到满足。 这些与 region 无关，并且始终是必需的。
 
-1. 通过创建 cloud.conf 文件，确保 RKE2 知道向 `ec2` 和 `elasticloadbalancing` 服务发送 API 请求的位置，下面是 `us-iso-east-1`（C2S） region 的例子。
+2. 通过创建 cloud.conf 文件，确保 RKE2 知道向 `ec2` 和 `elasticloadbalancing` 服务发送 API 请求的位置，下面是 `us-iso-east-1`（C2S） region 的例子。
 
 ```yaml
 # /etc/rancher/rke2/cloud.conf
@@ -147,7 +146,7 @@ systemctl start rke2-server
 
 或者，如果你使用[私有 AWS 端点](https://docs.aws.amazon.com/vpc/latest/privatelink/endpoint-services-overview.html)，确保每个私有端点使用适当的`URL`。
 
-2. 确保适当的 AWS CA 包被加载到系统的根 CA 信任存储中。 这可能已经为你做了，取决于你使用的 AMI。
+3. 确保适当的 AWS CA 包被加载到系统的根 CA 信任存储中。 这可能已经为你做了，取决于你使用的 AMI。
 
 ```bash
 #在 CentOS/RHEL 7/8 上
@@ -156,7 +155,7 @@ update-ca-trust
 
 ```
 
-3.使用步骤 1 中创建的自定义 `cloud.conf` 配置 RKE2，使其使用 `aws` 云提供商：
+4.使用步骤 1 中创建的自定义 `cloud.conf` 配置 RKE2，使其使用 `aws` 云提供商：
 
 ```yaml
 # /etc/rancher/rke2/config.yaml
@@ -165,6 +164,6 @@ cloud-provider-name: aws
 cloud-provider-config: "/etc/rancher/rke2/cloud.conf"
 ```
 
-4. 正常[安装](/docs/rke2/install/methods/_index)RKE2 (很可能是以[airgapped](/docs/rke2/install/airgap/_index)的身份安装)
+5. 正常[安装](/docs/rke2/install/methods/_index)RKE2 (很可能是以[airgapped](/docs/rke2/install/airgap/_index)的身份安装)
 
-5. 通过使用`kubectl get nodes --show-labels` 确认集群节点标签上是否存在 AWS 元数据来验证安装是否成功
+6. 通过使用`kubectl get nodes --show-labels` 确认集群节点标签上是否存在 AWS 元数据来验证安装是否成功
