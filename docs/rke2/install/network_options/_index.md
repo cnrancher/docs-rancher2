@@ -1,6 +1,6 @@
 ---
 title: 网络选项
-description: 默认情况下，RKE2 将 Canal 作为 cni 运行，VXLAN 作为默认后端，Canal 在主要组件启动并运行后通过 Helm 图表安装，可以通过修改 helm chart 选项进行自定义。
+description: 默认情况下，RKE2 将 Canal 作为 cni 运行，VXLAN 作为默认后端，Canal 在主要组件启动并运行后通过 Helm Chart安装，可以通过修改 helm chart 选项进行自定义。
 keywords:
   - rancher
   - rancher中文
@@ -15,8 +15,7 @@ keywords:
   - 网络选项
 ---
 
-
-默认情况下，RKE2 将 Canal 作为 cni 运行，VXLAN 作为默认后端，Canal 在主要组件启动并运行后通过 Helm 图表安装，可以通过修改 helm chart 选项进行自定义。
+默认情况下，RKE2 将 Canal 作为 cni 运行，VXLAN 作为默认后端，Canal 在主要组件启动并运行后通过 Helm Chart 安装，可以通过修改 helm chart 选项进行自定义。
 
 也可以选择用 Cilium 代替 Canal 作为 cni。
 
@@ -51,15 +50,13 @@ cp rke2-canal-config.yml /var/lib/rancher/rke2/server/manifests/
 
 有关 Cilium chart 可用 value 的更多信息，请参考[rke2-charts 资源库](https://github.com/rancher/rke2-charts/blob/main-source/packages/rke2-cilium/charts/values.yaml)
 
-有关 Calico chart 可用 value 的更多信息，请参考[rke2-charts 资源库](https://github.com/rancher/rke2-charts/blob/main/charts/rke2-calico/rke2-calico/v3.18.1-103/values.yaml)
-
 ## 使用 Multus
 
 从 RKE2 v1.21 开始，可以部署 Multus CNI meta-plugin。请注意，这是为高级用户准备的。
 
 [Multus CNI](https://github.com/k8snetworkplumbingwg/multus-cni)是一个 CNI 插件，能够将多个网络接口附加到 pod 上。Multus 并不取代 CNI 插件，相反，它充当了 CNI 插件的复用器。Multus 在某些用例中很有用，特别是当 pod 是网络密集型的，需要额外的网络接口来支持数据平面加速技术，如 SR-IOV。
 
-Multus 不能独立部署。它总是需要至少一个传统的 CNI 插件，以满足 Kubernetes 集群的网络要求。该 CNI 插件成为 Multus 的默认插件，并将被用来为所有的 pod 提供主要接口。
+Multus 不能独立部署。它总是需要至少一个传统的 CNI 插件，以满足 Kubernetes 集群的网络要求。该 CNI 插件成为 Multus 的默认插件，并将被用来为所有的 pod 提供主接口。
 
 要启用 Multus，请将`multus`作为第一个值传给`--cni`标志，然后是你想和 Multus 一起使用的插件名称（如果你将只用自己的默认插件，则为`none`）。注意，Multus 必须总是在列表的第一个位置。例如，要使用 Multus 和 `canal` 作为默认插件，你可以指定 `--cni=multus,canal` 或 `--cni=multus --cni=canal`。
 

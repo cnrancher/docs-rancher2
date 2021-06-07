@@ -15,8 +15,9 @@ keywords:
   - 安装方式
 ---
 
-
-**重要说明:** 如果你的节点已安装并启用 NetworkManager，[确保它被配置为忽略 CNI 管理的接口。](https://docs.rke2.io/known_issues/#networkmanager)
+:::note 说明：
+如果你的节点已安装并启用 NetworkManager，[确保它被配置为忽略 CNI 管理的接口。](/docs/rke2/known_issues/_index#networkmanager)
+:::
 
 RKE2 可以通过多种方式安装到系统中，其中两种方式是首选和支持的。这两种方法是 tarball 和 RPM。快速入门中提到的安装脚本是对这两种方法的一种封装。
 
@@ -51,9 +52,9 @@ INSTALL_RKE2_CHANNEL=latest ./install.sh
 
 接下来，安装脚本下载 tarball，通过比较 SHA256 哈希值进行验证，最后将内容提取到`/usr/local`。如果需要，操作者可以在安装后自由移动文件。这个操作只是提取 tarball，并没有做其他系统的修改。
 
-Tarball 结构/内容
+Tarball 结构/内容：
 
-- bin - 包含 RKE2 可执行文件以及`rke2-killall.sh`和`rke2-uninstall.sh`脚本。
+- bin - 包含 RKE2 可执行文件以及`rke2-killall.sh`和`rke2-uninstall.sh`脚本
 - lib - 包含 server 和 agent 的 systemd 单元文件
 - share - 包含 RKE2 许可证以及用于在 CIS 模式下运行 RKE2 时使用的 sysctl 配置文件
 
@@ -122,6 +123,7 @@ EOF
 ```bash
 yum -y install rke2-server
 ```
+
 or
 
 ```bash

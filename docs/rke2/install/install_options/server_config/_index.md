@@ -15,8 +15,7 @@ keywords:
   - Server 配置参考
 ---
 
-
-这是对可用于配置 rke2 server的所有参数的引用。请注意，虽然这是对命令行参数的引用，但配置 RKE2 的最佳方式是使用[配置文件](/docs/rke2/install/install_options/install_options/_index)。
+这是对可用于配置 rke2 server 的所有参数的引用。请注意，虽然这是对命令行参数的引用，但配置 RKE2 的最佳方式是使用[配置文件](/docs/rke2/install/install_options/install_options/_index#配置文件)。
 
 ## RKE2 Server CLI 帮助
 
