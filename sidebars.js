@@ -2039,4 +2039,48 @@ module.exports = {
         视频教程: ["harverster/demo/_index"],
         API参考: ["harverster/api-reference/_index"],
     },
+    rke2: {
+        产品介绍: ["rke2/_index"],
+        安装: [
+            "rke2/install/quickstart/_index",
+            "rke2/install/requirements/_index",
+            "rke2/install/ha/_index",
+            {
+                type: "category",
+                label: "安装选项",
+                items: [
+                    "rke2/install/install_options/install_options/_index",
+                    "rke2/install/install_options/server_config/_index",
+                    "rke2/install/install_options/agent_config/_index",
+                ],
+            },
+            "rke2/install/methods/_index",
+            "rke2/install/network_options/_index",
+            "rke2/install/containerd_registry_configuration/_index",
+            "rke2/install/airgap/_index",
+            "rke2/install/uninstall/_index",
+        ],
+        升级RKE2集群: [
+            "rke2/upgrade/upgrade/_index",
+            "rke2/upgrade/basic_upgrade/_index",
+            "rke2/upgrade/automated_upgrade/_index",
+        ],
+        安全: [
+            "rke2/security/hardening_guide/_index",
+            "rke2/security/cis_self_assessment15/_index",
+            "rke2/security/cis_self_assessment16/_index",
+            "rke2/security/fips_support/_index",
+            "rke2/security/policies/_index",
+            "rke2/security/selinux/_index",
+        ],
+        架构: [
+            "rke2/architecture/_index",
+        ],
+        访问集群: ["rke2/cluster_access/_index"],
+        Etcd备份和恢复: ["rke2/backup_restore/_index"],
+        网络: ["rke2/networking/_index"],
+        Helm集成: ["rke2/helm/_index"],
+        高级选项和配置: ["rke2/advanced/_index"],
+        已知问题和限制: ["rke2/known_issues/_index"],
+    },
 };
