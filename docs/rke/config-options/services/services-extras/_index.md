@@ -62,3 +62,13 @@ services:
     extra_env:
       - "HTTP_PROXY=http://your_proxy"
 ```
+or
+```yaml
+ingress:
+  provider: nginx
+  node_selector:
+    app: ingress
+  extra_envs:
+    - name: TZ
+      value: Asia/Shanghai
+  ```
