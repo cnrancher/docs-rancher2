@@ -62,7 +62,7 @@ services:
     extra_env:
       - "HTTP_PROXY=http://your_proxy"
 ```
-or
+或：
 ```yaml
 ingress:
   provider: nginx
