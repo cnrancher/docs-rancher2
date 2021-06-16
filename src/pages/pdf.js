@@ -45,6 +45,10 @@ function GetPDF() {
     axios
       .post(GENERATE_CODE_URL, {
         phone
+      }, {
+        params: {
+          kind: 'pdf'
+        }
       })
       .then(function (response) {
         // handle success
@@ -76,6 +80,10 @@ function GetPDF() {
         phone,
         email,
         code
+      }, {
+        params: {
+          kind: 'pdf'
+        }
       })
       .then(function (response) {
         // handle success
