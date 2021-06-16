@@ -18,11 +18,7 @@ keywords:
 
 使用 Rancher 创建 Kubernetes 集群之后，仍然可以编辑该集群的选项和设置。
 
-<sup>编辑现有集群</sup>
-
-![编辑集群](/img/rancher/edit-cluster.png)
-
-现有集群的可用选项和设置将根据用于提供它的方法进行更改。例如，只有集群[由 RKE 创建](/docs/rancher2.5/cluster-provisioning/rke-clusters/_index)才有可用于编辑的 **集群选项**。
+关于编辑集群成员资格的信息，请参考[将用户添加到集群中](/docs/rancher2.5/cluster-admin/cluster-access/cluster-members/_index)。
 
 下表总结了每种集群类型可用的选项和设置：
 
