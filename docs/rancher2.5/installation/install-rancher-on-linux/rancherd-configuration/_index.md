@@ -76,7 +76,7 @@ spec:
 | `auditLog.hostPath`      | "/var/log/rancher/audit"                              | **_string_** - 主机上的日志文件目的地（只有当**auditLog.destination**被设置为**hostPath**时才会适用）                   |
 | `auditLog.level`         | 0                                                     | **_int_** - 设置[API 审核日志级别](https://rancher.com/docs/rancher/v2.x/en/installation/api-auditing)。0 为关闭。[0-3] |
 | `auditLog.maxAge`        | 1                                                     | **_int_** - 保留旧审计日志文件的最大天数（仅在**auditLog.destination**设置为**hostPath**时才适用）                      |
-| `auditLog.maxBackups`    | 1                                                     | int - 保留审计日志文件的最大数量（仅当**auditLog.destination**设置为**hostPath**时适用）。                              |
+| `auditLog.maxBackup`     | 1                                                     | int - 保留审计日志文件的最大数量（仅当**auditLog.destination**设置为**hostPath**时适用）。                              |
 | `auditLog.maxSize`       | 100                                                   | **_int_** - 审计日志文件在被替换之前的最大大小（仅当**auditLog.destination**被设置为**hostPath**时适用）。              |
 | `debug`                  | false                                                 | **_bool_** - 在 rancher 服务器上设置调试标志                                                                            |
 | `extraEnv`               | []                                                    | **_list_** - 为 Rancher 设置额外的环境变量，从 v2.20 开始提供。                                                         |

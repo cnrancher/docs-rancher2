@@ -30,7 +30,20 @@ private_registries:
     password: mypassword
 ```
 
-> **注意：**如果您使用的是 Docker Hub 镜像仓库，您可以省略`url`，或者将`url`的值设置为 `docker.io`。
+如果您使用的是 Docker Hub 镜像仓库，您可以省略`url`，或者将`url`的值设置为 `docker.io`。
+
+:::note 注意
+尽管该指令被命名为`url`，但没有必要在主机或 IP 地址前加上`https://`。
+:::
+
+有效的`url'例子包括：
+
+```yaml
+url: registry.com
+url: registry.com:5555
+url: 1.1.1.1
+url: 1.1.1.1:5555/artifactory
+```
 
 ### 默认镜像仓库
 

@@ -25,9 +25,10 @@ Rancher 有以下 Kubernetes 发行版。
 
 ### RKE2 指南
 
-| Kubernetes 版本   | CIS 基准版 | 自评指南                                                   | 加固指南                                               |
-| :---------------- | :--------- | :--------------------------------------------------------- | :----------------------------------------------------- |
-| Kubernetes v1.18+ | CIS v1.5   | [链接](https://docs.rke2.io/security/cis_self_assessment/) | [链接](https://docs.rke2.io/security/hardening_guide/) |
+| Kubernetes 版本  | CIS 基准版 | 自评指南                                                     | 加固指南                                               |
+| :--------------- | :--------- | :----------------------------------------------------------- | :----------------------------------------------------- |
+| Kubernetes v1.18 | CIS v1.5   | [Link](https://docs.rke2.io/security/cis_self_assessment15/) | [Link](https://docs.rke2.io/security/hardening_guide/) |
+| Kubernetes v1.20 | CIS v1.6   | [Link](https://docs.rke2.io/security/cis_self_assessment16/) | [Link](https://docs.rke2.io/security/hardening_guide/) |
 
 ### K3s 指南
 

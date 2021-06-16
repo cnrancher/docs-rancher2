@@ -41,7 +41,7 @@ Rancher 版本必须是 v2.5.0 及以上。
 1. 单击 **Backup**。
 1. 使用表单或 YAML 编辑器创建 Backup。
 1. 要使用该表单配置 Backup 详细信息，请单击**Create**，然后参考[配置参考](/docs/rancher2.5/backups/configuration/back-up-config/_index)和[范例](/docs/rancher2.5/backups/examples/_index)。
-1. 要使用 YAML 编辑器，我们可以单击**Create > Create from YAML**，输入 Backup YAML。这个例子备份自定义资源将在 S3 中创建加密的定期备份：
+1. 要使用 YAML 编辑器，我们可以单击**Create > Create from YAML**，输入 Backup YAML。这个例子备份自定义资源将在 S3 中创建加密的定期备份。该应用程序使用`credentialSecretNamespace`值来确定在哪里寻找 S3 备份的密钥：
 
    ```yaml
    apiVersion: resources.cattle.io/v1

@@ -102,13 +102,7 @@ GKE 供应者可以在 Rancher 和供应商之间同步 GKE 集群的状态。�
 
 ### 配置刷新间隔
 
-刷新间隔可以通过设置 "gke-refresh "来配置，它是一个代表秒的整数。
-
-默认值是 300 秒。
-
-同步时间间隔可以通过运行`kubectl edit setting gke-refresh`来改变。
-
-刷新窗口越短，越不可能发生任何竞赛条件，但它确实增加了遇到 GCP APIs 可能存在的请求限制的可能性。
+配置刷新间隔的操作步骤请参考[GKE 配置参考](/docs/rancher2.5/cluster-admin/editing-clusters/gke-config-reference/_index)。
 
 ## 2.5.8 之前
 

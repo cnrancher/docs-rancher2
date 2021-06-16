@@ -38,63 +38,21 @@ RKE 可以在大多数已安装 Docker 的 Linux 操作系统上运行。RKE 的
 
 - 禁用所有 woker 节点上的交换功能（Swap）
 
-- 在命令行工具中输入以下命令和脚本，检查下列模组是否存在。
-
-  - `modprobe module_name`
-  - `lsmod | grep module_name`
-  - 如果是内置模组，请输入这条命令检查：`grep module_name /lib/modules/$(uname -r)/modules.builtin`
-  - 请输入以下脚本：
-
-    ```bash
-        for module in br_netfilter ip6_udp_tunnel ip_set ip_set_hash_ip ip_set_hash_net iptable_filter iptable_nat iptable_mangle iptable_raw nf_conntrack_netlink nf_conntrack nf_conntrack_ipv4   nf_defrag_ipv4 nf_nat nf_nat_ipv4 nf_nat_masquerade_ipv4 nfnetlink udp_tunnel veth vxlan x_tables xt_addrtype xt_conntrack xt_comment xt_mark xt_multiport xt_nat xt_recent xt_set  xt_statistic xt_tcpudp;
-        do
-          if ! lsmod | grep -q $module; then
-            echo "module $module is not present";
-          fi;
-        done
-    ```
-
-    返回的模组应该包括下列的所有模组：
-
-    | 模组名称               |
-    | :--------------------- |
-    | br_netfilter           |
-    | ip6_udp_tunnel         |
-    | ip_set                 |
-    | ip_set_hash_ip         |
-    | ip_set_hash_net        |
-    | iptable_filter         |
-    | iptable_nat            |
-    | iptable_mangle         |
-    | iptable_raw            |
-    | nf_conntrack_netlink   |
-    | nf_conntrack           |
-    | nf_conntrack_ipv4      |
-    | nf_defrag_ipv4         |
-    | nf_nat                 |
-    | nf_nat_ipv4            |
-    | nf_nat_masquerade_ipv4 |
-    | nfnetlink              |
-    | udp_tunnel             |
-    | veth                   |
-    | vxlan                  |
-    | x_tables               |
-    | xt_addrtype            |
-    | xt_conntrack           |
-    | xt_comment             |
-    | xt_mark                |
-    | xt_multiport           |
-    | xt_nat                 |
-    | xt_recent              |
-    | xt_set                 |
-    | xt_statistic           |
-    | xt_tcpudp              |
-
 - 运行以下命令，修改 sysctl 配置：
 
   ```shell
   net.bridge.bridge-nf-call-iptables=1
   ```
+
+- 请查看网络插件文件，了解任何额外的要求（例如，内核模块）。
+  - [Calico](https://docs.projectcalico.org/getting-started/kubernetes/requirements#kernel-dependencies)
+  - [Flannel](https://github.com/flannel-io/flannel/tree/master/Documentation)
+  - Canal (Combination Calico and Flannel)
+  - [Weave](https://www.weave.works/docs/net/latest/install/installing-weave/)
+
+:::note 说明
+如果你或你的云提供商使用自定义的最小内核，一些必要的（网络）内核模块可能不存在。
+:::
 
 ### SUSE Linux Enterprise Server (SLES) / openSUSE
 
@@ -326,22 +284,11 @@ systemctl enable docker.service
 
 #### 安装 Docker
 
-请参考[Docker 官方文档](https://docs.docker.com/install/)完成 Docker 安装。Rancher 也提供了 Docker 的安装脚本，详情请参考[安装脚本](https://github.com/rancher/install-docker) 。如果您使用的操作系统是 RHEL，请参考[Red Hat 官方文档-如何在 RHEL 上安装 Docker](https://access.redhat.com/solutions/3727511)。
-
-| Docker 版本 | 安装脚本                                                                           |
-| :---------- | :--------------------------------------------------------------------------------- |
-| 18.09.2     | <code>curl https://releases.rancher.com/install-docker/18.09.2.sh &#124; sh</code> |
-| 18.06.2     | <code>curl https://releases.rancher.com/install-docker/18.06.2.sh &#124; sh</code> |
-| 17.03.2     | <code>curl https://releases.rancher.com/install-docker/17.03.2.sh &#124; sh</code> |
+参考[安装 Docker](/docs/rancher2.5/installation/requirements/installing-docker/_index)
 
 #### 检查 Docker 版本号
 
-输入`docker version --format '{{.Server.Version}}'`，检查支持特定版本 Kubernetes 的 Docker 是否已经成功安装到您的机器上。如果已经成功安装，返回的信息应该如代码示例所示。
-
-```shell
-docker version --format '{{.Server.Version}}'
-17.03.2-ce
-```
+输入`docker version --format '{{.Server.Version}}'`，检查支持特定版本 Kubernetes 的 Docker 是否已经成功安装到您的机器上。
 
 ## 端口要求
 

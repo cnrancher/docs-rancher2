@@ -248,6 +248,8 @@ Alertmanager 必须在 YAML 中配置，如这个[例子](#alertmanager-config-�
 
 ## Alertmanager Config 示例
 
+### Slack
+
 要通过 Slack 设置通知，可以将以下 Alertmanager 配置 YAML 放入 Alertmanager 配置密钥的`alertmanager.yaml`键中，其中`api_url`应该更新为使用 Slack 的 Webhook URL。
 
 ```yaml
@@ -265,6 +267,30 @@ receivers:
         api_url: <user-provided slack webhook url here>
 templates:
   - /etc/alertmanager/config/*.tmpl
+```
+
+### PagerDuty
+
+要通过 PagerDuty 设置通知，请使用下面这个来自[PagerDuty 文档](https://www.pagerduty.com/docs/guides/prometheus-integration-guide/)的例子作为指导。这个例子设置了一个路由，用于捕获数据库服务的警报，并将其发送到与服务相关联的接收器，该接收器将直接通知 PagerDuty 中的 DBA，而所有其他的警报将被引导到具有不同 PagerDuty 集成密钥的默认接收器。
+
+下面的 Alertmanager 配置 YAML 可以放在 Alertmanager 配置密文的`alertmanager.yaml`键中。`service_key`应该更新为使用你的 PagerDuty 集成密钥，可以根据 PagerDuty 文档的 "与全球事件路由集成 "部分找到。关于配置选项的完整列表，请参考[Prometheus 官方文档](https://prometheus.io/docs/alerting/latest/configuration/#pagerduty_config)。
+
+```yaml
+route:
+  group_by: [cluster]
+  receiver: "pagerduty-notifications"
+  group_interval: 5m
+  routes:
+    - match:
+        service: database
+      receiver: "database-notifcations"
+receivers:
+  - name: "pagerduty-notifications"
+    pagerduty_configs:
+      - service_key: "primary-integration-key"
+  - name: "database-notifcations"
+    pagerduty_configs:
+      - service_key: "database-integration-key"
 ```
 
 ## CIS 扫描警报的路由配置示例

@@ -58,7 +58,7 @@ _自 v2.0.7 版本起可用_
 您可以使用 openssl 命令生成证书。例如：
 
 ```
-openssl req -x509 -newkey rsa:2048 -keyout myservice.key -out myservice.cert -days 365 -nodes -subj "/CN=https://myservice.example.com"
+openssl req -x509 -newkey rsa:2048 -keyout myservice.key -out myservice.cert -days 365 -nodes -subj "/CN=myservice.example.com"
 ```
 
 :::

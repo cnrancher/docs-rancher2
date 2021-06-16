@@ -114,7 +114,7 @@ services:
 
 ### Kubelet 选项
 
-RKE 支持 "kubelet "服务的以下选项。
+RKE 支持`kubelet`服务的以下选项。
 
 - **集群域** (`cluster_domain`) - 集群的[基本域](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)。集群上创建的所有服务和 DNS 记录。默认情况下，域被设置为`cluster.local`。
 - **集群 DNS 服务器** (`cluster_dns_server`) - 分配给集群内 DNS 服务端点的 IP 地址。DNS 查询将被发送到这个 IP 地址，该地址被 KubeDNS 使用。这个选项的默认值是`10.43.0.10`。
