@@ -72,6 +72,8 @@ az ad sp create-for-rbac \
 
 #### 3. 使用节点模板创建一个具有节点池的集群
 
+在所有三个节点角色（worker、etcd 和 controlplane）都出现之前，集群不会开始配置。
+
 1.  访问`集群列表`界面中，单击`添加集群`。
 
 2.  选择**Azure**。

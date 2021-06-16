@@ -69,7 +69,7 @@ RKE 支持`kube-api`服务的以下选项。
 - **节点端口范围** (`service_node_port_range`) - 使用[type](https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types) `NodePort`创建的 Kubernetes 服务的端口范围。默认情况下，端口范围是`30000-32767`。
 - **Pod 安全策略** (`pod_security_policy`) - 启用[Kubernetes Pod 安全策略](https://kubernetes.io/docs/concepts/policy/pod-security-policy/)的选项。默认情况下，我们不会启用 pod 安全策略，因为它被设置为`false`。
   > **注意：**如果您将`pod_security_policy`值设置为`true`，RKE 将配置一个开放的策略，允许任何 pod 在集群上工作。您需要配置您自己的策略来充分利用 PSP。
-- **拉取镜像** (`always_pull_images`) - 启用`AlwaysPullImages` Admission 控制器插件。启用`AlwaysPullImages`是一个安全的最佳实践。它强制 Kubernetes 与远程图像注册表验证图像和拉动凭证。本地图像层缓存仍将被使用，但它确实会在启动容器拉取和比较图像哈希时增加一点开销。_注：从 v0.2.0 开始提供_。
+- **拉取镜像** (`always_pull_images`) - 启用`AlwaysPullImages` Admission 控制器插件。启用`AlwaysPullImages`是一个安全的最佳实践。它强制 Kubernetes 与远程图像镜像仓库验证图像和拉动凭证。本地图像层缓存仍将被使用，但它确实会在启动容器拉取和比较图像哈希时增加一点开销。_注：从 v0.2.0 开始提供_。
 - **Secrets Encryption Config** (`secrets_encryption_config`) - 管理 Kubernetes 静态数据加密。文档化[这里](/docs/rke/config-options/secrets-encryption/_index)
 
 ## Kubernetes Controller Manager
@@ -114,7 +114,7 @@ services:
 
 ### Kubelet 选项
 
-RKE 支持 "kubelet "服务的以下选项。
+RKE 支持`kubelet`服务的以下选项。
 
 - **集群域** (`cluster_domain`) - 集群的[基本域](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)。集群上创建的所有服务和 DNS 记录。默认情况下，域被设置为`cluster.local`。
 - **集群 DNS 服务器** (`cluster_dns_server`) - 分配给集群内 DNS 服务端点的 IP 地址。DNS 查询将被发送到这个 IP 地址，该地址被 KubeDNS 使用。这个选项的默认值是`10.43.0.10`。

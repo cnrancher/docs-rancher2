@@ -63,8 +63,8 @@ keywords:
 
 ```yaml
 image:
-  repository: rancher/rancher-backup
-  tag: v0.0.1-rc10
+  repository: rancher/backup-restore-operator
+  tag: v1.0.3
 
 ## 默认的s3桶，用于存储所有由rancher-backup operator创建的备份文件
 s3:

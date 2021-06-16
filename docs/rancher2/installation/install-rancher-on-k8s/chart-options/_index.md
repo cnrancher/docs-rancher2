@@ -37,7 +37,7 @@ keywords:
 | `auditLog.hostPath`            | "/var/log/rancher/audit"                            | `string` - 主机上的日志文件目标地址 (仅在 `auditLog.destination` 的值为 `hostPath`时可用)                                  |
 | `auditLog.level`               | 0                                                   | `int` - 设置[API 审计日志](/docs/rancher2/installation/resources/advanced/api-audit-log/_index)等级。0 代表关闭。[0-3]     |
 | `auditLog.maxAge`              | 1                                                   | `int` - 保留旧审计日志的最大天数 (仅在 `auditLog.destination` 的值为 `hostPath`时可用)                                     |
-| `auditLog.maxBackups`          | 1                                                   | `int` - 保留旧审计日志的最大文件个数 (仅在 `auditLog.destination` 的值为 `hostPath`时可用)                                 |
+| `auditLog.maxBackup`           | 1                                                   | `int` - 保留旧审计日志的最大文件个数 (仅在 `auditLog.destination` 的值为 `hostPath`时可用)                                 |
 | `auditLog.maxSize`             | 100                                                 | `int` - 在审计日志被轮换前的以 M 为单位的最大容量 (仅在 `auditLog.destination` 的值为 `hostPath`时可用)                    |
 | `busyboxImage`                 | "busybox"                                           | `string` - 用来收集审计日志的 busybox 镜像的地址。_注意：从 v2.2.0 开始可用_                                               |
 | `debug`                        | false                                               | `bool` - 设置 Rancher Server 的 debug 参数                                                                                 |

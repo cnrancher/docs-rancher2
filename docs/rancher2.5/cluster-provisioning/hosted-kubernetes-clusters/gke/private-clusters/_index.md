@@ -35,7 +35,7 @@ keywords:
 > **注意**
 > 这个方案没有得到官方支持，但描述的是使用云端 NAT 服务不够的情况。
 
-如果限制节点的传入和传出流量是一个要求，请按照空中加注的安装说明，在集群所在的 VPC 上设置一个私有容器镜像[注册表](https://rancher.com/docs/rancher/v2.x/en/installation/other-installation-methods/air-gap/)，允许集群节点访问和下载它们运行集群代理所需的镜像。如果控制平面端点也是私有的，Rancher 将需要[直接访问](#direct-access)到它。
+如果限制节点的传入和传出流量是一个要求，请按照空中加注的安装说明，在集群所在的 VPC 上设置一个私有容器镜像[镜像仓库](https://rancher.com/docs/rancher/v2.x/en/installation/other-installation-methods/air-gap/)，允许集群节点访问和下载它们运行集群代理所需的镜像。如果控制平面端点也是私有的，Rancher 将需要[直接访问](#direct-access)到它。
 
 ###私有控制平面端点
 
@@ -51,6 +51,6 @@ keywords:
 
 #### 直接访问
 
-如果 Rancher 服务器与集群的控制平面运行在同一个 VPC 上，它将可以直接访问控制平面的私有端点。集群节点将需要访问[私有注册表](#private-registry)来下载上述的图像。
+如果 Rancher 服务器与集群的控制平面运行在同一个 VPC 上，它将可以直接访问控制平面的私有端点。集群节点将需要访问[私有镜像仓库](#private-registry)来下载上述的图像。
 
 你也可以使用谷歌的服务，如[Cloud VPN](https://cloud.google.com/network-connectivity/docs/vpn/concepts/overview)或[Cloud Interconnect VLAN](https://cloud.google.com/network-connectivity/docs/interconnect)，以促进你的组织的网络和谷歌 VPC 之间的连接。

@@ -91,6 +91,8 @@ Kubernetes 集群管理节点(`etcd`和`controlplane`)必须在 Linux 节点上�
 
 Windows 集群中的工作负载通常部署在 Windows（`worker`）节点中。但是，您必须至少有一个 Linux `worker`节点才能运行 Rancher Cluster Agent、Metrics Server、DNS 和 Ingress 相关容器。
 
+在所有三个节点角色（worker、etcd 和 controlplane）都出现之前，集群不会开始配置。
+
 下表中是一个由三个节点组成的集群，您可以添加其他 Linux 和 Windows 节点来扩展集群，实现冗余：
 
 | 节点   | 操作系统                                 | 集群角色                                                                                                                                                                    | 目的                                                           |

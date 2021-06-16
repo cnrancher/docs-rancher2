@@ -32,7 +32,8 @@ _v0.2.0 开始可用_
 完成证书轮换后，Kubernetes 组件会自动重启，重启后，新的证书就会生效。您可以为以下这些服务轮换证书：
 
 - etcd
-- kubelet
+- kubelet (节点证书)
+- kubelet ([启用 Kubelet 选项](/docs/rke/config-options/services/_index)后，可以轮换服务证书。)
 - kube-apiserver
 - kube-proxy
 - kube-scheduler

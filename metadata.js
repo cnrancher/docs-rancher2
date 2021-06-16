@@ -607,6 +607,12 @@ const metadata = {
             "rancher2.5/istio/release-notes/_index": "Istio版本说明",
             //logging
             "rancher2.5/logging/_index": "Rancher v2.5 的日志功能",
+            "rancher2.5/logging/architecture/_index": "架构介绍",
+            "rancher2.5/logging/custom-resource-config/_index":
+                "配置自定义资源",
+            "rancher2.5/logging/helm-chart-options/_index": "Helm Chart 选项",
+            "rancher2.5/logging/rbac/_index": "RBAC策略",
+            "rancher2.5/logging/taints-tolerations/_index": "污点和容忍度",
             "rancher2.5/logging/migrating/_index": "迁移至Rancher v2.5日志",
             //opa gate keeper
             "rancher2.5/opa-gatekeeper/_index": "OPA Gatekeeper",
@@ -759,7 +765,7 @@ const metadata = {
             "k3s/installation/ha/_index": "使用外部数据库实现高可用",
             "k3s/installation/ha-embedded/_index": "嵌入式DB的高可用",
             "k3s/installation/datastore/_index": "集群数据存储选项",
-            "k3s/installation/private-registry/_index": "私有注册表配置",
+            "k3s/installation/private-registry/_index": "私有镜像仓库配置",
             "k3s/installation/airgap/_index": "离线安装",
             "k3s/installation/kube-dashboard/_index": "Kubernetes 仪表盘",
             "k3s/installation/uninstall/_index": "卸载 K3s",

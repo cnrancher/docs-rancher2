@@ -27,7 +27,7 @@ CIS 基准测试是安全配置目标系统的最佳实践。CIS 基准是通过
 
 ## 关于 CIS 基准测试
 
-CIS 官方基准文件可通过 CIS 网站获得。用于访问文档的注册表格在[此处](https://learn.cisecurity.org/benchmarks)。
+CIS 官方基准文件可通过 CIS 网站获得。用于访问文档的镜像仓库格在[此处](https://learn.cisecurity.org/benchmarks)。
 
 Rancher 通过使用 Aqua Security 的开源工具 [kube-bench](https://github.com/aquasecurity/kube-bench) 检查集群是否符合 CIS Kubernetes Benchmark 的规定。
 
