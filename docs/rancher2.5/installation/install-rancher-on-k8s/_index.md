@@ -182,18 +182,21 @@ cert-manager-webhook-787858fcdb-nlzsq 1/1 Running 0 2m
 
 ### 方式 A：使用 Rancher 生成的自签名证书
 
-Rancher 的默认值是生成 CA 并使用`cert-manager`颁发证书，并将证书用于访问 Rancher Server 的接口。
+Rancher 的默认值是生成自签名 CA 并使用`cert-manager`颁发证书，并将证书用于访问 Rancher Server 的接口。
 
 因为`rancher`是`ingress.tls.source`的默认选项，所以在运行`helm install`命令时我们没有指定`ingress.tls.source`。
 
 - 将`hostname`设置为您指向负载均衡器的 DNS 名称。
-- 如果您在安装 `alpha` 版本，需要把`--devel` 选项添加到下面到 Helm 命令中。
-- 要安装指定版本的 Rancher，请使用`--version`选项，例如：`--version 2.3.6`。
+- 将`hostname`设置为解析到你的负载平衡器的 DNS 记录。
+- 将`replicas`设置为 Rancher 部署所使用的复制数量。默认为 3；如果你的集群中少于 3 个节点，你应该相应地减少它。
+- 要安装一个特定的 Rancher 版本，使用`--version`标志，例如：`--version 2.3.6`。
+- 如果你安装的是 alpha 版本，Helm 要求在命令中加入`--devel`选项。
 
 ```shell
 helm install rancher rancher-<CHART_REPO>/rancher \
  --namespace cattle-system \
- --set hostname=rancher.my.org
+ --set hostname=rancher.my.org \
+ --set replicas=3
 ```
 
 等待 Rancher 运行：
@@ -218,15 +221,18 @@ Rancher Chart 有许多自定义安装选项以适应特定的环境。以下是
 
 在下面的命令中，
 
-- 将 `hostname` 设置为公共 DNS 记录。
+- 将`hostname`设置为公共 DNS 记录，该记录可解析到你的负载平衡器。
+- 将`replicas`设置为 Rancher 部署所使用的复制数量。默认为 3；如果你的集群中少于 3 个节点，你应该相应地减少它。
 - 将 `ingress.tls.source` 选项设置为 `letsEncrypt`。
 - 将 `letsEncrypt.email` 设置为可通讯的电子邮件地址，方便发送通知（例如证书到期的通知）。
-- 如果您在安装 `alpha` 版本，需要把`--devel` 选项添加到下面到 Helm 命令中。
+- 要安装一个特定的 Rancher 版本，请使用`--version`标志，例如：`--version 2.3.6`。
+- 如果你安装的是 alpha 版本，Helm 要求在命令中加入`--devel`选项。
 
 ```shell
 helm install rancher rancher-<CHART_REPO>/rancher \
  --namespace cattle-system \
  --set hostname=rancher.my.org \
+ --set replicas=3 \
  --set ingress.tls.source=letsEncrypt \
  --set letsEncrypt.email=me@example.org
 ```
@@ -257,14 +263,17 @@ Rancher Chart 有许多自定义安装选项以适应特定的环境。以下是
 
 如果您想检查证书是否正确，请查看[如何在服务器证书中检查 Common Name 和 Subject Alternative Names](/docs/rancher2.5/faq/technical/_index)。
 
-- 设置 `hostname`。
-- 将 `ingress.tls.source` 选项设置为 `secret`。
-- 如果您在安装 `alpha` 版本，需要把`--devel` 选项添加到下面到 Helm 命令中。
+- 如上所述，为你的证书设置适当的`hostname`。
+- 将`replicas`设置为 Rancher 部署所使用的复制数量。默认为 3；如果你的集群中少于 3 个节点，你应填写实际节点数量。
+- 设置`ingress.tls.source`为`secret`。
+- 要安装一个特定的 Rancher 版本，使用`--版本`标志，例如：`--版本2.3.6`。
+- 如果你安装的是 alpha 版本，Helm 要求在命令中加入`--devel`选项。
 
 ```shell
 helm install rancher rancher-<CHART_REPO>/rancher \
  --namespace cattle-system \
  --set hostname=rancher.my.org \
+ --set replicas=3 \
  --set ingress.tls.source=secret
 ```
 
@@ -286,7 +295,7 @@ Rancher Chart 有许多自定义安装选项以适应特定的环境。以下是
 - [私有镜像仓库](/docs/rancher2.5/installation/resources/chart-options/_index)
 - [外部负载均衡器上的 TLS 终止](/docs/rancher2.5/installation/resources/chart-options/_index)
 
-有关选项的完整列表，请参见[Chart 选项](/docs/rancher2.5/installation/resources/chart-options/_index)。
+有关选项的完整列表，请参见[Chart 选项](/docs/rancher2.5/installation/install-rancher-on-k8s/chart-options/_index)。
 
 ## 6. 验证 Rancher Server 是否已成功部署
 

@@ -21,7 +21,6 @@ keywords:
 
 有关使用 RancherD 升级安装在 Kubernetes 上的 Rancher 的说明，请参考[本页](/docs/rancher2.5/installation/install-rancher-on-linux/upgrades/_index)
 
-
 关于安装了 Docker 的 Rancher 的升级说明，请参考[本页](/docs/rancher2/installation/other-installation-methods/single-node-docker/single-node-upgrades/_index)
 
 要升级 Kubernetes 集群中的组件，或者定义[Kubernetes 服务](/docs/rke/config-options/services/_index)或[附加组件](/docs/rke/config-options/add-ons/_index)。参考 Rancher Kubernetes 引擎的[RKE 的升级文档](/docs/rke/upgrades/_index)。
@@ -177,7 +176,7 @@ helm upgrade rancher rancher-<CHART_REPO>/rancher \
 
 #### 离线升级
 
-使用安装 Rancher 时选择的相同选项来渲染 Rancher 模板。使用下面的参考表来替换每个占位符。Rancher 需要配置为使用私有注册表，以便为任何 Rancher 启动的 Kubernetes 集群或 Rancher 工具提供服务。
+使用安装 Rancher 时选择的相同选项来渲染 Rancher 模板。使用下面的参考表来替换每个占位符。Rancher 需要配置为使用私有镜像仓库，以便为任何 Rancher 启动的 Kubernetes 集群或 Rancher 工具提供服务。
 
 根据您在安装过程中做出的选择，完成以下程序之一。
 

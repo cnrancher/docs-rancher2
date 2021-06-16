@@ -41,11 +41,11 @@ title: EC2 Node Template Configuration
 配置将要创建的实例。确保为配置的 AMI 配置正确的**SSH 用户**。
 
 如果您需要传递**IAM 实例配置文件名**（而不是 ARN），例如，当您要使用[Kubernetes 云提供商](/docs/rancher2/cluster-provisioning/rke-clusters/cloud-providers/_index)时，您将需要在策略中增加一个权限。请参阅[带 PassRole 的 IAM 策略示例](#example-iam-policy-with-passrole)以了解
-一个政策范例。
+一个策略范例。
 
 ### 引擎选项
 
-在节点模板的**引擎选项**部分，您可以配置 Docker 守护进程。您可能希望指定 docker 版本或 Docker 注册表镜像。
+在节点模板的**引擎选项**部分，您可以配置 Docker 守护进程。您可能希望指定 docker 版本或 Docker 镜像仓库镜像。
 
 ## v2.2.0 之前的版本
 
@@ -93,5 +93,5 @@ title: EC2 Node Template Configuration
 
 - **标签：**关于标签的信息，请参考[Docker 对象标签文档](https://docs.docker.com/config/labels-custom-metadata/)。
 - **Docker Engine Install URL：** 确定将在实例上安装的 Docker 版本。
-- **注册表镜像**：Docker 守护进程要使用的 Docker 注册表镜像。
+- **镜像仓库镜像**：Docker 守护进程要使用的 Docker 镜像仓库镜像。
 - **其他高级选项：**请参考[Docker 守护进程选项参考](https://docs.docker.com/engine/reference/commandline/dockerd/)。

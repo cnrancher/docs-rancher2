@@ -15,7 +15,6 @@ keywords:
   - Agent 配置参考
 ---
 
-
 这是对所有可用于配置 rke2 agent 的参数的参考。请注意，虽然这是命令行参数的参考，但配置 RKE2 的最佳方式是使用[配置文件](/docs/rke2/install/install_options/install_options/_index#配置文件)。
 
 ## RKE2 Agent CLI 帮助
@@ -41,7 +40,7 @@ OPTIONS:
    --node-taint value                     (agent/node) 节点污点
    --container-runtime-endpoint value     (agent/runtime) 禁用嵌入式containerd并使用替代的CRI实现
    --snapshotter value                    (agent/runtime) 覆盖默认的containerd snapshotter (默认: "overlayfs")
-   --private-registry value               (agent/runtime) 私有注册表配置文件 (默认: "/etc/rancher/rke2/registries.yaml")
+   --private-registry value               (agent/runtime) 私有镜像仓库配置文件 (默认: "/etc/rancher/rke2/registries.yaml")
    --node-ip value, -i value              (agent/networking) 为节点公布的IPv4/IPv6地址
    --node-external-ip value               (agent/networking) 为节点公布的IPv4/IPv6外部IP地址
    --resolv-conf value                    (agent/networking) Kubelet resolv.conf 文件 [$RKE2_RESOLV_CONF]
@@ -49,7 +48,7 @@ OPTIONS:
    --protect-kernel-defaults              (agent/node) 内核调整行为。如果设置，如果内核调谐与kubelet默认值不同，则会出现错误。
    --selinux                              (agent/node) 在containerd中启用SELinux [$RKE2_SELINUX]
    --lb-server-port value                 (agent/node) Supervisor客户端负载均衡器的本地端口。如果supervisor 和apiserver不在同一地点，则apiserver客户端负载均衡器也将使用比该端口少1的额外端口. (默认: 6444) [$RKE2_LB_SERVER_PORT]
-   --system-default-registry value        (image) 用于所有系统Docker镜像的私有注册表 [$RKE2_SYSTEM_DEFAULT_REGISTRY]
+   --system-default-registry value        (image) 用于所有系统Docker镜像的私有镜像仓库 [$RKE2_SYSTEM_DEFAULT_REGISTRY]
    --kube-apiserver-image value           (image) 覆盖kube-apiserver使用的镜像 [$RKE2_KUBE_APISERVER_IMAGE]
    --kube-controller-manager-image value  (image) 覆盖kube-controller-manager使用的镜像 [$RKE2_KUBE_CONTROLLER_MANAGER_IMAGE]
    --kube-scheduler-image value           (image) 覆盖kube-scheduler使用的镜像 [$RKE2_KUBE_SCHEDULER_IMAGE]

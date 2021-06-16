@@ -393,12 +393,12 @@ Spot 实例现在[由 EKS 支持](https://docs.aws.amazon.com/eks/latest/usergui
 
 亚马逊将使用[EKS-optimized AMI](https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html)为 Kubernetes 版本。你可以配置该 AMI 是否启用了 GPU。
 
-| 选项            | 描述                                                                                                                                    |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| 节点组名称      | 节点组名的称                                                                                                                            |
-| 期待的 ASG 规模 | 所需的实例数量。                                                                                                                        |
-| 最大 ASG 规模   | 实例的最大数量。此设置在[Cluster Autoscaler](https://docs.aws.amazon.com/eks/latest/userguide/cluster-autoscaler.html)安装后才会生效。  |
-| 最小 ASG 规模   | 实例的最小数量。此设置在[Cluster Autoscaler](https://docs.aws.amazon.com/eks/latest/userguide/cluster-autoscaler.html)安装后才会生效。. |
+| 选项            | 描述                                                                                                                                   |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| 节点组名称      | 节点组名的称                                                                                                                           |
+| 期待的 ASG 规模 | 所需的实例数量。                                                                                                                       |
+| 最大 ASG 规模   | 实例的最大数量。此设置在[Cluster Autoscaler](https://docs.aws.amazon.com/eks/latest/userguide/cluster-autoscaler.html)安装后才会生效。 |
+| 最小 ASG 规模   | 实例的最小数量。此设置在[Cluster Autoscaler](https://docs.aws.amazon.com/eks/latest/userguide/cluster-autoscaler.html)安装后才会生效。 |
 
 ### 2.5.0 之前
 
@@ -459,7 +459,6 @@ Spot 实例现在[由 EKS 支持](https://docs.aws.amazon.com/eks/latest/usergui
 1. 单击**下一步：选择子网**。然后在显示的**子网**中选择一个。
 
 1. 单击**下一步：选择安全组**。
-   {{% /accordion %}}
 
 如果你的工作节点只有私有 IP，你还必须选择一个**VPC 和子网**，让你的实例能够访问互联网。这种访问是必需的，这样你的工作节点才能连接到 Kubernetes 控制平面。
 

@@ -70,7 +70,7 @@ keywords:
 | `--docker`                           | N/A                                | 用 docker 代替 containerd                     |
 | `--container-runtime-endpoint` value | N/A                                | 禁用嵌入式 containerd，使用替代的 CRI 实现    |
 | `--pause-image` value                | "docker.io/rancher/pause:3.1"      | 针对 containerd 或 Docker 的自定义 pause 镜像 | (agent/runtime) (默认) |
-| `--private-registry` value           | "/etc/rancher/k3s/registries.yaml" | 私有注册表配置文件                            |
+| `--private-registry` value           | "/etc/rancher/k3s/registries.yaml" | 私有镜像仓库配置文件                          |
 
 ## 网络
 
@@ -143,7 +143,7 @@ K3s agent 可以用`--node-label`和`--node-taint`这两个选项进行配置，
    --docker                            (agent/runtime) 用docker代替containerd
    --container-runtime-endpoint value  (agent/runtime) 禁用嵌入式containerd，使用替代的CRI实现
    --pause-image value                 (agent/runtime) 针对containerd或Docker的自定义pause镜像(默认: "docker.io/rancher/pause:3.1")
-   --private-registry value            (agent/runtime) 私有注册表配置文件 (默认: "/etc/rancher/k3s/registries.yaml")
+   --private-registry value            (agent/runtime) 私有镜像仓库配置文件 (默认: "/etc/rancher/k3s/registries.yaml")
    --node-ip value, -i value           (agent/networking) 为节点发布的IP地址
    --node-external-ip value            (agent/networking) 对外发布节点的IP地址
    --resolv-conf value                 (agent/networking) Kubelet resolv.conf 文件 [$K3S_RESOLV_CONF]

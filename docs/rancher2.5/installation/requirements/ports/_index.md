@@ -244,6 +244,29 @@ import PortsImported from '@theme/PortsImported';
 
 ### 打开 SUSE Linux Portslink
 
+#### SLES 15/ openSUSE LEAP 15
+
+1. SSH 进入实例。
+1. 在文本模式下启动 YaST。
+
+   ```
+   sudo yast2
+   ```
+
+1. 导航到**安全和用户** > **防火墙** > **区域：公共** > **端口**。要在界面内导航，请按照指示[这里]（https://doc.opensuse.org/documentation/leap/reference/html/book.opensuse.reference/cha-yast-text.html#sec-yast-cli-navigate）。
+1. 要打开所需的端口，将它们输入**TCP 端口**和**UDP 端口**字段。在这个例子中，9796 和 10250 端口也被打开，用于监控。由此产生的字段应类似于以下内容。
+
+   ```yaml
+   TCP Ports
+   22, 80, 443, 2376, 2379, 2380, 6443, 9099, 9796, 10250, 10254, 30000-32767
+   UDP Ports
+   8472, 30000-32767
+   ```
+
+1. 当所有需要的端口都输入后，选择**接受**。
+
+#### SLES 12/ openSUSE LEAP 42
+
 SUSE Linux 可能有一个默认情况下会阻止所有端口的防火墙。要打开将主机添加到自定义集群所需的端口。
 
 1. SSH 进入实例。

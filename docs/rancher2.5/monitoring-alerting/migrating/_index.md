@@ -59,6 +59,15 @@ Monitoring V1 可以在集群级别和项目级别上配置，并将自动拉取
 1. 在 **“集群 > 工具 > 监控”** 下禁用集群监控安装。
 1. 确保系统项目中的集群监控应用和监控操作应用已经被删除，并且在几分钟后不重新创建。
 
+### RKE 模板集群
+
+为了防止 Monitoring v1 版监控被重新启用，请在今后的 RKE 模板修订中通过修改 RKE 模板 yaml 来禁用监控。
+
+```yaml
+enable_cluster_alerting: false
+enable_cluster_monitoring: false
+```
+
 ### 迁移 Grafana 仪表盘
 
 您可以将监控 V1 中添加到 Grafana 的任何仪表盘迁移到监控 V2 中。在 监控 V1 中，您可以执行以下步骤，导出现有的仪表盘。

@@ -16,7 +16,7 @@ For more information about Azure, refer to the official [Azure documentation.](h
 
 - **标签**：有关标签的信息，请参考[Docker 对象标签文档](https://docs.docker.com/config/labels-custom-metadata/)。
 - **Docker Engine Install URL**：确定将在实例上安装的 Docker 版本。
-- **注册表镜像**：Docker 守护进程要使用的 Docker 注册表镜像。
+- **镜像仓库镜像**：Docker 守护进程要使用的 Docker 镜像仓库镜像。
 - **其他高级选项**：请参考[Docker 守护进程选项参考](https://docs.docker.com/engine/reference/commandline/dockerd/)。
 
 ## v2.2.0 之前的版本
@@ -30,5 +30,5 @@ For more information about Azure, refer to the official [Azure documentation.](h
 
 - **标签**：有关标签的信息，请参考[Docker 对象标签文档](https://docs.docker.com/config/labels-custom-metadata/)。
 - **Docker Engine Install URL**：确定将在实例上安装的 Docker 版本。
-- **注册表镜像**：Docker 守护进程要使用的 Docker 注册表镜像。
+- **镜像仓库镜像**：Docker 守护进程要使用的 Docker 镜像仓库镜像。
 - **其他高级选项**：请参考[Docker 守护进程选项参考](https://docs.docker.com/engine/reference/commandline/dockerd/)。

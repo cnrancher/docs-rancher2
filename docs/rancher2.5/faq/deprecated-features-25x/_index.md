@@ -15,9 +15,9 @@ keywords:
   - Rancher 2.5已弃用的功能
 ---
 
-## Rancher 的废弃政策是什么？
+## Rancher 的废弃策略是什么？
 
-从 Rancher 2.5 开始，我们在支持[服务条款](https://rancher.com/support-maintenance-terms)中发布了官方的废弃政策。
+从 Rancher 2.5 开始，我们在支持[服务条款](https://rancher.com/support-maintenance-terms)中发布了官方的废弃策略。
 
 ## 我在哪里可以找到 Rancher 2.5 中哪些功能已经被废弃？
 

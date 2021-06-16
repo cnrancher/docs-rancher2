@@ -72,7 +72,7 @@ K3s agent 选项是可以作为 server 选项的，因为 server 内部嵌入了
 ### Agent 节点
 
 | Flag                 | 环境变量        | 描述                           |
-| :------------------- | :-------------- | :----------------------------- |
+| :------------------- | :-------------- | :----------------------------- | ------------ |
 | `--node-name` value  | `K3S_NODE_NAME` | 节点名称                       |
 | `--with-node-id`     | N/A             | 将 ID 附加到节点名称           | (agent/node) |
 | `--node-label` value | N/A             | 用一组标签注册和启动 kubelet。 |
@@ -81,11 +81,11 @@ K3s agent 选项是可以作为 server 选项的，因为 server 内部嵌入了
 ### Agent 运行时
 
 | Flag                                 | 默认值                             | 描述                                          |
-| :----------------------------------- | :--------------------------------- | :-------------------------------------------- |
+| :----------------------------------- | :--------------------------------- | :-------------------------------------------- | --------------- |
 | `--docker`                           | N/A                                | 用 docker 代替 containerd                     | (agent/runtime) |
 | `--container-runtime-endpoint` value | N/A                                | 禁用嵌入式 containerd，使用替代的 CRI 实现。  |
 | `--pause-image` value                | "docker.io/rancher/pause:3.1"      | 针对 containerd 或 Docker 的自定义 pause 镜像 |
-| `--private-registry` value           | "/etc/rancher/k3s/registries.yaml" | 私有注册表配置文件                            |
+| `--private-registry` value           | "/etc/rancher/k3s/registries.yaml" | 私有镜像仓库配置文件                          |
 
 ### Agent 网络
 
@@ -170,7 +170,7 @@ Agent 选项之所以存在，是因为 server 内嵌了 agent 进程
 ### 实验性选项
 
 | Flag                       | 环境变量               | 描述                                            |
-| :------------------------- | :--------------------- | :---------------------------------------------- |
+| :------------------------- | :--------------------- | :---------------------------------------------- | -------------- |
 | `--rootless`               | N/A                    | 运行 rootless                                   | (experimental) |
 | `--agent-token` value      | `K3S_AGENT_TOKEN`      | 用于将 agent 加入集群但不用于 server 的共享密钥 |
 | `--agent-token-file` value | `K3S_AGENT_TOKEN_FILE` | 包含 agent secret 的文件                        |
@@ -238,7 +238,7 @@ USAGE:
    --docker                                   (agent/runtime) 用docker代替containerd
    --container-runtime-endpoint value         (agent/runtime) 禁用嵌入式containerd，使用替代的CRI实现
    --pause-image value                        (agent/runtime) 针对containerd或Docker的自定义pause镜像 (默认: "docker.io/rancher/pause:3.1")
-   --private-registry value                   (agent/runtime) 私有注册表配置文件 (默认: "/etc/rancher/k3s/registries.yaml")
+   --private-registry value                   (agent/runtime) 私有镜像仓库配置文件 (默认: "/etc/rancher/k3s/registries.yaml")
    --node-ip value, -i value                  (agent/networking) 为节点发布的IP地址
    --node-external-ip value                   (agent/networking) 对外发布节点的IP地址
    --resolv-conf value                        (agent/networking) Kubelet resolv.conf 文件 [$K3S_RESOLV_CONF]

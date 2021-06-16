@@ -1,5 +1,5 @@
 ---
-title: 默认的政策配置
+title: 默认的策略配置
 description: 本文介绍了 RKE2 如何配置 PodSecurityPolicies 和 NetworkPolicies，以实现默认安全，同时也为运营商提供了最大的配置灵活性。
 keywords:
   - rancher
@@ -12,9 +12,8 @@ keywords:
   - rancher 中文文档
   - rancher cn
   - RKE2
-  - 默认的政策配置
+  - 默认的策略配置
 ---
-
 
 本文介绍了 RKE2 如何配置 PodSecurityPolicies 和 NetworkPolicies，以实现默认安全，同时也为运营商提供了最大的配置灵活性。
 
@@ -42,7 +41,7 @@ PSP 的创建和应用由 `kube-system` 命名空间中是否存在某些注释�
 
 因此，在初始启动后，操作员可以修改或删除 RKE2 的策略，RKE2 将尊重这些变化。此外，要 "重置" 一个策略，操作者只需要从 `kube-system` 命名空间中删除相关的注释，然后重新启动 RKE2。
 
-这些政策概述如下:
+这些策略概述如下:
 
 ```yaml
 apiVersion: policy/v1beta1
@@ -111,7 +110,7 @@ spec:
     rule: "RunAsAny"
 ```
 
-在这两种情况下，都适用 "系统不受限制的政策"。见下文：
+在这两种情况下，都适用 "系统不受限制的策略"。见下文：
 
 ```yaml
 apiVersion: policy/v1beta1

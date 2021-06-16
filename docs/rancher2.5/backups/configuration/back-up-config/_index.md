@@ -84,7 +84,7 @@ kubectl create secret generic encryptionconfig \
 
 S3 存储位置包含以下配置字段：
 
-1. **秘钥凭证** (可选)：如果你需要使用 AWS Access keys 和 Secret keys 访问 s3 桶，请使用带有密钥以及指令`accessKey`和`secretKey`的凭证创建密钥，它可以是在任何命名空间。[这里](#credentialsecret-示例)有一个示例 secret。如果运行 operator 的节点在 EC2 中，并且设置了 IAM 权限，允许它们访问 S3，则此指令是不必要的，如[本节所述.](#ec2节点访问s3的iam权限设置)
+1. **秘钥凭证** (可选)：如果你需要使用 AWS Access keys 和 Secret keys 访问 s3 桶，请使用带有密钥以及指令`accessKey`和`secretKey`的凭证创建密钥，它可以是在任何命名空间。[这里](#credentialsecret-示例)有一个示例 secret。如果运行 operator 的节点在 EC2 中，并且设置了 IAM 权限，允许它们访问 S3，则此指令是不必要的，如[本节所述](#ec2节点访问s3的iam权限设置)。秘钥凭证下拉菜单列出了所有命名空间的秘钥。
 1. **桶名称**: 存储备份文件的 S3 桶的名称。
 1. **区域** (可选)：S3 桶所在的 AWS [region](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/)。配置 MinIO 时不需要该字段。
 1. **文件夹** (可选)：S3 桶中存储备份文件的文件夹名称。
