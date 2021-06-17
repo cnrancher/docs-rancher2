@@ -18,18 +18,18 @@ keywords:
 
 - [证书轮换](#证书轮换)
 - [自动部署清单](#自动部署清单)
-- [使用 Docker 作为容器运行时](#使用docker作为容器运行时)
-- [配置 containerd](#配置containerd)
-- [Secrets 加密配置 (实验)](#secrets加密配置-实验)
-- [使用 RootlessKit 运行 K3s (实验)](#使用rootlesskit运行k3s-实验)
+- [使用 Docker 作为容器运行时](#使用-docker-作为容器运行时)
+- [配置 containerd](#配置-containerd)
+- [Secrets 加密配置 (实验)](#secrets-加密配置-实验)
+- [使用 Rootless 运行 K3s (实验)](#使用-rootless-运行-k3s-实验)
 - [节点标签和污点](#节点标签和污点)
-- [使用安装脚本启动 server 节点](#使用安装脚本启动server节点)
+- [使用安装脚本启动 server 节点](#使用安装脚本启动-server-节点)
 - [Alpine Linux 安装的额外准备工作](#alpine-linux-安装的额外准备工作)
-- [运行 K3d（Docker 中的 K3s）和 docker-compose](#运行k3d（docker中的k3s）和docker-compose)
+- [运行 K3d（Docker 中的 K3s）和 docker-compose](#运行-k3d（docker-中的-k3s）和-docker-compose)
 - [在 Raspbian Buster 上启用旧版的 iptables](#在-raspbian-buster-上启用旧版的-iptables)
 - [为 Raspbian Buster 启用 cgroup](#为-raspbian-buster-启用-cgroup)
 - [SELinux 支持](#selinux-支持)
-- [Red Hat 和 CentOS 的额外准备](#Red-Hat-和-CentOS-的额外准备)
+- [Red Hat 和 CentOS 的额外准备](#red-hat-和-centos-的额外准备)
 
 ## 证书轮换
 
@@ -181,17 +181,15 @@ K3s 将会在`/var/lib/rancher/k3s/agent/etc/containerd/config.toml`中为 conta
 
 一旦启用，任何创建的 secrets 都将用这个密钥加密。请注意，如果您禁用加密，那么任何加密后的 secrets 将无法读取，直到您再次启用加密。
 
-## 使用 RootlessKit 运行 K3s (实验)
+## 使用 Rootless 运行 K3s (实验)
 
 > **警告：** 这个功能是试验性的
 
-RootlessKit 是一种 Linux 原生的 "fake root(假根)" 实用程序，主要是为了[以非特权用户身份运行 Docker 和 Kubernetes，](https://github.com/rootless-containers/usernetes)从而保护主机上的 "real root（真根）" 不受潜在的容器破坏攻击。
+Rootless 模式允许以非特权用户的身份运行 k3s，这样可以保护主机上的真正的 root 免受潜在的容器攻击。
 
-最初的 rootless 支持已添加，但是围绕它存在一系列重大的可用性问题。
+请参阅 https://rootlesscontaine.rs/ 了解 Rootless 模式。
 
-我们为那些对 rootless 的感兴趣的人发布了初步的支持，希望一些人可以帮助改善可用性。 首先，确保你有一个正确的设置和对用户命名空间的支持。 请参考 RootlessKit 中的[需求部分](https://github.com/rootless-containers/rootlesskit#setup)获取说明。简而言之，最新的 Ubuntu 是你最好的选择。
-
-### RootlessKit 的已知问题
+### Rootless 模式的已知问题
 
 - **端口**
 
@@ -201,23 +199,38 @@ RootlessKit 是一种 Linux 原生的 "fake root(假根)" 实用程序，主要�
 
   目前，只有`LoadBalancer`服务会自动绑定。
 
-- **守护进程生命周期**
-
-  一旦你 kill 掉 K3s，然后启动一个新的 K3s 实例，它将创建一个新的网络命名空间，但它不会 kill 掉旧的 pods。 所以你留下的是一个相当糟糕的设置。 这是目前最主要的问题，如何处理网络命名空间的问题。
-
-  在 https://github.com/rootless-containers/rootlesskit/issues/65 中跟踪了该问题
-
 - **Cgroups**
 
-  不支持 Cgroups.
+  不支持 Cgroup v1，支持 V2。
 
-### 使用 Rootless 运行 Servers 和 Agents
+- **多节点集群**
 
-只需将`--rootless`标志添加到 server 或 agent 即可。因此，运行`k3s server --rootless`，然后查看`Wrote kubeconfig [SOME PATH]`的信息，了解你的 kubeconfig 文件在哪里。
+  多集群安装没有经过测试，也没有记录。
 
-关于设置 kubeconfig 文件的更多信息，请参考[关于集群访问的部分。](../cluster-access/_index)
+### 使用 Rootless 运行 Server 和 Agent
 
-要注意，如果你用`-o`把 kubeconfig 写到其他目录下，则可能无法使用，这是因为 K3s 实例运行在不同的挂载命名空间。
+- 启用 cgroup v2 授权，请参阅 https://rootlesscontaine.rs/getting-started/common/cgroup2/ 。这一步是可选的，但强烈建议启用 CPU 和内存资源的限制。
+
+- 从[`https://github.com/k3s-io/k3s/blob/<VERSION>/k3s-rootless.service`](https://github.com/k3s-io/k3s/blob/master/k3s-rootless.service)下载`k3s-rootless.service`。确保使用相同版本的`k3s-rootless.service`和`k3s`。
+
+- 将 `k3s-rootless.service` 安装到 `~/.config/systemd/user/k3s-rootless.service`。不支持将该文件安装为全系统服务（`/etc/systemd/...`）。根据 `k3s` 二进制文件的路径，你可能需要修改文件中的 `ExecStart=/usr/local/bin/k3s ...` 行。
+
+- 运行`systemctl --user daemon-reload`。
+
+- 运行`systemctl --user enable --now k3s-rootless`。
+
+- 运行`KUBECONFIG=~/.kube/k3s.yaml kubectl get pods -A`，并确保 pods 正在运行。
+
+> **注意：**不要尝试在终端上运行`k3s server --rootless`，因为它不能启用 cgroup v2 授权。
+> 如果你真的需要在终端上运行，请在 `systemd-run --user -p Delegate=yes --tty` 前加上一个 systemd 范围。
+>
+> 即：`systemd-run --user -p Delegate=yes --tty k3s server --rootless`。
+
+### 故障排除
+
+- 运行`systemctl --user status k3s-rootless` 来检查守护进程的状态。
+- 运行`journalctl --user -f -u k3s-rootless` 查看守护程序日志。
+- 参见 https://rootlesscontaine.rs/
 
 ## 节点标签和污点
 
