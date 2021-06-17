@@ -18,7 +18,7 @@ keywords:
 本页主要介绍首次设置 K3s 时可以使用的选项：
 
 - [使用脚本安装的选项](#使用脚本安装的选项)
-- [从二进制中安装的选项](#从二进制中安装k3s)
+- [从二进制中安装的选项](#从二进制安装的选项)
 - [K3s server 的注册选项](#k3s-server的注册选项)
 - [K3s agent 的注册选项](#k3s-agent的注册选项)
 - [配置文件](#配置文件)
@@ -77,7 +77,7 @@ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_M
 
 运行 agent 时还必须设置`K3S_TOKEN`。
 
-## 从二进制中安装 K3s
+## 从二进制安装的选项
 
 如上所述，安装脚本主要是配置 K3s 作为服务运行。如果你选择不使用脚本，你可以通过从我们的[发布页面](https://github.com/rancher/k3s/releases/latest)下载二进制文件，将其放在你的路径上，然后执行它来运行 K3s。K3s 二进制支持以下命令：
 
