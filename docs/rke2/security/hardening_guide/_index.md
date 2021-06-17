@@ -16,7 +16,6 @@ keywords:
   - CIS
 ---
 
-
 本文档为 RKE2 的生产安装提供了规范性的指导。它概述了应对信息安全中心（CIS）的 Kubernetes 基准控制所需的配置和控制。
 
 更多关于根据 CIS 官方基准评估加固集群的细节，请参考 CIS 基准 Rancher 自我评估指南[v1.5](/docs/rke2/security/cis_self_assessment15/_index)或[v1.6](/docs/rke2/security/cis_self_assessment16/_index)。
@@ -91,8 +90,10 @@ sysctl -p /usr/local/share/rke2/rke2-cis-sysctl.conf
 
 #### 创建 etcd 用户
 
+在某些 Linux 发行版上，`useradd`命令不会创建一个组。下面的 `-U` 标志是为了说明这个问题。这个标志告诉 `useradd` 创建一个与用户同名的组。
+
 ```bash
-useradd -r -c "etcd user" -s /sbin/nologin -M etcd
+useradd -r -c "etcd user" -s /sbin/nologin -M etcd -U
 ```
 
 ## Kubernetes 运行时要求
@@ -122,14 +123,6 @@ Kubernetes 的控制平面组件和关键的附加组件，如 CNI、DNS 和 Ing
 ## 已知问题
 
 以下是 RKE2 目前不能通过的 case。每一个问题都将被解释，并说明是否可以通过人工操作的方式通过，或者是否会在未来的版本中解决。
-
-### Control 3.2.1
-
-确保建立一个最低限度的审计政策 (Scored)
-
-Logging 是所有系统的一个重要检测控制，以检测潜在的未经授权的访问。
-
-RKE2 支持通过传递`--profile=cis-1.5`来配置审计日志。它启用了一个默认策略，不记录任何东西。要配置一个自定义的策略，你应该向 RKE2 server 进程传递`--audit-policy-file`参数。这个参数指定了审计日志策略配置的路径。关于日志策略的更多信息，你可以查看[官方文档]（https://kubernetes.io/docs/tasks/debug-application-cluster/audit/#audit-policy）。
 
 ### Control 5.1.5
 
