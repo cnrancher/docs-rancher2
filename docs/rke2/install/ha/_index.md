@@ -17,7 +17,6 @@ keywords:
   - HA
 ---
 
-
 本节介绍如何安装一个高可用性（HA）的 RKE2 集群。一个高可用的 RKE2 集群由以下部分组成：
 
 - 一个**固定的注册地址**，放在 server 节点的前面，允许其他节点在集群中注册。
@@ -57,7 +56,9 @@ Agent 通过固定的注册地址进行注册。但是，当 RKE2 启动 kubelet
 
 为了避免固定注册地址的证书错误，你应该在启动 server 时设置`tls-san`参数。这个选项在 server 节点的 TLS 证书中增加了一个额外的 hostname 或 IP 作为备用名称，如果你希望同时通过 IP 和 hostname 访问，可以将其指定为一个列表。
 
-如果你遵循本指南，则这是 RKE2 配置文件（位于`/etc/rancher/rke2/config.yaml`）的示例：
+如果您遵循本指南，这里是 RKE2 配置文件（位于`/etc/rancher/rke2/config.yaml`）的示例。
+
+**注意** RKE2 配置文件需要手动创建。你可以通过以特权用户身份运行 `touch /etc/rancher/rke2/config.yaml` 来完成。
 
 ```yaml
 token: my-shared-secret

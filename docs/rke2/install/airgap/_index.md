@@ -33,7 +33,7 @@ RKE2 可以通过两种不同的方式安装在一个离线环境中。你可以
    - 如果使用默认的 Canal CNI（`--cni=canal`），你可以使用上述的`rke2-image`旧存档，或者`rke2-images-core`和`rke2-images-canal`。
    - 如果使用替代的 Cilium CNI（`--cni=cilium`），你必须下载`rke2-images-core`和`rke2-images-cilium`。
    - 如果使用您自己的 CNI（`--cni=none`），您可以只下载`rke2-images-core`。
-   - 如果启用 vSphere CPI/CSI charts（`--cloud-provider-name=vsphere`），您还必须下载`rke2-images-vsphere`。
+   - 如果启用 vSphere CPI/CSI charts（`--cloud-provider-name=rancher-vsphere`），您还必须下载`rke2-images-vsphere`。
 2. 确保节点上存在`/var/lib/rancher/rke2/agent/images/`目录。
 3. 将压缩档案复制到节点上的`/var/lib/rancher/rke2/agent/images/`，确保保留文件扩展名。
 4. [安装 RKE2](#安装-rke2)

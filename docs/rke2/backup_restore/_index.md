@@ -49,7 +49,7 @@ rke2 server --cluster-reset
 
 当 RKE2 从备份中恢复时，旧的数据目录将被移到`/var/lib/rancher/rke2/server/db/etcd-old-%date%/`。然后，RKE2 将试图通过创建一个新的数据目录来恢复快照，然后用一个新的 RKE2 集群启动 etcd，并有一个 etcd 成员。
 
-要从备份中恢复集群，可以使用`--cluster-reset`选项运行 RKE2，并给出`--cluster-reset-restore-path`。
+要从备份中恢复集群，首先需要停止 RKE2 服务（如果它通过 systemd 启用）。停止后，使用`--cluster-reset` 选项运行 RKE2，同时加入`--cluster-reset-restore-path`：
 
 ```
 rke2 server \
@@ -59,7 +59,7 @@ rke2 server \
 
 **结果：**日志中的一条消息说，RKE2 可以在没有标志的情况下重新启动。再次启动 RKE2，应该能成功运行并从指定的快照中恢复。
 
-当 rke2 重置集群时，它会在`/var/lib/rancher/rke2/server/db/etc/reset-file`处创建一个文件。如果你想再次重置集群，你将需要删除这个文件。
+当 rke2 重置集群时，它会在 `/var/lib/rancher/rke2/server/db/reset-flag` 创建一个空文件。该文件留在原地无害，但必须删除才能执行后续重置或恢复。 rke2 正常启动时删除该文件。
 
 ## 选项
 
