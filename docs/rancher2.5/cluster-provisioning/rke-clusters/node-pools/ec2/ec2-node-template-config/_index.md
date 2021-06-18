@@ -40,7 +40,7 @@ title: EC2 节点模板配置
 
 配置将要创建的实例。确保为配置的 AMI 配置正确的**SSH 用户**。
 
-如果您需要传递**IAM 实例配置文件名**（而不是 ARN），例如，当您要使用[Kubernetes 云提供商](/docs/rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/_index)时，您将需要在策略中增加一个权限。请参阅[带 PassRole 的 IAM 策略示例](#example-iam-policy-with-passrole)以了解一个政策范例。有可能一个选定的区域不支持默认的实例类型。在这种情况下，你必须选择一个确实存在的实例类型，否则会发生错误，说明不支持所要求的配置。
+如果您需要传递**IAM 实例配置文件名**（而不是 ARN），例如，当您要使用[Kubernetes 云提供商](/docs/rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/_index)时，您将需要在策略中增加一个权限。请参阅[带 PassRole 的 IAM 策略示例](#example-iam-policy-with-passrole)以了解一个策略范例。有可能一个选定的区域不支持默认的实例类型。在这种情况下，你必须选择一个确实存在的实例类型，否则会发生错误，说明不支持所要求的配置。
 
 ### 引擎选项
 

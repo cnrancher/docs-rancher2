@@ -72,7 +72,7 @@ keywords:
 1. 可选的。使用**成员角色**来配置集群的用户授权。点击**添加成员**来添加可以访问集群的用户。使用**角色**下拉菜单，为每个用户设置权限。
 1. 可选的。将 Kubernetes 的[标签](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)或[注释](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/)添加到集群。
 1. 输入你的谷歌项目 ID 和你的谷歌云凭证。
-1. 填写表格的其余部分。如需帮助，请参考[GKE 集群配置参考](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/gke/config-reference/_index)。
+1. 填写表格的其余部分。如需帮助，请参考[GKE 集群配置参考](//docs/rancher2.5/cluster-admin/editing-clusters/gke-config-reference/_index)。
 1. 点击**创建**。
 
 **结果：**
@@ -83,11 +83,11 @@ keywords:
 
 ### 私有集群
 
-支持私有 GKE 集群。注意：这种高级设置在集群配置过程中可能需要更多步骤。详情请见[本节](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/gke/private-clusters/_index)。
+Rancher 支持部署私有 GKE 集群。注意：这种高级设置在集群配置过程中可能需要更多步骤。详情请见[本节](/docs/rancher2.5/cluster-admin/editing-clusters/gke-config-reference/_index)。
 
 ### 配置参考
 
-v2.5.8 版有更多配置选项。关于在 Rancher 中配置 GKE 集群的细节，请参见[本页](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/gke/config-reference/_index)。
+v2.5.8 版有更多配置选项。关于在 Rancher 中配置 GKE 集群的细节，请参见[本页](/docs/rancher2.5/cluster-admin/editing-clusters/gke-config-reference/_index)。
 
 ### Updating Kubernetes Version
 
@@ -98,7 +98,7 @@ v2.5.8 版有更多配置选项。关于在 Rancher 中配置 GKE 集群的细�
 
 ### 同步
 
-GKE 供应者可以在 Rancher 和供应商之间同步 GKE 集群的状态。关于这项工作的深入技术解释，请参见[同步](/docs/rancher2.5/cluster-provisioning/syncing/_index)。
+GKE 供应者可以在 Rancher 和供应商之间同步 GKE 集群的状态。关于这项工作的深入技术解释，请参见[同步](/docs/rancher2.5/cluster-admin/editing-clusters/syncing/_index)。
 
 ### 配置刷新间隔
 

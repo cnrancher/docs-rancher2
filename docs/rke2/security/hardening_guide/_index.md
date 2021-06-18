@@ -16,7 +16,6 @@ keywords:
   - CIS
 ---
 
-
 本文档为 RKE2 的生产安装提供了规范性的指导。它概述了应对信息安全中心（CIS）的 Kubernetes 基准控制所需的配置和控制。
 
 更多关于根据 CIS 官方基准评估加固集群的细节，请参考 CIS 基准 Rancher 自我评估指南[v1.5](/docs/rke2/security/cis_self_assessment15/_index)或[v1.6](/docs/rke2/security/cis_self_assessment16/_index)。
@@ -109,9 +108,9 @@ RKE2 在运行时总是打开 PodSecurityPolicy 接纳控制器。然而，当�
 Kubernetes 的控制平面组件和关键的附加组件，如 CNI、DNS 和 Ingress，是作为`kube-system`命名空间中的 pod 运行。因此，这个命名空间将有一个限制性较小的策略，以便这些组件能够正常运行。
 :::
 
-### 网络政策
+### 网络策略
 
-当使用 cis-1.5 配置文件运行时，RKE2 将把网络政策放在适当的位置，以通过 Kubernetes 内置命名空间的 CIS 基准测试。这些命名空间是。`kube-system`、`kube-public`、`kube-node-lease`和`default`。
+当使用 cis-1.5 配置文件运行时，RKE2 将把网络策略放在适当的位置，以通过 Kubernetes 内置命名空间的 CIS 基准测试。这些命名空间是。`kube-system`、`kube-public`、`kube-node-lease`和`default`。
 
 使用的 NetworkPolicy 将只允许同一命名空间内的 pod 互相访问。值得注意的例外是它允许解析 DNS 请求。。
 
@@ -125,7 +124,7 @@ Kubernetes 的控制平面组件和关键的附加组件，如 CNI、DNS 和 Ing
 
 ### Control 3.2.1
 
-确保建立一个最低限度的审计政策 (Scored)
+确保建立一个最低限度的审计策略 (Scored)
 
 Logging 是所有系统的一个重要检测控制，以检测潜在的未经授权的访问。
 

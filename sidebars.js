@@ -1401,8 +1401,18 @@ module.exports = {
             },
             "rancher2.5/cluster-admin/upgrading-kubernetes/_index",
             "rancher2.5/cluster-admin/pod-security-policy/_index",
-            "rancher2.5/cluster-admin/editing-clusters/_index",
-            "rancher2.5/cluster-admin/nodes/_index",
+
+            {
+                type: "category",
+                label: "编辑集群",
+                items: [
+                    "rancher2.5/cluster-admin/editing-clusters/_index",
+                    "rancher2.5/cluster-admin/editing-clusters/eks-config-reference/_index",
+                    "rancher2.5/cluster-admin/editing-clusters/gke-config-reference/_index",
+                    "rancher2.5/cluster-admin/editing-clusters/rke-config-reference/_index",
+                    "rancher2.5/cluster-admin/editing-clusters/syncing/_index",
+                ],
+            },
             {
                 type: "category",
                 label: "存储卷和存储类",
@@ -2073,9 +2083,7 @@ module.exports = {
             "rke2/security/policies/_index",
             "rke2/security/selinux/_index",
         ],
-        架构: [
-            "rke2/architecture/_index",
-        ],
+        架构: ["rke2/architecture/_index"],
         访问集群: ["rke2/cluster_access/_index"],
         Etcd备份和恢复: ["rke2/backup_restore/_index"],
         网络: ["rke2/networking/_index"],
