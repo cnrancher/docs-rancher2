@@ -54,7 +54,7 @@ title: RKE集群配置参考
 
 ### 云供应商云供应商
 
-如果你使用云提供商来托管由 RKE 启动的集群节点，请启用[此选项](/docs/rancher2.5/cluster-provisioning/rk-clusters/options/cloud-providers/_index)，以便你能使用云提供商的本地功能。如果你想为你的云托管集群存储持久性数据，这个选项是必需的。
+如果你使用云提供商来托管由 RKE 启动的集群节点，请启用[此选项](/docs/rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/_index)，以便你能使用云提供商的本地功能。如果你想为你的云托管集群存储持久性数据，这个选项是必需的。
 
 ## 用 YAML 编辑群组
 
@@ -65,9 +65,9 @@ title: RKE集群配置参考
 
 ![image](/img/rancher/cluster-options-yaml.png)
 
-关于 RKE 配置文件语法的例子，见[RKE 文档]({{<baseurl>}}/rke/latest/en/example-yamls/)。
+关于 RKE 配置文件语法的例子，见[RKE 文档](/docs/rke/example-yamls/_index)。
 
-关于 YAML 中 RKE Kubernetes 集群的可配置选项的完整参考，见[RKE 文档]({{<baseurl>}}/rke/latest/en/config-options/)
+关于 YAML 中 RKE Kubernetes 集群的可配置选项的完整参考，见[RKE 文档](/docs/rke/config-options/_index)
 
 ## 更新 ingress-nginx
 

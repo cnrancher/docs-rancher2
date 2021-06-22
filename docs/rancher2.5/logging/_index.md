@@ -77,13 +77,13 @@ Rancher 日志记录有两个角色，`logging-admin`和`logging-view`，详情�
 
 ### 配置污点和容忍度
 
-关于如何在日志应用程序中使用污点和容忍度的信息，请参见[本节](/docs/rancher2.5/logging/taints-tolerations_index)。
+关于如何在日志应用程序中使用污点和容忍度的信息，请参见[本节](/docs/rancher2.5/logging/taints-tolerations/_index)。
 
 ### 在 SELinux 系统中实现日志功能
 
 从 v2.5.8 开始可用
 
-关于为支持 SELinux 的节点启用日志应用程序的信息，请参见[本节](/docs/rancher2.5/logging/helm-chart-options_index)。
+关于为支持 SELinux 的节点启用日志应用程序的信息，请参见[本节](/docs/rancher2.5/logging/helm-chart-options/_index)。
 
 ### 配置其他日志资源
 
