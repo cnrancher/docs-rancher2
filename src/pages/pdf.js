@@ -95,7 +95,6 @@ function GetPDF() {
                 setSubmitting(false);
             });
     }
-<<<<<<< HEAD
     setSubmitting(true);
     axios
       .post(SUBMIT_URL, {
@@ -124,9 +123,6 @@ function GetPDF() {
         setSubmitting(false);
       });
   }
-=======
->>>>>>> d71e4a93 (snyc with english docs)
-
     return (
         <Layout title="获取 PDF 文档">
             <div
