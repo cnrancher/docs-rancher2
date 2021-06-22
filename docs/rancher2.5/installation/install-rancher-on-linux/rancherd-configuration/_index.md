@@ -87,7 +87,7 @@ spec:
 | `rancherImage`           | "rancher/rancher"                                     | **_string_** - Rancher 镜像源                                                                                           |
 | `rancherImageTag`        | same as chart version                                 | **_string_** - rancher/ranche 镜像标签                                                                                  |
 | `rancherImagePullPolicy` | "IfNotPresent"                                        | **_string_** - 镜像拉取策略- _"Always", "Never", "IfNotPresent"_                                                        |
-| `systemDefaultRegistry`  | ""                                                    | **_string_** - 用于所有系统 Docker 镜像的私有注册表，例如，[http://registry.example.com/] _从 v2.3.0 开始提供_。        |
+| `systemDefaultRegistry`  | ""                                                    | **_string_** - 用于所有系统 Docker 镜像的私有镜像仓库，例如，[http://registry.example.com/] _从 v2.3.0 开始提供_。      |
 | `useBundledSystemChart`  | false                                                 | **_bool_** - 选择使用 Rancher 服务器打包的系统图。此选项用于离线安装。_从 v2.3.0 开始提供_。                            |
 | `publicCA`               | false                                                 | **_bool_** - 如果你的证书是由公共 CA 签署的，则设置为 true。                                                            |
 

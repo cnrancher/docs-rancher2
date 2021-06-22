@@ -1598,6 +1598,19 @@ module.exports = {
         ],
         日志: [
             "rancher2.5/logging/_index",
+            "rancher2.5/logging/architecture/_index",
+            {
+                type: "category",
+                label: "配置自定义资源",
+                items: [
+                    "rancher2.5/logging/custom-resource-config/_index",
+                    "rancher2.5/logging/custom-resource-config/flows/_index",
+                    "rancher2.5/logging/custom-resource-config/outputs/_index",
+                ],
+            },
+            "rancher2.5/logging/helm-chart-options/_index",
+            "rancher2.5/logging/rbac/_index",
+            "rancher2.5/logging/taints-tolerations/_index",
             "rancher2.5/logging/migrating/_index",
         ],
         OPAGatekeeper: ["rancher2.5/opa-gatekeeper/_index"],

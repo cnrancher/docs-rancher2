@@ -145,9 +145,11 @@ const metadata = {
             安全: "提供了强化 RKE2 生产安装的说明性指南",
             架构: "下一代Kubernetes发行版的解析",
             访问集群: "介绍如何访问创建的RKE2集群",
-            Etcd备份和恢复: "为您提供创建备份的方式和使用备份恢复集群的操作指导",
+            Etcd备份和恢复:
+                "为您提供创建备份的方式和使用备份恢复集群的操作指导",
             网络: "介绍 CoreDNS 和 Nginx-Ingress 控制器如何在 RKE2 中工作",
-            Helm集成: "介绍使用 rancher/helm-release CRD 更容易部署传统的 Kubernetes 资源清单和 Helm Charts",
+            Helm集成:
+                "介绍使用 rancher/helm-release CRD 更容易部署传统的 Kubernetes 资源清单和 Helm Charts",
             高级选项和配置: "介绍了运行和管理 RKE2 的不同方式的高级信息",
             已知问题和限制: "介绍了rke2 的当前已知问题和限制",
         },
@@ -605,6 +607,12 @@ const metadata = {
             "rancher2.5/istio/release-notes/_index": "Istio版本说明",
             //logging
             "rancher2.5/logging/_index": "Rancher v2.5 的日志功能",
+            "rancher2.5/logging/architecture/_index": "架构介绍",
+            "rancher2.5/logging/custom-resource-config/_index":
+                "配置自定义资源",
+            "rancher2.5/logging/helm-chart-options/_index": "Helm Chart 选项",
+            "rancher2.5/logging/rbac/_index": "RBAC策略",
+            "rancher2.5/logging/taints-tolerations/_index": "污点和容忍度",
             "rancher2.5/logging/migrating/_index": "迁移至Rancher v2.5日志",
             //opa gate keeper
             "rancher2.5/opa-gatekeeper/_index": "OPA Gatekeeper",
@@ -757,7 +765,7 @@ const metadata = {
             "k3s/installation/ha/_index": "使用外部数据库实现高可用",
             "k3s/installation/ha-embedded/_index": "嵌入式DB的高可用",
             "k3s/installation/datastore/_index": "集群数据存储选项",
-            "k3s/installation/private-registry/_index": "私有注册表配置",
+            "k3s/installation/private-registry/_index": "私有镜像仓库配置",
             "k3s/installation/airgap/_index": "离线安装",
             "k3s/installation/kube-dashboard/_index": "Kubernetes 仪表盘",
             "k3s/installation/uninstall/_index": "卸载 K3s",
@@ -934,15 +942,18 @@ const metadata = {
             "rke2/install/install_options/agent_config/_index": "Agent 配置",
             "rke2/install/methods/_index": "安装方式",
             "rke2/install/network_options/_index": "网络选项",
-            "rke2/install/containerd_registry_configuration/_index": "Containerd 注册表配置",
+            "rke2/install/containerd_registry_configuration/_index":
+                "Containerd 镜像仓库配置",
             "rke2/install/airgap/_index": "离线安装",
             "rke2/install/uninstall/_index": "卸载",
             "rke2/upgrade/upgrade/_index": "升级RKE2集群",
             "rke2/upgrade/basic_upgrade/_index": "基础升级",
             "rke2/upgrade/automated_upgrade/_index": "自动升级",
             "rke2/security/hardening_guide/_index": "CIS 加固指南",
-            "rke2/security/cis_self_assessment15/_index": "CIS 自我评估指南 v1.5",
-            "rke2/security/cis_self_assessment16/_index": "CIS 自我评估指南 v1.6",
+            "rke2/security/cis_self_assessment15/_index":
+                "CIS 自我评估指南 v1.5",
+            "rke2/security/cis_self_assessment16/_index":
+                "CIS 自我评估指南 v1.6",
             "rke2/security/fips_support/_index": "FIPS 140-2 启用",
             "rke2/security/policies/_index": "默认策略配置",
             "rke2/security/selinux/_index": "SELinux",

@@ -1,6 +1,6 @@
 ---
 title: 离线安装
-description: RKE2 可以通过两种不同的方式安装在一个离线环境中。你可以通过`rke2-airgap-images` tarball release artifacts 进行部署，也可以通过使用私有注册表。
+description: RKE2 可以通过两种不同的方式安装在一个离线环境中。你可以通过`rke2-airgap-images` tarball release artifacts 进行部署，也可以通过使用私有镜像仓库。
 keywords:
   - rancher
   - rancher中文
@@ -20,7 +20,7 @@ keywords:
 如果你的节点安装并启用了 NetworkManager，[确保它被配置为忽略 CNI 管理的接口。](/docs/rke2/known_issues/_index#networkmanager)
 :::
 
-RKE2 可以通过两种不同的方式安装在一个离线环境中。你可以通过`rke2-airgap-images` tarball release artifacts 进行部署，也可以通过使用私有注册表。
+RKE2 可以通过两种不同的方式安装在一个离线环境中。你可以通过`rke2-airgap-images` tarball release artifacts 进行部署，也可以通过使用私有镜像仓库。
 
 步骤中提到的所有文件都可以在[此处](https://github.com/rancher/rke2/releases)从所需发布的 rke2 版本的资产中获取。
 
@@ -38,23 +38,23 @@ RKE2 可以通过两种不同的方式安装在一个离线环境中。你可以
 3. 将压缩档案复制到节点上的`/var/lib/rancher/rke2/agent/images/`，确保保留文件扩展名。
 4. [安装 RKE2](#安装-rke2)
 
-## 私有注册表方式
+## 私有镜像仓库方式
 
-从 RKE2 v1.20 开始，私有注册表支持来自[containerd 注册表配置](/docs/rke2/install/containerd_registry_configuration/_index)中的所有设置。这包括 endpoint 覆盖和传输协议（HTTP/HTTPS）、认证、证书验证等。
+从 RKE2 v1.20 开始，私有镜像仓库支持来自[containerd 镜像仓库配置](/docs/rke2/install/containerd_registry_configuration/_index)中的所有设置。这包括 endpoint 覆盖和传输协议（HTTP/HTTPS）、认证、证书验证等。
 
-在 RKE2 v1.20 之前，私有注册表必须使用 TLS，并使用由主机 CA 捆绑信任的 cert。如果 registry 使用的是自签名的证书，你可以用`update-ca-certificates`将该证书添加到主机 CA 捆绑中。registry 还必须允许匿名（未认证）访问。
+在 RKE2 v1.20 之前，私有镜像仓库必须使用 TLS，并使用由主机 CA 捆绑信任的 cert。如果 registry 使用的是自签名的证书，你可以用`update-ca-certificates`将该证书添加到主机 CA 捆绑中。registry 还必须允许匿名（未认证）访问。
 
-1. 将所有需要的系统镜像添加到你的私有注册表。镜像列表可以从上面提到的每个 tarball 对应的`.txt`文件中获得，或者你可以`docker load` 离线镜像 tarballs，然后标记并推送加载的镜像。
+1. 将所有需要的系统镜像添加到你的私有镜像仓库。镜像列表可以从上面提到的每个 tarball 对应的`.txt`文件中获得，或者你可以`docker load` 离线镜像 tarballs，然后标记并推送加载的镜像。
 2. 如果在 registry 上使用私有或自签名的证书，请将 registry 的 CA 证书添加到 containerd registry 配置中，如果是 v1.20 之前的版本，则添加操作系统的可信证书。
 3. 使用`system-default-registry`参数[安装 RKE2](#安装-rke2)，或使用[containerd registry 配置](/docs/rke2/install/containerd_registry_configuration/_index)将你的 registry 作为 docker.io 的一个镜像。
 
 ## 安装 RKE2
 
-这些步骤只能在完成[Tarball 方式](#tarball-方式)或[私有注册表方式](#私有注册表方式)中的一项后执行。
+这些步骤只能在完成[Tarball 方式](#tarball-方式)或[私有镜像仓库方式](#私有镜像仓库方式)中的一项后执行。
 
 1. 获得 rke2 的二进制文件`rke2.linux-amd64`。
 2. 确保二进制文件被命名为 `rke2`，并将其放在 `/usr/local/bin` 中。确保它是可执行的。
-3. 用所需的参数运行二进制文件。例如，如果使用私有注册表方式，你的配置文件将有以下内容：
+3. 用所需的参数运行二进制文件。例如，如果使用私有镜像仓库方式，你的配置文件将有以下内容：
 
 ```yaml
 system-default-registry: "registry.example.com:5000"

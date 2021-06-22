@@ -128,7 +128,7 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
    curl -L -o cert-manager/cert-manager-crd.yaml https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/deploy/manifests/00-crds.yaml
    ```
 
-1. 渲染 Rancher 模板，声明您选择的选项。使用下面的参考表替换每个占位符。需要将 Rancher 配置为在由 Rancher 启动 Kubernetes 集群或 Rancher 工具时，使用私有注册表。
+1. 渲染 Rancher 模板，声明您选择的选项。使用下面的参考表替换每个占位符。需要将 Rancher 配置为在由 Rancher 启动 Kubernetes 集群或 Rancher 工具时，使用私有镜像仓库。
 
 | 占位符                           | 描述                 |
 | :------------------------------- | :------------------- |

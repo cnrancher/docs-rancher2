@@ -227,7 +227,7 @@ spec:
 
 | 参数              | 描述                              | 类型                                                                        | 是否必填 |
 | :---------------- | :-------------------------------- | :-------------------------------------------------------------------------- | :------- |
-| register          | 指定要访问的注册表                | [ModbusDeviceRegisterType](#modbusdeviceregistertype)                       | 是       |
+| register          | 指定要访问的镜像仓库              | [ModbusDeviceRegisterType](#modbusdeviceregistertype)                       | 是       |
 | offset            | 指定读/写数据的寄存器的起始偏移量 | int                                                                         | 是       |
 | quantity          | 指定寄存器的数量                  | int                                                                         | 是       |
 | endianness        | 指定值的字节顺序                  | [ModbusDevicePropertyValueEndianness](#ModbusDevicePropertyValueEndianness) | 否       |

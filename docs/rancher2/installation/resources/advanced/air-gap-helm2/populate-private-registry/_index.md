@@ -95,7 +95,7 @@ keywords:
    ```
 
    :::tip 提示
-   国内用户，可以从 http://mirror.rancher.cn --> rancher --> [rancher 版本] 下载 rancher-save-images.sh，该脚本支持通过参数 `--from-aliyun true` 来指定从阿里云镜像仓库拉去rancher镜像（从rancher/rancher release下载的rancher-save-images.sh不支持该参数），例如：
+   国内用户，可以从 http://mirror.rancher.cn --> rancher --> [rancher 版本] 下载 rancher-save-images.sh，该脚本支持通过参数 `--from-aliyun true` 来指定从阿里云镜像仓库拉去 rancher 镜像（从 rancher/rancher release 下载的 rancher-save-images.sh 不支持该参数），例如：
 
    ```
    ./rancher-save-images.sh --image-list ./rancher-images.txt --from-aliyun true
@@ -177,7 +177,7 @@ _v2.3.0 及以后版本可用_
 
 #### C. 准备 Docker 守护进程
 
-将您的私有镜像库地址追加到 Docker 守护进程配置文件(`C:\ProgramData\Docker\config\daemon.json`)的`allow-nondistributable-artifacts`配置字段中。由于 Windows 镜像的基础镜像是由`mcr.microsoft.com` Registry 维护的，这一步是必须的，因为 Docker Hub 中缺少 Microsoft 注册表层，需要将其拉入私有镜像库。
+将您的私有镜像库地址追加到 Docker 守护进程配置文件(`C:\ProgramData\Docker\config\daemon.json`)的`allow-nondistributable-artifacts`配置字段中。由于 Windows 镜像的基础镜像是由`mcr.microsoft.com` Registry 维护的，这一步是必须的，因为 Docker Hub 中缺少 Microsoft 镜像仓库层，需要将其拉入私有镜像库。
 
 ```
 {
@@ -272,7 +272,7 @@ Linux 镜像需要从 Linux 主机上收集和推送，但是必须先将 Window
    ```
 
    :::tip 提示
-   国内用户，可以从 http://mirror.rancher.cn --> rancher --> [rancher 版本] 下载 rancher-save-images.sh，该脚本支持通过参数 `--from-aliyun true` 来指定从阿里云镜像仓库拉去rancher镜像（从rancher/rancher release下载的rancher-save-images.sh不支持该参数），例如：
+   国内用户，可以从 http://mirror.rancher.cn --> rancher --> [rancher 版本] 下载 rancher-save-images.sh，该脚本支持通过参数 `--from-aliyun true` 来指定从阿里云镜像仓库拉去 rancher 镜像（从 rancher/rancher release 下载的 rancher-save-images.sh 不支持该参数），例如：
 
    ```
    ./rancher-save-images.sh --image-list ./rancher-images.txt --from-aliyun true
@@ -282,7 +282,7 @@ Linux 镜像需要从 Linux 主机上收集和推送，但是必须先将 Window
    ```
 
    :::
-   
+
    **结果：** Docker 会开始拉取用于离线安装所需的镜像。这个过程会花费几分钟时间。完成时，您的当前目录会输出名为 rancher-images.tar.gz 的压缩包。请确认文件存在这个目录里。
 
 #### D. 推送镜像到私有镜像库

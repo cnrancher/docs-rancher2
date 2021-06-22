@@ -45,7 +45,7 @@ title: EC2 Node Template Configuration
 
 ### 引擎选项
 
-在节点模板的**引擎选项**部分，您可以配置 Docker 守护进程。您可能希望指定 docker 版本或 Docker 注册表镜像。
+在节点模板的**引擎选项**部分，您可以配置 Docker 守护进程。您可能希望指定 docker 版本或 Docker 镜像仓库镜像。
 
 ## v2.2.0 之前的版本
 
@@ -93,5 +93,5 @@ title: EC2 Node Template Configuration
 
 - **标签：**关于标签的信息，请参考[Docker 对象标签文档](https://docs.docker.com/config/labels-custom-metadata/)。
 - **Docker Engine Install URL：** 确定将在实例上安装的 Docker 版本。
-- **注册表镜像**：Docker 守护进程要使用的 Docker 注册表镜像。
+- **镜像仓库镜像**：Docker 守护进程要使用的 Docker 镜像仓库镜像。
 - **其他高级选项：**请参考[Docker 守护进程选项参考](https://docs.docker.com/engine/reference/commandline/dockerd/)。

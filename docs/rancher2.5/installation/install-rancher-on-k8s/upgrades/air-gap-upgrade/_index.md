@@ -17,7 +17,7 @@ keywords:
 
 ## Rancher Helm 模板选项
 
-使用安装 Rancher 时选择的相同选项来渲染 Rancher 模板。使用下面的参考表来替换每个占位符。Rancher 需要配置为使用私有注册表，以便为任何 Rancher 启动的 Kubernetes 集群或 Rancher 工具提供服务。
+使用安装 Rancher 时选择的相同选项来渲染 Rancher 模板。使用下面的参考表来替换每个占位符。Rancher 需要配置为使用私有镜像仓库，以便为任何 Rancher 启动的 Kubernetes 集群或 Rancher 工具提供服务。
 
 根据您在安装过程中做出的选择，完成以下程序之一。
 
