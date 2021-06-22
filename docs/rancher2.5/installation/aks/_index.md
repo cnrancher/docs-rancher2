@@ -112,6 +112,6 @@ ingress-nginx-controller   LoadBalancer   10.0.116.18    40.31.180.83   80:31229
 
 ## 8. 安装 Rancher Helm Chart
 
-接下来，按照[本页](/docs/rancher2.5/docs/installation/install-rancher-on-k8s/_index)上的说明，安装 Rancher Helm chart，在任何 Kubernetes 发行版上安装 Rancher 都是一样的。
+接下来，按照[本页](/docs/rancher2.5/installation/install-rancher-on-k8s/_index)上的说明，安装 Rancher Helm chart，在任何 Kubernetes 发行版上安装 Rancher 都是一样的。
 
 当你安装 Rancher 时，使用上一步的 DNS 名称作为 Rancher Server 的 URL。它可以作为一个 Helm 选项传入。例如，如果 DNS 名称是`rancher.my.org`，你可以用`--set hostname=rancher.my.org`选项运行 Helm 安装命令。
