@@ -40,30 +40,34 @@ function GetPDF() {
         return () => clearInterval(interval);
     }, [sent]);
 
-  function getCode() {
-    setSending(true);
-    axios
-      .post(GENERATE_CODE_URL, {
-        phone
-      }, {
-        params: {
-          kind: 'pdf'
-        }
-      })
-      .then(function (response) {
-        // handle success
-        setInvalidPhone(false);
-        setSent(true);
-      })
-      .catch(function (error) {
-        // handle error
-        setInvalidPhone(true);
-        console.log(error);
-      })
-      .then(function () {
-        setSending(false);
-      });
-  }
+    function getCode() {
+        setSending(true);
+        axios
+            .post(
+                GENERATE_CODE_URL,
+                {
+                    phone,
+                },
+                {
+                    params: {
+                        kind: "pdf",
+                    },
+                }
+            )
+            .then(function (response) {
+                // handle success
+                setInvalidPhone(false);
+                setSent(true);
+            })
+            .catch(function (error) {
+                // handle error
+                setInvalidPhone(true);
+                console.log(error);
+            })
+            .then(function () {
+                setSending(false);
+            });
+    }
 
     function submit(event) {
         event.preventDefault();
@@ -73,14 +77,22 @@ function GetPDF() {
         }
         setSubmitting(true);
         axios
-            .post(SUBMIT_URL, {
-                name,
-                company,
-                position,
-                phone,
-                email,
-                code,
-            })
+            .post(
+                SUBMIT_URL,
+                {
+                    name,
+                    company,
+                    position,
+                    phone,
+                    email,
+                    code,
+                },
+                {
+                    params: {
+                        kind: "pdf",
+                    },
+                }
+            )
             .then(function (response) {
                 // handle success
                 setSubmitted(true);
@@ -95,34 +107,7 @@ function GetPDF() {
                 setSubmitting(false);
             });
     }
-    setSubmitting(true);
-    axios
-      .post(SUBMIT_URL, {
-        name,
-        company,
-        position,
-        phone,
-        email,
-        code
-      }, {
-        params: {
-          kind: 'pdf'
-        }
-      })
-      .then(function (response) {
-        // handle success
-        setSubmitted(true);
-        setInvalidCode(false);
-      })
-      .catch(function (error) {
-        // handle error
-        setInvalidCode(true);
-        console.log(error);
-      })
-      .then(function () {
-        setSubmitting(false);
-      });
-  }
+
     return (
         <Layout title="获取 PDF 文档">
             <div
@@ -263,7 +248,7 @@ function GetPDF() {
                                         href="https://rancher.cn/privacy/"
                                         target="_blank"
                                     >
-                                        隐私策略
+                                        隐私政策
                                     </a>
                                     ，如果您有任何问题，请联系我们。
                                 </p>
