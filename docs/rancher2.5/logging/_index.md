@@ -73,7 +73,7 @@ Rancher 日志记录有两个角色，`logging-admin`和`logging-view`，详情�
 
 ### 自定义 Docker 根目录
 
-关于使用自定义 Docker 根目录的细节，请参见[本节](/docs/rancher2.5/logging/helm-chart-options/index)。
+关于使用自定义 Docker 根目录的细节，请参见[本节](/docs/rancher2.5/logging/helm-chart-options/_index)。
 
 ### 配置污点和容忍度
 
