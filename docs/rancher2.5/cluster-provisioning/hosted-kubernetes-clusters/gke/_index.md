@@ -72,7 +72,7 @@ keywords:
 1. 可选的。使用**成员角色**来配置集群的用户授权。点击**添加成员**来添加可以访问集群的用户。使用**角色**下拉菜单，为每个用户设置权限。
 1. 可选的。将 Kubernetes 的[标签](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)或[注释](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/)添加到集群。
 1. 输入你的谷歌项目 ID 和你的谷歌云凭证。
-1. 填写表格的其余部分。如需帮助，请参考[GKE 集群配置参考](//docs/rancher2.5/cluster-admin/editing-clusters/gke-config-reference/_index)。
+1. 填写表格的其余部分。如需帮助，请参考[GKE 集群配置参考](/docs/rancher2.5/cluster-admin/editing-clusters/gke-config-reference/_index)。
 1. 点击**创建**。
 
 **结果：**
