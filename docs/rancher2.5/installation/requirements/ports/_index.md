@@ -253,7 +253,7 @@ import PortsImported from '@theme/PortsImported';
    sudo yast2
    ```
 
-1. 导航到**安全和用户** > **防火墙** > **区域：公共** > **端口**。要在界面内导航，请按照指示[这里]（https://doc.opensuse.org/documentation/leap/reference/html/book.opensuse.reference/cha-yast-text.html#sec-yast-cli-navigate）。
+1. 导航到**安全和用户** > **防火墙** > **区域：公共** > **端口**。要在界面内导航，请按照指示[这里]（https://doc.opensuse.org/）。
 1. 要打开所需的端口，将它们输入**TCP 端口**和**UDP 端口**字段。在这个例子中，9796 和 10250 端口也被打开，用于监控。由此产生的字段应类似于以下内容。
 
    ```yaml
