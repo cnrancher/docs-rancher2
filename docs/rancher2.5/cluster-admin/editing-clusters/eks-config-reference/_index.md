@@ -26,7 +26,7 @@ title: EKS集群配置参考
 
 ### API Server Endpoint Access
 
-配置公共/私人 API 访问是一个高级用例。详情请参考 EKS 集群端点访问控制[文档]（https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html）。
+配置公共/私人 API 访问是一个高级用例。详情请参考 EKS 集群端点访问控制[文档](https://docs.aws.amazon.com/zh_cn/eks/latest/userguide/cluster-endpoint.html)。
 
 ### Private-only API Endpoints
 
@@ -48,7 +48,7 @@ title: EKS集群配置参考
 - Rancher 的 IP 必须是允许的 CIDR 块的一部分
 - 应启用私有访问，Rancher 必须与集群共享一个子网，并拥有对集群的网络访问权，这可以用安全组来进行配置
 
-关于集群端点的公共和私人访问的更多信息，请参考[Amazon EKS 文档](https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html)。
+关于集群端点的公共和私人访问的更多信息，请参考[Amazon EKS 文档](https://docs.aws.amazon.com/zh_cn/eks/latest/userguide/cluster-endpoint.html)。
 
 ### Subnet
 
@@ -180,7 +180,7 @@ Spot 实例现在[由 EKS 支持](https://docs.aws.amazon.com/eks/latest/usergui
 
 #### API Server 端点权限
 
-配置公共/私人 API 访问是一个高级用例。详情请参考 [EKS 集群端点访问控制文档](https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html)。
+配置公共/私人 API 访问是一个高级用例。详情请参考 [EKS 集群端点访问控制文档](https://docs.aws.amazon.com/zh_cn/eks/latest/userguide/cluster-endpoint.html)。
 
 ### 仅限私人使用的 API 端点
 
@@ -202,7 +202,7 @@ Spot 实例现在[由 EKS 支持](https://docs.aws.amazon.com/eks/latest/usergui
 - Rancher 的 IP 必须是允许的 CIDR 块的一部分
 - 应启用私有访问，Rancher 必须与集群共享一个子网，并拥有对集群的网络访问权，这可以用安全组来进行配置
 
-关于集群端点的公共和私人访问的更多信息，请参考[Amazon EKS 文档。](https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html)
+关于集群端点的公共和私人访问的更多信息，请参考[Amazon EKS 文档](https://docs.aws.amazon.com/zh_cn/eks/latest/userguide/cluster-endpoint.html)。
 
 ### 子网
 
