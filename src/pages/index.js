@@ -56,6 +56,9 @@ function Home() {
     const title = "Rancher 中文文档";
     return (
         <Layout title={metaTitle} description={description} keywords={keywords}>
+            <div className="image-url">
+                <a href="https://www.huodongxing.com/event/9599250103000?qd=wendang" target="_blank"><img src="/img/cloud-native-conference.png" width="960" /></a>
+            </div>
             <header className={classnames("hero", styles.heroBanner)}>
                 <div className="container">
                     <img
