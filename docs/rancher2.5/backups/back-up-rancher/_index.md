@@ -18,6 +18,8 @@ keywords:
 
 在本节中，你将学习如何备份运行在任何 Kubernetes 集群上的 Rancher。要备份通过 Docker 安装的 Rancher，请参考[单节点备份](/docs/rancher2.5/backups/docker-installs/docker-backups/_index)的说明。
 
+> 将备份恢复到新的 Rancher 设置时，新设置的版本应与进行备份的版本相同。
+
 ## 先决条件
 
 Rancher 版本必须是 v2.5.0 及以上。

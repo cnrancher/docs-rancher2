@@ -29,39 +29,54 @@ keywords:
 
 要测试 Overlay 网络，您可以根据以下 yaml 文件启动一个`DaemonSet`。这将在每个主机上运行一个`busybox`容器，我们将在所有主机上的容器之间运行一个`ping`测试。
 
-1. 将以下文件另存为`ds-overlaytest.yml`
+1. 将以下文件另存为`overlaytest.yml`
 
-   ```
-   apiVersion: apps/v1
-   kind: DaemonSet
-   metadata:
-     name: overlaytest
-   spec:
-     selector:
-         matchLabels:
-           name: overlaytest
-     template:
-       metadata:
-         labels:
-           name: overlaytest
-       spec:
-         tolerations:
-         - operator: Exists
-         containers:
-         - image: busybox:1.28
-           imagePullPolicy: Always
-           name: busybox
-           command: ["sh", "-c", "tail -f /dev/null"]
-           terminationMessagePath: /dev/termination-log
-   ```
+```
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: overlaytest
+spec:
+  selector:
+      matchLabels:
+        name: overlaytest
+  template:
+    metadata:
+      labels:
+        name: overlaytest
+    spec:
+      tolerations:
+      - operator: Exists
+      containers:
+      - image: rancherlabs/swiss-army-knife
+        imagePullPolicy: Always
+        name: overlaytest
+        command: ["sh", "-c", "tail -f /dev/null"]
+        terminationMessagePath: /dev/termination-log
 
-2. 使用`kubectl`启动它`kubectl create -f ds-overlaytest.yml`。
+```
+
+2. 使用`kubectl`启动它`kubectl create -f overlaytest.yml`。
 3. 等待，直到 `kubectl rollout status ds/overlaytest -w` 返回： `daemon set "overlaytest" successfully rolled out`。
 4. 运行以下命令，以使每个主机上的每个容器相互 ping 通。
 
-   ```
-   echo "=> Start network overlay test"; kubectl get pods -l name=overlaytest -o jsonpath='{range .items[*]}{@.metadata.name}{" "}{@.spec.nodeName}{"\n"}{end}' | while read spod shost; do kubectl get pods -l name=overlaytest -o jsonpath='{range .items[*]}{@.status.podIP}{" "}{@.spec.nodeName}{"\n"}{end}' | while read tip thost; do kubectl --request-timeout='10s' exec $spod -- /bin/sh -c "ping -c2 $tip > /dev/null 2>&1"; RC=$?; if [ $RC -ne 0 ]; then echo $shost cannot reach $thost; fi; done; done; echo "=> End network overlay test"
-   ```
+```
+#!/bin/bash
+echo "=> Start network overlay test"
+  kubectl get pods -l name=overlaytest -o jsonpath='{range .items[*]}{@.metadata.name}{" "}{@.spec.nodeName}{"\n"}{end}' |
+  while read spod shost
+    do kubectl get pods -l name=overlaytest -o jsonpath='{range .items[*]}{@.status.podIP}{" "}{@.spec.nodeName}{"\n"}{end}' |
+    while read tip thost
+      do kubectl --request-timeout='10s' exec $spod -c overlaytest -- /bin/sh -c "ping -c2 $tip > /dev/null 2>&1"
+        RC=$?
+        if [ $RC -ne 0 ]
+          then echo FAIL: $spod on $shost cannot reach pod IP $tip on $thost
+          else echo $shost can reach $thost
+        fi
+    done
+  done
+echo "=> End network overlay test"
+```
 
 5. 该命令运行完毕后，一切正确的的输出应该是：
 

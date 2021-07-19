@@ -16,7 +16,7 @@ keywords:
   - 配置参考
 ---
 
-## Changes in v2.5.8
+## Changes in v2.5.8+
 
 - 我们现在支持私有 GKE 集群。注意：这种高级设置在集群配置过程中可能需要更多步骤。详情请见[本节](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/gke/_index)。
 - 现在支持[Shared VPCs](https://cloud.google.com/vpc/docs/shared-vpc)了。
@@ -181,7 +181,9 @@ NetworkPolicy 的配置。它只跟踪主控端是否启用了插件，并不跟
 
 你可以将标签应用到节点池，将标签应用到池中的所有节点。
 
-###组细节
+无效的标签会阻止升级，或者会阻止Rancher启动。关于标签语法要求的详细信息，请参见[Kubernetes文档。](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#syntax-and-character-set)
+
+### 组细节
 
 在这一部分，输入描述节点池的详细信息。
 
@@ -221,9 +223,11 @@ GKE 的节点自动修复功能可以帮助你保持集群中的节点处于健�
 
 ## v2.5.8 之前
 
-###标签和注释
+### 标签和注释
 
 在集群中添加 Kubernetes 的[标签](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)或[注释](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/)。
+
+无效的标签会阻止升级，或者会阻止Rancher启动。关于标签语法要求的详细信息，请参见[Kubernetes文档。](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#syntax-and-character-set)
 
 ### Kubernetes 选项
 
@@ -358,6 +362,8 @@ GKE 的节点自动修复功能可以帮助你保持集群中的节点处于健�
 #### 节点标签
 
 你可以给节点池贴上标签，将标签应用到池中的所有节点上。
+
+无效的标签会阻止升级，或者会阻止Rancher启动。关于标签语法要求的详细信息，请参见[Kubernetes文档。](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#syntax-and-character-set)
 
 ### 安全选项
 

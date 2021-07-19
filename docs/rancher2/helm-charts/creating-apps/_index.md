@@ -49,18 +49,20 @@ Rancher 支持两种不同类型的 Chart：
 
 ## 应用商店的文件结构
 
-下表为应用商店 Chart 的结构，展示了`charts/<APPLICATION>/<APP_VERSION>/`目录下的结构。在为自定义应用商店定制 Chart 时，此信息很有用。带有 **\*** 的文件代表 Rancher Chart 独有的文件，但这些文件不是必须的。
+下表展示了 chart 的目录结构，可以在 chart 目录中找到：`charts/<APPLICATION>/<APP_VERSION>/`。这个信息在为自定义目录定制 chart 时很有帮助。用**Rancher Specific**表示的文件是 Rancher chart 所特有的，但对于图表定制来说是可选的。
 
 ```bash
-charts/<APPLICATION>/<APP_VERSION>/
-| --charts /            # 包含依赖的 Chart 的应用商店。
-| --templates/          # 包含应用商店的模板，当与 values.yml 结合使用时，将生成 Kubernetes YAML。
-| --app-readme.md       # 文本为显示在 Rancher UI 的 Chart 标题中。*
-| --Chart.yml           # 必需的 Helm Chart 信息文件。
-| --questions.yml       # 用于生成在 Rancher UI 中显示的应答表单。它们将显示在配置选项中。*
-| --README.md           # 可选：在 Rancher UI 中显示的 Helm 自述文件。该文本显示在“详细描述”中。
-| --requirements.yml    # 可选：YAML 文件列出了 Chart 的依赖关系。
-| --values.yml          # Chart 的默认配置值。
+<Repository-Base>/
+ │
+ ├── charts/
+ │   ├── <Application Name>/	  # 这个目录名称将作为chart名称出现在Rancher UI中。
+ │   │   ├── <App Version>/	  # 这一层的每个目录都提供了不同的应用程序版本，这些版本在Rancher用户界面的 chart 中可以选择。
+ │   │   │   ├── Chart.yaml	  # 所需的Helm chart 信息文件。
+ │   │   │   ├── questions.yaml	  # 在Rancher用户界面内显示的 questions。Questions显示在配置选项中。
+ │   │   │   ├── README.md         # 可选：Rancher UI内显示的Helm Readme文件。该文本显示在详细描述中。
+ │   │   │   ├── requirements.yml  # 可选：YAML文件，列出chart的依赖关系。
+ │   │   │   ├── values.yml        # chart的默认配置值。
+ │   │   │   ├── templates/        # 包含模板的目录，当与values.yml结合时，生成Kubernetes YAML。
 ```
 
 ## Rancher Chart 独有的文件

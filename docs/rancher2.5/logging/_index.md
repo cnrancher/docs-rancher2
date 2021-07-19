@@ -63,11 +63,11 @@ Rancher 日志记录有两个角色，`logging-admin`和`logging-view`，详情�
 
 ## Windows 集群支持
 
-**Rancher v2.5.8**：从 Rancher v2.5.8 开始，增加了对 Windows 集群的日志支持，可以从 Windows 节点收集日志。
+**Rancher v2.5.8+**：从 Rancher v2.5.8 开始，增加了对 Windows 集群的日志支持，可以从 Windows 节点收集日志。
 
 关于如何启用或禁用 Windows 节点日志的细节，请参见[本节](/docs/rancher2.5/logging/helm-chart-options/_index)。
 
-**Rancher v2.5.0-v2.5.7**：带有 Windows 工作者的集群支持从 Linux 节点导出日志，但 Windows 节点的日志目前无法导出。只有 Linux 节点的日志能够被导出。
+**Rancher v2.5.8 之前**：带有 Windows 工作者的集群支持从 Linux 节点导出日志，但 Windows 节点的日志目前无法导出。只有 Linux 节点的日志能够被导出。
 
 为了允许在 Linux 节点上调度日志 pod，必须向 pod 添加容错。请参阅 [使用污点和容忍度](/docs/rancher2.5/logging/taints-tolerations/_index)一节，以了解细节和例子。
 

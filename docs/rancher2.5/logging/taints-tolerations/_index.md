@@ -29,13 +29,13 @@ keywords:
 
 ## Rancher 的日志堆栈中的默认实现
 
-### v2.5.8
+### v2.5.8+
 
 默认情况下，Rancher 用`cattle.io/os=linux`玷污所有 Linux 节点，而不玷污 Windows 节点。
 日志堆栈 pod 对这种污点有`toleration`，这使得它们能够在 Linux 节点上运行。
 此外，大多数日志堆栈 pod 只在 Linux 上运行，并添加了一个`nodeSelector`以确保它们在 Linux 节点上运行。
 
-### v2.5.0-2.5.7
+### Rancher v2.5.8 之前
 
 默认情况下，Rancher 用`cattle.io/os=linux`玷污所有 Linux 节点，而不玷污 Windows 节点。
 日志堆栈 pod 对这种污点有`toleration`，这使得它们能够在 Linux 节点上运行。

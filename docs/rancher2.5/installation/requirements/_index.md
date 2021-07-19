@@ -40,7 +40,9 @@ Rancher 需要安装在支持的 Kubernetes 版本上。要了解你的 Rancher 
 
 为了防止在客户端和服务器之间因为时钟不同步而发生证书验证错误，建议您安装 `ntp` (Network Time Protocol)。
 
-一些 Linux 发行版可能有默认的防火墙规则。这些规则可能会屏蔽掉 Helm 的通信。这个[操作指南](/docs/rancher2.5/installation/resources/advanced/firewall/_index)展示了如何检查 Oracle Linux 的默认防火墙规则，以及在必要时如何使用`firewalld`开放端口。
+某些 Linux 发行版可能有默认的防火墙规则，阻止与 Helm 的通信。我们建议禁用 firewalld。对于 Kubernetes 1.19 和 1.20，Firewalld 必须被关闭。
+
+> 如果你觉得这样做不合适，你可以查看[相关问题](https://github.com/rancher/rancher/issues/28840)中的建议。一些用户成功地[为 Pod CIDR 创建了一个单独的 firewalld 区域，策略为 ACCEPT](https://github.com/rancher/rancher/issues/28840#issuecomment-787404822)。
 
 如果计划在 ARM64 上运行 Rancher，请参阅[在 ARM64 上运行（实验性）](/docs/rancher2.5/installation/resources/advanced/arm64-platform/_index)。
 

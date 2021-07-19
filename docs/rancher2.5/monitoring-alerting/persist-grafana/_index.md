@@ -91,7 +91,7 @@ grafana.sidecar.dashboards.searchNamespace=ALL
 
 注意，监控图所暴露的添加 Grafana 仪表盘的 RBAC 角色仍然被限制在给予用户在`grafana.dashboards.namespace`中定义的命名空间中添加仪表盘的权限，默认为`cattle-dashboards`。
 
-### v2.5.0-v2.5.8
+### Rancher v2.5.8 之前
 
 #### 前提条件
 

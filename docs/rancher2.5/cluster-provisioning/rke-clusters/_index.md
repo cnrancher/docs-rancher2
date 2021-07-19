@@ -38,6 +38,6 @@ Rancher 可以在现有节点上安装 Kubernetes，也可以在云服务商中�
 
 在这种情况下，您希望在裸金属服务器、内部部署虚拟机或云提供商中已存在的虚拟机上安装 Kubernetes。使用此选项，您将在计算机上运行 Rancher Agent Docker 容器。
 
-如果要重复使用以前的自定义集群中的节点，请在再次使用之前[清理节点](/docs/rancher2.5/faq/removing-rancher/_index)。如果重复使用尚未清理的节点，则启动集群可能会失败。
+如果要重复使用以前的自定义集群中的节点，请在再次使用之前[清理节点](/docs/rancher2.5/cluster-admin/cleaning-cluster-nodes/_index)。如果重复使用尚未清理的节点，则启动集群可能会失败。
 
 有关更多信息，请参阅[自定义节点](/docs/rancher2.5/cluster-provisioning/rke-clusters/custom-nodes/_index)。

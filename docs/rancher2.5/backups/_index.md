@@ -23,6 +23,8 @@ keywords:
 
 Rancher 版本必须是 v2.5.0 及以上，才能使用这种备份和恢复 Rancher 的方法。
 
+> 将备份恢复到新的 Rancher 设置时，新设置的版本应与进行备份的版本相同。
+
 ## Rancher v2.5 中的变化
 
 新的`rancher-backup` operator 允许 Rancher 在任何 Kubernetes 集群上进行备份和恢复。这个应用是一个 Helm chart，它可以通过 Rancher **应用和市场**页面部署，或者使用 Helm CLI 部署。

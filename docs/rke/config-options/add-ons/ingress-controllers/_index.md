@@ -24,6 +24,10 @@ keywords:
 
 RKE 将以 DaemonSet 的形式部署 Ingress Controller，并使用 `hostnetwork: true`，因此在部署控制器的每个节点上都会打开 `80`和`443`端口。
 
+:::note 注意
+从 V1.1.11 开始，入口控制器的网络选项是可配置的。参见[网络配置选项](#网络配置选项)。
+:::
+
 Ingress Controller 使用的镜像在[系统镜像](/docs/rke/config-options/system-images/_index)中。对于每个 Kubernetes 版本，都有与 Ingress Controller 相关联的默认镜像，这些镜像可以通过更改`system_images`中的镜像标签来覆盖默认设置。
 
 ## 调度 Ingress Controller
@@ -116,6 +120,36 @@ ingress:
 ```
 
 如果省略该字段会发生什么情况？这保持了旧版本`rke`的行为。然而，未来版本的`rke`将把默认值改为`false`。
+
+### 网络配置选项
+
+_从 v1.1.11 版起可用_
+
+默认情况下，nginx ingress controller 使用 `hostNetwork: true` 配置，默认端口为`80`和`443`。如果你想改变模式或端口，请参阅下面的选项。
+
+使用`hostPort`配置 nginx ingress controller ，并覆盖默认端口:
+
+```yaml
+ingress:
+  provider: nginx
+  network_mode: hostPort
+  http_port: 9090
+  https_port: 9443
+  extra_args:
+    http-port: 8080
+    https-port: 8443
+```
+
+配置 nginx ingress controller，不使用网络模式，这将使它在 overlay 网络上运行（例如，如果你想使用`LoadBalancer`暴露 nginx ingress controller），并覆盖默认端口:
+
+```yaml
+ingress:
+  provider: nginx
+  network_mode: none
+  extra_args:
+    http-port: 8080
+    https-port: 8443
+```
 
 ## 配置 NGINX 默认证书
 
