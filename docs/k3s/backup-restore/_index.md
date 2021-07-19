@@ -105,3 +105,41 @@ k3s server \
   --etcd-s3-access-key=<S3-ACCESS-KEY> \
   --etcd-s3-secret-key=<S3-SECRET-KEY>
 ```
+
+### Etcd 快照和恢复子命令
+
+k3s 支持一组用于处理 etcd 快照的子命令
+
+| 子命令      | 描述                         |
+| ----------- | ---------------------------- |
+| delete      | 删除指定的快照               |
+| ls, list, l | 列出快照                     |
+| prune       | 删除超过配置的保留次数的快照 |
+| save        | 触发一个即时的 etcd 快照     |
+
+_注_ `save`子命令与`k3s etcd-snapshot`相同。后者最终将被弃用，取而代之的是前者。
+
+无论 etcd 快照是存储在本地还是存储在 S3 兼容的对象存储中，这些命令都将按预期执行。
+
+关于 etcd 快照子命令的其他信息，请运行`k3s etcd-snapshot`。
+
+从 S3 中删除一个快照。
+
+```
+k3s etcd-snapshot delete          \
+  --s3                            \
+  --s3-bucket=<S3-BUCKET-NAME>    \
+  --s3-access-key=<S3-ACCESS-KEY> \
+  --s3-secret-key=<S3-SECRET-KEY> \
+  <SNAPSHOT-NAME>
+```
+
+用默认的保留策略（5）prune 本地快照。`prune`子命令接受一个额外的标志`--snapshot-retention`，允许覆盖默认的保留策略。
+
+```
+k3s etcd-snapshot prune
+```
+
+```
+k3s etcd-snapshot prune --snapshot-retention 10
+```

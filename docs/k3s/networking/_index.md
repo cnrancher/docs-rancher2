@@ -39,15 +39,15 @@ keywords:
 
 启动 server 时，默认情况下会部署 Traefik。更多信息请参见[自动部署清单](/docs/k3s/advanced/_index#自动部署清单)。默认的配置文件在`/var/lib/rancher/k3s/server/manifests/traefik.yaml`中，对该文件的任何修改都会以类似`kubectl apply`的方式自动部署到 Kubernetes 中。
 
-Traefik ingress controller 将使用主机上的 80、443 和 8080 端口（即这些端口不能用于 HostPort 或 NodePort）。
+Traefik ingress controller 将使用主机上的 80 和 443 端口（即这些端口不能用于 HostPort 或 NodePort）。
 
 Traefik 可以通过编辑`traefik.yaml`文件进行配置。为了防止 k3s 使用或覆盖修改后的版本，请使用`--no-deploy traefik`部署 k3s，并将修改后的副本存储在`k3s/server/manifests`目录中。更多信息请参考官方的[Traefik 配置参数](https://github.com/helm/charts/tree/master/stable/traefik#configuration)。
 
 要禁用它，请使用`--disable traefik`选项启动每个 server。
 
-如果未禁用Traefik，则K3s 1.20及更早版本将安装Traefik v1，而K3s 1.21及更高版本将安装Traefik v2（如果v1不存在）。
+如果未禁用 Traefik，则 K3s 1.20 及更早版本将安装 Traefik v1，而 K3s 1.21 及更高版本将安装 Traefik v2（如果 v1 不存在）。
 
-要从较旧的Traefik v1实例进行迁移，请参考[Traefik文档](https://doc.traefik.io/traefik/migration/v1-to-v2/) 和[迁移工具](https://github.com/traefik/traefik-migration-tool)。
+要从较旧的 Traefik v1 实例进行迁移，请参考[Traefik 文档](https://doc.traefik.io/traefik/migration/v1-to-v2/) 和[迁移工具](https://github.com/traefik/traefik-migration-tool)。
 
 ## Service Load Balancer
 
