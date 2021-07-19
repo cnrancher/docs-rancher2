@@ -141,6 +141,36 @@ OPTIONS:
 
 > **警告：**使用无效的加密提供者配置可能会导致您的集群出现一些问题，从崩溃 Kubernetes API 服务`kube-api`，到完全失去对加密数据的访问。
 
+### 示例：使用用户提供的32字节随机密钥的自定义加密配置
+
+下面描述了使用用户提供的32字节随机密钥配置自定义加密所需的步骤。
+
+步骤1：生成一个32字节的随机密钥并对其进行base64编码。如果你是在Linux或macOS上，运行以下命令：
+
+```
+head -c 32 /dev/urandom | base64
+```
+
+将该值放入秘密字段。
+
+```
+kube-api:
+    secrets_encryption_config:
+      enabled: true
+      custom_config:
+        api_version: apiserver.config.k8s.io/v1
+        kind: EncryptionConfiguration
+        resources:
+        - Providers:
+            - AESCBC:
+                Keys:
+                    - Name: key1
+                    Secret: <BASE 64 ENCODED SECRET>
+              Resources:
+                - secrets
+            - identity: {}
+```
+
 ### 例子: 使用 Amazon KMS 的自定义加密配置
 
 自定义配置的一个例子是启用外部密钥管理系统，如[Amazon KMS](https://aws.amazon.com/kms/)。以下是 AWS KMS 的配置实例。

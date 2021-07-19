@@ -46,6 +46,8 @@ keywords:
 
 您可以在节点模板中添加[标签](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)，从该节点模板创建的所有节点都将自动具有这些标签。
 
+无效的标签会阻止升级，或者会阻止Rancher启动。关于标签语法要求的详细信息，请参见[Kubernetes文档。](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#syntax-and-character-set)
+
 ### 节点污点
 
 _从 Rancher v2.3.0 开始可用_

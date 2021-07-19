@@ -35,7 +35,7 @@ export NO_PROXY=127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,cattle-syste
 接下来配置 apt 在安装包时使用这个代理。如果你没有使用 Ubuntu，你必须相应地调整这一步：
 
 ```shell
-cat <<'EOF' | sudo tee /etc/apt/apt.conf.d/proxy.conf > /dev/null
+cat <<EOF | sudo tee /etc/apt/apt.conf.d/proxy.conf > /dev/null
 Acquire::http::Proxy "http://${proxy_host}/";
 Acquire::https::Proxy "http://${proxy_host}/";
 EOF
@@ -57,7 +57,7 @@ sudo usermod -aG docker YOUR_USERNAME
 
 ```shell
 sudo mkdir -p mkdir /etc/systemd/system/docker.service.d
-cat <<'EOF' | sudo tee /etc/systemd/system/docker.service.d/http-proxy.conf > /dev/null
+cat <<EOF | sudo tee /etc/systemd/system/docker.service.d/http-proxy.conf > /dev/null
 [Service]
 Environment="HTTP_PROXY=http://${proxy_host}"
 Environment="HTTPS_PROXY=http://${proxy_host}"

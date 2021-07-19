@@ -61,7 +61,7 @@ Rancher v2.5.4 引入了通过在 Rancher 用户界面中填写表格来配置�
 - Microsoft Teams，基于[prom2teams](https://github.com/idealista/prom2teams)驱动程序
 - SMS，基于[Sachet](https://github.com/messagebird/sachet)驱动程序
 
-### v2.5.8
+### v2.5.8+
 
 Rancher v2.5.8 在 Rancher 用户界面中增加了 Microsoft Teams 和 SMS 作为可配置的接收者。
 

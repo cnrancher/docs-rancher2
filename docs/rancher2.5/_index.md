@@ -23,6 +23,8 @@ Rancher 2.x 目前有三个大版本：2.3.x、2.4.x 和 2.5.x，每个大版本
 
 ## 2.5.x
 
+- [2.5.9 版本说明](/docs/rancher2.5/releases/v2.5.9)
+- [2.5.8 版本说明](/docs/rancher2.5/releases/v2.5.8)
 - [2.5.7 版本说明](/docs/rancher2.5/releases/v2.5.7)
 - [2.5.6 版本说明](/docs/rancher2.5/releases/v2.5.6)
 - [2.5.5 版本说明](/docs/rancher2.5/releases/v2.5.5)

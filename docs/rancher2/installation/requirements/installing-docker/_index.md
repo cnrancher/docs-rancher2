@@ -22,10 +22,10 @@ keywords:
 
 另一种选择是使用 Rancher 提供的 Docker 安装脚本，该脚本可用于安装较新的 Docker 版本。
 
-例如，此命令可用于在 Ubuntu 上安装 Docker 19.03：
+例如，此命令可用于在 Ubuntu 上安装 Docker 20.10：
 
 ```bash
-curl https://releases.rancher.com/install-docker/19.03.sh | sh
+curl https://releases.rancher.com/install-docker/20.10.sh | sh
 ```
 
 Rancher 为 Kubernetes 支持的每个上游 Docker 版本都有安装脚本。要想知道是否有安装某个 Docker 版本的脚本，可以参考这个[GitHub 仓库](https://github.com/rancher/install-docker)，其中包含了 Rancher 所有的 Docker 安装脚本。

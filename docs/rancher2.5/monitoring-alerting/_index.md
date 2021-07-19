@@ -67,7 +67,7 @@ Prometheus 让您可以查看来自不同 Rancher 和 Kubernetes 对象的度量
 
 ### 操作步骤
 
-#### 2.5.0-2.5.7
+#### Rancher v2.5.8 之前
 
 1. 在 Rancher UI 中，进入要安装监控的集群，然后单击**集群资源管理器**。
 1. 单击**应用程序**。
@@ -77,7 +77,7 @@ Prometheus 让您可以查看来自不同 Rancher 和 Kubernetes 对象的度量
 
 **结果：**监控应用部署在`cattle-monitoring-system`命名空间中。
 
-#### 2.5.8
+#### 2.5.8+
 
 **启用监控，以便在没有 SSL 的情况下使用**。
 

@@ -85,6 +85,38 @@ Rancher 仅支持在 Windows 集群中使用 Flannel 作为网络插件。
 
 **VXLAN (Overlay)** 模式是默认选项。如果您选用 **VXLAN (Overlay)** 网络，必须安装[KB4489899](https://support.microsoft.com/en-us/help/4489899)补丁，大多数云托管的虚拟机已经安装了这个补丁。
 
+如果您正在为 AWS 虚拟私有云配置 DHCP 选项，请注意在域名选项字段中，只能指定一个域名。根据 DHCP [选项文档](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html)：
+
+> 一些 Linux 操作系统接受用空格分隔的多个域名。然而，其他 Linux 操作系统和 Windows 将该值视为一个单一的域，这将导致意外的行为。如果你的 DHCP 选项集与一个拥有多个操作系统实例的 VPC 相关联，请只指定一个域名。
+
+#### 带有 ESXi 6.7u2 及以上版本的 vSphere 上的 Rancher
+
+如果你在带有 ESXi 6.7u2 或更高版本的 VMware vSphere 上使用 Rancher，并使用 Red Hat Enterprise Linux 8.3、CentOS 8.3 或 SUSE Enterprise Linux 15 SP2 或更高版本，有必要禁用`vmxnet3`虚拟网络适配器硬件卸载功能。如果不这样做，将导致不同集群节点上的 pod 之间的所有网络连接因超时错误而失败。所有从 Windows pods 到 Linux 节点上运行的关键服务的连接，如 CoreDNS，也将失败。外部连接也有可能失败。这个问题是由于 Linux 发行版在`vmxnet3`中启用了硬件卸载功能，以及`vmxnet3`硬件卸载功能中的一个 bug，导致丢弃了客户覆盖流量的数据包。为了解决这个问题，有必要禁用`vmxnet3`的硬件卸载功能。这个设置不能在重启后继续使用，因此有必要在每次启动时禁用。推荐的做法是在`/etc/systemd/system/disable_hw_offloading.service`创建一个 systemd 单元文件，在启动时禁用`vmxnet3`硬件卸载功能。禁用 `vmxnet3` 硬件卸载功能的 systemd 单元文件示例如下。注意，`<VM网络接口>`必须定制为主机的`vmxnet3`网络接口，如`ens192`:
+
+```
+[Unit]
+Description=Disable vmxnet3 hardware offloading feature
+[Service]
+Type=oneshot
+ExecStart=ethtool -K <VM network interface> tx-udp_tnl-segmentation off
+ExecStart=ethtool -K <VM network interface> tx-udp_tnl-csum-segmentation off
+StandardOutput=journal
+[Install]
+WantedBy=multi-user.target
+```
+
+然后给 systemd 单元文件设置相应的权限:
+
+```
+chmod 0644 /etc/systemd/system/disable_hw_offloading.service
+```
+
+最后，启用 systemd 服务。
+
+```
+systemctl enable disable_hw_offloading.service
+```
+
 ### 架构要求
 
 Kubernetes 集群管理节点(`etcd`和`controlplane`)必须在 Linux 节点上运行。

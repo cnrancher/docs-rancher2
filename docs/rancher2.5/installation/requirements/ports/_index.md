@@ -207,7 +207,7 @@ import PortsImported from '@theme/PortsImported';
 | TCP     | 9796        | 集群监控拉取节点指标的默认端口（仅需要内网可达） |
 | TCP     | 6783        | Weave 端口                                       |
 | UDP     | 6783-6784   | Weave UDP 端口                                   |
-| TCP     | 10250       | kubelet API                                      |
+| TCP     | 10250       | Metrics server 与所有节点的通信                  |
 | TCP     | 10254       | Ingress controller 健康检查                      |
 | TCP/UDP | 30000-32767 | NodePort 端口范围                                |
 

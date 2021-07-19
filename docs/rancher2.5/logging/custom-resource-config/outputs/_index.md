@@ -66,7 +66,7 @@ Rancher 用户界面提供了配置`Output`类型、目标和访问凭证（如�
 
 关于`ClusterOutput`自定义资源的细节，见[ClusterOutput 文档](https://banzaicloud.com/docs/one-eye/logging-operator/configuration/crds/v1beta1/clusteroutput_types/)
 
-## v2.5.0-v2.5.7
+## Rancher v2.5.8 之前
 
 ### Outputs
 

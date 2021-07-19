@@ -55,3 +55,18 @@ keywords:
 1. 单击**Upgrade**完成更改。
 
 **结果：**Istio 组件的资源分配得到更新。
+
+### 编辑 Overlay 文件
+
+Overlay 文件可以包含[Istio Operator spec](https://istio.io/latest/docs/reference/config/istio.operator.v1alpha1/#IstioOperatorSpec)中的任何值，Istio 应用程序中包含的 overlay 文件只是 overlay 文件潜在配置的一个例子。
+
+只要该文件包含 `kind: IstioOperator` 并且 YAML 选项有效，该文件就可以作为 overlay 文件使用。
+
+在 Istio 应用程序提供的示例 overlay 文件中，以下部分允许你改变 Kubernetes 资源。
+
+```
+#      k8s:
+#        resources:
+#          requests:
+#            cpu: 200m
+```

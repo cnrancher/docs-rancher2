@@ -36,7 +36,7 @@ Rancher 需要安装在支持的 Kubernetes 版本上。要想知道你的 Ranch
 
 RKE2 服务器使用嵌入式 etcd 运行，所以你不需要设置外部数据存储就可以在 HA 模式下运行。
 
-1. 在第一个节点上，你应该用你自己的预共享密钥作为令牌来设置配置文件。令牌参数可以在启动时设置。
+在第一个节点上，你应该用你自己的预共享密钥作为令牌来设置配置文件。令牌参数可以在启动时设置。
 
 如果你没有指定预共享密钥，RKE2 将生成一个预共享密钥并将其放在`/var/lib/rancher/rke2/server/node-token` 中。
 
@@ -54,7 +54,7 @@ tls-san:
 然后，你需要运行安装命令并启用和启动 RKE2：
 
 ```
-curl -sfL https://get.rke2.io | sh -
+curl -sfL https://get.rke2.io | INSTALL_RKE2_CHANNEL=v1.20 sh -
 systemctl enable rke2-server.service
 systemctl start rke2-server.service
 ```
