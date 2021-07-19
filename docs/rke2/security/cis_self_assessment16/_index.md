@@ -1771,7 +1771,7 @@ Run the below command on the master node.
 /bin/ps -ef | grep kube-apiserver | grep -v grep
 ```
 
-Verify that the `--audit-policy-file` is set. Review the contents of the file specified and ensure that it contains a valid audit policy.
+Verify that the `--audit-policy-file` is set. Review the contents of the file specified and ensure that it contains valid audit policy.
 
 **Remediation:**
 Create an audit policy file for your cluster.
@@ -2359,7 +2359,7 @@ The default service account should be configured such that it does not provide a
 
 </details>
 
-**Result:** Pass. Currently requires operator intervention See the [known issue](/docs/rke2/security/hardening_guide/_index#control-515) for details.
+**Result:** Pass.
 
 **Audit:**
 For each namespace in the cluster, review the rights assigned to the default service account and ensure that it has no roles or cluster roles bound to it apart from the defaults. Additionally ensure that the automountServiceAccountToken: false setting is in place for each default service account.

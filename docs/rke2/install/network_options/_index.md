@@ -68,7 +68,11 @@ Multus 不能独立部署。它总是需要至少一个传统的 CNI 插件，�
 
 要使用这些插件中的任何一个，需要创建一个适当的 NetworkAttachmentDefinition 对象来定义二级网络的配置。然后，该定义被 pod 注释所引用，Multus 将使用这些注释来为该 pod 提供额外的接口。[multus-cni 存储库](https://github.com/k8snetworkplumbingwg/multus-cni/blob/master/docs/quickstart.md#storing-a-configuration-as-a-custom-resource)中提供了将 Macvlan cni 插件与 Mu 一起使用的示例。
 
-### 将 Multus 与 SR-IOV 一起使用
+### 使用 Multus 与 SR-IOV （实验性）
+
+:::note 注意：
+这是一个实验性的功能，在 v1.21.2+rke2r1 中引入。
+:::
 
 将 SR-IOV CNI 与 Multus 一起使用可以帮助解决数据平面加速的用例，在 Pod 中提供一个额外的接口，可以实现非常高的吞吐量。SR-IOV 并非在所有环境中都有效，并且必须满足一些要求才能将节点视为具有 SR-IOV 功能的节点：
 
