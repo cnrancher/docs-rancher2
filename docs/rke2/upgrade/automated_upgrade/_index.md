@@ -15,7 +15,6 @@ keywords:
   - 自动升级
 ---
 
-
 ## 概述
 
 你可以使用 Rancher 的 system-upgrade-controller 来管理 rke2 集群的升级。这是一种 Kubernetes 原生的集群升级方法。它利用[自定义资源定义（CRD）](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#custom-resources)、`计划` 和[控制器](https://kubernetes.io/docs/concepts/architecture/controller/)，根据配置的计划来安排升级。
@@ -54,7 +53,7 @@ kubectl apply -f https://github.com/rancher/system-upgrade-controller/releases/d
 
 ## 配置计划
 
-建议你至少创建两个计划：一个用于升级 server(master)节点的计划，一个用于升级 agent(worker)节点的计划。根据需要，你可以创建额外的计划来控制各节点的升级。下面的两个计划例子将把你的集群升级到 rke2 v1.17.4+k3s1。一旦计划被创建，控制器将接收它们并开始升级你的集群。
+建议你至少创建两个计划：一个用于升级 server(master)节点的计划，一个用于升级 agent(worker)节点的计划。根据需要，你可以创建额外的计划来控制各节点的升级。下面的两个计划例子将把你的集群升级到 rke2 v1.21.2+rke2r1。一旦计划被创建，控制器将接收它们并开始升级你的集群。
 
 ```
 # Server plan
@@ -79,7 +78,7 @@ spec:
 #    force: true
   upgrade:
     image: rancher/rke2-upgrade
-  version: v1.18.13+rke2r1
+  version: v1.21.2+rke2r1
 ---
 # Agent plan
 apiVersion: upgrade.cattle.io/v1
@@ -107,8 +106,7 @@ spec:
     force: true
   upgrade:
     image: rancher/rke2-upgrade
-  version: v1.18.13+rke2r1
-
+  version: v1.21.2+rke2r1
 ```
 
 关于这些计划，有几件重要的事情需要指出。
@@ -117,11 +115,11 @@ spec:
 
 第二，`concurrency` 字段表明有多少节点可以同时被升级。
 
-第三，server-plan 通过指定一个标签选择器，选择具有 `node-role.kubernetes.io/master` 标签的节点，来锁定 server 节点。agent-plan 通过指定一个标签选择器，选择没有这个标签的节点，来锁定 agent 节点。
+第三，server-plan 通过指定一个标签选择器，选择具有 `node-role.kubernetes.io/master` 标签的节点，来锁定 server 节点。agent-plan 通过指定一个标签选择器，选择没有这个标签的节点，来锁定 agent 节点。可以选择包括额外的标签，就像上面的例子，它要求存在标签 "rke2-upgrade"，并且不具有 "disabled" 或 "false" 的值。
 
 第四，agent 计划中的 `prepare` 步骤将导致该计划的升级作业在执行前等待 server 计划的完成。
 
-第五，两个计划的 `version` 字段都设置为 v1.18.9+rke2。另外，你可以省略`version`字段，将`channel`字段设置为一个 URL，该 URL 可解析为 rke2 的一个版本。这将导致控制器监控该 URL，并在它解析到新版本时升级集群。这与[release channels](/docs/rke2/upgrade/basic_upgrade/_index/#release-channels)配合得很好。因此，你可以用以下 channels 配置你的计划，以确保你的集群总是自动升级到最新的 rke2 稳定版本。
+第五，两个计划的 `version` 字段都设置为 v1.21.2+rke2r1。另外，你可以省略`version`字段，将`channel`字段设置为一个 URL，该 URL 可解析为 rke2 的一个版本。这将导致控制器监控该 URL，并在它解析到新版本时升级集群。这与[release channels](/docs/rke2/upgrade/basic_upgrade/_index/#release-channels)配合得很好。因此，你可以用以下 channels 配置你的计划，以确保你的集群总是自动升级到最新的 rke2 稳定版本。
 
 ```
 apiVersion: upgrade.cattle.io/v1

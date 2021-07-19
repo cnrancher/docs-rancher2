@@ -15,7 +15,6 @@ keywords:
   - 已知的问题和限制
 ---
 
-
 本节包含了当前 rke2 的已知问题和限制。如果你遇到这里没有记录的 rke2 的问题，请在[这里](https://github.com/rancher/rke2/issues)打开一个新问题。
 
 ## Firewalld 与默认网络冲突
@@ -32,6 +31,8 @@ unmanaged-devices=interface-name:cali*;interface-name:flannel*
 ```
 
 如果你还没有安装 RKE2，简单的 `systemctl reload NetworkManager` 就足以安装配置。如果在已经安装了 RKE2 的系统上执行这一配置变更，则需要重启节点以有效应用这一变更。
+
+在一些操作系统中，如 RHEL 8.4，NetworkManager 包括两个额外的服务，称为`nm-cloud-setup.service`和`nm-cloud-setup.timer`。这些服务添加了一个路由表，干扰了 CNI 插件的配置。不幸的是，没有任何配置可以避免，正如[issue](https://github.com/rancher/rke2/issues/1053)中解释的那样。因此，如果存在这些服务，它们应该被禁用，并且节点必须重新启动。
 
 ## Selinux 中的 Istio 执行系统默认失败
 

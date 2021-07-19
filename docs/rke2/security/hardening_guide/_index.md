@@ -124,32 +124,6 @@ Kubernetes 的控制平面组件和关键的附加组件，如 CNI、DNS 和 Ing
 
 以下是 RKE2 目前不能通过的 case。每一个问题都将被解释，并说明是否可以通过人工操作的方式通过，或者是否会在未来的版本中解决。
 
-### Control 5.1.5
-
-确保未主动使用默认服务帐户。(得分)
-
-Kubernetes 提供了一个默认的服务账户，在没有为 pod 分配特定服务账户的集群工作负载中使用。
-
-如果需要从 pod 访问 Kubernetes API，应该为该 pod 创建一个特定的服务账户，并为该服务账户授予权限。
-
-默认的服务账户应该被配置为不提供服务账户令牌，也没有任何明确的权限分配。
-
-这方面的补救措施是将每个命名空间中的 `default` 服务账户的 `automountServiceAccountToken` 字段更新为 `false`。
-
-对于内置命名空间（`kube-system`、`kube-public`、`kube-node-lease`和`default`）中的`default`服务账户，RKE2 不会自动这样做。你可以手动更新这些服务账户的这个字段来传递控制。
-
-对于包括`kube-system`、`kube-public`、`kube-node-lease`和`default`在内的每个命名空间，在标准的 RKE2 安装中，默认服务账户必须设置`automountServiceAccountToken: false`。
-
-创建一个名为 `account_update.sh` 的 bash 脚本文件。请确保`chmod +x account_update.sh`，以便脚本有执行权限。
-
-```bash
-#!/bin/bash -e
-
-for namespace in $(kubectl get namespaces -A -o json | jq -r '.items[].metadata.name'); do
-    kubectl patch serviceaccount default -n ${namespace} -p 'automountServiceAccountToken: false'
-done
-```
-
 ## 结论
 
 如果你遵循本指南，你的 RKE2 集群将被配置为通过 CIS Kubernetes 基准测试。你可以查看我们的 CIS 基准自我评估指南[v1.5](/docs/rke2/security/cis_self_assessment15/_index)或[v1.6](/docs/rke2/security/cis_self_assessment16/_index)，了解我们是如何验证每项基准的，以及你如何在你的集群上做同样的事情。
