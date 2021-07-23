@@ -42,7 +42,7 @@ ERROR: https://rancher.my.org/ping is not accessible (Could not resolve host: ra
 
 所以要解决这个问题，可以在环境中搭建一个 dns 服务器，配置正确的域名和 IP 的对应关系，然后将每个节点的`nameserver`指向这个 dns 服务器。
 
-或者使用[HostAliases](https://kubernetes.io/zh/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/)
+或者使用[HostAliases](https://kubernetes.io/docs/tasks/network/customize-hosts-file-for-pods/)
 
 ```bash
 kubectl -n cattle-system patch  deployments cattle-cluster-agent --patch '{
