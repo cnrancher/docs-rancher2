@@ -14,13 +14,9 @@ keywords:
   - 网络
 ---
 
-> **注意：** 本页解释了 CoreDNS、Traefik Ingress 控制器和 Klipper service load balancer 如何在 K3s 中工作。
+本页解释了 CoreDNS、Traefik Ingress 控制器和 Klipper service load balancer 如何在 K3s 中工作。
 
-## 开放端口
-
-请参阅[安装网络选项](/docs/k3s/installation/network-options/_index)页面，以获取有关 Flannel 配置选项和后端选择，或如何设置自己的 CNI 的详细信息。
-
-## CoreDNS
+关于 Flannel 配置选项和后端选择的细节，或如何设置自己的 CNI，请参考[安装网络选项](/docs/k3s/installation/network-options/_index)页面。
 
 关于 K3s 需要开放哪些端口，请参考[安装要求](/docs/k3s/installation/installation-requirements/_index#网络)。
 
@@ -32,6 +28,12 @@ keywords:
   - [从节点中排除 Service LB](#从节点中排除-service-lb)
   - [禁用 Service LB](#禁用-service-lb)
 - [没有主机名的节点](#没有主机名的节点)
+
+# CoreDNS
+
+CoreDNS 是在 agent 节点启动时部署的。要禁用，请在每台服务器上运行`--disable coredns`选项。
+
+如果你不安装 CoreDNS，你将需要自己安装一个集群 DNS 提供商。
 
 ## Traefik Ingress Controller
 
