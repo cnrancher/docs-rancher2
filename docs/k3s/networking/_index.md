@@ -29,7 +29,7 @@ keywords:
   - [禁用 Service LB](#禁用-service-lb)
 - [没有主机名的节点](#没有主机名的节点)
 
-# CoreDNS
+## CoreDNS
 
 CoreDNS 是在 agent 节点启动时部署的。要禁用，请在每台服务器上运行`--disable coredns`选项。
 
