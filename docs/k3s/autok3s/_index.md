@@ -91,9 +91,14 @@ AutoK3s 有两种运行模式：
 观看演示：
 ![](/img/k3s/autok3s-demo-min.gif)
 
+在以下演示中，我们将使用集成在 AutoK3s 中的 kube-explorer 工具，对不同 K3s 集群的资源进行管理。
+
+观看演示：
+![](/img/k3s/kube-explorer-demo.gif)
+
 ## 升级
 
-如果您使用 Docker 命令一键启动 AutoK3s 本地 UI，从 `v0.4.0` 升级到 `v0.4.3` 需要进行如下操作以保证历史数据的迁移。
+如果您使用 Docker 命令一键启动 AutoK3s 本地 UI，从 `v0.4.0` 升级到 `v0.4.4` 需要进行如下操作以保证历史数据的迁移。
 
 ```bash
 docker cp <old-container>:/root/.autok3s .
@@ -105,16 +110,10 @@ docker run -itd --restart=unless-stopped -p 8080:8080 -v $PWD/.autok3s:/root/.au
 
 ```bash
 docker stop <old-container>
-docker run -itd --restart=unless-stopped -p 8080:8080 --volumes-from <old-container> cnrancher/autok3s:v0.4.3
+docker run -itd --restart=unless-stopped -p 8080:8080 --volumes-from <old-container> cnrancher/autok3s:v0.4.4
 ```
 
 ## 开发者指南
-
-使用 `Makefile` 管理项目的编译、测试与打包。
-
-- 编译： `make autok3s build`
-- 测试： `make autok3s unit`
-- 打包： `make autok3s package only`
 
 使用 `dapper` 管理项目的编译、测试与打包
 
