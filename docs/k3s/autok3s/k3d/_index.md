@@ -30,6 +30,11 @@ keywords:
 
 您可以通过[快速体验](/docs/k3s/autok3s/_index#快速体验)中的描述，通过 Docker 或者 CLI 启动本地 UI，打开浏览器，访问目标端口 `8080` 即可。
 
+> 请注意：
+- 如果您使用 Docker 启动 AutoK3s 服务并且需要使用 K3d Provider，请将 docker.sock 文件挂载到容器中。
+- 受限于 MacOS docker vm，k3d 本身在 MacOS 下使用存在限制，为了您更好的体验，建议在 Linux 下使用 k3d provider。
+- 如确实需要 MacOS 下使用，需注意 MacOS 下 Docker 不支持 Host Networking，请使用 publish 端口方式。此时，AutoK3s 无法使用 Kubectl shell 操作 K3d 集群，请转而进入 K3d 集群的 node shell，依托 master 节点自带的kubectl进行管理。参考：https://docs.docker.com/network/host/ 
+
 ### 快速创建集群
 
 您可以使用快速创建功能，在指定的云提供商服务中，快速启动一个K3s集群。
@@ -65,7 +70,7 @@ K3d 配置主要配置的内容为启动 K3s 集群所需的参数，例如 K3s 
 | 参数 | 说明 | 默认值
 | :------------- | :----------------------- |:------------- 
 | API Port | 指定在LoadBalancer上公开的 Kubernetes API 服务器端口，例如（--api-port 0.0.0.0:6550） | `0.0.0.0:0`
-| Image | 在 Docker 中启动的 K3s 镜像 | `rancher/k3s:v1.20.5-k3s1` 
+| Image | 在 Docker 中启动的 K3s 镜像 | `rancher/k3s:v1.21.2-k3s1` 
 | No LoadBalancer | 禁用 LoadBalancer | `false`
 | No Host IP | 禁用将主机IP作为“host.k3d.internal”自动注入到容器和CoreDNS中 | `false`
 | No Image Volume | 禁用创建用于导入镜像的数据卷 | `false`
@@ -126,6 +131,25 @@ K3d 配置主要配置的内容为启动 K3s 集群所需的参数，例如 K3s 
 如果您想连接到远程主机进行操作，您可以在集群列表页面点击集群名称，进入详情页面，选择要连接的主机，点击右侧 **Execute Shell** 按钮。
 
 ![](/img/k3s/ssh-k3d.png)
+
+#### 开启 kube-explorer dashboard
+
+您可以通过右侧下拉菜单中选择 Enable Explorer 功能来开启 kube-explorer。
+
+![](/img/k3s/enable-kube-explorer.png)
+
+开启后，在集群列表会增加 dashboard 跳转链接按钮，点击跳转链接便可以访问 kube-explorer dashboard 页面了。
+
+![](/img/k3s/access-kube-explorer.png)
+
+#### 关闭 kube-explorer dashboard
+
+对于已经开启了 kube-explorer 功能的集群，可以在右侧下拉菜单中选择 Disable Explorer 功能来关闭 kube-explorer 服务。
+
+![](/img/k3s/disable-kube-explorer.png)
+
+> 请注意：
+> - MacOS 下 Docker 不支持 Host Networking，如果在 MacOS 下使用 K3d provider，由于无法使用 Kubectl shell 功能操作 K3d 集群，所以我们无法使用 kube-explorer 功能。
 
 ## CLI 使用说明
 

@@ -189,12 +189,12 @@ K3s 参数配置项主要对 K3s 集群进行设置，例如是否部署 HA 模�
 | IP | K3s server IP，用于加入已有集群 |
 | Token | 用于将server或agent加入集群的共享secret，如果不设置，会自动生成一个Token |
 | Manifests | 自动部署应用清单目录，这里支持设置某个manifest文件或者包含多个manifest文件的目录路径（仅支持一层目录），具体功能可查看[这里](http://docs.rancher.cn/docs/k3s/advanced/_index/#%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E6%B8%85%E5%8D%95) |
-| TLS Sans | 在 TLS 证书中添加其他主机名或 IP 作为主题备用名称 |
-| Registry | 私有镜像仓库配置 |
+| TLS Sans | 在 TLS 证书中添加其他主机名或 IP 作为主题备用名称，具体功能可查看[这里](https://docs.rancher.cn/docs/k3s/installation/install-options/server-config/_index#%E7%9B%91%E5%90%AC) |
+| Registry | [私有镜像仓库配置](https://docs.rancher.cn/docs/k3s/installation/private-registry/_index) |
 
 #### 高级选项
 
-配置是否开启 UI（kubernetes-dashboard），以及是否部署腾讯云 Cloud Provider。
+配置要开启的 UI 组件（kubernetes-dashboard/kube-explorer），以及是否部署腾讯云 Cloud Provider。
 
 ![](/img/k3s/custom-create-cluster-additional-tencent.png)
 
@@ -202,7 +202,7 @@ K3s 参数配置项主要对 K3s 集群进行设置，例如是否部署 HA 模�
 
 | 参数 | 说明 | 默认值
 | :------------- | :------------------- |:------------- 
-| UI | 是否部署 Kubernetes Dashboard | false
+| UI | 开启的 UI 组件（Kubernetes Dashboard/kube-explorer） | 
 | Cloud Controller Manager | 是否部署腾讯云 Cloud Provider | false
 | Network Route Table Name | 如果开启 CCM，需要配置路由名称，配置方法请参考[这里](#启用腾讯云-ccmcloud-controller-manager) |
 
@@ -248,6 +248,26 @@ K3s 参数配置项主要对 K3s 集群进行设置，例如是否部署 HA 模�
 如果您想连接到远程主机进行操作，您可以在集群列表页面点击集群名称，进入详情页面，选择要连接的主机，点击右侧 **Execute Shell** 按钮。
 
 ![](/img/k3s/ssh-node.png)
+
+#### 开启 kube-explorer dashboard
+
+您可以在创建集群时，通过 Additional Options 选择 explorer 选项开启 kube-explorer 功能。
+
+![](/img/k3s/launch-kube-explorer.png)
+
+也可以通过右侧下拉菜单中选择 Enable Explorer 功能来开启 kube-explorer。
+
+![](/img/k3s/enable-kube-explorer.png)
+
+开启后，在集群列表会增加 dashboard 跳转链接按钮，点击跳转链接便可以访问 kube-explorer dashboard 页面了。
+
+![](/img/k3s/access-kube-explorer.png)
+
+#### 关闭 kube-explorer dashboard
+
+对于已经开启了 kube-explorer 功能的集群，可以在右侧下拉菜单中选择 Disable Explorer 功能来关闭 kube-explorer 服务。
+
+![](/img/k3s/disable-kube-explorer.png)
 
 ## CLI 使用说明
 
@@ -466,11 +486,21 @@ autok3s -d create \
 
 #### 启用 UI 组件
 
-该参数会启用 [kubernetes/dashboard](https://github.com/kubernetes/dashboard) 图形界面。
-访问 Token 等设置请参考 [此文档](https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md) 。
+AutoK3s 支持两种 UI 组件，包括 [kubernetes-dashboard](https://github.com/kubernetes/dashboard) 和 [kube-explorer](https://github.com/cnrancher/kube-explorer)
+
+##### 开启 kubernetes dashboard
 
 ```bash
-autok3s -d create \
+autok3s -d create -p aws \
     ... \
-    --ui
+    --enable dashboard
 ```
+
+访问 Token 等设置请参考 [此文档](https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md) 。
+
+##### 开启 kube-explorer
+
+```bash
+autok3s explorer --context <context> --port 9999
+```
+您可以通过 http://127.0.0.1:9999 访问 kube-explorer dashboard 页面。
