@@ -47,13 +47,13 @@ AutoK3s 可以支持以下云厂商，我们会根据社区反馈添加更多支
 您可以通过以下 Docker 命令，一键启动 AutoK3s 本地 UI，快速体验相关功能。
 
 ```bash
-docker run -itd --restart=unless-stopped -p 8080:8080 cnrancher/autok3s:v0.4.3
+docker run -itd --restart=unless-stopped -p 8080:8080 cnrancher/autok3s:v0.4.4
 ```
 
 如果您想要在 docker 中使用 K3d provider，那么您需要使用宿主机网络启动 AutoK3s 镜像。
 
 ```bash
-docker run -itd --restart=unless-stopped --net host -v /var/run/docker.sock:/var/run/docker.sock cnrancher/autok3s:v0.4.3
+docker run -itd --restart=unless-stopped --net host -v /var/run/docker.sock:/var/run/docker.sock cnrancher/autok3s:v0.4.4
 ```
 
 如果您是 MacOS 或者 Linux 系统，您也可以使用以下安装命令，一键安装 AutoK3s（Windows用户请前往 [Releases](https://github.com/cnrancher/autok3s/releases) 页面下载对应的程序）。
