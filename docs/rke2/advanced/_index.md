@@ -104,6 +104,13 @@ curl -sfL https://get.rke2.io | sh -
 systemctl enable rke2-server
 systemctl start rke2-server
 ```
+:::note 提示
+国内用户，可以使用以下方法加速安装：
+
+```
+curl -sfL http://rancher-mirror.rancher.cn/rke2/install.sh | INSTALL_RKE2_MIRROR=cn sh - 
+```
+:::
 
 ## 禁用 server chart
 

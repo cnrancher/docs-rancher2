@@ -33,6 +33,14 @@ RKE2 可以通过多种方式安装到系统中，其中两种方式是首选和
 curl -sfL https://get.rke2.io | sh -
 ```
 
+:::note 提示
+国内用户，可以使用以下方法加速安装：
+
+```
+curl -sfL http://rancher-mirror.rancher.cn/rke2/install.sh | INSTALL_RKE2_MIRROR=cn sh - 
+```
+:::
+
 下载安装脚本并添加可执行权限。
 
 ```bash

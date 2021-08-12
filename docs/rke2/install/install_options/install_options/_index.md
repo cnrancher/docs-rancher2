@@ -36,6 +36,14 @@ keywords:
 curl -sfL https://get.rke2.io | sh -
 ```
 
+:::note 提示
+国内用户，可以使用以下方法加速安装：
+
+```
+curl -sfL http://rancher-mirror.rancher.cn/rke2/install.sh | INSTALL_RKE2_MIRROR=cn sh - 
+```
+:::
+
 当使用这种方法来安装 RKE2 时，可以使用以下环境变量来配置安装：
 
 | 环境变量                   | 描述                                                                                                                                                                               |
