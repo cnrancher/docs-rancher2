@@ -35,6 +35,15 @@ keywords:
 ```sh
 curl -sfL https://get.rke2.io | sh -
 ```
+
+:::note 提示
+国内用户，可以使用以下方法加速安装：
+
+```
+curl -sfL http://rancher-mirror.rancher.cn/rke2/install.sh | INSTALL_RKE2_MIRROR=cn sh - 
+```
+:::
+
 这将默认升级到stable channel中的较新版本。
 
 如果你想升级到一个特定channel的较新版本（如最新版本），你可以指定该channel:

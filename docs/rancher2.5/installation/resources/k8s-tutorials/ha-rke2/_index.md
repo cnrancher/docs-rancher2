@@ -59,6 +59,14 @@ systemctl enable rke2-server.service
 systemctl start rke2-server.service
 ```
 
+:::note 提示
+国内用户，可以使用以下方法加速安装：
+
+```
+curl -sfL http://rancher-mirror.rancher.cn/rke2/install.sh | INSTALL_RKE2_MIRROR=cn INSTALL_RKE2_CHANNEL=v1.20 sh - 
+```
+:::
+
 1. 要加入其余的节点，你需要用相同的共享令牌或自动生成的令牌来配置每个额外的节点。下面是一个配置文件的例子：
 
 ```
@@ -76,6 +84,14 @@ curl -sfL https://get.rke2.io | sh -
 systemctl enable rke2-server.service
 systemctl start rke2-server.service
 ```
+
+:::note 提示
+国内用户，可以使用以下方法加速安装：
+
+```
+curl -sfL http://rancher-mirror.rancher.cn/rke2/install.sh | INSTALL_RKE2_MIRROR=cn sh - 
+```
+:::
 
 1. 在你的第三个 RKE2 服务器节点上重复同样的命令。
 
