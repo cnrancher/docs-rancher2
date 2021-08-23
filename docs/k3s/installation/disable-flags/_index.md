@@ -23,10 +23,10 @@ keywords:
 
 本文档假设你通过向 Server 进程传递`---cluster-init`标志来运行内嵌 etcd 的 K3s Server。
 
-如果要运行一个只有 ETCD 组件的 K3s Server，你可以通过`--disable-api-server --disable-controller-manager --disable-scheduler`标志到 k3s，这样会生成一个只有 etcd 的 Server 节点，例如：
+如果要运行一个只有 ETCD 组件的 K3s Server，你可以通过`--disable-apiserver --disable-controller-manager --disable-scheduler`标志到 k3s，这样会生成一个只有 etcd 的 Server 节点，例如：
 
 ```bash
-curl -fL https://get.k3s.io | sh -s - server --cluster-init --disable-api-server --disable-controller-manager --disable-scheduler
+curl -fL https://get.k3s.io | sh -s - server --cluster-init --disable-apiserver --disable-controller-manager --disable-scheduler
 ```
 
 完成上述步骤之后。就可以正常加入其他节点到集群中。
@@ -54,7 +54,7 @@ ip-172-31-14-69   Ready    control-plane,master        5h39m   v1.20.4+k3s1
 
 ### 重新启用控制组件
 
-在这两种情况下，你可以随时重新启用已经禁用的组件，只需删除相应的禁用标志，所以例如，如果你想把只有 etcd 的节点恢复到有所有组件的完整的 k3s Server，你只需删除以下 3 个标志`--禁用api-server --禁用controller-manager --禁用scheduler`，所以在我们的例子中，要把节点`ip-172-31-13-32`恢复到完整的 k3s Server，你只需重新运行没有禁用标志的 curl 命令：
+在这两种情况下，你可以随时重新启用已经禁用的组件，只需删除相应的禁用标志，所以例如，如果你想把只有 etcd 的节点恢复到有所有组件的完整的 k3s Server，你只需删除以下 3 个标志`--disable-apiserver --disable-controller-manager --disable-scheduler`，所以在我们的例子中，要把节点`ip-172-31-13-32`恢复到完整的 k3s Server，你只需重新运行没有禁用标志的 curl 命令：
 
 ```bash
 curl -fL https://get.k3s.io | sh -s - server --cluster-init
@@ -71,13 +71,13 @@ ip-172-31-14-69   Ready    control-plane,master        5h45m   v1.20.4+k3s1
 
 Notice that role labels has been re-added to the node `ip-172-31-13-32` with the correct labels (control-plane,etcd,master).
 
-## 使用 config file 添加禁用标志
+## 使用配置文件添加禁用标志
 
 在前面的任何一种情况下，你都可以使用配置文件来代替运行带有相关标志的 curl 命令，例如要运行一个只有 etcd 的节点，你可以在`/etc/rancher/k3s/config.yaml`文件中添加以下选项：
 
 ```bash
 ---
-disable-api-server: true
+disable-apiserver: true
 disable-controller-manager: true
 disable-scheduler: true
 cluster-init: true
@@ -87,4 +87,21 @@ cluster-init: true
 
 ```bash
 curl -fL https://get.k3s.io | sh -
+```
+
+## 使用.skip 文件禁用组件
+
+对于`/var/lib/rancher/k3s/server/manifests`下的任何 yaml 文件（coredns、traefik、local-storeage 等），你可以添加一个`.skip`文件，这将导致 K3s 不应用相关的 yaml 文件。
+
+例如，在 manifests 目录中添加 `traefik.yaml.skip` 会导致 K3s 跳过 `traefik.yaml`。
+
+```
+ls /var/lib/rancher/k3s/server/manifests
+ccm.yaml      local-storage.yaml  rolebindings.yaml  traefik.yaml.skip
+coredns.yaml  traefik.yaml
+kubectl get pods -A
+NAMESPACE     NAME                                     READY   STATUS    RESTARTS   AGE
+kube-system   local-path-provisioner-64ffb68fd-xx98j   1/1     Running   0          74s
+kube-system   metrics-server-5489f84d5d-7zwkt          1/1     Running   0          74s
+kube-system   coredns-85cb69466-vcq7j                  1/1     Running   0          74s
 ```

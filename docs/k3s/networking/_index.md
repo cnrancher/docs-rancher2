@@ -39,11 +39,11 @@ CoreDNS 是在 agent 节点启动时部署的。要禁用，请在每台服务�
 
 [Traefik](https://traefik.io/)是一个现代的 HTTP 反向代理和负载均衡器，它是为了轻松部署微服务而生的。在设计，部署和运行应用程序时，它简化了网络复杂性。
 
-启动 server 时，默认情况下会部署 Traefik。更多信息请参见[自动部署清单](/docs/k3s/advanced/_index#自动部署清单)。默认的配置文件在`/var/lib/rancher/k3s/server/manifests/traefik.yaml`中，对该文件的任何修改都会以类似`kubectl apply`的方式自动部署到 Kubernetes 中。
+启动 server 时，默认情况下会部署 Traefik。更多信息请参见[自动部署清单](/docs/k3s/advanced/_index#自动部署清单)。默认的配置文件在`/var/lib/rancher/k3s/server/manifests/traefik.yaml`中。
 
 Traefik ingress controller 将使用主机上的 80 和 443 端口（即这些端口不能用于 HostPort 或 NodePort）。
 
-Traefik 可以通过编辑`traefik.yaml`文件进行配置。为了防止 k3s 使用或覆盖修改后的版本，请使用`--no-deploy traefik`部署 k3s，并将修改后的副本存储在`k3s/server/manifests`目录中。更多信息请参考官方的[Traefik 配置参数](https://github.com/helm/charts/tree/master/stable/traefik#configuration)。
+不应该手动编辑 `traefik.yaml`文件，因为 k3s 一旦重启就会再次覆盖它。相反，你可以通过在`/var/lib/rancher/k3s/server/manifests`中创建一个额外的`HelmChartConfig`清单来定制 Traefik。更多细节和例子见 [使用 HelmChartConfig 自定义打包的组件](/docs/k3s/helm/_index#使用-helmchartconfig-自定义打包的组件) 。关于可能的配置值的更多信息，请参考官方的[Traefik Helm 配置参数。](https://github.com/traefik/traefik-helm-chart/tree/master/traefik)。
 
 要禁用它，请使用`--disable traefik`选项启动每个 server。
 
