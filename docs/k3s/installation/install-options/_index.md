@@ -71,6 +71,12 @@ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_M
 | `K3S_TOKEN`                     | 用于将 server 或 agent 加入集群的共享 secret。                                                                                                                                                                                                          |
 | `K3S_TOKEN_FILE`                | 指定 `cluster-secret`,`token` 的文件目录。                                                                                                                                                                                                              |
 
+这个例子介绍了如何使用上述的环境变量（在管道之后）：
+
+```
+curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL=latest sh -
+```
+
 以 "K3S\_"开头的环境变量将被保留，供 systemd 和 openrc 服务使用。
 
 在没有明确设置 exec 命令的情况下设置`K3S_URL`，会将命令默认为 "agent"。
