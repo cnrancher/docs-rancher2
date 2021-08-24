@@ -43,7 +43,7 @@ keywords:
 
 **Rancher v2.x 支持采用 Hashicorp 的 Vault 来存储密文吗**
 
-使用 Vault 进行密文管理在我们的产品 Roadmap 里，但目前还没有确定在具体哪个版本发布。
+Rancher 和 Hashicorp 的 Vault 没有内置集成。Rancher 管理 Kubernetes 并通过 Kubernetes API 与 Secret 集成。因此，在任何下游（托管）集群中，你可以使用你选择的 secret vault，前提是它与 Kubernetes 集成，包括[Vault](https://www.vaultproject.io/docs/platform/k8s)。
 
 **Rancher v2.x 也支持 RKT 容器吗？**
 

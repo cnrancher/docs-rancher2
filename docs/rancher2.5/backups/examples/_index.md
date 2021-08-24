@@ -78,7 +78,7 @@ spec:
       credentialSecretName: minio-creds
       credentialSecretNamespace: default
       bucketName: rancherbackups
-      endpoint: minio.xip.io
+      endpoint: minio.sslip.io
       endpointCA: LS0tLS1CRUdJTi3VUFNQkl5UUT.....pbEpWaVzNkRS0tLS0t
   resourceSetName: rancher-resource-set
   encryptionConfigSecretName: encryptionconfig
@@ -208,7 +208,7 @@ spec:
       credentialSecretName: minio-creds
       credentialSecretNamespace: default
       bucketName: rancherbackups
-      endpoint: minio.xip.io
+      endpoint: minio.sslip.io
       endpointCA: LS0tLS1CRUdJTi3VUFNQkl5UUT.....pbEpWaVzNkRS0tLS0t
   encryptionConfigSecretName: test-encryptionconfig
 ```

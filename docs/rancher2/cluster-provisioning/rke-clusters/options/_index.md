@@ -100,6 +100,8 @@ _v2.2.0 可用_
 
 > 授权的集群端点仅适用于 Rancher 启动的 Kubernetes 集群。换句话说，它只适用于 Rancher [使用 RKE](/docs/rancher2/overview/architecture/_index)来配置集群的集群。它不适用于托管的 Kubernetes 集群，例如 Amazon 的 EKS。
 
+> 授权集群端点仅在 Rancher [使用 RKE](/docs/rancher2/cluster-provisioning/rke-clusters/options/_index#授权集群访问地址)配置的集群中可用。它不适用于托管的 Kubernetes 供应商的集群，如亚马逊的 EKS。此外，授权集群端点不能对导入 Rancher 的 RKE 集群启用；它只对 Rancher 启动的 Kubernetes 集群可用。
+
 这在 Rancher 启动的 Kubernetes 集群中默认启用，使用具有`controlplane` 角色的节点的 IP 和默认的 Kubernetes 自签名证书。
 
 有关授权的集群端点如何工作以及使用它的原因的更多详细信息，请参阅[产品架构](/docs/rancher2/overview/architecture/_index)。

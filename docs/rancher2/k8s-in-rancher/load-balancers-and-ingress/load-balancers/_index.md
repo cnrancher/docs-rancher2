@@ -67,8 +67,8 @@ Kubernetes 通过**四层负载均衡**和**七层负载均衡**两种方式支�
 
 其他七层负载均衡器（例如 Google 负载均衡器或 Nginx Ingress Controller）直接暴露一个或多个 IP 地址。Google 负载均衡器提供了一个可路由的 IP 地址。Nginx Ingress 控制器暴露了运行 Nginx Ingress 控制器的所有节点的外部 IP。您可以执行以下任一操作：
 
-- 配置您自己的 DNS，将您的域名映射到第七层负载均衡器暴露的 IP 地址。设置您自己的域名需要您配置 DNS 服务器并等待 DNS 生效。Rancher 将采用您暴露的 IP 之一，例如 a.b.c.d，并生成一个主机名 `<ingressname>.<namespace>.a.b.c.d.xip.io`
-- 要求 Rancher 为您的 Ingress 规则生成 `xip.io` 主机名。使用 `xip.io` 的好处是，您可以在创建 Ingress 规则后立即获得一个有效的入口 URL。
+- 配置您自己的 DNS，将您的域名映射到第七层负载均衡器暴露的 IP 地址。设置您自己的域名需要您配置 DNS 服务器并等待 DNS 生效。Rancher 将采用您暴露的 IP 之一，例如 a.b.c.d，并生成一个主机名 `<ingressname>.<namespace>.a.b.c.d.sslip.io`
+- 要求 Rancher 为您的 Ingress 规则生成 `sslip.io` 主机名。使用 `sslip.io` 的好处是，您可以在创建 Ingress 规则后立即获得一个有效的入口 URL。
 
 ## 相关链接
 
