@@ -17,6 +17,8 @@ keywords:
 
 _v0.2.0 开始可用_
 
+> **注意：**这不是 "Kubernetes 中的 TLS 证书管理"。更多细节请参考[Kubernetes 文档](https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/)和 RKE [cluster.yaml 示例](/docs/rke/example-yamls/_index/)。
+
 证书是 Kubernetes 集群的重要组成部分，所有的 Kubernetes 组件都需要用到证书。您可以使用 RKE 的 `rke cert`命令管理证书。
 
 ## 生成证书签发请求（CSRs）和密钥

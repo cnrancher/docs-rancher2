@@ -62,7 +62,7 @@ keywords:
    Outputs:
 
    rancher_node_ip = xx.xx.xx.xx
-   rancher_server_url = rancher.xx.xx.xx.xx.xip.io
+   rancher_server_url = rancher.xx.xx.xx.xx.sslip.io
    workload_node_ip = yy.yy.yy.yy
    ```
 

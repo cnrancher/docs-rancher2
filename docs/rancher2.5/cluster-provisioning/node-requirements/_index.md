@@ -108,6 +108,8 @@ Windows 节点只能用于工作节点。详情请参阅[配置自定义 Windows
 
 对于生产集群，我们建议您仅开放下文端口要求中定义的端口来限制流量。
 
+IPv6 应该在操作系统层面上被禁用。除非你特别打算利用 IPv6，否则你应该在你的节点上禁用它。 目前，IPv6 还没有得到完全支持，很多时候，仅仅在网卡上禁用 IPv6 还不足以避免复杂化。
+
 需要开放的端口根据下游集群的启动方式而有所不同。下面的每个部分列出了在不同的[集群创建选项](/docs/rancher2.5/cluster-provisioning/_index)下需要开放的端口。
 
 有关 kubernetes 集群中 etcd 节点、controlplane 节点和 worker 节点的端口要求的详细信息，请参阅 [Rancher Kubernetes Engine 的端口要求](/docs/rke/os/_index)。
