@@ -59,7 +59,7 @@ Cloud Shell 是一个用于管理谷歌云上托管的资源的壳环境。Cloud
    在后面的步骤中，`kubectl`将被配置为使用新的 GKE 集群。
 
 1. [安装 Helm 3](https://helm.sh/docs/intro/install/)，如果还没有安装。
-1. 用`HELM_EXPERIMENTAL_OCI`变量启用 Helm 实验性[支持 OCI 图像](https://github.com/helm/community/blob/master/hips/hip-0006.md)。在`~/.bashrc`（或 macOS 中的`~/.bash_profile`，或你的 shell 存储环境变量的地方）添加以下一行。
+1. 用`HELM_EXPERIMENTAL_OCI`变量启用 Helm 实验性[支持 OCI 镜像](https://github.com/helm/community/blob/master/hips/hip-0006.md)。在`~/.bashrc`（或 macOS 中的`~/.bash_profile`，或你的 shell 存储环境变量的地方）添加以下一行。
 
    ```
    export HELM_EXPERIMENTAL_OCI=1

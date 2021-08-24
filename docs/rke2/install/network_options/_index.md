@@ -17,7 +17,7 @@ keywords:
 
 默认情况下，RKE2 将 Canal 作为 cni 运行，VXLAN 作为默认后端，Canal 在主要组件启动并运行后通过 Helm Chart 安装，可以通过修改 helm chart 选项进行自定义。
 
-也可以选择用 Cilium 代替 Canal 作为 cni。
+也可以选择用 Cilium 或 Calico 代替 Canal 作为 cni。
 
 ## Canal 选项
 

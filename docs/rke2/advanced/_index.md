@@ -104,12 +104,14 @@ curl -sfL https://get.rke2.io | sh -
 systemctl enable rke2-server
 systemctl start rke2-server
 ```
+
 :::note 提示
 国内用户，可以使用以下方法加速安装：
 
 ```
-curl -sfL http://rancher-mirror.rancher.cn/rke2/install.sh | INSTALL_RKE2_MIRROR=cn sh - 
+curl -sfL http://rancher-mirror.rancher.cn/rke2/install.sh | INSTALL_RKE2_MIRROR=cn sh -
 ```
+
 :::
 
 ## 禁用 server chart
@@ -174,3 +176,69 @@ cloud-provider-config: "/etc/rancher/rke2/cloud.conf"
 5. 正常[安装](/docs/rke2/install/methods/_index)RKE2 (很可能是以[airgapped](/docs/rke2/install/airgap/_index)的身份安装)
 
 6. 通过使用`kubectl get nodes --show-labels` 确认集群节点标签上是否存在 AWS 元数据来验证安装是否成功
+
+## 控制平面组件资源请求/限制
+
+在 RKE2 的 `server` 子命令下有以下选项。这些选项允许为 RKE2 的控制面组件指定 CPU 请求和限制。
+
+```
+   --control-plane-resource-requests value       (components) Control Plane resource requests [$RKE2_CONTROL_PLANE_RESOURCE_REQUESTS]
+   --control-plane-resource-limits value         (components) Control Plane resource limits [$RKE2_CONTROL_PLANE_RESOURCE_LIMITS]
+```
+
+值是一个以逗号分隔的列表，包括 `[controlplane-component]-(cpu|memory)=[desired-value]`。`controlplan-component` 的可能值是:
+
+```
+kube-apiserver
+kube-scheduler
+kube-controller-manager
+kube-proxy
+etcd
+cloud-controller-manager
+```
+
+因此，一个 `--control-plane-resource-requests` 或 `--control-plane-resource-limits` 的例子可能看起来像:
+
+```
+kube-apiserver-cpu=500m,kube-apiserver-memory=512M,kube-scheduler-cpu=250m,kube-scheduler-memory=512M,etcd-cpu=1000m
+```
+
+CPU/内存的单位与 Kubernetes 的资源单位相同（参见：[Kubernetes 的资源限制](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-units-in-kubernetes)）。
+
+## 额外的控制平面组件卷挂载
+
+在 RKE2 的 `server` 子命令下有以下选项。这些选项指定主机路径，将节点文件系统中的目录挂载到与前缀名称相对应的静态 Pod 组件中。
+
+```
+   --kube-apiserver-extra-mount value            (components) kube-apiserver extra volume mounts [$RKE2_KUBE_APISERVER_EXTRA_MOUNT]
+   --kube-scheduler-extra-mount value            (components) kube-scheduler extra volume mounts [$RKE2_KUBE_SCHEDULER_EXTRA_MOUNT]
+   --kube-controller-manager-extra-mount value   (components) kube-controller-manager extra volume mounts [$RKE2_KUBE_CONTROLLER_MANAGER_EXTRA_MOUNT]
+   --kube-proxy-extra-mount value                (components) kube-proxy extra volume mounts [$RKE2_KUBE_PROXY_EXTRA_MOUNT]
+   --etcd-extra-mount value                      (components) etcd extra volume mounts [$RKE2_ETCD_EXTRA_MOUNT]
+   --cloud-controller-manager-extra-mount value  (components) cloud-controller-manager extra volume mounts [$RKE2_CLOUD_CONTROLLER_MANAGER_EXTRA_MOUNT]
+```
+
+### RW 主机路径卷挂载
+
+`/source/volume/path/on/host:/destination/volume/path/in/staticpod`
+
+### RO 主机路径卷挂载
+
+要将卷挂载为只读，在卷挂载的最后加上`:ro'。 `/source/volume/path/on/host:/destination/volume/path/in/staticpod:ro`
+
+通过在配置文件中以数组形式传递标志值，可以为同一个组件指定多个卷挂载。
+
+## 额外的控制平面组件环境变量
+
+以下是 RKE2 的 `server` 子命令中的选项。这些选项以标准格式指定了额外的环境变量，即 `KEY=VALUE`，用于与前缀名称相对应的静态 Pod 组件。
+
+```
+   --kube-apiserver-extra-env value              (components) kube-apiserver extra environment variables [$RKE2_KUBE_APISERVER_EXTRA_ENV]
+   --kube-scheduler-extra-env value              (components) kube-scheduler extra environment variables [$RKE2_KUBE_SCHEDULER_EXTRA_ENV]
+   --kube-controller-manager-extra-env value     (components) kube-controller-manager extra environment variables [$RKE2_KUBE_CONTROLLER_MANAGER_EXTRA_ENV]
+   --kube-proxy-extra-env value                  (components) kube-proxy extra environment variables [$RKE2_KUBE_PROXY_EXTRA_ENV]
+   --etcd-extra-env value                        (components) etcd extra environment variables [$RKE2_ETCD_EXTRA_ENV]
+   --cloud-controller-manager-extra-env value    (components) cloud-controller-manager extra environment variables [$RKE2_CLOUD_CONTROLLER_MANAGER_EXTRA_ENV]
+```
+
+通过在配置文件中以数组形式传递标志值，可以为同一个组件指定多个环境变量。

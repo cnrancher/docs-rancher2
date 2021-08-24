@@ -37,8 +37,9 @@ curl -sfL https://get.rke2.io | sh -
 国内用户，可以使用以下方法加速安装：
 
 ```
-curl -sfL http://rancher-mirror.rancher.cn/rke2/install.sh | INSTALL_RKE2_MIRROR=cn sh - 
+curl -sfL http://rancher-mirror.rancher.cn/rke2/install.sh | INSTALL_RKE2_MIRROR=cn sh -
 ```
+
 :::
 
 下载安装脚本并添加可执行权限。
@@ -66,7 +67,7 @@ Tarball 结构/内容：
 - lib - 包含 server 和 agent 的 systemd 单元文件
 - share - 包含 RKE2 许可证以及用于在 CIS 模式下运行 RKE2 时使用的 sysctl 配置文件
 
-要进一步配置系统，你需要参考[server](/docs/rke2/install/install_options/server_config/_index)或[agent](/docs/rke2/install/install_options/agent_config/_index)文档。
+要进一步配置系统，你需要参考[server](/docs/rke2/install/install_options/server_config/_index)或[agent](/docs/rke2/install/install_options/linux_agent_config/_index)文档。
 
 ## RPM
 

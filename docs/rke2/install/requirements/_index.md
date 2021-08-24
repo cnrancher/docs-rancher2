@@ -25,7 +25,9 @@ RKE2 非常轻便，但有一些最低要求，如下所述。
 
 ## 操作系统
 
-RKE2 已经在以下操作系统及其后续非主要版本上进行了测试和验证：
+### Linux
+
+RKE2 已经在以下操作系统及其后续的非主要版本上进行了测试和验证：
 
 - Ubuntu 18.04 (amd64)
 - Ubuntu 20.04 (amd64)
@@ -33,12 +35,45 @@ RKE2 已经在以下操作系统及其后续非主要版本上进行了测试和
 - CentOS/RHEL 8.2 (amd64)
 - SLES 15 SP2 (amd64) (v1.18.16+rke2r1 和更新版本)
 
+### Windows
+
+**从 v1.21.3+rke2r1 开始，Windows 支持目前是实验性的**。**Windows 支持需要选择 Calico 作为 RKE2 集群的 CNI**。
+
+RKE2 的 Windows 节点（Worker）agent 已经在以下操作系统及其后续非主要版本上进行了测试和验证：
+
+- Windows Server 2019 LTSC (amd64) (OS Build 17763.2061)
+- Windows Server SAC 2004 (amd64) (OS Build 19041.1110)
+- Windows Server SAC 20H2 (amd64) (OS Build 19042.1110)
+
+**注意：**需要启用 Windows Server Containers，以便 RKE2 agent 工作。
+
+用管理员权限打开一个新的 Powershell 窗口
+
+```powershell
+powershell -Command "Start-Process PowerShell -Verb RunAs"
+```
+
+在新的 Powershell 窗口中，运行以下命令。
+
+```powershell
+Enable-WindowsOptionalFeature -Online -FeatureName containers –All
+```
+
+这将需要重新启动以使 `Containers` 功能正常运行。
+
 ## 硬件
 
 硬件要求根据你的部署规模而扩展。这里列出了最低建议：
 
+### Linux
+
 - 内存：最低 512MB（我们建议至少 1GB）。
 - CPU：最低 1 个
+
+### Windows
+
+- RAM: 最低 4GB (我们建议至少有 8GB)
+- CPU: 最低 2 个 (我们建议至少有 4 个 CPU)
 
 #### 磁盘
 
@@ -71,3 +106,11 @@ RKE2 server 节点的入站规则：
 | TCP  | 30000-32767 | RKE2 server 和 agent 节点  | NodePort 端口范围        |
 
 通常情况下，所有出站流量都是允许的。
+
+### Windows 特定的入站网络规则
+
+| 协议 | 端口 | 来源             | 描述                         |
+| ---- | ---- | ---------------- | ---------------------------- |
+| UDP  | 4789 | RKE2 server 节点 | Calico 和 Flannel VXLAN 需要 |
+
+通常情况下，所有出站流量都将被允许。

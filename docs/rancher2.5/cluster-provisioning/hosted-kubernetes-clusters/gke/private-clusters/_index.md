@@ -51,6 +51,6 @@ keywords:
 
 #### 直接访问
 
-如果 Rancher 服务器与集群的控制平面运行在同一个 VPC 上，它将可以直接访问控制平面的私有端点。集群节点将需要访问[私有镜像仓库](#private-registry)来下载上述的图像。
+如果 Rancher 服务器与集群的控制平面运行在同一个 VPC 上，它将可以直接访问控制平面的私有端点。集群节点将需要访问[私有镜像仓库](#private-registry)来下载上述的镜像。
 
 你也可以使用谷歌的服务，如[Cloud VPN](https://cloud.google.com/network-connectivity/docs/vpn/concepts/overview)或[Cloud Interconnect VLAN](https://cloud.google.com/network-connectivity/docs/interconnect)，以促进你的组织的网络和谷歌 VPC 之间的连接。

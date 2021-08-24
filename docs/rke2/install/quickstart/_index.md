@@ -37,8 +37,9 @@ curl -sfL https://get.rke2.io | sh -
 国内用户，可以使用以下方法加速安装：
 
 ```
-curl -sfL http://rancher-mirror.rancher.cn/rke2/install.sh | INSTALL_RKE2_MIRROR=cn sh - 
+curl -sfL http://rancher-mirror.rancher.cn/rke2/install.sh | INSTALL_RKE2_MIRROR=cn sh -
 ```
+
 :::
 
 这将在你的机器上安装`rke2-server`服务和`rke2`二进制文件。
@@ -73,7 +74,7 @@ journalctl -u rke2-server -f
 如果你要添加额外的 server 节点，则总数必须为奇数。需要奇数来维持选举数。更多细节请参见[高可用文档](/docs/rke2/install/ha/_index) 。
 :::
 
-## Agent（Worker）节点的安装
+## Linux Agent（Worker）节点的安装
 
 #### 1. 运行安装程序
 
@@ -85,8 +86,9 @@ curl -sfL https://get.rke2.io | INSTALL_RKE2_TYPE="agent" sh -
 国内用户，可以使用以下方法加速安装：
 
 ```
-curl -sfL http://rancher-mirror.rancher.cn/rke2/install.sh | INSTALL_RKE2_MIRROR=cn INSTALL_RKE2_TYPE="agent"  sh - 
+curl -sfL http://rancher-mirror.rancher.cn/rke2/install.sh | INSTALL_RKE2_MIRROR=cn INSTALL_RKE2_TYPE="agent"  sh -
 ```
+
 :::
 
 这将在你的机器上安装 `rke2-agent` 服务和 `rke2 `二进制文件。
@@ -132,3 +134,76 @@ journalctl -u rke2-agent -f
 :::
 
 要阅读更多关于 config.yaml 文件的信息，请参见[安装选项文档。](/docs/rke2/install/install_options/install_options/_index#配置文件)
+
+## Windows Agent（Worker）节点的安装
+
+**从 v1.21.3+rke2r1 开始，Windows 支持目前是实验性的**。**Windows 支持需要选择 Calico 作为 RKE2 集群的 CNI**。
+
+#### 1. 准备好 Windows Agent 节点
+
+**注意：**需要启用 Windows Server Containers，以便 RKE2 agent 工作。
+
+以管理员权限打开一个新的 Powershell 窗口
+
+```powershell
+powershell -Command "Start-Process PowerShell -Verb RunAs"
+```
+
+在新的 Powershell 窗口中，运行以下命令。
+
+```powershell
+Enable-WindowsOptionalFeature -Online -FeatureName containers –All
+```
+
+这将需要重新启动以使 `Containers` 功能正常运行。
+
+#### 2. 下载安装脚本
+
+```powershell
+Invoke-WebRequest -Uri https://raw.githubusercontent.com/rancher/rke2/master/install.ps1 -Outfile install.ps1
+```
+
+这个脚本将下载 Windows 二进制文件 `rke2.exe` 到你的机器上。
+
+#### 3. 为 Windows 配置 rke2-agent
+
+```powershell
+New-Item -Type Directory c:/etc/rancher/rke2 -Force
+Set-Content -Path c:/etc/rancher/rke2/config.yaml -Value @"
+server: https://<server>:9345
+token: <token from server node>
+"@
+```
+
+要阅读更多关于 config.yaml 文件的信息，请参见[安装选项文档。](/docs/rke2/install/install_options/install_options/_index#配置文件)
+
+#### 4. 配置 PATH
+
+```powershell
+$env:PATH+=";c:\var\lib\rancher\rke2\bin;c:\usr\local\bin"
+
+[Environment]::SetEnvironmentVariable(
+    "Path",
+    [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine) + ";c:\var\lib\rancher\rke2\bin;c:\usr\local\bin",
+    [EnvironmentVariableTarget]::Machine)
+```
+
+#### 5. 运行安装程序
+
+```powershell
+./install.ps1
+```
+
+#### 6. 启动 Windows RKE2 服务
+
+```powershell
+rke2.exe agent service --add
+```
+
+**注意：**每台机器必须有一个唯一的主机名。
+
+如果你希望只使用 CLI 参数，请使用所需参数运行二进制文件。
+
+```
+rke2.exe agent --token <> --server <>
+```

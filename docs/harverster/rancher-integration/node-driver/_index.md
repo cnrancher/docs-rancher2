@@ -61,7 +61,7 @@ Harvester 节点驱动用于配置 Harvester 集群中的虚拟机。在本节�
    - 配置 CPU、内存、磁盘和磁盘总线。
    - 选择一个与 "cloud-init "配置兼容的操作系统镜像。
    - 选择一个节点驱动程序能够连接的网络，目前只支持`VLAN`。
-   - 输入 SSH 用户，该用户名将被用于 ssh 到节点。例如，Ubuntu 云图像的默认用户将是`ubuntu`。
+   - 输入 SSH 用户，该用户名将被用于 ssh 到节点。例如，Ubuntu 云镜像的默认用户将是`ubuntu`。
 1. 输入一个**RANCHER TEMPLATE**名称。
 
 更多信息请参见[由基础设施提供商托管的节点](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/_index)。

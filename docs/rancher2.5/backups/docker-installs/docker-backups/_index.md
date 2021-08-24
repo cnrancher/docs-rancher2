@@ -29,7 +29,7 @@ docker run  --volumes-from rancher-data-<DATE> -v $PWD:/backup busybox tar pzcvf
 
 在该命令中，`<DATE>`是数据容器和备份创建日期的占位符。例如，`9-27-18`代表的是 2018 年 9 月 27 日。
 
-请参考下面的图像和参考表，了解如何获取此占位符数据。在开始[创建备份](#创建备份)之前，请记下或复制这些信息。交叉参考下面的图像和参考表，了解如何获取该占位符数据。
+请参考下面的镜像和参考表，了解如何获取此占位符数据。在开始[创建备份](#创建备份)之前，请记下或复制这些信息。交叉参考下面的镜像和参考表，了解如何获取该占位符数据。
 
 在终端执行`docker ps`命令，显示哪里可以找到`<RANCHER_CONTAINER_TAG>`和`<RANCHER_CONTAINER_NAME>`。
 ![Placeholder Reference](/img/rancher/placeholder-ref.png)

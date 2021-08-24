@@ -21,7 +21,7 @@ Rancher v1.6 使用其自身的健康检查微服务在您的节点和服务上�
 
 使用本文档修改 Rancher v2.x 的工作负载和服务并在 `output.txt`中列出`health_check`. 您可以通过配置活性探针（即健康检查）来修正它们。
 
-例如，对于下面的图像，我们将为 `web` 和 `weblb` 工作负载配置活性探针（即迁移工具 CLI 输出的 Kubernetes 清单）。
+例如，对于下面的镜像，我们将为 `web` 和 `weblb` 工作负载配置活性探针（即迁移工具 CLI 输出的 Kubernetes 清单）。
 
 <figcaption>
 为“webLB”工作负载和“web”工作负载解决“health_check”问题
