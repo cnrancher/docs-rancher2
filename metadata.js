@@ -941,13 +941,18 @@ const metadata = {
             "rke2/install/ha/_index": "高可用安装",
             "rke2/install/install_options/install_options/_index": "安装选项",
             "rke2/install/install_options/server_config/_index": "Server 配置",
-            "rke2/install/install_options/agent_config/_index": "Agent 配置",
+            "rke2/install/install_options/linux_agent_config/_index":
+                "Linux Agent 配置",
+            "rke2/install/install_options/windows_agent_config/_index":
+                "Windows Agent 配置",
             "rke2/install/methods/_index": "安装方式",
             "rke2/install/network_options/_index": "网络选项",
             "rke2/install/containerd_registry_configuration/_index":
                 "Containerd 注册表配置",
             "rke2/install/airgap/_index": "离线安装",
-            "rke2/install/uninstall/_index": "卸载",
+            "rke2/install/windows_airgap/_index": "Windows 离线安装",
+            "rke2/install/linux_uninstall/_index": "Linux 卸载",
+            "rke2/install/windows_uninstall/_index": "Windows 卸载",
             "rke2/upgrade/upgrade/_index": "升级RKE2集群",
             "rke2/upgrade/basic_upgrade/_index": "基础升级",
             "rke2/upgrade/automated_upgrade/_index": "自动升级",

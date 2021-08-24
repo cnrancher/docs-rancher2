@@ -54,3 +54,9 @@ unmanaged-devices=interface-name:cali*;interface-name:flannel*
 - [grub2 手册](https://www.gnu.org/software/grub/manual/grub/grub.html#linux)
 - [systemd 手册](https://www.freedesktop.org/software/systemd/man/systemd.html#Kernel%20Command%20Line)
 - [cgroups v2](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html)
+
+## Calico 与 vxlan 封装
+
+Calico 在使用 vxlan 封装且 vxlan 接口的校验和卸载开启时遇到了一个内核错误。这个问题在[calico 项目](https://github.com/projectcalico/calico/issues/3145)和[rke2 项目](https://github.com/rancher/rke2/issues/1541)。我们的临时解决方法是通过应用值来禁用校验和卸载，在[calico helm chart](https://github.com/rancher/rke2-charts/blob/main/charts/rke2-calico/rke2-calico/v3.19.2-203/values.yaml#L51-L53)中使用 `ChecksumOffloadBroken=true` 的值。
+
+这个问题已经在 Ubuntu 18.04、Ubuntu 20.04 和 openSUSE Leap 15.3 中被观察到。

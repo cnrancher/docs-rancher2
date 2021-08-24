@@ -29,7 +29,7 @@ keywords:
 - 主机`IPC`、`NET`和`PID`命名空间
 - `CAP_SYS_BOOT`能力
 - 主机根目录安装在`/host`，有读写权限
-:::
+  :::
 
 关于 system-upgrade-controller 的设计和架构或其与 rke2 集成的更多细节，请参见以下 Git 仓库。
 
@@ -53,7 +53,7 @@ kubectl apply -f https://github.com/rancher/system-upgrade-controller/releases/d
 
 ## 配置计划
 
-建议你至少创建两个计划：一个用于升级 server(master)节点的计划，一个用于升级 agent(worker)节点的计划。根据需要，你可以创建额外的计划来控制各节点的升级。下面的两个计划例子将把你的集群升级到 rke2 v1.21.2+rke2r1。一旦计划被创建，控制器将接收它们并开始升级你的集群。
+建议你至少创建两个计划：一个用于升级 server(master/control-plane)节点的计划，一个用于升级 agent(worker)节点的计划。根据需要，你可以创建额外的计划来控制各节点的升级。下面的两个计划例子将把你的集群升级到 rke2 v1.21.2+rke2r1。一旦计划被创建，控制器将接收它们并开始升级你的集群。
 
 ```
 # Server plan
@@ -71,7 +71,8 @@ spec:
     matchExpressions:
        - {key: rke2-upgrade, operator: Exists}
        - {key: rke2-upgrade, operator: NotIn, values: ["disabled", "false"]}
-       - {key: node-role.kubernetes.io/master, operator: In, values: ["true"]}
+       # When using k8s version 1.19 or older, swap control-plane with master
+       - {key: node-role.kubernetes.io/control-plane, operator: In, values: ["true"]}
   serviceAccountName: system-upgrade
   cordon: true
 #  drain:
@@ -94,7 +95,8 @@ spec:
     matchExpressions:
       - {key: rke2-upgrade, operator: Exists}
       - {key: rke2-upgrade, operator: NotIn, values: ["disabled", "false"]}
-      - {key: node-role.kubernetes.io/master, operator: NotIn, values: ["true"]}
+      # When using k8s version 1.19 or older, swap control-plane with master
+      - {key: node-role.kubernetes.io/control-plane, operator: NotIn, values: ["true"]}
   prepare:
     args:
     - prepare
@@ -115,7 +117,7 @@ spec:
 
 第二，`concurrency` 字段表明有多少节点可以同时被升级。
 
-第三，server-plan 通过指定一个标签选择器，选择具有 `node-role.kubernetes.io/master` 标签的节点，来锁定 server 节点。agent-plan 通过指定一个标签选择器，选择没有这个标签的节点，来锁定 agent 节点。可以选择包括额外的标签，就像上面的例子，它要求存在标签 "rke2-upgrade"，并且不具有 "disabled" 或 "false" 的值。
+第三，server-plan 通过指定一个标签选择器，选择具有 `node-role.kubernetes.io/control-plane` 标签的节点(`node-role.kubernetes.io/master` 适用于 1.19 或更早的版本)，来锁定 server 节点。agent-plan 通过指定一个标签选择器，选择没有这个标签的节点，来锁定 agent 节点。可以选择包括额外的标签，就像上面的例子，它要求存在标签 "rke2-upgrade"，并且不具有 "disabled" 或 "false" 的值。
 
 第四，agent 计划中的 `prepare` 步骤将导致该计划的升级作业在执行前等待 server 计划的完成。
 

@@ -1,5 +1,5 @@
 ---
-title: 卸载
+title: Linux 卸载
 description: 根据安装 RKE2 的安装方式不同，卸载过程也不同。
 keywords:
   - rancher
@@ -13,7 +13,7 @@ keywords:
   - rancher cn
   - RKE2
   - 卸载rke2
-  - 卸载
+  - Linux 卸载
 ---
 
 :::warning 注意：

@@ -36,7 +36,7 @@ RKE2 汇集了一些开源技术来实现这一切：
 - [etcd][io-etcd]
 - [runc][gh-runc]
 - [containerd][io-containerd]/[cri][gh-cri-api]
-- [CNI][gh-cni]: Canal ([Calico][org-projectcalico] & [Flannel][gh-flannel]) or [Cilium][io-cilium]
+- CNI][gh-cni]: Canal ([Calico][org-projectcalico] ; [Flannel][gh-flannel]), [Cilium][io-cilium] 或 [Calico][org-projectcalico]
 - [CoreDNS][io-coredns]
 - [NGINX Ingress Controller][io-ingress-nginx]
 - [Metrics Server][gh-metrics-server]

@@ -30,7 +30,7 @@ tar pzxvf /backup/rancher-data-backup-<RANCHER_VERSION>-<DATE>"
 
 在此命令中，`<RANCHER_CONTAINER_NAME>`和`<RANCHER_VERSION>-<DATE>`是 Rancher 部署的环境变量。
 
-请参考下面的图像和参考表，了解如何获取该占位符数据。在开始下面的程序之前，请记下或复制这些信息。
+请参考下面的镜像和参考表，了解如何获取该占位符数据。在开始下面的程序之前，请记下或复制这些信息。
 
 在终端执行`docker ps`命令，显示哪里可以找到`<RANCHER_CONTAINER_TAG>`和`<RANCHER_CONTAINER_NAME>`。
 ![Placeholder Reference](/img/rancher/placeholder-ref.png)
