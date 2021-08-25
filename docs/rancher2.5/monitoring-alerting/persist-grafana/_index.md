@@ -52,14 +52,14 @@ keywords:
 
 ```yaml
 apiVersion: v1
-类型。配置图
+kind: ConfigMap
 metadata:
-  标签。
-    grafana_dashboard。"1"
-  名称。<dashboard-name>（仪表盘名称
-  namespace: cattle-dashboards # 如果使用非默认的命名空间，则进行更改
-数据。
-  <dashboard-name>.json。|-
+  labels:
+    grafana_dashboard: "1"
+  name: <dashboard-name>
+  namespace: cattle-dashboards # Change if using a non-default namespace
+data:
+  <dashboard-name>.json: |-
     <copied-json>
 ```
 
