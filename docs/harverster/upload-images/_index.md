@@ -22,7 +22,7 @@ keywords:
 :::note
 
 - 镜像名称将使用 URL 地址的文件名自动填充。你可以在需要时随时修改它。
-- 目前还不支持从 UI 上传图片到 Harvester 集群。该功能请求正在被追踪[#570](https://github.com/harvester/harvester/issues/570)。
+- 目前还不支持从 UI 上传镜像到 Harvester 集群。该功能请求正在被追踪[#570](https://github.com/harvester/harvester/issues/570)。
 
 :::
 
