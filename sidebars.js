@@ -1737,6 +1737,7 @@ module.exports = {
             "rancher2.5/troubleshooting/logging/_index",
         ],
         参与Rancher开源项目: ["rancher2.5/contributing/_index"],
+        开源社区治理: ["rancher2.5/contributing/community-governance/_index"],
     },
     rke: {
         产品介绍: ["rke/_index"],
