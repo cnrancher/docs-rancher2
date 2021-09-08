@@ -694,6 +694,7 @@ const metadata = {
             "rancher2.5/troubleshooting/logging/_index": "配置日志等级",
             //contributing
             "rancher2.5/contributing/_index": "为Rancher社区做出贡献",
+            "rancher2.5/contributing/community-governance/_index": "开源社区治理",
         },
         rke: {
             "rke/_index": "产品简介",
