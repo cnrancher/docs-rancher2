@@ -266,7 +266,7 @@ Rancher Chart 有许多自定义安装选项以适应特定的环境。以下是
 - 如上所述，为你的证书设置适当的`hostname`。
 - 将`replicas`设置为 Rancher 部署所使用的复制数量。默认为 3；如果你的集群中少于 3 个节点，你应填写实际节点数量。
 - 设置`ingress.tls.source`为`secret`。
-- 要安装一个特定的 Rancher 版本，使用`--版本`标志，例如：`--版本2.3.6`。
+- 要安装一个特定的 Rancher 版本，使用`--version` 标志，例如：`--version 2.3.6`。
 - 如果你安装的是 alpha 版本，Helm 要求在命令中加入`--devel`选项。
 
 ```shell
