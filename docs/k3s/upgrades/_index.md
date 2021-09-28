@@ -20,4 +20,6 @@ keywords:
 
 [自动升级](/docs/k3s/upgrades/automated/_index)描述了如何使用 Rancher 的[system-upgrade-controller](https://github.com/rancher/system-upgrade-controller)执行 Kubernetes 原生的自动升级。
 
-> 实验性嵌入式 Dqlite 数据存储在 K3s v1.19.1 中被废弃。请注意，不支持从实验性 Dqlite 升级到实验性嵌入式 etcd。如果您尝试升级，将不会成功，数据将丢失。
+> 如果 Traefik 没有被禁用，K3s 1.20 及以前的版本会安装 Traefik v1，而 K3s 1.21 及以后的版本会安装 Traefik v2（如果还没有 v1）。 要升级 Traefik，请参考[Traefik 文档](https://doc.traefik.io/traefik/migration/v1-to-v2/)，并使用[迁移工具](https://github.com/traefik/traefik-migration-tool)从旧的 Traefik v1 迁移到 Traefik v2。
+> 
+> 在 K3s v1.19.1 中，实验性的嵌入式 Dqlite 数据存储被废弃了。请注意，不支持从实验性 Dqlite 到实验性嵌入式 etcd 的升级。如果你尝试升级，它将不会成功，数据将丢失。

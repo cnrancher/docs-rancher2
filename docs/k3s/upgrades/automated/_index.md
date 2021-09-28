@@ -35,10 +35,15 @@ keywords:
 - [system-upgrade-controller](https://github.com/rancher/system-upgrade-controller)
 - [k3s-upgrade](https://github.com/rancher/k3s-upgrade)
 
-要以这种方式进行自动升级，你必须：
+要以这种方式进行自动升级，你必须执行以下操作：
 
 1. 将 system-upgrade-controller 安装到您的集群中
 1. 配置计划
+
+> **注意：**如果正在使用 Rancher 管理k3s的话，用户应该使用 Rancher 来升级他们的 K3s 集群。
+>
+> - 如果你选择使用 Rancher 来升级，已经为你解决了下面的步骤。
+> - 如果你选择不使用 Rancher 来升级，你必须使用下面的步骤来进行升级。
 
 ## 安装 system-upgrade-controller
 
@@ -92,7 +97,7 @@ spec:
     args:
     - prepare
     - server-plan
-    image: rancher/k3s-upgrade:v1.17.4-k3s1
+    image: rancher/k3s-upgrade
   serviceAccountName: system-upgrade
   upgrade:
     image: rancher/k3s-upgrade

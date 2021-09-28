@@ -19,6 +19,7 @@ keywords:
 - [证书轮换](#证书轮换)
 - [自动部署清单](#自动部署清单)
 - [使用 Docker 作为容器运行时](#使用-docker-作为容器运行时)
+- [使用 etcdctl](#使用-etcdctl)
 - [配置 containerd](#配置-containerd)
 - [Secrets 加密配置 (实验)](#secrets-加密配置-实验)
 - [使用 Rootless 运行 K3s (实验)](#使用-rootless-运行-k3s-实验)
@@ -30,6 +31,7 @@ keywords:
 - [为 Raspbian Buster 启用 cgroup](#为-raspbian-buster-启用-cgroup)
 - [SELinux 支持](#selinux-支持)
 - [Red Hat 和 CentOS 的额外准备](#red-hat-和-centos-的额外准备)
+- [启用 eStargz 的延迟拉取（实验性）](#启用-estargz-的延迟拉取（实验性）)
 
 ## 证书轮换
 
@@ -131,6 +133,24 @@ rancher/library-traefik          1.7.19              aa764f7db3051       85.7MB
 rancher/local-path-provisioner   v0.0.11             9d12f9848b99f       36.2MB
 rancher/metrics-server           v0.3.6              9dd718864ce61       39.9MB
 rancher/pause                    3.1                 da86e6ba6ca19       742kB
+```
+
+# 使用 etcdctl
+
+etcdctl 为 etcd 提供了一个 CLI。
+
+如果你想在嵌入式 etcd 的 K3s 里使用 etcdctl，请先参考[官方文档](https://etcd.io/docs/latest/install/)安装 etcdctl。
+
+```
+$ VERSION="v3.5.0"
+$ curl -L https://github.com/etcd-io/etcd/releases/download/${VERSION}/etcd-${VERSION}-linux-amd64.tar.gz --output etcdctl-${VERSION}-linux-amd64.tar.gz
+$ sudo tar -zxvf etcdctl-${VERSION}-linux-amd64.tar.gz -C /usr/local/bin
+```
+
+然后开始使用带有适当 K3s 标志的 etcdctl 命令：
+
+```
+$ sudo etcdctl --cacert=/var/lib/rancher/k3s/server/tls/etcd/server-ca.crt --cert=/var/lib/rancher/k3s/server/tls/etcd/client.crt --key=/var/lib/rancher/k3s/server/tls/etcd/client.key version
 ```
 
 ## 配置 containerd
@@ -411,4 +431,58 @@ selinux: true
 
 ```shell
 systemctl disable firewalld --now
+```
+
+如果启用，则需要禁用 nm-cloud-setup 并重启节点:
+
+```
+systemctl disable nm-cloud-setup.service nm-cloud-setup.timer
+reboot
+```
+
+## 启用 eStargz 的延迟拉取（实验性）
+
+### 什么是延迟拉取和 eStargz？
+
+拉取镜像被称为容器生命周期中耗时的步骤之一。根据[Harter, et al.](https://www.usenix.org/conference/fast16/technical-sessions/presentation/harter):
+
+> 拉取包占容器启动时间的 76%，但其中只有 6.4%的数据被读取
+
+为了解决这个问题，k3s 实验性地支持镜像内容的延迟拉取。这允许 k3s 在拉取整个镜像之前启动一个容器。相反，按需获取必要的内容块（例如单个文件）。特别是对于大镜像，这种技术可以缩短容器启动延迟。
+
+要启用延迟拉取，目标镜像需要格式化为 [_eStargz_](https://github.com/containerd/stargz-snapshotter/blob/main/docs/stargz-estargz.md)。这是一种 OCI 的替代品，但 100% 与 OCI 兼容的镜像格式，用于延迟拉取。由于兼容性，eStargz 可以推送到标准容器注册表（例如 ghcr.io），并且即使在 eStargz-agnostic 运行时，它也*仍然可运行*。
+
+eStargz 是基于[谷歌 CRFS 项目提出的 stargz 格式](https://github.com/google/crfs)开发的，具有内容验证、性能优化等实用功能。
+
+关于延迟拉取和 eStargz 的更多细节，请参考 [Stargz Snapshotter 项目资源库](https://github.com/containerd/stargz-snapshotter)。
+
+## 配置 k3s 进行 eStargz 的延迟拉取
+
+如以下所示，k3s server 和 agent 需要 `--snapshotter=stargz` 选项。
+
+```
+k3s server --snapshotter=stargz
+```
+
+使用此配置，您可以对 eStargz 格式的镜像执行延迟拉取。以下 Pod 清单使用 eStargz 格式的 `node:13.13.0` 镜像 （`ghcr.io/stargz-containers/node:13.13.0-esgz`）。k3s 对这个镜像进行了延迟拉取。
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nodejs
+spec:
+  containers:
+  - name: nodejs-estargz
+    image: ghcr.io/stargz-containers/node:13.13.0-esgz
+    command: ["node"]
+    args:
+    - -e
+    - var http = require('http');
+      http.createServer(function(req, res) {
+        res.writeHead(200);
+        res.end('Hello World!\n');
+      }).listen(80);
+    ports:
+    - containerPort: 80
 ```
