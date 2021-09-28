@@ -19,7 +19,7 @@ FIPS 140-2 是美国联邦政府的安全标准，用于批准加密模块。这
 
 ## 使用 FIPS 兼容的 Go 编译器
 
-所使用的 Go 编译器可以在[这里](https://hub.docker.com/u/goboring)找到。系统的每个组件都是用这个编译器的版本来构建的，与其他情况下使用的标准 Go 编译器版本一致。
+所使用的 Go 编译器可以在[这里](https://go.googlesource.com/go/+/dev.boringcrypto)找到。系统的每个组件都是用这个编译器的版本来构建的，与其他情况下使用的标准 Go 编译器版本一致。
 
 这个版本的 Go 用经过 FIPS 验证的 BoringCrypto 模块取代了标准 Go 密码库。更多细节请参见 [readme](https://github.com/golang/go/blob/dev.boringcrypto/README.boringcrypto.md) 。
 
@@ -29,7 +29,7 @@ FIPS 140-2 是美国联邦政府的安全标准，用于批准加密模块。这
 
 ### 集群组件中的 FIPS 支持
 
-RKE2 系统的大部分组件都是用 GoBoring Go 编译器实现静态编译的，它利用了 BoringSSL 库的优势。RKE2，从组件的角度来看，被分成了许多部分。下面的列表包含了这些部分和相关的组件。
+RKE2 系统的大部分组件是用 GoBoring Go 编译器实现静态编译的。从组件的角度来看，RKE2 被分成了若干部分。下面的列表包含了这些部分和相关的组件。
 
 - Kubernetes
 

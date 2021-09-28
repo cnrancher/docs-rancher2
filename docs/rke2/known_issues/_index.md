@@ -41,6 +41,34 @@ unmanaged-devices=interface-name:cali*;interface-name:flannel*
 1. [启用 CNI](https://istio.io/latest/docs/setup/additional-setup/cni/)作为 Istio 安装的一部分。请注意，这个[功能](https://istio.io/latest/about/feature-stages/)在本文写作时仍处于 Alpha 状态。 确保`values.cni.cniBinDir=/opt/cni/bin`和`values.cni.cniConfDir=/etc/cni/net.d`。
 2. 安装完成后，在 CrashLoopBackoff 中应该有`cni-node` pod。手动编辑它们的守护程序，在`install-cni`容器上加入`securityContext.privileged: true`。
 
+这可以通过自定义 overlay 来执行，如下所示：
+
+```yaml:
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+spec:
+  components:
+    cni:
+      enabled: true
+      k8s:
+        overlays:
+        - apiVersion: "apps/v1"
+          kind: "DaemonSet"
+          name: "istio-cni-node"
+          patches:
+          - path: spec.template.spec.containers.[name:install-cni].securityContext.privileged
+            value: true
+  values:
+    cni:
+      image: rancher/mirrored-istio-install-cni:1.9.3
+      excludeNamespaces:
+      - istio-system
+      - kube-system
+      logLevel: info
+      cniBinDir: /opt/cni/bin
+      cniConfDir: /etc/cni/net.d
+```
+
 如果需要，也可以直接[通过 Rancher](https://github.com/rancher/rancher/issues/27377#issuecomment-739075400)进行。更多关于未执行这些步骤时故障与详细日志的信息，请参见 [Issue 504](https://github.com/rancher/rke2/issues/504)。
 
 ## Control Groups V2

@@ -32,6 +32,8 @@ keywords:
 
 要配置快照时间间隔或保留的快照数量，请参考[选项章节.](#选项)
 
+在 RKE2 中，快照存储在每个 etcd 节点上。如果您有多个 etcd 或 etcd + control-plane 节点，您将拥有多个本地 etcd 快照副本。
+
 ## 集群重置
 
 RKE2 支持通过传递 `--cluster-reset` 标志将集群重置为一个成员集群，当传递这个标志给 rke2 server 时，它将以相同的数据目录重置集群，etcd 的数据目录存在于`/var/lib/rancher/rke2/server/db/etcd`，这个标志可以在集群中的仲裁丢失事件中传递。

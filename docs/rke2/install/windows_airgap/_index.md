@@ -19,7 +19,7 @@ keywords:
 
 RKE2 的 Windows Agent（Worker）节点可以用两种不同的方法在离线环境中使用。这需要首先完成 RKE2 [离线设置](/docs/rke2/install/airgap/_index)
 
-你可以使用 artifacts 发布的 `rke2-windows-<BUILD_VERSION>-amd64-images.tar.gz` 进行部署，或者使用私有注册表。根据我们验证的 [Windows 版本](https://rosskirk.ngrok.io/install/requirements/#windows)，目前有三个针对 Windows 的 tarball artifacts 发布。
+你可以使用 artifacts 发布的 `rke2-windows-<BUILD_VERSION>-amd64-images.tar.gz` 进行部署，或者使用私有注册表。根据我们验证的 [Windows 版本](https://docs.rke2.io/install/requirements/#windows)，目前有三个针对 Windows 的 tarball artifacts 发布。
 
 - rke2-windows-1809-amd64-images.tar.gz
 - rke2-windows-2004-amd64-images.tar.gz
@@ -55,21 +55,21 @@ Enable-WindowsOptionalFeature -Online -FeatureName containers –All
 
      ```powershell
      $ProgressPreference = 'SilentlyContinue'
-     Invoke-WebRequest https://github.com/rancher/rke2/releases/download/v1.21.3%2Brke2r1/rke2-windows-1809-amd64-images.tar.gz -OutFile /var/lib/rancher/rke2/agent/images/rke2-windows-1809-amd64-images.tar.gz
+     Invoke-WebRequest https://github.com/rancher/rke2/releases/download/v1.21.4%2Brke2r2/rke2-windows-1809-amd64-images.tar.gz -OutFile /var/lib/rancher/rke2/agent/images/rke2-windows-1809-amd64-images.tar.gz
      ```
 
    - **Windows Server SAC 2004 (amd64) (OS Build 19041.1110)**
 
      ```powershell
      $ProgressPreference = 'SilentlyContinue'
-     Invoke-WebRequest https://github.com/rancher/rke2/releases/download/v1.21.3%2Brke2r1/rke2-windows-2004-amd64-images.tar.gz -OutFile c:/var/lib/rancher/rke2/agent/images/rke2-windows-2004-amd64-images.tar.gz
+     Invoke-WebRequest https://github.com/rancher/rke2/releases/download/v1.21.4%2Brke2r2/rke2-windows-2004-amd64-images.tar.gz -OutFile c:/var/lib/rancher/rke2/agent/images/rke2-windows-2004-amd64-images.tar.gz
      ```
 
    - **Windows Server SAC 20H2 (amd64) (OS Build 19042.1110)**
 
      ```powershell
      $ProgressPreference = 'SilentlyContinue'
-     Invoke-WebRequest https://github.com/rancher/rke2/releases/download/v1.21.3%2Brke2r1/rke2-windows-20H2-amd64-images.tar.gz -OutFile c:/var/lib/rancher/rke2/agent/images/rke2-windows-20H2-amd64-images.tar.gz
+     Invoke-WebRequest https://github.com/rancher/rke2/releases/download/v1.21.4%2Brke2r2/rke2-windows-20H2-amd64-images.tar.gz -OutFile c:/var/lib/rancher/rke2/agent/images/rke2-windows-20H2-amd64-images.tar.gz
      ```
 
    #### 使用 tar.zst 镜像 tarballs
@@ -78,21 +78,21 @@ Enable-WindowsOptionalFeature -Online -FeatureName containers –All
 
      ```powershell
      $ProgressPreference = 'SilentlyContinue'
-     Invoke-WebRequest https://github.com/rancher/rke2/releases/download/v1.21.3%2Brke2r1/rke2-windows-1809-amd64-images.tar.zst -OutFile /var/lib/rancher/rke2/agent/images/rke2-windows-1809-amd64-images.tar.zst
+     Invoke-WebRequest https://github.com/rancher/rke2/releases/download/v1.21.4%2Brke2r2/rke2-windows-1809-amd64-images.tar.zst -OutFile /var/lib/rancher/rke2/agent/images/rke2-windows-1809-amd64-images.tar.zst
      ```
 
    - **Windows Server SAC 2004 (amd64) (OS Build 19041.1110)**
 
      ```powershell
      $ProgressPreference = 'SilentlyContinue'
-     Invoke-WebRequest https://github.com/rancher/rke2/releases/download/v1.21.3%2Brke2r1/rke2-windows-2004-amd64-images.tar.zst -OutFile c:/var/lib/rancher/rke2/agent/images/rke2-windows-2004-amd64-images.tar.zst
+     Invoke-WebRequest https://github.com/rancher/rke2/releases/download/v1.21.4%2Brke2r2/rke2-windows-2004-amd64-images.tar.zst -OutFile c:/var/lib/rancher/rke2/agent/images/rke2-windows-2004-amd64-images.tar.zst
      ```
 
    - **Windows Server SAC 20H2 (amd64) (OS Build 19042.1110)**
 
      ```powershell
      $ProgressPreference = 'SilentlyContinue'
-     Invoke-WebRequest https://github.com/rancher/rke2/releases/download/v1.21.3%2Brke2r1/rke2-windows-20H2-amd64-images.tar.zst -OutFile c:/var/lib/rancher/rke2/agent/images/rke2-windows-20H2-amd64-images.tar.zst
+     Invoke-WebRequest https://github.com/rancher/rke2/releases/download/v1.21.4%2Brke2r2/rke2-windows-20H2-amd64-images.tar.zst -OutFile c:/var/lib/rancher/rke2/agent/images/rke2-windows-20H2-amd64-images.tar.zst
      ```
 
    - 使用`rke2-windows-<BUILD_VERSION>-amd64.tar.gz`或`rke2-windows-<BUILD_VERSION>-amd64.tar.zst`。与 pigz 相比，Zstandard 提供了更好的压缩率和更快的解压速度。
@@ -125,7 +125,7 @@ Enable-WindowsOptionalFeature -Online -FeatureName containers –All
 1. 获取 Windows RKE2 二进制文件`rke2-windows-amd64.exe`。确保二进制文件被命名为`rke2.exe`并将其放在`c:/usr/local/bin`中。
 
    ```powershell
-   Invoke-WebRequest https://github.com/rancher/rke2/releases/download/v1.21.3%2Brke2r1/rke2-windows-amd64.exe -OutFile c:/usr/local/bin/rke2.exe
+   Invoke-WebRequest https://github.com/rancher/rke2/releases/download/v1.21.4%2Brke2r2/rke2-windows-amd64.exe -OutFile c:/usr/local/bin/rke2.exe
    ```
 
 2. 配置 Windows 下的 rke2-agent
