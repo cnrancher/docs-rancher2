@@ -44,12 +44,27 @@ keywords:
 
 ### 数据库
 
-| Flag                         | 环境变量                 | 描述                                                     |
-| :--------------------------- | :----------------------- | :------------------------------------------------------- |
-| `--datastore-endpoint` value | `K3S_DATASTORE_ENDPOINT` | 指定 etcd、Mysql、Postgres 或 Sqlite（默认）数据源名称。 |
-| `--datastore-cafile` value   | `K3S_DATASTORE_CAFILE`   | TLS 证书授权文件，用于确保数据存储后端通信的安全。       |
-| `--datastore-certfile` value | `K3S_DATASTORE_CERTFILE` | TLS 认证文件，用于确保数据存储后端通信的安全。           |
-| `--datastore-keyfile` value  | `K3S_DATASTORE_KEYFILE`  | 用于保护数据存储后端通信的 TLS 密钥文件。                |
+| Flag                                  | 环境变量                 | 描述                                                                                        |
+| :------------------------------------ | :----------------------- | :------------------------------------------------------------------------------------------ |
+| `--datastore-endpoint` value          | `K3S_DATASTORE_ENDPOINT` | 指定 etcd、Mysql、Postgres 或 Sqlite（默认）数据源名称。                                    |
+| `--datastore-cafile` value            | `K3S_DATASTORE_CAFILE`   | TLS 证书授权文件，用于确保数据存储后端通信的安全。                                          |
+| `--datastore-certfile` value          | `K3S_DATASTORE_CERTFILE` | TLS 认证文件，用于确保数据存储后端通信的安全。                                              |
+| `--datastore-keyfile` value           | `K3S_DATASTORE_KEYFILE`  | 用于保护数据存储后端通信的 TLS 密钥文件。                                                   |
+| `--etcd-expose-metrics`               | N/A                      | 将 etcd 指标公开给客户端界面。(默认为 false)                                                |
+| `--etcd-disable-snapshots`            | N/A                      | 禁用自动 etcd 快照                                                                          |
+| `--etcd-snapshot-name` value          | N/A                      | 设置 etcd 快照的基本名称。默认值: etcd-snapshot                                             |
+| `--etcd-snapshot-schedule-cron` value | N/A                      | cron 规范中的快照间隔时间。 例如。每 5 小时 "\* \*/5 \* \* \*" (默认值: "0 \*/12 \* \* \*") |
+| `--etcd-snapshot-retention` value     | N/A                      | 要保留的快照数量 (默认值: 5)                                                                |
+| `--etcd-snapshot-dir` value           | N/A                      | 保存数据库快照的目录. (默认 location: ${data-dir}/db/snapshots)                             |
+| `--etcd-s3`                           | N/A                      | 启用备份到 S3                                                                               |
+| `--etcd-s3-endpoint` value            | N/A                      | S3 endpoint url (默认值: "s3.amazonaws.com")                                                |
+| `--etcd-s3-endpoint-ca` value         | N/A                      | S3 自定义 CA 证书连接到 S3 endpoint                                                         |
+| `--etcd-s3-skip-ssl-verify`           | N/A                      | 禁用 S3 的 SSL 证书验证                                                                     |
+| `--etcd-s3-access-key` value          | `AWS_ACCESS_KEY_ID`      | S3 access key                                                                               |
+| `--etcd-s3-secret-key` value          | `AWS_SECRET_ACCESS_KEY`  | S3 secret key                                                                               |
+| `--etcd-s3-bucket` value              | N/A                      | S3 bucket 名称                                                                              |
+| `--etcd-s3-region` value              | N/A                      | S3 region / bucket 位置 (可选) 默认值: "us-east-1")                                         |
+| `--etcd-s3-folder` value              | N/A                      | S3 文件夹                                                                                   |
 
 ### 集群选项
 
@@ -71,21 +86,26 @@ K3s agent 选项是可以作为 server 选项的，因为 server 内部嵌入了
 
 ### Agent 节点
 
-| Flag                 | 环境变量        | 描述                           |
-| :------------------- | :-------------- | :----------------------------- | ------------ |
-| `--node-name` value  | `K3S_NODE_NAME` | 节点名称                       |
-| `--with-node-id`     | N/A             | 将 ID 附加到节点名称           | (agent/node) |
-| `--node-label` value | N/A             | 用一组标签注册和启动 kubelet。 |
-| `--node-taint` value | N/A             | 用一组污点注册 kubelet。       |
+| Flag                                        | 环境变量             | 描述                                                                                                                                                |
+| :------------------------------------------ | :------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--node-name` value                         | `K3S_NODE_NAME`      | 节点名称                                                                                                                                            |
+| `--with-node-id`                            | N/A                  | 将 ID 附加到节点名称                                                                                                                                |
+| `--node-label` value                        | N/A                  | 用一组标签注册和启动 kubelet。                                                                                                                      |
+| `--node-taint` value                        | N/A                  | 用一组污点注册 kubelet。                                                                                                                            |
+| `--image-credential-provider-bin-dir` value | N/A                  | 凭证提供程序插件二进制文件所在目录的路径（默认："/var/lib/rancher/credentialprovider/bin"）。                                                       |
+| `--image-credential-provider-config` value  | N/A                  | 凭证提供者插件配置文件的路径 (默认： "/var/lib/rancher/credentialprovider/config.yaml")                                                             |
+| `--selinux`                                 | `K3S_SELINUX`        | 在 containerd 中启用 SELinux                                                                                                                        |
+| `--lb-server-port` value                    | `K3S_LB_SERVER_PORT` | 客户端负载均衡器的本地端口。如果 supervisor 和 apiserver 不在同一个主机，则 apiserver 客户端负载均衡器也将使用比该端口小 1 的额外端口。(默认：6444) |
 
 ### Agent 运行时
 
-| Flag                                 | 默认值                             | 描述                                          |
-| :----------------------------------- | :--------------------------------- | :-------------------------------------------- | --------------- |
-| `--docker`                           | N/A                                | 用 docker 代替 containerd                     | (agent/runtime) |
-| `--container-runtime-endpoint` value | N/A                                | 禁用嵌入式 containerd，使用替代的 CRI 实现。  |
-| `--pause-image` value                | "docker.io/rancher/pause:3.1"      | 针对 containerd 或 Docker 的自定义 pause 镜像 |
-| `--private-registry` value           | "/etc/rancher/k3s/registries.yaml" | 私有镜像仓库配置文件                          |
+| Flag                                 | 默认值                             | 描述                                               |
+| :----------------------------------- | :--------------------------------- | :------------------------------------------------- |
+| `--docker`                           | N/A                                | 用 docker 代替 containerd                          |
+| `--container-runtime-endpoint` value | N/A                                | 禁用嵌入式 containerd，使用替代的 CRI 实现。       |
+| `--pause-image` value                | "docker.io/rancher/pause:3.1"      | 针对 containerd 或 Docker 的自定义 pause 镜像      |
+| `--snapshotter` value                | N/A                                | 覆盖默认的 containerd 快照程序 (默认: "overlayfs") |
+| `--private-registry` value           | "/etc/rancher/k3s/registries.yaml" | 私有镜像仓库配置文件                               |
 
 ### Agent 网络
 
@@ -105,6 +125,7 @@ Agent 选项之所以存在，是因为 server 内嵌了 agent 进程
 
 | Flag                    | 默认值 | 描述                                                    |
 | :---------------------- | :----- | :------------------------------------------------------ |
+| `--debug`               | N/A    | 开启调试日志                                            |
 | `-v` value              | 0      | 日志级别详细程度的数字                                  |
 | `--vmodule` value       | N/A    | 以逗号分隔的 pattern=N 设置列表，用于文件过滤的日志记录 |
 | `--log value, -l` value | N/A    | 记录到文件                                              |
@@ -128,13 +149,14 @@ Agent 选项之所以存在，是因为 server 内嵌了 agent 进程
 
 ### 网络
 
-| Flag                      | 默认值          | 描述                                                        |
-| :------------------------ | :-------------- | :---------------------------------------------------------- |
-| `--cluster-cidr` value    | "10.42.0.0/16"  | 用于 Pod IP 的网络 CIDR                                     |
-| `--service-cidr` value    | "10.43.0.0/16"  | 用于 service IP 的网络 CIDR                                 |
-| `--cluster-dns` value     | "10.43.0.10"    | 用于 coredns 服务的集群 IP。应该在您的`service-cidr`范围内  |
-| `--cluster-domain` value  | "cluster.local" | 集群域名                                                    |
-| `--flannel-backend` value | "vxlan"         | 'none', 'vxlan', 'ipsec', 'host-gw', 或 'wireguard'中的一个 |
+| Flag                              | 默认值          | 描述                                                        |
+| :-------------------------------- | :-------------- | :---------------------------------------------------------- |
+| `--cluster-cidr` value            | "10.42.0.0/16"  | 用于 Pod IP 的网络 CIDR                                     |
+| `--service-cidr` value            | "10.43.0.0/16"  | 用于 service IP 的网络 CIDR                                 |
+| `--service-node-port-range` value | "30000-32767"   | 为具有 NodePort 可见性的服务保留的端口范围                  |
+| `--cluster-dns` value             | "10.43.0.10"    | 用于 coredns 服务的集群 IP。应该在您的`service-cidr`范围内  |
+| `--cluster-domain` value          | "cluster.local" | 集群域名                                                    |
+| `--flannel-backend` value         | "vxlan"         | 'none', 'vxlan', 'ipsec', 'host-gw', 或 'wireguard'中的一个 |
 
 ### 定制标志
 
@@ -158,6 +180,7 @@ Agent 选项之所以存在，是因为 server 内嵌了 agent 进程
 | `--disable` value            | 不需要部署的组件，删除任何已部署的组件 (有效项目：coredns, servicelb, traefik,local-storage, metrics-server) |
 | `--disable-scheduler`        | 禁用 Kubernetes 默认调度器                                                                                   |
 | `--disable-cloud-controller` | 禁用 k3s 默认云控制管理器                                                                                    |
+| `--disable-kube-proxy`       | 禁止运行 kube-proxy                                                                                          |
 | `--disable-network-policy`   | 禁用 K3S 默认网络策略控制器                                                                                  |
 
 ### Kubernetes 进程定制标志
@@ -199,6 +222,8 @@ USAGE:
    k3s server [选项]
 
 选项:
+   --config FILE, -c FILE                     (config) 从FILE加载配置（默认："/etc/rancher/k3s/config.yaml" ） [$K3S_CONFIG_FILE]
+   --debug                                    (logging) 开启debug调试日志 [$K3S_DEBUG]
    -v value                                   (logging) 日志级别详细程度的数字 (默认: 0)
    --vmodule value                            (logging) 以逗号分隔的pattern=N设置列表，用于文件过滤的日志记录
    --log value, -l value                      (logging) 记录到文件
@@ -211,6 +236,7 @@ USAGE:
    --data-dir value, -d value                 (data) 存放数据的目录 默认 /var/lib/rancher/k3s or ${HOME}/.rancher/k3s(如果不是root用户)
    --cluster-cidr value                       (networking) 用于Pod IP的网络CIDR (默认: "10.42.0.0/16")
    --service-cidr value                       (networking) 用于service IP的网络CIDR (默认: "10.43.0.0/16")
+   --service-node-port-range value            (networking) 为具有 NodePort 可见性的服务保留的端口范围 (默认: "30000-32767")
    --cluster-dns value                        (networking) 用于coredns服务的集群IP。应该在您的`service-cidr`范围内 (默认: 10.43.0.10)
    --cluster-domain value                     (networking) 集群域名 (默认: "cluster.local")
    --flannel-backend value                    (networking) 'none', 'vxlan', 'ipsec', 'host-gw', 或 'wireguard'中的一个 (默认: "vxlan")
@@ -226,18 +252,37 @@ USAGE:
    --datastore-cafile value                   (db) TLS证书授权文件，用于确保数据存储后端通信的安全 [$K3S_DATASTORE_CAFILE]
    --datastore-certfile value                 (db) TLS认证文件，用于确保数据存储后端通信的安全 [$K3S_DATASTORE_CERTFILE]
    --datastore-keyfile value                  (db) 用于保护数据存储后端通信的TLS密钥文件 [$K3S_DATASTORE_KEYFILE]
+   --etcd-expose-metrics                      (db) 将 etcd 指标公开给客户端界面。(默认为 false)
+   --etcd-disable-snapshots                   (db) 禁用自动 etcd 快照
+   --etcd-snapshot-name value                 (db) 设置 etcd 快照的基本名称。默认值: etcd-snapshot
+   --etcd-snapshot-schedule-cron value        (db) cron 规范中的快照间隔时间。 例如。每 5 小时 "\* \*/5 \* \* \*" (默认值: "0 \*/12 \* \* \*")
+   --etcd-snapshot-retention value            (db) 要保留的快照数量 (默认值: 5)
+   --etcd-snapshot-dir value                  (db) 保存数据库快照的目录. (默认 location: ${data-dir}/db/snapshots)
+   --etcd-s3                                  (db) 启用备份到 S3
+   --etcd-s3-endpoint value                   (db) S3 endpoint url (默认值: "s3.amazonaws.com")
+   --etcd-s3-endpoint-ca value                (db) S3 自定义 CA 证书连接到 S3 endpoint
+   --etcd-s3-skip-ssl-verify                  (db) 禁用 S3 的 SSL 证书验证
+   --etcd-s3-access-key value                 (db) S3 access key [$AWS_ACCESS_KEY_ID]
+   --etcd-s3-secret-key value                 (db) S3 secret key [$AWS_SECRET_ACCESS_KEY]
+   --etcd-s3-bucket value                     (db) S3 bucket 名称
+   --etcd-s3-region value                     (db) S3 region / bucket 位置 (可选) 默认值: "us-east-1")
+   --etcd-s3-folder value                     (db) S3 文件夹
    --default-local-storage-path value         (storage) 本地存储类的默认存储路径
    --disable value                            (components) 不需要部署的组件，删除任何已部署的组件 (有效项目：coredns, servicelb, traefik,local-storage, metrics-server)
    --disable-scheduler                        (components) 禁用Kubernetes默认调度器
    --disable-cloud-controller                 (components) 禁用k3s默认云控制管理器
+   --disable-kube-proxy                       (components) 禁止运行 kube-proxy
    --disable-network-policy                   (components) 用K3S默认网络策略控制器
    --node-name value                          (agent/node) 节点名称 [$K3S_NODE_NAME]
    --with-node-id                             (agent/node) 将ID附加到节点名称
    --node-label value                         (agent/node) 用一组标签注册和启动kubelet
    --node-taint value                         (agent/node) 用一组污点注册kubelet
+   --image-credential-provider-bin-dir value  (agent/node) 凭证提供程序插件二进制文件所在目录的路径（默认："/var/lib/rancher/credentialprovider/bin"）
+   --image-credential-provider-config value   (agent/node) 凭证提供者插件配置文件的路径 (默认： "/var/lib/rancher/credentialprovider/config.yaml")
    --docker                                   (agent/runtime) 用docker代替containerd
    --container-runtime-endpoint value         (agent/runtime) 禁用嵌入式containerd，使用替代的CRI实现
    --pause-image value                        (agent/runtime) 针对containerd或Docker的自定义pause镜像 (默认: "docker.io/rancher/pause:3.1")
+   --snapshotter value                        (agent/runtime) 覆盖默认的 containerd 快照程序 (默认: "overlayfs")
    --private-registry value                   (agent/runtime) 私有镜像仓库配置文件 (默认: "/etc/rancher/k3s/registries.yaml")
    --node-ip value, -i value                  (agent/networking) 为节点发布的IP地址
    --node-external-ip value                   (agent/networking) 对外发布节点的IP地址
@@ -246,13 +291,18 @@ USAGE:
    --flannel-conf value                       (agent/networking) 覆盖默认的flannel文件
    --kubelet-arg value                        (agent/flags) 自定义kubelet进程的参数
    --kube-proxy-arg value                     (agent/flags) 自定义kube-proxy进程的参数
+   --protect-kernel-defaults                  (agent/node) 内核调优行为。如果设置，如果内核可调参数与 kubelet 默认值不同，则会出错。
    --rootless                                 (experimental) 运行 rootless
    --agent-token value                        (experimental/cluster) 用于将agent加入集群但不用于server的共享密钥 [$K3S_AGENT_TOKEN]
    --agent-token-file value                   (experimental/cluster) 包含agent secret的文件 [$K3S_AGENT_TOKEN_FILE]
    --server value, -s value                   (experimental/cluster) 要连接的k3s server，用于加入集群 [$K3S_URL]
    --cluster-init                             (experimental/cluster) 初始化为新的集群master [$K3S_CLUSTER_INIT]
    --cluster-reset                            (experimental/cluster) 忽略所有节点，成为一个新集群的集群master [$K3S_CLUSTER_RESET]
+   --cluster-reset-restore-path value         (db) 要恢复的快照文件的路径
    --secrets-encryption                       (experimental) 启用Secret加密
+   --system-default-registry value            (image) 用于所有系统镜像的私有注册表 [$K3S_SYSTEM_DEFAULT_REGISTRY]
+   --selinux                                  (agent/node) 在 containerd 中启用 SELinux [$K3S_SELINUX]
+   --lb-server-port value                     (agent/node) 客户端负载均衡器的本地端口。如果 supervisor 和 apiserver 不在同一个主机，则 apiserver 客户端负载均衡器也将使用比该端口小 1 的额外端口。(默认：6444) [$K3S_LB_SERVER_PORT]
    --no-flannel                               (deprecated) 使用 --flannel-backend=none
    --no-deploy value                          (deprecated) 不需要部署的组件 (有效选项: coredns, servicelb, traefik, local-storage, metrics-server)
    --cluster-secret value                     (deprecated) 使用 --token [$K3S_CLUSTER_SECRET]
