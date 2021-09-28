@@ -50,6 +50,10 @@ cp rke2-canal-config.yml /var/lib/rancher/rke2/server/manifests/
 
 有关 Cilium chart 可用 value 的更多信息，请参考[rke2-charts 资源库](https://github.com/rancher/rke2-charts/blob/main-source/packages/rke2-cilium/charts/values.yaml)
 
+关于 Calico chart 可用 value 的更多信息，请参考[rke2-charts 资源库](https://github.com/rancher/rke2-charts/blob/main/charts/rke2-calico/rke2-calico/v3.19.2-204/values.yaml)
+
+请注意，如果使用双栈 cluster-cidr 部署 rke2，则 calico 将使用 BGP 而不是 vxlan 封装。 在 windows 安装的 rke2 中，目前不支持双栈 cluster-cidr 和 BGP。
+
 ## 使用 Multus
 
 从 RKE2 v1.21 开始，可以部署 Multus CNI meta-plugin。请注意，这是为高级用户准备的。

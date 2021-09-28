@@ -76,6 +76,8 @@ node-taint:
   - "CriticalAddonsOnly=true:NoExecute"
 ```
 
+注意：当所有节点都被 `CriticalAddonsOnly` 污染时，NGINX Ingress 和 Metrics Server 插件将**不会**部署。如果你的 server 节点被污染，这些插件将保持挂起，直到未污染的 agent 节点添加到集群中。
+
 ### 3. 启动其他 server 节点
 
 其他的 server 节点的启动和第一个节点的启动很相似，只是你必须指定 `server` 和 `token` 参数，以便它们能够成功连接到初始 server 节点。
