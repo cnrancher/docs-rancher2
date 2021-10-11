@@ -29,6 +29,8 @@ keywords:
 
 要测试 Overlay 网络，您可以根据以下 yaml 文件启动一个`DaemonSet`。这将在每个主机上运行一个`swiss-army-knife`容器（该镜像由 Rancher 工程师开发，可以在[这里](https://github.com/rancherlabs/swiss-army-knife)找到，我们将用它在所有主机上的容器之间运行`ping`测试。
 
+> **注意：**这个容器[不支持 ARM 节点](https://github.com/leodotcloud/swiss-army-knife/issues/18)，例如 Raspberry Pi。这将在 pod 日志中显示为 `exec user process caused: exec format error`。
+
 1. 将以下文件另存为`ds-overlaytest.yml`
 
 ```
