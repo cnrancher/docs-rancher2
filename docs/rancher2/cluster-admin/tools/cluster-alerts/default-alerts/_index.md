@@ -27,7 +27,7 @@ keywords:
 
 Etcd 是键值存储数据库，它存储了 Kubernetes 集群状态。Rancher 提供 Etcd 健康状态告警和表达式告警，健康状态告警不必启用监控即可接收这些告警。
 
-leader 是处理所有需要集群达成共识的客户端请求的节点。详情参考[etcd 工作原理](https://rancher.com/blog/2019/2019-01-29-what-is-etcd/#how-does-etcd-work)。
+leader 是处理所有需要集群达成共识的客户端请求的节点。
 
 集群的 leader 变更是正常现象，但是 leader 在短时间内频繁改变，则很可能是网络出现问题或 CPU 负载过高导致的问题。延迟较长时，默认的 etcd 配置可能会导致频繁的心跳超时，从而触发新的 leader 选举。
 
