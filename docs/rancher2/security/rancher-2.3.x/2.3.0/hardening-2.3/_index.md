@@ -1034,8 +1034,6 @@ Upgrade the Rancher server installation using Helm, and configure the audit log 
 
 #### Reference
 
-- <https://rancher.com/docs/rancher/v2.x/en/installation/options/chart-options/#advanced-options>
-
 ## 3.2 - Rancher Management Control Plane Authentication
 
 ### 3.2.1 - Change the local administrator password from the default value

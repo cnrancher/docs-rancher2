@@ -74,7 +74,7 @@ spec:
 | `addLocal`               | "auto"                                                | **_string_** - 让 Rancher 检测并[导入本地集群](/docs/rancher2.5/installation/resources/chart-options/_index)            |
 | `auditLog.destination`   | "sidecar"                                             | **_string_** - 流到 sidecar 容器控制台或 hostPath 卷 - _"sidecar, hostPath"_。                                          |
 | `auditLog.hostPath`      | "/var/log/rancher/audit"                              | **_string_** - 主机上的日志文件目的地（只有当**auditLog.destination**被设置为**hostPath**时才会适用）                   |
-| `auditLog.level`         | 0                                                     | **_int_** - 设置[API 审核日志级别](https://rancher.com/docs/rancher/v2.x/en/installation/api-auditing)。0 为关闭。[0-3] |
+| `auditLog.level`         | 0                                                     | **_int_** - 设置[API 审核日志级别](/docs/rancher2.5/installation/resources/advanced/api-audit-log/_index/)。0 为关闭。[0-3] |
 | `auditLog.maxAge`        | 1                                                     | **_int_** - 保留旧审计日志文件的最大天数（仅在**auditLog.destination**设置为**hostPath**时才适用）                      |
 | `auditLog.maxBackup`     | 1                                                     | int - 保留审计日志文件的最大数量（仅当**auditLog.destination**设置为**hostPath**时适用）。                              |
 | `auditLog.maxSize`       | 100                                                   | **_int_** - 审计日志文件在被替换之前的最大大小（仅当**auditLog.destination**被设置为**hostPath**时适用）。              |

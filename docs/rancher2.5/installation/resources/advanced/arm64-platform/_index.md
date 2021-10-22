@@ -38,7 +38,7 @@ _自 v2.2.0 起可用_
   > **注意：**要检查您的特定发布版本是否与 ARM64 架构兼容，您可以导航到您的版本的发行说明，有以下两种方式：
   >
   > - 使用 https://github.com/rancher/rancher/releases 手动查找您的版本。
-  > - 使用标签和具体的版本号直接进入你的版本。例如，如果你打算使用 v2.5.8，你可以导航到 https://github.com/rancher/rancher/releases/tag/v2.5.8。
+  > - 使用标签和具体的版本号直接进入你的版本。例如，如果你打算使用 v2.5.8，你可以导航到 https://github.com/rancher/rancher/releases/tag/v2.5.8 。
 
 - 创建自定义集群并添加基于 ARM64 的节点
   - Kubernetes 集群版本必须为 1.12 或更新版本
