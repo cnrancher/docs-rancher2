@@ -73,22 +73,7 @@ _v2.1.0 版本可用_
 
 1.  在**全局**视图中，从主菜单中选择**安全 > 认证**。
 1.  选择**Keycloak**。
-1.  完成**配置 Keycloak 帐户**表单。
-
-    | 字段             | 描述                                                  |
-    | :--------------- | :---------------------------------------------------- |
-    | 显示名称         | 包含用户 display name 的 属性，例如`givenName`        |
-    | 用户名           | 包含用户 user name/given name 的属性，例如`givenName` |
-    | UID              | 对每个用户唯一的属性，例如`email`                     |
-    | 组               | 为管理组成员身份创建的组，例如`team_member`           |
-    | Rancher API 地址 | Rancher Server 的 URL 地址                            |
-    | 私钥 / 证书      | 密钥/证书对，用于在 Rancher 和 IdP 之间创建安全 shell |
-    | 元数据 XML       | 从您的 IdP 服务器导出的`metadata.xml`文件。           |
-
-    > **提示：** 您可以使用 openssl 命令生成密钥/证书对。例如：
-    >
-    >        openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout myservice.key -out myservice.cert
-
+1.  完成**配置 Keycloak 账户**表单。有关填写表格的帮助，请参阅[配置参考](#配置参考)。
 1.  完成**配置 Keycloak 帐户**表单后，单击页面底部的**启用 Keycloak 认证**进行身份验证。
 
     Rancher 将重定向到 IdP 登录页面。输入 Keycloak IdP 系统的身份验证凭据，以验证您的 Rancher Keycloak 配置。
@@ -103,6 +88,23 @@ _v2.1.0 版本可用_
 > - 添加用户时，必须正确输入确切的用户 ID（即`UID`字段）。输入用户 ID 时，将不会搜索可能匹配的其他用户 ID。
 > - 添加组时，必须从文本框旁边的下拉列表中选择组。Rancher 假定来自文本框的任何输入都是用户。
 >   - 用户组下拉列表仅显示您所属的用户组。您将无法添加您不是其成员的组。
+
+## 配置参考
+
+| Field                     | 描述                                                                                                         |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Display Name Field        | 包含用户的显示名称的属性。例如: `givenName`                                                                  |
+| User Name Field           | 包含用户名/姓名的属性。 例如: `email`                                                                        |
+| UID Field                 | 一个对每个用户来说都是独一无二的属性。 例如: `email`                                                         |
+| Groups Field              | 为管理组成员资格创建条目。 例如: `member`                                                                    |
+| Entity ID Field           | Keycloak 客户端需要配置为客户端 ID 的 ID。 默认: `https://yourRancherHostURL/v1-saml/keycloak/saml/metadata` |
+| Rancher API Host          | Rancher Server 的 URL。                                                                                      |
+| Private Key / Certificate | 一个密钥/证书对，在 Rancher 和你的 IdP 之间创建一个安全的外壳。                                              |
+| IDP-metadata              | 从 IdP 服务器导出的 `metadata.xml` 文件。                                                                    |
+
+> **提示：**你可以使用 openssl 命令生成一个密钥/证书对。比如说：
+>
+>        openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout myservice.key -out myservice.cert
 
 ## 附录: 故障诊断
 

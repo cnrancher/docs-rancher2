@@ -46,7 +46,7 @@ _适用于 v2.5.6+_
 
 ## 为自定义污点添加 NodeSelector 设置和容忍度
 
-你可以添加你自己的`nodeSelector`设置，并通过编辑日志 Helm 图表值为额外的污点添加`tolerations`，详情请见[本页面](/docs/rancher2.5/logging/taints-tolerations/_index)。
+你可以添加你自己的`nodeSelector`设置，并通过编辑日志 Helm chart 值为额外的污点添加`tolerations`，详情请见[本页面](/docs/rancher2.5/logging/taints-tolerations/_index)。
 
 ## 启用日志应用程序以与 SELinux 一起工作
 

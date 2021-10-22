@@ -1,5 +1,5 @@
 ---
-title: Windows集群监控和告警
+title: Windows 群集支持
 description: description
 keywords:
   - rancher
@@ -16,15 +16,11 @@ keywords:
   - Windows集群监控和告警
 ---
 
-从 V2.5.8 版起可用\_
+_从 V2.5.8 版起可用_
 
-从监控 V2 14.5.100 开始（在 Rancher 2.5.8 中默认使用），监控 V2 现在可以部署在 Windows 集群上，并将使用[prometheus-community/windows_exporter](https://github.com/prometheus-community/windows_exporter)（之前名为`wmi_exporter`）从 Windows 节点刮取指标。
+从监控 V2 14.5.100 开始（在 Rancher 2.5.8 中默认使用），监控 V2 现在可以部署在 Windows 集群上，并将使用 [prometheus-community/windows_exporter](https://github.com/prometheus-community/windows_exporter)（之前名为`wmi_exporter`）从 Windows 节点抓取指标。
 
-- [与监控 V1 比较](#comparison-to-monitoring-v1)
-- [集群要求](#cluster-requirements)
-  - [将现有集群升级到 wins v0.1.0](#upgrading-existing-clusters to-wins-v0-1-0)
-
-##与监控 V1 的比较
+## 与监控 V1 的比较
 
 与 Monitoring V1 for Windows 不同的是，根据上游从 "wmi*exporter "到 "windows_exporter "的命名变化，"windows_exporter "收集的指标将被标注为 "windows*"而不是 "wmi\_"。
 
@@ -32,7 +28,7 @@ keywords:
 
 ## 集群要求
 
-Windows 的监控 V2 只能从 Windows 主机上刮取指标，这些主机的最小`wins`版本为 v0.1.0。为了能够完全部署 Monitoring V2 for Windows，你的所有主机必须满足这个要求。
+Windows 的监控 V2 只能从 Windows 主机上抓取指标，这些主机的最小`wins`版本为 v0.1.0。为了能够完全部署 Monitoring V2 for Windows，你的所有主机必须满足这个要求。
 
 如果你在 Rancher 2.5.8 中配置一个新的 RKE1 集群，你的集群应该已经满足这个要求。
 
@@ -59,14 +55,10 @@ Windows 的监控 V2 只能从 Windows 主机上刮取指标，这些主机的�
 
    > **非默认 Windows 前缀路径的注意事项：**如果你用`cluster.yml`设置的 RKE 集群有一个非默认的`win_prefix_path`，你将需要用你的前缀路径来更新`masquerade.as`字段，以代替`c:\``。
    >
-   > 例如，如果你有`win_prefix_path: 'c:\host\opt\'，那么你需要设置`as: c:\host\opt\etc\wmi-exporter\wmi-exporter.exe`。
+   > 例如，如果你有 `win_prefix_path: 'c:\host\opt\'`，那么你需要设置`as: c:\host\opt\etc\wmi-exporter\wmi-exporter.exe`。
 
-   ```
-
-   ```
-
-2. 一旦你的所有主机都成功升级，请确保你再次以默认值部署 Helm 图表，以避免与以下设置冲突。
+2. 一旦你的所有主机都成功升级，请确保你再次以默认值部署 Helm chart ，以避免与以下设置冲突。
    `yaml masquerade: enabled: false`。
    **结果：**主机已准备好安装监控 V2。你可以选择卸载`rancher-wins-upgrader`图表，或将其保留在集群中以方便将来的升级。
 
-关于如何使用它的更多信息，请参见图表的[README.md](https://github.com/rancher/wins/blob/master/charts/rancher-wins-upgrader/README.md)。
+关于如何使用它的更多信息，请参见 chart 的 [README.md](https://github.com/rancher/wins/blob/master/charts/rancher-wins-upgrader/README.md)。

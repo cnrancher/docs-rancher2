@@ -20,7 +20,7 @@ keywords:
 
 如果希望为用户提供对集群中的 _所有_ 项目、节点和资源的访问和权限，请为该用户分配集群成员资格。
 
-> **提示:** 希望为用户提供对集群中 _特定_ 项目的访问权限？ 请参见 [添加项目成员](/docs/rancher2.5/project-admin/project-members/_index)。
+> **提示:** 希望为用户提供对集群中 _特定_ 项目的访问权限？ 请参见 [添加项目成员](/docs/rancher2.5/admin-settings/rbac/cluster-project-roles/_index)。
 
 以下两种情况下，您可以添加集群成员：
 

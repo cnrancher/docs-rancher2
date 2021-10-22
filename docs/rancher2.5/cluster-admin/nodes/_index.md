@@ -190,17 +190,6 @@ _自 2.3.3 起可用_
 
 > **注意：** Rancher 存在一个[未解决的问题](https://github.com/rancher/rancher/issues/24172)，在 Rancher UI 上查看被标记为忽略的节点时，节点会一直保持`Updataing`状态。
 
-### 使用 Rancher UI 标记要被忽略的节点
-
-1. 在**全局**视图中，单击**设置**选项卡。
-1. 转到 `ignore-node-name` 设置，然后单击 **省略号> 编辑**。
-1. 输入 Rancher 需要忽略节点的名称。具有该名称的所有节点将被忽略。
-1. 单击**保存**。
-
-**结果：** Rancher 不会等待使用该名称注册的节点。在用户界面中，节点将显示为灰色。该节点仍然是集群的一部分，可以用 `kubectl` 列出。
-
-即便以后更改了 `ignore-node-name` ，这个已被忽略的节点将继续被忽略。
-
 ### 使用 kubectl 标记要被忽略的节点
 
 添加需要被 Rancher 忽略的节点，请使用 `kubectl` 创建具有以下标签的节点：
@@ -215,4 +204,4 @@ cattle.rancher.io/node-status: ignore
 
 如果在将节点添加到 Rancher 集群后添加标签，UI 会继续显示该节点。
 
-如果您使用 Rancher UI 或 Rancher API 从 Rancher Server 中删除节点时，如果节点名称与 Rancher 的设置的 `ignore-node-name`匹配，则 Rancher 不会从集群中删除该节点。
+如果您使用 Rancher UI 或 Rancher API 从 Rancher Server 中删除节点时，如果`nodeName`与 Rancher API 的 `v3/settings/ignore-node-name` 匹配，则 Rancher 不会从集群中删除该节点。

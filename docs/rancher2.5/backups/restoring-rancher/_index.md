@@ -60,38 +60,26 @@ keywords:
 2. 集群范围内的资源
 3. 命名空间资源
 
+## 日志
+
 要查看还原的进展情况，可以查看 operator 的日志。请按照以下步骤来获取日志：
 
 ```yaml
-kubectl get pods -n cattle-resources-system
-kubectl logs <pod name from above command> -n cattle-resources-system -f
+kubectl logs -n cattle-resources-system -l app.kubernetes.io/name=rancher-backup -f
 ```
 
-### 重启 Rancher
+## Cleanup
 
-Rancher 必须在使用 Rancher 备份操作员进行回滚后，以较低/以前的版本启动。它应该用与前次安装相同的 Helm Chart 值启动。
+如果你用 kubectl 创建了还原资源，请删除该资源以防止与未来的还原发生命名冲突。
 
-从当前安装的 Rancher Helm Chart 中获取用`--set`传递的值。
+## 已知问题
 
-```
-helm get values rancher -n cattle-system
-hostname: rancher.my.org
-```
-
-:::note
-这个命令会列出更多的值。这只是其中一个值的例子。
-另外，也可以将当前的值导出到一个文件中，并在升级时引用该文件。例如，要只改变 Rancher 的版本。
-:::
+在某些情况下，恢复备份后，Rancher 日志会显示类似以下的错误：
 
 ```
-helm get values rancher -n cattle-system -o yaml > values.yaml。
+2021/10/05 21:30:45 [ERROR] error syncing 'c-89d82/m-4067aa68dd78': handler rke-worker-upgrader: clusters.management.cattle.io "c-89d82" not found, requeuing
 ```
 
-然后将 Helm Chart 升级到以前的 Rancher 版本，使用以前的值。在这个例子中，这些值是从文件中提取的。
+发生这种情况的原因是，刚刚恢复的一个资源有终结器，但相关的资源已经被删除，所以处理程序无法找到它。
 
-```
-helm upgrade rancher rancher-<CHART_REPO>/rancher \
-  --namespace cattle-system
-  -f values.yaml ．
-  --version=X.Y.Z
-```
+为了消除这些错误，我们需要找到并删除导致错误的资源。查看更多信息[这里](https://github.com/rancher/rancher/issues/35050#issuecomment-937968556)。

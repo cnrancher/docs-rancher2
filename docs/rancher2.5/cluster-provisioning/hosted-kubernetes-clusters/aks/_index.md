@@ -126,7 +126,7 @@ az ad sp create-for-rbac \
 
 1. 在 **集群** 页，单击 **添加集群**。
 
-1. 选择 **Azure Kubernetes Service**。
+1. 选择 **Azure AKS**。
 
 1. 输入 **集群名称**。
 
@@ -135,11 +135,12 @@ az ad sp create-for-rbac \
    - 单击**添加成员**将需要访问这个集群的用户添加到成员中。
    - 在**角色**下拉菜单中选择每个用户的权限。
 
-1. 使用订阅 ID、租户 ID、应用 ID 和客户端密钥授予集群对 AKS 的访问权限。如果您没有所有这些信息，则可以使用以下指引来获取这些信息：
+1. 使用订阅 ID、租户 ID、client ID 和 客户端密钥 来让你的集群访问 AKS。如果你没有这些信息，则可以使用以下指引来获取这些信息：
 
-- **应用 ID and ID、租户 ID：** 要获取应用 ID 和租户 ID，可以转到 Azure 门户网站，然后单击**Azure Active Directory**，然后单击**应用注册**，然后单击服务主体的名称。应用 ID 和租户 ID 都位于应用注册详细信息页上。
-- **客户端密钥：** 如果在创建服务主体时未复制客户端密钥，在应用注册详细信息页面，可以获取新密钥，然后单击**证书 & 密钥**，然后单击**新客户端密钥**。
-- **订阅 ID：** 您可以从门户网站的**全部服务 > 订阅**中获取订阅 ID。
+- **租户 ID：**要获得租户 ID，可以进入 Azure 门户，然后点击**Azure Active Directory**，然后点击**Properties**，找到**Tenant ID**字段。
+- **Client ID：**要获得 client ID，可以进入 Azure 门户，然后点击**Azure Active Directory**，再点击**Enterprise applications。**点击**All applications。**选择你的应用，点击**Properties，**并复制应用 ID。
+- **客户端密钥：** 如果在创建服务主体时未复制客户端密钥，在应用注册详细信息页面，可以获取新密钥，然后单击**Certificates & secrets**，然后单击**New client secret**。
+- **订阅 ID：** 您可以从门户网站的**All services > Subscriptions.**中获取订阅 ID。
 
 1.  使用您的服务主体的信息完成**帐户访问**表单，并选择一个地理区域。此信息用于 Azure 进行身份验证。
 

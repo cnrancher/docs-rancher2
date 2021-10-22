@@ -21,7 +21,7 @@ keywords:
 
 ## 需要监测的内容
 
-Kubernetes 本身以及运行在其内部的应用，构成了一个分布式系统，不同的组件之间相互影响。对于整个系统和每个单独的组件，你必须确保性能、可用性、可靠性和可扩展性。更多细节和信息的参考 Google 免费的[Site Reliability Engineering Book](https://sre.google/)，尤其是关于[监控分布式系统](https://sre.google/)这一章。
+Kubernetes 本身以及运行在其内部的应用，构成了一个分布式系统，不同的组件之间相互影响。对于整个系统和每个单独的组件，你必须确保性能、可用性、可靠性和可扩展性。更多细节和信息的参考 Google 免费的[Site Reliability Engineering Book](https://landing.google.com/sre/sre-book/)，尤其是关于[监控分布式系统](https://landing.google.com/sre/sre-book/chapters/monitoring-distributed-systems/)这一章。
 
 ## 配置 Prometheus 资源使用
 
@@ -99,7 +99,7 @@ Prometheus 并不是为了长期存储指标，而只用于短期存储。
 
 如果你有一个（微）服务架构，集群中的多个单独的工作负载相互通信，那么拥有关于这些流量的详细指标和跟踪非常很重要，这是为了解所有这些工作负载是如何相互通信的，以及问题或瓶颈可能在哪里。
 
-当然，你可以监控所有工作负载中的所有内部流量，并将这些指标暴露给 Prometheus，但这相当耗费精力。像 Istio 这样的服务网格，可以通过[单击](https://rancher.com/docs/rancher/v2.x/en/cluster-admin/tools/istio/)在 Rancher 中安装，可以自动完成这项工作，并提供关于所有服务之间的流量的丰富的遥测数据。
+当然，你可以监控所有工作负载中的所有内部流量，并将这些指标暴露给 Prometheus，但这相当耗费精力。像 Istio 这样的服务网格，可以通过[单击](/docs/rancher2.5/istio/_index)在 Rancher 中安装，可以自动完成这项工作，并提供关于所有服务之间的流量的丰富的遥测数据。
 
 ## 真实用户监控
 
@@ -109,7 +109,7 @@ Prometheus 并不是为了长期存储指标，而只用于短期存储。
 
 除了监控工作负载以检测性能、可用性或可扩展性的问题外，还应该监控集群和运行到集群中的工作负载，这可以发现一些潜在的安全问题。一个好的起点是经常运行[CIS 扫描](/docs/rancher2.5/cis-scans/_index)并发出告警，检查集群是否按照安全最佳实践进行配置。
 
-对于工作负载，你可以看看 Kubernetes 和 Container 安全解决方案，比如[Falko](https://falco.org/)、[Aqua Kubernetes Security](https://www.aquasec.com/solutions/kubernetes-container-security/)、[SysDig](https://sysdig.com/)。
+对于工作负载，你可以看看 Kubernetes 和 Container 安全解决方案，比如[Falco](https://falco.org/)、[Aqua Kubernetes Security](https://www.aquasec.com/solutions/kubernetes-container-security/)、[SysDig](https://sysdig.com/)。
 
 ## 设置告警
 

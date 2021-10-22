@@ -52,6 +52,7 @@ keywords:
   - [Metrics Server 插件](/docs/rke/config-options/add-ons/metrics-server/_index)
   - [自定义插件](/docs/rke/config-options/add-ons/user-defined-add-ons/_index)
   - [插件 job 连接超时](#插件-job-超时)
+  - [cri-dockerd](#cri-dockerd)
 
 ## 集群层级选项
 
@@ -126,3 +127,11 @@ $ echo $SSH_AUTH_SOCK
 ### 插件 job 连接超时
 
 您可以定义 RKE 插件及其连接超时的时间，在 Kubernetes 集群成功运行后，RKE 以 Kubernetes [job](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/)的形式运行插件。如果连接超时，RKE 将停止尝试检索 job 状态，超时的单位是秒。默认超时值为`30`秒。
+
+### cri-dockerd
+
+Kubernetes 将在未来的 Kubernetes 版本中删除与 Docker（dockershim）交互的 kubelet 中的代码。更多信息，请参阅 [Dockershim 废弃常见问题：dockershim 什么时候会被移除？](https://kubernetes.io/blog/2020/12/02/dockershim-faq/#when-will-dockershim-be-removed)。替换这段代码的组件被称为 `cri-dockerd`，可以使用以下配置启用：
+
+```
+enable_cri_dockerd: true
+```

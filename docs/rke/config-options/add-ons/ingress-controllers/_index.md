@@ -123,7 +123,11 @@ ingress:
 
 ### 网络配置选项
 
-_从 v1.1.11 版起可用_
+#### v1.3.x
+
+对于 Kubernetes v1.21 及更高版本，NGINX ingress controller 不再运行在 `hostNetwork: true` 中，而是使用 hostPorts 的端口 `80` 和端口 `443`。这样做是为了使 webhook 可以被配置为使用 ClusterIP 来访问，这样它就只能在集群内被访问。如果你想改变模式或端口，请参阅下面的选项。
+
+#### v1.1.11 及以上版本 & v1.2.x
 
 默认情况下，nginx ingress controller 使用 `hostNetwork: true` 配置，默认端口为`80`和`443`。如果你想改变模式或端口，请参阅下面的选项。
 
@@ -138,6 +142,14 @@ ingress:
   extra_args:
     http-port: 8080
     https-port: 8443
+```
+
+使用 `hostNetwork` 配置 nginx ingress controller：
+
+```yaml
+ingress:
+  provider: nginx
+  network_mode: hostNetwork
 ```
 
 配置 nginx ingress controller，不使用网络模式，这将使它在 overlay 网络上运行（例如，如果你想使用`LoadBalancer`暴露 nginx ingress controller），并覆盖默认端口:
@@ -200,7 +212,3 @@ ingress:
    ```
    kubectl delete pod -l app=ingress-nginx -n ingress-nginx
    ```
-
-```
-
-```

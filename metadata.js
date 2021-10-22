@@ -591,13 +591,13 @@ const metadata = {
                 "多集群应用",
             //add monitoring alerting
             "rancher2.5/monitoring-alerting/_index": "概述",
-            "rancher2.5/monitoring-alerting/configuration/_index":
-                "配置用于监控的自定义资源",
+            "rancher2.5/monitoring-alerting/how-monitoring-works/_index": "工作原理",
             "rancher2.5/monitoring-alerting/rbac/_index": "基于角色的访问控制",
-            "rancher2.5/monitoring-alerting/persist-grafana/_index":
-                "持久化Grafana仪表盘",
-            "rancher2.5/monitoring-alerting/migrating/_index":
-                "迁移到Rancher v2.5监控",
+            "rancher2.5/monitoring-alerting/dashboards/_index": "内置 Dashboards",
+            "rancher2.5/monitoring-alerting/guides/_index": "监控指南",
+            "rancher2.5/monitoring-alerting/configuration/_index": "配置介绍",
+            "rancher2.5/monitoring-alerting/windows-clusters/_index": "Windows 群集支持",
+            "rancher2.5/monitoring-alerting/expression/_index": "PromQL 表达式参考",
             //istio
             "rancher2.5/istio/_index": "功能介绍",
             "rancher2.5/istio/resources/_index": "分配CPU和内存",
@@ -735,6 +735,7 @@ const metadata = {
             "rke/config-options/cloud-providers/custom/_index":
                 "自定义云服务提供商",
             "rke/config-options/audit-log/_index": "审计日志",
+            "rke/config-options/dual-stack/_index": "Dual-stack",
             "rke/config-options/add-ons/_index": "RKE插件",
             "rke/config-options/add-ons/network-plugins/_index": "网络插件",
             "rke/config-options/add-ons/network-plugins/custom-network-plugin-example/_index":

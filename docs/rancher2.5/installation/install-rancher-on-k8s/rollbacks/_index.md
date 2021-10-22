@@ -27,9 +27,17 @@ keywords:
 :::important 重要
 
 - 请按照此页面上的说明在已备份的同一集群上恢复 rancher。为了将 rancher 迁移到新的集群，请按照步骤进行[迁移 rancher](/docs/rancher2.5/backups/migrating-rancher/_index)。
-- 在使用相同设置还原 Rancher 时，operator 将在还原开始时缩减 Rancher deployment，还原完成后又会扩展 deployment。因此，Rancher 在还原期间将不可用。
-
+- 在使用相同设置还原 Rancher 时，Rancher deployment 在还原开始前被手动缩减，然后操作员将在还原完成后将其缩回。因此，Rancher 在还原期间将不可用。
 :::
+
+### 将 Rancher Deployment 的规模扩大到 0
+
+1. 在**全局**视图中，将鼠标悬停在**本地**集群上。
+1. 在**本地**的项目下，点击**System**。
+1. 从**cattle-system**命名空间部分，找到 `rancher-hook` deployment。
+1. 选择**&#8942;> Edit**。
+1. 将**Scalable deployment of \_ pods**改为`0`。
+1. 滚动到底部并点击**保存**。
 
 ### 创建 Restore 自定义资源
 
@@ -60,7 +68,7 @@ keywords:
 
 1. 单击 **Create**。
 
-**结果：**rancher-operator 在还原过程中缩减了 rancher deployment，并在还原完成后将其扩展。资源的恢复顺序是这样的：
+**结果：**备份文件被创建并更新到目标存储位置。资源按以下顺序恢复：
 
 1. 自定义资源对象 (CRDs)
 2. 集群范围内的资源
@@ -71,6 +79,26 @@ keywords:
 ```yaml
 kubectl get pods -n cattle-resources-system
 kubectl logs <pod name from above command> -n cattle-resources-system -f
+```
+
+### 回滚到以前的 Rancher 版本
+
+Rancher 可以使用 Helm CLI 进行回滚。要回滚到以前的版本：
+
+```yaml
+helm rollback rancher -n cattle-system
+```
+
+如果以前的版本不是预定目标，你可以指定一个版本来回滚。要查看部署历史：
+
+```yaml
+helm history rancher -n cattle-system
+```
+
+当目标版本确定后，执行回滚。这个例子将回滚到版本`3`：
+
+```yaml
+helm rollback rancher 3 -n cattle-system
 ```
 
 ### 回滚到上一个版本

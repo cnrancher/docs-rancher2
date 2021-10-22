@@ -270,7 +270,7 @@ GKE 的节点自动修复功能可以帮助你保持集群中的节点处于健�
 
 启用 Google Cloud 的运营套件（以前称为 Stackdriver）的监控。详情请见 [document.](https://cloud.google.com/monitoring/docs/monitoring-overview)
 
-#### Kubernetes 仪表板
+#### Kubernetes 仪表盘
 
 启用[Kubernetes 仪表盘插件。](https://cloud.google.com/kubernetes-engine/docs/concepts/dashboards#kubernetes_dashboard) 从 GKE v1.15 开始，你将不再能够通过使用插件 API 启用 Kubernetes 仪表盘。
 

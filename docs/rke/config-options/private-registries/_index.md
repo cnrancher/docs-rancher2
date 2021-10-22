@@ -64,3 +64,35 @@ private_registries:
 从 v0.1.10 开始，您必须配置您的私有镜像仓库凭证，但您可以指定这个镜像仓库为默认镜像仓库，这样所有的[系统镜像](/docs/rke/config-options/system-images/_index)都会从指定的私有镜像仓库中提取。您可以使用`rke config --system-images`命令来获取默认系统映像的列表来填充您的私有镜像仓库。
 
 在 v0.1.10 之前，您必须配置您的私有镜像仓库凭证并更新`cluster.yml`中所有[系统镜像](/docs/rke/config-options/system-images/_index)的名称，这样镜像名称就会在每个镜像名称前附加私有镜像仓库 URL。
+
+### Amazon Elastic Container Registry (ECR) 私有注册表设置
+
+[Amazon ECR](https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html) 是一种安全、可扩展且可靠的 AWS 托管容器镜像注册服务。有两种方法可以提供 ECR 凭证来设置您的 ECR 私有注册表：使用实例配置文件或添加配置片段，它们是 `kubelet` 环境变量中的硬编码凭证和 `ecrCredentialPlugin` 下的凭证。
+
+- **实例配置文件**：实例配置文件是提供 ECR 凭证的首选且更安全的方法（在 EC2 等中运行时）。默认情况下，实例配置文件将被自动检测和使用。有关使用 ECR 权限配置实例配置文件的更多信息，请转到 [此处](https://docs.aws.amazon.com/AmazonECR/latest/userguide/security-iam.html)。
+
+- **配置片段**。只有当你的节点存在以下条件时，你才会使用下面的配置片段而不是实例配置文件：
+
+  - 节点不是一个 EC2 实例
+  - 节点是一个 EC2 实例，但没有配置实例配置文件
+  - 节点是一个 EC2 实例，并且配置了实例配置文件，但没有 ECR 的权限
+
+> **注意：** ECR 凭证只在 `kubelet` 和 `ecrCredentialPlugin` 区域使用。如果你在创建一个新的集群或在协调/升级过程中拉取镜像时遇到问题，请务必记住这一点。
+>
+> - Kubelet：对于附加组件、自定义 workload 等，实例配置文件或凭证被下游集群节点使用
+> - 拉取系统镜像（直接通过 Docker）：对于启动、升级、协调等，实例配置文件或凭证被运行 RKE 或运行 Rancher pod 的节点使用。
+
+```
+  # Configuration snippet to be used when the instance profile is unavailable.
+  services:
+    kubelet:
+      extra_env:
+        - "AWS_ACCESS_KEY_ID=ACCESSKEY"
+        - "AWS_SECRET_ACCESS_KEY=SECRETKEY"
+  private_registries:
+       - url: ACCOUNTID.dkr.ecr.REGION.amazonaws.com
+         is_default: true
+         ecrCredentialPlugin: 
+          aws_access_key_id: "ACCESSKEY"
+          aws_secret_access_key: "SECRETKEY"
+``` 

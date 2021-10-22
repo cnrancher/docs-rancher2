@@ -81,16 +81,9 @@ _自 v2.2.0 起可用_
 
 ## TLS 设置
 
-_自 v2.2.0 起可用_
+当你在 Kubernetes 集群内安装 Rancher 时，TLS 会在集群的 ingress controller 上卸载。可能的 TLS 设置取决于使用的 ingress controller。
 
-要设置不同的 TLS 配置，可以使用`CATTLE_TLS_MIN_VERSION`和`CATTLE_TLS_CIPHERS`环境变量。例如，将 TLS 1.0 配置为接受的最低 TLS 版本:
-
-```plain
---set 'extraEnv[0].name=CATTLE_TLS_MIN_VERSION'
---set 'extraEnv[0].value=1.0'
-```
-
-参阅 [TLS 设置](/docs/rancher2.5/installation/resources/tls-settings/_index) 获取更多信息和选项。
+参见[TLS 设置](/docs/rancher2.5/installation/resources/tls-settings/_index)以了解更多信息和选项。
 
 ## 导入`local`集群
 

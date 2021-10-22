@@ -23,7 +23,7 @@ keywords:
 
 ## Elasticsearch 配置
 
-1. 在**访问地址**字段中，输入您的 Elasticsearch 实例的 IP 地址和端口。您可以从 Elasticsearch 的仪表板中找到此信息。
+1. 在**访问地址**字段中，输入您的 Elasticsearch 实例的 IP 地址和端口。您可以从 Elasticsearch 的仪表盘中找到此信息。
 
    - Elasticsearch 通常将端口 `9200` 用于 HTTP，将 `9243` 用于 HTTPS。
 

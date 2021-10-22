@@ -44,9 +44,9 @@ Rancher 的 Helm System Chart 里包含了 OPA Gatekeeper。启用后，它将�
 > **先决条件：**
 >
 > - 只有系统管理员和集群所有者才能启用 OPA Gatekeeper。
-> - 需要通过`dashboard`功能开关启用仪表板。有关更多信息，请参阅[启用实验性功能](/docs/rancher2/installation/resources/feature-flags/_index)的部分。
+> - 需要通过`dashboard`功能开关启用仪表盘。有关更多信息，请参阅[启用实验性功能](/docs/rancher2/installation/resources/feature-flags/_index)的部分。
 
-1. 导航到集群的**仪表板**视图。
+1. 导航到集群的**仪表盘**视图。
 1. 在左侧菜单上，展开集群菜单，然后单击**OPA Gatekeeper**。
 1. 要使用默认配置安装 Gatekeeper，请单击**启用具有默认设置的 Gatekeeper（v0.1.0）**。
 1. 要更改任何默认配置，请单击**自定义 Gatekeeper yaml 配置**。
@@ -103,7 +103,7 @@ OPA Gatekeeper 会定期对集群进行审核，以检查是否有任何现有�
 
 ## 禁用 OPA Gatekeeper
 
-1. 导航到集群的仪表板视图
+1. 导航到集群的仪表盘视图
 1. 在左侧菜单上，展开集群菜单，然后单击**OPA Gatekeeper**。
 1. 单击 **省略号 > 禁用**。
 

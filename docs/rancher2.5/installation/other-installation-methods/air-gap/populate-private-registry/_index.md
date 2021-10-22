@@ -19,7 +19,7 @@ keywords:
 
 本节介绍如何配置私有镜像仓库，以便在安装 Rancher 时，Rancher 可以从此私有镜像仓库中拉取所需的镜像。
 
-默认情况下，Rancher 中所有用于[创建 Kubernetes 集群](/docs/rancher2.5/cluster-provisioning/_index)或运行任何[工具](/docs/rancher2.5/cluster-admin/tools/_index)的镜像都从 Docker Hub 中拉取，如： 监控、日志、告警、流水线等镜像。在离线环境下安装 Rancher，您需要一个私有镜像库，这个私有镜像库应该位于 Rancher 中的节点能访问的位置上。然后您需要载入所有镜像到这个私有镜像库里。
+默认情况下，Rancher 中所有用于[创建 Kubernetes 集群](/docs/rancher2.5/cluster-provisioning/_index)或启动 Rancher 中任何工具（如监控和日志）的镜像都来自 Docker Hub。在 Rancher 的离线安装中，你将需要一个私人注册表，它位于 Rancher server可以访问的地方。然后，你将在注册表中加载所有的镜像。
 
 对于高可用安装和单节点安装，同步镜像到私有镜像仓库的过程是相同的。
 
@@ -67,7 +67,7 @@ keywords:
     ```plain
     helm repo add jetstack https://charts.jetstack.io
     helm repo update
-    helm fetch jetstack/cert-manager --version v0.12.0
+    helm fetch jetstack/cert-manager --version v1.5.1
     helm template ./cert-manager-<version>.tgz | grep -oP '(?<=image: ").*(?=")' >> ./rancher-images.txt
     ```
 
@@ -248,7 +248,7 @@ Linux 镜像需要从 Linux 主机上收集和推送，但是必须先将 Window
    ```plain
    helm repo add jetstack https://charts.jetstack.io
    helm repo update
-   helm fetch jetstack/cert-manager --version v0.12.0
+   helm fetch jetstack/cert-manager --version v1.5.1
    helm template ./cert-manager-<version>.tgz | grep -oP '(?<=image: ").*(?=")' >> ./rancher-images.txt
    ```
 

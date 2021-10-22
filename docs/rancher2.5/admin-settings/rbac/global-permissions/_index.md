@@ -28,6 +28,60 @@ keywords:
 
 您无法更新或删除内置的全局权限。
 
+## 受限管理员
+
+Rancher v2.5 中创建了一个新的 `restricted-admin` 角色，以防止从本地 Rancher 服务器 Kubernetes 集群提权。这个角色对 Rancher 管理的所有下游集群有完全的管理员权限，但它没有改变本地 Kubernetes 集群的权限。
+
+`restricted-admin` 可以创建其他 `restricted-admin` 用户，具有同等的访问级别。
+
+Rancher 增加了一个新的设置，将初始启动的管理员设置为 `restricted-admin` 的角色。这适用于 Rancher server 首次启动时创建的第一个用户。如果设置了这个环境变量，那么就不会创建全局管理员，也就不可能通过 Rancher 创建全局管理员。
+
+要以 `restricted-admin` 作为初始用户启动 Rancher，Rancher server 应以下列环境变量启动：
+
+```
+CATTLE_RESTRICTED_DEFAULT_ADMIN=true
+```
+
+### `restricted-admin`的权限列表
+
+`restricted-admin`角色的权限根据 Rancher 版本不同而不同。
+
+#### v2.5.7+
+
+`restricted-admin` 权限如下：
+
+- 对 Rancher 管理的所有下游集群拥有完全的管理权限。
+- 可以添加其他用户，并将其分配到本地集群之外的集群。
+- 可以创建其他受限管理员。
+
+#### v2.5.0-v2.5.6
+
+`restricted-admin` 权限如下：
+
+- 对 Rancher 管理的所有下游集群有完全的管理权限。
+- 对本地 Kubernetes 集群有非常有限的访问权。可以访问 Rancher 定制的资源定义，但不能访问任何 Kubernetes 本地类型。
+- 可以添加其他用户，并将其分配到本地集群之外的集群。
+- 可以创建其他受限制的管理员。
+- 不能在本地集群中授予他们目前不具备的任何权限。(这是 Kubernetes 通常的操作方式)
+
+### 从 Rancher 升级到隐藏的 Local 集群
+
+在 Rancher v2.5 之前，可以使用这个标志来运行 Rancher server 隐藏 Local 集群。
+
+```
+--add-local=false
+```
+
+升级到 Rancher v2.5 时，你需要放弃这个标志。否则，Rancher 将无法启动。`restricted-admin`角色可以用来继续限制对 Local 集群的访问。
+
+### 将全局管理员改为受限管理员
+
+如果 Rancher 已经有一个全局管理员，他们应该将所有全局管理员改为新的`restricted-admin`角色。
+
+这可以通过**安全>用户**来完成，并将任何管理员角色转为受限管理员。
+
+已登录的用户如果愿意，可以把自己改为 `restricted-admin` ，但他们应该在最后一步才这样做，否则他们就没有权限这样做。
+
 ## 分配全局权限
 
 本地用户（Local）的全局权限分配与使用外部身份验证系统登录到 Rancher 的用户不同。

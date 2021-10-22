@@ -42,7 +42,7 @@ Rancher 包含一些实验性功能，默认状态下，这些功能是禁用的
 
 以下是 Rancher 中可用的功能开关的列表：
 
-- `dashboard`：此功能将启用下一代的实验性 UI。仪表板还使用了 Rancher 中的新 API，该 API 允许 UI 访问默认的 Kubernetes 资源，而不经过 Rancher 的任何干预。
+- `dashboard`：此功能将启用下一代的实验性 UI。仪表盘还使用了 Rancher 中的新 API，该 API 允许 UI 访问默认的 Kubernetes 资源，而不经过 Rancher 的任何干预。
 - `unsupported-storage-drivers`: 启用[允许不受支持的存储驱动程序](/docs/rancher2/installation/resources/feature-flags/enable-not-default-storage-drivers/_index)。换句话说，它启用了默认情况下未启用的 storage providers 和 provisioners 的类型。
 - `proxy`：此功能使 Rancher 使用新的简化的代理模块，这有助于增强性能和安全性。但是目前有一个已知问题，新的代理功能会导致 Helm 不能正常工作，这会导致包括 Rancher 工具（如监控，日志，Istio 等）在内的任何应用商店应用部署失败。
 - `istio-virtual-service-ui`：启用 Istio 的流量管理功能：[通过 UI 创建，读取，更新和删除 Istio 虚拟服务和目标规则](/docs/rancher2/installation/resources/feature-flags/istio-virtual-service-ui/_index)。

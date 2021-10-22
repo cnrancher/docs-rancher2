@@ -1,5 +1,5 @@
 ---
-title: GKE
+title: 在 GKE 上安装 Rancher
 description:
 keywords:
   - rancher
@@ -13,12 +13,12 @@ keywords:
   - rancher cn
   - 高可用安装指南
   - 安装 Rancher
-  - GKE
+  - 在 GKE 上安装 Rancher
 ---
 
 在本节中，你将学习如何使用 GKE 安装 Rancher。
 
-如果你已经有一个 GKE Kubernetes 集群，请跳到关于[安装 ingress 的步骤](#7-install-an-ingress)，然后按照[本页](/docs/rancher2.5/installation/install-rancher-on-k8s/_index)上的说明安装 Rancher Helm 图表。
+如果你已经有一个 GKE Kubernetes 集群，请跳到关于[安装 ingress 的步骤](#7-install-an-ingress)，然后按照[本页](/docs/rancher2.5/installation/install-rancher-on-k8s/_index)上的说明安装 Rancher Helm chart 。
 
 # 先决条件
 
