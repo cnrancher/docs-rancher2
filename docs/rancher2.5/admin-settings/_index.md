@@ -22,7 +22,7 @@ keywords:
 第一次登录 Rancher 后，Rancher 将提示您输入一个**Rancher Server URL**。您应该将 URL 设置为 Rancher Server 的主入口点。当负载均衡器位于 Rancher Server 集群前面时，URL 应该设置为负载均衡地址。系统会自动尝试从运行 Rancher Server 的主机的 IP 地址或主机名推断 Rancher Server 的 URL，但只有在运行单节点的 Rancher Server 时，上述推断才会正确。因此，在大多数情况下，您需要自己将 Rancher Server URL 设置为正确的值。
 
 :::important 注意
-Rancher Server URL 在设置后不支持更新修改操作。务必确保设置正确的 URL。
+Rancher Server URL 在设置后可通过**系统设置**->**高级设置**中的**server-url**来更新设置。
 :::
 
 ## 全局私有镜像仓库
