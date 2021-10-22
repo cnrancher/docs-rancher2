@@ -1028,6 +1028,7 @@ module.exports = {
                     "rancher2.5/installation/install-rancher-on-k8s/upgrades/_index",
                     "rancher2.5/installation/install-rancher-on-k8s/rollbacks/_index",
                     "rancher2.5/installation/install-rancher-on-k8s/amazon-eks/_index",
+                    "rancher2.5/installation/install-rancher-on-k8s/aks/_index",
                     "rancher2.5/installation/install-rancher-on-k8s/gke/_index",
                 ],
             },
@@ -1410,7 +1411,16 @@ module.exports = {
                 items: [
                     "rancher2.5/cluster-admin/editing-clusters/_index",
                     "rancher2.5/cluster-admin/editing-clusters/eks-config-reference/_index",
-                    "rancher2.5/cluster-admin/editing-clusters/gke-config-reference/_index",
+                    {
+                        type: "category",
+                        label: "GKE集群配置参考",
+                        items: [
+                            "rancher2.5/cluster-admin/editing-clusters/gke-config-reference/_index",
+                            "rancher2.5/cluster-admin/editing-clusters/gke-config-reference/private-clusters/_index",
+
+                        ],
+                    },
+                    
                     "rancher2.5/cluster-admin/editing-clusters/rke-config-reference/_index",
                     "rancher2.5/cluster-admin/editing-clusters/syncing/_index",
                 ],
@@ -1548,25 +1558,61 @@ module.exports = {
         HelmChart: ["rancher2.5/helm-charts/_index"],
         跨集群部署: [
             "rancher2.5/deploy-across-clusters/_index",
-            "rancher2.5/deploy-across-clusters/fleet/_index",
+            {
+                type: "category",
+                label: "Fleet - 大规模 GitOps",
+                items: [
+                    "rancher2.5/deploy-across-clusters/fleet/_index",
+                    "rancher2.5/deploy-across-clusters/fleet/architecture/_index",
+                    "rancher2.5/deploy-across-clusters/fleet/windows/_index",
+                    "rancher2.5/deploy-across-clusters/fleet/proxy/_index",
+                ],
+            },
             "rancher2.5/deploy-across-clusters/multi-cluster-apps/_index",
         ],
         监控和告警: [
             "rancher2.5/monitoring-alerting/_index",
+            "rancher2.5/monitoring-alerting/how-monitoring-works/_index",
+            "rancher2.5/monitoring-alerting/rbac/_index",
+            "rancher2.5/monitoring-alerting/dashboards/_index",
             {
                 type: "category",
-                label: "配置用于监控的自定义资源",
+                label: "指南",
                 items: [
-                    "rancher2.5/monitoring-alerting/configuration/_index",
-                    "rancher2.5/monitoring-alerting/configuration/alert-manager/_index",
-                    "rancher2.5/monitoring-alerting/configuration/prometheusrules/_index",
-                    "rancher2.5/monitoring-alerting/configuration/expression/_index",
+                    "rancher2.5/monitoring-alerting/guides/_index",
+                    "rancher2.5/monitoring-alerting/guides/enable-monitoring/_index",
+                    "rancher2.5/monitoring-alerting/guides/uninstall/_index",
+                    "rancher2.5/monitoring-alerting/guides/monitoring-workloads/_index",
+                    "rancher2.5/monitoring-alerting/guides/customize-grafana/_index",
+                    "rancher2.5/monitoring-alerting/guides/persist-grafana/_index",
+                    "rancher2.5/monitoring-alerting/guides/memory-usage/_index",
+                    "rancher2.5/monitoring-alerting/guides/migrating/_index",
                 ],
             },
-            "rancher2.5/monitoring-alerting/rbac/_index",
+            {
+                type: "category",
+                label: "配置",
+                items: [
+                    "rancher2.5/monitoring-alerting/configuration/_index",
+                    "rancher2.5/monitoring-alerting/configuration/receiver/_index",
+                    "rancher2.5/monitoring-alerting/configuration/route/_index",
+                    "rancher2.5/monitoring-alerting/configuration/servicemonitor-podmonitor/_index",
+                    "rancher2.5/monitoring-alerting/configuration/helm-chart-options/_index",
+                    "rancher2.5/monitoring-alerting/configuration/examples/_index",
+                        {
+                            type: "category",
+                            label: "高级配置",
+                            items: [
+                                "rancher2.5/monitoring-alerting/configuration/advanced/_index",
+                                "rancher2.5/monitoring-alerting/configuration/advanced/alertmanager/_index",
+                                "rancher2.5/monitoring-alerting/configuration/advanced/prometheus/_index",
+                                "rancher2.5/monitoring-alerting/configuration/advanced/prometheusrules/_index",
+                            ],
+                        },
+                ],
+            },
             "rancher2.5/monitoring-alerting/windows-clusters/_index",
-            "rancher2.5/monitoring-alerting/persist-grafana/_index",
-            "rancher2.5/monitoring-alerting/migrating/_index",
+            "rancher2.5/monitoring-alerting/expression/_index",
         ],
         Istio: [
             "rancher2.5/istio/_index",
@@ -1801,6 +1847,7 @@ module.exports = {
                 ],
             },
             "rke/config-options/audit-log/_index",
+            "rke/config-options/dual-stack/_index",
             {
                 type: "category",
                 label: "RKE 插件",

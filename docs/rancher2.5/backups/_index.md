@@ -17,7 +17,7 @@ keywords:
 
 在本节中，您将学习如何创建 Rancher 的备份，如何从备份中恢复 Rancher，以及如何将 Rancher 迁移到新的 Kubernetes 集群。
 
-从 Rancher v2.5 开始，`rancher-backup` operator 用来备份和恢复 Rancher。`rancher-backup` Helm chart 在[这里。](https://github.com/rancher/charts/tree/main/charts/rancher-backup)
+从 Rancher v2.5 开始，`rancher-backup` operator 用来备份和恢复 Rancher。`rancher-backup` Helm chart 在[这里。](https://github.com/rancher/charts/tree/release-v2.5/charts/rancher-backup)
 
 备份还原 operator 需要安装在 local 集群中，并且只对 Rancher 应用进行备份。备份和还原操作只在 local Kubernetes 集群中进行。
 

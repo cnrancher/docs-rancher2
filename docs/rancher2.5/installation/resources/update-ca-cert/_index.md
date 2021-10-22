@@ -147,7 +147,7 @@ $ sha256sum cacert.tmp | awk '{print $1}'。
 
 ```
 $ kubectl edit -n cattle-system ds/cattle-node-agent
-$ kubectl edit -n cattle-system deployment/cluster-agent。
+$ kubectl edit -n cattle-system deployment/cattle-cluster-agent
 ```
 
 ### 方法 3：重新创建 Rancher agents

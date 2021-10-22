@@ -22,8 +22,6 @@ keywords:
 
 从 Rancher v2.4 开始，Rancher Server 可以安装在 RKE Kubernetes 集群或 K3s Kubernetes 集群上。K3s 也是 Rancher 发布的经过完全认证的 Kubernetes 发行版，但比 RKE 更新。我们建议在 K3s 上安装 Rancher，因为 K3s 易于使用且更轻量，全部组件都打包在了一个二进制文件里。并且这个二进制文件小于 100 MB。注意：如果在 RKE 集群上安装了 Rancher 之后，目前没有办法将这个高可用迁移到 K3s 集群上。
 
-Rancher Server 只能在使用 RKE 或 K3s 安装的 Kubernetes 集群中运行。不支持在托管的 Kubernetes 集群（例如 EKS）上使用 Rancher。
-
 对于无法直接访问 Internet 的系统，请参阅 [Rancher 离线安装指南](/docs/rancher2.5/installation/other-installation-methods/air-gap/_index)。
 
 > **单节点 Kubernetes 集群安装提示：**

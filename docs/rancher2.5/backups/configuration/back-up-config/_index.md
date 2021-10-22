@@ -134,8 +134,8 @@ metadata:
   name: creds
 type: Opaque
 data:
-  accessKey: <Enter your access key>
-  secretKey: <Enter your secret key>
+  accessKey: <Enter your base64-encoded access key>
+  secretKey: <Enter your base64-encoded secret key>
 ```
 
 请运行以下代码，使用 base64 在 YAML 文件中对密钥进行加密：

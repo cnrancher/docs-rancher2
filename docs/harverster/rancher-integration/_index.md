@@ -1,6 +1,6 @@
 ---
 title: Rancher 集成
-description: 用户可以通过进入 Harvester 的 "Settings "页面来启用 Rancher 仪表板。
+description: 用户可以通过进入 Harvester 的 "Settings "页面来启用 Rancher 仪表盘。
 keywords:
   - rancher
   - rancher中文
@@ -21,14 +21,14 @@ _从 0.2.0 版起可用_
 
 [Rancher](https://github.com/rancher/rancher)是一个开源的多集群管理平台。Harvester 默认将 Rancher 集成到其 HCI 模式安装中。
 
-## 启用 Rancher 仪表板
+## 启用 Rancher 仪表盘
 
-用户可以通过进入 Harvester 的 "Settings "页面来启用 Rancher 仪表板。
+用户可以通过进入 Harvester 的 "Settings "页面来启用 Rancher 仪表盘。
 
 1. 点击`rancher-enabled`设置的动作。
 1. 选择 "启用 "选项并点击保存按钮。
-1. 在右上角会出现 Rancher 仪表板按钮。
-1. 点击 Rancher 按钮，它将打开一个新的标签，导航到 Rancher 仪表板。
+1. 在右上角会出现 Rancher 仪表盘按钮。
+1. 点击 Rancher 按钮，它将打开一个新的标签，导航到 Rancher 仪表盘。
 
 关于如何使用 Rancher 的更多细节，你可以参考这篇[文档](/docs/rancher2.5/_index)。
 

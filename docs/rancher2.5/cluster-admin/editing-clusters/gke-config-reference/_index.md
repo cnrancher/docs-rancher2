@@ -93,13 +93,13 @@ Pod IP 地址的现有二级范围的名称。如果选择，**集群 Pod 地址
 
 #### 私有集群
 
-> 警告：私有集群需要 Rancher 之外的额外规划和配置。请参考[私有集群指南](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/gke/private-clusters/_index) 。
+> 警告：私有集群需要 Rancher 之外的额外规划和配置。请参考[私有集群指南](/docs/rancher2.5/cluster-admin/editing-clusters/gke-config-reference/private-clusters/_index) 。
 
 只给节点分配内部 IP 地址。除非在 GCP 中采取额外的网络步骤，否则私有集群节点不能访问公共互联网。
 
 #### 启用私有端点
 
-> 警告：私有集群需要 Rancher 之外的额外规划和配置。请参考[私有集群指南]({{< baseurl >}}/rancher/v2.5/en/cluster-provisioning/hosted-kubernetes-clusters/gke/#private-clusters）。)
+> 警告：私有集群需要 Rancher 之外的额外规划和配置。请参考[私有集群指南](/docs/rancher2.5/cluster-admin/editing-clusters/gke-config-reference/private-clusters/_index)。
 
 锁定对控制平面端点的外部访问。只有当**私有集群**也被选中时才可用。如果选择了，并且如果 Rancher 不能直接访问集群运行的虚拟私有云网络，Rancher 将提供一个注册命令，在集群上运行，使 Rancher 能够连接到它。
 
@@ -273,7 +273,7 @@ GKE 的节点自动修复功能可以帮助你保持集群中的节点处于健�
 
 启用 Google Cloud 的运营套件（以前称为 Stackdriver）的监控。详情请见 [document.](https://cloud.google.com/monitoring/docs/monitoring-overview)
 
-#### Kubernetes 仪表板
+#### Kubernetes 仪表盘
 
 启用[Kubernetes 仪表盘插件。](https://cloud.google.com/kubernetes-engine/docs/concepts/dashboards#kubernetes_dashboard) 从 GKE v1.15 开始，你将不再能够通过使用插件 API 启用 Kubernetes 仪表盘。
 

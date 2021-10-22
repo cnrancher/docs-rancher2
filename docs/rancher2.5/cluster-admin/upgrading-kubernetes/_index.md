@@ -30,7 +30,7 @@ Rancher 将使用 RKE（Rancher Kubernetes Engine）作为库来创建和编辑 
 
 ## 经过测试的 Kubernetes 版本
 
-在发布新版本的 Rancher 之前，将会对 Kubernetes 的最新次要版本进行了测试，以确保兼容性。例如，Rancher v2.3.0 中以及验证了 Kubernetes v1.15.4，v1.14.7 和 v1.13.11。有关在每个 Rancher 版本上测试过哪个版本的 Kubernetes 的详细信息，请参阅[支持维护条款](https://rancher.com/support-maintenance-terms/all-supported-versions/)。
+在 Rancher 的新版本发布之前，会对其与 Kubernetes 的最新次要版本进行测试，以确保兼容性。关于在每个 Rancher 版本上测试了哪些版本的 Kubernetes 的详细信息，请参考[支持维护条款。](https://rancher.com/support-maintenance-terms/all-supported-versions/rancher-v2.5.9/)
 
 ## 升级的工作原理
 

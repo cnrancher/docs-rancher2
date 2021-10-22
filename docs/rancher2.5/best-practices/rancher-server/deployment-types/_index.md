@@ -51,4 +51,4 @@ Rancher 服务器的 Kubernetes 集群应该尽可能满足[系统和硬件要�
 
 使用 Rancher，您可以通过与领先的开源监控解决方案 Prometheus 和 Grafana 的集成来监视集群节点、Kubernetes 组件和软件部署的状态和过程，从而可以可视化 Prometheus 的指标。
 
-在集群中[启用监控](/docs/rancher2.5/cluster-admin/tools/cluster-monitoring/_index)后，可以设置[通知](/docs/rancher2.5/cluster-admin/tools/notifiers/_index)和[告警](/docs/rancher2.5/cluster-admin/tools/cluster-alerts/_index)来让您知道您的集群是否接近其容量。您还可以使用 Prometheus 和 Grafana 监控框架，在您扩展时建立关键指标的基线。
+在集群中[启用监控](/docs/rancher2.5/cluster-admin/tools/cluster-monitoring/_index)后，可以设置[通知](/docs/rancher2.5/cluster-admin/tools/notifiers/_index)和告警来让您知道您的集群是否接近其容量。您还可以使用 Prometheus 和 Grafana 监控框架，在您扩展时建立关键指标的基线。

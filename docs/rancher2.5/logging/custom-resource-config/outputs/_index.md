@@ -176,9 +176,9 @@ metadata:
   name: "devteam-splunk"
   namespace: "devteam"
 spec:
-  SplunkHec:
-    host: splunk.example.com
-    port: 8088
+  splunkHec:
+    hec_host: splunk.example.com
+    hec_port: 8088
     protocol: http
 ```
 
@@ -201,37 +201,37 @@ spec:
 
 ```yaml
 apiVersion: logging.banzaicloud.io/v1beta1
-    kind: ClusterOutput
-    metadata:
-      name: "example-syslog"
-      namespace: "cattle-logging-system"
-    spec:
-      syslog:
-        buffer:
-          timekey: 30s
-          timekey_use_utc: true
-          timekey_wait: 10s
-          flush_interval: 5s
-        format:
-          type: json
-          app_name_field: test
-        host: syslog.example.com
-        insecure: true
-        port: 514
-        transport: tcp
+kind: ClusterOutput
+metadata:
+  name: "example-syslog"
+  namespace: "cattle-logging-system"
+spec:
+  syslog:
+    buffer:
+      timekey: 30s
+      timekey_use_utc: true
+      timekey_wait: 10s
+      flush_interval: 5s
+    format:
+      type: json
+      app_name_field: test
+    host: syslog.example.com
+    insecure: true
+    port: 514
+    transport: tcp
 ```
 
 现在我们已经配置好日志的去向，让我们把所有的日志都配置到`output`。
 
 ```yaml
 apiVersion: logging.banzaicloud.io/v1beta1
-    kind: ClusterFlow
-    metadata:
-      name: "all-logs"
-      namespace: cattle-logging-system
-    spec:
-      globalOutputRefs:
-        - "example-syslog"
+kind: ClusterFlow
+metadata:
+  name: "all-logs"
+  namespace: cattle-logging-system
+spec:
+  globalOutputRefs:
+    - "example-syslog"
 ```
 
 ### 其他不支持的输出类型

@@ -66,6 +66,6 @@ Rancher 支持给用户组授予访问 Kiali 和 Jaeger 的权限，不支持针
 | 用 `kubectl` 配置 Istio                                          | ✓          | ✓          | ✓        |                |
 | 查看 Prometheus UI 和 Grafana UI                                 | ✓          |            |          |                |
 | 查看 Kiali UI 和 Jaeger UI ([可配置](#access-to-visualizations)) | ✓          |            |          |                |
-| 查看 Istio 项目仪表板，包括流量指标\*                            | ✓          | ✓          | ✓        | ✓              |
+| 查看 Istio 项目仪表盘，包括流量指标\*                            | ✓          | ✓          | ✓        | ✓              |
 
 > **说明：**因为流量图来源于 Kiali，而 Kiali 中可能包含敏感信息，所以在默认情况下，只有集群所有者能看到流量图，项目成员物只能看到一部分流量指标。

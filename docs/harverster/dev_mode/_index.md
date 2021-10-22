@@ -35,7 +35,7 @@ Harvester 可以通过以下方式安装在 Kubernetes 集群上。
 - 使用[Helm](https://helm.sh/)CLI 进行安装
 - 作为 Rancher 目录应用安装，在这种情况下，[harvester/harvester](https://github.com/harvester/harvester) repo 会作为 Helm `v3`应用添加到 Rancher 目录中。
 
-请参考 Harvester [Helm chart](https://github.com/harvester/harvester/blob/master/deploy/charts/harvester/README.md)了解更多关于安装和配置 Helm 图表的细节。
+请参考 Harvester [Helm chart](https://github.com/harvester/harvester/blob/master/deploy/charts/harvester/README.md)了解更多关于安装和配置 Helm chart 的细节。
 
 ### 前提条件
 

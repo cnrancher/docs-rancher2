@@ -60,7 +60,7 @@ keywords:
    sudo cp ./k3s-airgap-images-$ARCH.tar /var/lib/rancher/k3s/agent/images/
    ```
 
-1. 将 k3s 二进制文件放在 `/usr/local/bin/k3s`路径想，并确保拥有可执行权限。完成后，现在可以转到下面的[安装 K3s](#安装-k3s)部分，开始安装 K3s。
+1. 将 k3s 二进制文件放在 `/usr/local/bin/k3s`路径下，并确保拥有可执行权限。完成后，现在可以转到下面的[安装 K3s](#安装-k3s)部分，开始安装 K3s。
 
 ## 安装 K3s
 
@@ -72,7 +72,7 @@ keywords:
 
 1. 从[K3s GitHub Release](https://github.com/rancher/k3s/releases)页面获取 K3s 二进制文件，K3s 二进制文件需要与离线镜像的版本匹配。
 
-1. 获取 K3s 安装脚本：https://get.k3s.io。
+1. 获取 K3s 安装脚本：https://get.k3s.io 。
 
 1. 将二进制文件放在每个节点的`/usr/local/bin`中，并确保拥有可执行权限。将安装脚本放在每个节点的任意位置，并将其命名为`install.sh`。
 

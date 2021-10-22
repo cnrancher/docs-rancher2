@@ -20,7 +20,7 @@ title: Selectors和拉取配置
 1. 设置`prometheus.prometheusSpec.ignoreNamespaceSelectors=true`。
 1. 完成安装或升级
 
-**结果：** Prometheus 将被限制在特定的命名空间，这意味着需要设置以下配置之一，以继续在各种仪表板中查看数据。
+**结果：** Prometheus 将被限制在特定的命名空间，这意味着需要设置以下配置之一，以继续在各种仪表盘中查看数据。
 
 ## 启用 Prometheus 检测其他命名空间中的资源
 

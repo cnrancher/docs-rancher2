@@ -29,7 +29,8 @@ Rancher 可以安装在任何 Kubernetes 集群上。这个集群可以使用上
 - K3s：安装 K3s Kubernetes 集群的教程，请参考[本页](/docs/rancher2.5/installation/resources/k8s-tutorials/ha-with-external-db/_index)。如需帮助设置高可用性 K3s 集群的基础架构，请参考[本页](/docs/rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha-with-external-db/_index)
 - RKE2：在 RKE2 安装 Kubernetes 集群的教程，请参考[本页](https://rancher.com/docs/rancher/v2.5/en/installation/install-rancher-on-k8s/amazon-eks/)。如需帮助设置高可用性 K3s 集群的基础架构，请参考[本页](https://rancher.com/docs/rancher/v2.5/en/installation/resources/k8s-tutorials/ha-rke2/)。
 - Amazon EKS： 在 EKS 上安装 Kubernetes 集群的教程，请参考[本页](/docs/rancher2.5/installation/install-rancher-on-k8s/amazon-eks/_index)。
-- **GKE:**关于如何用谷歌 Kubernetes 引擎安装 Rancher 的细节，包括如何安装一个入口以便可以访问 Rancher 服务器，请参考[本页](/docs/rancher2.5/installation/install-rancher-on-k8s/gke/_index)
+- AKS：关于如何用 Azure Kubernetes 服务安装 Rancher 的细节，包括如何安装一个入口以便可以访问 Rancher server，请参考[本页](/docs/rancher2.5/installation/install-rancher-on-k8s/aks/_index)。
+- GKE：关于如何用谷歌 Kubernetes 引擎安装 Rancher 的细节，包括如何安装一个入口以便可以访问 Rancher server，请参考[本页](/docs/rancher2.5/installation/install-rancher-on-k8s/gke/_index)。
 
 ### CLI
 
@@ -135,20 +136,9 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
 这些说明来自[官方的 cert-manager 文档](https://cert-manager.io/docs/installation/kubernetes/#installing-with-helm)。
 
 ```shell
-# 安装 CustomResourceDefinition 资源
 
-kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.0.4/cert-manager.crds.yaml
-
-# **重要：**
-# 如果您正在运行 Kubernetes v1.15 或更低版本，
-# 则需要在上方的 kubectl apply 命令中添加`--validate=false`标志，
-# 否则您将在 cert-manager 的 CustomResourceDefinition 资源中收到与
-# x-kubernetes-preserve-unknown-fields 字段有关的验证错误。
-# 这是一个良性错误，是由于 kubectl 执行资源验证的方式造成的。
-
-# 为 cert-manager 创建命名空间
-
-kubectl create namespace cert-manager
+# 如果你手动安装了CRD，而不是在Helm安装命令中添加了`--set installCRDs=true`选项，你应该在升级Helm chart之前升级CRD资源。
+kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.1/cert-manager.crds.yaml
 
 # 添加 Jetstack Helm 仓库
 
@@ -160,10 +150,10 @@ helm repo update
 
 # 安装 cert-manager Helm chart
 
-helm install \
-  cert-manager jetstack/cert-manager \
+helm install cert-manager jetstack/cert-manager \
   --namespace cert-manager \
-  --version v1.0.4
+  --create-namespace \
+  --version v1.5.1
 
 ```
 

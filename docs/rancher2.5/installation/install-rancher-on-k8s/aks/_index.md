@@ -1,5 +1,19 @@
 ---
-title: 在AKS上安装Rancher
+title: 在 AKS 上安装 Rancher
+description:
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - 高可用安装指南
+  - 安装 Rancher
+  - 在 AKS 上安装 Rancher
 ---
 
 ## 概述

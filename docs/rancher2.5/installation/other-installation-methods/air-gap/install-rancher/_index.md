@@ -111,13 +111,13 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
 1. 从 [Helm Chart 仓库](https://hub.helm.sh/charts/jetstack/cert-manager) 中获取最新的 cert-manager Chart。
 
    ```shell
-   helm fetch jetstack/cert-manager --version v0.12.0
+   helm fetch jetstack/cert-manager --version v1.5.1
    ```
 
 1. 使用您期望的参数渲染 chart 模板，切记设置`image.repository`以便从私有镜像仓库中拉取 Chart。这将生成一个包含相关 YAML 的名为`cert-manager`的文件夹。
 
    ```shell
-   helm template cert-manager ./cert-manager-v0.12.0.tgz --output-dir . \
+   helm template cert-manager ./cert-manager-v1.5.1.tgz --output-dir . \
        --namespace cert-manager \
        --set image.repository=<REGISTRY.YOURDOMAIN.COM:PORT>/quay.io/jetstack/cert-manager-controller \
        --set webhook.image.repository=<REGISTRY.YOURDOMAIN.COM:PORT>/quay.io/jetstack/cert-manager-webhook \
@@ -127,7 +127,7 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
 1. 下载 cert-manager 所需的 CRD 文件。
 
    ```shell
-   curl -L -o cert-manager/cert-manager-crd.yaml https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/deploy/manifests/00-crds.yaml
+   curl -L -o cert-manager/cert-manager-crd.yaml https://github.com/jetstack/cert-manager/releases/download/v1.5.1/cert-manager.crds.yaml
    ```
 
 1. 渲染 Rancher 模板，声明您选择的选项。使用下面的参考表替换每个占位符。需要将 Rancher 配置为在由 Rancher 启动 Kubernetes 集群或 Rancher 工具时，使用私有镜像库。
@@ -143,24 +143,25 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
 
    ```shell
    helm template rancher ./rancher-<VERSION>.tgz --output-dir . \
-   --namespace cattle-system \
-   --set hostname=<RANCHER.YOURDOMAIN.COM> \
-   --set certmanager.version=<CERTMANAGER_VERSION> \
-   --set rancherImage=<REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher \
-   --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # 自v2.2.0可用，设置默认的系统镜像仓库
-   --set useBundledSystemChart=true # 自v2.3.0可用，使用内嵌的 Rancher system charts
+    --namespace cattle-system \
+    --set hostname=<RANCHER.YOURDOMAIN.COM> \
+    --set certmanager.version=<CERTMANAGER_VERSION> \
+    --set rancherImage=<REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher \
+    --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # Set a default private registry to be used in Rancher
+    --set useBundledSystemChart=true # Use the packaged Rancher system charts
    ```
 
    **2.5.8 之后的版本：**
 
    ```shell
    helm template rancher ./rancher-<VERSION>.tgz --output-dir . \
-   --namespace cattle-system \
-   --set hostname=<RANCHER.YOURDOMAIN.COM> \
-   --set certmanager.version=<CERTMANAGER_VERSION> \
-   --set rancherImage=<REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher \
-   --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # Set a default private registry to be used in Rancher
-   --set useBundledSystemChart=true # Use the packaged Rancher system charts
+    --no-hooks \ # prevent files for Helm hooks from being generated
+    --namespace cattle-system \
+    --set hostname=<RANCHER.YOURDOMAIN.COM> \
+    --set certmanager.version=<CERTMANAGER_VERSION> \
+    --set rancherImage=<REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher \
+    --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # Set a default private registry to be used in Rancher
+    --set useBundledSystemChart=true # Use the packaged Rancher system charts
    ```
 
 #### 选项 B - 使用已有的证书
@@ -183,8 +184,8 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
     --set hostname=<RANCHER.YOURDOMAIN.COM> \
     --set rancherImage=<REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher \
     --set ingress.tls.source=secret \
-    --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # 自v2.2.0可用，设置默认的系统镜像仓库
-    --set useBundledSystemChart=true # 自v2.3.0可用，使用内嵌的 Rancher system charts
+    --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # Set a default private registry to be used in Rancher
+    --set useBundledSystemChart=true # Use the packaged Rancher system charts
 ```
 
 如果您使用的是由私有 CA 签名的证书，则在`--set ingress.tls.source=secret`之后添加`--set privateCA=true`：
@@ -196,8 +197,8 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
     --set rancherImage=<REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher \
     --set ingress.tls.source=secret \
     --set privateCA=true \
-    --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # 自v2.2.0可用，设置默认的系统镜像仓库
-    --set useBundledSystemChart=true # 自v2.3.0可用，使用内嵌的 Rancher system charts
+    --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # Set a default private registry to be used in Rancher
+    --set useBundledSystemChart=true # Use the packaged Rancher system charts
 ```
 
 **2.5.8 之后的版本：**
@@ -216,7 +217,7 @@ Rancher 中国技术支持团队建议您使用“您已有的证书” `ingress
 如果您使用的是由私有 CA 签名的证书，则在`--set ingress.tls.source=secret`之后添加`--set privateCA=true`：
 
 ```shell
-    helm template rancher ./rancher-<VERSION>.tgz --output-dir . \
+   helm template rancher ./rancher-<VERSION>.tgz --output-dir . \
     --no-hooks \ # prevent files for Helm hooks from being generated
     --namespace cattle-system \
     --set hostname=<RANCHER.YOURDOMAIN.COM> \

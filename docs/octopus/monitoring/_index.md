@@ -107,9 +107,9 @@ Octopus 基于[sigs.k8s.io/controller-runtime](https://github.com/kubernetes-sig
 
 默认情况下，指标将在端口 `8080`上公开 (请参阅[brain options](https://github.com/cnrancher/octopus/blob/master/cmd/brain/options)和[limb options](https://github.com/cnrancher/octopus/blob/master/cmd/limb/options)，则可以通过[Prometheus](https://prometheus.io/)进行收集，并通过[Grafana](https://grafana.com/)进行可视化分析。 Octopus 提供了一个[ServiceMonitor 定义 YAML](https://github.com/cnrancher/octopus/blob/master/deploy/e2e/integrate_with_prometheus_operator.yaml)与[Prometheus Operator](https://github.com/coreos/prometheus-operator)集成用于配置和管理 Prometheus 实例的工具。
 
-### Grafana 仪表板
+### Grafana 仪表盘
 
-为方便起见，Octopus 提供了[Grafana 仪表板](https://github.com/cnrancher/octopus/blob/master/deploy/e2e/integrate_with_grafana.json)来可视化展示监视指标。
+为方便起见，Octopus 提供了[Grafana 仪表盘](https://github.com/cnrancher/octopus/blob/master/deploy/e2e/integrate_with_grafana.json)来可视化展示监视指标。
 
 ![monitoring](/img/octopus/monitoring.png)
 
@@ -167,4 +167,4 @@ Octopus 基于[sigs.k8s.io/controller-runtime](https://github.com/kubernetes-sig
 1. (可选)通过`kubectl apply -f https://raw.githubusercontent.com/cnrancher/octopus/master/deploy/e2e/all_in_one.yaml`来部署 Octopus
 1. 通过`kubectl apply -f https://raw.githubusercontent.com/cnrancher/octopus/master/deploy/e2e/integrate_with_prometheus_operator.yaml` 将监视集成部署于本地集群。
 1. 访问`http://localhost/prometheus`以通过浏览器查看 Prometheus Web 控制台，或访问`http://localhost/grafana`以查看 Grafana 控制台(管理员帐户为`admin/admin`)。
-1. (可选)从 Grafana 控制台导入[Octopus 概述仪表板](https://raw.githubusercontent.com/cnrancher/octopus/master/deploy/e2e/integrate_with_grafana.json)。
+1. (可选)从 Grafana 控制台导入[Octopus 概述仪表盘](https://raw.githubusercontent.com/cnrancher/octopus/master/deploy/e2e/integrate_with_grafana.json)。

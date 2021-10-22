@@ -26,7 +26,7 @@ sudo k3s kubectl create -f https://raw.githubusercontent.com/kubernetes/dashboar
 
 ## 仪表盘 RBAC 配置
 
-> **重要：** 本指南中创建的 `admin-user` 将在仪表板中拥有管理权限。
+> **重要：** 本指南中创建的 `admin-user` 将在仪表盘中拥有管理权限。
 
 创建以下资源清单文件：
 
@@ -69,9 +69,9 @@ sudo k3s kubectl create -f dashboard.admin-user.yml -f dashboard.admin-user-role
 sudo k3s kubectl -n kubernetes-dashboard describe secret admin-user-token | grep '^token'
 ```
 
-## 本地访问仪表板
+## 本地访问仪表盘
 
-要访问仪表板，你必须创建一个安全通道到你的 K3s 集群。
+要访问仪表盘，你必须创建一个安全通道到你的 K3s 集群。
 
 ```bash
 sudo k3s kubectl proxy
@@ -82,7 +82,7 @@ sudo k3s kubectl proxy
 - `http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/`
 - 使用`admin-user` Bearer Token `Sign In`
 
-### 高级：远程访问仪表板
+### 高级：远程访问仪表盘
 
 请参阅仪表盘文档。使用[端口转发](https://kubernetes.io/docs/tasks/access-application-cluster/port-forward-access-application-cluster/)来访问集群中的应用程序。
 
@@ -95,7 +95,7 @@ VERSION_KUBE_DASHBOARD=$(curl -w '%{url_effective}' -I -L -s -S ${GITHUB_URL}/la
 sudo k3s kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/${VERSION_KUBE_DASHBOARD}/aio/deploy/recommended.yaml -f dashboard.admin-user.yml -f dashboard.admin-user-role.yml
 ```
 
-## 删除仪表板和 admin-user 配置
+## 删除仪表盘和 admin-user 配置
 
 ```bash
 sudo k3s kubectl delete ns kubernetes-dashboard

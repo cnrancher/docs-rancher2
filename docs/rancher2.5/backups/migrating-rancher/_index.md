@@ -33,11 +33,13 @@ Rancher 可以安装在任何 Kubernetes 集群上，包括托管的 Kubernetes 
 
 ### 1. 安装 rancher-backup Helm chart
 
+安装 rancher-backup chart 的 1.x.x 版本
+
 ```
 helm repo add rancher-charts https://charts.rancher.io
 helm repo update
-helm install rancher-backup-crd rancher-charts/rancher-backup-crd -n cattle-resources-system --create-namespace
-helm install rancher-backup rancher-charts/rancher-backup -n cattle-resources-system
+helm install rancher-backup-crd rancher-charts/rancher-backup-crd -n cattle-resources-system --create-namespace --version $CHART_VERSION
+helm install rancher-backup rancher-charts/rancher-backup -n cattle-resources-system --version $CHART_VERSION
 ```
 
 ### 2. 使用 Restore 自定义资源从备份中还原

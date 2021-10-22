@@ -82,27 +82,31 @@ configs:
 
 ### 3、安装 K3s 集群
 
-Rancher 需要安装在支持的 Kubernetes 版本上。要了解你的 Rancher 版本支持哪些 Kubernetes 版本，请参考[这里](https://rancher.com/support-maintenance-terms/)。
+Rancher 需要安装在支持的 Kubernetes 版本上。要了解你的 Rancher 版本支持哪些版本的 Kubernetes，请参考[支持维护条款。](https://rancher.com/support-matrix/)
 
-要指定 K3s 的版本，请在运行 K3s 安装脚本时使用 INSTALL_K3S_VERSION 环境变量。
+要指定 K3s 的版本，在运行 K3s 安装脚本时使用 INSTALL_K3S_VERSION 环境变量。
 
-1. 从[版本发布](https://github.com/rancher/k3s/releases)页面获取 K3s 二进制文件，找到与版本对应的镜像`tar`文件包，并通过 https://get.k3s.io 获取 K3s 安装脚本。
+从 [release](https://github.com/rancher/k3s/releases) 页面获取 K3s 二进制文件，与用于获取 airgap images tar 的版本一致。
+同时在https://get.k3s.io ，获得 K3s 的安装脚本。
 
-:::tip 提示
-国内用户，可以导航到 http://mirror.cnrancher.com 下载所需资源
-:::
+将二进制文件放在每个节点的`/usr/local/bin`中。将安装脚本放在每个节点的任何地方，并命名为`install.sh`。
 
-2. 将二进制文件放在每个节点上的`/usr/local/bin`中。
-
-3. 将安装脚本放置在每个节点上的任何位置，并将其命名为`install.sh`。
-
-4. 请根据您的准备好的数据库，替换以下命令中的数据库连接字符串，并在准备好的两台 Linux 节点中运行命令来安装 K3s：
+在每个 server 上安装 K3s:
 
 ```
-INSTALL_K3S_SKIP_DOWNLOAD=true INSTALL_K3S_EXEC='server --datastore-endpoint="mysql://username:password@tcp(hostname:3306)/database-name"' ./install.sh
+INSTALL_K3S_SKIP_DOWNLOAD=true ./install.sh
 ```
 
-> **注意：** K3s 还为 kubelet 提供了一个`--resolv-conf` 参数，这可能有助于在离线环境中配置 DNS。
+在每个 agent 上安装 K3s:
+
+```
+INSTALL_K3S_SKIP_DOWNLOAD=true K3S_URL=https://myserver:6443 K3S_TOKEN=mynodetoken ./install.sh
+```
+
+注意，注意确保用 server 节点的 IP 或有效 DNS 替换 `myserver`，用 server 节点的 token 替换 `mynodetoken`。
+节点 token 在 server 节点上的`/var/lib/rancher/k3s/server/node-token`处。
+
+> **注意：** K3s 还为 kubelets 提供了一个 `--resolv-conf` 标志，这可能有助于在离线网络中配置 DNS。
 
 ### 4、保存并使用 kubeconfig 文件
 
