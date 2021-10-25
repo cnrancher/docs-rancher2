@@ -31,7 +31,7 @@ K3S_TOKEN=SECRET k3s server --cluster-init
 启动第一台服务器后，使用共享密钥将第二台和第三台服务器加入集群。
 
 ```
-K3S_TOKEN=SECRET k3s server --server https://<ip or hostname of server1>:6443。
+K3S_TOKEN=SECRET k3s server --server https://<ip or hostname of server1>:6443
 ```
 
 现在你有了一个高可用的 control-plane。将额外的工作节点加入到集群中，步骤与单个服务器集群相同。
