@@ -46,7 +46,7 @@ module.exports = {
                 },
                 {
                     href:
-                        "https://rancher.com/support-maintenance-terms/all-supported-versions/",
+                        "https://www.suse.com/suse-rancher/support-matrix/all-supported-versions/",
                     label: "支持矩阵",
                     position: "right",
                 },

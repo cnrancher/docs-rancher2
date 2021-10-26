@@ -29,7 +29,7 @@ keywords:
 ![数据如何流经监控应用](/img/rancher/monitoring-v2-architecture-overview.svg)
 
 1. 规则定义了哪些 Prometheus 指标或时间序列数据库查询应触发告警。
-2. ServiceMonitors 和 PodMonitors 声明性地指定应如何监控服务和 pod。它们使用标签从 pods 中抓取指标。
+2. ServiceMonitors 和 PodMonitors 声明性地指定应如何监控 service 和 pod。它们使用标签从 pods 中抓取指标。
 3. Prometheus Operator 观察正在创建的 ServiceMonitors、PodMonitors 和 PrometheusRules。
 4. 当 Prometheus 配置资源被创建时，Prometheus Operator 调用 Prometheus API 来同步新配置。
 5. 记录规则不直接用于告警。它们创建新的预先计算的查询时间序列。然后，这些新的时间序列数据可以被查询到，以产生告警。
@@ -101,7 +101,7 @@ Alertmanager 负责协调告警的发送位置。它允许你根据标签来分�
 
 通过编辑 Rancher UI 中的表单，你可以设置一个 Receiver 资源，其中包含 Alertmanager 向你的通知系统发送告警所需的所有信息。
 
-通过编辑 Alertmanager 或 Receiver 配置中的自定义 YAML，你也可以向多个通知系统发送告警。更多信息，请参见配置 [Receivers](/docs/rancher2.5/monitoring-alerting/configuration/receiver/_index#配置多个接收器)章节。
+通过编辑 Alertmanager 或 Receiver 配置中的自定义 YAML，你也可以向多个通知系统发送告警。更多信息，请参见配置 [Receivers](/docs/rancher2.5/monitoring-alerting/configuration/receiver/_index#配置多个接收器) 章节。
 
 ## 4. Monitoring V2 特定组件
 
@@ -145,14 +145,14 @@ PushProx 是一个 DaemonSet，用于监听寻求注册的客户端。一旦注�
 
 当安装监控应用程序后，你能在 Rancher UI 中编辑以下组件：
 
-| 组件           | 组件类型                                   | 编辑的目的和常见用例                                                                                                                                                          |
-| -------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ServiceMonitor | Custom resource                            | 设置 targets 来抓取自定义指标。自动更新 Prometheus 自定义资源中的抓取配置。                                                                                                   |
-| PodMonitor     | Custom resource                            | 设置 targets 来抓取自定义指标。自动更新 Prometheus 自定义资源中的抓取配置。                                                                                                   |
-| Receiver       | Configuration block (part of Alertmanager) | 设置一个通知系统来接收告警。自动更新 Alertmanager 自定义资源。                                                                                                                |
-| Route          | Configuration block (part of Alertmanager) | 添加识别信息，使告警更有意义，并定向到各个团队。自动更新 Alertmanager 自定义资源。                                                                                            |
-| PrometheusRule | Custom resource                            | 对于更高级的用例，你可能想定义哪些 Prometheus 指标或时间序列数据库查询应该导致告警被触发。自动更新 Prometheus 的自定义资源。                                                  |
-| Alertmanager   | Custom resource                            | 只有当你需要更多的高级配置选项，而不是 Rancher UI 在路由和接收者部分所展示的选项时，才编辑这个自定义资源。例如，你可能想编辑这个资源来添加一个两层以上的路由树。              |
+| 组件           | 组件类型                                   | 编辑的目的和常见用例                                                                                                                                                                                                    |
+| -------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ServiceMonitor | Custom resource                            | 设置 targets 来抓取自定义指标。自动更新 Prometheus 自定义资源中的抓取配置。                                                                                                                                             |
+| PodMonitor     | Custom resource                            | 设置 targets 来抓取自定义指标。自动更新 Prometheus 自定义资源中的抓取配置。                                                                                                                                             |
+| Receiver       | Configuration block (part of Alertmanager) | 设置一个通知系统来接收告警。自动更新 Alertmanager 自定义资源。                                                                                                                                                          |
+| Route          | Configuration block (part of Alertmanager) | 添加识别信息，使告警更有意义，并定向到各个团队。自动更新 Alertmanager 自定义资源。                                                                                                                                      |
+| PrometheusRule | Custom resource                            | 对于更高级的用例，你可能想定义哪些 Prometheus 指标或时间序列数据库查询应该导致告警被触发。自动更新 Prometheus 的自定义资源。                                                                                            |
+| Alertmanager   | Custom resource                            | 只有当你需要更多的高级配置选项，而不是 Rancher UI 在路由和接收者部分所展示的选项时，才编辑这个自定义资源。例如，你可能想编辑这个资源来添加一个两层以上的路由树。                                                        |
 | Prometheus     | Custom resource                            | 只有当你需要更高级的配置，而不是使用 ServiceMonitors、PodMonitors 或[ Rancher monitoring Helm chart 选项](/docs/rancher2.5/monitoring-alerting/configuration/helm-chart-options/_index)来配置时，才编辑这个自定义资源。 |
 
 ## 5. 抓取和暴露指标
@@ -181,7 +181,7 @@ PrometheusOperator 如何设置指标抓取:
 
 ### 5.3. Kubernetes 组件指标如何暴露
 
-Prometheus 从称为 [exporters](https://prometheus.io/docs/instrumenting/exporters/)的部署中抓取指标，这些部署以 Prometheus 支持的格式导出时间序列数据。在 Prometheus 中，时间序列由属于相同指标和相同标记维度集的时间戳值流组成。
+Prometheus 从称为 [exporters](https://prometheus.io/docs/instrumenting/exporters/) 的部署中抓取指标，这些部署以 Prometheus 支持的格式导出时间序列数据。在 Prometheus 中，时间序列由属于相同指标和相同标记维度集的时间戳值流组成。
 
 为了监控能够安装在强化的 Kubernetes 集群上，`rancher-monitoring` 应用程序通过 PushProx Proxy Prometheus 和 exporter 之间的通信，用于一些 Kubernetes master 组件。
 
