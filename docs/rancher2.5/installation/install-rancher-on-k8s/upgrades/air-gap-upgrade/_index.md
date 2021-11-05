@@ -1,5 +1,5 @@
 ---
-title: 升级指南
+title: 离线升级
 description: 以下说明将指导您升级使用 Helm 安装在 Kubernetes 集群上的 Rancher 服务器。这些步骤也适用于使用 Helm 进行的离线安装。
 keywords:
   - rancher

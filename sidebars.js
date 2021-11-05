@@ -1026,9 +1026,16 @@ module.exports = {
                 label: "高可用安装",
                 items: [
                     "rancher2.5/installation/install-rancher-on-k8s/_index",
-                    "rancher2.5/installation/install-rancher-on-k8s/upgrades/air-gap-upgrade/_index",
+                    {
+                        type: "category",
+                        label: "升级指南",
+                        items: [
+                            "rancher2.5/installation/install-rancher-on-k8s/upgrades/_index",
+                            "rancher2.5/installation/install-rancher-on-k8s/upgrades/air-gap-upgrade/_index",
+                        ],
+                    },
+
                     "rancher2.5/installation/install-rancher-on-k8s/chart-options/_index",
-                    "rancher2.5/installation/install-rancher-on-k8s/upgrades/_index",
                     "rancher2.5/installation/install-rancher-on-k8s/rollbacks/_index",
                     "rancher2.5/installation/install-rancher-on-k8s/amazon-eks/_index",
                     "rancher2.5/installation/install-rancher-on-k8s/aks/_index",

@@ -121,7 +121,7 @@ function Home() {
                                                                             styles.latest
                                                                         }
                                                                     >
-                                                                        最新版
+                                                                        最新稳定版
                                                                     </span>
                                                                 );
                                                             }
