@@ -32,6 +32,7 @@ keywords:
 - [SELinux 支持](#selinux-支持)
 - [Red Hat 和 CentOS 的额外准备](#red-hat-和-centos-的额外准备)
 - [启用 eStargz 的延迟拉取（实验性）](#启用-estargz-的延迟拉取（实验性）)
+- [其他日志源](#additional-logging-sources)
 
 ## 证书轮换
 
@@ -41,7 +42,7 @@ keywords:
 
 ## 自动部署清单
 
-在`/var/lib/rancher/k3s/server/manifests`中找到的任何文件都会以类似`kubectl apply`的方式自动部署到 Kubernetes。
+在`/var/lib/rancher/k3s/server/manifests`中找到的任何文件都会以类似`kubectl apply`的方式自动部署到 Kubernetes，在启动和在磁盘上更改文件时都是如此。从该目录中删除文件不会从集群中删除相应的资源。
 
 关于部署 Helm charts 的信息，请参阅[Helm](../helm/_index)章节。
 
@@ -485,4 +486,15 @@ spec:
       }).listen(80);
     ports:
     - containerPort: 80
+```
+
+## 其他日志源
+
+可以在不使用 Rancher 的情况下安装 K3s 的 [Rancher 日志](https://rancher.com/docs//rancher/v2.6/en/logging/helm-chart-options/)。应执行以下指令来实现：
+
+```
+helm repo add rancher-charts https://charts.rancher.io
+helm repo update
+helm install --create-namespace -n cattle-logging-system rancher-logging-crd rancher-charts/rancher-logging-crd
+helm install --create-namespace -n cattle-logging-system rancher-logging --set additionalLoggingSources.k3s.enabled=true rancher-charts/rancher-logging
 ```

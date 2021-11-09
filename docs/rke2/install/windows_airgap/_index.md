@@ -114,7 +114,7 @@ Enable-WindowsOptionalFeature -Online -FeatureName containers –All
 
 在 RKE2 v1.20 之前，私有注册表必须使用 TLS，并使用由主机 CA 绑定信任的 cert。如果注册中心使用的是自签名的证书，你可以用`update-ca-certificates`将该证书添加到主机 CA 绑定中。注册表还必须允许匿名（未认证）访问。
 
-1. 将所有需要的系统镜像添加到你的私人注册表。镜像列表可以从上面提到的每个 tarball 对应的`.txt`文件中获得，或者你可以`docker load` 离线镜像 tarballs，然后标记并推送加载的镜像。
+1. 将所有需要的系统镜像添加到你的私有注册表。镜像列表可以从上面提到的每个 tarball 对应的`.txt`文件中获得，或者你可以`docker load` 离线镜像 tarballs，然后标记并推送加载的镜像。
 2. 如果在注册表上使用私人或自签名的证书，请将注册表的 CA 证书添加到 containerd 注册表配置中，如果是 v1.20 之前的版本，则添加操作系统的可信证书。
 3. 使用`system-default-registry`参数[安装 RKE2](#安装-windows-rke2)，或者使用[containerd 注册表配置](/docs/rke2/install/containerd_registry_configuration/_index)将你的注册表作为 docker.io 的一个镜像。
 

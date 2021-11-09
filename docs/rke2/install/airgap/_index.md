@@ -50,7 +50,11 @@ RKE2 可以通过两种不同的方式安装在一个离线环境中。你可以
 
 ## 安装 RKE2
 
-这些步骤只能在完成[Tarball 方式](#tarball-方式)或[私有镜像仓库方式](#私有镜像仓库方式)中的一项后执行。
+以下安装 RKE2 的选项只能在完成 [Tarball 方式](#tarball-method)或[私有注册表方法](#私有镜像仓库方式)中的一种后进行。
+
+RKE2 可以通过直接运行[二进制](#rke2-二进制安装)或使用[install.sh 脚本](#rke2-installsh-脚本安装)来安装。
+
+### RKE2 二进制安装
 
 1. 获得 rke2 的二进制文件`rke2.linux-amd64`。
 2. 确保二进制文件被命名为 `rke2`，并将其放在 `/usr/local/bin` 中。确保它是可执行的。
@@ -63,3 +67,25 @@ system-default-registry: "registry.example.com:5000"
 :::note 注意：
 `system-default-registry`参数必须只指定有效的 RFC 3986 URI 授权，即一个主机和可选的端口。
 :::
+
+### RKE2 Install.sh 脚本安装
+
+`install.sh` 可以在离线模式下使用，方法是将 `INSTALL_RKE2_ARTIFACT_PATH` 变量设置为包含预下载工件的路径。这将通过正常安装运行，包括创建 systemd 单元。
+
+1. 将安装脚本、rke2、rke2-images 和 sha256sum 文件从 release 中下载到一个目录中，如下面的例子：
+
+```bash
+mkdir /root/rke2-artifacts && cd /root/rke2-artifacts/
+curl -OLs https://github.com/rancher/rke2/releases/download/v1.21.5%2Brke2r2/rke2-images.linux-amd64.tar.zst
+curl -OLs https://github.com/rancher/rke2/releases/download/v1.21.5%2Brke2r2/rke2.linux-amd64.tar.gz
+curl -OLs https://github.com/rancher/rke2/releases/download/v1.21.5%2Brke2r2/sha256sum-amd64.txt
+curl -sfL https://get.rke2.io --output install.sh
+```
+
+2. 接下来，使用该目录运行 install.sh，如下面的例子：
+
+```bash
+INSTALL_RKE2_ARTIFACT_PATH=/root/rke2-artifacts sh install.sh
+```
+
+3. 启用并运行[此处](/docs/rke2/install/quickstart/_index#2-启用-rke2-server-服务)描述的服务。

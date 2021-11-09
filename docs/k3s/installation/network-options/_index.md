@@ -35,7 +35,7 @@ Flannel 的默认后端是 VXLAN。要启用加密，请使用下面的 IPSec（
 
 使用`--flannel-backend=none`运行 K3s，然后在安装你选择的 CNI。应该为 Canal 和 Calico 启用 IP 转发。请参考以下步骤。
 
-#### Canal
+### Canal
 
 访问[Project Calico Docs](https://docs.projectcalico.org/)网站。按照以下步骤安装 Canal。修改 Canal 的 YAML，在 container_settings 部分中允许 IP 转发，例如：
 
@@ -55,7 +55,22 @@ cat /etc/cni/net.d/10-canal.conflist
 
 你应该看到 IP 转发被设置为 true。
 
-#### Calico
+##### Dual-stack 安装
+
+要在 k3s 中启用 dual-stack，你必须提供有效的 dual-stack `cluster-cidr`和`service-cidr`，并在所有 server 节点上设置`disable-network-policy`。Server 和 Agent 都必须提供有效的 dual-stack `node-ip`设置。当使用默认的 flannel CNI 时，在 dual-stack 集群上不支持节点地址自动检测和网络策略。此外，目前只支持 vxlan 后端。这是一个有效配置的例子:
+
+```
+node-ip: 10.0.10.7,2a05:d012:c6f:4611:5c2:5602:eed2:898c
+cluster-cidr: 10.42.0.0/16,2001:cafe:42:0::/56
+service-cidr: 10.43.0.0/16,2001:cafe:42:1::/112
+disable-network-policy: true
+```
+
+注意，你可以选择任何 `cluster-cidr` 和 `service-cidr` 的值，但是 `node-ip` 的值必须与你的主接口的 ip 地址相对应。如果你在公有云中部署，记住要允许 ipv6 流量。
+
+如果你使用的是自定义的 cni 插件，即与 flannel 不同的 cni 插件，前面的配置可能不足以在 cni 插件中启用 dual-stack。请在其文档中查看如何启用 dual-stack，并验证是否可以启用网络策略。
+
+### Calico
 
 按照[Calico CNI 插件指南](https://docs.projectcalico.org/master/reference/cni-plugin/configuration)。修改 Calico YAML，在 container_settings 部分中允许 IP 转发，例如：
 
