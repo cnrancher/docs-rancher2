@@ -77,6 +77,21 @@ spec:
 
 放在`/var/lib/rancher/k3s/server/static/`中的内容可以通过 Kubernetes APIServer 从集群内匿名访问。这个 URL 可以使用`spec.chart`字段中的特殊变量`%{KUBERNETES_API}%`进行模板化。例如，打包后的 Traefik 组件从`https://%{KUBERNETES_API}%/static/charts/traefik-1.81.0.tgz`加载其 Chart。
 
+**注意：** `name` 字段应遵循 Helm chart 命名规范。参考[这里](https://helm.sh/docs/chart_best_practices/conventions/#chart-names)了解更多。
+
+> **关于文件命名要求：** `HelmChart` 和 `HelmChartConfig` 清单文件名应遵守 Kubernetes 对象的[命名要求](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/)。Helm Controller 使用文件名来创建对象；因此，文件名也必须与要求一致。任何相关的错误都可以在 rke2-server 的日志中观察到。下面的例子是使用下划线产生的错误：
+
+```
+level=error msg="Failed to process config: failed to process 
+/var/lib/rancher/rke2/server/manifests/rke2_ingress_daemonset.yaml: 
+Addon.k3s.cattle.io \"rke2_ingress_daemonset\" is invalid: metadata.name: 
+Invalid value: \"rke2_ingress_daemonset\": a lowercase RFC 1123 subdomain 
+must consist of lower case alphanumeric characters, '-' or '.', and must 
+start and end with an alphanumeric character (e.g. 'example.com', regex 
+used for validation is '[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]
+([-a-z0-9]*[a-z0-9])?)*')"
+```
+
 ## 使用 HelmChartConfig 自定义打包的组件
 
 为了允许覆盖作为 HelmCharts（如 Traefik）部署的打包组件的值，从 v1.19.0+k3s1 开始的 K3s 版本支持通过 HelmChartConfig 资源自定义部署。HelmChartConfig 资源必须与其对应的 HelmChart 的名称和命名空间相匹配，并支持提供额外的 "valuesContent"，它作为一个额外的值文件传递给`helm`命令。

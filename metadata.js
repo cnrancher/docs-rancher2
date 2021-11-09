@@ -151,6 +151,7 @@ const metadata = {
             Helm集成:
                 "介绍使用 rancher/helm-release CRD 更容易部署传统的 Kubernetes 资源清单和 Helm Charts",
             高级选项和配置: "介绍了运行和管理 RKE2 的不同方式的高级信息",
+            从RKE1迁移到RKE2: "介绍如何从 RKE1 迁移到 RKE2",
             已知问题和限制: "介绍了rke2 的当前已知问题和限制",
         },
     },
@@ -973,6 +974,7 @@ const metadata = {
             "rke2/networking/_index": "网络",
             "rke2/helm/_index": "Helm 集成",
             "rke2/advanced/_index": "高级选项和配置",
+            "rke2/migration/_index": "从 RKE1 迁移到 RKE2",
             "rke2/known_issues/_index": "已知问题和限制",
         },
     },

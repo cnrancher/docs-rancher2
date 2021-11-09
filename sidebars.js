@@ -2165,6 +2165,7 @@ module.exports = {
         网络: ["rke2/networking/_index"],
         Helm集成: ["rke2/helm/_index"],
         高级选项和配置: ["rke2/advanced/_index"],
+        从RKE1迁移到RKE2: ["rke2/migration/_index"],
         已知问题和限制: ["rke2/known_issues/_index"],
     },
 };

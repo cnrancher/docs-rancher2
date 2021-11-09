@@ -47,11 +47,17 @@ rke2 server --cluster-reset
 
 **结果：**日志中的一条消息说，RKE2 可以在没有标志的情况下重新启动。再次启动 rke2，它应该将 rke2 启动为一个 1 个成员的集群。
 
-## 从快照中恢复群集
+### 将快照恢复到现有的节点上
 
-当 RKE2 从备份中恢复时，旧的数据目录将被移到`/var/lib/rancher/rke2/server/db/etcd-old-%date%/`。然后，RKE2 将试图通过创建一个新的数据目录来恢复快照，然后用一个新的 RKE2 集群启动 etcd，并有一个 etcd 成员。
+当 RKE2 从备份中恢复时，旧的数据目录将被移动到 `/var/lib/rancher/rke2/server/db/etcd-old-%date%/`。然后，RKE2 将尝试通过创建一个新的数据目录来恢复快照，并使用具有一个 etcd 成员的新 RKE2 集群启动 etcd。
 
-要从备份中恢复集群，首先需要停止 RKE2 服务（如果它通过 systemd 启用）。停止后，使用`--cluster-reset` 选项运行 RKE2，同时加入`--cluster-reset-restore-path`：
+1. 如果 RKE2 服务是通过 systemd 启用的，你必须在所有 server 节点上停止 RKE2 server 服务。使用下面的命令来完成：
+
+```
+systemctl stop rke2-server
+```
+
+2. 接下来，可以使用以下命令在第一个 server 节点上启动快照恢复：
 
 ```
 rke2 server \
@@ -59,24 +65,94 @@ rke2 server \
   --cluster-reset-restore-path=<PATH-TO-SNAPSHOT>
 ```
 
-**结果：**日志中的一条消息说，RKE2 可以在没有标志的情况下重新启动。再次启动 RKE2，应该能成功运行并从指定的快照中恢复。
+3. 恢复完成后，在第一个 server 节点上启动 rke2-server 服务：
 
-当 rke2 重置集群时，它会在 `/var/lib/rancher/rke2/server/db/reset-flag` 创建一个空文件。该文件留在原地无害，但必须删除才能执行后续重置或恢复。 rke2 正常启动时删除该文件。
+```
+systemctl start rke2-server
+```
 
-## 选项
+4. 移除其他 server 节点上的 rke2 db 目录，方法如下：
+
+```
+rm -rf /var/lib/rancher/rke2/server/db
+```
+
+5. 用以下命令在其他 server 节点上启动 rke2-server 服务:
+
+```
+systemctl start rke2-server
+```
+
+**结果：**还原成功后，日志中出现一条消息说 etcd 正在运行，RKE2 可以在没有标志的情况下重新启动。再次启动 RKE2，它应该成功运行并从指定的快照中恢复。
+
+当 rke2 重置集群时，它在 `/var/lib/rancher/rke2/server/db/reset-flag` 创建一个空文件。这个文件留在原地是无害的，但为了执行后续的重置或恢复，必须删除。这个文件在 rke2 正常启动时被删除。
+
+### 将快照恢复到新节点上
+
+**警告：**对于 rke2 v.1.20.9 及更早的所有版本，你需要先备份和恢复证书，因为有一个已知的问题，即引导数据在恢复时可能无法保存（以下步骤 1-3 假设这种情况）。请参阅下面的[注意](#关于恢复快照的其他注意事项)，了解关于恢复的其他特定版本的恢复注意事项。
+
+1. 备份以下内容：`/var/lib/rancher/rke2/server/cred`, `/var/lib/rancher/rke2/server/tls`, `/var/lib/rancher/rke2/server/token`, `/etc/rancher`。
+
+2. 将上述步骤 1 中的证书恢复到第一个新的 server 节点。
+
+3. 在第一个新的 server 节点上安装 rke2 v1.20.8+rke2r1，如下所示：
+
+```
+curl -sfL https://get.rke2.io | INSTALL_RKE2_VERSION="v1.20.8+rke2r1" sh -`
+```
+
+4. 停止所有 server 节点上的 RKE2 服务（如果已启用）并使用以下命令从第一个 server 节点上的快照启动恢复：
+
+```
+systemctl stop rke2-server
+rke2 server \
+  --cluster-reset \
+  --cluster-reset-restore-path=<PATH-TO-SNAPSHOT>
+```
+
+5. 恢复完成后，在第一个 server 节点上启动 rke2-server 服务，如下所示：
+
+```
+systemctl start rke2-server
+```
+
+6. 你可以继续按照标准[RKE2 HA 安装文档](/docs/rke2/install/ha/_index#3-启动其他-server-节点)向集群添加新的 server 和 worker 节点。
+
+### 关于恢复快照的其他注意事项
+
+> - 当执行从备份中恢复时，用户不需要使用创建快照时所用的相同 RKE2 版本来恢复快照。用户可以使用较新的版本进行还原。当在恢复时改变版本时，要注意使用哪个 etcd 版本。
+> - 默认情况下，快照是启用的，并计划每 12 小时进行一次。快照被写入 `${data-dir}/server/db/snapshots`，默认的 `${data-dir}` 是 `/var/lib/rancher/rke2`。
+>   
+> **rke2 v1.20.11+rke2r1 的特定版本要求**:
+> - rke2 v1.20.11+rke2r1 从备份中恢复 RKE2 到新节点时，您应该通过运行 `rke2-killall.sh` 确保所有 Pod 在初始恢复后停止，如下所示：
+```
+curl -sfL https://get.rke2.io | sudo INSTALL_RKE2_VERSION=v1.20.11+rke2r1
+rke2 server \
+ --cluster-reset \
+ --cluster-reset-restore-path=<PATH-TO-SNAPSHOT> \
+ --token=<token used in the original cluster>
+rke2-killall.sh
+```
+> 恢复完成后，在第一个 server 节点上启用并启动 rke2-server 服务，方法如下。：
+```
+systemctl enable rke2-server
+systemctl start rke2-server
+```
+
+### 选项
 
 这些选项可以在配置文件中设置：
 
 | 选项                                | 描述                                                                       |
 | ----------------------------------- | -------------------------------------------------------------------------- |
 | `etcd-disable-snapshots`            | 禁用自动 etcd 快照                                                         |
-| `etcd-snapshot-schedule-cron` value | 例如，每 5 小时一次 `* */5 * * *`(默认：`0 */12 * * *`))                   |
+| `etcd-snapshot-schedule-cron` value | 例如，每 4 小时一次 `0 */4 * * *`(默认：`0 */12 * * *`))                   |
 | `etcd-snapshot-retention` value     | 要保留的快照数量 (default: 5)                                              |
 | `etcd-snapshot-dir` value           | 保存数据库快照的目录。(默认位置：`${data-dir}/db/snapshots`)               |
 | `cluster-reset`                     | 成为新集群的唯一成员。这也可以通过环境变量`[$RKE2_CLUSTER_RESET]`来设置。. |
 | `cluster-reset-restore-path` value  | 要恢复的快照文件的路径                                                     |
 
-## 支持 S3 兼容的 API
+### 支持 S3 兼容的 API
 
 rke2 支持将 etcd 快照写入具有 S3 兼容 API 的系统，并从该系统恢复 etcd 快照。S3 支持按需和计划快照。
 

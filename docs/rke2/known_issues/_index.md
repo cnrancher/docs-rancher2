@@ -43,7 +43,7 @@ unmanaged-devices=interface-name:cali*;interface-name:flannel*
 
 这可以通过自定义 overlay 来执行，如下所示：
 
-```yaml:
+```yaml
 apiVersion: install.istio.io/v1alpha1
 kind: IstioOperator
 spec:
