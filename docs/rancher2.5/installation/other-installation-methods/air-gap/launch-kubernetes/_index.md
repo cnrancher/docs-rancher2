@@ -239,7 +239,7 @@ rke up --config ./rancher-cluster.yml
 将以下文件的副本保存在安全的位置：
 
 - `rancher-cluster.yml`：RKE 配置文件
-- `kube_config_rancher-cluster.yml`：[Kubeconfig 文件](/docs/rke/kubeconfig/_index)
+- `kube_config_cluster.yml`：[Kubeconfig 文件](/docs/rke/kubeconfig/_index)
 - `rancher-cluster.rkestate`：[Kubernetes 集群状态文件](/docs/rke/installation/_index)
 
 > **注意：** 后两个文件名的“rancher-cluster”部分取决于您如何命名 RKE 集群的配置文件。

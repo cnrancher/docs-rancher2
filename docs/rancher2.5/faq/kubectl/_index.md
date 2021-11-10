@@ -23,12 +23,12 @@ keywords:
 
 ## 配置
 
-当您采用 RKE 工具创建一个 Kubernets 集群，RKE 会自动在本地目录创建一个`kube_config_rancher-cluster.yml`文件，文件里面包含通过`kubectl`或`helm`连接到新创建的集群所需的凭证。
+当您采用 RKE 工具创建一个 Kubernets 集群，RKE 会自动在本地目录创建一个 `kube_config_cluster.yml` 文件，文件里面包含通过`kubectl`或`helm`连接到新创建的集群所需的凭证。
 
-您可以复制文件到`$HOME/.kube/config`或者如果您同时管理多个集群，可通过`KUBECONFIG`环境变量指向到`kube_config_rancher-cluster.yml`文件。
+您可以复制文件到 `$HOME/.kube/config` 或者如果您同时管理多个集群，可通过 `KUBECONFIG` 环境变量指向到 `kube_config_cluster.yml` 文件。
 
 ```
-export KUBECONFIG=$(pwd)/kube_config_rancher-cluster.yml
+export KUBECONFIG=$(pwd)/kube_config_cluster.yml
 ```
 
 通过`kubectl`测试连通性，确定是否能获得节点列表。

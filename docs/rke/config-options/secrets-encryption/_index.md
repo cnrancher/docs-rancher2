@@ -71,7 +71,7 @@ services:
 
 启用后，RKE 将执行以下[操作](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#encrypting-your-data)以启用静态数据加密。
 
-- 生成一个新的随机 32 位加密密钥。
+- 生成一个新的随机 32-byte 加密密钥。
 - 使用新的密钥生成加密提供者配置文件，默认使用的[提供者](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#providers)是`aescbc`。
 - 将提供者配置文件部署到所有具有`controlplane`角色的节点上。
 - 更新`kube-apiserver`容器参数，使其指向提供者配置文件。
@@ -123,7 +123,7 @@ OPTIONS:
 
 该命令将执行以下操作。
 
-- 生成一个新的随机 32 位加密密钥
+- 生成一个新的随机 32-byte 加密密钥
 - 生成一个新的提供者配置，新密钥作为第一提供者，第二密钥作为第二提供者。当密钥被重写时，第一把钥匙将在写操作时用于加密数据，而第二把钥匙（旧钥匙）将在读操作时用于解密存储的数据。
 - 将新的提供者配置部署到所有`controlplane`节点，并重新启动`kube-apiserver`。
 - 重写所有密钥。这个过程将用新的密钥重新加密所有的密钥。
@@ -145,7 +145,7 @@ OPTIONS:
 
 下面描述了使用用户提供的32字节随机密钥配置自定义加密所需的步骤。
 
-步骤1：生成一个32字节的随机密钥并对其进行base64编码。如果你是在Linux或macOS上，运行以下命令：
+步骤1：生成一个 32-byte 的随机密钥并对其进行base64编码。如果你是在Linux或macOS上，运行以下命令：
 
 ```
 head -c 32 /dev/urandom | base64

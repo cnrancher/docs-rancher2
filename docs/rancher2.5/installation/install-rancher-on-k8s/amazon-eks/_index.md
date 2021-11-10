@@ -92,12 +92,12 @@ aws configure
 
 ### 3. 创建 EKS 集群
 
-请运行以下命令，创建 EKS 集群，请使用适用于您的用例的 AWS 区域。
+请运行以下命令，创建 EKS 集群，请使用适用于您的用例的 AWS 区域。 在选择 Kubernetes 版本时，请务必先查阅 [支持矩阵](https://rancher.com/support-matrix/) 找到针对你的 Rancher 版本进行验证的 Kubernetes 最高版本。
 
 ```
 eksctl create cluster \
   --name rancher-server \
-  --version 1.18 \
+  --version 1.20 \
   --region us-west-2 \
   --nodegroup-name ranchernodes \
   --nodes 3 \

@@ -1,6 +1,6 @@
 ---
 title: Rancher 高可用
-description: 此页面上列出的命令/步骤可用于检查 Rancher Kubernetes 的安装。确保您配置了正确的 kubeconfig(例如，`export KUBECONFIG=$PWD/kube_config_rancher-cluster.yml`) 或者通过 Rancher UI 使用内嵌的 kubectl。
+description: 此页面上列出的命令/步骤可用于检查 Rancher Kubernetes 的安装。确保您配置了正确的 kubeconfig(例如，`export KUBECONFIG=$PWD/kube_config_cluster.yml`) 或者通过 Rancher UI 使用内嵌的 kubectl。
 keywords:
   - rancher
   - rancher中文
@@ -17,7 +17,7 @@ keywords:
 
 此页面上列出的命令/步骤可用于检查 Rancher Kubernetes 的安装。
 
-确保您配置了正确的 kubeconfig(例如，`export KUBECONFIG=$PWD/kube_config_rancher-cluster.yml`) 或者通过 Rancher UI 使用内嵌的 kubectl。
+确保您配置了正确的 kubeconfig(例如，`export KUBECONFIG=$PWD/kube_config_cluster.yml`) 或者通过 Rancher UI 使用内嵌的 kubectl。
 
 ## 检查 Rancher Pods
 

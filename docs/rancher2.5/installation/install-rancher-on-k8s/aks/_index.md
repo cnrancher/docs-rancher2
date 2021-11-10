@@ -18,7 +18,7 @@ keywords:
 
 ## 概述
 
-本页介绍了如何在微软的 Azure Kubernetes Servcice（AKS）上安装 Rancher。
+本页介绍了如何在微软的 Azure Kubernetes Service（AKS）上安装 Rancher。
 
 本指南使用命令行工具来配置一个带有入口的 AKS 集群。如果你喜欢使用 Azure 门户来配置你的集群，请参考[官方文档](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal)。
 
@@ -30,6 +30,7 @@ keywords:
 - [Microsoft Azure 订阅](https://docs.microsoft.com/en-us/azure/cost-management-billing/manage/create-subscription#create-a-subscription-in-the-azure-portal)。如果你还没有微软 Azure 订阅，请使用此链接，按照教程创建一个微软 Azure 订阅。
 - [Micsoroft Azure Tenant](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-create-new-tenant)。使用此链接并按照说明创建一个 Microsoft Azure 租户。
 - 你的订阅有足够的配额，至少有 2 个 vCPU。关于 Rancher 服务器资源要求的详细信息，请参阅[本节](/docs/rancher2.5/installation/requirements/_index)
+- 在 Azure 中用 Helm 安装 Rancher 时，请使用 L7 负载均衡器来避免网络问题。更多信息请参考 [Azure 负载均衡器限制](https://docs.microsoft.com/en-us/azure/load-balancer/components#limitations)的文档。
 
 部署到微软 Azure 将产生费用。
 
@@ -57,13 +58,13 @@ az group create --name rancher-rg --location eastus
 
 ## 3. 创建 AKS 集群
 
-要创建一个 AKS 集群，运行以下命令。使用适用于你的使用情况的虚拟机大小。关于可用的尺寸和选项，请参考[本文](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes)。
+要创建一个 AKS 集群，运行以下命令。使用适用于你的使用情况的虚拟机大小。关于可用的尺寸和选项，请参考[本文](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes)。在选择 Kubernetes 版本时，请务必先查阅 [支持矩阵](https://rancher.com/support-matrix/) 来找到针对你的 Rancher 版本进行验证的 Kubernetes 最高版本。
 
 ```bash
 az aks create \
-  --resource-group rancher-rg
+  --resource-group rancher-rg \
   --name rancher-server \
-  --kubernetes-version 1.18.14 \
+  --kubernetes-version 1.20.5 \
   --node-count 3 \
   --node-vm-size Standard_D2_v3
 ```

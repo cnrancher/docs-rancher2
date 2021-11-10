@@ -100,7 +100,7 @@ keywords:
 
     - 通过 `kubectl` 安装在 Kubernetes 中的 Rancher Server
 
-      > **注意：** 确保已配置正确的 kubeconfig（例如，如果在 Kubernetes 集群上安装了 Rancher，则 `export KUBECONFIG=$PWD/kube_config_rancher-cluster.yml` ），或者通过 UI 使用嵌入式 kubectl。
+      > **注意：** 确保已配置正确的 kubeconfig（例如，如果在 Kubernetes 集群上安装了 Rancher，则 `export KUBECONFIG=$PWD/kube_config_cluster.yml` ），或者通过 UI 使用嵌入式 kubectl。
 
       ```bash
       kubectl -n cattle-system \
@@ -119,7 +119,7 @@ keywords:
 
     - 使用 RKE Add-On 安装在 Kubernetes 中的 Rancher Server
 
-      > **注意：** 确保已配置正确的 kubeconfig（例如，如果 Rancher Server 安装在 Kubernetes 集群上，则 `export KUBECONFIG=$PWD/kube_config_rancher-cluster.yml` )或通过 UI 使用嵌入式 kubectl。
+      > **注意：** 确保已配置正确的 kubeconfig（例如，如果 Rancher Server 安装在 Kubernetes 集群上，则 `export KUBECONFIG=$PWD/kube_config_cluster.yml` )或通过 UI 使用嵌入式 kubectl。
 
       ```bash
       kubectl -n cattle-system \

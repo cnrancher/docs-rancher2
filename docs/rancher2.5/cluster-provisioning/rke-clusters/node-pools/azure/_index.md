@@ -24,6 +24,12 @@ keywords:
 
 然后，你将在 Rancher 中创建一个 Azure 集群，在配置新集群时，你将为其定义节点池。每个节点池都会有一个 etcd、controlplane 或 worker 的 Kubernetes 角色。Rancher 将在新节点上安装 Kubernetes，它将用节点池定义的 Kubernetes 角色来设置每个节点。
 
+> **警告：**当 Rancher RKE 集群在 Azure 中运行并且前面有 Azure 负载均衡器时，出站流量会失败。这个问题的解决方法如下：
+>
+> - 终止内部负载均衡器上的 SSL/TLS
+> - 使用 L7 负载均衡器  
+>   更多信息请参考 [Azure 负载均衡器限制](https://docs.microsoft.com/en-us/azure/load-balancer/components#limitations)的文档。
+
 有关配置 Rancher 将在 Azure 节点上安装的 Kubernetes 集群的更多信息，请参考 [RKE 集群配置参考](/docs/rancher2.5/cluster-provisioning/rke-clusters/options/_index)。
 
 有关配置 Azure 节点模板的更多信息，请参阅 [Azure 节点模板配置参考](/docs/rancher2.5/cluster-provisioning/rke-clusters/node-pools/azure/azure-node-template-config/_index)

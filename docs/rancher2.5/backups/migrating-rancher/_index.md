@@ -53,8 +53,8 @@ metadata:
   name: s3-creds
 type: Opaque
 stringData:
-  accessKey: <Enter your access key>
-  secretKey: <Enter your secret key>
+  accessKey: <Enter your base64-encoded access key>
+  secretKey: <Enter your base64-encoded secret key>
 ```
 
 这个 secret 可以在任何命名空间中创建，上面的例子中，它将在默认的命名空间中创建。

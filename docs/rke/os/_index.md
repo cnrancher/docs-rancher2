@@ -290,6 +290,20 @@ systemctl enable docker.service
 
 输入`docker version --format '{{.Server.Version}}'`，检查支持特定版本 Kubernetes 的 Docker 是否已经成功安装到您的机器上。
 
+## 硬件
+
+本节描述了 worker 角色、大型 Kubernetes 集群和 etcd 集群的硬件要求。
+
+关于 CPU 和内存，建议将 Kubernetes 集群的不同 plane（etcd、controlplane 和 worker）托管在不同的节点上，以便它们可以相互独立扩展。
+
+### 大型 Kubernetes 集群
+
+对于大型 Kubernetes 集群的硬件建议，请参考 Kubernetes 官方文档[构建大型集群](https://kubernetes.io/docs/setup/best-practices/cluster-large/)。
+
+### Etcd 集群
+
+生产环境中 etcd 集群的硬件推荐，参考官方 [etcd 文档](https://etcd.io/docs/v3.5/op-guide/hardware/)。
+
 ## 端口要求
 
 如果您使用的是外部防火墙，请确保在运行 RKE 的节点和创建集群的节点之间开放了 TCP/6443 端口。

@@ -233,14 +233,14 @@ rke up --config ./rancher-cluster.yml
 
 如果您已经安装了`kubectl`，您需要将`kubeconfig`文件放置在`kubectl`可以访问的位置。`kubeconfig`文件包含使用`kubectl`访问集群所必需的凭证。
 
-当您运行 rke up 时，RKE 应该已经创建了一个名为`kube_config_rancher-cluster.yml`的`kubeconfig`文件。该文件具有`kubectl`和`helm`的凭据。
+当您运行 rke up 时，RKE 应该已经创建了一个名为`kube_config_cluster.yml`的`kubeconfig`文件。该文件具有`kubectl`和`helm`的凭据。
 
 > **注意：** 如果您使用了与`rancher-cluster.yml`不同的文件名，则 kubeconfig 文件将命名为`kube_config_<FILE_NAME>.yml`。
 
-您可以将此文件复制到`$HOME/.kube/config`，或者如果您使用多个 Kubernetes 集群，请将`KUBECONFIG`环境变量设置为`kube_config_rancher-cluster.yml`的路径：
+您可以将此文件复制到`$HOME/.kube/config`，或者如果您使用多个 Kubernetes 集群，请将`KUBECONFIG`环境变量设置为`kube_config_cluster.yml`的路径：
 
 ```
-export KUBECONFIG=$(pwd)/kube_config_rancher-cluster.yml
+export KUBECONFIG=$(pwd)/kube_config_cluster.yml
 ```
 
 使用`kubectl`测试您的连通性，并查看您的所有节点是否都处于`Ready`状态：
@@ -292,7 +292,7 @@ kube-system     rke-network-plugin-deploy-job-6pbgj       0/1       Completed   
 将以下文件的副本保存在安全的位置：
 
 - `rancher-cluster.yml`: RKE 集群配置文件。
-- `kube_config_rancher-cluster.yml`: 集群的[Kubeconfig 文件](/docs/rke/kubeconfig/_index)，此文件包含用于访问集群的凭据。
+- `kube_config_cluster.yml`: 集群的[Kubeconfig 文件](/docs/rke/kubeconfig/_index)，此文件包含用于访问集群的凭据。
 - `rancher-cluster.rkestate`: [Kubernetes 集群状态文件](/docs/rke/installation/_index)，此文件包含用于完全访问集群的凭据。_Kubernetes 集群状态文件仅在使用 RKE v0.2.0 或更高版本时创建。_
 
 > **注意：** 后两个文件名的“rancher-cluster”部分取决于您如何命名 RKE 集群的配置文件。
