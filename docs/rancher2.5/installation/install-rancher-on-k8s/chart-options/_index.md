@@ -81,7 +81,7 @@ _自 v2.2.0 起可用_
 
 ## TLS 设置
 
-当你在 Kubernetes 集群内安装 Rancher 时，TLS 会在集群的 ingress controller 上卸载。可能的 TLS 设置取决于使用的 ingress controller。
+当您在 Kubernetes 集群内安装 Rancher 时，TLS 会在集群的 ingress controller 上卸载。支持的 TLS 设置取决于使用的ingress controller。
 
 参见[TLS 设置](/docs/rancher2.5/installation/resources/tls-settings/_index)以了解更多信息和选项。
 

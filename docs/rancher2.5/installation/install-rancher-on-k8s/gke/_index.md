@@ -134,8 +134,10 @@ Your active configuration is: [default]
 
 将`cluster-name`替换为新集群的名称。
 
+在选择 Kubernetes 版本时，请务必先查阅 [支持矩阵](https://rancher.com/support-matrix/) 找到针对你的 Rancher 版本进行验证的 Kubernetes 最高版本。
+
 ```
-gcloud container clusters create cluster-name --num-nodes=3
+gcloud container clusters create cluster-name --num-nodes=3 --cluster-version=1.20.10-gke.301
 ```
 
 # 6. 获取认证凭证

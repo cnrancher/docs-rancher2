@@ -30,7 +30,7 @@ Rancher 中使用以下日志级别：
 - 配置 debug 级别
 
   ```
-  $ KUBECONFIG=./kube_config_rancher-cluster.yml
+  $ KUBECONFIG=./kube_config_cluster.yml
   $ kubectl --kubeconfig $KUBECONFIG -n cattle-system get pods -l app=rancher | grep '1/1' | awk '{ print $1 }' | while read rancherpod; do kubectl --kubeconfig $KUBECONFIG -n cattle-system exec $rancherpod -- loglevel --set debug; done
   OK
   OK
@@ -41,7 +41,7 @@ Rancher 中使用以下日志级别：
 - 配置 info 级别
 
   ```
-  $ KUBECONFIG=./kube_config_rancher-cluster.yml
+  $ KUBECONFIG=./kube_config_cluster.yml
   $ kubectl --kubeconfig $KUBECONFIG -n cattle-system get pods -l app=rancher | grep '1/1' | awk '{ print $1 }' | while read rancherpod; do kubectl --kubeconfig $KUBECONFIG -n cattle-system exec $rancherpod -- loglevel --set info; done
   OK
   OK

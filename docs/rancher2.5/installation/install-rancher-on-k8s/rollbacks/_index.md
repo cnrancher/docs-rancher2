@@ -18,7 +18,7 @@ keywords:
 
 ## 回滚到 v2.5.0+
 
-要回滚到 Rancher v2.5.0+，请使用`rancher-backup`应用程序并从备份中恢复 Rancher。
+要回滚到 Rancher v2.5.0+，请使用 **Rancher Backups** 应用程序并从备份中恢复 Rancher。
 
 回滚后，Rancher 必须以较低/以前的版本启动。
 
@@ -27,24 +27,25 @@ keywords:
 :::important 重要
 
 - 请按照此页面上的说明在已备份的同一集群上恢复 rancher。为了将 rancher 迁移到新的集群，请按照步骤进行[迁移 rancher](/docs/rancher2.5/backups/migrating-rancher/_index)。
-- 在使用相同设置还原 Rancher 时，Rancher deployment 在还原开始前被手动缩减，然后操作员将在还原完成后将其缩回。因此，Rancher 在还原期间将不可用。
+- 在使用相同设置还原 Rancher 时，Rancher deployment 在还原开始前被手动缩减，然后操作员将在还原完成后将其缩回。因此，在恢复完成之前，Rancher 和 UI 将不可用。当 UI 不可用时，可使用 kubectl 创建还原：`kubectl create -f restore.yaml`。
 :::
 
 ### 将 Rancher Deployment 的规模扩大到 0
 
 1. 在**全局**视图中，将鼠标悬停在**本地**集群上。
 1. 在**本地**的项目下，点击**System**。
-1. 从**cattle-system**命名空间部分，找到 `rancher-hook` deployment。
+1. 从**cattle-system**命名空间部分，找到 `rancher` deployment。
 1. 选择**&#8942;> Edit**。
 1. 将**Scalable deployment of \_ pods**改为`0`。
 1. 滚动到底部并点击**保存**。
 
 ### 创建 Restore 自定义资源
 
-1. 在**Cluster Explorer**中，进入左上角的下拉菜单，单击**Rancher Backups**。
+1. 在**Cluster Explorer**中，进入左上角的下拉菜单，单击**Rancher Backups**。  
+   **注意：** 如果 Rancher Backups 应用程序在下拉列表中不可见，您需要从 **Apps & Marketplace** 中的 Charts 页面安装它。请参阅[此处](/docs/rancher2.5/helm-charts/_index#charts)了解更多信息。 
 1. 单击 **Restore**。
-1. 使用表单或 YAML 创建 Restore。关于使用表单创建 Restore 资源，请参考[配置参考](/docs/rancher2.5/backups/configuration/restore-config/_index)和[示例](/docs/rancher2.5/backups/examples/_index)。
-1. 使用 YAML 编辑器，我们可以单击**Create > Create from YAML** 进入 Restore YAML。
+1. 使用表单或 YAML 创建 Restore。关于使用在线表单创建 Restore 资源，请参考[配置参考](/docs/rancher2.5/backups/configuration/restore-config/_index)和[示例](/docs/rancher2.5/backups/examples/_index)。
+1. 使用 YAML 编辑器，你可以单击**Create > Create from YAML** 进入 Restore YAML。以下是还原自定义资源的示例：
 
    ```yaml
    apiVersion: resources.cattle.io/v1

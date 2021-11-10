@@ -17,7 +17,7 @@ keywords:
 
 此页面上列出的命令/步骤可用于检查集群中的名称解析问题。
 
-确保您配置了正确的 kubeconfig（例如，使用 Rancher 高可用时，`export KUBECONFIG=$PWD/kube_config_rancher-cluster.yml` ) 或者通过 Rancher UI 使用内嵌 kubectl。
+确保您配置了正确的 kubeconfig（例如，使用 Rancher 高可用时，`export KUBECONFIG=$PWD/kube_config_cluster.yml` ) 或者通过 Rancher UI 使用内嵌 kubectl。
 
 在运行 DNS 检查之前，请检查您集群中的[默认 DNS 插件](/docs/rancher2.5/cluster-provisioning/rke-clusters/options/_index)，并确保[网络运行正常](/docs/rancher2.5/troubleshooting/networking/_index)，因为这也可能是 DNS 解析失败的原因之一。
 

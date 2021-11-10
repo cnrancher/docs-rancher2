@@ -50,6 +50,12 @@ Rancher 需要安装在支持的 Kubernetes 版本上。要了解你的 Rancher 
 
 RKE 可以兼容当前的所有 Docker 版本。
 
+请注意，必须应用以下 sysctl 设置：
+
+```
+net.bridge.bridge-nf-call-iptables=1
+```
+
 ### K3s 要求
 
 K3s 兼容当前的所有 Docker 版本和 containerd。

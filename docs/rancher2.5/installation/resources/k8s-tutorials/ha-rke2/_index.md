@@ -42,7 +42,13 @@ RKE2 服务器使用嵌入式 etcd 运行，所以你不需要设置外部数据
 
 为了避免固定注册地址的证书错误，你应该在启动服务器时设置 `tls-san` 参数。这个选项在服务器的 TLS 证书中增加了一个额外的主机名或 IP 作为主题替代名，如果你想通过 IP 和主机名访问，可以将其指定为一个列表。
 
-下面是一个 RKE2 配置文件的例子（在`/etc/rancher/rke2/config.yaml`），如果你按照这个指南来做，会是这样：
+首先，你需要创建要存放 RKE2 配置文件的目录：
+
+```
+mkdir -p /etc/rancher/rke2/
+```
+
+接下来，使用以下示例在 `/etc/rancher/rke2/config.yaml` 中创建 RKE2 配置文件：
 
 ```
 token: my-shared-secret

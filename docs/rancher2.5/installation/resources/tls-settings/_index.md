@@ -3,11 +3,11 @@ title: TLS 设置
 descripition: 在 Rancher v2.1.7 中，默认 TLS 配置已更改为仅接受 TLS 1.2 和安全 TLS 密码套件。不支持 TLS 1.3 和 TLS 1.3 专用密码套件。通过将环境变量传递到 Rancher Server 容器来启用和配置审计日志。请参阅以下内容以启用安装。
 ---
 
-改变默认的 TLS 设置取决于所选择的安装方法。
+更改默认的 TLS 设置取决于所选择的安装方法。
 
 ## 在高可用的 Kubernetes 集群中运行 Rancher
 
-当您在 Kubernetes 集群内安装 Rancher 时，TLS 会在集群的 ingress controller 上 offloaded。可能的 TLS 设置取决于使用的 ingress controller：
+当你在 Kubernetes 集群内安装 Rancher 时，TLS 会在集群的 ingress controller 上 offloaded。可能的 TLS 设置取决于使用的 ingress controller：
 
 - nginx-ingress-controller（RKE1 和 RKE2 的默认）。[默认的 TLS 版本和密码](https://kubernetes.github.io/ingress-nginx/user-guide/tls/#default-tls-version-and-ciphers)。
 - traefik (K3s 的默认版本)。[TLS 选项](https://doc.traefik.io/traefik/https/tls/#tls-options)。

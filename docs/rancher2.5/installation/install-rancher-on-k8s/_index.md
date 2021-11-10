@@ -209,6 +209,8 @@ Rancher Chart 有许多自定义安装选项以适应特定的环境。以下是
 
 该选项使用`cert-manager`来自动请求和续订 [Let's Encrypt](https://letsencrypt.org/)证书。这是一项免费服务，可为您提供有效的证书，因为 Let's Encrypt 是受信任的 CA。
 
+> **注意：**你需要打开 80 端口，因为 HTTP-01 challenge 只能在 80 端口运行。
+
 在下面的命令中，
 
 - 将`hostname`设置为公共 DNS 记录，该记录可解析到你的负载平衡器。

@@ -10,7 +10,8 @@ title: 为高可用RKE集群配置基础设施
 
 要在高可用性 RKE 集群上安装 Rancher 管理服务器，我们建议设置以下基础设施。
 
-- **三个 Linux 节点，**通常是虚拟机，在基础设施提供商中，如 Amazon 的 EC2、Google Compute Engine 或 vSphere。
+- **三个 Linux 节点，**通常是虚拟机，在基础设施提供商中，如 Amazon 的 EC2、Google Compute Engine、Azure 或 vSphere。  
+    **注意：**在 Azure 中使用 Helm 安装 Rancher 时，请使用 L7 负载均衡器避免网络问题。请参考[这里](https://docs.microsoft.com/en-us/azure/load-balancer/components#limitations)了解更多关于 Azure 负载均衡器限制的信息。
 - **一个负载均衡器**，将前端流量引导到三个节点。
 - **一个 DNS 记录**，将一个 URL 映射到负载均衡器。这将成为 Rancher 服务器的 URL，下游的 Kubernetes 集群需要到达它。
 

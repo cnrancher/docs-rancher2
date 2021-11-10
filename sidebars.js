@@ -1477,7 +1477,6 @@ module.exports = {
                         type: "category",
                         label: "Istio",
                         items: [
-                            "rancher2.5/cluster-admin/tools/istio/release-notes/_index",
                             "rancher2.5/cluster-admin/tools/istio/_index",
                             "rancher2.5/cluster-admin/tools/istio/resources/_index",
                             {
@@ -1652,7 +1651,6 @@ module.exports = {
             },
             "rancher2.5/istio/rbac/_index",
             "rancher2.5/istio/disabling-istio/_index",
-            "rancher2.5/istio/release-notes/_index",
         ],
         日志: [
             "rancher2.5/logging/_index",

@@ -125,12 +125,12 @@ services:
 rke up --config rancher-cluster.yaml
 ```
 
-RKE 会创建一个名为 "rancher-cluster.rkestate "的状态文件，如果你想进行更新、修改集群配置或从备份中恢复，就需要这个文件。它还创建了一个`kube_config_rancher-cluster.yaml`文件，你可以用这个文件在本地使用 kubectl 或 Helm 等工具连接到远程 Kubernetes 集群。确保将所有这些文件保存在一个安全的位置，例如将它们放到一个版本控制系统中。
+RKE 会创建一个名为 `rancher-cluster.rkestate` 的状态文件，如果你想进行更新、修改集群配置或从备份中恢复，就需要这个文件。它还创建了一个`kube_config_cluster.yaml`文件，你可以用这个文件在本地使用 kubectl 或 Helm 等工具连接到远程 Kubernetes 集群。确保将所有这些文件保存在一个安全的位置，例如将它们放到一个版本控制系统中。
 
 要查看你的集群，请运行以下命令：
 
 ```shell
-export KUBECONFIG=kube_config_rancher-cluster.yaml
+export KUBECONFIG=kube_config_cluster.yaml
 kubectl cluster-info
 kubectl get pods --all-namespaces
 ```
@@ -153,7 +153,7 @@ default backend - 404
 将以下文件的副本保存在安全的位置：
 
 - `rancher-cluster.yml`： RKE 集群配置文件。
-- `kube_config_rancher-cluster.yml`: 集群的[Kubeconfig 文件](/docs/rke/kubeconfig/_index)，此文件包含用于访问集群的凭据。
+- `kube_config_cluster.yml`: 集群的[Kubeconfig 文件](/docs/rke/kubeconfig/_index)，此文件包含用于访问集群的凭据。
 - `rancher-cluster.rkestate`： [Kubernetes 集群状态文件](/docs/rke/installation/_index)，此文件包含用于完全访问集群的凭据。_Kubernetes 集群状态文件仅在使用 RKE v0.2.0 或更高版本时创建。_
 
 > **注意：** 后两个文件名的“rancher-cluster”部分取决于您如何命名 RKE 集群的配置文件。

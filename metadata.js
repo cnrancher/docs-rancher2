@@ -610,7 +610,6 @@ const metadata = {
             "rancher2.5/istio/configuration-reference/_index": "配置选项",
             "rancher2.5/istio/rbac/_index": "基于角色的访问控制策略（RBAC）",
             "rancher2.5/istio/disabling-istio/_index": "停用Istio",
-            "rancher2.5/istio/release-notes/_index": "Istio版本说明",
             //logging
             "rancher2.5/logging/_index": "Rancher v2.5 的日志功能",
             "rancher2.5/logging/architecture/_index": "架构介绍",
