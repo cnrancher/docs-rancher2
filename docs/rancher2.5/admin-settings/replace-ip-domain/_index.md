@@ -133,7 +133,7 @@ SSL 证书与`域名或IP`之间存在绑定关系，客户端通过`域名或IP
   extendedKeyUsage = clientAuth, serverAuth
   EOM
 
-  if [[ -n ${SSL_TRUSTED_IP} || -n ${SSL_TRUSTED_DOMAIN} ]]; then
+  if [[ -n ${SSL_TRUSTED_IP} || -n ${SSL_TRUSTED_DOMAIN} || -n ${SSL_DOMAIN} ]]; then
       cat >> ${SSL_CONFIG} <<EOM
   subjectAltName = @alt_names
   [alt_names]
