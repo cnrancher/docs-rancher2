@@ -679,6 +679,7 @@ const metadata = {
             "rancher2.5/faq/removing-rancher/_index": "卸载 Rancher",
             "rancher2.5/faq/etcd/_index": "ETCD",
             "rancher2.5/faq/install/_index": "安装",
+            "rancher2.5/faq/upgrade/_index": "升级",
             //troubleshooting
             "rancher2.5/troubleshooting/kubernetes-components/etcd/_index":
                 "etcd 节点",

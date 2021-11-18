@@ -1769,6 +1769,7 @@ module.exports = {
             "rancher2.5/faq/removing-rancher/_index",
             "rancher2.5/faq/etcd/_index",
             "rancher2.5/faq/install/_index",
+            "rancher2.5/faq/upgrade/_index",
         ],
         常见故障排查: [
             "rancher2.5/troubleshooting/_index",
