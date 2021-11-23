@@ -763,6 +763,7 @@ const metadata = {
             "k3s/autok3s/_index": "功能介绍",
             "k3s/autok3s/alibaba/_index": "创建阿里云集群",
             "k3s/autok3s/aws/_index": "创建AWS集群",
+            "k3s/autok3s/google/_index": "创建Google集群",
             "k3s/autok3s/tencent/_index": "创建腾讯云集群",
             "k3s/autok3s/native/_index": "创建Native集群",
             "k3s/autok3s/k3d/_index": "创建K3d集群",
