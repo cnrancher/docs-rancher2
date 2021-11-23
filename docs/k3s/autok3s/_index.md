@@ -38,6 +38,7 @@ AutoK3s 可以支持以下云厂商，我们会根据社区反馈添加更多支
 
 - [阿里云](/docs/k3s/autok3s/alibaba/_index) - 在阿里云的 ECS 中初始化 K3s 集群
 - [AWS](/docs/k3s/autok3s/aws/_index) - 在亚马逊 EC2 中初始化 K3s 集群
+- [Google](/docs/k3s/autok3s/google/_index) - 在Google GCE 中初始化 K3s 集群
 - [腾讯云](/docs/k3s/autok3s/tencent/_index) - 在腾讯云 CVM 中初始化 K3s 集群
 - [Native](/docs/k3s/autok3s/native/_index) - 在任意类型 VM 实例中初始化 K3s 集群
 - [K3d](/docs/k3s/autok3s/k3d/_index) - 使用 K3d 在宿主机 Docker 中初始化 K3s 集群
@@ -47,13 +48,13 @@ AutoK3s 可以支持以下云厂商，我们会根据社区反馈添加更多支
 您可以通过以下 Docker 命令，一键启动 AutoK3s 本地 UI，快速体验相关功能。
 
 ```bash
-docker run -itd --restart=unless-stopped -p 8080:8080 cnrancher/autok3s:v0.4.4
+docker run -itd --restart=unless-stopped -p 8080:8080 cnrancher/autok3s:v0.4.5
 ```
 
 如果您想要在 docker 中使用 K3d provider，那么您需要使用宿主机网络启动 AutoK3s 镜像。
 
 ```bash
-docker run -itd --restart=unless-stopped --net host -v /var/run/docker.sock:/var/run/docker.sock cnrancher/autok3s:v0.4.4
+docker run -itd --restart=unless-stopped --net host -v /var/run/docker.sock:/var/run/docker.sock cnrancher/autok3s:v0.4.5
 ```
 
 如果您是 MacOS 或者 Linux 系统，您也可以使用以下安装命令，一键安装 AutoK3s（Windows用户请前往 [Releases](https://github.com/cnrancher/autok3s/releases) 页面下载对应的程序）。
@@ -98,7 +99,7 @@ AutoK3s 有两种运行模式：
 
 ## 升级
 
-如果您使用 Docker 命令一键启动 AutoK3s 本地 UI，从 `v0.4.0` 升级到 `v0.4.4` 需要进行如下操作以保证历史数据的迁移。
+如果您使用 Docker 命令一键启动 AutoK3s 本地 UI，从 `v0.4.0` 升级到 `v0.4.5` 需要进行如下操作以保证历史数据的迁移。
 
 ```bash
 docker cp <old-container>:/root/.autok3s .
