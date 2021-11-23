@@ -31,11 +31,11 @@ x509: certificate relies on legacy Common Name field, use SANs or temporarily en
 
 使用[一键生成 ssl 自签名证书脚本](/docs/rancher2.5/installation/resources/advanced/self-signed-ssl/_index/#41-一键生成-ssl-自签名证书脚本) 重新生成证书，然后参考[无需重新搭建集群，轻松替换证书](https://mp.weixin.qq.com/s/7Ym6VKGdRsj2qnJT2_zqRA)替换 Rancher HA 的证书。
 
-#### 方案 2：添加环境变量 `GODEBUG=x509ignoreCN=0`
+### 方案 2：添加环境变量 `GODEBUG=x509ignoreCN=0`
 
 1. 更新 Rancher Server ，添加环境变量`GODEBUG=x509ignoreCN=0`
 
-  升级 Rancher 通过`extraEnv`设置环境变量`GODEBUG=x509ignoreCN=0`，例如：
+升级 Rancher 通过`extraEnv`设置环境变量`GODEBUG=x509ignoreCN=0`，例如：
 
 ```
 helm upgrade rancher rancher-latest/rancher \
@@ -48,8 +48,8 @@ helm upgrade rancher rancher-latest/rancher \
 
 2. 更新 Rancher Agent，添加环境变量`GODEBUG=x509ignoreCN=0`
 
-  编辑下游集群，点击 `Add Environmenet Variable`，设置环境变量，如下：
+编辑下游集群，点击 `Add Environmenet Variable`，设置环境变量，如下：
 
-   ![添加agent变量](/img/rancher/add-env-var.png)
+![添加agent变量](/img/rancher/add-env-var.png)
 
-  保存，等待集群更新成功，此时， cattle-cluster-agent 和 cattle-node-agent 恢复为 `Active` 状态
+保存，等待集群更新成功，此时， cattle-cluster-agent 和 cattle-node-agent 恢复为 `Active` 状态
