@@ -169,52 +169,18 @@ function PortsIaasNodes() {
           <td></td>
         </tr>
         <tr>
-          <td rowSpan={2}>
-            外部负载均衡 <sup>(5)</sup>
+          <td rowSpan={1}>
+           Kubernetes API Clients
           </td>
-          <td className={styles.highlight}>80 TCP</td>
           <td></td>
           <td></td>
+          <td className={styles.highlight}>6443 TCP <sup>(5)</sup></td>
           <td></td>
           <td></td>
           <td></td>
         </tr>
         <tr>
-          <td className={styles.highlight}>
-            443 TCP <sup>(6)</sup>
-          </td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td rowSpan={2}>API / UI 客户端</td>
-          <td className={styles.highlight}>
-            80 TCP <sup>(3)</sup>
-          </td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td className={styles.highlight}>
-            80 TCP
-            <br />
-          </td>
-          <td></td>
-        </tr>
-        <tr>
-          <td className={styles.highlight}>
-            443 TCP <sup>(3)</sup>
-          </td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td className={styles.highlight}>443 TCP</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td rowSpan={3}>工作负载客户端</td>
+          <td rowSpan={3}>工作负载客户端或负载均衡器</td>
           <td></td>
           <td></td>
           <td></td>
@@ -229,19 +195,19 @@ function PortsIaasNodes() {
         <tr>
           <td></td>
           <td></td>
-          <td colSpan={2} className={styles.highlight}>
+          <td></td>
+          <td colSpan={1} className={styles.highlight}>
             80 TCP (Ingress)
           </td>
-          <td></td>
           <td></td>
         </tr>
         <tr>
           <td></td>
           <td></td>
-          <td colSpan={2} className={styles.highlight}>
+          <td></td>
+          <td colSpan={1} className={styles.highlight}>
             443 TCP (Ingress)
           </td>
-          <td></td>
           <td></td>
         </tr>
         <tr>
@@ -257,9 +223,8 @@ function PortsIaasNodes() {
             <br />
             4. 本地流量（非跨节点流量）。
             <br />
-            5. 负责Rancher UI / API的负载均衡或反向代理。
+            5. 仅当授权集群端点被激活时。
             <br />
-            6. 仅适用于SSL没有在外部负载均衡终止。
           </td>
         </tr>
       </tbody>

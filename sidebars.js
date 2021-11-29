@@ -1390,7 +1390,7 @@ module.exports = {
                     "rancher2.5/cluster-provisioning/rke-clusters/rancher-agents/_index",
                 ],
             },
-            "rancher2.5/cluster-provisioning/syncing/_index",
+            "rancher2.5/cluster-provisioning/registered-clusters/_index",
         ],
         集群管理员指南: [
             "rancher2.5/cluster-admin/_index",

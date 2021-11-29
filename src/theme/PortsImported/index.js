@@ -45,31 +45,12 @@ function PortsImportedHosted() {
           <td></td>
         </tr>
         <tr>
-          <td>
-            外部负载均衡 <sup>(5)</sup>
-          </td>
-          <td className={styles.highlight}>
-            80 TCP
-            <br />
-            443 TCP <sup>(6)</sup>
-          </td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>API / UI 客户端</td>
-          <td className={styles.highlight}>
-            80 TCP <sup>(4)</sup>
-            <br />
-            443 TCP <sup>(4)</sup>
-          </td>
+          <td>Kubernetes API Clients</td>
           <td></td>
           <td className={styles.highlight}>
-            80 TCP
-            <br />
-            443 TCP
+            取决于集群 / 供应商 <sup>(6)</sup>
           </td>
+          <td></td>
           <td></td>
         </tr>
         <tr>
@@ -96,7 +77,7 @@ function PortsImportedHosted() {
             <br />
             5. 来自 worker 节点。
             <br />
-            6. 仅适用于SSL没有在外部负载均衡终止。
+            6. 无需 Rancher 即可直接访问 Kubernetes API。
             <br />
             7. 通常是 Ingress 负载均衡和/或 nodeport。
           </td>
