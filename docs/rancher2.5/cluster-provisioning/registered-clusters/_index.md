@@ -77,15 +77,15 @@ K3s server 需要被配置为允许写入 kubeconfig 文件，以下是两种配
 
 - 您可以通过在安装过程中传递`--write-kubeconfig-mode 644`作为一个标志来实现：
 
-        ```bash
-        $ curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
-        ```
+```bash
+$ curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
+```
 
 - 该选项也可以使用环境变量`K3S_KUBECONFIG_MODE`来指定：
 
-        ```bash
-        $ curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" sh -s -
-        ```
+```bash
+$ curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" sh -s -
+```
 
 ## Rancher 对于注册集群的管理权限
 
