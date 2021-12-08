@@ -481,7 +481,7 @@ const metadata = {
             "rancher2.5/installation/_index": "安装介绍",
             "rancher2.5/installation/requirements/_index": "安装要求",
             "rancher2.5/installation/install-rancher-on-k8s/_index":
-                "高可用安装",
+                "高可用安装和升级",
             "rancher2.5/installation/other-installation-methods/air-gap/_index":
                 "离线安装",
             "rancher2.5/installation/other-installation-methods/single-node-docker/_index":

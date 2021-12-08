@@ -224,7 +224,7 @@ CPU/内存的单位与 Kubernetes 的资源单位相同（参见：[Kubernetes �
 
 ### RO 主机路径卷挂载
 
-要将卷挂载为只读，在卷挂载的最后加上`:ro'。 `/source/volume/path/on/host:/destination/volume/path/in/staticpod:ro`
+要将卷挂载为只读，在卷挂载的最后加上`:ro`。 `/source/volume/path/on/host:/destination/volume/path/in/staticpod:ro`
 
 通过在配置文件中以数组形式传递标志值，可以为同一个组件指定多个卷挂载。
 

@@ -167,7 +167,7 @@ helm upgrade --install \
   --create-namespace
 ```
 
-# 8. 获取负载平衡器的 IP
+# 8. 获取负载均衡器的 IP
 
 要获得负载均衡器的地址，请运行。
 
