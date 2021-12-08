@@ -45,6 +45,11 @@ module.exports = {
                     position: "right",
                 },
                 {
+                    href: "https://forums.cnrancher.com/",
+                    label: "中文论坛",
+                    position: "right",
+                },
+                {
                     href:
                         "https://www.suse.com/suse-rancher/support-matrix/all-supported-versions/",
                     label: "支持矩阵",

@@ -168,7 +168,7 @@ ingress-nginx-controller   LoadBalancer   10.100.90.18   a904a952c73bf4f668a17c4
 
 设置一个 DNS，指向您保存的外部 IP。这个 DNS 将被用作 Rancher 服务器的 URL。
 
-设置 DNS 的有效方法有很多。有关帮助，请参考 AWS 文档中关于[将流量路由到 ELB 负载平衡器](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-elb-load-balancer.html)的内容。
+设置 DNS 的有效方法有很多。有关帮助，请参考 AWS 文档中关于[将流量路由到 ELB 负载均衡器](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-elb-load-balancer.html)的内容。
 
 ### 8. 安装 Rancher Helm Chart
 

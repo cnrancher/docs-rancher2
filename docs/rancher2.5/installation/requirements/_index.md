@@ -24,17 +24,21 @@ keywords:
 
 建议在 Chrome 或 Firefox 浏览器中使用 Rancher UI。
 
-:::important 注意
+:::note 注意
 这是对 Rancher Server 节点的要求。如果您要创建用来运行您自己的应用的集群，请参阅[下游集群的节点要求](/docs/rancher2.5/cluster-provisioning/node-requirements/_index)，获取对于下游集群的节点要求。
 :::
+
+确保 Rancher Server 的节点满足以下要求：
 
 ## 操作系统和容器运行时要求
 
 Rancher 可以兼容当前任何流行的 Linux 发行版。
 
-对于将运行 K3s 或 RKE Kubernetes 集群的节点，需要使用 Docker。对于 RancherD 安装 和 RKE2 安装来说，Docker 不是必需的。
+对于将运行 RKE Kubernetes 集群的节点需要安装 Docker。对于 RancherD 安装 和 RKE2 安装来说，Docker 不是必需的。
 
-Rancher 需要安装在支持的 Kubernetes 版本上。要了解你的 Rancher 版本支持哪些 Kubernetes 版本，请参考[这里](https://rancher.com/support-maintenance-terms/)。
+Rancher 需要安装在支持的 Kubernetes 版本上。要了解你的 Rancher 版本支持哪些 Kubernetes 版本，请参考[支持维护条款](https://rancher.com/support-maintenance-terms/)。
+
+有关每个 Rancher 版本测试哪些 OS 和 Docker 版本的详细信息，请参阅[支持维护条款](https://rancher.com/support-maintenance-terms/)。
 
 所有受支持的操作系统都是 64-bit x86。
 
@@ -58,37 +62,41 @@ net.bridge.bridge-nf-call-iptables=1
 
 ### K3s 要求
 
-K3s 兼容当前的所有 Docker 版本和 containerd。
+对于容器运行时，K3s 兼容当前的所有 Docker 版本和 containerd。
 
 Rancher 需要安装在受支持的 Kubernetes 版本上。要了解您的 Rancher 版本支持哪些版本的 Kubernetes，请参考[支持维护条款](https://rancher.com/support-maintenance-terms/)。要指定 K3s 版本，请在运行 K3s 安装脚本时使用 INSTALL_K3S_VERSION 环境变量。
 
-如果您在使用 Raspbian Buster 的 K3s 集群上安装 Rancher，请按照[这些步骤](/docs/k3s/advanced/_index)切换到传统的 iptables。
+如果您在使用 `Raspbian Buster` 的 K3s 集群上安装 Rancher，请按照[这些步骤](/docs/k3s/advanced/_index#在-raspbian-buster-上启用旧版的-iptables)切换到传统的 iptables。
 
-如果您在使用 Alpine Linux 的 K3s 集群上安装 Rancher，请按照[这些步骤](/docs/k3s/advanced/_index)]进行额外的设置。
+如果您在使用 Alpine Linux 的 K3s 集群上安装 Rancher，请按照[这些步骤](/docs/k3s/advanced/_index#alpine-linux-安装的额外准备工作)进行额外的设置。
 
 ### RancherD 要求
 
-RancherD 安装从 v2.5.4 开始可用。这是一个实验性功能。
+_RancherD 安装从 v2.5.4 开始可用。这是一个实验性功能。_
 
-目前，只支持利用 systemd 的 Linux 操作系统。
+目前，只支持使用 systemd 的 Linux 操作系统。
 
 RancherD 安装时不需要 Docker。
 
-要在 SELinux Enforcing CentOS 8 或 RHEL 8 节点上安装 RancherD，需要一些额外的步骤。
+要在 SELinux Enforcing CentOS 8 或 RHEL 8 节点上安装 RancherD，需要一些[额外的步骤](#rancherd-在-selinux-上强制执行-centos-8-或-rhel-8-节点)。
 
-## RKE2 具体要求
+RancherD 安装不需要 Docker。
 
-RKE2 安装从 v2.5.6 开始可用。
+### RKE2 具体要求
+
+_RKE2 安装从 v2.5.6 开始可用。_
 
 关于哪些操作系统版本在 RKE2 中进行了测试，请参考[支持维护条款](https://rancher.com/support-maintenance-terms/)。
 
 RKE2 的安装不需要 Docker。
 
-Ingress 应该被部署为 DaemonSet，以确保你的负载平衡器能够成功地将流量路由到所有节点。目前，RKE2 默认将 nginx-ingress 部署为一个部署，所以你需要按照[这些步骤](/docs/rancher2.5/installation/resources/k8s-tutorials/ha-rke2/_index)将其部署为一个 DaemonSet。
+Ingress 应该被部署为 DaemonSet，以确保你的负载均衡器能够成功地将流量路由到所有节点。目前，RKE2 默认将 nginx-ingress 部署为 Deployment，所以你需要按照[这些步骤](/docs/rancher2.5/installation/resources/k8s-tutorials/ha-rke2/_index#5-配置-nginx-成为一个-daemonset)将其部署为一个 DaemonSet。
 
 ### 安装 Docker
 
 您可以按照[Docker 官方文档](https://docs.docker.com/)中的步骤安装 Docker。Rancher 也提供了使用命令安装 Docker 的[脚本](/docs/rancher2.5/installation/requirements/installing-docker/_index)。
+
+RancherD 安装 Rancher 不需要 Docker。
 
 ## 硬件要求
 
@@ -98,11 +106,11 @@ Ingress 应该被部署为 DaemonSet，以确保你的负载平衡器能够成�
 
 硬件要求根据您的 Rancher 部署规模而定。请根据要求配置每个单独的节点。这些要求具体取决于您是通过单节点容器安装 Rancher，还是在 Kubernetes 集群上安装 Rancher。
 
-### RKE 高可用安装的 CPU 和 内存要求
+### RKE 和托管 Kubernetes
 
-这些要求适用于[安装了 Rancher Server 的 RKE Kubernetes 集群](/docs/rancher2.5/installation/install-rancher-on-k8s/_index)中的每个主机。
+这些 CPU 和内存要求适用于安装 Rancher Server 的 Kubernetes 集群中的每个主机。
 
-在 Rancher v2.4.0 中提高了性能。有关 v2.4.0 之前的 Rancher 的要求，请参阅[本节](#rancher-v240-之前的-rke-高可用安装的-cpu-和内存要求)。
+这些要求适用于 RKE Kubernetes 集群以及托管的 Kubernetes 集群，例如 EKS。
 
 | 部署规模 | 集群         | 节点           | vCPUs | 内存   |
 | :------- | :----------- | :------------- | :---- | :----- |
@@ -130,10 +138,14 @@ Ingress 应该被部署为 DaemonSet，以确保你的负载平衡器能够成�
 
 ### RancherD 安装的 CPU 和 内存要求
 
+RancherD 从 v2.5.4 开始可用。这是一个实验性功能。
+
+这些 CPU 和内存要求适用于安装了 RancherD 的每个主机。这里列出了建议的最低配置要求。
+
 | 部署规模 | 集群       | 节点        | vCPUs | 内存 | RAM |
 | :------- | :--------- | :---------- | :---- | :--- | :-- |
-| 小       | 最多 5 个  | 最多 50 个  | 2     | 4 GB |
-| 中       | 最多 15 个 | 最多 200 个 | 3     | 8 GB |
+| 小       | 最多 5 个  | 最多 50 个  | 2     | 5 GB |
+| 中       | 最多 15 个 | 最多 200 个 | 3     | 9 GB |
 
 ### RKE2 Kubernetes
 
@@ -146,7 +158,7 @@ Ingress 应该被部署为 DaemonSet，以确保你的负载平衡器能够成�
 
 ### 单节点安装的 CPU 和 内存要求
 
-这些要求适用于使用 Docker 安装 Rancher 的[单节点安装](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/_index)。
+这些 CPU 和内存要求适用于[单节点](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/_index)安装 Rancher 的主机。
 
 | 部署规模 | 集群       | 节点        | vCPUs | 内存 |
 | :------- | :--------- | :---------- | :---- | :--- |
@@ -157,19 +169,19 @@ Ingress 应该被部署为 DaemonSet，以确保你的负载平衡器能够成�
 
 Rancher 安装的 Kubernetes 集群中的每个节点都应该运行一个 Ingress。
 
-Ingress 应被部署为 DaemonSet，以确保你的负载平衡器能够成功地将流量路由到所有节点。
+Ingress 应被部署为 DaemonSet，以确保你的负载均衡器能够成功地将流量路由到所有节点。
 
 对于 RKE、K3s 和 RancherD 的安装，你不需要手动安装 Ingress，因为它是默认安装的。
 
 对于托管的 Kubernetes 集群（EKS、GKE、AKS）和 RKE2 Kubernetes 安装，你将需要设置 Ingress。
 
-### Ingress for RKE2
+### RKE2 的 Ingress
 
-目前，RKE2 默认将 nginx-ingress 部署为一个 deployment，所以你需要按照[这些步骤](/docs/rancher2.5/installation/resources/k8s-tutorials/ha-rke2/_index)将其部署为一个 DaemonSet。
+目前，RKE2 默认将 nginx-ingress 部署为一个 deployment，所以你需要按照[这些步骤](/docs/rancher2.5/installation/resources/k8s-tutorials/ha-rke2/_index#5-配置-nginx-成为一个-daemonset)将其部署为一个 DaemonSet。
 
-### Ingress for EKS
+### EKS 的 Ingress
 
-关于如何部署带有 LoadBalancer 服务的 nginx-ingress-controller 的例子，请参阅[本节](/docs/rancher2.5/installation/resources/k8s-tutorials/ha-rke2/_index)。
+关于如何部署带有 LoadBalancer 服务的 nginx-ingress-controller 的示例，请参阅[本节](/docs/rancher2.5/installation/resources/k8s-tutorials/ha-rke2/_index)。
 
 ### Rancher v2.4.0 之前的 RKE 高可用安装的 CPU 和内存要求
 
@@ -183,13 +195,13 @@ Ingress 应被部署为 DaemonSet，以确保你的负载平衡器能够成功�
 | 加大     | 最多 100 个 | 最多 1000 个 | 32                                              | 128 GB                                          |
 | 超大     | 100+        | 1000+        | [联系 Rancher](https://www.rancher.cn/contact/) | [联系 Rancher](https://www.rancher.cn/contact/) |
 
-### 磁盘
+## 磁盘
 
 Rancher 的性能取决于 etcd 在集群中的性能。为了确保最佳速度，我们建议使用 SSD 磁盘来支持 Rancher 管里面的 Kubernetes 集群。在云提供商上，您还需要使用允许最大 IOPS 的最小大小。在较大的集群中，请考虑使用专用存储设备存储 etcd 数据和 wal 目录。
 
 ## 网络要求
 
-本节描述了安装 Rancher Server 的节点的网络要求。
+本节描述了安装 Rancher Server 节点的网络要求。
 
 ### 节点 IP 地址
 
@@ -201,7 +213,7 @@ Rancher 的性能取决于 etcd 在集群中的性能。为了确保最佳速度
 
 ## RancherD 在 SELinux 上强制执行 CentOS 8 或 RHEL 8 节点
 
-在 SELinux Enforcing CentOS 8 节点或 RHEL 8 节点上安装 Rancher 之前，必须安装容器-selinux 和 iptables。
+在 SELinux Enforcing CentOS 8 节点或 RHEL 8 节点上安装 Rancher 之前，必须安装 `container-selinux` 和 `iptables`。
 
 ```bash
 sudo yum install iptables

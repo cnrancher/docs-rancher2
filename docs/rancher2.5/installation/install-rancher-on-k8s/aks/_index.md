@@ -85,7 +85,7 @@ az aks get-credentials --resource-group rancher-rg --name rancher-server
 
 集群需要一个 Ingress，以便 Rancher 可以从集群外部被访问。安装一个 Ingress 需要分配一个公共 IP 地址。确保你有足够的配额，否则它将无法分配 IP 地址。公共 IP 地址的限制适用于每个订阅的区域级别。
 
-下面的命令安装了一个`nginx-ingress-controller`与 Kubernetes 负载平衡器服务。
+下面的命令安装了一个`nginx-ingress-controller`与 Kubernetes 负载均衡器服务。
 
 ```bash
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
@@ -100,7 +100,7 @@ helm upgrade --install \
 
 ## 6. 获取负载均衡器 IP
 
-要获得负载平衡器的地址，请运行：
+要获得负载均衡器的地址，请运行：
 
 ```bash
 kubectl get service ingress-nginx-controller --namespace=ingress-nginx

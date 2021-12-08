@@ -53,7 +53,7 @@ COMMANDS:
    --kube-proxy-arg value                     (agent/flags) 为kube-proxy进程定制的标志
    --protect-kernel-defaults                  (agent/node) 内核调整行为。如果设置，如果内核调优与kubelet默认值不同，则会出现错误
    --selinux                                  (agent/node) 在containerd中启用SELinux [%RKE2_SELINUX%]
-   --lb-server-port value                     (agent/node) supervisor 客户端负载平衡器的本地端口。如果supervisor和apiserver不在同一地点，比这个端口小1的额外端口也将用于apiserver客户端负载平衡器。(默认：6444) [%RKE2_LB_SERVER_PORT%]
+   --lb-server-port value                     (agent/node) supervisor 客户端负载均衡器的本地端口。如果supervisor和apiserver不在同一地点，比这个端口小1的额外端口也将用于apiserver客户端负载均衡器。(默认：6444) [%RKE2_LB_SERVER_PORT%]
    --kube-apiserver-image value               (image) 覆盖kube-apiserver使用的镜像 [%RKE2_KUBE_APISERVER_IMAGE%]
    --kube-controller-manager-image value      (image) 覆盖kube-controller-manager的镜像 [%RKE2_KUBE_CONTROLLER_MANAGER_IMAGE%]
    --kube-proxy-image value                   (image) 覆盖kube-proxy使用的镜像 [%RKE2_KUBE_PROXY_IMAGE%]

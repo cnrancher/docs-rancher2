@@ -1023,9 +1023,10 @@ module.exports = {
             },
             {
                 type: "category",
-                label: "高可用安装",
+                label: "高可用安装和升级",
                 items: [
                     "rancher2.5/installation/install-rancher-on-k8s/_index",
+                    "rancher2.5/installation/install-rancher-on-k8s/chart-options/_index",
                     {
                         type: "category",
                         label: "升级指南",
@@ -1034,8 +1035,6 @@ module.exports = {
                             "rancher2.5/installation/install-rancher-on-k8s/upgrades/air-gap-upgrade/_index",
                         ],
                     },
-
-                    "rancher2.5/installation/install-rancher-on-k8s/chart-options/_index",
                     "rancher2.5/installation/install-rancher-on-k8s/rollbacks/_index",
                     "rancher2.5/installation/install-rancher-on-k8s/amazon-eks/_index",
                     "rancher2.5/installation/install-rancher-on-k8s/aks/_index",
@@ -1119,6 +1118,7 @@ module.exports = {
                                 items: [
                                     "rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/_index",
                                     "rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha-with-external-db/_index",
+                                    "rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-rke2-ha/_index",
                                     "rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha/_index",
                                     "rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/ec2-node/_index",
                                     "rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/rds/_index",

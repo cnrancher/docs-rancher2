@@ -127,7 +127,7 @@ curl -sfL http://rancher-mirror.rancher.cn/rke2/install.sh | INSTALL_RKE2_MIRROR
 
 1. 安装[kubectl]（https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl）。
 2. 复制`/etc/rancher/rke2/rke2.yaml`的文件，并保存到本地机器上的`~/.kube/config`目录。
-3. 在 kubeconfig 文件中，`server`指令被定义为 localhost。将该服务器配置为你的负载平衡器的 DNS，参考端口 6443。(Kubernetes API 服务器将在 6443 端口到达，而 Rancher 服务器将在 80 和 443 端口到达)。下面是一个`rke2.yaml`的例子：
+3. 在 kubeconfig 文件中，`server`指令被定义为 localhost。将该服务器配置为你的负载均衡器的 DNS，参考端口 6443。(Kubernetes API 服务器将在 6443 端口到达，而 Rancher 服务器将在 80 和 443 端口到达)。下面是一个`rke2.yaml`的例子：
 
 ```yml
 apiVersion: v1

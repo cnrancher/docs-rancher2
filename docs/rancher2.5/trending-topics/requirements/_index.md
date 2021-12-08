@@ -76,7 +76,7 @@ RKE2 安装从 v2.5.6 开始可用。
 
 RKE2 的安装不需要 Docker。
 
-Ingress 应该被部署为 DaemonSet，以确保你的负载平衡器能够成功地将流量路由到所有节点。目前，RKE2 默认将 nginx-ingress 部署为一个部署，所以你需要按照[这些步骤](/docs/rancher2.5/installation/resources/k8s-tutorials/ha-rke2/_index)将其部署为一个 DaemonSet。
+Ingress 应该被部署为 DaemonSet，以确保你的负载均衡器能够成功地将流量路由到所有节点。目前，RKE2 默认将 nginx-ingress 部署为一个部署，所以你需要按照[这些步骤](/docs/rancher2.5/installation/resources/k8s-tutorials/ha-rke2/_index)将其部署为一个 DaemonSet。
 
 ### 安装 Docker
 
@@ -149,7 +149,7 @@ Ingress 应该被部署为 DaemonSet，以确保你的负载平衡器能够成�
 
 Rancher 安装的 Kubernetes 集群中的每个节点都应该运行一个 Ingress。
 
-Ingress 应被部署为 DaemonSet，以确保你的负载平衡器能够成功地将流量路由到所有节点。
+Ingress 应被部署为 DaemonSet，以确保你的负载均衡器能够成功地将流量路由到所有节点。
 
 对于 RKE、K3s 和 RancherD 的安装，你不需要手动安装 Ingress，因为它是默认安装的。
 
