@@ -55,12 +55,13 @@ spec:
 apiVersion: helm.cattle.io/v1
 kind: HelmChartConfig
 metadata:
-  name: rke2-canal
+  name: rke2-cilium
   namespace: kube-system
 spec:
   valuesContent: |-
-    flannel:
-      iface: "eth1"
+    cilium:
+      eni:
+        enabled: true
 ```
 
 更多关于 Cilium chart 的可用值，请参考[rke2-charts 资源库](https://github.com/rancher/rke2-charts/blob/main-source/packages/rke2-cilium/charts/values.yaml)。
