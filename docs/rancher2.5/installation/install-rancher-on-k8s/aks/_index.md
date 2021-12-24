@@ -20,9 +20,9 @@ keywords:
 
 本页介绍了如何在微软的 Azure Kubernetes Service（AKS）上安装 Rancher。
 
-本指南使用命令行工具来配置一个带有入口的 AKS 集群。如果你喜欢使用 Azure 门户来配置你的集群，请参考[官方文档](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal)。
+本指南使用命令行工具来配置一个带有 ingress 的 AKS 集群。如果你喜欢使用 Azure 门户来配置你的集群，请参考[官方文档](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal)。
 
-如果你已经有一个 AKS Kubernetes 集群，请跳到关于[安装入口](#5-安装-Ingress)的步骤。 然后按照[本页](/docs/rancher2.5/installation/install-rancher-on-k8s/_index)上的说明安装 Rancher Helm Chart。
+如果你已经有一个 AKS Kubernetes 集群，请跳到关于[安装 ingress ](#5-安装-Ingress)的步骤。 然后按照[本页](/docs/rancher2.5/installation/install-rancher-on-k8s/_index#helm-chart-安装-rancher)上的说明安装 Rancher Helm Chart。
 
 ## 前提条件
 
@@ -36,9 +36,9 @@ keywords:
 
 ## 1. 准备好你的工作站
 
-在你的工作站上安装以下命令行工具。
+在你的工作站上安装以下命令行工具:
 
-- Azure CLI 是、**az:** 如需帮助，请参考这些[安装步骤](https://docs.microsoft.com/en-us/cli/azure/)。
+- Azure CLI 是 **az:** ，如需帮助，请参考这些[安装步骤](https://docs.microsoft.com/en-us/cli/azure/)。
 - **kubectl:** 如需帮助，请参考这些[安装步骤](https://kubernetes.io/docs/tasks/tools/#kubectl)。
 - **helm:** 有关帮助，请参考这些[安装步骤](https://helm.sh/docs/intro/install/)。
 
