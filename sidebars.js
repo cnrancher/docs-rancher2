@@ -1064,8 +1064,15 @@ module.exports = {
                             "rancher2.5/installation/other-installation-methods/air-gap/prepare-nodes/_index",
                             "rancher2.5/installation/other-installation-methods/air-gap/populate-private-registry/_index",
                             "rancher2.5/installation/other-installation-methods/air-gap/launch-kubernetes/_index",
-                            "rancher2.5/installation/other-installation-methods/air-gap/install-rancher/_index",
-                            "rancher2.5/installation/other-installation-methods/air-gap/install-rancher/docker-install-commands/_index",
+                            {
+                                type: "category",
+                                label: "4. 安装 Rancher",
+                                items: [
+                                "rancher2.5/installation/other-installation-methods/air-gap/install-rancher/_index",
+                                "rancher2.5/installation/other-installation-methods/air-gap/install-rancher/docker-install-commands/_index",
+                                ],
+                            },    
+                            
                         ],
                     },
                     {

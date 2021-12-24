@@ -20,13 +20,16 @@ keywords:
 
 本文介绍了在 EKS 上安装 Rancher 的两种方法。
 
-第一种方法是使用 CloudFormation 在 EKS 集群上部署 Rancher 服务器的指南。本指南是与 Amazon Web Services 合作创建的，旨在展示如何按照最佳实践部署 Rancher。
+第一种方法是使用 CloudFormation 在 EKS 集群上部署 Rancher Server的指南。本指南是与 Amazon Web Services 合作创建的，旨在展示如何按照最佳实践部署 Rancher。
 
-第二种方法是使用命令行工具安装带有入口的 EKS 集群的指南。如果您想在 EKS 上试用 Rancher 时使用较少的资源，请使用这种方式部署 Rancher。
+第二种方法是使用命令行工具安装带有入口的 EKS 集群的指南。如果您想在 EKS 上使用 Rancher 时使用较少的资源，请使用这种方式部署 Rancher。
 
-如果您已经有一个 EKS Kubernetes 集群，请跳转到[5. 安装 Ingress](#安装Ingress)章节。然后按照[高可用安装指南](/docs/rancher2.5/installation/install-rancher-on-k8s/_index#安装-Rancher-Helm-Chart)上的说明安装 Rancher Helm Chart。
+如果您已经有一个 EKS Kubernetes 集群，请跳转到[安装 Ingress](#5-安装-ingress)章节。然后按照[高可用安装指南](/docs/rancher2.5/installation/install-rancher-on-k8s/_index#安装-Rancher-Helm-Chart)上的说明安装 Rancher Helm Chart。
 
-## 使用 AWS 最佳实践自动快速启动
+- [使用 AWS 最佳实践的快速入门](#使用-aws-最佳实践的快速入门)
+- [为 Rancher Server 创建 EKS 集群](#为-rancher-server-创建-eks-集群)
+
+## 使用 AWS 最佳实践的快速入门
 
 Rancher 和 AWS 合作编写了一份快速入门指南，用于按照 AWS 最佳实践在 EKS 集群上部署 Rancher，详情请参考[部署指南](https://aws-quickstart.github.io/quickstart-eks-rancher/)。
 
@@ -87,12 +90,12 @@ aws configure
 | :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | AWS Access Key ID     | 具有 EKS 权限的 IAM 用户的访问密钥凭证。具有 EKS 权限的 IAM 用户的访问密钥凭证。                                                                                          |
 | AWS Secret Access Key | 具有 EKS 权限的 IAM 用户的密匙凭证。                                                                                                                                      |
-| Default region name   | 集群节点所在的[AWS 区域](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html#Concepts.RegionsAndAvailabilityZones.Regions)。 |
+| Default region name   | 集群节点所在的[AWS Region ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html#Concepts.RegionsAndAvailabilityZones.Regions)。 |
 | Default output format | 输入 `json`。                                                                                                                                                             |
 
 ### 3. 创建 EKS 集群
 
-请运行以下命令，创建 EKS 集群，请使用适用于您的用例的 AWS 区域。 在选择 Kubernetes 版本时，请务必先查阅 [支持矩阵](https://rancher.com/support-matrix/) 找到针对你的 Rancher 版本进行验证的 Kubernetes 最高版本。
+请运行以下命令，创建 EKS 集群，请使用适用于您的用例的 AWS Region。 在选择 Kubernetes 版本时，请务必先查阅 [支持矩阵](https://rancher.com/support-matrix/) 找到针对你的 Rancher 版本进行验证的 Kubernetes 最高版本。
 
 ```
 eksctl create cluster \
@@ -164,9 +167,9 @@ ingress-nginx-controller   LoadBalancer   10.100.90.18   a904a952c73bf4f668a17c4
 
 ### 7. 配置 DNS
 
-到 Rancher 服务器的外部流量需要指向您创建的负载均衡器。
+到 Rancher Server的外部流量需要指向您创建的负载均衡器。
 
-设置一个 DNS，指向您保存的外部 IP。这个 DNS 将被用作 Rancher 服务器的 URL。
+设置一个 DNS，指向您保存的外部 IP。这个 DNS 将被用作 Rancher Server的 URL。
 
 设置 DNS 的有效方法有很多。有关帮助，请参考 AWS 文档中关于[将流量路由到 ELB 负载均衡器](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-elb-load-balancer.html)的内容。
 
@@ -174,4 +177,4 @@ ingress-nginx-controller   LoadBalancer   10.100.90.18   a904a952c73bf4f668a17c4
 
 按照[本页](/docs/rancher2.5/installation/install-rancher-on-k8s/_index)上的说明安装 Rancher Helm Chart。Helm 说明与在任何 Kubernetes 发行版上安装 Rancher 相同。
 
-安装 Rancher 时，使用上一步中的那个 DNS 名称作为 Rancher 服务器的 URL。它可以作为 Helm 选项传递进来。例如，如果 DNS 名是`rancher.my.org`，你可以用`--set hostname=rancher.my.org`这个选项运行 Helm 安装命令。
+安装 Rancher 时，使用上一步中的那个 DNS 名称作为 Rancher Server的 URL。它可以作为 Helm 选项传递进来。例如，如果 DNS 名是`rancher.my.org`，你可以用`--set hostname=rancher.my.org`这个选项运行 Helm 安装命令。

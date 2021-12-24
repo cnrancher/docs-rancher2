@@ -17,56 +17,55 @@ keywords:
   - 安装指南
 ---
 
-## 概述
-
 在开发和测试环境中，您可以运行单个 Docker 容器安装 Rancher。在这种安装方案中，您将 Docker 安装在单个 Linux 主机上，然后使用一个 Docker 容器在您的主机上部署 Rancher。
 
-有关请配置单节点安装的外部负载均衡的详细说明，请参阅[使用外部负载均器的单节点安装](/docs/rancher2/installation/resources/advanced/single-node-install-external-lb/_index)。
+如果要使用外部负载均衡器，请参阅[使用外部负载均器的单节点安装](/docs/rancher2.5/installation/resources/advanced/single-node-install-external-lb/_index)。
+
+单节点安装的 Rancher 只推荐用于开发和测试目的。能否将 Rancher 迁移到高可用集群取决于 Rancher 版本：
+
+Rancher backup operator 可用于将 Rancher 从单节点安装的容器迁移到高可用 Kubernetes 集群上的安装。有关详细信息，请参阅有关[将 Rancher 迁移到新集群](/docs/rancher2.5/backups/migrating-rancher/_index)的文档。
+
+## Rancher v2.5+ 的特权访问
+
+当 Rancher Server 部署在 Docker 容器中时，容器内会安装一个本地的 Kubernetes 集群来提供 Rancher 使用。由于 Rancher 的许多功能都作为 deployment 运行，并且在容器内运行容器需要特权模式，因此您需要使用 `--privileged` 选项安装 Rancher。
 
 ## 操作系统、Docker、硬件和网络的要求
 
-确保您的节点满足常规的[操作系统、Docker、硬件和网络的要求](/docs/rancher2/installation/requirements/_index)。
+确保您的节点满足常规的[操作系统、Docker、硬件和网络的要求](/docs/rancher2.5/installation/requirements/_index)。
 
 ## 配置 Linux 主机
 
-根据我们的操作系统、Docker、硬件和网络的要求配置一个 Linux 主机，用于启动 Rancher Server。
+根据我们的[操作系统、Docker、硬件和网络的要求](/docs/rancher2.5/installation/requirements/_index)配置一个 Linux 主机，用于启动 Rancher Server。
 
 ## 选择一个 SSL 选项并安装 Rancher
 
-为了安全起见，使用 Rancher 时需要 SSL。SSL 保护所有 Rancher 网络通信的安全，例如在您登录集群或与集群交互时：
+为了安全起见，使用 Rancher 时需要 SSL。SSL 保护所有 Rancher 网络通信的安全，例如在您登录集群或与集群交互时。
 
-- 如果需要使用代理，请参阅 [HTTP 代理配置](/docs/rancher2/installation/other-installation-methods/single-node-docker/proxy/_index)。
-- 如果需要配置自定义 CA 根证书，请参阅[自定义 CA 根证书](/docs/rancher2/installation/other-installation-methods/single-node-docker/advanced/_index)。
-- 如果需要在离线环境下安装 Rancher，请参阅[单节点离线安装](/docs/rancher2/installation/other-installation-methods/air-gap/_index)。
-- 如果需要查看所有 Rancher API 的审计日志，请参阅[审计日志](/docs/rancher2/installation/other-installation-methods/single-node-docker/advanced/_index)。
+:::note 也许你想要……
 
-选择下面的一个选项：
+- 如果需要使用代理，请参阅 [HTTP 代理配置](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/proxy/_index)。
+- 如果需要配置自定义 CA 根证书，请参阅[自定义 CA 根证书](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/advanced/_index#自定义-ca-证书)。
+- 如果需要在离线环境下安装 Rancher，请参阅[单节点离线安装](/docs/rancher2.5/installation/other-installation-methods/air-gap/install-rancher/docker-install-commands/_index)。
+- 如果需要查看所有 Rancher API 的审计日志，请参阅[审计日志](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/advanced/_index#api-审计日志)。
 
-### 选项 A - 使用 Rancher 默认的自签名证书
-
-如果要在不涉及身份验证的开发或测试环境中安装 Rancher，请使用其生成的自签名证书安装 Rancher。此安装选项省去了自己生成证书的麻烦。
-
-:::important 重要
-在使用单节点安装时，Rancher Server 的数据默认保存在容器里。这意味着，在 Rancher Server 容器被删除时，Rancher Server 的数据将会丢失。您可以通过添加 `-v` 参数以挂载目录的方式将数据保存在 Rancher Server 所在的主机上。详情请参阅 [Rancher 单节点数据持久化](/docs/rancher2/installation/other-installation-methods/single-node-docker/advanced/_index#persist-data)。
 :::
 
-#### Rancher 2.4.x 及之前的版本
+从以下选项中选择证书进行安装：
 
-登录到 Linux 主机，然后运行下面这个非常简洁的安装命令。
+- 选项 A：默认 Rancher 生成的自签名证书
+- 选项 B：自带证书，自签名
+- 选项 C：自带证书，由认可的 CA 签名
+- 选项 D：让我们加密证书
 
-```bash
-docker run -d --privileged --restart=unless-stopped \
-	-p 80:80 -p 443:443 \
-	rancher/rancher:latest
-```
+### 选项 A - 使用 Rancher 生成的自签名证书
 
-#### Rancher 2.5.x 及之后的版本
+如果要在不涉及身份验证的开发或测试环境中安装 Rancher，可以使用 Rancher 生成的自签名证书安装 Rancher。此安装选项省去了自己生成证书的麻烦。
 
-登录到 Linux 主机，然后运行下面这个非常简洁的安装命令。
+登录到您的 Linux 主机，然后运行下面的最小安装命令。
 
-与 2.4.x 或之前的版本相比，使用`docker run`命令安装 Rancher 2.5.x 时，需要添加`--privileged`标志变量，启用特权模式安装 Rancher。
+从 Rancher v2.5 开始，需要[特权访问](#rancher-v25-的特权访问)。
 
-```bash
+```shell
 docker run -d --restart=unless-stopped \
   -p 80:80 -p 443:443 \
   --privileged \
@@ -75,15 +74,18 @@ docker run -d --restart=unless-stopped \
 
 ### 选项 B - 使用已有的自签名证书
 
-在开发或测试环境中，您的团队需要访问您的 Rancher Server 时，您可以创建一个自签名证书以供您的 Rancher Server 使用，以便您的团队可以验证正在连接的 Rancher 是否是您的实例。
+在开发或测试环境中，您的团队需要访问您的 Rancher Server 时，您可以创建一个自签名证书来提供您的 Rancher Server 使用。
 
-**先决条件：**
+:::note 先决条件
 
-- 使用 [OpenSSL](https://www.openssl.org/) 或您选择的其他方法创建自签名证书.
-- 证书文件必须为 [PEM 格式](/docs/rancher2/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
-- 在您的证书文件中，需要包含证书链中的所有中间证书。您需要对您的证书进行排序，把您的证书放在最前面，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/rancher2/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
+使用 [OpenSSL](https://www.openssl.org/) 或其他方法创建自签名证书.
 
-创建证书后，运行下面的 Docker 命令安装 Rancher。使用该 `-v` 标志并提供证书的路径，以将其挂载到容器中。
+- 证书文件必须为 [PEM 格式](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
+- 在您的证书文件中，需要包含证书链中的所有中间证书。您需要对您的证书进行排序，把您的证书放在最前面，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
+
+:::
+
+创建证书后，运行下面的 Docker 命令安装 Rancher。使用 `-v` 标志将证书挂载到容器中。
 
 | 占位符              | 描述                       |
 | :------------------ | :------------------------- |
@@ -92,31 +94,32 @@ docker run -d --restart=unless-stopped \
 | `<PRIVATE_KEY.pem>` | 证书私有密钥路径。         |
 | `<CA_CERTS.pem>`    | 证书颁发机构的证书的路径。 |
 
-:::important 重要
-在使用单节点安装时，Rancher Server 的数据默认保存在容器里。这意味着，在 Rancher Server 容器被删除时，Rancher Server 的数据将会丢失。您可以通过添加 `-v` 参数以挂载目录的方式将数据保存在 Rancher Server 所在的主机上。详情请参阅 [Rancher 单节点数据持久化](/docs/rancher2/installation/other-installation-methods/single-node-docker/advanced/_index#persist-data)。
-:::
+从 Rancher v2.5 开始，需要[特权访问](#rancher-v25-的特权访问)。
 
 ```bash
-docker run -d --privileged --restart=unless-stopped \
-	-p 80:80 -p 443:443 \
-	-v /<CERT_DIRECTORY>/<FULL_CHAIN.pem>:/etc/rancher/ssl/cert.pem \
-	-v /<CERT_DIRECTORY>/<PRIVATE_KEY.pem>:/etc/rancher/ssl/key.pem \
-	-v /<CERT_DIRECTORY>/<CA_CERTS.pem>:/etc/rancher/ssl/cacerts.pem \
-	rancher/rancher:latest
+docker run -d --restart=unless-stopped \
+  -p 80:80 -p 443:443 \
+  -v /<CERT_DIRECTORY>/<FULL_CHAIN.pem>:/etc/rancher/ssl/cert.pem \
+  -v /<CERT_DIRECTORY>/<PRIVATE_KEY.pem>:/etc/rancher/ssl/key.pem \
+  -v /<CERT_DIRECTORY>/<CA_CERTS.pem>:/etc/rancher/ssl/cacerts.pem \
+  --privileged \
+  rancher/rancher:latest
 ```
 
 ### 选项 C - 使用已有的可信证书
 
 在要公开展示应用程序的环境中，请使用由权威的 CA 签名的证书，这样您的用户就不会遇到安全警告。
 
-**先决条件：**
+:::note 先决条件
 
-- 证书文件必须为 [PEM 格式](/docs/rancher2/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
-- 在您的证书文件中，需要包含证书链中的所有中间证书。您需要对您的证书进行排序，把您的证书放在最前面，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/rancher2/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
+- 证书文件必须为 [PEM 格式](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
+- 在您的证书文件中，需要包含证书链中的所有中间证书。您需要对您的证书进行排序，把您的证书放在最前面，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
 
-获得证书后，运行下面的 Docker 命令。
+:::
 
-- 使用该 `-v` 标志并提供证书的路径，以将其挂载到容器中，由于您的证书是由权威的 CA 签名的，因此不需要安装其他 CA 证书文件。
+获得证书后，运行下面的 Docker 命令：
+
+- 使用该 `-v` 标志并根据提供的证书路径，将其挂载到容器中，由于您的证书是由权威的 CA 签名的，因此不需要安装其他 CA 证书文件。
 - 使用 `--no-cacerts` 作为容器的参数，来禁用由 Rancher 生成的默认 CA 证书。
 
 | 占位符              | 描述               |
@@ -125,17 +128,16 @@ docker run -d --privileged --restart=unless-stopped \
 | `<FULL_CHAIN.pem>`  | 证书链文件路径。   |
 | `<PRIVATE_KEY.pem>` | 证书私有密钥路径。 |
 
-:::important 重要
-在使用单节点安装时，Rancher Server 的数据默认保存在容器里。这意味着，在 Rancher Server 容器被删除时，Rancher Server 的数据将会丢失。您可以通过添加 `-v` 参数以挂载目录的方式将数据保存在 Rancher Server 所在的主机上。详情请参阅 [Rancher 单节点数据持久化](/docs/rancher2/installation/other-installation-methods/single-node-docker/advanced/_index#persist-data)。
-:::
+从 Rancher v2.5 开始，需要[特权访问](#rancher-v25-的特权访问)。
 
 ```bash
-docker run -d --privileged --restart=unless-stopped \
-	-p 80:80 -p 443:443 \
-	-v /<CERT_DIRECTORY>/<FULL_CHAIN.pem>:/etc/rancher/ssl/cert.pem \
-	-v /<CERT_DIRECTORY>/<PRIVATE_KEY.pem>:/etc/rancher/ssl/key.pem \
-	rancher/rancher:latest \
-	--no-cacerts
+docker run -d --restart=unless-stopped \
+  -p 80:80 -p 443:443 \
+  -v /<CERT_DIRECTORY>/<FULL_CHAIN.pem>:/etc/rancher/ssl/cert.pem \
+  -v /<CERT_DIRECTORY>/<PRIVATE_KEY.pem>:/etc/rancher/ssl/key.pem \
+  --privileged \
+  rancher/rancher:latest \
+  --no-cacerts
 ```
 
 ### 选项 D - 使用 Let's Encrypt 证书
@@ -157,7 +159,7 @@ docker run -d --privileged --restart=unless-stopped \
 | `<YOUR.DNS.NAME>` | 您的域名 |
 
 :::important 重要
-在使用单节点安装时，Rancher Server 的数据默认保存在容器里。这意味着，在 Rancher Server 容器被删除时，Rancher Server 的数据将会丢失。您可以通过添加 `-v` 参数以挂载目录的方式将数据保存在 Rancher Server 所在的主机上。详情请参阅 [Rancher 单节点数据持久化](/docs/rancher2/installation/other-installation-methods/single-node-docker/advanced/_index#persist-data)。
+在使用单节点安装时，Rancher Server 的数据默认保存在容器里。这意味着，在 Rancher Server 容器被删除时，Rancher Server 的数据将会丢失。您可以通过添加 `-v` 参数以挂载目录的方式将数据保存在 Rancher Server 所在的主机上。详情请参阅 [Rancher 单节点数据持久化](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/advanced/_index#persist-data)。
 :::
 
 ```
@@ -178,13 +180,13 @@ docker run -d --privileged --restart=unless-stopped \
 - 持久化数据
 - 在同一个节点上运行 Rancher Server 和 Rancher Agent
 
-有关详情，请参阅[此页面](/docs/rancher2/installation/other-installation-methods/single-node-docker/advanced/_index)。
+有关详情，请参阅[此页面](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/advanced/_index)。
 
 ## 故障排查
 
-请参阅[此页面](/docs/rancher2/installation/other-installation-methods/single-node-docker/troubleshooting/_index)，以获取常见问题和问题排查的提示。
+请参阅[此页面](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/troubleshooting/_index)，以获取常见问题和问题排查的提示。
 
 ## 后续步骤
 
-- **推荐：** 查看[单节点备份和还原](/docs/rancher2/backups/backup/docker-backups/_index)。尽管您现在没有任何数据需要备份，但是我们建议您在常规使用 Rancher 之后创建备份。
-- 创建 Kubernetes 集群：[创建 Kubernetes 集群](/docs/rancher2/cluster-provisioning/_index)。
+- **推荐：** 查看[单节点备份和还原](/docs/rancher2.5/backups/backup/docker-backups/_index)。尽管您现在没有任何数据需要备份，但是我们建议您在常规使用 Rancher 之后创建备份。
+- 创建 Kubernetes 集群：[创建 Kubernetes 集群](/docs/rancher2.5/cluster-provisioning/_index)。
