@@ -39,7 +39,7 @@ weight: 3
 
 ### RKE Kubernetes 集群安装
 
-在 RKE 安装中，集群数据在集群中的三个 ETCD 节点上复制，以在某个节点发生故障时提供冗余和进行数据复制。
+在 RKE 安装中，集群数据在集群中的三个 etcd 节点上复制，以在某个节点发生故障时提供冗余和进行数据复制。
 
 <figcaption>运行 Rancher Management Server 的 RKE Kubernetes 集群的架构</figcaption>
 ![运行 Rancher Management Server 的 RKE Kubernetes 集群的架构]({{<baseurl>}}/img/rancher/rke-server-storage.svg)
@@ -90,13 +90,13 @@ RKE 每个角色至少需要一个节点，但并不强制每个节点只能有�
 
 以下是我们对下游集群的最低配置建议：
 
-- **三个仅使用 ETCD 角色的节点** ，以在三个节点中其中一个发生故障时，仍能保障集群的高可用性。
+- **三个仅使用 etcd 角色的节点** ，以在三个节点中其中一个发生故障时，仍能保障集群的高可用性。
 - **两个只有 controlplane 角色的节点** ，以保证master 组件的高可用性。
 - **一个或多个只有 worker 角色的节点**，用于运行 Kubernetes 节点组件，以及你部署的服务或应用的工作负载。
 
 在设置 Rancher server 时，在三个节点上使用全部这三个角色也是安全的，因为：
 
-* 允许一个 `ETCD` 节点故障。
+* 允许一个 `etcd` 节点故障。
 * 多个 `controlplane` 节点可以维护 master 组件的多个实例。
 * 该集群中只有 Rancher 在运行。
 
