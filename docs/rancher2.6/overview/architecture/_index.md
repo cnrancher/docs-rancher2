@@ -101,7 +101,7 @@ Rancher 使用 [服务账号](https://kubernetes.io/docs/tasks/configure-pod-con
 
 如果集群 Agent（也称为 `cattle-cluster-agent`）不可用，其中一个节点 Agent 会创建一个连接到 Cluster Controller 的通道与 Rancher 通信。
 
-`cattle-node-agent` 使用 [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) 资源进行部署，以确保它能在 Rancher 启动的 Kubernetes 集群中的每个节点上运行，用于在执行集群操作时与节点交互。集群操作的包括升级 Kubernetes 版本，创建或恢复 ETCD 快照等。
+`cattle-node-agent` 使用 [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) 资源进行部署，以确保它能在 Rancher 启动的 Kubernetes 集群中的每个节点上运行，用于在执行集群操作时与节点交互。集群操作的包括升级 Kubernetes 版本，创建或恢复 etcd 快照等。
 
 ### 4. 授权集群端点
 
