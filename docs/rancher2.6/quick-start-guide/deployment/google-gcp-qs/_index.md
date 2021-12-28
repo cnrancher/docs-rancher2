@@ -33,7 +33,7 @@ weight: 100
    建议修改的参数包括：
    - `gcp_region` - Google GCP 地域。GCP 的默认地域不一定是距离你最近的地域。建议修改为距离你最近的地域。
    - `prefix` - 所有创建资源的前缀
-   - `machine_type` - 使用的计算实例大小，最小值为 `n1-standard-1`。如果在预算范围内，可以使用 `n1-standard-2` 或 `n1-standard-4`。
+   - `machine_type` - 使用的计算实例大小，最小规格为 `n1-standard-1`。如果在预算范围内，可以使用 `n1-standard-2` 或 `n1-standard-4`。
    - `ssh_key_file_name` - 使用指定的 SSH 密钥而不是`~/.ssh/id_rsa`（假设公钥为`${ssh_key_file_name}.pub`）
 
 1. 执行 `terraform init`。
