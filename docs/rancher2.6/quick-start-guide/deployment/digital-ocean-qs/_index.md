@@ -10,9 +10,9 @@ weight: 100
 > **注意**
 > 部署到 DigitalOcean 会产生费用。
 
-- [DigitalOcean 账号](https://www.digitalocean.com): 用于运行服务器和集群。
+- [DigitalOcean 账号](https://www.digitalocean.com)：用于运行服务器和集群。
 - [DigitalOcean 访问密钥](https://www.digitalocean.com/community/tutorials/how-to-create-a-digitalocean-space-and-api-key)：如果你没有的话，请访问此链接创建一个。
-- [Terraform](https://www.terraform.io/downloads.html): 用于在 DigitalOcean 中配置服务器和集群。
+- [Terraform](https://www.terraform.io/downloads.html)：用于在 DigitalOcean 中配置服务器和集群。
 
 
 ## 操作步骤
@@ -40,7 +40,7 @@ weight: 100
 1. 执行 `terraform apply --auto-approve`以初始化环境。然后，等待命令行工具返回以下信息：
 
    ```
-   Apply complete!Resources: 15 added, 0 changed, 0 destroyed.
+   Apply complete! Resources: 15 added, 0 changed, 0 destroyed.
 
    Outputs:
 
@@ -61,6 +61,6 @@ weight: 100
 
 ## 清理环境
 
-1. From the `quickstart/do` folder, execute `terraform destroy --auto-approve`.
+1. 进入`quickstart/do`文件夹，然后执行`terraform destroy --auto-approve`。
 
-2. 等待命令行界面显示完成了资源删除的消息。
+2. 等待命令行界面显示资源已删除的消息。
