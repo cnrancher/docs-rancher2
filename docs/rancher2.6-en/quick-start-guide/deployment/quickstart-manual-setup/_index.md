@@ -25,6 +25,7 @@ This Quick Start Guide is divided into different tasks for easier consumption.
 
 <!-- /TOC -->
 <br/>
+
 ### 1. Provision a Linux Host
 
  Begin creation of a custom cluster by provisioning a Linux host. Your host can be:
@@ -48,9 +49,9 @@ To install Rancher on your host, connect to it and then use a shell to install.
 
 2.  From your shell, enter the following command:
 
-	```
+```
   sudo docker run -d --restart=unless-stopped -p 80:80 -p 443:443 --privileged rancher/rancher
-  ```
+```
 
 **Result:** Rancher is installed.
 
@@ -96,7 +97,7 @@ In this task, you can use the versatile **Custom** option. This option lets you 
 
 11. When you finish running the command on your Linux host, click **Done**.
 
-**Result:** 
+**Result:**
 
 Your cluster is created and assigned a state of **Provisioning**. Rancher is standing up your cluster.
 
