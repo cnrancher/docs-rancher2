@@ -36,7 +36,7 @@ weight: 100
 
 1. 执行 `terraform init`。
 
-2. 执行 `terraform apply --auto-approve`以初始化环境。然后，等待命令行工具返回以下信息：
+2. 执行`terraform apply --auto-approve`以初始化环境。然后，等待命令行工具返回以下信息：
 
    ```
    Apply complete! Resources: 15 added, 0 changed, 0 destroyed.
