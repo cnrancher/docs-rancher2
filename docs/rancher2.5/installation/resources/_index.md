@@ -24,7 +24,7 @@ aliases:
 | 高级选项                                                                                     | 截至版本 |
 | :------------------------------------------------------------------------------------------- | :------- |
 | [自定义 CA 证书](/docs/rancher2.5/installation/resources/custom-ca-root-certificate/_index)  | v2.0.0   |
-| [API 审计日志](/docs/rancher2.5/installation/resources/advanced/api-audit-log/_index)        | v2.0.0   |
+| [API 审计日志](/docs/rancher2.5/installation/resources/advanced/api-audit-log/_index/#开启-api-审计日志)        | v2.0.0   |
 | [TLS 设置](/docs/rancher2.5/installation/resources/tls-settings/_index)                      | v2.1.7   |
 | [etcd 配置](/docs/rancher2.5/installation/resources/advanced/etcd/_index)                    | v2.2.0   |
 | [离线部署 System Charts](/docs/rancher2.5/installation/resources/local-system-charts/_index) | v2.3.0   |

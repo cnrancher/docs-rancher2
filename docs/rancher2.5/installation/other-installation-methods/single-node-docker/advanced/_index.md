@@ -53,7 +53,7 @@ API 审计日志记录通过 Rancher Server 进行的所有用户请求和系统
 
 默认情况下，API 审计日志会写入 rancher 容器内的`/var/log/auditlog`中。您可以设置`AUDIT_LEVEL`以启用日志，并将该目录作为卷共享。
 
-参考[API 审计日志](/docs/rancher2.5/installation/resources/advanced/api-audit-log/_index)获取更多信息。
+参考 [API 审计日志](/docs/rancher2.5/installation/resources/advanced/api-audit-log/_index/#开启-api-审计日志)获取更多信息。
 
 ```
  --restart=unless-stopped \
