@@ -41,7 +41,7 @@ keywords:
 | `antiAffinity`                 | "preferred"                                         | `string` - Rancher Pod 反亲和性规则 - "preferred, required"                                                                                                                                                                                           |
 | `auditLog.destination`         | "sidecar"                                           | `string` - 发送审计日志到 sidecar 容器的 console，或发送到 hostPath 卷 - "sidecar, hostPath"                                                                                                                                                          |
 | `auditLog.hostPath`            | "/var/log/rancher/audit"                            | `string` - 主机上的日志文件目标地址 (仅在 `auditLog.destination` 的值为 `hostPath`时可用)                                                                                                                                                             |
-| `auditLog.level`               | 0                                                   | `int` - 设置[API 审计日志](/docs/rancher2.5/installation/resources/advanced/api-audit-log/_index)等级。0 代表关闭。[0-3]                                                                                                                              |
+| `auditLog.level`               | 0                                                   | `int` - 设置 [API 审计日志](/docs/rancher2.5/installation/resources/advanced/api-audit-log/_index/#开启-api-审计日志)等级。0 代表关闭。[0-3]                                                                                                                              |
 | `auditLog.maxAge`              | 1                                                   | `int` - 保留旧审计日志的最大天数 (仅在 `auditLog.destination` 的值为 `hostPath`时可用)                                                                                                                                                                |
 | `auditLog.maxBackup`           | 1                                                   | `int` - 保留旧审计日志的最大文件个数 (仅在 `auditLog.destination` 的值为 `hostPath`时可用)                                                                                                                                                            |
 | `auditLog.maxSize`             | 100                                                 | `int` - 在审计日志被轮换前的以 M 为单位的最大容量 (仅在 `auditLog.destination` 的值为 `hostPath`时可用)                                                                                                                                               |
@@ -69,7 +69,7 @@ keywords:
 
 ## API 审计日志
 
-启用[API 审计日志](/docs/rancher2.5/installation/api-auditing/_index)。
+启用 [API 审计日志](/docs/rancher2.5/installation/resources/advanced/api-audit-log/_index/#开启-api-审计日志)。
 
 你可以像收集任何容器日志一样收集此日志。为 Rancher Server 集群上的 `System` 项目启用[日志](/docs/rancher2.5/logging/_index)。
 
