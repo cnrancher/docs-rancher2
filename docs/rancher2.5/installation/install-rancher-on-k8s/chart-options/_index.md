@@ -69,9 +69,9 @@ keywords:
 
 ## API 审计日志
 
-启用[API 审计日志]（/docs/rancher2.5/installation/api-auditing/\_index）。
+启用[API 审计日志](/docs/rancher2.5/installation/api-auditing/_index)。
 
-你可以像收集任何容器日志一样收集此日志。为 Rancher Server 集群上的 `System` 项目启用[日志]（/docs/rancher2.5/logging/\_index）。
+你可以像收集任何容器日志一样收集此日志。为 Rancher Server 集群上的 `System` 项目启用[日志](/docs/rancher2.5/logging/_index)。
 
 ```plain
 --set auditLog.level=1
