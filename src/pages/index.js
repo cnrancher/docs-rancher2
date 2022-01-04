@@ -69,6 +69,18 @@ function Home() {
             </header>
             <main>
                 <div className="navigation__grid">
+                <div className="navigation__item">
+                        <div className="navigation__title">
+                            <a href="https://rancher.com/docs/rancher/v2.6/en/">
+                                <h1>Rancher 2.6</h1>
+                            </a>
+                        </div>
+                        <div className="navigation__content">
+                            <p>
+                                Rancher 2.6 中文文档正在努力筹备中，如需查阅 2.6 文档，请移步至 <a href="https://rancher.com/docs/rancher/v2.6/en/">2.6 英文文档</a>
+                            </p>
+                        </div>
+                    </div>
                     <div className="navigation__item">
                         <div className="navigation__title">
                             <a href="/rancher2.5">
