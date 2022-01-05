@@ -19,8 +19,6 @@ keywords:
 
 以下说明将指导您升级使用 Helm 安装在 Kubernetes 集群上的 Rancher 服务器。这些步骤也适用于使用 Helm 进行的离线安装。
 
-有关使用 RancherD 升级安装在 Kubernetes 上的 Rancher 的说明，请参考[本页](/docs/rancher2.5/installation/install-rancher-on-linux/upgrades/_index)
-
 关于安装了 Docker 的 Rancher 的升级说明，请参考[本页](/docs/rancher2/installation/other-installation-methods/single-node-docker/single-node-upgrades/_index)
 
 要升级 Kubernetes 集群中的组件，或者定义[Kubernetes 服务](/docs/rke/config-options/services/_index)或[附加组件](/docs/rke/config-options/add-ons/_index)。参考 Rancher Kubernetes 引擎的[RKE 的升级文档](/docs/rke/upgrades/_index)。
