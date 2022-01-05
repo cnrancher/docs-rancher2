@@ -40,7 +40,7 @@ const metadata = {
                 "为您提供Rancher容器平台的产品介绍、产品架构、推荐架构和Kubernetes基础概念",
             快速入门:
                 "为您提供Rancher容器平台的基本使用方法，通过简易demo教学，帮助您体验Rancher容器平台",
-            安装指南: "为您提供在不同环境中安装Rancher容器平台的操作指导",
+            安装和升级: "为您提供在不同环境中安装Rancher容器平台的操作指导",
             最佳实践: "为您提供Rancher容器平台的部署策略和配置建议",
             备份和恢复指南: "为您提供备份和恢复Rancher容器平台数据的操作指导",
             系统管理员指南:
@@ -488,8 +488,8 @@ const metadata = {
                 "单节点安装",
             "rancher2.5/installation/other-installation-methods/behind-proxy/_index":
                 "HTTP 代理安装",
-            "rancher2.5/installation/install-rancher-on-linux/_index":
-                "Linux安装",
+            "rancher2.5/installation/other-installation-methods/install-rancher-on-linux/_index":
+                "RancherD 安装",
             "rancher2.5/installation/resources/_index":
                 "其他资料及高级配置选项",
             // add best practices here

@@ -1,5 +1,5 @@
 ---
-title: 使用RancherD安装Rancher
+title: 安装指南
 description: RancherD 是一种新的、更简单的安装 Rancher 的方法，这是一个实验性功能。RancherD 是一个二进制文件，它首先启动一个 RKE2 Kubernetes 集群，然后在集群上安装 Rancher 服务器 Helm Chart。
 keywords:
   - rancher
@@ -100,9 +100,9 @@ tls-san:
 
 要指定自己的预共享密钥作为标记，请在启动时设置`token`参数。
 
-以这种方式安装 Rancher 将使用 Rancher 生成的证书。要使用自己的自签名或受信任的证书，请参考[配置指南](/docs/rancher2.5/installation/install-rancher-on-linux/rancherd-configuration/_index)
+以这种方式安装 Rancher 将使用 Rancher 生成的证书。要使用自己的自签名或受信任的证书，请参考[配置指南](/docs/rancher2.5/installation/other-installation-methods/install-rancher-on-linux/rancherd-configuration/_index)
 
-关于自定义 RancherD Helm Chart 值.yaml 的信息，请参考[本节](/docs/rancher2.5/installation/install-rancher-on-linux/rancherd-configuration/_index)
+关于自定义 RancherD Helm Chart 值.yaml 的信息，请参考[本节](/docs/rancher2.5/installation/other-installation-methods/install-rancher-on-linux/rancherd-configuration/_index)
 
 ### 2. 启动第一个服务器节点
 
@@ -223,11 +223,11 @@ systemctl start rancherd-server.service。
 
 ## 升级
 
-有关升级和回滚的信息，请参考[本页。](/docs/rancher2.5/installation/install-rancher-on-linux/upgrades/_index)
+有关升级和回滚的信息，请参考[本页。](/docs/rancher2.5/installation/other-installation-methods/install-rancher-on-linux/upgrades/_index)
 
 ## 配置
 
-有关如何配置证书、节点污点、Rancher Helm Chart 选项或 RancherD CLI 选项的信息，请参考[配置参考](/docs/rancher2.5/installation/install-rancher-on-linux/rancherd-configuration/_index)
+有关如何配置证书、节点污点、Rancher Helm Chart 选项或 RancherD CLI 选项的信息，请参考[配置参考](/docs/rancher2.5/installation/other-installation-methods/install-rancher-on-linux/rancherd-configuration/_index)
 
 ## 卸载
 
