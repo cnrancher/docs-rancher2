@@ -188,5 +188,5 @@ docker run -d --privileged --restart=unless-stopped \
 
 ## 后续步骤
 
-- **推荐：** 查看[单节点备份和还原](/docs/rancher2.5/backups/backup/docker-backups/_index)。尽管您现在没有任何数据需要备份，但是我们建议您在常规使用 Rancher 之后创建备份。
+- **推荐：** 查看[单节点备份和还原](/docs/rancher2.5/backups/docker-installs/_index)。尽管您现在没有任何数据需要备份，但是我们建议您在常规使用 Rancher 之后创建备份。
 - 创建 Kubernetes 集群：[创建 Kubernetes 集群](/docs/rancher2.5/cluster-provisioning/_index)。

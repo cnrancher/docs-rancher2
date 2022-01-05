@@ -1009,7 +1009,7 @@ module.exports = {
                 ],
             },
         ],
-        安装指南: [
+        安装和升级: [
             "rancher2.5/installation/_index",
 
             {
@@ -1039,16 +1039,6 @@ module.exports = {
                     "rancher2.5/installation/install-rancher-on-k8s/amazon-eks/_index",
                     "rancher2.5/installation/install-rancher-on-k8s/aks/_index",
                     "rancher2.5/installation/install-rancher-on-k8s/gke/_index",
-                ],
-            },
-            {
-                type: "category",
-                label: "在Linux操作系统上安装Rancher",
-                items: [
-                    "rancher2.5/installation/install-rancher-on-linux/_index",
-                    "rancher2.5/installation/install-rancher-on-linux/rancherd-configuration/_index",
-                    "rancher2.5/installation/install-rancher-on-linux/upgrades/_index",
-                    "rancher2.5/installation/install-rancher-on-linux/rollbacks/_index",
                 ],
             },
             {
@@ -1085,6 +1075,16 @@ module.exports = {
                             "rancher2.5/installation/other-installation-methods/single-node-docker/proxy/_index",
                             "rancher2.5/installation/other-installation-methods/single-node-docker/single-node-upgrades/_index",
                             "rancher2.5/installation/other-installation-methods/single-node-docker/single-node-rollbacks/_index",
+                        ],
+                    },
+                    {
+                        type: "category",
+                        label: "使用 RancherD 安装/升级 Rancher",
+                        items: [
+                            "rancher2.5/installation/other-installation-methods/install-rancher-on-linux/_index",
+                            "rancher2.5/installation/other-installation-methods/install-rancher-on-linux/rancherd-configuration/_index",
+                            "rancher2.5/installation/other-installation-methods/install-rancher-on-linux/upgrades/_index",
+                            "rancher2.5/installation/other-installation-methods/install-rancher-on-linux/rollbacks/_index",
                         ],
                     },
                     {
