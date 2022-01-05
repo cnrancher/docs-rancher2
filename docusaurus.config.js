@@ -99,7 +99,7 @@ module.exports = {
         stable: "版本说明 - v2.5.11",
         baseCommit: "2c5dbef2fc64e815d7c4e2a3339c644dfb65f849 - Nov 10, 2021",
         k3sBaseCommit:
-            "51bf01b4899f3309d2675cf2f1eeb923d364751a - Nov 8, 2021",
+            "cd9ed7b74cc8111fecb05d2950c6948a83a6a595 - Jan 6, 2022",
         rke2Commit: "303646bf7e37ef976c1006d574fffbecc91ea921 - Nov 9, 2021",
     },
     plugins: ["@docusaurus/plugin-baidu-analytics"],

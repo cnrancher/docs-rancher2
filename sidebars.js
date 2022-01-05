@@ -1948,6 +1948,7 @@ module.exports = {
         高级选项和配置: ["k3s/advanced/_index"],
         常见问题: ["k3s/faq/_index"],
         安全: [
+            "k3s/security/secrets_encryption/_index",
             "k3s/security/hardening-guide/_index",
             "k3s/security/self-assessment/_index",
         ],

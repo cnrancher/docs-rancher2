@@ -21,7 +21,6 @@ keywords:
 - [使用 Docker 作为容器运行时](#使用-docker-作为容器运行时)
 - [使用 etcdctl](#使用-etcdctl)
 - [配置 containerd](#配置-containerd)
-- [Secrets 加密配置 (实验)](#secrets-加密配置-实验)
 - [使用 Rootless 运行 K3s (实验)](#使用-rootless-运行-k3s-实验)
 - [节点标签和污点](#节点标签和污点)
 - [使用安装脚本启动 server 节点](#使用安装脚本启动-server-节点)
@@ -33,6 +32,7 @@ keywords:
 - [Red Hat 和 CentOS 的额外准备](#red-hat-和-centos-的额外准备)
 - [启用 eStargz 的延迟拉取（实验性）](#启用-estargz-的延迟拉取（实验性）)
 - [其他日志源](#additional-logging-sources)
+- [Server 和 agent tokens](#server-和-agent-token)
 
 ## 证书轮换
 
@@ -144,8 +144,8 @@ etcdctl 为 etcd 提供了一个 CLI。
 
 ```
 $ VERSION="v3.5.0"
-$ curl -L https://github.com/etcd-io/etcd/releases/download/${VERSION}/etcd-${VERSION}-linux-amd64.tar.gz --output etcdctl-${VERSION}-linux-amd64.tar.gz
-$ sudo tar -zxvf etcdctl-${VERSION}-linux-amd64.tar.gz -C /usr/local/bin
+$ curl -L https://github.com/etcd-io/etcd/releases/download/${VERSION}/etcd-${VERSION}-linux-amd64.tar.gz --output etcdctl-linux-amd64.tar.gz
+$ sudo tar -zxvf etcdctl-linux-amd64.tar.gz --strip-components=1 -C /usr/local/bin etcd-${VERSION}-linux-amd64/etcdctl
 ```
 
 然后开始使用带有适当 K3s 标志的 etcdctl 命令：
@@ -161,46 +161,6 @@ K3s 将会在`/var/lib/rancher/k3s/agent/etc/containerd/config.toml`中为 conta
 如果要对这个文件进行高级定制，你可以在同一目录中创建另一个名为 `config.toml.tmpl` 的文件，此文件将会代替默认设置。
 
 `config.toml.tmpl`将被视为 Go 模板文件，并且`config.Node`结构被传递给模板。[此模板](https://github.com/rancher/k3s/blob/master/pkg/agent/templates/templates.go#L16-L32)示例介绍了如何使用结构来自定义配置文件。
-
-## Secrets 加密配置 (实验)
-
-从 v1.17.4+k3s1 开始，K3s 增加了一个实验性的功能，就是通过在 server 上传递标志`--secrets-encryption`来实现 secrets 加密，这个标志会自动进行以下操作：
-
-- 生成 AES-CBC 密钥
-- 用生成的密钥生成一个加密配置文件
-
-```
-{
-  "kind": "EncryptionConfiguration",
-  "apiVersion": "apiserver.config.k8s.io/v1",
-  "resources": [
-    {
-      "resources": [
-        "secrets"
-      ],
-      "providers": [
-        {
-          "aescbc": {
-            "keys": [
-              {
-                "name": "aescbckey",
-                "secret": "xxxxxxxxxxxxxxxxxxx"
-              }
-            ]
-          }
-        },
-        {
-          "identity": {}
-        }
-      ]
-    }
-  ]
-}
-```
-
-- 将配置作为 encryption-provider-config 传递给 KubeAPI
-
-一旦启用，任何创建的 secrets 都将用这个密钥加密。请注意，如果您禁用加密，那么任何加密后的 secrets 将无法读取，直到您再次启用加密。
 
 ## 使用 Rootless 运行 K3s (实验)
 
@@ -498,3 +458,13 @@ helm repo update
 helm install --create-namespace -n cattle-logging-system rancher-logging-crd rancher-charts/rancher-logging-crd
 helm install --create-namespace -n cattle-logging-system rancher-logging --set additionalLoggingSources.k3s.enabled=true rancher-charts/rancher-logging
 ```
+
+## Server 和 agent token
+
+在 K3s 中，有两种类型的 token：K3S_TOKEN 和 K3S_AGENT_TOKEN。
+
+K3S_TOKEN：定义了 server 提供 HTTP 配置资源所需的密钥。其他 server 在加入 K3s HA 集群之前会请求这些资源。如果没有定义 K3S_AGENT_TOKEN，agent 也使用这个 token 来访问加入集群所需的 HTTP 资源。请注意，这个 token 还用于为数据库中的重要内容（例如引导数据）生成加密密钥。
+
+K3S_AGENT_TOKEN（可选）：定义了 server 向 agent 提供 HTTP 配置资源所需的密钥。如果没有定义，agent 将需要 K3S_TOKEN。推荐使用 K3S_AGENT_TOKEN 避免 agent 节点必须知道 K3S_TOKEN，它也用于加密数据。
+
+如果没有定义 K3S_TOKEN，第一个 K3s server 将生成一个随机的 K3S_TOKEN。其结果是 `/var/lib/rancher/k3s/server/token` 中的部分内容。例如，`K1070878408e06a827960208f84ed18b65fa10f27864e71a57d9e053c4caff8504b::server:df54383b5659b9280aa1e73e60ef78fc`，其中 `df54383b5659b9280aa1e73e60ef78fc` 是 K3S_TOKEN。

@@ -17,6 +17,8 @@ keywords:
 
 ## 概述
 
+你可以使用两种不同的方法在离线环境中安装 K3s。离线环境是不直接连接到 Internet 的任何环境。你可以部署一个私有镜像仓库，或者你可以手动部署镜像，比如用于小型集群。
+
 离线安装的过程主要分为以下两个步骤：
 
 **步骤 1**：部署镜像，本文提供了两种部署方式，分别是**部署私有镜像仓库**和**手动部署镜像**。请在这两种方式中选择一种执行。
@@ -66,35 +68,43 @@ keywords:
 
 ### 前提条件
 
-只有在完成上述[部署私有镜像仓库](#部署私有镜像仓库)或[手动部署镜像](#手手动部署镜像)后，才能安装 K3s。
+- 在安装 K3s 之前，完成上面的[部署私有镜像仓库](#部署私有镜像仓库)或[手动部署镜像](#手动部署镜像)，导入安装 K3s 所需要的镜像。
+- 从 [release](https://github.com/rancher/k3s/releases) 页面下载 K3s 二进制文件，K3s 二进制文件需要与离线镜像的版本匹配。将二进制文件放在每个离线节点的 `/usr/local/bin` 中，并确保这个二进制文件是可执行的。
+- 下载 K3s 安装脚本：https://get.k3s.io 。将安装脚本放在每个离线节点的任意地方，并命名为 `install.sh`。
 
-### 操作步骤
+当使用 `INSTALL_K3S_SKIP_DOWNLOAD` 环境变量运行 K3s 脚本时，K3s 将使用本地的脚本和二进制。
 
-1. 从[K3s GitHub Release](https://github.com/rancher/k3s/releases)页面获取 K3s 二进制文件，K3s 二进制文件需要与离线镜像的版本匹配。
-
-1. 获取 K3s 安装脚本：https://get.k3s.io 。
-
-1. 将二进制文件放在每个节点的`/usr/local/bin`中，并确保拥有可执行权限。将安装脚本放在每个节点的任意位置，并将其命名为`install.sh`。
-
-### 安装选项
+### 在离线环境中安装 K3s
 
 您可以在离线环境中执行单节点安装，在一个 server（节点）上安装 K3s，或高可用安装，在多个 server（节点）上安装 K3s。
 
-#### 单节点安装
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-1. 在 server 节点上运行以下命令：
+<Tabs
+defaultValue="single"
+values={[
+{ label: '单节点安装', value: 'single', },
+{ label: '高可用安装', value: 'ha', },
+]}>
 
-   ```
-   INSTALL_K3S_SKIP_DOWNLOAD=true ./install.sh
-   ```
+<TabItem value="single">
 
-2. 然后，要选择添加其他 agent，请在每个 agent 节点上执行以下操作。注意将 `myserver` 替换为 server 的 IP 或有效的 DNS，并将 `mynodetoken` 替换 server 节点的 token，通常在`/var/lib/rancher/k3s/server/node-token`。
+要在单个服务器上安装 K3s，只需在 server 节点上执行以下操作：
 
-   ```
-   INSTALL_K3S_SKIP_DOWNLOAD=true K3S_URL=https://myserver:6443 K3S_TOKEN=mynodetoken ./install.sh
-   ```
+```
+INSTALL_K3S_SKIP_DOWNLOAD=true ./install.sh
+```
 
-#### 高可用安装
+然后，要选择添加其他 agent，请在每个 agent 节点上执行以下操作。注意将 `myserver` 替换为 server 的 IP 或有效的 DNS，并将 `mynodetoken` 替换 server 节点的 token，通常在`/var/lib/rancher/k3s/server/node-token`。
+
+```
+INSTALL_K3S_SKIP_DOWNLOAD=true K3S_URL=https://myserver:6443 K3S_TOKEN=mynodetoken ./install.sh
+```
+
+</TabItem>
+
+<TabItem value="ha">
 
 您需要调整安装命令，以便指定`INSTALL_K3S_SKIP_DOWNLOAD=true`并在本地运行安装脚本。您还将利用`INSTALL_K3S_EXEC='args'`为 k3s 提供其他参数。
 
@@ -102,14 +112,18 @@ keywords:
 
 ```
 curl -sfL https://get.k3s.io | sh -s - server \
-  --datastore-endpoint="mysql://username:password@tcp(hostname:3306)/database-name"
+  --datastore-endpoint='mysql://username:password@tcp(hostname:3306)/database-name'
 ```
 
 由于在离线环境中无法使用`curl`命令进行安装，所以您需要参考以下示例，将这条命令行修改为离线安装：
 
 ```
-INSTALL_K3S_SKIP_DOWNLOAD=true INSTALL_K3S_EXEC='server --datastore-endpoint=mysql://username:password@tcp(hostname:3306)/database-name' ./install.sh
+INSTALL_K3S_SKIP_DOWNLOAD=true INSTALL_K3S_EXEC='server' K3S_DATASTORE_ENDPOINT='mysql://username:password@tcp(hostname:3306)/database-name' ./install.sh
 ```
+
+</TabItem>
+
+</Tabs>
 
 :::note 注意
 K3s 还为 kubelets 提供了一个`--resolv-conf`标志，这可能有助于在离线网络中配置 DNS。
