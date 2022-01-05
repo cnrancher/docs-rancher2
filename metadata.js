@@ -788,6 +788,7 @@ const metadata = {
             "k3s/networking/_index": "网络",
             "k3s/helm/_index": "Helm",
             "k3s/advanced/_index": "高级选项和配置",
+            "k3s/security/secrets_encryption/_index": "Secret 加密",
             "k3s/security/hardening-guide/_index": "安全加固指南",
             "k3s/security/self-assessment/_index": "自测指南",
             "k3s/faq/_index": "常见问题",

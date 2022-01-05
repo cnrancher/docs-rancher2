@@ -63,6 +63,8 @@ K3s server 需要 6443 端口才能被所有节点访问。
 节点上的 VXLAN 端口不应公开暴露，因为它公开了集群网络，任何人都可以访问它。应在禁止访问端口 8472 的防火墙/安全组后面运行节点。
 :::
 
+> **警告：** Flannel 依靠 [Bridge CNI plugin](https://www.cni.dev/plugins/current/main/bridge/) 来创建一个可以交换流量的 L2 网络。具有 NET_RAW 功能的 Rogue pod 可以滥用该 L2 网络来发动攻击，如 [ARP 欺骗](https://static.sched.com/hosted_files/kccncna19/72/ARP%20DNS%20spoof.pdf)。因此，正如 [kubernetes 文档](https://kubernetes.io/docs/concepts/security/pod-security-standards/)中记载的那样，请设置一个受限配置文件，在不可信任的 pod 上禁用 NET_RAW。
+
 K3s Server 节点的入站规则如下：
 
 | 协议 | 端口      | 源                       | 描述                         |

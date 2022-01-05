@@ -53,7 +53,7 @@ Traefik ingress controller 将使用主机上的 80 和 443 端口（即这些�
 
 ## Service Load Balancer
 
-在你的 Kubernetes 集群中可以使用 service load balancer（LB）。K3s 提供了一个名为[Klipper Load Balancer](https://github.com/rancher/klipper-lb)的负载均衡器，它可以使用可用的主机端口。
+在你的 Kubernetes 集群中可以使用 service load balancer（LB）。K3s 提供了一个名为[Klipper Load Balancer](https://github.com/k3s-io/klipper-lb)的负载均衡器，它可以使用可用的主机端口。
 
 上游 Kubernetes 允许创建 LoadBalancer 类型的 Service，但不包括 LB 的实现。某些 LB 服务需要云提供商，例如 Amazon EC2 或 Microsoft Azure。相比之下，K3s service LB 使得可以在没有云提供商的情况下使用 LB 服务。
 

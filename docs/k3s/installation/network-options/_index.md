@@ -57,6 +57,8 @@ cat /etc/cni/net.d/10-canal.conflist
 
 ##### Dual-stack 安装
 
+首次创建集群时必须配置 dual-stack 组网。它不能在现有的 single-stack 集群上启用。
+
 要在 k3s 中启用 dual-stack，你必须提供有效的 dual-stack `cluster-cidr`和`service-cidr`，并在所有 server 节点上设置`disable-network-policy`。Server 和 Agent 都必须提供有效的 dual-stack `node-ip`设置。当使用默认的 flannel CNI 时，在 dual-stack 集群上不支持节点地址自动检测和网络策略。此外，目前只支持 vxlan 后端。这是一个有效配置的例子:
 
 ```

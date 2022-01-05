@@ -22,18 +22,24 @@ keywords:
 嵌入式 etcd (HA) 在速度较慢的磁盘上可能会出现性能问题，例如使用 SD 卡运行的 Raspberry Pi。
 :::
 
-要在这种模式下运行 K3s，你必须有奇数的服务器节点。我们建议从三个节点开始。
+要在这种模式下运行 K3s，你必须有奇数的 server 节点。我们建议从三个节点开始。
 
-要开始运行，首先启动一个服务器节点，使用`cluster-init`标志来启用集群，并使用一个标记作为共享的密钥来加入其他服务器到集群中。
+要开始运行，首先启动一个 server 节点，使用`cluster-init`标志来启用集群，并使用一个标记作为共享的密钥来加入其他服务器到集群中。
 
 ```
 K3S_TOKEN=SECRET k3s server --cluster-init
 ```
 
-启动第一台服务器后，使用共享密钥将第二台和第三台服务器加入集群。
+启动第一台 server 后，使用共享密钥将第二台和第三台 server 加入集群。
 
 ```
 K3S_TOKEN=SECRET k3s server --server https://<ip or hostname of server1>:6443
 ```
 
-现在你有了一个高可用的 control-plane。将额外的工作节点加入到集群中，步骤与单个服务器集群相同。
+现在你有了一个高可用的 control-plane。将额外的工作节点加入到集群中，步骤与单个 server 集群相同。
+
+有几个配置标志在所有 server 节点中必须是相同的：
+
+- 与网络有关的标志：`--cluster-dns`, `--cluster-domain`, `--cluster-cidr`, `--service-cidr`
+- 控制某些组件的部署的标志：`--disable-helm-controller`, `--disable-kube-proxy`, `--disable-network-policy`和任何传递给`--disable`的组件
+- 与功能相关的标志：`--secrets-encryption`
