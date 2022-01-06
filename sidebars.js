@@ -2160,6 +2160,7 @@ module.exports = {
             "rke2/upgrade/automated_upgrade/_index",
         ],
         安全: [
+            "rke2/security/about_hardened_images/_index",
             "rke2/security/hardening_guide/_index",
             "rke2/security/cis_self_assessment15/_index",
             "rke2/security/cis_self_assessment16/_index",

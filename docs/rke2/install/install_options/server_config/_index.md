@@ -45,6 +45,7 @@ OPTIONS:
    --write-kubeconfig value, -o value     (client) 将管理客户端的kubeconfig写入此文件中 [$RKE2_KUBECONFIG_OUTPUT]
    --write-kubeconfig-mode value          (client) kubeconfig 的模式 [$RKE2_KUBECONFIG_MODE]
    --kube-apiserver-arg value             (flags) 为kube-apiserver进程设置参数
+   --etcd-arg value                       (flags) 为etcd进程设置参数
    --kube-scheduler-arg value             (flags) 为kube-scheduler进程设置参数
    --kube-controller-manager-arg value    (flags) 为kube-controller-manager进程设置参数
    --etcd-expose-metrics                  (db) 将etcd指标暴露给客户端接口. (默认 false)
