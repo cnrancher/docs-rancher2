@@ -43,7 +43,7 @@ Rancher 可以安装在任何 Kubernetes 集群上。这个集群可以使用上
 
 如果你需要获取在 EKS 上部署 Ingress 示例，请参见[此处]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/amazon-eks/#5-install-an-ingress)。
 
-# Helm Chart 安装 Rancher
+# 安装 Rancher Helm Chart
 
 Rancher 是使用 Kubernetes 的 [Helm](https://helm.sh/) 包管理器安装的。Helm Chart 为 Kubernetes YAML 清单文件提供了模板语法。通过 Helm，用户可以创建可配置的 deployment，而不仅仅只能使用静态文件。
 
