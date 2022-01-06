@@ -1,5 +1,5 @@
 ---
-title: Deploying Rancher Server
+title: 部署 Rancher Server
 weight: 100
 ---
 

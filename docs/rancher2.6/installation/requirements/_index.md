@@ -1,6 +1,6 @@
 ---
-title: Installation Requirements
-description: Learn the node requirements for each node running Rancher server when you’re configuring  Rancher to run either in a Docker or Kubernetes setup
+title: 安装要求
+description: 如果 Rancher 配置在 Docker 或 Kubernetes 中运行时，了解运行 Rancher Server 的每个节点的节点要求
 weight: 1
 ---
 
@@ -82,7 +82,7 @@ Rancher 需要安装在支持的 Kubernetes 版本上。如需了解你使用的
 
 RKE2 安装不需要 Docker。
 
-Ingress 需要部署为 DaemonSet 以确保负载均衡能成功把流量转发到各个节点。目前，RKE2 默认将 nginx-ingress 部署为 Deployment，因此你需要按照[这些步骤]({{<baseurl>}}/rancher/v2.6/en/installation/resources/k8s-tutorials/ha-rke2/#5-configure-nginx-to-be-a-daemonset)将其部署为 DaemonSet。
+Ingress 需要部署为 DaemonSet 以确保负载均衡器能成功把流量转发到各个节点。目前，RKE2 默认将 nginx-ingress 部署为 Deployment，因此你需要按照[这些步骤]({{<baseurl>}}/rancher/v2.6/en/installation/resources/k8s-tutorials/ha-rke2/#5-configure-nginx-to-be-a-daemonset)将其部署为 DaemonSet。
 
 ### 安装 Docker
 
@@ -149,7 +149,7 @@ Docker 是 Helm Chart 安装所必须的。你可以参见 [Docker 官方文档]
 
 安装 Rancher 的 Kubernetes 集群中的每个节点都应该运行一个 Ingress。
 
-Ingress 需要部署为 DaemonSet 以确保负载均衡能成功把流量转发到各个节点。
+Ingress 需要部署为 DaemonSet 以确保负载均衡器能成功把流量转发到各个节点。
 
 如果是 RKE 和 K3s 安装，你不需要手动安装 Ingress，因为它是默认安装的。
 

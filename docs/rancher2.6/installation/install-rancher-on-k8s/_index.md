@@ -1,6 +1,6 @@
 ---
-title: Install/Upgrade Rancher on a Kubernetes Cluster
-description: Learn how to install Rancher in development and production environments. Read about single node and high availability installation
+title: 在 Kubernetes 集群上安装/升级 Rancher
+description: 了解如何在开发和生产环境中安装 Rancher。了解单节点和高可用安装
 weight: 2
 ---
 
@@ -60,7 +60,7 @@ Rancher 是使用 Kubernetes 的 [Helm](https://helm.sh/) 包管理器安装的�
 1. [添加 Helm Chart 仓库](#1-add-the-helm-chart-repository)
 2. [为 Rancher 创建命名空间](#2-create-a-namespace-for-rancher)
 3. [选择 SSL 配置](#3-choose-your-ssl-configuration)
-4. [安装 cert-manager](#4-install-cert-manager)（除非你自带证书，否则 TLS 将在负载均衡上终止）
+4. [安装 cert-manager](#4-install-cert-manager)（除非你自带证书，否则 TLS 将在负载均衡器上终止）
 5. [使用 Helm 和你选择的证书选项安装 Rancher](#5-install-rancher-with-helm-and-your-chosen-certificate-option)
 6. [验证 Rancher server 是否部署成功](#6-verify-that-the-rancher-server-is-successfully-deployed)
 7. [保存你的选择](#7-save-your-options)
@@ -87,12 +87,12 @@ kubectl create namespace cattle-system
 
 Rancher management server 默认需要 SSL/TLS 配置来保证访问的安全性。
 
-> **注意**：如果你想在外部终止 SSL/TLS，请参见[外部负载均衡的 TLS 终止]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#external-tls-termination)。
+> **注意**：如果你想在外部终止 SSL/TLS，请参见[外部负载均衡器的 TLS 终止]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#external-tls-termination)。
 
 你可以从以下三种证书来源中选择一种，用于在 Rancher Server 中终止 TLS：
 
 - **Rancher 生成的 TLS 证书**：要求你在集群中安装 `cert-manager`。Rancher 使用 `cert-manager` 签发并维护证书。Rancher 会生成自己的 CA 证书，并使用该 CA 签署证书。然后 `cert-manager`负责管理该证书。
-- **Let's Encrypt**：Let's Encrypt 选项也需要使用 `cert-manager`。但是，在这种情况下，cert-manager 与 Let's Encrypt 的特殊颁发者相结合，该颁发者执行获取 Let's Encrypt 颁发的证书所需的所有操作（包括请求和验证）。此配置使用 HTTP 验证（`HTTP-01`），因此负载均衡必须具有可以从互联网访问的公共 DNS 记录。
+- **Let's Encrypt**：Let's Encrypt 选项也需要使用 `cert-manager`。但是，在这种情况下，cert-manager 与 Let's Encrypt 的特殊颁发者相结合，该颁发者执行获取 Let's Encrypt 颁发的证书所需的所有操作（包括请求和验证）。此配置使用 HTTP 验证（`HTTP-01`），因此负载均衡器必须具有可以从互联网访问的公共 DNS 记录。
 - **你已有的证书**：使用已有的 CA 颁发的公有或私有证书。Rancher 将使用该证书来保护 WebSocket 和 HTTPS 流量。在这种情况下，你必须上传名称分别为 `tls.crt` 和 `tls.key`的 PEM 格式的证书以及相关的密钥。如果你使用私有 CA，则还必须上传该 CA 证书。这是由于你的节点可能不信任此私有 CA。Rancher 将获取该 CA 证书，并从中生成一个校验和，各种 Rancher 组件将使用该校验和来验证其与 Rancher 的连接。
 
 
@@ -104,7 +104,7 @@ Rancher management server 默认需要 SSL/TLS 配置来保证访问的安全性
 
 ### 4. 安装 cert-manager
 
-> 如果你使用自己的证书文件（`ingress.tls.source=secret`）或使用[外部负载均衡的 TLS 终止]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#external-tls-termination)，你可以跳过此步骤。
+> 如果你使用自己的证书文件（`ingress.tls.source=secret`）或使用[外部负载均衡器的 TLS 终止]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#external-tls-termination)，你可以跳过此步骤。
 
 仅在使用 Rancher 生成的证书（`ingress.tls.source=rancher`）或 Let's Encrypt 颁发的证书（`ingress.tls.source=letsEncrypt`）时，才需要安装 cert-manager。
 
@@ -156,7 +156,7 @@ cert-manager-webhook-787858fcdb-nlzsq      1/1     Running   0          2m
 
 由于 `rancher` 是 `ingress.tls.source` 的默认选项，因此在执行 `helm install` 命令时，我们不需要指定 `ingress.tls.source`。
 
-- 将 `hostname` 设置为解析到你的负载均衡的 DNS 名称。
+- 将 `hostname` 设置为解析到你的负载均衡器的 DNS 名称。
 - 将 `bootstrapPassword` 设置为`admin` 用户独有的值。
 - 如果你安装的是 alpha 版本，Helm 要求你在命令中添加 `--devel` 选项。
 - 如果你需要安装指定的 Rancher 版本，使用 `--version` 标志，例如 `--version 2.3.6`。
@@ -251,7 +251,7 @@ Rancher Chart 有许多选项，用于为你的具体环境自定义安装。以
 
 - [HTTP 代理]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#http-proxy)
 - [私有容器镜像仓库]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#private-registry-and-air-gap-installs)
-- [外部负载均衡上的 TLS 终止]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#external-tls-termination)
+- [外部负载均衡器上的 TLS 终止]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#external-tls-termination)
 
 如需获取完整的选项列表，请参见 [Chart 选项]({{<baseurl>}}/rancher/v2.6/en/installation/resources/chart-options/)。
 
@@ -284,6 +284,6 @@ rancher   3         3         3            3           3m
 
 安装已完成。现在 Rancher server 应该已经可以正常运行了。
 
-使用浏览器打开把流量转发到你的负载均衡的 DNS 域名。然后，你就会看到一个漂亮的登录页面了。
+使用浏览器打开把流量转发到你的负载均衡器的 DNS 域名。然后，你就会看到一个漂亮的登录页面了。
 
 如果在安装过程中遇到任何问题，请参见[故障排查]({{<baseurl>}}/rancher/v2.6/en/installation/resources/troubleshooting/)。

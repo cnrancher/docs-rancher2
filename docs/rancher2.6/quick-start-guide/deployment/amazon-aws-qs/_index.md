@@ -1,6 +1,6 @@
 ---
-title: Rancher AWS Quick Start Guide
-description: Read this step by step Rancher AWS guide to quickly deploy a Rancher Server with a single node cluster attached.
+title: Rancher AWS 快速入门指南
+description: 阅读此分步 Rancher AWS 指南，以快速部署带有单节点集群的 Rancher Server。
 weight: 100
 ---
 你可以参考以下步骤，在 AWS 上快速部署 Rancher server，并附加一个单节点集群。

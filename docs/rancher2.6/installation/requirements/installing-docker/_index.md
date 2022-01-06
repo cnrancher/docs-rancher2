@@ -1,5 +1,5 @@
 ---
-title: Installing Docker
+title: 安装 Docker
 weight: 1
 ---
 

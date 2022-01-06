@@ -1,6 +1,6 @@
 ---
-title: Installing/Upgrading Rancher
-description: Learn how to install Rancher in development and production environments. Read about single node and high availability installation
+title: 安装/升级 Rancher
+description: 了解如何在开发和生产环境中安装 Rancher。了解单节点和高可用安装
 weight: 3
 ---
 
@@ -59,7 +59,7 @@ Rancher backup operator 可将 Rancher 从单个 Docker 容器迁移到高可用
 
 [在 Kubernetes 上安装 Rancher 的说明]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s)介绍了如何首先使用 K3s 或 RKE 创建和管理 Kubernetes 集群，然后再将 Rancher 安装到该集群上。
 
-如果 Kubernetes 集群中的节点正在运行且满足[节点要求]({{<baseurl>}}/rancher/v2.6/en/installation/requirements)，你可以使用 Helm 将 Rancher 部署到 Kubernetes 上。Helm 使用 Rancher 的 Helm Chart 在 Kubernetes 集群的每个节点上安装 Rancher 的副本。我们建议使用负载均衡将流量定向到集群中的每个 Rancher 副本上。
+如果 Kubernetes 集群中的节点正在运行且满足[节点要求]({{<baseurl>}}/rancher/v2.6/en/installation/requirements)，你可以使用 Helm 将 Rancher 部署到 Kubernetes 上。Helm 使用 Rancher 的 Helm Chart 在 Kubernetes 集群的每个节点上安装 Rancher 的副本。我们建议使用负载均衡器将流量定向到集群中的每个 Rancher 副本上。
 
 如需进一步了解 Rancher 架构，请参见[架构概述]({{<baseurl>}}/rancher/v2.6/en/overview/architecture)，[生产级别架构推荐]({{<baseurl>}}/rancher/v2.6/en/overview/architecture-recommendations)或[最佳实践指南]({{<baseurl>}}/rancher/v2.6/en/best-practices/rancher-server/deployment-types)。
 
@@ -77,7 +77,7 @@ Rancher backup operator 可将 Rancher 从单个 Docker 容器迁移到高可用
 参见 [Helm Chart 选项]({{<baseurl>}}/rancher/v2.6/en/installation/resources/chart-options/)以了解在 Kubernetes 集群上安装 Rancher 的其他配置，包括：
 
 - [开启 API 审计日志]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#api-audit-log)
-- [负载均衡上的 TLS 终止]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#external-tls-termination)
+- [负载均衡器上的 TLS 终止]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#external-tls-termination)
 - [自定义 Ingress]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#customizing-your-ingress)
 
 在 Rancher 的安装指南中，我们推荐使用 K3s 或 RKE 来配置 Kubernetes 集群，然后再在这个集群中安装 Rancher。K3s 和 RKE 均提供许多配置选项，用于为你的具体环境自定义 Kubernetes 集群。有关选项和功能的完整列表，请参见：
@@ -90,5 +90,5 @@ Rancher backup operator 可将 Rancher 从单个 Docker 容器迁移到高可用
 参见 [Docker 安装选项]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/single-node-docker)，以了解其他配置，包括：
 
 - [开启 API 审计日志]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/single-node-docker/advanced/#api-audit-log)
-- [外部负载均衡]({{<baseurl>}}/rancher/v2.6/en/installation/resources/advanced/single-node-install-external-lb/)
+- [外部负载均衡器]({{<baseurl>}}/rancher/v2.6/en/installation/resources/advanced/single-node-install-external-lb/)
 - [持久化数据存储]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/single-node-docker/advanced/#persistent-data)

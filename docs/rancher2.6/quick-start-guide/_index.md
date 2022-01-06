@@ -1,7 +1,7 @@
 ---
-title: Rancher Deployment Quick Start Guides
-metaDescription: Use this section to jump start your Rancher deployment and testing. It contains instructions for a simple Rancher setup and some common use cases.
-short title: Use this section to jump start your Rancher deployment and testing. It contains instructions for a simple Rancher setup and some common use cases.
+title: Rancher 部署快速入门指南
+metaDescription: 快速开始 Rancher 部署和测试。本章节包含 Rancher 的简单设置和一些常见用例的说明。
+short title: 快速开始 Rancher 部署和测试。本章节包含 Rancher 的简单设置和一些常见用例的说明。
 weight: 2
 ---
 > **注意**：本章节中提供的指南，旨在帮助你快速启动一个用于 Rancher 的沙盒，以评估 Rancher 是否能满足你的使用需求。快速入门指南不适用于生产环境。如果你需要获取生产环境的操作知道，请参见[安装]({{<baseurl>}}/rancher/v2.6/en/installation/)。

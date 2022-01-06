@@ -1,6 +1,6 @@
 ---
 title: "Rancher 2.6"
-shortTitle: "Rancher 2.6  (最新)"
+shortTitle: "Rancher 2.6（最新）"
 description: "Rancher 在 Kubernetes 之上添加了新的功能，让你一站式管理上百个集群，统一 RBAC，开启监控和告警。了解更多。"
 metaTitle: "Rancher 2.x 文档: 了解新功能"
 metaDescription: "Rancher 2 在 Kubernetes 之上添加了新的功能，让你一站式管理上百个集群，统一 RBAC，开启监控和告警。了解更多。"

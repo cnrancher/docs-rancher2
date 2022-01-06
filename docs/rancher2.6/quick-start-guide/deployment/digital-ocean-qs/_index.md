@@ -1,6 +1,6 @@
 ---
-title: Rancher DigitalOcean Quick Start Guide
-description: Read this step by step Rancher DigitalOcean guide to quickly deploy a Rancher Server with a single node cluster attached.
+title: Rancher DigitalOcean 快速入门指南
+description: 阅读此分步 Rancher DigitalOcean 指南，以快速部署带有单节点集群的 Rancher Server。
 weight: 100
 ---
 你可以参考以下步骤，在 DigitalOcean 上快速部署 Rancher server，并附加一个单节点集群。
