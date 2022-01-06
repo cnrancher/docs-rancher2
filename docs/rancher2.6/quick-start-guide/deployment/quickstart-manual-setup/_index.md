@@ -1,5 +1,5 @@
 ---
-title: Manual Quick Start
+title: 快速入门
 weight: 300
 ---
 你好！本章节将引导你：
@@ -25,7 +25,6 @@ weight: 300
 
 <!-- /TOC -->
 <br/>
-
 ### 1. 配置 Linux 主机
 
 你可以通过配置 Linux 主机，来创建自定义集群。你的主机可以是：

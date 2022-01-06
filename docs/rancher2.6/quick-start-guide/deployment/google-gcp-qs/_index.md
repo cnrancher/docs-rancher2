@@ -1,6 +1,6 @@
 ---
-title: Rancher GCP Quick Start Guide
-description: Read this step by step Rancher GCP guide to quickly deploy a Rancher Server with a single node cluster attached.
+title: Rancher GCP 快速入门指南
+description: 阅读此分步 Rancher GCP 指南，以快速部署带有单节点集群的 Rancher Server。
 weight: 100
 ---
 你可以参考以下步骤，在 GCP 的单节点 RKE Kubernetes 集群中快速部署 Rancher server，并附加一个单节点下游 Kubernetes 集群。
@@ -42,9 +42,9 @@ weight: 100
 
    ```
    Apply complete! Resources: 16 added, 0 changed, 0 destroyed.
-
+   
    Outputs:
-
+   
    rancher_node_ip = xx.xx.xx.xx
    rancher_server_url = https://rancher.xx.xx.xx.xx.xip.io
    workload_node_ip = yy.yy.yy.yy
