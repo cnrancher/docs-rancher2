@@ -38,6 +38,31 @@ RKE2 会在`/var/lib/rancher/rke2/agent/etc/containerd/config.toml`中为 contai
 
 `config.toml.tmpl`将被视为 Go 模板文件，`config.Node`结构被传递到模板中。参见[本模板](https://github.com/k3s-io/k3s/blob/master/pkg/agent/templates/templates.go#L16-L32)，了解如何使用该结构来自定义配置文件的例子。
 
+## 配置一个 HTTP 代理
+
+如果你在一个环境中运行 RKE2，而这个环境只能通过 HTTP 代理进行外部连接，你可以在 RKE2 的 systemd 服务上配置你的代理设置。这些代理设置将在 RKE2 中使用，并传递给嵌入式容器和 kubelet。
+
+在 systemd 服务的环境文件中添加必要的 `HTTP_PROXY`、`HTTPS_PROXY` 和 `NO_PROXY` 变量，通常为:
+
+- `/etc/default/rke2-server`
+- `/etc/default/rke2-agent`
+
+`NO_PROXY` 变量必须包括你的内部网络，以及集群 pod 和 service IP 范围。
+
+```
+HTTP_PROXY=http://your-proxy.example.com:8888
+HTTPS_PROXY=http://your-proxy.example.com:8888
+NO_PROXY=127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,.svc,.cluster.local
+```
+
+如果你想在不影响 RKE2 和 Kubelet 的情况下配置 containerd 的代理设置，你可以在变量前加上 `CONTAINERD_`。
+
+```
+CONTAINERD_HTTP_PROXY=http://your-proxy.example.com:8888
+CONTAINERD_HTTPS_PROXY=http://your-proxy.example.com:8888
+CONTAINERD_NO_PROXY=127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,.svc,.cluster.local
+```
+
 ## Secrets 加密配置
 
 RKE2 支持对 Secrets 进行静态加密，并会自动完成以下工作：

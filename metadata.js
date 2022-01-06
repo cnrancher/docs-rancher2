@@ -964,6 +964,7 @@ const metadata = {
             "rke2/upgrade/upgrade/_index": "升级RKE2集群",
             "rke2/upgrade/basic_upgrade/_index": "基础升级",
             "rke2/upgrade/automated_upgrade/_index": "自动升级",
+            "rke2/security/about_hardened_images/_index": "关于加固镜像",
             "rke2/security/hardening_guide/_index": "CIS 加固指南",
             "rke2/security/cis_self_assessment15/_index": "CIS 1.5自我评估指南",
             "rke2/security/cis_self_assessment16/_index": "CIS 1.6自我评估指南",

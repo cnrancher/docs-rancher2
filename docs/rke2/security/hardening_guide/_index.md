@@ -88,6 +88,8 @@ sudo systemctl restart systemd-sysctl
 sysctl -p /usr/local/share/rke2/rke2-cis-sysctl.conf
 ```
 
+在使用 RKE2 部署 Kubernetes 之前，请在新安装的主机上执行这一步骤。许多 Kubernetes 组件，包括 CNI 插件，都在设置自己的 sysctls。重启 `systemd-sysctl` 服务可能会产生意想不到的后果。
+
 #### 创建 etcd 用户
 
 在某些 Linux 发行版上，`useradd`命令不会创建一个组。下面的 `-U` 标志是为了说明这个问题。这个标志告诉 `useradd` 创建一个与用户同名的组。

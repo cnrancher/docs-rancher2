@@ -100,7 +100,7 @@ module.exports = {
         baseCommit: "2c5dbef2fc64e815d7c4e2a3339c644dfb65f849 - Nov 10, 2021",
         k3sBaseCommit:
             "cd9ed7b74cc8111fecb05d2950c6948a83a6a595 - Jan 6, 2022",
-        rke2Commit: "303646bf7e37ef976c1006d574fffbecc91ea921 - Nov 9, 2021",
+        rke2Commit: "dc2e93e6d3caacf544cb417e1106eaf581f9e062 - Jan 6, 2022",
     },
     plugins: ["@docusaurus/plugin-baidu-analytics"],
 };
