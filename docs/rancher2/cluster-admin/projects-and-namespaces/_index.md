@@ -160,6 +160,8 @@ Rancher 扩展了 Kubernetes 以允许在[项目级别](/docs/rancher2/project-a
 >
 > - 为项目分配了`所有者`或`成员`角色的用户会自动继承`命名空间创建`角色。但是，此角色是 [Kubernetes ClusterRole](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#role-and-clusterrole)，这意味着它的作用域扩展到了集群中的所有项目。因此，在某个项目中明确分配了`所有者`或`成员`角色的用户，即使在其他项目中仅分配了`只读`角色，这些用户也可以在这些项目中创建命名空间。
 > - 选择`自定义`以动态创建自定义角色：[自定义项目角色](/docs/rancher2/admin-settings/rbac/cluster-project-roles/_index)。
+>
+> 默认情况下，Rancher 的 `项目成员` 角色继承自 `Kubernetes-edit` 角色，而 `项目所有者` 角色继承自 `Kubernetes-admin` 角色。因此，`项目成员` 和 `项目拥有者` 角色将允许命名空间管理，包括创建和删除命名空间的能力。
 
 要添加成员：
 
