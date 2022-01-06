@@ -1,5 +1,5 @@
 ---
-title: Rancher Equinix Metal Quick Start
+title: Rancher Equinix Metal 快速入门
 weight: 300
 ---
 
@@ -57,6 +57,7 @@ weight: 300
 ```
     sudo docker run -d --restart=unless-stopped -p 80:80 -p 443:443 --privileged rancher/rancher
 ```
+
 **结果**：Rancher 已安装。
 
 ### 3. 登录
