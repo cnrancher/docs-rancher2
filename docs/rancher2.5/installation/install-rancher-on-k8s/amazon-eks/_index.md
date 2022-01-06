@@ -85,8 +85,8 @@ aws configure
 
 | 变量                  | 描述                                                                                                                                                                      |
 | :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| AWS Access Key ID     | 具有 EKS 权限的 IAM 用户的访问密钥凭证。具有 EKS 权限的 IAM 用户的访问密钥凭证。                                                                                          |
-| AWS Secret Access Key | 具有 EKS 权限的 IAM 用户的密匙凭证。                                                                                                                                      |
+| AWS Access Key ID     | 具有 EKS 权限的 IAM 用户的访问密钥凭证。                                                                                          |
+| AWS Secret Access Key | 具有 EKS 权限的 IAM 用户的密文密钥凭证。                                                                                                                                      |
 | Default region name   | 集群节点所在的[AWS 区域](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html#Concepts.RegionsAndAvailabilityZones.Regions)。 |
 | Default output format | 输入 `json`。                                                                                                                                                             |
 
