@@ -1,5 +1,5 @@
 ---
-title: Authentication, Permissions and Global Configuration
+title: 身份验证、权限和全局配置
 weight: 6
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Deploying Workloads
+title: 部署工作负载
 weight: 200
 ---
 

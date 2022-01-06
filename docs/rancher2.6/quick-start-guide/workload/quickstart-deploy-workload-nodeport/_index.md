@@ -1,5 +1,5 @@
 ---
-title: Workload with NodePort Quick Start
+title: 部署带有 NodePort 的工作负载
 weight: 200
 ---
 

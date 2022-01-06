@@ -1,6 +1,6 @@
 ---
-title: Rancher Hetzner Cloud Quick Start Guide
-description: Read this step by step Rancher Hetzner Cloud guide to quickly deploy a Rancher Server with a single node cluster attached.
+title: Rancher Hetzner Cloud 快速入门指南
+description: 阅读此分步 Rancher Hetzner Cloud 指南，以快速部署带有单节点集群的 Rancher Server。
 weight: 100
 ---
 你可以参考以下步骤，在 Hetzner Cloud 上快速部署 Rancher server，并附加一个单节点集群。

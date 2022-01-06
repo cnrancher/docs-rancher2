@@ -1,5 +1,5 @@
 ---
-title: CLI with Rancher
+title: Rancher CLI
 weight: 100
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Vagrant Quick Start
+title: Vagrant 快速入门
 weight: 200
 ---
 你可以参考以下步骤快速部署 Rancher server，并附加一个单节点集群。

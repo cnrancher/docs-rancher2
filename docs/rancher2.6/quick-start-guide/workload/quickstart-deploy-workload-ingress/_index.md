@@ -1,5 +1,5 @@
 ---
-title: Workload with Ingress Quick Start
+title: 部署带有 Ingress 的工作负载
 weight: 100
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: Port Requirements
-description: Read about port requirements needed in order for Rancher to operate properly, both for Rancher nodes and downstream Kubernetes cluster nodes
+title: 端口要求
+description: 了解 Rancher 正常运行所需的端口要求，包括 Rancher 节点和下游 Kubernetes 集群节点
 weight: 300
 ---
 
@@ -55,7 +55,7 @@ K3s server 需要开放端口 6443 才能供节点访问。
 
 | 协议 | 端口 | 源 | 描述 |
 |-----|-----|----------------|---|
-| TCP | 80 | 执行外部 SSL 终止的负载平衡/代理 | 使用外部 SSL 终止时的 Rancher UI/API |
+| TCP | 80 | 执行外部 SSL 终止的负载均衡器/代理 | 使用外部 SSL 终止时的 Rancher UI/API |
 | TCP | 443 | <ul><li>Server 节点</li><li>Agent 节点</li><li>托管/注册的 Kubernetes</li><li>任何需要使用 Rancher UI 或 API 的源</li></ul> | Rancher Agent，Rancher UI/API，kubectl |
 | TCP | 6443 | K3s Server 节点 | Kubernetes API |
 | UDP | 8472 | K3s Server 和 Agent 节点 | 仅 Flannel VXLAN 需要 |
@@ -102,8 +102,8 @@ K3s server 需要开放端口 6443 才能供节点访问。
 | 协议 | 端口 | 源 | 描述 |
 |-----|-----|----------------|---|
 | TCP | 22 | RKE CLI | RKE 通过 SSH 配置节点 |
-| TCP | 80 | 负载均衡/反向代理 | 到 Rancher UI/API 的 HTTP 流量 |
-| TCP | 443 | <ul><li>负载均衡/反向代理</li><li>所有集群节点和其他 API/UI 客户端的 IP</li></ul> | 到 Rancher UI/API 的 HTTPS 流量 |
+| TCP | 80 | 负载均衡器/反向代理 | 到 Rancher UI/API 的 HTTP 流量 |
+| TCP | 443 | <ul><li>负载均衡器/反向代理</li><li>所有集群节点和其他 API/UI 客户端的 IP</li></ul> | 到 Rancher UI/API 的 HTTPS 流量 |
 | TCP | 6443 | Kubernetes API 客户端 | 到 Kubernetes API 的 HTTPS 流量 |
 
 <figcaption>Rancher 节点的出站规则</figcaption>
@@ -142,7 +142,7 @@ RKE2 server 需要开放端口 6443 和 9345 才能供集群中的其他节点�
 | TCP | 2380 | RKE2 Server 节点 | etcd 对等端口 |
 | TCP | 30000-32767 | RKE2 Server 和 Agent 节点 | NodePort 端口范围 |
 | TCP | 5473 | Calico-node pod 连接到 typha pod | 使用 Calico 部署时需要 |
-| HTTP | 8080 | 执行外部 SSL 终止的负载平衡/代理 | 使用外部 SSL 终止时的 Rancher UI/API |
+| HTTP | 8080 | 执行外部 SSL 终止的负载均衡器/代理 | 使用外部 SSL 终止时的 Rancher UI/API |
 | HTTPS | 8443 | <ul><li>托管/注册的 Kubernetes</li><li>任何需要使用 Rancher UI 或 API 的源</li></ul> | Rancher Agent，Rancher UI/API，kubectl。如果负载均衡执行 TLS 终止，则不需要。 |
 
 所有出站流量通常都是允许的。
@@ -158,7 +158,7 @@ RKE2 server 需要开放端口 6443 和 9345 才能供集群中的其他节点�
 
 | 协议 | 端口 | 源 | 描述 |
 |-----|-----|----------------|---|
-| TCP | 80 | 执行外部 SSL 终止的负载平衡/代理 | 使用外部 SSL 终止时的 Rancher UI/API |
+| TCP | 80 | 执行外部 SSL 终止的负载均衡器/代理 | 使用外部 SSL 终止时的 Rancher UI/API |
 | TCP | 443 | <ul><li>托管/注册的 Kubernetes</li><li>任何需要使用 Rancher UI 或 API 的源</li></ul> | Rancher Agent，Rancher UI/API，kubectl |
 
 <figcaption>Rancher 节点的出站规则</figcaption>
