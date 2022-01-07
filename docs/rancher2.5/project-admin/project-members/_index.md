@@ -34,6 +34,8 @@ title: 添加项目成员
    >
    > - 被分配到 `Owner` 或 `Member` 角色的用户自动继承 `namespace creation` 角色。然而，这个角色是一个[Kubernetes ClusterRole](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#role-and-clusterrole)，这意味它的作用范围会延伸到集群中的所有项目。因此，如果用户在一个项目中分配到了 `Owner` 或 `Member` 角色，而在同一个集群中的另一个项目中即使只分配到了 `Read Only` 权限，该用户还是可以在这个项目中创建命名空间。
    >
+   > - 默认情况下，Rancher 的 `project-member` 角色继承自 `Kubernetes-edit` 角色，而 `project-owner` 角色继承自 `Kubernetes-admin` 角色。因此，`project-member` 和 `project-owner` 角色将允许命名空间管理，包括创建和删除命名空间的能力。
+   >
    > - 对于`自定义`角色，您可以修改可分配的单个角色的列表。
    >
    >   - 向这个列表中添加角色的详细步骤请参考[添加自定义角色](/docs/rancher2.5/admin-settings/rbac/default-custom-roles/_index)。

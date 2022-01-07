@@ -307,7 +307,7 @@ const metadata = {
             "rancher2/cluster-admin/projects-and-namespaces/_index":
                 "项目和 Kubernetes 命名空间",
             "rancher2/cluster-admin/tools/_index": "集群工具",
-            "rancher2/cluster-admin/cloning-clusters/_index": "复制集群",
+            "rancher2/cluster-admin/cloning-clusters/_index": "克隆集群",
             "rancher2/cluster-admin/certificate-rotation/_index": "轮换证书",
             "rancher2/cluster-admin/backing-up-etcd/_index": "备份集群",
             "rancher2/cluster-admin/restoring-etcd/_index": "恢复集群",

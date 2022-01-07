@@ -154,6 +154,12 @@ _v2.2.0 可用_
 
 选项来启用或禁用[定期的 etcd 快照](/docs/rke/etcd-snapshots/_index)。
 
+### Agent 环境变量
+
+_从 v2.5.6 起可用_
+
+为 [Rancher agent](/docs/rancher2.5/cluster-provisioning/rke-clusters/rancher-agents/_index) 设置环境变量的选项。可以使用键值对设置环境变量。如果 Rancher agent 需要使用代理与 Rancher server 通信，则可以使用 agent 环境变量设置 `HTTP_PROXY`、`HTTPS_PROXY`和`NO_PROXY`环境变量。
+
 ## 集群配置文件
 
 除了 Rancher UI 之外，高级用户还可以通过 RKE 配置文件，在 YAML 中指定 RKE 安装[可用选项](/docs/rke/config-options/_index)，`system_images`选项除外。

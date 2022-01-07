@@ -48,7 +48,7 @@ services:
 services:
   kubelet:
     extra_binds:
-      - "/host/dev:/dev"
+      - "/dev:/host/dev"
       - "/usr/libexec/kubernetes/kubelet-plugins:/usr/libexec/kubernetes/kubelet-plugins:z"
 ```
 

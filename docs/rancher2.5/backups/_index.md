@@ -68,6 +68,8 @@ Backup 和 Restore 自定义资源可以在 Rancher UI 中创建，或者使用 
 
 `rancher-backup` operator 可以从 Rancher UI 安装，也可以用 Helm CLI 安装。在这两种情况下，`rancher-backup` Helm chart 安装在运行 Rancher server 的 Kubernetes 集群上。它是一个集群管理员专用的功能，只对 **local** 集群可用。（如果您在 Rancher 用户界面中没有看到`rancher-backup`，您可能选择了错误的集群）
 
+> **注意：**使用 backup-restore-operator 执行还原后，Fleet 中会出现两个已知问题： Fleet agent 无法操作，并且 clientSecretName 和 HelmSecretName 不包括在 Fleet gitrepos 中。请参考[这里](/docs/rancher2.5/deploy-across-clusters/fleet/_index)了解解决方法。
+
 ### 使用 Rancher UI 安装 rancher-backup
 
 1. 在 Rancher UI 的 **Cluster Manager** 中，选择名为**local**的集群。

@@ -25,7 +25,27 @@ Rancher 具有管理这些已注册集群的权限。具体权限取决于集群
 
 ## 前提条件
 
-如果您现有的 Kubernetes 集群已经定义了一个`cluster-admin`角色，您必须拥有这个 `cluster-admin`特权才能在 Rancher 中注册集群。
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+defaultValue="v259"
+values={[
+{ label: 'v2.5.9+', value: 'v259', },
+{ label: 'Rancher v2.5.9 之前', value: 'v259+', },
+]}>
+
+<TabItem value="v259">
+
+## Kubernetes 节点角色
+
+注册的 RKE Kubernetes 集群必须拥有所有三个节点角色：etcd, controlplane 和 worker。只有 controlplane 组件的集群不能在 Rancher 中注册。
+
+关于 RKE 节点角色的更多信息，请参阅[最佳实践](/docs/rancher2.5/cluster-provisioning/production/_index#集群架构)
+
+## 权限
+
+如果你现有的 Kubernetes 集群已经定义了一个 `cluster-admin` 角色，你必须拥有这个 `cluster-admin` 特权才能在 Rancher 中注册集群。
 
 为了应用该权限，首先运行以下命令：
 
@@ -37,11 +57,37 @@ kubectl create clusterrolebinding cluster-admin-binding \
 
 然后再运行`kubectl`命令注册这个集群。
 
-默认情况下，GKE 用户不具有此权限，因此您需要在注册 GKE 集群之前运行该命令。要了解更多关于 GKE 的基于角色的访问控制，请单击[这里](https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control)。
+默认情况下，GKE 用户不具有此权限，因此你需要在注册 GKE 集群之前运行该命令。要了解更多关于 GKE 的基于角色的访问控制，请单击[这里](https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control)。
 
-如果你要注册一个 K3s 集群，请确保`cluster.yml`是可读的。默认情况下，它是受保护的。详情请参考[配置一个 K3s 集群以启用导入 Rancher](#配置一个-K3s-集群以启用导入-Rancher)。
+如果你要注册一个 K3s 集群，请确保`cluster.yml`是可读的。默认情况下，它是受保护的。详情请参考[配置一个 K3s 集群以启用导入 Rancher](#配置一个-k3s-集群以启用导入-rancher)。
 
-## 操作步骤
+</TabItem>
+
+<TabItem value="v259+">
+
+## 权限
+
+如果现有的 Kubernetes 集群已经定义了 `cluster-admin` 角色，你必须拥有这个 `cluster-admin` 权限才能在 Rancher 中注册该集群。
+
+为了应用该权限，你需要运行:
+
+```plain
+kubectl create clusterrolebinding cluster-admin-binding \
+  --clusterrole cluster-admin \
+  --user [USER_ACCOUNT]
+```
+
+然后再运行`kubectl`命令注册这个集群。
+
+默认情况下，GKE 用户没有这个权限，所以你需要在注册 GKE 集群之前运行该命令。要了解更多关于 GKE 的基于角色的访问控制，请点击[这里](https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control)。
+
+如果你要注册一个 K3s 集群，确保 `cluster.yml` 是可读的。默认情况下，它是受保护的。详情请参考[配置 K3s 集群以启用导入 Rancher](#配置一个-k3s-集群以启用导入-rancher)
+
+</TabItem>
+
+</Tabs>
+
+## 注册集群
 
 1. 在 **集群** 页, 单击 **添加**。
 2. 选择 **注册**。
@@ -55,27 +101,27 @@ kubectl create clusterrolebinding cluster-admin-binding \
 6. 单击 **创建**。
 7. 这里显示了需要`集群管理员`特权的先决条件 (请参阅上面的**先决条件**)的提示，其中包括了达到该先决条件的示例命令。
 
-8. 将`kubectl`命令复制到剪贴板，并在有着指向您要导入的集群的 kubeconfig 的节点上运行它。如果您不确定它是否正确配置，在运行 Rancher 中显示的命令之前，运行`kubectl get nodes`进行验证。
+8. 将`kubectl`命令复制到剪贴板，并在有着指向你要导入的集群的 kubeconfig 的节点上运行它。如果你不确定它是否正确配置，在运行 Rancher 中显示的命令之前，运行`kubectl get nodes`进行验证。
 
-9. 如果您正在使用自签名证书，您将收到`certificate signed by unknown authority`消息。要解决这个验证问题，请把 Rancher 中显示的`curl`开头的命令复制到剪贴板中。并在有着指向您要导入的集群的 kubeconfig 的节点上运行它。
+9. 如果你正在使用自签名证书，你将收到`certificate signed by unknown authority`消息。要解决这个验证问题，请把 Rancher 中显示的`curl`开头的命令复制到剪贴板中。并在有着指向你要导入的集群的 kubeconfig 的节点上运行它。
 
 10. 在节点上运行完命令后，单击 **完成**。
 
 **结果：**
 
-- 您的集群创建成功并进入到**Pending**（等待中）的状态。Rancher 正在向您的集群部署资源。
-- 在集群状态变为**Active**（激活）状态后，您将可以开始访问您的集群。
+- 你的集群创建成功并进入到**Pending**（等待中）的状态。Rancher 正在向你的集群部署资源。
+- 在集群状态变为**Active**（激活）状态后，你将可以开始访问你的集群。
 - 在**Active**的集群中，默认会有两个项目：`Default`项目（包括`default`命名空间）和`System`项目（包括`cattle-system`、`ingress-nginx`、`kube-public` 和 `kube-system`）。
 
 :::note 注意
-您不能重新注册当前在 Rancher 设置中处于**Active**状态的集群。
+你不能重新注册当前在 Rancher 设置中处于**Active**状态的集群。
 :::
 
 ### 配置一个 K3s 集群以启用导入 Rancher
 
 K3s server 需要被配置为允许写入 kubeconfig 文件，以下是两种配置允许写入的方式：
 
-- 您可以通过在安装过程中传递`--write-kubeconfig-mode 644`作为一个标志来实现：
+- 你可以通过在安装过程中传递`--write-kubeconfig-mode 644`作为一个标志来实现：
 
 ```bash
 $ curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
@@ -118,7 +164,7 @@ Rancher 具有管理这些已注册集群的权限。具体权限取决于集群
 
 Amazon EKS 集群现在可以在 Rancher 中注册。在大多数情况下，注册的 EKS 集群和在 Rancher 中创建的 EKS 集群在 Rancher UI 中的处理方式是一样的，但删除除外。
 
-当您删除在 Rancher 中创建的 EKS 集群时，该集群将被销毁。当您删除在 Rancher 中注册的 EKS 集群时，它将与 Rancher 服务器断开连接，但它仍然存在，您仍然可以以在 Rancher 中注册之前的方式访问它。
+当你删除在 Rancher 中创建的 EKS 集群时，该集群将被销毁。当你删除在 Rancher 中注册的 EKS 集群时，它将与 Rancher 服务器断开连接，但它仍然存在，你仍然可以以在 Rancher 中注册之前的方式访问它。
 
 已注册的 EKS 集群的功能列在[本页](/docs/rancher2.5/cluster-provisioning/_index)的表格中。
 
@@ -126,7 +172,7 @@ Amazon EKS 集群现在可以在 Rancher 中注册。在大多数情况下，注
 
 升级前备份集群是 Kubernetes 的最佳实践。当升级具有外部数据库的高可用性 K3s 集群时，请以关系数据库厂商推荐的方式备份数据库。
 
-在升级期间，**并发**是允许不可用的最大节点数。不可用的节点数大于**并发量**会导致升级失败。如果碰到升级失败的情况，您可能需要在升级成功之前修复或删除失败的节点。
+在升级期间，**并发**是允许不可用的最大节点数。不可用的节点数大于**并发量**会导致升级失败。如果碰到升级失败的情况，你可能需要在升级成功之前修复或删除失败的节点。
 
 - **controlplane 节点并发量**：一次升级的最大 server 节点数；也是最大不可用的 server 节点数。
 - **worker 节点并发量**：同时升级的最大 worker 节点数；也是最大不可用的 worker 节点数。
@@ -141,7 +187,7 @@ Amazon EKS 集群现在可以在 Rancher 中注册。在大多数情况下，注
 
 要启用系统升级控制器部署的调试日志，编辑[configmap](https://github.com/rancher/system-upgrade-controller/blob/50a4c8975543d75f1d76a8290001d87dc298bdb4/manifests/system-upgrade-controller.yaml#L32)，将调试环境变量设置为 true。然后重新启动`system-upgrade-controller` pod。
 
-您可以通过运行以下命令查看`system-upgrade-controller`创建的日志：
+你可以通过运行以下命令查看`system-upgrade-controller`创建的日志：
 
 ```bash
 kubectl logs -n cattle-system system-upgrade-controller
@@ -184,7 +230,7 @@ kubectl get plans -A -o yaml
 ]"
 ```
 
-如果您的集群具有这些能力，您可以为它们在集群中添加注释：
+如果你的集群具有这些能力，你可以为它们在集群中添加注释：
 
 - `ingressCapabilities`
 - `loadBalancerCapabilities`

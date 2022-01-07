@@ -105,7 +105,7 @@ Kubernetes 集群最好使用低延迟网络。对于 control plane 组件和 et
 
 ### 使用至少两个 control plane 节点
 
-提供两个或多个 control plane 节点。一些 control plane 组件，比如：`kube-apiserver`，运行在[双活](https://www.jscape.com/blog/active-active-vs-active-passive-high-availability-cluster) 模式下，将为您提供更多的规模。其他组件，如`kube-scheduler`和`kube-controller`运行在`主被`模式下，提供更多的容错。
+提供三个或多个 control plane 节点。一些 control plane 组件，比如：`kube-apiserver`，运行在[双活](https://www.jscape.com/blog/active-active-vs-active-passive-high-availability-cluster) 模式下，将为您提供更多的规模。其他组件，如`kube-scheduler`和`kube-controller`运行在`主被`模式下，提供更多的容错。
 
 ### 监控集群
 

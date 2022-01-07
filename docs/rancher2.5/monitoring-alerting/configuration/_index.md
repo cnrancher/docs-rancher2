@@ -24,6 +24,8 @@ keywords:
 
 在安装 `rancher-monitoring` 时，可以配置监控应用程序的资源请求和限制。有关默认限制的更多信息，请参阅[此页面](/docs/rancher2.5/monitoring-alerting/configuration/helm-chart-options/_index#配置资源限制和请求)
 
+> **注意：**在空闲的集群上，与监控 V1 相比，监控 V2 的 CPU 使用率明显更高（高达 70%）。为了提高性能并获得与监控 V1 类似的结果，请关闭 Prometheus adapter。
+
 ## Prometheus 配置
 
 通常没必要直接编辑 Prometheus 的自定义资源。
@@ -42,7 +44,7 @@ keywords:
 
 Alertmanager 的自定义资源通常不需要直接编辑。对于大多数常见的场景，你可以通过更新 Routes 和 Receivers 来管理告警。
 
-路由和接收器是 alertmanager 自定义资源的配置的一部分。在 Rancher UI 中，路由和接收器不是真正的自定义资源，而是伪自定义资源，Prometheus Operator使用它来将你的配置与 Alertmanager 自定义资源同步。当路由和接收器被更新时，监控应用程序将自动更新 Alertmanager 以反映这些变化。
+路由和接收器是 alertmanager 自定义资源的配置的一部分。在 Rancher UI 中，路由和接收器不是真正的自定义资源，而是伪自定义资源，Prometheus Operator 使用它来将你的配置与 Alertmanager 自定义资源同步。当路由和接收器被更新时，监控应用程序将自动更新 Alertmanager 以反映这些变化。
 
 对于一些高级场景，你可能想直接配置 alertmanager。要了解更多信息，请参阅[此页](./advanced/alertmanager/_index)
 

@@ -22,7 +22,8 @@ keywords:
 以下服务支持证书轮换：
 
 - etcd
-- kubelet
+- kubelet (node certificate)
+- kubelet（服务证书，如果[启用](/docs/rke/config-options/services/_index#kubelet-选项))
 - kube-apiserver
 - kube-proxy
 - kube-scheduler
@@ -210,7 +211,7 @@ _可用版本: rke v0.2.0+_
 
        ```bash
        docker exec -ti <rancher_server_id> mv /var/lib/rancher/k3s/server/tls /var/lib/rancher/k3s/server/tlsbak
-       # 执行两次，第一次用于申请证书，第二次用于加载证书并启动
+       # 执行两侧，第一次用于申请证书，第二次用于加载证书并启动
        docker restart <rancher_server_id>
        ```
 
@@ -231,7 +232,7 @@ _可用版本: rke v0.2.0+_
        ```bash
        curl --insecure -sfL https://server-url/v3
        ```
-       
+
   3. 重启 Rancher Server 容器
      ```bash
      docker restart <rancher_server_id>

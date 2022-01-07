@@ -20,7 +20,7 @@ keywords:
 
 _v2.5.6 开始可用_
 
-本文描述了如何根据[Rancher Server 环境的最佳实践](/docs/rancher2.5/overview/architecture-recommendations/_index)来安装 Kubernetes 集群。
+本文描述了如何根据[Rancher Server 环境的最佳实践](/docs/rancher2.5/overview/architecture-recommendations/_index#kubernetes-的安装环境)来安装 Kubernetes 集群。
 
 ## 前提条件
 

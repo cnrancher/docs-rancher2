@@ -45,9 +45,9 @@ keywords:
 | [当集群不再能从 Rancher 访问时，清理 Kubernetes 组件](/docs/rancher2.5/cluster-admin/cleaning-cluster-nodes/_index) | ✓                                         |                        | ✓                 |
 | [配置 Pod 安全策略](/docs/rancher2.5/cluster-admin/pod-security-policy/_index)                                      | ✓                                         |                        | ✓                 |
 
-\*：除了 [K3s 集群和 RKE 集群](/docs/rancher2/cluster-provisioning/imported-clusters/_index#导入的-K3s-集群的其他功能)外，Rancher 不支持为其他类型的导入集群配置集群选项。
+1. 除了 [K3s 集群和 RKE 集群](/docs/rancher2/cluster-provisioning/imported-clusters/_index#导入的-K3s-集群的其他功能)外，Rancher 不支持为其他类型的导入集群配置集群选项。
 
-\*\*：对于已注册的集群节点，Rancher 用户界面暴露了封锁 cordon 和编辑节点的能力。
+2. 对于已注册的集群节点，Rancher 用户界面暴露了封锁 cordon 和编辑节点的能力。
 
 ### 2.5.8
 
@@ -69,11 +69,11 @@ keywords:
 | [当集群不再能从 Rancher 访问时，清理 Kubernetes 组件](/docs/rancher2.5/cluster-admin/cleaning-cluster-nodes/_index) | ✓                                         |                 | ✓                          |
 | [配置 Pod 安全策略](/docs/rancher2.5/cluster-admin/pod-security-policy/_index)                                      | ✓                                         |                 | ✓                          |
 
-\*：注册的 GKE 和 EKS 集群与从 Rancher 用户界面创建的 GKE 和 EKS 集群有相同的可用选项。不同的是，当从 Rancher 用户界面上删除注册的集群时，它不会被销毁。
+1. 注册的 GKE 和 EKS 集群与从 Rancher 用户界面创建的 GKE 和 EKS 集群有相同的可用选项。不同的是，当从 Rancher 用户界面上删除注册的集群时，它不会被销毁。
 
-\*\*：除了 [K3s 集群和 RKE 集群](/docs/rancher2/cluster-provisioning/imported-clusters/_index#导入的-K3s-集群的其他功能)外，Rancher 不支持为其他类型的导入集群配置集群选项。
+2. 除了 [K3s 集群和 RKE 集群](/docs/rancher2/cluster-provisioning/imported-clusters/_index#导入的-K3s-集群的其他功能)外，Rancher 不支持为其他类型的导入集群配置集群选项。
 
-\*\*\*：对于已注册的集群节点，Rancher 用户界面暴露了封锁 cordon 和编辑节点的能力。
+3. 对于已注册的集群节点，Rancher 用户界面暴露了封锁 cordon 和编辑节点的能力。
 
 ## 创建云供应商托管的 Kubernetes 集群
 
