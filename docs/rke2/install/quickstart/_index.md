@@ -21,7 +21,9 @@ keywords:
 
 ## 先决条件
 
-请确保你的环境满足[要求](/docs/rke2/install/requirements/_index)。如果在主机上安装并启用了 NetworkManager，[确保它被配置为忽略 CNI 管理的接口](/docs/rke2/known_issues/_index#networkmanager)。
+- 请确保你的环境满足[要求](/docs/rke2/install/requirements/_index)。如果在主机上安装并启用了 NetworkManager，[确保它被配置为忽略 CNI 管理的接口](/docs/rke2/known_issues/_index#networkmanager)。
+
+- 对于 1.21 及以上的 RKE2 版本，如果主机内核支持[AppArmor](https://apparmor.net/)，那么在安装 RKE2 之前，AppArmor 工具（通常通过`apparmor-parser`包获得）也必须存在。
 
 ## Server 节点安装
 

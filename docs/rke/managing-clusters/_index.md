@@ -1,6 +1,6 @@
 ---
 title: 节点管理
-description: RKE 支持为 worker 和 controlplane 主机添加或删除节点。您可以通过修改`cluster.yml`文件的内容，添加额外的节点，并指定它们在 Kubernetes 集群中的角色；或从`cluster.yml`中的节点列表中删除节点信息，以达到删除节点的目的。
+description: RKE 支持为 worker、controlplane、etcd 主机添加或删除节点。您可以通过修改`cluster.yml`文件的内容，添加额外的节点，并指定它们在 Kubernetes 集群中的角色；或从`cluster.yml`中的节点列表中删除节点信息，以达到删除节点的目的。
 keywords:
   - rancher
   - rancher中文
@@ -17,7 +17,7 @@ keywords:
 
 ## 添加或删除节点
 
-RKE 支持为 worker 和 controlplane 主机添加或删除[节点](/docs/rke/config-options/nodes/_index)。
+RKE 支持为 worker、controlplane、etcd 主机添加或删除[节点](/docs/rke/config-options/nodes/_index)。
 
 您可以通过修改`cluster.yml`文件的内容，添加额外的节点，并指定它们在 Kubernetes 集群中的角色；或从`cluster.yml`中的节点列表中删除节点信息，以达到删除节点的目的。
 

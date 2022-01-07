@@ -1009,7 +1009,7 @@ module.exports = {
                 ],
             },
         ],
-        安装指南: [
+        安装和升级: [
             "rancher2.5/installation/_index",
 
             {
@@ -1043,16 +1043,6 @@ module.exports = {
             },
             {
                 type: "category",
-                label: "在Linux操作系统上安装Rancher",
-                items: [
-                    "rancher2.5/installation/install-rancher-on-linux/_index",
-                    "rancher2.5/installation/install-rancher-on-linux/rancherd-configuration/_index",
-                    "rancher2.5/installation/install-rancher-on-linux/upgrades/_index",
-                    "rancher2.5/installation/install-rancher-on-linux/rollbacks/_index",
-                ],
-            },
-            {
-                type: "category",
                 label: "其他安装方式",
                 items: [
                     "rancher2.5/installation/other-installation-methods/_index",
@@ -1064,8 +1054,15 @@ module.exports = {
                             "rancher2.5/installation/other-installation-methods/air-gap/prepare-nodes/_index",
                             "rancher2.5/installation/other-installation-methods/air-gap/populate-private-registry/_index",
                             "rancher2.5/installation/other-installation-methods/air-gap/launch-kubernetes/_index",
-                            "rancher2.5/installation/other-installation-methods/air-gap/install-rancher/_index",
-                            "rancher2.5/installation/other-installation-methods/air-gap/install-rancher/docker-install-commands/_index",
+                            {
+                                type: "category",
+                                label: "4. 安装 Rancher",
+                                items: [
+                                "rancher2.5/installation/other-installation-methods/air-gap/install-rancher/_index",
+                                "rancher2.5/installation/other-installation-methods/air-gap/install-rancher/docker-install-commands/_index",
+                                ],
+                            },    
+                            
                         ],
                     },
                     {
@@ -1078,6 +1075,16 @@ module.exports = {
                             "rancher2.5/installation/other-installation-methods/single-node-docker/proxy/_index",
                             "rancher2.5/installation/other-installation-methods/single-node-docker/single-node-upgrades/_index",
                             "rancher2.5/installation/other-installation-methods/single-node-docker/single-node-rollbacks/_index",
+                        ],
+                    },
+                    {
+                        type: "category",
+                        label: "使用 RancherD 安装/升级 Rancher",
+                        items: [
+                            "rancher2.5/installation/other-installation-methods/install-rancher-on-linux/_index",
+                            "rancher2.5/installation/other-installation-methods/install-rancher-on-linux/rancherd-configuration/_index",
+                            "rancher2.5/installation/other-installation-methods/install-rancher-on-linux/upgrades/_index",
+                            "rancher2.5/installation/other-installation-methods/install-rancher-on-linux/rollbacks/_index",
                         ],
                     },
                     {
@@ -1941,6 +1948,7 @@ module.exports = {
         高级选项和配置: ["k3s/advanced/_index"],
         常见问题: ["k3s/faq/_index"],
         安全: [
+            "k3s/security/secrets_encryption/_index",
             "k3s/security/hardening-guide/_index",
             "k3s/security/self-assessment/_index",
         ],
@@ -2152,6 +2160,7 @@ module.exports = {
             "rke2/upgrade/automated_upgrade/_index",
         ],
         安全: [
+            "rke2/security/about_hardened_images/_index",
             "rke2/security/hardening_guide/_index",
             "rke2/security/cis_self_assessment15/_index",
             "rke2/security/cis_self_assessment16/_index",

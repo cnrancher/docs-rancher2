@@ -1,5 +1,5 @@
 ---
-title: 回滚必读
+title: 回滚指南
 description: 本节包含有关如何将 Rancher Server 回滚到以前版本的信息。
 keywords:
   - rancher
@@ -16,7 +16,11 @@ keywords:
   - 回滚必读
 ---
 
-## 回滚到 v2.5.0+
+- [回滚到 Rancher v2.5.0+](#回滚到-rancher-v250)
+- [回滚到 Rancher v2.2-v2.4+](#回滚到-rancher-v22x-v24x)
+- [回滚到 Rancher v2.0-v2.1](#回滚到-rancher-v20x-v21x)
+
+## 回滚到 Rancher v2.5.0+
 
 要回滚到 Rancher v2.5.0+，请使用 **Rancher Backups** 应用程序并从备份中恢复 Rancher。
 
@@ -30,14 +34,14 @@ keywords:
 - 在使用相同设置还原 Rancher 时，Rancher deployment 在还原开始前被手动缩减，然后操作员将在还原完成后将其缩回。因此，在恢复完成之前，Rancher 和 UI 将不可用。当 UI 不可用时，可使用 kubectl 创建还原：`kubectl create -f restore.yaml`。
 :::
 
-### 将 Rancher Deployment 的规模扩大到 0
+### 将 Rancher Deployment 的规模扩展到 0
 
-1. 在**全局**视图中，将鼠标悬停在**本地**集群上。
-1. 在**本地**的项目下，点击**System**。
+1. 在**全局**视图中，将鼠标悬停在 **local** 集群上。
+1. 在 **local** 的项目下，点击**System**。
 1. 从**cattle-system**命名空间部分，找到 `rancher` deployment。
 1. 选择**&#8942;> Edit**。
 1. 将**Scalable deployment of \_ pods**改为`0`。
-1. 滚动到底部并点击**保存**。
+1. 滚动到底部并点击 **Save**。
 
 ### 创建 Restore 自定义资源
 
@@ -96,7 +100,7 @@ helm rollback rancher -n cattle-system
 helm history rancher -n cattle-system
 ```
 
-当目标版本确定后，执行回滚。这个例子将回滚到版本`3`：
+当目标版本确定后，执行回滚。这个例子将回滚到修订版 `3`：
 
 ```yaml
 helm rollback rancher 3 -n cattle-system
@@ -111,14 +115,14 @@ helm rollback rancher 3 -n cattle-system
 1. 编辑 Rancher 部署，并将镜像修改为您要回滚到的版本。
 1. 保存所做的更改。
 
-## 回滚到 v2.2.x-v2.4.x
+## 回滚到 Rancher v2.2.x-v2.4.x
 
-要回滚到 v2.5 之前的 Rancher，请按照这里的步骤进行。[恢复备份 - Kubernetes 安装](/docs/rancher2/backups/restore/ha-restore/_index) 恢复 Rancher 服务器集群的快照会将 Rancher 恢复到快照时的版本和状态。
+要回滚到 v2.5 之前的 Rancher，请按照这里的步骤进行。[恢复备份 - Kubernetes 安装](/docs/rancher2/backups/restore/ha-restore/_index) 恢复 Rancher Server 集群的快照会将 Rancher 恢复到快照时的版本和状态。
 
 有关如何回滚安装了 Docker 的 Rancher 的信息，请参考[本页](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/single-node-rollbacks/_index)
 
-> 受管集群对其状态具有权威性。这意味着恢复 rancher 服务器不会恢复工作负载部署或快照后在托管集群上所做的更改。
+> 受管集群对其状态具有权威性。这意味着恢复 rancher server 不会恢复工作负载部署或快照后在托管集群上所做的更改。
 
-## 回滚到 v2.0.x-v2.1.x
+## 回滚到 Rancher v2.0.x-v2.1.x
 
 不再支持回滚到 Rancher v2.0-v2.1。回滚到这些版本的说明保留在[这里](/docs/rancher2/backups/restore/ha-restore/2.0-2.1/_index)，仅用于升级到 Rancher v2.2+不可行的情况。

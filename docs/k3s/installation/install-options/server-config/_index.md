@@ -162,6 +162,7 @@ Agent 选项之所以存在，是因为 server 内嵌了 agent 进程
 
 | Flag                                        | 描述                                              |
 | :------------------------------------------ | :------------------------------------------------ |
+| `--etcd-arg` value                          | 自定义 etcd 进程的参数。                          |
 | `--kube-apiserver-arg` value                | 自定义 kube-apiserver 进程的参数。                |
 | `--kube-scheduler-arg` value                | 自定义 kube-scheduler 进程的参数。                |
 | `--kube-controller-manager-arg` value       | 自定义 kube-controller-manager 进程的参数。       |
@@ -244,6 +245,7 @@ USAGE:
    --token-file value                         (cluster) 包含cluster-secret/token的文件 [$K3S_TOKEN_FILE]
    --write-kubeconfig value, -o value         (client) 将管理客户端的kubeconfig写入这个文件。 [$K3S_KUBECONFIG_OUTPUT]
    --write-kubeconfig-mode value              (client) 用这种模式编写kubeconfig，例如：644 [$K3S_KUBECONFIG_MODE]
+   --etcd-arg value                           (flags) 自定义etcd进程的参数
    --kube-apiserver-arg value                 (flags) 自定义kube-apiserver进程的参数
    --kube-scheduler-arg value                 (flags) 自定义kube-scheduler进程的参数
    --kube-controller-manager-arg value        (flags) 自定义kube-controller-manager进程的参数

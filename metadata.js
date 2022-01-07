@@ -40,7 +40,7 @@ const metadata = {
                 "为您提供Rancher容器平台的产品介绍、产品架构、推荐架构和Kubernetes基础概念",
             快速入门:
                 "为您提供Rancher容器平台的基本使用方法，通过简易demo教学，帮助您体验Rancher容器平台",
-            安装指南: "为您提供在不同环境中安装Rancher容器平台的操作指导",
+            安装和升级: "为您提供在不同环境中安装Rancher容器平台的操作指导",
             最佳实践: "为您提供Rancher容器平台的部署策略和配置建议",
             备份和恢复指南: "为您提供备份和恢复Rancher容器平台数据的操作指导",
             系统管理员指南:
@@ -488,8 +488,8 @@ const metadata = {
                 "单节点安装",
             "rancher2.5/installation/other-installation-methods/behind-proxy/_index":
                 "HTTP 代理安装",
-            "rancher2.5/installation/install-rancher-on-linux/_index":
-                "Linux安装",
+            "rancher2.5/installation/other-installation-methods/install-rancher-on-linux/_index":
+                "RancherD 安装",
             "rancher2.5/installation/resources/_index":
                 "其他资料及高级配置选项",
             // add best practices here
@@ -788,6 +788,7 @@ const metadata = {
             "k3s/networking/_index": "网络",
             "k3s/helm/_index": "Helm",
             "k3s/advanced/_index": "高级选项和配置",
+            "k3s/security/secrets_encryption/_index": "Secret 加密",
             "k3s/security/hardening-guide/_index": "安全加固指南",
             "k3s/security/self-assessment/_index": "自测指南",
             "k3s/faq/_index": "常见问题",
@@ -963,6 +964,7 @@ const metadata = {
             "rke2/upgrade/upgrade/_index": "升级RKE2集群",
             "rke2/upgrade/basic_upgrade/_index": "基础升级",
             "rke2/upgrade/automated_upgrade/_index": "自动升级",
+            "rke2/security/about_hardened_images/_index": "关于加固镜像",
             "rke2/security/hardening_guide/_index": "CIS 加固指南",
             "rke2/security/cis_self_assessment15/_index": "CIS 1.5自我评估指南",
             "rke2/security/cis_self_assessment16/_index": "CIS 1.6自我评估指南",

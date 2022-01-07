@@ -67,10 +67,7 @@ Enable-WindowsOptionalFeature -Online -FeatureName containers –All
 
 ### Linux
 
-- 内存：最低 512MB（我们建议至少 1GB）。
-- CPU：最低 1 个
-
-### Windows
+### Linux/Windows
 
 - RAM: 最低 4GB (我们建议至少有 8GB)
 - CPU: 最低 2 个 (我们建议至少有 4 个 CPU)

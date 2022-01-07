@@ -58,11 +58,11 @@ rm -rf /run/k3s
 运行这些命令后，rke2-uninstall.sh 和 rke2-killall.sh 脚本应该被下载。这两个脚本将停止所有正在运行的容器和进程，清理已使用的进程，并最终从系统中删除 RKE2。运行下面的命令：
 
 ```bash
-curl -sL https://raw.githubusercontent.com/rancher/rke2/488bab0f48b848e408ce399c32e7f5f73ce96129/bundle/bin/rke2-uninstall.sh --output rke2-uninstall.sh
+curl -sL https://raw.githubusercontent.com/rancher/rke2/master/bundle/bin/rke2-uninstall.sh --output rke2-uninstall.sh
 chmod +x rke2-uninstall.sh
 mv rke2-uninstall.sh /usr/local/bin
 
-curl -sL https://raw.githubusercontent.com/rancher/rke2/488bab0f48b848e408ce399c32e7f5f73ce96129/bundle/bin/rke2-killall.sh --output rke2-killall.sh
+curl -sL https://raw.githubusercontent.com/rancher/rke2/master/bundle/bin/rke2-killall.sh --output rke2-killall.sh
 chmod +x rke2-killall.sh
 mv rke2-killall.sh /usr/local/bin
 ```
