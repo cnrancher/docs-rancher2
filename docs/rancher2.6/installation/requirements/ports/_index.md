@@ -43,7 +43,7 @@ Rancher 可以安装在任何 Kubernetes 集群上。如果你的 Rancher 安装
 
 K3s server 需要开放端口 6443 才能供节点访问。
 
-使用 Flannel VXLAN 时，节点需要能够通过 UDP 端口 8472 访问其它节点。节点不应监听任何其它端口。K3s 使用反向隧道，建立节点与 Server 的出站连接，所有 kubelet 流量都通过该隧道进行。但是，如果你不使用 Flannel，而是使用自定义的 CNI，K3s 则不需要打开 8472 端口。
+使用 Flannel VXLAN 时，节点需要能够通过 UDP 端口 8472 访问其他节点。节点不应监听任何其他端口。K3s 使用反向隧道，建立节点与 Server 的出站连接，所有 kubelet 流量都通过该隧道进行。但是，如果你不使用 Flannel，而是使用自定义的 CNI，K3s 则不需要打开 8472 端口。
 
 如果要使用 Metrics Server，则需要在每个节点上打开端口 10250。
 
@@ -124,7 +124,7 @@ K3s server 需要开放端口 6443 才能供节点访问。
 
 RKE2 server 需要开放端口 6443 和 9345 才能供集群中的其他节点访问。
 
-使用 Flannel VXLAN 时，所有节点都需要能够通过 UDP 端口 8472 访问其它节点。
+使用 Flannel VXLAN 时，所有节点都需要能够通过 UDP 端口 8472 访问其他节点。
 
 如果要使用 Metrics Server，则需要在每个节点上打开端口 10250。
 
