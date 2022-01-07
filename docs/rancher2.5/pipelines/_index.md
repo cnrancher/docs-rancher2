@@ -16,6 +16,10 @@ keywords:
   - 功能介绍
 ---
 
+> 从 Rancher v2.5 开始，基于 Git 的 pipelines 现在已被废弃。我们建议用 Rancher 持续交付的 [Fleet](/docs/rancher2.5/deploy-across-clusters/fleet/_index) 处理 pipelines，可以在集群资源管理器中使用。
+>
+> **_注意：_**Fleet 并没有取代 Rancher pipelines；区别在于 Rancher pipelines 现在由 Fleet 提供支持。
+
 Rancher 的流水线提供了简单的 CI / CD 体验。使用它可以自动拉取代码，运行构建或脚本，发布 Docker 镜像或应用商店应用以及部署更新的软件。
 
 建立流水线可以帮助开发人员尽快，高效地交付新软件。使用 Rancher，您可以与 GitHub 等版本控制系统集成，以设置持续集成（CI）流水线。

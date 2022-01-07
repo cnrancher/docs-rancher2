@@ -126,8 +126,8 @@ Rancher Cluster Manager 部署的默认角色（即集群所有者、集群成�
 | -------------------- | ------------- | ----------------------------- | ------------------------------------ |
 | cluster-owner        | cluster-admin | N/A                           | ClusterRoleBinding                   |
 | cluster-member       | admin         | monitoring-admin              | ClusterRoleBinding                   |
-| project-owner        | edit          | monitoring-admin              | RoleBinding within Project namespace |
-| project-member       | view          | monitoring-edit               | RoleBinding within Project namespace |
+| project-owner        | admin          | monitoring-admin              | RoleBinding within Project namespace |
+| project-member       | edit          | monitoring-edit               | RoleBinding within Project namespace |
 
 除了这些默认的角色，以下额外的 Rancher 项目角色可以应用于集群的成员，以提供对监控的额外访问。这些 Rancher 角色将与监控 chart 部署的 ClusterRoles 相关联：
 

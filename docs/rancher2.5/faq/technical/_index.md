@@ -189,6 +189,10 @@ openssl x509 -noout -in cert.pem -text | grep DNS
 
 可以。大部分 UI 可以通过键盘快捷键访问。可在 UI 任意地方中按`?`查看所有可用的快捷键。
 
+### 当试图修改 App 时，`Unknown schema for type:` 错误后面跟着类似 `catalog.cattle.io.operation` 的内容是什么意思？
+
+当 Kubernetes 无法找到所提到的 CRD 时，就会出现这种错误。 绝大多数情况下，这些都是 RBAC 权限丢失的结果。 试着用一个管理员用户，如果成功了，请为错误中提到的资源添加权限（即`Get`，`List`，`Patch`）。
+
 ## 将 kubeconfig 文件复制到本地，kubectl 无法使用
 
 Rancher 2.4.x 版本使用 kubectl 连接 kubernetes 集群出现以下错误：

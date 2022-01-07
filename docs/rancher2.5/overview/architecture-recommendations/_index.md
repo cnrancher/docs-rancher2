@@ -37,13 +37,15 @@ Rancher 需要安装在高可用的 [RKE（Rancher Kubernetes Engine）](/docs/r
 
 ### K3s Kubernetes 集群安装
 
-如果您是首次安装 Rancher v2.4，建议将其安装在 K3s Kubernetes 集群上。这种 K3s 架构的一个主要优点是，它允许使用外部数据库保存集群数据，从而可以将 K3s 服务器节点视为无状态的。
-
-在 K3s 集群上安装 Rancher 的功能是在 Rancher v2.4 中引入的。K3s 易于安装，仅需要 Kubernetes 一半的内存，而且所有组件都在一个不超过 100 MB 的二进制文件中。
+底层 Kubernetes 集群的一个选择是使用 K3s Kubernetes。K3s 是 Rancher 的 CNCF 认证的 Kubernetes 发行版。它很容易安装，使用的内存是 Kubernetes 的一半，所有的二进制文件不到 100MB。K3s 的另一个优势是，它允许外部数据存储来保存集群数据，允许 K3s server 节点被视为临时节点。
 
 <figcaption> 使用 K3s Kubernetes 集群运行 Rancher Management Server 的架构 </figcaption>
 
 ![Architecture of a K3s Kubernetes Cluster Running the Rancher Management Server](/img/rancher/k3s-server-storage.svg)
+
+如果你使用[授权集群端点，](/docs/rancher2.5/overview/architecture/_index#4-authorized-cluster-endpoint/_index#授权集群端点)，我们建议创建一个指向负载均衡器的 FQDN，该负载均衡器通过 `controlplane` 角色分发你的节点流量。
+
+如果你在负载均衡器上使用私有 CA 签名的证书，你必须提供 CA 证书，它将被包含在生成的 kubeconfig 文件中，以验证证书链。更多信息请参见 [kubeconfig 文件](/docs/rancher2.5/cluster-admin/cluster-access/kubectl/_index)和 [API 密钥](/docs/rancher2.5/user-settings/api-keys/_index#创建-api-密钥) 文档。
 
 ### RKE Kubernetes 集群安装
 

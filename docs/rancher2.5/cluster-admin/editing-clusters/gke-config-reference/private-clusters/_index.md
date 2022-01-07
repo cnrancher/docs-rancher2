@@ -35,7 +35,7 @@ keywords:
 > **注意**
 > 这个方案没有得到官方支持，但描述的是使用云端 NAT 服务不够的情况。
 
-如果限制节点的传入和传出流量是一个要求，请按照空中加注的安装说明，在集群所在的 VPC 上设置一个私有容器镜像[镜像仓库](https://rancher.com/docs/rancher/v2.x/en/installation/other-installation-methods/air-gap/)，允许集群节点访问和下载它们运行集群代理所需的镜像。如果控制平面端点也是私有的，Rancher 将需要[直接访问](#direct-access)到它。
+如果限制节点的传入和传出流量是一个要求，请按照空中加注的安装说明，在集群所在的 VPC 上设置一个私有容器镜像[镜像仓库](/docs/rancher2.5/installation/other-installation-methods/air-gap/_index)，允许集群节点访问和下载它们运行集群代理所需的镜像。如果控制平面端点也是私有的，Rancher 将需要[直接访问](#直接访问)到它。
 
 ###私有控制平面端点
 
