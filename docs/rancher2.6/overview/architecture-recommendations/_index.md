@@ -1,5 +1,5 @@
 ---
-title: Architecture Recommendations
+title: 架构推荐
 weight: 3
 ---
 
@@ -9,7 +9,7 @@ weight: 3
 
 - [分开部署 Rancher 与下游集群](#separation-of-rancher-and-user-clusters)
 - [为什么高可用（HA）集群与 Rancher 适配性更高](#why-ha-is-better-for-rancher-in-production)
-- [Kubernetes 安装中负载均衡的推荐配置参数](#recommended-load-balancer-configuration-for-kubernetes-installations)
+- [Kubernetes 安装中负载均衡器的推荐配置参数](#recommended-load-balancer-configuration-for-kubernetes-installations)
 - [Kubernetes 安装环境](#environment-for-kubernetes-installations)
 - [Kubernetes 安装的节点角色建议](#recommended-node-roles-for-kubernetes-installations)
 - [授权集群端点（ACE）的架构](#architecture-for-an-authorized-cluster-endpoint-ace)
@@ -44,16 +44,16 @@ weight: 3
 <figcaption>运行 Rancher Management Server 的 RKE Kubernetes 集群的架构</figcaption>
 ![运行 Rancher Management Server 的 RKE Kubernetes 集群的架构]({{<baseurl>}}/img/rancher/rke-server-storage.svg)
 
-# Kubernetes 安装的负载均衡推荐配置
+# Kubernetes 安装的负载均衡器推荐配置
 
-我们建议你为负载均衡和 Ingress Controller 使用以下配置：
+我们建议你为负载均衡器和 Ingress Controller 使用以下配置：
 
-* 把 Rancher 的 DNS 解析到四层负载均衡上。
-* 负载均衡应该把 TCP/80 端口和 TCP/443 端口的流量转发到Kubernetes 集群的全部3个节点上。
+* 把 Rancher 的 DNS 解析到四层负载均衡器上。
+* 负载均衡器应该把 TCP/80 端口和 TCP/443 端口的流量转发到Kubernetes 集群的全部3个节点上。
 * Ingress Controller 会把 HTTP 重定向到 HTTPS，在 TCP/443 端口终结 SSL/TLS。
 * Ingress Controller 会把流量转发到 Rancher deployment 的 Pod 上的 TCP/80 端口。
 
-<figcaption>在 Kubernetes 集群中安装 Rancher，并使用四层负载均衡，SSL 终止在 Ingress Controller 中</figcaption>
+<figcaption>在 Kubernetes 集群中安装 Rancher，并使用四层负载均衡器，SSL 终止在 Ingress Controller 中</figcaption>
 ![Rancher 高可用]({{<baseurl>}}/img/rancher/ha/rancher2ha.svg)
 
 # Kubernetes 安装环境
@@ -106,8 +106,8 @@ RKE 每个角色至少需要一个节点，但并不强制每个节点只能有�
 
 # 授权集群端点（ACE）架构
 
-如果你使用[授权集群端点]({{<baseurl>}}/rancher/v2.6/en/overview/architecture/#4-authorized-cluster-endpoint)，我们建议你创建一个指向负载均衡的 FQDN，这个负载均衡把流量转到所有角色为 `controlplane` 的节点。
+如果你使用[授权集群端点]({{<baseurl>}}/rancher/v2.6/en/overview/architecture/#4-authorized-cluster-endpoint)，我们建议你创建一个指向负载均衡器的 FQDN，这个负载均衡器把流量转到所有角色为 `controlplane` 的节点。
 
-如果你在负载均衡上使用了私有 CA 签发的证书，你需要提供 CA 证书，这个证书会包含在生成的 kubeconfig 文件中，以校验证书链。详情请参见 [kubeconfig 文件]({{<baseurl>}}/rancher/v2.6/en/cluster-admin/cluster-access/kubectl/)和 [API 密钥]({{<baseurl>}}/rancher/v2.6/en/user-settings/api-keys/#creating-an-api-key)的相关文档。
+如果你在负载均衡器上使用了私有 CA 签发的证书，你需要提供 CA 证书，这个证书会包含在生成的 kubeconfig 文件中，以校验证书链。详情请参见 [kubeconfig 文件]({{<baseurl>}}/rancher/v2.6/en/cluster-admin/cluster-access/kubectl/)和 [API 密钥]({{<baseurl>}}/rancher/v2.6/en/user-settings/api-keys/#creating-an-api-key)的相关文档。
 
 在 Rancher 2.6.3 中，注册的 RKE2 和 K3s 集群可以使用 ACE 支持。点击[这里]({{<baseurl>}}/v2.6/en/cluster-provisioning/registered-clusters/#authorized-cluster-endpoint-support-for-rke2-and-k3s-clusters)了解在下游集群中开启 ACE 的步骤。
