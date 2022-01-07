@@ -184,7 +184,7 @@ Kubernetes 1.20 弃用了 Dockershim，也不再使用 Docker 作为 Kubernetes 
 
 Rancher 计划实施 [Mirantis 和 Docker 宣布的上游开源社区 Dockershim](https://www.mirantis.com/blog/mirantis-to-take-over-support-of-kubernetes-dockershim-2/) 以确保 RKE 集群可以继续利用 Docker 作为其容器运行时。RKE 用户将能够利用 Docker 作为运行时和安装方法，以继续升级和构建新的 RKE 集群。
 
-如果你想使用其它容器运行时，Rancher 也提供使用 Containerd 作为默认运行时的，以边缘为中心的 K3s，和以数据中心为中心的 RKE2 Kubernetes 发行版。然后，你就可以通过 Rancher 对导入的 RKE2 和 K3s Kubernetes 集群进行升级和管理。
+如果你想使用其他容器运行时，Rancher 也提供使用 Containerd 作为默认运行时的，以边缘为中心的 K3s，和以数据中心为中心的 RKE2 Kubernetes 发行版。然后，你就可以通过 Rancher 对导入的 RKE2 和 K3s Kubernetes 集群进行升级和管理。
 
 有关弃用 Docker 作为 Kubernetes 容器运行时的详情，请参见 [Kubernetes 官方博客](https://kubernetes.io/blog/2020/12/02/dont-panic-kubernetes-and-docker/)和 Mirantis 的[官方博客](https://www.mirantis.com/blog/mirantis-to-take-over-support-of-kubernetes-dockershim-2/)。
 
