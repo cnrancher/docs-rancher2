@@ -1,5 +1,5 @@
 ---
-title: Kubernetes Concepts
+title: Kubernetes 概念
 weight: 4
 ---
 

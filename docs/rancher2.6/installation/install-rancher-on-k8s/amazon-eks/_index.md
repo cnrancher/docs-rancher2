@@ -10,7 +10,7 @@ weight: 4
 
 第二种方法是使用命令行工具安装带有 Ingress 的 EKS 集群。如果你想在 EKS 上使用 Rancher 时使用较少的资源，请使用此方法。
 
-如果你已经有一个 EKS Kubernetes 集群，请跳转到[安装 Ingress](#5-install-an-ingress)这个步骤。然后按照[此处]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/#install-the-rancher-helm-chart)的步骤安装 Rancher Helm Chart。
+如果你已经有一个 EKS Kubernetes 集群，请直接跳转到[安装 Ingress](#5-install-an-ingress)这个步骤。然后按照[此处]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/#install-the-rancher-helm-chart)的步骤安装 Rancher Helm Chart。
 
 - [使用 AWS 最佳实践的快速入门](#automated-quickstart-using-aws-best-practices)
 - [为 Rancher Server 创建 EKS 集群](#creating-an-eks-cluster-for-the-rancher-server)
