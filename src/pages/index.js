@@ -154,11 +154,13 @@ function Home() {
                     <div className="navigation__item">
                         <div className="navigation__title">
                             <a href="/harvester">
-                                <h1>Harvester</h1>
+                                <h1>Harvester v0.3.0</h1>
                             </a>
                         </div>
                         <div className="navigation__content">
                             <p>
+                            <font size="1"><i>本文档为 Harvester v0.3.0 版本。v1.0.0 中文文档正在努力筹备中，如需查阅 v1.0.0 文档，请移步至 <a href="https://docs.harvesterhci.io/v1.0/">v1.0.0 英文文档</a></i> </font>
+                            <p/>
                                 Harvester是由Rancher提供的基于Kubernetes构建的100%开源的超融合基础架构（HCI）软件。
                                 它是vSphere和Nutanix的开源替代方案。
                             </p>
