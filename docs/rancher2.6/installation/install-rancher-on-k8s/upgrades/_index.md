@@ -35,9 +35,9 @@ kubeconfig 也可以通过 `--kubeconfig` 标签（详情请参见 https://helm.
 
 如果你使用 Helm 2，请参见 [Helm 2 迁移到 Helm 3 文档](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/)。如果你不能升级到 Helm 3，[Helm 2 升级页面]({{<baseurl>}}/rancher/v2.0-v2.4/en/installation/upgrades-rollbacks/upgrades/ha/helm2)提供了使用 Helm 2 升级的旧升级指南。
 
-### 离线安装：同步私有仓库
+### 离线安装：推送镜像到私有镜像仓库
 
-此前提[仅适用于离线安装]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/air-gap)。为新的 Rancher Server 版本收集和同步镜像。使用你需要针对 Rancher 版本升级的镜像，按照步骤[同步私有仓库]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/air-gap/populate-private-registry/)。
+此前提[仅适用于离线安装]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/air-gap)。为新的 Rancher Server 版本收集和推送镜像。使用你需要针对 Rancher 版本升级的镜像，按照步骤[推送镜像到私有镜像仓库]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/air-gap/populate-private-registry/)。
 
 ### 升级 Rancher Server 并使用隐藏的本地集群
 
