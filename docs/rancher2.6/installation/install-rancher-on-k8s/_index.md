@@ -110,7 +110,7 @@ Rancher management server 默认需要 SSL/TLS 配置来保证访问的安全性
 
 {{% accordion id="cert-manager" label="Click to Expand" %}}
 
-> **重要提示**：cert-manager 的最新更改要求升级操作。如果你需要升级 Rancher 并使用低于 0.11.0 的 cert-manager 版本，请参见[升级文档]({{<baseurl>}}/rancher/v2.6/en/installation/resources/upgrading-cert-manager/)。
+> **重要提示**：由于 cert-manager 的最新改动，你需要升级 cert-manager 版本。如果你需要升级 Rancher 并使用低于 0.11.0 的 cert-manager 版本，请参见[升级文档]({{<baseurl>}}/rancher/v2.6/en/installation/resources/upgrading-cert-manager/)。
 
 这些说明来自 [cert-manager 官方文档](https://cert-manager.io/docs/installation/kubernetes/#installing-with-helm)。
 
@@ -149,7 +149,7 @@ cert-manager-webhook-787858fcdb-nlzsq      1/1     Running   0          2m
 不同的证书配置需要使用不同的 Rancher 安装命令。
 
 {{% tabs %}}
-{{% tab "Rancher 生成的证书" %}}
+{{% tab "Rancher-generated Certificates" %}}
 
 
 默认情况是使用 Rancher 生成 CA，并使用 `cert-manager` 颁发用于访问 Rancher server 接口的证书。
@@ -209,7 +209,7 @@ deployment "rancher" successfully rolled out
 ```
 
 {{% /tab %}}
-{{% tab "已有的证书" %}}
+{{% tab "Certificates from Files" %}}
 
 该选项使用你自己的证书来创建 Kubernetes 密文，以供 Rancher 使用。
 
