@@ -75,6 +75,7 @@ kubectl create namespace cattle-system
 ```
 
 并使用 Helm 安装 Rancher。Rancher 还需要一个代理配置，以便它可以与外部应用 catalog 通信或检索 Kubernetes 版本更新元数据。
+
 请注意，`rancher.cattle-system` 必须添加到 noProxy 列表中（如下所示），以便 Fleet 可以使用服务发现直接与 Rancher 和 Kubernetes 服务 DNS 通信。
 
 ```bash

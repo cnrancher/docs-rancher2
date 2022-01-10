@@ -37,6 +37,13 @@ Rancher 已经过测试，并官方支持在 Ubuntu，CentOS，Oracle Linux，Ra
 
 一些从 RHEL 衍生出来的 Linux 发行版，包括 Oracle Linux，可能有默认的防火墙规则，会阻止与 Helm 的通信。我们建议禁用 firewalld。对于 Kubernetes 1.19，必须关闭 firewalld。
 
+> **注意：**在 RHEL 8.4 中，NetworkManager 上有两个额外的服务：`nm-cloud-setup.service` 和 `nm-cloud-setup.timer`。这些服务增加了一个路由表，干扰了 CNI 插件的配置。如果这些服务被启用，你必须使用下面的命令禁用它们，然后重新启动节点以恢复连接。
+>
+> ```
+> systemctl disable nm-cloud-setup.service nm-cloud-setup.timer
+> reboot
+> ```
+
 ### SUSE Linux 节点
 
 SUSE Linux 可能有一个默认屏蔽所有端口的防火墙。在这种情况下，请参考[端口要求-打开 SUSE Linux Portslink](/docs/rancher2.5/installation/requirements/ports/_index)，打开向自定义集群添加主机所需的端口。
@@ -48,33 +55,37 @@ SUSE Linux 可能有一个默认屏蔽所有端口的防火墙。在这种情况
 #### Canal
 
 ```
-rancher_kubernetes_engine_config:
-  network:
-    plugin: canal
-    options:
-      canal_flex_volume_plugin_dir: /opt/kubernetes/kubelet-plugins/volume/exec/nodeagent~uds
-      flannel_backend_type: vxlan
 
-  services:
-    kube-controller:
-      extra_args:
-        flex-volume-plugin-dir: /opt/kubernetes/kubelet-plugins/volume/exec/
+rancher_kubernetes_engine_config:
+network:
+plugin: canal
+options:
+canal_flex_volume_plugin_dir: /opt/kubernetes/kubelet-plugins/volume/exec/nodeagent~uds
+flannel_backend_type: vxlan
+
+services:
+kube-controller:
+extra_args:
+flex-volume-plugin-dir: /opt/kubernetes/kubelet-plugins/volume/exec/
+
 ```
 
 #### Calico
 
 ```
-rancher_kubernetes_engine_config:
-  network:
-    plugin: calico
-    options:
-      calico_flex_volume_plugin_dir: /opt/kubernetes/kubelet-plugins/volume/exec/nodeagent~uds
-      flannel_backend_type: vxlan
 
-  services:
-    kube-controller:
-      extra_args:
-        flex-volume-plugin-dir: /opt/kubernetes/kubelet-plugins/volume/exec/
+rancher_kubernetes_engine_config:
+network:
+plugin: calico
+options:
+calico_flex_volume_plugin_dir: /opt/kubernetes/kubelet-plugins/volume/exec/nodeagent~uds
+flannel_backend_type: vxlan
+
+services:
+kube-controller:
+extra_args:
+flex-volume-plugin-dir: /opt/kubernetes/kubelet-plugins/volume/exec/
+
 ```
 
 #### 启用 Docker 服务
@@ -82,7 +93,9 @@ rancher_kubernetes_engine_config:
 还需要启用 Docker 服务，你可以使用以下命令启用 Docker 服务：
 
 ```
+
 systemctl enable docker.service
+
 ```
 
 当使用 Node Drivers 时，Docker 服务会自动启用。
@@ -122,3 +135,4 @@ IPv6 应该在操作系统层面上被禁用。除非你特别打算利用 IPv6�
 如果你想配置一个符合 CISKubernetes 基准的 集群，我们建议在安装 Kubernetes 之前，按照我们的加固指南来配置你的节点。
 
 有关加固指南的更多信息，以及指南的哪个版本与您的 Rancher 和 Kubernetes 版本相对应的详细信息，请参阅安全加固指南。
+```

@@ -85,7 +85,7 @@ keywords:
    如果升级期间出现问题，则此备份包将用作回滚点。使用以下命令，替换每个[占位符](#占位符)。
 
    ```bash
-   docker run --volumes-from rancher-data -v $PWD:/backup busybox tar zcvf /backup/rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz /var/lib/rancher
+   docker run --volumes-from rancher-data -v "$PWD:/backup" --rm busybox tar zcvf /backup/rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz /var/lib/rancher
    ```
 
    **步骤结果：** 当您输入此命令时，应运行一系列命令。

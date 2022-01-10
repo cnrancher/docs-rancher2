@@ -174,7 +174,7 @@ kubectl run -i --restart=Never --rm test-${RANDOM} --image=ubuntu --overrides='{
 可以通过在 configmap`coredns`的 Corefile 配置中启用[日志插件](https://coredns.io/plugins/log/)来启用查询日志记录。您可以使用`kubectl -n kube-system edit configmap coredns`或使用以下命令替换现有配置：
 
 ```
-kubectl get configmap -n kube-system coredns -o json |  kubectl get configmap -n kube-system coredns -o json | sed -e 's_loadbalance_log\\n    loadbalance_g' | kubectl apply -f -
+kubectl get configmap -n kube-system coredns -o json | sed -e 's_loadbalance_log\\n    loadbalance_g' | kubectl apply -f -
 ```
 
 现在可以查询所有记录，并可以使用命令进行检查。

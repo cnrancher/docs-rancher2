@@ -22,7 +22,8 @@ keywords:
 以下服务支持证书轮换：
 
 - etcd
-- kubelet
+- kubelet (node certificate)
+- kubelet（服务证书，如果[启用](/docs/rke/config-options/services/_index#kubelet-选项))
 - kube-apiserver
 - kube-proxy
 - kube-scheduler

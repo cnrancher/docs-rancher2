@@ -143,9 +143,14 @@ https://kubic.opensuse.org/blog/2021-02-08-MicroOS-Kubic-Rancher-RKE/
 
 ### RHEL、OEL 或 CentOS
 
-因为 Red Hat Enterprise Linux（RHEL）、Oracle Enterprise Linux （OEL）和 CentOS 存在漏洞[Bugzilla 1527565](https://bugzilla.redhat.com/show_bug.cgi?id=1527565)，所以它们不允许用户使用`root`作为[SSH 用户](/docs/rke/config-options/nodes/_index#ssh-user)。
+因为 Red Hat Enterprise Linux（RHEL）、Oracle Enterprise Linux （OEL）和 CentOS 存在漏洞[Bugzilla 1527565](https://bugzilla.redhat.com/show_bug.cgi?id=1527565)，所以它们不允许用户使用`root`作为[SSH 用户](/docs/rke/config-options/nodes/_index#ssh-user)。请根据你在节点上安装 Docker 的方式，按照以下说明正确设置 Docker:
 
-如果您使用的操作系统是 RHEL、OEL 或 CentOS ，请参考下文。
+> **注意：**在 RHEL 8.4 中，NetworkManager 中包含两个额外的服务：`nm-cloud-setup.service` 和 `nm-cloud-setup.timer`。这些服务增加了一个路由表，干扰了 CNI 插件的配置。如果这些服务被启用，你必须使用下面的命令禁用它们，然后重新启动节点以恢复连接。
+>
+> ```
+> systemctl disable nm-cloud-setup.service nm-cloud-setup.timer
+> reboot
+> ```
 
 #### 使用 upstream Docker
 
@@ -153,7 +158,7 @@ https://kubic.opensuse.org/blog/2021-02-08-MicroOS-Kubic-Rancher-RKE/
 
 ```shell
 rpm -q docker-ce
-```
+````
 
 如果第一条命令的返回结果显示没有这个安装包，则表示安装包的名称可能是`docker-ee`，请输入以下命令确认安装包名称：
 
