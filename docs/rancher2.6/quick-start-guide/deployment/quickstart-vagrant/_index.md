@@ -2,7 +2,7 @@
 title: Vagrant 快速入门
 weight: 200
 ---
-你可以参考以下步骤快速部署 Rancher server，并附加一个单节点集群。
+你可以参考以下步骤快速部署 Rancher Server，并附加一个单节点集群。
 
 ## 前提
 
@@ -19,16 +19,16 @@ weight: 200
 
 ## 操作步骤
 
-1. 使用命令行工具，执行`git clone https://github.com/rancher/quickstart`把 [Rancher Quickstart](https://github.com/rancher/quickstart) 克隆到本地。
+1. 使用命令行工具，执行 `git clone https://github.com/rancher/quickstart` 把 [Rancher Quickstart](https://github.com/rancher/quickstart) 克隆到本地。
 
-2. 执行`cd quickstart/vagrant`命令，进入包含 Vagrantfile 文件的文件夹。
+2. 执行 `cd quickstart/vagrant` 命令，进入包含 Vagrantfile 文件的文件夹。
 
-3. **可选**：编辑`config.yaml`文件：
+3. **可选**：编辑 `config.yaml` 文件：
 
-   - 根据需要更改节点数和内存分配。(`node.count`, `node.cpus`, `node.memory`)
+   - 根据需要更改节点数和内存分配（`node.count`, `node.cpus`, `node.memory`）
    - 更改 `admin` 的密码以登录 Rancher。(`default_password`)
 
-4. 执行`vagrant up --provider=virtualbox`以初始化环境。
+4. 执行 `vagrant up --provider=virtualbox` 以初始化环境。
 
 5. 配置完成后，在浏览器中打开 `https://192.168.56.101`。默认用户/密码是 `admin/admin`。
 

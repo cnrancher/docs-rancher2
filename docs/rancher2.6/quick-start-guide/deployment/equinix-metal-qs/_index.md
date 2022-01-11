@@ -66,9 +66,9 @@ weight: 300
 
 1. 开 Web 浏览器并输入主机的 IP 地址`https://<SERVER_IP>`。
 
-   将`<SERVER_IP>`替换为你的主机 IP 地址。
+   将 `<SERVER_IP>` 替换为你的主机 IP 地址。
 
-2. 出现提示时，为默认`admin`账号创建密码。
+2. 出现提示时，为默认 `admin` 账号创建密码。
 
 3. 设置 **Rancher Server URL**。URL 可以是 IP 地址或主机名。需要注意，添加到集群中的每个节点都必须能够连接到此 URL。<br/><br/>如果你在 URL 中使用主机名，则此主机名必须在 DNS 中解析到你需要添加到集群的节点上。
 
@@ -92,7 +92,7 @@ weight: 300
 
 6. 在**节点角色**中，选择 _全部_ 角色，即 **etcd**，**Control** 和 **Worker**。
 
-7. **Optional**：Rancher 会自动检测用于 Rancher 通信和集群通信的 IP 地址。你可以使用**节点地址**处的`公有地址`和`内网地址`进行覆盖。
+7. **可选**：Rancher 会自动检测用于 Rancher 通信和集群通信的 IP 地址。你可以使用**节点地址**处的`公有地址`和`内网地址`进行覆盖。
 
 8. 跳过**标签**部分的内容。这部分内容暂时不重要。
 
@@ -111,7 +111,7 @@ weight: 300
 **Active** 状态的集群会分配到两个项目：
 
 - `默认`：包含`默认`命名空间
-- `系统`：包含 `cattle-system`，`ingress-nginx`，`kube-public`和`kube-system`命名空间。
+- `系统`：包含 `cattle-system`，`ingress-nginx`，`kube-public` 和 `kube-system` 命名空间。
 
 #### 已完成！
 

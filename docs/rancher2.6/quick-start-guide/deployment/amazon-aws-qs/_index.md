@@ -3,7 +3,7 @@ title: Rancher AWS 快速入门指南
 description: 阅读此分步 Rancher AWS 指南，以快速部署带有单节点下游 Kubernetes 集群的 Rancher Server。
 weight: 100
 ---
-你可以参考以下步骤，在 AWS 的单节点 K3s Kubernetes 集群中快速部署 Rancher server，并附加一个单节点下游 Kubernetes 集群。
+你可以参考以下步骤，在 AWS 的单节点 K3s Kubernetes 集群中快速部署 Rancher Server，并附加一个单节点下游 Kubernetes 集群。
 
 ## 前提
 
@@ -17,18 +17,18 @@ weight: 100
 
 ## 操作步骤
 
-1. 使用命令行工具，执行`git clone https://github.com/rancher/quickstart`把 [Rancher Quickstart](https://github.com/rancher/quickstart) 克隆到本地。
+1. 使用命令行工具，执行 `git clone https://github.com/rancher/quickstart` 把 [Rancher Quickstart](https://github.com/rancher/quickstart) 克隆到本地。
 
 2. 执行`cd quickstart/aws`命令，进入包含 terraform 文件的 AWS 文件夹。
 
-3. 把`terraform.tfvars.example`文件重命名为 `terraform.tfvars`。
+3. 把 `terraform.tfvars.example` 文件重命名为 `terraform.tfvars`。
 
-4. 编辑`terraform.tfvars`文件，并替换以下变量：
+4. 编辑 `terraform.tfvars` 文件，并替换以下变量：
    - `aws_access_key` - 替换为 Amazon AWS 访问密钥
    - `aws_secret_key` - 替换为 Amazon AWS Secret 密钥
-   - `rancher_server_admin_password` - 替换为创建 Rancher server 的 admin 账号的密码
+   - `rancher_server_admin_password` - 替换为创建 Rancher Server 的 admin 账号的密码
 
-5. **可选**：修改`terraform.tfvars`中的可选参数。
+5. **可选**：修改 `terraform.tfvars` 中的可选参数。
    参见 [Quickstart Readme](https://github.com/rancher/quickstart) 以及 [AWS Quickstart Readme](https://github.com/rancher/quickstart/tree/master/aws) 了解更多信息。
    建议修改的参数包括：
    - `aws_region` - Amazon AWS 地域。AWS 的默认地域 (`us-east-1`) 不一定是距离你最近的地域。建议修改为距离你最近的地域。
@@ -38,7 +38,7 @@ weight: 100
 
 6. 执行 `terraform init`。
 
-7. 执行`terraform apply --auto-approve`以初始化环境。然后，等待命令行工具返回以下信息：
+7. 执行 `terraform apply --auto-approve` 以初始化环境。然后，等待命令行工具返回以下信息：
 
    ```
    Apply complete! Resources: 16 added, 0 changed, 0 destroyed.
@@ -50,12 +50,12 @@ weight: 100
    workload_node_ip = yy.yy.yy.yy
    ```
 
-8. 将以上输出中的`rancher_server_url`粘贴到浏览器中。在登录页面中登录（默认用户名为 `admin`，密码为在`rancher_server_admin_password`中设置的密码）。
-9. 使用 `quickstart/aws` 中生成的 `id_rsa` 密钥 SSH 到 Rancher server。
+8. 将以上输出中的 `rancher_server_url` 粘贴到浏览器中。在登录页面中登录（默认用户名为 `admin`，密码为在 `rancher_server_admin_password` 中设置的密码）。
+9. 使用 `quickstart/aws` 中生成的 `id_rsa` 密钥 SSH 到 Rancher Server。
 
 #### 结果
 
-两个 Kubernetes 集群已部署到你的 AWS 账户中，一个运行 Rancher server，另一个为实验部署做好准备。请注意，虽然这种设置是探索 Rancher 功能的好方法，但在生产环境中，应遵循我们的高可用设置指南。用于虚拟机的 SSH 密钥是自动生成的，存储在模块目录中。
+两个 Kubernetes 集群已部署到你的 AWS 账户中，一个运行 Rancher Server，另一个为实验部署做好准备。请注意，虽然这种设置是探索 Rancher 功能的好方法，但在生产环境中，应遵循我们的高可用设置指南。用于虚拟机的 SSH 密钥是自动生成的，存储在模块目录中。
 
 ### 后续操作
 
@@ -63,6 +63,6 @@ weight: 100
 
 ## 清理环境
 
-1. 进入`quickstart/aws`文件夹，然后执行`terraform destroy --auto-approve`。
+1. 进入 `quickstart/aws` 文件夹，然后执行`terraform destroy --auto-approve`。
 
 2. 等待命令行界面显示资源已删除的消息。

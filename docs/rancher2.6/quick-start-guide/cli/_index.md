@@ -27,13 +27,13 @@ _要求_
 如果管理员有 [强制执行 kubeconfig token 上的 TTL]({{<baseurl>}}/rancher/v2.6/en/api/api-tokens/#setting-ttl-on-kubeconfig-tokens)，当你运行 `kubectl` 时，kubeconfig 文件需要 [Rancher CLI](../cli) 存在于你的路径中。否则，你会看到这样的错误信息：
 `Unable to connect to the server: getting credentials: exec: exec: "rancher": executable file not found in $PATH`。
 
-该功能可以让 kubectl 与 Rancher server 进行身份验证，并在需要时获得新的 kubeconfig token。目前支持以下认验证提供程序：
+该功能可以让 kubectl 与 Rancher Server 进行身份验证，并在需要时获得新的 kubeconfig token。目前支持以下认验证提供程序：
 
 1. 本地
 2. Active Directory
 3. FreeIpa，OpenLdap
 4. SAML 身份提供商：Ping，Okta，ADFS，Keycloak和Shibboleth
 
-如果你是第一次运行 kubectl，例如，`kubectl get pods`，它会要求你选择一个验证提供程序并使用 Rancher server 登录。
-kubeconfig token 会被缓存`./.cache/token`下你运行 kubectl 的路径中。该令 token 在[过期](../../api/api-tokens/#setting-ttl-on-kubeconfig-tokens-period)或[从Rancher server 删除](../../api/api-tokens/#deleting-tokens)之前都是有效的。
-过期后，下一个`kubectl get pods`命令会要求你再次使用 Rancher server 登录。
+如果你是第一次运行 kubectl，例如，`kubectl get pods`，它会要求你选择一个验证提供程序并使用 Rancher Server 登录。
+kubeconfig token 会被缓存 `./.cache/token` 下你运行 kubectl 的路径中。该令 Token 在[过期](../../api/api-tokens/#setting-ttl-on-kubeconfig-tokens-period)或[从 Rancher Server 删除](../../api/api-tokens/#deleting-tokens)之前都是有效的。
+过期后，下一个 `kubectl get pods` 命令会要求你再次使用 Rancher Server 登录。

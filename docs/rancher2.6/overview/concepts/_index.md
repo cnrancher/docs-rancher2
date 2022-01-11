@@ -56,7 +56,7 @@ Controlplane 节点上运行 Kubernetes API server、scheduler 和 Controller Ma
 
 ### Worker 节点
 
-每个 [worker 节点](https://kubernetes.io/docs/concepts/architecture/nodes/) 都能运行：
+每个 [worker 节点](https://kubernetes.io/docs/concepts/architecture/nodes/)都能运行：
 
 - **Kubelets**：监控节点状态的 Agent，确保你的容器处于健康状态。
 - **工作负载**：承载应用和其他 deployment 的容器和 Pod。

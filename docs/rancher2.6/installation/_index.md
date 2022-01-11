@@ -10,7 +10,7 @@ weight: 3
 
 本章节涉及以下名词：
 
-- **Rancher Server**：用于管理和配置 Kubernetes 集群。你可以通过 Rancher Server 的 UI 与下游 Kubernetes 集群进行交互。Rancher management server 可以安装到任意 Kubernetes 集群上，包括托管的集群，如 AWS EKS 集群。
+- **Rancher Server**：用于管理和配置 Kubernetes 集群。你可以通过 Rancher Server 的 UI 与下游 Kubernetes 集群进行交互。Rancher Management Server 可以安装到任意 Kubernetes 集群上，包括托管的集群，如 Amazon EKS 集群。
 - **RKE（Rancher Kubernetes Engine）**：是经过认证的 Kubernetes 发行版，也是用于创建和管理 Kubernetes 集群的 CLI 工具和库。
 - **K3s（轻量级 Kubernetes）**：也是经过认证的 Kubernetes 发行版。它比 RKE 更新，更易用且更轻量，其所有组件都在一个小于 100 MB 的二进制文件中。
 - **RKE2**：一个完全合规的 Kubernetes 发行版，专注于安全和合规性。
@@ -25,7 +25,7 @@ Rancher 可以安装在以下主要架构上：
 
 我们建议使用 Kubernetes 包管理器 Helm 在专用的 Kubernetes 集群上安装 Rancher。在 RKE 集群中，需要使用三个节点才能实现高可用集群。在 K3s 集群中，只需要两个节点即可。
 
-### 在 AWS EKS 上部署 Rancher 的快速入门
+### 在 Amazon EKS 上部署 Rancher 的快速入门
 
 Rancher 和 Amazon Web Services 合作编写了一份快速入门指南，用于按照 AWS 的最佳实践，在 EKS Kubernetes 集群上部署 Rancher。详情请参见[部署指南](https://aws-quickstart.github.io/quickstart-eks-rancher/)。
 
@@ -33,7 +33,7 @@ Rancher 和 Amazon Web Services 合作编写了一份快速入门指南，用于
 
 Rancher 可以安装在单节点 Kubernetes 集群上。但是，在单节点安装的情况下，Rancher Server 没有高可用性。而高可用性对在生产环境中运行 Rancher 非常重要。
 
-但是，如果你想要短期内使用单节点节省资源，同时又保留高可用性迁移路径，那么单节点 Kubernetes 安装也是合适的。你也可以之后向集群中添加节点，获得高可用的 Rancher server。
+但是，如果你想要短期内使用单节点节省资源，同时又保留高可用性迁移路径，那么单节点 Kubernetes 安装也是合适的。你也可以之后向集群中添加节点，获得高可用的 Rancher Server。
 
 ### Docker 安装
 
