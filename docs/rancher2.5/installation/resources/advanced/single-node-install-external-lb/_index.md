@@ -244,7 +244,7 @@ openssl rsa -in key.pem -out convertedkey.pem
 
 ### 如何验证我的证书链？
 
-您可以使用 `openssl` 二进制文件来验证证书链。如果命令的输出（请参见下面的命令示例）以`Verify return code: 0 (ok)`，则您的证书链有效。`ca.pem`文件必须与您添加到`rancher/rancher`容器中的文件相同。使用由公认的证书颁发机构签名的证书时，可以省略`-CAfile`参数。
+您可以使用 `openssl` 二进制文件来验证证书链。如果命令的输出（请参见下面的命令示例）以 `Verify return code: 0 (ok)` 结尾，则您的证书链有效。`ca.pem` 文件必须与您添加到 `rancher/rancher` 容器中的文件相同。使用由公认的证书颁发机构签名的证书时，可以省略 `-CAfile` 参数。
 
 命令：
 
