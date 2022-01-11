@@ -17,7 +17,7 @@ weight: 1
 | `<VERSION>` | 输出压缩包的版本号。 |
 | `<RANCHER.YOURDOMAIN.COM>` | 指向负载均衡器的 DNS 名称。 |
 | `<REGISTRY.YOURDOMAIN.COM:PORT>` | 你的私有镜像仓库的 DNS 名称。 |
-| `<CERTMANAGER_VERSION>` | 在 k8s 集群上运行的 cert-manager 版本。 |
+| `<CERTMANAGER_VERSION>` | 在 K8s 集群上运行的 cert-manager 版本。 |
 
 
 ### 选项 A：使用默认的自签名证书
@@ -62,9 +62,9 @@ helm template rancher ./rancher-<VERSION>.tgz --output-dir . \
 
 ### 应用已渲染的模板
 
-将渲染的清单目录复制到可以访问 Rancher Server 集群的系统中，并应用渲染的模板。
+将渲染的 manifest 目录复制到可以访问 Rancher Server 集群的系统中，并应用渲染的模板。
 
-使用 `kubectl` 来应用渲染的清单。
+使用 `kubectl` 来应用渲染的 manifest。
 
 ```plain
 kubectl -n cattle-system apply -R -f ./rancher
