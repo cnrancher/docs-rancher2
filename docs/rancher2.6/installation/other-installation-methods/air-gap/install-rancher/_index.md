@@ -7,7 +7,7 @@ weight: 400
 
 ### Rancher 特权访问
 
-当 Rancher Server 部署在 Docker 容器中时，容器内会安装一个本地 Kubernetes 集群供 Rancher 使用。为 Rancher 的很多功能都是以 deployments 的方式运行的，而在容器内运行容器是需要特权模式的，所以你需要在安装 Rancher 时添加 `--privileged` 选项。
+当 Rancher Server 部署在 Docker 容器中时，容器内会安装一个本地 Kubernetes 集群供 Rancher 使用。为 Rancher 的很多功能都是以 deployment 的方式运行的，而在容器内运行容器是需要特权模式的，因此你需要在安装 Rancher 时添加 `--privileged` 选项。
 
 # Docker 说明
 
