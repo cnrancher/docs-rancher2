@@ -17,18 +17,18 @@ weight: 2
 
 ### Kubernetes 集群
 
-设置 Rancher server 的本地 Kubernetes 集群。
+设置 Rancher Server 的本地 Kubernetes 集群。
 
-Rancher 可以安装在任何 Kubernetes 集群上。这个集群可以使用上游 Kubernetes，也可以使用 Rancher 的 Kubernetes 发行版之一，也可以是来自 AWS EKS 等提供商的托管 Kubernetes 集群。
+Rancher 可以安装在任何 Kubernetes 集群上。这个集群可以使用上游 Kubernetes，也可以使用 Rancher 的 Kubernetes 发行版之一，也可以是来自 Amazon EKS 等提供商的托管 Kubernetes 集群。
 
 你可参考以下教程，以获得设置 Kubernetes 集群的帮助：
 
 - **RKE**：[安装 RKE Kubernetes 集群的教程]({{<baseurl>}}/rancher/v2.6/en/installation/resources/k8s-tutorials/ha-rke/)；[为高可用 RKE 集群设置基础设施的教程]({{<baseurl>}}/rancher/v2.6/en/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha)。
 - **K3s**：[安装 K3s Kubernetes 集群的教程]({{<baseurl>}}/rancher/v2.6/en/installation/resources/k8s-tutorials/ha-with-external-db)；[设置高可用 K3s 集群的基础设施的教程]({{<baseurl>}}/rancher/v2.6/en/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha-with-external-db)。
 - **RKE2:** ：[安装 RKE2 Kubernetes 集群的教程]({{<baseurl>}}/rancher/v2.6/en/installation/resources/k8s-tutorials/ha-rke2)；[设置高可用 RKE2 集群的基础设施的教程]({{<baseurl>}}/rancher/v2.6/en/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-rke2-ha)。
-- **AWS EKS**：[在 AWS EKS 上安装 Rancher 以及如何安装 Ingress 以访问 Rancher server]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/amazon-eks)。
-- **AKS**：[使用 Azure Kubernetes 服务安装 Rancher 以及如何安装 Ingress 以访问 Rancher server]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/aks)。
-- **GKE**：[使用 GKE 安装 Rancher 以及如何安装 Ingress 以访问 Rancher server]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/gke)。
+- **Amazon EKS**：[在 Amazon EKS 上安装 Rancher 以及如何安装 Ingress 以访问 Rancher Server]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/amazon-eks)。
+- **AKS**：[使用 Azure Kubernetes 服务安装 Rancher 以及如何安装 Ingress 以访问 Rancher Server]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/aks)。
+- **GKE**：[使用 GKE 安装 Rancher 以及如何安装 Ingress 以访问 Rancher Server]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/gke)。
 
 ### CLI 工具
 
@@ -62,7 +62,7 @@ Rancher 是使用 Kubernetes 的 [Helm](https://helm.sh/) 包管理器安装的�
 3. [选择 SSL 配置](#3-choose-your-ssl-configuration)
 4. [安装 cert-manager](#4-install-cert-manager)（除非你自带证书，否则 TLS 将在负载均衡器上终止）
 5. [使用 Helm 和你选择的证书选项安装 Rancher](#5-install-rancher-with-helm-and-your-chosen-certificate-option)
-6. [验证 Rancher server 是否部署成功](#6-verify-that-the-rancher-server-is-successfully-deployed)
+6. [验证 Rancher Server 是否部署成功](#6-verify-that-the-rancher-server-is-successfully-deployed)
 7. [保存你的选择](#7-save-your-options)
 
 ### 1. 添加 Helm Chart 仓库
@@ -85,7 +85,7 @@ kubectl create namespace cattle-system
 
 ### 3. 选择 SSL 配置
 
-Rancher management server 默认需要 SSL/TLS 配置来保证访问的安全性。
+Rancher Management Server 默认需要 SSL/TLS 配置来保证访问的安全性。
 
 > **注意**：如果你想在外部终止 SSL/TLS，请参见[外部负载均衡器的 TLS 终止]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#external-tls-termination)。
 
@@ -152,7 +152,7 @@ cert-manager-webhook-787858fcdb-nlzsq      1/1     Running   0          2m
 {{% tab "Rancher-generated Certificates" %}}
 
 
-默认情况是使用 Rancher 生成 CA，并使用 `cert-manager` 颁发用于访问 Rancher server 接口的证书。
+默认情况是使用 Rancher 生成 CA，并使用 `cert-manager` 颁发用于访问 Rancher Server 接口的证书。
 
 由于 `rancher` 是 `ingress.tls.source` 的默认选项，因此在执行 `helm install` 命令时，我们不需要指定 `ingress.tls.source`。
 
@@ -282,7 +282,7 @@ rancher   3         3         3            3           3m
 
 ### 安装完成
 
-安装已完成。现在 Rancher server 应该已经可以正常运行了。
+安装已完成。现在 Rancher Server 应该已经可以正常运行了。
 
 使用浏览器打开把流量转发到你的负载均衡器的 DNS 域名。然后，你就会看到一个漂亮的登录页面了。
 
