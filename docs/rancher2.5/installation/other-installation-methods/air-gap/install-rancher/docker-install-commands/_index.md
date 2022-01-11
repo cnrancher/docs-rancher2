@@ -67,7 +67,7 @@ docker run -d --restart=unless-stopped \
 从具有 Internet 连接的计算机上，使用 OpenSSL 或其他方法创建自签名证书。
 
 - 证书文件必须是 PEM 格式。
-- 在你的证书文件中，包括链中的所有中间证书。你需要对你的证书进行排序，把你的证书放在最签名，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
+- 在你的证书文件中，包括链中的所有中间证书。你需要对你的证书进行排序，把你的证书放在最前面，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
 
 :::
 

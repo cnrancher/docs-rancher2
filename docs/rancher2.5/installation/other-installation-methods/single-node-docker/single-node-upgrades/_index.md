@@ -151,7 +151,7 @@ docker run -d --privileged --volumes-from rancher-data \
 
 如果您选择携带自己的自签名证书，则在启动原始 Rancher Server 容器的命令中添加`--volumes-from rancher-data`，并需要可以访问到原始安装时使用的证书。
 
-> **证书先决条件提示：** 证书文件必须为[PEM 格式](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/_index)。在您的证书文件中，包括链中的所有中间证书。您需要对您的证书进行排序，把您的证书放在最签名，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
+> **证书先决条件提示：** 证书文件必须为[PEM 格式](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/_index)。在您的证书文件中，包括链中的所有中间证书。您需要对您的证书进行排序，把您的证书放在最前面，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
 
 | 占位符                  | 描述                                                                                                    |
 | :---------------------- | :------------------------------------------------------------------------------------------------------ |
@@ -176,7 +176,7 @@ docker run -d --privileged --volumes-from rancher-data \
 
 如果选择使用由可信 CA 签名的证书，则将 `--volumes-from rancher-data` 添加到启动原始 Rancher Server 容器的命令中，并需要可以访问到原始安装时使用的证书。请记住，要在容器启动命令中包含`--no-cacerts`参数，以禁用 Rancher 生成的默认 CA 证书。
 
-> **证书先决条件提示：** 证书文件必须为[PEM 格式](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/_index)。在您的证书文件中，包括可信 CA 提供的所有中间证书。您需要对您的证书进行排序，把您的证书放在最签名，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
+> **证书先决条件提示：** 证书文件必须为[PEM 格式](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/_index)。在您的证书文件中，包括可信 CA 提供的所有中间证书。您需要对您的证书进行排序，把您的证书放在最前面，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
 
 | 占位符                  | 描述                                                                                                    |
 | :---------------------- | :------------------------------------------------------------------------------------------------------ |
@@ -250,7 +250,7 @@ docker run -d --privileged --volumes-from rancher-data \
 
 如果您选择携带自己的自签名证书，则在启动原始 Rancher Server 容器的命令中添加`--volumes-from rancher-data`，并需要可以访问到原始安装时使用的证书。
 
-> **证书先决条件提示：** 证书文件必须为[PEM 格式](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/_index)。在您的证书文件中，包括链中的所有中间证书。您需要对您的证书进行排序，把您的证书放在最签名，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
+> **证书先决条件提示：** 证书文件必须为[PEM 格式](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/_index)。在您的证书文件中，包括链中的所有中间证书。您需要对您的证书进行排序，把您的证书放在最前面，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
 
 | 占位符                           | 描述                                                                                                    |
 | :------------------------------- | :------------------------------------------------------------------------------------------------------ |
@@ -276,7 +276,7 @@ docker run -d --privileged --restart=unless-stopped \
 
 如果选择使用由可信 CA 签名的证书，则将 `--volumes-from rancher-data` 添加到启动原始 Rancher Server 容器的命令中，并需要可以访问到原始安装时使用的证书。请记住，要在容器启动命令中包含`--no-cacerts`参数，以禁用 Rancher 生成的默认 CA 证书。
 
-> **证书先决条件提示：** 证书文件必须为[PEM 格式](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/_index)。在您的证书文件中，包括可信 CA 提供的所有中间证书。您需要对您的证书进行排序，把您的证书放在最签名，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
+> **证书先决条件提示：** 证书文件必须为[PEM 格式](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/_index)。在您的证书文件中，包括可信 CA 提供的所有中间证书。您需要对您的证书进行排序，把您的证书放在最前面，后面跟着中间证书。有关示例，请参见[SSL 常见问题解答/故障排查](/docs/rancher2.5/installation/other-installation-methods/single-node-docker/troubleshooting/_index)。
 
 | 占位符                           | 描述                                                                                                     |
 | :------------------------------- | :------------------------------------------------------------------------------------------------------- |
