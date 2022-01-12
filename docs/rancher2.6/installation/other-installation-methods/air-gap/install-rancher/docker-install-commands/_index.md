@@ -25,7 +25,7 @@ Docker 安装适用于想要测试 Rancher 的用户。
 
 ### 选项 A：使用 Rancher 默认的自签名证书
 
-{{% accordion id="option-a" label="Click to expand" %}}
+
 
 如果你在不考虑身份验证的开发或测试环境中安装 Rancher，可以使用 Rancher 生成的自签名证书安装 Rancher。这种安装方式避免了自己生成证书的麻烦。
 

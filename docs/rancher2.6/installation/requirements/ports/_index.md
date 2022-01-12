@@ -299,7 +299,7 @@ UDP Ports
 
 1. 所有必须端口都输入后，选择**接受**。
 
-{{% /tab %}}
+</TabItem>
 {{% tab "SLES 12 / openSUSE Leap 42" %}}
 1. SSH 进入实例。
 1. 编辑 /`etc/sysconfig/SuSEfirewall2` 并打开所需的端口。在这个例子中，端口 9796 和 10250 也被打开，用于监控。
@@ -312,7 +312,7 @@ FW_ROUTE=yes
 ```
 SuSEfirewall2
 ```
-{{% /tab %}}
-{{% /tabs %}}
+</TabItem>
+</Tabs>
 
 **结果** ：该节点已打开添加到自定义集群所需的端口。
