@@ -11,8 +11,19 @@ Rancher 安装在 K3s Kubernetes 集群、RKE Kubernetes 集群还是单个 Dock
 
 Rancher 可以安装在任何 Kubernetes 集群上。为了阅读方便，我们在下文中仍提供了 RKE 和 K3s Kubernetes 基础设施教程。
 
-{{% tabs %}}
-{{% tab "K3s" %}}
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+
+<Tabs
+defaultValue="k3s"
+values={[
+{ label: 'K3s', value: 'k3s', },
+{ label: 'RKE', value: 'rke', },
+{ label: 'Docker', value: 'docker', },
+]}>
+
+<TabItem value="k3s">
 为了实现高可用安装，我们建议设置以下的基础设施：
 
 - **2个 Linux 节点**：可以是你的云提供商中的虚拟机。
@@ -83,7 +94,7 @@ Rancher 支持使用私有镜像仓库进行离线安装。你必须有自己的
 
 如需获得创建私有镜像仓库的帮助，请参见 [Docker 官方文档](https://docs.docker.com/registry/deploying/#run-an-externally-accessible-registry)。
 </TabItem>
-{{% tab "RKE" %}}
+<TabItem value="rke">
 
 如需在 RKE 集群中安装 Rancher Management Server，我们建议配置以下基础设施：
 
@@ -147,7 +158,7 @@ Rancher 支持使用安全的 Docker 私有镜像仓库进行离线安装。你�
 如需获得创建私有镜像仓库的帮助，请参见 [Docker 官方文档](https://docs.docker.com/registry/deploying/#run-an-externally-accessible-registry)。
 
 </TabItem>
-{{% tab "Docker" %}}
+<TabItem value="docker">
 > Docker 安装适用于想要测试 Rancher 的用户。由于只有一个节点和一个 Docker 容器，因此如果该节点发生故障，你将丢失 Rancher Server 的所有数据。
 >
 > Rancher backup operator 可将 Rancher 从单个 Docker 容器迁移到高可用 Kubernetes 集群上。详情请参见[把 Rancher 迁移到新集群]({{<baseurl>}}/rancher/v2.6/en/backups/migrating-rancher)。

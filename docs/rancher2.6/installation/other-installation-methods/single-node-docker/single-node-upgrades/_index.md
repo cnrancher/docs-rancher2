@@ -123,8 +123,18 @@ docker pull rancher/rancher:<RANCHER_VERSION_TAG>
 - Docker 升级
 - 离线安装的 Docker 升级
 
-{{% tabs %}}
-{{% tab "Docker Upgrade" %}}
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+
+<Tabs
+defaultValue="docker"
+values={[
+{ label: 'Docker 升级', value: 'docker', },
+{ label: 'Docker 离线升级', value: 'airgap', },
+]}>
+
+<TabItem value="docker">
 
 选择你安装 Rancher Server 时用的选项
 
@@ -242,7 +252,7 @@ docker run -d --volumes-from rancher-data \
 
 
 </TabItem>
-{{% tab "Docker Air Gap Upgrade" %}}
+<TabItem value="airgap">
 
 出于安全考虑，使用 Rancher 时需要使用 SSL（Secure Sockets Layer）。SSL 保护所有 Rancher 网络通信（如登录和与集群交互）的安全。
 

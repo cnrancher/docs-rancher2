@@ -17,8 +17,18 @@ weight: 200
 >
 > 如果镜像仓库有证书，请参见 [K3s 文档中心](https://rancher.com/docs/k3s/latest/en/installation/private-registry/)了解添加私有镜像仓库的详情。证书和镜像仓库配置文件均需要挂载到 Rancher 容器中。
 
-{{% tabs %}}
-{{% tab "Linux Only Clusters" %}}
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+
+<Tabs
+defaultValue="linux"
+values={[
+{ label: '仅包含 Linux 节点的集群', value: 'linux', },
+{ label: '包含 Linux 和 Windows 节点的集群', value: 'linuxwin', },
+]}>
+
+<TabItem value="linux">
 
 如果 Rancher Server 用于配置仅有 Linux 节点的集群，请按以下步骤将你的镜像推送到私有镜像仓库。
 
@@ -103,7 +113,7 @@ chmod +x rancher-load-images.sh
 ./rancher-load-images.sh --image-list ./rancher-images.txt --registry <REGISTRY.YOURDOMAIN.COM:PORT>
 ```
 </TabItem>
-{{% tab "Linux and Windows Clusters" %}}
+<TabItem value="linuxwin">
 
 如果你的 Rancher Server 将用于配置 Linux 和 Windows 集群，你需要执行不同的步骤，来将 Windows 镜像和 Linux 镜像推送到你的私有镜像仓库。由于 Windows 集群同时包含 Linux 和 Windows 节点，因此推送到私有镜像仓库的 Linux 镜像是 Manifest。
 
