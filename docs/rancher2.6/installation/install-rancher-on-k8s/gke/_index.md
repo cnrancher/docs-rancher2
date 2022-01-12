@@ -84,10 +84,10 @@ Cloud Shell 是一个 shell 环境，用于管理托管在 Google Cloud 上的�
    ```
 2. 按照指示，以授权 gcloud 使用你的 Google Cloud 账户，并选择你创建的新项目。
 
-{{% /tab %}}
+</TabItem>
 {{% tab "Using gcloud config" %}}
-{{% /tab %}}
-{{% /tabs %}}
+</TabItem>
+</Tabs>
 
 # 4. 确认 gcloud 的配置是否正确
 

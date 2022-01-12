@@ -135,7 +135,7 @@ kubectl --kubeconfig ~/.kube/config/k3s.yaml get pods --all-namespaces
 1. 从[版本发布](https://github.com/rancher/k3s/releases)页面下载要升级的 K3s 版本的新离线镜像 tar 包。将 tar 文件放在每个节点上的 `/var/lib/rancher/k3s/agent/images/` 目录中。删除旧的 tar 文件。
 2. 复制并替换每个节点上 `/usr/local/bin` 中的旧 K3s 二进制文件。复制 [K3s 安装脚本](https://get.k3s.io)（因为脚本可能自上次版本发布以来已更改）。使用相同的环境变量再次运行脚本。
 3. 重启 K3s 服务（如果安装程序没有自动重启 K3s 的话）。
-   {{% /tab %}}
+   </TabItem>
    {{% tab "RKE" %}}
 
    我们将使用 Rancher Kubernetes Engine (RKE) 创建一个 Kubernetes 集群。在启动 Kubernetes 集群之前，你需要安装 RKE 并创建 RKE 配置文件。
@@ -209,8 +209,8 @@ rke up --config ./rancher-cluster.yml
 - `rancher-cluster.yml`：RKE 集群配置文件。
 - `kube_config_cluster.yml`：集群的 [Kubeconfig 文件]({{<baseurl>}}/rke/latest/en/kubeconfig/)。该文件包含可完全访问集群的凭证。
 - `rancher-cluster.rkestate`：[Kubernetes 集群状态文件]({{<baseurl>}}/rke/latest/en/installation/#kubernetes-cluster-state)。该文件包含集群的当前状态，包括 RKE 配置以及证书<br/>。<br/>_Kubernetes 集群状态文件仅在使用 RKE 0.2.0 或更高版本时创建。_
-   {{% /tab %}}
-   {{% /tabs %}}
+   </TabItem>
+   </Tabs>
 
 > **注意：** 后两个文件名中的 `rancher-cluster` 部分取决于你命名 RKE 集群配置文件的方式。
 

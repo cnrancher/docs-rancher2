@@ -102,7 +102,7 @@ chmod +x rancher-load-images.sh
 ```plain
 ./rancher-load-images.sh --image-list ./rancher-images.txt --registry <REGISTRY.YOURDOMAIN.COM:PORT>
 ```
-{{% /tab %}}
+</TabItem>
 {{% tab "Linux and Windows Clusters" %}}
 
 如果你的 Rancher Server 将用于配置 Linux 和 Windows 集群，你需要执行不同的步骤，来将 Windows 镜像和 Linux 镜像推送到你的私有镜像仓库。由于 Windows 集群同时包含 Linux 和 Windows 节点，因此推送到私有镜像仓库的 Linux 镜像是 Manifest。
@@ -281,8 +281,8 @@ Linux 镜像需要在 Linux 主机上收集和推送，但是你必须先将 Win
 ```
 
 
-{{% /tab %}}
-{{% /tabs %}}
+</TabItem>
+</Tabs>
 
 ### [Kubernetes 安装的后续步骤 - 启动 Kubernetes 集群]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/air-gap/launch-kubernetes/)
 

@@ -82,7 +82,7 @@ Rancher 支持使用私有镜像仓库进行离线安装。你必须有自己的
 在后续设置 K3s Kubernetes 集群时，你需要创建一个[私有镜像仓库配置文件]({{<baseurl>}}/k3s/latest/en/installation/private-registry/)，其中包含此镜像仓库的信息。
 
 如需获得创建私有镜像仓库的帮助，请参见 [Docker 官方文档](https://docs.docker.com/registry/deploying/#run-an-externally-accessible-registry)。
-{{% /tab %}}
+</TabItem>
 {{% tab "RKE" %}}
 
 如需在 RKE 集群中安装 Rancher Management Server，我们建议配置以下基础设施：
@@ -146,7 +146,7 @@ Rancher 支持使用安全的 Docker 私有镜像仓库进行离线安装。你�
 
 如需获得创建私有镜像仓库的帮助，请参见 [Docker 官方文档](https://docs.docker.com/registry/deploying/#run-an-externally-accessible-registry)。
 
-{{% /tab %}}
+</TabItem>
 {{% tab "Docker" %}}
 > Docker 安装适用于想要测试 Rancher 的用户。由于只有一个节点和一个 Docker 容器，因此如果该节点发生故障，你将丢失 Rancher Server 的所有数据。
 >
@@ -168,8 +168,8 @@ Rancher 支持使用 Docker 私有镜像仓库在堡垒服务器中进行离线�
 
 如需获得创建私有镜像仓库的帮助，请参见 [Docker 官方文档](https://docs.docker.com/registry/)。
 
-{{% /tab %}}
-{{% /tabs %}}
+</TabItem>
+</Tabs>
 
 ### 后续操作
 [收集镜像并发布到你的私有镜像仓库]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/air-gap/populate-private-registry/)

@@ -176,7 +176,7 @@ Waiting for deployment "rancher" rollout to finish: 0 of 3 updated replicas are 
 deployment "rancher" successfully rolled out
 ```
 
-{{% /tab %}}
+</TabItem>
 {{% tab "Let's Encrypt" %}}
 
 此选项使用 `cert-manager` 来自动请求和续订 [Let's Encrypt](https://letsencrypt.org/) 证书。Let's Encrypt 是免费的，而且是受信的 CA，因此可以为你提供有效的证书。
@@ -208,7 +208,7 @@ Waiting for deployment "rancher" rollout to finish: 0 of 3 updated replicas are 
 deployment "rancher" successfully rolled out
 ```
 
-{{% /tab %}}
+</TabItem>
 {{% tab "Certificates from Files" %}}
 
 该选项使用你自己的证书来创建 Kubernetes 密文，以供 Rancher 使用。
@@ -244,8 +244,8 @@ helm install rancher rancher-latest/rancher \
 ```
 
 现在 Rancher 已部署，请参见[添加 TLS 密文]({{<baseurl>}}/rancher/v2.6/en/installation/resources/tls-secrets/)发布证书文件，以便 Rancher 和 Ingress Controller 可以使用它们。
-{{% /tab %}}
-{{% /tabs %}}
+</TabItem>
+</Tabs>
 
 Rancher Chart 有许多选项，用于为你的具体环境自定义安装。以下是一些常见的高级方案：
 
