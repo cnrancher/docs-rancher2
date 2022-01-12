@@ -148,8 +148,18 @@ cert-manager-webhook-787858fcdb-nlzsq      1/1     Running   0          2m
 
 不同的证书配置需要使用不同的 Rancher 安装命令。
 
-{{% tabs %}}
-{{% tab "Rancher-generated Certificates" %}}
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+defaultValue="rancher"
+values={[
+{ label: 'Rancher 生成的证书', value: 'rancher', },
+{ label: 'Let's Encrypt', value: 'letsencrypt', },
+{ label: '已有的证书', value: 'fromfile', },
+]}>
+
+<TabItem value="rancher">
 
 
 默认情况是使用 Rancher 生成 CA，并使用 `cert-manager` 颁发用于访问 Rancher Server 接口的证书。
@@ -177,7 +187,7 @@ deployment "rancher" successfully rolled out
 ```
 
 </TabItem>
-{{% tab "Let's Encrypt" %}}
+<TabItem value="letsencrypt">
 
 此选项使用 `cert-manager` 来自动请求和续订 [Let's Encrypt](https://letsencrypt.org/) 证书。Let's Encrypt 是免费的，而且是受信的 CA，因此可以为你提供有效的证书。
 
@@ -209,7 +219,7 @@ deployment "rancher" successfully rolled out
 ```
 
 </TabItem>
-{{% tab "Certificates from Files" %}}
+<TabItem value="fromfile">
 
 该选项使用你自己的证书来创建 Kubernetes 密文，以供 Rancher 使用。
 

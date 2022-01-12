@@ -69,8 +69,18 @@ Cloud Shell 是一个 shell 环境，用于管理托管在 Google Cloud 上的�
 - 如果您想了解默认值，请使用 gcloud init。
 - 如需单独设置你的项目 ID、地区和区域，使用 gcloud config。
 
-{{% tabs %}}
-{{% tab "Using gloud init" %}}
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+
+<Tabs
+defaultValue="init"
+values={[
+{ label: '使用 gloud init', value: 'init', },
+{ label: '使用 gcloud config', value: 'config', },
+]}>
+
+<TabItem value="init">
 
 1. 运行 gcloud init 并按照指示操作：
 
@@ -85,8 +95,11 @@ Cloud Shell 是一个 shell 环境，用于管理托管在 Google Cloud 上的�
 2. 按照指示，以授权 gcloud 使用你的 Google Cloud 账户，并选择你创建的新项目。
 
 </TabItem>
-{{% tab "Using gcloud config" %}}
+
+<TabItem value="config">
+
 </TabItem>
+
 </Tabs>
 
 # 4. 确认 gcloud 的配置是否正确

@@ -11,8 +11,18 @@ Rancher 可以安装在任何 Kubernetes 集群上，包括托管的 Kubernetes�
 
 在 RKE 或 K3s 上离线安装 Kubernetes 集群的步骤如下所示：
 
-{{% tabs %}}
-{{% tab "K3s" %}}
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+
+<Tabs
+defaultValue="k3s"
+values={[
+{ label: 'K3s', value: 'k3s', },
+{ label: 'RKE', value: 'rke', },
+]}>
+
+<TabItem value="k3s">
 
 在本指南中，我们假设你已经在离线环境中创建了节点，并且在堡垒服务器上有一个安全的 Docker 私有镜像仓库。
 
@@ -136,7 +146,7 @@ kubectl --kubeconfig ~/.kube/config/k3s.yaml get pods --all-namespaces
 2. 复制并替换每个节点上 `/usr/local/bin` 中的旧 K3s 二进制文件。复制 [K3s 安装脚本](https://get.k3s.io)（因为脚本可能自上次版本发布以来已更改）。使用相同的环境变量再次运行脚本。
 3. 重启 K3s 服务（如果安装程序没有自动重启 K3s 的话）。
    </TabItem>
-   {{% tab "RKE" %}}
+   <TabItem value="rke">
 
    我们将使用 Rancher Kubernetes Engine (RKE) 创建一个 Kubernetes 集群。在启动 Kubernetes 集群之前，你需要安装 RKE 并创建 RKE 配置文件。
 
