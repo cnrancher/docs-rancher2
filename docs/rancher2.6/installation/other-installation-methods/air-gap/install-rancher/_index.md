@@ -199,7 +199,7 @@ helm template rancher ./rancher-<VERSION>.tgz --output-dir . \
 
 ### 自签名证书安装 - 安装 Cert-manager
 
-{{% accordion id="install-cert-manager" label="Click to expand" %}}
+
 
 如果你使用自签名证书，安装 cert-manager：
 
@@ -221,7 +221,7 @@ kubectl apply -f cert-manager/cert-manager-crd.yaml
 kubectl apply -R -f ./cert-manager
 ```
 
-{{% /accordion %}}
+
 
 ### 使用 kubectl 安装 Rancher
 

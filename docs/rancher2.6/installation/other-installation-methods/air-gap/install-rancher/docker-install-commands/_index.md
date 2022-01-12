@@ -19,7 +19,7 @@ Docker 安装适用于想要测试 Rancher 的用户。
 > **你是否需要**：
 >
 > - 配置自定义 CA 根证书以访问服务。参见[自定义 CA 根证书]({{<baseurl>}}/rancher/v2.6/en/installation/resources/custom-ca-root-certificate/)。
-> - 记录所有与 Rancher API 的交易活动。参见 [API 审计]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/single-node-docker/advanced/#api-audit-log)。
+> - 记录所有与 Rancher API 的事务。参见 [API 审计]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/single-node-docker/advanced/#api-audit-log)。
 
 选择以下的选项之一：
 
@@ -47,11 +47,11 @@ docker run -d --restart=unless-stopped \
     <REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher:<RANCHER_VERSION_TAG>
 ```
 
-{{% /accordion %}}
+
 
 ### 选项 B：使用你自己的证书 - 自签名
 
-{{% accordion id="option-b" label="Click to expand" %}}
+
 
 在你团队访问 Rancher Server 的开发或测试环境中，创建一个用于你的安装的自签名证书，以便团队验证他们对实例的连接。
 
@@ -86,11 +86,11 @@ docker run -d --restart=unless-stopped \
     <REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher:<RANCHER_VERSION_TAG>
 ```
 
-{{% /accordion %}}
+
 
 ### 选项 C：使用你自己的证书 - 可信 CA 签名的证书
 
-{{% accordion id="option-c" label="Click to expand" %}}
+
 
 在公开暴露应用的开发或测试环境中，请使用由可信 CA 签名的证书，以避免用户收到证书安全警告。
 
@@ -122,7 +122,7 @@ docker run -d --restart=unless-stopped \
     <REGISTRY.YOURDOMAIN.COM:PORT>/rancher/rancher:<RANCHER_VERSION_TAG>
 ```
 
-{{% /accordion %}}
+
 
 
 

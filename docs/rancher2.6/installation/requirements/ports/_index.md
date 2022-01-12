@@ -39,7 +39,7 @@ Rancher 可以安装在任何 Kubernetes 集群上。如果你的 Rancher 安装
 
 ### K3s 上 Rancher Server 节点的端口
 
-{{% accordion label="Click to expand" %}}
+
 
 K3s server 需要开放端口 6443 才能供节点访问。
 
@@ -70,11 +70,11 @@ K3s server 需要开放端口 6443 才能供节点访问。
 | TCP | 2376 | 使用 Node Driver 创建的节点的任何节点 IP | Docker Machine 使用的 Docker daemon TLS 端口 |
 | TCP | 6443 | 托管/导入的 Kubernetes API | Kubernetes API 服务器 |
 
-{{% /accordion %}}
+
 
 ### RKE 上 Rancher Server 节点的端口
 
-{{% accordion label="Click to expand" %}}
+
 
 通常情况下，Rancher 安装在三个 RKE 节点上，这些节点都有 etcd、control plane 和 worker 角色。
 
@@ -116,11 +116,11 @@ K3s server 需要开放端口 6443 才能供节点访问。
 | TCP | 6443 | 托管/导入的 Kubernetes API | Kubernetes API 服务器 |
 | TCP | 提供商依赖 | 托管集群中 Kubernetes API 端点的端口 | Kubernetes API |
 
-{{% /accordion %}}
+
 
 ### RKE2 上 Rancher Server 节点的端口
 
-{{% accordion label="Click to expand" %}}
+
 
 RKE2 server 需要开放端口 6443 和 9345 才能供集群中的其他节点访问。
 
@@ -146,11 +146,11 @@ RKE2 server 需要开放端口 6443 和 9345 才能供集群中的其他节点�
 | HTTPS | 8443 | <ul><li>托管/注册的 Kubernetes</li><li>任何需要使用 Rancher UI 或 API 的源</li></ul> | Rancher Agent，Rancher UI/API，kubectl。如果负载均衡执行 TLS 终止，则不需要。 |
 
 所有出站流量通常都是允许的。
-{{% /accordion %}}
+
 
 ### Docker 安装的 Rancher Server 的端口
 
-{{% accordion label="Click to expand" %}}
+
 
 下表描述了 Rancher 节点入站和出站流量的端口要求：
 
@@ -170,7 +170,7 @@ RKE2 server 需要开放端口 6443 和 9345 才能供集群中的其他节点�
 | TCP | 2376 | 使用 Node Driver 创建的节点的任何节点 IP | Docker Machine 使用的 Docker daemon TLS 端口 |
 | TCP | 6443 | 托管/导入的 Kubernetes API | Kubernetes API 服务器 |
 
-{{% /accordion %}}
+
 
 # 下游 Kubernetes 集群节点
 
@@ -190,7 +190,7 @@ RKE2 server 需要开放端口 6443 和 9345 才能供集群中的其他节点�
 
 ### Rancher 使用节点池启动 Kubernetes 集群的端口
 
-{{% accordion label="Click to expand" %}}
+
 
 下表描述了节点在[云提供商]({{<baseurl>}}/rancher/v2.6/en/cluster-provisioning/rke-clusters/node-pools/)中创建的情况下，[Rancher 启动 Kubernetes]({{<baseurl>}}/rancher/v2.6/en/cluster-provisioning/rke-clusters/) 的端口要求。
 
@@ -199,39 +199,39 @@ RKE2 server 需要开放端口 6443 和 9345 才能供集群中的其他节点�
 
 {{< ports-iaas-nodes >}}
 
-{{% /accordion %}}
+
 
 ### Rancher 使用自定义节点启动 Kubernetes 集群的端口
 
-{{% accordion label="Click to expand" %}}
+
 
 下表描述了使用[自定义节点]({{<baseurl>}}/rancher/v2.6/en/cluster-provisioning/rke-clusters/custom-nodes/)的情况下，[Rancher 启动 Kubernetes]({{<baseurl>}}/rancher/v2.6/en/cluster-provisioning/rke-clusters/) 的端口要求。
 
 {{< ports-custom-nodes >}}
 
-{{% /accordion %}}
+
 
 ### 托管 Kubernetes 集群的端口
 
-{{% accordion label="Click to expand" %}}
+
 
 下表描述了[托管集群]({{<baseurl>}}/rancher/v2.6/en/cluster-provisioning/hosted-kubernetes-clusters)的端口要求。
 
 {{< ports-imported-hosted >}}
 
-{{% /accordion %}}
+
 
 ### 注册集群的端口
 
 注意：在 Rancher 2.5 之前，注册集群被称为导入集群。
 
-{{% accordion label="Click to expand" %}}
+
 
 下表描述了[注册集群]({{<baseurl>}}/rancher/v2.6/en/cluster-provisioning/registered-clusters/)的端口要求。
 
 {{< ports-imported-hosted >}}
 
-{{% /accordion %}}
+
 
 
 # 其他端口注意事项
