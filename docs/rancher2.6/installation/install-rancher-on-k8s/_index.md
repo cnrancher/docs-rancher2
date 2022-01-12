@@ -108,7 +108,7 @@ Rancher Management Server 默认需要 SSL/TLS 配置来保证访问的安全性
 
 仅在使用 Rancher 生成的证书（`ingress.tls.source=rancher`）或 Let's Encrypt 颁发的证书（`ingress.tls.source=letsEncrypt`）时，才需要安装 cert-manager。
 
-{{% accordion id="cert-manager" label="Click to Expand" %}}
+
 
 > **重要提示**：由于 cert-manager 的最新改动，你需要升级 cert-manager 版本。如果你需要升级 Rancher 并使用低于 0.11.0 的 cert-manager 版本，请参见[升级文档]({{<baseurl>}}/rancher/v2.6/en/installation/resources/upgrading-cert-manager/)。
 
@@ -142,7 +142,7 @@ cert-manager-cainjector-577f6d9fd7-tr77l   1/1     Running   0          2m
 cert-manager-webhook-787858fcdb-nlzsq      1/1     Running   0          2m
 ```
 
-{{% /accordion %}}
+
 
 ### 5. 根据你选择的证书选项，通过 Helm 安装 Rancher
 

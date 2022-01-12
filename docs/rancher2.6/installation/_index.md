@@ -76,7 +76,7 @@ Rancher backup operator 可将 Rancher 从单个 Docker 容器迁移到高可用
 
 参见 [Helm Chart 选项]({{<baseurl>}}/rancher/v2.6/en/installation/resources/chart-options/)以了解在 Kubernetes 集群上安装 Rancher 的其他配置，包括：
 
-- [开启 API 审计日志]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#api-audit-log)
+- [开启 API 审计日志来记录所有事务]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#api-audit-log)
 - [负载均衡器上的 TLS 终止]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#external-tls-termination)
 - [自定义 Ingress]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#customizing-your-ingress)
 
@@ -89,6 +89,6 @@ Rancher backup operator 可将 Rancher 从单个 Docker 容器迁移到高可用
 
 参见 [Docker 安装选项]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/single-node-docker)，以了解其他配置，包括：
 
-- [开启 API 审计日志]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/single-node-docker/advanced/#api-audit-log)
+- [开启 API 审计日志来记录所有事务]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/single-node-docker/advanced/#api-audit-log)
 - [外部负载均衡器]({{<baseurl>}}/rancher/v2.6/en/installation/resources/advanced/single-node-install-external-lb/)
 - [持久化数据存储]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/single-node-docker/advanced/#persistent-data)
