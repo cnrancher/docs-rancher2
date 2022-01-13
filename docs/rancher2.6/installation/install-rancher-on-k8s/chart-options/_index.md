@@ -120,7 +120,9 @@ kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='{{
 
 默认情况下，Rancher Server 会检测并导入其所在的 `local` 集群。有权访问 `local` 集群的用户对 Rancher Server 管理的所有集群具有“root”访问权限。
 
-> **重要提示**：如果你关闭 addLocal，大多数 Rancher 2.5 功能都不能使用，包括 EKS Provisioner。
+> :::important 重要提示
+> 如果你关闭 addLocal，大多数 Rancher 2.5 功能都不能使用，包括 EKS Provisioner。
+> :::
 
 如果这在你的环境中是一个问题，你可以在初始安装时将此选项设置为“false”。
 
@@ -181,7 +183,9 @@ kubectl -n cattle-system create secret generic tls-ca-additional --from-file=ca-
 
 你可以在 Rancher 集群（Ingress）外部的 L7 负载均衡器上终止 SSL/TLS。使用 `--set tls=external` 选项，将负载均衡器指向所有 Rancher 集群节点上的端口 HTTP 80。这将在 HTTP 端口 80 上暴露 Rancher 接口。请注意，允许直接连接到 Rancher 集群的客户端不会被加密。如果你选择这样做，我们建议你将网络级别的直接访问限制为仅你的负载均衡器。
 
-> **注意**：如果你使用的是私有 CA 签名的证书，请添加 `--set privateCA=true` 并参见[添加 TLS 密文 - 使用私有 CA 签名证书]({{<baseurl>}}/rancher/v2.6/en/installation/resources/tls-secrets/)，为 Rancher 添加 CA 证书。
+> :::note 注意
+> 如果你使用的是私有 CA 签名的证书，请添加 `--set privateCA=true` 并参见[添加 TLS 密文 - 使用私有 CA 签名证书]({{<baseurl>}}/rancher/v2.6/en/installation/resources/tls-secrets/)，为 Rancher 添加 CA 证书。
+> :::
 
 你的负载均衡器必须支持长期存在的 Websocket 连接，并且需要插入代理头，以便 Rancher 可以正确传送链接。
 
@@ -217,7 +221,9 @@ Rancher 将对 `/healthz` 端点的健康检查响应`200`。
 
 此 NGINX 配置已在 NGINX 1.14 上进行了测试。
 
-> **注意**：此 NGINX 配置只是一个示例，可能不适合你的环境。如需查阅完整文档，请参见 [NGINX 负载均衡 - HTTP 负载均衡](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/)。
+> :::note 注意
+> 此 NGINX 配置只是一个示例，可能不适合你的环境。如需查阅完整文档，请参见 [NGINX 负载均衡 - HTTP 负载均衡](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/)。
+> :::
 
 - 将 `IP_NODE1`，`IP_NODE2`  和 `IP_NODE3` 替换为你集群中节点的 IP 地址。
 - 将两处的 `FQDN` 均替换为 Rancher 的 DNS 名称。

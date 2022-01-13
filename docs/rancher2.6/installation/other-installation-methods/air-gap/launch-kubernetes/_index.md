@@ -222,7 +222,9 @@ rke up --config ./rancher-cluster.yml
    </TabItem>
    </Tabs>
 
-> **注意：** 后两个文件名中的 `rancher-cluster` 部分取决于你命名 RKE 集群配置文件的方式。
+> :::note 注意
+> 后两个文件名中的 `rancher-cluster` 部分取决于你命名 RKE 集群配置文件的方式。
+> :::
 
 ### 故障排查
 

@@ -106,7 +106,9 @@ docker run -d --restart=unless-stopped \
 | `<REGISTRY.YOURDOMAIN.COM:PORT>` | 私有镜像仓库的 URL 和端口。 |
 | `<RANCHER_VERSION_TAG>` | 你想要安装的 [Rancher 版本]({{<baseurl>}}/rancher/v2.6/en/installation/resources/chart-options/)的版本标签。 |
 
-> **注意**：使用 `--no-cacerts` 作为容器的参数，以禁用 Rancher 生成的默认 CA 证书。
+> :::note 注意
+> 使用 `--no-cacerts` 作为容器的参数，以禁用 Rancher 生成的默认 CA 证书。
+> :::
 
 特权访问是[必须](#privileged-access-for-rancher)的。
 

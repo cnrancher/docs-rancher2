@@ -71,7 +71,7 @@ Rancher 是使用 Kubernetes 的 [Helm](https://helm.sh/) 包管理器安装的�
 
 执行 `helm repo add` 命令，以添加包含安装 Rancher 的 Chart 的 Helm Chart 仓库。有关如何选择仓库，以及哪个仓库最适合你的用例，请参见[选择 Rancher 版本]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#helm-chart-repositories)。
 
-{{< release-channel >}}
+
 
 ```
 helm repo add rancher-<CHART_REPO> https://releases.rancher.com/server-charts/<CHART_REPO>
@@ -114,7 +114,9 @@ Rancher Management Server 默认需要 SSL/TLS 配置来保证访问的安全性
 
 
 
-> **重要提示**：由于 cert-manager 的最新改动，你需要升级 cert-manager 版本。如果你需要升级 Rancher 并使用低于 0.11.0 的 cert-manager 版本，请参见[升级文档]({{<baseurl>}}/rancher/v2.6/en/installation/resources/upgrading-cert-manager/)。
+> :::important 重要提示
+> 由于 cert-manager 的最新改动，你需要升级 cert-manager 版本。如果你需要升级 Rancher 并使用低于 0.11.0 的 cert-manager 版本，请参见[升级文档]({{<baseurl>}}/rancher/v2.6/en/installation/resources/upgrading-cert-manager/)。
+> :::
 
 这些说明来自 [cert-manager 官方文档](https://cert-manager.io/docs/installation/kubernetes/#installing-with-helm)。
 

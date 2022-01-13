@@ -13,7 +13,9 @@ weight: 251
 | HTTPS_PROXY | 发起 HTTPS 连接的代理地址 |
 | NO_PROXY | 发起连接时不使用代理的网络地址，网络地址范围和域名 |
 
-> **注意**：`NO_PROXY` 必须大写才能使用网络范围 CIDR 表示法。
+> :::note 注意
+> `NO_PROXY` 必须大写才能使用网络范围 CIDR 表示法。
+> :::
 
 ## 基于 Docker 安装
 
