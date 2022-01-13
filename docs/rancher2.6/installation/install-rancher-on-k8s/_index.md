@@ -53,7 +53,9 @@ Rancher 是使用 Kubernetes 的 [Helm](https://helm.sh/) 包管理器安装的�
 
 如果要指定用于安装 Rancher 的 Helm 版本，请参见[Helm 版本要求]({{<baseurl>}}/rancher/v2.6/en/installation/resources/helm-version)。
 
-> **注意**：本安装指南假定你使用的是 Helm 3。
+> :::note
+> 本安装指南假定你使用的是 Helm 3。
+> :::
 
 要设置 Rancher：
 
