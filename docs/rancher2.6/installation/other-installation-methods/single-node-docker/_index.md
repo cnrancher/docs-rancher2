@@ -36,7 +36,7 @@ Rancher backup operator 可将 Rancher 从单个 Docker 容器迁移到高可用
 > - 使用代理。参见 [HTTP 代理配置]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/single-node-docker/proxy/)。
 > - 配置自定义 CA 根证书以访问服务。参见[自定义 CA 根证书]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/single-node-docker/advanced/#custom-ca-certificate/)。
 > - 完成离线安装。参见 [离线：Docker 安装]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/air-gap/)。
-> - 记录所有与 Rancher API 的交易活动。参加 [API 审计](./advanced/#api-audit-log)。
+> - 记录所有与 Rancher API 的事务。参加 [API 审计](./advanced/#api-audit-log)。
 
 选择以下的选项之一：
 
@@ -123,7 +123,9 @@ docker run -d --restart=unless-stopped \
 
 ### 选项 D：Let's Encrypt 证书
 
-> **注意**：Let's Encrypt 对新证书请求有频率限制。因此，请限制创建或销毁容器的频率。详情请参见 [Let's Encrypt 官方文档 - 频率限制](https://letsencrypt.org/docs/rate-limits/)。
+> :::note 注意
+> Let's Encrypt 对新证书请求有频率限制。因此，请限制创建或销毁容器的频率。详情请参见 [Let's Encrypt 官方文档 - 频率限制](https://letsencrypt.org/docs/rate-limits/)。
+> :::
 
 你也可以在生产环境中使用 [Let's Encrypt](https://letsencrypt.org/) 证书。Let's Encrypt 使用 HTTP-01 质询来验证你对域名的控制权。如果要确认你对该域名有控制权，你可将用于访问 Rancher 的主机名（例如 `rancher.mydomain.com`）指向运行的机器的 IP。你可通过在 DNS 中创建 A 记录，以将主机名绑定到 IP 地址。
 

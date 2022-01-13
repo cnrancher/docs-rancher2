@@ -7,8 +7,9 @@ weight: 100
 
 ## 前提
 
-> **注意**
+> :::note 注意
 > 部署到 Amazon AWS 会产生费用。
+> :::
 
 - [Amazon AWS 账号](https://aws.amazon.com/account/): 用于创建部署 Rancher Server 和 Kubernetes 的资源。
 - [Amazon AWS 访问密钥](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html)：如果你没有的话，请访问此链接查看相关指南。

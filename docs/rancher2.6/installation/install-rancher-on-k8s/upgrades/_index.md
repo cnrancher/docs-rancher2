@@ -74,7 +74,7 @@ kubeconfig 也可以通过 `--kubeconfig` 标签（详情请参见 https://helm.
 
    关于仓库及其区别，请参见 [Helm Chart Repositories]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#helm-chart-repositories)。
 
-   {{< release-channel >}}
+
 
    ```
    helm repo list
@@ -84,7 +84,9 @@ kubeconfig 也可以通过 `--kubeconfig` 标签（详情请参见 https://helm.
    rancher-<CHART_REPO>	 https://releases.rancher.com/server-charts/<CHART_REPO>
    ```
 
-   > **注意**：如果你想切换到不同的 Helm Chart 仓库，请按照[切换仓库步骤]({{<baseurl>}}/rancher/v2.6/en/installation/resources/choosing-version/#switching-to-a-different-helm-chart-repository)进行操作。如果你要切换存储库，请先再次列出仓库，再继续执行步骤3，以确保添加了正确的仓库。
+   > :::note 注意
+   > 如果你想切换到不同的 Helm Chart 仓库，请按照[切换仓库步骤]({{<baseurl>}}/rancher/v2.6/en/installation/resources/choosing-version/#switching-to-a-different-helm-chart-repository)进行操作。如果你要切换存储库，请先再次列出仓库，再继续执行步骤3，以确保添加了正确的仓库。
+   > :::
 
 
 1. 从 Helm Chart 仓库获取最新的 Chart 来安装 Rancher。
@@ -115,7 +117,9 @@ helm get values rancher -n cattle-system
 hostname: rancher.my.org
 ```
 
-> **注意**：这个命令会列出更多的值。此处展示的只是其中一个值的例子。
+> :::note 注意
+> 这个命令会列出更多的值。此处展示的只是其中一个值的例子。
+> :::
 
 如果你也要将 cert-manager 从早于 0.11.0 的版本升级到最新版本，请选择[选项 B：重装 Rancher 和 cert-manager](#option-b-reinstalling-rancher-and-cert-manager)。
 
@@ -133,7 +137,9 @@ helm upgrade rancher rancher-<CHART_REPO>/rancher \
   --set hostname=rancher.my.org
 ```
 
-> **注意**：以上是一个例子，可能有更多上一步的值需要追加。
+> :::note 注意
+> 以上是一个例子，可能有更多上一步的值需要追加。
+> :::
 
 另外，你也可以将当前的值导出到一个文件中，并在升级时引用该文件。例如，如果你只需要改变 Rancher 的版本：
 
