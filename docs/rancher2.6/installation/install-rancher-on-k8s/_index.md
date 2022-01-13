@@ -35,7 +35,7 @@ Rancher 可以安装在任何 Kubernetes 集群上。这个集群可以使用上
 设置 Kubernetes 集群需要以下 CLI 工具。请确保这些工具已安装并在你的 `$PATH` 中可用。
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl) - Kubernetes 命令行工具。
-- [Helm](https://docs.helm.sh/using_helm/#installing-helm) - Kubernetes 的包管理器。请参见 [Helm 版本要求]({{<baseurl>}}/rancher/v2.6/en/installation/resources/helm-version) 选择 Helm 版本来安装 Rancher。请为你的具体平台参见 [Helm 项目提供的说明](https://helm.sh/docs/intro/install/)。
+- [Helm](https://docs.helm.sh/using_helm/#installing-helm) - Kubernetes 的包管理器。请参见 [Helm 版本要求]({{<baseurl>}}/rancher/v2.6/en/installation/resources/helm-version)选择 Helm 版本来安装 Rancher。请为你的具体平台参见 [Helm 项目提供的说明](https://helm.sh/docs/intro/install/)。
 
 ### Ingress Controller（用于托管的 Kubernetes）
 
@@ -53,7 +53,7 @@ Rancher 是使用 Kubernetes 的 [Helm](https://helm.sh/) 包管理器安装的�
 
 如果要指定用于安装 Rancher 的 Helm 版本，请参见[Helm 版本要求]({{<baseurl>}}/rancher/v2.6/en/installation/resources/helm-version)。
 
-> :::note
+> :::note 注意
 > 本安装指南假定你使用的是 Helm 3。
 > :::
 
@@ -89,7 +89,9 @@ kubectl create namespace cattle-system
 
 Rancher Management Server 默认需要 SSL/TLS 配置来保证访问的安全性。
 
-> **注意**：如果你想在外部终止 SSL/TLS，请参见[外部负载均衡器的 TLS 终止]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#external-tls-termination)。
+> :::note 注意
+> 如果你想在外部终止 SSL/TLS，请参见[外部负载均衡器的 TLS 终止]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#external-tls-termination)。
+> :::
 
 你可以从以下三种证书来源中选择一种，用于在 Rancher Server 中终止 TLS：
 
@@ -157,7 +159,7 @@ import TabItem from '@theme/TabItem';
 defaultValue="rancher"
 values={[
 { label: 'Rancher 生成的证书', value: 'rancher', },
-{ label: 'Let's Encrypt', value: 'letsencrypt', },
+{ label: 'Let\'s Encrypt 证书', value: 'letsencrypt', },
 { label: '已有的证书', value: 'fromfile', },
 ]}>
 
@@ -193,7 +195,9 @@ deployment "rancher" successfully rolled out
 
 此选项使用 `cert-manager` 来自动请求和续订 [Let's Encrypt](https://letsencrypt.org/) 证书。Let's Encrypt 是免费的，而且是受信的 CA，因此可以为你提供有效的证书。
 
-> **注意**：由于 HTTP-01 质询只能在端口 80 上完成，因此你需要打开端口 80。
+> :::note 注意
+> 由于 HTTP-01 质询只能在端口 80 上完成，因此你需要打开端口 80。
+> :::
 
 在以下命令中，
 
