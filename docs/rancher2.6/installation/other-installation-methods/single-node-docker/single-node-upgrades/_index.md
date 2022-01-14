@@ -43,7 +43,7 @@ docker ps
 | `<DATE>` | `2018-12-19` | 数据容器或备份的创建日期。 |
 <br/>
 
-可以通过远程连接登录到 Rancher Server 所在的主机并输入命令 `docker ps` 以查看正在运行的容器，从而获得 `<RANCHER_CONTAINER_TAG>` 和 `<RANCHER_CONTAINER_NAME>`。你还可以运行 `docker ps -a` 命令查看停止了的容器。在创建备份期间，你可以随时运行这些命令以获得帮助。
+可以通过远程连接登录到 Rancher Server 所在的主机并输入命令 `docker ps` 以查看正在运行的容器，从而获得 `<RANCHER_CONTAINER_TAG>` 和 `<RANCHER_CONTAINER_NAME>`。你还可以运行 `docker ps -a` 命令查看停止了的容器。在创建备份期间，你随时可以运行这些命令以获得帮助。
 
 # 升级概要
 
@@ -110,7 +110,9 @@ docker pull rancher/rancher:<RANCHER_VERSION_TAG>
 
 使用 `rancher-data` 容器中的数据启动一个新的 Rancher Server 容器。记住要传入启动原始容器时使用的所有环境变量。
 
-> **重要**：启动升级后，即使升级耗时比预期长，也 _不要_ 停止升级。如果你停止升级，可能会导致之后的升级中出现数据库迁移错误。
+> :::important 重要提示
+> 启动升级后，即使升级耗时比预期长，也 _不要_ 停止升级。如果你停止升级，可能会导致之后的升级中出现数据库迁移错误。
+> :::
 
 如果你使用代理，请参见 [HTTP 代理配置]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/single-node-docker/proxy/)。
 
@@ -224,7 +226,9 @@ docker run -d --volumes-from rancher-data \
 
 
 
-> **注意**：Let's Encrypt 对新证书请求有频率限制。因此，请限制创建或销毁容器的频率。详情请参见 [Let's Encrypt 官方文档 - 频率限制](https://letsencrypt.org/docs/rate-limits/)。
+> :::note 注意
+> Let's Encrypt 对新证书请求有频率限制。因此，请限制创建或销毁容器的频率。详情请参见 [Let's Encrypt 官方文档 - 频率限制](https://letsencrypt.org/docs/rate-limits/)。
+> :::
 
 如果你选择使用 [Let's Encrypt](https://letsencrypt.org/) 证书，则在启动原始 Rancher Server 容器的命令中添加 `--volumes-from rancher-data`，并且提供最初安装 Rancher 时使用的域名。
 
@@ -329,7 +333,9 @@ docker run -d --restart=unless-stopped \
 | `<REGISTRY.YOURDOMAIN.COM:PORT>` | 私有镜像仓库的 URL 和端口。 |
 | `<RANCHER_VERSION_TAG>` | 你想要升级到的 [Rancher 版本]({{<baseurl>}}/rancher/v2.6/en/installation/resources/chart-options/)的版本标签。 |
 
-> **注意**：使用 `--no-cacerts` 作为容器的参数，以禁用 Rancher 生成的默认 CA 证书。
+> :::note 注意
+> 使用 `--no-cacerts` 作为容器的参数，以禁用 Rancher 生成的默认 CA 证书。
+> :::
 
 ```
 docker run -d --volumes-from rancher-data \

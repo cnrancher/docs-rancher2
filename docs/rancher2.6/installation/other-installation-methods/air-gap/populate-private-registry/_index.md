@@ -63,7 +63,9 @@ values={[
 
 1. 获取最新的 `cert-manager` Helm Chart，并解析模板以获取镜像的详情信息：
 
-   > **注意**：由于 cert-manager 的最新改动，你需要升级 cert-manager 版本。如果你要升级 Rancher，但你使用的 cert-manager 版本早于 0.12.0，请参见[升级文档]({{<baseurl>}}/rancher/v2.6/en/installation/resources/upgrading-cert-manager/)。
+   > :::note 注意
+   > 由于 cert-manager 的最新改动，你需要升级 cert-manager 版本。如果你要升级 Rancher，但你使用的 cert-manager 版本早于 0.12.0，请参见[升级文档]({{<baseurl>}}/rancher/v2.6/en/installation/resources/upgrading-cert-manager/)。
+   > :::
 
    ```plain
    helm repo add jetstack https://charts.jetstack.io
@@ -235,7 +237,9 @@ Linux 镜像需要在 Linux 主机上收集和推送，但是你必须先将 Win
 **在 Kubernetes 安装中，如果你使用的是 Rancher 默认的自签名 TLS 证书**，则必须将 [`cert-manager`](https://hub.helm.sh/charts/jetstack/cert-manager) 镜像添加到 `rancher-images.txt` 文件中。如果你使用自己的证书，则可跳过此步骤。
 
 1. 获取最新的 `cert-manager` Helm Chart，并解析模板以获取镜像的详情信息：
-   > **注意**：由于 cert-manager 的最新改动，你需要升级 cert-manager 版本。如果你要升级 Rancher，但你使用的 cert-manager 版本早于 0.12.0，请参见[升级文档]({{<baseurl>}}/rancher/v2.6/en/installation/resources/upgrading-cert-manager/)。
+   > :::note 注意
+   > 由于 cert-manager 的最新改动，你需要升级 cert-manager 版本。如果你要升级 Rancher，但你使用的 cert-manager 版本早于 0.12.0，请参见[升级文档]({{<baseurl>}}/rancher/v2.6/en/installation/resources/upgrading-cert-manager/)。
+   > :::
    ```plain
    helm repo add jetstack https://charts.jetstack.io
    helm repo update

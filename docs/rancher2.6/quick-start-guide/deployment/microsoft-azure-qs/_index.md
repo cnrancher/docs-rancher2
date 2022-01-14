@@ -8,8 +8,9 @@ weight: 100
 
 ## 前提
 
-> **注意**
+> :::note 注意
 > 部署到 Microsoft Azure 会产生费用。
+> :::
 
 - [Microsoft Azure 账号](https://azure.microsoft.com/en-us/free/)：用于创建部署 Rancher 和 Kubernetes 的资源。
 - [Microsoft Azure 订阅](https://docs.microsoft.com/en-us/azure/cost-management-billing/manage/create-subscription#create-a-subscription-in-the-azure-portal)：如果你没有的话，请访问此链接查看如何创建 Microsoft Azure 订阅。

@@ -15,7 +15,7 @@ weight: 3
 
 还原是通过创建 Restore 自定义资源实现的。
 
-> **重要提示**
+> :::important 重要提示
 >
 > * 请按照此页面上的说明在已备份的同一集群上恢复 Rancher。要把 Rancher 迁移到新集群，请参照步骤[迁移 Rancher]({{<baseurl>}}/rancher/v2.6/en/backups/migrating-rancher)。
 > * 在使用相同设置恢复 Rancher 时，Rancher deployment 在恢复开始前被手动缩减，然后 Operator 将在恢复完成后将其缩回。因此，在恢复完成之前，Rancher 和 UI 都将不可用。如果 UI 不可用时，你可使用 `kubectl create -f restore.yaml`YAML 恢复文件来使用初始的集群 kubeconfig。

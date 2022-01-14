@@ -31,7 +31,7 @@ weight: 400
 1. 如果你还没有安装 `helm`，请在可访问互联网的工作站上进行本地安装。注意：参考 [Helm 版本要求]({{<baseurl>}}/rancher/v2.6/en/installation/resources/helm-version)选择 Helm 版本来安装Rancher。
 
 2. 执行 `helm repo add` 命令，以添加包含安装 Rancher 的 Chart 的 Helm Chart 仓库。有关如何选择仓库，以及哪个仓库最适合你的用例，请参见[选择 Rancher 版本]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#helm-chart-repositories)。
-   {{< release-channel >}}
+
    ```
    helm repo add rancher-<CHART_REPO> https://releases.rancher.com/server-charts/<CHART_REPO>
    ```
@@ -52,7 +52,9 @@ Rancher Server 默认设计为安全的，并且需要 SSL/TLS 配置。
 
 如果你在离线的 Kubernetes 集群中安装 Rancher，我们建议使用以下两种证书生成方式。
 
-> **注意**：如果你想在外部终止 SSL/TLS，请参见[外部负载均衡器的 TLS 终止]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#external-tls-termination)。
+> :::note 注意
+> 如果你想在外部终止 SSL/TLS，请参见[外部负载均衡器的 TLS 终止]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#external-tls-termination)。
+> :::
 
 | 配置 | Chart 选项 | 描述 | 是否需要 cert-manager |
 | ------------------------------------------ | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
@@ -78,8 +80,9 @@ Rancher Server 默认设计为安全的，并且需要 SSL/TLS 配置。
 
 默认情况下，Rancher 会生成一个 CA 并使用 cert-manager 颁发证书以访问 Rancher Server 界面。
 
-> **注意**：
+> :::note 注意
 > 由于 cert-manager 的最新改动，你需要升级 cert-manager 版本。如果你需要升级 Rancher 并使用低于 0.11.0 的 cert-manager 版本，请参见 [cert-manager 升级文档]({{<baseurl>}}/rancher/v2.6/en/installation/resources/upgrading-cert-manager/)。
+> :::
 
 ### 1. 添加 cert-manager 仓库
 
@@ -231,7 +234,9 @@ kubectl -n cattle-system apply -R -f ./rancher
 ```
 安装已完成。
 
-> **注意**：如果你不想发送遥测数据，在首次登录时退出[遥测]({{<baseurl>}}/rancher/v2.6/en/faq/telemetry/)。如果在离线安装的环境中让这个功能处于 active 状态，socket 可能无法打开。
+> :::note 注意
+> 如果你不想发送遥测数据，在首次登录时退出[遥测]({{<baseurl>}}/rancher/v2.6/en/faq/telemetry/)。如果在离线安装的环境中让这个功能处于 active 状态，socket 可能无法打开。
+> :::
 
 # 其他资源
 

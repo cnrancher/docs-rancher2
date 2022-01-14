@@ -7,8 +7,9 @@ weight: 100
 
 ## 前提
 
-> **注意**
+> :::note 注意
 > 部署到 DigitalOcean 会产生费用。
+> :::
 
 - [DigitalOcean 账号](https://www.digitalocean.com)：用于运行服务器和集群。
 - [DigitalOcean 访问密钥](https://www.digitalocean.com/community/tutorials/how-to-create-a-digitalocean-space-and-api-key)：如果你没有的话，请访问此链接创建一个。

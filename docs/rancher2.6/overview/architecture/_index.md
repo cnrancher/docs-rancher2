@@ -134,7 +134,9 @@ Rancher 使用[服务账号](https://kubernetes.io/docs/tasks/configure-pod-cont
 - `kube_config_cluster.yml`：集群的 Kubeconfig 文件，包含完全访问集群的凭证。如果 Rancher 出现问题时，你可以使用此文件认证由 Rancher 启动的 Kubernetes 集群。
 - `rancher-cluster.rkestate`：Kubernetes 集群状态文件，文件包含用于完全访问集群的凭证。注意：仅在使用 RKE v0.2.0 或更高版本时，才会创建此该文件。
 
-> **注意：** 后两个文件名中的 `rancher-cluster` 部分取决于你命名 RKE 集群配置文件的方式。
+> :::note 注意
+> 后两个文件名中的 `rancher-cluster` 部分取决于你命名 RKE 集群配置文件的方式。
+> :::
 
 有关在没有 Rancher 认证代理和其他配置选项的情况下连接到集群的更多信息，请参见 [kubeconfig 文件]({{<baseurl>}}/rancher/v2.6/en/cluster-admin/cluster-access/kubectl/)。
 

@@ -78,7 +78,9 @@ kubectl rollout status deployment -n cattle-system rancher
 
 现在，你可以导航到 `https://rancher.example.com` 并开始使用 Rancher。
 
-> **注意**：如果你不想发送遥测数据，在首次登录时退出[遥测]({{<baseurl>}}/rancher/v2.6/en/faq/telemetry/)。如果在离线安装的环境中让这个功能处于 active 状态，socket 可能无法打开。
+> :::note 注意
+> 如果你不想发送遥测数据，在首次登录时退出[遥测]({{<baseurl>}}/rancher/v2.6/en/faq/telemetry/)。如果在离线安装的环境中让这个功能处于 active 状态，socket 可能无法打开。
+> :::
 
 ### 其他资源
 

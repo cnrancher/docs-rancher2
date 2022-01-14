@@ -7,8 +7,9 @@ weight: 100
 
 ## 前提
 
-> **注意**
+> :::note 注意
 > 部署到 Hetzner Cloud 会产生费用。
+> :::
 
 - [Hetzner Cloud 账号](https://www.hetzner.com)：用于运行服务器和集群。
 - [Hetzner API 访问密钥](https://docs.hetzner.cloud/#getting-started)：如果你没有的话，请参考说明创建一个。
