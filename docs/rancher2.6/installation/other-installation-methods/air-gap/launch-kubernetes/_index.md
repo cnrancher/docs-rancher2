@@ -132,13 +132,13 @@ users:
     username: admin
 ```
 
-**结果**：你可以开始使用 `kubectl` 来管理你的 K3s 集群。如果你有多个 `kubeconfig` 文件，你可以在使用 `kubectl` 时，通过传入文件路径，来指定要使用的 `kubeconfig` 文件：
+**结果**：你可以开始使用 `kubectl` 来管理你的 K3s 集群。如果你有多个 `kubeconfig` 文件，在使用 `kubectl` 时，你可以传入文件路径来指定要使用的 `kubeconfig` 文件：
 
 ```
 kubectl --kubeconfig ~/.kube/config/k3s.yaml get pods --all-namespaces
 ```
 
-有关 `kubeconfig` 文件的详情，请参见 [K3s 官方文档]({{<baseurl>}}/k3s/latest/en/cluster-access/) 或 [ Kubernetes 官方文档](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/) 中关于使用 `kubeconfig` 文件管理集群访问的部分。
+有关 `kubeconfig` 文件的详情，请参见 [K3s 官方文档]({{<baseurl>}}/k3s/latest/en/cluster-access/) 或 [ Kubernetes 官方文档](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/)中关于使用 `kubeconfig` 文件管理集群访问的部分。
 
 ### 升级注意事项
 
