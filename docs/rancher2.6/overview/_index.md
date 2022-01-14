@@ -1,9 +1,9 @@
 ---
-title: Overview
+title: 概述
 weight: 1
 ---
 
-Rancher 是一个为使用容器的公司打造的容器管理平台。Rancher 使得开发者可以随处运行 Kubernetes（Run Kubernetes Everywhere），满足IT需求规范，赋能 DevOps 团队。
+Rancher 是一个为使用容器的公司打造的容器管理平台。Rancher 使得开发者可以随处运行 Kubernetes（Run Kubernetes Everywhere），满足 IT 需求规范，赋能 DevOps 团队。
 
 # Run Kubernetes Everywhere
 
@@ -19,7 +19,7 @@ Rancher 支持对其控制的所有 Kubernetes 集群进行集中认证、访问
 
 # 赋能 DevOps 团队
 
-Rancher 为 DevOps 工程师提供简单直接的用户界面，以管理其应用负载。用户不需要对 Kubernetes 有非常深入的了解，即可使用 Rancher。Rancher 应用商店包含一套实用的 DevOps 开发工具。Rancher 获得了多种云原生生态系统产品的认证，包括安全工具、监控系统、容器注册表、存储和网络驱动等。
+Rancher 为 DevOps 工程师提供简单直接的用户界面，以管理其应用负载。用户不需要对 Kubernetes 有非常深入的了解，即可使用 Rancher。Rancher 应用商店包含一套实用的 DevOps 开发工具。Rancher 获得了多种云原生生态系统产品的认证，包括安全工具、监控系统、容器镜像仓库、存储和网络驱动等。
 
 下图讲述了 Rancher 在 IT 管理团队和 DevOps 开发团队之间扮演的角色。DevOps 团队把他们的应用部署在他们选择的公有云或私有云上。IT 管理员负责查看并管理用户、集群、云服务的权限。
 

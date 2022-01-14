@@ -71,7 +71,7 @@ K3s server 需要开放端口 6443 才能供节点访问。
 | TCP | 22 | 使用 Node Driver 创建的节点的任何节点 IP | 使用 Node Driver SSH 配置节点 |
 | TCP | 443 | git.rancher.io | Rancher catalog |
 | TCP | 2376 | 使用 Node Driver 创建的节点的任何节点 IP | Docker Machine 使用的 Docker daemon TLS 端口 |
-| TCP | 6443 | 托管/导入的 Kubernetes API | Kubernetes API 服务器 |
+| TCP | 6443 | 托管/导入的 Kubernetes API | Kubernetes API Server |
 
 
 
@@ -116,7 +116,7 @@ K3s server 需要开放端口 6443 才能供节点访问。
 | TCP | 443 | `35.160.43.145`，`35.167.242.46`，`52.33.59.17` | Rancher catalog（git.rancher.io） |
 | TCP | 22 | 使用 Node Driver 创建的任何节点 | Node Driver 通过 SSH 配置节点 |
 | TCP | 2376 | 使用 Node Driver 创建的任何节点 | Node Driver 使用的 Docker daemon TLS 端口 |
-| TCP | 6443 | 托管/导入的 Kubernetes API | Kubernetes API 服务器 |
+| TCP | 6443 | 托管/导入的 Kubernetes API | Kubernetes API Server |
 | TCP | 提供商依赖 | 托管集群中 Kubernetes API 端点的端口 | Kubernetes API |
 
 
@@ -173,7 +173,7 @@ RKE2 server 需要开放端口 6443 和 9345 才能供集群中的其他节点�
 | TCP | 22 | 使用 Node Driver 创建的节点的任何节点 IP | 使用 Node Driver SSH 配置节点 |
 | TCP | 443 | git.rancher.io | Rancher catalog |
 | TCP | 2376 | 使用 Node Driver 创建的节点的任何节点 IP | Docker Machine 使用的 Docker daemon TLS 端口 |
-| TCP | 6443 | 托管/导入的 Kubernetes API | Kubernetes API 服务器 |
+| TCP | 6443 | 托管/导入的 Kubernetes API | Kubernetes API Server |
 
 
 

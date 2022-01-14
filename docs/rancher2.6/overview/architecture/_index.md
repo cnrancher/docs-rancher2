@@ -75,7 +75,7 @@ Pod。Bob 通过 Rancher 的认证代理进行身份验证。
 
 Rancher 使用[服务账号](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)与 Kubernetes 集群通信，该服务账号为在 Pod 中运行的进程提供身份。
 
-默认情况下，Rancher 生成一个 [kubeconfig 文件]({{<baseurl>}}/rancher/v2.6/en/cluster-admin/cluster-access/kubectl/)，文件包含凭证信息，用于为 Rancher Server 连接下游集群的 Kubernetes API 服务器的代理。kubeconfig 文件 (`kube_config_cluster.yml`)包含了访问集群的所有权限。
+默认情况下，Rancher 生成一个 [kubeconfig 文件]({{<baseurl>}}/rancher/v2.6/en/cluster-admin/cluster-access/kubectl/)，文件包含凭证信息，用于为 Rancher Server 连接下游集群的 Kubernetes API Server 的代理。kubeconfig 文件 (`kube_config_cluster.yml`)包含了访问集群的所有权限。
 
 ### 2. Cluster Controller 和集群 Agent
 
@@ -105,7 +105,7 @@ Rancher 使用[服务账号](https://kubernetes.io/docs/tasks/configure-pod-cont
 
 ### 4. 授权集群端点
 
-授权集群端点可连接到下游集群的 Kubernetes API 服务器，而不用通过 Rancher 认证代理调度请求。
+授权集群端点可连接到下游集群的 Kubernetes API Server，而不用通过 Rancher 认证代理调度请求。
 
 > 授权集群端点仅适用于 Rancher 启动的 Kubernetes 集群，即只适用于 Rancher [使用 RKE]({{<baseurl>}}/rancher/v2.6/en/cluster-provisioning/rke-clusters) 来配置的集群。ACE 不可用于于托管在 Kubernetes 提供商（如 Amazon EKS）中的集群。
 
@@ -116,7 +116,7 @@ Rancher 使用[服务账号](https://kubernetes.io/docs/tasks/configure-pod-cont
 - 在 Rancher 不可用时访问下游集群
 - 在 Rancher Server 和与下游集群之间相距甚远时降低延迟
 
-`kube-api-auth` 微服务为授权集群端点提供用户验证功能。当使用 `kubectl`访问下游集群时，集群的 Kubernetes API 服务器使用 `kube-api-auth` 服务作为 webhook 对用户进行身份验证。
+`kube-api-auth` 微服务为授权集群端点提供用户验证功能。当使用 `kubectl`访问下游集群时，集群的 Kubernetes API Server 使用 `kube-api-auth` 服务作为 webhook 对用户进行身份验证。
 
 与授权集群端点一样，`kube-api-auth` 的身份验证功能也仅适用于 Rancher 启动的 Kubernetes 集群。
 
