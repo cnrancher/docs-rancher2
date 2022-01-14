@@ -16,7 +16,7 @@ keywords:
   - 安装 Docker
 ---
 
-使用 Helm 或 Docker 的在节点上安装 Rancher Server 前，您需要安装 Docker。使用 RancherD 安装时则不需要安装 Docker。
+使用 Helm 或 Docker 在节点上安装 Rancher Server 前，你需要安装 Docker。使用 RancherD 安装时则不需要安装 Docker。
 
 有两种安装 Docker 的选择。一种选择是参考[官方 Docker 文档](https://docs.docker.com/install/)来了解如何在 Linux 上安装 Docker。这些安装步骤将根据 Linux 发行版而有所不同。
 
