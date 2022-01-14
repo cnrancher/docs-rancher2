@@ -7,8 +7,9 @@ weight: 100
 
 ## 前提
 
-> **注意**
+> :::note 注意
 > 部署到 Google GCP 会产生费用。
+> :::
 
 - [Google GCP Account](https://console.cloud.google.com/)：用于创建部署 Rancher 和 Kubernetes 的资源。
 - [Google GCP 项目](https://cloud.google.com/appengine/docs/standard/nodejs/building-app/creating-project)：如果你没有的话，请访问此链接查看如何创建 GCP 项目。

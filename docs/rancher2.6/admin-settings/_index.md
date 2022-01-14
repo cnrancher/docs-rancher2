@@ -9,7 +9,9 @@ weight: 6
 
 首次登录 Rancher 后，Rancher 会提示你输入 **Rancher Server URL**。你需要将 URL 设置为 Rancher Server 的主要入口点。当负载均衡器位于 Rancher Server 集群前面时，URL需要设置为负载均衡器地址。系统会自动尝试从运行 Rancher Server 的主机的 IP 地址或主机名推断 Rancher Server 的URL，上述推断仅在你运行单节点 Rancher Server 时才正确。因此，在大多数情况下，你需要自己将 Rancher Server 的 URL 设置为正确的值。
 
-> **重要提示**：Rancher Server 的 URL 在设置后不可再更新。因此，你需要谨慎设置该 URL。
+> :::important 重要提示
+> Rancher Server 的 URL 在设置后不可再更新。因此，你需要谨慎设置该 URL。
+> :::
 
 ## 身份验证
 
@@ -19,7 +21,7 @@ Rancher 向 Kubernetes 添加的关键功能之一，就是集中式用户身份
 
 ## 授权
 
-Rancher 通过_用户_进行授权管理。用户的_授权_或系统访问权限由用户角色决定。Rancher 提供了预设角色，让你轻松配置用户对资源的权限，还提供了为每个 Kubernetes 资源定制角色的能力。
+Rancher 通过 _用户_ 进行授权管理。用户的 _授权_ 或系统访问权限由用户角色决定。Rancher 提供了预设角色，让你轻松配置用户对资源的权限，还提供了为每个 Kubernetes 资源定制角色的能力。
 
 有关授权如何工作及如何自定义角色，请参见[基于角色的访问控制 (RBAC)]({{<baseurl>}}/rancher/v2.6/en/admin-settings/rbac/)。
 

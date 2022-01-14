@@ -44,8 +44,9 @@ weight: 100
 
 如需获取如何配置 Amazon ELB Network Load Balancer 的指南，请参见[本页]({{<baseurl>}}/rancher/v2.6/en/installation/resources/k8s-tutorials/infrastructure-tutorials/nlb/)。
 
-> **重要提示**：
+> :::important 重要提示
 > 安装后，请勿将此负载均衡（例如 `local` 集群 Ingress）用于 Rancher 以外的应用。如果此 Ingress 与其他应用共享，在其他应用的 Ingress 配置重新加载后，可能导致 Rancher 出现 websocket 错误。我们建议把 `local` 集群专用给 Rancher，不要在集群内部署其他应用。
+> :::
 
 ### 3. 配置 DNS 记录
 

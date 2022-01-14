@@ -33,7 +33,7 @@ weight: 300
 - 就地虚拟机
 - 裸机服务器
 
-   > **注意：**
+   > :::note 注意
    > 如果使用云虚拟机，你需要允许入站 TCP 和端口 80 和 443 通信。如需了解端口配置，请参见你的云托管商的官方文档。
    >
    > 如需了解所有端口要求，请参见 [Docker 安装]({{<baseurl>}}/rancher/v2.6/en/cluster-provisioning/node-requirements/)。

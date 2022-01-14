@@ -133,8 +133,9 @@ default backend - 404
 
 ### 保存你的文件
 
-> **重要提示**：
+> :::important 重要提示
 > 请妥善保管以下文件，以对集群进行维护，故障排查和升级。
+> :::
 
 将以下文件的副本保存在安全位置：
 
@@ -142,7 +143,9 @@ default backend - 404
 - `kube_config_cluster.yml`：集群的 [Kubeconfig 文件]({{<baseurl>}}/rke/latest/en/kubeconfig/)。该文件包含可完全访问集群的凭证。
 - `rancher-cluster.rkestate`：[Kubernetes 集群状态文件]({{<baseurl>}}/rke/latest/en/installation/#kubernetes-cluster-state)。此文件包含集群的当前状态，包括 RKE 配置和证书。
 
-> **注意：** 后两个文件名中的 `rancher-cluster` 部分取决于你命名 RKE 集群配置文件的方式。
+> :::note 注意
+> 后两个文件名中的 `rancher-cluster` 部分取决于你命名 RKE 集群配置文件的方式。
+> :::
 
 ### 故障排查
 

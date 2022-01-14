@@ -102,9 +102,9 @@ Rancher Server 以 Docker 镜像的形式分发并附有标签。你可以在输
 
 > :::note 注意
 >
+>
 > - `master` 和带有 `-rc` 或其他后缀的标签是供 Rancher 测试团队验证用的。这些标签不受官方支持，因此请不要使用这些标签。
 > - 安装 alpha 版本进行预览：使用我们的[公告页面](https://forums.rancher.com/c/announcements)中列出的 alpha 标签（例如，`v2.2.0-alpha1`）进行安装。不支持升级或升级到 Alpha 版本。
->    :::
 
 </TabItem>
 </Tabs>
