@@ -8,7 +8,7 @@ weight: 1
 
 > 如果你需要在 Kubernetes 集群上安装 Rancher，该节点的要求与用于运行应用和服务的[下游集群的节点要求]({{<baseurl>}}/rancher/v2.6/en/cluster-provisioning/node-requirements/)不同。
 
-请确保安装 Rancher server 的节点满足以下要求：
+请确保安装 Rancher Server 的节点满足以下要求：
 
 - [操作系统和容器运行时要求](#operating-systems-and-container-runtime-requirements)
    - [RKE 要求](#rke-specific-requirements)
@@ -30,7 +30,7 @@ weight: 1
    - [端口要求](#port-requirements)
 - [Dockershim 支持](#dockershim-support)
 
-如需获取在生产环境中运行 Rancher server 的最佳实践列表，请参见[最佳实践]({{<baseurl>}}/rancher/v2.6/en/best-practices/rancher-server/deployment-types/)。
+如需获取在生产环境中运行 Rancher Server 的最佳实践列表，请参见[最佳实践]({{<baseurl>}}/rancher/v2.6/en/best-practices/rancher-server/deployment-types/)。
 
 Rancher UI 在 Firefox 或 Chrome 中效果更佳。
 
@@ -68,7 +68,7 @@ net.bridge.bridge-nf-call-iptables=1
 
 容器运行时方面，K3s 可以兼容当前的所有 Docker 版本。
 
-Rancher 需要安装在支持的 Kubernetes 版本上。如需了解你使用的 Rancher 版本支持哪些 Kubernetes 版本，请参见[支持维护条款](https://rancher.com/support-maintenance-terms/)。如需指定 K3s 版本，请在运行 K3s 安装脚本时，使用 INSTALL_K3S_VERSION 环境变量。
+Rancher 需要安装在支持的 Kubernetes 版本上。如需了解你使用的 Rancher 版本支持哪些 Kubernetes 版本，请参见[支持维护条款](https://rancher.com/support-maintenance-terms/)。如需指定 K3s 版本，请在运行 K3s 安装脚本时，使用 `INSTALL_K3S_VERSION` 环境变量。
 
 如果你使用 **Raspbian Buster** 在 K3s 集群上安装 Rancher，请按照[这些步骤]({{<baseurl>}}/k3s/latest/en/advanced/#enabling-legacy-iptables-on-raspbian-buster)切换到旧版 iptables。
 
