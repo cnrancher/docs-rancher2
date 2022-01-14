@@ -105,24 +105,24 @@ Cluster Agent，也叫做 `cattle-cluster-agent`，是运行在下游集群中�
 
 ### 4. 授权集群端点（ACE）
 
-授权集群端点（ACE）可连接到下游集群的 Kubernetes API Server，而不用通过 Rancher 认证代理调度请求。
+授权集群端点可连接到下游集群的 Kubernetes API Server，而不用通过 Rancher 认证代理调度请求。
 
-> 授权集群端点（ACE）仅适用于 Rancher 启动的 Kubernetes 集群，即只适用于 Rancher [使用 RKE]({{<baseurl>}}/rancher/v2.6/en/cluster-provisioning/rke-clusters) 来配置的集群。ACE 不可用于于托管在 Kubernetes 提供商（如 Amazon EKS）中的集群。
+> 授权集群端点仅适用于 Rancher 启动的 Kubernetes 集群，即只适用于 Rancher [使用 RKE]({{<baseurl>}}/rancher/v2.6/en/cluster-provisioning/rke-clusters) 来配置的集群。ACE 不可用于于托管在 Kubernetes 提供商（如 Amazon EKS）中的集群。
 
 > 从 Rancher 2.6.3 开始，[ACE 可用于注册的 RKE2 和 K3s 集群]({{<baseurl>}}/v2.6/en/cluster-provisioning/registered-clusters/#authorized-cluster-endpoint-support-for-rke2-and-k3s-clusters)。
 
-授权集群端点（ACE）的主要用途：
+授权集群端点的主要用途：
 
 - 在 Rancher 不可用时访问下游集群
 - 在 Rancher Server 和与下游集群之间相距甚远时降低延迟
 
-`kube-api-auth` 微服务为授权集群端点（ACE）提供用户验证功能。当使用 `kubectl`访问下游集群时，集群的 Kubernetes API Server 使用 `kube-api-auth` 服务作为 webhook 对用户进行身份验证。
+`kube-api-auth` 微服务为授权集群端点提供用户验证功能。当使用 `kubectl`访问下游集群时，集群的 Kubernetes API Server 使用 `kube-api-auth` 服务作为 webhook 对用户进行身份验证。
 
-与授权集群端点（ACE）一样，`kube-api-auth` 的身份验证功能也仅适用于 Rancher 启动的 Kubernetes 集群。
+与授权集群端点一样，`kube-api-auth` 的身份验证功能也仅适用于 Rancher 启动的 Kubernetes 集群。
 
-> **示例场景：** 假设 Rancher Server 位于美国，User Cluster 1 与用户 Alice 均位于澳大利亚。Alice 可以使用 Rancher UI 操作 User Cluster 1 中的资源，但她的请求必须从澳大利亚发送到美国的 Rancher Server，然后通过代理返回澳大利亚，即下游集群所在的位置。地理距离可能导致明显延迟，因此，Alice 可以使用授权集群端点（ACE）来降低延迟。
+> **示例场景：** 假设 Rancher Server 位于美国，User Cluster 1 与用户 Alice 均位于澳大利亚。Alice 可以使用 Rancher UI 操作 User Cluster 1 中的资源，但她的请求必须从澳大利亚发送到美国的 Rancher Server，然后通过代理返回澳大利亚，即下游集群所在的位置。地理距离可能导致明显延迟，因此，Alice 可以使用授权集群端点来降低延迟。
 
-为下游集群启用授权集群端点（ACE）后，Rancher 会在 kubeconfig 文件中额外生成一段 Kubernetes 上下文，用于直连到集群。该文件具有 `kubectl` 和 `helm`的凭证。
+为下游集群启用授权集群端点后，Rancher 会在 kubeconfig 文件中额外生成一段 Kubernetes 上下文，用于直连到集群。该文件具有 `kubectl` 和 `helm`的凭证。
 
 如果 Rancher 出现问题，你需要使用此 kubeconfig 文件中定义的上下文来访问集群。因此，我们建议你导出 kubeconfig 文件，以便在 Rancher 出现问题时，仍能使用文件中的凭证访问集群。详情请参见使用 [kubectl 和 kubeconfig 文件]({{<baseurl>}}/rancher/v2.6/en/cluster-admin/cluster-access/kubectl)访问集群的章节。
 
