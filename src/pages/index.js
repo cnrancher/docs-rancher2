@@ -175,6 +175,7 @@ function Home() {
                             <a href="/octopus">
                                 <h1>Octopus</h1>
                             </a>
+                            <h3>已经暂停维护，不建议生产使用</h3>
                         </div>
                         <div className="navigation__content">
                             <p>
@@ -188,6 +189,7 @@ function Home() {
                             <a href="/rancher1">
                                 <h1>Rancher 1.x</h1>
                             </a>
+                            <h3>已经暂停维护，不建议生产使用</h3>
                         </div>
                         <div className="navigation__content">
                             <p>
