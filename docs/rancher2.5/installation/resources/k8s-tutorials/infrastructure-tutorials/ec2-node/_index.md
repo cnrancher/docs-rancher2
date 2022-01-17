@@ -1,6 +1,6 @@
 ---
 title: 在 Amazon EC2 中配置节点
-description: 在本教程中，您将学习一种为 Rancher 管理面的服务器创建 Linux 节点的方法。这些节点将满足 Rancher 对 OS，Docker，硬件和网络的要求。如果要将 Rancher Server 安装在 RKE Kubernetes 集群上，则应创建三个实例。如果要将 Rancher Server 安装在 K3s Kubernetes 集群上，则仅需创建两个实例。如果要将 Rancher Server 安装在单个 Docker 容器中，则仅需创建一个实例。
+description: 在本教程中，您将学习一种为 Rancher Management Server 创建 Linux 节点的方法。这些节点将满足 Rancher 对 OS，Docker，硬件和网络的要求。如果要将 Rancher Server 安装在 RKE Kubernetes 集群上，则应创建三个实例。如果要将 Rancher Server 安装在 K3s Kubernetes 集群上，则仅需创建两个实例。如果要将 Rancher Server 安装在单个 Docker 容器中，则仅需创建一个实例。
 keywords:
   - rancher
   - rancher中文
@@ -16,7 +16,7 @@ keywords:
   - 在 Amazon EC2 中配置节点
 ---
 
-在本教程中，您将学习一种为 Rancher 管理面的服务器创建 Linux 节点的方法。这些节点将满足 Rancher 对 [操作系统和容器运行时要求](/docs/rancher2.5/installation/requirements/_index)。
+在本教程中，您将学习一种为 Rancher Management Server 创建 Linux 节点的方法。这些节点将满足 Rancher 对[操作系统和容器运行时要求](/docs/rancher2.5/installation/requirements/_index)。
 
 - 如果要将 Rancher Server 安装在 RKE Kubernetes 集群上，则应创建三个实例。
 
