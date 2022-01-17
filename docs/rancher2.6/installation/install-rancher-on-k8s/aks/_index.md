@@ -26,19 +26,19 @@ weight: 4
 
 在工作站上安装以下命令行工具：
 
-- Azure CLI，**az**：如需获得帮助，请参见[安装步骤](https://docs.microsoft.com/en-us/cli/azure/)。
+- **az**，Azure CLI：如需获得帮助，请参见[安装步骤](https://docs.microsoft.com/en-us/cli/azure/)。
 - **kubectl**：如需获得帮助，请参见[安装步骤](https://kubernetes.io/docs/tasks/tools/#kubectl)。
 - **helm**：如需获取帮助，请参见[安装步骤](https://helm.sh/docs/intro/install/)。
 
 # 2. 创建资源组
 
-安装 CLI 后，你需要用你的 Azure 账户登录。
+安装 CLI 后，你需要用你的 Azure 账户登录：
 
 ```
 az login
 ```
 
-创建一个 [资源组](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal) 来保存集群的所有相关资源。使用一个适用于你实际情况的位置。
+创建一个 [资源组](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal) 来保存集群的所有相关资源。使用一个适用于你实际情况的位置：
 
 ```
 az group create --name rancher-rg --location eastus
