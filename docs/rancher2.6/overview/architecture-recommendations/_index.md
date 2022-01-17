@@ -8,7 +8,7 @@ weight: 3
 本节涵盖以下主题：
 
 - [分开部署 Rancher 与下游集群](#separation-of-rancher-and-user-clusters)
-- [为什么高可用（HA）集群与 Rancher 适配性更高](#why-ha-is-better-for-rancher-in-production)
+- [为什么高可用（HA）更适合生产环境中的 Rancher](#why-ha-is-better-for-rancher-in-production)
 - [Kubernetes 安装中负载均衡器的推荐配置参数](#recommended-load-balancer-configuration-for-kubernetes-installations)
 - [Kubernetes 安装环境](#environment-for-kubernetes-installations)
 - [Kubernetes 安装的节点角色建议](#recommended-node-roles-for-kubernetes-installations)
@@ -18,13 +18,13 @@ weight: 3
 
 下游集群，是运行你自己的应用和服务的下游 Kubernetes 集群。
 
-如果你通过 Docker 安装了 Rancher，运行 Rancher 服务器的节点应该与你的下游集群分开。
+如果你通过 Docker 安装了 Rancher，运行 Rancher Server 的节点应该与你的下游集群分开。
 
 如果你需要使用 Rancher 管理下游 Kubernetes 集群，那么运行 Rancher Server 的 Kubernetes 集群也应该与下游集群分开。
 
 ![分开部署 Rancher Server 与下游集群]({{<baseurl>}}/img/rancher/rancher-architecture-separation-of-rancher-server.svg)
 
-# 为什么高可用（HA）集群与 Rancher 适配性更高
+# 为什么高可用（HA）更适合生产环境中的 Rancher
 
 我们建议在高可用 Kubernetes 集群上安装 Rancher Server，以保护 Rancher Server 的数据。在高可用安装中，负载均衡器充当客户端的单点入口，并在集群中的多台服务器之间分配网络流量，这有助于防止任何一台服务器成为单点故障。
 
@@ -34,7 +34,7 @@ weight: 3
 
 底层 Kubernetes 集群的一种选择是使用 K3s Kubernetes。K3s 是 Rancher CNCF 认证的 Kubernetes 发行版。K3s 易于安装，仅需要 Kubernetes 内存的一半，所有组件都在一个小于 100 MB 的二进制文件中。K3s 的另一个优点是允许外部 Datastore 保存集群数据，因此可以把 K3s 服务器节点视为无状态。
 
-<figcaption>运行 Rancher Management Server 的 K3s Kubernetes 集群架构运行 Rancher Management Server 的 K3s Kubernetes 集群架构</figcaption>
+<figcaption>运行 Rancher Management Server 的 K3s Kubernetes 集群架构</figcaption>
 ![使用 K3s Kubernetes 集群运行 Rancher Management Server 的架构]({{<baseurl>}}/img/rancher/k3s-server-storage.svg)
 
 ### RKE Kubernetes 集群安装
@@ -80,18 +80,18 @@ weight: 3
 
 我们对 Rancher Server 集群上 RKE 节点角色建议，与对运行你的应用和服务的下游集群的建议相反。
 
-Rancher 在配置下游 Kubernetes 集群时使用 RKE 作为库。注意：Rancher 将在未来的版本中添加配置下游 K3s 集群的功能。
+在配置下游 Kubernetes 集群时，Rancher 使用 RKE 作为创建下游 Kubernetes 集群的工具。注意：Rancher 将在未来的版本中添加配置下游 K3s 集群的功能。
 
 我们建议下游 Kubernetes 集群中的每个节点都只分配一个角色，以确保稳定性和可扩展性。
 
 ![Rancher Server 集群中和下游集群中节点的 Kubernetes 角色对比]({{<baseurl>}}/img/rancher/rancher-architecture-node-roles.svg)
 
-RKE 每个角色至少需要一个节点，但并不强制每个节点只能有一个角色。但是，我们建议为运行应用的集群中的每个节点，使用单独的角色，以保证在 service 拓展时，worker 节点上的工作负载不影响 Kubernetes master 或集群的数据。
+RKE 每个角色至少需要一个节点，但并不强制每个节点只能有一个角色。但是，我们建议为运行应用的集群中的每个节点，使用单独的角色，以保证在服务拓展时，worker 节点上的工作负载不影响 Kubernetes master 或集群的数据。
 
 以下是我们对下游集群的最低配置建议：
 
 - **三个仅使用 etcd 角色的节点** ，以在三个节点中其中一个发生故障时，仍能保障集群的高可用性。
-- **两个只有 controlplane 角色的节点** ，以保证master 组件的高可用性。
+- **两个只有 controlplane 角色的节点** ，以保证 master 组件的高可用性。
 - **一个或多个只有 worker 角色的节点**，用于运行 Kubernetes 节点组件，以及你部署的服务或应用的工作负载。
 
 在设置 Rancher Server 时，在三个节点上使用全部这三个角色也是安全的，因为：

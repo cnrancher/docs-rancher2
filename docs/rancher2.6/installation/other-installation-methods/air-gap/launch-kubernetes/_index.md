@@ -106,7 +106,7 @@ node-token 位于 Server 节点上的 `/var/lib/rancher/k3s/server/node-token`�
 
 如要使用该 `kubeconfig` 文件：
 
-1. 安装 Kubernetes 命令行工具 [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl)：
+1. 安装 Kubernetes 命令行工具 [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl)。
 2. 复制 `/etc/rancher/k3s/k3s.yaml` 文件并保存到本地机器的 `~/.kube/config` 目录上。
 3. 在 kubeconfig 文件中，`server` 的参数为 localhost。你需要将 `server` 配置为负载均衡器的 DNS，并指定端口 6443（通过端口 6443 访问 Kubernetes API Server，通过端口 80 和 443 访问 Rancher Server）。以下是一个 `k3s.yaml` 示例：
 

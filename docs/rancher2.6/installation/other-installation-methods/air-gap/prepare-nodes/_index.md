@@ -58,7 +58,7 @@ K3s 与其他 Kubernetes 发行版不同，在于其支持使用 etcd 以外的�
 
 ### 3. 配置负载均衡器
 
-你还需要设置一个负载均衡器，以将流量重定向到两个节点上的 Rancher 副本。配置后，当单个节点不可用时，继续保障与 Rancher Management Server 的通信。
+你还需要设置一个负载均衡器，来将流量重定向到两个节点上的 Rancher 副本。配置后，当单个节点不可用时，继续保障与 Rancher Management Server 的通信。
 
 在后续步骤中配置 Kubernetes 时，K3s 工具会部署一个 Traefik Ingress Controller。该 Controller 将侦听 worker 节点的 80 端口和 443 端口，以响应发送给特定主机名的流量。
 
@@ -71,7 +71,7 @@ K3s 与其他 Kubernetes 发行版不同，在于其支持使用 etcd 以外的�
 
 如需获取如何配置 NGINX 负载均衡器的示例，请参见[本页]({{<baseurl>}}/rancher/v2.6/en/installation/resources/k8s-tutorials/infrastructure-tutorials/nginx/)。
 
-如需获取如何配置 Amazon ELB Network Load Balancer 的指南，请参见[本页]({{<baseurl>}}/rancher/v2.6/en/installation/resources/k8s-tutorials/infrastructure-tutorials/nlb/)。
+如需获取如何配置 Amazon ELB 网络负载均衡器的指南，请参见[本页]({{<baseurl>}}/rancher/v2.6/en/installation/resources/k8s-tutorials/infrastructure-tutorials/nlb/)。
 
 > :::important 重要提示
 > 安装后，请勿将此负载均衡（例如 `local` 集群 Ingress）用于 Rancher 以外的应用。如果此 Ingress 与其他应用共享，在其他应用的 Ingress 配置重新加载后，可能导致 Rancher 出现 websocket 错误。我们建议把 `local` 集群专用给 Rancher，不要在集群内部署其他应用。
@@ -97,7 +97,7 @@ Rancher 支持使用私有镜像仓库进行离线安装。你必须有自己的
 </TabItem>
 <TabItem value="rke">
 
-如需在 RKE 集群中安装 Rancher Management Server，我们建议配置以下基础设施：
+如需在高可用 RKE 集群中安装 Rancher Management Server，我们建议配置以下基础设施：
 
 - **3个 Linux 节点**：可以是你的云提供商（例如 Amazon EC2，GCE 或 vSphere）中的虚拟机。
 - **1 个负载均衡器**：用于将前端流量转发到这三个节点中。
@@ -122,7 +122,7 @@ Rancher 支持使用私有镜像仓库进行离线安装。你必须有自己的
 
 ### 2. 配置负载均衡器
 
-你还需要设置一个负载均衡器，以将流量重定向到两个节点上的 Rancher 副本。配置后，当单个节点不可用时，继续保障与 Rancher Management Server 的通信。
+你还需要设置一个负载均衡器，来将流量重定向到两个节点上的 Rancher 副本。配置后，当单个节点不可用时，继续保障与 Rancher Management Server 的通信。
 
 在后续步骤中配置 Kubernetes 时，RKE 工具会部署一个 NGINX Ingress Controller。该 Controller 将侦听 worker 节点的 80 端口和 443 端口，以响应发送给特定主机名的流量。
 
@@ -135,7 +135,7 @@ Rancher 支持使用私有镜像仓库进行离线安装。你必须有自己的
 
 如需获取如何配置 NGINX 负载均衡器的示例，请参见[本页]({{<baseurl>}}/rancher/v2.6/en/installation/resources/k8s-tutorials/infrastructure-tutorials/nginx/)。
 
-如需获取如何配置 Amazon ELB Network Load Balancer 的指南，请参见[本页]({{<baseurl>}}/rancher/v2.6/en/installation/resources/k8s-tutorials/infrastructure-tutorials/nlb/)。
+如需获取如何配置 Amazon ELB 网络负载均衡器的指南，请参见[本页]({{<baseurl>}}/rancher/v2.6/en/installation/resources/k8s-tutorials/infrastructure-tutorials/nlb/)。
 
 > :::important 重要提示
 > 安装后，请勿将此负载均衡（例如 `local` 集群 Ingress）用于 Rancher 以外的应用。如果此 Ingress 与其他应用共享，在其他应用的 Ingress 配置重新加载后，可能导致 Rancher 出现 websocket 错误。我们建议把 `local` 集群专用给 Rancher，不要在集群内部署其他应用。
