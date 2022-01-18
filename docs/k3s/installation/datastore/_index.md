@@ -62,6 +62,12 @@ K3s 支持以下数据存储选项：
 - 使用`postgres`作为用户名和密码连接到 localhost
 - 创建一个名为`kubernetes`的数据库
 
+使用下面的示例命令来启动一个连接到名为 k3s 的 PostgreSQL 数据库的 k3s server 实例:
+
+```
+K3S_DATASTORE_ENDPOINT='postgres://username:password@hostname:5432/k3s' k3s server
+```
+
 #### MySQL/MariaDB"
 
 最常见的 MySQL 和 MariaDB 的`datastore-endpoint`参数格式如下：
@@ -79,21 +85,7 @@ K3s 支持以下数据存储选项：
 - 使用 root 用户并且不使用密码连接到`/var/run/mysqld/mysqld.sock`上的 MySQL 套接字
 - 创建一个名为`kubernetes`的数据库
 
-#### etcd
-
-最常见的 etcd 的`datastore-endpoint`参数的格式如下：
-
-`https://etcd-host-1:2379,https://etcd-host-2:2379,https://etcd-host-3:2379`
-
-以上假设是一个典型的三节点 etcd 集群。该参数可以再接受一个以逗号分隔的 etcd URL。
-
-基于上述情况，可以使用下面的示例命令来启动一个连接到名为 k3s 的 PostgreSQL 数据库的 k3s server 实例:
-
-```
-K3S_DATASTORE_ENDPOINT='postgres://username:password@hostname:5432/k3s' k3s server
-```
-
-而下面的例子可以用来使用客户端证书认证连接到 MySQL 数据库：
+下面的例子可以用来使用客户端证书认证连接到 MySQL 数据库：
 
 ```
 K3S_DATASTORE_ENDPOINT='mysql://username:password@tcp(hostname:3306)/k3s' \
@@ -101,6 +93,14 @@ K3S_DATASTORE_CERTFILE='/path/to/client.crt' \
 K3S_DATASTORE_KEYFILE='/path/to/client.key' \
 k3s server
 ```
+
+#### etcd
+
+最常见的 etcd 的`datastore-endpoint`参数的格式如下：
+
+`https://etcd-host-1:2379,https://etcd-host-2:2379,https://etcd-host-3:2379`
+
+以上假设是一个典型的三节点 etcd 集群。该参数可以再接受一个以逗号分隔的 etcd URL。
 
 ## 嵌入式 DB 的高可用
 
