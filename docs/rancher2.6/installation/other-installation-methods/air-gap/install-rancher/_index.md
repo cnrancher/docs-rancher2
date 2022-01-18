@@ -86,7 +86,7 @@ Rancher Server 默认设计为安全的，并且需要 SSL/TLS 配置。
 
 ### 1. 添加 cert-manager 仓库
 
-在可以连接互联网的系统中，将 cert-manager 仓库添加到 Helm。
+在可以连接互联网的系统中，将 cert-manager 仓库添加到 Helm：
 
 ```plain
 helm repo add jetstack https://charts.jetstack.io
@@ -95,7 +95,7 @@ helm repo update
 
 ### 2. 获取 cert-manager Chart
 
-从 [Helm Chart 仓库](https://hub.helm.sh/charts/jetstack/cert-manager)中获取最新可用的 cert-manager Chart。
+从 [Helm Chart 仓库](https://hub.helm.sh/charts/jetstack/cert-manager)中获取最新可用的 cert-manager Chart：
 
 ```plain
 helm fetch jetstack/cert-manager --version v1.5.1
@@ -206,7 +206,7 @@ helm template rancher ./rancher-<VERSION>.tgz --output-dir . \
 
 如果你使用自签名证书，安装 cert-manager：
 
-1. 为 cert-manager 创建命名空间。
+1. 为 cert-manager 创建命名空间：
 ```plain
 kubectl create namespace cert-manager
 ```
@@ -216,8 +216,9 @@ kubectl create namespace cert-manager
 kubectl apply -f cert-manager/cert-manager-crd.yaml
 ```
 
-    > **注意**：
-    > 如果你运行的 Kubernetes 版本是 1.15 或更低版本，你需要在以上的 `kubectl apply` 命令中添加`--validate=false`，否则你将看到 cert-manager CRD 资源中的 `x-kubernetes-preserve-unknown-fields` 字段校验错误提示。这是 kubectl 执行资源校验方式产生的良性错误。
+    :::note 注意
+    如果你运行的 Kubernetes 版本是 1.15 或更低版本，你需要在以上的 `kubectl apply` 命令中添加`--validate=false`，否则你将看到 cert-manager CRD 资源中的 `x-kubernetes-preserve-unknown-fields` 字段校验错误提示。这是 kubectl 执行资源校验方式产生的良性错误。
+    :::
 
 1. 启动 cert-manager.
 ```plain
