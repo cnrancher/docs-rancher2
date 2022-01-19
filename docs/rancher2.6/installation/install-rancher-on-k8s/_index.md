@@ -253,7 +253,7 @@ helm install rancher rancher-<CHART_REPO>/rancher \
 如果你使用的是私有 CA 证书，请在命令中增加 `--set privateCA=true`。
 
 ```
-helm install rancher rancher-latest/rancher \
+helm install rancher rancher-<CHART_REPO>/rancher \
   --namespace cattle-system \
   --set hostname=rancher.my.org \
   --set bootstrapPassword=admin \

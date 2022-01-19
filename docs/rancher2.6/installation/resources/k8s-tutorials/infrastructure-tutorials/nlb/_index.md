@@ -92,7 +92,7 @@ Rancher 仅支持使用 Amazon NLB 以 `TCP` 模式终止 443 端口的流量，
 
 接下来，将 Linux 节点添加到两个目标组中。
 
-选择名为 **rancher-tcp-443** 的目标组，点击**目标**页签并选择**编辑**。
+选择名为 **rancher-tcp-443** 的目标组，点击**目标**选项卡并选择**编辑**。
 
 {{< img "/img/rancher/ha/nlb/edit-targetgroup-443.png" "Edit target group 443">}}
 
@@ -156,7 +156,7 @@ AWS 完成 NLB 创建后，单击**关闭**。
 
 # 4. 为 TCP 端口 80 向 NLB 添加监听器
 
-1. 选择新创建的 NLB 并选择**监听器**页签。
+1. 选择新创建的 NLB 并选择**监听器**选项卡。
 
 2. 单击**添加监听器**。
 

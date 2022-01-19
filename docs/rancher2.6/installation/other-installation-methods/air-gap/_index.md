@@ -9,7 +9,7 @@ Rancher 安装在 RKE Kubernetes 集群、K3s Kubernetes 集群，或单个 Dock
 
 如需了解各个安装方式的更多信息，请参见[本页]({{<baseurl>}}/rancher/v2.6/en/installation/)。
 
-在安装指导中，我们为不同的安装选项提供对应的 _页签_ 。
+在安装指导中，我们为不同的安装选项提供对应的 _选项卡_ 。
 
 > :::important 重要提示
 > 如果你按照 Docker 安装指南安装 Rancher，你将没有把 Docker 安装转换为 Kubernetes 安装的升级途径。
