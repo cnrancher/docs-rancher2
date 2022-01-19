@@ -32,7 +32,7 @@ weight: 100
 5. **可选**：修改 `terraform.tfvars` 中的可选参数。
    参见 [Quickstart Readme](https://github.com/rancher/quickstart) 以及 [AWS Quickstart Readme](https://github.com/rancher/quickstart/tree/master/aws) 了解更多信息。
    建议修改的参数包括：
-   - `aws_region` - Amazon AWS 地域。AWS 的默认地域 (`us-east-1`) 不一定是距离你最近的地域。建议修改为距离你最近的地域。
+   - `aws_region` - Amazon AWS 区域。AWS 的默认区域 (`us-east-1`) 不一定是距离你最近的区域。建议修改为距离你最近的区域。
    - `prefix` - 所有创建资源的前缀
    - `instance_type` - EC2 使用的实例规格，最小规格为 `t3a.medium` 。如果在预算范围内，可以使用 `t3a.large` 或 `t3a.xlarge`。
    - `add_windows_node` - 如果设为 true，一个额外的 Windows worker 节点会添加到工作负载集群中。

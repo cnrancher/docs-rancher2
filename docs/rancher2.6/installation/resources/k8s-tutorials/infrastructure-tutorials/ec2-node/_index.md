@@ -18,7 +18,7 @@ weight: 3
 
 ### 2. 配置实例
 
-1. 登录到 [Amazon AWS EC2 控制台](https://console.aws.amazon.com/ec2/)。由于 Rancher Management Server 的所有基础设施都需要位于同一地域，因此，请务必记下创建 EC2 实例（Linux 节点）的**地域**。
+1. 登录到 [Amazon AWS EC2 控制台](https://console.aws.amazon.com/ec2/)。由于 Rancher Management Server 的所有基础设施都需要位于同一区域，因此，请务必记下创建 EC2 实例（Linux 节点）的**区域**。
 1. 在左侧面板中，点击**实例**。
 1. 点击**启动示例**。
 1. 在**步骤 1：选择 Amazon Machine Image (AMI)** 中，使用 `ami-0d1cd67c26f5fca19 (64-bit x86)` 来使用 Ubuntu 18.04 作为 Linux 操作系统。去到 Ubuntu AMI 并点击**选择**。

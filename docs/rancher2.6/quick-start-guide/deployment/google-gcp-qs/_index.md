@@ -32,7 +32,7 @@ weight: 100
 5. **可选**：修改 `terraform.tfvars` 中的可选参数。
    参见 [Quickstart Readme](https://github.com/rancher/quickstart) 以及 [GCP Quickstart Readme](https://github.com/rancher/quickstart/tree/master/gcp) 了解更多信息。
    建议修改的参数包括：
-   - `gcp_region` - Google GCP 地域。GCP 的默认地域 (`us-east4`) 不一定是距离你最近的地域。建议修改为距离你最近的地域。
+   - `gcp_region` - Google GCP 区域。GCP 的默认区域 (`us-east4`) 不一定是距离你最近的区域。建议修改为距离你最近的区域。
    - `gcp_zone` - Google GCP 区域。GCP 的默认区域 (`us-east4-a`) 不一定是距离你最近的区域。建议修改为距离你最近的区域。
    - `prefix` - 所有创建资源的前缀
    - `machine_type` - 使用的计算实例大小，最小规格为 `n1-standard-1`。如果在预算范围内，可以使用 `n1-standard-2` 或 `n1-standard-4`。

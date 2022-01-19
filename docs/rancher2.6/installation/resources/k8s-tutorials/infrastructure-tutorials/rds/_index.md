@@ -6,7 +6,7 @@ weight: 4
 
 该数据库可用作高可用 K3s Kubernetes 集群的外部数据存储。
 
-1. 登录到 [Amazon AWS RDS 控制台](https://console.aws.amazon.com/rds/)。确保选择的**地域**是你创建 EC2 实例 （Linux 节点）的地域。
+1. 登录到 [Amazon AWS RDS 控制台](https://console.aws.amazon.com/rds/)。确保选择的**区域**是你创建 EC2 实例 （Linux 节点）的区域。
 1. 在左侧面板中，点击**数据库**。
 1. 点击**创建数据库**。
 1. 在**引擎类型**中，点击 **MySQL**。

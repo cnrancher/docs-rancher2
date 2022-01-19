@@ -55,7 +55,7 @@ Rancher 和 Amazon Web Services 合作编写了一份快速入门指南，用于
 
 在工作站上安装以下命令行工具：
 
-- **The AWS CLI v2**：如需获取帮助，请参见[安装步骤](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)。
+- **AWS CLI v2**：如需获取帮助，请参见[安装步骤](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)。
 - **eksctl**：如需获取帮助，请参见[安装步骤](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html)。
 - **kubectl**：如需获得帮助，请参见[安装步骤](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html)。
 - **helm**：如需获取帮助，请参见[安装步骤](https://helm.sh/docs/intro/install/)。
@@ -74,12 +74,12 @@ aws configure
 |-------|-------------|
 | AWS Access Key ID | 具有 EKS 权限的 IAM 用户的访问密钥凭证。 |
 | AWS Secret Access Key | 具有 EKS 权限的 IAM 用户的密文密钥凭证。 |
-| Default region name | 集群节点所在的 [AWS 地域](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html#Concepts.RegionsAndAvailabilityZones.Regions)。 |
+| Default region name | 集群节点所在的 [AWS 区域](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html#Concepts.RegionsAndAvailabilityZones.Regions)。 |
 | Default output format | 输入 `json`。 |
 
 ### 3. 创建 EKS 集群
 
-运行以下命令创建一个 EKS 集群。使用适用于你的用例的 AWS 地域。在选择 Kubernetes 版本时，请务必先查阅[支持矩阵](https://rancher.com/support-matrix/)，以找出已针对你的 Rancher 版本验证的最新 Kubernetes 版本。
+运行以下命令创建一个 EKS 集群。使用适用于你的用例的 AWS 区域。在选择 Kubernetes 版本时，请务必先查阅[支持矩阵](https://rancher.com/support-matrix/)，以找出已针对你的 Rancher 版本验证的最新 Kubernetes 版本。
 
 ```
 eksctl create cluster \

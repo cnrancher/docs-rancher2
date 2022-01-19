@@ -32,7 +32,7 @@ Rancher 仅支持使用 Amazon NLB 以 `TCP` 模式终止 443 端口的流量，
 
 不管使用的是 NGINX Ingress 还是 Traefik Ingress Controller，Ingress 都应该将端口 80 的流量重定向到端口 443。以下为操作步骤：
 
-1. 登录到 [Amazon AWS 控制台](https://console.aws.amazon.com/ec2/)。确保选择的**地域**是你创建 EC2 实例 （Linux 节点）的地域。
+1. 登录到 [Amazon AWS 控制台](https://console.aws.amazon.com/ec2/)。确保选择的**区域**是你创建 EC2 实例 （Linux 节点）的区域。
 1. 选择**服务** >  **EC2**，找到**负载均衡器**并打开**目标组**。
 1. 单击**创建目标组**，然后创建用于 TCP 端口 443 的第一个目标组。
 
