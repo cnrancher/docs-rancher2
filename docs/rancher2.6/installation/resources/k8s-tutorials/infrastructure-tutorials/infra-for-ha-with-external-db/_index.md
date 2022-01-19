@@ -10,7 +10,7 @@ weight: 1
 有关每个安装选项的详情，请参见[本页]({{<baseurl>}}/rancher/v2.6/en/installation)。
 
 > :::note 注意
-> 这些节点必须位于同一个地域。但是你可以把这些服务器放在不同的可用区（数据中心）。
+> 这些节点必须位于同一个区域。但是你可以把这些服务器放在不同的可用区（数据中心）。
 > :::
 
 如需在高可用 K3s 集群中安装 Rancher Management Server，我们建议配置以下基础设施：
@@ -40,7 +40,7 @@ K3s 与其他 Kubernetes 发行版不同，在于其支持使用 etcd 以外的�
 
 ### 3. 配置负载均衡器
 
-你还需要设置一个负载均衡器，以将流量重定向到两个节点上的 Rancher 副本。配置后，当单个节点不可用时，继续保障与 Rancher Management Server 的通信。
+你还需要设置一个负载均衡器，来将流量重定向到两个节点上的 Rancher 副本。配置后，当单个节点不可用时，继续保障与 Rancher Management Server 的通信。
 
 在后续步骤中配置 Kubernetes 时，K3s 工具会部署一个 Traefik Ingress Controller。该 Controller 将侦听 worker 节点的 80 端口和 443 端口，以响应发送给特定主机名的流量。
 

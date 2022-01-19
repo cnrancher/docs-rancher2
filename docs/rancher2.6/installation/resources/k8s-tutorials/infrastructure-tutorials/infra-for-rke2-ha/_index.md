@@ -8,7 +8,7 @@ weight: 1
 我们根据 Rancher 的安装位置（RKE2 Kubernetes 集群、RKE Kubernetes 集群或单个 Docker 容器）为专用于 Rancher 的 Kubernetes 集群推荐不同基础设施。
 
 > :::note 注意
-> 这些节点必须位于同一个地域。但是你可以把这些服务器放在不同的可用区（数据中心）。
+> 这些节点必须位于同一个区域。但是你可以把这些服务器放在不同的可用区（数据中心）。
 > :::
 
 如需在高可用 RKE2 集群中安装 Rancher Management Server，我们建议配置以下基础设施：

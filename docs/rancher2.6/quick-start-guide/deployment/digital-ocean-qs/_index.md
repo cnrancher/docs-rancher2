@@ -31,7 +31,7 @@ weight: 100
 5. **可选**：修改 `terraform.tfvars` 中的可选参数。
    参见 [Quickstart Readme](https://github.com/rancher/quickstart) 以及 [DO Quickstart Readme](https://github.com/rancher/quickstart/tree/master/do) 了解更多信息。
    建议修改的参数包括：
-   - `do_region` - DigitalOcean 地域。DigitalOcean 的默认地域不一定是距离你最近的地域。建议修改为距离你最近的地域。
+   - `do_region` - DigitalOcean 区域。DigitalOcean 的默认区域不一定是距离你最近的区域。建议修改为距离你最近的区域。
    - `prefix` - 所有创建资源的前缀
    - `droplet_size` - 使用的计算实例规格，最小规格为`s-2vcpu-4gb`。如果在预算范围内，可以使用 `s-4vcpu-8gb`。
 

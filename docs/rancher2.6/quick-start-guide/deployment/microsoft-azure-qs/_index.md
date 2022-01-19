@@ -37,7 +37,7 @@ weight: 100
 5. **可选**：修改 `terraform.tfvars` 中的可选参数。
    参见 [Quickstart Readme](https://github.com/rancher/quickstart) 以及 [Azure Quickstart Readme](https://github.com/rancher/quickstart/tree/master/azure) 了解更多信息。
    建议修改的参数包括：
-   - `azure_location` - Microsoft Azure 地域。Azure 的默认地域 (`East US`) 不一定是距离你最近的地域。建议修改为距离你最近的地域。
+   - `azure_location` - Microsoft Azure 区域。Azure 的默认区域 (`East US`) 不一定是距离你最近的区域。建议修改为距离你最近的区域。
    - `prefix` - 所有创建资源的前缀
    - `instance_type` - 使用的计算实例大小，最小规格为 `Standard_DS2_v2`。如果在预算范围内，可以使用 `Standard_DS2_v3` 或 `Standard_DS3_v2`。
    - `add_windows_node` - 如果设为 true，一个额外的 Windows worker 节点会添加到工作负载集群中。
