@@ -64,6 +64,6 @@ sudo usermod -aG docker ubuntu
 
 ### RKE Kubernetes 集群节点的后续步骤
 
-如需在新节点上安装 RKE 集群，请记住每个节点的 **IPv4 公共 IP** 和 **私有 IP**。创建节点后，此信息可以在每个节点的**描述**页签中找到。公共和私有 IP 将用于设置 RKE 集群配置文件 `rancher-cluster.yml` 中每个节点的 `address` 和 `internal_address`。
+如需在新节点上安装 RKE 集群，请记住每个节点的 **IPv4 公共 IP** 和 **私有 IP**。创建节点后，此信息可以在每个节点的**描述**选项卡中找到。公共和私有 IP 将用于设置 RKE 集群配置文件 `rancher-cluster.yml` 中每个节点的 `address` 和 `internal_address`。
 
 RKE 还需要访问私钥才能连接到每个节点。因此，请记住连接到节点的私钥的路径，该路径也可用于设置 `rancher-cluster.yml` 中每个节点的 `ssh_key_path`。

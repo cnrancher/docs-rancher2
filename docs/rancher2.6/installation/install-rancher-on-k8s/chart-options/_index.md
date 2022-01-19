@@ -26,7 +26,7 @@ aliases:
 
 | 选项 | 默认值 | 描述 |
 | ------------------------- | ------------- | ---------------------------------------------------------------------------------- |
-| `bootstrapPassword` | " " | `string` - 为第一个管理员用户设置 [bootstrap 密码](#bootstrap-password)。登录后，管理员需要重置密码。如不设置，会使用随机生成的 bootstrap 密码。 |
+| `bootstrapPassword` | " " | `string` - 为第一个管理员用户设置[引导密码](#bootstrap-password)。登录后，管理员需要重置密码。如不设置，会使用随机生成的引导密码。 |
 | `hostname` | " " | `string` - 你的 Rancher Server 的完全限定的域名（FQDN) |
 | `ingress.tls.source` | "rancher" | `string` - 从哪里获取 Ingress 的证书- "rancher, letsEncrypt, secret" |
 | `letsEncrypt.email` | " " | `string` - 你的邮箱地址 |
