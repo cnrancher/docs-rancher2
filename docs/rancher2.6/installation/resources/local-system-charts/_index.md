@@ -1,15 +1,15 @@
 ---
-title: 离线安装中设置本地 System Chart
+title: 离线安装中设置本地 System Charts
 weight: 120
 ---
 
-The [System Charts](https://github.com/rancher/system-charts) repository contains all the catalog items required for features such as monitoring, logging, alerting and global DNS.
+[System Charts](https://github.com/rancher/system-charts) 仓库包含监控、日志管理、告警和全局 DNS 等功能所需的所有应用项。
 
-In an air gapped installation of Rancher, you will need to configure Rancher to use a local copy of the system charts. This section describes how to use local system charts using a CLI flag.
+在 Rancher 的离线安装中，你需要配置 Rancher 以使用 System Charts 的本地副本。本节介绍如何通过 CLI 标志使用本地 System Charts。
 
-# Using Local System Charts
+# 使用本地 System Charts
 
-A local copy of `system-charts` has been packaged into the `rancher/rancher` container. To be able to use these features in an air gap install, you will need to run the Rancher install command with an extra environment variable, `CATTLE_SYSTEM_CATALOG=bundled`, which tells Rancher to use the local copy of the charts instead of attempting to fetch them from GitHub.
+`system-charts` 的一个本地副本已经打包到 `rancher/rancher` 容器中。为了在离线安装中使用这些功能，你需要使用额外的环境变量 `CATTLE_SYSTEM_CATALOG=bundled` 来运行 Rancher 安装命令，该环境变量告诉 Rancher 使用 Chart 的本地副本，而不是尝试从 GitHub 获取 Chart。
 
-Example commands for a Rancher installation with a bundled `system-charts` are included in the [air gap installation]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/air-gap) instructions for Docker and Helm installs.
+带有 `system-charts` 的 Rancher 安装命令示例包含在 Docker 和 Helm 的[离线安装说明]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/air-gap)中。
 
