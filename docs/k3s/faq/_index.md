@@ -72,7 +72,7 @@ level=error msg="Node password rejected, duplicate hostname or contents of '/etc
 
 **原因分析：**
 
-根据日志提示大概的原因是两个 k3s 节点主机名重复，或者‘/etc/rancher/node/password 与 k3s server 的 node-passwd 不匹配照成。
+根据日志提示大概的原因是两个 k3s 节点主机名重复，或者`/etc/rancher/node/password` 与 k3s server 的 node-passwd 不匹配造成。
 
 节点注册到 k3s 集群，会在节点的`/etc/rancher/node/password`生成一串随机的 password。如果 agent 首次注册，master 节点会把 agent 发送的 node-name 和 node-passwd 解析出来存储到/var/lib/rancher/k3s/server/cred/node-passwd 中。如果 agent 是非首次注册，k3s master 会结合 node-name 和 node-passwd 进行比对，如果信息不一致会拒绝添加节点请求。
 
