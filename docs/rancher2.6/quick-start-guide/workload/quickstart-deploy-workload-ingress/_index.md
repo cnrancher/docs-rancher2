@@ -20,13 +20,13 @@ weight: 100
 1. 点击 **Deployment**。
 1. 为工作负载设置**名称**。
 1. 在 **Docker 镜像**字段中，输入 `rancher/hello-world`。注意区分大小写。
-1. 点击**添加端口**并在**私有容器端口**字段中输入`80`。通过添加端口，你可以访问集群内外的应用。详情请参见[服务]({{<baseurl>}}/rancher/v2.6/en/k8s-in-rancher/workloads/#services)。
+1. 点击**添加端口**并在**私有容器端口**字段中输入`80`。通过添加端口，你可以访问集群内外的应用。详情请参见 [Service]({{<baseurl>}}/rancher/v2.6/en/k8s-in-rancher/workloads/#services)。
 1. 点击**创建**。
 
 **结果**：
 
 * 工作负载已部署。此过程可能需要几分钟。
-* 当工作负载的 deployment 完成后，它的状态会变为 **Active**。你可以从项目的**工作负载**页面查看其状态。
+* 当工作负载完成部署后，它的状态会变为 **Active**。你可以从项目的**工作负载**页面查看其状态。
 
 <br/>
 
@@ -57,7 +57,7 @@ weight: 100
 
 ### 查看应用
 
-在 **Deployments** 页面中，找到你 deployment 的**端点**列，然后单击一个端点。可用的端点取决于你添加到 deployment 中的端口配置。如果你看不到随机分配端口的端点，请将你在创建 Ingress 时指定的路径尾附到 IP 地址上。例如，如果你的端点是 `xxx.xxx.xxx.xxx` 或 `https://xxx.xxx.xxx.xxx`，把它修改为 `xxx.xxx.xxx.xxx/hello` 或 `https://xxx.xxx.xxx.xxx/hello`。
+在 **Deployments** 页面中，找到你 deployment 的 **endpoint** 列，然后单击一个 endpoint。可用的 endpoint 取决于你添加到 deployment 中的端口配置。如果你看不到随机分配端口的 endpoint，请将你在创建 Ingress 时指定的路径尾附到 IP 地址上。例如，如果你的 endpoint 是 `xxx.xxx.xxx.xxx` 或 `https://xxx.xxx.xxx.xxx`，把它修改为 `xxx.xxx.xxx.xxx/hello` 或 `https://xxx.xxx.xxx.xxx/hello`。
 
 应用将在另一个窗口中打开。
 

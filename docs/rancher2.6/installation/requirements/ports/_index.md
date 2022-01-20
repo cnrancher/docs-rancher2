@@ -318,7 +318,7 @@ UDP Ports
 </TabItem>
 <TabItem value="sles12">
 1. SSH 进入实例。
-1. 编辑 /`etc/sysconfig/SuSEfirewall2` 并打开所需的端口。在这个例子中，端口 9796 和 10250 也被打开，用于监控。
+1. 编辑 `/etc/sysconfig/SuSEfirewall2` 并打开所需的端口。在这个例子中，端口 9796 和 10250 也被打开，用于监控。
 ```
 FW_SERVICES_EXT_TCP="22 80 443 2376 2379 2380 6443 9099 9796 10250 10254 30000:32767"
 FW_SERVICES_EXT_UDP="8472 30000:32767"

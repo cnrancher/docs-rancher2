@@ -3,7 +3,7 @@ title: 部署工作负载
 weight: 200
 ---
 
-以下指南将引导你完成应用部署，其中包括公开应用以在集群外部使用。
+这些指南指导你完成一个应用的部署，包括如何将应用暴露在集群之外使用。
 
 - [部署带有 Ingress 的工作负载](./quickstart-deploy-workload-ingress)
 - [部署带有 NodePort 的工作负载](./quickstart-deploy-workload-nodeport)

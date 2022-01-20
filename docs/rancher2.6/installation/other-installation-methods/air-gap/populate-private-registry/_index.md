@@ -33,7 +33,7 @@ values={[
 如果 Rancher Server 用于配置仅有 Linux 节点的集群，请按以下步骤将你的镜像推送到私有镜像仓库。
 
 1. [找到你的 Rancher 版本所需的资源](#1-find-the-required-assets-for-your-rancher-version)
-2. [收集 cert-manager 镜像](#2-collect-the-cert-manager-image)（出发你使用自己的证书，或在负载均衡器上终止 TLS）
+2. [收集 cert-manager 镜像](#2-collect-the-cert-manager-image)（除非你使用自己的证书，或在负载均衡器上终止 TLS）
 3. [把镜像保存到你的工作站](#3-save-the-images-to-your-workstation)
 4. [推送镜像到私有镜像仓库](#4-populate-the-private-registry)
 
