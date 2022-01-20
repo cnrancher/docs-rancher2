@@ -19,4 +19,4 @@ headless: true
 | UDP | 6783-6784 | Weave UDP 端口 |
 | TCP | 10250 | Metrics Server 与所有节点 API 的通信 |
 | TCP | 10254 | Ingress controller livenessProbe/readinessProbe |
-| TCP/UDP | 30000-</br>32767 | NodePort 端口范围 |
+| TCP/UDP | 30000-32767 | NodePort 端口范围 |
