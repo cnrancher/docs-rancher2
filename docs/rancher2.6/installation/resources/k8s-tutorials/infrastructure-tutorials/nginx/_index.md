@@ -29,7 +29,7 @@ weight: 4
    > 参见 [NGINX 文档：TCP 和 UDP 负载均衡](https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/)了解所有配置选项。
    > :::
 
-<figcaption>NGINX 配置示例</figcaption>
+NGINX 配置示例:
 ```
     worker_processes 4;
     worker_rlimit_nofile 40000;
@@ -62,7 +62,6 @@ weight: 4
         }
 
     }
-
 ```
 
 
@@ -70,23 +69,17 @@ weight: 4
 
 4. 运行以下命令重新加载 NGINX 配置：
 
-```
-
-# nginx -s reload
-
-```
+   ```
+   # nginx -s reload
+   ```
 
 ## 可选 - 将 NGINX 作为 Docker 容器运行
 
 除了将 NGINX 作为软件包安装在操作系统上外，你也可以将其作为 Docker 容器运行。将编辑后的 **NGINX 配置示例** 保存为`/etc/nginx.conf`，并运行以下命令来启动 NGINX 容器：
 
 ```
-
 docker run -d --restart=unless-stopped \
- -p 80:80 -p 443:443 \
- -v /etc/nginx.conf:/etc/nginx/nginx.conf \
- nginx:1.14
-
-```
-
+  -p 80:80 -p 443:443 \
+  -v /etc/nginx.conf:/etc/nginx/nginx.conf \
+  nginx:1.14
 ```
