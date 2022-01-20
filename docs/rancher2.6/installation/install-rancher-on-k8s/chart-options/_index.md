@@ -71,17 +71,17 @@ aliases:
 
 
 
-### Bootstrap 密码
+### 引导密码
 
-Rancher 首次启动时，会为第一个管理员用户随机生成一个密码。当管理员首次登录 Rancher 时，用于获取 Bootstrap 密码的命令会在 UI 上显示。管理员需要运行命令并使用 Bootstrap 密码登录。然后 Rancher 会让管理员重置密码。
+Rancher 首次启动时，会为第一个管理员用户随机生成一个密码。当管理员首次登录 Rancher 时，用于获取引导密码（Bootstrap）的命令会在 UI 上显示。管理员需要运行命令并使用引导密码登录。然后 Rancher 会让管理员重置密码。
 
-如果你想指定 Bootstrap 密码而不使用随机生成的密码，请参考以下命令设置密码。
+如果你想指定引导密码而不使用随机生成的密码，请参考以下命令设置密码。
 
 ```plain
 --set bootstrapPassword="rancher"
 ```
 
-无论你是使用提供的密码还是生成的密码，密码均存储在 Kubernetes 密文中。安装 Rancher 后，如何使用 kubectl 获取密码的说明将会显示在 UI 中：
+无论你是使用提供的密码还是生成的密码，密码均存储在 Kubernetes 密文中。安装 Rancher 后，如何使用 kubectl 获取密码的说明将会在 UI 中显示：
 
 ```
 kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='{{ .data.bootstrapPassword|base64decode}}{{ "\n" }}'

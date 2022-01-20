@@ -173,7 +173,7 @@ values={[
 由于 `rancher` 是 `ingress.tls.source` 的默认选项，因此在执行 `helm install` 命令时，我们不需要指定 `ingress.tls.source`。
 
 - 将 `hostname` 设置为解析到你的负载均衡器的 DNS 名称。
-- 将 `bootstrapPassword` 设置为`admin` 用户独有的值。
+- 将 `bootstrapPassword` 设置为 `admin` 用户独有的值。
 - 如果你安装的是 alpha 版本，Helm 要求你在命令中添加 `--devel` 选项。
 - 如果你需要安装指定的 Rancher 版本，使用 `--version` 标志，例如 `--version 2.3.6`。
 
@@ -204,7 +204,7 @@ deployment "rancher" successfully rolled out
 在以下命令中，
 
 - 将 `hostname` 设置为公有 DNS 记录。
-- 将 `bootstrapPassword` 设置为`admin` 用户独有的值。
+- 将 `bootstrapPassword` 设置为 `admin` 用户独有的值。
 - 将 `ingress.tls.source` 设置为 `letsEncrypt`。
 - 将 `letsEncrypt.email` 设置为可通讯的电子邮件地址，用于发送通知（例如证书到期的通知）。
 - 如果你安装的是 alpha 版本，Helm 要求你在命令中添加 `--devel` 选项。
@@ -238,7 +238,7 @@ deployment "rancher" successfully rolled out
 > 如果你想检查证书是否正确，请查看[如何在服务器证书中检查 Common Name 和 Subject Alternative Names]({{<baseurl>}}/rancher/v2.6/en/faq/technical/#how-do-i-check-common-name-and-subject-alternative-names-in-my-server-certificate)。
 
 - 设置 `hostname`。
-- 将 `bootstrapPassword` 设置为`admin` 用户独有的值。
+- 将 `bootstrapPassword` 设置为 `admin` 用户独有的值。
 - 将 `ingress.tls.source` 设置为 `secret`。
 - 如果你安装的是 alpha 版本，Helm 要求你在命令中添加 `--devel` 选项。
 

@@ -66,7 +66,7 @@ Cloud Shell 是一个 shell 环境，用于管理托管在 Google Cloud 上的�
 
 选择以下方法之一配置默认的 gcloud 设置：
 
-- 如果您想了解默认值，请使用 gcloud init。
+- 如果你想了解默认值，请使用 gcloud init。
 - 如需单独设置你的项目 ID、地区和区域，使用 gcloud config。
 
 import Tabs from '@theme/Tabs';

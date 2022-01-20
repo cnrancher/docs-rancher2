@@ -5,7 +5,7 @@ short title: 快速开始 Rancher 部署和测试。本章节包含 Rancher 的�
 weight: 2
 ---
 > :::note 注意
-> 本章节中提供的指南，旨在帮助你快速启动一个用于 Rancher 的沙盒，以评估 Rancher 是否能满足你的使用需求。快速入门指南不适用于生产环境。如果你需要获取生产环境的操作知道，请参见[安装]({{<baseurl>}}/rancher/v2.6/en/installation/)。
+> 本章节中提供的指南，旨在帮助你快速启动一个用于 Rancher 的沙盒，以评估 Rancher 是否能满足你的使用需求。快速入门指南不适用于生产环境。如果你需要获取生产环境的操作指导，请参见[安装]({{<baseurl>}}/rancher/v2.6/en/installation/)。
 > :::
 
 你好！你可以阅读本章节，以快速开始部署和测试 Rancher 2.x。本章节包含 Rancher 的简单设置和一些常见用例的说明。未来，我们会在本章节中添加更多内容。

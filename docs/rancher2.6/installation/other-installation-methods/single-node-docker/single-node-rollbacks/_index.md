@@ -58,7 +58,7 @@ docker pull rancher/rancher:<PRIOR_RANCHER_VERSION>
    ```
    你可输入 `docker ps`获取 Rancher 容器的名称。
 
-1. 将你在 [Docker 升级]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/single-node-docker/single-node-upgrades)时创建的备份压缩包移动到 Rancher Server。切换到您将其移动到的目录。输入 `dir` 以确认它在该位置。
+1. 将你在 [Docker 升级]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/single-node-docker/single-node-upgrades)时创建的备份压缩包移动到 Rancher Server。切换到你将其移动到的目录。输入 `dir` 以确认它在该位置。
 
    如果你遵循了我们在 [Docker 升级]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/single-node-docker/single-node-upgrades)中推荐的命名方式，它的名称会与 `rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz` 类似。
 

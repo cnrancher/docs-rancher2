@@ -10,7 +10,7 @@ weight: 10
 1. 使用新证书和私钥创建或更新 `tls-rancher-ingress` Kubernetes 密文资源。
 2. 使用根 CA 证书创建或更新 `tls-ca` Kubernetes 密文资源（仅在使用私有 CA 时需要）。
 3. 使用 Helm CLI 更新 Rancher 安装。
-4. 重新配置 Rancher 代理以信任新的 CA 证书。
+4. 重新配置 Rancher Agent 以信任新的 CA 证书。
 
 
 
