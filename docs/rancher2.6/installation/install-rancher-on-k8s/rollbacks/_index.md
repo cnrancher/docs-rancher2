@@ -96,7 +96,7 @@ helm rollback rancher 3 -n cattle-system
 
 # 回滚到 Rancher 2.2-2.4
 
-要回滚到 2.5 之前的 Rancher 版本，参考此处的步骤[恢复备份  — Kubernetes 安装]({{<baseurl>}}/rancher/v2.0-v2.4/en/backups/restore/rke-restore/)。如果恢复 Rancher Server 的集群的某个快照，Rancher 的版本以及状态均会恢复回到快照时的版本和状态。
+要回滚到 2.5 之前的 Rancher 版本，参考此处的步骤[恢复备份 — Kubernetes 安装]({{<baseurl>}}/rancher/v2.0-v2.4/en/backups/restore/rke-restore/)。如果恢复 Rancher Server 的集群的某个快照，Rancher 的版本以及状态均会恢复回到快照时的版本和状态。
 
 有关回滚 Docker 安装的 Rancher，请参见[本页]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/single-node-docker/single-node-rollbacks)。
 

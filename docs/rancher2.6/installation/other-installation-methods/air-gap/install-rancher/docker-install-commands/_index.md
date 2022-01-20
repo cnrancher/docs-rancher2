@@ -128,5 +128,6 @@ docker run -d --restart=unless-stopped \
 
 
 
-> **注意**：如果你不想发送遥测数据，在首次登录时退出[遥测]({{<baseurl>}}/rancher/v2.6/en/faq/telemetry/)。
+> :::note 注意
+> 如果你不想发送遥测数据，在首次登录时退出[遥测]({{<baseurl>}}/rancher/v2.6/en/faq/telemetry/)。
 

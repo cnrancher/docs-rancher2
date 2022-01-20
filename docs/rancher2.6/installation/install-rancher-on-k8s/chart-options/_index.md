@@ -225,7 +225,7 @@ Rancher 将对 `/healthz` 端点的健康检查响应`200`。
 > 此 NGINX 配置只是一个示例，可能不适合你的环境。如需查阅完整文档，请参见 [NGINX 负载均衡 - HTTP 负载均衡](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/)。
 > :::
 
-- 将 `IP_NODE1`，`IP_NODE2`  和 `IP_NODE3` 替换为你集群中节点的 IP 地址。
+- 将 `IP_NODE1`，`IP_NODE2` 和 `IP_NODE3` 替换为你集群中节点的 IP 地址。
 - 将两处的 `FQDN` 均替换为 Rancher 的 DNS 名称。
 - 把 `/certs/fullchain.pem` 和 `/certs/privkey.pem` 分别替换为服务器证书和服务器证书密钥的位置。
 
