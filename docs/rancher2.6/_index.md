@@ -14,7 +14,7 @@ Rancher 最初是为了支持多种容器编排引擎而构建的，其中包括
 
 Rancher 可以创建来自 Kubernetes 托管服务提供商的集群，创建节点并安装 Kubernetes，或者导入在任何地方运行的现有 Kubernetes 集群。
 
-你只需安装一台 Rancher server，就可以使用一个UI，管理上千个 Kubernetes 集群和节点。
+你只需安装一台 Rancher Server，就可以使用一个 UI，管理上千个 Kubernetes 集群和节点。
 
 Rancher 基于 Kubernetes 添加了新的功能，包括统一所有集群的身份验证和基于角色的访问控制（RBAC），让系统管理员从一个位置控制全部集群的访问。
 

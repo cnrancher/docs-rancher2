@@ -27,19 +27,19 @@ Rancher 和 Amazon Web Services 合作编写了一份快速入门指南，用于
 
 使用默认参数为新的 Virtual Private Cloud（VPC）和新的 Amazon EKS 集群按照此快速入门部署，会在 AWS Cloud 中构建以下 Rancher 环境：
 
-- 跨越三个可用区的高可用架构。*
-- 根据 AWS 最佳实践，配置有公共和私有子网的 VPC，为你提供 AWS 上你自己的虚拟网络。*
+- 跨越三个可用区的高可用架构。\*
+- 根据 AWS 最佳实践，配置有公共和私有子网的 VPC，为你提供 AWS 上你自己的虚拟网络。\*
 - 在公共子网中：
-   - 管理网络地址转换（NAT）网关，以允许资源的出站互联网访问。*
-   - 自动扩缩组中的 Linux 堡垒主机，允许对公共和私有子网中的 Amazon Elastic Compute Cloud (Amazon EC2) 实例进行入站安全 Shell (SSH) 访问。*
+   - 管理网络地址转换（NAT）网关，以允许资源的出站互联网访问。\*
+   - 自动扩缩组中的 Linux 堡垒主机，允许对公共和私有子网中的 Amazon Elastic Compute Cloud (Amazon EC2) 实例进行入站安全 Shell (SSH) 访问。\*
 - 私有子网中：
-   - 自动扩缩组中的 Kubernetes 节点。*
+   - 自动扩缩组中的 Kubernetes 节点。\*
    - 网络负载均衡器（未显示），用于访问 Rancher 控制台。
 - 使用 AWS Systems Manager 自动化进行 Rancher 部署。
-- 用于 EKS 集群的 Amazon EKS 服务，它提供了 Kubernetes control plane 。*
+- 用于 EKS 集群的 Amazon EKS 服务，它提供了 Kubernetes control plane 。\*
 - 用于访问 Rancher 部署的 Amazon Route 53 DNS 记录。
 
-\* 将快速启动部署到现有 Amazon EKS 集群中的 CloudForm 模板会跳过标有星号（*）的组件，并提示你查看现有 VPC 配置。
+\* 将快速启动部署到现有 Amazon EKS 集群中的 CloudForm 模板会跳过标有星号（\*）的组件，并提示你查看现有 VPC 配置。
 
 # 为 Rancher Server 创建 EKS 集群
 

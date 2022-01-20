@@ -26,7 +26,7 @@ values={[
 <TabItem value="k3s">
 为了实现高可用安装，我们建议设置以下的基础设施：
 
-- **2个 Linux 节点**：可以是你的云提供商中的虚拟机。
+- **2 个 Linux 节点**：可以是你的云提供商中的虚拟机。
 - **1 个外部数据库**：用于存储集群数据。支持 PostgreSQL, MySQL 和 etcd。
 - **1 个负载均衡器**：用于将流量转发到这两个节点中。
 - **1 个 DNS 记录**：用于将 URL 映射到负载均衡器。此 DNS 记录将成为 Rancher Server 的 URL，下游集群需要可以访问到这个地址。
@@ -99,7 +99,7 @@ Rancher 支持使用私有镜像仓库进行离线安装。你必须有自己的
 
 如需在高可用 RKE 集群中安装 Rancher Management Server，我们建议配置以下基础设施：
 
-- **3个 Linux 节点**：可以是你的云提供商（例如 Amazon EC2，GCE 或 vSphere）中的虚拟机。
+- **3 个 Linux 节点**：可以是你的云提供商（例如 Amazon EC2，GCE 或 vSphere）中的虚拟机。
 - **1 个负载均衡器**：用于将前端流量转发到这三个节点中。
 - **1 个 DNS 记录**：用于将 URL 映射到负载均衡器。此 DNS 记录将成为 Rancher Server 的 URL，下游集群需要可以访问到这个地址。
 - **1 个私有 Docker 镜像仓库**：用于将 Docker 镜像分发到你的机器。

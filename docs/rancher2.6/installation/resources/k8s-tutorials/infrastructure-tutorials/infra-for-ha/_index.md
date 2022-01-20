@@ -11,7 +11,7 @@ weight: 2
 
 如需在高可用 RKE 集群中安装 Rancher Management Server，我们建议配置以下基础设施：
 
-- **3个 Linux 节点**：可以是你的云提供商（例如 Amazon EC2，GCE 或 vSphere）中的虚拟机。
+- **3 个 Linux 节点**：可以是你的云提供商（例如 Amazon EC2，GCE 或 vSphere）中的虚拟机。
 - **1 个负载均衡器**：用于将前端流量转发到这三个节点中。
 - **1 个 DNS 记录**：用于将 URL 映射到负载均衡器。此 DNS 记录将成为 Rancher Server 的 URL，下游集群需要可以访问到这个地址。
 

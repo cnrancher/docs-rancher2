@@ -27,7 +27,7 @@ kubeconfig 也可以通过 `--kubeconfig` 标签（详情请参见 https://helm.
 
 如需查看每个 Rancher 版本的已知问题，请参见 [GitHub](https://github.com/rancher/rancher/releases) 中的发行说明，或查看 [Rancher 论坛](https://forums.rancher.com/c/announcements/12)。
 
-不支持 _升级_ 或 _升级到_  [rancher-alpha 仓库]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#helm-chart-repositories/)中任何 Chart。
+不支持 _升级_ 或 _升级到_ [rancher-alpha 仓库]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#helm-chart-repositories/)中任何 Chart。
 
 ### Helm 版本
 
@@ -45,7 +45,7 @@ kubeconfig 也可以通过 `--kubeconfig` 标签（详情请参见 https://helm.
 
 ### 使用 cert-manager 0.8.0 之前的版本升级
 
-[从2019年11月1日开始，Let's Encrypt 已屏蔽早于 0.8.0 的 cert-manager 实例](https://community.letsencrypt.org/t/blocking-old-cert-manager-versions/98753)。因此，请参见[说明]({{<baseurl>}}/rancher/v2.6/en/installation/resources/upgrading-cert-manager)把 cert-manager 升级到最新版本。
+[从 2019 年 11 月 1 日开始，Let's Encrypt 已屏蔽早于 0.8.0 的 cert-manager 实例](https://community.letsencrypt.org/t/blocking-old-cert-manager-versions/98753)。因此，请参见[说明]({{<baseurl>}}/rancher/v2.6/en/installation/resources/upgrading-cert-manager)把 cert-manager 升级到最新版本。
 
 # 升级概要
 
@@ -85,7 +85,7 @@ kubeconfig 也可以通过 `--kubeconfig` 标签（详情请参见 https://helm.
    ```
 
    > :::note 注意
-   > 如果你想切换到不同的 Helm Chart 仓库，请按照[切换仓库步骤]({{<baseurl>}}/rancher/v2.6/en/installation/resources/choosing-version/#switching-to-a-different-helm-chart-repository)进行操作。如果你要切换存储库，请先再次列出仓库，再继续执行步骤3，以确保添加了正确的仓库。
+   > 如果你想切换到不同的 Helm Chart 仓库，请按照[切换仓库步骤]({{<baseurl>}}/rancher/v2.6/en/installation/resources/choosing-version/#switching-to-a-different-helm-chart-repository)进行操作。如果你要切换存储库，请先再次列出仓库，再继续执行步骤 3，以确保添加了正确的仓库。
    > :::
 
 

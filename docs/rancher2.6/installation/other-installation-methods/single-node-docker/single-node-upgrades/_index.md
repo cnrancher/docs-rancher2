@@ -20,7 +20,7 @@ weight: 1010
 docker stop <RANCHER_CONTAINER_NAME>
 ```
 
-在此命令中，`<RANCHER_CONTAINER_NAME>`  是你的 Rancher 容器的名称。
+在此命令中，`<RANCHER_CONTAINER_NAME>` 是你的 Rancher 容器的名称。
 
 # 获取升级命令的数据
 

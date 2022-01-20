@@ -32,7 +32,7 @@ _要求_
 1. 本地
 2. Active Directory
 3. FreeIpa，OpenLdap
-4. SAML 身份提供商：Ping，Okta，ADFS，Keycloak和Shibboleth
+4. SAML 身份提供商：Ping，Okta，ADFS，Keycloak 和 Shibboleth
 
 如果你是第一次运行 kubectl，例如，`kubectl get pods`，它会要求你选择一个验证提供程序并使用 Rancher Server 登录。
 kubeconfig token 会被缓存 `./.cache/token` 下你运行 kubectl 的路径中。该令 Token 在[过期](../../api/api-tokens/#setting-ttl-on-kubeconfig-tokens-period)或[从 Rancher Server 删除](../../api/api-tokens/#deleting-tokens)之前都是有效的。

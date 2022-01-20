@@ -57,7 +57,7 @@ weight: 100
 
 ### 查看应用
 
-在 **Deployments** 页面中，找到你 deployment 的**端点**列，然后单击一个端点。可用的端点取决于你添加到 deployment 中的端口配置。如果你看不到随机分配端口的端点，请将你在创建 Ingress 时指定的路径尾附到 IP 地址上。例如，如果你的端点是 `xxx.xxx.xxx.xxx` 或  `https://xxx.xxx.xxx.xxx`，把它修改为 `xxx.xxx.xxx.xxx/hello` 或 `https://xxx.xxx.xxx.xxx/hello`。
+在 **Deployments** 页面中，找到你 deployment 的**端点**列，然后单击一个端点。可用的端点取决于你添加到 deployment 中的端口配置。如果你看不到随机分配端口的端点，请将你在创建 Ingress 时指定的路径尾附到 IP 地址上。例如，如果你的端点是 `xxx.xxx.xxx.xxx` 或 `https://xxx.xxx.xxx.xxx`，把它修改为 `xxx.xxx.xxx.xxx/hello` 或 `https://xxx.xxx.xxx.xxx/hello`。
 
 应用将在另一个窗口中打开。
 

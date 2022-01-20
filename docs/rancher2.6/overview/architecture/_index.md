@@ -62,7 +62,7 @@ Rancher backup operator 可将 Rancher 从单个 Docker 容器迁移到高可用
 以下描述对应于上图中的数字：
 
 1. [认证代理](#1-the-authentication-proxy)
-2. [Cluster Controller 和  Cluster Agent](#2-cluster-controllers-and-cluster-agents)
+2. [Cluster Controller 和 Cluster Agent](#2-cluster-controllers-and-cluster-agents)
 3. [Node Agent](#3-node-agents)
 4. [授权集群端点（ACE）](#4-authorized-cluster-endpoint)
 
@@ -81,7 +81,7 @@ Rancher 使用[服务账号](https://kubernetes.io/docs/tasks/configure-pod-cont
 
 每个下游集群都有一个 Cluster Agent，用于打开与 Rancher Server 中对应的 Cluster Controller 之间的通道。
 
-每个下游集群有一个 Cluster cController 和一个 Cluster Agent。每个 Cluster Controller 都能：
+每个下游集群有一个 Cluster Controller 和一个 Cluster Agent。每个 Cluster Controller 都能：
 
 - 检测下游集群中的资源变化
 - 将下游集群的当前状态变更到目标状态

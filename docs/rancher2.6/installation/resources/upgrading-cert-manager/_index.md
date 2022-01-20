@@ -21,7 +21,7 @@ Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和续期 TLS
 > 2. 卸载 Rancher、cert-manager 和 cert-manager 的 CustomResourceDefinition。
 > 3. 安装新版本的 Rancher 和 cert-manager。
 
-> 进行上述操作的原因是，Helm 升级 Rancher 时，如果正在运行的 Rancher 应用与安装它所使用的Helm 模板不匹配，Helm 会拒绝升级并提示错误消息。由于 cert-manager 更改了它的 API 组，而且我们不能修改 Rancher 已发布的 Chart，因此 cert-manager 的 API 版本始终不匹配，导致升级被拒绝。
+> 进行上述操作的原因是，Helm 升级 Rancher 时，如果正在运行的 Rancher 应用与安装它所使用的 Helm 模板不匹配，Helm 会拒绝升级并提示错误消息。由于 cert-manager 更改了它的 API 组，而且我们不能修改 Rancher 已发布的 Chart，因此 cert-manager 的 API 版本始终不匹配，导致升级被拒绝。
 
 # 升级 Cert-Manager
 

@@ -41,7 +41,7 @@ values={[
 
 这些步骤要求你使用一个 Linux 工作站，该工作站需要可访问互联网和你的私有镜像仓库，且至少有 20GB 的可用磁盘空间。
 
-如果你的主机架构是 ARM64，镜像仓库必须支持 Manifest。这是因为从2020年4月开始, Amazon Elastic Container Registry 已经不再支持 Manifest。
+如果你的主机架构是 ARM64，镜像仓库必须支持 Manifest。这是因为从 2020 年 4 月开始, Amazon Elastic Container Registry 已经不再支持 Manifest。
 
 ### 1. 找到你的 Rancher 版本所需的资源
 
@@ -134,7 +134,7 @@ chmod +x rancher-load-images.sh
 
 工作站必须安装 Docker 18.02+ 版本以提供 manifest 支持。Manifest 支持是配置 Windows 集群所必须的。
 
-你的镜像仓库必须支持 Manifest。这是因为从2020年4月开始, Amazon Elastic Container Registry 已经不再支持 Manifest。
+你的镜像仓库必须支持 Manifest。这是因为从 2020 年 4 月开始, Amazon Elastic Container Registry 已经不再支持 Manifest。
 
 <a name="windows-1"></a>
 

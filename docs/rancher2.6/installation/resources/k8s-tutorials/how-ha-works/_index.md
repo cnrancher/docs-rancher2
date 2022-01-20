@@ -16,7 +16,7 @@ Rancher Server 的数据存储在 etcd 中。etcd 数据库可以在所有三个
 ### 推荐架构
 
 - Rancher 的 DNS 应该解析为 4 层负载均衡器。
-- 负载均衡器应该把 TCP/80 端口和 TCP/443 端口的流量转发到Kubernetes 集群的全部3个节点上。
+- 负载均衡器应该把 TCP/80 端口和 TCP/443 端口的流量转发到 Kubernetes 集群的全部 3 个节点上。
 - Ingress Controller 会把 HTTP 重定向到 HTTPS，在 TCP/443 端口终结 SSL/TLS。
 - Ingress Controller 会把流量转发到 Rancher deployment 的 Pod 上的 TCP/80 端口。
 

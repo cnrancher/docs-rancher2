@@ -5,7 +5,7 @@ weight: 1
 
 如果你在内部生产环境使用 Rancher，且不打算公开暴露应用，你可以使用使用私有 CA 颁发的证书。
 
-Rancher 可能会访问配置了自定义/内部 CA 根证书（也称为自签名证书）的服务。如果Rancher 无法验证服务的证书，则会显示错误信息 `x509: certificate signed by unknown authority`。
+Rancher 可能会访问配置了自定义/内部 CA 根证书（也称为自签名证书）的服务。如果 Rancher 无法验证服务的证书，则会显示错误信息 `x509: certificate signed by unknown authority`。
 
 如需验证证书，你需要把 CA 根证书添加到 Rancher。由于 Rancher 是用 Go 编写的，我们可以使用环境变量 `SSL_CERT_DIR` 指向容器中 CA 根证书所在的目录。启动 Rancher 容器时，可以使用 Docker 卷选项（`-v host-source-directory:container-destination-directory`）来挂载 CA 根证书目录。
 

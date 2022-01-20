@@ -73,7 +73,7 @@ Rancher Helm Chart 版本与 Rancher 版本（即 `appVersion`）对应。添加
    rancher-<CHART_REPO>		https://releases.rancher.com/server-charts/<CHART_REPO>
    ```
 
-2. 删除包含安装 Rancher 时用的 Chart  的 Helm Chart 仓库。是 `rancher-stable` 或 `rancher-latest` 取决于你初始安装时的选择。
+2. 删除包含安装 Rancher 时用的 Chart 的 Helm Chart 仓库。是 `rancher-stable` 或 `rancher-latest` 取决于你初始安装时的选择。
 
    ```plain
    helm repo remove rancher-<CHART_REPO>
