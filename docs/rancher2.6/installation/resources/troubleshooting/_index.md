@@ -134,7 +134,7 @@ W0705 23:04:58.240571       7 backend_ssl.go:49] error obtaining PEM from secret
 Error: validation failed: unable to recognize "": no matches for kind "Issuer" in version "certmanager.k8s.io/v1alpha1"
 ```
 
-在这种情况下，先安装 Cert-Manager，然后再尝试重新安装 Rancher。
+在这种情况下，先安装 Cert-Manager，然后再重新安装 Rancher。
 
 
 ### Canal Pod 显示 READY 2/3
@@ -160,9 +160,9 @@ user@server$ docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
 ```
 
-如需了解如何进行正确设置，请参见[以非 root 用户身份管理 Docker](https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user)。
+如果需要了解如何进行正确设置，请参见[以非 root 用户身份管理 Docker](https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user)。
 
-* 你使用的操作系统是 RedHat 或 CentOS：由于 [Bugzilla #1527565](https://bugzilla.redhat.com/show_bug.cgi?id=1527565)，你不能使用 `root` 用户连接到节点。因此，你需要添加一个单独的用户并配置其访问 Docker Socket。如需了解如何进行正确设置，请参见[以非 root 用户身份管理 Docker](https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user)。
+* 你使用的操作系统是 RedHat 或 CentOS：由于 [Bugzilla #1527565](https://bugzilla.redhat.com/show_bug.cgi?id=1527565)，你不能使用 `root` 用户连接到节点。因此，你需要添加一个单独的用户并配置其访问 Docker Socket。如果需要了解如何进行正确设置，请参见[以非 root 用户身份管理 Docker](https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user)。
 
 * SSH 服务器版本不是 6.7 或更高版本：高版本是 Socket 转发所必须的，用于通过 SSH 连接到 Docker Socket。你可以在你要连接的主机上使用 `sshd -V` 或使用 netcat 进行检查：
 ```
@@ -172,7 +172,7 @@ SSH-2.0-OpenSSH_6.6.1p1 Ubuntu-2ubuntu2.10
 
 ### Failed to dial ssh using address [xxx.xxx.xxx.xxx:xx]: Error configuring SSH: ssh: no key found
 
-`ssh_key_path` 密钥文件无法访问：请确保你已指定了私钥文件（不是公钥 `.pub`），而且运行 `rke` 命令的用户可以访问该私钥文件。
+`ssh_key_path` 密钥文件无法访问：请确保你已经指定了私钥文件（不是公钥 `.pub`），而且运行 `rke` 命令的用户可以访问该私钥文件。
 
 ### Failed to dial ssh using address [xxx.xxx.xxx.xxx:xx]: ssh: handshake failed: ssh: unable to authenticate, attempted methods [none publickey], no supported methods remain
 
