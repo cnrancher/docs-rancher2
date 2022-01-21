@@ -85,7 +85,7 @@ docker ps
 
    **步骤结果**：你输入此命令时，会运行一系列命令。
 
-1. 输入 `ls` 命令，以确认备份压缩包已创建成功。压缩包的名称格式类似 `rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz`。
+1. 输入 `ls` 命令，确认备份压缩包已创建成功。压缩包的名称格式类似 `rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz`。
 
    ```
    [rancher@ip-10-0-0-50 ~]$ ls
