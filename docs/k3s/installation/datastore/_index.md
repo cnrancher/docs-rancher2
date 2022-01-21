@@ -36,7 +36,7 @@ K3s 支持以下数据存储选项：
 
 | CLI Flag               | 环境变量                 | 描述                                                                                                                                                                                                  |
 | :--------------------- | :----------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--datastore-endpoint` | `K3S_DATASTORE_ENDPOINT` | 指定一个 PostgreSQL、MySQL 或 etcd 连接字符串。用于描述与数据存储的连接。这个字符串的结构是特定于每个后端的，详情如下。                                                                              |
+| `--datastore-endpoint` | `K3S_DATASTORE_ENDPOINT` | 指定一个 PostgreSQL、MySQL 或 etcd 连接字符串。用于描述与数据存储的连接。这个字符串的结构是特定于每个后端的，详情如下。                                                                               |
 | `--datastore-cafile`   | `K3S_DATASTORE_CAFILE`   | TLS 证书颁发机构（CA）文件，用于帮助确保与数据存储的通信安全。如果你的数据存储通过 TLS 服务请求，使用由自定义证书颁发机构签署的证书，你可以使用这个参数指定该 CA，这样 K3s 客户端就可以正确验证证书。 |
 | `--datastore-certfile` | `K3S_DATASTORE_CERTFILE` | TLS 证书文件，用于对数据存储进行基于客户端证书的验证。要使用这个功能，你的数据存储必须被配置为支持基于客户端证书的认证。如果你指定了这个参数，你还必须指定`datastore-keyfile`参数。                   |
 | `--datastore-keyfile`  | `K3S_DATASTORE_KEYFILE`  | TLS 密钥文件，用于对数据存储进行基于客户端证书的认证。更多细节请参见前面的`datastore-certfile`参数。                                                                                                  |
@@ -47,7 +47,18 @@ K3s 支持以下数据存储选项：
 
 如前所述，传递给`datastore-endpoint`参数的值的格式取决于数据存储后端。下文详细介绍了每个支持的外部数据存储的格式和功能。
 
-#### PostgreSQL
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+defaultValue="postgresql"
+values={[
+{ label: 'PostgreSQL', value: 'postgresql', },
+{ label: 'MySQL/MariaDB', value: 'mysqlandmariadb', },
+{ label: 'etcd', value: 'etcd', },
+]}>
+
+<TabItem value="postgresql">
 
 最常见的 PostgreSQL 数据存储端点的参数格式：
 
@@ -62,7 +73,9 @@ K3s 支持以下数据存储选项：
 - 使用`postgres`作为用户名和密码连接到 localhost
 - 创建一个名为`kubernetes`的数据库
 
-#### MySQL/MariaDB"
+</TabItem>
+
+<TabItem value="mysqlandmariadb">
 
 最常见的 MySQL 和 MariaDB 的`datastore-endpoint`参数格式如下：
 
@@ -79,13 +92,20 @@ K3s 支持以下数据存储选项：
 - 使用 root 用户并且不使用密码连接到`/var/run/mysqld/mysqld.sock`上的 MySQL 套接字
 - 创建一个名为`kubernetes`的数据库
 
-#### etcd
+</TabItem>
+
+<TabItem value="etcd">
 
 最常见的 etcd 的`datastore-endpoint`参数的格式如下：
 
 `https://etcd-host-1:2379,https://etcd-host-2:2379,https://etcd-host-3:2379`
 
 以上假设是一个典型的三节点 etcd 集群。该参数可以再接受一个以逗号分隔的 etcd URL。
+
+</TabItem>
+</Tabs>
+
+---
 
 基于上述情况，可以使用下面的示例命令来启动一个连接到名为 k3s 的 PostgreSQL 数据库的 k3s server 实例:
 
