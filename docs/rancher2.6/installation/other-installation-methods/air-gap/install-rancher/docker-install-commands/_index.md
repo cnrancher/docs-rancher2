@@ -9,7 +9,7 @@ Docker 安装适用于想要测试 Rancher 的用户。
 
 你可以使用备份应用，按照[这些步骤]({{<baseurl>}}/rancher/v2.6/en/backups/migrating-rancher)，将 Rancher Server 从 Docker 安装迁移到 Kubernetes 安装。
 
-出于安全考虑，使用 Rancher 时需要使用 SSL（Secure Sockets Layer）。SSL 保护所有 Rancher 网络通信（如登录和与集群交互）的安全。
+出于安全考虑，使用 Rancher 时请使用 SSL（Secure Sockets Layer）。SSL 保护所有 Rancher 网络通信（如登录和与集群交互）的安全。
 
 | 环境变量键 | 环境变量值 | 描述 |
 | -------------------------------- | -------------------------------- | ---- |
@@ -19,7 +19,7 @@ Docker 安装适用于想要测试 Rancher 的用户。
 > **你是否需要**：
 >
 > - 配置自定义 CA 根证书以访问服务。参见[自定义 CA 根证书]({{<baseurl>}}/rancher/v2.6/en/installation/resources/custom-ca-root-certificate/)。
-> - 记录所有与 Rancher API 的事务。参见 [API 审计]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/single-node-docker/advanced/#api-audit-log)。
+> - 记录所有 Rancher API 的事务。参见 [API 审计]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/single-node-docker/advanced/#api-audit-log)。
 
 选择以下的选项之一：
 

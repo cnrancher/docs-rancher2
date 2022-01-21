@@ -7,7 +7,7 @@ weight: 100
 
 如需在高可用 RKE 集群中安装 Rancher Management Server，我们建议配置以下基础设施：
 
-- **3个 Linux 节点**：可以是你的云提供商（例如 Amazon EC2，GCE 或 vSphere）中的虚拟机。
+- **3 个 Linux 节点**：可以是你的云提供商（例如 Amazon EC2，GCE 或 vSphere）中的虚拟机。
 - **1 个负载均衡器**：用于将前端流量转发到这三个节点中。
 - **1 个 DNS 记录**：用于将 URL 映射到负载均衡器。此 DNS 记录将成为 Rancher Server 的 URL，下游集群需要可以访问到这个地址。
 
@@ -38,7 +38,7 @@ weight: 100
 在你的实现中，你可以考虑是否需要使用 4 层或 7 层的负载均衡器：
 
 - **4 层负载均衡器**：两种选择中较为简单的一种，它将 TCP 流量转发到你的节点中。我们建议使用 4 层负载均衡器，将流量从 TCP/80 端口和 TCP/443 端口转发到 Rancher Management 集群节点上。集群上的 Ingress Controller 会将 HTTP 流量重定向到 HTTPS，并在 TCP/443 端口上终止 SSL/TLS。Ingress Controller 会将流量转发到 Rancher deployment 中 Ingress Pod 的 TCP/80 端口。
-- **7 层负载均衡器**：相对比较复杂，但功能更全面。例如，与 Rancher 本身进行 TLS 终止相反，7 层负载均衡器能够在负载均衡器处处理 TLS 终止。如果你需要集中在基础设施中进行 TLS 终止，7 层负载均衡可能会很适合你。7 层负载均衡还能让你的负载均衡器提供基于 HTTP 属性（例如 cookie 等）做出决策，而 4 层负载均衡器则不具备这种功能。如果你选择在 7 层负载均衡器上终止 SSL/TLS 流量，则在安装 Rancher 时（后续步骤）需要使用 `--set tls=external` 选项。详情请参见 [Rancher Helm Chart 选项]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#external-tls-termination)。
+- **7 层负载均衡器**：相对比较复杂，但功能更全面。例如，与 Rancher 本身进行 TLS 终止相反，7 层负载均衡器能够在负载均衡器处处理 TLS 终止。如果你需要集中在基础设施中进行 TLS 终止，7 层负载均衡可能会很适合你。7 层负载均衡还能让你的负载均衡器基于 HTTP 属性（例如 cookie 等）做出决策，而 4 层负载均衡器则不能。如果你选择在 7 层负载均衡器上终止 SSL/TLS 流量，则在安装 Rancher 时（后续步骤）需要使用 `--set tls=external` 选项。详情请参见 [Rancher Helm Chart 选项]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#external-tls-termination)。
 
 如需获取如何配置 NGINX 负载均衡器的示例，请参见[本页]({{<baseurl>}}/rancher/v2.6/en/installation/resources/k8s-tutorials/infrastructure-tutorials/nginx/)。
 

@@ -258,7 +258,7 @@ docker run -d --volumes-from rancher-data \
 </TabItem>
 <TabItem value="airgap">
 
-出于安全考虑，使用 Rancher 时需要使用 SSL（Secure Sockets Layer）。SSL 保护所有 Rancher 网络通信（如登录和与集群交互）的安全。
+出于安全考虑，使用 Rancher 时请使用 SSL（Secure Sockets Layer）。SSL 保护所有 Rancher 网络通信（如登录和与集群交互）的安全。
 
 启动新的 Rancher Server 容器时，从以下的选项中进行选择：
 
