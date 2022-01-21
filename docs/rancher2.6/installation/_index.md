@@ -87,7 +87,7 @@ Rancher backup operator 可将 Rancher 从单个 Docker 容器迁移到高可用
 
 ### 在 Docker 上安装 Rancher 的更多选项
 
-参见 [Docker 安装选项]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/single-node-docker)，以了解其他配置，包括：
+参见 [Docker 安装选项]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/single-node-docker)了解其他配置，包括：
 
 - [开启 API 审计日志来记录所有事务]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/single-node-docker/advanced/#api-audit-log)
 - [外部负载均衡器]({{<baseurl>}}/rancher/v2.6/en/installation/resources/advanced/single-node-install-external-lb/)
