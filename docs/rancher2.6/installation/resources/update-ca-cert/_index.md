@@ -76,7 +76,7 @@ $ helm ls -A
 
 使用初始配置的值升级 Helm 应用实例，并指定 `ingress.tls.source=secret` 以及当前的 Chart 版本来防止应用升级。
 
-如果证书是由私有 CA 签发的，你需要添加 `set privateCA=true` 参数。请确保你已阅读了使用自定义证书进行初始安装的文档。
+如果证书是由私有 CA 签发的，你需要添加 `set privateCA=true` 参数。请确保你已经阅读了使用自定义证书进行初始安装的文档。
 
 ```
 helm upgrade rancher rancher-stable/rancher \
