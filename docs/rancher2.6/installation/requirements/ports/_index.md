@@ -93,6 +93,7 @@ K3s server 需要开放端口 6443 才能供节点访问。
 | TCP | 2379 | etcd 客户端请求 |
 | TCP | 2380 | etcd 对等通信 |
 | TCP | 6443 | Kubernetes apiserver |
+| TCP | 8443 | NGINX Ingress 的验证 Webhook |
 | UDP | 8472 | Canal/Flannel VXLAN 覆盖网络 |
 | TCP | 9099 | Canal/Flannel livenessProbe/readinessProbe |
 | TCP | 10250 | Metrics Server 与所有节点的通信 |

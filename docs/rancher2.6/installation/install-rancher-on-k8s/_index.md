@@ -197,9 +197,7 @@ deployment "rancher" successfully rolled out
 
 此选项使用 `cert-manager` 来自动请求和续订 [Let's Encrypt](https://letsencrypt.org/) 证书。Let's Encrypt 是免费的，而且是受信的 CA，因此可以为你提供有效的证书。
 
-> :::note 注意
-> 由于 HTTP-01 质询只能在端口 80 上完成，因此你需要打开端口 80。
-> :::
+> **注意**：由于 HTTP-01 质询只能在端口 80 上完成，因此你需要打开端口 80。
 
 在以下命令中，
 
@@ -207,6 +205,7 @@ deployment "rancher" successfully rolled out
 - 将 `bootstrapPassword` 设置为 `admin` 用户独有的值。
 - 将 `ingress.tls.source` 设置为 `letsEncrypt`。
 - 将 `letsEncrypt.email` 设置为可通讯的电子邮件地址，用于发送通知（例如证书到期的通知）。
+- 将 `letsEncrypt.ingress.class` 设为你的 Ingress Controller（例如 `traefik`，`nginx`，`haproxy`）
 - 如果你安装的是 alpha 版本，Helm 要求你在命令中添加 `--devel` 选项。
 
 ```
@@ -216,6 +215,7 @@ helm install rancher rancher-<CHART_REPO>/rancher \
   --set bootstrapPassword=admin \
   --set ingress.tls.source=letsEncrypt \
   --set letsEncrypt.email=me@example.org
+  --set letsEncrypt.ingress.class=nginx
 ```
 
 等待 Rancher 运行：
@@ -304,4 +304,4 @@ rancher   3         3         3            3           3m
 
 使用浏览器打开把流量转发到你的负载均衡器的 DNS 域名。然后，你就会看到一个漂亮的登录页面了。
 
-如果在安装过程中遇到任何问题，请参见[故障排查]({{<baseurl>}}/rancher/v2.6/en/installation/resources/troubleshooting/)。
+如果遇到任何问题，请参见[故障排查]({{<baseurl>}}/rancher/v2.6/en/installation/resources/troubleshooting/)。
