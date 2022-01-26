@@ -78,8 +78,6 @@ weight: 252
        rancher/rancher:latest --no-cacerts
        ```
 
-
-
 ## 3. 配置负载均衡器
 
 在 Rancher 容器前使用负载均衡器时，容器无需从端口 80 或端口 443 重定向端口通信。你可以通过传递 `X-Forwarded-Proto: https` 标头禁用此重定向。

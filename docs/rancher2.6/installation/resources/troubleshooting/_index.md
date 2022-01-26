@@ -9,8 +9,8 @@ weight: 276
 
 故障排查主要针对以下 3 个命名空间中的对象：
 
-- `cattle-system`：`rancher` 部署和 Pod。
-- `ingress-nginx`：Ingress Controller Pod 和服务。
+- `cattle-system`：`rancher` deployment 和 Pod。
+- `ingress-nginx`：Ingress Controller Pod 和 services。
 - `cert-manager`：`cert-manager` Pod。
 
 ### "default backend - 404"
