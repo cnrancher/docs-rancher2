@@ -47,7 +47,7 @@ rate(prometheus_tsdb_head_samples_appended_total[1h])
 
 你可以访问[这篇博客](https://www.robustperception.io/how-much-disk-space-do-prometheus-blocks-use)了解关于如何计算必须的存储空间的更多信息。
 
-你可以参见[Prometheus 官方文档](https://prometheus.io/docs/prometheus/latest/storage)来进一步了解 Prometheus 的存储概念。
+你可以参见 [Prometheus 官方文档](https://prometheus.io/docs/prometheus/latest/storage)来进一步了解 Prometheus 的存储概念。
 
 ### CPU 和内存的请求和限制
 
