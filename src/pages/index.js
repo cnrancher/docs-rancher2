@@ -134,8 +134,7 @@ function Home() {
                         </div>
                         <div className="navigation__content">
                             <p>
-                                史上最轻量级Kubernetes，易于安装，只需512MB
-                                RAM即可运行。
+                                K3s 是一个轻量级的 Kubernetes 发行版，它针对边缘计算、物联网等场景进行了高度优化。
                             </p>
                         </div>
                     </div>
