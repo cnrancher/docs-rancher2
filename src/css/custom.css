@@ -41,6 +41,8 @@ html[data-theme="dark"] {
 }
 body {
   font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
+  /* custom for gray background */
+  background-color: #f2f5f5;
 }
 
 p {
@@ -172,4 +174,31 @@ p {
 
 .navigation__content p {
   color: #4e6e8e;
+}
+
+/* custom tab container */
+.tabs-container .tabs__item--active{
+  background-color: #fff;
+}
+.margin-vert--md {
+  background-color: #fff;
+  margin: 0 !important;
+  padding: 1rem;
+}
+
+/* custom ol bg color */
+ARTICLE OL {
+  background-color:#fff;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+/* custom blockquote bg color */
+ARTICLE BLOCKQUOTE {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: none;
+  padding: 35px;
+  background-color: rgba(36,83,255,0.1);
+  color: var(--ifm-font-color-base);
 }
