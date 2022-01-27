@@ -1,5 +1,5 @@
 ---
-title: Rancher 托管 vSphere 集群的最佳实践
+title: Rancher 管理 vSphere 集群的最佳实践
 shortTitle: Rancher 在 vSphere 托管的集群
 ---
 

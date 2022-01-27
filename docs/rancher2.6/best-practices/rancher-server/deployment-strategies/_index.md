@@ -8,7 +8,7 @@ weight: 100
 * [中心辐射型策略](#hub-and-spoke-strategy)
 * [区域型策略](#regional-strategy)
 
-# 中心辐射型策略
+## 中心辐射型策略
 ---
 
 在中心辐射型部署中，一个 Rancher control plane 就可以管理遍布全球的 Kubernetes 集群。这个 control plane 运行在高可用 Kubernetes 集群上，并且会受延迟影响。
@@ -26,7 +26,7 @@ weight: 100
 * 受限于网络延迟。
 * 如果 control plane 出现故障，在恢复之前不可以在全球范围内创建新服务。但是每个 Kubernetes 集群都可以继续单独管理。
 
-# 区域型策略
+## 区域型策略
 ---
 在区域型部署模型中，control plane 部署在靠近计算节点的位置。
 

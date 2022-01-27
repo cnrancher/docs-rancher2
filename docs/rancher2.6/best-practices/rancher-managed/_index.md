@@ -1,6 +1,6 @@
 ---
-title: Rancher 托管集群的最佳实践
-shortTitle: Rancher 托管的集群
+title: Rancher 管理集群的最佳实践
+shortTitle: Rancher 管理的集群
 weight: 2
 ---
 
@@ -16,6 +16,6 @@ weight: 2
 
 配置良好的容器可以极大地提高环境的整体性能和安全性。有关容器设置的建议，请参见[设置容器的技巧](./containers)。
 
-### Rancher 托管 vSphere 集群的最佳实践
+### Rancher 管理 vSphere 集群的最佳实践
 
-[Rancher 托管 vSphere 集群的最佳实践](./managed-vsphere)概述了在 vSphere 环境中配置下游 Rancher 集群的参考架构，以及 VMware 记录的标准 vSphere 最佳实践。
+[Rancher 管理 vSphere 集群的最佳实践](./managed-vsphere)概述了在 vSphere 环境中配置下游 Rancher 集群的参考架构，以及 VMware 记录的标准 vSphere 最佳实践。
