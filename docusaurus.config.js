@@ -96,7 +96,7 @@ module.exports = {
     customFields: {
         sidebars,
         metadata,
-        stable: "版本说明 - v2.5.11",
+        stable: "版本说明 - v2.5.12",
         baseCommit: "cd9ed7b74cc8111fecb05d2950c6948a83a6a595 - Jan 8, 2022",
         k3sBaseCommit:
             "cd9ed7b74cc8111fecb05d2950c6948a83a6a595 - Jan 6, 2022",
