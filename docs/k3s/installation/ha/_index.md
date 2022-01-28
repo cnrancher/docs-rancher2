@@ -123,3 +123,13 @@ curl -sfL https://get.k3s.io | sh -s - server \
 ```bash
 K3S_TOKEN=SECRET k3s agent --server https://fixed-registration-address:6443
 ```
+
+import Accordion from '@theme/Accordion'
+
+<Accordion title="Cusom Title">
+  <div>
+    You can insert anything here!
+  </div>
+
+  #### xxx---aaabbb
+</Accordion>

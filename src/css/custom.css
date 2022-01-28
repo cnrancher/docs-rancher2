@@ -27,6 +27,7 @@ html {
   --ifm-navbar-link-color: rgb(255, 255, 255, 0.9);
   --ifm-navbar-link-hover-color: rgb(255, 255, 255);
   --ra-color-important: var(--ifm-color-primary);
+  --ifm-custom-bg-color: #fff;
 }
 
 html[data-theme="dark"] {
@@ -38,11 +39,16 @@ html[data-theme="dark"] {
   --ifm-rancher-color-stable: #13572f;
   --ifm-rancher-color-latest: #786207;
   --ifm-rancher-color-vedio: rgb(204, 0, 0, 0.5);
+  --ifm-custom-bg-color: rgb(41, 45, 62);
 }
 body {
   font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
   /* custom for gray background */
   background-color: #f2f5f5;
+}
+
+html[data-theme="dark"] body{
+  background-color: var(--ifm-hero-background-color);
 }
 
 p {
@@ -176,19 +182,26 @@ p {
   color: #4e6e8e;
 }
 
+/* custom code bg color */
+CODE {
+  color: #fff;
+  background-color: var(--ifm-color-primary-dark);
+}
+
 /* custom tab container */
 .tabs-container .tabs__item--active{
-  background-color: #fff;
+  background-color: var(--ifm-custom-bg-color);
 }
 .margin-vert--md {
-  background-color: #fff;
+  background-color: var(--ifm-custom-bg-color);
   margin: 0 !important;
   padding: 1rem;
 }
 
 /* custom ol bg color */
 ARTICLE OL {
-  background-color:#fff;
+  border-radius: var(--ifm-global-radius);
+  background-color:var(--ifm-custom-bg-color);
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
@@ -198,6 +211,7 @@ ARTICLE BLOCKQUOTE {
   margin-top: 20px;
   margin-bottom: 20px;
   border: none;
+  border-radius: var(--ifm-global-radius);
   padding: 35px;
   background-color: rgba(36,83,255,0.1);
   color: var(--ifm-font-color-base);

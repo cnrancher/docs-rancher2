@@ -6,8 +6,9 @@
  */
 
 .accordion {
-  background-color: #fff;
+  background-color: var(--ifm-custom-bg-color);
   padding: 1rem;
+  border-radius: var(--ifm-global-radius);
 }
 
 .accordion__title {
@@ -16,7 +17,6 @@
 }
 
 .accordion__content {
-  background-color: #fff;
   margin-top: 1rem;
   /* padding: 1rem */
 }
