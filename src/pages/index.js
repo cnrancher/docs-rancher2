@@ -165,6 +165,18 @@ function Home() {
                             </p>
                         </div>
                     </div>
+                    <div className="navigation__item">
+                        <div className="navigation__title">
+                            <a href="/rancherdesktop">
+                                <h1>Rancher Desktop</h1>
+                            </a>
+                        </div>
+                        <div className="navigation__content">
+                            <p>
+                            Rancher Desktop 是一款在桌面上提供容器管理和 Kubernetes 的应用。它适用于 Mac（包括 Intel 和 Apple Silicon）、Windows 和 Linux。
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </main>
             <main>
