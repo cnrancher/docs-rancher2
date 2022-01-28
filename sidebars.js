@@ -2180,4 +2180,13 @@ module.exports = {
         从RKE1迁移到RKE2: ["rke2/migration/_index"],
         已知问题和限制: ["rke2/known_issues/_index"],
     },
+    rancherdesktop: {
+        产品介绍: ["rancherdesktop/intro/_index"],
+        安装: ["rancherdesktop/installation/_index"],
+        功能指南: [
+            "rancherdesktop/features-guide/preferences/_index",
+            "rancherdesktop/features-guide/images/_index",
+        ],
+        FAQ: ["rancherdesktop/faq/_index"],
+    },
 };

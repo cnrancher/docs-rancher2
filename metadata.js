@@ -154,6 +154,14 @@ const metadata = {
             从RKE1迁移到RKE2: "介绍如何从 RKE1 迁移到 RKE2",
             已知问题和限制: "介绍了rke2 的当前已知问题和限制",
         },
+        rancherdesktop: {
+            产品介绍: "提供 Rancher Desktop 的产品介绍",
+            安装: "介绍多种安装 Rancher Desktop 的方式",
+            功能指南: "介绍完整的 Rancher Desktop 功能指南",
+            偏好设置: "提供常见的 Rancher Desktop 的偏好设置",
+            Images: "提供 Images 的详细配置说明",
+            FAQ: "介绍 Rancher Desktop 的常问问题",
+        },
     },
     docs: {
         rancher2: {
@@ -980,6 +988,13 @@ const metadata = {
             "rke2/advanced/_index": "高级选项和配置",
             "rke2/migration/_index": "从 RKE1 迁移到 RKE2",
             "rke2/known_issues/_index": "已知问题和限制",
+        },
+        rancherdesktop: {
+            "rancherdesktop/intro/_index": "产品介绍",
+            "rancherdesktop/installation/_index": "安装",
+            "rancherdesktop/features-guide/preferences/_index": "偏好设置",
+            "rancherdesktop/features-guide/images/_index": "Images",
+            "rancherdesktop/faq/_index": "FAQ",
         },
     },
 };

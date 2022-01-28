@@ -98,9 +98,10 @@ module.exports = {
         metadata,
         stable: "版本说明 - v2.5.12",
         baseCommit: "cd9ed7b74cc8111fecb05d2950c6948a83a6a595 - Jan 8, 2022",
-        k3sBaseCommit:
-            "cd9ed7b74cc8111fecb05d2950c6948a83a6a595 - Jan 6, 2022",
+        k3sBaseCommit: "cd9ed7b74cc8111fecb05d2950c6948a83a6a595 - Jan 6, 2022",
         rke2Commit: "dc2e93e6d3caacf544cb417e1106eaf581f9e062 - Jan 6, 2022",
+        rancherdesktopCommit:
+            "e97751d3fad48bee09c74953b9d698638fd3e1c7 - Jan 28, 2022",
     },
     plugins: ["@docusaurus/plugin-baidu-analytics"],
 };
