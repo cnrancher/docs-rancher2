@@ -9,6 +9,7 @@
   position: relative;
   overflow: hidden;
   color: var(--ifm-color-primary);
+  background-color: transparent;
 }
 
 .wrapper {
