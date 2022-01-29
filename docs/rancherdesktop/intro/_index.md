@@ -18,7 +18,7 @@ keywords:
   - 概述
 ---
 
-Rancher Desktop 是一款在桌面上提供容器管理和 Kubernetes 的应用。它适用于 Mac（包括 Intel 和 Apple Silicon）、Windows 和 Linux。
+Rancher Desktop 是一款在桌面上提供容器和 Kubernetes 管理的应用。它适用于 Mac（包括 Intel 和 Apple Silicon）、Windows 和 Linux。
 
 ![](/img/rancherdesktop/intro/intro.png)
 _上图左边是 Mac 上的 Kubernetes 设置，右边是 Windows。_
