@@ -173,7 +173,7 @@ function Home() {
                         </div>
                         <div className="navigation__content">
                             <p>
-                            Rancher Desktop 是一款在桌面上提供容器管理和 Kubernetes 的应用。它适用于 Mac（包括 Intel 和 Apple Silicon）、Windows 和 Linux。
+                            Rancher Desktop 是一款在桌面上提供容器和 Kubernetes 管理的应用。它适用于 Mac（包括 Intel 和 Apple Silicon）、Windows 和 Linux。
                             </p>
                         </div>
                     </div>
