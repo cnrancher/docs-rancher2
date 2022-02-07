@@ -28,7 +28,7 @@ Rancher Desktop 类似于 [minikube](https://minikube.sigs.k8s.io/docs/)、[kind
 
 <!-- #1221 -->
 
-**问：我可以将 Docker Desktop 与 Rancher Desktop 同时安装吗？**
+**问：我可以同时安装 Docker Desktop 与 Rancher Desktop 吗？**
 
 **答：**可以，但它们不能同时运行，因为 Rancher Desktop 和 Docker Desktop 都使用同一个 Docker socket（`/var/run/docker.sock`）。在启动一个之前，一定要先停止另一个。
 
@@ -75,7 +75,7 @@ kubectl delete node lima rancher-desktop
 
 <!-- #776 -->
 
-**问：运行 `brew install rancher` 时，出现 `It seems there is already a Binary at '/usr/local/bin/<BINARY>'` 的错误，为什么？**
+**问：为什么运行 `brew install rancher` 时出现 `It seems there is already a Binary at '/usr/local/bin/<BINARY>'` 的错误？**
 
 **答：**如果任何支持 Rancher Desktop 的工具（Helm、kubectl、nerdctl、docker）已经被 Homebrew 管理，那么由于 Homebrew cask 公式的定义方式，安装会失败。使用 Mac 应用程序进行安装将避免这个问题。
 
@@ -93,9 +93,9 @@ kubectl delete node lima rancher-desktop
 
 <!-- #1156 -->
 
-**问：当我尝试在 WSL 上使用 Docker 时，如何解决 `permission denied `的错误？**
+**问：当我尝试在 WSL 上使用 Docker 时，如何解决 `permission denied` 的错误？**
 
-**答：**你需要写权限来访问 docker socket。有很多方法可以做到这一点，但这是比较常见的方法：使用 Ubuntu WSL 的命令行。
+**答：**你需要写权限来访问 docker socket。有很多方法可以做到这一点，但这是比较常见的方法：使用 Ubuntu WSL 的命令行：
 
 ```bash
 sudo addgrp docker
@@ -105,7 +105,7 @@ sudo chmod g+w /var/run/docker.sock
 newgrp docker
 ```
 
-**问：如何解决 Linux 上的 `kubectl: command not found `问题？**
+**问：如何解决 Linux 上的 `kubectl: command not found` 问题？**
 
 **答：**默认情况下，Rancher Desktop 会在 Linux 上的 `/home/<user>/.local/bin` 目录下创建 `kubectl`、`docker`、`helm` 和 `nerdctl` 二进制文件的符号链接。为了能够从控制台直接调用这些命令，你可以通过在控制台执行以下命令并进行注销和登录，将该目录添加到你的 `PATH` 环境变量中:
 
