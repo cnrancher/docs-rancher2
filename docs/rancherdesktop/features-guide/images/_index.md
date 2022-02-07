@@ -23,7 +23,7 @@ import TabItem from '@theme/TabItem';
 
 Rancher Desktop 提供了通过 [NERDCTL](https://github.com/containerd/nerdctl) 项目和 Docker CLI 构建、推送和拉取镜像的能力。
 
-注意，`nerdctl` 和 `docker` 都被自动放到路径中。是在 Windows 的安装过程中，以及在 macOS 和 Linux 上首次运行时触发的。
+注意，在 Windows 的安装过程中，以及在 macOS 和 Linux 上首次运行的时候，`nerdctl` 和 `docker` 都会被自动放到路径中。
 
 ## 常规用法
 
@@ -97,7 +97,7 @@ values={[
 
 <TabItem value="nerdctl">
 
-构建镜像与现有工具的感觉相似。例如，从一个有 `Dockerfile` 的目录中运行 `nerdctl`，其中 `Dockerfile` 使用的是 scratch 镜像。
+构建镜像的过程与现有工具类似。例如，从一个有 `Dockerfile` 的目录中运行 `nerdctl`，其中 `Dockerfile` 使用的是 scratch 镜像。
 
 ```console
 nerdctl build .
@@ -143,7 +143,7 @@ docker build -t TAG .
 
 ## 标记镜像
 
-如果要标记已经构建的现有镜像，可以使用以下命令：
+如果要标记已经构建的镜像，可以使用以下命令：
 
 <Tabs
 defaultValue="nerdctl"
