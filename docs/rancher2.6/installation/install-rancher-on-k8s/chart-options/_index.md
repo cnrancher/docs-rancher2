@@ -139,7 +139,7 @@ kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='{{
 设置自定义证书颁发者的示例：
 
 ```plain
---set ingress.extraAnnotations.'certmanager\.k8s\.io/cluster-issuer'=ca-key-pair
+--set ingress.extraAnnotations.'cert-manager\.io/cluster-issuer'=issuer-name
 ```
 
 以下是使用 `ingress.configurationSnippet`设置静态代理头的实例。该值像模板一样进行解析，因此可以使用变量。

@@ -15,7 +15,7 @@ Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和续期 TLS
 1. 阐述 cert-manager API 的变更，并提供 cert-manager 官方文档的链接，助你实现数据迁移。
 
 > **重要提示**：
-> 如果你的 cert-manger 版本低于 0.11，而且你想将 Rancher 和 cert-manager 均升级到新版本，你需要重新安装它们：
+> 如果你的 cert-manager 版本低于 0.11，而且你想将 Rancher 和 cert-manager 均升级到新版本，你需要重新安装它们：
 
 > 1. 对运行 Rancher Server 的 Kubernetes 集群进行一次性快照。
 > 2. 卸载 Rancher、cert-manager 和 cert-manager 的 CustomResourceDefinition。
