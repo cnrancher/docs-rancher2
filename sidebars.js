@@ -2186,6 +2186,7 @@ module.exports = {
         功能指南: [
             "rancherdesktop/features-guide/preferences/_index",
             "rancherdesktop/features-guide/images/_index",
+            "rancherdesktop/features-guide/ui/_index",
         ],
         FAQ: ["rancherdesktop/faq/_index"],
     },

@@ -994,6 +994,7 @@ const metadata = {
             "rancherdesktop/installation/_index": "安装",
             "rancherdesktop/features-guide/preferences/_index": "偏好设置",
             "rancherdesktop/features-guide/images/_index": "Images",
+            "rancherdesktop/features-guide/ui/_index": "UI",
             "rancherdesktop/faq/_index": "FAQ",
         },
     },
