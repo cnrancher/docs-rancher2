@@ -15,9 +15,9 @@ weight: 3
 
 还原是通过创建 Restore 自定义资源实现的。
 
-> :::important 重要提示
+> **重要提示**
 >
-> * 请按照此页面上的说明在已备份的同一集群上恢复 Rancher。要把 Rancher 迁移到新集群，请参照步骤[迁移 Rancher]({{<baseurl>}}/rancher/v2.6/en/backups/migrating-rancher)。
+> * 请按照此页面上的说明在已备份的同一集群上还原 Rancher。要把 Rancher 迁移到新集群，请参照步骤[迁移 Rancher]({{<baseurl>}}/rancher/v2.6/en/backups/migrating-rancher)。
 > * 在使用相同设置恢复 Rancher 时，Rancher deployment 在恢复开始前被手动缩减，然后 Operator 将在恢复完成后将其缩回。因此，在恢复完成之前，Rancher 和 UI 都将不可用。如果 UI 不可用时，你可使用 `kubectl create -f restore.yaml`YAML 恢复文件来使用初始的集群 kubeconfig。
 
 ### 将 Rancher Deployment 规模扩展到 0
@@ -34,10 +34,10 @@ weight: 3
 
 1. 点击 **☰ > 集群管理**。
 1. 找到你的本地集群，并点击 **Explore**。
-1. 在左侧导航栏中，点击 **Rancher 备份 > 恢复**。
+1. 在左侧导航栏中，点击 **Rancher 备份 > 还原**。
    * **注意**：如果 Rancher Backups 应用不可见，你需要到**应用 & 应用市场**的 Charts 页面中安装应用。详情请参见[此处]({{<baseurl>}}/rancher/v2.6/en/helm-charts/#charts)。
-1. 点击**创建**。
-1. 使用表单或 YAML 创建 Restore。如需获取使用在线表单创建 Restore 资源的帮助，请参见[配置参考]({{<baseurl>}}/rancher/v2.6/en/backups/configuration/restore-config)并查看[示例]({{<baseurl>}}/rancher/v2.6/en/backups/examples)。
+1. 单击**创建**。
+1. 使用表单或 YAML 创建 Restore。如需获取使用表单创建 Restore 资源的更多信息，请参见[配置参考]({{<baseurl>}}/rancher/v2.6/en/backups/configuration/restore-config)和[示例]({{<baseurl>}}/rancher/v2.6/en/backups/examples)。
 1. 如需使用 YAML 编辑器，点击**创建 > 使用 YAML 文件创建**。然后输入 Restore YAML。以下是 Restore 自定义资源示例：
 
    ```yaml
@@ -57,11 +57,11 @@ weight: 3
    	      region: us-west-2
    	      endpoint: s3.us-west-2.amazonaws.com
    ```
-   如需获得配置 Restore 的帮助，请参见[配置参考]({{<baseurl>}}/rancher/v2.6/en/backups/configuration/restore-config)并查看[示例]({{<baseurl>}}/rancher/v2.6/en/backups/examples)。
+   如需获得配置 Restore 的帮助，请参见[配置参考]({{<baseurl>}}/rancher/v2.6/en/backups/configuration/restore-config)和[示例]({{<baseurl>}}/rancher/v2.6/en/backups/examples)。
 
-1. 点击**创建**。
+1. 单击**创建**。
 
-**结果**：已创建备份文件并更新到目标存储位置。资源恢复顺序如下：
+**结果**：已创建备份文件并更新到目标存储位置。资源还原顺序如下：
 
 1. 自定义资源定义（CRD）
 2. 集群范围资源

@@ -43,7 +43,7 @@ docker ps
 | `<DATE>` | `2018-12-19` | 数据容器或备份的创建日期。 |
 <br/>
 
-可以通过远程连接登录到 Rancher Server 所在的主机并输入命令 `docker ps` 以查看正在运行的容器，从而获得 `<RANCHER_CONTAINER_TAG>` 和 `<RANCHER_CONTAINER_NAME>`。你还可以运行 `docker ps -a` 命令查看停止了的容器。在创建备份期间，你随时可以运行这些命令以获得帮助。
+可以通过远程连接登录到 Rancher Server 所在的主机并输入命令 `docker ps` 以查看正在运行的容器，从而获得 `<RANCHER_CONTAINER_TAG>` 和 `<RANCHER_CONTAINER_NAME>`。你还可以运行 `docker ps -a` 命令查看停止了的容器。在创建备份期间，你随时可以运行这些命令来获得帮助。
 
 # 升级概要
 
@@ -60,13 +60,13 @@ docker ps
 
 1. 使用远程终端连接，登录到运行 Rancher Server 的节点。
 
-1. 停止正在运行 Rancher Server 的容器。将 `<RANCHER_CONTAINER_NAME>` 替换为你的 Rancher 容器的名称。
+1. 停止正在运行 Rancher Server 的容器。将 `<RANCHER_CONTAINER_NAME>` 替换为你的 Rancher 容器的名称：
 
    ```
    docker stop <RANCHER_CONTAINER_NAME>
    ```
 
-1. <a id="backup"></a>运行以下命令，从刚才停止的 Rancher 容器创建一个数据容器。请替换命令中的占位符。
+1. <a id="backup"></a>运行以下命令，从刚才停止的 Rancher 容器创建一个数据容器。请替换命令中的占位符：
 
    ```
    docker create --volumes-from <RANCHER_CONTAINER_NAME> --name rancher-data rancher/rancher:<RANCHER_CONTAINER_TAG>

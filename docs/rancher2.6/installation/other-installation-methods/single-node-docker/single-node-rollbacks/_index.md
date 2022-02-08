@@ -18,7 +18,7 @@ docker pull rancher/rancher:<PRIOR_RANCHER_VERSION>
 
 在此命令中，`<PRIOR_RANCHER_VERSION>` 是升级失败之前运行的 Rancher 版本，如 `v2.0.5`。
 
-请交叉参考下方的图片和表格，了解获取此占位符数据的方法。在执行回滚操作之前，先写下或复制此信息。
+请交叉参考下方的图片和表格，了解获取此占位符数据的方法。在开始以下步骤之前，请先记下或复制此信息。
 
 <sup>终端 `docker ps` 命令，显示如何找到 `<PRIOR_RANCHER_VERSION>` 和 `<RANCHER_CONTAINER_NAME>`</sup>
 ![占位符参考]({{<baseurl>}}/img/rancher/placeholder-ref-2.png)
@@ -31,7 +31,7 @@ docker pull rancher/rancher:<PRIOR_RANCHER_VERSION>
 | `<DATE>` | `9-27-18` | 数据容器或备份的创建日期。 |
 <br/>
 
-可以通过远程连接登录到 Rancher Server 所在的主机并输入命令 `docker ps` 以查看正在运行的容器，从而获得 `<PRIOR_RANCHER_VERSION>` 和 `<RANCHER_CONTAINER_NAME>` 。你还可以运行 `docker ps -a` 命令查看停止了的容器。在创建备份期间，你随时可以运行这些命令以获得帮助。
+可以通过远程连接登录到 Rancher Server 所在的主机并输入命令 `docker ps` 以查看正在运行的容器，从而获得 `<PRIOR_RANCHER_VERSION>` 和 `<RANCHER_CONTAINER_NAME>` 。你还可以运行 `docker ps -a` 命令查看停止了的容器。在创建备份期间，你随时可以运行这些命令来获得帮助。
 
 ## 回滚 Rancher
 
@@ -51,7 +51,7 @@ docker pull rancher/rancher:<PRIOR_RANCHER_VERSION>
    docker pull rancher/rancher:<PRIOR_RANCHER_VERSION>
    ```
 
-1. 停止当前运行 Rancher Server 的容器。将 `<RANCHER_CONTAINER_NAME>` 替换为你的 Rancher 容器的名称。
+1. 停止当前运行 Rancher Server 的容器。将 `<RANCHER_CONTAINER_NAME>` 替换为你的 Rancher 容器的名称：
 
    ```
    docker stop <RANCHER_CONTAINER_NAME>
