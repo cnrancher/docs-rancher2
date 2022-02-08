@@ -29,14 +29,14 @@ Rancher backup operator 可将 Rancher 从单个 Docker 容器迁移到高可用
 
 # 2. 选择一个 SSL 选项并安装 Rancher
 
-出于安全考虑，使用 Rancher 时需要使用 SSL（Secure Sockets Layer）。SSL 保护所有 Rancher 网络通信（如登录和与集群交互）的安全。
+出于安全考虑，使用 Rancher 时请使用 SSL（Secure Sockets Layer）。SSL 保护所有 Rancher 网络通信（如登录和与集群交互）的安全。
 
 > **你是否需要**：
 >
 > - 使用代理。参见 [HTTP 代理配置]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/single-node-docker/proxy/)。
 > - 配置自定义 CA 根证书以访问服务。参见[自定义 CA 根证书]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/single-node-docker/advanced/#custom-ca-certificate/)。
 > - 完成离线安装。参见 [离线：Docker 安装]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/air-gap/)。
-> - 记录所有与 Rancher API 的事务。参加 [API 审计](./advanced/#api-audit-log)。
+> - 记录所有 Rancher API 的事务。参加 [API 审计](./advanced/#api-audit-log)。
 
 选择以下的选项之一：
 
@@ -174,7 +174,7 @@ docker run -d --restart=unless-stopped \
 - 自定义 CA 证书
 - API 审计日志
 - TLS 设置
-- 离线
+- 离线环境
 - 持久化数据
 - 在同一个节点中运行 `rancher/rancher` 和 `rancher/rancher-agent`
 
@@ -186,5 +186,5 @@ docker run -d --restart=unless-stopped \
 
 ## 后续操作
 
-- **推荐**：[单节点备份和恢复]({{<baseurl>}}/rancher/v2.6/en/backups/docker-installs)。虽然你暂时可能没有需要备份的数据，我们还是建议在常规使用 Rancher 后创建备份。
+- **推荐**：[单节点备份和恢复]({{<baseurl>}}/rancher/v2.6/en/backups/docker-installs)。你可能暂时没有需要备份的数据，但是我们建议你在常规使用 Rancher 后创建备份。
 - 创建 Kubernetes 集群：[配置 Kubernetes 集群]({{<baseurl>}}/rancher/v2.6/en/cluster-provisioning/)。
