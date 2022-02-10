@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+title: PXE 启动安装
 keywords:
   - Harvester
   - harvester
@@ -9,10 +9,10 @@ keywords:
   - 安装 Harverster
   - Harverster 安装
   - PXE 启动安装
-Description: 从 `0.2.0` 开始，Harvester 可以自动安装。本文提供使用 PXE 启动进行自动安装的示例。
+description: 从 `0.2.0` 开始，Harvester 可以自动安装。本文提供使用 PXE 启动进行自动安装的示例。
 ---
 
-# PXE 启动安装
+## 概述
 
 从 `0.2.0` 开始，Harvester 可以自动安装。本文提供使用 PXE 启动进行自动安装的示例。
 

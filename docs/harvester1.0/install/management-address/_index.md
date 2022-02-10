@@ -1,11 +1,11 @@
 ---
-sidebar_position: 2
+title: 管理地址
 keywords:
   - VIP
-Description: Harvester 提供一个虚拟 IP 作为管理地址。
+description: Harvester 提供一个虚拟 IP 作为管理地址。
 ---
 
-# 管理地址
+## 概述
 Harvester 提供固定的虚拟 IP (VIP) 作为管理地址。安装后，你可以在控制台仪表盘上找到管理地址。
 
  > 注意

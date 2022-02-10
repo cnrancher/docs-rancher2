@@ -1,15 +1,14 @@
 ---
-sidebar_position: 3
+title: Harvester 配置
 keywords:
   - Harvester
   - harvester
   - Rancher
   - rancher
   - Harvester 配置
-Description: 你可以在手动或自动安装期间提供 Harvester 配置文件，来进行特定的配置。
+  - Harvester 配置示例
+description: 你可以在手动或自动安装期间提供 Harvester 配置文件，来进行特定的配置。
 ---
-
-# Harvester 配置
 
 ## 配置示例
 

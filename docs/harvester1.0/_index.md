@@ -1,15 +1,16 @@
 ---
-sidebar_position: 1
+title: Harvester 介绍
 keywords:
   - Harvester
   - harvester
   - Rancher
   - rancher
   - Harvester 介绍
-Description: Harvester 是基于 Kubernetes 构建的开源超融合基础架构 (HCI) 软件。它是 vSphere 和 Nutanix 的开源替代方案。
+  - 什么是 Harvester
+description: Harvester 是基于 Kubernetes 构建的开源超融合基础架构 (HCI) 软件。它是 vSphere 和 Nutanix 的开源替代方案。
 ---
 
-# Harvester 介绍
+## 概述
 
 Harvester 是基于 Kubernetes 构建的开源[超融合基础架构](https://en.wikipedia.org/wiki/Hyper-converged_infrastructure) (HCI) 软件。它是使用专有 HCI 堆栈的一种开放替代方案，该堆栈结合了 [Cloud Native Computing](https://en.wikipedia.org/wiki/Cloud_native_computing) 的设计和精神。
 

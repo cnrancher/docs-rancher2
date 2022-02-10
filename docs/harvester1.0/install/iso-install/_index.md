@@ -1,15 +1,13 @@
 ---
-sidebar_position: 1
+title: ISO 安装
 keywords:
   - Harvester
   - harvester
   - Rancher
   - rancher
   - ISO 安装
-Description: 如需获取 Harvester ISO，访问 GitHub 上的发行版本进行下载。在安装过程中，你可以选择组建一个新的集群，或者将节点加入到现有的集群中。
+description: 如需获取 Harvester ISO，访问 GitHub 上的发行版本进行下载。在安装过程中，你可以选择组建一个新的集群，或者将节点加入到现有的集群中。
 ---
-
-# ISO 安装
 
 如需获取 Harvester ISO 镜像，访问 [GitHub 上的发行版本](https://github.com/harvester/harvester/releases)进行下载。
 

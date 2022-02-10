@@ -1,4 +1,18 @@
-# U 盘安装
+---
+title: U 盘安装
+keywords:
+  - Harvester
+  - harvester
+  - Rancher
+  - rancher
+  - 安装 Harverster
+  - 安装 Harverster
+  - Harverster 安装
+  - U 盘安装
+  - USB 安装
+  - Harvester 安装方式
+description: 使用 U 盘安装 Harvester
+---
 
 ## 创建一个 USB 启动盘
 
