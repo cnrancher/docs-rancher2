@@ -35,7 +35,7 @@ weight: 5
 
 ResourceSet 定义了需要备份哪些 Kubernetes 资源。由于备份 Rancher 所需的值是预设的，因此 ResourceSet 无法通过 Rancher UI 进行配置。请不要修改此 ResourceSet。
 
-在创建 Backup 自定义资源时，`rancher-backup` operator 调用 `kube-apiserver` 来获取 Backup 自定义资源引用的 ResourceSet（即预设的 `rancher-resource -set`）资源。
+在创建 Backup 自定义资源时，`rancher-backup` operator 调用 `kube-apiserver` 来获取 Backup 自定义资源引用的 ResourceSet（即预设的 `rancher-resource-set`）资源。
 
 然后，operator 以 `.tar.gz` 格式创建备份文件，并将其存储在 Backup 资源中配置的位置。
 
