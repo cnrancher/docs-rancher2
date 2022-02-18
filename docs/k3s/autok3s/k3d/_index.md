@@ -83,10 +83,10 @@ K3d 配置主要配置的内容为启动 K3s 集群所需的参数，例如 K3s 
 | Token | 用于将server或agent加入集群的共享secret，如果不设置，会自动生成一个Token |
 | Network | 使用已经存在的 [Docker 网络](https://k3d.io/v5.2.2/design/networking/) |
 | GPUs | 将GPU设备添加到群集节点容器（设置`all`将添加所有GPU到容器）[作用于Docker] | 
-| Labels | 将标签添加到节点容器，例如`--labels my.label@agent [0,1] --labels other.label=somevalue@server[0]` | 
-| Environment Variables | 将环境变量添加到节点，例如`--envs HTTP_PROXY=my.proxy.com@server[0] --envs SOME_KEY=SOME_VAL@server[0]` | 
-| Volumes | 将卷挂载到节点中，例如`--volumes /my/path@agent[0,1] --volumes /tmp/test:/tmp/other@server[0]` |
-| Ports | 将节点容器中的端口映射到主机，例如`--ports 8080:80@agent[0] --ports 8081@agent[1]` | 
+| Labels | 将标签添加到节点容器，例如`--labels my.label@agent [0,1] --labels other.label=somevalue@server:0` | 
+| Environment Variables | 将环境变量添加到节点，例如`--envs HTTP_PROXY=my.proxy.com@server:0 --envs SOME_KEY=SOME_VAL@server:0` | 
+| Volumes | 将卷挂载到节点中，例如`--volumes /my/path@agent:0,1 --volumes /tmp/test:/tmp/other@server:0` |
+| Ports | 将节点容器中的端口映射到主机，例如`--ports 8080:80@agent:0 --ports 8081@agent:1` | 
 | Registry | 私有镜像仓库配置文件路径，如果您的私有镜像仓库带有证书，请参考[这里](https://k3d.io/v5.2.2/usage/registries/#secure-registries) | 
 
 
