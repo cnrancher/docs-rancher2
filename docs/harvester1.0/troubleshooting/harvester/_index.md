@@ -14,13 +14,13 @@ description: 你可以参考本文对 Harvester 进行故障排查。
 你可以按照以下步骤在 Harvester GUI 中生成支持包：
 
 - Harvester 网页 UI 的左下角点击`支持`。
-  ![](./assets/harvester-sb-support-link.png)
+  ![](../assets/harvester-sb-support-link.png)
 
 - 单击`生成支持包`按钮。
-  ![](./assets/harvester-sb-support-button.png)
+  ![](../assets/harvester-sb-support-button.png)
 
 - 输入支持包的描述并点击`创建`以生成和下载支持包。
-  ![](./assets/harvester-sb-support-modal.png)
+  ![](../assets/harvester-sb-support-modal.png)
 
 ## 访问内嵌的 Rancher
 
@@ -28,7 +28,7 @@ description: 你可以参考本文对 Harvester 进行故障排查。
 
 > 注意
 > 仅支持使用内嵌 Rancher Dashboard 来进行调试和验证。
-> 对于 Rancher 的多集群和多租户集成，请参见[文档](../rancher/rancher-integration.md)。
+> 对于 Rancher 的多集群和多租户集成，请参见[文档](../../rancher/rancher-integration/_index.md)。
 
 ## 访问内嵌的 Longhorn
 
@@ -39,10 +39,10 @@ description: 你可以参考本文对 Harvester 进行故障排查。
 
 ## 修改 SSL/TLS 启用的协议和密码后无法访问 Harvester
 
-如果你修改了 [SSL/TLS 启用的协议和密码设置](../../settings/settings/#ssl-parameters)后无法访问 Harvester GUI 和 API，很有可能是由于错误配置的 SSL/TLS 协议和密码导致 NGINX Ingress Controller 停止运行。
+如果你修改了 [SSL/TLS 启用的协议和密码设置](../../settings/settings/_index#SSL-参数)后无法访问 Harvester GUI 和 API，很有可能是由于错误配置的 SSL/TLS 协议和密码导致 NGINX Ingress Controller 停止运行。
 请按照以下步骤来进行重置：
 
-1. 按照[常见问题](../../faq/)的描述 SSH 到 Harvester 节点，并切换成 `root` 用户：
+1. 按照[常见问题](../../faq/_index.md)的描述 SSH 到 Harvester 节点，并切换成 `root` 用户：
 
 ```
 $ sudo -s
