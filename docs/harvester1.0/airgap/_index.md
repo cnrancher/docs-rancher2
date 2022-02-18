@@ -24,7 +24,7 @@ Harvester ISO 镜像包括实现在离线环境中运行的所有包。
 
 您可以在 [ISO 安装](./install/iso-install.md) 期间配置 HTTP(S) 代理，如下图所示：
 
-![iso-proxy](./assets/iso-proxy.png)
+![iso-proxy](../assets/iso-proxy.png)
 
 ### 在 Harvester 设置中配置 HTTP 代理
 
@@ -34,7 +34,7 @@ Harvester ISO 镜像包括实现在离线环境中运行的所有包。
 1. 找到 `http-proxy` 设置，点击**⋮ > 编辑设置**
 1. 输入 `http-proxy`，`https-proxy` 和 `no-proxy` 的值。
 
-![proxy-setting](./assets/proxy-setting.png)
+![proxy-setting](../assets/proxy-setting.png)
 
 > 注意
 > Harvester 在用户配置的 `no-proxy` 后附加必要的地址，来确保内部流量能正常工作。
