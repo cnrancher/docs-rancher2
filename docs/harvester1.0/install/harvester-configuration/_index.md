@@ -316,7 +316,7 @@ install:
 - `method`：为该网络分配 IP 的方法。支持：
    - `static`：手动分配 IP 和 网关。
    - `dhcp`：向 DHCP 服务器请求一个 IP。
-   - `none`：不进行操作。该配置适用于接口不需要 IP 的情况，例如在 Harvester 中创建 [VLAN 网络](../networking/harvester-network.md#vlan) NIC 时。
+   - `none`：不进行操作。该配置适用于接口不需要 IP 的情况，例如在 Harvester 中创建 [VLAN 网络](../../networking/harvester-network/_index#VLAN-网络) NIC 时。
 - `ip`：此网络的静态 IP。如果选择了 `static` 方法，则必须设置此字段。
 - `subnet_mask`：此网络的子网掩码。如果选择了 `static` 方法，则必须设置此字段。
 - `gateway`：此网络的网关。如果选择了 `static` 方法，则必须设置此字段。
@@ -327,7 +327,7 @@ install:
    - `miimon: 100`
 
  > 注意
-> 一个名为 `harvester-mgmt` 的网络是建立有效的[管理网络](../networking/harvester-network.md#management-network)所必须的。
+> 一个名为 `harvester-mgmt` 的网络是建立有效的[管理网络](../../networking/harvester-network/_index#管理网络)所必须的。
 
  > 注意
 > Harvester 使用 [systemd 网络命名方案](https://www.freedesktop.org/software/systemd/man/systemd.net-naming-scheme.html)。

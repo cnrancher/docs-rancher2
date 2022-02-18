@@ -34,7 +34,7 @@ description: 如需获取 Harvester ISO，访问 GitHub 上的发行版本进行
 1. （可选）配置节点的 NTP Server。默认值是 `0.suse.pool.ntp.org`。
 1. （可选）如果你需要使用 HTTP 代理来访问外部环境，在此处输入代理的 URL。否则，请留空。
 1. （可选）你可以从远端服务器 URL 导入 SSH 密钥。你的 GitHub 公钥可以与 `https://github.com/<username>.keys` 一起使用。
-1. （可选）如果你需要使用 [Harvester 配置](./harvester-configuration.md)文件来自定义主机，在此处输入 HTTP URL。
+1. （可选）如果你需要使用 [Harvester 配置](../harvester-configuration/_index.md)文件来自定义主机，在此处输入 HTTP URL。
 1. 确认安装选项后，Harvester 会自动安装到你的主机上。安装过程可能需要几分钟。
 1. 主机会在安装完成后重启。重启后，包含管理 URL 和状态的 Harvester 控制台会显示。你可以使用 `F12` 在 Harvester 控制台和 Shell 之间切换。
 1. 网页界面的默认 URL 是 `https://your-virtual-ip`。

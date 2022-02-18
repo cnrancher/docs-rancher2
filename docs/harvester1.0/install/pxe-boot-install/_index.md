@@ -63,7 +63,7 @@ description: 从 `0.2.0` 开始，Harvester 可以自动安装。本文提供使
 > 警告
 > **安全风险**：下面的配置文件包含应保密的凭证。请不要公开配置文件。
 
-为 `CREATE` 模式创建一个名为 `config-create.yaml` 的 [Harvester 配置文件](./harvester-configuration.md)。按照需要修改值：
+为 `CREATE` 模式创建一个名为 `config-create.yaml` 的 [Harvester 配置文件](../harvester-configuration/_index.md)。按照需要修改值：
 
 ```YAML
 # cat /usr/share/nginx/html/harvester/config-create.yaml
@@ -117,7 +117,7 @@ boot
 > 警告
 > **安全风险**：下面的配置文件包含应保密的凭证。请不要公开配置文件。
 
-为 `JOIN` 模式创建一个名为 `config-join.yaml` 的 [Harvester 配置文件](./harvester-configuration.md)。按照需要修改值：
+为 `JOIN` 模式创建一个名为 `config-join.yaml` 的 [Harvester 配置文件](../harvester-configuration/_index.md)。按照需要修改值：
 
 ```YAML
 # cat /usr/share/nginx/html/harvester/config-join.yaml
@@ -230,7 +230,7 @@ group {
 
 ## Harvester 配置
 
-有关 Harvester 配置的详情，请参见 [Harvester 配置](./harvester-configuration.md)。
+有关 Harvester 配置的详情，请参见 [Harvester 配置](../harvester-configuration/_index.md)。
 
 用户也可以通过内核参数提供配置。例如，如果你需要指定 `CREATE` 安装模式，你可以在启动时传入 `harvester.install.mode=create` 内核参数。通过内核参数传入的值比在配置文件中指定的值具有更高的优先级。
 
