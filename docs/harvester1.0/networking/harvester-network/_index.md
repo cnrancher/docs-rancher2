@@ -23,8 +23,8 @@ Harvester 构建在 [Kubernetes](https://kubernetes.io/) 之上，并使用其�
 
 目前，Harvester 支持两种类型的网络：
 
-- [管理网络](#management-network)
-- [VLAN 网络](#vlan-network)
+- [管理网络](#管理网络)
+- [VLAN 网络](#VLAN-网络)
 
 ## 管理网络
 
@@ -39,7 +39,7 @@ Harvester 使用 [canal](https://projectcalico.docs.tigera.io/getting-started/ku
 
 下图说明了 VLAN 网络在 Harvester 中的工作方式：
 
-![](./assets/vlan-case.png)
+![](../assets/vlan-case.png)
 
 - Harvester network-controller 为每个节点创建一个桥接器，并为每个虚拟机创建一对 veth 来实现 VLAN 网络。网桥充当交换机，转发来自或发往虚拟机的网络流量，而一对 veth 则充当虚拟机和交换机之间的连接端口。
 - 同一 VLAN 内的虚拟机能够相互通信，而不同 VLAN 内的虚拟机则不能。
@@ -52,7 +52,7 @@ Harvester 使用 [canal](https://projectcalico.docs.tigera.io/getting-started/ku
 
 为了获得更好的网络性能和实现隔离，我们建议为 VLAN 和管理网络（即 `harvester-mgmt`）选择不同的网络接口。
 
-![](assets/enable-vlan.png)
+![](../assets/enable-vlan.png)
 
 > 注意
 >
@@ -62,20 +62,20 @@ Harvester 使用 [canal](https://projectcalico.docs.tigera.io/getting-started/ku
 
 你还可以通过**主机 > 网络**选项卡自定义每个节点的 VLAN 网络。
 
-![](assets/node-network-configuration.png)
+![](../assets/node-network-configuration.png)
 
 ### 创建 VLAN 网络
 
 你可以前往**高级选项 > 网络**页面，并单击**创建**按钮来创建新的 VLAN 网络。
 
-1. 设置 VLAN 网络的名称和 VLAN ID <small>（你可以在 [Rancher 多租户](/rancher/virtualization-management/#multi-tenancy) 支持的不同命名空间上指定相同的 VLAN ID）</small>。
-   ![create-vlan-network.png](assets/create-network.png)
+1. 设置 VLAN 网络的名称和 VLAN ID <small>（你可以在 [Rancher 多租户](/rancher/virtualization-management/_index/#多租户) 支持的不同命名空间上指定相同的 VLAN ID）</small>。
+   ![create-vlan-network.png](../assets/create-network.png)
 
 2. 配置路由以允许主机使用 IPv4 地址连接到 VLAN 网络。VLAN 网络的 CIDR 和网关是路由配置的必备参数。你可以选择以下选项之一来配置路由：
    - 自动（DHCP）：Harvester 网络控制器将使用 DHCP 协议从 DHCP 服务器获取 CIDR 和网关值。你也可以指定 DHCP 服务器地址。
-     ![](assets/create-network-auto.png)
+     ![](../assets/create-network-auto.png)
    - 手动：你需要自行指定 CIDR 和网关值。
-     ![](assets/create-network-manual.png)
+     ![](../assets/create-network-manual.png)
 
 ### 使用 VLAN 网络创建虚拟机
 
@@ -85,7 +85,7 @@ Harvester 使用 [canal](https://projectcalico.docs.tigera.io/getting-started/ku
 - 输入所需参数并单击**网络**选项卡。
 - 将默认网络配置为 VLAN 网络，或选择要添加的其他网络。
 
-![](./assets/vm-network-configuration.png)
+![](../assets/vm-network-configuration.png)
 
 > 注意
 >
