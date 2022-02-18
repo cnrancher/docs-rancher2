@@ -17,12 +17,12 @@ description: Harvester 中的来宾集群使用的 Harvester Cloud Provider 提�
 
 ## 概述
 
-你可以使用内置的 Harvester 主机驱动在 Rancher 中配置 [RKE1](./rke1-cluster.md) 和 [RKE2](./rke2-cluster.md) 集群。Harvester 会为来宾 Kubernetes 集群提供[负载均衡器](./cloud-provider.md#load-balancer-support)和[集群持久存储](./csi-driver.md)支持。
+你可以使用内置的 Harvester 主机驱动在 Rancher 中配置 [RKE1](../rke1-cluster/_index.md) 和 [RKE2](../rke2-cluster/_index.md) 集群。Harvester 会为来宾 Kubernetes 集群提供[负载均衡器](../cloud-provider/_index.md#负载均衡器支持)和[集群持久存储](../csi-driver/_index.md)支持。
 
 你将在本文中学习：
 
 - 如何在 RKE1 和 RKE2 中部署 Harvester Cloud Provider。
-- 如何使用 [Harvester 负载均衡器](./cloud-provider.md#load-balancer-support)。
+- 如何使用 [Harvester 负载均衡器](../cloud-provider/_index.md#负载均衡器支持)。
 
 ## 部署
 
