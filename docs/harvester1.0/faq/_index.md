@@ -29,7 +29,7 @@ password: # 首次登录时会提示你设置默认密码
 ### 如何访问 Harvester 集群的 kubeconfig 文件？
 
 选项 1：你可以从 Harvester 仪表盘的支持页面下载 kubeconfig 文件。
-![harvester-kubeconfig.png](./assets/harvester-kubeconfig.png)
+![harvester-kubeconfig.png](../assets/harvester-kubeconfig.png)
 
 选项 2：你可以从其中一个 Harvester 管理节点获取 kubeconfig 文件。例如：
 
