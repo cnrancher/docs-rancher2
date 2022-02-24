@@ -58,7 +58,7 @@ Harvester 使用 [canal](https://projectcalico.docs.tigera.io/getting-started/ku
 >
 > - 选择网络接口时，括号中的数值代表网络接口在所有主机上的分布百分比。如果选择了小于 100% 的网络接口，需要在 VLAN 网络配置失败的主机上手动指定网络接口。
 > - 修改默认 VLAN 网络设置不会更新现有的主机网络配置。
-> - Harvester VLAN 网络支持绑定接口。目前只能通过 [PXE 启动配置](../install/pxe-boot-install/_index.md)自动创建。你也可以登录到节点并进行手动创建。
+> - Harvester VLAN 网络支持绑定接口。目前只能通过 [PXE 引导配置](../install/pxe-boot-install/_index.md)自动创建。你也可以登录到节点并进行手动创建。
 
 你还可以通过**主机 > 网络**选项卡自定义每个节点的 VLAN 网络。
 

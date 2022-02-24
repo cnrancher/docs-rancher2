@@ -1,5 +1,5 @@
 ---
-title: Harvester配置
+title: Harvester 配置
 keywords:
   - Harvester
   - harvester
@@ -85,7 +85,7 @@ system_settings:
 
 要作为 Agent 加入的 Harvester Server URL。
 
-对于使用 `JOIN` 模式进行的安装，配置是必须的。配置可以将主服务器的位置告知 Harvester 安装程序。外部镜像和备份到 S3）配置
+对于使用 `JOIN` 模式进行的安装，配置是必须的。配置可以将主服务器的位置告知 Harvester 安装程序。
 
 > 注意：
 > 为确保高可用的 Harvester 集群，请使用 Harvester 主服务器 [VIP](#installvip) 或 `server_url` 中的一个域名。

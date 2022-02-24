@@ -37,7 +37,7 @@ password: # 首次登录时会提示你设置默认密码
 $ cat /etc/rancher/rke2/rke2.yaml
 ```
 
-### 如何安装正在运行虚拟机的 qemu-guest-agent？
+### 如何在运行的虚拟机上安装 qemu-guest-agent？
 
 ```shell
 # cloud-init 只会执行一次。使用以下命令添加 cloud-init 配置后请重新启动它。
