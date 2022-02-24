@@ -1,5 +1,5 @@
 ---
-title: ISO安装
+title: ISO 安装
 keywords:
   - Harvester
   - harvester
@@ -19,7 +19,7 @@ description: 如果需要获取 Harvester ISO，访问 GitHub 上的发行版本
 <iframe width="950" height="475" src="https://www.youtube.com/embed/X0VIGZ_lExQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-1. 安装 Harvester ISO 磁盘并通过选择 `Harvester 安装程序`来启动服务器。
+1. 安装 Harvester ISO 磁盘并通过选择 `Harvester Installer` 来启动服务器。
    ![iso-install.png](../assets/iso-install.png)
 1. 通过创建新的 Harvester 集群或加入现有集群来选择安装模式。
 1. 选择要安装 Harvester 集群的设备。

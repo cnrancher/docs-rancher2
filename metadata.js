@@ -975,7 +975,7 @@ const metadata = {
             "harvester1.0/install/_index": "概述",
             "harvester1.0/install/iso-install/_index": "ISO 安装",
             "harvester1.0/install/usb-install/_index": "USB 安装",
-            "harvester1.0/install/pxe-boot-install/_index": "PXE 启动安装",
+            "harvester1.0/install/pxe-boot-install/_index": "PXE 引导安装",
             "harvester1.0/install/harvester-configuration/_index": "Harvester 配置",
             "harvester1.0/install/management-address/_index": "管理地址",
             "harvester1.0/airgap/_index": "离线环境",

@@ -1,5 +1,5 @@
 ---
-title: PXE启动安装
+title: PXE 引导安装
 keywords:
   - Harvester
   - harvester
@@ -8,15 +8,15 @@ keywords:
   - 安装 Harverster
   - 安装 Harverster
   - Harverster 安装
-  - PXE 启动安装
-description: 从 `0.2.0` 开始，Harvester 可以自动安装。本文提供使用 PXE 启动进行自动安装的示例。
+  - PXE 引导安装
+description: 从 `0.2.0` 开始，Harvester 可以自动安装。本文提供使用 PXE 引导进行自动安装的示例。
 ---
 
 ## 概述
 
-从 `0.2.0` 开始，Harvester 可以自动安装。本文提供使用 PXE 启动进行自动安装的示例。
+从 `0.2.0` 开始，Harvester 可以自动安装。本文提供使用 PXE 引导进行自动安装的示例。
 
-我们建议使用 [iPXE](https://ipxe.org/) 进行网络启动。iPXE 比传统 PXE 启动程序功能更多，而且与现代网卡更匹配。如果你的网卡不支持 iPXE 固件，你可以先从 TFTP 服务器加载 iPXE 固件镜像。
+我们建议使用 [iPXE](https://ipxe.org/) 进行网络启动。iPXE 比传统 PXE 引导程序功能更多，而且与现代网卡更匹配。如果你的网卡不支持 iPXE 固件，你可以先从 TFTP 服务器加载 iPXE 固件镜像。
 
 如果需要获得 iPXE 脚本示例，请参见 [Harvester iPXE 示例](https://github.com/harvester/ipxe-examples)。
 
@@ -109,7 +109,7 @@ boot
 以上假设 iPXE 脚本存储在 `/usr/share/nginx/html/harvester/ipxe-create` 中。
 
 > 注意：
-> 如果您有多个网络接口，你可以利用 dracut 的 `ip=` 参数来指定启动界面以及 dracut 支持的任何其他网络配置（例如，`ip=eth1:dhcp`）。详情请参见 [`man dracut.cmdline`](https://man7.org/linux/man-pages/man7/dracut.cmdline.7.html)。
+> 如果你有多个网络接口，你可以利用 dracut 的 `ip=` 参数来指定启动界面以及 dracut 支持的任何其他网络配置（例如，`ip=eth1:dhcp`）。详情请参见 [`man dracut.cmdline`](https://man7.org/linux/man-pages/man7/dracut.cmdline.7.html)。
 >
 > 使用 `ip=` 参数仅指定启动界面，因为我们仅支持**一个 `ip=` 参数**。
 
@@ -183,14 +183,14 @@ subnet 10.100.0.0 netmask 255.255.255.0 {
 group {
   # 创建组
   if exists user-class and option user-class = "iPXE" {
-    # iPXE 启动
+    # iPXE 引导
     if option architecture-type = 00:07 {
       filename "http://10.100.0.10/harvester/ipxe-create-efi";
     } else {
       filename "http://10.100.0.10/harvester/ipxe-create";
     }
   } else {
-    # PXE 启动
+    # PXE 引导
     if option architecture-type = 00:07 {
       # UEFI
       filename "ipxe.efi";
@@ -207,14 +207,14 @@ group {
 group {
   # join group
   if exists user-class and option user-class = "iPXE" {
-    # iPXE 启动
+    # iPXE 引导
     if option architecture-type = 00:07 {
       filename "http://10.100.0.10/harvester/ipxe-join-efi";
     } else {
       filename "http://10.100.0.10/harvester/ipxe-join";
     }
   } else {
-    # PXE 启动
+    # PXE 引导
     if option architecture-type = 00:07 {
       # UEFI
       filename "ipxe.efi";
@@ -259,7 +259,7 @@ wget http://boot.ipxe.org/ipxe.efi
 group {
   # 创建组
   if exists user-class and option user-class = "iPXE" {
-    # iPXE 启动
+    # iPXE 引导
     if option architecture-type = 00:07 {
       filename "http://10.100.0.10/harvester/ipxe-create-efi";
     } else {
@@ -270,7 +270,7 @@ group {
     option vendor-class-identifier "HTTPClient";
     filename "http://10.100.0.10/harvester/ipxe.efi";
   } else {
-    # PXE 启动
+    # PXE 引导
     if option architecture-type = 00:07 {
       # UEFI
       filename "ipxe.efi";
