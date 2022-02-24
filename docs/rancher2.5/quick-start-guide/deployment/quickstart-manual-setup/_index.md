@@ -37,7 +37,7 @@ keywords:
 
 1. 如果您使用的是云端虚拟机，请开放 **80 端口**和 **443 端口**的流入流量，详情请参考云服务提供商的文档。
 1. 有关业务集群的端口的详细要求，请参考[下游集群节点要求](/docs/rancher2/cluster-provisioning/node-requirements/_index)。
-1. 请按照[具体要求](/docs/rancher2/installation/requirements/_index)配置 Linux 主机。
+1. 请按照[具体要求](/docs/rancher2.5/installation/requirements/_index)配置 Linux 主机。
 
 :::
 
