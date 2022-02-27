@@ -25,7 +25,7 @@ description: 如果需要获取 Harvester ISO，访问 GitHub 上的发行版本
 1. 选择要安装 Harvester 集群的设备。
    - 注意：默认情况下，Harvester 对 UEFI 和 BIOS 使用 [GPT](https://en.wikipedia.org/wiki/GUID_Partition_Table) 分区架构。如果你使用 BIOS 引导，则可以选择 [MBR](https://en.wikipedia.org/wiki/Master_boot_record)。
      ![iso-install-disk.png](../assets/iso-install-disk.png)
-1. 配置主机名并选择管理网络的网络接口。默认情况下，Harvester 将创建一个名为 `harvester-mgmt` 的绑定网卡，IP 地址可以通过 DHCP 或静态方法配置。
+1. 配置主机名并选择管理网络的网络接口。默认情况下，Harvester 将创建一个名为 `harvester-mgmt` 的 Bond 网卡，IP 地址可以通过 DHCP 或静态方法配置。
    ![iso-installed.png](../assets/iso-nic-config.gif)
 1. （可选）配置 DNS 服务器。使用逗号作为分隔符。
 1. 配置用于访问集群或加入集群中其他节点的 `Virtual IP`（注意：如果你的 IP 地址是通过 DHCP 配置的，则需要在 DHCP 服务器上配置静态 MAC 到 IP 地址的映射，以便拥有持久的虚拟 IP）。

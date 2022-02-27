@@ -7,19 +7,19 @@ keywords:
   - Harvester CSI 驱动
   - Harvester CSI 驱动程序
   - CSI 接口
-description: Harvester CSI Driver 提供了一个 CSI 接口，供 Harvester 中的来宾 Kubernetes 集群使用。
+description: Harvester CSI Driver 提供了一个 CSI 接口，供 Harvester 中的 Kubernetes 集群使用。
 ---
 
 ## 概述
 
-Harvester CSI Driver 提供了一个 CSI 接口，供 Harvester 中的来宾 Kubernetes 集群使用。这个 CIS 接口连接到主机集群，并将主机卷热插拔到虚拟机来提供本机存储性能。
+Harvester CSI Driver 提供了一个 CSI 接口，供 Harvester 中的 Kubernetes 集群使用。这个 CIS 接口连接到主机集群，并将主机卷热插拔到虚拟机来提供本机存储性能。
 
 ## 部署
 
 ### 前提
 
 - Kubernetes 集群是在 Harvester 虚拟机之上构建的。
-- 作为来宾 Kubernetes 节点运行的 Harvester 虚拟机位于相同的命名空间中。
+- 作为 Kubernetes 节点运行的 Harvester 虚拟机位于相同的命名空间中。
 
 ### 使用 Harvester RKE2 主机驱动进行部署
 

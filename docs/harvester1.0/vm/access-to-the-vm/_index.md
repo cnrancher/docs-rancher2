@@ -13,15 +13,15 @@ description: 虚拟机运行后，你可以在 Harvester UI 通过 VNC 客户端
 
 ## 概述
 
-虚拟机运行后，你可以在 Harvester UI 通过虚拟网络计算 (VNC) 客户端或串行控制台访问虚拟机。
+虚拟机运行后，你可以在 Harvester UI 通过 `VNC` 客户端或串行控制台访问虚拟机。
 
-你也可以直接从电脑的 SSH 客户端连接。
+在使用 VLAN 网络的情况下，你也可以直接从本地电脑远程 SSH 到客户端进行连接。
 
 ## 使用 Harvester UI 访问
 
 你可以使用 VNC 或串行控制台直接从 UI 访问虚拟机。
 
-如果虚拟机上未启用 VGA 显示，则与 Ubuntu 最小云镜像一样，可以使用串行控制台访问虚拟机。
+如果虚拟机上未启用 VGA 显示，例如像 Ubuntu 的Cloud Image镜像，则可以使用串行控制台访问虚拟机。
 
 ![](../assets/access-to-vm.png)
 
