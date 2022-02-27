@@ -6,12 +6,12 @@ keywords:
   - RKE2 Kubernetes 集群
   - Harvester 主机驱动
   - Node Driver
-description: 你可以使用内置的 Harvester 主机驱动在 Rancher `2.6.1+` 中配置在 Harvester 集群之上的 RKE2 Kubernetes 集群。
+description: 你可以使用内置的 Harvester 主机驱动在 Rancher `2.6.3` 中配置在 Harvester 集群之上的 RKE2 Kubernetes 集群。
 ---
 
 ## 概述
 
-你可以使用内置的 Harvester 主机驱动在 Rancher `2.6.1+` 中配置在 Harvester 集群之上的 RKE2 Kubernetes 集群。
+你可以使用内置的 Harvester 主机驱动在 Rancher `2.6.3` 中配置在 Harvester 集群之上的 RKE2 Kubernetes 集群。
 
 ![rke2-cluster](../assets/rke2-node-driver.png)
 

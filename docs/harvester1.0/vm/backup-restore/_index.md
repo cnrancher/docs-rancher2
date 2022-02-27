@@ -30,9 +30,9 @@ _从 v0.3.0 起可用_
 | 参数               | 类型   | 描述                                                        |
 | :----------------- | :----- | :---------------------------------------------------------- |
 | Type               | string | 选择 S3 或 NFS                                              |
-| Endpoint           | string | 主机名或 IP 地址。如果是 AWS S3，则可以留空。               |
-| BucketName         | string | 存储桶名称                                                  |
-| BucketRegion       | string | 存储桶所在的区域                                            |
+| Endpoint           | string | 配置服务器或 IP 地址。如果是 AWS S3，则可以留空。               |
+| BucketName         | string | Bucket 名称                                                  |
+| BucketRegion       | string | Bucket 所在的区域                                            |
 | AccessKeyID        | string | 唯一标识你的账号的用户 ID                                   |
 | SecretAccessKey    | string | 你账号的密码                                                |
 | Certificate        | string | 粘贴以使用 S3 服务器的自签名 SSL 证书。                     |
@@ -80,7 +80,7 @@ _从 v1.0.0 起可用_
 用户现在可以使用虚拟机元数据和内容备份功能，在另一个集群上恢复新虚拟机。
 
 > 前提
-> 你必须先在新集群上手动配置同名的虚拟机镜像，否则虚拟机将无法恢复。
+> 你必须先在新集群上手动配置同名的虚拟机镜像，否则将无法正常恢复。
 
 ### 将相同的虚拟机镜像上传到新集群
 

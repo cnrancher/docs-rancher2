@@ -11,7 +11,7 @@ description: 本文回答用户常问的 Harvester 的问题。
 
 ## 概述
 
-本文回答用户常问的 Harvester 的问题。
+本文包含了用户常见的 Harvester 问题。
 
 ### 如何通过 SSH 登录到 Harvester 节点？
 

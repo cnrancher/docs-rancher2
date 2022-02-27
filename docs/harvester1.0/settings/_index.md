@@ -13,8 +13,8 @@ description: 本文介绍可在 Harvester 中使用的高级设置。
 
 ## 概述
 
-本文介绍可在 Harvester 中使用的高级设置。
-你可以从仪表盘 UI 或使用 `kubectl` 命令修改自定义资源 `settings.harvesterhci.io`。
+本文将介绍可在 Harvester 中使用的高级配置。
+你可以从仪表盘 UI 或使用 `kubectl` 命令修改 `settings.harvesterhci.io` 自定义资源。
 
 ## `additional-ca`
 

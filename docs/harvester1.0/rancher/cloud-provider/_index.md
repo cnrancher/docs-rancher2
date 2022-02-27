@@ -12,12 +12,12 @@ keywords:
   - RKE1
   - 部署 Harvester Cloud Provider
   - Harvester 负载均衡器
-description: Harvester 中的来宾集群使用的 Harvester Cloud Provider 提供了一个 CSI 接口和 Cloud Controller Manager (CCM)，来实现一个内置的负载均衡器。
+description: Harvester 中的k8s集群使用的 Harvester Cloud Provider 提供了一个 CSI 接口和 Cloud Controller Manager (CCM)，来实现一个内置的负载均衡器。
 ---
 
 ## 概述
 
-你可以使用内置的 Harvester 主机驱动在 Rancher 中配置 [RKE1](../rke1-cluster/_index.md) 和 [RKE2](../rke2-cluster/_index.md) 集群。Harvester 会为来宾 Kubernetes 集群提供[负载均衡器](../cloud-provider/_index.md#负载均衡器支持)和[集群持久存储](../csi-driver/_index.md)支持。
+你可以使用内置的 Harvester 主机驱动在 Rancher 中配置 [RKE1](../rke1-cluster/_index.md) 和 [RKE2](../rke2-cluster/_index.md) 集群。Harvester 会为这些 Kubernetes 集群提供[负载均衡器](../cloud-provider/_index.md#负载均衡器支持)和[集群持久存储](../csi-driver/_index.md)支持。
 
 你将在本文中学习：
 
@@ -28,7 +28,7 @@ description: Harvester 中的来宾集群使用的 Harvester Cloud Provider 提�
 
 ### 前提
 - Kubernetes 集群是在 Harvester 虚拟机之上构建的。
-- 作为来宾 Kubernetes 节点运行的 Harvester 虚拟机位于相同的命名空间中。
+- 作为 Kubernetes 节点运行的 Harvester 虚拟机位于相同的命名空间中。
 
 ### 使用 Harvester 主机驱动部署到 RKE1 集群
 使用 Harvester 主机驱动启动 RKE 集群时，你可以执行两个步骤来部署 `Harvester` 云提供商：
@@ -54,7 +54,7 @@ description: Harvester 中的来宾集群使用的 Harvester Cloud Provider 提�
 ![](../assets/rke2-cloud-provider.png)
 
 ## 负载均衡器支持
-部署 `Harvester Cloud Provider` 后，你可以使用 Kubernetes `LoadBalancer` 服务将来宾集群内的微服务公开给外部。在你创建 Kubernetes `LoadBalancer` 服务时，会为该服务分配一个 Harvester 负载均衡器，你可以通过 Rancher UI 中的`附加配置`对其进行编辑。
+部署 `Harvester Cloud Provider` 后，你可以使用 Kubernetes `LoadBalancer` 服务将集群内的微服务公开给外部。在你创建 Kubernetes `LoadBalancer` 服务时，会为该服务分配一个 Harvester 负载均衡器，你可以通过 Rancher UI 中的`附加配置`对其进行编辑。
 
 ![](../assets/lb-svc.png)
 

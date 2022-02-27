@@ -16,18 +16,18 @@ description: 使用 U 盘安装 Harvester
 
 ## 创建一个 USB 启动盘
 
-创建 USB 安装启动盘的方式有几种。
+你可以通过以下几种方式创建 USB 安装启动盘。
 
 ### balenaEtcher
 
-[balenaEtcher](https://www.balena.io/etcher/) 支持把镜像写入到 U 盘中。它提供一个易用的 GUI。选择 Harvester 安装 ISO 以及要使用的 USB 设备，来创建一个 USB 安装启动盘。
+通过[balenaEtcher](https://www.balena.io/etcher/) 把镜像写入到 U 盘中。它提供一个易用的UI界面。选择某个版本的 Harvester ISO 镜像以及要写入的 USB 设备，然后它将自动帮你创建一个 USB 安装启动盘。
 
 ### `dd` 命令
 
 在有 `dd` 命令的 Linux 或其他平台上，用户可以运行 `dd` 来创建一个 USB 安装启动盘：
 
 > 警告：
-> 请确保你选择了正确的设备。所选设备上的数据会被清除。
+> 请确保你选择了正确的写入设备,因为所选设备上的数据会被清除。
 
 ```
 # sudo dd if=<path_to_iso> of=<path_to_usb_device> bs=64k
@@ -35,9 +35,9 @@ description: 使用 U 盘安装 Harvester
 
 ## 常见问题
 
-### 使用 U 盘启动时，显示 `GRUB _` 文本，但没有事情发生
+### 使用 U 盘启动时，只显示 `GRUB _` 文本，但没有事情发生
 
-如果你使用的是 UEFI 模式，请尝试从 USB 设备的 UEFI 启动分区启动，而不是从 USB 设备本身启动。例如：
+如果你使用的是 UEFI 模式，请尝试从 USB 设备的 UEFI 分区启动，而不是从 USB 设备本身启动。例如：
 
 ![](../assets/usb-install-select-correct-partition.jpg)
 
