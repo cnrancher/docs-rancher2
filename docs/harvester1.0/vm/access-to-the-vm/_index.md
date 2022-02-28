@@ -21,7 +21,7 @@ description: 虚拟机运行后，你可以在 Harvester UI 通过 VNC 客户端
 
 你可以使用 VNC 或串行控制台直接从 UI 访问虚拟机。
 
-如果虚拟机上未启用 VGA 显示，例如像 Ubuntu 的Cloud Image镜像，则可以使用串行控制台访问虚拟机。
+如果虚拟机上未启用 VGA 显示，例如像 Ubuntu 的 Cloud Image 镜像，则可以使用串行控制台访问虚拟机。
 
 ![](../assets/access-to-vm.png)
 

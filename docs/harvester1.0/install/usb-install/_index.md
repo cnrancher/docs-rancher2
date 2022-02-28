@@ -20,7 +20,7 @@ description: 使用 U 盘安装 Harvester
 
 ### balenaEtcher
 
-通过[balenaEtcher](https://www.balena.io/etcher/) 把镜像写入到 U 盘中。它提供一个易用的UI界面。选择某个版本的 Harvester ISO 镜像以及要写入的 USB 设备，然后它将自动帮你创建一个 USB 安装启动盘。
+通过[balenaEtcher](https://www.balena.io/etcher/) 把镜像写入到 U 盘中。它提供一个易用的 UI 界面。选择某个版本的 Harvester ISO 镜像以及要写入的 USB 设备，然后它将自动帮你创建一个 USB 安装启动盘。
 
 ### `dd` 命令
 

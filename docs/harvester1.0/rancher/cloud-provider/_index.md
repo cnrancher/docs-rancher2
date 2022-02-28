@@ -12,7 +12,7 @@ keywords:
   - RKE1
   - 部署 Harvester Cloud Provider
   - Harvester 负载均衡器
-description: Harvester 中的k8s集群使用的 Harvester Cloud Provider 提供了一个 CSI 接口和 Cloud Controller Manager (CCM)，来实现一个内置的负载均衡器。
+description: Harvester 中的 K8s 集群使用的 Harvester Cloud Provider 提供了一个 CSI 接口和 Cloud Controller Manager (CCM)，来实现一个内置的负载均衡器。
 ---
 
 ## 概述
