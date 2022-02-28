@@ -27,7 +27,7 @@ steps:
     image: node:12.16.2
     environment:
       PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
-      NODE_OPTIONS: "--max_old_space_size=4096"        
+      NODE_OPTIONS: "--max_old_space_size=4096"
       HTTP_PROXY:
         from_secret: proxy
       HTTPS_PROXY:
@@ -52,7 +52,7 @@ steps:
       dist: /website/build
       dist_ignore: img/
       path: docs-rancher2-3-preview
-      endpoint: oss-accelerate.aliyuncs.com
+      endpoint: oss-cn-shanghai.aliyuncs.com
       access_key_id:
         from_secret: ACCESS_KEY_ID
       access_key_secret:
@@ -72,7 +72,7 @@ steps:
       dist: /website/build
       dist_ignore: img/
       path: docs-rancher2-3-production
-      endpoint: oss-accelerate.aliyuncs.com
+      endpoint: oss-cn-shanghai.aliyuncs.com
       access_key_id:
         from_secret: ACCESS_KEY_ID
       access_key_secret:
