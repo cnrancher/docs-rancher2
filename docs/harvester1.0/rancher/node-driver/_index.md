@@ -13,9 +13,9 @@ description: Harvester 主机驱动用于在 Harvester 集群中配置虚拟机�
 
 ## 概述
 
-Harvester 主机驱动用于在 Harvester 集群中配置虚拟机。在本节中，你将学习如何配置 Rancher 以使用 Harvester 主机驱动来启动和管理 Kubernetes 集群。
+Harvester 主机驱动（Node Driver）用于在 Harvester 集群中配置虚拟机。在本节中，你将学习如何配置 Rancher 以使用 Harvester 主机驱动来启动和管理 Kubernetes 集群。
 
-Node Driver 的设计与 [Docker Machine Driver](https://docs.docker.com/machine/) 相同，它的项目仓库位于 [harvester/docker-machine-driver-harvester](https://github.com/harvester/docker-machine-driver-harvester)。
+主机驱动的设计与 [Docker Machine Driver](https://docs.docker.com/machine/) 相同，它的项目仓库位于 [harvester/docker-machine-driver-harvester](https://github.com/harvester/docker-machine-driver-harvester)。
 
 你可以使用内置的 Harvester 主机驱动在 Rancher `2.6.3+` 中配置 RKE1/RKE2 Kubernetes 集群。
 此外，Harvester 可以为 Kubernetes 集群提供内置的[负载均衡器](../cloud-provider/_index.md)以及原始集群[持久存储](../csi-driver/_index.md)支持。

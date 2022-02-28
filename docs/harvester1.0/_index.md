@@ -22,15 +22,15 @@ Harvester 支持在裸机服务器上实施 HCI。Harvester 使用本地、直�
 
 以下是 Harvester 当下提供的一些主要功能：
 
-1. 虚拟机生命周期管理，包括 SSH-Key 注入、Cloud-init配置、和图形、串行端口控制台。
+1. 虚拟机生命周期管理，包括 SSH-Key 注入、Cloud-init 配置、和图形、串行端口控制台。
 1. 虚拟机热迁移支持。
 1. 虚拟机备份和恢复。
 1. 分布式块存储。
-1. 虚拟机中的多个网卡支持、可连接到管理或 VLAN网络。
+1. 虚拟机中的多个网卡支持、可连接到管理或 VLAN 网络。
 1. 虚拟机和 cloud-init 模板。
 1. 集成 [Rancher](https://github.com/rancher/rancher) 并提供多集群管理和 Harvester 主机驱动。
 1. [PXE/iPXE 引导支持](./install/pxe-boot-install/_index)
-1. 虚拟 IP(VIP) 和 Bond 网卡支持
+1. 虚拟 IP (VIP) 和 Bond 网卡支持
 1. 监控集成
 
 ## Harvester 架构
