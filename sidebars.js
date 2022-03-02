@@ -1905,6 +1905,7 @@ module.exports = {
             "k3s/autok3s/google/_index",
             "k3s/autok3s/tencent/_index",
             "k3s/autok3s/native/_index",
+            "k3s/autok3s/harvester/_index",
             "k3s/autok3s/k3d/_index",
         ],
         安装: [

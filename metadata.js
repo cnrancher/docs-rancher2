@@ -794,6 +794,7 @@ const metadata = {
             "k3s/autok3s/google/_index": "创建Google集群",
             "k3s/autok3s/tencent/_index": "创建腾讯云集群",
             "k3s/autok3s/native/_index": "创建Native集群",
+            "k3s/autok3s/harvester/_index": "在Harvester中创建K3s集群",
             "k3s/autok3s/k3d/_index": "创建K3d集群",
             "k3s/installation/_index": "安装介绍",
             "k3s/installation/installation-requirements/_index": "安装要求",
