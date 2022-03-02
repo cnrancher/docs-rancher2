@@ -46,6 +46,25 @@ OutBound    ALL         ALL       ALL                Allow All
 
 您可以通过[快速体验](/docs/k3s/autok3s/_index#快速体验)中的描述，通过 Docker 或者 CLI 启动本地 UI，打开浏览器，访问目标端口 `8080` 即可。
 
+### 快速创建集群
+
+您可以使用快速创建功能，在指定的云提供商服务中，快速启动一个K3s集群。
+
+以下图为例，我们将在您准备好的 VM 中使用默认配置创建一个单节点的 K3s 集群。
+
+![](/img/k3s/quick-start-native.png)
+
+**表 1：快速创建参数**
+
+| 参数 | 说明 | 默认值
+| :------------- | :----------------- | :-----------------
+| Provider | 云提供商名称 | `native`
+| Name | K3s集群名称 | 
+| Master IPs | Master 节点IP | 
+| Worker IPs | Worker 节点IP | 
+| SSH User | SSH 用户 | `root`
+| SSH Key Path | 如果您选择了已有的密钥对，需要指定SSH 私钥目录，如果您使用AutoK3s 自动生成的密钥，这里可以不填写任何内容 |
+
 ### 自定义参数创建
 
 您可以在集群列表页点击 **Create** 按钮进入自定义参数页面进行更多参数的设置。
@@ -108,11 +127,33 @@ K3s 参数配置项主要对 K3s 集群进行设置，例如是否部署 HA 模�
 
 ### 集群模板
 
-Native 模式不支持集群模板功能。
+您可以使用模板功能，提前预置好常用的集群模板，每次创建集群时可以用模板参数进行填充，极大精简了重复操作。一次编写，多次运行，提升效率。
+
+创建集群模板的参数与上面描述的自定义参数创建集群的表单内容相同，在这里不做赘述。
+
+![](/img/k3s/cluster-templates.png)
+
+您可以选择最常用的模板，点击右侧下拉框中的 **Set Default** 按钮，将模板设置为默认模板。
+
+![](/img/k3s/set-default-templates.png)
+
+设置为默认模板后，您可以通过快速创建功能一键部署常用配置的 K3s 集群。
+
+![](/img/k3s/quick-start-with-default-templates.png)
+
+如果您想使用其他模板创建集群，您还可以在快速创建页面的右上角，或者在自定义创建集群的右上角筛选模板，点击 **Fill Form** 按钮后，会自动根据模板内容填充表单。
+
+![](/img/k3s/fill-form-with-templates.png)
 
 ### 集群管理
 
-Native 模式不支持集群列表管理功能，但您可以使用 Kubectl 功能操作和管理集群资源。
+您可以在集群列表页查看和管理使用 AutoK3s 创建的 K3s 集群。
+
+#### 添加节点
+
+选中您要添加节点的集群，点击右侧下拉菜单中的 **Join Node** 按钮，在弹出的窗口中设置要添加的节点 IP 及可连接到主机的 SSH 信息即可。
+
+![](/img/k3s/join-nodes-native.png)
 
 #### Kubectl
 
@@ -120,11 +161,17 @@ Native 模式不支持集群列表管理功能，但您可以使用 Kubectl 功�
 
 ![](/img/k3s/launch-kubectl.png)
 
+#### SSH
+
+如果您想连接到远程主机进行操作，您可以在集群列表页面点击集群名称，进入详情页面，选择要连接的主机，点击右侧 **Execute Shell** 按钮。
+
+![](/img/k3s/ssh-node-native.png)
+
 #### 开启 kube-explorer dashboard
 
 您可以在创建集群时，通过 Additional Options 选择 explorer 选项开启 kube-explorer 功能。
 
-![](/img/k3s/launch-kube-explorer.png)
+![](/img/k3s/launch-kube-explorer-native.png)
 
 也可以通过右侧下拉菜单中选择 Enable Explorer 功能来开启 kube-explorer。
 
@@ -152,9 +199,10 @@ Native 模式不支持集群列表管理功能，但您可以使用 Kubectl 功�
 autok3s -d create \
     --provider native \
     --name myk3s \
+    --ssh-user <ssh-user> \
     --ssh-key-path <ssh-key-path> \
-    --master-ips <master-ip-1> \
-    --worker-ips <worker-ip-1>
+    --master-ips <master-ip-1,master-ip-2> \
+    --worker-ips <worker-ip-1,worker-ip-2>
 ```
 
 ### 创建高可用 K3s 集群
@@ -169,6 +217,7 @@ autok3s -d create \
 autok3s -d create \
     --provider native \
     --name myk3s \
+    --ssh-user <ssh-user> \
     --ssh-key-path <ssh-key-path> \
     --master-ips <master-ip-1,master-ip-2,master-ip-3> \
     --cluster
@@ -189,6 +238,7 @@ autok3s -d create \
 autok3s -d create \
     --provider native \
     --name myk3s \
+    --ssh-user <ssh-user> \
     --ssh-key-path <ssh-key-path> \
     --master-ips <master-ip-1,master-ip-2> \
     --datastore "mysql://<user>:<password>@tcp(<ip>:<port>)/<db>"
@@ -206,8 +256,8 @@ autok3s -d create \
 autok3s -d join \
     --provider native \
     --name myk3s \
+    --ssh-user <ssh-user> \
     --ssh-key-path <ssh-key-path> \
-    --ip <existing-k3s-server-public-ip> \
     --worker-ips <worker-ip-2,worker-ip-3>
 ```
 
@@ -223,8 +273,8 @@ autok3s -d join \
 autok3s -d join \
     --provider native \
     --name myk3s \
+    --ssh-user <ssh-user> \
     --ssh-key-path <ssh-key-path> \
-    --ip <existing-k3s-server-public-ip> \
     --master-ips <master-ip-2,master-ip-3>
 ```
 
@@ -236,10 +286,62 @@ autok3s -d join \
 autok3s -d join \
     --provider native \
     --name myk3s \
+    --ssh-user <ssh-user> \
     --ssh-key-path <ssh-key-path> \
-    --ip <existing-k3s-server-public-ip> \
     --master-ips <master-ip-2,master-ip-3> \
     --datastore "mysql://<user>:<password>@tcp(<ip>:<port>)/<db>"
+```
+
+### 删除 K3s 集群
+
+删除一个 k3s 集群，这里删除的集群为 myk3s。
+
+```bash
+autok3s -d delete --provider native --name myk3s
+```
+
+### 查看集群列表
+
+显示当前主机上管理的所有 K3s 集群列表。
+
+```bash
+autok3s list
+```
+
+```bash
+   NAME     REGION  PROVIDER  STATUS   MASTERS  WORKERS    VERSION
+  myk3s             native    Running  1        0        v1.22.6+k3s1
+```
+
+### 查看集群详细信息
+
+显示具体的 K3s 信息，包括实例状态、主机 ip、集群版本等信息。
+
+```bash
+autok3s describe -n <clusterName> -p native
+```
+
+> 注意：如果使用不同的 provider 创建的集群名称相同，describe 时会显示多个集群信息，可以使用`-p <provider>`对 provider 进一步过滤。例如：`autok3s describe -n myk3s -p native`。
+
+```bash
+Name: myk3s
+Provider: native
+Region:
+Zone:
+Master: 1
+Worker: 0
+Status: Running
+Version: v1.22.6+k3s1
+Nodes:
+  - internal-ip: [x.x.x.x]
+    external-ip: [x.x.x.x]
+    instance-status: -
+    instance-id: xxxxxxxxxx
+    roles: control-plane,master
+    status: Ready
+    hostname: test
+    container-runtime: containerd://1.5.9-k3s1
+    version: v1.22.6+k3s1
 ```
 
 ### Kubectl
@@ -258,6 +360,15 @@ autok3s kubectl config get-contexts
 autok3s kubectl config use-context <context>
 ```
 
+### SSH
+
+SSH 连接到集群中的某个主机，这里选择的集群为 myk3s。
+
+
+```bash
+autok3s ssh --provider native --name myk3s
+```
+
 ### 进阶使用
 
 AutoK3s 集成了一些与当前 provider 有关的高级组件，例如私有镜像仓库和 UI。
@@ -270,8 +381,9 @@ AutoK3s 集成了一些与当前 provider 有关的高级组件，例如私有�
 autok3s -d create \
     --provider native \
     --name myk3s \
+    --ssh-user <ssh-user> \
     --ssh-key-path <ssh-key-path> \
-    --master-ips <master-ip-1> \
+    --master-ips <master-ip-1,master-ip-2> \
     --worker-ips <worker-ip-1,worker-ip-2> \
     --registry /etc/autok3s/registries.yaml
 ```
