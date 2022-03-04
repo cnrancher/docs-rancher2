@@ -106,8 +106,6 @@ Rancher Server 会定期刷新并下载`rke-metadata-config`中配置定元数�
 
 若要将 Rancher 与 RKE 元数据的本地镜像同步，管理员将通过更新`rke-metadata-config`以指向镜像的仓库。请参见[配置元数据同步](#配置元数据同步)。
 
-To sync Rancher with a local mirror of the RKE metadata, an administrator would configure the `rke-metadata-config` settings to point to the mirror. For details, refer to [Configuring the Metadata Synchronization.](#configuring-the-metadata-synchronization)
-
 在将新的 Kubernetes 版本加载到 Rancher Server 中之后，需要执行其他步骤才能使用它们启动集群。Rancher 需要访问更新的系统镜像。虽然元数据设置只能由系统管理员更改，但任何用户都可以下载 Rancher 系统镜像并为它们准备一个私有镜像仓库。
 
 1. 要下载私有镜像仓库所需的镜像，请单击 Rancher UI 左下角的 Rancher Server 版本。
