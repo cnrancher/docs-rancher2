@@ -91,8 +91,11 @@ Harvester 支持在裸机服务器上实施 HCI。Harvester 使用本地、直�
    ![first-login.png](./install/assets/first-time-login.png)
 
 <div class="text-center">
-<iframe width="950" height="475" src="https://www.youtube.com/embed/Ngsk7m6NYf4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="950" height="475" src="//player.bilibili.com/player.html?aid=296897818&bvid=BV1DF411t736&cid=540530681&page=1" title="bilibili video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
+
+
+
 
 ### PXE/iPXE 安装
 
