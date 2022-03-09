@@ -40,3 +40,6 @@ Rancher `2.6.3` 版本默认启用 Harvester Node Driver。你可以前往`集�
 ## RKE2 Kubernetes 集群
 
 了解[如何创建 RKE2 Kubernetes 集群](../rke2-cluster/_index.md)。
+
+## K3s Kubernetes 集群
+点击了解[如何创建 k3s Kubernetes 集群](../k3s-cluster/_index.md)。
