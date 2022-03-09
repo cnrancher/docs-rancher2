@@ -48,10 +48,33 @@ description: Harvester 中的k8s集群使用的 Harvester Cloud Provider 提供�
 
    ![](../assets/install-harvester-csi-driver.png)
 
-### 使用 Harvester 主机驱动部署到 RKE2 集群
+### 使用 Harvester 主机驱动部署到 RKE2 集群[实验功能]
 使用 Harvester 主机驱动启动 RKE2 集群时，选择 `Harvester` 云提供商。然后，主机驱动将自动部署 CSI 驱动和 CCM。
 
 ![](../assets/rke2-cloud-provider.png)
+
+### 使用 Harvester 主机驱动部署到 K3s 集群[实验功能]
+
+- 为 K3s 选择 Kubernetes 版本，并点击`以 YAML 文件编辑` 按钮，来配置 K3s 集群 YAML（对于现有集群，你也可以点击`编辑 YAML` 按钮进行更新)：
+
+   ![](../assets/edit-k3s-cluster-yaml.png)
+
+- 编辑 K3s 集群 YAML。
+   - 设置 `disable-cloud-provider: true` 以禁用默认的 K3s 云提供商。
+   - 添加 `cloud-provider=external` 以使用 Harvester 云提供商。
+
+   ![](../assets/k3s-cluster-yaml-content-for-harvester-cloud-provider.png)
+
+- [生成 addon 配置](https://github.com/harvester/cloud-provider-harvester/blob/master/deploy/generate_addon.sh)并放入 K3s 虚拟机 `/etc/kubernetes/cloud-config`。
+
+```
+# 依赖 kubectl 来操作 Harvester 集群
+./deploy/generate_addon.sh <serviceaccount name> <namespace>
+```
+
+- 从 Rancher 应用市场中安装 `Harvester Cloud Provider`。
+
+   ![](../assets/install-harvester-cloud-provider-in-k3s.png)
 
 ## 负载均衡器支持
 部署 `Harvester Cloud Provider` 后，你可以使用 Kubernetes `LoadBalancer` 服务将集群内的微服务公开给外部。在你创建 Kubernetes `LoadBalancer` 服务时，会为该服务分配一个 Harvester 负载均衡器，你可以通过 Rancher UI 中的`附加配置`对其进行编辑。
