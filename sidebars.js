@@ -2158,7 +2158,11 @@ module.exports = {
             "harvester1.0/vm/live-migration/_index",
             "harvester1.0/vm/hotplug-volume/_index",
         ],
-        网络: ["harvester1.0/networking/_index"],
+        网络: [
+            "harvester1.0/networking/_index",
+            "harvester1.0/networking/best-practice-vlan-aware-switch/_index",
+            "harvester1.0/networking/best-practice-non-vlan-aware-switch/_index",
+        ],
         监控: ["harvester1.0/monitoring/_index"],
         Rancher集成: [
             "harvester1.0/rancher/_index",
@@ -2170,6 +2174,7 @@ module.exports = {
                     "harvester1.0/rancher/node-driver/_index",
                     "harvester1.0/rancher/rke1-cluster/_index",
                     "harvester1.0/rancher/rke2-cluster/_index",
+                    "harvester1.0/rancher/k3s-cluster/_index"
                 ],
             },            
             "harvester1.0/rancher/cloud-provider/_index",
