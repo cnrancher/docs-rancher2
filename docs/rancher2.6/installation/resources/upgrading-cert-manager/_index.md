@@ -23,7 +23,7 @@ Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和续期 TLS
 
 > 进行上述操作的原因是，Helm 升级 Rancher 时，如果正在运行的 Rancher 应用与安装它所使用的 Helm 模板不匹配，Helm 会拒绝升级并提示错误消息。由于 cert-manager 更改了它的 API 组，而且我们不能修改 Rancher 已发布的 Chart，因此 cert-manager 的 API 版本始终不匹配，导致升级被拒绝。
 
-# 升级 Cert-Manager
+## 升级 Cert-Manager
 
 以下说明中使用的命名空间是由当前安装了 cert-manager 的命名空间决定的。如果它在 kube-system 中，在以下说明步骤中使用。你可以运行 `kubectl get pods --all-namespaces` 来验证，并检查 cert-manager-\* pods 列在哪个命名空间中。不要更改运行 cert-manager 的命名空间，否则可能会出现错误。
 
@@ -39,9 +39,8 @@ Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和续期 TLS
    issuer,clusterissuer,certificates,certificaterequests > cert-manager-backup.yaml
    ```
 
-   > :::important 重要提示
+   > **重要提示**：
    > 如果你从低于 0.11.0 的版本升级，请将所有备份资源上的 apiVersion 从 `certmanager.k8s.io/v1alpha1` 升级到 `cert-manager.io/v1alpha2`。如果你需要在其他资源上使用 cert-manager 注释，请对其进行更新以反映新的 API 组。详情请参见[附加注释变更](https://cert-manager.io/docs/installation/upgrading/upgrading-0.10-0.11/#additional-annotation-changes)。
-   > :::
 
 1. [卸载现有部署](https://cert-manager.io/docs/installation/uninstall/kubernetes/#uninstalling-with-helm)：
 
@@ -61,9 +60,7 @@ Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和续期 TLS
    kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/vX.Y.Z/cert-manager.crds.yaml
    ```
 
-   > :::note 注意
-   > 如果你运行的 Kubernetes 版本是 1.15 或更低版本，你需要在以上的 `kubectl apply` 命令中添加 `--validate=false`。否则你将看到 cert-manager CRD 资源中的 `x-kubernetes-preserve-unknown-fields` 字段校验错误提示。这是 kubectl 执行资源校验方式产生的良性错误。
-   > :::
+   > **注意**：如果你运行的 Kubernetes 版本是 1.15 或更低版本，你需要在以上的 `kubectl apply` 命令中添加 `--validate=false`。否则你将看到 cert-manager CRD 资源中的 `x-kubernetes-preserve-unknown-fields` 字段校验错误提示。这是 kubectl 执行资源校验方式产生的良性错误。
 
 1. 根据需要为 cert-manager 创建命名空间：
 
@@ -161,9 +158,8 @@ Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和续期 TLS
    issuer,clusterissuer,certificates,certificaterequests > cert-manager-backup.yaml
    ```
 
-   > :::important 重要提示
+   > **重要提示**：
    > 如果你从低于 0.11.0 的版本升级，请将所有备份资源上的 apiVersion 从 `certmanager.k8s.io/v1alpha1` 升级到 `cert-manager.io/v1alpha2`。如果你需要在其他资源上使用 cert-manager 注释，请对其进行更新以反映新的 API 组。详情请参见[附加注释变更](https://cert-manager.io/docs/installation/upgrading/upgrading-0.10-0.11/#additional-annotation-changes)。
-   > :::
 
 1. 删除现有的 cert-manager 安装包：
 
@@ -185,9 +181,7 @@ Rancher 使用 cert-manager 为 Rancher 高可用部署自动生成和续期 TLS
    kubectl apply -f cert-manager/cert-manager-crd.yaml
    ```
 
-   > :::note 注意
-   > 如果你运行的 Kubernetes 版本是 1.15 或更低版本，你需要在以上的 `kubectl apply` 命令中添加 `--validate=false`。否则你将看到 cert-manager CRD 资源中的 `x-kubernetes-preserve-unknown-fields` 字段校验错误提示。这是 kubectl 执行资源校验方式产生的良性错误。
-   > :::
+   > **注意**：如果你运行的 Kubernetes 版本是 1.15 或更低版本，你需要在以上的 `kubectl apply` 命令中添加 `--validate=false`。否则你将看到 cert-manager CRD 资源中的 `x-kubernetes-preserve-unknown-fields` 字段校验错误提示。这是 kubectl 执行资源校验方式产生的良性错误。
 
 1. 为 cert-manager 创建命名空间：
 

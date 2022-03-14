@@ -19,15 +19,15 @@ Rancher backup operator 可将 Rancher 从单个 Docker 容器迁移到高可用
 
 当 Rancher Server 部署在 Docker 容器中时，容器内会安装一个本地 Kubernetes 集群供 Rancher 使用。为 Rancher 的很多功能都是以 deployment 的方式运行的，而在容器内运行容器是需要特权模式的，因此你需要在安装 Rancher 时添加 `--privileged` 选项。
 
-# 操作系统，Docker，硬件和网络要求
+## 操作系统，Docker，硬件和网络要求
 
 请确保你的节点满足常规的[安装要求]({{<baseurl>}}/rancher/v2.6/en/installation/requirements/)。
 
-# 1. 配置 Linux 主机
+## 1. 配置 Linux 主机
 
 按照[要求]({{<baseurl>}}/rancher/v2.6/en/installation/requirements)配置一个 Linux 主机，用于运行 Rancher Server。
 
-# 2. 选择一个 SSL 选项并安装 Rancher
+## 2. 选择一个 SSL 选项并安装 Rancher
 
 出于安全考虑，使用 Rancher 时请使用 SSL（Secure Sockets Layer）。SSL 保护所有 Rancher 网络通信（如登录和与集群交互）的安全。
 
@@ -123,9 +123,7 @@ docker run -d --restart=unless-stopped \
 
 ### 选项 D：Let's Encrypt 证书
 
-> :::note 注意
-> Let's Encrypt 对新证书请求有频率限制。因此，请限制创建或销毁容器的频率。详情请参见 [Let's Encrypt 官方文档 - 频率限制](https://letsencrypt.org/docs/rate-limits/)。
-> :::
+> **注意**：Let's Encrypt 对新证书请求有频率限制。因此，请限制创建或销毁容器的频率。详情请参见 [Let's Encrypt 官方文档 - 频率限制](https://letsencrypt.org/docs/rate-limits/)。
 
 你也可以在生产环境中使用 [Let's Encrypt](https://letsencrypt.org/) 证书。Let's Encrypt 使用 HTTP-01 质询来验证你对域名的控制权。如果要确认你对该域名有控制权，你可将用于访问 Rancher 的主机名（例如 `rancher.mydomain.com`）指向运行的机器的 IP。你可通过在 DNS 中创建 A 记录，以将主机名绑定到 IP 地址。
 

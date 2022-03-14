@@ -1,16 +1,16 @@
 ---
 title: Rancher Azure 快速入门指南
 description: 阅读此分步 Rancher Azure 指南，以快速部署带有单节点下游 Kubernetes 集群的 Rancher Server。
-weight: 100
+weight: 115
 ---
 
 你可以参考以下步骤，在 Azure 的单节点 K3s Kubernetes 集群中快速部署 Rancher Server，并附加一个单节点下游 Kubernetes 集群。
 
+> **注意**：本章节中提供的指南，旨在帮助你快速启动一个用于 Rancher 的沙盒，以评估 Rancher 是否能满足你的使用需求。快速入门指南不适用于生产环境。如果你需要获取生产环境的操作指导，请参见[安装]({{<baseurl>}}/rancher/v2.6/en/installation/)。
+
 ## 前提
 
-> :::note 注意
-> 部署到 Microsoft Azure 会产生费用。
-> :::
+> **注意**：部署到 Microsoft Azure 会产生费用。
 
 - [Microsoft Azure 账号](https://azure.microsoft.com/en-us/free/)：用于创建部署 Rancher 和 Kubernetes 的资源。
 - [Microsoft Azure 订阅](https://docs.microsoft.com/en-us/azure/cost-management-billing/manage/create-subscription#create-a-subscription-in-the-azure-portal)：如果你没有的话，请访问此链接查看如何创建 Microsoft Azure 订阅。

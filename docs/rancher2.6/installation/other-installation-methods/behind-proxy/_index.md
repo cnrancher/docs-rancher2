@@ -7,7 +7,7 @@ weight: 4
 
 另外，也可以在没有任何互联网访问的情况下，离线设置 Rancher。详情请参见 [Rancher 官方文档]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/air-gap/)。
 
-# 安装概要
+## 安装概要
 
 1. [配置基础设施]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/behind-proxy/prepare-nodes/)
 2. [配置 Kubernetes 集群]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/behind-proxy/launch-kubernetes/)

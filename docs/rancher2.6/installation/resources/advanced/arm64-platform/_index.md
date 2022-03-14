@@ -3,10 +3,9 @@ title: "在 ARM64 上运行 Rancher（实验性）"
 weight: 3
 ---
 
-> :::important 重要提示
+> **重要提示**：
 >
 > 在使用 ARM64 架构的节点上运行 Rancher 目前还处在实验阶段，Rancher 尚未正式支持该功能。因此，我们不建议你在生产环境中使用 ARM64 架构的节点。
-> :::
 
 如果你的节点使用 ARM64 架构，你可以使用以下选项：
 
@@ -20,7 +19,7 @@ weight: 3
      --privileged \
      rancher/rancher:vX.Y.Z  
    ```
-> :::note 注意
+> **注意**：
 > 要检查你的发布版本是否与 ARM64 架构兼容。你可以使用以下两种方式找到对应版本的发行说明：
 >
 > - 访问 [Rancher 发行版本](https://github.com/rancher/rancher/releases)自行查询。

@@ -98,9 +98,7 @@ weight: 252
 
 此 NGINX 配置已在 NGINX 1.14 上进行了测试。
 
-> :::note 注意
-> 此 NGINX 配置只是一个示例，可能不适合你的环境。如需查阅完整文档，请参见 [NGINX 负载均衡 - HTTP 负载均衡](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/)。
-> :::
+> **注意**：此 NGINX 配置只是一个示例，可能不适合你的环境。如需查阅完整文档，请参见 [NGINX 负载均衡 - HTTP 负载均衡](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/)。
 
 - 将 `rancher-server` 替换为运行 Rancher 容器的节点的 IP 或主机名。
 - 将两处的 `FQDN` 均替换为 Rancher 的 DNS 名称。
@@ -204,8 +202,7 @@ Rancher 2.5 开始需要[特权访问]({{<baseurl>}}/rancher/v2.6/en/installatio
 
 这个 7 层 NGINX 配置已经在 NGINX 1.13（Mainline）和 1.14（Stable）版本上进行了测试。
 
-> :::note 注意
-> 此 NGINX 配置只是一个示例，可能不适合你的环境。如果需要查阅完整文档，请参见 [NGINX 负载均衡 - TCP 和 UDP 负载均衡器](https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/)。
+> **注意**：此 NGINX 配置只是一个示例，可能不适合你的环境。如果需要查阅完整文档，请参见 [NGINX 负载均衡 - TCP 和 UDP 负载均衡器](https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/)。
 
 ```
 upstream rancher {

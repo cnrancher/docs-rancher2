@@ -15,12 +15,12 @@ weight: 2
 >
 > 在这两种单节点设置中，Rancher 可以与 Helm 一起安装在 Kubernetes 集群上，安装方法与安装到其他集群上一样。
 
-# 前提
+## 前提
 
 以下说明假设你已参见[此章节]({{<baseurl>}}/rancher/v2.6/en/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha-with-external-db/)配置好两个节点，一个负载均衡器，一个 DNS 记录和一个外部 MySQL 数据库。
 
 Rancher 需要安装在支持的 Kubernetes 版本上。如需了解你使用的 Rancher 版本支持哪些 Kubernetes 版本，请参见[支持维护条款](https://rancher.com/support-maintenance-terms/)。如需指定 K3s 版本，请在运行 K3s 安装脚本时，使用 `INSTALL_K3S_VERSION` 环境变量。
-# 安装 Kubernetes
+## 安装 Kubernetes
 
 ### 1. 安装 Kubernetes 并设置 K3s Server
 

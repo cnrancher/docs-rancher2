@@ -13,7 +13,7 @@ weight: 2
 - [已知的升级问题](#known-upgrade-issues)
 - [RKE 附加组件安装](#rke-add-on-installs)
 
-# 前提
+## 前提
 
 ### 访问 kubeconfig
 
@@ -47,7 +47,7 @@ kubeconfig 也可以通过 `--kubeconfig` 标签（详情请参见 https://helm.
 
 [从 2019 年 11 月 1 日开始，Let's Encrypt 已屏蔽早于 0.8.0 的 cert-manager 实例](https://community.letsencrypt.org/t/blocking-old-cert-manager-versions/98753)。因此，请参见[说明]({{<baseurl>}}/rancher/v2.6/en/installation/resources/upgrading-cert-manager)把 cert-manager 升级到最新版本。
 
-# 升级概要
+## 升级概要
 
 按照以下步骤升级 Rancher Server：
 
@@ -56,13 +56,13 @@ kubeconfig 也可以通过 `--kubeconfig` 标签（详情请参见 https://helm.
 - [3. 升级 Rancher](#3-upgrade-rancher)
 - [4. 验证安装](#4-verify-the-upgrade)
 
-# 1. 备份运行 Rancher Server 的 Kubernetes 集群
+## 1. 备份运行 Rancher Server 的 Kubernetes 集群
 
 使用[备份应用]({{<baseurl>}}/rancher/v2.6/en/backups/back-up-rancher)来备份 Rancher。
 
 如果升级过程中出现问题，你将使用备份作为还原点。
 
-# 2. 更新 Helm Chart 仓库
+## 2. 更新 Helm Chart 仓库
 
 1. 更新本地 Helm 仓库缓存。
 
@@ -84,9 +84,7 @@ kubeconfig 也可以通过 `--kubeconfig` 标签（详情请参见 https://helm.
    rancher-<CHART_REPO>	 https://releases.rancher.com/server-charts/<CHART_REPO>
    ```
 
-   > :::note 注意
-   > 如果你想切换到不同的 Helm Chart 仓库，请按照[切换仓库步骤]({{<baseurl>}}/rancher/v2.6/en/installation/resources/choosing-version/#switching-to-a-different-helm-chart-repository)进行操作。如果你要切换存储库，请先再次列出仓库，再继续执行步骤 3，以确保添加了正确的仓库。
-   > :::
+   > **注意**：如果你想切换到不同的 Helm Chart 仓库，请按照[切换仓库步骤]({{<baseurl>}}/rancher/v2.6/en/installation/resources/choosing-version/#switching-to-a-different-helm-chart-repository)进行操作。如果你要切换存储库，请先再次列出仓库，再继续执行步骤 3，以确保添加了正确的仓库。
 
 
 1. 从 Helm Chart 仓库获取最新的 Chart 来安装 Rancher。
@@ -102,7 +100,7 @@ kubeconfig 也可以通过 `--kubeconfig` 标签（详情请参见 https://helm.
    helm fetch rancher-<CHART_REPO>/rancher --version=v2.4.11
    ```
 
-# 3. 升级 Rancher
+## 3. 升级 Rancher
 
 本节介绍了如何使用 Helm 升级 Rancher 的一般（互联网连接）或离线安装。
 
@@ -117,9 +115,7 @@ helm get values rancher -n cattle-system
 hostname: rancher.my.org
 ```
 
-> :::note 注意
-> 这个命令会列出更多的值。此处展示的只是其中一个值的例子。
-> :::
+> **注意**：这个命令会列出更多的值。此处展示的只是其中一个值的例子。
 
 如果你也要将 cert-manager 从早于 0.11.0 的版本升级到最新版本，请选择[选项 B：重装 Rancher 和 cert-manager](#option-b-reinstalling-rancher-and-cert-manager)。
 
@@ -137,9 +133,7 @@ helm upgrade rancher rancher-<CHART_REPO>/rancher \
   --set hostname=rancher.my.org
 ```
 
-> :::note 注意
-> 以上是一个例子，可能有更多上一步的值需要追加。
-> :::
+> **注意**：以上是一个例子，可能有更多上一步的值需要追加。
 
 另外，你也可以将当前的值导出到一个文件中，并在升级时引用该文件。例如，如果你只需要改变 Rancher 的版本：
 
@@ -172,7 +166,7 @@ helm upgrade rancher rancher-<CHART_REPO>/rancher \
    --set hostname=rancher.my.org
    ```
 
-# 4. 验证升级
+## 4. 验证升级
 
 登录 Rancher 以确认升级成功。
 
@@ -180,6 +174,6 @@ helm upgrade rancher rancher-<CHART_REPO>/rancher \
 >
 > 请参见[恢复集群网络]({{<baseurl>}}/rancher/v2.0-v2.4/en/installation/install-rancher-on-k8s/upgrades/namespace-migration)。
 
-# 已知升级问题
+## 已知升级问题
 
 如需升级 Kubernetes 集群中的如需查看每个 Rancher 版本的已知问题，请参见 [GitHub](https://github.com/rancher/rancher/releases) 中的发行说明，或查看 [Rancher 论坛](https://forums.rancher.com/c/announcements/12)。

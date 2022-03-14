@@ -37,9 +37,7 @@ Rancher 提供几个可选的 Helm Chart 仓库供你选择。最新版或稳定
 
 了解何时选择这些仓库，请参见[切换到不同 Helm Chart 仓库](#切换到不同-helm-chart-仓库)。
 
-> :::note 注意
->  `rancher-stable` 仓库中的所有 Chart 都与 `stable` 标记的 Rancher 版本对应。
-> :::
+> **注意**：`rancher-stable` 仓库中的所有 Chart 都与 `stable` 标记的 Rancher 版本对应。
 
 ### Helm Chart 版本
 
@@ -56,10 +54,7 @@ Rancher Helm Chart 版本与 Rancher 版本（即 `appVersion`）对应。添加
 
 安装 Rancher 后，如果想修改安装 Rancher 的 Helm Chart 仓库，按照以下步骤操作。
 
-> :::note 注意
-> 由于 rancher-alpha 仓库只包含 alpha 版本 Chart，因此不支持从 rancher alpha 仓库切换到 rancher-stable 或 rancher-latest 仓库以进行升级。
-> :::
->
+> **注意**：由于 rancher-alpha 仓库只包含 alpha 版本 Chart，因此不支持从 rancher alpha 仓库切换到 rancher-stable 或 rancher-latest 仓库以进行升级。
 
 
 
@@ -100,8 +95,7 @@ Rancher Server 以 Docker 镜像的形式分发并附有标签。你可以在输
 | `rancher/rancher:stable` | 最新的稳定版本。推荐将此标签用于生产环境。 |
 | `rancher/rancher:<v2.X.X>` | 你可以使用以前版本中的标签来指定要安装的 Rancher 版本。访问 DockerHub 查看可用的版本。 |
 
-> :::note 注意
->
+> **注意**：
 >
 > - `master` 和带有 `-rc` 或其他后缀的标签是供 Rancher 测试团队验证用的。这些标签不受官方支持，因此请不要使用这些标签。
 > - 安装 alpha 版本进行预览：使用我们的[公告页面](https://forums.rancher.com/c/announcements)中列出的 alpha 标签（例如，`v2.2.0-alpha1`）进行安装。不支持升级或升级到 Alpha 版本。

@@ -37,9 +37,7 @@ docker pull rancher/rancher:<PRIOR_RANCHER_VERSION>
 
 如果你在升级 Rancher 时遇到问题，你可拉取先前使用的镜像并恢复在升级前所做的备份，从而将 Rancher 回滚到之前的正常工作状态。
 
-> :::warning 警告
-> 回滚到先前的 Rancher 版本会破坏你在升级后对 Rancher 做出的所有更改。丢失的数据可能无法恢复。
-> :::
+> **警告**：回滚到先前的 Rancher 版本会破坏你在升级后对 Rancher 做出的所有更改。丢失的数据可能无法恢复。
 
 1. 使用远程终端连接，登录到运行 Rancher Server 的节点。
 
@@ -80,9 +78,7 @@ docker pull rancher/rancher:<PRIOR_RANCHER_VERSION>
    ```
    特权访问是[必须]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/single-node-docker/#privileged-access-for-rancher)的。
 
-   > :::note 注意
-   > 启动回滚后，即使回滚耗时比预期长，也 _不要_ 停止回滚。如果你停止回滚，可能会导致之后的升级中出现数据库错误。
-   > :::
+   > **注意**：启动回滚后，即使回滚耗时比预期长，也 _不要_ 停止回滚。如果你停止回滚，可能会导致之后的升级中出现数据库错误。
 
 1. 等待片刻，然后在浏览器中打开 Rancher。确认回滚成功并且你的数据已恢复。
 

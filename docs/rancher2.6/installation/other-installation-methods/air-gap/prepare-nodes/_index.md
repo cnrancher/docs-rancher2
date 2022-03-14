@@ -73,9 +73,8 @@ K3s 与其他 Kubernetes 发行版不同，在于其支持使用 etcd 以外的�
 
 如需获取如何配置 Amazon ELB 网络负载均衡器的指南，请参见[本页]({{<baseurl>}}/rancher/v2.6/en/installation/resources/k8s-tutorials/infrastructure-tutorials/nlb/)。
 
-> :::important 重要提示
+> **重要提示**：
 > 安装后，请勿将此负载均衡（例如 `local` 集群 Ingress）用于 Rancher 以外的应用。如果此 Ingress 与其他应用共享，在其他应用的 Ingress 配置重新加载后，可能导致 Rancher 出现 websocket 错误。我们建议把 `local` 集群专用给 Rancher，不要在集群内部署其他应用。
-> :::
 
 ### 4. 配置 DNS 记录
 
@@ -137,9 +136,8 @@ Rancher 支持使用私有镜像仓库进行离线安装。你必须有自己的
 
 如需获取如何配置 Amazon ELB 网络负载均衡器的指南，请参见[本页]({{<baseurl>}}/rancher/v2.6/en/installation/resources/k8s-tutorials/infrastructure-tutorials/nlb/)。
 
-> :::important 重要提示
+> **重要提示**：
 > 安装后，请勿将此负载均衡（例如 `local` 集群 Ingress）用于 Rancher 以外的应用。如果此 Ingress 与其他应用共享，在其他应用的 Ingress 配置重新加载后，可能导致 Rancher 出现 websocket 错误。我们建议把 `local` 集群专用给 Rancher，不要在集群内部署其他应用。
-> :::
 
 ### 3. 配置 DNS 记录
 
@@ -155,7 +153,7 @@ Rancher 支持使用私有镜像仓库进行离线安装。你必须有自己的
 
 Rancher 支持使用安全的 Docker 私有镜像仓库进行离线安装。你必须有自己的私有镜像仓库或使用其他方式将 Docker 镜像分发到机器。
 
-在后续设置 K3s Kubernetes 集群时，你需要创建一个[私有镜像仓库配置文件]({{<baseurl>}}/k3s/latest/en/installation/private-registry/)，其中包含此镜像仓库的信息。
+在后续设置 RKE Kubernetes 集群时，你需要创建一个[私有镜像仓库配置文件]({{<baseurl>}}/rke/latest/en/config-options/private-registries/)，其中包含此镜像仓库的信息。
 
 如需获得创建私有镜像仓库的帮助，请参见 [Docker 官方文档](https://docs.docker.com/registry/deploying/#run-an-externally-accessible-registry)。
 
@@ -176,8 +174,6 @@ Rancher 支持使用安全的 Docker 私有镜像仓库进行离线安装。你�
 ### 2. 配置私有 Docker 镜像仓库
 
 Rancher 支持使用 Docker 私有镜像仓库在堡垒服务器中进行离线安装。你必须有自己的私有镜像仓库或使用其他方式将 Docker 镜像分发到机器。
-
-在后续设置 K3s Kubernetes 集群时，你需要创建一个[私有镜像仓库配置文件]({{<baseurl>}}/k3s/latest/en/installation/private-registry/)，其中包含此镜像仓库的信息。
 
 如需获得创建私有镜像仓库的帮助，请参见 [Docker 官方文档](https://docs.docker.com/registry/)。
 

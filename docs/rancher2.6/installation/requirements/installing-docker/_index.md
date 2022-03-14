@@ -3,7 +3,7 @@ title: 安装 Docker
 weight: 1
 ---
 
-对于 Helm CLI 安装，需要在所有运行 Rancher Server 的节点上安装 Docker。
+在使用 Helm 或 Docker 在节点上安装 Rancher Server 前，你需要先安装 Docker。
 
 Docker 有几个安装方法。一种方法是参见 [Docker 官方文档](https://docs.docker.com/install/)以了解如何在 Linux 上安装 Docker。不同 Linux 发行版的安装步骤可能有所不同。
 

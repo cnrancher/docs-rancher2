@@ -7,7 +7,7 @@ weight: 3
 - [回滚到 Rancher 2.2-2.4+](#rolling-back-to-rancher-v2-2-v2-4)
 - [回滚到 Rancher 2.0-2.1](#rolling-back-to-rancher-v2-0-v2-1)
 
-# 回滚到 Rancher 2.5.0+
+## 回滚到 Rancher 2.5.0+
 
 要回滚到 Rancher 2.5.0+，使用 **Rancher 备份**应用并通过备份来恢复 Rancher。
 
@@ -94,7 +94,7 @@ helm history rancher -n cattle-system
 helm rollback rancher 3 -n cattle-system
 ```
 
-# 回滚到 Rancher 2.2-2.4
+## 回滚到 Rancher 2.2-2.4
 
 要回滚到 2.5 之前的 Rancher 版本，参考此处的步骤[恢复备份 — Kubernetes 安装]({{<baseurl>}}/rancher/v2.0-v2.4/en/backups/restore/rke-restore/)。如果恢复 Rancher Server 的集群的某个快照，Rancher 的版本以及状态均会恢复回到快照时的版本和状态。
 
@@ -102,6 +102,6 @@ helm rollback rancher 3 -n cattle-system
 
 > 托管集群对其状态具有权威性。因此，恢复 Rancher Server 不会恢复快照后对托管集群进行的工作负载部署或更改。
 
-# 回滚到 Rancher 2.0-2.1
+## 回滚到 Rancher 2.0-2.1
 
 我们不再支持回滚到 Rancher 2.0-2.1。回滚到这些版本的说明保留在[此处]({{<baseurl>}}/rancher/v2.0-v2.4/en/backups/restore/rke-restore/v2.0-v2.1)，仅用于无法升级到 v2.2 的情况。

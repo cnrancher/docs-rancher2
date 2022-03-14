@@ -1,15 +1,16 @@
 ---
 title: Rancher DigitalOcean 快速入门指南
 description: 阅读此分步 Rancher DigitalOcean 指南，以快速部署带有单节点下游 Kubernetes 集群的 Rancher Server。
-weight: 100
+weight: 120
 ---
 你可以参考以下步骤，在 DigitalOcean 的单节点 K3s Kubernetes 集群中快速部署 Rancher Server，并附加一个单节点下游 Kubernetes 集群。
 
+> **注意**：本章节中提供的指南，旨在帮助你快速启动一个用于 Rancher 的沙盒，以评估 Rancher 是否能满足你的使用需求。快速入门指南不适用于生产环境。如果你需要获取生产环境的操作指导，请参见[安装]({{<baseurl>}}/rancher/v2.6/en/installation/)。
+
 ## 前提
 
-> :::note 注意
+> **注意**
 > 部署到 DigitalOcean 会产生费用。
-> :::
 
 - [DigitalOcean 账号](https://www.digitalocean.com)：用于运行服务器和集群。
 - [DigitalOcean 访问密钥](https://www.digitalocean.com/community/tutorials/how-to-create-a-digitalocean-space-and-api-key)：如果你没有的话，请访问此链接创建一个。

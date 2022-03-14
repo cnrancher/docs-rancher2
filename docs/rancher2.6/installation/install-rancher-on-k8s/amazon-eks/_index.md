@@ -15,7 +15,7 @@ weight: 4
 - [使用 AWS 最佳实践的快速入门](#automated-quickstart-using-aws-best-practices)
 - [为 Rancher Server 创建 EKS 集群](#creating-an-eks-cluster-for-the-rancher-server)
 
-# 使用 AWS 最佳实践的快速入门
+## 使用 AWS 最佳实践的快速入门
 
 Rancher 和 Amazon Web Services 合作编写了一份快速入门指南，用于按照 AWS 的最佳实践，在 EKS 集群上部署 Rancher。详情请参见[部署指南](https://aws-quickstart.github.io/quickstart-eks-rancher/)。
 
@@ -41,7 +41,7 @@ Rancher 和 Amazon Web Services 合作编写了一份快速入门指南，用于
 
 \* 将快速启动部署到现有 Amazon EKS 集群中的 CloudForm 模板会跳过标有星号（\*）的组件，并提示你查看现有 VPC 配置。
 
-# 为 Rancher Server 创建 EKS 集群
+## 为 Rancher Server 创建 EKS 集群
 
 在本节中，你将使用命令行工具安装一个带有 Ingress 的 EKS 集群。如果你想在 EKS 上使用 Rancher 时使用较少的资源，请使用此方法。
 

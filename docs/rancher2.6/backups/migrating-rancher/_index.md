@@ -9,7 +9,7 @@ weight: 3
 
 以下说明假设你已经完成[备份创建](../back-up-rancher)，并且已经安装了用于部署 Rancher 的新 Kubernetes 集群。
 
-你需要使用与第一个集群中设置的 Server URL 相同的主机名。
+> **警告**：你需要使用与第一个集群中设置的 Server URL 相同的主机名。否则，下游集群会在 UI 的管理页面显示为不可用，并且你不能点击集群内或集群的 **Explore** 按钮。
 
 Rancher 必须是 2.5.0 或更高版本。
 
@@ -41,7 +41,9 @@ helm install rancher-backup rancher-charts/rancher-backup -n cattle-resources-sy
 >
 > - 请注意，在为 v1.22 版本制作或恢复备份时，Rancher 版本和本地集群的 Kubernetes 版本应该是一样的。由于集群中支持的 apiVersion 和备份文件中的 apiVersion 可能不同，因此在还原备份时请考虑 Kubernetes 的版本。
 
-如果你使用 S3 作为备份源，并且需要使用你的 S3 凭证进行还原，请使用 S3 凭证在集群中创建一个密文（Secret）。密文数据必须有两个 key，分别是包含 S3 凭证的 `accessKey` 和 `secretKey`，如下：
+如果你使用 S3 作为备份源，并且需要使用你的 S3 凭证进行还原，请使用 S3 凭证在集群中创建一个密文（Secret）。密文数据必须有两个 key，分别是包含 S3 凭证的 `accessKey` 和 `secretKey`。
+
+**警告**：在直接创建对象时，下方示例中的 `accessKey` 和 `secretKey` 必须先进行 base64 编码。否则，在你尝试备份或恢复时，粘贴的值会导致错误。
 
 ```yaml
 apiVersion: v1

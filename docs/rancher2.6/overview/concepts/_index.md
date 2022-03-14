@@ -16,25 +16,23 @@ weight: 4
    - [Worker 节点](#worker-nodes)
 - [关于 Helm](#about-helm)
 
-# 关于 Docker
+## 关于 Docker
 
 Docker 是容器打包和运行时系统的标准。开发者在 Dockerfiles 中构建容器映像，并在 Docker 镜像仓库中分发容器镜像。[Docker Hub](https://hub.docker.com) 是市面上主流的公有镜像仓库。许多企业还创建私有 Docker 镜像仓库。Docker 主要用于管理单个节点上的容器。
 
-> :::note 注意
-> 由于 Kubernetes 已经成为了容器管理的主流工具，所以从 Rancher 2.x 版本开始，我们不再支持 Docker Swarm。如果你有使用 Docker 管理容器的需求，可以安装 Rancher 1.6 进行操作。
-> :::
+> **注意**：由于 Kubernetes 已经成为了容器管理的主流工具，所以从 Rancher 2.x 版本开始，我们不再支持 Docker Swarm。如果你有使用 Docker 管理容器的需求，可以安装 Rancher 1.6 进行操作。
 
-# 关于 Kubernetes
+## 关于 Kubernetes
 
 Kubernetes 是容器和集群管理的标准。YAML 文件规定了组成一个应用所需的容器和其他资源。Kubernetes 提供了调度、伸缩、服务发现、健康检查、密文管理和配置管理等功能。
 
-# Kubernetes 集群是什么
+## Kubernetes 集群是什么
 
 集群是可作为一个系统协同工作的一组计算机。
 
 _Kubernetes 集群_ 是使用 [Kubernetes 容器编排系统](https://kubernetes.io/)来部署、运维和伸缩 Docker 容器的集群，让你的组织实现应用自动化运维。
 
-# Kubernetes 集群中节点的角色
+## Kubernetes 集群中节点的角色
 
 Kubernetes 集群中的每个计算资源称为一个 _节点_ 。节点可以是裸金属服务器或虚拟机。Kubernetes 将节点分为 _etcd_ 节点、_controlplane_ 节点和 _worker_ 节点。
 
@@ -65,7 +63,7 @@ Controlplane 节点上运行 Kubernetes API server、scheduler 和 Controller Ma
 
 Worker 节点也运行存储和网络驱动，有必要时也会运行 Ingress Controller。你可以根据需要，创建尽可能多的 worker 节点来运行你的[工作负载]({{<baseurl>}}/rancher/v2.6/en/k8s-in-rancher/workloads/)。
 
-# 关于 Helm
+## 关于 Helm
 
 在 Rancher 高可用安装的场景下，你可以使用 Helm 工具，把 Rancher 安装到 Kubernetes 集群上。
 

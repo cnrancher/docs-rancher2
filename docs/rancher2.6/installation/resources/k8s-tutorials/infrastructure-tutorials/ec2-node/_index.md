@@ -36,9 +36,7 @@ weight: 3
 
 **结果**：你已创建满足操作系统、硬件和网络要求的 Rancher 节点。
 
-:::note 注意
-如果节点用于 RKE Kubernetes 集群，请在下一步操作中为每个节点安装 Docker 。如果节点用于 K3s Kubernetes 集群，你可以开始在节点上安装 K3s 了。
-:::
+**注意**：如果节点用于 RKE Kubernetes 集群，请在下一步操作中为每个节点安装 Docker 。如果节点用于 K3s Kubernetes 集群，你可以开始在节点上安装 K3s 了。
 
 ### 3. 为 RKE Kubernetes 集群节点安装 Docker 并创建用户
 
