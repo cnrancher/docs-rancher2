@@ -109,7 +109,7 @@ Cluster Agent，也叫做 `cattle-cluster-agent`，是运行在下游集群中�
 
 > 授权集群端点仅适用于 Rancher 启动的 Kubernetes 集群，即只适用于 Rancher [使用 RKE]({{<baseurl>}}/rancher/v2.6/en/cluster-provisioning/rke-clusters) 来配置的集群。ACE 不可用于于托管在 Kubernetes 提供商（如 Amazon EKS）中的集群。
 
-> 从 Rancher 2.6.3 开始，[ACE 可用于注册的 RKE2 和 K3s 集群]({{<baseurl>}}/v2.6/en/cluster-provisioning/registered-clusters/#authorized-cluster-endpoint-support-for-rke2-and-k3s-clusters)。
+> 从 Rancher 2.6.3 开始，[ACE 可用于注册的 RKE2 和 K3s 集群]({{<baseurl>}}/rancher/v2.6/en/cluster-provisioning/registered-clusters/#authorized-cluster-endpoint-support-for-rke2-and-k3s-clusters)。
 
 授权集群端点的主要用途：
 
@@ -134,9 +134,7 @@ Cluster Agent，也叫做 `cattle-cluster-agent`，是运行在下游集群中�
 - `kube_config_cluster.yml`：集群的 Kubeconfig 文件，包含完全访问集群的凭证。如果 Rancher 出现问题时，你可以使用此文件认证由 Rancher 启动的 Kubernetes 集群。
 - `rancher-cluster.rkestate`：Kubernetes 集群状态文件，文件包含用于完全访问集群的凭证。注意：仅在使用 RKE v0.2.0 或更高版本时，才会创建此该文件。
 
-> :::note 注意
-> 后两个文件名中的 `rancher-cluster` 部分取决于你命名 RKE 集群配置文件的方式。
-> :::
+> **注意**：后两个文件名中的 `rancher-cluster` 部分取决于你命名 RKE 集群配置文件的方式。
 
 有关在没有 Rancher 认证代理和其他配置选项的情况下连接到集群的更多信息，请参见 [kubeconfig 文件]({{<baseurl>}}/rancher/v2.6/en/cluster-admin/cluster-access/kubectl/)。
 

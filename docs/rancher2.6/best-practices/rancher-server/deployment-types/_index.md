@@ -15,8 +15,7 @@ weight: 100
 不要在安装了 Rancher 的 Kubernetes 集群上运行其他工作负载或微服务。
 
 ### 确保 Kubernetes 节点配置正确
-
-在部署节点时，请遵循 K8s 和 etcd 的最佳实践，其中包括禁用 swap，检查集群中的所有机器之间是否有良好的网络连接，为每个节点使用唯一的主机名、MAC 地址和 `product_uuids`，检查所需端口是否已经打开，并使用配置 SSD 的 etcd 进行部署。详情请参见 [kubernetes 官方文档](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#before-you-begin)和 [etcd 性能操作指南](https://github.com/etcd-io/etcd/blob/master/Documentation/op-guide/performance.md)。
+在部署节点时，请遵循 K8s 和 etcd 的最佳实践，其中包括禁用 swap，检查集群中的所有机器之间是否有良好的网络连接，为每个节点使用唯一的主机名、MAC 地址和 `product_uuids`，检查所需端口是否已经打开，并使用配置 SSD 的 etcd 进行部署。详情请参见 [kubernetes 官方文档](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#before-you-begin)和 [etcd 性能操作指南](https://etcd.io/docs/v3.4/op-guide/performance/)。
 
 ### 使用 RKE 时：备份状态文件（Statefile）
 RKE 将集群状态记录在一个名为 `cluster.rkestate` 的文件中，该文件对集群的恢复和/或通过 RKE 维护集群非常重要。由于这个文件包含证书材料，我们强烈建议在备份前对该文件进行加密。请在每次运行 `rke up` 后备份状态文件。

@@ -7,9 +7,7 @@ weight: 1
 
 我们根据 Rancher 的安装位置（RKE2 Kubernetes 集群、RKE Kubernetes 集群或单个 Docker 容器）为专用于 Rancher 的 Kubernetes 集群推荐不同基础设施。
 
-> :::note 注意
-> 这些节点必须位于同一个区域。但是你可以把这些服务器放在不同的可用区（数据中心）。
-> :::
+> **注意**：这些节点必须位于同一个区域。但是你可以把这些服务器放在不同的可用区（数据中心）。
 
 如需在高可用 RKE2 集群中安装 Rancher Management Server，我们建议配置以下基础设施：
 
@@ -40,9 +38,8 @@ weight: 1
 
 如需获取如何配置 Amazon ELB 网络负载均衡器的指南，请参见[本页]({{<baseurl>}}/rancher/v2.6/en/installation/resources/k8s-tutorials/infrastructure-tutorials/nlb/)。
 
-> :::important 重要提示
+> **重要提示**：
 > 安装后，请勿将此负载均衡（例如 `local` 集群 Ingress）用于 Rancher 以外的应用。如果此 Ingress 与其他应用共享，在其他应用的 Ingress 配置重新加载后，可能导致 Rancher 出现 websocket 错误。我们建议把 `local` 集群专用给 Rancher，不要在集群内部署其他应用。
-> :::
 
 ### 4. 配置 DNS 记录
 

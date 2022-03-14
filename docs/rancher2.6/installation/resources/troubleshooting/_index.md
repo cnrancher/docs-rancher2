@@ -71,9 +71,7 @@ kubectl -n cattle-system logs -f rancher-784d94f59b-vgqzh
 
 使用浏览器检查证书的详细信息。如果显示 CN 是 "Kubernetes Ingress Controller Fake Certificate"，则说明读取或颁发 SSL 证书时出现了问题。
 
-> :::note 注意
-> 如果你使用的是 Let's Encrypt 证书，证书颁发的过程可能需要几分钟。
-> :::
+> **注意**：如果你使用的是 Let's Encrypt 证书，证书颁发的过程可能需要几分钟。
 
 ### 排查 Cert-Manager 颁发的证书（Rancher 或 Let's Encrypt 生成的）问题
 

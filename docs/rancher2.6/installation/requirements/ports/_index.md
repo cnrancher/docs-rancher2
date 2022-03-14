@@ -22,7 +22,7 @@ weight: 300
    - [Rancher AWS EC2 安全组](#rancher-aws-ec2-security-group)
    - [打开 SUSE Linux 端口](#opening-suse-linux-ports)
 
-# Rancher 节点
+## Rancher 节点
 
 下表列出了运行 Rancher Server 的节点之间需要开放的端口。
 
@@ -30,8 +30,7 @@ weight: 300
 
 Rancher 可以安装在任何 Kubernetes 集群上。如果你的 Rancher 安装在 K3s、RKE 或 RKE2 Kubernetes 集群上，请参考下面的标签页。对于其他 Kubernetes 发行版，请参见该发行版的文档，了解集群节点的端口要求。
 
-> :::note 注意
->
+> **注意**：
 >
 > - Rancher 节点可能要求额外出站访问已配置的外部验证提供程序（如 LDAP）。
 > - Kubernetes 建议节点端口服务使用 TCP 30000-32767。
@@ -48,9 +47,7 @@ K3s server 需要开放端口 6443 才能供节点访问。
 
 如果要使用 Metrics Server，则需要在每个节点上打开端口 10250。
 
-> :::important 重要提示
-> 节点上的 VXLAN 端口会开放集群网络，让任何人均能访问集群。因此，不要将 VXLAN 端口暴露给外界。请使用禁用 8472 端口的防火墙/安全组来运行节点。
-> :::
+> **重要提示**：节点上的 VXLAN 端口会开放集群网络，让任何人均能访问集群。因此，不要将 VXLAN 端口暴露给外界。请使用禁用 8472 端口的防火墙/安全组来运行节点。
 
 下表描述了入站和出站流量的端口要求：
 
@@ -132,9 +129,7 @@ RKE2 server 需要开放端口 6443 和 9345 才能供集群中的其他节点�
 
 如果要使用 Metrics Server，则需要在每个节点上打开端口 10250。
 
-:::important 重要提示
-节点上的 VXLAN 端口会开放集群网络，让任何人均能访问集群。因此，不要将 VXLAN 端口暴露给外界。请使用禁用 8472 端口的防火墙/安全组来运行节点。
-:::
+**重要提示**：节点上的 VXLAN 端口会开放集群网络，让任何人均能访问集群。因此，不要将 VXLAN 端口暴露给外界。请使用禁用 8472 端口的防火墙/安全组来运行节点。
 
 <figcaption>RKE2 Server 节点的入站规则</figcaption>
 
@@ -177,8 +172,7 @@ RKE2 server 需要开放端口 6443 和 9345 才能供集群中的其他节点�
 | TCP | 6443 | 托管/导入的 Kubernetes API | Kubernetes API Server |
 
 
-
-# 下游 Kubernetes 集群节点
+## 下游 Kubernetes 集群节点
 
 下游 Kubernetes 集群用于运行你的应用和服务。本节介绍了哪些端口需要在下游集群的节点上打开，以便 Rancher 能够与它们进行通信。
 
@@ -200,9 +194,8 @@ RKE2 server 需要开放端口 6443 和 9345 才能供集群中的其他节点�
 
 下表描述了节点在[云提供商]({{<baseurl>}}/rancher/v2.6/en/cluster-provisioning/rke-clusters/node-pools/)中创建的情况下，[Rancher 启动 Kubernetes]({{<baseurl>}}/rancher/v2.6/en/cluster-provisioning/rke-clusters/) 的端口要求。
 
-> :::note 注意
+> **注意**
 > 在 AWS EC2 或 DigitalOcean 等云提供商中创建集群期间，Rancher 会自动打开所需的端口。
-> :::
 
 {{< ports-iaas-nodes >}}
 
@@ -241,7 +234,7 @@ RKE2 server 需要开放端口 6443 和 9345 才能供集群中的其他节点�
 
 
 
-# 其他端口注意事项
+## 其他端口注意事项
 
 ### 常用端口
 

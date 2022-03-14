@@ -1,6 +1,6 @@
 ---
 title: Rancher Equinix Metal 快速入门
-weight: 300
+weight: 250
 ---
 
 ## 本章节引导你：
@@ -9,6 +9,8 @@ weight: 300
 - 安装 Rancher 2.x
 - 创建你的第一个集群
 - 部署一个 Nginx 应用
+
+> **注意**：本章节中提供的指南，旨在帮助你快速启动一个用于 Rancher 的沙盒，以评估 Rancher 是否能满足你的使用需求。快速入门指南不适用于生产环境。如果你需要获取生产环境的操作指导，请参见[安装]({{<baseurl>}}/rancher/v2.6/en/installation/)。
 
 ## 快速入门概述
 
@@ -42,7 +44,7 @@ weight: 300
 
 **注意**：
 > 如果使用 CLI 或 API 配置新的 Equinix Metal Server，你需要提供项目 ID、计划、metro 和操作系统。
-> 当使用云主机的虚拟机时，你需要允许80和443端口的入站TCP通信。有关端口配置的信息，请参见你的云主机的文档。
+> 当使用云主机的虚拟机时，你需要允许 80 和 443 端口的入站 TCP 通信。有关端口配置的信息，请参见你的云主机的文档。
 > 如需了解所有端口要求，请参见 [Docker 安装]({{<baseurl>}}/rancher/v2.6/en/cluster-provisioning/node-requirements/)。
 > 根据我们的[要求]({{<baseurl>}}/rancher/v2.6/en/installation/requirements/)配置主机。
 
@@ -110,8 +112,8 @@ weight: 300
 
 **Active** 状态的集群会分配到两个项目：
 
-- `默认`：包含`默认`命名空间
-- `系统`：包含 `cattle-system`，`ingress-nginx`，`kube-public` 和 `kube-system` 命名空间。
+- `Default`：包含 `default` 命名空间
+- `System`：包含 `cattle-system`，`ingress-nginx`，`kube-public` 和 `kube-system` 命名空间。
 
 #### 已完成！
 

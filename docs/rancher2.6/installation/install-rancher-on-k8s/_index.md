@@ -9,7 +9,7 @@ weight: 2
 - [前提](#prerequisites)
 - [安装 Rancher Helm Chart](#install-the-rancher-helm-chart)
 
-# 前提
+## 前提
 
 - [Kubernetes 集群](#kubernetes-cluster)
 - [CLI 工具](#cli-tools)
@@ -43,7 +43,7 @@ Rancher 可以安装在任何 Kubernetes 集群上。这个集群可以使用上
 
 如果你需要获取在 EKS 上部署 Ingress 示例，请参见[此处]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/amazon-eks/#5-install-an-ingress)。
 
-# 安装 Rancher Helm Chart
+## 安装 Rancher Helm Chart
 
 Rancher 是使用 Kubernetes 的 [Helm](https://helm.sh/) 包管理器安装的。Helm Chart 为 Kubernetes YAML 清单文件提供了模板语法。通过 Helm，用户可以创建可配置的 deployment，而不仅仅只能使用静态文件。
 
@@ -53,9 +53,7 @@ Rancher 是使用 Kubernetes 的 [Helm](https://helm.sh/) 包管理器安装的�
 
 如果要指定用于安装 Rancher 的 Helm 版本，请参见[Helm 版本要求]({{<baseurl>}}/rancher/v2.6/en/installation/resources/helm-version)。
 
-> :::note 注意
-> 本安装指南假定你使用的是 Helm 3。
-> :::
+> **注意**：本安装指南假定你使用的是 Helm 3。
 
 要设置 Rancher：
 
@@ -89,9 +87,7 @@ kubectl create namespace cattle-system
 
 Rancher Management Server 默认需要 SSL/TLS 配置来保证访问的安全性。
 
-> :::note 注意
-> 如果你想在外部终止 SSL/TLS，请参见[外部负载均衡器的 TLS 终止]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#external-tls-termination)。
-> :::
+> **注意**：如果你想在外部终止 SSL/TLS，请参见[外部负载均衡器的 TLS 终止]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#external-tls-termination)。
 
 你可以从以下三种证书来源中选择一种，用于在 Rancher Server 中终止 TLS：
 
@@ -114,9 +110,7 @@ Rancher Management Server 默认需要 SSL/TLS 配置来保证访问的安全性
 
 
 
-> :::important 重要提示
-> 由于 cert-manager 的最新改动，你需要升级 cert-manager 版本。如果你需要升级 Rancher 并使用低于 0.11.0 的 cert-manager 版本，请参见[升级文档]({{<baseurl>}}/rancher/v2.6/en/installation/resources/upgrading-cert-manager/)。
-> :::
+> **重要提示**：由于 cert-manager 的最新改动，你需要升级 cert-manager 版本。如果你需要升级 Rancher 并使用低于 0.11.0 的 cert-manager 版本，请参见[升级文档]({{<baseurl>}}/rancher/v2.6/en/installation/resources/upgrading-cert-manager/)。
 
 这些说明来自 [cert-manager 官方文档](https://cert-manager.io/docs/installation/kubernetes/#installing-with-helm)。
 
@@ -214,7 +208,7 @@ helm install rancher rancher-<CHART_REPO>/rancher \
   --set hostname=rancher.my.org \
   --set bootstrapPassword=admin \
   --set ingress.tls.source=letsEncrypt \
-  --set letsEncrypt.email=me@example.org
+  --set letsEncrypt.email=me@example.org \
   --set letsEncrypt.ingress.class=nginx
 ```
 
@@ -261,7 +255,7 @@ helm install rancher rancher-<CHART_REPO>/rancher \
   --set privateCA=true
 ```
 
-现在 Rancher 已部署，请参见[添加 TLS 密文]({{<baseurl>}}/rancher/v2.6/en/installation/resources/tls-secrets/)发布证书文件，以便 Rancher 和 Ingress Controller 可以使用它们。
+**添加 TLS 密文（千万不要遗漏此步骤）**：现在 Rancher 已经完成部署，你还需要参考[添加 TLS 密文]({{<baseurl>}}/rancher/v2.6/en/installation/resources/tls-secrets/)发布证书文件，以便 Rancher 和 Ingress Controller 可以使用它们。
 </TabItem>
 </Tabs>
 

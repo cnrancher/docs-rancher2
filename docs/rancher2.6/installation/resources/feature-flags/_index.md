@@ -21,9 +21,7 @@ Rancher 包含一些默认关闭的实验功能。在某些情况下，例如当
 
 如果你安装 Rancher 后使用 Rancher API 将功能开关设置为 true，然后在使用命令升级 Rancher 时将功能开关设置为 false，在这种情况下，虽然默认值会是 false，但是该功能依然会被启用，因为它是通过 API 设置的。如果你随后使用 Rancher API 删除设置值（true）并将它设置为 NULL，则默认值（false）将生效。
 
-> :::note 注意
-> 某些功能需要重启 Rancher Server 容器才能生效。我们在文档的表格和 UI 中对这些功能进行了标记。
-> :::
+> **注意**：某些功能需要重启 Rancher Server 容器才能生效。我们在文档的表格和 UI 中对这些功能进行了标记。
 
 以下是 Rancher 中可用的功能开关列表：
 
@@ -55,17 +53,15 @@ Rancher 包含一些默认关闭的实验功能。在某些情况下，例如当
 
 \* 一般情况下可用。此功能包含在 Rancher 中，不是实验功能的。
 
-# 启动 Rancher 时启用功能
+## 启动 Rancher 时启用功能
 
 安装 Rancher 时，使用功能开关启用你所需的功能。通过单节点容器安装 Rancher，和在 Kubernetes 集群上安装 Rancher 对应的命令有所不同。
 
 ### Kubernetes 安装的情况下启用功能
 
-> :::note 注意
-> 通过 Rancher API 设置的值会覆盖命令行传入的值。
-> :::
+> **注意**：通过 Rancher API 设置的值会覆盖命令行传入的值。
 
-使用 Helm Chart 安装 Rancher 时，请使用 `--features` 选项。下面的示例通过传递功能开关名称（用逗号分隔）来启用两个功能：
+使用 Helm Chart 安装 Rancher 时，使用 `--set` 选项。下面的示例通过传递功能开关名称（用逗号分隔）来启用两个功能：
 
 ```
 helm install rancher rancher-latest/rancher \
@@ -75,9 +71,7 @@ helm install rancher rancher-latest/rancher \
   --set 'extraEnv[0].value=<FEATURE-FLAG-NAME-1>=true,<FEATURE-FLAG-NAME-2>=true'
 ```
 
-:::note 注意
-如果要安装 Alpha 版本，Helm 要求在命令中添加 `--devel` 选项。
-:::
+注意：如果要安装 Alpha 版本，Helm 要求在命令中添加 `--devel` 选项。
 
 ### 离线安装的情况下渲染 Helm Chart
 
@@ -108,13 +102,13 @@ helm template rancher ./rancher-<VERSION>.tgz --output-dir . \
 docker run -d -p 80:80 -p 443:443 \
   --restart=unless-stopped \
   rancher/rancher:rancher-latest \
-  --features=<FEATURE-FLAG-NAME-1>=true,<FEATURE-NAME-2>=true
+  --features=<FEATURE-FLAG-NAME-1>=true,<FEATURE-FLAG-NAME-2>=true
 ```
 
 
-# 使用 Rancher UI 启用功能
+## 使用 Rancher UI 启用功能
 
-1. 在左上角，单击**☰ > 全局设置**。
+1. 在左上角，单击 **☰ > 全局设置**。
 1. 单击**功能开关**。
 1. 如需启用某个功能，找到该已禁用的功能，并点击**⋮ > 激活**。
 
@@ -122,13 +116,13 @@ docker run -d -p 80:80 -p 443:443 \
 
 ### 使用 Rancher UI 禁用功能
 
-1. 在左上角，单击**☰ > 全局设置**。
+1. 在左上角，单击 **☰ > 全局设置**。
 1. 单击**功能开关**。你将看到实验功能列表。
 1. 如需禁用某个功能，找到该已启用的功能，并点击**⋮ > 停用**。
 
 **结果**：该功能已禁用。
 
-# 使用 Rancher API 启用功能
+## 使用 Rancher API 启用功能
 
 1. 前往 `<RANCHER-SERVER-URL>/v3/features`。
 1. 在 `data` 中，你会看到一个数组，该数组包含所有能通过功能开关启用的功能。功能的名称在 `id` 字段中。单击要启用的功能的名称。

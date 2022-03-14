@@ -96,9 +96,7 @@ INSTALL_K3S_SKIP_DOWNLOAD=true K3S_URL=https://myserver:6443 K3S_TOKEN=mynodetok
 请确保你将 `myserver` 替换为 Server 的 IP 或有效 DNS，并将 `mynodetoken` 替换为 Server 节点上的 node-token。
 node-token 位于 Server 节点上的 `/var/lib/rancher/k3s/server/node-token`。
 
-> :::note 注意
-> K3s 自动为 kubelets 提供 `--resolv-conf` 标志，该标志可能对在离线环境中配置 DNS 有帮助。
-> :::
+> **注意**：K3s 自动为 kubelets 提供 `--resolv-conf` 标志，该标志可能对在离线环境中配置 DNS 有帮助。
 
 ### 4. 保存并开始使用 kubeconfig 文件
 
@@ -213,9 +211,7 @@ rke up --config ./rancher-cluster.yml
 
 ### 4. 保存你的文件
 
-> :::important 重要提示
-> 请妥善保管以下文件，以对集群进行维护，故障排查和升级。
-> :::
+> **重要提示**：请妥善保管以下文件，以对集群进行维护，故障排查和升级。
 
 将以下文件的副本保存在安全位置：
 
@@ -225,9 +221,7 @@ rke up --config ./rancher-cluster.yml
    </TabItem>
    </Tabs>
 
-> :::note 注意
-> 后两个文件名中的 `rancher-cluster` 部分取决于你命名 RKE 集群配置文件的方式。
-> :::
+> **注意**：后两个文件名中的 `rancher-cluster` 部分取决于你命名 RKE 集群配置文件的方式。
 
 ### 故障排查
 

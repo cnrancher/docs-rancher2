@@ -5,11 +5,12 @@ weight: 100
 ---
 你可以参考以下步骤，在 AWS 的单节点 K3s Kubernetes 集群中快速部署 Rancher Server，并附加一个单节点下游 Kubernetes 集群。
 
+> **注意**：本章节中提供的指南，旨在帮助你快速启动一个用于 Rancher 的沙盒，以评估 Rancher 是否能满足你的使用需求。快速入门指南不适用于生产环境。如果你需要获取生产环境的操作指导，请参见[安装]({{<baseurl>}}/rancher/v2.6/en/installation/)。
+
 ## 前提
 
-> :::note 注意
+> **注意**
 > 部署到 Amazon AWS 会产生费用。
-> :::
 
 - [Amazon AWS 账号](https://aws.amazon.com/account/): 用于创建部署 Rancher Server 和 Kubernetes 的资源。
 - [Amazon AWS 访问密钥](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html)：如果你没有的话，请访问此链接查看相关指南。
@@ -54,11 +55,11 @@ weight: 100
 8. 将以上输出中的 `rancher_server_url` 粘贴到浏览器中。在登录页面中登录（默认用户名为 `admin`，密码为在 `rancher_server_admin_password` 中设置的密码）。
 9. 使用 `quickstart/aws` 中生成的 `id_rsa` 密钥 SSH 到 Rancher Server。
 
-#### 结果
+##### 结果
 
 两个 Kubernetes 集群已部署到你的 AWS 账户中，一个运行 Rancher Server，另一个为实验部署做好准备。请注意，虽然这种设置是探索 Rancher 功能的好方法，但在生产环境中，应遵循我们的高可用设置指南。用于虚拟机的 SSH 密钥是自动生成的，存储在模块目录中。
 
-### 后续操作
+## 后续操作
 
 使用 Rancher 创建 deployment。详情请参见[创建 Deployment]({{<baseurl>}}/rancher/v2.6/en/quick-start-guide/workload)。
 

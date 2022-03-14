@@ -8,13 +8,13 @@ weight: 5
 
 如果你已经有一个 GKE Kubernetes 集群，请直接跳转到[安装 Ingress](#7-install-an-ingress)这个步骤。然后按照[此处]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/#install-the-rancher-helm-chart)的步骤安装 Rancher Helm Chart。
 
-# 前提
+## 前提
 
 - 你需要有一个 Google 账号。
 - 你需要有一个 Google Cloud Billing 账号。你可使用 Google Cloud Console 来管理你的 Cloud Billing 账号。有关 Cloud Console 的详情，请参见 [ Console 通用指南](https://support.google.com/cloud/answer/3465889?hl=en&ref_topic=3340599)。
 - 你需要至少一个在用的 IP 地址和至少 2 个 CPU 的云配额。有关 Rancher Server 的硬件要求，请参见[本节]({{<baseurl>}}/rancher/v2.6/en/installation/requirements/#rke-and-hosted-kubernetes)。
 
-# 1. 启用 Kubernetes Engine API
+## 1. 启用 Kubernetes Engine API
 
 按照以下步骤启用 Kubernetes Engine API：
 
@@ -23,7 +23,7 @@ weight: 5
 1. 打开项目，并为项目启用 Kubernetes Engine API。等待 API 和相关服务的启用。这可能需要几分钟时间。
 1. 确保为你的云项目启用了计费。有关如何为你的项目启用计费，请参见 [Google Cloud 文档中心](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)。
 
-# 2. 打开 Cloud Shell
+## 2. 打开 Cloud Shell
 
 Cloud Shell 是一个 shell 环境，用于管理托管在 Google Cloud 上的资源。Cloud Shell 预装了 `gcloud` 命令行工具和 kubectl 命令行工具中。`gcloud` 工具为 Google Cloud 提供主要的命令行界面，而`kubectl` 则提供针对 Kubernetes 集群的主要命令行界面。
 
@@ -60,9 +60,7 @@ Cloud Shell 是一个 shell 环境，用于管理托管在 Google Cloud 上的�
    source ~/.bash_profile
    ```
 
-
-
-# 3. 配置 gcloud CLI
+## 3. 配置 gcloud CLI
 
 选择以下方法之一配置默认的 gcloud 设置：
 
@@ -102,7 +100,7 @@ values={[
 
 </Tabs>
 
-# 4. 确认 gcloud 的配置是否正确
+## 4. 确认 gcloud 的配置是否正确
 
 运行：
 
@@ -124,7 +122,7 @@ project = <Your project ID>
 Your active configuration is: [default]
 ```
 
-# 5. 创建一个 GKE 集群
+## 5. 创建一个 GKE 集群
 
 下面的命令创建了一个三节点的集群。
 
@@ -136,7 +134,7 @@ Your active configuration is: [default]
 gcloud container clusters create cluster-name --num-nodes=3 --cluster-version=1.20.8-gke.900
 ```
 
-# 6. 获取验证凭证
+## 6. 获取验证凭证
 
 创建集群后，你需要获得认证凭证才能与集群交互：
 
@@ -146,7 +144,7 @@ gcloud container clusters get-credentials cluster-name
 
 此命令将 `kubectl` 配置成使用你创建的集群。
 
-# 7. 安装 Ingress
+## 7. 安装 Ingress
 
 集群需要一个 Ingress，以从集群外部访问 Rancher。
 
@@ -163,7 +161,7 @@ helm upgrade --install \
   --create-namespace
 ```
 
-# 8. 获取负载均衡器的 IP
+## 8. 获取负载均衡器的 IP
 
 运行以下命令获取负载均衡器的 IP 地址：
 
@@ -180,7 +178,7 @@ ingress-nginx-controller   LoadBalancer   10.3.244.156   35.233.206.34   80:3187
 
 保存 `EXTERNAL-IP`。
 
-# 9. 设置 DNS
+## 9. 设置 DNS
 
 到 Rancher Server 的外部流量需要重定向到你创建的负载均衡器。
 
@@ -188,7 +186,7 @@ ingress-nginx-controller   LoadBalancer   10.3.244.156   35.233.206.34   80:3187
 
 设置 DNS 的有效方法有很多。如需获取帮助，请参见 Google Cloud 文档中的[管理 DNS 记录](https://cloud.google.com/dns/docs/records)部分。
 
-# 10. 安装 Rancher Helm Chart
+## 10. 安装 Rancher Helm Chart
 
 按照[本页]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/#install-the-rancher-helm-chart)的说明安装 Rancher Helm Chart。任何 Kubernetes 发行版上安装的 Rancher 的 Helm 说明都是一样的。
 

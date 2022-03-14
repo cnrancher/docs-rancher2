@@ -34,7 +34,7 @@ weight: 1
 
 Rancher UI 在 Firefox 或 Chrome 中效果更佳。
 
-# 操作系统和容器运行时要求
+## 操作系统和容器运行时要求
 
 Rancher 兼容当前所有的主流 Linux 发行版。
 
@@ -88,11 +88,11 @@ Ingress 需要部署为 DaemonSet 以确保负载均衡器能成功把流量转�
 
 Docker 是 Helm Chart 安装所必须的。你可以参见 [Docker 官方文档](https://docs.docker.com/)中的步骤进行安装。Rancher 也提供使用单条命令安装 Docker 的[脚本]({{<baseurl>}}/rancher/v2.6/en/installation/requirements/installing-docker)。
 
-# 硬件要求
+## 硬件要求
 
 本节描述安装 Rancher Server 的节点的 CPU、内存和磁盘要求。
 
-# CPU 和内存
+## CPU 和内存
 
 硬件要求根据你的 Rancher 部署规模而定。请根据要求配置每个节点。通过单节点容器安装 Rancher，和在 Kubernetes 集群上安装 Rancher 的要求有所不同。
 
@@ -145,7 +145,7 @@ Docker 是 Helm Chart 安装所必须的。你可以参见 [Docker 官方文档]
 | 小 | 最多 5 个 | 最多 50 个 | 1 | 4 GB |
 | 中 | 最多 15 个 | 最多 200 个 | 2 | 8 GB |
 
-# Ingress
+## Ingress
 
 安装 Rancher 的 Kubernetes 集群中的每个节点都应该运行一个 Ingress。
 
@@ -162,11 +162,11 @@ Ingress 需要部署为 DaemonSet 以确保负载均衡器能成功把流量转�
 ### EKS 的 Ingress
 如果你需要获取使用 LoadBalancer 服务部署 nginx-ingress-controller 的示例，请参见[此处]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/amazon-eks/#5-install-an-ingress)。
 
-# 磁盘
+## 磁盘
 
 etcd 在集群中的性能决定了 Rancher 的性能。因此，为了获得最佳速度，我们建议使用 SSD 磁盘来支持 Rancher 管理的 Kubernetes 集群。在云提供商上，你还需使用能获得最大 IOPS 的最小大小。在较大的集群中，请考虑使用专用存储设备存储 etcd 数据和 wal 目录。
 
-# 网络要求
+## 网络要求
 
 本节描述了安装 Rancher Server 的节点的网络要求。
 
@@ -178,14 +178,6 @@ etcd 在集群中的性能决定了 Rancher 的性能。因此，为了获得最
 
 为了确保能正常运行，Rancher 需要在 Rancher 节点和下游 Kubernetes 集群节点上开放一些端口。不同集群类型的 Rancher 和下游集群的所有必要端口，请参见[端口要求]({{<baseurl>}}/rancher/v2.6/en/installation/requirements/ports)。
 
-# Dockershim 支持
+## Dockershim 支持
 
-Kubernetes 1.20 弃用了 Dockershim，也不再使用 Docker 作为 Kubernetes 容器运行时。Dockershim 作为适配器内置于 Kubernetes 中，用于让 Kubernetes 管理 Docker 容器。由于 Docker Daemon 不适用于为 Kubernetes 创建的 CRI（容器运行时接口），因此 Dockershim 是必须的。Dockershim 仍然包含在 Kubernetes 1.20 的 kubelet 中。
-
-Rancher 计划实施 [Mirantis 和 Docker 宣布的上游开源社区 Dockershim](https://www.mirantis.com/blog/mirantis-to-take-over-support-of-kubernetes-dockershim-2/) 以确保 RKE 集群可以继续利用 Docker 作为其容器运行时。RKE 用户将能够利用 Docker 作为运行时和安装方法，以继续升级和构建新的 RKE 集群。
-
-如果你想使用其他容器运行时，Rancher 也提供使用 Containerd 作为默认运行时的，以边缘为中心的 K3s，和以数据中心为中心的 RKE2 Kubernetes 发行版。然后，你就可以通过 Rancher 对导入的 RKE2 和 K3s Kubernetes 集群进行升级和管理。
-
-有关弃用 Docker 作为 Kubernetes 容器运行时的详情，请参见 [Kubernetes 官方博客](https://kubernetes.io/blog/2020/12/02/dont-panic-kubernetes-and-docker/)和 Mirantis 的[官方博客](https://www.mirantis.com/blog/mirantis-to-take-over-support-of-kubernetes-dockershim-2/)。
-
-Dockershim 弃用计划由上游 Kubernetes 社区在 [Kubernetes 增强提案 (KEP) 1985](https://github.com/kubernetes/enhancements/tree/master/keps/sig-node/1985-remove-dockershim) 中跟踪。
+有关 Dockershim 支持的详情，请参见[此页面]({{<baseurl>}}/rancher/v2.6/en/installation/requirements/dockershim/)。

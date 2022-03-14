@@ -5,9 +5,7 @@ weight: 2
 
 此功能可启动一个 UI，用于管理 Istio 的流量，其中包括创建、读取、更新和删除虚拟服务（Virtual Service）和目标规则（Destination Rule）。
 
-> :::note 注意
-> 启用此功能并不会启用 Istio。集群管理员需要[为集群启用 Istio]({{<baseurl>}}/rancher/v2.6/en/istio/setup) 才能使用该功能。
-> :::
+> **注意**：启用此功能并不会启用 Istio。集群管理员需要[为集群启用 Istio]({{<baseurl>}}/rancher/v2.6/en/istio/setup) 才能使用该功能。
 
 如需启用或禁用此功能，请参见[启用实验功能主页]({{<baseurl>}}/rancher/v2.6/en/installation/resources/feature-flags/)中的说明。
 
@@ -16,7 +14,7 @@ weight: 2
 | `istio-virtual-service-ui` | `false` | 实验功能 | v2.3.0 |
 | `istio-virtual-service-ui` | `true` | GA | v2.3.2 |
 
-# 功能介绍
+## 功能介绍
 
 Istio 流量管理功能的主要优势时允许动态请求路由，这对于金丝雀发布，蓝/绿发布或 A/B 测试都非常有用。
 

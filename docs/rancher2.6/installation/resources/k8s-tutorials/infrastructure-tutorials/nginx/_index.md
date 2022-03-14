@@ -25,9 +25,7 @@ weight: 4
 
 2. 在 `nginx.conf` 中，将所有（端口 80 和端口 443）的 `<IP_NODE_1>`，`<IP_NODE_2>`和 `<IP_NODE_3>` 替换为你节点的 IP 地址。
 
-   > :::note 注意
-   > 参见 [NGINX 文档：TCP 和 UDP 负载均衡](https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/)了解所有配置选项。
-   > :::
+   > **注意**：参见 [NGINX 文档：TCP 和 UDP 负载均衡](https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/)了解所有配置选项。
 
 NGINX 配置示例:
 ```

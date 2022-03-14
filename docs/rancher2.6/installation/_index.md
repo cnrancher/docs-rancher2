@@ -6,7 +6,7 @@ weight: 3
 
 本节介绍了 Rancher 各种安装方式以及每个安装方式的优点。
 
-# 名词解释
+## 名词解释
 
 本章节涉及以下名词：
 
@@ -17,7 +17,7 @@ weight: 3
 
 `restrictedAdmin` Helm Chart 选项在 **Rancher Server** 可用。如果该选项设置为 true，初始的 Rancher 用户访问本地 Kubernetes 集群会受到限制，以避免权限升级。详情请参见 [restricted-admin 角色]({{<baseurl>}}/rancher/v2.6/en/admin-settings/rbac/global-permissions/#restricted-admin)。
 
-# 安装方式概述
+## 安装方式概述
 
 Rancher 可以安装在以下主要架构上：
 
@@ -63,10 +63,10 @@ Rancher backup operator 可将 Rancher 从单个 Docker 容器迁移到高可用
 
 如需进一步了解 Rancher 架构，请参见[架构概述]({{<baseurl>}}/rancher/v2.6/en/overview/architecture)，[生产级别架构推荐]({{<baseurl>}}/rancher/v2.6/en/overview/architecture-recommendations)或[最佳实践指南]({{<baseurl>}}/rancher/v2.6/en/best-practices/rancher-server/deployment-types)。
 
-# 前提
+## 前提
 安装 Rancher 之前，请确保你的节点满足所有[安装要求]({{<baseurl>}}/rancher/v2.6/en/installation/requirements/)。
 
-# 架构建议
+## 架构建议
 
 为了达到最佳性能和安全性，我们建议你为 Rancher Management Server 使用单独的专用 Kubernetes 集群。不建议在此集群上运行用户工作负载。部署 Rancher 后，你可以[创建或导入集群]({{<baseurl>}}/rancher/v2.6/en/cluster-provisioning/)来运行你的工作负载。
 

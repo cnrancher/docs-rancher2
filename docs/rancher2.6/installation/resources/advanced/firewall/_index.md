@@ -34,7 +34,7 @@ sudo iptables --list
 
 下文介绍如何使用 `firewalld`，将[防火墙端口规则]({{<baseurl>}}/rancher/v2.6/en/installation/requirements/ports)应用到高可用 Rancher Server 集群中的节点。
 
-# 前提
+## 前提
 
 安装 v7.x 或更高版本的 `firewalld`：
 
@@ -44,7 +44,7 @@ systemctl start firewalld
 systemctl enable firewalld
 ```
 
-# 应用防火墙端口规则
+## 应用防火墙端口规则
 
 在 Rancher 高可用安装中，Rancher Server 设置在三个节点上，三个节点均具有 Kubernetes 的所有三个角色（etcd、controlplane 和 worker）。如果你的 Rancher Server 节点同时具有这三个角色，请在每个节点上运行以下命令：
 

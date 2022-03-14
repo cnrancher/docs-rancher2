@@ -18,7 +18,7 @@ weight: 3
 >
 > 在这两种单节点设置中，Rancher 可以与 Helm 一起安装在 Kubernetes 集群上，安装方法与安装到其他集群上一样。
 
-# 安装 Kubernetes
+## 安装 Kubernetes
 
 ### 所需的 CLI 工具
 
@@ -80,6 +80,8 @@ ingress:
 > 如需了解选项和功能的完整列表，请参见 [RKE 官方文档]({{<baseurl>}}/rke/latest/en/config-options/)。
 >
 > 要为大规模 Rancher 安装优化 etcd 集群，请参见 [etcd 设置指南]({{<baseurl>}}/rancher/v2.6/en/installation/resources/advanced/etcd/)。
+>
+> 有关 Dockershim 支持的详情，请参见[此页面]({{<baseurl>}}/rancher/v2.6/en/installation/requirements/dockershim/)。
 
 ### 2. 运行 RKE
 
@@ -97,9 +99,7 @@ rke up --config ./rancher-cluster.yml
 
 你在运行 `rke up` 时，RKE 应该已经创建了一个名为 `kube_config_cluster.yml`的 `kubeconfig` 文件。该文件具有 `kubectl` 和 `helm`的凭证。
 
-> :::note 注意
-> 如果你的文件名不是 `rancher-cluster.yml`，kubeconfig 文件将命名为 `kube_config_<FILE_NAME>.yml`。
-> :::
+> **注意**：如果你的文件名不是 `rancher-cluster.yml`，kubeconfig 文件将命名为 `kube_config_<FILE_NAME>.yml`。
 
 将此文件移动到 `$HOME/.kube/config`。如果你使用多个 Kubernetes 集群，将 `KUBECONFIG` 环境变量设置为 `kube_config_cluster.yml` 的路径:
 
@@ -149,9 +149,7 @@ kube-system     rke-network-plugin-deploy-job-6pbgj       0/1       Completed   
 
 ### 5. 保存你的文件
 
-> :::important 重要提示
-> 请妥善保管以下文件，以对集群进行维护，故障排查和升级。
-> :::
+> **重要提示**：请妥善保管以下文件，以对集群进行维护，故障排查和升级。
 
 将以下文件的副本保存在安全位置：
 
@@ -159,9 +157,7 @@ kube-system     rke-network-plugin-deploy-job-6pbgj       0/1       Completed   
 - `kube_config_cluster.yml`：集群的 [Kubeconfig 文件]({{<baseurl>}}/rke/latest/en/kubeconfig/)。该文件包含可完全访问集群的凭证。
 - `rancher-cluster.rkestate`：[Kubernetes 状态文件]({{<baseurl>}}/rke/latest/en/installation/#kubernetes-cluster-state)。此文件包括用于完全访问集群的凭证。<br/><br/>_Kubernetes 集群状态文件仅在 RKE 版本是 0.2.0 或更高版本时生成。_
 
-> :::note 注意
-> 后两个文件名中的 `rancher-cluster` 部分取决于你命名 RKE 集群配置文件的方式。
-> :::
+> **注意**：后两个文件名中的 `rancher-cluster` 部分取决于你命名 RKE 集群配置文件的方式。
 
 ### 故障排查
 

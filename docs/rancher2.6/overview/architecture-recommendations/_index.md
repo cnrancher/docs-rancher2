@@ -14,7 +14,7 @@ weight: 3
 - [Kubernetes 安装的节点角色建议](#recommended-node-roles-for-kubernetes-installations)
 - [授权集群端点（ACE）的架构](#architecture-for-an-authorized-cluster-endpoint-ace)
 
-# 分开部署 Rancher 与下游集群
+## 分开部署 Rancher 与下游集群
 
 下游集群，是运行你自己的应用和服务的下游 Kubernetes 集群。
 
@@ -24,7 +24,7 @@ weight: 3
 
 ![分开部署 Rancher Server 与下游集群]({{<baseurl>}}/img/rancher/rancher-architecture-separation-of-rancher-server.svg)
 
-# 为什么高可用（HA）更适合生产环境中的 Rancher
+## 为什么高可用（HA）更适合生产环境中的 Rancher
 
 我们建议在高可用 Kubernetes 集群上安装 Rancher Server，以保护 Rancher Server 的数据。在高可用安装中，负载均衡器充当客户端的单点入口，并在集群中的多台服务器之间分配网络流量，这有助于防止任何一台服务器成为单点故障。
 
@@ -44,7 +44,7 @@ weight: 3
 <figcaption>运行 Rancher Management Server 的 RKE Kubernetes 集群的架构</figcaption>
 ![运行 Rancher Management Server 的 RKE Kubernetes 集群的架构]({{<baseurl>}}/img/rancher/rke-server-storage.svg)
 
-# Kubernetes 安装的负载均衡器推荐配置
+## Kubernetes 安装的负载均衡器推荐配置
 
 我们建议你为负载均衡器和 Ingress Controller 使用以下配置：
 
@@ -56,13 +56,13 @@ weight: 3
 <figcaption>在 Kubernetes 集群中安装 Rancher，并使用四层负载均衡器，SSL 终止在 Ingress Controller 中</figcaption>
 ![Rancher 高可用]({{<baseurl>}}/img/rancher/ha/rancher2ha.svg)
 
-# Kubernetes 安装环境
+## Kubernetes 安装环境
 
 我们强烈建议你把 Rancher 安装到托管在云提供商（如 AWS EC2 和 Google Compute Engine（GCE）等）上的 Kubernetes 集群上。
 
 为了达到最佳性能和安全性，我们建议你为 Rancher Management Server 创建一个专用的 Kubernetes 集群。不建议在此集群上运行用户工作负载。部署 Rancher 后，你可以[创建或导入集群]({{<baseurl>}}/rancher/v2.6/en/cluster-provisioning/)来运行你的工作负载。
 
-# Kubernetes 安装的推荐节点角色
+## Kubernetes 安装的推荐节点角色
 
 如果 Rancher 安装在 K3s Kubernetes 或 RKE Kubernetes 集群上，以下建议适用。
 
@@ -104,10 +104,10 @@ RKE 每个角色至少需要一个节点，但并不强制每个节点只能有�
 
 有关下游集群的最佳实践，请查看[生产环境清单]({{<baseurl>}}/rancher/v2.6/en/cluster-provisioning/production)或[最佳实践]({{<baseurl>}}/rancher/v2.6/en/best-practices/)。
 
-# 授权集群端点（ACE）架构
+## 授权集群端点（ACE）架构
 
 如果你使用[授权集群端点（ACE）]({{<baseurl>}}/rancher/v2.6/en/overview/architecture/#4-authorized-cluster-endpoint)，我们建议你创建一个指向负载均衡器的 FQDN，这个负载均衡器把流量转到所有角色为 `controlplane` 的节点。
 
 如果你在负载均衡器上使用了私有 CA 签发的证书，你需要提供 CA 证书，这个证书会包含在生成的 kubeconfig 文件中，以校验证书链。详情请参见 [kubeconfig 文件]({{<baseurl>}}/rancher/v2.6/en/cluster-admin/cluster-access/kubectl/)和 [API 密钥]({{<baseurl>}}/rancher/v2.6/en/user-settings/api-keys/#creating-an-api-key)的相关文档。
 
-在 Rancher 2.6.3 中，注册的 RKE2 和 K3s 集群可以使用 ACE 支持。点击[这里]({{<baseurl>}}/v2.6/en/cluster-provisioning/registered-clusters/#authorized-cluster-endpoint-support-for-rke2-and-k3s-clusters)了解在下游集群中开启 ACE 的步骤。
+在 Rancher 2.6.3 中，注册的 RKE2 和 K3s 集群可以使用 ACE 支持。点击[这里]({{<baseurl>}}/rancher/v2.6/en/cluster-provisioning/registered-clusters/#authorized-cluster-endpoint-support-for-rke2-and-k3s-clusters)了解在下游集群中开启 ACE 的步骤。

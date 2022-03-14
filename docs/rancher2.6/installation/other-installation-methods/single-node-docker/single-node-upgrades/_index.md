@@ -5,12 +5,12 @@ weight: 1010
 
 本文介绍如何升级通过 Docker 安装的 Rancher Server。
 
-# 前提
+## 前提
 
 - 参见 Rancher 官方文档中的[已知升级问题]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/upgrades/#known-upgrade-issues)，了解升级 升级 Rancher 时最需要注意的问题。你可以访问 [GitHub](https://github.com/rancher/rancher/releases) 上的发行说明和 [Rancher 论坛](https://forums.rancher.com/c/announcements/12)，以了解每个 Rancher 版本已知问题的完整列表。不支持升级或升级到 [rancher-alpha 仓库]({{<baseurl>}}/rancher/v2.6/en/installation/install-rancher-on-k8s/chart-options/#helm-chart-repositories/)中的任何 Chart。
 - **[仅适用于离线安装]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/air-gap)：为新的 Rancher Server 版本收集和推送镜像**。按照指南为你想要升级的目标 Rancher 版本[推送镜像到私有镜像仓库]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/air-gap/populate-private-registry/)。
 
-# 占位符
+## 占位符
 
 在升级过程中，你将输入一系列命令。请按照你环境的实际情况替换占位符。占位符用尖括号和大写字母（如 `<EXAMPLE>`）表示。
 
@@ -22,7 +22,7 @@ docker stop <RANCHER_CONTAINER_NAME>
 
 在此命令中，`<RANCHER_CONTAINER_NAME>` 是你的 Rancher 容器的名称。
 
-# 获取升级命令的数据
+## 获取升级命令的数据
 
 要获取替换占位符的数据，请运行：
 
@@ -45,7 +45,7 @@ docker ps
 
 可以通过远程连接登录到 Rancher Server 所在的主机并输入命令 `docker ps` 以查看正在运行的容器，从而获得 `<RANCHER_CONTAINER_TAG>` 和 `<RANCHER_CONTAINER_NAME>`。你还可以运行 `docker ps -a` 命令查看停止了的容器。在创建备份期间，你随时可以运行这些命令来获得帮助。
 
-# 升级概要
+## 升级概要
 
 在升级期间，你可以为当前 Rancher 容器创建数据的副本及备份，以确保可以在升级出现问题时可以进行回滚。然后，你可使用现有数据将新版本的 Rancher 部署到新容器中。按照以下步骤升级 Rancher Server：
 
@@ -56,7 +56,7 @@ docker ps
 - [5. 验证安装](#5-verify-the-upgrade)
 - [6. 清理旧的 Rancher Server 容器](#6-clean-up-your-old-rancher-server-container)
 
-# 1. 创建 Rancher Server 容器的数据副本
+## 1. 创建 Rancher Server 容器的数据副本
 
 1. 使用远程终端连接，登录到运行 Rancher Server 的节点。
 
@@ -72,7 +72,7 @@ docker ps
    docker create --volumes-from <RANCHER_CONTAINER_NAME> --name rancher-data rancher/rancher:<RANCHER_CONTAINER_TAG>
    ```
 
-# 2. 创建备份压缩包
+## 2. 创建备份压缩包
 
 1. <a id="tarball"></a>使用你刚才创建的数据容器（`rancher-data`）创建一个备份压缩包（`rancher-data-backup-<RANCHER_VERSION>-<DATE>.tar.gz`）。
 
@@ -94,7 +94,7 @@ docker ps
 
 1. 将备份压缩包移动到 Rancher Server 外的安全位置。
 
-# 3. 拉取新的 Docker 镜像
+## 3. 拉取新的 Docker 镜像
 
 拉取你需要升级到的 Rancher 版本镜像。
 
@@ -106,13 +106,11 @@ docker ps
 docker pull rancher/rancher:<RANCHER_VERSION_TAG>
 ```
 
-# 4. 启动新的 Rancher Server 容器
+## 4. 启动新的 Rancher Server 容器
 
 使用 `rancher-data` 容器中的数据启动一个新的 Rancher Server 容器。记住要传入启动原始容器时使用的所有环境变量。
 
-> :::important 重要提示
-> 启动升级后，即使升级耗时比预期长，也 _不要_ 停止升级。如果你停止升级，可能会导致之后的升级中出现数据库迁移错误。
-> :::
+> **重要提示**：启动升级后，即使升级耗时比预期长，也 _不要_ 停止升级。如果你停止升级，可能会导致之后的升级中出现数据库迁移错误。
 
 如果你使用代理，请参见 [HTTP 代理配置]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/single-node-docker/proxy/)。
 
@@ -226,9 +224,7 @@ docker run -d --volumes-from rancher-data \
 
 
 
-> :::note 注意
-> Let's Encrypt 对新证书请求有频率限制。因此，请限制创建或销毁容器的频率。详情请参见 [Let's Encrypt 官方文档 - 频率限制](https://letsencrypt.org/docs/rate-limits/)。
-> :::
+> **注意**：Let's Encrypt 对新证书请求有频率限制。因此，请限制创建或销毁容器的频率。详情请参见 [Let's Encrypt 官方文档 - 频率限制](https://letsencrypt.org/docs/rate-limits/)。
 
 如果你选择使用 [Let's Encrypt](https://letsencrypt.org/) 证书，则在启动原始 Rancher Server 容器的命令中添加 `--volumes-from rancher-data`，并且提供最初安装 Rancher 时使用的域名。
 
@@ -333,9 +329,7 @@ docker run -d --restart=unless-stopped \
 | `<REGISTRY.YOURDOMAIN.COM:PORT>` | 私有镜像仓库的 URL 和端口。 |
 | `<RANCHER_VERSION_TAG>` | 你想要升级到的 [Rancher 版本]({{<baseurl>}}/rancher/v2.6/en/installation/resources/chart-options/)的版本标签。 |
 
-> :::note 注意
-> 使用 `--no-cacerts` 作为容器的参数，以禁用 Rancher 生成的默认 CA 证书。
-> :::
+> **注意**：使用 `--no-cacerts` 作为容器的参数，以禁用 Rancher 生成的默认 CA 证书。
 
 ```
 docker run -d --volumes-from rancher-data \
@@ -356,7 +350,7 @@ docker run -d --volumes-from rancher-data \
 
 **结果**：你已升级 Rancher。已升级 Server 中的数据将保存在 `rancher-data` 容器中，用于将来的升级。
 
-# 5. 验证升级
+## 5. 验证升级
 
 登录到 Rancher。通过检查浏览器左下角的版本号，确认升级是否成功。
 
@@ -365,10 +359,10 @@ docker run -d --volumes-from rancher-data \
 > 请参见[恢复集群网络]({{<baseurl>}}/rancher/v2.0-v2.4/en/installation/install-rancher-on-k8s/upgrades/namespace-migration)。
 
 
-# 6. 清理旧的 Rancher Server 容器
+## 6. 清理旧的 Rancher Server 容器
 
 移除旧的 Rancher Server 容器。如果你仅停止了旧的 Rancher Server 容器，但没有移除它，该容器还可能在服务器下次重启后重新启动。
 
-# 回滚
+## 回滚
 
 如果升级没有成功完成，你可以将 Rancher Server 及其数据回滚到上次的健康状态。详情请参见 [Docker 回滚]({{<baseurl>}}/rancher/v2.6/en/installation/other-installation-methods/single-node-docker/single-node-rollbacks/)。

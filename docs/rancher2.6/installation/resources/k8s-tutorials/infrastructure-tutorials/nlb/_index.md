@@ -11,7 +11,7 @@ weight: 5
 
 Rancher 仅支持使用 Amazon NLB 以 `TCP` 模式终止 443 端口的流量，而不支持 `TLS` 模式。这试因为在 NLB 终止时，NLB 不会将正确的标头注入请求中。如果你想使用由 Amazon Certificate Manager (ACM) 托管的证书，请使用 ALB。
 
-# 设置负载均衡器
+## 设置负载均衡器
 
 以下是配置 Amazon NLB 的步骤：
 
@@ -20,11 +20,11 @@ Rancher 仅支持使用 Amazon NLB 以 `TCP` 模式终止 443 端口的流量，
 3. [创建 NLB](#3-create-your-nlb)
 4. [为 TCP 端口 80 向 NLB 添加监听器](#4-add-listener-to-nlb-for-tcp-port-80)
 
-# 要求
+## 要求
 
 你已在 EC2 中创建了 Linux 实例。此外，负载均衡器会把流量转发到这些节点。
 
-# 1. 创建目标组
+## 1. 创建目标组
 
 首先，为 **TCP** 协议创建两个目标组，其中一个使用 TCP 端口 443，另一个使用 TCP 端口 80（用于重定向到 TCP 端口 443）。然后，将 Linux 节点添加到这些组中。
 
@@ -36,8 +36,7 @@ Rancher 仅支持使用 Amazon NLB 以 `TCP` 模式终止 443 端口的流量，
 1. 选择**服务** > **EC2**，找到**负载均衡器**并打开**目标组**。
 1. 单击**创建目标组**，然后创建用于 TCP 端口 443 的第一个目标组。
 
-> :::note 注意
-> 不同 Ingress 的健康检查处理方法不同。详情请参见[此部分](#health-check-paths-for-nginx-ingress-and-traefik-ingresses)。
+> **注意**：不同 Ingress 的健康检查处理方法不同。详情请参见[此部分](#health-check-paths-for-nginx-ingress-and-traefik-ingresses)。
 
 ### 目标组（TCP 端口 443）
 
@@ -88,7 +87,7 @@ Rancher 仅支持使用 Amazon NLB 以 `TCP` 模式终止 443 端口的流量，
 | 超时 | `6 秒` |
 | 间隔 | `10 秒` |
 
-# 2. 注册目标
+## 2. 注册目标
 
 接下来，将 Linux 节点添加到两个目标组中。
 
@@ -112,7 +111,7 @@ Rancher 仅支持使用 Amazon NLB 以 `TCP` 模式终止 443 端口的流量，
 
 将 **rancher-tcp-443** 替换为 **rancher-tcp-80**，然后重复上述步骤。你需要将相同的实例作为目标添加到此目标组。
 
-# 3. 创建 NLB
+## 3. 创建 NLB
 
 使用 Amazon 的向导创建网络负载均衡器。在这个过程中，你需要添加在 [1. 创建目标组](#1-create-target-groups)中创建的目标组。
 
@@ -154,7 +153,7 @@ Rancher 仅支持使用 Amazon NLB 以 `TCP` 模式终止 443 端口的流量，
 
 AWS 完成 NLB 创建后，单击**关闭**。
 
-# 4. 为 TCP 端口 80 向 NLB 添加监听器
+## 4. 为 TCP 端口 80 向 NLB 添加监听器
 
 1. 选择新创建的 NLB 并选择**监听器**选项卡。
 
@@ -168,7 +167,7 @@ AWS 完成 NLB 创建后，单击**关闭**。
 
 6. 单击右上角的**保存**。
 
-# NGINX Ingress 和 Traefik Ingress 的健康检查路径
+## NGINX Ingress 和 Traefik Ingress 的健康检查路径
 
 K3s 和 RKE Kubernetes 集群使用的默认 Ingress 不同，因此对应的健康检查方式也不同。
 

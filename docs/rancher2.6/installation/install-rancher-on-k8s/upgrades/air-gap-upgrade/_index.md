@@ -70,7 +70,7 @@ helm template rancher ./rancher-<VERSION>.tgz --output-dir . \
 kubectl -n cattle-system apply -R -f ./rancher
 ```
 
-# 验证升级
+## 验证升级
 
 登录 Rancher 以确认升级成功。
 
@@ -78,6 +78,6 @@ kubectl -n cattle-system apply -R -f ./rancher
 >
 > 请参见[恢复集群网络]({{<baseurl>}}/rancher/v2.0-v2.4/en/installation/install-rancher-on-k8s/upgrades/namespace-migration)。
 
-# 已知升级问题
+## 已知升级问题
 
 如需升级 Kubernetes 集群中的如需查看每个 Rancher 版本的已知问题，请参见 [GitHub](https://github.com/rancher/rancher/releases) 中的发行说明，或查看 [Rancher 论坛](https://forums.rancher.com/c/announcements/12)。

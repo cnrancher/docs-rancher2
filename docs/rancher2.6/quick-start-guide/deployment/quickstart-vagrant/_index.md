@@ -4,6 +4,8 @@ weight: 200
 ---
 你可以参考以下步骤快速部署 Rancher Server，并附加一个单节点集群。
 
+> **注意**：本章节中提供的指南，旨在帮助你快速启动一个用于 Rancher 的沙盒，以评估 Rancher 是否能满足你的使用需求。快速入门指南不适用于生产环境。如果你需要获取生产环境的操作指导，请参见[安装]({{<baseurl>}}/rancher/v2.6/en/installation/)。
+
 ## 前提
 
 - [Vagrant](https://www.vagrantup.com)：Vagrant 是必需的，用于根据 Vagrantfile 配置机器。
@@ -30,7 +32,7 @@ weight: 200
 
 4. 执行 `vagrant up --provider=virtualbox` 以初始化环境。
 
-5. 配置完成后，在浏览器中打开 `https://192.168.56.101`。默认用户/密码是 `admin/admin`。
+5. 配置完成后，在浏览器中打开 `https://192.168.56.101`。默认的用户名和密码是 `admin/adminPassword`。
 
 **结果**：Rancher Server 和你的 Kubernetes 集群已安装在 VirtualBox 上。
 

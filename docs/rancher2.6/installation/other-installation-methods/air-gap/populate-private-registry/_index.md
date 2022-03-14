@@ -63,9 +63,7 @@ values={[
 
 1. 获取最新的 `cert-manager` Helm Chart，并解析模板以获取镜像的详情信息：
 
-   > :::note 注意
-   > 由于 cert-manager 的最新改动，你需要升级 cert-manager 版本。如果你要升级 Rancher，但你使用的 cert-manager 版本早于 0.12.0，请参见[升级文档]({{<baseurl>}}/rancher/v2.6/en/installation/resources/upgrading-cert-manager/)。
-   > :::
+   > **注意**：由于 cert-manager 的最新改动，你需要升级 cert-manager 版本。如果你要升级 Rancher，但你使用的 cert-manager 版本早于 0.12.0，请参见[升级文档]({{<baseurl>}}/rancher/v2.6/en/installation/resources/upgrading-cert-manager/)。
 
    ```plain
    helm repo add jetstack https://charts.jetstack.io
@@ -119,7 +117,7 @@ chmod +x rancher-load-images.sh
 
 如果你的 Rancher Server 将用于配置 Linux 和 Windows 集群，你需要执行不同的步骤，来将 Windows 镜像和 Linux 镜像推送到你的私有镜像仓库。由于 Windows 集群同时包含 Linux 和 Windows 节点，因此推送到私有镜像仓库的 Linux 镜像是 Manifest。
 
-# Windows 步骤
+## Windows 步骤
 
 从 Windows Server 工作站中收集和推送 Windows 镜像。
 
@@ -198,7 +196,7 @@ chmod +x rancher-load-images.sh
    ./rancher-load-images.ps1 --registry <REGISTRY.YOURDOMAIN.COM:PORT>
    ```
 
-# Linux 步骤
+## Linux 步骤
 
 Linux 镜像需要在 Linux 主机上收集和推送，但是你必须先将 Windows 镜像推送到私有镜像仓库，然后再推送 Linux 镜像。由于被推送的 Linux 镜像实际上是支持 Windows 和 Linux 镜像的 manifest，因此涉及的步骤不同于只包含 Linux 节点的集群。
 
@@ -237,9 +235,7 @@ Linux 镜像需要在 Linux 主机上收集和推送，但是你必须先将 Win
 **在 Kubernetes 安装中，如果你使用的是 Rancher 默认的自签名 TLS 证书**，则必须将 [`cert-manager`](https://hub.helm.sh/charts/jetstack/cert-manager) 镜像添加到 `rancher-images.txt` 文件中。如果你使用自己的证书，则可跳过此步骤。
 
 1. 获取最新的 `cert-manager` Helm Chart，并解析模板以获取镜像的详情信息：
-   > :::note 注意
-   > 由于 cert-manager 的最新改动，你需要升级 cert-manager 版本。如果你要升级 Rancher，但你使用的 cert-manager 版本早于 0.12.0，请参见[升级文档]({{<baseurl>}}/rancher/v2.6/en/installation/resources/upgrading-cert-manager/)。
-   > :::
+   > **注意**：由于 cert-manager 的最新改动，你需要升级 cert-manager 版本。如果你要升级 Rancher，但你使用的 cert-manager 版本早于 0.12.0，请参见[升级文档]({{<baseurl>}}/rancher/v2.6/en/installation/resources/upgrading-cert-manager/)。
    ```plain
    helm repo add jetstack https://charts.jetstack.io
    helm repo update
