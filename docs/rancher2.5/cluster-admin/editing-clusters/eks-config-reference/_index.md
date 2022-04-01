@@ -128,7 +128,7 @@ Spot 实例现在[由 EKS 支持](https://docs.aws.amazon.com/eks/latest/usergui
 | 节点组名称      | 节点组名的称                                                                                                                                                                                                                                               |
 | 期待的 ASG 规模 | 所需的实例数量。                                                                                                                                                                                                                                           |
 | 最大 ASG 规模   | 实例的最大数量。此设置在[Cluster Autoscaler](https://docs.aws.amazon.com/eks/latest/userguide/cluster-autoscaler.html)安装后才会生效。                                                                                                                     |
-| 最小 ASG 规模   | 实例的最小数量。此设置在[Cluster Autoscaler](https://docs.aws.amazon.com/eks/latest/userguide/cluster-autoscaler.html)安装后才会生效。.                                                                                                                    |
+| 最小 ASG 规模   | 实例的最小数量。此设置在[Cluster Autoscaler](https://docs.aws.amazon.com/eks/latest/userguide/cluster-autoscaler.html)安装后才会生效。                                                                                                                     |
 | 标签            | 应用于管理节点组中的节点的 Kubernetes 标签。注意：无效的标签会阻止升级，或者会阻止 Rancher 启动。关于标签语法要求的详细信息，请参见[Kubernetes 文档。](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#syntax-and-character-set) |
 | Tags            | 这些是被管理的节点组的标签，不会传播到任何相关的资源。                                                                                                                                                                                                     |
 
@@ -242,21 +242,6 @@ Spot 实例现在[由 EKS 支持](https://docs.aws.amazon.com/eks/latest/usergui
 
 | 选项            | 描述                                                                                                                                   |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------- | --- | ---- | ---- |
-| 节点组名称      | 节点组名的称                                                                                                                           |
-| 期待的 ASG 规模 | 所需的实例数量。                                                                                                                       |
-| 最大 ASG 规模   | 实例的最大数量。此设置在[Cluster Autoscaler](https://docs.aws.amazon.com/eks/latest/userguide/cluster-autoscaler.html)安装后才会生效。 |
-| 最小 ASG 规模   | 实例的最小数量。此设置在[Cluster Autoscaler](https://docs.aws.amazon.com/eks/latest/userguide/cluster-autoscaler.html)安装后才会生效。 |     | 选项 | 描述 |
-| --------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| 节点组名称      | 节点组名的称                                                                                                                           |
-| 期待的 ASG 规模 | 所需的实例数量。                                                                                                                       |
-| 最大 ASG 规模   | 实例的最大数量。此设置在[Cluster Autoscaler](https://docs.aws.amazon.com/eks/latest/userguide/cluster-autoscaler.html)安装后才会生效。 |
-| 最小 ASG 规模   | 实例的最小数量。此设置在[Cluster Autoscaler](https://docs.aws.amazon.com/eks/latest/userguide/cluster-autoscaler.html)安装后才会生效。 |     | 选项 | 描述 |
-| --------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| 节点组名称      | 节点组名的称                                                                                                                           |
-| 期待的 ASG 规模 | 所需的实例数量。                                                                                                                       |
-| 最大 ASG 规模   | 实例的最大数量。此设置在[Cluster Autoscaler](https://docs.aws.amazon.com/eks/latest/userguide/cluster-autoscaler.html)安装后才会生效。 |
-| 最小 ASG 规模   | 实例的最小数量。此设置在[Cluster Autoscaler](https://docs.aws.amazon.com/eks/latest/userguide/cluster-autoscaler.html)安装后才会生效。 |     | 选项 | 描述 |
-| --------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | 节点组名称      | 节点组名的称                                                                                                                           |
 | 期待的 ASG 规模 | 所需的实例数量。                                                                                                                       |
 | 最大 ASG 规模   | 实例的最大数量。此设置在[Cluster Autoscaler](https://docs.aws.amazon.com/eks/latest/userguide/cluster-autoscaler.html)安装后才会生效。 |
