@@ -85,7 +85,7 @@ OutBound    ALL         ALL       ALL                Allow All
 | Worker IPs | Worker 主机 IP 列表 |
 | SSH User | SSH 用户 | `root`
 | SSH Port | SSH 端口 | `22`
-| SSH Key Path | SSH 私钥目录 | `~/.ssh/id_rsa`
+| SSH Key Path | SSH 私钥目录 | 
 | SSH Key Passphrase | 如果您的私钥需要密码验证，请在这里输入密码 |
 | SSH Password | 如果您使用Password连接到虚拟机，请输入密码 |
 | SSH Agent Auth | 如果您配置 SSH 代理程序，可以开启此项配置 | false
@@ -292,6 +292,25 @@ autok3s -d join \
     --datastore "mysql://<user>:<password>@tcp(<ip>:<port>)/<db>"
 ```
 
+#### 向已有集群（非AutoK3s管理的集群）添加节点
+
+在 v0.4.9 版本以后，AutoK3s 支持使用 `join` 命令向已有集群中添加节点，在命令执行完成后，可以在 AutoK3s 中对已有的集群进行统一的管理，在使用此功能之前您需要了解以下限制：
+- 向已有集群中添加节点时，请保证要添加的主机节点与传入的 master 主机节点使用相同的 ssh 配置，以便 AutoK3s 可以连接到 master 主机节点获取 token 及 kubeconfig 信息。
+- 用户执行删除集群操作时，AutoK3s 不会为每个主机执行自动卸载功能。
+- 如果想连接到集群已有的主机节点（**不是**通过 `AutoK3s join` 命令添加进来的主机节点），请使用 `autok3s ssh` 命令，UI暂不支持。
+
+运行以下命令，可以将已存在的集群导入到 AutoK3s 中管理，并向该集群中添加 1 个 worker 节点，使用 `--ip` 参数指向已有集群的 master 节点。
+
+```bash
+autok3s -d join \
+    --provider native \
+    --name myk3s \
+    --ip <master-ip> \
+    --ssh-user <ssh-user> \
+    --ssh-key-path <ssh-key-path> \
+    --worker-ips <worker-ip>
+```
+
 ### 删除 K3s 集群
 
 删除一个 k3s 集群，这里删除的集群为 myk3s。
@@ -367,6 +386,12 @@ SSH 连接到集群中的某个主机，这里选择的集群为 myk3s。
 
 ```bash
 autok3s ssh --provider native --name myk3s
+```
+
+如果集群是通过 AutoK3s join 导入管理的，连接到集群其他节点（**不是**通过 `AutoK3s join` 命令添加进来的主机节点），且该节点 ssh 配置与通过 `AutoK3s join` 命令添加进来的主机节点不同时，可以运行如下命令：
+
+```bash
+autok3s ssh --provider native --name myk3s <ip> --ssh-user <ssh-user> --ssh-key-path <ssh-key-path>
 ```
 
 ### 进阶使用
