@@ -80,4 +80,4 @@ kubectl -n cattle-system apply -R -f ./rancher
 
 ## 已知升级问题
 
-如需升级 Kubernetes 集群中的如需查看每个 Rancher 版本的已知问题，请参见 [GitHub](https://github.com/rancher/rancher/releases) 中的发行说明，或查看 [Rancher 论坛](https://forums.rancher.com/c/announcements/12)。
+你可以在 [GitHub](https://github.com/rancher/rancher/releases) 发布说明以及 [Rancher 论坛](https://forums.rancher.com/c/announcements/12)中找到每个 Rancher 版本的已知问题。
