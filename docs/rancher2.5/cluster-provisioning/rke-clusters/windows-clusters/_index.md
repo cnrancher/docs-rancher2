@@ -91,7 +91,7 @@ Rancher 仅支持在 Windows 集群中使用 Flannel 作为网络插件。
 
 ### 带有 ESXi 6.7u2 及以上版本的 vSphere 上的 Rancher
 
-如果你在带有 ESXi 6.7u2 或更高版本的 VMware vSphere 上使用 Rancher，并使用 Red Hat Enterprise Linux 8.3、CentOS 8.3 或 SUSE Enterprise Linux 15 SP2 或更高版本，有必要禁用`vmxnet3`虚拟网络适配器硬件卸载功能。如果不这样做，将导致不同集群节点上的 pod 之间的所有网络连接因超时错误而失败。所有从 Windows pods 到 Linux 节点上运行的关键服务的连接，如 CoreDNS，也将失败。外部连接也有可能失败。这个问题是由于 Linux 发行版在`vmxnet3`中启用了硬件卸载功能，以及`vmxnet3`硬件卸载功能中的一个 bug，导致丢弃了客户覆盖流量的数据包。为了解决这个问题，有必要禁用`vmxnet3`的硬件卸载功能。这个设置不能在重启后继续使用，因此有必要在每次启动时禁用。推荐的做法是在`/etc/systemd/system/disable_hw_offloading.service`创建一个 systemd 单元文件，在启动时禁用`vmxnet3`硬件卸载功能。禁用 `vmxnet3` 硬件卸载功能的 systemd 单元文件示例如下。注意，`<VM网络接口>`必须定制为主机的`vmxnet3`网络接口，如`ens192`:
+如果你在带有 ESXi 6.7u2 或更高版本的 VMware vSphere 上使用 Rancher，并使用 Red Hat Enterprise Linux 8.3、CentOS 8.3 或 SUSE Enterprise Linux 15 SP2 或更高版本，有必要禁用`vmxnet3`虚拟网络适配器硬件卸载功能。如果不这样做，将导致不同集群节点上的 pod 之间的所有网络连接因超时错误而失败。所有从 Windows pods 到 Linux 节点上运行的关键服务的连接，如 CoreDNS，也将失败。外部连接也有可能失败。这个问题是由于 Linux 发行版在`vmxnet3`中启用了硬件卸载功能，以及`vmxnet3`硬件卸载功能中的一个 bug，导致丢弃了客户覆盖流量的数据包。为了解决这个问题，有必要禁用`vmxnet3`的硬件卸载功能。这个设置不能在重启后继续使用，因此有必要在每次启动时禁用。推荐的做法是在`/etc/systemd/system/disable_hw_offloading.service`创建一个 systemd 单元文件，在启动时禁用`vmxnet3`硬件卸载功能。禁用 `vmxnet3` 硬件卸载功能的 systemd 单元文件示例如下。注意，`<VM network interface>`必须定制为主机的`vmxnet3`网络接口，如`ens192`:
 
 ```
 [Unit]
