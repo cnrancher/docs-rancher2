@@ -419,9 +419,7 @@ Spot 实例现在[由 EKS 支持](https://docs.aws.amazon.com/eks/latest/usergui
 | 服务相关角色                         | 描述                                                                                                           |
 | ------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
 | 标准：Rancher 生成的服务相关角色     | 如果你选择了这个角色，Rancher 会自动添加一个服务相关角色供集群使用。                                           |
-| 自定义：从你现有的服务相关角色中选择 | 如果你选择了这个角色，Rancher 让你从 AWS 中已经创建的服务相关角色中选择。关于在 AWS 中创建自定义服务相关角色的 |
-
-更多信息，请参阅[AWS 官方文档](https://docs.aws.amazon.com/zh_cn/IAM/latest/UserGuide/using-service-linked-roles.html#create-service-linked-role)。 |
+| 自定义：从你现有的服务相关角色中选择 | 如果你选择了这个角色，Rancher 让你从 AWS 中已经创建的服务相关角色中选择。关于在 AWS 中创建自定义服务相关角色的更多信息，请参阅[AWS 官方文档](https://docs.aws.amazon.com/zh_cn/IAM/latest/UserGuide/using-service-linked-roles.html#create-service-linked-role)。 |
 
 #### Worker 节点的公网 IP
 
@@ -441,8 +439,6 @@ Spot 实例现在[由 EKS 支持](https://docs.aws.amazon.com/eks/latest/usergui
 | 标准：Rancher 生成的 VPC 和子网     | 在配置你的集群时，Rancher 生成了一个新的 VPC，有 3 个公共子网。                                                                                                        |
 | 自定义：从你现有的 VPC 和子网中选择 | 在配置你的集群时，Rancher 将你的控制平面和节点配置为使用你已经[在 AWS 中创建的 VPC 和子网](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)。 |
 
-更多信息，请参阅[AWS 官方文档](https://docs.aws.amazon.com/zh_cn/IAM/latest/UserGuide/using-service-linked-roles.html#create-service-linked-role)。
-
 - [什么是亚马逊 VPC？](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)
 - [VPCs 和子网](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)
 
@@ -450,7 +446,7 @@ Spot 实例现在[由 EKS 支持](https://docs.aws.amazon.com/eks/latest/usergui
 
 如果你使用的是**定制：从你现有的 VPC 和子网中选择**。
 
-(如果你使用**标准**，请跳到[实例选项])](#select-instance-options-2-4)
+(如果你使用**标准**，请跳到[实例选项](#实例选项))
 
 1. 请确保**自定义：从你现有的 VPC 和子网中选择**。
 
@@ -470,7 +466,7 @@ Spot 实例现在[由 EKS 支持](https://docs.aws.amazon.com/eks/latest/usergui
 
 1. 单击**下一步。选择子网**。然后从显示的**子网**中选择一个。
 
-### Security Group
+### 安全组
 
 请参考 AWS 文档：
 

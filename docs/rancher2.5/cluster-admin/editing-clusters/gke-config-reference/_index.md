@@ -16,7 +16,7 @@ keywords:
   - 配置参考
 ---
 
-## Changes in v2.5.8+
+## v2.5.8+ 的变更
 
 - 我们现在支持私有 GKE 集群。注意：这种高级设置在集群配置过程中可能需要更多步骤。详情请见[本节](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/gke/_index)。
 - 现在支持[Shared VPCs](https://cloud.google.com/vpc/docs/shared-vpc)了。
