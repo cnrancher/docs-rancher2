@@ -46,7 +46,7 @@ Rancher 可以安装在任何 Kubernetes 集群上。这个集群可以使用上
 - [helm](https://docs.helm.sh/using_helm/#installing-helm) - Kubernetes 的软件包管理工具。请参阅 [Helm 版本要求](/docs/rancher2.5/installation/resources/helm-version/_index)以选择要安装 Rancher 的 Helm 版本。
 
 :::note 提示
-国内用户，可以导航到 http://mirror.cnrancher.com 下载所需资源。
+国内用户，可以导航到 https://mirror.rancher.cn 下载所需资源。
 :::
 
 ### Ingress Controller

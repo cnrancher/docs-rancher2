@@ -26,7 +26,7 @@ keywords:
 - [Rancher 博客](https://rancher.com/blog/)
   - [更多 Kubernetes 的 101 种安全最佳实践](https://rancher.com/blog/2019/2019-01-17-101-more-kubernetes-security-best-practices/)
 - [Rancher 论坛](https://forums.rancher.com/)
-- [Rancher 中文论坛](https://forums.cnrancher.com/)
+- [Rancher 中文论坛](https://forums.rancher.cn/)
 - [Rancher 免费在线培训视频](https://space.bilibili.com/430496045)
 - [Rancher 实用教程](https://mp.weixin.qq.com/mp/homepage?__biz=MzIyMTUwMDMyOQ==&hid=3&sn=2698abdc0a64455c730a1dfecdba3f76&scene=18)
 - [Rancher 用户 Slack](https://slack.rancher.io/)
