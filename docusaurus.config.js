@@ -45,7 +45,7 @@ module.exports = {
                     position: "right",
                 },
                 {
-                    href: "https://forums.cnrancher.com/",
+                    href: "https://forums.rancher.cn",
                     label: "中文论坛",
                     position: "right",
                 },

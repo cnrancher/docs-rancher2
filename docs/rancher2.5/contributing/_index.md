@@ -64,7 +64,7 @@ keywords:
 
 如果您发现任何错误或遇到任何问题，请搜索[已经报告的 Issues](https://github.com/rancher/rancher/issues)，因为可能有人遇到过相同的问题或我们正在积极寻求解决方案。
 
-如果没有找到与您问题相关的 issue，请通过[创建 Issue](https://github.com/rancher/rancher/issues/new)与我们联系。尽管我们有许多与 Rancher 相关的代码库，但我们希望将问题记录在 `rancher/rancher` 的代码库中，这样我们就不会错过它们！如果您想提出问题或向其他用户询问使用案例，我们建议在[Rancher 全球论坛](https://forums.rancher.com)或[Rancher 中文论坛](https://forums.cnrancher.com/)上发布问题，或者在 Rancher 微信交流群中和大家一起讨论。
+如果没有找到与您问题相关的 issue，请通过[创建 Issue](https://github.com/rancher/rancher/issues/new)与我们联系。尽管我们有许多与 Rancher 相关的代码库，但我们希望将问题记录在 `rancher/rancher` 的代码库中，这样我们就不会错过它们！如果您想提出问题或向其他用户询问使用案例，我们建议在[Rancher 全球论坛](https://forums.rancher.com)或[Rancher 中文论坛](https://forums.rancher.cn/)上发布问题，或者在 Rancher 微信交流群中和大家一起讨论。
 
 ### 提交问题清单
 

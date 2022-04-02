@@ -53,7 +53,7 @@ K3s 几乎可以胜任 k8s 的所有工作, 它只是一个更轻量级的版本
 1. 使用国内安装脚本安装 k3s，详情参考[快速入门指南](/docs/k3s/quick-start/_index)
 
 ```
-curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -
+curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -
 ```
 
 2. 或采用[离线安装](/docs/k3s/installation/airgap/_index#)方式安装 k3s
@@ -96,7 +96,7 @@ level=error msg="Node password rejected, duplicate hostname or contents of '/etc
 1. 通过 --node-taint
 
 ```
-curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn INSTALL_K3S_EXEC="--node-taint k3s-controlplane=true:NoExecute" sh -
+curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn INSTALL_K3S_EXEC="--node-taint k3s-controlplane=true:NoExecute" sh -
 ```
 
 ![](https://tva1.sinaimg.cn/large/007S8ZIlly1ghns3k40ugj30sy066wf4.jpg)
@@ -104,7 +104,7 @@ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_M
 2. 通过 --disable-agent
 
 ```
-curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn INSTALL_K3S_EXEC="--disable-agent" sh -
+curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn INSTALL_K3S_EXEC="--disable-agent" sh -
 ```
 
 ![](https://tva1.sinaimg.cn/large/007S8ZIlly1ghns42e23nj30sy05gq3j.jpg)
@@ -127,14 +127,14 @@ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_M
 K3s1(master):
 
 ```
-# curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn \
+# curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn \
 INSTALL_K3S_EXEC="--advertise-address 192.168.99.211" sh –
 ```
 
 K3s2(worker):
 
 ```
-# curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn \
+# curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn \
 INSTALL_K3S_EXEC="--node-ip 192.168.99.212" K3S_URL=https://192.168.99.211:6443 K3S_TOKEN=mynodetoken sh -
 ```
 

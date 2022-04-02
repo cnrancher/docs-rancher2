@@ -53,7 +53,7 @@ values={[
 从[版本发布](https://github.com/rancher/k3s/releases)页面获取要运行的 K3s 版本的镜像`tar`文件。
 
 :::note 提示
-国内用户，可以导航到 http://mirror.cnrancher.com 下载所需资源
+国内用户，可以导航到 https://mirror.rancher.cn 下载所需资源
 :::
 
 在每个节点上启动 K3s 之前，将这个`tar`文件放在 `images` 目录中，例如：
@@ -165,7 +165,7 @@ kubectl --kubeconfig ~/.kube/config/k3s.yaml get pods --all-namespaces
 - 从[版本发布](https://github.com/rancher/k3s/releases)页面下载要升级的 K3s 版本的新镜像包（`tar`文件）。将`tar`包放在每个节点上的 `/var/lib/rancher/k3s/agent/images/` 目录中。删除旧的 `tar` 文件。
 
   :::note 提示
-  国内用户，可以导航到 http://mirror.cnrancher.com 下载资源
+  国内用户，可以导航到 https://mirror.rancher.cn 下载资源
   :::
 
 - 复制并替换每个节点上 `/usr/local/bin` 中的旧的 K3s 二进制文件。复制 https://get.k3s.io 上的安装脚本（因为它可能自上次发布以来已更改）。就像你过去使用相同的环境变量所做的那样再次运行脚本。

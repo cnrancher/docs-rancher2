@@ -42,7 +42,7 @@ curl -sfL https://get.k3s.io | sh -
 国内用户，可以使用以下方法加速安装：
 
 ```
-curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -
+curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -
 ```
 
 :::

@@ -21,7 +21,7 @@ keywords:
 
 ## 使用国内资源下载 Rancher 组件
 
-我们已经将 Rancher 的常用组件放在国内服务器上，访问http://mirror.cnrancher.com 即可下载所需的组件，从此告别`failed: Operation timed out`
+我们已经将 Rancher 的常用组件放在国内服务器上，访问 https://mirror.rancher.cn 即可下载所需的组件，从此告别`failed: Operation timed out`
 
 ![rancher-mirror](/img/rancher/expansion/007S8ZIlly1gejvtmh6w3j31sx0u0q3j.jpg)
 
