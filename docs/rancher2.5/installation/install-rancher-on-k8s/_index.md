@@ -25,9 +25,16 @@ keywords:
 
 ### Kubernetes 集群
 
-设置 Rancher Server 的本地 Kubernetes 集群。
+设置 Rancher Server 的 Local Kubernetes 集群。
 
 Rancher 可以安装在任何 Kubernetes 集群上。这个集群可以使用上游 Kubernetes，也可以使用 Rancher 的 Kubernetes 发行版之一，也可以是来自 Amazon EKS 等提供商的托管 Kubernetes 集群。
+
+:::important 重要
+
+Rancher 需要安装在受支持的 Kubernetes 版本上。要了解你的 Rancher 版本支持哪些版本的 Local Kubernetes，请参考[支持矩阵](https://www.suse.com/suse-rancher/support-matrix/all-supported-versions/) 或 [Rancher Release](https://github.com/rancher/rancher/releases)。
+
+  例如：Rancher v2.5.12 支持的 Kubernetes 版本包括 1.20、1.19、1.18 和 1.17。所以你的 Local Kubernetes 集群可以选择 1.20、1.19、1.18 或 1.17 版本。
+:::
 
 对于设置 Kubernetes 集群的帮助，我们提供这些教程：
 
