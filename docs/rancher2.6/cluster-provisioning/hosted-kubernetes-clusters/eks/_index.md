@@ -108,7 +108,7 @@ EKS 配置者可以在 Rancher 和提供商之间同步 EKS 集群的状态。�
 
 如果你的更改被覆盖，可能是集群数据与 EKS 同步的方式导致的。不要在使用其他源（例如 EKS 控制台）对集群进行更改后，又在五分钟之内在 Rancher 中进行更改。有关其工作原理，以及如何配置刷新间隔的信息，请参阅[同步](#syncing)。
 
-如果在修改或注册集群时返回未经授权的错误，并且集群不是使用你的凭据所属的角色或用户创建的，请参阅[安全与合规](#security-and-compliance)。
+如果在修改或注册集群时返回未经授权的错误，并且集群不是使用你的凭证所属的角色或用户创建的，请参阅[安全与合规](#security-and-compliance)。
 
 有关 Amazon EKS Kubernetes 集群的任何问题或故障排除详细信息，请参阅此[文档](https://docs.aws.amazon.com/eks/latest/userguide/troubleshooting.html)。
 

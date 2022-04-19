@@ -66,7 +66,7 @@ weight: 115
 
 ### 后续操作
 
-使用 Rancher 创建 deployment。详情请参见 [创建 Deployment]({{< baseurl >}}/rancher/v2.6/en/quick-start-guide/workload)。
+使用 Rancher 创建 deployment。详情请参见 [创建 Deployment]({{<baseurl>}}/rancher/v2.6/en/quick-start-guide/workload)。
 
 ## 清理环境
 

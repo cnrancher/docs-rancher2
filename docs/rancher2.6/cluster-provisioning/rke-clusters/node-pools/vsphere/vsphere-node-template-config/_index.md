@@ -50,7 +50,7 @@ weight: 2
 | 创建方法           |    \*    | 在节点上创建操作系统的方法。可以使用 ISO 或 VM 模板安装操作系统。根据创建方法，你还必须指定 VM 模板、内容库、现有 VM 或 ISO。有关创建方法的详细信息，请参阅 [VM 创建方法](#about-vm-creation-methods)。                                                                           |
 | Cloud Init         |          | `cloud-config.yml` 文件的 URL 或用于配置 VM 的 URL。此文件允许进一步定制操作系统，例如网络配置、DNS 服务器或系统守护程序。操作系统必须支持 `cloud-init`。                                                                                                                         |
 | 网络               |          | 要挂载 VM 的网络的名称。                                                                                                                                                                                                                                                          |
-| guestinfo 配置参数 |          | VM 的其他配置参数。这些参数对应 vSphere 控制台中的[高级设置](https://kb.vmware.com/s/article/1016098)。示例用例包括提供 RancherOS [guestinfo]({{< baseurl >}}/os/v1.x/en/installation/cloud/vmware-esxi/#vmware-guestinfo) 参数，或为 VM 启用磁盘 UUID (`disk.EnableUUID=TRUE`)。 |
+| guestinfo 配置参数 |          | VM 的其他配置参数。这些参数对应 vSphere 控制台中的[高级设置](https://kb.vmware.com/s/article/1016098)。示例用例包括提供 RancherOS [guestinfo]({{<baseurl>}}/os/v1.x/en/installation/cloud/vmware-esxi/#vmware-guestinfo) 参数，或为 VM 启用磁盘 UUID (`disk.EnableUUID=TRUE`)。 |
 
 ### VM 创建方法
 

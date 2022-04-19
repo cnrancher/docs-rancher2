@@ -26,7 +26,7 @@ PSP 通过继承的方式工作：
 - **例外**：无论 PSP 是分配给集群还是项目，未分配给项目的命名空间不会继承 PSP。因为这些命名空间没有 PSP，所以这些命名空间的工作负载 deployment 将失败，这是 Kubernetes 的默认行为。
 - 你可以通过将不同的 PSP 直接分配给项目来覆盖默认 PSP。
 
-在分配 PSP 之前已经在集群或项目中运行的任何工作负载如果符合 PSP，则不会被检查。需要克隆或升级工作负载以查看它们是否通过 PSP。
+在分配 PSP 之前已经在集群或项目中运行的任何工作负载如果符合 PSP，则不会被检查。你需要克隆或升级工作负载以查看它们是否通过 PSP。
 
 在 [Kubernetes 文档](https://kubernetes.io/docs/concepts/policy/pod-security-policy/)中阅读有关 Pod 安全策略的更多信息。
 
@@ -51,7 +51,7 @@ Rancher 内置了两个默认的 Pod 安全策略 (PSP)，分别是 `restricted`
 
 ### 要求
 
-Rancher 只能为[使用 RKE 启动的集群]({{< baseurl >}}/rancher/v2.6/en/cluster-provisioning/rke-clusters/)分配 PSP。
+Rancher 只能为[使用 RKE 启动的集群]({{<baseurl>}}/rancher/v2.6/en/cluster-provisioning/rke-clusters/)分配 PSP。
 
 你必须先在集群级别启用 PSP，然后才能将它们分配给项目。这可以通过[编辑集群]({{<baseurl>}}/rancher/v2.6/en/cluster-admin/editing-clusters/)来配置。
 

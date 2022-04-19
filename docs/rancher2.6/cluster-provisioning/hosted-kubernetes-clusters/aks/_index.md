@@ -1,5 +1,5 @@
 ---
-title: 创建 AKS 群集
+title: 创建 AKS 集群
 shortTitle: Azure Kubernetes 服务
 weight: 2115
 ---
@@ -10,19 +10,19 @@ weight: 2115
 - [使用 Azure 命令行工具设置服务主体](#setting-up-the-service-principal-with-the-azure-command-line-tool)
   - [从 Azure 门户设置服务主体](#setting-up-the-service-principal-from-the-azure-portal)
 - [1. 创建 AKS 云凭证](#1-create-the-aks-cloud-credentials)
-- [2. 创建 AKS 群集](#2-create-the-aks-cluster)
+- [2. 创建 AKS 集群](#2-create-the-aks-cluster)
 - [基于角色的访问控制](#role-based-access-control)
 - [AKS 集群配置参考](#aks-cluster-configuration-reference)
 - [私有集群](#private-clusters)
 - [同步](#syncing)
-- [以编程方式创建 AKS 群集](#programmatically-creating-aks-clusters)
+- [以编程方式创建 AKS 集群](#programmatically-creating-aks-clusters)
 
 ## Microsoft Azure 中的先决条件
 
 > **注意**：
 > 部署到 AKS 会产生费用。
 
-若要与 Azure API 交互，AKS 群集需要 Azure Active Directory (AD) 服务主体。服务主体是动态创建和管理其他 Azure 资源所必需的，它为群集提供凭证来与 AKS 通信。有关服务主体的详细信息，请参阅 [AKS 文档](https://docs.microsoft.com/en-us/azure/aks/kubernetes-service-principal)。
+若要与 Azure API 交互，AKS 集群需要 Azure Active Directory (AD) 服务主体。服务主体是动态创建和管理其他 Azure 资源所必需的，它为集群提供凭证来与 AKS 通信。有关服务主体的详细信息，请参阅 [AKS 文档](https://docs.microsoft.com/en-us/azure/aks/kubernetes-service-principal)。
 
 在创建服务主体之前，你需要从 [Microsoft Azure 门户](https://portal.azure.com)获取以下信息：
 
@@ -84,16 +84,16 @@ az ad sp create-for-rbac \
 1. 可选：选择可以使用服务主体的账号。
 1. 单击 **Register**。
 1. 你现在应该能在 **Azure Active Directory > App registrations** 下看到服务主体的名称。
-1. 单击你的服务主体的名称。记下应用程序 ID（也称为应用 ID 或客户端 ID），以便在预配 AKS 群集时使用。然后单击 **Certificates & secrets**。
+1. 单击你的服务主体的名称。记下应用 ID（也称为应用 ID 或客户端 ID），以便在预配 AKS 集群时使用。然后单击 **Certificates & secrets**。
 1. 单击 **New client secret**。
-1. 输入简短说明，选择过期时间，然后单击 **Add**。记下客户端密码，以便在预配 AKS 群集时使用它。
+1. 输入简短说明，选择过期时间，然后单击 **Add**。记下客户端密码，以便在预配 AKS 集群时使用它。
 
 **结果**：你已经创建了一个服务主体，现在你能够在 **App registrations** 下的 **Azure Active Directory** 中找到它。你仍然需要向服务主体授予对 AKS 的访问权限。
 
 要授予对服务主体基于角色的访问权限：
 
 1. 点击左侧导航栏中的 **All Services**。然后单击 **Subscriptions**。
-1. 单击要与 Kubernetes 集群关联的订阅的名称。记下订阅 ID，以便在预配 AKS 群集时使用它。
+1. 单击要与 Kubernetes 集群关联的订阅的名称。记下订阅 ID，以便在预配 AKS 集群时使用它。
 1. 单击 **Access Control (IAM)**。
 1. 在 **Add role assignment** 中，单击 **Add**。
 1. 在 **Role** 字段中，选择将有权访问 AKS 的角色。例如，你可以使用 **Contributor** 角色，该角色有权管理除授予其他用户访问权限之外的所有内容。
@@ -131,7 +131,7 @@ az ad sp create-for-rbac \
 
 注册或导入到 Rancher 的 AKS 集群需要 RBAC。
 
-## AKS 群集配置参考
+## AKS 集群配置参考
 
 有关如何在 Rancher UI 配置 AKS 集群的更多信息，请参阅[配置参考]({{<baseurl>}}/rancher/v2.6/en/cluster-admin/editing-clusters/aks-config-reference)。
 
@@ -143,11 +143,11 @@ Rancher 可以通过以下两种方式之一连接到私有 AKS 集群。
 
 第一种方法是确保 Rancher 运行在与 AKS 节点相同的 [NAT](https://docs.microsoft.com/en-us/azure/virtual-network/nat-overview) 上。
 
-第二种方法是运行命令向 Rancher 注册集群。配置集群后，你可以在任何能连接到集群的 Kubernetes API 的地方运行显示的命令。配置启用了私有 API 端点的 AKS 群集时，此命令将显示在弹出窗口中。
+第二种方法是运行命令向 Rancher 注册集群。配置集群后，你可以在任何能连接到集群的 Kubernetes API 的地方运行显示的命令。配置启用了私有 API 端点的 AKS 集群时，此命令将显示在弹出窗口中。
 
-> **注意**：注册现有 AKS 群集时，群集可能需要一些时间（可能是数小时）才会出现在 `Cluster To register` 下拉列表中。不同区域的结果可能不同。
+> **注意**：注册现有 AKS 集群时，集群可能需要一些时间（可能是数小时）才会出现在 `Cluster To register` 下拉列表中。不同区域的结果可能不同。
 
-有关连接到 AKS 专用群集的详细信息，请参阅 [AKS 文档](https://docs.microsoft.com/en-us/azure/aks/private-clusters#options-for-connecting-to-the-private-cluster)。
+有关连接到 AKS 专用集群的详细信息，请参阅 [AKS 文档](https://docs.microsoft.com/en-us/azure/aks/private-clusters#options-for-connecting-to-the-private-cluster)。
 
 ## 同步
 
@@ -155,6 +155,6 @@ AKS 配置者可以在 Rancher 和提供商之间同步 AKS 集群的状态。�
 
 有关配置刷新间隔的信息，请参阅[本节]({{<baseurl>}}/rancher/v2.6/en/cluster-admin/editing-clusters/gke-config-reference/#configuring-the-refresh-interval)。
 
-## 以编程方式创建 AKS 群集
+## 以编程方式创建 AKS 集群
 
 通过 Rancher 以编程方式部署 AKS 集群的最常见方法是使用 Rancher 2 Terraform Provider。详情请参见[使用 Terraform 创建集群](https://registry.terraform.io/providers/rancher/rancher2/latest/docs/resources/cluster)。

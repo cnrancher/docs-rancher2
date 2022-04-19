@@ -37,7 +37,7 @@ az ad sp create-for-rbac \
   --scopes="/subscriptions/<subscription Id>"
 ```
 
-创建服务主体后会返回三个标识信息，分别是*应用程序 ID（也称为客户端 ID）*，以及*客户端密码*。为 Azure 创建节点模板时将使用这些信息。
+创建服务主体后会返回三个标识信息，分别是*应用 ID（也称为客户端 ID）*，以及*客户端密码*。为 Azure 创建节点模板时将使用这些信息。
 
 # 创建 Azure 集群
 
