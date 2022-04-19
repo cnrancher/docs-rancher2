@@ -85,7 +85,7 @@ kubeconfig 也可以通过 `--kubeconfig` 标签（详情请参见 https://helm.
    rancher-<CHART_REPO>	 https://releases.rancher.com/server-charts/<CHART_REPO>
    ```
 
-   > **注意**：如果你想切换到不同的 Helm Chart 仓库，请按照[切换仓库步骤]({{<baseurl>}}/rancher/v2.6/en/installation/resources/choosing-version/#switching-to-a-different-helm-chart-repository)进行操作。如果你要切换存储库，请先再次列出仓库，再继续执行步骤 3，以确保添加了正确的仓库。
+   > **注意**：如果你想切换到不同的 Helm Chart 仓库，请按照[切换仓库步骤]({{<baseurl>}}/rancher/v2.6/en/installation/resources/choosing-version/#switching-to-a-different-helm-chart-repository)进行操作。如果你要切换仓库，请先再次列出仓库，再继续执行步骤 3，以确保添加了正确的仓库。
 
 1. 从 Helm Chart 仓库获取最新的 Chart 来安装 Rancher。
 

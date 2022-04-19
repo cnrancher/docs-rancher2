@@ -68,7 +68,7 @@ weight: 1115
 
 1. 单击 **New client secret**。
 
-   ![Create new client secret]({{< baseurl >}}/img/rancher/select-client-secret.png)
+   ![Create new client secret]({{<baseurl>}}/img/rancher/select-client-secret.png)
 
    1. 输入 **Description**（例如 `Rancher`）。
 
@@ -95,7 +95,7 @@ weight: 1115
 
 1. 在 **Azure Active Directory Graph** 中，选择以下 **Delegated Permissions**：
 
-   ![Select API Permissions]({{< baseurl >}}/img/rancher/select-required-permissions-2.png)
+   ![Select API Permissions]({{<baseurl>}}/img/rancher/select-required-permissions-2.png)
 
    - **Access the directory as the signed-in user**
    - **Read directory data**

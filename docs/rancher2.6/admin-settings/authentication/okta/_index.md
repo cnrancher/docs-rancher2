@@ -31,7 +31,7 @@ weight: 1210
     | 用户组字段       | 组属性语句中公开你的组的属性名称。                                      |
     | Rancher API 主机 | Rancher Server 的 URL。                                                 |
     | 私钥/证书        | 密钥/证书对，用于断言加密。                                             |
-    | 元数据 XML       | 你在应用程序 `Sign On` 部分中找到的 `Identity Provider metadata` 文件。 |
+    | 元数据 XML       | 你在应用 `Sign On` 部分中找到的 `Identity Provider metadata` 文件。 |
 
     > **提示**：你可以使用 openssl 命令生成一个密钥/证书对。例如：
     >

@@ -157,7 +157,7 @@ spec:
 
 添加上述 YAML 会创建 Grafana 的链接，如以下截图所示：
 
-![Screenshot of Grafana Link]({{< baseurl >}}/img/rancher/example-grafana-link.png)
+![Screenshot of Grafana Link]({{<baseurl>}}/img/rancher/example-grafana-link.png)
 
 ### `toService` 的链接示例
 
@@ -189,4 +189,4 @@ spec:
 
 添加上面的 `toService` 参数会创建 Grafana 的链接，如以下截图所示：
 
-![Screenshot of Grafana Link]({{< baseurl >}}/img/rancher/example-service-link.png)
+![Screenshot of Grafana Link]({{<baseurl>}}/img/rancher/example-service-link.png)

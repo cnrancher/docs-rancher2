@@ -109,7 +109,7 @@ weight: 10
    1. 属于多个用户组的用户：选中此框以启用嵌套组成员关系。Rancher 管理员可以在配置认证后的任何时候禁用它。
    - **步骤一**是将 Rancher 添加为授权域（详情请参见[本节](#1-adding-rancher-as-an-authorized-domain)）。
    - **步骤二**提供你完成[本节](#2-creating-oauth2-credentials-for-the-rancher-server)后下载的 OAuth 凭证 JSON。你可以上传文件或将内容粘贴到 **OAuth Credentials** 字段。
-   - **步骤三**提供在[本节](#3-creating-service-account-credentials)末尾下载的服务账号凭据 JSON。仅当你成功[在 G Suite 账号中将服务账号密钥注册为 OAuth Client](#4-register-the-service-account-key-as-an-oauth-client) 后，凭证才能正常工作。
+   - **步骤三**提供在[本节](#3-creating-service-account-credentials)末尾下载的服务账号凭证 JSON。仅当你成功[在 G Suite 账号中将服务账号密钥注册为 OAuth Client](#4-register-the-service-account-key-as-an-oauth-client) 后，凭证才能正常工作。
 1. 点击**使用 Google 认证**。
 1. 点击**启用**。
 
