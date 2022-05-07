@@ -2229,6 +2229,7 @@ module.exports = {
             "rke2/security/fips_support/_index",
             "rke2/security/policies/_index",
             "rke2/security/selinux/_index",
+            "rke2/security/secrets_encryption/_index",
         ],
         架构: ["rke2/architecture/_index"],
         访问集群: ["rke2/cluster_access/_index"],

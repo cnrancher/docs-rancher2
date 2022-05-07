@@ -25,11 +25,11 @@ keywords:
 - [节点标签和污点](#节点标签和污点)
 - [使用安装脚本启动 server 节点](#使用安装脚本启动-server-节点)
 - [Alpine Linux 安装的额外准备工作](#alpine-linux-安装的额外准备工作)
+- [Red Hat/CentOS Enterprise Linux 的额外准备工作](#red-hatcentos-enterprise-linux-的额外准备工作)
+- [Raspberry Pi OS 设置的额外准备工作](#raspberry-pi-os-setup-的额外准备工作)
+- [在 Raspberry Pi 上的 Ubuntu 21.10+ 上启用 vxlan](#在-raspberry-pi-上的-ubuntu-2110-上启用-vxlan)
 - [运行 K3d（Docker 中的 K3s）和 docker-compose](#运行-k3d（docker-中的-k3s）和-docker-compose)
-- [在 Raspbian Buster 上启用旧版的 iptables](#在-raspbian-buster-上启用旧版的-iptables)
-- [为 Raspbian Buster 启用 cgroup](#为-raspbian-buster-启用-cgroup)
 - [SELinux 支持](#selinux-支持)
-- [Red Hat 和 CentOS 的额外准备](#red-hat-和-centos-的额外准备)
 - [启用 eStargz 的延迟拉取（实验性）](#启用-estargz-的延迟拉取（实验性）)
 - [其他日志源](#additional-logging-sources)
 - [Server 和 agent tokens](#server-和-agent-token)
@@ -160,7 +160,7 @@ K3s 将会在`/var/lib/rancher/k3s/agent/etc/containerd/config.toml`中为 conta
 
 如果要对这个文件进行高级定制，你可以在同一目录中创建另一个名为 `config.toml.tmpl` 的文件，此文件将会代替默认设置。
 
-`config.toml.tmpl`将被视为 Go 模板文件，并且`config.Node`结构被传递给模板。[此模板](https://github.com/rancher/k3s/blob/master/pkg/agent/templates/templates.go#L16-L32)示例介绍了如何使用结构来自定义配置文件。
+`config.toml.tmpl` 其实是一个 Go 模板文件，并且 `config.Node` 结构传递给模板。有关如何使用该结构自定义配置文件的 Linux 和 Windows 示例，请参见 [这个文件夹](https://github.com/k3s-io​​/k3s/blob/master/pkg/agent/templates)。
 
 ## 使用 Rootless 运行 K3s (实验)
 
@@ -277,6 +277,46 @@ INFO[2019-01-22T15:16:20.541049100-07:00] Run: k3s kubectl
    reboot
    ```
 
+## Red Hat/CentOS Enterprise Linux 的额外准备工作
+
+建议关闭 firewalld：
+
+```
+systemctl disable firewalld --now
+```
+
+如果启用，则需要禁用 nm-cloud-setup 并重新启动节点：
+
+```
+systemctl disable nm-cloud-setup.service nm-cloud-setup.timer
+reboot
+```
+
+## Raspberry Pi OS Setup 的额外准备工作
+
+### 在 Raspberry Pi OS 上启用旧版 iptables
+
+Raspberry Pi OS（以前称为 Raspbian）默认使用 `nftables` 而不是 `iptables`。 **K3S** 网络功能需要 `iptables` 并且不能与 `nftables` 一起使用。按照以下步骤切换配置 **Buster** 以使用 `legacy iptables`：
+
+```
+sudo iptables -F
+sudo update-alternatives --set iptables /usr/sbin/iptables-legacy
+sudo update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
+sudo reboot
+```
+
+### 为 Raspberry Pi OS 启用 cgroups
+
+标准 Raspberry Pi OS 安装时不会启用 `cgroups`。 **K3S** 需要 `cgroups` 来启动 systemd 服务。可以通过将 `cgroup_memory=1 cgroup_enable=memory` 附加到 `/boot/cmdline.txt` 来启用 `cgroups`。
+
+## 在 Raspberry Pi 上的 Ubuntu 21.10+ 上启用 vxlan
+
+从 Ubuntu 21.10 开始，Raspberry Pi 上的 vxlan 支持已移至单独的内核模块中。
+
+```
+sudo apt install linux-modules-extra-raspi
+```
+
 ## 运行 K3d（Docker 中的 K3s）和 docker-compose
 
 [k3d](https://github.com/rancher/k3d)是一个设计用于在 Docker 中轻松运行 K3s 的工具。
@@ -315,21 +355,6 @@ sudo docker run \
   -e K3S_TOKEN=${NODE_TOKEN} \
   --privileged rancher/k3s:vX.Y.Z
 ```
-
-## 在 Raspbian Buster 上启用旧版的 iptables
-
-Raspbian Buster 默认使用`nftables`而不是`iptables`。 **K3S** 网络功能需要使用`iptables`，而不能使用`nftables`。 按照以下步骤切换配置**Buster**使用`legacy iptables`：
-
-```
-sudo iptables -F
-sudo update-alternatives --set iptables /usr/sbin/iptables-legacy
-sudo update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
-sudo reboot
-```
-
-## 为 Raspbian Buster 启用 cgroup
-
-标准的 Raspbian Buster 安装没有启用 `cgroups`。**K3S** 需要`cgroups`来启动 systemd 服务。在`/boot/cmdline.txt`中添加`cgroup_memory=1 cgroup_enable=memory`就可以启用`cgroups`。
 
 ### /boot/cmdline.txt 的示例
 
@@ -385,21 +410,6 @@ selinux: true
 要关闭嵌入式 containerd 中的 SELinux enforcement，请使用`--disable-selinux`标志启动 K3s。
 
 在 SELinux 下不支持使用自定义的`--data-dir`。要自定义它，你很可能需要编写自己的自定义策略。为了获得指导，你可以参考[container/container-selinux](https://github.com/containers/container-selinux)资源库，它包含了容器运行时的 SELinux 策略文件，以及[rancher/k3s-selinux](https://github.com/rancher/k3s-selinux)资源库，它包含了 K3s 的 SELinux 策略。
-
-## Red Hat 和 CentOS 的额外准备
-
-建议运行以下命令，关闭 firewalld：
-
-```shell
-systemctl disable firewalld --now
-```
-
-如果启用，则需要禁用 nm-cloud-setup 并重启节点:
-
-```
-systemctl disable nm-cloud-setup.service nm-cloud-setup.timer
-reboot
-```
 
 ## 启用 eStargz 的延迟拉取（实验性）
 

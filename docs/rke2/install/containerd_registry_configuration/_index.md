@@ -58,6 +58,21 @@ mirrors:
 如果没有配置 endpoint，containerd 会假定镜像仓库可以通过 443 端口的 HTTPS 匿名访问，并且使用主机操作系统信任的证书。欲了解更多信息，你可以[查阅 containerd 文档](https://github.com/containerd/containerd/blob/master/docs/cri/registry.md#configure-registry-endpoint)。
 :::
 
+#### 重写
+
+每个 mirror 可以有一组重写。重写可以根据正则表达式来改变镜像的标签。如果镜像仓库中的组织/项目结构与上游的不同，这很有用。
+
+例如，以下配置将透明地从 `registry.example.com:5000/mirrorproject/rancher-images/rke2-runtime:v1.23.5-rke2r1` 拉取镜像 `rancher/rke2-runtime:v1.23.5-rke2r1`。
+
+```yaml
+mirrors:
+  docker.io:
+    endpoint:
+      - "https://registry.example.com:5000"
+    rewrite:
+      "^rancher/(.*)": "mirrorproject/rancher-images/$1"
+```
+
 ### Configs
 
 configs 部分定义了每个镜像的 TLS 和凭证配置。对于每个镜像，你可以定义`auth`和/或`tls`。TLS 部分由以下部分组成：

@@ -43,3 +43,9 @@ K3S_TOKEN=SECRET k3s server --server https://<ip or hostname of server1>:6443
 - 与网络有关的标志：`--cluster-dns`, `--cluster-domain`, `--cluster-cidr`, `--service-cidr`
 - 控制某些组件的部署的标志：`--disable-helm-controller`, `--disable-kube-proxy`, `--disable-network-policy`和任何传递给`--disable`的组件
 - 与功能相关的标志：`--secrets-encryption`
+
+## 现有集群
+
+如果你有一个使用默认嵌入式 SQLite 数据库的现有集群，你可以通过使用 `--cluster-init` 标志重新启动你的 K3s server 来将其转换为 etcd。完成此操作后，你将能够如上所述添加其他实例。
+
+> **重要：** K3s v1.22.2 及更新版本支持从 SQLite 迁移到 etcd。如果您将 `--cluster-init` 添加到现有 server，旧版本将创建一个新的空数据存储。

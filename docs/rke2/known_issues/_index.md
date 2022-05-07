@@ -52,18 +52,18 @@ spec:
       enabled: true
       k8s:
         overlays:
-        - apiVersion: "apps/v1"
-          kind: "DaemonSet"
-          name: "istio-cni-node"
-          patches:
-          - path: spec.template.spec.containers.[name:install-cni].securityContext.privileged
-            value: true
+          - apiVersion: "apps/v1"
+            kind: "DaemonSet"
+            name: "istio-cni-node"
+            patches:
+              - path: spec.template.spec.containers.[name:install-cni].securityContext.privileged
+                value: true
   values:
     cni:
       image: rancher/mirrored-istio-install-cni:1.9.3
       excludeNamespaces:
-      - istio-system
-      - kube-system
+        - istio-system
+        - kube-system
       logLevel: info
       cniBinDir: /opt/cni/bin
       cniConfDir: /etc/cni/net.d
@@ -73,7 +73,7 @@ spec:
 
 ## Control Groups V2
 
-越来越多的 Linux 发行版开始使用支持 cgroups v2 的内核和用户空间，例如从 Fedora 31 开始。然而，在写这篇文章的时候，RKE2 内置的`containerd`是 1.3.x 的分叉版本（有 1.4.x 版本的 SELinux 提交），不支持 cgroups v2。 在 RKE2 发布`containerd`v1.4.x 版本之前，在支持 cgroups v2 的系统上运行它需要一些前期的配置。
+RKE2 v1.19.5+ 内置 `containerd` v1.4.x 或更高版本，因此应该在支持 cgroups v2 的系统上运行。较旧的版本（< 1.19.5）内置 containerd 1.3.x ，它不支持 cgroups v2 并且需要一些前期配置：
 
 假设是基于 `systemd` 的系统，设置[systemd.unified_cgroup_hierarchy=0](https://www.freedesktop.org/software/systemd/man/systemd.html#systemd.unified_cgroup_hierarchy)内核参数将向 systemd 表明它应该以混合（cgroups v1 + v2）方式运行。结合上述情况，设置 [systemd.legacy_systemd_cgroup_controller](https://www.freedesktop.org/software/systemd/man/systemd.html#systemd.legacy_systemd_cgroup_controller) 内核参数将向 systemd 表明它应该以传统（cgroups v1）的方式运行。由于这些参数是内核命令行参数，因此必须在系统引导程序中设置，以便在`/sbin/init`中作为 PID 1 传递给`systemd`。
 
@@ -88,3 +88,12 @@ spec:
 Calico 在使用 vxlan 封装且 vxlan 接口的校验和卸载开启时遇到了一个内核错误。这个问题在[calico 项目](https://github.com/projectcalico/calico/issues/3145)和[rke2 项目](https://github.com/rancher/rke2/issues/1541)。我们的临时解决方法是通过应用值来禁用校验和卸载，在[calico helm chart](https://github.com/rancher/rke2-charts/blob/main/charts/rke2-calico/rke2-calico/v3.19.2-203/values.yaml#L51-L53)中使用 `ChecksumOffloadBroken=true` 的值。
 
 这个问题已经在 Ubuntu 18.04、Ubuntu 20.04 和 openSUSE Leap 15.3 中被观察到。
+
+## Wicked
+
+Wicked 根据 sysctl 配置文件（例如，在 /etc/sysctl.d/ 目录下）来配置主机的网络设置。即使 rke2 将 `/net/ipv4/conf/all/forwarding` 等参数设置为 1，但每当 Wicked 重新应用网络配置时，该配置可能会被 Wicked 恢复（有几个事件会导致重新应用网络配置以及 rcwicked 在更新期间重新启动）。因此，在 sysctl 配置文件中启用 ipv4（如果是双堆栈，则启用 ipv6）转发是非常重要的。例如，建议创建一个名为 `/etc/sysctl.d/90-rke2.conf` 的文件，其中包含这些参数（ipv6 仅在双栈的情况下需要）：
+
+```bash
+net.ipv4.conf.all.forwarding=1
+net.ipv6.conf.all.forwarding=1
+```

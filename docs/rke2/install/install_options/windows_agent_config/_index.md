@@ -17,16 +17,16 @@ keywords:
 
 这是所有可用于配置 Windows RKE2 Agent 的参数的参考。
 
-## Windows RKE2 Agent CLI 帮助
-
 **从 v1.21.3+rke2r1 开始，Windows 支持目前是实验性的**。**Windows 支持需要选择 Calico 作为 RKE2 集群的 CNI**。
+
+## Windows RKE2 Agent CLI 帮助
 
 ```console
 NAME:
-   rke2.exe agent - Run node agent
+   rke2-windows-amd64.exe agent - Run node agent
 
 USAGE:
-   rke2.exe agent command [command options] [arguments...]
+   rke2-windows-amd64.exe agent command [command options] [arguments...]
 
 COMMANDS:
    service  Manage RKE2 as a Windows Service
@@ -66,6 +66,26 @@ COMMANDS:
    --cloud-provider-config value              (cloud provider) 云提供商配置文件路径 [%RKE2_CLOUD_PROVIDER_CONFIG%]
    --profile value                            (security) 根据选定的基准验证系统配置 (有效项目: cis-1.5, cis-1.6 ) [%RKE2_CIS_PROFILE%]
    --audit-policy-file value                  (security) 定义审计策略配置的文件的路径 [%RKE2_AUDIT_POLICY_FILE%]
+   --control-plane-resource-requests value       (components) Control Plane 资源请求 [%RKE2_CONTROL_PLANE_RESOURCE_REQUESTS%]
+   --control-plane-resource-limits value         (components) Control Plane 资源限制 [%RKE2_CONTROL_PLANE_RESOURCE_LIMITS%]
+   --kube-apiserver-extra-mount value            (components) kube-apiserver 额外的卷挂载 [%RKE2_KUBE_APISERVER_EXTRA_MOUNT%]
+   --kube-scheduler-extra-mount value            (components) kube-scheduler 额外的卷挂载 [%RKE2_KUBE_SCHEDULER_EXTRA_MOUNT%]
+   --kube-controller-manager-extra-mount value   (components) kube-controller-manager 额外的卷挂载 [%RKE2_KUBE_CONTROLLER_MANAGER_EXTRA_MOUNT%]
+   --kube-proxy-extra-mount value                (components) kube-proxy 额外的卷挂载 [%RKE2_KUBE_PROXY_EXTRA_MOUNT%]
+   --etcd-extra-mount value                      (components) etcd 额外的卷挂载 [%RKE2_ETCD_EXTRA_MOUNT%]
+   --cloud-controller-manager-extra-mount value  (components) cloud-controller-manager 额外的卷挂载 [%RKE2_CLOUD_CONTROLLER_MANAGER_EXTRA_MOUNT%]
+   --kube-apiserver-extra-env value              (components) kube-apiserver 额外的环境变量 [%RKE2_KUBE_APISERVER_EXTRA_ENV%]
+   --kube-scheduler-extra-env value              (components) kube-scheduler 额外的环境变量 [%RKE2_KUBE_SCHEDULER_EXTRA_ENV%]
+   --kube-controller-manager-extra-env value     (components) kube-controller-manager 额外的环境变量 [%RKE2_KUBE_CONTROLLER_MANAGER_EXTRA_ENV%]
+   --kube-proxy-extra-env value                  (components) kube-proxy 额外的环境变量 [%RKE2_KUBE_PROXY_EXTRA_ENV%]
+   --etcd-extra-env value                        (components) etcd 额外的环境变量 [%RKE2_ETCD_EXTRA_ENV%]
+   --cloud-controller-manager-extra-env value    (components) cloud-controller-manager 额外的环境变量 [%RKE2_CLOUD_CONTROLLER_MANAGER_EXTRA_ENV%]
    --help, -h                                 显示帮助
+```
 
+#### 此 Windows Agent 配置参考的最后更新版本为 v1.22.5+rke2r2
+
+```console
+rke2-windows-amd64.exe version v1.22.5+rke2r2 (b61d4b3cb989b0380aae97fceb9a3e45a35ee2b9)
+go version go1.16.10b7
 ```

@@ -63,7 +63,7 @@ OPTIONS:
    --etcd-s3-bucket value                 (db) S3 bucket 名称
    --etcd-s3-region value                 (db) S3 region / bucket 位置 (可选) (默认: "us-east-1")
    --etcd-s3-folder value                 (db) S3 folder
-   --disable value                        (components) 不要部署打包的组件，并删除任何已部署的组件 (有效项目: rke2-coredns, rke2-ingress-nginx, rke2-kube-proxy, rke2-metrics-server)
+   --disable value                        (components) 不要部署打包的组件，并删除任何已部署的组件 (有效项目: rke2-coredns, rke2-ingress-nginx, rke2-metrics-server)
    --disable-scheduler                    (components) 禁用 Kubernetes scheduler
    --disable-cloud-controller             (components) 禁用 rke2 cloud controller manager
    --disable-kube-proxy                   (components) 禁用 kube-proxy
@@ -86,7 +86,6 @@ OPTIONS:
    --server value, -s value               (experimental/cluster) 连接的server，用于加入一个集群 [$RKE2_URL]
    --cluster-reset                        (experimental/cluster) 成为新集群的唯一成员 [$RKE2_CLUSTER_RESET]
    --cluster-reset-restore-path value     (db) 要恢复的快照文件的路径
-   --secrets-encryption                   (experimental) 启用 Secret 加密
    --selinux                              (agent/node) 在containerd中启用SELinux [$RKE2_SELINUX]
    --lb-server-port value                 (agent/node) Supervisor客户端负载均衡器的本地端口。如果supervisor 和apiserver不在同一地点，则apiserver客户端负载均衡器也将使用比该端口少1的额外端口。 (default: 6444) [$RKE2_LB_SERVER_PORT]
    --cni value                            (networking) 部署CNI插件, none, canal, cilium (默认: "canal") [$RKE2_CNI]

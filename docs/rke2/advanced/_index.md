@@ -63,41 +63,6 @@ CONTAINERD_HTTPS_PROXY=http://your-proxy.example.com:8888
 CONTAINERD_NO_PROXY=127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,.svc,.cluster.local
 ```
 
-## Secrets 加密配置
-
-RKE2 支持对 Secrets 进行静态加密，并会自动完成以下工作：
-
-- 生成一个 AES-CBC 密钥
-- 用生成的密钥生成一个加密配置文件：
-
-```yaml
-{
-  "kind": "EncryptionConfiguration",
-  "apiVersion": "apiserver.config.k8s.io/v1",
-  "resources":
-    [
-      {
-        "resources": ["secrets"],
-        "providers":
-          [
-            {
-              "aescbc":
-                {
-                  "keys":
-                    [{ "name": "aescbckey", "secret": "xxxxxxxxxxxxxxxxxxx" }],
-                },
-            },
-            { "identity": {} },
-          ],
-      },
-    ],
-}
-```
-
-- 将配置作为 encryption-provider-config 传递给 Kubernetes APIServer
-
-一旦启用，任何创建的 secret 都将用这个密钥进行加密。请注意，如果你禁用了加密，那么任何加密的 secret 都是不可读的，直到你使用相同的密钥再次启用加密。
-
 ## 节点标签和污点
 
 RKE2 agent 可以通过配置`node-label`和`node-taint`为 kubelet 添加标签和污点。这两个选项只在注册时添加标签和/或污点，而且只能添加一次，之后不能通过 rke2 命令删除。
@@ -113,8 +78,6 @@ Agent 使用加入 token 的集群 secret 部分和随机生成的节点特定�
 注意：在 RKE2 v1.20.2 之前，server 将密码存储在磁盘的`/var/lib/rancher/rke2/server/cred/node-passwd`中。
 
 如果 agent 的`/etc/rancher/node`目录被删除，密码文件应该在启动前为 agent 重新创建，或者从 server 或 Kubernetes 集群中删除该条目（取决于 RKE2 版本）。
-
-通过使用`--with-node-id`标志启动 RKE2 server 或 agent，可以将唯一的节点 ID 附加到主机名上。
 
 ## 用安装脚本启动 server
 
@@ -148,7 +111,6 @@ curl -sfL http://rancher-mirror.rancher.cn/rke2/install.sh | INSTALL_RKE2_MIRROR
 - `rke2-canal `
 - `rke2-coredns `
 - `rke2-ingress-nginx `
-- `rke2-kube-proxy `
 - `rke2-metrics-server`
 
 请注意，集群操作者谨慎禁用或被替换组件，因为 server chart 在集群的可操作性方面起着重要作用。 请参考[架构概述](/docs/rke2/architecture/_index#server-charts)，了解更多关于集群中各个系统 chart 作用的信息。

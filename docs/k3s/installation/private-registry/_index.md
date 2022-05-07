@@ -44,9 +44,28 @@ mirrors:
 
 每个 mirror 必须有一个名称和一组 endpoint。当从镜像仓库中拉取镜像时，containerd 会逐一尝试这些 endpoint URL，并使用第一个可用的 endpoint。
 
+#### 重写
+
+每个镜像都可以有一组重写。重写可以根据正则表达式来改变镜像的标签。如果镜像仓库中的组织/项目结构与上游的不同，这很有用。
+
+例如，以下配置将透明地从 `registry.example.com:5000/mirrorproject/rancher-images/coredns-coredns:1.6.3` 拉取镜像 `docker.io/rancher/coredns-coredns:1.6.3`：
+
+```
+mirrors:
+  docker.io:
+    endpoint:
+      - "https://registry.example.com:5000"
+    rewrite:
+      "^rancher/(.*)": "mirrorproject/rancher-images/$1"
+```
+
+镜像仍将以原始名称存储，所以 `crictl image ls` 将显示 `docker.io/rancher/coredns-coredns:1.6.3` 在节点上是可用的，即使镜像是以不同的名字从镜像仓库中拉取的。
+
 ### Configs
 
-Configs 部分定义了每个 mirror 的 TLS 和证书配置。对于每个 mirror，你可以定义`auth`和/或`tls`。TLS 部分包括：
+Configs 部分定义了每个 mirror 的 TLS 和凭证配置。对于每个 mirror，你可以定义`auth`和/或`tls`。
+
+`tls` 部分包括：
 
 | 指令                   | 描述                                             |
 | :--------------------- | :----------------------------------------------- |
@@ -55,11 +74,13 @@ Configs 部分定义了每个 mirror 的 TLS 和证书配置。对于每个 mirr
 | `ca_file`              | 定义用于验证镜像仓库服务器证书文件的 CA 证书路径 |
 | `insecure_skip_verify` | 定义是否应跳过镜像仓库的 TLS 验证的布尔值        |
 
-凭证由用户名/密码或认证 token 组成：
+`auth` 部分由用户名/密码或身份验证令牌组成：
 
-- username： 镜像仓库身份验证的用户名
-- password： 镜像仓库身份验证的用户密码
-- auth： 镜像仓库 auth 的认证 token
+| Directive  | Description                |
+| ---------- | -------------------------- |
+| `username` | 镜像仓库身份验证的用户名   |
+| `password` | 镜像仓库身份验证的用户密码 |
+| `auth`     | 镜像仓库 auth 的认证 token |
 
 以下是在不同模式下使用私有镜像仓库的基本例子：
 
@@ -67,7 +88,17 @@ Configs 部分定义了每个 mirror 的 TLS 和证书配置。对于每个 mirr
 
 下面的例子展示了当你使用 TLS 时，如何在每个节点上配置`/etc/rancher/k3s/registries.yaml`。
 
-#### 有认证
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+defaultValue="withauth"
+values={[
+{ label: '有认证', value: 'withauth', },
+{ label: '无认证', value: 'withoutauth', },
+]}>
+
+<TabItem value="withauth">
 
 ```
 mirrors:
@@ -85,7 +116,9 @@ configs:
       ca_file:   # 镜像仓库中使用的ca文件的路径。
 ```
 
-#### 无认证
+</TabItem>
+
+<TabItem value="withoutauth">
 
 ```
 mirrors:
@@ -99,12 +132,23 @@ configs:
       key_file:  # 镜像仓库中使用的key文件的路径。
       ca_file:   # 镜像仓库中使用的ca文件的路径。
 ```
+
+</TabItem>
+
+</Tabs>
 
 ### 不使用 TLS
 
 下面的例子展示了当你不使用 TLS 时，如何在每个节点上配置`/etc/rancher/k3s/registries.yaml`。
 
-#### 有认证
+<Tabs
+defaultValue="withauth"
+values={[
+{ label: '有认证', value: 'withauth', },
+{ label: '无认证', value: 'withoutauth', },
+]}>
+
+<TabItem value="withauth">
 
 ```
 mirrors:
@@ -118,7 +162,9 @@ configs:
       password: xxxxxx # 这是私有镜像仓库的密码
 ```
 
-#### 无认证
+</TabItem>
+
+<TabItem value="withoutauth">
 
 ```
 mirrors:
@@ -126,6 +172,10 @@ mirrors:
     endpoint:
       - "http://mycustomreg.com:5000"
 ```
+
+</TabItem>
+
+</Tabs>
 
 > 在没有 TLS 通信的情况下，需要为 endpoints 指定`http://`，否则将默认为 https。
 

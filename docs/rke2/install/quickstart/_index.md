@@ -25,13 +25,15 @@ keywords:
 
 - 对于 1.21 及以上的 RKE2 版本，如果主机内核支持[AppArmor](https://apparmor.net/)，那么在安装 RKE2 之前，AppArmor 工具（通常通过`apparmor-parser`包获得）也必须存在。
 
+- RKE2 安装过程必须以 root 用户或通过 `sudo` 运行。
+
 ## Server 节点安装
 
 RKE2 提供了一个安装脚本，这是一个在基于 systemd 的系统上将其作为服务安装的便捷方式。这个脚本可以从 https://get.rke2.io 获得。要使用此方法安装 RKE2，请执行以下操作：
 
 #### 1. 运行安装程序
 
-```
+```sh
 curl -sfL https://get.rke2.io | sh -
 ```
 
@@ -44,23 +46,23 @@ curl -sfL http://rancher-mirror.rancher.cn/rke2/install.sh | INSTALL_RKE2_MIRROR
 
 :::
 
-这将在你的机器上安装`rke2-server`服务和`rke2`二进制文件。
+这将在你的机器上安装 `rke2-server` 服务和 `rke2` 二进制文件。需要注意的是，除非以 root 用户身份或通过 `sudo` 运行，否则会失败。
 
 #### 2. 启用 rke2-server 服务
 
-```
+```sh
 systemctl enable rke2-server.service
 ```
 
 #### 3. 启动服务
 
-```
+```sh
 systemctl start rke2-server.service
 ```
 
 #### 4. 如果你愿意，可以关注一下日志
 
-```
+```sh
 journalctl -u rke2-server -f
 ```
 
@@ -78,16 +80,18 @@ journalctl -u rke2-server -f
 
 ## Linux Agent（Worker）节点的安装
 
+本节中的步骤需要 root 级别访问权限或 `sudo` 才能工作。
+
 #### 1. 运行安装程序
 
-```
+```sh
 curl -sfL https://get.rke2.io | INSTALL_RKE2_TYPE="agent" sh -
 ```
 
 :::note 提示
 国内用户，可以使用以下方法加速安装：
 
-```
+```sh
 curl -sfL http://rancher-mirror.rancher.cn/rke2/install.sh | INSTALL_RKE2_MIRROR=cn INSTALL_RKE2_TYPE="agent"  sh -
 ```
 
@@ -97,20 +101,20 @@ curl -sfL http://rancher-mirror.rancher.cn/rke2/install.sh | INSTALL_RKE2_MIRROR
 
 #### 2. 启用 rke2-agent 服务
 
-```
+```sh
 systemctl enable rke2-agent.service
 ```
 
 #### 3. 配置 rke2-agent 服务
 
-```
+```sh
 mkdir -p /etc/rancher/rke2/
 vim /etc/rancher/rke2/config.yaml
 ```
 
 config.yaml 的内容。
 
-```bash
+```yaml
 server: https://<server>:9345
 token: <token from server node>
 ```
@@ -121,13 +125,13 @@ token: <token from server node>
 
 #### 4. 启动服务
 
-```
+```sh
 systemctl start rke2-agent.service
 ```
 
 **如果你愿意，可以关注一下日志**。
 
-```
+```sh
 journalctl -u rke2-agent -f
 ```
 
