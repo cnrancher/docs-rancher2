@@ -32,9 +32,10 @@ keywords:
 
 正如[快速入门指南](/docs/rke2/install/quickstart/_index)中提到的，你可以使用 https://get.rke2.io ，将 RKE2 作为服务进行安装。
 
-这个命令的最简单形式如下：
+这个命令的最简单形式是以 root 用户身份或通过 `sudo` 运行，如下所示：
 
 ```sh
+# curl -sfL https://get.rke2.io | sudo sh -
 curl -sfL https://get.rke2.io | sh -
 ```
 
@@ -53,7 +54,7 @@ curl -sfL http://rancher-mirror.rancher.cn/rke2/install.sh | INSTALL_RKE2_MIRROR
 | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `INSTALL_RKE2_VERSION`     | 从 GitHub 下载 RKE2 的版本。如果没有指定，将尝试从`stable`频道下载最新版本。如果在基于 RPM 的系统上安装，并且所需的版本不存在于`stable`频道中，则应该设置 `INSTALL_RKE2_CHANNEL`。 |
 | `INSTALL_RKE2_TYPE`        | 创建 systemd 服务的类型，可以是 "server"或 "agent"，默认为 "server"。                                                                                                              |
-| `INSTALL_RKE2_CHANNEL_URL` | 用于获取 RKE2 下载地址的通道 URL。默认为 https://update.rke2.io/v1-release/channels 。                                                                                             |
+| `INSTALL_RKE2_CHANNEL_URL` | 用于获取 RKE2 下载地址的通道 URL。默认为 `https://update.rke2.io/v1-release/channels`。                                                                                             |
 | `INSTALL_RKE2_CHANNEL`     | 用于获取 RKE2 下载 URL 的通道。默认为`stable`。选项包括: `stable`, `latest`, `testing`.                                                                                            |
 | `INSTALL_RKE2_METHOD`      | 要使用的安装方法。在基于 RPM 的系统中默认为`rpm`，其他都是`tar`。                                                                                                                  |
 

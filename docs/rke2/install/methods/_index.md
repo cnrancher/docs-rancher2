@@ -30,6 +30,7 @@ RKE2 可以通过多种方式安装到系统中，其中两种方式是首选和
 在这里，你可以获得脚本并立即开始安装。
 
 ```bash
+# curl -sfL https://get.rke2.io | sudo sh -
 curl -sfL https://get.rke2.io | sh -
 ```
 

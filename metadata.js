@@ -1042,6 +1042,7 @@ const metadata = {
             "rke2/security/fips_support/_index": "FIPS 140-2 启用",
             "rke2/security/policies/_index": "默认策略配置",
             "rke2/security/selinux/_index": "SELinux",
+            "rke2/security/secrets_encryption/_index": "Secret 加密",
             "rke2/architecture/_index": "架构",
             "rke2/cluster_access/_index": "访问集群",
             "rke2/backup_restore/_index": "Etcd 备份和恢复",

@@ -105,6 +105,8 @@ tls-san:
 
 你应该看到你的 server 节点处于`Ready`状态。
 
+**注意**: 默认情况下，任何 `kubectl` 命令都需要 root 用户访问权限，除非使用 `RKE2_KUBECONFIG_MODE`。请在[集群访问页面](/docs/rke2/cluster_access/_index)中阅读更多信息。
+
 ### 5. 可选：加入 agent 节点
 
 因为 RKE2 server 节点默认是可调度的，所以一个 HA 的 RKE2 server 集群的最小节点数是 3 个 server 节点和 0 个 agent 节点。要添加指定的节点来运行你的应用程序和服务，请将 agent 节点加入你的集群。

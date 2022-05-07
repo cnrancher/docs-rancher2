@@ -53,7 +53,7 @@ K3s 的性能取决于数据库的性能。为了确保最佳速度，我们建�
 
 K3s server 需要 6443 端口才能被所有节点访问。
 
-当使用 Flannel VXLAN 时，节点需要能够通过 UDP 端口 8472 访问其他节点。节点不应该在其他端口上监听。K3s 使用反向隧道，这样节点与服务器建立出站连接，所有的 kubelet 流量都通过该隧道运行。然而，如果你不使用 Flannel 并提供自己的自定义 CNI，那么 K3s 就不需要 8472 端口。
+当使用 Flannel VXLAN 时，节点需要能够通过 UDP 端口 8472 访问其他节点，或者当使用 Flannel Wireguard 后端时，节点需要能够通过 UDP 端口 51820 和 51821（使用 IPv6 时）访问其他节点。该节点不应侦听任何其他端口。 K3s 使用反向隧道，以便节点与服务器建立出站连接，并且所有 kubelet 流量都通过该隧道运行。但是，如果你不使用 Flannel 并提供自己的自定义 CNI，那么 K3s 不需要 Flannel 所需的端口。
 
 如果要使用`metrics server`，则需要在每个节点上打开端口 10250 端口。
 
@@ -67,12 +67,14 @@ K3s server 需要 6443 端口才能被所有节点访问。
 
 K3s Server 节点的入站规则如下：
 
-| 协议 | 端口      | 源                       | 描述                         |
-| :--- | :-------- | :----------------------- | :--------------------------- |
-| TCP  | 6443      | K3s agent 节点           | Kubernetes API Server        |
-| UDP  | 8472      | K3s server 和 agent 节点 | 仅对 Flannel VXLAN 需要      |
-| TCP  | 10250     | K3s server 和 agent 节点 | Kubelet metrics              |
-| TCP  | 2379-2380 | K3s server 节点          | 只有嵌入式 etcd 高可用才需要 |
+| 协议 | 端口      | 源                       | 描述                                          |
+| :--- | :-------- | :----------------------- | :-------------------------------------------- |
+| TCP  | 6443      | K3s agent 节点           | Kubernetes API Server                         |
+| UDP  | 8472      | K3s server 和 agent 节点 | 仅对 Flannel VXLAN 需要                       |
+| UDP  | 51820     | K3s server 和 agent 节点 | 只有 Flannel Wireguard 后端需要               |
+| UDP  | 51821     | K3s server 和 agent 节点 | 只有使用 IPv6 的 Flannel Wireguard 后端才需要 |
+| TCP  | 10250     | K3s server 和 agent 节点 | Kubelet metrics                               |
+| TCP  | 2379-2380 | K3s server 节点          | 只有嵌入式 etcd 高可用才需要                  |
 
 通常情况下，所有出站流量都是允许的。
 

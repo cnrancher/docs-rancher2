@@ -24,7 +24,23 @@ RKE2 可以通过两种不同的方式安装在一个离线环境中。你可以
 
 步骤中提到的所有文件都可以在[此处](https://github.com/rancher/rke2/releases)从所需发布的 rke2 版本的资产中获取。
 
-如果在一个执行 SELinux 的离线节点上运行，在执行这些步骤之前，你必须先安装必要的 SELinux policy RPM。请参阅我们的[RPM 文档](https://github.com/rancher/rke2#rpm-repositories)以确定你需要什么。
+如果在启用了 SELinux 的离线节点上运行，你必须在执行这些步骤之前手动安装必要的 SELinux policy RPM。请参阅我们的 [RPM 文档](/docs/rke2/install/methods/_index#rpm)，以确定你需要什么。
+
+如果在运行 SELinux、CentOS 或 RHEL 8 且启用 SELinux 的离线节点上运行，则在进行 [RPM 安装](/docs/rke2/install/methods/_index#rpm) 时需要以下依赖项:
+
+```
+    Installing dependencies:
+    container-selinux
+    iptables
+    libnetfilter_conntrack
+    libnfnetlink
+    libnftnl
+    policycoreutils-python-utils
+    rke2-common
+    rke2-selinux
+```
+
+本文档中列出的所有步骤都必须以 root 用户身份或通过 `sudo` 运行。
 
 ## Tarball 方式
 

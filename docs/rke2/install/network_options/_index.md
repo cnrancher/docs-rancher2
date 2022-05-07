@@ -27,7 +27,18 @@ RKE2 需要一个 CNI 插件来连接 pod 和 services。Canal CNI 插件是默�
 
 接下来的标签告知如何部署每个 CNI 插件并覆盖默认选项。
 
-#### Canal CNI 插件
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+defaultValue="canal"
+values={[
+{ label: 'Canal CNI 插件', value: 'canal', },
+{ label: 'Cilium CNI 插件', value: 'cilium', },
+{ label: 'Calico CNI 插件', value: 'calico', },
+]}>
+
+<TabItem value="canal">
 
 Canal 意味着使用 Flannel 处理节点间流量，使用 Calico 处理节点内流量和网络策略。默认情况下，它将使用 vxlan 封装在节点之间创建一个 overlay 网络。Canal 默认部署在 RKE2 中的，因此不需要配置就可以激活它。要覆盖默认的 Canal 选项，你应该创建一个 HelmChartConfig 资源。HelmChartConfig 资源必须与其对应的 HelmChart 的名称和命名空间相匹配。例如，要覆盖 flannel 接口，你可以应用以下配置:
 
@@ -43,11 +54,27 @@ spec:
       iface: "eth1"
 ```
 
+从 RKE2 v1.23 开始，可以使用 flannel [wireguard backend](https://github.com/flannel-io/flannel/blob/master/Documentation/backends.md#wireguard) 进行内核内 WireGuard 封装和加密（[内核<5.6 的用户需要安装一个模块](https://www.wireguard.com/install/)）。这可以使用以下配置来实现：
+
+```yaml
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  name: rke2-canal
+  namespace: kube-system
+spec:
+  valuesContent: |-
+    flannel:
+      backend: "wireguard"
+```
+
 关于 Canal 配置的全部选项的更多信息，请参考[rke2-charts](https://github.com/rancher/rke2-charts/blob/main-source/packages/rke2-canal/charts/values.yaml)。
 
 目前 RKE2 的 Window 安装中不支持 Canal。
 
-#### Cilium CNI 插件
+</TabItem>
+
+<TabItem value="cilium">
 
 从 RKE2 v1.21 开始，Cilium 可以作为 CNI 插件被部署。要做到这一点，请将 `cilium` 作为 `--cni` 标志的值。要覆盖默认选项，请使用 HelmChartConfig 资源。HelmChartConfig 资源必须符合对应的 HelmChart 的名称和命名空间。例如，要启用 eni:
 
@@ -64,11 +91,30 @@ spec:
         enabled: true
 ```
 
-更多关于 Cilium chart 的可用值，请参考[rke2-charts 资源库](https://github.com/rancher/rke2-charts/blob/main-source/packages/rke2-cilium/charts/values.yaml)。
+有关 Cilium chart 中可用值的更多信息，请参考[rke2-charts repository](https://github.com/rancher/rke2-charts/blob/main/charts/rke2-cilium/rke2-cilium/1.11.201/values.yaml)
+
+Cilium 包括高级功能，可以完全取代 kube-proxy，使用 eBPF 而不是 iptables 实现服务的路由。如果你的内核不是 v5.8 或更新版本，不建议用 Cilium 取代 kube-proxy，因为重要的 bug 修复和功能会丢失。要激活这种模式，请在部署 rke2 时加入 `--disable-kube-proxy` 标志和以下 cilium 配置：
+
+```yaml
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  name: rke2-cilium
+  namespace: kube-system
+spec:
+  valuesContent: |-
+    kubeProxyReplacement: strict
+    k8sServiceHost: REPLACE_WITH_API_SERVER_IP
+    k8sServicePort: REPLACE_WITH_API_SERVER_PORT
+```
+
+更多信息请查看[上游文档](https://docs.cilium.io/en/v1.11/gettingstarted/kubeproxy-free/)
 
 目前 RKE2 的 Windows 安装中不支持 Cilium。
 
-#### Calico CNI 插件
+</TabItem>
+
+<TabItem value="calico">
 
 从 RKE2 v1.21 开始，Calico 可以作为 CNI 插件被部署。要做到这一点，请将 `calico` 作为 `--cni` 标志的值。要覆盖默认选项，请使用 HelmChartConfig 资源。HelmChartConfig 资源必须符合对应的 HelmChart 的名称和命名空间。例如，要改变 mtu：
 
@@ -87,6 +133,9 @@ spec:
 
 关于 Calico chart 的可用值的更多信息，请参考[rke2-charts 资源库](https://github.com/rancher/rke2-charts/blob/main/charts/rke2-calico/rke2-calico/v3.19.2-204/values.yaml)
 
+</TabItem>
+</Tabs>
+
 ## Dual-stack 配置
 
 IPv4/IPv6 dual-stack 网络可以为 Pod 和 Service 同时分配 IPv4 和 IPv6 地址。RKE2 从 v1.21 版开始支持该功能，但默认情况下并未激活。为了正确激活它，RKE2 和所选的 CNI 插件都必须进行相应的配置。要在 dual-stack 模式下配置 RKE2，只需为 pods 和 service 设置一个有效的 IPv4/IPv6 dual-stack cidr。要做到这一点，请使用标志 `--cluster-cidr` 和 `--service-cidr`，例如。
@@ -98,11 +147,21 @@ IPv4/IPv6 dual-stack 网络可以为 Pod 和 Service 同时分配 IPv4 和 IPv6 
 
 每个 CNI 插件都需要不同的配置来实现 dual-stack：
 
-#### Canal CNI 插件
+<Tabs
+defaultValue="canal"
+values={[
+{ label: 'Canal CNI 插件', value: 'canal', },
+{ label: 'Cilium CNI 插件', value: 'cilium', },
+{ label: 'Calico CNI 插件', value: 'calico', },
+]}>
 
-Canal 目前不支持 dual-stack。要跟踪这方面的进展，请查看[dual-stack in canal issue](https://github.com/rancher/rke2/issues/1883)
+<TabItem value="canal">
 
-#### Cilium CNI 插件
+Canal 自动检测 dual-stack 的 RKE2 配置，不需要任何额外的配置。 RKE2 的 windows 安装目前不支持双栈。
+
+</TabItem>
+
+<TabItem value="cilium">
 
 使用 HelmChartConfig 启用 ipv6 参数：
 
@@ -114,14 +173,18 @@ metadata:
   namespace: kube-system
 spec:
   valuesContent: |-
-    cilium:
-      ipv6:
-        enabled: true
+    ipv6:
+      enabled: true
 ```
 
-#### Calico CNI 插件
+</TabItem>
+
+<TabItem value="calico">
 
 Calico 自动检测 dual-stack 的 RKE2 配置，不需要任何额外配置。当以 dual-stack 模式部署时，它会创建两个不同的 ippool 资源。注意，当使用 dual-stack 时，Calico 利用 BGP 而不是 VXLAN 封装。目前 RKE2 的 windows 系统不支持 dual-stack 和 BGP。
+
+</TabItem>
+</Tabs>
 
 ## 使用 Multus
 

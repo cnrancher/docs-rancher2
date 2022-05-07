@@ -42,8 +42,7 @@ RKE2 已经在以下操作系统及其后续的非主要版本上进行了测试
 RKE2 的 Windows 节点（Worker）agent 已经在以下操作系统及其后续非主要版本上进行了测试和验证：
 
 - Windows Server 2019 LTSC (amd64) (OS Build 17763.2061)
-- Windows Server SAC 2004 (amd64) (OS Build 19041.1110)
-- Windows Server SAC 20H2 (amd64) (OS Build 19042.1110)
+- Windows Server 2022 LTSC (amd64) (OS Build 20348.169)
 
 **注意：**需要启用 Windows Server Containers，以便 RKE2 agent 工作。
 
@@ -56,7 +55,7 @@ powershell -Command "Start-Process PowerShell -Verb RunAs"
 在新的 Powershell 窗口中，运行以下命令。
 
 ```powershell
-Enable-WindowsOptionalFeature -Online -FeatureName containers –All
+Enable-WindowsOptionalFeature -Online -FeatureName Containers –All
 ```
 
 这将需要重新启动以使 `Containers` 功能正常运行。
@@ -78,7 +77,7 @@ RKE2 的性能取决于数据库的性能，由于 RKE2 以嵌入式方式运行
 
 ## 网络
 
-**重要的是：** 如果你的节点安装并启用了 NetworkManager，[确保它被配置为忽略 CNI 管理的接口。](/docs/rke2/known_issues/_index#networkmanager)
+**重要：** 如果你的节点安装并启用了 NetworkManager，[确保它被配置为忽略 CNI 管理的接口](/docs/rke2/known_issues/_index#networkmanager)。如果你的节点安装并启用了 Wicked，[确保启用了转发 sysctl 配置](https://docs.rke2.io/known_issues/#wicked)。
 
 RKE2 server 需要 6443 和 9345 端口，以便被集群中的其他节点访问。
 
@@ -86,21 +85,34 @@ RKE2 server 需要 6443 和 9345 端口，以便被集群中的其他节点访�
 
 如果你想使用 metrics server，你将需要在每个节点上打开 10250 端口。
 
-:::warning 注意：
+:::note 注意：
 节点上的 VXLAN 端口不应该暴露给外界，因为它将你的集群网络开放给任何人访问。在禁止访问端口 8472 的防火墙/安全组后面运行节点。
 :::
 
 RKE2 server 节点的入站规则：
 
-| 协议 | 端口        | 来源                       | 描述                     |
-| ---- | ----------- | -------------------------- | ------------------------ |
-| TCP  | 9345        | RKE2 agent 节点            | Kubernetes API           |
-| TCP  | 6443        | RKE2 agent 节点            | Kubernetes API           |
-| UDP  | 8472        | RKE2 server and agent 节点 | 仅要求用于 Flannel VXLAN |
-| TCP  | 10250       | RKE2 server 和 agent 节点  | kubelet                  |
-| TCP  | 2379        | RKE2 server 节点           | etcd client port         |
-| TCP  | 2380        | RKE2 server 节点           | etcd peer port           |
-| TCP  | 30000-32767 | RKE2 server 和 agent 节点  | NodePort 端口范围        |
+| 协议 | 端口        | 来源                      | 描述                                     |
+| ---- | ----------- | ------------------------- | ---------------------------------------- |
+| TCP  | 9345        | RKE2 agent 节点           | Kubernetes API                           |
+| TCP  | 6443        | RKE2 agent 节点           | Kubernetes API                           |
+| UDP  | 8472        | RKE2 server 和 agent 节点 | 仅要求用于 Flannel VXLAN                 |
+| TCP  | 10250       | RKE2 server 和 agent 节点 | kubelet                                  |
+| TCP  | 2379        | RKE2 server 节点          | etcd client port                         |
+| TCP  | 2380        | RKE2 server 节点          | etcd peer port                           |
+| TCP  | 30000-32767 | RKE2 server 和 agent 节点 | NodePort 端口范围                        |
+| UDP  | 8472        | RKE2 server 和 agent 节点 | Cilium CNI VXLAN                         |
+| TCP  | 4240        | RKE2 server 和 agent 节点 | Cilium CNI 健康检查                      |
+| ICMP | 8/0         | RKE2 server 和 agent 节点 | Cilium CNI 健康检查                      |
+| TCP  | 179         | RKE2 server 和 agent 节点 | Calico CNI with BGP                      |
+| UDP  | 4789        | RKE2 server 和 agent 节点 | Calico CNI with VXLAN                    |
+| TCP  | 5473        | RKE2 server 和 agent 节点 | Calico CNI with Typha                    |
+| TCP  | 9098        | RKE2 server 和 agent 节点 | Calico Typha 健康检查                    |
+| TCP  | 9099        | RKE2 server 和 agent 节点 | Calico 健康检查                          |
+| TCP  | 5473        | RKE2 server 和 agent 节点 | Calico CNI with Typha                    |
+| UDP  | 8472        | RKE2 server 和 agent 节点 | Canal CNI with VXLAN                     |
+| TCP  | 9099        | RKE2 server 和 agent 节点 | Canal CNI 健康检查                       |
+| UDP  | 51820       | RKE2 server 和 agent 节点 | Canal CNI with WireGuard IPv4            |
+| UDP  | 51821       | RKE2 server 和 agent 节点 | Canal CNI with WireGuard IPv6/dual-stack |
 
 通常情况下，所有出站流量都是允许的。
 
