@@ -12,9 +12,9 @@ headless: true
 | UDP | 4789 | Windows 集群中的 Flannel VXLAN 覆盖网络 |
 | TCP | 8443 | Rancher webhook |
 | TCP | 9099 | Canal/Flannel livenessProbe/readinessProbe |
-| TCP | 9100 | Monitoring 从 Linux 节点导出器中抓取指标所需的默认端口 |
+| TCP | 9100 | Monitoring 从 Linux node-exporter 中抓取指标所需的默认端口 |
 | TCP | 9443 | Rancher webhook |
-| TCP | 9796 | Monitoring 从 Windows 节点导出器中抓取指标所需的默认端口 |
+| TCP | 9796 | Monitoring 从 Windows node-exporter 中抓取指标所需的默认端口 |
 | TCP | 6783 | Weave 端口 |
 | UDP | 6783-6784 | Weave UDP 端口 |
 | TCP | 10250 | Metrics Server 与所有节点 API 的通信 |

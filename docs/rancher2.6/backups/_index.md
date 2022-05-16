@@ -63,7 +63,7 @@ ResourceSet 定义了需要备份哪些 Kubernetes 资源。由于备份 Rancher
 
 **结果**：`rancher-backup` operator 已安装。
 
-在**集群仪表盘**中，你可以看到列在 **Deployments** 下的 `rancher-backup` operator。
+在**集群仪表板**中，你可以看到列在 **Deployments** 下的 `rancher-backup` operator。
 
 如果需要在 Rancher 中配置备份应用，在左侧导航栏中单击 **Rancher 备份**。
 

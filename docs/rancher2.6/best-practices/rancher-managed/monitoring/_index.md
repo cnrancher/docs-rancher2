@@ -5,7 +5,7 @@ weight: 2
 
 配置合理的监控和告警规则对于安全、可靠地运行生产环境中的工作负载至关重要。在使用 Kubernetes 和 Rancher 时也是如此。幸运的是，你可以使用集成的监控和告警功能来简化整个过程。
 
-[Rancher 监控文档]({{<baseurl>}}/rancher/v2.6/en/monitoring-alerting/)描述了如何设置完整的 Prometheus 和 Grafana。这是开箱即用的功能，它将从集群中的所有系统和 Kubernetes 组件中抓取监控数据，并提供合理的仪表盘和告警。但为了实现可靠的设置，你还需要监控你的工作负载并使 Prometheus 和 Grafana 适应你的特定用例和集群规模。本文档将为你提供这方面的最佳实践。
+[Rancher 监控文档]({{<baseurl>}}/rancher/v2.6/en/monitoring-alerting/)描述了如何设置完整的 Prometheus 和 Grafana。这是开箱即用的功能，它将从集群中的所有系统和 Kubernetes 组件中抓取监控数据，并提供合理的仪表板和告警。但为了实现可靠的设置，你还需要监控你的工作负载并使 Prometheus 和 Grafana 适应你的特定用例和集群规模。本文档将为你提供这方面的最佳实践。
 
 - [监控内容](#what-to-monitor)
 - [配置 Prometheus 资源使用](#configuring-prometheus-resource-usage)
@@ -109,7 +109,7 @@ Prometheus 不是用于长期存储指标的，它只用于短期存储。
 
 ## 设置告警
 
-将所有的指标纳入监控系统并在仪表盘中可视化是很好的做法，但你也希望在出现问题时能主动收到提醒。
+将所有的指标纳入监控系统并在仪表板中可视化是很好的做法，但你也希望在出现问题时能主动收到提醒。
 
 集成的 Rancher 监控已经配置了一套合理的告警，这些告警在任何 Kubernetes 集群中都是可用的。你可以扩展告警，来覆盖特定的工作负载和用例。
 
