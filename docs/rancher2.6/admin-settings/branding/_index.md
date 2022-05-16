@@ -44,7 +44,7 @@ Rancher 2.6 开始支持自定义 Rancher 的品牌和导航链接。
 
 ## 自定义导航链接
 
-在本节中，你将了解如何配置**集群仪表盘**左侧导航栏中的链接。要访问集群仪表盘：
+在本节中，你将了解如何配置**集群仪表板**左侧导航栏中的链接。要访问集群仪表板：
 
 1. 点击左上角 **☰ > 集群管理**。
 1. 在**集群**页面上，转到你想要自定义导航链接的集群，然后单击 **Explore**。
@@ -143,7 +143,7 @@ NavLink 自定义资源的 Kubernetes 标签。
 
 ### `toUrl` 的链接示例
 
-以下 NavLink YAML 显示了将 NavLink 配置到 Grafana 仪表盘的示例：
+以下 NavLink YAML 显示了将 NavLink 配置到 Grafana 仪表板的示例：
 
 ```yaml
 apiVersion: ui.cattle.io/v1
