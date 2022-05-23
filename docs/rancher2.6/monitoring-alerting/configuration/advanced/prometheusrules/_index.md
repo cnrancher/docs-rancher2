@@ -31,7 +31,7 @@ Prometheus 规则文件保存在 PrometheusRule 自定义资源中。PrometheusR
 - 新告警或记录的名称
 - 新告警或记录的 PromQL 表达式
 - 用于标记告警或记录的标签（例如集群名称或严重性）
-- 对需要在告警通知上显示的其他重要信息进行编码的注释（例如摘要、描述、消息、 Runbook URL 等）。记录规则不需要此字段。
+- 对需要在告警通知上显示的其他重要信息进行编码的注释（例如摘要、描述、消息、Runbook URL 等）。记录规则不需要此字段。
 
 有关可以指定的字段的更多信息，请查看 [Prometheus Operator 规范。](https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#prometheusrulespec)
 

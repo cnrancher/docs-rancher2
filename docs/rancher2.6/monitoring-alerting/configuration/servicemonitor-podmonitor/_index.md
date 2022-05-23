@@ -24,7 +24,7 @@ ServiceMonitor 比 PodMonitor 更常用，推荐用于大多数用例。
 
 ### PodMonitor
 
-这个伪 CRD 映射到 Prometheus 自定义资源配置的一部分。它以声明方式指定应如何监视 Pod 组。
+这个伪 CRD 映射到 Prometheus 自定义资源配置的一部分。它以声明方式指定应如何监控 Pod 组。
 
 创建 PodMonitor 时，Prometheus Operator 会更新 Prometheus 抓取配置，从而包含 PodMonitor 配置。然后 Prometheus 开始从 PodMonitor 中定义的端点抓取指标。
 

@@ -73,7 +73,7 @@ StatefulSet 管理 Pod 的部署和扩展，同时为每个 Pod 维护一个粘�
 
 **结果**：StatefulSet 管理的每个 Pod 部署完成后，都会向 Kubernetes master 请求指定的磁盘空间。如果在部署工作负载时具有指定资源的 PV 是可用的，则 Kubernetes master 会将 PV 绑定到具有兼容 PVC 的 Pod。
 
-要将 PVC 连接到现有工作负载，
+要将 PVC 附加到现有工作负载，
 
 1. 点击 **☰ > 集群管理**。
 1. 转到要将 StorageClass 用于工作负载的集群，然后单击 **Explore**。

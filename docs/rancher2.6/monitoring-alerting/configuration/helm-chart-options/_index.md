@@ -68,7 +68,7 @@ Istio 就是一个可能用到这个配置的例子。有关详细信息，请�
 
 ### 为持久化 Grafana 仪表板配置命名空间
 
-要让 Grafana 监视所有命名空间中的 ConfigMap，请在 `rancher-monitoring` Helm chart 中指定以下值：
+要让 Grafana 监控所有命名空间中的 ConfigMap，请在 `rancher-monitoring` Helm chart 中指定以下值：
 
 ```
 grafana.sidecar.dashboards.searchNamespace=ALL

@@ -55,7 +55,7 @@ ResourceSet 定义了需要备份哪些 Kubernetes 资源。由于备份 Rancher
 
 1. 在左上角，单击**☰ > 集群管理**。
 1. 在**集群**页面上，转到 `local` 集群并单击 **Explore**。
-1. 在左侧导航栏中，单击**应用 & 应用商店 > Chart**。
+1. 在左侧导航栏中，单击**应用 & 应用市场 > Chart**。
 1. 点击 **Rancher 备份**。
 1. 单击**安装**。
 1. 可选：配置默认存储位置。如需获取帮助，请参见[配置](./configuration/storage-config)。

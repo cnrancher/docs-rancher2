@@ -143,7 +143,7 @@ Kubernetes API server 公开 Kubernetes API。该组件提供管理工具（例�
 
 ### 容器监控
 
-容器监控使用 Metrics API 从 Kubernetes 中可用的控制器、节点和容器中收集内存和处理器指标，从而为你可视化性能数据。容器日志也能被收集。启用监视后，系统会通过 Linux 的 Log Analytics 代理的容器化版本自动为你收集指标和日志。指标会被写入指标存储，而日志数据会被写入与你的 [Log Analytics](https://docs.microsoft.com/en-us/azure/azure-monitor/logs/log-query-overview) 工作区关联的日志存储。
+容器监控使用 Metrics API 从 Kubernetes 中可用的控制器、节点和容器中收集内存和处理器指标，从而为你可视化性能数据。容器日志也能被收集。启用监控后，系统会通过 Linux 的 Log Analytics 代理的容器化版本自动为你收集指标和日志。指标会被写入指标存储，而日志数据会被写入与你的 [Log Analytics](https://docs.microsoft.com/en-us/azure/azure-monitor/logs/log-query-overview) 工作区关联的日志存储。
 
 ### Log Analytics 工作区资源组
 

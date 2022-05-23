@@ -68,10 +68,10 @@ Alertmanager UI 可让你查看最近触发的告警。
 1. 点击左上角 **☰ > 集群管理**。
 1. 在**集群**页面上，转到要查看 Prometheus UI 的集群，然后单击 **Explore**。
 1. 在左侧导航栏中，单击**监控**。
-1. 单击 **Prometheus 图表**。
+1. 单击 **Prometheus Graph**。
 
-<figcaption>Prometheus 图表 UI</figcaption>
-![Prometheus 图表 UI]({{<baseurl>}}/img/rancher/prometheus-graph-ui.png)
+<figcaption>Prometheus Graph UI</figcaption>
+![Prometheus Graph UI]({{<baseurl>}}/img/rancher/prometheus-graph-ui.png)
 
 ### 查看 Prometheus 目标
 

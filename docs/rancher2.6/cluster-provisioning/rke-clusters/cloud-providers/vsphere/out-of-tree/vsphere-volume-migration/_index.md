@@ -60,7 +60,7 @@ chmod +x taints.sh
 
 1. 点击 **☰ > 集群管理**。
 1. 转到将安装 vSphere CPI chart 的集群，然后单击 **Explore**。
-1. 单击**应用 & 应用商店 > Chart**。
+1. 单击**应用 & 应用市场 > Chart**。
 1. 单击 **vSphere CPI**。
 1. 单击**安装**。
 1. 填写所需的 vCenter 详细信息，然后单击**安装**。
@@ -77,7 +77,7 @@ kubectl describe nodes | grep "ProviderID"
 
 1. 点击 **☰ > 集群管理**。
 1. 转到将安装 vSphere CSI chart 的集群，然后单击 **Explore**。
-1. 单击**应用 & 应用商店 > Chart**。
+1. 单击**应用 & 应用市场 > Chart**。
 1. 单击 **vSphere CSI**。
 1. 单击**安装**。
 1. 填写所需的 vCenter 详细信息，然后单击**安装**。
