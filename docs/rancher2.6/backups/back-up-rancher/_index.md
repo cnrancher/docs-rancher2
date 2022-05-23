@@ -25,7 +25,7 @@ Rancher 必须是 2.5.0 或更高版本。
 
 1. 在左上角，单击**☰ > 集群管理**。
 1. 在**集群**页面上，转到 `local` 集群并单击 **Explore**。Rancher Server 运行在 `local` 集群中。
-1. 单击**应用 & 应用商店 > Chart**。
+1. 单击**应用 & 应用市场 > Chart**。
 1. 点击 **Rancher 备份**。
 1. 单击**安装**。
 1. 配置默认存储位置。如需获取帮助，请参见[存储配置](../configuration/storage-config)。

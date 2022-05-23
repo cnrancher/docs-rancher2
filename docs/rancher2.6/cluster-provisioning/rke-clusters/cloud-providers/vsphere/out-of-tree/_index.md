@@ -36,7 +36,7 @@ Kubernetes 版本必须为 1.19 或更高版本。
 
 1. 点击 **☰ > 集群管理**。
 1. 转到将安装 vSphere CPI 插件的集群，然后单击 **Explore**。
-1. 单击**应用 & 应用商店 > Chart**。
+1. 单击**应用 & 应用市场 > Chart**。
 1. 单击 **vSphere CPI**。
 1. 填写所需的 vCenter 详细信息。
 1. vSphere CPI 使用 vSphere CSI 驱动所需的 ProviderID 来初始化所有节点。在使用以下命令安装 CSI 驱动之前，检查是否所有节点都使用 ProviderID 进行了初始化：
@@ -49,7 +49,7 @@ Kubernetes 版本必须为 1.19 或更高版本。
 
 1. 点击 **☰ > 集群管理**。
 1. 转到将安装 vSphere CSI 插件的集群，然后单击 **Explore**。
-1. 单击**应用 & 应用商店 > Chart**。
+1. 单击**应用 & 应用市场 > Chart**。
 1. 单击 **vSphere CSI**。
 1. 单击**安装**。
 1. 填写所需的 vCenter 详细信息。在**功能**选项卡中，将**启用 CSI 迁移**设置为 **false**。

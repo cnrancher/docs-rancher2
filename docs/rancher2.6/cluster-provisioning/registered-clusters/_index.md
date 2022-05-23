@@ -19,7 +19,7 @@ Rancher 管理注册集群的范围取决于集群的类型。详情请参见[�
 
 ### Kubernetes 节点角色
 
-已注册的 RKE Kubernetes 集群必须具有所有三个节点角色，分别是 etcd、controlplane 和 worker。只有 controlplane 组件的集群无法在 Rancher 中注册。
+已注册的 RKE Kubernetes 集群必须具有所有三个节点角色，分别是 etcd、control plane 和 worker。只有 control plane 组件的集群无法在 Rancher 中注册。
 
 有关 RKE 节点角色的更多信息，请参阅[最佳实践]({{<baseurl>}}/rancher/v2.6/en/cluster-provisioning/production/#cluster-architecture)。
 
@@ -129,7 +129,7 @@ Rancher 管理注册集群的范围取决于集群的类型。
 - 启用[日志管理]({{<baseurl>}}/rancher/v2.6/en/logging/)
 - 启用 [Istio]({{<baseurl>}}/rancher/v2.6/en/istio/)
 - 使用[管道]({{<baseurl>}}/rancher/v2.6/en/project-admin/pipelines/)
-- 管理项目和工作量
+- 管理项目和工作负载
 
 ### 已注册 K3s 集群的附加功能
 
@@ -160,13 +160,13 @@ K3s 集群注册到 Rancher 后，Rancher 会将它识别为 K3s。Rancher UI �
 - **Control Plane 并发**：可以同时升级的最大服务器节点数；也是最大不可用服务器节点数
 - **Worker 并发**：可以同时升级的最大 worker 节点数；也是最大不可用 worker 节点数
 
-在 K3s 文档中，Control Plane 节点也称为 server 节点。Kubernetes 主节点运行在这些节点上，用于维护集群的状态。在 K3s 中，controlplane 节点默认能够让工作负载调度到节点上。
+在 K3s 文档中，Control Plane 节点也称为 server 节点。Kubernetes 主节点运行在这些节点上，用于维护集群的状态。在 K3s 中，control plane 节点默认能够让工作负载调度到节点上。
 
 类似的，在 K3s 文档中，具有 worker 角色的节点称为 Agent 节点。默认情况下，部署在集群中的任何工作负载或 Pod 都能调度到这些节点上。
 
 ## 已注册 K3s 集群的调试日志记录和故障排除
 
-节点由运行在下游集群中的 `system-upgrade-controller` 升级。基于集群配置，Rancher 部署了两个[计划](https://github.com/rancher/system-upgrade-controller#example-upgrade-plan)来升级 K3s 节点，分别用于升级 controlplane 节点和 worker 节点。`system-upgrade-controller` 会按照计划对节点进行升级。
+节点由运行在下游集群中的 `system-upgrade-controller` 升级。基于集群配置，Rancher 部署了两个[计划](https://github.com/rancher/system-upgrade-controller#example-upgrade-plan)来升级 K3s 节点，分别用于升级 control plane 节点和 worker 节点。`system-upgrade-controller` 会按照计划对节点进行升级。
 
 要在 `system-upgrade-controller` deployment 上启用调试日志记录，请编辑 [configmap](https://github.com/rancher/system-upgrade-controller/blob/50a4c8975543d75f1d76a8290001d87dc298bdb4/manifests/system-upgrade-controller.yaml#L32) 以将调试环境变量设置为 true。然后重启 `system-upgrade-controller` pod。
 
@@ -194,13 +194,13 @@ _从 v2.6.3 起可用_
 
 > **注意**：
 >
-> - 只需要在下游集群的 controlplane 节点上执行这些步骤。你必须单独配置每个 controlplane 节点。
+> - 只需要在下游集群的 control plane 节点上执行这些步骤。你必须单独配置每个 control plane 节点。
 >
 > - 以下步骤适用于在 v2.6.x 中注册的 RKE2 和 K3s 集群，以及从先前的 Rancher 版本注册（或导入）并升级到 v2.6.x 的集群。
 >
 > - 这些步骤将改变下游 RKE2 和 K3s 集群的配置并部署 `kube-api-authn-webhook`。如果 ACE 的未来实现需要更新 `kube-api-authn-webhook`，那么这也必须手动完成。有关此 webhook 的更多信息，请单击[此处]({{<baseurl>}}/rancher/v2.6/en/cluster-admin/cluster-access/ace/#about-the-kube-api-auth-authentication-webhook)。
 
-###### **在每个下游集群的 controlplane 上启用 ACE 的手动执行步骤**：
+###### **在每个下游集群的 control plane 上启用 ACE 的手动执行步骤**：
 
 1.  在 `/var/lib/rancher/{rke2,k3s}/kube-api-authn-webhook.yaml` 创建一个文件，内容如下：
 

@@ -62,9 +62,9 @@ data:
     <copied-json>
 ```
 
-默认情况下，Grafana 配置为监视 `cattle-dashboards` 命名空间中带有 `grafana_dashboard` 标签的所有 ConfigMap。
+默认情况下，Grafana 配置为监控 `cattle-dashboards` 命名空间中带有 `grafana_dashboard` 标签的所有 ConfigMap。
 
-要让 Grafana 监视所有命名空间中的 ConfigMap，请参阅[本节](#configuring-namespaces-for-the-grafana-dashboard-configmap)。
+要让 Grafana 监控所有命名空间中的 ConfigMap，请参阅[本节](#configuring-namespaces-for-the-grafana-dashboard-configmap)。
 
 要在 Rancher UI 中创建 ConfigMap：
 
@@ -83,7 +83,7 @@ data:
 
 ### 为 Grafana 仪表板 ConfigMap 配置命名空间
 
-要让 Grafana 监视所有命名空间中的 ConfigMap，请在 `rancher-monitoring` Helm chart 中指定以下值：
+要让 Grafana 监控所有命名空间中的 ConfigMap，请在 `rancher-monitoring` Helm chart 中指定以下值：
 
 ```
 grafana.sidecar.dashboards.searchNamespace=ALL

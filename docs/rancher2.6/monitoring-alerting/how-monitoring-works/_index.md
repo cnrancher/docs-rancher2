@@ -23,7 +23,7 @@ weight: 1
 {{% column %}}
 
 1. 规则定义了应该触发告警的 Prometheus 指标或时间序列数据库查询。
-2. ServiceMonitors 和 PodMonitors 以声明方式指定监视服务和 Pod 的方式。它们使用标签从 pod 中抓取指标。
+2. ServiceMonitors 和 PodMonitors 以声明方式指定监控服务和 Pod 的方式。它们使用标签从 pod 中抓取指标。
 3. Prometheus Operator 观察正在创建的 ServiceMonitors、PodMonitors 和 PrometheusRules。
 4. 在创建 Prometheus 配置资源时，Prometheus Operator 会调用 Prometheus API 来同步新配置。
 5. 记录规则不直接用于告警。它们创建预计算查询的新时间序列。然后可以查询这些新时间序列数据来生成告警。
@@ -240,7 +240,7 @@ Prometheus 从称为 [exporter](https://prometheus.io/docs/instrumenting/exporte
 - **kube-scheduler**：内部 Kubernetes 组件，该组件使用 pod 规范中的信息来决定在哪个节点上运行 pod。
 - **kube-controller-manager**：负责节点管理（检测节点是否失败）、pod 复制，以及端点创建的内部 Kubernetes 组件。
 - **etcd**：Kubernetes 内部组件，它是 Kubernetes 用于持久存储所有集群信息的分布式键/值存储。
-- **kube-proxy**：内部 Kubernetes 组件，用于监视 API server 的 pod/service 更改以保持网络最新状态。
+- **kube-proxy**：内部 Kubernetes 组件，用于监控 API server 的 pod/service 更改以保持网络最新状态。
 - **kubelet**：内部 Kubernetes 组件，用于为 pod 监视节点上的 API server 并确保这些 pod 能运行。
 - **ingress-nginx**：用于 Kubernetes 的 Ingress controller，使用 NGINX 作为反向代理和负载均衡器。
 - **coreDns/kubeDns**：负责 DNS 的内部 Kubernetes 组件。
