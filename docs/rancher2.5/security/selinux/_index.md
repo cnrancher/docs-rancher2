@@ -39,7 +39,7 @@ Enforcing
 
 为了让 Rancher 与 SELinux 一起工作，必须为 SELinux 节点手动启用一些功能。为了帮助解决这个问题，Rancher 提供了一个 SELinux RPM。
 
-从 v2.5.8 开始，`rancher-selinux` RPM 只包含[rancher-logging application.]的策略(https://github.com/rancher/charts/tree/dev-v2.5/charts/rancher-logging)
+从 v2.5.8 开始，`rancher-selinux` RPM 只包含 [rancher-logging application](https://github.com/rancher/charts/tree/dev-v2.5/charts/rancher-logging) 的策略。
 
 `rancher-selinux`的 GitHub 仓库是[这里。](https://github.com/rancher/rancher-selinux)
 
