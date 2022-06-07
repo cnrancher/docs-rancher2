@@ -126,6 +126,12 @@ K3d 配置主要配置的内容为启动 K3s 集群所需的参数，例如 K3s 
 
 ![](/img/k3s/launch-kubectl.png)
 
+#### 下载 Kubeconfig 文件
+
+如果您想在其他地方管理集群，可以单独下载指定集群的 Kubeconfig 文件。点击指定集群右侧下拉菜单中的 **Download KubeConfig** 按钮，在弹出窗口中选择复制或下载文件。
+
+![](/img/k3s/download-kubeconfig.png)
+
 #### SSH
 
 如果您想连接到远程主机进行操作，您可以在集群列表页面点击集群名称，进入详情页面，选择要连接的主机，点击右侧 **Execute Shell** 按钮。

@@ -49,13 +49,13 @@ AutoK3s 可以支持以下云厂商，我们会根据社区反馈添加更多支
 您可以通过以下 Docker 命令，一键启动 AutoK3s 本地 UI，快速体验相关功能。
 
 ```bash
-docker run -itd --restart=unless-stopped -p 8080:8080 cnrancher/autok3s:v0.4.9
+docker run -itd --restart=unless-stopped -p 8080:8080 cnrancher/autok3s:v0.5.0
 ```
 
 如果您想要在 docker 中使用 K3d provider，那么您需要使用宿主机网络启动 AutoK3s 镜像。
 
 ```bash
-docker run -itd --restart=unless-stopped --net host -v /var/run/docker.sock:/var/run/docker.sock cnrancher/autok3s:v0.4.9
+docker run -itd --restart=unless-stopped --net host -v /var/run/docker.sock:/var/run/docker.sock cnrancher/autok3s:v0.5.0
 ```
 
 如果您是 MacOS 或者 Linux 系统，您也可以使用以下安装命令，一键安装 AutoK3s（Windows用户请前往 [Releases](https://github.com/cnrancher/autok3s/releases) 页面下载对应的程序）。
@@ -79,6 +79,16 @@ export AWS_SECRET_ACCESS_KEY='<Your secret access key>'
 autok3s -d create -p aws --name myk3s --master 1 --worker 1
 ```
 
+## 卸载 AutoK3s
+
+> v0.5.0 及更新版本可用
+
+如果您想卸载 AutoK3s，可以执行以下命令：
+
+```bash
+/usr/local/bin/autok3s-uninstall.sh
+```
+
 ## 演示视频
 
 在以下演示中，我们将在 1 分钟左右的时间内通过 K3d 启动 K3s集群，并且我们将使用集成在 AutoK3s 中的 kube-explorer 工具，对不同 K3s 集群的资源进行管理。
@@ -88,27 +98,27 @@ autok3s -d create -p aws --name myk3s --master 1 --worker 1
 
 ## 升级
 
-如果您使用 Docker 命令一键启动 AutoK3s 本地 UI，从 `v0.4.0` 升级到 `v0.4.9` 需要进行如下操作以保证历史数据的迁移。
+如果您使用 Docker 命令一键启动 AutoK3s 本地 UI，从 `v0.4.0` 升级到 `v0.5.0` 需要进行如下操作以保证历史数据的迁移。
 
 ```bash
 docker cp <old-container>:/root/.autok3s .
 docker rm -f <old-container>
-docker run -itd --restart=unless-stopped -p 8080:8080 -v $PWD/.autok3s:/root/.autok3s cnrancher/autok3s:v0.4.9
+docker run -itd --restart=unless-stopped -p 8080:8080 -v $PWD/.autok3s:/root/.autok3s cnrancher/autok3s:v0.5.0
 ```
 
 在 `v0.4.1` 以后的版本，可以直接通过 `--volumes-from` 来保证历史数据的迁移。
 
 ```bash
 docker stop <old-container>
-docker run -itd --restart=unless-stopped -p 8080:8080 --volumes-from <old-container> cnrancher/autok3s:v0.4.9
+docker run -itd --restart=unless-stopped -p 8080:8080 --volumes-from <old-container> cnrancher/autok3s:v0.5.0
 ```
 
 ## 开发者指南
 
 使用 `dapper` 管理项目的编译、测试与打包
 
-- 编译： `BY=dapper make autok3s build`
-- 测试： `BY=dapper make autok3s unit`
-- 打包： `BY=dapper make autok3s package only`
+- 编译： `make autok3s build`
+- 测试： `make autok3s unit`
+- 打包： `make autok3s package only`
 
 请参考[dapper](https://github.com/rancher/dapper)项目来安装 `dapper`

@@ -119,7 +119,10 @@ OutBound    ALL         ALL       ALL                Allow All
 | Provider | 云提供商名称 
 | Name | K3s集群名称 
 | Access Key | 云提供商的Access Key 访问密钥 
-| Secret Key | 云提供商的Secret Key 访问密钥  
+| Secret Key | 云提供商的Secret Key 访问密钥
+| Region | AWS EC2 区域 | `us-east-1` 
+
+UI 集成了 AWS SDK，可以与 AWS 进行联动，方便用户配置实例信息，这里需要输入云凭证信息进行合法性校验，用以获取后续的实例参数。
 
 #### 实例配置
 
@@ -151,6 +154,9 @@ OutBound    ALL         ALL       ALL                Allow All
 | SSH Agent Auth | 如果您配置 SSH 代理程序，可以开启此项配置 | false
 | SSH Cert Path | 如果您配置了 ssh certificate，在这里您需要将 certificate path 传入进来，以保证 AutoK3s 可以通过ssh连接到远程虚拟机 |
 | Tags | 虚拟机标签 |
+| User Data | 配置实例的[用户数据](https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/user-data.html) |
+
+如果云凭证信息验证通过，用户可以在每个配置项的下拉列表中选择合适的参数进行配置，不再需要切换到 AWS Console 页面获取对应的参数信息。
 
 #### K3s 参数配置
 
@@ -221,11 +227,31 @@ K3s 参数配置项主要对 K3s 集群进行设置，例如是否部署 HA 模�
 
 ![](/img/k3s/join-nodes.png)
 
+#### 集群升级
+
+选中您要升级的集群，点击右侧下拉菜单中的 **Upgrade** 按钮，在弹出窗口中会显示您当前集群配置的版本信息，例如下图示例中，显示集群版本为 `v1.19.16+k3s1`。
+
+![](/img/k3s/upgrade-cluster.png)
+
+如果我们要将集群升级到 `v1.20.15+k3s1`，则修改 Version 为指定版本号即可；如果想要将集群升级到最新的stable版本，则删除掉 Version 指定的版本号。
+
+![](/img/k3s/upgrade-cluster-to-specified-version.png)
+
+选择要升级的版本后，点击 **Upgrade** 按钮，等待集群升级完成。
+
+![](/img/k3s/upgrade-cluster-result.png)
+
 #### Kubectl
 
 如果您想操作 K3s 集群数据，可以点击右上角 **Launch Kubectl** 按钮，在下拉框中选择要操作的集群后，便可以在 UI 控制台操作选中的集群了。
 
 ![](/img/k3s/launch-kubectl.png)
+
+#### 下载 Kubeconfig 文件
+
+如果您想在其他地方管理集群，可以单独下载指定集群的 Kubeconfig 文件。点击指定集群右侧下拉菜单中的 **Download KubeConfig** 按钮，在弹出窗口中选择复制或下载文件。
+
+![](/img/k3s/download-kubeconfig.png)
 
 #### SSH
 
@@ -391,6 +417,20 @@ SSH 连接到集群中的某个主机，这里选择的集群为 myk3s。
 
 ```bash
 autok3s ssh --provider aws --name myk3s
+```
+
+### 升级 K3s 集群
+
+您可以使用以下命令将指定的 K3s 集群升级到 `latest` 版本
+
+```bash
+autok3s upgrade --provider aws --name myk3s --k3s-channel latest
+```
+
+如果您想将 K3s 集群升级到指定版本，可以指定 `--k3s-version`
+
+```bash
+autok3s upgrade --provider aws --name myk3s --k3s-version v1.22.4+k3s1
 ```
 
 ### 进阶使用
