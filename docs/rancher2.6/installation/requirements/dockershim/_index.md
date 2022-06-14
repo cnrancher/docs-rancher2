@@ -27,7 +27,7 @@ A. 对于 RKE，Dockershim 的上游支持从 Kubernetes 1.21 开始。你需要
 
 Q. 我目前的 RKE 使用 Kubernetes 1.20。为了避免出现不再支持 Dockershim 的情况，我是否需要尽早将 RKE 升级到 Kubernetes 1.21？
 
-A. 在使用 Kubernetes 1.20 的 RKE 中，Dockershim 版本依然可用，而且在下一个发行版发行之前不会被弃用。有关时间线的更多信息，请参见 [Kubernetes Dockershim 弃用相关的常见问题](https://kubernetes.io/blog/2020/12/02/dockershim-faq/#when-will-dockershim-be-removed)。Kubernetes 会发出将会弃用 Dockershim 的警告，而 Rancher 在 RKE 中已经用 Kubernetes 1.21 缓解了这个问题。你可以按照计划正常升级到 1.21。
+A. 在使用 Kubernetes 1.20 的 RKE 中，Dockershim 版本依然可用，而且在下一个发行版发行之前不会被弃用。有关时间线的更多信息，请参见 [Kubernetes Dockershim 弃用相关的常见问题](https://kubernetes.io/blog/2020/12/02/dockershim-faq/#when-will-dockershim-be-removed)。Kubernetes 会发出弃用 Dockershim 的警告，而 Rancher 在使用 Kubernetes 1.21 的 RKE 中已经缓解了这个问题。你可以按照计划正常升级到 1.21。
 
 <br>
 

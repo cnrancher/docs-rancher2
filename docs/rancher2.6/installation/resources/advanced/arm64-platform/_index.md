@@ -27,7 +27,7 @@ weight: 3
 
 - 创建自定义集群并添加使用 ARM64 架构的节点
    - Kubernetes 集群必须为 1.12 或更高版本
-   - CNI 网络提供商必须是 [Flannel]({{<baseurl>}}/rancher/v2.6/en/faq/networking/cni-providers/#flannel)
+   - CNI 网络插件必须是 [Flannel]({{<baseurl>}}/rancher/v2.6/en/faq/networking/cni-providers/#flannel)
 - 导入包含使用 ARM64 架构的节点的集群
    - Kubernetes 集群必须为 1.12 或更高版本
 

@@ -16,18 +16,18 @@ Rancher CLI 是一个命令行工具，用于在工作站中与 Rancher 进行�
 安装 `kubectl` 请参见[安装 kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。
 
 
-通过 Rancher Web UI 访问你的集群，然后单击 `Kubeconfig`，复制内容并将其粘贴到你的 `~/.kube/config` 文件中，以配置 kubectl。
+要配置 kubectl，通过 Rancher Web UI 访问你的集群，单击 `Kubeconfig`，然后复制内容并将其粘贴到你的 `~/.kube/config` 文件中。
 
-检查是否可以成功运行 `kubectl cluster-info` 或 `kubectl get pods`命令。
+检查是否可以成功运行 `kubectl cluster-info` 或 `kubectl get pods` 命令。
 
 ## 使用 kubectl 和 kubeconfig token 进行 TTL 认证
 
+_要求_
 
-
-如果管理员有 [强制执行 kubeconfig token 上的 TTL]({{<baseurl>}}/rancher/v2.6/en/api/api-tokens/#setting-ttl-on-kubeconfig-tokens)，当你运行 `kubectl` 时，kubeconfig 文件需要 [Rancher CLI](../cli) 存在于你的 PATH 中。否则，你会看到这样的错误信息：
+如果管理员已[强制执行 kubeconfig token 上的 TTL]({{<baseurl>}}/rancher/v2.6/en/api/api-tokens/#setting-ttl-on-kubeconfig-tokens)，当你运行 `kubectl` 时，kubeconfig 文件需要 [Rancher CLI](../cli) 存在于你的 PATH 中。否则，你会看到这样的错误信息：
 `Unable to connect to the server: getting credentials: exec: exec: "rancher": executable file not found in $PATH`。
 
-该功能可以让 kubectl 与 Rancher Server 进行身份验证，并在需要时获得新的 kubeconfig token。目前支持以下认验证提供程序：
+该功能可以让 kubectl 与 Rancher Server 进行身份验证，并在需要时获得新的 kubeconfig token。目前支持以下验证提供程序：
 
 1. 本地
 2. Active Directory
