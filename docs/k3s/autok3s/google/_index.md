@@ -120,6 +120,8 @@ OutBound    ALL         ALL       ALL                Allow All
 | SSH Agent Auth | 如果您配置 SSH 代理程序，可以开启此项配置 | false
 | SSH Cert Path | 如果您配置了 ssh certificate，在这里您需要将 certificate path 传入进来，以保证 AutoK3s 可以通过ssh连接到远程虚拟机 |
 | Tags | 虚拟机标签 |
+| Startup Script URL | 保存在Cloud Storage中的启动脚本url，为Linux VM引用[启动脚本](https://cloud.google.com/compute/docs/instances/startup-scripts/linux#passing-storage) |
+| Startup Script | 为Linux VM设置[启动脚本](https://cloud.google.com/compute/docs/instances/startup-scripts/linux#passing-directly)，这里可输入启动脚本的内容 |
 
 #### K3s 参数配置
 
