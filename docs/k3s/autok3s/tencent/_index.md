@@ -152,7 +152,6 @@ OutBound    ALL         ALL       ALL                Allow All
 | Image | 腾讯云 CVM 系统映像 ID | `img-pi0ii46r`(Ubuntu 18.04)
 | Disk Category | 根磁盘卷类型 | `CLOUD_SSD`
 | Disk Size | 根磁盘卷大小 | `50`(GiB)
-| Spot | 是否使用[竞价实例](https://cloud.tencent.com/document/product/213/17816) | `false`
 | VPC ID | VPC ID(如果您不设置，AutoK3s 将为您创建名称为 autok3s-tencent-vpc 的VPC) | 
 | Subnet ID | 子网 ID(如果您不设置，AutoK3s会自动在 autok3s-tencent-vpc 下创建默认子网) | 
 | Internet Max Bandwidth Out | 网络带宽 | 5(MB)

@@ -181,9 +181,6 @@ OutBound    ALL         ALL       ALL                Allow All
 | Image | 阿里云 ECS 系统映像ID | `ubuntu_18_04_x64_20G_alibase_20200618.vhd`(Ubuntu 18.04)
 | Disk Category | 根磁盘卷类型 | `cloud_ssd`
 | Disk Size | 根磁盘卷大小 | `40`(GiB)
-| Spot Strategy | 是否使用[抢占式实例](https://www.alibabacloud.com/help/zh/elastic-compute-service/latest/preemptible-instances-overview#section-pgb-zcy-wgb) | `NoSpot`
-| Spot Duration | 抢占式实例的保留时长，单位为小时 | `1`
-| Spot Price Limit | 设置实例的每小时最高价格，支持最大3位小数，仅当参数`SpotStrategy`设置为`SpotWithPriceLimit`时生效 | 
 | V-Switch | 专有网络交换机 ID (如果您不设置，AutoK3s 将为您创建名称为 autok3s-aliyun-vswitch 的默认交换机) | 
 | Internet Max Bandwidth Out | 网络带宽 | 5(MB)
 | Security Group | 安全组(如果您不选择任何安全组，AutoK3s 将为您自动创建名称为 autok3s 的[默认的安全组](#设置安全组)) | 
