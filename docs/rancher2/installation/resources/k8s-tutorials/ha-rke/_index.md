@@ -60,7 +60,7 @@ Rancher Server 只能在使用 RKE 或 K3s 安装的 Kubernetes 集群中运行�
 国内用户，可以使用以下方法加速安装：
 
 ```
-curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -s - server \
+curl -sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -s - server \
 --datastore-endpoint="mysql://username:password@tcp(hostname:3306)/database-name"
 ```
 
