@@ -33,4 +33,4 @@ helm --kubeconfig /etc/rancher/k3s/k3s.yaml ls --all-namespaces
 
 ## 使用 kubectl 从外部访问集群
 
-将`/etc/rancher/k3s/k3s.yaml`复制到集群外部的计算机上的`~/.kube/config`。然后用你的 K3s 服务器的 IP 或名称替换 "localhost"。`kubectl`现在可以管理你的 K3s 集群了。
+将 `/etc/rancher/k3s/k3s.yaml` 复制到集群外部的计算机上的 `~/.kube/config`。然后使用 K3s server 的 IP 或名称替换 `server` 字段的值。`kubectl` 现在可以管理你的 K3s 集群了。

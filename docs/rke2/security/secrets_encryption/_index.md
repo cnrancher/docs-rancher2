@@ -54,7 +54,7 @@ RKE2 支持对 Secret 进行静态加密，并且会自动进行以下操作：
 
 _从 v1.21.8+rke2r1 起可用_
 
-RKE2 包含一个实用的子命令 `secrets-encrypt`，它允许管理员执行以下任务：
+RKE2 包含一个实用的[子命令](/docs/rke2/subcommands/_index#secrets-encrypt) `secrets-encrypt`，它允许管理员执行以下任务：
 
 - 添加新的加密密钥
 - 轮换和删除加密密钥

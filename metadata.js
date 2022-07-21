@@ -170,7 +170,7 @@ const metadata = {
             Helm集成:
                 "介绍使用 rancher/helm-release CRD 更容易部署传统的 Kubernetes 资源清单和 Helm Charts",
             高级选项和配置: "介绍了运行和管理 RKE2 的不同方式的高级信息",
-            从RKE1迁移到RKE2: "介绍如何从 RKE1 迁移到 RKE2",
+			子命令: "介绍 RKE2 二进制文件包含的子命令的选项",
             已知问题和限制: "介绍了rke2 的当前已知问题和限制",
         },
         rancherdesktop: {
@@ -1041,7 +1041,6 @@ const metadata = {
             "rke2/upgrade/automated_upgrade/_index": "自动升级",
             "rke2/security/about_hardened_images/_index": "关于加固镜像",
             "rke2/security/hardening_guide/_index": "CIS 加固指南",
-            "rke2/security/cis_self_assessment15/_index": "CIS 1.5自我评估指南",
             "rke2/security/cis_self_assessment16/_index": "CIS 1.6自我评估指南",
             "rke2/security/fips_support/_index": "FIPS 140-2 启用",
             "rke2/security/policies/_index": "默认策略配置",
@@ -1053,7 +1052,7 @@ const metadata = {
             "rke2/networking/_index": "网络",
             "rke2/helm/_index": "Helm 集成",
             "rke2/advanced/_index": "高级选项和配置",
-            "rke2/migration/_index": "从 RKE1 迁移到 RKE2",
+            "rke2/subcommands/_index": "子命令",			
             "rke2/known_issues/_index": "已知问题和限制",
         },
         rancherdesktop: {

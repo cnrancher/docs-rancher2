@@ -15,15 +15,15 @@ keywords:
   - CIS 1.6自我评估指南
 ---
 
-### CIS Kubernetes 基准测试 v1.6 - RKE2 v1.20
+### CIS Kubernetes 基准测试 v1.6 - RKE2
 
 #### 概述
 
 本文件是 RKE2 安全加固指南的配套文件。硬化指南为 RKE2 的生产安装提供了规范性的指导，而本基准指南旨在帮助你根据 CIS Kubernetes 基准中的每一项控制来评估硬化后的集群的安全水平。它将被 RKE2 运营商、安全团队、审计师和决策者使用。
 
-本指南是针对 RKE2 的**v1.20**版本和 CIS Kubernetes 基准的**v1.6.1**版本。
+本指南是针对 RKE2 的 **v1.20** 和 **v1.22** 版本和 CIS Kubernetes 基准的 **v1.6.1** 版本。
 
-关于每个控制的更多细节，包括更详细的描述和测试失败的补救措施，你可以参考 CIS Kubernetes Benchmark v1.5 的相应部分。你可以在登录[CISecurity.org](https://www.cisecurity.org/benchmark/kubernetes/)后下载该基准。
+关于每个控制的更多细节，包括更详细的描述和测试失败的补救措施，你可以参考 CIS Kubernetes Benchmark v1.6.1 的相应部分。你可以在登录[CISecurity.org](https://www.cisecurity.org/benchmark/kubernetes/)后下载该基准。
 
 #### 测试控制方法
 
@@ -2753,7 +2753,7 @@ Follow the Kubernetes documentation and setup image provenance.
 
 ### 5.6 Omitted
 
-The v1.5.1 guide skips 5.6 and goes from 5.5 to 5.7. We are including it here merely for explanation.
+The v1.6.1 guide skips 5.6 and goes from 5.5 to 5.7. We are including it here merely for explanation.
 
 ### 5.7 General Policies
 

@@ -46,7 +46,7 @@ keywords:
 system-upgrade-controller 可以通过 deployment 的方式安装到你的集群中。该 deployment 需要一个 service-account、clusterRoleBinding 和 configmap。要安装这些组件，请运行以下命令：
 
 ```
-kubectl apply -f https://github.com/rancher/system-upgrade-controller/releases/download/v0.8.1/system-upgrade-controller.yaml
+kubectl apply -f https://github.com/rancher/system-upgrade-controller/releases/download/v0.9.1/system-upgrade-controller.yaml
 ```
 
 可以通过前面提到的 configmap 来配置和自定义控制器，但必须重新部署控制器才能应用这些变化。
@@ -74,12 +74,15 @@ spec:
        # When using k8s version 1.19 or older, swap control-plane with master
        - {key: node-role.kubernetes.io/control-plane, operator: In, values: ["true"]}
   serviceAccountName: system-upgrade
+  tolerations:
+  - key: CriticalAddonsOnly
+    operator: Exists  
   cordon: true
 #  drain:
 #    force: true
   upgrade:
     image: rancher/rke2-upgrade
-  version: v1.23.1+rke2r2
+  version: v1.23.1-rke2r2
 ---
 # Agent plan
 apiVersion: upgrade.cattle.io/v1
@@ -108,20 +111,20 @@ spec:
     force: true
   upgrade:
     image: rancher/rke2-upgrade
-  version: v1.23.1+rke2r2
+  version: v1.23.1-rke2r2
 ```
 
 关于这些计划，有几件重要的事情需要指出。
 
-首先，计划必须在部署控制器的同一命名空间中创建。
+1. 计划必须在部署控制器的同一命名空间中创建。
 
-第二，`concurrency` 字段表明有多少节点可以同时被升级。
+2. `concurrency` 字段表明有多少节点可以同时被升级。
 
-第三，server-plan 通过指定一个标签选择器，选择具有 `node-role.kubernetes.io/control-plane` 标签的节点(`node-role.kubernetes.io/master` 适用于 1.19 或更早的版本)，来锁定 server 节点。agent-plan 通过指定一个标签选择器，选择没有这个标签的节点，来锁定 agent 节点。可以选择包括额外的标签，就像上面的例子，它要求存在标签 "rke2-upgrade"，并且不具有 "disabled" 或 "false" 的值。
+3. server-plan 通过指定一个标签选择器，选择具有 `node-role.kubernetes.io/control-plane` 标签的节点(`node-role.kubernetes.io/master` 适用于 1.19 或更早的版本)，来锁定 server 节点。agent-plan 通过指定一个标签选择器，选择没有这个标签的节点，来锁定 agent 节点。可以选择包括额外的标签，就像上面的例子，它要求存在标签 "rke2-upgrade"，并且不具有 "disabled" 或 "false" 的值。
 
-第四，agent 计划中的 `prepare` 步骤将导致该计划的升级作业在执行前等待 server 计划的完成。
+4. agent 计划中的 `prepare` 步骤将导致该计划的升级作业在执行前等待 server 计划的完成。
 
-第五，两个计划的 `version` 字段都设置为 v1.23.1+rke2r2。另外，你可以省略`version`字段，将`channel`字段设置为一个 URL，该 URL 可解析为 rke2 的一个版本。这将导致控制器监控该 URL，并在它解析到新版本时升级集群。这与[release channels](/docs/rke2/upgrade/basic_upgrade/_index/#release-channels)配合得很好。因此，你可以用以下 channels 配置你的计划，以确保你的集群总是自动升级到最新的 rke2 稳定版本。
+5. 两个计划的 `version` 字段都设置为 v1.23.1+rke2r2。另外，你可以省略`version`字段，将`channel`字段设置为一个 URL，该 URL 可解析为 rke2 的一个版本。这将导致控制器监控该 URL，并在它解析到新版本时升级集群。这与[release channels](/docs/rke2/upgrade/basic_upgrade/_index/#release-channels)配合得很好。因此，你可以用以下 channels 配置你的计划，以确保你的集群总是自动升级到最新的 rke2 稳定版本。
 
 ```
 apiVersion: upgrade.cattle.io/v1

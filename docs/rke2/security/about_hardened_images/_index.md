@@ -23,4 +23,4 @@ RKE2 加固后的镜像在构建时扫描漏洞，并增加了额外的安全保
 你可以通过镜像名称知道一个镜像是否已经过上述加固处理。RKE2 在每个版本中都会公布镜像列表。请参考[这里](https://github.com/rancher/rke2/releases/download/v1.22.3-rc1%2Brke2r1/rke2-images-all.linux-amd64.txt)公布的镜像列表的例子。
 
 **注意：**
-目前，RKE2 加固后的镜像是多架构的。只有 Linux 的 AMD64 架构是符合 FIPS 标准的。Windows 和即将到来的 s390x 架构不符合 FIPS 标准。
+目前，RKE2 加固后的镜像是多架构的。只有 Linux 的 AMD64 架构是符合 FIPS 标准的。Windows 和 s390x 不符合 FIPS 标准。

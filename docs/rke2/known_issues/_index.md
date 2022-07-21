@@ -97,3 +97,13 @@ Wicked 根据 sysctl 配置文件（例如，在 /etc/sysctl.d/ 目录下）来�
 net.ipv4.conf.all.forwarding=1
 net.ipv6.conf.all.forwarding=1
 ```
+
+## Canal 和 IP 地址枯竭
+
+默认情况下，Canal 通过在 `/var/lib/cni/networks/k8s-pod-network` 中为每个 IP 创建一个 lockfile 来保持对 pod IP 的跟踪。每个 IP 都属于一个 pod，一旦该 pod 被删除，IP 就会被删除。但是，如果 containerd 失去了对正在运行的 pod 的追踪，lockfile 可能会被泄露，Canal 将不能再重新使用这些 IP。如果发生这种情况，你可能会遇到 IP 地址枯竭的错误，例如：
+
+```console
+failed to allocate for range 0: no IP addresses available in range set
+```
+
+要解决这个问题，你可以手动删除该目录中未使用的 IP。如果你需要这样做，请通过 GitHub 报告这个问题，并指定它是如何被触发的。

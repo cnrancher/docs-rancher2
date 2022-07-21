@@ -109,8 +109,11 @@ k3s server --node-ip 10.0.10.7,2a05:d012:c6f:4611:5c2:5602:eed2:898c --cluster-c
 
 ## 只安装 IPv6
 
-k3s v1.22 或以上版本支持只安装 IPv6。请注意，在使用默认的 flannel CNI 时，仅有 IPv6 的集群不支持网络策略执行。这是一个有效配置的示例：
+K3s v1.22 或以上版本支持只安装 IPv6。
 
-```
-k3s server --disable-network-policy
-```
+:::note 提示：
+
+如果你的 IPv6 默认路由是由路由器广告（RA）设置的，你需要设置 `net.ipv6.conf.all.accept_ra = 2`，否则，一旦默认路由过期，节点将放弃该路由。请注意，接受 RA 可能会增加[中间人攻击](https://github.com/kubernetes/kubernetes/issues/91507)的风险。
+
+:::
+

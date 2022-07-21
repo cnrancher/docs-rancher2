@@ -44,7 +44,7 @@ curl -sfL http://rancher-mirror.rancher.cn/rke2/install.sh | INSTALL_RKE2_MIRROR
 ```
 :::
 
-这将默认升级到stable channel中的较新版本。
+这将默认升级到stable channel中的最新的版本。
 
 如果你想升级到一个特定channel的较新版本（如最新版本），你可以指定该channel:
 ```sh
@@ -54,7 +54,17 @@ curl -sfL https://get.rke2.io | INSTALL_RKE2_CHANNEL=latest sh -
 如果你想升级到一个特定的版本，你可以运行以下命令:
 
 ```sh
-curl -sfL https://get.rke2.io | INSTALL_RKE2_VERSION=vX.Y.Z-rc1 sh -
+curl -sfL https://get.rke2.io | INSTALL_RKE2_VERSION=vX.Y.Z+rke2rN sh -
+```
+
+安装后，请记得重启 rke2 进程：
+
+```sh
+# Server 节点：
+systemctl restart rke2-server
+
+# Agent 节点：
+systemctl restart rke2-agent
 ```
 
 ## 使用二进制文件手动升级rke2

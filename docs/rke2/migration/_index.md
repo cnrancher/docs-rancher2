@@ -15,6 +15,8 @@ keywords:
   - 从 RKE1 迁移到 RKE2
 ---
 
+*实验功能* / *不支持*
+
 为了从 Rancher Kubernetes Engine（RKE1）迁移到 RKE2，你需要两个东西：
 
 - ETCD 数据目录

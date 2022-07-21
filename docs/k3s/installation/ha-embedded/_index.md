@@ -22,21 +22,37 @@ keywords:
 嵌入式 etcd (HA) 在速度较慢的磁盘上可能会出现性能问题，例如使用 SD 卡运行的 Raspberry Pi。
 :::
 
+## 新集群
+
 要在这种模式下运行 K3s，你必须有奇数的 server 节点。我们建议从三个节点开始。
 
 要开始运行，首先启动一个 server 节点，使用`cluster-init`标志来启用集群，并使用一个标记作为共享的密钥来加入其他服务器到集群中。
 
-```
-K3S_TOKEN=SECRET k3s server --cluster-init
+```bash
+curl -sfL https://get.k3s.io | K3S_TOKEN=SECRET sh -s - server --cluster-init
 ```
 
 启动第一台 server 后，使用共享密钥将第二台和第三台 server 加入集群。
 
-```
-K3S_TOKEN=SECRET k3s server --server https://<ip or hostname of server1>:6443
+```bash
+curl -sfL https://get.k3s.io | K3S_TOKEN=SECRET sh -s - server --server https://<ip or hostname of server1>:6443
 ```
 
-现在你有了一个高可用的 control-plane。将额外的工作节点加入到集群中，步骤与单个 server 集群相同。
+现在你有了一个高可用的 controlplane。你可以在 `--server` 参数中使用任何集群 server，从而加入额外的 server 和 worker 节点。将额外的 worker 节点加入到集群中，步骤与单个 server 集群相同。
+
+### 验证
+
+```bash
+kubectl get nodes
+```
+
+输出：
+
+```bash
+NAME        STATUS   ROLES                       AGE   VERSION
+server1     Ready    control-plane,etcd,master   28m   vX.Y.Z
+server2     Ready    control-plane,etcd,master   13m   vX.Y.Z
+```
 
 有几个配置标志在所有 server 节点中必须是相同的：
 
@@ -49,3 +65,5 @@ K3S_TOKEN=SECRET k3s server --server https://<ip or hostname of server1>:6443
 如果你有一个使用默认嵌入式 SQLite 数据库的现有集群，你可以通过使用 `--cluster-init` 标志重新启动你的 K3s server 来将其转换为 etcd。完成此操作后，你将能够如上所述添加其他实例。
 
 > **重要：** K3s v1.22.2 及更新版本支持从 SQLite 迁移到 etcd。如果您将 `--cluster-init` 添加到现有 server，旧版本将创建一个新的空数据存储。
+
+如果由于节点已经初始化或加入了一个集群，导致在磁盘上发现一个 etcd 数据存储，那么数据存储参数（`--cluster-init`、`--server` 和 `--datastore-endpoint` 等）将被忽略。

@@ -98,8 +98,8 @@ module.exports = {
         metadata,
         stable: "版本说明 - v2.5.15",
         baseCommit: "cd9ed7b74cc8111fecb05d2950c6948a83a6a595 - Jan 8, 2022",
-        k3sBaseCommit: "877427c71659ab25b14daf390b712df7f6d5a930 - May 6, 2022",
-        rke2Commit: "40d712e5081ac87e30e8f328f738130acf2c31f8 - May 6, 2022",
+        k3sBaseCommit: "dda29b33af1a03365a0b1a683fed6c8ff554949e - Jul 21, 2022",
+        rke2Commit: "bd4f6718b91f553a6abb639ba9cef6288d2b3508 - Jul 21, 2022",
         rancherdesktopCommit:
             "e97751d3fad48bee09c74953b9d698638fd3e1c7 - Jan 28, 2022",
     },
