@@ -29,11 +29,10 @@ RKE2 非常轻便，但有一些最低要求，如下所述。
 
 RKE2 已经在以下操作系统及其后续的非主要版本上进行了测试和验证：
 
-- Ubuntu 18.04 (amd64)
-- Ubuntu 20.04 (amd64)
+- Ubuntu 18.04 and 20.04 (amd64)
 - CentOS/RHEL 7.8 (amd64)
-- CentOS/RHEL 8.2 (amd64)
-- SLES 15 SP2 (amd64) (v1.18.16+rke2r1 和更新版本)
+- Rocky/RHEL 8.5 (amd64)
+- SLES 15 SP3, OpenSUSE, SLE Micro 5.1 (amd64)
 
 ### Windows
 

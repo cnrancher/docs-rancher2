@@ -2228,7 +2228,6 @@ module.exports = {
         安全: [
             "rke2/security/about_hardened_images/_index",
             "rke2/security/hardening_guide/_index",
-            "rke2/security/cis_self_assessment15/_index",
             "rke2/security/cis_self_assessment16/_index",
             "rke2/security/fips_support/_index",
             "rke2/security/policies/_index",
@@ -2241,7 +2240,7 @@ module.exports = {
         网络: ["rke2/networking/_index"],
         Helm集成: ["rke2/helm/_index"],
         高级选项和配置: ["rke2/advanced/_index"],
-        从RKE1迁移到RKE2: ["rke2/migration/_index"],
+		子命令: ["rke2/subcommands/_index"],
         已知问题和限制: ["rke2/known_issues/_index"],
     },
     rancherdesktop: {

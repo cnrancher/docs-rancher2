@@ -46,6 +46,8 @@ mirrors:
 
 #### 重写
 
+_v1.21.0 + K3s1 起可用_
+
 每个镜像都可以有一组重写。重写可以根据正则表达式来改变镜像的标签。如果镜像仓库中的组织/项目结构与上游的不同，这很有用。
 
 例如，以下配置将透明地从 `registry.example.com:5000/mirrorproject/rancher-images/coredns-coredns:1.6.3` 拉取镜像 `docker.io/rancher/coredns-coredns:1.6.3`：
@@ -194,4 +196,4 @@ mirrors:
 
 最后，将镜像推送到私有镜像仓库。
 
-示例： `docker push mycustomreg:5000/coredns-coredns`
+示例： `docker push mycustomreg.com:5000/coredns-coredns`

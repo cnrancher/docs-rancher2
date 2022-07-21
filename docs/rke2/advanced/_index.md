@@ -24,6 +24,16 @@ keywords:
 
 如果证书已经过期或剩余时间少于 90 天，当 RKE2 重新启动时，证书将被轮换。
 
+从 v1.21.8 + RKE2 r1 开始，你可以手动轮换证书。要做到这一点，最好的方法是停止 rke2-server 进程，轮换证书，然后再次启动该进程：
+
+```sh
+systemctl stop rke2-server
+rke2 certificate rotate
+systemctl start rke2-server
+```
+
+你也可以通过传递 `--service` 标志来轮换单个服务，例如：`rke2 certificate rotate --service api-server`。详情请参阅 [certificate 子命令](/docs/rke2/subcommands/_index#certificate)。
+
 ## 自动部署任务
 
 在`/var/lib/rancher/rke2/server/manifests`中找到的任何文件都会自动部署到 Kubernetes，其方式类似于`kubectl apply`。

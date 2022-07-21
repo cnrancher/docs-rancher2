@@ -62,7 +62,7 @@ mirrors:
 
 每个 mirror 可以有一组重写。重写可以根据正则表达式来改变镜像的标签。如果镜像仓库中的组织/项目结构与上游的不同，这很有用。
 
-例如，以下配置将透明地从 `registry.example.com:5000/mirrorproject/rancher-images/rke2-runtime:v1.23.5-rke2r1` 拉取镜像 `rancher/rke2-runtime:v1.23.5-rke2r1`。
+例如，以下配置将透明地从 `registry.example.com:5000/mirrorproject/rancher-images/rke2-runtime:v1.23.5-rke2r1` 拉取镜像 `docker.io/rancher/rke2-runtime:v1.23.5-rke2r1`。
 
 ```yaml
 mirrors:
@@ -73,22 +73,26 @@ mirrors:
       "^rancher/(.*)": "mirrorproject/rancher-images/$1"
 ```
 
+镜像仍将使用原来的名称存储，因此即使该镜像是以不同的名称从镜像仓库中拉取的，`crictl image ls` 仍将显示 `docker.io/rancher/rke2-runtime:v1.23.5-rke2r1` 在节点上可用。
+
 ### Configs
 
-configs 部分定义了每个镜像的 TLS 和凭证配置。对于每个镜像，你可以定义`auth`和/或`tls`。TLS 部分由以下部分组成：
+`configs` 部分定义了每个镜像的 TLS 和凭证配置。对于每个镜像，你可以定义`auth`和/或`tls`。TLS 部分由以下部分组成：
 
-| 指令                   | 说明                                               |
-| ---------------------- | -------------------------------------------------- |
-| `cert_file`            | 客户端证书路径，将用于与镜像仓库进行验证           |
-| `key_file`             | 用于与镜像仓库进行验证的客户密钥路径               |
-| `ca_file`              | 定义用于验证镜像仓库服务器 cert 文件的 CA 证书路径 |
+| 参数                                                            | 描述                                               |
+| --------------------------------------------------------------- | -------------------------------------------------- |
+| `cert_file`                                                     | 客户端证书路径，将用于与镜像仓库进行验证           |
+| `key_file`                                                      | 用于与镜像仓库进行验证的客户密钥路径               |
+| `ca_file`                                                       | 定义用于验证镜像仓库服务器 cert 文件的 CA 证书路径 |
 | `insecure_skip_verify` | 布尔值，定义是否应该跳过镜像仓库的 TLS 验证        |
 
-凭证由用户名/密码或认证令牌组成：
+`auth` 由用户名/密码或认证令牌组成：
 
-- username: 私有镜像仓库的用户名
-- password: 私有镜像仓库的用户密码
-- auth: 私有镜像仓库基本认证的认证令牌
+| 参数       | 描述                           |
+| ---------- | ------------------------------ |
+| `username` | 私有镜像仓库基本认证的用户名   |
+| `password` | 私有镜像仓库基本认证的用户密码 |
+| `auth`     | 私有镜像仓库基本认证的认证令牌 |
 
 以下是在不同模式下使用私有镜像仓库的基本例子：
 

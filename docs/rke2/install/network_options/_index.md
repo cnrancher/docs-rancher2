@@ -68,9 +68,13 @@ spec:
       backend: "wireguard"
 ```
 
+之后，通过执行 `kubectl rollout restart ds rke2-canal -n kube-system` 重新启动 canal daemonset 以使用较新的配置。
+
 关于 Canal 配置的全部选项的更多信息，请参考[rke2-charts](https://github.com/rancher/rke2-charts/blob/main-source/packages/rke2-canal/charts/values.yaml)。
 
 目前 RKE2 的 Window 安装中不支持 Canal。
+
+如果你遇到 IP 分配问题，请参阅[已知的问题和限制](https://docs.rke2.io/known_issues/)。
 
 </TabItem>
 
@@ -138,11 +142,12 @@ spec:
 
 ## Dual-stack 配置
 
-IPv4/IPv6 dual-stack 网络可以为 Pod 和 Service 同时分配 IPv4 和 IPv6 地址。RKE2 从 v1.21 版开始支持该功能，但默认情况下并未激活。为了正确激活它，RKE2 和所选的 CNI 插件都必须进行相应的配置。要在 dual-stack 模式下配置 RKE2，只需为 pods 和 service 设置一个有效的 IPv4/IPv6 dual-stack cidr。要做到这一点，请使用标志 `--cluster-cidr` 和 `--service-cidr`，例如。
+IPv4/IPv6 dual-stack 网络可以为 Pod 和 Service 同时分配 IPv4 和 IPv6 地址。RKE2 从 v1.21 版（从 v1.23 开始稳定）开始支持该功能，但默认情况下并未激活。为了正确激活它，RKE2 和所选的 CNI 插件都必须进行相应的配置。要在 dual-stack 模式下配置 RKE2，你必须在 controlplane 节点中为 pods 和 service 设置一个有效的 IPv4/IPv6 dual-stack cidr。此外，你还需要在 controlplane 和 worker 节点上设置包含节点 IPv4 和 IPv6 地址的 dual-stack node-ip。要做到这一点，请使用标志 `--cluster-cidr`、`--service-cidr` 和 `--node-ip`，例如：
 
 ```bash
 --cluster-cidr 10.42.0.0/16,2001:cafe:42:0::/56
 --service-cidr 10.43.0.0/16,2001:cafe:42:1::/112
+--node-ip 10.0.10.40,2a02:d091:a6f:4691:58c6:8609:a6d5:d1c3
 ```
 
 每个 CNI 插件都需要不同的配置来实现 dual-stack：
@@ -163,19 +168,7 @@ Canal 自动检测 dual-stack 的 RKE2 配置，不需要任何额外的配置�
 
 <TabItem value="cilium">
 
-使用 HelmChartConfig 启用 ipv6 参数：
-
-```yaml
-apiVersion: helm.cattle.io/v1
-kind: HelmChartConfig
-metadata:
-  name: rke2-cilium
-  namespace: kube-system
-spec:
-  valuesContent: |-
-    ipv6:
-      enabled: true
-```
+Cilium 自动检测 dual-stack 的 RKE2 配置，不需要任何额外的配置。
 
 </TabItem>
 
@@ -185,6 +178,14 @@ Calico 自动检测 dual-stack 的 RKE2 配置，不需要任何额外配置。�
 
 </TabItem>
 </Tabs>
+
+## IPv6 设置
+
+在只配置 IPv6 的情况下，RKE2 需要使用 `localhost` 来访问 ETCD pod 的 liveness URL。检查你的操作系统是否正确配置了 `/etc/hosts` 文件：
+
+```
+::1       localhost
+```
 
 ## 使用 Multus
 
@@ -203,6 +204,48 @@ Multus 不能独立部署。它总是需要至少一个传统的 CNI 插件，�
 任何 CNI 插件都可以作为 Multus 的次要 CNI 插件，以提供连接到一个 pod 的额外网络接口。然而，最常见的是使用由 containernetworking 团队维护的 CNI 插件（bridge、host-device、macvlan 等）作为 Multus 的辅助 CNI 插件。这些 containernetworking 插件会在安装 Multus 时自动部署。关于这些插件的更多信息，请参阅 [containernetworking plugins](https://www.cni.dev/plugins/current) 文档。
 
 要使用这些插件中的任何一个，需要创建一个适当的 NetworkAttachmentDefinition 对象来定义二级网络的配置。然后，该定义被 pod 注释所引用，Multus 将使用这些注释来为该 pod 提供额外的接口。[multus-cni 存储库](https://github.com/k8snetworkplumbingwg/multus-cni/blob/master/docs/quickstart.md#storing-a-configuration-as-a-custom-resource)中提供了将 Macvlan cni 插件与 Mu 一起使用的示例。
+
+## 使用 Multus 与 Whereabouts CNI
+
+[Whereabouts](https://github.com/k8snetworkplumbingwg/whereabouts) 是一个 IP 地址管理（IP Address Management,IPAM）CNI 插件，用于分配整个集群的 IP 地址。
+RKE2 1.22 开始支持使用 Whereabouts 与 Multus 来管理通过 Multus 创建的额外接口的 IP 地址。
+为了做到这一点，你需要使用 [HelmChartConfig](/docs/rke2/helm/_index#使用-helmchartconfig-自定义打包的组件)来配置 Multus CNI 以使用 Whereabouts。
+
+你可以创建一个名为 `/var/lib/rancher/rke2/server/manifests/rke2-multus-config.yml` 的文件，文件内容如下：
+
+```yaml
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  name: rke2-multus
+  namespace: kube-system
+spec:
+  valuesContent: |-
+    rke2-whereabouts:
+      enabled: true
+```
+
+这会将 Multus 的 chart 配置为使用 `rke2-whereabouts` 作为依赖。
+
+如果你需要自定义 Whereabouts 镜像，配置类似如下：
+```yaml
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  name: rke2-multus
+  namespace: kube-system
+spec:
+  valuesContent: |-
+    rke2-whereabouts:
+      enabled: true
+      image:
+        repository: ghcr.io/k8snetworkplumbingwg/whereabouts
+        tag: latest-amd64
+```
+
+:::note 注意：
+在启动 RKE2 之前，你需要写入该文件。
+:::
 
 ### 使用 Multus 与 SR-IOV （实验性）
 
