@@ -2244,13 +2244,30 @@ module.exports = {
         已知问题和限制: ["rke2/known_issues/_index"],
     },
     rancherdesktop: {
-        产品介绍: ["rancherdesktop/intro/_index"],
-        安装: ["rancherdesktop/installation/_index"],
-        功能指南: [
-            "rancherdesktop/features-guide/preferences/_index",
-            "rancherdesktop/features-guide/images/_index",
-            "rancherdesktop/features-guide/ui/_index",
+		快速入门: [
+			"rancherdesktop/getting-started/introduction/_index",
+			"rancherdesktop/getting-started/installation/_index",
+			"rancherdesktop/getting-started/features/_index",		
+		],
+		教程: [
+			"rancherdesktop/tutorials/working-with-images/_index",
+			"rancherdesktop/tutorials/working-with-containers/_index",
+		],
+		操作指南: [
+			"rancherdesktop/how-to-guides/hello-world-example/_index",
+			"rancherdesktop/how-to-guides/create-multi-node-cluster/_index",
+			"rancherdesktop/how-to-guides/setup-NGINX-Ingress-Controller/_index",
+			"rancherdesktop/how-to-guides/vs-code-docker/_index",
+			"rancherdesktop/how-to-guides/vs-code-remote-containers/_index",
+			"rancherdesktop/how-to-guides/rancher-on-rancher-desktop/_index",
+			"rancherdesktop/how-to-guides/skaffold-and-rancher-desktop/_index",
+			"rancherdesktop/how-to-guides/provisioning-scripts/_index",
+		],
+        参考: [
+            "rancherdesktop/references/architecture/_index",
+            "rancherdesktop/references/rdctl-command-reference/_index",
         ],
-        FAQ: ["rancherdesktop/faq/_index"],
+        常见问题: ["rancherdesktop/faq/_index"],
+		故障排除提示: ["rancherdesktop/troubleshooting-tips/_index"],
     },
 };
