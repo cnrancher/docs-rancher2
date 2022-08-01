@@ -26,27 +26,28 @@ import TabItem from '@theme/TabItem';
 本指南概述了使用 `container runtime` 或 `helm`（本地环境）在 Rancher Desktop 上安装 Rancher Dashboard 的步骤：
 
 <Tabs
+groupId="container-runtime"
 defaultValue="nerdctl"
 values={[
 { label: 'nerdctl', value: 'nerdctl', },
 { label: 'docker', value: 'docker', },
 { label: 'helm', value: 'helm', },
 ]}>
-<TabItem value="nerdctl">
+<TabItem value="nerdctl" default>
 
 ```console
 nerdctl run --privileged -d --restart=no -p 8080:80 -p 8443:443 rancher/rancher
 ```
 
 </TabItem>
-  <TabItem value="docker">
+  <TabItem value="docker" default>
 
 ```console
 docker run --privileged -d --restart=no -p 8080:80 -p 8443:443 rancher/rancher
 ```
 
 </TabItem>
-  <TabItem value="helm">
+  <TabItem value="helm" default>
 
 1：添加 Jetstack Chart：
 ```console
@@ -89,6 +90,7 @@ helm install rancher rancher-latest/rancher --namespace cattle-system --set host
 
 
 <Tabs
+groupId="container-runtime"
 defaultValue="nerdctl"
 values={[
 { label: 'nerdctl', value: 'nerdctl', },

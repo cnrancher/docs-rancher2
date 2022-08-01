@@ -111,12 +111,13 @@ rdctl set --kubernetes-enabled=false
 ## rdctl list-settings
 
 <Tabs
+groupId="command-reference"
 defaultValue="CLI"
 values={[
 { label: 'CLI', value: 'CLI', },
 { label: 'API', value: 'API', },
 ]}>
-<TabItem value="CLI">
+<TabItem value="CLI" default>
 
 运行 `rdctl list-settings` 以查看当前的活动配置：
 
@@ -150,7 +151,7 @@ values={[
 }
 ```
 </TabItem>
-  <TabItem value="API">
+  <TabItem value="API" default>
 
 调用以下 API 以查看当前的活动配置：
 
@@ -166,12 +167,13 @@ curl -s -H "Authorization: Basic $AUTH" http://localhost:6107/v0/settings -X GET
 ## rdctl set
 
 <Tabs
+groupId="command-reference"
 defaultValue="CLI"
 values={[
 { label: 'CLI', value: 'CLI', },
 { label: 'API', value: 'API', },
 ]}>
-<TabItem value="CLI">
+<TabItem value="CLI" default>
 
 运行 `rdctl set [flags]` 来设置属性。在大多数情况下，Kubernetes 会在运行 `set` 命令时重置。你可以通过在单个命令中使用链接来设置多个属性。下面是一些参考示例：
 
@@ -180,7 +182,7 @@ values={[
 > rdctl set --container-engine docker --kubernetes-version 1.21.2
 ```
 </TabItem>
-  <TabItem value="API">
+  <TabItem value="API" default>
 
 调用以下 API 来设置属性：
 
@@ -193,12 +195,13 @@ curl -s -H "Authorization: Basic $AUTH" http://localhost:6107/v0/settings -d '{ 
 ## rdctl shutdown
 
 <Tabs
+groupId="command-reference"
 defaultValue="CLI"
 values={[
 { label: 'CLI', value: 'CLI', },
 { label: 'API', value: 'API', },
 ]}>
-<TabItem value="CLI">
+<TabItem value="CLI" default>
 
 运行 `rdctl shutdown` 来正常关闭 Rancher Desktop：
 
@@ -208,7 +211,7 @@ Shutting down.
 ```
 
 </TabItem>
-  <TabItem value="API">
+  <TabItem value="API" default>
 
 
 调用以下 API 来关闭 Rancher Desktop：
@@ -222,12 +225,13 @@ shutdown: curl -s -H "Authorization: Basic $AUTH" http://localhost:6107/v0/shutd
 ## rdctl start
 
 <Tabs
+groupId="command-reference"
 defaultValue="CLI"
 values={[
 { label: 'CLI', value: 'CLI', },
 { label: 'API', value: 'API', },
 ]}>
-<TabItem value="CLI">
+<TabItem value="CLI" default>
 
 运行 `rdctl start` 来确保 Rancher Desktop 按照要求运行和配置：
 
@@ -236,7 +240,7 @@ values={[
 ```
 
 </TabItem>
-  <TabItem value="API">
+  <TabItem value="API" default>
 
 
 调用以下 API 来确保 Rancher Desktop 按照要求运行和配置，请填写你的用户和密码：

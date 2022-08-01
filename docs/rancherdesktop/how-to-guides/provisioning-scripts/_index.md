@@ -29,12 +29,13 @@ import TabItem from '@theme/TabItem';
 - 在以下路径创建 `override.yaml` 文件。
 
 <Tabs
+groupId="os"
 defaultValue="macOS"
 values={[
 { label: 'macOS', value: 'macOS', },
 { label: 'Linux', value: 'Linux', },
 ]}>
-<TabItem value="macOS">
+<TabItem value="macOS" default>
 
 ```
 ~/Library/Application Support/rancher-desktop/lima/_config/override.yaml

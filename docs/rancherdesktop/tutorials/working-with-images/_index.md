@@ -32,12 +32,13 @@ Rancher Desktop 通过 [NERDCTL](https://github.com/containerd/nerdctl) 项目�
 要了解所有命令选项并显示帮助文档，运行：
 
 <Tabs
+groupId="container-runtime"
 defaultValue="nerdctl"
 values={[
 { label: 'nerdctl', value: 'nerdctl', },
 { label: 'docker', value: 'docker', },
 ]}>
-<TabItem value="nerdctl">
+<TabItem value="nerdctl" default>
 
 ```console
 nerdctl -h
@@ -46,7 +47,7 @@ nerdctl -h
 与 Docker 不同，containerd 具有自己的命名空间。默认情况下，nerdctl 镜像存储在 `default` 命名空间中。如果你希望你的镜像可供 Kubernetes 使用，请使用 `--namespace k8s.io` 或 `-n k8s.io` CLI 参数。你还可以使用 `--namespace <NAMESPACE_NAME>` 选项来切换到 `default` 或其他命名空间。请注意，nerdctl 命名空间独立于 Kubernetes 和 `kubectl` 命名空间。
 
 </TabItem>
-  <TabItem value="docker">
+  <TabItem value="docker" default>
 
 ```console
 docker --help
@@ -59,12 +60,13 @@ docker --help
 要查看当前可用的镜像，请运行以下命令：
 
 <Tabs
+groupId="container-runtime"
 defaultValue="nerdctl"
 values={[
 { label: 'nerdctl', value: 'nerdctl', },
 { label: 'docker', value: 'docker', },
 ]}>
-<TabItem value="nerdctl">
+<TabItem value="nerdctl" default>
 
 ```console
 nerdctl images
@@ -81,12 +83,13 @@ docker images
 ## 构建镜像
 
 <Tabs
+groupId="container-runtime"
 defaultValue="nerdctl"
 values={[
 { label: 'nerdctl', value: 'nerdctl', },
 { label: 'docker', value: 'docker', },
 ]}>
-<TabItem value="nerdctl">
+<TabItem value="nerdctl" default>
 
 构建镜像与现有工具的操作相似。你可以在具有 `Dockerfile`（`Dockerfile` 使用了一个 scratch 镜像）的路径上运行 `nerdctl`：
 
@@ -143,12 +146,13 @@ docker build -t TAG .
 运行以下命令来使用 Dockerfile 构建镜像：
 
 <Tabs
+groupId="container-runtime"
 defaultValue="nerdctl"
 values={[
 { label: 'nerdctl', value: 'nerdctl', },
 { label: 'docker', value: 'docker', },
 ]}>
-<TabItem value="nerdctl">
+<TabItem value="nerdctl" default>
 
 ```
 nerdctl --namespace k8s.io build -t expressapp:v1.0 .
@@ -181,12 +185,13 @@ imagePullPolicy: Never
 如果要标记已构建的现有镜像，你可以运行以下命令：
 
 <Tabs
+groupId="container-runtime"
 defaultValue="nerdctl"
 values={[
 { label: 'nerdctl', value: 'nerdctl', },
 { label: 'docker', value: 'docker', },
 ]}>
-<TabItem value="nerdctl">
+<TabItem value="nerdctl" default>
 
 ```console
 nerdctl tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
@@ -205,12 +210,13 @@ docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
 要删除镜像，请运行以下命令：
 
 <Tabs
+groupId="container-runtime"
 defaultValue="nerdctl"
 values={[
 { label: 'nerdctl', value: 'nerdctl', },
 { label: 'docker', value: 'docker', },
 ]}>
-<TabItem value="nerdctl">
+<TabItem value="nerdctl" default>
 
 ```console
 nerdctl rmi IMAGE

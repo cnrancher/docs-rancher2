@@ -30,19 +30,20 @@ import TabItem from '@theme/TabItem';
 要使用默认的 `bridge` CNI 网络 (10.4.0.0/24) 运行容器：
 
 <Tabs
+groupId="container-runtime"
 defaultValue="nerdctl"
 values={[
 { label: 'nerdctl', value: 'nerdctl', },
 { label: 'docker', value: 'docker', },
 ]}>
-<TabItem value="nerdctl">
+<TabItem value="nerdctl" default>
 
 ```
 nerdctl run -it --rm alpine
 ```
 
 </TabItem>
-  <TabItem value="docker">
+  <TabItem value="docker" default>
 
 ```
 docker run -it --rm alpine
@@ -53,12 +54,13 @@ docker run -it --rm alpine
 要使用 BuildKit 构建镜像：
 
 <Tabs
+groupId="container-runtime"
 defaultValue="nerdctl"
 values={[
 { label: 'nerdctl', value: 'nerdctl', },
 { label: 'docker', value: 'docker', },
 ]}>
-<TabItem value="nerdctl">
+<TabItem value="nerdctl" default>
 
 ```
 nerdctl build -t foo /some-dockerfile-directory
@@ -66,7 +68,7 @@ nerdctl run -it --rm foo
 ```
 
 </TabItem>
-  <TabItem value="docker">
+  <TabItem value="docker" default>
 
 ```
 docker build -t foo /some-dockerfile-directory
@@ -78,18 +80,19 @@ docker run -it --rm foo
 要使用 BuiltKit 进行构建并将输出发送到本地目录：
 
 <Tabs
+groupId="container-runtime"
 defaultValue="nerdctl"
 values={[
 { label: 'nerdctl', value: 'nerdctl', },
 { label: 'docker', value: 'docker', },
 ]}>
-<TabItem value="nerdctl">
+<TabItem value="nerdctl" default>
 
 ```
 nerdctl build -o type=local,dest=. /some-dockerfile-directory
 ```
 </TabItem>
-  <TabItem value="docker">
+  <TabItem value="docker" default>
 
 ```
 docker build -o type=local,dest=. /some-dockerfile-directory
@@ -102,12 +105,13 @@ docker build -o type=local,dest=. /some-dockerfile-directory
 Docker Compose 是一个用于定义和运行多容器 Docker 应用程序的工具。
 
 <Tabs
+groupId="container-runtime"
 defaultValue="nerdctl"
 values={[
 { label: 'nerdctl', value: 'nerdctl', },
 { label: 'docker', value: 'docker', },
 ]}>
-<TabItem value="nerdctl">
+<TabItem value="nerdctl" default>
 
 `nerdctl-compose` CLI 用于与 `docker-compose` 兼容：
 ```
@@ -130,18 +134,19 @@ docker compose down
 要为容器公开端口 8000：
 
 <Tabs
+groupId="container-runtime"
 defaultValue="nerdctl"
 values={[
 { label: 'nerdctl', value: 'nerdctl', },
 { label: 'docker', value: 'docker', },
 ]}>
-<TabItem value="nerdctl">
+<TabItem value="nerdctl" default>
 
 ```
 nerdctl run -d -p 8000:80 nginx
 ```
 </TabItem>
-  <TabItem value="docker">
+  <TabItem value="docker" default>
 
 ```
 docker run -d -p 8000:80 nginx
@@ -162,11 +167,12 @@ netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 conne
 你还可以通过 `containerd` 使用 `--namespace` 参数来定位 Kubernetes 命名空间。请注意 `docker` 不使用命名空间。
 
 <Tabs
+groupId="container-runtime"
 defaultValue="nerdctl"
 values={[
 { label: 'nerdctl', value: 'nerdctl', },
 ]}>
-<TabItem value="nerdctl">
+<TabItem value="nerdctl" default>
 
 ```
 nerdctl --namespace k8s.io build -t demo:latest /code/demos/rd/anvil-app
