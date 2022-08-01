@@ -25,38 +25,38 @@ keywords:
 
 1. 安装并启动 Rancher Desktop。从 `Kubernetes Settings` 菜单中，将 **Container Runtime** 选为 `dockerd (moby)`：
 
-![](/img/rancherdesktop/vscoderemotecontainers/rd-main.png)
+   ![](/img/rancherdesktop/vscoderemotecontainers/rd-main.png)
 
 2. 安装并启动 Visual Studio Code 或 Visual Studio Code Insiders。本教程使用 Visual Studio Code：
 
-![](/img/rancherdesktop/vscoderemotecontainers/vscode-main.png)
+   ![](/img/rancherdesktop/vscoderemotecontainers/vscode-main.png)
 
 3. 安装 Remote Development 扩展包：
 
-![](/img/rancherdesktop/vscoderemotecontainers/vscode-remotedevelopment-marketplace.png)
+   ![](/img/rancherdesktop/vscoderemotecontainers/vscode-remotedevelopment-marketplace.png)
 
 4. 安装扩展后，你将在侧栏中看到扩展项，左下角有一个显示命令面板的绿色按钮，其中包含与 `Remote Development` 相关的各种选项/命令：
 
-![](/img/rancherdesktop/vscoderemotecontainers/vscode-remotedevelopment-installed.png)
+   ![](/img/rancherdesktop/vscoderemotecontainers/vscode-remotedevelopment-installed.png)
 
 5. Microsoft 在此 GitHub 仓库 (https://github.com/microsoft/vscode-dev-containers.git) 中提供了许多示例开发容器。将此仓库克隆到你的本地主机：
 
-```
-git clone https://github.com/microsoft/vscode-dev-containers.git
-```
+   ```
+   git clone https://github.com/microsoft/vscode-dev-containers.git
+   ```
 
 6. 单击窗口左下角的 ![](/img/rancherdesktop/vscoderemotecontainers/vscode-remotedevelopment-commandbutton.png) 按钮，然后从命令面板中选择 `Open Folder in Container...`。浏览克隆仓库中的其中一个示例，例如 `javascript-node`：
 
-![](/img/rancherdesktop/vscoderemotecontainers/vscode-remotedevelopment-commandpalette.png)
+   ![](/img/rancherdesktop/vscoderemotecontainers/vscode-remotedevelopment-commandpalette.png)
 
-![](/img/rancherdesktop/vscoderemotecontainers/vscode-remotedevelopment-openfolder.png)
+   ![](/img/rancherdesktop/vscoderemotecontainers/vscode-remotedevelopment-openfolder.png)
 
 
 7. 选择示例后，你会在容器加载时看到进度通知 ![](/img/rancherdesktop/vscoderemotecontainers/vscode-remotedevelopment-containerprogress.png)，容器启动成功后，左下角会显示容器名称 ![](/img/rancherdesktop/vscoderemotecontainers/vscode-remotedevelopment-containersuccess.png)。
 
 8. 容器启动后，在 VS Code IDE 中按 `F5` 启动示例应用程序。你将看到应用程序已启动并在 `localhost:3000` 上提供服务：
 
-![](/img/rancherdesktop/vscoderemotecontainers/vscode-remotedevelopment-appinbrowser.png)
+   ![](/img/rancherdesktop/vscoderemotecontainers/vscode-remotedevelopment-appinbrowser.png)
 
 恭喜！你已经使用 Rancher Desktop 和 VS Code 成功加载并运行了一个示例开发容器。
 

@@ -43,12 +43,13 @@ CMD ["echo", "Hello World!!"]
 #### 构建并运行镜像以进行验证
 
 <Tabs
+groupId="container-runtime"
 defaultValue="nerdctl"
 values={[
 { label: 'nerdctl', value: 'nerdctl', },
 { label: 'docker', value: 'docker', },
 ]}>
-<TabItem value="nerdctl">
+<TabItem value="nerdctl" default>
 
 ```
 nerdctl build --tag helloworld:v1.0 .
@@ -94,12 +95,13 @@ COPY . /usr/share/nginx/html
 :warning: **注意**：你需要将 `--namespace k8s.io` 标志传递给 `nerdctl` build 命令，以便 `nerdctl` 构建镜像并使其在 `k8s.io` 命名空间中可用。
 
 <Tabs
+groupId="container-runtime"
 defaultValue="nerdctl"
 values={[
 { label: 'nerdctl', value: 'nerdctl', },
 { label: 'docker', value: 'docker', },
 ]}>
-<TabItem value="nerdctl">
+<TabItem value="nerdctl" default>
 
 ```
 nerdctl --namespace k8s.io build --tag nginx-helloworld:latest .
@@ -132,12 +134,13 @@ kubectl port-forward pods/hello-world 8080:80
 #### 删除 pod 和镜像
 
 <Tabs
+groupId="container-runtime"
 defaultValue="nerdctl"
 values={[
 { label: 'nerdctl', value: 'nerdctl', },
 { label: 'docker', value: 'docker', },
 ]}>
-<TabItem value="nerdctl">
+<TabItem value="nerdctl" default>
 
 ```
 kubectl delete pod hello-world

@@ -46,33 +46,33 @@ Skaffold 是一个命令行工具，用于 Kubernetes 原生应用程序的持�
 
    由于你需要对镜像仓库具有推送访问权限，因此你可以使用 docker 登录，也可以设置本地镜像仓库：
 
-<Tabs
-defaultValue="docker-hub"
-values={[
-{ label: 'Docker Hub', value: 'docker-hub', },
-{ label: '本地镜像仓库', value: 'local-registry', },
-]}>
-<TabItem value="docker-hub">
+   <Tabs
+   defaultValue="docker-hub"
+   values={[
+   { label: 'Docker Hub', value: 'docker-hub', },
+   { label: '本地镜像仓库', value: 'local-registry', },
+   ]}>
+   <TabItem value="docker-hub">
 
-在运行 `skaffold dev` 之前，如果你有 [Docker Hub](https://hub.docker.com/) 账号，请使用你的 docker 登录。
+   在运行 `skaffold dev` 之前，如果你有 [Docker Hub](https://hub.docker.com/) 账号，请使用你的 docker 登录。
 
-</TabItem>
-<TabItem value="local-registry">
+   </TabItem>
+   <TabItem value="local-registry">
 
-你可以先运行以下命令来设置本地镜像仓库：
+   你可以先运行以下命令来设置本地镜像仓库：
 
-```
-docker run -d -p 5000:5000 --restart=always --name registry registry:2
-```
+   ```
+   docker run -d -p 5000:5000 --restart=always --name registry registry:2
+   ```
 
-然后：
-```
-skaffold dev --default-repo=localhost:5000
-```
-</TabItem>
-</Tabs>
+   然后：
+   ```
+   skaffold dev --default-repo=localhost:5000
+   ```
+   </TabItem>
+   </Tabs>
 
-在进行开发时，Skaffold 将检测所有更改，并会自动再次执行构建和部署的过程。你将能够看到集群中的任何更改。
+   在进行开发时，Skaffold 将检测所有更改，并会自动再次执行构建和部署的过程。你将能够看到集群中的任何更改。
 
 6. 在浏览器中访问 `localhost:3000`，你将看到 `express-sample` 界面。
 
