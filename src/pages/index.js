@@ -99,22 +99,6 @@ function Home() {
                     </div>
                     <div className="navigation__item">
                         <div className="navigation__title">
-                            <a href="/rancher2">
-                                <h1>Rancher 2.0-2.4</h1>
-                            </a>
-                        </div>
-                        <div className="navigation__content">
-                            <p>
-                                Rancher
-                                是为使用容器的公司打造的容器管理平台。Rancher
-                                简化了使用 Kubernetes 的流程，开发者可以随处运行
-                                Kubernetes（Run Kubernetes Everywhere），满足 IT
-                                需求规范，赋能 DevOps 团队。
-                            </p>
-                        </div>
-                    </div>
-                    <div className="navigation__item">
-                        <div className="navigation__title">
                             <a href="/rke">
                                 <h1>RKE</h1>
                             </a>
@@ -122,7 +106,7 @@ function Home() {
                         <div className="navigation__content">
                             <p>
                                 Rancher Kubernetes
-                                Engine（RKE）是一款非常简单，运行速度快的Kubernetes安装程序，支持各种运行平台。
+                                Engine（RKE）是一款非常简单，运行速度快的 Kubernetes 安装程序，支持各种运行平台。
                             </p>
                         </div>
                     </div>
@@ -181,6 +165,23 @@ function Home() {
                 <div className="navigation__grid">
                     <div className="navigation__item">
                         <div className="navigation__title">
+                            <a href="/rancher2">
+                                <h1>Rancher 2.0-2.4</h1>
+                            </a>
+                            <h3>已经暂停维护，不建议生产使用</h3>
+                        </div>
+                        <div className="navigation__content">
+                            <p>
+                                Rancher
+                                是为使用容器的公司打造的容器管理平台。Rancher
+                                简化了使用 Kubernetes 的流程，开发者可以随处运行
+                                Kubernetes（Run Kubernetes Everywhere），满足 IT
+                                需求规范，赋能 DevOps 团队。
+                            </p>
+                        </div>
+                    </div>
+                    <div className="navigation__item">
+                        <div className="navigation__title">
                             <a href="/octopus">
                                 <h1>Octopus</h1>
                             </a>
@@ -188,8 +189,8 @@ function Home() {
                         </div>
                         <div className="navigation__content">
                             <p>
-                                Octopus是基于Kubernetes或k3s的开源和云原生的设备管理系统，它非常轻巧，也不需要替换Kubernetes集群的任何基础组件。
-                                部署了Octopus，集群可以将边缘设备作为自定义k8s资源进行管理。
+                                Octopus 是基于 Kubernetes 或 k3s 的开源和云原生的设备管理系统，它非常轻巧，也不需要替换 Kubernetes 集群的任何基础组件。
+                                部署了 Octopus 后，集群可以将边缘设备作为自定义 K8s 资源进行管理。
                             </p>
                         </div>
                     </div>
@@ -202,7 +203,7 @@ function Home() {
                         </div>
                         <div className="navigation__content">
                             <p>
-                                Rancher帮助企业能够在生产环境中运行和管理Docker和Kubernetes，而无需从头开始构建容器服务平台。Rancher不再维护1.x版本的文档，建议您升级至2.x后，配合2.x文档使用新版Rancher。
+                                Rancher 帮助企业能够在生产环境中运行和管理 Docker 和 Kubernetes，而无需从头开始构建容器服务平台。Rancher 不再维护 1.x 版本的文档，建议您升级至 2.x 后，配合 2.x 文档使用新版 Rancher。
                             </p>
                         </div>
                     </div>
