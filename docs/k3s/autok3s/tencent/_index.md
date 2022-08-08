@@ -99,6 +99,8 @@ OutBound    ALL         ALL       ALL                Allow All
 
 您可以使用快速创建功能，在指定的云提供商服务中，快速启动一个K3s集群。
 
+由于 `rancher.cn` 域名正在备案中，因此使用默认的 `https://rancher-mirror.rancher.cn/autok3s/install.sh` 地址部署集群会出现部署失败情况。如果发生此类问题，请使用以下方式解决： `--k3s-install-script=https://rancher-mirror.oss-cn-beijing.aliyuncs.com/autok3s/install.sh`。
+
 以下图为例，我们将在 tencent CVM 使用默认配置创建一个单节点的 K3s 集群，CVM 虚拟机会在 `ap-guangzhou` 区域中创建。
 
 ![](/img/k3s/quick-start-tencent.png)
