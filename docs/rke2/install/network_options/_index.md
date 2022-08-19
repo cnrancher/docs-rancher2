@@ -90,9 +90,8 @@ metadata:
   namespace: kube-system
 spec:
   valuesContent: |-
-    cilium:
-      eni:
-        enabled: true
+    eni:
+      enabled: true
 ```
 
 有关 Cilium chart 中可用值的更多信息，请参考[rke2-charts repository](https://github.com/rancher/rke2-charts/blob/main/charts/rke2-cilium/rke2-cilium/1.11.201/values.yaml)
