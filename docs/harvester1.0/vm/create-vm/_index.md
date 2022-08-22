@@ -36,7 +36,7 @@ description: 从"虚拟机"页面创建一个或多个虚拟机。
 默认用户的密码配置：
 
 ```YAML
-# cloud-config
+#cloud-config
 password: password
 chpasswd: { expire: False }
 ssh_pwauth: True
