@@ -71,11 +71,44 @@ keywords:
 
 #### **问：如何为 Traefik Ingress Controller 启用仪表板？**
 
-**答**：出于安全原因，Traefik 仪表板默认不公开。但是，你可以通过多种方式公开仪表板。例如，使用 `port-forward` 将启用仪表板访问：
+**答**：出于安全原因，Traefik 仪表板默认不公开。但是，你可以通过多种方式公开仪表板。你可以使用下面显示的两种方法之一。
+
+#### 使用 `port-forward` 来启用仪表板访问
 
 ```
 kubectl port-forward -n kube-system $(kubectl -n kube-system get pods --selector "app.kubernetes.io/name=traefik" --output=name) 9000:9000
 ```
+
+在浏览器中访问 [http://127.0.0.1:9000/dashboard/](http://127.0.0.1:9000/dashboard/) 以查看 Traefik 仪表板。
+
+#### 使用 `HelmChartConfig` 来启用仪表板访问
+
+将以下说明复制到文件中，例如 `expose-traefik.yaml`：
+
+```
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  name: traefik
+  namespace: kube-system
+spec:
+  valuesContent: |-
+    dashboard:
+      enabled: true
+    ports:
+      traefik:
+        expose: true # Avoid this in production deployments
+    logs:
+      access:
+        enabled: true
+```
+
+运行命令：
+
+```
+kubectl apply -f expose-traefik.yaml
+```
+
 在浏览器中访问 [http://127.0.0.1:9000/dashboard/](http://127.0.0.1:9000/dashboard/) 以查看 Traefik 仪表板。
 
 #### **问：如何禁用 Traefik，这样会删除 Traefik 资源吗？**
