@@ -107,3 +107,26 @@ failed to allocate for range 0: no IP addresses available in range set
 ```
 
 要解决这个问题，你可以手动删除该目录中未使用的 IP。如果你需要这样做，请通过 GitHub 报告这个问题，并指定它是如何被触发的。
+
+## CIS 模式的 Ingress
+
+默认情况下，当 RKE2 以 `profile: cis-1.6` 参数运行的时候，RKE2 所应用的网络策略可能对 Ingress 有限制。此外，`rke2-ingress-nginx` Chart 默认设置为 `hostNetwork: false`，因此，用户需要设置自己的网络策略来允许访问 Ingress URL。以下是一个网络策略的示例，该示例允许进入它所应用的命名空间中的任何工作负载。如需了解更多配置选项，请参阅[本文](https://kubernetes.io/docs/concepts/services-networking/network-policies/)。
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: ingress-to-backends
+spec:
+  podSelector: {}
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/name: rke2-ingress-nginx
+  policyTypes:
+  - Ingress
+```
+有关详细信息，请参见此 [issue](https://github.com/rancher/rke2/issues/3195) 中的 comment。

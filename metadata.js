@@ -1069,6 +1069,7 @@ const metadata = {
 			"rancherdesktop/how-to-guides/rancher-on-rancher-desktop/_index": "Rancher Desktop 上的 Rancher",
 			"rancherdesktop/how-to-guides/skaffold-and-rancher-desktop/_index": "Skaffold 和 Rancher Desktop",
 			"rancherdesktop/how-to-guides/provisioning-scripts/_index": "配置脚本",
+            "rancherdesktop/how-to-guides/running-air-gapped/_index": "离线运行",
             "rancherdesktop/references/architecture/_index": "架构",
 			"rancherdesktop/references/rdctl-command-reference/_index": "rdctl 命令参考",
             "rancherdesktop/faq/_index": "常见问题",

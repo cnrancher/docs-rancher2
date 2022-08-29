@@ -2262,6 +2262,7 @@ module.exports = {
 			"rancherdesktop/how-to-guides/rancher-on-rancher-desktop/_index",
 			"rancherdesktop/how-to-guides/skaffold-and-rancher-desktop/_index",
 			"rancherdesktop/how-to-guides/provisioning-scripts/_index",
+            "rancherdesktop/how-to-guides/running-air-gapped/_index",
 		],
         参考: [
             "rancherdesktop/references/architecture/_index",
