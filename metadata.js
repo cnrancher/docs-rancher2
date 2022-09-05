@@ -461,7 +461,8 @@ const metadata = {
         },
         rancher2_5: {
             "rancher2.5/_index": "概述",
-			"rancher2.5/releases/v2.5.15": "版本说明 - v2.5.15",
+            "rancher2.5/releases/v2.5.16": "版本说明 - v2.5.16",
+            "rancher2.5/releases/v2.5.15": "版本说明 - v2.5.15",
             "rancher2.5/releases/v2.5.14": "版本说明 - v2.5.14",
             "rancher2.5/releases/v2.5.13": "版本说明 - v2.5.13",
             "rancher2.5/releases/v2.5.12": "版本说明 - v2.5.12",
