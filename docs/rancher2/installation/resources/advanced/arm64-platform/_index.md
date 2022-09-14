@@ -32,7 +32,6 @@ _自 v2.2.0 起可用_
   # 在最后一行`rancher/rancher:vX.Y.Z`中，一定要将 "X.Y.Z" 替换为存在ARM64构建的发布版本。例如，如果你的匹配版本是v2.5.8，你可以在这一行填写`rancher/rancher:v2.5.8`。
   docker run -d --restart=unless-stopped \
     -p 80:80 -p 443:443 \
-    --privileged \
     rancher/rancher:vX.Y.Z
   ```
 

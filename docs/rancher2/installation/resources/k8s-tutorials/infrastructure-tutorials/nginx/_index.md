@@ -87,7 +87,7 @@ keywords:
 除了可以将 NGINX 作为软件包安装在操作系统上外，您也可以将其作为 Docker 容器运行。将已编辑的**示例 NGINX 配置**另存为`/etc/nginx.conf`并运行以下命令启动 NGINX 容器：
 
 ```bash
-docker run -d --privileged --restart=unless-stopped \
+docker run -d --restart=unless-stopped \
   -p 80:80 -p 443:443 \
   -v /etc/nginx.conf:/etc/nginx/nginx.conf \
   nginx:1.14

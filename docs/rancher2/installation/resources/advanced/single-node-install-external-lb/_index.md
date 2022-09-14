@@ -67,7 +67,7 @@ keywords:
 1. 在运行 Docker 命令部署 Rancher 时，将 Docker 指向您的 CA 证书文件。
 
    ```
-   docker run -d --privileged --restart=unless-stopped \
+   docker run -d --restart=unless-stopped \
    -p 80:80 -p 443:443 \
    -v /etc/your_certificate_directory/cacerts.pem:/etc/rancher/ssl/cacerts.pem \
    rancher/rancher:latest
@@ -89,7 +89,7 @@ keywords:
 1. 输入下面的命令
 
    ```
-   docker run -d --privileged --restart=unless-stopped \
+   docker run -d --restart=unless-stopped \
    -p 80:80 -p 443:443 \
    rancher/rancher:latest --no-cacerts
    ```
@@ -281,7 +281,7 @@ Rancher 使用 etcd 作为数据存储。使用 Docker 安装时，将使用嵌�
 命令：
 
 ```
-docker run -d --privileged --restart=unless-stopped \
+docker run -d --restart=unless-stopped \
   -p 80:80 -p 443:443 \
   -v /opt/rancher:/var/lib/rancher \
   rancher/rancher:latest

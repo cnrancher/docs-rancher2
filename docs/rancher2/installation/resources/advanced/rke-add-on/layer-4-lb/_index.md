@@ -108,7 +108,7 @@ RKE add-on 安装仅支持 Rancher v2.0.8 之前的版本。
 与其将 NGINX 作为包安装在操作系统上，不如将其作为 Docker 容器运行。将已编辑的**NGINX 配置示例**保存为`/etc/nginx.conf`，并运行以下命令以启动 NGINX 容器：
 
 ```
-docker run -d --privileged --restart=unless-stopped \
+docker run -d --restart=unless-stopped \
   -p 80:80 -p 443:443 \
   -v /etc/nginx.conf:/etc/nginx/nginx.conf \
   nginx:1.14
