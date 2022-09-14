@@ -49,7 +49,7 @@ keywords:
 2.  执行以下命令：
 
     ```bash
-    docker run -d --privileged --restart=unless-stopped \
+    docker run -d --restart=unless-stopped \
       -p 80:80 -p 443:443 \
       rancher/rancher:latest
     ```

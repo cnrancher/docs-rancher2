@@ -141,7 +141,7 @@ docker pull rancher/rancher:<RANCHER_VERSION_TAG>
 | `<RANCHER_VERSION_TAG>` | 您要升级到的[Rancher 版本](/docs/rancher2/installation/resources/choosing-version/_index)的发行标签。 |
 
 ```bash
-docker run -d --privileged --volumes-from rancher-data \
+docker run -d --volumes-from rancher-data \
   --restart=unless-stopped \
   -p 80:80 -p 443:443 \
 	rancher/rancher:<RANCHER_VERSION_TAG>
@@ -163,7 +163,7 @@ docker run -d --privileged --volumes-from rancher-data \
 |                         |                                                                                                       |
 
 ```bash
-docker run -d --privileged --volumes-from rancher-data \
+docker run -d --volumes-from rancher-data \
   --restart=unless-stopped \
 	-p 80:80 -p 443:443 \
 	-v /<CERT_DIRECTORY>/<FULL_CHAIN.pem>:/etc/rancher/ssl/cert.pem \
@@ -187,7 +187,7 @@ docker run -d --privileged --volumes-from rancher-data \
 |                         |                                                                                                       |
 
 ```bash
-docker run -d --privileged --volumes-from rancher-data \
+docker run -d --volumes-from rancher-data \
   --restart=unless-stopped \
 	-p 80:80 -p 443:443 \
  	-v /<CERT_DIRECTORY>/<FULL_CHAIN.pem>:/etc/rancher/ssl/cert.pem \
@@ -213,7 +213,7 @@ docker run -d --privileged --volumes-from rancher-data \
 | `<YOUR.DNS.NAME>`       | 您最初开始使用的域地址                                                                                |
 
 ```bash
-docker run -d --privileged --volumes-from rancher-data \
+docker run -d --volumes-from rancher-data \
   --restart=unless-stopped \
 	-p 80:80 -p 443:443 \
 	rancher/rancher:<RANCHER_VERSION_TAG> \
@@ -238,7 +238,7 @@ docker run -d --privileged --volumes-from rancher-data \
 | `<RANCHER_VERSION_TAG>`          | 您要升级到的[Rancher 版本](/docs/rancher2/installation/resources/choosing-version/_index)的发行标签。 |
 
 ```bash
-  docker run -d --privileged --volumes-from rancher-data \
+  docker run -d --volumes-from rancher-data \
       --restart=unless-stopped \
       -p 80:80 -p 443:443 \
       -e CATTLE_SYSTEM_DEFAULT_REGISTRY=<REGISTRY.YOURDOMAIN.COM:PORT> \ # Set a default private registry to be used in Rancher
@@ -262,7 +262,7 @@ docker run -d --privileged --volumes-from rancher-data \
 | `<RANCHER_VERSION_TAG>`          | 您要升级到的[Rancher 版本](/docs/rancher2/installation/resources/choosing-version/_index)的发行标签。 |
 
 ```bash
-docker run -d --privileged --restart=unless-stopped \
+docker run -d --restart=unless-stopped \
     -p 80:80 -p 443:443 \
     -v /<CERT_DIRECTORY>/<FULL_CHAIN.pem>:/etc/rancher/ssl/cert.pem \
     -v /<CERT_DIRECTORY>/<PRIVATE_KEY.pem>:/etc/rancher/ssl/key.pem \
@@ -289,7 +289,7 @@ docker run -d --privileged --restart=unless-stopped \
 > **注意：** 使用`--no-cacerts`作为容器的参数来禁用 Rancher 生成的默认 CA 证书。
 
 ```bash
-docker run -d --privileged --volumes-from rancher-data \
+docker run -d --volumes-from rancher-data \
     --restart=unless-stopped \
      -p 80:80 -p 443:443 \
      --no-cacerts \

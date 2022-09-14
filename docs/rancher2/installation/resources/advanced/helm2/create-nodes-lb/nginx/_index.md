@@ -90,7 +90,7 @@ keywords:
 完成 IP 地址替换后，将文件另存为`/etc/nginx.conf`，运行以下命令即可启动 NGINX 容器。使用 NGINX v1.15 时，请将最后一行的“1.14”替换为“1.15”。
 
 ```
-docker run -d --privileged --restart=unless-stopped \
+docker run -d --restart=unless-stopped \
   -p 80:80 -p 443:443 \
   -v /etc/nginx.conf:/etc/nginx/nginx.conf \
   nginx:1.14

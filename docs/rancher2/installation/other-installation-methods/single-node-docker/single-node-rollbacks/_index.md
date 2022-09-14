@@ -93,7 +93,6 @@ docker pull rancher/rancher:<PRIOR_RANCHER_VERSION>
    docker run -d --volumes-from rancher-data \
     --restart=unless-stopped \
     -p 80:80 -p 443:443 \
-    --privileged \
     rancher/rancher:<PRIOR_RANCHER_VERSION>
    ```
 

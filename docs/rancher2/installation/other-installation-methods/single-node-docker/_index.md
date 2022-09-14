@@ -55,7 +55,7 @@ keywords:
 登录到 Linux 主机，然后运行下面这个非常简洁的安装命令。
 
 ```bash
-docker run -d --privileged --restart=unless-stopped \
+docker run -d --restart=unless-stopped \
 	-p 80:80 -p 443:443 \
 	rancher/rancher:latest
 ```
@@ -97,7 +97,7 @@ docker run -d --restart=unless-stopped \
 :::
 
 ```bash
-docker run -d --privileged --restart=unless-stopped \
+docker run -d --restart=unless-stopped \
 	-p 80:80 -p 443:443 \
 	-v /<CERT_DIRECTORY>/<FULL_CHAIN.pem>:/etc/rancher/ssl/cert.pem \
 	-v /<CERT_DIRECTORY>/<PRIVATE_KEY.pem>:/etc/rancher/ssl/key.pem \
@@ -130,7 +130,7 @@ docker run -d --privileged --restart=unless-stopped \
 :::
 
 ```bash
-docker run -d --privileged --restart=unless-stopped \
+docker run -d --restart=unless-stopped \
 	-p 80:80 -p 443:443 \
 	-v /<CERT_DIRECTORY>/<FULL_CHAIN.pem>:/etc/rancher/ssl/cert.pem \
 	-v /<CERT_DIRECTORY>/<PRIVATE_KEY.pem>:/etc/rancher/ssl/key.pem \
@@ -161,7 +161,7 @@ docker run -d --privileged --restart=unless-stopped \
 :::
 
 ```
-docker run -d --privileged --restart=unless-stopped \
+docker run -d --restart=unless-stopped \
 	-p 80:80 -p 443:443 \
 	rancher/rancher:latest \
 	--acme-domain <YOUR.DNS.NAME>
