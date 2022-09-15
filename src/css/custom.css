@@ -179,3 +179,7 @@ p {
 .navigation__content p {
   color: #4e6e8e;
 }
+
+.navigation__content h4 {
+    color: var(--ifm-color-primary)
+}
