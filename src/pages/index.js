@@ -137,7 +137,7 @@ function Home() {
                     </div>
                     <div className="navigation__item">
                         <div className="navigation__title">
-                            <a href="/harvester1.0">
+                            <a href="https://docs.harvesterhci.io/zh/">
                                 <h1>Harvester 1.0</h1>
                             </a>
                         </div>
