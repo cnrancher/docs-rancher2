@@ -69,9 +69,6 @@ function Home() {
                         在任何页面，您都可以单击左上角的logo回到本页。想要下载离线文档，请单击导航栏中的“获取
                         PDF 文档”。
                     </div>
-                    <div className= "text-note">   
-                        注意：我们正在迁移 Harvester 文档，因此已暂停更新此站点上的文档。如需查阅最新文档，请先移步至 <a href="https://docs.harvesterhci.io/v1.0/">1.0 英文文档</a>。
-                    </div>
                 </div>
             </header>
             <main>
