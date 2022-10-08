@@ -138,7 +138,7 @@ function Home() {
                     <div className="navigation__item">
                         <div className="navigation__title">
                             <a href="https://docs.harvesterhci.io/zh/">
-                                <h1>Harvester 1.0</h1>
+                                <h1>Harvester</h1>
                             </a>
                         </div>
                         <div className="navigation__content">
@@ -150,7 +150,7 @@ function Home() {
                     </div>
                     <div className="navigation__item">
                         <div className="navigation__title">
-                            <a href="/rancherdesktop">
+                            <a href="https://docs.rancherdesktop.io/zh/">
                                 <h1>Rancher Desktop</h1>
                             </a>
                         </div>
