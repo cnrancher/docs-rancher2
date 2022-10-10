@@ -25,7 +25,7 @@ keywords:
 
 ### 准备镜像与网络
 
-在使用 Harvester provider 之前，你需要上传好可以创建容器化实例的 OS 镜像，关于上传镜像的方法，可以参考[这里](/docs/harvester1.0/upload-image/_index)。
+在使用 Harvester provider 之前，你需要上传好可以创建容器化实例的 OS 镜像，关于上传镜像的方法，可以参考[这里](https://docs.harvesterhci.io/zh/v1.0/upload-image)。
 
 目前，Harvester 支持两种类型的网络：
 
@@ -35,7 +35,7 @@ keywords:
 Harvester 使用 [canal](https://projectcalico.docs.tigera.io/getting-started/kubernetes/flannel/flannel) 作为默认管理网络。它是一个内置网络，可以直接从集群中使用。
 默认情况下，虚拟机的管理网络 IP 只能在集群节点内访问，虚拟机重启后管理网络 IP 会改变。
 
-如果你是在 Harvester 集群外部使用 AutoK3s，你不能使用默认的管理网络，请你准备好可访问到 Harvester VM的 [VLAN 网络](/docs/harvester1.0/networking/_index#vlan-网络)，以便 AutoK3s 可以在 Harvester VM 中安装 K3s 集群。
+如果你是在 Harvester 集群外部使用 AutoK3s，你不能使用默认的管理网络，请你准备好可访问到 Harvester VM的 [VLAN 网络](https://docs.harvesterhci.io/zh/v1.0/networking/harvester-network#vlan-%E7%BD%91%E7%BB%9C)，以便 AutoK3s 可以在 Harvester VM 中安装 K3s 集群。
 
 ## UI 使用说明
 
