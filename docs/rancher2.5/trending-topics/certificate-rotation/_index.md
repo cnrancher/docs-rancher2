@@ -215,7 +215,7 @@ _可用版本: rke v0.2.0+_
        docker restart <rancher_server_id>
        ```
 
-     - 2.4 +
+     - 2.4/2.5 +
 
        1. exec 到 rancher server
 
@@ -230,7 +230,7 @@ _可用版本: rke v0.2.0+_
        3. 执行以下命令刷新参数
 
        ```bash
-       curl --insecure -sfL https://server-url/v3
+       curl --insecure -sfL https://<server-url>/v3  # 请将 <server-url> 替换为 Rancher Server 的访问地址
        ```
 
   3. 重启 Rancher Server 容器
