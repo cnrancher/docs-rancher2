@@ -31,6 +31,7 @@ AutoK3s 是一款开源的工具，如果您需要提交产品需求，或者是
 - 低成本（尝试云中的竞价实例）。
 - 通过 UI 简化操作。
 - 多云之间弹性迁移，借助诸如 [backup-restore-operator](https://github.com/rancher/backup-restore-operator) 这样的工具进行弹性迁移。
+- [K3s离线安装](/docs/k3s/autok3s/airgap/_index)，K8s离线安装包管理以及使用离线安装方式部署集群。
 
 ## 云提供商
 
