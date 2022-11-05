@@ -83,7 +83,7 @@ Service LB 控制器会监听其他 Kubernetes Services。当它找到一个 Ser
 要排除节点使用 Service LB，请将以下标签添加到不应排除的节点上：
 
 ```
-svccontroller.k3s.cattle.io/enablelb
+svccontroller.k3s.cattle.io/enablelb: true
 ```
 
 如果使用标签，则 service load balancer 仅在标记的节点上运行。
