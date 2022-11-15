@@ -40,10 +40,11 @@ keywords:
 以下示例是将主机上的`/host/certs`目录中的 CA 根证书，挂载到 Rancher 容器中的`/container/certs`上。
 
 ```
- --restart=unless-stopped \
+docker run -d --restart=unless-stopped \
   -p 80:80 -p 443:443 \
   -v /host/certs:/container/certs \
   -e SSL_CERT_DIR="/container/certs" \
+  --privileged \
   rancher/rancher:latest
 ```
 
@@ -56,10 +57,11 @@ API 审计日志记录通过 Rancher Server 进行的所有用户请求和系统
 参考 [API 审计日志](/docs/rancher2.5/installation/resources/advanced/api-audit-log/_index/#开启-api-审计日志)获取更多信息。
 
 ```
- --restart=unless-stopped \
+docker run -d --restart=unless-stopped \
   -p 80:80 -p 443:443 \
   -v /var/log/rancher/auditlog:/var/log/auditlog \
   -e AUDIT_LEVEL=1 \
+  --privileged \
   rancher/rancher:latest
 ```
 
@@ -70,9 +72,10 @@ _v2.1.7 可用_
 要设置其他 TLS 配置，您可以使用`CATTLE_TLS_MIN_VERSION`和`CATTLE_TLS_CIPHERS`环境变量。例如，要将 TLS 1.0 配置为可接受的最低 TLS 版本：
 
 ```
- --restart=unless-stopped \
+docker run -d --restart=unless-stopped \
   -p 80:80 -p 443:443 \
   -e CATTLE_TLS_MIN_VERSION="1.0" \
+  --privileged \
   rancher/rancher:latest
 ```
 
@@ -95,9 +98,10 @@ Rancher 使用 etcd 作为数据存储。使用 Docker 安装时，将使用嵌�
 命令：
 
 ```
- --restart=unless-stopped \
+docker run -d --restart=unless-stopped \
   -p 80:80 -p 443:443 \
   -v /opt/rancher:/var/lib/rancher \
+  --privileged \
   rancher/rancher:latest
 ```
 
@@ -112,7 +116,8 @@ Rancher 使用 etcd 作为数据存储。使用 Docker 安装时，将使用嵌�
 要更改主机端口映射，请将以下部分`-p 80:80 -p 443:443`替换为`-p 8080:80 -p 8443:443`：
 
 ```
- --restart=unless-stopped \
+docker run -d --restart=unless-stopped \
   -p 8080:80 -p 8443:443 \
+  --privileged \
   rancher/rancher:latest
 ```
