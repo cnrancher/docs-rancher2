@@ -113,7 +113,7 @@ function Home() {
                     </div>
                     <div className="navigation__item">
                         <div className="navigation__title">
-                            <a href="/k3s">
+                            <a href="https://docs.k3s.io/zh/">
                                 <h1>K3s</h1>
                             </a>
                         </div>
