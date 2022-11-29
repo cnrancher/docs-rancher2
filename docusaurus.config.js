@@ -33,7 +33,6 @@ module.exports = {
                     label: "文档中心",
                     position: "left",
                 },
-                { to: "pdf", label: "获取 PDF 文档", position: "left" },
                 {
                     href: "https://www.rancher.cn/weixin/",
                     label: "微信",
