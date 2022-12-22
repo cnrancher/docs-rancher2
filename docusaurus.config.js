@@ -72,7 +72,7 @@ module.exports = {
         },
         footer: {
             style: "dark",
-            copyright: `Copyright © ${new Date().getFullYear()} Rancher Labs, Inc. All Rights Reserved. 粤ICP备16086305号`,
+            copyright: `Copyright © ${new Date().getFullYear()} Rancher Labs, Inc. All Rights Reserved. 京ICP备2022035548号`,
         },
     },
     presets: [
