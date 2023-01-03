@@ -62,7 +62,7 @@ docker run -itd --restart=unless-stopped --net host -v /var/run/docker.sock:/var
 如果您是 MacOS 或者 Linux 系统，您也可以使用以下安装命令，一键安装 AutoK3s（Windows用户请前往 [Releases](https://github.com/cnrancher/autok3s/releases) 页面下载对应的程序）。
 
 ```bash
-curl -sS https://rancher-mirror.oss-cn-beijing.aliyuncs.com/autok3s/install.sh  | INSTALL_AUTOK3S_MIRROR=cn sh
+curl -sS https://rancher-mirror.rancher.cn/autok3s/install.sh  | INSTALL_AUTOK3S_MIRROR=cn sh
 ```
 
 您可以通过以下 CLI 命令启动本地 UI。

@@ -384,17 +384,6 @@ module.exports = {
             "rancher2/best-practices/deployment-types/_index",
             "rancher2/best-practices/containers/_index",
             "rancher2/best-practices/management/_index",
-
-            {
-                type: "category",
-                label: "调优",
-                items: [
-                    "rancher2/best-practices/optimize/os/_index",
-                    "rancher2/best-practices/optimize/docker/_index",
-                    "rancher2/best-practices/optimize/etcd/_index",
-                    "rancher2/best-practices/optimize/kubernetes/_index",
-                ],
-            },
             "rancher2/best-practices/use-in-china/_index",
         ],
 
