@@ -245,11 +245,6 @@ const metadata = {
             "rancher2/best-practices/containers/_index": "容器配置",
             "rancher2/best-practices/management/_index":
                 "关于规模，安全，可靠性的建议",
-            "rancher2/best-practices/optimize/os/_index": "节点 OS 调优",
-            "rancher2/best-practices/optimize/docker/_index": "Docker 调优",
-            "rancher2/best-practices/optimize/etcd/_index": "ETCD 调优",
-            "rancher2/best-practices/optimize/kubenetes/_index":
-                "Kubernetes 调优",
             "rancher2/best-practices/use-in-china/_index":
                 "如何在国内使用 Rancher",
             // end of this section

@@ -85,7 +85,7 @@ helm repo add rancher-<CHART_REPO> https://releases.rancher.com/server-charts/<C
 国内用户，可以使用放在国内的 Rancher Chart 加速安装：
 
 ```shell
-helm repo add rancher-<CHART_REPO> http://rancher-mirror.oss-cn-beijing.aliyuncs.com/server-charts/<CHART_REPO>
+helm repo add rancher-<CHART_REPO> https://rancher-mirror.rancher.cn/server-charts/<CHART_REPO>
 ```
 
 :::

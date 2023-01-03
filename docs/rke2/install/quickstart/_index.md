@@ -41,7 +41,7 @@ curl -sfL https://get.rke2.io | sh -
 国内用户，可以使用以下方法加速安装：
 
 ```
-curl -sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/rke2/install.sh | INSTALL_RKE2_MIRROR=cn sh -
+curl -sfL https://rancher-mirror.rancher.cn/rke2/install.sh | INSTALL_RKE2_MIRROR=cn sh -
 ```
 
 :::
@@ -92,7 +92,7 @@ curl -sfL https://get.rke2.io | INSTALL_RKE2_TYPE="agent" sh -
 国内用户，可以使用以下方法加速安装：
 
 ```sh
-curl -sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/rke2/install.sh | INSTALL_RKE2_MIRROR=cn INSTALL_RKE2_TYPE="agent"  sh -
+curl -sfL https://rancher-mirror.rancher.cn/rke2/install.sh | INSTALL_RKE2_MIRROR=cn INSTALL_RKE2_TYPE="agent"  sh -
 ```
 
 :::

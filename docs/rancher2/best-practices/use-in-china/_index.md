@@ -108,7 +108,7 @@ Error: looks like "https://releases.rancher.com/server-charts/stable" is not a v
 为了解决这个问题，我们在国内也同步了一份 Rancher Chart，使用时只需要替换成国内的 Rancher Chart 地址即可：
 
 ```
-helm repo add rancher-<CHART_REPO> http://rancher-mirror.oss-cn-beijing.aliyuncs.com/server-charts/<CHART_REPO>
+helm repo add rancher-<CHART_REPO> https://rancher-mirror.rancher.cn/server-charts/<CHART_REPO>
 ```
 
 ## 同步说明

@@ -122,7 +122,7 @@ curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
 国内用户，可以使用以下方法加速安装：
 
 ```shell
-curl -sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -s - --write-kubeconfig-mode 644
+curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -s - --write-kubeconfig-mode 644
 ```
 
 :::
@@ -137,7 +137,7 @@ curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" sh -s -
 国内用户，可以使用以下方法加速安装：
 
 ```shell
-curl -sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn K3S_KUBECONFIG_MODE="644" sh -s -
+curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn K3S_KUBECONFIG_MODE="644" sh -s -
 ```
 
 :::

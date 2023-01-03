@@ -99,7 +99,7 @@ OutBound    ALL         ALL       ALL                Allow All
 
 您可以使用快速创建功能，在指定的云提供商服务中，快速启动一个K3s集群。
 
-由于 `rancher.cn` 域名正在备案中，因此使用默认的 `https://rancher-mirror.rancher.cn/k3s/k3s-install.sh` 地址部署集群会出现部署失败情况。如果发生此类问题，请使用以下方式解决： `--k3s-install-script=https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh`。
+由于 `rancher.cn` 域名正在备案中，因此使用默认的 `https://rancher-mirror.rancher.cn/k3s/k3s-install.sh` 地址部署集群会出现部署失败情况。如果发生此类问题，请使用以下方式解决： `--k3s-install-script=https://rancher-mirror.rancher.cn/k3s/k3s-install.sh`。
 
 以下图为例，我们将在 tencent CVM 使用默认配置创建一个单节点的 K3s 集群，CVM 虚拟机会在 `ap-guangzhou` 区域中创建。
 
@@ -185,7 +185,7 @@ K3s 参数配置项主要对 K3s 集群进行设置，例如是否部署 HA 模�
 | K3s Version | 安装的 K3s 版本，如果设置则覆盖 Channel 选项 |
 | Cluster | 启用嵌入式 DB 高可用 K3s（即开启 `--cluster-init` 设置） | false
 | Datastore | 指定 etcd、Mysql、Postgres 或 Sqlite（默认）数据源名称 |
-| K3s Install Script | K3s 安装脚本 | `https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh`
+| K3s Install Script | K3s 安装脚本 | `https://rancher-mirror.rancher.cn/k3s/k3s-install.sh`
 | Master | Master 节点数量 |
 | Master Extra Args | Master 节点额外参数设置，例如 `--no-deploy traefik` |
 | Worker | Worker 节点数量 |
