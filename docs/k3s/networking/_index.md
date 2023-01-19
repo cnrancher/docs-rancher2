@@ -93,7 +93,3 @@ svccontroller.k3s.cattle.io/enablelb: true
 要禁用嵌入式 LB，请使用`--disable servicelb`选项运行 k3s server。
 
 如果您希望运行其他 LB，例如 MetalLB，这是必需的。
-
-## 没有主机名的节点
-
-一些云提供商（如 Linode）会以 "localhost "作为主机名创建机器，而其他提供商可能根本没有设置主机名。这可能会导致域名解析的问题。你可以用`--node-name`标志或`K3S_NODE_NAME`环境变量来运行 K3s，这样就会传递节点名称来解决这个问题。
