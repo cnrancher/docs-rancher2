@@ -72,13 +72,12 @@ function Home() {
                 <div className="navigation__item">
                         <div className="navigation__title">
                             <a href="https://docs.ranchermanager.rancher.io/zh/">
-                                <h1>Rancher 2.6</h1>
+                                <h1>Rancher 2.6/2.7</h1>
                             </a>
                         </div>
                         <div className="navigation__content">
-                            <h4>Rancher 2.6 中文文档已正式上线！</h4>
                             <p>
-                                Rancher 2.6 文档已正式发布到我们的<a href="https://docs.ranchermanager.rancher.io/zh/">全新文档站点</a>，支持中英双语切换，结构更合理，界面更简洁，欢迎用户前往阅读。
+                                Rancher 2.6/2.7 的文档已正式发布到我们的<a href="https://docs.ranchermanager.rancher.io/zh/">全新文档站点</a>，支持中英双语切换和版本切换，结构更合理，界面更简洁，欢迎用户前往阅读。
                             </p>
                         </div>
                     </div>
