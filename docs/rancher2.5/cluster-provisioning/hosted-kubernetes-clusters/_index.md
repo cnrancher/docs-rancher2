@@ -29,9 +29,6 @@ Rancher 目前支持以下 Kubernetes 供应商：
 | [谷歌 GKE (Google Kubernetes Engine)](https://cloud.google.com/kubernetes-engine/)                             | v2.0.0 |
 | [亚马逊 EKS (Amazon Elastic Container Service for Kubernetes)](https://aws.amazon.com/eks/)                    | v2.0.0 |
 | [微软 AKS (Azure Kubernetes Service)](https://azure.microsoft.com/en-us/services/kubernetes-service/)          | v2.0.0 |
-| [阿里云 ACK (Alibaba Cloud Container Service for Kubernetes)](https://www.alibabacloud.com/product/kubernetes) | v2.2.0 |
-| [腾讯 TKE (Tencent Kubernetes Engine)](https://intl.cloud.tencent.com/product/tke)                             | v2.2.0 |
-| [华为 CCE (Huawei Cloud Container Engine)](https://www.huaweicloud.com/product/cce.html)                       | v2.2.0 |
 
 ## 托管 Kubernetes 提供商的身份验证
 
@@ -40,6 +37,3 @@ Rancher 目前支持以下 Kubernetes 供应商：
 - [创建 GKE 集群](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/gke/_index)
 - [创建 EKS 集群](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/eks/_index)
 - [创建 AKS 集群](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/aks/_index)
-- [创建 ACK 集群](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/ack/_index)
-- [创建 TKE 集群](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/tke/_index)
-- [创建 CCE 集群](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/cce/_index)

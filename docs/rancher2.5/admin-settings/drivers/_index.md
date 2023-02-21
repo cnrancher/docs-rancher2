@@ -39,13 +39,6 @@ _自 v2.2.0 起可用_
 - [Google GKE](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/gke/_index)
 - [Azure AKS](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/aks/_index)
 
-还有其他一些托管的 Kubernetes 云供应商默认情况下被禁用的，但打包在了 Rancher 中，您可以手动激活它们：
-
-- [阿里巴巴 ACK](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/ack/_index)
-- [华为 CCE](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/cce/_index)
-- [腾讯 TKE](/docs/rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/tke/_index)
-- 百度 CCE
-
 ## 节点驱动
 
 节点驱动用于创建节点，Rancher 可以用这些节点启动和管理 Kubernetes 集群。节点驱动就是[Docker Machine](https://docs.docker.com/machine/drivers/)。在创建集群时显示哪个供应商的可用性是根据节点驱动的状态决定的。在创建供应商提供节点的 Kubernetes 集群的选项中，UI 仅显示节点驱动状态为`Active`的选项。默认情况下，Rancher 内置了许多现有的 Docker Machine 驱动，但是您也可以创建自定义节点驱动，并添加到 Rancher 中。
