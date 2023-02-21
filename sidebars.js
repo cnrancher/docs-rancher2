@@ -1323,9 +1323,6 @@ module.exports = {
                     "rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/gke/_index",
                     "rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/eks/_index",
                     "rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/aks/_index",
-                    "rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/ack/_index",
-                    "rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/tke/_index",
-                    "rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/cce/_index",
                 ],
             },
             {
