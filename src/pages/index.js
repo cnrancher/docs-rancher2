@@ -83,22 +83,6 @@ function Home() {
                     </div>
                     <div className="navigation__item">
                         <div className="navigation__title">
-                            <a href="/rancher2.5">
-                                <h1>Rancher 2.5</h1>
-                            </a>
-                        </div>
-                        <div className="navigation__content">
-                            <p>
-                                Rancher
-                                是为使用容器的公司打造的容器管理平台。Rancher
-                                简化了使用 Kubernetes 的流程，开发者可以随处运行
-                                Kubernetes（Run Kubernetes Everywhere），满足 IT
-                                需求规范，赋能 DevOps 团队。
-                            </p>
-                        </div>
-                    </div>
-                    <div className="navigation__item">
-                        <div className="navigation__title">
                             <a href="/rke">
                                 <h1>RKE</h1>
                             </a>
@@ -163,6 +147,23 @@ function Home() {
             </main>
             <main>
                 <div className="navigation__grid">
+                  <div className="navigation__item">
+                        <div className="navigation__title">
+                            <a href="/rancher2.5">
+                                <h1>Rancher 2.5</h1>
+                            </a>
+                            <h3>已经暂停维护，不建议生产使用</h3>
+                        </div>
+                        <div className="navigation__content">
+                            <p>
+                                Rancher
+                                是为使用容器的公司打造的容器管理平台。Rancher
+                                简化了使用 Kubernetes 的流程，开发者可以随处运行
+                                Kubernetes（Run Kubernetes Everywhere），满足 IT
+                                需求规范，赋能 DevOps 团队。
+                            </p>
+                        </div>
+                    </div>
                     <div className="navigation__item">
                         <div className="navigation__title">
                             <a href="/rancher2">
