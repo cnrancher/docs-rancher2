@@ -125,3 +125,55 @@ p {
 [class^="copyButton_"] {
   color: #cccccc !important;
 }
+
+/* black cow style */
+.hero__logo {
+  max-width: 350px;
+  max-height: 100%;
+  display: block;
+  margin: 0 auto 1.5rem;
+}
+
+.navigation__subtitle {
+  margin-bottom: 0;
+}
+
+/* main navigation */
+.navigation__grid {
+  padding: 3.6rem 2rem 0;
+  max-width: 960px;
+  margin: 0 auto;
+  border-top: 1px solid #adc5e8;
+  padding: 1.2rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: stretch;
+  justify-content: space-between;
+}
+
+.navigation__item {
+  flex-grow: 1;
+  flex-basis: 30%;
+  max-width: 30%;
+}
+
+.navigation__title a {
+  color: var(--ifm-color-primary)
+}
+
+.navigation__title a:hover {
+  text-decoration: none;
+}
+
+.navigation__title a h1 {
+  margin-top: 16px;
+}
+
+.navigation__content p {
+  color: #4e6e8e;
+}
+
+.navigation__content h4 {
+    color: var(--ifm-color-primary)
+}

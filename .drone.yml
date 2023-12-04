@@ -1,10 +1,45 @@
 kind: pipeline
+type: docker
 name: default
 
+platform:
+  os: linux
+  arch: amd64
+
+clone:
+  disable: true
+
 steps:
+  - name: clone
+    image: "drone/git:latest"
+    environment:
+      HTTP_PROXY:
+        from_secret: proxy
+      HTTPS_PROXY:
+        from_secret: proxy
+      http_proxy:
+        from_secret: proxy
+      https_proxy:
+        from_secret: proxy
+      NOPROXY: localhost
+      noproxy: localhost
   - name: build
-    image: node:12.16.0
+    image: node:12.16.2
+    environment:
+      PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
+      NODE_OPTIONS: "--max_old_space_size=4096"
+      HTTP_PROXY:
+        from_secret: proxy
+      HTTPS_PROXY:
+        from_secret: proxy
+      http_proxy:
+        from_secret: proxy
+      https_proxy:
+        from_secret: proxy
+      NOPROXY: localhost
+      noproxy: localhost
     commands:
+      - which yarn
       - yarn install
       - yarn build
       - mv ./build /website
@@ -12,12 +47,12 @@ steps:
       - name: vol
         path: /website
   - name: preview
-    image: loganhz/drone-oss:0.0.4
+    image: kingsd/drone-oss:v0.0.6
     settings:
       dist: /website/build
       dist_ignore: img/
       path: docs-rancher2-3-preview
-      endpoint: oss-accelerate.aliyuncs.com
+      endpoint: oss-cn-shanghai.aliyuncs.com
       access_key_id:
         from_secret: ACCESS_KEY_ID
       access_key_secret:
@@ -28,16 +63,16 @@ steps:
     when:
       ref:
         include:
-          - 'refs/heads/preview'
+          - "refs/heads/preview"
       event:
         - push
   - name: production
-    image: loganhz/drone-oss:0.0.4
+    image: kingsd/drone-oss:v0.0.6
     settings:
       dist: /website/build
       dist_ignore: img/
       path: docs-rancher2-3-production
-      endpoint: oss-accelerate.aliyuncs.com
+      endpoint: oss-cn-shanghai.aliyuncs.com
       access_key_id:
         from_secret: ACCESS_KEY_ID
       access_key_secret:
@@ -48,9 +83,35 @@ steps:
     when:
       ref:
         include:
-          - 'refs/heads/master'
+          - "refs/heads/master"
       event:
         - push
+  - name: build-pdf
+    image: reg.cnrancher.com/tool/node-chrome:12.16.0-stable
+    environment:
+      PUPPETEER_EXECUTABLE_PATH: /usr/bin/google-chrome
+    commands:
+      - ln -s /website/build ./build
+      - yarn generate
+    volumes:
+      - name: vol
+        path: /website
+    when:
+      event:
+        - tag
+  - name: push-pdf
+    image: kingsd/drone-oss:v0.0.6
+    settings:
+      dist: ./build_docs
+      path: pdf-rancher-private
+      endpoint: oss-cn-shanghai.aliyuncs.com
+      access_key_id:
+        from_secret: ACCESS_KEY_ID
+      access_key_secret:
+        from_secret: ACCESS_KEY_SECRET
+    when:
+      event:
+        - tag
 
 volumes:
   - name: vol

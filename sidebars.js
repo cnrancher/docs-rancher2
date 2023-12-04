@@ -6,799 +6,2143 @@
  */
 
 module.exports = {
-  docs: {
-    版本说明: [
-      "releases/v2.4.3",
-      "releases/v2.4.2",
-      "releases/v2.4.0",
-      "releases/v2.3.7",
-      "releases/v2.3.6",
-      "releases/v2.3.5",
-      "releases/v2.3.4",
-      "releases/v2.3.3",
-      "releases/v2.3.2",
-      "releases/v2.3.1",
-      "releases/v2.3.0"
-    ],
-    产品介绍: [
-      "overview/_index",
-      "overview/architecture/_index",
-      "overview/architecture-recommendations/_index",
-      "overview/concepts/_index",
-      "overview/glossary/_index"
-    ],
-    快速入门: [
-      "quick-start-guide/_index",
-      "quick-start-guide/cli/_index",
-      {
-        type: "category",
-        label: "部署 Rancher Server",
-        items: [
-          "quick-start-guide/deployment/_index",
-          "quick-start-guide/deployment/quickstart-manual-setup/_index",
-          "quick-start-guide/deployment/amazon-aws-qs/_index",
-          "quick-start-guide/deployment/microsoft-azure-qs/_index",
-          "quick-start-guide/deployment/digital-ocean-qs/_index",
-          "quick-start-guide/deployment/google-gcp-qs/_index",
-          "quick-start-guide/deployment/quickstart-vagrant/_index"
-        ]
-      },
-      {
-        type: "category",
-        label: "部署工作负载",
-        items: [
-          "quick-start-guide/workload/_index",
-          "quick-start-guide/workload/quickstart-deploy-workload-ingress/_index",
-          "quick-start-guide/workload/quickstart-deploy-workload-nodeport/_index"
-        ]
-      }
-    ],
-    安装指南: [
-      "installation/_index",
-      {
-        type: "category",
-        label: "安装要求",
-        items: [
-          "installation/requirements/_index",
-          "installation/requirements/installing-docker/_index",
-          "installation/requirements/ports/_index"
-        ]
-      },
-      "installation/how-ha-works/_index",
-      {
-        type: "category",
-        label: "Rancher 高可用安装",
-        items: [
-          "installation/k8s-install/_index",
-          "installation/k8s-install/create-nodes-lb/_index",
-          "installation/k8s-install/kubernetes-rke/_index",
-          "installation/k8s-install/helm-rancher/_index"
-        ]
-      },
-      {
-        type: "category",
-        label: "其他安装方法",
-        items: [
-          "installation/other-installation-methods/_index",
-          {
-            type: "category",
-            label: "Rancher 单节点安装",
-            items: [
-              "installation/other-installation-methods/single-node-docker/_index",
-              "installation/other-installation-methods/single-node-docker/troubleshooting/_index",
-              "installation/other-installation-methods/single-node-docker/advanced/_index",
-              "installation/other-installation-methods/single-node-docker/proxy/_index"
-            ]
-          },
-          {
-            type: "category",
-            label: "Rancher 离线安装",
-            items: [
-              "installation/other-installation-methods/air-gap/_index",
-              "installation/other-installation-methods/air-gap/prepare-nodes/_index",
-              "installation/other-installation-methods/air-gap/populate-private-registry/_index",
-              "installation/other-installation-methods/air-gap/launch-kubernetes/_index",
-              "installation/other-installation-methods/air-gap/install-rancher/_index"
-            ]
-          }
-        ]
-      },
-      {
-        type: "category",
-        label: "其他资料和高级选项",
-        items: [
-          "installation/options/_index",
-          {
-            type: "category",
-            label: "Rancher 高可用 Helm2 安装",
-            items: [
-              "installation/options/helm2/_index",
-              {
+    rancher2: {
+        版本说明: [
+            "rancher2/_index",
+			"rancher2/releases/v2.4.18",
+            "rancher2/releases/v2.4.17",
+            "rancher2/releases/v2.4.16",
+            "rancher2/releases/v2.4.15",
+            "rancher2/releases/v2.4.14",
+            "rancher2/releases/v2.4.13",
+            "rancher2/releases/v2.4.12",
+            "rancher2/releases/v2.4.11",
+            "rancher2/releases/v2.4.10",
+            "rancher2/releases/v2.4.9",
+            "rancher2/releases/v2.4.8",
+            "rancher2/releases/v2.4.7",
+            "rancher2/releases/v2.4.6",
+            "rancher2/releases/v2.4.5",
+            "rancher2/releases/v2.4.4",
+            "rancher2/releases/v2.4.3",
+            "rancher2/releases/v2.4.2",
+            "rancher2/releases/v2.4.0",
+            "rancher2/releases/v2.3.11",
+            "rancher2/releases/v2.3.10",
+            "rancher2/releases/v2.3.9",
+            "rancher2/releases/v2.3.8",
+            "rancher2/releases/v2.3.7",
+            "rancher2/releases/v2.3.6",
+            "rancher2/releases/v2.3.5",
+            "rancher2/releases/v2.3.4",
+            "rancher2/releases/v2.3.3",
+            "rancher2/releases/v2.3.2",
+            "rancher2/releases/v2.3.1",
+            "rancher2/releases/v2.3.0",
+        ],
+        热点问题: [
+            "rancher2/trending-topics/_index",
+            "rancher2/trending-topics/certificate-rotation/_index",
+            "rancher2/trending-topics/cleaning-cluster-nodes/_index",
+            "rancher2/trending-topics/deployment/_index",
+            "rancher2/trending-topics/install-rancher-on-k8s/_index",
+            "rancher2/trending-topics/requirements/_index",
+            "rancher2/trending-topics/quickstart-manual-setup/_index",
+            "rancher2/trending-topics/cli/_index",
+            "rancher2/trending-topics/single-node-docker/_index",
+        ],
+        产品介绍: [
+            "rancher2/overview/_index",
+            "rancher2/overview/architecture/_index",
+            "rancher2/overview/architecture-recommendations/_index",
+            "rancher2/overview/concepts/_index",
+            "rancher2/overview/glossary/_index",
+            "rancher2/overview/rancher-glossary/_index",
+        ],
+        快速入门: [
+            "rancher2/quick-start-guide/_index",
+            "rancher2/quick-start-guide/cli/_index",
+            {
                 type: "category",
-                label: "1、配置基础设施",
+                label: "部署 Rancher Server",
                 items: [
-                  "installation/options/helm2/create-nodes-lb/_index",
-                  "installation/options/helm2/create-nodes-lb/nginx/_index",
-                  "installation/options/helm2/create-nodes-lb/nlb/_index"
-                ]
-              },
-              {
+                    "rancher2/quick-start-guide/deployment/_index",
+                    "rancher2/quick-start-guide/deployment/quickstart-manual-setup/_index",
+                    "rancher2/quick-start-guide/deployment/amazon-aws-qs/_index",
+                    "rancher2/quick-start-guide/deployment/microsoft-azure-qs/_index",
+                    "rancher2/quick-start-guide/deployment/digital-ocean-qs/_index",
+                    "rancher2/quick-start-guide/deployment/google-gcp-qs/_index",
+                    "rancher2/quick-start-guide/deployment/quickstart-vagrant/_index",
+                ],
+            },
+            {
                 type: "category",
-                label: "2、安装 Kubernetes",
+                label: "部署工作负载",
                 items: [
-                  "installation/options/helm2/kubernetes-rke/_index",
-                  "installation/options/helm2/kubernetes-rke/troubleshooting/_index"
-                ]
-              },
-              {
-                type: "category",
-                label: "3、Helm 初始化",
-                items: [
-                  "installation/options/helm2/helm-init/_index",
-                  "installation/options/helm2/helm-init/troubleshooting/_index"
-                ]
-              },
-              {
-                type: "category",
-                label: "4、安装 Rancher",
-                items: [
-                  "installation/options/helm2/helm-rancher/_index",
-                  "installation/options/helm2/helm-rancher/tls-secrets/_index",
-                  "installation/options/helm2/helm-rancher/chart-options/_index",
-                  "installation/options/helm2/helm-rancher/troubleshooting/_index"
-                ]
-              }
-            ]
-          },
-          {
-            type: "category",
-            label: "Rancher 高可用 Helm2 离线安装",
-            items: [
-              "installation/options/air-gap-helm2/_index",
-              "installation/options/air-gap-helm2/prepare-nodes/_index",
-              "installation/options/air-gap-helm2/populate-private-registry/_index",
-              "installation/options/air-gap-helm2/launch-kubernetes/_index",
-              "installation/options/air-gap-helm2/install-rancher/_index"
-            ]
-          },
-          "installation/options/etcd/_index",
-          "installation/options/server-tags/_index",
-          "installation/options/single-node-install-external-lb/_index",
-          "installation/options/nginx/_index",
-          "installation/options/tls-secrets/_index",
-          "installation/options/chart-options/_index",
-          {
-            type: "category",
-            label: "RKE Add-On 安装",
-            items: [
-              "installation/options/rke-add-on/_index",
-              {
-                type: "category",
-                label: "Rancher 高可用 - 4层 LB",
-                items: [
-                  "installation/options/rke-add-on/layer-4-lb/_index",
-                  "installation/options/rke-add-on/layer-4-lb/nlb/_index"
-                ]
-              },
-              {
-                type: "category",
-                label: "Rancher 高可用 - 7层 LB",
-                items: [
-                  "installation/options/rke-add-on/layer-7-lb/_index",
-                  "installation/options/rke-add-on/layer-7-lb/alb/_index",
-                  "installation/options/rke-add-on/layer-7-lb/nginx/_index"
-                ]
-              },
-              "installation/options/rke-add-on/proxy/_index",
-              "installation/options/rke-add-on/api-auditing/_index",
-              {
-                type: "category",
-                label: "问题排查",
-                items: [
-                  "installation/options/rke-add-on/troubleshooting/_index",
-                  "installation/options/rke-add-on/troubleshooting/generic-troubleshooting/_index",
-                  "installation/options/rke-add-on/troubleshooting/job-complete-status/_index",
-                  "installation/options/rke-add-on/troubleshooting/404-default-backend/_index"
-                ]
-              }
-            ]
-          },
-          "installation/options/troubleshooting/_index",
-          "installation/options/nlb/_index",
-          "installation/options/ec2-node/_index",
-          "installation/options/rds/_index",
-          "installation/options/helm-version/_index",
-          "installation/options/custom-ca-root-certificate/_index",
-          "installation/options/local-system-charts/_index",
-          {
-            type: "category",
-            label: "升级 Cert-Manager",
-            items: [
-              "installation/options/upgrading-cert-manager/_index",
-              "installation/options/upgrading-cert-manager/helm-2-instructions/_index"
-            ]
-          },
-          "installation/options/arm64-platform/_index",
-          {
-            type: "category",
-            label: "功能开关",
-            items: [
-              "installation/options/feature-flags/_index",
-              "installation/options/feature-flags/enable-not-default-storage-drivers/_index",
-              "installation/options/feature-flags/istio-virtual-service-ui/_index"
-            ]
-          },
-          "installation/options/api-audit-log/_index",
-          "installation/options/tls-settings/_index",
-          "installation/options/firewall/_index",
-          "installation/options/self-signed-ssl/_index"
-        ]
-      }
-    ],
-    升级和回滚: [
-      "upgrades/_index",
-      {
-        type: "category",
-        label: "升级",
-        items: [
-          "upgrades/upgrades/_index",
-          {
-            type: "category",
-            label: "升级高可用 Rancher",
-            items: [
-              "upgrades/upgrades/ha/_index",
-              "upgrades/upgrades/ha/helm2/_index"
-            ]
-          },
-          "upgrades/upgrades/single-node/_index",
-          "upgrades/upgrades/migrating-from-rke-add-on/_index",
-          "upgrades/upgrades/namespace-migration/_index"
-        ]
-      },
-      {
-        type: "category",
-        label: "回滚",
-        items: [
-          "upgrades/rollbacks/_index",
-          "upgrades/rollbacks/ha-server-rollbacks/_index",
-          "upgrades/rollbacks/single-node-rollbacks/_index"
-        ]
-      }
-    ],
-    备份和恢复指南: [
-      "backups/_index",
-      {
-        type: "category",
-        label: "备份",
-        items: [
-          "backups/backups/_index",
-          "backups/backups/k3s-backups/_index",
-          "backups/backups/ha-backups/_index",
-          "backups/backups/single-node-backups/_index"
-        ]
-      },
-      {
-        type: "category",
-        label: "恢复",
-        items: [
-          "backups/restorations/_index",
-          "backups/restorations/k3s-restoration/_index",
-          "backups/restorations/ha-restoration/_index",
-          "backups/restorations/single-node-restoration/_index"
-        ]
-      }
-    ],
-    最佳实践: [
-      "best-practices/_index",
-      "best-practices/deployment-strategies/_index",
-      "best-practices/deployment-types/_index",
-      "best-practices/containers/_index",
-      "best-practices/management/_index",
-      {
-        type: "category",
-        label: "调优",
-        items: [
-          "best-practices/optimize/os/_index",
-          "best-practices/optimize/docker/_index",
-          "best-practices/optimize/etcd/_index",
-          "best-practices/optimize/kubernetes/_index"
-        ]
-      },
-      "best-practices/use-in-china/_index"
-    ],
-    系统管理员指南: [
-      "admin-settings/_index",
-      "admin-settings/config-private-registry/_index",
-      {
-        type: "category",
-        label: "登录认证",
-        items: [
-          "admin-settings/authentication/_index",
-          "admin-settings/authentication/user-groups/_index",
-          "admin-settings/authentication/local/_index",
-          "admin-settings/authentication/ad/_index",
-          {
-            type: "category",
-            label: "对接 OpenLDAP",
-            items: [
-              "admin-settings/authentication/openldap/_index",
-              "admin-settings/authentication/openldap/openldap-config/_index"
-            ]
-          },
-          "admin-settings/authentication/freeipa/_index",
-          "admin-settings/authentication/azure-ad/_index",
+                    "rancher2/quick-start-guide/workload/_index",
+                    "rancher2/quick-start-guide/workload/quickstart-deploy-workload-ingress/_index",
+                    "rancher2/quick-start-guide/workload/quickstart-deploy-workload-nodeport/_index",
+                ],
+            },
+        ],
+        安装指南: [
+            "rancher2/installation/_index",
 
-          "admin-settings/authentication/github/_index",
-          "admin-settings/authentication/keycloak/_index",
-          "admin-settings/authentication/ping-federate/_index",
-          {
-            type: "category",
-            label: "对接 AD FS (SAML)",
-            items: [
-              "admin-settings/authentication/microsoft-adfs/_index",
-              "admin-settings/authentication/microsoft-adfs/microsoft-adfs-setup/_index",
-              "admin-settings/authentication/microsoft-adfs/rancher-adfs-setup/_index"
-            ]
-          },
-          "admin-settings/authentication/okta/_index",
-          {
-            type: "category",
-            label: "对接 Shibboleth (SAML)",
-            items: [
-              "admin-settings/authentication/shibboleth/_index",
-              "admin-settings/authentication/shibboleth/about/_index"
-            ]
-          },
-          "admin-settings/authentication/google/_index"
-        ]
-      },
-      {
-        type: "category",
-        label: "RBAC",
-        items: [
-          "admin-settings/rbac/_index",
-          "admin-settings/rbac/global-permissions/_index",
-          "admin-settings/rbac/cluster-project-roles/_index",
-          "admin-settings/rbac/default-custom-roles/_index",
-          "admin-settings/rbac/locked-roles/_index"
-        ]
-      },
-      "admin-settings/k8s-metadata/_index",
-      "admin-settings/pod-security-policies/_index",
-      {
-        type: "category",
-        label: "RKE 集群模板",
-        items: [
-          "admin-settings/rke-templates/_index",
-          "admin-settings/rke-templates/example-scenarios/_index",
-          "admin-settings/rke-templates/creator-permissions/_index",
-          "admin-settings/rke-templates/template-access-and-sharing/_index",
-          "admin-settings/rke-templates/creating-and-revising/_index",
-          "admin-settings/rke-templates/enforcement/_index",
-          "admin-settings/rke-templates/overrides/_index",
-          "admin-settings/rke-templates/applying-templates/_index",
-          "admin-settings/rke-templates/example-yaml/_index",
-          "admin-settings/rke-templates/rke-templates-and-hardware/_index"
-        ]
-      },
-      {
-        type: "category",
-        label: "驱动管理",
-        items: [
-          "admin-settings/drivers/_index",
-          "admin-settings/drivers/cluster-drivers/_index",
-          "admin-settings/drivers/node-drivers/_index"
-        ]
-      },
-      "admin-settings/replace-ip-domain/_index"
-    ],
-    创建集群: [
-      "cluster-provisioning/_index",
-      "cluster-provisioning/node-requirements/_index",
-      {
-        type: "category",
-        label: "生产环境检查清单",
-        items: [
-          "cluster-provisioning/production/_index",
-          "cluster-provisioning/production/recommended-architecture/_index",
-          "cluster-provisioning/production/nodes-and-roles/_index"
-        ]
-      },
-      {
-        type: "category",
-        label: "创建托管集群",
-        items: [
-          "cluster-provisioning/hosted-kubernetes-clusters/_index",
-          "cluster-provisioning/hosted-kubernetes-clusters/gke/_index",
-          "cluster-provisioning/hosted-kubernetes-clusters/eks/_index",
-          "cluster-provisioning/hosted-kubernetes-clusters/aks/_index",
-          "cluster-provisioning/hosted-kubernetes-clusters/ack/_index",
-          "cluster-provisioning/hosted-kubernetes-clusters/tke/_index",
-          "cluster-provisioning/hosted-kubernetes-clusters/cce/_index"
-        ]
-      },
-      {
-        type: "category",
-        label: "创建 RKE 集群",
-        items: [
-          "cluster-provisioning/rke-clusters/_index",
-          {
-            type: "category",
-            label: "创建节点和集群",
-            items: [
-              "cluster-provisioning/rke-clusters/node-pools/_index",
-              "cluster-provisioning/rke-clusters/node-pools/ec2/_index",
-              "cluster-provisioning/rke-clusters/node-pools/digital-ocean/_index",
-              "cluster-provisioning/rke-clusters/node-pools/azure/_index",
-              {
+            {
                 type: "category",
-                label: "vSphere",
+                label: "安装要求",
                 items: [
-                  "cluster-provisioning/rke-clusters/node-pools/vsphere/_index",
-                  "cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/_index",
-                  "cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/creating-credentials/_index",
-                  "cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/enabling-uuids/_index",
-                  "cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/node-template-reference/_index"
-                ]
-              }
-            ]
-          },
-          {
-            type: "category",
-            label: "自定义集群",
-            items: [
-              "cluster-provisioning/rke-clusters/custom-nodes/_index",
-              "cluster-provisioning/rke-clusters/custom-nodes/agent-options/_index"
-            ]
-          },
-          {
-            type: "category",
-            label: "Windows 集群",
-            items: [
-              "cluster-provisioning/rke-clusters/windows-clusters/_index",
-              "cluster-provisioning/rke-clusters/windows-clusters/host-gateway-requirements/_index",
-              "cluster-provisioning/rke-clusters/windows-clusters/docs-for-2.1-and-2.2/_index"
-            ]
-          },
-          {
-            type: "category",
-            label: "集群配置参数",
-            items: [
-              "cluster-provisioning/rke-clusters/options/_index",
-              "cluster-provisioning/rke-clusters/options/pod-security-policies/_index"
-            ]
-          },
-          {
-            type: "category",
-            label: "配置 Cloud Provider",
-            items: [
-              "cluster-provisioning/rke-clusters/cloud-providers/_index",
-              "cluster-provisioning/rke-clusters/cloud-providers/amazon/_index",
-              "cluster-provisioning/rke-clusters/cloud-providers/azure/_index",
-              "cluster-provisioning/rke-clusters/cloud-providers/gce/_index"
-            ]
-          },
-          "cluster-provisioning/rke-clusters/rancher-agents/_index"
-        ]
-      },
-      "cluster-provisioning/imported-clusters/_index"
-    ],
-    集群管理员指南: [
-      "cluster-admin/_index",
-      {
-        type: "category",
-        label: "集群访问控制",
-        items: [
-          "cluster-admin/cluster-access/_index",
-          "cluster-admin/cluster-access/kubectl/_index",
-          "cluster-admin/cluster-access/ace/_index",
-          "cluster-admin/cluster-access/cluster-members/_index"
-        ]
-      },
-      "cluster-admin/upgrading-kubernetes/_index",
-      "cluster-admin/pod-security-policy/_index",
-      "cluster-admin/editing-clusters/_index",
-      "cluster-admin/nodes/_index",
-      {
-        type: "category",
-        label: "存储卷和存储类",
-        items: [
-          "cluster-admin/volumes-and-storage/_index",
-          "cluster-admin/volumes-and-storage/how-storage-works/_index",
-          "cluster-admin/volumes-and-storage/attaching-existing-storage/_index",
-          "cluster-admin/volumes-and-storage/provisioning-new-storage/_index",
-          {
-            type: "category",
-            label: "创建存储示例",
-            items: [
-              "cluster-admin/volumes-and-storage/examples/_index",
-              "cluster-admin/volumes-and-storage/examples/ebs/_index",
-              "cluster-admin/volumes-and-storage/examples/nfs/_index",
-              "cluster-admin/volumes-and-storage/examples/vsphere/_index"
-            ]
-          },
-          "cluster-admin/volumes-and-storage/glusterfs-volumes/_index",
-          "cluster-admin/volumes-and-storage/iscsi-volumes/_index"
-        ]
-      },
-      "cluster-admin/projects-and-namespaces/_index",
-      {
-        type: "category",
-        label: "集群工具",
-        items: [
-          "cluster-admin/tools/_index",
-          "cluster-admin/tools/notifiers/_index",
-          {
-            type: "category",
-            label: "告警",
-            items: [
-              "cluster-admin/tools/alerts/_index",
-              "cluster-admin/tools/alerts/default-alerts/_index"
-            ]
-          },
-          {
-            type: "category",
-            label: "Istio",
-            items: [
-              "cluster-admin/tools/istio/_index",
-              "cluster-admin/tools/istio/resources/_index",
-              {
+                    "rancher2/installation/requirements/_index",
+                    "rancher2/installation/requirements/installing-docker/_index",
+                    "rancher2/installation/requirements/ports/_index",
+                ],
+            },
+            {
                 type: "category",
-                label: "Istio 使用指南",
+                label: "高可用安装",
                 items: [
-                  "cluster-admin/tools/istio/setup/_index",
-                  {
-                    type: "category",
-                    label: "1、在集群中启用 Istio",
-                    items: [
-                      "cluster-admin/tools/istio/setup/enable-istio-in-cluster/_index",
-                      "cluster-admin/tools/istio/setup/enable-istio-in-cluster/enable-istio-with-psp/_index"
-                    ]
-                  },
-                  "cluster-admin/tools/istio/setup/enable-istio-in-namespace/_index",
-                  "cluster-admin/tools/istio/setup/node-selectors/_index",
-                  "cluster-admin/tools/istio/setup/deploy-workloads/_index",
-                  "cluster-admin/tools/istio/setup/gateway/_index",
-                  "cluster-admin/tools/istio/setup/set-up-traffic-management/_index",
-                  "cluster-admin/tools/istio/setup/view-traffic/_index"
-                ]
-              },
-              "cluster-admin/tools/istio/rbac/_index",
-              "cluster-admin/tools/istio/disabling-istio/_index"
-            ]
-          },
-          {
-            type: "category",
-            label: "日志",
-            items: [
-              "cluster-admin/tools/logging/_index",
-              "cluster-admin/tools/logging/elasticsearch/_index",
-              "cluster-admin/tools/logging/fluentd/_index",
-              "cluster-admin/tools/logging/kafka/_index",
-              "cluster-admin/tools/logging/splunk/_index",
-              "cluster-admin/tools/logging/syslog/_index"
-            ]
-          },
-          {
-            type: "category",
-            label: "监控",
-            items: [
-              "cluster-admin/tools/monitoring/_index",
-              "cluster-admin/tools/monitoring/cluster-metrics/_index",
-              "cluster-admin/tools/monitoring/expression/_index",
-              "cluster-admin/tools/monitoring/prometheus/_index",
-              "cluster-admin/tools/monitoring/viewing-metrics/_index"
-            ]
-          },
-          "cluster-admin/tools/opa-gatekeeper/_index"
-        ]
-      },
-      "cluster-admin/cloning-clusters/_index",
-      "cluster-admin/certificate-rotation/_index",
-      "cluster-admin/backing-up-etcd/_index",
-      "cluster-admin/restoring-etcd/_index",
-      "cluster-admin/cleaning-cluster-nodes/_index",
-      "cluster-admin/restore-kubecfg/_index",
-      "cluster-admin/restore-rkestate/_index",
-      "cluster-admin/replace-ca/_index",
-      "cluster-admin/single-to-ha/_index",
-      "cluster-admin/etcd-compact/_index",
-      "cluster-admin/webhooks/_index",
-      "cluster-admin/kubectl-delete-evicted-pods/_index"
-    ],
-    项目管理员指南: [
-      "project-admin/_index",
-      "project-admin/project-members/_index",
-      {
-        type: "category",
-        label: "项目资源配额",
-        items: [
-          "project-admin/resource-quotas/_index",
-          "project-admin/resource-quotas/quotas-for-projects/_index",
-          "project-admin/resource-quotas/override-namespace-default/_index",
-          "project-admin/resource-quotas/override-container-default/_index",
-          "project-admin/resource-quotas/quota-type-reference/_index"
-        ]
-      },
-      "project-admin/namespaces/_index",
-      {
-        type: "category",
-        label: "项目工具",
-        items: [
-          "project-admin/tools/_index",
-          "project-admin/tools/alerts/_index",
-          "project-admin/tools/logging/_index",
-          "project-admin/tools/monitoring/_index"
-        ]
-      },
-      "project-admin/istio/_index",
-      "project-admin/pipelines/_index",
-      "project-admin/pod-security-policies/_index"
-    ],
-    用户指南: [
-      "k8s-in-rancher/_index",
-      {
-        type: "category",
-        label: "工作负载",
-        items: [
-          "k8s-in-rancher/workloads/_index",
-          "k8s-in-rancher/workloads/deploy-workloads/_index",
-          "k8s-in-rancher/workloads/upgrade-workloads/_index",
-          "k8s-in-rancher/workloads/rollback-workloads/_index",
-          "k8s-in-rancher/workloads/add-a-sidecar/_index"
-        ]
-      },
-      {
-        type: "category",
-        label: "Pod 弹性伸缩",
-        items: [
-          "k8s-in-rancher/horitzontal-pod-autoscaler/_index",
-          "k8s-in-rancher/horitzontal-pod-autoscaler/hpa-background/_index",
-          "k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-rancher-ui/_index",
-          "k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-kubectl/_index",
-          "k8s-in-rancher/horitzontal-pod-autoscaler/testing-hpa/_index",
-          "k8s-in-rancher/horitzontal-pod-autoscaler/hpa-for-rancher-before-2_0_7/_index"
-        ]
-      },
-      {
-        type: "category",
-        label: "负载均衡和 Ingress",
-        items: [
-          "k8s-in-rancher/load-balancers-and-ingress/_index",
-          "k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index",
-          "k8s-in-rancher/load-balancers-and-ingress/ingress/_index"
-        ]
-      },
-      "k8s-in-rancher/service-discovery/_index",
-      "k8s-in-rancher/certificates/_index",
-      "k8s-in-rancher/configmaps/_index",
-      "k8s-in-rancher/secrets/_index",
-      "k8s-in-rancher/registries/_index",
-      {
-        type: "category",
-        label: "流水线",
-        items: [
-          "k8s-in-rancher/pipelines/_index",
-          "k8s-in-rancher/pipelines/concepts/_index",
-          "k8s-in-rancher/pipelines/config/_index",
-          "k8s-in-rancher/pipelines/example-repos/_index",
-          "k8s-in-rancher/pipelines/example/_index",
-          "k8s-in-rancher/pipelines/storage/_index",
-          "k8s-in-rancher/pipelines/docs-for-v2.0.x/_index"
-        ]
-      }
-    ],
-    应用商店: [
-      "catalog/_index",
-      "catalog/built-in/_index",
-      "catalog/adding-catalogs/_index",
-      "catalog/catalog-config/_index",
-      "catalog/creating-apps/_index",
-      "catalog/managing-apps/_index",
-      "catalog/multi-cluster-apps/_index",
-      "catalog/launching-apps/_index",
-      "catalog/tutorial/_index",
-      "catalog/globaldns/_index"
-    ],
-    Rancher命令行: ["cli/_index"],
-    系统工具: ["system-tools/_index"],
-    用户设置: [
-      "user-settings/_index",
-      "user-settings/api-keys/_index",
-      "user-settings/node-templates/_index",
-      "user-settings/cloud-credentials/_index",
-      "user-settings/preferences/_index"
-    ],
-    API: [
-      "api/_index",
-      "api/api-tokens/_index",
-      "api/api-resources/_index",
-      "api/api-custom-cluster/_index",
-      "api/api-import-cluster/_index"
-    ],
-    安全: [
-      "security/_index",
-      "security/security-scan/_index",
-      {
-        type: "category",
-        label: "安全加固指南",
-        items: [
-          "security/hardening-2.3.5/_index",
-          "security/hardening-2.3.3/_index",
-          "security/hardening-2.3/_index",
-          "security/hardening-2.2/_index",
-          "security/hardening-2.1/_index"
-        ]
-      },
-      {
-        type: "category",
-        label: "CIS自测指南",
-        items: [
-          "security/benchmark-2.3.5/_index",
-          "security/benchmark-2.3.3/_index",
-          "security/benchmark-2.3/_index",
-          "security/benchmark-2.2/_index",
-          "security/benchmark-2.1/_index"
-        ]
-      }
-    ],
-    常见问题: [
-      "faq/_index",
-      "faq/upgrades-to-2x/_index",
-      "faq/kubectl/_index",
-      {
-        type: "category",
-        label: "网络",
-        items: [
-          "faq/networking/_index",
-          "faq/networking/cni-providers/_index",
-          "faq/networking/mtu/_index"
-        ]
-      },
-      "faq/technical/_index",
-      "faq/security/_index",
-      "faq/telemetry/_index",
-      "faq/removing-rancher/_index",
-      "faq/etcd/_index"
-    ],
-    常见故障排查: [
-      "troubleshooting/_index",
-      {
-        type: "category",
-        label: "Kubernetes 组件",
-        items: [
-          "troubleshooting/kubernetes-components/_index",
-          "troubleshooting/kubernetes-components/etcd/_index",
-          "troubleshooting/kubernetes-components/controlplane/_index",
-          "troubleshooting/kubernetes-components/nginx-proxy/_index",
-          "troubleshooting/kubernetes-components/worker-and-generic/_index"
-        ]
-      },
-      "troubleshooting/kubernetes-resources/_index",
-      "troubleshooting/networking/_index",
-      "troubleshooting/dns/_index",
-      "troubleshooting/rancherha/_index",
-      "troubleshooting/imported-clusters/_index",
-      "troubleshooting/logging/_index"
-    ],
-    参与Rancher开源项目: ["contributing/_index"],
-    版本迁移: [
-      "v1.6-migration/_index",
-      "v1.6-migration/kub-intro/_index",
-      "v1.6-migration/get-started/_index",
-      {
-        type: "category",
-        label: "2、迁移服务",
-        items: [
-          "v1.6-migration/run-migration-tool/_index",
-          "v1.6-migration/run-migration-tool/migration-tools-ref/_index"
-        ]
-      },
-      "v1.6-migration/expose-services/_index",
-      "v1.6-migration/monitor-apps/_index",
-      "v1.6-migration/schedule-workloads/_index",
-      "v1.6-migration/discover-services/_index",
-      "v1.6-migration/load-balancing/_index"
-    ]
-  }
+                    "rancher2/installation/install-rancher-on-k8s/_index",
+                    "rancher2/installation/install-rancher-on-k8s/chart-options/_index",
+
+                    {
+                        type: "category",
+                        label: "升级指南",
+                        items: [
+                            "rancher2/installation/install-rancher-on-k8s/upgrades/_index",
+                            "rancher2/installation/install-rancher-on-k8s/upgrades/single-node/_index",
+                            "rancher2/installation/install-rancher-on-k8s/upgrades/migrating-from-rke-add-on/_index",
+                            "rancher2/installation/install-rancher-on-k8s/upgrades/namespace-migration/_index",
+                            {
+                                type: "category",
+                                label: "高可用升级指南",
+                                items: [
+                                    "rancher2/installation/install-rancher-on-k8s/upgrades/ha/_index",
+                                    "rancher2/installation/install-rancher-on-k8s/upgrades/ha/helm2/_index",
+                                ],
+                            },
+                        ],
+                    },
+                    "rancher2/installation/install-rancher-on-k8s/rollbacks/_index",
+                    "rancher2/installation/install-rancher-on-k8s/amazon-eks/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "其他安装方式",
+                items: [
+                    "rancher2/installation/other-installation-methods/_index",
+                    {
+                        type: "category",
+                        label: "离线安装",
+                        items: [
+                            "rancher2/installation/other-installation-methods/air-gap/_index",
+                            "rancher2/installation/other-installation-methods/air-gap/prepare-nodes/_index",
+                            "rancher2/installation/other-installation-methods/air-gap/populate-private-registry/_index",
+                            "rancher2/installation/other-installation-methods/air-gap/launch-kubernetes/_index",
+                            "rancher2/installation/other-installation-methods/air-gap/install-rancher/_index",
+                        ],
+                    },
+                    {
+                        type: "category",
+                        label: "单节点安装",
+                        items: [
+                            "rancher2/installation/other-installation-methods/single-node-docker/_index",
+                            "rancher2/installation/other-installation-methods/single-node-docker/troubleshooting/_index",
+                            "rancher2/installation/other-installation-methods/single-node-docker/advanced/_index",
+                            "rancher2/installation/other-installation-methods/single-node-docker/proxy/_index",
+                            "rancher2/installation/other-installation-methods/single-node-docker/single-node-upgrades/_index",
+                            "rancher2/installation/other-installation-methods/single-node-docker/single-node-rollbacks/_index",
+                        ],
+                    },
+                    {
+                        type: "category",
+                        label: "HTTP代理安装",
+                        items: [
+                            "rancher2/installation/other-installation-methods/behind-proxy/_index",
+                            "rancher2/installation/other-installation-methods/behind-proxy/prepare-nodes/_index",
+                            "rancher2/installation/other-installation-methods/behind-proxy/launch-kubernetes/_index",
+                            "rancher2/installation/other-installation-methods/behind-proxy/install-rancher/_index",
+                        ],
+                    },
+                    "rancher2/installation/other-installation-methods/troubleshooting/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "其他资料及高级配置选项",
+                items: [
+                    "rancher2/installation/resources/_index",
+                    "rancher2/installation/resources/custom-ca-root-certificate/_index",
+                    "rancher2/installation/resources/update-ca-cert/_index",
+                    "rancher2/installation/resources/choosing-version/_index",
+                    "rancher2/installation/resources/installing-docker/_index",
+                    "rancher2/installation/resources/tls-secrets/_index",
+                    "rancher2/installation/resources/helm-version/_index",
+                    "rancher2/installation/resources/tls-settings/_index",
+                    {
+                        type: "category",
+                        label: "K8s使用教程",
+                        items: [
+                            "rancher2/installation/resources/k8s-tutorials/_index",
+                            "rancher2/installation/resources/k8s-tutorials/how-ha-works/_index",
+                            "rancher2/installation/resources/k8s-tutorials/ha-with-external-db/_index",
+                            "rancher2/installation/resources/k8s-tutorials/ha-rke/_index",
+                            {
+                                type: "category",
+                                label: "基础设施教程",
+                                items: [
+                                    "rancher2/installation/resources/k8s-tutorials/infrastructure-tutorials/_index",
+                                    "rancher2/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha-with-external-db/_index",
+                                    "rancher2/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha/_index",
+                                    "rancher2/installation/resources/k8s-tutorials/infrastructure-tutorials/ec2-node/_index",
+                                    "rancher2/installation/resources/k8s-tutorials/infrastructure-tutorials/rds/_index",
+                                    "rancher2/installation/resources/k8s-tutorials/infrastructure-tutorials/nginx/_index",
+                                    "rancher2/installation/resources/k8s-tutorials/infrastructure-tutorials/nlb/_index",
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        type: "category",
+                        label: "升级Cert-manager",
+                        items: [
+                            "rancher2/installation/resources/upgrading-cert-manager/_index",
+                            "rancher2/installation/resources/upgrading-cert-manager/helm-2-instructions/_index",
+                        ],
+                    },
+                    {
+                        type: "category",
+                        label: "启用实验功能",
+                        items: [
+                            "rancher2/installation/resources/feature-flags/_index",
+                            "rancher2/installation/resources/feature-flags/enable-not-default-storage-drivers/_index",
+                            "rancher2/installation/resources/feature-flags/istio-virtual-service-ui/_index",
+                        ],
+                    },
+                    "rancher2/installation/resources/chart-options/_index",
+                    "rancher2/installation/resources/local-system-charts/_index",
+                    "rancher2/installation/resources/F5-7-layer-loadbalancer/_index",
+                    "rancher2/installation/resources/F5-WAF/_index",
+                    "rancher2/installation/resources/troubleshooting/_index",
+                    {
+                        type: "category",
+                        label: "高级配置选项",
+                        items: [
+                            "rancher2/installation/resources/advanced/_index",
+                            {
+                                type: "category",
+                                label: "安装指南（Helm2）",
+                                items: [
+                                    "rancher2/installation/resources/advanced/helm2/_index",
+                                    {
+                                        type: "category",
+                                        label: "节点和负载均衡",
+                                        items: [
+                                            "rancher2/installation/resources/advanced/helm2/create-nodes-lb/_index",
+                                            "rancher2/installation/resources/advanced/helm2/create-nodes-lb/nginx/_index",
+                                            "rancher2/installation/resources/advanced/helm2/create-nodes-lb/nlb/_index",
+                                        ],
+                                    },
+                                    {
+                                        type: "category",
+                                        label: "Helm 初始化",
+                                        items: [
+                                            "rancher2/installation/resources/advanced/helm2/helm-init/_index",
+                                            "rancher2/installation/resources/advanced/helm2/helm-init/troubleshooting/_index",
+                                        ],
+                                    },
+                                    {
+                                        type: "category",
+                                        label: "安装 Rancher",
+                                        items: [
+                                            "rancher2/installation/resources/advanced/helm2/helm-rancher/_index",
+                                            "rancher2/installation/resources/advanced/helm2/helm-rancher/chart-options/_index",
+                                            "rancher2/installation/resources/advanced/helm2/helm-rancher/tls-secrets/_index",
+                                            "rancher2/installation/resources/advanced/helm2/helm-rancher/troubleshooting/_index",
+                                        ],
+                                    },
+                                    {
+                                        type: "category",
+                                        label: "安装 Kubernetes",
+                                        items: [
+                                            "rancher2/installation/resources/advanced/helm2/kubernetes-rke/_index",
+                                            "rancher2/installation/resources/advanced/helm2/kubernetes-rke/troubleshooting/_index",
+                                        ],
+                                    },
+                                    {
+                                        type: "category",
+                                        label: "RKE Add-on 安装指南",
+                                        items: [
+                                            "rancher2/installation/resources/advanced/helm2/rke-add-on/_index",
+                                            "rancher2/installation/resources/advanced/helm2/rke-add-on/api-auditing/_index",
+                                            {
+                                                type: "category",
+                                                label: "4层负载均衡",
+                                                items: [
+                                                    "rancher2/installation/resources/advanced/helm2/rke-add-on/layer-4-lb/_index",
+                                                    "rancher2/installation/resources/advanced/helm2/rke-add-on/layer-4-lb/nlb/_index",
+                                                ],
+                                            },
+                                            {
+                                                type: "category",
+                                                label: "7层负载均衡",
+                                                items: [
+                                                    "rancher2/installation/resources/advanced/helm2/rke-add-on/layer-7-lb/_index",
+                                                    "rancher2/installation/resources/advanced/helm2/rke-add-on/layer-7-lb/alb/_index",
+                                                    "rancher2/installation/resources/advanced/helm2/rke-add-on/layer-7-lb/nginx/_index",
+                                                ],
+                                            },
+                                            "rancher2/installation/resources/advanced/helm2/rke-add-on/proxy/_index",
+                                            {
+                                                type: "category",
+                                                label: "问题排查",
+                                                items: [
+                                                    "rancher2/installation/resources/advanced/helm2/rke-add-on/troubleshooting/_index",
+                                                    "rancher2/installation/resources/advanced/helm2/rke-add-on/troubleshooting/404-default-backend/_index",
+                                                    "rancher2/installation/resources/advanced/helm2/rke-add-on/troubleshooting/generic-troubleshooting/_index",
+                                                    "rancher2/installation/resources/advanced/helm2/rke-add-on/troubleshooting/job-complete-status/_index",
+                                                ],
+                                            },
+                                        ],
+                                    },
+                                ],
+                            },
+                            "rancher2/installation/resources/advanced/firewall/_index",
+                            {
+                                type: "category",
+                                label: "使用Helm2离线安装",
+                                items: [
+                                    "rancher2/installation/resources/advanced/air-gap-helm2/_index",
+                                    "rancher2/installation/resources/advanced/air-gap-helm2/prepare-nodes/_index",
+                                    "rancher2/installation/resources/advanced/air-gap-helm2/populate-private-registry/_index",
+                                    "rancher2/installation/resources/advanced/air-gap-helm2/launch-kubernetes/_index",
+                                    "rancher2/installation/resources/advanced/air-gap-helm2/install-rancher/_index",
+                                ],
+                            },
+                            "rancher2/installation/resources/advanced/etcd/_index",
+                            "rancher2/installation/resources/advanced/arm64-platform/_index",
+                            "rancher2/installation/resources/advanced/api-audit-log/_index",
+                            "rancher2/installation/resources/advanced/single-node-install-external-lb/_index",
+                            "rancher2/installation/resources/advanced/self-signed-ssl/_index",
+                            {
+                                type: "category",
+                                label: "cluster.yml 文件模板",
+                                items: [
+                                    "rancher2/installation/resources/advanced/cluster-yml-templates/_index",
+                                    "rancher2/installation/resources/advanced/cluster-yml-templates/3-node-certificate/_index",
+                                    "rancher2/installation/resources/advanced/cluster-yml-templates/3-node-certificate-recognizedca/_index",
+                                    "rancher2/installation/resources/advanced/cluster-yml-templates/3-node-externalssl-certificate/_index",
+                                    "rancher2/installation/resources/advanced/cluster-yml-templates/3-node-externalssl-recognizedca/_index",
+                                ],
+                            },
+                            {
+                                type: "category",
+                                label: "四层和七层负载均衡安装指南",
+                                items: [
+                                    "rancher2/installation/resources/advanced/rke-add-on/layer-4-lb/_index",
+                                    "rancher2/installation/resources/advanced/rke-add-on/layer-7-lb/_index",
+                                ],
+                            },
+                        ],
+                    },
+                ],
+            },
+        ],
+        备份和恢复指南: [
+            "rancher2/backups/_index",
+            {
+                type: "category",
+                label: "备份",
+                items: [
+                    "rancher2/backups/backup/_index",
+                    "rancher2/backups/backup/k3s-backups/_index",
+                    "rancher2/backups/backup/ha-backups/_index",
+                    "rancher2/backups/backup/docker-backups/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "恢复",
+                items: [
+                    "rancher2/backups/restore/_index",
+                    "rancher2/backups/restore/k3s-restore/_index",
+                    {
+                        type: "category",
+                        label: "高可用Rancher恢复",
+                        items: [
+                            "rancher2/backups/restore/ha-restore/_index",
+                            "rancher2/backups/restore/ha-restore/2.0-2.1/_index",
+                        ],
+                    },
+                    "rancher2/backups/restore/docker-restore/_index",
+                ],
+            },
+        ],
+        最佳实践: [
+            "rancher2/best-practices/_index",
+            "rancher2/best-practices/deployment-strategies/_index",
+            "rancher2/best-practices/deployment-types/_index",
+            "rancher2/best-practices/containers/_index",
+            "rancher2/best-practices/management/_index",
+            "rancher2/best-practices/use-in-china/_index",
+        ],
+
+        系统管理员指南: [
+            "rancher2/admin-settings/_index",
+            "rancher2/admin-settings/config-private-registry/_index",
+            {
+                type: "category",
+                label: "登录认证",
+                items: [
+                    "rancher2/admin-settings/authentication/_index",
+                    "rancher2/admin-settings/authentication/user-groups/_index",
+                    "rancher2/admin-settings/authentication/local/_index",
+                    "rancher2/admin-settings/authentication/ad/_index",
+                    {
+                        type: "category",
+                        label: "对接 OpenLDAP",
+                        items: [
+                            "rancher2/admin-settings/authentication/openldap/_index",
+                            "rancher2/admin-settings/authentication/openldap/openldap-config/_index",
+                        ],
+                    },
+                    "rancher2/admin-settings/authentication/freeipa/_index",
+                    "rancher2/admin-settings/authentication/azure-ad/_index",
+
+                    "rancher2/admin-settings/authentication/github/_index",
+                    "rancher2/admin-settings/authentication/keycloak/_index",
+                    "rancher2/admin-settings/authentication/ping-federate/_index",
+                    {
+                        type: "category",
+                        label: "对接 AD FS (SAML)",
+                        items: [
+                            "rancher2/admin-settings/authentication/microsoft-adfs/_index",
+                            "rancher2/admin-settings/authentication/microsoft-adfs/microsoft-adfs-setup/_index",
+                            "rancher2/admin-settings/authentication/microsoft-adfs/rancher-adfs-setup/_index",
+                        ],
+                    },
+                    "rancher2/admin-settings/authentication/okta/_index",
+                    {
+                        type: "category",
+                        label: "对接 Shibboleth (SAML)",
+                        items: [
+                            "rancher2/admin-settings/authentication/shibboleth/_index",
+                            "rancher2/admin-settings/authentication/shibboleth/about/_index",
+                        ],
+                    },
+                    "rancher2/admin-settings/authentication/google/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "RBAC",
+                items: [
+                    "rancher2/admin-settings/rbac/_index",
+                    "rancher2/admin-settings/rbac/global-permissions/_index",
+                    "rancher2/admin-settings/rbac/cluster-project-roles/_index",
+                    "rancher2/admin-settings/rbac/default-custom-roles/_index",
+                    "rancher2/admin-settings/rbac/locked-roles/_index",
+                ],
+            },
+            "rancher2/admin-settings/pod-security-policies/_index",
+            {
+                type: "category",
+                label: "RKE 集群模板",
+                items: [
+                    "rancher2/admin-settings/rke-templates/_index",
+                    "rancher2/admin-settings/rke-templates/example-scenarios/_index",
+                    "rancher2/admin-settings/rke-templates/creator-permissions/_index",
+                    "rancher2/admin-settings/rke-templates/template-access-and-sharing/_index",
+                    "rancher2/admin-settings/rke-templates/creating-and-revising/_index",
+                    "rancher2/admin-settings/rke-templates/enforcement/_index",
+                    "rancher2/admin-settings/rke-templates/overrides/_index",
+                    "rancher2/admin-settings/rke-templates/applying-templates/_index",
+                    "rancher2/admin-settings/rke-templates/example-yaml/_index",
+                    "rancher2/admin-settings/rke-templates/rke-templates-and-hardware/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "驱动管理",
+                items: [
+                    "rancher2/admin-settings/drivers/_index",
+                    "rancher2/admin-settings/drivers/cluster-drivers/_index",
+                    "rancher2/admin-settings/drivers/node-drivers/_index",
+                ],
+            },
+            "rancher2/admin-settings/replace-ip-domain/_index",
+        ],
+        创建集群: [
+            "rancher2/cluster-provisioning/_index",
+            "rancher2/cluster-provisioning/node-requirements/_index",
+            {
+                type: "category",
+                label: "生产环境检查清单",
+                items: [
+                    "rancher2/cluster-provisioning/production/_index",
+                    "rancher2/cluster-provisioning/production/recommended-architecture/_index",
+                    "rancher2/cluster-provisioning/production/nodes-and-roles/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "创建托管集群",
+                items: [
+                    "rancher2/cluster-provisioning/hosted-kubernetes-clusters/_index",
+                    "rancher2/cluster-provisioning/hosted-kubernetes-clusters/gke/_index",
+                    "rancher2/cluster-provisioning/hosted-kubernetes-clusters/eks/_index",
+                    "rancher2/cluster-provisioning/hosted-kubernetes-clusters/aks/_index",
+                    "rancher2/cluster-provisioning/hosted-kubernetes-clusters/ack/_index",
+                    "rancher2/cluster-provisioning/hosted-kubernetes-clusters/tke/_index",
+                    "rancher2/cluster-provisioning/hosted-kubernetes-clusters/cce/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "创建 RKE 集群",
+                items: [
+                    "rancher2/cluster-provisioning/rke-clusters/_index",
+                    {
+                        type: "category",
+                        label: "创建节点和集群",
+                        items: [
+                            "rancher2/cluster-provisioning/rke-clusters/node-pools/_index",
+                            "rancher2/cluster-provisioning/rke-clusters/node-pools/ec2/_index",
+                            "rancher2/cluster-provisioning/rke-clusters/node-pools/digital-ocean/_index",
+                            "rancher2/cluster-provisioning/rke-clusters/node-pools/azure/_index",
+                            {
+                                type: "category",
+                                label: "vSphere",
+                                items: [
+                                    "rancher2/cluster-provisioning/rke-clusters/node-pools/vsphere/_index",
+                                    "rancher2/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/_index",
+                                    "rancher2/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/creating-credentials/_index",
+                                    "rancher2/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/enabling-uuids/_index",
+                                    "rancher2/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/node-template-reference/_index",
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        type: "category",
+                        label: "自定义集群",
+                        items: [
+                            "rancher2/cluster-provisioning/rke-clusters/custom-nodes/_index",
+                            "rancher2/cluster-provisioning/rke-clusters/custom-nodes/agent-options/_index",
+                        ],
+                    },
+                    {
+                        type: "category",
+                        label: "Windows 集群",
+                        items: [
+                            "rancher2/cluster-provisioning/rke-clusters/windows-clusters/_index",
+                            "rancher2/cluster-provisioning/rke-clusters/windows-clusters/host-gateway-requirements/_index",
+                            "rancher2/cluster-provisioning/rke-clusters/windows-clusters/docs-for-2.1-and-2.2/_index",
+                        ],
+                    },
+                    {
+                        type: "category",
+                        label: "集群配置参数",
+                        items: [
+                            "rancher2/cluster-provisioning/rke-clusters/options/_index",
+                            "rancher2/cluster-provisioning/rke-clusters/options/pod-security-policies/_index",
+                        ],
+                    },
+                    {
+                        type: "category",
+                        label: "配置 Cloud Provider",
+                        items: [
+                            "rancher2/cluster-provisioning/rke-clusters/cloud-providers/_index",
+                            "rancher2/cluster-provisioning/rke-clusters/cloud-providers/amazon/_index",
+                            "rancher2/cluster-provisioning/rke-clusters/cloud-providers/azure/_index",
+                            "rancher2/cluster-provisioning/rke-clusters/cloud-providers/gce/_index",
+                        ],
+                    },
+                    "rancher2/cluster-provisioning/rke-clusters/rancher-agents/_index",
+                ],
+            },
+            "rancher2/cluster-provisioning/imported-clusters/_index",
+        ],
+        集群管理员指南: [
+            "rancher2/cluster-admin/_index",
+            {
+                type: "category",
+                label: "集群访问控制",
+                items: [
+                    "rancher2/cluster-admin/cluster-access/_index",
+                    "rancher2/cluster-admin/cluster-access/kubectl/_index",
+                    "rancher2/cluster-admin/cluster-access/ace/_index",
+                    "rancher2/cluster-admin/cluster-access/cluster-members/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "集群弹性伸缩",
+                items: [
+                    "rancher2/cluster-admin/cluster-autoscaler/_index",
+                    "rancher2/cluster-admin/cluster-autoscaler/amazon/_index",
+                ],
+            },
+            "rancher2/cluster-admin/upgrading-kubernetes/_index",
+            "rancher2/cluster-admin/pod-security-policy/_index",
+            "rancher2/cluster-admin/editing-clusters/_index",
+            "rancher2/cluster-admin/nodes/_index",
+            {
+                type: "category",
+                label: "存储卷和存储类",
+                items: [
+                    "rancher2/cluster-admin/volumes-and-storage/_index",
+                    "rancher2/cluster-admin/volumes-and-storage/how-storage-works/_index",
+                    "rancher2/cluster-admin/volumes-and-storage/attaching-existing-storage/_index",
+                    "rancher2/cluster-admin/volumes-and-storage/provisioning-new-storage/_index",
+                    {
+                        type: "category",
+                        label: "创建存储示例",
+                        items: [
+                            "rancher2/cluster-admin/volumes-and-storage/examples/_index",
+                            "rancher2/cluster-admin/volumes-and-storage/examples/ebs/_index",
+                            "rancher2/cluster-admin/volumes-and-storage/examples/nfs/_index",
+                            "rancher2/cluster-admin/volumes-and-storage/examples/vsphere/_index",
+                        ],
+                    },
+                    "rancher2/cluster-admin/volumes-and-storage/glusterfs-volumes/_index",
+                    "rancher2/cluster-admin/volumes-and-storage/iscsi-volumes/_index",
+                ],
+            },
+            "rancher2/cluster-admin/projects-and-namespaces/_index",
+            {
+                type: "category",
+                label: "集群工具",
+                items: [
+                    "rancher2/cluster-admin/tools/_index",
+                    {
+                        type: "category",
+                        label: "监控",
+                        items: [
+                            "rancher2/cluster-admin/tools/cluster-monitoring/_index",
+                            {
+                                type: "category",
+                                label: "集群参数",
+                                items: [
+                                    "rancher2/cluster-admin/tools/cluster-monitoring/cluster-metrics/_index",
+                                    "rancher2/cluster-admin/tools/cluster-monitoring/cluster-metrics/custom-metrics/_index",
+                                ],
+                            },
+                            "rancher2/cluster-admin/tools/cluster-monitoring/expression/_index",
+                            "rancher2/cluster-admin/tools/cluster-monitoring/prometheus/_index",
+                            "rancher2/cluster-admin/tools/cluster-monitoring/viewing-metrics/_index",
+                            "rancher2/cluster-admin/tools/cluster-monitoring/project-monitoring/_index",
+                        ],
+                    },
+                    {
+                        type: "category",
+                        label: "告警",
+                        items: [
+                            "rancher2/cluster-admin/tools/cluster-alerts/_index",
+                            "rancher2/cluster-admin/tools/cluster-alerts/default-alerts/_index",
+                        ],
+                    },
+                    {
+                        type: "category",
+                        label: "日志",
+                        items: [
+                            "rancher2/cluster-admin/tools/cluster-logging/_index",
+                            "rancher2/cluster-admin/tools/cluster-logging/elasticsearch/_index",
+                            "rancher2/cluster-admin/tools/cluster-logging/splunk/_index",
+                            "rancher2/cluster-admin/tools/cluster-logging/kafka/_index",
+                            "rancher2/cluster-admin/tools/cluster-logging/syslog/_index",
+                            "rancher2/cluster-admin/tools/cluster-logging/fluentd/_index",
+                        ],
+                    },
+                    "rancher2/cluster-admin/tools/notifiers/_index",
+                    {
+                        type: "category",
+                        label: "Istio",
+                        items: [
+                            "rancher2/cluster-admin/tools/istio/_index",
+                            "rancher2/cluster-admin/tools/istio/resources/_index",
+                            {
+                                type: "category",
+                                label: "Istio 使用指南",
+                                items: [
+                                    "rancher2/cluster-admin/tools/istio/setup/_index",
+                                    {
+                                        type: "category",
+                                        label: "1、在集群中启用 Istio",
+                                        items: [
+                                            "rancher2/cluster-admin/tools/istio/setup/enable-istio-in-cluster/_index",
+                                            "rancher2/cluster-admin/tools/istio/setup/enable-istio-in-cluster/enable-istio-with-psp/_index",
+                                        ],
+                                    },
+                                    "rancher2/cluster-admin/tools/istio/setup/enable-istio-in-namespace/_index",
+                                    "rancher2/cluster-admin/tools/istio/setup/node-selectors/_index",
+                                    "rancher2/cluster-admin/tools/istio/setup/deploy-workloads/_index",
+                                    "rancher2/cluster-admin/tools/istio/setup/gateway/_index",
+                                    "rancher2/cluster-admin/tools/istio/setup/set-up-traffic-management/_index",
+                                    "rancher2/cluster-admin/tools/istio/setup/view-traffic/_index",
+                                ],
+                            },
+
+                            "rancher2/cluster-admin/tools/istio/rbac/_index",
+                            "rancher2/cluster-admin/tools/istio/disabling-istio/_index",
+                            "rancher2/cluster-admin/tools/istio/release-notes/_index",
+                        ],
+                    },
+
+                    "rancher2/cluster-admin/tools/opa-gatekeeper/_index",
+                    {
+                        type: "category",
+                        label: "CIS扫描",
+                        items: [
+                            "rancher2/cluster-admin/tools/cis-scans/_index",
+                            "rancher2/cluster-admin/tools/cis-scans/skipped-tests/_index",
+                        ],
+                    },
+                ],
+            },
+            "rancher2/cluster-admin/cloning-clusters/_index",
+            "rancher2/cluster-admin/certificate-rotation/_index",
+            "rancher2/cluster-admin/backing-up-etcd/_index",
+            "rancher2/cluster-admin/restoring-etcd/_index",
+            "rancher2/cluster-admin/cleaning-cluster-nodes/_index",
+            "rancher2/cluster-admin/restore-kubecfg/_index",
+            "rancher2/cluster-admin/restore-rkestate/_index",
+            "rancher2/cluster-admin/replace-ca/_index",
+            "rancher2/cluster-admin/single-to-ha/_index",
+            "rancher2/cluster-admin/etcd-compact/_index",
+            "rancher2/cluster-admin/webhooks/_index",
+            "rancher2/cluster-admin/kubectl-delete-evicted-pods/_index",
+        ],
+        项目管理员指南: [
+            "rancher2/project-admin/_index",
+            "rancher2/project-admin/project-members/_index",
+            {
+                type: "category",
+                label: "项目资源配额",
+                items: [
+                    "rancher2/project-admin/resource-quotas/_index",
+                    "rancher2/project-admin/resource-quotas/quotas-for-projects/_index",
+                    "rancher2/project-admin/resource-quotas/override-namespace-default/_index",
+                    "rancher2/project-admin/resource-quotas/override-container-default/_index",
+                    "rancher2/project-admin/resource-quotas/quota-type-reference/_index",
+                ],
+            },
+            "rancher2/project-admin/namespaces/_index",
+            {
+                type: "category",
+                label: "项目工具",
+                items: [
+                    "rancher2/project-admin/tools/_index",
+                    "rancher2/project-admin/tools/project-alerts/_index",
+                    "rancher2/project-admin/tools/project-logging/_index",
+                ],
+            },
+            "rancher2/project-admin/pipelines/_index",
+            "rancher2/project-admin/pod-security-policies/_index",
+        ],
+        流水线: [
+            "rancher2/pipelines/_index",
+            "rancher2/pipelines/concepts/_index",
+            "rancher2/pipelines/config/_index",
+            "rancher2/pipelines/example-repos/_index",
+            "rancher2/pipelines/example/_index",
+            "rancher2/pipelines/storage/_index",
+            "rancher2/pipelines/docs-for-v2.0.x/_index",
+        ],
+        HelmChart: [
+            "rancher2/helm-charts/_index",
+            "rancher2/helm-charts/built-in/_index",
+            "rancher2/helm-charts/adding-catalogs/_index",
+            "rancher2/helm-charts/catalog-config/_index",
+            "rancher2/helm-charts/creating-apps/_index",
+            "rancher2/helm-charts/managing-apps/_index",
+            "rancher2/helm-charts/multi-cluster-apps/_index",
+            "rancher2/helm-charts/launching-apps/_index",
+            "rancher2/helm-charts/tutorial/_index",
+            "rancher2/helm-charts/globaldns/_index",
+        ],
+        跨集群部署: ["rancher2/deploy-across-clusters/_index"],
+        用户指南: [
+            "rancher2/k8s-in-rancher/_index",
+            {
+                type: "category",
+                label: "工作负载",
+                items: [
+                    "rancher2/k8s-in-rancher/workloads/_index",
+                    "rancher2/k8s-in-rancher/workloads/deploy-workloads/_index",
+                    "rancher2/k8s-in-rancher/workloads/upgrade-workloads/_index",
+                    "rancher2/k8s-in-rancher/workloads/rollback-workloads/_index",
+                    "rancher2/k8s-in-rancher/workloads/add-a-sidecar/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "Pod 弹性伸缩",
+                items: [
+                    "rancher2/k8s-in-rancher/horitzontal-pod-autoscaler/_index",
+                    "rancher2/k8s-in-rancher/horitzontal-pod-autoscaler/hpa-background/_index",
+                    "rancher2/k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-rancher-ui/_index",
+                    "rancher2/k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-kubectl/_index",
+                    "rancher2/k8s-in-rancher/horitzontal-pod-autoscaler/testing-hpa/_index",
+                    "rancher2/k8s-in-rancher/horitzontal-pod-autoscaler/hpa-for-rancher-before-2_0_7/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "负载均衡和 Ingress",
+                items: [
+                    "rancher2/k8s-in-rancher/load-balancers-and-ingress/_index",
+                    "rancher2/k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index",
+                    "rancher2/k8s-in-rancher/load-balancers-and-ingress/ingress/_index",
+                ],
+            },
+            "rancher2/k8s-in-rancher/service-discovery/_index",
+            "rancher2/k8s-in-rancher/certificates/_index",
+            "rancher2/k8s-in-rancher/configmaps/_index",
+            "rancher2/k8s-in-rancher/secrets/_index",
+            "rancher2/k8s-in-rancher/registries/_index",
+        ],
+        安全: [
+            "rancher2/security/_index",
+            {
+                type: "category",
+                label: "v2.1",
+                items: [
+                    "rancher2/security/rancher-2.1/benchmark-2.1/_index",
+                    "rancher2/security/rancher-2.1/hardening-2.1/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "v2.2",
+                items: [
+                    "rancher2/security/rancher-2.2/benchmark-2.2/_index",
+                    "rancher2/security/rancher-2.2/hardening-2.2/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "v2.3",
+                items: [
+                    {
+                        type: "category",
+                        label: "2.3.0",
+                        items: [
+                            "rancher2/security/rancher-2.3.x/2.3.0/benchmark-2.3/_index",
+                            "rancher2/security/rancher-2.3.x/2.3.0/hardening-2.3/_index",
+                        ],
+                    },
+                    {
+                        type: "category",
+                        label: "2.3.3",
+                        items: [
+                            "rancher2/security/rancher-2.3.x/2.3.3/benchmark-2.3.3/_index",
+                            "rancher2/security/rancher-2.3.x/2.3.3/hardening-2.3.3/_index",
+                        ],
+                    },
+                    {
+                        type: "category",
+                        label: "2.3.5",
+                        items: [
+                            "rancher2/security/rancher-2.3.x/2.3.5/benchmark-2.3.5/_index",
+                            "rancher2/security/rancher-2.3.x/2.3.5/hardening-2.3.5/_index",
+                        ],
+                    },
+                ],
+            },
+            {
+                type: "category",
+                label: "v2.4",
+                items: [
+                    "rancher2/security/rancher-2.4/benchmark-2.4/_index",
+                    "rancher2/security/rancher-2.4/hardening-2.4/_index",
+                ],
+            },
+            "rancher2/security/security-scan/_index",
+            "rancher2/security/cve/_index",
+        ],
+        Rancher命令行: ["rancher2/cli/_index"],
+        系统工具: ["rancher2/system-tools/_index"],
+        Rancher命令行: ["rancher2/cli/_index"],
+        用户设置: [
+            "rancher2/user-settings/_index",
+            "rancher2/user-settings/api-keys/_index",
+            "rancher2/user-settings/node-templates/_index",
+            "rancher2/user-settings/cloud-credentials/_index",
+            "rancher2/user-settings/preferences/_index",
+        ],
+        API: [
+            "rancher2/api/_index",
+            "rancher2/api/api-tokens/_index",
+            "rancher2/api/api-resources/_index",
+            "rancher2/api/api-custom-cluster/_index",
+            "rancher2/api/api-import-cluster/_index",
+        ],
+        常见问题: [
+            "rancher2/faq/_index",
+            "rancher2/faq/upgrades-to-2x/_index",
+            "rancher2/faq/kubectl/_index",
+            {
+                type: "category",
+                label: "网络",
+                items: [
+                    "rancher2/faq/networking/_index",
+                    "rancher2/faq/networking/cni-providers/_index",
+                    "rancher2/faq/networking/mtu/_index",
+                ],
+            },
+            "rancher2/faq/technical/_index",
+            "rancher2/faq/security/_index",
+            "rancher2/faq/telemetry/_index",
+            "rancher2/faq/removing-rancher/_index",
+            "rancher2/faq/etcd/_index",
+            "rancher2/faq/install/_index",
+        ],
+        常见故障排查: [
+            "rancher2/troubleshooting/_index",
+            {
+                type: "category",
+                label: "Kubernetes 组件",
+                items: [
+                    "rancher2/troubleshooting/kubernetes-components/_index",
+                    "rancher2/troubleshooting/kubernetes-components/etcd/_index",
+                    "rancher2/troubleshooting/kubernetes-components/controlplane/_index",
+                    "rancher2/troubleshooting/kubernetes-components/nginx-proxy/_index",
+                    "rancher2/troubleshooting/kubernetes-components/worker-and-generic/_index",
+                ],
+            },
+            "rancher2/troubleshooting/kubernetes-resources/_index",
+            "rancher2/troubleshooting/networking/_index",
+            "rancher2/troubleshooting/dns/_index",
+            "rancher2/troubleshooting/rancherha/_index",
+            "rancher2/troubleshooting/imported-clusters/_index",
+            "rancher2/troubleshooting/logging/_index",
+        ],
+        版本迁移: [
+            "rancher2/v1.6-migration/_index",
+            "rancher2/v1.6-migration/kub-intro/_index",
+            "rancher2/v1.6-migration/get-started/_index",
+            {
+                type: "category",
+                label: "2、迁移服务",
+                items: [
+                    "rancher2/v1.6-migration/run-migration-tool/_index",
+                    "rancher2/v1.6-migration/run-migration-tool/migration-tools-ref/_index",
+                ],
+            },
+            "rancher2/v1.6-migration/expose-services/_index",
+            "rancher2/v1.6-migration/monitor-apps/_index",
+            "rancher2/v1.6-migration/schedule-workloads/_index",
+            "rancher2/v1.6-migration/discover-services/_index",
+            "rancher2/v1.6-migration/load-balancing/_index",
+        ],
+        参与Rancher开源项目: ["rancher2/contributing/_index"],
+    },
+    rancher2_5: {
+        版本说明: [
+            "rancher2.5/_index",
+            "rancher2.5/releases/v2.5.16",
+            "rancher2.5/releases/v2.5.15",
+            "rancher2.5/releases/v2.5.14",
+            "rancher2.5/releases/v2.5.13",
+            "rancher2.5/releases/v2.5.12",
+            "rancher2.5/releases/v2.5.11",
+            "rancher2.5/releases/v2.5.10",
+            "rancher2.5/releases/v2.5.9",
+            "rancher2.5/releases/v2.5.8",
+            "rancher2.5/releases/v2.5.7",
+            "rancher2.5/releases/v2.5.6",
+            "rancher2.5/releases/v2.5.5",
+            "rancher2.5/releases/v2.5.4",
+            "rancher2.5/releases/v2.5.3",
+            "rancher2.5/releases/v2.5.2",
+            "rancher2.5/releases/v2.5.0",
+        ],
+        热点问题: [
+            "rancher2.5/trending-topics/_index",
+            "rancher2.5/trending-topics/certificate-rotation/_index",
+            "rancher2.5/trending-topics/cleaning-cluster-nodes/_index",
+            "rancher2.5/trending-topics/deployment/_index",
+            "rancher2.5/trending-topics/install-rancher-on-k8s/_index",
+            "rancher2.5/trending-topics/requirements/_index",
+            "rancher2.5/trending-topics/quickstart-manual-setup/_index",
+            "rancher2.5/trending-topics/cli/_index",
+            "rancher2.5/trending-topics/single-node-docker/_index",
+            "rancher2.5/trending-topics/install-rancher-on-linux/_index",
+        ],
+        产品介绍: [
+            "rancher2.5/overview/_index",
+            "rancher2.5/overview/architecture/_index",
+            "rancher2.5/overview/architecture-recommendations/_index",
+            "rancher2.5/overview/concepts/_index",
+            "rancher2.5/overview/glossary/_index",
+            "rancher2.5/overview/rancher-glossary/_index",
+        ],
+        快速入门: [
+            "rancher2.5/quick-start-guide/_index",
+            "rancher2.5/quick-start-guide/cli/_index",
+            {
+                type: "category",
+                label: "部署 Rancher Server",
+                items: [
+                    "rancher2.5/quick-start-guide/deployment/_index",
+                    "rancher2.5/quick-start-guide/deployment/quickstart-manual-setup/_index",
+                    "rancher2.5/quick-start-guide/deployment/amazon-aws-qs/_index",
+                    "rancher2.5/quick-start-guide/deployment/microsoft-azure-qs/_index",
+                    "rancher2.5/quick-start-guide/deployment/digital-ocean-qs/_index",
+                    "rancher2.5/quick-start-guide/deployment/google-gcp-qs/_index",
+                    "rancher2.5/quick-start-guide/deployment/quickstart-vagrant/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "部署工作负载",
+                items: [
+                    "rancher2.5/quick-start-guide/workload/_index",
+                    "rancher2.5/quick-start-guide/workload/quickstart-deploy-workload-ingress/_index",
+                    "rancher2.5/quick-start-guide/workload/quickstart-deploy-workload-nodeport/_index",
+                ],
+            },
+        ],
+        安装和升级: [
+            "rancher2.5/installation/_index",
+
+            {
+                type: "category",
+                label: "安装要求",
+                items: [
+                    "rancher2.5/installation/requirements/_index",
+                    "rancher2.5/installation/requirements/installing-docker/_index",
+                    "rancher2.5/installation/requirements/ports/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "高可用安装和升级",
+                items: [
+                    "rancher2.5/installation/install-rancher-on-k8s/_index",
+                    "rancher2.5/installation/install-rancher-on-k8s/chart-options/_index",
+                    {
+                        type: "category",
+                        label: "升级指南",
+                        items: [
+                            "rancher2.5/installation/install-rancher-on-k8s/upgrades/_index",
+                            "rancher2.5/installation/install-rancher-on-k8s/upgrades/air-gap-upgrade/_index",
+                        ],
+                    },
+                    "rancher2.5/installation/install-rancher-on-k8s/rollbacks/_index",
+                    "rancher2.5/installation/install-rancher-on-k8s/amazon-eks/_index",
+                    "rancher2.5/installation/install-rancher-on-k8s/aks/_index",
+                    "rancher2.5/installation/install-rancher-on-k8s/gke/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "其他安装方式",
+                items: [
+                    "rancher2.5/installation/other-installation-methods/_index",
+                    {
+                        type: "category",
+                        label: "离线安装",
+                        items: [
+                            "rancher2.5/installation/other-installation-methods/air-gap/_index",
+                            "rancher2.5/installation/other-installation-methods/air-gap/prepare-nodes/_index",
+                            "rancher2.5/installation/other-installation-methods/air-gap/populate-private-registry/_index",
+                            "rancher2.5/installation/other-installation-methods/air-gap/launch-kubernetes/_index",
+                            {
+                                type: "category",
+                                label: "4. 安装 Rancher",
+                                items: [
+                                "rancher2.5/installation/other-installation-methods/air-gap/install-rancher/_index",
+                                "rancher2.5/installation/other-installation-methods/air-gap/install-rancher/docker-install-commands/_index",
+                                ],
+                            },    
+                            
+                        ],
+                    },
+                    {
+                        type: "category",
+                        label: "单节点安装",
+                        items: [
+                            "rancher2.5/installation/other-installation-methods/single-node-docker/_index",
+                            "rancher2.5/installation/other-installation-methods/single-node-docker/troubleshooting/_index",
+                            "rancher2.5/installation/other-installation-methods/single-node-docker/advanced/_index",
+                            "rancher2.5/installation/other-installation-methods/single-node-docker/proxy/_index",
+                            "rancher2.5/installation/other-installation-methods/single-node-docker/single-node-upgrades/_index",
+                            "rancher2.5/installation/other-installation-methods/single-node-docker/single-node-rollbacks/_index",
+                        ],
+                    },
+                    {
+                        type: "category",
+                        label: "使用 RancherD 安装/升级 Rancher",
+                        items: [
+                            "rancher2.5/installation/other-installation-methods/install-rancher-on-linux/_index",
+                            "rancher2.5/installation/other-installation-methods/install-rancher-on-linux/rancherd-configuration/_index",
+                            "rancher2.5/installation/other-installation-methods/install-rancher-on-linux/upgrades/_index",
+                            "rancher2.5/installation/other-installation-methods/install-rancher-on-linux/rollbacks/_index",
+                        ],
+                    },
+                    {
+                        type: "category",
+                        label: "HTTP代理安装",
+                        items: [
+                            "rancher2.5/installation/other-installation-methods/behind-proxy/_index",
+                            "rancher2.5/installation/other-installation-methods/behind-proxy/prepare-nodes/_index",
+                            "rancher2.5/installation/other-installation-methods/behind-proxy/launch-kubernetes/_index",
+                            "rancher2.5/installation/other-installation-methods/behind-proxy/install-rancher/_index",
+                        ],
+                    },
+                ],
+            },
+            {
+                type: "category",
+                label: "其他资料及高级配置选项",
+                items: [
+                    "rancher2.5/installation/resources/_index",
+                    "rancher2.5/installation/resources/custom-ca-root-certificate/_index",
+                    "rancher2.5/installation/resources/choosing-version/_index",
+                    "rancher2.5/installation/resources/installing-docker/_index",
+                    "rancher2.5/installation/resources/tls-secrets/_index",
+                    "rancher2.5/installation/resources/helm-version/_index",
+                    "rancher2.5/installation/resources/tls-settings/_index",
+                    {
+                        type: "category",
+                        label: "K8s使用教程",
+                        items: [
+                            "rancher2.5/installation/resources/k8s-tutorials/_index",
+                            "rancher2.5/installation/resources/k8s-tutorials/how-ha-works/_index",
+                            "rancher2.5/installation/resources/k8s-tutorials/ha-with-external-db/_index",
+                            "rancher2.5/installation/resources/k8s-tutorials/ha-rke2/_index",
+                            "rancher2.5/installation/resources/k8s-tutorials/ha-rke/_index",
+                            {
+                                type: "category",
+                                label: "基础设施教程",
+                                items: [
+                                    "rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/_index",
+                                    "rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha-with-external-db/_index",
+                                    "rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-rke2-ha/_index",
+                                    "rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/infra-for-ha/_index",
+                                    "rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/ec2-node/_index",
+                                    "rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/rds/_index",
+                                    "rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/nginx/_index",
+                                    "rancher2.5/installation/resources/k8s-tutorials/infrastructure-tutorials/nlb/_index",
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        type: "category",
+                        label: "升级Cert-manager",
+                        items: [
+                            "rancher2.5/installation/resources/upgrading-cert-manager/_index",
+                            "rancher2.5/installation/resources/upgrading-cert-manager/helm-2-instructions/_index",
+                        ],
+                    },
+                    "rancher2.5/installation/resources/update-ca-cert/_index",
+                    {
+                        type: "category",
+                        label: "启用实验功能",
+                        items: [
+                            "rancher2.5/installation/resources/feature-flags/_index",
+                            "rancher2.5/installation/resources/feature-flags/enable-not-default-storage-drivers/_index",
+                            "rancher2.5/installation/resources/feature-flags/istio-virtual-service-ui/_index",
+                        ],
+                    },
+                    "rancher2.5/installation/resources/chart-options/_index",
+                    "rancher2.5/installation/resources/local-system-charts/_index",
+                    "rancher2.5/installation/resources/F5-7-layer-loadbalancer/_index",
+                    "rancher2.5/installation/resources/F5-WAF/_index",
+                    "rancher2.5/installation/resources/troubleshooting/_index",
+                    {
+                        type: "category",
+                        label: "高级配置选项",
+                        items: [
+                            "rancher2.5/installation/resources/advanced/_index",
+                            "rancher2.5/installation/resources/advanced/firewall/_index",
+                            "rancher2.5/installation/resources/advanced/etcd/_index",
+                            "rancher2.5/installation/resources/advanced/arm64-platform/_index",
+                            "rancher2.5/installation/resources/advanced/api-audit-log/_index",
+                            "rancher2.5/installation/resources/advanced/single-node-install-external-lb/_index",
+                            "rancher2.5/installation/resources/advanced/self-signed-ssl/_index",
+                        ],
+                    },
+                ],
+            },
+        ],
+        最佳实践: [
+            {
+                type: "category",
+                label: "Rancher Server 的最佳实践",
+                items: [
+                    "rancher2.5/best-practices/rancher-server/_index",
+                    "rancher2.5/best-practices/rancher-server/rancher-in-vsphere/_index",
+                    "rancher2.5/best-practices/rancher-server/deployment-strategies/_index",
+                    "rancher2.5/best-practices/rancher-server/deployment-types/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "Rancher管理集群的最佳实践",
+                items: [
+                    "rancher2.5/best-practices/rancher-managed/_index",
+                    "rancher2.5/best-practices/rancher-managed/logging/_index",
+                    "rancher2.5/best-practices/rancher-managed/monitoring/_index",
+                    "rancher2.5/best-practices/rancher-managed/containers/_index",
+                    "rancher2.5/best-practices/rancher-managed/managed-vsphere/_index",
+                ],
+            },
+        ],
+        备份和恢复指南: [
+            "rancher2.5/backups/_index",
+            "rancher2.5/backups/back-up-rancher/_index",
+            "rancher2.5/backups/restoring-rancher/_index",
+            "rancher2.5/backups/migrating-rancher/_index",
+            {
+                type: "category",
+                label: "Rancher备份配置参考",
+                items: [
+                    "rancher2.5/backups/configuration/back-up-config/_index",
+                    "rancher2.5/backups/configuration/restore-config/_index",
+                    "rancher2.5/backups/configuration/storage-config/_index",
+                ],
+            },
+            "rancher2.5/backups/examples/_index",
+            {
+                type: "category",
+                label: "Docker安装的Rancher的备份和还原",
+                items: [
+                    "rancher2.5/backups/docker-installs/_index",
+                    "rancher2.5/backups/docker-installs/docker-backups/_index",
+                    "rancher2.5/backups/docker-installs/docker-restores/_index",
+                ],
+            },
+        ],
+        系统管理员指南: [
+            "rancher2.5/admin-settings/_index",
+            "rancher2.5/admin-settings/config-private-registry/_index",
+            {
+                type: "category",
+                label: "登录认证",
+                items: [
+                    "rancher2.5/admin-settings/authentication/_index",
+                    "rancher2.5/admin-settings/authentication/user-groups/_index",
+                    "rancher2.5/admin-settings/authentication/local/_index",
+                    "rancher2.5/admin-settings/authentication/ad/_index",
+                    {
+                        type: "category",
+                        label: "对接 OpenLDAP",
+                        items: [
+                            "rancher2.5/admin-settings/authentication/openldap/_index",
+                            "rancher2.5/admin-settings/authentication/openldap/openldap-config/_index",
+                        ],
+                    },
+                    "rancher2.5/admin-settings/authentication/freeipa/_index",
+                    "rancher2.5/admin-settings/authentication/azure-ad/_index",
+
+                    "rancher2.5/admin-settings/authentication/github/_index",
+                    "rancher2.5/admin-settings/authentication/keycloak/_index",
+                    "rancher2.5/admin-settings/authentication/ping-federate/_index",
+                    {
+                        type: "category",
+                        label: "对接 AD FS (SAML)",
+                        items: [
+                            "rancher2.5/admin-settings/authentication/microsoft-adfs/_index",
+                            "rancher2.5/admin-settings/authentication/microsoft-adfs/microsoft-adfs-setup/_index",
+                            "rancher2.5/admin-settings/authentication/microsoft-adfs/rancher-adfs-setup/_index",
+                        ],
+                    },
+                    "rancher2.5/admin-settings/authentication/okta/_index",
+                    {
+                        type: "category",
+                        label: "对接 Shibboleth (SAML)",
+                        items: [
+                            "rancher2.5/admin-settings/authentication/shibboleth/_index",
+                            "rancher2.5/admin-settings/authentication/shibboleth/about/_index",
+                        ],
+                    },
+                    "rancher2.5/admin-settings/authentication/google/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "RBAC",
+                items: [
+                    "rancher2.5/admin-settings/rbac/_index",
+                    "rancher2.5/admin-settings/rbac/global-permissions/_index",
+                    "rancher2.5/admin-settings/rbac/cluster-project-roles/_index",
+                    "rancher2.5/admin-settings/rbac/default-custom-roles/_index",
+                    "rancher2.5/admin-settings/rbac/locked-roles/_index",
+                ],
+            },
+            "rancher2.5/admin-settings/k8s-metadata/_index",
+            "rancher2.5/admin-settings/pod-security-policies/_index",
+            {
+                type: "category",
+                label: "集群和节点驱动",
+                items: [
+                    "rancher2.5/admin-settings/drivers/_index",
+                    "rancher2.5/admin-settings/drivers/cluster-drivers/_index",
+                    "rancher2.5/admin-settings/drivers/node-drivers/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "RKE 集群模板",
+                items: [
+                    "rancher2.5/admin-settings/rke-templates/_index",
+                    "rancher2.5/admin-settings/rke-templates/example-scenarios/_index",
+                    "rancher2.5/admin-settings/rke-templates/creator-permissions/_index",
+                    "rancher2.5/admin-settings/rke-templates/template-access-and-sharing/_index",
+                    "rancher2.5/admin-settings/rke-templates/creating-and-revising/_index",
+                    "rancher2.5/admin-settings/rke-templates/enforcement/_index",
+                    "rancher2.5/admin-settings/rke-templates/overrides/_index",
+                    "rancher2.5/admin-settings/rke-templates/applying-templates/_index",
+                    "rancher2.5/admin-settings/rke-templates/example-yaml/_index",
+                    "rancher2.5/admin-settings/rke-templates/rke-templates-and-hardware/_index",
+                ],
+            },
+            "rancher2.5/admin-settings/replace-ip-domain/_index",
+        ],
+        创建集群: [
+            "rancher2.5/cluster-provisioning/_index",
+            "rancher2.5/cluster-provisioning/node-requirements/_index",
+            {
+                type: "category",
+                label: "生产环境检查清单",
+                items: [
+                    "rancher2.5/cluster-provisioning/production/_index",
+                    "rancher2.5/cluster-provisioning/production/recommended-architecture/_index",
+                    "rancher2.5/cluster-provisioning/production/nodes-and-roles/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "创建托管集群",
+                items: [
+                    "rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/_index",
+                    "rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/gke/_index",
+                    "rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/eks/_index",
+                    "rancher2.5/cluster-provisioning/hosted-kubernetes-clusters/aks/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "创建 RKE 集群",
+                items: [
+                    "rancher2.5/cluster-provisioning/rke-clusters/_index",
+                    {
+                        type: "category",
+                        label: "创建节点和集群",
+                        items: [
+                            "rancher2.5/cluster-provisioning/rke-clusters/node-pools/_index",
+                            "rancher2.5/cluster-provisioning/rke-clusters/node-pools/ec2/_index",
+                            "rancher2.5/cluster-provisioning/rke-clusters/node-pools/digital-ocean/_index",
+                            "rancher2.5/cluster-provisioning/rke-clusters/node-pools/azure/_index",
+                            {
+                                type: "category",
+                                label: "vSphere",
+                                items: [
+                                    "rancher2.5/cluster-provisioning/rke-clusters/node-pools/vsphere/_index",
+                                    "rancher2.5/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/_index",
+                                    "rancher2.5/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/creating-credentials/_index",
+                                    "rancher2.5/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/enabling-uuids/_index",
+                                    "rancher2.5/cluster-provisioning/rke-clusters/node-pools/vsphere/provisioning-vsphere-clusters/node-template-reference/_index",
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        type: "category",
+                        label: "自定义集群",
+                        items: [
+                            "rancher2.5/cluster-provisioning/rke-clusters/custom-nodes/_index",
+                            "rancher2.5/cluster-provisioning/rke-clusters/custom-nodes/agent-options/_index",
+                        ],
+                    },
+                    {
+                        type: "category",
+                        label: "Windows 集群",
+                        items: [
+                            "rancher2.5/cluster-provisioning/rke-clusters/windows-clusters/_index",
+                            "rancher2.5/cluster-provisioning/rke-clusters/windows-clusters/host-gateway-requirements/_index",
+                            "rancher2.5/cluster-provisioning/rke-clusters/windows-clusters/windows-parity/_index",
+                        ],
+                    },
+                    {
+                        type: "category",
+                        label: "集群配置参数",
+                        items: [
+                            "rancher2.5/cluster-provisioning/rke-clusters/options/_index",
+                            "rancher2.5/cluster-provisioning/rke-clusters/options/pod-security-policies/_index",
+                        ],
+                    },
+                    {
+                        type: "category",
+                        label: "配置 Cloud Provider",
+                        items: [
+                            "rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/_index",
+                            "rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/amazon/_index",
+                            "rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/azure/_index",
+                            "rancher2.5/cluster-provisioning/rke-clusters/cloud-providers/gce/_index",
+                        ],
+                    },
+                    "rancher2.5/cluster-provisioning/rke-clusters/rancher-agents/_index",
+                ],
+            },
+            "rancher2.5/cluster-provisioning/registered-clusters/_index",
+        ],
+        集群管理员指南: [
+            "rancher2.5/cluster-admin/_index",
+            {
+                type: "category",
+                label: "集群访问控制",
+                items: [
+                    "rancher2.5/cluster-admin/cluster-access/_index",
+                    "rancher2.5/cluster-admin/cluster-access/kubectl/_index",
+                    "rancher2.5/cluster-admin/cluster-access/ace/_index",
+                    "rancher2.5/cluster-admin/cluster-access/cluster-members/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "集群弹性伸缩",
+                items: [
+                    "rancher2.5/cluster-admin/cluster-autoscaler/_index",
+                    "rancher2.5/cluster-admin/cluster-autoscaler/amazon/_index",
+                ],
+            },
+            "rancher2.5/cluster-admin/upgrading-kubernetes/_index",
+            "rancher2.5/cluster-admin/pod-security-policy/_index",
+
+            {
+                type: "category",
+                label: "编辑集群",
+                items: [
+                    "rancher2.5/cluster-admin/editing-clusters/_index",
+                    "rancher2.5/cluster-admin/editing-clusters/eks-config-reference/_index",
+                    {
+                        type: "category",
+                        label: "GKE集群配置参考",
+                        items: [
+                            "rancher2.5/cluster-admin/editing-clusters/gke-config-reference/_index",
+                            "rancher2.5/cluster-admin/editing-clusters/gke-config-reference/private-clusters/_index",
+
+                        ],
+                    },
+                    
+                    "rancher2.5/cluster-admin/editing-clusters/rke-config-reference/_index",
+                    "rancher2.5/cluster-admin/editing-clusters/syncing/_index",
+                ],
+            },
+            "rancher2.5/cluster-admin/nodes/_index",
+            {
+                type: "category",
+                label: "存储卷和存储类",
+                items: [
+                    "rancher2.5/cluster-admin/volumes-and-storage/_index",
+                    "rancher2.5/cluster-admin/volumes-and-storage/how-storage-works/_index",
+                    "rancher2.5/cluster-admin/volumes-and-storage/attaching-existing-storage/_index",
+                    "rancher2.5/cluster-admin/volumes-and-storage/provisioning-new-storage/_index",
+                    {
+                        type: "category",
+                        label: "创建存储示例",
+                        items: [
+                            "rancher2.5/cluster-admin/volumes-and-storage/examples/_index",
+                            "rancher2.5/cluster-admin/volumes-and-storage/examples/ebs/_index",
+                            "rancher2.5/cluster-admin/volumes-and-storage/examples/nfs/_index",
+                            "rancher2.5/cluster-admin/volumes-and-storage/examples/vsphere/_index",
+                        ],
+                    },
+                    "rancher2.5/cluster-admin/volumes-and-storage/glusterfs-volumes/_index",
+                    "rancher2.5/cluster-admin/volumes-and-storage/iscsi-volumes/_index",
+                ],
+            },
+            "rancher2.5/cluster-admin/projects-and-namespaces/_index",
+            {
+                type: "category",
+                label: "集群工具",
+                items: [
+                    "rancher2.5/cluster-admin/tools/_index",
+                    "rancher2.5/cluster-admin/tools/logging/_index",
+                    "rancher2.5/cluster-admin/tools/notifiers/_index",
+                    {
+                        type: "category",
+                        label: "告警",
+                        items: [
+                            "rancher2.5/cluster-admin/tools/cluster-alerts/_index",
+                            "rancher2.5/cluster-admin/tools/cluster-alerts/default-alerts/_index",
+                        ],
+                    },
+                    {
+                        type: "category",
+                        label: "Istio",
+                        items: [
+                            "rancher2.5/cluster-admin/tools/istio/_index",
+                            "rancher2.5/cluster-admin/tools/istio/resources/_index",
+                            {
+                                type: "category",
+                                label: "Istio 使用指南",
+                                items: [
+                                    "rancher2.5/cluster-admin/tools/istio/setup/_index",
+                                    {
+                                        type: "category",
+                                        label: "1、在集群中启用 Istio",
+                                        items: [
+                                            "rancher2.5/cluster-admin/tools/istio/setup/enable-istio-in-cluster/_index",
+                                            "rancher2.5/cluster-admin/tools/istio/setup/enable-istio-in-cluster/enable-istio-with-psp/_index",
+                                        ],
+                                    },
+                                    "rancher2.5/cluster-admin/tools/istio/setup/enable-istio-in-namespace/_index",
+                                    "rancher2.5/cluster-admin/tools/istio/setup/node-selectors/_index",
+                                    "rancher2.5/cluster-admin/tools/istio/setup/deploy-workloads/_index",
+                                    "rancher2.5/cluster-admin/tools/istio/setup/gateway/_index",
+                                    "rancher2.5/cluster-admin/tools/istio/setup/set-up-traffic-management/_index",
+                                    "rancher2.5/cluster-admin/tools/istio/setup/view-traffic/_index",
+                                ],
+                            },
+                            "rancher2.5/cluster-admin/tools/istio/rbac/_index",
+                            "rancher2.5/cluster-admin/tools/istio/disabling-istio/_index",
+                        ],
+                    },
+                    {
+                        type: "category",
+                        label: "监控",
+                        items: [
+                            "rancher2.5/cluster-admin/tools/cluster-monitoring/_index",
+                            {
+                                type: "category",
+                                label: "集群参数",
+                                items: [
+                                    "rancher2.5/cluster-admin/tools/cluster-monitoring/cluster-metrics/_index",
+                                    "rancher2.5/cluster-admin/tools/cluster-monitoring/cluster-metrics/custom-metrics/_index",
+                                ],
+                            },
+                            "rancher2.5/cluster-admin/tools/cluster-monitoring/expression/_index",
+                            "rancher2.5/cluster-admin/tools/cluster-monitoring/prometheus/_index",
+                            "rancher2.5/cluster-admin/tools/cluster-monitoring/viewing-metrics/_index",
+                        ],
+                    },
+                    "rancher2.5/cluster-admin/tools/opa-gatekeeper/_index",
+                ],
+            },
+            "rancher2.5/cluster-admin/cloning-clusters/_index",
+            "rancher2.5/cluster-admin/certificate-rotation/_index",
+            "rancher2.5/cluster-admin/backing-up-etcd/_index",
+            "rancher2.5/cluster-admin/restoring-etcd/_index",
+            "rancher2.5/cluster-admin/cleaning-cluster-nodes/_index",
+            "rancher2.5/cluster-admin/restore-kubecfg/_index",
+            "rancher2.5/cluster-admin/restore-rkestate/_index",
+            "rancher2.5/cluster-admin/replace-ca/_index",
+            "rancher2.5/cluster-admin/single-to-ha/_index",
+            "rancher2.5/cluster-admin/etcd-compact/_index",
+            "rancher2.5/cluster-admin/webhooks/_index",
+            "rancher2.5/cluster-admin/kubectl-delete-evicted-pods/_index",
+        ],
+        项目管理员指南: [
+            "rancher2.5/project-admin/_index",
+            "rancher2.5/project-admin/project-members/_index",
+            {
+                type: "category",
+                label: "项目资源配额",
+                items: [
+                    "rancher2.5/project-admin/resource-quotas/_index",
+                    "rancher2.5/project-admin/resource-quotas/quotas-for-projects/_index",
+                    "rancher2.5/project-admin/resource-quotas/override-namespace-default/_index",
+                    "rancher2.5/project-admin/resource-quotas/override-container-default/_index",
+                    "rancher2.5/project-admin/resource-quotas/quota-type-reference/_index",
+                ],
+            },
+            "rancher2.5/project-admin/namespaces/_index",
+            "rancher2.5/project-admin/tools/_index",
+            "rancher2.5/project-admin/pipelines/_index",
+            "rancher2.5/project-admin/pod-security-policies/_index",
+        ],
+        流水线: [
+            "rancher2.5/pipelines/_index",
+            "rancher2.5/pipelines/concepts/_index",
+            "rancher2.5/pipelines/example-repos/_index",
+            "rancher2.5/pipelines/example/_index",
+            "rancher2.5/pipelines/storage/_index",
+        ],
+        HelmChart: ["rancher2.5/helm-charts/_index"],
+        跨集群部署: [
+            "rancher2.5/deploy-across-clusters/_index",
+            {
+                type: "category",
+                label: "Fleet - 大规模 GitOps",
+                items: [
+                    "rancher2.5/deploy-across-clusters/fleet/_index",
+                    "rancher2.5/deploy-across-clusters/fleet/architecture/_index",
+                    "rancher2.5/deploy-across-clusters/fleet/windows/_index",
+                    "rancher2.5/deploy-across-clusters/fleet/proxy/_index",
+                ],
+            },
+            "rancher2.5/deploy-across-clusters/multi-cluster-apps/_index",
+        ],
+        监控和告警: [
+            "rancher2.5/monitoring-alerting/_index",
+            "rancher2.5/monitoring-alerting/how-monitoring-works/_index",
+            "rancher2.5/monitoring-alerting/rbac/_index",
+            "rancher2.5/monitoring-alerting/dashboards/_index",
+            {
+                type: "category",
+                label: "指南",
+                items: [
+                    "rancher2.5/monitoring-alerting/guides/_index",
+                    "rancher2.5/monitoring-alerting/guides/enable-monitoring/_index",
+                    "rancher2.5/monitoring-alerting/guides/uninstall/_index",
+                    "rancher2.5/monitoring-alerting/guides/monitoring-workloads/_index",
+                    "rancher2.5/monitoring-alerting/guides/customize-grafana/_index",
+                    "rancher2.5/monitoring-alerting/guides/persist-grafana/_index",
+                    "rancher2.5/monitoring-alerting/guides/memory-usage/_index",
+                    "rancher2.5/monitoring-alerting/guides/migrating/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "配置",
+                items: [
+                    "rancher2.5/monitoring-alerting/configuration/_index",
+                    "rancher2.5/monitoring-alerting/configuration/receiver/_index",
+                    "rancher2.5/monitoring-alerting/configuration/route/_index",
+                    "rancher2.5/monitoring-alerting/configuration/servicemonitor-podmonitor/_index",
+                    "rancher2.5/monitoring-alerting/configuration/helm-chart-options/_index",
+                    "rancher2.5/monitoring-alerting/configuration/examples/_index",
+                        {
+                            type: "category",
+                            label: "高级配置",
+                            items: [
+                                "rancher2.5/monitoring-alerting/configuration/advanced/_index",
+                                "rancher2.5/monitoring-alerting/configuration/advanced/alertmanager/_index",
+                                "rancher2.5/monitoring-alerting/configuration/advanced/prometheus/_index",
+                                "rancher2.5/monitoring-alerting/configuration/advanced/prometheusrules/_index",
+                            ],
+                        },
+                ],
+            },
+            "rancher2.5/monitoring-alerting/windows-clusters/_index",
+            "rancher2.5/monitoring-alerting/expression/_index",
+        ],
+        Istio: [
+            "rancher2.5/istio/_index",
+            "rancher2.5/istio/resources/_index",
+            {
+                type: "category",
+                label: "配置 Istio",
+                items: [
+                    "rancher2.5/istio/setup/enable-istio-in-cluster/_index",
+                    "rancher2.5/istio/setup/enable-istio-in-namespace/_index",
+                    "rancher2.5/istio/setup/deploy-workloads/_index",
+                    "rancher2.5/istio/setup/gateway/_index",
+                    "rancher2.5/istio/setup/set-up-traffic-management/_index",
+                    "rancher2.5/istio/setup/view-traffic/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "配置选项",
+                items: [
+                    "rancher2.5/istio/configuration-reference/_index",
+                    "rancher2.5/istio/configuration-reference/enable-istio-with-psp/_index",
+                    "rancher2.5/istio/configuration-reference/selectors-and-scrape/_index",
+                    "rancher2.5/istio/configuration-reference/rke2/_index",
+                    "rancher2.5/istio/configuration-reference/canal-and-project-network/_index",
+                ],
+            },
+            "rancher2.5/istio/rbac/_index",
+            "rancher2.5/istio/disabling-istio/_index",
+        ],
+        日志: [
+            "rancher2.5/logging/_index",
+            "rancher2.5/logging/architecture/_index",
+            {
+                type: "category",
+                label: "配置自定义资源",
+                items: [
+                    "rancher2.5/logging/custom-resource-config/_index",
+                    "rancher2.5/logging/custom-resource-config/flows/_index",
+                    "rancher2.5/logging/custom-resource-config/outputs/_index",
+                ],
+            },
+            "rancher2.5/logging/helm-chart-options/_index",
+            "rancher2.5/logging/rbac/_index",
+            "rancher2.5/logging/taints-tolerations/_index",
+            "rancher2.5/logging/migrating/_index",
+        ],
+        OPAGatekeeper: ["rancher2.5/opa-gatekeeper/_index"],
+        CIS扫描: [
+            "rancher2.5/cis-scans/_index",
+            "rancher2.5/cis-scans/configuration/_index",
+            "rancher2.5/cis-scans/rbac/_index",
+            "rancher2.5/cis-scans/skipped-tests/_index",
+            "rancher2.5/cis-scans/custom-benchmark/_index",
+        ],
+        用户指南: [
+            "rancher2.5/k8s-in-rancher/_index",
+            {
+                type: "category",
+                label: "工作负载",
+                items: [
+                    "rancher2.5/k8s-in-rancher/workloads/_index",
+                    "rancher2.5/k8s-in-rancher/workloads/deploy-workloads/_index",
+                    "rancher2.5/k8s-in-rancher/workloads/upgrade-workloads/_index",
+                    "rancher2.5/k8s-in-rancher/workloads/rollback-workloads/_index",
+                    "rancher2.5/k8s-in-rancher/workloads/add-a-sidecar/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "Pod 弹性伸缩",
+                items: [
+                    "rancher2.5/k8s-in-rancher/horitzontal-pod-autoscaler/_index",
+                    "rancher2.5/k8s-in-rancher/horitzontal-pod-autoscaler/hpa-background/_index",
+                    "rancher2.5/k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-rancher-ui/_index",
+                    "rancher2.5/k8s-in-rancher/horitzontal-pod-autoscaler/manage-hpa-with-kubectl/_index",
+                    "rancher2.5/k8s-in-rancher/horitzontal-pod-autoscaler/testing-hpa/_index",
+                    "rancher2.5/k8s-in-rancher/horitzontal-pod-autoscaler/hpa-for-rancher-before-2_0_7/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "配置负载均衡和 Ingress",
+                items: [
+                    "rancher2.5/k8s-in-rancher/load-balancers-and-ingress/_index",
+                    "rancher2.5/k8s-in-rancher/load-balancers-and-ingress/load-balancers/_index",
+                    "rancher2.5/k8s-in-rancher/load-balancers-and-ingress/ingress/_index",
+                ],
+            },
+            "rancher2.5/k8s-in-rancher/service-discovery/_index",
+            "rancher2.5/k8s-in-rancher/certificates/_index",
+            "rancher2.5/k8s-in-rancher/configmaps/_index",
+            "rancher2.5/k8s-in-rancher/secrets/_index",
+            "rancher2.5/k8s-in-rancher/registries/_index",
+        ],
+        Longhorn: ["rancher2.5/longhorn/_index"],
+        安全: [
+            "rancher2.5/security/_index",
+            {
+                type: "category",
+                label: "Rancher v2.5",
+                items: [
+                    "rancher2.5/security/rancher-2.5/_index",
+                    "rancher2.5/security/rancher-2.5/1.5-benchmark-2.5/_index",
+                    "rancher2.5/security/rancher-2.5/1.5-hardening-2.5/_index",
+                    "rancher2.5/security/rancher-2.5/1.6-benchmark-2.5/_index",
+                    "rancher2.5/security/rancher-2.5/1.6-hardening-2.5/_index",
+                ],
+            },
+            "rancher2.5/security/selinux/_index",
+            "rancher2.5/security/best-practices/_index",
+            "rancher2.5/security/security-scan/_index",
+            "rancher2.5/security/cve/_index",
+        ],
+        Rancher命令行: ["rancher2.5/cli/_index"],
+        系统工具: ["rancher2.5/system-tools/_index"],
+        用户设置: [
+            "rancher2.5/user-settings/_index",
+            "rancher2.5/user-settings/api-keys/_index",
+            "rancher2.5/user-settings/node-templates/_index",
+            "rancher2.5/user-settings/cloud-credentials/_index",
+            "rancher2.5/user-settings/preferences/_index",
+        ],
+        API: [
+            "rancher2.5/api/_index",
+            "rancher2.5/api/api-tokens/_index",
+            "rancher2.5/api/api-resources/_index",
+            "rancher2.5/api/api-custom-cluster/_index",
+            "rancher2.5/api/api-import-cluster/_index",
+        ],
+        常见问题: [
+            "rancher2.5/faq/_index",
+            "rancher2.5/faq/deprecated-features-25x/_index",
+            "rancher2.5/faq/kubectl/_index",
+            {
+                type: "category",
+                label: "网络",
+                items: [
+                    "rancher2.5/faq/networking/_index",
+                    "rancher2.5/faq/networking/cni-providers/_index",
+                ],
+            },
+            "rancher2.5/faq/technical/_index",
+            "rancher2.5/faq/security/_index",
+            "rancher2.5/faq/telemetry/_index",
+            "rancher2.5/faq/removing-rancher/_index",
+            "rancher2.5/faq/etcd/_index",
+            "rancher2.5/faq/install/_index",
+            "rancher2.5/faq/upgrade/_index",
+        ],
+        常见故障排查: [
+            "rancher2.5/troubleshooting/_index",
+            {
+                type: "category",
+                label: "Kubernetes 组件",
+                items: [
+                    "rancher2.5/troubleshooting/kubernetes-components/_index",
+                    "rancher2.5/troubleshooting/kubernetes-components/etcd/_index",
+                    "rancher2.5/troubleshooting/kubernetes-components/controlplane/_index",
+                    "rancher2.5/troubleshooting/kubernetes-components/nginx-proxy/_index",
+                    "rancher2.5/troubleshooting/kubernetes-components/worker-and-generic/_index",
+                ],
+            },
+            "rancher2.5/troubleshooting/kubernetes-resources/_index",
+            "rancher2.5/troubleshooting/networking/_index",
+            "rancher2.5/troubleshooting/dns/_index",
+            "rancher2.5/troubleshooting/rancherha/_index",
+            "rancher2.5/troubleshooting/imported-clusters/_index",
+            "rancher2.5/troubleshooting/logging/_index",
+        ],
+        参与Rancher开源项目: ["rancher2.5/contributing/_index"],
+        开源社区治理: ["rancher2.5/contributing/community-governance/_index"],
+    },
+    rke: {
+        产品介绍: ["rke/_index"],
+        安装要求: ["rke/os/_index"],
+        安装介绍: ["rke/installation/_index", "rke/installation/certs/_index"],
+        升级指南: [
+            "rke/upgrades/_index",
+            "rke/upgrades/how-upgrades-work/_index",
+            "rke/upgrades/maintaining-availability/_index",
+            "rke/upgrades/configuring-strategy/_index",
+        ],
+        kubeconfig文件: ["rke/kubeconfig/_index"],
+        备份和恢复指南: [
+            "rke/etcd-snapshots/_index",
+            "rke/etcd-snapshots/one-time-snapshots/_index",
+            "rke/etcd-snapshots/recurring-snapshots/_index",
+            "rke/etcd-snapshots/restoring-from-backup/_index",
+            "rke/etcd-snapshots/example-scenarios/_index",
+            "rke/etcd-snapshots/troubleshooting/_index",
+        ],
+        证书管理: ["rke/cert-mgmt/_index"],
+        节点管理: ["rke/managing-clusters/_index"],
+        Kubernetes配置选项: [
+            "rke/config-options/_index",
+            "rke/config-options/nodes/_index",
+            "rke/config-options/private-registries/_index",
+            "rke/config-options/bastion-host/_index",
+            "rke/config-options/system-images/_index",
+            {
+                type: "category",
+                label: "默认的Kubernetes服务",
+                items: [
+                    "rke/config-options/services/_index",
+                    "rke/config-options/services/services-extras/_index",
+                    "rke/config-options/services/external-etcd/_index",
+                ],
+            },
+            "rke/config-options/secrets-encryption/_index",
+            "rke/config-options/authentication/_index",
+            "rke/config-options/authorization/_index",
+            "rke/config-options/rate-limiting/_index",
+            {
+                type: "category",
+                label: "云服务提供商",
+                items: [
+                    "rke/config-options/cloud-providers/_index",
+                    "rke/config-options/cloud-providers/aws/_index",
+                    "rke/config-options/cloud-providers/azure/_index",
+                    "rke/config-options/cloud-providers/openstack/_index",
+                    {
+                        type: "category",
+                        label: "vSphere",
+                        items: [
+                            "rke/config-options/cloud-providers/vsphere/_index",
+                            "rke/config-options/cloud-providers/vsphere/enabling-uuid/_index",
+                            "rke/config-options/cloud-providers/vsphere/config-reference/_index",
+                            "rke/config-options/cloud-providers/vsphere/troubleshooting/_index",
+                        ],
+                    },
+                    "rke/config-options/cloud-providers/custom/_index",
+                ],
+            },
+            "rke/config-options/audit-log/_index",
+            "rke/config-options/dual-stack/_index",
+            {
+                type: "category",
+                label: "RKE 插件",
+                items: [
+                    "rke/config-options/add-ons/_index",
+                    {
+                        type: "category",
+                        label: "网络插件",
+                        items: [
+                            "rke/config-options/add-ons/network-plugins/_index",
+                            "rke/config-options/add-ons/network-plugins/custom-network-plugin-example/_index",
+                        ],
+                    },
+                    "rke/config-options/add-ons/dns/_index",
+                    "rke/config-options/add-ons/ingress-controllers/_index",
+                    "rke/config-options/add-ons/metrics-server/_index",
+                    "rke/config-options/add-ons/user-defined-add-ons/_index",
+                ],
+            },
+        ],
+        yaml文件示例: ["rke/example-yamls/_index"],
+        常见问题排查: [
+            "rke/troubleshooting/_index",
+            "rke/troubleshooting/ssh-connectivity-errors/_index",
+            "rke/troubleshooting/provisioning-errors/_index",
+        ],
+    },
+    k3s: {
+        K3s介绍: ["k3s/_index"],
+        架构: ["k3s/architecture/_index"],
+        快速入门: ["k3s/quick-start/_index"],
+        AutoK3s: [
+            "k3s/autok3s/_index",
+            "k3s/autok3s/alibaba/_index",
+            "k3s/autok3s/aws/_index",
+            "k3s/autok3s/google/_index",
+            "k3s/autok3s/tencent/_index",
+            "k3s/autok3s/native/_index",
+            "k3s/autok3s/harvester/_index",
+            "k3s/autok3s/k3d/_index",
+        ],
+        安装: [
+            "k3s/installation/_index",
+            {
+                type: "category",
+                label: "安装要求",
+                items: [
+                    "k3s/installation/installation-requirements/_index",
+                    "k3s/installation/installation-requirements/resource-profiling/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "安装选项",
+                items: [
+                    "k3s/installation/install-options/_index",
+                    "k3s/installation/install-options/server-config/_index",
+                    "k3s/installation/install-options/agent-config/_index",
+                    "k3s/installation/install-options/how-to-flags/_index",
+                ],
+            },
+            "k3s/installation/network-options/_index",
+            "k3s/installation/ha/_index",
+            "k3s/installation/ha-embedded/_index",
+            "k3s/installation/datastore/_index",
+            "k3s/installation/private-registry/_index",
+            "k3s/installation/airgap/_index",
+            "k3s/installation/disable-flags/_index",
+            "k3s/installation/kube-dashboard/_index",
+            "k3s/installation/uninstall/_index",
+        ],
+        集群访问: ["k3s/cluster-access/_index"],
+        升级: [
+            "k3s/upgrades/_index",
+            "k3s/upgrades/killall/_index",
+            "k3s/upgrades/basic/_index",
+            "k3s/upgrades/automated/_index",
+        ],
+        备份和恢复: ["k3s/backup-restore/_index"],
+        卷和存储: ["k3s/storage/_index"],
+        网络: ["k3s/networking/_index"],
+        Helm: ["k3s/helm/_index"],
+        高级选项和配置: ["k3s/advanced/_index"],
+        常见问题: ["k3s/faq/_index"],
+        安全: [
+            "k3s/security/secrets_encryption/_index",
+            "k3s/security/hardening-guide/_index",
+            "k3s/security/self-assessment/_index",
+        ],
+        已知问题: ["k3s/known-issues/_index"],
+    },
+    octopus: {
+        产品介绍: ["octopus/about/_index"],
+        快速入门: ["octopus/quick-start/_index"],
+        安装部署: ["octopus/install/_index"],
+        DeviceLink: [
+            "octopus/device-link/_index",
+            "octopus/device-link/state-of-dl/_index",
+        ],
+        适配器: [
+            "octopus/adaptors/_index",
+            "octopus/adaptors/modbus/_index",
+            "octopus/adaptors/opc-ua/_index",
+            "octopus/adaptors/mqtt/_index",
+            "octopus/adaptors/ble/_index",
+            "octopus/adaptors/dummy/_index",
+            "octopus/adaptors/mqtt-extension/_index",
+            "octopus/adaptors/develop/_index",
+        ],
+        开发指南: ["octopus/develop/_index"],
+        关于监控: ["octopus/monitoring/_index"],
+        UI界面: ["octopus/octopus-ui/_index"],
+        常见问题: ["octopus/faq/_index"],
+    },
+    rancher1: {
+        产品介绍: ["rancher1/_index"],
+        快速入门: [
+            "rancher1/overview/start/_index",
+            "rancher1/overview/native-docker/_index",
+        ],
+        安装指南: [
+            "rancher1/installation/basic-ssl-config/_index",
+            "rancher1/installation/installing-server/_index",
+            "rancher1/installation/no-internet-access/_index",
+            "rancher1/installation/selinux/_index",
+        ],
+        配置参考: [
+            {
+                type: "category",
+                label: "应用商店",
+                items: [
+                    "rancher1/configurations/catalog/_index",
+                    "rancher1/configurations/catalog/private-catalog/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "cli",
+                items: [
+                    "rancher1/configurations/cli/_index",
+                    "rancher1/configurations/cli/commands/_index",
+                    "rancher1/configurations/cli/variable-interpolation/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "环境",
+                items: [
+                    "rancher1/configurations/environments/_index",
+                    "rancher1/configurations/environments/access-control/_index",
+                    "rancher1/configurations/environments/accounts/_index",
+                    "rancher1/configurations/environments/audit-log/_index",
+                    "rancher1/configurations/environments/certificates/_index",
+                    "rancher1/configurations/environments/ecr_updater/_index",
+                    "rancher1/configurations/environments/machine-drivers/_index",
+                    "rancher1/configurations/environments/registries/_index",
+                    "rancher1/configurations/environments/settings/_index",
+                ],
+            },
+        ],
+        基础设施: [
+            {
+                type: "category",
+                label: "cattle",
+                items: [
+                    "rancher1/infrastructure/cattle/adding-external-services/_index",
+                    "rancher1/infrastructure/cattle/adding-load-balancers/_index",
+                    "rancher1/infrastructure/cattle/adding-service-alias/_index",
+                    "rancher1/infrastructure/cattle/adding-services/_index",
+                    "rancher1/infrastructure/cattle/containers/_index",
+                    "rancher1/infrastructure/cattle/external-dns-service/_index",
+                    "rancher1/infrastructure/cattle/health-checks/_index",
+                    "rancher1/infrastructure/cattle/internal-dns-service/_index",
+                    "rancher1/infrastructure/cattle/labels/_index",
+                    {
+                        type: "category",
+                        label: "编排",
+                        items: [
+                            "rancher1/infrastructure/cattle/rancher-compose/_index",
+                            "rancher1/infrastructure/cattle/rancher-compose/environment-interpolation/_index",
+                            "rancher1/infrastructure/cattle/rancher-compose/commands/_index",
+                        ],
+                    },
+                    "rancher1/infrastructure/cattle/scheduling/_index",
+                    "rancher1/infrastructure/cattle/secrets/_index",
+                    "rancher1/infrastructure/cattle/stacks/_index",
+                    "rancher1/infrastructure/cattle/upgrading/_index",
+                    "rancher1/infrastructure/cattle/vms/_index",
+                    "rancher1/infrastructure/cattle/volume/_index",
+                    "rancher1/infrastructure/cattle/webhook-service/_index",
+                ],
+            },
+            {
+                type: "category",
+                label: "hosts",
+                items: [
+                    "rancher1/infrastructure/hosts/_index",
+                    "rancher1/infrastructure/hosts/amazon/_index",
+                    "rancher1/infrastructure/hosts/azure/_index",
+                    "rancher1/infrastructure/hosts/custom/_index",
+                    "rancher1/infrastructure/hosts/digitalocean/_index",
+                    "rancher1/infrastructure/hosts/exoscale/_index",
+                    "rancher1/infrastructure/hosts/other/_index",
+                    "rancher1/infrastructure/hosts/packet/_index",
+                    "rancher1/infrastructure/hosts/rackspace/_index",
+                ],
+            },
+            "rancher1/infrastructure/mesos/_index",
+            "rancher1/infrastructure/swarm/_index",
+            "rancher1/infrastructure/windows/_index",
+        ],
+        基础服务: [
+            "rancher1/rancher-service/_index",
+            "rancher1/rancher-service/dns-service/_index",
+            "rancher1/rancher-service/load-balancer/_index",
+            "rancher1/rancher-service/metadata-service/_index",
+            "rancher1/rancher-service/network-policy/_index",
+            "rancher1/rancher-service/networking/_index",
+            "rancher1/rancher-service/scheduler/_index",
+            "rancher1/rancher-service/service-accounts/_index",
+            {
+                type: "category",
+                label: "存储服务",
+                items: [
+                    "rancher1/rancher-service/storage-services/_index",
+                    "rancher1/rancher-service/storage-services/rancher-ebs/_index",
+                    "rancher1/rancher-service/storage-services/rancher-nfs/_index",
+                ],
+            },
+        ],
+
+        升级指南: ["rancher1/upgrade/_index"],
+        常见问题: [
+            "rancher1/faq/_index",
+            "rancher1/faq/agents/_index",
+            "rancher1/faq/docker/_index",
+            "rancher1/faq/kubernetes/_index",
+            "rancher1/faq/server/_index",
+        ],
+    },
+    rke2: {
+        产品介绍: ["rke2/_index"],
+        安装: [
+            "rke2/install/quickstart/_index",
+            "rke2/install/requirements/_index",
+            "rke2/install/ha/_index",
+            {
+                type: "category",
+                label: "安装选项",
+                items: [
+                    "rke2/install/install_options/install_options/_index",
+                    "rke2/install/install_options/server_config/_index",
+                    "rke2/install/install_options/linux_agent_config/_index",
+                    "rke2/install/install_options/windows_agent_config/_index",
+                ],
+            },
+            "rke2/install/methods/_index",
+            "rke2/install/network_options/_index",
+            "rke2/install/containerd_registry_configuration/_index",
+            "rke2/install/airgap/_index",
+            "rke2/install/windows_airgap/_index",
+            "rke2/install/linux_uninstall/_index",
+            "rke2/install/windows_uninstall/_index",
+        ],
+        升级RKE2集群: [
+            "rke2/upgrade/upgrade/_index",
+            "rke2/upgrade/basic_upgrade/_index",
+            "rke2/upgrade/automated_upgrade/_index",
+        ],
+        安全: [
+            "rke2/security/about_hardened_images/_index",
+            "rke2/security/hardening_guide/_index",
+            "rke2/security/cis_self_assessment16/_index",
+            "rke2/security/fips_support/_index",
+            "rke2/security/policies/_index",
+            "rke2/security/selinux/_index",
+            "rke2/security/secrets_encryption/_index",
+        ],
+        架构: ["rke2/architecture/_index"],
+        访问集群: ["rke2/cluster_access/_index"],
+        Etcd备份和恢复: ["rke2/backup_restore/_index"],
+        网络: ["rke2/networking/_index"],
+        Helm集成: ["rke2/helm/_index"],
+        高级选项和配置: ["rke2/advanced/_index"],
+		子命令: ["rke2/subcommands/_index"],
+        已知问题和限制: ["rke2/known_issues/_index"],
+    },
 };
