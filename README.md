@@ -19,7 +19,7 @@ Rancher 中文文档，包括Rancher1.x、Rancher 2.x、RKE、K3s、Octopus、Ha
 如果yarn install的速度很慢，可以尝试配置淘宝Registry。
 
 ```bash
-$ yarn config set registry https://registry.npm.taobao.org -g
+$ yarn config set registry https://registry.npmmirror.com -g
 ```
 
 安装初始化
