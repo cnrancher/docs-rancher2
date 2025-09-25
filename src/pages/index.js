@@ -108,7 +108,7 @@ function Home() {
                     </div>
                     <div className="navigation__item">
                         <div className="navigation__title">
-                            <a href="https://docs.rke2.io/zh/">
+                            <a href="https://docs.rke2.io/">
                                 <h1>RKE2</h1>
                             </a>
                         </div>
