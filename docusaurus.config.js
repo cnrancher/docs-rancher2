@@ -5,7 +5,7 @@ module.exports = {
     title: "Rancher文档",
     tagline: "Run Kubernetes Everywhere",
     baseUrl: "/",
-    url: "https://www.rancher.cn",
+    url: "https://docs.rancher.cn",
     favicon: "img/favicon.ico",
     organizationName: "cnrancher",
     projectName: "docs-rancher2",
