@@ -1,0 +1,39 @@
+name: Release Preview
+on:
+  push:
+    tags-ignore: [ '**' ]
+    branches: [  'preview' ]
+
+jobs:
+  release-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 24
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 24
+      - name: Install Dependencies
+        run: |
+          npm install
+      - name: Build website
+        run: |
+          npm run build
+      - name: Release to Production
+        env:
+          ALIYUN_BUCKET: ${{ vars.PREVIEW_ALIYUN_BUCKEY }} # oss://bucket-name
+          ALIYUN_ENDPOINT: https://oss-cn-shanghai.aliyuncs.com/
+          ALIYUN_ACCESS_KEY_ID: ${{ secrets.ALIBABA_CLOUD_ACCESS_KEY_ID }}
+          ALIYUN_ACCESS_KEY_SECRET: ${{ secrets.ALIBABA_CLOUD_ACCESS_KEY_SECRET }}
+          ALIYUN_SECURITY_TOKEN: ""
+          FOLDER_ACCESS: public-read
+          OSSUTIL_VERSION: "1.7.19"
+        if: ${{ env.ALIBABA_CLOUD_ACCESS_KEY_ID != '' }}
+        run: |
+          ./.github/scripts/aliyun-oss-sync

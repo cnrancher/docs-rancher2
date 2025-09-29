@@ -1,0 +1,33 @@
+#!/bin/bash
+
+set -euo pipefail
+cd $(dirname $0)/../../
+
+echo "---- Downloading ossutil"
+wget -O ossutil.zip "https://gosspublic.alicdn.com/ossutil/${OSSUTIL_VERSION}/ossutil-v${OSSUTIL_VERSION}-linux-amd64.zip"
+unzip ./ossutil.zip
+sudo cp ./ossutil-v*/ossutil /bin/
+sudo chmod 755 /bin/ossutil
+
+echo "---- Configuring ossutil"
+STS_TOKEN_OPTION=""
+if [[ ! -z "${ALIYUN_SECURITY_TOKEN}" ]]; then
+    STS_TOKEN_OPTION="--sts-token ${ALIYUN_SECURITY_TOKEN}"
+fi
+ossutil config \
+    --endpoint "${ALIYUN_ENDPOINT}" \
+    --access-key-id "${ALIYUN_ACCESS_KEY_ID}" \
+    --access-key-secret "${ALIYUN_ACCESS_KEY_SECRET}" \
+    ${STS_TOKEN_OPTION}
+
+echo "---- Checking ossutil bucket"
+ossutil ls -d "${ALIYUN_BUCKET}"
+
+echo "---- Sync build files"
+ossutil sync -f --delete --update --acl ${FOLDER_ACCESS} "./build" "${ALIYUN_BUCKET}/"
+
+echo '---- Sync Result:'
+ossutil ls "${ALIYUN_BUCKET}/"
+
+echo
+echo "aliyun-oss-sync: Done"
