@@ -15,7 +15,7 @@ function findAndAppendSubGroups(all, metadata, baseUrl, subItems) {
             if (label) {
                 all.push({
                     label,
-                    key: baseUrl + "docs/" + sub,
+                    key: baseUrl + "docs/" + (sub.endsWith("/index") ? sub + ".html" : sub),
                 });
             }
         } else if (sub.items) {
@@ -138,7 +138,7 @@ function Home() {
                                                                     >
                                                                         视频
                                                                     </span>
-                                                                ); 
+                                                                );
                                                             }*/
                                                         })()}
                                                     </li>
