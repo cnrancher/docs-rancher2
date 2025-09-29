@@ -10,15 +10,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 24
-      - name: Setup Docker Buildx
-        uses: docker/setup-buildx-action@v3
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 24
+          node-version: 22
       - name: Install Dependencies
         run: |
           npm install
@@ -34,6 +29,6 @@ jobs:
           ALIYUN_SECURITY_TOKEN: ""
           FOLDER_ACCESS: public-read
           OSSUTIL_VERSION: "1.7.19"
-        if: ${{ env.ALIBABA_CLOUD_ACCESS_KEY_ID != '' }}
+        if: ${{ env.ALIYUN_ACCESS_KEY_ID != '' }}
         run: |
           ./.github/scripts/aliyun-oss-sync
