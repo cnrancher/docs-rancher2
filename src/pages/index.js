@@ -120,20 +120,20 @@ function Home() {
                     </div>
                     <div className="navigation__item">
                         <div className="navigation__title">
-                            <a href="https://docs.harvesterhci.io/zh/">
+                            <a href="https://docs.harvesterhci.io/">
                                 <h1>Harvester</h1>
                             </a>
                         </div>
                         <div className="navigation__content">
                             <p>
-                                Harvester 是 Rancher 提供的基于 Kubernetes 构建的 100% 开源的超融合基础架构（HCI）软件。 
+                                Harvester 是 Rancher 提供的基于 Kubernetes 构建的 100% 开源的超融合基础架构（HCI）软件。
                                 它是 vSphere 和 Nutanix 的开源替代方案。
                             </p>
                         </div>
                     </div>
                     <div className="navigation__item">
                         <div className="navigation__title">
-                            <a href="https://docs.rancherdesktop.io/zh/">
+                            <a href="https://docs.rancherdesktop.io/">
                                 <h1>Rancher Desktop</h1>
                             </a>
                         </div>
