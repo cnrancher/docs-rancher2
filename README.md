@@ -11,36 +11,34 @@ Rancher 中文文档，包括Rancher1.x、Rancher 2.x、RKE、K3s、Octopus、Ha
 确保您的开发环境有如下软件：
 
 * [Git](http://git-scm.com/)
-* [Node.js](http://nodejs.org/) 10.9.0+ (with NPM)
-* [Yarn](https://yarnpkg.com/en/docs/install) 1.5+
+* [Node.js](http://nodejs.org/) 24+ (with NPM)
 
 ### 安装
 
-如果yarn install的速度很慢，可以尝试配置淘宝Registry。
+> 如果 `npm install` 的速度很慢，可以尝试配置淘宝 Registry。
+>
+> ```bash
+> $ npm config set registry https://registry.npmmirror.com
+> ```
 
-```bash
-$ yarn config set registry https://registry.npmmirror.com -g
-```
-
-安装初始化
+安装初始化：
 
 ```bash
 $ git clone 'https://github.com/cnrancher/docs-rancher2'
 $ cd 'docs-rancher2'
-$ yarn install
+$ npm install
 ```
 
 ### 本地启动
 
 ```bash
-$ yarn start
+$ npm run start
 ```
 
-将在浏览器中自动打开http://localhost:3000/
+将在浏览器中自动打开 <http://localhost:3000/>。
 
 ### 构建
 
 ```bash
-$ yarn build
+$ npm run build
 ```
-
