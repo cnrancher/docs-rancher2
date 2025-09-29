@@ -7,19 +7,17 @@ module.exports = {
     baseUrl: "/",
     url: "https://www.rancher.cn",
     favicon: "img/favicon.ico",
+    organizationName: "cnrancher",
+    projectName: "docs-rancher2",
+    onBrokenLinks: 'warn',
     themeConfig: {
-        algoliasearch: {
-            trackingID: "692a488c8d0d137240f1a940bde32441",
-            changefreq: "weekly",
-            priority: 0.5,
-            trailingSlash: false,
+        docs: {
+            sidebar: {
+                hideable: true,
+            },
         },
-        hideableSidebar: true,
         prism: {
             defaultLanguage: "bash",
-        },
-        baiduAnalytics: {
-            trackingID: "692a488c8d0d137240f1a940bde32441",
         },
         navbar: {
             title: "Rancher",
@@ -66,10 +64,6 @@ module.exports = {
                 },
             ],
         },
-        algolia: {
-            apiKey: "f790c2168867f49bb212aee8c224116d",
-            indexName: "rancher",
-        },
         footer: {
             style: "dark",
             copyright: `Copyright © ${new Date().getFullYear()} Rancher Labs, Inc. All Rights Reserved. 京ICP备2022035548号`,
@@ -102,5 +96,22 @@ module.exports = {
         rancherdesktopCommit:
             "86cb51bfffd19cdad4bfb0a7ff65e3ae3701394b - Aug 29, 2022",
     },
-    plugins: ["@docusaurus/plugin-baidu-analytics"],
+    plugins: [
+        [
+            require.resolve("@easyops-cn/docusaurus-search-local"),
+            {
+                // ... Your options.
+                // `hashed` is recommended as long-term-cache of index file is possible.
+                hashed: true,
+                // For Docs using Chinese, The `language` is recommended to set to:
+                // ```
+                language: ["en", "zh"],
+                // ```
+                // When applying `zh` in language, please install `nodejieba` in your project.
+                searchResultContextMaxLength: 500,
+                searchResultLimits: 64,
+                indexPages: true
+            },
+        ],
+    ],
 };

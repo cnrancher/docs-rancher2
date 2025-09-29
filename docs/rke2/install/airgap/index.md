@@ -1,0 +1,107 @@
+---
+title: 离线安装
+description: RKE2 可以通过两种不同的方式安装在一个离线环境中。你可以通过`rke2-airgap-images` tarball release artifacts 进行部署，也可以通过使用私有镜像仓库。
+keywords:
+  - rancher
+  - rancher中文
+  - rancher中文文档
+  - rancher官网
+  - rancher文档
+  - Rancher
+  - rancher 中文
+  - rancher 中文文档
+  - rancher cn
+  - RKE2
+  - 离线安装
+  - airgap
+---
+
+:::note 说明：
+如果你的节点安装并启用了 NetworkManager，[确保它被配置为忽略 CNI 管理的接口。](/docs/rke2/known_issues/#networkmanager)
+:::
+
+RKE2 可以通过两种不同的方式安装在一个离线环境中。你可以通过`rke2-airgap-images` tarball release artifacts 进行部署，也可以通过使用私有镜像仓库。
+
+步骤中提到的所有文件都可以在[此处](https://github.com/rancher/rke2/releases)从所需发布的 rke2 版本的资产中获取。
+
+如果在启用了 SELinux 的离线节点上运行，你必须在执行这些步骤之前手动安装必要的 SELinux policy RPM。请参阅我们的 [RPM 文档](/docs/rke2/install/methods/#rpm)，以确定你需要什么。
+
+如果在运行 SELinux、CentOS 或 RHEL 8 且启用 SELinux 的离线节点上运行，则在进行 [RPM 安装](/docs/rke2/install/methods/#rpm) 时需要以下依赖项:
+
+```
+    Installing dependencies:
+    container-selinux
+    iptables
+    libnetfilter_conntrack
+    libnfnetlink
+    libnftnl
+    policycoreutils-python-utils
+    rke2-common
+    rke2-selinux
+```
+
+本文档中列出的所有步骤都必须以 root 用户身份或通过 `sudo` 运行。
+
+## Tarball 方式
+
+1. 从 RKE2 的版本和平台的 RKE release artifacts 列表中下载 airgap images tarball。
+   - 对于 v1.20 之前的版本，使用`rke2-images.linux-amd64.tar.zst`，或`rke2-images.linux-amd64.tar.gz`。与 gzip 相比，Zstandard 提供了更好的压缩率和更快的解压速度。
+   - 如果使用默认的 Canal CNI（`--cni=canal`），你可以使用上述的`rke2-image`旧存档，或者`rke2-images-core`和`rke2-images-canal`。
+   - 如果使用替代的 Cilium CNI（`--cni=cilium`），你必须下载`rke2-images-core`和`rke2-images-cilium`。
+   - 如果使用您自己的 CNI（`--cni=none`），您可以只下载`rke2-images-core`。
+   - 如果启用 vSphere CPI/CSI charts（`--cloud-provider-name=rancher-vsphere`），您还必须下载`rke2-images-vsphere`。
+2. 确保节点上存在`/var/lib/rancher/rke2/agent/images/`目录。
+3. 将压缩档案复制到节点上的`/var/lib/rancher/rke2/agent/images/`，确保保留文件扩展名。
+4. [安装 RKE2](#安装-rke2)
+
+## 私有镜像仓库方式
+
+从 RKE2 v1.20 开始，私有镜像仓库支持来自[containerd 镜像仓库配置](/docs/rke2/install/containerd_registry_configuration/)中的所有设置。这包括 endpoint 覆盖和传输协议（HTTP/HTTPS）、认证、证书验证等。
+
+在 RKE2 v1.20 之前，私有镜像仓库必须使用 TLS，并使用由主机 CA 捆绑信任的 cert。如果 registry 使用的是自签名的证书，你可以用`update-ca-certificates`将该证书添加到主机 CA 捆绑中。registry 还必须允许匿名（未认证）访问。
+
+1. 将所有需要的系统镜像添加到你的私有镜像仓库。镜像列表可以从上面提到的每个 tarball 对应的`.txt`文件中获得，或者你可以`docker load` 离线镜像 tarballs，然后标记并推送加载的镜像。
+2. 如果在 registry 上使用私有或自签名的证书，请将 registry 的 CA 证书添加到 containerd registry 配置中，如果是 v1.20 之前的版本，则添加操作系统的可信证书。
+3. 使用`system-default-registry`参数[安装 RKE2](#安装-rke2)，或使用[containerd registry 配置](/docs/rke2/install/containerd_registry_configuration/)将你的 registry 作为 docker.io 的一个镜像。
+
+## 安装 RKE2
+
+以下安装 RKE2 的选项只能在完成 [Tarball 方式](#tarball-method)或[私有镜像仓库方式](#私有镜像仓库方式)中的一种后进行。
+
+RKE2 可以通过直接运行[二进制](#rke2-二进制安装)或使用[install.sh 脚本](#rke2-installsh-脚本安装)来安装。
+
+### RKE2 二进制安装
+
+1. 获得 rke2 的二进制文件`rke2.linux-amd64`。
+2. 确保二进制文件被命名为 `rke2`，并将其放在 `/usr/local/bin` 中。确保它是可执行的。
+3. 用所需的参数运行二进制文件。例如，如果使用私有镜像仓库方式，你的配置文件将有以下内容：
+
+```yaml
+system-default-registry: "registry.example.com:5000"
+```
+
+:::note 注意：
+`system-default-registry`参数必须只指定有效的 RFC 3986 URI 授权，即一个主机和可选的端口。
+:::
+
+### RKE2 Install.sh 脚本安装
+
+`install.sh` 可以在离线模式下使用，方法是将 `INSTALL_RKE2_ARTIFACT_PATH` 变量设置为包含预下载工件的路径。这将通过正常安装运行，包括创建 systemd 单元。
+
+1. 将安装脚本、rke2、rke2-images 和 sha256sum 文件从 release 中下载到一个目录中，如下面的例子：
+
+```bash
+mkdir /root/rke2-artifacts && cd /root/rke2-artifacts/
+curl -OLs https://github.com/rancher/rke2/releases/download/v1.21.5%2Brke2r2/rke2-images.linux-amd64.tar.zst
+curl -OLs https://github.com/rancher/rke2/releases/download/v1.21.5%2Brke2r2/rke2.linux-amd64.tar.gz
+curl -OLs https://github.com/rancher/rke2/releases/download/v1.21.5%2Brke2r2/sha256sum-amd64.txt
+curl -sfL https://get.rke2.io --output install.sh
+```
+
+2. 接下来，使用该目录运行 install.sh，如下面的例子：
+
+```bash
+INSTALL_RKE2_ARTIFACT_PATH=/root/rke2-artifacts sh install.sh
+```
+
+3. 启用并运行[此处](/docs/rke2/install/quickstart/#2-启用-rke2-server-服务)描述的服务。
