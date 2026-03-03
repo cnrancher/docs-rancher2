@@ -39,6 +39,6 @@ $ npm run start
 
 ### 构建
 
-```bash
+```BASH
 $ npm run build
 ```
