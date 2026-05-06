@@ -58,5 +58,8 @@
   },
   "resolutions": {
     "cheerio": "1.0.0-rc.12"
+  },
+  "overrides": {
+    "webpack": "5.105.4"
   }
 }
