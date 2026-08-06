@@ -71,7 +71,7 @@ function Home() {
                 <div className="navigation__grid">
                 <div className="navigation__item">
                         <div className="navigation__title">
-                            <a href="https://docs.ranchermanager.rancher.io/zh/">
+                            <a href="https://docs.ranchermanager.rancher.io/">
                                 <h1>Rancher</h1>
                             </a>
                         </div>
